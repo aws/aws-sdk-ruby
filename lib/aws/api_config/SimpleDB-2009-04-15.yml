@@ -1,0 +1,278 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+--- 
+:operations: 
+  DeleteAttributes: 
+    :output: []
+
+    :input: 
+      Expected: 
+      - :list:
+        - :structure: 
+            Name: 
+            - :string
+            Exists: 
+            - :boolean
+            Value: 
+            - :string
+      Attribute: 
+      - :list: 
+        - :structure: 
+            AlternateNameEncoding: 
+            - :string
+            Name: 
+            - :string
+            - :required
+            AlternateValueEncoding: 
+            - :string
+            Value: 
+            - :string
+      - :rename: Attributes
+      DomainName: 
+      - :string
+      - :required
+      ItemName: 
+      - :string
+      - :required
+  CreateDomain: 
+    :output: []
+
+    :input: 
+      DomainName: 
+      - :string
+      - :required
+  ListDomains: 
+    :output: 
+    - DomainName: 
+      - :list
+      - :rename: DomainNames
+    :input: 
+      MaxNumberOfDomains: 
+      - :integer
+      NextToken: 
+      - :string
+  GetAttributes: 
+    :output: 
+    - Attribute: 
+      - :list
+      - :rename: Attributes
+    :input: 
+      DomainName: 
+      - :string
+      - :required
+      AttributeName: 
+      - :list: 
+        - :string
+      - :rename: AttributeNames
+      ConsistentRead: 
+      - :boolean
+      ItemName: 
+      - :string
+      - :required
+  BatchPutAttributes: 
+    :output: []
+
+    :input: 
+      Item: 
+      - :list: 
+        - :structure: 
+            Attribute: 
+            - :list: 
+              - :structure: 
+                  Replace: 
+                  - :boolean
+                  Name: 
+                  - :string
+                  - :required
+                  Value: 
+                  - :string
+                  - :required
+            - :required
+            - :rename: Attributes
+            ItemName: 
+            - :string
+            - :required
+            - :rename: Name
+      - :required
+      - :rename: Items
+      DomainName: 
+      - :string
+      - :required
+  DeleteDomain: 
+    :output: []
+
+    :input: 
+      DomainName: 
+      - :string
+      - :required
+  Select: 
+    :output: 
+    - Item: 
+      - :list
+      - :rename: Items
+      - Attribute: 
+        - :list
+        - :rename: Attributes
+    :input: 
+      SelectExpression: 
+      - :string
+      - :required
+      ConsistentRead: 
+      - :boolean
+      NextToken: 
+      - :string
+  PutAttributes: 
+    :output: []
+
+    :input: 
+      Expected: 
+      - :list:
+        - :structure: 
+            Name: 
+            - :string
+            Exists: 
+            - :boolean
+            Value: 
+            - :string
+      Attribute: 
+      - :list: 
+        - :structure: 
+            Replace: 
+            - :boolean
+            Name: 
+            - :string
+            - :required
+            Value: 
+            - :string
+            - :required
+      - :required
+      - :rename: Attributes
+      DomainName: 
+      - :string
+      - :required
+      ItemName: 
+      - :string
+      - :required
+  DomainMetadata: 
+    :output: 
+    - ItemCount: 
+      - :integer
+    - ItemNamesSizeBytes: 
+      - :long
+    - AttributeNameCount: 
+      - :integer
+    - AttributeNamesSizeBytes: 
+      - :long
+    - AttributeValueCount: 
+      - :integer
+    - AttributeValuesSizeBytes: 
+      - :long
+    - Timestamp: 
+      - :integer
+    :input: 
+      DomainName: 
+      - :string
+      - :required
+  BatchDeleteAttributes: 
+    :output: []
+
+    :input: 
+      Item: 
+      - :list: 
+        - :structure: 
+            Attribute: 
+            - :list: 
+              - :structure: 
+                  AlternateNameEncoding: 
+                  - :string
+                  Name: 
+                  - :string
+                  - :required
+                  AlternateValueEncoding: 
+                  - :string
+                  Value: 
+                  - :string
+                  - :required
+            - :rename: Attributes
+            ItemName: 
+            - :string
+            - :required
+            - :rename: Name
+      - :required
+      - :rename: Items
+      DomainName: 
+      - :string
+      - :required
+:client_errors: 
+  TooManyRequestedAttributes: 
+  - BoxUsage: 
+    - :float
+  ConditionalCheckFailed: 
+  - BoxUsage: 
+    - :float
+  InvalidQueryExpression: 
+  - BoxUsage: 
+    - :float
+  InvalidParameterValue: 
+  - BoxUsage: 
+    - :float
+  DuplicateItemName: 
+  - BoxUsage: 
+    - :float
+  NumberDomainAttributesExceeded: 
+  - BoxUsage: 
+    - :float
+  InvalidNextToken: 
+  - BoxUsage: 
+    - :float
+  NumberSubmittedItemsExceeded: 
+  - BoxUsage: 
+    - :float
+  NoSuchDomain: 
+  - BoxUsage: 
+    - :float
+  AttributeDoesNotExist: 
+  - BoxUsage: 
+    - :float
+  NumberDomainsExceeded: 
+  - BoxUsage: 
+    - :float
+  MissingParameter: 
+  - BoxUsage: 
+    - :float
+  InvalidNumberValueTests: 
+  - BoxUsage: 
+    - :float
+  UnsupportedNextToken: 
+  - BoxUsage: 
+    - :float
+  NumberSubmittedAttributesExceeded: 
+  - BoxUsage: 
+    - :float
+  NumberItemAttributesExceeded: 
+  - BoxUsage: 
+    - :float
+  NumberDomainBytesExceeded: 
+  - BoxUsage: 
+    - :float
+  InvalidNumberPredicates: 
+  - BoxUsage: 
+    - :float
+  RequestTimeout: 
+  - BoxUsage: 
+    - :float
+  InvalidParameterCombination: 
+  - BoxUsage: 
+    - :float
+:server_errors: {}

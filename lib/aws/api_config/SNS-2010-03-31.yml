@@ -1,0 +1,171 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+--- 
+:operations: 
+  CreateTopic: 
+    :input: 
+      Name: 
+      - :string
+      - :required
+    :output: 
+    - TopicArn: []
+
+  GetTopicAttributes: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+    :output: 
+    - Attributes: 
+      - :map: 
+        - entry
+        - key
+        - value
+  SetTopicAttributes: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      AttributeName: 
+      - :string
+      - :required
+      AttributeValue: 
+      - :string
+      - :required
+    :output: []
+
+  DeleteTopic: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+    :output: []
+
+  AddPermission: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      Label: 
+      - :string
+      - :required
+      AWSAccountId: 
+      - :list: 
+        - :string
+      - :required
+      ActionName: 
+      - :list: 
+        - :string
+      - :required
+    :output: []
+
+  RemovePermission: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      Label: 
+      - :string
+      - :required
+    :output: []
+
+  Subscribe: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      Protocol: 
+      - :string
+      - :required
+      Endpoint: 
+      - :string
+      - :required
+    :output: []
+
+  Unsubscribe: 
+    :input: 
+      SubscriptionArn: 
+      - :string
+      - :required
+    :output: []
+
+  ConfirmSubscription: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      Token: 
+      - :string
+      - :required
+      AuthenticateOnUnsubscribe: 
+      - :boolean
+    :output: []
+
+  ListTopics: 
+    :input: 
+      NextToken: 
+      - :string
+    :output: 
+    - Topics: 
+      - :list: member
+    - NextToken: 
+      - :force
+  ListSubscriptions: 
+    :input: 
+      NextToken: 
+      - :string
+    :output: 
+    - Subscriptions: 
+      - :list: member
+    - NextToken: 
+      - :force
+  ListSubscriptionsByTopic: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      NextToken: 
+      - :string
+    :output: 
+    - Subscriptions: 
+      - :list: member
+    - NextToken: 
+      - :force
+  Publish: 
+    :input: 
+      TopicArn: 
+      - :string
+      - :required
+      Message: 
+      - :string
+      - :required
+      Subject: 
+      - :string
+      MessageStructure: 
+      - :string
+    :output: []
+
+:client_errors: 
+  InvalidParameter: []
+
+  AuthorizationError: []
+
+  TopicLimitExceeded: []
+
+  SubscriptionLimitExceeded: []
+
+  NotFound: []
+
+:server_errors: 
+  InternalError: []

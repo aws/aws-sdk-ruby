@@ -1,0 +1,161 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+--- 
+:operations: 
+  CreateQueue: 
+    :input: 
+      QueueName: 
+      - :string
+      - :required
+      DefaultVisibilityTimeout: 
+      - :integer
+    :output: []
+
+  ListQueues: 
+    :input: 
+      QueueNamePrefix: 
+      - :string
+    :output: 
+    - QueueUrl: 
+      - :list
+      - :rename: queueUrls
+  AddPermission: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      Label: 
+      - :string
+      - :required
+      AWSAccountId: 
+      - :list: 
+        - :string
+      - :required
+      - :rename: AWSAccountIds
+      ActionName: 
+      - :list: 
+        - :string
+      - :required
+      - :rename: Actions
+    :output: []
+
+  RemovePermission: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      Label: 
+      - :string
+      - :required
+    :output: []
+
+  ChangeMessageVisibility: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      ReceiptHandle: 
+      - :string
+      - :required
+      VisibilityTimeout: 
+      - :integer
+      - :required
+    :output: []
+
+  DeleteQueue: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+    :output: []
+
+  DeleteMessage: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      ReceiptHandle: 
+      - :string
+      - :required
+    :output: []
+
+  GetQueueAttributes: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      AttributeName: 
+      - :list: 
+        - :string
+      - :rename: attributeNames
+    :output: 
+    - Attribute: 
+      - :rename: attributes
+      - :map_entry: 
+        - Name
+        - Value
+  ReceiveMessage: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      AttributeName: 
+      - :list: 
+        - :string
+      - :rename: AttributeNames
+      MaxNumberOfMessages: 
+      - :integer
+      VisibilityTimeout: 
+      - :integer
+    :output: 
+    - Message: 
+      - :list
+      - :rename: messages
+      - Attribute: 
+        - :rename: Attributes
+        - :map_entry: 
+          - Name
+          - Value
+  SetQueueAttributes: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      Attribute: 
+      - :required
+      - :structure: 
+          Name: 
+          - :string
+          - :required
+          Value: 
+          - :string
+          - :required
+    :output: []
+
+  SendMessage: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      MessageBody: 
+      - :string
+      - :required
+    :output: []
+
+:client_errors: 
+  AWS.SimpleQueueService.QueueDeletedRecently: []
+
+  AWS.SimpleQueueService.QueueNameExists: []
+
+:server_errors: {}

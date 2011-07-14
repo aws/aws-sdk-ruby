@@ -1,0 +1,189 @@
+= Getting Started with the AWS SDK for Ruby
+
+The AWS SDK for Ruby helps you to get started building applications
+using AWS infrastructure services, including Amazon Simple Storage
+Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon
+SimpleDB, and more. This guide shows how you can start building Ruby
+and Rails applications on the Amazon Web Services platform with the
+AWS Ruby gem.
+
+= Get Set Up
+
+To get set up, you must sign up for Amazon Web Services, get your AWS
+credentials, and set up your environment.
+
+== Sign Up for AWS Products
+
+Before you can begin, you must sign up for each AWS product you want
+to use. The sample included in the SDK uses Amazon S3, so we'll use
+that product as an example here.
+
+=== To sign up for a product
+
+1. Go to the home page for the product, for example
+   http://aws.amazon.com/s3.
+
+   *Tip:* Go to http://aws.amazon.com/products for a list of links to all our products.
+
+2. Click the sign-up button on the top right corner of the page.
+
+3. Follow the on-screen instructions. If you don't already have an AWS
+   account, you are prompted to create one as part of the sign-up
+   process.
+
+AWS sends you a confirmation e-mail after the sign-up process is
+complete. You can view your current account activity or manage your
+account at any time, by going to http://aws.amazon.com and clicking
+the *Account* tab.
+
+== Get Your Credentials
+
+To use the AWS SDK for Ruby, you need your AWS Access Key ID and Secret Access Key.
+
+=== To get your AWS Access Key ID and Secret Access Key
+
+1. Go to http://aws.amazon.com.
+
+2. Click *Account* and then click <b>Security Credentials</b>.
+   The Security Credentials page displays (you might be prompted to log in).
+
+3. Scroll down to Access Credentials and make sure the <b>Access Keys</b> tab
+   is selected.  The AWS Access Key ID appears in the Access Key column.
+
+4. To view the Secret Access Key, click *Show*.
+
+   *Important!* Your Secret Access Key is a secret, which only you and
+   AWS should know. It is important to keep it confidential to protect
+   your account. Store it securely in a safe place. Never include it in
+   your requests to AWS, and never e-mail it to anyone. Do not share it
+   outside your organization, even if an inquiry appears to come from AWS
+   or Amazon.com. No one who legitimately represents Amazon will ever ask
+   you for your Secret Access Key.
+
+== Set Up Your Environment
+
+The AWS Ruby gem runs on Ruby 1.8.7 and later. If you have an older
+version of Ruby, RVM is a great way to get started using the latest
+version.
+
+= Install the SDK
+
+To install the AWS Ruby gem, just enter:
+
+  gem install aws-sdk
+
+= Run the Samples
+
+Now that you've installed the gem, you can run the samples, which you
+can find in our GitHub repository:
+
+  $ git clone git://github.com/amazonwebservices/aws-sdk-for-ruby.git
+  $ cd aws-sdk-for-ruby/samples/
+
+The subdirectories of the +samples+ directory contain several code
+samples that you can run.  These samples demonstrate basic usage of
+the SDK features.
+
+== To run the Amazon S3 Sample
+
+1. Create a file named config.yml in the samples directory as follows:
+
+     # Fill in your AWS Access Key ID and Secret Access Key
+     # http://aws.amazon.com/security-credentials
+     access_key_id: REPLACE_WITH_ACCESS_KEY_ID
+     secret_access_key: REPLACE_WITH_SECRET_ACCESS_KEY
+
+2. Run a sample script with the Ruby interpreter. For example, to run
+   the s3/upload_file.rb sample:
+
+     $ echo "Hello, World!" > helloworld.txt
+     $ ruby s3/upload_file.rb unique-bucket-name helloworld.txt
+
+== To use the AWS ORM in a Rails 3 application
+
+1. Install the gem:
+
+     $ gem install aws-sdk
+
+2. Start a new Rails project:
+
+     $ gem install rails
+     $ rails new myapp
+     $ cd myapp/
+
+3. Add the following line to your Gemfile:
+
+     gem 'aws-sdk'
+
+4. Install dependencies:
+
+     $ bundle install
+
+5. Create config/aws.yml as follows:
+
+     # Fill in your AWS Access Key ID and Secret Access Key
+     # http://aws.amazon.com/security-credentials
+     access_key_id: REPLACE_WITH_ACCESS_KEY_ID
+     secret_access_key: REPLACE_WITH_SECRET_ACCESS_KEY
+
+6. Create config/initializers/aws.rb as follows:
+
+     # load the libraries
+     require 'aws'
+     # log requests using the default rails logger
+     AWS.config(:logger => Rails.logger)
+     # load credentials from a file
+     config_path = File.expand_path(File.dirname(__FILE__)+"/../aws.yml")
+     AWS.config(YAML.load(File.read(config_path)))
+
+7. Create app/models/my_record.rb as follows:
+
+     class MyRecord < AWS::Record::Base
+       string_attr :name
+     end
+
+8. Create the SimpleDB domain:
+
+     $ rails console
+     > MyRecord.create_domain
+
+Now, you can play around with the model by creating some records and querying them:
+
+  > MyRecord.find(:all).to_a
+  => []
+  > MyRecord.new(:name => "The first one").save
+  => true
+  > MyRecord.new(:name => "The second one").save
+  => true
+  > MyRecord.where('name like ?', "%first%").count
+  => 1
+
+Exit the rails console before continuing to the next step:
+
+  > exit
+
+9. Generate a scaffold controller for your model:
+
+     $ rails generate scaffold_controller MyRecord name:string
+     $ rails server
+
+10. Add a route to your scaffold controller in config/routes.rb:
+
+      Myapp::Application.routes.draw do
+        # add this line:
+        resources :my_records
+      end
+
+11. Now, you can create records in the browser at http://localhost:3000/my_records.
+
+= Where Do I Go from Here?
+
+For more information about the AWS SDK for Ruby, including a complete
+list of supported AWS products, go to
+http://aws.amazon.com/sdkforruby.
+
+The SDK reference documentation provides information about both the
+AWS Ruby gem and AWS Rails integration gem. You can find it at
+http://docs.amazonwebservices.com/AWSRubySDK/latest.
+
+Licensed under Apache 2.0. See {file:LICENSE.txt} and {file:NOTICE.txt} files.

@@ -1,0 +1,88 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+When /^I ask the client to set a bucket ACL$/ do
+  @result = @s3_client.set_bucket_acl(:bucket_name => @bucket_name,
+                                   :acl => (@acl = <<END))
+<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Owner>
+    <ID>#{@test_config["owner_id"]}</ID>
+    <DisplayName>#{@test_config["display_name"]}</DisplayName>
+  </Owner>
+  <AccessControlList>
+    <Grant>
+      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:type="CanonicalUser">
+        <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
+        <DisplayName>Mickey Mouse</DisplayName>
+      </Grantee>
+      <Permission>FULL_CONTROL</Permission>
+    </Grant>
+  </AccessControlList>
+</AccessControlPolicy>
+END
+end
+
+When /^I ask the client to set a bucket ACL using an AccessControlList object$/ do
+  acl = {
+    :owner => {
+      :id => @test_config["owner_id"],
+      :display_name => @test_config["display_name"]
+    },
+    :grants => [{ :grantee => {
+                    :canonical_user_id => "d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df",
+                    :display_name => "Mickey Mouse"
+                  },
+                  :permission => :full_control }]
+  }
+  @result = @s3_client.set_bucket_acl(:bucket_name => @bucket_name,
+                                   :acl => acl)
+end
+
+Then /^the bucket ACL should resemble the one that was set$/ do
+  doc = REXML::Document.new(@s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl.to_s)
+  doc.elements["//Grant/Grantee"].to_s.should =~ /d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df/
+end
+
+When /^I ask the client to get the bucket ACL$/ do
+  @result = @s3_client.get_bucket_acl(:bucket_name => @bucket_name)
+end
+
+Then /^the result should return something that looks like a acl from its acl method$/ do
+  @result.acl.to_s.should =~ /AccessControlPolicy/
+end
+
+Then /^the result should be an AccessControlList object containing the right data$/ do
+  @result.acl.should be_an(S3::AccessControlList)
+  @result.acl.owner.id.should == @test_config["owner_id"]
+  @result.acl.grants.size.should == 1
+  grant = @result.acl.grants.first
+  grant.grantee.canonical_user_id.should == @test_config["owner_id"]
+  grant.permission.name.should == :full_control
+end
+
+When /^I add a grant to the bucket ACL$/ do
+  @acl = @s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl
+  @acl.grant(:read_acp).to(:amazon_customer_email => "aws-dr-sandbox@amazon.com")
+end
+
+When /^I ask the client to set the modified bucket ACL$/ do
+  @result = @s3_client.set_bucket_acl(:bucket_name => @bucket_name, :acl => @acl)
+end
+
+Then /^the bucket ACL should include the new grant$/ do
+  acl = @s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl
+  # it would be nice to check the grantee as well, but S3
+  # canonicalizes it so we get something different than what we put in
+  acl.grants.map { |g| g.permission.name }.should include(:read_acp)
+end

@@ -1,0 +1,147 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+--- 
+:operations: 
+  SendEmail: 
+    :input: 
+      Source: 
+      - :string
+      - :required
+      Destination: 
+      - :structure: 
+          ToAddresses: 
+          - :list: 
+            - :string
+          CcAddresses: 
+          - :list: 
+            - :string
+          BccAddresses: 
+          - :list: 
+            - :string
+      - :required
+      Message: 
+      - :structure: 
+          Subject: 
+          - :structure: 
+              Data: 
+              - :string
+              - :required
+              Charset: 
+              - :string
+          - :required
+          Body: 
+          - :structure: 
+              Text: 
+              - :structure: 
+                  Data: 
+                  - :string
+                  - :required
+                  Charset: 
+                  - :string
+              Html: 
+              - :structure: 
+                  Data: 
+                  - :string
+                  - :required
+                  Charset: 
+                  - :string
+          - :required
+      - :required
+      ReplyToAddresses: 
+      - :list: 
+        - :string
+      ReturnPath: 
+      - :string
+    :output: []
+
+  SendRawEmail: 
+    :input: 
+      Source: 
+      - :string
+      Destinations: 
+      - :list: 
+        - :string
+      RawMessage: 
+      - :structure: 
+          Data: 
+          - :blob
+          - :required
+      - :required
+    :output: []
+
+  GetSendStatistics: 
+    :input: {}
+
+    :output: 
+    - SendDataPoints: 
+      - :list: member
+      - member: 
+        - Timestamp: 
+          - :timestamp
+        - DeliveryAttempts: 
+          - :long
+        - Bounces: 
+          - :long
+        - Complaints: 
+          - :long
+        - Rejects: 
+          - :long
+  GetSendQuota: 
+    :input: {}
+
+    :output: 
+    - Max24HourSend: 
+      - :float
+    - MaxSendRate: 
+      - :float
+    - SentLast24Hours: 
+      - :float
+  VerifyEmailAddress: 
+    :input: 
+      EmailAddress: 
+      - :string
+      - :required
+    :output: []
+
+  ListVerifiedEmailAddresses: 
+    :input: {}
+
+    :output: 
+    - VerifiedEmailAddresses: 
+      - :list: member
+  DeleteVerifiedEmailAddress: 
+    :input: 
+      EmailAddress: 
+      - :string
+      - :required
+    :output: []
+
+:client_errors: 
+  MessageRejected: []
+
+  MalformedQueryString: []
+
+  InvalidParameterCombination: []
+
+  InvalidParameterValue: []
+
+  InvalidQueryParameter: []
+
+  MissingAction: []
+
+  MissingParameter: []
+
+  RequestExpired: []
+
+:server_errors: {}
