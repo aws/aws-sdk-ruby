@@ -671,7 +671,7 @@ module AWS
 
         it "formats Time values" do
           http_handler.should_receive(:handle) do |req, resp|
-            req.headers[header].should == "Mon, 13 Jun 2011 15:42:31 -0700"
+            req.headers[header].should == Time.parse("Mon, 13 Jun 2011 15:42:31 -0700").rfc2822
           end
           my_opts = opts.dup
           my_opts[option_name] = Time.parse("2011-06-13 15:42:31 -0700")
@@ -680,7 +680,7 @@ module AWS
 
         it "formats DateTime values" do
           http_handler.should_receive(:handle) do |req, resp|
-            req.headers[header].should == "Mon, 13 Jun 2011 15:42:31 -0700"
+            req.headers[header].should == Time.parse("Mon, 13 Jun 2011 15:42:31 -0700").rfc2822
           end
           my_opts = opts.dup
           my_opts[option_name] = DateTime.parse("2011-06-13 15:42:31 -0700")
