@@ -41,7 +41,7 @@ module AWS
     #   sqs.config.max_retries #=> 2
     #
     # If you want to change a configuration value for a single instance you
-    # pass the new configuration value to that objects initializer:
+    # pass the new configuration value to that object's initializer:
     #
     #   AWS::SQS.new(:max_retries => 0)
     #
