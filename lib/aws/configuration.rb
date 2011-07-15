@@ -83,6 +83,9 @@ module AWS
         :stub_requests => false,
         :use_ssl => true,
         :user_agent_prefix => nil,
+        :ssl_verify_peer => true,
+        :ssl_ca_file => File.expand_path(File.dirname(__FILE__)+
+                                         "/../../ca-bundle.crt")
       }
 
       {
@@ -233,6 +236,27 @@ module AWS
     #   when uploading to S3.
     def s3_multipart_max_parts
       @options[:s3_multipart_max_parts]
+    end
+
+    # @return [Boolean] True if the HTTPS client should validate the
+    #   server certificate.
+    #
+    # @note This option should only be used for diagnostic purposes;
+    #   leaving this option set to +false+ exposes your application to
+    #   man-in-the-middle attacks and can pose a serious security
+    #   risk.
+    def ssl_verify_peer?
+      @options[:ssl_verify_peer]
+    end
+
+    # @return [String] The path to a CA cert bundle in PEM format.
+    #
+    # If {#ssl_verify_peer?} is true (the default) this bundle will be
+    # used to validate the server certificate in each HTTPS request.
+    # The AWS SDK for Ruby ships with a CA cert bundle, which is the
+    # default value for this option.
+    def ssl_ca_file
+      @options[:ssl_ca_file]
     end
 
     # @private

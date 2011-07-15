@@ -142,6 +142,34 @@ module AWS
 
     end
 
+    it 'should set ssl_verify_peer to the current config ssl_verify_peer? value' do
+
+      ssl_verify_peer = double('ssl_peer_state')
+
+      ssl_peer_state = nil
+      new_client = client.with_http_handler{|request, response|
+        ssl_peer_state = request.ssl_verify_peer?
+      }
+      new_client.config.stub(:ssl_verify_peer?).and_return(ssl_verify_peer)
+      new_client.send(method, opts)
+      ssl_peer_state.should == ssl_verify_peer
+
+    end
+
+    it 'should set ssl_ca_file to the current config ssl_ca_file value' do
+
+      ssl_ca_file = double('ssl_ca_state')
+
+      ssl_ca_state = nil
+      new_client = client.with_http_handler{|request, response|
+        ssl_ca_state = request.ssl_ca_file
+      }
+      new_client.config.stub(:ssl_ca_file).and_return(ssl_ca_file)
+      new_client.send(method, opts)
+      ssl_ca_state.should == ssl_ca_file
+
+    end
+
     it 'populates the response with the request options' do
       resp = client.send(method, opts)
       resp.request_options.should == opts

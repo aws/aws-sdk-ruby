@@ -371,6 +371,33 @@ module AWS
 
       end
 
+      context '#ssl_verify_peer?' do
+
+        it 'defaults to true' do
+          config.ssl_verify_peer?.should == true
+        end
+
+        it 'can be set to false' do
+          config.with(:ssl_verify_peer => false).ssl_verify_peer?.should == false
+        end
+
+      end
+
+      context '#ssl_ca_file' do
+
+        it 'defaults to a readable file' do
+          File.readable?(config.ssl_ca_file).should be_true
+          File.read(config.ssl_ca_file).
+            should include("Bundle of CA Root Certificates")
+        end
+
+        it 'can be set to another path' do
+          config.with(:ssl_ca_file => "foobar.txt").
+            ssl_ca_file.should == "foobar.txt"
+        end
+
+      end
+
     end
 
   end

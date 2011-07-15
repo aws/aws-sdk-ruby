@@ -92,6 +92,18 @@ module AWS
     #   values. This is primarily used for writing tests.
     # @option options [Boolean] :use_ssl (true) When true, all requests are
     #   sent over SSL.
+    # @option options [Boolean] :ssl_verify_peer (true) True if the HTTPS
+    #   client should validate the server certificate.  *Note:* This
+    #   option should only be used for diagnostic purposes; leaving
+    #   this option set to +false+ exposes your application to
+    #   man-in-the-middle attacks and can pose a serious security
+    #   risk.
+    # @option options [String] :ssl_ca_file The path to a CA cert
+    #   bundle in PEM format.  If +:ssl_verify_peer+ is true (the
+    #   default) this bundle will be used to validate the server
+    #   certificate in each HTTPS request.  The AWS SDK for Ruby ships
+    #   with a CA cert bundle, which is the default value for this
+    #   option.
     # @option options [String] :user_agent_prefix (nil) A string prefix to 
     #   append to all requets against AWS services.  This should be set
     #   for clients and applications built ontop of the aws-sdk gem.

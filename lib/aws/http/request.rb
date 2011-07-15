@@ -61,6 +61,32 @@ module AWS
         @use_ssl
       end
 
+      # @param [Boolean] verify_peer If the client should verify the
+      #   peer certificate or not.
+      def ssl_verify_peer=(verify_peer)
+        @ssl_verify_peer = verify_peer
+      end
+
+      # @return [Boolean] If the client should verify the peer
+      #   certificate or not.
+      def ssl_verify_peer?
+        @ssl_verify_peer
+      end
+
+      # @param [String] ca_file Path to a bundle of CA certs in PEM
+      #   format; the HTTP handler should use this to verify all HTTPS
+      #   requests if {#ssl_verify_peer?} is true.
+      def ssl_ca_file=(ca_file)
+        @ssl_ca_file = ca_file
+      end
+
+      # @return [String] Path to a bundle of CA certs in PEM format;
+      #   the HTTP handler should use this to verify all HTTPS
+      #   requests if {#ssl_verify_peer?} is true.
+      def ssl_ca_file
+        @ssl_ca_file
+      end
+
       # Adds a request param.
       #
       # @overload add_param(param_name, param_value = nil)

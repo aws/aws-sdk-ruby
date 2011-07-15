@@ -382,6 +382,8 @@ module AWS
           http_request = new_request
           http_request.host = endpoint
           http_request.use_ssl = config.use_ssl?
+          http_request.ssl_verify_peer = config.ssl_verify_peer?
+          http_request.ssl_ca_file = config.ssl_ca_file
           send("configure_#{name}_request", http_request, opts, &block)
           http_request.headers["user-agent"] = user_agent_string
           http_request.add_authorization!(signer)

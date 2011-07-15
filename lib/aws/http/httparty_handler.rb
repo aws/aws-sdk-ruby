@@ -27,9 +27,18 @@ module AWS
 
       def handle(request, response)
 
-        url = request.use_ssl? ?
-          "https://#{request.host}:443#{request.uri}" :
-          "http://#{request.host}#{request.uri}"
+        opts = {
+          :body => request.body,
+          :parser => NoOpParser
+        }
+
+        if request.use_ssl?
+          url = "https://#{request.host}:443#{request.uri}"
+          opts[:ssl_ca_file] = request.ssl_ca_file if
+            request.ssl_verify_peer?
+        else
+          url = "http://#{request.host}#{request.uri}"
+        end
 
         # get, post, put, delete, head
         method = request.http_method.downcase
@@ -43,11 +52,10 @@ module AWS
           headers[key] = value.to_s
         end
 
+        opts[:headers] = headers
+
         begin
-          http_response = self.class.send(method, url,
-                                          :headers => headers,
-                                          :body => request.body,
-                                          :parser => NoOpParser)
+          http_response = self.class.send(method, url, opts)
         rescue Timeout::Error => e
           response.timeout = true
         else

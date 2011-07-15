@@ -32,6 +32,7 @@ namespace :gems do
     gem.add_dependency('json', '~> 1.4')
 
     gem.files = FileList[
+      "ca-bundle.crt",
       "rails/init.rb",    # for compatability with older versions of rails
       "lib/**/*.rb",
       "lib/**/*.yml",
