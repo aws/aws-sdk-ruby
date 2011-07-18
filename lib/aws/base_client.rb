@@ -156,7 +156,7 @@ module AWS
       req = self.class::REQUEST_CLASS.new
       req.http_method = 'POST'
       req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-      req.add_param 'Timestamp', Time.now.utc.strftime('%Y-%m-%dT%TZ')
+      req.add_param 'Timestamp', Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
       req.add_param 'Version', self.class::API_VERSION
       req
     end
