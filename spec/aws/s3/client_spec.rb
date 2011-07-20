@@ -668,22 +668,25 @@ module AWS
       end
 
       shared_examples_for 'formats date header' do |option_name, header|
-
+      	t_now = Time.now
+	req_header_ts = t_now.strftime('%a, %d %b %Y %H:%M:%S %z').to_s
+	parse_ts = t_now.strftime('%Y-%m-%d %H:%M:%S %z').to_s
+      
         it "formats Time values" do
           http_handler.should_receive(:handle) do |req, resp|
-            req.headers[header].should == "Mon, 13 Jun 2011 15:42:31 -0700"
+            req.headers[header].should == req_header_ts
           end
           my_opts = opts.dup
-          my_opts[option_name] = Time.parse("2011-06-13 15:42:31 -0700")
+          my_opts[option_name] = Time.parse(parse_ts)
           client.send(method, my_opts)
         end
 
         it "formats DateTime values" do
           http_handler.should_receive(:handle) do |req, resp|
-            req.headers[header].should == "Mon, 13 Jun 2011 15:42:31 -0700"
+            req.headers[header].should == req_header_ts
           end
           my_opts = opts.dup
-          my_opts[option_name] = DateTime.parse("2011-06-13 15:42:31 -0700")
+          my_opts[option_name] = DateTime.parse(parse_ts)
           client.send(method, my_opts)
         end
 
