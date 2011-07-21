@@ -827,6 +827,20 @@ module AWS
           validate_bucket_name!(bucket_name) rescue false
         end
 
+        # Returns true if the given +bucket_name+ is DNS compatible.
+        #
+        # DNS compatible bucket names may be accessed like:
+        #
+        #   http://dns.compat.bucket.name.s3.amazonaws.com/
+        #
+        # Whereas non-dns compatible bucket names must place the bucket
+        # name in the url path, like:
+        #
+        #   http://s3.amazonaws.com/dns_incompat_bucket_name/
+        #   
+        # @return [Boolean] Returns true if the given bucket name may be
+        #   is dns compatible.  
+        #   this bucket n
         def dns_compatible_bucket_name?(bucket_name)
           return false if
             !valid_bucket_name?(bucket_name) or
@@ -848,6 +862,27 @@ module AWS
             (bucket_name['-.'] || bucket_name['.-'])
 
           true
+        end
+
+        # Returns true if the bucket name must be used in the request
+        # path instead of as a sub-domain when making requests against
+        # S3.  
+        #
+        # This can be an issue if the bucket name is DNS compatible but 
+        # contains '.' (periods).  These cause the SSL certificate to
+        # become invalid when making authenticated requets over SSL to the
+        # bucket name.  The solution is to send this as a path argument
+        # instead.
+        # 
+        # @return [Boolean] Returns true if the bucket name should be used
+        #   as a path segement instead of dns prefix when making requests
+        #   against s3.  
+        def path_style_bucket_name? bucket_name
+          if dns_compatible_bucket_name?(bucket_name)
+            bucket_name =~ /\./ ? true : false
+          else
+            true
+          end
         end
 
         protected

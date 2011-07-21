@@ -19,7 +19,6 @@ module AWS
   module Naming
 
     def service_name
-      debugger if self.name == nil
       self.name.split(/::/)[1]
     end
 

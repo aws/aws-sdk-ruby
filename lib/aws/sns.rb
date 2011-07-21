@@ -28,7 +28,7 @@ module AWS
   #
   # For more information about Amazon SNS:
   #
-  # * {Amazon SNS}[http://aws.amazon.com/simpledb/]
+  # * {Amazon SNS}[http://aws.amazon.com/sns/]
   # * {Amazon SNS Documentation}[http://aws.amazon.com/documentation/sns/]
   #
   # = Credentials
@@ -46,9 +46,6 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Understanding the SNS Interface
-  #
-  # ...
   class SNS
 
     include ServiceInterface

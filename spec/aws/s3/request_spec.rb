@@ -101,6 +101,13 @@ module AWS
           request.host.should == 'my-bucket.s3.com'
         end
 
+        it 'should not contain dns compat bucket names that have periods' do
+          request = Request.new
+          request.bucket = 'my.bucket'
+          request.host = 's3.com'
+          request.host.should == 's3.com'
+        end
+
       end
 
       context '#string_to_sign' do
@@ -241,6 +248,20 @@ Tue, 27 Mar 2007 19:42:41 +0000
 /johnsmith/
 END
         end
+
+        it 'places dns compat names into the path when they contain .' do
+          request.http_method = "GET"
+          request.bucket = "my.bucket.name"
+          request.headers["Date"] = "Tue, 27 Mar 2007 19:42:41 +0000"
+          request.string_to_sign.should == <<END.strip
+GET
+
+
+Tue, 27 Mar 2007 19:42:41 +0000
+/my.bucket.name
+END
+        end
+
 
         it 'should produce the right string for GET service' do
           request.http_method = "GET"

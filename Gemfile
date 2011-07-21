@@ -39,6 +39,7 @@ group :build do
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
   gem 'flog', '~> 2.5'
   gem 'yard', '~> 0.6.8'
+  gem 'chronic', '~> 0.5', :platforms => [:ruby]
 end
 
 group :profile do

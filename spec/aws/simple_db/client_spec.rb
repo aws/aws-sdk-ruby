@@ -99,7 +99,7 @@ module AWS
           client.with_http_handler {|req, resp| 
             content_type = req.headers['Content-Type']
           }.send(method, opts)
-          content_type.should == 'application/x-www-form-urlencoded'
+          content_type.should == 'application/x-www-form-urlencoded; charset=utf-8'
         end
 
         it 'should return an object that response to response_metadata' do

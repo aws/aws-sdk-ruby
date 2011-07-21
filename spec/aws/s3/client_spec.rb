@@ -506,7 +506,7 @@ module AWS
                   and_return(false)
               end
 
-              let(:file_opts) { ["r"] }
+              let(:file_opts) { ["rb"] }
 
               it 'get passed as the opened file' do
                 expect_file_body("hello.txt")
@@ -527,7 +527,7 @@ module AWS
                   and_return(true)
               end
 
-              let(:file_opts) { ["r", { :encoding => "BINARY" }] }
+              let(:file_opts) { ["rb", { :encoding => "BINARY" }] }
 
               it 'get passed as the opened file' do
                 expect_file_body("hello.txt")

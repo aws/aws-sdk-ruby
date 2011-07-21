@@ -297,6 +297,58 @@ module AWS
 
       end
 
+      context '#proxy_uri' do
+
+        it 'defaults to nil' do
+          config.proxy_uri.should == nil
+        end
+
+        it 'accepts a string' do
+          config.with(:proxy_uri => 'http://myproxy.com').
+            proxy_uri.to_s.should == 'http://myproxy.com'
+        end
+
+        it 'parses the strings' do 
+          c = config.with(:proxy_uri => 'https://user:pass@myproxy.com:411/abc?xyz')
+          c.proxy_uri.scheme.should == 'https'
+          c.proxy_uri.host.should == 'myproxy.com'
+          c.proxy_uri.path.should == '/abc'
+          c.proxy_uri.query.should == 'xyz'
+          c.proxy_uri.user.should == 'user'
+          c.proxy_uri.password.should == 'pass'
+          c.proxy_uri.port.should == 411
+        end
+
+        it 'returns strings as uri objects' do
+          config.with(:proxy_uri => 'http://myproxy.com').
+            proxy_uri.should == URI.parse('http://myproxy.com')
+        end
+
+        it 'accepts a uri object' do
+          config.with(:proxy_uri => URI.parse('http://myproxy.com')).
+            proxy_uri.to_s.should == 'http://myproxy.com'
+        end
+
+        it 'passes :proxy_api from the config to the request' do
+
+          cfg = config.with(
+            :access_key_id => 'abc',
+            :secret_access_key => 'xyz',
+            :proxy_uri => 'https://myproxy.com/abc?xyz')
+
+          proxy_uri = nil
+          s3_client = S3::Client.new(:config => cfg).with_http_handler do |req,resp|
+            proxy_uri = req.proxy_uri
+          end
+
+          AWS::S3.new(:s3_client => s3_client).buckets['foo'].exists?
+
+          proxy_uri.should == URI.parse('https://myproxy.com/abc?xyz')
+
+        end
+        
+      end
+
       context '#ec2_endpoint' do
 
         it 'defaults to s3.amazonaws.com' do

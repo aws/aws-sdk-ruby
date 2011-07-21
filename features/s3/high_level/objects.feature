@@ -52,6 +52,12 @@ Feature: CRUD Objects (High Level)
     | http   | verb           | PUT   |
     | header | content-length | 3     |
 
+  @put_object @newlines
+  Scenario: Write an object with a file containing newlines
+    Given I ask for the object with key "foo"
+    When I write a file containing a CR-LF sequence to the object
+    Then the object should eventually have the same bytes as the file
+
   @put_object @multibyte
   Scenario: Write an object with a file containing multibyte characters
     Given I ask for the object with key "foo"

@@ -24,7 +24,13 @@ Then /^the attribute should have no values$/ do
 end
 
 When /^I add the value "([^\"]*)" to the "([^\"]*)" attribute of "([^\"]*)"$/ do |value, attribute_name, item_name|
+  value = eval("\"#{value}\"")
   @domain.items[item_name].attributes[attribute_name].add(value)
+end
+
+Then /^the "([^\"]*)" attribute of "([^\"]*)" item should eventually be "([^\"]*)"$/ do |attribute, item_name, value|
+  value = eval("\"#{value}\"")
+  eventually(10) { @domain.items[item_name].attributes[attribute].values.should == [value] }
 end
 
 Then /^the "([^\"]*)" attribute of "([^\"]*)" item should eventually be:$/ do |attribute_name, item_name, table|
@@ -214,7 +220,7 @@ When /^I set the "([^\"]*)" attribute of "([^\"]*)" to "([^\"]*)" unless "([^\"]
   end
 end
 
-When /^I put the following attributes to "([^"]*)"$/ do |item_name, table|
+When /^I put the following attributes to "([^\"]*)"$/ do |item_name, table|
 
   replace = {}
   add = {}

@@ -31,21 +31,23 @@ module AWS
       REQUEST_CLASS = EC2::Request
 
       # @private
-      CACHEABLE_REQUESTS = Set[:describe_instances,
-                               :describe_instance_attribute,
-                               :describe_images,
-                               :describe_image_attribute,
-                               :describe_volumes,
-                               :describe_security_groups,
-                               :describe_addresses,
-                               :describe_key_pairs,
-                               :describe_regions,
-                               :describe_availability_zones,
-                               :describe_reserved_instances,
-                               :describe_reserved_instances_offerings,
-                               :describe_snapshots,
-                               :describe_snapshot_attribute,
-                               :describe_tags]
+      CACHEABLE_REQUESTS = Set[
+        :describe_instances,
+        :describe_instance_attribute,
+        :describe_images,
+        :describe_image_attribute,
+        :describe_volumes,
+        :describe_security_groups,
+        :describe_addresses,
+        :describe_key_pairs,
+        :describe_regions,
+        :describe_availability_zones,
+        :describe_reserved_instances,
+        :describe_reserved_instances_offerings,
+        :describe_snapshots,
+        :describe_snapshot_attribute,
+        :describe_tags
+      ]
 
       configure_client
 

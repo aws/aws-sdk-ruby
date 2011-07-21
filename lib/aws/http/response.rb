@@ -12,19 +12,16 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  
-  # @private
+
   module Http
 
     # Represents the http response from a service request.
     #
     # Responses have:
-    # 
+    #
     # * status (200, 404, 500, etc)
     # * headers (hash of response headers)
     # * body (the response body)
-    #
-    # @private
     class Response
 
       # @return [Integer] (200) response http status code 
@@ -41,7 +38,7 @@ module AWS
       attr_accessor :timeout
       alias_method :timeout?, :timeout
 
-      # @param [Hash] options 
+      # @param [Hash] options
       # @option options [Integer] :status (200) HTTP status code
       # @option options [Hash] :headers ({}) HTTP response headers
       # @option options [String] :body ('') HTTP response body

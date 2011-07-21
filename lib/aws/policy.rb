@@ -17,7 +17,7 @@ require 'date'
 
 module AWS
 
-  # Represents an access policy for S3 operations and resources.  For example:
+  # Represents an access policy for AWS operations and resources.  For example:
   #
   #   policy = Policy.new do |policy|
   #     policy.allow(:actions => ['s3:PutObject'],

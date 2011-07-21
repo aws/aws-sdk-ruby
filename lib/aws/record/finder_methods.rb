@@ -16,6 +16,7 @@ require 'aws/record/scope'
 
 module AWS
   module Record
+
     module FinderMethods
   
       # @param [String] id The id of the record to load.
@@ -83,8 +84,22 @@ module AWS
         _new_scope.find(*args)
       end
 
-      # Equivalent to +find(:all)+
-      def all(options = {})
+      # Returns an enumerable scope object represents all records.
+      #
+      #   Book.all.each do |book|
+      #     # ...
+      #   end
+      #
+      # This method is equivalent to +find(:all)+, and therefore you can also
+      # pass aditional options.  See {#find} for more information on what 
+      # options you can pass.
+      #
+      #   Book.all(:where => { :author' => 'me' }).each do |my_book|
+      #     # ...
+      #   end
+      #
+      # @return [Scope] Returns an enumerable scope object.
+      def all options = {}
         find(:all, options)
       end
 
@@ -186,75 +201,6 @@ module AWS
       #
       def limit limit
         _new_scope.limit(limit)
-      end
-
-      # @private
-      def _new_scope
-        Scope.new(self)
-      end
-      private :_new_scope
-
-      # A configuration method to override the default domain name.
-      # @param [String] The domain name that should be used for this class.
-      def set_domain_name name
-        @_domain_name = name
-      end
-
-      # @return [String] Returns the full prefixed domain name for this class.
-      # 
-      def domain_name
-        @_domain_name ||= self.to_s
-        "#{Record.domain_prefix}#{@_domain_name}"
-      end
-
-      # @return [AWS::SimpleDB::Domain] A reference to the domain
-      #   this class will save data to.
-      def sdb_domain
-        AWS::SimpleDB.new.domains[domain_name]
-      end
-
-      # Creates the SimpleDB domain that is configured for this class.
-      def create_domain
-        AWS::SimpleDB.new.domains.create(domain_name)
-      end
-
-      # @return [Hash] A hash of Attribute objects that represent the
-      #   "columns" objects in this domain use.
-      def attributes
-        @attributes ||= {}
-      end
-
-      # @param [Symbol] name The name of the scope.  Scope names should be
-      #   method-safe and should not conflict with any of the class 
-      #   methods of {Record::Base} or {Record::Scope}.
-      #
-      # Adding a scope using built-in scope modifiers:
-      #
-      #   scope :top_10, order(:rating, :desc).limit(10)
-      #
-      def scope name, scope = nil, &block
-        
-        raise ArgumentError, "only a scope or block may be passed, not both" if
-          scope and block_given?
-
-        if scope
-          method_definition = lambda { scope }
-        else
-          method_definition = block
-        end
-
-        extend(Module.new { define_method(name, &method_definition) })
-
-      end
-
-      def optimistic_locking attribute_name = :version_id
-        attribute = integer_attr(attribute_name)
-        @optimistic_locking_attr = attribute
-      end
-
-      # @private
-      def optimistic_locking_attr
-        @optimistic_locking_attr
       end
 
     end

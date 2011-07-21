@@ -20,9 +20,9 @@ module AWS
 
       it_behaves_like 'an S3 model object', 'foo'
 
-      let(:client) { double("s3-client") }
+      let(:config) { stub_config }
 
-      let(:config) { Configuration.new(:s3_client => client) }
+      let(:client) { config.s3_client }
 
       let(:bucket) { S3::Bucket.new("mybucket", :config => config) }
 
@@ -34,20 +34,25 @@ module AWS
       end
 
       context '#url' do
+
         context 'with dns safe name' do
           it 'should put the bucket name in the host' do
-            bucket = Bucket.new('bucket-name')
-            bucket.stub_chain(:client, :dns_compatible_bucket_name?).
-              and_return(true)
+            bucket = Bucket.new('bucket-name', :config => config)
             bucket.url.should == "http://bucket-name.s3.amazonaws.com/"
           end
         end
+
+        context 'with dns compat name but not for requests' do
+          it 'should put the bucket name in the path' do
+            bucket = Bucket.new('bucket_name', :config => config)
+            bucket.url.should == "http://s3.amazonaws.com/bucket_name/"
+          end
+        end
+
         context 'with non-dns safe name' do
           it 'should put the bucket name in the path' do
-            bucket = Bucket.new('bucket_name')
-            bucket.stub_chain(:client, :dns_compatible_bucket_name?).
-              and_return(false)
-            bucket.url.should == "http://s3.amazonaws.com/bucket_name/"
+            bucket = Bucket.new('my.bucket.name', :config => config)
+            bucket.url.should == "http://my.bucket.name.s3.amazonaws.com/"
           end
         end
 

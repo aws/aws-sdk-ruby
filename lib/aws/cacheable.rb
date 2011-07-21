@@ -81,10 +81,9 @@ module AWS
 
     end
 
-    def self.included(mod)
+    def self.included mod
       mod.extend ClassMethods
-      mod.extend Naming unless
-        mod.respond_to?(:service_ruby_name)
+      mod.extend Naming unless mod.respond_to?(:service_ruby_name)
     end
 
   end

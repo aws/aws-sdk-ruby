@@ -94,6 +94,9 @@ module AWS
     #   [delete_on_termination] True if the Amazon EBS volume is
     #                           deleted on instance termination.
     #
+    # @attr_reader [Array<String>] product_codes Returns an array of
+    #   product codes attached to this instance.
+    #
     # @attr_reader [Symbol] virtualization_type The type of
     #   virtualization of the AMI.  Possible values:
     #
@@ -227,6 +230,30 @@ module AWS
             h
           end
         end
+      end
+
+      describe_call_attribute :product_codes, :memoize => true do
+        translate_output do |list|
+          (list || []).collect{|item| item.product_code }
+        end
+      end
+
+      # Adds one or more product codes:
+      #
+      #   image.add_product_codes 'ABCXYZ', 'MNOPQR'
+      #
+      # You can also pass an array of product codes:
+      # 
+      #   image.add_product_codes ['ABCXYZ', 'MNOPQR']
+      #
+      # @param [Array<String>] product_codes 
+      # @return [nil]
+      def add_product_codes *product_codes
+        opts = {}
+        opts[:image_id] = self.id
+        opts[:product_codes] = product_codes.flatten
+        client.modify_image_attribute(opts)
+        nil
       end
 
       # @private

@@ -53,16 +53,12 @@ module AWS
       end
 
       def host
-        Client.dns_compatible_bucket_name?(bucket) ?
-          "#{bucket}.#{@host}" : 
-          @host
+        Client.path_style_bucket_name?(bucket) ? @host : "#{bucket}.#{@host}"
       end
 
       def path
         parts = []
-        unless bucket.nil? or Client.dns_compatible_bucket_name?(bucket)
-          parts << bucket 
-        end
+        parts << bucket if bucket and Client.path_style_bucket_name?(bucket)
         parts << key if key
         "/#{parts.join('/')}"
       end
@@ -131,23 +127,25 @@ module AWS
 
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
-        if Client.dns_compatible_bucket_name?(bucket)
+        if 
+          Client.dns_compatible_bucket_name?(bucket) and
+          !Client.path_style_bucket_name?(bucket)
+        then
           parts << "/#{bucket}"
         end
- 
+  
         # all requests require the portion of the un-decoded uri up to
         # but not including the query string
         parts << path
  
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
-        params = (sub_resource_params +
-                  query_parameters_for_signature)
+        params = (sub_resource_params + query_parameters_for_signature)
         unless params.empty?
           parts << '?'
           parts << params.sort.collect{|p| p.to_s }.join('&')
         end
- 
+
         parts.join
       end
 

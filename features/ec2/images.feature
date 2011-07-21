@@ -72,6 +72,31 @@ Feature: Basic Image Operations
     | param | Action  | DescribeImages |
     | param | Owner.1 | self           |
 
+  # ari-fe916297 is a public ami by IBM, if this ami is removed then 
+  # the test will need to be updated
+  Scenario: Getting product codes
+    When I ask for the image "ari-fe916297" by ID
+    Then the image product codes should be
+    | CODE     |
+    | CBBD347F |
+    Then a request should have been made like:
+    | TYPE  | NAME      | VALUE          |
+    | param | Action    | DescribeImages |
+    | param | ImageId.1 | ari-fe916297   |
+
+  Scenario: Add image products code
+    Given I ask for the image "non-existent" by ID
+    When I add the following product codes to the image:
+    | CODE |
+    | abc  |
+    | xyz  |
+    Then a request should have been made like:
+    | TYPE  | NAME          | VALUE                |
+    | param | Action        | ModifyImageAttribute |
+    | param | ImageId       | non-existent         |
+    | param | ProductCode.1 | abc                  |
+    | param | ProductCode.2 | xyz                  |
+
   @memoized
   Scenario: List images with memoization
     Given I start a memoization block

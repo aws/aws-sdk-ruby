@@ -195,3 +195,15 @@ def eventually(seconds = 60*5)
     raise e
   end
 end
+
+def tempfile(contents)
+  f = Tempfile.new("aws-sdk-cucumber")
+  path = f.path
+  f.close
+  f.unlink
+  File.open(path, "w+b") do |f|
+    f.write(contents)
+    f.flush
+    yield(f)
+  end
+end

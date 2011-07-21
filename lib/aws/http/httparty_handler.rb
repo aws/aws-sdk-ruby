@@ -16,8 +16,37 @@ require 'httparty'
 module AWS
   module Http
 
-    # @private
+    # Makes HTTP requests using HTTParty.  This is the default
+    # handler, so you don't need to do anything special to configure
+    # it.  However, you can directly instantiate this class in order
+    # to send extra options to HTTParty, for example to enable an HTTP
+    # proxy:
+    #
+    #   AWS.config(
+    #     :http_handler => AWS::Http::HTTPartyHandler.new(
+    #       :http_proxyaddr => "http://myproxy.com",
+    #       :http_proxyport => 80
+    #     )
+    #   )
+    #
     class HTTPartyHandler
+
+      # @return [Hash] The default options to send to HTTParty on each
+      #   request.
+      attr_reader :default_request_options
+
+      # Constructs a new HTTP handler using HTTParty.
+      #
+      # @param [Hash] options Default options to send to HTTParty on
+      #   each request.  These options will be sent to +get+, +post+,
+      #   +head+, +put+, or +delete+ when a request is made.  Note
+      #   that +:body+, +:headers+, +:parser+, and +:ssl_ca_file+ are
+      #   ignored.  If you need to set the CA file, you should use the
+      #   +:ssl_ca_file+ option to {AWS.config} or
+      #   {AWS::Configuration} instead.
+      def initialize options = {}
+        @default_request_options = options
+      end
 
       include HTTParty
 
@@ -27,10 +56,15 @@ module AWS
 
       def handle(request, response)
 
-        opts = {
+        opts = default_request_options.merge({
           :body => request.body,
           :parser => NoOpParser
-        }
+        })
+
+        if request.proxy_uri
+          opts[:http_proxyaddr] = request.proxy_uri.to_s
+          opts[:http_proxyport] = request.proxy_uri.port
+        end
 
         if request.use_ssl?
           url = "https://#{request.host}:443#{request.uri}"

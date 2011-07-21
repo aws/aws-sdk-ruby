@@ -23,6 +23,15 @@ Feature: CRUD Buckets (High Level)
     Then I should receive a bucket
     And the client should have made a PUT request to the bucket
 
+  @create_bucket
+  Scenario: Create a bucket with a dns compat name with sub-domains
+    When I create a bucket named "ruby.integration.test"
+    Then a request should have been made like:
+    | TYPE   | NAME | VALUE                  |
+    | http   | verb | PUT                    |
+    | http   | host | s3.amazonaws.com       |
+    | http   | path | /ruby.integration.test |
+
   @get_bucket
   Scenario: Get a bucket
     When I ask for the bucket named "foo"

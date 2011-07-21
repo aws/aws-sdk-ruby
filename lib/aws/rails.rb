@@ -17,6 +17,7 @@ module AWS
 
   if Object.const_defined?(:Rails) and Rails.const_defined?(:Railtie)
 
+    # @private
     class Railtie < Rails::Railtie
 
       # configure our plugin on boot. other extension points such
@@ -125,17 +126,20 @@ module AWS
       path = Pathname.new("#{rails_root}/config/aws.yml")
   
       if File.exists?(path)
-        cfg = YAML::load(ERB.new(File.read(path)).result)[rails_env]
-        AWS.config(cfg)
+        cfg = YAML::load(ERB.new(File.read(path)).result)
+        unless cfg[rails_env]
+          raise "config/aws.yml is missing a section for `#{rails_env}`"
+        end
+        AWS.config(cfg[rails_env])
       end
   
     end
   
     # Adds a delivery method to ActionMailer that uses {AWS::SimplEmailService}.
     #
-    # Once you have an SES delivery method you can configure Rails to use this
-    # for ActionMailer in your environment configuration (e.g. 
-    # RAILS_ROOT/config/environments/production.rb)
+    # Once you have an SES delivery method you can configure Rails to
+    # use this for ActionMailer in your environment configuration
+    # (e.g.  RAILS_ROOT/config/environments/production.rb)
     #
     #   config.action_mailer.delivery_method = :amazon_ses
     #
@@ -153,21 +157,23 @@ module AWS
     #   AWS.add_action_mailer_delivery_method(:ses, custom_options)
     #
     # @param [Hash] options
-    # @param [Symbol] name (:amazon_ses) The name of the delivery 
-    #   method.  The name used here should be the same as you set in your
-    #   environment config.  If you name the delivery method +:amazon_ses+ then
-    #   you could do something like this in your config/environments/ENV.rb file:
-    #   
+    #
+    # @param [Symbol] name (:amazon_ses) The name of the delivery
+    #   method.  The name used here should be the same as you set in
+    #   your environment config.  If you name the delivery method
+    #   +:amazon_ses+ then you could do something like this in your
+    #   config/environments/ENV.rb file:
+    #
     #     config.action_mailer.delivery_method = :amazon_ses
     #
-    # @param [Hash] options ({}) A hash of options that are passes to 
-    #   {AWS::SimpleEmailService#new} before delivering email.  
+    # @param [Hash] options A hash of options that are passes to
+    #   {AWS::SimpleEmailService#new} before delivering email.
     #
-    # @return [nil] 
+    # @return [nil]
     def self.add_action_mailer_delivery_method name = :amazon_ses, options = {}
-  
+
       amb = ::ActionMailer::Base
-  
+
       if ::Rails.version.to_f >= 3
         amb.add_delivery_method(name, AWS::SimpleEmailService, options)
       else
@@ -175,11 +181,11 @@ module AWS
           AWS::SimpleEmailService.new(options).send_raw_email(mail)
         end
       end
-  
+
       nil
-  
+
     end
-  
+
     # Configures AWS to log to the Rails defualt logger.
     # @return [nil]
     def self.log_to_rails_logger

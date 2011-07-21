@@ -43,6 +43,11 @@ Feature: SimpleDB Items
     | param | Action            | PutAttributes |
     | param | Attribute.1.Value | green         |
 
+  @multibyte
+  Scenario: Adding multibyte character values
+    When I add the value "\xE1\x88\xB4" to the "att1" attribute of "car"
+    Then the "att1" attribute of "car" item should eventually be "\xE1\x88\xB4"
+
   @conditional
   Scenario: Adding values one at a time with an expected value
     Given I add the value "red" to the "colors" attribute of "car"

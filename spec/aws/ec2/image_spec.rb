@@ -409,6 +409,47 @@ module AWS
         it_should_behave_like "ec2 image attribute accessor (describe_images)"
       end
 
+      context '#product_codes' do
+
+        let(:response) { client.stub_for(:describe_images) }
+
+        before(:each) do
+          resp_image = double('image', :image_id => 'ami-123', :product_codes => [
+            double('pc1', :product_code => 'abc'),
+            double('pc2', :product_code => 'xyz'),
+          ])
+          response.stub(:image_index).and_return("ami-123" => resp_image)
+          client.stub(:modify_image_attribute).and_return(response)
+        end
+
+        it 'gets the product codes' do
+          image.product_codes.should == ['abc', 'xyz']
+        end
+
+      end
+
+      context '#add_product_codes' do
+        
+        it 'calls modify image attribute on the client' do
+          client.should_receive(:modify_image_attribute).
+            with(:image_id => image.id, :product_codes => ['ABC'])
+          image.add_product_codes 'ABC'
+        end
+
+        it 'accepts a list of product codes' do
+          client.should_receive(:modify_image_attribute).
+            with(:image_id => image.id, :product_codes => ['ABC', 'XYZ'])
+          image.add_product_codes 'ABC', 'XYZ'
+        end
+
+        it 'accepts an array of product codes' do
+          client.should_receive(:modify_image_attribute).
+            with(:image_id => image.id, :product_codes => ['ABC', 'XYZ'])
+          image.add_product_codes ['ABC', 'XYZ']
+        end
+
+      end
+
       context '#block_device_mappings' do
 
         let(:attribute) { :block_device_mappings }

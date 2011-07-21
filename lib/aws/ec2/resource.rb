@@ -26,11 +26,9 @@ module AWS
       def initialize(*args)
         super
         @memoized_attributes = {}
-        if options = args.last and
-            options.kind_of?(Hash)
+        if options = args.last and options.kind_of?(Hash)
           self.class.memoized_attributes.each do |att|
-            @memoized_attributes[att] = options[att] if
-              options.key?(att)
+            @memoized_attributes[att] = options[att] if options.key?(att)
           end
         end
       end
@@ -311,10 +309,12 @@ module AWS
           request_name = Inflection.class_name(name.to_s)
           request_name = request_name[0,1].downcase + request_name[1..-1]
 
-          # define the getter and setter
+          # define getter
           define_method(getter) do
             retrieve_attribute(getter) { describe_attribute_call(request_name) }
           end
+
+          # define setter
           define_method(setter) do |input_value|
             set_mutable_attribute(name, input_value)
           end unless opts[:setter] == false

@@ -70,7 +70,7 @@ module AWS
         context '#encoded' do
            
           it 'should return a url safe string name/value pair joined by =' do
-            param.encoded.split(/=/).each do |part|
+            param.encoded.split('=').each do |part|
               part.should match(/^[a-z0-9\-_%]+$/i)
             end
           end
@@ -93,6 +93,16 @@ module AWS
           it 'should encode new-lines' do
             param = Param.new('name', "value\nvalue")
             param.encoded.should == 'name=value%0Avalue'
+          end
+
+          context 'with transcoding support' do
+
+            it 'should convert to UTF-8 before encoding' do
+              param = Param.new('name', 'something in LATIN-1')
+              param.value.stub(:encode).with("UTF-8").and_return("ENCODED VALUE")
+              param.encoded.should == "name=ENCODED%20VALUE"
+            end
+
           end
 
         end

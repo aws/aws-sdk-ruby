@@ -70,10 +70,11 @@ module AWS
         options[:"#{self.class.service_ruby_name}_endpoint"] = 
           options.delete(:endpoint)
       end
-      
-      @config = options[:config]
+
+      options_without_config = options.dup
+      @config = options_without_config.delete(:config)
       @config ||= AWS.config
-      @config = @config.with(options)
+      @config = @config.with(options_without_config)
       @signer = @config.signer
       @http_handler = @config.http_handler
       @stubs = {}
@@ -155,8 +156,8 @@ module AWS
     def new_request
       req = self.class::REQUEST_CLASS.new
       req.http_method = 'POST'
-      req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-      req.add_param 'Timestamp', Time.now.utc.strftime('%Y-%m-%dT%TZ')
+      req.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8'
+      req.add_param 'Timestamp', Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
       req.add_param 'Version', self.class::API_VERSION
       req
     end
@@ -221,8 +222,7 @@ module AWS
     private
     def make_async_request response
 
-      pauses = async_request_with_retries(response,
-                                          response.http_request)
+      pauses = async_request_with_retries(response, response.http_request)
 
       response
 
@@ -378,12 +378,15 @@ module AWS
           opts = options.dup
           opts.delete(:async)
 
-          # configure the http request
           http_request = new_request
+
+          # configure the http request
           http_request.host = endpoint
+          http_request.proxy_uri = config.proxy_uri
           http_request.use_ssl = config.use_ssl?
           http_request.ssl_verify_peer = config.ssl_verify_peer?
           http_request.ssl_ca_file = config.ssl_ca_file
+
           send("configure_#{name}_request", http_request, opts, &block)
           http_request.headers["user-agent"] = user_agent_string
           http_request.add_authorization!(signer)

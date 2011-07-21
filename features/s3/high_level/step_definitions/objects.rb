@@ -208,13 +208,18 @@ end
 When /^I write a UTF\-8 file containing "([^\"]*)" to the object$/ do |str|
   require 'tempfile'
   str = eval("\"#{str}\"")
-  f = Tempfile.new("foo")
-  begin
-    f.write(str)
-    f.flush
+  tempfile(str) do |f|
     @object.write(:file => f.path)
-  ensure
-    f.close
-    f.unlink
   end
+end
+
+When /^I write a file containing a CR-LF sequence to the object$/ do
+  @bytes = "foo\x0D\x0Abar"
+  tempfile(@bytes) do |f|
+    @object.write(:file => f.path)
+  end
+end
+
+Then /^the object should eventually have the same bytes as the file$/ do
+  eventually(10) { @object.read.bytes.to_a.should == @bytes.bytes.to_a }
 end

@@ -16,101 +16,109 @@ require 'spec_helper'
 module AWS
   module Record
     describe Base do
-      context 'optimistic locking' do
-        
-        let(:klass) do
-          Class.new(Record::Base)
-        end
-  
-        before(:each) do
-          klass.stub(:to_s).and_return('ExampleModel')
-        end
-  
-        let(:attr_collection) { double('attribute-collection').as_null_object }
-  
-        before(:each) do
-          klass.string_attr :name
-          klass.optimistic_locking :version_id
-          klass.stub_chain(:sdb_domain, :items, :[], :attributes).
-            and_return(attr_collection)
-        end
-  
-        context 'new records' do
-  
-          it 'sets optmistic attribute to 1 on create' do
-            attr_collection.should_receive(:add).
-              with(hash_including('name' => %w(foo), 'version_id' => %w(1)))
-            obj = klass.new(:name => 'foo')
-            obj.save
-          end
-  
-          it 'ensures the optimstic locking attribute is null on create' do
-            attr_collection.should_receive(:add).
-              with(hash_including(:unless => 'version_id'))
-            obj = klass.new(:name => 'foo')
-            obj.save
-          end
-  
-        end
-  
-        context 'existing records' do
-  
-          let(:data) { double('item-data', :attributes => { 
-            'name' => %w(name1),
-            'version_id' => %w(1),
-          })}
-  
-          let(:obj) { klass['item-name'] }
-          
+      it_behaves_like 'aws record' do
+        context 'optimistic locking' do
+    
           before(:each) do
-            klass.stub_chain(:sdb_domain, :items, :[], :data).and_return(data)
+            klass.string_attr :name
+            klass.optimistic_locking :version_id
           end
-  
-          it 'incrementes the optmistic attribute on update' do
-            attr_collection.should_receive(:replace).
-              with(hash_including('name' => %w(name2), 'version_id' => %w(2)))
-            obj.name = 'name2'
-            obj.save!
+    
+          context 'new records' do
+    
+            it 'sets optmistic attribute to 1 on create' do
+
+              sdb_attributes.should_receive(:add).with(hash_including(
+                'name' => %w(foo), 'version_id' => %w(1)))
+
+              klass.new(:name => 'foo').save
+
+            end
+    
+            it 'ensures the optimstic locking attribute is null on create' do
+
+              sdb_attributes.should_receive(:add).with(hash_including(
+                :unless => 'version_id'))
+
+              klass.new(:name => 'foo').save
+
+            end
+    
           end
-  
-          it 'sets expectation about the opt locking attr on update' do
-            attr_collection.should_receive(:replace).
-              with(hash_including(:if => { 'version_id' => '1' }))
-            obj.name = 'name2'
-            obj.save!
-          end
-  
-          it 'sets expectations about the opt locking attr on delete' do
-            obj.send(:sdb_item).should_receive(:delete).
-              with(:if => { 'version_id' => '1' })
-            obj.delete
-          end
-  
-          # simulate enabling optimistic locking after records have been
-          # already added to the system
-          context 'missing previous version id' do
-            
-            # note - no version id
-            let(:data) { double('item-data', :attributes => { 
-              'name' => %w(name1)
-            })}
-  
-            it 'sets expectation about the opt locking attr to be nil' do
-              attr_collection.should_receive(:replace).
-                with(hash_including(:unless => 'version_id'))
+    
+          context 'existing records' do
+    
+            before(:each) do
+              sdb_data.stub(:attributes).and_return({
+                'name' => %w(name1),
+                'version_id' => %w(1),
+              })
+            end
+    
+            it 'incrementes the optmistic attribute on update' do
+
+              sdb_attributes.should_receive(:replace).
+                with(hash_including('name' => %w(name2), 'version_id' => %w(2)))
+
+              obj = klass['item-id']
               obj.name = 'name2'
               obj.save!
+
             end
-  
+    
+            it 'sets expectation about the opt locking attr on update' do
+
+              sdb_attributes.should_receive(:replace).
+                with(hash_including(:if => { 'version_id' => '1' }))
+
+              obj = klass['item-id']
+              obj.name = 'name2'
+              obj.save!
+
+            end
+    
             it 'sets expectations about the opt locking attr on delete' do
-              obj.send(:sdb_item).should_receive(:delete).with(:unless => 'version_id')
+
+              sdb_item.should_receive(:delete).
+                with(:if => { 'version_id' => '1' })
+
+              obj = klass['item-id']
               obj.delete
+
             end
-  
+    
+            # simulate enabling optimistic locking after records have been
+            # already added to the system
+            context 'missing previous version id' do
+              
+              before(:each) do
+                sdb_data.stub(:attributes).and_return({'name' => %w(name1)})
+              end
+      
+              it 'sets expectation about the opt locking attr to be nil' do
+
+                sdb_attributes.should_receive(:replace).
+                  with(hash_including(:unless => 'version_id'))
+
+                obj = klass['item-id']
+                obj.name = 'name2'
+                obj.save!
+
+              end
+    
+              it 'sets expectations about the opt locking attr on delete' do
+
+                sdb_item.should_receive(:delete).with(:unless => 'version_id')
+
+                obj = klass['item-id']
+                obj.delete
+
+              end
+    
+            end
+            
           end
-          
         end
-  
       end
     end
   end

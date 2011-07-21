@@ -19,7 +19,9 @@ require 'aws/indifferent_hash'
 
 require 'aws/record/naming'
 require 'aws/record/attribute_macros'
+require 'aws/record/scopes'
 require 'aws/record/finder_methods'
+require 'aws/record/optimistic_locking'
 require 'aws/record/validations'
 require 'aws/record/dirty_tracking'
 require 'aws/record/conversion'
@@ -288,6 +290,9 @@ module AWS
       extend Validations
       extend AttributeMacros
       extend FinderMethods
+      extend OptimisticLocking
+      extend Scopes
+
       include Conversion
       include DirtyTracking
   
@@ -408,6 +413,41 @@ module AWS
       # @return [Boolean] Returns true if this instance object has been deleted.
       def deleted?
         persisted? ? !!@_deleted : false
+      end
+
+      class << self
+
+        # @return [Hash<String,Attribute>] Returns a hash of all of the
+        #   configured attributes for this class.
+        def attributes
+          @attributes ||= {}
+        end
+
+        # Allows you to override the default domain name for this record.  
+        # The defualt domain name is the class name.
+        # @param [String] The domain name that should be used for this class.
+        def set_domain_name name
+          @_domain_name = name
+        end
+
+        # @return [String] Returns the full prefixed domain name for this class.
+        def domain_name
+          @_domain_name ||= self.to_s
+          "#{Record.domain_prefix}#{@_domain_name}"
+        end
+
+        # Creates the SimpleDB domain that is configured for this class.
+        def create_domain
+          AWS::SimpleDB.new.domains.create(domain_name)
+        end
+
+        # @return [AWS::SimpleDB::Domain] Returns a reference to the domain
+        #   this class will save data to.
+        # @private
+        def sdb_domain
+          AWS::SimpleDB.new.domains[domain_name]
+        end
+
       end
 
       # If you define a custom setter, you use #[]= to set the value 

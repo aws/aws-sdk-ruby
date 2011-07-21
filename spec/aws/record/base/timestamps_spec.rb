@@ -51,7 +51,7 @@ module AWS
           context 'existing record' do
 
             let(:yesterday) { 
-              (Time.now - (60 * 60 * 24)).strftime('%Y-%m-%dT%TZ') 
+              (Time.now - (60 * 60 * 24)).strftime('%Y-%m-%dT%H:%M:%SZ') 
             }
 
             before(:each) do

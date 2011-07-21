@@ -85,7 +85,7 @@ module AWS
       # @param [Hash] options
       # @option options [String] :version_id Which version of this object
       #   to make a HEAD request against.
-      # @return [Response] A head object response with metatadata, 
+      # @return A head object response with metatadata, 
       #   content_length, content_type and etag.
       def head options = {}
         client.head_object(options.merge(
@@ -122,11 +122,12 @@ module AWS
       # @option [String] :version_id (nil) If present the specified version
       #   of this object will be deleted.  Only works for buckets that have
       #   had versioning enabled.
-      # @return [Response]
+      # @return [nil]
       def delete options = {}
         options[:bucket_name] = bucket.name
         options[:key] = key
         client.delete_object(options)
+        nil
       end
 
       # @option [String] :version_id (nil) If present the metadata object
@@ -552,13 +553,13 @@ module AWS
       #   AccessControlList#initialize.
       #
       # @param (see Bucket#acl=)
-      # @return [Response]
-      #
+      # @return [nil]
       def acl=(acl)
         client.set_object_acl(
           :bucket_name => bucket.name,
           :key => key,
           :acl => acl)
+        nil
       end
 
       # @private

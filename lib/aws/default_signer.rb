@@ -16,16 +16,31 @@ require 'openssl'
 
 module AWS
 
-  # @private
+  # Computes signatures using credentials that are stored in memory.
   class DefaultSigner
 
-    attr_reader :access_key_id, :secret_access_key
+    # @return [String] The Access Key ID used to sign requests.
+    attr_reader :access_key_id
 
+    # @return [String] The Secret Access Key used to sign requests.
+    attr_reader :secret_access_key
+
+    # @param [String] access_key_id The Access Key ID used to sign
+    #   requests.
+    #
+    # @param [String] secret_access_key The Secret Access Key used to
+    #   sign requests.
     def initialize(access_key_id, secret_access_key)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
     end
 
+    # Signs a string using the credentials stored in memory.
+    #
+    # @param [String] string_to_sign The string to sign.
+    #
+    # @param [String] digest_method The digest method to use when
+    #   computing the HMAC digest.
     def sign(string_to_sign, digest_method = 'sha256')
       Base64.encode64(
         OpenSSL::HMAC.digest(

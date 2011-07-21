@@ -18,7 +18,6 @@ module AWS
   module Http
 
     # Base class for all service reqeusts.
-    # @private
     class Request
 
       # Returns a new empty http request object.
@@ -50,6 +49,10 @@ module AWS
       # @return [String] the AWS access key ID used to authorize the
       #   request
       attr_accessor :access_key_id
+
+      # @return [nil, URI] The URI to the proxy server requests are 
+      #   sent through if configured.  Returns nil if there is no proxy.
+      attr_accessor :proxy_uri
 
       # @param [Boolean] ssl If the request should be sent over ssl or not.
       def use_ssl= use_ssl

@@ -32,7 +32,7 @@ module AWS
 
         # string, pathname, file, io-like object, etc
         data = options[:data]
-        file_opts = ["r"]
+        file_opts = ["rb"]
         file_opts << { :encoding => "BINARY" } if Object.const_defined?(:Encoding)
         case
         when data.is_a?(String)

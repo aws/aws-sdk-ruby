@@ -17,6 +17,10 @@ module AWS
   module Http
     class Request
 
+      # Represents a single request paramater.  Some services accept this
+      # in a form encoded body string, others as query parameters.
+      # It is up to each service's Request class to determine how to
+      # consume these params.
       # @private
       class Param
 
@@ -52,10 +56,13 @@ module AWS
           end
         end
 
+        # @private
+        protected
         def escape value
+          value = value.encode("UTF-8") if
+            value.respond_to?(:encode)
           CGI::escape(value.to_s).gsub('+', '%20')
         end
-        protected :escape
         
       end
     end

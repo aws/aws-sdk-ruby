@@ -11,4 +11,24 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.2"
+require 'aws/simple_db'
+require 'aws/record/scope'
+
+module AWS
+  module Record
+
+    module OptimisticLocking
+
+      def optimistic_locking attribute_name = :version_id
+        attribute = integer_attr(attribute_name)
+        @optimistic_locking_attr = attribute
+      end
+
+      # @private
+      def optimistic_locking_attr
+        @optimistic_locking_attr
+      end
+
+    end
+  end
+end

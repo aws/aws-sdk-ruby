@@ -14,6 +14,7 @@
 require 'aws/default_signer'
 require 'aws/http/httparty_handler'
 require 'set'
+require 'uri'
 
 module AWS
 
@@ -81,6 +82,7 @@ module AWS
         :sns_endpoint => 'sns.us-east-1.amazonaws.com',
         :sqs_endpoint => 'sqs.us-east-1.amazonaws.com',
         :stub_requests => false,
+        :proxy_uri => nil,
         :use_ssl => true,
         :user_agent_prefix => nil,
         :ssl_verify_peer => true,
@@ -257,6 +259,12 @@ module AWS
     # default value for this option.
     def ssl_ca_file
       @options[:ssl_ca_file]
+    end
+
+    # @return [URI::HTTP, URI::HTTPS, nil] Returns the URI for the configured
+    #   proxy if there is one.  Defaults to nil.
+    def proxy_uri
+      @options[:proxy_uri] ? URI.parse(@options[:proxy_uri].to_s) : nil
     end
 
     # @private

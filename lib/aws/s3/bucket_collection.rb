@@ -41,6 +41,19 @@ module AWS
 
       # Creates and returns a new Bucket.  For example:
       #
+      # @note If your bucket name contains one or more periods and it
+      #   is hosted in a non-US region, you should make requests
+      #   against the bucket using the S3 endpoint specific to the
+      #   region in which your bucket resides. For example:
+      #
+      #     s3 = AWS::S3.new(:s3_endpoint => "s3-eu-west-1.amazonaws.com")
+      #     bucket = s3.buckets.create("my.eu.bucket")
+      #
+      #   For a full list of endpoints and regions, see
+      #   {http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html
+      #   Regions and Endpoints} in the Amazon Web Services General
+      #   Reference.
+      #
       # @example
       #
       #   bucket = s3.buckets.create('my-bucket')

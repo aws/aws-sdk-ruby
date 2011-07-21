@@ -85,10 +85,14 @@ module AWS
         url = request.use_ssl? ? 
           "https://#{request.host}:443#{request.uri}" :
           "http://#{request.host}#{request.uri}"
-        puts url
 
         curl = Curl::Easy.new(url)
         curl.headers = request.headers
+
+        if proxy = request.proxy_uri
+          curl.proxy_url = proxy.to_s
+          curl.proxy_port = proxy.port
+        end
 
         curl.on_header {|header_data|
           name, value = header_data.strip.split(/:\s+/, 2)

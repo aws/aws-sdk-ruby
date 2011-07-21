@@ -16,7 +16,7 @@ require 'aws/policy'
 module AWS
   class SNS
 
-    # @private
+    # @see AWS::Policy
     class Policy < AWS::Policy
 
       class Statement < AWS::Policy::Statement

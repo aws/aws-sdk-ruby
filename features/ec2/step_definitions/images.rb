@@ -101,3 +101,16 @@ When /^I compute a hash of mapped snapshot ID to image ID for Amazon\-owned imag
     hash
   end
 end
+
+Then /^the image product codes should be$/ do |table|
+  @image.product_codes.sort.should == table.hashes.collect{|h| h['CODE'] }.sort
+end
+
+When /^I add the following product codes to the image:$/ do |table|
+  codes = table.hashes.collect{|h| h['CODE'] }
+  begin
+    @image.add_product_codes(*codes)
+  rescue AWS::EC2::Errors::InvalidAMIID::Malformed => e
+    # intentional fake ami id
+  end
+end

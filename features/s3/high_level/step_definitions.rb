@@ -15,6 +15,15 @@ Given /^I create a new bucket$/ do
   create_bucket_high_level
 end
 
+Given /^I create a bucket named "([^"]*)"$/ do |bucket_name|
+  create_bucket_high_level(:name => bucket_name)
+end
+
+Given /^I create "([^"]*)" to the key "([^"]*)"$/ do |data, key|
+  @object = @bucket.objects[key]
+  @result = @object.write(data)
+end
+
 When /^I create a bucket with the location constraint "([^"]*)"$/ do |constraint|
   create_bucket_high_level(:location_constraint => constraint)
 end
