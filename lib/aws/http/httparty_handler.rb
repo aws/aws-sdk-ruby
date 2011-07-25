@@ -70,6 +70,8 @@ module AWS
           url = "https://#{request.host}:443#{request.uri}"
           opts[:ssl_ca_file] = request.ssl_ca_file if
             request.ssl_verify_peer?
+          opts[:ssl_ca_path] = '/etc/ssl/certs' if
+            request.ssl_verify_peer? && FileTest.directory?('/etc/ssl/certs')
         else
           url = "http://#{request.host}#{request.uri}"
         end
