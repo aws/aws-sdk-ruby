@@ -317,7 +317,7 @@ module AWS
           "expiration" => format_expiration,
           "conditions" => generate_conditions
         }.to_json
-        Base64.encode64(json)
+        Base64.encode64(json).gsub(/\n/, '')
       end
 
       # @return [Hash] A collection of form fields (including a
