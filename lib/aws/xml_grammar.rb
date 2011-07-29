@@ -66,13 +66,15 @@ module AWS
     class CustomizationContext < Hash
 
       def initialize(element_name = nil)
-        self[:children] = {}
+        original_store(:children, {})
 
         if element_name
-          self[:name] = element_name
+          original_store(:name, element_name)
           recompute_accessors
         end
       end
+
+      alias_method :original_store, :[]=
 
       def []=(name, value)
         super
@@ -90,16 +92,16 @@ module AWS
       end
 
       def deep_copy(hash = self)
-        hash.inject(hash.class.new) do |copy,(key,value)|
+        fields = hash.inject({}) do |copy,(key,value)|
           if value.is_a?(CustomizationContext)
-            copy[key] = value.deep_copy
+            value = value.deep_copy
           elsif value.is_a?(Hash)
-            copy[key] = deep_copy(value)
-          else
-            copy[key] = value
+            value = deep_copy(value)
           end
+          copy[key] = value
           copy
         end
+        hash.merge(fields)
       end
 
       private

@@ -32,8 +32,8 @@ module AWS
   # A handful of useful Rails integration methods.
   #
   # If you require this gem inside a Rails application (via config.gem
-  # for rails 2 and bundler for rails 3) then AWS::Rails.setup
-  # is called automatically.
+  # for rails 2 and bundler for rails 3) then {setup} is called
+  # automatically.
   module Rails
     
     # Adds extra functionality to Rails.
@@ -43,33 +43,12 @@ module AWS
     #
     # Rails 3+ (RAILS_ROOT/Gemfile)
     #
-    #   gem 'aws-sdk-rails'
+    #   gem 'aws-sdk'
     #
     # Rails 2.1 - 2.3 (RAILS_ROOT/config/environment.rb)
     #
-    #   config.gem 'aws-sdk-rails'
+    #   config.gem 'aws-sdk'
     #
-    # === Selective Rails Features
-    #
-    # If you would prefer to cherry pick a few of the features added by this
-    # gem you can change your gem requirement to load 'aws/rails' instead:
-    #
-    # Rails 3+ (RAILS_ROOT/Gemfile)
-    #
-    #   gem 'aws-sdk-rails', :require => 'aws/rails'
-    #
-    # Rails 2.1 - 2.3 (RAILS_ROOT/config/environment.rb)
-    #
-    #   config.gem 'aws-sdk-rails', :lib => 'aws/rails'
-    #
-    # In both of the examples above you can now configure AWS and call the setup
-    # methods of choice inside a config initializer (e.g. 
-    # RAILS_ROOT/config/initializers/aws.rb):
-    #
-    #   AWS.config(...)
-    #   AWS.log_to_rails_logger
-    #   AWS.add_action_mailer_delivery_method 
-    #   
     # @return [nil]
     def self.setup
       load_yaml_config
@@ -135,7 +114,8 @@ module AWS
   
     end
   
-    # Adds a delivery method to ActionMailer that uses {AWS::SimplEmailService}.
+    # Adds a delivery method to ActionMailer that uses
+    # {AWS::SimpleEmailService}.
     #
     # Once you have an SES delivery method you can configure Rails to
     # use this for ActionMailer in your environment configuration

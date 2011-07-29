@@ -78,6 +78,11 @@ module AWS
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
 
+      EMPTY_BODY_ERRORS = {
+        304 => Errors::NotModified,
+        404 => Errors::NoSuchKey
+      }
+
       include DataOptions
 
       configure_client
@@ -471,6 +476,9 @@ module AWS
           MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
           end
+          MetaUtils.extend_method(response, :last_modified) do
+            Time.parse(response.http_response.header('Last-Modified'))
+          end
         end
 
         simulate_response do |response|
@@ -610,6 +618,10 @@ module AWS
             end
           end
 
+          MetaUtils.extend_method(resp, :last_modified) do
+            Time.parse(resp.http_response.header('Last-Modified'))
+          end
+
           MetaUtils.extend_method(resp, :content_length) do
             http_response.header('content-length').to_i
           end
@@ -694,6 +706,9 @@ module AWS
         process_response do |response|
           MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
+          end
+          MetaUtils.extend_method(response, :last_modified) do
+            Time.parse(response.http_response.header('Last-Modified'))
           end
         end
 
@@ -791,6 +806,9 @@ module AWS
           MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
           end
+          MetaUtils.extend_method(response, :last_modified) do
+            Time.parse(response.http_response.header('Last-Modified'))
+          end
         end
 
       end
@@ -799,7 +817,21 @@ module AWS
       def xml_error_response? response
         (response.http_response.status >= 300 ||
          response.request_type == :complete_multipart_upload) and
+          response.http_response.body and
           XmlGrammar.parse(response.http_response.body).respond_to?(:code)
+      end
+
+      protected
+      def populate_error response
+        code = response.http_response.status
+        if EMPTY_BODY_ERRORS.include?(code) and
+            response.http_response.body.nil?
+          response.error =
+            EMPTY_BODY_ERRORS[code].new(response.http_request,
+                                        response.http_response)
+        else
+          super
+        end
       end
 
       protected

@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'cgi'
+require 'aws/uri_escape'
 
 module AWS
   module Http
@@ -23,6 +23,8 @@ module AWS
       # consume these params.
       # @private
       class Param
+
+        include UriEscape
 
         attr_accessor :name, :value
 
@@ -56,14 +58,6 @@ module AWS
           end
         end
 
-        # @private
-        protected
-        def escape value
-          value = value.encode("UTF-8") if
-            value.respond_to?(:encode)
-          CGI::escape(value.to_s).gsub('+', '%20')
-        end
-        
       end
     end
   end

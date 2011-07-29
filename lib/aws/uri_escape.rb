@@ -11,4 +11,30 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.3"
+require 'cgi'
+
+module AWS
+
+  # @private
+  module UriEscape
+
+    # Does URI escaping the way AWS expects it to be done.
+    #
+    # @private
+    protected
+    def escape value
+      value = value.encode("UTF-8") if
+        value.respond_to?(:encode)
+      CGI::escape(value.to_s).gsub('+', '%20')
+    end
+
+    # URI-escapes a path without escaping the separators
+    #
+    # @private
+    protected
+    def escape_path value
+      value.split("/").map { |part| escape(part) }.join("/")
+    end
+
+  end
+end

@@ -61,6 +61,32 @@ module AWS
 
       end
 
+      shared_examples_for "an s3 error response with no body" do |params|
+
+        status = params[:status]
+        klass = params[:klass]
+        kind = params[:kind]
+
+        before(:each) do
+          Kernel.stub(:sleep)
+          http_handler.stub(:handle) do |req, resp|
+            resp.status = status
+            resp.body = nil
+          end
+        end
+
+        it "should raise an instance of #{klass}" do
+          lambda { client.send(method, opts) }.
+            should raise_error(klass)
+        end
+
+        it "should raise an instance of #{kind}" do
+          lambda { client.send(method, opts) }.
+            should raise_error(kind)
+        end
+
+      end
+
       shared_examples_for "an s3 http request" do |verb|
 
         it_should_behave_like "an aws http request", verb
@@ -88,6 +114,16 @@ module AWS
               should raise_error(Errors::NoSuchBucket,
                                  "Something bad happened")
           end
+
+          it_should_behave_like("an s3 error response with no body",
+                                :status => 304,
+                                :klass => Errors::NotModified,
+                                :kind => AWS::Errors::ClientError)
+
+          it_should_behave_like("an s3 error response with no body",
+                                :status => 404,
+                                :klass => Errors::NoSuchKey,
+                                :kind => AWS::Errors::ClientError)
 
         end
 
@@ -137,6 +173,17 @@ module AWS
             resp.headers['ETag'] = ['abcxyz']
           end.send(method, opts)
           response.etag.should == 'abcxyz'
+        end
+
+      end
+
+      shared_examples_for "returns last_modified" do
+
+        it 'should return the last_modified time as a Time object' do
+          response = client.with_http_handler do |req, resp|
+            resp.headers['Last-Modified'] = ['Fri, 29 Jul 2011 22:16:13 -0000']
+          end.send(method, opts)
+          response.last_modified.should == Time.utc(2011, 7, 29, 22, 16, 13)
         end
 
       end
@@ -1055,6 +1102,8 @@ module AWS
 
         it_should_behave_like "returns etag"
 
+        it_should_behave_like "returns last_modified"
+
         it_should_behave_like "sends metadata headers", true
 
         it_should_behave_like "accepts input data"
@@ -1080,6 +1129,8 @@ module AWS
         it_should_behave_like "returns version id"
 
         it_should_behave_like "returns etag"
+
+        it_should_behave_like "returns last_modified"
 
         it_should_behave_like "sends metadata headers", false
 
@@ -1152,6 +1203,8 @@ module AWS
         it_should_behave_like "returns version id"
 
         it_should_behave_like "returns etag"
+
+        it_should_behave_like "returns last_modified"
 
         context 'response' do
 
@@ -1345,6 +1398,8 @@ module AWS
         it_should_behave_like "accepts upload_id"
 
         it_should_behave_like "returns etag"
+
+        it_should_behave_like "returns last_modified"
 
         it 'requires part_number' do
           opts.delete(:part_number)

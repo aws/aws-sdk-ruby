@@ -89,6 +89,35 @@ module AWS
 
       end
 
+      context '#exists?' do
+
+        it 'should call head_object' do
+          client.should_receive(:head_object).
+            with(:bucket_name => "foobucket",
+                 :key => "foo").and_return(client.stub_for(:head_object))
+          object.exists?
+        end
+
+        it 'should return true if the request is successful' do
+          object.exists?.should be_true
+        end
+
+        it 'should return false if a NoSuchKey error is raised' do
+          client.stub(:head_object).
+            and_raise(Errors::NoSuchKey.new(double("req"),
+                                            double("resp",
+                                                   :status => 404,
+                                                   :body => '')))
+          object.exists?.should be_false
+        end
+
+        it 'should not intercept other kinds of errors' do
+          client.stub(:head_object).and_raise("FOO")
+          lambda { object.exists? }.should raise_error("FOO")
+        end
+
+      end
+
       context '#write' do
 
         context 'with no arguments' do
@@ -539,6 +568,14 @@ module AWS
           head = double('head-object-response', :etag => 'myetag')
           client.stub(:head_object).and_return(head)
           object.etag.should == 'myetag'
+        end
+      end
+
+      context '#last_modified' do
+        it 'returns #last_modified from the head response' do
+          head = double('head-object-response', :last_modified => Time.now)
+          client.stub(:head_object).and_return(head)
+          object.last_modified.should == head.last_modified
         end
       end
 

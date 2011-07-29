@@ -66,6 +66,28 @@ module AWS
           request.path.should == '/foo_bar/key'
         end
 
+        it 'should URI-encode the key' do
+          request.bucket = "foo_bar"
+          request.key = "key with spaces"
+          request.path.should == "/foo_bar/key%20with%20spaces"
+        end
+
+        if String.instance_methods.include?(:encoding)
+
+          it 'should URI-encode the key' do
+            request.bucket = "foo_bar"
+            request.key = "key\u1234"
+            request.path.should == "/foo_bar/key%E1%88%B4"
+          end
+
+        end
+
+        it 'should not URI-encode path separators in the key' do
+          request.bucket = "foo_bar"
+          request.key = "key/foo bla"
+          request.path.should == "/foo_bar/key/foo%20bla"
+        end
+
         it 'should be readonly' do
           lambda {
             request.path = '/foo'

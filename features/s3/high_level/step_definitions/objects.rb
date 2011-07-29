@@ -17,6 +17,7 @@ Before("@s3", "@objects") do
 end
 
 When /^I ask for the object with key "([^\"]*)"$/ do |key|
+  key = eval("\"#{key}\"")
   @object = @result = @bucket.objects[key]
 end
 
@@ -222,4 +223,38 @@ end
 
 Then /^the object should eventually have the same bytes as the file$/ do
   eventually(10) { @object.read.bytes.to_a.should == @bytes.bytes.to_a }
+end
+
+Given /^I get the object ETag$/ do
+  @result = @etag = @object.etag
+end
+
+When /^I get the object\'s last modified date$/ do
+  @result = @object.last_modified
+end
+
+When /^I read it with :if_match set to "([^\"]*)"$/ do |etag|
+  etag = "\"#{etag}\""
+  @object.read(:if_match => etag)
+end
+
+When /^I read it with :if_none_match set to the previous ETag$/ do
+  @object.read(:if_none_match => @etag)
+end
+
+Then /^the result should be the same as the "([^\"]*)" header in the HTTP response$/ do |header|
+  @result.should == @http_handler.last_response.headers[header.downcase].first
+end
+
+When /^I ask if the object exists$/ do
+  @result = @object.exists?
+end
+
+When /^I read it with :if_unmodified_since set to an hour ago$/ do
+  @result = @object.read(:if_unmodified_since => Time.now-60*60)
+end
+
+When /^I read it with :if_modified_since set to the current time$/ do
+  sleep 2
+  @result = @object.read(:if_modified_since => Time.now)
 end

@@ -1215,5 +1215,46 @@ module AWS
 
     end
 
+    describe XmlGrammar::CustomizationContext do
+
+      context '#deep_copy' do
+
+        it 'should preserve the class' do
+          original = XmlGrammar::CustomizationContext.new.merge(:foo => {:baz => "bar"})
+          original.deep_copy.should be_a(XmlGrammar::CustomizationContext)
+        end
+
+        it 'should preserve the class of the input value' do
+          original = XmlGrammar::CustomizationContext.new.merge(:foo => {:baz => "bar"})
+          original.deep_copy(:foo => "bar").should be_a(Hash)
+        end
+
+        it 'should make a copy of each nested hash' do
+          original = XmlGrammar::CustomizationContext.new.merge(:foo => {:baz => "bar"})
+          original.deep_copy[:foo].should_not be(original[:foo])
+          original.deep_copy.should == original
+        end
+
+        it 'should make a copy of each nested customization context' do
+          original = XmlGrammar::CustomizationContext.new.merge(:foo => XmlGrammar::CustomizationContext.new)
+          original.deep_copy[:foo].should_not be(original[:foo])
+          original.deep_copy.should == original
+        end
+
+        it 'should not use the overridden indexed-assignment operator' do
+          subclass = Class.new(XmlGrammar::CustomizationContext) do
+            def []=(name, value)
+              fail
+            end
+          end
+          original = subclass.new.merge(:foo => "foo",
+                                        :bar => "bar")
+          original.deep_copy
+        end
+
+      end
+
+    end
+
   end
 end

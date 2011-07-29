@@ -74,6 +74,14 @@ module AWS
 
       alias_method :eql?, :==
 
+      def exists?
+        head
+      rescue Errors::NoSuchKey => e
+        false
+      else
+        true
+      end
+
       # Performs a HEAD request against this object and returns an object
       # with useful information about the object, including:
       #
@@ -101,6 +109,13 @@ module AWS
       # @return [String] Returns the object's ETag
       def etag
         head.etag
+      end
+
+      # Returns the object's last modified time.
+      #
+      # @return [Time] Returns the object's last modified time.
+      def last_modified
+        head.last_modified
       end
 
       # @return [Integer] Size of the object in bytes.
@@ -488,14 +503,24 @@ module AWS
       # @param [Hash] options
       # @option options [String] :version_id Reads data from a
       #   specific version of this object.
-      # @option options [Time] :if_unmodified_since Causes #read 
-      #   to return nil if the object was modified since the 
-      #   given time.
-      # @option options [Time] :if_modified_since Causes #read 
-      #   to return nil unless the object was modified since the 
-      #   given time.
-      # @option options [String] :if_match If specified, the method 
-      #   will return nil (and not fetch any data) unless the object ETag
+      #
+      # @option options [Time] :if_unmodified_since If specified, the
+      #   method will raise
+      #   <tt>AWS::S3::Errors::PreconditionFailed</tt> unless the
+      #   object has not been modified since the given time.
+      #
+      # @option options [Time] :if_modified_since If specified, the
+      #   method will raise <tt>AWS::S3::Errors::NotModified</tt> if
+      #   the object has not been modified since the given time.
+      #
+      # @option options [String] :if_match If specified, the method
+      #   will raise <tt>AWS::S3::Errors::PreconditionFailed</tt>
+      #   unless the object ETag matches the provided value.
+      #
+      # @option options [String] :if_none_match If specified, the
+      #   method will raise <tt>AWS::S3::Errors::NotModified</tt> if
+      #   the object ETag matches the provided value.
+      #
       # @option options [Range] :range A byte range to read data from
       def read(options = {}, &blk)
         options[:bucket_name] = bucket.name

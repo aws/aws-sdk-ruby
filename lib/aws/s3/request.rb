@@ -13,6 +13,7 @@
 
 require 'aws/http/request'
 require 'aws/base_client'
+require 'aws/uri_escape'
 require 'uri'
 require 'time'
 
@@ -21,6 +22,8 @@ module AWS
 
     # @private
     class Request < AWS::Http::Request
+
+      include UriEscape
 
       # @param [bucket] S3 bucket name
       attr_accessor :bucket
@@ -59,7 +62,7 @@ module AWS
       def path
         parts = []
         parts << bucket if bucket and Client.path_style_bucket_name?(bucket)
-        parts << key if key
+        parts << escape_path(key) if key
         "/#{parts.join('/')}"
       end
 

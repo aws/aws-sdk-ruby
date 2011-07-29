@@ -58,6 +58,7 @@ module AWS
     #   by AWS.
     def throttled?
       !successful? and
+        http_response.body and
         parsed_body = XmlGrammar.parse(http_response.body) and
         parsed_body.respond_to?(:code) and
         parsed_body.code == "Throttling"

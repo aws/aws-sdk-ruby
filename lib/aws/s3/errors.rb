@@ -38,6 +38,34 @@ module AWS
 
       include LazyErrorClasses
 
+      # This error is special, because S3 does not (and must not
+      # according to RFC 2616) return a body with the HTTP response.
+      # The interface is the same as for any other client error.
+      class NotModified < AWS::Errors::Base
+        include AWS::Errors::ClientError
+
+        def code; "NotModified"; end
+
+        def initialize(req, resp)
+          super(req, resp, "Not Modified")
+        end
+
+      end
+
+      # This error is special, because S3 does not return a body with
+      # the HTTP response.  The interface is the same as for any other
+      # client error.
+      class NoSuchKey < AWS::Errors::Base
+        include AWS::Errors::ClientError
+
+        def code; "NoSuchKey"; end
+
+        def initialize(req, resp)
+          super(req, resp, "No Such Key")
+        end
+
+      end
+
     end
   end
 end

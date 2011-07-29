@@ -30,6 +30,46 @@ Feature: CRUD Objects (High Level)
     Then the result should be an s3 object with key "foo"
     And the client should not have been called
 
+  @multibyte
+  Scenario: Access an object with multibyte characters in the key
+    When I ask for the object with key "\u1234"
+    And I write the string "HELLO" to it
+    Then the object should eventually have "HELLO" as its body
+
+  @head_object
+  Scenario: Ask if an S3 object exists (does not exist)
+    Given I ask for the object with key "foo"
+    When I ask if the object exists
+    Then the result should be false
+    And a request should have been made like:
+    | TYPE | NAME | VALUE |
+    | http | verb | HEAD  |
+    | http | uri  | /foo  |
+
+  @head_object
+  Scenario: Get an object's ETag
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I get the object ETag
+    Then a request should have been made like:
+    | TYPE | NAME | VALUE |
+    | http | verb | HEAD  |
+    | http | uri  | /foo  |
+    And the result should be the same as the "ETag" header in the HTTP response
+
+  @head_object
+  Scenario: Get an object's last modified timestamp
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I get the object's last modified date
+    Then a request should have been made like:
+    | TYPE | NAME | VALUE |
+    | http | verb | HEAD  |
+    | http | uri  | /foo  |
+    And the result should be a time within the last hour
+
   @put_object
   Scenario: Write an object
     Given I ask for the object with key "foo"
@@ -98,6 +138,59 @@ Feature: CRUD Objects (High Level)
     | TYPE | NAME | VALUE |
     | http | verb | GET   |
     | http | uri  | /foo  |
+
+  @read_object
+  Scenario Outline: Read an object if its etag does not match the constraint
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    And I get the object ETag
+    When I read it with :if_none_match set to the previous ETag rescuing "<class>"
+    Then I should rescue the error with code "<code>"
+
+  Examples:
+    | class                        | code        |
+    | AWS::S3::Errors::NotModified | NotModified |
+    | AWS::Errors::ClientError     | NotModified |
+
+  @read_object
+  Scenario Outline: Read an object if its etag does match the constraint
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I read it with :if_match set to "foo" rescuing "<class>"
+    Then I should rescue the error with code "<code>"
+
+  Examples:
+    | class                               | code               |
+    | AWS::S3::Errors::PreconditionFailed | PreconditionFailed |
+    | AWS::Errors::ClientError            | PreconditionFailed |
+
+  @read_object
+  Scenario Outline: Read an object if it has not been modified recently
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I read it with :if_unmodified_since set to an hour ago rescuing "<class>"
+    Then I should rescue the error with code "<code>"
+
+  Examples:
+    | class                               | code               |
+    | AWS::S3::Errors::PreconditionFailed | PreconditionFailed |
+    | AWS::Errors::ClientError            | PreconditionFailed |
+
+  @read_object
+  Scenario Outline: Read an object if it has been modified recently
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I read it with :if_modified_since set to the current time rescuing "<class>"
+    Then I should rescue the error with code "<code>"
+
+  Examples:
+    | class                        | code        |
+    | AWS::S3::Errors::NotModified | NotModified |
+    | AWS::Errors::ClientError     | NotModified |
 
   @head_object
   Scenario: Get object metadata

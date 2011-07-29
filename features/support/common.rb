@@ -63,12 +63,13 @@ AfterConfiguration do
   #require 'amazon/aws/http/event_machine_handler'
   #AWS.config(:http_handler => AWS::Http::EventMachineHandler.new)
   handler = AWS::Http::Handler.new(AWS.config.http_handler) do |req, resp|
-    @requests_made ||= []
-    @requests_made << req
+    (@requests_made ||= []) << req
     super(req, resp)
+    @last_response = resp
   end
   class << handler
     attr_reader :requests_made
+    attr_reader :last_response
   end
   AWS.config(:http_handler => handler)
 end

@@ -15,11 +15,12 @@ source 'http://rubygems.org'
 
 gem 'uuidtools', '~> 2.1'
 gem 'httparty', '~> 0.7'
-gem 'nokogiri', '~> 1.4'
+gem 'nokogiri', '>= 1.4.4'
 gem 'json', '~> 1.4.6'
 
 gem 'jruby-openssl', :platforms => :jruby
 gem 'ruby-debug', :platforms => [:jruby, :mri_18]
+gem 'ruby-prof', :platforms => [:mri_18]
 
 group :autotest do
   gem 'ZenTest', '~> 4.4'
@@ -38,12 +39,8 @@ group :build do
   gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
   gem 'flog', '~> 2.5'
-  gem 'yard', '~> 0.6.8'
+  gem 'yard', '~> 0.7.2'
   gem 'chronic', '~> 0.5', :platforms => [:ruby]
-end
-
-group :profile do
-  gem 'ruby-prof'
 end
 
 group :integration do

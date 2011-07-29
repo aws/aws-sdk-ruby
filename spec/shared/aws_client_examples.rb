@@ -175,10 +175,19 @@ module AWS
       resp.request_options.should == opts
     end
 
-    it 'raises client errors for non errors that can not be retried' do
+    it 'raises client errors for errors that can not be retried' do
       lambda {
         client.with_http_handler{|request, response|
           response.status = 405 # method not allowed
+        }.send(method, opts)
+      }.should raise_error(Errors::ClientError)
+    end
+
+    it 'raises client errors for 4xx response codes with a nil response body' do
+      lambda {
+        client.with_http_handler{|request, response|
+          response.status = 405 # method not allowed
+          response.body = nil
         }.send(method, opts)
       }.should raise_error(Errors::ClientError)
     end

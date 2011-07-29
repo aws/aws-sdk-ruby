@@ -350,6 +350,7 @@ module AWS
     protected
     def xml_error_response? response
       response.http_response.status >= 300 and
+        response.http_response.body and
         xml_error_grammar.parse(response.http_response.body).respond_to?(:code)
 
     end

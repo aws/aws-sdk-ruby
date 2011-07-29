@@ -57,10 +57,10 @@ end
 Then /^the response should include an item named "([^\"]*)" with:$/ do |item, table|
   item = @result.items.find { |i| i.name == item }
   item.should_not be_nil
-  table.rows.each do |(name, value)|
-    att = item.attributes.find { |att| att.name == name }
+  table.hashes.each do |h|
+    att = item.attributes.find { |a| a.name == h['attribute_name'] }
     att.should_not be_nil
-    att.value.should == value
+    att.value.should == h['value']
   end
 end
 
