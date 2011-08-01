@@ -311,12 +311,16 @@ module AWS
 
       context '#policy' do
 
+        let(:policy) { JSON.load(Base64.decode64(post.policy)) }
+
         it 'should be valid Base64-encoded JSON' do
           lambda { policy }.
             should_not raise_error
         end
 
-        let(:policy) { JSON.load(Base64.decode64(post.policy)) }
+        it "should remove newline breaks from the Base64-encoded JSON" do
+          post.policy.should == Base64.encode64(policy.to_json).gsub(/\n/, '')
+        end
 
         it 'should expire an hour from now by default' do
           Time.stub(:now).
