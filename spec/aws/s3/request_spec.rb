@@ -132,6 +132,51 @@ module AWS
 
       end
 
+
+      context '#add_authorization!' do
+
+        let(:signer) { DefaultSigner.new('KEY', 'secret') }
+
+        before(:each) do
+          signer.stub(:sign).and_return('SIGNATURE')
+        end
+
+        context 'signer does not support a session token' do
+
+          it 'should not add the x-amz-security-token header' do
+            request.add_authorization!(signer)
+            request.headers.
+              should_not include("x-amz-security-token")
+          end
+
+        end
+
+        context 'signer does not have a session token configured' do
+
+          it 'should not add the x-amz-security-token header' do
+            signer.stub(:session_token)
+            request.add_authorization!(signer)
+            request.headers.
+              should_not include("x-amz-security-token")
+          end
+
+        end
+
+        context 'signer has a session token configured' do
+
+          it 'should add the x-amz-security-token header prior to computing the signature' do
+            signer.stub(:session_token).and_return("TOKEN")
+            signer.should_receive(:sign) do |*args|
+              request.headers["x-amz-security-token"].should == "TOKEN"
+              "SIGNATURE"
+            end
+            request.add_authorization!(signer)
+          end
+
+        end
+
+      end
+
       context '#string_to_sign' do
 
         let(:verb) { 'PUT' }

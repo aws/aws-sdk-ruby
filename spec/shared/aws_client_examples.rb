@@ -260,6 +260,20 @@ module AWS
       requests_made.should == 4
     end
 
+    it 'should build a new request for each retry' do
+      requests = (1..4).map { |i| client.send(:new_request) }
+      expect_requests = requests.dup
+      client.stub(:new_request) { requests.shift }
+      http_handler.should_receive(:handle).exactly(4).times do |req, resp|
+        resp.status = 500
+        req.should be(expect_requests.shift)
+      end
+      begin
+        client.send(method, opts)
+      rescue Errors::ServerError
+      end
+    end
+
     it 'should retry more times if configured' do
       requests_made = 0
       new_client = client.with_http_handler{|req, resp|
@@ -608,6 +622,27 @@ module AWS
           complete = true
           status.should == :failure
           response.error.should be_a(Timeout::Error)
+        end
+
+        sleep 0.001 until complete
+
+      end
+
+      it 'should build a new request for each retry' do
+        seen_requests = []
+        new_client = client.with_http_handler do |req, resp|
+          resp.timeout = true
+          seen_requests << req
+        end
+
+        Kernel.stub(:sleep)
+
+        response = new_client.send(method, async_opts)
+
+        complete = false
+        response.on_complete do |status|
+          complete = true
+          seen_requests.uniq.size.should == 4
         end
 
         sleep 0.001 until complete

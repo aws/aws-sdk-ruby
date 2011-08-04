@@ -174,6 +174,10 @@ module AWS
       end
 
       def add_authorization!(signer)
+        if signer.respond_to?(:session_token) and
+            token = signer.session_token
+          headers["x-amz-security-token"] = token
+        end
         signature = URI.escape(signer.sign(string_to_sign, 'sha1'))
         headers["authorization"] = "AWS #{signer.access_key_id}:#{signature}"
       end

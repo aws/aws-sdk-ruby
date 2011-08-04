@@ -38,11 +38,12 @@ module AWS
       context '#copy_from' do
 
         it 'calls copy_object on the client' do
-          client.should_receive(:copy_object).with(
-            :bucket_name => obj1.bucket.name,
-            :key => obj1.key,
-            :copy_source => 'bucket-1/key',
-            :metadata_directive => 'COPY')
+          client.should_receive(:copy_object).
+            with(:bucket_name => obj1.bucket.name,
+                 :key => obj1.key,
+                 :copy_source => 'bucket-1/key',
+                 :metadata_directive => 'COPY',
+                 :storage_class => "STANDARD")
           obj1.copy_from('key')
         end
 
@@ -84,10 +85,16 @@ module AWS
           obj1.copy_from('bucket/key', :metadata => { 'foo' => 'bar' })
         end
 
-        it 'allows you to store the copied object with reduced redun' do
+        it 'allows you to store the copied object with reduced redundancy' do
           client.should_receive(:copy_object).with(hash_including(
             :storage_class => 'REDUCED_REDUNDANCY'))
           obj1.copy_from('bucket/key', :reduced_redundancy => true)
+        end
+
+        it 'allows you to set a canned ACL' do
+          client.should_receive(:copy_object).
+            with(hash_including(:acl => :public_read))
+          obj1.copy_from('bucket/key', :acl => :public_read)
         end
 
         it 'allows you copy an objects version by version id' do
@@ -109,11 +116,12 @@ module AWS
       context '#copy_to' do
 
         it 'calls copy_object on the client' do
-          client.should_receive(:copy_object).with(
-            :bucket_name => obj1.bucket.name,
-            :key => 'key',
-            :copy_source => 'bucket-1/key-1',
-            :metadata_directive => 'COPY')
+          client.should_receive(:copy_object).
+            with(:bucket_name => obj1.bucket.name,
+                 :key => 'key',
+                 :copy_source => 'bucket-1/key-1',
+                 :metadata_directive => 'COPY',
+                 :storage_class => "STANDARD")
           obj1.copy_to('key')
         end
 
@@ -160,10 +168,16 @@ module AWS
           obj1.copy_to('bucket/key', :metadata => { 'foo' => 'bar' })
         end
 
-        it 'allows you to store the copied object with reduced redun' do
+        it 'allows you to store the copied object with reduced redundancy' do
           client.should_receive(:copy_object).with(hash_including(
             :storage_class => 'REDUCED_REDUNDANCY'))
           obj1.copy_to('bucket/key', :reduced_redundancy => true)
+        end
+
+        it 'allows you to set a canned ACL' do
+          client.should_receive(:copy_object).
+            with(hash_including(:acl => :public_read))
+          obj1.copy_to('bucket/key', :acl => :public_read)
         end
 
       end

@@ -25,14 +25,24 @@ module AWS
     # @return [String] The Secret Access Key used to sign requests.
     attr_reader :secret_access_key
 
+    # @return [String] The Session Token used to sign requests.
+    attr_reader :session_token
+
     # @param [String] access_key_id The Access Key ID used to sign
     #   requests.
     #
     # @param [String] secret_access_key The Secret Access Key used to
     #   sign requests.
-    def initialize(access_key_id, secret_access_key)
+    #
+    # @param [String] session_token The Session Token used to sign
+    #   requests.  You can get credentials that include a session
+    #   token using the {STS} class.
+    def initialize(access_key_id,
+                   secret_access_key,
+                   session_token = nil)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
+      @session_token = session_token
     end
 
     # Signs a string using the credentials stored in memory.

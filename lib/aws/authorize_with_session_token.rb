@@ -11,4 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+module AWS
+
+  module AuthorizeWithSessionToken
+
+    def add_authorization! signer
+      if signer.respond_to?(:session_token) and
+          token = signer.session_token
+        add_param("SecurityToken", token)
+      end
+
+      super
+    end
+
+  end
+
+end

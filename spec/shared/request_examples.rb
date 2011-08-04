@@ -88,6 +88,56 @@ module AWS
 
   end
 
+  shared_examples_for "an authorize v2 request with a session token" do
+
+    let(:request) { described_class.new }
+
+    context '#add_authorization!' do
+
+      let(:signer) { DefaultSigner.new('KEY', 'secret') }
+
+      before(:each) do
+        signer.stub(:sign).and_return('SIGNATURE')
+      end
+
+      context 'signer does not support a session token' do
+
+        it 'should not add the SecurityToken parameter' do
+          request.add_authorization!(signer)
+          request.params.map { |p| p.name }.
+            should_not include("SecurityToken")
+        end
+
+      end
+
+      context 'signer does not have a session token configured' do
+
+        it 'should not add the SecurityToken parameter' do
+          signer.stub(:session_token)
+          request.add_authorization!(signer)
+          request.params.map { |p| p.name }.
+            should_not include("SecurityToken")
+        end
+
+      end
+
+      context 'signer has a session token configured' do
+
+        it 'should add the SecurityToken parameter prior to computing the signature' do
+          signer.stub(:session_token).and_return("TOKEN")
+          signer.should_receive(:sign) do |*args|
+            request.get_param("SecurityToken").value.should == "TOKEN"
+            "SIGNATURE"
+          end
+          request.add_authorization!(signer)
+        end
+
+      end
+
+    end
+
+  end
+
   shared_examples_for "an authorize v3 request" do
 
     let(:request) { described_class.new }

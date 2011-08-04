@@ -11,4 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'aws/policy'
+
+module AWS
+  class STS
+
+    # (see AWS::Policy)
+    class Policy < AWS::Policy
+
+      # (see AWS::Policy#to_h)
+      def to_h
+        h = super
+        h.delete("Id")
+        h
+      end
+
+    end
+
+  end
+end

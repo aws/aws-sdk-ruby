@@ -11,19 +11,31 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/http/request'
-require 'aws/authorize_v2'
-require 'aws/authorize_with_session_token'
+require 'spec_helper'
 
 module AWS
-  class SNS
+  class STS
 
-    # @private
-    class Request < AWS::Http::Request
+    describe FederatedSession do
 
-      include AuthorizeV2
-      include AuthorizeWithSessionToken
+      context '#initialize' do
+
+        it 'should store the user ID' do
+          described_class.new(:user_id => "foo").user_id.should == "foo"
+        end
+
+        it 'should store the user ARN' do
+          described_class.new(:user_arn => "foo").user_arn.should == "foo"
+        end
+
+        it 'should store the packed policy size' do
+          described_class.new(:packed_policy_size => 12).
+            packed_policy_size.should == 12
+        end
+
+      end
 
     end
+
   end
 end

@@ -141,27 +141,30 @@ Then /^I should have made at least (\d+) "([^\"]*)" bucket requests$/ do |count,
   }.length.should == count.to_i
 end
 
-Given /^the object "([^"]*)" has the contents "([^"]*)"$/ do |key, data|
+Given /^the object "([^\"]*)" has the contents "([^\"]*)"$/ do |key, data|
+  key = eval("\"#{key}\"")
   @bucket.objects[key].write(data)
+  eventually(10) { @bucket.objects[key].read.should == data }
 end
 
-When /^I copy "([^"]*)" to "([^"]*)"$/ do |from_key, to_key|
+When /^I copy "([^\"]*)" to "([^\"]*)"$/ do |from_key, to_key|
   @bucket.objects[from_key].copy_to(@bucket.objects[to_key])
 end
 
-When /^I copy "([^"]*)" from "([^"]*)"$/ do |to_key, from_key|
+When /^I copy "([^\"]*)" from "([^\"]*)"$/ do |to_key, from_key|
+  from_key = eval("\"#{from_key}\"")
   @bucket.objects[to_key].copy_from(@bucket.objects[from_key])
 end
 
-Then /^the object "([^"]*)" should have the contents "([^"]*)"$/ do |key, data|
+Then /^the object "([^\"]*)" should have the contents "([^\"]*)"$/ do |key, data|
   @bucket.objects[key].read.should == data
 end
 
-Given /^I get the oldest version of "([^"]*)"$/ do |key|
+Given /^I get the oldest version of "([^\"]*)"$/ do |key|
   @version = @bucket.objects[key].versions.to_a.last
 end
 
-When /^I copy the versioned object to "([^"]*)"$/ do |key|
+When /^I copy the versioned object to "([^\"]*)"$/ do |key|
   @bucket.objects[key].copy_from(@version)
 end
 
@@ -169,16 +172,16 @@ def meta_hash table
   table.hashes.inject({}) {|d,h| d[h['key']] = h['value']; d }
 end
 
-Given /^I write "([^"]*)" to the key "([^"]*)" with the metadata:$/ do |data, key, table|
+Given /^I write "([^\"]*)" to the key "([^\"]*)" with the metadata:$/ do |data, key, table|
 
   @bucket.objects[key].write(data, :metadata => meta_hash(table))
 end
 
-When /^I copy the object "([^"]*)" to "([^"]*)" with the metadata:$/ do |src, dest, table|
+When /^I copy the object "([^\"]*)" to "([^\"]*)" with the metadata:$/ do |src, dest, table|
   @bucket.objects[src].copy_to(dest, :metadata => meta_hash(table))
 end
 
-Then /^the object "([^"]*)" should read "([^"]*)" with the meatadata:$/ do |key, data, table|
+Then /^the object "([^\"]*)" should read "([^\"]*)" with the metadata:$/ do |key, data, table|
   @bucket.objects[key].read.should == data
   @bucket.objects[key].metadata.to_h.should == meta_hash(table)
 end
@@ -257,4 +260,26 @@ end
 When /^I read it with :if_modified_since set to the current time$/ do
   sleep 2
   @result = @object.read(:if_modified_since => Time.now)
+end
+
+When /^I change the metadata "([^\"]*)" to "([^\"]*)" for the key "([^\"]*)"$/ do |meta, value, key|
+  @bucket.objects[key].metadata[meta] = value
+end
+
+When /^I (enable|disable) reduced redundancy storage on the object "([^\"]*)"$/ do |action, key|
+  enabled = (action == "enable")
+  @bucket.objects[key].reduced_redundancy = enabled
+end
+
+When /^I copy the object "([^\"]*)" in place without changing anything$/ do |key|
+  @bucket.objects[key].copy_from(key)
+end
+
+When /^I copy "([^\"]*)" from "([^\"]*)" with public read permissions$/ do |to, from|
+  @bucket.objects[to].copy_from(from, :acl => :public_read)
+end
+
+Then /^the object "([^\"]*)" should have public read permissions$/ do |key|
+  resp = Net::HTTP.get_response(@bucket.objects[key].public_url(:secure => false))
+  resp.code.to_i.should == 200
 end

@@ -11,4 +11,28 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'aws/configured_xml_grammars'
+require 'aws/ignore_result_element'
+require 'aws/xml_grammar'
+
+module AWS
+  class STS
+    class Client < BaseClient
+
+      # @private
+      module XML
+
+        include ConfiguredXmlGrammars
+
+        extend IgnoreResultElement
+
+        BaseError = XmlGrammar.customize do
+          element("Error") { ignore }
+        end
+
+        define_configured_grammars
+
+      end
+    end
+  end
+end

@@ -11,4 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'spec_helper'
+
+module AWS
+  class STS
+
+    describe Policy do
+
+      context '#to_h' do
+
+        it 'should not include an ID' do
+          described_class.new.to_h.should_not include("Id")
+        end
+
+      end
+
+    end
+
+  end
+end

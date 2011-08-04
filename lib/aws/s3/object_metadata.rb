@@ -34,20 +34,51 @@ module AWS
       # @return [S3Object]
       attr_reader :object
 
-      # Returns the value for the given name stored in the S3Objects
+      # Returns the value for the given name stored in the S3Object's
       # metadata:
       #
       #   bucket.objects['myobject'].metadata['purpose']
       #   # returns nil if the given metadata key has not been set
+      #
+      # @param [String,Symbol] name The name of the metadata field to
+      #   get.
       #
       # @return [String,nil] Returns the metadata for the given name.
       def [] name
         to_h[name.to_s]
       end
 
+      # Changes the value of the given name stored in the S3Object's
+      # metadata:
+      #
+      #   object = bucket.object['myobject']
+      #   object.metadata['purpose'] = 'research'
+      #   object.metadata['purpose']               # => 'research'
+      #
+      # @note The name and value of each metadata field must conform
+      #   to US-ASCII.
+      #
+      # @param [String,Symbol] name The name of the metadata field to
+      #   set.
+      #
+      # @param [String] value The new value of the metadata field.
+      #
+      # @return [String,nil] Returns the value that was set.
+      def []= name, value
+        raise "cannot change the metadata of an object version; "+
+          "use S3Object#write to create a new version with different metadata" if
+          @version_id
+        metadata = to_h.dup
+        metadata[name.to_s] = value
+        object.copy_from(object.key,
+                         :metadata => metadata)
+        value
+      end
+
       # Proxies the method to {#[]}.
       # @return (see #[])
-      def method_missing name
+      def method_missing name, *args, &blk
+        return super if !args.empty? || blk
         self[name]
       end
 

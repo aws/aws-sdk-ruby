@@ -11,4 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'aws/lazy_error_classes'
+require 'aws/sts/client/xml'
+
+module AWS
+  class STS
+
+    # @private
+    module Errors
+
+      BASE_ERROR_GRAMMAR = Client::XML::BaseError
+
+      include LazyErrorClasses
+
+    end
+  end
+end

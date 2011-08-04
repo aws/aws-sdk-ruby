@@ -11,4 +11,29 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'spec_helper'
+
+module AWS
+  class STS
+
+    describe Session do
+
+      context '#initialize' do
+
+        it 'should store the credentials' do
+          described_class.new(:credentials => { :foo => "bar" }).
+            credentials.should == { :foo => "bar" }
+        end
+
+        it 'should store the expiration time' do
+          t = Time.now
+          described_class.new(:expires_at => t).
+            expires_at.should == t
+        end
+
+      end
+
+    end
+
+  end
+end

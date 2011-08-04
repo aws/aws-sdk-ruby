@@ -862,6 +862,41 @@ module AWS
 
       end
 
+      context '#reduced_redundancy=' do
+
+        def expect_copy_with_storage_class(sc)
+          client.should_receive(:copy_object).
+            with(:bucket_name => "foobucket",
+                 :key => "foo",
+                 :copy_source => "foobucket/foo",
+                 :metadata_directive => "COPY",
+                 :storage_class => sc)
+        end
+
+        context 'set to true' do
+
+          it 'should set :storage_class to "REDUCED_REDUNDANCY"' do
+            expect_copy_with_storage_class("REDUCED_REDUNDANCY")
+            object.reduced_redundancy = true
+          end
+
+        end
+
+        context 'set to false' do
+
+          it 'should set :storage_class to "STANDARD"' do
+            expect_copy_with_storage_class("STANDARD")
+            object.reduced_redundancy = false
+          end
+
+        end
+
+        it 'should return the assigned value' do
+          object.send(:reduced_redundancy=, "foo").should == "foo"
+        end
+
+      end
+
     end
 
   end

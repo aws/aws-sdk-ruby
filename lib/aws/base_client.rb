@@ -22,6 +22,7 @@ require 'aws/http/request'
 require 'aws/http/response'
 require 'aws/xml_grammar'
 require 'aws/option_grammar'
+require 'aws/client_logging'
 require 'benchmark'
 require 'set'
 
@@ -32,6 +33,7 @@ module AWS
   class BaseClient
 
     include Configurable
+    include ClientLogging
 
     extend Naming
 
@@ -163,60 +165,8 @@ module AWS
     end
 
     protected
-    def new_response(*args)
-      Response.new(*args)
-    end
-
-    private
-    def log severity, message
-      config.logger.send(severity, message + "\n") if config.logger
-    end
-
-    private
-    def log_client_request method_name, options, &block
-
-      response = nil
-      time = Benchmark.measure do
-        response = yield
-      end
-
-      if options[:async]
-        response.on_success { log_client_request_on_success(method_name,
-                                                            options,
-                                                            response,
-                                                            time) }
-      else
-        log_client_request_on_success(method_name,
-                                      options,
-                                      response,
-                                      time)
-      end
-
-      response
-
-    end
-
-    private
-    def log_client_request_on_success(method_name, options, response, time)
-      status = response.http_response.status
-      service = self.class.service_name
-
-      pattern = "[AWS %s %s %.06f] %s %s"
-      parts = [service, status, time.real, method_name, options.inspect]
-      severity = :info
-
-      if response.error
-        pattern += " %s: %s"
-        parts << response.error.class
-        parts << response.error.message
-        severity = :error
-      end
-
-      if response.cached
-        pattern << " [CACHED]"
-      end
-
-      log(severity, pattern % parts)
+    def new_response(*args, &block)
+      Response.new(*args, &block)
     end
 
     private
@@ -244,8 +194,9 @@ module AWS
           populate_error(response)
           retry_delays ||= sleep_durations(response)
           if should_retry?(response) and !retry_delays.empty?
+            response.rebuild_request
             @http_handler.sleep_with_callback(retry_delays.shift) do
-              async_request_with_retries(response, http_request, retry_delays)
+              async_request_with_retries(response, response.http_request, retry_delays)
             end
           else
             response.error ?
@@ -284,6 +235,9 @@ module AWS
       while should_retry?(response)
         break if sleeps.empty?
         Kernel.sleep(sleeps.shift)
+
+        # rebuild the request to get a fresh signature
+        response.rebuild_request
         response = yield
       end
 
@@ -375,38 +329,21 @@ module AWS
       return_or_raise(options) do
         log_client_request(name, options) do
 
-          # we dont want to pass the async option to the configure block
-          opts = options.dup
-          opts.delete(:async)
-
-          http_request = new_request
-
-          # configure the http request
-          http_request.host = endpoint
-          http_request.proxy_uri = config.proxy_uri
-          http_request.use_ssl = config.use_ssl?
-          http_request.ssl_verify_peer = config.ssl_verify_peer?
-          http_request.ssl_ca_file = config.ssl_ca_file
-
-          send("configure_#{name}_request", http_request, opts, &block)
-          http_request.headers["user-agent"] = user_agent_string
-          http_request.add_authorization!(signer)
-
           if config.stub_requests?
 
-            response = stub_for(name) 
-            response.http_request = http_request
+            response = stub_for(name)
+            response.http_request = build_request(name, options, &block)
             response.request_options = options
             response
 
           else
 
-            response = new_response(http_request)
+            client = self
+            response = new_response { client.send(:build_request, name, options, &block) }
             response.request_type = name
             response.request_options = options
 
-            if self.class::CACHEABLE_REQUESTS.
-                include?(name) and
+            if self.class::CACHEABLE_REQUESTS.include?(name) and
                 cache = AWS.response_cache and
                 cached_response = cache.cached(response)
               cached_response.cached = true
@@ -433,6 +370,27 @@ module AWS
 
         end
       end
+    end
+
+    private
+    def build_request(name, options, &block)
+      # we dont want to pass the async option to the configure block
+      opts = options.dup
+      opts.delete(:async)
+
+      http_request = new_request
+
+      # configure the http request
+      http_request.host = endpoint
+      http_request.proxy_uri = config.proxy_uri
+      http_request.use_ssl = config.use_ssl?
+      http_request.ssl_verify_peer = config.ssl_verify_peer?
+      http_request.ssl_ca_file = config.ssl_ca_file
+
+      send("configure_#{name}_request", http_request, opts, &block)
+      http_request.headers["user-agent"] = user_agent_string
+      http_request.add_authorization!(signer)
+      http_request
     end
 
     private

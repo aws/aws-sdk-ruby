@@ -11,4 +11,16 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+require 'spec_helper'
+
+module AWS
+  class STS
+    describe Request do
+
+      it_should_behave_like "an authorize v2 request"
+
+      it_should_behave_like "an aws query request"
+
+    end
+  end
+end

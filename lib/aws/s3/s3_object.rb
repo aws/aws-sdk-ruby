@@ -229,10 +229,12 @@ module AWS
       #
       # @option options [Hash] :metadata A hash of metadata to be
       #   included with the object.  These will be sent to S3 as
-      #   headers prefixed with +x-amz-meta+.
+      #   headers prefixed with +x-amz-meta+.  Each name, value pair
+      #   must conform to US-ASCII.
       #
-      # @option options [Symbol] :acl A canned access control
-      #   policy.  Valid values are:
+      # @option options [Symbol] :acl (private) A canned access
+      #   control policy.  Valid values are:
+      #
       #   * +:private+
       #   * +:public_read+
       #   * +:public_read_write+
@@ -333,10 +335,12 @@ module AWS
       #
       # @option options [Hash] :metadata A hash of metadata to be
       #   included with the object.  These will be sent to S3 as
-      #   headers prefixed with +x-amz-meta+.
+      #   headers prefixed with +x-amz-meta+.  Each name, value pair
+      #   must conform to US-ASCII.
       #
-      # @option options [Symbol] :acl A canned access control
-      #   policy.  Valid values are:
+      # @option options [Symbol] :acl (private) A canned access
+      #   control policy.  Valid values are:
+      #
       #   * +:private+
       #   * +:public_read+
       #   * +:public_read_write+
@@ -344,9 +348,9 @@ module AWS
       #   * +:bucket_owner_read+
       #   * +:bucket_owner_full_control+
       #
-      # @option options [Boolean] :reduced_redundancy If true,
-      #   Reduced Redundancy Storage will be enabled for the
-      #   uploaded object.
+      # @option options [Boolean] :reduced_redundancy (false) If true,
+      #   Reduced Redundancy Storage will be enabled for the uploaded
+      #   object.
       #
       # @option options :cache_control [String] Can be used to specify
       #   caching behavior.  See
@@ -403,18 +407,36 @@ module AWS
       # metadata of the object when copying.
       #
       # @param [Mixed] source
+      #
       # @param [Hash] options
+      #
       # @option options [String] :bucket_name The name of the bucket
       #   the source object can be found in.  Defaults to the current
       #   object's bucket.
-      # @option options [Bucket] :bucket The bucket the source object can 
-      #   be found in.  Defaults to the current object's bucket.
-      # @option options [Hash] :metadata A hash of metadata to save with
-      #   the copied object.  When blank, the sources metadata is copied.
+      #
+      # @option options [Bucket] :bucket The bucket the source object
+      #   can be found in.  Defaults to the current object's bucket.
+      #
+      # @option options [Hash] :metadata A hash of metadata to save
+      #   with the copied object.  Each name, value pair must conform
+      #   to US-ASCII.  When blank, the sources metadata is copied.
+      #
       # @option options [Boolean] :reduced_redundancy (false) If true the
       #   object is stored with reduced redundancy in S3 for a lower cost.
-      # @option options [String] :version_id (nil) Causes the copy to 
+      #
+      # @option options [String] :version_id (nil) Causes the copy to
       #   read a specific version of the source object.
+      #
+      # @option options [Symbol] :acl (private) A canned access
+      #   control policy.  Valid values are:
+      #
+      #   * +:private+
+      #   * +:public_read+
+      #   * +:public_read_write+
+      #   * +:authenticated_read+
+      #   * +:bucket_owner_read+
+      #   * +:bucket_owner_full_control+
+      #
       # @return [nil]
       def copy_from source, options = {}
 
@@ -441,10 +463,14 @@ module AWS
           copy_opts[:metadata_directive] = 'COPY'
         end
 
+        copy_opts[:acl] = options[:acl] if options[:acl]
         copy_opts[:version_id] = options[:version_id] if options[:version_id]
 
-        copy_opts[:storage_class] = 'REDUCED_REDUNDANCY' if
-          options[:reduced_redundancy]
+        if options[:reduced_redundancy]
+          copy_opts[:storage_class] = 'REDUCED_REDUNDANCY'
+        else
+          copy_opts[:storage_class] = 'STANDARD'
+        end
 
         client.copy_object(copy_opts)
 
@@ -460,16 +486,24 @@ module AWS
       #
       # @param [S3Object,String] target An S3Object, or a string key of
       #   and object to copy to.
+      #
       # @param [Hash] options
+      #
       # @option options [String] :bucket_name The name of the bucket
       #   the object should be copied into.  Defaults to the current object's
       #   bucket.
+      #
       # @option options [Bucket] :bucket The bucket the target object
       #   should be copied into. Defaults to the current object's bucket.
-      # @option options [Hash] :metadata A hash of metadata to save with
-      #   the copied object.  When blank, the sources metadata is copied.
-      # @option options [Boolean] :reduced_redundancy (false) If true the
-      #   object is stored with reduced redundancy in S3 for a lower cost.
+      #
+      # @option options [Hash] :metadata A hash of metadata to save
+      #   with the copied object.  Each name, value pair must conform
+      #   to US-ASCII.  When blank, the sources metadata is copied.
+      #
+      # @option options [Boolean] :reduced_redundancy (false) If true
+      #   the object is stored with reduced redundancy in S3 for a
+      #   lower cost.
+      #
       # @return (see #copy_from)
       def copy_to target, options = {}
 
@@ -687,6 +721,23 @@ module AWS
       # @return [PresignedPost]
       def presigned_post(options = {})
         PresignedPost.new(bucket, options.merge(:key => key))
+      end
+
+      # @note Changing the storage class of an object incurs a COPY
+      #   operation.
+      #
+      # Changes the storage class of the object to enable or disable
+      # Reduced Redundancy Storage (RRS).
+      #
+      # @param [true,false] value If this is true, the object will be
+      #   copied in place and stored with reduced redundancy at a
+      #   lower cost.  Otherwise, the object will be copied and stored
+      #   with the standard storage class.
+      #
+      # @return [true,false] The +value+ parameter.
+      def reduced_redundancy= value
+        copy_from(key, :reduced_redundancy => value)
+        value
       end
 
       # @private

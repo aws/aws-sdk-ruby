@@ -78,10 +78,18 @@ module AWS
 
       context '#to_h' do
 
-        it 'should have an Sid' do
+        it 'should have an Sid generated from a UUID' do
           UUIDTools::UUID.stub(:timestamp_create).
             and_return(UUIDTools::UUID.parse("934257b4-452e-11e0-8f5e-00254bfffeb7"))
-          statement.to_h["Sid"].should == "934257b4-452e-11e0-8f5e-00254bfffeb7"
+          statement.to_h["Sid"].should == "934257b4452e11e08f5e00254bfffeb7"
+        end
+
+        it 'should not have a principal' do
+          statement.to_h.should_not include("Principal")
+        end
+
+        it 'should not have a condition block' do
+          statement.to_h.should_not include("Condition")
         end
 
       end
@@ -208,8 +216,8 @@ module AWS
 
       it 'should generate a Condition key' do
         statement.conditions = double("condition block",
-                                      :to_h => {})
-        statement.to_h["Condition"].should == {}
+                                      :to_h => { "foo" => "bar" })
+        statement.to_h["Condition"].should == { "foo" => "bar" }
       end
 
     end

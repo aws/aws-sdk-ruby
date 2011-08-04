@@ -111,6 +111,12 @@ When /^I use a regular HTTP client to POST data with header "([^\"]*)" set to "(
                :ignore_errors => true)
 end
 
+When /^I generate pre\-signed form fields for the object "([^\"]*)" with a large policy$/ do |key|
+  @form = @result = @bucket.objects[key].
+    presigned_post(:additional => Hash[[["foo", "bar"*20]]]).
+    where(:content_length).in(1..200)
+end
+
 def execute_post(form, opts = {})
   require 'net/http/post/multipart'
 

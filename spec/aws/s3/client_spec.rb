@@ -1115,9 +1115,9 @@ module AWS
         let(:method) { :copy_object }
 
         let(:opts) {{ 
-          :bucket_name => 'foo', 
-          :key => 'some/key', 
-          :data => 'HELLO'
+          :bucket_name => 'foo',
+          :key => 'some/key',
+          :copy_source => 'bar'
         }}
 
         it_should_behave_like "an s3 http request", 'PUT'
@@ -1133,6 +1133,26 @@ module AWS
         it_should_behave_like "returns last_modified"
 
         it_should_behave_like "sends metadata headers", false
+
+        it 'requires :copy_source' do
+          opts.delete(:copy_source)
+          lambda { client.copy_object(opts) }.
+            should raise_error(ArgumentError, /copy_source/)
+        end
+
+        it 'sends :copy_source url-encoded as the x-amz-copy-source header' do
+          http_handler.should_receive(:handle).with do |req, resp|
+            req.headers["x-amz-copy-source"].should == "foo%20bar"
+          end
+          client.copy_object(opts.merge(:copy_source => "foo bar"))
+        end
+
+        it 'only escapes path elements in :copy_source' do
+          http_handler.should_receive(:handle).with do |req, resp|
+            req.headers["x-amz-copy-source"].should == "foo/bar%20baz"
+          end
+          client.copy_object(opts.merge(:copy_source => "foo/bar baz"))
+        end
 
       end
 

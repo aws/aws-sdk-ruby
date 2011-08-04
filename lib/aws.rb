@@ -53,7 +53,7 @@ module AWS; end
 
 require 'aws/common'
 
-%w(ec2 s3 simple_db simple_email_service sns sqs record rails).each do |service|
+%w(ec2 s3 simple_db simple_email_service sns sqs sts record rails).each do |service|
   $:.each do |load_path|
     if (Pathname.new(load_path) + "aws" + "#{service}.rb").exist?
       require "aws/#{service}"

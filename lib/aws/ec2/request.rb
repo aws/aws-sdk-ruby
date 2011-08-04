@@ -13,6 +13,7 @@
 
 require 'aws/http/request'
 require 'aws/authorize_v2'
+require 'aws/authorize_with_session_token'
 
 module AWS
   class EC2
@@ -21,6 +22,7 @@ module AWS
     class Request < AWS::Http::Request
 
       include AuthorizeV2
+      include AuthorizeWithSessionToken
 
     end
   end

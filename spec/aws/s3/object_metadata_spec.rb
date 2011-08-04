@@ -20,9 +20,9 @@ module AWS
 
       it_behaves_like 'an S3 model object', Object.new
 
-      let(:client) { double("s3-client") }
+      let(:config) { stub_config }
 
-      let(:config) { Configuration.new(:s3_client => client) }
+      let(:client) { config.s3_client }
 
       let(:bucket) { Bucket.new('foobucket', :config => config) }
 
@@ -78,6 +78,50 @@ module AWS
 
       end
 
+      context '#[]=' do
+
+        it 'should call copy_object with the full, modified metadata and key' do
+          metadata.stub(:to_h).and_return("color" => "red",
+                                          "shape" => "square")
+          client.should_receive(:copy_object).
+            with(hash_including(:copy_source => "foobucket/foo",
+                                :bucket_name => "foobucket",
+                                :key => "foo",
+                                :metadata_directive => "REPLACE",
+                                :metadata => {
+                                  "color" => "red",
+                                  "shape" => "circle"
+                                }))
+          metadata["shape"] = "circle"
+        end
+
+        it 'should work with symbol keys' do
+          metadata.stub(:to_h).and_return("color" => "red",
+                                          "shape" => "square")
+          client.should_receive(:copy_object).
+            with(hash_including(:copy_source => "foobucket/foo",
+                                :bucket_name => "foobucket",
+                                :key => "foo",
+                                :metadata_directive => "REPLACE",
+                                :metadata => {
+                                  "color" => "red",
+                                  "shape" => "circle"
+                                }))
+          metadata[:shape] = "circle"
+        end
+
+        it 'should return the value that was set' do
+          metadata.send(:[]=, :shape, "circle").should == "circle"
+        end
+
+        it 'should raise an error if the version ID is set' do
+          metadata = ObjectMetadata.new(object, :version_id => "abc123")
+          lambda { metadata[:shape] = "circle" }.
+            should raise_error(/cannot change the metadata of an object version/)
+        end
+
+      end
+
       context '#method_missing' do
 
         it 'should call head_object on the client' do
@@ -93,6 +137,14 @@ module AWS
 
         it 'should return nil if there is no metadata entry' do
           metadata.kind.should be_nil
+        end
+
+        it 'should not apply to method calls with arguments' do
+          lambda { metadata.foo(2) }.should raise_error(NoMethodError)
+        end
+
+        it 'should not apply to method calls with blocks' do
+          lambda { metadata.foo { 2 } }.should raise_error(NoMethodError)
         end
 
       end

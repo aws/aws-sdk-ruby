@@ -64,6 +64,11 @@ Feature: Pre-signed HTML Form Fields
     And I use a regular HTTP client to POST the data "HELLO"
     Then the object should eventually have metadata "color" set to "blue"
 
+  Scenario: Pre-signed POST with long policy string
+    When I generate pre-signed form fields for the object "foo" with a large policy
+    And I use a regular HTTP client to POST the data "HELLO"
+    Then the response status code should be 204
+
   Scenario: Pre-signed POST with additional fields
     When I generate pre-signed form fields for the object "foo" ignoring the "somethingelse" field
     And I use a regular HTTP client to POST the form with the additional field "somethingelse" set to "values"

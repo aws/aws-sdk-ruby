@@ -47,7 +47,8 @@ Feature: Managing SNS Topics
     | KEY          | VALUE    |
     | display_name | My Topic |
 
-  Scenario: Set a queue policy
+  @policy
+  Scenario: Set an SNS topic policy
     Given I create an SNS topic
     When I set the topic policy
     Then the topic policy should match

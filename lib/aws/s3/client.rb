@@ -16,6 +16,7 @@ require 'aws/http/response'
 require 'aws/base_client'
 require 'aws/s3/errors'
 require 'aws/s3/data_options'
+require 'aws/uri_escape'
 require 'aws/s3/access_control_list'
 require 'aws/s3/policy'
 require 'aws/s3/client/xml'
@@ -84,6 +85,7 @@ module AWS
       }
 
       include DataOptions
+      include UriEscape
 
       configure_client
 
@@ -786,10 +788,13 @@ module AWS
       ) do
 
         configure_request do |req, options|
-          # TODO : validate presence of copy source
           # TODO : validate metadata directive COPY / REPLACE
           # TODO : validate storage class STANDARD / REDUCED_REDUNDANCY
           # TODO : add validations for storage class in other places used
+          validate!(:copy_source, options[:copy_source]) do
+            "may not be blank" if options[:copy_source].to_s.empty?
+          end
+          options = options.merge(:copy_source => escape_path(options[:copy_source]))
           super(req, options)
           req.canned_acl = options[:acl]
           req.metadata = options[:metadata]

@@ -17,6 +17,7 @@ Feature: SQS Queues
 
   I want to manage policies on SQS queues.
 
+  @policy
   Scenario: Set a queue policy
     Given I create a queue
     When I set the queue policy

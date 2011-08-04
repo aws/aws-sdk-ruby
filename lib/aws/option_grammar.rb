@@ -165,6 +165,25 @@ module AWS
       end
 
       # @private
+      module Pattern
+
+#         def validate value, context = nil
+#           unless value =~ regex
+#             raise format_error("value to match #{regex}", context)
+#           end
+#         end
+#       
+#         def self.apply option, regex
+#           option.extend(self)
+#           MetaUtils.extend_method(option, :regex) { regex }
+#         end
+
+        def self.apply *args
+        end
+
+      end
+
+      # @private
       module ListMethods
 
         module ClassMethods
@@ -333,7 +352,9 @@ module AWS
         value
       end
 
-      def required?; false; end
+      def required?
+        false
+      end
 
       def format_error(expected, context = nil)
         context = context_description(context)

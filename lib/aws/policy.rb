@@ -84,7 +84,7 @@ module AWS
       if opts.has_key?(:id) or opts.has_key?("Id")
         @id = opts[:id] || opts["Id"]
       else
-        @id = UUIDTools::UUID.timestamp_create.to_s
+        @id = UUIDTools::UUID.timestamp_create.to_s.tr('-','')
       end
       if opts.has_key?(:version) or opts.has_key?("Version")
         @version = opts[:version] || opts["Version"]
@@ -119,8 +119,8 @@ module AWS
     end
     protected :hash_without_ids 
 
-    # Returns a hash representation of the policy; the
-    # following statements are equivalent:
+    # Returns a hash representation of the policy. The following
+    # statements are equivalent:
     #
     #   policy.to_h.to_json
     #   policy.to_json
@@ -744,7 +744,7 @@ module AWS
       #   Policy#deny to add conditions to a statement.
       # @see S3::Client
       def initialize(opts = {})
-        self.sid = UUIDTools::UUID.timestamp_create.to_s
+        self.sid = UUIDTools::UUID.timestamp_create.to_s.tr('-','')
         self.conditions = ConditionBlock.new
 
         parse_options(opts)
@@ -777,6 +777,8 @@ module AWS
           "Resource" => resource_arns,
           "Condition" => (conditions.to_h if conditions)
         }
+        stmt.delete("Condition") if !conditions || conditions.to_h.empty?
+        stmt.delete("Principal") unless principals_hash
         if !translated_actions || translated_actions.empty?
           stmt["NotAction"] = translated_excluded_actions
         else

@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@s3 @high_level @bucket_policy
+@s3 @high_level @bucket_policy @policy
 Feature: Bucket Policies
   As a user of the S3 high-level interface
   I want to be able to manipulate bucket policies

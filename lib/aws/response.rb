@@ -44,12 +44,19 @@ module AWS
 
     # @param [Http::Request] http_request
     # @param [Http::Response] http_request
-    def initialize http_request = nil, http_response = nil
+    def initialize http_request = nil, http_response = nil, &block
       @http_request = http_request
       @http_response = http_response
+      @request_builder = block
+      rebuild_request if @request_builder && !http_request
     end
 
-    # @return [Boolean] Teturns true unless there is a response error.
+    # Rebuilds the HTTP request using the block passed to the initializer
+    def rebuild_request
+      @http_request = @request_builder.call
+    end
+
+    # @return [Boolean] Returns true unless there is a response error.
     def successful?
       error.nil?
     end

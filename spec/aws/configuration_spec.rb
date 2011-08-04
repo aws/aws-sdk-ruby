@@ -163,6 +163,12 @@ module AWS
                     :secret_access_key => 'bar')
       end
 
+      let(:config_with_session_credentials) do
+        config.with(:access_key_id => 'foo',
+                    :secret_access_key => 'bar',
+                    :session_token => 'baz')
+      end
+
       class DummyClient; end
 
       context '#signer' do
@@ -209,6 +215,15 @@ module AWS
 
         it 'should return the explicitly configured signer' do
           config_with_signer.signer.should == explicit_signer
+        end
+
+        context 'with session credentials' do
+
+          it 'should pass the session token to the signer' do
+            config_with_session_credentials.signer.
+              session_token.should == "baz"
+          end
+
         end
 
       end

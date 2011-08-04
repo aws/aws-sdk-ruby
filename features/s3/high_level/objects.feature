@@ -240,6 +240,13 @@ Feature: CRUD Objects (High Level)
     When I copy "foo2" from "foo1"
     Then the object "foo2" should have the contents "bar1"
 
+  @copy @from
+  Scenario: Copy an object from a key with URL-unsafe characters in it
+    Given the object "foo1 bar" has the contents "bar1"
+    And the object "foo2" has the contents "bar2"
+    When I copy "foo2" from "foo1 bar"
+    Then the object "foo2" should have the contents "bar1"
+
   @copy
   Scenario: Copy an versioned object
     Given I create a new bucket
@@ -258,6 +265,64 @@ Feature: CRUD Objects (High Level)
     When I copy the object "foo" to "foo2" with the metadata:
     | key | value |
     | abc | xyz   |
-    Then the object "foo2" should read "a-string" with the meatadata:
+    Then the object "foo2" should read "a-string" with the metadata:
     | key | value |
     | abc | xyz   |
+
+  @copy
+  Scenario: Copy an object but change its canned ACL
+    Given I write "a-string" to the key "foo"
+    When I copy "foo2" from "foo" with public read permissions
+    Then the object "foo2" should have the contents "a-string"
+    And the object "foo2" should have public read permissions
+
+  @copy
+  Scenario: Change S3 object metadata in place
+    Given I write "a-string" to the key "foo" with the metadata:
+    | key | value |
+    | foo | bar   |
+    | baz | bla   |
+    When I change the metadata "foo" to "BAR" for the key "foo"
+    Then the object "foo" should read "a-string" with the metadata:
+    | key | value |
+    | foo | BAR   |
+    | baz | bla   |
+
+  @copy
+  Scenario: Copy an object in place without changing anything
+    Given I write "a-string" to the key "foo" with the metadata:
+    | key | value |
+    | foo | bar   |
+    | baz | bla   |
+    When I copy the object "foo" in place without changing anything
+    Then the object "foo" should read "a-string" with the metadata:
+    | key          | value                    |           |
+    | foo          | bar                      |           |
+    | baz          | bla                      |           |
+    And a request should have been made like:
+    | TYPE         | NAME                     | VALUE     |
+    | http         | verb                     | PUT       |
+    | header_match | x-amz-copy-source        | [^/]+/foo |
+    | header       | x-amz-metadata-directive | COPY      |
+    | header       | x-amz-storage-class      | STANDARD  |
+
+  @copy
+  Scenario Outline: Change S3 storage class on an object
+    Given I write "a-string" to the key "foo" with the metadata:
+    | key | value |
+    | foo | bar   |
+    When I <action> reduced redundancy storage on the object "foo"
+    Then the object "foo" should read "a-string" with the metadata:
+    | key | value |
+    | foo | bar   |
+    And a request should have been made like:
+    | TYPE         | NAME                     | VALUE           |
+    | http         | verb                     | PUT             |
+    | header_match | x-amz-copy-source        | [^/]+/foo       |
+    | header       | x-amz-metadata-directive | COPY            |
+    | header       | x-amz-storage-class      | <storage class> |
+
+  Examples:
+    | action  | storage class      |
+    | enable  | REDUCED_REDUNDANCY |
+    | disable | STANDARD           |

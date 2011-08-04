@@ -81,6 +81,7 @@ module AWS
         :simple_email_service_endpoint => 'email.us-east-1.amazonaws.com',
         :sns_endpoint => 'sns.us-east-1.amazonaws.com',
         :sqs_endpoint => 'sqs.us-east-1.amazonaws.com',
+        :sts_endpoint => 'sts.amazonaws.com',
         :stub_requests => false,
         :proxy_uri => nil,
         :use_ssl => true,
@@ -122,6 +123,12 @@ module AWS
     # @return [String] Your AWS secret access key credential.
     def secret_access_key
       @options[:secret_access_key]
+    end
+
+    # @return [String] Your AWS session token credential.
+    # @see STS
+    def session_token
+      @options[:session_token]
     end
 
     # Used to create a new Configuration object with the given modifications.
@@ -186,6 +193,11 @@ module AWS
       @options[:sqs_endpoint]
     end
 
+    # @return [String] The service endpoint for AWS Security Token Service.
+    def sts_endpoint
+      @options[:sts_endpoint]
+    end
+
     # @return [Boolean] Returns true if all reads to SimpleDB default to
     #   consistent reads.
     def simple_db_consistent_reads?
@@ -207,7 +219,8 @@ module AWS
     def signer
       return @options[:signer] if @options[:signer]
       raise "Missing credentials" unless access_key_id and secret_access_key
-      @options[:signer] ||= DefaultSigner.new(access_key_id, secret_access_key)
+      @options[:signer] ||=
+        DefaultSigner.new(access_key_id, secret_access_key, session_token)
     end
 
     # @return [Object,nil] Returns the current logger.

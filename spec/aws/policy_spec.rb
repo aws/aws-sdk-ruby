@@ -13,8 +13,6 @@
 
 require 'spec_helper'
 
-require 'spec_helper'
-
 module AWS
 
   describe Policy do
@@ -67,10 +65,10 @@ module AWS
           hash["Version"].should == "2008-10-17"
         end
 
-        it 'should contain a UUID' do
+        it 'should use a UUID to generate an alphanumeric ID' do
           UUIDTools::UUID.stub(:timestamp_create).
             and_return(UUIDTools::UUID.parse("934257b4-452e-11e0-8f5e-00254bfffeb7"))
-          hash["Id"].should == "934257b4-452e-11e0-8f5e-00254bfffeb7"
+          hash["Id"].should == "934257b4452e11e08f5e00254bfffeb7"
         end
 
       end

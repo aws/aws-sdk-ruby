@@ -38,6 +38,10 @@ module AWS
       DefaultSigner.new('foo', 'bar').secret_access_key.should == 'bar'
     end
 
+    it 'provides access to session_token' do
+      DefaultSigner.new('foo', 'bar', 'baz').session_token.should == 'baz'
+    end
+
     context '#sign' do
 
       it 'requires a string to sign' do

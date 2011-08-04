@@ -21,15 +21,41 @@ module AWS
 
     let(:http_response) { double('http-request') }
 
-    let(:response) { 
-      response = Response.new
-      response.http_request = http_request
-      response.http_response = http_response
-      response
-    }
+    let(:response) { Response.new(http_request, http_response) }
+
+    context '#initialize' do
+
+      it 'should not require any arguments' do
+        lambda { Response.new }.
+          should_not raise_error
+      end
+
+    end
+
+    context '#rebuild_request' do
+
+      it 'should call the block passed to initialize' do
+        obj = double("obj")
+        obj.should_receive(:call)
+        Response.new(http_request, http_response) { obj.call }.
+          rebuild_request
+      end
+
+      it 'should set http_request to the return value of the block' do
+        r = Response.new(http_request, http_response) { "foo" }
+        r.rebuild_request
+        r.http_request.should == "foo"
+      end
+
+    end
 
     context '#http_request' do
-      
+
+      it 'uses rebuild_request if no http_request is set' do
+        Response.new { http_request }.
+          http_request.should be(http_request)
+      end
+
       it 'returns the http request object' do
         response.http_request.should == http_request
       end
