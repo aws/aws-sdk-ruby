@@ -167,8 +167,8 @@ module AWS
   # the string "linux", you can do this:
   #
   #   ec2.images.with_owner("amazon").
-  #     filtered("platform", "windows").
-  #     filtered("description", "*linux*")
+  #     filter("platform", "windows").
+  #     filter("description", "*linux*")
   #
   # Similarly, you can tag images, instances, security groups,
   # snapshots, and volumes with free-form key-value metadata and
