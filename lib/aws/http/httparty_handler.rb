@@ -62,7 +62,7 @@ module AWS
         })
 
         if request.proxy_uri
-          opts[:http_proxyaddr] = request.proxy_uri.to_s
+          opts[:http_proxyaddr] = request.proxy_uri.to_s.gsub(/https?:\/\//i, '')
           opts[:http_proxyport] = request.proxy_uri.port
         end
 
