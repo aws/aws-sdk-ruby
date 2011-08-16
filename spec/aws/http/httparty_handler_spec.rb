@@ -85,7 +85,7 @@ module AWS
             req.proxy_uri = URI.parse('https://user:pass@proxy.com:443/path?query')
 
             httparty_options[:http_proxyaddr].
-              should == 'https://user:pass@proxy.com/path?query'
+              should == 'user:pass@proxy.com/path?query'
 
             httparty_options[:http_proxyport].should == 443
 
