@@ -42,7 +42,13 @@ module AWS
       attr_reader :id
 
       ATTRIBUTES.each do |attr_name|
-        describe_call_attribute attr_name, :memoize => true
+        attribute(attr_name, :static => true)
+      end
+
+      populates_from(:describe_reserved_instances) do |resp|
+        resp.reserved_instances_set.find do |r|
+          r.reserved_instances_id == id
+        end
       end
 
     end

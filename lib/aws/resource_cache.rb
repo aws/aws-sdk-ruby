@@ -25,8 +25,7 @@ module AWS
     end
 
     def cached?(key, attribute)
-      attributes = @cache[key] and
-        attributes.key?(attribute)
+      attributes = @cache[key] and attributes.has_key?(attribute)
     end
 
     def get(key, attribute)

@@ -64,15 +64,6 @@ module AWS
 
       end
 
-      context '#local_cache_key' do
-
-        it 'should use the class name and resource id' do
-          instance.local_cache_key.
-            should == described_class.name + ":foo-id"
-        end
-
-      end
-
     end
 
     it_should_behave_like "ec2 resource equality method", :==

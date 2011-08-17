@@ -95,9 +95,7 @@ module AWS
                               :tag_index => {}) }
 
           it 'should use retrieve_attribute' do
-            tag.should_receive(:retrieve_attribute).
-              with(:value).
-              and_return("FOO")
+            tag.should_receive(:retrieve_attribute).and_return("FOO")
             tag.value.should == "FOO"
           end
 
@@ -184,7 +182,7 @@ module AWS
 
         it 'should include the class name, resource type, resource ID, and key' do
           tag.local_cache_key.
-            should == "AWS::EC2::Tag:resource-object:resource-id:key"
+            should == "resource-object:resource-id:key"
         end
 
       end

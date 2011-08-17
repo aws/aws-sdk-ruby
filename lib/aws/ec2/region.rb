@@ -29,19 +29,25 @@ module AWS
     #    h[region.name] = region.instances.map(&:id)
     #    h
     #  end
+    #
+    # @attr_reader [String] endpoint The endpoint to use for this region
+    #   (e.g. "ec2.eu-west-1.amazonaws.com").
+    #
     class Region < Resource
-
-      # The name of the region (e.g. "us-east-1")
-      attr_reader :name
 
       def initialize(name, options = {})
         @name = name
         super(options)
       end
 
-      # @return [String] The endpoint to use for this region.
-      def endpoint; end
-      describe_call_attribute :region_endpoint, :getter => :endpoint, :memoize => true
+      # @return [String] The name of the region (e.g. "us-east-1").
+      attr_reader :name
+
+      attribute :endpoint, :as => :region_endpoint, :static => true
+
+      populates_from(:describe_regions) do |resp|
+        resp.region_info.find{|r| r.region_name == name }
+      end
 
       # @return [Boolean] True if the region is available for this
       #   account.
@@ -51,17 +57,19 @@ module AWS
           region_info.empty?
       end
 
-      PROXIED_METHODS = [:instances,
-                         :security_groups,
-                         :key_pairs,
-                         :elastic_ips,
-                         :tags,
-                         :availability_zones,
-                         :images,
-                         :volumes,
-                         :snapshots,
-                         :reserved_instances,
-                         :reserved_instances_offerings]
+      PROXIED_METHODS = [
+        :instances,
+        :security_groups,
+        :key_pairs,
+        :elastic_ips,
+        :tags,
+        :availability_zones,
+        :images,
+        :volumes,
+        :snapshots,
+        :reserved_instances,
+        :reserved_instances_offerings
+      ]
 
       PROXIED_METHODS.each do |method|
         define_method(method) do

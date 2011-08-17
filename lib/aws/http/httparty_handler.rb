@@ -62,7 +62,7 @@ module AWS
         })
 
         if request.proxy_uri
-          opts[:http_proxyaddr] = request.proxy_uri.to_s
+          opts[:http_proxyaddr] = request.proxy_uri.host
           opts[:http_proxyport] = request.proxy_uri.port
         end
 
@@ -90,7 +90,7 @@ module AWS
 
         begin
           http_response = self.class.send(method, url, opts)
-        rescue Timeout::Error => e
+        rescue Timeout::Error, Errno::ETIMEDOUT => e
           response.timeout = true
         else
           response.body = http_response.body

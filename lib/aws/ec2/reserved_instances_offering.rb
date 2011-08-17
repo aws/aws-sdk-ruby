@@ -40,7 +40,13 @@ module AWS
       attr_reader :id
 
       ATTRIBUTES.each do |attr_name|
-        describe_call_attribute attr_name, :memoize => true
+        attribute(attr_name, :static => true)
+      end
+
+      populates_from(:describe_reserved_instances_offerings) do |resp|
+        resp.reserved_instances_offerings_set.find do |r|
+          r.reserved_instances_offering_id == id
+        end
       end
 
       def purchase options = {}

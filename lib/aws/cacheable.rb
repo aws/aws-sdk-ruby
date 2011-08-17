@@ -12,78 +12,66 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/naming'
-require 'aws/meta_utils'
 
 module AWS
 
   # @private
   module Cacheable
 
+    # @private
+    class NoData < StandardError; end
+
+    def self.included base
+      base.extend Naming unless base.respond_to?(:service_ruby_name)
+    end
+
+    # @private
+    protected
     def local_cache_key
       raise NotImplementedError
     end
 
+    # @private
+    protected
     def cache_key
-      endpoint_method = self.class.service_ruby_name + "_endpoint"
-      config.signer.access_key_id + ":" +
-        config.send(endpoint_method) + ":" +
-        local_cache_key
-    end
-
-    def attributes_from_response(response)
-      method = "populate_from_#{response.request_type}"
-      if respond_to?(method)
-        send(method, response)
+      @cache_key ||= begin
+        endpoint_method = self.class.service_ruby_name + "_endpoint"
+        config.signer.access_key_id + ":" +
+          config.send(endpoint_method) + ":" +
+          self.class.name + ":" +
+          local_cache_key
       end
     end
 
-    def request_types
-      self.class.request_types
-    end
+    # @private
+    public
+    def retrieve_attribute attr, &block
 
-    class NoData < StandardError; end
-
-    def retrieve_attribute(attribute)
       if cache = AWS.response_cache
-        if cache.resource_cache.cached?(cache_key, attribute)
-          return cache.resource_cache.get(cache_key, attribute)
+
+        if cache.resource_cache.cached?(cache_key, attr.name)
+          return cache.resource_cache.get(cache_key, attr.name)
         end
-        cache.select(*request_types).each do |resp|
-          if attributes = attributes_from_response(resp)
+
+        cache.select(*attr.request_types).each do |response|
+          if attributes = attributes_from_response(response)
             cache.resource_cache.store(cache_key, attributes)
-            return attributes[attribute] if attributes.key?(attribute)
+            return attributes[attr.name] if attributes.key?(attr.name)
           end
         end
+
       end
-      resp = yield
-      if attributes = attributes_from_response(resp)
+
+      response = yield
+
+      if attributes = attributes_from_response(response)
         if cache = AWS.response_cache
           cache.resource_cache.store(cache_key, attributes)
         end
-        attributes[attribute] if attributes.key?(attribute)
+        attributes[attr.name] if attributes.key?(attr.name)
       else
-        raise NoData.new("no data for #{self} in response to #{resp.request_type}")
+        raise NoData.new("no data in #{response.request_type} response")
       end
-    end
-
-    module ClassMethods
-
-      def request_types
-        []
-      end
-
-      def populate_from(type, &block)
-        define_method("populate_from_#{type}", &block)
-        new_request_types = request_types + [type]
-        new_request_types.uniq!
-        MetaUtils.extend_method(self, :request_types) { new_request_types }
-      end
-
-    end
-
-    def self.included mod
-      mod.extend ClassMethods
-      mod.extend Naming unless mod.respond_to?(:service_ruby_name)
     end
 
   end

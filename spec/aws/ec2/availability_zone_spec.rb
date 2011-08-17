@@ -34,8 +34,13 @@ module AWS
 
         it 'should set region' do
           region = Region.new("foo", :config => config)
-          AvailabilityZone.new("name", :region => region).
-            region.should be(region)
+          AvailabilityZone.new("name", :region => region).region.
+            should == region
+        end
+
+        it 'should set by name' do
+          AvailabilityZone.new("name", :region_name => 'foo').region.
+            should == Region.new("foo", :config => config)
         end
 
       end

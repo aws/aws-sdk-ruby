@@ -67,8 +67,11 @@ module AWS
         response = filtered_request(:describe_addresses)
         response.addresses_set.each do |address|
 
-          elastic_ip = ElasticIp.new(address.public_ip,
-                                     :config => config)
+          options = {}
+          options[:config] = config
+          options[:instance_id] = address.instance_id
+
+          elastic_ip = ElasticIp.new(address.public_ip, options)
 
           yield(elastic_ip)
 

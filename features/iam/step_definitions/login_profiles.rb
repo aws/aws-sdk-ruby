@@ -11,4 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-VERSION = "1.0.4"
+When /^I set the password for the user\'s login profile$/ do
+  alpha = ("a".."z").to_a
+  pass = ""
+  10.times { pass << alpha[rand(alpha.size-1)] }
+  begin
+    @user.login_profile.password = pass
+  rescue AWS::IAM::Errors::EntityTemporarilyUnmodifiable => e
+    sleep 1
+    retry
+  end
+end
+
+Then /^the IAM user should have a login profile$/ do
+  @user.login_profile.exists?.should be_true
+end
+
+When /^I get the create date for the user\'s login profile$/ do
+  @user.login_profile.create_date
+end

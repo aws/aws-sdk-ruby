@@ -17,6 +17,10 @@ require 'aws/response_cache'
 
 # Root namespace for the AWS SDK for Ruby.
 module AWS
+
+  # Current version of the AWS SDK for Ruby
+  VERSION = "1.1.0"
+
   class << self
 
     # @private

@@ -18,6 +18,7 @@ module AWS
   class EC2
 
     # Represents an EC2 tag.
+    # @attr [String] value The tag value.
     class Tag < Resource
 
       # @param [String] key The name of the tag
@@ -37,9 +38,11 @@ module AWS
 
       alias_method :name, :key
 
-      # @return [String] The tag value.
-      def value; end
-      describe_call_attribute :value
+      attribute :value
+
+      populates_from(:describe_tags) do |resp|
+        resp.tag_index[response_index_key]
+      end
 
       # Deletes this tag.
       # @return [nil]
@@ -52,12 +55,12 @@ module AWS
 
       # @private
       def inspect
-        "<#{local_cache_key}>"
+        "<#{self.class}:#{local_cache_key}>"
       end
 
       # @private
       def local_cache_key
-        "#{self.class}:#{response_index_key}"
+        response_index_key
       end
 
       private
@@ -68,19 +71,12 @@ module AWS
       end
 
       protected
-      def find_in_response(resp)
-        resp.tag_index[response_index_key]
-      end
-
-      protected
-      def describe_call
-        client.describe_tags(:filters =>
-                             [{ :name => "key",
-                                :values => [key] },
-                              { :name => "resource-type",
-                                :values => [resource.tagging_resource_type] },
-                              { :name => "resource-id",
-                                :values => [resource.send(:__resource_id__)] }])
+      def get_resource attr
+        client.describe_tags(:filters => [
+          { :name => "key", :values => [key] },
+          { :name => "resource-type", :values => [resource.tagging_resource_type] },
+          { :name => "resource-id", :values => [resource.send(:__resource_id__)] }
+        ])
       end
 
     end

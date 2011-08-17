@@ -54,6 +54,31 @@ module AWS
           options
         end
 
+        context 'timeouts' do
+
+          it 'should rescue Timeout::Error' do
+            HTTPartyHandler.should_receive(:post).
+              and_raise(Timeout::Error)
+            lambda { handler.handle(req, resp) }.
+              should_not raise_error
+          end
+
+          it 'should rescue Errno::ETIMEDOUT' do
+            HTTPartyHandler.should_receive(:post).
+              and_raise(Errno::ETIMEDOUT)
+            lambda { handler.handle(req, resp) }.
+              should_not raise_error
+          end
+
+          it 'should indicate that there was a timeout' do
+            HTTPartyHandler.stub(:post).
+              and_raise(Errno::ETIMEDOUT)
+            handler.handle(req, resp)
+            resp.timeout?.should be_true
+          end
+
+        end
+
         context 'default request options' do
 
           let(:default_request_options) do
@@ -85,7 +110,7 @@ module AWS
             req.proxy_uri = URI.parse('https://user:pass@proxy.com:443/path?query')
 
             httparty_options[:http_proxyaddr].
-              should == 'https://user:pass@proxy.com/path?query'
+              should == 'proxy.com'
 
             httparty_options[:http_proxyport].should == 443
 

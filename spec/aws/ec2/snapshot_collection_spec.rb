@@ -36,6 +36,82 @@ module AWS
 
         it_should_behave_like "a tagged ec2 collection"
 
+        context '#with_owner' do
+
+          it 'should filter by passing the Owner.n parameter' do
+            client.should_receive(:describe_snapshots).
+              with(:owner_ids => ["foo", "bar"]).
+              and_return(response)
+            collection.with_owner("foo", "bar").each { |i| }
+          end
+
+          it 'should accept symbol values' do
+            client.should_receive(:describe_snapshots).
+              with(:owner_ids => ["foo", "bar"]).
+              and_return(response)
+            collection.with_owner(:foo, :bar).each { |i| }
+          end
+
+          it 'should preserve filters' do
+            client.should_receive(:describe_snapshots).
+              with(:owner_ids => ["foo"],
+                   :filters => [{ :name => "foo",
+                                  :values => ["bar"] }]).
+              and_return(response)
+            collection.filter("foo", "bar").
+              with_owner("foo").each { |i| }
+          end
+
+          it 'should survive filtering' do
+            client.should_receive(:describe_snapshots).
+              with(:owner_ids => ["foo"],
+                   :filters => [{ :name => "foo",
+                                  :values => ["bar"] }]).
+              and_return(response)
+            collection.with_owner("foo").
+              filter("foo", "bar").each { |i| }
+          end
+
+        end
+
+        context '#restorable_by' do
+
+          it 'should filter by passing the ExecutableBy.n parameter' do
+            client.should_receive(:describe_snapshots).
+              with(:restorable_by_user_ids => ["foo", "bar"]).
+              and_return(response)
+            collection.restorable_by("foo", "bar").each { |i| }
+          end
+
+          it 'should accept symbol values' do
+            client.should_receive(:describe_snapshots).
+              with(:restorable_by_user_ids => ["foo", "bar"]).
+              and_return(response)
+            collection.restorable_by(:foo, :bar).each { |i| }
+          end
+
+          it 'should preserve filters' do
+            client.should_receive(:describe_snapshots).
+              with(:restorable_by_user_ids => ["foo"],
+                   :filters => [{ :name => "foo",
+                                  :values => ["bar"] }]).
+              and_return(response)
+            collection.filter("foo", "bar").
+              restorable_by("foo").each { |i| }
+          end
+
+          it 'should survive filtering' do
+            client.should_receive(:describe_snapshots).
+              with(:restorable_by_user_ids => ["foo"],
+                   :filters => [{ :name => "foo",
+                                  :values => ["bar"] }]).
+              and_return(response)
+            collection.restorable_by("foo").
+              filter("foo", "bar").each { |i| }
+          end
+
+        end
+
         context '#[]' do
 
           it 'should pass the id' do

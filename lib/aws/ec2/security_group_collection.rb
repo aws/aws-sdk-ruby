@@ -110,11 +110,8 @@ module AWS
         response = filtered_request(:describe_security_groups)
         response.security_group_info.each do |info|
 
-          group = SecurityGroup.new(info.group_id,
-            :name => info.group_name,
-            :description => info.group_description,
-            :owner_id => info.owner_id,
-            :config => config)
+          group = SecurityGroup.new_from(:describe_security_groups, info, 
+            info.group_id, :config => config)
 
           yield(group)
 

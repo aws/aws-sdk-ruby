@@ -39,15 +39,51 @@ module AWS
 
       include TaggedCollection
 
+      # @private
+      def initialize(options = {})
+        @owners = options[:owners] || []
+        @restorable_by = options[:restorable_by] || []
+        super(options)
+      end
+
       # @yield [Instance] Yields each volume in the collection.
       # @return [nil]
       def each(&block)
-        resp = filtered_request(:describe_snapshots)
+        opts = {}
+        opts[:owner_ids] = @owners.map { |id| id.to_s } unless @owners.empty?
+        opts[:restorable_by_user_ids] = @restorable_by.map { |id| id.to_s } unless
+          @restorable_by.empty?
+        resp = filtered_request(:describe_snapshots, opts)
         resp.snapshot_set.each do |v|
           snapshot = Snapshot.new(v.snapshot_id, :config => config)
           yield(snapshot)
         end
         nil
+      end
+
+      # @return [SnapshotCollection] A new collection that only
+      #   includes snapshots owned by one or more of the specified AWS
+      #   accounts.  The IDs +:amazon+ and +:self+ can be used to
+      #   include snapshots owned by Amazon or AMIs owned by you,
+      #   respectively.
+      #
+      # @param [Array of Strings] owners The AWS account IDs by
+      #   which the new collection should be filtered.
+      def with_owner(*owners)
+        collection_with(:owners => @owners + owners)
+      end
+
+      # @return [ImageCollection] A new collection that only includes
+      #   images for which the specified user ID has explicit launch
+      #   permissions. The user ID can be an AWS account ID, +:self+
+      #   to return AMIs for which the sender of the request has
+      #   explicit launch permissions, or +:all+ to return AMIs with
+      #   public launch permissions.
+      #
+      # @param [Array of Strings] users The AWS account IDs by which
+      #   the new collection should be filtered.
+      def restorable_by(*users)
+        collection_with(:restorable_by => @restorable_by + users)
       end
 
       # Creates a snapshot of an Amazon EBS volume and stores it in
@@ -82,6 +118,12 @@ module AWS
       protected
       def member_class
         Snapshot
+      end
+
+      # @private
+      protected
+      def preserved_options
+        super.merge(:owners => @owners, :restorable_by => @restorable_by)
       end
 
     end

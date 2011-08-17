@@ -60,7 +60,7 @@ module AWS
 
       it 'should emit an INFO log message on success' do
         logger.should_receive(:info).with do |str|
-          str.should include("{}")
+          str.should include("()")
         end
         inst.log_client_request("foo", {}) { response }
       end
@@ -82,7 +82,7 @@ module AWS
         inst.log_client_request("foo", :async => true) { response }
         cb.should_not be_nil
         logger.should_receive(:info).with do |str|
-          str.should include("{:async=>true}")
+          str.should include(":async=>true")
         end
         cb.call
       end
@@ -95,22 +95,22 @@ module AWS
 
         it 'should support string values' do
           inst.sanitize_options({:foo => "bar"}).
-            should == '{:foo=>"bar"}'
+            should == ':foo=>"bar"'
         end
 
         it 'should sort options by key' do
           inst.sanitize_options({:cadabra => "1", :abra => "2"}).
-            should == '{:abra=>"2",:cadabra=>"1"}'
+            should == ':abra=>"2",:cadabra=>"1"'
         end
 
         it 'should support list values' do
           inst.sanitize_options({:foo => ["bar", "baz"]}).
-            should == '{:foo=>["bar","baz"]}'
+            should == ':foo=>["bar","baz"]'
         end
 
         it 'should support hash values' do
           inst.sanitize_options({ :foo => { :bar => "baz" } }).
-            should == '{:foo=>{:bar=>"baz"}}'
+            should == ':foo=>{:bar=>"baz"}'
         end
 
         context 'files' do
@@ -124,21 +124,26 @@ module AWS
 
           it 'should show byte count' do
             File.stub(:size).with("foo.txt").and_return(12)
-            string.should == '{:file=>#<File:foo.txt (12 bytes)>}'
+            string.should == ':file=>#<File:foo.txt (12 bytes)>'
           end
 
         end
 
         context 'long strings' do
 
-          it 'should give the prefix, suffix, and total length when longer than 50 characters' do
+          it 'should give the prefix, suffix, and total length when longer than the summary string' do
             inst.sanitize_options(:foo => "!"*25 + "$"*26).
-              should == '{:foo=>#<String "!!!!!!" ... "$$$$$$" (51 characters)>}'
+              should == ':foo=>#<String "!!!!!!" ... "$$$$$$" (51 characters)>'
           end
 
-          it 'should not summarize strings 50 characters or less in length' do
-            inst.sanitize_options(:foo => "!"*25 + "$"*25).
-              should == '{:foo=>"!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$$$$$$"}'
+          it 'should inspect the summarized portions of the string' do
+            inst.sanitize_options(:foo => "\n"*25 + "\t"*26).
+              should == ':foo=>#<String "\n\n\n\n\n\n" ... "\t\t\t\t\t\t" (51 characters)>'
+          end
+
+          it 'should not summarize strings that are shorter than their summary strings' do
+            inst.sanitize_options(:foo => "!"*25 + "$"*20).
+              should == ':foo=>"!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$"'
           end
 
         end
@@ -146,7 +151,7 @@ module AWS
         it 'should call inspect for other objects' do
           other = double("other object", :inspect => "INSPECT")
           inst.sanitize_options({ :foo => other }).
-            should == '{:foo=>INSPECT}'
+            should == ':foo=>INSPECT'
         end
 
       end

@@ -73,6 +73,10 @@ module AWS
 
         context '#[]' do
 
+          it 'returns an elastic ip' do
+            collection['1.1.1.1'].should be_an(ElasticIp)
+          end
+
           it 'returns an elastic ip with the given public ip' do
             collection['1.1.1.1'].public_ip.should == "1.1.1.1"
           end

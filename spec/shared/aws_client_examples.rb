@@ -396,7 +396,7 @@ module AWS
       it 'should send a user-agent header' do
         http_handler.should_receive(:handle).with do |req, resp|
           req.headers["user-agent"].
-            should =~ %r{aws-sdk-ruby/[0-9.]+ [a-z]+/[0-9.]+ \w+}
+            should =~ %r{aws-sdk-ruby/#{VERSION} [a-z]+/[0-9.]+ \w+}
         end
         client_with_handler.send(method, opts)
       end

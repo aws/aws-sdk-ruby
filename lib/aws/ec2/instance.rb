@@ -33,11 +33,11 @@ module AWS
     #   The instance must be in a stopped state to change user data;
     #   for example:
     #
-    #    i.user_data             # => "HELLO"
-    #    i.status                # => :running
-    #    i.user_data = "GOODBYE" # raises an exception
-    #    i.stop; sleep 1 until i.status == :stopped
-    #    i.user_data = "GOODBYE" # => "GOODBYE"
+    #     i.user_data             # => "HELLO"
+    #     i.status                # => :running
+    #     i.user_data = "GOODBYE" # raises an exception
+    #     i.stop; sleep 1 until i.status == :stopped
+    #     i.user_data = "GOODBYE" # => "GOODBYE"
     #
     # @attr [String] instance_type The instance type,
     #   e.g. "m1.small".  The instance must be in a stopped state to
@@ -73,7 +73,6 @@ module AWS
     # @attr_reader [Symbol] root_device_type The root device type
     #   used by the AMI. The AMI can use an Amazon EBS or instance
     #   store root device.  Valid values:
-    #
     #   * +:ebs+
     #   * +:instance_store+
     #
@@ -96,12 +95,21 @@ module AWS
     # @attr_reader [String] ip_address The IP address of the
     #   instance.
     #
+    # @attr_reader [Symbol] status The instance status.  Valid values are:
+    #   * +:pending+
+    #   * +:running+
+    #   * +:shutting_down+
+    #   * +:terminated+
+    #   * +:stopping+
+    #   * +:stopped+
+    #
+    # @attr_reader [Integer] status_code The numeric instance status code.
+    #
     # @attr_reader [Symbol] architecture The architecture of the
     #   image.
     #
     # @attr_reader [Symbol] virtualization_type The instance's
     #   virtualization type.  Valid values:
-    #
     #   * +:paravirtual+
     #   * +:hvm+
     #
@@ -117,7 +125,6 @@ module AWS
     #
     # @attr_reader [Symbol] monitoring The status of CloudWatch
     #   monitoring for the instance.  Valid values:
-    #
     #   * +:enabled+
     #   * +:disabled+
     #   * +:pending+
@@ -133,12 +140,12 @@ module AWS
     #
     # @attr_reader [Symbol] hypervisor The instance's hypervisor
     #   type.  Valid values:
-    #
     #   * +:ovm+
     #   * +:xen+
     #
     # @attr_reader [String] client_token Idempotency token you
     #   provided when you launched the instance.
+    #
     class Instance < Resource
 
       include TaggedItem
@@ -150,110 +157,250 @@ module AWS
       def initialize(instance_id, opts = {})
         super
         @id = instance_id
-        @reservation_attributes = {}
       end
 
       # @return [String] Returns the instance id.
       attr_reader :id
 
-      # @return [Boolean] True if the instance exists according to
-      #   EC2.
-      def exists?
-        client.describe_instances(:filters =>
-                                  [{
-                                     :name => "instance-id",
-                                     :values => [id]
-                                   }]).instance_index.key?(id)
+      # @private
+      def self.reservation_attributes
+        @reservation_attributes ||= {}
       end
 
       # @private
-      def self.instance_action(name)
-        define_method(name) do
-          client.send("#{name}_instances", :instance_ids => [id])
-          nil
+      def self.reservation_attribute name, options = {}, &block
+        attr = attribute(name, options, &block)
+        reservation_attributes[attr.name] = attr
+      end
+      
+      # @private
+      def self.describe_call_attributes
+        @describe_call_attributes ||= {}
+      end
+
+      # @private
+      def self.mutable_describe_attributes
+        @mutable_describe_attributes ||= {}
+      end
+
+      # @private
+      def self.describe_call_attribute name, options = {}, &block
+        attr = attribute(name, options, &block)
+        describe_call_attributes[attr.name] = attr
+      end
+
+      # @private
+      def self.mutable_describe_call_attribute name, options = {}, &block
+        attr = mutable_attribute(name, options, &block)
+        describe_call_attributes[attr.name] = attr
+      end
+
+      # @private
+      def self.mutable_describe_attribute name, options = {}, &block
+        attr = mutable_attribute(name, options, &block)
+        mutable_describe_attributes[attr.name] = attr
+      end
+
+      reservation_attribute :reservation_id, :static => true
+
+      reservation_attribute :owner_id, :static => true
+
+      reservation_attribute :requester_id, :static => true
+
+      describe_call_attribute :private_dns_name
+
+      describe_call_attribute :dns_name
+
+      alias_method :public_dns_name, :dns_name
+
+      describe_call_attribute :product_codes, :static => true
+
+      describe_call_attribute :ami_launch_index, :static => true
+
+      describe_call_attribute :monitoring do 
+        translates_output {|v| v.state.to_sym }
+      end
+
+      describe_call_attribute :private_ip_address
+
+      describe_call_attribute :ip_address
+
+      alias_method :public_ip_address, :ip_address
+
+      describe_call_attribute :architecture, :to_sym => true, :static => true
+
+      describe_call_attribute :root_device_type, :to_sym => true, :static => true
+
+      describe_call_attribute :root_device_name, :static => true
+
+      describe_call_attribute :block_device_mapping
+      protected :block_device_mapping
+      
+      describe_call_attribute :instance_lifecycle, :to_sym => true
+
+      describe_call_attribute :virtualization_type, :to_sym => true, :static => true
+
+      describe_call_attribute :hypervisor, :to_sym => true, :static => true
+
+      describe_call_attribute :placement, :static => true
+
+      describe_call_attribute :state_transition_reason, :get_as => :reason
+
+      describe_call_attribute :launch_time, :static => true
+
+      describe_call_attribute :platform, :static => true
+
+      describe_call_attribute :client_token
+
+      describe_call_attribute :image_id
+
+      describe_call_attribute :key_name, :static => true
+
+      attribute :status do
+        translates_output{|state| state.name.tr("-","_").to_sym }
+      end
+
+      attribute :status_code do 
+        translates_output{|state| state.code }
+      end
+
+      mutable_describe_call_attribute :instance_type
+
+      mutable_describe_call_attribute :kernel_id, :set_as => :kernel
+
+      mutable_describe_call_attribute :ramdisk_id, :set_as => :ramdisk
+
+      mutable_describe_call_attribute :source_dest_check?,
+        :as => :source_dest_check
+
+      mutable_describe_call_attribute :group_set
+
+      mutable_describe_attribute(:user_data) do
+        translates_output {|v| Base64.decode64(v) if v }
+        translates_input {|v| Base64.encode64(v).strip }
+      end
+
+      mutable_describe_attribute :api_termination_disabled?,
+        :as => :disable_api_termination
+
+      mutable_describe_attribute :instance_initiated_shutdown_behavior
+
+      provider(:describe_instances) do |provider|
+        provider.find {|resp| resp.reservation_index[id] }
+        provider.provides *reservation_attributes.keys
+      end
+
+      provider(:describe_instances) do |provider|
+        provider.find {|resp| resp.instance_index[id] }
+        provider.provides *describe_call_attributes.keys
+        provider.provides :status, :get_as => :instance_state
+        provider.provides :status_code, :get_as => :instance_state
+      end
+
+      provider(:run_instances) do |provider|
+        provider.find {|resp| resp.instances_set.find{|i| i.instance_id == id } }
+        provider.provides *describe_call_attributes.keys
+        provider.provides :status, :get_as => :instance_state
+        provider.provides :status_code, :get_as => :instance_state
+      end
+
+      provider(:run_instances) do |provider|
+        provider.find {|resp| resp if resp.instances_set.find{|i| i.instance_id == id } }
+        provider.provides *reservation_attributes.keys
+      end
+
+      # These are the few attributes that are only returned by 
+      # :desribe_instance_attribute and are *NOT* returned by
+      # :describe_instances.  To make matters worse, only one of
+      # them is returned per :describe_instance_attribute call.
+      mutable_describe_attributes.values.each do |attr|
+
+        attr_opt_name = Inflection.class_name(attr.get_as.to_s)
+        attr_opt_name = attr_opt_name[0,1].downcase + attr_opt_name[1..-1]
+
+        provider(:describe_instance_attribute) do |provider|
+          provider.find do |resp|
+            if
+              resp.request_options[:instance_id] == id and
+              resp.request_options[:attribute] == attr_opt_name
+            then
+              return resp
+            end
+          end
+          provider.provides(attr.name, :value_wrapped => true)
+        end
+
+      end
+
+      provider(:terminate_instances, :start_instances, :stop_instances) do |provider|
+        provider.find do |resp| 
+          resp.instances_set.find { |i| i.instance_id == id }
+        end
+        provider.provides :status, :get_as => :current_state
+        provider.provides :status_code, :get_as => :current_state
+      end
+      
+      provider(:monitor_instances, :unmonitor_instances) do |provider|
+        provider.find do |resp|
+          resp.instances_set.find { |i| i.instance_id == id }
+        end
+        provider.provides :monitoring
+      end
+
+      # @return [Array<SecurityGroup>] Returns a list of security 
+      #   groups the instance belongs to. 
+      def security_groups
+        (group_set || []).collect do |g|
+          SecurityGroup.new(g.group_id, :name => g.group_name, :config => config)
         end
       end
 
-      # Terminates the instance.
-      # @return [nil]
-      def terminate; end
-      instance_action :terminate
-      alias_method :delete, :terminate
+      alias_method :groups, :security_groups
 
-      # Reboots the instance.
-      # @return [nil]
-      def reboot; end
-      instance_action :reboot
-
-      # Starts the instance, assuming it is in a stopped state.
-      # @see stop
-      # @return [nil]
-      def start; end
-      instance_action :start
-
-      # Stops the instance, eventually putting it into a stopped state.
-      # @return [nil]
-      def stop; end
-      instance_action :stop
-
-      describe_call_attribute :private_dns_name
-      describe_call_attribute :dns_name
-      alias_method :public_dns_name, :dns_name
-      describe_call_attribute :ami_launch_index
-
-      describe_call_attribute :monitoring do
-        translate_output { |v| v.state.to_sym if v }
+      # @return [Hash<String,Attachment>] Returns a hash of device mappings.
+      #   The keys are device name strings (e.g. '/dev/sda') and the values
+      #   are {Attachment} objects.
+      def block_device_mappings
+        (block_device_mapping || []).inject({}) do |m, mapping|
+          device = mapping.device_name
+          volume = Volume.new(mapping.ebs.volume_id, :config => config)
+          attachment = Attachment.new(volume, self, device, :config => config)
+          m[device] = attachment
+          m
+        end
       end
 
-      # @return true if CloudWatch monitoring is enabled for this
-      #   instance.
-      def monitoring_enabled?
-        monitoring == :enabled
+      # Enables monitoring for this instance.
+      # @return [nil]
+      def enable_monitoring
+        client.monitor_instances(:instance_ids => [id])
+        nil
+      end
+
+      # Disables monitoring for this instance.
+      # @return [nil]
+      def disable_monitoring
+        client.unmonitor_instances(:instance_ids => [id])
+        nil
       end
 
       # Enables or disables monitoring for this instance.
-      def monitoring_enabled=(value)
-        if value
-          client.monitor_instances(:instance_ids => [id])
-          true
-        else
-          client.unmonitor_instances(:instance_ids => [id])
-          false
-        end
+      # @param [Boolean] state A true or false value.  Enables monintoring
+      #   for a true value, disables it for a false value.
+      def monitoring_enabled= value
+        value ? enable_monitoring : disable_monitoring
       end
 
-      # @return [Array] A list of security groups
-      #   the instance is in.  Each member is an instance of
-      #   {SecurityGroup}.
-      def security_groups
-        group_set
+      # @return [Booelan] Returns +true+ if CloudWatch monitoring is 
+      #   enabled for this instance.
+      def monitoring_enabled?
+        monitoring == :enabled
       end
-      describe_call_attribute :group_set do
-        translate_output do |groups|
-          (groups || []).map do |g|
-            SecurityGroup.new(g.group_id,
-                              :name => g.group_name,
-                              :config => config)
-          end
-        end
-      end
-      alias_method :groups, :security_groups
-
-      describe_call_attribute :private_ip_address
-      describe_call_attribute :ip_address
-      alias_method :public_ip_address, :ip_address
-      describe_call_attribute :architecture, :to_sym => true
-      describe_call_attribute :root_device_type, :to_sym => true
-      describe_call_attribute :instance_lifecycle, :to_sym => true
 
       # @return [Boolean] true if the instance is a Spot instance.
       def spot_instance?
         instance_lifecycle == :spot
       end
-
-      describe_call_attribute :virtualization_type, :to_sym => true
-      describe_call_attribute :hypervisor, :to_sym => true
-      describe_call_attribute :placement
 
       # @return [String] The availability zone where the instance is
       #   running.
@@ -263,19 +410,10 @@ module AWS
         end
       end
 
-      describe_call_attribute :reason, :getter => :state_transition_reason
-
-      describe_call_attribute :launch_time
-      describe_call_attribute :platform
-      describe_call_attribute :client_token
-      describe_call_attribute :image_id
-
       # @return [Image] The AMI used to launch the instance.
       def image
         Image.new(image_id, :config => config)
       end
-
-      describe_call_attribute :key_name
 
       # @return [KeyPair] The key pair with which this instance was
       #   associated at launch.
@@ -306,110 +444,9 @@ module AWS
       #   be guaranteed.
       #
       # @return [Image] The newly created image.
-      def create_image(name, options = {})
-        ImageCollection.new(:config => config).
-            create(options.merge(:instance_id => id,
-                                 :name => name))
-      end
-
-      # @private
-      def self.reservation_attribute(name)
-        define_method(name) do
-          @reservation_attributes[name] ||= retrieve_attribute(name) do
-            client.describe_instances(:instance_ids => [id])
-          end
-        end
-        MetaUtils.class_extend_method(self, :attributes_from_reservation) do |r, i|
-          if atts = super(r, i)
-            atts[name] = (r.send(name) if r.respond_to?(name))
-            atts
-          end
-        end
-      end
-
-      MetaUtils.class_extend_method(self, :attributes_from_reservation) do |r, i|
-        attributes_from_response_object(i) if i
-      end
-
-      reservation_attribute :reservation_id
-      reservation_attribute :owner_id
-      reservation_attribute :requester_id
-
-      mutable_attribute :user_data do
-        # mutable_attribute unwraps the ".value" unless you translate
-        # the output yourself
-        translate_output { |v| Base64.decode64(v.value) if v }
-        translate_input { |v| Base64.encode64(v).strip }
-      end
-
-      describe_call_attribute :instance_type
-      mutable_attribute :instance_type
-
-      mutable_attribute :source_dest_check, :getter => :source_dest_check?
-      mutable_attribute(:disable_api_termination,
-                         :getter => :api_termination_disabled?,
-                         :setter => :api_termination_disabled=)
-      mutable_attribute :instance_initiated_shutdown_behavior
-      describe_call_attribute :kernel_id
-      mutable_attribute :kernel, :getter => :kernel_id, :setter => :kernel_id=
-
-      ##
-      # Resets the kernel to its default value.
-      def reset_kernel_id
-        client.reset_instance_attribute(:instance_id => id,
-                                        :attribute => "kernel").return
-      end
-
-      describe_call_attribute :ramdisk_id
-      mutable_attribute :ramdisk, :getter => :ramdisk_id, :setter => :ramdisk_id=
-
-      ##
-      # Resets the RAM disk to its default value.
-      def reset_ramdisk_id
-        client.reset_instance_attribute(:instance_id => id,
-                                        :attribute => "ramdisk").return
-      end
-
-      describe_call_attribute :root_device_name
-      mutable_attribute :root_device_name, :setter => false
-
-      # @return [Hash] A hash in which each key is the name of a
-      #   device that is mapped to an EBS volume.  The value of each
-      #   entry is an object describing the volume, including the
-      #   following fields:
-      #
-      #   [status] The status of the attachment (e.g. "attached").
-      #
-      #   [volume_id] The ID of the EBS volume.
-      #
-      #   [attach_time] The time at which the volume was attached.
-      #
-      #   [delete_on_termination?] True if the volume will be
-      #                            automatically deleted when the
-      #                            instance terminates.
-      def block_device_mappings; end
-
-      describe_call_attribute(:block_device_mapping,
-                              :getter => :block_device_mappings) do
-        translate_output { |v| translate_block_device_mappings(v) }
-      end
-      mutable_attribute(:block_device_mapping,
-                        :setter => false,
-                        :getter => :block_device_mappings) do
-        translate_output { |v| translate_block_device_mappings(v) }
-      end
-
-      # @return [Symbol] The status of the instance.  Valid values:
-      #   * +:pending+
-      #   * +:running+
-      #   * +:shutting_down+
-      #   * +:terminated+
-      #   * +:stopping+
-      #   * +:stopped+
-      def status
-        retrieve_attribute(:status) do
-          client.describe_instances(:instance_ids => [id])
-        end
+      def create_image name, options = {}
+        images = ImageCollection.new(:config => config)
+        images.create(options.merge(:instance_id => id, :name => name))
       end
 
       # Associates the elastic IP address with this instance.
@@ -421,7 +458,8 @@ module AWS
       def associate_elastic_ip elastic_ip
         client.associate_address(
           :public_ip => elastic_ip.to_s,
-          :instance_id => self.id)
+          :instance_id => self.id
+        )
         nil
       end
 
@@ -438,66 +476,85 @@ module AWS
         end
       end
 
+      # @return [ElasticIp,nil] Returns an elastic IP address if one
+      #   is associated with this instance, nil otherwise.
+      def elastic_ip
+        ips = ElasticIpCollection.new(:config => config)
+        ips.filter('instance-id', id).first
+      end
+
       # @return [Boolean] Returns true if an elastic IP address is 
       #   associated with this instance, false otherwise.
       def has_elastic_ip?
         !elastic_ip.nil?
       end
 
-      # @return [ElasticIp,nil] Returns an elastic IP address if one
-      #   is associated with this instance, nil otherwise.
-      def elastic_ip
-        ElasticIpCollection.new(:config => config).
-          filter('instance-id', id).first
+      # @return [Boolean] Returns true if the instance exists according to
+      #   EC2.
+      def exists?
+        client.describe_instances(:filters => [
+          { :name => "instance-id", :values => [id] }
+        ]).instance_index.key?(id)
       end
 
+      # Resets the kernel to its default value.
+      def reset_kernel_id
+        client.reset_instance_attribute(
+          :instance_id => id, :attribute => "kernel").return
+      end
+
+      # Resets the RAM disk to its default value.
+      def reset_ramdisk_id
+        client.reset_instance_attribute(
+          :instance_id => id, :attribute => "ramdisk").return
+      end
+
+      # Terminates the instance.
+      # @return [nil]
+      def terminate
+        instance_action :terminate
+      end
+      alias_method :delete, :terminate
+
+      # Reboots the instance.
+      # @return [nil]
+      def reboot
+        instance_action :reboot
+      end
+
+      # Starts the instance, assuming it is in a stopped state.
+      # @see stop
+      # @return [nil]
+      def start
+        instance_action :start
+      end
+
+      # Stops the instance, eventually putting it into a stopped state.
+      # @return [nil]
+      def stop
+        instance_action :stop
+      end
+
+      # @private
       protected
-      def find_in_response(resp)
+      def find_in_response resp
         resp.instance_index[id]
       end
 
-      populate_from :describe_instances do |resp|
-        if r = resp.reservation_index[id]
-          attributes_from_reservation(r, resp.instance_index[id])
-        end
-      end
-
-      populate_from :run_instances do |resp|
-        attributes_from_reservation(resp,
-                                    resp.instances_set.
-                                    find { |i| i.instance_id == id })
-      end
-
-      [:terminate_instances,
-       :start_instances,
-       :stop_instances].each do |op|
-        populate_from op do |resp|
-          if i = resp.instances_set.find { |i| i.instance_id == id }
-            { :status => i.current_state.name.tr("-","_").to_sym }
-          end
-        end
-      end
-
-      [:monitor_instances,
-       :unmonitor_instances].each do |op|
-        populate_from op do |resp|
-          if i = resp.instances_set.find { |i| i.instance_id == id }
-            { :monitoring =>
-              attributes_from_response_object(i)[:monitoring] }
-          end
-        end
+      # @private
+      protected
+      def instance_action name 
+        client.send("#{name}_instances", :instance_ids => [id])
+        nil
       end
 
       protected
-      def translate_block_device_mappings(mappings)
-        mappings.inject({}) do |m, mapping|
-          m[mapping.device_name] =
-            Attachment.new(Volume.new(mapping.ebs.volume_id, :config => config),
-                           self,
-                           mapping.device_name,
-                           :config => config)
-          m
-        end if mappings
+      def get_resource attribute
+        if self.class.mutable_describe_attributes.include?(attribute.name)
+          describe_attribute_call(attribute)
+        else
+          describe_call
+        end
       end
 
       protected

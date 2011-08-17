@@ -37,7 +37,7 @@ module AWS
 
     def select(*types, &block)
       cached_responses.select do |resp|
-        types.map { |t| t.to_s }.include?(resp.request_type.to_s) and
+        types.map{|t| t.to_s }.include?(resp.request_type.to_s) and
           (block.nil? || block.call(resp))
       end
     end

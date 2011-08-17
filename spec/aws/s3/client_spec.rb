@@ -1066,6 +1066,13 @@ module AWS
 
         it_should_behave_like "accepts an ACL"
 
+        it 'should accept a canned ACL as a symbol' do
+          http_handler.should_receive(:handle).with do |req, resp|
+            req.headers["x-amz-acl"].should == "public-read"
+          end
+          client.send(method, opts.merge(:acl => :public_read))
+        end
+
       end
 
       context '#get_object_acl' do

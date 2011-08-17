@@ -13,7 +13,7 @@
 
 require 'aws/common'
 require 'aws/service_interface'
-require 'aws/s3/errors'
+require 'aws/simple_db/errors'
 require 'aws/simple_db/client'
 require 'aws/simple_db/domain_collection'
 

@@ -30,9 +30,9 @@ module AWS
         response = filtered_request(:describe_reserved_instances)
         response.reserved_instances_set.each do |item|
 
-          reserved_instance = ReservedInstances.new(
-            item.reserved_instances_id,
-            :config => config)
+          reserved_instance = ReservedInstances.new_from(
+            :describe_reserved_instances, item, 
+            item.reserved_instances_id, :config => config)
 
           yield(reserved_instance)
 

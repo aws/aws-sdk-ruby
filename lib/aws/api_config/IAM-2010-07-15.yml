@@ -1,0 +1,632 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:operations:
+  CreateUser:
+    :input:
+      Path:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output:
+    - User:
+      - CreateDate:
+        - :timestamp
+  GetUser:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+    :output:
+    - User:
+      - CreateDate:
+        - :timestamp
+  UpdateUser:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      NewPath:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      NewUserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+    :output: []
+  DeleteUser:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  ListUsers:
+    :input:
+      PathPrefix:
+      - :string
+      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - Users:
+      - :list: member
+      - member:
+        - CreateDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  CreateAccessKey:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+    :output:
+    - AccessKey:
+      - CreateDate:
+        - :timestamp
+  UpdateAccessKey:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      AccessKeyId:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+      Status:
+      - :string
+      - :required
+    :output: []
+  DeleteAccessKey:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      AccessKeyId:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+    :output: []
+  ListAccessKeys:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - AccessKeyMetadata:
+      - :list: member
+      - member:
+        - CreateDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  UploadSigningCertificate:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      CertificateBody:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+    :output:
+    - Certificate:
+      - UploadDate:
+        - :timestamp
+  UpdateSigningCertificate:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      CertificateId:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+      Status:
+      - :string
+      - :required
+    :output: []
+  DeleteSigningCertificate:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      CertificateId:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+    :output: []
+  ListSigningCertificates:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - Certificates:
+      - :list: member
+      - member:
+        - UploadDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  CreateGroup:
+    :input:
+      Path:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output:
+    - Group:
+      - CreateDate:
+        - :timestamp
+  GetGroup:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - Group:
+      - CreateDate:
+        - :timestamp
+    - Users:
+      - :list: member
+      - member:
+        - CreateDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  UpdateGroup:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      NewPath:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      NewGroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+    :output: []
+  RemoveUserFromGroup:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  AddUserToGroup:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  DeleteGroup:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  ListGroups:
+    :input:
+      PathPrefix:
+      - :string
+      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - Groups:
+      - :list: member
+      - member:
+        - CreateDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  ListGroupsForUser:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - Groups:
+      - :list: member
+      - member:
+        - CreateDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  PutUserPolicy:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyDocument:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+    :output: []
+  PutGroupPolicy:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyDocument:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+    :output: []
+  GetUserPolicy:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  GetGroupPolicy:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  DeleteUserPolicy:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  DeleteGroupPolicy:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      PolicyName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  ListUserPolicies:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - PolicyNames:
+      - :list: member
+    - IsTruncated:
+      - :boolean
+  ListGroupPolicies:
+    :input:
+      GroupName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - PolicyNames:
+      - :list: member
+    - IsTruncated:
+      - :boolean
+  EnableMFADevice:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      SerialNumber:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+      AuthenticationCode1:
+      - :string
+      - :pattern: !ruby/regexp /[\d]*/
+      - :required
+      AuthenticationCode2:
+      - :string
+      - :pattern: !ruby/regexp /[\d]*/
+      - :required
+    :output: []
+  ResyncMFADevice:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      SerialNumber:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+      AuthenticationCode1:
+      - :string
+      - :pattern: !ruby/regexp /[\d]*/
+      - :required
+      AuthenticationCode2:
+      - :string
+      - :pattern: !ruby/regexp /[\d]*/
+      - :required
+    :output: []
+  DeactivateMFADevice:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      SerialNumber:
+      - :string
+      - :pattern: !ruby/regexp /[\w]*/
+      - :required
+    :output: []
+  ListMFADevices:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - MFADevices:
+      - :list: member
+      - member:
+        - EnableDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  CreateLoginProfile:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Password:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+    :output:
+    - LoginProfile:
+      - CreateDate:
+        - :timestamp
+  GetLoginProfile:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output:
+    - LoginProfile:
+      - CreateDate:
+        - :timestamp
+  UpdateLoginProfile:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      Password:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+    :output: []
+  DeleteLoginProfile:
+    :input:
+      UserName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  UploadServerCertificate:
+    :input:
+      Path:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      ServerCertificateName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      CertificateBody:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+      PrivateKey:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]*/
+      - :required
+      CertificateChain:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]*/
+    :output:
+    - ServerCertificateMetadata:
+      - UploadDate:
+        - :timestamp
+  GetServerCertificate:
+    :input:
+      ServerCertificateName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output:
+    - ServerCertificate:
+      - ServerCertificateMetadata:
+        - UploadDate:
+          - :timestamp
+  UpdateServerCertificate:
+    :input:
+      ServerCertificateName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+      NewPath:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      NewServerCertificateName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+    :output: []
+  DeleteServerCertificate:
+    :input:
+      ServerCertificateName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output: []
+  ListServerCertificates:
+    :input:
+      PathPrefix:
+      - :string
+      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - ServerCertificateMetadataList:
+      - :list: member
+      - member:
+        - UploadDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  GetAccountSummary:
+    :input: {}
+    :output:
+    - SummaryMap:
+      - :map:
+        - entry
+        - key
+        - value
+      - entry:
+        - value:
+          - :integer
+  CreateAccountAlias:
+    :input:
+      AccountAlias:
+      - :string
+      - :pattern: !ruby/regexp /^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$/
+      - :required
+    :output: []
+  ListAccountAliases:
+    :input:
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - AccountAliases:
+      - :list: member
+    - IsTruncated:
+      - :boolean
+  DeleteAccountAlias:
+    :input:
+      AccountAlias:
+      - :string
+      - :pattern: !ruby/regexp /^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$/
+      - :required
+    :output: []
+:client_errors:
+  NoSuchEntity: []
+  MalformedCertificate: []
+  LimitExceeded: []
+  EntityAlreadyExists: []
+  EntityTemporarilyUnmodifiable: []
+  MalformedPolicyDocument: []
+  DeleteConflict: []
+  InvalidAuthenticationCode: []
+  InvalidCertificate: []
+  DuplicateCertificate: []
+  KeyPairMismatch: []
+  NoSuchVendor: []
+:server_errors: {}

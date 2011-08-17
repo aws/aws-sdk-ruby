@@ -12,14 +12,13 @@
 # language governing permissions and limitations under the License.
 
 require 'rubygems/package_task'
-require 'version'
 
 namespace :gems do
 
   spec = Gem::Specification.new do |gem|
 
     gem.name = "aws-sdk"
-    gem.version = VERSION
+    gem.version = AWS::VERSION
     gem.summary = "AWS SDK for Ruby"
     gem.description = gem.summary
     gem.license = 'Apache 2.0'

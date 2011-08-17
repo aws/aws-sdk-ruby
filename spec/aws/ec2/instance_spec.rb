@@ -471,7 +471,9 @@ module AWS
 
         it 'should use retrieve_attribute' do
           instance.should_receive(:retrieve_attribute).
-            with(:image_id).and_return("value")
+            with do |attr|
+              attr.name.should == :image_id
+            end.and_return("value")
           instance.image_id.should == "value"
         end
 
@@ -619,11 +621,6 @@ module AWS
 
         context 'when not present' do
 
-          it 'should not memoize the attribute value' do
-            client.should_receive(:describe_instances).twice
-            2.times { instance.send(attribute) }
-          end
-
           it 'should return nil' do
             instance.send(attribute).should be_nil
           end
@@ -689,6 +686,7 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_instance_attribute) }
 
         before(:each) do
+
           resp.stub(response_field).
             and_return(double("attribute",
                               :value => response_value))
@@ -760,9 +758,8 @@ module AWS
         let(:response_field) { :instance_type }
         let(:response_value) { "t1.micro" }
         let(:translated_value) { "t1.micro" }
-        let(:request_attribute_name) { "instanceType" }
 
-        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
         context 'populate from run_instances' do
 
@@ -790,33 +787,6 @@ module AWS
                                           :instance_type => "t1.micro"))
             instance.attributes_from_response(response)[:instance_type].
               should == "t1.micro"
-          end
-
-        end
-
-        context 'populate from describe_instance_attribute' do
-
-          it 'should populate the correct value' do
-            response = double("resp",
-                              :request_type => :describe_instance_attribute,
-                              :request_options => {
-                                :instance_id => "i-123",
-                                :attribute => "instanceType"
-                              },
-                              :instance_type => double("att",
-                                                       :value => "t1.micro"))
-            instance.attributes_from_response(response)[:instance_type].
-              should == "t1.micro"
-          end
-
-          it 'should not populate if the requested attribute does not match' do
-            response = double("resp",
-                              :request_type => :describe_instance_attribute,
-                              :request_options => {
-                                :instance_id => "i-123",
-                                :attribute => "foo"
-                              })
-            instance.attributes_from_response(response).should be_nil
           end
 
         end
@@ -865,7 +835,7 @@ module AWS
         let(:translated_value) { true }
         let(:request_attribute_name) { "sourceDestCheck" }
 
-        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
       end
 
@@ -906,12 +876,11 @@ module AWS
       context '#kernel_id' do
 
         let(:attribute) { :kernel_id }
-        let(:response_field) { :kernel }
+        let(:response_field) { :kernel_id }
         let(:response_value) { "aki-123" }
         let(:translated_value) { "aki-123" }
-        let(:request_attribute_name) { "kernel" }
 
-        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
       end
 
@@ -970,12 +939,11 @@ module AWS
       context '#ramdisk_id' do
 
         let(:attribute) { :ramdisk_id }
-        let(:response_field) { :ramdisk }
+        let(:response_field) { :ramdisk_id }
         let(:response_value) { "ari-123" }
         let(:translated_value) { "ari-123" }
-        let(:request_attribute_name) { "ramdisk" }
 
-        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
       end
 
@@ -996,9 +964,8 @@ module AWS
         let(:response_field) { :root_device_name }
         let(:response_value) { "/dev/sda1" }
         let(:translated_value) { "/dev/sda1" }
-        let(:request_attribute_name) { "rootDeviceName" }
 
-        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
       end
 
@@ -1013,25 +980,6 @@ module AWS
                  :attach_time =>
                  Time.parse("Thu Apr 21 16:19:57 -0700 2011"),
                  :delete_on_termination => true)
-        end
-
-        before(:each) do
-          resp.stub(:block_device_mapping).
-            and_return([double("mapping",
-                               :device_name => "/dev/sda2",
-                               :ebs => ebs_mapping)])
-          resp.stub(:request_options).
-            and_return(:instance_id => "i-123",
-                       :attribute => "blockDeviceMapping")
-          client.stub(:describe_instance_attribute).and_return(resp)
-        end
-
-        it 'should call describe_instance_attribute' do
-          client.should_receive(:describe_instance_attribute).
-            with(:instance_id => "i-123",
-                 :attribute => "blockDeviceMapping").
-            and_return(resp)
-          instance.block_device_mappings
         end
 
         shared_examples_for "ec2 instance block device mapping value" do
@@ -1076,17 +1024,13 @@ module AWS
 
         end
 
-        context 'returned value' do
-          let(:mappings) { instance.block_device_mappings }
-          it_should_behave_like "ec2 instance block device mapping value"
-        end
-
         context 'populated from describe_instances' do
 
           let(:resp) { client.new_stub_for(:describe_instances) }
 
           let(:mappings) do
-            instance.attributes_from_response(resp)[:block_device_mappings]
+            client.stub(:describe_instances).and_return(resp)
+            instance.block_device_mappings
           end
 
           before(:each) do
@@ -1150,7 +1094,7 @@ module AWS
 
           it 'should populate from the current state' do
             response_instance.stub(:current_state).
-              and_return(double("state", :name => "foo-bar"))
+              and_return(double("state", :name => "foo-bar", :code => 80))
             populated[:status].should == :foo_bar
           end
 
@@ -1279,10 +1223,6 @@ module AWS
                                                    :attribute => "instanceType")
             resp.stub(:instance_type).and_return(double("attribute",
                                                         :value => "foo"))
-          end
-
-          it 'should return a hash if the instance ID is found' do
-            instance.attributes_from_response(resp).should be_a(Hash)
           end
 
           it 'should return nil if the instance ID does not match' do

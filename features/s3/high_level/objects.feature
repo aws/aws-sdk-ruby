@@ -326,3 +326,12 @@ Feature: CRUD Objects (High Level)
     | action  | storage class      |
     | enable  | REDUCED_REDUNDANCY |
     | disable | STANDARD           |
+
+  Scenario: Change ACL on an S3 object using a canned ACL
+    Given I write "a-string" to the key "foo"
+    When I grant public read permissions on the object "foo"
+    Then the object "foo" should have public read permissions
+    And a request should have been made like:
+    | TYPE   | NAME      | VALUE       |
+    | http   | verb      | PUT         |
+    | header | x-amz-acl | public-read |

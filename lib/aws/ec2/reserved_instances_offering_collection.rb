@@ -29,9 +29,9 @@ module AWS
         response = filtered_request(:describe_reserved_instances_offerings)
         response.reserved_instances_offerings_set.each do |item|
 
-          reserved_instance_offering = ReservedInstancesOffering.new(
-            item.reserved_instances_offering_id,
-            :config => config)
+          reserved_instance_offering = ReservedInstancesOffering.new_from(
+            :describe_reserved_instances_offerings, item, 
+            item.reserved_instances_offering_id, :config => config)
 
           yield(reserved_instance_offering)
 

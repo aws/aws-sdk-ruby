@@ -19,59 +19,68 @@ module AWS
     # Represents an EC2 availability zone.  You can use this class
     # to get information about the state of an availability zone
     # that is available to your account.
+    #
+    # @attr_reader [String,nil] region_name Returns the region name
+    #   of the availability zone.
+    #
+    # @attr_reader [Symbol] state Returns the state of the availability 
+    #   zone, e.g. +:available+.
+    #
+    # @attr_reader [Array<String>] messages Returns a list of messages about the 
+    #   Availability Zone.
+    #
     class AvailabilityZone < Resource
+
+      # @param [String] name The name of the availability zone.
+      def initialize name, options = {}
+        @name = name
+        if options[:region]
+          options[:region_name] = options[:region].name
+          
+        end
+        super
+      end
 
       # @return [String] Returns the name of the availability zone,
       #   e.g. "us-east-1a".
       attr_reader :name
 
       alias_method :to_s, :name
+
       alias_method :to_str, :name
 
-      # @param [String] name The name of the availability zone.
-      def initialize(name, opts = {})
-        @name = name
-        @region = opts[:region]
-        super(opts)
-      end
+      attribute :region_name, :static => true
 
-      # @return [Region] The region of this availability zone.
-      def region; end
-      describe_call_attribute :region_name, :getter => :region, :memoize => true do
-        translate_output do |value|
-          Region.new(value, :config => config) if value
+      attribute :state, :as => :zone_state, :to_sym => true
+
+      attribute :messages, :as => :message_set do
+        translates_output do |messages|
+          messages ? messages.collect{|m| m.message } : []
         end
       end
 
-      # @return [Symbol] The state of the availability zone,
-      #   e.g. +:available+.
-      def state; end
-      describe_call_attribute :zone_state, :getter => :state, :to_sym => true
+      populates_from(:describe_availability_zones) do |resp|
+        resp.availability_zone_info.find {|az| az.zone_name == name }
+      end
 
-      # @return [Array] A list of messages about the Availability
-      #   Zone.
-      def messages; end
-      describe_call_attribute :message_set, :getter => :messages do
-        translate_output { |set| set.map { |m| m.message } if set }
+      # @return [Region] Returns the region of this availability zone.
+      def region
+        Region.new(self.region_name, :config => config)
+      end
+
+      protected
+      def describe_call_name
+        :describe_availability_zones
       end
 
       protected
       def inflected_name
-        "zone"
+        self.class.inflected_name
       end
 
       protected
-      def find_in_response(resp)
-        resp.availability_zone_info.find { |az| az.zone_name == name }
-      end
-
-      # @private
-      private
-      def get_attribute(name)
-        resp = client.describe_availability_zones(:zone_names =>
-                                                  [self.name])
-        az = resp.availability_zone_info.first
-        az.send(name)
+      def self.inflected_name
+        "zone"
       end
 
     end

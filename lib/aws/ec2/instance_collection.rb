@@ -46,45 +46,43 @@ module AWS
       include TaggedCollection
       include BlockDeviceMappings
 
-      ##
       # Runs one or more EC2 instances.
       #
       # @example Running a single instance
-      #  i = ec2.instances.create(:image_id => "ami-8c1fece5")
-      #  sleep 1 while i.status == :pending
+      #   i = ec2.instances.create(:image_id => "ami-8c1fece5")
+      #   sleep 1 while i.status == :pending
       #
       # @example Running multiple instances with the same parameters
-      #  instances =
-      #    ec2.instances.create(:image_id => "ami-8c1fece5",
-      #                         :count => 10)
-      #  sleep 1 while instances.any? { |i| i.status == :pending }
+      #
+      #   instances = ec2.instances.create(
+      #     :image_id => "ami-8c1fece5",
+      #     :count => 10)
+      #
+      #  sleep 1 while instances.any? {|i| i.status == :pending }
       #
       # @example Specifying block device mappings
-      #  ec2.instances.create(:image_id => "ami-8c1fece5",
-      #                       :block_device_mappings => {
-      #                         "/dev/sda2" => {
-      #                           # 15 GiB
-      #                           :volume_size => 15,
-      #                           :delete_on_termination => true
-      #                         }
-      #                       })
       #
-      # @return [Instance or Array] If a single instance is being created, this returns
-      #   an instance of {EC2::Instance} to represent the newly
-      #   created instance.  Otherwise it returns an array of
-      #   EC2::Instance objects.
+      #   ec2.instances.create({
+      #     :image_id => "ami-8c1fece5",
+      #     :block_device_mappings => {
+      #       "/dev/sda2" => {
+      #         :volume_size => 15, # 15 GiB
+      #         :delete_on_termination => true
+      #       }
+      #     }
+      #   })
       #
-      # @param [Hash] opts Options for new instance.  +:image_id+ is
+      # @param [Hash] options Options for new instance.  +:image_id+ is
       #   the only required option.
       #
-      # @option opts :count How many instances to request.  By
+      # @option options :count How many instances to request.  By
       #   default one instance is requested.  You can specify this
       #   either as an integer or as a Range, to indicate the
       #   minimum and maximum number of instances to run.  Note that
       #   for a new account you can request at most 20 instances at
       #   once.
       #
-      # @option opts [Hash] :block_device_mappings This must be a
+      # @option options [Hash] :block_device_mappings This must be a
       #   hash; the keys are device names to map, and the value for
       #   each entry determines how that device is mapped.  Valid
       #   values include:
@@ -110,43 +108,43 @@ module AWS
       #                              to delete the volume when the
       #                              instance is terminated.
       #
-      # @option opts [Boolean] :monitoring Setting this to true
+      # @option options [Boolean] :monitoring Setting this to true
       #   enables CloudWatch monitoring on the instances once they
       #   are started.
       #
-      # @option opts [String] :availability_zone Specifies the
+      # @option options [String] :availability_zone Specifies the
       #   availability zone where the instance should run.  Without
       #   this option, EC2 will choose an availability zone for you.
       #
-      # @option opts [String] :image_id ID of the AMI you want to
+      # @option options [String] :image_id ID of the AMI you want to
       #   launch.
       #
-      # @option opts [String] :key_name The name of the key pair to
+      # @option options [String] :key_name The name of the key pair to
       #   use.  Note: Launching public images without a key pair ID
       #   will leave them inaccessible.
       #
-      # @option opts [Array] :security_groups The names of the
+      # @option options [Array] :security_groups The names of the
       #   security groups that will be used to determine network
       #   access rules for the instances.  You may pass instances of
       #   {SecurityGroup} as well.
       #
-      # @option opts [String] :user_data Arbitrary user data.  You
+      # @option options [String] :user_data Arbitrary user data.  You
       #   do not need to encode this value.
       #
-      # @option opts [String] :instance_type The type of instance to
+      # @option options [String] :instance_type The type of instance to
       #   launch, for example "m1.small".
       #
-      # @option opts [String] :kernel_id The ID of the kernel with
+      # @option options [String] :kernel_id The ID of the kernel with
       #   which to launch the instance.
       #
-      # @option opts [String] :ramdisk_id The ID of the RAM disk to
+      # @option options [String] :ramdisk_id The ID of the RAM disk to
       #   select. Some kernels require additional drivers at
       #   launch. Check the kernel requirements for information on
       #   whether you need to specify a RAM disk. To find kernel
       #   requirements, refer to the Resource Center and search for
       #   the kernel ID.
       #
-      # @option opts [Boolean] :disable_api_termination Specifies
+      # @option options [Boolean] :disable_api_termination Specifies
       #   whether you can terminate the instance using the EC2
       #   API. A value of true means you can't terminate the
       #   instance using the API (i.e., the instance is "locked"); a
@@ -161,54 +159,61 @@ module AWS
       #     i.api_termination_disabled = false
       #     i.terminate                        # terminates the instance
       #
-      # @option opts [String] :instance_initiated_shutdown_behavior
+      # @option options [String] :instance_initiated_shutdown_behavior
       #   Determines whether the instance stops or terminates on
       #   instance-initiated shutdown.
-      def create(opts = {})
-        if image = opts.delete(:image)
-          opts[:image_id] = image.id
+      #
+      # @return [Instance or Array] If a single instance is being created, 
+      #   this returns an {EC2::Instance} to represent the newly
+      #   created instance.  Otherwise it returns an array of instance 
+      #   objects.
+      #
+      def create options = {}
+
+        if image = options.delete(:image)
+          options[:image_id] = image.id
         end
 
-        if kernel = opts.delete(:kernel)
-          opts[:kernel_id] = kernel.id
+        if kernel = options.delete(:kernel)
+          options[:kernel_id] = kernel.id
         end
 
-        if ramdisk = opts.delete(:ramdisk)
-          opts[:ramdisk_id] = ramdisk.id
+        if ramdisk = options.delete(:ramdisk)
+          options[:ramdisk_id] = ramdisk.id
         end
 
-        if key_pair = opts.delete(:key_pair)
-          opts[:key_name] = key_pair.name
+        if key_pair = options.delete(:key_pair)
+          options[:key_name] = key_pair.name
         end
 
-        opts = count_opts(opts).merge(opts)
-        opts.delete(:count)
+        options = count_options(options).merge(options)
+        options.delete(:count)
 
-        opts[:user_data] = Base64.encode64(opts[:user_data]).strip if
-          opts[:user_data]
+        options[:user_data] = Base64.encode64(options[:user_data]).strip if
+          options[:user_data]
 
-        opts[:block_device_mappings] =
-          translate_block_device_mappings(opts[:block_device_mappings]) if
-          opts[:block_device_mappings]
+        options[:block_device_mappings] =
+          translate_block_device_mappings(options[:block_device_mappings]) if
+          options[:block_device_mappings]
 
-        opts[:monitoring] = { :enabled => true } if
-          opts[:monitoring_enabled]
-        opts.delete(:monitoring_enabled)
+        options[:monitoring] = { :enabled => true } if
+          options[:monitoring_enabled]
+        options.delete(:monitoring_enabled)
 
-        opts[:placement] = {
-          :availability_zone => opts[:availability_zone].to_s
-        } if opts[:availability_zone]
-        opts.delete(:availability_zone)
+        options[:placement] = {
+          :availability_zone => options[:availability_zone].to_s
+        } if options[:availability_zone]
+        options.delete(:availability_zone)
 
-        opts[:security_groups] = group_opts(opts[:security_groups]) if
-          opts[:security_groups]
+        options[:security_groups] = group_opts(options[:security_groups]) if
+          options[:security_groups]
 
-        opts[:client_token] = UUIDTools::UUID.timestamp_create.to_s
+        options[:client_token] = UUIDTools::UUID.timestamp_create.to_s
 
-        resp = client.run_instances(opts)
+        resp = client.run_instances(options)
 
-        if opts[:min_count] == opts[:max_count] and
-            opts[:min_count] == 1
+        if options[:min_count] == options[:max_count] and
+            options[:min_count] == 1
           self[resp.instances_set.first.instance_id]
         else
           resp.instances_set.map do |i|
@@ -216,6 +221,7 @@ module AWS
           end
         end
       end
+
       alias_method :run, :create
 
       # @yield [Instance] Yields each instance in the collection.
@@ -242,18 +248,17 @@ module AWS
 
       # @private
       private
-      def count_opts(opts)
+      def count_options options
         min = max = 1
-        count = opts[:count]
+        count = options[:count]
         case count
         when Range
           min = count.begin
-          max = (count.exclude_end? ? count.end-1 : count.end)
+          max = (count.exclude_end? ? count.end - 1 : count.end)
         when Integer
           min = max = count
         end
-        { :min_count => min,
-          :max_count => max }
+        { :min_count => min, :max_count => max }
       end
 
       # @private

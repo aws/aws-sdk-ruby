@@ -335,10 +335,12 @@ module AWS
       # The response contains only the standard fields.
       object_method(:set_object_acl, :put, 'acl') do
         configure_request do |req, options|
-            require_acl!(options[:acl])
+          require_acl!(options[:acl]) unless options[:acl].kind_of?(Symbol)
           super(req, options)
           if options[:acl].kind_of?(Hash)
             req.body = AccessControlList.new(options[:acl]).to_xml
+          elsif options[:acl].kind_of?(Symbol)
+            req.headers["x-amz-acl"] = options[:acl].to_s.tr("_","-")
           elsif options[:acl].respond_to?(:to_str)
             req.body = options[:acl]
           else

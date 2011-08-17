@@ -316,6 +316,11 @@ module AWS
             should_not raise_error
         end
 
+        it 'should strip newlines from the encoded policy' do
+          Base64.stub(:encode64).and_return("ONE\nTWO\n")
+          post.policy.should == "ONETWO"
+        end
+
         let(:policy) { JSON.load(Base64.decode64(post.policy)) }
 
         it 'should expire an hour from now by default' do

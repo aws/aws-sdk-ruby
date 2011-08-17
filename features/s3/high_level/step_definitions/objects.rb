@@ -283,3 +283,7 @@ Then /^the object "([^\"]*)" should have public read permissions$/ do |key|
   resp = Net::HTTP.get_response(@bucket.objects[key].public_url(:secure => false))
   resp.code.to_i.should == 200
 end
+
+When /^I grant public read permissions on the object "([^\"]*)"$/ do |key|
+  @bucket.objects[key].acl = :public_read
+end

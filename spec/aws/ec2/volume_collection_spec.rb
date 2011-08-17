@@ -50,6 +50,7 @@ module AWS
 
           before(:each) do
             resp.stub(:volume_id).and_return("vol-123")
+            resp.stub(:create_time).and_return(Time.now)
             client.stub(:create_volume).and_return(resp)
           end
 

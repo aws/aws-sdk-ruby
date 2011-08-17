@@ -50,7 +50,7 @@ module AWS
       status = response.http_response.status
       service = self.class.service_name
 
-      pattern = "[AWS %s %s %.06f] %s %s"
+      pattern = "[AWS %s %s %.06f] %s(%s)"
       parts = [service, status, time.real, method_name, sanitize_options(options)]
       severity = :info
 
@@ -72,7 +72,7 @@ module AWS
     def sanitize_value(value)
       case value
       when Hash
-        sanitize_hash(value)
+        '{' + sanitize_hash(value) + '}'
       when Array
         sanitize_array(value)
       when File
@@ -85,31 +85,36 @@ module AWS
     end
 
     protected
-    def sanitize_string(str)
-      if str.size > MAX_STRING_LENGTH
-        "#<String \"#{str[0,6]}\" ... \"#{str[-6,6]}\" (#{str.size} characters)>"
+    def sanitize_string str
+      summary = summarize_string(str)
+      inspected = str.inspect
+      if inspected.size > summary.size
+        summary
       else
-        str.inspect
+        inspected
       end
     end
 
     protected
-    def sanitize_file(file)
+    def summarize_string str
+      "#<String #{str[0,6].inspect} ... #{str[-6,6].inspect} (#{str.size} characters)>"
+    end
+
+    protected
+    def sanitize_file file
       "#<File:#{file.path} (#{File.size(file.path)} bytes)>"
     end
 
     protected
-    def sanitize_array(ary)
-      "[" +
-        ary.map { |v| sanitize_value(v) }.join(",") +
-        "]"
+    def sanitize_array array
+      "[" + array.map { |v| sanitize_value(v) }.join(",") + "]"
     end
 
     protected
-    def sanitize_hash(hash)
-      "{" + hash.map do |k,v|
+    def sanitize_hash hash
+      hash.map do |k,v|
         "#{sanitize_value(k)}=>#{sanitize_value(v)}"
-      end.sort.join(",") + "}"
+      end.sort.join(",")
     end
 
   end

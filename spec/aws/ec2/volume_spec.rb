@@ -222,8 +222,7 @@ module AWS
             context 'when returned by the service' do
 
               before(:each) do
-                response.stub(response_field).
-                  and_return(response_value)
+                response.stub(response_field).and_return(response_value)
               end
 
               it 'should return the translated attribute value' do

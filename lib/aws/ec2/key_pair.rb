@@ -17,11 +17,12 @@ module AWS
   class EC2
 
     # Represents an EC2 key pair.
+    # @attr_reader [String] fingerprint A SHA-1 digest of the DER encoded 
+    #   private key
     class KeyPair < Resource
 
       def initialize name, options = {}
         @name = name.to_s
-        @fingerprint = options[:fingerprint]
         @private_key = options[:private_key]
         super
       end
@@ -29,18 +30,23 @@ module AWS
       # @return [String] The name of the key pair.
       attr_reader :name
 
-      # @return [Boolean] True if the key pair exists.
-      def exists?
-        !client.describe_key_pairs(:filters => [{ :name => "key-name",
-                                                :values => [name] }]).
-          key_set.empty?
+      attribute :fingerprint, :as => :key_fingerprint, :static => true
+
+      populates_from(:create_key_pair, :import_key_pair) do |resp|
+        resp if resp.key_name == name
       end
 
-      # @return [String] A SHA-1 digest of the DER encoded private key
-      def fingerprint; end
-      describe_call_attribute(:key_fingerprint,
-                              :getter => :fingerprint,
-                              :memoize => true)
+      populates_from(:describe_key_pairs) do |resp|
+        resp.key_set.find{|k| k.key_name == name }
+      end
+
+      # @return [Boolean] True if the key pair exists.
+      def exists?
+        resp = client.describe_key_pairs(:filters => [
+          { :name => "key-name", :values => [name] }
+        ])
+        !resp.key_set.empty?
+      end
 
       # Returns the private key.  Raises an exception if called
       # against an existing key.  You can only get the private key
@@ -61,14 +67,6 @@ module AWS
       def delete
         client.delete_key_pair(:key_name => name)  
         true
-      end
-
-      [:create_key_pair,
-       :import_key_pair].each do |op|
-        populate_from op do |resp|
-          attributes_from_response_object(resp) if
-            resp.key_name == name
-        end
       end
 
       protected

@@ -11,6 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+Given /^I wait (\d+) seconds for eventual consistency$/ do |seconds|
+  sleep(seconds.to_i)
+end
+
 When /^(.*), ignoring errors$/ do |step|
   When step rescue nil
 end
@@ -20,7 +24,7 @@ When /^(.*) again$/ do |step|
 end
 
 Given /^I start a memoization block$/ do
-  @http_handler.requests_made.clear
+  @http_handler.requests_made.clear if @http_handler.requests_made
   AWS.start_memoizing
 end
 
@@ -213,4 +217,25 @@ end
 
 When /^I wait for (\d+) seconds$/ do |seconds|
   sleep seconds.to_i
+end
+
+After do |scenario|
+  @proxy.shutdown if @proxy
+end
+
+Given /^I have an HTTP proxy running on localhost$/ do
+  require 'webrick/httpproxy'
+  @proxy = WEBrick::HTTPProxyServer.new(:BindAddress => "127.0.0.1",
+                                        :Port => 0)
+  @proxy_thread = Thread.new do
+    @proxy.start
+  end
+end
+
+When /^I configure an S3 interface using the proxy URI$/ do
+  @s3 = S3.new(:proxy_uri => "http://127.0.0.1:#{@proxy.config[:Port]}")
+end
+
+Then /^I should be able to make a call to S3$/ do
+  @s3.buckets.to_a
 end

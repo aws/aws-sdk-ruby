@@ -55,22 +55,51 @@ module AWS
     #   snapshot provided at snapshot initiation.
     class Snapshot < Resource
 
-      include HasPermissions
       include TaggedItem
-      alias_method :create_volume_permissions, :permissions
-
-      # The snapshot ID
-      attr_reader :id
+      include HasPermissions
 
       # @private
-      def initialize(id, opts = {})
+      def initialize id, options = {}
         @id = id
-        super(opts)
+        super(options)
+      end
+
+      # @return [String] Returns the snapshot's ID.
+      attr_reader :id
+
+      attribute :status, :to_sym => true
+
+      attribute :start_time, :static => true
+
+      attribute :progress do
+        translates_output {|value| value.to_i if value }
+      end
+
+      attribute :owner_id, :static => true
+
+      attribute :volume_size, :static => true
+
+      attribute :volume_id, :static => true
+
+      attribute :owner_alias, :static => true
+
+      attribute :description, :static => true
+
+      alias_method :create_volume_permissions, :permissions
+
+      populates_from(:create_snapshot) do |resp|
+        resp if resp.snapshot_id == id
+      end
+
+      populates_from(:describe_snapshots) do |resp|
+        resp.snapshot_index[id]
       end
 
       # Deletes the snapshot.
+      # @return [nil]
       def delete
         client.delete_snapshot(:snapshot_id => id)
+        nil
       end
 
       # Creates a volume from the snapshot.
@@ -80,16 +109,18 @@ module AWS
       #   {EC2#availability_zones} for how to get a list of
       #   availability zones.
       #
-      # @param [Hash] opts Additional options for creating the volume
+      # @param [Hash] options Additional options for creating the volume
       #
-      # @option opts [Integer] size The desired size (in gigabytes)
+      # @option options [Integer] size The desired size (in gigabytes)
       #   for the volume.
       #
       # @return [Volume] The newly created volume
-      def create_volume(availability_zone, opts = {})
-        VolumeCollection.new(:config => config).
-          create(opts.merge(:snapshot => self,
-                            :availability_zone => availability_zone))
+      def create_volume availability_zone, options = {}
+        volumes = VolumeCollection.new(:config => config)
+        volumes.create(options.merge(
+          :availability_zone => availability_zone,
+          :snapshot => self
+        ))
       end
 
       # @return [Boolean] True if the snapshot exists.
@@ -100,36 +131,14 @@ module AWS
           !resp.snapshot_set.empty?
       end
 
-      describe_call_attribute :volume_id
-
       # @return [Volume] The volume this snapshot was created from.
       def volume
         Volume.new(volume_id, :config => config) if volume_id
       end
 
-      describe_call_attribute :status, :to_sym => true
-      describe_call_attribute :start_time
-      describe_call_attribute :progress do
-        translate_output { |value| value.to_i if value }
-      end
-      describe_call_attribute :owner_id
-      describe_call_attribute :volume_size
-      describe_call_attribute :owner_alias
-      describe_call_attribute :description
-
       # @private
       def __permissions_attribute__
         "createVolumePermission"
-      end
-
-      populate_from :create_snapshot do |resp|
-        attributes_from_response_object(resp) if
-          resp.snapshot_id == id
-      end
-
-      protected
-      def find_in_response(resp)
-        resp.snapshot_index[id]
       end
 
     end

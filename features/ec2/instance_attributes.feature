@@ -119,8 +119,8 @@ Feature: Instance attributes
     And I get the instance type again
     Then the result should be "t1.micro"
     And 1 request should have been made like:
-    | TYPE  | NAME   | VALUE                     |
-    | param | Action | DescribeInstanceAttribute |
+    | TYPE  | NAME   | VALUE             |
+    | param | Action | DescribeInstances |
 
   @set @slow
   Scenario: Change instance type

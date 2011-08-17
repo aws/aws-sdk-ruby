@@ -396,7 +396,7 @@ module AWS
     private
     def user_agent_string
       engine = (RUBY_ENGINE rescue nil or "ruby")
-      user_agent = "%s aws-sdk-ruby/1.0 %s/%s %s" %
+      user_agent = "%s aws-sdk-ruby/#{VERSION} %s/%s %s" %
         [config.user_agent_prefix, engine, RUBY_VERSION, RUBY_PLATFORM]
       user_agent.strip!
       if AWS.memoizing?

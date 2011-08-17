@@ -11,8 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/cacheable'
+require 'aws/resource'
 
 module AWS
   class EC2
@@ -31,67 +30,45 @@ module AWS
     #  end
     #  sleep 1 until volume.status == :available
     #  volume.delete
-    class Attachment
-
-      include Model
-      include Cacheable
-
-      attr_reader :volume
-      attr_reader :instance
-      attr_reader :device
+    class Attachment < Resource
 
       # @private
-      def initialize(volume, instance, device, opts = {})
+      def initialize volume, instance, device, options = {}
         @volume = volume
         @instance = instance
         @device = device
-        super(opts)
+        super
       end
 
-      # (see Volume#detach_from)
-      def delete(opts = {})
-        client.detach_volume(opts.merge(:volume_id => volume.id,
-                                        :instance_id => instance.id,
-                                        :device => device))
-      end
+      # @return [Volume] Returns the volume that is attached.
+      attr_reader :volume
 
-      # @return [Symbol] The attachment status.  Possible values:
-      #   * +:attaching+
-      #   * +:attached+
-      #   * +:detaching+
-      #   * +:detached+
-      def status
-        retrieve_attribute(:status) { describe_call }
-      end
+      # @return [Instance] Returns the EC2 instance the volume is attached to.
+      attr_reader :instance
 
-      # @return [Time] The time at which this attachment was created.
-      def attach_time
-        retrieve_attribute(:attach_time) { describe_call }
-      end
+      # @return [String] Returns how the device is exposed to the instance
+      #   (e.g. '/dev/sdh')
+      attr_reader :device
 
-      # @return [Boolean] True if the volume will be deleted on
-      #   instance termination.
-      def delete_on_termination?
-        retrieve_attribute(:delete_on_termination?) { describe_call }
-      end
+      # @overload status
+      # Returns the attachment status.  Possible values are:
+      # * +:attaching+
+      # * +:attached+
+      # * +:detaching+
+      # * +:detached+
+      # @return [Symbol] Returns the attachment status.  
+      attribute :status, :to_sym => true
 
-      # @return [Boolean] True if the attachment exists.
-      def exists?
-        !describe_attachment.nil?
-      end
+      # @overload attach_time
+      # @return [Time] Returns the time at which this attachment was created.
+      attribute :attach_time
 
-      # @return [Boolean] True if the attachments are the same.
-      #
-      # @param [Object] other The object to compare with.
-      def ==(other)
-        other.kind_of?(Attachment) and
-          other.volume == volume and
-          other.instance == instance and
-          other.device == device
-      end
-      alias_method :eql?, :==
-
-      populate_from :describe_volumes do |resp|
+      # @overload delete_on_termination? 
+      # @return [Boolean] Returns +true+ if the volume will be deleted 
+      #   on instance termination.
+      attribute :delete_on_termination?
+    
+      populates_from(:describe_volumes) do |resp|
         if volume = resp.volume_index[self.volume.id] and
             attachments = volume.attachment_set and
             attachment = attachments.find do |att|
@@ -99,31 +76,47 @@ module AWS
               att.volume_id == self.volume.id &&
               att.device == self.device
           end
-
-          attributes_from_response_object(attachment)
+        then
+          attachment
         end
       end
 
-      [:attach_volume,
-       :detach_volume].each do |op|
-        populate_from op do |resp|
-          attributes_from_response_object(resp) if
-            resp.volume_id == volume.id and
-            resp.instance_id == instance.id and
-            resp.device == device
+      populates_from(:attach_volume, :detach_volume) do |resp|
+        if 
+          resp.volume_id == volume.id and
+          resp.instance_id == instance.id and
+          resp.device == device
+        then
+          resp
         end
+      end
+
+      # @return [Boolean] Returns true if the attachment exists.
+      def exists?
+        !describe_attachment.nil?
+      end
+
+      # Detaches the volume from its instance.
+      # @option options [Boolean] :force Forces detachment if the
+      #   previous detachment attempt did not occur cleanly (logging
+      #   into an instance, unmounting the volume, and detaching
+      #   normally). This option can lead to data loss or a
+      #   corrupted file system. Use this option only as a last
+      #   resort to detach a volume from a failed instance. The
+      #   instance will not have an opportunity to flush file system
+      #   caches or file system metadata. If you use this option,
+      #   you must perform file system check and repair procedures.
+      def delete options = {}
+        client.detach_volume(options.merge(resource_options))
       end
 
       protected
-      def attributes_from_response_object(attachment)
-        atts = {}
-        atts[:status] = (attachment.status.to_sym if
-                         attachment.respond_to?(:status))
-        atts[:attach_time] = (attachment.attach_time if
-                              attachment.respond_to?(:attach_time))
-        atts[:delete_on_termination?] = (attachment.delete_on_termination? if
-                                         attachment.respond_to?(:delete_on_termination?))
-        atts
+      def resource_identifiers
+        [
+          [:volume_id, volume.id],
+          [:instance_id, instance.id],
+          [:device, device],
+        ]
       end
 
       protected

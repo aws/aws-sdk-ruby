@@ -20,6 +20,14 @@ module AWS
   class EC2
 
     # Represents a security group in EC2.
+    #
+    # @attr_reader [String] description The short informal description 
+    #   given when the group was created.
+    #
+    # @attr_reader [String] name The name of the security group.
+    #
+    # @attr_reader [String] owner_id The security group owner's id.
+    #
     class SecurityGroup < Resource
 
       include TaggedItem
@@ -37,28 +45,24 @@ module AWS
 
       alias_method :group_id, :id
 
-      # @return [Boolean] True if the security group exists.
-      def exists?
-        client.describe_security_groups(:filters =>
-                                         [{ :name => "group-id",
-                                            :values => [id] }]).
-          security_group_index.key?(id)
+      attribute :name, :as => :group_name, :static => true
+
+      attribute :owner_id, :static => true
+
+      attribute :description, :as => :group_description, :static => true
+
+      attribute :ip_permissions_list, :as => :ip_permissions
+
+      populates_from(:describe_security_groups) do |resp|
+        resp.security_group_index[id]
       end
 
-      # @return [String] The name of the security group.
-      def name; end
-      describe_call_attribute :group_name, :getter => :name, :memoize => true
-
-      # @return [String] The id of the owner for this security group.
-      def owner_id; end
-      describe_call_attribute :owner_id, :memoize => true
-
-      # @return [String] The short informal description given when the
-      #   group was created.
-      def description; end
-      describe_call_attribute :group_description, :getter => :description, :memoize => true
-
-      describe_call_attribute :ip_permissions, :getter => :ip_permissions_list
+      # @return [Boolean] True if the security group exists.
+      def exists?
+        client.describe_security_groups(:filters => [
+          { :name => "group-id", :values => [id] }
+        ]).security_group_index.key?(id)
+      end
 
       # @return [SecurityGroup::IpPermissionCollection] Returns a
       #   collection of {IpPermission} objects that represents all of

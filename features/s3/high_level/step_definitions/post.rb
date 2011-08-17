@@ -131,6 +131,11 @@ def execute_post(form, opts = {})
     fields["key"] ||= "foo"
 
     fields = fields.to_a + [["file", file]]
+    fields = fields.inject({}) do |h, (key, value)|
+      value = value.strip if value.kind_of?(String)
+      h[key] = value
+      h
+    end
 
     req = Net::HTTP::Post::Multipart.new(form.url.path, fields)
     resp = http.request(req)

@@ -31,22 +31,24 @@ module AWS
       attr_reader :volume
 
       # @private
-      def initialize(volume, opts = {})
+      def initialize volume, options = {}
         @volume = volume
-        super(opts)
+        super
       end
 
       # @yield [attachment] Each attachment of the volume as an
       #   {Attachment} object.
       # @return [nil]
-      def each(&block)
-        volume.attachment_set.each do |att|
-          instance = Instance.new(att.instance_id, :config => config)
-          attachment = Attachment.new(self.volume,
-                                      instance,
-                                      att.device,
-                                      :config => config)
+      def each &block
+        volume.attachment_set.each do |item|
+
+          instance = Instance.new(item.instance_id, :config => config)
+
+          attachment = Attachment.new(self.volume, instance, item.device, 
+            :config => config)
+
           yield(attachment)
+
         end
         nil
       end

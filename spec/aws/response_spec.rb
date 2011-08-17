@@ -126,6 +126,11 @@ module AWS
         response.inspect.should == '<AWS::Response>'
       end
 
+      it 'includes the request type if present' do
+        response.request_type = "foo_bar"
+        response.inspect.should == '<AWS::Response:foo_bar>'
+      end
+
     end
 
     context '#cache_key' do

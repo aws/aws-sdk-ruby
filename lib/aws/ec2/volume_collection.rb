@@ -30,7 +30,7 @@ module AWS
     #  volume.exists?
     #
     # @example Get a map of volume IDs to volume status
-    #   ec2.volumes.inject({}) { |m, v| m[i.id] = v.status; m }
+    #   ec2.volumes.inject({}) { |m, v| m[v.id] = v.status; m }
     #   # => { "vol-12345678" => :available, "vol-87654321" => :in_use }
     class VolumeCollection < Collection
 
@@ -41,8 +41,12 @@ module AWS
       def each(&block)
         resp = filtered_request(:describe_volumes)
         resp.volume_set.each do |v|
-          volume = Volume.new(v.volume_id, :config => config)
+
+          volume = Volume.new_from(:describe_volumes, v, 
+            v.volume_id, :config => config)
+
           yield(volume)
+
         end
         nil
       end
@@ -55,32 +59,32 @@ module AWS
       #
       # @return [Volume] An object representing the new volume.
       #
-      # @param [Hash] opts Options for creating the volume.
+      # @param [Hash] options Options for creating the volume.
       #   +:availability_zone+ and one of +:size+, +:snapshot+, or
       #   +:snapshot_id+ is required.
       #
-      # @option opts [Integer] :size The size of the volume, in
+      # @option options [Integer] :size The size of the volume, in
       #   GiBs.  Valid values: 1 - 1024.  If +:snapshot+ or
       #   +:snapshot_id+ is specified, this defaults to the size of
       #   the specified snapshot.
       #
-      # @option opts [Snapshot] :snapshot The snapshot from which to
+      # @option options [Snapshot] :snapshot The snapshot from which to
       #   create the new volume.
       #
-      # @option opts [String] :snapshot_id The ID of the snapshot
+      # @option options [String] :snapshot_id The ID of the snapshot
       #   from which to create the new volume.
       #
-      # @option opts [String, AvailabilityZone] :availability_zone
+      # @option options [String, AvailabilityZone] :availability_zone
       #   The Availability Zone in which to create the new volume.
       #   To get a list of the availability zones you can use, see
       #   {EC2#availability_zones}.
       # @return [Volume]
-      def create(opts = {})
-        if snapshot = opts.delete(:snapshot)
-          opts[:snapshot_id] = snapshot.id
+      def create options = {}
+        if snapshot = options.delete(:snapshot)
+          options[:snapshot_id] = snapshot.id
         end
-        resp = client.create_volume(opts)
-        Volume.new(resp.volume_id, :config => config)
+        resp = client.create_volume(options)
+        Volume.new_from(:create_volume, resp, resp.volume_id, :config => config)
       end
 
       # @private

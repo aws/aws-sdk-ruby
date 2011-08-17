@@ -364,6 +364,18 @@ module AWS
         
       end
 
+      context '#iam_endpoint' do
+
+        it 'defaults to iam.amazonaws.com' do
+          config.iam_endpoint.should == 'iam.amazonaws.com'
+        end
+
+        it 'can be changed' do
+          config.with(:iam_endpoint => 'abc').iam_endpoint.should == 'abc'
+        end
+
+      end
+
       context '#ec2_endpoint' do
 
         it 'defaults to s3.amazonaws.com' do

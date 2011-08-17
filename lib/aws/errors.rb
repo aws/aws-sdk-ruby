@@ -51,7 +51,8 @@ module AWS
       #   that wrapped the service error.
       attr_reader :http_response
 
-      def initialize http_request, http_response, message = http_response.body
+      def initialize http_request = nil, http_response = nil, message = nil
+        message ||= http_response.body if http_response
         @http_request = http_request
         @http_response = http_response
         super(message)
@@ -97,10 +98,18 @@ module AWS
       # @return [Integer] The HTTP status code returned by the AWS service.
       attr_reader :code
 
-      def initialize(req, resp)
-        super(req, resp, message)
-        include_error_type
-        parse_body(resp.body)
+      def initialize(req = nil, resp = nil)
+        if req.kind_of?(String)
+          # makes it easier to test handling of modeled exceptions
+          super(nil, nil, req)
+          @message = req
+        elsif req and resp
+          super(req, resp, message)
+          include_error_type
+          parse_body(resp.body)
+        else
+          super()
+        end
       end
 
       def include_error_type

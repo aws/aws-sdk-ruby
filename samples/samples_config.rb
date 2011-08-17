@@ -12,7 +12,8 @@
 # language governing permissions and limitations under the License.
 
 require 'rubygems'
-require 'aws'
+require 'yaml'
+require 'aws-sdk'
 
 config_file = File.join(File.dirname(__FILE__),
                         "config.yml")

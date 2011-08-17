@@ -79,15 +79,14 @@ module AWS
 
       # @yield [image] Each image in the collection.
       # @return [nil]
-      def each(&block)
+      def each &block
         opts = {}
-        opts[:owners] = @owners.map { |id| id.to_s } unless
-          @owners.empty?
+        opts[:owners] = @owners.map { |id| id.to_s } unless @owners.empty?
         opts[:executable_users] = @executable_users.map { |id| id.to_s } unless
           @executable_users.empty?
         response = filtered_request(:describe_images, opts)
         response.images_set.each do |i|
-          image = Image.new(i.image_id, :config => config)
+          image = Image.new_from(:describe_images, i, i.image_id, :config => config)
           yield(image)
         end
         nil
@@ -194,7 +193,7 @@ module AWS
       #                              to delete the volume when the
       #                              instance is terminated.
       # @return [Image]
-      def create(options = {})
+      def create options = {}
         resp = case
         when options[:instance_id]
           client.create_image(options)
@@ -214,7 +213,7 @@ module AWS
                 "expected instance_id, image_location, " +
                 "or root_device_name")
         end
-        self[resp.image_id]
+        Image.new(resp.image_id, :config => config)
       end
 
       # @private

@@ -14,8 +14,13 @@
 require 'bundler/setup'
 Bundler.require(:default, :build, :integration)
 
-tasks_dir = File.join(File.dirname(__FILE__), "tasks")
+root = File.dirname(__FILE__)
+tasks_dir = File.join(root, "tasks")
 $:.unshift(tasks_dir)
+$:.unshift(File.join(root, "lib"))
+
+require 'aws/common' # for the version number
+
 Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file
 end

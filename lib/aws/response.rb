@@ -78,7 +78,11 @@ module AWS
 
     # @private
     def inspect
-      "<#{self.class}>"
+      if request_type
+        "<#{self.class}:#{request_type}>"
+      else
+        "<#{self.class}>"
+      end
     end
 
     def cache_key

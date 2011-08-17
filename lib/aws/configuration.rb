@@ -72,6 +72,7 @@ module AWS
         :ec2_endpoint => 'ec2.amazonaws.com',
         :http_handler => Http::HTTPartyHandler.new,
         :max_retries => 3,
+        :iam_endpoint => 'iam.amazonaws.com',
         :s3_endpoint => 's3.amazonaws.com',
         :s3_multipart_threshold => 16 * 1024 * 1024,
         :s3_multipart_min_part_size => 5 * 1024 * 1024,
@@ -161,6 +162,12 @@ module AWS
     # @return [Integer] Maximum number of times to retry server errors.
     def max_retries
       @options[:max_retries]
+    end
+
+    # @return [String] The service endpoint for AWS Idenity Access 
+    #   Management (IAM).
+    def iam_endpoint
+      @options[:iam_endpoint]
     end
 
     # @return [String] The service endpoint for Amazon S3.

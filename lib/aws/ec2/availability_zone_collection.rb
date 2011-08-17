@@ -27,9 +27,8 @@ module AWS
         resp = filtered_request(:describe_availability_zones)
         resp.availability_zone_info.each do |az|
           zone = AvailabilityZone.new(az.zone_name,
-            :region => Region.new(az.region_name, :config => config),
-            :config => config
-          )
+            :region_name => az.region_name,
+            :config => config)
           yield(zone)
         end
         nil
