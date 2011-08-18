@@ -129,6 +129,10 @@ module AWS
             post.secure?.should == original_post.secure?
           end unless except == :secure?
 
+          it 'should preserve expires' do
+            post.expires.should == original_post.expires
+          end unless except == :expires
+
         end
 
         context 'equality condition' do
@@ -136,6 +140,7 @@ module AWS
           let(:original_post) do
             described_class.new(bucket,
                                 :secure => true,
+                                :expires => 12,
                                 :metadata => { :foo => "bar" },
                                 :content_length => 1..2,
                                 :key => "foobar",
@@ -165,6 +170,7 @@ module AWS
           let(:original_post) do
             described_class.new(bucket,
                                 :secure => true,
+                                :expires => 12,
                                 :metadata => { :foo => "bar" },
                                 :content_length => 1..2,
                                 :key => "foobar",
@@ -194,6 +200,7 @@ module AWS
           let(:original_post) do
             described_class.new(bucket,
                                 :secure => true,
+                                :expires => 12,
                                 :metadata => { :foo => "bar" },
                                 :content_length => 1..2,
                                 :key => "foobar",
@@ -224,6 +231,7 @@ module AWS
           let(:original_post) do
             described_class.new(bucket,
                                 :secure => true,
+                                :expires => 12,
                                 :metadata => { :foo => "bar" },
                                 :content_length => 1..2,
                                 :key => "foobar",

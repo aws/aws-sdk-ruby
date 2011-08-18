@@ -33,7 +33,11 @@ module AWS
     # @private
     protected
     def escape_path value
-      value.split("/").map { |part| escape(part) }.join("/")
+      escaped = ""
+      value.scan(%r{(/?)([^/]+)(/?)}) do |(leading, part, trailing)|
+        escaped << leading + escape(part) + trailing
+      end
+      escaped
     end
 
   end

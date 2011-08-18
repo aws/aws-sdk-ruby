@@ -108,7 +108,7 @@ module AWS
   # See {AccessKeyCollection} and {AccessKey} for more information about
   # working with access keys.
   #
-  # = Users & Gropus
+  # = Users & Groups
   #
   # Each AWS account can have multiple users.  Users can be used to easily
   # manage permissions.  Users can also be organized into groups.  

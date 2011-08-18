@@ -357,7 +357,8 @@ module AWS
                          :key => key,
                          :metadata => metadata,
                          :secure => secure?,
-                         :content_length => content_length
+                         :content_length => content_length,
+                         :expires => expires
                        }.merge(@fields).
                        merge(opts))
       end

@@ -88,6 +88,12 @@ module AWS
           request.path.should == "/foo_bar/key/foo%20bla"
         end
 
+        it 'should preserve a trailing slash in the key' do
+          request.bucket = "foo_bar"
+          request.key = "key/foo bla/"
+          request.path.should == "/foo_bar/key/foo%20bla/"
+        end
+
         it 'should be readonly' do
           lambda {
             request.path = '/foo'

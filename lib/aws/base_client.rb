@@ -16,7 +16,6 @@ require 'aws/inflection'
 require 'aws/naming'
 require 'aws/response'
 require 'aws/async_handle'
-require 'aws/configurable'
 require 'aws/http/handler'
 require 'aws/http/request'
 require 'aws/http/response'
@@ -32,7 +31,6 @@ module AWS
   # @private
   class BaseClient
 
-    include Configurable
     include ClientLogging
 
     extend Naming
@@ -281,6 +279,7 @@ module AWS
       code = nil
       code = xml_error_grammar.parse(response.http_response.body).code if
         xml_error_response?(response)
+      
 
       case
       when response.timeout?
@@ -306,7 +305,6 @@ module AWS
       response.http_response.status >= 300 and
         response.http_response.body and
         xml_error_grammar.parse(response.http_response.body).respond_to?(:code)
-
     end
 
     protected
@@ -433,15 +431,17 @@ module AWS
 
     end
 
-    # defined using MetaUtils so it can be extended by
-    # modules such as ConfiguredClientMethods
-    MetaUtils.extend_method(self, :configure_client) do
+    protected
+    def self.configure_client
 
       module_eval('module Options; end')
       module_eval('module XML; end')
 
-      make_configurable :"#{service_ruby_name}_client",
-        :needs => [:signer, :http_handler]
+      name = :"#{service_ruby_name}_client"
+      needs = [:signer, :http_handler]
+      create_block = lambda {|config| new(:config => config) }
+
+      Configuration.add_option_with_needs(name, needs, &create_block)
 
     end
 
