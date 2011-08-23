@@ -57,13 +57,13 @@ module AWS
 
         it 'sets no location constraint by default' do
           config.stub(:s3_endpoint).and_return('s3.amazonaws.com')
-          client.should_receive(:create_bucket).with(:bucket_name => 'name')
+          buckets.client.should_receive(:create_bucket).with(:bucket_name => 'name')
           buckets.create('name')
         end
 
         it 'sets the location constraint to EU when using the eu endpoint' do
           config.stub(:s3_endpoint).and_return('s3-eu-west-1.amazonaws.com')
-          client.should_receive(:create_bucket).
+          buckets.client.should_receive(:create_bucket).
             with(hash_including(:location_constraint => 'EU'))
           buckets.create('name')
         end
@@ -74,7 +74,7 @@ module AWS
           config.stub(:s3_endpoint).
             and_return('s3-eu-west-1.amazonaws.com')
           
-          client.should_receive(:create_bucket).
+          buckets.client.should_receive(:create_bucket).
             with(hash_including(:location_constraint => 'eek!'))
 
           buckets.create('name', :location_constraint => 'eek!')
@@ -85,7 +85,7 @@ module AWS
 
           config.stub(:s3_endpoint).and_return('s3-fake-2.amazonaws.com')
           
-          client.should_receive(:create_bucket).
+          buckets.client.should_receive(:create_bucket).
             with(hash_including(:location_constraint => 'fake-2'))
 
           buckets.create('name')

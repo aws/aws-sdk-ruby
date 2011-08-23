@@ -220,6 +220,22 @@ module AWS
 
       end
 
+      it 'does not change the original constructed object when the needs change in a derived config' do
+
+        c1 = config_class.new(:abc => 'abc', :mno => 'mno')
+        d1 = c1.dummy1
+
+        c2 = c1.with(:abc => 'newabc')
+        d2 = c2.dummy1
+
+        c1.dummy1.should_not == c2.dummy1
+        c1.dummy1.should be(d1)
+        c2.dummy1.should be(d2)
+        c1.dummy1.opts.should == {:abc => 'abc', :mno => 'mno'}
+        c2.dummy1.opts.should == {:abc => 'newabc', :mno => 'mno'}
+
+      end
+
       it 'chains deeply on dependencies' do
 
         c1 = config_class.new(:abc => 'abc', :mno => 'mno')
@@ -233,6 +249,10 @@ module AWS
       it 'rebuilds only those affected by changes' do
 
         c1 = config_class.new(:abc => 'abc', :mno => 'mno', :xyz => 'xyz')
+        c1.dummy1
+        c1.dummy2
+        c1.dummy3
+
         c2 = c1.with(:xyz => 'newxyz')
 
         c1.should_not == c2

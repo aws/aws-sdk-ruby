@@ -212,7 +212,7 @@ module AWS
       if supplied == values
         self # nothing changed
       else
-        self.class.new(values.merge(:__created__ => @created))
+        self.class.new(values.merge(:__created__ => @created.dup))
       end
 
     end
@@ -279,7 +279,7 @@ module AWS
           needed = needs.collect{|need| send(need) }
 
           unless @created.key?(name) and @created[name][:needed] == needed
-            @created[name] ||= {}
+            @created[name] = {}
             @created[name][:object] = create_block.call(self)
             @created[name][:needed] = needed
           end

@@ -51,3 +51,15 @@ Feature: Regions
     Then a request should have been made like:
     | TYPE | NAME | VALUE                       |
     | http | host | ec2.us-west-1.amazonaws.com |
+
+  Scenario: Multiple regional interfaces
+    Given I use the regional interface for "us-west-1"
+    And I ask for the list of EC2 availability zones
+    When I use the regional interface for "us-east-1"
+    And I ask for the list of EC2 availability zones
+    Then a request should have been made like:
+    | TYPE | NAME | VALUE                       |
+    | http | host | ec2.us-west-1.amazonaws.com |
+    And a request should have been made like:
+    | TYPE | NAME | VALUE                       |
+    | http | host | ec2.us-east-1.amazonaws.com |

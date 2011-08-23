@@ -24,7 +24,7 @@ end
 
 Given /^I use the regional interface for "([^\"]*)"$/ do |region|
   @orig_ec2 ||= @ec2
-  @ec2 = @ec2.regions[region]
+  @ec2 = @orig_ec2.regions[region]
 end
 
 Given /^I ask for the region "([^\"]*)" by name$/ do |name|

@@ -62,9 +62,18 @@ module AWS
       #
       # @param [String] bucket_name
       # @param [Hash] options
-      # @option options [String] :location_constraint (nil) The location 
-      #   where the bucket should be created.  Defaults to the classic 
-      #   US region.  
+      #
+      # @option options [String] :location_constraint (nil) The
+      #   location where the bucket should be created.  Defaults to
+      #   the classic US region; however, if you configure a regional
+      #   endpoint for Amazon S3 this option will default to the
+      #   appropriate location constraint for the endpoint.  For
+      #   example:
+      #
+      #     s3 = AWS::S3.new(:s3_endpoint => "s3-us-west-1.amazonaws.com")
+      #     bucket = s3.buckets.create("my-us-west-bucket")
+      #     bucket.location_constraint # => "us-west-1"
+      #
       # @option options [String] :acl (:private) Sets the ACL of the bucket 
       #   you are creating.  Valid Values include :private, :public_read, 
       #   :public_read_write, :authenticated_read, :bucket_owner_read and

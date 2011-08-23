@@ -438,7 +438,7 @@ module AWS
       module_eval('module XML; end')
 
       name = :"#{service_ruby_name}_client"
-      needs = [:signer, :http_handler]
+      needs = [:signer, :http_handler, "#{service_ruby_name}_endpoint"]
       create_block = lambda {|config| new(:config => config) }
 
       Configuration.add_option_with_needs(name, needs, &create_block)

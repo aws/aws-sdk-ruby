@@ -133,19 +133,25 @@ module AWS
             post.expires.should == original_post.expires
           end unless except == :expires
 
+          it 'should preserve ignored_fields' do
+            post.ignored_fields.should == original_post.ignored_fields
+          end unless except == :ignored_fields
+
         end
 
-        context 'equality condition' do
+        let(:original_options) { {
+            :secure => true,
+            :expires => 12,
+            :metadata => { :foo => "bar" },
+            :content_length => 1..2,
+            :key => "foobar",
+            :acl => :public_read,
+            :ignore => ["foo", "bar"]
+          } }
 
-          let(:original_post) do
-            described_class.new(bucket,
-                                :secure => true,
-                                :expires => 12,
-                                :metadata => { :foo => "bar" },
-                                :content_length => 1..2,
-                                :key => "foobar",
-                                :acl => :public_read)
-          end
+        let(:original_post) { described_class.new(bucket, original_options) }
+
+        context 'equality condition' do
 
           let(:post) { original_post.where(:expires_header).is("foobar") }
 
@@ -167,16 +173,6 @@ module AWS
 
         context 'starts with condition' do
 
-          let(:original_post) do
-            described_class.new(bucket,
-                                :secure => true,
-                                :expires => 12,
-                                :metadata => { :foo => "bar" },
-                                :content_length => 1..2,
-                                :key => "foobar",
-                                :acl => :public_read)
-          end
-
           let(:post) { original_post.where(:acl).starts_with("public") }
 
           let(:conditions) { policy_conditions(post) }
@@ -196,16 +192,6 @@ module AWS
         end
 
         context 'range condition' do
-
-          let(:original_post) do
-            described_class.new(bucket,
-                                :secure => true,
-                                :expires => 12,
-                                :metadata => { :foo => "bar" },
-                                :content_length => 1..2,
-                                :key => "foobar",
-                                :acl => :public_read)
-          end
 
           let(:post) do
             original_post.where(:content_length).in(3..4)
@@ -227,16 +213,6 @@ module AWS
         end
 
         context 'single-value range condition (syntactic sugar)' do
-
-          let(:original_post) do
-            described_class.new(bucket,
-                                :secure => true,
-                                :expires => 12,
-                                :metadata => { :foo => "bar" },
-                                :content_length => 1..2,
-                                :key => "foobar",
-                                :acl => :public_read)
-          end
 
           let(:post) do
             original_post.where(:content_length).is(3)
