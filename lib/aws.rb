@@ -49,16 +49,18 @@
 #
 #   config/initializers/aws.rb
 #
-module AWS; end
+
+module AWS
+  autoload :EC2,                'aws/ec2'
+  autoload :S3,                 'aws/s3'
+  autoload :SimpleDB,           'aws/simple_db'
+  autoload :SNS,                'aws/sns'
+  autoload :SQS,                'aws/sqs'
+  autoload :IAM,                'aws/iam'
+  autoload :STS,                'aws/sts'
+  autoload :SimpleEmailService, 'aws/simple_email_service'
+  autoload :Record,             'aws/record'
+end
 
 require 'aws/common'
-require 'aws/ec2'
-require 'aws/s3'
-require 'aws/simple_db'
-require 'aws/sns'
-require 'aws/sqs'
-require 'aws/iam'
-require 'aws/sts'
-require 'aws/simple_email_service'
-require 'aws/record'
 require 'aws/rails'
