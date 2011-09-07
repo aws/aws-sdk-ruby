@@ -185,11 +185,11 @@ module AWS
 
         args = attributes + [options]
 
-        return if handle_query_options(:select, *args, &block)
-
         unless block_given?
           return Enumerator.new(self, :select, *args)
         end
+
+        return if handle_query_options(:select, *args, &block)
   
         if attributes.empty?
           output_list = '*'
