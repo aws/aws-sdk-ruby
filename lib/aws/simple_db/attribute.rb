@@ -11,18 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/simple_db/consistent_read_option'
-require 'aws/simple_db/put_attributes'
-require 'aws/simple_db/delete_attributes'
-
 module AWS
   class SimpleDB
 
     # Represents a single named item attribute in SimpleDB.
     class Attribute
 
-      include Model
+      include Core::Model
       include Enumerable
       include ConsistentReadOption
       include PutAttributes

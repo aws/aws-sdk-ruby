@@ -62,7 +62,7 @@ AfterConfiguration do
   AWS.config(test_config)
   #require 'amazon/aws/http/event_machine_handler'
   #AWS.config(:http_handler => AWS::Http::EventMachineHandler.new)
-  handler = AWS::Http::Handler.new(AWS.config.http_handler) do |req, resp|
+  handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp|
     (@requests_made ||= []) << req
     super(req, resp)
     @last_response = resp

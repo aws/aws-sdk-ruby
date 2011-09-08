@@ -11,11 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/s3/client'
-require 'aws/s3/errors'
-require 'aws/s3/bucket_collection'
+require 'aws/core'
+require 'aws/s3/config'
 
 module AWS
 
@@ -97,7 +94,35 @@ module AWS
   #
   class S3
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :AccessControlList,            'access_control_list'
+      autoload :ACLObject,                    'acl_object'
+      autoload :Bucket,                       'bucket'
+      autoload :BucketCollection,             'bucket_collection'
+      autoload :BucketVersionCollection,      'bucket_version_collection'
+      autoload :Client,                       'client'
+      autoload :DataOptions,                  'data_options'
+      autoload :Errors,                       'errors'
+      autoload :MultipartUpload,              'multipart_upload'
+      autoload :MultipartUploadCollection,    'multipart_upload_collection'
+      autoload :ObjectCollection,             'object_collection'
+      autoload :ObjectMetadata,               'object_metadata'
+      autoload :ObjectUploadCollection,       'object_upload_collection'
+      autoload :ObjectVersion,                'object_version'
+      autoload :ObjectVersionCollection,      'object_version_collection'
+      autoload :PaginatedCollection,          'paginated_collection'
+      autoload :Policy,                       'policy'
+      autoload :PrefixAndDelimiterCollection, 'prefix_and_delimiter_collection'
+      autoload :PrefixedCollection,           'prefixed_collection'
+      autoload :PresignedPost,                'presigned_post'
+      autoload :Request,                      'request'
+      autoload :S3Object,                     's3_object'
+      autoload :Tree,                         'tree'
+      autoload :UploadedPart,                 'uploaded_part'
+      autoload :UploadedPartCollection,       'uploaded_part_collection'
+    end
+
+    include Core::ServiceInterface
 
     # @return [BucketCollection] Returns a collection that represents all 
     #  buckets in the account.

@@ -11,13 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/iam/resource'
-require 'aws/iam/mfa_device_collection'
-require 'aws/iam/user_policy_collection'
-require 'aws/iam/signing_certificate_collection'
-require 'aws/iam/login_profile'
-require 'aws/iam/user_group_collection'
-
 module AWS
   class IAM
 

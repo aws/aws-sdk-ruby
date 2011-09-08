@@ -11,18 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/http/request'
-require 'aws/authorize_v2'
-require 'aws/authorize_with_session_token'
-
 module AWS
   class SQS
 
     # @private
-    class Request < AWS::Http::Request
+    class Request < Core::Http::Request
 
-      include AuthorizeV2
-      include AuthorizeWithSessionToken
+      include Core::AuthorizeV2
+      include Core::AuthorizeWithSessionToken
 
       def path
         full_url.path
@@ -42,5 +38,6 @@ module AWS
       end
 
     end
+
   end
 end

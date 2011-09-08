@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   class S3
-    class Client < BaseClient
+    class Client < Core::Client
 
       describe XML::ListBuckets do
 

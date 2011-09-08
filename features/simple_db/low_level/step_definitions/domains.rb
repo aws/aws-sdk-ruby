@@ -52,7 +52,7 @@ end
 
 
 Then /^I should receive a simple db response$/ do
-  @response.should be_a(SimpleDB::Response)
+  @response.should be_a(Core::Response)
   @response.response_metadata.request_id.should be_a(String)
   @response.response_metadata.request_id.should_not == ''
   @response.response_metadata.box_usage.should be_a(Float)

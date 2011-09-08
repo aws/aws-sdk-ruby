@@ -118,12 +118,12 @@ module AWS
           it_should_behave_like("an s3 error response with no body",
                                 :status => 304,
                                 :klass => Errors::NotModified,
-                                :kind => AWS::Errors::ClientError)
+                                :kind => Errors::ClientError)
 
           it_should_behave_like("an s3 error response with no body",
                                 :status => 404,
                                 :klass => Errors::NoSuchKey,
-                                :kind => AWS::Errors::ClientError)
+                                :kind => Errors::ClientError)
 
         end
 
@@ -298,7 +298,7 @@ module AWS
 
         it 'should raise an argument error for an object whose to_xml method returns invalid XML' do
           obj = Object.new
-          MetaUtils.extend_method(obj, :to_xml) { "<acl" }
+          Core::MetaUtils.extend_method(obj, :to_xml) { "<acl" }
           lambda {
             client.send(method, opts.merge(:acl => obj))
           }.should raise_error(ArgumentError, /acl contains invalid XML/)
@@ -675,6 +675,8 @@ module AWS
             :content_encoding, "Content-Encoding")
           it_should_behave_like("sends option as header",
             :content_type, "Content-Type")
+          it_should_behave_like("sends option as header",
+            :expires, "Expires")
         end
 
         it_should_behave_like("sends option as header",
@@ -816,7 +818,7 @@ module AWS
 
         it 'should raise an argument error for an object whose to_json method returns invalid JSON' do
           obj = Object.new
-          MetaUtils.extend_method(obj, :to_json) { "{" }
+          Core::MetaUtils.extend_method(obj, :to_json) { "{" }
           lambda {
             client.set_bucket_policy(:bucket_name => 'foo',
                                      :policy => obj)

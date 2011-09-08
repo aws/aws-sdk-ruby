@@ -10,14 +10,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class IAM
 
     class MFADevice
 
-      include Model
+      include Core::Model
 
       # @param [User] user The user the MFA device is associated with.
       # @param [String] serial_number The MFA device's unique serial number.

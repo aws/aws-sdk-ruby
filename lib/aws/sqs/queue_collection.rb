@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/sqs/queue'
-
 module AWS
   class SQS
 
@@ -34,7 +31,7 @@ module AWS
     #   sqs.queues[url].send_message("HELLO")
     class QueueCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # @private
@@ -81,7 +78,9 @@ module AWS
 
       # @yieldparam [Queue] queue Each {Queue} object in the collection.
       def each(&block)
-        client.list_queues.queue_urls.each do |url|
+        options = {}
+        options[:queue_name_prefix] = prefix if prefix
+        client.list_queues(options).queue_urls.each do |url|
           queue = self[url]
           yield(queue)
         end

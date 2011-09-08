@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/ec2/collection'
-require 'aws/ec2/tagged_collection'
-require 'aws/ec2/security_group'
-
 module AWS
   class EC2
 
@@ -31,18 +26,26 @@ module AWS
       #   of this security group.  Accepts alphanumeric characters, spaces,
       #   dashes, and underscores. If left blank the description will be set
       #   to the name.
+      # @option options [String] :vpc_id (nil) The ID of a VPC to create
+      #   a security group in.  If this option is left blank then an 
+      #   EC2 security group is created.  If this option is provided a VPC
+      #   security group will be created.
       # @return [SecurityGroup]
       def create name, options = {}
 
         description = options[:description] || name
 
-        response = client.create_security_group(
-          :group_name => name, 
-          :description => description)
+        create_opts = {}
+        create_opts[:group_name] = name
+        create_opts[:description] = description
+        create_opts[:vpc_id] = options[:vpc_id] if options[:vpc_id]
+
+        response = client.create_security_group(create_opts)
 
         SecurityGroup.new(response.group_id, {
           :name => name,
           :description => description,
+          :vpc_id => options[:vpc_id],
           :config => config })
 
       end

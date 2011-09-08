@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class S3
 
@@ -23,7 +21,7 @@ module AWS
     #  upload.parts.inject(0) { |sum, part| sum + part.size }
     class UploadedPart
 
-      include Model
+      include Core::Model
 
       # @return [MultipartUpload] The upload to which this belongs.
       attr_reader :upload

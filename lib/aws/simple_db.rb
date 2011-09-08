@@ -11,11 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/simple_db/errors'
-require 'aws/simple_db/client'
-require 'aws/simple_db/domain_collection'
+require 'aws/core'
+require 'aws/simple_db/config'
 
 module AWS
 
@@ -141,7 +138,25 @@ module AWS
   #
   class SimpleDB
 
-    include ServiceInterface
+    AWS.register_autoloads(self, 'aws/simple_db') do
+      autoload :Attribute,             'attribute'
+      autoload :AttributeCollection,   'attribute_collection'
+      autoload :Client,                'client'
+      autoload :ConsistentReadOption,  'consistent_read_option'
+      autoload :DeleteAttributes,      'delete_attributes'
+      autoload :Domain,                'domain'
+      autoload :DomainCollection,      'domain_collection'
+      autoload :DomainMetadata,        'domain_metadata'
+      autoload :Errors,                'errors' 
+      autoload :ExpectConditionOption, 'expect_condition_option'
+      autoload :Item,                  'item'
+      autoload :ItemCollection,        'item_collection'
+      autoload :ItemData,              'item_data'
+      autoload :PutAttributes,         'put_attributes'
+      autoload :Request,               'request'
+    end
+
+    include Core::ServiceInterface
 
     # Returns a collection object that represents the domains in your
     # account.

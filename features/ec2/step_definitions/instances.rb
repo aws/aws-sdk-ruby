@@ -27,8 +27,14 @@ When /^I request to run an instance with the following parameters:$/ do |table|
     opts[:security_groups] = [opts[:security_groups]]
   end
 
+  if @run_in_vpc
+    opts[:subnet_id] = @subnet_id
+  end
+
   @instance = @result = @ec2.instances.create(opts)
+
   @started_instances << @instance.id
+
   sleep 0.1
 end
 

@@ -21,3 +21,5 @@ Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
 end
 
 require 'aws'
+
+AWS.eager_autoload!

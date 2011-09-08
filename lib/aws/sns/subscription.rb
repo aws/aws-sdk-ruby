@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/sns/topic_subscription_collection'
-require 'aws/sns/subscription_collection'
-
 module AWS
   class SNS
 
@@ -24,7 +20,7 @@ module AWS
     # {Topic#confirm_subscription}.
     class Subscription
 
-      include Model
+      include Core::Model
 
       # @private
       def initialize(arn, opts = {})

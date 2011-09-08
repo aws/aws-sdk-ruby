@@ -11,22 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/base_client'
-require 'aws/configured_client_methods'
-require 'aws/simple_db/request'
-require 'aws/simple_db/client/xml'
-require 'aws/simple_db/client/options'
-require 'aws/inflection'
-require 'aws/simple_db/errors'
 require 'time'
 
 module AWS
   class SimpleDB
     
     # @private
-    class Client < BaseClient
+    class Client < Core::Client
 
-      include ConfiguredClientMethods
+      AWS.register_autoloads(self, 'aws/simple_db/client') do
+        autoload :Options, 'options'
+        autoload :XML,     'xml'
+      end
+
+      include Core::ConfiguredClientMethods
 
       API_VERSION = '2009-04-15'
 

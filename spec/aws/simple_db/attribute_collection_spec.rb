@@ -17,9 +17,9 @@ module AWS
   class SimpleDB
     describe AttributeCollection do
 
-      let(:client) { double('sdb-client') }
+      let(:config) { stub_config }
 
-      let(:config) { Configuration.new(:simple_db_client => client) }
+      let(:client) { config.simple_db_client }
 
       let(:domain) { Domain.new('domain-name', :config => config) }
 

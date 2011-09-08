@@ -11,13 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/policy'
-
 module AWS
   class IAM
 
     # @private
-    class Policy < AWS::Policy
+    class Policy < Core::Policy
 
       def to_h
         hash = super
@@ -29,7 +27,7 @@ module AWS
         hash
       end
 
-      class Statement < AWS::Policy::Statement
+      class Statement < Core::Policy::Statement
 
         ACTION_MAPPING = { }
 

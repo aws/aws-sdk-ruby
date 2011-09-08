@@ -125,6 +125,70 @@ module AWS
 
       end
 
+      shared_examples_for("security group egress method") do
+
+        before(:each) do
+          client.stub(client_method).and_return(client.stub_for(client_method))
+          group.stub(:vpc_id).and_return('vpc-123')
+        end
+
+        it 'accepts ranges for ports and defaults ip ranges to 0.0.0.0/0' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => 'tcp', :from_port => 20, :to_port => 22,
+                :ip_ranges => [{ :cidr_ip => '0.0.0.0/0' }] }
+            ])
+          group.send(method, :ports => (20..22), :protocol => :tcp)
+        end
+
+        it 'donwcases protocols and accepts ports as arrays' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => 'tcp', :from_port => 22, :to_port => 22,
+                :ip_ranges => [{ :cidr_ip => '0.0.0.0/0' }] }
+            ])
+          group.send(method, :protocol => 'TCP', :ports => 22)
+        end
+
+        it 'accepts ip ranges as strings' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', :ip_ranges => [
+                  { :cidr_ip => '0.0.0.0/0' },
+                  { :cidr_ip => '1.1.1.1/1' },
+                ] 
+              }
+            ])
+          group.send(method, '0.0.0.0/0', '1.1.1.1/1')
+        end
+
+        it 'accepts groups' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { :group_id => 'foo', :user_id => 'bar' },
+                ] 
+              }
+            ])
+          g1 = SecurityGroup.new('foo', :owner_id => 'bar')
+          group.send(method, g1)
+        end
+
+        it 'accepts group hashes' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { :group_id => 'foo', :user_id => 'bar' },
+                ] 
+              }
+            ])
+          group.send(method, { :group_id => 'foo', :user_id => 'bar' })
+        end
+
+      end
+
       shared_examples_for "security group ping method" do
 
         it 'calls the client' do
@@ -259,6 +323,20 @@ module AWS
         it_behaves_like "security group ingress method" do
           let(:method) { :revoke_ingress }
           let(:client_method) { :revoke_security_group_ingress }
+        end
+      end
+
+      context '#authorize_egress' do
+        it_behaves_like "security group egress method" do
+          let(:method) { :authorize_egress }
+          let(:client_method) { :authorize_security_group_egress }
+        end
+      end
+
+      context '#revoke_egress' do
+        it_behaves_like "security group egress method" do
+          let(:method) { :revoke_egress }
+          let(:client_method) { :revoke_security_group_egress }
         end
       end
 

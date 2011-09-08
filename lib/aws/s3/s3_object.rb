@@ -11,13 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/request'
-require 'aws/s3/object_metadata'
-require 'aws/s3/multipart_upload'
-require 'aws/s3/object_upload_collection'
-require 'aws/s3/presigned_post'
-require 'aws/s3/data_options'
 require 'uri'
 
 module AWS
@@ -44,7 +37,7 @@ module AWS
     #
     class S3Object
 
-      include Model
+      include Core::Model
       include DataOptions
 
       # @param [Bucket] bucket The bucket this object belongs to.

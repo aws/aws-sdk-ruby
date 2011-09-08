@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/bucket'
-
 module AWS
   class S3
 
@@ -36,7 +33,7 @@ module AWS
     #
     class BucketCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # Creates and returns a new Bucket.  For example:
@@ -79,7 +76,7 @@ module AWS
       #   :public_read_write, :authenticated_read, :bucket_owner_read and
       #   :bucket_owner_full_control
       # @return [Bucket]
-      def create(bucket_name, options = {})
+      def create bucket_name, options = {}
 
         # auto set the location constraint for the user if it is not 
         # passed in and the endpoint is not the us-standard region.  don't 

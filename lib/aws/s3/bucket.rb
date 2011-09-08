@@ -11,14 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/object_collection'
-require 'aws/s3/bucket_version_collection'
-require 'aws/s3/object_version_collection'
-require 'aws/s3/multipart_upload_collection'
-require 'aws/s3/tree'
-require 'aws/meta_utils'
-
 module AWS
   class S3
 
@@ -34,7 +26,7 @@ module AWS
     #
     class Bucket
 
-      include Model
+      include Core::Model
 
       # @param [String] name
       # @param [Hash] options

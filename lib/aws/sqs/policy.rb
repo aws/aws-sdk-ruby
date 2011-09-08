@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/policy'
-
 module AWS
   class SQS
 
-    # @see AWS::Policy
-    class Policy < AWS::Policy
+    # @see Core::Policy
+    class Policy < Core::Policy
 
-      class Statement < AWS::Policy::Statement
+      class Statement < Core::Policy::Statement
 
         ACTION_MAPPING = {
           :add_permission => 'sqs:AddPermission',

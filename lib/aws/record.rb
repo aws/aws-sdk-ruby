@@ -12,10 +12,13 @@
 # language governing permissions and limitations under the License.
 
 require 'set'
-require 'aws/record/base'
 
 module AWS
   module Record
+
+    AWS.register_autoloads(self) do
+      autoload :Base, 'base'
+    end
   
     # @private
     class RecordNotFound < Exception; end

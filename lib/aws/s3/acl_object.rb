@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/meta_utils'
-require 'aws/inflection'
 require 'rexml/text'
 
 module AWS
@@ -81,7 +79,7 @@ module AWS
 
         def string_attr(element_name, options = {})
           method_name = options[:method_name] ||
-            Inflection.ruby_name(element_name)
+            Core::Inflection.ruby_name(element_name)
 
           attr_accessor(method_name)
           setter_option(method_name)
@@ -92,7 +90,7 @@ module AWS
 
         def object_attr(klass, options = {})
           base_name = klass.name[/::([^:]*)$/, 1]
-          method_name = Inflection.ruby_name(base_name)
+          method_name = Core::Inflection.ruby_name(base_name)
           cast = options[:cast] || Hash
 
           attr_reader(method_name)
@@ -105,7 +103,7 @@ module AWS
 
         def object_list_attr(list_element, klass, options = {})
           base_name = klass.name[/::([^:]*)$/, 1]
-          method_name = Inflection.ruby_name(options[:method_name].to_s || list_element)
+          method_name = Core::Inflection.ruby_name(options[:method_name].to_s || list_element)
           default_value = nil
           default_value = [] if options[:required]
 
@@ -118,7 +116,7 @@ module AWS
         end
 
         def setter_option(method_name)
-          MetaUtils.class_extend_method(self, :initialize) do |*args|
+          Core::MetaUtils.class_extend_method(self, :initialize) do |*args|
             opts = args.last || {}
             instance_variable_set("@#{method_name}", yield) if block_given?
             key = method_name.to_sym
@@ -168,8 +166,8 @@ module AWS
 
         def input_validator(method_name, &blk)
           validator = "__validator__#{blk.object_id}"
-          MetaUtils.class_extend_method(self, validator, &blk)
-          MetaUtils.class_extend_method(self, "validate_#{method_name}_input!") do |*args|
+          Core::MetaUtils.class_extend_method(self, validator, &blk)
+          Core::MetaUtils.class_extend_method(self, "validate_#{method_name}_input!") do |*args|
             (value, context) = args
             context = " "+context if context
             context ||= ""
@@ -202,14 +200,14 @@ module AWS
         end
 
         def validate_string(method_name)
-          MetaUtils.class_extend_method(self, :validate!) do
+          Core::MetaUtils.class_extend_method(self, :validate!) do
             super()
             raise "missing #{method_name}" unless send(method_name)
           end
         end
 
         def validate_object(method_name)
-          MetaUtils.class_extend_method(self, :validate!) do
+          Core::MetaUtils.class_extend_method(self, :validate!) do
             super()
             raise "missing #{method_name}" unless send(method_name)
             send(method_name).validate!
@@ -217,7 +215,7 @@ module AWS
         end
 
         def validate_list(method_name)
-          MetaUtils.class_extend_method(self, :validate!) do
+          Core::MetaUtils.class_extend_method(self, :validate!) do
             super()
             raise "missing #{method_name}" unless send(method_name)
             send(method_name).each { |member| member.validate! }
@@ -247,7 +245,7 @@ module AWS
         end
 
         def add_xml_child(method_name)
-          MetaUtils.class_extend_method(self, :body_xml) do
+          Core::MetaUtils.class_extend_method(self, :body_xml) do
             xml = super()
             value = send(method_name)
             xml += yield(value) if value

@@ -11,41 +11,40 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class EC2
     class SecurityGroup < Resource
 
       class IpPermissionCollection
 
-        include Model
+        include Core::Model
         include Enumerable
 
         attr_reader :security_group
 
-        def initialize(security_group, opts = {})
-          super
+        def initialize security_group, options = {}
           @security_group = security_group
+          super
         end
 
         def each
           security_group.ip_permissions_list.each do |p|
 
-            groups = p.groups.collect do |group|
-              SecurityGroup.new(group.group_id,
-                                :name => group.group_name,
-                                :owner_id => group.user_id,
-                                :config => config)
-            end
+            ports = [p.from_port, p.to_port]
 
             ip_ranges = p.ip_ranges.collect{|ip| ip.cidr_ip }
 
-            permission =
-              IpPermission.new(self, p.ip_protocol, [p.from_port, p.to_port],
-                               :ip_ranges => ip_ranges,
-                               :groups => groups,
-                               :config => config)
+            groups = p.groups.collect do |group|
+              SecurityGroup.new(group.group_id,
+                :name => group.group_name,
+                :owner_id => group.user_id,
+                :config => config)
+            end
+
+            permission = IpPermission.new(security_group, p.ip_protocol, ports,
+              :ip_ranges => ip_ranges,
+              :groups => groups,
+              :config => config)
 
             yield(permission)
 

@@ -45,6 +45,12 @@ module AWS
           it 'is the lowercase symbolized version of what is passed' do
             IpPermission.new(group, 'TCP', 80).protocol.should == :tcp
           end
+
+          it 'converts -1 to :any' do
+            # ec2 returns the string -1 to indicate any protocol
+            # for egress ip permissions
+            IpPermission.new(group, '-1', 80).protocol.should == :any
+          end
           
         end
 
@@ -58,6 +64,15 @@ module AWS
           it 'converts arrays into ranges' do
             IpPermission.new(group, :tcp, [20,21]).port_range.
               should == (20..21)
+          end
+
+          it 'accepts ranges' do
+            IpPermission.new(group, :tcp, 20..22).port_range.
+              should == (20..22)
+          end
+
+          it 'accepts nil' do
+            IpPermission.new(group, :tcp, nil).port_range.should == nil
           end
 
         end
@@ -84,6 +99,19 @@ module AWS
           it 'returns whatever it received as an array' do
             IpPermission.new(group, :tcp, 80, :groups => 'foo').
               groups.should == ['foo']
+          end
+
+        end
+
+        context '#egress?' do
+
+          it 'defaults to false' do
+            IpPermission.new(group, :tcp, 80).egress?.should == false
+          end
+
+          it 'can be set to true' do
+            IpPermission.new(group, :tcp, 80, :egress => true).egress?.
+              should == true
           end
 
         end

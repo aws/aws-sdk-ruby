@@ -94,6 +94,13 @@ module AWS
           collection.prefix.should be_nil
         end
 
+        it 'should pass :queue_name_prefix to the client' do
+          client.should_receive(:list_queues).
+            with(hash_including(:queue_name_prefix => "foo")).
+            and_return(client.stub_for(:list_queues))
+          collection.with_prefix("foo").to_a
+        end
+
       end
 
       context '#[]' do

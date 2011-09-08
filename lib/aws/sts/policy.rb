@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/policy'
-
 module AWS
   class STS
 
-    # (see AWS::Policy)
-    class Policy < AWS::Policy
+    # (see Core::Policy)
+    class Policy < Core::Policy
 
-      # (see AWS::Policy#to_h)
+      # (see Core::Policy#to_h)
       def to_h
         h = super
         h.delete("Id")

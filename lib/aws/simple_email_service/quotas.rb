@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class SimpleEmailService
 
     # Returns information about your SimpleEmailService quotas.
     class Quotas
 
-      include Model
+      include Core::Model
 
       # @return [Integer] The maximum number of emails the user is allowed
       #   to send in a 24-hour interval.

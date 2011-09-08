@@ -353,6 +353,12 @@ module AWS
                 should == [%w(1 2), %w(3 4), nil]
             end
 
+            it 'returns an enumerable when conditions are passed' do
+              items.select(:where => { :foo => "Bar" }).
+                map { |i| i.attributes["foo"] }.
+                should == [%w(1 2), %w(3 4), nil]
+            end
+
           end
 
         end

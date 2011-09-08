@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/sns/subscription'
-require 'aws/sns/topic'
-
 module AWS
   class SNS
 
@@ -29,7 +25,7 @@ module AWS
     #
     class SubscriptionCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # Yield each subscription belonging to this account.

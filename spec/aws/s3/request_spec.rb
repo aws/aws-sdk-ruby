@@ -141,7 +141,7 @@ module AWS
 
       context '#add_authorization!' do
 
-        let(:signer) { DefaultSigner.new('KEY', 'secret') }
+        let(:signer) { Core::DefaultSigner.new('KEY', 'secret') }
 
         before(:each) do
           signer.stub(:sign).and_return('SIGNATURE')

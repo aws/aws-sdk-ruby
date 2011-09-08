@@ -11,20 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/configured_xml_grammars'
-require 'aws/ignore_result_element'
-
 module AWS
   class SQS
-    class Client < BaseClient
+    class Client < Core::Client
 
       # @private
       module XML
 
-        include ConfiguredXmlGrammars
-        extend IgnoreResultElement
+        include Core::ConfiguredXmlGrammars
+        extend Core::IgnoreResultElement
 
-        BaseError = XmlGrammar.customize do
+        BaseError = Core::XmlGrammar.customize do
           element("Error") { ignore }
         end
 

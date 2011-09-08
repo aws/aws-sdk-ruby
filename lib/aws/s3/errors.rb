@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/lazy_error_classes'
-require 'aws/s3/client/xml'
-
 module AWS
   class S3
 
@@ -34,14 +31,11 @@ module AWS
     # @private
     module Errors
 
-      BASE_ERROR_GRAMMAR = Client::XML::Error
-
-      include LazyErrorClasses
-
       # This error is special, because S3 does not (and must not
       # according to RFC 2616) return a body with the HTTP response.
       # The interface is the same as for any other client error.
       class NotModified < AWS::Errors::Base
+
         include AWS::Errors::ClientError
 
         def code; "NotModified"; end
@@ -56,6 +50,7 @@ module AWS
       # the HTTP response.  The interface is the same as for any other
       # client error.
       class NoSuchKey < AWS::Errors::Base
+
         include AWS::Errors::ClientError
 
         def code; "NoSuchKey"; end
@@ -65,6 +60,10 @@ module AWS
         end
 
       end
+
+      BASE_ERROR_GRAMMAR = Client::XML::Error
+
+      include Core::LazyErrorClasses
 
     end
   end

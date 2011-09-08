@@ -19,7 +19,7 @@ tasks_dir = File.join(root, "tasks")
 $:.unshift(tasks_dir)
 $:.unshift(File.join(root, "lib"))
 
-require 'aws/common' # for the version number
+require 'aws/core' # for the version number
 
 Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file

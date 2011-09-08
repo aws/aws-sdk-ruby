@@ -11,21 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/simple_db/item'
-require 'aws/simple_db/item_data'
-require 'aws/simple_db/consistent_read_option'
-
-# for 1.8.6
-require 'enumerator'
-
 module AWS
   class SimpleDB
 
     # Represents a collection of items in a SimpleDB domain.
     class ItemCollection
 
-      include Model
+      include Core::Model
       include Enumerable
       include ConsistentReadOption
 
@@ -107,7 +99,9 @@ module AWS
       # @return [nil]
       def each options = {}, &block
 
-        return if handle_query_options(:each, options, &block)
+        handle_query_options(options) do |c, opts|
+          return c.each(opts, &block)
+        end
 
         if attributes = options.delete(:select)
           return select(attributes, options, &block)
@@ -185,12 +179,14 @@ module AWS
 
         args = attributes + [options]
 
-        return if handle_query_options(:select, *args, &block)
+        handle_query_options(*args) do |c, *clean_args|
+          return c.select(*clean_args, &block)
+        end
 
         unless block_given?
           return Enumerator.new(self, :select, *args)
         end
-  
+
         if attributes.empty?
           output_list = '*'
         #elsif attributes == ['*']
@@ -238,7 +234,9 @@ module AWS
       #   items to fetch from SimpleDB.  More than one request may be
       #   required to satisfy the limit.
       def count options = {}, &block
-        return if handle_query_options(:count, options, &block)
+        handle_query_options(options) do |c, opts|
+          return c.count(opts, &block)
+        end
 
         options = options.merge(:output_list => "count(*)")
 
@@ -403,17 +401,18 @@ module AWS
       # turns e.g. each(:where => 'foo', ...) into where('foo').each(...)
       # @private
       protected
-      def handle_query_options(method, *args, &block)
+      def handle_query_options(*args)
         options = args.pop if args.last.kind_of?(Hash)
-        if query_option = (options.keys & [:where, :order, :limit]).first
-          option_args = options[query_option]
-          option_args = [option_args] unless option_args.kind_of?(Array)
-          options.delete(query_option)
-          send(query_option, *option_args).
-            send(method, *(args + [options]), &block)
-          true
-        else
-          false
+        if query_options = options.keys & [:where, :order, :limit] and
+            !query_options.empty?
+          c = self
+          query_options.each do |query_option|
+            option_args = options[query_option]
+            option_args = [option_args] unless option_args.kind_of?(Array)
+            options.delete(query_option)
+            c = send(query_option, *option_args)
+          end
+          yield(c, *(args + [options]))
         end
       end
 

@@ -17,9 +17,9 @@ module AWS
   class S3
     describe ObjectVersionCollection do
 
-      let(:client) { double("s3-client") }
+      let(:config) { stub_config }
 
-      let(:config) { Configuration.new(:s3_client => client) }
+      let(:client) { config.s3_client }
 
       let(:bucket) { Bucket.new('foo', :config => config) }
 

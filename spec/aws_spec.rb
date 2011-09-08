@@ -19,7 +19,7 @@ describe AWS do
   context '#config' do
 
     it 'should return a configuration object' do
-      AWS.config.should be_a(AWS::Configuration)
+      AWS.config.should be_a(AWS::Core::Configuration)
     end
 
     it 'should pass options through to Configuration#with' do
@@ -176,13 +176,13 @@ describe AWS do
 
   context '#resource_cache' do
     let(:method) { :resource_cache }
-    let(:cache_class) { AWS::ResourceCache }
+    let(:cache_class) { AWS::Core::ResourceCache }
     it_should_behave_like "memoization cache"
   end
 
   context '#response_cache' do
     let(:method) { :response_cache }
-    let(:cache_class) { AWS::ResponseCache }
+    let(:cache_class) { AWS::Core::ResponseCache }
     it_should_behave_like "memoization cache"
   end
 

@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/ec2/resource'
-require 'aws/ec2/tagged_item'
-require 'aws/ec2/security_group/ip_permission'
-require 'aws/ec2/security_group/ip_permission_collection'
-
 module AWS
   class EC2
 
@@ -28,19 +23,26 @@ module AWS
     #
     # @attr_reader [String] owner_id The security group owner's id.
     #
+    # @attr_reader [String,nil] vpc_id If this is a VPC security group, 
+    #   vpc_id is the ID of the VPC this group was created in.
+    #   Returns false otherwise.
+    #
     class SecurityGroup < Resource
+
+      AWS.register_autoloads(self, 'aws/ec2/security_group') do
+        autoload :IpPermission,                 'ip_permission'
+        autoload :IpPermissionCollection,       'ip_permission_collection'
+        autoload :EgressIpPermissionCollection, 'egress_ip_permission_collection'
+      end
 
       include TaggedItem
 
       def initialize id, options = {}
         @id = id
-        @name = options[:name]
-        @description = options[:description]
-        @owner_id = options[:owner_id]
         super
       end
 
-      # @return [String] The id of the security group.
+      # @return [String] The ID of the security group.
       attr_reader :id
 
       alias_method :group_id, :id
@@ -49,9 +51,13 @@ module AWS
 
       attribute :owner_id, :static => true
 
+      attribute :vpc_id, :static => true
+
       attribute :description, :as => :group_description, :static => true
 
       attribute :ip_permissions_list, :as => :ip_permissions
+
+      attribute :ip_permissions_list_egress, :as => :ip_permissions_egress
 
       populates_from(:describe_security_groups) do |resp|
         resp.security_group_index[id]
@@ -64,11 +70,29 @@ module AWS
         ]).security_group_index.key?(id)
       end
 
+      # Returns true if this security group is a VPC security group and 
+      # not an EC2 security group.  VPC security groups belong to a VPC
+      # subnet and can have egress rules.
+      # @return [Boolean] Returns true if this is a VPC security group and 
+      #   false if this is an EC2 security group.
+      def vpc?
+        vpc_id ? true : false
+      end
+
       # @return [SecurityGroup::IpPermissionCollection] Returns a
       #   collection of {IpPermission} objects that represents all of
-      #   the permissions this security group has authorizations for.
-      def ip_permissions
+      #   the (ingress) permissions this security group has 
+      #   authorizations for.
+      def ingress_ip_permissions
         IpPermissionCollection.new(self, :config => config)
+      end
+      alias_method :ip_permissions, :ingress_ip_permissions
+
+      # @return [SecurityGroup::EgressIpPermissionCollection] Returns a
+      #   collection of {IpPermission} objects that represents all of
+      #   the egress permissions this security group has authorizations for.
+      def egress_ip_permissions
+        EgressIpPermissionCollection.new(self, :config => config)
       end
 
       # Adds ingress rules for ICMP pings.  Defaults to 0.0.0.0/0 for 
@@ -81,6 +105,8 @@ module AWS
       #
       # @param [String] ip_ranges One or more IP ranges to allow ping from.
       #   Defaults to 0.0.0.0/0
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
       def allow_ping *sources
         sources << '0.0.0.0/0' if sources.empty?
         authorize_ingress('icmp', -1, *sources)
@@ -91,48 +117,52 @@ module AWS
       #
       # @param [String] ip_ranges One or more IP ranges to allow ping from.
       #   Defaults to 0.0.0.0/0
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
       def disallow_ping *sources
         sources << '0.0.0.0/0' if sources.empty?
         revoke_ingress('icmp', -1, *sources)
       end
 
-      # Adds an ingress rules to a security group.
-      #
-      # Each ingress exception is comprised of a protocol a port range
-      # and a list of sources.
-      # 
+      # Add an ingress rules to this security group.
+      # Ingress rules permit inbound traffic over a given protocol for
+      # a given port range from one or more souce ip addresses.
       #
       # This example grants the whole internet (0.0.0.0/0) access to port 80 
       # over TCP (HTTP web traffic).
       #
-      #   security_groups['websrv'].authorize_ingress(:tcp, 80)
-      #
-      # In the following example we grant SSH access from a list of 
-      # IP address.
-      #
-      #   security_groups['appsrv'].authorize_ingress(:tcp, 22, 
-      #     '111.111.111.111/0', '222.222.222.222/0')
-      #
-      # You can also grant privileges to other security groups. This
-      # is a convenient shortcut for granting permissions to all EC2
-      # servers in a particular security group access.
-      #
-      #   web = security_groups['httpservers']
-      #   db = security_groups['dbservers']
-      #
-      #   db.authorize_ingress(:tcp, 3306, web)
+      #   security_group.authorize_ingress(:tcp, 80)
       #
       # You can specify port ranges as well:
       #
-      #   security_groups['ftpsvr'].authorize_ingress(:tcp, 20..21)
+      #   # ftp
+      #   security_group.authorize_ingress(:tcp, 20..21)
       #
-      # You can even mix and match IP address and security groups.
+      # In the following example allow incoming SSH from a list of 
+      # IP address.
+      #
+      #   security_group.authorize_ingress(:tcp, 22, 
+      #     '111.111.111.111/0', '222.222.222.222/0')
+      #
+      # You can also pass another security group as an ingress source.
+      # Allows traffic through that originates from EC2 instances inside
+      # the given security group.
+      #
+      #   web = security_groups.create('webservers')
+      #   db = security_groups.create('database')
+      #
+      #   # allows ec2 instances in the webservers security group to make
+      #   # tcp requests via port 3306 to instances in the database 
+      #   # security group
+      #   db.authorize_ingress(:tcp, 3306, web)
+      #
+      # You can even mix and match IP address and security group sources.
       #
       # @param [String, Symbol] protocol Should be :tcp, :udp or :icmp
       #   or the string equivalent.
       #
       # @param [Integer, Range] ports The port (or port range) to allow
-      #   ingress traffic over.  You can pass a single integer (like 80) 
+      #   traffic through.  You can pass a single integer (like 80) 
       #   or a range (like 20..21).
       #
       # @param [Mixed] sources One or more CIDR IP addresses,
@@ -142,23 +172,81 @@ module AWS
       #   user id should be the owner_id (account id) of the security
       #   group.
       #
-      # @return [nil]
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
+      #
       def authorize_ingress protocol, ports, *sources
-        permissions = format_permission(protocol, ports, sources)
-        client.authorize_security_group_ingress(
-          :group_id => id,
-          :ip_permissions => permissions)
-        nil
+        parse_ingress_sources(sources) do |options|
+          permission = IpPermission.new(self, protocol, ports, options)
+          permission.authorize
+          permission
+        end
       end
 
-      # @param see #authorize_ingress
-      # @return [nil]
+      # Revokes an ingress (inbound) ip permission.  This is the inverse 
+      # operation to {#authorize_ingress}.  See {#authorize_ingress}
+      # for param and option documentation.
+      # @see #authorize_ingress
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
       def revoke_ingress protocol, ports, *sources
-        permissions = format_permission(protocol, ports, sources)
-        client.revoke_security_group_ingress(
-          :group_id => id,
-          :ip_permissions => permissions)
-        nil
+        parse_ingress_sources(sources) do |options|
+          permission = IpPermission.new(self, protocol, ports, options)
+          permission.revoke
+          permission
+        end
+      end
+
+      # Authorize egress (outbound) traffic for a VPC security group.
+      # 
+      #   # allow traffic for all protocols/ports from the given sources
+      #   security_group.authorize_egress('10.0.0.0/16', '10.0.0.1/16')
+      #
+      #   # allow tcp traffic outband via port 80
+      #   security_group.authorize_egress('10.0.0.0/16',
+      #     :protocol => :tcp, :ports => 80..80)
+      # 
+      # @note Calling this method on a non-VPC security group raises an error.
+      #
+      # @overload authorize_egress(*sources, options = {})
+      #   @param [Mixed] sources One or more CIDR IP addresses,
+      #     security groups, or hashes.  Hash values should
+      #     have :group_id and :user_id keys/values.  This is useful
+      #     for when the security group belongs to another account.  The
+      #     user id should be the owner_id (account id) of the security
+      #     group.
+      #   @param [Hash] options
+      #   @option options [Symbol] :protocol (:any) The protocol to authorize
+      #     traffic for.  If this option is ommitted, all protocols are
+      #     allowed.  Defaults to the symbol +:any+.  For a complete list of
+      #     supported protocols, see 
+      #   @option options [Range<Integer>,Integer] :ports (nil) An optional
+      #     port or range of ports.  This option is required depending on
+      #     the protocal.  
+      #
+      # @param 
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
+      def authorize_egress *args
+        parse_egress_args(*args) do |protocol, ports, options|
+          permission = IpPermission.new(self, protocol, ports, options)
+          permission.authorize
+          permission
+        end
+      end
+
+      # Revokes an egress (outound) ip permission.  This is the inverse 
+      # operation to {#authorize_egress}.  See {#authorize_egress}
+      # for param and option documentation.
+      # @see #authorize_egress
+      # @return [IpPermission] Returns an IpPermission object that was added
+      #   to this security group.
+      def revoke_egress *args
+        parse_egress_args(*args) do |protocol, ports, options|
+          permission = IpPermission.new(self, protocol, ports, options)
+          permission.revoke
+          permission
+        end
       end
 
       # Deletes this security group. 
@@ -193,58 +281,102 @@ module AWS
 
       # @private
       protected
-      def find_in_response(resp)
-        resp.security_group_index[id]
+      def parse_ingress_sources sources
+
+        ips, groups = parse_sources(sources)
+
+        options = {}
+        options[:ip_ranges] = ips unless ips.empty?
+        options[:groups] = groups unless groups.empty?
+        options[:egress] = false
+
+        yield(options)
+
       end
 
       # @private
       protected
-      def format_permission protocol, ports, sources
+      def parse_egress_args *args, &block
+        ensure_vpc do
 
-        permission = {}
-        permission[:ip_protocol] = protocol.to_s.downcase
-        permission[:from_port] = Array(ports).first.to_i
-        permission[:to_port] = Array(ports).last.to_i
+          last = args.last
+          
+          if last.is_a?(Hash) and (last.key?(:protocol) or last.key?(:ports))
+            # hashes at the end of egress methods could be a hash intedned
+            # to be a source, like:
+            #
+            #   { :group_id => ..., :user_id => ... }
+            #
+            options = args.pop
+          else
+            options = {}
+          end
 
-        ip_ranges = []
+          protocol = options[:protocol] || :any
+
+          ports = options[:ports]
+
+          ips, groups = parse_sources(args)
+
+          options[:ip_ranges] = ips unless ips.empty?
+          options[:groups] = groups unless groups.empty?
+          options[:egress] = true
+
+          yield(protocol, ports, options)
+
+        end
+      end
+
+      # @private
+      protected
+      def parse_sources sources
+
+        ips = []
         groups = []
 
-        # default to 0.0.0.0/0
-        sources << '0.0.0.0/0' if sources.empty?
+        sources.each do |source|
+          case source
+          when String then ips << source
+          when SecurityGroup then groups << source
+          when Hash
+            if source.has_key?(:group_id) and source.has_key?(:user_id)
 
-        sources.each do |where|
-          case where 
+              group = SecurityGroup.new(source[:group_id],
+                :owner_id => source[:user_id],
+                :config => config)
 
-          when String 
-            ip_ranges << where
+              groups << group
 
-          when SecurityGroup
-            groups << {:group_id => where.id, :user_id => where.owner_id}
-
-          when Hash 
-            if where.has_key?(:group_id) and where.has_key?(:user_id)
-              groups << where
             else
-              raise ArgumentError, 'invalid ingress ip permission, hashes ' +
-               'must have :group_id and :user_id key/values'
+              raise ArgumentError, 'invalid ip permission hash, ' +
+                'must provide :group_id and :user_id'
             end
+
           else
             raise ArgumentError, 'invalid ingress ip permission, ' +
               'expected CIDR IP addres or SecurityGroup'
           end
         end
 
-        unless ip_ranges.empty?
-          permission[:ip_ranges] = ip_ranges.collect{|ip| { :cidr_ip => ip } }
-        end
+        ips << '0.0.0.0/0' if ips.empty? and groups.empty?
 
-        unless groups.empty?
-          permission[:user_id_group_pairs] = groups
-        end
-
-        [permission]
-
+        [ips, groups]
+        
       end
+
+      # @private
+      protected
+      def ensure_vpc &block
+        raise 'operation permitted for VPC security groups only' unless vpc?
+        yield
+      end
+
+      # @private
+      protected
+      def find_in_response(resp)
+        resp.security_group_index[id]
+      end
+
     end
   end
 end

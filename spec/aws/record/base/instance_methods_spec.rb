@@ -89,7 +89,7 @@ module AWS
   
             it 'returns a hash that provides indifferent access' do
               obj = klass.new  
-              obj.attributes.should be_an(IndifferentHash)
+              obj.attributes.should be_an(Core::IndifferentHash)
             end
     
           end

@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/errors'
-
 module AWS
   class S3
 
@@ -24,7 +21,7 @@ module AWS
     # object.
     class ObjectVersion
 
-      include Model
+      include Core::Model
 
       # @param [S3Object] object The object this is a version of.
       # @param [String] version_id The unique id for this version.

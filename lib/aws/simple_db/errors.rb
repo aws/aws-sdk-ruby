@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/lazy_error_classes'
-require 'aws/simple_db/client/xml'
-
 module AWS
   class SimpleDB
 
@@ -39,7 +36,7 @@ module AWS
     # @private
     module Errors
       BASE_ERROR_GRAMMAR = Client::XML::BaseError
-      include LazyErrorClasses
+      include Core::LazyErrorClasses
     end
 
   end

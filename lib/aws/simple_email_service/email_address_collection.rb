@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class SimpleEmailService
 
     # Helps you manage your verified SimpleEmailService email addresses.
     class EmailAddressCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # Requets for an email address to be verified.  An email will be

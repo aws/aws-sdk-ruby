@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/lazy_error_classes'
-require 'aws/ec2/client/xml'
-
 module AWS
   class EC2
 
@@ -22,7 +19,7 @@ module AWS
 
       BASE_ERROR_GRAMMAR = Client::XML::BaseError
 
-      include LazyErrorClasses
+      include Core::LazyErrorClasses
 
     end
   end

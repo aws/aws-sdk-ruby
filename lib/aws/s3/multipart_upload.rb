@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/uploaded_part'
-require 'aws/s3/uploaded_part_collection'
 require 'thread'
 
 module AWS
@@ -24,7 +21,7 @@ module AWS
     # multipart upload.
     class MultipartUpload
 
-      include Model
+      include Core::Model
 
       # @private
       def initialize(object, id, options = {})

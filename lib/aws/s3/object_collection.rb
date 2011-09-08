@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/s3_object'
-require 'aws/s3/prefix_and_delimiter_collection'
-
 module AWS
   class S3
 
@@ -62,7 +58,7 @@ module AWS
     #
     class ObjectCollection
 
-      include Model
+      include Core::Model
       include Enumerable
       include PrefixAndDelimiterCollection
 
