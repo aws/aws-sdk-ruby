@@ -75,6 +75,12 @@ module AWS
               end
             end
           end
+
+          module ::ActiveSupport
+            def self.on_load(name, options = {}, &block)
+              ::ActionMailer::Base.instance_eval &block
+            end
+          end
   
         end
   
@@ -86,6 +92,12 @@ module AWS
         it 'adds an :amazon_ses delivery method' do
           ActionMailer::Base.should_receive(:add_delivery_method).
             with(:amazon_ses, AWS::SimpleEmailService, {})
+          AWS::Rails.add_action_mailer_delivery_method
+        end
+
+        it 'uses an ActiveSupport lazy load hook' do
+          ActiveSupport.should_receive(:on_load).
+            with(:action_mailer)
           AWS::Rails.add_action_mailer_delivery_method
         end
   
