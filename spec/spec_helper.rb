@@ -15,9 +15,18 @@ $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
 require 'rspec'
 
+require 'aws'
+require 'aws/ec2'
+require 'aws/s3'
+require 'aws/simple_db'
+require 'aws/sns'
+require 'aws/sqs'
+require 'aws/iam'
+require 'aws/sts'
+require 'aws/simple_email_service'
+
 # require all _examples.rb files in spec/shared/
 Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file
 end
 
-require 'aws'
