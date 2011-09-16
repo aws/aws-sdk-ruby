@@ -11,19 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/base_client'
-require 'aws/configured_client_methods'
-require 'aws/sts/request'
-require 'aws/sts/client/xml'
-require 'aws/sts/errors'
-
 module AWS
   class STS
 
     # @private
-    class Client < BaseClient
+    class Client < Core::Client
 
-      include ConfiguredClientMethods
+      AWS.register_autoloads(self) do
+        autoload :XML, 'xml'
+      end
+
+      include Core::ConfiguredClientMethods
 
       API_VERSION = '2011-06-15'
 

@@ -11,54 +11,29 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-# AWS is the root module for all of the Amazon Web Services.  It is also 
-# where you can configure you access to AWS.  
-#
-# = Supported Services
-#
-# The currently supported services are:
-#
-# * {EC2}
-# * {S3}
-# * {SimpleDB}
-# * {SimpleEmailService}
-# * {SNS}
-# * {SQS}
-#
-# = AWS::Record
-#
-# In addition to the above services, bundled is an ORM based on AWS services
-# See {AWS::Record} for more information.
-#
-# = Configuration
-#
-# You call {AWS.config} with a hash of options to configure your 
-# access to the Amazon Web Services.  
-#
-# At a minimum you need to set your access credentials. See {AWS.config} 
-# for additional configuration options.
-#
-#    AWS.config(
-#      :access_key_id => 'ACCESS_KEY_ID',
-#      :secret_access_key => 'SECRET_ACCESS_KEY') 
-#
-# == Rails
-# 
-# If you are loading AWS inside a Rails web application, place your
-# configuration inside:
-#
-#   config/initializers/aws.rb
-#
-module AWS; end
+require 'aws/core'
 
-require 'aws/common'
-require 'aws/ec2'
-require 'aws/s3'
-require 'aws/simple_db'
-require 'aws/sns'
-require 'aws/sqs'
-require 'aws/iam'
-require 'aws/sts'
-require 'aws/simple_email_service'
-require 'aws/record'
+require 'aws/ec2/config'
+require 'aws/iam/config'
+require 'aws/s3/config'
+require 'aws/simple_db/config'
+require 'aws/simple_email_service/config'
+require 'aws/sns/config'
+require 'aws/sqs/config'
+require 'aws/sts/config'
+
+module AWS
+  register_autoloads(self) do
+    autoload :EC2, 'ec2'
+    autoload :IAM, 'iam'
+    autoload :S3, 's3'
+    autoload :SimpleDB, 'simple_db'
+    autoload :SimpleEmailService, 'simple_email_service'
+    autoload :SNS, 'sns'
+    autoload :SQS, 'sqs'
+    autoload :STS, 'sts'
+    autoload :Record, 'record'
+  end
+end
+
 require 'aws/rails'

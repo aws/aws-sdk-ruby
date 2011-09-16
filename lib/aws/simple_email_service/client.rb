@@ -11,20 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/base_client'
-require 'aws/configured_client_methods'
-require 'aws/simple_email_service/request'
-require 'aws/simple_email_service/client/options'
-require 'aws/simple_email_service/client/xml'
-require 'aws/simple_email_service/errors'
-
 module AWS
   class SimpleEmailService
 
     # @private
-    class Client < BaseClient
+    class Client < Core::Client
 
-      include ConfiguredClientMethods
+      AWS.register_autoloads(self, 'aws/simple_email_service/client') do
+        autoload :Options, 'options'
+        autoload :XML,     'xml'
+      end
+
+      include Core::ConfiguredClientMethods
 
       API_VERSION = '2010-12-01'
 

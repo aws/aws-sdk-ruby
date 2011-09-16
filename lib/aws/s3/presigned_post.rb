@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/request'
 require 'uri'
 require 'base64'
 require 'time'
@@ -52,7 +50,7 @@ module AWS
     #  bucket.presigned_post.where(:key).starts_with("photos/")
     class PresignedPost
 
-      include Model
+      include Core::Model
 
       # @return [Bucket] The bucket to which data can be uploaded
       #   using the form fields

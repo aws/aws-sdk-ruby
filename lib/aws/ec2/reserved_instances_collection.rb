@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/ec2/collection'
-require 'aws/ec2/reserved_instances'
-require 'aws/ec2/tagged_collection'
-
 module AWS
   class EC2
     class ReservedInstancesCollection < Collection

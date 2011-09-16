@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class SQS
 
     # Represents a message received from an Amazon SQS Queue.
     class ReceivedMessage
 
-      include Model
+      include Core::Model
 
       # @return [Queue] The queue from which this message was
       #   received.

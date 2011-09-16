@@ -219,6 +219,74 @@ module AWS
 
           end
 
+          context ':subnet' do
+
+            it 'defaults to not sending subnet id' do
+
+              client.should_receive(:run_instances).with do |opts|
+                opts.keys.should_not include(:subnet_id)
+                hash_including(:image_id => 'ami-123')
+              end.and_return(resp)
+
+              collection.create(:image_id => "ami-123")
+
+            end
+
+            it 'passes :subnet as :subnet_id' do
+
+              client.should_receive(:run_instances).
+                with(hash_including(:subnet_id => 'subnet-id')).
+                and_return(resp)
+
+              collection.create(
+                :image_id => "ami-123",
+                :subnet => 'subnet-id')
+
+            end
+
+          end
+
+          context ':private_ip_address' do
+
+            it 'passes :private_ip_address through unmodified' do
+
+              client.should_receive(:run_instances).
+                with(hash_including(:private_ip_address => '1.2.3.4')).
+                and_return(resp)
+
+              collection.create(
+                :image_id => "ami-123",
+                :private_ip_address => '1.2.3.4')
+            end
+
+          end
+
+          context ':dedicated_tenancy' do
+
+            it 'should send Placement.Tenancy' do
+
+              client.should_receive(:run_instances).
+                with(hash_including(:placement => { :tenancy => "dedicated" })).
+                and_return(resp)
+
+              collection.create(
+                :image_id => "ami-123", 
+                :dedicated_tenancy => true)
+            end
+
+            it 'should accept tenancy with an availability zone' do
+              client.should_receive(:run_instances).
+                with(hash_including(:placement => { 
+                  :tenancy => "dedicated",
+                  :availability_zone => "us-east-1a" 
+                })).and_return(resp)
+              collection.create(:image_id => "ami-123",
+                :availability_zone => AvailabilityZone.new("us-east-1a"),
+                :dedicated_tenancy => true)
+            end
+
+          end
+
           context 'availability zone' do
 
             it 'should send Placement.AvailabilityZone' do
@@ -256,71 +324,117 @@ module AWS
 
           context 'security groups' do
 
-            context 'valid values' do
+            def run_instance options = {}
+              collection.create(options.merge(:image_id => 'ami-123'))
+            end
 
-              before(:each) do
-                client.should_receive(:run_instances).
-                  with(hash_including(:security_groups =>
-                                      group_ids)).
-                  and_return(resp)
+            def should_receive_sg_names *names
+              client.should_receive(:run_instances).
+                with(hash_including(:security_groups => names)).
+                and_return(resp)
+            end
+
+            def should_receive_sg_ids *ids
+              client.should_receive(:run_instances).
+                with(hash_including(:security_group_ids => ids)).
+                and_return(resp)
+            end
+
+            context 'non-vpc' do
+              
+              it 'accepts singular ids' do
+                should_receive_sg_ids('sg-123')
+                run_instance(:security_group_ids => 'sg-123')
               end
 
-              context 'strings' do
+              it 'accepts multiple ids' do
+                should_receive_sg_ids('sg-123', 'sg-234')
+                run_instance(:security_group_ids => ['sg-123', 'sg-234'])
+              end
 
-                let(:group_ids) { ["one", "two"] }
+              it 'accepts singular names' do
+                should_receive_sg_names('abc')
+                run_instance(:security_groups => 'abc')
+              end
 
-                it 'should pass them through' do
-                  collection.create(:image_id => "ami-123",
-                                    :security_groups => ["one", "two"])
-                end
+              it 'accepts multiple names' do
+                should_receive_sg_names('abc', 'xyz')
+                run_instance(:security_groups => ['abc', 'xyz'])
+              end
+
+              it 'accepts singular security group objects' do
+                group = SecurityGroup.new('sg-id')
+                should_receive_sg_ids('sg-id')
+                run_instance(:security_groups => group)
+              end
+
+              it 'accepts multiple security group objects' do
+                g1 = SecurityGroup.new('sg-id1')
+                g2 = SecurityGroup.new('sg-id2')
+                should_receive_sg_ids('sg-id1', 'sg-id2')
+                run_instance(:security_groups => [g1, g2])
+              end
+
+              it 'accepts mixed ids, names and security groups objects' do
+
+                client.should_receive(:run_instances).with(hash_including(
+                  :security_groups => ['group2'],
+                  :security_group_ids => ['sg-id3', 'sg-id1']
+                )).and_return(resp)
+
+                group = SecurityGroup.new('sg-id1')
+
+                run_instance(
+                  :security_groups => [group, 'group2'],
+                  :security_group_ids => 'sg-id3')
 
               end
 
-              context 'single string' do
-
-                let(:group_ids) { ["one"] }
-
-                it 'should convert it to an array' do
-                  collection.create(:image_id => "ami-123",
-                                    :security_groups => "one")
-                end
-
-              end
-
-              context 'single group object' do
-
-                let(:group_ids) { ["one"] }
-
-                it 'should put the name in an array' do
-                  group = SecurityGroup.new("foo",
-                                            :name => "one",
-                                            :config => config)
-                  collection.create(:image_id => "ami-123",
-                                    :security_groups => group)
-                end
-
+              it 'rejects invalid values' do
+                lambda {
+                  run_instance(:security_groups => :abc)
+                }.should raise_error(ArgumentError)
               end
 
             end
 
-            context 'invalid array member' do
+            context 'vpc' do
 
-              it 'should raise an argument error' do
-                lambda do
-                  collection.create(:image_id => "ami-123",
-                                    :security_groups => [:foo])
-                end.should raise_error(ArgumentError, /security_groups/)
+              it 'accepts singular ids' do
+                should_receive_sg_ids('id')
+                run_instance(:subnet_id => 's', :security_group_ids => 'id')
               end
 
-            end
+              it 'accepts multiple ids' do
+                should_receive_sg_ids('id1', 'id2')
+                run_instance(:subnet_id => 's', :security_group_ids => %w(id1 id2))
+              end
 
-            context 'invalid single value' do
+              it 'accepts security group objects' do
+                g1 = SecurityGroup.new('sg-id1')
+                g2 = SecurityGroup.new('sg-id2')
+                should_receive_sg_ids('sg-id1', 'sg-id2')
+                run_instance(:subnet_id => 's', 
+                  :security_groups => [g1, g2])
+              end
 
-              it 'should raise an argument error' do
-                lambda do
-                  collection.create(:image_id => "ami-123",
-                                    :security_groups => :foo)
-                end.should raise_error(ArgumentError, /security_groups/)
+              it 'converts names into ids' do
+
+                sg_collection = double('sg-collection')
+
+                sg_collection.should_receive(:filter).
+                  with('group-name', ['name1', 'name2']).
+                  and_return([
+                    SecurityGroup.new('sg-id1'), 
+                    SecurityGroup.new('sg-id2')])
+                
+                EC2.stub_chain(:new, :security_groups).and_return(sg_collection)
+
+                should_receive_sg_ids('sg-id1', 'sg-id2')
+
+                run_instance(:subnet_id => 's', 
+                  :security_groups => %w(name1 name2))
+
               end
 
             end

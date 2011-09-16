@@ -11,19 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/base_client'
-require 'aws/configured_client_methods'
-require 'aws/iam/request'
-require 'aws/iam/client/xml'
-require 'aws/iam/errors'
-
 module AWS
   class IAM
 
     # @private
-    class Client < BaseClient
+    class Client < Core::Client
+
+      AWS.register_autoloads(self) do
+        autoload :XML, 'xml'
+      end
       
-      include ConfiguredClientMethods
+      include Core::ConfiguredClientMethods
 
       API_VERSION = '2010-05-08'
 

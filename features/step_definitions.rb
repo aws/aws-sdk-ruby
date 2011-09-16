@@ -225,8 +225,7 @@ end
 
 Given /^I have an HTTP proxy running on localhost$/ do
   require 'webrick/httpproxy'
-  @proxy = WEBrick::HTTPProxyServer.new(:BindAddress => "127.0.0.1",
-                                        :Port => 0)
+  @proxy = WEBrick::HTTPProxyServer.new(:BindAddress => "127.0.0.1", :Port => 0)
   @proxy_thread = Thread.new do
     @proxy.start
   end

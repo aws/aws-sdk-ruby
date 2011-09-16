@@ -11,12 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/tree/parent'
-require 'aws/s3/tree/leaf_node'
-require 'aws/s3/tree/branch_node'
-require 'aws/s3/tree/child_collection'
-
 module AWS
   class S3
 
@@ -82,6 +76,14 @@ module AWS
     # type of object depending on which kind of collection the tree is
     # using.
     class Tree
+
+      AWS.register_autoloads(self) do
+        autoload :BranchNode, 'branch_node'
+        autoload :ChildCollection, 'child_collection'
+        autoload :LeafNode, 'leaf_node'
+        autoload :Node, 'node'
+        autoload :Parent, 'parent'
+      end
 
       include Parent
 

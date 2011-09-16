@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class SimpleDB
 
@@ -37,7 +35,7 @@ module AWS
     # 
     class DomainMetadata
 
-      include Model
+      include Core::Model
 
       # @private
       ATTRIBUTES = [

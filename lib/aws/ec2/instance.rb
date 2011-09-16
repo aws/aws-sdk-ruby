@@ -11,14 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/inflection'
-require 'aws/ec2/tagged_item'
-require 'aws/model'
-require 'aws/cacheable'
-require 'aws/ec2/resource'
-require 'aws/ec2/key_pair'
-require 'aws/ec2/image'
-
 module AWS
   class EC2
 
@@ -146,6 +138,12 @@ module AWS
     # @attr_reader [String] client_token Idempotency token you
     #   provided when you launched the instance.
     #
+    # @attr_reader [String,nil] vpc_id Instances launched in a VPC have
+    #   a vpc_id.  Normal EC2 instances return nil.
+    #
+    # @attr_reader [String,nil] subnet_id Instances launched in a VPC have
+    #   a subnet_id.  Normal EC2 instances return nil.
+    #
     class Instance < Resource
 
       include TaggedItem
@@ -234,6 +232,7 @@ module AWS
       describe_call_attribute :root_device_name, :static => true
 
       describe_call_attribute :block_device_mapping
+
       protected :block_device_mapping
       
       describe_call_attribute :instance_lifecycle, :to_sym => true
@@ -255,6 +254,10 @@ module AWS
       describe_call_attribute :image_id
 
       describe_call_attribute :key_name, :static => true
+
+      describe_call_attribute :vpc_id, :static => true
+
+      describe_call_attribute :subnet_id, :static => true
 
       attribute :status do
         translates_output{|state| state.name.tr("-","_").to_sym }
@@ -315,7 +318,7 @@ module AWS
       # them is returned per :describe_instance_attribute call.
       mutable_describe_attributes.values.each do |attr|
 
-        attr_opt_name = Inflection.class_name(attr.get_as.to_s)
+        attr_opt_name = Core::Inflection.class_name(attr.get_as.to_s)
         attr_opt_name = attr_opt_name[0,1].downcase + attr_opt_name[1..-1]
 
         provider(:describe_instance_attribute) do |provider|
@@ -407,6 +410,17 @@ module AWS
       def availability_zone
         if p = placement
           p.availability_zone
+        end
+      end
+
+      # @return [Boolean] Returns true if the instance has dedicated tenancy.
+      #   This will be false for all non-VPC instances.  Dedicated Tenancy
+      #   comes at extra cost.
+      def dedicated_tenancy?
+        if p = placement
+          p.tenancy == 'dedicated'
+        else
+          false
         end
       end
 

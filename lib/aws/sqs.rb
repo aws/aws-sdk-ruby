@@ -11,10 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/sqs/client'
-require 'aws/sqs/queue_collection'
+require 'aws/core'
+require 'aws/sqs/config'
 
 module AWS
 
@@ -57,7 +55,18 @@ module AWS
   #
   class SQS
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :Client,             'client'
+      autoload :Errors,             'errors'
+      autoload :Queue,              'queue'
+      autoload :QueueCollection,    'queue_collection'
+      autoload :Policy,             'policy'
+      autoload :ReceivedMessage,    'received_message'
+      autoload :ReceivedSNSMessage, 'received_sns_message'
+      autoload :Request,            'request'
+    end
+
+    include Core::ServiceInterface
 
     # @return [QueueCollection] The collection of all {Queue}
     #   objects in your account.

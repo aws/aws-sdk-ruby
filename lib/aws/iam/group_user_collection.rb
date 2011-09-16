@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/collections'
-require 'aws/iam/user'
-
 module AWS
   class IAM
 
@@ -25,7 +22,7 @@ module AWS
     #   users.each { |u| puts u.name }
     class GroupUserCollection
 
-      include Collections::Basic
+      include Core::Collections::Basic
 
       # @attr_reader [Group] The group.
       attr_reader :group

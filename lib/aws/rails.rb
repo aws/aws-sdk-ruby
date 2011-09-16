@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws'
+require 'yaml'
 
 module AWS
 
@@ -152,11 +152,12 @@ module AWS
     # @return [nil]
     def self.add_action_mailer_delivery_method name = :amazon_ses, options = {}
 
-      amb = ::ActionMailer::Base
-
       if ::Rails.version.to_f >= 3
-        amb.add_delivery_method(name, AWS::SimpleEmailService, options)
+        ActiveSupport.on_load(:action_mailer) do
+          self.add_delivery_method(name, AWS::SimpleEmailService, options)
+        end
       else
+        amb = ::ActionMailer::Base
         amb.send(:define_method, "perform_delivery_#{name}") do |mail|
           AWS::SimpleEmailService.new(options).send_raw_email(mail)
         end

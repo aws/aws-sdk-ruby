@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/s3/tree/node'
-require 'aws/s3/s3_object'
-require 'aws/s3/object_version'
-require 'aws/s3/multipart_upload'
-
 module AWS
   class S3
     class Tree

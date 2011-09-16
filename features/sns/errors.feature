@@ -25,6 +25,6 @@ Feature: Modeled exceptions
     Then I should rescue the error with code "<code>"
 
   Examples:
-    | class                         | code                       |
-    | SNS::Errors::InvalidParameter | InvalidParameter           |
+    | class                         | code             |
+    | SNS::Errors::InvalidParameter | InvalidParameter |
     | Errors::ClientError           | InvalidParameter |

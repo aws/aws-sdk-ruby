@@ -11,19 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/s3/request'
-require 'aws/http/response'
-require 'aws/base_client'
-require 'aws/s3/errors'
-require 'aws/s3/data_options'
-require 'aws/uri_escape'
-require 'aws/s3/access_control_list'
-require 'aws/s3/policy'
-require 'aws/s3/client/xml'
+require 'rexml/document'
 require 'pathname'
 require 'stringio'
 require 'json'
-require 'rexml/document'
 
 module AWS
   class S3
@@ -73,7 +64,11 @@ module AWS
     #     response.on_success { p response.buckets.map(&:name) }
     #
     # @private
-    class Client < BaseClient
+    class Client < Core::Client
+
+      AWS.register_autoloads(self) do
+        autoload :XML, 'xml'
+      end
 
       API_VERSION = '2006-03-01'
 
@@ -85,7 +80,7 @@ module AWS
       }
 
       include DataOptions
-      include UriEscape
+      include Core::UriEscape
 
       configure_client
 
@@ -211,7 +206,7 @@ module AWS
           # FIXME: this makes unit testing easier, but is there something
           # we should be doing in case of invalid JSON from the service?
           policy = Policy.from_json(resp.http_response.body) rescue nil
-          MetaUtils.extend_method(resp, :policy) { policy }
+          Core::MetaUtils.extend_method(resp, :policy) { policy }
         end
       end
 
@@ -248,7 +243,7 @@ module AWS
           regex = />(.*)<\/LocationConstraint>/
           matches = response.http_response.body.match(regex)
           location = matches ? matches[1] : nil
-          MetaUtils.extend_method(response, :location_constraint) { location }
+          Core::MetaUtils.extend_method(response, :location_constraint) { location }
         end
       end
 
@@ -463,7 +458,8 @@ module AWS
                       :content_disposition => 'Content-Disposition',
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
-                      :storage_class => 'x-amz-storage-class'
+                      :storage_class => 'x-amz-storage-class',
+                      :expires => 'Expires'
                     }) do
         configure_request do |request, options, block|
           super(request, options)
@@ -474,20 +470,20 @@ module AWS
         end
 
         process_response do |response|
-          MetaUtils.extend_method(response, :version_id) do
+          Core::MetaUtils.extend_method(response, :version_id) do
             response.http_response.header('x-amz-version-id')
           end
-          MetaUtils.extend_method(response, :etag) do
+          Core::MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
           end
-          MetaUtils.extend_method(response, :last_modified) do
+          Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
         end
 
         simulate_response do |response|
-          MetaUtils.extend_method(response, :etag) { "abc123" }
-          MetaUtils.extend_method(response, :version_id) { nil }
+          Core::MetaUtils.extend_method(response, :etag) { "abc123" }
+          Core::MetaUtils.extend_method(response, :version_id) { nil }
         end
       end
 
@@ -583,8 +579,8 @@ module AWS
         end
 
         process_response do |resp|
-          MetaUtils.extend_method(resp, :data) { resp.http_response.body }
-          MetaUtils.extend_method(resp, :version_id) do
+          Core::MetaUtils.extend_method(resp, :data) { resp.http_response.body }
+          Core::MetaUtils.extend_method(resp, :version_id) do
             http_response.header('x-amz-version-id')
           end
         end
@@ -601,7 +597,7 @@ module AWS
         process_response do |resp|
 
           # create a hash of user-supplied metadata
-          MetaUtils.extend_method(resp, :meta) do
+          Core::MetaUtils.extend_method(resp, :meta) do
             meta = {}
             resp.http_response.headers.each_pair do |name,value|
               if name =~ /^x-amz-meta-(.+)$/i
@@ -617,16 +613,16 @@ module AWS
             'content-type' => :content_type,
             'etag' => :etag,
           }.each_pair do |header,method|
-            MetaUtils.extend_method(resp, method) do
+            Core::MetaUtils.extend_method(resp, method) do
               http_response.header(header)
             end
           end
 
-          MetaUtils.extend_method(resp, :last_modified) do
+          Core::MetaUtils.extend_method(resp, :last_modified) do
             Time.parse(resp.http_response.header('Last-Modified'))
           end
 
-          MetaUtils.extend_method(resp, :content_length) do
+          Core::MetaUtils.extend_method(resp, :content_length) do
             http_response.header('content-length').to_i
           end
         end
@@ -641,7 +637,7 @@ module AWS
         end
 
         process_response do |resp|
-          MetaUtils.extend_method(resp, :version_id) do
+          Core::MetaUtils.extend_method(resp, :version_id) do
             http_response.header('x-amz-version-id')
           end
         end
@@ -667,7 +663,8 @@ module AWS
                       :content_disposition => 'Content-Disposition',
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
-                      :storage_class => 'x-amz-storage-class'
+                      :storage_class => 'x-amz-storage-class',
+                      :expires => 'Expires'
                     }) do
         configure_request do |req, options|
           super(req, options)
@@ -708,16 +705,16 @@ module AWS
         end
 
         process_response do |response|
-          MetaUtils.extend_method(response, :etag) do
+          Core::MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
           end
-          MetaUtils.extend_method(response, :last_modified) do
+          Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
         end
 
         simulate_response do |response|
-          MetaUtils.extend_method(response, :etag) { "abc123" }
+          Core::MetaUtils.extend_method(response, :etag) { "abc123" }
         end
       end
 
@@ -739,13 +736,13 @@ module AWS
         end
 
         process_response do |response|
-          MetaUtils.extend_method(response, :version_id) do
+          Core::MetaUtils.extend_method(response, :version_id) do
             response.http_response.header('x-amz-version-id')
           end
         end
 
         simulate_response do |response|
-          MetaUtils.extend_method(response, :version_id) { nil }
+          Core::MetaUtils.extend_method(response, :version_id) { nil }
         end
       end
 
@@ -807,13 +804,13 @@ module AWS
         end
 
         process_response do |response|
-          MetaUtils.extend_method(response, :version_id) do
+          Core::MetaUtils.extend_method(response, :version_id) do
             response.http_response.header('x-amz-version-id')
           end
-          MetaUtils.extend_method(response, :etag) do
+          Core::MetaUtils.extend_method(response, :etag) do
             response.http_response.header('ETag')
           end
-          MetaUtils.extend_method(response, :last_modified) do
+          Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
         end
@@ -825,7 +822,7 @@ module AWS
         (response.http_response.status >= 300 ||
          response.request_type == :complete_multipart_upload) and
           response.http_response.body and
-          XmlGrammar.parse(response.http_response.body).respond_to?(:code)
+          Core::XmlGrammar.parse(response.http_response.body).respond_to?(:code)
       end
 
       protected

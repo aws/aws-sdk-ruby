@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/sns/subscription_collection'
-
 module AWS
   class SNS
 
@@ -27,7 +24,7 @@ module AWS
     #    map(&:endpoint)
     class TopicSubscriptionCollection < SubscriptionCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # @return [Topic] The topic to which all the subscriptions

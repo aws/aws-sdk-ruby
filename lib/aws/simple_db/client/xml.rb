@@ -11,22 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/configured_xml_grammars'
-require 'aws/ignore_result_element'
-require 'aws/xml_grammar'
-
 module AWS
   class SimpleDB
-    class Client < BaseClient
+    class Client < Core::Client
 
       # @private
       module XML
 
-        include ConfiguredXmlGrammars
+        include Core::ConfiguredXmlGrammars
+        extend Core::IgnoreResultElement
 
-        extend IgnoreResultElement
-
-        BaseResponse = XmlGrammar.customize do
+        BaseResponse = Core::XmlGrammar.customize do
           element "ResponseMetadata" do
             element "BoxUsage" do
               float_value
@@ -34,7 +29,7 @@ module AWS
           end
         end
 
-        BaseError = XmlGrammar.customize do
+        BaseError = Core::XmlGrammar.customize do
           element("Errors") do
             ignore
             element("Error") do

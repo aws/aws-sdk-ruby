@@ -11,17 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/http/request'
-require 'aws/authorize_v3'
-
 module AWS
   class STS
 
     # @private
-    class Request < AWS::Http::Request
-
-      include AuthorizeV2
-
+    class Request < Core::Http::Request
+      include Core::AuthorizeV2
     end
+
   end
 end

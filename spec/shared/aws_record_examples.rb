@@ -40,7 +40,7 @@ module AWS
 
       def item_with_attributes attributes
 
-        attributes = IndifferentHash.new(attributes)
+        attributes = Core::IndifferentHash.new(attributes)
 
         item_id = attributes.delete('id') || 'item-id'
         

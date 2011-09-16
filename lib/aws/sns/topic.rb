@@ -12,18 +12,13 @@
 # language governing permissions and limitations under the License.
 
 require 'json'
-require 'aws/model'
-require 'aws/sns/policy'
-require 'aws/sns/subscription'
-require 'aws/sns/topic_subscription_collection'
-require 'aws/sqs'
 
 module AWS
   class SNS
 
     class Topic
 
-      include Model
+      include Core::Model
 
       # @param [String] arn The topic ARN.
       def initialize arn, options = {}

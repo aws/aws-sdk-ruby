@@ -11,16 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/inflection'
-require 'aws/service_interface'
-require 'aws/iam/client'
-require 'aws/iam/user_collection'
-require 'aws/iam/group_collection'
-require 'aws/iam/signing_certificate_collection'
-require 'aws/iam/server_certificate_collection'
-require 'aws/iam/account_alias_collection'
-require 'aws/iam/access_key_collection'
+require 'aws/core'
+require 'aws/iam/config'
 
 module AWS
 
@@ -142,7 +134,36 @@ module AWS
   #
   class IAM
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :AccessKey,                    'access_key'
+      autoload :AccessKeyCollection,          'access_key_collection'
+      autoload :AccountAliasCollection,       'account_alias_collection'
+      autoload :Client,                       'client'
+      autoload :Collection,                   'collection'
+      autoload :Errors,                       'errors'
+      autoload :Group,                        'group'
+      autoload :GroupCollection,              'group_collection'
+      autoload :GroupPolicyCollection,        'group_policy_collection'
+      autoload :GroupUserCollection,          'group_user_collection'
+      autoload :LoginProfile,                 'login_profile'
+      autoload :MFADevice,                    'mfa_device'
+      autoload :MFADeviceCollection,          'mfa_device_collection'
+      autoload :Policy,                       'policy'
+      autoload :PolicyCollection,             'policy_collection'
+      autoload :Request,                      'request'
+      autoload :Resource,                     'resource'
+      autoload :ServerCertificate,            'server_certificate'
+      autoload :ServerCertificateCollection,  'server_certificate_collection'
+      autoload :SigningCertificate,           'signing_certificate'
+      autoload :SigningCertificateCollection, 'signing_certificate_collection'
+      autoload :User,                         'user'
+      autoload :UserCollection,               'user_collection'
+      autoload :UserGroupCollection,          'user_group_collection'
+      autoload :UserPolicy,                   'user_policy'
+      autoload :UserPolicyCollection,         'user_policy_collection'
+    end
+
+    include Core::ServiceInterface
 
     # Returns a collection that represents all AWS users for this account:
     #
@@ -297,7 +318,7 @@ module AWS
     # @return [Hash]
     def account_summary
       client.get_account_summary.summary_map.inject({}) do |h, (k,v)|
-        h[Inflection.ruby_name(k).to_sym] = v
+        h[Core::Inflection.ruby_name(k).to_sym] = v
         h
       end
     end

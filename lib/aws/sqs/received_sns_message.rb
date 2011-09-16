@@ -11,8 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
 require 'time'
+require 'base64'
 
 module AWS
   class SQS
@@ -20,7 +20,7 @@ module AWS
     # Represents message published from an {SNS::Topic} to an {SQS::Queue}.
     class ReceivedSNSMessage
 
-      include Model
+      include Core::Model
 
       # @param [String] encoded_body The base64 encoded json string
       #   from a message published by SNS.

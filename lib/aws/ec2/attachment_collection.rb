@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/ec2/volume'
-require 'aws/ec2/instance'
-require 'aws/ec2/attachment'
-
 module AWS
   class EC2
 
@@ -25,7 +20,7 @@ module AWS
     # @see Volume
     class AttachmentCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       attr_reader :volume

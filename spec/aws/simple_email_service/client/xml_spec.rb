@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   class SimpleEmailService
-    class Client < BaseClient
+    class Client < Core::Client
 
       describe XML::ListVerifiedEmailAddresses do
 

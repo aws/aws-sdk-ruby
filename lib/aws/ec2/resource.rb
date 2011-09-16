@@ -11,13 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/resource'
-
 module AWS
   class EC2
 
     # @private
-    class Resource < AWS::Resource
+    class Resource < Core::Resource
 
       # @private
       protected
@@ -78,7 +76,7 @@ module AWS
       def describe_attribute_call(attribute)
         name = describe_attribute_call_name
 
-        attr_opt_name = Inflection.class_name(attribute.get_as.to_s)
+        attr_opt_name = Core::Inflection.class_name(attribute.get_as.to_s)
         attr_opt_name = attr_opt_name[0,1].downcase + attr_opt_name[1..-1]
 
         client.send(name, Hash[[[response_id_method.to_sym,
@@ -119,7 +117,7 @@ module AWS
 
         protected
         def inflected_name
-          Inflection.ruby_name(class_name)
+          Core::Inflection.ruby_name(class_name)
         end
 
         protected

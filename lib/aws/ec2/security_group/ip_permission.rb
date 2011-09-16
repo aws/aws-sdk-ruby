@@ -11,14 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-
 module AWS
   class EC2
     class SecurityGroup < Resource
       class IpPermission
 
-        include Model
+        include Core::Model
 
         # @param protocol [:tcp, :udp, :icmp]
         # @param port [Range,Integer] An integer or a range of integers
@@ -28,13 +26,28 @@ module AWS
         #   to grant permission to.
         # @option options [Array] :groups An array of SecurityGroup objects to
         #   grant permission to.
+        # @option options [Boolean] :egress (false) When true this IpPermission
+        #   is assumed to be an egree permission.
         def initialize security_group, protocol, ports, options = {}
+
           @security_group = security_group
-          @protocol = protocol.to_s.downcase.to_sym
-          @port_range = (Array(ports).first..Array(ports).last)
+
+          @protocol = protocol == '-1' ?  :any : protocol.to_s.downcase.to_sym
+
           @ip_ranges = Array(options[:ip_ranges])
+
           @groups = Array(options[:groups])
+
+          @egress = options[:egress]
+
+          # not all egress permissions require port ranges, depends on the
+          # protocol
+          if ports
+            @port_range = Array(ports).first.to_i..Array(ports).last.to_i
+          end
+
           super
+
         end
 
         # @return [SecurityGroup] The security group this permission is 
@@ -47,21 +60,90 @@ module AWS
         # @return [Range] The port range (e.g. 80..80, 4000..4010, etc)
         attr_reader :port_range
 
-        # @return [Array] An array if string CIDR ip addresses.
+        # @return [Array] An array of string CIDR ip addresses.
         attr_reader :ip_ranges
 
         # @return [Array] An array of security groups that have been 
         # granted access with this permission.
         attr_reader :groups
 
-        def authorize
-          sources = groups + ip_ranges
-          security_group.authorize_ingress(protocol, port_range, *sources)
+        # @return [Boolean] Returns true if this is an egress permission.
+        def egress?
+          @egress ? true : false
         end
 
+        # Authorizes this permission from its security group.
+        # @return [IpPermission] Returns self
+        def authorize
+
+          method = egress? ? 
+            :authorize_security_group_egress :
+            :authorize_security_group_ingress
+
+          client.send(method, 
+            :group_id => security_group.id,
+            :ip_permissions => [format_permission])
+
+          self
+
+        end
+
+        # Revokes this permission from its security group.
+        # @return [IpPermission] Returns self
         def revoke
-          sources = groups + ip_ranges
-          security_group.revoke_ingress(protocol, port_range, *sources)
+
+          method = egress? ? 
+            :revoke_security_group_egress :
+            :revoke_security_group_ingress
+
+          client.send(method, 
+            :group_id => security_group.id,
+            :ip_permissions => [format_permission])
+
+          self
+
+        end
+
+        # @return [Boolean] Returns true if the other IpPermission matches
+        #   this one.
+        def == other
+          other.is_a?(IpPermission) and
+          other.security_group == security_group and
+          other.protocol == protocol and
+          other.port_range == port_range and
+          other.ip_ranges == ip_ranges and
+          other.groups == groups and
+          other.egress == egress?
+        end
+
+        alias_method :eql?, :==
+
+        # @private
+        protected
+        def format_permission
+      
+          permission = {}
+
+          permission[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s
+
+          if port_range
+            permission[:from_port] = port_range.first
+            permission[:to_port] = port_range.last
+          end
+
+          unless ip_ranges.empty?
+            permission[:ip_ranges] = ip_ranges.collect{|ip| { :cidr_ip => ip } }
+          end
+
+          unless groups.empty?
+            permission[:user_id_group_pairs] = groups.inject([]) do |list,group|
+              list << { :group_id => group.id, :user_id => group.owner_id }
+              list
+            end
+          end
+
+          permission
+
         end
 
       end

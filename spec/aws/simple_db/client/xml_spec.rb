@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   class SimpleDB
-    class Client < BaseClient
+    class Client < Core::Client
       module XML
 
         describe BaseResponse do

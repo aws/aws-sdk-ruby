@@ -11,11 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/service_interface'
-require 'aws/sts/client'
-require 'aws/sts/session'
-require 'aws/sts/federated_session'
-require 'aws/sts/policy'
+require 'aws/core'
+require 'aws/sts/config'
 
 module AWS
 
@@ -42,7 +39,16 @@ module AWS
   #
   class STS
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :Client,           'client'
+      autoload :Errors,           'errors'
+      autoload :FederatedSession, 'federated_session'
+      autoload :Policy,           'policy'
+      autoload :Request,          'request'
+      autoload :Session,          'session'
+    end
+
+    include Core::ServiceInterface
 
     # Returns a set of temporary credentials for an AWS account or IAM
     # User. The credentials consist of an Access Key ID, a Secret

@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'spec_helper'
-require 'aws/errors'
 
 module AWS
   module Errors
@@ -30,7 +29,7 @@ module AWS
       end
       
       it 'should be an aws service error' do
-        error.should be_a_kind_of(AWS::Errors::Base)
+        error.should be_a_kind_of(Errors::Base)
       end
 
       it 'should have a message like the response body' do

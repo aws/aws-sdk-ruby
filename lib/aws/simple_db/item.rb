@@ -11,12 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/simple_db/item_data'
-require 'aws/simple_db/attribute_collection'
-require 'aws/simple_db/expect_condition_option'
-require 'aws/simple_db/consistent_read_option'
-
 module AWS
   class SimpleDB
 
@@ -29,7 +23,7 @@ module AWS
     #
     class Item
 
-      include Model
+      include Core::Model
       include ExpectConditionOption
       include ConsistentReadOption
 

@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/ec2/tagged_collection'
-require 'aws/ec2/collection'
-require 'aws/ec2/instance'
-require 'aws/ec2/block_device_mappings'
 require 'base64'
 require 'uuidtools'
 
@@ -72,6 +67,12 @@ module AWS
       #     }
       #   })
       #
+      # @example Launching in an Amazon VPC subnet
+      #
+      #   ec2.instances.create(
+      #     :image_id => "ami-8c1fece5",
+      #     :subnet => "subnet-abc123ef")
+      #
       # @param [Hash] options Options for new instance.  +:image_id+ is
       #   the only required option.
       #
@@ -123,10 +124,15 @@ module AWS
       #   use.  Note: Launching public images without a key pair ID
       #   will leave them inaccessible.
       #
-      # @option options [Array] :security_groups The names of the
-      #   security groups that will be used to determine network
-      #   access rules for the instances.  You may pass instances of
-      #   {SecurityGroup} as well.
+      # @option options [Array] :security_groups Security groups are used
+      #   to determine network access rules for the instances.  
+      #   +:security_groups+ can be a single value or an array of values.
+      #   Values should be group name strings or {SecurityGroup} objects.
+      #
+      # @option options [Array<String>] :security_group_ids Security groups 
+      #   are used to determine network access rules for the instances.  
+      #   +:security_group_ids+ accepts a single ID or an array of security
+      #   group IDs.
       #
       # @option options [String] :user_data Arbitrary user data.  You
       #   do not need to encode this value.
@@ -162,6 +168,22 @@ module AWS
       # @option options [String] :instance_initiated_shutdown_behavior
       #   Determines whether the instance stops or terminates on
       #   instance-initiated shutdown.
+      #
+      # @option options [String] :subnet (nil) The ID of an EC2 VPC 
+      #   subnet to launch the instance in.
+      #
+      # @option options [String] :private_ip_address (nil) If you're using VPC,
+      #   you can optionally use this option to assign the instance a 
+      #   specific available IP address from the subnet (e.g., '10.0.0.25').
+      #   This option is not valid for instances launched outside a VPC (i.e.
+      #   those launched without the :subnet option).
+      #
+      # @option options [Boolean] :dedicated_tenancy (false) Instances
+      #   with dedicated tenancy will not share physical hardware with
+      #   instances outside their VPC.  *NOTE:* Dedicated tenancy
+      #   incurs an additional service charge.  This option is not
+      #   valid for instances launched outside a VPC (e.g. those
+      #   launched without the :subnet option).
       #
       # @return [Instance or Array] If a single instance is being created, 
       #   this returns an {EC2::Instance} to represent the newly
@@ -200,13 +222,23 @@ module AWS
           options[:monitoring_enabled]
         options.delete(:monitoring_enabled)
 
-        options[:placement] = {
-          :availability_zone => options[:availability_zone].to_s
-        } if options[:availability_zone]
-        options.delete(:availability_zone)
+        placement = {}
 
-        options[:security_groups] = group_opts(options[:security_groups]) if
-          options[:security_groups]
+        if options[:availability_zone]
+          placement[:availability_zone] = options[:availability_zone].to_s
+          options.delete(:availability_zone)
+        end
+
+        if options[:dedicated_tenancy]
+          placement[:tenancy] = 'dedicated' 
+          options.delete(:dedicated_tenancy)
+        end
+
+        options[:placement] = placement unless placement.empty?
+
+        options[:subnet_id] = options.delete(:subnet) if options[:subnet]
+
+        security_group_opts(options)
 
         options[:client_token] = UUIDTools::UUID.timestamp_create.to_s
 
@@ -263,19 +295,50 @@ module AWS
 
       # @private
       private
-      def group_opts(groups)
-        [groups].flatten.map do |g|
+      def security_group_opts options
+
+        ids = []
+        names = []
+
+        Array(options.delete(:security_group_ids)).each do |g|
+          ids << g
+        end
+
+        # this may be security group objects or names
+        Array(options.delete(:security_groups)).each do |g|
           case g
-          when SecurityGroup then g.name
-          when String        then g
+          when String        then names << g
+          when SecurityGroup then ids << g.id
           else
-            raise ArgumentError.new("members of security_groups must be "+
-                                    "strings or SecurityGroup objects")
+            raise ArgumentError, ':security_groups may only contain ' +
+              'security group names, ids or objects'
           end
+        end
+
+        return if ids.empty? and names.empty?
+
+        if options[:subnet_id]
+
+          # vpc instances only accepts security group ids, so any group
+          # names must be converted to ids, which requires a service
+          # request
+          unless names.empty?
+            ec2 = EC2.new(:config => config)
+            groups = ec2.security_groups.filter('group-name', names)
+            ids += groups.collect{|g| g.id }
+          end
+          options[:security_group_ids] = ids
+
+        else
+
+          # non-vpc instances accept both group names and ids, so 
+          # we accept whichever
+          options[:security_groups] = names unless names.empty?
+          options[:security_group_ids] = ids unless ids.empty?
+
         end
       end
 
     end
-
   end
 end

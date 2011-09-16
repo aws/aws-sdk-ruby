@@ -60,7 +60,7 @@ Feature: SQS Messages
     Given I create a queue
     And I fork a process to send 50 random numbers to the queue over a period of 30 seconds
     When I poll for messages with an idle timeout of 10 seconds
-    Then I should have received all of the messages within 60 seconds
+    Then I should have received all of the messages within 120 seconds
     And each message receipt handle should have been deleted
     And the forked process should have completed without errors
 

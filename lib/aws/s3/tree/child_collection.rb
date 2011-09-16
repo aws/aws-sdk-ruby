@@ -11,17 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/s3/tree/leaf_node'
-require 'aws/s3/tree/branch_node'
-
 module AWS
   class S3
     class Tree
 
       class ChildCollection
 
-        include Model
+        include Core::Model
         include Enumerable
 
         # @private

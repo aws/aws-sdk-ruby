@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
+module AWS::Core
 
   shared_examples_for "an aws client" do |sample_method|
 
@@ -52,8 +52,8 @@ module AWS
           recorded_request = req
           recorded_response = resp
         }.send(sample_method)
-        recorded_request.should be_a_kind_of(AWS::Http::Request)
-        recorded_response.should be_a(AWS::Http::Response)
+        recorded_request.should be_a_kind_of(Http::Request)
+        recorded_response.should be_a(Http::Response)
       end
 
       it 'should be able to call super to access previous definition' do
@@ -180,7 +180,7 @@ module AWS
         client.with_http_handler{|request, response|
           response.status = 405 # method not allowed
         }.send(method, opts)
-      }.should raise_error(Errors::ClientError)
+      }.should raise_error(AWS::Errors::ClientError)
     end
 
     it 'raises client errors for 4xx response codes with a nil response body' do
@@ -189,7 +189,7 @@ module AWS
           response.status = 405 # method not allowed
           response.body = nil
         }.send(method, opts)
-      }.should raise_error(Errors::ClientError)
+      }.should raise_error(AWS::Errors::ClientError)
     end
 
     it 'does not retry client errors' do
@@ -255,7 +255,7 @@ module AWS
           resp.status = 500
           requests_made += 1 
         }.send(method, opts) 
-      rescue Errors::ServerError
+      rescue AWS::Errors::ServerError
       end
       requests_made.should == 4
     end
@@ -270,7 +270,7 @@ module AWS
       end
       begin
         client.send(method, opts)
-      rescue Errors::ServerError
+      rescue AWS::Errors::ServerError
       end
     end
 
@@ -283,7 +283,7 @@ module AWS
       new_client.config.stub(:max_retries).and_return(5)
       begin
         new_client.send(method, opts) 
-      rescue Errors::ServerError
+      rescue AWS::Errors::ServerError
       end
       requests_made.should == 6
     end
@@ -293,7 +293,7 @@ module AWS
         client.with_http_handler{|req, resp|
           resp.status = 500
         }.send(method, opts)
-      }.should raise_error(Errors::ServerError)
+      }.should raise_error(AWS::Errors::ServerError)
     end
 
     it 'should re-raise the timeout error after retries fail' do
@@ -396,7 +396,7 @@ module AWS
       it 'should send a user-agent header' do
         http_handler.should_receive(:handle).with do |req, resp|
           req.headers["user-agent"].
-            should =~ %r{aws-sdk-ruby/#{VERSION} [a-z]+/[0-9.]+ \w+}
+            should =~ %r{aws-sdk-ruby/#{AWS::VERSION} [a-z]+/[0-9.]+ \w+}
         end
         client_with_handler.send(method, opts)
       end
@@ -439,7 +439,7 @@ module AWS
             resp.status = 502
             resp.body = 'Service busy' 
           end.send(method, opts)
-        rescue Errors::ServerError
+        rescue AWS::Errors::ServerError
         end
       end
 
@@ -599,7 +599,7 @@ module AWS
         response.on_complete do |status|
           complete = true
           status.should == :failure
-          response.error.should be_a(Errors::ServerError)
+          response.error.should be_a(AWS::Errors::ServerError)
         end
 
         sleep 0.001 until complete

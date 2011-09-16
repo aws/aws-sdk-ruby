@@ -11,14 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/resource'
-require 'aws/inflection'
-
 module AWS
   class IAM
 
     # @private
-    class Resource < AWS::Resource
+    class Resource < Core::Resource
 
       # @return [Boolean] True if the resource exists.
       def exists?

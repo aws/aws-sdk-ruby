@@ -1,19 +1,16 @@
 # Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-require 'aws/configured_option_grammars'
-require 'aws/api_config_transform'
-
 module AWS
   class SimpleEmailService
-    class Client < BaseClient
+    class Client < Core::Client
       
       # @private
       module Options
 
-        include ConfiguredOptionGrammars
+        include Core::ConfiguredOptionGrammars
 
         def self.api_config
-          ApiConfigTransform.rename_input_list_to_membered_list(super)
+          Core::ApiConfigTransform.rename_input_list_to_membered_list(super)
         end
 
         define_configured_grammars

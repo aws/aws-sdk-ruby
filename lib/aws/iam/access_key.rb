@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/iam/resource'
-require 'aws/iam/user'
-
 module AWS
   class IAM
 

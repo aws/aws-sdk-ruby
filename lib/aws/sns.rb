@@ -11,13 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/sns/errors'
-require 'aws/sns/client'
-require 'aws/sns/topic_collection'
-require 'aws/sns/subscription_collection'
-require 'aws/sns/policy'
+require 'aws/core'
+require 'aws/sns/config'
 
 module AWS
 
@@ -48,7 +43,19 @@ module AWS
   #
   class SNS
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :Client,                      'client'
+      autoload :Errors,                      'errors'
+      autoload :Policy,                      'policy'
+      autoload :Request,                     'request'
+      autoload :Subscription,                'subscription'
+      autoload :SubscriptionCollection,      'subscription_collection'
+      autoload :Topic,                       'topic'
+      autoload :TopicCollection,             'topic_collection'
+      autoload :TopicSubscriptionCollection, 'topic_subscription_collection'
+    end
+
+    include Core::ServiceInterface
 
     # @return [TopicCollection] Returns a topic collection for managing
     #   SNS topics.

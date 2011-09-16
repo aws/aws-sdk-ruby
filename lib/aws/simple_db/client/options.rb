@@ -11,16 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/configured_option_grammars'
-
 module AWS
   class SimpleDB
-    class Client < BaseClient
+    class Client < Core::Client
 
       # @private
       module Options
 
-        include ConfiguredOptionGrammars
+        include Core::ConfiguredOptionGrammars
 
         define_configured_grammars
 

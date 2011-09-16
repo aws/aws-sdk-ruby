@@ -11,11 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/simple_email_service/client'
-require 'aws/simple_email_service/email_address_collection'
-require 'aws/simple_email_service/quotas'
+require 'aws/core'
+require 'aws/simple_email_service/config'
 
 module AWS
   
@@ -138,7 +135,15 @@ module AWS
   #
   class SimpleEmailService
 
-    include ServiceInterface
+    AWS.register_autoloads(self, 'aws/simple_email_service') do
+      autoload :Client,                 'client'
+      autoload :Errors,                 'errors'
+      autoload :EmailAddressCollection, 'email_address_collection'
+      autoload :Quotas,                 'quotas'
+      autoload :Request,                'request'
+    end
+
+    include Core::ServiceInterface
 
     # @return [EmailAddressCollection] Returns a collection that represents
     #   all of the verified email addresses for your account.

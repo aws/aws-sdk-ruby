@@ -11,17 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/base_client'
-require 'aws/configured_xml_grammars'
-
 module AWS
   class EC2
-    class Client < BaseClient
+    class Client < Core::Client
       module XML
 
-        include ConfiguredXmlGrammars
+        include Core::ConfiguredXmlGrammars
 
-        BaseError = XmlGrammar.customize do
+        BaseError = Core::XmlGrammar.customize do
           element "Errors" do
             ignore
             element("Error") { ignore }

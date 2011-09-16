@@ -11,17 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/xml_grammar'
-require 'aws/base_client'
-
 module AWS
   class S3
-    class Client < BaseClient
+    class Client < Core::Client
 
       # @private
       module XML
 
-        Error = XmlGrammar.customize { }
+        Error = Core::XmlGrammar.customize { }
 
         module HasCommonPrefixes
 
@@ -36,7 +33,7 @@ module AWS
 
         end
 
-        ListBuckets = XmlGrammar.customize do
+        ListBuckets = Core::XmlGrammar.customize do
           element "Buckets" do
             element "Bucket" do
               collect_values
@@ -45,7 +42,7 @@ module AWS
           end
         end
 
-        GetBucketAcl = GetObjectAcl = XmlGrammar.customize do
+        GetBucketAcl = GetObjectAcl = Core::XmlGrammar.customize do
           wrapper(:acl,
                   :for => ["Owner",
                            "AccessControlList"]) do
@@ -79,7 +76,7 @@ module AWS
           end
         end
 
-        ListObjects = XmlGrammar.customize do
+        ListObjects = Core::XmlGrammar.customize do
 
           element("Name") { rename "bucket_name" }
           element("MaxKeys") { integer_value }
@@ -105,7 +102,7 @@ module AWS
 
         end
 
-        GetBucketVersioning = XmlGrammar.customize do
+        GetBucketVersioning = Core::XmlGrammar.customize do
           element("Status") do
             symbol_value
             format_value {|value| super(value) || :unversioned }
@@ -113,7 +110,7 @@ module AWS
           end
         end
 
-        ListObjectVersions = XmlGrammar.customize do
+        ListObjectVersions = Core::XmlGrammar.customize do
 
           element("MaxKeys") { integer_value }
           element("IsTruncated") { rename "Truncated"; boolean_value }
@@ -147,11 +144,11 @@ module AWS
         end
 
         # default behavior is good enough
-        InitiateMultipartUpload = XmlGrammar.customize do
+        InitiateMultipartUpload = Core::XmlGrammar.customize do
           element("UploadId") { force }
         end
 
-        ListMultipartUploads = XmlGrammar.customize do
+        ListMultipartUploads = Core::XmlGrammar.customize do
           element("IsTruncated") { rename "Truncated"; boolean_value }
           element("MaxUploads") { integer_value }
           element("NextKeyMarker") { force }
@@ -167,9 +164,9 @@ module AWS
         end
 
         # keep default behavior
-        CompleteMultipartUpload = XmlGrammar.customize
+        CompleteMultipartUpload = Core::XmlGrammar.customize
 
-        ListParts = XmlGrammar.customize do
+        ListParts = Core::XmlGrammar.customize do
           element("StorageClass") { symbol_value }
           element("IsTruncated") { rename "Truncated"; boolean_value }
           element("MaxParts") { integer_value }

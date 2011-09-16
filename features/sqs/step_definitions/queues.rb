@@ -37,6 +37,7 @@ end
 
 Then /^the result should( not)? include the queue I created$/ do |should_not|
   eventually(60) do
+    @sqs.queues.should include(@queue)
     @result.send(should_not == " not" ? :should_not : :should, include(@queue))
   end
 end

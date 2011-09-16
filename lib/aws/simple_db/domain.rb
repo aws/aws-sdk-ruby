@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/errors'
-require 'aws/model'
-require 'aws/simple_db/domain_metadata'
-require 'aws/simple_db/item_collection'
-
 module AWS
   class SimpleDB
 
@@ -36,7 +31,7 @@ module AWS
       # @private
       class NonEmptyDeleteError < StandardError; end
 
-      include Model
+      include Core::Model
 
       # @param [String] The name of a SimpleDB domain to reference.
       def initialize(name, options = {})

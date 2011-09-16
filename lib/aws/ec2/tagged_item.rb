@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/ec2/resource_tag_collection'
-
 module AWS
   class EC2
     module TaggedItem
@@ -79,7 +77,7 @@ module AWS
 
       # @private
       def tagging_resource_type
-        Inflection.ruby_name(self.class.to_s).tr("_","-")
+        Core::Inflection.ruby_name(self.class.to_s).tr("_","-")
       end
 
     end

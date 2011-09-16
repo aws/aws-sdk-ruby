@@ -11,13 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/inflection'
-require 'aws/ec2/collection'
-require 'aws/ec2/tag'
-require 'aws/ec2/tagged_item'
-require 'aws/ec2/resource'
-
 module AWS
   class EC2
 
@@ -87,7 +80,7 @@ module AWS
         response = filtered_request(:describe_tags)
         response.tag_set.each do |tag|
 
-          resource_class_name = Inflection.class_name(tag.resource_type)
+          resource_class_name = Core::Inflection.class_name(tag.resource_type)
           if EC2.const_defined?(resource_class_name)
             resource_class = EC2.const_get(resource_class_name)
             resource = resource_class.new(tag.resource_id, :config => config)

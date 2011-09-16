@@ -10,14 +10,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/collections'
-require 'aws/inflection'
-
 module AWS
   class IAM
     module Collection
 
-      include Collections::PagedWithLimits
+      include Core::Collections::PagedWithLimits
 
       # Common methods for collection classes that can be filtered by
       # a path prefix.
@@ -65,7 +62,7 @@ module AWS
       # @private
       protected
       def request_method
-        name = Inflection.ruby_name(self.class.name).sub(/_collection$/, '')
+        name = Core::Inflection.ruby_name(self.class.name).sub(/_collection$/, '')
         "list_#{name}s"
       end
 

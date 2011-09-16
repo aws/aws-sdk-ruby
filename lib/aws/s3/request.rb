@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/http/request'
-require 'aws/base_client'
-require 'aws/uri_escape'
 require 'uri'
 require 'time'
 
@@ -21,9 +18,9 @@ module AWS
   class S3
 
     # @private
-    class Request < AWS::Http::Request
+    class Request < Core::Http::Request
 
-      include UriEscape
+      include Core::UriEscape
 
       # @param [bucket] S3 bucket name
       attr_accessor :bucket

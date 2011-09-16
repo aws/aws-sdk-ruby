@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/iam/resource'
-require 'aws/iam/errors'
-require 'aws/iam/group_user_collection'
-require 'aws/iam/group_policy_collection'
-
 module AWS
   class IAM
 

@@ -11,11 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/inflection'
-require 'aws/model'
-require 'aws/sqs/received_message'
-require 'aws/sqs/received_sns_message'
-
 module AWS
   class SQS
 
@@ -36,7 +31,7 @@ module AWS
       # new messages.  
       DEFAULT_POLL_INTERVAL = 1
 
-      include Model
+      include Core::Model
 
       # @return [String] The queue URL.
       attr_reader :url
@@ -458,7 +453,7 @@ module AWS
           receive_opts[:attribute_names] = names.map do |name|
             name = ReceivedMessage::ATTRIBUTE_ALIASES[name.to_sym] if
               ReceivedMessage::ATTRIBUTE_ALIASES.key?(name.to_sym)
-            name = Inflection.class_name(name.to_s) if name.kind_of?(Symbol)
+            name = Core::Inflection.class_name(name.to_s) if name.kind_of?(Symbol)
             name
           end
         end

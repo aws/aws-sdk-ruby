@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/model'
-require 'aws/inflection'
-
 module AWS
   class EC2
 
@@ -24,7 +21,7 @@ module AWS
     # that use this interface.
     class PermissionCollection
 
-      include Model
+      include Core::Model
       include Enumerable
 
       # @private
@@ -137,7 +134,7 @@ module AWS
       # @private
       private
       def inflected_permissions_attribute
-        Inflection.ruby_name(permissions_attribute).to_sym
+        Core::Inflection.ruby_name(permissions_attribute).to_sym
       end
 
       # @private

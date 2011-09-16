@@ -42,22 +42,27 @@ module AWS
         context '#each' do
 
           let(:ip_permissions) do
-            [double("p1",
-                    :ip_protocol => :tcp,
-                    :from_port => 80,
-                    :to_port => 81,
-                    :ip_ranges =>
-                    [double("ip1", :cidr_ip => "1.1.1.1/1"),
-                     double("ip2", :cidr_ip => "2.2.2.2/2")],
-                    :groups =>
-                    [double('grp1',
-                            :group_id => 'grp1-id',
-                            :group_name => 'grp1-name',
-                            :user_id => 'grp1-user-id'),
-                     double('grp2',
-                            :group_id => 'grp2-id',
-                            :group_name => 'grp2-name',
-                            :user_id => 'grp2-user-id')])]
+            [
+              double("ip-permission-1",
+                :ip_protocol => :tcp,
+                :from_port => 80,
+                :to_port => 81,
+                :ip_ranges => [
+                  double("ip1", :cidr_ip => "1.1.1.1/1"),
+                  double("ip2", :cidr_ip => "2.2.2.2/2")
+                ],
+                :groups => [
+                  double('grp1',
+                    :group_id => 'grp1-id',
+                    :group_name => 'grp1-name',
+                    :user_id => 'grp1-user-id'),
+                  double('grp2',
+                    :group_id => 'grp2-id',
+                    :group_name => 'grp2-name',
+                    :user_id => 'grp2-user-id')
+                ]
+              ),
+            ]
           end
 
           before(:each) do
@@ -66,6 +71,10 @@ module AWS
 
           it 'yields IpPermission objects' do
             collection.each { |obj| obj.should be_an(IpPermission) }
+          end
+
+          it 'yielded permissions should all be ingress' do
+            collection.all?{|obj| obj.egress? }.should == false
           end
 
           it 'passes the config' do

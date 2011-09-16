@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 def stub_config
-  AWS::Configuration.new({
+  AWS::Core::Configuration.new({
     :stub_requests => true,
     :access_key_id => 'ACCESS_KEY_ID',
     :secret_access_key => 'SECRET_ACCESS_KEY',

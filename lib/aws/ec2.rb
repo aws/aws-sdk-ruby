@@ -11,21 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/common'
-require 'aws/service_interface'
-require 'aws/ec2/client'
-require 'aws/ec2/instance_collection'
-require 'aws/ec2/security_group_collection'
-require 'aws/ec2/elastic_ip_collection'
-require 'aws/ec2/key_pair_collection'
-require 'aws/ec2/tag_collection'
-require 'aws/ec2/region_collection'
-require 'aws/ec2/availability_zone_collection'
-require 'aws/ec2/image_collection'
-require 'aws/ec2/volume_collection'
-require 'aws/ec2/snapshot_collection'
-require 'aws/ec2/reserved_instances_collection'
-require 'aws/ec2/reserved_instances_offering_collection'
+require 'aws/core'
+require 'aws/ec2/config'
 
 module AWS
 
@@ -244,7 +231,51 @@ module AWS
   #
   class EC2
 
-    include ServiceInterface
+    AWS.register_autoloads(self) do
+      autoload :Attachment, 'attachment'
+      autoload :AttachmentCollection, 'attachment_collection'
+      autoload :AvailabilityZone, 'availability_zone'
+      autoload :AvailabilityZoneCollection, 'availability_zone_collection'
+      autoload :BlockDeviceMappings, 'block_device_mappings'
+      autoload :Client, 'client'
+      autoload :Collection, 'collection'
+      autoload :ConfigTransform, 'config_transform'
+      autoload :ElasticIp, 'elastic_ip'
+      autoload :ElasticIpCollection, 'elastic_ip_collection'
+      autoload :Errors, 'errors'
+      autoload :FilteredCollection, 'filtered_collection'
+      autoload :HasPermissions, 'has_permissions'
+      autoload :Image, 'image'
+      autoload :ImageCollection, 'image_collection'
+      autoload :Instance, 'instance'
+      autoload :InstanceCollection, 'instance_collection'
+      autoload :KeyPair, 'key_pair'
+      autoload :KeyPairCollection, 'key_pair_collection'
+      autoload :PermissionCollection, 'permission_collection'
+      autoload :Region, 'region'
+      autoload :RegionCollection, 'region_collection'
+      autoload :Request, 'request'
+      autoload :ReservedInstances, 'reserved_instances'
+      autoload :ReservedInstancesCollection, 'reserved_instances_collection'
+      autoload :ReservedInstancesOffering, 'reserved_instances_offering'
+      autoload :ReservedInstancesOfferingCollection, 
+        'reserved_instances_offering_collection'
+      autoload :Resource, 'resource'
+      autoload :ResourceObject, 'tag_collection'
+      autoload :ResourceTagCollection, 'resource_tag_collection'
+      autoload :SecurityGroup, 'security_group'
+      autoload :SecurityGroupCollection, 'security_group_collection'
+      autoload :Snapshot, 'snapshot'
+      autoload :SnapshotCollection, 'snapshot_collection'
+      autoload :Tag, 'tag'
+      autoload :TagCollection, 'tag_collection'
+      autoload :TaggedCollection, 'tagged_collection'
+      autoload :TaggedItem, 'tagged_item'
+      autoload :Volume, 'volume'
+      autoload :VolumeCollection, 'volume_collection'
+    end
+
+    include Core::ServiceInterface
 
     # @return [InstanceCollection] A collection representing all instances
     def instances

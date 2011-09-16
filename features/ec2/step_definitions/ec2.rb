@@ -22,6 +22,10 @@ Before("@ec2") do
 
   @ec2 = EC2.new
   @ec2_client = @ec2.client
+
+  @created_vpc_ids = []
+  @created_subnet_ids = []
+
   @created_key_pairs = []
   @created_security_groups = []
   @allocated_elastic_ips = []
@@ -96,6 +100,30 @@ After("@ec2") do
       snapshot.delete
     rescue
     end
+  end
+
+
+  unless @created_subnet_ids.empty?
+
+    # before we can delete vpc subnets we must wait till all stated
+    # vpc instances in that subnet have been terminated
+    @vpc_instances = []
+    @started_instances.each do |id|
+      instance = @ec2.instances[id]
+      @vpc_instances << instance if instance.vpc_id
+    end
+    until @vpc_instances.all?{|i| i.status == terminated? }
+      sleep(5)
+    end
+
+    @created_subnet_ids.each do |subnet_id|
+      @ec2_client.delete_subnet(:subnet_id => subnet_id)
+    end
+
+  end
+
+  @created_vpc_ids.each do |vpc_id|
+    @ec2_client.delete_vpc(:vpc_id => vpc_id)
   end
 
 end

@@ -11,12 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/ec2/resource'
-require 'aws/ec2/tagged_item'
-require 'aws/ec2/availability_zone'
-require 'aws/ec2/attachment'
-require 'aws/ec2/attachment_collection'
-
 module AWS
   class EC2
 

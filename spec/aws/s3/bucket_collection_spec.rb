@@ -20,10 +20,6 @@ module AWS
 
       it_behaves_like 'an S3 model object'
 
-      let(:successful_response) do
-        double("successful response", :successful? => true)
-      end
-
       let(:config) { stub_config }
 
       let(:client) { config.s3_client }
@@ -31,10 +27,6 @@ module AWS
       let(:buckets) { BucketCollection.new(:config => config) }
  
       context '#create' do
-
-        before(:each) do
-          client.stub(:create_bucket).and_return(successful_response)
-        end
 
         it 'should call create_bucket with the bucket name' do
           client.should_receive(:create_bucket).with(:bucket_name => 'bar')

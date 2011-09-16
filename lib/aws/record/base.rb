@@ -13,9 +13,10 @@
 
 # todo move these to included modules (like validations and naming)
 
+require 'aws/simple_db'
+
 require 'set'
 require 'uuidtools'
-require 'aws/indifferent_hash'
 
 require 'aws/record/naming'
 require 'aws/record/attribute_macros'
@@ -318,7 +319,7 @@ module AWS
       # @return [Hash] A hash with attribute names as hash keys (strings) and 
       #   attribute values (of mixed types) as hash values.
       def attributes
-        attributes = IndifferentHash.new
+        attributes = Core::IndifferentHash.new
         attributes['id'] = id if persisted?
         self.class.attributes.keys.inject(attributes) do |hash,attr_name|
           hash[attr_name] = __send__(attr_name)
