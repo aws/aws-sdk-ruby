@@ -26,8 +26,14 @@ end
 sqs = AWS::SQS.new
 
 puts "Creating queue '#{queue_name}' ..."
-# Creates new queue or gets erxisting queue
-q = sqs.queues.create queue_name
+q = nil
+begin
+	# Creates new queue or gets erxisting queue
+	q = sqs.queues.create queue_name
+rescue AWS::SQS::Errors::InvalidParameterValue => e
+	puts "Invalid queue name '#{queue_name}'. "+e.message
+	exit 1
+end
 
 puts "Waiting for queue created on AWS"
 loop do	
