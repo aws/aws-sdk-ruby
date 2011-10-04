@@ -459,6 +459,10 @@ module AWS
       #   with the copied object.  Each name, value pair must conform
       #   to US-ASCII.  When blank, the sources metadata is copied.
       #
+      # @option options [String] :content_type The content type of
+      #   the copied object.  Defaults to the source object's content
+      #   type.
+      #
       # @option options [Boolean] :reduced_redundancy (false) If true the
       #   object is stored with reduced redundancy in S3 for a lower cost.
       #
@@ -503,11 +507,16 @@ module AWS
           end
         end
 
+        copy_opts[:metadata_directive] = 'COPY'
+
         if options[:metadata]
           copy_opts[:metadata] = options[:metadata]
           copy_opts[:metadata_directive] = 'REPLACE'
-        else
-          copy_opts[:metadata_directive] = 'COPY'
+        end
+
+        if options[:content_type]
+          copy_opts[:content_type] = options[:content_type]
+          copy_opts[:metadata_directive] = "REPLACE"
         end
 
         copy_opts[:acl] = options[:acl] if options[:acl]

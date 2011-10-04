@@ -85,6 +85,14 @@ module AWS
           obj1.copy_from('bucket/key', :metadata => { 'foo' => 'bar' })
         end
 
+        it 'allows you to change content type' do
+          client.should_receive(:copy_object).with(hash_including(
+            :metadata_directive => 'REPLACE',
+            :content_type => "image/png"
+          ))
+          obj1.copy_from("bucket/key", :content_type => "image/png")
+        end
+
         it 'allows you to store the copied object with reduced redundancy' do
           client.should_receive(:copy_object).with(hash_including(
             :storage_class => 'REDUCED_REDUNDANCY'))
