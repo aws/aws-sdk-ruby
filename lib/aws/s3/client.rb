@@ -802,6 +802,7 @@ module AWS
                       :metadata_directive => 'x-amz-metadata-directive',
                       :storage_class => 'x-amz-storage-class',
                       :server_side_encryption => 'x-amz-server-side-encryption',
+                      :content_type => 'Content-Type',
                     }) do
 
         configure_request do |req, options|
