@@ -79,6 +79,27 @@ module AWS
             ignored_fields.should == ["foo"]
         end
 
+        context ':server_side_encryption option' do
+
+          let(:config) do
+            stub_config.with(:s3_server_side_encryption => :aes256)
+          end
+
+          it 'should use the configured value by default' do
+            described_class.new(bucket).
+              fields["x-amz-server-side-encryption"].
+              should == "AES256"
+          end
+
+          it 'should allow the configured value to be overridden with nil' do
+            described_class.new(bucket,
+                                :server_side_encryption => nil).
+              fields["x-amz-server-side-encryption"].
+              should be_nil
+          end
+
+        end
+
       end
 
       context '#where' do
@@ -146,6 +167,7 @@ module AWS
             :content_length => 1..2,
             :key => "foobar",
             :acl => :public_read,
+            :server_side_encryption => :aes256,
             :ignore => ["foo", "bar"]
           } }
 
@@ -429,6 +451,12 @@ module AWS
             fields["acl"].should == "public-read"
         end
 
+        it 'should properly transform the server side encryption algorithm' do
+          described_class.new(bucket,
+                              :server_side_encryption => :aes256).
+            fields["x-amz-server-side-encryption"].should == "AES256"
+        end
+
         it 'should contain an entry for each metadata key' do
           post.metadata.merge!(:foo => "bar",
                                :bla => "baz")
@@ -510,6 +538,8 @@ module AWS
       end
 
       it_behaves_like "presigned post special field", "acl", :acl
+      it_behaves_like("presigned post special field",
+                      "x-amz-server-side-encryption", :server_side_encryption)
       it_behaves_like("presigned post special field",
                       "Cache-Control", :cache_control)
       it_behaves_like("presigned post special field",

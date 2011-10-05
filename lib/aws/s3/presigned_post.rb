@@ -79,6 +79,7 @@ module AWS
                         :content_encoding,
                         :expires_header,
                         :acl,
+                        :server_side_encryption,
                         :success_action_redirect,
                         :success_action_status]
 
@@ -153,6 +154,15 @@ module AWS
       #   * +:bucket_owner_read+
       #   * +:bucket_owner_full_control+
       #
+      # @option options [Symbol] :server_side_encryption (nil) If this
+      #   option is set, the object will be stored using server side
+      #   encryption.  The only valid value is +:aes256+, which
+      #   specifies that the object should be stored using the AES
+      #   encryption algorithm with 256 bit keys.  By default, this
+      #   option uses the value of the +:s3_server_side_encryption+
+      #   option in the current configuration; for more information,
+      #   see {AWS.config}.
+      #
       # @option opts [String] :success_action_redirect The URL to
       #   which the client is redirected upon successful upload.
       #
@@ -197,6 +207,12 @@ module AWS
         @expires = opts[:expires]
 
         super
+
+        @fields[:server_side_encryption] =
+          config.s3_server_side_encryption unless
+          @fields.key?(:server_side_encryption)
+        @fields.delete(:server_side_encryption) if
+          @fields[:server_side_encryption].nil?
       end
 
       # @return [Boolean] True if {#url} generates an HTTPS url.
@@ -415,12 +431,9 @@ module AWS
         fields = (SPECIAL_FIELDS &
                   @fields.keys).inject({}) do |fields, option_name|
           fields[field_name(option_name)] =
-            @fields[option_name].to_s
+            field_value(option_name)
           fields
         end
-
-        fields["acl"] = fields["acl"].tr("_", "-") if
-          fields["acl"]
 
         @metadata.each do |key, value|
           fields["x-amz-meta-#{key}"] = value.to_s
@@ -435,6 +448,8 @@ module AWS
         case option_name
         when :expires_header
           "Expires"
+        when :server_side_encryption
+          "x-amz-server-side-encryption"
         when :acl, :success_action_redirect, :success_action_status
           option_name.to_s
         else
@@ -443,6 +458,24 @@ module AWS
             gsub(/-(.)/) { |m| m.upcase }
           field_name[0,1] = field_name[0,1].upcase
           field_name
+        end
+      end
+
+      # @private
+      private
+      def field_value(option_name)
+        case option_name
+        when :acl
+          @fields[:acl].to_s.tr("_", "-")
+        when :server_side_encryption
+          value = @fields[:server_side_encryption]
+          if value.kind_of?(Symbol)
+            value.to_s.upcase
+          else
+            value.to_s
+          end
+        else
+          @fields[option_name].to_s
         end
       end
 

@@ -65,8 +65,7 @@ module AWS
           raise ArgumentError, "invalid prefix mode `#{mode}`, it must be " +
             ":replace, :append or :prepend"
         end
-        self.class.new(bucket,
-                       :prefix => new_prefix)
+        self.class.new(bucket, :prefix => new_prefix)
       end
 
       # @private

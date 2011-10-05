@@ -39,11 +39,12 @@ module AWS
         end
 
         it 'should be able to get the item from the domain' do
-          domain = double("domain")
-          item = double("item")
-          domain.should_receive(:[]).with("foo").and_return(item)
-          ItemData.new(:name => "foo",
-                       :domain => domain).item.should be(item)
+
+          domain = Domain.new('name')
+
+          ItemData.new(:name => "foo", :domain => domain).item.
+            should == domain.items['foo']
+
         end
 
         it 'should extract the name from an object' do

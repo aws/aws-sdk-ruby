@@ -21,7 +21,9 @@ module AWS
 
     let(:s3_client) { double("s3-client") }
 
-    let(:config) { double("config", :s3_client => s3_client) }
+    let(:config) { double("config",
+                          :s3_client => s3_client,
+                          :s3_server_side_encryption => nil) }
 
     let(:instance) do
       options = args.last.is_a?(Hash) ? args.pop : {} 

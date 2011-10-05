@@ -31,7 +31,8 @@ end
 When /^I generate pre\-signed form fields for the object "([^\"]*)" with the following parameters:$/ do |key, table|
   opts = table.rows_hash.inject({}) do |opts, (name, value)|
     opts[name.to_sym] = case name
-                        when "acl" then value.to_sym
+                        when "acl", "server_side_encryption"
+                          value.to_sym
                         else
                           value
                         end

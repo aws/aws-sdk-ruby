@@ -21,13 +21,13 @@
       Destination: 
       - :structure: 
           ToAddresses: 
-          - :list: 
+          - :membered_list: 
             - :string
           CcAddresses: 
-          - :list: 
+          - :membered_list: 
             - :string
           BccAddresses: 
-          - :list: 
+          - :membered_list: 
             - :string
       - :required
       Message: 
@@ -59,7 +59,7 @@
           - :required
       - :required
       ReplyToAddresses: 
-      - :list: 
+      - :membered_list: 
         - :string
       ReturnPath: 
       - :string
@@ -70,7 +70,7 @@
       Source: 
       - :string
       Destinations: 
-      - :list: 
+      - :membered_list: 
         - :string
       RawMessage: 
       - :structure: 

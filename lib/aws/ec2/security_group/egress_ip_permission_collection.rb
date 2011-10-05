@@ -30,9 +30,8 @@ module AWS
 
             groups = p.groups.collect do |group|
               SecurityGroup.new(group.group_id,
-                :name => group.group_name,
                 :owner_id => group.user_id,
-                :vpc_id => group.vpc_id,
+                :vpc_id => security_group.vpc_id,
                 :config => config)
             end
 

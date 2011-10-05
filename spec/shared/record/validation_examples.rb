@@ -166,13 +166,17 @@ module AWS
   
       end
 
-      context ':message' do
+      unless test_opts[:accepts_message] == false
 
-        it 'overides the default message' do
-          klass.send(validation_macro, :value, opts.merge(message_opt => 'custom message'))
-          obj.value = invalid_value
-          obj.valid?
-          obj.errors[:value].should == ['custom message']
+        context ':message' do
+
+          it 'overides the default message' do
+            klass.send(validation_macro, :value, opts.merge(message_opt => 'custom message'))
+            obj.value = invalid_value
+            obj.valid?
+            obj.errors[:value].should == ['custom message']
+          end
+
         end
 
       end

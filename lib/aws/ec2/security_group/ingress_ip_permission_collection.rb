@@ -15,7 +15,7 @@ module AWS
   class EC2
     class SecurityGroup < Resource
 
-      class IpPermissionCollection
+      class IngressIpPermissionCollection
 
         include Core::Model
         include Enumerable
@@ -52,6 +52,9 @@ module AWS
         end
 
       end
+
+      # alias for ingress permissions
+      IpPermissionCollection = IngressIpPermissionCollection
 
     end
   end

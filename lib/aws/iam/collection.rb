@@ -14,7 +14,7 @@ module AWS
   class IAM
     module Collection
 
-      include Core::Collections::PagedWithLimits
+      include Core::Collection::Limitable
 
       # Common methods for collection classes that can be filtered by
       # a path prefix.
@@ -27,21 +27,9 @@ module AWS
         attr_reader :prefix
 
         # @private
-        def initialize(options = {})
+        def initialize options = {}
           @prefix = options[:prefix]
           super
-        end
-
-        def each options = {}, &block
-          options = {
-            :path_prefix => prefix
-          }.merge(options) if prefix
-          options[:path_prefix] = options.delete(:prefix) if
-            options.key?(:prefix)
-          if prefix = options[:path_prefix]
-            options[:path_prefix] = "/#{prefix}".sub(%r{^//}, "/")
-          end
-          super(options, &block)
         end
 
         # Returns a collection object including only those groups whose
@@ -51,31 +39,41 @@ module AWS
         #   results.
         #
         # @return [GroupCollection]
-        def with_prefix(prefix)
+        def with_prefix prefix
           prefix = "/#{prefix}".sub(%r{^//}, "/")
-          self.class.new(:prefix => prefix,
-                         :config => config)
+          self.class.new(:prefix => prefix, :config => config)
+        end
+
+        protected
+        def _each_item marker, max_items, options = {}, &block
+            
+          prefix = options.delete(:prefix) || self.prefix
+
+          options[:path_prefix] = "/#{prefix}".sub(%r{^//}, "/") if prefix
+
+          super(marker, max_items, options, &block)
+
         end
 
       end
 
-      # @private
       protected
       def request_method
         name = Core::Inflection.ruby_name(self.class.name).sub(/_collection$/, '')
         "list_#{name}s"
       end
 
-      # @private
       protected
-      def next_token_key
-        :marker
-      end
+      def _each_item marker, max_items, options = {}, &block
 
-      # @private
-      protected
-      def limit_key
-        :max_items
+        options[:marker] = marker if marker
+        options[:max_items] = max_items if max_items
+
+        response = client.send(request_method, options)
+        each_item(response, &block)
+
+        response.marker if response.respond_to?(:marker)
+
       end
 
     end

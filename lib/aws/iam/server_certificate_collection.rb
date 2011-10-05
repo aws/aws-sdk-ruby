@@ -117,45 +117,9 @@ module AWS
         ServerCertificate.new(name, :config => config)
       end
 
-      # Yields once for each server certificate
-      #
-      # You can limit the number of certificates yielded using
-      # +:limit+ and +:path_prefix+.
-      #
-      # @param [Hash] options
-      #
-      # @option options [String] :path_prefix ('/') A path prefix that
-      #   filters according to the path of the certificate.
-      #
-      # @option options [Integer] :limit The maximum number of
-      #   certificates to yield.
-      #
-      # @option options [Integer] :batch_size The maximum number of
-      #   certificates to retrieve in each service request.
-      #
-      # @yieldparam [ServerCertificate] certificate
-      # @return [nil]
-      def each options = {}, &block
-        super(options, &block)
-      end
-
-      # Returns an enumerable object for this collection.  This can be
-      # useful if you want to call an enumerable method that does
-      # not accept options (e.g. +collect+, +first+, etc).
-      #
-      #   certificates.enumerator(:path_prefix => '/production').
-      #     collect(&:name)
-      #
-      # @param (see #each)
-      # @option (see #each)
-      # @return [Enumerator]
-      def enumerator options = {}
-        super(options)
-      end
-
       # @private
       protected
-      def each_item(response, &block)
+      def each_item response, &block
         response.server_certificate_metadata_list.each do |sc|
           certificate = ServerCertificate.new_from(:list_server_certificates,
                                                    sc,

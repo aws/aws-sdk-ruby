@@ -55,6 +55,41 @@ module AWS
             end
     
           end
+
+          context '#attributes=' do
+
+            before(:each) do
+              klass.string_attr :name
+            end
+    
+            it 'accepts string keys' do
+              obj = klass.new
+              obj.should_receive(:name=).with('new name')
+              obj.attributes = {'name' => 'new name'}
+            end
+    
+            it 'accepts symbol keys' do
+              obj = klass.new
+              obj.should_receive(:name=).with('new name')
+              obj.attributes = {:name => 'new name'}
+            end
+    
+            it 'raises exception for non-existant attributes' do
+              obj = klass.new
+              lambda {
+                obj.attributes = {:xyz => 'xyz'}
+              }.should raise_error(NoMethodError)
+            end
+
+            it 'accepts multiple values' do
+              obj = klass.new
+              obj.should_receive(:foo=).with('bar')
+              obj.should_receive(:abc=).with('xyz')
+              obj.attributes = { :foo => 'bar', 'abc' => 'xyz' }
+            end
+    
+
+          end
     
           context '#attributes' do
     

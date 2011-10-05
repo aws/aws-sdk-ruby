@@ -17,9 +17,26 @@ module AWS
     # Represents a collection of items in a SimpleDB domain.
     class ItemCollection
 
-      include Core::Model
-      include Enumerable
+      # Identifies quoted regions in the string, giving access to
+      # the regions before and after each quoted region, for example:
+      #  "? ? `foo?``bar?` ? 'foo?' ?".scan(OUTSIDE_QUOTES_REGEX)
+      #  # => [["? ? ", "`foo?``bar?`", " ? "], ["", "'foo?'", " ?"]]
+      # @private
+      OUTSIDE_QUOTES_REGEX = Regexp.compile(
+        '([^\'"`]*)(`(?:[^`]*(?:``))*[^`]*`|' +
+        '\'(?:[^\']*(?:\'\'))*[^\']*\'|'      +
+        '"(?:[^"]*(?:""))*[^"]*")([^\'`"]*)'
+      )
+
       include ConsistentReadOption
+
+      include Core::Collection::Limitable
+
+      # @return [Domain] The domain the items belong to.
+      attr_reader :domain
+
+      # @private
+      attr_reader :output_list
 
       # @private
       attr_reader :conditions
@@ -31,16 +48,13 @@ module AWS
       # @return [ItemCollection]
       def initialize domain, options = {}
         @domain = domain
-        @conditions = []
-        @conditions += options[:conditions] if options[:conditions]
-        @sort_instructions = options[:sort_instructions] if options[:sort_instructions]
+        @output_list = options[:output_list] || 'itemName()'
+        @conditions = options[:conditions] || []
+        @sort_instructions = options[:sort_instructions]
         @not_null_attribute = options[:not_null_attribute]
-        @limit = options[:limit] if options[:limit]
+        @limit = options[:limit]
         super
       end
-
-      # @return [Domain] The domain the items belong to.
-      attr_reader :domain
 
       # Creates a new item in SimpleDB with the given attributes: 
       #
@@ -78,132 +92,85 @@ module AWS
         Item.new(domain, item_name.to_s)
       end
 
-      # Yields to the block once for each item in the domain.
+      # Yields to the block once for each item in the collection.
+      # This method can yield two type of objects:
       #
-      # @example using each to fetch every item in the domain.
+      # * AWS::SimpleDB::Item objects (only the item name is populated)
+      # * AWS::SimpleDB::ItemData objects (some or all attributes populated)
       #
+      # The defualt mode of an ItemCollection is to yield Item objects with
+      # no populated attributes.  
+      #
+      #   # only receives item names from SimpleDB
       #   domain.items.each do |item|
+      #     puts item.name
+      #     puts item.class.name # => AWS::SimpleDB::Item
+      #   end
+      #
+      # You can switch a collection into yielded {ItemData} objects by
+      # specifying what attributes to request:
+      #
+      #   domain.items.select(:all).each do |item_data|
+      #     puts item_data.class.name # => AWS::SimpleDB::ItemData
+      #     puts item_data.attributes # => { 'attr-name' => 'attr-value', ... }
+      #   end
+      #
+      # You can also pass the standard scope options to #each as well:
+      #
+      #   # output the item names of the 10 most expesive items
+      #   domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
       #     puts item.name
       #   end
       #
       # @yield [item] Yields once for every item in the {#domain}.
-      # @yieldparam [Item] item
-      # @param options (see #select)
-      # @option options (see #select)
-      # @option options [Symbol or Array] :select Causes this method
-      #   to behave like {#select} and yield {ItemData} instead of
-      #   {Item} instances.
+      #
+      # @yieldparam [Item,ItemData] item If the item collection has been
+      #   scoped by chaining +#select+ or by passing the +:select+ option
+      #   then {ItemData} objects (that contain a hash of attrbiutes) are 
+      #   yielded.  If no list of attributes has been provided, then#
+      #   {Item} objects (with no populated data) are yielded.
+      #
+      # @param options [Hash]
+      #
+      # @option options [Boolean] :consistent_read (false) Causes this
+      #   method to yield the most current data in the domain.
+      #
+      # @option options [Mixed] :select If select is provided, then each
+      #   will yield {ItemData} objects instead of empty {Item}.
+      #   The +:select+ option may be:
+      #
+      #   * +:all+ - Specifies that all attributes should requested.
+      #
+      #   * A single or array of attribute names (as strings or symbols).
+      #     This causes the named attribute(s) to be requested.
+      #
+      # @option options :where Restricts the item collection using
+      #   {#where} before querying (see {#where}).
+      #
+      # @option options :order Changes the order in which the items
+      #   will be yielded (see {#order}).
+      #
+      # @option options :limit [Integer] The maximum number of
+      #   items to fetch from SimpleDB.  
+      #
       # @option options :batch_size Specifies a maximum number of records
       #   to fetch from SimpleDB in a single request.  SimpleDB may return
       #   fewer items than :batch_size per request, but never more.
-      # @return [nil]
+      #   Generally you should not need to specify this option.
+      #
+      # @return [String,nil] Returns a next token that can be used with 
+      #   the exact same SimpleDB select expression to get more results.
+      #   A next token is returned ONLY if there was a limit on the
+      #   expression, otherwise all items will be enumerated and
+      #   nil is returned.
+      #
       def each options = {}, &block
 
-        handle_query_options(options) do |c, opts|
-          return c.each(opts, &block)
+        handle_query_options(options) do |collection, opts|
+          return collection.each(opts, &block)
         end
 
-        if attributes = options.delete(:select)
-          return select(attributes, options, &block)
-        end
-
-        perform_select(options) do |response|
-          response.items.each do |item|
-            yield(self[item.name])
-          end
-        end
-
-      end
-
-      # Retrieves data from each item in the domain.
-      #
-      #   domain.items.select('size', 'color')
-      #
-      # You may optionally filter by a set of conditions.  For example, 
-      # to retrieve the attributes of each of the top 100 items in order of
-      # descending popularity as an array of hashes, you could do:
-      #
-      #  items.order(:popularity, :desc).limit(100).select do |data|
-      #    puts data.to_yaml
-      #  end
-      #
-      # You can select specific attributes; for example, to get
-      # all the unique colors in the collection you could do:
-      #
-      #  colors = Set.new
-      #  items.select(:color) {|data| colors += data.attributes["color"] }
-      #
-      # Finally, you can specify conditions, sort instructions, and
-      # a limit in the same method call:
-      #
-      #  items.select(:color,
-      #               :where => "rating > 4",
-      #               :order => [:popularity, :desc],
-      #               :limit => 100) do |data|
-      #    puts "Data for #{data.name}: #{data.attributes.inspect}"
-      #  end
-      #
-      # @overload select(*attribute_names, options = {}) &block
-      #   @param *attributes [Symbol, String, or Array]
-      #     The attributes to retrieve.  This can be:
-      #
-      #     * +:all+ to retrieve all attributes (the default).
-      #     * a Symbol or String to retrieve a single attribute.
-      #     * an array of Symbols or Strings to retrieve multiple attributes.
-      #
-      #     For single attributes or arrays of attributes, the
-      #     attribute name may contain any characters that are valid
-      #     in a SimpleDB attribute name; this method will handle
-      #     escaping them for inclusion in the query.  Note that you
-      #     cannot use this method to select the number of items; use
-      #     {#count} instead.
-      #
-      #   @param [Hash] options Options for querying the domain.
-      #   @option options [Boolean] :consistent_read (false) Causes this
-      #     method to yield the most current data in the domain.
-      #   @option options :where Restricts the item collection using
-      #     {#where} before querying.
-      #   @option options :order Changes the order in which the items
-      #     will be yielded (see {#order}).
-      #   @option options :limit [Integer] The maximum number of
-      #     items to fetch from SimpleDB.  More than one request may be
-      #     required to satisfy the limit.
-      #   @option options :batch_size Specifies a maximum number of records
-      #     to fetch from SimpleDB in a single request.  SimpleDB may return
-      #     fewer items than :batch_size per request, but never more.
-      #   @return If no block is given, an enumerator is returned. If a block
-      #     was passed then nil is returned.
-      def select *attributes, &block
-        
-        options = attributes.last.is_a?(Hash) ? attributes.pop : {}
-
-        args = attributes + [options]
-
-        handle_query_options(*args) do |c, *clean_args|
-          return c.select(*clean_args, &block)
-        end
-
-        unless block_given?
-          return Enumerator.new(self, :select, *args)
-        end
-
-        if attributes.empty?
-          output_list = '*'
-        #elsif attributes == ['*']
-        #  output_list = '*'
-        else
-          output_list = [attributes].flatten.collect do |attr|
-            coerce_attribute(attr)
-          end.join(', ')
-        end
-
-        perform_select(options.merge(:output_list => output_list)) do |response|
-          response.items.each do |item|
-            yield(ItemData.new(:domain => domain, :response_object => item))
-          end
-        end
-
-        nil
+        super
 
       end
 
@@ -211,31 +178,32 @@ module AWS
       #
       #   domain.items.count
       #
-      # You can use this method to get the total number of items in
-      # the domain, or you can use it with {#where} to count a subset
-      # of items.  For example, to count the items where the "color"
-      # attribute is "red":
+      # You can specify what items to count with {#where}:
       #
-      #   domain.items.where("color" => "red").count
+      #   domain.items.where(:color => "red").count
       #
-      # You can also limit the number of items searched using the
-      # {#limit} method.  For example, to count the number of items up
-      # to 500:
+      # You can also limit the number of items to count:
       #
+      #   # count up to 500 items and then stop
       #   domain.items.limit(500).count
       #
       # @param [Hash] options Options for counting items.
       #
       # @option options [Boolean] :consistent_read (false) Causes this
-      #   method to yield the most current data in the domain.
+      #   method to yield the most current data in the domain when +true+.
+      #
       # @option options :where Restricts the item collection using
       #   {#where} before querying.
+      #
       # @option options :limit [Integer] The maximum number of
-      #   items to fetch from SimpleDB.  More than one request may be
-      #   required to satisfy the limit.
+      #   items to count in SimpleDB.
+      #
+      # @return [Integer] The number of items counted.
+      #
       def count options = {}, &block
-        handle_query_options(options) do |c, opts|
-          return c.count(opts, &block)
+
+        handle_query_options(options) do |collection, opts|
+          return collection.count(opts, &block)
         end
 
         options = options.merge(:output_list => "count(*)")
@@ -243,30 +211,107 @@ module AWS
         count = 0
         next_token = nil
 
-        while limit.nil? || count < limit and
-            response = select_request(options, next_token)
+        begin
 
-          if domain_item = response.items.first and
-              count_attribute = domain_item.attributes.first
+          response = select_request(options, next_token)
+
+          if 
+            domain_item = response.items.first and
+            count_attribute = domain_item.attributes.first
+          then
             count += count_attribute.value.to_i
           end
 
-          next_token = response.next_token
-          break unless next_token
+          break unless next_token = response.next_token
 
-        end
+        end while limit.nil? || count < limit
 
         count
+
       end
       alias_method :size, :count
 
-      # Identifies quoted regions in the string, giving access to
-      # the regions before and after each quoted region, for example:
-      #  "? ? `foo?``bar?` ? 'foo?' ?".scan(OUTSIDE_QUOTES_REGEX)
-      #  # => [["? ? ", "`foo?``bar?`", " ? "], ["", "'foo?'", " ?"]]
-      OUTSIDE_QUOTES_REGEX = Regexp.compile('([^\'"`]*)(`(?:[^`]*(?:``))*[^`]*`|'+
-                                            '\'(?:[^\']*(?:\'\'))*[^\']*\'|'+
-                                            '"(?:[^"]*(?:""))*[^"]*")([^\'`"]*)')
+#       # @return [PageResult] Returns an array-based object with results.
+#       #   Results are either {Item} or {ItemData} objects depending on
+#       #   the selection mode (item names only or with attributes).
+#       #
+#       def page options = {}
+# 
+#         handle_query_options(options) do |collection, opts|
+#           return collection.page(opts)
+#         end
+# 
+#         super(options)
+# 
+#       end
+
+      # Specifies a list of attributes select from SimpleDB.
+      #
+      #   domain.items.select('size', 'color').each do |item_data|
+      #     puts item_data.attributes # => { 'size' => ..., :color => ... }
+      #   end
+      #
+      # You can select all attributes by passing +:all+ or '*':
+      #
+      #   domain.items.select('*').each {|item_data| ... }
+      #
+      #   domain.items.select(:all).each {|item_data| ... }
+      #
+      # Calling #select causes #each to yield {ItemData} objects
+      # with #attribute hashes, instead of {Item} objects with 
+      # an item name.
+      #
+      # @param *attributes [Symbol, String, or Array] The attributes to
+      #   retrieve.  This can be:
+      #  
+      #   * +:all+ or '*' to request all attributes for each item
+      #  
+      #   * A list or array of attribute names as strinsg or symbols
+      #
+      #     Attribute names may contain any characters that are valid
+      #     in a SimpleDB attribute name; this method will handle
+      #     escaping them for inclusion in the query.  Note that you
+      #     cannot use this method to select the number of items; use
+      #     {#count} instead.
+      #
+      # @return [ItemCollection] Returns a new item collection with the
+      #   specified list of attributes to select.
+      #
+      def select *attributes, &block
+
+        # Before select was morphed into a chainable method, it accepted
+        # a hash of options (e.g. :where, :order, :limit) that no longer
+        # make sense, but to maintain backwards compatability we still
+        # consume those.
+        #
+        # TODO : it would be a good idea to add a deprecation warning for
+        #        passing options to #select
+        #
+        handle_query_options(*attributes) do |collection, *args|
+          return collection.select(*args, &block)
+        end
+
+        options = attributes.last.is_a?(Hash) ? attributes.pop : {}
+
+        output_list = case attributes.flatten
+        when []     then '*'
+        when ['*']  then '*'
+        when [:all] then '*'
+        else attributes.flatten.map{|attr| coerce_attribute(attr) }.join(', ')
+        end
+
+        collection = collection_with(:output_list => output_list)
+
+        if block_given?
+          # previously select accepted a block and it would enumerate items
+          # this is for backwards compatability
+          collection.each(options, &block)
+          nil
+        else
+          collection
+        end
+
+      end
 
       # Returns an item collection defined by the given conditions
       # in addition to any conditions defined on this collection.
@@ -333,7 +378,8 @@ module AWS
       #
       # @return [ItemCollection] Returns a new item collection with the
       #   additional conditions.
-      def where(conditions, *substitutions)
+      #
+      def where conditions, *substitutions
         case conditions
         when String
           conditions = [replace_placeholders(conditions, *substitutions)]
@@ -391,64 +437,72 @@ module AWS
       #
       # @overload limit
       #   @return [Integer] Returns the current limit for the collection.
+      #
       # @overload limit(value)
       #   @return [ItemCollection] Returns a collection with the given limit.
-      def limit(*args)
+      #
+      def limit *args
         return @limit if args.empty?
         collection_with(:limit => Integer(args.first))
       end
+      alias_method :_limit, :limit # for Collection::Limitable
 
-      # turns e.g. each(:where => 'foo', ...) into where('foo').each(...)
+      # Applies standard scope options (e.g. :where => 'foo') and removes them from
+      # the options hash by calling their method (e.g. by calling #where('foo')).
+      # Yields only if there were scope options to apply.  
       # @private
       protected
       def handle_query_options(*args)
-        options = args.pop if args.last.kind_of?(Hash)
-        if query_options = options.keys & [:where, :order, :limit] and
-            !query_options.empty?
-          c = self
+
+        options = args.last.is_a?(Hash) ? args.pop : {}
+
+        if 
+          query_options = options.keys & [:select, :where, :order, :limit] and
+          !query_options.empty?
+        then
+          collection = self
           query_options.each do |query_option|
             option_args = options[query_option]
             option_args = [option_args] unless option_args.kind_of?(Array)
             options.delete(query_option)
-            c = send(query_option, *option_args)
+            collection = collection.send(query_option, *option_args)
           end
-          yield(c, *(args + [options]))
+
+          args << options
+
+          yield(collection, *args)
+
         end
       end
 
-      # @private
       protected
-      def perform_select(options = {})
+      def _each_item next_token, max, options = {}, &block
 
-        next_token = options[:next_token]
-        batch_size = options[:batch_size] ? Integer(options[:batch_size]) : nil
-        total = 0
-        
-        begin
+        handle_query_options(options) do |collection, opts|
+          return collection._each_item(next_token, max, opts, &block)
+        end
 
-          # if the user provided a batch size we need to rewrite the
-          # select expression's LIMIT clause.  
-          if batch_size
-            max = limit ? [limit - total, batch_size].min : batch_size
-          else
-            max = nil
+        response = select_request(options, next_token, max)
+
+        if output_list == 'itemName()'  
+          response.items.each do |item|
+            yield(self[item.name])
           end
+        else
+          response.items.each do |item|
+            yield(ItemData.new(:domain => domain, :response_object => item))
+          end
+        end
 
-          response = select_request(options, next_token, max)
-
-          yield(response)
-
-          next_token = response.next_token
-
-          total += response.items.size
-
-        end while next_token && (limit.nil? || total < limit)
+        response.next_token
+        
       end
 
       protected
       def select_request(options, next_token = nil, limit = nil)
+
         opts = {}
-        opts[:select_expression] = select_expression(options[:output_list])
+        opts[:select_expression] = select_expression(options)
         opts[:consistent_read] = consistent_read(options)
         opts[:next_token] = next_token if next_token
 
@@ -459,57 +513,57 @@ module AWS
         end
 
         client.select(opts)
+
       end
 
       # @private
       protected
-      def select_expression(output_list = nil)
-        output_list ||= "itemName()"
-        "SELECT #{output_list} FROM `#{domain.name}`" +
-          where_clause + order_by_clause + limit_clause
-      end
-
-      # @private
-      protected
-      def limit_clause
-        if limit
-          " LIMIT #{limit}"
-        else
-          ""
-        end
+      def select_expression options = {}
+        expression = []
+        expression << "SELECT #{options[:output_list] || self.output_list}"
+        expression << "FROM `#{domain.name}`"
+        expression << where_clause
+        expression << order_by_clause
+        expression << limit_clause
+        expression.compact.join(' ')
       end
 
       # @private
       protected
       def where_clause
-        all_conditions = conditions.dup
+
+        conditions = self.conditions.dup
+
         if @not_null_attribute
-          all_conditions << coerce_attribute(@not_null_attribute) + " IS NOT NULL"
+          conditions << coerce_attribute(@not_null_attribute) + " IS NOT NULL"
         end
-        if all_conditions.empty?
-          ""
-        else
-          " WHERE " + all_conditions.join(" AND ")
-        end
+
+        conditions.empty? ? nil : "WHERE #{conditions.join(" AND ")}"
+
       end
 
       # @private
       protected
       def order_by_clause
-        if sort_instructions
-          " ORDER BY " + sort_instructions
-        else
-          ""
-        end
+        sort_instructions ? "ORDER BY #{sort_instructions}" : nil
       end
 
       # @private
       protected
-      def collection_with(opts)
+      def limit_clause
+        limit ? "LIMIT #{limit}" : nil
+      end
+
+      # @private
+      protected
+      def collection_with options
         ItemCollection.new(domain, { 
-          :limit => limit,
+          :output_list => output_list,
           :conditions => conditions,
-          :sort_instructions => sort_instructions }.merge(opts))
+          :sort_instructions => sort_instructions,
+          :not_null_attribute => @not_null_attribute,
+          :limit => limit,
+        }.merge(options))
       end
 
       # @private

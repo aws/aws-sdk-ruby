@@ -14,6 +14,7 @@
 require 'aws/core'
 
 require 'aws/ec2/config'
+require 'aws/elb/config'
 require 'aws/iam/config'
 require 'aws/s3/config'
 require 'aws/simple_db/config'
@@ -25,6 +26,7 @@ require 'aws/sts/config'
 module AWS
   register_autoloads(self) do
     autoload :EC2, 'ec2'
+    autoload :ELB, 'elb'
     autoload :IAM, 'iam'
     autoload :S3, 's3'
     autoload :SimpleDB, 'simple_db'

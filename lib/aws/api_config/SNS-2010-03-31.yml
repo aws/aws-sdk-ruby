@@ -61,11 +61,11 @@
       - :string
       - :required
       AWSAccountId: 
-      - :list: 
+      - :membered_list: 
         - :string
       - :required
       ActionName: 
-      - :list: 
+      - :membered_list: 
         - :string
       - :required
     :output: []

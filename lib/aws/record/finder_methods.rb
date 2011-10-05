@@ -150,12 +150,15 @@ module AWS
       #   Car.where('color = ? OR style = ?', 'red', 'compact')
       #
       #   # produces a condition using in, like: WHERE color IN ('red', 'blue')
-      #   Car.where('color = ?', ['red','blue'])
+      #   Car.where('color IN ?', ['red','blue'])
       # 
       # Hash arguments
       #
       #   # WHERE age = '40' AND gender = 'male'
       #   People.where(:age => 40, :gender => 'male').each {|person| ... }
+      #
+      #   # WHERE name IN ('John', 'Jane')
+      #   People.where(:name => ['John', 'Jane']).each{|person| ... }
       #
       # Chaining where with other scope modifiers
       #

@@ -97,6 +97,37 @@ module AWS
           obj1.copy_from('bucket/key', :acl => :public_read)
         end
 
+        context ':server_side_encryption option' do
+
+          it 'allows you to specify a value' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :aes256))
+            obj1.copy_from('bucket/key', :server_side_encryption => :aes256)
+          end
+
+          it 'uses the configured value by default' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :aes256))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_from('bucket/key')
+          end
+
+          it 'allows you to override the configured value' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :foobar))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_from('bucket/key', :server_side_encryption => :foobar)
+          end
+
+          it 'allows you to override the configured value with nil' do
+            client.should_receive(:copy_object).
+              with(hash_not_including(:server_side_encryption))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_from('bucket/key', :server_side_encryption => nil)
+          end
+
+        end
+
         it 'allows you copy an objects version by version id' do
           client.should_receive(:copy_object).with(hash_including(
             :version_id => 'abc'))
@@ -178,6 +209,37 @@ module AWS
           client.should_receive(:copy_object).
             with(hash_including(:acl => :public_read))
           obj1.copy_to('bucket/key', :acl => :public_read)
+        end
+
+        context ':server_side_encryption option' do
+
+          it 'allows you to specify a value' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :aes256))
+            obj1.copy_to('bucket/key', :server_side_encryption => :aes256)
+          end
+
+          it 'uses the configured value by default' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :aes256))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_to('bucket/key')
+          end
+
+          it 'allows you to override the configured value' do
+            client.should_receive(:copy_object).
+              with(hash_including(:server_side_encryption => :foobar))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_to('bucket/key', :server_side_encryption => :foobar)
+          end
+
+          it 'allows you to override the configured value with nil' do
+            client.should_receive(:copy_object).
+              with(hash_not_including(:server_side_encryption))
+            obj1.config.stub(:s3_server_side_encryption => :aes256)
+            obj1.copy_to('bucket/key', :server_side_encryption => nil)
+          end
+
         end
 
       end

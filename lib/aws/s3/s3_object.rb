@@ -82,12 +82,14 @@ module AWS
       # * content_length (integer, number of bytes)
       # * content_type (as sent to S3 when uploading the object)
       # * etag (typically the object's MD5)
+      # * server_side_encryption (the algorithm used to encrypt the
+      #   object on the server side, e.g. +:aes256+)
       # 
       # @param [Hash] options
       # @option options [String] :version_id Which version of this object
       #   to make a HEAD request against.
       # @return A head object response with metatadata, 
-      #   content_length, content_type and etag.
+      #   content_length, content_type, etag and server_side_encryption.
       def head options = {}
         client.head_object(options.merge(
           :bucket_name => bucket.name, :key => key))
@@ -122,6 +124,19 @@ module AWS
       #   defaults to an empty string when not provided during upload.
       def content_type
         head.content_type
+      end
+
+      # @return [Symbol, nil] Returns the algorithm used to encrypt
+      #   the object on the server side, or +nil+ if SSE was not used
+      #   when storing the object.
+      def server_side_encryption
+        head.server_side_encryption
+      end
+
+      # @return [true, false] Returns true if the object was stored
+      #   using server side encryption.
+      def server_side_encryption?
+        !server_side_encryption.nil?
       end
 
       # Deletes the object from its S3 bucket.
@@ -258,6 +273,15 @@ module AWS
       # @option options :content_type A standard MIME type
       #   describing the format of the object data.
       #
+      # @option options [Symbol] :server_side_encryption (nil) If this
+      #   option is set, the object will be stored using server side
+      #   encryption.  The only valid value is +:aes256+, which
+      #   specifies that the object should be stored using the AES
+      #   encryption algorithm with 256 bit keys.  By default, this
+      #   option uses the value of the +:s3_server_side_encryption+
+      #   option in the current configuration; for more information,
+      #   see {AWS.config}.
+      #
       # @return [S3Object, ObjectVersion] If the bucket has versioning
       #   enabled, returns the {ObjectVersion} representing the
       #   version that was uploaded.  If versioning is disabled,
@@ -266,6 +290,8 @@ module AWS
 
         (data_options, put_options) =
           compute_put_options(options_or_data, options)
+
+        add_configured_write_options(put_options)
 
         if use_multipart?(data_options, put_options)
           put_options.delete(:multipart_threshold)
@@ -363,11 +389,24 @@ module AWS
       # @option options :content_type A standard MIME type
       #   describing the format of the object data.
       #
+      # @option options [Symbol] :server_side_encryption (nil) If this
+      #   option is set, the object will be stored using server side
+      #   encryption.  The only valid value is +:aes256+, which
+      #   specifies that the object should be stored using the AES
+      #   encryption algorithm with 256 bit keys.  By default, this
+      #   option uses the value of the +:s3_server_side_encryption+
+      #   option in the current configuration; for more information,
+      #   see {AWS.config}.
+      #
       # @return [S3Object, ObjectVersion] If the bucket has versioning
       #   enabled, returns the {ObjectVersion} representing the
       #   version that was uploaded.  If versioning is disabled,
       #   returns self.
       def multipart_upload(options = {})
+
+        options = options.dup
+        add_configured_write_options(options)
+
         upload = multipart_uploads.create(options)
 
         if block_given?
@@ -398,6 +437,12 @@ module AWS
       # S3 handles the copy so the clients does not need to fetch the data
       # and upload it again.  You can also change the storage class and 
       # metadata of the object when copying.
+      #
+      # @note This operation does not copy the ACL, storage class
+      #   (standard vs. reduced redundancy) or server side encryption
+      #   setting from the source object.  If you don't specify any of
+      #   these options when copying, the object will have the default
+      #   values as described below.
       #
       # @param [Mixed] source
       #
@@ -430,6 +475,15 @@ module AWS
       #   * +:bucket_owner_read+
       #   * +:bucket_owner_full_control+
       #
+      # @option options [Symbol] :server_side_encryption (nil) If this
+      #   option is set, the object will be stored using server side
+      #   encryption.  The only valid value is +:aes256+, which
+      #   specifies that the object should be stored using the AES
+      #   encryption algorithm with 256 bit keys.  By default, this
+      #   option uses the value of the +:s3_server_side_encryption+
+      #   option in the current configuration; for more information,
+      #   see {AWS.config}.
+      #
       # @return [nil]
       def copy_from source, options = {}
 
@@ -458,6 +512,10 @@ module AWS
 
         copy_opts[:acl] = options[:acl] if options[:acl]
         copy_opts[:version_id] = options[:version_id] if options[:version_id]
+        copy_opts[:server_side_encryption] =
+          options[:server_side_encryption] if
+          options.key?(:server_side_encryption)
+        add_configured_write_options(copy_opts)
 
         if options[:reduced_redundancy]
           copy_opts[:storage_class] = 'REDUCED_REDUNDANCY'
@@ -476,6 +534,12 @@ module AWS
       # S3 handles the copy so the client does not need to fetch the data
       # and upload it again.  You can also change the storage class and 
       # metadata of the object when copying.
+      #
+      # @note This operation does not copy the ACL, storage class
+      #   (standard vs. reduced redundancy) or server side encryption
+      #   setting from this object to the new object.  If you don't
+      #   specify any of these options when copying, the new object
+      #   will have the default values as described below.
       #
       # @param [S3Object,String] target An S3Object, or a string key of
       #   and object to copy to.
@@ -496,6 +560,25 @@ module AWS
       # @option options [Boolean] :reduced_redundancy (false) If true
       #   the object is stored with reduced redundancy in S3 for a
       #   lower cost.
+      #
+      # @option options [Symbol] :acl (private) A canned access
+      #   control policy.  Valid values are:
+      #
+      #   * +:private+
+      #   * +:public_read+
+      #   * +:public_read_write+
+      #   * +:authenticated_read+
+      #   * +:bucket_owner_read+
+      #   * +:bucket_owner_full_control+
+      #
+      # @option options [Symbol] :server_side_encryption (nil) If this
+      #   option is set, the object will be stored using server side
+      #   encryption.  The only valid value is +:aes256+, which
+      #   specifies that the object should be stored using the AES
+      #   encryption algorithm with 256 bit keys.  By default, this
+      #   option uses the value of the +:s3_server_side_encryption+
+      #   option in the current configuration; for more information,
+      #   see {AWS.config}.
       #
       # @return (see #copy_from)
       def copy_to target, options = {}
@@ -823,6 +906,15 @@ module AWS
         else
           [{ :data => options_or_data || "" }, {}]
         end
+      end
+
+      private
+      def add_configured_write_options(options)
+        options[:server_side_encryption] =
+          config.s3_server_side_encryption unless
+          options.key?(:server_side_encryption)
+        options.delete(:server_side_encryption) if
+          options[:server_side_encryption] == nil
       end
 
       # @private

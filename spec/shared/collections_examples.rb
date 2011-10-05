@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
 
-  shared_examples_for "a basic collection" do
+  shared_examples_for "a simple collection" do
 
     let(:collection)      { raise NotImplementedError }
     let(:client_method)   { raise NotImplementedError }
@@ -27,7 +27,7 @@ module AWS
       stub_n_members(response, 2)
     end
 
-    it_behaves_like "a collection with #enumerator"
+    it_behaves_like "a collection with #enum"
 
     context '#each' do
 
@@ -50,7 +50,7 @@ module AWS
 
   end
 
-  shared_examples_for "a paged collection" do
+  shared_examples_for "a batchable collection" do
 
     let(:collection)      { raise NotImplementedError }
     let(:client_method)   { raise NotImplementedError }
@@ -62,16 +62,16 @@ module AWS
       client.stub(client_method).and_return(response)
     end
 
-    it_behaves_like "a collection with #enumerator"
+    it_behaves_like "a collection with #enum"
 
   end
 
-  shared_examples_for "a paged collection with limits" do
+  shared_examples_for "a pageable collection with limits" do
 
     let(:collection)      { raise NotImplementedError }
     let(:client_method)   { raise NotImplementedError }
     let(:next_token_key)  { raise NotImplementedError }
-    let(:limit_key)       { raise NotImplementedError }
+    let(:limit_key)       { :limit }
     let(:response)        { client.new_stub_for(client_method) }
     let(:request_options) { {} }
 
@@ -79,12 +79,12 @@ module AWS
       client.stub(client_method).and_return(response)
     end
 
-    it_behaves_like "a collection with #enumerator"
+    it_behaves_like "a collection with #enum"
 
     context '#each' do
 
       context 'with :limit' do
-  
+
         it 'passes :limit as limit_key' do
   
           client.should_receive(client_method).
@@ -229,14 +229,14 @@ module AWS
 
   end
 
-  shared_examples_for "a collection with #enumerator" do
+  shared_examples_for "a collection with #enum" do
 
     it 'should be enumerable' do
       collection.should be_an(Enumerable)
     end
 
     it 'responds to enumerator' do
-      collection.should respond_to(:enumerator)
+      collection.should respond_to(:enum)
     end
 
     it 'returns an enumerator' do
@@ -244,17 +244,17 @@ module AWS
       # 1.8.6 only has Enumerable::Enumerator,
       # 1.8.7 has both Enumerable::Enumerator and Enumerator
       # 1.9.2 only has Enumerator (not Enumerable::Enumerator)
-      collection.enumerator.class.name.should =~ /Enumerator$/
+      collection.enum.class.name.should =~ /Enumerator$/
     end
 
     it 'returns an enumerator for the each method' do
       collection.should_receive(:each)
-      collection.enumerator.collect {|obj|}
+      collection.enum.collect {|obj|}
     end
 
     it 'passes arguments to the each method' do
       collection.should_receive(:each).with(:limit => 4, :batch_size => 2)
-      collection.enumerator(:limit => 4, :batch_size => 2).collect {|obj|}
+      collection.enum(:limit => 4, :batch_size => 2).collect {|obj|}
     end
 
   end

@@ -120,6 +120,7 @@ module AWS
       end
 
       shared_examples_for 'method accepting query options' do |method, *args|
+
         original_args = args.dup
 
         options = args.pop if args.last.kind_of?(Hash)
@@ -161,6 +162,10 @@ module AWS
             items.send(method, *args_with_option) { |v| obj.call(v) }
           end
 
+        end
+
+        unless method == :select
+          it_should_behave_like "#{method} accepts query option", :select
         end
 
         it_should_behave_like "#{method} accepts query option", :where
@@ -232,17 +237,6 @@ module AWS
             let(:method) { :each }
             let(:client_method) { :select }
             let(:response) { double('response', :items => [], :next_token => nil) }
-          end
-
-        end
-
-        context 'with :select' do
-
-          it 'calls #select' do
-            obj = double("obj")
-            obj.should_receive(:call).with("hello")
-            items.should_receive(:select).with(true, {}).and_yield("hello")
-            items.each(:select => true) { |data| obj.call(data) }
           end
 
         end
@@ -423,6 +417,50 @@ module AWS
             counts = [6, 6, 2]
             count_attribute.stub(:value) { counts.shift.to_s unless counts.empty? }
             items.limit(12).count.should == 12
+          end
+
+        end
+
+      end
+
+      context '#page' do
+
+        let(:response) { client.stub_for(:select) }
+
+        context 'the collection' do
+
+          it 'applies :where, :order and :limit to the page request' do
+
+            client.should_receive(:select).with do |opts|
+              opts[:select_expression].should match(/SELECT `name`/)
+              opts[:select_expression].should match(/`age` = '40'/)
+              opts[:select_expression].should match(/ORDER BY `age` DESC/)
+              opts[:select_expression].should match(/LIMIT 10/)
+              anything()
+            end.and_return(response)
+
+            items.select('name').where(:age => 40).order(:age, :desc).limit(10).page
+
+          end
+
+        end
+
+        context '#per_page' do
+        
+          it 'returns a page result object' do
+            items.page.should be_a(Core::PageResult)  
+          end
+
+          it 'defaults per_page to 10' do
+            items.page.per_page.should == 10
+          end
+
+          it 'accepts a numeric :per_page option' do
+            items.page(:per_page => 25).per_page.should == 25
+          end
+
+          it 'accepts a string :per_page option' do
+            items.page(:per_page => '25').per_page.should == 25
           end
 
         end

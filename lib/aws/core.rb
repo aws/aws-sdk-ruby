@@ -55,7 +55,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.1.4"
+  VERSION = "1.2.0"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -65,7 +65,6 @@ module AWS
 
     AWS.register_autoloads(self) do
       autoload :ApiConfig,                 'api_config'
-      autoload :ApiConfigTransform,        'api_config_transform'
       autoload :AsyncHandle,               'async_handle'
       autoload :AuthorizeV2,               'authorize_v2'
       autoload :AuthorizeV3,               'authorize_v3'
@@ -73,7 +72,7 @@ module AWS
       autoload :Cacheable,                 'cacheable'
       autoload :Client,                    'client'
       autoload :ClientLogging,             'client_logging'
-      autoload :Collections,               'collections'
+      autoload :Collection,                'collection'
       autoload :Configuration,             'configuration'
       autoload :ConfiguredClientMethods,   'configured_client_methods'
       autoload :ConfiguredGrammars,        'configured_grammars'
@@ -88,6 +87,7 @@ module AWS
       autoload :Model,                     'model'
       autoload :Naming,                    'naming'
       autoload :OptionGrammar,             'option_grammar'
+      autoload :PageResult,                'page_result'
       autoload :Policy,                    'policy'
       autoload :Resource,                  'resource'
       autoload :ResourceCache,             'resource_cache'
@@ -187,6 +187,21 @@ module AWS
     # @option options [Integer] :s3_multipart_min_part_size (5242880) The 
     #   absolute minimum size (in bytes) each S3 multipart segment should be.
     #   Defaults to 5242880 (5MB).
+    #
+    # @option options [Symbol] :s3_server_side_encryption (nil) The
+    #   algorithm to use when encrypting object data on the server
+    #   side.  The only valid value is +:aes256+, which specifies that
+    #   the object should be stored using the AES encryption algorithm
+    #   with 256 bit keys.  Defaults to +nil+, meaning server side
+    #   encryption is not used unless specified on each individual
+    #   call to upload an object.  This option controls the default
+    #   behavior for the following methods:
+    #
+    #   * {S3::S3Object#write}
+    #   * {S3::S3Object#multipart_upload}
+    #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
+    #   * {S3::S3Object#presigned_post}
+    #   * {S3::Bucket#presigned_post}
     #
     # @option options [String] :secret_access_key (nil) AWS secret access 
     #   key credential.

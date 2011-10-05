@@ -326,6 +326,19 @@ module AWS
           hash
         end
       end
+
+      # Acts like {#update} but does not call {#save}.
+      #
+      #   record.attributes = { :name => 'abc', :age => 20 }
+      #
+      # @param [Hash] attributes A hash of attributes to set on this record
+      #   without calling save. 
+      #
+      # @return [Hash] Returns the attribute hash that was passed in.
+      #
+      def attributes= attributes
+        bulk_assign(attributes)
+      end
   
       # Persistence indicates if the record has been saved previously or not.
       #
@@ -348,7 +361,7 @@ module AWS
   
       # @return [Boolean] Returns true if this record has no validation errors.
       def valid?
-        validate
+        run_validations
         errors.empty?
       end
   

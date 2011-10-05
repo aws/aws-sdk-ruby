@@ -19,15 +19,21 @@ module AWS
         include Core::Model
 
         # @param protocol [:tcp, :udp, :icmp]
+        #
         # @param port [Range,Integer] An integer or a range of integers
         #   to open ports for.
+        #
         # @param [Hash] options
+        #
         # @option options [Array] :ip_ranges An array of CIDR ip address
         #   to grant permission to.
+        #
         # @option options [Array] :groups An array of SecurityGroup objects to
         #   grant permission to.
+        #
         # @option options [Boolean] :egress (false) When true this IpPermission
         #   is assumed to be an egree permission.
+        #
         def initialize security_group, protocol, ports, options = {}
 
           @security_group = security_group
@@ -75,33 +81,13 @@ module AWS
         # Authorizes this permission from its security group.
         # @return [IpPermission] Returns self
         def authorize
-
-          method = egress? ? 
-            :authorize_security_group_egress :
-            :authorize_security_group_ingress
-
-          client.send(method, 
-            :group_id => security_group.id,
-            :ip_permissions => [format_permission])
-
-          self
-
+          update_sg(egress? ? :authorize_egress : :authorize_ingress)
         end
 
         # Revokes this permission from its security group.
         # @return [IpPermission] Returns self
         def revoke
-
-          method = egress? ? 
-            :revoke_security_group_egress :
-            :revoke_security_group_ingress
-
-          client.send(method, 
-            :group_id => security_group.id,
-            :ip_permissions => [format_permission])
-
-          self
-
+          update_sg(egress? ? :revoke_egress : :revoke_ingress)
         end
 
         # @return [Boolean] Returns true if the other IpPermission matches
@@ -118,32 +104,24 @@ module AWS
 
         alias_method :eql?, :==
 
-        # @private
         protected
-        def format_permission
-      
-          permission = {}
+        def update_sg method
 
-          permission[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s
+          sources = []
+          sources += ip_ranges
+          sources += groups
 
-          if port_range
-            permission[:from_port] = port_range.first
-            permission[:to_port] = port_range.last
+          if egress?
+            opts = {}
+            opts[:protocol] = protocol
+            opts[:ports] = port_range if port_range
+            sources << opts
+            security_group.send(method, *sources)
+          else
+            security_group.send(method, protocol, port_range, *sources)
           end
 
-          unless ip_ranges.empty?
-            permission[:ip_ranges] = ip_ranges.collect{|ip| { :cidr_ip => ip } }
-          end
-
-          unless groups.empty?
-            permission[:user_id_group_pairs] = groups.inject([]) do |list,group|
-              list << { :group_id => group.id, :user_id => group.owner_id }
-              list
-            end
-          end
-
-          permission
-
+          self
         end
 
       end

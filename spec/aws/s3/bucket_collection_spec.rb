@@ -83,6 +83,16 @@ module AWS
           buckets.create('name')
         end
 
+        it 'leaves off the location constraint for non-standard endpoint names' do
+
+          config.stub(:s3_endpoint).and_return('s3.foo.bar.com')
+
+          buckets.client.should_receive(:create_bucket).
+            with(hash_not_including(:location_constraint))
+
+          buckets.create('name')
+        end
+
       end
 
       context '#each' do

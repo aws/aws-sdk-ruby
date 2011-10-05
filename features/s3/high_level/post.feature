@@ -31,21 +31,21 @@ Feature: Pre-signed HTML Form Fields
 
   Scenario: Pre-signed POST with various options
     When I generate pre-signed form fields for the object "foo" with the following parameters:
-    | acl                 | public_read |
-    | cache_control       | something   |
-    | content_type        | text/plain  |
-    | content_disposition | attachment  |
-    | content_encoding    | gzip        |
-    | expires_header      | tomorrow    |
+    | acl                    | public_read |
+    | cache_control          | something   |
+    | content_type           | text/plain  |
+    | content_disposition    | attachment  |
+    | content_encoding       | gzip        |
+    | expires_header         | tomorrow    |
     And I use a regular HTTP client to POST the data "HELLO"
     And I ask for the public URL of object "foo"
     And I use a regular HTTP client to GET the URL
     Then the response headers should include:
-    | content-type        | text/plain |
-    | expires             | tomorrow   |
-    | cache-control       | something  |
-    | content-disposition | attachment |
-    | content-encoding    | gzip       |
+    | content-type                 | text/plain |
+    | expires                      | tomorrow   |
+    | cache-control                | something  |
+    | content-disposition          | attachment |
+    | content-encoding             | gzip       |
 
   Scenario: Pre-signed POST with success redirect
     When I generate pre-signed form fields for the object "foo" with the following parameters:

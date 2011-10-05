@@ -1,0 +1,380 @@
+# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+--- 
+:operations: 
+  DescribeLoadBalancerPolicies: 
+    :input: 
+      PolicyNames: 
+      - :membered_list: 
+        - :string
+      LoadBalancerName: 
+      - :string
+    :output: 
+    - PolicyDescriptions: 
+      - :list: member
+      - member: 
+        - PolicyAttributeDescriptions: 
+          - :list: member
+  CreateLoadBalancerPolicy: 
+    :input: 
+      PolicyAttributes: 
+      - :membered_list: 
+        - :structure: 
+            AttributeValue: 
+            - :string
+            AttributeName: 
+            - :string
+      PolicyTypeName: 
+      - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+      PolicyName: 
+      - :string
+      - :required
+    :output: []
+
+  DescribeLoadBalancerPolicyTypes: 
+    :input: 
+      PolicyTypeNames: 
+      - :membered_list: 
+        - :string
+    :output: 
+    - PolicyTypeDescriptions: 
+      - :list: member
+      - member: 
+        - PolicyAttributeTypeDescriptions: 
+          - :list: member
+  CreateAppCookieStickinessPolicy: 
+    :input: 
+      CookieName: 
+      - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+      PolicyName: 
+      - :string
+      - :required
+    :output: []
+
+  DeregisterInstancesFromLoadBalancer: 
+    :input: 
+      LoadBalancerName: 
+      - :string
+      - :required
+      Instances: 
+      - :membered_list: 
+        - :structure: 
+            InstanceId: 
+            - :string
+      - :required
+    :output: 
+    - Instances: 
+      - :list: member
+  DeleteLoadBalancerPolicy: 
+    :input: 
+      LoadBalancerName: 
+      - :string
+      - :required
+      PolicyName: 
+      - :string
+      - :required
+    :output: []
+
+  DisableAvailabilityZonesForLoadBalancer: 
+    :input: 
+      AvailabilityZones: 
+      - :membered_list: 
+        - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: 
+    - AvailabilityZones: 
+      - :list: member
+  DescribeLoadBalancers: 
+    :input: 
+      LoadBalancerNames: 
+      - :membered_list: 
+        - :string
+    :output: 
+    - LoadBalancerDescriptions: 
+      - :list: member
+      - member: 
+        - ListenerDescriptions: 
+          - :list: member
+          - member: 
+            - Listener: 
+              - LoadBalancerPort: 
+                - :integer
+              - InstancePort: 
+                - :integer
+            - PolicyNames: 
+              - :list: member
+        - Policies: 
+          - AppCookieStickinessPolicies: 
+            - :list: member
+          - LBCookieStickinessPolicies: 
+            - :list: member
+            - member: 
+              - CookieExpirationPeriod: 
+                - :long
+          - OtherPolicies: 
+            - :list: member
+        - BackendServerDescriptions: 
+          - :list: member
+          - member: 
+            - InstancePort: 
+              - :integer
+            - PolicyNames: 
+              - :list: member
+        - AvailabilityZones: 
+          - :list: member
+        - Instances: 
+          - :list: member
+        - HealthCheck: 
+          - Interval: 
+            - :integer
+          - Timeout: 
+            - :integer
+          - UnhealthyThreshold: 
+            - :integer
+          - HealthyThreshold: 
+            - :integer
+        - CreatedTime: 
+          - :timestamp
+  DeleteLoadBalancerListeners: 
+    :input: 
+      LoadBalancerPorts: 
+      - :membered_list: 
+        - :integer
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  CreateLoadBalancer: 
+    :input: 
+      Listeners: 
+      - :membered_list: 
+        - :structure: 
+            InstancePort: 
+            - :integer
+            - :required
+            Protocol: 
+            - :string
+            - :required
+            InstanceProtocol: 
+            - :string
+            LoadBalancerPort: 
+            - :integer
+            - :required
+            SSLCertificateId: 
+            - :string
+      - :required
+      AvailabilityZones: 
+      - :membered_list: 
+        - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  SetLoadBalancerPoliciesOfListener: 
+    :input: 
+      PolicyNames: 
+      - :membered_list: 
+        - :string
+      - :required
+      LoadBalancerPort: 
+      - :integer
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  CreateLBCookieStickinessPolicy: 
+    :input: 
+      CookieExpirationPeriod: 
+      - :long
+      LoadBalancerName: 
+      - :string
+      - :required
+      PolicyName: 
+      - :string
+      - :required
+    :output: []
+
+  SetLoadBalancerListenerSSLCertificate: 
+    :input: 
+      LoadBalancerPort: 
+      - :integer
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+      SSLCertificateId: 
+      - :string
+      - :required
+    :output: []
+
+  SetLoadBalancerPoliciesForBackendServer: 
+    :input: 
+      InstancePort: 
+      - :integer
+      - :required
+      PolicyNames: 
+      - :membered_list: 
+        - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  EnableAvailabilityZonesForLoadBalancer: 
+    :input: 
+      AvailabilityZones: 
+      - :membered_list: 
+        - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: 
+    - AvailabilityZones: 
+      - :list: member
+  DescribeInstanceHealth: 
+    :input: 
+      LoadBalancerName: 
+      - :string
+      - :required
+      Instances: 
+      - :membered_list: 
+        - :structure: 
+            InstanceId: 
+            - :string
+    :output: 
+    - InstanceStates: 
+      - :list: member
+  ConfigureHealthCheck: 
+    :input: 
+      HealthCheck: 
+      - :structure: 
+          HealthyThreshold: 
+          - :integer
+          - :required
+          Timeout: 
+          - :integer
+          - :required
+          Interval: 
+          - :integer
+          - :required
+          UnhealthyThreshold: 
+          - :integer
+          - :required
+          Target: 
+          - :string
+          - :required
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: 
+    - HealthCheck: 
+      - Interval: 
+        - :integer
+      - Timeout: 
+        - :integer
+      - UnhealthyThreshold: 
+        - :integer
+      - HealthyThreshold: 
+        - :integer
+  CreateLoadBalancerListeners: 
+    :input: 
+      Listeners: 
+      - :membered_list: 
+        - :structure: 
+            InstancePort: 
+            - :integer
+            - :required
+            Protocol: 
+            - :string
+            - :required
+            InstanceProtocol: 
+            - :string
+            LoadBalancerPort: 
+            - :integer
+            - :required
+            SSLCertificateId: 
+            - :string
+      - :required
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  DeleteLoadBalancer: 
+    :input: 
+      LoadBalancerName: 
+      - :string
+      - :required
+    :output: []
+
+  RegisterInstancesWithLoadBalancer: 
+    :input: 
+      LoadBalancerName: 
+      - :string
+      - :required
+      Instances: 
+      - :membered_list: 
+        - :structure: 
+            InstanceId: 
+            - :string
+      - :required
+    :output: 
+    - Instances: 
+      - :list: member
+:client_errors: 
+  DuplicateListener: []
+
+  InvalidInstance: []
+
+  PolicyNotFound: []
+
+  ListenerNotFound: []
+
+  LoadBalancerNotFound: []
+
+  TooManyLoadBalancers: []
+
+  InvalidConfigurationRequest: []
+
+  PolicyTypeNotFound: []
+
+  TooManyPolicies: []
+
+  CertificateNotFound: []
+
+  DuplicateLoadBalancerName: []
+
+  DuplicatePolicyName: []
+
+:server_errors: {}

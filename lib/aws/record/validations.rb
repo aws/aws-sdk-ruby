@@ -21,6 +21,7 @@ require 'aws/record/validators/inclusion'
 require 'aws/record/validators/length'
 require 'aws/record/validators/numericality'
 require 'aws/record/validators/presence'
+require 'aws/record/validators/method'
 
 module AWS
   module Record
@@ -100,15 +101,55 @@ module AWS
 
       def self.extended base
 
-        base.send(:define_method, :validate) do
+        base.send(:define_method, :run_validations) do
           errors.clear!
           self.class.send(:validators).each do |validator|
             validator.validate(self)
           end
         end
 
-        base.send(:private, :validate)
+        base.send(:private, :run_validations)
 
+      end
+
+      # Registers a validation method.
+      #
+      #   validate :ensure_age_is_greater_than_shoe_size
+      #
+      #   def ensure_age_is_greater_than_shoe_size
+      #     unless age > shoe_size
+      #       errors.add(:age, 'should be greater than your shoe size')
+      #     end
+      #   end
+      #
+      # You can also pass a list of method names that should be called during
+      # validation.
+      #
+      #   validate :some_complex_validation, :some_other_validation
+      #
+      # As with most other validation methods you can also pass a hash of
+      # options that affect when the named validation methods get called.
+      #
+      #   validate :my_custom_validation, :unless => :new_record?
+      #
+      # @overload validate(*method_names, options = {})
+      #   @param [Array<Symbol>] method_names A list of methods to call
+      #     during validation.  
+      #   @param [Hash] options
+      #   @option options [Symbol] :on (:save) When this validation is run.
+      #     Valid values include:
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
+      #   @option options [Symbol,String,Proc] :if Specifies a method or proc
+      #     to call.  The validation will only be run if the return value is
+      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
+      #     +:if => lambda{|book| book.in_stock? }+).
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #     proc to call.  The validation will *not* be run if the return value
+      #     is of the method/proc is false.
+      def validate *args
+        validators << MethodValidator.new(self, *args)
       end
 
       # This validation method is primariliy intended for ensuring a form
@@ -178,9 +219,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -233,9 +274,9 @@ module AWS
       #     +:message+ is "doesn't match confirmation".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -319,9 +360,9 @@ module AWS
       #     number of values (should have exactly %{exactly}"</code>
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -354,9 +395,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -400,9 +441,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -449,9 +490,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -486,9 +527,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -547,9 +588,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -597,9 +638,9 @@ module AWS
       #     attribute value is +nil+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
@@ -626,9 +667,9 @@ module AWS
       #     +:message+ is "may not be blank".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save:+
-      #     * +:create:+
-      #     * +:update:+
+      #     * +:save+
+      #     * +:create+
+      #     * +:update+
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc

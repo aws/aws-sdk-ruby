@@ -59,9 +59,7 @@ module AWS
                 :groups => [
                   double('grp1',
                     :group_id => 'grp1-id',
-                    :group_name => 'grp1-name',
-                    :user_id => 'grp1-user-id',
-                    :vpc_id => 'grp1-vpc-id'),
+                    :user_id => 'grp1-user-id')
                 ]
               ),
             ]
@@ -103,10 +101,8 @@ module AWS
             p2.groups.size.should == 1
             p2.groups[0].should be_a(SecurityGroup)
             p2.groups[0].id.should == 'grp1-id'
-            p2.groups[0].name.should == 'grp1-name'
             p2.groups[0].owner_id.should == 'grp1-user-id'
             p2.groups[0].vpc?.should == true
-            p2.groups[0].vpc_id.should == 'grp1-vpc-id'
 
           end
 

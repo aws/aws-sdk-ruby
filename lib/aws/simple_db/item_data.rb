@@ -61,7 +61,7 @@ module AWS
       # fetch its most recent data.
       # @return [Item] The item this data belongs to.
       def item
-        domain[name]
+        domain.items[name]
       end
 
     end

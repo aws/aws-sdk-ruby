@@ -20,7 +20,7 @@ module AWS
 
       it_should_behave_like "iam policy collection" do
 
-        let(:user)         { User.new("username", :config => config) }
+        let(:user)          { User.new("username", :config => config) }
         let(:policies)      { UserPolicyCollection.new(user) }
         let(:resource_name) { :user }
         let(:resource_opts) {{ :user_name => "username" }}

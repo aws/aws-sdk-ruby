@@ -11,26 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'yaml'
+AWS::Core::Configuration.module_eval do
 
-module AWS
-  module Core
+  add_service 'ELB', 'elb', 'elasticloadbalancing.us-east-1.amazonaws.com'
 
-    # @private
-    class ApiConfigTransform
-
-      def self.rename_input_list_to_membered_list api_config
-        api_config[:operations].each_pair do |name,customizations|
-
-          input = api_config[:operations][name][:input]
-          fixed_input = input.to_yaml.gsub(/:list:/, ':membered_list:')
-
-          api_config[:operations][name][:input] = YAML.load(fixed_input)
-
-        end
-        api_config
-      end
-
-    end
-  end
 end

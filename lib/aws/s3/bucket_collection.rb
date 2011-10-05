@@ -85,10 +85,12 @@ module AWS
           config.s3_endpoint == 's3.amazonaws.com' or
           options[:location_constraint]
         then
-          options[:location_constraint] = case config.s3_endpoint
-          when 's3-eu-west-1.amazonaws.com' then 'EU'
-          else config.s3_endpoint.match(/^s3-(.*)\.amazonaws\.com$/)[1]
-          end
+          constraint =
+            case config.s3_endpoint
+            when 's3-eu-west-1.amazonaws.com' then 'EU'
+            when /^s3-(.*)\.amazonaws\.com$/ then $1
+            end
+          options[:location_constraint] = constraint if constraint
         end
 
         client.create_bucket(options.merge(:bucket_name => bucket_name))

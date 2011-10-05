@@ -21,7 +21,7 @@ module AWS
     end
   
     # @private
-    class RecordNotFound < Exception; end
+    class RecordNotFound < StandardError; end
   
     # Sets a prefix to be applied to all SimpleDB domains associated with
     # AWS::Record::Base classes.

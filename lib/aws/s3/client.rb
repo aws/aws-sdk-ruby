@@ -459,9 +459,13 @@ module AWS
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
                       :storage_class => 'x-amz-storage-class',
+                      :server_side_encryption => 'x-amz-server-side-encryption',
                       :expires => 'Expires'
                     }) do
         configure_request do |request, options, block|
+          options[:server_side_encryption] =
+            options[:server_side_encryption].to_s.upcase if
+            options[:server_side_encryption].kind_of?(Symbol)
           super(request, options)
           set_request_data(request, options, block)
           request.metadata = options[:metadata]
@@ -479,6 +483,7 @@ module AWS
           Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
+          add_sse_to_response(response)
         end
 
         simulate_response do |response|
@@ -583,6 +588,7 @@ module AWS
           Core::MetaUtils.extend_method(resp, :version_id) do
             http_response.header('x-amz-version-id')
           end
+          add_sse_to_response(resp)
         end
       end
 
@@ -625,6 +631,8 @@ module AWS
           Core::MetaUtils.extend_method(resp, :content_length) do
             http_response.header('content-length').to_i
           end
+
+          add_sse_to_response(resp)
         end
       end
 
@@ -664,13 +672,21 @@ module AWS
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
                       :storage_class => 'x-amz-storage-class',
+                      :server_side_encryption => 'x-amz-server-side-encryption',
                       :expires => 'Expires'
                     }) do
         configure_request do |req, options|
+          options[:server_side_encryption] =
+            options[:server_side_encryption].to_s.upcase if
+            options[:server_side_encryption].kind_of?(Symbol)
           super(req, options)
           req.metadata = options[:metadata]
           req.canned_acl = options[:acl]
           req.storage_class = options[:storage_class]
+        end
+
+        process_response do |response|
+          add_sse_to_response(response)
         end
       end
 
@@ -711,6 +727,7 @@ module AWS
           Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
+          add_sse_to_response(response)
         end
 
         simulate_response do |response|
@@ -739,6 +756,7 @@ module AWS
           Core::MetaUtils.extend_method(response, :version_id) do
             response.http_response.header('x-amz-version-id')
           end
+          add_sse_to_response(response)
         end
 
         simulate_response do |response|
@@ -779,12 +797,12 @@ module AWS
       # @option options [Symbol] :acl
       #
       object_method(:copy_object, :put,
-        :header_options => {
-          :copy_source => 'x-amz-copy-source',
-          :metadata_directive => 'x-amz-metadata-directive',
-          :storage_class => 'x-amz-storage-class',
-        }
-      ) do
+                    :header_options => {
+                      :copy_source => 'x-amz-copy-source',
+                      :metadata_directive => 'x-amz-metadata-directive',
+                      :storage_class => 'x-amz-storage-class',
+                      :server_side_encryption => 'x-amz-server-side-encryption',
+                    }) do
 
         configure_request do |req, options|
           # TODO : validate metadata directive COPY / REPLACE
@@ -794,6 +812,9 @@ module AWS
             "may not be blank" if options[:copy_source].to_s.empty?
           end
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
+          options[:server_side_encryption] =
+            options[:server_side_encryption].to_s.upcase if
+            options[:server_side_encryption].kind_of?(Symbol)
           super(req, options)
           req.canned_acl = options[:acl]
           req.metadata = options[:metadata]
@@ -813,6 +834,7 @@ module AWS
           Core::MetaUtils.extend_method(response, :last_modified) do
             Time.parse(response.http_response.header('Last-Modified'))
           end
+          add_sse_to_response(response)
         end
 
       end
@@ -854,6 +876,15 @@ module AWS
       protected
       def new_request
         S3::Request.new
+      end
+
+      protected
+      def add_sse_to_response(response)
+        sse = nil
+        if value = response.http_response.header('x-amz-server-side-encryption')
+          sse = value.downcase.to_sym
+        end
+        Core::MetaUtils.extend_method(response, :server_side_encryption) { sse }
       end
 
       module Validators

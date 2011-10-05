@@ -18,7 +18,6 @@ module AWS
 
     shared_examples_for "iam policy collection" do
   
-  
       let(:config) { stub_config }
   
       let(:client) { config.iam_client }
@@ -180,7 +179,7 @@ module AWS
   
       end
   
-      it_behaves_like "a paged collection with limits" do
+      it_behaves_like "a pageable collection with limits" do
   
         let(:collection)      { policies }
         let(:client_method)   { list_method }

@@ -102,6 +102,26 @@ module AWS
     #   size (in bytes) each S3 multipart segment should be.
     #   Defaults to 5242880 (5MB).
     #
+    # @attr_reader [Symbol] s3_server_side_encryption The algorithm to
+    #   use when encrypting object data on the server side.  The only
+    #   valid value is +:aes256+, which specifies that the object
+    #   should be stored using the AES encryption algorithm with 256
+    #   bit keys.  Defaults to +nil+, meaning server side encryption
+    #   is not used unless specified on each individual call to upload
+    #   an object.  This option controls the default behavior for the
+    #   following method:
+    #
+    #   * {S3::S3Object#write}
+    #   * {S3::S3Object#multipart_upload}
+    #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
+    #   * {S3::S3Object#presigned_post}
+    #   * {S3::Bucket#presigned_post}
+    #
+    #   You can construct an interface to Amazon S3 which always
+    #   stores data using server side encryption as follows:
+    #
+    #     s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
+    #
     # @attr_reader [String,nil] secret_access_key AWS secret access key 
     #   credential.  Defaults to +nil+.
     #
@@ -306,6 +326,7 @@ module AWS
             :ssl_ca_file,
             :user_agent_prefix,
             :logger,
+            :logger_truncate_strings_at,
           ]
 
           add_option :"#{ruby_name}_endpoint", default_endpoint
@@ -322,6 +343,8 @@ module AWS
       add_option :http_handler, Core::Http::NetHttpHandler.new
   
       add_option :logger
+
+      add_option :logger_truncate_strings_at, 1000 
   
       add_option :max_retries, 3
   

@@ -56,7 +56,7 @@ module AWS
 
       end
 
-      it_behaves_like "a paged collection with limits" do
+      it_behaves_like "a pageable collection with limits" do
 
         let(:collection)      { groups }
         let(:client_method)   { :list_groups_for_user }

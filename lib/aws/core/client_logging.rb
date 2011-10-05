@@ -19,8 +19,6 @@ module AWS
     # @private
     module ClientLogging
   
-      MAX_STRING_LENGTH = 50
-  
       def log_client_request(name, options)
         response = nil
         time = Benchmark.measure do
@@ -89,10 +87,9 @@ module AWS
   
       protected
       def sanitize_string str
-        summary = summarize_string(str)
         inspected = str.inspect
-        if inspected.size > summary.size
-          summary
+        if inspected.size > config.logger_truncate_strings_at
+          summarize_string(str)
         else
           inspected
         end
@@ -100,7 +97,9 @@ module AWS
   
       protected
       def summarize_string str
-        "#<String #{str[0,6].inspect} ... #{str[-6,6].inspect} (#{str.size} characters)>"
+        # skip the openning "
+        string_start = str.inspect[1,config.logger_truncate_strings_at]
+        "#<String \"#{string_start}\" ... (#{str.size} characters)>"
       end
   
       protected

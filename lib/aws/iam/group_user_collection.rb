@@ -20,27 +20,32 @@ module AWS
     #   group = AWS::IAM.new.groups.first
     #   users = group.users
     #   users.each { |u| puts u.name }
+    #
     class GroupUserCollection
 
-      include Core::Collections::Basic
-
-      # @attr_reader [Group] The group.
-      attr_reader :group
+      include Core::Collection::Simple
 
       # @private
-      def initialize(group, opts = {})
+      def initialize group, options = {}
         @group = group
         super
       end
+
+      # @attr_reader [Group] The group.
+      attr_reader :group
 
       # Adds a user to the group.
       #
       # @param [User] user The user to add.
       # @return [nil]
       def add(user)
-        client.add_user_to_group(:group_name => group.name,
-                                 :user_name => user.name)
+
+        client.add_user_to_group(
+          :group_name => group.name,
+          :user_name => user.name)
+
         nil
+
       end
 
       # Remove a user from the group.
@@ -48,37 +53,25 @@ module AWS
       # @param [User] user The user to remove.
       # @return [nil]
       def remove(user)
-        client.remove_user_from_group(:group_name => group.name,
-                                      :user_name => user.name)
+
+        client.remove_user_from_group(
+          :group_name => group.name,
+          :user_name => user.name)
+
         nil
+
       end
 
       # Removes all users from this group.
       # @return [nil]
       def clear
-        each do |user|
-          remove(user)
-        end
-      end
-
-      # Yields once for each user in the group.
-      #
-      # @param [Hash] options
-      # @yieldparam [User] user
-      # @return [nil]
-      def each(options = {}, &block)
-        super(options.merge(:group_name => group.name), &block)
+        each {|user| remove(user) }
       end
 
       # @private
       protected
-      def request_method
-        :get_group
-      end
-
-      # @private
-      protected
-      def each_item response
+      def _each_item options = {}, &block
+        response = client.get_group(:group_name => group.name)
         response.users.each do |u|
           user = User.new_from(:get_group, u, u.user_name, :config => config)
           yield(user)

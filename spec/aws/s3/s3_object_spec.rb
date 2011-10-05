@@ -215,6 +215,41 @@ module AWS
 
           end
 
+          context ':server_side_encryption' do
+
+            it 'should not pass the option by default' do
+              client.should_receive(:put_object).
+                with(hash_not_including(:server_side_encryption)).
+                and_return(client.stub_for(:put_object))
+              object.write("HELLO")
+            end
+
+            it 'should pass the value from configuration if present' do
+              client.should_receive(:put_object).
+                with(hash_including(:server_side_encryption => :aes256)).
+                and_return(client.stub_for(:put_object))
+              object.config.stub(:s3_server_side_encryption => :aes256)
+              object.write("HELLO")
+            end
+
+            it 'should not pass the option if it is overridden to nil' do
+              client.should_receive(:put_object).
+                with(hash_not_including(:server_side_encryption)).
+                and_return(client.stub_for(:put_object))
+              object.config.stub(:s3_server_side_encryption => :aes256)
+              object.write("HELLO", :server_side_encryption => nil)
+            end
+
+            it 'should allow overriding the config with a different value' do
+              client.should_receive(:put_object).
+                with(hash_including(:server_side_encryption => :foobar)).
+                and_return(client.stub_for(:put_object))
+              object.config.stub(:s3_server_side_encryption => :aes256)
+              object.write("HELLO", :server_side_encryption => :foobar)
+            end
+
+          end
+
         end
 
         context 'large data' do
@@ -356,6 +391,46 @@ module AWS
                               :upload_id => "abc123"))
           object.multipart_upload(:content_type =>
                                   "application/json") { |upload| }
+        end
+
+        context ':server_side_encryption' do
+
+          it 'should not pass the option by default' do
+            client.should_receive(:initiate_multipart_upload).
+              with(hash_not_including(:server_side_encryption)).
+              and_return(double("response",
+                                :upload_id => "abc123"))
+            object.multipart_upload { |upload| }
+          end
+
+          it 'should pass the value from configuration if present' do
+            client.should_receive(:initiate_multipart_upload).
+              with(hash_including(:server_side_encryption => :aes256)).
+              and_return(double("response",
+                                :upload_id => "abc123"))
+            object.config.stub(:s3_server_side_encryption => :aes256)
+            object.multipart_upload { |upload| }
+          end
+
+          it 'should not pass the option if it is overridden to nil' do
+            client.should_receive(:initiate_multipart_upload).
+              with(hash_not_including(:server_side_encryption)).
+              and_return(double("response",
+                                :upload_id => "abc123"))
+            object.config.stub(:s3_server_side_encryption => :aes256)
+            object.multipart_upload(:server_side_encryption => nil) { |upload| }
+          end
+
+          it 'should allow overriding the config with a different value' do
+            client.should_receive(:initiate_multipart_upload).
+              with(hash_including(:server_side_encryption => :foobar)).
+              and_return(double("response",
+                                :upload_id => "abc123"))
+            object.config.stub(:s3_server_side_encryption => :aes256)
+            object.multipart_upload(:server_side_encryption =>
+                                    :foobar) { |upload| }
+          end
+
         end
 
         it 'should pass the config' do
@@ -593,6 +668,29 @@ module AWS
           client.stub(:head_object).and_return(head)
           object.content_type.should == 'text/plain'
         end
+      end
+
+      context '#server_side_encryption' do
+        it 'returns #server_side_encryption from the head response' do
+          head = double('head-object-response',
+                        :server_side_encryption => :aes256)
+          client.stub(:head_object).and_return(head)
+          object.server_side_encryption.should == :aes256
+        end
+      end
+
+      context '#server_side_encryption?' do
+
+        it 'should return true if server_side_encryption is not nil' do
+          object.stub(:server_side_encryption => 'foo')
+          object.server_side_encryption?.should be_true
+        end
+
+        it 'should return false if server_side_encryption is nil' do
+          object.stub(:server_side_encryption => nil)
+          object.server_side_encryption?.should be_false
+        end
+
       end
 
       context '#versions' do

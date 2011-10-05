@@ -49,6 +49,13 @@ module AWS
       end
 
       # Deletes the item and all of its attributes from SimpleDB.
+      # @param [Hash] options
+      # @option options [Hash] :if Pass a hash with a single key (attribute 
+      #   name) and a single value (the attribute value).  This causes the
+      #   delete to become conditional. 
+      # @option options [String,Symbol] :unless Pass an attribute name.  This
+      #   causes the delete to become conditional on that attribute not
+      #   existing.
       # @return [nil]
       def delete options = {}
         delete_opts = {}
@@ -71,6 +78,14 @@ module AWS
         r = client.get_attributes(get_opts)
         ItemData.new(:name => name, :domain => domain, :response_object => r)
       end
+
+      def == other
+        other.is_a?(Item) and 
+        other.domain == domain and
+        other.name == name
+      end
+
+      alias_method :eql?, :==
 
     end
 

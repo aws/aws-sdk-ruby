@@ -130,6 +130,8 @@ module AWS
           end
   
         end
+
+        Long = Integer
   
         # @private
         module Boolean

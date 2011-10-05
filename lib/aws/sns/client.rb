@@ -18,7 +18,6 @@ module AWS
     class Client < Core::Client
 
       AWS.register_autoloads(self) do
-        autoload :Options, 'options'
         autoload :XML,     'xml'
       end
 

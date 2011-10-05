@@ -26,7 +26,10 @@ module AWS::Core
       i
     end
 
-    let(:config) { double("config", :logger => logger) }
+    let(:config) { double("config", 
+      :logger => logger,
+      :logger_truncate_strings_at => 100) 
+    }
 
     let(:logger) { double("logger", :info => nil, :error => nil) }
 
@@ -131,19 +134,18 @@ module AWS::Core
 
         context 'long strings' do
 
-          it 'should give the prefix, suffix, and total length when longer than the summary string' do
+          before(:each) do
+            config.stub(:logger_truncate_strings_at).and_return(10)
+          end
+
+          it 'should give the prefix and total length when exceedes limit' do
             inst.sanitize_options(:foo => "!"*25 + "$"*26).
-              should == ':foo=>#<String "!!!!!!" ... "$$$$$$" (51 characters)>'
+              should == ':foo=>#<String "!!!!!!!!!!" ... (51 characters)>'
           end
 
           it 'should inspect the summarized portions of the string' do
-            inst.sanitize_options(:foo => "\n"*25 + "\t"*26).
-              should == ':foo=>#<String "\n\n\n\n\n\n" ... "\t\t\t\t\t\t" (51 characters)>'
-          end
-
-          it 'should not summarize strings that are shorter than their summary strings' do
-            inst.sanitize_options(:foo => "!"*25 + "$"*20).
-              should == ':foo=>"!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$"'
+            inst.sanitize_options(:foo => "\n" + '!'*24 + "\t"*26).
+              should == ':foo=>#<String "\n!!!!!!!!" ... (51 characters)>'
           end
 
         end

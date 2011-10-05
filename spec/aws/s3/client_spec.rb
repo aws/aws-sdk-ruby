@@ -188,6 +188,17 @@ module AWS
 
       end
 
+      shared_examples_for "returns server_side_encryption" do
+
+        it 'should return the server_side_encryption method as a symbol' do
+          response = client.with_http_handler do |req, resp|
+            resp.headers['x-amz-server-side-encryption'] = ['AES256']
+          end.send(method, opts)
+          response.server_side_encryption.should == :aes256
+        end
+
+      end
+
       shared_examples_for "requires bucket_name" do
 
         it 'raises argument error for blank bucket name' do
@@ -683,6 +694,8 @@ module AWS
                               :acl, "x-amz-acl")
         it_should_behave_like("sends option as header",
                               :storage_class, "x-amz-storage-class")
+        it_should_behave_like("sends option as header",
+                              :server_side_encryption, "x-amz-server-side-encryption")
 
         it 'converts canned acl symbols to strings' do
           http_handler.should_receive(:handle) do |req, resp|
@@ -697,6 +710,14 @@ module AWS
             req.headers["x-amz-storage-class"].should == "REDUCED_REDUNDANCY"
           end
           opts[:storage_class] = :reduced_redundancy
+          client.send(method, opts)
+        end
+
+        it 'converts server side encryption symbols to strings' do
+          http_handler.should_receive(:handle) do |req, resp|
+            req.headers["x-amz-server-side-encryption"].should == "AES256"
+          end
+          opts[:server_side_encryption] = :aes256
           client.send(method, opts)
         end
 
@@ -1111,6 +1132,8 @@ module AWS
 
         it_should_behave_like "returns etag"
 
+        it_should_behave_like "returns server_side_encryption"
+
         it_should_behave_like "returns last_modified"
 
         it_should_behave_like "sends metadata headers", true
@@ -1140,6 +1163,8 @@ module AWS
         it_should_behave_like "returns etag"
 
         it_should_behave_like "returns last_modified"
+
+        it_should_behave_like "returns server_side_encryption"
 
         it_should_behave_like "sends metadata headers", false
 
@@ -1178,6 +1203,8 @@ module AWS
         it_should_behave_like "accepts version id"
 
         it_should_behave_like "returns version id"
+
+        it_should_behave_like "returns server_side_encryption"
 
         it_should_behave_like "sends option as header", :range, "Range"
         it_should_behave_like "sends option as header", :if_modified_since, "If-Modified-Since"
@@ -1234,6 +1261,8 @@ module AWS
         it_should_behave_like "returns etag"
 
         it_should_behave_like "returns last_modified"
+
+        it_should_behave_like "returns server_side_encryption"
 
         context 'response' do
 
@@ -1348,6 +1377,8 @@ module AWS
 
         it_should_behave_like "sends metadata headers", true
 
+        it_should_behave_like "returns server_side_encryption"
+
       end
 
       context '#list_multipart_uploads' do
@@ -1430,6 +1461,8 @@ module AWS
 
         it_should_behave_like "returns last_modified"
 
+        it_should_behave_like "returns server_side_encryption"
+
         it 'requires part_number' do
           opts.delete(:part_number)
           lambda { client.upload_part(opts) }.
@@ -1464,6 +1497,8 @@ module AWS
         it_should_behave_like "accepts upload_id"
 
         it_should_behave_like "returns version id"
+
+        it_should_behave_like "returns server_side_encryption"
 
         it_should_behave_like "parses XML response", Client::XML::CompleteMultipartUpload
 

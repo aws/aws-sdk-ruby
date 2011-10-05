@@ -92,7 +92,7 @@ module AWS
 
       end
 
-      it_behaves_like "a paged collection with limits" do
+      it_behaves_like "a pageable collection with limits" do
 
         let(:collection)     { server_certificates }
         let(:client_method)  { :list_server_certificates }

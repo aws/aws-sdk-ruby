@@ -175,7 +175,31 @@ module AWS
           group.send(method, g1)
         end
 
-        it 'accepts group hashes' do
+        it 'accepts group hashes with a group_id' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { :group_id => 'foo' },
+                ] 
+              }
+            ])
+          group.send(method, { :group_id => 'foo' })
+        end
+
+        it 'accepts group hashes with a group_name' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { :group_name => 'foo' },
+                ] 
+              }
+            ])
+          group.send(method, { :group_name => 'foo', })
+        end
+
+        it 'accepts group hashes with a group_id and user_id' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
               { :ip_protocol => '-1', 
@@ -185,6 +209,56 @@ module AWS
               }
             ])
           group.send(method, { :group_id => 'foo', :user_id => 'bar' })
+        end
+
+        it 'accepts group hashes with a group_name and user_id' do
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { :group_name => 'foo', :user_id => 'bar' },
+                ] 
+              }
+            ])
+          group.send(method, { :group_name => 'foo', :user_id => 'bar' })
+        end
+
+        it 'raises an error for missing group' do
+          lambda {
+            # must provide :group_id or :group_name
+            group.send(method, { :user_id => 'bar' }) 
+          }.should raise_error(ArgumentError, /provide :group_id or :group_name/)
+        end
+
+        it 'raises an error for unknown group keys' do
+          lambda {
+            # intentional typo
+            group.send(method, { :group_id => 'foo', :usr_id => 'typo' }) 
+          }.should raise_error(ArgumentError, /only accepts the following keys/)
+        end
+
+        it 'accepts a load balancer' do
+
+          load_balancer = ELB::LoadBalancer.new('lb-name')
+          load_balancer.stub(:source_security_group).
+            and_return(
+              :group_name => 'lb-group-name', 
+              :user_id => 'lb-owner-alias')
+
+          client.should_receive(client_method).
+            with(:group_id => 'id', :ip_permissions => [
+              { :ip_protocol => '-1', 
+                :user_id_group_pairs => [
+                  { 
+                    :group_name => 'lb-group-name',
+                    :user_id => 'lb-owner-alias'
+                  },
+                ] 
+              }
+            ])
+
+          group.send(method, load_balancer)
+
         end
 
       end

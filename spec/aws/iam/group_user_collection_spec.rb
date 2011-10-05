@@ -56,7 +56,7 @@ module AWS
 
       end
 
-      it_behaves_like "a basic collection" do
+      it_behaves_like "a simple collection" do
 
         let(:collection)      { users }
         let(:client_method)   { :get_group }
