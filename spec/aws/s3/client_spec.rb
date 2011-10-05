@@ -1168,6 +1168,8 @@ module AWS
 
         it_should_behave_like "sends metadata headers", false
 
+        it_should_behave_like "sends option as header", :content_type, "Content-Type"
+
         it 'requires :copy_source' do
           opts.delete(:copy_source)
           lambda { client.copy_object(opts) }.
