@@ -82,7 +82,7 @@ module AWS
     #    to send service requests through.  You can pass a URI object or a 
     #    URI string.  Defautls to +nil+.
     #
-    #      AWS.config(:proxy_uri => 'https://user:pass@my.proxy:443/path?query')
+    #      AWS.config(:proxy_uri => 'https://user:pass@my.proxy:443')
     #
     # @attr_reader [String] s3_endpoint The service endpoint for Amazon S3.
     #   Defaults to 's3.amazonaws.com'.

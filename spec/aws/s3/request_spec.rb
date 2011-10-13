@@ -88,6 +88,30 @@ module AWS
           request.path.should == "/foo_bar/key/foo%20bla"
         end
 
+        it 'should not remove prefixed slashes' do
+          request.bucket = 'foo_bar' #not uri safe
+          request.key = '//double/slashes/'
+          request.path.should == '/foo_bar///double/slashes/'
+        end
+
+        it 'should not remove prefixed slashes' do
+          request.bucket = 'foo' #uri safe
+          request.key = '//double/slashes/'
+          request.path.should == '///double/slashes/'
+        end
+
+        it 'should accept a path of only slashes' do
+          request.bucket = 'foo_bar' #not uri safe
+          request.key = '////'
+          request.path.should == '/foo_bar/////'
+        end
+
+        it 'should accept a path of only slashes' do
+          request.bucket = 'foo' #uri safe
+          request.key = '////'
+          request.path.should == '/////'
+        end
+
         it 'should preserve a trailing slash in the key' do
           request.bucket = "foo_bar"
           request.key = "key/foo bla/"

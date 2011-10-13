@@ -21,6 +21,7 @@ require 'aws/core/autoloader'
 # The currently supported services are:
 #
 # * {EC2}
+# * {ELB}
 # * {S3}
 # * {SimpleDB}
 # * {SimpleEmailService}
@@ -55,7 +56,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.2.0"
+  VERSION = "1.2.1"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'

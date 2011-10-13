@@ -35,7 +35,7 @@ module AWS
       protected
       def escape_path value
         escaped = ""
-        value.scan(%r{(/?)([^/]+)(/?)}) do |(leading, part, trailing)|
+        value.scan(%r{(/*)([^/]*)(/*)}) do |(leading, part, trailing)|
           escaped << leading + escape(part) + trailing
         end
         escaped
