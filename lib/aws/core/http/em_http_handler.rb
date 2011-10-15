@@ -6,10 +6,16 @@ require "em-synchrony/em-http"
 module AWS
   module Core
     module Http
-      # An EM-Synchrony implementation for Fiber based asynchronous application
-      #
+      
+      # An EM-Synchrony implementation for Fiber based asynchronous ruby application.
+      # See https://github.com/igrigorik/async-rails and 
+      # http://www.mikeperham.com/2010/04/03/introducing-phat-an-asynchronous-rails-app/
+      # for examples of Aync-Rails application
+      # 
       # In Rails add the following to you various environment files:
       #
+      # require 'aws-sdk'
+      # require 'aws/core/http/em_http_handler'
       # AWS.config(
       # :http_handler => AWS::Http::EMHttpHandler.new(
       # :proxy => {:host => "http://myproxy.com",:port => 80}
