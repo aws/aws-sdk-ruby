@@ -6,7 +6,6 @@ require "em-synchrony/em-http"
 module AWS
   module Core
     module Http
-  
       # An EM-Synchrony implementation for Fiber based asynchronous application
       #
       # In Rails add the following to you various environment files:
@@ -35,32 +34,18 @@ module AWS
         def initialize options = {}
           @default_request_options = options
         end
-
-  
-        def handle(request, response)
-          #puts "Using EM!!!!"
-          opts = default_request_options.merge({
-              :body => request.body
-            })
-  
-          if request.proxy_uri     
-            opts[:proxy] = {:host => request.proxy_uri.host,:port => request.proxy_uri.port}
-          end
-  
+        
+        def fetch_url(request)
+          url = nil
           if request.use_ssl?
             url = "https://#{request.host}:443#{request.uri}"
-            if request.ssl_verify_peer?
-              opts[:private_key_file] = request.ssl_ca_file 
-              opts[:cert_chain_file]= request.ssl_ca_file 
-            end
-            request.ssl_verify_peer?
           else
             url = "http://#{request.host}#{request.uri}"
           end
-  
-          # get, post, put, delete, head
-          method = request.http_method.downcase
-  
+          url
+        end
+                   
+        def fetch_headers(request)
           # Net::HTTP adds this header for us when the body is
           # provided, but it messes up signing
           headers = { 'content-type' => '' }
@@ -70,30 +55,72 @@ module AWS
             headers[key] = value.to_s
           end
   
-          opts[:head] = headers
-  
-          begin
-            http_response = nil
-            if EM::reactor_running?
+          {:head => headers}
+        end
+        
+        def fetch_proxy(request)
+          opts={}
+          if request.proxy_uri     
+            opts[:proxy] = {:host => request.proxy_uri.host,:port => request.proxy_uri.port}
+          end
+          opts
+        end
+          
+        def fetch_ssl(request)
+          opts = {}
+          if request.use_ssl? && request.ssl_verify_peer?
+            opts[:private_key_file] = request.ssl_ca_file 
+            opts[:cert_chain_file]= request.ssl_ca_file 
+          end
+          opts
+        end
+        
+        def request_options(request)
+          fetch_headers(request).
+            merge(fetch_proxy(request)).
+            merge(fetch_ssl(request))
+        end
+        
+        def fetch_response(url,method,opts={})
+          new_response = nil
+          if EM::reactor_running?
+              #puts "Reactor is running"
+            http = EM::HttpRequest.new(url).send(method, opts)
+            http.callback { new_response =  http}
+            http.errback { puts "#{method} to AWS failed." }
+          else
+            EM.synchrony do
+                #puts "Had to start EM"
               http = EM::HttpRequest.new(url).send(method, opts)
-              http.callback { http_response = http}
+              http.callback { new_response =  http}
               http.errback { puts "#{method} to AWS failed." }
-            else
-              EM.synchrony do
-                http = EM::HttpRequest.new(url).send(method, opts)
-                http.callback { http_response = http}
-                http.errback { puts "#{method} to AWS failed." }
-                EM.stop
-              end
-            end
+              EM.stop
+            end           
+          end
+          new_response
+        end
+  
+        def handle(request, response)
+            #puts "Using EM!!!!"
+          opts = default_request_options.merge({
+              :body => request.body
+            }).merge(request_options(request))
+          
+          url = fetch_url(request)
+          
+          # get, post, put, delete, head
+          method = request.http_method.downcase
+          
+          begin
+            http_response = fetch_response(url,method,opts)         
           rescue Timeout::Error, Errno::ETIMEDOUT => e
             response.timeout = true
           else
             response.body = http_response.response
             response.status = http_response.response_header.status.to_i
-            response.headers = http_response.response_header
+            response.headers = http_response.response_header.to_hash
           end
-        end
+        end   
       end
     end
   end
