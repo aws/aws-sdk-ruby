@@ -591,6 +591,19 @@ module AWS
   
         end
   
+        context 'domain' do
+          it 'should return a scope object' do
+            klass.domain('shard').should be_a(Scope)
+          end
+
+          it 'should pass the domain name parameter to the scope' do
+            scope = double('scope')
+            Scope.should_receive(:new).with(klass).and_return(scope)
+            scope.should_receive(:domain).with('shard')
+            klass.domain('shard')
+          end
+        end
+
         context 'all' do
   
           it 'calls find(:all)' do

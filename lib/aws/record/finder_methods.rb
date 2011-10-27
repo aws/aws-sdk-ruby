@@ -84,6 +84,19 @@ module AWS
         _new_scope.find(*args)
       end
 
+      # Returns a chainable scope object that restricts further scopes to a
+      # particular domain
+      #
+      #  Book.domain('shard_3').all.each do |book|
+      #    # ...
+      #  end
+      #
+      # @param [String] domain
+      # @return [Scope] Returns a scope for restricting the domain of subsequent
+      def domain name
+        _new_scope.domain(name)
+      end
+
       # Returns an enumerable scope object represents all records.
       #
       #   Book.all.each do |book|

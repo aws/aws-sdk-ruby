@@ -32,6 +32,22 @@ module AWS
         klass.string_attr :foo
         klass.stub_chain(:sdb_domain, :items).and_return(items)
       end
+
+      context '#domain' do
+        it 'returns a scope object' do
+          scope.domain('shard').should be_a(Scope)
+        end
+
+        it 'limits subsequent scopes to the specified domain' do
+          domain = double('domain')
+          domain.stub(:items).and_return(items)
+          domains = double('domains')
+          AWS::SimpleDB.stub_chain(:new, :domains).and_return(domains)
+          domains.should_receive(:[]).with('shard').and_return(domain)
+
+          scope.domain('shard').find(:all).each{|obj|}
+        end
+      end
   
       context '#find' do
         
