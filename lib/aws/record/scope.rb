@@ -64,6 +64,14 @@ module AWS
       # @return [Class] Returns the AWS::Record::Base extending class that
       #   this scope will find records for.
       attr_reader :base_class
+
+      # @param [String] domain
+      # @return [Scope] Returns a scope for restricting the domain of subsequent
+      #   scope operations
+      def domain name
+        @domain = name
+        self
+      end
   
       # @overload find(id)
       #   Finds and returns a single record by id.  If no record is found
@@ -283,7 +291,8 @@ module AWS
       # @private
       private
       def _item_collection
-        items = base_class.sdb_domain.items
+        items = @domain ? AWS::SimpleDB.new.domains[@domain].items :
+                          base_class.sdb_domain.items
         items = items.order(*@options[:order]) if @options[:order]
         items = items.limit(*@options[:limit]) if @options[:limit]
         Record.as_array(@options[:where]).each do |where_condition|
