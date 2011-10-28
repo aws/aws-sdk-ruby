@@ -444,22 +444,31 @@ module AWS
           @_domain_name = name
         end
 
+        # Returns the domain name this record class persists data into.
+        # The default domain name is the class name with the optional
+        # domain_prefix).
+        # @param [String] name Defaults to the name of this class.
         # @return [String] Returns the full prefixed domain name for this class.
-        def domain_name
-          @_domain_name ||= self.to_s
-          "#{Record.domain_prefix}#{@_domain_name}"
+        def domain_name name = nil
+          "#{Record.domain_prefix}#{name || @_domain_name || self.to_s}"
         end
 
         # Creates the SimpleDB domain that is configured for this class.
-        def create_domain
-          AWS::SimpleDB.new.domains.create(domain_name)
+        # @param [String] name Name of the domain to create.  Defaults to
+        #   the name of this class.  The +name+ will be prefixed with
+        #   domain_prefix if one is set.
+        #
+        # @return [AWS::SimpleDB::Domain]
+        #
+        def create_domain name = nil
+          AWS::SimpleDB.new.domains.create(domain_name(name))
         end
 
         # @return [AWS::SimpleDB::Domain] Returns a reference to the domain
         #   this class will save data to.
         # @private
-        def sdb_domain
-          AWS::SimpleDB.new.domains[domain_name]
+        def sdb_domain name = nil
+          AWS::SimpleDB.new.domains[domain_name(name)]
         end
 
       end
