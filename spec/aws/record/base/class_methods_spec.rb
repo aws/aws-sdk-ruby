@@ -174,22 +174,32 @@ module AWS
           end
   
         end
-  
+
         context 'create_domain' do
-  
-          it 'should call create on the domain collection' do
+          before(:each) do
             domain = double("domain")
             domains = double("domains")
             sdb = double("sdb", :domains => domains)
             AWS::SimpleDB.should_receive(:new).and_return(sdb)
             domains.should_receive(:create).with("foo").and_return(domain)
             Record.stub(:domain_prefix).and_return("")
-            klass.set_domain_name("foo")
-            klass.create_domain
           end
-  
+
+          context 'without a domain attribute' do
+            it 'should call create on the domain collection with the domain nam of the class' do
+              klass.set_domain_name("foo")
+              klass.create_domain
+            end
+          end
+
+          context 'with a domain attribute' do
+            it 'should call create on the domain collection with the domain name specified in the attribute' do
+              klass.create_domain("foo")
+            end
+          end
+
         end
-  
+
         context 'sdb_domain' do
           
           it 'returns a sdb domain object' do

@@ -56,6 +56,43 @@ module AWS
     
           end
 
+          context '#sdb_item' do
+            before(:each) do
+              items = double('items')
+              items.stub(:[])
+              @domain = double('domain')
+              @domain.stub(:items).and_return(items)
+            end
+
+            context 'when the object has an sdb_domain attribute' do
+              it 'should select an item from the domain specified in the domain attribute' do
+                klass = Class.new(Record::Base) do
+                  string_attr :sdb_domain
+                end
+                domains = double('domains')
+                domains.should_receive(:[]).with('abc').and_return(@domain)
+                sdb = double('sdb')
+                sdb.stub(:domains).and_return(domains)
+                AWS::SimpleDB.stub(:new).and_return(sdb)
+                obj = klass.new
+                obj.sdb_domain = 'abc'
+                obj.send(:sdb_item)
+              end
+            end
+
+            context 'when the object does not have an sdb_domain attribute' do
+              it 'should select an item from the sdb_domain of the class' do
+                klass = Class.new(Record::Base) do
+                end
+                obj = klass.new
+                obj.class.should_receive(:sdb_domain).and_return(@domain)
+                obj.send(:sdb_item)
+              end
+            end
+
+
+          end
+
           context '#attributes=' do
 
             before(:each) do

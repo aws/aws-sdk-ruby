@@ -437,7 +437,7 @@ module AWS
           @attributes ||= {}
         end
 
-        # Allows you to override the default domain name for this record.  
+        # Allows you to override the default domain name for this class.  
         # The defualt domain name is the class name.
         # @param [String] The domain name that should be used for this class.
         def set_domain_name name
@@ -451,8 +451,8 @@ module AWS
         end
 
         # Creates the SimpleDB domain that is configured for this class.
-        def create_domain
-          AWS::SimpleDB.new.domains.create(domain_name)
+        def create_domain(name=domain_name)
+          AWS::SimpleDB.new.domains.create(name)
         end
 
         # @return [AWS::SimpleDB::Domain] Returns a reference to the domain
@@ -538,7 +538,11 @@ module AWS
       # @private
       private
       def sdb_item
-        self.class.sdb_domain.items[id]
+        if respond_to?(:sdb_domain)
+          AWS::SimpleDB.new.domains[sdb_domain].items[id]
+        else
+          self.class.sdb_domain.items[id]
+        end
       end
 
       # @private
