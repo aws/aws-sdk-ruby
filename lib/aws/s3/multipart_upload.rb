@@ -178,6 +178,8 @@ module AWS
       #     this option must match the total number of bytes written
       #     to S3 during the operation.  This option is required if
       #     +:data+ is an IO-like object without a +size+ method.
+      #
+      #   @option options [Integer] :part_number The part number.
       def add_part(data_or_options, options = {})
         if data_or_options.kind_of?(Hash)
           part_options = base_opts.merge(data_or_options)
