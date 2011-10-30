@@ -69,8 +69,7 @@ module AWS
       # @return [Scope] Returns a scope for restricting the domain of subsequent
       #   scope operations
       def domain name
-        @domain = name
-        self
+        _with(:domain => name)
       end
   
       # @overload find(id)
@@ -291,8 +290,11 @@ module AWS
       # @private
       private
       def _item_collection
-        items = @domain ? AWS::SimpleDB.new.domains[@domain].items :
-                          base_class.sdb_domain.items
+        if @options[:domain]
+          items = AWS::SimpleDB.new.domains[@options[:domain]].items
+        else
+          items = base_class.sdb_domain.items
+        end
         items = items.order(*@options[:order]) if @options[:order]
         items = items.limit(*@options[:limit]) if @options[:limit]
         Record.as_array(@options[:where]).each do |where_condition|

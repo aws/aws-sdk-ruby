@@ -34,21 +34,32 @@ module AWS
       end
 
       context '#domain' do
+        before(:each) do
+          items.stub(:where).and_return(items)
+          @domain = double('domain')
+          @domain.stub(:items).and_return(items)
+          @domains = double('domains')
+          AWS::SimpleDB.stub_chain(:new, :domains).and_return(@domains)
+        end
+
         it 'returns a scope object' do
           scope.domain('shard').should be_a(Scope)
         end
 
         it 'limits subsequent scopes to the specified domain' do
-          domain = double('domain')
-          domain.stub(:items).and_return(items)
-          domains = double('domains')
-          AWS::SimpleDB.stub_chain(:new, :domains).and_return(domains)
-          domains.should_receive(:[]).with('shard').and_return(domain)
-
+          @domains.should_receive(:[]).with('shard').and_return(@domain)
           scope.domain('shard').find(:all).each{|obj|}
         end
+
+        context 'when chained with scopes that return a new scope' do
+          it 'the new scope should have the same domain limitation' do
+            @domains.should_receive(:[]).with('shard').and_return(@domain)
+
+            scope.domain('shard').where(:name => 'Sam').each{|obj|}
+          end
+        end
       end
-  
+
       context '#find' do
         
         context ':all' do
