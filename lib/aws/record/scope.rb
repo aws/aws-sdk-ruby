@@ -290,11 +290,7 @@ module AWS
       # @private
       private
       def _item_collection
-        if @options[:domain]
-          items = AWS::SimpleDB.new.domains[@options[:domain]].items
-        else
-          items = base_class.sdb_domain.items
-        end
+        items = base_class.sdb_domain(@options[:domain]).items
         items = items.order(*@options[:order]) if @options[:order]
         items = items.limit(*@options[:limit]) if @options[:limit]
         Record.as_array(@options[:where]).each do |where_condition|

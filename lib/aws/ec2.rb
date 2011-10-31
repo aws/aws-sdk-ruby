@@ -83,8 +83,8 @@ module AWS
   # group(s).
   #
   #   # get two existing security groups
-  #   dbsvrs = ec2.security_groups['db-servers']
-  #   websvrs = ec2.security_groups['web-servers']
+  #   dbsvrs = ec2.security_groups.filter('group-name', 'db-servers').first
+  #   websvrs = ec2.security_groups.filter('group-name', 'web-servers').first
   #
   #   # allow instances in the 'web-servers' security group to connect
   #   # to instances in the 'db-servers' security group over tcp port 3306
