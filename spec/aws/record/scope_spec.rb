@@ -56,7 +56,7 @@ module AWS
         end
 
       end
-  
+
       context '#find' do
         
         context ':all' do
