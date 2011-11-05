@@ -463,6 +463,13 @@ module AWS
         images.create(options.merge(:instance_id => id, :name => name))
       end
 
+      # Retrieves the console output for the instance.
+      #
+      # @return [String] the console output.
+      def console_output
+        Base64.decode64(client.get_console_output(:instance_id => self.id).output)
+      end
+
       # Associates the elastic IP address with this instance.
       #
       # @param [ElasticIp,String] elastic_ip Either a public IP address
