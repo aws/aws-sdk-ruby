@@ -101,6 +101,30 @@ module AWS
             perm.groups[1].owner_id.should == 'grp2-user-id'
           end
 
+          context 'vpc security group without ports' do
+            
+            let(:ip_permissions) do
+              [
+                double("ip-permission-1",
+                  :ip_protocol => 39,
+                  :ip_ranges => [
+                    double("ip1", :cidr_ip => "1.1.1.1/1"),
+                    double("ip2", :cidr_ip => "2.2.2.2/2")
+                  ],
+                  :groups => []
+                ),
+              ]
+            end
+
+            it 'should accept a permission without port ranges' do
+              perm = collection.to_a.first
+              perm.protocol.should == :"39"
+              perm.port_range.should == nil
+              perm.ip_ranges.should == %w(1.1.1.1/1 2.2.2.2/2)
+            end
+
+          end
+
         end
 
       end

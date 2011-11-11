@@ -20,13 +20,16 @@ module AWS
     module FinderMethods
   
       # @param [String] id The id of the record to load.
+      # @param [Hash] options
+      # @option options [String] :domain Specifies what domain
+      #   should be searched.
       # @raise [RecordNotFound] Raises a record not found exception if there
       #   was no data found for the given id.
       # @return [Record::Base] Returns the record, as a sub-class of 
       #   Record::Base
-      def [] id
+      def find_by_id id, options = {}
 
-        data = sdb_domain.items[id].data.attributes
+        data = sdb_domain(options[:domain]).items[id].data.attributes
 
         raise RecordNotFound, "no data found for id: #{id}" if data.empty?
 
@@ -35,6 +38,7 @@ module AWS
         obj
 
       end
+      alias_method :[], :find_by_id
 
       # Finds records in SimpleDB and returns them as objects of the 
       # current class.

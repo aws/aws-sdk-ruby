@@ -781,6 +781,8 @@ module AWS
         req.add_param("AWSAccessKeyId", config.signer.access_key_id)
         req.add_param("Signature", signature(method, expires, req))
         req.add_param("Expires", expires)
+        req.add_param("x-amz-security-token", config.signer.session_token) if
+          config.signer.session_token
 
         build_uri(options[:secure] != false, req)
       end
@@ -791,7 +793,9 @@ module AWS
       #
       # @option options [Boolean] :secure Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
+      #
       # @return [URI::HTTP, URI::HTTPS]
+      #
       def public_url(options = {})
         req = request_for_signing(options)
         build_uri(options[:secure] != false, req)
@@ -837,11 +841,20 @@ module AWS
       # @private
       private
       def signature(method, expires, request)
-        string_to_sign = [method,
-                          "", "",
-                          expires,
-                          request.canonicalized_resource].join("\n")
+
+        parts = []
+        parts << method
+        parts << ""
+        parts << ""
+        parts << expires
+        parts << "x-amz-security-token:#{config.signer.session_token}" if
+          config.signer.session_token
+        parts << request.canonicalized_resource
+
+        string_to_sign = parts.join("\n")
+
         config.signer.sign(string_to_sign, "sha1")
+
       end
 
       # @private

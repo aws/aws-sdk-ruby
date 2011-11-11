@@ -30,7 +30,7 @@ module AWS
         def each
           security_group.ip_permissions_list.each do |p|
 
-            ports = [p.from_port, p.to_port]
+            ports = p.respond_to?(:from_port) ? [p.from_port, p.to_port] : nil
 
             ip_ranges = p.ip_ranges.collect{|ip| ip.cidr_ip }
 

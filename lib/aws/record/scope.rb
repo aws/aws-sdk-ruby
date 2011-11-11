@@ -103,13 +103,8 @@ module AWS
         case
         when id_or_mode == :all   then scope
         when id_or_mode == :first then scope.limit(1).first
-        when scope.send(:_empty?) then base_class[id_or_mode]
         else
-          object = scope.where('itemName() = ?', id_or_mode).limit(1).first
-          if object.nil?
-            raise RecordNotFound, "no data found for record `#{id_or_mode}`"
-          end
-          object
+          base_class.find_by_id(id_or_mode, :domain => scope._domain)
         end
   
       end
@@ -205,11 +200,10 @@ module AWS
           Enumerator.new(self, :"_each_object")
         end
       end
-  
-      # @private
-      private
-      def _empty?
-        @options == {}
+
+      protected
+      def _domain
+        @options[:domain] 
       end
   
       # @private
@@ -290,7 +284,7 @@ module AWS
       # @private
       private
       def _item_collection
-        items = base_class.sdb_domain(@options[:domain]).items
+        items = base_class.sdb_domain(_domain).items
         items = items.order(*@options[:order]) if @options[:order]
         items = items.limit(*@options[:limit]) if @options[:limit]
         Record.as_array(@options[:where]).each do |where_condition|

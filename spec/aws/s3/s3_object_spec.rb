@@ -705,9 +705,12 @@ module AWS
 
         let(:http_request) { Request.new }
 
-        let(:signer) { double("signer",
-                              :access_key_id => "ACCESS_KEY",
-                              :sign => "SIGNATURE") }
+        let(:signer) { 
+          double("signer",
+            :access_key_id => "ACCESS_KEY",
+            :session_token => nil,
+            :sign => "SIGNATURE") 
+        }
 
         before(:each) do
           http_request.stub(:canonicalized_resource).and_return("/foo/bar")
@@ -748,6 +751,28 @@ module AWS
           signer.should_receive(:sign).with(an_instance_of(String),
                                             "sha1")
           object.url_for(:get)
+        end
+
+        context 'federated sessions' do
+
+          before(:each) do
+            signer.stub(:session_token).and_return('session-token')
+          end
+
+          it 'adds the security token to the request' do
+            http_request.stub(:add_param)
+            http_request.should_receive(:add_param).
+              with('x-amz-security-token', 'session-token')
+            object.url_for(:get)
+          end
+
+          it 'addes the security token to the string to sign' do
+            signer.should_receive(:sign).with do |string,type|
+              string.should =~ /x-amz-security-token:session-token/
+            end
+            object.url_for(:get)
+          end
+
         end
 
         shared_examples_for "presigned url request parameter" do |name, param|

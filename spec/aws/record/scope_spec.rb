@@ -142,13 +142,21 @@ module AWS
   
           let(:data) { double('item-data', :attributes => { 'foo' => %w(bar) }) }
 
+          let(:domain) { double('sdb-domain') }
+
           before(:each) do
-            klass.stub_chain(:sdb_domain, :items, :[], :data).and_return(data)
+            klass.stub_chain(:sdb_domain).and_return(domain) 
+            domain.stub_chain(:items, :[], :data).and_return(data)
           end
 
           it 'gets the item data via get_attributes instead of select' do
             data.should_receive(:attributes)
             scope.find(123)
+          end
+
+          it 'can also receive a domain name' do
+            klass.should_receive(:sdb_domain).with('shard').and_return(domain)
+            scope.domain('shard').find(123)
           end
   
         end

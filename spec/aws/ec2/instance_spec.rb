@@ -56,6 +56,27 @@ module AWS
 
       end
 
+      context '#console_output' do
+
+        let(:response) { client.stub_for(:get_console_output) }
+
+        before(:each) do
+          response.stub(:output).and_return("YWJj\n")
+        end
+        
+        it 'calls get_console_output on the client' do
+          client.should_receive(:get_console_output).
+            with(:instance_id => instance.id).
+            and_return(response)
+          instance.console_output
+        end
+
+        it 'base 64 decodes the output' do
+          instance.console_output.should == 'abc'
+        end
+
+      end
+
       context '#exists?' do
         let(:id_filter) { "instance-id" }
         def stub_exists(resp)
