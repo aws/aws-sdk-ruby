@@ -612,11 +612,6 @@ module AWS
               should == ["foo = 'bar'"]
           end
 
-          it 'should raise an error if the hash has no entry for a placeholder' do
-            lambda { items.where("foo = :foo", :foos => "bar") }.
-              should raise_error(ArgumentError, "missing value for placeholder :foo")
-          end
-
           it 'should not raise an error when performing positional substitution with a time value' do
             lambda { items.where("foo = ?", Time.now) }.
               should_not raise_error(ArgumentError)

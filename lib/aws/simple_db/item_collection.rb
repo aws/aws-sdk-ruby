@@ -619,9 +619,6 @@ module AWS
         named.each do |name, value|
           str = str.gsub(name.to_sym.inspect, coerce_substitution(value))
         end
-        str.scan(/:\S+/) do |missing|
-          raise ArgumentError.new("missing value for placeholder #{missing}")
-        end
         str
       end
 
