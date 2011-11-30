@@ -628,6 +628,10 @@ module AWS
         if subst.kind_of?(Array)
           "(" +
             subst.flatten.map { |s| coerce_substitution(s) }.join(", ") + ")"
+        elsif subst.is_a?(DateTime)
+          "'" + AWS::Record::DateTimeAttribute.serialize(subst) + "'"
+        elsif subst.is_a?(Time)
+          coerce_substitution(subst.to_datetime)
         else
           "'" + subst.to_s.gsub("'", "''") + "'"
         end

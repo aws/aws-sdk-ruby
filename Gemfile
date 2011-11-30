@@ -19,8 +19,14 @@ gem 'nokogiri', '>= 1.4.4'
 gem 'json', '~> 1.4.6'
 
 gem 'jruby-openssl', :platforms => :jruby
-gem 'ruby-debug', :platforms => [:jruby, :mri_18]
-gem 'ruby-prof', :platforms => [:mri_18]
+
+group :development, :test do
+  gem 'ruby-debug19', :require => 'ruby-debug', :platforms => [:mri_19]
+  gem 'ruby-debug', :platforms => [:jruby, :mri_18]
+  gem 'ruby-prof', :platforms => [:mri_18]
+  gem 'active_support'
+  gem 'tzinfo'
+end
 
 group :autotest do
   gem 'ZenTest', '~> 4.4'

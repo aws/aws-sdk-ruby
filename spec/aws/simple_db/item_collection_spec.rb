@@ -632,6 +632,34 @@ module AWS
               should_not raise_error(ArgumentError)
           end
 
+          it 'should format time substitutions so they can be lexically compared against the database' do
+            now = Time.parse('2011-11-30 16:33:03 UTC')
+            items.where('opened_at > ?', now).conditions.
+              should == ["opened_at > '2011-11-30T16:33:03+0000'"]
+          end
+
+          it 'should format datetime substitutions so they can be lexically compared against the database' do
+            now = DateTime.parse('2011-11-30 16:33:03 UTC')
+            items.where('opened_at > ?', now).conditions.
+              should == ["opened_at > '2011-11-30T16:33:03+0000'"]
+          end
+
+          it 'should change all time zones to UTC so that time substitutions can be lexically compared against the database' do
+            Time.zone = 'Central Time (US & Canada)'
+            now = Time.parse('2011-11-30 16:33:03 UTC').in_time_zone
+            items.where('opened_at > ?', now).conditions.
+              should == ["opened_at > '2011-11-30T16:33:03+0000'"]
+            Time.zone = 'UTC'
+          end
+
+          it 'should format datetime-in-zone substitutions so they can be lexically compared against the database' do
+            Time.zone = 'Central Time (US & Canada)'
+            now = DateTime.parse('2011-11-30 16:33:03 UTC').in_time_zone
+            items.where('opened_at > ?', now).conditions.
+              should == ["opened_at > '2011-11-30T16:33:03+0000'"]
+            Time.zone = 'UTC'
+          end
+
         end
 
       end
