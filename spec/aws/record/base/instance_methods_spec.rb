@@ -361,11 +361,12 @@ module AWS
               end
     
               it 'encodes datetimes as iso8601 string' do
-                date = DateTime.now
-                iso8601 = date.strftime('%Y-%m-%dT%H:%M:%S%Z')
+                datetime = DateTime.now
+                Time.zone = 'UTC'
+                iso8601 = datetime.in_time_zone.strftime('%Y-%m-%dT%H:%M:%S%z')
                 sdb_attributes.should_receive(:add).with('when' => [iso8601])
                 klass.datetime_attr :when
-                klass.new(:when => date).save
+                klass.new(:when => datetime).save
               end
     
               it 'encodes integers as strings' do
