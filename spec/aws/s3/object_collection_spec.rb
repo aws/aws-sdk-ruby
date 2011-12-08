@@ -30,6 +30,8 @@ module AWS
 
       let(:list_method) { :list_objects }
 
+      let(:delete_response) { client.stub_for(:delete_objects) }
+
       it_behaves_like "an S3 tree-like collection"
 
       it_behaves_like "an S3 paginated collection" do
@@ -147,6 +149,147 @@ module AWS
         end
 
       end
+
+      context '#delete' do
+
+        it 'calls delete_objects on the client' do
+
+          client.should_receive(:delete_objects).with(
+            :bucket_name => bucket.name,
+            :quiet => true,
+            :objects => [{ :key => '1' }, { :key => '2' }]).
+            and_return(delete_response)
+
+
+          collection.delete('1', '2')
+
+        end
+
+        it 'accepts mixed keys (strings, hashes, objects and versions)' do
+
+          client.should_receive(:delete_objects).with(
+            :bucket_name => bucket.name,
+            :quiet => true,
+            :objects => [
+              { :key => 'key1' }, 
+              { :key => 'key2' },
+              { :key => 'key3' },
+              { :key => 'key3', :version_id => 'vid' },
+            ]
+          ).and_return(delete_response)
+
+          objects = [
+            'key1',
+            { :key => 'key2' },
+            bucket.objects['key3'],
+            bucket.objects['key3'].versions['vid'],
+          ]
+
+          collection.delete(objects)
+
+        end
+
+
+        it 'can delete a batch of 1k objects in a single call' do
+
+          keys = (1..1000).map {|n| { :key => "key#{n}" } }
+
+          client.should_receive(:delete_objects).exactly(1).times.with(
+            :bucket_name => bucket.name, :quiet => true, :objects => keys).
+            and_return(delete_response)
+
+          collection.delete(*keys)
+
+        end
+
+
+        it 'deletes > 1k objects in multiple calls' do
+
+          keys = (1..1500).map {|n| { :key => "key#{n}" } }
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => keys[0..999]).
+            and_return(delete_response)
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => keys[1000..1499]).
+            and_return(delete_response)
+
+          collection.delete(*keys)
+
+        end
+
+      end
+
+      context '#delete_if' do
+
+        it 'enumerates the collection and deletes objects that return true' do
+
+          # make this collection represent 3000 objects with numerical keys
+          objects = (1..3000).map {|n| bucket.objects[n.to_s] }
+          stub = collection.stub(:each)
+          objects.each do |obj|
+            stub = stub.and_yield(obj)
+          end
+
+          # we only want to delete those with even keys
+          even_keys = objects.select{|o| o.key.to_i % 2 == 0 }.map do |o|
+            { :key => o.key }
+          end
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => even_keys[0..999]).
+            and_return(delete_response)
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => even_keys[1000..1499]).
+            and_return(delete_response)
+
+          collection.delete_if do |obj|
+            obj.key.to_i % 2 == 0
+          end
+
+        end
+
+      end
+
+      context '#delete_all' do
+
+        it 'calls #delete on each batch of the collection' do
+
+          # make this collection represent 3000 objects with numerical keys
+          objects = (1..3000).map {|n| bucket.objects[n.to_s] }
+
+          keys = objects.map{|o| { :key => o.key } }
+
+          collection.stub(:each_batch).
+            and_yield(objects[0..999]).
+            and_yield(objects[1000..1999]).
+            and_yield(objects[2000..2999])
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => keys[0..999]).
+            and_return(delete_response)
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => keys[1000..1999]).
+            and_return(delete_response)
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => keys[2000..2999]).
+            and_return(delete_response)
+
+          collection.delete_all
+
+        end
+
+      end
+
     end
   end
 end

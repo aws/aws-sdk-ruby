@@ -15,6 +15,7 @@ require 'rexml/document'
 require 'pathname'
 require 'stringio'
 require 'json'
+require 'digest/md5'
 
 module AWS
   class S3
@@ -561,17 +562,19 @@ module AWS
       #   marker.
       object_method(:get_object, :get,
                     :header_options => {
-                      :range => "Range",
                       :if_modified_since => "If-Modified-Since",
                       :if_unmodified_since => "If-Unmodified-Since",
                       :if_match => "If-Match",
                       :if_none_match => "If-None-Match"
                     }) do
         configure_request do |req, options|
+
           super(req, options)
+
           if options[:version_id]
             req.add_param('versionId', options[:version_id])
           end
+
           ["If-Modified-Since",
            "If-Unmodified-Since"].each do |date_header|
             case value = req.headers[date_header]
@@ -581,6 +584,13 @@ module AWS
               req.headers[date_header] = value.rfc2822
             end
           end
+
+          if options[:range]
+            range = options[:range]
+            range = "bytes=#{range.first}-#{range.last}" if range.is_a?(Range)
+            req.headers['Range'] = range
+          end
+
         end
 
         process_response do |resp|
@@ -705,6 +715,31 @@ module AWS
         end
       end
 
+      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects) do
+        configure_request do |req, options|
+
+          super(req, options)
+
+          quiet = options.key?(:quiet) ? options[:quiet] : true
+
+          objects = options[:objects].inject('') do |xml,o|
+            xml << "<Object><Key>#{o[:key]}</Key>"
+            xml << "<VersionId>#{o[:version_id]}</VersionId>" if o[:version_id]
+            xml << "</Object>"
+          end
+
+          xml = '<?xml version="1.0" encoding="UTF-8"?>'
+          xml << "<Delete><Quiet>#{quiet}</Quiet>#{objects}</Delete>"
+
+          req.body = xml
+
+          md5 = Base64.encode64(Digest::MD5.digest(xml)).strip
+
+          req.headers['content-md5'] = md5
+
+        end
+      end
+
       object_method(:upload_part, :put,
                     :header_options => {
                       :content_md5 => 'Content-MD5'
@@ -799,6 +834,7 @@ module AWS
       object_method(:copy_object, :put,
                     :header_options => {
                       :copy_source => 'x-amz-copy-source',
+                      :cache_control => 'Cache-Control',
                       :metadata_directive => 'x-amz-metadata-directive',
                       :storage_class => 'x-amz-storage-class',
                       :server_side_encryption => 'x-amz-server-side-encryption',

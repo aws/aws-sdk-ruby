@@ -18,6 +18,7 @@ require 'aws/record/attributes/float'
 require 'aws/record/attributes/sortable_float'
 require 'aws/record/attributes/boolean'
 require 'aws/record/attributes/datetime'
+require 'aws/record/attributes/date'
 
 module AWS
   module Record
@@ -204,14 +205,37 @@ module AWS
       # will be automanaged.
       #
       # @param [Symbol] name The name of the attribute.
+      #
       # @param [Hash] options
-      # @option options [Integer] :precision When set, the integer will be
-      #   serialized with the correct number of digits to SimpleDB, left 
-      #   padded by zeros to allow sorting.
+      #
       # @option options [Boolean] :set (false) When true this attribute
-      #   can have multiple values.
+      #   can have multiple date times.
+      #
       def datetime_attr name, options = {}
         add_attribute(DateTimeAttribute.new(name, options))
+      end
+
+      # Adds a date attribute to this class.
+      #
+      # @example A standard date attribute
+      #
+      #   class Person < AWS::Record::Base
+      #     date_attr :birthdate
+      #   end
+      #
+      #   baby = Person.new
+      #   baby.birthdate = Time.now
+      #   baby.birthdate #=> <Date: ....>
+      #
+      # @param [Symbol] name The name of the attribute.
+      #
+      # @param [Hash] options
+      #
+      # @option options [Boolean] :set (false) When true this attribute
+      #   can have multiple dates.
+      #
+      def date_attr name, options = {}
+        add_attribute(DateAttribute.new(name, options))
       end
 
       # A convenience method for adding the standard two datetime attributes

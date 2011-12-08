@@ -45,7 +45,7 @@ module AWS
           domain = double('domain')
           domain.stub(:items).and_return(items)
 
-          klass.should_receive(:sdb_domain).with(nil).and_return(domain)
+          klass.should_receive(:sdb_domain).with('Klass').and_return(domain)
           klass.should_receive(:sdb_domain).with('shard').and_return(domain)
 
           scope.domain('shard').find(:all).each{|obj|}
@@ -53,6 +53,60 @@ module AWS
           scope.each{|obj|}
           scope.domain('shard').each{|obj|}
 
+        end
+
+      end
+
+      context '#new' do
+
+        it 'returns a new object of the base class' do
+          scope.domain('foo').new.should be_a(klass)
+        end
+
+        it 'passes to new the scope domain' do
+          scope.domain('foo').new.domain.should == 'foo'
+        end
+
+        it 'passes :domain option to new' do
+          scope.new(:domain => 'foo').domain.should == 'foo'
+        end
+
+        it 'accepts a the domain option as a string' do
+          obj = scope.new('domain' => 'shard')
+          obj.domain.should == 'shard'
+        end
+
+        it 'passes hash conditions to new' do
+          klass.string_attr :foo
+          obj = klass.where(:foo => 'bar').new
+          obj.foo.should == 'bar'
+        end
+
+        it 'passes multiple conditions' do
+
+          klass.should_receive(:new).with(
+            :domain => klass.name,
+            :foo => 'f', :bar => 'b', :yuck => 'y')
+
+          scope.where(:foo => 'f', :bar => 'b').where(:yuck => 'y').new
+
+        end
+
+        it 'does not pass non-hash conditions' do
+
+          klass.should_receive(:new).with(
+            :domain => klass.name, :foo => 'f')
+
+          scope.where(:foo => 'f').where('abc > 10').new
+          
+        end
+
+      end
+
+      context '#build' do
+
+        it 'is an alias of new' do
+          scope.method(:new).should == scope.method(:build)
         end
 
       end
@@ -327,6 +381,7 @@ module AWS
         it 'the defined method should return a scope object for this class' do
           klass.scope :foo, klass.where(:foo => 'bar')
           items.should_receive(:where).with(:foo => 'bar').and_return(items)
+          items.should_receive(:limit).with(1).and_return(items)
           klass.foo.first
         end
   

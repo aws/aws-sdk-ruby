@@ -58,12 +58,33 @@ module AWS
       # @private
       def initialize base_class, options = {}
         @base_class = base_class
-        @options = options
+        @options = options.dup
+        @options[:where] ||= []
+        @options[:domain] ||= base_class.domain_name
       end
   
       # @return [Class] Returns the AWS::Record::Base extending class that
       #   this scope will find records for.
       attr_reader :base_class
+
+      def new attributes = {}
+
+        options = {}
+        options.merge!(attributes)
+        unless options.key?(:domain) or options.key?('domain')
+          options[:domain] = _domain
+        end
+
+        @options[:where].each do |conditions|
+          if conditions.size == 1 and conditions.first.is_a?(Hash)
+            options.merge!(conditions.first)
+          end
+        end
+
+        base_class.new(options)
+
+      end
+      alias_method :build, :new
 
       # @param [String] domain
       # @return [Scope] Returns a scope for restricting the domain of subsequent
@@ -102,7 +123,7 @@ module AWS
 
         case
         when id_or_mode == :all   then scope
-        when id_or_mode == :first then scope.limit(1).first
+        when id_or_mode == :first then scope.limit(1).to_a.first
         else
           base_class.find_by_id(id_or_mode, :domain => scope._domain)
         end
@@ -119,6 +140,12 @@ module AWS
         end
       end
       alias_method :size, :count
+
+      # @return [Record::Base,nil] Gets the first record from the domain
+      #   and returns it, or returns nil if the domain is empty.
+      def first options = {}
+        _handle_options(options).find(:first)
+      end
 
       # Applies conditions to the scope that limit which records are returned.
       # Only those matching all given conditions will be returned.
@@ -149,7 +176,7 @@ module AWS
         if conditions.empty?
           raise ArgumentError, 'missing required condition'
         end
-        _with(:where => Record.as_array(@options[:where]) + [conditions])
+        _with(:where => @options[:where] + [conditions])
       end
   
       # Specifies how to sort records returned.  
@@ -213,7 +240,7 @@ module AWS
         items = _item_collection
 
         items.select.each do |item_data|
-          obj = base_class.new
+          obj = base_class.new(:domain => _domain)
           obj.send(:hydrate, item_data.name, item_data.attributes)
           yield(obj)
         end
@@ -287,7 +314,7 @@ module AWS
         items = base_class.sdb_domain(_domain).items
         items = items.order(*@options[:order]) if @options[:order]
         items = items.limit(*@options[:limit]) if @options[:limit]
-        Record.as_array(@options[:where]).each do |where_condition|
+        @options[:where].each do |where_condition|
           items = items.where(*where_condition)
         end
         items

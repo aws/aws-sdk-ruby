@@ -29,11 +29,13 @@ module AWS
       #   Record::Base
       def find_by_id id, options = {}
 
-        data = sdb_domain(options[:domain]).items[id].data.attributes
+        domain = sdb_domain(options[:domain])
+
+        data = domain.items[id].data.attributes
 
         raise RecordNotFound, "no data found for id: #{id}" if data.empty?
 
-        obj = self.new
+        obj = self.new(:domain => domain)
         obj.send(:hydrate, id, data)
         obj
 
@@ -117,7 +119,7 @@ module AWS
       #
       # @return [Scope] Returns an enumerable scope object.
       def all options = {}
-        find(:all, options)
+        _new_scope.find(:all, options)
       end
 
       # Counts records in SimpleDB.
@@ -143,7 +145,7 @@ module AWS
       #   records are counted.
       # @option options [Integer] :limit The max number of records to count.
       def count(options = {})
-        find(:all).count(options)
+        _new_scope.count(options)
       end
       alias_method :size, :count
 
@@ -151,7 +153,7 @@ module AWS
       #   class.  If there are no records in the current classes domain, then
       #   nil is returned.
       def first options = {}
-        _new_scope.find(:first, options)
+        _new_scope.first(options)
       end
 
       # Limits which records are retried from SimpleDB when performing a find.

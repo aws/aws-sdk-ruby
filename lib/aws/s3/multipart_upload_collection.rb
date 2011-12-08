@@ -64,9 +64,6 @@ module AWS
       protected
       def pagination_markers; super + [:upload_id_marker]; end
 
-      protected
-      def page_size(resp); super + resp.uploads.size; end
-
     end
 
   end

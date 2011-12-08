@@ -1331,6 +1331,18 @@ module AWS
 
       end
 
+      context '#delete_objects' do
+
+        let(:method) { :delete_object }
+
+        let(:opts) { { :bucket_name => 'foo', :key => 'some/key' } }
+
+        it_should_behave_like "requires bucket_name"
+
+        #it_should_behave_like "an s3 http request", 'POST'
+
+      end
+
       context '#list_objects' do
 
         let(:method) { :list_objects }

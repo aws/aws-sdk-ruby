@@ -45,6 +45,15 @@ module AWS
                 klass.new(:blah => 'abc')
               }.should raise_error(NoMethodError)
             end
+
+            it 'accepts a :domain string' do
+              klass.new(:domain => 'abc').domain.should == 'abc'
+            end
+
+            it 'accepts :domain object' do
+              domain = SimpleDB::Domain.new('abc')
+              klass.new(:domain => domain).domain.should == 'abc'
+            end
     
           end
     
@@ -54,6 +63,51 @@ module AWS
               klass.new.id.should be_nil
             end
     
+          end
+
+          context '#domain' do
+
+            it 'defaults to the klass domain' do
+              obj = klass.new
+              obj.domain.should == klass.name
+            end
+
+            it 'can be set as a contructor arg' do
+              obj = klass.new(:domain => 'abc')
+              obj.domain.should == 'abc'
+            end
+
+            it 'can be set with a string key' do
+              obj = klass.new('domain' => 'abc')
+              obj.domain.should == 'abc'
+            end
+
+            it 'can be chained with the domain scope' do
+              obj = klass.domain('xyz').new
+              obj.domain.should == 'xyz'
+            end
+
+            it 'is read only' do
+              obj = klass.new
+              lambda { obj.domain = 'abc' }.should raise_error(NoMethodError)
+            end
+
+            it 'can not be set after construction' do
+              obj = klass.new # domain is determined here
+              lambda { 
+                obj.attributes = { :domain => 'abc' }
+              }.should raise_error(NoMethodError, /domain=/)
+            end
+
+            it 'can not be updated' do
+              klass.string_attr :foo
+              obj = klass.new :foo => 'bar' # default domain 
+              obj.save
+              lambda { 
+                obj.update_attributes :domain => 'abc'
+              }.should raise_error(NoMethodError, /domain=/)
+            end
+
           end
 
           context '#attributes=' do

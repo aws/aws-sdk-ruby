@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@elb @backend_server_policies @foo
+@elb @backend_server_policies
 Feature: ELB Backend Server Policies
 
   Scenario: Creating a backend server policy

@@ -102,19 +102,28 @@ module AWS
 
       # Deletes the current bucket.
       # 
-      # @note the bucket *must* be empty.
+      # @note This operation will fail if the bucket is not empty.
+      #
       # @return [nil]
+      #
       def delete
         client.delete_bucket(:bucket_name => @name)
         nil
       end
 
-      # Deletes any objects and versions which may be in the bucket,
-      # then deletes the bucket.
+      # Attempts to delete all objects (or object versions) from the bucket
+      # and then attempts to delete the bucket.
+      #
+      # @note This operation may fail if you do not have privileges to delete 
+      #   all objects from the bucket.
+      #
       # @return [nil]
+      #
       def delete!
-        versions.each{|version| version.delete }
-        delete
+        versions.each_batch do |versions|
+          objects.delete(versions)
+        end
+        self.delete
       end
 
       # @return [String] bucket owner id

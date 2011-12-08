@@ -31,6 +31,20 @@ module AWS
     # @private
     module Errors
 
+      class BatchDeleteError < StandardError
+
+        def initialize error_counts
+          @error_counts = error_counts
+          total = error_counts.values.inject(0) {|sum,count| sum + count }
+          super("Failed to delete #{total} objects")
+        end
+
+        # @return [Hash] Returns a hash of error codes and how many
+        #   objects failed with that code.
+        attr_reader :error_counts
+
+      end
+
       # This error is special, because S3 does not (and must not
       # according to RFC 2616) return a body with the HTTP response.
       # The interface is the same as for any other client error.

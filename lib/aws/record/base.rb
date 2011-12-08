@@ -301,11 +301,23 @@ module AWS
       #
       # @param [Hash] attributes A set of attribute values to seed this record
       #   with.  The attributes are bulk assigned.
+      #
       # @return [Base] Returns a new record that has not been persisted yet.
+      #
       def initialize attributes = {}
+
+        opts = attributes.dup
+
         @_data = {}
+
+        @_domain = attributes.delete(:domain)
+        @_domain ||= attributes.delete('domain')
+        @_domain = self.class.domain_name(@_domain)
+
         assign_default_values
+
         bulk_assign(attributes)
+
       end
   
       # The id for each record is auto-generated.  The default strategy 
@@ -314,6 +326,12 @@ module AWS
       #   nil if this is a new record that has not been persisted yet.
       def id
         @_id
+      end
+
+      # @return [String] Returns the name of the SimpleDB domain this record
+      #   is persisted to or will be persisted to.
+      def domain
+        @_domain
       end
 
       # @return [Hash] A hash with attribute names as hash keys (strings) and 
@@ -450,7 +468,13 @@ module AWS
         # @param [String] name Defaults to the name of this class.
         # @return [String] Returns the full prefixed domain name for this class.
         def domain_name name = nil
-          "#{Record.domain_prefix}#{name || @_domain_name || self.to_s}"
+
+          name = @_domain_name if name.nil?
+          name = self.name if name.nil?
+          name = name.name if name.is_a?(SimpleDB::Domain)
+
+          "#{Record.domain_prefix}#{name}"
+
         end
 
         # Creates the SimpleDB domain that is configured for this class.
@@ -461,14 +485,19 @@ module AWS
         # @return [AWS::SimpleDB::Domain]
         #
         def create_domain name = nil
-          AWS::SimpleDB.new.domains.create(domain_name(name))
+          sdb.domains.create(domain_name(name))
         end
 
         # @return [AWS::SimpleDB::Domain] Returns a reference to the domain
         #   this class will save data to.
         # @private
         def sdb_domain name = nil
-          AWS::SimpleDB.new.domains[domain_name(name)]
+          sdb.domains[domain_name(name)]
+        end
+
+        protected
+        def sdb
+          AWS::SimpleDB.new
         end
 
       end
@@ -547,7 +576,14 @@ module AWS
       # @private
       private
       def sdb_item
-        self.class.sdb_domain.items[id]
+        sdb_domain.items[id]
+      end
+
+      # @return [SimpleDB::Domain] Returns the domain this record is
+      #   persisted to or will be persisted to.
+      private
+      def sdb_domain
+        self.class.sdb_domain(domain)
       end
 
       # @private
@@ -589,6 +625,7 @@ module AWS
       # @todo need to do something about partial hyrdation of attributes
       private
       def hydrate id, data
+
         @_id = id
   
         # New objects are populated with default values, but we don't

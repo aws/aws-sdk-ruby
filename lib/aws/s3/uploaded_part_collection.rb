@@ -74,7 +74,9 @@ module AWS
 
       # @private
       protected
-      def pagination_markers; [:part_number_marker]; end
+      def pagination_markers
+        [:part_number_marker]
+      end
 
     end
 

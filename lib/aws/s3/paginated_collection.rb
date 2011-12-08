@@ -17,39 +17,25 @@ module AWS
     # @private
     module PaginatedCollection
 
-      def each(options = {}, &block)
-        each_page(options) do |page|
-          each_member_in_page(page, &block)
-        end
-        nil
+      include Core::Collection::Limitable
+
+      protected
+      def _each_item markers, limit, options = {}, &block
+
+        options = list_options(options)
+        options.merge!(markers) unless markers.nil? or markers.empty?
+        options[limit_param] = limit || 1000
+
+        response = list_request(options)
+
+        each_member_in_page(response, &block)
+      
+        response.truncated? ? next_markers(response) : nil
+
       end
 
       protected
       def each_member_in_page(page, &block); end
-
-      protected
-      def each_page(options = {}, &block)
-        opts = list_options(options)
-        limit = options[:limit]
-        batch_size = options[:batch_size] || 1000
-        markers = {}
-        received = 0
-
-        loop do
-          page_opts = opts.dup
-          page_opts.merge!(markers)
-          page_opts[limit_param] =
-            limit ? [limit - received, batch_size].min : batch_size
-
-          page = list_request(page_opts)
-          markers = next_markers(page)
-          received += page_size(page)
-
-          yield(page)
-
-          return unless page.truncated?
-        end
-      end
 
       protected
       def list_request(options)
@@ -57,7 +43,7 @@ module AWS
       end
 
       protected
-      def list_options(options)
+      def list_options options
         opts = {}
         opts[:bucket_name] = bucket.name if respond_to?(:bucket)
         opts
@@ -74,18 +60,13 @@ module AWS
       end
 
       protected
-      def next_markers(page)
-        pagination_markers.inject({}) do |markers, marker|
-          markers[marker] = page.send("next_#{marker}")
+      def next_markers page
+        pagination_markers.inject({}) do |markers, marker_name|
+          if marker = page.send("next_#{marker_name}")
+            markers[marker_name] = marker if marker
+          end
           markers
         end
-      end
-
-      protected
-      def page_size(resp)
-        (resp.respond_to?(:common_prefixes) and
-         prefixes = resp.common_prefixes and
-         prefixes.size) or 0
       end
 
     end

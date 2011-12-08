@@ -11,9 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'net/http'
-require 'net/https'
-require 'openssl'
+require 'net/http/connection_pool'
 
 module AWS
   module Core
@@ -22,71 +20,32 @@ module AWS
       # The default http request handler for the aws-sdk gem.  It is based
       # on Net::Http.
       class NetHttpHandler
+
+        @@pool = Net::HTTP::ConnectionPool.new
+
+        # @private
+        def self.pool
+          @@pool
+        end
   
         def handle request, response
-          http_session_for(request) do |http|
-            begin
-              http_resp = http.request(build_request(request))
-              response.body = http_resp.body
-              response.status = http_resp.code.to_i
-              response.headers = http_resp.to_hash
-            rescue Timeout::Error, Errno::ETIMEDOUT => e
-              response.timeout = true
-            end
-          end
-        end
-          
-        # @private
-        protected
-        def http_session_for request, &block
+
+          options = {}
+          options[:ssl] = request.use_ssl?
+          options[:proxy_uri] = request.proxy_uri
+          options[:ssl_verify_peer] = request.ssl_verify_peer?
+          options[:ssl_ca_file] = request.ssl_ca_file
+
+          connection = self.class.pool.connection_for(request.host, options)
+
           begin
-            http = build_http(request)
-            http.start
-            yield(http)
-          ensure
-            http.finish if http.started?
+            http_response = connection.request(build_request(request))
+            response.body = http_response.body
+            response.status = http_response.code.to_i
+            response.headers = http_response.to_hash
+          rescue Timeout::Error, Errno::ETIMEDOUT => e
+            response.timeout = true
           end
-        end
-
-        # @private
-        protected
-        def build_http request
-
-          http_args = []
-          http_args << request.host
-          http_args << (request.use_ssl? ? 443 : 80)
-
-          ## add proxy arguments
-
-          if proxy = request.proxy_uri
-            proxy_addr = proxy.respond_to?(:request_uri) ?
-              "#{proxy.host}#{proxy.request_uri}" : proxy.host
-            http_args << proxy_addr
-            http_args << proxy.port
-            http_args << proxy.user
-            http_args << proxy.password
-          end
-
-          # ruby 1.8.7 does not accept a hash of options at the end of
-          # Net::HTTP.new like 1.9 does, therefore we have to set ssl
-          # options on the returned http object
-          http = Net::HTTP.new(*http_args)
-
-          ## configure ssl 
-
-          if request.use_ssl?
-            http.use_ssl = true
-            if request.ssl_verify_peer?
-              http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-              http.ca_file = request.ssl_ca_file
-            else
-              http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-            end
-          else
-            http.use_ssl = false
-          end
-
-          http
 
         end
 

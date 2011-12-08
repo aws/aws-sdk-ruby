@@ -142,7 +142,7 @@ module AWS
     describe Base do
   
       before(:each) do
-        klass.stub(:to_s).and_return('ExampleModel')
+        klass.stub(:name).and_return('ExampleModel')
       end
       
       let(:klass) do
@@ -606,14 +606,27 @@ module AWS
 
         context 'all' do
   
-          it 'calls find(:all)' do
-            klass.should_receive(:find).with(:all, {}).and_return("foo")
-            klass.all.should == "foo"
+          it 'returns a scope for all records' do
+
+            scope = double('scope')
+            scope.should_receive(:find).with(:all, {}).
+              and_return(scope)
+            Scope.stub(:new).and_return(scope)
+
+            klass.all.should == scope
+
           end
   
           it 'passes options' do
-            klass.should_receive(:find).with(:all, :foo => "bar")
-            klass.all(:foo => "bar")
+
+            scope = double('scope')
+            scope.should_receive(:find).with(:all, :where => 'foo').
+              and_return(scope)
+
+            Scope.stub(:new).and_return(scope)
+
+            klass.all(:where => 'foo').should == scope
+
           end
   
         end
@@ -741,16 +754,16 @@ module AWS
         context 'count' do
 
           it 'should call .find and count the result' do
-            klass.should_receive(:find).with(:all).
-              and_return(double("scope", :count => 12))
+            scope = double('scope', :count => 12)
+            Scope.stub(:new).and_return(scope)
             klass.count.should == 12
           end
 
           it 'should pass options to Scope#count' do
             scope = double("scope")
-            klass.stub(:find).and_return(scope)
-            scope.should_receive(:count).with(:foo => "bar")
-            klass.count(:foo => "bar")
+            scope.should_receive(:count).with(:foo => 'bar').and_return(12)
+            Scope.stub(:new).and_return(scope)
+            klass.count(:foo => 'bar').should == 12
           end
 
         end

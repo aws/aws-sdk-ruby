@@ -83,15 +83,40 @@ module AWS
       end
 
       context '#delete!' do
+
+        let(:response) { client.stub_for(:delete_objects) }
         
-        it 'should delete every versioned object in the bucket' do
+        it 'should delete the bucket objects in batches' do 
 
-          version = double('version')
-          versions = (1..10).collect{|n| version }
+          key = { :key => 'key', :version_id => "null" }
+
+          versions1 = (1..1000).collect{|n| key }
+          versions2 = (1..1000).collect{|n| key }
+          versions3 = (1..500).collect{|n| key }
+
+          versions = double('version-collection')
+          versions.should_receive(:each_batch).
+            and_yield(versions1).
+            and_yield(versions2).
+            and_yield(versions3)
+
           bucket.stub(:versions).and_return(versions)
+          
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => versions1).
+            and_return(response)
 
-          version.should_receive(:delete).exactly(10).times
-          client.should_receive(:delete_bucket)
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => versions2).
+            and_return(response)
+
+          client.should_receive(:delete_objects).ordered.with(
+            :bucket_name => bucket.name, :quiet => true, 
+            :objects => versions3).
+            and_return(response)
+              
           bucket.delete!
 
         end

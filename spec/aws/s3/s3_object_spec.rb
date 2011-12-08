@@ -442,15 +442,30 @@ module AWS
             with(:bucket_name => "foobucket",
                  :key => "foo",
                  :upload_id => "abc123")
-          object.multipart_upload { |upload| }
+          object.multipart_upload {|upload|}
         end
 
-        it 'should abort the upload if an exception is raised' do
+        it 'should abort the upload if an error is raised' do
+
           client.should_receive(:abort_multipart_upload).
             with(:bucket_name => "foobucket",
                  :key => "foo",
                  :upload_id => "abc123")
-          object.multipart_upload { |upload| raise "FOO" } rescue nil
+
+          object.multipart_upload do |upload| 
+            upload.add_part('part')
+            raise 'oops'
+          end
+
+        end
+
+        it 'does not abort the upload if an exception is raised' do
+          begin
+            client.should_not_receive(:abort_multipart_upload)
+            object.multipart_upload {|upload| raise Exception.new } 
+          rescue Exception
+            nil
+          end
         end
 
         it 'should not abort the upload if initialization failed' do

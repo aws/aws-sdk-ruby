@@ -287,3 +287,35 @@ end
 When /^I grant public read permissions on the object "([^\"]*)"$/ do |key|
   @bucket.objects[key].acl = :public_read
 end
+
+Given /^I have the following objects:$/ do |table|
+  table.hashes.each do |hash|
+    @bucket.objects[hash['KEY']].write(hash['DATA'])
+  end
+end
+
+When /^I use delete_if to delete even objects with the prefix "([^"]*)"$/ do |prefix|
+  @bucket.objects.with_prefix(prefix).delete_if do |obj|
+    obj.key.to_i % 2 == 0
+  end
+end
+
+Then /^the bucket should have the following keys$/ do |table|
+  keys = table.hashes.map{|h| h["KEY"] }
+  @bucket.objects.map(&:key).sort.should == keys.sort
+end
+
+Given /^I have (\d+) objects$/ do |count|
+  count.to_i.times do |n|
+    @bucket.objects[n].write(n.to_s)
+  end
+end
+
+When /^I call delete_all on the collection of objects$/ do
+  @bucket.objects.delete_all
+end
+
+Then /^the bucket should be empty$/ do
+  @bucket.empty?.should == true
+end
+

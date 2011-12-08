@@ -407,6 +407,66 @@ module AWS
         end
       end
 
+      describe DateAttribute do
+        it_behaves_like "aws record attribute" do
+
+          context '#type_cast' do
+
+            it 'returns nil as nil' do
+              type_casts(nil, nil)
+            end
+
+            it 'converts empty string to nil' do
+              type_casts('', nil)
+            end
+
+            it 'returns Date objects unmodified' do
+              date = Date.parse('2011-1-2')
+              type_casts(date, date)
+            end
+
+            it 'treats integers as timestamps' do
+              now = Time.now
+              timestamp = now.to_i
+              date = Date.parse(now.to_s)
+              type_casts(timestamp, date)
+            end
+
+            it 'uses Date.parse on the string value of everything else' do
+              now = Time.now
+              date = Date.parse(now.to_s)
+              value = double('raw-value', :to_s => now.to_s)
+              type_casts(value, date)
+            end
+
+          end
+
+          context '#serialize' do
+
+            it 'accepts Date objects' do
+              lambda {
+                attribute.serialize(Date.parse(Time.now.to_s))
+              }.should_not raise_error
+            end
+
+            it 'raises argument error for non-DateTime objects' do
+              value = double('type-casted-value')
+              value.should_receive(:is_a?).with(Date).and_return(false)
+              lambda {
+                attribute.serialize(value)
+              }.should raise_error(ArgumentError)
+            end
+            
+            it 'returns dates as strings' do
+              date = Date.parse(Time.now.to_s)
+              serializes(date, date.strftime('%Y-%m-%d'))
+            end
+            
+          end
+
+        end
+      end
+
       describe DateTimeAttribute do
         it_behaves_like "aws record attribute" do
 

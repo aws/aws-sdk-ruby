@@ -102,6 +102,153 @@ module AWS
         super(prefix, mode)
       end
 
+      # Deletes the objects provided in as few requests as possible.
+      #
+      #   # delete 2 objects (by key) in a single request
+      #   bucket.objects.delete('abc', 'xyz')
+      #
+      # You can delete objects also by passing their S3Object representation:
+      #
+      #   to_delete = []
+      #   to_delete << buckets.objects['foo']
+      #   to_delete << buckets.objects['bar']
+      #
+      #   bucket.objects.delete(to_delete)
+      #
+      # @param [Mixed] objects One or more objects to delete.  Each object
+      #   can be one of the following:
+      #
+      #   * An object key (string)
+      #   * A hash with :key and :version_id (for versioned objects)
+      #   * An {S3Object} instance
+      #   * An {ObjectVersion} instance
+      #
+      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      #   a BatchDeleteError will be raised with a summary of the errors.
+      #
+      # @return [nil]
+      #
+      def delete *objects
+
+        objects = objects.flatten.collect do |obj|
+          case obj
+          when String        then { :key => obj }
+          when Hash          then obj
+          when S3Object      then { :key => obj.key }
+          when ObjectVersion then { :key => obj.key, :version_id => obj.version_id }
+          else  
+            msg = "objects must be keys (strings or hashes with :key and " +
+                  ":version_id), S3Objects or ObjectVersions, got " +
+                  object.class.name
+            raise ArgumentError, msg
+          end
+        end
+
+        batch_helper = BatchHelper.new(1000) do |batch|
+          client_opts = {}
+          client_opts[:bucket_name] = bucket.name
+          client_opts[:quiet] = true
+          client_opts[:objects] = batch
+          client.delete_objects(client_opts)
+        end
+
+        error_counts = {}
+        batch_helper.after_batch do |response|
+          response.errors.each do |error|
+            error_counts[error.code] ||= 0
+            error_counts[error.code] += 1
+          end
+        end
+
+        objects.each do |object|
+          batch_helper.add(object)
+        end
+
+        batch_helper.complete!
+
+        raise Errors::BatchDeleteError.new(error_counts) unless 
+          error_counts.empty?
+
+        nil
+
+      end
+
+      # Deletes each object in the collection that returns a true value 
+      # from block passed to this method.  Deletes are batched for efficiency.
+      #
+      #   # delete text files in the 2009 "folder"
+      #   bucket.objects.with_prefix('2009/').delete_if {|o| o.key =~ /\.txt$/ }
+      #
+      # @yieldparam [S3Object] object
+      #
+      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      #   a BatchDeleteError will be raised with a summary of the errors.
+      #
+      def delete_if &block
+
+        error_counts = {}
+
+        batch_helper = BatchHelper.new(1000) do |objects| 
+          begin
+            delete(objects)
+          rescue Errors::BatchDeleteError => error
+            error.error_counts.each_pair do |code,count|
+              error_counts[code] ||= 0
+              error_counts[code] += count
+            end
+          end
+        end
+
+        each do |object|
+          batch_helper.add(object) if yield(object)
+        end
+
+        batch_helper.complete!
+
+        raise Errors::BatchDeleteError.new(error_counts) unless 
+          error_counts.empty?
+
+        nil
+
+      end
+
+      # Deletes all objects represented by this collection.
+      #
+      # @example Delete all objects from a bucket
+      #
+      #   bucket.objects.delete_all
+      #
+      # @example Delete objects with a given prefix
+      #
+      #   bucket.objects.with_prefix('2009/').delete_all
+      #
+      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      #   a BatchDeleteError will be raised with a summary of the errors.
+      #
+      # @return [Array] Returns an array of results
+      #
+      def delete_all
+
+        error_counts = {}
+
+        each_batch do |objects|
+          begin
+            delete(objects)
+          rescue Errors::BatchDeleteError => error
+            error.error_counts.each_pair do |code,count|
+              error_counts[code] ||= 0
+              error_counts[code] += count
+            end
+          end
+        end
+
+        raise Errors::BatchDeleteError.new(error_counts) unless 
+          error_counts.empty?
+
+        nil
+
+      end
+
       # Iterates the collection, yielding instances of S3Object.
       #
       # Use break or raise an exception to terminate the enumeration.
@@ -127,7 +274,7 @@ module AWS
 
       # @private
       protected
-      def list_request(options)
+      def list_request options
         client.list_objects(options)
       end
 
@@ -139,14 +286,43 @@ module AWS
 
       # @private
       protected
-      def page_size resp
-        super + resp.contents.size
-      end
-
-      # @private
-      protected
       def next_markers page
         { :marker => (last = page.contents.last and last.key) }
+      end
+
+      # processes items in batches of 1k items
+      # @private
+      class BatchHelper
+        
+        def initialize batch_size, &block
+          @batch_size = batch_size
+          @block = block
+          @batch = []
+        end
+
+        def after_batch &block
+          @after_batch = block
+        end
+
+        def add item
+          @batch << item
+          if @batch.size == @batch_size
+            process_batch
+            @batch = []
+          end
+          item
+        end
+
+        def complete!
+          process_batch unless @batch.empty?
+        end
+
+        protected
+        def process_batch
+          response = @block.call(@batch)
+          @after_batch.call(response) if @after_batch
+        end
+
       end
 
     end

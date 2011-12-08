@@ -335,3 +335,34 @@ Feature: CRUD Objects (High Level)
     | TYPE   | NAME      | VALUE       |
     | http   | verb      | PUT         |
     | header | x-amz-acl | public-read |
+
+  @batch_delete
+  Scenario: Multi-object delete with delete_if
+    Given I have the following objects:
+    | KEY |
+    | 1   |
+    | 2   |
+    | 3   |
+    | 4   |
+    | 41  |
+    | 42  |
+    | 43  |
+    | 44  |
+    When I use delete_if to delete even objects with the prefix "4"
+    Then the bucket should have the following keys
+    | KEY |
+    | 1   |
+    | 2   |
+    | 3   |
+    | 41  |
+    | 43  |
+
+  @slow @batch_delete
+  Scenario: Multi-object delete of more than 1k records
+    Given I have 1010 objects
+    When I call delete_all on the collection of objects
+    Then 2 requests should have been made like:
+    | TYPE  | NAME    | VALUE |
+    | http  | verb    | POST  |
+    | param | delete  |       |
+    And the bucket should be empty

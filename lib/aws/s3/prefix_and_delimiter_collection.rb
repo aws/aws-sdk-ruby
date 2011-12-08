@@ -19,13 +19,6 @@ module AWS
 
       include PrefixedCollection
 
-      def each(options = {}, &block)
-        each_page(options) do |page|
-          each_member_in_page(page, &block)
-        end
-        nil
-      end
-
       # @see Bucket#as_tree
       def as_tree options = {}
         Tree.new(self, { :prefix => prefix }.merge(options))

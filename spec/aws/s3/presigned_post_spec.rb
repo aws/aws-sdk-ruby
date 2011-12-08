@@ -209,6 +209,12 @@ module AWS
               should_not include(["starts-with", "$acl", "public"])
           end
 
+          it 'should apply the x-amz-security token condition when appropriate' do
+            signer.stub(:session_token).and_return('abc')
+            policy_conditions(original_post).
+              should include({ "x-amz-security-token" => "abc" })
+          end
+
           it_should_behave_like "POST policy condition preserves fields"
 
         end
@@ -270,6 +276,15 @@ module AWS
 
         it 'should be an empty hash by default' do
           post.metadata.should == {}
+        end
+
+      end
+
+      context '#fields' do
+        
+        it 'should include the session token when provided' do
+          signer.stub(:session_token).and_return('abc')
+          post.fields['x-amz-security-token'].should == 'abc'
         end
 
       end

@@ -410,13 +410,12 @@ module AWS
         upload = multipart_uploads.create(options)
 
         if block_given?
-          result = nil
           begin
             yield(upload)
-          ensure
-            result = upload.close
+            upload.close
+          rescue
+            upload.abort
           end
-          result
         else
           upload
         end
@@ -488,6 +487,10 @@ module AWS
       #   option in the current configuration; for more information,
       #   see {AWS.config}.
       #
+      # @option options :cache_control [String] Can be used to specify
+      #   caching behavior.  See
+      #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+      #
       # @return [nil]
       def copy_from source, options = {}
 
@@ -524,6 +527,8 @@ module AWS
         copy_opts[:server_side_encryption] =
           options[:server_side_encryption] if
           options.key?(:server_side_encryption)
+        copy_opts[:cache_control] = options[:cache_control] if 
+          options[:cache_control]
         add_configured_write_options(copy_opts)
 
         if options[:reduced_redundancy]
@@ -641,6 +646,7 @@ module AWS
       #   the object ETag matches the provided value.
       #
       # @option options [Range] :range A byte range to read data from
+      #
       def read(options = {}, &blk)
         options[:bucket_name] = bucket.name
         options[:key] = key

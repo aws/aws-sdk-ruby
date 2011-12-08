@@ -35,18 +35,7 @@ module AWS::Core::Http
 
     let(:handle!) { handler.handle(request, response) }
 
-    let(:http) {
-      http = double('http-session')
-      http.stub(:use_ssl=)
-      http.stub(:verify_mode=)
-      http.stub(:ca_file=)
-      http.stub(:ca_path=)
-      http.stub(:start)
-      http.stub(:request).and_return(http_response)
-      http.stub(:finish)
-      http.stub(:started?).and_return(true)
-      http
-    }
+    let(:http) { double('http-session').as_null_object }
 
     let(:http_response) {
       double('http-response',
@@ -56,7 +45,10 @@ module AWS::Core::Http
     }
 
     before(:each) do
+      http.stub(:request).and_return(http_response)
+      http.stub(:started?).and_return(true)
       Net::HTTP.stub(:new).and_return(http)
+      AWS::Core::Http::NetHttpHandler.pool.empty!
     end
 
     context 'http session' do
@@ -88,7 +80,7 @@ module AWS::Core::Http
       it 'starts and stops the http session around the request' do
         http.should_receive(:start).once.ordered
         http.should_receive(:request).once.ordered.and_return(http_response)
-        http.should_receive(:finish).once.ordered
+        #http.should_receive(:finish).once.ordered
         handle!
       end
 
@@ -102,7 +94,7 @@ module AWS::Core::Http
         request.stub(:proxy_uri).and_return(p)
 
         Net::HTTP.should_receive(:new).
-          with(anything, anything, "#{p.host}#{p.request_uri}", p.port, p.user, p.password).
+          with(anything, anything, p.host, p.port, p.user, p.password).
           and_return(http)
 
         handle!

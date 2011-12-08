@@ -340,15 +340,21 @@ module AWS
       #   long as they are described by a policy condition (see
       #   {#where}).
       def fields
-        signature =
-          config.signer.sign(policy, "sha1")
 
-        {
+        signature = config.signer.sign(policy, "sha1")
+
+        fields = {
           "AWSAccessKeyId" => config.signer.access_key_id,
           "key" => key,
           "policy" => policy,
           "signature" => signature
         }.merge(optional_fields)
+
+        fields["x-amz-security-token"] = config.signer.session_token if
+          config.signer.session_token
+
+        fields.merge(optional_fields)
+
       end
 
       # @private
@@ -482,14 +488,23 @@ module AWS
       # @private
       private
       def generate_conditions
-        conditions.inject([]) do |ary, (field, field_conds)|
-          ary += field_conds
-        end +
-          [{ "bucket" => bucket.name }] +
-          key_conditions +
-          optional_fields.map { |(n, v)| Hash[[[n, v]]] } +
-          range_conditions +
-          ignored_conditions
+
+        conditions = self.conditions.inject([]) do |list, (field, field_conds)|
+          list + field_conds
+        end 
+        
+        conditions << { "bucket" => bucket.name }
+        conditions += key_conditions
+        conditions += optional_fields.map { |(n, v)| Hash[[[n, v]]] }
+        conditions += range_conditions
+        conditions += ignored_conditions
+        
+        if config.signer.session_token
+          conditions << {"x-amz-security-token" => config.signer.session_token}
+        end
+
+        conditions
+
       end
 
       # @private

@@ -159,8 +159,15 @@ module AWS
             element("StorageClass") { symbol_value }
             element("Initiated") { datetime_value }
           end
-
           include HasCommonPrefixes
+        end
+
+        DeleteObjects = Core::XmlGrammar.customize do
+          element("Deleted") do
+            element("DeleteMarker") { boolean_value }
+            list
+          end
+          element("Error") { list; rename('errors') }  
         end
 
         # keep default behavior

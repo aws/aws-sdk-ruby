@@ -184,7 +184,7 @@ module AWS
         def sub_resources
           %w(acl location logging notification partNumber policy 
              requestPayment torrent uploadId uploads versionId 
-             versioning versions)
+             versioning versions delete)
         end
 
         def query_parameters

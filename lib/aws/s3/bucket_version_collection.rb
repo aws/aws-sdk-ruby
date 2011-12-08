@@ -19,8 +19,6 @@ module AWS
     # @see PrefixedCollection
     class BucketVersionCollection
 
-      include Core::Model
-      include Enumerable
       include PrefixAndDelimiterCollection
 
       # @param [Bucket] bucket
@@ -35,14 +33,18 @@ module AWS
       # @return [ObjectVersion] Returns the most recently created object
       #   version in the entire bucket.
       def latest
-        self.find{|version| true }
+        first
+        #self.find{|version| true }
       end
 
       # Yields once for each version in the bucket.
       #
       # @yield [object_version]
+      #
       # @yieldparam [ObjectVersion] object_version
+      #
       # @return nil
+      #
       def each options = {}, &block; super; end
 
       # @private
@@ -50,10 +52,8 @@ module AWS
       def each_member_in_page(page, &block)
         super
         page.versions.each do |version|
-          object_version =
-            ObjectVersion.new(bucket.objects[version.key],
-                              version.version_id,
-                              :delete_marker => version.delete_marker?)
+          object_version = ObjectVersion.new(bucket.objects[version.key],
+            version.version_id, :delete_marker => version.delete_marker?)
           yield(object_version)
         end
       end
@@ -71,10 +71,6 @@ module AWS
       # @private
       protected
       def pagination_markers; super + [:version_id_marker]; end
-
-      # @private
-      protected
-      def page_size(resp); super + resp.versions.size; end
 
     end
   end
