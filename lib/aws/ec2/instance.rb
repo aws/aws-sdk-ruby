@@ -467,7 +467,8 @@ module AWS
       #
       # @return [String] the console output.
       def console_output
-        Base64.decode64(client.get_console_output(:instance_id => self.id).output)
+        output = client.get_console_output(:instance_id => self.id).output
+        Base64.decode64(output) if output
       end
 
       # Associates the elastic IP address with this instance.
