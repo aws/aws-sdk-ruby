@@ -369,6 +369,8 @@ module AWS
         when endpoint.include?("@")
           { :protocol => opts[:json] ? "email-json" : "email",
             :endpoint => endpoint }
+        when endpoint.gsub(/\D/,'') =~ /\d{11,15}/
+          { :protocol => "sms", :endpoint => endpoint.gsub(/\D/,'') }
         else
           raise ArgumentError, "could not determine protocol for '#{endpoint}'"
         end
