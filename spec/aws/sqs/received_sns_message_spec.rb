@@ -21,11 +21,9 @@ module AWS
       
       let(:json) { '{ "Message": "test message", "Signature": "abcdefg", "TopicArn": "arn:aws:sns:us-east-1:123456789012:sample", "SignatureVersion": "1", "Timestamp": "2011-06-21T18:45:44.942Z", "MessageId": "5f5bc831-1877-4ed8-bdcf-da7bc64f3b11", "SigningCertURL": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem", "UnsubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:123456789012:sample:84a744a5-1de8-4133-8dc3-872acf0b29ad", "Type": "Notification" }' }
 
-      let(:encoded_message) { Base64.encode64(json) }
-
       let(:config) { stub_config }
 
-      let(:message) { described_class.new(encoded_message, :config => config) }
+      let(:message) { described_class.new(json, :config => config) }
 
       context '#body' do
 

@@ -94,8 +94,7 @@ module AWS
       # @return [SentMessage] An object containing information about
       #   the message that was sent.
       def send_message(body)
-        resp = client.send_message(:queue_url => url,
-                                   :message_body => body)
+        resp = client.send_message(:queue_url => url, :message_body => body)
         msg = SentMessage.new
         msg.message_id = resp.message_id
         msg.md5 = resp.md5_of_message_body

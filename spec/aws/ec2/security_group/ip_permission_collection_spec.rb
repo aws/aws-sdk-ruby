@@ -54,11 +54,9 @@ module AWS
                 :groups => [
                   double('grp1',
                     :group_id => 'grp1-id',
-                    :group_name => 'grp1-name',
                     :user_id => 'grp1-user-id'),
                   double('grp2',
                     :group_id => 'grp2-id',
-                    :group_name => 'grp2-name',
                     :user_id => 'grp2-user-id')
                 ]
               ),
@@ -93,11 +91,9 @@ module AWS
             perm.groups.should be_an(Array)
             perm.groups[0].should be_a(SecurityGroup)
             perm.groups[0].id.should == 'grp1-id'
-            perm.groups[0].name.should == 'grp1-name'
             perm.groups[0].owner_id.should == 'grp1-user-id'
             perm.groups[1].should be_a(SecurityGroup)
             perm.groups[1].id.should == 'grp2-id'
-            perm.groups[1].name.should == 'grp2-name'
             perm.groups[1].owner_id.should == 'grp2-user-id'
           end
 

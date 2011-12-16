@@ -22,19 +22,19 @@ module AWS
 
       include Core::Model
 
-      # @param [String] encoded_body The base64 encoded json string
+      # @param [String] body The SQS message body
       #   from a message published by SNS.
       # @param [Hash] options
-      def initialize encoded_body, options = {}
-        @encoded_body = encoded_body
+      def initialize body, options = {}
+        @body = body
         super
       end
 
-      # @return [String] Returns the Base64 encoded JSON hash as was
+      # @return [String] Returns the JSON hash (as a string) as was
       #   published by SNS.  See {#body} to get the decoded message
       #   or {#to_h} to get the decoded JSON hash as a ruby hash.
-      def encoded_body
-        @encoded_body
+      def raw_message
+        @body
       end
 
       # @return[String] Returns the decoded message as was published.
@@ -92,7 +92,7 @@ module AWS
 
       # @return [Hash] Returns the decoded message as a hash.
       def to_h
-        data = JSON.parse(Base64.decode64(@encoded_body))
+        data = JSON.parse(@body)
         {
           :body => data['Message'],
           :topic_arn => data['TopicArn'],

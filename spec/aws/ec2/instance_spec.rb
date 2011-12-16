@@ -75,6 +75,11 @@ module AWS
           instance.console_output.should == 'abc'
         end
 
+        it 'does not attempt to decode output when blank' do
+          response.stub(:output).and_return(nil)
+          instance.console_output.should == nil
+        end
+
       end
 
       context '#exists?' do

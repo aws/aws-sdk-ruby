@@ -91,17 +91,20 @@ module AWS
       # @param [mixed] endpoint The endpoint that should receive
       #   messages that are published to this topic.  Valid values
       #   for +endpoint+ include:
+      #
       #   * URI object
       #   * http and https URI strings
-      #   * email addresse
+      #   * email address
       #   * {SQS::Queue}
       #   * SQS queue ARN
+      #   * phone number of an SMS-enabled device
+      #
       # @param [Hash] options
       # @option options [Boolean] :json (false)
       # @return [Subscription,nil] Returns a subscription when possible.
       #   If the subscription requires confirmation first, then +nil+ is
       #   returned instead.
-      def subscribe(endpoint, opts = {})
+      def subscribe endpoint, opts = {}
         subscribe_opts = endpoint_opts(endpoint, opts).merge(:topic_arn => arn)
         resp = client.subscribe(subscribe_opts)
         if arn = resp.subscription_arn and arn =~ /^arn:/

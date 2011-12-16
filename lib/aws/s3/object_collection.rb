@@ -287,7 +287,12 @@ module AWS
       # @private
       protected
       def next_markers page
-        { :marker => (last = page.contents.last and last.key) }
+        marker = (last = page.contents.last and last.key)
+        if marker.nil?
+          raise 'Unable to find marker in S3 list objects response'
+        else
+          { :marker => marker }
+        end
       end
 
       # processes items in batches of 1k items

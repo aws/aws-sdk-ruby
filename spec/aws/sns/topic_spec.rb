@@ -142,6 +142,26 @@ module AWS
 
           end
 
+          context 'sms' do
+
+            it 'accepts phone numbers 11 characters or longer' do
+              params_for_endpoint('12345678901').should == {
+                :endpoint => '12345678901',
+                :protocol => 'sms',
+                :topic_arn => arn,
+              }
+            end
+
+            it 'strips non-digits from the phone number' do
+              params_for_endpoint('1-234.567,8901').should == {
+                :endpoint => '12345678901',
+                :protocol => 'sms',
+                :topic_arn => arn,
+              }
+            end
+
+          end
+
           context 'email-json' do
 
             it 'should use the "email-json" protocol' do

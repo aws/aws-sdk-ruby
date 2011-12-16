@@ -98,6 +98,14 @@ module AWS
             stub(:contents).and_return(contents)
         end
 
+        it 'raises a runtime error if the response says its but there are no keys' do
+          response.stub(:truncated?).and_return(true)
+          response.stub(:contents).and_return([])
+          lambda {
+            collection.each{|o|}
+          }.should raise_error(/Unable to find marker/)
+        end
+
         it 'should call list_objects with the bucket name' do
           client.should_receive(:list_objects).
             with(hash_including(:bucket_name => "bu")).

@@ -68,7 +68,7 @@ module AWS
           msg = message.as_sns_message
           msg.should be_a(ReceivedSNSMessage)
           msg.config.should == message.config
-          msg.encoded_body.should == message.body
+          msg.raw_message.should == message.body
         end
       end
 

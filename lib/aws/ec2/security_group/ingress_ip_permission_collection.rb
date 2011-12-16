@@ -36,7 +36,6 @@ module AWS
 
             groups = p.groups.collect do |group|
               SecurityGroup.new(group.group_id,
-                :name => group.group_name,
                 :owner_id => group.user_id,
                 :config => config)
             end
