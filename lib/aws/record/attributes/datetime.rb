@@ -12,6 +12,10 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/record/attribute'
+require 'active_support/core_ext/time/conversions'
+require 'active_support/core_ext/time/zones'
+require 'active_support/core_ext/date_time/conversions'
+require 'active_support/core_ext/date_time/zones'
 
 module AWS
   module Record
@@ -72,7 +76,12 @@ module AWS
           msg = "expected a DateTime value, got #{datetime.class}"
           raise ArgumentError, msg  
         end
-        datetime.strftime('%Y-%m-%dT%H:%M:%S%Z')
+
+        original_zone = Time.zone
+        Time.zone = 'UTC'
+        string = datetime.in_time_zone.strftime('%Y-%m-%dT%H:%M:%S%z')
+        Time.zone = original_zone
+        string
       end
 
       # @private

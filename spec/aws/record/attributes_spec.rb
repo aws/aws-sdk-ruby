@@ -519,7 +519,8 @@ module AWS
             
             it 'returns datetimes as strings' do
               datetime = DateTime.parse(Time.now.to_s)
-              serializes(datetime, datetime.strftime('%Y-%m-%dT%H:%M:%S%Z'))
+              Time.zone = 'UTC'
+              serializes(datetime, datetime.in_time_zone.strftime('%Y-%m-%dT%H:%M:%S%z'))
             end
             
           end
