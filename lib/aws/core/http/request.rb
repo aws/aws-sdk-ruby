@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -175,28 +175,19 @@ module AWS
           end
   
           def <=> other
-            @name <=> other.name
+            name <=> other.name
           end
   
           def to_s
-            if value
-              "#{name}=#{value}"
-            else
-              name
-            end
+            value ? "#{name}=#{value}" : name
           end
   
           def ==(other)
-            other.kind_of?(Param) &&
-              to_s == other.to_s
+            other.kind_of?(Param) and to_s == other.to_s
           end
   
           def encoded
-            if value
-              "#{escape(name)}=#{escape(value)}"
-            else
-              escape(name)
-            end
+            value ? "#{escape(name)}=#{escape(value)}" : escape(name)
           end
   
         end

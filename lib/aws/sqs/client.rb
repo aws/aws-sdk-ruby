@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,7 +23,7 @@ module AWS
 
       include Core::ConfiguredClientMethods
 
-      API_VERSION = '2009-02-01'
+      API_VERSION = '2011-10-01'
 
       # @private
       REQUEST_CLASS = SQS::Request

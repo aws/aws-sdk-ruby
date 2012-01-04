@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,8 +18,24 @@
       QueueName: 
       - :string
       - :required
-      DefaultVisibilityTimeout: 
-      - :integer
+      Attribute: 
+      - :map: 
+          :key: 
+          - :string
+          :value: 
+          - :string
+          :key_param: Name
+          :value_param: Value
+      - :rename: attributes
+    :output: []
+
+  GetQueueUrl: 
+    :input: 
+      QueueName: 
+      - :string
+      - :required
+      QueueOwnerAWSAccountId: 
+      - :string
     :output: []
 
   ListQueues: 
@@ -151,11 +167,109 @@
       MessageBody: 
       - :string
       - :required
+      DelaySeconds: 
+      - :integer
     :output: []
 
+  SendMessageBatch: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      SendMessageBatchRequestEntry: 
+      - :list: 
+        - :structure: 
+            Id: 
+            - :string
+            - :required
+            MessageBody: 
+            - :string
+            - :required
+            DelaySeconds: 
+            - :integer
+      - :required
+      - :rename: Entries
+    :output: 
+    - SendMessageBatchResultEntry: 
+      - :list
+      - :rename: Successful
+    - BatchResultErrorEntry: 
+      - :list
+      - :rename: Failed
+      - SenderFault: 
+        - :boolean
+  ChangeMessageVisibilityBatch: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      ChangeMessageVisibilityBatchRequestEntry: 
+      - :list: 
+        - :structure: 
+            Id: 
+            - :string
+            - :required
+            ReceiptHandle: 
+            - :string
+            - :required
+            VisibilityTimeout: 
+            - :integer
+      - :required
+      - :rename: Entries
+    :output: 
+    - ChangeMessageVisibilityBatchResultEntry: 
+      - :list
+      - :rename: Successful
+    - BatchResultErrorEntry: 
+      - :list
+      - :rename: Failed
+      - SenderFault: 
+        - :boolean
+  DeleteMessageBatch: 
+    :input: 
+      QueueUrl: 
+      - :string
+      - :required
+      DeleteMessageBatchRequestEntry: 
+      - :list: 
+        - :structure: 
+            Id: 
+            - :string
+            - :required
+            ReceiptHandle: 
+            - :string
+            - :required
+      - :required
+      - :rename: Entries
+    :output: 
+    - DeleteMessageBatchResultEntry: 
+      - :list
+      - :rename: Successful
+    - BatchResultErrorEntry: 
+      - :list
+      - :rename: Failed
+      - SenderFault: 
+        - :boolean
 :client_errors: 
+  OverLimit: []
+
+  AWS.SimpleQueueService.MessageNotInflight: []
+
   AWS.SimpleQueueService.QueueDeletedRecently: []
 
   AWS.SimpleQueueService.QueueNameExists: []
 
+  AWS.SimpleQueueService.QueueDoesNotExist: []
+
+  AWS.SimpleQueueService.BatchEntryIdsNotDistinct: []
+
+  AWS.SimpleQueueService.InvalidBatchEntryId: []
+
+  AWS.SimpleQueueService.BatchRequestTooLong: []
+
+  AWS.SimpleQueueService.EmptyBatchRequest: []
+
+  AWS.SimpleQueueService.TooManyEntriesInBatchRequest: []
+
 :server_errors: {}
+

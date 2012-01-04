@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -317,6 +317,86 @@ module AWS
             end.flatten
           end
   
+        end
+
+        module Map
+
+          def self.apply(option, members)
+
+            option.extend self
+
+            key_option = option.key_option
+            if key_descriptors = members[:key]
+              key_option = key_option.extend_with_config(*key_descriptors)
+              MetaUtils.extend_method(option, :key_option) { key_option }
+            end
+
+            value_option = option.value_option
+            if value_descriptors = members[:value]
+              value_option = value_option.extend_with_config(*value_descriptors)
+              MetaUtils.extend_method(option, :value_option) { value_option }
+            end
+
+            key_option.param_name = members[:key_param] if members[:key_param]
+            value_option.param_name = members[:value_param] if members[:value_param]
+
+          end
+
+          def validate(value, context = nil)
+
+            raise format_error("hash value", context) unless
+              value.respond_to?(:to_hash)
+
+            context = context_description(context)
+
+            value.each do |key, value|
+              key_option.validate(key, "key of #{context}")
+              value_option.validate(value, "value at key #{key} of #{context}")
+            end
+
+          end
+
+          def request_params values, prefix = nil
+            values.inject([]) do |params, (key,value)|
+
+              index = params.size / 2 + 1
+              common_prefix = "#{prefixed_name(prefix)}.#{index}."
+
+              key_name = common_prefix + key_option.param_name
+              value_name = common_prefix + value_option.param_name
+
+              params << Http::Request::Param.new(key_name, key)
+              params << Http::Request::Param.new(value_name, value)
+
+            end
+          end
+  
+
+          def hash_format(value)
+            value.inject({}) do |hash, (key, value)|
+              hash[key_option.hash_format(key)] =
+                value_option.hash_format(value)
+              hash
+            end
+          end
+
+          def key_option
+            @_key_option ||= MapOption.new("key")
+          end
+
+          def value_option
+            @_value_option ||= MapOption.new("value")
+          end
+
+          class MapOption < DefaultOption
+            def param_name
+              @param_name || name  
+            end
+            def param_name= name
+              @param_name = name
+            end
+          end
+
         end
   
         # @private

@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,15 +14,91 @@
 module AWS
   class SQS
 
-    # @private
     module Errors
 
+      # @private
       BASE_ERROR_GRAMMAR = Client::XML::BaseError
 
       include Core::LazyErrorClasses
 
+      # @private
       def self.error_class(code)
         super(code.sub(/^AWS\.SimpleQueueService\./, ''))
+      end
+
+      # Raised when one or more messages fail to delete during a 
+      # batch delete operation.  
+      #
+      # See {#failures} for a complete list of failures.
+      #
+      class BatchDeleteError < StandardError
+        
+        def initialize failures
+          @failures = failures
+          super("Failed to delete #{failures.size} messages")
+        end
+
+        # @return [Array<Hash>] Returns a list of hashes.  Each hash
+        #   contains information about one message that failed to delete.
+        #   Hash keys include:
+        #
+        #   * +:error_code+
+        #   * +:error_message+
+        #   * +:sender_fault+
+        #   * +:receipt_handle+
+        #
+        attr_reader :failures
+
+      end
+
+      # Raised from a batch change message visibility call when one or more
+      # of the updates fail.
+      #
+      # See {#failures} for a complete list of failures.
+      #
+      class BatchChangeVisibilityError < StandardError
+        
+        def initialize failures
+          @failures = failures
+          super("Failed to change visibility for #{failures.size} messages")
+        end
+
+        # @return [Array<Hash>] Returns a list of hashes.  Each hash
+        #   contains information about one message that failed to change
+        #   visibility. Hash keys include:
+        #
+        #   * +:error_code+
+        #   * +:error_message+
+        #   * +:sender_fault+
+        #   * +:receipt_handle+
+        #
+        attr_reader :failures
+
+      end
+
+      class BatchSendError < StandardError
+
+        def initialize sent, failures
+          @sent = sent
+          @failures = failures
+          super("Failed to send #{failures.size} messages")
+        end
+
+        # @return [Array<SentMessage>] Returns a list of {SentMessage}
+        #   objects.
+        attr_reader :sent
+
+        # @return [Array<Hash>] Returns a list of hashes.  Each hash
+        #   contains information about one message that failed to change
+        #   visibility. Hash keys include:
+        #
+        #   * +:error_code+
+        #   * +:error_message+
+        #   * +:sender_fault+
+        #   * +:receipt_handle+
+        #
+        attr_reader :failures
+
       end
 
     end

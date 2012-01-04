@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -51,7 +51,6 @@ Feature: SQS Queues
 
   Scenario: Get queue attributes
     Given I create a queue
-    When I access the queue attributes
     Then the following integer fields should be present:
     | visible_messages         |
     | invisible_messages       |
@@ -77,3 +76,55 @@ Feature: SQS Queues
     Given I create a queue
     When I set the queue's message retention period to 3600
     Then the queue's message retention period should eventually be 3600
+
+  Scenario: Getting a queue by its name
+    Given I create a queue
+    When I access the queue by name
+    Then a request should have been made like:
+    | TYPE        | NAME      | VALUE                     |
+    | param       | Action    | GetQueueUrl               |
+    | param_match | QueueName | ruby-integration-test-\d+ |
+
+  Scenario: Sending messages in a batch
+    Given I create a queue
+    When I send the following messages in a batch:
+    | MESSAGE |
+    | abc     |
+    | mno     |
+    | xyz     |
+    | 123     |
+    Then 4 sent messages should have been returned with the correct md5:
+    | MD5                              |
+    | 900150983cd24fb0d6963f7d28e17f72 |
+    | d1cf6a6090003989122c4483ed135d55 |
+    | d16fb36f0911f878998c136191af705e |
+    | 202cb962ac59075b964b07152d234b70 |
+
+  Scenario: Sending messages in a batch with failures
+    Given I create a queue
+    When I send the following messages in a batch:
+    | MESSAGE |
+    | abc     |
+    | mno     |
+    |         |
+    | 123     |
+    Then 3 sent messages should have been returned with the correct md5:
+    | MD5                              |
+    | 900150983cd24fb0d6963f7d28e17f72 |
+    | d1cf6a6090003989122c4483ed135d55 |
+    | 202cb962ac59075b964b07152d234b70 |
+    And 1 message should have failed
+
+  Scenario: Deleting messages in a batch
+    Given I create a queue
+    And I send the following messages in a batch:
+    | MESSAGE |
+    | abc     |
+    | mno     |
+    | xyz     |
+    When I receive 3 messages 
+    And I delete the messages
+    Then a request should have been made like:
+    | TYPE  | NAME   | VALUE              |
+    | param | Action | DeleteMessageBatch |
+    

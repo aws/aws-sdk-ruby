@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 When /^I create a queue$/ do
-  @queue_name = "ruby-integration-test-#{Time.now.to_i}"
+  @queue_name = "ruby-integration-test-#{Time.now.to_i + rand(1000)}"
   @result = @queue = @sqs.queues.create(@queue_name)
   @created_queues << @queue
 end
@@ -67,10 +67,6 @@ Then /^the queue should eventually not exist$/ do
   eventually(60) { @queue.exists?.should be_false }
 end
 
-When /^I access the queue attributes$/ do
-  # sugar
-end
-
 Then /^the following integer fields should be present:$/ do |table|
   table.raw.flatten.each do |field|
     @queue.send(field).should be_an(Integer)
@@ -94,3 +90,39 @@ end
 Then /^the queue\'s (.*) should eventually be (\d+)$/ do |field, value|
   eventually(60) { @queue.send(field.gsub(" ", "_")).should == value.to_i }
 end
+
+When /^I access the queue by name$/ do
+  @queue = @sqs.queues.named(@queue_name)
+end
+
+When /^I send the following messages in a batch:$/ do |table|
+  messages = table.hashes.map{|h| h['MESSAGE'] }
+  begin
+    @sent = @queue.batch_send(messages)
+  rescue AWS::SQS::Errors::BatchSendError => e
+    @sent = e.sent
+    @failures = e.failures
+  end
+end
+
+Then /^(\d+) sent messages should have been returned with the correct md5:$/ do |count, table|
+  @sent.size.should  == count.to_i
+  @sent.map(&:md5).should == table.hashes.map{|h| h["MD5"] }
+end
+
+Then /^(\d+) message should have failed$/ do |count|
+  @failures.size.should == count.to_i
+end
+
+When /^I receive (\d+) messages$/ do |count|
+  @messages = @queue.receive_messages :limit => count.to_i
+end
+
+When /^I delete the messages$/ do
+  @queue.batch_delete(@messages)
+end
+
+Then /^the queue should eventually have (\d+) message$/ do |count|
+  @queue.visible_messages.should == count.to_i
+end
+

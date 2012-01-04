@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -159,6 +159,7 @@ module AWS
 
       # @return [String] Returns the instance id.
       attr_reader :id
+      alias_method :instance_id, :id
 
       # @private
       def self.reservation_attributes

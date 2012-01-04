@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,12 +22,13 @@ require 'aws/core/autoloader'
 #
 # * {EC2}
 # * {ELB}
+# * {IAM}
 # * {S3}
 # * {SimpleDB}
 # * {SimpleEmailService}
 # * {SNS}
 # * {SQS}
-# * {IAM}
+# * {STS}
 #
 # = AWS::Record
 #
@@ -56,7 +57,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.2.5"
+  VERSION = "1.2.6"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'

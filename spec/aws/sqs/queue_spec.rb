@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -71,6 +71,14 @@ module AWS
             with(:queue_url => "url",
                  :message_body => "HELLO")
           queue.send_message("HELLO")
+        end
+
+        it 'passes along the delay option' do
+          client.should_receive(:send_message).with(
+            :queue_url => "url",
+            :message_body => "HELLO",
+            :delay_seconds => 400)
+          queue.send_message('HELLO', :delay_seconds => 400)
         end
 
         it 'should return an object with the message ID from the response' do
@@ -786,7 +794,325 @@ module AWS
         
       end
 
-    end
+      context '#batch_delete' do
 
+        let(:response) { client.stub_for(:delete_message_batch) }
+        
+        before(:each) do
+          client.stub(:delete_message_batch).and_return(response)
+        end
+
+        it 'calls #delete_message_batch on the client' do
+          client.should_receive(:delete_message_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'handle1' },
+              { :id => '1', :receipt_handle => 'handle2' },
+            ]).and_return(response)
+          queue.batch_delete('handle1', 'handle2')
+        end
+
+        it 'accepts an array of values' do
+          client.should_receive(:delete_message_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'handle1' },
+              { :id => '1', :receipt_handle => 'handle2' },
+            ]).and_return(response)
+          queue.batch_delete(['handle1', 'handle2'])
+        end
+
+        it 'returns nil' do
+          queue.batch_delete('handle1', 'handle2').should == nil
+        end
+
+        it 'accepts ReceivedMesssage objects' do
+
+          client.should_receive(:delete_message_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'handle1' },
+              { :id => '1', :receipt_handle => 'handle2' },
+            ]).and_return(response)
+
+          m1 = SQS::ReceivedMessage.new('q', 'id1', 'handle1')
+          m2 = SQS::ReceivedMessage.new('q', 'id2', 'handle2')
+          queue.batch_delete(m1, m2)
+
+        end
+
+        it 'raises an error if some of the messages in the batch fail' do
+          
+          failure1 = double('failure-1', 
+            :code => 'error-code-1',
+            :message => 'error-message-1',
+            :sender_fault? => true,
+            :id => '0')
+
+          failure2 = double('failure-2', 
+            :code => 'error-code-2',
+            :message => 'error-message-2',
+            :sender_fault? => false,
+            :id => '2')
+
+          response.stub(:failed).and_return([failure1, failure2])
+
+          raised = false
+          begin
+            m1 = SQS::ReceivedMessage.new('q', 'id1', 'handle1')
+            m2 = SQS::ReceivedMessage.new('q', 'id2', 'handle2')
+            queue.batch_delete(m1, m2, 'handle3', 'handle4')
+          rescue SQS::Errors::BatchDeleteError => e
+            raised = true
+            e.failures.should == [
+              {
+                :error_code => 'error-code-1',
+                :error_message => 'error-message-1',
+                :sender_fault => true,
+                :receipt_handle => 'handle1',
+              },
+              {
+                :error_code => 'error-code-2',
+                :error_message => 'error-message-2',
+                :sender_fault => false,
+                :receipt_handle => 'handle3',
+              }
+            ]
+          end
+
+          raised.should == true
+
+        end
+
+      end
+
+      context '#batch_change_visibility' do
+
+        let(:response) { client.stub_for(:change_message_visibility_batch) }
+
+        before(:each) do
+          client.stub(:change_message_visibility_batch).and_return(response)
+        end
+
+        it 'calls #change_message_visibility_batch on the client' do
+
+          client.should_receive(:change_message_visibility_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'h1', :visibility_timeout => 5 },
+              { :id => '1', :receipt_handle => 'h2', :visibility_timeout => 5 },
+            ]
+          ).and_return(response)
+
+          queue.batch_change_visibility(5, 'h1', 'h2')
+
+        end
+        
+        it 'accepts an array of values' do
+
+          client.should_receive(:change_message_visibility_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'h1', :visibility_timeout => 5 },
+              { :id => '1', :receipt_handle => 'h2', :visibility_timeout => 5 },
+            ]
+          ).and_return(response)
+
+          queue.batch_change_visibility(5, ['h1', 'h2'])
+
+        end
+
+        it 'accepts ReceivedMesssage objects' do
+
+          client.should_receive(:change_message_visibility_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'h1', :visibility_timeout => 5 },
+              { :id => '1', :receipt_handle => 'h2', :visibility_timeout => 5 },
+            ]
+          ).and_return(response)
+
+          m1 = SQS::ReceivedMessage.new('q', 'id1', 'h1')
+          m2 = SQS::ReceivedMessage.new('q', 'id2', 'h2')
+          queue.batch_change_visibility(5, m1, m2)
+
+        end
+
+        it 'accepts a list of hashes' do
+
+          client.should_receive(:change_message_visibility_batch).with(
+            :queue_url => queue.url,
+            :entries => [
+              { :id => '0', :receipt_handle => 'h1', :visibility_timeout => 5 },
+              { :id => '1', :receipt_handle => 'h2', :visibility_timeout => 10 },
+            ]
+          ).and_return(response)
+
+          m2 = SQS::ReceivedMessage.new('q', 'id2', 'h2')
+
+          messages = []
+          messages << { :message => 'h1', :visibility_timeout => 5 }
+          messages << { :message => m2, :visibility_timeout => 10 }
+
+          queue.batch_change_visibility(*messages)
+
+        end
+
+        it 'returns nil' do
+          queue.batch_change_visibility(5, ['h1', 'h2']).should == nil
+        end
+
+        it 'raises an error if any of the messages in the batch fail' do
+           
+          failure1 = double('failure-1', 
+            :code => 'error-code-1',
+            :message => 'error-message-1',
+            :sender_fault? => true,
+            :id => '0')
+
+          failure2 = double('failure-2', 
+            :code => 'error-code-2',
+            :message => 'error-message-2',
+            :sender_fault? => false,
+            :id => '2')
+
+          response.stub(:failed).and_return([failure1, failure2])
+
+          raised = false
+          begin
+            m1 = SQS::ReceivedMessage.new('q', 'id1', 'h1')
+            m2 = SQS::ReceivedMessage.new('q', 'id2', 'h2')
+            queue.batch_change_visibility(5, m1, m2, 'h3', 'h4')
+          rescue SQS::Errors::BatchChangeVisibilityError => e
+            raised = true
+            e.failures.should == [
+              {
+                :error_code => 'error-code-1',
+                :error_message => 'error-message-1',
+                :sender_fault => true,
+                :receipt_handle => 'h1',
+              },
+              {
+                :error_code => 'error-code-2',
+                :error_message => 'error-message-2',
+                :sender_fault => false,
+                :receipt_handle => 'h3',
+              }
+            ]
+          end
+
+          raised.should == true
+
+        end
+
+        context '#batch_send' do
+
+          let(:response) { client.stub_for(:send_message_batch) }
+
+          before(:each) do
+            client.stub(:send_message_batch).and_return(response)
+          end
+
+          it 'calls #send_message_batch on the client' do
+            client.should_receive(:send_message_batch).with(
+              :queue_url => queue.url,
+              :entries => [
+                { :id => '0', :message_body => 'msg1' },
+                { :id => '1', :message_body => 'msg2' },
+              ]
+            ).and_return(response)
+            queue.batch_send 'msg1', 'msg2'
+          end
+
+          it 'accepts an array of messages' do
+            client.should_receive(:send_message_batch).with(
+              :queue_url => queue.url,
+              :entries => [
+                { :id => '0', :message_body => 'msg1' },
+                { :id => '1', :message_body => 'msg2' },
+              ]
+            ).and_return(response)
+            queue.batch_send ['msg1', 'msg2']
+          end
+
+          it 'returns an array of sent messages' do
+            
+            sent1 = double('sent-1', 
+              :message_id => 'msg-1-id',
+              :md5_of_message_body => 'msg-1-md5')
+
+            sent2 = double('sent-2', 
+              :message_id => 'msg-2-id',
+              :md5_of_message_body => 'msg-2-md5')
+            
+            response.stub(:successful).and_return([sent1, sent2])
+
+            sent = queue.batch_send 'msg-1', 'msg-12'
+
+            sent[0].should be_a(Queue::SentMessage)
+            sent[0].message_id.should == 'msg-1-id'
+            sent[0].md5.should == 'msg-1-md5'
+            sent[1].should be_a(Queue::SentMessage)
+            sent[1].message_id.should == 'msg-2-id'
+            sent[1].md5.should == 'msg-2-md5'
+
+          end
+
+          it 'raises a BatchSendError if any of the messages failed' do
+            
+            sent1 = double('sent-1', 
+              :message_id => 'msg-1-id',
+              :md5_of_message_body => 'msg-1-md5')
+
+            sent2 = double('sent-2', 
+              :message_id => 'msg-2-id',
+              :md5_of_message_body => 'msg-2-md5')
+            
+            failure1 = double('failure-1', 
+              :code => 'error-code-1',
+              :message => 'error-message-1',
+              :sender_fault? => true,
+              :id => '0')
+
+            failure2 = double('failure-2', 
+              :code => 'error-code-2',
+              :message => 'error-message-2',
+              :sender_fault? => false,
+              :id => '2')
+
+            response.stub(:successful).and_return([sent1, sent2])
+            response.stub(:failed).and_return([failure1, failure2])
+
+            begin
+              queue.batch_send 'msg-1', 'msg-2', 'msg-3', 'msg-4'
+            rescue Errors::BatchSendError => e
+              sent = e.sent
+              failed = e.failures
+            end
+
+            sent[0].should be_a(Queue::SentMessage)
+            sent[0].message_id.should == 'msg-1-id'
+            sent[0].md5.should == 'msg-1-md5'
+            sent[1].should be_a(Queue::SentMessage)
+            sent[1].message_id.should == 'msg-2-id'
+            sent[1].md5.should == 'msg-2-md5'
+
+            failed.should == [{
+              :error_code => "error-code-1",
+              :error_message => "error-message-1",
+              :sender_fault => true
+            }, {
+              :error_code => "error-code-2",
+              :error_message => "error-message-2",
+              :sender_fault => false
+            }]
+
+          end
+
+        end
+
+      end
+
+    end
   end
 end

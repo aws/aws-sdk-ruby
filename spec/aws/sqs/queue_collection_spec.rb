@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -58,15 +58,15 @@ module AWS
         end
 
         it 'should call create_queue' do
-          client.should_receive(:create_queue).
-            with(:queue_name => "foo")
+          client.should_receive(:create_queue).with(:queue_name => "foo")
           collection.create("foo")
         end
 
         it 'should pass additional options' do
           client.should_receive(:create_queue).
-            with(:queue_name => "foo",
-                 :foo => "bar")
+            with(:queue_name => "foo", :attributes => { 
+              'Foo' => 'bar',
+            })
           collection.create("foo", :foo => "bar")
         end
 
@@ -75,6 +75,67 @@ module AWS
           q.should be_a(Queue)
           q.url.should == "url"
           q.config.should be(config)
+        end
+
+        it 'renames the deprecated :default_visibility_timeout option' do
+          client.should_receive(:create_queue).with(
+            :queue_name => 'name',
+            :attributes => { 'VisibilityTimeout' => '1000' })
+          collection.create('name', :default_visibility_timeout => 1000)
+        end
+
+        it 'passes policy strings unmodified' do
+          client.should_receive(:create_queue).with(
+            :queue_name => 'name',
+            :attributes => { 'Policy' => 'policy-json' })
+          policy = 'policy-json'
+          collection.create('name', :policy => policy)
+        end
+
+        it 'calls #to_json on all other policy options' do
+          client.should_receive(:create_queue).with(
+            :queue_name => 'name',
+            :attributes => { 'Policy' => 'policy-json' })
+          policy = double('policy', :to_json => 'policy-json')
+          collection.create('name', :policy => policy)
+        end
+
+        it 'merges multiple options/attributes' do
+          client.should_receive(:create_queue).with(
+            :queue_name => 'name',
+            :attributes => { 'Abc' => 'xyz', 'Foo' => 'bar' }
+          ).and_return(resp)
+          collection.create("name", :foo => 'bar', :abc => 'xyz')
+        end
+
+      end
+
+      context '#url_for' do
+
+        let(:response) { client.stub_for(:get_queue_url) }
+        
+        before(:each) do
+          response.stub(:queue_url).and_return('url')
+          client.stub(:get_queue_url).and_return(response)
+        end
+
+        it 'gets the url for a queue' do
+          client.should_receive(:get_queue_url).
+            with(:queue_name => 'name').
+            and_return(response)
+          collection.url_for('name')
+        end
+
+        it 'accepts an :queue_owner_aws_account_id' do
+          client.should_receive(:get_queue_url).with(
+            :queue_name => 'name',
+            :queue_owner_aws_account_id => 'id'
+          ).and_return(response)
+          collection.url_for('name', :queue_owner_aws_account_id => 'id')
+        end
+
+        it 'returns the queue url from the response' do
+          collection.url_for('name').should == 'url'
         end
 
       end

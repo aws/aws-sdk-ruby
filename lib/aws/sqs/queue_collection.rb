@@ -1,4 +1,4 @@
-# Copyright 2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -53,27 +53,60 @@ module AWS
       #   Constraints: Maximum 80 characters; alphanumeric
       #   characters, hyphens (-), and underscores (_) are allowed.
       #
-      #   To successfully create a new queue, you must provide a
-      #   name that is unique within the scope of your own
-      #   queues. If you provide the name of an existing queue, a
-      #   new queue isn't created and an error isn't
-      #   returned. Instead, the request succeeds and the queue URL
-      #   for the existing queue is returned. Exception: if you
-      #   provide a value for +:default_visibility_timeout+ that is
-      #   different from the value for the existing queue, you
-      #   receive an error.
+      #   The name of the queue should be unique within your account.  If
+      #   you provide the name of an existing queue with the same options
+      #   it was created with then no error is raised and the existing
+      #   queue will be returned.
       #
-      # @param [Hash] opts Additional options for creating the
-      #   queue.
+      # @param [Hash] options
       #
-      # @option opts [Integer] :default_visibility_timeout The
-      #   visibility timeout (in seconds) to use for this queue.
+      # @option options [Integer] :visibility_timeout (30) The number of 
+      #   seconds a message received from a queue will be invisible to 
+      #   others when they ask to receive messages.
+      #
+      # @option options [Policy] :policy A policy object or policy desription
+      #   (a json string).
+      #
+      # @option options [Integer] :maximum_message_size (65536) The maximum
+      #   number of bytes a message can contain before Amazon SQS rejects 
+      #   it.
+      #
+      # @option options [Integer] :delay_seconds The time in seconds that 
+      #   the delivery of all messages in the queue will be delayed.
+      #   This can be overriden when sending a message to the queue.
+      #
+      # @option options [Integer] :message_retention_period The number of
+      #   seconds from 60 (1 minute) to 1209600 (14 days).  The default
+      #   is 345600 (4 days).
       #
       # @return [Queue] The newly created queue.
       #
-      def create(name, opts = {})
-        resp = client.create_queue(opts.merge(:queue_name => name))
-        Queue.new(resp.queue_url, :config => config)
+      def create name, options = {}
+
+        # SQS removed the default prefix to the visibility timeout option
+        # in the 2011-10-01 update -- this allows us to not break existing
+        # customers.
+        if options[:default_visibility_timeout]
+          options[:visibility_timeout] = 
+            options.delete(:default_visibility_timeout)
+        end
+
+        if policy = options[:policy]
+          options[:policy] = policy.to_json unless policy.is_a?(String)
+        end
+
+        client_opts = {}
+        client_opts[:queue_name] = name
+        unless options.empty?
+          client_opts[:attributes] = options.inject({}) do |attributes,(k,v)|
+            attributes.merge(Core::Inflection.class_name(k.to_s) => v.to_s)
+          end
+        end
+
+        response = client.create_queue(client_opts)
+
+        Queue.new(response.queue_url, :config => config)
+
       end
 
       # @yieldparam [Queue] queue Each {Queue} object in the collection.
@@ -94,8 +127,41 @@ module AWS
       end
 
       # @return [Queue] The queue with the given URL.
-      def [](url)
+      def [] url
         Queue.new(url, :config => config)
+      end
+      
+      # Returns the queue with the given name.  This requires making
+      # a request to SQS to get the queue url.  If you know the url,
+      # you should use {#[]} instead.
+      #
+      #   queue = AWS::SQS.new.queues.named('my-queue')
+      #
+      # @param (see #url_for)
+      # @option (see #url_for)
+      # @return [Queue] Returns the queue with the given name.
+      def named queue_name, options = {}
+        self[url_for(queue_name, options = {})]
+      end
+
+      # Returns the url for the given queue.
+      #
+      #   sqs.queues.url_for('my-queue') 
+      #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue" 
+      #
+      # @param [String] queue_name The name of the queue you need a URL for.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :queue_owner_aws_account_id The AWS account
+      #   ID of the account that created the queue.  You can only get the
+      #   url for queues in other accounts when the account owner has
+      #   granted you permission.
+      #
+      def url_for queue_name, options = {}
+        client_opts = {}
+        client_opts[:queue_name] = queue_name
+        client.get_queue_url(client_opts.merge(options)).queue_url
       end
 
     end
