@@ -25,12 +25,14 @@ module AWS
           response = yield
         end
   
-        if options[:async]
-          response.on_complete do
+        if config.logger
+          if options[:async]
+            response.on_complete do
+              log_client_request_on_success(name, options, response, time)
+            end
+          else
             log_client_request_on_success(name, options, response, time)
           end
-        else
-          log_client_request_on_success(name, options, response, time)
         end
         response
       end
