@@ -95,9 +95,7 @@ module AWS
 
         protected
         def dynamo_db
-          AWS::DynamoDB.new(
-            :dynamo_db_endpoint => 'bigbird-sdk.amazon.com',
-            :use_ssl => false) 
+          AWS::DynamoDB.new
         end
 
       end
