@@ -41,7 +41,7 @@ module AWS
   #
   #   table = dynamo_db.tables.create(
   #     "MyTable",
-  #     :hash_key => [:id, :string]
+  #     :hash_key => { :id => :string }
   #   )
   #   sleep 1 while t.status == :creating
   #
@@ -70,39 +70,40 @@ module AWS
   #
   # = Examples
   #
-  # # create a table (10 read and 5 write capacity units) with the
-  # # default schema (id string hash key)
-  # dynamo_db = AWS::DynamoDB.new
-  # table = dynamo_db.tables.create('my-table', 10, 5)
-  # sleep 1 while table.status == :creating
-  # table.status #=> :active
+  #   # create a table (10 read and 5 write capacity units) with the
+  #   # default schema (id string hash key)
+  #   dynamo_db = AWS::DynamoDB.new
+  #   table = dynamo_db.tables.create('my-table', 10, 5)
   #
-  # # get an existing table by name and specify its hash key
-  # table = dynamo_db.tables['another-table']
-  # table.hash_key = [:id, :number]
+  #   sleep 1 while table.status == :creating
+  #   table.status #=> :active
+  #
+  #   # get an existing table by name and specify its hash key
+  #   table = dynamo_db.tables['another-table']
+  #   table.hash_key = [:id, :number]
   # 
-  # # add an item
-  # item = table.items.create('id' => 12345, 'foo' => 'bar')
+  #   # add an item
+  #   item = table.items.create('id' => 12345, 'foo' => 'bar')
   # 
-  # # add attributes to an item
-  # item.attributes.add 'category' => %w(demo), 'tags' => %w(sample item)
+  #   # add attributes to an item
+  #   item.attributes.add 'category' => %w(demo), 'tags' => %w(sample item)
   # 
-  # # update an item with mixed add, delete, update
-  # item.attributes.update do |u|
-  #   u.add 'colors' => %w(red)
-  #   u.set 'category' => 'demo-category'
-  #   u.delete 'foo'
-  # end
+  #   # update an item with mixed add, delete, update
+  #   item.attributes.update do |u|
+  #     u.add 'colors' => %w(red)
+  #     u.set 'category' => 'demo-category'
+  #     u.delete 'foo'
+  #   end
   # 
-  # # delete attributes
-  # item.attributes.delete 'colors', 'category'
+  #   # delete attributes
+  #   item.attributes.delete 'colors', 'category'
   # 
-  # # get attributes
-  # item.attributes.to_h
-  # #=> {"id"=>#<BigDecimal:10155f5d0,'0.12345E5',9(18)>, "tags"=>#<Set: {"item", "sample"}>}
+  #   # get attributes
+  #   item.attributes.to_h
+  #   #=> {"id"=>#<BigDecimal:10155f5d0,'0.12345E5',9(18)>, "tags"=>#<Set: {"item", "sample"}>}
   # 
-  # # delete an item and all of its attributes
-  # item.delete
+  #   # delete an item and all of its attributes
+  #   item.delete
   #
   class DynamoDB
 

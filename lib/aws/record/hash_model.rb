@@ -70,7 +70,7 @@ module AWS
 
           table_name = dynamo_db_table_name(options[:shard_name])
 
-          create_opts = { :hash_key => [:id, :string] }
+          create_opts = { :hash_key => { :id => :string } }
 
           dynamo_db.tables.create(
             table_name, 
