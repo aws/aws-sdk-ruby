@@ -126,7 +126,9 @@ module AWS
       #  tags.color         # => "red"
       def method_missing(m, *args)
         if m.to_s[-1,1] == "="
-          send(:[]=, m.to_s[0...-1], *args)
+          self.send(:[]=, m.to_s[0...-1], *args)
+        elsif args.empty?
+          self[m]
         else
           super
         end

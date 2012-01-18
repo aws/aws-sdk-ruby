@@ -181,7 +181,7 @@ module AWS
             populate_error(response)
             retry_delays ||= sleep_durations(response)
             if should_retry?(response) and !retry_delays.empty?
-              response.rebuild_request
+              rebuild_http_request(response)
               @http_handler.sleep_with_callback(retry_delays.shift) do
                 async_request_with_retries(response, response.http_request, retry_delays)
               end
@@ -222,14 +222,18 @@ module AWS
         while should_retry?(response)
           break if sleeps.empty?
           Kernel.sleep(sleeps.shift)
-  
           # rebuild the request to get a fresh signature
-          response.rebuild_request
+          rebuild_http_request(response)
           response = yield
         end
   
         response
   
+      end
+
+      private
+      def rebuild_http_request response
+        response.rebuild_request
       end
   
       private
@@ -266,10 +270,8 @@ module AWS
         response.error = nil
         status = response.http_response.status
         code = nil
-        code = xml_error_grammar.parse(response.http_response.body).code if
-          xml_error_response?(response)
-        
-  
+        code = extract_error_code(response)
+
         case
         when response.timeout?
           response.error = Timeout::Error.new
@@ -290,12 +292,15 @@ module AWS
       end
   
       protected
-      def xml_error_response? response
-        response.http_response.status >= 300 and
-          response.http_response.body and
-          xml_error_grammar.parse(response.http_response.body).respond_to?(:code)
+      def extract_error_code response
+        if response.http_response.status >= 300 and
+            body = response.http_response.body and
+            parse = xml_error_grammar.parse(body) and
+            parse.respond_to?(:code)
+          parse.code
+        end
       end
-  
+
       protected
       def xml_error_grammar
         if service_module::const_defined?(:Errors) and

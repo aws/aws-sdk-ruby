@@ -14,12 +14,16 @@
 require 'set'
 
 module AWS
+
+  # AWS::Record is an ORM built on top of AWS services.  
   module Record
 
     AWS.register_autoloads(self) do
-      autoload :Base, 'base'
+      autoload :Base,         'model'
+      autoload :Model,        'model'
+      autoload :HashModel,    'hash_model'
     end
-  
+
     # @private
     class RecordNotFound < StandardError; end
   
@@ -37,14 +41,38 @@ module AWS
     # @param [String] A prefix to append to all domains.  This is useful for
     #   grouping domains used by one application with a single prefix.
     def self.domain_prefix= prefix
-      @prefix = prefix
+      @domain_prefix = prefix
     end
-  
+
     # @return [String,nil] The string that is prepended to all domain names.
     def self.domain_prefix
-      @prefix
+      @domain_prefix
     end
-  
+
+    # Sets a prefix to be applied to all DynamoDB tables associated
+    # with {AWS::Record::HashModel} and {AWS::Record::ListModel}
+    # classes.
+    #
+    #   AWS::Record.table_prefix = 'production_'
+    #
+    #   class Product < AWS::Record::HashModel
+    #     set_table_name 'products'
+    #   end
+    #
+    #   Product.table_name #=> 'production_products'
+    #
+    # @param [String] A prefix to append to all tables.  This is
+    #   useful for grouping tables used by one application with a
+    #   single prefix.
+    def self.table_prefix= prefix
+      @table_prefix = prefix
+    end
+
+    # @return [String,nil] The string that is prepended to all table names.
+    def self.table_prefix
+      @table_prefix
+    end
+
     # A utility method for casting values into an array.  
     #
     # * nil is returned as an empty array, []
@@ -62,7 +90,7 @@ module AWS
       else [value]
       end
     end
-  
+
     # A utility method for casting values into 
     #
     # * Sets are returned unmodified
@@ -77,6 +105,6 @@ module AWS
       else Set.new(as_array(value))
       end
     end
-  
+
   end
 end

@@ -178,7 +178,7 @@ module AWS
 
         let(:select_expression) { "SELECT itemName() FROM `#{domain.name}`" }
 
-        it_should_behave_like 'method accepting query options', :each
+        it_should_behave_like 'method accepting query options', :each_batch
 
         it 'calls select to get all item names from the domain' do
           client.should_receive(:select).

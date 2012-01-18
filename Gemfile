@@ -39,7 +39,7 @@ group :build do
   gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
   gem 'flog', '~> 2.5'
-  gem 'yard', '~> 0.7.2'
+  gem 'yard', '~> 0.7.3'
   gem 'chronic', '~> 0.5', :platforms => [:ruby]
 end
 

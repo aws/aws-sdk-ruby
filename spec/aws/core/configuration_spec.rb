@@ -47,6 +47,19 @@ module AWS::Core
         config.basic.should == 'default'
       end
 
+      it 'allows you to override defaults at the getter' do
+        config_class.add_option :basic, 'default'
+        basic = config.basic { 'custom-default' }
+        basic.should == 'custom-default'
+      end
+
+      it 'block-level default overrides do no hide provided values' do
+        config_class.add_option :basic, 'default'
+        config2 = config.with(:basic => 'provided')
+        value = config2.basic { 'override' }
+        value.should == 'provided'
+      end
+
       it 'allows you to blank out default values' do
         config_class.add_option :basic, 'default'
         config_class.new(:basic => nil).basic.should == nil

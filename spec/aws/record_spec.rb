@@ -21,10 +21,25 @@ module AWS
       it 'defaults to nil' do
         Record.domain_prefix.should be_nil
       end
-      
+
       it 'can be altered' do
         Record.domain_prefix = 'prod'
         Record.domain_prefix.should == 'prod'
+        Record.domain_prefix = nil
+      end
+
+    end
+
+    context 'table prefix' do
+
+      it 'defaults to nil' do
+        Record.table_prefix.should be_nil
+      end
+
+      it 'can be altered' do
+        Record.table_prefix = 'prod'
+        Record.table_prefix.should == 'prod'
+        Record.table_prefix = nil
       end
 
     end

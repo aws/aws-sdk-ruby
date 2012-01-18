@@ -14,90 +14,59 @@
 module AWS
   module Record
 
-    # The primary interface for finding records with AWS::Record.
-    #
-    # == Getting a Scope Object
-    #
-    # You should normally never need to construct a Scope object directly.
-    # Scope objects are returned from the AWS::Record::Base finder methods
-    # (e.g. +find+ +all+, +where+, +order+, +limit+, etc).
-    #
-    #   books = Book.where(:author => 'John Doe')
-    #   books.class #=> AWS::Record::Scope, not Array
-    #
-    # Scopes are also returned from methods defined with the +scope+ method.
-    #
-    # == Delayed Execution
-    #
-    # Scope objects represent a select expression, but do not actually
-    # cause a request to be made until enumerated.
-    #
-    #   # no request made yet
-    #   books = Book.where(:author => 'John Doe')
-    #
-    #   # a request is made now
-    #   books.each {|book| ... }
-    #
-    # You can refine a scope object by calling other scope methods on
-    # it.
-    #
-    #   # refine the previous books Scope, no request
-    #   top_10 = books.order(:popularity, :desc).limit(10)
-    #
-    #   # another request is made now
-    #   top_10.first
-    #
+    # Base class for {AWS::Record::Model::Scope} and
+    # {AWS::Record::HashModel::Scope}.
     class Scope
   
       include Enumerable
       
-      # @param [Record::Base] base_class A class that extends 
-      #   {AWS::Record::Base}.  
+      # @param base_class A class that extends {AWS::Record::AbstractBase}.
       # @param [Hash] options
       # @option options :
       # @private
       def initialize base_class, options = {}
+
         @base_class = base_class
+
         @options = options.dup
-        @options[:where] ||= []
-        @options[:domain] ||= base_class.domain_name
+
+        # backwards compat
+        @options[:shard] = @options.delete(:domain) if @options[:domain]
+
       end
   
-      # @return [Class] Returns the AWS::Record::Base extending class that
+      # @return [Class] Returns the AWS::Record::Model extending class that
       #   this scope will find records for.
       attr_reader :base_class
 
       def new attributes = {}
 
-        options = {}
-        options.merge!(attributes)
-        unless options.key?(:domain) or options.key?('domain')
-          options[:domain] = _domain
-        end
+        attributes = attributes.dup
+        attributes[:shard] ||= attributes.delete(:shard)
+        attributes[:shard] ||= attributes.delete('shard')
+        # for backwards compatability, domain is accepted
+        attributes[:shard] ||= attributes.delete('domain')
+        attributes[:shard] ||= attributes.delete(:domain)
+        attributes[:shard] ||= _shard
 
-        @options[:where].each do |conditions|
-          if conditions.size == 1 and conditions.first.is_a?(Hash)
-            options.merge!(conditions.first)
-          end
-        end
-
-        base_class.new(options)
+        base_class.new(attributes)
 
       end
       alias_method :build, :new
 
-      # @param [String] domain
-      # @return [Scope] Returns a scope for restricting the domain of subsequent
-      #   scope operations
-      def domain name
-        _with(:domain => name)
+      # @param [String] shard_name
+      # @return [Scope] Returns a scope that specifies which shard
+      #   (i.e. SimpleDB domain) should be used.
+      def shard shard_name
+        _with(:shard => shard_name)
       end
+      alias_method :domain, :shard
   
       # @overload find(id)
       #   Finds and returns a single record by id.  If no record is found
       #   with the given +id+, then a RecordNotFound error will be raised.
       #   @param [String] id ID of the record to find.
-      #   @return [Record::Base] Returns the record.
+      #   @return Returns the record.
       #   
       # @overload find(:first, options = {})
       #   Returns the first record found.  If no records were matched then
@@ -125,7 +94,7 @@ module AWS
         when id_or_mode == :all   then scope
         when id_or_mode == :first then scope.limit(1).to_a.first
         else
-          base_class.find_by_id(id_or_mode, :domain => scope._domain)
+          base_class.find_by_id(id_or_mode, :shard => scope._shard)
         end
   
       end
@@ -141,63 +110,10 @@ module AWS
       end
       alias_method :size, :count
 
-      # @return [Record::Base,nil] Gets the first record from the domain
-      #   and returns it, or returns nil if the domain is empty.
+      # @return Returns the first record found, returns
+      #   nil if the domain/table is empty.
       def first options = {}
         _handle_options(options).find(:first)
-      end
-
-      # Applies conditions to the scope that limit which records are returned.
-      # Only those matching all given conditions will be returned.
-      #
-      # @overload where(conditions_hash)
-      #   Specify a hash of conditions to query with.  Multiple conditions
-      #   are joined together with AND.
-      #
-      #     Book.where(:author => 'John Doe', :softcover => true)
-      #     # where `author` = `John Doe` AND `softcover` = `1`
-      #
-      #   @param [Hash] conditions
-      #
-      # @overload where(conditions_string, *values)
-      #   A sql-like query fragment with optional placeholders and values.
-      #   Placeholders are replaced with properly quoted values.
-      #
-      #     Book.where('author = ?', 'John Doe')
-      #
-      #   @param [String] conditions_string A sql-like where string with
-      #     question mark placeholders.  For each placeholder there should
-      #     be a value that will be quoted into that position.
-      #   @param [String] *values A value that should be quoted into the
-      #     corresponding (by position) placeholder.
-      #
-      # @return [Scope] Returns a new scope with the passed conditions applied.
-      def where *conditions
-        if conditions.empty?
-          raise ArgumentError, 'missing required condition'
-        end
-        _with(:where => @options[:where] + [conditions])
-      end
-  
-      # Specifies how to sort records returned.  
-      #
-      #   # enumerate books, starting with the most recently published ones
-      #   Book.order(:published_at, :desc).each do |book|
-      #     # ...
-      #   end
-      #
-      # Only one order may be applied.  If order is specified more than
-      # once the last one in the chain takes precedence:
-      #
-      #    
-      #   # books returned by this scope will be ordered by :published_at
-      #   # and not :author.
-      #   Book.where(:read => false).order(:author).order(:published_at)
-      #
-      # @param [String,Symbol] attribute_name The attribute to sort by.
-      # @param [:asc, :desc] order (:asc) The direct to sort.
-      def order attribute_name, order = :asc
-        _with(:order => [attribute_name, order])
       end
   
       # Limits the maximum number of total records to return when finding
@@ -229,28 +145,21 @@ module AWS
       end
 
       protected
-      def _domain
-        @options[:domain] 
+      def _shard
+        @options[:shard] || base_class.shard_name
       end
+      alias_method :domain, :shard
   
       # @private
       private
       def _each_object &block
-
-        items = _item_collection
-
-        items.select.each do |item_data|
-          obj = base_class.new(:domain => _domain)
-          obj.send(:hydrate, item_data.name, item_data.attributes)
-          yield(obj)
-        end
-
+        raise NotImplementedError
       end
   
       # @private
       private
       def _with options
-        Scope.new(base_class, @options.merge(options))
+        self.class.new(base_class, @options.merge(options))
       end
   
       # @private
@@ -260,66 +169,31 @@ module AWS
         _merge_scope(base_class.send(scope_name, *args))
       end
   
-      # Merges another scope with this scope.  Conditions are added together
-      # and the limit and order parts replace those in this scope (if set).
-      # @param [Scope] scope A scope to merge with this one.
-      # @return [Scope] Returns a new scope with merged conditions and 
-      #   overriden order and limit.
+      # Merges the one scope with the current scope, returning a 3rd.
+      # @param [Scope] scope
+      # @return [Scope]
       # @private
       private
       def _merge_scope scope
-        merged = self
-        scope.instance_variable_get('@options').each_pair do |opt_name,opt_value|
-          unless [nil, []].include?(opt_value)
-            if opt_name == :where
-              opt_value.each do |condition| 
-                merged = merged.where(*condition) 
-              end
-            else
-              merged = merged.send(opt_name, *opt_value)
-            end
-          end
-        end
-        merged
+        raise NotImplementedError
       end
 
-      # Consumes a hash of options (e.g. +:where+, +:order+ and +:limit+) and
-      # builds them onto the current scope, returning a new one.
-      # @param [Hash] options
-      # @option options :where
-      # @option options :order
-      # @option options [Integer] :limit
-      # @return [Scope] Returns a new scope with the hash of scope 
-      #   options applied.
+      # Consumes a hash of options (e.g. +:shard+, +:limit) and returns
+      # a new scope with those applied.
+      # @return [Scope]
       # @private
       private
       def _handle_options options
-        scope = self
-        options.each_pair do |method, args|
-          if method == :where and args.is_a?(Hash)
-            # splatting a hash turns it into an array, bad juju
-            scope = scope.send(method, args)
-          else
-            scope = scope.send(method, *args)
-          end
-        end
-        scope
+        raise NotImplementedError
       end
 
-      # Converts this scope object into an AWS::SimpleDB::ItemCollection
-      # @return [SimpleDB::ItemCollection]
       # @private
       private
       def _item_collection
-        items = base_class.sdb_domain(_domain).items
-        items = items.order(*@options[:order]) if @options[:order]
-        items = items.limit(*@options[:limit]) if @options[:limit]
-        @options[:where].each do |where_condition|
-          items = items.where(*where_condition)
-        end
-        items
+        raise NotImplementedError
       end
 
     end
+
   end
 end

@@ -28,7 +28,6 @@ module AWS
 
       before(:each) do
 
-        #klass.stub(:to_s).and_return('ExampleModel')
         klass.stub(:name).and_return('ExampleModel')
       
         klass.stub_chain(:sdb_domain, :items, :[]).and_return(sdb_item)

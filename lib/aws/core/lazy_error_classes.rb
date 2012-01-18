@@ -22,14 +22,16 @@ module AWS
   
         def const_missing(name)
           base_error_grammar = self::BASE_ERROR_GRAMMAR
+          mod = self::ERROR_MODULE
           const_missing_mutex.synchronize do
             return if const_defined?(name)
             const_set(name,
                       Class.new(self::Base) do
-                        include Errors::ModeledError
-  
+                        include mod::ModeledError
+
                         # so that MyService::Errors::Foo::Bar will work
                         const_set(:BASE_ERROR_GRAMMAR, base_error_grammar)
+                        const_set(:ERROR_MODULE, mod)
                         include LazyErrorClasses
                       end)
           end
@@ -50,6 +52,9 @@ module AWS
       def self.included(mod)
         unless mod.const_defined?(:BASE_ERROR_GRAMMAR)
           mod.const_set(:BASE_ERROR_GRAMMAR, XmlGrammar)
+        end
+        unless mod.const_defined?(:ERROR_MODULE)
+          mod.const_set(:ERROR_MODULE, mod)
         end
         mutex = Mutex.new
         MetaUtils.extend_method(mod, :const_missing_mutex) { mutex }

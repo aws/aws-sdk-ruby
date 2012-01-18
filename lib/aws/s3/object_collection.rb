@@ -51,7 +51,7 @@ module AWS
     #   photos/2011/summer/vacation.jpg
     #   photos/2011/summer/family.jpg
     #
-    #   tree = bucket.objects.with_prefix.prefix('photos').as_tree
+    #   tree = bucket.objects.with_prefix('photos').as_tree
     #
     #   directories = tree.children.select(&:branch?).collect(&:prefix)
     #   #=> ['photos/2010', 'photos/2011']

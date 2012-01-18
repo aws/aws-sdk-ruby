@@ -19,7 +19,7 @@ Feature: Modeled exceptions
   I want to get modeled exceptions for client and server errors
   So that I can handle those exceptions without doing string comparisons
 
-  Scenario Outline: Rescue InvalidInstanceID.NotFound
+  Scenario Outline: Rescue InvalidParameter
     Given I create an SNS topic
     When I confirm a subscription with token "FOO" and ask that unsubscribe requests be authenticated rescuing "<class>"
     Then I should rescue the error with code "<code>"

@@ -18,6 +18,8 @@ module AWS
 
     describe Client do
 
+      let(:config) { stub_config }
+
       let(:test_credentials) do
         { :access_key_id => "access key id",
           :secret_access_key => "secret access key" }
@@ -48,6 +50,22 @@ END
           end
           lambda { client.get_session_token }.
             should raise_error(STS::Errors::Foo, "BAR")
+        end
+
+      end
+
+      context '#new' do
+
+        it 'accepts :use_ssl as true' do
+          lambda {
+            Client.new(:config => config.with(:use_ssl => true))
+          }.should_not raise_error
+        end
+        
+        it 'does not accept :use_ssl => false' do
+          lambda {
+            Client.new(:config => config.with(:use_ssl => false))
+          }.should raise_error(ArgumentError, /:use_ssl/)
         end
 
       end

@@ -165,13 +165,15 @@ module AWS
       #   nil is returned.
       #
       def each options = {}, &block
-
-        handle_query_options(options) do |collection, opts|
-          return collection.each(opts, &block)
-        end
-
         super
+      end
 
+      # @private
+      def each_batch options = {}, &block
+        handle_query_options(options) do |collection, opts|
+          return collection.each_batch(opts, &block)
+        end
+        super
       end
 
       # Counts the items in the collection.

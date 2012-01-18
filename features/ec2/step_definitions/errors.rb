@@ -11,6 +11,15 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+When /^(.*) rescuing "([^\"]*)":$/ do |i_do_something, class_name, string|
+  error = AWS.module_eval(class_name)
+  begin
+    When i_do_something, string
+  rescue error => e
+    @error = e
+  end
+end
+
 When /^(.*) rescuing "([^\"]*)"$/ do |i_do_something, class_name|
   error = AWS.module_eval(class_name)
   begin

@@ -14,14 +14,6 @@
 module AWS
   module Record
 
-    class Base
-
-      def errors
-        @errors ||= Errors.new
-      end
-
-    end
-
     class Errors < Core::IndifferentHash
       
       include Enumerable

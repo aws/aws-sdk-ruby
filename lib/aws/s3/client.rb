@@ -877,11 +877,14 @@ module AWS
       end
 
       protected
-      def xml_error_response? response
-        (response.http_response.status >= 300 ||
-         response.request_type == :complete_multipart_upload) and
-          response.http_response.body and
-          Core::XmlGrammar.parse(response.http_response.body).respond_to?(:code)
+      def extract_error_code response
+        if (response.http_response.status >= 300 ||
+            response.request_type == :complete_multipart_upload) and
+            body = response.http_response.body and
+            parse = Core::XmlGrammar.parse(body) and
+            parse.respond_to?(:code)
+          parse.code
+        end
       end
 
       protected
@@ -901,7 +904,7 @@ module AWS
       def should_retry? response
         super or
           response.request_type == :complete_multipart_upload &&
-          xml_error_response?(response)
+          extract_error_code(response)
       end
 
       protected

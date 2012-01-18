@@ -84,7 +84,7 @@ GEM
     term-ansicolor (1.0.5)
     thor (0.14.6)
     uuidtools (2.1.2)
-    yard (0.7.2)
+    yard (0.7.3)
 
 PLATFORMS
   java
@@ -118,4 +118,4 @@ DEPENDENCIES
   ruby-debug
   ruby-prof
   uuidtools (~> 2.1)
-  yard (~> 0.7.2)
+  yard (~> 0.7.3)

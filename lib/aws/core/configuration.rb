@@ -273,9 +273,19 @@ module AWS
   
           accepted_options << name
   
-          define_method(name) do
-            value = supplied.has_key?(name) ? supplied[name] : default_value
+          define_method(name) do |&default_override|
+
+            value = 
+              if supplied.has_key?(name)
+                supplied[name]
+              elsif default_override
+                default_override.call
+              else
+                default_value
+              end
+
             transform ? transform.call(value) : value
+
           end
   
           alias_method("#{name}?", name) if options[:boolean]
@@ -339,7 +349,7 @@ module AWS
 
       add_option :access_key_id, 
         ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID']
-  
+
       add_option :http_handler, Core::Http::NetHttpHandler.new
   
       add_option :logger

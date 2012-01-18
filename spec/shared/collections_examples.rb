@@ -71,12 +71,18 @@ module AWS
     let(:collection)      { raise NotImplementedError }
     let(:client_method)   { raise NotImplementedError }
     let(:next_token_key)  { raise NotImplementedError }
-    let(:limit_key)       { :limit }
+    let(:next_token_response_key) { next_token_key }
+    let(:limit_key)       { raise NotImplementedError }
     let(:response)        { client.new_stub_for(client_method) }
     let(:request_options) { {} }
 
+    def stub_next_token(response, token)
+      response.stub(next_token_response_key).and_return(token)
+    end
+
     before(:each) do
       client.stub(client_method).and_return(response)
+      stub_n_members(response, 0)
     end
 
     it_behaves_like "a collection with #enum"
@@ -90,7 +96,8 @@ module AWS
           client.should_receive(client_method).
             with(request_options.merge(limit_key => 10)).
             and_return(response)
-  
+          stub_n_members(response, 1)
+
           collection.each(:limit => 10) {|obj|}
   
         end
@@ -98,15 +105,15 @@ module AWS
         it 'makes requests until the total number of items received == limit' do
   
           resp1 = client.new_stub_for(client_method)
-          resp1.stub(next_token_key).and_return('abc')
+          stub_next_token(resp1, 'abc')
           stub_n_members(resp1, 2)
   
           resp2 = client.new_stub_for(client_method)
-          resp2.stub(next_token_key).and_return('mno')
+          stub_next_token(resp2, 'mno')
           stub_n_members(resp2, 2)
   
           resp3 = client.new_stub_for(client_method)
-          resp3.stub(next_token_key).and_return('xyz')
+          stub_next_token(resp3, 'xyz')
           stub_n_members(resp3, 1)
   
           client.should_receive(client_method).
@@ -128,7 +135,7 @@ module AWS
         it 'stops short of the limit if a truncated response is returned' do
   
           resp1 = client.new_stub_for(client_method)
-          resp1.stub(next_token_key).and_return('abc')
+          stub_next_token(resp1, 'abc')
           stub_n_members(resp1, 2)
   
           resp2 = client.new_stub_for(client_method)
@@ -158,7 +165,8 @@ module AWS
           client.should_receive(client_method).
             with(request_options.merge(limit_key => 10)).
             and_return(response)
-  
+          stub_n_members(response, 1)
+
           collection.each(:batch_size => 10) {|obj|}
   
         end
@@ -166,12 +174,15 @@ module AWS
         it 'requests :batch_size num elements until response is truncated' do
   
           resp1 = client.new_stub_for(client_method)
-          resp1.stub(next_token_key).and_return('abc')
+          stub_next_token(resp1, 'abc')
+          stub_n_members(resp1, 1)
   
           resp2 = client.new_stub_for(client_method)
-          resp2.stub(next_token_key).and_return('xyz')
+          stub_next_token(resp2, 'xyz')
+          stub_n_members(resp2, 1)
   
           resp3 = client.new_stub_for(client_method)
+          stub_n_members(resp3, 1)
           # no next token
   
           client.should_receive(client_method).
@@ -197,11 +208,11 @@ module AWS
         it 'makes requests while response is truncated' do
   
           resp1 = client.new_stub_for(client_method)
-          resp1.stub(next_token_key).and_return('abc')
+          stub_next_token(resp1, 'abc')
           stub_n_members(resp1, 2)
   
           resp2 = client.new_stub_for(client_method)
-          resp2.stub(next_token_key).and_return('mno')
+          stub_next_token(resp2, 'mno')
           stub_n_members(resp2, 2)
   
           resp3 = client.new_stub_for(client_method)

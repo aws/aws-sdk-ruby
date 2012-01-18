@@ -72,6 +72,10 @@ module AWS
           collection["foo"].should == "bar"
         end
 
+        it 'accepts method missing calls that proxy to #[]' do
+          collection.foo.should == 'bar'
+        end
+
         it 'should accept a symbol' do
           collection[:foo].should == "bar"
         end

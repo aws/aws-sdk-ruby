@@ -15,6 +15,7 @@ require 'spec_helper'
 
 module AWS
   module Record
+    module Attributes
   
       shared_examples_for "aws record attribute" do
 
@@ -77,14 +78,14 @@ module AWS
           it 'raises an exception when serializing nil' do
             lambda {
               attribute.serialize(nil)
-            }.should raise_error(ArgumentError, /^expected a.+value, got/)
+            }.should raise_error(ArgumentError, /^expected a.+, got/)
           end
           
         end
   
       end
   
-      describe StringAttribute do
+      describe StringAttr do
 
         it_behaves_like "aws record attribute" do
 
@@ -141,7 +142,7 @@ module AWS
         end
       end
 
-      describe IntegerAttribute do
+      describe IntegerAttr do
         it_behaves_like "aws record attribute" do
 
           context '#type_cast' do
@@ -187,19 +188,19 @@ module AWS
               }.should raise_error(ArgumentError)
             end
             
-            it 'returns integers as strings' do
-              serializes(1, '1')
+            it 'returns integers as integers' do
+              serializes(1, 1)
             end
 
             it 'returns negative integers as strings' do
-              serializes(-123, '-123')
+              serializes(-123, -123)
             end
 
           end
         end
       end
 
-      describe SortableIntegerAttribute do
+      describe Model::Attributes::SortableIntegerAttr do
 
         it_behaves_like "aws record attribute" do
 
@@ -273,7 +274,7 @@ module AWS
         end
       end
 
-      describe FloatAttribute do
+      describe FloatAttr do
 
         it_behaves_like "aws record attribute" do
 
@@ -319,12 +320,12 @@ module AWS
               }.should raise_error(ArgumentError)
             end
             
-            it 'returns floats as strings' do
-              serializes(12.34, '12.34')
+            it 'returns floats as floats' do
+              serializes(12.34, 12.34)
             end
             
-            it 'returns negative floats as strings' do
-              serializes(-12.34, '-12.34')
+            it 'returns negative floats as floats' do
+              serializes(-12.34, -12.34)
             end
 
           end
@@ -332,7 +333,7 @@ module AWS
         end
       end
 
-      describe SortableFloatAttribute do
+      describe Model::Attributes::SortableFloatAttr do
 
         it_behaves_like "aws record attribute" do
 
@@ -407,7 +408,7 @@ module AWS
         end
       end
 
-      describe DateAttribute do
+      describe DateAttr do
         it_behaves_like "aws record attribute" do
 
           context '#type_cast' do
@@ -467,7 +468,7 @@ module AWS
         end
       end
 
-      describe DateTimeAttribute do
+      describe DateTimeAttr do
         it_behaves_like "aws record attribute" do
 
           context '#type_cast' do
@@ -527,7 +528,7 @@ module AWS
         end
       end
 
-      describe BooleanAttribute do
+      describe BooleanAttr do
         it_behaves_like "aws record attribute" do
 
           context '#type_cast' do
@@ -554,15 +555,11 @@ module AWS
           context '#serialize' do
 
             it 'accepts true values' do
-              lambda {
-                attribute.serialize(true)
-              }.should_not raise_error
+              lambda { attribute.serialize(true) }.should_not raise_error
             end
 
             it 'accepts false values' do
-              lambda {
-                attribute.serialize(false)
-              }.should_not raise_error
+              lambda { attribute.serialize(false) }.should_not raise_error
             end
 
             it 'raises argument error for non-boolean values' do
@@ -571,18 +568,19 @@ module AWS
               }.should raise_error(ArgumentError)
             end
             
-            it 'serializes true to the string "1"' do
-              serializes(true, '1')
+            it 'serializes true to the integer 1' do
+              serializes(true, 1)
             end
             
-            it 'serializes false to the string "0"' do
-              serializes(false, '0')
+            it 'serializes false to the integer 0' do
+              serializes(false, 0)
             end
 
           end
 
         end
 
+      end
     end
   end
 end

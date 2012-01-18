@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-Around("@orm") do |scenario,block|
+Around("@orm", "~@dnamo_db") do |scenario,block|
 
   class ExampleClass < AWS::Record::Base; end
 
@@ -21,7 +21,7 @@ Around("@orm") do |scenario,block|
 
 end
 
-Around("@orm", "~@validations") do |scenario,block|
+Around("@orm", "~@dnamo_db", "~@validations") do |scenario,block|
 
   SimpleDB.new.domains.create(ExampleClass.domain_name)
 

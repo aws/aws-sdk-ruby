@@ -29,7 +29,7 @@ module AWS
               :name => expected_name.to_s,
               :value => expected_value
             }
-          when :unless
+          when :unless, :unless_exists
             expected << {
               :name => value.to_s,
               :exists => false

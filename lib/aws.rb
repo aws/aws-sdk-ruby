@@ -13,6 +13,7 @@
 
 require 'aws/core'
 
+require 'aws/dynamo_db/config'
 require 'aws/ec2/config'
 require 'aws/elb/config'
 require 'aws/iam/config'
@@ -25,6 +26,7 @@ require 'aws/sts/config'
 
 module AWS
   register_autoloads(self) do
+    autoload :DynamoDB, 'dynamo_db'
     autoload :EC2, 'ec2'
     autoload :ELB, 'elb'
     autoload :IAM, 'iam'

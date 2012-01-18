@@ -300,6 +300,7 @@ module AWS
   
           case
           when @options[:to_sym]  then value.tr('-','_').downcase.to_sym
+          when @options[:timestamp] then Time.at(value.to_i)
           when @output_translator then @output_translator.call(value)
           else value
           end
@@ -364,7 +365,14 @@ module AWS
             attr = @klass.attributes[attr_name]
             method = options[:get_as] || attr.get_as
   
-            v = resp_obj.respond_to?(method) ? resp_obj.send(method) : nil
+            v = case
+                when resp_obj.respond_to?(method)
+                  resp_obj.send(method)
+                when resp_obj.respond_to?(:key?) && resp_obj.key?(method)
+                  resp_obj[method]
+                else
+                  nil
+                end
             v = v.value if v and options[:value_wrapped]
             v = attr.translate_output_value(v)
   

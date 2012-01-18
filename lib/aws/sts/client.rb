@@ -31,6 +31,15 @@ module AWS
 
       configure_client
 
+      def initialize *args
+        super
+        unless config.use_ssl?
+          msg = 'AWS Security Token Service (STS) requires ssl but the ' + 
+            ':use_ssl option is set to false.  Try passing :use_ssl => true'
+          raise ArgumentError, msg
+        end
+      end
+
     end
   end
 end

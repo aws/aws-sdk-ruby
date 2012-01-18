@@ -32,7 +32,7 @@ module AWS
 
       before(:each) do
         klass.stub_chain(:sdb_domain, :items, :[], :data).and_return(sdb_data)
-        klass.stub(:to_s).and_return('ExampleModel')
+        klass.stub(:name).and_return('ExampleModel')
       end
     
       let(:true_block) { lambda{|obj| true } }

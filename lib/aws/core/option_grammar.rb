@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'base64'
+require 'bigdecimal'
 
 module AWS
   module Core
@@ -219,7 +220,13 @@ module AWS
               return [Http::Request::Param.new(prefixed_name(prefix), "")] if params.empty?
               params
             end
-  
+
+            def hash_format(value)
+              value.map do |v|
+                member_option.hash_format(v)
+              end
+            end
+
             def join
               '.'
             end
@@ -284,6 +291,7 @@ module AWS
             MetaUtils.extend_method(option, :member_options) { options.values }
             by_ruby_name = options.values.inject({}) do |memo, member_option|
               memo[member_option.ruby_name] = member_option
+              memo[member_option.name] = member_option
               memo
             end
             MetaUtils.extend_method(option, :member_option) { |n| by_ruby_name[n] }
@@ -306,7 +314,8 @@ module AWS
               raise ArgumentError.new("missing required key #{option.ruby_name} for #{context}") if
                 option.required? and
                 !value.has_key?(option.ruby_name) and
-                !value.has_key?(option.ruby_name.to_sym)
+                !value.has_key?(option.ruby_name.to_sym) and
+                !value.has_key?(option.name)
             end
           end
   
@@ -316,7 +325,15 @@ module AWS
               member_option(name).request_params(value, prefixed_name(prefix))
             end.flatten
           end
-  
+
+          def hash_format(hash)
+            hash.inject({}) do |hash, (name, value)|
+              option = member_option(name.to_s)
+              hash[option.name] = option.hash_format(value)
+              hash
+            end
+          end
+
         end
 
         module Map
@@ -388,13 +405,20 @@ module AWS
             @_value_option ||= MapOption.new("value")
           end
 
-          class MapOption < DefaultOption
-            def param_name
-              @param_name || name  
-            end
-            def param_name= name
-              @param_name = name
-            end
+        end
+
+        module Bigdecimal
+
+          extend NoArgs
+
+          def validate(value, context = nil)
+            raise format_error("decimal value", context) unless
+              value.kind_of?(Numeric) or
+              value.respond_to?(:to_int)
+          end
+
+          def hash_format(value)
+            BigDecimal(value.to_s)
           end
 
         end
@@ -421,7 +445,11 @@ module AWS
         def request_params(value, prefix = nil)
           [Http::Request::Param.new(prefixed_name(prefix), encode_value(value))]
         end
-  
+
+        def hash_format(value)
+          value
+        end
+
         def prefixed_name(prefix)
           return "#{prefix}.#{name}" if prefix
           name
@@ -527,7 +555,8 @@ module AWS
               options.has_key?(option.ruby_name) || options.has_key?(option.ruby_name.to_sym)
           end
         end
-  
+
+        # Returns the options in AWS/Query format
         def request_params(options)
           validate(options)
           options.map do |(name, value)|
@@ -535,7 +564,23 @@ module AWS
             option(name).request_params(value)
           end.flatten
         end
-  
+
+        # Returns the options as a hash (which is used to generate JSON
+        # in to_json).
+        def to_h(options)
+          validate(options)
+          options.inject({}) do |hash, (name, value)|
+            option = self.option(name.to_s)
+            hash[option.name] = option.hash_format(value)
+            hash
+          end
+        end
+
+        # Returns the options in JSON format
+        def to_json(options)
+          to_h(options).to_json
+        end
+
         def included(m)
           m.extend(self::ModuleMethods)
         end
@@ -635,6 +680,15 @@ module AWS
           end
         end
   
+      end
+
+      class MapOption < DefaultOption
+        def param_name
+          @param_name || name  
+        end
+        def param_name= name
+          @param_name = name
+        end
       end
   
       extend ModuleMethods

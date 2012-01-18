@@ -19,6 +19,7 @@ module AWS::Core
 
     let(:config) { AWS.config.with(:access_key_id => "AKID",
                                    :secret_access_key => "SECRET",
+                                   :session_token => "TOKEN",
                                    :http_handler => http_handler) }
 
     let(:client) { described_class.new(:config => config) }
@@ -49,7 +50,7 @@ module AWS::Core
           resp.status = 200
           resp.body = "<foo/>"
         end
-        client.send(method, opts)
+        client.send(method, opts) rescue nil
       end
 
       it 'should use a response class whose cache key includes the access key ID' do
@@ -58,7 +59,7 @@ module AWS::Core
           nil
         end
         http_handler.stub(:handle)
-        client.send(method, opts)
+        client.send(method, opts) rescue nil
       end
 
       it 'should log the response including a [CACHED] tag' do

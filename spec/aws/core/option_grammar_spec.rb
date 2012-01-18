@@ -47,6 +47,28 @@ module AWS::Core
 
       end
 
+      context '#to_h' do
+
+        it 'should return an empty hash' do
+          grammar.to_h({}).should == {}
+        end
+
+        it 'should validate the argument' do
+          grammar.should_receive(:validate).with({})
+          grammar.to_h({})
+        end
+
+      end
+
+      context '#to_json' do
+
+        it 'should call to_h and JSON-ify the result' do
+          grammar.stub(:to_h).with({}).and_return({"foo" => "bar"})
+          grammar.to_json({}).should == '{"foo":"bar"}'
+        end
+
+      end
+
     end
 
     context '#customize' do
@@ -104,6 +126,17 @@ module AWS::Core
               grammar.request_params(opts).sort.should ==
                 [Http::Request::Param.new("Bar", 1),
                  Http::Request::Param.new("Foo", 0)]
+            end
+
+          end
+
+          context '#to_h' do
+
+            it 'should inflect the names' do
+              grammar.to_h(opts).should == {
+                "Foo" => "0",
+                "Bar" => "1"
+              }
             end
 
           end
@@ -226,6 +259,44 @@ module AWS::Core
 
           end
 
+          context 'bigdecimal' do
+
+            let(:descriptors) { [:bigdecimal] }
+
+            it 'should cause validate to reject values that are not numbers' do
+              lambda { grammar.validate(:foo => "12") }.
+                should raise_error(ArgumentError, "expected decimal value for option foo")
+            end
+
+            it 'should accept Fixnums' do
+              lambda { grammar.validate(:foo => 12) }.should_not raise_error
+            end
+
+            it 'should accept Floats' do
+              lambda { grammar.validate(:foo => 1.2) }.should_not raise_error
+            end
+
+            it 'should accept BigDecimals' do
+              require 'bigdecimal'
+              lambda { grammar.validate(:foo => BigDecimal("1.2")) }.should_not raise_error
+            end
+
+            it 'should accept Bignums' do
+              lambda { grammar.validate(:foo => 1234567890123456789012) }.should_not raise_error
+            end
+
+            context 'hash format' do
+
+              it 'should convert the number to a BigDecimal' do
+                grammar.to_h(:foo => 12).should == {
+                  "Foo" => BigDecimal("12")
+                }
+              end
+
+            end
+
+          end
+
           context 'string' do
 
             let(:descriptors) { [:string] }
@@ -266,6 +337,16 @@ module AWS::Core
                 [Http::Request::Param.new("Foo.1", "12")]
             end
 
+            context 'hash format' do
+
+              it 'should send the list as a list' do
+                grammar.to_h(:foo => ["12"]).should == {
+                  "Foo" => ["12"]
+                }
+              end
+
+            end
+
           end
 
           context 'list of integers' do
@@ -286,6 +367,11 @@ module AWS::Core
 
             it 'should cause validate to accept a hash' do
               lambda { grammar.validate(:foo => {}) }.
+                should_not raise_error
+            end
+
+            it 'should cause validate to accept a hash with the original member name' do
+              lambda { grammar.validate(:foo => { "Prop" => "foo" }) }.
                 should_not raise_error
             end
 
@@ -314,9 +400,28 @@ module AWS::Core
                                    "missing required key prop for option foo")
             end
 
+            it 'should cause validate to accept a hash with a required entry using the original name' do
+              grammar2 = grammar.customize("Foo" =>
+                                           [{ :structure => { "Prop" => [:required] } }])
+              lambda { grammar2.validate(:foo => { "Prop" => "foo" }) }.
+                should_not raise_error
+            end
+
             it 'should send members prefixed by the structure name' do
               grammar.request_params(:foo => { :prop => "12" }).should ==
                 [Http::Request::Param.new("Foo.Prop", "12")]
+            end
+
+            context 'hash format' do
+
+              it 'should inflect the nested option names' do
+                grammar.to_h(:foo => { :prop => "12" }).should == {
+                  "Foo" => {
+                    "Prop" => "12"
+                  }
+                }
+              end
+
             end
 
           end
@@ -343,6 +448,18 @@ module AWS::Core
                  Http::Request::Param.new("Foo.2.Prop", "14")]
             end
 
+            context 'hash format' do
+
+              it 'should inflect structure properties' do
+                grammar.to_h(:foo => [{ :prop => 12 },
+                                      { :prop => 14 }]).should == {
+                  "Foo" => [{ "Prop" => 12 },
+                            { "Prop" => 14 }]
+                }
+              end
+
+            end
+
           end
 
           context 'structure with list' do
@@ -365,6 +482,121 @@ module AWS::Core
               grammar.request_params(:foo => { :my_list => [12, 14] }).should ==
                 [Http::Request::Param.new("Foo.MyListOfStuff.1", "12"),
                  Http::Request::Param.new("Foo.MyListOfStuff.2", "14")]
+            end
+
+            context 'hash format' do
+
+              it 'should include the list in the output' do
+                grammar.to_h(:foo => { :my_list => [12, 14] }).should == {
+                  "Foo" => { "MyListOfStuff" => [12, 14] }
+                }
+              end
+
+            end
+
+          end
+
+          context 'map' do
+
+            let(:descriptors) do
+              [{ :map => { :key => [:string], :value => [:string] } }]
+            end
+
+            it 'should cause validate to reject strings' do
+              lambda { grammar.validate(:foo => "bar") }.
+                should raise_error(ArgumentError,
+                                   "expected hash value for option foo")
+            end
+
+            it 'should cause validate to reject lists' do
+              lambda { grammar.validate(:foo => []) }.
+                should raise_error(ArgumentError,
+                                   "expected hash value for option foo")
+            end
+
+            it 'should validate the keys' do
+              lambda { grammar.validate(:foo => { 12 => "foo" }) }.
+                should raise_error(ArgumentError,
+                                   "expected string value for key of option foo")
+            end
+
+            it 'should validate the values' do
+              lambda { grammar.validate(:foo => { "foo" => 12 }) }.
+                should raise_error(ArgumentError,
+                                   "expected string value for value at key foo of option foo")
+            end
+
+            it 'should generate the correct query parameters'
+
+            context 'hash format' do
+
+              it 'should pass the hash as is' do
+                grammar.to_h(:foo => { "foo" => "bar" }).should == {
+                  "Foo" => { "foo" => "bar" }
+                }
+              end
+
+            end
+
+          end
+
+          context 'map of string to list' do
+
+            let(:descriptors) do
+              [{ :map => {
+                   :key => [:string],
+                   :value => [{ :list => [:string] }]
+                 }
+               }]
+            end
+
+            it 'should validate the list members' do
+              lambda { grammar.validate(:foo => { "bar" => [12] }) }.
+                should raise_error(ArgumentError,
+                                   "expected string value for member 1 "+
+                                   "of value at key bar of option foo")
+            end
+
+            it 'should generate the correct query parameters'
+
+            context 'hash format' do
+
+              it 'should pass the hash as is' do
+                grammar.to_h(:foo => { "bar" => ["baz"] }).should == {
+                  "Foo" => {
+                    "bar" => ["baz"]
+                  }
+                }
+              end
+
+            end
+
+          end
+
+          context 'map of string to structure' do
+
+            let(:descriptors) do
+              [{ :map => {
+                   :key => [:string],
+                   :value => [{ :structure => { "Zap" => [:string] } }]
+                 }
+               }]
+            end
+
+            it 'should generate the correct query parameters'
+
+            context 'hash format' do
+
+              it 'should inflect the keys in the structure' do
+                grammar.to_h(:foo => { "bar" => { :zap => "zoo" } }).should == {
+                  "Foo" => {
+                    "bar" => {
+                      "Zap" => "zoo"
+                    }
+                  }
+                }
+              end
+
             end
 
           end

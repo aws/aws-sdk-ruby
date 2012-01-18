@@ -14,7 +14,6 @@
 module AWS
   module Record
 
-
     # Provides a way to track changes in your records.
     #
     #   my_book = Book['bookid']

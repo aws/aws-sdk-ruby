@@ -62,7 +62,7 @@ module AWS
     context '#inspect' do
 
       it 'should include the ID' do
-        instance.inspect.should include(identifiers.join(":"))
+        identifiers.each { |id| instance.inspect.should include(id) }
       end
 
     end

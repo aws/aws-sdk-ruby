@@ -20,6 +20,7 @@ require 'aws/core/autoloader'
 #
 # The currently supported services are:
 #
+# * {DynamoDB}
 # * {EC2}
 # * {ELB}
 # * {IAM}
@@ -57,7 +58,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.2.6"
+  VERSION = "1.3.0"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -78,6 +79,7 @@ module AWS
       autoload :Configuration,             'configuration'
       autoload :ConfiguredClientMethods,   'configured_client_methods'
       autoload :ConfiguredGrammars,        'configured_grammars'
+      autoload :ConfiguredJsonClientMethods, 'configured_json_client_methods'
       autoload :ConfiguredOptionGrammars,  'configured_option_grammars'
       autoload :ConfiguredXmlGrammars,     'configured_xml_grammars'
       autoload :DefaultSigner,             'default_signer'
@@ -96,6 +98,7 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
       autoload :ServiceInterface,          'service_interface'
+      autoload :SessionSigner,             'session_signer'
       autoload :UriEscape,                 'uri_escape'
       autoload :XmlGrammar,                'xml_grammar'
     end
@@ -153,6 +156,12 @@ module AWS
     # @param [Hash] options
     # @option options [String] :access_key_id (nil) AWS access key id 
     #   credential.
+    # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com') The 
+    #   service endpoint for Amazon DynamoDB.
+    # @option options [String] :dynamo_db_retry_throughput_errors (false) When
+    #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
+    #   errors will be retried.  You may need to increase the maximum number
+    #   of retries if you have a low provisioned throughput.
     # @option options [String] :ec2_endpoint ('ec2.amazonaws.com') The 
     #   service endpoint for Amazon EC2.
     # @option options [Object] :http_handler (AWS::HTTPartyHandler) The 

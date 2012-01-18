@@ -164,6 +164,16 @@ def requests_matching requests, table
         when 'header_match'
           throw :non_matching unless request.headers[name].to_s =~ /^#{value}$/
 
+        when 'json'
+          body = JSON.load(request.body)
+          throw :non_matching unless
+            (eval("body#{name}").to_s == value rescue false)
+
+        when 'json_match'
+          body = JSON.load(request.body)
+          throw :non_matching unless
+            (eval("body#{name}").to_s =~ /^#{value}$/ rescue false)
+
         else pending("unhandled requirement type `#{type}`")
         end
 
@@ -199,16 +209,25 @@ def table_formatted_requests requests
 #   tables.collect{|t| t.to_s(:color => false, :prefixes => Hash.new('')) }
   tables = requests.collect do |req| 
     table = []
-    table << %w(TYPE NAME VALUE)
-    table << ['http', 'verb', req.http_method.to_s]
-    table << ['http', 'host', req.host.to_s]
-    table << ['http', 'path', req.path.to_s]
-    table << ['http', 'uri', req.uri.to_s]
-    req.params.each do |param|
-      table << ['param', param.name.to_s, param.value.to_s]
-    end
-    req.headers.each_pair do |key,value|
-      table << ['header', key.to_s, value.to_s]
+    if req.headers["content-type"].include?("json")
+      table << %w(TYPE NAME VALUE)
+      table << ['header', 'x-amz-target', req.headers["x-amz-target"]]
+      body = JSON.load(req.body)
+      body.each do |name, value|
+        table << ['json', "[\"#{name}\"]", value.inspect]
+      end
+    else
+      table << %w(TYPE NAME VALUE)
+      table << ['http', 'verb', req.http_method.to_s]
+      table << ['http', 'host', req.host.to_s]
+      table << ['http', 'path', req.path.to_s]
+      table << ['http', 'uri', req.uri.to_s]
+      req.params.each do |param|
+        table << ['param', param.name.to_s, param.value.to_s]
+      end
+      req.headers.each_pair do |key,value|
+        table << ['header', key.to_s, value.to_s]
+      end
     end
     Cucumber::Ast::Table.new(table)
   end
@@ -237,4 +256,8 @@ end
 
 Then /^I should be able to make a call to S3$/ do
   @s3.buckets.to_a
+end
+
+Then /^the result should be:$/ do |string|
+  @result.should == eval(string)
 end
