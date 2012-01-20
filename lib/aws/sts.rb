@@ -25,7 +25,7 @@ module AWS
   # @example Getting temporary credentials and using them to make an EC2 request
   #   sts = AWS::STS.new(:access_key_id => "LONG_TERM_KEY",
   #                      :secret_access_key => "LONG_TERM_SECRET")
-  #   session = AWS::STS.new.new_session(:duration => 60*60)
+  #   session = sts.new_session(:duration => 60*60)
   #   ec2 = AWS::EC2.new(session.credentials)
   #   ec2.instances.to_a
   #
