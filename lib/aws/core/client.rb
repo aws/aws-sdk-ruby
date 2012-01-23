@@ -377,7 +377,8 @@ module AWS
         http_request.proxy_uri = config.proxy_uri
         http_request.use_ssl = config.use_ssl?
         http_request.ssl_verify_peer = config.ssl_verify_peer?
-        http_request.ssl_ca_file = config.ssl_ca_file
+        http_request.ssl_ca_file = config.ssl_ca_file if config.ssl_ca_file
+        http_request.ssl_ca_path = config.ssl_ca_path if config.ssl_ca_path
   
         send("configure_#{name}_request", http_request, opts, &block)
         http_request.headers["user-agent"] = user_agent_string

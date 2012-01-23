@@ -379,6 +379,8 @@ module AWS
   
       add_option :ssl_ca_file, 
         File.expand_path(File.dirname(__FILE__) + "/../../../ca-bundle.crt")
+
+      add_option :ssl_ca_path
   
       add_option :stub_requests, false, :boolean => true
   
