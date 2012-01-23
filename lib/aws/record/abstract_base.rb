@@ -202,6 +202,7 @@ module AWS
             raise 'unable to delete, this object has not been saved yet'
           end
         end
+        alias_method :destroy, :delete
   
         # @return [Boolean] Returns true if this instance object has been deleted.
         def deleted?
