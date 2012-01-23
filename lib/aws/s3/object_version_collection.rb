@@ -23,7 +23,21 @@ module AWS
     #   object.write('3')
     #
     #   object.versions.collect(&:read)
-    #   #=> ['1', '2', '3']
+    #   #=> ['1', '2', '3']         
+    #                                         
+    # To see all the version id for a particular object, access the any particular version,
+    # and see the latest version:
+    #
+    #   object.versions.each do |version| puts version.version_id end
+    #   #=> T2TwAiZ3SmNr7tOfe0QBa4RZnSb3GSLq
+    #   #=> kAEHC_ysT65bT4P3zyYOP1ELA6ajar_6
+    #   #=> itHPX6m8na_sog0cAtkgP3QITEE8v5ij
+    #  
+    #   object.versions['itHPX6m8na_sog0cAtkgP3QITEE8v5ij']
+    #   #=> <AWS::S3::ObjectVersion:<<bucket>>:myobj:itHPX6m8na_sog0cAtkgP3QITEE8v5ij>
+    #
+    #   object.versions.latest
+    #   #=> <AWS::S3::ObjectVersion:<<bucket>>:myobj:T2TwAiZ3SmNr7tOfe0QBa4RZnSb3GSLq>
     #
     # If you know the id of a particular version you can get that object.
     #
