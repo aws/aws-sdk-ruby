@@ -46,4 +46,11 @@ namespace :gems do
 
   Gem::PackageTask.new(spec) {|pkg|}
 
+  task :gemspec do
+    gemspec = File.join(File.dirname(__FILE__), '..', 'aws-sdk.gemspec')
+    File.open(gemspec, 'w+') do |f|
+      f.print spec.to_ruby
+    end
+  end
+
 end
