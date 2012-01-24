@@ -34,7 +34,8 @@ module AWS
           options[:ssl] = request.use_ssl?
           options[:proxy_uri] = request.proxy_uri
           options[:ssl_verify_peer] = request.ssl_verify_peer?
-          options[:ssl_ca_file] = request.ssl_ca_file
+          options[:ssl_ca_file] = request.ssl_ca_file if request.ssl_ca_file
+          options[:ssl_ca_path] = request.ssl_ca_path if request.ssl_ca_path
 
           connection = self.class.pool.connection_for(request.host, options)
 
