@@ -88,6 +88,20 @@ module AWS
           @ssl_ca_file
         end
   
+        # @param [String] ca_path Path to a bundle of CA certs in PEM
+        #   format; the HTTP handler should use this to verify all HTTPS
+        #   requests if {#ssl_verify_peer?} is true.
+        def ssl_ca_path=(ca_path)
+          @ssl_ca_path = ca_path
+        end
+  
+        # @return [String] Path to a bundle of CA certs in PEM format;
+        #   the HTTP handler should use this to verify all HTTPS
+        #   requests if {#ssl_verify_peer?} is true.
+        def ssl_ca_path
+          @ssl_ca_path
+        end
+  
         # Adds a request param.
         #
         # @overload add_param(param_name, param_value = nil)

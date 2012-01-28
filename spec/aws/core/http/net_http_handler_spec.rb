@@ -28,6 +28,7 @@ module AWS::Core::Http
         :use_ssl? => true,
         :ssl_verify_peer? => true,
         :ssl_ca_file => '/ssl/ca',
+        :ssl_ca_path => nil,
         :headers => { 'foo' => 'bar' })
     }
 
