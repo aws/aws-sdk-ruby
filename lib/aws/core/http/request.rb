@@ -26,7 +26,13 @@ module AWS
           @headers = CaseInsensitiveHash.new
           @params = []
           @use_ssl = true
+          @read_timeout = 60 
         end
+
+        # @return [Integer] The number of seconds the service has to respond
+        #   before a timeout error is raised on the request.  Defaults to 
+        #   60 seconds.
+        attr_accessor :read_timeout
   
         # @return [String] hostname of the request
         attr_accessor :host
@@ -120,11 +126,18 @@ module AWS
             @params << Param.new(name_or_param, value)
           end
         end
+        alias_method :[]=, :add_param
   
         # @private
         def get_param param_name
           @params.detect{|p| p.name == param_name } ||
             raise("undefined param #{param_name}")
+        end
+        
+        # @private
+        def param_value_for param_name
+          param = @params.detect{|p| p.name == param_name }
+          param ? param.value : nil
         end
   
         # @return [String] the request uri

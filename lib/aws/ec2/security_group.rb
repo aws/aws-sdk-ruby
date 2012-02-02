@@ -190,7 +190,8 @@ module AWS
       #
       # If you use ELB to manage load balancers, then you need to add
       # ingress permissions to the security groups they route traffic into.
-      # You can do this by passing the {LoadBalancer} into authorize_ingress:
+      # You can do this by passing the {ELB::LoadBalancer} into 
+      # authorize_ingress:
       #
       #   load_balancer = AWS::ELB.new.load_balancers['web-load-balancer']
       #

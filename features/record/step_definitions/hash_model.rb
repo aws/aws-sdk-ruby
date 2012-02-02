@@ -21,6 +21,35 @@ Around("@orm", "@hash_model") do |scenario,block|
 
 end
 
-Given /^I configure the HashModel example class with:$/ do |string|
+Given /^I configure the HashModel example class with:$/ do |expression|
   ExampleClass.module_eval(expression)
+end
+
+When /^I call create_table on the HashModel example class$/ do
+  @table = ExampleClass.create_table(10,5)
+end
+
+When /^the table should have the hash key :id => :string$/ do
+  @table.hash_key.name.should == 'id'
+  @table.hash_key.type.should == :string
+end
+
+When /^I should be able to delete the table$/ do
+  @table.delete
+end
+
+Given /^I set the AWS::Record\.table_name_prefix to "([^"]*)"$/ do |prefix|
+  AWS::Record.table_prefix = prefix
+end
+
+Given /^I set the example class shard name to "([^"]*)"$/ do |shard_name|
+  ExampleClass.set_shard_name(shard_name)
+end
+
+Then /^the table should be named "([^"]*)"$/ do |table_name|
+  @table.name.should == table_name
+end
+
+When /^I should be able to reset the table prefix$/ do
+  AWS::Record.table_prefix = nil
 end

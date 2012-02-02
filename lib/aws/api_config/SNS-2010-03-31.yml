@@ -18,154 +18,163 @@
       Name: 
       - :string
       - :required
-    :output: 
+    :output:
     - TopicArn: []
-
-  GetTopicAttributes: 
-    :input: 
-      TopicArn: 
+  GetTopicAttributes:
+    :input:
+      TopicArn:
       - :string
       - :required
-    :output: 
-    - Attributes: 
-      - :map: 
+    :output:
+    - Attributes:
+      - :map:
         - entry
         - key
         - value
-  SetTopicAttributes: 
-    :input: 
-      TopicArn: 
+  SetTopicAttributes:
+    :input:
+      TopicArn:
       - :string
       - :required
-      AttributeName: 
+      AttributeName:
       - :string
       - :required
-      AttributeValue: 
-      - :string
-      - :required
-    :output: []
-
-  DeleteTopic: 
-    :input: 
-      TopicArn: 
+      AttributeValue:
       - :string
       - :required
     :output: []
-
-  AddPermission: 
-    :input: 
-      TopicArn: 
+  DeleteTopic:
+    :input:
+      TopicArn:
       - :string
       - :required
-      Label: 
+    :output: []
+  AddPermission:
+    :input:
+      TopicArn:
       - :string
       - :required
-      AWSAccountId: 
-      - :membered_list: 
+      Label:
+      - :string
+      - :required
+      AWSAccountId:
+      - :membered_list:
         - :string
       - :required
-      ActionName: 
-      - :membered_list: 
+      ActionName:
+      - :membered_list:
         - :string
       - :required
     :output: []
-
-  RemovePermission: 
-    :input: 
-      TopicArn: 
+  RemovePermission:
+    :input:
+      TopicArn:
       - :string
       - :required
-      Label: 
-      - :string
-      - :required
-    :output: []
-
-  Subscribe: 
-    :input: 
-      TopicArn: 
-      - :string
-      - :required
-      Protocol: 
-      - :string
-      - :required
-      Endpoint: 
+      Label:
       - :string
       - :required
     :output: []
-
-  Unsubscribe: 
-    :input: 
-      SubscriptionArn: 
+  Subscribe:
+    :input:
+      TopicArn:
+      - :string
+      - :required
+      Protocol:
+      - :string
+      - :required
+      Endpoint:
       - :string
       - :required
     :output: []
-
-  ConfirmSubscription: 
-    :input: 
-      TopicArn: 
+  Unsubscribe:
+    :input:
+      SubscriptionArn:
       - :string
       - :required
-      Token: 
+    :output: []
+  ConfirmSubscription:
+    :input:
+      TopicArn:
       - :string
       - :required
-      AuthenticateOnUnsubscribe: 
+      Token:
+      - :string
+      - :required
+      AuthenticateOnUnsubscribe:
       - :boolean
     :output: []
-
-  ListTopics: 
-    :input: 
-      NextToken: 
-      - :string
-    :output: 
-    - Topics: 
-      - :list: member
-    - NextToken: 
-      - :force
-  ListSubscriptions: 
-    :input: 
-      NextToken: 
-      - :string
-    :output: 
-    - Subscriptions: 
-      - :list: member
-    - NextToken: 
-      - :force
-  ListSubscriptionsByTopic: 
-    :input: 
-      TopicArn: 
+  SetSubscriptionAttributes:
+    :input:
+      SubscriptionArn:
       - :string
       - :required
-      NextToken: 
+      AttributeName:
       - :string
-    :output: 
-    - Subscriptions: 
+      - :required
+      AttributeValue:
+      - :string
+      - :required
+    :output: []
+  GetSubscriptionAttributes:
+    :input:
+      SubscriptionArn:
+      - :string
+      - :required
+    :output:
+    - Attributes:
+      - :map:
+        - entry
+        - key
+        - value
+  ListTopics:
+    :input:
+      NextToken:
+      - :string
+    :output:
+    - Topics:
       - :list: member
-    - NextToken: 
+    - NextToken:
       - :force
-  Publish: 
-    :input: 
-      TopicArn: 
+  ListSubscriptions:
+    :input:
+      NextToken:
+      - :string
+    :output:
+    - Subscriptions:
+      - :list: member
+    - NextToken:
+      - :force
+  ListSubscriptionsByTopic:
+    :input:
+      TopicArn:
       - :string
       - :required
-      Message: 
+      NextToken:
+      - :string
+    :output:
+    - Subscriptions:
+      - :list: member
+    - NextToken:
+      - :force
+  Publish:
+    :input:
+      TopicArn:
       - :string
       - :required
-      Subject: 
+      Message:
       - :string
-      MessageStructure: 
+      - :required
+      Subject:
+      - :string
+      MessageStructure:
       - :string
     :output: []
-
-:client_errors: 
+:client_errors:
   InvalidParameter: []
-
   AuthorizationError: []
-
   TopicLimitExceeded: []
-
   SubscriptionLimitExceeded: []
-
   NotFound: []
-
-:server_errors: 
+:server_errors:
   InternalError: []

@@ -171,6 +171,12 @@ module AWS
           obj1.copy_to('some/key')
         end
 
+        it 'returns the copied/target object' do
+          copy = obj1.copy_to('new/key', :bucket_name => 'new-bucket')
+          copy.key.should == 'new/key'
+          copy.bucket.name.should == 'new-bucket'
+        end
+
         it 'accepts a key string and a bucket' do
           client.should_receive(:copy_object).with(hash_including(
             :bucket_name => 'bucket-2',
@@ -248,6 +254,25 @@ module AWS
             obj1.copy_to('bucket/key', :server_side_encryption => nil)
           end
 
+        end
+
+      end
+
+      context '#move_to' do
+
+        it 'calls #copy_to followed by #delete' do
+          obj1.should_receive(:copy_to).with('new-key', {})
+          obj1.move_to('new-key')
+        end
+
+        it 'returns a new object (where it was copied to)' do
+          obj1.move_to('key-2').should == S3Object.new(bucket1, 'key-2')
+        end
+
+        it 'can be used to copy across buckets' do
+          obj2 = obj1.move_to('new-key', :bucket_name => 'new-bucket')
+          obj2.key.should == 'new-key'
+          obj2.bucket.name.should == 'new-bucket'
         end
 
       end

@@ -11,6 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'aws/core'
+require 'aws/dynamo_db/config'
+
 module AWS
 
   # Provides a high-level interface for using DynamoDB.
@@ -43,7 +46,7 @@ module AWS
   #     "MyTable",
   #     :hash_key => { :id => :string }
   #   )
-  #   sleep 1 while t.status == :creating
+  #   sleep 1 while table.status == :creating
   #
   # See {Table} and {TableCollection} for more information on creating
   # and managing tables.

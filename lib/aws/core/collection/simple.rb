@@ -40,6 +40,7 @@ module AWS
 
           each_opts  = options.dup
           limit      = each_opts.delete(:limit)
+          limit      = limit.to_i if limit
           next_token = each_opts.delete(:next_token)
           offset     = next_token ? next_token.to_i - 1 : 0
           total      = 0

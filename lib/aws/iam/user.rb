@@ -58,6 +58,16 @@ module AWS
     # In order to delete a user you must first remove it from all of its
     # groups and delete all of its signing certificates.  Once this is done:
     #
+    # @attr [String] user_name
+    #
+    # @attr [String] path
+    #
+    # @attr_reader [String] id
+    #
+    # @attr_reader [DateTime] create_date
+    #
+    # @attr_reader [String] arn
+    #
     class User < Resource
 
       prefix_update_attributes

@@ -31,6 +31,13 @@ module AWS
         let(:comparison_instances) { [described_class.new("arn2")] }
       end
 
+      it_behaves_like "it has a delivery policy" do
+        let(:object) { subscription }
+        let(:arn_key) { :subscription_arn }
+        let(:get_method) { :get_subscription_attributes }
+        let(:set_method) { :set_subscription_attributes }
+      end
+
       context '#initialize' do
 
         it 'should set the arn' do
@@ -39,9 +46,8 @@ module AWS
 
         it 'should set the topic' do
           topic = Topic.new("foo")
-          described_class.new(arn,
-                              :topic => topic).
-            topic.should be(topic)
+          subscription = Subscription.new(arn, :topic_arn => topic.arn)
+          subscription.topic.should == topic
         end
 
         it 'should set the endpoint' do
@@ -80,25 +86,28 @@ module AWS
 
       context '#exists?' do
 
-        let(:collection) { [] }
+        it 'calls #get_subscription_attributes on the client' do
+          
+          client.should_receive(:get_subscription_attributes).
+            with(:subscription_arn => subscription.arn).
+            and_return(client.stub_for(:get_subscription_attributes))
 
-        it 'should return true if the subscription is in the collection' do
-          SubscriptionCollection.should_receive(:new).and_return([subscription])
-          subscription.exists?.should be_true
+          subscription.exists?
+
         end
 
-        it 'should return false if the subscription is not in the collection' do
-          SubscriptionCollection.should_receive(:new).and_return([])
-          subscription.exists?.should be_false
+        it 'returns true if no error is raised' do
+          subscription.exists?.should == true
         end
 
-        it 'should use the topic collection if the topic is set' do
-          topic = Topic.new("topicARN")
-          subscription.stub(:topic).and_return(topic)
-          TopicSubscriptionCollection.should_receive(:new).
-            with(topic, :config => config).
-            and_return([subscription])
-          subscription.exists?.should be_true
+        it 'returns false if the client raises a not found error' do
+          client.stub(:get_subscription_attributes).and_raise(Errors::NotFound)
+          subscription.exists?.should == false
+        end
+
+        it 'returns false if the client raises an invalid parameter error' do
+          client.stub(:get_subscription_attributes).and_raise(Errors::InvalidParameter)
+          subscription.exists?.should == false
         end
 
       end

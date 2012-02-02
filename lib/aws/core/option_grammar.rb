@@ -338,7 +338,7 @@ module AWS
 
         module Map
 
-          def self.apply(option, members)
+          def self.apply option, members = {}
 
             option.extend self
 

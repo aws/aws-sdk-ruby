@@ -50,6 +50,11 @@ module AWS
         object.key
       end
 
+      # (see S3Object#url_for)
+      def url_for method, options = {}
+        object.url_for(method, options.merge(:version_id => version_id))
+      end
+
       # @see S3Object#head
       # @return (see S3Object#head)
       def head

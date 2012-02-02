@@ -30,11 +30,18 @@ module AWS
         def each_batch options = {}, &block
 
           each_opts  = options.dup
-          limit      = each_opts.delete(:limit) || _limit
-          next_token = each_opts.delete(:next_token)
-          batch_size = each_opts.delete(:batch_size)
 
-          total = 0  # count of items yeileded across all batches
+          ## limit and batch size should accept string values like '10'
+
+          limit = each_opts.delete(:limit) || _limit
+          limit = limit.to_i if limit
+
+          batch_size = each_opts.delete(:batch_size)
+          batch_size = batch_size.to_i if batch_size
+
+          next_token = each_opts.delete(:next_token)
+
+          total = 0  # count of items yeilded across all batches
 
           begin
 

@@ -152,6 +152,45 @@ module AWS
       # * +:bucket_name+ -- The name of the bucket.
       bucket_method(:delete_bucket, :delete)
 
+      bucket_method(:set_bucket_lifecycle_configuration, :put) do
+
+        configure_request do |req, options|
+          xml = options[:lifecycle_configuration]
+          md5 = Base64.encode64(Digest::MD5.digest(xml)).strip
+          req.add_param('lifecycle')
+          req.body = xml
+          req.headers['content-md5'] = md5
+          super(req, options)
+        end
+
+      end
+
+      bucket_method(:get_bucket_lifecycle_configuration, :get) do
+
+        configure_request do |req, options|
+          req.add_param('lifecycle')
+          super(req, options)
+        end
+
+        process_response do |resp|
+          xml = resp.http_response.body
+          data = XML::GetBucketLifecycleConfiguration.parse(xml)
+          Core::MetaUtils.extend_method(resp, :data) { ResponseData.new(data) }
+        end
+
+      end
+
+      bucket_method(:delete_bucket_lifecycle_configuration, :delete) do
+        
+        configure_request do |req, options|
+          req.add_param('lifecycle')
+          super(req, options)
+        end
+
+      end
+
+      # delete_bucket_lifecycle_configuration
+
       ##
       # Lists the buckets in the account.
       add_client_request_method(:list_buckets) do
@@ -622,6 +661,17 @@ module AWS
             end
             meta
           end
+
+          if expiry = resp.http_response.headers['x-amz-expiration']
+            expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
+            date = DateTime.parse($1)
+            rule_id = $2
+          else
+            date = nil
+            rule_id = nil
+          end
+          Core::MetaUtils.extend_method(resp, :expiration_date) { date }
+          Core::MetaUtils.extend_method(resp, :expiration_rule_id) { rule_id }
 
           # create methods for standard response headers
           {

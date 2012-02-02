@@ -58,6 +58,69 @@ module AWS
 
       end
 
+      context '#lifecycle_configuration' do
+        
+        it 'returns a lifecycle configuration for this bucket' do
+          cfg = bucket.lifecycle_configuration
+          cfg.should be_a(BucketLifecycleConfiguration)
+          cfg.bucket.should == bucket
+        end
+
+        it 'does not make any requests against the client' do
+          bucket = S3::Bucket.new('bucket-name', :s3_client => double('s3'))
+          bucket.lifecycle_configuration
+        end
+
+      end
+
+      context '#lifecycle_configuration=' do
+
+        let(:xml) { <<-XML.strip } 
+<LifecycleConfiguration>
+  <Rule>
+    <ID>id</ID>
+    <Prefix>prefix</Prefix>
+    <Status>Enabled</Status>
+    <Expiration>
+      <Days>5</Days>
+    </Expiration>
+  </Rule>
+</LifecycleConfiguration>
+        XML
+
+        it 'calls delete when you pass nil' do
+          client.should_receive(:delete_bucket_lifecycle_configuration).with(
+            :bucket_name => bucket.name)
+          bucket.lifecycle_configuration = nil
+        end
+
+        it 'passes strings along to set_bucket_lifecycle_configuration' do
+          client.should_receive(:set_bucket_lifecycle_configuration).with(
+            :bucket_name => bucket.name, :lifecycle_configuration => xml)
+          bucket.lifecycle_configuration = xml
+        end
+
+        it 'calls #to_xml on non-string objects' do
+          xml_obj = double('xml', :to_xml => xml)
+          client.should_receive(:set_bucket_lifecycle_configuration).with(
+            :bucket_name => bucket.name, :lifecycle_configuration => xml)
+          bucket.lifecycle_configuration = xml_obj
+        end
+
+        it 'updates the cached lifecycle configuration' do
+          
+          client.should_not_receive(:get_bucket_lifecycle_configuration)
+
+          bucket.lifecycle_configuration = xml
+          cfg = bucket.lifecycle_configuration
+          cfg.rules.should == [
+            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix', 5, 'Enabled')
+          ]
+
+        end
+
+      end
+
       context '#empty?' do
 
         it 'returns true if the bucket has no versions' do
@@ -82,7 +145,7 @@ module AWS
 
       end
 
-      context '#delete!' do
+      context '#clear!' do
 
         let(:response) { client.stub_for(:delete_objects) }
         
@@ -117,8 +180,18 @@ module AWS
             :objects => versions3).
             and_return(response)
               
-          bucket.delete!
+          bucket.clear!
 
+        end
+
+      end
+
+      context '#delete!' do
+
+        it 'should clear the bucket and then delete the bucket' do
+          bucket.should_receive(:clear!).ordered
+          bucket.should_receive(:delete).ordered
+          bucket.delete!
         end
 
       end

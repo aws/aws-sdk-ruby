@@ -98,7 +98,7 @@ module AWS
     # @option opts [Integer] :duration The duration, in seconds, that
     #   the session should last. Acceptable durations for federation
     #   sessions range from 3600s (one hour) to 129600s (36 hours),
-    #   with 43200s (12 hours) as the default.
+    #   with one hour as the default.
     #
     # @option opts [String, AWS::STS::Policy] :policy A policy
     #   specifying the permissions to associate with the session. The
@@ -110,6 +110,7 @@ module AWS
     #   who issued the session.
     #
     # @return [FederatedSession]
+    #
     def new_federated_session(name, opts = {})
       opts = opts.merge(:name => name)
       case

@@ -174,6 +174,13 @@ def requests_matching requests, table
           throw :non_matching unless
             (eval("body#{name}").to_s =~ /^#{value}$/ rescue false)
 
+        when 'target'
+          if name == 'like'
+            throw :non_matching unless request.headers['x-amz-target'] =~ /#{value}/
+          else
+            throw :non_matching unless request.headers['x-amz-target'] == value
+          end
+
         else pending("unhandled requirement type `#{type}`")
         end
 

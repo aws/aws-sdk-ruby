@@ -48,9 +48,7 @@ module AWS
     # * +integer_attr+
     # * +float_attr+
     # * +datetime_attr+
-    #
-    # For more information about the various attribute macros available, 
-    # and what options they accept, see {AttributeMacros}.
+    # * +date_attr+
     #
     # === Usage 
     #

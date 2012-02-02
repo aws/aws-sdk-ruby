@@ -74,3 +74,13 @@ Then /^The queue should eventually have the message$/ do
   end
   received.should == true
 end
+
+Given /^I set the delivery policy to:$/ do |policy_string|
+  @delivery_policy = eval(policy_string)
+  @topic.delivery_policy = @delivery_policy
+end
+
+Then /^the delivery policy should be what was passed$/ do
+  @topic.delivery_policy.should == @delivery_policy
+end
+

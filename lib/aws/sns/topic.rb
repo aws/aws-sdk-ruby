@@ -19,6 +19,7 @@ module AWS
     class Topic
 
       include Core::Model
+      include HasDeliveryPolicy
 
       # @param [String] arn The topic ARN.
       def initialize arn, options = {}
@@ -140,7 +141,7 @@ module AWS
         resp = client.confirm_subscription(confirm_opts)
         Subscription.new(
           resp.subscription_arn,
-          :topic => self,
+          :topic_arn => arn,
           :config => config)
       end
 
@@ -201,6 +202,17 @@ module AWS
         policy_json = policy.is_a?(String) ? policy : policy.to_json
         set_attribute('Policy', policy_json)
         nil
+      end
+
+      # @return [nil,String<JSON>] The delivery policy JSON string.
+      def delivery_policy_json
+        to_h[:delivery_policy_json]
+      end
+
+      # @return [String<JSON>] The effective delivery policy JSON string.
+      #   into account system defaults.
+      def effective_delivery_policy_json
+        to_h[:effective_delivery_policy_json]
       end
 
       # Publishes a message to this SNS topic. 
@@ -297,17 +309,23 @@ module AWS
           :num_subscriptions_confirmed => attributes['SubscriptionsConfirmed'].to_i,
           :num_subscriptions_pending => attributes['SubscriptionsPending'].to_i,
           :num_subscriptions_deleted => attributes['SubscriptionsDeleted'].to_i,
+          :delivery_policy_json => attributes['DeliveryPolicy'],
+          :effective_delivery_policy_json => attributes['EffectiveDeliveryPolicy'],
         }
       end
 
       # @return [Boolean] Returns true if compared to another {Topic}
       #   with the same ARN.
-      def ==(other)
+      def eql? other
         other.kind_of?(Topic) and other.arn == arn
       end
-      alias_method :eql?, :==
+      alias_method :==, :eql?
 
-      # @private
+      protected
+      def update_delivery_policy policy_json
+        set_attribute('DeliveryPolicy', policy_json)
+      end
+
       protected
       def parse_policy policy_json
         if policy_json

@@ -44,23 +44,16 @@ module AWS
       #   collection.each {|item| ... }
       #
       # @note If you want fewer than all items, it is generally better 
-      #   to call #{page} than {#each} with a +:limit+.
+      #   to call {#page} than {#each} with a +:limit+.
       #
       # @param [Hash] options
       #
       # @option options [Integer] :limit (nil) The maximum number of
       #   items to enumerate from this collection.
       #
-      # @option options [next_token] :next_token (nil) Next tokens
-      #   act as offsets into the collection.  Next tokens vary in
-      #   format from one service to the next, (e.g. may be a number,
-      #   an opaque string, a hash of values, etc).
-      #
-      #   {#each} and {#each_batch} return a +:next_token+ when called
-      #   with +:limit+ and there were more items matching the request.
-      #
-      #   *NOTE* It is generally better to call {#page} if you only
-      #   want a few items with the ability to request more later.
+      # @option options [next_token] :next_token (nil) 
+      #   Acts as an offset.  +:next_token+ may be returned by {#each} and
+      #   {#each_batch} when a +:limit+ is provided.
       #
       # @return [nil_or_next_token] Returns nil if all items were enumerated.
       #   If some items were excluded because of a +:limit+ option then
@@ -205,7 +198,7 @@ module AWS
       #   the next page of results.  You can not choose an offset
       #   or know how many pages of results there will be.
       #
-      # @params [Hash] options A hash of options that modifies the
+      # @param [Hash] options A hash of options that modifies the
       #   items returned in the page of results.
       #
       # @option options [Integer] :per_page (10) The number of results

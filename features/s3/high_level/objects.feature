@@ -327,6 +327,19 @@ Feature: CRUD Objects (High Level)
     | enable  | REDUCED_REDUNDANCY |
     | disable | STANDARD           |
 
+  Scenario: Renaming an object
+    Given I write "bar" to the key "foo"
+    When I move the key "foo" to "foo2"
+    Then the object "foo" should not exist
+    Then the object "foo2" should have the data "bar"
+
+  Scenario: Renaming an object
+    Given I write "bar" to the key "foo"
+    And I create a new bucket
+    When I move the key "foo" to "foo2" to the new bucket
+    Then the object "foo" should not exist
+    Then the object "foo2" should have the data "bar" in the new bucket
+
   Scenario: Change ACL on an S3 object using a canned ACL
     Given I write "a-string" to the key "foo"
     When I grant public read permissions on the object "foo"

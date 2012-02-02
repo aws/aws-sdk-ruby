@@ -43,7 +43,7 @@ module AWS
               :endpoint => sub.endpoint,
               :protocol => sub.protocol.tr('-','_').to_sym,
               :owner_id => sub.owner,
-              :topic => Topic.new(sub.topic_arn, :config => config),
+              :topic_arn => sub.topic_arn,
               :config => config
             )
             yield(subscription)

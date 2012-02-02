@@ -99,6 +99,7 @@ module AWS
       autoload :ACLObject,                    'acl_object'
       autoload :Bucket,                       'bucket'
       autoload :BucketCollection,             'bucket_collection'
+      autoload :BucketLifecycleConfiguration, 'bucket_lifecycle_configuration'
       autoload :BucketVersionCollection,      'bucket_version_collection'
       autoload :Client,                       'client'
       autoload :DataOptions,                  'data_options'

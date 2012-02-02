@@ -405,7 +405,7 @@
       - :required
       SerialNumber:
       - :string
-      - :pattern: !ruby/regexp /[\w]*/
+      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
       - :required
       AuthenticationCode1:
       - :string
@@ -424,7 +424,7 @@
       - :required
       SerialNumber:
       - :string
-      - :pattern: !ruby/regexp /[\w]*/
+      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
       - :required
       AuthenticationCode1:
       - :string
@@ -443,7 +443,7 @@
       - :required
       SerialNumber:
       - :string
-      - :pattern: !ruby/regexp /[\w]*/
+      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
       - :required
     :output: []
   ListMFADevices:
@@ -451,7 +451,6 @@
       UserName:
       - :string
       - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
       Marker:
       - :string
       - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
@@ -461,6 +460,57 @@
     - MFADevices:
       - :list: member
       - member:
+        - EnableDate:
+          - :timestamp
+    - IsTruncated:
+      - :boolean
+  CreateVirtualMFADevice:
+    :input:
+      Path:
+      - :string
+      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
+      VirtualMFADeviceName:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=,.@-]*/
+      - :required
+    :output:
+    - VirtualMFADevice:
+      - Base32StringSeed:
+        - :blob
+      - QRCodePNG:
+        - :blob
+      - User:
+        - CreateDate:
+          - :timestamp
+      - EnableDate:
+        - :timestamp
+  DeleteVirtualMFADevice:
+    :input:
+      SerialNumber:
+      - :string
+      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
+      - :required
+    :output: []
+  ListVirtualMFADevices:
+    :input:
+      AssignmentStatus:
+      - :string
+      Marker:
+      - :string
+      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
+      MaxItems:
+      - :integer
+    :output:
+    - VirtualMFADevices:
+      - :list: member
+      - member:
+        - Base32StringSeed:
+          - :blob
+        - QRCodePNG:
+          - :blob
+        - User:
+          - CreateDate:
+            - :timestamp
         - EnableDate:
           - :timestamp
     - IsTruncated:
@@ -629,4 +679,6 @@
   DuplicateCertificate: []
   KeyPairMismatch: []
   NoSuchVendor: []
+  InvalidPublicKey: []
+  DuplicatePublicKey: []
 :server_errors: {}

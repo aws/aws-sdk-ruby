@@ -63,11 +63,16 @@ module AWS
         MFADevice.new(user, serial_number)
       end
 
-      # Deletes all of the MFA devices in this collection.
+      # Deactivates all of the MFA devices in this collection.
+      # Virtual MFA devices in this collection will not be
+      # deleted. Instead they will be available in the
+      # {IAM#virtual_mfa_devices} collection so that they can either
+      # be deleted or enabled for different users.
+      #
       # @return [nil]
       def clear
         each do |device| 
-          device.delete
+          device.deactivate
         end
         nil
       end
@@ -104,7 +109,13 @@ module AWS
       def each_item response, &block
         response.mfa_devices.each do |item|
 
-          mfa_device = MFADevice.new(user, item.serial_number)
+          if item.serial_number =~ /^arn:/
+            mfa_device = VirtualMfaDevice.new_from(:list_mfa_devices, item,
+                                                   item.serial_number,
+                                                   :config => config)
+          else
+            mfa_device = MFADevice.new(user, item.serial_number)
+          end
 
           yield(mfa_device)
 

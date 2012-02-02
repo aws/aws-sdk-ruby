@@ -92,7 +92,7 @@ module AWS
 
         # @return [Boolean] Returns true if the other IpPermission matches
         #   this one.
-        def == other
+        def eql? other
           other.is_a?(IpPermission) and
           other.security_group == security_group and
           other.protocol == protocol and
@@ -101,8 +101,7 @@ module AWS
           other.groups == groups and
           other.egress == egress?
         end
-
-        alias_method :eql?, :==
+        alias_method :==, :eql?
 
         protected
         def update_sg method

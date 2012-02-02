@@ -39,13 +39,16 @@ module AWS
             option_grammar = self::Options.operation_grammar(name)
             target_prefix = self::TARGET_PREFIX
             add_client_request_method(Inflection.ruby_name(name).to_sym) do
+
               configure_request do |request, options|
                 request.headers["x-amz-target"] = target_prefix + name
                 request.body = option_grammar.to_json(options)
               end
 
               process_response do |response|
-                data = JSON.load(response.http_response.body)
+                response_body = response.http_response.body
+                response_body = "{}" if response_body == ""
+                data = JSON.load(response_body)
                 MetaUtils.extend_method(response, :data) { data }
               end
 
@@ -53,6 +56,7 @@ module AWS
                 data = {}
                 MetaUtils.extend_method(response, :data) { data }
               end
+
             end
           end
 
@@ -68,4 +72,3 @@ module AWS
 
   end
 end
-

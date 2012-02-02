@@ -49,8 +49,5 @@ group :integration do
   gem 'mocha', '0.9.8'
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post', '~> 1.1.2'
-end
-
-group :curb do
-  gem 'curb', '~> 0.7'
+  gem 'rotp', '~> 1.3.0'
 end

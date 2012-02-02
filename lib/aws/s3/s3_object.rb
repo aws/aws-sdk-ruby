@@ -126,6 +126,16 @@ module AWS
         head.content_type
       end
 
+      # @return [DateTime,nil]
+      def expiration_date
+        head.expiration_date
+      end
+
+      # @return [String,nil]
+      def expiration_rule_id
+        head.expiration_date
+      end
+
       # @return [Symbol, nil] Returns the algorithm used to encrypt
       #   the object on the server side, or +nil+ if SSE was not used
       #   when storing the object.
@@ -431,6 +441,48 @@ module AWS
         ObjectUploadCollection.new(self)
       end
 
+      # Moves an object to a new key. 
+      #
+      # This works by copying the object to a new key and then
+      # deleting the old object.  This function returns the 
+      # new object once this is done.
+      #
+      #   bucket = s3.buckets['old-bucket']
+      #   old_obj = bucket.objets['old-key']
+      #
+      #   # renaming an object returns a new object
+      #   new_obj = old_obj.move_to('new-key')
+      #
+      #   old_obj.key     #=> 'old-key'
+      #   old_obj.exists? #=> false
+      #   
+      #   new_obj.key     #=> 'new-key'
+      #   new_obj.exists? #=> true
+      #
+      # If you need to move an object to a different bucket, pass
+      # +:bucket+ or +:bucket_name+.
+      #
+      #   obj = s3.buckets['old-bucket'].objects['old-key]
+      #   obj.move_to('new-key', :bucket_name => 'new_bucket')
+      # 
+      # If the copy succedes, but the then the delete fails, an error
+      # will be raised.  
+      #
+      # @param [String] target The key to move this object to.
+      #
+      # @param [Hash] options
+      #
+      # @option (see #copy_to)
+      #
+      # @return [S3Object] Returns a new objet with the new key.
+      #
+      def move_to target, options = {}
+        copy = copy_to(target, options)
+        delete
+        copy
+      end
+      alias_method :rename_to, :move_to
+
       # Copies data from one S3 object to another.  
       #
       # S3 handles the copy so the clients does not need to fetch the data
@@ -594,7 +646,8 @@ module AWS
       #   option in the current configuration; for more information,
       #   see {AWS.config}.
       #
-      # @return (see #copy_from)
+      # @return [S3Object] Returns the copy (target) object.
+      #
       def copy_to target, options = {}
 
         unless target.is_a?(S3Object)
@@ -614,6 +667,7 @@ module AWS
         copy_opts.delete(:bucket_name)
 
         target.copy_from(self, copy_opts)
+        target
         
       end
 
@@ -785,6 +839,7 @@ module AWS
         method = http_method(method)
         expires = expiration_timestamp(options[:expires])
         req.add_param("AWSAccessKeyId", config.signer.access_key_id)
+        req.add_param("versionId", options[:version_id]) if options[:version_id]
         req.add_param("Signature", signature(method, expires, req))
         req.add_param("Expires", expires)
         req.add_param("x-amz-security-token", config.signer.session_token) if

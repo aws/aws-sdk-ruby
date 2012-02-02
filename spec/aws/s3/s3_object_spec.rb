@@ -25,7 +25,7 @@ module AWS
 
       let(:client) { config.s3_client }
 
-      let(:bucket) { Bucket.new('foobucket', :config => config) }
+      let(:bucket) { Bucket.new('foobucket', :config => config, :s3_client => client) }
 
       let(:object) { S3Object.new(bucket, 'foo') }
 
@@ -762,6 +762,13 @@ module AWS
           object.url_for(:get)
         end
 
+        it 'should include the version id when provided' do
+          http_request.stub(:add_param)
+          http_request.should_receive(:add_param).
+            with('versionId', 'version-id-string')
+          object.url_for(:read, :version_id => 'version-id-string')
+        end
+
         it 'should sign the request using SHA1' do
           signer.should_receive(:sign).with(an_instance_of(String),
                                             "sha1")
@@ -944,7 +951,6 @@ module AWS
         end
 
       end
-
 
       context '#public_url' do
 

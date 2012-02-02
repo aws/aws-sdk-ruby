@@ -64,6 +64,7 @@ module AWS::Core
             <v>A Nobody</v>
           </item>
         </Map>
+        <Blob>SEVMTE8=</Blob>
       </RootElement>
     XML
 
@@ -708,6 +709,31 @@ module AWS::Core
         it 'casts a string to a DateTime (non-ISO8601 format)' do
           obj = grammar.parse("<Root><Foo>#{other_string}</Foo></Root>")
           obj.foo.should == DateTime.parse(other_string)
+        end
+
+        it 'should leave nil elements alone' do
+          obj = grammar.parse("<Root><Foo/></Root>")
+          obj.foo.should be_nil
+        end
+
+      end
+
+      context '#blob_value' do
+
+        let(:grammar) do
+          XmlGrammar.customize do
+            element "Foo" do
+              blob_value
+            end
+          end
+        end
+
+        let(:encoded_string) { "SEVMTE8=" }
+        let(:decoded_string) { "HELLO" }
+
+        it 'decodes the Base64-encoded string' do
+          obj = grammar.parse("<Root><Foo>#{encoded_string}</Foo></Root>")
+          obj.foo.should == decoded_string
         end
 
         it 'should leave nil elements alone' do

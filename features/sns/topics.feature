@@ -67,3 +67,33 @@ Feature: Managing SNS Topics
     And I subscribe to the topic with the queue
     When I publish a message to the topic
     Then The queue should eventually have the message
+
+  @delivery_policies
+  Scenario: 
+    Given I create an SNS topic
+    And I set the delivery policy to:
+    """
+    {
+      "http" => {
+        "disableSubscriptionOverrides" => true,
+        "defaultHealthyRetryPolicy" => {
+          "minDelayTarget" => 20,
+          "numRetries" => 3,
+          "numNoDelayRetries" => 0,
+          "backoffFunction" => "linear",
+          "numMaxDelayRetries" => 0,
+          "numMinDelayRetries" => 0,
+          "maxDelayTarget" => 20
+        }
+      }
+    }
+    """
+    Then the delivery policy should be what was passed
+    And a request should have been made like:
+    | TYPE   | NAME             | VALUE              |
+    | param  | Action           | SetTopicAttributes |
+    | param  | AttributeName    | DeliveryPolicy     |
+    | param  | AttributeValue   | {"http":{"disableSubscriptionOverrides":true,"defaultHealthyRetryPolicy":{"numRetries":3,"minDelayTarget":20,"numNoDelayRetries":0,"backoffFunction":"linear","numMaxDelayRetries":0,"numMinDelayRetries":0,"maxDelayTarget":20}}} |
+    And a request should have been made like:
+    | TYPE  | NAME           | VALUE              |
+    | param | Action         | GetTopicAttributes |

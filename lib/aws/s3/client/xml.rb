@@ -188,6 +188,16 @@ module AWS
           end
         end
 
+        GetBucketLifecycleConfiguration = Core::XmlGrammar.customize do
+          element("Rule") do
+            list
+            rename("Rules")  
+            element("Expiration") do
+              element("Days") { integer_value }
+            end
+          end
+        end
+
       end
     end
   end

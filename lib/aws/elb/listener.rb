@@ -170,12 +170,12 @@ module AWS
       end
 
       # @private
-      def == other
+      def eql? other
         other.is_a?(Listener) and 
         other.load_balancer == load_balancer and
         other.port == port
       end
-      alias_method :eql?, :==
+      alias_method :==, :eql?
 
       protected
       def _description

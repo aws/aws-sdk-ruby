@@ -26,6 +26,13 @@ module AWS
 
       let(:topic) { Topic.new(arn, :config => config) }
 
+      it_behaves_like "it has a delivery policy" do
+        let(:object) { topic }
+        let(:arn_key) { :topic_arn }
+        let(:get_method) { :get_topic_attributes }
+        let(:set_method) { :set_topic_attributes }
+      end
+
       context '#config' do
 
         it 'returns the config from initialize' do
@@ -305,8 +312,8 @@ module AWS
           sub = topic.confirm_subscription("abc123")
           sub.should be_a(Subscription)
           sub.arn.should == "arn123"
-          sub.config.should be(config)
-          sub.topic.should be(topic)
+          sub.config.should == config
+          sub.topic.should == topic
         end
 
       end

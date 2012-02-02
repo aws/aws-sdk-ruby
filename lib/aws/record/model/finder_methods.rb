@@ -65,7 +65,7 @@ module AWS
         #     # ...
         #   end
         #
-        # See also {#where}, {#order} and {#limit} for more
+        # See also {where}, {order} and {limit} for more
         # information and options.
         #
         # @overload find(id)
@@ -107,7 +107,7 @@ module AWS
         #   end
         #
         # This method is equivalent to +find(:all)+, and therefore you can also
-        # pass aditional options.  See {#find} for more information on what 
+        # pass aditional options.  See {.find} for more information on what 
         # options you can pass.
         #
         #   Book.all(:where => { :author' => 'me' }).each do |my_book|
@@ -138,7 +138,7 @@ module AWS
         #
         #   People.find(:all).where(:boss => true).count
         #
-        # See {#find} and {Scope#count} for more details.
+        # See {find} and {Scope#count} for more details.
         #
         # @param [Hash] options (<code>{}</code>) Options for counting
         #   records.

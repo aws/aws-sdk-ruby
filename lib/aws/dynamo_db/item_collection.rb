@@ -645,6 +645,20 @@ module AWS
       #   * +:range_lte+
       #   * +:range_begins_with+
       #
+      # @option [Boolean] :scan_index_forward (true) Specifies which
+      #   order records will be returned.  Defaults to returning them
+      #   in ascending range key order.  Pass false to reverse this.
+      #
+      # @option :select (nil) By default {#query} yields {Item}
+      #   objects without any attribute data.  If you want to select
+      #   specific attributes, pass a list of them to :select.
+      #
+      #      :select => [:id, :category, :size]
+      #
+      #   If you want to select ALL attributes, pass the symbol +:all+
+      #
+      #      :select => :all
+      #
       # @option options [String, Numeric] :hash_value Attribute value
       #   of the hash component of the composite primary key.
       #
@@ -679,6 +693,7 @@ module AWS
       # @option options [String, Numeric] :range_begins_with Matches
       #   items where the range key value begins with this value.
       #   This option is only valid if the range key is a string.
+      #
       def query(options = {}, &block)
 
         options = options.merge(:query => true)

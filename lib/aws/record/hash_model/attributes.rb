@@ -22,7 +22,7 @@ module AWS
         #
         # @example A standard string attribute
         #
-        #   class Recipe < AWS::Record::Model
+        #   class Recipe < AWS::Record::HashModel
         #     string_attr :name
         #   end
         #
@@ -31,7 +31,7 @@ module AWS
         #
         # @example A string attribute with +:set+ set to true
         #
-        #   class Recipe < AWS::Record::Model
+        #   class Recipe < AWS::Record::HashModel
         #     string_attr :tags, :set => true
         #   end
         #
@@ -48,7 +48,7 @@ module AWS
   
         # Adds an integer attribute to this class.
         #
-        #   class Recipe < AWS::Record::Model
+        #   class Recipe < AWS::Record::HashModel
         #     integer_attr :servings
         #   end
         #
@@ -65,7 +65,7 @@ module AWS
   
         # Adds a float attribute to this class.
         #
-        #   class Listing < AWS::Record::Model
+        #   class Listing < AWS::Record::HashModel
         #     float_attr :score
         #   end
         #
@@ -84,7 +84,7 @@ module AWS
         #
         # @example
         #
-        #   class Book < AWS::Record::Model
+        #   class Book < AWS::Record::HashModel
         #     boolean_attr :read
         #   end
         #
@@ -112,7 +112,7 @@ module AWS
         #
         # @example A standard datetime attribute
         #
-        #   class Recipe < AWS::Record::Model
+        #   class Recipe < AWS::Record::HashModel
         #     datetime_attr :invented
         #   end
         #
@@ -137,7 +137,7 @@ module AWS
         #
         # @example A standard date attribute
         #
-        #   class Person < AWS::Record::Model
+        #   class Person < AWS::Record::HashModel
         #     date_attr :birthdate
         #   end
         #
@@ -161,7 +161,7 @@ module AWS
         #
         # @example
         #
-        #   class Recipe < AWS::Record::Model
+        #   class Recipe < AWS::Record::HashModel
         #     timestamps
         #   end
         #

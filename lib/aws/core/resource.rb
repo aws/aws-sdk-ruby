@@ -60,12 +60,11 @@ module AWS
   
       # @return [Boolean] Returns true if the objects references the same
       #   AWS resource.
-      def == other
+      def eql? other
         other.kind_of?(self.class) and 
           resource_identifiers == other.resource_identifiers
       end
-  
-      alias_method :eql?, :==
+      alias_method :==, :eql?
   
       # @private
       protected
@@ -151,7 +150,6 @@ module AWS
           end
         end
       end
-  
   
       class << self
   
@@ -299,9 +297,9 @@ module AWS
           return nil if value.nil? and @translates_nil != true
   
           case
-          when @options[:to_sym]  then value.tr('-','_').downcase.to_sym
+          when @options[:to_sym]    then value.tr('-','_').downcase.to_sym
           when @options[:timestamp] then Time.at(value.to_i)
-          when @output_translator then @output_translator.call(value)
+          when @output_translator   then @output_translator.call(value)
           else value
           end
   
@@ -326,7 +324,7 @@ module AWS
         end
   
         def finder_method
-          "find_in_response_#{@id}"
+          "_find_in_#{request_types.join('_or_')}_response_#{@id}"
         end
   
         # Indicates that all of the the named attributes can be retrieved
@@ -366,13 +364,13 @@ module AWS
             method = options[:get_as] || attr.get_as
   
             v = case
-                when resp_obj.respond_to?(method)
-                  resp_obj.send(method)
-                when resp_obj.respond_to?(:key?) && resp_obj.key?(method)
-                  resp_obj[method]
-                else
-                  nil
-                end
+            when resp_obj.respond_to?(:key?) && resp_obj.key?(method.to_s)
+              resp_obj[method.to_s]
+            when resp_obj.respond_to?(method)
+              resp_obj.send(method)
+            else
+              nil
+            end
             v = v.value if v and options[:value_wrapped]
             v = attr.translate_output_value(v)
   

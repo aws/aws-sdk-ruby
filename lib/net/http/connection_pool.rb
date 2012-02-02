@@ -27,7 +27,7 @@ class Net::HTTP::ConnectionPool
     Errno::EINVAL 
   ]
 
-  # @params [Hash] options
+  # @param [Hash] options
   #
   # @option options [Numeric] :idle_timeout (60) The number of seconds a 
   #   connection is allowed to sit idle before it is closed and removed

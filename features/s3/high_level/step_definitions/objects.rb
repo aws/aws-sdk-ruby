@@ -319,3 +319,27 @@ Then /^the bucket should be empty$/ do
   @bucket.empty?.should == true
 end
 
+When /^I move the key "([^"]*)" to "([^"]*)"$/ do |key1, key2|
+  @bucket.objects[key1].move_to(key2)
+end
+
+Then /^the object "([^"]*)" should not exist$/ do |key|
+  @bucket.objects[key].exists?.should == false
+end
+
+Then /^the object "([^"]*)" should have the data "([^"]*)"$/ do |key, data|
+  eventually do
+    @bucket.objects[key].read.should == data
+  end
+end
+
+When /^I move the key "([^"]*)" to "([^"]*)" to the new bucket$/ do |key1, key2|
+  @old_bucket.objects[key1].move_to(key2, :bucket => @new_bucket)
+end
+
+Then /^the object "([^"]*)" should have the data "([^"]*)" in the new bucket$/ do |key, data|
+  eventually do
+    @new_bucket.objects[key].read.should == data
+  end
+end
+

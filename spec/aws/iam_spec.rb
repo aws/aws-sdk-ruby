@@ -89,6 +89,16 @@ module AWS
 
     end
 
+    context '#virtual_mfa_devices' do
+
+      it 'returns a virtual mfa devices collection' do
+        devices = iam.virtual_mfa_devices
+        devices.should be_an(IAM::VirtualMfaDeviceCollection)
+        devices.config.should == iam.config
+      end
+
+    end
+
     context '#account_alias' do
 
       it 'returns the first account alias' do

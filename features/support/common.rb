@@ -60,8 +60,6 @@ end
 
 AfterConfiguration do
   AWS.config(test_config)
-  #require 'amazon/aws/http/event_machine_handler'
-  #AWS.config(:http_handler => AWS::Http::EventMachineHandler.new)
   handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp|
     (@requests_made ||= []) << req
     super(req, resp)
@@ -159,6 +157,7 @@ def create_bucket_high_level options = {}
   @endpoint = @s3.client.config.s3_endpoint
   @bucket = @s3.buckets.create(@bucket_name, options)
   @buckets_created << [@bucket_name, @endpoint]
+  @bucket
 end
 
 def create_domain_low_level options = {}

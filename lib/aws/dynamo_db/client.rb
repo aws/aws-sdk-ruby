@@ -15,7 +15,7 @@ module AWS
   class DynamoDB
 
     # @private
-    class Client < Core::Client
+    class Client < Core::JsonClient
 
       API_VERSION = '2011-06-01'
 
@@ -26,8 +26,6 @@ module AWS
       REQUEST_CLASS = DynamoDB::Request
 
       CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
-
-      include Core::ConfiguredJsonClientMethods
 
       configure_client
 
@@ -46,22 +44,11 @@ module AWS
       end
 
       protected
-      def new_request
-        req = super
-        req.headers["content-type"] = "application/x-amz-json-1.0"
-        req
-      end
-
-      protected
       def extract_error_code response
         if response.http_response.status == 413
           'RequestEntityTooLarge'
-        elsif response.http_response.status >= 300 and
-            body = response.http_response.body and
-            json = (JSON.load(body) rescue nil) and
-            type = json["__type"] and
-            type =~ /\#(.*)$/
-          $1
+        else
+          super(response)
         end
       end
 
@@ -111,7 +98,7 @@ module AWS
       # our signer is capible of getting new short-term credentials
       def possible_expired_credentials? response
         signer.respond_to?(:refresh_session) and
-        response.error.is_a?(Errors::AccessDeniedException)
+        response.error.is_a?(Errors::ExpiredTokenException)
       end
 
     end

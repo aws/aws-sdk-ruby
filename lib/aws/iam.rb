@@ -161,6 +161,8 @@ module AWS
       autoload :UserGroupCollection,          'user_group_collection'
       autoload :UserPolicy,                   'user_policy'
       autoload :UserPolicyCollection,         'user_policy_collection'
+      autoload :VirtualMfaDeviceCollection,   'virtual_mfa_device_collection'
+      autoload :VirtualMfaDevice,             'virtual_mfa_device'
     end
 
     include Core::ServiceInterface
@@ -251,6 +253,21 @@ module AWS
     #   represents server certificates for this AWS account.
     def server_certificates
       ServerCertificateCollection.new(:config => config)
+    end
+
+    # Returns a collection that represents the virtual MFA devices
+    # that are not assigned to an IAM user.
+    #
+    #   iam = AWS::IAM.new
+    #   iam.virtual_mfa_devices.each do |cert|
+    #     # ...
+    #   end
+    #
+    # @return [VirtualMfaDeviceCollection] Returns a collection that
+    #   represents the virtual MFA devices that are not assigned to an
+    #   IAM user.
+    def virtual_mfa_devices
+      VirtualMfaDeviceCollection.new(:config => config)
     end
 
     # Sets the account alias for this AWS account.

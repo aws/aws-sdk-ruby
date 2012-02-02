@@ -335,9 +335,11 @@ module AWS
               response.request_type = name
               response.request_options = options
   
-              if self.class::CACHEABLE_REQUESTS.include?(name) and
-                  cache = AWS.response_cache and
-                  cached_response = cache.cached(response)
+              if 
+                cacheable_request?(name, options) and
+                cache = AWS.response_cache and
+                cached_response = cache.cached(response)
+              then
                 cached_response.cached = true
                 cached_response
               else
@@ -362,6 +364,11 @@ module AWS
   
           end
         end
+      end
+
+      private
+      def cacheable_request? name, options
+        self.class::CACHEABLE_REQUESTS.include?(name)
       end
   
       private

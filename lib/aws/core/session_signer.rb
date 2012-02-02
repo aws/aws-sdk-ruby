@@ -76,11 +76,6 @@ module AWS
           session = get_session
         end
 
-        if session.expires_at < (Time.now + 15 * 60)
-          refresh_session 
-          session = get_session
-        end
-
         session
 
       end

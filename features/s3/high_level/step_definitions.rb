@@ -12,7 +12,8 @@
 # language governing permissions and limitations under the License.
 
 Given /^I create a new bucket$/ do
-  create_bucket_high_level
+  @old_bucket = @bucket
+  @new_bucket = create_bucket_high_level
 end
 
 Given /^I create a bucket named "([^"]*)"$/ do |bucket_name|

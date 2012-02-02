@@ -96,7 +96,7 @@ module AWS
           end
 
           def access_fail
-            @failure = "{\"__type\":\"VERSION#AccessDeniedException\",\"message\":\"\"}"
+            @failure = "{\"__type\":\"VERSION#ExpiredTokenException\",\"message\":\"\"}"
             @status = 400
           end
 
@@ -197,7 +197,7 @@ module AWS
           it 'does not retry when using the default signer' do
             lambda { 
               make_request
-            }.should raise_error(Errors::AccessDeniedException)
+            }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 1
           end
 
@@ -206,7 +206,7 @@ module AWS
             client.config.signer.should_receive(:refresh_session).exactly(1).times
             lambda { 
               make_request
-            }.should raise_error(Errors::AccessDeniedException)
+            }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 2
           end
 
@@ -216,7 +216,7 @@ module AWS
             client.config.signer.should_not_receive(:refresh_session)
             lambda { 
               make_request
-            }.should raise_error(Errors::AccessDeniedException)
+            }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 1
           end
 
@@ -226,7 +226,7 @@ module AWS
             client.config.signer.should_receive(:refresh_session).exactly(1).times
             lambda { 
               make_request
-            }.should raise_error(Errors::AccessDeniedException)
+            }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 2
           end
 

@@ -44,7 +44,7 @@ module AWS
         #   that +:body+, +:headers+, +:parser+, and +:ssl_ca_file+ are
         #   ignored.  If you need to set the CA file, you should use the
         #   +:ssl_ca_file+ option to {AWS.config} or
-        #   {AWS::Configuration} instead.
+        #   {Configuration} instead.
         def initialize options = {}
           @default_request_options = options
         end

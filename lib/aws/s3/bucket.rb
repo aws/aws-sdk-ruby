@@ -100,30 +100,27 @@ module AWS
         client.get_bucket_versioning(:bucket_name => @name).status
       end
 
-      # Deletes the current bucket.
-      # 
-      # @note This operation will fail if the bucket is not empty.
-      #
+      # Deletes all objects from this bucket.
       # @return [nil]
-      #
+      def clear!
+        versions.each_batch do |versions|
+          objects.delete(versions)
+        end
+      end
+
+      # Deletes the current bucket.  An error will be raised if the
+      # bucket is not empty.
+      # @return [nil]
       def delete
         client.delete_bucket(:bucket_name => @name)
         nil
       end
 
-      # Attempts to delete all objects (or object versions) from the bucket
-      # and then attempts to delete the bucket.
-      #
-      # @note This operation may fail if you do not have privileges to delete 
-      #   all objects from the bucket.
-      #
+      # Deletes all objects in a bucket and then deletes the bucket.
       # @return [nil]
-      #
       def delete!
-        versions.each_batch do |versions|
-          objects.delete(versions)
-        end
-        self.delete
+        clear!
+        delete
       end
 
       # @return [String] bucket owner id
@@ -284,6 +281,76 @@ module AWS
       def policy=(policy)
         client.set_bucket_policy(:bucket_name => name, :policy => policy)
         nil
+      end
+
+      # The primary interface for editing the lifecycle configuration.
+      # See {BucketLifecycleConfiguration} for more information.
+      #
+      # @example Adding rules to a bucket's lifecycle configuration
+      #
+      #   bucket.lifecycle_configuration.update do
+      #     add_rule 'cache-1/', 30
+      #     add_rule 'cache-2/', 30
+      #   end
+      #
+      # @example Deleting the lifecycle configuration
+      #
+      #   bucket.lifecycle_configuration.clear
+      #
+      # @return [BucketLifecycleConfiguration]
+      #
+      def lifecycle_configuration
+        @lifecycle_cfg ||= BucketLifecycleConfiguration.new(self)
+      end
+
+      # You can call this method if you prefer to build your own
+      # lifecycle configuration.
+      #
+      #   bucket.lifecycle_configuration = <<-XML
+      #     <LifecycleConfiguration>
+      #       ...
+      #     </LifecycleConfiguration>
+      #   XML
+      #
+      # You can also use this method to copy a lifecycle configuration
+      # from another bucket.
+      #
+      #   bucket.lifecycle_configuration = other_bucket.lifecycle_configuration
+      #
+      # If you call this method, passing nil, the lifecycle configuration 
+      # for this bucket will be deleted.
+      #
+      # @param [String,Object] config You can pass an xml string or any 
+      #   other object that responds to #to_xml (e.g. 
+      #   BucketLifecycleConfiguration).
+      #
+      # @return [nil]
+      #
+      def lifecycle_configuration= config
+
+        if config.nil?
+
+          client_opts = {}
+          client_opts[:bucket_name] = name
+          client.delete_bucket_lifecycle_configuration(client_opts)
+
+          @lifecycle_cfg = BucketLifecycleConfiguration.new(self, :empty => true)
+
+        else
+        
+          xml = config.is_a?(String) ? config : config.to_xml
+
+          client_opts = {}
+          client_opts[:bucket_name] = name
+          client_opts[:lifecycle_configuration] = xml
+          client.set_bucket_lifecycle_configuration(client_opts)
+
+          @lifecycle_cfg = BucketLifecycleConfiguration.new(self, :xml => xml)
+
+        end
+
+        nil
+
       end
 
       # Returns a tree that allows you to expose the bucket contents

@@ -28,12 +28,15 @@ module AWS
       REQUEST_CLASS = IAM::Request
 
       # @private
-      CACHEABLE_REQUESTS = Set[:list_groups,
-                               :list_group_policies,
-                               :list_groups_for_user,
-                               :list_server_certificates,
-                               :get_group,
-                               :get_group_policy]
+      CACHEABLE_REQUESTS = Set[
+        :list_groups,
+        :list_group_policies,
+        :list_groups_for_user,
+        :list_server_certificates,
+        :list_virtual_mfa_devices,
+        :get_group,
+        :get_group_policy
+      ]
 
       configure_client
 

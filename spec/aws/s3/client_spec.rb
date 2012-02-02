@@ -812,6 +812,15 @@ module AWS
 
       end
 
+      context '#set_bucket_lifecycle_configuration' do
+      end
+
+      context '#get_bucket_lifecycle_configuration' do
+      end
+
+      context '#delete_bucket_lifecycle_configuration' do
+      end
+
       context '#set_bucket_policy' do
 
         let(:method) { :set_bucket_policy }
@@ -1307,6 +1316,25 @@ module AWS
               resp.headers['content-length'] = ['12345']
             end.head_object(opts)
             response.content_length.should == 12345
+          end
+
+          it 'defaults expiration date and rule id to nil' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-expiration'] = nil
+            end.head_object(opts)
+            r.expiration_date.should == nil
+            r.expiration_rule_id.should == nil
+          end
+
+          it 'parses x-amz-expiration headers' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-expiration'] = 
+                ["expiry-date=\"Fri, 27 Jan 2012 00:00:00 GMT\", rule-id=\"temp-rule\""]
+            end.head_object(opts)
+            r.expiration_date.should be_a(DateTime)
+            r.expiration_date.to_s.should == "2012-01-27T00:00:00+00:00"
+            r.expiration_rule_id.should be_a(String)
+            r.expiration_rule_id.should == 'temp-rule'
           end
 
         end

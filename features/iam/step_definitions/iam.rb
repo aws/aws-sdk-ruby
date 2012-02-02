@@ -26,6 +26,8 @@ Before("@iam") do
 
   @created_server_certificates = []
 
+  @created_mfa_devices = []
+
 end
 
 After("@iam") do
@@ -72,6 +74,7 @@ After("@iam") do
     begin
       user.policies.clear
       user.login_profile.delete if user.login_profile.exists?
+      user.mfa_devices.clear
       user.delete
     rescue AWS::IAM::Errors::EntityTemporarilyUnmodifiable => e
       sleep 1
@@ -93,5 +96,7 @@ After("@iam") do
   end
 
   @created_server_certificates.each { |sc| sc.delete rescue nil }
+
+  @created_mfa_devices.each { |d| d.delete rescue nil }
 
 end

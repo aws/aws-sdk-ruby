@@ -21,11 +21,12 @@ module AWS
     class Subscription
 
       include Core::Model
+      include HasDeliveryPolicy
 
       # @private
       def initialize(arn, opts = {})
         @arn = arn
-        @topic = opts[:topic]
+        @topic_arn = opts[:topic_arn]
         @endpoint = opts[:endpoint]
         @protocol = opts[:protocol]
         @owner_id = opts[:owner_id]
@@ -34,9 +35,6 @@ module AWS
 
       # @return [String] The ARN of the subscription.
       attr_reader :arn
-
-      # @return [Topic] The topic to which the endpoint is subscribed.
-      attr_reader :topic
 
       # @return [String] The endpoint.  This can be an HTTP or HTTPS
       # URL, an e-mail address, or a queue ARN.
@@ -52,13 +50,51 @@ module AWS
       attr_reader :protocol
 
       # @return [String] The AWS account ID of the subscription owner.
-      attr_reader :owner_id
+      def owner_id
+        @owner_id ||= get_attributes['Owner']
+      end
+
+      # @return [String]
+      def topic_arn
+        @topic_arn ||= get_attributes['TopicArn']
+      end
+
+      # @return [Topic]
+      def topic
+        Topic.new(topic_arn, :config => config)  
+      end
 
       # Deletes this subscription.
       # @return [nil]
       def unsubscribe
         client.unsubscribe(:subscription_arn => arn)
         nil
+      end
+
+      # @return [Boolean] Returns true if the subscription confirmation 
+      #   request was authenticated.
+      def confirmation_authenticated?
+
+        return true if @authenticated
+
+        if authenticated = get_attributes['ConfirmationWasAuthenticated']
+          @authenticated = true
+        else
+          false
+        end
+
+      end
+
+      # You can get the parsed JSON hash from {#delivery_policy}.
+      # @return [nil,String] Returns the delivery policy JSON string.
+      def delivery_policy_json
+        get_attributes['DeliveryPolicy']
+      end
+
+      # You can get the parsed JSON hash from {#effective_delivery_policy}.
+      # @return [nil,String] Returns the effective delivery policy JSON string.
+      def effective_delivery_policy_json
+        get_attributes['EffectiveDeliveryPolicy']
       end
 
       # @note This method requests the entire list of subscriptions
@@ -68,19 +104,17 @@ module AWS
       #
       # @return [Boolean] Returns true if the subscription exists.
       def exists?
-        collection =
-          if topic
-            TopicSubscriptionCollection.new(topic,
-                                            :config => config)
-          else
-            SubscriptionCollection.new(:config => config)
-          end
-        collection.include?(self)
+        begin
+          get_attributes
+          true
+        rescue Errors::NotFound, Errors::InvalidParameter
+          false
+        end
       end
 
       # @private
       def inspect
-        "<#{self.class}:#{arn}>"
+        "<#{self.class} arn:#{arn}>"
       end
 
       # @return [Boolean] Returns true if the subscriptions have the same
@@ -89,6 +123,20 @@ module AWS
         other.kind_of?(Subscription) and other.arn == arn
       end
       alias_method :eql?, :==
+
+      protected
+      def update_delivery_policy policy_json
+        client_opts = {}
+        client_opts[:subscription_arn] = arn
+        client_opts[:attribute_name] = 'DeliveryPolicy'
+        client_opts[:attribute_value] = policy_json
+        client.set_subscription_attributes(client_opts)
+      end
+
+      protected
+      def get_attributes
+        client.get_subscription_attributes(:subscription_arn => arn).attributes
+      end
 
     end
 

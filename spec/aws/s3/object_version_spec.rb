@@ -51,6 +51,15 @@ module AWS
 
       end
 
+      context '#url_for' do
+        
+        it 'calls #url_for on the object with a version id' do
+          object.should_receive(:url_for).with(:read, :version_id => version.version_id)
+          version.url_for(:read)
+        end
+
+      end
+
       context '#object' do
         it 'returns the s3 object' do
           version.object.should == object

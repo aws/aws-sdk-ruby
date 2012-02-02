@@ -47,6 +47,7 @@ module AWS
       autoload :Client,                      'client'
       autoload :Errors,                      'errors'
       autoload :Policy,                      'policy'
+      autoload :HasDeliveryPolicy,           'has_delivery_policy'
       autoload :Request,                     'request'
       autoload :Subscription,                'subscription'
       autoload :SubscriptionCollection,      'subscription_collection'

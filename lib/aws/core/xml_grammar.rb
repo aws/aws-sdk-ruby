@@ -14,6 +14,7 @@
 require 'rexml/document'
 require 'rexml/streamlistener'
 require 'base64'
+require 'time'
 
 begin
   require 'nokogiri'
@@ -254,14 +255,22 @@ module AWS
         end
   
         alias_method :float, :float_value
-  
+
         def symbol_value
           format_value do |value|
             value = super(value)
             ['', nil].include?(value) ? nil : Inflection.ruby_name(value).to_sym
           end
         end
-  
+
+        def blob_value
+          format_value do |value|
+            value = super(value)
+            Base64.decode64(value) if value
+          end
+        end
+        alias_method :blob, :blob_value
+
         def format_value &block
           @current[:value_formatter] ||= ValueFormatter.new
           @current[:value_formatter].extend_format_value(&block)
@@ -405,6 +414,7 @@ module AWS
           allow_methods = %w(
             rename attribute_name boolean integer long float list force
             ignore collect_values symbol_value timestamp map_entry map
+            blob
           )
           unless allow_methods.include?(method.to_s)
             raise "#{method} cannot be used in configuration"
