@@ -322,6 +322,11 @@ module AWS
 
         protected
         def sdb_domain_name shard_name = nil
+          # including the prefix on retrieved items causes #delete
+          # to throw an invalid domain exception as the prefix
+          # gets appended a second time (i.e. "foo-foo-images")
+          return "#{self.shard_name(shard_name)}" if shard_name.to_s.start_with?(AWS::Record.domain_prefix)
+
           "#{AWS::Record.domain_prefix}#{self.shard_name(shard_name)}"
         end
 
