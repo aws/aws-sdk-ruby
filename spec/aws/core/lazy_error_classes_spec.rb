@@ -47,6 +47,16 @@ module AWS
             should == "AWS::FooService::Errors::Foo::Bar"
         end
 
+        it 'works with codes that are already Ruby class names' do
+          mod.error_class("Range.Bar").name.
+            should == "AWS::FooService::Errors::Range::Bar"
+        end
+
+        it 'works with codes that are already defined in Core' do
+          mod.error_class("Resource.Bar").name.
+            should == "AWS::FooService::Errors::Resource::Bar"
+        end
+
       end
 
     end

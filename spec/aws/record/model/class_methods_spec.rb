@@ -165,6 +165,10 @@ module AWS
           })}
     
           let(:now) { Time.now }
+
+          let(:domain) { 
+            SimpleDB::Domain.new('shard-name', :config => stub_config)
+          }
     
           before(:each) do
     
@@ -173,12 +177,23 @@ module AWS
             klass.string_attr :colors, :set => true
             klass.datetime_attr :tested_at, :default_value => now
     
-            klass.stub_chain(:sdb_domain, :items, :[], :data).and_return(data)
-    
+            klass.stub(:sdb_domain).and_return(domain)
+            domain.stub_chain(:items, :[], :data).and_return(data)
+
           end
     
           it 'returns an existing record' do
             klass['item-name'].should be_a(klass)
+          end
+
+          it 'populates the shard' do
+            klass['item-name'].shard.should == domain.name
+          end
+
+          it 'removes the domain prefix' do 
+            AWS::Record.stub(:domain_prefix).and_return('prefixed-')
+            domain.stub(:name).and_return('prefixed-shard-name')
+            klass['item-name'].shard.should == 'shard-name'
           end
     
           it 'returns an object with the correct id' do

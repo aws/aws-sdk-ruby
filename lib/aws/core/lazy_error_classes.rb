@@ -26,7 +26,6 @@ module AWS
           base_error_grammar = self::BASE_ERROR_GRAMMAR
           mod = self::ERROR_MODULE
           const_missing_mutex.synchronize do
-            return if const_defined?(name)
             const_set(name,
                       Class.new(self::Base) do
                         include mod::ModeledError
@@ -40,7 +39,7 @@ module AWS
         end
   
         def error_class(code)
-          module_eval(code.gsub(".","::"))
+          module_eval("#{self}::#{code.gsub(".","::")}")
         end
   
         def included(mod)

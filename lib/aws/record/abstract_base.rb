@@ -512,10 +512,15 @@ module AWS
         # @param [String] name Defaults to the name of this class.
         # @return [String] Returns the full prefixed domain name for this class.
         def shard_name name = nil
-          name = @_shard_name if name.nil?
-          name = self.name if name.nil?
-          name = name.name if name.is_a?(Core::Model) # sdb domain or ddb table
-          name
+          case name
+          when nil
+            @_shard_name || self.name
+          when AWS::DynamoDB::Table
+            name.name.gsub(/^#{Record::table_prefix}/, '')
+          when AWS::SimpleDB::Domain
+            name.name.gsub(/^#{Record::domain_prefix}/, '')
+          else name
+          end
         end
         alias_method :domain_name, :shard_name
 
