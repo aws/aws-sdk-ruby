@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'rubygems/package_task'
+require 'secret_scanner'
 
 namespace :gems do
 
@@ -44,7 +45,16 @@ namespace :gems do
 
   end
 
-  Gem::PackageTask.new(spec) {|pkg|}
+  Gem::PackageTask.new(spec) do |pkg|
+    matches = SecretScanner.scan_files(pkg.gem_spec.files)
+    unless matches.empty?
+      puts "***                                   ***"
+      puts "*** Possible credentials in gem files ***"
+      puts "***                                   ***"
+      puts matches
+      exit unless ENV['SCAN'] == 'false'
+    end
+  end
 
   task :gemspec do
     gemspec = File.join(File.dirname(__FILE__), '..', 'aws-sdk.gemspec')

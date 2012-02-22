@@ -44,7 +44,7 @@ module AWS
       #
       # @option options [required,Array] :availability_zones An array of
       #   one or more availability zones.  Values may be availability zone
-      #   name strings, or {AWS::EC2::AvabilityZone} objects.
+      #   name strings, or {AWS::EC2::AvailabilityZone} objects.
       #
       # @option options [required,Array] :listeners An array of load balancer
       #   listener options.  Each value must be an array with the following

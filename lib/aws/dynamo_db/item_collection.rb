@@ -465,9 +465,8 @@ module AWS
       # are filtered). A scan can result in no table data meeting the
       # filter criteria.
       #
-      # For more information about filtering the collection or
-      # limiting the results that are returned, see the {#where} and
-      # {#limit} methods.
+      # For more information about filtering the collection 
+      # see the {#where} method.
       #
       # @param [Hash] options Options for iterating the collection.
       #

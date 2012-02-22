@@ -33,13 +33,16 @@ module AWS
     #   AWS::Record.domain_prefix = 'production_'
     #
     #   class Product < AWS::Record::Base
-    #     set_domain_name 'products'
+    #     set_shard_name 'products'
     #   end
     #
-    #   Product.domain_name #=> 'production_products'
+    #   p = Product.new
+    #   p.shard #=> 'products'
+    #   p.save # the product is persisted to the 'production-products' domain
     #
     # @param [String] A prefix to append to all domains.  This is useful for
     #   grouping domains used by one application with a single prefix.
+    #
     def self.domain_prefix= prefix
       @domain_prefix = prefix
     end
@@ -56,14 +59,17 @@ module AWS
     #   AWS::Record.table_prefix = 'production_'
     #
     #   class Product < AWS::Record::HashModel
-    #     set_table_name 'products'
+    #     set_shard_name 'products'
     #   end
     #
-    #   Product.table_name #=> 'production_products'
+    #   p = Product.new
+    #   p.shard #=> 'products'
+    #   p.save # the product is persisted to the 'production-products' table
     #
     # @param [String] A prefix to append to all tables.  This is
     #   useful for grouping tables used by one application with a
     #   single prefix.
+    #
     def self.table_prefix= prefix
       @table_prefix = prefix
     end

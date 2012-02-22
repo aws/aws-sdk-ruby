@@ -84,8 +84,8 @@ module AWS
           super("Failed to send #{failures.size} messages")
         end
 
-        # @return [Array<SentMessage>] Returns a list of {SentMessage}
-        #   objects.
+        # @return [Array<Queue::SentMessage>] Returns a list of 
+        #   {Queue::SentMessage} objects.
         attr_reader :sent
 
         # @return [Array<Hash>] Returns a list of hashes.  Each hash

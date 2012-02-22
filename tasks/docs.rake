@@ -15,16 +15,18 @@ namespace :docs do
 
   YARD::Rake::YardocTask.new(:yard)
 
-  directory "docs"
-  file "docs/aws-docs.zip" => ["docs", "doc"] do |t|
-    rm_f t.name
-    sh "zip -r #{t.name} doc"
-  end
+  desc "Builds a distributable documentation zip file at ./pkg/aws-docs.zip"
+  task :package => [:clobber, :yard, "pkg/aws-docs.zip"]
 
   task :clobber do
     rm_rf "doc"
+    rm_rf "pkg/aws-docs.zip"
   end
 
-  task :package => [:clobber, :yard, "docs/aws-docs.zip"]
+  directory "pkg"
+  file "pkg/aws-docs.zip" => ["pkg", "doc"] do |t|
+    rm_f t.name
+    sh "zip -r #{t.name} doc"
+  end
 
 end

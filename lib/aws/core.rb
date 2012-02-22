@@ -27,6 +27,7 @@ require 'aws/core/autoloader'
 # * {AWS::S3}
 # * {AWS::SimpleDB}
 # * {AWS::SimpleEmailService}
+# * {AWS::SimpleWorkflow}
 # * {AWS::SNS}
 # * {AWS::SQS}
 # * {AWS::STS}
@@ -58,7 +59,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.3.4"
+  VERSION = "1.3.5"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -159,13 +160,18 @@ module AWS
     # @option options [String] :access_key_id (nil) AWS access key id 
     #   credential.
     #
+    # @option options [String] :secret_access_key (nil) AWS secret access 
+    #   key credential.
+    #
+    # @option options [String,nil] :session_token (nil) AWS secret token 
+    #   credential.
+    #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com') The 
     #   service endpoint for Amazon DynamoDB.
     #
-    # @option options [String] :dynamo_db_retry_throughput_errors (false) When
+    # @option options [String] :dynamo_db_retry_throughput_errors (true) When
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
-    #   errors will be retried.  You may need to increase the maximum number
-    #   of retries if you have a low provisioned throughput.
+    #   errors will be retried.
     #
     # @option options [String] :ec2_endpoint ('ec2.amazonaws.com') The 
     #   service endpoint for Amazon EC2.
@@ -227,12 +233,6 @@ module AWS
     #   * {S3::S3Object#presigned_post}
     #   * {S3::Bucket#presigned_post}
     #
-    # @option options [String] :secret_access_key (nil) AWS secret access 
-    #   key credential.
-    #
-    # @option options [String,nil] :session_token (nil) AWS secret token 
-    #   credential.
-    #
     # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com') The
     #   service endpoint for Amazon SimpleDB.
     #
@@ -242,6 +242,9 @@ module AWS
     #
     # @option options [String] :simple_email_service_endpoint ('email.us-east-1.amazonaws.com') 
     #   The service endpoint for Amazon Simple Email Service.
+    #
+    # @option options [String] :simple_workflow_service ('swf.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Simple Workflow Service.
     #
     # @option options [Object] :signer (AWS::DefaultSigner) The request signer.  Defaults to
     #   a default request signer implementation.
@@ -254,7 +257,8 @@ module AWS
     #   The AWS SDK for Ruby ships with a CA cert bundle, which is the
     #   default value for this option.
     #
-    # @option options [String] :ssl_ca_path The path the a CA cert directory.
+    # @option options [String] :ssl_ca_path (nil) 
+    #   The path the a CA cert directory.
     #
     # @option options [Boolean] :ssl_verify_peer (true) When +true+ 
     #   the HTTP handler validate server certificates for HTTPS requests.
@@ -285,6 +289,7 @@ module AWS
     #   for clients and applications built ontop of the aws-sdk gem.
     # 
     # @return [Core::Configuration] Returns the new configuration.
+    #
     def config options = {}
       @@config ||= Core::Configuration.new
       @@config = @@config.with(options) unless options.empty?

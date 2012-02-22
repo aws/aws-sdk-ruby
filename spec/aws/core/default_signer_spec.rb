@@ -89,12 +89,7 @@ module AWS::Core
 
     context 'samples' do
 
-      let(:signer) { 
-        DefaultSigner.new(
-          "0PN5J17HBGZHT7JJ3X82",
-          "uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o"
-        ) 
-      }
+      let(:signer) { DefaultSigner.new('ACCESS_KEY_ID', 'SECRET_ACCESS_KEY') }
 
       let(:example_signatures) do
         [{ :string_to_sign => <<END.strip,
@@ -104,7 +99,7 @@ GET
 Tue, 27 Mar 2007 19:36:42 +0000
 /johnsmith/photos/puppy.jpg
 END
-           :signature => "zzTmSK1cr02yZmrr8u9LjF7U2zTiPoANPv+ayUIrxqw=" },
+           :signature => "heNUBd6x8kP/cQhQTiMo18au63AExPb/G7CNApAP0po=" },
          { :string_to_sign => <<END.strip,
 PUT
 
@@ -112,7 +107,7 @@ image/jpeg
 Tue, 27 Mar 2007 21:15:45 +0000
 /johnsmith/photos/puppy.jpg
 END
-           :signature => "93MRuLdrrXEIPVPS22umXdNVp2gOFQtAlsN9QDA2zX8=" },
+           :signature => "c0NdRCzhQS7pLz9GZSUp/Not0PKF8mZNiRkJ6en7GzU=" },
          { :string_to_sign => <<END.strip,
 GET
 
@@ -120,7 +115,7 @@ GET
 Tue, 27 Mar 2007 19:42:41 +0000
 /johnsmith/
 END
-           :signature => "MKvpLKH6ojCSBhhG16T4NwPPsMLBTU4r0CWQ81Tqwt4=" },
+           :signature => "tfulhg5PW0lY5BN1lDMkBX0p3FDyDWELXh2eWPvlNRY=" },
          { :string_to_sign => <<END.strip,
 GET
 
@@ -128,7 +123,7 @@ GET
 Tue, 27 Mar 2007 19:44:46 +0000
 /johnsmith/?acl
 END
-           :signature => "KGr9c1NT6qWRBicKjrNTenNEXrk0tkVqLzaZaGsAYP8=" },
+           :signature => "XxA+jkeOJl2n2DOSBL5dm1k1eWARlzuiu42H+tuzEwI=" },
          { :string_to_sign => <<END.strip,
 DELETE
 
@@ -137,7 +132,7 @@ DELETE
 x-amz-date:Tue, 27 Mar 2007 21:20:26 +0000
 /johnsmith/photos/puppy.jpg
 END
-           :signature => "jzCguZRh2xc/mAXomk9y0UyGpfXkr0GOU50J7LELVxU=" },
+           :signature => "1NzsN8y3nJjOpDUH9rwbA+iT0zaXQe1BctnoACrAml0=" },
          { :string_to_sign => <<END.strip,
 PUT
 4gJE4saaMU4BqNR0kLY+lw==
@@ -149,7 +144,7 @@ x-amz-meta-filechecksum:0x02661779
 x-amz-meta-reviewedby:joe@johnsmith.net,jane@johnsmith.net
 /static.johnsmith.net/db-backup.dat.gz
 END
-           :signature => "9L0movyZIJkpubKOJ4tuBpA3m851rI8seCnXSGwjSis=" },
+           :signature => "TgFkJKglg1bymlZHMFZYD/B+1cNhNUc8GmKdiGk7GGw=" },
          { :string_to_sign => <<END.strip,
 GET
 
@@ -157,7 +152,7 @@ GET
 Wed, 28 Mar 2007 01:49:49 +0000
 /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re
 END
-           :signature => "WrsTf3SwgvLE3FyvXuzXGb+YcYR5wmdnhZzVrKHckC4=" }]
+           :signature => "IXavJhbvaDEzd4BEYBKby4D71kMvKzTD4JJIrqpo+IM=" }]
       end
 
       it 'should work for the static examples in the S3 GSG' do

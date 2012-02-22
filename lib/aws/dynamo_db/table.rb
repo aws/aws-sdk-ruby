@@ -30,8 +30,8 @@ module AWS
     # == Creating a Table
     #
     # To get started you can create a table by supplying a name
-    # and the read/write capacity.  A default schema of a hash_key
-    # ({:id => :string}) will be provided.
+    # and the read/write capacity.  A default schema with a hash_key
+    # of :id => :string will be provided.
     #
     #   dynamo_db = AWS::DynamoDB.new
     #   dynamo_db.tables.create('mytable', 10, 5)

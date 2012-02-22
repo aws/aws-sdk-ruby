@@ -44,7 +44,7 @@ module AWS
     #
     # == Adding Rules
     #
-    # You can add a rule to a bucket lifecycle configuration using #{add_rule}.
+    # You can add a rule to a bucket lifecycle configuration using {#add_rule}.
     #
     #   # add a rule that deletes backups after they are 1 year old
     #   bucket.lifecycle_configuration.update do
@@ -62,7 +62,7 @@ module AWS
     # == Replacing Rules
     #
     # If you prefer to completely replace a lifecycle configuration, call
-    # #add_rule inside a #replace block instead of an #update block:
+    # {#add_rule} inside a #replace block instead of an #update block:
     #
     #   # replace all existing rules with the following
     #   bucket.lifecycle_configuration.replace do

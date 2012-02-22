@@ -98,8 +98,7 @@ module AWS
         #   end
         #
         # This method is equivalent to +find(:all)+, and therefore you can also
-        # pass aditional options.  See {#find} for more information on what 
-        # options you can pass.
+        # pass aditional options.
         #
         #   Book.all(:where => { :author' => 'me' }).each do |my_book|
         #     # ...
@@ -143,7 +142,7 @@ module AWS
         # 
         # @return [Integer] The count of records in the table.
         #
-        def count
+        def count options = {}
           new_scope.count(options)
         end
         alias_method :size, :count

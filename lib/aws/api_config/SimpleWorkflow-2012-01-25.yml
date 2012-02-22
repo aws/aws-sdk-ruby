@@ -1,0 +1,1163 @@
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:operations:
+  RegisterWorkflowType:
+    :input:
+      domain:
+      - :string
+      - :required
+      name:
+      - :string
+      - :required
+      version:
+      - :string
+      - :required
+      description:
+      - :string
+      defaultTaskStartToCloseTimeout:
+      - :string
+      defaultExecutionStartToCloseTimeout:
+      - :string
+      defaultTaskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      defaultChildPolicy:
+      - :string
+    :output: []
+  DeprecateWorkflowType:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowType:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+          - :required
+      - :required
+    :output: []
+  DescribeWorkflowType:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowType:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+          - :required
+      - :required
+    :output:
+    - typeInfo:
+      - creationDate:
+        - :timestamp
+      - deprecationDate:
+        - :timestamp
+  ListWorkflowTypes:
+    :input:
+      domain:
+      - :string
+      - :required
+      name:
+      - :string
+      registrationStatus:
+      - :string
+      - :required
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - typeInfos:
+      - :list: member
+      - member:
+        - creationDate:
+          - :timestamp
+        - deprecationDate:
+          - :timestamp
+  RegisterActivityType:
+    :input:
+      domain:
+      - :string
+      - :required
+      name:
+      - :string
+      - :required
+      version:
+      - :string
+      - :required
+      description:
+      - :string
+      defaultTaskStartToCloseTimeout:
+      - :string
+      defaultTaskHeartbeatTimeout:
+      - :string
+      defaultTaskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      defaultTaskScheduleToStartTimeout:
+      - :string
+      defaultTaskScheduleToCloseTimeout:
+      - :string
+    :output: []
+  DeprecateActivityType:
+    :input:
+      domain:
+      - :string
+      - :required
+      activityType:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+          - :required
+      - :required
+    :output: []
+  DescribeActivityType:
+    :input:
+      domain:
+      - :string
+      - :required
+      activityType:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+          - :required
+      - :required
+    :output:
+    - typeInfo:
+      - creationDate:
+        - :timestamp
+      - deprecationDate:
+        - :timestamp
+  ListActivityTypes:
+    :input:
+      domain:
+      - :string
+      - :required
+      name:
+      - :string
+      registrationStatus:
+      - :string
+      - :required
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - typeInfos:
+      - :list: member
+      - member:
+        - creationDate:
+          - :timestamp
+        - deprecationDate:
+          - :timestamp
+  StartWorkflowExecution:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowId:
+      - :string
+      - :required
+      workflowType:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+          - :required
+      - :required
+      taskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      input:
+      - :string
+      executionStartToCloseTimeout:
+      - :string
+      tagList:
+      - :list:
+        - :string
+      taskStartToCloseTimeout:
+      - :string
+      childPolicy:
+      - :string
+    :output: []
+  SignalWorkflowExecution:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowId:
+      - :string
+      - :required
+      runId:
+      - :string
+      signalName:
+      - :string
+      - :required
+      input:
+      - :string
+    :output: []
+  RequestCancelWorkflowExecution:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowId:
+      - :string
+      - :required
+      runId:
+      - :string
+    :output: []
+  TerminateWorkflowExecution:
+    :input:
+      domain:
+      - :string
+      - :required
+      workflowId:
+      - :string
+      - :required
+      runId:
+      - :string
+      reason:
+      - :string
+      details:
+      - :string
+      childPolicy:
+      - :string
+    :output: []
+  DescribeWorkflowExecution:
+    :input:
+      domain:
+      - :string
+      - :required
+      execution:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+          runId:
+          - :string
+          - :required
+      - :required
+    :output:
+    - executionInfo:
+      - startTimestamp:
+        - :timestamp
+      - closeTimestamp:
+        - :timestamp
+      - tagList:
+        - :list: member
+      - cancelRequested:
+        - :boolean
+    - openCounts:
+      - openActivityTasks:
+        - :integer
+      - openDecisionTasks:
+        - :integer
+      - openTimers:
+        - :integer
+      - openChildWorkflowExecutions:
+        - :integer
+    - latestActivityTaskTimestamp:
+      - :timestamp
+  GetWorkflowExecutionHistory:
+    :input:
+      domain:
+      - :string
+      - :required
+      execution:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+          runId:
+          - :string
+          - :required
+      - :required
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - events:
+      - :list: member
+      - member:
+        - eventTimestamp:
+          - :timestamp
+        - eventId:
+          - :long
+        - workflowExecutionStartedEventAttributes:
+          - tagList:
+            - :list: member
+          - parentInitiatedEventId:
+            - :long
+        - workflowExecutionCompletedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - completeWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - failWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionCanceledEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - cancelWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionContinuedAsNewEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+          - tagList:
+            - :list: member
+        - continueAsNewWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionCancelRequestedEventAttributes:
+          - externalInitiatedEventId:
+            - :long
+        - decisionTaskStartedEventAttributes:
+          - scheduledEventId:
+            - :long
+        - decisionTaskCompletedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - decisionTaskTimedOutEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskScheduledEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - activityTaskStartedEventAttributes:
+          - scheduledEventId:
+            - :long
+        - activityTaskCompletedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskFailedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskTimedOutEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskCanceledEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+          - latestCancelRequestedEventId:
+            - :long
+        - activityTaskCancelRequestedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionSignaledEventAttributes:
+          - externalInitiatedEventId:
+            - :long
+        - markerRecordedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - timerStartedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - timerFiredEventAttributes:
+          - startedEventId:
+            - :long
+        - timerCanceledEventAttributes:
+          - startedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - startChildWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+          - tagList:
+            - :list: member
+        - childWorkflowExecutionStartedEventAttributes:
+          - initiatedEventId:
+            - :long
+        - childWorkflowExecutionCompletedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionTimedOutEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionCanceledEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionTerminatedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - signalExternalWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - externalWorkflowExecutionSignaledEventAttributes:
+          - initiatedEventId:
+            - :long
+        - signalExternalWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - externalWorkflowExecutionCancelRequestedEventAttributes:
+          - initiatedEventId:
+            - :long
+        - requestCancelExternalWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - requestCancelExternalWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - scheduleActivityTaskFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - requestCancelActivityTaskFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - startTimerFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - cancelTimerFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - startChildWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+  ListOpenWorkflowExecutions:
+    :input:
+      domain:
+      - :string
+      - :required
+      startTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      - :required
+      typeFilter:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+      tagFilter:
+      - :structure:
+          tag:
+          - :string
+          - :required
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+      executionFilter:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+    :output:
+    - executionInfos:
+      - :list: member
+      - member:
+        - startTimestamp:
+          - :timestamp
+        - closeTimestamp:
+          - :timestamp
+        - tagList:
+          - :list: member
+        - cancelRequested:
+          - :boolean
+  ListClosedWorkflowExecutions:
+    :input:
+      domain:
+      - :string
+      - :required
+      startTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      closeTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      executionFilter:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+      closeStatusFilter:
+      - :structure:
+          status:
+          - :string
+          - :required
+      typeFilter:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+      tagFilter:
+      - :structure:
+          tag:
+          - :string
+          - :required
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - executionInfos:
+      - :list: member
+      - member:
+        - startTimestamp:
+          - :timestamp
+        - closeTimestamp:
+          - :timestamp
+        - tagList:
+          - :list: member
+        - cancelRequested:
+          - :boolean
+  CountOpenWorkflowExecutions:
+    :input:
+      domain:
+      - :string
+      - :required
+      startTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      - :required
+      typeFilter:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+      tagFilter:
+      - :structure:
+          tag:
+          - :string
+          - :required
+      executionFilter:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+    :output:
+    - count:
+      - :integer
+    - truncated:
+      - :boolean
+  CountClosedWorkflowExecutions:
+    :input:
+      domain:
+      - :string
+      - :required
+      startTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      closeTimeFilter:
+      - :structure:
+          oldestDate:
+          - :timestamp
+          - :required
+          latestDate:
+          - :timestamp
+      executionFilter:
+      - :structure:
+          workflowId:
+          - :string
+          - :required
+      typeFilter:
+      - :structure:
+          name:
+          - :string
+          - :required
+          version:
+          - :string
+      tagFilter:
+      - :structure:
+          tag:
+          - :string
+          - :required
+      closeStatusFilter:
+      - :structure:
+          status:
+          - :string
+          - :required
+    :output:
+    - count:
+      - :integer
+    - truncated:
+      - :boolean
+  PollForActivityTask:
+    :input:
+      domain:
+      - :string
+      - :required
+      taskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      - :required
+      identity:
+      - :string
+    :output:
+    - startedEventId:
+      - :long
+  RecordActivityTaskHeartbeat:
+    :input:
+      taskToken:
+      - :string
+      - :required
+      details:
+      - :string
+    :output:
+    - cancelRequested:
+      - :boolean
+  RespondActivityTaskCompleted:
+    :input:
+      taskToken:
+      - :string
+      - :required
+      result:
+      - :string
+    :output: []
+  RespondActivityTaskCanceled:
+    :input:
+      taskToken:
+      - :string
+      - :required
+      details:
+      - :string
+    :output: []
+  RespondActivityTaskFailed:
+    :input:
+      taskToken:
+      - :string
+      - :required
+      reason:
+      - :string
+      details:
+      - :string
+    :output: []
+  PollForDecisionTask:
+    :input:
+      domain:
+      - :string
+      - :required
+      taskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      - :required
+      identity:
+      - :string
+      nextPageToken:
+      - :string
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - startedEventId:
+      - :long
+    - events:
+      - :list: member
+      - member:
+        - eventTimestamp:
+          - :timestamp
+        - eventId:
+          - :long
+        - workflowExecutionStartedEventAttributes:
+          - tagList:
+            - :list: member
+          - parentInitiatedEventId:
+            - :long
+        - workflowExecutionCompletedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - completeWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - failWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionCanceledEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - cancelWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionContinuedAsNewEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+          - tagList:
+            - :list: member
+        - continueAsNewWorkflowExecutionFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionCancelRequestedEventAttributes:
+          - externalInitiatedEventId:
+            - :long
+        - decisionTaskStartedEventAttributes:
+          - scheduledEventId:
+            - :long
+        - decisionTaskCompletedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - decisionTaskTimedOutEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskScheduledEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - activityTaskStartedEventAttributes:
+          - scheduledEventId:
+            - :long
+        - activityTaskCompletedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskFailedEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskTimedOutEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - activityTaskCanceledEventAttributes:
+          - scheduledEventId:
+            - :long
+          - startedEventId:
+            - :long
+          - latestCancelRequestedEventId:
+            - :long
+        - activityTaskCancelRequestedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - workflowExecutionSignaledEventAttributes:
+          - externalInitiatedEventId:
+            - :long
+        - markerRecordedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - timerStartedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - timerFiredEventAttributes:
+          - startedEventId:
+            - :long
+        - timerCanceledEventAttributes:
+          - startedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - startChildWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+          - tagList:
+            - :list: member
+        - childWorkflowExecutionStartedEventAttributes:
+          - initiatedEventId:
+            - :long
+        - childWorkflowExecutionCompletedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionTimedOutEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionCanceledEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - childWorkflowExecutionTerminatedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - startedEventId:
+            - :long
+        - signalExternalWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - externalWorkflowExecutionSignaledEventAttributes:
+          - initiatedEventId:
+            - :long
+        - signalExternalWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - externalWorkflowExecutionCancelRequestedEventAttributes:
+          - initiatedEventId:
+            - :long
+        - requestCancelExternalWorkflowExecutionInitiatedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - requestCancelExternalWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+        - scheduleActivityTaskFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - requestCancelActivityTaskFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - startTimerFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - cancelTimerFailedEventAttributes:
+          - decisionTaskCompletedEventId:
+            - :long
+        - startChildWorkflowExecutionFailedEventAttributes:
+          - initiatedEventId:
+            - :long
+          - decisionTaskCompletedEventId:
+            - :long
+    - previousStartedEventId:
+      - :long
+  RespondDecisionTaskCompleted:
+    :input:
+      taskToken:
+      - :string
+      - :required
+      decisions:
+      - :list:
+        - :structure:
+            decisionType:
+            - :string
+            - :required
+            scheduleActivityTaskDecisionAttributes:
+            - :structure:
+                activityType:
+                - :structure:
+                    name:
+                    - :string
+                    - :required
+                    version:
+                    - :string
+                    - :required
+                - :required
+                activityId:
+                - :string
+                - :required
+                control:
+                - :string
+                input:
+                - :string
+                scheduleToCloseTimeout:
+                - :string
+                taskList:
+                - :structure:
+                    name:
+                    - :string
+                    - :required
+                scheduleToStartTimeout:
+                - :string
+                startToCloseTimeout:
+                - :string
+                heartbeatTimeout:
+                - :string
+            requestCancelActivityTaskDecisionAttributes:
+            - :structure:
+                activityId:
+                - :string
+                - :required
+            completeWorkflowExecutionDecisionAttributes:
+            - :structure:
+                result:
+                - :string
+            failWorkflowExecutionDecisionAttributes:
+            - :structure:
+                reason:
+                - :string
+                details:
+                - :string
+            cancelWorkflowExecutionDecisionAttributes:
+            - :structure:
+                details:
+                - :string
+            continueAsNewWorkflowExecutionDecisionAttributes:
+            - :structure:
+                input:
+                - :string
+                executionStartToCloseTimeout:
+                - :string
+                taskList:
+                - :structure:
+                    name:
+                    - :string
+                    - :required
+                taskStartToCloseTimeout:
+                - :string
+                childPolicy:
+                - :string
+                tagList:
+                - :list:
+                  - :string
+                workflowTypeVersion:
+                - :string
+            recordMarkerDecisionAttributes:
+            - :structure:
+                markerName:
+                - :string
+                - :required
+                details:
+                - :string
+            startTimerDecisionAttributes:
+            - :structure:
+                timerId:
+                - :string
+                - :required
+                control:
+                - :string
+                startToFireTimeout:
+                - :string
+                - :required
+            cancelTimerDecisionAttributes:
+            - :structure:
+                timerId:
+                - :string
+                - :required
+            signalExternalWorkflowExecutionDecisionAttributes:
+            - :structure:
+                workflowId:
+                - :string
+                - :required
+                runId:
+                - :string
+                signalName:
+                - :string
+                - :required
+                input:
+                - :string
+                control:
+                - :string
+            requestCancelExternalWorkflowExecutionDecisionAttributes:
+            - :structure:
+                workflowId:
+                - :string
+                - :required
+                runId:
+                - :string
+                control:
+                - :string
+            startChildWorkflowExecutionDecisionAttributes:
+            - :structure:
+                workflowType:
+                - :structure:
+                    name:
+                    - :string
+                    - :required
+                    version:
+                    - :string
+                    - :required
+                - :required
+                workflowId:
+                - :string
+                - :required
+                control:
+                - :string
+                input:
+                - :string
+                executionStartToCloseTimeout:
+                - :string
+                taskList:
+                - :structure:
+                    name:
+                    - :string
+                    - :required
+                taskStartToCloseTimeout:
+                - :string
+                childPolicy:
+                - :string
+                tagList:
+                - :list:
+                  - :string
+      executionContext:
+      - :string
+    :output: []
+  RegisterDomain:
+    :input:
+      name:
+      - :string
+      - :required
+      description:
+      - :string
+      workflowExecutionRetentionPeriodInDays:
+      - :string
+      - :required
+    :output: []
+  DeprecateDomain:
+    :input:
+      name:
+      - :string
+      - :required
+    :output: []
+  ListDomains:
+    :input:
+      nextPageToken:
+      - :string
+      registrationStatus:
+      - :string
+      - :required
+      maximumPageSize:
+      - :integer
+      reverseOrder:
+      - :boolean
+    :output:
+    - domainInfos:
+      - :list: member
+  DescribeDomain:
+    :input:
+      name:
+      - :string
+      - :required
+    :output: []
+  CountPendingActivityTasks:
+    :input:
+      domain:
+      - :string
+      - :required
+      taskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      - :required
+    :output:
+    - count:
+      - :integer
+    - truncated:
+      - :boolean
+  CountPendingDecisionTasks:
+    :input:
+      domain:
+      - :string
+      - :required
+      taskList:
+      - :structure:
+          name:
+          - :string
+          - :required
+      - :required
+    :output:
+    - count:
+      - :integer
+    - truncated:
+      - :boolean
+:client_errors: {}
+:server_errors: {}

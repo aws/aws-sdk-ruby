@@ -14,7 +14,7 @@
 module AWS
   class IAM
 
-    # @private
+    # (see AWS::Core::Policy)
     class Policy < Core::Policy
 
       def to_h

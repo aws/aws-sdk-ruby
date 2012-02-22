@@ -14,13 +14,13 @@
 module AWS
   class EC2
 
-    # @private
     class Collection
 
       include Core::Model
       include Enumerable
       include FilteredCollection
 
+      # @param [String] id Returns the collection member with the given id.
       def [] id
         member_class.new(id.to_s, :config => config)
       end

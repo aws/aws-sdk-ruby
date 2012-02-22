@@ -152,6 +152,42 @@ module AWS::Core
 
     end
 
+    context '#credentials' do
+      
+      let(:config_class) do
+        Class.new(Configuration) do
+          add_option :access_key_id
+          add_option :secret_access_key
+          add_option :session_token
+        end
+      end
+      
+      it 'returns the credentails' do
+        config = config_class.new.with({
+          :access_key_id => 'abc',
+          :secret_access_key => 'xyz',
+        })
+        config.credentials.should == {
+          :access_key_id => 'abc',
+          :secret_access_key => 'xyz',
+        }
+      end
+      
+      it 'includes the session token when provided' do
+        config = config_class.new.with({
+          :access_key_id => 'abc',
+          :secret_access_key => 'xyz',
+          :session_token => 'mno',
+        })
+        config.credentials.should == {
+          :access_key_id => 'abc',
+          :secret_access_key => 'xyz',
+          :session_token => 'mno',
+        }
+      end
+
+    end
+
     context 'options with needs' do
     
       class DummyClass

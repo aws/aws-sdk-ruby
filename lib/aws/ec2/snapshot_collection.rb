@@ -42,7 +42,7 @@ module AWS
         super(options)
       end
 
-      # @yield [Instance] Yields each volume in the collection.
+      # @yield [Snapshot] Yields each snapshot in the collection.
       # @return [nil]
       def each(&block)
         opts = {}

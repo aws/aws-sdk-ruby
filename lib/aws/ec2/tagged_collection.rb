@@ -14,7 +14,12 @@
 module AWS
   class EC2
 
-    # @private
+    # Most of the AWS::EC2 collections include TaggedCollection.  This 
+    # module provides methods for filtering the collection with
+    # tags.
+    #
+    #   collecion.tagged('prod').each do {|obj| ... }
+    #
     module TaggedCollection
 
       # Filter the collection by one or more tag keys.  If you pass multiple

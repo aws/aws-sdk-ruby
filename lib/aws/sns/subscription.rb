@@ -119,10 +119,10 @@ module AWS
 
       # @return [Boolean] Returns true if the subscriptions have the same
       #   resource ARN.
-      def ==(other)
+      def eql? other
         other.kind_of?(Subscription) and other.arn == arn
       end
-      alias_method :eql?, :==
+      alias_method :==, :eql?
 
       protected
       def update_delivery_policy policy_json

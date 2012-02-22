@@ -14,7 +14,7 @@
 module AWS
   class SNS
 
-    # @see Core::Policy
+    # (see Core::Policy)
     class Policy < Core::Policy
 
       class Statement < Core::Policy::Statement
