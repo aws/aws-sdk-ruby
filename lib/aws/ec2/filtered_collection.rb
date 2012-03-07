@@ -47,11 +47,36 @@ module AWS
         client.send(client_method, options)
       end
 
+      protected
+      def vpc_id_option options
+        vpc_id = options[:vpc]
+        vpc_id ||= options[:vpc_id]
+        vpc_id ||= filter_value_for('vpc-id')
+        vpc_id = vpc_id.id if vpc_id.is_a?(VPC)
+        vpc_id
+      end
+
+      protected
+      def subnet_id_option options
+        subnet_id = options.delete(:subnet)
+        subnet_id ||= options[:subnet_id]
+        subnet_id ||= filter_value_for('subnet-id')
+        subnet_id = subnet_id.id if subnet_id.is_a?(Subnet)
+        subnet_id
+      end
+
+      protected
+      def filter_value_for filter_name
+        @filters.each do |filter|
+          return filter[:values].first if filter[:name] == filter_name
+        end
+        nil
+      end
+
       # @private
       protected
       def preserved_options
-        { :config => config,
-          :filters => @filters }
+        { :config => config, :filters => @filters }
       end
 
       # @private

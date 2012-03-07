@@ -38,15 +38,17 @@ module AWS
 
       include TaggedItem
 
-      def initialize id, options = {}
-        @id = id
+      def initialize security_group_id, options = {}
+        @security_group_id = security_group_id
         super
       end
 
-      # @return [String] The ID of the security group.
-      attr_reader :id
+      # @return [String]
+      attr_reader :security_group_id
 
-      alias_method :group_id, :id
+      alias_method :group_id, :security_group_id
+
+      alias_method :id, :security_group_id
 
       attribute :name, :as => :group_name, :static => true
 
@@ -78,6 +80,14 @@ module AWS
       #   false if this is an EC2 security group.
       def vpc?
         vpc_id ? true : false
+      end
+
+      # @return [VPC,nil] Returns the VPC this security group belongs to,
+      #   or nil if this is not a VPC security group.
+      def vpc
+        if vpc_id
+          VPC.new(vpc_id, :config => config)
+        end
       end
 
       # @return [SecurityGroup::IngressIpPermissionCollection] Returns a

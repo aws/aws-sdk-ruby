@@ -52,7 +52,7 @@ module AWS
       end
 
       protected
-      def get_resource attribute
+      def get_resource attribute = nil
         describe_call
       end
 
@@ -87,7 +87,11 @@ module AWS
       protected
       def update_resource attribute, value
         options = {}
-        options[attribute.set_as] = { :value => value }
+        if value.is_a?(Array)
+          options[attribute.set_as] = value
+        else
+          options[attribute.set_as] = { :value => value }
+        end
         options[:"#{inflected_name}_id"] = __resource_id__
         method_name = "modify_#{inflected_name}_attribute"
         client.send(method_name, options)

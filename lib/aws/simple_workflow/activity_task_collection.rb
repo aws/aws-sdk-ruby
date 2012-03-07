@@ -30,6 +30,10 @@ module AWS
 
       # Returns the number of tasks in the specified +task_list+.
       #
+      #   count = activity_tasks.count('task-list-name')
+      #   count.truncated? #=> false
+      #   count.to_i #=> 7
+      #
       # @note This operation is eventually consistent. The results are best 
       #   effort and may not exactly reflect recent updates and changes.
       #
@@ -54,7 +58,8 @@ module AWS
       # @option options [String] :identity (nil) Identity of the worker 
       #   making the request, which is recorded in the ActivityTaskStarted 
       #   event in the workflow history. This enables diagnostic tracing 
-      #   when problems arise. The form of this identity is user defined.
+      #   when problems arise. The :identity defaults to the hostname and 
+      #   pid (e.g. "hostname:pid").
       #
       # @yieldparam [ActivityTask] activity_task Yields if a task is
       #   available within 60 seconds.  
@@ -68,7 +73,7 @@ module AWS
         client_opts = {}
         client_opts[:domain] = domain.name
         client_opts[:task_list] = { :name => task_list }
-        client_opts[:identity] = options[:identity] if options[:identity]
+        client_opts[:identity] = identity_opt(options)
 
         response = client.poll_for_activity_task(client_opts)
 

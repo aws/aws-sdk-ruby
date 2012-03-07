@@ -53,8 +53,15 @@ module AWS
         status = response.http_response.status
         service = self.class.service_name
   
-        pattern = "[AWS %s %s %.06f] %s(%s)"
-        parts = [service, status, time.real, method_name, sanitize_options(options)]
+        pattern = "[AWS %s %s %.06f %d retries] %s(%s)"
+        parts = [
+          service, 
+          status, 
+          time.real, 
+          response.retry_count,
+          method_name, 
+          sanitize_options(options)]
+
         severity = :info
   
         if response.error

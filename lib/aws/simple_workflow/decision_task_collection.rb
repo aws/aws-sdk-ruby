@@ -24,7 +24,7 @@ module AWS
     # To get a count of decision tasks needing attention, call {#count}
     # with a task list name:
     #
-    #   domain.decision_tasks.count('my-task-list') #=> 7
+    #   domain.decision_tasks.count('my-task-list').to_i #=> 7
     #
     # == Getting a single decision task
     #
@@ -83,14 +83,19 @@ module AWS
 
       # Returns the number of decision tasks in the specified +task_list+. 
       #
+      #   count = decision_tasks.count('task-list-name')
+      #   count.truncated? #=> false
+      #   count.to_i #=> 7
+      #
       # @note This operation is eventually consistent. The results are best 
       #   effort and may not exactly reflect recent updates and changes.
       #
       # @param [String] task_list Name of the task list to count 
       #   decision tasks for.
       #
-      # @return [Integer] Returns the number of descision tasks for the 
-      #   given +task_list+.
+      # @return [Count] Returns a {Count} object that specifies the number
+      #   of decision tasks for the given task list.  This count will
+      #   also indiciate if the count was truncated.
       #
       def count task_list
         options = {}
@@ -133,7 +138,8 @@ module AWS
       # @option options [String] :identity The identity of the decider 
       #   requesting a decision task.  This will be recorded in the
       #   DecisionTaskStarted event in the workflow history. 
-      #   If +:identity+ is not passed, a random UUID will be generated.
+      #   If +:identity+ is not passed then the hostname and 
+      #   process id will be sent (e.g. "hostname:pid").
       #
       # @option options [Boolean] :reverse_event_order (false)  When true, 
       #   the history events on the decision task will enumerate in 
@@ -155,7 +161,7 @@ module AWS
 
         client_opts = {}
         client_opts[:domain] = domain.name
-        client_opts[:identity] = options[:identity] if options[:identity]
+        client_opts[:identity] = identity_opt(options)
         client_opts[:task_list] = { :name => task_list }
         client_opts[:maximum_page_size] = options[:event_batch_size] || 1000
         client_opts[:reverse_order] = options.key?(:reverse_event_order) ?

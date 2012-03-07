@@ -25,12 +25,12 @@ require 'aws/core/autoloader'
 # * {AWS::ELB}
 # * {AWS::IAM}
 # * {AWS::S3}
-# * {AWS::SimpleDB}
-# * {AWS::SimpleEmailService}
-# * {AWS::SimpleWorkflow}
 # * {AWS::SNS}
 # * {AWS::SQS}
 # * {AWS::STS}
+# * {AWS::SimpleDB}
+# * {AWS::SimpleEmailService}
+# * {AWS::SimpleWorkflow}
 #
 # = AWS::Record
 #
@@ -59,7 +59,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.3.5"
+  VERSION = "1.3.6"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'

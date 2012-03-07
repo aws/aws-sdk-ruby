@@ -27,6 +27,7 @@ module AWS
     #
     # @example Deleting the login profile for a user
     #   user.login_profile.delete
+    #
     class LoginProfile < Resource
 
       # @private
@@ -67,8 +68,11 @@ module AWS
       #   about making keys inactive or deleting them, see
       #   {User#access_keys}.
       #
+      # @return [nil]
+      #
       def delete
         client.delete_login_profile(resource_options)
+        nil
       end
 
       # @return [Boolean] True if a login profile exists for the user.

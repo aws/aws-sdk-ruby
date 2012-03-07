@@ -14,7 +14,6 @@
 module AWS
   module Core
 
-    # @private
     module ServiceInterface
 
       def self.included base
@@ -40,9 +39,11 @@ module AWS
       # @see AWS::Cofiguration
       #
       # @param [Hash] options
+      #
       # @option options [Configuration] :config An AWS::Configuration
       #   object to initialize this service interface object with.  Defaults
       #   to AWS.config when not provided.
+      #
       def initialize options = {}
         @config = options[:config]
         @config ||= AWS.config
@@ -50,7 +51,7 @@ module AWS
         @client = config.send(Inflection.ruby_name(self.class.to_s) + '_client')
       end
 
-      # @private
+      # @return [String]
       def inspect
         "<#{self.class}>"
       end

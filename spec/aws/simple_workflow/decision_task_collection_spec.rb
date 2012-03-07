@@ -62,6 +62,7 @@ module AWS
           :task_list => { :name => task_list },
           :maximum_page_size => 1000,
           :reverse_order => false,
+          :identity => "#{Socket.gethostname}:#{Process.pid}",
         }}
 
         before(:each) do
@@ -116,6 +117,18 @@ module AWS
               and_return(response)
 
             tasks.poll_for_single_task(task_list, :identity => 'abc')
+
+          end
+
+          it 'defaults to the hostname and pid' do
+            
+            ident = "#{Socket.gethostname}:#{Process.pid}"
+
+            client.should_receive(method).
+              with(request_opts.merge(:identity => ident)).
+              and_return(response)
+
+            tasks.poll_for_single_task(task_list)
 
           end
 

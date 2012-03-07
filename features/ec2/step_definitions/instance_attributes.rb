@@ -57,12 +57,10 @@ Then /^the instance type should eventually be "([^\"]*)"$/ do |type|
 end
 
 When /^I ask if source\/destination checking is enabled$/ do
-  pending # VPC
   @result = @instance.source_dest_check?
 end
 
 When /^I disable source\/destination checking$/ do
-  pending # VPC
   @instance.source_dest_check = false
 end
 

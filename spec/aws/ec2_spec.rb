@@ -81,6 +81,46 @@ module AWS
       it_should_behave_like 'ec2 top level collection', :volumes, EC2::VolumeCollection
     end
 
+    context '#vpcs' do
+      it_should_behave_like 'ec2 top level collection', :vpcs, EC2::VPCCollection
+    end
+
+    context '#subnets' do
+      it_should_behave_like 'ec2 top level collection', :subnets, EC2::SubnetCollection
+    end
+
+    context '#network_acls' do
+      it_should_behave_like 'ec2 top level collection', :network_acls, EC2::NetworkACLCollection
+    end
+
+    context '#route_tables' do
+      it_should_behave_like 'ec2 top level collection', :route_tables, EC2::RouteTableCollection
+    end
+
+    context '#network_interfaces' do
+      it_should_behave_like 'ec2 top level collection', :network_interfaces, EC2::NetworkInterfaceCollection
+    end
+
+    context '#internet_gateways' do
+      it_should_behave_like 'ec2 top level collection', :internet_gateways, EC2::InternetGatewayCollection
+    end
+
+    context '#customer_gateways' do
+      it_should_behave_like 'ec2 top level collection', :customer_gateways, EC2::CustomerGatewayCollection
+    end
+
+    context '#vpn_gateways' do
+      it_should_behave_like 'ec2 top level collection', :vpn_gateways, EC2::VPNGatewayCollection
+    end
+
+    context '#dhcp_options' do
+      it_should_behave_like 'ec2 top level collection', :dhcp_options, EC2::DHCPOptionsCollection
+    end
+
+    context '#vpn_connections' do
+      it_should_behave_like 'ec2 top level collection', :vpn_connections, EC2::VPNConnectionCollection
+    end
+
   end
 
 end

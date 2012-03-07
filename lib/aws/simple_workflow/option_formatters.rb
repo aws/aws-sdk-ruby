@@ -11,11 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'socket'
+
 module AWS
   class SimpleWorkflow
     
     # @private
     module OptionFormatters
+
+      protected
+      def identity_opt options
+        options[:identity] || "#{Socket.gethostname}:#{Process.pid}"
+      end
       
       protected
       def upcase_opts options, *opt_names

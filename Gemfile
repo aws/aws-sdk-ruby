@@ -18,9 +18,11 @@ gem 'httparty', '~> 0.7'
 gem 'nokogiri', '>= 1.4.4'
 gem 'json', '~> 1.4.6'
 
-gem 'jruby-openssl', :platforms => :jruby
-gem 'ruby-debug', :platforms => [:jruby, :mri_18]
-gem 'ruby-prof', :platforms => [:mri_18]
+group :debug do
+  gem 'ruby-debug', :platforms => :ruby_18
+  gem 'ruby-debug19', :platforms => :ruby_19
+  gem 'ruby-prof', :platforms => [:mri_18]
+end
 
 group :autotest do
   gem 'ZenTest', '~> 4.4'

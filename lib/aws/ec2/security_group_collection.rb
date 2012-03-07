@@ -26,11 +26,13 @@ module AWS
       #   of this security group.  Accepts alphanumeric characters, spaces,
       #   dashes, and underscores. If left blank the description will be set
       #   to the name.
-      # @option options [String] :vpc_id (nil) The ID of a VPC to create
-      #   a security group in.  If this option is left blank then an 
-      #   EC2 security group is created.  If this option is provided a VPC
-      #   security group will be created.
+      #
+      # @option options [VPC,String] :vpc (nil) A VPC or VPC id string to 
+      #   create the security group in.  When specified a VPC security
+      #   group is created.
+      #
       # @return [SecurityGroup]
+      #
       def create name, options = {}
 
         description = options[:description] || name
@@ -38,14 +40,20 @@ module AWS
         create_opts = {}
         create_opts[:group_name] = name
         create_opts[:description] = description
-        create_opts[:vpc_id] = options[:vpc_id] if options[:vpc_id]
+
+        vpc_id = options[:vpc]
+        vpc_id ||= options[:vpc_id] # for backwards compatability
+        vpc_id ||= filter_value_for('vpc-id')
+        vpc_id = vpc_id.id if vpc_id.is_a?(VPC)
+
+        create_opts[:vpc_id] = vpc_id if vpc_id
 
         response = client.create_security_group(create_opts)
 
         SecurityGroup.new(response.group_id, {
           :name => name,
           :description => description,
-          :vpc_id => options[:vpc_id],
+          :vpc_id => create_opts[:vpc_id],
           :config => config })
 
       end
@@ -53,7 +61,7 @@ module AWS
       # @param [String] group_id The group id of a security group.
       # @return [SecurityGroup] The group with the given id.
       def [] group_id
-        super
+        SecurityGroup.new(group_id, :config => config)
       end
 
       # Specify one or more criteria to filter security groups by.
@@ -120,11 +128,6 @@ module AWS
 
         end
         nil
-      end
-
-      protected
-      def member_class
-        SecurityGroup
       end
 
     end

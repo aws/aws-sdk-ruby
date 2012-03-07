@@ -66,7 +66,17 @@ module AWS
         :volumes,
         :snapshots,
         :reserved_instances,
-        :reserved_instances_offerings
+        :reserved_instances_offerings,
+        :vpcs,
+        :subnets,
+        :network_acls,
+        :route_tables,
+        :network_interfaces,
+        :internet_gateways,
+        :customer_gateways,
+        :vpn_gateways,
+        :dhcp_options,
+        :vpn_connections,
       ]
 
       PROXIED_METHODS.each do |method|

@@ -21,6 +21,15 @@ Given /^I create a security group named "([^\"]*)"$/ do |name|
   @created_security_groups << @security_group
 end
 
+Given /^I create (\d+) vpc security groups$/ do |count|
+  @security_groups = []
+  count.to_i.times do |n|
+    name = "integ-test-#{Time.now.to_i}-#{n}"
+    @security_groups << @vpc.security_groups.create(name)
+  end
+  @created_security_groups += @security_groups
+end
+
 Then /^I delete the security group$/ do
   @security_group.delete
 end

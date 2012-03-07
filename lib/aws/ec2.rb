@@ -240,6 +240,10 @@ module AWS
       autoload :Client, 'client'
       autoload :Collection, 'collection'
       autoload :ConfigTransform, 'config_transform'
+      autoload :CustomerGateway, 'customer_gateway'
+      autoload :CustomerGatewayCollection, 'customer_gateway_collection'
+      autoload :DHCPOptions, 'dhcp_options'
+      autoload :DHCPOptionsCollection, 'dhcp_options_collection'
       autoload :ElasticIp, 'elastic_ip'
       autoload :ElasticIpCollection, 'elastic_ip_collection'
       autoload :Errors, 'errors'
@@ -249,8 +253,14 @@ module AWS
       autoload :ImageCollection, 'image_collection'
       autoload :Instance, 'instance'
       autoload :InstanceCollection, 'instance_collection'
+      autoload :InternetGateway, 'internet_gateway'
+      autoload :InternetGatewayCollection, 'internet_gateway_collection'
       autoload :KeyPair, 'key_pair'
       autoload :KeyPairCollection, 'key_pair_collection'
+      autoload :NetworkACL, 'network_acl'
+      autoload :NetworkACLCollection, 'network_acl_collection'
+      autoload :NetworkInterface, 'network_interface'
+      autoload :NetworkInterfaceCollection, 'network_interface_collection'
       autoload :PermissionCollection, 'permission_collection'
       autoload :Region, 'region'
       autoload :RegionCollection, 'region_collection'
@@ -263,16 +273,26 @@ module AWS
       autoload :Resource, 'resource'
       autoload :ResourceObject, 'tag_collection'
       autoload :ResourceTagCollection, 'resource_tag_collection'
+      autoload :RouteTable, 'route_table'
+      autoload :RouteTableCollection, 'route_table_collection'
       autoload :SecurityGroup, 'security_group'
       autoload :SecurityGroupCollection, 'security_group_collection'
       autoload :Snapshot, 'snapshot'
       autoload :SnapshotCollection, 'snapshot_collection'
+      autoload :Subnet, 'subnet'
+      autoload :SubnetCollection, 'subnet_collection'
       autoload :Tag, 'tag'
       autoload :TagCollection, 'tag_collection'
       autoload :TaggedCollection, 'tagged_collection'
       autoload :TaggedItem, 'tagged_item'
       autoload :Volume, 'volume'
       autoload :VolumeCollection, 'volume_collection'
+      autoload :VPC, 'vpc'
+      autoload :VPCCollection, 'vpc_collection'
+      autoload :VPNConnection, 'vpn_connection'
+      autoload :VPNConnectionCollection, 'vpn_connection_collection'
+      autoload :VPNGateway, 'vpn_gateway'
+      autoload :VPNGatewayCollection, 'vpn_gateway_collection'
     end
 
     include Core::ServiceInterface
@@ -347,6 +367,65 @@ module AWS
       SnapshotCollection.new(:config => config)
     end
 
-  end
+    # @return [VPCCollection] A collection representing 
+    #   all VPCs in your account.
+    def vpcs
+      VPCCollection.new(:config => config)
+    end
 
+    # @return [SubnetCollection] Returns a collection that represents all
+    #   of the subnets associated with this account (across all VPCs).
+    def subnets
+      SubnetCollection.new(:config => config)
+    end
+
+    # @return [NetworkACLCollection] Returns a collection that represents
+    #   all of the network ACLs for this account.
+    def network_acls
+      NetworkACLCollection.new(:config => config)
+    end
+
+    # @return [RouteTableCollection] Returns a collection that represents
+    #   all of the route tables for this account.
+    def route_tables
+      RouteTableCollection.new(:config => config)
+    end
+
+    # @return [NetworkInterfaceCollection] Returns a collection that
+    #   represents all of the network interfaces for this account.
+    def network_interfaces
+      NetworkInterfaceCollection.new(:config => config)
+    end
+
+    # @return [InternetGatewayCollection] Returns a collection that
+    #   represents all of the internet gateways for this account.
+    def internet_gateways
+      InternetGatewayCollection.new(:config => config)
+    end
+
+    # @return [CustomerGatewayCollection] Returns a collection that
+    #   represents all of the customer gateways for this account.
+    def customer_gateways
+      CustomerGatewayCollection.new(:config => config)
+    end
+
+    # @return [VPNGatewayCollection] Returns a collection that
+    #   represents all of the vpn gateways for this account.
+    def vpn_gateways
+      VPNGatewayCollection.new(:config => config)
+    end
+
+    # @return [DHCPOptionsCollection] Returns a collection that
+    #   represents all of the dhcp options for this account.
+    def dhcp_options
+      DHCPOptionsCollection.new(:config => config)
+    end
+
+    # @return [VPNConnections] Returns a collection that
+    #   represents all of vpn connections for this account.
+    def vpn_connections
+      VPNConnectionCollection.new(:config => config)
+    end
+
+  end
 end

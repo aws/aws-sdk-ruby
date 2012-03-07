@@ -169,8 +169,8 @@ module AWS
       #   Determines whether the instance stops or terminates on
       #   instance-initiated shutdown.
       #
-      # @option options [String] :subnet (nil) The ID of an EC2 VPC 
-      #   subnet to launch the instance in.
+      # @option options [Subnet,String] :subnet (nil) The VPC Subnet (or 
+      #   subnet id string) to launch the instance in.
       #
       # @option options [String] :private_ip_address (nil) If you're using VPC,
       #   you can optionally use this option to assign the instance a 
@@ -236,7 +236,9 @@ module AWS
 
         options[:placement] = placement unless placement.empty?
 
-        options[:subnet_id] = options.delete(:subnet) if options[:subnet]
+        if subnet_id = subnet_id_option(options)
+          options[:subnet_id] = subnet_id
+        end
 
         security_group_opts(options)
 

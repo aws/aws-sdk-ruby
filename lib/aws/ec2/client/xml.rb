@@ -27,6 +27,57 @@ module AWS
 
         define_configured_grammars
 
+        CustomizedDescribeNetworkInterfaces = DescribeNetworkInterfaces.customize do
+          element "networkInterfaceSet" do
+            rename "set"
+            element "item" do
+              element "groupSet" do
+                element "item" do
+                  rename :groups
+                end
+              end
+            end
+          end
+        end
+
+        CustomizedDescribeCustomerGateways = DescribeCustomerGateways.customize do
+          element "customerGatewaySet" do
+            element "item" do
+              element "type" do
+                rename :vpn_type
+              end
+            end
+          end
+        end
+
+        CustomizedDescribeVpnConnections = DescribeVpnConnections.customize do
+          element "vpnConnectionSet" do
+            element "item" do
+              element "type" do
+                rename :vpn_type
+              end
+            end
+          end
+        end
+
+        CustomizedCreateVpnGateway = CreateVpnGateway.customize do
+          element "vpnGateway" do
+            element "type" do
+              rename :vpn_type
+            end
+          end
+        end
+
+        CustomizedDescribeVpnGateways = DescribeVpnGateways.customize do
+          element "vpnGatewaySet" do
+            element "item" do
+              element "type" do
+                rename :vpn_type
+              end
+            end
+          end
+        end
+
         CustomizedDescribeSecurityGroups = DescribeSecurityGroups.customize do
           element "securityGroupInfo" do
             element "item" do
@@ -119,7 +170,6 @@ module AWS
         end
 
       end
-
     end
   end
 end

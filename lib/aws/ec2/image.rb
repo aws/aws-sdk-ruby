@@ -128,6 +128,7 @@ module AWS
       attribute :hypervisor, :to_sym => true, :static => true
 
       attribute :block_device_mapping
+
       protected :block_device_mapping
 
       attribute :product_codes, :static => true do
@@ -231,12 +232,14 @@ module AWS
       #   image.add_product_codes ['ABCXYZ', 'MNOPQR']
       #
       # @param [Array<String>] product_codes 
+      #
       # @return [nil]
+      #
       def add_product_codes *product_codes
-        opts = {}
-        opts[:image_id] = self.id
-        opts[:product_codes] = product_codes.flatten
-        client.modify_image_attribute(opts)
+        client_opts = {}
+        client_opts[:image_id] = self.id
+        client_opts[:product_codes] = product_codes.flatten
+        client.modify_image_attribute(client_opts)
         nil
       end
 

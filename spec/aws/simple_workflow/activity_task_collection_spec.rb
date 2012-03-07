@@ -75,10 +75,10 @@ module AWS
         end
 
         it 'calls poll_for_activity_task on the client' do
-          client.should_receive(:poll_for_activity_task).with(
+          client.should_receive(:poll_for_activity_task).with(hash_including(
             :domain => domain.name,
             :task_list => { :name => 'task-list' }
-          ).and_return(response)
+          )).and_return(response)
           tasks.poll_for_single_task('task-list')
         end
 
@@ -89,6 +89,19 @@ module AWS
             :identity => 'abc'
           ).and_return(response)
           tasks.poll_for_single_task('task-list', :identity => 'abc')
+        end
+
+        it 'defaults the identit to the hostname and pid' do
+
+          ident = "#{Socket.gethostname}:#{Process.pid}"
+
+          client.should_receive(:poll_for_activity_task).with(
+            :domain => domain.name,
+            :task_list => { :name => 'task-list' },
+            :identity => ident
+          ).and_return(response)
+
+          tasks.poll_for_single_task('task-list')
         end
 
         context 'with block' do

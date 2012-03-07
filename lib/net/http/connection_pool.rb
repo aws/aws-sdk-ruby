@@ -117,24 +117,37 @@ class Net::HTTP::ConnectionPool
   end
 
   def request connection, *request_args, &block
+
     session = nil
     response = nil
     retried = false
+
     begin
+
       session = session_for(connection)
       session.http_session.read_timeout = connection.read_timeout
       response = session.request(*request_args, &block)
-    rescue *SOCKET_ERRORS => error
-      # retry socket errors once
-      unless retried
+
+    rescue Exception => error
+
+      # close the http session to prevent the connection from being
+      # left open and risk the other side sending data
+      session.finish if session
+
+      # retry socket errors once on a new session
+      if SOCKET_ERRORS.include?(error.class) and !retried
         retried = true
         retry
       end
+
       raise error
+
     else
       @pool_mutex.synchronize { @pool << session }
     end
+
     response
+
   end
 
   # Returns the number of sessions currently in the pool, not counting those
@@ -143,12 +156,13 @@ class Net::HTTP::ConnectionPool
     @pool_mutex.synchronize { @pool.size }  
   end
 
-  # Removes http sessions from the pool that have passed the idle timeout
+  # Removes stale http sessions from the pool (that have exceeded 
+  # the idle timeout).
   def clean!
     @pool_mutex.synchronize { _clean }
   end
 
-  # Finishes and removes removes all sessions from the pool.  
+  # Closes and removes removes all sessions from the pool.  
   # If empty! is called while there are outstanding requests they may
   # get checked back into the pool, leaving the pool in a non-empty state.
   def empty!

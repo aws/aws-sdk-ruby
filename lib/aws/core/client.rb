@@ -234,6 +234,7 @@ module AWS
       private
       def rebuild_http_request response
         response.rebuild_request
+        response.retry_count += 1
       end
   
       private

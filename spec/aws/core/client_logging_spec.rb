@@ -39,6 +39,7 @@ module AWS::Core
         response = double("response",
                           :error => nil,
                           :cached => false,
+                          :retry_count => 0,
                           :http_request => http_request,
                           :http_response => http_response)
         response.extend(Module.new do

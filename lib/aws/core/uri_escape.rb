@@ -24,8 +24,7 @@ module AWS
       # @private
       protected
       def escape value
-        value = value.encode("UTF-8") if
-          value.respond_to?(:encode)
+        value = value.encode("UTF-8") if value.respond_to?(:encode)
         CGI::escape(value.to_s).gsub('+', '%20')
       end
 

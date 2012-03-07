@@ -15,7 +15,36 @@
 @ec2 @vpc
 Feature: EC2 VPC
 
-  A limited set of features required to work with EC2 VPCs.
+  Scenario: Creating a VPC
+    When I create a vpc with the cidr block "10.0.0.0/16"
+    And a request should have been made like:
+    | TYPE   | NAME      | VALUE       |
+    | param  | Action    | CreateVpc   |
+    | param  | CidrBlock | 10.0.0.0/16 |
+
+  Scenario: Getting VPC attributes
+    Given I create a vpc with the cidr block "10.0.0.0/16"
+    When I get the vpc by its id
+    Then the vpcs should have the same attributes
+    And a request should have been made like:
+    | TYPE   | NAME     | VALUE        |
+    | param  | Action   | DescribeVpcs |
+
+  @delete
+  Scenario: Deleting a VPC
+    Given I create a vpc
+    When I delete the VPC
+    And a request should have been made like:
+    | TYPE   | NAME      | VALUE     |
+    | param  | Action    | DeleteVpc |
+
+  Scenario: Listing VPCs
+    Given I create 4 vpcs
+    When I enumerate vpcs
+    Then The vpcs should be included
+    And a request should have been made like:
+    | TYPE   | NAME      | VALUE        |
+    | param  | Action    | DescribeVpcs |
 
   @instances
   Scenario: Run an Amazon EC2 instance in a VPC subnet
@@ -45,7 +74,10 @@ Feature: EC2 VPC
     | param | IpPermissions.1.IpProtocol        | tcp                          |
     | param | IpPermissions.1.FromPort          | 80                           |
     | param | IpPermissions.1.ToPort            | 80                           |
-    When I revoke the returned ip permission
+    When I revoke egress authorization from "10.0.0.0/0":
+    | OPTION   | VALUE |
+    | protocol | tcp   |
+    | ports    | 80    |
     Then a request should have been made like:
     | TYPE  | NAME                              | VALUE                     |
     | param | Action                            | RevokeSecurityGroupEgress |

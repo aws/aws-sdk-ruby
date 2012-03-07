@@ -154,18 +154,22 @@ Feature: Instance attributes
 
   @get @vpc
   Scenario: Check if Source/Destination checking is enabled
-    Given I request to run an instance with the following parameters:
-    | parameter               | value        |
-    | image_id                | ami-8c1fece5 |
+    Given I create a vpc
+    And I create a subnet
+    When I request to run an vpc instance with the following parameters:
+    | parameter | value        |
+    | image_id  | ami-8c1fece5 |
     And I wait for the instance to exist
     When I ask if source/destination checking is enabled
     Then the result should be true
 
   @set @vpc
   Scenario: Disable Source/Destination checking
-    Given I request to run an instance with the following parameters:
-    | parameter               | value        |
-    | image_id                | ami-8c1fece5 |
+    Given I create a vpc
+    And I create a subnet
+    When I request to run an vpc instance with the following parameters:
+    | parameter | value        |
+    | image_id  | ami-8c1fece5 |
     And I wait for the instance to exist
     When I disable source/destination checking
     Then the instance should eventually have source/destination checking disabled

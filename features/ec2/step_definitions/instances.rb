@@ -27,13 +27,11 @@ When /^I request to run an instance with the following parameters:$/ do |table|
     opts[:security_groups] = [opts[:security_groups]]
   end
 
-  if @run_in_vpc
-    opts[:subnet_id] = @subnet_id
-  end
+  opts[:subnet] = @subnet if @run_in_vpc
 
   @instance = @result = @ec2.instances.create(opts)
 
-  @started_instances << @instance.id
+  @started_instances << @instance
 
   sleep 0.1
 end
@@ -45,20 +43,20 @@ When /^I request to run between (\d+) and (\d+) instances with the following par
   end
   @instances = @result =
     @ec2.instances.create(opts.merge(:count => (min.to_i)..(max.to_i)))
-  @started_instances += @instances.map { |i| i.id }
+  @started_instances += @instances
 end
 
 When /^I request to run an instance of "([^\"]*)" with the following block device mappings:$/ do |ami_id, string|
   mappings = eval(string)
   @instance = @result = @ec2.instances.create(:image_id => ami_id,
                                               :block_device_mappings => mappings)
-  @started_instances << @instance.id
+  @started_instances << @instance
 end
 
 Given /^I request to run an instance of "([^\"]*)" using the key pair$/ do |image_id|
   @instance = @result = @ec2.instances.create(:image_id => image_id,
                                               :key_pair => @key_pair)
-  @started_instances << @instance.id
+  @started_instances << @instance
 end
 
 Then /^The result should be an instance object$/ do

@@ -98,16 +98,19 @@ module AWS
   # * request_cancel_external_workflow_execution workflow_execution, options = {}
   # * start_child_workflow_execution workflow_type, options = {}
   #
+  # This sample gets a decision task and responds based on the events
+  # by scheduling an activity task or completing the workflow execution.
+  #
   #   # poll for decision tasks from 'my-task-list'
-  #   domain.decision_tasks.poll('my-task-list') do |decision_task|
+  #   domain.decision_tasks.poll('my-task-list') do |task|
   #
   #     # invesitate new events and make decisions
-  #     decision_task.new_events.each do |event|
+  #     task.new_events.each do |event|
   #       case event.event_type
   #       when 'WorkflowExecutionStarted'
   #         task.schedule_activity_task 'do-something', :input => 'abc xyz'
   #       when 'ActivityTaskCompleted'
-  #         task.comlete_workflow_execution :results => event.attributes.result
+  #         task.complete_workflow_execution :result => event.attributes.result
   #       end
   #     end
   #

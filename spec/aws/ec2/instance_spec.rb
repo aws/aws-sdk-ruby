@@ -853,29 +853,6 @@ module AWS
 
       end
 
-      context '#source_dest_check?' do
-
-        let(:attribute) { :source_dest_check? }
-        let(:response_field) { :source_dest_check }
-        let(:response_value) { true }
-        let(:translated_value) { true }
-        let(:request_attribute_name) { "sourceDestCheck" }
-
-        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
-
-      end
-
-      context '#source_dest_check=' do
-
-        let(:attribute_setter) { :source_dest_check= }
-        let(:attribute) { :source_dest_check }
-        let(:value_to_send) { true }
-        let(:input_value) { true }
-
-        it_should_behave_like "ec2 instance attribute mutator"
-
-      end
-
       context '#instance_initiated_shutdown_behavior' do
 
         let(:attribute) { :instance_initiated_shutdown_behavior }

@@ -1,0 +1,2791 @@
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:operations:
+  AllocateAddress:
+    :input:
+      Domain:
+      - :string
+    :output: []
+  AssociateAddress:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      PublicIp:
+      - :string
+      - :required
+      AllocationId:
+      - :string
+      NetworkInterfaceId:
+      - :string
+    :output: []
+  AssociateDhcpOptions:
+    :input:
+      DhcpOptionsId:
+      - :string
+      - :required
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  AttachVolume:
+    :input:
+      VolumeId:
+      - :string
+      - :required
+      InstanceId:
+      - :string
+      - :required
+      Device:
+      - :string
+      - :required
+    :output:
+    - attachTime:
+      - :timestamp
+    - deleteOnTermination:
+      - :boolean
+  AttachVpnGateway:
+    :input:
+      VpnGatewayId:
+      - :string
+      - :required
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  AuthorizeSecurityGroupIngress:
+    :input:
+      GroupName:
+      - :string
+      GroupId:
+      - :string
+      SourceSecurityGroupName:
+      - :string
+      SourceSecurityGroupOwnerId:
+      - :string
+      IpProtocol:
+      - :string
+      FromPort:
+      - :integer
+      ToPort:
+      - :integer
+      CidrIp:
+      - :string
+      IpPermissions:
+      - :list:
+        - :structure:
+            IpProtocol:
+            - :string
+            - :rename: IpProtocol
+            FromPort:
+            - :integer
+            - :rename: FromPort
+            ToPort:
+            - :integer
+            - :rename: ToPort
+            Groups:
+            - :list:
+              - :structure:
+                  UserId:
+                  - :string
+                  - :rename: UserId
+                  GroupName:
+                  - :string
+                  - :rename: GroupName
+                  GroupId:
+                  - :string
+                  - :rename: GroupId
+            - :rename: UserIdGroupPairs
+            IpRanges:
+            - :list:
+              - :structure:
+                  CidrIp:
+                  - :string
+                  - :rename: CidrIp
+            - :rename: IpRanges
+    :output: []
+  BundleInstance:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      Storage:
+      - :structure:
+          S3:
+          - :structure:
+              Bucket:
+              - :string
+              - :rename: Bucket
+              Prefix:
+              - :string
+              - :rename: Prefix
+              AWSAccessKeyId:
+              - :string
+              UploadPolicy:
+              - :string
+              - :rename: UploadPolicy
+              UploadPolicySignature:
+              - :string
+              - :rename: UploadPolicySignature
+      - :required
+    :output:
+    - bundleInstanceTask:
+      - startTime:
+        - :timestamp
+      - updateTime:
+        - :timestamp
+  CancelBundleTask:
+    :input:
+      BundleId:
+      - :string
+      - :required
+    :output:
+    - bundleInstanceTask:
+      - startTime:
+        - :timestamp
+      - updateTime:
+        - :timestamp
+  ConfirmProductInstance:
+    :input:
+      ProductCode:
+      - :string
+      - :required
+      InstanceId:
+      - :string
+      - :required
+    :output: []
+  CreateCustomerGateway:
+    :input:
+      Type:
+      - :string
+      - :required
+      IpAddress:
+      - :string
+      - :required
+      - :rename: PublicIp
+      BgpAsn:
+      - :integer
+      - :required
+    :output:
+    - customerGateway:
+      - tagSet:
+        - :list: item
+  CreateDhcpOptions:
+    :input:
+      DhcpConfiguration:
+      - :list:
+        - :structure:
+            Key:
+            - :string
+            - :rename: Key
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :required
+      - :rename: DhcpConfigurations
+    :output:
+    - dhcpOptions:
+      - dhcpConfigurationSet:
+        - :list: item
+        - item:
+          - valueSet:
+            - :list: item
+      - tagSet:
+        - :list: item
+  CreateKeyPair:
+    :input:
+      KeyName:
+      - :string
+      - :required
+    :output: []
+  CreateSecurityGroup:
+    :input:
+      GroupName:
+      - :string
+      - :required
+      GroupDescription:
+      - :string
+      - :required
+      - :rename: Description
+      VpcId:
+      - :string
+    :output: []
+  CreateSnapshot:
+    :input:
+      VolumeId:
+      - :string
+      - :required
+      Description:
+      - :string
+    :output:
+    - startTime:
+      - :timestamp
+    - volumeSize:
+      - :integer
+    - tagSet:
+      - :list: item
+  CreateSubnet:
+    :input:
+      VpcId:
+      - :string
+      - :required
+      CidrBlock:
+      - :string
+      - :required
+      AvailabilityZone:
+      - :string
+    :output:
+    - subnet:
+      - availableIpAddressCount:
+        - :integer
+      - tagSet:
+        - :list: item
+  CreateVolume:
+    :input:
+      Size:
+      - :integer
+      SnapshotId:
+      - :string
+      AvailabilityZone:
+      - :string
+      - :required
+    :output:
+    - size:
+      - :integer
+    - createTime:
+      - :timestamp
+    - attachmentSet:
+      - :list: item
+      - item:
+        - attachTime:
+          - :timestamp
+        - deleteOnTermination:
+          - :boolean
+    - tagSet:
+      - :list: item
+  CreateVpc:
+    :input:
+      CidrBlock:
+      - :string
+      - :required
+      InstanceTenancy:
+      - :string
+    :output:
+    - vpc:
+      - tagSet:
+        - :list: item
+  CreateVpnConnection:
+    :input:
+      Type:
+      - :string
+      - :required
+      CustomerGatewayId:
+      - :string
+      - :required
+      VpnGatewayId:
+      - :string
+      - :required
+    :output:
+    - vpnConnection:
+      - tagSet:
+        - :list: item
+      - vgwTelemetry:
+        - :list: item
+        - item:
+          - lastStatusChange:
+            - :timestamp
+          - acceptedRouteCount:
+            - :integer
+  CreateVpnGateway:
+    :input:
+      Type:
+      - :string
+      - :required
+      AvailabilityZone:
+      - :string
+    :output:
+    - vpnGateway:
+      - attachments:
+        - :list: item
+      - tagSet:
+        - :list: item
+  DeleteCustomerGateway:
+    :input:
+      CustomerGatewayId:
+      - :string
+      - :required
+    :output: []
+  DeleteDhcpOptions:
+    :input:
+      DhcpOptionsId:
+      - :string
+      - :required
+    :output: []
+  DeleteKeyPair:
+    :input:
+      KeyName:
+      - :string
+      - :required
+    :output: []
+  DeleteSecurityGroup:
+    :input:
+      GroupName:
+      - :string
+      GroupId:
+      - :string
+    :output: []
+  DeleteSnapshot:
+    :input:
+      SnapshotId:
+      - :string
+      - :required
+    :output: []
+  DeleteSubnet:
+    :input:
+      SubnetId:
+      - :string
+      - :required
+    :output: []
+  DeleteVolume:
+    :input:
+      VolumeId:
+      - :string
+      - :required
+    :output: []
+  DeleteVpc:
+    :input:
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  DeleteVpnConnection:
+    :input:
+      VpnConnectionId:
+      - :string
+      - :required
+    :output: []
+  DeleteVpnGateway:
+    :input:
+      VpnGatewayId:
+      - :string
+      - :required
+    :output: []
+  DeregisterImage:
+    :input:
+      ImageId:
+      - :string
+      - :required
+    :output: []
+  DescribeAddresses:
+    :input:
+      PublicIp:
+      - :list:
+        - :string
+      - :rename: PublicIps
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      AllocationId:
+      - :list:
+        - :string
+      - :rename: allocationIds
+    :output:
+    - addressesSet:
+      - :list: item
+  DescribeAvailabilityZones:
+    :input:
+      ZoneName:
+      - :list:
+        - :string
+      - :rename: ZoneNames
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - availabilityZoneInfo:
+      - :list: item
+      - item:
+        - messageSet:
+          - :list: item
+  DescribeBundleTasks:
+    :input:
+      BundleId:
+      - :list:
+        - :string
+      - :rename: BundleIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - bundleInstanceTasksSet:
+      - :list: item
+      - item:
+        - startTime:
+          - :timestamp
+        - updateTime:
+          - :timestamp
+  DescribeCustomerGateways:
+    :input:
+      CustomerGatewayId:
+      - :list:
+        - :string
+      - :rename: CustomerGatewayIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: Filters
+    :output:
+    - customerGatewaySet:
+      - :list: item
+      - item:
+        - tagSet:
+          - :list: item
+  DescribeDhcpOptions:
+    :input:
+      DhcpOptionsId:
+      - :list:
+        - :string
+      - :rename: DhcpOptionsIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - dhcpOptionsSet:
+      - :list: item
+      - item:
+        - dhcpConfigurationSet:
+          - :list: item
+          - item:
+            - valueSet:
+              - :list: item
+        - tagSet:
+          - :list: item
+  DescribeImageAttribute:
+    :input:
+      ImageId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output:
+    - launchPermission:
+      - :list: item
+    - productCodes:
+      - :list: item
+    - blockDeviceMapping:
+      - :list: item
+      - item:
+        - ebs:
+          - volumeSize:
+            - :integer
+          - deleteOnTermination:
+            - :boolean
+  DescribeImages:
+    :input:
+      ImageId:
+      - :list:
+        - :string
+      - :rename: ImageIds
+      Owner:
+      - :list:
+        - :string
+      - :rename: Owners
+      ExecutableBy:
+      - :list:
+        - :string
+      - :rename: ExecutableUsers
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - imagesSet:
+      - :list: item
+      - item:
+        - isPublic:
+          - :boolean
+        - productCodes:
+          - :list: item
+        - blockDeviceMapping:
+          - :list: item
+          - item:
+            - ebs:
+              - volumeSize:
+                - :integer
+              - deleteOnTermination:
+                - :boolean
+        - tagSet:
+          - :list: item
+  DescribeInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :rename: InstanceIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - reservationSet:
+      - :list: item
+      - item:
+        - groupSet:
+          - :list: item
+        - instancesSet:
+          - :list: item
+          - item:
+            - instanceState:
+              - code:
+                - :integer
+            - amiLaunchIndex:
+              - :integer
+            - productCodes:
+              - :list: item
+            - launchTime:
+              - :timestamp
+            - blockDeviceMapping:
+              - :list: item
+              - item:
+                - ebs:
+                  - attachTime:
+                    - :timestamp
+                  - deleteOnTermination:
+                    - :boolean
+            - tagSet:
+              - :list: item
+            - groupSet:
+              - :list: item
+            - sourceDestCheck:
+              - :boolean
+            - networkInterfaceSet:
+              - :list: item
+              - item:
+                - sourceDestCheck:
+                  - :boolean
+                - groupSet:
+                  - :list: item
+                - attachment:
+                  - deviceIndex:
+                    - :integer
+                  - attachTime:
+                    - :timestamp
+                  - deleteOnTermination:
+                    - :boolean
+  DescribeKeyPairs:
+    :input:
+      KeyName:
+      - :list:
+        - :string
+      - :rename: KeyNames
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - keySet:
+      - :list: item
+  DescribeRegions:
+    :input:
+      RegionName:
+      - :list:
+        - :string
+      - :rename: RegionNames
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - regionInfo:
+      - :list: item
+  DescribeReservedInstances:
+    :input:
+      ReservedInstancesId:
+      - :list:
+        - :string
+      - :rename: ReservedInstancesIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      OfferingType:
+      - :string
+    :output:
+    - reservedInstancesSet:
+      - :list: item
+      - item:
+        - start:
+          - :timestamp
+        - duration:
+          - :long
+        - usagePrice:
+          - :float
+        - fixedPrice:
+          - :float
+        - instanceCount:
+          - :integer
+        - tagSet:
+          - :list: item
+        - recurringCharges:
+          - :list: item
+          - item:
+            - amount:
+              - :float
+  DescribeReservedInstancesOfferings:
+    :input:
+      ReservedInstancesOfferingId:
+      - :list:
+        - :string
+      - :rename: ReservedInstancesOfferingIds
+      InstanceType:
+      - :string
+      AvailabilityZone:
+      - :string
+      ProductDescription:
+      - :string
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      InstanceTenancy:
+      - :string
+      OfferingType:
+      - :string
+    :output:
+    - reservedInstancesOfferingsSet:
+      - :list: item
+      - item:
+        - duration:
+          - :long
+        - usagePrice:
+          - :float
+        - fixedPrice:
+          - :float
+        - recurringCharges:
+          - :list: item
+          - item:
+            - amount:
+              - :float
+  DescribeSecurityGroups:
+    :input:
+      GroupName:
+      - :list:
+        - :string
+      - :rename: GroupNames
+      GroupId:
+      - :list:
+        - :string
+      - :rename: GroupIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - securityGroupInfo:
+      - :list: item
+      - item:
+        - ipPermissions:
+          - :list: item
+          - item:
+            - fromPort:
+              - :integer
+            - toPort:
+              - :integer
+            - groups:
+              - :list: item
+            - ipRanges:
+              - :list: item
+        - ipPermissionsEgress:
+          - :list: item
+          - item:
+            - fromPort:
+              - :integer
+            - toPort:
+              - :integer
+            - groups:
+              - :list: item
+            - ipRanges:
+              - :list: item
+        - tagSet:
+          - :list: item
+  DescribeSnapshotAttribute:
+    :input:
+      SnapshotId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output:
+    - createVolumePermission:
+      - :list: item
+  DescribeSnapshots:
+    :input:
+      SnapshotId:
+      - :list:
+        - :string
+      - :rename: SnapshotIds
+      Owner:
+      - :list:
+        - :string
+      - :rename: OwnerIds
+      RestorableBy:
+      - :list:
+        - :string
+      - :rename: RestorableByUserIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - snapshotSet:
+      - :list: item
+      - item:
+        - startTime:
+          - :timestamp
+        - volumeSize:
+          - :integer
+        - tagSet:
+          - :list: item
+  DescribeSubnets:
+    :input:
+      SubnetId:
+      - :list:
+        - :string
+      - :rename: SubnetIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: Filters
+    :output:
+    - subnetSet:
+      - :list: item
+      - item:
+        - availableIpAddressCount:
+          - :integer
+        - tagSet:
+          - :list: item
+  DescribeVolumes:
+    :input:
+      VolumeId:
+      - :list:
+        - :string
+      - :rename: VolumeIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - volumeSet:
+      - :list: item
+      - item:
+        - size:
+          - :integer
+        - createTime:
+          - :timestamp
+        - attachmentSet:
+          - :list: item
+          - item:
+            - attachTime:
+              - :timestamp
+            - deleteOnTermination:
+              - :boolean
+        - tagSet:
+          - :list: item
+  DescribeVpcs:
+    :input:
+      VpcId:
+      - :list:
+        - :string
+      - :rename: VpcIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: Filters
+    :output:
+    - vpcSet:
+      - :list: item
+      - item:
+        - tagSet:
+          - :list: item
+  DescribeVpnConnections:
+    :input:
+      VpnConnectionId:
+      - :list:
+        - :string
+      - :rename: VpnConnectionIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: Filters
+    :output:
+    - vpnConnectionSet:
+      - :list: item
+      - item:
+        - tagSet:
+          - :list: item
+        - vgwTelemetry:
+          - :list: item
+          - item:
+            - lastStatusChange:
+              - :timestamp
+            - acceptedRouteCount:
+              - :integer
+  DescribeVpnGateways:
+    :input:
+      VpnGatewayId:
+      - :list:
+        - :string
+      - :rename: VpnGatewayIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: Filters
+    :output:
+    - vpnGatewaySet:
+      - :list: item
+      - item:
+        - attachments:
+          - :list: item
+        - tagSet:
+          - :list: item
+  DetachVolume:
+    :input:
+      VolumeId:
+      - :string
+      - :required
+      InstanceId:
+      - :string
+      Device:
+      - :string
+      Force:
+      - :boolean
+    :output:
+    - attachTime:
+      - :timestamp
+    - deleteOnTermination:
+      - :boolean
+  DetachVpnGateway:
+    :input:
+      VpnGatewayId:
+      - :string
+      - :required
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  DisassociateAddress:
+    :input:
+      PublicIp:
+      - :string
+      - :required
+      AssociationId:
+      - :string
+    :output: []
+  GetConsoleOutput:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+    :output:
+    - timestamp:
+      - :timestamp
+  GetPasswordData:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+    :output:
+    - timestamp:
+      - :timestamp
+  ImportKeyPair:
+    :input:
+      KeyName:
+      - :string
+      - :required
+      PublicKeyMaterial:
+      - :string
+      - :required
+    :output: []
+  ModifyImageAttribute:
+    :input:
+      ImageId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      OperationType:
+      - :string
+      UserId:
+      - :list:
+        - :string
+      - :rename: UserIds
+      UserGroup:
+      - :list:
+        - :string
+      - :rename: UserGroups
+      ProductCode:
+      - :list:
+        - :string
+      - :rename: ProductCodes
+      Value:
+      - :string
+      LaunchPermission:
+      - :structure:
+          Add:
+          - :list:
+            - :structure:
+                UserId:
+                - :string
+                - :rename: UserId
+                Group:
+                - :string
+                - :rename: Group
+          Remove:
+          - :list:
+            - :structure:
+                UserId:
+                - :string
+                - :rename: UserId
+                Group:
+                - :string
+                - :rename: Group
+      Description:
+      - :structure:
+          Value:
+          - :string
+    :output: []
+  ModifySnapshotAttribute:
+    :input:
+      SnapshotId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      OperationType:
+      - :string
+      UserId:
+      - :list:
+        - :string
+      - :rename: UserIds
+      UserGroup:
+      - :list:
+        - :string
+      - :rename: GroupNames
+      CreateVolumePermission:
+      - :structure:
+          Add:
+          - :list:
+            - :structure:
+                UserId:
+                - :string
+                - :rename: UserId
+                Group:
+                - :string
+                - :rename: Group
+          Remove:
+          - :list:
+            - :structure:
+                UserId:
+                - :string
+                - :rename: UserId
+                Group:
+                - :string
+                - :rename: Group
+    :output: []
+  MonitorInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+    :output:
+    - instancesSet:
+      - :list: item
+  PurchaseReservedInstancesOffering:
+    :input:
+      ReservedInstancesOfferingId:
+      - :string
+      - :required
+      InstanceCount:
+      - :integer
+      - :required
+    :output: []
+  RebootInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+    :output: []
+  RegisterImage:
+    :input:
+      ImageLocation:
+      - :string
+      Name:
+      - :string
+      Description:
+      - :string
+      Architecture:
+      - :string
+      KernelId:
+      - :string
+      RamdiskId:
+      - :string
+      RootDeviceName:
+      - :string
+      BlockDeviceMapping:
+      - :list:
+        - :structure:
+            VirtualName:
+            - :string
+            - :rename: VirtualName
+            DeviceName:
+            - :string
+            - :rename: DeviceName
+            Ebs:
+            - :structure:
+                SnapshotId:
+                - :string
+                VolumeSize:
+                - :integer
+                DeleteOnTermination:
+                - :boolean
+            NoDevice:
+            - :string
+      - :rename: blockDeviceMappings
+    :output: []
+  ReleaseAddress:
+    :input:
+      PublicIp:
+      - :string
+      AllocationId:
+      - :string
+    :output: []
+  ResetImageAttribute:
+    :input:
+      ImageId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output: []
+  ResetSnapshotAttribute:
+    :input:
+      SnapshotId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output: []
+  RevokeSecurityGroupIngress:
+    :input:
+      GroupName:
+      - :string
+      GroupId:
+      - :string
+      SourceSecurityGroupName:
+      - :string
+      SourceSecurityGroupOwnerId:
+      - :string
+      IpProtocol:
+      - :string
+      FromPort:
+      - :integer
+      ToPort:
+      - :integer
+      CidrIp:
+      - :string
+      IpPermissions:
+      - :list:
+        - :structure:
+            IpProtocol:
+            - :string
+            - :rename: IpProtocol
+            FromPort:
+            - :integer
+            - :rename: FromPort
+            ToPort:
+            - :integer
+            - :rename: ToPort
+            Groups:
+            - :list:
+              - :structure:
+                  UserId:
+                  - :string
+                  - :rename: UserId
+                  GroupName:
+                  - :string
+                  - :rename: GroupName
+                  GroupId:
+                  - :string
+                  - :rename: GroupId
+            - :rename: UserIdGroupPairs
+            IpRanges:
+            - :list:
+              - :structure:
+                  CidrIp:
+                  - :string
+                  - :rename: CidrIp
+            - :rename: IpRanges
+    :output: []
+  RunInstances:
+    :input:
+      ImageId:
+      - :string
+      - :required
+      MinCount:
+      - :integer
+      - :required
+      MaxCount:
+      - :integer
+      - :required
+      KeyName:
+      - :string
+      SecurityGroup:
+      - :list:
+        - :string
+      - :rename: SecurityGroups
+      SecurityGroupId:
+      - :list:
+        - :string
+      - :rename: SecurityGroupIds
+      UserData:
+      - :string
+      AddressingType:
+      - :string
+      InstanceType:
+      - :string
+      Placement:
+      - :structure:
+          AvailabilityZone:
+          - :string
+          - :rename: AvailabilityZone
+          GroupName:
+          - :string
+          Tenancy:
+          - :string
+      KernelId:
+      - :string
+      RamdiskId:
+      - :string
+      BlockDeviceMapping:
+      - :list:
+        - :structure:
+            VirtualName:
+            - :string
+            - :rename: VirtualName
+            DeviceName:
+            - :string
+            - :rename: DeviceName
+            Ebs:
+            - :structure:
+                SnapshotId:
+                - :string
+                VolumeSize:
+                - :integer
+                DeleteOnTermination:
+                - :boolean
+            NoDevice:
+            - :string
+      - :rename: BlockDeviceMappings
+      Monitoring:
+      - :structure:
+          Enabled:
+          - :boolean
+          - :required
+      SubnetId:
+      - :string
+      DisableApiTermination:
+      - :boolean
+      InstanceInitiatedShutdownBehavior:
+      - :string
+      License:
+      - :structure:
+          Pool:
+          - :string
+      PrivateIpAddress:
+      - :string
+      ClientToken:
+      - :string
+      AdditionalInfo:
+      - :string
+      NetworkInterface:
+      - :list:
+        - :structure:
+            NetworkInterfaceId:
+            - :string
+            DeviceIndex:
+            - :integer
+            SubnetId:
+            - :string
+            Description:
+            - :string
+            PrivateIpAddress:
+            - :string
+            SecurityGroupId:
+            - :list:
+              - :string
+            - :rename: groups
+            DeleteOnTermination:
+            - :boolean
+      - :rename: networkInterfaces
+    :output:
+    - groupSet:
+      - :list: item
+    - instancesSet:
+      - :list: item
+      - item:
+        - instanceState:
+          - code:
+            - :integer
+        - amiLaunchIndex:
+          - :integer
+        - productCodes:
+          - :list: item
+        - launchTime:
+          - :timestamp
+        - blockDeviceMapping:
+          - :list: item
+          - item:
+            - ebs:
+              - attachTime:
+                - :timestamp
+              - deleteOnTermination:
+                - :boolean
+        - tagSet:
+          - :list: item
+        - groupSet:
+          - :list: item
+        - sourceDestCheck:
+          - :boolean
+        - networkInterfaceSet:
+          - :list: item
+          - item:
+            - sourceDestCheck:
+              - :boolean
+            - groupSet:
+              - :list: item
+            - attachment:
+              - deviceIndex:
+                - :integer
+              - attachTime:
+                - :timestamp
+              - deleteOnTermination:
+                - :boolean
+  TerminateInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+    :output:
+    - instancesSet:
+      - :list: item
+      - item:
+        - currentState:
+          - code:
+            - :integer
+        - previousState:
+          - code:
+            - :integer
+  UnmonitorInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+    :output:
+    - instancesSet:
+      - :list: item
+  CreateImage:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      Name:
+      - :string
+      - :required
+      Description:
+      - :string
+      NoReboot:
+      - :boolean
+    :output: []
+  StartInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+    :output:
+    - instancesSet:
+      - :list: item
+      - item:
+        - currentState:
+          - code:
+            - :integer
+        - previousState:
+          - code:
+            - :integer
+  StopInstances:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: InstanceIds
+      Force:
+      - :boolean
+    :output:
+    - instancesSet:
+      - :list: item
+      - item:
+        - currentState:
+          - code:
+            - :integer
+        - previousState:
+          - code:
+            - :integer
+  DescribeInstanceAttribute:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output:
+    - disableApiTermination:
+      - value:
+        - :boolean
+    - blockDeviceMapping:
+      - :list: item
+      - item:
+        - ebs:
+          - attachTime:
+            - :timestamp
+          - deleteOnTermination:
+            - :boolean
+  ModifyInstanceAttribute:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      Value:
+      - :string
+      BlockDeviceMapping:
+      - :list:
+        - :structure:
+            DeviceName:
+            - :string
+            Ebs:
+            - :structure:
+                VolumeId:
+                - :string
+                DeleteOnTermination:
+                - :boolean
+            VirtualName:
+            - :string
+            NoDevice:
+            - :string
+      - :rename: blockDeviceMappings
+      SourceDestCheck:
+      - :structure:
+          Value:
+          - :boolean
+      DisableApiTermination:
+      - :structure:
+          Value:
+          - :boolean
+      InstanceType:
+      - :structure:
+          Value:
+          - :string
+      Kernel:
+      - :structure:
+          Value:
+          - :string
+      Ramdisk:
+      - :structure:
+          Value:
+          - :string
+      UserData:
+      - :structure:
+          Value:
+          - :string
+      InstanceInitiatedShutdownBehavior:
+      - :structure:
+          Value:
+          - :string
+      GroupId:
+      - :list:
+        - :string
+      - :rename: groups
+    :output: []
+  ResetInstanceAttribute:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      Attribute:
+      - :string
+      - :required
+    :output: []
+  RequestSpotInstances:
+    :input:
+      SpotPrice:
+      - :string
+      - :required
+      InstanceCount:
+      - :integer
+      Type:
+      - :string
+      ValidFrom:
+      - :timestamp
+      ValidUntil:
+      - :timestamp
+      LaunchGroup:
+      - :string
+      AvailabilityZoneGroup:
+      - :string
+      LaunchSpecification:
+      - :structure:
+          ImageId:
+          - :string
+          KeyName:
+          - :string
+          GroupSet:
+          - :list:
+            - :structure:
+                GroupName:
+                - :string
+                - :rename: GroupName
+                GroupId:
+                - :string
+          - :rename: SecurityGroups
+          UserData:
+          - :string
+          AddressingType:
+          - :string
+          InstanceType:
+          - :string
+          Placement:
+          - :structure:
+              AvailabilityZone:
+              - :string
+              GroupName:
+              - :string
+          KernelId:
+          - :string
+          RamdiskId:
+          - :string
+          BlockDeviceMapping:
+          - :list:
+            - :structure:
+                VirtualName:
+                - :string
+                - :rename: VirtualName
+                DeviceName:
+                - :string
+                - :rename: DeviceName
+                Ebs:
+                - :structure:
+                    SnapshotId:
+                    - :string
+                    VolumeSize:
+                    - :integer
+                    DeleteOnTermination:
+                    - :boolean
+                NoDevice:
+                - :string
+          - :rename: blockDeviceMappings
+          MonitoringEnabled:
+          - :boolean
+          SubnetId:
+          - :string
+          NetworkInterfaceSet:
+          - :list:
+            - :structure:
+                NetworkInterfaceId:
+                - :string
+                DeviceIndex:
+                - :integer
+                SubnetId:
+                - :string
+                Description:
+                - :string
+                PrivateIpAddress:
+                - :string
+                SecurityGroupId:
+                - :list:
+                  - :string
+                - :rename: groups
+                DeleteOnTermination:
+                - :boolean
+          - :rename: networkInterfaces
+    :output:
+    - spotInstanceRequestSet:
+      - :list: item
+      - item:
+        - validFrom:
+          - :timestamp
+        - validUntil:
+          - :timestamp
+        - launchSpecification:
+          - groupSet:
+            - :list: item
+          - blockDeviceMapping:
+            - :list: item
+            - item:
+              - ebs:
+                - volumeSize:
+                  - :integer
+                - deleteOnTermination:
+                  - :boolean
+          - monitoringEnabled:
+            - :boolean
+          - networkInterfaceSet:
+            - :list: item
+            - item:
+              - deviceIndex:
+                - :integer
+              - SecurityGroupId:
+                - :list: SecurityGroupId
+              - deleteOnTermination:
+                - :boolean
+        - createTime:
+          - :timestamp
+        - tagSet:
+          - :list: item
+  DescribeSpotInstanceRequests:
+    :input:
+      SpotInstanceRequestId:
+      - :list:
+        - :string
+      - :rename: spotInstanceRequestIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - spotInstanceRequestSet:
+      - :list: item
+      - item:
+        - validFrom:
+          - :timestamp
+        - validUntil:
+          - :timestamp
+        - launchSpecification:
+          - groupSet:
+            - :list: item
+          - blockDeviceMapping:
+            - :list: item
+            - item:
+              - ebs:
+                - volumeSize:
+                  - :integer
+                - deleteOnTermination:
+                  - :boolean
+          - monitoringEnabled:
+            - :boolean
+          - networkInterfaceSet:
+            - :list: item
+            - item:
+              - deviceIndex:
+                - :integer
+              - SecurityGroupId:
+                - :list: SecurityGroupId
+              - deleteOnTermination:
+                - :boolean
+        - createTime:
+          - :timestamp
+        - tagSet:
+          - :list: item
+  CancelSpotInstanceRequests:
+    :input:
+      SpotInstanceRequestId:
+      - :list:
+        - :string
+      - :required
+      - :rename: spotInstanceRequestIds
+    :output:
+    - spotInstanceRequestSet:
+      - :list: item
+  DescribeSpotPriceHistory:
+    :input:
+      StartTime:
+      - :timestamp
+      EndTime:
+      - :timestamp
+      InstanceType:
+      - :list:
+        - :string
+      - :rename: instanceTypes
+      ProductDescription:
+      - :list:
+        - :string
+      - :rename: productDescriptions
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      AvailabilityZone:
+      - :string
+      MaxResults:
+      - :integer
+      NextToken:
+      - :string
+    :output:
+    - spotPriceHistorySet:
+      - :list: item
+      - item:
+        - timestamp:
+          - :timestamp
+  CreateSpotDatafeedSubscription:
+    :input:
+      Bucket:
+      - :string
+      - :required
+      Prefix:
+      - :string
+    :output: []
+  DescribeSpotDatafeedSubscription:
+    :input: {}
+    :output: []
+  DeleteSpotDatafeedSubscription:
+    :input: {}
+    :output: []
+  DescribeLicenses:
+    :input:
+      LicenseId:
+      - :list:
+        - :string
+      - :rename: licenseIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - licenseSet:
+      - :list: item
+      - item:
+        - capacitySet:
+          - :list: item
+          - item:
+            - capacity:
+              - :integer
+            - instanceCapacity:
+              - :integer
+            - earliestAllowedDeactivationTime:
+              - :timestamp
+        - tagSet:
+          - :list: item
+  ActivateLicense:
+    :input:
+      LicenseId:
+      - :string
+      - :required
+      Capacity:
+      - :integer
+      - :required
+    :output: []
+  DeactivateLicense:
+    :input:
+      LicenseId:
+      - :string
+      - :required
+      Capacity:
+      - :integer
+      - :required
+    :output: []
+  CreatePlacementGroup:
+    :input:
+      GroupName:
+      - :string
+      - :required
+      Strategy:
+      - :string
+      - :required
+    :output: []
+  DeletePlacementGroup:
+    :input:
+      GroupName:
+      - :string
+      - :required
+    :output: []
+  DescribePlacementGroups:
+    :input:
+      GroupName:
+      - :list:
+        - :string
+      - :rename: groupNames
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - placementGroupSet:
+      - :list: item
+  CreateTags:
+    :input:
+      ResourceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: resources
+      Tag:
+      - :list:
+        - :structure:
+            Key:
+            - :string
+            Value:
+            - :string
+      - :required
+      - :rename: tags
+    :output: []
+  DescribeTags:
+    :input:
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - tagSet:
+      - :list: item
+  DeleteTags:
+    :input:
+      ResourceId:
+      - :list:
+        - :string
+      - :required
+      - :rename: resources
+      Tag:
+      - :list:
+        - :structure:
+            Key:
+            - :string
+            Value:
+            - :string
+      - :rename: tags
+    :output: []
+  AuthorizeSecurityGroupEgress:
+    :input:
+      GroupId:
+      - :string
+      - :required
+      SourceSecurityGroupName:
+      - :string
+      SourceSecurityGroupOwnerId:
+      - :string
+      IpProtocol:
+      - :string
+      FromPort:
+      - :integer
+      ToPort:
+      - :integer
+      CidrIp:
+      - :string
+      IpPermissions:
+      - :list:
+        - :structure:
+            IpProtocol:
+            - :string
+            - :rename: IpProtocol
+            FromPort:
+            - :integer
+            - :rename: FromPort
+            ToPort:
+            - :integer
+            - :rename: ToPort
+            Groups:
+            - :list:
+              - :structure:
+                  UserId:
+                  - :string
+                  - :rename: UserId
+                  GroupName:
+                  - :string
+                  - :rename: GroupName
+                  GroupId:
+                  - :string
+                  - :rename: GroupId
+            - :rename: UserIdGroupPairs
+            IpRanges:
+            - :list:
+              - :structure:
+                  CidrIp:
+                  - :string
+                  - :rename: CidrIp
+            - :rename: IpRanges
+    :output: []
+  RevokeSecurityGroupEgress:
+    :input:
+      GroupId:
+      - :string
+      - :required
+      SourceSecurityGroupName:
+      - :string
+      SourceSecurityGroupOwnerId:
+      - :string
+      IpProtocol:
+      - :string
+      FromPort:
+      - :integer
+      ToPort:
+      - :integer
+      CidrIp:
+      - :string
+      IpPermissions:
+      - :list:
+        - :structure:
+            IpProtocol:
+            - :string
+            - :rename: IpProtocol
+            FromPort:
+            - :integer
+            - :rename: FromPort
+            ToPort:
+            - :integer
+            - :rename: ToPort
+            Groups:
+            - :list:
+              - :structure:
+                  UserId:
+                  - :string
+                  - :rename: UserId
+                  GroupName:
+                  - :string
+                  - :rename: GroupName
+                  GroupId:
+                  - :string
+                  - :rename: GroupId
+            - :rename: UserIdGroupPairs
+            IpRanges:
+            - :list:
+              - :structure:
+                  CidrIp:
+                  - :string
+                  - :rename: CidrIp
+            - :rename: IpRanges
+    :output: []
+  CreateInternetGateway:
+    :input: {}
+    :output:
+    - internetGateway:
+      - attachmentSet:
+        - :list: item
+      - tagSet:
+        - :list: item
+  DescribeInternetGateways:
+    :input:
+      InternetGatewayId:
+      - :list:
+        - :string
+      - :rename: internetGatewayIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - internetGatewaySet:
+      - :list: item
+      - item:
+        - attachmentSet:
+          - :list: item
+        - tagSet:
+          - :list: item
+  DeleteInternetGateway:
+    :input:
+      InternetGatewayId:
+      - :string
+      - :required
+    :output: []
+  AttachInternetGateway:
+    :input:
+      InternetGatewayId:
+      - :string
+      - :required
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  DetachInternetGateway:
+    :input:
+      InternetGatewayId:
+      - :string
+      - :required
+      VpcId:
+      - :string
+      - :required
+    :output: []
+  CreateRouteTable:
+    :input:
+      VpcId:
+      - :string
+      - :required
+    :output:
+    - routeTable:
+      - routeSet:
+        - :list: item
+      - associationSet:
+        - :list: item
+        - item:
+          - main:
+            - :boolean
+      - tagSet:
+        - :list: item
+  DescribeRouteTables:
+    :input:
+      RouteTableId:
+      - :list:
+        - :string
+      - :rename: routeTableIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - routeTableSet:
+      - :list: item
+      - item:
+        - routeSet:
+          - :list: item
+        - associationSet:
+          - :list: item
+          - item:
+            - main:
+              - :boolean
+        - tagSet:
+          - :list: item
+  DeleteRouteTable:
+    :input:
+      RouteTableId:
+      - :string
+      - :required
+    :output: []
+  AssociateRouteTable:
+    :input:
+      SubnetId:
+      - :string
+      - :required
+      RouteTableId:
+      - :string
+      - :required
+    :output: []
+  ReplaceRouteTableAssociation:
+    :input:
+      AssociationId:
+      - :string
+      - :required
+      RouteTableId:
+      - :string
+      - :required
+    :output: []
+  DisassociateRouteTable:
+    :input:
+      AssociationId:
+      - :string
+      - :required
+    :output: []
+  CreateRoute:
+    :input:
+      RouteTableId:
+      - :string
+      - :required
+      DestinationCidrBlock:
+      - :string
+      - :required
+      GatewayId:
+      - :string
+      InstanceId:
+      - :string
+      NetworkInterfaceId:
+      - :string
+    :output: []
+  ReplaceRoute:
+    :input:
+      RouteTableId:
+      - :string
+      - :required
+      DestinationCidrBlock:
+      - :string
+      - :required
+      GatewayId:
+      - :string
+      InstanceId:
+      - :string
+      NetworkInterfaceId:
+      - :string
+    :output: []
+  DeleteRoute:
+    :input:
+      RouteTableId:
+      - :string
+      - :required
+      DestinationCidrBlock:
+      - :string
+      - :required
+    :output: []
+  CreateNetworkAcl:
+    :input:
+      VpcId:
+      - :string
+      - :required
+    :output:
+    - networkAcl:
+      - default:
+        - :boolean
+      - entrySet:
+        - :list: item
+        - item:
+          - ruleNumber:
+            - :integer
+          - egress:
+            - :boolean
+          - icmpTypeCode:
+            - type:
+              - :integer
+            - code:
+              - :integer
+          - portRange:
+            - from:
+              - :integer
+            - to:
+              - :integer
+      - associationSet:
+        - :list: item
+      - tagSet:
+        - :list: item
+  DescribeNetworkAcls:
+    :input:
+      NetworkAclId:
+      - :list:
+        - :string
+      - :rename: networkAclIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - networkAclSet:
+      - :list: item
+      - item:
+        - default:
+          - :boolean
+        - entrySet:
+          - :list: item
+          - item:
+            - ruleNumber:
+              - :integer
+            - egress:
+              - :boolean
+            - icmpTypeCode:
+              - type:
+                - :integer
+              - code:
+                - :integer
+            - portRange:
+              - from:
+                - :integer
+              - to:
+                - :integer
+        - associationSet:
+          - :list: item
+        - tagSet:
+          - :list: item
+  DeleteNetworkAcl:
+    :input:
+      NetworkAclId:
+      - :string
+      - :required
+    :output: []
+  ReplaceNetworkAclAssociation:
+    :input:
+      AssociationId:
+      - :string
+      - :required
+      NetworkAclId:
+      - :string
+      - :required
+    :output: []
+  CreateNetworkAclEntry:
+    :input:
+      NetworkAclId:
+      - :string
+      - :required
+      RuleNumber:
+      - :integer
+      - :required
+      Protocol:
+      - :string
+      - :required
+      RuleAction:
+      - :string
+      - :required
+      Egress:
+      - :boolean
+      - :required
+      CidrBlock:
+      - :string
+      - :required
+      Icmp:
+      - :structure:
+          Type:
+          - :integer
+          Code:
+          - :integer
+      - :rename: icmpTypeCode
+      PortRange:
+      - :structure:
+          From:
+          - :integer
+          To:
+          - :integer
+    :output: []
+  ReplaceNetworkAclEntry:
+    :input:
+      NetworkAclId:
+      - :string
+      - :required
+      RuleNumber:
+      - :integer
+      - :required
+      Protocol:
+      - :string
+      - :required
+      RuleAction:
+      - :string
+      - :required
+      Egress:
+      - :boolean
+      - :required
+      CidrBlock:
+      - :string
+      - :required
+      Icmp:
+      - :structure:
+          Type:
+          - :integer
+          Code:
+          - :integer
+      - :rename: icmpTypeCode
+      PortRange:
+      - :structure:
+          From:
+          - :integer
+          To:
+          - :integer
+    :output: []
+  DeleteNetworkAclEntry:
+    :input:
+      NetworkAclId:
+      - :string
+      - :required
+      RuleNumber:
+      - :integer
+      - :required
+      Egress:
+      - :boolean
+      - :required
+    :output: []
+  DescribeInstanceStatus:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :rename: InstanceIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      NextToken:
+      - :string
+      MaxResults:
+      - :integer
+    :output:
+    - instanceStatusSet:
+      - :list: item
+      - item:
+        - eventsSet:
+          - :list: item
+          - item:
+            - notBefore:
+              - :timestamp
+            - notAfter:
+              - :timestamp
+        - instanceState:
+          - code:
+            - :integer
+        - systemStatus:
+          - details:
+            - :list: item
+        - instanceStatus:
+          - details:
+            - :list: item
+  ReportInstanceStatus:
+    :input:
+      InstanceId:
+      - :list:
+        - :string
+      - :rename: instances
+      Status:
+      - :string
+      StartTime:
+      - :timestamp
+      EndTime:
+      - :timestamp
+      ReasonCode:
+      - :list:
+        - :structure:
+            ReasonCode:
+            - :string
+      - :rename: reasonCodes
+      Description:
+      - :string
+    :output: []
+  ImportInstance:
+    :input:
+      Description:
+      - :string
+      LaunchSpecification:
+      - :structure:
+          Architecture:
+          - :string
+          SecurityGroup:
+          - :list:
+            - :string
+          - :rename: securityGroups
+          AdditionalInfo:
+          - :string
+          UserData:
+          - :string
+          InstanceType:
+          - :string
+          Placement:
+          - :structure:
+              AvailabilityZone:
+              - :string
+              - :rename: AvailabilityZone
+              GroupName:
+              - :string
+              Tenancy:
+              - :string
+          BlockDeviceMapping:
+          - :list:
+            - :structure:
+                VirtualName:
+                - :string
+                - :rename: VirtualName
+                DeviceName:
+                - :string
+                - :rename: DeviceName
+                Ebs:
+                - :structure:
+                    SnapshotId:
+                    - :string
+                    VolumeSize:
+                    - :integer
+                    DeleteOnTermination:
+                    - :boolean
+                NoDevice:
+                - :string
+          - :rename: blockDeviceMappings
+          Monitoring:
+          - :boolean
+          SubnetId:
+          - :string
+          DisableApiTermination:
+          - :boolean
+          InstanceInitiatedShutdownBehavior:
+          - :string
+          PrivateIpAddress:
+          - :string
+      DiskImage:
+      - :list:
+        - :structure:
+            Image:
+            - :structure:
+                Format:
+                - :string
+                - :required
+                Bytes:
+                - :long
+                - :required
+                ImportManifestUrl:
+                - :string
+                - :required
+            Description:
+            - :string
+            Volume:
+            - :structure:
+                Size:
+                - :long
+                - :required
+      - :rename: diskImages
+      Platform:
+      - :string
+      - :required
+    :output:
+    - conversionTask:
+      - importInstance:
+        - volumes:
+          - :list: item
+          - item:
+            - bytesConverted:
+              - :long
+            - image:
+              - size:
+                - :long
+            - volume:
+              - size:
+                - :long
+      - importVolume:
+        - bytesConverted:
+          - :long
+        - image:
+          - size:
+            - :long
+        - volume:
+          - size:
+            - :long
+      - tagSet:
+        - :list: item
+  ImportVolume:
+    :input:
+      AvailabilityZone:
+      - :string
+      Image:
+      - :structure:
+          Format:
+          - :string
+          - :required
+          Bytes:
+          - :long
+          - :required
+          ImportManifestUrl:
+          - :string
+          - :required
+      Description:
+      - :string
+      Volume:
+      - :structure:
+          Size:
+          - :long
+          - :required
+    :output:
+    - conversionTask:
+      - importInstance:
+        - volumes:
+          - :list: item
+          - item:
+            - bytesConverted:
+              - :long
+            - image:
+              - size:
+                - :long
+            - volume:
+              - size:
+                - :long
+      - importVolume:
+        - bytesConverted:
+          - :long
+        - image:
+          - size:
+            - :long
+        - volume:
+          - size:
+            - :long
+      - tagSet:
+        - :list: item
+  CancelConversionTask:
+    :input:
+      ConversionTaskId:
+      - :string
+      - :required
+      ReasonMessage:
+      - :string
+    :output: []
+  DescribeConversionTasks:
+    :input:
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+      ConversionTaskId:
+      - :list:
+        - :string
+      - :rename: conversionTaskIds
+    :output:
+    - conversionTasks:
+      - :list: item
+      - item:
+        - importInstance:
+          - volumes:
+            - :list: item
+            - item:
+              - bytesConverted:
+                - :long
+              - image:
+                - size:
+                  - :long
+              - volume:
+                - size:
+                  - :long
+        - importVolume:
+          - bytesConverted:
+            - :long
+          - image:
+            - size:
+              - :long
+          - volume:
+            - size:
+              - :long
+        - tagSet:
+          - :list: item
+  CreateNetworkInterface:
+    :input:
+      SubnetId:
+      - :string
+      - :required
+      Description:
+      - :string
+      PrivateIpAddress:
+      - :string
+      SecurityGroupId:
+      - :list:
+        - :string
+      - :rename: groups
+    :output:
+    - networkInterface:
+      - requesterManaged:
+        - :boolean
+      - sourceDestCheck:
+        - :boolean
+      - groupSet:
+        - :list: item
+      - attachment:
+        - deviceIndex:
+          - :integer
+        - attachTime:
+          - :timestamp
+        - deleteOnTermination:
+          - :boolean
+      - tagSet:
+        - :list: item
+  DescribeNetworkInterfaces:
+    :input:
+      NetworkInterfaceId:
+      - :list:
+        - :string
+      - :rename: networkInterfaceIds
+      Filter:
+      - :list:
+        - :structure:
+            Name:
+            - :string
+            Value:
+            - :list:
+              - :string
+            - :rename: Values
+      - :rename: filters
+    :output:
+    - networkInterfaceSet:
+      - :list: item
+      - item:
+        - requesterManaged:
+          - :boolean
+        - sourceDestCheck:
+          - :boolean
+        - groupSet:
+          - :list: item
+        - attachment:
+          - deviceIndex:
+            - :integer
+          - attachTime:
+            - :timestamp
+          - deleteOnTermination:
+            - :boolean
+        - tagSet:
+          - :list: item
+  DeleteNetworkInterface:
+    :input:
+      NetworkInterfaceId:
+      - :string
+      - :required
+    :output: []
+  AttachNetworkInterface:
+    :input:
+      NetworkInterfaceId:
+      - :string
+      - :required
+      InstanceId:
+      - :string
+      - :required
+      DeviceIndex:
+      - :integer
+      - :required
+    :output: []
+  DetachNetworkInterface:
+    :input:
+      AttachmentId:
+      - :string
+      - :required
+      Force:
+      - :boolean
+    :output: []
+  DescribeNetworkInterfaceAttribute:
+    :input:
+      NetworkInterfaceId:
+      - :string
+      - :required
+      Description:
+      - :string
+      SourceDestCheck:
+      - :string
+      GroupSet:
+      - :string
+      - :rename: groups
+      Attachment:
+      - :string
+    :output:
+    - sourceDestCheck:
+      - value:
+        - :boolean
+    - groupSet:
+      - :list: item
+    - attachment:
+      - deviceIndex:
+        - :integer
+      - attachTime:
+        - :timestamp
+      - deleteOnTermination:
+        - :boolean
+  ModifyNetworkInterfaceAttribute:
+    :input:
+      NetworkInterfaceId:
+      - :string
+      - :required
+      Description:
+      - :structure:
+          Value:
+          - :string
+      SourceDestCheck:
+      - :structure:
+          Value:
+          - :boolean
+      SecurityGroupId:
+      - :list:
+        - :string
+      - :rename: groups
+      Attachment:
+      - :structure:
+          AttachmentId:
+          - :string
+          DeleteOnTermination:
+          - :boolean
+    :output: []
+  ResetNetworkInterfaceAttribute:
+    :input:
+      NetworkInterfaceId:
+      - :string
+      - :required
+      SourceDestCheck:
+      - :string
+    :output: []
+:client_errors: {}
+:server_errors: {}

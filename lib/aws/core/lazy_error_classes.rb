@@ -39,7 +39,7 @@ module AWS
         end
   
         def error_class(code)
-          module_eval("#{self}::#{code.gsub(".","::")}")
+          module_eval("#{self}::#{code.gsub('.Range','Range').gsub(".","::")}")
         end
   
         def included(mod)

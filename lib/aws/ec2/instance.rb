@@ -274,10 +274,15 @@ module AWS
 
       mutable_describe_call_attribute :ramdisk_id, :set_as => :ramdisk
 
-      mutable_describe_call_attribute :source_dest_check?,
-        :as => :source_dest_check
+      mutable_describe_attribute :source_dest_check do
+        translates_output{|bool| bool == "true" }
+      end
+
+      alias_method :source_dest_check?, :source_dest_check
 
       mutable_describe_call_attribute :group_set
+
+      describe_call_attribute :network_interface_set
 
       mutable_describe_attribute(:user_data) do
         translates_output {|v| Base64.decode64(v) if v }
@@ -349,6 +354,53 @@ module AWS
           resp.instances_set.find { |i| i.instance_id == id }
         end
         provider.provides :monitoring
+      end
+
+      # @return [VPC,nil] Returns the VPC this instance was launched in.
+      #   If this instance was not launched inside a VPC, nil is returned.
+      def vpc
+        if vpc_id
+          VPC.new(vpc_id, :config => config)
+        end
+      end
+      
+      # @return [Subnet,nil] Returns the VPC subnet this instance was
+      #   launched in.  Returns nil if this was not launched in a VPC.
+      def subnet
+        if subnet_id
+          Subnet.new(subnet_id, :vpc_id => vpc_id, :config => config)
+        end
+      end
+
+      # @return [Array<NetworkInterface>] Returns a list of elastic network
+      #   interfaces attached to this instance (VPC only).  Non-vpc
+      #   instance may not have attached network interfaces.
+      def network_interfaces
+        network_interface_set.collect do |ni|
+          NetworkInterface.new_from(:describe_network_interfaces, ni,
+            ni.network_interface_id, :config => config)
+        end
+      end
+
+      # Attaches a network interface to this instance (VPC only).
+      #
+      # @param [NetworkInterface,String] network_interface A network interface
+      #   (or network interface id string) to attach to this vpc instance.
+      #
+      # @param [Hash] options
+      #
+      # @option (see NetworkInterface#attach)
+      #
+      # @return [nil]
+      #
+      def attach_network_interface network_interface, options = {}
+        if network_interface.is_a?(NetworkInterface) 
+          network_interface.attach(self, options)
+        else
+          i = NetworkInterface.new(network_interface, :config => config)
+          i.attach(self, options)
+        end
+        nil
       end
 
       # @return [Array<SecurityGroup>] Returns a list of security 

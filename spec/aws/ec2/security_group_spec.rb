@@ -132,6 +132,11 @@ module AWS
           group.stub(:vpc_id).and_return('vpc-123')
         end
 
+        it 'returns a vpc' do
+          group.vpc.should == VPC.new('vpc-123')
+          group.vpc.config.should == group.config
+        end
+
         it 'accepts ranges for ports and defaults ip ranges to 0.0.0.0/0' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [

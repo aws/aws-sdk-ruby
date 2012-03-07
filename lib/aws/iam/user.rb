@@ -111,6 +111,12 @@ module AWS
         nil
       end
 
+      # Deletes the current user, after:
+      # * deleting its login profile
+      # * removing it from all groups
+      # * deleting all of its access keys
+      # * deleting its mfa devices
+      # * deleting its signing certificates
       def delete!
         groups.clear
         access_keys.clear

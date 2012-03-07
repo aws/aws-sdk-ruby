@@ -57,8 +57,7 @@ module AWS
         # @param [Integer] write_capacity_units
         #   See {DynamoDB::TableCollection#create} for more information.
         #
-        # @param [Hash] options Hash of options passed to 
-        #   {DynamoDB::TableCollection#create}.  
+        # @param [Hash] options
         #
         # @option options [String] :shard_name Defaults to the class name.  The
         #   shard name will be prefixed with {AWS::Record.table_prefix},
@@ -70,7 +69,8 @@ module AWS
 
           table_name = dynamo_db_table_name(options[:shard_name])
 
-          create_opts = { :hash_key => { :id => :string } }
+          create_opts = {}
+          create_opts[:hash_key] = { :id => :string }
 
           dynamo_db.tables.create(
             table_name, 
