@@ -126,9 +126,11 @@ module AWS
           end
 
           def self.deserialize string_value, options = {}
-            left, right = float.to_s.split('.')
-            left = SortableIntegerAttr.deserialize(left, options)
-            "#{left}.#{right}".to_f
+            expect(String, string_value) do
+              left, right = string_value.split('.')
+              left = SortableIntegerAttr.deserialize(left, options)
+              "#{left}.#{right}".to_f
+            end
           end
 
         end
