@@ -20,6 +20,7 @@ Before("@iam") do
   @uploaded_signing_certificates = []
   @created_account_aliases = []
   @created_access_keys = []
+  @set_account_password_policy = false
 
   @created_groups = []
   @numbered_groups = {}
@@ -31,6 +32,10 @@ Before("@iam") do
 end
 
 After("@iam") do
+
+  if @set_account_password_policy
+    @iam.delete_account_password_policy
+  end
 
   @created_access_keys.each do |access_key|
     begin

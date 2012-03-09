@@ -556,6 +556,17 @@
       - :pattern: !ruby/regexp /[\w+=,.@-]*/
       - :required
     :output: []
+  ChangePassword:
+    :input:
+      OldPassword:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+      NewPassword:
+      - :string
+      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
+      - :required
+    :output: []
   UploadServerCertificate:
     :input:
       Path:
@@ -666,6 +677,36 @@
       - :pattern: !ruby/regexp /^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$/
       - :required
     :output: []
+  UpdateAccountPasswordPolicy:
+    :input:
+      MinimumPasswordLength:
+      - :integer
+      RequireSymbols:
+      - :boolean
+      RequireNumbers:
+      - :boolean
+      RequireUppercaseCharacters:
+      - :boolean
+      RequireLowercaseCharacters:
+      - :boolean
+    :output: []
+  DeleteAccountPasswordPolicy:
+    :input: {}
+    :output: []
+  GetAccountPasswordPolicy:
+    :input: {}
+    :output:
+    - PasswordPolicy:
+      - MinimumPasswordLength:
+        - :integer
+      - RequireSymbols:
+        - :boolean
+      - RequireNumbers:
+        - :boolean
+      - RequireUppercaseCharacters:
+        - :boolean
+      - RequireLowercaseCharacters:
+        - :boolean
 :client_errors:
   NoSuchEntity: []
   MalformedCertificate: []
@@ -678,6 +719,7 @@
   InvalidCertificate: []
   DuplicateCertificate: []
   KeyPairMismatch: []
+  PasswordPolicyViolation: []
   NoSuchVendor: []
   InvalidPublicKey: []
   DuplicatePublicKey: []

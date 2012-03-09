@@ -11,6 +11,7 @@
 # language governing permissions and limitations under the License.
 
 require 'uri'
+require 'json'
 
 module AWS
   class IAM

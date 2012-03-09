@@ -68,7 +68,7 @@ module AWS
       def read_timeout
         # these two operations have long polling 
         if headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
-          90
+          90 
         else
           @read_timeout
         end

@@ -340,5 +340,80 @@ module AWS
       end
     end
 
+    # Changes the web password associated with the current IAM user.
+    # In order to change your password you must configure the sdk
+    # to use your IAM user credentials.
+    #
+    #
+    # To change a user password, you must be using credentials from the
+    # user you want to change:
+    #
+    #   # pass in a key pair generated for the user you want to change 
+    #   # the password for
+    #   iam = AWS::IAM.new(:access_key_id => '...', :secret_access_key => '...)
+    #   iam.change_password('old-password', 'new-password')
+    #
+    # @param [String] old_password
+    #
+    # @param [String] new_password
+    #
+    # @return [nil]
+    #
+    def change_password old_password, new_password
+      client_opts = {}
+      client_opts[:old_password] = old_password
+      client_opts[:new_password] = new_password
+      client.change_password(client_opts)
+      nil
+    end
+
+    # Updates the account password policy for all IAM accounts.
+    # @param [Hash] options
+    # @option options [Integer] :minimum_password_length 
+    # @option options [Boolean] :require_symbols
+    # @option options [Boolean] :require_numbers
+    # @option options [Boolean] :require_uppercase_characters
+    # @option options [Boolean] :require_lowercase_characters
+    # @return [nil]
+    def update_account_password_policy options = {}
+      client.update_account_password_policy(options)
+      nil
+    end
+
+    # Removes the account password policy.
+    # @return [nil]
+    def delete_account_password_policy
+      client.delete_account_password_policy
+      nil
+    end
+
+    # Returns the account password policy details as a hash.  This method
+    # returns nil if no password policy has been set for this account.
+    #
+    #   # set the policy
+    #   iam.update_account_password_policy :minimum_password_length => 8
+    #
+    #   iam.account_password_policy
+    #   #=> {:require_symbols=>false, :require_numbers=>false, :require_uppercase_characters=>false, :require_lowercase_characters=>false, :minimum_password_length=>8}
+    #
+    # @return [Hash,nil]
+    def account_password_policy
+      begin
+        policy = client.get_account_password_policy.password_policy
+        [
+          :minimum_password_length,
+          :require_symbols?,
+          :require_numbers?,
+          :require_uppercase_characters?,
+          :require_lowercase_characters?,
+        ].inject({}) do |hash,method|
+          key = method.to_s.sub(/\?/, '').to_sym
+          hash.merge(key => policy.send(method))
+        end
+      rescue Errors::NoSuchEntity
+        nil
+      end
+    end
+
   end
 end

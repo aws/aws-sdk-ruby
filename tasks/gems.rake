@@ -28,7 +28,7 @@ namespace :gems do
 
     gem.add_dependency('uuidtools', '~> 2.1')
     gem.add_dependency('httparty', '~> 0.7')
-    gem.add_dependency('nokogiri', '>= 1.4.4')
+    gem.add_dependency('nokogiri', '<= 1.5.0') # nokogiri 1.5.1 broken
     gem.add_dependency('json', '~> 1.4')
 
     gem.files = FileList[

@@ -124,7 +124,7 @@ class Net::HTTP::ConnectionPool
 
     begin
 
-      session = session_for(connection)
+      session = session_for(connection, retried)
       session.http_session.read_timeout = connection.read_timeout
       response = session.request(*request_args, &block)
 
@@ -174,13 +174,16 @@ class Net::HTTP::ConnectionPool
 
   # Returns a suitable session from the pool or creates a new one
   private
-  def session_for connection
+  def session_for connection, force_new = false
+
     session = nil
 
-    @pool_mutex.synchronize do
-      _clean
-      session = @pool.find{|idle_session| idle_session.key == connection.key }
-      @pool.delete(session) if session
+    unless force_new
+      @pool_mutex.synchronize do
+        _clean
+        session = @pool.find{|idle_session| idle_session.key == connection.key }
+        @pool.delete(session) if session
+      end
     end
 
     if session.nil?

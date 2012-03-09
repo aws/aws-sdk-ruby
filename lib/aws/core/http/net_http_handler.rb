@@ -38,6 +38,7 @@ module AWS
           options[:ssl_ca_path] = request.ssl_ca_path if request.ssl_ca_path
 
           connection = self.class.pool.connection_for(request.host, options)
+          connection.read_timeout = request.read_timeout
 
           begin
             http_response = connection.request(build_request(request))
