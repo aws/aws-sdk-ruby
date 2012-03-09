@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'timeout'
+
 module AWS
   class SimpleWorkflow
 
@@ -105,8 +107,12 @@ module AWS
 
       def poll task_list, options = {}, &block
         loop do 
-          poll_for_single_task(task_list, options) do |activity_task|
-            yield(activity_task)
+          begin
+            poll_for_single_task(task_list, options) do |activity_task|
+              yield(activity_task)
+            end
+          rescue Timeout::Error
+            retry
           end
         end
         nil

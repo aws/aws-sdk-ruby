@@ -13,6 +13,7 @@
 
 require 'uuidtools'
 require 'date'
+require 'json'
 
 module AWS
   module Core

@@ -29,6 +29,7 @@ module AWS::Core::Http
         :ssl_verify_peer? => true,
         :ssl_ca_file => '/ssl/ca',
         :ssl_ca_path => nil,
+        :read_timeout => 60,
         :headers => { 'foo' => 'bar' })
     }
 
