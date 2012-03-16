@@ -806,7 +806,7 @@ module AWS
       #   as a date using Time#parse), a Time, or a DateTime object.
       #   This option defaults to one hour after the current time.
       #
-      # @option options [String] :secure Whether to generate a
+      # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
       # @option options [String] :response_content_type Sets the
