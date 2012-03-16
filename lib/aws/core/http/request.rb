@@ -26,6 +26,7 @@ module AWS
           @headers = CaseInsensitiveHash.new
           @params = []
           @use_ssl = true
+          @port = nil
           @read_timeout = 60 
         end
 
@@ -33,6 +34,10 @@ module AWS
         #   before a timeout error is raised on the request.  Defaults to 
         #   60 seconds.
         attr_accessor :read_timeout
+
+        # @return [String] The snake-cased ruby name for the service
+        #   (e.g. 's3', 'iam', 'dynamo_db', etc).
+        attr_accessor :service_ruby_name
   
         # @return [String] hostname of the request
         attr_accessor :host
@@ -57,6 +62,10 @@ module AWS
         # @return [nil, URI] The URI to the proxy server requests are 
         #   sent through if configured.  Returns nil if there is no proxy.
         attr_accessor :proxy_uri
+
+        # @return [String] The region name this request is for.  Only needs
+        #   to be populated for requests against signature v4 endpoints.
+        attr_accessor :region
   
         # @param [Boolean] ssl If the request should be sent over ssl or not.
         def use_ssl= use_ssl
@@ -66,6 +75,19 @@ module AWS
         # @return [Boolean] If this request should be sent over ssl or not.
         def use_ssl?
           @use_ssl
+        end
+
+        # Override the default port (443 or 80).  If you pass nil then
+        # the default port will take precedence.
+        # @param [Integer,nil] port_number
+        def port= port_number
+          @port = port_number
+        end
+
+        # @return [Integer] Returns the port the request will be made over.
+        #   Defaults to 443 for SSL requests and 80 for non-SSL requests.
+        def port
+          @port || (use_ssl? ? 443 : 80)
         end
   
         # @param [Boolean] verify_peer If the client should verify the

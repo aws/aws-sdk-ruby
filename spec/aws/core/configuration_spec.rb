@@ -66,12 +66,21 @@ module AWS::Core
       end
 
       it 'can transform values' do
-        config_class.add_option :basic, 'default' do |v| "|#{v}|" end
+        config_class.add_option :basic, 'default' do |config,v| "|#{v}|" end
         config.basic.should == '|default|'
       end
 
+      it 'passes the configuration object to the config block' do
+        yielded = nil
+        config_class.add_option :basic do |config,v|
+          yielded = config
+        end
+        config.basic
+        yielded.should == config
+      end
+
       it 'passes default nil values to the transform block' do
-        config_class.add_option :basic do |v| "|#{v}|" end
+        config_class.add_option :basic do |config,v| "|#{v}|" end
         config.basic.should == '||'
       end
 
@@ -86,7 +95,7 @@ module AWS::Core
       end
 
       it 'transforms values as passed to #new' do
-        config_class.add_option :basic do |v| "|#{v}|" end
+        config_class.add_option :basic do |config,v| "|#{v}|" end
         config_class.new(:basic => 'foo').basic.should == '|foo|'
       end
 

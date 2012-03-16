@@ -16,7 +16,13 @@ module AWS
 
     # @private
     class Request < Core::Http::Request
-      include Core::AuthorizeV2
+
+      include Core::AuthorizeV4
+
+      def service
+        'iam'
+      end
+
     end
 
   end

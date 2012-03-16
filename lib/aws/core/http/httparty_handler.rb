@@ -68,12 +68,13 @@ module AWS
           end
   
           if request.use_ssl?
-            url = "https://#{request.host}:443#{request.uri}"
-            opts[:ssl_ca_file] = request.ssl_ca_file if
-              request.ssl_verify_peer?
+            protocol = 'https'
+            opts[:ssl_ca_file] = request.ssl_ca_file if request.ssl_verify_peer?
           else
-            url = "http://#{request.host}#{request.uri}"
+            protocol = 'http'
           end
+
+          url = "#{protocol}://#{request.host}:#{request.port}#{request.uri}"
   
           # get, post, put, delete, head
           method = request.http_method.downcase

@@ -59,7 +59,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.3.7"
+  VERSION = "1.3.8"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -72,6 +72,7 @@ module AWS
       autoload :AsyncHandle,               'async_handle'
       autoload :AuthorizeV2,               'authorize_v2'
       autoload :AuthorizeV3,               'authorize_v3'
+      autoload :AuthorizeV4,               'authorize_v4'
       autoload :AuthorizeWithSessionToken, 'authorize_with_session_token'
       autoload :Cacheable,                 'cacheable'
       autoload :Client,                    'client'

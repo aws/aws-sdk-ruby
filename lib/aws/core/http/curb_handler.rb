@@ -86,11 +86,10 @@ module AWS
 
         private
         def make_easy_handle request, response, thread = nil
-
-          url = request.use_ssl? ? 
-            "https://#{request.host}:443#{request.uri}" :
-            "http://#{request.host}#{request.uri}"
-
+  
+          protocol = request.use_ssl? ? 'https' : 'http'
+          url = "#{protocol}://#{request.host}:#{request.port}#{request.uri}"
+  
           curl = Curl::Easy.new(url)
           # curl.verbose = true
           request.headers.each {|k, v| curl.headers[k] = v}
