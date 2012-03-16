@@ -302,7 +302,7 @@ module AWS
                 default_value
               end
 
-            transform ? transform.call(value) : value
+            transform ? transform.call(self, value) : value
 
           end
   
@@ -346,6 +346,7 @@ module AWS
             :signer, 
             :http_handler, 
             :"#{ruby_name}_endpoint",
+            :"#{ruby_name}_port",
             :max_retries,
             :stub_requests?,
             :proxy_uri,
@@ -358,6 +359,29 @@ module AWS
           ]
 
           add_option :"#{ruby_name}_endpoint", default_endpoint
+
+          add_option(:"#{ruby_name}_port") do |config,value|
+            value || (config.use_ssl? ? 443 : 80)
+          end
+
+          # users only need to specify service regions when they use
+          # a test endpoint with a sigv4 service
+          add_option(:"#{ruby_name}_region") do |config,value|
+            value || begin
+              endpoint = config.send("#{ruby_name}_endpoint")
+              if endpoint =~ /us-gov/
+                if matches = enpoint.match(/(us-gov-west-\d+)/)
+                  matches[1]
+                else
+                  'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
+                end
+              elsif matches = endpoint.match(/^.+\.(.+)\.amazonaws.com$/)
+                matches[1] 
+              else
+                'us-east-1'
+              end
+            end
+          end
 
           add_option_with_needs :"#{ruby_name}_client", needs, &create_block
 
@@ -376,7 +400,7 @@ module AWS
   
       add_option :max_retries, 3
   
-      add_option :proxy_uri do |uri| uri ? URI.parse(uri.to_s) : nil end
+      add_option :proxy_uri do |config,uri| uri ? URI.parse(uri.to_s) : nil end
   
       add_option :secret_access_key, 
         ENV['AWS_SECRET_ACCESS_KEY'] || ENV['AMAZON_SECRET_ACCESS_KEY']

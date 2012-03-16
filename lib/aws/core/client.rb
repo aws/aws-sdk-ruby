@@ -54,20 +54,28 @@ module AWS
       #   HTTP requests that this client constructs.
       #
       def initialize options = {}
+
+        options = options.dup # so we don't modify the options passed in
+
+        @service_ruby_name = self.class.service_ruby_name
   
-        if options[:endpoint]
-          options[:"#{self.class.service_ruby_name}_endpoint"] = 
-            options.delete(:endpoint)
+        # translate these into service specific configuration options,
+        # e.g. :endpoint into :s3_endpoint
+        [:endpoint, :region, :port].each do |opt|
+          if options[opt]
+            options[:"#{service_ruby_name}_#{opt}"] = options.delete(opt)
+          end
         end
   
-        options_without_config = options.dup
-        @config = options_without_config.delete(:config)
+        @config = options.delete(:config)
         @config ||= AWS.config
-        @config = @config.with(options_without_config)
+        @config = @config.with(options)
+
         @signer = @config.signer
         @http_handler = @config.http_handler
-        @stubs = {}
-  
+        @endpoint = config.send(:"#{service_ruby_name}_endpoint")
+        @port = config.send(:"#{service_ruby_name}_port")
+
       end
   
       # @return [Configuration] This clients configuration.
@@ -77,11 +85,17 @@ module AWS
       #   This is normally a DefaultSigner, but it can be configured to
       #   an other object.
       attr_reader :signer
-  
-      # @return [String] the configured endpoint for this client.
-      def endpoint
-        config.send(:"#{self.class.service_ruby_name}_endpoint")
-      end
+
+      # @return [String] The snake-cased ruby name for the service
+      #   (e.g. 's3', 'iam', 'dynamo_db', etc).
+      attr_reader :service_ruby_name
+
+      # @return [Integer] What port this client makes requests via.
+      attr_reader :port
+
+      # @return [String] Returns the service endpoint (hostname) this client
+      #   makes requests against.
+      attr_reader :endpoint
   
       # Returns a copy of the client with a different HTTP handler.
       # You can pass an object like BuiltinHttpHandler or you can
@@ -125,6 +139,7 @@ module AWS
       # @see new_stub_for
       # @private
       def stub_for method_name
+        @stubs ||= {}
         @stubs[method_name] ||= new_stub_for(method_name)
       end
   
@@ -381,7 +396,10 @@ module AWS
         http_request = new_request
   
         # configure the http request
+        http_request.service_ruby_name = service_ruby_name
         http_request.host = endpoint
+        http_request.port = port
+        http_request.region = config.send(:"#{service_ruby_name}_region")
         http_request.proxy_uri = config.proxy_uri
         http_request.use_ssl = config.use_ssl?
         http_request.ssl_verify_peer = config.ssl_verify_peer?

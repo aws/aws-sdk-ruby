@@ -16,7 +16,7 @@ require 'time'
 module AWS
   module Core
   
-    # Mixed into clients that use v3 authorization.
+    # Mixed into clients that use signature v3 authorization.
     # @private
     module AuthorizeV3
 

@@ -14,7 +14,7 @@
 module AWS
   module Core
     
-    # Mixed into clients that use v2 authorization.
+    # Mixed into clients that use signature v2 authorization.
     # @private
     module AuthorizeV2
 
