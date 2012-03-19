@@ -448,7 +448,7 @@ module AWS
       # new object once this is done.
       #
       #   bucket = s3.buckets['old-bucket']
-      #   old_obj = bucket.objets['old-key']
+      #   old_obj = bucket.objects['old-key']
       #
       #   # renaming an object returns a new object
       #   new_obj = old_obj.move_to('new-key')
@@ -474,7 +474,7 @@ module AWS
       #
       # @option (see #copy_to)
       #
-      # @return [S3Object] Returns a new objet with the new key.
+      # @return [S3Object] Returns a new object with the new key.
       #
       def move_to target, options = {}
         copy = copy_to(target, options)
