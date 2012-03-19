@@ -41,7 +41,7 @@ module AWS
     #
     # If you know the id of a particular version you can get that object.
     #
-    #   bucket.objets['myobj'].version[version_id].delete
+    #   bucket.objects['myobj'].version[version_id].delete
     #   
     class ObjectVersionCollection
 
