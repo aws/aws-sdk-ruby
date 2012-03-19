@@ -465,7 +465,7 @@ module AWS
       #   obj = s3.buckets['old-bucket'].objects['old-key]
       #   obj.move_to('new-key', :bucket_name => 'new_bucket')
       # 
-      # If the copy succedes, but the then the delete fails, an error
+      # If the copy succeeds, but the then the delete fails, an error
       # will be raised.  
       #
       # @param [String] target The key to move this object to.
