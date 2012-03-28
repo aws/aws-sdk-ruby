@@ -129,7 +129,7 @@ the SDK features.
 6. Create config/initializers/aws.rb as follows:
 
      # load the libraries
-     require 'aws'
+     require 'aws-sdk'
      # log requests using the default rails logger
      AWS.config(:logger => Rails.logger)
      # load credentials from a file
