@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws'
+require 'aws-sdk'
 
 include AWS
 config_path = File.expand_path(File.dirname(__FILE__)+"/../aws.yml")

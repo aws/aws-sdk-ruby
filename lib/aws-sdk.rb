@@ -11,4 +11,35 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws'
+require 'aws/core'
+
+require 'aws/dynamo_db/config'
+require 'aws/ec2/config'
+require 'aws/elb/config'
+require 'aws/iam/config'
+require 'aws/s3/config'
+require 'aws/simple_db/config'
+require 'aws/simple_email_service/config'
+require 'aws/simple_workflow/config'
+require 'aws/sns/config'
+require 'aws/sqs/config'
+require 'aws/sts/config'
+
+module AWS
+  register_autoloads(self) do
+    autoload :DynamoDB, 'dynamo_db'
+    autoload :EC2, 'ec2'
+    autoload :ELB, 'elb'
+    autoload :IAM, 'iam'
+    autoload :S3, 's3'
+    autoload :SimpleDB, 'simple_db'
+    autoload :SimpleEmailService, 'simple_email_service'
+    autoload :SimpleWorkflow, 'simple_workflow'
+    autoload :SNS, 'sns'
+    autoload :SQS, 'sqs'
+    autoload :STS, 'sts'
+    autoload :Record, 'record'
+  end
+end
+
+require 'aws/rails'
