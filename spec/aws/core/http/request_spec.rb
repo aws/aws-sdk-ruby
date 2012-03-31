@@ -75,10 +75,10 @@ module AWS::Core
           Request.new.path.should == '/'
         end
 
-        it 'can not be set directly' do
-          lambda { 
-            Request.new.path = '/foo'
-          }.should raise_error(NoMethodError)
+        it 'can be set directly' do
+          req = Request.new
+          req.path = '/foo'
+          req.path.should == '/foo'
         end
 
       end

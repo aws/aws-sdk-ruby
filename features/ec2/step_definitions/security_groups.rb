@@ -21,6 +21,13 @@ Given /^I create a security group named "([^\"]*)"$/ do |name|
   @created_security_groups << @security_group
 end
 
+Given /^I create (\d+) security groups$/ do |count|
+  count.to_i.times do |i|
+    name = "ruby-integration-test-#{Time.now.to_i}-#{i}"
+    Given "I create a security group named \"#{name}\""
+  end
+end
+
 Given /^I create (\d+) vpc security groups$/ do |count|
   @security_groups = []
   count.to_i.times do |n|

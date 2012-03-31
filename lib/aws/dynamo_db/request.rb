@@ -50,7 +50,7 @@ module AWS
       end
 
       def headers_to_sign
-        headers.keys.select do |header|
+        headers.keys.sort.select do |header|
           header == "content-encoding" ||
             header == "host" ||
             header =~ /^x-amz/

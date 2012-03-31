@@ -14,8 +14,6 @@
 module AWS
   class ELB
 
-  
-    #
     # @attr_reader [String] name The name of the load balancer.
     #
     # @attr_reader [Array<String>] availability_zone_names Return the names of

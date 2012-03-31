@@ -24,8 +24,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [VPC,String] :vpc The vpc or vpc id of where you want
-      #   to create the subnet.  This option is required if this collection
-      #   does not have a populated vpc ({#vpc} returns nil).
+      #   to create the subnet.
       #
       # @return [NetworkACL]
       #

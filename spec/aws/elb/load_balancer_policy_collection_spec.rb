@@ -30,18 +30,20 @@ module AWS
 
         it 'calls #create_load_balancer_policy' do
           
-          client.should_receive(:create_load_balancer_policy).with(
-            :load_balancer_name => load_balancer.name,
-            :policy_name => 'policy-name',
-            :policy_type_name => 'policy-type-name',
-            :policy_attributes => [
+          client.should_receive(:create_load_balancer_policy).with do |opts|
+            opts[:load_balancer_name].should ==  load_balancer.name
+            opts[:policy_name].should == 'policy-name'
+            opts[:policy_type_name].should ==  'policy-type-name'
+            opts[:policy_attributes].sort_by do |a|
+              a[:attribute_name] + a[:attribute_value]
+            end.should == [
               { :attribute_name => 'attr1', :attribute_value => 'value1' },
               { :attribute_name => 'attr2', :attribute_value => 'value2' },
               { :attribute_name => 'attr2', :attribute_value => 'value3' },
               { :attribute_name => 'attr3', :attribute_value => 'true' },
               { :attribute_name => 'attr4', :attribute_value => 'false' },
             ]
-          )
+          end
 
           policies.create('policy-name', 'policy-type-name', {
             'attr1' => 'value1',

@@ -106,7 +106,7 @@ module AWS
 
         it 'should pass the instance' do
           volume.send(method, *args).instance.
-            should == Instance.new("i-123")
+            should == Instance.new("i-123", :config => config)
         end
 
         it 'should pass the volume' do

@@ -1,0 +1,563 @@
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:operations:
+  CreateAutoScalingGroup:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      LaunchConfigurationName:
+      - :string
+      - :required
+      MinSize:
+      - :integer
+      - :required
+      MaxSize:
+      - :integer
+      - :required
+      DesiredCapacity:
+      - :integer
+      DefaultCooldown:
+      - :integer
+      AvailabilityZones:
+      - :membered_list:
+        - :string
+      - :required
+      LoadBalancerNames:
+      - :membered_list:
+        - :string
+      HealthCheckType:
+      - :string
+      HealthCheckGracePeriod:
+      - :integer
+      PlacementGroup:
+      - :string
+      VPCZoneIdentifier:
+      - :string
+      Tags:
+      - :membered_list:
+        - :structure:
+            ResourceId:
+            - :string
+            ResourceType:
+            - :string
+            Key:
+            - :string
+            - :required
+            Value:
+            - :string
+            PropagateAtLaunch:
+            - :boolean
+    :output: []
+  DeleteAutoScalingGroup:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      ForceDelete:
+      - :boolean
+    :output: []
+  DescribeAutoScalingGroups:
+    :input:
+      AutoScalingGroupNames:
+      - :membered_list:
+        - :string
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - AutoScalingGroups:
+      - :list: member
+      - member:
+        - MinSize:
+          - :integer
+        - MaxSize:
+          - :integer
+        - DesiredCapacity:
+          - :integer
+        - DefaultCooldown:
+          - :integer
+        - AvailabilityZones:
+          - :list: member
+        - LoadBalancerNames:
+          - :list: member
+        - HealthCheckGracePeriod:
+          - :integer
+        - Instances:
+          - :list: member
+        - CreatedTime:
+          - :timestamp
+        - SuspendedProcesses:
+          - :list: member
+        - EnabledMetrics:
+          - :list: member
+        - Tags:
+          - :list: member
+          - member:
+            - PropagateAtLaunch:
+              - :boolean
+  UpdateAutoScalingGroup:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      LaunchConfigurationName:
+      - :string
+      MinSize:
+      - :integer
+      MaxSize:
+      - :integer
+      DesiredCapacity:
+      - :integer
+      DefaultCooldown:
+      - :integer
+      AvailabilityZones:
+      - :membered_list:
+        - :string
+      HealthCheckType:
+      - :string
+      HealthCheckGracePeriod:
+      - :integer
+      PlacementGroup:
+      - :string
+      VPCZoneIdentifier:
+      - :string
+    :output: []
+  DescribeAutoScalingInstances:
+    :input:
+      InstanceIds:
+      - :membered_list:
+        - :string
+      MaxRecords:
+      - :integer
+      NextToken:
+      - :string
+    :output:
+    - AutoScalingInstances:
+      - :list: member
+  DescribeScalingProcessTypes:
+    :input: {}
+    :output:
+    - Processes:
+      - :list: member
+  SuspendProcesses:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      ScalingProcesses:
+      - :membered_list:
+        - :string
+    :output: []
+  ResumeProcesses:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      ScalingProcesses:
+      - :membered_list:
+        - :string
+    :output: []
+  SetDesiredCapacity:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      DesiredCapacity:
+      - :integer
+      - :required
+      HonorCooldown:
+      - :boolean
+    :output: []
+  SetInstanceHealth:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      HealthStatus:
+      - :string
+      - :required
+      ShouldRespectGracePeriod:
+      - :boolean
+    :output: []
+  PutScheduledUpdateGroupAction:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      ScheduledActionName:
+      - :string
+      - :required
+      Time:
+      - :timestamp
+      StartTime:
+      - :timestamp
+      EndTime:
+      - :timestamp
+      Recurrence:
+      - :string
+      MinSize:
+      - :integer
+      MaxSize:
+      - :integer
+      DesiredCapacity:
+      - :integer
+    :output: []
+  DescribeScheduledActions:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      ScheduledActionNames:
+      - :membered_list:
+        - :string
+      StartTime:
+      - :timestamp
+      EndTime:
+      - :timestamp
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - ScheduledUpdateGroupActions:
+      - :list: member
+      - member:
+        - Time:
+          - :timestamp
+        - StartTime:
+          - :timestamp
+        - EndTime:
+          - :timestamp
+        - MinSize:
+          - :integer
+        - MaxSize:
+          - :integer
+        - DesiredCapacity:
+          - :integer
+  DeleteScheduledAction:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      ScheduledActionName:
+      - :string
+      - :required
+    :output: []
+  DescribeAdjustmentTypes:
+    :input: {}
+    :output:
+    - AdjustmentTypes:
+      - :list: member
+  PutScalingPolicy:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      PolicyName:
+      - :string
+      - :required
+      ScalingAdjustment:
+      - :integer
+      - :required
+      AdjustmentType:
+      - :string
+      - :required
+      Cooldown:
+      - :integer
+      MinAdjustmentMagnitude:
+      - :integer
+    :output: []
+  DescribePolicies:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      PolicyNames:
+      - :membered_list:
+        - :string
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - ScalingPolicies:
+      - :list: member
+      - member:
+        - ScalingAdjustment:
+          - :integer
+        - Cooldown:
+          - :integer
+        - Alarms:
+          - :list: member
+        - MinAdjustmentMagnitude:
+          - :integer
+  DeletePolicy:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      PolicyName:
+      - :string
+      - :required
+    :output: []
+  ExecutePolicy:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      PolicyName:
+      - :string
+      - :required
+      HonorCooldown:
+      - :boolean
+    :output: []
+  DescribeMetricCollectionTypes:
+    :input: {}
+    :output:
+    - Metrics:
+      - :list: member
+    - Granularities:
+      - :list: member
+  EnableMetricsCollection:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      Metrics:
+      - :membered_list:
+        - :string
+      Granularity:
+      - :string
+      - :required
+    :output: []
+  DisableMetricsCollection:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      Metrics:
+      - :membered_list:
+        - :string
+    :output: []
+  CreateLaunchConfiguration:
+    :input:
+      LaunchConfigurationName:
+      - :string
+      - :required
+      ImageId:
+      - :string
+      - :required
+      KeyName:
+      - :string
+      SecurityGroups:
+      - :membered_list:
+        - :string
+      UserData:
+      - :string
+      InstanceType:
+      - :string
+      - :required
+      KernelId:
+      - :string
+      RamdiskId:
+      - :string
+      BlockDeviceMappings:
+      - :membered_list:
+        - :structure:
+            VirtualName:
+            - :string
+            DeviceName:
+            - :string
+            - :required
+            Ebs:
+            - :structure:
+                SnapshotId:
+                - :string
+                VolumeSize:
+                - :integer
+      InstanceMonitoring:
+      - :structure:
+          Enabled:
+          - :boolean
+    :output: []
+  DescribeLaunchConfigurations:
+    :input:
+      LaunchConfigurationNames:
+      - :membered_list:
+        - :string
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - LaunchConfigurations:
+      - :list: member
+      - member:
+        - SecurityGroups:
+          - :list: member
+        - BlockDeviceMappings:
+          - :list: member
+          - member:
+            - Ebs:
+              - VolumeSize:
+                - :integer
+        - InstanceMonitoring:
+          - Enabled:
+            - :boolean
+        - CreatedTime:
+          - :timestamp
+  DeleteLaunchConfiguration:
+    :input:
+      LaunchConfigurationName:
+      - :string
+      - :required
+    :output: []
+  DescribeScalingActivities:
+    :input:
+      ActivityIds:
+      - :membered_list:
+        - :string
+      AutoScalingGroupName:
+      - :string
+      MaxRecords:
+      - :integer
+      NextToken:
+      - :string
+    :output:
+    - Activities:
+      - :list: member
+      - member:
+        - StartTime:
+          - :timestamp
+        - EndTime:
+          - :timestamp
+        - Progress:
+          - :integer
+  TerminateInstanceInAutoScalingGroup:
+    :input:
+      InstanceId:
+      - :string
+      - :required
+      ShouldDecrementDesiredCapacity:
+      - :boolean
+      - :required
+    :output:
+    - Activity:
+      - StartTime:
+        - :timestamp
+      - EndTime:
+        - :timestamp
+      - Progress:
+        - :integer
+  PutNotificationConfiguration:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      TopicARN:
+      - :string
+      - :required
+      NotificationTypes:
+      - :membered_list:
+        - :string
+      - :required
+    :output: []
+  DeleteNotificationConfiguration:
+    :input:
+      AutoScalingGroupName:
+      - :string
+      - :required
+      TopicARN:
+      - :string
+      - :required
+    :output: []
+  DescribeNotificationConfigurations:
+    :input:
+      AutoScalingGroupNames:
+      - :membered_list:
+        - :string
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - NotificationConfigurations:
+      - :list: member
+  DescribeAutoScalingNotificationTypes:
+    :input: {}
+    :output:
+    - AutoScalingNotificationTypes:
+      - :list: member
+  CreateOrUpdateTags:
+    :input:
+      Tags:
+      - :membered_list:
+        - :structure:
+            ResourceId:
+            - :string
+            ResourceType:
+            - :string
+            Key:
+            - :string
+            - :required
+            Value:
+            - :string
+            PropagateAtLaunch:
+            - :boolean
+      - :required
+    :output: []
+  DeleteTags:
+    :input:
+      Tags:
+      - :membered_list:
+        - :structure:
+            ResourceId:
+            - :string
+            ResourceType:
+            - :string
+            Key:
+            - :string
+            - :required
+            Value:
+            - :string
+            PropagateAtLaunch:
+            - :boolean
+      - :required
+    :output: []
+  DescribeTags:
+    :input:
+      Filters:
+      - :membered_list:
+        - :structure:
+            Name:
+            - :string
+            Values:
+            - :membered_list:
+              - :string
+      NextToken:
+      - :string
+      MaxRecords:
+      - :integer
+    :output:
+    - Tags:
+      - :list: member
+      - member:
+        - PropagateAtLaunch:
+          - :boolean
+:client_errors:
+  ScalingActivityInProgress: []
+  ResourceInUse: []
+  AlreadyExists: []
+  LimitExceeded: []
+  InvalidNextToken: []
+  InvalidActivityStep: []
+:server_errors: {}

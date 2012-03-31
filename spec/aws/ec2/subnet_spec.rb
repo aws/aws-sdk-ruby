@@ -92,7 +92,7 @@ module AWS
 
           it 'returns the vpc passed in' do
             client.should_not_receive(:describe_subnets)
-            subnet = Subnet.new('subnet-12345', :vpc_id => vpc.id)
+            subnet = Subnet.new('subnet-12345', :vpc_id => vpc.id, :config => config)
             subnet.vpc.should == vpc
           end
 
@@ -175,7 +175,7 @@ module AWS
                 :vpc_id => 'vpc-id',
                 :config => config)
               subnet.route_table.should == 
-                RouteTable.new('route-table-id-1')
+                RouteTable.new('route-table-id-1', :config => config)
             end
 
             it 'returns the default route table if there is no association' do
@@ -183,14 +183,16 @@ module AWS
                 :vpc_id => 'vpc-id',
                 :config => config)
               subnet.route_table.should == 
-                RouteTable.new('route-table-id-2')
+                RouteTable.new('route-table-id-2', :config => config)
             end
 
           end
 
           context 'setting the route table' do
 
-            let(:route_table) { RouteTable.new('other-route-table') }
+            let(:route_table) { 
+              RouteTable.new('other-route-table', :config => config) 
+            }
             
             context 'a subnet without a route table association' do
 

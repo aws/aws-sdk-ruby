@@ -31,7 +31,7 @@ module AWS
       # @option options [AvailabilityZone,String] :availability_zone
       #   The Availability Zone where you want the virtual private gateway.
       #   AWS can select a default zone for you.  This can be an
-      #   {AvailablityZone} object or availability zone name string.
+      #   {AvailabilityZone} object or availability zone name string.
       #   
       # @return [VPNGateway]
       #
