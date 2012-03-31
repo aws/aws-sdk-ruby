@@ -18,13 +18,15 @@ module AWS
   shared_examples_for 'a class that accepts configuration' do |*used_config|
 
     it 'constructor passes options to Configuration#with' do
-      AWS.config.should_receive(:with).
-        with(:access_key_id => "foo",
-             :secret_access_key => "bar").and_return(AWS.config)
-      (used_config || []).each do |name|
-        AWS.config.stub(name)
-      end
+
+      credentials = { :access_key_id => 'foo', :secret_access_key => 'bar' }
+
+      configured = AWS.config.with(credentials)
+
+      AWS.config.should_receive(:with).with(credentials).and_return(configured)
+
       described_class.new(:access_key_id => "foo", :secret_access_key => "bar")
+
     end
 
   end

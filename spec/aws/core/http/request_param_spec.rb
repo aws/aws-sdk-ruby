@@ -94,6 +94,11 @@ module AWS::Core
             param.encoded.should == 'name=value%0Avalue'
           end
 
+          it 'should not encode tilde' do
+            param = Param.new('name', "value~")
+            param.encoded.should == 'name=value~'
+          end
+
           context 'with transcoding support' do
 
             it 'should convert to UTF-8 before encoding' do

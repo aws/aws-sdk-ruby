@@ -22,8 +22,6 @@ module AWS
   
       extend Naming
   
-      include ClientLogging
-  
       CACHEABLE_REQUESTS = Set.new
   
       # Creates a new low-level client.
@@ -222,6 +220,8 @@ module AWS
           @http_handler.handle(response.http_request, http_response)
   
           populate_error(response)
+
+          populate_error(response)
           response.signal_success unless response.error
           response
   
@@ -277,6 +277,31 @@ module AWS
           raise response.error if response.error
         end
         response
+      end
+
+      private
+      def log_client_request options
+
+        # time the request, retries and all
+        start = Time.now
+        response = yield
+        response.duration = Time.now - start
+
+        if config.logger
+          if options[:async] 
+            response.on_complete { log_response(response) } 
+          else
+            log_response(response)
+          end
+        end
+  
+        response
+
+      end
+
+      def log_response response
+        message = config.log_formatter.format(response)
+        config.logger.send(config.log_level, message)
       end
   
       protected
@@ -335,7 +360,7 @@ module AWS
       private
       def client_request name, options, &block
         return_or_raise(options) do
-          log_client_request(name, options) do
+          log_client_request(options) do
   
             if config.stub_requests?
   

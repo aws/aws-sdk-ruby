@@ -101,9 +101,9 @@ module AWS
           super(nil, nil, req)
           @message = req
         elsif req and resp
-          super(req, resp, message)
-          include_error_type
           parse_body(resp.body)
+          super(req, resp, self.message)
+          include_error_type
         else
           super()
         end

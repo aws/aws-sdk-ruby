@@ -44,6 +44,10 @@ module AWS
       # @return [Integer] Returns the number of times the request
       #   was retried.
       attr_accessor :retry_count
+
+      # @return [Float] The total number of seconds taken to make the
+      #   request and return the response.
+      attr_accessor :duration
   
       # @param [Http::Request] http_request
       # @param [Http::Response] http_request
@@ -52,6 +56,7 @@ module AWS
         @http_response = http_response
         @request_builder = block
         @retry_count = 0
+        @duration = 0
         rebuild_request if @request_builder && !http_request
       end
   

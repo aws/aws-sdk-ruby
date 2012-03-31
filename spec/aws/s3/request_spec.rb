@@ -118,12 +118,6 @@ module AWS
           request.path.should == "/foo_bar/key/foo%20bla/"
         end
 
-        it 'should be readonly' do
-          lambda {
-            request.path = '/foo'
-          }.should raise_error(NoMethodError, /undefined method/)
-        end
-
       end
 
       context '#uri' do

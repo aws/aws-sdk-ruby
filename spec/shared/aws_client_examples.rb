@@ -433,7 +433,7 @@ module AWS::Core
       end
 
       it 'should log server errors' do
-        logger.should_receive(:error)
+        logger.should_receive(:info)
         begin
           logging_client.with_http_handler do |req,resp|
             resp.status = 502

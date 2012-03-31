@@ -48,6 +48,26 @@ module AWS
         def respond_to?(m)
           @data.key?(m.to_sym) or super
         end
+        
+        def to_hash
+          @data.inject({}) do |hash,(key,value)|
+
+            # strip question marks from hash keys
+            if matches = key.to_s.match(/(.+)\?$/)
+              key = matches[1].to_sym
+            end
+
+            # recursively convert hashes
+            if value.is_a?(Array)
+              value = value.map{|v| v.is_a?(Context) ? v.to_hash : v }
+            elsif value.is_a?(Context)
+              value = value.to_hash
+            end
+
+            hash.merge(key => value)
+
+          end
+        end
   
         def inspect
           methods = @data.keys
@@ -517,6 +537,7 @@ module AWS
   
       end
   
+      # @private
       module NokogiriAdapter
   
         def xmldecl(*args); end

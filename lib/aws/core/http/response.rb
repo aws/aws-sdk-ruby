@@ -33,9 +33,10 @@ module AWS
         # @return [String] ('') response http body
         attr_accessor :body
   
-        # @return [String] (false) set to true if the client gives up
+        # @return [Boolean] (false) set to true if the client gives up
         #   before getting a response from the service.
         attr_accessor :timeout
+
         alias_method :timeout?, :timeout
   
         # @param [Hash] options

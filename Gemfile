@@ -15,7 +15,7 @@ source 'http://rubygems.org'
 
 gem 'uuidtools', '~> 2.1'
 gem 'httparty', '~> 0.7'
-gem 'nokogiri', '<= 1.5.0'
+gem 'nokogiri', '>= 1.4.4'
 gem 'json', '~> 1.4.6'
 
 group :debug do
@@ -37,12 +37,9 @@ end
 group :build do
   gem 'rspec', '2.5'
   gem 'rcov', '0.9.9'
-  gem 'hanna', '0.1.12', :require => 'hanna/rdoctask'
   gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
-  gem 'flog', '~> 2.5'
   gem 'yard', '~> 0.7.3'
-  gem 'chronic', '~> 0.5', :platforms => [:ruby]
 end
 
 group :integration do

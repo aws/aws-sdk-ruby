@@ -24,6 +24,7 @@ module AWS
       # @private
       class NotFound < StandardError; end
   
+      # @private
       def initialize *args
   
         super
@@ -62,7 +63,7 @@ module AWS
       #   AWS resource.
       def eql? other
         other.kind_of?(self.class) and 
-          resource_identifiers == other.resource_identifiers
+        other.resource_identifiers == resource_identifiers
       end
       alias_method :==, :eql?
   

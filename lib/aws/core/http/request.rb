@@ -43,17 +43,17 @@ module AWS
         attr_accessor :host
   
         # @return [CaseInsensitiveHash] request headers
-        attr_reader :headers
+        attr_accessor :headers
   
         # @return [Array] An array of request params, each param responds to
         #   #name and #value.
-        attr_reader :params
+        attr_accessor :params
   
         # @return [String] GET, PUT POST, HEAD or DELETE, defaults to POST
         attr_accessor :http_method
   
         # @return [String] path of the request URI, defaults to /
-        attr_reader :path
+        attr_accessor :path
   
         # @return [String] the AWS access key ID used to authorize the
         #   request
