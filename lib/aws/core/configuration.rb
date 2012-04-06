@@ -354,7 +354,7 @@ module AWS
             value || begin
               endpoint = config.send("#{ruby_name}_endpoint")
               if endpoint =~ /us-gov/
-                if matches = enpoint.match(/(us-gov-west-\d+)/)
+                if matches = endpoint.match(/(us-gov-west-\d+)/)
                   matches[1]
                 else
                   'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
