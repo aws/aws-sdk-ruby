@@ -290,14 +290,12 @@ module AWS
       send_opts = {}
       send_opts[:raw_message] = {}
       send_opts[:raw_message][:data] = raw_message.to_s
-      
-      if raw_message.class.name == 'Mail::Message'
-        send_opts[:source] = raw_message.from.first
+      send_opts[:source] = options[:from] if options[:from]
+
+      if raw_message.respond_to?(:destinations)
         send_opts[:destinations] = raw_message.destinations
-      else
-        send_opts[:source] = options[:from] if options[:from]
-        send_opts[:destinations] = [options[:to]].flatten if options[:to]
       end
+      send_opts[:destinations] = [options[:to]].flatten if options[:to]
 
       client.send_raw_email(send_opts)
       nil
