@@ -216,6 +216,36 @@ module AWS
         ses.method(:send_raw_email).should == ses.method(:deliver!)
       end
 
+      context 'with an object as input, that understands destinations (e.g. Mail::Message)' do
+        let(:raw) do
+          r = "raw"
+          r.stub!(:destinations => ['bcc'])
+          r
+        end
+
+        it 'should use the destinations from raw' do
+          client.should_receive(:send_raw_email).with(
+              :raw_message => { :data => 'raw' },
+              :destinations => ['bcc'])
+          ses.send_raw_email(raw)
+        end
+
+        it 'should use the to option as destination, when given' do
+          client.should_receive(:send_raw_email).with(
+              :raw_message => { :data => 'raw' },
+              :destinations => ['to1', 'to2'])
+          ses.send_raw_email(raw, :to => ['to1', 'to2'])
+        end
+
+        it 'should use the from option, when given' do
+          client.should_receive(:send_raw_email).with(
+              :raw_message => { :data => 'raw' },
+              :destinations => ['bcc'],
+              :source => 'from')
+          ses.send_raw_email(raw, :from => 'from')
+        end
+      end
+
     end
 
     context '#quotas' do
