@@ -12,18 +12,21 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  class STS
+  class CloudFormation
+    class Client < Core::Client
+      # @private
+      module XML
 
-    # @private
-    class Request < Core::Http::Request
+        include Core::ConfiguredXmlGrammars
+        extend Core::IgnoreResultElement
 
-      include Core::AuthorizeV4
+        BaseError = Core::XmlGrammar.customize do
+          element("Error") { ignore }
+        end
 
-      def service
-        'sts'
+        define_configured_grammars
+
       end
-
     end
-
   end
 end

@@ -356,6 +356,11 @@ module AWS
         provider.provides :monitoring
       end
 
+      # @return [Boolean] Returns true if this is an EC2 VPC instance.
+      def vpc?
+        !!vpc_id
+      end
+
       # @return [VPC,nil] Returns the VPC this instance was launched in.
       #   If this instance was not launched inside a VPC, nil is returned.
       def vpc
@@ -526,16 +531,32 @@ module AWS
 
       # Associates the elastic IP address with this instance.
       #
-      # @param [ElasticIp,String] elastic_ip Either a public IP address
-      #   string or an {ElasticIp} object to associate to this 
-      #   instance.
+      # @overload associate_elastic_ip(elastic_ip)
+      #   @param [ElasticIp,String] elastic_ip An Elastic ip address
+      #     (VPC or non-VPC) or a public ip address string (non-VPC only).
+      #
+      # @overload associate_elastic_ip(allocation_id)
+      #   @param [String] allocation_id The allocation id of a
+      #     VPC elastic ip address.
+      #
       # @return [nil]
+      #
       def associate_elastic_ip elastic_ip
-        client.associate_address(
-          :public_ip => elastic_ip.to_s,
-          :instance_id => self.id
-        )
+
+        client_opts = {}
+        client_opts[:instance_id] = self.id
+
+        if vpc?
+          client_opts[:allocation_id] = elastic_ip.is_a?(ElasticIp) ?
+            elastic_ip.allocation_id :
+            elastic_ip.to_s
+        else
+          client_opts[:public_ip] = elastic_ip.to_s
+        end
+
+        client.associate_address(client_opts)
         nil
+
       end
 
       alias_method :ip_address=, :associate_elastic_ip

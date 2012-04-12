@@ -186,4 +186,37 @@ describe AWS do
     it_should_behave_like "memoization cache"
   end
 
+  context '#config' do
+
+    context "SERVICE_region" do
+
+      it 'returns REGION when endpoint is SERVICE.REGION.amazonaws.com' do
+        AWS.config.stub(:ec2_endpoint).and_return('ec2.REGION.amazonaws.com')
+        AWS.config.ec2_region.should == 'REGION'
+      end
+
+      it 'returns us-east-1 when endpoint is SERVCIE.amazonaws.com' do
+        AWS.config.stub(:ec2_endpoint).and_return('ec2.amazonaws.com')
+        AWS.config.ec2_region.should == 'us-east-1'
+      end
+
+      it 'returns us-gov-west-1 when endpoint is ec2.us-gov-west-1.amazonaws.com' do
+        AWS.config.stub(:ec2_endpoint).and_return('ec2.us-gov-west-1.amazonaws.com')
+        AWS.config.ec2_region.should == 'us-gov-west-1'
+      end
+
+      it 'returns us-gov-west-2 when endpoint is s3-fips-us-gov-west-1.amazonaws.com' do
+        AWS.config.stub(:s3_endpoint).and_return('s3-fips-us-gov-west-2.amazonaws.com')
+        AWS.config.s3_region.should == 'us-gov-west-2'
+      end
+
+      it 'returns us-gov-west-1 when endpoint is iam.us-gov.amazonaws.com' do
+        AWS.config.stub(:iam_endpoint).and_return('iam.us-gov.amazonaws.com')
+        AWS.config.iam_region.should == 'us-gov-west-1'
+      end
+
+    end
+
+  end
+
 end

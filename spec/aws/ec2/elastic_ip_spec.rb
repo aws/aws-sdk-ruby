@@ -59,6 +59,35 @@ module AWS
 
       end
 
+      context '#allocation_id' do
+      end
+
+      context '#domain' do
+      end
+
+      context '#association_id' do
+      end
+
+      context '#network_interface_id' do
+      end
+
+      context '#network_interface_owner_id' do
+      end
+
+      context '#vpc?' do
+
+        it 'returns true when the domain is vpc' do
+          ip.stub(:domain).and_return('vpc')
+          ip.vpc?.should == true
+        end
+
+        it 'returns false when the domain is not vpc' do
+          ip.stub(:domain).and_return('standard')
+          ip.vpc?.should == false
+        end
+
+      end
+
       context '#associated?' do
 
         it 'returns false when :instance_id is not set' do
@@ -83,9 +112,24 @@ module AWS
       context '#delete' do
 
         it 'calls release_address on the client' do
+
           client.should_receive(:release_address).
             with(:public_ip => ip.public_ip)
+
+          ip.stub(:domain).and_return('standard')
           ip.delete  
+
+        end
+
+        it 'calls release_address on the client with the association id' do
+
+          client.should_receive(:release_address).
+            with(:allocation_id => 'allocation-id')
+
+          ip.stub(:domain).and_return('vpc')
+          ip.stub(:allocation_id).and_return('allocation-id')
+          ip.delete  
+
         end
 
       end
@@ -103,6 +147,15 @@ module AWS
         it 'calls disassociate_address on the client' do
           client.should_receive(:disassociate_address).
             with(:public_ip => ip.public_ip)
+          ip.stub(:domain).and_return('stanrdard')
+          ip.disassociate
+        end
+
+        it 'passes the allocation id for vpc elastic ips' do
+          client.should_receive(:disassociate_address).
+            with(:association_id => 'assoc-id')
+          ip.stub(:domain).and_return('vpc')
+          ip.stub(:association_id).and_return('assoc-id')
           ip.disassociate
         end
 

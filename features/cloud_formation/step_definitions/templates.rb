@@ -11,19 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class STS
+When /^I validate the following template:$/ do |template|
+  @response = @cloud_formation.validate_template(template)
+end
 
-    # @private
-    class Request < Core::Http::Request
-
-      include Core::AuthorizeV4
-
-      def service
-        'sts'
-      end
-
-    end
-
-  end
+Then /^I should get a response like:$/ do |response|
+  @response.should == eval(response)
 end

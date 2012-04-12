@@ -130,8 +130,8 @@ module AWS
       end
       alias_method :put, :create
 
-      # @yeild [notification_config] 
-      # @yield_param [NotificationConfiguration] notification_config
+      # @yield [notification_config] 
+      # @yieldparam [NotificationConfiguration] notification_config
       def each &block
 
         #

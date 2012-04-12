@@ -12,18 +12,22 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  class STS
+  class CloudFormation
+    class Client < Core::Client
 
-    # @private
-    class Request < Core::Http::Request
-
-      include Core::AuthorizeV4
-
-      def service
-        'sts'
+      AWS.register_autoloads(self, 'aws/cloud_formation/client') do
+        autoload :XML, 'xml'
       end
 
-    end
+      include Core::ConfiguredClientMethods
 
+      API_VERSION = '2010-05-15'
+
+      # @private
+      REQUEST_CLASS = CloudFormation::Request
+
+      configure_client
+
+    end
   end
 end

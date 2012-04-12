@@ -14,6 +14,7 @@
 require 'aws/core'
 
 require 'aws/auto_scaling/config'
+require 'aws/cloud_formation/config'
 require 'aws/dynamo_db/config'
 require 'aws/ec2/config'
 require 'aws/elb/config'
@@ -29,6 +30,7 @@ require 'aws/sts/config'
 module AWS
   register_autoloads(self) do
     autoload :AutoScaling, 'auto_scaling'
+    autoload :CloudFormation, 'cloud_formation'
     autoload :DynamoDB, 'dynamo_db'
     autoload :EC2, 'ec2'
     autoload :ELB, 'elb'

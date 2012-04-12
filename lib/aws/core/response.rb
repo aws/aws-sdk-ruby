@@ -73,11 +73,13 @@ module AWS
       # @return [Boolean] Returns true if the http request was throttled
       #   by AWS.
       def throttled?
-        !successful? and
-          http_response.body and
-          parsed_body = XmlGrammar.parse(http_response.body) and
-          parsed_body.respond_to?(:code) and
-          parsed_body.code == "Throttling"
+        if !successful? and http_response.body
+          error = XmlGrammar.parse(http_response.body)
+          error = error.error if error.respond_to?(:error)
+          error.respond_to?(:code) and error.code == "Throttling"
+        else
+          false
+        end
       end
   
       # @return [Boolean] Returns true if the http request timed out.

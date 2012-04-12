@@ -47,3 +47,18 @@ Feature: EC2 Elastic IPs
     Then exactly 1 request should have been made like:
     | TYPE  | NAME   | VALUE             |
     | param | Action | DescribeAddresses |
+
+  @vpc @subnet @instances @elastic_ips @internet_gatweays @slow @wip
+  Scenario: Working with VPC elastic IPs
+    Given I create a vpc with the cidr block "10.0.0.0/16"
+    And I create an internet gateway
+    And I attach the internet gateway to the vpc
+    And I create a subnet with the with the cidr block "10.0.0.0/16"
+    And I allocate a VPC elastic ip
+    When I request to run vpc instance in the subnet
+    Then the instance status should eventually be "running"
+    When I associate the elastic ip with the instance
+    Then the instance public ip address should match the elastic ip address
+    When I disassociate the elastic ip address
+    And I release the elastic ip address
+    Then the elastic ip should not exits

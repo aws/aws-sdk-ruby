@@ -153,6 +153,22 @@ module AWS
       end
   
       class << self
+
+        # @private
+        def define_attribute_type type_name
+          class_eval <<-METHODS
+
+            def self.#{type_name}_attributes
+              @#{type_name}_attributes ||= {}  
+            end
+
+            def self.#{type_name}_attribute name, options = {}, &block
+              attr = attribute(name, options, &block)
+              #{type_name}_attributes[attr.name] = attr
+            end
+
+          METHODS
+        end
   
         # @private
         def new_from request_type, resp_obj, *args

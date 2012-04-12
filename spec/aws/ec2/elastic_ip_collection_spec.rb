@@ -61,6 +61,13 @@ module AWS
             collection.create.ip_address.should == '1.1.1.1'
           end
 
+          it 'accepts a :vpc option for creating vpc ip addresses' do
+            client.should_receive(:allocate_address).
+              with(:domain => 'vpc').
+              and_return(response)
+            collection.create(:vpc => true)
+          end
+
         end
 
         context '#allocate' do
