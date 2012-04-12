@@ -12,18 +12,15 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  class STS
+  class CloudFormation
 
     # @private
-    class Request < Core::Http::Request
+    module Errors
 
-      include Core::AuthorizeV4
+      BASE_ERROR_GRAMMAR = Client::XML::BaseError
 
-      def service
-        'sts'
-      end
+      include Core::LazyErrorClasses
 
     end
-
   end
 end

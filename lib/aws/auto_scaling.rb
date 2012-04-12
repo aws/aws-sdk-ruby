@@ -115,7 +115,7 @@ module AWS
 
     # @return [AutoScaling::InstancesCollection] Returns a collection of
     #   {AutoScaling::Instance} objects.  Each of these is a small
-    #   wrapper around an {EC::Instance} with additional attributes.
+    #   wrapper around an {EC2::Instance} with additional attributes.
     def instances
       InstanceCollection.new(:config => config)
     end

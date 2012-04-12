@@ -18,10 +18,10 @@ module AWS
     #
     # == Getting Auto Scaling Instances
     #
-    # If you know the EC2 instance id, you can use {#[]} to get the 
-    # Auto Scaling instance.
+    # If you know the EC2 instance id, you can use {InstanceCollection#[]} 
+    # to get the Auto Scaling instance.
     #
-    #   instance = auto_scaling.instance['i-1234578']
+    #   instance = auto_scaling.instances['i-1234578']
     #   instance.health_statue #=> :healthy
     #   instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
     #
@@ -150,7 +150,7 @@ module AWS
 
       # Terminates the current Auto Scaling instance.
       #
-      # @params [Boolean] decrement_desired_capacity Specifies whether or not 
+      # @param [Boolean] decrement_desired_capacity Specifies whether or not 
       #   terminating this instance should also decrement the size of 
       #   the AutoScalingGroup.
       #

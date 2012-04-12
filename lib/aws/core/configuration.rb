@@ -66,6 +66,9 @@ module AWS
     # @attr_reader [String] auto_scaling_endpoint ('autoscaling.us-east-1.amazonaws.com')
     #   The service endpoint for Auto Scaling.
     #
+    # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS CloudFormation.
+    #
     # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.  
     #

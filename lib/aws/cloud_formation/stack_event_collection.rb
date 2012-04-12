@@ -12,18 +12,36 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  class STS
+  class CloudFormation
 
-    # @private
-    class Request < Core::Http::Request
+    class StackEventCollection
 
-      include Core::AuthorizeV4
+      include Core::Collection::Simple
 
-      def service
-        'sts'
+      # @param [Stack] stack
+      # @param [Hash] options
+      def initialize stack, options = {}
+        @stack = stack
+        super
+      end
+
+      # @return [Stack]
+      attr_reader :stack
+
+      protected
+
+      def _each_item options = {}
+        options[:stack_name] = stack.name
+        resp = client.describe_stack_events(options)
+        resp.stack_events.each do |details|
+
+          event = StackEvent.new(stack, details.to_hash)
+
+          yield(event)
+
+        end
       end
 
     end
-
   end
 end

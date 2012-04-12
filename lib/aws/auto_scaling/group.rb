@@ -372,7 +372,7 @@ module AWS
       #
       # @see #delete!
       #
-      # @params [Hash] options
+      # @param [Hash] options
       #
       # @option options [Boolean] :force (false) When true, the Auto Scaling
       #   group will be deleted along with all instances associated with 

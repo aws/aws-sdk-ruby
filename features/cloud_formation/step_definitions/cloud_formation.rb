@@ -11,19 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class STS
+Before("@cloud_formation") do
 
-    # @private
-    class Request < Core::Http::Request
+  @cloud_formation = AWS::CloudFormation.new
+  @cloud_formation_client = @cloud_formation.client
 
-      include Core::AuthorizeV4
+  @created_stacks = []
 
-      def service
-        'sts'
-      end
+end
 
-    end
+After("@cloud_formation") do
 
+  @created_stacks.each do |stack|
+    stack.delete
   end
+
 end

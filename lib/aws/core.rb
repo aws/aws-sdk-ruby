@@ -21,6 +21,7 @@ require 'aws/core/autoloader'
 # The currently supported services are:
 #
 # * {AWS::AutoScaling}
+# * {AWS::CloudFormation}
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ELB}
@@ -60,7 +61,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.3.9"
+  VERSION = "1.4.0"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -170,6 +171,9 @@ module AWS
     #
     # @option options [String] :auto_scaling_endpoint ('autoscaling.us-east-1.amazonaws.com')
     #   The service endpoint for Auto Scaling.
+    #
+    # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com') 
+    #   The service endpoint for AWS CloudFormation.
     #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com') 
     #   The service endpoint for Amazon DynamoDB.

@@ -36,6 +36,16 @@ When /^I request to run an instance with the following parameters:$/ do |table|
   sleep 0.1
 end
 
+
+Given /^I request to run vpc instance in the subnet$/ do
+  opts = {}
+  opts[:subnet] = @subnet
+  opts[:image_id] = 'ami-8c1fece5'
+  @instance = @ec2.instances.create(opts)
+  @started_instances << @instance
+end
+
+
 When /^I request to run between (\d+) and (\d+) instances with the following parameters:$/ do |min, max, table|
   opts = {}
   table.hashes.each do |h|

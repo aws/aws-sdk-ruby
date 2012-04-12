@@ -11,19 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class STS
+AWS::Core::Configuration.module_eval do
 
-    # @private
-    class Request < Core::Http::Request
+  add_service 'CloudFormation', 'cloud_formation', 'cloudformation.us-east-1.amazonaws.com'
 
-      include Core::AuthorizeV4
-
-      def service
-        'sts'
-      end
-
-    end
-
-  end
 end

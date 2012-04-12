@@ -1153,6 +1153,7 @@ module AWS
           it 'calls associate_address on the client' do
             client.should_receive(:associate_address).
               with(:public_ip => '1.1.1.1', :instance_id => 'i-123')
+            instance.stub(:vpc_id).and_return(nil)
             instance.associate_elastic_ip('1.1.1.1')
           end
 
@@ -1160,7 +1161,32 @@ module AWS
             client.should_receive(:associate_address).
               with(:public_ip => '1.1.1.1', :instance_id => 'i-123')
             elastic_ip = ElasticIp.new('1.1.1.1')
+            instance.stub(:vpc_id).and_return(nil)
             instance.associate_elastic_ip(elastic_ip)
+          end
+
+          it 'accepts allocation ids for vpc instances' do
+
+            client.should_receive(:associate_address).with(
+              :allocation_id => 'alloc-id', 
+              :instance_id => 'i-123')
+
+            instance.stub(:vpc_id).and_return('vpc-id')
+            instance.associate_elastic_ip('alloc-id')
+
+          end
+
+          it 'accepts allocation ids for vpc instances' do
+
+            client.should_receive(:associate_address).with(
+              :allocation_id => 'alloc-id', 
+              :instance_id => 'i-123')
+
+            elastic_ip = ElasticIp.new('1.1.1.1', :allocation_id => 'alloc-id')
+
+            instance.stub(:vpc_id).and_return('vpc-id')
+            instance.associate_elastic_ip(elastic_ip)
+
           end
 
         end

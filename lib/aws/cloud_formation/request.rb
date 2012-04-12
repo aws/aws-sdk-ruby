@@ -12,15 +12,16 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  class STS
+  class CloudFormation
 
     # @private
     class Request < Core::Http::Request
 
       include Core::AuthorizeV4
+      include Core::AuthorizeWithSessionToken
 
       def service
-        'sts'
+        'cloudformation'
       end
 
     end

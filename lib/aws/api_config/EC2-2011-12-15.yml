@@ -25,7 +25,6 @@
       - :required
       PublicIp:
       - :string
-      - :required
       AllocationId:
       - :string
       NetworkInterfaceId:
@@ -1004,7 +1003,6 @@
     :input:
       PublicIp:
       - :string
-      - :required
       AssociationId:
       - :string
     :output: []

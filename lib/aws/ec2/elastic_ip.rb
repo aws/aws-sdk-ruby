@@ -14,9 +14,23 @@
 module AWS
   class EC2
 
-    #
     # @attr_reader [String,nil] instance_id Returns the instance id if 
     #   assigned to an EC2 instance, nil otherwise.
+    #
+    # @attr_reader [String,nil] allocation_id
+    #   The ID representing the allocation of the address for use with Amazon 
+    #   VPC.
+    #
+    # @attr_reader [String] Indicates whether this elastic ip address is for 
+    #   EC2 instances ('standard') or VPC instances ('vpc').
+    #
+    # @attr_reader [String,nil] The ID of the association between this elastic
+    #   ip address and an EC2 VPC instance (VPC only).
+    #
+    # @attr_reader [String,nil] The ID of the network interface (VPC only).
+    #
+    # @attr_reader [String,nil] network_interface_owner_id 
+    #   The ID of the AWS account that owns the network interface (VPC only).
     #
     class ElasticIp < Resource
 
@@ -32,8 +46,25 @@ module AWS
 
       attribute :instance_id
 
+      ## vpc related attributes
+
+      attribute :allocation_id, :static => true
+
+      attribute :domain, :static => true
+
+      attribute :association_id
+
+      attribute :network_interface_id
+
+      attribute :network_interface_owner_id
+
       populates_from(:describe_addresses) do |resp|
         resp.address_index[public_ip]
+      end
+
+      # @return [Boolean] Returns true if this is an EC2 VPC Elastic IP.
+      def vpc?
+        domain == 'vpc'
       end
 
       # @return [Boolean] Returns true if this IP address is attached to
@@ -59,10 +90,13 @@ module AWS
       #
       # @return [nil]
       def delete
-        client.release_address(resource_options)
+        if vpc?
+          client.release_address(:allocation_id => allocation_id)
+        else
+          client.release_address(:public_ip => public_ip)
+        end
         nil
       end
-
       alias_method :release, :delete
 
       # Disassociates this elastic IP address from an EC2 instance.
@@ -70,8 +104,23 @@ module AWS
       # associated with an instance.
       # @return [nil]
       def disassociate
-        client.disassociate_address(resource_options)
+        if vpc?
+          client.disassociate_address(:association_id => association_id)
+        else
+          client.disassociate_address(:public_ip => public_ip)
+        end
         nil
+      end
+
+      # @return [Boolean] Returns true the elastic ip address exists in
+      #   your account.
+      def exists?
+        begin
+          get_resource
+          true
+        rescue Errors::InvalidAddress::NotFound
+          false
+        end
       end
 
       # @return [String] Returns the public IP address

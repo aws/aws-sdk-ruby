@@ -16,6 +16,11 @@ When /^I allocate an elastic ip$/ do
   @allocated_elastic_ips << @elastic_ip
 end
 
+When /^I allocate a VPC elastic ip$/ do
+  @elastic_ip = @ec2.elastic_ips.allocate :vpc => true
+  @allocated_elastic_ips << @elastic_ip
+end
+
 When /^I list allocated elastic ips$/ do
   @elastic_ips = @ec2.elastic_ips.to_a
 end
@@ -51,4 +56,18 @@ end
 
 When /^I count the elastic IPs in my account$/ do
   @ec2.elastic_ips.inject(0) { |count, ip| count + 1 }
+end
+
+Then /^the instance public ip address should match the elastic ip address$/ do
+  @instance.ip_address.should == @elastic_ip.ip_address
+end
+
+When /^I disassociate the elastic ip address$/ do
+  @elastic_ip.disassociate
+end
+
+Then /^the elastic ip should not exist$/ do
+  eventually do
+    @elastic_ip.exists?.should == false
+  end
 end

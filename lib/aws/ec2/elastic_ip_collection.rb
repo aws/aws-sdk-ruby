@@ -15,9 +15,22 @@ module AWS
   class EC2
     class ElasticIpCollection < Collection
 
-      def create 
-        response = client.allocate_address
+      # @param [Hash] options
+      #
+      # @option [Boolean] :vpc (false) When true, the elastic ip address
+      #   will be allocated to your VPC.
+      #
+      # @return [ElasticIp]
+      #
+      def create options = {}
+
+        client_opts = {}
+        client_opts[:domain] = 'vpc' if options[:vpc]
+
+        response = client.allocate_address(client_opts)
+
         ElasticIp.new(response.public_ip, :config => config)
+
       end
 
       alias_method :allocate, :create
@@ -63,11 +76,11 @@ module AWS
         response = filtered_request(:describe_addresses)
         response.addresses_set.each do |address|
 
-          options = {}
-          options[:config] = config
-          options[:instance_id] = address.instance_id
-
-          elastic_ip = ElasticIp.new(address.public_ip, options)
+          elastic_ip = ElasticIp.new_from(
+            :describe_addresses,
+            address,
+            address.public_ip,
+            :config => config)
 
           yield(elastic_ip)
 
