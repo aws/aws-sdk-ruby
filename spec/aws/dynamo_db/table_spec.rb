@@ -424,7 +424,77 @@ module AWS
 
       end
 
-    end
+      context 'batch write methods' do
 
+        let(:resp) { 
+          r = client.stub_for(:batch_write_item)
+          r.data['UnprocessedItems'] = {}
+          r
+        }
+
+        context '#batch_put' do
+
+          it 'accept an array of item attributes to batch put' do
+            client.should_receive(:batch_write_item).with(:request_items => {
+              table.name => [
+                {:put_request=>{:item=>{'id'=>{:n=>'1'}}}},
+                {:put_request=>{:item=>{'id'=>{:n=>'2'}}}},
+              ]
+            }).and_return(resp)
+            table.batch_put([{ :id => 1 }, { :id => 2}])
+          end
+
+        end
+
+        context '#batch_delete' do
+
+          it 'accept an array of item ids to delete' do
+            client.should_receive(:batch_write_item).with(:request_items => {
+              table.name => [
+                {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id1"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id2"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id3"}}}}
+              ]
+            }).and_return(resp)
+            table.batch_delete(%w(id1 id2 id3))
+          end
+
+          it 'accepts nested arrays for hash and range keys' do
+            client.should_receive(:batch_write_item).with(:request_items => {
+              table.name => [
+                {:delete_request=>{:key=>{:hash_key_element=>{:n=>"1"}, :range_key_element=>{:s=>"a"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:n=>"2"}, :range_key_element=>{:s=>"b"}}}}
+              ]
+            }).and_return(resp)
+            table.batch_delete([[1,'a'], [2,'b']])
+          end
+
+        end
+
+        context '#batch_write' do
+
+          it 'accepts :put and :delete options' do
+            client.should_receive(:batch_write_item).with(:request_items => {
+              table.name => [
+                {:put_request=>{:item=>{"id"=>{:n=>"1"}, "v"=>{:n=>"1"}}}},
+                {:put_request=>{:item=>{"id"=>{:n=>"2"}, "v"=>{:n=>"2"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:n=>"1"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:n=>"2"}}}},
+                {:delete_request=>{:key=>{:hash_key_element=>{:n=>"3"}}}}
+              ]
+            }).and_return(resp)
+            table.batch_write(
+              :put => [
+                { :id => 1, :v => 1 },
+                { :id => 2, :v => 2 },
+              ],
+              :delete => [1,2,3]
+            )
+          end
+
+        end
+
+      end
+    end
   end
 end

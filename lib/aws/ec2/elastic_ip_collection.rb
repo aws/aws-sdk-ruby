@@ -17,8 +17,8 @@ module AWS
 
       # @param [Hash] options
       #
-      # @option [Boolean] :vpc (false) When true, the elastic ip address
-      #   will be allocated to your VPC.
+      # @option options [Boolean] :vpc (false) When true, the elastic ip 
+      #   address will be allocated to your VPC.
       #
       # @return [ElasticIp]
       #
