@@ -402,6 +402,96 @@ module AWS
         block_given? ? enum.each(&block) : enum
       end
 
+      # Batch puts up to 25 items to this table.
+      #
+      #   table.batch_put([
+      #     { :id => 'id1', :color => 'red' },
+      #     { :id => 'id2', :color => 'blue' },
+      #     { :id => 'id3', :color => 'green' },
+      #   ])
+      #
+      # @param [Array<Hash>] items A list of item attributes to put.
+      #   The hash must contain the table hash key element and range key 
+      #   element (if one is defined).
+      #
+      # @return (see BatchWrite#process!)
+      # 
+      def batch_put items
+        batch = BatchWrite.new(:config => config)
+        batch.put(self, options)
+        batch.process!
+      end
+
+      # Batch delets up to 25 items.
+      #
+      #   table.batch_delete(%w(id1 id2 id3 id4))
+      #
+      # @param [Array<String>,Array<Array>] items A list of item keys to 
+      #   delete.  For tables without a range key, items should be an array
+      #   of hash key strings.
+      #
+      #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
+      #
+      #   For tables with a range key, items should be an array of 
+      #   hash key and range key pairs.
+      #
+      #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #
+      # @return (see BatchWrite#process!)
+      # 
+      def batch_put items
+        batch = BatchWrite.new(:config => config)
+        batch.put(self, items)
+        batch.process!
+      end
+
+      # Batch writes up to 25 items to this table.  A batch may contain
+      # a mix of items to put and items to delete.
+      #
+      #   table.batch_write(
+      #     :put => [
+      #       { :id => 'id1', :color => 'red' },
+      #       { :id => 'id2', :color => 'blue' },
+      #       { :id => 'id3', :color => 'green' },
+      #     ],
+      #     :delete => ['id4', 'id5']
+      #   )
+      #
+      # @param [Hash] options
+      #
+      # @option options (BatchWrite#write)
+      #
+      # @return (see BatchWrite#process!)
+      # 
+      def batch_write options = {}
+        batch = BatchWrite.new(:config => config)
+        batch.write(self, options)
+        batch.process!
+      end
+
+      # Delete up to 25 items in a single batch.
+      #
+      #   table.batch_delete(%w(id1 id2 id3 id4 id5))
+      #
+      # @param [Array<String>,Array<Array>] items A list of item keys to 
+      #   delete.  For tables without a range key, items should be an array
+      #   of hash key strings.
+      #
+      #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
+      #
+      #   For tables with a range key, items should be an array of 
+      #   hash key and range key pairs.
+      #
+      #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #
+      # @return (see BatchWrite#process!)
+      # 
+      def batch_delete items
+        batch = BatchWrite.new(:config => config)
+        batch.delete(self, items)
+        batch.process!
+      end
+
       protected
       def get_resource attribute_name = nil
         client.describe_table(resource_options)

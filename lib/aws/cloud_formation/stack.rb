@@ -124,7 +124,7 @@ module AWS
         provider.provides *template_attributes.keys
       end
 
-      # @retun [Array<StackOutput>]
+      # @return [Array<StackOutput>]
       def outputs
         output_details.collect do |o|
           StackOutput.new(self, o.output_key, o.output_value, o.description)

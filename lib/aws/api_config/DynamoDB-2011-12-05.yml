@@ -19,703 +19,802 @@
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      Key: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              S: 
+      Key:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              S: 
+          RangeKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
       - :required
-      AttributesToGet: 
-      - :list: 
+      AttributesToGet:
+      - :list:
         - :string
-      ConsistentRead: 
+      ConsistentRead:
       - :boolean
-    :output: 
-    - Item: 
-      - :map: 
+    :output:
+    - Item:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - SS: 
+      - entry:
+        - value:
+          - SS:
             - :list: member
-          - NS: 
+          - NS:
             - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-  BatchGetItem: 
-    :input: 
-      RequestItems: 
-      - :map: 
-          :key: 
+  BatchGetItem:
+    :input:
+      RequestItems:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              Keys: 
-              - :list: 
-                - :structure: 
-                    HashKeyElement: 
-                    - :structure: 
-                        S: 
+          :value:
+          - :structure:
+              Keys:
+              - :list:
+                - :structure:
+                    HashKeyElement:
+                    - :structure:
+                        S:
                         - :string
-                        N: 
+                        N:
                         - :string
-                        SS: 
-                        - :list: 
+                        SS:
+                        - :list:
                           - :string
-                        NS: 
-                        - :list: 
+                        NS:
+                        - :list:
                           - :string
                     - :required
-                    RangeKeyElement: 
-                    - :structure: 
-                        S: 
+                    RangeKeyElement:
+                    - :structure:
+                        S:
                         - :string
-                        N: 
+                        N:
                         - :string
-                        SS: 
-                        - :list: 
+                        SS:
+                        - :list:
                           - :string
-                        NS: 
-                        - :list: 
+                        NS:
+                        - :list:
                           - :string
               - :required
-              AttributesToGet: 
-              - :list: 
+              AttributesToGet:
+              - :list:
                 - :string
       - :required
-    :output: 
-    - Responses: 
-      - :map: 
+    :output:
+    - Responses:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - Items: 
+      - entry:
+        - value:
+          - Items:
             - :list: member
-            - member: 
-              - :map: 
+            - member:
+              - :map:
                 - entry
                 - key
                 - value
-              - entry: 
-                - value: 
-                  - SS: 
+              - entry:
+                - value:
+                  - SS:
                     - :list: member
-                  - NS: 
+                  - NS:
                     - :list: member
-          - ConsumedCapacityUnits: 
+          - ConsumedCapacityUnits:
             - :float
-    - UnprocessedKeys: 
-      - :map: 
+    - UnprocessedKeys:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - Keys: 
+      - entry:
+        - value:
+          - Keys:
             - :list: member
-            - member: 
-              - HashKeyElement: 
-                - SS: 
+            - member:
+              - HashKeyElement:
+                - SS:
                   - :list: member
-                - NS: 
+                - NS:
                   - :list: member
-              - RangeKeyElement: 
-                - SS: 
+              - RangeKeyElement:
+                - SS:
                   - :list: member
-                - NS: 
+                - NS:
                   - :list: member
-          - AttributesToGet: 
+          - AttributesToGet:
             - :list: member
-  PutItem: 
-    :input: 
-      TableName: 
+  PutItem:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      Item: 
-      - :map: 
-          :key: 
+      Item:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              S: 
+          :value:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
       - :required
-      Expected: 
-      - :map: 
-          :key: 
+      Expected:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              Value: 
-              - :structure: 
-                  S: 
+          :value:
+          - :structure:
+              Value:
+              - :structure:
+                  S:
                   - :string
-                  N: 
+                  N:
                   - :string
-                  SS: 
-                  - :list: 
+                  SS:
+                  - :list:
                     - :string
-                  NS: 
-                  - :list: 
+                  NS:
+                  - :list:
                     - :string
-              Exists: 
+              Exists:
               - :boolean
-      ReturnValues: 
+      ReturnValues:
       - :string
-    :output: 
-    - Attributes: 
-      - :map: 
+    :output:
+    - Attributes:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - SS: 
+      - entry:
+        - value:
+          - SS:
             - :list: member
-          - NS: 
+          - NS:
             - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-  DeleteItem: 
-    :input: 
-      TableName: 
+  DeleteItem:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      Key: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              S: 
+      Key:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              S: 
+          RangeKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
       - :required
-      Expected: 
-      - :map: 
-          :key: 
+      Expected:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              Value: 
-              - :structure: 
-                  S: 
+          :value:
+          - :structure:
+              Value:
+              - :structure:
+                  S:
                   - :string
-                  N: 
+                  N:
                   - :string
-                  SS: 
-                  - :list: 
+                  SS:
+                  - :list:
                     - :string
-                  NS: 
-                  - :list: 
+                  NS:
+                  - :list:
                     - :string
-              Exists: 
+              Exists:
               - :boolean
-      ReturnValues: 
+      ReturnValues:
       - :string
-    :output: 
-    - Attributes: 
-      - :map: 
+    :output:
+    - Attributes:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - SS: 
+      - entry:
+        - value:
+          - SS:
             - :list: member
-          - NS: 
+          - NS:
             - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-  UpdateItem: 
-    :input: 
-      TableName: 
+  UpdateItem:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      Key: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              S: 
+      Key:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              S: 
+          RangeKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
       - :required
-      AttributeUpdates: 
-      - :map: 
-          :key: 
+      AttributeUpdates:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              Value: 
-              - :structure: 
-                  S: 
+          :value:
+          - :structure:
+              Value:
+              - :structure:
+                  S:
                   - :string
-                  N: 
+                  N:
                   - :string
-                  SS: 
-                  - :list: 
+                  SS:
+                  - :list:
                     - :string
-                  NS: 
-                  - :list: 
+                  NS:
+                  - :list:
                     - :string
-              Action: 
+              Action:
               - :string
       - :required
-      Expected: 
-      - :map: 
-          :key: 
+      Expected:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              Value: 
-              - :structure: 
-                  S: 
+          :value:
+          - :structure:
+              Value:
+              - :structure:
+                  S:
                   - :string
-                  N: 
+                  N:
                   - :string
-                  SS: 
-                  - :list: 
+                  SS:
+                  - :list:
                     - :string
-                  NS: 
-                  - :list: 
+                  NS:
+                  - :list:
                     - :string
-              Exists: 
+              Exists:
               - :boolean
-      ReturnValues: 
+      ReturnValues:
       - :string
-    :output: 
-    - Attributes: 
-      - :map: 
+    :output:
+    - Attributes:
+      - :map:
         - entry
         - key
         - value
-      - entry: 
-        - value: 
-          - SS: 
+      - entry:
+        - value:
+          - SS:
             - :list: member
-          - NS: 
+          - NS:
             - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-  CreateTable: 
-    :input: 
-      TableName: 
+  CreateTable:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      KeySchema: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              AttributeName: 
+      KeySchema:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              AttributeName:
               - :string
               - :required
-              AttributeType: 
+              AttributeType:
               - :string
               - :required
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              AttributeName: 
+          RangeKeyElement:
+          - :structure:
+              AttributeName:
               - :string
               - :required
-              AttributeType: 
+              AttributeType:
               - :string
               - :required
       - :required
-      ProvisionedThroughput: 
-      - :structure: 
-          ReadCapacityUnits: 
+      ProvisionedThroughput:
+      - :structure:
+          ReadCapacityUnits:
           - :long
           - :required
-          WriteCapacityUnits: 
-          - :long
-          - :required
-      - :required
-    :output: 
-    - TableDescription: 
-      - CreationDateTime: 
-        - :timestamp
-      - ProvisionedThroughput: 
-        - LastIncreaseDateTime: 
-          - :timestamp
-        - LastDecreaseDateTime: 
-          - :timestamp
-        - ReadCapacityUnits: 
-          - :long
-        - WriteCapacityUnits: 
-          - :long
-      - TableSizeBytes: 
-        - :long
-      - ItemCount: 
-        - :long
-  UpdateTable: 
-    :input: 
-      TableName: 
-      - :string
-      - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
-      - :required
-      ProvisionedThroughput: 
-      - :structure: 
-          ReadCapacityUnits: 
-          - :long
-          - :required
-          WriteCapacityUnits: 
+          WriteCapacityUnits:
           - :long
           - :required
       - :required
-    :output: 
-    - TableDescription: 
-      - CreationDateTime: 
+    :output:
+    - TableDescription:
+      - CreationDateTime:
         - :timestamp
-      - ProvisionedThroughput: 
-        - LastIncreaseDateTime: 
+      - ProvisionedThroughput:
+        - LastIncreaseDateTime:
           - :timestamp
-        - LastDecreaseDateTime: 
+        - LastDecreaseDateTime:
           - :timestamp
-        - ReadCapacityUnits: 
+        - ReadCapacityUnits:
           - :long
-        - WriteCapacityUnits: 
+        - WriteCapacityUnits:
           - :long
-      - TableSizeBytes: 
+      - TableSizeBytes:
         - :long
-      - ItemCount: 
+      - ItemCount:
         - :long
-  DeleteTable: 
-    :input: 
-      TableName: 
+  UpdateTable:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-    :output: 
-    - TableDescription: 
-      - CreationDateTime: 
+      ProvisionedThroughput:
+      - :structure:
+          ReadCapacityUnits:
+          - :long
+          - :required
+          WriteCapacityUnits:
+          - :long
+          - :required
+      - :required
+    :output:
+    - TableDescription:
+      - CreationDateTime:
         - :timestamp
-      - ProvisionedThroughput: 
-        - LastIncreaseDateTime: 
+      - ProvisionedThroughput:
+        - LastIncreaseDateTime:
           - :timestamp
-        - LastDecreaseDateTime: 
+        - LastDecreaseDateTime:
           - :timestamp
-        - ReadCapacityUnits: 
+        - ReadCapacityUnits:
           - :long
-        - WriteCapacityUnits: 
+        - WriteCapacityUnits:
           - :long
-      - TableSizeBytes: 
+      - TableSizeBytes:
         - :long
-      - ItemCount: 
+      - ItemCount:
         - :long
-  DescribeTable: 
-    :input: 
-      TableName: 
+  DeleteTable:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-    :output: 
-    - Table: 
-      - CreationDateTime: 
+    :output:
+    - TableDescription:
+      - CreationDateTime:
         - :timestamp
-      - ProvisionedThroughput: 
-        - LastIncreaseDateTime: 
+      - ProvisionedThroughput:
+        - LastIncreaseDateTime:
           - :timestamp
-        - LastDecreaseDateTime: 
+        - LastDecreaseDateTime:
           - :timestamp
-        - ReadCapacityUnits: 
+        - ReadCapacityUnits:
           - :long
-        - WriteCapacityUnits: 
+        - WriteCapacityUnits:
           - :long
-      - TableSizeBytes: 
+      - TableSizeBytes:
         - :long
-      - ItemCount: 
+      - ItemCount:
         - :long
-  ListTables: 
-    :input: 
-      ExclusiveStartTableName: 
+  DescribeTable:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
-      Limit: 
+      - :required
+    :output:
+    - Table:
+      - CreationDateTime:
+        - :timestamp
+      - ProvisionedThroughput:
+        - LastIncreaseDateTime:
+          - :timestamp
+        - LastDecreaseDateTime:
+          - :timestamp
+        - ReadCapacityUnits:
+          - :long
+        - WriteCapacityUnits:
+          - :long
+      - TableSizeBytes:
+        - :long
+      - ItemCount:
+        - :long
+  ListTables:
+    :input:
+      ExclusiveStartTableName:
+      - :string
+      - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
+      Limit:
       - :integer
-    :output: 
-    - TableNames: 
+    :output:
+    - TableNames:
       - :list: member
-  Scan: 
-    :input: 
-      TableName: 
+  Scan:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      AttributesToGet: 
-      - :list: 
+      AttributesToGet:
+      - :list:
         - :string
-      Limit: 
+      Limit:
       - :integer
-      Count: 
+      Count:
       - :boolean
-      ScanFilter: 
-      - :map: 
-          :key: 
+      ScanFilter:
+      - :map:
+          :key:
           - :string
-          :value: 
-          - :structure: 
-              AttributeValueList: 
-              - :list: 
-                - :structure: 
-                    S: 
+          :value:
+          - :structure:
+              AttributeValueList:
+              - :list:
+                - :structure:
+                    S:
                     - :string
-                    N: 
+                    N:
                     - :string
-                    SS: 
-                    - :list: 
+                    SS:
+                    - :list:
                       - :string
-                    NS: 
-                    - :list: 
+                    NS:
+                    - :list:
                       - :string
-              ComparisonOperator: 
+              ComparisonOperator:
               - :string
-      ExclusiveStartKey: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              S: 
+              - :required
+      ExclusiveStartKey:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              S: 
+          RangeKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
-    :output: 
-    - Items: 
+    :output:
+    - Items:
       - :list: member
-      - member: 
-        - :map: 
+      - member:
+        - :map:
           - entry
           - key
           - value
-        - entry: 
-          - value: 
-            - SS: 
+        - entry:
+          - value:
+            - SS:
               - :list: member
-            - NS: 
+            - NS:
               - :list: member
-    - Count: 
+    - Count:
       - :integer
-    - ScannedCount: 
+    - ScannedCount:
       - :integer
-    - LastEvaluatedKey: 
-      - HashKeyElement: 
-        - SS: 
+    - LastEvaluatedKey:
+      - HashKeyElement:
+        - SS:
           - :list: member
-        - NS: 
+        - NS:
           - :list: member
-      - RangeKeyElement: 
-        - SS: 
+      - RangeKeyElement:
+        - SS:
           - :list: member
-        - NS: 
+        - NS:
           - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-  Query: 
-    :input: 
-      TableName: 
+  Query:
+    :input:
+      TableName:
       - :string
       - :pattern: !ruby/regexp /[a-zA-Z0-9_.-]+/
       - :required
-      AttributesToGet: 
-      - :list: 
+      AttributesToGet:
+      - :list:
         - :string
-      Limit: 
+      Limit:
       - :integer
-      ConsistentRead: 
+      ConsistentRead:
       - :boolean
-      Count: 
+      Count:
       - :boolean
-      HashKeyValue: 
-      - :structure: 
-          S: 
+      HashKeyValue:
+      - :structure:
+          S:
           - :string
-          N: 
+          N:
           - :string
-          SS: 
-          - :list: 
+          SS:
+          - :list:
             - :string
-          NS: 
-          - :list: 
+          NS:
+          - :list:
             - :string
       - :required
-      RangeKeyCondition: 
-      - :structure: 
-          AttributeValueList: 
-          - :list: 
-            - :structure: 
-                S: 
+      RangeKeyCondition:
+      - :structure:
+          AttributeValueList:
+          - :list:
+            - :structure:
+                S:
                 - :string
-                N: 
+                N:
                 - :string
-                SS: 
-                - :list: 
+                SS:
+                - :list:
                   - :string
-                NS: 
-                - :list: 
+                NS:
+                - :list:
                   - :string
-          ComparisonOperator: 
+          ComparisonOperator:
           - :string
-      ScanIndexForward: 
+          - :required
+      ScanIndexForward:
       - :boolean
-      ExclusiveStartKey: 
-      - :structure: 
-          HashKeyElement: 
-          - :structure: 
-              S: 
+      ExclusiveStartKey:
+      - :structure:
+          HashKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
           - :required
-          RangeKeyElement: 
-          - :structure: 
-              S: 
+          RangeKeyElement:
+          - :structure:
+              S:
               - :string
-              N: 
+              N:
               - :string
-              SS: 
-              - :list: 
+              SS:
+              - :list:
                 - :string
-              NS: 
-              - :list: 
+              NS:
+              - :list:
                 - :string
-    :output: 
-    - Items: 
+    :output:
+    - Items:
       - :list: member
-      - member: 
-        - :map: 
+      - member:
+        - :map:
           - entry
           - key
           - value
-        - entry: 
-          - value: 
-            - SS: 
+        - entry:
+          - value:
+            - SS:
               - :list: member
-            - NS: 
+            - NS:
               - :list: member
-    - Count: 
+    - Count:
       - :integer
-    - LastEvaluatedKey: 
-      - HashKeyElement: 
-        - SS: 
+    - LastEvaluatedKey:
+      - HashKeyElement:
+        - SS:
           - :list: member
-        - NS: 
+        - NS:
           - :list: member
-      - RangeKeyElement: 
-        - SS: 
+      - RangeKeyElement:
+        - SS:
           - :list: member
-        - NS: 
+        - NS:
           - :list: member
-    - ConsumedCapacityUnits: 
+    - ConsumedCapacityUnits:
       - :float
-:client_errors: 
+  BatchWriteItem:
+    :input:
+      RequestItems:
+      - :map:
+          :key:
+          - :string
+          :value:
+          - :list:
+            - :structure:
+                PutRequest:
+                - :structure:
+                    Item:
+                    - :map:
+                        :key:
+                        - :string
+                        :value:
+                        - :structure:
+                            S:
+                            - :string
+                            N:
+                            - :string
+                            SS:
+                            - :list:
+                              - :string
+                            NS:
+                            - :list:
+                              - :string
+                    - :required
+                DeleteRequest:
+                - :structure:
+                    Key:
+                    - :structure:
+                        HashKeyElement:
+                        - :structure:
+                            S:
+                            - :string
+                            N:
+                            - :string
+                            SS:
+                            - :list:
+                              - :string
+                            NS:
+                            - :list:
+                              - :string
+                        - :required
+                        RangeKeyElement:
+                        - :structure:
+                            S:
+                            - :string
+                            N:
+                            - :string
+                            SS:
+                            - :list:
+                              - :string
+                            NS:
+                            - :list:
+                              - :string
+                    - :required
+      - :required
+    :output:
+    - Responses:
+      - :map:
+        - entry
+        - key
+        - value
+      - entry:
+        - value:
+          - ConsumedCapacityUnits:
+            - :float
+    - UnprocessedItems:
+      - :map:
+        - entry
+        - key
+        - value
+      - entry:
+        - value:
+          - :list: member
+          - member:
+            - PutRequest:
+              - Item:
+                - :map:
+                  - entry
+                  - key
+                  - value
+                - entry:
+                  - value:
+                    - SS:
+                      - :list: member
+                    - NS:
+                      - :list: member
+            - DeleteRequest:
+              - Key:
+                - HashKeyElement:
+                  - SS:
+                    - :list: member
+                  - NS:
+                    - :list: member
+                - RangeKeyElement:
+                  - SS:
+                    - :list: member
+                  - NS:
+                    - :list: member
+:client_errors:
   ConditionalCheckFailed: []
-
   ResourceInUseException: []
-
   ResourceNotFoundException: []
-
   LimitExceededException: []
-
   ProvisionedThroughputExceededException: []
-
 :server_errors: {}

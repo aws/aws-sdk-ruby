@@ -113,6 +113,7 @@ module AWS
     AWS.register_autoloads(self, 'aws/dynamo_db') do
       autoload :AttributeCollection, 'attribute_collection'
       autoload :BatchGet, 'batch_get'
+      autoload :BatchWrite, 'batch_write'
       autoload :Client, 'client'
       autoload :Errors, 'errors'
       autoload :Expectations, 'expectations'
@@ -167,6 +168,45 @@ module AWS
       batch = BatchGet.new(:config => config)
       yield(batch)
       batch.enumerator
+    end
+
+    # Yields a batch for writing (put and delete) items across multiple
+    # tables.  You can put and delete items in the same batch.
+    #
+    # @example Putting items across tables
+    #
+    #   # shard data across two tables with batch write
+    #   items = [
+    #     { :id => '123', :color => 'red' },
+    #     { :id => '456', :color => 'blue' },
+    #     { :id => '789', :color => 'green' },
+    #   ]
+    #
+    #   ddb.batch_write do |batch|
+    #     batch.put('table1', items)
+    #     batch.put('table2', items)
+    #   end
+    #
+    # @example Mixing puts and deletes
+    #
+    #   ddb.batch_write do |batch|
+    #     batch.write('table1', :put => [...], :delete => [...])
+    #     batch.write('table2', :put => [...], :delete => [...])
+    #   end
+    #
+    # @yield [BatchWrite]
+    #
+    # @return (see BatchWrite#process!)
+    #
+    # @see BatchWrite
+    # @see BatchWrite#put
+    # @see BatchWrite#delete
+    # @see BatchWrite#write
+    #
+    def batch_write &block
+      batch = BatchWrite.new(:config => config)
+      yield(batch)
+      batch.process!
     end
 
   end

@@ -17,10 +17,7 @@ Before("@dynamo_db") do
 
   session = AWS::STS.new.new_session
 
-  @dynamo_db = AWS::DynamoDB.new(session.credentials.merge(
-    :dynamo_db_endpoint => 'bigbird-sdk.amazon.com',
-    :use_ssl => false) )
-
+  @dynamo_db = AWS::DynamoDB.new
   @created_tables = []
 
 end

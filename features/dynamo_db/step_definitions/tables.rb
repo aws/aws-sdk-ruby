@@ -38,6 +38,10 @@ Then /^the table should eventually be active$/ do
   eventually { @table.status.should == :active }
 end
 
+Then /^the tables are eventually active$/ do
+  eventually { @created_tables.map(&:status).uniq.should == [:active] }
+end
+
 Given /^I ask for the table named "([^\"]*)"$/ do |name|
   @result = @table = @dynamo_db.tables[name]
 end
