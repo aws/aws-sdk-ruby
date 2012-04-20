@@ -148,7 +148,7 @@ module AWS
             collection.with_prefix('/prefix').each{|version| }
           end
 
-          it 'replaces prefixes by defualt' do
+          it 'replaces prefixes by default' do
             client.should_receive(:list_object_versions).
               with(hash_including(:prefix => 'bar'))
             collection.with_prefix('foo').with_prefix('bar').each{|version| }
