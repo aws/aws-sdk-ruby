@@ -374,7 +374,7 @@ module AWS::Core
 
     context 'endpoint' do
 
-      it 'should defualt the endpoint given in the client config' do
+      it 'should default the endpoint given in the client config' do
         stub_client = client.with_options(:s3_endpoint => 'xyz.com',
                                           :simple_db_endpoint => 'xyz.com',
                                           :ec2_endpoint => 'xyz.com',
