@@ -418,7 +418,7 @@ module AWS::Core
           obj.string_element.should == 'foo'
         end
 
-        it 'accepts a block where super provides the defualt behavior' do
+        it 'accepts a block where super provides the default behavior' do
           obj = grammar.customize do
             element "StringElement" do
               format_value {|value| super(value) }

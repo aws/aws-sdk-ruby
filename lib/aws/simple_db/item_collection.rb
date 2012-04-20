@@ -98,7 +98,7 @@ module AWS
       # * AWS::SimpleDB::Item objects (only the item name is populated)
       # * AWS::SimpleDB::ItemData objects (some or all attributes populated)
       #
-      # The defualt mode of an ItemCollection is to yield Item objects with
+      # The default mode of an ItemCollection is to yield Item objects with
       # no populated attributes.  
       #
       #   # only receives item names from SimpleDB
