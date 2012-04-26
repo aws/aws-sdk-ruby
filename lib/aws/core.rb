@@ -454,9 +454,9 @@ module AWS
 
       needs = [:signer, :http_handler, :"#{ruby_name}_endpoint"]
 
-      Core::Configuraiton.add_option :"#{ruby_name}_endpoint", default_endpoint
+      Core::Configuration.add_option :"#{ruby_name}_endpoint", default_endpoint
 
-      Core::Configuraiton.add_option_with_needs(
+      Core::Configuration.add_option_with_needs(
         :"#{ruby_name}_client", needs, &create_block)
 
     end
