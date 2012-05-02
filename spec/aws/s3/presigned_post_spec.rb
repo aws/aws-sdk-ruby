@@ -569,6 +569,8 @@ module AWS
                       "success_action_redirect", :success_action_redirect)
       it_behaves_like("presigned post special field",
                       "success_action_status", :success_action_status)
+      it_behaves_like("presigned post special field",
+                      "Filename", :filename)
 
     end
 

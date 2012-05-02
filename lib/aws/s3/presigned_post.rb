@@ -82,7 +82,8 @@ module AWS
                         :acl,
                         :server_side_encryption,
                         :success_action_redirect,
-                        :success_action_status]
+                        :success_action_status,
+                        :filename]
 
       # @private
       attr_reader :conditions
