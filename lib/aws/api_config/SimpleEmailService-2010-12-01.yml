@@ -11,137 +11,151 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
---- 
-:operations: 
-  SendEmail: 
-    :input: 
-      Source: 
-      - :string
-      - :required
-      Destination: 
-      - :structure: 
-          ToAddresses: 
-          - :membered_list: 
+---
+:operations:
+- :name: DeleteVerifiedEmailAddress
+  :method: :delete_verified_email_address
+  :inputs:
+    EmailAddress:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteVerifiedEmailAddressResult:
+        :ignore: true
+- :name: GetSendQuota
+  :method: :get_send_quota
+  :inputs: {}
+  :outputs:
+    :children:
+      GetSendQuotaResult:
+        :ignore: true
+        :children:
+          Max24HourSend:
+            :type: :float
+          MaxSendRate:
+            :type: :float
+          SentLast24Hours:
+            :type: :float
+- :name: GetSendStatistics
+  :method: :get_send_statistics
+  :inputs: {}
+  :outputs:
+    :children:
+      GetSendStatisticsResult:
+        :ignore: true
+        :children:
+          SendDataPoints:
+            :ignore: true
+            :children:
+              member:
+                :rename: :send_data_points
+                :list: true
+                :children:
+                  Timestamp:
+                    :type: :time
+                  DeliveryAttempts:
+                    :type: :integer
+                  Bounces:
+                    :type: :integer
+                  Complaints:
+                    :type: :integer
+                  Rejects:
+                    :type: :integer
+- :name: ListVerifiedEmailAddresses
+  :method: :list_verified_email_addresses
+  :inputs: {}
+  :outputs:
+    :children:
+      ListVerifiedEmailAddressesResult:
+        :ignore: true
+        :children:
+          VerifiedEmailAddresses:
+            :ignore: true
+            :children:
+              member:
+                :rename: :verified_email_addresses
+                :list: true
+- :name: SendEmail
+  :method: :send_email
+  :inputs:
+    Source:
+    - :string
+    - :required
+    Destination:
+    - :structure:
+        ToAddresses:
+        - :membered_list:
+          - :string
+        CcAddresses:
+        - :membered_list:
+          - :string
+        BccAddresses:
+        - :membered_list:
+          - :string
+    - :required
+    Message:
+    - :structure:
+        Subject:
+        - :structure:
+            Data:
             - :string
-          CcAddresses: 
-          - :membered_list: 
+            - :required
+            Charset:
             - :string
-          BccAddresses: 
-          - :membered_list: 
-            - :string
-      - :required
-      Message: 
-      - :structure: 
-          Subject: 
-          - :structure: 
-              Data: 
-              - :string
-              - :required
-              Charset: 
-              - :string
-          - :required
-          Body: 
-          - :structure: 
-              Text: 
-              - :structure: 
-                  Data: 
-                  - :string
-                  - :required
-                  Charset: 
-                  - :string
-              Html: 
-              - :structure: 
-                  Data: 
-                  - :string
-                  - :required
-                  Charset: 
-                  - :string
-          - :required
-      - :required
-      ReplyToAddresses: 
-      - :membered_list: 
-        - :string
-      ReturnPath: 
+        - :required
+        Body:
+        - :structure:
+            Text:
+            - :structure:
+                Data:
+                - :string
+                - :required
+                Charset:
+                - :string
+            Html:
+            - :structure:
+                Data:
+                - :string
+                - :required
+                Charset:
+                - :string
+        - :required
+    - :required
+    ReplyToAddresses:
+    - :membered_list:
       - :string
-    :output: []
-
-  SendRawEmail: 
-    :input: 
-      Source: 
+    ReturnPath:
+    - :string
+  :outputs:
+    :children:
+      SendEmailResult:
+        :ignore: true
+- :name: SendRawEmail
+  :method: :send_raw_email
+  :inputs:
+    Source:
+    - :string
+    Destinations:
+    - :membered_list:
       - :string
-      Destinations: 
-      - :membered_list: 
-        - :string
-      RawMessage: 
-      - :structure: 
-          Data: 
-          - :blob
-          - :required
-      - :required
-    :output: []
-
-  GetSendStatistics: 
-    :input: {}
-
-    :output: 
-    - SendDataPoints: 
-      - :list: member
-      - member: 
-        - Timestamp: 
-          - :timestamp
-        - DeliveryAttempts: 
-          - :long
-        - Bounces: 
-          - :long
-        - Complaints: 
-          - :long
-        - Rejects: 
-          - :long
-  GetSendQuota: 
-    :input: {}
-
-    :output: 
-    - Max24HourSend: 
-      - :float
-    - MaxSendRate: 
-      - :float
-    - SentLast24Hours: 
-      - :float
-  VerifyEmailAddress: 
-    :input: 
-      EmailAddress: 
-      - :string
-      - :required
-    :output: []
-
-  ListVerifiedEmailAddresses: 
-    :input: {}
-
-    :output: 
-    - VerifiedEmailAddresses: 
-      - :list: member
-  DeleteVerifiedEmailAddress: 
-    :input: 
-      EmailAddress: 
-      - :string
-      - :required
-    :output: []
-
-:client_errors: 
-  MessageRejected: []
-
-  MalformedQueryString: []
-
-  InvalidParameterCombination: []
-
-  InvalidParameterValue: []
-
-  InvalidQueryParameter: []
-
-  MissingAction: []
-
-  MissingParameter: []
-
-  RequestExpired: []
-
-:server_errors: {}
+    RawMessage:
+    - :structure:
+        Data:
+        - :blob
+        - :required
+    - :required
+  :outputs:
+    :children:
+      SendRawEmailResult:
+        :ignore: true
+- :name: VerifyEmailAddress
+  :method: :verify_email_address
+  :inputs:
+    EmailAddress:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      VerifyEmailAddressResult:
+        :ignore: true

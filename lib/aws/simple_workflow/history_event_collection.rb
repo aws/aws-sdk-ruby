@@ -24,8 +24,8 @@ module AWS
 
       include Core::Collection::Limitable
 
-      # @param [WorkflowExecution] The execution this history event 
-      #   belongs to.
+      # @param [WorkflowExecution] workflow_execution The execution this 
+      #   history event belongs to.
       #
       # @param [Hash] options
       #

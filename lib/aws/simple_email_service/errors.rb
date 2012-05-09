@@ -13,13 +13,9 @@
 
 module AWS
   class SimpleEmailService
-
-    # @private
     module Errors
 
-      BASE_ERROR_GRAMMAR = Client::XML::BaseError
-
-      include Core::LazyErrorClasses
+      extend Core::LazyErrorClasses
 
     end
   end

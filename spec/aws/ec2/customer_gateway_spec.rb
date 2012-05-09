@@ -29,9 +29,9 @@ module AWS
         let(:describe_call) { :describe_customer_gateways }
         let(:taggable) { customer_gateway }
         def stub_tags(resp, tags)
-          resp.stub(:customer_gateway_set).and_return([
-            double('gateway', :customer_gateway_id => 'cgw-123', :tag_set => tags)
-          ])
+          resp.data[:customer_gateway_set] = [
+            { :customer_gateway_id => 'cgw-123', :tag_set => tags },
+          ]
         end
       end
 
@@ -62,14 +62,15 @@ module AWS
         let(:response) { client.stub_for(:describe_customer_gateways) }
 
         before(:each) do
-          response.stub(:customer_gateway_set).and_return([
-            double('gateway',
+          response.data[:customer_gateway_set] = [
+            {
               :customer_gateway_id => customer_gateway.id,
               :state => 'available',
               :vpn_type => 'ipsec.1',
               :ip_address => '1.2.3.4',
-              :bgp_asn => 65432)
-          ])
+              :bgp_asn => 65432,
+            }
+          ]
         end
 
         context 'state' do
@@ -119,7 +120,7 @@ module AWS
 
           it 'returns false if an error is raised trying to describe it' do
             client.stub(:describe_customer_gateways).
-              and_raise(Errors::InvalidCustomerGatewayID::NotFound)
+              and_raise(Errors::InvalidCustomerGatewayID::NotFound.new('msg'))
             customer_gateway.exists?.should == false
           end
 

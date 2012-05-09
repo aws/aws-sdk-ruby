@@ -27,11 +27,10 @@ module AWS
         let(:client_method) { :describe_images }
 
         def stub_two_members(response)
-          response.stub(:images_set).
-            and_return([double("image 1",
-                               :image_id => "ami-123"),
-                        double("image 2",
-                               :image_id => "ami-321")])
+          response.data[:images_set] = [
+            { :image_id => 'ami-123' },
+            { :image_id => 'ami-321' },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"

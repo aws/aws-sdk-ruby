@@ -1,5 +1,4 @@
 --no-private
---files guides/*
 --files NOTICE.txt
 --files LICENSE.txt
 --exclude '~$'

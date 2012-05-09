@@ -17,8 +17,7 @@ module AWS
     # @private
     class Request < Core::Http::Request
 
-      include Core::AuthorizeV2
-      include Core::AuthorizeWithSessionToken
+      include Core::Signature::Version2
 
       def path
         full_url.path
@@ -29,6 +28,7 @@ module AWS
       end
 
       private
+
       def full_url
         if url_param = params.find { |p| p.name == "QueueUrl" }
           URI.parse(url_param.value)

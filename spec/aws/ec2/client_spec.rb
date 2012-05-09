@@ -194,8 +194,9 @@ module AWS
               "<Message>BAR</Message>"+
               "</Error></Errors></Response>"
           end
-          lambda { client.describe_instances }.
-            should raise_error(EC2::Errors::Foo, "BAR")
+          lambda { 
+            client.describe_instances 
+          }.should raise_error(EC2::Errors::Foo, "BAR")
         end
 
       end

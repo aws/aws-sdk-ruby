@@ -29,18 +29,14 @@ module AWS
         let(:response) { client.stub_for(:create_user) }
 
         before(:each) do
-
-          response_user = double('response-user', 
+          response.data[:user] = {
             :user_name => 'name',
             :user_id => 'ABCXYZ',
             :path => '/',
             :arn => 'arn',
-            :create_date => Time.parse('2011-07-22T16:35:46Z'))
-
-          response.stub(:user).and_return(response_user)
-
+            :create_date => Time.parse('2011-07-22T16:35:46Z'),
+          }
           client.stub(:create_user).and_return(response)
-
         end
         
         it 'call create_user on the client' do 
@@ -73,15 +69,15 @@ module AWS
         let(:now)            { Time.now }
 
         def stub_n_members response, n
-          response.stub(:users).and_return((1..n).collect{|i|
-            double("user-#{i}", {
+          response.data[:users] = (1..n).collect{|i|
+            {
               :user_name => "user#{i}",
               :user_id => "ABCXYZ#{i}",
               :create_date => now,
               :arn => "awn:aws:iam::12345678901#{i}:user:/path/#{i}/user#{i}",
               :path => "/path/#{i}/",
-            })
-          })
+            }
+          }
         end
 
         it_behaves_like "a collection using a path prefix"

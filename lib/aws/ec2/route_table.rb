@@ -107,8 +107,9 @@ module AWS
       #   {RouteTable::Association} objects (association to subnets).
       def associations
         association_set.collect do |details| 
-          subnet_id = details.respond_to?(:subnet_id) ? details.subnet_id : nil
-          Association.new(self, details.route_table_association_id, subnet_id)
+          Association.new(self, 
+            details[:route_table_association_id], 
+            details[:subnet_id])
         end
       end
 

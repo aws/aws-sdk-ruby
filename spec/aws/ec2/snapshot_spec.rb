@@ -35,8 +35,7 @@ module AWS
       let(:instance) { snapshot }
 
       def stub_member(resp, member)
-        resp.stub(:snapshot_index).
-          and_return(Hash[[[member.snapshot_id, member]]])
+        resp.data[:snapshot_index] = { member[:snapshot_id] => member }
       end
 
       it_should_behave_like 'an ec2 resource object'
@@ -44,10 +43,7 @@ module AWS
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { snapshot }
         def stub_tags(resp, tags)
-          stub_member(resp,
-                      double("snapshot",
-                             :snapshot_id => "snap-123",
-                             :tag_set => tags))
+          stub_member(resp, :snapshot_id => "snap-123", :tag_set => tags)
         end
       end
 
@@ -107,7 +103,7 @@ module AWS
       context '#exists?' do
         let(:id_filter) { "snapshot-id" }
         def stub_exists(resp)
-          resp.stub(:snapshot_set).and_return([double("snapshot")])
+          resp.data[:snapshot_set] = [{ :snapshot_id => 'snap-123' }]
         end
         it_should_behave_like "ec2 resource exists method"
       end
@@ -120,27 +116,23 @@ module AWS
 
           context 'populate from create_snapshot' do
 
-            let(:response) { double("response",
-                                    :request_type => :create_snapshot,
-                                    :snapshot_id => "snap-123") }
+            let(:response) { client.stub_for(:create_snapshot) }
 
             let(:attributes) { snapshot.attributes_from_response(response) }
 
+            before(:each) do
+              response.data[:snapshot_id] = 'snap-123'
+            end
+
             it 'should not populate unless the snapshot ID matches' do
-              response.stub(:snapshot_id).and_return("snap-321")
+              response.data[:snapshot_id] = 'snap-321'
               attributes.should be_nil
             end
 
             context 'when returned by the service' do
               it 'should populate the translated value' do
-                response.stub(response_field).and_return(response_value)
+                response.data[response_field] = response_value
                 attributes[attribute].should == translated_value
-              end
-            end
-
-            context 'when not returned by the service' do
-              it 'should populate nil' do
-                attributes[attribute].should be_nil
               end
             end
 

@@ -35,7 +35,7 @@ module AWS
       let(:instance) { volume }
 
       def stub_member(resp, member)
-        resp.stub(:volume_index).and_return(Hash[[[member.volume_id, member]]])
+        resp[:volume_index][member[:volume_id]] = member
       end
 
       it_should_behave_like 'an ec2 resource object'
@@ -43,10 +43,7 @@ module AWS
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { volume }
         def stub_tags(resp, tags)
-          stub_member(resp,
-                      double("volume",
-                             :volume_id => "vol-123",
-                             :tag_set => tags))
+          stub_member(resp, :volume_id => "vol-123", :tag_set => tags)
         end
       end
 
@@ -197,7 +194,7 @@ module AWS
       context 'exists?' do
         let(:id_filter) { "volume-id" }
         def stub_exists(resp)
-          stub_member(resp, double("volume", :volume_id => resource.id))
+          stub_member(resp, :volume_id => resource.id)
         end
         it_should_behave_like "ec2 resource exists method"
       end
@@ -208,21 +205,21 @@ module AWS
 
           context 'populated from create_volume' do
 
-            let(:response) do
-              double("resp",
-                     :request_type => :create_volume,
-                     :volume_id => "vol-123")
+            let(:response) { client.stub_for(:create_volume) }
+
+            before(:each) do
+              response.data = { :volume_id => "vol-123" }
             end
 
             it 'should not populate when the volume ID does not match' do
-              response.stub(:volume_id).and_return("vol-321")
+              response.data[:volume_id] = 'vol-321'
               instance.attributes_from_response(response).should be_nil
             end
 
             context 'when returned by the service' do
 
               before(:each) do
-                response.stub(response_field).and_return(response_value)
+                response.data[response_field] = response_value
               end
 
               it 'should return the translated attribute value' do
@@ -273,7 +270,7 @@ module AWS
       context '#size' do
         let(:attribute) { :size }
         let(:response_field) { attribute }
-        let(:response_value) { "80" }
+        let(:response_value) { 80 }
         let(:translated_value) { 80 }
         it_should_behave_like "ec2 volume attribute accessor"
       end

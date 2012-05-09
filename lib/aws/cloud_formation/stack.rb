@@ -99,7 +99,7 @@ module AWS
       describe_attribute :parameters do 
         translates_output do |params|
           params.inject({}) do |hash,param|
-            hash.merge(param.parameter_key => param.parameter_value)
+            hash.merge(param[:parameter_key] => param[:parameter_value])
           end
         end
       end
@@ -112,7 +112,7 @@ module AWS
 
       provider(:describe_stacks) do |provider|
         provider.find do |resp|
-          resp.stacks.find{|stack| stack.stack_name == name }
+          resp.data[:stacks].find{|stack| stack[:stack_name] == name }
         end
         provider.provides *describe_attributes.keys
       end
@@ -127,7 +127,8 @@ module AWS
       # @return [Array<StackOutput>]
       def outputs
         output_details.collect do |o|
-          StackOutput.new(self, o.output_key, o.output_value, o.description)
+          key, value, desc = o.values_at(:output_key, :output_value, :description)
+          StackOutput.new(self, key, value, desc)
         end
       end
 

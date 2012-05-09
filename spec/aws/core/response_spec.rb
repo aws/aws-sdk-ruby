@@ -25,8 +25,38 @@ module AWS::Core
     context '#initialize' do
 
       it 'should not require any arguments' do
-        lambda { Response.new }.
-          should_not raise_error
+        lambda { Response.new }.should_not raise_error
+      end
+
+    end
+
+    context '#data' do
+
+      it 'returns the value passed in' do
+        hash = { :a => 1 }
+        response.data = hash
+        response.data.should === hash
+      end
+
+    end
+
+    context '#[]' do
+
+      it 'returns the hash data at the given key' do
+        hash = { :a => 1 }
+        response.data = { :key => hash }
+        response[:key].should === hash
+      end
+
+    end
+
+    context '#method_missing' do
+
+      it 'returns the hash data at the given key wrapped in a Core::Data obj' do
+        hash = { :a => 1 }
+        response.data = { :key => hash }
+        response.key.should == hash
+        response.key.should be_a(AWS::Core::Data)
       end
 
     end
@@ -122,93 +152,88 @@ module AWS::Core
     context '#inspect' do
 
       it 'has a simple inspect string' do
-        response.inspect.should == '<AWS::Core::Response>'
+        response.inspect.should == '{}'
       end
 
-      it 'includes the request type if present' do
-        response.request_type = "foo_bar"
-        response.inspect.should == '<AWS::Core::Response:foo_bar>'
+      it 'is the inspect string for the response data' do
+        data = double('response-data')
+        data.should_receive(:inspect).and_return('inspect-string')
+        response.data = data
+        response.inspect.should == 'inspect-string'
       end
 
     end
 
     context '#cache_key' do
 
-      let(:request) { double("request",
-                             :host => "ENDPOINT",
-                             :access_key_id => "KEY") }
+      let(:request) { 
+        double("request", :host => "ENDPOINT", :access_key_id => "KEY") 
+      }
 
       before(:each) do
         response.stub(:http_request).and_return(request)
-        response.stub(:serialized_options).and_return("OPTIONS")
         response.stub(:request_type).and_return(:some_request)
       end
 
       it 'should consist of the access key, endpoint, and options' do
+        response.stub(:serialized_options).and_return("OPTIONS")
         response.cache_key.should == "KEY:ENDPOINT:some_request:OPTIONS"
       end
 
-    end
+      context 'serialized options' do
 
-    context '#serialized_options' do
+        context 'hash' do
 
-      context 'hash' do
+          it 'should alphabetize the keys' do
+            response.request_options = {
+              :zed => "1",
+              :acrobat => "2"
+            }
+            response.cache_key.should =~ /\(acrobat="2" zed="1"\)/
+          end
 
-        it 'should alphabetize the keys' do
-          response.request_options = {
-            :zed => "1",
-            :acrobat => "2"
-          }
-          response.serialized_options.
-            should == '(acrobat="2" zed="1")'
+          it 'should use :inspect to serialize the values' do
+            response.request_options = {
+              :foo => double("bar", :inspect => "ZZZ")
+            }
+            response.cache_key.should =~ /\(foo=ZZZ\)/
+          end
+
+          it 'should serialize nested hashes the same way' do
+            response.request_options = {
+              :foo => { :foo => "bar" }
+            }
+            response.cache_key.should =~ /\(foo=\(foo="bar"\)\)/
+          end
+
         end
 
-        it 'should use :inspect to serialize the values' do
-          response.request_options = {
-            :foo => double("bar", :inspect => "ZZZ")
-          }
-          response.serialized_options.
-            should == '(foo=ZZZ)'
-        end
+        context 'array' do
 
-        it 'should serialize nested hashes the same way' do
-          response.request_options = {
-            :foo => { :foo => "bar" }
-          }
-          response.serialized_options.
-            should == '(foo=(foo="bar"))'
-        end
+          it 'should inspect each element' do
+            response.request_options = {
+              :foo => ["a", :b]
+            }
+            response.cache_key.should =~ /\(foo=\["a" :b\]\)/
+          end
 
-      end
+          it 'should recurse into nested hashes' do
+            response.request_options = {
+              :foo => [{ :foo => "bar" }]
+            }
+            response.cache_key.should =~ /\(foo=\[\(foo="bar"\)\]\)/
+          end
 
-      context 'array' do
+          it 'should represent empty arrays as "[]"' do
+            response.request_options = {
+              :foo => []
+            }
+            response.cache_key.should =~ /\(foo=\[\]\)/
+          end
 
-        it 'should inspect each element' do
-          response.request_options = {
-            :foo => ["a", :b]
-          }
-          response.serialized_options.
-            should == '(foo=["a" :b])'
-        end
-
-        it 'should recurse into nested hashes' do
-          response.request_options = {
-            :foo => [{ :foo => "bar" }]
-          }
-          response.serialized_options.
-            should == '(foo=[(foo="bar")])'
-        end
-
-        it 'should represent empty arrays as "[]"' do
-          response.request_options = {
-            :foo => []
-          }
-          response.serialized_options.
-            should == '(foo=[])'
         end
 
       end
-
     end
 
   end

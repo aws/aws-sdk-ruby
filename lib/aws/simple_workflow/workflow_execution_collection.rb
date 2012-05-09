@@ -69,9 +69,9 @@ module AWS
       #   domain.workflow_executions['workflow-id', 'run-id']
       #   domain.workflow_executions.at('workflow-id', 'run-id')
       #
-      # @param [String] The workflow execution id.
+      # @param [String] workflow_id The workflow execution id.
       #
-      # @param [String] The workflow execution run id.
+      # @param [String] run_id The workflow execution run id.
       #
       # @return [WorkflowExecution
       #

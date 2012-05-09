@@ -120,9 +120,11 @@ module AWS
         opts[:policy] = opts[:policy].to_json
       end
       get_session(:get_federation_token, opts) do |resp, session_opts|
-        session_opts.merge!(:user_id => resp.federated_user.federated_user_id,
-                            :user_arn => resp.federated_user.arn,
-                            :packed_policy_size => resp.packed_policy_size)
+        session_opts.merge!(
+          :user_id => resp[:federated_user][:federated_user_id],
+          :user_arn => resp[:federated_user][:arn],
+          :packed_policy_size => resp[:packed_policy_size]
+        )
         FederatedSession.new(session_opts)
       end
     end
@@ -133,14 +135,10 @@ module AWS
       opts[:duration_seconds] = opts.delete(:duration) if
         opts[:duration]
       resp = client.send(method, opts)
-      credentials = resp.credentials
+      credentials = resp[:credentials].dup
       session_opts = {
-        :credentials => {
-          :access_key_id => credentials.access_key_id,
-          :secret_access_key => credentials.secret_access_key,
-          :session_token => credentials.session_token
-        },
-        :expires_at => credentials.expiration
+        :credentials => credentials,
+        :expires_at => credentials.delete(:expiration),
       }
       yield(resp, session_opts)
     end

@@ -15,7 +15,10 @@ module AWS
   module Core
     module Http
   
-      # Base class for all service reqeusts.
+      # Base class for all service reqeusts.  This class describes
+      # a basic HTTP request, but will not make one.  It is consumed
+      # by a HTTP handler class that sends the actual request
+      # and parses the actual response.
       class Request
   
         # Returns a new empty http request object.
@@ -67,9 +70,9 @@ module AWS
         #   to be populated for requests against signature v4 endpoints.
         attr_accessor :region
   
-        # @param [Boolean] ssl If the request should be sent over ssl or not.
-        def use_ssl= use_ssl
-          @use_ssl = use_ssl
+        # @param [Boolean] state If the request should be sent over ssl or not.
+        def use_ssl= state
+          @use_ssl = state
         end
   
         # @return [Boolean] If this request should be sent over ssl or not.

@@ -56,7 +56,7 @@ module AWS
       attribute :detailed_instance_monitoring,
         :as => :instance_monitoring,
         :static => true do
-        translates_output {|value| value.enabled? }
+        translates_output {|value| value[:enabled] }
       end
 
       alias_method :detailed_instance_monitoring?, :detailed_instance_monitoring

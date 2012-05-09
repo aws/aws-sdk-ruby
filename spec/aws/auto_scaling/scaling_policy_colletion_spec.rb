@@ -43,7 +43,7 @@ module AWS
         let(:response) { client.stub_for(:put_scaling_policy) }
 
         before(:each) do 
-          response.stub(:policy_arn).and_return('arn')
+          response.data[:policy_arn] = 'arn'
           client.stub(:put_scaling_policy).and_return(response)
         end
 
@@ -114,15 +114,16 @@ module AWS
         let(:request_options) {{ :auto_scaling_group_name => group.name }}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:scaling_policies).and_return((1..n).map{|i|
-            double('scaling-policy', 
+          response.data[:scaling_policies] = (1..n).map{|i|
+            {
               :policy_name => i.to_s,
-              :auto_scaling_group_name => group.name)
-          })
+              :auto_scaling_group_name => group.name,
+            }
+          }
         end
 
       end

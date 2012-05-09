@@ -51,7 +51,7 @@ module AWS
 
       it 'should request the next page for a truncated response' do
         truncated_resp = client.new_stub_for(list_method)
-        truncated_resp.stub(:truncated?).and_return(true)
+        truncated_resp.data[:truncated] = true
         stub_markers(truncated_resp, "first")
         client.should_receive(list_method).
           and_return(truncated_resp)
@@ -64,7 +64,7 @@ module AWS
         let(:truncated_resp) { client.new_stub_for(list_method) }
 
         before(:each) do
-          truncated_resp.stub(:truncated?).and_return(true)
+          truncated_resp.data[:truncated] = true
           stub_markers(truncated_resp, "first")
         end
 
@@ -86,12 +86,14 @@ module AWS
 
       it 'should request the remainder of the requested number of items' do
         expect_limits = [2, 2, 1]
-        results = [double("resp 1",
-                          :truncated? => true),
-                   double("resp 2",
-                          :truncated? => true),
-                   double("resp 3",
-                          :truncated? => false)]
+        results = [
+          client.new_stub_for(list_method),
+          client.new_stub_for(list_method),
+          client.new_stub_for(list_method),
+        ]
+        results[0].data[:truncated] = true
+        results[1].data[:truncated] = true
+        results[2].data[:truncated] = false
 
         ["first", "second", "third"].zip(results).each do |name, result|
           stub_markers(result, name)

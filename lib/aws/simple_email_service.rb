@@ -327,13 +327,14 @@ module AWS
     #
     # @return [Array of Hashes] An array of email statistic hashes.
     def statistics
-      client.get_send_statistics.send_data_points.inject([]) do |stats, data|
-        stats << {
-          :sent => data.timestamp,
-          :delivery_attempts => data.delivery_attempts,
-          :rejects => data.rejects,
-          :bounces => data.bounces,
-          :complaints => data.complaints,
+      response = client.get_send_statistics
+      response.data[:send_data_points].collect do |data|
+        {
+          :sent => data[:timestamp],
+          :delivery_attempts => data[:delivery_attempts],
+          :rejects => data[:rejects],
+          :bounces => data[:bounces],
+          :complaints => data[:complaints],
         }
       end
     end

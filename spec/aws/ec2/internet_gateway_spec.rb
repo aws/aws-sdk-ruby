@@ -88,16 +88,15 @@ module AWS
         let(:response) { client.stub_for(:describe_internet_gateways) }
         
         before(:each) do
-          response.stub(:internet_gateway_set).and_return([
-            double('gateway', 
+          response.data[:internet_gateway_set] = [
+            {
               :internet_gateway_id => internet_gateway.id,
               :vpc_id => 'vpc-id',
               :attachment_set => [
-                double('attachment', 
-                  :vpc_id => 'vpc-id',
-                  :state => 'attached')
-              ])
-          ])
+                { :vpc_id => 'vpc-id', :state => 'attached' },
+              ]
+            }
+          ]
           client.stub(:describe_internet_gateways).and_return(response)
         end
 
@@ -161,7 +160,7 @@ module AWS
 
           it 'returns false if an error is raised trying to describe it' do
             client.stub(:describe_internet_gateways).
-              and_raise(Errors::InvalidInternetGatewayID::NotFound)
+              and_raise(Errors::InvalidInternetGatewayID::NotFound.new('msg'))
             internet_gateway.exists?.should == false
           end
 

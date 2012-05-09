@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'bundler/setup'
+
 Bundler.require(:default, :build, :integration)
 
 root = File.dirname(__FILE__)

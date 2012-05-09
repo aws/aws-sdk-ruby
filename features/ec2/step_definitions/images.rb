@@ -28,8 +28,7 @@ When /^I create an image( from the instance)? with the following parameters:$/ d
     opts
   end
   opts[:instance_id] = @instance.id unless from_instance.to_s.empty?
-  @image =
-    @ec2.images.create(opts)
+  @image = @ec2.images.create(opts)
   @created_images << @image
 end
 
@@ -110,7 +109,8 @@ When /^I add the following product codes to the image:$/ do |table|
   codes = table.hashes.collect{|h| h['CODE'] }
   begin
     @image.add_product_codes(*codes)
-  rescue AWS::EC2::Errors::InvalidAMIID::Malformed => e
+  rescue AWS::EC2::Errors::InvalidAMIID::Malformed,
+         AWS::EC2::Errors::InvalidParameterValue
     # intentional fake ami id
   end
 end

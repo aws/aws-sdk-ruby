@@ -107,15 +107,11 @@ module AWS
           context 'when instance data is cached' do
 
             it 'should return a hash' do
-              stub_tags(resp,
-                        [double("tag 1",
-                                :key => "foo",
-                                :value => "bar"),
-                         double("tag 2",
-                                :key => "FOO",
-                                :value => "BAR")])
-              taggable.cached_tags.
-                should == { "foo" => "bar", "FOO" => "BAR" }
+              stub_tags(resp, [
+                { :key => "foo", :value => "bar" },
+                { :key => "FOO", :value => "BAR" },
+              ])
+              taggable.cached_tags.should == { "foo" => "bar", "FOO" => "BAR" }
             end
 
           end

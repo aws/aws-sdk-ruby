@@ -129,14 +129,18 @@ module AWS
       populates_from :describe_table do |resp|
         desc = resp.data['Table']
         if desc['TableName'] == name
-          desc.merge(desc['ProvisionedThroughput']).merge(desc['KeySchema'])
+          desc.
+            merge(desc['ProvisionedThroughput']).
+            merge(desc['KeySchema'] || {})
         end
       end
 
       populates_from :create_table, :delete_table do |resp|
         desc = resp.data['TableDescription']
         if desc['TableName'] == name
-          desc.merge(desc['ProvisionedThroughput']).merge(desc['KeySchema'])
+          desc.
+            merge(desc['ProvisionedThroughput']).
+            merge(desc['KeySchema'] || {})
         end
       end
 

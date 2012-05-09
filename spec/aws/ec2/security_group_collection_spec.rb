@@ -27,17 +27,17 @@ module AWS
         let(:client_method) { :describe_security_groups }
 
         def stub_two_members(resp)
-          resp.stub(:security_group_info).
-            and_return([double("group 1",
-                               :group_name => "g1",
-                               :group_id => "g1",
-                               :group_description => "foo",
-                               :owner_id => "123"),
-                        double("group 2",
-                               :group_name => "g2",
-                               :group_id => "g2",
-                               :group_description => "bar",
-                               :owner_id => "123")])
+          resp.data[:security_group_info] = [{
+            :group_name => "g1",
+            :group_id => "g1",
+            :group_description => "foo",
+            :owner_id => "123",
+          },{
+            :group_name => "g2",
+            :group_id => "g2",
+            :group_description => "bar",
+            :owner_id => "123",
+          }]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -47,9 +47,9 @@ module AWS
         context '#create' do
 
           before(:each) do
-            stub_response = client.stub_for(:create_security_group)
-            stub_response.stub(:group_id).and_return('group-id')
-            client.stub(:create_security_group).and_return(stub_response)
+            response = client.stub_for(:create_security_group)
+            response.data[:group_id] = 'group-id'
+            client.stub(:create_security_group).and_return(response)
           end
 
           it 'should return a new security group' do

@@ -44,11 +44,9 @@ module AWS
 
           response = client.stub_for(:describe_load_balancer_policies)
           response.request_options[:load_balancer_name] = load_balancer.name
-          response.stub(:policy_descriptions).and_return([
-            double('policy-desc-1', 
-              :policy_name => 'name',
-              :policy_type_name => 'TYPE'),
-          ])
+          response.data[:policy_descriptions] = [
+            { :policy_name => 'name', :policy_type_name => 'TYPE' },
+          ]
           
           described_class.new(load_balancer, 'name').type.should == 'TYPE'
         end
@@ -61,17 +59,17 @@ module AWS
 
         before(:each) do
           response.request_options[:load_balancer_name] = load_balancer.name
-          response.stub(:policy_descriptions).and_return([
-            double('policy-desc-1', 
+          response.data[:policy_descriptions] = [
+            {
               :policy_name => policy.name,
               :policy_type_name => 'PolicyTypeName',
               :policy_attribute_descriptions => [
-                double('a1', :attribute_name => 'a1', :attribute_value => 'v1'),
-                double('a2', :attribute_name => 'a2', :attribute_value => 'v2'),
-                double('a3', :attribute_name => 'a2', :attribute_value => 'v3'),
+                { :attribute_name => 'a1', :attribute_value => 'v1' },
+                { :attribute_name => 'a2', :attribute_value => 'v2' },
+                { :attribute_name => 'a2', :attribute_value => 'v3' },
               ]
-            ),
-          ])
+            },
+          ]
           client.stub(:describe_load_balancer_policies).and_return(response)
         end
 
@@ -113,16 +111,16 @@ module AWS
         it 'returns false if the policy does not exist' do
           response = client.stub_for(:describe_load_balancer_policies)
           response.request_options[:load_balancer_name] = load_balancer.name
-          response.stub(:policy_descriptions).and_return([])
+          response.data[:policy_descriptions] = []
           policy.exists?.should == false
         end
 
         it 'returns true if the policy exists' do
           response = client.stub_for(:describe_load_balancer_policies)
           response.request_options[:load_balancer_name] = load_balancer.name
-          response.stub(:policy_descriptions).and_return([
-            double('policy-desc-1', :policy_name => policy.name),
-          ])
+          response.data[:policy_descriptions] = [
+            { :policy_name => policy.name },
+          ]
           policy.exists?.should == true
         end
 

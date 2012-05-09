@@ -354,7 +354,7 @@ module AWS
         #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingResOpsConditions.html
         #   for a list of the available keys for each action in S3.
         #
-        # @param value The value to compare against.
+        # @param [Mixed] values The value to compare against.
         #   This can be:
         #   * a String
         #   * a number
@@ -362,6 +362,7 @@ module AWS
         #   * a boolean value
         #   This method does not attempt to validate that the values
         #   are valid for the operators or keys they are used with.
+        #
         def add(operator, key, *values)
           if operator.kind_of?(Symbol)
             converted_values = values.map { |v| convert_value(v) }

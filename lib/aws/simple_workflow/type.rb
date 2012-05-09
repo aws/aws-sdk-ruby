@@ -17,7 +17,7 @@ module AWS
     # Base class for {WorkflowType} and {ActivityType} objects.
     class Type < Resource
 
-      # @param [Domain] The domain this type is registered to.
+      # @param [Domain] domain The domain this type is registered to.
       # @param [String] name The name of this type.
       # @param [String] version The version of this type.
       def initialize domain, name, version, options = {}

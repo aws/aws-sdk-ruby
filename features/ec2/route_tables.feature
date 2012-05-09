@@ -32,7 +32,7 @@ Feature: EC2 Route Tables
     | param       | Action       | DeleteRouteTable |
     | param_match | RouteTableId | rtb-.+           |
 
-  Scenario: Working with the default route table
+  Scenario: Working with the defualt route table
     Given I create a vpc
     And I create a subnet
     Then the subnet route table should be the main route table

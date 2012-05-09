@@ -76,7 +76,7 @@ module AWS
         get_opts[:item_name] = name
         get_opts[:consistent_read] = consistent_read(options)
         r = client.get_attributes(get_opts)
-        ItemData.new(:name => name, :domain => domain, :response_object => r)
+        ItemData.new(:name => name, :domain => domain, :response_object => r.data)
       end
 
       def == other

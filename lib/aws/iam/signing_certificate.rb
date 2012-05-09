@@ -55,7 +55,7 @@ module AWS
 
       # @param [String] certificate_id The id of the signing certificate.
       # @param [Hash] options
-      # @param [User] :user The user this signing certificate belongs to.
+      # @option options [User] :user
       def initialize certificate_id, options = {}
         @id = certificate_id
         @user = options[:user]

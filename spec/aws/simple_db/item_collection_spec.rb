@@ -25,7 +25,7 @@ module AWS
 
       let(:items) { ItemCollection.new(domain) }
 
-      let(:empty_response) { double('resp', :items => [], :next_token => nil) }
+      let(:empty_response) { client.new_stub_for(:select) }
 
       it_behaves_like 'a sdb model object', 'domain'
 
@@ -183,17 +183,18 @@ module AWS
         it 'calls select to get all item names from the domain' do
           client.should_receive(:select).
             with(hash_including(:select_expression => select_expression)).
-            and_return(double('resp', :items => [], :next_token => nil))
+            and_return(client.stub_for(:select))
           items.each{|item|}
         end
 
         it 'yields an item for each item name returned' do
 
-          response = double('response', :items => [
-            double('item1', :name => 'foo'),
-            double('item1', :name => 'bar'),
-            double('item1', :name => 'yuck'),
-          ], :next_token => nil)
+          response = client.stub_for(:select)
+          response.data[:items] = [
+            { :name => 'foo' },
+            { :name => 'bar' },
+            { :name => 'yuck' },
+          ]
 
           client.stub(:select).and_return(response)
 
@@ -204,8 +205,10 @@ module AWS
 
         it 'calls select until the response does not return a next_token' do
 
-          with_next = double('resp1', :items => [], :next_token => 'abc')
-          no_next = double('resp2', :items => [], :next_token => nil)
+          with_next = client.new_stub_for(:select)
+          with_next.data[:next_token] = 'abc'
+
+          no_next = client.new_stub_for(:select)
 
           client.stub(:select).and_return(with_next, with_next, no_next) 
 
@@ -228,7 +231,7 @@ module AWS
               with(hash_including(
                 :select_expression => select_expression,
                 :next_token => 'abc')).
-              and_return(double('resp', :items => [], :next_token => nil))
+              and_return(client.stub_for(:select))
             items.each(:next_token => 'abc') {|item|}
           end
 
@@ -236,7 +239,7 @@ module AWS
             let(:object) { items }
             let(:method) { :each }
             let(:client_method) { :select }
-            let(:response) { double('response', :items => [], :next_token => nil) }
+            let(:response) { client.stub_for(:select) }
           end
 
         end
@@ -295,27 +298,26 @@ module AWS
         context 'result' do
 
           let(:response) do
-            double('response',
-                   :items => [double('item1',
-                                     :name => 'foo',
-                                     :attributes =>
-                                     [double('foo attribute 1',
-                                             :name => 'foo',
-                                             :value => '1'),
-                                      double('foo attribute 2',
-                                             :name => 'foo',
-                                             :value => '2')]),
-                              double('item1', :name => 'bar',
-                                     :attributes =>
-                                     [double('foo attribute 1',
-                                             :name => 'foo',
-                                             :value => '3'),
-                                      double('foo attribute 2',
-                                             :name => 'foo',
-                                             :value => '4')]),
-                              double('item1', :name => 'yuck',
-                                     :attributes => [])],
-                   :next_token => nil)
+            resp = client.stub_for(:select)
+            resp.data[:items] = [
+              {
+                :name => 'foo',
+                :attributes => [
+                  { :name => 'foo', :value => '1' },
+                  { :name => 'foo', :value => '2' },
+                ]
+              }, {
+                :name => 'bar',
+                :attributes => [
+                  { :name => 'foo', :value => '3' },
+                  { :name => 'foo', :value => '4' },
+                ]
+              }, {
+                :name => 'yuck',
+                :attributes => []
+              }
+            ]
+            resp
           end
 
           before(:each) { client.stub(:select).and_return(response) }
@@ -375,17 +377,18 @@ module AWS
           items.count
         end
 
-        let(:response) { client.new_stub_for(:select) }
+        let(:response) { client.stub_for(:select) }
 
-        let(:count_attribute) { double("count attribute",
-                                       :name => "Count",
-                                       :value => "123") }
+        let(:count_attribute) {{
+          :name => 'Count',
+          :value => '123',
+        }}
 
         before(:each) do
-          response.stub(:items).
-            and_return([double("domain item",
-                               :name => "Domain",
-                               :attributes => [count_attribute])])
+          response.data[:items] = [
+            :name => 'Domain',
+            :attributes => [count_attribute]
+          ]
           client.stub(:select).and_return(response)
         end
 
@@ -394,29 +397,68 @@ module AWS
         end
 
         it 'should add counts from each page of results' do
-          tokens = ['abc', '123']
-          response.stub(:next_token) { tokens.shift unless tokens.empty? }
-          counts = [12, 12, 2]
-          count_attribute.stub(:value) { counts.shift.to_s unless counts.empty? }
+
+          resp = client.new_stub_for(:select)
+          resp.data[:items] = [{ 
+            :name => 'Domain', 
+            :attributes => [{ :name => 'Count', :value => 2 }]
+          }]
+
+          tokens_and_counts = [['abc',12], ['mno', 12], [nil,2]]
+
+          client.stub(:select).and_return { 
+            next_token, count = tokens_and_counts.shift
+            resp.data[:next_token] = next_token
+            resp.data[:items].first[:attributes].first[:value] = count
+            resp
+          }
+
           items.count.should == 26
+
         end
 
         context 'expression with limit' do
 
           it 'should stop at the limit' do
-            tokens = ['abc', '123']
-            response.stub(:next_token) { tokens.shift unless tokens.empty? }
-            counts = [12, 12, 2]
-            count_attribute.stub(:value) { counts.shift.to_s unless counts.empty? }
+
+            resp = client.new_stub_for(:select)
+            resp.data[:items] = [{ 
+              :name => 'Domain', 
+              :attributes => [{ :name => 'Count', :value => 2 }]
+            }]
+
+            tokens_and_counts = [['abc',12], ['mno', 12], [nil,2]]
+
+            client.stub(:select).and_return { 
+              next_token, count = tokens_and_counts.shift
+              resp.data[:next_token] = next_token
+              resp.data[:items].first[:attributes].first[:value] = count
+              resp
+            }
+
             items.limit(12).count.should == 12
+
           end
 
           it 'should keep paging until the limit' do
-            tokens = ['abc', '123']
-            response.stub(:next_token) { tokens.shift unless tokens.empty? }
-            counts = [6, 6, 2]
-            count_attribute.stub(:value) { counts.shift.to_s unless counts.empty? }
+
+            resp = client.new_stub_for(:select)
+            resp.data[:items] = [{ 
+              :name => 'Domain', 
+              :attributes => [{ :name => 'Count', :value => 2 }]
+            }]
+
+            tokens_and_counts = [['abc',6], ['mno', 6], [nil,2]]
+
+            client.stub(:select).and_return { 
+              next_token, count = tokens_and_counts.shift
+              resp.data[:next_token] = next_token
+              resp.data[:items].first[:attributes].first[:value] = count
+              resp
+            }
+
             items.limit(12).count.should == 12
+
           end
 
         end
@@ -584,8 +626,7 @@ module AWS
           end
 
           it 'should call to_s on the value' do
-            obj = double("obj",
-                         :to_s => "foobar")
+            obj = double("obj", :to_s => "foobar")
             items.where("foo = ?", obj).conditions.
               should == ["foo = 'foobar'"]
           end
@@ -713,31 +754,43 @@ module AWS
         end
 
         it 'should make one call if the right number of results is returned' do
-          response = double('response', :items => [
-            double('item1', :name => 'foo'),
-            double('item1', :name => 'bar'),
-            double('item1', :name => 'yuck'),
-          ], :next_token => 'abc')
+
+          response = client.stub_for(:select)
+          response.data[:items] = [
+            { :name => 'foo' },
+            { :name => 'bar' },
+            { :name => 'yuck' },
+          ] 
+          response.data[:next_token] = 'abc'
+
           client.should_receive(:select).and_return(response)
           client.should_not_receive(:select).with(hash_including(:next_token))
+
           items.limit(3).to_a
+
         end
 
         it 'should use the next token until all results are returned' do
-          responses = [double('response 1',
-                              :items => [double('item1', :name => 'foo'),
-                                         double('item1', :name => 'bar')],
-                              :next_token => 'abc'),
-                       double('response 2',
-                              :items => [double('item1', :name => 'yuck')],
-                              :next_token => 'def')]
-          client.should_receive(:select).and_return(responses.first)
+          
+          resp1 = client.new_stub_for(:select)
+          resp1.data[:items] = [{ :name => 'foo' }, { :name => 'bar' }]
+          resp1.data[:next_token] = 'abc'
+
+          resp2 = client.new_stub_for(:select)
+          resp2.data[:items] = [{ :name => 'yuck' }]
+          resp2.data[:next_token] = 'def'
+
+          client.should_receive(:select).and_return(resp1)
+
           client.should_receive(:select).
             with(hash_including(:next_token => 'abc')).
-            and_return(responses.last)
+            and_return(resp2)
+
           client.should_not_receive(:select).
             with(hash_including(:next_token => 'def'))
+
           items.limit(3).to_a
+
         end
 
       end

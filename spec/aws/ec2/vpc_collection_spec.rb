@@ -26,22 +26,23 @@ module AWS
         let(:client_method) { :describe_vpcs }
 
         def stub_two_members(resp)
-          resp.stub(:vpc_set).and_return([
-            double('vpc-1', 
+          resp.data[:vpc_set] = [
+            {
               :vpc_id => 'vpc-1',
               :cidr_block => '192.0.0.0/16',
               :dhcp_options_id => 'dopt-1',
               :tag_set => [],
               :instance_tenancy => 'default',
-              :state => 'available'),
-            double('vpc-2', 
+              :state => 'available',
+            },{
               :vpc_id => 'vpc-2',
               :cidr_block => '10.0.0.0/16',
               :dhcp_options_id => 'dopt-2',
               :tag_set => [],
               :instance_tenancy => 'dedicated',
-              :state => 'available')
-          ])
+              :state => 'available',
+            }
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -79,19 +80,18 @@ module AWS
 
         context '#create' do
 
-          let(:vpc_details) {
-            double('vpc-details', 
-              :vpc_id => 'vpc-12345',
-              :state => 'pending',
-              :cidr_block => '192.0.0.0/16',
-              :dhcp_options_id => 'dopt-12345',
-              :instance_tenancy => 'default')
-          }
+          let(:vpc_details) {{
+            :vpc_id => 'vpc-12345',
+            :state => 'pending',
+            :cidr_block => '192.0.0.0/16',
+            :dhcp_options_id => 'dopt-12345',
+            :instance_tenancy => 'default',
+          }}
 
           let(:response) { client.stub_for(:create_vpc) }
 
           before(:each) do
-            response.stub(:vpc).and_return(vpc_details)
+            response.data[:vpc] = vpc_details
             client.stub(:create_vpc).and_return(response)
           end
 

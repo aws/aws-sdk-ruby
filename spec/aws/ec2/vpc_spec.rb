@@ -61,20 +61,19 @@ module AWS
 
       context 'vpc attributes' do
 
-        let(:vpc_details) {
-          double('vpc-details', 
-            :vpc_id => 'vpc-12345',
-            :state => 'pending',
-            :cidr_block => '192.0.0.0/16',
-            :dhcp_options_id => 'dopt-12345',
-            :instance_tenancy => 'default',
-            :tag_set => [])
-        }
+        let(:vpc_details) {{
+          :vpc_id => 'vpc-12345',
+          :state => 'pending',
+          :cidr_block => '192.0.0.0/16',
+          :dhcp_options_id => 'dopt-12345',
+          :instance_tenancy => 'default',
+          :tag_set => [],
+        }}
 
         let(:response) { client.stub_for(:describe_vpcs) }
 
         before(:each) do
-          response.stub(:vpc_set).and_return([vpc_details])
+          response.data[:vpc_set] = [vpc_details]
           client.should_receive(:describe_vpcs).
             with(:vpc_ids => ['vpc-12345']).
             and_return(response)

@@ -203,7 +203,7 @@ module AWS
       # terminated. This applies to any Auto Scaling decisions that might 
       # result in terminating instances.
       #
-      # @param [Integer] Capacity The new capacity setting for this Auto 
+      # @param [Integer] capacity The new capacity setting for this Auto 
       #   Scaling group.
       #
       # @param [Hash] options

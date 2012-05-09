@@ -44,7 +44,7 @@ module AWS
       # @example Setting an array of values
       #   attributes['colors'].set ['red', 'blue']
       #
-      # @param *values An array or list of attribute values to set.
+      # @param [String] values A list of attribute values to set.
       # @return [nil]
       def set *values
         put(values, true)
@@ -62,7 +62,7 @@ module AWS
       #
       #   attributes['colors'].add ['red', 'blue']
       #
-      # @param *values An array or list of attribute values to add.
+      # @param [String] values A list of attribute values to add.
       # @return [nil]
       def add *values
         put(values, false)

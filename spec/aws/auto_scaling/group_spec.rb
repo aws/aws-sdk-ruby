@@ -31,7 +31,7 @@ module AWS
       let(:now) { Time.now }
 
       let(:details) {
-        double('launch-config-details', {
+        {
           :auto_scaling_group_name => group.name,
           :auto_scaling_group_arn => 'arn',
           :availability_zones => %w(us-east-1a us-east-1b),
@@ -39,19 +39,19 @@ module AWS
           :default_cooldown => 10,
           :desired_capacity => 2,
           :enabled_metrics => [
-            double('metric', :metric => 'metric1', :granularity => 'gran1'),
-            double('metric', :metric => 'metric2', :granularity => 'gran2'),
+            { :metric => 'metric1', :granularity => 'gran1' },
+            { :metric => 'metric2', :granularity => 'gran2' },
           ],
           :health_check_grace_period => 100,
           :health_check_type => 'EC2',
           :instances => [ 
-            double('instance',{
+            {
               :instance_id => "i-4973362d", 
               :health_status => "Healthy", 
               :launch_configuration_name => "name", 
               :availability_zone => "us-east-1a", 
               :lifecycle_state => "InService",
-            })
+            }
           ],
           :launch_configuration_name => 'lc-name',
           :load_balancer_names => %w(lb1-name lb2-name),
@@ -59,8 +59,8 @@ module AWS
           :max_size => 3,
           :placement_group => 'pg',
           :suspended_processes => [
-            double('p', :process_name => 'name1', :suspension_reason => 'reason1'),
-            double('p', :process_name => 'name2', :suspension_reason => 'reason2'),
+            { :process_name => 'name1', :suspension_reason => 'reason1' },
+            { :process_name => 'name2', :suspension_reason => 'reason2' },
           ],
           :tags => [
             {
@@ -78,11 +78,11 @@ module AWS
             }, 
           ],
           :vpc_zone_identifier => 'subnet1-id,subnet2-id'
-        })
+        }
       }
 
       before(:each) do
-        response.stub(:auto_scaling_groups).and_return([details])
+        response.data[:auto_scaling_groups] = [details]
         client.stub(:describe_auto_scaling_groups).and_return(response)
       end
 
@@ -373,14 +373,14 @@ module AWS
         end
 
         it 'returns false if it can not describe it' do
-          response.stub(:auto_scaling_groups).and_return([])
+          response.data[:auto_scaling_groups] = [] # empty
           group.exists?.should == false
         end
 
         it 'returns true if it can describe it' do
-          response.stub(:auto_scaling_groups).and_return([
-            double('group', :auto_scaling_group_name => 'name'),
-          ])
+          response.data[:auto_scaling_groups] = [
+            { :auto_scaling_group_name => 'name' },
+          ]
           group.exists?.should == true
         end
 

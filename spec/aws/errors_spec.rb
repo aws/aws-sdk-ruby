@@ -18,11 +18,15 @@ module AWS
 
     shared_examples_for "an aws error" do
 
-      let(:req) { double('http-request') }
+      let(:req) { Core::Http::Request.new }
 
-      let(:resp) { double('http-response', :body => 'http response body') }
+      let(:resp) { Core::Http::Response.new }
 
       let(:error) { described_class.new(req, resp) }
+
+      before(:each) do
+        resp.body = 'http response body'
+      end
       
       it 'should be a standard error' do
         error.should be_a_kind_of(StandardError)

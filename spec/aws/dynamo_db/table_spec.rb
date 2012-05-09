@@ -59,6 +59,23 @@ module AWS
 
         let(:attributes) { table.attributes_from_response(resp) }
 
+        # this happens when you describe a table that is being deleted
+        it 'should be able to describe a table witout a key schema' do
+
+          response_table.delete('KeySchema')
+          response_table.should == {
+            "TableName" => "MyTable",
+            "ProvisionedThroughput" => {},
+          }
+
+          client.stub(:describe_table).and_return(resp)
+
+          table.exists?.should == true
+          table.hash_key.should == nil
+          table.range_key.should == nil
+
+        end
+
         context '#exists?' do
 
           before(:each) { client.stub(:describe_table).and_return(resp) }

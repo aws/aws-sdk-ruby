@@ -78,18 +78,18 @@ module AWS
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:tags).and_return((1..n).map{|i|
+          response.data[:tags] = (1..n).map{|i|
             {
               :resource_type => 'auto-scaling-group',
               :resource_id => 'as-group-name',
               :key => "tag-#{n}",
               :propagate_at_launch => true,
             }
-          })
+          }
         end
 
         it 'yields tag objects' do
@@ -110,7 +110,7 @@ module AWS
             },
           ]
 
-          response.stub(:tags).and_return(tag_details)
+          response.data[:tags] = tag_details
 
           tags.to_a.should == tag_details.map{|details|
             Tag.new(details.merge(:config => config))

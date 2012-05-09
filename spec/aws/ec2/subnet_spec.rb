@@ -56,18 +56,17 @@ module AWS
 
         let(:response) { client.stub_for(:describe_subnets) }
 
-        let(:subnet_details) {
-          double('subnet-details', 
-            :subnet_id => 'subnet-12345',
-            :vpc_id => 'vpc-12345',
-            :state => 'available',
-            :cidr_block => '10.0.0.0/16',
-            :available_ip_address_count => 50,
-            :availability_zone => 'us-east-1d')
-        }
+        let(:subnet_details) {{
+          :subnet_id => 'subnet-12345',
+          :vpc_id => 'vpc-12345',
+          :state => 'available',
+          :cidr_block => '10.0.0.0/16',
+          :available_ip_address_count => 50,
+          :availability_zone => 'us-east-1d',
+        }}
 
         before(:each) do
-          response.stub(:subnet_set).and_return([subnet_details])
+          response.data[:subnet_set] = [subnet_details]
           client.stub(:describe_subnets).and_return(response)
         end
 
@@ -144,28 +143,28 @@ module AWS
           let(:response) { client.stub_for(:describe_route_tables) }
 
           before(:each) do 
-            response.stub(:route_table_set).and_return([
-              double('route-table-1',
+            response.data[:route_table_set] = [
+              {
                 :route_table_id => 'route-table-id-1',
                 :association_set => [
-                  double('association-1', 
+                  {
                     :route_table_association_id => 'rta-123',
                     :route_table_id => 'route-table-id-1',
-                    :subnet_id => 'subnet-1'),
-                  double('association-2', 
+                    :subnet_id => 'subnet-1' },
+                  {
                     :route_table_association_id => 'rta-321',
                     :route_table_id => 'route-table-id-1',
-                    :subnet_id => 'subnet-2')
-                ]),
-              double('route-table-2',
+                    :subnet_id => 'subnet-2' }
+                ],
+              }, {
                 :route_table_id => 'route-table-id-2',
                 :association_set => [
-                  double('association-3', 
-                    :route_table_association_id => 'rta-456',
+                  { :route_table_association_id => 'rta-456',
                     :route_table_id => 'route-table-id-2',
-                    :main => true)
-                ])
-            ])
+                    :main => true, }
+                ]
+              },
+            ]
           end
 
           context 'getting the route table' do
@@ -199,7 +198,7 @@ module AWS
               it 'calls #associate_route_table on the client' do
 
                 resp = client.stub_for(:associate_route_table)
-                resp.stub(:association_id).and_return('assoc-id')
+                resp.data[:association_id] = 'assoc-id'
 
                 client.should_receive(:associate_route_table).with(
                   :route_table_id => route_table.id,
@@ -225,7 +224,7 @@ module AWS
               it 'calls #replace_route_table_association on the client' do
 
                 resp = client.stub_for(:replace_route_table_association)
-                resp.stub(:new_association_id).and_return('assoc-id')
+                resp.data[:new_association_id] = 'assoc-id'
 
                 client.should_receive(:replace_route_table_association).with(
                   :association_id => 'rta-321',

@@ -33,7 +33,7 @@ module AWS
 
       # Add a list of items to fetch in this batch.  
       #
-      # @param [String] table_name The name of the table to fetch attributes
+      # @param [Table,String] table The name of the table to fetch attributes
       #   from.
       #
       # @param [Symbol, String, Array<String>] attributes The list of attributes

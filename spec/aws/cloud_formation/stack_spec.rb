@@ -35,13 +35,16 @@ module AWS
 
         let(:translated_value) { 'value' }
 
-        let(:stack_details) { double('stack-details', {
+        let(:stack_details) {{
           :stack_name => stack.name,
           get_as => raw_value,
-        })}
+        }}
 
         before(:each) do
-          resp.stub(:stacks).and_return([stack_details])
+          resp.data[:stacks] = [{
+            :stack_name => stack.name,
+            get_as => raw_value
+          }]
           client.stub(:describe_stacks).and_return(resp)
         end
 
@@ -147,16 +150,16 @@ module AWS
         it_behaves_like "a describe stack attribute" do
           let(:attr_name) { :outputs }
           let(:raw_value) {[
-            double('output', {
+            {
               :output_key => 'k1',
               :output_value => 'v1',
               :description => 'd1',
-            }),
-            double('output', {
+            },
+            {
               :output_key => 'k2',
               :output_value => 'v2',
               :description => 'd2',
-            }),
+            },
           ]}
           let(:translated_value) {[
             StackOutput.new(stack, 'k1', 'v1', 'd1'),
@@ -171,18 +174,16 @@ module AWS
         it_behaves_like "a describe stack attribute" do
           let(:attr_name) { :parameters }
           let(:raw_value) {[
-            double('param', {
+            {
               :parameter_key => 'key1',
               :parameter_value => 'value1',
-            }),
-            double('param', {
+            }, {
               :parameter_key => 'key2',
               :parameter_value => 'value2',
-            }),
-            double('param', {
+            }, {
               :parameter_key => 'key3',
               :parameter_value => 'value3',
-            }),
+            },
           ]}
           let(:translated_value) {{
             'key1' => 'value1',
@@ -207,7 +208,7 @@ module AWS
 
         before(:each) do
           resp.request_options[:stack_name] = stack.name
-          resp.stub(:template_body).and_return('template-body')
+          resp.data[:template_body] = 'template-body'
         end
 
         it 'calls #get_template on the client' do

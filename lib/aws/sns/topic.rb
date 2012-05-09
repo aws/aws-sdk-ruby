@@ -105,10 +105,10 @@ module AWS
       # @return [Subscription,nil] Returns a subscription when possible.
       #   If the subscription requires confirmation first, then +nil+ is
       #   returned instead.
-      def subscribe endpoint, opts = {}
-        subscribe_opts = endpoint_opts(endpoint, opts).merge(:topic_arn => arn)
+      def subscribe endpoint, options = {}
+        subscribe_opts = endpoint_opts(endpoint, options).merge(:topic_arn => arn)
         resp = client.subscribe(subscribe_opts)
-        if arn = resp.subscription_arn and arn =~ /^arn:/
+        if arn = resp[:subscription_arn] and arn =~ /^arn:/
           Subscription.new(arn, :config => config)
         else
           nil
@@ -128,21 +128,22 @@ module AWS
       #
       # @option :options [Boolean] :authenticate_on_unsubscribe
       #   Indicates that you want to disable unauthenticated
-      #   unsubsciption of the subscription. If parameter is present
-      #   in the request, the request has an AWS signature, and the
-      #   value of this parameter is true, only the topic owner and
-      #   the subscription owner will be permitted to unsubscribe the
-      #   endpoint, and the Unsubscribe action will require AWS
-      #   authentication.
+      #   unsubsciption of the subscription.
       #
       # @return [Subscription] The newly created subscription.
-      def confirm_subscription(token, opts = {})
-        confirm_opts = opts.merge(:token => token, :topic_arn => arn)
+      #
+      def confirm_subscription token, options = {}
+
+        options[:authenticate_on_unsubscribe] = 'true' if 
+          options[:authenticate_on_unsubscribe]
+
+        confirm_opts = options.merge(:token => token, :topic_arn => arn)
         resp = client.confirm_subscription(confirm_opts)
         Subscription.new(
-          resp.subscription_arn,
+          resp[:subscription_arn],
           :topic_arn => arn,
           :config => config)
+
       end
 
       # @return [TopicSubscriptionCollection] Returns a collection that
@@ -238,7 +239,7 @@ module AWS
       # @param [String] default_message The message you want to send to the 
       #   topic.  Messages must be UTF-8 encoded strings at most 8 KB in size 
       #   (8192 bytes, not 8192 characters).
-      # @param [Hash] Options
+      # @param [Hash] options
       # @option options [String] :subject Used as the "Subject" line when 
       #   the message is delivered to email endpoints. Will also  be
       #   included in the standard JSON messages delivered to other endpoints.
@@ -275,7 +276,7 @@ module AWS
         
         response = client.publish(publish_opts)
 
-        response.message_id
+        response[:message_id]
 
       end
 

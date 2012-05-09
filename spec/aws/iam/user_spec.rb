@@ -28,28 +28,27 @@ module AWS
       shared_examples_for "populated user data" do
 
         let(:response)        { raise NotImplementedError }
-        let(:response_object) { double("response user",
-                                       :user_name => "username") }
+        let(:response_object) {{ :user_name => "username" }}
         let(:attributes)      { user.attributes_from_response(response) }
 
         it 'should include the user id' do
-          response_object.stub(:user_id).and_return("abc123")
+          response_object[:user_id] = 'abc123'
           attributes[:id].should == "abc123"
         end
 
         it 'should include the path' do
-          response_object.stub(:path).and_return("/foo/")
+          response_object[:path] = '/foo/'
           attributes[:path].should == "/foo/"
         end
 
         it 'should include the create date' do
           now = Time.now
-          response_object.stub(:create_date).and_return(now)
+          response_object[:create_date] = now
           attributes[:create_date].should == now
         end
 
         it 'should include the arn' do
-          response_object.stub(:arn).and_return("arn:foo")
+          response_object[:arn] = 'arn:foo'
           attributes[:arn].should == "arn:foo"
         end
 
@@ -58,18 +57,16 @@ module AWS
       context 'populated from get_user' do
 
         it_should_behave_like "populated user data" do
-          let(:response) { double("get_user",
-                                  :request_type => :get_user,
-                                  :user => response_object) }
+          let(:response) { client.stub_for(:get_user) }
+          before(:each) do
+            response.data[:user] = response_object
+          end
         end
 
         it 'should not populate for a non-matching user' do
-          user.attributes_from_response(double("resp",
-                                               :request_type => :get_user,
-                                               :user =>
-                                               double("user",
-                                                      :user_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:get_user)
+          resp.data[:user] = { :user_name => 'foobar' }
+          user.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -77,18 +74,16 @@ module AWS
       context 'populated from create_user' do
 
         it_should_behave_like "populated user data" do
-          let(:response) { double("create_user",
-                                  :request_type => :create_user,
-                                  :user => response_object) }
+          let(:response) { client.stub_for(:create_user) }
+          before(:each) do
+            response.data[:user] = response_object
+          end
         end
 
         it 'should not populate for a non-matching user' do
-          user.attributes_from_response(double("resp",
-                                               :request_type => :create_user,
-                                               :user =>
-                                               double("user",
-                                                      :user_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:create_user)
+          resp.data[:user] = { :user_name => 'foobar' }
+          user.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -96,18 +91,16 @@ module AWS
       context 'populated from list_users' do
 
         it_should_behave_like "populated user data" do
-          let(:response) { double("list_users",
-                                  :request_type => :list_users,
-                                  :users => [response_object]) }
+          let(:response) { client.stub_for(:list_users) }
+          before(:each) do
+            response.data[:users] = [response_object]
+          end
         end
 
         it 'should not populate for a non-matching user' do
-          user.attributes_from_response(double("resp",
-                                               :request_type => :list_users,
-                                               :users =>
-                                               [double("user",
-                                                       :user_name => "foobar")])).
-            should be_nil
+          resp = client.stub_for(:list_users)
+          resp.data[:users] = [{ :user_name => 'foobar' }]
+          user.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -115,18 +108,16 @@ module AWS
       context 'populated from get_group' do
 
         it_should_behave_like "populated user data" do
-          let(:response) { double("get_group",
-                                  :request_type => :get_group,
-                                  :users => [response_object]) }
+          let(:response) { client.stub_for(:get_group) }
+          before(:each) do
+            response.data[:users] = [response_object]
+          end
         end
 
         it 'should not populate for a non-matching user' do
-          user.attributes_from_response(double("resp",
-                                               :request_type => :get_group,
-                                               :users =>
-                                               [double("user",
-                                                       :user_name => "foobar")])).
-            should be_nil
+          resp = client.stub_for(:get_group)
+          resp.data[:users] = [{:user_name => 'foobar'}]
+          user.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -135,18 +126,16 @@ module AWS
 
         let(:response) { client.stub_for(:get_user) }
 
-        let(:response_user) { 
-          double('response-user', {
-                   :user_name => 'username',
-                   :user_id => 'ABCXYZ',
-                   :create_date => now.to_s,
-                   :arn => 'arn',
-                   :path => '/abc/xyz/',
-                 })
-        }
+        let(:response_user) {{
+          :user_name => 'username',
+          :user_id => 'ABCXYZ',
+          :create_date => now.to_s,
+          :arn => 'arn',
+          :path => '/abc/xyz/',
+        }}
 
         before(:each) do
-          response.stub(:user).and_return(response_user)
+          response.data[:user] = response_user
           client.stub(:get_user).and_return(response)
         end
 
@@ -162,11 +151,11 @@ module AWS
 
           it 'updates the user name' do
             
-            response_user.stub(:user_name).and_return('newname')
+            response_user[:user_name] = 'newname'
 
             client.should_receive(:update_user).with(
-                                                     :user_name => 'username', 
-                                                     :new_user_name => 'newname')
+              :user_name => 'username', 
+              :new_user_name => 'newname')
 
             user.name = 'newname'
 

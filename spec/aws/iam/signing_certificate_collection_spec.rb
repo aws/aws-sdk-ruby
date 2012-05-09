@@ -58,16 +58,11 @@ module AWS
           let(:response) { client.stub_for(:upload_signing_certificate) }
           
           before(:each) do
-
-            cert = double('response-certificate', 
+            response.data[:certificate] = {
               :certificate_id => 'cert-id',
               :certificate_body => 'cert-body',
-              :status => 'Active')
-
-            response.stub(:certificate).and_return(cert)
-
-            client.stub(:upload_signing_certificate).and_return(response)
-
+              :status => 'Active',
+            }
           end
           
           it 'calls upload_signing_certificate on the client' do
@@ -113,13 +108,13 @@ module AWS
           let(:request_options) {{ :user_name => user.name }}
 
           def stub_n_members response, n
-            response.stub(:certificates).and_return((1..n).collect{|i|
-              double("certificates-#{i}", {
+            response.data[:certificates] = (1..n).collect{|i|
+              {
                 :certificate_id => "id-#{i}",
                 :certificate_body => "body-#{i}",
                 :status => i % 2 == 1 ? 'Active' : 'Inactive',
-              })
-            })
+              }
+            }
           end
 
           it_behaves_like "a collection that yields models" do
@@ -165,16 +160,11 @@ module AWS
           let(:response) { client.stub_for(:upload_signing_certificate) }
           
           before(:each) do
-
-            cert = double('response-certificate', 
+            response.data[:certificate] = {
               :certificate_id => 'cert-id',
               :certificate_body => 'cert-body',
-              :status => 'Active')
-
-            response.stub(:certificate).and_return(cert)
-
-            client.stub(:upload_signing_certificate).and_return(response)
-
+              :status => 'Active',
+            }
           end
           
           it 'calls upload_signing_certificate on the client' do

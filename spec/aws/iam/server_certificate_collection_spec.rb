@@ -28,12 +28,11 @@ module AWS
 
       context '#create' do
 
-        let(:resp) { client.new_stub_for(:upload_server_certificate) }
+        let(:resp) { client.stub_for(:upload_server_certificate) }
 
         before(:each) do
-          resp.stub(:server_certificate_metadata).
-            and_return(double("cert",
-                              :server_certificate_name => "MyCert"))
+          resp.data[:server_certificate_metadata] = 
+            { :server_certificate_name => "MyCert" }
           client.stub(:upload_server_certificate).and_return(resp)
         end
 
@@ -101,16 +100,15 @@ module AWS
         let(:now)            { Time.now }
 
         def stub_n_members response, n
-          response.stub(:server_certificate_metadata_list).
-            and_return((1..n).collect{|i|
-                         double("cert-#{i}", {
-                                  :server_certificate_name => "cert#{i}",
-                                  :server_certificate_id => "ABCXYZ#{i}",
-                                  :upload_date => now,
-                                  :arn => "awn:aws:iam::12345678901#{i}:cert:/path/#{i}/cert#{i}",
-                                  :path => "/path/#{i}/",
-                                })
-                       })
+          response.data[:server_certificate_metadata_list] = (1..n).collect{|i|
+            {
+              :server_certificate_name => "cert#{i}",
+              :server_certificate_id => "ABCXYZ#{i}",
+              :upload_date => now,
+              :arn => "awn:aws:iam::12345678901#{i}:cert:/path/#{i}/cert#{i}",
+              :path => "/path/#{i}/",
+            }
+          }
         end
 
         it_behaves_like "a collection using a path prefix"

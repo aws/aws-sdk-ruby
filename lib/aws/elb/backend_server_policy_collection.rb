@@ -94,7 +94,7 @@ module AWS
       # @param [Integer] instance_port The instance port you want to set
       #   backend server policies for.
       #
-      # @param [String,LoadBalancerPolicy,nil] policies Load balancer policy
+      # @param [String,LoadBalancerPolicy,nil] policy Load balancer policy
       #   name or object.  Passing nil removes the current policy.
       #
       # @return [nil]

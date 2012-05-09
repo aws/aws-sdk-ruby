@@ -48,31 +48,23 @@ module AWS
         end
 
         it 'should extract the name from an object' do
-          obj = double("obj",
-                       :name => "foo")
-          ItemData.new(:response_object => obj).name.should == "foo"
+          ItemData.new(:response_object => { :name => 'foo'}).name.should == "foo"
         end
 
         it 'should prefer the :name option to the name from a response object' do
-          obj = double("obj",
-                       :name => "foo")
-          ItemData.new(:response_object => obj,
-                       :name => "bar").name.should == "bar"
+          data = ItemData.new(
+            :name => 'bar', 
+            :response_object => { :name => 'foo' })
+          data.name.should == 'bar'
         end
 
-        let(:response_with_attributes) do
-          double("obj",
-                 :attributes =>
-                 [double("att1",
-                         :name => "foo",
-                         :value => "1"),
-                  double("att2",
-                         :name => "foo",
-                         :value => "2"),
-                  double("att3",
-                         :name => "bar",
-                         :value => "baz")])
-        end
+        let(:response_with_attributes) {{
+          :attributes => [
+            { :name => 'foo', :value => '1' },
+            { :name => 'foo', :value => '2' },
+            { :name => 'bar', :value => 'baz' },
+          ]
+        }}
 
         it 'should extract the attributes from an object' do
           ItemData.new(:response_object => response_with_attributes).

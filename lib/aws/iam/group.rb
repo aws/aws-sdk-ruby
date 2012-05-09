@@ -20,6 +20,12 @@ module AWS
     # their jobs. For example, you could have a group called Admins
     # and give that group the types of permissions admins typically
     # need.
+    # @attr [String] name The group's name.
+    # @attr_reader [String] id The group's unique ID.
+    # @attr_reader [Time] create_date When the group was created.
+    # @attr_reader [String] arn The group's ARN (Amazon Resource Name).
+    # @attr [String] path The group's path.  Paths are used to identify
+    #   which division or part of an organization the group belongs to.
     class Group < Resource
 
       prefix_update_attributes
@@ -30,21 +36,14 @@ module AWS
         super
       end
 
-      # @attr [String] The group's name.
       mutable_attribute :name, :static => true, :as => :group_name
 
-      # @attr_reader [String] The group's unique ID.
       attribute :id, :static => true, :as => :group_id
 
-      # @attr_reader [Time] When the group was created.
       attribute :create_date, :static => true
 
-      # @attr_reader [String] The group's ARN (Amazon Resource Name).
       attribute :arn
 
-      # @attr [String] The group's path.  Paths are used to identify
-      #   which division or part of an organization the group belongs
-      #   to.
       mutable_attribute :path do
         translates_input do |path|
           path = "/#{path}" unless path[0] == ?/
@@ -54,11 +53,11 @@ module AWS
       end
 
       populates_from(:get_group, :create_group) do |resp|
-        resp.group if resp.group.group_name == name
+        resp[:group] if resp[:group][:group_name] == name
       end
 
       populates_from(:list_groups, :list_groups_for_user) do |resp|
-        resp.groups.find { |g| g.group_name == name }
+        resp[:groups].find {|g| g[:group_name] == name }
       end
 
       # (see Resource#exists?)

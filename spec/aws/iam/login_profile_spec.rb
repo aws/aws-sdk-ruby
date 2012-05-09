@@ -36,13 +36,12 @@ module AWS
       shared_examples_for "populated login profile data" do
 
         let(:response)        { raise NotImplementedError }
-        let(:response_object) { double("response profile",
-                                       :user_name => "username") }
+        let(:response_object) {{ :user_name => "username" }}
         let(:attributes)      { profile.attributes_from_response(response) }
 
         it 'should include the create date' do
           now = Time.now
-          response_object.stub(:create_date).and_return(now)
+          response_object[:create_date] = now
           attributes[:create_date].should == now
         end
 
@@ -51,18 +50,16 @@ module AWS
       context 'populated from get_login_profile' do
 
         it_should_behave_like "populated login profile data" do
-          let(:response) { double("resp",
-                                  :request_type => :get_login_profile,
-                                  :login_profile => response_object) }
+          let(:response) { client.stub_for(:get_login_profile) }
+          before(:each) do
+            response.data[:login_profile] = response_object
+          end
         end
 
         it 'should not populate for a non-matching profile' do
-          profile.attributes_from_response(double("resp",
-                                                  :request_type => :get_login_profile,
-                                                  :login_profile =>
-                                                  double("profile",
-                                                         :user_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:get_login_profile)
+          resp.data[:login_profile] = { :user_name => 'foobar' }
+          profile.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -70,18 +67,16 @@ module AWS
       context 'populated from create_login_profile' do
 
         it_should_behave_like "populated login profile data" do
-          let(:response) { double("resp",
-                                  :request_type => :create_login_profile,
-                                  :login_profile => response_object) }
+          let(:response) { client.stub_for(:create_login_profile) }
+          before(:each) do
+            response.data[:login_profile] = response_object
+          end
         end
 
         it 'should not populate for a non-matching profile' do
-          profile.attributes_from_response(double("resp",
-                                                  :request_type => :create_login_profile,
-                                                  :login_profile =>
-                                                  double("profile",
-                                                         :user_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:create_login_profile)
+          resp.data[:login_profile] = { :user_name => 'foobar' }
+          profile.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -90,8 +85,7 @@ module AWS
 
         it 'should call get_login_profile' do
           resp = client.new_stub_for(:get_login_profile)
-          resp.stub(:login_profile).
-            and_return(double("profile", :user_name => "username"))
+          resp.data[:login_profile] = { :user_name => 'username' }
           client.should_receive(:get_login_profile).
             with(:user_name => "username").
             and_return(resp)

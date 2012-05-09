@@ -137,7 +137,7 @@ class Net::HTTP::ConnectionPool
 
       end
 
-      it 'enables peer verification by default' do
+      it 'enables peer verification by defualt' do
 
         http_session.should_receive(:use_ssl=).with(true)
         http_session.should_receive(:verify_mode=).

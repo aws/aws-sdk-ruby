@@ -64,9 +64,9 @@ module AWS
         let(:limit_key)      { :max_items }
 
         def stub_n_members response, n
-          response.stub(:account_aliases).and_return((1..n).collect{|i|
+          response.data[:account_aliases] = (1..n).collect{|i|
             "accountalias#{i}"
-          })
+          }
         end
 
       end

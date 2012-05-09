@@ -49,7 +49,6 @@ Feature: Object ACLs
     When I ask the client to get the object ACL
     Then the result should be a successful response
     And the client should have made a "GET" request to the object ACL
-    And the result should return something that looks like a acl from its acl method
 
   @get
   Scenario: Get object ACL (OO interface)

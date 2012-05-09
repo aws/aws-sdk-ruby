@@ -32,7 +32,7 @@ When /^I ask the client to set an object ACL$/ do
     <Grant>
       <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:type="CanonicalUser">
-        <ID>154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef</ID>
+        <ID>b82eae0a69b20ebec9f229f3812b69eec1e09bbf89b1999ccb08aa97bda77270</ID>
         <DisplayName>Mickey Mouse</DisplayName>
       </Grantee>
       <Permission>FULL_CONTROL</Permission>
@@ -50,7 +50,7 @@ When /^I ask the client to set an object ACL using an AccessControlList object$/
     },
     :grants => [{ :grantee => {
                     :canonical_user_id =>
-                    "154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef",
+                    "b82eae0a69b20ebec9f229f3812b69eec1e09bbf89b1999ccb08aa97bda77270",
                     :display_name => "Mickey Mouse"
                   },
                   :permission => :full_control }]
@@ -68,14 +68,14 @@ Then /^the client should have made a "([^\"]*)" request to the object ACL$/ do |
 end
 
 Then /^the object ACL should resemble the one that was set$/ do
-  doc = REXML::Document.new(@s3_client.get_object_acl(:bucket_name => @bucket_name,
-                                                   :key => @object_key).acl.to_s)
-  doc.elements["//Grant/Grantee"].to_s.should =~ /154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef/
+  r = @s3_client.get_object_acl(:bucket_name => @bucket_name, :key => @object_key)
+  r[:grants].first[:grantee][:canonical_user_id].should =~
+    /b82eae0a69b20ebec9f229f3812b69eec1e09bbf89b1999ccb08aa97bda77270/
 end
 
 When /^I add a grant to the object ACL$/ do
-  @acl = @s3_client.get_object_acl(:bucket_name => @bucket_name,
-                                :key => @object_key).acl
+  resp = @s3_client.get_object_acl(:bucket_name => @bucket_name, :key => @object_key)
+  @acl = AWS::S3::AccessControlList.new(resp.data)
   @acl.grant(:read_acp).to(:amazon_customer_email => "aws-dr-sandbox@amazon.com")
 end
 
@@ -86,11 +86,8 @@ When /^I ask the client to set the modified object ACL$/ do
 end
 
 Then /^the object ACL should include the new grant$/ do
-  acl = @s3_client.get_object_acl(:bucket_name => @bucket_name,
-                               :key => @object_key).acl
-  # it would be nice to check the grantee as well, but S3
-  # canonicalizes it so we get something different than what we put in
-  acl.grants.map { |g| g.permission.name }.should include(:read_acp)
+  r = @s3_client.get_object_acl(:bucket_name => @bucket_name, :key => @object_key)
+  r[:grants].map{|g| g[:permission] }.should include(:read_acp)
 end
 
 When /^I ask the client to get the object ACL$/ do

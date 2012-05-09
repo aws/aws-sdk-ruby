@@ -14,11 +14,13 @@
 include AWS
 
 When /^I enable versioning on the bucket$/ do
+  sleep(0.5)
   @bucket.enable_versioning
   sleep(0.5)
 end
 
 When /^I suspend versioning on the bucket$/ do
+  sleep(0.5)
   @bucket.suspend_versioning
   sleep(0.5)
 end
@@ -28,7 +30,9 @@ When /^the object should have a version_id$/ do
 end
 
 When /^the bucket should be versioned$/ do
-  @bucket.versioned?.should == true
+  eventually do
+    @bucket.versioned?.should == true
+  end
 end
 
 When /^the bucket should not be versioned$/ do

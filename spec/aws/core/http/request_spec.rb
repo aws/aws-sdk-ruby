@@ -71,7 +71,7 @@ module AWS::Core
 
       context '#path' do
 
-        it 'defaults to /' do
+        it 'defualts to /' do
           Request.new.path.should == '/'
         end
 

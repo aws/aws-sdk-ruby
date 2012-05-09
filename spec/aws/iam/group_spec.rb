@@ -45,28 +45,27 @@ module AWS
       shared_examples_for "populated group data" do
 
         let(:response)        { raise NotImplementedError }
-        let(:response_object) { double("response group",
-                                       :group_name => "grpname") }
+        let(:response_object) {{ :group_name => "grpname" }}
         let(:attributes)      { group.attributes_from_response(response) }
 
         it 'should include the group id' do
-          response_object.stub(:group_id).and_return("abc123")
+          response_object[:group_id] = 'abc123'
           attributes[:id].should == "abc123"
         end
 
         it 'should include the path' do
-          response_object.stub(:path).and_return("/foo/")
+          response_object[:path] = '/foo/'
           attributes[:path].should == "/foo/"
         end
 
         it 'should include the create date' do
           now = Time.now
-          response_object.stub(:create_date).and_return(now)
+          response_object[:create_date] = now
           attributes[:create_date].should == now
         end
 
         it 'should include the arn' do
-          response_object.stub(:arn).and_return("arn:foo")
+          response_object[:arn] = 'arn:foo'
           attributes[:arn].should == "arn:foo"
         end
 
@@ -75,18 +74,17 @@ module AWS
       context 'populated from get_group' do
 
         it_should_behave_like "populated group data" do
-          let(:response) { double("get_group",
-                                  :request_type => :get_group,
-                                  :group => response_object) }
+          let(:response) { client.stub_for(:get_group) }
+          before(:each) do
+            response.data[:group] = response_object
+            client.stub(:get_group).and_return(response)
+          end
         end
 
         it 'should not populate for a non-matching group' do
-          group.attributes_from_response(double("resp",
-                                                :request_type => :get_group,
-                                                :group =>
-                                                double("group",
-                                                       :group_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:get_group)
+          resp.data[:group] = { :group_name => "foobar" }
+          group.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -94,18 +92,16 @@ module AWS
       context 'populated from create_group' do
 
         it_should_behave_like "populated group data" do
-          let(:response) { double("create_group",
-                                  :request_type => :create_group,
-                                  :group => response_object) }
+          let(:response) { client.stub_for(:create_group) }
+          before(:each) do
+            response.data[:group] = response_object
+          end
         end
 
         it 'should not populate for a non-matching group' do
-          group.attributes_from_response(double("resp",
-                                                :request_type => :create_group,
-                                                :group =>
-                                                double("group",
-                                                       :group_name => "foobar"))).
-            should be_nil
+          resp = client.stub_for(:create_group)
+          resp.data[:group] = { :group_name => 'foobar' }
+          group.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -113,18 +109,16 @@ module AWS
       context 'populated from list_groups' do
 
         it_should_behave_like "populated group data" do
-          let(:response) { double("list_groups",
-                                  :request_type => :list_groups,
-                                  :groups => [response_object]) }
+          let(:response) { client.stub_for(:list_groups) }
+          before(:each) do
+            response.data[:groups] = [response_object]
+          end
         end
 
         it 'should not populate for a non-matching group' do
-          group.attributes_from_response(double("resp",
-                                                :request_type => :list_groups,
-                                                :groups =>
-                                                [double("group",
-                                                        :group_name => "foobar")])).
-            should be_nil
+          resp = client.stub_for(:list_groups)
+          resp.data[:groups] = [{ :group_name => 'foobar' }]
+          group.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -132,18 +126,16 @@ module AWS
       context 'populated from list_groups_for_user' do
 
         it_should_behave_like "populated group data" do
-          let(:response) { double("list_groups_for_user",
-                                  :request_type => :list_groups_for_user,
-                                  :groups => [response_object]) }
+          let(:response) { client.stub_for(:list_groups_for_user) }
+          before(:each) do
+            response.data[:groups] = [response_object]
+          end
         end
 
         it 'should not populate for a non-matching group' do
-          group.attributes_from_response(double("resp",
-                                                :request_type => :list_groups_for_user,
-                                                :groups =>
-                                                [double("group",
-                                                        :group_name => "foobar")])).
-            should be_nil
+          resp = client.stub_for(:list_groups_for_user)
+          resp.data[:groups] = [{ :group_name => 'foobar' }]
+          group.attributes_from_response(resp).should be_nil
         end
 
       end
@@ -203,20 +195,12 @@ module AWS
         end
 
         it 'should return false if there is a NoSuchEntity error' do
-          client.stub(:get_group).
-            and_raise(Errors::NoSuchEntity.new(double("request"),
-                                               double("response",
-                                                      :status => 404,
-                                                      :body => "<foo/>")))
+          client.stub(:get_group).and_raise(Errors::NoSuchEntity)
           group.exists?.should be_false
         end
 
         it 'should not rescue other kinds of errors' do
-          client.stub(:get_group).
-            and_raise(Errors::FooBla.new(double("request"),
-                                         double("response",
-                                                :status => 404,
-                                                :body => "<foo/>")))
+          client.stub(:get_group).and_raise(Errors::FooBla)
           lambda { group.exists? }.should raise_error(Errors::FooBla)
         end
 

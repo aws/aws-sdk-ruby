@@ -77,7 +77,7 @@ module AWS
     let(:request_options) { {} }
 
     def stub_next_token(response, token)
-      response.stub(next_token_response_key).and_return(token)
+      response.data[next_token_response_key] = token
     end
 
     before(:each) do

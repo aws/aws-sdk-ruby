@@ -14,32 +14,75 @@
 module AWS
   module Core
 
-    # @private
+    # = Response
+    #
+    # Each service request returns a response object.  Responses provide
+    # access to response data and request/response metadata.
+    #
+    # == Response Data
+    #
+    # Each response has a hash of data that represents the data
+    # returned by the service.  You can get at this data by
+    # calling {#data} (you can also use the {#[]} method as a shortcut)
+    #
+    #   # make a request to describe one instance
+    #   ec2 = AWS::EC2.new
+    #   response = ec2.client.describe_instances(:instance_ids => ['i-12345678'])
+    #
+    #   # find the instance in the response data (2 ways to get the data)
+    #   instance = response[:reservation_set].first[:instance_set].first
+    #   instance = response.data[:reservation_set].first[:instance_set].first
+    #
+    #   instance[:status] #=> 'running'
+    # 
+    # == Response Metadata
+    #
+    # In addition to the response data, there is additional information
+    # available with the response, including:
+    #
+    # * the name of the client request method called
+    # * the hash of options passed to the client request
+    # * the HTTP request object (useful for debugging)
+    # * the HTTP response object (useful for debugging)
+    #
+    # Given the example and response object from above:
+    #
+    #   response.request_type #=> :describe_instances
+    #   response.request_options #=> { :instance_ids => ['i-12345678'] }
+    #   response.http_request #=> #<AWS::Core::Http::Request>
+    #   response.http_response #=> #<AWS::Core::Http::Response>
+    #
     class Response
   
       include AsyncHandle
+
+      # @return [Hash] Returns the response data as a hash.
+      attr_accessor :data
   
-      # @return [AWS::Error] Returns nil unless the request failed.
+      # @return [Symbol] The name of the client request method that 
+      #   returned this response.
+      attr_accessor :request_type
+      
+      # @return [Hash] Returns the hash of options passed to the client
+      #   request method that generated this response.
+      attr_accessor :request_options
+      
+      # @return [Core::Http::Request]
+      attr_accessor :http_request
+  
+      # @return [Core::Http::Response]
+      attr_accessor :http_response
+  
+      # @return [Boolean] true if the response was generated from a
+      #   another cached response.
+      attr_accessor :cached
+
+      alias_method :cached?, :cached
+  
+      # @return [AWS::Error,nil] Returns nil unless the request failed.
       #   Normally this will be nil unless you are using the Asynchronous 
       #   interface.
       attr_accessor :error
-      
-      # @return [Hash] The hash of options passed to the low level request 
-      #   method that generated this response.
-      attr_accessor :request_options
-  
-      # @return [Symbol] The low-level request method that generated
-      #   this response
-      attr_accessor :request_type
-      
-      # @return [Http::Request] the HTTP request object 
-      attr_accessor :http_request
-  
-      # @return [Http::Response] the HTTP response object 
-      attr_accessor :http_response
-  
-      # @return [Boolean] true if the response is cached
-      attr_accessor :cached
 
       # @return [Integer] Returns the number of times the request
       #   was retried.
@@ -50,22 +93,27 @@ module AWS
       attr_accessor :duration
   
       # @param [Http::Request] http_request
-      # @param [Http::Response] http_request
+      # @param [Http::Response] http_response
       def initialize http_request = nil, http_response = nil, &block
         @http_request = http_request
         @http_response = http_response
         @request_builder = block
+        @data = {}
         @retry_count = 0
         @duration = 0
         rebuild_request if @request_builder && !http_request
       end
-  
-      # Rebuilds the HTTP request using the block passed to the initializer
-      def rebuild_request
-        @http_request = @request_builder.call
+
+      # Provides access to the response data.  This is a short-cut
+      # for calling +response.data[key]+.
+      #
+      # @param [Symbol,String] key
+      # @return [Hash,nil]
+      def [] key
+        data[key]
       end
   
-      # @return [Boolean] Returns true unless there is a response error.
+      # @return [Boolean] Returns true if there is no response error.
       def successful?
         error.nil?
       end
@@ -74,9 +122,9 @@ module AWS
       #   by AWS.
       def throttled?
         if !successful? and http_response.body
-          error = XmlGrammar.parse(http_response.body)
-          error = error.error if error.respond_to?(:error)
-          error.respond_to?(:code) and error.code == "Throttling"
+          error = XML::Parser.new.parse(http_response.body)
+          error = error[:error] if error[:error]
+          error[:code] == "Throttling"
         else
           false
         end
@@ -87,49 +135,66 @@ module AWS
         http_response.timeout?
       end
   
+      # @return [String]
       # @private
       def inspect
-        if request_type
-          "<#{self.class}:#{request_type}>"
-        else
-          "<#{self.class}>"
-        end
+        data.inspect
       end
   
+      # @return [String]
+      # @private
       def cache_key
-        [http_request.access_key_id,
-         http_request.host,
-         request_type,
-         serialized_options].join(":")
+        [
+          http_request.access_key_id,
+          http_request.host,
+          request_type,
+          serialized_options
+        ].join(":")
+      end
+  
+      # Rebuilds the HTTP request using the block passed to the initializer.
+      # This is primarily used by the client when a request must be retried
+      # (throttling, server errors, socket errors, etc).
+      # @private
+      def rebuild_request
+        @http_request = @request_builder.call
+      end
+
+      protected
+
+      # @note The prefered method to get as response data is to use {#[]}.
+      # 
+      # This provides a backwards-compat layer to the old response objects
+      # where each response value had a method extended onto this object.
+      # Now all response data is accessible as a hash.
+      #
+      # @see #[]
+      # @see #data
+      #
+      def method_missing *args, &block
+        Core::Data.new(data).send(*args, &block)
       end
   
       def serialized_options
         serialize_options_hash(request_options)
       end
   
-      private
       def serialize_options_hash(hash)
         "(" + hash.keys.sort_by(&:to_s).map do |key|
           "#{key}=#{serialize_options_value(hash[key])}"
         end.join(" ") + ")"
       end
   
-      private
       def serialize_options_value(value)
         case value
-        when Hash
-          serialize_options_hash(value)
-        when Array
-          serialize_options_array(value)
-        else
-          value.inspect
+        when Hash  then serialize_options_hash(value)
+        when Array then serialize_options_array(value)
+        else value.inspect
         end
       end
   
-      private
-      def serialize_options_array(ary)
-        "[" + ary.map { |v| serialize_options_value(v) }.join(" ") +
-          "]"
+      def serialize_options_array array
+        "[" + array.map{|v| serialize_options_value(v) }.join(" ") + "]"
       end
   
     end

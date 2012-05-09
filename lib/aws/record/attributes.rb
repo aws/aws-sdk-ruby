@@ -20,7 +20,7 @@ module AWS
       # Base class for all of the AWS::Record attributes.
       class BaseAttr
   
-        # @param [Symbol] Name of this attribute.  It should be a name that
+        # @param [Symbol] name Name of this attribute.  It should be a name that
         #   is safe to use as a method.
         # @param [Hash] options
         # @option options [String] :persist_as Defaults to the name of the 
@@ -59,20 +59,20 @@ module AWS
           (options[:persist_as] || @name).to_s
         end
   
-        # @param [Mixed] A single value to type cast.
+        # @param [Mixed] raw_value A single value to type cast.
         # @return [Mixed] Returns the type casted value.
         def type_cast raw_value
           self.class.type_cast(raw_value, options)
         end
   
-        # @param [String] The serialized string value.
+        # @param [String] serialized_value The serialized string value.
         # @return [Mixed] Returns a deserialized type-casted value.
         def deserialize serialized_value
           self.class.deserialize(serialized_value, options)
         end
   
         # Takes the type casted value and serializes it
-        # @param [Mixed] A single value to serialize.
+        # @param [Mixed] type_casted_value A single value to serialize.
         # @return [Mixed] Returns the serialized value.
         def serialize type_casted_value
           self.class.serialize(type_casted_value, options)
@@ -116,7 +116,7 @@ module AWS
         #   string_attr.type_cast('', :preserve_empty_strings => true)
         #   # => ''
         #
-        # @param [Mixed] value
+        # @param [Mixed] raw_value
         # @param [Hash] options
         # @option options [Boolean] :preserve_empty_strings (false) When true,
         #   empty strings are preserved and not cast to nil.  
@@ -189,7 +189,7 @@ module AWS
         #   int_attribute.type_cast('')
         #   #=> nil
         #
-        # @param [Mixed] value The value to type cast to an integer.
+        # @param [Mixed] raw_value The value to type cast to an integer.
         # @return [Integer,nil] Returns the type casted integer or nil
         def self.type_cast raw_value, options = {}
           case raw_value
@@ -294,7 +294,7 @@ module AWS
         #   attribute.serialize(DateTime.parse('2001-01-01'))
         #   #=> '2001-01-01'
         #
-        # @param [Date] datetime The date to serialize.
+        # @param [Date] date The date to serialize.
         #
         # @param [Hash] options
         #

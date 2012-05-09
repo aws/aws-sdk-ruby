@@ -84,7 +84,7 @@ module AWS
 
       shared_examples_for "s3 uploaded part attribute accessor" do
 
-        let(:resp) { client.new_stub_for(:list_parts) }
+        let(:resp) { client.stub_for(:list_parts) }
 
         let(:response_part) { double("part",
                                      :part_number => 3) }

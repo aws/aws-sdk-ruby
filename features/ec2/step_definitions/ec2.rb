@@ -113,7 +113,8 @@ After("@ec2") do
   @created_security_groups.each{|group|
     begin
       group.delete
-    #rescue AWS::EC2::Errors::InvalidSecurityGroupID::NotFound
+    rescue AWS::EC2::Errors::InvalidSecurityGroupID::NotFound,
+           AWS::EC2::Errors::InvalidGroup::NotFound
       # already deleted
     end
   }
@@ -121,7 +122,8 @@ After("@ec2") do
   @created_images.each do |image|
     begin
       image.delete
-    rescue AWS::EC2::Errors::InvalidImageID::NotFound
+    rescue AWS::EC2::Errors::InvalidImageID::NotFound,
+           AWS::EC2::Errors::InvalidAMIID::Unavailable
       # already deleted
     end
   end
@@ -137,7 +139,8 @@ After("@ec2") do
   @created_snapshots.each do |snapshot|
     begin
       snapshot.delete
-    rescue AWS::EC2::Errors::InvalidSnapshotID::NotFound
+    rescue AWS::EC2::Errors::InvalidSnapshotID::NotFound,
+           AWS::EC2::Errors::InvalidSnapshot::NotFound
       # already deleted
     end
   end

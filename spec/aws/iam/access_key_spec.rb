@@ -73,13 +73,13 @@ module AWS
 
           response = client.stub_for(:list_access_keys)
 
-          response.stub(:access_key_metadata).and_return([
-            double("response-access-key", {
+          response.data[:access_key_metadata] = [
+            {
               :access_key_id => 'id', 
               :user_name => user.name,
               :status => 'Inactive',
-            })
-          ])
+            },
+          ]
 
           client.should_receive(:list_access_keys).
             with(:user_name => user.name).

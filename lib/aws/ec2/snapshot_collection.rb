@@ -94,14 +94,17 @@ module AWS
       # @param [Hash] opts Options for creating the snapshot.
       #   Either +:volume+ or +:volume_id+ is required.
       #
-      # @param opts [Volume] :volume The Amazon EBS volume of which
+      # @option opts [Volume] :volume The Amazon EBS volume of which
       #   to take a snapshot.
       #
-      # @param opts [String] :volume_id The ID of the Amazon EBS
+      # @option opts [String] :volume_id The ID of the Amazon EBS
       #   volume of which to take a snapshot.
       #
-      # @param opts [String] :description An optional description of
+      # @option opts [String] :description An optional description of
       #   the snapshot.  May contain up to 255 characters.
+      #
+      # @return [Snapshot]
+      #
       def create opts = {}
         if volume = opts.delete(:volume)
           opts[:volume_id] = volume.id

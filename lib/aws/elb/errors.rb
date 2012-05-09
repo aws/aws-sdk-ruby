@@ -13,15 +13,11 @@
 
 module AWS
   class ELB
-
-    # @private
     module Errors
 
-      BASE_ERROR_GRAMMAR = Client::XML::BaseError
+      extend Core::LazyErrorClasses
 
-      include Core::LazyErrorClasses
-
-      def self.error_class(code)
+      def self.error_class code 
         super(code.sub(/^ElasticLoadBalancing\./, ''))
       end
 

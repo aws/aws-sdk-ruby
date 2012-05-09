@@ -35,11 +35,11 @@ group :autotest do
 end
 
 group :build do
+  gem 'yard'
   gem 'rspec', '2.5'
-  gem 'rcov', '0.9.9'
   gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
+  gem 'rcov', '0.9.9'
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
-  gem 'yard', '~> 0.7.3'
 end
 
 group :integration do
@@ -50,3 +50,4 @@ group :integration do
   gem 'multipart-post', '~> 1.1.2'
   gem 'rotp', '~> 1.3.0'
 end
+

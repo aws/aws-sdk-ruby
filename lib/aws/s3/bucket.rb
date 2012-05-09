@@ -202,10 +202,14 @@ module AWS
       #
       # @return [AccessControlList]
       def acl
-        acl = client.get_bucket_acl(:bucket_name => name).acl
+
+        resp = client.get_bucket_acl(:bucket_name => name)
+
+        acl = AccessControlList.new(resp.data)
         acl.extend ACLProxy
         acl.bucket = self
         acl
+
       end
 
       # Sets the bucket's access control list.  +acl+ can be:
@@ -263,7 +267,8 @@ module AWS
       # @return [Policy,nil] Returns the bucket policy (if it has one),
       #   or it returns +nil+ otherwise.
       def policy
-        policy = client.get_bucket_policy(:bucket_name => name).policy
+        resp = client.get_bucket_policy(:bucket_name => name)
+        policy = Policy.from_json(resp.data[:policy])
         policy.extend(PolicyProxy)
         policy.bucket = self
         policy

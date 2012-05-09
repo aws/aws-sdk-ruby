@@ -36,8 +36,8 @@ module AWS
 
       include Core::Collection::Simple
 
-      # @param [LoadBalancer] The load balancer this list of availability
-      #   zones belongs to.
+      # @param [LoadBalancer] load_balancer The load balancer this list of 
+      #   availability zones belongs to.
       def initialize load_balancer, options = {}
         @load_balancer = load_balancer
         super

@@ -29,9 +29,9 @@ module AWS
         let(:describe_call) { :describe_vpn_gateways }
         let(:taggable) { vpn_gateway }
         def stub_tags(resp, tags)
-          resp.stub(:vpn_gateway_set).and_return([
-            double('gateway', :vpn_gateway_id => 'vgw-123', :tag_set => tags)
-          ])
+          resp.data[:vpn_gateway_set] = [
+            { :vpn_gateway_id => 'vgw-123', :tag_set => tags },
+          ]
         end
       end
 
@@ -52,9 +52,10 @@ module AWS
         let(:response) { client.stub_for(:attach_vpn_gateway) }
 
         before(:each) do
-          response.stub(:attachment).and_return(double('attachment',
+          response.data[:attachment] = {
             :state => 'attached',
-            :vpc_id => 'vpc-id'))
+            :vpc_id => 'vpc-id',
+          }
           client.stub(:attach_vpn_gateway).and_return(response)
         end
 
@@ -115,15 +116,16 @@ module AWS
         let(:response) { client.stub_for(:describe_vpn_gateways) }
 
         before(:each) do
-          response.stub(:vpn_gateway_set).and_return([
-            double('gateway',
+          response.data[:vpn_gateway_set] = [
+            {
               :vpn_gateway_id => vpn_gateway.id,
               :state => 'attached',
               :vpn_type => 'ipsec.1',
               :attachments => [
-                double('attachment', :state => 'attached', :vpc_id => 'vpc-id'),
-              ])
-          ])
+                { :state => 'attached', :vpc_id => 'vpc-id' },
+              ]
+            }
+          ]
           client.stub(:describe_vpn_gateways).and_return(response)
         end
 

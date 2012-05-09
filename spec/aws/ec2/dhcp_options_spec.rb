@@ -29,9 +29,9 @@ module AWS
         let(:describe_call) { :describe_dhcp_options }
         let(:taggable) { dhcp_options }
         def stub_tags(resp, tags)
-          resp.stub(:dhcp_options_set).and_return([
-            double('dhcp-options', :dhcp_options_id => 'id', :tag_set => tags)
-          ])
+          resp.data[:dhcp_options_set] = [
+            { :dhcp_options_id => 'id', :tag_set => tags },
+          ]
         end
       end
 
@@ -80,30 +80,30 @@ module AWS
         let(:response) { client.stub_for(:describe_dhcp_options) }
 
         before(:each) do
-          response.stub(:dhcp_options_set).and_return([
-            double('dhcp-options',
+          response.data[:dhcp_options_set] = [
+            {
               :dhcp_options_id => dhcp_options.id,
               :dhcp_configuration_set => [
-                double('c', :key => 'domain-name', :value_set => [
-                  double('v', :value => 'a'),
-                ]),
-                double('c', :key => 'domain-name-servers', :value_set => [
-                  double('v', :value => 'b'),
-                  double('v', :value => 'c'),
-                ]),
-                double('c', :key => 'ntp-servers', :value_set => [
-                  double('v', :value => 'd'),
-                  double('v', :value => 'e'),
-                ]),
-                double('c', :key => 'netbios-name-servers', :value_set => [
-                  double('v', :value => 'f'),
-                  double('v', :value => 'g'),
-                ]),
-                double('c', :key => 'netbios-node-type', :value_set => [
-                  double('v', :value => '2'),
-                ]),
-              ])
-          ])
+                { 
+                  :key => 'domain-name', 
+                  :value_set => [{ :value => 'a' }] 
+                }, { 
+                  :key => 'domain-name-servers', 
+                  :value_set => [{ :value => 'b' }, { :value => 'c' }]
+                }, { 
+                  :key => 'ntp-servers',
+                  :value_set => [{ :value => 'd' }, { :value => 'e' }]
+                }, { 
+                  :key => 'netbios-name-servers',
+                  :value_set => [{ :value => 'f' }, { :value => 'g' }]
+                },
+                { 
+                  :key => 'netbios-node-type', 
+                  :value_set => [{ :value => '2' }] 
+                },
+              ]
+            }
+          ]
           client.stub(:describe_dhcp_options).and_return(response)
         end
 
@@ -136,7 +136,7 @@ module AWS
 
           it 'returns false if an error is raised trying to describe it' do
             client.stub(:describe_dhcp_options).
-              and_raise(Errors::InvalidDhcpOptionID::NotFound)
+              and_raise(Errors::InvalidDhcpOptionID::NotFound.new('msg'))
             dhcp_options.exists?.should == false
           end
 

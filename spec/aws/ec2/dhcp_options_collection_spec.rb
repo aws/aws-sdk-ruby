@@ -26,14 +26,10 @@ module AWS
         let(:client_method) { :describe_dhcp_options }
 
         def stub_two_members(resp)
-          resp.stub(:dhcp_options_set).and_return([
-            double('options-1',
-              :dhcp_options_id => 'id1',
-              :dhcp_configuration_set => []),
-            double('options-2',
-              :dhcp_options_id => 'id2',
-              :dhcp_configuration_set => []),
-          ])
+          resp.data[:dhcp_options_set] = [
+            { :dhcp_options_id => 'id1', :dhcp_configuration_set => [] },
+            { :dhcp_options_id => 'id2', :dhcp_configuration_set => [] },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -65,16 +61,15 @@ module AWS
 
         context '#create' do
 
-          let(:details) {
-            double('dhcp-options-details',
-              :dhcp_options_id => 'id',
-              :dhcp_configuration => [])
-          }
+          let(:details) {{
+            :dhcp_options_id => 'id',
+            :dhcp_configuration => [],
+          }}
 
           let(:response) { client.stub_for(:create_dhcp_options) }
 
           before(:each) do
-            response.stub(:dhcp_options).and_return(details)
+            response.data[:dhcp_options] = details
             client.stub(:create_dhcp_options).and_return(response)
           end
 

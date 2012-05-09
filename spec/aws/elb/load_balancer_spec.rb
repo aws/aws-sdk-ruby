@@ -120,18 +120,19 @@ module AWS
         let(:now) { Time.now }
 
         before(:each) do
-          response.stub(:load_balancer_descriptions).and_return([
-            double('load-balancer', {
+          response.data[:load_balancer_descriptions] = [
+            {
               :load_balancer_name => 'lb-name',
               :canonical_hosted_zone_name => 'hosted-zone-name',
               :canonical_hosted_zone_name_id => 'hosted-zone-name-id',
               :created_time => now,
               :dns_name => 'dns-name',
-              :source_security_group => double('ssg',
+              :source_security_group => {
                 :group_name => 'sg-name',
-                :owner_alias => 'sg-owner-alias'),
-            })
-          ])
+                :owner_alias => 'sg-owner-alias',
+              },
+            },
+          ]
         end
 
         it 'returns the load balancer name as a string' do
@@ -185,11 +186,12 @@ module AWS
         let(:response) { client.stub_for(:describe_load_balancers) }
 
         before(:each) do
-          response.stub(:load_balancer_descriptions).and_return([
-            double('load-balancer', 
+          response.data[:load_balancer_descriptions] = [
+            {
               :load_balancer_name => load_balancer.name,
-              :availability_zones => %w(az1 az2 az3))
-          ])
+              :availability_zones => %w(az1 az2 az3),
+            },
+          ]
         end
 
         it 'returns an array of strings' do
@@ -204,16 +206,15 @@ module AWS
 
         before(:each) do
 
-          source_sg = double('load-balancer-source-sg',
+          source_sg = {
             :group_name => 'lb-group-name',
-            :owner_alias => 'lb-owner-alias')
+            :owner_alias => 'lb-owner-alias' }
 
-          balancer = double('load-balancer', 
+          balancer = {
             :load_balancer_name => load_balancer.name,
-            :source_security_group => source_sg)
+            :source_security_group => source_sg }
             
-          response.stub(:load_balancer_descriptions).
-            and_return([balancer])
+          response.data[:load_balancer_descriptions] = [balancer]
 
         end
 
@@ -228,33 +229,29 @@ module AWS
 
         let(:response) { client.stub_for(:describe_load_balancers) }
 
-        let(:config_a) {
-          double('health-check',
-            :healthy_threshold => 1,
-            :unhealthy_threshold => 2,
-            :interval => 3,
-            :timeout => 4,
-            :target => 'TCP:80')
-        }
+        let(:config_a) {{
+          :healthy_threshold => 1,
+          :unhealthy_threshold => 2,
+          :interval => 3,
+          :timeout => 4,
+          :target => 'TCP:80',
+        }}
 
-        let(:config_b) {
-          double('health-check',
-            :healthy_threshold => 2,
-            :unhealthy_threshold => 3,
-            :interval => 4,
-            :timeout => 5,
-            :target => 'HTTP:443')
-        }
+        let(:config_b) {{
+          :healthy_threshold => 2,
+          :unhealthy_threshold => 3,
+          :interval => 4,
+          :timeout => 5,
+          :target => 'HTTP:443',
+        }}
 
-        let(:balancer_description) {
-          double('load-balancer-description',
-            :load_balancer_name => load_balancer.name,
-            :health_check => config_a)
-        }
+        let(:balancer_description) {{
+          :load_balancer_name => load_balancer.name,
+          :health_check => config_a,
+        }}
         
         before(:each) do
-          response.stub(:load_balancer_descriptions).
-            and_return([balancer_description])
+          response.data[:load_balancer_descriptions] = [balancer_description]
         end
 
         context '#health_check_configuration' do

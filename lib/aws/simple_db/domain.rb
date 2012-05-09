@@ -33,7 +33,7 @@ module AWS
 
       include Core::Model
 
-      # @param [String] The name of a SimpleDB domain to reference.
+      # @param [String] name The name of a SimpleDB domain to reference.
       def initialize(name, options = {})
         super(options)
         @name = name

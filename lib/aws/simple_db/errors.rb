@@ -35,8 +35,20 @@ module AWS
     # service are instances of either {ClientError} or {ServerError}.
     # @private
     module Errors
-      BASE_ERROR_GRAMMAR = Client::XML::BaseError
-      include Core::LazyErrorClasses
+
+      # @private
+      GRAMMAR = Core::XML::Grammar.customize do
+        element("Errors") do
+          ignore
+          element("Error") do
+            ignore
+            element("BoxUsage") { float_value }
+          end
+        end
+      end
+
+      extend Core::LazyErrorClasses
+
     end
 
   end

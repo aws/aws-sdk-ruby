@@ -26,9 +26,9 @@ module AWS
       let(:response) { client.stub_for(:get_send_quota) }
 
       before(:each) do
-        response.stub(:max_24_hour_send).and_return(200.0)
-        response.stub(:max_send_rate).and_return(1.0)
-        response.stub(:sent_last_24_hours).and_return(10.0)
+        response.data[:max_24_hour_send] = 200.0
+        response.data[:max_send_rate] = 1.0
+        response.data[:sent_last_24_hours] = 10.0
         client.stub(:get_send_quota).and_return(response)
       end
 
@@ -52,8 +52,7 @@ module AWS
       context '#max_24_hour_send' do
         
         it 'returns a value from #to_h' do
-          quotas.stub(:to_h).and_return({:max_24_hour_send => 'foo' })
-          quotas.max_24_hour_send.should == 'foo'
+          quotas.max_24_hour_send.should == 200.0
         end
 
       end
@@ -61,8 +60,7 @@ module AWS
       context '#max_send_rate' do
         
         it 'returns a value from #to_h' do
-          quotas.stub(:to_h).and_return({:max_send_rate => 'foo' })
-          quotas.max_send_rate.should == 'foo'
+          quotas.max_send_rate.should == 1.0
         end
 
       end
@@ -70,8 +68,7 @@ module AWS
       context '#sent_last_24_hours' do
         
         it 'returns a value from #to_h' do
-          quotas.stub(:to_h).and_return({:sent_last_24_hours => 'foo' })
-          quotas.sent_last_24_hours.should == 'foo'
+          quotas.sent_last_24_hours.should == 10.0
         end
 
       end

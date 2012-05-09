@@ -48,7 +48,7 @@ module AWS
         :timestamp,
       ]
 
-      # @param [Domain] The domain to fetch metadata for.
+      # @param [Domain] domain The domain to fetch metadata for.
       # @return [DomainMetadata]
       def initialize domain, options = {}
         @domain = domain

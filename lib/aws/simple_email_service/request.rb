@@ -16,7 +16,13 @@ module AWS
 
     # @private
     class Request < Core::Http::Request
-      include Core::AuthorizeV3
+
+      include Core::Signature::Version4
+
+      def service
+        'ses'
+      end
+
     end
 
   end

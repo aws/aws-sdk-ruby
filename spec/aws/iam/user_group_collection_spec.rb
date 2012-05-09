@@ -66,15 +66,15 @@ module AWS
         let(:limit_key)       { :max_items }
 
         def stub_n_members response, n
-          response.stub(:groups).and_return((1..n).collect{|i|
-            double("group-#{i}", {
+          response.data[:groups] = (1..n).collect{|i|
+            {
               :group_name => "group#{i}",
               :group_id => "ABCXYZ#{i}",
               :create_date => now,
               :arn => "awn:aws:iam::12345678901#{i}:group:/path/#{i}/group#{i}",
               :path => "/path/#{i}/",
-            })
-          })
+            }
+          }
         end
 
         it_behaves_like "a collection that yields models" do

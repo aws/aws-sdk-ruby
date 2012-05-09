@@ -19,7 +19,5 @@ Before("@ses") do
 end
 
 After("@ses") do
-
   # no cleanup yet
-
 end

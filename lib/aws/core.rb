@@ -61,7 +61,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.4.1"
+  VERSION = "1.5.0"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -70,26 +70,15 @@ module AWS
   module Core
 
     AWS.register_autoloads(self) do
-      autoload :ApiConfig,                 'api_config'
       autoload :AsyncHandle,               'async_handle'
-      autoload :AuthorizeV2,               'authorize_v2'
-      autoload :AuthorizeV3,               'authorize_v3'
-      autoload :AuthorizeV4,               'authorize_v4'
-      autoload :AuthorizeWithSessionToken, 'authorize_with_session_token'
       autoload :Cacheable,                 'cacheable'
       autoload :Client,                    'client'
       autoload :Collection,                'collection'
       autoload :Configuration,             'configuration'
-      autoload :ConfiguredClientMethods,   'configured_client_methods'
-      autoload :ConfiguredGrammars,        'configured_grammars'
-      autoload :ConfiguredJsonClientMethods, 'configured_json_client_methods'
-      autoload :ConfiguredOptionGrammars,  'configured_option_grammars'
-      autoload :ConfiguredXmlGrammars,     'configured_xml_grammars'
+      autoload :Data,                      'data'
       autoload :DefaultSigner,             'default_signer'
-      autoload :IgnoreResultElement,       'ignore_result_element'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
-      autoload :JsonClient,                'json_client'
       autoload :LazyErrorClasses,          'lazy_error_classes'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
@@ -105,7 +94,33 @@ module AWS
       autoload :ServiceInterface,          'service_interface'
       autoload :SessionSigner,             'session_signer'
       autoload :UriEscape,                 'uri_escape'
-      autoload :XmlGrammar,                'xml_grammar'
+    end
+
+    module Signature
+      AWS.register_autoloads(self) do
+        autoload :Version2,     'version_2'
+        autoload :Version3,     'version_3'
+        autoload :Version4,     'version_4'
+      end
+    end
+    
+    module XML
+      AWS.register_autoloads(self) do
+        autoload :Parser,     'parser'
+        autoload :Grammar,    'grammar'
+        autoload :Stub,       'stub'
+        autoload :Frame,      'frame'
+        autoload :RootFrame,  'root_frame'
+        autoload :FrameStack, 'frame_stack'
+      end
+
+      module SaxHandlers
+        AWS.register_autoloads(self, 'aws/core/xml/sax_handlers') do
+          autoload :Nokogiri, 'nokogiri'
+          autoload :REXML,    'rexml'
+        end
+      end
+
     end
 
     module Http
@@ -454,9 +469,9 @@ module AWS
 
       needs = [:signer, :http_handler, :"#{ruby_name}_endpoint"]
 
-      Core::Configuration.add_option :"#{ruby_name}_endpoint", default_endpoint
+      Core::Configuraiton.add_option :"#{ruby_name}_endpoint", default_endpoint
 
-      Core::Configuration.add_option_with_needs(
+      Core::Configuraiton.add_option_with_needs(
         :"#{ruby_name}_client", needs, &create_block)
 
     end

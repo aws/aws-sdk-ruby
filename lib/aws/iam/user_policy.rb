@@ -18,8 +18,9 @@ module AWS
 
     class UserPolicy < Resource
 
-      # @param [User] The user this user policy belongs to.
-      # @param [String] The name of this user policy.
+      # @param [User] user The user this user policy belongs to.
+      # @param [String] name The name of this user policy.
+      # @param [Hash] options
       def initialize user, name, options = {}
         @user = user
         @name = name

@@ -99,8 +99,8 @@ module AWS
       #   load_balancer.instances['i-123456'].elb_health
       #   # => { :state => ..., :reason_code => ..., :description => ... }
       #
-      # @param [String,EC2::Instance] One or more instances to receive 
-      #   health information for.
+      # @param [String,EC2::Instance] instances A list of instances to
+      #   receive health information for.
       #
       # @return [Array<Hash>] Returns an array of hashes.  Each hash represents
       #   the health of a single instance.  Each hash includes the following

@@ -35,14 +35,14 @@ module AWS
 
         let(:translated_value) { raw_value }
 
-        let(:stack_resource) { double('stack-resource', {
+        let(:stack_resource) {{
           :logical_resource_id => resource.logical_resource_id,
           :stack_name => stack.name,
           get_as => raw_value,
-        })}
+        }}
 
         before(:each) do
-          resp.stub(:stack_resource_detail).and_return(stack_resource)
+          resp.data[:stack_resource_detail] = stack_resource
           client.stub(:describe_stack_resource).and_return(resp)
         end
 

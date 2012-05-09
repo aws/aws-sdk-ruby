@@ -111,7 +111,7 @@ module AWS
           yield(launch_configuration)
           
         end
-        resp.next_token if resp.respond_to?(:next_token)
+        resp.data[:next_token]
       end
 
       def image_id_opt image

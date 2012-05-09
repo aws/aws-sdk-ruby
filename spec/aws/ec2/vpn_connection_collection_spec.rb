@@ -26,10 +26,10 @@ module AWS
         let(:client_method) { :describe_vpn_connections }
 
         def stub_two_members(resp)
-          resp.stub(:vpn_connection_set).and_return([
-            double('connection', :vpn_connection_id => 'id1'),
-            double('connection', :vpn_connection_id => 'id2'),
-          ])
+          resp.data[:vpn_connection_set] = [
+            { :vpn_connection_id => 'id1' },
+            { :vpn_connection_id => 'id2' },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -61,20 +61,19 @@ module AWS
 
         context '#create' do
 
-          let(:details) {
-            double('vpn-connection-details', 
-              :vpn_connection_id => 'id',
-              :vpn_type => 'ipsec.1',
-              :vpn_gateway_id => 'gid',
-              :customer_gateway_id => 'cgid',
-              :customer_gateway_configuration => 'xml',
-              :vgw_telemetry => [])
-          }
+          let(:details) {{
+            :vpn_connection_id => 'id',
+            :vpn_type => 'ipsec.1',
+            :vpn_gateway_id => 'gid',
+            :customer_gateway_id => 'cgid',
+            :customer_gateway_configuration => 'xml',
+            :vgw_telemetry => [],
+          }}
 
           let(:response) { client.stub_for(:create_vpn_connection) }
 
           before(:each) do
-            response.stub(:vpn_connection).and_return(details)
+            response.data[:vpn_connection] = details
             client.stub(:create_vpn_connection).and_return(response)
           end
 

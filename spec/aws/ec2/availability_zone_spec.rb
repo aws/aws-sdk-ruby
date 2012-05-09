@@ -58,10 +58,9 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_availability_zones) }
 
         before(:each) do
-          resp.stub(:availability_zone_info).
-            and_return([double("az",
-                               Hash[[[response_field, response_value],
-                                     [:zone_name, 'name']]])])
+          resp.data[:availability_zone_info] = [
+            { :zone_name => 'name', response_field => response_value },
+          ]
           client.stub(:describe_availability_zones).and_return(resp)
         end
 
@@ -122,10 +121,10 @@ module AWS
 
         let(:attribute) { :messages }
         let(:response_field) { :message_set }
-        let(:response_value) { [double("msg 1",
-                                       :message => "something"),
-                                double("msg 2",
-                                       :message => "something else")] }
+        let(:response_value) { [
+          { :message => "something" },
+          { :message => "something else" },
+        ]}
 
         it_should_behave_like "availability zone attribute" do
 

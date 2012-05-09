@@ -30,6 +30,7 @@ module AWS
         let(:response) { client.stub_for(:create_topic) }
 
         before(:each) do
+          response.data[:topic_arn] = 'arn'
           client.stub(:create_topic).and_return(response)
         end
         
@@ -43,7 +44,6 @@ module AWS
         end
 
         it 'returns a new topic with the correct arn' do
-          client.stub_for(:create_topic).stub(:topic_arn).and_return('arn')
           topics.create('topic-name').arn.should == 'arn'
         end
 
@@ -82,10 +82,10 @@ module AWS
         let(:response) { client.stub_for(:list_topics) }
 
         before(:each) do
-          response.stub(:topics).and_return([
-            double('t1', :topic_arn => 'arn1'),
-            double('t2', :topic_arn => 'arn2'),
-          ])
+          response.data[:topics] = [
+            { :topic_arn => 'arn1' },
+            { :topic_arn => 'arn2' },
+          ]
           client.stub(:list_topics).and_return(response)
         end
 
@@ -113,15 +113,15 @@ module AWS
           ## 3 stub responses, first 2 have a next token, the 3rd doesn't
 
           r1 = client.new_stub_for(:list_topics)
-          r1.stub(:topics).and_return([double('t1', :topic_arn => 'arn1')])
-          r1.should_receive(:next_token).and_return('abc')
+          r1.data[:topics] = [{ :topic_arn => 'arn1' }]
+          r1.data[:next_token] = 'abc'
 
           r2 = client.new_stub_for(:list_topics)
-          r2.stub(:topics).and_return([double('t2', :topic_arn => 'arn2')])
-          r2.should_receive(:next_token).and_return('xyz')
+          r2.data[:topics] = [{ :topic_arn => 'arn2' }]
+          r2.data[:next_token] = 'xyz'
 
           r3 = response
-          r3.stub(:topics).and_return([double('t3', :topic_arn => 'arn3')])
+          r3.data[:topics] = [{ :topic_arn => 'arn3' }]
 
           ## client should recieve list topics 3 times with the correct 
           ## next tokens (those returned by the previous response)

@@ -24,5 +24,9 @@ When /^I set the model instance "([^"]*)" to "([^"]*)"$/ do |method, value|
 end
 
 When /^I call save on the model instance$/ do
-  @inst.save
+  begin
+    @inst.save
+  rescue AWS::DynamoDB::Errors::ResourceNotFoundException
+    # table does not exist
+  end
 end

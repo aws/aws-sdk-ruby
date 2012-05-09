@@ -65,15 +65,15 @@ module AWS
 
       context '#subscribe' do
 
-        let(:resp) { client.new_stub_for(:subscribe) }
+        let(:resp) { client.stub_for(:subscribe) }
 
         before(:each) do
-          resp.stub(:subscription_arn).and_return(nil)
+          resp.data.delete(:subscription_arn)
           client.stub(:subscribe).and_return(resp)
         end
 
         it 'should return a subscription if an ARN is returned' do
-          resp.stub(:subscription_arn).and_return("arn:foo:bar")
+          resp.data[:subscription_arn] = 'arn:foo:bar'
           subscription = topic.subscribe("http://foo.bar")
           subscription.should be_a(Subscription)
           subscription.arn.should == "arn:foo:bar"
@@ -81,7 +81,7 @@ module AWS
         end
 
         it 'should return nil if the subscription is pending' do
-          resp.stub(:subscription_arn).and_return("pending confirmation")
+          resp.data[:subscription_arn] = 'pending confirmation'
           topic.subscribe("http://foo.bar").should be_nil
         end
 
@@ -288,7 +288,7 @@ module AWS
         let(:resp) { client.new_stub_for(:confirm_subscription) }
 
         before(:each) do
-          resp.stub(:subscription_arn).and_return("arn123")
+          resp.data[:subscription_arn] = 'arn123'
           client.stub(:confirm_subscription).and_return(resp)
         end
 
@@ -302,10 +302,9 @@ module AWS
 
         it 'should pass :authenticate_on_unsubscribe' do
           client.should_receive(:confirm_subscription).
-            with(hash_including(:authenticate_on_unsubscribe => "foo")).
+            with(hash_including(:authenticate_on_unsubscribe => "true")).
             and_return(resp)
-          topic.confirm_subscription("abc123",
-                                     :authenticate_on_unsubscribe => "foo")
+          topic.confirm_subscription("abc123", :authenticate_on_unsubscribe => true)
         end
 
         it 'should return a subscription object with the ARN from the response' do
@@ -336,7 +335,7 @@ module AWS
         let(:response) { client.stub_for(:get_topic_attributes) }
         
         before(:each) do
-          response.stub(:attributes).and_return({
+          response.data[:attributes] = {
             'DisplayName' => 'Display Name',
             'Owner' => '1234567890',
             'TopicArn' => 'arn:aws:sns:us-east-1:123456789012:topicname',
@@ -344,7 +343,7 @@ module AWS
             'SubscriptionsConfirmed' => '1',
             'SubscriptionsPending' => '2',
             'SubscriptionsDeleted' => '3',
-          })
+          }
           client.stub(:get_topic_attributes).and_return(response)
         end
 
@@ -361,7 +360,7 @@ module AWS
           end
 
           it 'returns the name when the display name is not present' do
-            response.stub(:attributes).and_return({})
+            response.data[:attributes] = {}
             topic.display_name.should == 'topicname'
           end
 
@@ -455,7 +454,7 @@ module AWS
         let(:response) { client.stub_for(:publish) }
 
         before(:each) do
-          response.stub(:message_id).and_return('message-id')
+          response.data[:message_id] = 'message-id'
           client.stub(:publish).and_return(response)
         end
 

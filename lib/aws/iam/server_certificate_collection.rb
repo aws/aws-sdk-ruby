@@ -87,7 +87,8 @@ module AWS
       #
       # @return [ServerCertificate] The newly created server
       #   certificate.
-      def upload(options = {})
+      def create options = {}
+
         client_opts = options.dup
         client_opts[:server_certificate_name] = client_opts.delete(:name)
 
@@ -98,11 +99,13 @@ module AWS
         end
 
         resp = client.upload_server_certificate(client_opts)
-        ServerCertificate.new(resp.server_certificate_metadata.
-                              server_certificate_name,
-                              :config => config)
+
+        ServerCertificate.new(
+          resp[:server_certificate_metadata][:server_certificate_name], 
+          :config => config)
+
       end
-      alias_method :create, :upload
+      alias_method :upload, :create
 
       # Returns a reference to the server certificate with the given
       # name:

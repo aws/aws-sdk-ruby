@@ -16,7 +16,7 @@ module AWS
 
     # @private
     class Request < Core::Http::Request
-      include Core::AuthorizeV2
+      include Core::Signature::Version2
     end
 
   end

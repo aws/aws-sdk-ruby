@@ -37,8 +37,8 @@ Feature: Optimistic Locking
     | param | Attribute.2.Name    | version_id    |
     | param | Attribute.2.Value   | 1             |
     | param | Attribute.2.Replace | false         |
-    | param | Expected.1.Name     | version_id    |
-    | param | Expected.1.Exists   | false         |
+    | param | Expected.Name       | version_id    |
+    | param | Expected.Exists     | false         |
 
   Scenario: Updating Adding optimstic locking after records have already been saved
     Given I configure the example class with:
@@ -55,8 +55,8 @@ Feature: Optimistic Locking
     Then a request should have been made like:
     | TYPE  | NAME                | VALUE         |
     | param | Action              | PutAttributes |
-    | param | Expected.1.Name     | version_id    |
-    | param | Expected.1.Value    | 1             |
+    | param | Expected.Name       | version_id    |
+    | param | Expected.Value      | 1             |
     | param | Attribute.2.Name    | version_id    |
     | param | Attribute.2.Value   | 2             |
     | param | Attribute.2.Replace | true          |
@@ -77,8 +77,8 @@ Feature: Optimistic Locking
     Then a request should have been made like:
     | TYPE  | NAME                | VALUE         |
     | param | Action              | PutAttributes |
-    | param | Expected.1.Name     | version_id    |
-    | param | Expected.1.Exists   | false         |
+    | param | Expected.Name       | version_id    |
+    | param | Expected.Exists     | false         |
     | param | Attribute.2.Replace | true          |
     | param | Attribute.2.Value   | 1             |
     | param | Attribute.2.Name    | version_id    |

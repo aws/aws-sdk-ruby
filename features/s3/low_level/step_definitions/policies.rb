@@ -74,7 +74,8 @@ When /^I ask the client to set a bucket policy using the OO interface$/ do
 end
 
 Then /^the bucket policy should resemble the one I set$/ do
-  policy = @s3_client.get_bucket_policy(:bucket_name => @bucket_name).policy
+  resp = @s3_client.get_bucket_policy(:bucket_name => @bucket_name)
+  policy = AWS::S3::Policy.from_json(resp.data[:policy])
   policy.statements.map { |s| s.resources }.
     flatten.should include("arn:aws:s3:::#@bucket_name")
   policy.statements.inject(0) { |sum, s| sum + s.conditions.to_h.size }.should > 0
@@ -92,7 +93,8 @@ Then /^the bucket policy should resemble the one I set$/ do
 end
 
 When /^I produce a modified bucket policy using the OO interface$/ do
-  @policy = @s3_client.get_bucket_policy(:bucket_name => @bucket_name).policy
+  resp = @s3_client.get_bucket_policy(:bucket_name => @bucket_name)
+  @policy = AWS::S3::Policy.from_json(resp.data[:policy])
   @policy.allow(:actions => "s3:*",
                :resources => @bucket_name,
                :principals => "681294939609").

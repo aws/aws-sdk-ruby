@@ -57,7 +57,7 @@ module AWS
             yield(topic)
           end
 
-        end while(next_token = response.next_token)
+        end while(next_token = response.data[:next_token])
         nil
 
       end

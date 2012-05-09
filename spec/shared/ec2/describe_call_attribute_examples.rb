@@ -18,12 +18,12 @@ module AWS
 
   shared_examples_for "ec2 resource attribute accessor (describe call)" do
 
-    let(:resp) { client.new_stub_for(describe_call) }
+    let(:resp) { client.stub_for(describe_call) }
 
-    let(:response_resource) { double("resource") }
+    let(:response_resource) {{}} 
 
     before(:each) do
-      response_resource.stub(response_id_field).and_return(resource_id)
+      response_resource[response_id_field] = resource_id
       stub_member(resp, response_resource)
       client.stub(describe_call).and_return(resp)
     end
@@ -31,8 +31,7 @@ module AWS
     context 'when returned by the service' do
 
       before(:each) do
-        response_resource.stub(response_field).
-          and_return(response_value)
+        response_resource[response_field] = response_value
       end
 
       it 'should call the describe call' do

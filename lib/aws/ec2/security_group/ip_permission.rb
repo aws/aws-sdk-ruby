@@ -20,8 +20,7 @@ module AWS
 
         # @param protocol [:tcp, :udp, :icmp]
         #
-        # @param port [Range,Integer] An integer or a range of integers
-        #   to open ports for.
+        # @param [Integer,Range<Integer>] ports A port or port range to allow.
         #
         # @param [Hash] options
         #

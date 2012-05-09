@@ -19,11 +19,11 @@ module AWS
 
       include Core::Model
 
-      # @param [S3Object]
+      # @param [S3Object] object
       # @param [Hash] options
       # @option options [String] :version_id A specific version of the object
       #   to get metadata for
-      def initialize(object, options = {})
+      def initialize object, options = {}
         @object = object
         @version_id = options[:version_id]
         super

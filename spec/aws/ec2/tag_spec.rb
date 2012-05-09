@@ -62,9 +62,7 @@ module AWS
 
         context 'populated from describe_tags' do
 
-          let(:resp) { double("response",
-                              :request_type => :describe_tags,
-                              :tag_index => {}) }
+          let(:resp) { client.stub_for(:describe_tags) }
 
           let(:attributes) { tag.attributes_from_response(resp) }
 
@@ -80,7 +78,7 @@ module AWS
 
             it 'should return the value from the response object' do
               resp.tag_index["resource-object:resource-id:key"] =
-                double("tag", :value => "value")
+                { :value => 'value' }
               attributes[:value].should == "value"
             end
 
@@ -112,8 +110,8 @@ module AWS
             end
 
             before(:each) do
-              resp.tag_index["resource-object:resource-id:key"] =
-                double("tag", :value => "value")
+              resp.tag_index["resource-object:resource-id:key"] = 
+                { :value => 'value' }
             end
 
             it 'should call describe_tags' do

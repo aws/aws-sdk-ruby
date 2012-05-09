@@ -602,10 +602,10 @@ module AWS
 
       context '#read' do
 
-        let(:response) { double("a response",
-                                :data => "HELLO") }
+        let(:response) { client.stub_for(:get_object) }
 
         before(:each) do
+          response.data[:data] = 'HELLO'
           client.stub(:get_object).and_return(response)
         end
 

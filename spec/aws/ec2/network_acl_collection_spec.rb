@@ -26,20 +26,21 @@ module AWS
         let(:client_method) { :describe_network_acls }
 
         def stub_two_members(resp)
-          resp.stub(:network_acl_set).and_return([
-            double('network-acl', 
+          resp.data[:network_acl_set] = [
+            {
               :network_acl_id => 'acl-1-id',
               :vpc_id => 'vpc-1-id',
-              :default? => true,
+              :default => true,
               :entry_set => [],
-              :association_set => []),
-            double('network-acl', 
+              :association_set => [],
+            }, {
               :network_acl_id => 'acl-2-id',
               :vpc_id => 'vpc-2-id',
-              :default? => false,
+              :default => false,
               :entry_set => [],
-              :association_set => [])
-          ])
+              :association_set => [],
+            },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -77,19 +78,18 @@ module AWS
 
         context '#create' do
 
-          let(:acl_details) {
-            double('network-acl', 
-              :network_acl_id => 'acl-id',
-              :vpc_id => 'vpc-id',
-              :default? => false,
-              :entry_set => [],
-              :association_set => [])
-          }
+          let(:acl_details) {{
+            :network_acl_id => 'acl-id',
+            :vpc_id => 'vpc-id',
+            :default => false,
+            :entry_set => [],
+            :association_set => [],
+          }}
 
           let(:response) { client.stub_for(:create_network_acl) }
 
           before(:each) do
-            response.stub(:network_acl).and_return(acl_details)
+            response.data[:network_acl] = acl_details
             client.stub(:create_network_acl).and_return(response)
           end
 

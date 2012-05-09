@@ -32,22 +32,22 @@ module AWS
 
           @destination_cidr_block = details.destination_cidr_block
 
-          if details.respond_to?(:gateway_id)
+          if details[:gateway_id]
             @internet_gateway = InternetGateway.new(
-              details.gateway_id, 
+              details[:gateway_id],
               :config => route_table.config)
           end
 
-          if details.respond_to?(:instance_id)
-            @instance = Instance.new(details.instance_id, 
+          if details[:instance_id]
+            @instance = Instance.new(details[:instance_id],
               :vpc_id => route_table.vpc_id,
-              :owner_id => details.instance_owner_id,
+              :owner_id => details[:instance_owner_id],
               :config => route_table.config)
           end
 
-          if details.respond_to?(:network_interface_id)
+          if details[:network_interface_id]
             @network_interface = NetworkInterface.new(
-              details.network_interface_id, 
+              details[:network_interface_id], 
               :vpc_id => route_table.vpc_id,
               :config => route_table.config)
           end

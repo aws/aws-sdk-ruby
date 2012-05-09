@@ -20,17 +20,18 @@ module AWS
         include Core::Model
         include Enumerable
 
-        attr_reader :security_group
-
         def initialize security_group, options = {}
           @security_group = security_group
           super
         end
 
+        # @return [SecurityGroup]
+        attr_reader :security_group
+
         def each
           security_group.ip_permissions_list.each do |p|
 
-            ports = p.respond_to?(:from_port) ? [p.from_port, p.to_port] : nil
+            ports = p[:from_port] ? [p[:from_port], p[:to_port]] : nil
 
             ip_ranges = p.ip_ranges.collect{|ip| ip.cidr_ip }
 

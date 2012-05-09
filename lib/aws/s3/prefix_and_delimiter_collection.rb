@@ -29,7 +29,7 @@ module AWS
       def each_member_in_page(page, &block)
         super
         page.common_prefixes.each do |p|
-          yield(with_prefix(p))
+          yield(with_prefix(p[:prefix]))
         end
       end
 

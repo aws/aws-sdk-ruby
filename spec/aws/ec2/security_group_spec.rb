@@ -33,29 +33,25 @@ module AWS
       let(:instance) { group }
 
       def stub_member(resp, member)
-        stub_response_group(resp, member.group_id, member)
+        stub_response_group(resp, member[:group_id], member)
       end
 
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { group }
         def stub_tags(resp, tags)
-          stub_member(resp,
-                      double("group",
-                             :group_id => "id",
-                             :tag_set => tags))
+          stub_member(resp, { :group_id => "id", :tag_set => tags })
         end
       end
 
       def stub_response_group(resp, id, group)
-        resp.stub(:security_group_index).
-          and_return(Hash[[[id, group]]])
+        resp.data[:security_group_index] = { id => group }
       end
 
       context '#exists?' do
         let(:describe_call) { :describe_security_groups }
         let(:id_filter) { "group-id" }
         def stub_exists(resp)
-          stub_response_group(resp, resource.id, double("security group"))
+          stub_response_group(resp, resource.id, {})
         end
         it_should_behave_like "ec2 resource exists method"
       end
@@ -303,11 +299,11 @@ module AWS
         it 'calls describe_security_groups to get the name' do
 
           response = client.new_stub_for(:describe_security_groups)
-          stub_response_group(response, "id",
-                              double('grp1',
-                                     :group_name => 'name', 
-                                     :owner_id => 'abc', 
-                                     :group_description => 'xyz'))
+          stub_response_group(response, "id", {
+            :group_name => 'name', 
+            :owner_id => 'abc', 
+            :group_description => 'xyz',
+          })
 
           client.should_receive(:describe_security_groups).
             with(:group_ids => ['id']).
@@ -335,11 +331,11 @@ module AWS
         it 'calls describe_security_groups to get the owner_id' do
 
           response = client.stub_for(:describe_security_groups)
-          stub_response_group(response, "id",
-                              double('grp1',
-                                     :group_name => 'name',
-                                     :owner_id => 'abc',
-                                     :group_description => 'xyz'))
+          stub_response_group(response, "id", {
+            :group_name => 'name',
+            :owner_id => 'abc',
+            :group_description => 'xyz',
+          })
 
           client.should_receive(:describe_security_groups).
             with(:group_ids => ['id']).
@@ -368,11 +364,11 @@ module AWS
         it 'calls describe_security_groups to get the desc when missing' do
 
           response = client.stub_for(:describe_security_groups)
-          stub_response_group(response, "id",
-                              double('grp1',
-                                     :group_name => 'name',
-                                     :owner_id => 'abc',
-                                     :group_description => 'xyz'))
+          stub_response_group(response, "id", {
+            :group_name => 'name',
+            :owner_id => 'abc',
+            :group_description => 'xyz'
+          })
 
           client.should_receive(:describe_security_groups).
             with(:group_ids => ['id']).

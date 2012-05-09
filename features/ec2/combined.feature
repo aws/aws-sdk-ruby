@@ -19,12 +19,10 @@ Feature: Combining various EC2 features
 
   @instances @elastic_ips @security_groups @key_pairs @slow
   Scenario: Starting an instance with a new key pair and logging in
-  
     Given I create a security group named "ruby-integration-test-ssh"
     And I add SSH access from my current IP to the security group
     And I create a key pair named "ruby-integration-test"
     And I allocate an elastic ip
-
     When I request to run an instance with the following parameters:
     | parameter       | value                     |
     | image_id        | ami-8c1fece5              |
@@ -33,7 +31,6 @@ Feature: Combining various EC2 features
     And the instance status should eventually be "running"
     And I associate the elastic ip with the instance
     And The instance should eventually have the new elastic ip
-
     Then I should be able to ssh to the elastic ip as "ec2-user"
     And I terminate the instance
     And the instance status should eventually be "terminated"

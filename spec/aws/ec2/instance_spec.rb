@@ -27,14 +27,10 @@ module AWS
       it_should_behave_like "an ec2 resource object"
 
       def stub_response_instance(resp, id, instance)
-        reservation = double("reservation",
-                             :instances_set => [instance])
-        resp.stub(:instance_index).
-          and_return(Hash[[[id, instance]]])
-        resp.stub(:reservation_index).
-          and_return(Hash[[[id, reservation]]])
-        resp.stub(:reservation_set).
-          and_return([reservation])
+        reservation = { :instances_set => [instance] }
+        resp.data[:instance_index] = { id => instance }
+        resp.data[:reservation_index] = { id => reservation }
+        resp.data[:reservation_set] = [reservation]
       end
 
       let(:describe_call) { :describe_instances }
@@ -42,9 +38,7 @@ module AWS
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { instance }
         def stub_tags(resp, tags)
-          stub_response_instance(resp, "i-123",
-                                 double("instance",
-                                        :tag_set => tags))
+          stub_response_instance(resp, "i-123", { :tag_set => tags })
         end
       end
 
@@ -118,22 +112,21 @@ module AWS
 
       shared_examples_for "ec2 instance attribute returned from describe_instances" do
 
-        let(:response_instance) { double("instance",
-                                         :instance_id => "i-123") }
+        let(:response_instance) {{ :instance_id => "i-123" }}
 
         # everything in describe_instances is also in run_instances
         context 'populate from run_instances' do
 
-          let(:response) do
-            double("resp",
-                   :request_type => :run_instances,
-                   :instances_set => [response_instance])
+          let(:response) { client.stub_for(:run_instances) }
+
+          before(:each) do
+            response.data[:instances_set] = [response_instance]
           end
 
           context 'when returned by the service' do
 
             it 'should populate the correct value' do
-              response_instance.stub(response_field).and_return(response_value)
+              response_instance[response_field] = response_value
               instance.attributes_from_response(response)[attribute].
                 should == translated_value
             end
@@ -157,8 +150,7 @@ module AWS
 
         let(:resp) { client.new_stub_for(:describe_instances) }
 
-        let(:response_instance) { double("instance",
-                                         :instance_id => "i-123") }
+        let(:response_instance) {{ :instance_id => 'i-123'  }}
 
         before(:each) do
           stub_response_instance(resp, "i-123", response_instance)
@@ -168,8 +160,7 @@ module AWS
         context 'when returned by the service' do
 
           before(:each) do
-            response_instance.stub(response_field).
-              and_return(response_value)
+            response_instance[response_field] = response_value
           end
 
           it 'should call describe_instances' do
@@ -201,19 +192,18 @@ module AWS
 
         let(:attribute) { :security_groups }
         let(:response_field) { :group_set }
-        let(:response_value) { [double("g1",
-                                       :group_id => "sg-123",
-                                       :group_name => "group1"),
-                                double("g2",
-                                       :group_id => "sg-321",
-                                       :group_name => "group2")] }
-        let(:translated_value) { [SecurityGroup.new("sg-123", :config => config),
-                                  SecurityGroup.new("sg-321", :config => config)] }
+        let(:response_value) {[
+          { :group_id => "sg-123", :group_name => "group1" },
+          { :group_id => "sg-321", :group_name => "group2" },
+        ]}
+        let(:translated_value) {[
+          SecurityGroup.new("sg-123", :config => config),
+          SecurityGroup.new("sg-321", :config => config)
+        ]}
 
-        let(:resp) { client.new_stub_for(:describe_instances) }
+        let(:resp) { client.stub_for(:describe_instances) }
 
-        let(:response_instance) { double("instance",
-                                         :instance_id => "i-123") }
+        let(:response_instance) {{ :instance_id => "i-123" }}
 
         before(:each) do
           stub_response_instance(resp, "i-123", response_instance)
@@ -223,8 +213,7 @@ module AWS
         context 'when returned by the service' do
 
           before(:each) do
-            response_instance.stub(response_field).
-              and_return(response_value)
+            response_instance[response_field] = response_value
           end
 
           it 'should call describe_instances' do
@@ -279,16 +268,17 @@ module AWS
       end
 
       context '#monitoring' do
+
         let(:attribute) { :monitoring }
         let(:response_field) { attribute }
-        let(:response_value) { double("monitoring status",
-                                      :state => "enabled") }
+        let(:response_value) {{ :state => "enabled" }}
         let(:translated_value) { :enabled }
+
         it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
 
-        shared_examples_for "populate from monitoring action" do |op|
+        shared_examples_for "populate from monitoring action" do |client_method|
 
-          let(:resp) { client.new_stub_for(op) }
+          let(:resp) { client.stub_for(client_method) }
 
           let(:attributes) { instance.attributes_from_response(resp) }
 
@@ -303,10 +293,10 @@ module AWS
           context 'when the instance is included in the response' do
 
             it 'should return the translated value' do
-              resp.stub(:instances_set).
-                and_return([double("instance",
-                                   :instance_id => "i-123",
-                                   :monitoring => response_value)])
+              resp.data[:instances_set] = [{
+                :instance_id => "i-123",
+                :monitoring => response_value,
+              }]
               attributes[:monitoring].should == translated_value
             end
 
@@ -506,12 +496,10 @@ module AWS
         context 'populate from run_instances' do
 
           it 'should populate the correct value' do
-            response = double("resp",
-                              :request_type => :run_instances,
-                              :instances_set =>
-                              [double("inst",
-                                      :instance_id => "i-123",
-                                      :image_id => "ami-123")])
+            response = client.stub_for(:run_instances)
+            response.data[:instances_set] = [
+              { :instance_id => 'i-123', :image_id => 'ami-123' }
+            ]
             instance.attributes_from_response(response)[:image_id].
               should == "ami-123"
           end
@@ -521,12 +509,11 @@ module AWS
         context 'populate from describe_instances' do
 
           it 'should populate the correct value' do
-            response = double("resp",
-                              :request_type => :describe_instances)
-            stub_response_instance(response, "i-123",
-                                   double("inst",
-                                          :instance_id => "i-123",
-                                          :image_id => "ami-123"))
+            response = client.stub_for(:describe_instances)
+            stub_response_instance(response, "i-123", {
+              :instance_id => 'i-123',
+              :image_id => 'ami-123',
+            })
             instance.attributes_from_response(response)[:image_id].
               should == "ami-123"
           end
@@ -610,12 +597,9 @@ module AWS
 
         let(:resp) { client.new_stub_for(:describe_instances) }
 
-        let(:reservation) { double("reservation",
-                                   :instances_set =>
-                                   [response_instance]) }
+        let(:reservation) {{ :instances_set => [response_instance] }}
 
-        let(:response_instance) { double("instance",
-                                         :instance_id => "i-123") }
+        let(:response_instance) {{ :instance_id => "i-123" }}
 
         before(:each) do
           resp.stub(:instance_index).and_return("i-123" => response_instance)
@@ -632,7 +616,9 @@ module AWS
 
         context 'when present' do
 
-          before(:each) { reservation.stub(attribute).and_return("1234") }
+          before(:each) do
+            reservation[attribute] = '1234'
+          end
 
           it "should memoize the attribute value" do
             client.should_receive(:describe_instances).once
@@ -655,19 +641,18 @@ module AWS
 
         context 'populate from run_instances' do
 
-          let(:response_instance) { double("instance",
-                                           :instance_id => "i-123") }
+          let(:response_instance) {{ :instance_id => "i-123" }}
 
-          let(:response) do
-            double("resp",
-                   :request_type => :run_instances,
-                   :instances_set => [response_instance])
+          let(:response) { client.stub_for(:run_instances) }
+
+          before(:each) do
+            response.data[:instances_set] = [response_instance]
           end
 
           context 'when returned by the service' do
 
             it 'should populate the correct value' do
-              response.stub(attribute).and_return("1234")
+              response.data[attribute] = '1234'
               instance.attributes_from_response(response)[attribute].
                 should == "1234"
             end
@@ -676,14 +661,10 @@ module AWS
 
           context 'when not returned by the service' do
 
-            it 'should have a key in the hash' do
-              instance.attributes_from_response(response).
-                should have_key(attribute)
-            end
-
-            it 'should populate nil' do
-              instance.attributes_from_response(response)[attribute].
-                should be_nil
+            it 'should have a key in the hash with a nil value' do
+              attributes = instance.attributes_from_response(response)
+              attributes.should have_key(attribute)
+              attributes[attribute].should == nil
             end
 
           end
@@ -709,15 +690,12 @@ module AWS
 
       shared_examples_for "ec2 instance attribute accessor (describe_instance_attribute)" do
 
-        let(:resp) { client.new_stub_for(:describe_instance_attribute) }
+        let(:resp) { client.stub_for(:describe_instance_attribute) }
 
         before(:each) do
-
-          resp.stub(response_field).
-            and_return(double("attribute",
-                              :value => response_value))
-          resp.stub(:request_options).and_return(:instance_id => "i-123",
-                                                 :attribute => request_attribute_name)
+          resp.request_options[:instance_id] = 'i-123'
+          resp.request_options[:attribute] = request_attribute_name
+          resp.data[response_field] = { :value => response_value }
           client.stub(:describe_instance_attribute).and_return(resp)
         end
 
@@ -734,7 +712,7 @@ module AWS
         end
 
         it 'should return nil if the attribute is not set' do
-          resp.stub(response_field).and_return(nil)
+          resp.data[response_field] = nil
           instance.send(attribute).should be_nil
         end
 
@@ -790,12 +768,10 @@ module AWS
         context 'populate from run_instances' do
 
           it 'should populate the correct value' do
-            response = double("resp",
-                              :request_type => :run_instances,
-                              :instances_set =>
-                              [double("inst",
-                                      :instance_id => "i-123",
-                                      :instance_type => "t1.micro")])
+            response = client.stub_for(:run_instances)
+            response.data[:instances_set] = [
+              { :instance_id => 'i-123', :instance_type => 't1.micro' }
+            ]
             instance.attributes_from_response(response)[:instance_type].
               should == "t1.micro"
           end
@@ -805,12 +781,11 @@ module AWS
         context 'populate from describe_instances' do
 
           it 'should populate the correct value' do
-            response = double("resp",
-                              :request_type => :describe_instances)
-            stub_response_instance(response, "i-123",
-                                   double("inst",
-                                          :instance_id => "i-123",
-                                          :instance_type => "t1.micro"))
+            response = client.stub_for(:describe_instances)
+            stub_response_instance(response, "i-123", {
+              :instance_id => 'i-123',
+              :instance_type => 't1.micro',
+            })
             instance.attributes_from_response(response)[:instance_type].
               should == "t1.micro"
           end
@@ -976,20 +951,14 @@ module AWS
 
         let(:resp) { client.new_stub_for(:describe_instance_attribute) }
 
-        let(:ebs_mapping) do
-          double("ebs",
-                 :volume_id => "vol-123",
-                 :status => "attaching",
-                 :attach_time =>
-                 Time.parse("Thu Apr 21 16:19:57 -0700 2011"),
-                 :delete_on_termination => true)
-        end
+        let(:ebs_mapping) {{
+          :volume_id => "vol-123",
+          :status => "attaching",
+          :attach_time => Time.parse("Thu Apr 21 16:19:57 -0700 2011"),
+          :delete_on_termination => true,
+        }}
 
         shared_examples_for "ec2 instance block device mapping value" do
-
-          it 'should be a hash' do
-            mappings.should be_a(Hash)
-          end
 
           it 'should have device names as keys' do
             mappings.should have_key("/dev/sda2")
@@ -1037,13 +1006,13 @@ module AWS
           end
 
           before(:each) do
-            stub_response_instance(resp, "i-123",
-                                   double("instance",
-                                          :instance_id => "i-123",
-                                          :block_device_mapping =>
-                                          [double("mapping",
-                                                  :device_name => "/dev/sda2",
-                                                  :ebs => ebs_mapping)]))
+            stub_response_instance(resp, "i-123", {
+              :instance_id => "i-123",
+              :block_device_mapping => [{
+                :device_name => "/dev/sda2",
+                :ebs => ebs_mapping,
+              }]
+            })
           end
 
           it_should_behave_like "ec2 instance block device mapping value"
@@ -1057,20 +1026,27 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_instances) }
 
         before(:each) do
-          stub_response_instance(resp, "i-123",
-                                 double("instance",
-                                        :instance_id => "i-123",
-                                        :instance_state =>
-                                        double("instance state",
-                                               :code => 32,
-                                               :name => "shutting-down")))
+          
+          stub_response_instance(resp, "i-123", {
+            :instance_id => "i-123",
+            :instance_state => {
+              :code => 32,
+              :name => "shutting-down",
+            }
+          })
+
           client.stub(:describe_instances).and_return(resp)
+
         end
 
         it 'should call describe_instances' do
+
           client.should_receive(:describe_instances).
-            with(:instance_ids => ["i-123"])
+            with(:instance_ids => ["i-123"]).
+            and_return(resp)
+
           instance.status
+
         end
 
         it 'should return the symbol-ized named of the instance state' do
@@ -1081,23 +1057,24 @@ module AWS
 
           let(:resp) { client.new_stub_for(op) }
 
-          let(:response_instance) { double("instance",
-                                           :instance_id => "i-123") }
+          let(:response_instance) {{ :instance_id => 'i-123' }}
 
           let(:populated) { instance.attributes_from_response(resp) }
 
           before(:each) do
-            resp.stub(:instances_set).and_return([response_instance])
+            resp.data[:instances_set] = [response_instance]
           end
 
           it 'should not populate the status when no instance matches' do
-            response_instance.stub(:instance_id).and_return("i-321")
+            response_instance[:instance_id] = 'i-bogus'
             populated.should be_nil
           end
 
           it 'should populate from the current state' do
-            response_instance.stub(:current_state).
-              and_return(double("state", :name => "foo-bar", :code => 80))
+            response_instance[:current_state] = {
+              :name => "foo-bar", 
+              :code => 80,
+            }
             populated[:status].should == :foo_bar
           end
 
@@ -1134,16 +1111,20 @@ module AWS
           end
           
           it 'returns nil if there is no elastic ip address associated' do
+            response.data[:addresses_set] = []
             instance.elastic_ip.should be_nil
           end
 
           it 'returns an ElasticIp when one is associated' do
-            response.stub(:addresses_set).and_return([
-              double('ip', :public_ip => '1.1.1.1', :instance_id => instance.id)
-            ])
+
+            response.data[:addresses_set] = [
+              { :public_ip => '1.1.1.1', :instance_id => instance.id },
+            ]
+
             ip = instance.elastic_ip
             ip.should be_an(ElasticIp)
             ip.public_ip.should == '1.1.1.1'
+
           end
 
         end
@@ -1222,14 +1203,15 @@ module AWS
 
         context 'populated from run_instances' do
 
-          let(:response_instance) { double("inst",
-                                           :instance_id => "i-123",
-                                           :instance_type => "t1.micro") }
+          let(:response_instance) {{
+            :instance_id => "i-123",
+            :instance_type => "t1.micro",
+          }}
 
           let(:resp) { client.new_stub_for(:run_instances) }
 
           before(:each) do
-            resp.stub(:instances_set).and_return([response_instance])
+            resp.data[:instances_set] = [response_instance]
           end
 
           it 'should return a hash if the instance ID is found' do
@@ -1237,7 +1219,7 @@ module AWS
           end
 
           it 'should return nil if no instance IDs match' do
-            response_instance.stub(:instance_id).and_return("i-321")
+            response_instance[:instance_id] = 'i-bogus'
             instance.attributes_from_response(resp).should be_nil
           end
 
@@ -1248,10 +1230,14 @@ module AWS
           let(:resp) { client.new_stub_for(:describe_instance_attribute) }
 
           before(:each) do
-            resp.stub(:request_options).and_return(:instance_id => "i-123",
-                                                   :attribute => "instanceType")
-            resp.stub(:instance_type).and_return(double("attribute",
-                                                        :value => "foo"))
+
+            resp.request_options = { 
+              :instance_id => 'i-123', 
+              :attribute => 'instanceType',
+            }
+
+            resp.data[:instance_type] = { :value => 'foo' }
+
           end
 
           it 'should return nil if the instance ID does not match' do
@@ -1263,9 +1249,10 @@ module AWS
 
         context 'populated from describe_instances' do
 
-          let(:response_instance) { double("inst",
-                                           :instance_id => "i-123",
-                                           :instance_type => "t1.micro") }
+          let(:response_instance) {{ 
+            :instance_id => "i-123",
+            :instance_type => "t1.micro",
+          }}
 
           let(:resp) { client.new_stub_for(:describe_instances) }
 
@@ -1278,9 +1265,8 @@ module AWS
           end
 
           it 'should return nil if no instance IDs match' do
-            described_class.new("i-321",
-                                :config => config).
-              attributes_from_response(resp).should be_nil
+            instance = Instance.new("i-bogus", :config => config)
+            instance.attributes_from_response(resp).should be_nil
           end
 
         end

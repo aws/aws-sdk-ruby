@@ -11,268 +11,295 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
---- 
-:operations: 
-  DeleteAttributes: 
-    :output: []
-
-    :input: 
-      Expected: 
-      - :list:
-        - :structure: 
-            Name: 
-            - :string
-            Exists: 
-            - :boolean
-            Value: 
-            - :string
-      Attribute: 
-      - :list: 
-        - :structure: 
-            AlternateNameEncoding: 
-            - :string
-            Name: 
-            - :string
-            - :required
-            AlternateValueEncoding: 
-            - :string
-            Value: 
-            - :string
-      - :rename: Attributes
-      DomainName: 
-      - :string
-      - :required
-      ItemName: 
-      - :string
-      - :required
-  CreateDomain: 
-    :output: []
-
-    :input: 
-      DomainName: 
-      - :string
-      - :required
-  ListDomains: 
-    :output: 
-    - DomainName: 
-      - :list
-      - :rename: DomainNames
-    :input: 
-      MaxNumberOfDomains: 
-      - :integer
-      NextToken: 
-      - :string
-  GetAttributes: 
-    :output: 
-    - Attribute: 
-      - :list
-      - :rename: Attributes
-    :input: 
-      DomainName: 
-      - :string
-      - :required
-      AttributeName: 
-      - :list: 
+---
+:operations:
+- :name: BatchDeleteAttributes
+  :method: :batch_delete_attributes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    Item:
+    - :list:
+      - :structure:
+          ItemName:
+          - :string
+          - :required
+          - :rename: Name
+          Attribute:
+          - :list:
+            - :structure:
+                Name:
+                - :string
+                - :required
+                Value:
+                - :string
+                - :required
+          - :rename: Attributes
+    - :required
+    - :rename: Items
+  :outputs:
+    :children:
+      BatchDeleteAttributesResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: BatchPutAttributes
+  :method: :batch_put_attributes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    Item:
+    - :list:
+      - :structure:
+          ItemName:
+          - :string
+          - :required
+          - :rename: Name
+          Attribute:
+          - :list:
+            - :structure:
+                Name:
+                - :string
+                - :required
+                Value:
+                - :string
+                - :required
+                Replace:
+                - :boolean
+          - :required
+          - :rename: Attributes
+    - :required
+    - :rename: Items
+  :outputs:
+    :children:
+      BatchPutAttributesResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: CreateDomain
+  :method: :create_domain
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateDomainResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: DeleteAttributes
+  :method: :delete_attributes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    ItemName:
+    - :string
+    - :required
+    Attribute:
+    - :list:
+      - :structure:
+          Name:
+          - :string
+          - :required
+          Value:
+          - :string
+    - :rename: Attributes
+    Expected:
+    - :structure:
+        Name:
         - :string
-      - :rename: AttributeNames
-      ConsistentRead: 
-      - :boolean
-      ItemName: 
+        Value:
+        - :string
+        Exists:
+        - :boolean
+  :outputs:
+    :children:
+      DeleteAttributesResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: DeleteDomain
+  :method: :delete_domain
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteDomainResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: DomainMetadata
+  :method: :domain_metadata
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DomainMetadataResult:
+        :ignore: true
+        :children:
+          ItemCount:
+            :type: :integer
+          ItemNamesSizeBytes:
+            :type: :integer
+          AttributeNameCount:
+            :type: :integer
+          AttributeNamesSizeBytes:
+            :type: :integer
+          AttributeValueCount:
+            :type: :integer
+          AttributeValuesSizeBytes:
+            :type: :integer
+          Timestamp:
+            :type: :integer
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: GetAttributes
+  :method: :get_attributes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    ItemName:
+    - :string
+    - :required
+    AttributeName:
+    - :list:
       - :string
-      - :required
-  BatchPutAttributes: 
-    :output: []
-
-    :input: 
-      Item: 
-      - :list: 
-        - :structure: 
-            Attribute: 
-            - :list: 
-              - :structure: 
-                  Replace: 
-                  - :boolean
-                  Name: 
-                  - :string
-                  - :required
-                  Value: 
-                  - :string
-                  - :required
-            - :required
-            - :rename: Attributes
-            ItemName: 
-            - :string
-            - :required
-            - :rename: Name
-      - :required
-      - :rename: Items
-      DomainName: 
-      - :string
-      - :required
-  DeleteDomain: 
-    :output: []
-
-    :input: 
-      DomainName: 
-      - :string
-      - :required
-  Select: 
-    :output: 
-    - Item: 
-      - :list
-      - :rename: Items
-      - Attribute: 
-        - :list
-        - :rename: Attributes
-    :input: 
-      SelectExpression: 
-      - :string
-      - :required
-      ConsistentRead: 
-      - :boolean
-      NextToken: 
-      - :string
-  PutAttributes: 
-    :output: []
-
-    :input: 
-      Expected: 
-      - :list:
-        - :structure: 
-            Name: 
-            - :string
-            Exists: 
-            - :boolean
-            Value: 
-            - :string
-      Attribute: 
-      - :list: 
-        - :structure: 
-            Replace: 
-            - :boolean
-            Name: 
-            - :string
-            - :required
-            Value: 
-            - :string
-            - :required
-      - :required
-      - :rename: Attributes
-      DomainName: 
-      - :string
-      - :required
-      ItemName: 
-      - :string
-      - :required
-  DomainMetadata: 
-    :output: 
-    - ItemCount: 
-      - :integer
-    - ItemNamesSizeBytes: 
-      - :long
-    - AttributeNameCount: 
-      - :integer
-    - AttributeNamesSizeBytes: 
-      - :long
-    - AttributeValueCount: 
-      - :integer
-    - AttributeValuesSizeBytes: 
-      - :long
-    - Timestamp: 
-      - :integer
-    :input: 
-      DomainName: 
-      - :string
-      - :required
-  BatchDeleteAttributes: 
-    :output: []
-
-    :input: 
-      Item: 
-      - :list: 
-        - :structure: 
-            Attribute: 
-            - :list: 
-              - :structure: 
-                  AlternateNameEncoding: 
-                  - :string
-                  Name: 
-                  - :string
-                  - :required
-                  AlternateValueEncoding: 
-                  - :string
-                  Value: 
-                  - :string
-                  - :required
-            - :rename: Attributes
-            ItemName: 
-            - :string
-            - :required
-            - :rename: Name
-      - :required
-      - :rename: Items
-      DomainName: 
-      - :string
-      - :required
-:client_errors: 
-  TooManyRequestedAttributes: 
-  - BoxUsage: 
-    - :float
-  ConditionalCheckFailed: 
-  - BoxUsage: 
-    - :float
-  InvalidQueryExpression: 
-  - BoxUsage: 
-    - :float
-  InvalidParameterValue: 
-  - BoxUsage: 
-    - :float
-  DuplicateItemName: 
-  - BoxUsage: 
-    - :float
-  NumberDomainAttributesExceeded: 
-  - BoxUsage: 
-    - :float
-  InvalidNextToken: 
-  - BoxUsage: 
-    - :float
-  NumberSubmittedItemsExceeded: 
-  - BoxUsage: 
-    - :float
-  NoSuchDomain: 
-  - BoxUsage: 
-    - :float
-  AttributeDoesNotExist: 
-  - BoxUsage: 
-    - :float
-  NumberDomainsExceeded: 
-  - BoxUsage: 
-    - :float
-  MissingParameter: 
-  - BoxUsage: 
-    - :float
-  InvalidNumberValueTests: 
-  - BoxUsage: 
-    - :float
-  UnsupportedNextToken: 
-  - BoxUsage: 
-    - :float
-  NumberSubmittedAttributesExceeded: 
-  - BoxUsage: 
-    - :float
-  NumberItemAttributesExceeded: 
-  - BoxUsage: 
-    - :float
-  NumberDomainBytesExceeded: 
-  - BoxUsage: 
-    - :float
-  InvalidNumberPredicates: 
-  - BoxUsage: 
-    - :float
-  RequestTimeout: 
-  - BoxUsage: 
-    - :float
-  InvalidParameterCombination: 
-  - BoxUsage: 
-    - :float
-:server_errors: {}
+    - :rename: AttributeNames
+    ConsistentRead:
+    - :boolean
+  :outputs:
+    :children:
+      GetAttributesResult:
+        :ignore: true
+        :children:
+          Attribute:
+            :list: true
+            :rename: :attributes
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: ListDomains
+  :method: :list_domains
+  :inputs:
+    MaxNumberOfDomains:
+    - :integer
+    NextToken:
+    - :string
+  :outputs:
+    :children:
+      ListDomainsResult:
+        :ignore: true
+        :children:
+          DomainName:
+            :list: true
+            :rename: :domain_names
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: PutAttributes
+  :method: :put_attributes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    ItemName:
+    - :string
+    - :required
+    Attribute:
+    - :list:
+      - :structure:
+          Name:
+          - :string
+          - :required
+          Value:
+          - :string
+          - :required
+          Replace:
+          - :boolean
+    - :required
+    - :rename: Attributes
+    Expected:
+    - :structure:
+        Name:
+        - :string
+        Value:
+        - :string
+        Exists:
+        - :boolean
+  :outputs:
+    :children:
+      PutAttributesResult:
+        :ignore: true
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string
+- :name: Select
+  :method: :select
+  :inputs:
+    SelectExpression:
+    - :string
+    - :required
+    NextToken:
+    - :string
+    ConsistentRead:
+    - :boolean
+  :outputs:
+    :children:
+      SelectResult:
+        :ignore: true
+        :children:
+          Item:
+            :list: true
+            :rename: :items
+            :children:
+              Attribute:
+                :list: true
+                :rename: :attributes
+      ResponseMetadata:
+        :children:
+          BoxUsage:
+            :type: :float
+          ResponseId:
+            :type: :string

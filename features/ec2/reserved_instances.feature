@@ -45,10 +45,14 @@ Feature: EC2 Reserved Instances
     | param | Filter.1.Value.1 | m1.small                     |
     | param | Filter.1.Name    | instance-type                |
 
+  # not functional as we don't have a reseved intstance offering
+  @wip
   Scenario: Purchasing a reserved instances offering
     When I purchase a reserved instances offering
     Then reserved instances should contain the returned reservation
 
+  # not functional as we don't have a reseved intstance offering
+  @wip
   Scenario: Getting details about a reservation
     Given I purchase a reserved instances offering
     When I get the fixed price for the reservation
@@ -57,7 +61,8 @@ Feature: EC2 Reserved Instances
     | param       | Action                | DescribeReservedInstances |
     | param_match | ReservedInstancesId.1 | .*                        |
 
-  @memoized
+  # not functional as we don't have a reseved intstance offering
+  @memoized @wip
   Scenario: Describing reserved instances with memoization
     Given I purchase a reserved instances offering
     And I start a memoization block

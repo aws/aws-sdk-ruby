@@ -35,7 +35,7 @@ module AWS
       let(:instance) { region }
 
       def stub_member(resp, member)
-        resp.stub(:region_info).and_return([member])
+        resp.data[:region_info] = [member]
       end
 
       it_should_behave_like "an ec2 resource object"
@@ -109,10 +109,12 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_regions) }
 
         before(:each) do
-          resp.stub(:region_info).
-            and_return([double("region",
-                               :region_name => "region",
-                               :region_endpoint => "foo.amazonaws.com")])
+          resp.data[:region_info] = [
+            {
+               :region_name => "region",
+               :region_endpoint => "foo.amazonaws.com",
+            }
+          ]
           client.stub(:describe_regions).and_return(resp)
         end
 

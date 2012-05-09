@@ -29,7 +29,7 @@ module AWS
         let(:resp) { client.stub_for(:create_stack) }
 
         before(:each) do
-          resp.stub(:stack_id).and_return('stack-id')
+          resp.data[:stack_id] = 'stack-id'
           client.stub(:create_stack).and_return(resp)
         end
 
@@ -298,9 +298,9 @@ module AWS
         let(:request_options) {{}}
 
         def stub_n_members response, n
-          response.stub(:stacks).and_return((1..n).map{|i|
-            double('stack', :stack_name => "stack-#{i}")
-          })
+          response.data[:stacks] = (1..n).map{|i|
+            { :stack_name => "stack-#{i}" }
+          }
         end
 
       end

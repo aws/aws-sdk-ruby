@@ -66,9 +66,7 @@ module AWS
 
       attribute :snapshot_id, :static => true
 
-      attribute :size, :static => true do
-        translates_output {|value| value.to_i if value }
-      end
+      attribute :size, :static => true
 
       attribute :availability_zone_name, :as => :availability_zone,
         :static => true

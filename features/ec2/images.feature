@@ -42,29 +42,29 @@ Feature: Basic Image Operations
 
   Scenario: Register S3-backed image
     When I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | description    | the s3-backed one I just made              |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
-    | architecture   | i386                                       |
-    | kernel_id      | aki-12f0127b                               |
-    | ramdisk_id     | ari-0ccd3965                               |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | description    | the s3-backed one I just made    |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
+    | architecture   | i386                             |
+    | kernel_id      | aki-12f0127b                     |
+    | ramdisk_id     | ari-0ccd3965                     |
     Then the result should be an image
     And a request should have been made like:
-    | TYPE  | NAME          | VALUE                                      |
-    | param | Action        | RegisterImage                              |
-    | param | ImageLocation | aws-sdk-amis/quickstart/image.manifest.xml |
-    | param | Name          | my-image                                   |
-    | param | Description   | the s3-backed one I just made              |
-    | param | Architecture  | i386                                       |
-    | param | KernelId      | aki-12f0127b                               |
-    | param | RamdiskId     | ari-0ccd3965                               |
+    | TYPE  | NAME          | VALUE                            |
+    | param | Action        | RegisterImage                    |
+    | param | ImageLocation | ruby-sdk-amis/image.manifest.xml |
+    | param | Name          | my-image                         |
+    | param | Description   | the s3-backed one I just made    |
+    | param | Architecture  | i386                             |
+    | param | KernelId      | aki-12f0127b                     |
+    | param | RamdiskId     | ari-0ccd3965                     |
 
   Scenario: List images
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     When I ask for the list of images owned by me
     Then the image I created should be in the list
     And a request should have been made like:
@@ -119,9 +119,9 @@ Feature: Basic Image Operations
 
   Scenario: Deregister image
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     When I deregister the image
     Then the image should eventually not exist
     And a request should have been made like:
@@ -140,8 +140,8 @@ Feature: Basic Image Operations
 
   Scenario: Check that an image exists (exists)
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     When I ask if the image exists
     Then the result should eventually be true

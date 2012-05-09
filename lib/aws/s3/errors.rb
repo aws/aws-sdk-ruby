@@ -31,6 +31,11 @@ module AWS
     # @private
     module Errors
 
+      # @private
+      GRAMMAR = Core::XML::Grammar.customize
+
+      extend Core::LazyErrorClasses
+
       class BatchDeleteError < StandardError
 
         def initialize error_counts
@@ -52,10 +57,8 @@ module AWS
 
         include AWS::Errors::ClientError
 
-        def code; "NotModified"; end
-
         def initialize(req, resp)
-          super(req, resp, "Not Modified")
+          super(req, resp, "NotModified", "Not Modified")
         end
 
       end
@@ -67,17 +70,11 @@ module AWS
 
         include AWS::Errors::ClientError
 
-        def code; "NoSuchKey"; end
-
-        def initialize(req, resp)
-          super(req, resp, "No Such Key")
+        def initialize(req, resp, code = nil, message = nil)
+          super(req, resp, "NoSuchKey", "No Such Key")
         end
 
       end
-
-      BASE_ERROR_GRAMMAR = Client::XML::Error
-
-      include Core::LazyErrorClasses
 
     end
   end

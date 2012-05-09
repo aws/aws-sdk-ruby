@@ -93,7 +93,7 @@ module AWS
         #    # ...
         #  end
         #
-        # @param [String] domain
+        # @param [String] shard_name
         # @return [Scope] Returns a scope for restricting the domain of subsequent
         def shard shard_name
           new_scope.shard(shard_name)
@@ -186,11 +186,12 @@ module AWS
         #   Car.where(:color => 'red').order(:price, :desc).limit(10)
         #   
         # @overload where(conditions_hash)
+        #   @param [Hash] conditions_hash A hash of attributes to values.  Each 
+        #     key/value pair from the hash becomes a find condition.  All
+        #     conditions are joined by AND.
+        #
         # @overload where(sql_fragment[, quote_params, ...])
         #
-        # @param [Hash] conditions_hash A hash of attributes to values.  Each 
-        #   key/value pair from the hash becomes a find condition.  All conditions
-        #   are joined by AND.
         def where *args
           new_scope.where(*args)
         end
@@ -206,9 +207,8 @@ module AWS
         #   Pepole.order(:age, :desc).limit(10).each {|person| ... }
         #
         # @overload order(attribute, direction = :asc)
-        # @param [String,Symbol] attribute The attribute in SimpleDB to sort by.
-        # @param [:asc,:desc] direction (:asc) The direction to sort, ascending
-        #   or descending order.
+        #   @param [String,Symbol] attribute The attribute to sort by.
+        #   @param [:asc,:desc] direction (:asc) The direction to sort.
         def order *args
           new_scope.order(*args)
         end

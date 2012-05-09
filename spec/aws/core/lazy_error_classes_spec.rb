@@ -17,7 +17,7 @@ module AWS
 
   module FooService
     module Errors
-      include Core::LazyErrorClasses
+      extend Core::LazyErrorClasses
     end
   end
 

@@ -28,20 +28,20 @@ module AWS
       let(:response) { client.stub_for(:describe_policies) }
 
       before(:each) do
-        response.stub(:scaling_policies).and_return([
-          double('policy', {
+        response.data[:scaling_policies] = [
+          {
             :auto_scaling_group_name => group.name,
             :policy_name => policy.name,
             :policy_arn => 'arn',
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
             :alarms => [
-              double('alarm', :alarm_name => 'name1', :alarm_arn => 'arn1'),
-              double('alarm', :alarm_name => 'name2', :alarm_arn => 'arn2'),
+              { :alarm_name => 'name1', :alarm_arn => 'arn1' },
+              { :alarm_name => 'name2', :alarm_arn => 'arn2' },
             ],
             :cooldown => 10,
-          })
-        ])
+          }
+        ]
         client.stub(:describe_policies).and_return(response)
       end
 
@@ -100,7 +100,7 @@ module AWS
         
         it 'calls #put_scaling_policy on the client' do
           resp = client.stub_for(:put_scaling_policy)
-          resp.stub(:policy_arn).and_return('arn')
+          resp.data[:policy_arn] = 'arn'
           client.should_receive(:put_scaling_policy).with({
             :auto_scaling_group_name => group.name,
             :policy_name => policy.name,
@@ -159,17 +159,17 @@ module AWS
         end
 
         it 'returns true if it can be described' do
-          response.stub(:scaling_policies).and_return([
-            double('policy', {
+          response.data[:scaling_policies] = [
+            {
               :auto_scaling_policy_name => group.name,
               :policy_name => policy.name,
-            })
-          ])
+            }
+          ]
           policy.exists?.should == true
         end
 
         it 'returns false if the describe call returns no results' do
-          response.stub(:scaling_policies).and_return([])
+          response.data[:scaling_policies] = []
           policy.exists?.should == false
         end
       end

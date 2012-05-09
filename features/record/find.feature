@@ -86,11 +86,11 @@ Feature: Scoped Finds
       find(:all, :where => { :name => 'Patt' }, :order => [:name, :desc], :limit => 10)
     """
     Then a select should have been performed like:
-    | PART              | VALUE           |
-    | output_list       | *               |
-    | condition         | `name` = 'Patt' |
-    | sort_instructions | `name` DESC     |
-    | limit             | 10              |
+    | PART              | VALUE                                  |
+    | output_list       | *                                      |
+    | condition         | `name` = 'Patt' AND `name` IS NOT NULL |
+    | sort_instructions | `name` DESC                            |
+    | limit             | 10                                     |
 
   Scenario: Adding a record and then finding it
     Given I configure the example class with:

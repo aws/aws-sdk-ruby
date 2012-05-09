@@ -261,8 +261,8 @@ module AWS
       # @yield [Instance] Yields each instance in the collection.
       def each(&block)
         response = filtered_request(:describe_instances)
-        response.reservation_set.each do |r|
-          r.instances_set.each do |i|
+        response.reservation_set.each do |reservation|
+          reservation.instances_set.each do |i|
             yield(Instance.new(i.instance_id, :config => config))
           end
         end

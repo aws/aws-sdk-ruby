@@ -26,22 +26,23 @@ module AWS
         let(:client_method) { :describe_subnets }
 
         def stub_two_members(resp)
-          resp.stub(:subnet_set).and_return([
-            double('subnet-1', 
+          resp.data[:subnet_set] = [
+            {
               :subnet_id => 'subnet-1',
               :vpc_id => 'vpc-1',
               :state => 'available',
               :cidr_block => '192.0.0.0/16',
               :available_ip_address_count => 256,
-              :availability_zone => 'us-east-1a'),
-            double('subnet-2', 
+              :availability_zone => 'us-east-1a',
+            },{
               :subnet_id => 'subnet-2',
               :vpc_id => 'vpc-2',
               :state => 'available',
               :cidr_block => '192.0.0.0/20',
               :available_ip_address_count => 50,
-              :availability_zone => 'us-east-1b'),
-          ])
+              :availability_zone => 'us-east-1b',
+            },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -86,20 +87,19 @@ module AWS
 
         context '#create' do
 
-          let(:subnet_details) {
-            double('vpc-details', 
-              :subnet_id => 'subnet-12345',
-              :vpc_id => 'vpc-12345',
-              :state => 'pending',
-              :cidr_block => '192.0.0.0/16',
-              :available_ip_address_count => 50,
-              :availability_zone => 'us-east-1c')
-          }
+          let(:subnet_details) {{
+            :subnet_id => 'subnet-12345',
+            :vpc_id => 'vpc-12345',
+            :state => 'pending',
+            :cidr_block => '192.0.0.0/16',
+            :available_ip_address_count => 50,
+            :availability_zone => 'us-east-1c',
+          }}
 
           let(:response) { client.stub_for(:create_subnet) }
 
           before(:each) do
-            response.stub(:subnet).and_return(subnet_details)
+            response.data[:subnet] = subnet_details
             client.stub(:create_subnet).and_return(response)
           end
 

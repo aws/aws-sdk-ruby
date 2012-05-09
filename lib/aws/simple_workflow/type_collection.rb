@@ -21,7 +21,8 @@ module AWS
       include OptionFormatters
       include Core::Collection::Limitable 
 
-      # @param [Domain] The domain the (workflow or activity types belong to.
+      # @param [Domain] domain The domain the (workflow or activity types 
+      #   belong to.
       def initialize domain, options = {}
 
         @domain = domain
@@ -51,9 +52,9 @@ module AWS
       #   domain.activity_types['name','version']
       #   domain.activity_types.at('name','version')
       #
-      # @param [String] Name of the type.
+      # @param [String] name Name of the type.
       #
-      # @param [String] Version of the type.
+      # @param [String] version Version of the type.
       #
       # @return [ActivityType,WorkflowType]
       #

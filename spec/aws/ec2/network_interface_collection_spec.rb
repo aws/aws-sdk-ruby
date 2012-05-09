@@ -26,16 +26,17 @@ module AWS
         let(:client_method) { :describe_network_interfaces }
 
         def stub_two_members(resp)
-          resp.stub(:network_interface_set).and_return([
-            double('network-interface-1',
+          resp.data[:network_interface_set] = [
+            {
               :network_interface_id => 'ni-123',
               :vpc_id => 'vpc-id',
-              :subnet_id => 'subnet-id'),
-            double('network-interface-2',
+              :subnet_id => 'subnet-id',
+            }, {
               :network_interface_id => 'ni-321',
               :vpc_id => 'vpc-id',
-              :subnet_id => 'subnet-id')
-          ])
+              :subnet_id => 'subnet-id',
+            },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -73,25 +74,23 @@ module AWS
 
         context '#create' do
 
-          let(:details) {
-            double('network-interface',
-              :network_interface_id => 'ni-id',
-              :vpc_id => 'vpc-12345',
-              :subnet_id => 'subnet-12345',
-              :description => 'desc',
-              :owner_id => 'owner-id',
-              :status => 'pending',
-              :private_ip_address => '1.2.3.4',
-              :private_dns_name => 'private-dns-name',
-              :source_dest_check => true,
-              :group_set => []
-            )
-          }
+          let(:details) {{
+            :network_interface_id => 'ni-id',
+            :vpc_id => 'vpc-12345',
+            :subnet_id => 'subnet-12345',
+            :description => 'desc',
+            :owner_id => 'owner-id',
+            :status => 'pending',
+            :private_ip_address => '1.2.3.4',
+            :private_dns_name => 'private-dns-name',
+            :source_dest_check => true,
+            :group_set => [],
+          }}
 
           let(:response) { client.stub_for(:create_network_interface) }
 
           before(:each) do
-            response.stub(:network_interface).and_return(details)
+            response.data[:network_interface] = details
             client.stub(:create_network_interface).and_return(response)
           end
 

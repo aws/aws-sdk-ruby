@@ -203,7 +203,7 @@ module AWS
       # to validate that all of the values in a set are true, then use
       # {#validates_inclusion_of}.
       #
-      # @note Most validators default :allow_nil to false, this one defaults to true
+      # @note Most validators default :allow_nil to false, this one defualts to true
       # @note This validator should not be used with multi-valued attributes
       #
       # @overload validates_acceptance_of(*attributes, options = {}, &block)
@@ -213,7 +213,7 @@ module AWS
       #
       #       validates_acceptance_of :agree, :accept => 'yes'
       #
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "must be accepted".
       #   @option options [Boolean] :allow_nil (true) Skip validation if the
       #     attribute value is +nil+.
@@ -270,7 +270,7 @@ module AWS
       # @overload validates_confirmation_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "doesn't match confirmation".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
@@ -435,7 +435,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [required, Enumerable] :in An enumerable object to
       #     ensure the value is not in.
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
@@ -484,7 +484,7 @@ module AWS
       #   @option options [Regexp] :without If the value matches the given 
       #     regex, an error will be added.
       #     must match, or an error is added.
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
@@ -521,7 +521,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [required, Enumerable] :in An enumerable object to
       #     check for the value in.
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "is not included in the list".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
@@ -632,7 +632,7 @@ module AWS
       #     an even integer.  This forces the +:only_integer+ to +true+.
       #   @option options [Numeric] :odd If true, the value may only be
       #     an odd integer.  This forces the +:only_integer+ to +true+.
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "is not a number".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
@@ -663,7 +663,7 @@ module AWS
       # @overload validates_presence_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
-      #   @option options [String] :message A custom error message.  The default
+      #   @option options [String] :message A custom error message.  The defualt
       #     +:message+ is "may not be blank".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:

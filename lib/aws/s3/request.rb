@@ -22,12 +22,13 @@ module AWS
 
       include Core::UriEscape
 
-      # @param [bucket] S3 bucket name
+      # @return [bucket] S3 bucket name
       attr_accessor :bucket
 
-      # @param [String] S3 object key
+      # @return [String] S3 object key
       attr_accessor :key
 
+      # @private
       attr_accessor :body_stream
 
       def metadata= metadata
@@ -67,7 +68,7 @@ module AWS
         url_encoded_params
       end
 
-      # @param [String, IO] The http request body.  This can be a string or
+      # @param [String, IO] body The http request body.  This can be a string or
       #   any object that responds to #read and #eof? (like an IO object).
       def body= body
         @body_stream = StringIO.new(body)

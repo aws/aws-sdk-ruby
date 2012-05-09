@@ -12,33 +12,57 @@
 # language governing permissions and limitations under the License.
 
 module AWS
+
+  # = Errors
+  #
+  # There are two basic types of errors:
+  #
+  # * {ClientError}
+  # * {ServerError}
+  #
+  # == Client Errors
+  #
+  # Errors in the three and four hundreds are client errors ({ClientError}).
+  # A client error should not be resent without changes.  The body of the
+  # http response (the error #message) should give more information about
+  # the nature of the problem.
+  #
+  # == Server Errors
+  #
+  # A 500 level error typically indicates the service is having an issue.
+  #
+  # Requests that generate service errors are automatically retried with
+  # an exponential backoff.  If the service still fails to respond with 
+  # a 200 after 3 retries the error is raised.
+  #
   module Errors
 
-    # Base class for the two service error classes:
-    #
-    # * {ClientError}
-    # * {ServerError}
-    #
-    # When interacting with Amazon AWS services, you will sometimes 
-    # receive a non-200 level response.  These http responses are treated
-    # as errors.
-    # 
-    # == Client Errors
-    #
-    # Errors in the three and four hundreds are client errors ({ClientError}).
-    # A client error should not be resent without changes.  The body of the
-    # http response (the error #message) should give more information about
-    # the nature of the problem.
-    #
-    # == Server Errors
-    # 
-    # A 500 level error typically indicates the service is having an issue.
-    #
-    # Requests that generate service errors are automatically retried with
-    # an exponential backoff.  If the service still fails to respond with 
-    # a 200 after 3 retries the error is raised.
-    #
+    # Base class for all errors returned by the service.  
     class Base < StandardError
+
+      # @overload new(error_message)
+      #   @param [String] error_message The body of the error message
+      #
+      # @overload new(http_request, http_response, code = nil, message = nil)
+      #   @param [Http::Request] http_request
+      #   @param [Http::Response] http_response
+      #   @param [String] code (nil)
+      #   @param [String] message (nil)
+      #
+      def initialize req = nil, resp = nil, code = nil, message = nil
+        if req.is_a?(String) or req.nil?
+          super(req)
+        else
+          @http_request = req
+          @http_response = resp
+          @code = code
+          include_error_type
+          super(message || http_response.body)
+        end
+      end
+
+      # @return [String] The response code given by the service.
+      attr_reader :code
 
       # @return [Http::Request] The low level http request that caused the
       #   error to be raised.
@@ -48,15 +72,23 @@ module AWS
       #   that wrapped the service error.
       attr_reader :http_response
 
-      def initialize http_request = nil, http_response = nil, message = nil
-        message ||= http_response.body if http_response
-        @http_request = http_request
-        @http_response = http_response
-        super(message)
+      protected
+
+      # Extends the error object with {ServerError} or {ClientError}.
+      # This indicates if the request should be retried (server errors)
+      # or not (client errors).
+      def include_error_type
+        if http_response.status >= 500
+          extend ServerError
+        else
+          extend ClientError
+        end
       end
 
     end
 
+    # Provides the ability to instantiate instances of {ServerError} and
+    # {ClientError}.
     # @private
     module ExceptionMixinClassMethods
       def new(*args)
@@ -84,51 +116,6 @@ module AWS
     # failing, then the error is raised.
     module ServerError
       extend ExceptionMixinClassMethods
-    end
-
-    # @private
-    module ModeledError
-
-      # @return [String] The error message given by the AWS service.
-      attr_accessor :message
-
-      # @return [Integer] The HTTP status code returned by the AWS service.
-      attr_reader :code
-
-      def initialize(req = nil, resp = nil)
-        if req.kind_of?(String)
-          # makes it easier to test handling of modeled exceptions
-          super(nil, nil, req)
-          @message = req
-        elsif req and resp
-          parse_body(resp.body)
-          super(req, resp, self.message)
-          include_error_type
-        else
-          super()
-        end
-      end
-
-      def include_error_type
-        if http_response.status >= 500
-          extend ServerError
-        else
-          extend ClientError
-        end
-      end
-
-      def parse_body(body)
-        error_grammar.parse(body, :context => self)
-      end
-
-      def extract_message(body)
-        error_grammar.parse(body).message
-      end
-
-      def error_grammar
-        self.class::BASE_ERROR_GRAMMAR
-      end
-
     end
 
   end

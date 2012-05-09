@@ -20,15 +20,15 @@ module AWS
         
         def initialize network_interface, details
           @network_interface = network_interface
-          @attachment_id = details.attachment_id
-          @instance = Instance.new(details.instance_id, 
-            :owner_id => details.instance_owner_id,
+          @attachment_id = details[:attachment_id]
+          @instance = Instance.new(details[:instance_id],
+            :owner_id => details[:instance_owner_id],
             :config => network_interface.config)
-          @instance_owner_id = details.instance_owner_id
-          @device_index = details.device_index
-          @status = details.status.to_sym
-          @attach_time = details.attach_time
-          @delete_on_termination = details.delete_on_termination?
+          @instance_owner_id = details[:instance_owner_id]
+          @device_index = details[:device_index]
+          @status = details[:status].to_sym
+          @attach_time = details[:attach_time]
+          @delete_on_termination = details[:delete_on_termination]
         end
 
         # @return [String] Returns the attachment id.

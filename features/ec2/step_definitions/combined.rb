@@ -14,8 +14,7 @@
 require 'net/ssh'
 
 When /^I add SSH access from my current IP to the security group$/ do
-  url = 'https://console.aws.amazon.com/checkip'
-  @my_ip = HTTParty.get(url).body.split(/"/)[1]
+  @my_ip = `dig +short myip.opendns.com @resolver1.opendns.com`.strip
   @security_group.authorize_ingress(:tcp, 22, "#{@my_ip}/0")
 end
 
@@ -32,11 +31,13 @@ When /^I should be able to ssh to the elastic ip as "([^\"]*)"$/ do |username|
 
   #sleep(60)
 
-  ssh = Net::SSH.start(@instance.ip_address, username,
-                       :key_data => [@key_pair.private_key],
-                       :paranoid => false)
-  files = ssh.exec!("ls -la")
-  ssh.close
+  eventually do
+    ssh = Net::SSH.start(@instance.ip_address, username,
+                         :key_data => [@key_pair.private_key],
+                         :paranoid => false)
+    files = ssh.exec!("ls -la")
+    ssh.close
+  end
   #puts files
 
 end

@@ -117,7 +117,7 @@ module AWS
             yield(summary.to_hash)
           end
 
-          next_token = resp.next_token if resp.respond_to?(:next_token)
+          next_token = resp.data[:next_token]
 
         end while next_token
       end

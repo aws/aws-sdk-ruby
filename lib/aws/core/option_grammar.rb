@@ -477,6 +477,7 @@ module AWS
           descriptors.each do |desc|
             if desc.kind_of?(Hash)
               (name, arg) = desc.to_a.first
+              next if name == :documentation
             else
               name = desc
               arg = nil

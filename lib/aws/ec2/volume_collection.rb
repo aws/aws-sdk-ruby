@@ -74,7 +74,9 @@ module AWS
       #   The Availability Zone in which to create the new volume.
       #   To get a list of the availability zones you can use, see
       #   {EC2#availability_zones}.
+      #
       # @return [Volume]
+      #
       def create options = {}
         if snapshot = options.delete(:snapshot)
           options[:snapshot_id] = snapshot.id

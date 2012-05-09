@@ -44,9 +44,6 @@ module AWS
 
         # Constructs a new record.
         #
-        # @param [Hash] attributes A set of attribute values to seed this record
-        #   with.  The attributes are bulk assigned.
-        #
         # @param [Hash] attributes Attributes that should be bulk assigned
         #   to this record.  You can also specify the shard (i.e. domain 
         #   or table) this record should persist to via +:shard+).

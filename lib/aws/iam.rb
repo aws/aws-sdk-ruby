@@ -334,9 +334,8 @@ module AWS
     #
     # @return [Hash]
     def account_summary
-      client.get_account_summary.summary_map.inject({}) do |h, (k,v)|
-        h[Core::Inflection.ruby_name(k).to_sym] = v
-        h
+      client.get_account_summary.data[:summary_map].inject({}) do |h,(k,v)|
+        h.merge(Core::Inflection.ruby_name(k).to_sym => v)
       end
     end
 

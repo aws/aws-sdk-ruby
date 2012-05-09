@@ -29,7 +29,7 @@ module AWS
         let(:response) { client.stub_for(:create_load_balancer) }
 
         before(:each) do
-          response.stub(:dns_name).and_return('lb-dns-name')
+          response.data[:dns_name] = 'lb-dns-name'
           client.stub(:create_load_balancer).and_return(response)
         end
 
@@ -114,11 +114,9 @@ module AWS
 
         def stub_n_members response, n
           balancers = (1..n).collect do |i|
-            double("balancer-#{i}", {
-              :load_balancer_name => "name-#{i}",
-            })
+            { :load_balancer_name => "name-#{i}" }
           end
-          response.stub(:load_balancer_descriptions).and_return(balancers)
+          response.data[:load_balancer_descriptions] = balancers
         end
 
       end
