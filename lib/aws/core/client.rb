@@ -14,6 +14,7 @@
 require 'set'
 require 'aws/core/client/query_xml'
 require 'aws/core/client/query_json'
+require 'json'
 
 module AWS
   module Core
@@ -485,8 +486,10 @@ module AWS
       # configuration that drives the request and response DSLs.
       # @return [Hash]
       def self.api_config
-        path = "lib/aws/api_config/#{service_name}-#{self::API_VERSION}.yml"
-        YAML.load(File.read(path))
+        config_file = 
+          File.dirname(File.dirname(__FILE__)) + 
+          "/api_config/#{service_name}-#{self::API_VERSION}.yml"
+        YAML.load(File.read(config_file))
       end
 
       # @return [Array<Symbol>] Returns a list of service operations as

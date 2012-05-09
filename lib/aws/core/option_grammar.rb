@@ -13,6 +13,7 @@
 
 require 'base64'
 require 'bigdecimal'
+require 'json'
 
 module AWS
   module Core

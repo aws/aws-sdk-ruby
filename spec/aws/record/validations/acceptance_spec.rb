@@ -59,7 +59,7 @@ module AWS
 
           context ':allow_nil' do
 
-            it 'defualts to true' do
+            it 'defaults to true' do
               klass.validates_acceptance_of :confirmation
               obj = klass.new
               obj.confirmation.should == nil

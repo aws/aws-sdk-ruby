@@ -149,7 +149,7 @@ module AWS
       # You can also specify the string 'default' to use Amazon's
       # default dhcp options.
       #
-      #   vpc.dhcp_optinos = 'defualt'
+      #   vpc.dhcp_optinos = 'default'
       #
       # @param [DHCPOptions,String] dhcp_options A {DHCPOptions} object
       #   or a dhcp options id string.

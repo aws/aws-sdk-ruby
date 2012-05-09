@@ -166,7 +166,7 @@ module AWS
 
     end
 
-    # Configures AWS to log to the Rails defualt logger.
+    # Configures AWS to log to the Rails default logger.
     # @return [nil]
     def self.log_to_rails_logger
       AWS.config(:logger => rails_logger)

@@ -61,7 +61,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.5.0"
+  VERSION = "1.5.1"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -459,21 +459,6 @@ module AWS
         Thread.current[:aws_memoization][:response_cache] ||=
           Core::ResponseCache.new
       end
-    end
-
-    def add_service name, ruby_name, default_endpoint
-
-      create_block = lambda do |config| 
-        AWS.const_get(name)::Client.new(:config => config)
-      end
-
-      needs = [:signer, :http_handler, :"#{ruby_name}_endpoint"]
-
-      Core::Configuraiton.add_option :"#{ruby_name}_endpoint", default_endpoint
-
-      Core::Configuraiton.add_option_with_needs(
-        :"#{ruby_name}_client", needs, &create_block)
-
     end
 
     # Causes all requests to return empty responses without making any
