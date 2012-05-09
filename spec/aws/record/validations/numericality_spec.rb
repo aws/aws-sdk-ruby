@@ -630,7 +630,7 @@ module AWS
               obj.valid?.should == true
             end
 
-            it 'defualts to false' do
+            it 'defaults to false' do
               klass.send(:attr_accessor, :value)
               klass.validates_numericality_of :value
               obj.valid?.should == false
