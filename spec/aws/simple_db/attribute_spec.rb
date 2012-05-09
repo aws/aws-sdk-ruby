@@ -156,7 +156,7 @@ module AWS
         end
 
         it_should_behave_like "sdb expect conditions" do
-          def should_expect(*conditions)
+          def should_expect(conditions)
             client.should_receive(:put_attributes).
               with(hash_including(:domain_name => domain.name,
                                   :item_name => item.name,
@@ -214,7 +214,7 @@ module AWS
         end
 
         it_should_behave_like "sdb expect conditions" do
-          def should_expect(*conditions)
+          def should_expect(conditions)
             client.should_receive(:put_attributes).
               with(hash_including(:domain_name => domain.name,
                                   :item_name => item.name,
@@ -247,7 +247,7 @@ module AWS
           end
 
           it_should_behave_like "sdb expect conditions" do
-            def should_expect(*conditions)
+            def should_expect(conditions)
             client.should_receive(:delete_attributes).
               with(:domain_name => domain.name,
                    :item_name => item.name,
@@ -286,7 +286,7 @@ module AWS
           end
 
           it_should_behave_like "sdb expect conditions" do
-            def should_expect(*conditions)
+            def should_expect(conditions)
               client.should_receive(:delete_attributes).
                 with(:domain_name => domain.name,
                      :item_name => item.name,

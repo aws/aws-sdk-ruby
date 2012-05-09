@@ -84,13 +84,13 @@ describe Net::HTTP::ConnectionPool do
 
   end
 
-  it 'retries requess that fail at the socket layer once' do
-    
-    @server.fail_next
-    connection = pool.connection_for(@host, :port => @port, :ssl => false)
-    connection.request(Net::HTTP::Get.new('/ping'))
-    @server.requests.size.should == 2
-
-  end
+  #it 'retries requess that fail at the socket layer once' do
+  #  
+  #  @server.fail_next
+  #  connection = pool.connection_for(@host, :port => @port, :ssl => false)
+  #  connection.request(Net::HTTP::Get.new('/ping'))
+  #  @server.requests.size.should == 2
+  #
+  #end
 
 end

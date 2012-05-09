@@ -31,11 +31,11 @@ module AWS
       let(:groups) { [] }
 
       let(:details) {
-        double('launch-config-details',
+        {
           :launch_configuration_name => launch_config.name,
           :created_time => now,
           :image_id => 'img-12345678',
-          :instance_monitoring => double('state', :enabled? => false),
+          :instance_monitoring => { :enabled => false },
           :instance_type => 'instance-type',
           :kernel_id => 'kernel-id',
           :key_name => 'key-name',
@@ -43,14 +43,15 @@ module AWS
           :ramdisk_id => 'ramdisk-id',
           :user_data => Base64.encode64('user-data'),
           :block_device_mappings => [
-            double('mapping', :to_hash => { :mapping => 1 }),
-            double('mapping', :to_hash => { :mapping => 2 }),
+            { :mapping => 1 },
+            { :mapping => 2 },
           ],
-          :security_groups => groups)
+          :security_groups => groups,
+        }
       }
 
       before(:each) do
-        response.stub(:launch_configurations).and_return([details])
+        response.data[:launch_configurations] = [details]
         client.stub(:describe_launch_configurations).and_return(response)
       end
 
@@ -99,10 +100,10 @@ module AWS
           ec2_client = config.ec2_client
 
           resp = ec2_client.stub_for(:describe_security_groups)
-          resp.stub(:security_group_info).and_return([
-            double('sg1', :group_id => 'sg-12345678'),
-            double('sg1', :group_id => 'sg-22345678'),
-          ])
+          resp.data[:security_group_info] = [
+            { :group_id => 'sg-12345678' },
+            { :group_id => 'sg-22345678' },
+          ]
 
           ec2_client.should_receive(:describe_security_groups).
             with(:filters => [{ :name => 'group-name', :values => %w(sg1 sg2)}]).
@@ -143,14 +144,14 @@ module AWS
       context '#exists?' do
         
         it 'describes launch configurations with a name filter' do
-          response.stub(:launch_configurations).and_return([
-            double('config', :launch_configuration_name => 'name'),
-          ])
+          response.data[:launch_configurations] = [
+            { :launch_configuration_name => 'name' },
+          ]
           launch_config.exists?.should == true
         end
 
         it 'returns false when the domain can not be described' do
-          response.stub(:launch_configurations).and_return([])
+          response.data[:launch_configurations] = []
           launch_config.exists?.should == false
         end
 

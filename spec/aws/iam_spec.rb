@@ -103,7 +103,7 @@ module AWS
 
       it 'returns the first account alias' do
         resp = client.stub_for(:list_account_aliases)
-        resp.stub(:account_aliases).and_return(['foo'])
+        resp.data[:account_aliases] = ['foo']
         client.should_receive(:list_account_aliases).and_return(resp)
         iam.account_alias.should == 'foo'
       end
@@ -158,9 +158,9 @@ module AWS
       end
 
       it 'returns a hash with symbol-ized keys' do
-        client.stub(:get_account_summary).
-          and_return(double("account summary",
-                            :summary_map => { "FooBar" => "baz" }))
+        resp = client.stub_for(:get_account_summary)
+        resp.data[:summary_map] = { 'FooBar' => 'baz' }
+        client.stub(:get_account_summary).and_return(resp)
         iam.account_summary.should == {
           :foo_bar => "baz"
         }

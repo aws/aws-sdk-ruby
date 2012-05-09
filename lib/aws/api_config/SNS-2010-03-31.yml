@@ -11,170 +11,238 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
---- 
-:operations: 
-  CreateTopic: 
-    :input: 
-      Name: 
+---
+:operations:
+- :name: AddPermission
+  :method: :add_permission
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    Label:
+    - :string
+    - :required
+    AWSAccountId:
+    - :membered_list:
       - :string
-      - :required
-    :output:
-    - TopicArn: []
-  GetTopicAttributes:
-    :input:
-      TopicArn:
+    - :required
+    ActionName:
+    - :membered_list:
       - :string
-      - :required
-    :output:
-    - Attributes:
-      - :map:
-        - entry
-        - key
-        - value
-  SetTopicAttributes:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      AttributeName:
-      - :string
-      - :required
-      AttributeValue:
-      - :string
-      - :required
-    :output: []
-  DeleteTopic:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-    :output: []
-  AddPermission:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      Label:
-      - :string
-      - :required
-      AWSAccountId:
-      - :membered_list:
-        - :string
-      - :required
-      ActionName:
-      - :membered_list:
-        - :string
-      - :required
-    :output: []
-  RemovePermission:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      Label:
-      - :string
-      - :required
-    :output: []
-  Subscribe:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      Protocol:
-      - :string
-      - :required
-      Endpoint:
-      - :string
-      - :required
-    :output: []
-  Unsubscribe:
-    :input:
-      SubscriptionArn:
-      - :string
-      - :required
-    :output: []
-  ConfirmSubscription:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      Token:
-      - :string
-      - :required
-      AuthenticateOnUnsubscribe:
-      - :boolean
-    :output: []
-  SetSubscriptionAttributes:
-    :input:
-      SubscriptionArn:
-      - :string
-      - :required
-      AttributeName:
-      - :string
-      - :required
-      AttributeValue:
-      - :string
-      - :required
-    :output: []
-  GetSubscriptionAttributes:
-    :input:
-      SubscriptionArn:
-      - :string
-      - :required
-    :output:
-    - Attributes:
-      - :map:
-        - entry
-        - key
-        - value
-  ListTopics:
-    :input:
-      NextToken:
-      - :string
-    :output:
-    - Topics:
-      - :list: member
-    - NextToken:
-      - :force
-  ListSubscriptions:
-    :input:
-      NextToken:
-      - :string
-    :output:
-    - Subscriptions:
-      - :list: member
-    - NextToken:
-      - :force
-  ListSubscriptionsByTopic:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      NextToken:
-      - :string
-    :output:
-    - Subscriptions:
-      - :list: member
-    - NextToken:
-      - :force
-  Publish:
-    :input:
-      TopicArn:
-      - :string
-      - :required
-      Message:
-      - :string
-      - :required
-      Subject:
-      - :string
-      MessageStructure:
-      - :string
-    :output: []
-:client_errors:
-  InvalidParameter: []
-  AuthorizationError: []
-  TopicLimitExceeded: []
-  SubscriptionLimitExceeded: []
-  NotFound: []
-:server_errors:
-  InternalError: []
+    - :required
+  :outputs:
+    :children:
+      AddPermissionResult:
+        :ignore: true
+- :name: ConfirmSubscription
+  :method: :confirm_subscription
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    Token:
+    - :string
+    - :required
+    AuthenticateOnUnsubscribe:
+    - :string
+  :outputs:
+    :children:
+      ConfirmSubscriptionResult:
+        :ignore: true
+- :name: CreateTopic
+  :method: :create_topic
+  :inputs:
+    Name:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateTopicResult:
+        :ignore: true
+- :name: DeleteTopic
+  :method: :delete_topic
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteTopicResult:
+        :ignore: true
+- :name: GetSubscriptionAttributes
+  :method: :get_subscription_attributes
+  :inputs:
+    SubscriptionArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetSubscriptionAttributesResult:
+        :ignore: true
+        :children:
+          Attributes:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :attributes
+                :map:
+                - key
+                - value
+- :name: GetTopicAttributes
+  :method: :get_topic_attributes
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetTopicAttributesResult:
+        :ignore: true
+        :children:
+          Attributes:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :attributes
+                :map:
+                - key
+                - value
+- :name: ListSubscriptions
+  :method: :list_subscriptions
+  :inputs:
+    NextToken:
+    - :string
+  :outputs:
+    :children:
+      ListSubscriptionsResult:
+        :ignore: true
+        :children:
+          Subscriptions:
+            :ignore: true
+            :children:
+              member:
+                :rename: :subscriptions
+                :list: true
+- :name: ListSubscriptionsByTopic
+  :method: :list_subscriptions_by_topic
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    NextToken:
+    - :string
+  :outputs:
+    :children:
+      ListSubscriptionsByTopicResult:
+        :ignore: true
+        :children:
+          Subscriptions:
+            :ignore: true
+            :children:
+              member:
+                :rename: :subscriptions
+                :list: true
+- :name: ListTopics
+  :method: :list_topics
+  :inputs:
+    NextToken:
+    - :string
+  :outputs:
+    :children:
+      ListTopicsResult:
+        :ignore: true
+        :children:
+          Topics:
+            :ignore: true
+            :children:
+              member:
+                :rename: :topics
+                :list: true
+- :name: Publish
+  :method: :publish
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    Message:
+    - :string
+    - :required
+    Subject:
+    - :string
+    MessageStructure:
+    - :string
+  :outputs:
+    :children:
+      PublishResult:
+        :ignore: true
+- :name: RemovePermission
+  :method: :remove_permission
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    Label:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RemovePermissionResult:
+        :ignore: true
+- :name: SetSubscriptionAttributes
+  :method: :set_subscription_attributes
+  :inputs:
+    SubscriptionArn:
+    - :string
+    - :required
+    AttributeName:
+    - :string
+    - :required
+    AttributeValue:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      SetSubscriptionAttributesResult:
+        :ignore: true
+- :name: SetTopicAttributes
+  :method: :set_topic_attributes
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    AttributeName:
+    - :string
+    - :required
+    AttributeValue:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      SetTopicAttributesResult:
+        :ignore: true
+- :name: Subscribe
+  :method: :subscribe
+  :inputs:
+    TopicArn:
+    - :string
+    - :required
+    Protocol:
+    - :string
+    - :required
+    Endpoint:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      SubscribeResult:
+        :ignore: true
+- :name: Unsubscribe
+  :method: :unsubscribe
+  :inputs:
+    SubscriptionArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UnsubscribeResult:
+        :ignore: true

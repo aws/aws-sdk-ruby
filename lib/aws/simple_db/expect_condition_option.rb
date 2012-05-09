@@ -36,7 +36,7 @@ module AWS
             }
           end
         end
-        expected
+        expected.empty? ? {} : expected.first
       end
 
     end

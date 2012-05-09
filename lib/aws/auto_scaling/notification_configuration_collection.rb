@@ -163,7 +163,7 @@ module AWS
             groups[group_name][c.topic_arn] << c.notification_type
           end
 
-          next_token = resp.respond_to?(:next_token) ? resp.next_token : nil
+          next_token = resp.data[:next_token]
 
         end while next_token
 

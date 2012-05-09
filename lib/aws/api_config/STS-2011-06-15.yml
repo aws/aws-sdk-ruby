@@ -13,44 +13,38 @@
 
 ---
 :operations:
-  GetSessionToken:
-    :input:
-      DurationSeconds:
-      - :integer
-    :output:
-    - Credentials:
-      - Expiration:
-        - :timestamp
-  GetFederationToken:
-    :input:
-      Name:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Policy:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      DurationSeconds:
-      - :integer
-    :output:
-    - Credentials:
-      - Expiration:
-        - :timestamp
-    - PackedPolicySize:
-      - :integer
-:client_errors:
-  MalformedQueryString: []
-  InvalidParameterCombination: []
-  InvalidParameterValue: []
-  InvalidQueryParameter: []
-  MissingAction: []
-  MissingParameter: []
-  RequestExpired: []
-  AccessDenied: []
-  NotAuthorized: []
-  DelegationFailure: []
-  MalformedHttpRequest: []
-  MalformedPolicyDocument: []
-  PackedPolicyTooLarge: []
-:server_errors:
-  ServiceUnavailable: []
+- :name: GetFederationToken
+  :method: :get_federation_token
+  :inputs:
+    Name:
+    - :string
+    - :required
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      GetFederationTokenResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
+- :name: GetSessionToken
+  :method: :get_session_token
+  :inputs:
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      GetSessionTokenResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time

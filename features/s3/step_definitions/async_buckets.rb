@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 Then /^the result should be a response handle$/ do
-  @result.should be_kind_of AWS::AsyncHandle
+  @result.should be_kind_of AWS::Core::AsyncHandle
 end
 
 Then /^a client error should be available on failure$/ do

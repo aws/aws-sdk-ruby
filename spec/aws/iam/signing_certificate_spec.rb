@@ -62,14 +62,14 @@ module AWS
 
           response = client.stub_for(:list_signing_certificates)
 
-          response.stub(:certificates).and_return([
-            double("response-certificate", {
+          response.data[:certificates] = [
+            {
               :user_name => user.name,
               :certificate_id => 'id', 
               :certificate_body => 'body',
               :status => 'Active',
-            })
-          ])
+            }
+          ]
 
           client.should_receive(:list_signing_certificates).
             with(:user_name => user.name).
@@ -87,14 +87,14 @@ module AWS
 
           response = client.stub_for(:list_signing_certificates)
 
-          response.stub(:certificates).and_return([
-            double("response-certificate", {
+          response.data[:certificates] = [
+            {
               :user_name => user.name,
               :certificate_id => 'id', 
               :certificate_body => 'body',
               :status => 'Inactive',
-            })
-          ])
+            }
+          ]
 
           client.should_receive(:list_signing_certificates).
             with(:user_name => user.name).

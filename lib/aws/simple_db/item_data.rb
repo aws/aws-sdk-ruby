@@ -36,12 +36,15 @@ module AWS
         @domain = opts[:domain]
 
         if obj = opts[:response_object]
-          @name ||= obj.name if obj.respond_to?(:name)
-          if obj.respond_to?(:attributes)
-            @attributes ||= obj.attributes.inject({}) do |m, att|
-              m[att.name] ||= []
-              m[att.name] << att.value
-              m
+          @name ||= obj[:name]
+          if obj[:attributes]
+            @attributes ||= begin
+              attributes = {}
+              obj[:attributes].each do |attr|
+                attributes[attr[:name]] ||= []
+                attributes[attr[:name]] << attr[:value]
+              end
+              attributes
             end
           end
         end

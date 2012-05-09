@@ -52,8 +52,8 @@ module AWS
         let(:request_options) {{ :stack_name => stack.name }}
 
         def stub_n_members response, n
-          response.stub(:stack_resources).and_return((1..n).map{|i|
-            double('stack-resource', {
+          response.data[:stack_resources] = (1..n).map{|i|
+            {
               :stack_name => stack.name,
               :stack_id => 'stack-id',
               :resource_type => 'AWS::EC2::Instance',
@@ -61,8 +61,8 @@ module AWS
               :logical_resource_id => "id-#{i}",
               :description => 'desc',
               :resource_status => 'CREATE_IN_PROGRESS',
-            })
-          })
+            }
+          }
         end
 
         it 'enumerates stack resources' do

@@ -85,9 +85,9 @@ module AWS
         response = client.send(client_method, options)
 
         options = {}
-        options[:fingerprint] = response.key_fingerprint
-        if response.respond_to?(:key_material)
-          options[:private_key] = response.key_material
+        options[:fingerprint] = response.data[:key_fingerprint]
+        if response[:key_material]
+          options[:private_key] = response.data[:key_material]
         end
 
         KeyPair.new(response.key_name, options)

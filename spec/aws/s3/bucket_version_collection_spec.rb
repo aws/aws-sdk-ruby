@@ -36,8 +36,8 @@ module AWS
         let(:limit_param) { :max_keys }
 
         def stub_markers(resp, value)
-          resp.stub(:next_key_marker).and_return(value+"_key")
-          resp.stub(:next_version_id_marker).and_return(value+"_version_id")
+          resp.data[:next_key_marker] = value + '_key'
+          resp.data[:next_version_id_marker] = value + '_version_id'
         end
 
         def expect_markers(client, value)
@@ -47,22 +47,24 @@ module AWS
         end
 
         def stub_members(resp, quantity)
-          resp.stub(:contents).
-            and_return([double('v1',
-                               :key => 'a',
-                               :version_id => 'v1',
-                               :delete_marker? => true,
-                               :latest? => true),
-                        double('v1',
-                               :key => 'b',
-                               :version_id => 'v1',
-                               :delete_marker? => false,
-                               :latest? => false),
-                        double('v1',
-                               :key => 'c',
-                               :version_id => 'v1',
-                               :delete_marker? => false,
-                               :latest? => true)].first(quantity))
+          resp.data[:contents] = [
+            {
+              :key => 'a',
+              :version_id => 'v1',
+              :delete_marker => true,
+              :latest => true,
+            },{
+              :key => 'b',
+              :version_id => 'v1',
+              :delete_marker => false,
+              :latest => false,
+            },{
+              :key => 'c',
+              :version_id => 'v1',
+              :delete_marker => false,
+              :latest => true,
+            }
+          ].first(quantity)
         end
 
       end
@@ -92,15 +94,15 @@ module AWS
       context '#each' do
 
         let(:versions) {[
-          double('v1', :key => 'a', :version_id => 'v1', :delete_marker? => true, :latest? => true),
-          double('v1', :key => 'b', :version_id => 'v1', :delete_marker? => false, :latest? => false),
-          double('v1', :key => 'c', :version_id => 'v1', :delete_marker? => false, :latest? => true),
+          { :key => 'a', :version_id => 'v1', :delete_marker => true, :latest => true },
+          { :key => 'b', :version_id => 'v1', :delete_marker => false, :latest => false },
+          { :key => 'c', :version_id => 'v1', :delete_marker => false, :latest => true },
         ]}
 
         let(:list) { client.new_stub_for(:list_object_versions) }
 
         before(:each) do
-          list.stub(:versions).and_return(versions)
+          list.data[:versions] = versions
           client.stub(:list_object_versions).and_return(list)
         end
 
@@ -112,9 +114,21 @@ module AWS
         end
 
         it 'calls list_object_versions while the list is truncated' do
-          list.stub(:truncated?).and_return(true, true, false)
-          client.should_receive(:list_object_versions).exactly(3).times
+
+          r1 = client.new_stub_for(:list_object_versions)
+          r2 = client.new_stub_for(:list_object_versions)
+          r3 = client.new_stub_for(:list_object_versions)
+
+          r1.data[:truncated] = true
+          r2.data[:truncated] = true
+          r3.data[:truncated] = false
+
+          client.should_receive(:list_object_versions).
+            exactly(3).times.
+            and_return(r1,r2,r3)
+
           collection.each {|version|}
+
         end
 
         it 'yields once for each version' do
@@ -148,7 +162,7 @@ module AWS
             collection.with_prefix('/prefix').each{|version| }
           end
 
-          it 'replaces prefixes by default' do
+          it 'replaces prefixes by defualt' do
             client.should_receive(:list_object_versions).
               with(hash_including(:prefix => 'bar'))
             collection.with_prefix('foo').with_prefix('bar').each{|version| }

@@ -36,16 +36,15 @@ module AWS
       let(:instance) { offering }
 
       def stub_member(response, member)
-        response.stub(:reserved_instances_offerings_set).and_return([member])
+        response.data[:reserved_instances_offerings_set] = [member]
       end
 
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { offering }
         def stub_tags(resp, tags)
-          stub_member(resp,
-                      double("reserved instances offering",
-                             :reserved_instances_offering_id => "id",
-                             :tag_set => tags))
+          stub_member(resp, 
+            :reserved_instances_offering_id => "id",
+            :tag_set => tags)
         end
       end
 

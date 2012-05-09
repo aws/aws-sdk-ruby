@@ -50,10 +50,10 @@ Feature: EC2 Tagging
   @images
   Scenario: Tagging an image
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | description    | foobar                                     |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | description    | foobar                           |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And the image description should eventually be "foobar"
     When I call the "image" resource
     Then the resource should be taggable
@@ -61,10 +61,10 @@ Feature: EC2 Tagging
   @images @memoized
   Scenario: Image tags memoized from DescribeImages
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | description    | foobar                                     |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | description    | foobar                           |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And the image description should eventually be "foobar"
     When I call the "image" resource
     Then the resource should memoize tags properly

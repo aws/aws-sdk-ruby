@@ -343,7 +343,7 @@ module AWS
 
       provider(:terminate_instances, :start_instances, :stop_instances) do |provider|
         provider.find do |resp| 
-          resp.instances_set.find { |i| i.instance_id == id }
+          resp.instances_set.find {|i| i.instance_id == id }
         end
         provider.provides :status, :get_as => :current_state
         provider.provides :status_code, :get_as => :current_state
@@ -351,7 +351,7 @@ module AWS
       
       provider(:monitor_instances, :unmonitor_instances) do |provider|
         provider.find do |resp|
-          resp.instances_set.find { |i| i.instance_id == id }
+          resp.instances_set.find {|i| i.instance_id == id }
         end
         provider.provides :monitoring
       end
@@ -448,8 +448,8 @@ module AWS
       # Enables or disables monitoring for this instance.
       # @param [Boolean] state A true or false value.  Enables monintoring
       #   for a true value, disables it for a false value.
-      def monitoring_enabled= value
-        value ? enable_monitoring : disable_monitoring
+      def monitoring_enabled= state
+        state ? enable_monitoring : disable_monitoring
       end
 
       # @return [Booelan] Returns +true+ if CloudWatch monitoring is 
@@ -656,8 +656,9 @@ module AWS
       protected
       def attributes_from_response_object(obj)
         if atts = super(obj)
-          atts[:status] = obj.instance_state.name.tr("-","_").to_sym if
-            obj.respond_to?(:instance_state)
+          if obj[:instance_state]
+            atts[:status] = obj[:instance_state].name.tr("-","_").to_sym 
+          end
           atts
         end
       end

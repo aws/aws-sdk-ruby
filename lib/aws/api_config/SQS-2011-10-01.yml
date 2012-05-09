@@ -11,265 +11,304 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
---- 
-:operations: 
-  CreateQueue: 
-    :input: 
-      QueueName: 
+---
+:operations:
+- :name: AddPermission
+  :method: :add_permission
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    Label:
+    - :string
+    - :required
+    AWSAccountId:
+    - :list:
       - :string
-      - :required
-      Attribute: 
-      - :map: 
-          :key: 
-          - :string
-          :value: 
-          - :string
-          :key_param: Name
-          :value_param: Value
-      - :rename: attributes
-    :output: []
-
-  GetQueueUrl: 
-    :input: 
-      QueueName: 
+    - :required
+    - :rename: AWSAccountIds
+    ActionName:
+    - :list:
       - :string
-      - :required
-      QueueOwnerAWSAccountId: 
-      - :string
-    :output: []
-
-  ListQueues: 
-    :input: 
-      QueueNamePrefix: 
-      - :string
-    :output: 
-    - QueueUrl: 
-      - :list
-      - :rename: queueUrls
-  AddPermission: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      Label: 
-      - :string
-      - :required
-      AWSAccountId: 
-      - :list: 
-        - :string
-      - :required
-      - :rename: AWSAccountIds
-      ActionName: 
-      - :list: 
-        - :string
-      - :required
-      - :rename: Actions
-    :output: []
-
-  RemovePermission: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      Label: 
-      - :string
-      - :required
-    :output: []
-
-  ChangeMessageVisibility: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      ReceiptHandle: 
-      - :string
-      - :required
-      VisibilityTimeout: 
-      - :integer
-      - :required
-    :output: []
-
-  DeleteQueue: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-    :output: []
-
-  DeleteMessage: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      ReceiptHandle: 
-      - :string
-      - :required
-    :output: []
-
-  GetQueueAttributes: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      AttributeName: 
-      - :list: 
-        - :string
-      - :rename: attributeNames
-    :output: 
-    - Attribute: 
-      - :rename: attributes
-      - :map_entry: 
-        - Name
-        - Value
-  ReceiveMessage: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      AttributeName: 
-      - :list: 
-        - :string
-      - :rename: AttributeNames
-      MaxNumberOfMessages: 
-      - :integer
-      VisibilityTimeout: 
-      - :integer
-    :output: 
-    - Message: 
-      - :list
-      - :rename: messages
-      - Attribute: 
-        - :rename: Attributes
-        - :map_entry: 
-          - Name
-          - Value
-  SetQueueAttributes: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      Attribute: 
-      - :required
-      - :structure: 
-          Name: 
+    - :required
+    - :rename: Actions
+  :outputs:
+    :children:
+      AddPermissionResult:
+        :ignore: true
+- :name: ChangeMessageVisibility
+  :method: :change_message_visibility
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    ReceiptHandle:
+    - :string
+    - :required
+    VisibilityTimeout:
+    - :integer
+    - :required
+  :outputs:
+    :children:
+      ChangeMessageVisibilityResult:
+        :ignore: true
+- :name: ChangeMessageVisibilityBatch
+  :method: :change_message_visibility_batch
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    ChangeMessageVisibilityBatchRequestEntry:
+    - :list:
+      - :structure:
+          Id:
           - :string
           - :required
-          Value: 
+          ReceiptHandle:
           - :string
           - :required
-    :output: []
-
-  SendMessage: 
-    :input: 
-      QueueUrl: 
+          VisibilityTimeout:
+          - :integer
+    - :required
+    - :rename: Entries
+  :outputs:
+    :children:
+      ChangeMessageVisibilityBatchResult:
+        :ignore: true
+        :children:
+          ChangeMessageVisibilityBatchResultEntry:
+            :list: true
+            :rename: :successful
+          BatchResultErrorEntry:
+            :list: true
+            :rename: :failed
+            :children:
+              SenderFault:
+                :type: :boolean
+- :name: CreateQueue
+  :method: :create_queue
+  :inputs:
+    QueueName:
+    - :string
+    - :required
+    Attribute:
+    - :map:
+        :key:
+        - :string
+        :value:
+        - :string
+        :key_param: Name
+        :value_param: Value
+    - :rename: attributes
+  :outputs:
+    :children:
+      CreateQueueResult:
+        :ignore: true
+- :name: DeleteMessage
+  :method: :delete_message
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    ReceiptHandle:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteMessageResult:
+        :ignore: true
+- :name: DeleteMessageBatch
+  :method: :delete_message_batch
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    DeleteMessageBatchRequestEntry:
+    - :list:
+      - :structure:
+          Id:
+          - :string
+          - :required
+          ReceiptHandle:
+          - :string
+          - :required
+    - :required
+    - :rename: Entries
+  :outputs:
+    :children:
+      DeleteMessageBatchResult:
+        :ignore: true
+        :children:
+          DeleteMessageBatchResultEntry:
+            :list: true
+            :rename: :successful
+          BatchResultErrorEntry:
+            :list: true
+            :rename: :failed
+            :children:
+              SenderFault:
+                :type: :boolean
+- :name: DeleteQueue
+  :method: :delete_queue
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteQueueResult:
+        :ignore: true
+- :name: GetQueueAttributes
+  :method: :get_queue_attributes
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    AttributeName:
+    - :list:
       - :string
-      - :required
-      MessageBody: 
+    - :rename: attributeNames
+  :outputs:
+    :children:
+      GetQueueAttributesResult:
+        :ignore: true
+        :children:
+          Attribute:
+            :rename: :attributes
+            :map:
+            - Name
+            - Value
+- :name: GetQueueUrl
+  :method: :get_queue_url
+  :inputs:
+    QueueName:
+    - :string
+    - :required
+    QueueOwnerAWSAccountId:
+    - :string
+  :outputs:
+    :children:
+      GetQueueUrlResult:
+        :ignore: true
+- :name: ListQueues
+  :method: :list_queues
+  :inputs:
+    QueueNamePrefix:
+    - :string
+  :outputs:
+    :children:
+      ListQueuesResult:
+        :ignore: true
+        :children:
+          QueueUrl:
+            :list: true
+            :rename: :queue_urls
+- :name: ReceiveMessage
+  :method: :receive_message
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    AttributeName:
+    - :list:
       - :string
-      - :required
-      DelaySeconds: 
-      - :integer
-    :output: []
-
-  SendMessageBatch: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      SendMessageBatchRequestEntry: 
-      - :list: 
-        - :structure: 
-            Id: 
-            - :string
-            - :required
-            MessageBody: 
-            - :string
-            - :required
-            DelaySeconds: 
-            - :integer
-      - :required
-      - :rename: Entries
-    :output: 
-    - SendMessageBatchResultEntry: 
-      - :list
-      - :rename: Successful
-    - BatchResultErrorEntry: 
-      - :list
-      - :rename: Failed
-      - SenderFault: 
-        - :boolean
-  ChangeMessageVisibilityBatch: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      ChangeMessageVisibilityBatchRequestEntry: 
-      - :list: 
-        - :structure: 
-            Id: 
-            - :string
-            - :required
-            ReceiptHandle: 
-            - :string
-            - :required
-            VisibilityTimeout: 
-            - :integer
-      - :required
-      - :rename: Entries
-    :output: 
-    - ChangeMessageVisibilityBatchResultEntry: 
-      - :list
-      - :rename: Successful
-    - BatchResultErrorEntry: 
-      - :list
-      - :rename: Failed
-      - SenderFault: 
-        - :boolean
-  DeleteMessageBatch: 
-    :input: 
-      QueueUrl: 
-      - :string
-      - :required
-      DeleteMessageBatchRequestEntry: 
-      - :list: 
-        - :structure: 
-            Id: 
-            - :string
-            - :required
-            ReceiptHandle: 
-            - :string
-            - :required
-      - :required
-      - :rename: Entries
-    :output: 
-    - DeleteMessageBatchResultEntry: 
-      - :list
-      - :rename: Successful
-    - BatchResultErrorEntry: 
-      - :list
-      - :rename: Failed
-      - SenderFault: 
-        - :boolean
-:client_errors: 
-  OverLimit: []
-
-  AWS.SimpleQueueService.MessageNotInflight: []
-
-  AWS.SimpleQueueService.QueueDeletedRecently: []
-
-  AWS.SimpleQueueService.QueueNameExists: []
-
-  AWS.SimpleQueueService.QueueDoesNotExist: []
-
-  AWS.SimpleQueueService.BatchEntryIdsNotDistinct: []
-
-  AWS.SimpleQueueService.InvalidBatchEntryId: []
-
-  AWS.SimpleQueueService.BatchRequestTooLong: []
-
-  AWS.SimpleQueueService.EmptyBatchRequest: []
-
-  AWS.SimpleQueueService.TooManyEntriesInBatchRequest: []
-
-:server_errors: {}
-
+    - :rename: AttributeNames
+    MaxNumberOfMessages:
+    - :integer
+    VisibilityTimeout:
+    - :integer
+  :outputs:
+    :children:
+      ReceiveMessageResult:
+        :ignore: true
+        :children:
+          Message:
+            :list: true
+            :rename: :messages
+            :children:
+              Attribute:
+                :rename: :attributes
+                :map:
+                - Name
+                - Value
+- :name: RemovePermission
+  :method: :remove_permission
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    Label:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RemovePermissionResult:
+        :ignore: true
+- :name: SendMessage
+  :method: :send_message
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    MessageBody:
+    - :string
+    - :required
+    DelaySeconds:
+    - :integer
+  :outputs:
+    :children:
+      SendMessageResult:
+        :ignore: true
+- :name: SendMessageBatch
+  :method: :send_message_batch
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    SendMessageBatchRequestEntry:
+    - :list:
+      - :structure:
+          Id:
+          - :string
+          - :required
+          MessageBody:
+          - :string
+          - :required
+          DelaySeconds:
+          - :integer
+    - :required
+    - :rename: Entries
+  :outputs:
+    :children:
+      SendMessageBatchResult:
+        :ignore: true
+        :children:
+          SendMessageBatchResultEntry:
+            :list: true
+            :rename: :successful
+          BatchResultErrorEntry:
+            :list: true
+            :rename: :failed
+            :children:
+              SenderFault:
+                :type: :boolean
+- :name: SetQueueAttributes
+  :method: :set_queue_attributes
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+    Attribute:
+    - :map:
+        :key:
+        - :string
+        :value:
+        - :string
+        :key_param: Name
+        :value_param: Value
+    - :required
+    - :rename: attributes
+  :outputs:
+    :children:
+      SetQueueAttributesResult:
+        :ignore: true

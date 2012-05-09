@@ -22,45 +22,45 @@ Feature: Image attributes
   @get
   Scenario: Get image location
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
-    Then the image location should eventually be "aws-sdk-amis/quickstart/image.manifest.xml"
+    Then the image location should eventually be "ruby-sdk-amis/image.manifest.xml"
 
   @get
   Scenario: Get image state
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image state should eventually be :available
 
   @get
   Scenario: Get image owner ID
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image owner ID should eventually be the account ID
 
   @get
   Scenario: Get image owner alias
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image owner alias should eventually be nil
 
   @get
   Scenario: Ask if image is public
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     When I ask if the image is public
     Then the result should be false
@@ -68,18 +68,18 @@ Feature: Image attributes
   @get
   Scenario: Get image launch permissions
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image launch permissions should eventually be empty
 
   @set
   Scenario: Make image public
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     When I make the image public
     Then the image launch permissions should eventually be empty
@@ -88,9 +88,9 @@ Feature: Image attributes
   @set
   Scenario: Remove explicit permission
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     And I add image launch permissions for the user "599169622985"
     And the image launch permissions should eventually include:
@@ -101,9 +101,9 @@ Feature: Image attributes
   @reset
   Scenario: Reset launch permissions
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     And I add image launch permissions for the user "599169622985"
     When I reset the image launch permissions
@@ -112,9 +112,9 @@ Feature: Image attributes
   @set
   Scenario: Add explicit permission
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     When I add image launch permissions for the user "599169622985"
     Then the image launch permissions should eventually include:
@@ -123,9 +123,9 @@ Feature: Image attributes
   @memoized @set
   Scenario: Memoized launch permissions
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     When I add image launch permissions for the user "599169622985"
     And I start a memoization block
@@ -141,48 +141,48 @@ Feature: Image attributes
   @get
   Scenario: Get image architecture
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
-    | architecture   | i386                                       |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
+    | architecture   | i386                             |
     And I wait for the image to exist
     Then the image architecture should eventually be :i386
 
   @get
   Scenario: Get image type
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image type should eventually be :machine
 
   @get
   Scenario: Get kernel ID
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
-    | kernel_id      | aki-f5c1219c                               |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
+    | kernel_id      | aki-f5c1219c                     |
     And I wait for the image to exist
     Then the image kernel ID should eventually be "aki-f5c1219c"
 
   @get
   Scenario: Get ramdisk ID
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
-    | ramdisk_id     | ari-dbc121b2                               |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
+    | ramdisk_id     | ari-dbc121b2                     |
     And I wait for the image to exist
     Then the image ramdisk ID should eventually be "ari-dbc121b2"
 
   @get
   Scenario: Get platform
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image platform should eventually be nil
 
@@ -196,28 +196,28 @@ Feature: Image attributes
   @get
   Scenario: Get image name
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image name should eventually be "my-image"
 
   @get
   Scenario: Get image description
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | description    | foobar                                     |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | description    | foobar                           |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image description should eventually be "foobar"
 
   @set
   Scenario: Set image description
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml | 
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     When I set the image description to "foobar"
     Then the image description should eventually be "foobar"
@@ -225,61 +225,26 @@ Feature: Image attributes
   @get
   Scenario: Get image root device type
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image root device type should eventually be :instance_store
 
   @get
-  Scenario: Get image root device name
-    Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
-    And I wait for the image to exist
-    Then the image root device name should eventually be "/dev/sda1"
-
-  @get
   Scenario: Get image virtualization type
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image virtualization type should eventually be :paravirtual
 
   @get
   Scenario: Get image hypervisor
     Given I create an image with the following parameters:
-    | parameter      | value                                      |
-    | name           | my-image                                   |
-    | image_location | aws-sdk-amis/quickstart/image.manifest.xml |
+    | parameter      | value                            |
+    | name           | my-image                         |
+    | image_location | ruby-sdk-amis/image.manifest.xml |
     And I wait for the image to exist
     Then the image hypervisor should eventually be :xen
-
-  @get
-  Scenario: Get image block device mapping
-    Given I create an image with the following block device mappings:
-    """
-    {
-      "/dev/sda1" => {
-        :snapshot_id => "snap-1482e87d",
-        :volume_size => 15,
-        :delete_on_termination => true
-      },
-      "/dev/sda2" => "ephemeral0"
-    }
-    """
-    And I wait for the image to exist
-    When the image block device mappings should eventually have the following mappings:
-    | device name | delete on termination |
-    | /dev/sda1   | true                  |
-    And a request should have been made like:
-    | TYPE  | NAME                                         | VALUE         |
-    | param | Action                                       | RegisterImage |
-    | param | BlockDeviceMapping.1.DeviceName              | /dev/sda1     |
-    | param | BlockDeviceMapping.1.Ebs.SnapshotId          | snap-1482e87d |
-    | param | BlockDeviceMapping.1.Ebs.DeleteOnTermination | true          |
-    | param | BlockDeviceMapping.2.DeviceName              | /dev/sda2     |
-    | param | BlockDeviceMapping.2.VirtualName             | ephemeral0    |

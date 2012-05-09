@@ -39,38 +39,36 @@ module AWS
 
     context '#statistics' do
 
-      let(:resp) { client.new_stub_for(:get_send_statistics) }
+      let(:resp) { client.stub_for(:get_send_statistics) }
 
       let(:timestamp) { Time.now }
 
-      let(:result_statistics) do
-
-        stat1 = double('stat-1', 
+      let(:stats) do
+        stats = []
+        stats << {
           :timestamp => timestamp,
           :delivery_attempts => 1,
           :rejects => 0,
           :bounces => 0,
-          :complaints => 0)
-
-        stat2 = double('stat-2', 
+          :complaints => 0
+        }
+        stats << {
           :timestamp => timestamp,
           :delivery_attempts => 2,
           :rejects => 0,
           :bounces => 1,
-          :complaints => 0)
-        
-        [stat1, stat2]
-
+          :complaints => 0
+        }
+        stats
       end
 
       before(:each) do
-        resp.stub(:send_data_points).and_return(result_statistics)
+        resp.data[:send_data_points] = stats
         client.stub(:get_send_statistics).and_return(resp)
       end
 
       it 'calls get_send_statistics' do
-        client.should_receive(:get_send_statistics).
-          and_return(resp)
+        client.should_receive(:get_send_statistics).and_return(resp)
         ses.statistics
       end
 

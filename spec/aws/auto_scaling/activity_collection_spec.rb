@@ -42,13 +42,13 @@ module AWS
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:activities).and_return((1..n).map{|i|
-            double('activity', :activity_id => i.to_s)
-          })
+          response.data[:activities] = (1..n).map{|i|
+            { :activity_id => i.to_s }
+          }
         end
 
         it 'yields activities' do

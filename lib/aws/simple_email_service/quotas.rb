@@ -37,24 +37,26 @@ module AWS
         to_h[:sent_last_24_hours]
       end
 
-      # @example
+      # Returns a hash of the SES quotas.
       #
-      #   @ses.quotas.to_h
+      #   @ses.quotas.to_hash
       #   # {:max_24_hour_send=>200, :max_send_rate=>1.0, :sent_last_24_hours=>22}
       #
-      # @return [Hash] Returns a hash of the SES quotas.
-      def to_h
-        response = client.get_send_quota({})
+      # @return [Hash] 
+      #
+      def to_hash
+        response = client.get_send_quota
         {
           :max_24_hour_send => response.max_24_hour_send.to_i,
           :max_send_rate => response.max_send_rate.to_f,
           :sent_last_24_hours => response.sent_last_24_hours.to_i,  
         }
       end
+      alias_method :to_h, :to_hash
 
       # @private
       def inspect
-        "<#{self.class} #{to_h.inspect}>"
+        "<#{self.class} #{to_hash.inspect}>"
       end
         
     end

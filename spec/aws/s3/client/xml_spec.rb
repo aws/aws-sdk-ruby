@@ -22,7 +22,6 @@ module AWS
         context "one bucket" do
 
           let(:response) { described_class.parse(<<-XML) }
-            <?xml version="1.0" encoding="UTF-8"?>
             <ListAllMyBucketsResult xmlns="http://doc.s3.amazonaws.com/2006-03-01">
               <Owner>
                 <ID>bcaf1ffd86f461ca5fb16fd081034f</ID>
@@ -56,7 +55,6 @@ module AWS
         context "two buckets" do
 
           let(:response) { described_class.parse(<<-XML.strip) }
-            <?xml version="1.0" encoding="UTF-8"?>
             <ListAllMyBucketsResult xmlns="http://doc.s3.amazonaws.com/2006-03-01">
               <Owner>
                 <ID>bcaf1ffd86f461ca5fb16fd081034f</ID>
@@ -91,7 +89,6 @@ module AWS
         context "no buckets" do
 
           let(:response) { described_class.parse(<<-XML.strip) }
-            <?xml version="1.0" encoding="UTF-8"?>
             <ListAllMyBucketsResult xmlns="http://doc.s3.amazonaws.com/2006-03-01">
               <Owner>
                 <ID>bcaf1ffd86f461ca5fb16fd081034f</ID>
@@ -133,86 +130,22 @@ module AWS
           XML
 
           it 'should add an acl attribute' do
-            response.should respond_to(:acl)
-          end
-
-          context 'acl' do
-
-            let(:acl) { response.acl }
-
-            it 'should be an AccessControlList' do
-              acl.should be_an(AccessControlList)
-            end
-
-            context 'owner' do
-
-              let(:owner) { acl.owner }
-
-              it 'should not be nil' do
-                owner.should_not be_nil
-              end
-
-              it 'should have an id' do
-                owner.id.should == "8a6925ce4adee97f21c32aa379004fef"
-              end
-
-              it 'should have a display name' do
-                owner.display_name.should == "CustomersName@amazon.com"
-              end
-
-            end
-
-            context 'grants' do
-
-              let(:grants) { acl.grants }
-
-              it 'should have one item' do
-                grants.size.should == 1
-              end
-
-              context 'grant' do
-
-                let(:grant) { grants.first }
-
-                it 'should be a Grant object' do
-                  grant.should be_a(AccessControlList::Grant)
-                end
-
-                it 'should have a grantee' do
-                  grant.grantee.should_not be_nil
-                end
-
-                it 'should have a permission' do
-                  grant.permission.should_not be_nil
-                end
-
-                context 'grantee' do
-
-                  let(:grantee) { grant.grantee }
-
-                  it 'should have an id' do
-                    grantee.canonical_user_id.should ==
-                      "8a6925ce4adf57f21c32aa379004fef"
-                  end
-
-                  it 'should have a display name' do
-                    grantee.display_name.should == "CustomersName@amazon.com"
-                  end
-
-                end
-
-                context 'permission' do
-
-                  it 'should be :full_control' do
-                    grant.permission.name.should == :full_control
-                  end
-
-                end
-
-              end
-
-            end
-
+            response.to_hash.should == {
+              :grants => [
+                {
+                  :grantee=>{
+                    :type=>"CanonicalUser", 
+                    :canonical_user_id=>"8a6925ce4adf57f21c32aa379004fef", 
+                    :display_name=>"CustomersName@amazon.com"
+                  }, 
+                  :permission=>:full_control
+                }
+              ], 
+              :owner=>{
+                :id=>"8a6925ce4adee97f21c32aa379004fef", 
+                :display_name=>"CustomersName@amazon.com"
+              }
+            }
           end
 
         end
@@ -245,7 +178,10 @@ module AWS
           end
 
           it 'flatttens CommonPrefix.Prefix to #common_prefixes' do
-            response.common_prefixes.should == %w(foo bar)
+            response.common_prefixes.should == [
+              { :prefix => 'foo' },
+              { :prefix => 'bar' },
+            ]
           end
 
         end
@@ -257,7 +193,6 @@ module AWS
         context 'one contents' do
         
           let(:response) { described_class.parse(<<-XML) }
-            <?xml version="1.0" encoding="UTF-8"?>
             <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <Name>trowe-bucket</Name>
               <Prefix>some_prefix</Prefix>
@@ -390,7 +325,6 @@ module AWS
 
       describe XML::ListObjectVersions do
         let(:xml) { <<-XML.strip }
-          <?xml version="1.0" encoding="UTF-8"?>
           <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
             <Name>bucket</Name>
             <Prefix>my</Prefix>
@@ -505,7 +439,7 @@ module AWS
           end
 
           it 'should not respond to #size' do
-            delete_marker.should_not respond_to(:size)
+            delete_marker[:size].should == nil
           end
 
           it 'should not respond to #storage_class' do
@@ -555,13 +489,12 @@ module AWS
       describe XML::InitiateMultipartUpload do
 
         let(:response) { described_class.parse(<<-XML) }
-<?xml version="1.0" encoding="UTF-8"?>
-<InitiateMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-<Bucket>example-bucket</Bucket>
-<Key>example-object</Key>
-<UploadId>VXBsb2FkIElEIGZvciA2aWWpbmcncyBteS1tb3ZpZS5tMnRzIHVwbG9hZA</UploadId>
-</InitiateMultipartUploadResult>
-XML
+          <InitiateMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Bucket>example-bucket</Bucket>
+          <Key>example-object</Key>
+          <UploadId>VXBsb2FkIElEIGZvciA2aWWpbmcncyBteS1tb3ZpZS5tMnRzIHVwbG9hZA</UploadId>
+          </InitiateMultipartUploadResult>
+        XML
 
         it 'should respond to upload_id' do
           response.upload_id.
@@ -581,31 +514,30 @@ XML
       describe XML::ListMultipartUploads do
 
         let(:response) { described_class.parse(<<-XML) }
-<?xml version='1.0' encoding='UTF-8'?>
-<ListMultipartUploadsResult xmlns='http://s3.amazonaws.com/doc/2006-03-01/'>
-<Bucket>ruby_manual_testing</Bucket>
-<KeyMarker/>
-<UploadIdMarker/>
-<NextKeyMarker>foo</NextKeyMarker>
-<NextUploadIdMarker>F6hez6AVKtgp_.83rK._emo8MYL7pd29BTCBX2houAu6S9RS4YZkU4wyEDZZYmiECyTRM.fY6gDTSFSCcidcPQ--</NextUploadIdMarker>
-<MaxUploads>1000</MaxUploads>
-<IsTruncated>false</IsTruncated>
-<Upload>
-  <Key>foo</Key>
-  <UploadId>F6hez6AVKtgp_.83rK._emo8MYL7pd29BTCBX2houAu6S9RS4YZkU4wyEDZZYmiECyTRM.fY6gDTSFSCcidcPQ--</UploadId>
-  <Initiator>
-    <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
-    <DisplayName>aws-dr-tools-test</DisplayName>
-  </Initiator>
-  <Owner>
-    <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
-    <DisplayName>aws-dr-tools-test</DisplayName>
-  </Owner>
-  <StorageClass>STANDARD</StorageClass>
-  <Initiated>2011-03-30T20:57:31.000Z</Initiated>
-</Upload>
-</ListMultipartUploadsResult>
-XML
+          <ListMultipartUploadsResult xmlns='http://s3.amazonaws.com/doc/2006-03-01/'>
+          <Bucket>ruby_manual_testing</Bucket>
+          <KeyMarker/>
+          <UploadIdMarker/>
+          <NextKeyMarker>foo</NextKeyMarker>
+          <NextUploadIdMarker>F6hez6AVKtgp_.83rK._emo8MYL7pd29BTCBX2houAu6S9RS4YZkU4wyEDZZYmiECyTRM.fY6gDTSFSCcidcPQ--</NextUploadIdMarker>
+          <MaxUploads>1000</MaxUploads>
+          <IsTruncated>false</IsTruncated>
+          <Upload>
+            <Key>foo</Key>
+            <UploadId>F6hez6AVKtgp_.83rK._emo8MYL7pd29BTCBX2houAu6S9RS4YZkU4wyEDZZYmiECyTRM.fY6gDTSFSCcidcPQ--</UploadId>
+            <Initiator>
+              <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
+              <DisplayName>aws-dr-tools-test</DisplayName>
+            </Initiator>
+            <Owner>
+              <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
+              <DisplayName>aws-dr-tools-test</DisplayName>
+            </Owner>
+            <StorageClass>STANDARD</StorageClass>
+            <Initiated>2011-03-30T20:57:31.000Z</Initiated>
+          </Upload>
+          </ListMultipartUploadsResult>
+        XML
 
         it 'should expose a truncated? method' do
           response.should respond_to(:truncated?)
@@ -646,32 +578,31 @@ XML
       describe XML::ListParts do
 
         let(:response) { described_class.parse(<<-XML) }
-<?xml version='1.0' encoding='UTF-8'?> 
-<ListPartsResult xmlns='http://s3.amazonaws.com/doc/2006-03-01/'>
-<Bucket>ruby_manual_testing</Bucket>
-<Key>foo</Key>
-<UploadId>A24elvMhVHcW1Fp5fTvjpPToV503NQagpyhME3dhrp2KsmUWLziX6Qu6TroL1ZufIlWPHtvbxK5ZrsstrejT0w--</UploadId>
-<Initiator>
-  <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
-  <DisplayName>aws-dr-tools-test</DisplayName>
-</Initiator>
-<Owner>
-  <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
-  <DisplayName>aws-dr-tools-test</DisplayName>
-</Owner>
-<StorageClass>STANDARD</StorageClass>
-<PartNumberMarker>0</PartNumberMarker>
-<NextPartNumberMarker>0</NextPartNumberMarker>
-<MaxParts>1000</MaxParts>
-<IsTruncated>false</IsTruncated>
-<Part>
-  <PartNumber>1</PartNumber>
-  <LastModified>2011-04-01T00:34:36.000Z</LastModified>
-  <ETag>quot;eb61eead90e3b899c6bcbe27ac581660&quot;</ETag>
-  <Size>5</Size>
-</Part>
-</ListPartsResult>
-XML
+          <ListPartsResult xmlns='http://s3.amazonaws.com/doc/2006-03-01/'>
+          <Bucket>ruby_manual_testing</Bucket>
+          <Key>foo</Key>
+          <UploadId>A24elvMhVHcW1Fp5fTvjpPToV503NQagpyhME3dhrp2KsmUWLziX6Qu6TroL1ZufIlWPHtvbxK5ZrsstrejT0w--</UploadId>
+          <Initiator>
+            <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
+            <DisplayName>aws-dr-tools-test</DisplayName>
+          </Initiator>
+          <Owner>
+            <ID>d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df</ID>
+            <DisplayName>aws-dr-tools-test</DisplayName>
+          </Owner>
+          <StorageClass>STANDARD</StorageClass>
+          <PartNumberMarker>0</PartNumberMarker>
+          <NextPartNumberMarker>0</NextPartNumberMarker>
+          <MaxParts>1000</MaxParts>
+          <IsTruncated>false</IsTruncated>
+          <Part>
+            <PartNumber>1</PartNumber>
+            <LastModified>2011-04-01T00:34:36.000Z</LastModified>
+            <ETag>quot;eb61eead90e3b899c6bcbe27ac581660&quot;</ETag>
+            <Size>5</Size>
+          </Part>
+          </ListPartsResult>
+        XML
 
         it 'should expose storage_class as a symbol' do
           response.storage_class.should == :standard

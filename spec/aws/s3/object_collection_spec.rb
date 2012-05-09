@@ -39,9 +39,7 @@ module AWS
         let(:limit_param) { :max_keys }
 
         def stub_markers(resp, value)
-          resp.stub(:contents).
-            and_return([double("obj 1",
-                               :key => value)])
+          resp.data[:contents] = [{ :key => value }]
         end
 
         def expect_markers(client, value)
@@ -50,11 +48,10 @@ module AWS
         end
 
         def stub_members(resp, quantity)
-          resp.stub(:contents).
-            and_return([double("object 1",
-                               :key => "foo"),
-                        double("upload 2",
-                               :key => "bar")].first(quantity))
+          resp.data[:contents] = [
+            { :key => 'foo' },
+            { :key => 'bar' },
+          ].first(quantity)
         end
 
       end
@@ -81,26 +78,28 @@ module AWS
 
       context '#each' do
 
-        let(:contents) { [double('content', :key => 'bar'),
-                          double('content', :key => 'foo')] }
+        let(:contents) {[
+          { :key => 'bar' },
+          { :key => 'foo' },
+        ]}
 
         let(:response) { client.stub_for(:list_objects) }
 
         let(:truncated_response) { 
           response = client.new_stub_for(:list_objects) 
-          response.stub(:contents).and_return(contents)
-          response.stub(:truncated?).and_return(true)
+          response.data[:contents] = contents
+          response.data[:truncated] = true
           response
         }
 
         before(:each) do
-          client.stub_for(:list_objects).
-            stub(:contents).and_return(contents)
+          resp = client.stub_for(:list_objects)
+          resp.data[:contents] = contents
         end
 
         it 'raises a runtime error if the response says its but there are no keys' do
-          response.stub(:truncated?).and_return(true)
-          response.stub(:contents).and_return([])
+          response.data[:truncated] = true
+          response.data[:contents] = []
           lambda {
             collection.each{|o|}
           }.should raise_error(/Unable to find marker/)

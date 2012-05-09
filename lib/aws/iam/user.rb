@@ -97,11 +97,11 @@ module AWS
       mutable_attribute :path
 
       populates_from(:create_user, :get_user) do |resp|
-        resp.user if resp.user.user_name == name
+        resp[:user] if resp[:user][:user_name] == name
       end
 
       populates_from(:list_users, :get_group) do |resp|
-        resp.users.find{|u| u.user_name == name }
+        resp[:users].find{|u| u[:user_name] == name }
       end
 
       # Deletes this user.

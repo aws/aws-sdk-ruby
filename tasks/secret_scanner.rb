@@ -31,6 +31,7 @@ module SecretScanner
     /ChangeMessageVisibilityBatchRequestEntry/,
     /WorkflowExecutionTimedOutEventAttributes/,
     /WorkflowExecutionCanceledEventAttributes/,
+    /workflowExecutionTimedOutEventAttributes/,
   ]
 
   WHITELIST_FILES = [

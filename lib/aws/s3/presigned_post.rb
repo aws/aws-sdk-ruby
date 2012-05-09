@@ -25,29 +25,30 @@ module AWS
     # stored.
     #
     # @example Form fields for uploading by file name
-    #  form = bucket.presigned_post(:key => "photos/${filename}")
-    #  form.url.to_s        # => "https://mybucket.s3.amazonaws.com/"
-    #  form.fields          # => { "AWSAccessKeyId" => "...", ... }
+    #
+    #   form = bucket.presigned_post(:key => "photos/${filename}")
+    #   form.url.to_s        # => "https://mybucket.s3.amazonaws.com/"
+    #   form.fields          # => { "AWSAccessKeyId" => "...", ... }
     #
     # @example Generating a minimal HTML form
-    #  form = bucket.objects.myobj.presigned_post
-    #  hidden_inputs = form.fields.map do |(name, value)|
-    #    %(<input type="hidden" name="#{name}" value="#{value}" />)
-    #  end
-    #  <<-END
-    #  <form action="#{form.url}"
-    #        method="post"
-    #        enctype="multipart/form-data">
-    #    #{hidden_inputs}
-    #    <input type="file" name="file" />
-    #  </form>
-    #  END
+    #
+    #   form = bucket.objects.myobj.presigned_post
+    #   hidden_inputs = form.fields.map do |(name, value)|
+    #     %(<input type="hidden" name="#{name}" value="#{value}" />)
+    #   end
+    #   <<-END
+    #   <form action="#{form.url}" method="post" enctype="multipart/form-data">
+    #     #{hidden_inputs}
+    #     <input type="file" name="file" />
+    #   </form>
+    #   END
     #
     # @example Restricting the size of the uploaded object
-    #  bucket.presigned_post(:content_length => 1..(10*1024))
+    #   bucket.presigned_post(:content_length => 1..(10*1024))
     #
     # @example Restricting the key prefix
-    #  bucket.presigned_post.where(:key).starts_with("photos/")
+    #   bucket.presigned_post.where(:key).starts_with("photos/")
+    #
     class PresignedPost
 
       include Core::Model

@@ -17,30 +17,45 @@ module AWS
   module Core
     describe Client do
 
-      let(:request_class) {
-        klass = Class.new(Http::Request) do
-          include AuthorizeV2
-          include AuthorizeWithSessionToken
-        end
-        klass.stub(:name).and_return('AWS::Dummy::Request')
-        klass
-      }
+      ## before each test we are creating a fake service interface
 
-      let(:client_class) { 
+      before(:each) do
 
-        klass = Class.new(described_class) do
+        module ::AWS
+          class Dummy
 
-          add_client_request_method(:sample_method) do
+            extend ServiceInterface
+
+            class Request < Core::Http::Request
+              include Signature::Version2
+            end
+
+            class Client < Core::Client
+
+              API_VERSION = Time.now.strftime('%Y-%m-%d')
+
+              add_client_request_method(:sample_method) do
+                # ...
+              end
+
+            end
+
           end
-
         end
 
-        klass.stub(:name).and_return('AWS::Dummy::Client')
-        klass::API_VERSION = Time.now.strftime('%Y-%m-%d')
-        klass::REQUEST_CLASS = request_class
-        klass
+        config.stub(:dummy_endpoint).and_return('dummy.amazonaws.com')
+        config.stub(:dummy_port).and_return('443')
+        config.stub(:dummy_region).and_return('us-east-1')
 
-      }
+      end
+
+      after(:each) do
+        ::AWS.send(:remove_const, :Dummy)
+      end
+
+      let(:client_class) { ::AWS::Dummy::Client }
+
+      let(:request_class) { ::AWS::Dummy::Request }
 
       let(:config_options) {{}}
       
@@ -48,19 +63,19 @@ module AWS
 
       let(:client) { client_class.new(:config => config) }
 
-      let(:response) { client.stub_for(:sample_method) }
-
-      before(:each) do 
-        config.stub(:dummy_endpoint).and_return('dummy.amazonaws.com')
-        config.stub(:dummy_port).and_return('443')
-        config.stub(:dummy_region).and_return('us-east-1')
-      end
-
       context 'logging' do
 
         let(:logger) { double('logger') }
 
         let(:config_options) {{ :logger => logger }}
+
+        let(:response) { client.stub_for(:sample_method) }
+
+        before(:each) do
+          client_class.add_client_request_method(:sample_method) do
+            # method definition not important for logger tests
+          end
+        end
 
         it 'logs to the configured logger after each request' do
           logger.should_receive(:info)

@@ -28,19 +28,20 @@ module AWS
 
       before(:each) do
         response = client.stub_for(:describe_load_balancers)
-        response.stub(:load_balancer_descriptions).and_return([
-          double('lb-desc', 
+        response.data[:load_balancer_descriptions] = [
+          {
             :load_balancer_name => load_balancer.name,
             :backend_server_descriptions => [
-              double('bes-desc-1',
+              {
                 :instance_port => 80,
-                :policy_names => %w(abc)),
-              double('bes-desc-2',
+                :policy_names => %w(abc),
+              }, {
                 :instance_port => 81,
-                :policy_names => %w(xyz)),
+                :policy_names => %w(xyz),
+              },
             ]
-          ),
-        ])
+          },
+        ]
         client.stub(:describe_load_balancers).and_return(response)
       end
 

@@ -36,12 +36,7 @@ module AWS
         end
 
         it 'should parse the exception XML' do
-          Client::XML::Error.should_receive(:parse).
-            at_least(:once).with do |xml, opts|
-            xml.should == error_xml
-            opts[:context].should be_kind_of(Errors::ModeledError)
-          end
-          exception
+          exception.message.should =~ /Something bad happened/
         end
 
         it "should be a kind of #{base}" do

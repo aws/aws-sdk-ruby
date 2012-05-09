@@ -45,42 +45,41 @@ module AWS
 
       context 'attributes' do
 
-        let(:response_object) { double("response certificate",
-                                       :server_certificate_metadata =>
-                                       certificate_metadata) }
+        let(:response_object) {{
+          :server_certificate_metadata => certificate_metadata
+        }}
 
-        let(:certificate_metadata) { double("certificate metadata",
-                                            :server_certificate_name =>
-                                            "certname") }
+        let(:certificate_metadata) {{
+          :server_certificate_name => "certname"
+        }}
 
-        let(:attributes)      { cert.attributes_from_response(response) }
+        let(:attributes) { cert.attributes_from_response(response) }
 
         shared_examples_for "populated server certificate metadata" do
 
           it 'should include the certificate id' do
-            certificate_metadata.stub(:server_certificate_id).and_return("abc123")
+            certificate_metadata[:server_certificate_id] = 'abc123'
             attributes[:id].should == "abc123"
           end
 
           it 'should include the path' do
-            certificate_metadata.stub(:path).and_return("/foo/")
+            certificate_metadata[:path] = '/foo/'
             attributes[:path].should == "/foo/"
           end
 
           it 'should include the upload date' do
             now = Time.now
-            certificate_metadata.stub(:upload_date).and_return(now)
+            certificate_metadata[:upload_date] = now
             attributes[:upload_date].should == now
           end
 
           it 'should include the arn' do
-            certificate_metadata.stub(:arn).and_return("arn:foo")
+            certificate_metadata[:arn] = 'arn:foo'
             attributes[:arn].should == "arn:foo"
           end
 
           it 'should not populate for a non-matching group' do
-            certificate_metadata.stub(:server_certificate_name).
-              and_return("foobar")
+            certificate_metadata[:server_certificate_name] = 'foobar'
             attributes.should be_nil
           end
 
@@ -89,12 +88,12 @@ module AWS
         shared_examples_for "populated server certificate data" do
 
           it 'should include the certificate body' do
-            response_object.stub(:certificate_body).and_return("FOO")
+            response_object[:certificate_body] = 'FOO'
             attributes[:certificate_body].should == "FOO"
           end
 
           it 'should include the certificate chain' do
-            response_object.stub(:certificate_chain).and_return("FOO")
+            response_object[:certificate_chain] = 'FOO'
             attributes[:certificate_chain].should == "FOO"
           end
 
@@ -102,9 +101,10 @@ module AWS
 
         context 'populated from get_server_certificate' do
 
-          let(:response) { double("get_server_certificate",
-                                  :request_type => :get_server_certificate,
-                                  :server_certificate => response_object) }
+          let(:response) { client.stub_for(:get_server_certificate) }
+          before(:each) do
+            response.data[:server_certificate] = response_object
+          end
 
           it_should_behave_like "populated server certificate metadata"
           it_should_behave_like "populated server certificate data"
@@ -113,10 +113,10 @@ module AWS
 
         context 'populated from upload_server_certificate' do
 
-          let(:response) { double("upload_server_certificate",
-                                  :request_type => :upload_server_certificate,
-                                  :server_certificate_metadata =>
-                                  certificate_metadata) }
+          let(:response) { client.stub_for(:upload_server_certificate) }
+          before(:each) do
+            response.data[:server_certificate_metadata] = certificate_metadata
+          end
 
           it_should_behave_like "populated server certificate metadata"
 
@@ -124,10 +124,11 @@ module AWS
 
         context 'populated from list_server_certificates' do
 
-          let(:response) { double("list_server_certificates",
-                                  :request_type => :list_server_certificates,
-                                  :server_certificate_metadata_list =>
-                                  [certificate_metadata]) }
+          let(:response) { client.stub_for(:list_server_certificates) }
+          before(:each) do
+            response.data[:server_certificate_metadata_list] = 
+              [certificate_metadata]
+          end
 
           it_should_behave_like "populated server certificate metadata"
 

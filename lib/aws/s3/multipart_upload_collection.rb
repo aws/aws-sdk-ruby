@@ -44,6 +44,7 @@ module AWS
       end
 
       protected
+
       def each_member_in_page(page, &block)
         super
         page.uploads.each do |u|
@@ -53,15 +54,12 @@ module AWS
         end
       end
 
-      protected
       def list_request(options)
         client.list_multipart_uploads(options)
       end
 
-      protected
       def limit_param; :max_uploads; end
 
-      protected
       def pagination_markers; super + [:upload_id_marker]; end
 
     end

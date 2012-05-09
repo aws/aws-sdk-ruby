@@ -470,9 +470,7 @@ module AWS
       # execution and records a SignalExternalWorkflowExecutionRequested 
       # event in the history.
       #
-      # @param [String] workflow_id
-      #
-      # @param [String] run_id
+      # @param [WorkflowExecution,String] workflow_execution
       #
       # @param [String] signal_name
       #

@@ -218,7 +218,7 @@ module AWS
         end
 
         it_should_behave_like "sdb expect conditions" do
-          def should_expect(*conditions)
+          def should_expect(conditions)
             client.should_receive(:put_attributes).with do |hash|
               attr = hash[:attributes]
               attr.length.should == 3
@@ -283,7 +283,7 @@ module AWS
         end
 
         it_should_behave_like "sdb expect conditions" do
-          def should_expect(*conditions)
+          def should_expect(conditions)
             client.should_receive(:put_attributes).with do |hash|
               attr = hash[:attributes]
               attr.length.should == 3
@@ -335,7 +335,7 @@ module AWS
         end
 
         it_should_behave_like "sdb expect conditions" do
-          def should_expect(*conditions)
+          def should_expect(conditions)
             client.should_receive(:put_attributes).with do |hash|
               attr = hash[:attributes]
               attr.length.should == 3
@@ -409,7 +409,7 @@ module AWS
           end
 
           it_should_behave_like "sdb expect conditions" do
-            def should_expect(*conditions)
+            def should_expect(conditions)
               should_delete({
                               :attributes => [{ :name => 'colors' }]
                             }.merge(:expected => conditions))
@@ -456,7 +456,7 @@ module AWS
           end
 
           it_should_behave_like "sdb expect conditions" do
-            def should_expect(*conditions)
+            def should_expect(conditions)
               should_delete({
                               :attributes => [{ :name => 'colors',
                                                 :value => 'red' }]

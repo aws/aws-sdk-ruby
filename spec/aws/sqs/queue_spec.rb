@@ -49,8 +49,7 @@ module AWS
         end
 
         it 'should call delete_queue' do
-          client.should_receive(:delete_queue).
-            with(:queue_url => "url")
+          client.should_receive(:delete_queue).with(:queue_url => "url")
           queue.delete
         end
 
@@ -58,11 +57,11 @@ module AWS
 
       context '#send_message' do
 
-        let(:resp) { client.new_stub_for(:send_message) }
+        let(:resp) { client.stub_for(:send_message) }
 
         before(:each) do
-          resp.stub(:message_id).and_return("abc123")
-          resp.stub(:md5_of_message_body).and_return("123abc")
+          resp.data[:message_id] = 'abc123'
+          resp.data[:md5_of_message_body] = '123abc'
           client.stub(:send_message).and_return(resp)
         end
 
@@ -95,22 +94,23 @@ module AWS
 
         let(:resp) { client.new_stub_for(:receive_message) }
 
-        let(:response_message) { double("message",
-                                        :message_id => "ID",
-                                        :md5_of_body => "MD5",
-                                        :body => "HELLO",
-                                        :receipt_handle => "HANDLE",
-                                        :attributes => attributes) }
+        let(:response_message) {{
+          :message_id => "ID",
+          :md5_of_body => "MD5",
+          :body => "HELLO",
+          :receipt_handle => "HANDLE",
+          :attributes => attributes,
+        }}
 
-        let(:attributes) do
-          { "SenderId" => "123456789012",
-            "SentTimestamp" => Time.now.to_i.to_s,
-            "ApproximateReceivedCount" => "12",
-            "ApproximateFirstReceiveTimestamp" => (Time.now + 12).to_i.to_s }
-        end
+        let(:attributes) {{
+          "SenderId" => "123456789012",
+          "SentTimestamp" => Time.now.to_i.to_s,
+          "ApproximateReceivedCount" => "12",
+          "ApproximateFirstReceiveTimestamp" => (Time.now + 12).to_i.to_s,
+        }}
 
         before(:each) do
-          resp.stub(:messages).and_return([response_message])
+          resp.data[:messages] = [response_message]
           client.stub(:receive_message).and_return(resp)
         end
 
@@ -190,20 +190,21 @@ module AWS
           end
 
           it 'should return an array of message objects if :limit is passed' do
-            resp.stub(:messages).
-              and_return([double("message 1",
-                                 :message_id => "ID1",
-                                 :md5_of_body => "MD5",
-                                 :body => "HELLO",
-                                 :receipt_handle => "HANDLE",
-                                 :attributes => attributes),
-                          double("message 2",
-                                 :message_id => "ID2",
-                                 :md5_of_body => "MD5",
-                                 :body => "HELLO",
-                                 :receipt_handle => "HANDLE",
-                                 :attributes => attributes)])
-
+            resp.data[:messages] = [
+              {
+                :message_id => "ID1",
+                :md5_of_body => "MD5",
+                :body => "HELLO",
+                :receipt_handle => "HANDLE",
+                :attributes => attributes,
+              }, {
+                :message_id => "ID2",
+                :md5_of_body => "MD5",
+                :body => "HELLO",
+                :receipt_handle => "HANDLE",
+                :attributes => attributes,
+              }
+            ]
             messages = queue.receive_message(:limit => 10)
             messages.should be_an(Array)
             messages.each { |msg| msg.should be_a(ReceivedMessage) }
@@ -211,7 +212,7 @@ module AWS
           end
 
           it 'should return nil if no messages are returned' do
-            resp.stub(:messages).and_return([])
+            resp.data[:messages] = []
             queue.receive_message.should be_nil
           end
 
@@ -230,7 +231,7 @@ module AWS
             it 'should not call the block if no message is returned' do
               obj = double("object")
               obj.should_not_receive(:call)
-              resp.stub(:messages).and_return([])
+              resp.data[:messages] = []
               queue.receive_message do |msg|
                 obj.call(msg)
               end
@@ -301,19 +302,21 @@ module AWS
           end
 
           it 'yields each message' do
-            resp.stub(:messages).
-              and_return([double("message 1",
-                                 :message_id => "ID1",
-                                 :md5_of_body => "MD5",
-                                 :body => "HELLO",
-                                 :receipt_handle => "HANDLE",
-                                 :attributes => attributes),
-                          double("message 2",
-                                 :message_id => "ID2",
-                                 :md5_of_body => "MD5",
-                                 :body => "HELLO",
-                                 :receipt_handle => "HANDLE",
-                                 :attributes => attributes)])
+            resp.data[:messages] = [
+              {
+                :message_id => "ID1",
+                :md5_of_body => "MD5",
+                :body => "HELLO",
+                :receipt_handle => "HANDLE",
+                :attributes => attributes,
+              }, {
+                :message_id => "ID2",
+                :md5_of_body => "MD5",
+                :body => "HELLO",
+                :receipt_handle => "HANDLE",
+                :attributes => attributes,
+              }
+            ]
             catch(:second_request) do
               first = true
               client.stub(:receive_message) do |opts|
@@ -336,8 +339,7 @@ module AWS
             client.stub(:receive_message) do |opts|
               count += 1
               throw :third_request if count == 3
-              response_message.stub(:message_id).
-                and_return("ID#{count}")
+              response_message[:message_id] = "ID#{count}"
               resp
             end
             catch(:third_request) do
@@ -355,7 +357,7 @@ module AWS
 
             before(:each) do
               client.stub(:receive_message) do |opts|
-                resp.stub(:messages).and_return(response_lists.shift)
+                resp.data[:messages] = response_lists.shift
                 resp
               end
             end
@@ -395,7 +397,7 @@ module AWS
 
             before(:each) do
               client.stub(:receive_message) do |opts|
-                resp.stub(:messages).and_return(response_lists.shift)
+                resp.data[:messages] = response_lists.shift
                 resp
               end
               start_time
@@ -455,7 +457,7 @@ module AWS
               Time.stub(:now).and_return(start_time)
               client.stub(:receive_message) do |opts|
                 Time.stub(:now).and_return(response_times.shift)
-                resp.stub(:messages).and_return(response_lists.shift)
+                resp.data[:messages] = response_lists.shift
                 resp
               end
             end
@@ -547,17 +549,13 @@ module AWS
 
         it 'should return false if NonExistentQueue is raised' do
           client.stub(:get_queue_attributes).
-            and_raise(SQS::Errors::NonExistentQueue.
-                      new(double("request"),
-                          double("response", :status => 400, :body => '<foo/>')))
+            and_raise(SQS::Errors::NonExistentQueue)
           queue.exists?.should be_false
         end
 
         it 'should return false if InvalidAddress is raised' do
           client.stub(:get_queue_attributes).
-            and_raise(SQS::Errors::InvalidAddress.
-                      new(double("request"),
-                          double("response", :status => 400, :body => '<foo/>')))
+            and_raise(SQS::Errors::InvalidAddress)
           queue.exists?.should be_false
         end
 
@@ -567,23 +565,21 @@ module AWS
 
         it 'should not rescue other exceptions' do
           client.stub(:get_queue_attributes).
-            and_raise(SQS::Errors::InvalidParameterValue.
-                      new(double("request"),
-                          double("response", :status => 400, :body => '<foo/>')))
-          lambda { queue.exists? }.
-            should raise_error(SQS::Errors::InvalidParameterValue)
+            and_raise(SQS::Errors::InvalidParameterValue)
+          lambda { 
+            queue.exists? 
+          }.should raise_error(SQS::Errors::InvalidParameterValue)
         end
 
       end
 
       shared_examples_for "sqs queue attribute accessor" do
 
-        let(:resp) { client.new_stub_for(:get_queue_attributes) }
+        let(:resp) { client.stub_for(:get_queue_attributes) }
 
         before(:each) do
-          resp.stub(:attributes).and_return(Hash[[[response_attribute,
-                                                   response_value]]])
-          resp.attributes["QueueArn"] ||= "abc123"
+          resp.data[:attributes] = { response_attribute => response_value }
+          resp.data[:attributes]["QueueArn"] ||= "abc123"
           client.stub(:get_queue_attributes).and_return(resp)
         end
 
@@ -643,12 +639,9 @@ module AWS
       context '#visibility_timeout=' do
 
         it 'should call set_queue_attributes' do
-          client.should_receive(:set_queue_attributes).
-            with(:queue_url => "url",
-                 :attribute => {
-                   :name => "VisibilityTimeout",
-                   :value => "12"
-                 })
+          client.should_receive(:set_queue_attributes).with(
+            :queue_url => "url",
+            :attributes => { "VisibilityTimeout" => "12" })
           queue.visibility_timeout = 12
         end
 
@@ -692,12 +685,9 @@ module AWS
         end
 
         it 'should call set_queue_attributes' do
-          client.should_receive(:set_queue_attributes).
-            with(:queue_url => "url",
-                 :attribute => {
-                   :name => "MaximumMessageSize",
-                   :value => "12"
-                 })
+          client.should_receive(:set_queue_attributes).with(
+            :queue_url => "url",
+            :attributes => { "MaximumMessageSize" => "12" })
           queue.maximum_message_size = 12
         end
 
@@ -715,12 +705,9 @@ module AWS
       context '#message_retention_period=' do
 
         it 'should call set_queue_attributes' do
-          client.should_receive(:set_queue_attributes).
-            with(:queue_url => "url",
-                 :attribute => {
-                   :name => "MessageRetentionPeriod",
-                   :value => "12"
-                 })
+          client.should_receive(:set_queue_attributes).with(
+            :queue_url => "url",
+            :attributes => { "MessageRetentionPeriod" => "12" })
           queue.message_retention_period = 12
         end
 
@@ -764,9 +751,7 @@ module AWS
           policy = double('policy', :to_json => '{}')
 
           client.should_receive(:set_queue_attributes).
-            with(hash_including(:attribute => {
-              :name => 'Policy', :value => policy.to_json
-            }))
+            with(hash_including(:attributes => { 'Policy' => policy.to_json }))
 
           queue.policy = policy
 
@@ -775,8 +760,7 @@ module AWS
         it 'passes policy strings unmodified' do
 
           client.should_receive(:set_queue_attributes).
-            with(hash_including(:attribute => {
-              :name => 'Policy', :value => '{}' }))
+            with(hash_including(:attributes => { 'Policy' => '{}' }))
 
           queue.policy = '{}'
 
@@ -785,8 +769,7 @@ module AWS
         it 'deletes a policy by passing an empty string' do
 
           client.should_receive(:set_queue_attributes).
-            with(hash_including(:attribute => {
-              :name => 'Policy', :value => '' }))
+            with(hash_including(:attributes => { 'Policy' => '' }))
 
           queue.policy = nil
 
@@ -843,19 +826,20 @@ module AWS
 
         it 'raises an error if some of the messages in the batch fail' do
           
-          failure1 = double('failure-1', 
+          failed = []
+          failed << {
             :code => 'error-code-1',
             :message => 'error-message-1',
-            :sender_fault? => true,
-            :id => '0')
-
-          failure2 = double('failure-2', 
+            :sender_fault => true,
+            :id => '0',
+          }
+          failed << {
             :code => 'error-code-2',
             :message => 'error-message-2',
-            :sender_fault? => false,
-            :id => '2')
-
-          response.stub(:failed).and_return([failure1, failure2])
+            :sender_fault => false,
+            :id => '2',
+          }
+          response.data[:failed] = failed
 
           raised = false
           begin
@@ -964,19 +948,20 @@ module AWS
 
         it 'raises an error if any of the messages in the batch fail' do
            
-          failure1 = double('failure-1', 
+          failed = []
+          failed << {
             :code => 'error-code-1',
             :message => 'error-message-1',
-            :sender_fault? => true,
-            :id => '0')
-
-          failure2 = double('failure-2', 
+            :sender_fault => true,
+            :id => '0',
+          }
+          failed << {
             :code => 'error-code-2',
             :message => 'error-message-2',
-            :sender_fault? => false,
-            :id => '2')
-
-          response.stub(:failed).and_return([failure1, failure2])
+            :sender_fault => false,
+            :id => '2',
+          }
+          response.data[:failed] = failed
 
           raised = false
           begin
@@ -1037,15 +1022,16 @@ module AWS
 
           it 'returns an array of sent messages' do
             
-            sent1 = double('sent-1', 
+            sent = []
+            sent << {
               :message_id => 'msg-1-id',
-              :md5_of_message_body => 'msg-1-md5')
-
-            sent2 = double('sent-2', 
+              :md5_of_message_body => 'msg-1-md5',
+            }
+            sent << {
               :message_id => 'msg-2-id',
-              :md5_of_message_body => 'msg-2-md5')
-            
-            response.stub(:successful).and_return([sent1, sent2])
+              :md5_of_message_body => 'msg-2-md5',
+            }
+            response.data[:successful] = sent
 
             sent = queue.batch_send 'msg-1', 'msg-12'
 
@@ -1060,28 +1046,31 @@ module AWS
 
           it 'raises a BatchSendError if any of the messages failed' do
             
-            sent1 = double('sent-1', 
+            sent = []
+            sent << {
               :message_id => 'msg-1-id',
-              :md5_of_message_body => 'msg-1-md5')
-
-            sent2 = double('sent-2', 
+              :md5_of_message_body => 'msg-1-md5',
+            }
+            sent << {
               :message_id => 'msg-2-id',
-              :md5_of_message_body => 'msg-2-md5')
+              :md5_of_message_body => 'msg-2-md5',
+            }
             
-            failure1 = double('failure-1', 
+            failed = []
+            failed << {
               :code => 'error-code-1',
               :message => 'error-message-1',
-              :sender_fault? => true,
-              :id => '0')
-
-            failure2 = double('failure-2', 
+              :sender_fault => true,
+              :id => '0',
+            }
+            failed << {
               :code => 'error-code-2',
               :message => 'error-message-2',
-              :sender_fault? => false,
-              :id => '2')
-
-            response.stub(:successful).and_return([sent1, sent2])
-            response.stub(:failed).and_return([failure1, failure2])
+              :sender_fault => false,
+              :id => '2',
+            }
+            response.data[:successful] = sent
+            response.data[:failed] = failed
 
             begin
               queue.batch_send 'msg-1', 'msg-2', 'msg-3', 'msg-4'

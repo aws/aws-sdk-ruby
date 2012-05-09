@@ -26,18 +26,19 @@ module AWS
         let(:client_method) { :describe_customer_gateways }
 
         def stub_two_members(resp)
-          resp.stub(:customer_gateway_set).and_return([
-            double('route-table-1',
+          resp.data[:customer_gateway_set] = [
+            {
               :customer_gateway_id => 'cgw-1',
               :state => 'available',
               :vpn_type => 'ipsec.1',
-              :bgp_asn => 65534),
-            double('route-table-1',
+              :bgp_asn => 65534,
+            },{
               :customer_gateway_id => 'cgw-2',
               :state => 'pending',
               :vpn_type => 'ipsec.1',
-              :bgp_asn => 65535),
-          ])
+              :bgp_asn => 65535,
+            },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -69,19 +70,18 @@ module AWS
 
         context '#create' do
 
-          let(:details) {
-            double('customer-gateway-details',
-              :customer_gateway_id => 'cgw-123',
-              :bgp_asn => 65432,
-              :ip_address => '1.2.3.4',
-              :vpn_type => 'ipsec.1',
-              :state => 'available')
-          }
+          let(:details) {{
+            :customer_gateway_id => 'cgw-123',
+            :bgp_asn => 65432,
+            :ip_address => '1.2.3.4',
+            :vpn_type => 'ipsec.1',
+            :state => 'available',
+          }}
 
           let(:response) { client.stub_for(:create_customer_gateway) }
 
           before(:each) do
-            response.stub(:customer_gateway).and_return(details)
+            response.data[:customer_gateway] = details
             client.stub(:create_customer_gateway).and_return(response)
           end
 

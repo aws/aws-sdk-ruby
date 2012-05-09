@@ -70,9 +70,10 @@ module AWS
         options[:max_items] = max_items if max_items
 
         response = client.send(request_method, options)
+
         each_item(response, &block)
 
-        response.marker if response.respond_to?(:marker)
+        response.data[:marker]
 
       end
 

@@ -15,9 +15,12 @@ require 'pathname'
 
 module AWS
   class S3
+
+    # @private
     module DataOptions
 
       protected
+
       def data_stream_from options, &block
 
         validate_data!(options, block)
@@ -45,7 +48,6 @@ module AWS
 
       end
 
-      protected
       def content_length_from options
         data = options[:data]
         case
@@ -61,7 +63,6 @@ module AWS
         end
       end
 
-      protected
       def validate_data! options, block
 
         data = options[:data]

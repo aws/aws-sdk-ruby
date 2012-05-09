@@ -280,33 +280,33 @@ module AWS
         #   class Product < AWS::Record::Model
         #   end
         #
-        #   Product.create_table #=> creates the SimpleDB domain 'Product'
+        #   Product.create_table #=> 'Product'
+        #
+        # If you share a single AWS account with multiple applications, you
+        # can provide a domain prefix for your model classes.
+        #
+        #   AWS::Record.domain_prefix = 'myapp-'
+        #
+        #   Product.create_table #=> 'myapp-Product'
+        #
+        # If you have set a model shard name, this is used in place of the
+        # class name.
+        #
+        #   AWS::Record.domain_prefix = 'prod-'
+        #   class Product < AWS::Record::Model
+        #     set_shard_name 'products'
+        #   end
+        #
+        #   Product.create_table #=> 'prod-products'
         #
         # If you shard you data across multiple domains, you can specify the
         # shard name:
         #
         #   # create two domains, with the given names
-        #   Product.create_domain :shard_name => 'products-1'
-        #   Product.create_domain :shard_name => 'products-2'
+        #   Product.create_domain 'products-1'
+        #   Product.create_domain 'products-2'
         #
-        # If you share a single AWS account with multiple applications, you
-        # can provide a domain prefix to group domains and to avoid name
-        # collisions:
-        #
-        #   AWS::Record.domain_prefix = 'myapp-'
-        #
-        #   # creates the domain 'myapp-Product'
-        #   Product.create_domain
-        #
-        #   # creates the domain 'myapp-products-1'
-        #   Product.create_domain :shard_name => 'products-1'
-        #
-        # @param [Hash] options Hash of options passed to 
-        #   {SimpleDB::DomainCollection#create}.  
-        #
-        # @option options [String] :shard_name Defaults to the class name.  The
-        #   shard name will be prefixed with {AWS::Record.domain_prefix},
-        #   and that becomes the domain name.
+        # @param [optional,String] shard_name Defaults to the class name.
         #
         # @return [SimpleDB::Domain]
         #

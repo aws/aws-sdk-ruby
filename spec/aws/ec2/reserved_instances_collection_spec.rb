@@ -26,13 +26,10 @@ module AWS
         let(:client_method) { :describe_reserved_instances }
 
         def stub_two_members(resp)
-          resp.stub(:reserved_instances_set).
-            and_return([
-              double("reserved-1",
-                :reserved_instances_id => "id-1"),
-              double("reserved-2",
-                :reserved_instances_id => "id-2"),
-            ])
+          resp.data[:reserved_instances_set] = [
+            { :reserved_instances_id => "id-1" },
+            { :reserved_instances_id => "id-2" },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"

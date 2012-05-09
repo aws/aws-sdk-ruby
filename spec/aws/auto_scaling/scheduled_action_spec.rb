@@ -27,7 +27,7 @@ module AWS
 
       let(:now) { Time.now }
 
-      let(:details) { double('scheduled-action', {
+      let(:details) {{
         :scheduled_action_name => action.name,
         :scheduled_action_arn => 'arn',
         :auto_scaling_group_name => 'group',
@@ -37,10 +37,10 @@ module AWS
         :end_time => now,
         :min_size => 1,
         :max_size => 2,
-      })}
+      }}
 
       before(:each) do
-        response.stub(:scheduled_update_group_actions).and_return([details])
+        response.data[:scheduled_update_group_actions] = [details]
         client.stub(:describe_scheduled_actions).and_return(response)
       end
 
@@ -114,12 +114,12 @@ module AWS
         end
 
         it 'returns true if it can be described' do
-          resp.stub(:scheduled_update_group_actions).and_return([double('a')])
+          resp.data[:scheduled_update_group_actions] = [{}] # not-empty
           action.exists?.should == true
         end
 
         it 'returns false if it can be described' do
-          resp.stub(:scheduled_update_group_actions).and_return([])
+          resp.data[:scheduled_update_group_actions] = [] # empty
           action.exists?.should == false
         end
 

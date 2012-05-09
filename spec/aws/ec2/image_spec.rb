@@ -31,10 +31,7 @@ module AWS
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { image }
         def stub_tags(resp, tags)
-          resp.stub(:image_index).
-            and_return("ami-123" =>
-                       double("image",
-                              :tag_set => tags))
+          resp.data[:image_index]['ami-123'] = { :tag_set => tags }
         end
       end
 
@@ -155,22 +152,19 @@ module AWS
 
       shared_examples_for "ec2 image attribute accessor (describe_images)" do
 
-        let(:resp) { client.new_stub_for(:describe_images) }
+        let(:resp) { client.stub_for(:describe_images) }
 
-        let(:response_image) { double("image",
-                                      :image_id => "ami-123") }
+        let(:response_image) {{ :image_id => "ami-123" }}
 
         before(:each) do
-          resp.stub(:image_index).
-            and_return("ami-123" => response_image)
+          resp.data[:image_index]["ami-123"] = response_image
           client.stub(:describe_images).and_return(resp)
         end
 
         context 'when returned by the service' do
 
           before(:each) do
-            response_image.stub(response_field).
-              and_return(response_value)
+            response_image[response_field] = response_value
           end
 
           it 'should call describe_images' do
@@ -196,7 +190,7 @@ module AWS
 
       end
 
-      shared_examples_for "memoized ec2 image attribute (describe_images)" do
+      shared_examples_for "static ec2 image attribute (describe_images)" do
 
         it_should_behave_like "ec2 image attribute accessor (describe_images)" do
 
@@ -205,8 +199,7 @@ module AWS
             context 'when returned by the service' do
 
               before(:each) do
-                response_image.stub(response_field).
-                  and_return(response_value)
+                response_image[response_field] = response_value
               end
 
               it 'should call describe_images only once' do
@@ -217,7 +210,7 @@ module AWS
 
               it 'should return the translated value' do
                 image.send(attribute)
-                response_image.stub(response_field).and_return("FOO")
+                response_image[response_field] = "FOO"
                 image.send(attribute).should == translated_value
               end
 
@@ -250,7 +243,7 @@ module AWS
         let(:response_field) { :image_location }
         let(:response_value) { "foobar" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#description' do
@@ -274,7 +267,7 @@ module AWS
         let(:response_field) { :image_owner_id }
         let(:response_value) { "1234" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#owner_alias' do
@@ -282,7 +275,7 @@ module AWS
         let(:response_field) { :image_owner_alias }
         let(:response_value) { "self" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       it_should_behave_like 'has ec2 public?/private? accessors' do
@@ -305,7 +298,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "i386" }
         let(:translated_value) { :i386 }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#type' do
@@ -313,7 +306,7 @@ module AWS
         let(:response_field) { :image_type }
         let(:response_value) { "machine" }
         let(:translated_value) { :machine }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#kernel_id' do
@@ -321,7 +314,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "aki-123" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#kernel' do
@@ -337,7 +330,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "ari-123" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#ramdisk' do
@@ -353,7 +346,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "Windows" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#state_reason' do
@@ -374,7 +367,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "my-image" }
         let(:translated_value) { response_value }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#root_device_type' do
@@ -382,7 +375,7 @@ module AWS
         let(:response_field) { attribute }
         let(:response_value) { "instance-store" }
         let(:translated_value) { :instance_store }
-        it_should_behave_like "memoized ec2 image attribute (describe_images)"
+        it_should_behave_like "static ec2 image attribute (describe_images)"
       end
 
       context '#root_device_name' do
@@ -414,11 +407,14 @@ module AWS
         let(:response) { client.stub_for(:describe_images) }
 
         before(:each) do
-          resp_image = double('image', :image_id => 'ami-123', :product_codes => [
-            double('pc1', :product_code => 'abc'),
-            double('pc2', :product_code => 'xyz'),
-          ])
-          response.stub(:image_index).and_return("ami-123" => resp_image)
+          resp_image = {
+            :image_id => 'ami-123', 
+            :product_codes => [
+              { :product_code => 'abc' },
+              { :product_code => 'xyz' },
+            ]
+          }
+          response.data[:image_index]["ami-123"] = resp_image
           client.stub(:modify_image_attribute).and_return(response)
         end
 
@@ -455,30 +451,26 @@ module AWS
         let(:attribute) { :block_device_mappings }
         let(:response_field) { :block_device_mapping }
         let(:ebs_device) { double("ebs") }
-        let(:ebs_mapping) do
-          double("mapping 1",
-                 :device_name => "/dev/sda1",
-                 :ebs => ebs_device)
-        end
+        let(:ebs_mapping) {{
+          :device_name => "/dev/sda1",
+          :ebs => ebs_device,
+        }}
         let(:response_value) { [ebs_mapping] }
         let(:translated_value) { { "/dev/sda1" => ebs_device } }
 
-        let(:resp) { client.new_stub_for(:describe_images) }
+        let(:resp) { client.stub_for(:describe_images) }
 
-        let(:response_image) { double("image",
-                                      :image_id => "ami-123") }
+        let(:response_image) {{ :image_id => "ami-123"  }}
 
         before(:each) do
-          resp.stub(:image_index).
-            and_return("ami-123" => response_image)
+          resp.data[:image_index]["ami-123"] = response_image
           client.stub(:describe_images).and_return(resp)
         end
 
         context 'when returned by the service' do
 
           before(:each) do
-            response_image.stub(response_field).
-              and_return(response_value)
+            response_image[response_field] = response_value
           end
 
           it 'should call describe_images' do
@@ -506,12 +498,10 @@ module AWS
 
       shared_examples_for "ec2 image attribute accessor (describe_image_attribute)" do
 
-        let(:resp) { client.new_stub_for(:describe_image_attribute) }
+        let(:resp) { client.stub_for(:describe_image_attribute) }
 
         before(:each) do
-          resp.stub(response_field).
-            and_return(double("attribute",
-                              :value => response_value))
+          resp.data[response_field] = { :value => response_value }
           client.stub(:describe_image_attribute).and_return(resp)
         end
 
@@ -560,11 +550,10 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_image_attribute) }
 
         before(:each) do
-          resp.stub(:launch_permission).
-            and_return([double("user permission",
-                               :user_id => "1234"),
-                        double("group permission",
-                               :group => "all")])
+          resp.data[:launch_permission] = [
+            { :user_id => "1234" },
+            { :group => "all" },
+          ]
           client.stub(:describe_image_attribute).and_return(resp)
         end
 

@@ -29,9 +29,9 @@ module AWS
         let(:describe_call) { :describe_route_tables }
         let(:taggable) { route_table }
         def stub_tags(resp, tags)
-          resp.stub(:route_table_set).and_return([
-            double('route-table', :route_table_id => 'rt-123', :tag_set => tags)
-          ])
+          resp.data[:route_table_set] = [
+            { :route_table_id => 'rt-123', :tag_set => tags },
+          ]
         end
       end
 
@@ -169,13 +169,14 @@ module AWS
         let(:association_set) { [] }
 
         before(:each) do
-          response.stub(:route_table_set).and_return([
-            double('route-table',
+          response.data[:route_table_set] = [
+            {
               :route_table_id => route_table.id,
               :vpc_id => 'vpc-id',
               :route_set => route_set,
-              :association_set => association_set)
-          ])
+              :association_set => association_set,
+            },
+          ]
         end
 
         context '#vpc' do
@@ -191,18 +192,20 @@ module AWS
         context '#main?' do
           
           it 'returns true if it has an association without a subnet' do
-            association_set << double('association', 
+            association_set << {
               :route_table_association_id => 'assoc-id',
               :route_table_id => route_table.id,
-              :main => true)
+              :main => true,
+            }
             route_table.main?.should == true
           end
 
           it 'returns false if all of its associations have a subnet' do
-            association_set << double('association', 
+            association_set << {
               :route_table_association_id => 'assoc-id',
               :route_table_id => route_table.id,
-              :subnet_id => 'subnet-id')
+              :subnet_id => 'subnet-id',
+            }
             route_table.main?.should == false
           end
 
@@ -212,15 +215,17 @@ module AWS
 
           it 'collects subnets from its associations' do
 
-            association_set << double('association1', 
+            association_set << {
               :route_table_association_id => 'aid-123',
               :route_table_id => route_table.id,
-              :subnet_id => 'subnet-123')
+              :subnet_id => 'subnet-123',
+            }
 
-            association_set << double('association2', 
+            association_set << {
               :route_table_association_id => 'aid-321',
               :route_table_id => route_table.id,
-              :subnet_id => 'subnet-321')
+              :subnet_id => 'subnet-321',
+            }
 
             route_table.subnets.should == [
               Subnet.new('subnet-123', :config => route_table.config),
@@ -235,21 +240,24 @@ module AWS
           
           it 'returns an array of route objects' do
 
-            route_set << double('route1',
+            route_set << {
               :destination_cidr_block => 'cidr-block-1',
               :gateway_id => 'igw-123',
-              :state => 'active')
+              :state => 'active',
+            }
 
-            route_set << double('route2',
+            route_set << {
               :destination_cidr_block => 'cidr-block-2',
               :instance_id => 'i-123',
               :instance_owner_id => 'owner-id',
-              :state => 'pending')
+              :state => 'pending',
+            }
 
-            route_set << double('route3',
+            route_set << {
               :destination_cidr_block => 'cidr-block-3',
               :network_interface_id => 'ni-123',
-              :state => 'foo')
+              :state => 'foo',
+            }
 
             routes = route_table.routes
 

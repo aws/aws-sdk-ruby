@@ -144,7 +144,7 @@ end
 ## helpers for creating domains / buckets in a way that they will get cleaned up
 
 def create_bucket_low_level options = {}
-  options[:bucket_name] ||= "ruby-integration-test-#{Time.now.to_i}"
+  options[:bucket_name] ||= "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
   @bucket_name = options[:bucket_name]
   @endpoint = options[:endpoint] || @s3_client.config.s3_endpoint
   @result = @s3_client.create_bucket(options)
@@ -153,7 +153,7 @@ def create_bucket_low_level options = {}
 end
 
 def create_bucket_high_level options = {}
-  @bucket_name = options.delete(:name) || "ruby-integration-test-#{Time.now.to_i}"
+  @bucket_name = options.delete(:name) || "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
   @endpoint = @s3.client.config.s3_endpoint
   @bucket = @s3.buckets.create(@bucket_name, options)
   @buckets_created << [@bucket_name, @endpoint]

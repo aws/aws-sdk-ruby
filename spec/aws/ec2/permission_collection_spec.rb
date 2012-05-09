@@ -35,11 +35,10 @@ module AWS
         let(:resp) { client.new_stub_for(describe_call) }
 
         before(:each) do
-          resp.stub(response_field).
-            and_return([double("user permission",
-                               :user_id => "1234"),
-                        double("group permission",
-                               :group => "all")])
+          resp.data[response_field] = [
+            { :user_id => "1234" },
+            { :group => "all" },
+          ]
           client.stub(describe_call).and_return(resp)
         end
 

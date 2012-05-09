@@ -62,7 +62,8 @@ module AWS
       include Enumerable
       include PrefixAndDelimiterCollection
 
-      # @param [Bucket] The S3 bucket this object collection belongs to.
+      # @param [Bucket] bucket The S3 bucket this object collection belongs to.
+      # @param [Hash] options
       def initialize(bucket, options = {})
         @bucket = bucket
         super

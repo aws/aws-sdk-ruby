@@ -97,16 +97,6 @@ module AWS
 
         context 'x-amz-security-token' do
 
-          context 'none set' do
-
-            it 'should raise an argument error' do
-              signer.stub(:session_token).and_return(nil)
-              lambda { request.add_authorization!(signer) }.
-                should raise_error(ArgumentError, "a security token is required")
-            end
-
-          end
-
           it 'should be the session token from the signer before the string to sign is computed' do
             request.should_receive(:string_to_sign) do
               request.headers["x-amz-security-token"].should == "TOKEN"
@@ -126,18 +116,18 @@ module AWS
 
         it 'should include any headers starting with x-amz, and capitalize them like Net::HTTP does' do
           request.headers["x-amz-foo"] = "value"
-          request.headers_to_sign.should == ["x-amz-foo"]
+          request.send(:headers_to_sign).should == ["x-amz-foo"]
         end
 
         it 'should include content-encoding and host' do
           request.headers["content-encoding"] = "value"
           request.headers["host"] = "value"
-          request.headers_to_sign.should == ["content-encoding", "host"]
+          request.send(:headers_to_sign).sort.should == ["content-encoding", "host"]
         end
 
         it 'should not include other headers' do
           request.headers["foo"] = "value"
-          request.headers_to_sign.should == []
+          request.send(:headers_to_sign).should == []
         end
 
       end
@@ -152,18 +142,18 @@ module AWS
 
         it 'should format each header as header-name:value' do
           request.headers["header-name"] = "VALUE"
-          request.canonical_headers.should == "header-name:VALUE\n"
+          request.send(:canonical_headers).should == "header-name:VALUE\n"
         end
 
         it 'should concatenate the headers in alphabetical order joined by newlines' do
           request.headers["alien"] = "v1"
           request.headers["zoo"] = "v2"
-          request.canonical_headers.should == "alien:v1\nzoo:v2\n"
+          request.send(:canonical_headers).should == "alien:v1\nzoo:v2\n"
         end
 
         it 'should strip whitespace around the name and value' do
           request.headers[" header "] = " value "
-          request.canonical_headers.should == "header:value\n"
+          request.send(:canonical_headers).should == "header:value\n"
         end
 
         it 'should use the headers returned by headers_to_sign' do
@@ -171,7 +161,7 @@ module AWS
           request.headers["foo"] = "v1"
           request.headers["bar"] = "v2"
           request.headers["baz"] = "v3"
-          request.canonical_headers.should == "bar:v2\nfoo:v1\n"
+          request.send(:canonical_headers).should == "bar:v2\nfoo:v1\n"
         end
 
       end
@@ -184,7 +174,7 @@ module AWS
           request.stub(:http_method).and_return("POST")
         end
 
-        let(:string_to_sign) { request.string_to_sign }
+        let(:string_to_sign) { request.send(:string_to_sign) }
 
         let(:lines) { string_to_sign.split("\n") }
 

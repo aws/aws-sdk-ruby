@@ -45,10 +45,9 @@ module AWS
 
       attribute :private_dns_name, :static => true
 
-      mutable_attribute :source_dest_check?, 
-        :set_as => :source_dest_check
+      mutable_attribute :source_dest_check
 
-      alias_method :source_dest_check, :source_dest_check?
+      alias_method :source_dest_check?, :source_dest_check
 
       attribute :attachment_details, :as => :attachment
 

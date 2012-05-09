@@ -23,7 +23,7 @@ module AWS
     # = Other Ways to Get Resource Details
     #
     # If you want to get a {StackResource} by its physical resource
-    # id, then you should use {CloudFormation#get_resource}.
+    # id, then you should use {CloudFormation#stack_resource}.
     #
     # You can also take a look at {Stack#resource_summaries} for
     # light-weight hashes of stack resource details.

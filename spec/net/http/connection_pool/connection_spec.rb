@@ -37,7 +37,7 @@ class Net::HTTP::ConnectionPool
 
     context '#port' do
       
-      it 'defaults to port 80' do
+      it 'defualts to port 80' do
         Connection.new(pool, 'host').port.should == 80
       end
 

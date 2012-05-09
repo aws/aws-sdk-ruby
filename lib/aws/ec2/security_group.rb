@@ -114,7 +114,7 @@ module AWS
       #   # only allow ping from a particular address
       #   security_group.allow_ping('123.123.123.123/0')
       #
-      # @param [String] ip_ranges One or more IP ranges to allow ping from.
+      # @param [String] sources One or more IP ranges to allow ping from.
       #   Defaults to 0.0.0.0/0
       #
       # @return [nil]
@@ -127,7 +127,7 @@ module AWS
       # Removes ingress rules for ICMP pings.  Defaults to 0.0.0.0/0 for 
       # the list of IP ranges to revoke.
       #
-      # @param [String] ip_ranges One or more IP ranges to allow ping from.
+      # @param [String] sources One or more IP ranges to disallow ping from.
       #   Defaults to 0.0.0.0/0
       #
       # @return [nil] 

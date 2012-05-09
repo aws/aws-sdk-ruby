@@ -50,8 +50,9 @@ When /^I ask the client to set a bucket ACL using an AccessControlList object$/ 
 end
 
 Then /^the bucket ACL should resemble the one that was set$/ do
-  doc = REXML::Document.new(@s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl.to_s)
-  doc.elements["//Grant/Grantee"].to_s.should =~ /d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df/
+  r = @s3_client.get_bucket_acl(:bucket_name => @bucket_name)
+  r[:grants].first[:grantee][:canonical_user_id].should =~
+    /d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe19069d1a5df/
 end
 
 When /^I ask the client to get the bucket ACL$/ do
@@ -63,16 +64,17 @@ Then /^the result should return something that looks like a acl from its acl met
 end
 
 Then /^the result should be an AccessControlList object containing the right data$/ do
-  @result.acl.should be_an(S3::AccessControlList)
-  @result.acl.owner.id.should == @test_config["owner_id"]
-  @result.acl.grants.size.should == 1
-  grant = @result.acl.grants.first
+  acl = S3::AccessControlList.new(@result.data)
+  acl.owner.id.should == @test_config["owner_id"]
+  acl.grants.size.should == 1
+  grant = acl.grants.first
   grant.grantee.canonical_user_id.should == @test_config["owner_id"]
   grant.permission.name.should == :full_control
 end
 
 When /^I add a grant to the bucket ACL$/ do
-  @acl = @s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl
+  resp = @s3_client.get_bucket_acl(:bucket_name => @bucket_name)
+  @acl = AWS::S3::AccessControlList.new(resp.data)
   @acl.grant(:read_acp).to(:amazon_customer_email => "aws-dr-sandbox@amazon.com")
 end
 
@@ -81,8 +83,6 @@ When /^I ask the client to set the modified bucket ACL$/ do
 end
 
 Then /^the bucket ACL should include the new grant$/ do
-  acl = @s3_client.get_bucket_acl(:bucket_name => @bucket_name).acl
-  # it would be nice to check the grantee as well, but S3
-  # canonicalizes it so we get something different than what we put in
-  acl.grants.map { |g| g.permission.name }.should include(:read_acp)
+  r = @s3_client.get_bucket_acl(:bucket_name => @bucket_name)
+  r[:grants].map{|g| g[:permission] }.should include(:read_acp)
 end

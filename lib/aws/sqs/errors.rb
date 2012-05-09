@@ -13,13 +13,9 @@
 
 module AWS
   class SQS
-
     module Errors
 
-      # @private
-      BASE_ERROR_GRAMMAR = Client::XML::BaseError
-
-      include Core::LazyErrorClasses
+      extend Core::LazyErrorClasses
 
       # @private
       def self.error_class(code)
@@ -100,7 +96,6 @@ module AWS
         attr_reader :failures
 
       end
-
     end
   end
 end

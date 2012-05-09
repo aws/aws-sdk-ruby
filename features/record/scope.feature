@@ -111,8 +111,8 @@ Feature: Scoped Finds
       where('age > ?', 20).order(:age, :desc).limit(10)
     """
     Then a select should have been performed like:
-    | PART              | VALUE         |
-    | output_list       | *             |
-    | condition         | age > '20'    |
-    | sort_instructions | `age` DESC    |
-    | limit             | 10            |
+    | PART              | VALUE                            |
+    | output_list       | *                                |
+    | condition         | age > '20' AND `age` IS NOT NULL |
+    | sort_instructions | `age` DESC                       |
+    | limit             | 10                               |

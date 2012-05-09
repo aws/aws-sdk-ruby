@@ -25,17 +25,17 @@ module AWS
 
       let(:response) { client.stub_for(:describe_auto_scaling_instances) }
 
-      let(:details) { double('instance', {
+      let(:details) {{
         :instance_id => instance.instance_id,
         :auto_scaling_group_name => 'group',
         :availability_zone => 'az-name',
         :health_status => 'Healthy',
         :launch_configuration_name => 'launch-config',
         :lifecycle_state => 'state',
-      })}
+      }}
 
       before(:each) do
-        response.stub(:auto_scaling_instances).and_return([details])
+        response.data[:auto_scaling_instances] = [details]
         client.stub(:describe_auto_scaling_instances).and_return(response)
       end
 
@@ -133,12 +133,12 @@ module AWS
         end
       
         it 'returns true when it can be described' do
-          resp.stub(:auto_scaling_instances).and_return([double('instance')])
+          resp.data[:auto_scaling_instances] = [{}] # not empty
           instance.exists?.should == true
         end
 
         it 'returns false when it does not come back from describe' do
-          resp.stub(:auto_scaling_instances).and_return([])
+          resp.data[:auto_scaling_instances] = [] # empty
           instance.exists?.should == false
         end
 
@@ -151,7 +151,7 @@ module AWS
         let(:now) { Time.now }
 
         before(:each) do
-          resp.stub(:activity).and_return(double('activity', {
+          resp.data[:activity] = {
             :activity_id => 'aid',
             :auto_scaling_group_name => 'group',
             :cause => 'cause',
@@ -162,7 +162,7 @@ module AWS
             :progress => 100,
             :status_code => 'code',
             :status_message => 'message',
-          }))
+          }
         end
 
         it 'calls #terminate_instance_in_auto_scaling_group on the client' do
@@ -202,22 +202,22 @@ module AWS
 
         let(:group) { Group.new('name', :config => config) }
 
-        let(:instance) { double('instance', {
+        let(:instance_details) {{
           :instance_id => 'id',
           #:auto_scaling_group_name => -- not provided by the resp
           :availability_zone => 'az-name',
           :health_status => 'Healthy',
           :launch_configuration_name => 'launch-config',
           :lifecycle_state => 'state',
-        })}
+        }}
 
         before(:each) do
-          resp.stub(:auto_scaling_groups).and_return([
-            double('group', {
+          resp.data[:auto_scaling_groups] = [
+            {
               :auto_scaling_group_name => group.name,
-              :instances => [instance],
-            })
-          ])
+              :instances => [instance_details],
+            }
+          ]
         end
 
         it 'can be populated from describing a group' do

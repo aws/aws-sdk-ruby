@@ -62,12 +62,12 @@ module AWS
       #     'colors' => ['red', 'blue'],  
       #     'category' => 'clearance'})
       #
-      # @overload create(item_name, attribute_hash)
-      # @param [String] item_name The name of the item as you want it stored
-      #   in SimpleDB.
-      # @param [Hash] attribute_hash A hash of attribute names and values 
-      #   you want to store in SimpleDB.
-      # @return [Item] Returns a reference to the object that was created.
+      # @overload create(item_name, attributes)
+      #   @param [String] item_name The name of the item as you want it stored
+      #     in SimpleDB.
+      #   @param [Hash] attributes A hash of attribute names and values 
+      #     you want to store in SimpleDB.
+      #   @return [Item] Returns a reference to the object that was created.
       def create item_name, *args
         item = self[item_name]
         item.attributes.replace(*args)
@@ -98,7 +98,7 @@ module AWS
       # * AWS::SimpleDB::Item objects (only the item name is populated)
       # * AWS::SimpleDB::ItemData objects (some or all attributes populated)
       #
-      # The default mode of an ItemCollection is to yield Item objects with
+      # The defualt mode of an ItemCollection is to yield Item objects with
       # no populated attributes.  
       #
       #   # only receives item names from SimpleDB
@@ -224,7 +224,7 @@ module AWS
             count += count_attribute.value.to_i
           end
 
-          break unless next_token = response.next_token
+          break unless next_token = response[:next_token]
 
         end while limit.nil? || count < limit
 
@@ -263,7 +263,7 @@ module AWS
       # with #attribute hashes, instead of {Item} objects with 
       # an item name.
       #
-      # @param *attributes [Symbol, String, or Array] The attributes to
+      # @param [Symbol, String, or Array] attributes The attributes to
       #   retrieve.  This can be:
       #  
       #   * +:all+ or '*' to request all attributes for each item
@@ -496,7 +496,7 @@ module AWS
           end
         end
 
-        response.next_token
+        response[:next_token]
         
       end
 

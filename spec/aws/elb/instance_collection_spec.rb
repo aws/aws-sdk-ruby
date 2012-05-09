@@ -48,13 +48,14 @@ module AWS
           let(:response) { client.stub_for(:describe_instance_health) }
 
           before(:each) do
-            response.stub(:instance_states).and_return([
-              double('instance-state', 
+            response.data[:instance_states] = [
+              {
                 :description => 'description',
                 :instance_id => 'i-1234',
                 :reason_code => 'reason-code',
-                :state => 'state')
-            ])
+                :state => 'state',
+              },
+            ]
           end
 
           it 'calls #describe_instance_health on the client' do
@@ -103,20 +104,21 @@ module AWS
         let(:response) { client.stub_for(:describe_instance_health) }
 
         let(:instance_states) {[
-          double('instance-state-1', 
+          {
             :description => 'desc-1',
             :instance_id => 'i-123456',
             :reason_code => 'reason-code-1',
-            :state => 'state-1'),
-          double('instance-state-2', 
+            :state => 'state-1',
+          }, {
             :description => 'desc-2',
             :instance_id => 'i-223456',
             :reason_code => 'reason-code-2',
-            :state => 'state-2'),
+            :state => 'state-2',
+          },
         ]}
 
         before(:each) do
-          response.stub(:instance_states).and_return(instance_states)
+          response.data[:instance_states] = instance_states
           client.stub(:describe_instance_health).and_return(response)
         end
 
@@ -217,16 +219,16 @@ module AWS
         before(:each) do
 
           descriptions = [
-            double('lb-description',
+            {
               :load_balancer_name => load_balancer.name,
               :instances => [
-                double('isnt-1', :instance_id => 'i-1'),
-                double('isnt-1', :instance_id => 'i-2'),
+                { :instance_id => 'i-1' },
+                { :instance_id => 'i-2' },
               ]
-            )
+            }
           ]
 
-          response.stub(:load_balancer_descriptions).and_return(descriptions)
+          response.data[:load_balancer_descriptions] = descriptions
 
           client.stub(:describe_load_balancers).and_return(response)
 

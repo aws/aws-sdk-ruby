@@ -23,10 +23,11 @@ module AWS
 
         let(:client) { config.ec2_client }
 
-        let(:group) { SecurityGroup.new("sg-123", 
-          :vpc_id => "vpc-123", :config => config) }
+        let(:security_group) { 
+          SecurityGroup.new("sg-123", :vpc_id => "vpc-123", :config => config) 
+        }
 
-        let(:collection) { described_class.new(group, :config => config) }
+        let(:collection) { described_class.new(security_group, :config => config) }
 
         it_should_behave_like "an ec2 model object", SecurityGroup.new("sg-123")
 
@@ -35,7 +36,7 @@ module AWS
         context '#initialize' do
 
           it 'should set the group' do
-            described_class.new(group).security_group.should be(group)
+            described_class.new(security_group).security_group.should be(security_group)
           end
 
         end
@@ -44,29 +45,32 @@ module AWS
 
           let(:ip_permissions) do
             [
-              # any protocol, no ports, 1 cidr ip
-              double("ip-permission-1",
+              {
                 :ip_protocol => "-1",
-                :ip_ranges => [double("ip1", :cidr_ip => "1.1.1.1/1")],
-                :groups => []
-              ),
+                :ip_ranges => [{ :cidr_ip => "1.1.1.1/1" }],
+                :groups => [],
+              },
               # tcp, plus ports and groups
-              double("ip-permission-2",
+              {
                 :ip_protocol => 'TCP',
                 :from_port => 80,
                 :to_port => 81,
                 :ip_ranges => [],
                 :groups => [
-                  double('grp1',
-                    :group_id => 'grp1-id',
-                    :user_id => 'grp1-user-id')
+                  { :group_id => 'grp1-id', :user_id => 'grp1-user-id' },
                 ]
-              ),
+              },
             ]
           end
 
           before(:each) do
-            group.stub(:ip_permissions_list_egress).and_return(ip_permissions)
+            resp = client.stub_for(:describe_security_groups)
+            resp[:security_group_index][security_group.id] = {
+              :security_group_id => security_group.id,
+              :vpc_id => security_group.vpc_id,
+              :ip_permissions_egress => ip_permissions
+            }
+            client.stub(:describe_security_groups).and_return(resp)
           end
 
           it 'yields IpPermission objects' do

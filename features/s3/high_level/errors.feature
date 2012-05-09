@@ -25,7 +25,3 @@ Feature: Modeled exceptions
     | field   | value                               |
     | code    | NoSuchBucket                        |
     | message | The specified bucket does not exist |
-    And the exception object should include the bucket name
-    And the exception object should include the following fields:
-    | request_id |
-    | host_id    |

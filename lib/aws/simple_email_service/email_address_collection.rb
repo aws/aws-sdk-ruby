@@ -30,7 +30,6 @@ module AWS
         client.verify_email_address(:email_address => email_address)
         nil
       end
-
       alias_method :create, :verify
 
       # @param [String] email_address An email address to remove from the list

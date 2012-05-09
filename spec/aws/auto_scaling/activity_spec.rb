@@ -43,9 +43,7 @@ module AWS
       }}
 
       before(:each) do
-        response.stub(:activities).and_return([
-          double('activity', details)
-        ])
+        response.data[:activities] = [details]
         client.stub(:describe_scaling_activities).and_return(response)
       end
 
@@ -96,12 +94,12 @@ module AWS
       context '#exists?' do
 
         it 'returns true if it can be described' do
-          response.stub(:activities).and_return([double('activity')])
+          response.data[:activities] = [{}] # not empty
           activity.exists?.should == true
         end
 
         it 'returns false if it can not be found' do
-          response.stub(:activities).and_return([])
+          response.data[:activities] = [] # empty
           activity.exists?.should == false
         end
 

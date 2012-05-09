@@ -16,22 +16,19 @@ require 'cgi'
 module AWS
   module Core
 
-    # @private
+    # Provides helper methods for URI escaping values and paths.
     module UriEscape
 
-      # Does URI escaping the way AWS expects it to be done.
-      #
-      # @private
-      protected
+      # @param [String] value
+      # @return [String] Returns a URI escaped string.
       def escape value
         value = value.encode("UTF-8") if value.respond_to?(:encode)
         CGI::escape(value.to_s).gsub('+', '%20').gsub('%7E', '~')
       end
 
-      # URI-escapes a path without escaping the separators
-      #
-      # @private
-      protected
+      # @param [String] value
+      # @return [String] Returns a URI-escaped path without escaping the 
+      #   separators.
       def escape_path value
         escaped = ""
         value.scan(%r{(/*)([^/]*)(/*)}) do |(leading, part, trailing)|

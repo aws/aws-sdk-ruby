@@ -27,10 +27,10 @@ module AWS
         let(:client_method) { :describe_addresses }
 
         def stub_two_members(resp)
-          resp.stub(:addresses_set).and_return([
-            double('ip1', :public_ip => '1.1.1.1', :instance_id => 'instance1'),
-            double('ip1', :public_ip => '2.2.2.2', :instance_id => nil),
-          ])
+          resp.data[:addresses_set] = [
+            { :public_ip => '1.1.1.1', :instance_id => 'instance1' },
+            { :public_ip => '2.2.2.2', :instance_id => nil },
+          ]
         end
 
         it_should_behave_like "ec2 collection array access"
@@ -40,7 +40,7 @@ module AWS
           let(:response) { client.stub_for(:allocate_address) }
 
           before(:each) do
-            response.stub(:public_ip).and_return('1.1.1.1')
+            response.data[:public_ip] = '1.1.1.1'
             client.stub(:allocate_address).and_return(response)
           end
 

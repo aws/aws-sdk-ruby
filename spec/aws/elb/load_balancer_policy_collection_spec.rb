@@ -89,16 +89,17 @@ module AWS
         let(:response) { client.stub_for(:describe_load_balancer_policies) }
 
         before(:each) do
-          response.stub(:policy_descriptions).and_return([
-            double('policy-desc-1', 
+          response.data[:policy_descriptions] = [
+            {
               :policy_name => 'abc-policy',
               :policy_type_name => 'AbcPolicyType',
-              :policy_attribute_descriptions => []),
-            double('policy-desc-2', 
+              :policy_attribute_descriptions => [],
+            }, {
               :policy_name => 'xyz-policy',
               :policy_type_name => 'XyzPolicyType',
-              :policy_attribute_descriptions => []),
-          ])
+              :policy_attribute_descriptions => [],
+            },
+          ]
           client.stub(:describe_load_balancer_policies).and_return(response)
         end
 

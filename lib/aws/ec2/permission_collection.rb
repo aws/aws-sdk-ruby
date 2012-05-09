@@ -35,8 +35,8 @@ module AWS
       def each(&block)
         resp = client.send(describe_call, describe_params)
         resp.send(inflected_permissions_attribute).each do |permission|
-          if permission.respond_to?(:user_id)
-            user_id = permission.user_id
+          if permission[:user_id]
+            user_id = permission[:user_id]
             yield(user_id)
           end
         end
@@ -57,7 +57,7 @@ module AWS
       def public?
         resp = client.send(describe_call, describe_params)
         resp.send(inflected_permissions_attribute).any? do |permission|
-          permission.respond_to?(:group) and permission.group == "all"
+          permission[:group] and permission[:group] == "all"
         end
       end
 

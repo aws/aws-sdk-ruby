@@ -45,9 +45,9 @@ module AWS
 
       # @return [Hash]
       def configuration
-        dhcp_configuration_set.inject({}) do |config,opt|
-          key = opt.key.gsub(/-/, '_').to_sym
-          values = opt.value_set.map(&:value)
+        dhcp_configuration_set.to_a.inject({}) do |config,opt|
+          key = opt[:key].gsub(/-/, '_').to_sym
+          values = opt[:value_set].map{|v| v[:value] }
           values = values.first if key == :domain_name
           values = values.first.to_i if key == :netbios_node_type
           config.merge(key => values)

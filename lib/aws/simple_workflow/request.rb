@@ -11,62 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'openssl'
-require 'time'
-
 module AWS
   class SimpleWorkflow
 
+    # @private
     class Request < Core::Http::Request
 
+      include Core::Signature::Version3
+
+      # @return [String,nil]
       attr_accessor :body
 
-      def add_authorization!(signer)
-
-        self.access_key_id = signer.access_key_id
-
-        headers["x-amz-date"] ||= (headers["date"] ||= Time.now.rfc822)
-        headers["host"] ||= host
-
-        #raise ArgumentError, "a security token is required" unless
-        #  signer.session_token
-        #headers["x-amz-security-token"] = signer.session_token
-
-        # compute the authorization
-        request_hash = OpenSSL::Digest::SHA256.digest(string_to_sign)
-        signature = signer.sign(request_hash)
-        headers["x-amzn-authorization"] =
-          "AWS3 "+
-          "AWSAccessKeyId=#{signer.access_key_id},"+
-          "Algorithm=HmacSHA256,"+
-          "SignedHeaders=#{headers_to_sign.join(';')},"+
-          "Signature=#{signature}"
-      end
-
-      def headers_to_sign
-        headers.keys.select do |header|
-            header == "host" ||
-            header =~ /^x-amz/
-        end
-      end
-
-      def canonical_headers
-        headers_to_sign.map do |name|
-          value = headers[name]
-          "#{name.downcase.strip}:#{value.strip}\n"
-        end.sort.join
-      end
-
-      def string_to_sign
-        [http_method,
-         "/",
-         "",
-         canonical_headers,
-         body].join("\n")
-      end
-
       def read_timeout
-        # these two operations have long polling 
+        # increase read timeout for long polling
         if headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
           90 
         else
@@ -75,6 +32,5 @@ module AWS
       end
 
     end
-
   end
 end

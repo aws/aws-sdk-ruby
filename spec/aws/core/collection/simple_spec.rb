@@ -237,7 +237,7 @@ module AWS
             new_collection(20).page.should be_a(PageResult)
           end
 
-          it 'defaults page size to 10' do
+          it 'defualts page size to 10' do
             collection = new_collection(20)
             collection.page.per_page.should == 10
             collection.page.to_a.should == (1..10).to_a

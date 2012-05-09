@@ -14,14 +14,25 @@
 module AWS
   class EC2
     class SecurityGroup < Resource
-      class EgressIpPermissionCollection < IpPermissionCollection
+      class EgressIpPermissionCollection
+
+        include Core::Model
+        include Enumerable
+
+        def initialize security_group, options = {}
+          @security_group = security_group
+          super
+        end
+
+        # @return [SecurityGroup]
+        attr_reader :security_group
 
         def each
           security_group.ip_permissions_list_egress.each do |p|
 
             # egress permissions don't always have ports
-            if p.respond_to?(:from_port)
-              ports = [p.from_port, p.to_port]
+            if p[:from_port]
+              ports = [p[:from_port], p[:to_port]]
             else
               ports = nil
             end
@@ -29,8 +40,8 @@ module AWS
             ip_ranges = p.ip_ranges.collect{|ip| ip.cidr_ip }
 
             groups = p.groups.collect do |group|
-              SecurityGroup.new(group.group_id,
-                :owner_id => group.user_id,
+              SecurityGroup.new(group[:group_id],
+                :owner_id => group[:user_id],
                 :vpc_id => security_group.vpc_id,
                 :config => config)
             end

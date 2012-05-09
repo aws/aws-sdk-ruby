@@ -32,6 +32,7 @@ Then /^I should get an? "([^\"]*)" (client|server) exception as follows:$/ do |t
 end
 
 Then /^the exception object should include the bucket name$/ do
+puts @exception.http_response.body
   @exception.bucket_name.should == @bucket_name
 end
 

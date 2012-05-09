@@ -147,13 +147,13 @@ module AWS
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:launch_configurations).and_return((1..n).map{|i|
-            double('launch-config', :launch_configuration_name => i.to_s)
-          })
+          response.data[:launch_configurations] = (1..n).map{|i|
+            { :launch_configuration_name => i.to_s }
+          }
         end
 
       end

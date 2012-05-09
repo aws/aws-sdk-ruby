@@ -37,8 +37,7 @@ module AWS
       let(:instance) { ip }
 
       def stub_member(resp, member)
-        resp.stub(:address_index).
-          and_return(Hash[[[member.public_ip, member]]])
+        resp.data[:address_index] = { member[:public_ip] => member }
       end
 
       context '#public_ip' do

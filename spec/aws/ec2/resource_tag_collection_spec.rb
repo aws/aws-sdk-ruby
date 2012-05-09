@@ -33,26 +33,29 @@ module AWS
       it_should_behave_like "enumerable"
 
       def stub_tags(resp, tags)
-        resp.stub(:tag_index).
-          and_return(tags.inject({}) do |hash, tag|
-                       hash["#{tag.resource_type}:#{tag.resource_id}:#{tag.key}"] = tag
-                       hash
-                     end)
-        resp.stub(:tag_set).
-          and_return(tags)
+        resp.data[:tag_index] = tags.inject({}) do |hash,tag|
+          key = []
+          key << tag[:resource_type]
+          key << tag[:resource_id]
+          key << tag[:key]
+          hash.merge(key.join(':') => tag)
+        end
+        resp.data[:tag_set] = tags
       end
 
       context '#[]' do
 
-        let(:resp) { client.new_stub_for(:describe_tags) }
+        let(:resp) { client.stub_for(:describe_tags) }
 
         before(:each) do
-          stub_tags(resp,
-                    [double("tag",
-                            :resource_type => "resource-object",
-                            :resource_id => "resource-id",
-                            :key => "foo",
-                            :value => "bar")])
+          stub_tags(resp, [
+            {
+              :resource_type => "resource-object",
+              :resource_id => "resource-id",
+              :key => "foo",
+              :value => "bar",
+            },
+          ])
           client.stub(:describe_tags).and_return(resp)
         end
 
@@ -112,15 +115,15 @@ module AWS
 
         context 'tag exists' do
 
-          let(:resp) { client.new_stub_for(:describe_tags) }
+          let(:resp) { client.stub_for(:describe_tags) }
 
           before(:each) do
-            stub_tags(resp,
-                      [double("tag",
-                              :resource_type => "resource-object",
-                              :resource_id => "resource-id",
-                              :key => "foo",
-                              :value => "bar")])
+            stub_tags(resp, [{
+              :resource_type => "resource-object",
+              :resource_id => "resource-id",
+              :key => "foo",
+              :value => "bar",
+            }])
             client.stub(:describe_tags).and_return(resp)
           end
 
@@ -370,17 +373,19 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_tags) }
 
         before(:each) do
-          stub_tags(resp,
-                    [double("tag 1",
-                            :resource_type => "resource-object",
-                            :resource_id => "resource-id",
-                            :key => "foo",
-                            :value => "bar"),
-                     double("tag 2",
-                            :resource_type => "resource-object",
-                            :resource_id => "resource-id",
-                            :key => "baz",
-                            :value => "bla")])
+          stub_tags(resp, [
+            {
+              :resource_type => "resource-object",
+              :resource_id => "resource-id",
+              :key => "foo",
+              :value => "bar",
+            }, {
+              :resource_type => "resource-object",
+              :resource_id => "resource-id",
+              :key => "baz",
+              :value => "bla",
+            },
+          ])
           client.stub(:describe_tags).and_return(resp)
         end
 

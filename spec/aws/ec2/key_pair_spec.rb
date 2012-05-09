@@ -35,8 +35,7 @@ module AWS
       let(:instance) { keypair }
 
       def stub_member(resp, member)
-        resp.stub(:key_index).
-          and_return(Hash[[[member.key_name, member]]])
+        resp.data[:key_index] = { member.key_name => member }
       end
 
       it_should_behave_like "an ec2 resource object"
@@ -56,8 +55,7 @@ module AWS
       context '#exists?' do
         let(:id_filter) { "key-name" }
         def stub_exists(resp)
-          resp.stub(:key_set).
-            and_return([double("key_pair")])
+          resp.data[:key_set] = [{}]
         end
         it_should_behave_like "ec2 resource exists method"
       end
@@ -78,20 +76,22 @@ module AWS
 
         context 'populate from create_key_pair' do
 
-          let(:response) { double("response",
-                                  :request_type => :create_key_pair,
-                                  :key_name => "gsg-keypair",
-                                  :key_fingerprint => '1234') }
-
+          let(:response) { client.stub_for(:create_key_pair) }
+          
           let(:attributes) { keypair.attributes_from_response(response) }
 
+          before(:each) do
+            response.data[:key_name] = 'gsg-keypair'
+            response.data[:key_fingerprint] = '1234'
+          end
+
           it 'should not populate if the key name does not match' do
-            response.stub(:key_name).and_return("anotherone")
+            response.data[:key_name] = 'anotherone'
             attributes.should be_nil
           end
 
           it 'should populate the key fingerprint' do
-            response.stub(:key_fingerprint).and_return("1234")
+            response.data[:key_fingerprint] = '1234'
             attributes[:fingerprint].should == "1234"
           end
 
@@ -99,19 +99,21 @@ module AWS
 
         context 'populate from import_key_pair' do
 
-          let(:response) { double("response",
-                                  :request_type => :import_key_pair,
-                                  :key_name => "gsg-keypair") }
+          let(:response) { client.stub_for(:import_key_pair) }
 
           let(:attributes) { keypair.attributes_from_response(response) }
 
+          before(:each) do
+            response.data[:key_name] = 'gsg-keypair'
+          end
+
           it 'should not populate if the key name does not match' do
-            response.stub(:key_name).and_return("anotherone")
+            response.data[:key_name] = 'anotherone'
             attributes.should be_nil
           end
 
           it 'should populate the key fingerprint' do
-            response.stub(:key_fingerprint).and_return("1234")
+            response.data[:key_fingerprint] = '1234'
             attributes[:fingerprint].should == "1234"
           end
 

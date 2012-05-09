@@ -127,7 +127,7 @@ Then /^the bucket should be in the response( on completion)?$/ do |async|
     @result.on_complete { complete = true }
     sleep 0.1 until complete
   end
-  @result.buckets.should have_at_least(1).item
+  @result.buckets.count.should >= 1
   @result.buckets.map { |b| b.name }.should include(@bucket_name)
 end
 

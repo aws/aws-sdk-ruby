@@ -42,17 +42,14 @@ module AWS
 
       context '#create' do
 
-        let(:response) { 
-          double("response",
-            :request_type => :create_virtual_mfa_device,
-            :virtual_mfa_device => double("device", 
-              :serial_number => "arn",
-              :base_32_string_seed => 'seed',
-              :qr_code_png => 'png')
-          )
-        }
+        let(:response) { client.stub_for(:create_virtual_mfa_device) }
 
         before(:each) do
+          response.data[:virtual_mfa_device] = {
+            :serial_number => "arn",
+            :base_32_string_seed => 'seed',
+            :qr_code_png => 'png',
+          }
           client.stub(:create_virtual_mfa_device).and_return(response)
         end
 
@@ -89,11 +86,9 @@ module AWS
         let(:limit_key)      { :max_items }
 
         def stub_n_members response, n
-          response.stub(:virtual_mfa_devices).and_return((1..n).collect{|i|
-            double("device-#{i}", {
-              :serial_number => "device#{i}"
-            })
-          })
+          response.data[:virtual_mfa_devices] = (1..n).collect{|i|
+            { :serial_number => "device#{i}" }
+          }
         end
 
         it_behaves_like "a collection that yields models" do

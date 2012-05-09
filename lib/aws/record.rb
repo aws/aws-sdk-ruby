@@ -40,8 +40,8 @@ module AWS
     #   p.shard #=> 'products'
     #   p.save # the product is persisted to the 'production-products' domain
     #
-    # @param [String] A prefix to append to all domains.  This is useful for
-    #   grouping domains used by one application with a single prefix.
+    # @param [String] prefix A prefix to append to all domains.  This is useful 
+    #   for grouping domains used by one application with a single prefix.
     #
     def self.domain_prefix= prefix
       @domain_prefix = prefix
@@ -66,7 +66,7 @@ module AWS
     #   p.shard #=> 'products'
     #   p.save # the product is persisted to the 'production-products' table
     #
-    # @param [String] A prefix to append to all tables.  This is
+    # @param [String] prefix A prefix to append to all tables.  This is
     #   useful for grouping tables used by one application with a
     #   single prefix.
     #

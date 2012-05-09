@@ -21,7 +21,7 @@ module AWS
     #
     # @attr_reader [String] vpc_id
     #
-    # @attr_reader [Boolean] default? Returns true if this is the default 
+    # @attr_reader [Boolean] default Returns true if this is the default 
     #   network ACL.
     #
     class NetworkACL < Resource
@@ -40,7 +40,9 @@ module AWS
     
       attribute :vpc_id, :static => true
 
-      attribute :default?, :static => true
+      attribute :default, :static => true
+
+      alias_method :default?, :default
 
       attribute :entry_set
 

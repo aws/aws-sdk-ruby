@@ -237,24 +237,7 @@ module AWS
         client_opts = {}
         client_opts[:template] = template
         apply_template(client_opts)  
-        resp = client.validate_template(client_opts)
-
-        results = {}
-        [
-          :capabilities,
-          :capabilities_reason,
-          :description,
-        ].each do |method|
-          if resp.respond_to?(method)
-            results[method] = resp.send(method)
-          end
-        end
-        
-        if resp.respond_to?(:parameters)
-          results[:parameters] = resp.parameters.collect(&:to_hash)
-        end
-
-        results
+        client.validate_template(client_opts).data
 
       rescue CloudFormation::Errors::ValidationError => e
 

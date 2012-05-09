@@ -122,11 +122,11 @@ module AWS
       #   collection that will filter the actions returned by the
       #   given criteria.
       #
-      def filter options = {}
+      def filter filters = {}
         init_opts = {}
         init_opts[:config] = config
         init_opts[:filters] = @filters
-        init_opts[:filters].merge!(filter_opts(options))
+        init_opts[:filters].merge!(filter_opts(filters))
         ScheduledActionCollection.new(init_opts)
       end
 
@@ -186,7 +186,7 @@ module AWS
           
         end
 
-        resp.next_token if resp.respond_to?(:next_token)
+        resp.data[:next_token]
 
       end
 

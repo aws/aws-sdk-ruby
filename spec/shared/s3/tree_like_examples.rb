@@ -69,7 +69,10 @@ module AWS
       context 'common prefixes' do
 
         before(:each) do
-          resp.stub(:common_prefixes).and_return(%w(one two))
+          resp.data[:common_prefixes] = [
+            { :prefix => 'one' },
+            { :prefix => 'two' },
+          ]
         end
 
         it 'should yield a new collection for each prefix' do

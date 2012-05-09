@@ -13,714 +13,902 @@
 
 ---
 :operations:
-  CreateUser:
-    :input:
-      Path:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output:
-    - User:
-      - CreateDate:
-        - :timestamp
-  GetUser:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-    :output:
-    - User:
-      - CreateDate:
-        - :timestamp
-  UpdateUser:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      NewPath:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      NewUserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-    :output: []
-  DeleteUser:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  ListUsers:
-    :input:
-      PathPrefix:
-      - :string
-      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - Users:
-      - :list: member
-      - member:
-        - CreateDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  CreateAccessKey:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-    :output:
-    - AccessKey:
-      - CreateDate:
-        - :timestamp
-  UpdateAccessKey:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      AccessKeyId:
-      - :string
-      - :pattern: !ruby/regexp /[\w]*/
-      - :required
-      Status:
-      - :string
-      - :required
-    :output: []
-  DeleteAccessKey:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      AccessKeyId:
-      - :string
-      - :pattern: !ruby/regexp /[\w]*/
-      - :required
-    :output: []
-  ListAccessKeys:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - AccessKeyMetadata:
-      - :list: member
-      - member:
-        - CreateDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  UploadSigningCertificate:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      CertificateBody:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-    :output:
-    - Certificate:
-      - UploadDate:
-        - :timestamp
-  UpdateSigningCertificate:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      CertificateId:
-      - :string
-      - :pattern: !ruby/regexp /[\w]*/
-      - :required
-      Status:
-      - :string
-      - :required
-    :output: []
-  DeleteSigningCertificate:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      CertificateId:
-      - :string
-      - :pattern: !ruby/regexp /[\w]*/
-      - :required
-    :output: []
-  ListSigningCertificates:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - Certificates:
-      - :list: member
-      - member:
-        - UploadDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  CreateGroup:
-    :input:
-      Path:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output:
-    - Group:
-      - CreateDate:
-        - :timestamp
-  GetGroup:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - Group:
-      - CreateDate:
-        - :timestamp
-    - Users:
-      - :list: member
-      - member:
-        - CreateDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  UpdateGroup:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      NewPath:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      NewGroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-    :output: []
-  RemoveUserFromGroup:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  AddUserToGroup:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  DeleteGroup:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  ListGroups:
-    :input:
-      PathPrefix:
-      - :string
-      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - Groups:
-      - :list: member
-      - member:
-        - CreateDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  ListGroupsForUser:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - Groups:
-      - :list: member
-      - member:
-        - CreateDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  PutUserPolicy:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyDocument:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-    :output: []
-  PutGroupPolicy:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyDocument:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-    :output: []
-  GetUserPolicy:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  GetGroupPolicy:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  DeleteUserPolicy:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  DeleteGroupPolicy:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      PolicyName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  ListUserPolicies:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - PolicyNames:
-      - :list: member
-    - IsTruncated:
-      - :boolean
-  ListGroupPolicies:
-    :input:
-      GroupName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - PolicyNames:
-      - :list: member
-    - IsTruncated:
-      - :boolean
-  EnableMFADevice:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      SerialNumber:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
-      - :required
-      AuthenticationCode1:
-      - :string
-      - :pattern: !ruby/regexp /[\d]*/
-      - :required
-      AuthenticationCode2:
-      - :string
-      - :pattern: !ruby/regexp /[\d]*/
-      - :required
-    :output: []
-  ResyncMFADevice:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      SerialNumber:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
-      - :required
-      AuthenticationCode1:
-      - :string
-      - :pattern: !ruby/regexp /[\d]*/
-      - :required
-      AuthenticationCode2:
-      - :string
-      - :pattern: !ruby/regexp /[\d]*/
-      - :required
-    :output: []
-  DeactivateMFADevice:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      SerialNumber:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
-      - :required
-    :output: []
-  ListMFADevices:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - MFADevices:
-      - :list: member
-      - member:
-        - EnableDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  CreateVirtualMFADevice:
-    :input:
-      Path:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      VirtualMFADeviceName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output:
-    - VirtualMFADevice:
-      - Base32StringSeed:
-        - :blob
-      - QRCodePNG:
-        - :blob
-      - User:
-        - CreateDate:
-          - :timestamp
-      - EnableDate:
-        - :timestamp
-  DeleteVirtualMFADevice:
-    :input:
-      SerialNumber:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=\/:,.@-]*/
-      - :required
-    :output: []
-  ListVirtualMFADevices:
-    :input:
-      AssignmentStatus:
-      - :string
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - VirtualMFADevices:
-      - :list: member
-      - member:
-        - Base32StringSeed:
-          - :blob
-        - QRCodePNG:
-          - :blob
-        - User:
-          - CreateDate:
-            - :timestamp
-        - EnableDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  CreateLoginProfile:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Password:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-    :output:
-    - LoginProfile:
-      - CreateDate:
-        - :timestamp
-  GetLoginProfile:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output:
-    - LoginProfile:
-      - CreateDate:
-        - :timestamp
-  UpdateLoginProfile:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      Password:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-    :output: []
-  DeleteLoginProfile:
-    :input:
-      UserName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  ChangePassword:
-    :input:
-      OldPassword:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-      NewPassword:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-    :output: []
-  UploadServerCertificate:
-    :input:
-      Path:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      ServerCertificateName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      CertificateBody:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]+/
-      - :required
-      PrivateKey:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]*/
-      - :required
-      CertificateChain:
-      - :string
-      - :pattern: !ruby/regexp /[\u0009\u000A\u000D\u0020-\u00FF]*/
-    :output:
-    - ServerCertificateMetadata:
-      - UploadDate:
-        - :timestamp
-  GetServerCertificate:
-    :input:
-      ServerCertificateName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output:
-    - ServerCertificate:
-      - ServerCertificateMetadata:
-        - UploadDate:
-          - :timestamp
-  UpdateServerCertificate:
-    :input:
-      ServerCertificateName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-      NewPath:
-      - :string
-      - :pattern: !ruby/regexp /(\u002F)|(\u002F[\u0021-\u007F]+\u002F)/
-      NewServerCertificateName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-    :output: []
-  DeleteServerCertificate:
-    :input:
-      ServerCertificateName:
-      - :string
-      - :pattern: !ruby/regexp /[\w+=,.@-]*/
-      - :required
-    :output: []
-  ListServerCertificates:
-    :input:
-      PathPrefix:
-      - :string
-      - :pattern: !ruby/regexp /\u002F[\u0021-\u007F]*/
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - ServerCertificateMetadataList:
-      - :list: member
-      - member:
-        - UploadDate:
-          - :timestamp
-    - IsTruncated:
-      - :boolean
-  GetAccountSummary:
-    :input: {}
-    :output:
-    - SummaryMap:
-      - :map:
-        - entry
-        - key
-        - value
-      - entry:
-        - value:
-          - :integer
-  CreateAccountAlias:
-    :input:
-      AccountAlias:
-      - :string
-      - :pattern: !ruby/regexp /^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$/
-      - :required
-    :output: []
-  ListAccountAliases:
-    :input:
-      Marker:
-      - :string
-      - :pattern: !ruby/regexp /[\u0020-\u00FF]*/
-      MaxItems:
-      - :integer
-    :output:
-    - AccountAliases:
-      - :list: member
-    - IsTruncated:
-      - :boolean
-  DeleteAccountAlias:
-    :input:
-      AccountAlias:
-      - :string
-      - :pattern: !ruby/regexp /^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$/
-      - :required
-    :output: []
-  UpdateAccountPasswordPolicy:
-    :input:
-      MinimumPasswordLength:
-      - :integer
-      RequireSymbols:
-      - :boolean
-      RequireNumbers:
-      - :boolean
-      RequireUppercaseCharacters:
-      - :boolean
-      RequireLowercaseCharacters:
-      - :boolean
-    :output: []
-  DeleteAccountPasswordPolicy:
-    :input: {}
-    :output: []
-  GetAccountPasswordPolicy:
-    :input: {}
-    :output:
-    - PasswordPolicy:
-      - MinimumPasswordLength:
-        - :integer
-      - RequireSymbols:
-        - :boolean
-      - RequireNumbers:
-        - :boolean
-      - RequireUppercaseCharacters:
-        - :boolean
-      - RequireLowercaseCharacters:
-        - :boolean
-:client_errors:
-  NoSuchEntity: []
-  MalformedCertificate: []
-  LimitExceeded: []
-  EntityAlreadyExists: []
-  EntityTemporarilyUnmodifiable: []
-  MalformedPolicyDocument: []
-  DeleteConflict: []
-  InvalidAuthenticationCode: []
-  InvalidCertificate: []
-  DuplicateCertificate: []
-  KeyPairMismatch: []
-  PasswordPolicyViolation: []
-  NoSuchVendor: []
-  InvalidPublicKey: []
-  DuplicatePublicKey: []
-:server_errors: {}
+- :name: AddUserToGroup
+  :method: :add_user_to_group
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AddUserToGroupResult:
+        :ignore: true
+- :name: ChangePassword
+  :method: :change_password
+  :inputs:
+    OldPassword:
+    - :string
+    - :required
+    NewPassword:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ChangePasswordResult:
+        :ignore: true
+- :name: CreateAccessKey
+  :method: :create_access_key
+  :inputs:
+    UserName:
+    - :string
+  :outputs:
+    :children:
+      CreateAccessKeyResult:
+        :ignore: true
+        :children:
+          AccessKey:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: CreateAccountAlias
+  :method: :create_account_alias
+  :inputs:
+    AccountAlias:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateAccountAliasResult:
+        :ignore: true
+- :name: CreateGroup
+  :method: :create_group
+  :inputs:
+    Path:
+    - :string
+    GroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateGroupResult:
+        :ignore: true
+        :children:
+          Group:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: CreateLoginProfile
+  :method: :create_login_profile
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    Password:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateLoginProfileResult:
+        :ignore: true
+        :children:
+          LoginProfile:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: CreateUser
+  :method: :create_user
+  :inputs:
+    Path:
+    - :string
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateUserResult:
+        :ignore: true
+        :children:
+          User:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: CreateVirtualMFADevice
+  :method: :create_virtual_mfa_device
+  :inputs:
+    Path:
+    - :string
+    VirtualMFADeviceName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateVirtualMFADeviceResult:
+        :ignore: true
+        :children:
+          VirtualMFADevice:
+            :children:
+              Base32StringSeed:
+                :type: :blob
+              QRCodePNG:
+                :type: :blob
+              User:
+                :children:
+                  CreateDate:
+                    :type: :time
+              EnableDate:
+                :type: :time
+- :name: DeactivateMFADevice
+  :method: :deactivate_mfa_device
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    SerialNumber:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeactivateMFADeviceResult:
+        :ignore: true
+- :name: DeleteAccessKey
+  :method: :delete_access_key
+  :inputs:
+    UserName:
+    - :string
+    AccessKeyId:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteAccessKeyResult:
+        :ignore: true
+- :name: DeleteAccountAlias
+  :method: :delete_account_alias
+  :inputs:
+    AccountAlias:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteAccountAliasResult:
+        :ignore: true
+- :name: DeleteAccountPasswordPolicy
+  :method: :delete_account_password_policy
+  :inputs: {}
+  :outputs:
+    :children:
+      DeleteAccountPasswordPolicyResult:
+        :ignore: true
+- :name: DeleteGroup
+  :method: :delete_group
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteGroupResult:
+        :ignore: true
+- :name: DeleteGroupPolicy
+  :method: :delete_group_policy
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteGroupPolicyResult:
+        :ignore: true
+- :name: DeleteLoginProfile
+  :method: :delete_login_profile
+  :inputs:
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteLoginProfileResult:
+        :ignore: true
+- :name: DeleteServerCertificate
+  :method: :delete_server_certificate
+  :inputs:
+    ServerCertificateName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteServerCertificateResult:
+        :ignore: true
+- :name: DeleteSigningCertificate
+  :method: :delete_signing_certificate
+  :inputs:
+    UserName:
+    - :string
+    CertificateId:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteSigningCertificateResult:
+        :ignore: true
+- :name: DeleteUser
+  :method: :delete_user
+  :inputs:
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteUserResult:
+        :ignore: true
+- :name: DeleteUserPolicy
+  :method: :delete_user_policy
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteUserPolicyResult:
+        :ignore: true
+- :name: DeleteVirtualMFADevice
+  :method: :delete_virtual_mfa_device
+  :inputs:
+    SerialNumber:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteVirtualMFADeviceResult:
+        :ignore: true
+- :name: EnableMFADevice
+  :method: :enable_mfa_device
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    SerialNumber:
+    - :string
+    - :required
+    AuthenticationCode1:
+    - :string
+    - :required
+    AuthenticationCode2:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      EnableMFADeviceResult:
+        :ignore: true
+- :name: GetAccountPasswordPolicy
+  :method: :get_account_password_policy
+  :inputs: {}
+  :outputs:
+    :children:
+      GetAccountPasswordPolicyResult:
+        :ignore: true
+        :children:
+          PasswordPolicy:
+            :children:
+              MinimumPasswordLength:
+                :type: :integer
+              RequireSymbols:
+                :type: :boolean
+              RequireNumbers:
+                :type: :boolean
+              RequireUppercaseCharacters:
+                :type: :boolean
+              RequireLowercaseCharacters:
+                :type: :boolean
+- :name: GetAccountSummary
+  :method: :get_account_summary
+  :inputs: {}
+  :outputs:
+    :children:
+      GetAccountSummaryResult:
+        :ignore: true
+        :children:
+          SummaryMap:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :summary_map
+                :map:
+                - key
+                - value
+                :children:
+                  value:
+                    :type: :integer
+- :name: GetGroup
+  :method: :get_group
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      GetGroupResult:
+        :ignore: true
+        :children:
+          Group:
+            :children:
+              CreateDate:
+                :type: :time
+          Users:
+            :ignore: true
+            :children:
+              member:
+                :rename: :users
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: GetGroupPolicy
+  :method: :get_group_policy
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetGroupPolicyResult:
+        :ignore: true
+- :name: GetLoginProfile
+  :method: :get_login_profile
+  :inputs:
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetLoginProfileResult:
+        :ignore: true
+        :children:
+          LoginProfile:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: GetServerCertificate
+  :method: :get_server_certificate
+  :inputs:
+    ServerCertificateName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetServerCertificateResult:
+        :ignore: true
+        :children:
+          ServerCertificate:
+            :children:
+              ServerCertificateMetadata:
+                :children:
+                  UploadDate:
+                    :type: :time
+- :name: GetUser
+  :method: :get_user
+  :inputs:
+    UserName:
+    - :string
+  :outputs:
+    :children:
+      GetUserResult:
+        :ignore: true
+        :children:
+          User:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: GetUserPolicy
+  :method: :get_user_policy
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetUserPolicyResult:
+        :ignore: true
+- :name: ListAccessKeys
+  :method: :list_access_keys
+  :inputs:
+    UserName:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListAccessKeysResult:
+        :ignore: true
+        :children:
+          AccessKeyMetadata:
+            :ignore: true
+            :children:
+              member:
+                :rename: :access_key_metadata
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListAccountAliases
+  :method: :list_account_aliases
+  :inputs:
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListAccountAliasesResult:
+        :ignore: true
+        :children:
+          AccountAliases:
+            :ignore: true
+            :children:
+              member:
+                :rename: :account_aliases
+                :list: true
+          IsTruncated:
+            :type: :boolean
+- :name: ListGroupPolicies
+  :method: :list_group_policies
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListGroupPoliciesResult:
+        :ignore: true
+        :children:
+          PolicyNames:
+            :ignore: true
+            :children:
+              member:
+                :rename: :policy_names
+                :list: true
+          IsTruncated:
+            :type: :boolean
+- :name: ListGroups
+  :method: :list_groups
+  :inputs:
+    PathPrefix:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListGroupsResult:
+        :ignore: true
+        :children:
+          Groups:
+            :ignore: true
+            :children:
+              member:
+                :rename: :groups
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListGroupsForUser
+  :method: :list_groups_for_user
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListGroupsForUserResult:
+        :ignore: true
+        :children:
+          Groups:
+            :ignore: true
+            :children:
+              member:
+                :rename: :groups
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListMFADevices
+  :method: :list_mfa_devices
+  :inputs:
+    UserName:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListMFADevicesResult:
+        :ignore: true
+        :children:
+          MFADevices:
+            :ignore: true
+            :children:
+              member:
+                :rename: :mfa_devices
+                :list: true
+                :children:
+                  EnableDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListServerCertificates
+  :method: :list_server_certificates
+  :inputs:
+    PathPrefix:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListServerCertificatesResult:
+        :ignore: true
+        :children:
+          ServerCertificateMetadataList:
+            :ignore: true
+            :children:
+              member:
+                :rename: :server_certificate_metadata_list
+                :list: true
+                :children:
+                  UploadDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListSigningCertificates
+  :method: :list_signing_certificates
+  :inputs:
+    UserName:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListSigningCertificatesResult:
+        :ignore: true
+        :children:
+          Certificates:
+            :ignore: true
+            :children:
+              member:
+                :rename: :certificates
+                :list: true
+                :children:
+                  UploadDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListUserPolicies
+  :method: :list_user_policies
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListUserPoliciesResult:
+        :ignore: true
+        :children:
+          PolicyNames:
+            :ignore: true
+            :children:
+              member:
+                :rename: :policy_names
+                :list: true
+          IsTruncated:
+            :type: :boolean
+- :name: ListUsers
+  :method: :list_users
+  :inputs:
+    PathPrefix:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListUsersResult:
+        :ignore: true
+        :children:
+          Users:
+            :ignore: true
+            :children:
+              member:
+                :rename: :users
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListVirtualMFADevices
+  :method: :list_virtual_mfa_devices
+  :inputs:
+    AssignmentStatus:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListVirtualMFADevicesResult:
+        :ignore: true
+        :children:
+          VirtualMFADevices:
+            :ignore: true
+            :children:
+              member:
+                :rename: :virtual_mfa_devices
+                :list: true
+                :children:
+                  Base32StringSeed:
+                    :type: :blob
+                  QRCodePNG:
+                    :type: :blob
+                  User:
+                    :children:
+                      CreateDate:
+                        :type: :time
+                  EnableDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: PutGroupPolicy
+  :method: :put_group_policy
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+    PolicyDocument:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      PutGroupPolicyResult:
+        :ignore: true
+- :name: PutUserPolicy
+  :method: :put_user_policy
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+    PolicyDocument:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      PutUserPolicyResult:
+        :ignore: true
+- :name: RemoveUserFromGroup
+  :method: :remove_user_from_group
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    UserName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RemoveUserFromGroupResult:
+        :ignore: true
+- :name: ResyncMFADevice
+  :method: :resync_mfa_device
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    SerialNumber:
+    - :string
+    - :required
+    AuthenticationCode1:
+    - :string
+    - :required
+    AuthenticationCode2:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ResyncMFADeviceResult:
+        :ignore: true
+- :name: UpdateAccessKey
+  :method: :update_access_key
+  :inputs:
+    UserName:
+    - :string
+    AccessKeyId:
+    - :string
+    - :required
+    Status:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UpdateAccessKeyResult:
+        :ignore: true
+- :name: UpdateAccountPasswordPolicy
+  :method: :update_account_password_policy
+  :inputs:
+    MinimumPasswordLength:
+    - :integer
+    RequireSymbols:
+    - :boolean
+    RequireNumbers:
+    - :boolean
+    RequireUppercaseCharacters:
+    - :boolean
+    RequireLowercaseCharacters:
+    - :boolean
+  :outputs:
+    :children:
+      UpdateAccountPasswordPolicyResult:
+        :ignore: true
+- :name: UpdateGroup
+  :method: :update_group
+  :inputs:
+    GroupName:
+    - :string
+    - :required
+    NewPath:
+    - :string
+    NewGroupName:
+    - :string
+  :outputs:
+    :children:
+      UpdateGroupResult:
+        :ignore: true
+- :name: UpdateLoginProfile
+  :method: :update_login_profile
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    Password:
+    - :string
+  :outputs:
+    :children:
+      UpdateLoginProfileResult:
+        :ignore: true
+- :name: UpdateServerCertificate
+  :method: :update_server_certificate
+  :inputs:
+    ServerCertificateName:
+    - :string
+    - :required
+    NewPath:
+    - :string
+    NewServerCertificateName:
+    - :string
+  :outputs:
+    :children:
+      UpdateServerCertificateResult:
+        :ignore: true
+- :name: UpdateSigningCertificate
+  :method: :update_signing_certificate
+  :inputs:
+    UserName:
+    - :string
+    CertificateId:
+    - :string
+    - :required
+    Status:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UpdateSigningCertificateResult:
+        :ignore: true
+- :name: UpdateUser
+  :method: :update_user
+  :inputs:
+    UserName:
+    - :string
+    - :required
+    NewPath:
+    - :string
+    NewUserName:
+    - :string
+  :outputs:
+    :children:
+      UpdateUserResult:
+        :ignore: true
+- :name: UploadServerCertificate
+  :method: :upload_server_certificate
+  :inputs:
+    Path:
+    - :string
+    ServerCertificateName:
+    - :string
+    - :required
+    CertificateBody:
+    - :string
+    - :required
+    PrivateKey:
+    - :string
+    - :required
+    CertificateChain:
+    - :string
+  :outputs:
+    :children:
+      UploadServerCertificateResult:
+        :ignore: true
+        :children:
+          ServerCertificateMetadata:
+            :children:
+              UploadDate:
+                :type: :time
+- :name: UploadSigningCertificate
+  :method: :upload_signing_certificate
+  :inputs:
+    UserName:
+    - :string
+    CertificateBody:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UploadSigningCertificateResult:
+        :ignore: true
+        :children:
+          Certificate:
+            :children:
+              UploadDate:
+                :type: :time

@@ -44,8 +44,8 @@ class DummyServer
               server.requests << request
 
                if server.should_fail?
-                 socket.shutdown
                  server.failed!
+                 socket.shutdown
                  break
                end
 
@@ -144,29 +144,3 @@ OK"
   end
 
 end
-
-# DummyServer.start(8000) do |server|
-# 
-#   h1 = Net::HTTP.new('127.0.0.1', 8000)
-#   h1.set_debug_output($stdout)
-#   h1.open_timeout = 1
-#   h1.read_timeout = 5
-#   h1.start
-# 
-#   h2 = Net::HTTP.new('127.0.0.1', 8000)
-#   h2.set_debug_output($stdout)
-#   h2.open_timeout = 1
-#   h2.read_timeout = 5
-#   h2.start
-# 
-#   h1.request(Net::HTTP::Get.new('/ping'))
-#   h2.request(Net::HTTP::Get.new('/ping'))
-#   h1.request(Net::HTTP::Get.new('/sleep/0.2'))
-#   h2.request(Net::HTTP::Get.new('/sleep/0.2'))
-#   h1.request(Net::HTTP::Get.new('/sleep/0.2'))
-#   h2.request(Net::HTTP::Get.new('/sleep/0.2'))
-# 
-#   h1.finish
-#   h2.finish
-# 
-# end

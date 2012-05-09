@@ -26,10 +26,10 @@ module AWS
         let(:client_method) { :describe_internet_gateways }
 
         def stub_two_members(resp)
-          resp.stub(:internet_gateway_set).and_return([
-            double('gateway', :internet_gateway_id => 'igw-1'),
-            double('gateway', :internet_gateway_id => 'igw-2'),
-          ])
+          resp.data[:internet_gateway_set] = [
+            { :internet_gateway_id => 'igw-1' },
+            { :internet_gateway_id => 'igw-2' },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -66,8 +66,9 @@ module AWS
           let(:response) { client.stub_for(:create_network_acl) }
 
           before(:each) do
-            response.stub_chain(:internet_gateway, :internet_gateway_id).
-              and_return('igw-123')
+            response.data[:internet_gateway] = { 
+              :internet_gateway_id => 'igw-123',
+            }
             client.stub(:create_internet_gateway).and_return(response)
           end
 

@@ -37,19 +37,21 @@ module AWS
         let(:member_class) { Subscription }
 
         def stub_two_members(resp)
-          resp.stub(:subscriptions).
-            and_return([double("sub 1",
-                               :subscription_arn => "arn1",
-                               :endpoint => "e1",
-                               :protocol => "p-1",
-                               :owner => "o1",
-                               :topic_arn => "t1"),
-                        double("sub 2",
-                               :subscription_arn => "arn2",
-                               :endpoint => "e2",
-                               :protocol => "p-2",
-                               :owner => "o2",
-                               :topic_arn => "t2")])
+          resp.data[:subscriptions] = [
+            {
+              :subscription_arn => "arn1",
+              :endpoint => "e1",
+              :protocol => "p-1",
+              :owner => "o1",
+              :topic_arn => "t1",
+            }, {
+              :subscription_arn => "arn2",
+              :endpoint => "e2",
+              :protocol => "p-2",
+              :owner => "o2",
+              :topic_arn => "t2",
+            },
+          ]
         end
 
         it_should_behave_like "paginated collection"

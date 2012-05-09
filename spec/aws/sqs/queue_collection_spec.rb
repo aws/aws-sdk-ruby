@@ -35,7 +35,7 @@ module AWS
         let(:member_class) { Queue }
 
         def stub_two_members(resp)
-          resp.stub(:queue_urls).and_return(["one", "two"])
+          resp.data[:queue_urls] = ["one", "two"]
         end
 
         context 'yielded objects' do
@@ -50,10 +50,10 @@ module AWS
 
       context '#create' do
 
-        let(:resp) { client.new_stub_for(:create_queue) }
+        let(:resp) { client.stub_for(:create_queue) }
 
         before(:each) do
-          resp.stub(:queue_url).and_return("url")
+          resp.data[:queue_url] = 'url'
           client.stub(:create_queue).and_return(resp)
         end
 
@@ -115,7 +115,7 @@ module AWS
         let(:response) { client.stub_for(:get_queue_url) }
         
         before(:each) do
-          response.stub(:queue_url).and_return('url')
+          response.data[:queue_url] = 'url'
           client.stub(:get_queue_url).and_return(response)
         end
 

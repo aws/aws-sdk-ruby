@@ -20,18 +20,18 @@ module AWS
 
         def initialize network_acl, details
           @network_acl = network_acl
-          @rule_number = details.rule_number
-          @protocol = details.protocol.to_i
-          @action = details.rule_action.to_sym
-          @egress = details.egress?
+          @rule_number = details[:rule_number]
+          @protocol = details[:protocol].to_i
+          @action = details[:rule_action].to_sym
+          @egress = details[:egress]
           @ingress = !@egress
-          @cidr_block = details.cidr_block
-          if details.respond_to?(:icmp_type_code)
-            @icmp_type = details.icmp_type_code.type
-            @icmp_code = details.icmp_type_code.code
+          @cidr_block = details[:cidr_block]
+          if type_code = details[:icmp_type_code]
+            @icmp_type = type_code[:type]
+            @icmp_code = type_code[:code]
           end
-          if details.respond_to?(:port_range)
-            @port_range = (details.port_range.from..details.port_range.to)
+          if range = details[:port_range]
+            @port_range = (range[:from]..range[:to])
           end
         end
 

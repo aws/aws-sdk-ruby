@@ -103,7 +103,7 @@ module AWS
           yield(Tag.new(tag.to_hash.merge(:config => config)))
         end
 
-        resp.next_token if resp.respond_to?(:next_token)
+        resp.data[:next_token]
 
       end
 

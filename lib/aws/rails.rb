@@ -136,8 +136,6 @@ module AWS
     #
     #   AWS.add_action_mailer_delivery_method(:ses, custom_options)
     #
-    # @param [Hash] options
-    #
     # @param [Symbol] name (:amazon_ses) The name of the delivery
     #   method.  The name used here should be the same as you set in
     #   your environment config.  If you name the delivery method
@@ -150,6 +148,7 @@ module AWS
     #   {AWS::SimpleEmailService#new} before delivering email.
     #
     # @return [nil]
+    #
     def self.add_action_mailer_delivery_method name = :amazon_ses, options = {}
 
       if ::Rails.version.to_f >= 3
@@ -167,7 +166,7 @@ module AWS
 
     end
 
-    # Configures AWS to log to the Rails default logger.
+    # Configures AWS to log to the Rails defualt logger.
     # @return [nil]
     def self.log_to_rails_logger
       AWS.config(:logger => rails_logger)

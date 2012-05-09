@@ -92,7 +92,7 @@ module AWS
       # route table associated with this subnet, that association
       # is replaced.
       #
-      # @param [RouteTable,String] route_Table A {RouteTable} object or
+      # @param [RouteTable,String] route_table A {RouteTable} object or
       #   a route table id string.
       #
       # @return [RouteTable::Association]

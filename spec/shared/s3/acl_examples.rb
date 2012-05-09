@@ -36,25 +36,22 @@ module AWS
 
     context '#acl' do
 
-      let(:acl) { S3::AccessControlList.new }
+      let(:acl) { double('acl') }
+
+      let(:resp) { client.new_stub_for(getter) }
 
       before(:each) do
-        client.stub(getter).
-          and_return(double("response",
-                            :acl => acl))
-        client.stub(setter)
+        client.stub(getter).and_return(resp)
+        S3::AccessControlList.stub(:new).and_return(acl)
       end
 
-      it "should call #{getter} on the client" do
-        client.should_receive(getter).
-          with(opts).
-          and_return(double("response",
-                            :acl => S3::AccessControlList.new))
+      it "should construct a new acl from the response data" do
+        S3::AccessControlList.should_receive(:new).with(resp.data).and_return(acl)
         model_obj.acl
       end
 
       it 'should return the acl in the client response' do
-        model_obj.acl.should be(acl)
+        model_obj.acl.should == acl
       end
 
       it 'should add a #change method' do

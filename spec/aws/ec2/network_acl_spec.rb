@@ -148,35 +148,32 @@ module AWS
 
         let(:response) { client.stub_for(:describe_network_acls) }
 
-        let(:entry_data) {
-          double('network-acl-entry',
-            :rule_number => 10,
-            :protocol => '5',
-            :rule_action => 'allow',
-            :egress? => true,
-            :cidr_block => '10.0.0.0/16',
-            :icmp_type_code => double('icmp', :type => 1, :code => 2),
-            :port_range => double('range', :from => 20, :to => 22))
-        }
+        let(:entry_data) {{
+          :rule_number => 10,
+          :protocol => '5',
+          :rule_action => 'allow',
+          :egress => true,
+          :cidr_block => '10.0.0.0/16',
+          :icmp_type_code => { :type => 1, :code => 2 },
+          :port_range => { :from => 20, :to => 22 },
+        }}
 
-        let(:association_data) {
-          double('network-acl-association',
-            :network_acl_association_id => 'assoc-id',
-            :network_acl_id => network_acl.id,
-            :subnet_id => 'subnet-id')
-        }
+        let(:association_data) {{
+          :network_acl_association_id => 'assoc-id',
+          :network_acl_id => network_acl.id,
+          :subnet_id => 'subnet-id',
+        }}
 
-        let(:acl_data) {
-          double('network-acl', 
-            :network_acl_id => 'acl-id',
-            :vpc_id => 'vpc-id',
-            :default? => true,
-            :entry_set => [entry_data],
-            :association_set => [association_data])
-        }
+        let(:acl_data) {{
+          :network_acl_id => 'acl-id',
+          :vpc_id => 'vpc-id',
+          :default => true,
+          :entry_set => [entry_data],
+          :association_set => [association_data],
+        }}
 
         before(:each) do
-          response.stub(:network_acl_set).and_return([acl_data])
+          response.data[:network_acl_set] = [acl_data]
           client.stub(:describe_network_acls).and_return(response)
         end
 
@@ -195,7 +192,7 @@ module AWS
           end
 
           it 'returns the default attribute as a boolean' do
-            acl_data.stub(:default?).and_return(false)
+            acl_data[:default] = false
             network_acl.default?.should == false
           end
 
@@ -204,7 +201,6 @@ module AWS
         context '#entries' do
 
           it 'returns an array of entries' do
-            network_acl.entries.should be_an(Array)
             network_acl.entries[0].should be_a(NetworkACL::Entry)
             network_acl.entries.size.should == 1
           end
@@ -230,7 +226,6 @@ module AWS
         context '#associations' do
           
           it 'returns an array of associations' do
-            network_acl.associations.should be_an(Array)
             network_acl.associations[0].should be_a(NetworkACL::Association)
             network_acl.associations.size.should == 1
           end

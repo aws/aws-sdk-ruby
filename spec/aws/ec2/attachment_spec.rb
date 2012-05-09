@@ -55,9 +55,9 @@ module AWS
         let(:resp) { client.new_stub_for(:detach_volume) }
 
         before(:each) do
-          resp.stub(:volume_id).and_return("vol-123")
-          resp.stub(:instance_id).and_return("i-123")
-          resp.stub(:device).and_return("/dev/sdf")
+          resp.data[:volume_id] = 'vol-123'
+          resp.data[:instance_id] = 'i-123'
+          resp.data[:device] = '/dev/sdf'
           client.stub(:detach_volume).and_return(resp)
         end
 
@@ -84,29 +84,33 @@ module AWS
 
       shared_examples_for "ec2 attachment attribute (attachment action)" do |action|
 
-        let(:response) { double("response",
-                                :request_type => action,
-                                :volume_id => "vol-123",
-                                :instance_id => "i-123",
-                                :device => "/dev/sdf") }
+        let(:response) { client.stub_for(action) }
 
+        before(:each) do
+          response.data = { 
+            :volume_id => "vol-123",
+            :instance_id => "i-123",
+            :device => "/dev/sdf"
+          }
+        end
+        
         let(:attributes) { attachment.attributes_from_response(response) }
 
         it 'should return nil if the volume ID does not match' do
           stub_value(response)
-          response.stub(:volume_id).and_return("vol-321")
+          response.data[:volume_id] = 'vol-321'
           attributes.should be_nil
         end
 
         it 'should return nil if the instance ID does not match' do
           stub_value(response)
-          response.stub(:instance_id).and_return("i-321")
+          response.data[:instance_id] = 'i-321'
           attributes.should be_nil
         end
 
         it 'should return nil if the device does not match' do
           stub_value(response)
-          response.stub(:device).and_return("/dev/sdg")
+          response.data[:device] = '/dev/sdg'
           attributes.should be_nil
         end
 
@@ -135,33 +139,36 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_volumes) }
 
         let(:response_volume) do
-          double("volume",
-                 :attachment_set =>
-                 [response_attachment,
-                  double("other volume",
-                         :volume_id => "vol-321",
-                         :instance_id => "i-123",
-                         :device => "/dev/sdf"),
-                  double("other instance",
-                         :volume_id => "vol-123",
-                         :instance_id => "i-321",
-                         :device => "/dev/sdf"),
-                  double("other device",
-                         :volume_id => "vol-123",
-                         :instance_id => "i-123",
-                         :device => "/dev/sdg")])
+          { 
+            :attachment_set => [
+              response_attachment,
+              {
+                :volume_id => "vol-321",
+                :instance_id => "i-123",
+                :device => "/dev/sdf",
+              },{
+                :volume_id => "vol-123",
+                :instance_id => "i-321",
+                :device => "/dev/sdf",
+              },{
+                :volume_id => "vol-123",
+                :instance_id => "i-123",
+                :device => "/dev/sdg",
+              }
+            ]
+          }
         end
 
         let(:response_attachment) do
-          double("this attachment",
-                 :volume_id => "vol-123",
-                 :instance_id => "i-123",
-                 :device => "/dev/sdf")
+          {
+            :volume_id => "vol-123",
+            :instance_id => "i-123",
+            :device => "/dev/sdf",
+          }
         end
 
         before(:each) do
-          resp.stub(:volume_index).
-            and_return("vol-123" => response_volume)
+          resp.data[:volume_index] = { 'vol-123' => response_volume }
           client.stub(:describe_volumes).and_return(resp)
         end
 
@@ -205,7 +212,7 @@ module AWS
 
         it_should_behave_like "ec2 attachment attribute" do
           def stub_value(response_attachment)
-            response_attachment.stub(:status).and_return("attaching")
+            response_attachment[:status] = 'attaching'
           end
           def check_value(value)
             value.should == :attaching
@@ -220,8 +227,7 @@ module AWS
 
         it_should_behave_like "ec2 attachment attribute" do
           def stub_value(response_attachment)
-            response_attachment.stub(:attach_time).
-              and_return(Time.parse("2008-05-07T12:51:50.000Z"))
+            response_attachment[:attach_time] = Time.parse("2008-05-07T12:51:50.000Z")
           end
 
           def check_value(value)
@@ -233,12 +239,11 @@ module AWS
 
       context '#delete_on_termination?' do
 
-        let(:attribute) { :delete_on_termination? }
+        let(:attribute) { :delete_on_termination }
 
         it_should_behave_like "ec2 attachment attribute" do
           def stub_value(response_attachment)
-            response_attachment.stub(:delete_on_termination?).
-              and_return(true)
+            response_attachment[:delete_on_termination] = true
           end
 
           def check_value(value)
@@ -256,7 +261,7 @@ module AWS
                                    :attachment_set => resp_attachments) }
 
         before(:each) do
-          resp.stub(:volume_index).and_return(volume_index)
+          resp.data[:volume_index] = volume_index
           client.stub(:describe_volumes).and_return(resp)
         end
 

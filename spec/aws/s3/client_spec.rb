@@ -38,9 +38,9 @@ module AWS
           :secret_access_key => "secret access key" }
       end
 
-      let(:http_handler) { double("a handler",
-                                  :handle => true,
-                                  :handle_async => true) }
+      let(:http_handler) { 
+        double("a handler", :handle => true, :handle_async => true) 
+      }
 
       let(:client) do
         Client.new(test_credentials.merge(:http_handler => http_handler))
@@ -796,8 +796,6 @@ module AWS
 
         it_should_behave_like "an s3 http request", 'GET'
 
-        it_should_behave_like "parses XML response", Client::XML::ListBuckets
-
       end
 
       context '#delete_bucket' do
@@ -885,9 +883,6 @@ module AWS
 
         it_should_behave_like "a subresource request", 'versioning'
 
-        it_should_behave_like "parses XML response", 
-          Client::XML::GetBucketVersioning
-          
       end
 
       context '#get_bucket_location' do
@@ -991,11 +986,7 @@ module AWS
 
         it_should_behave_like "a subresource request", 'policy'
 
-        it_should_behave_like 'parses response' do
-          before(:each) do
-            S3::Policy.should_receive(:from_json).with(response_body)
-          end
-        end
+        it_should_behave_like 'parses response'
 
       end
 
@@ -1010,9 +1001,6 @@ module AWS
         it_should_behave_like "requires bucket_name"
 
         it_should_behave_like "a subresource request", 'versions'
-
-        it_should_behave_like "parses XML response", 
-          Client::XML::ListObjectVersions
 
         it 'should add :delimiter as a "delimiter"' do
           should_add_param_as(:delimiter, 'delimiter')
@@ -1078,8 +1066,6 @@ module AWS
 
         it_should_behave_like "a subresource request", 'acl'
 
-        it_should_behave_like "parses XML response", Client::XML::GetBucketAcl
-
       end
 
       context '#set_object_acl' do
@@ -1120,8 +1106,6 @@ module AWS
         it_should_behave_like "an s3 http request", 'GET'
 
         it_should_behave_like "a subresource request", 'acl'
-
-        it_should_behave_like "parses XML response", Client::XML::GetObjectAcl
 
       end
 
@@ -1234,7 +1218,7 @@ module AWS
             http_handler.stub(:handle) do |req, resp|
               resp.body = body
             end
-            client.get_object(opts).data.should == "FOO DATA"
+            client.get_object(opts).data[:data].should == "FOO DATA"
           end
 
           it 'should read the response body on success' do
@@ -1248,7 +1232,7 @@ module AWS
             got_resp.body = body
             got_resp.status = 200
             got_handle.signal_success
-            r.data.should == "FOO DATA"
+            r.data[:data].should == "FOO DATA"
           end
 
         end
@@ -1381,8 +1365,6 @@ module AWS
 
         it_should_behave_like "an s3 http request", 'GET'
 
-        it_should_behave_like "parses XML response", Client::XML::ListObjects
-
         it 'should add :delimiter as a "delimiter"' do
           should_add_param_as(:delimiter, 'delimiter')
         end
@@ -1413,8 +1395,6 @@ module AWS
 
         it_should_behave_like "an s3 http request", 'POST'
 
-        it_should_behave_like "parses XML response", Client::XML::InitiateMultipartUpload
-
         it_should_behave_like "a subresource request", 'uploads'
 
         it_should_behave_like "sends metadata headers", true
@@ -1432,8 +1412,6 @@ module AWS
         it_should_behave_like "requires bucket_name"
 
         it_should_behave_like "an s3 http request", 'GET'
-
-        it_should_behave_like "parses XML response", Client::XML::ListMultipartUploads
 
         it_should_behave_like "a subresource request", 'uploads'
 
@@ -1541,8 +1519,6 @@ module AWS
         it_should_behave_like "returns version id"
 
         it_should_behave_like "returns server_side_encryption"
-
-        it_should_behave_like "parses XML response", Client::XML::CompleteMultipartUpload
 
         context 'errors in the response body' do
 
@@ -1693,8 +1669,6 @@ module AWS
         it_should_behave_like "an s3 http request", 'GET'
 
         it_should_behave_like "accepts upload_id"
-
-        it_should_behave_like "parses XML response", Client::XML::ListParts
 
         it 'sends :max_parts as max-parts' do
           should_add_param_as(:max_parts, 'max-parts')

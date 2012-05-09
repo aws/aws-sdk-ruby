@@ -105,7 +105,6 @@ module AWS
         it 'should return an object that response to response_metadata' do
           a_client = client.with_http_handler do |req, resp|
             resp.body = <<-XML.strip
-              <?xml version="1.0"?>
               <GenericResponse xmlns="http://sdb.amazonaws.com/doc/2009-04-15/">
                 <ResponseMetadata>
                   <RequestId>request-id</RequestId>
@@ -201,7 +200,7 @@ module AWS
           limit = nil
           client.with_http_handler { |req, resp|
             limit = req.get_param('MaxNumberOfDomains').value
-          }.list_domains(:limit => 10)
+          }.list_domains(:max_number_of_domains => 10)
           limit.should == "10"
         end
 
@@ -214,7 +213,6 @@ module AWS
         end
 
         let(:response_body) { <<-XML }
-          <?xml version="1.0"?>
           <ListDomainsResponse xmlns="http://sdb.amazonaws.com/doc/2009-04-15/">
             <ListDomainsResult>
               <DomainName>foo</DomainName>
@@ -230,9 +228,7 @@ module AWS
 
         let(:response) {
           body = response_body
-          client.with_http_handler { |req, resp|
-            resp.body = body
-          }.list_domains
+          client.with_http_handler{|req, resp| resp.body = body }.list_domains
         }
 
         context 'response#domain_names' do
@@ -271,7 +267,7 @@ module AWS
 
         it_should_behave_like "requires a domain name"
 
-        let(:response_body) { <<-XML }
+        let(:response_body) { <<-XML.strip }
           <?xml version="1.0"?>
           <DomainMetadataResponse xmlns="http://sdb.amazonaws.com/doc/2009-04-15/">
             <DomainMetadataResult>
@@ -321,7 +317,7 @@ module AWS
           response.attribute_values_size_bytes.should == 6
         end
 
-        it 'should expose Timestamp as an integer' do
+        it 'should expose Timestamp as an integer', :tagged => true do
           response.timestamp.should == 1234567890
         end
 

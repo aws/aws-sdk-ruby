@@ -57,7 +57,7 @@ end
 Then /^the object "([^\"]*)" should eventually have a body including the following strings:$/ do |key, table|
   sleep 1
   body = @s3_client.get_object(:bucket_name => @bucket_name,
-                            :key => key).data
+                            :key => key).data[:data]
 
   table.raw.flatten.each do |str|
     body.should include(str)

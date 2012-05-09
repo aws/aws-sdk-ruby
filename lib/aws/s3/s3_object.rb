@@ -204,17 +204,14 @@ module AWS
       #
       # @overload write(options = {})
       # @overload write(data, options = {})
-      #
-      # @param data The data to upload (see the +:data+
-      #   option).
+      #   @param data The data to upload (see the +:data+ option).
       #
       # @param options [Hash] Additional upload options.
       #
       # @option options :data The data to upload.  Valid values include:
+      #
       #   * A string
-      #
       #   * A Pathname object
-      #
       #   * Any object responding to +read+ and +eof?+; the object
       #     must support the following access methods:
       #       read                     # all at once
@@ -704,7 +701,7 @@ module AWS
       def read(options = {}, &blk)
         options[:bucket_name] = bucket.name
         options[:key] = key
-        client.get_object(options).data
+        client.get_object(options).data[:data]
       end
 
       # @private
@@ -740,13 +737,14 @@ module AWS
       # @return [AccessControlList]
       #
       def acl
-        acl = client.get_object_acl(
-          :bucket_name => bucket.name,
-          :key => key
-        ).acl
+
+        resp = client.get_object_acl(:bucket_name => bucket.name, :key => key)
+
+        acl = AccessControlList.new(resp.data)
         acl.extend ACLProxy
         acl.object = self
         acl
+
       end
 
       # Sets the object's access control list.  +acl+ can be:

@@ -469,22 +469,26 @@ module AWS
                                                 :status => 404))
         end
 
+        let(:resp) { client.stub_for(:get_bucket_policy) }
+
         before(:each) do
-          client.stub(:get_bucket_policy).
-            and_return(double("response",
-                              :policy => policy))
+          resp.data[:policy] = Policy.new.to_json
+          client.stub(:get_bucket_policy).and_return(resp)
           client.stub(:set_bucket_policy)
         end
 
         it 'should call get_bucket_policy on the client' do
           client.should_receive(:get_bucket_policy).
             with(:bucket_name => "mybucket").
-            and_return(double("response",
-                              :policy => S3::Policy.new))
+            and_return(resp)
           bucket.policy
         end
 
         it 'should return the policy' do
+          policy = double('policy')
+          Policy.should_receive(:from_json).
+            with(resp.data[:policy]).
+            and_return(policy)
           bucket.policy.should be(policy)
         end
 

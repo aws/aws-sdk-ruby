@@ -29,9 +29,9 @@ module AWS
         let(:describe_call) { :describe_vpn_connections }
         let(:taggable) { vpn_connection }
         def stub_tags(resp, tags)
-          resp.stub(:vpn_connection_set).and_return([
-            double('conn', :vpn_connection_id => 'id', :tag_set => tags)
-          ])
+          resp.data[:vpn_connection_set] = [
+            { :vpn_connection_id => 'id', :tag_set => tags },
+          ]
         end
       end
 
@@ -64,8 +64,8 @@ module AWS
         let(:response) { client.stub_for(:describe_vpn_connections) }
 
         before(:each) do
-          response.stub(:vpn_connection_set).and_return([
-            double('vpn-connection',
+          response.data[:vpn_connection_set] = [
+            {
               :vpn_connection_id => vpn_connection.id,
               :state => 'state',
               :vpn_type => 'ipsec.1',
@@ -73,14 +73,16 @@ module AWS
               :customer_gateway_id => 'cgid',
               :customer_gateway_configuration => 'xml',
               :vgw_telemetry => [
-                double('telemetry', 
+                {
                   :outside_ip_address => '1.2.3.4',
                   :status => 'status',
                   :last_status_change => now,
                   :status_message => 'status message',
-                  :accepted_route_count => 2)
-              ])
-          ])
+                  :accepted_route_count => 2,
+                },
+              ]
+            },
+          ]
         end
 
         it 'returns the state as a symbol' do

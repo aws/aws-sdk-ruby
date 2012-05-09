@@ -26,18 +26,19 @@ module AWS
         let(:client_method) { :describe_route_tables }
 
         def stub_two_members(resp)
-          resp.stub(:route_table_set).and_return([
-            double('route-table-1',
+          resp.data[:route_table_set] = [
+            {
               :route_table_id => 'rt-123',
               :vpc_id => 'vpc-id',
               :route_set => [],
-              :association_set => []),
-            double('route-table-2',
+              :association_set => [],
+            }, {
               :route_table_id => 'rt-321',
               :vpc_id => 'vpc-id',
               :route_set => [],
-              :association_set => []),
-          ])
+              :association_set => [],
+            },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"
@@ -69,16 +70,15 @@ module AWS
 
         context '#create' do
 
-          let(:route_table_details) {
-            double('route-table-details', 
-              :route_table_id => 'rt-123',
-              :vpc_id => 'vpc-id')
-          }
+          let(:details) {{
+            :route_table_id => 'rt-123',
+            :vpc_id => 'vpc-id',
+          }}
 
           let(:response) { client.stub_for(:create_route_table) }
 
           before(:each) do
-            response.stub(:route_table).and_return(route_table_details)
+            response.data[:route_table] = details
             client.stub(:create_route_table).and_return(response)
           end
 

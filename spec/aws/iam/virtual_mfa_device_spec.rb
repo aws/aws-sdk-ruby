@@ -121,22 +121,21 @@ module AWS
 
         let(:now) { DateTime.now }
 
-        let(:details) { 
-          double('device', 
-            :serial_number => device.arn,
-            :user => double('device-user', :user_name => 'johndoe'),
-            :enable_date => now)
-        }
+        let(:details) {{
+          :serial_number => device.arn,
+          :user => { :user_name => 'johndoe' },
+          :enable_date => now,
+        }}
 
         before(:each) do
-          response.stub(:virtual_mfa_devices).and_return([details])
+          response.data[:virtual_mfa_devices] = [details]
           client.stub(:list_virtual_mfa_devices).and_return(response)
         end
 
         context '#user' do
 
           it 'defaults to nil' do
-            details.stub(:user).and_return(nil)
+            details.delete(:user)
             device.user.should == nil
           end
 
@@ -164,7 +163,7 @@ module AWS
         context '#enable_date' do
 
           it 'returns nil when not present' do
-            details.stub(:enable_date).and_return(nil)
+            details.delete(:enable_date)
             device.enable_date.should == nil
           end
 
@@ -177,7 +176,7 @@ module AWS
           end
 
           it 'returns false from enabled? when missing' do
-            details.stub(:enable_date).and_return(nil)
+            details.delete(:enable_date)
             device.enabled?.should == false
           end
 

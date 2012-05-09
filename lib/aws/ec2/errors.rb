@@ -13,13 +13,19 @@
 
 module AWS
   class EC2
-
-    # @private
     module Errors
 
-      BASE_ERROR_GRAMMAR = Client::XML::BaseError
+      # @private
+      GRAMMAR = Core::XML::Grammar.customize do
+        element "Errors" do
+          ignore
+          element "Error" do
+            ignore
+          end
+        end
+      end
 
-      include Core::LazyErrorClasses
+      extend Core::LazyErrorClasses
 
     end
   end

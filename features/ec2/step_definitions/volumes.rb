@@ -41,8 +41,10 @@ Given /^I create a volume$/ do
 end
 
 When /^I create a volume from the snapshot$/ do
-  @volume = @result = @snapshot.create_volume(@ec2.availability_zones.first)
-  @created_volumes << @volume
+  eventually do
+    @volume = @result = @snapshot.create_volume(@ec2.availability_zones.first)
+    @created_volumes << @volume
+  end
 end
 
 Then /^the result should be a volume$/ do

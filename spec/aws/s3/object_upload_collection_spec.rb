@@ -40,8 +40,8 @@ module AWS
         let(:limit_param) { :max_uploads }
 
         def stub_markers(resp, value)
-          resp.stub(:next_key_marker).and_return(value+"_key")
-          resp.stub(:next_upload_id_marker).and_return(value+"_upload_id")
+          resp.data[:next_key_marker] = value + "_key"
+          resp.data[:next_upload_id_marker] = value + "_upload_id"
         end
 
         def expect_markers(client, value)
@@ -51,13 +51,10 @@ module AWS
         end
 
         def stub_members(resp, quantity)
-          resp.stub(:uploads).
-            and_return([double("upload 1",
-                               :key => "foo",
-                               :upload_id => "abc123"),
-                        double("upload 2",
-                               :key => "bar",
-                               :upload_id => "123abc")].first(quantity))
+          resp.data[:uploads] = [
+            { :key => 'foo', :upload_id => 'abc123' },
+            { :key => 'bar', :upload_id => '123abc' },
+          ].first(quantity)
         end
 
       end

@@ -57,9 +57,8 @@ module AWS
         @tags.to_a.empty?
       end
 
+      # @param [String or Symbol] key The key of the tag to check.
       # @return [Boolean] True if the resource has a tag for the given key.
-      #
-      # @param [String or Symbol] The key of the tag to check.
       def has_key?(key)
         if cached = cached_tags
           return cached.has_key?(key.to_s)
@@ -70,9 +69,8 @@ module AWS
       alias_method :include?, :has_key?
       alias_method :member?, :has_key?
 
+      # @param [String or Symbol] value The value to check.
       # @return [Boolean] True if the resource has a tag with the given value.
-      #
-      # @param [String or Symbol] The value to check.
       def has_value?(value)
         if cached = cached_tags
           return cached.values.include?(value)
@@ -82,10 +80,8 @@ module AWS
       alias_method :value?, :has_value?
 
       # Changes the value of a tag.
-      #
-      # @param [String or Symbol] The key of the tag to set.
-      #
-      # @param [String] The new value.  If this is nil, the tag will
+      # @param [String or Symbol] key The key of the tag to set.
+      # @param [String] value The new value.  If this is nil, the tag will
       #   be deleted.
       def []=(key, value)
         if value

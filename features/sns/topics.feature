@@ -93,7 +93,6 @@ Feature: Managing SNS Topics
     | TYPE   | NAME             | VALUE              |
     | param  | Action           | SetTopicAttributes |
     | param  | AttributeName    | DeliveryPolicy     |
-    | param  | AttributeValue   | {"http":{"disableSubscriptionOverrides":true,"defaultHealthyRetryPolicy":{"numRetries":3,"minDelayTarget":20,"numNoDelayRetries":0,"backoffFunction":"linear","numMaxDelayRetries":0,"numMinDelayRetries":0,"maxDelayTarget":20}}} |
     And a request should have been made like:
     | TYPE  | NAME           | VALUE              |
     | param | Action         | GetTopicAttributes |

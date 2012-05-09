@@ -50,13 +50,13 @@ module AWS
       let(:resp) { client.stub_for(:describe_stack_resources) }
 
       before(:each) do
-        resp.stub(:stack_resources).and_return([
-          double('resource', {
+        resp.data[:stack_resources] = [
+          {
             :stack_name => 'stack-name',
             :logical_resource_id => 'logical-resource-id',
             :physical_resource_id => 'physical-resource-id',
-          })
-        ])
+          }
+        ]
       end
 
       it 'accepts a stack name and a logical resource id' do
@@ -103,13 +103,13 @@ module AWS
       end
 
       it 'returns a hash with parsed template details' do
-        resp.stub(:capabilities).and_return(%w(c1 c2))
-        resp.stub(:capabilities_reason).and_return('c-reason')
-        resp.stub(:description).and_return('desc')
-        resp.stub(:parameters).and_return([
+        resp.data[:capabilities] = %w(c1 c2)
+        resp.data[:capabilities_reason] = 'c-reason'
+        resp.data[:description] = 'desc'
+        resp.data[:parameters] = [
           {:no_echo=>false, :parameter_key=>"k1", :description=>"d1" },
           {:no_echo=>false, :parameter_key=>"k2", :description=>"d2" },
-        ])
+        ]
         cloud_formation.validate_template('template').should == {
           :capabilities => %w(c1 c2),
           :capabilities_reason => 'c-reason',

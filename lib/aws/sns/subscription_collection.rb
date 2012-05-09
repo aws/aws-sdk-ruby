@@ -48,8 +48,8 @@ module AWS
             )
             yield(subscription)
           end
-          next_token = resp.next_token
-        end until resp && next_token.nil?
+          next_token = resp.data[:next_token]
+        end until next_token.nil?
         nil
       end
 

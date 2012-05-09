@@ -188,12 +188,12 @@ module AWS
       protected
 
       def _each_item options = {}
-        client.describe_stacks.stacks.each do |summary|
+        client.describe_stacks.data[:stacks].each do |summary|
 
           stack = Stack.new_from(
             :describe_stacks, 
             summary, 
-            summary.stack_name, 
+            summary[:stack_name], 
             :config => config)
 
           yield(stack)

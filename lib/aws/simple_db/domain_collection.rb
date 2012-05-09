@@ -86,14 +86,14 @@ module AWS
             [total_limit - received, batch_size].min : 
             batch_size
 
-          list_options = { :limit => limit }
+          list_options = { :max_number_of_domains => limit }
           list_options[:next_token] = next_token if next_token
           list = client.list_domains(list_options)
 
-          next_token = list.next_token
-          received += list.domain_names.length
+          next_token = list[:next_token]
+          received += list[:domain_names].size
 
-          list.domain_names.each do |name|
+          list[:domain_names].each do |name|
             yield(domain_named(name))
           end
         

@@ -26,13 +26,13 @@ When /^I call create_domain with "([^"]*)" in "([^"]*)"$/ do |domain_name, endpo
 end
 
 When /^I call list_domains with a limit of (\d+)$/ do |limit|
-  @response = @sdb_client.list_domains(:limit => limit.to_i)
+  @response = @sdb_client.list_domains(:max_number_of_domains => limit.to_i)
 end
 
 When /^I call list_domains with a limit of (\d+) and a next_token$/ do |limit|
   @prev_response = @response
   @response = @sdb_client.list_domains(
-    :limit => limit.to_i,
+    :max_number_of_domains => limit.to_i,
     :next_token => @response.next_token
   )
 end

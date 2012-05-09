@@ -41,7 +41,7 @@ module AWS
         let(:limit_param) { :max_parts }
 
         def stub_markers(resp, value)
-          resp.stub(:next_part_number_marker).and_return(value)
+          resp.data[:next_part_number_marker] = value
         end
 
         def expect_markers(client, value)
@@ -50,11 +50,10 @@ module AWS
         end
 
         def stub_members(resp, quantity)
-          resp.stub(:parts).
-            and_return([double("part 1",
-                               :part_number => 1),
-                        double("part 2",
-                               :part_number => 2)].first(quantity))
+          resp.data[:parts] = [
+            { :part_number => 1 },
+            { :part_number => 2 },
+          ].first(quantity)
         end
 
       end
@@ -71,13 +70,13 @@ module AWS
 
         let(:resp) { client.new_stub_for(:list_parts) }
 
-        let(:response_parts) { [double("part 1",
-                                       :part_number => 1),
-                                double("part 2",
-                                       :part_number => 2)] }
+        let(:response_parts) {[
+          { :part_number => 1 },
+          { :part_number => 2 },
+        ]}
 
         before(:each) do
-          resp.stub(:parts).and_return(response_parts)
+          resp.data[:parts] = response_parts
           client.stub(:list_parts).and_return(resp)
         end
 

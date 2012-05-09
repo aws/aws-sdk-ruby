@@ -21,7 +21,7 @@ module AWS
       include PutAttributes
       include DeleteAttributes
 
-      # @param [Item] The item to create an attribute collection for.
+      # @param [Item] item The item to create an attribute collection for.
       # @return [AttributeCollection]
       def initialize item, options = {}
         @item = item
@@ -201,12 +201,22 @@ module AWS
 
       # Delete one or more attributes from {#item}.
       #
-      # @example Delete a list of attributes by name
+      # @example Delete a list of attributes by name (accepts a list or array)
       #   item.attributes.delete 'size', 'color'
       #   item.attributes.delete %w(size color)
       #
-      # @param attribute_names An array or list of attribute names to delete.
-      # @return [nil]
+      # @example Delete a specific list of attribute values
+      #   item.attributes.delete(:color => 'red', :tags => %w(special limited))
+      #
+      # @overload delete(attributes)
+      #   @param [Hash] attributes A hash of attribute names and values to
+      #     delete.
+      #   @return [nil]
+      #
+      # @overload delete(*attribute_names)
+      #   @param [String] A list of attribute names to delete.
+      #   @return [nil]
+      #
       def delete *args
         if args.size == 1 and args.first.kind_of?(Hash)
           delete_attribute_values(args.first)

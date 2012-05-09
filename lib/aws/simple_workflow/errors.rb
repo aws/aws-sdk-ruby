@@ -13,45 +13,8 @@
 
 module AWS
   class SimpleWorkflow
-
-    # @private
     module Errors
-
-      module ModeledError
-
-        def initialize(request = nil, response = nil)
-          message = extract_message(response)
-          include_error_type(response) if response
-          super(request, response, message)
-        end
-
-        def extract_message(response)
-          if response and
-              response.body
-            JSON.load(response.body)["message"] || code
-          else
-            code
-          end
-        end
-
-        def include_error_type(response)
-          if response.status >= 500
-            extend Errors::ServerError
-          else
-            extend Errors::ClientError
-          end
-        end
-
-        def code
-          self.class.name =~ /(::)?([^:]+)$/
-          $2
-        end
-
-      end
-
-      include Core::LazyErrorClasses
-
+      extend Core::LazyErrorClasses
     end
-
   end
 end

@@ -30,7 +30,7 @@ module AWS
 
         each_member_in_page(response, &block)
       
-        response.truncated? ? next_markers(response) : nil
+        response.data[:truncated] ? next_markers(response) : nil
 
       end
 
@@ -62,7 +62,7 @@ module AWS
       protected
       def next_markers page
         pagination_markers.inject({}) do |markers, marker_name|
-          if marker = page.send("next_#{marker_name}")
+          if marker = page.data[:"next_#{marker_name}"]
             markers[marker_name] = marker if marker
           end
           markers

@@ -16,5 +16,6 @@ When /^I validate the following template:$/ do |template|
 end
 
 Then /^I should get a response like:$/ do |response|
+  @response.delete(:response_metadata)
   @response.should == eval(response)
 end

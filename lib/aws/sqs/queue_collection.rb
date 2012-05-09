@@ -105,7 +105,7 @@ module AWS
 
         response = client.create_queue(client_opts)
 
-        Queue.new(response.queue_url, :config => config)
+        Queue.new(response[:queue_url], :config => config)
 
       end
 
@@ -113,7 +113,7 @@ module AWS
       def each(&block)
         options = {}
         options[:queue_name_prefix] = prefix if prefix
-        client.list_queues(options).queue_urls.each do |url|
+        client.list_queues(options)[:queue_urls].each do |url|
           queue = self[url]
           yield(queue)
         end
@@ -161,7 +161,7 @@ module AWS
       def url_for queue_name, options = {}
         client_opts = {}
         client_opts[:queue_name] = queue_name
-        client.get_queue_url(client_opts.merge(options)).queue_url
+        client.get_queue_url(client_opts.merge(options))[:queue_url]
       end
 
     end

@@ -121,21 +121,31 @@ module AWS
       # @private
       public
       def attributes_from_response resp
-  
-        attributes = {}
-  
+
+        # check each provider for this request type to see if it
+        # can find the resource and some of its attributes
+        attributes = []
         self.class.attribute_providers_for(resp.request_type).each do |provider|
-          attributes.merge!(provider.attributes_from_response(self, resp))
+          attributes << provider.attributes_from_response(self, resp)
         end
+
+        # drop out those that returned no attributesj
+        attributes.compact!
+
+        # stop here if nothing was found for this resource
+        return nil if attributes.empty?
+
+        # merge the attributes together into a single hash
+        attributes = attributes.inject({}) {|hash,attribs| hash.merge(attribs) }
   
         # cache static attributes
-        attributes.each do |attr_name,value|
+        attributes.each_pair do |attr_name,value|
           if self.class.attributes[attr_name].static?
             static_attributes[attr_name] = value
           end
         end
-  
-        attributes.empty? ? nil : attributes
+
+        attributes
   
       end
   
@@ -347,15 +357,16 @@ module AWS
         # Indicates that all of the the named attributes can be retrieved
         # from an appropriate response object.
         # 
-        # @param [Symbol] attr_names A list of attributes provided
-        # @param [Hash] options
-        # @option options [Boolean] :value_wrapped (false) If true, then
-        #   the value returned by the response object will also receive
-        #   the message :value before it is translated and returned.
-        # @option options [Symbol] :get_as Defaults to the method named
-        #   by the attribute.  This is useful when you have two providers
-        #   for the same attribute but their response object name
-        #   them differently.
+        # @overload provides(*attr_names, options = {})
+        #   @param [Symbol] attr_names A list of attributes provided
+        #   @param [Hash] options
+        #   @option options [Boolean] :value_wrapped (false) If true, then
+        #     the value returned by the response object will also receive
+        #     the message :value before it is translated and returned.
+        #   @option options [Symbol] :get_as Defaults to the method named
+        #     by the attribute.  This is useful when you have two providers
+        #     for the same attribute but their response object name
+        #     them differently.
         def provides *attr_names
           options = attr_names.last.is_a?(Hash) ? attr_names.pop : {}
           attr_names.each do |attr_name|
@@ -369,32 +380,26 @@ module AWS
           if response_object = resource.send(finder_method, response)
             attributes_from_response_object(response_object)
           else
-            {}
+            nil
           end
         end
   
         def attributes_from_response_object resp_obj
-          attributes = {}
-          @provides.each do |attr_name, options|
-  
+          
+          @provides.inject({}) do |attributes,(attr_name,options)|
+
             attr = @klass.attributes[attr_name]
+
             method = options[:get_as] || attr.get_as
   
-            v = case
-            when resp_obj.respond_to?(:key?) && resp_obj.key?(method.to_s)
-              resp_obj[method.to_s]
-            when resp_obj.respond_to?(method)
-              resp_obj.send(method)
-            else
-              nil
-            end
-            v = v.value if v and options[:value_wrapped]
+            v = resp_obj.key?(method) ? resp_obj[method] : resp_obj[method.to_s]
+            v = v[:value] if v and options[:value_wrapped]
             v = attr.translate_output_value(v)
-  
-            attributes[attr_name] = v
-  
+
+            attributes.merge(attr_name => v)
+
           end
-          attributes
+  
         end
   
       end

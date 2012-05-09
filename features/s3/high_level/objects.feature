@@ -179,7 +179,7 @@ Feature: CRUD Objects (High Level)
     | AWS::S3::Errors::PreconditionFailed | PreconditionFailed |
     | AWS::Errors::ClientError            | PreconditionFailed |
 
-  @read_object
+  @read_object @wip @broken
   Scenario Outline: Read an object if it has been modified recently
     Given I ask for the object with key "foo"
     And I write the string "HELLO" to it
@@ -209,9 +209,8 @@ Feature: CRUD Objects (High Level)
     When I ask for the list of all the objects as an array
     Then the result should include the object with key "foo"
     And a request should have been made like:
-    | TYPE | NAME       | VALUE                                      |
-    | http | verb       | GET                                        |
-    | http | host_match | ruby-integration-test-\d+.s3.amazonaws.com |
+    | TYPE | NAME       | VALUE |
+    | http | verb       | GET   |
 
   @list_objects @paginate
   Scenario: List all objects while paginating

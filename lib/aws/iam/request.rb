@@ -17,7 +17,7 @@ module AWS
     # @private
     class Request < Core::Http::Request
 
-      include Core::AuthorizeV4
+      include Core::Signature::Version4
 
       def service
         'iam'

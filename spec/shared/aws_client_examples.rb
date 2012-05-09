@@ -374,7 +374,7 @@ module AWS::Core
 
     context 'endpoint' do
 
-      it 'should default the endpoint given in the client config' do
+      it 'should defualt the endpoint given in the client config' do
         stub_client = client.with_options(:s3_endpoint => 'xyz.com',
                                           :simple_db_endpoint => 'xyz.com',
                                           :ec2_endpoint => 'xyz.com',
@@ -678,22 +678,13 @@ module AWS::Core
 
         resp = client.send(method, opts.merge(:async => true))
 
-        http_resp.stub(:body).and_return response_body
+        http_resp.stub(:body).and_return(response_body)
         http_resp.status = 200
         handler_handle.signal_success
       end
 
     end
 
-  end
-
-  shared_examples_for 'parses XML response' do |response_class, *args|
-    it_should_behave_like 'parses response' do
-      before(:each) do
-        response_class.should_receive(:parse).
-          with(response_body, anything())
-      end
-    end
   end
 
 end

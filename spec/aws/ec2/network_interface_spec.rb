@@ -96,52 +96,46 @@ module AWS
 
         let(:now) { Time.now }
 
-        let(:attachment) {
-          double('attachment',
-            :attachment_id => 'attachment-id',
-            :instance_id => 'i-123',
-            :instance_owner_id => 'instance-owner-id',
-            :device_index => 0,
-            :status => 'attached',
-            :attach_time => now,
-            :delete_on_termination? => true)
-        }
+        let(:attachment) {{
+          :attachment_id => 'attachment-id',
+          :instance_id => 'i-123',
+          :instance_owner_id => 'instance-owner-id',
+          :device_index => 0,
+          :status => 'attached',
+          :attach_time => now,
+          :delete_on_termination => true,
+        }}
   
         let(:groups) {[
-          double('group-1',
-            :group_id => 'sg-123',
-            :group_name => 'sg-1-name'),
-          double('group-2',
-            :group_id => 'sg-321',
-            :group_name => 'sg-2-name'),
+          { :group_id => 'sg-123', :group_name => 'sg-1-name' },
+          { :group_id => 'sg-321', :group_name => 'sg-2-name' },
         ]}
   
-        let(:details) {
-          double('network_interface',
-            :network_interface_id => network_interface.id,
-            :vpc_id => 'vpc-12345',
-            :subnet_id => 'subnet-id',
-            :description => 'desc',
-            :owner_id => 'owner-id',
-            :status => 'pending',
-            :private_ip_address => '1.2.3.4',
-            :private_dns_name => 'private-dns-name',
-            :source_dest_check => true,
-            :attachment => attachment,
-            :groups => groups)
-        }
+        let(:details) {{
+          :network_interface_id => network_interface.id,
+          :vpc_id => 'vpc-12345',
+          :subnet_id => 'subnet-id',
+          :description => 'desc',
+          :owner_id => 'owner-id',
+          :status => 'pending',
+          :private_ip_address => '1.2.3.4',
+          :private_dns_name => 'private-dns-name',
+          :source_dest_check => true,
+          :attachment => attachment,
+          :groups => groups,
+        }}
   
         let(:response) { client.stub_for(:describe_network_interfaces) }
   
         before(:each) do
-          response.stub(:network_interface_set).and_return([details])
+          response.data[:network_interface_set] = [details]
+          response.stub(:describe_network_interfaces).and_return(response)
         end
-  
   
         context '#detach' do
   
           it 'raises an error if there is no attachment' do
-            details.stub(:attachment).and_return(nil)
+            details.delete(:attachment)
             lambda {
               network_interface.detach
             }.should raise_error(/unable to detach/)
@@ -149,14 +143,14 @@ module AWS
   
           it 'calls #detach_network_interface on the client' do
             client.should_receive(:detach_network_interface).with(
-              :attachment_id => attachment.attachment_id,
+              :attachment_id => attachment[:attachment_id],
               :force => false)
             network_interface.detach
           end
   
           it 'accepts a force option' do
             client.should_receive(:detach_network_interface).with(
-              :attachment_id => attachment.attachment_id,
+              :attachment_id => attachment[:attachment_id],
               :force => true)
             network_interface.detach :force => true
           end
@@ -165,14 +159,10 @@ module AWS
 
         context '#security_groups' do
 
-        let(:groups) {[
-          double('group-1',
-            :group_id => 'sg-123',
-            :group_name => 'sg-1-name'),
-          double('group-2',
-            :group_id => 'sg-321',
-            :group_name => 'sg-2-name'),
-        ]}
+          let(:groups) {[
+            { :group_id => 'sg-123', :group_name => 'sg-1-name' },
+            { :group_id => 'sg-321', :group_name => 'sg-2-name' },
+          ]}
 
           it 'returns security groups' do
             sg = network_interface.security_groups
@@ -224,7 +214,7 @@ module AWS
             attachment.device_index.should == 0
             attachment.status.should == :attached
             attachment.attach_time.should == now
-            attachment.delete_on_termination.should == true
+            attachment.delete_on_termination?.should == true
             attachment.instance.should be_an(Instance)
             attachment.instance_owner_id.should == 'instance-owner-id'
           end

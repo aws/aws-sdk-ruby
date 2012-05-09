@@ -111,8 +111,8 @@ module AWS
         response = client.send_message(client_opts)
 
         msg = SentMessage.new
-        msg.message_id = response.message_id
-        msg.md5 = response.md5_of_message_body
+        msg.message_id = response[:message_id]
+        msg.md5 = response[:md5_of_message_body]
         msg
 
       end
@@ -172,11 +172,11 @@ module AWS
       def receive_message(opts = {}, &block)
         resp = client.receive_message(receive_opts(opts))
 
-        messages = resp.messages.map do |m|
-          ReceivedMessage.new(self, m.message_id, m.receipt_handle,
-                              :body => m.body,
-                              :md5 => m.md5_of_body,
-                              :attributes => m.attributes)
+        messages = resp[:messages].map do |m|
+          ReceivedMessage.new(self, m[:message_id], m[:receipt_handle],
+            :body => m[:body],
+            :md5 => m[:md5_of_body],
+            :attributes => m[:attributes])
         end
 
         if block
@@ -498,10 +498,10 @@ module AWS
 
         failed = batch_failures(entries, response)
 
-        sent = response.successful.collect do |sent|
+        sent = response[:successful].collect do |sent|
           msg = SentMessage.new
-          msg.message_id = sent.message_id
-          msg.md5 = sent.md5_of_message_body
+          msg.message_id = sent[:message_id]
+          msg.md5 = sent[:md5_of_message_body]
           msg
         end
 
@@ -511,7 +511,7 @@ module AWS
         
       end
 
-      # @param [ReceivedMessage,String] message A list of up to 10 messages 
+      # @param [ReceivedMessage,String] messages A list of up to 10 messages 
       #   to delete.  Each message should be a {ReceivedMessage} object 
       #   or a received message handle (string).
       #
@@ -629,14 +629,14 @@ module AWS
 
       protected
       def batch_failures entries, response
-        response.failed.inject([]) do |failures, failure|
+        response[:failed].inject([]) do |failures, failure|
 
-          entry = entries.find{|e| e[:id] == failure.id }
+          entry = entries.find{|e| e[:id] == failure[:id] }
 
           details = {
-            :error_code => failure.code,
-            :error_message => failure.message,
-            :sender_fault => failure.sender_fault?,
+            :error_code => failure[:code],
+            :error_message => failure[:message],
+            :sender_fault => failure[:sender_fault],
           }
 
           if handle = entry[:receipt_handle]
@@ -713,11 +713,10 @@ module AWS
       # @private
       protected
       def set_attribute(name, value)
-        client.set_queue_attributes(:queue_url => url,
-                                    :attribute => {
-                                      :name => name,
-                                      :value => value
-                                    })
+        client.set_queue_attributes({
+          :queue_url => url, 
+          :attributes => { name => value },
+        })
       end
 
     end

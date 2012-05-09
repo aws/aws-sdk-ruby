@@ -64,7 +64,7 @@ module AWS
       # @overload delete_on_termination? 
       # @return [Boolean] Returns +true+ if the volume will be deleted 
       #   on instance termination.
-      attribute :delete_on_termination?
+      attribute :delete_on_termination, :boolean => true
     
       populates_from(:describe_volumes) do |resp|
         if volume = resp.volume_index[self.volume.id] and

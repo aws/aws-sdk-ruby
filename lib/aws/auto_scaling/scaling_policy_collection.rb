@@ -64,7 +64,7 @@ module AWS
           yield(scaling_policy)
           
         end
-        resp.next_token if resp.respond_to?(:next_token)
+        resp.data[:next_token]
       end
 
     end

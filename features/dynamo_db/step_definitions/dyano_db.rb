@@ -38,7 +38,7 @@ Given /^I have an empty DynamoDB table with options:$/ do |string|
   table_name = "ruby-shared-test-#{Digest::MD5.hexdigest(string)}"
 
   begin
-    @table = @dynamo_db.tables.create(table_name, eval(string))
+    @table = @dynamo_db.tables.create(table_name, 10, 10, eval(string))
     eventually do
       @table.exists?.should == true and @table.status.should == :active
     end

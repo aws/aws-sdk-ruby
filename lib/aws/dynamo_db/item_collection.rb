@@ -516,32 +516,34 @@ module AWS
       #     data.item.delete if data.attributes.size % 2 == 0
       #   end
       #
-      # @param [Array<String, Symbol>] attributes Specifies which
-      #   attributes to retrieve from the service.  By default all
-      #   attributes are retrieved.  If the last argument is a hash,
-      #   it may contain options for iterating the items in the
-      #   collection.  See the {#each} method for more information
-      #   about these options.
+      # @overload select(*attributes, options = {})
       #
-      # @param [Hash] options
+      #   @param [Array<String, Symbol>] attributes Specifies which
+      #     attributes to retrieve from the service.  By default all
+      #     attributes are retrieved.  If the last argument is a hash,
+      #     it may contain options for iterating the items in the
+      #     collection.  See the {#each} method for more information
+      #     about these options.
       #
-      # @option [Integer] :limit The maximum number of records to 
-      #   select (scan).  If more records are requested than can 
-      #   be returned in a single response, multiple requests
-      #   will be made.
+      #   @param [Hash] options
       #
-      # @yieldparam [ItemData] data The data for each item in the
-      #   collection.  The attributes of each item will be populated
-      #   in the ItemData object; however, {ItemData#item} will not be
-      #   populated unless the requested attributes include all
-      #   elements of the table's primary key.  For example, if a
-      #   table has a composite primary key, this method will only
-      #   populate {ItemData#item} if the list of requested attributes
-      #   includes both the hash key and range key attributes.
-      #
-      # @return [Enumerator, nil] If a block is given, this method
-      #   returns nil.  Otherwise, it returns an enumerator for the
-      #   values that would have been yielded to the block.
+      #   @option [Integer] :limit The maximum number of records to 
+      #     select (scan).  If more records are requested than can 
+      #     be returned in a single response, multiple requests
+      #     will be made.
+      #  
+      #   @yieldparam [ItemData] data The data for each item in the
+      #     collection.  The attributes of each item will be populated
+      #     in the ItemData object; however, {ItemData#item} will not be
+      #     populated unless the requested attributes include all
+      #     elements of the table's primary key.  For example, if a
+      #     table has a composite primary key, this method will only
+      #     populate {ItemData#item} if the list of requested attributes
+      #     includes both the hash key and range key attributes.
+      #  
+      #   @return [Enumerator, nil] If a block is given, this method
+      #     returns nil.  Otherwise, it returns an enumerator for the
+      #     values that would have been yielded to the block.
       #
       def select *attributes, &block
 
@@ -622,8 +624,7 @@ module AWS
       #   # get only the colors attribute of each item
       #   items.query(
       #     :hash_value => "abc123",
-      #     :select => :colors
-      #   )
+      #     :select => [:colors])
       #
       #   # find only the items where the range key is between two values
       #   items.query(

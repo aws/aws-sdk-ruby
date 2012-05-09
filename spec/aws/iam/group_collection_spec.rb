@@ -31,8 +31,7 @@ module AWS
         let(:resp) { client.new_stub_for(:create_group) }
 
         before(:each) do
-          resp.stub(:group).and_return(double("group",
-                                              :group_name => "MyGroup"))
+          resp.data[:group] = { :group_name => "MyGroup" }
           client.stub(:create_group).and_return(resp)
         end
 
@@ -92,16 +91,15 @@ module AWS
         let(:now)            { Time.now }
 
         def stub_n_members response, n
-          response.stub(:groups).
-            and_return((1..n).collect{|i|
-                         double("group-#{i}", {
-                                  :group_name => "group#{i}",
-                                  :group_id => "ABCXYZ#{i}",
-                                  :create_date => now,
-                                  :arn => "awn:aws:iam::12345678901#{i}:group:/path/#{i}/group#{i}",
-                                  :path => "/path/#{i}/",
-                                })
-                       })
+          response.data[:groups] = (1..n).collect{|i|
+            {
+              :group_name => "group#{i}",
+              :group_id => "ABCXYZ#{i}",
+              :create_date => now,
+              :arn => "awn:aws:iam::12345678901#{i}:group:/path/#{i}/group#{i}",
+              :path => "/path/#{i}/",
+            }
+          }
         end
 
         it_behaves_like "a collection using a path prefix"

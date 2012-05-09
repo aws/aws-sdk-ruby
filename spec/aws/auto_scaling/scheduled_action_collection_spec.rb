@@ -150,13 +150,13 @@ module AWS
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:scheduled_update_group_actions).and_return((1..n).map{|i|
-            double('action', :scheduled_action_name => i.to_s)
-          })
+          response.data[:scheduled_update_group_actions] = (1..n).map{|i|
+            { :scheduled_action_name => i.to_s }
+          }
         end
 
       end

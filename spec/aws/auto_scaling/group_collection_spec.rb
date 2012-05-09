@@ -242,13 +242,13 @@ module AWS
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
-          response.stub('next_token').and_return(token)
+          response.data[:next_token] = token
         end
 
         def stub_n_members response, n
-          response.stub(:auto_scaling_groups).and_return((1..n).map{|i|
-            double('launch-config', :auto_scaling_group_name => i.to_s)
-          })
+          response.data[:auto_scaling_groups] = (1..n).map{|i|
+            { :auto_scaling_group_name => i.to_s }
+          }
         end
 
       end

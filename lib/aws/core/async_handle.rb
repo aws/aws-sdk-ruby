@@ -16,7 +16,6 @@ module AWS
   
     # Mixin that provides a generic callback facility for asynchronous
     # tasks that can either succeed or fail.
-    # @private
     module AsyncHandle
   
       # Called to signal success and fire off the success and complete callbacks.
@@ -36,11 +35,11 @@ module AWS
       #
       # If this is called when the task has already completed
       # successfully, it will call the callback immediately.
-      def on_success(&blk)
+      def on_success(&block)
         if @_async_status == :success
-          blk.call
+          block.call
         else
-          (@_async_callbacks ||= []) << { :success => blk }
+          (@_async_callbacks ||= []) << { :success => block }
         end
       end
   
@@ -50,11 +49,11 @@ module AWS
       #
       # If this is called when the task has already failed, it will
       # call the callback immediately.
-      def on_failure(&blk)
+      def on_failure(&block)
         if @_async_status == :failure
-          blk.call
+          block.call
         else
-          (@_async_callbacks ||= []) << { :failure => blk }
+          (@_async_callbacks ||= []) << { :failure => block }
         end
       end
   
@@ -67,13 +66,13 @@ module AWS
       #
       # If this is called when the task has already completed, it will
       # call the callback immediately.
-      def on_complete(&blk)
+      def on_complete(&block)
         if !@_async_status.nil?
-          blk.call(@_async_status)
+          block.call(@_async_status)
         else
           (@_async_callbacks ||= []) << {
-            :failure => lambda { blk.call(:failure) },
-            :success => lambda { blk.call(:success) }
+            :failure => lambda { block.call(:failure) },
+            :success => lambda { block.call(:success) }
           }
         end
       end
@@ -83,7 +82,7 @@ module AWS
         @_async_status = kind
         @_async_callbacks.map do |cb|
           cb[kind]
-        end.compact.each { |blk| blk.call } if @_async_callbacks
+        end.compact.each {|block| block.call } if @_async_callbacks
       end
   
     end
