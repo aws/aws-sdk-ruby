@@ -17,6 +17,33 @@ module AWS
   class EC2
 
     # Represents a network interface in EC2.
+    #
+    # @attr [String] description
+    #
+    # @attr_reader [String] vpc_id
+    #
+    # @attr_reader [String] subnet_id
+    #
+    # @attr_reader [String] owner_id
+    #
+    # @attr_reader [Symbol] status
+    #
+    # @attr_reader [String] private_ip_address
+    #
+    # @attr_reader [String] private_dns_name
+    #
+    # @attr_reader [String] availability_zone_name
+    #
+    # @attr_reader [String] mac_address
+    #
+    # @attr_reader [Hash,nil] association Returns a hash of
+    #   details about the association between this network interface
+    #   and an elastic ip address.
+    #
+    # @attr [Boolean] source_dest_check
+    #
+    # @attr [Boolean] requester_managed
+    #
     class NetworkInterface < Resource
 
       include TaggedItem
@@ -45,9 +72,23 @@ module AWS
 
       attribute :private_dns_name, :static => true
 
+      attribute :mac_address, :static => true
+
+      attribute :availability_zone_name,
+        :as => :availability_zone, 
+        :static => true
+
       mutable_attribute :source_dest_check
 
       alias_method :source_dest_check?, :source_dest_check
+
+      attribute :requester_managed
+
+      alias_method :requester_managed?, :requester_managed
+
+      attribute :association do 
+        translates_output {|assoc| assoc.to_hash }
+      end
 
       attribute :attachment_details, :as => :attachment
 
@@ -74,6 +115,19 @@ module AWS
       #   belongs to.
       def subnet
         Subnet.new(subnet_id, :vpc_id => vpc_id, :config => config)
+      end
+
+      # @return [ElasticIp,nil]
+      def elastic_ip
+        if association = self.association
+          opts = association.merge(:config => config)
+          ElasticIp.new(association[:public_ip], opts)
+        end
+      end
+
+      # @return [AvailabilityZone]
+      def availability_zone
+        AvailabilityZone.new(availability_zone_name, :config => config)
       end
 
       # @return [Array<SecurityGroup>]
@@ -106,6 +160,7 @@ module AWS
         end
       end
 
+      # @return [Attachment,nil]
       def attachment
         if details = attachment_details
           Attachment.new(self, details)

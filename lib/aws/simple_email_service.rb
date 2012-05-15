@@ -54,25 +54,60 @@ module AWS
   #
   # This has only been tested with Rails 2.3 and Rails 3.0.
   #
-  # = Email Addresses
   #
+  # = Identities
+  #
+  # Before you can send emails, you need to verify one or more identities.
+  # Identities are email addresses or domain names that you have control over.
   # Until you have {requested production access}[http://docs.amazonwebservices.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html]
-  # you will only be able to send emails to and from verified email addresses.
-  # To verify an email address:
+  # you will only be able to send emails to and from verified email addresses 
+  # and domains.
   #
-  #   ses.email_addresses.verify('youremailaddress@domain.com')
+  # == Verifying Email Addresses
   #
-  # AWS will send an email to the given email address.  Follow the link in the
-  # email to verify the address.
+  # You can verify an email address for sending/receiving emails using
+  # the identities collection.
   #
-  # To explore the email addresses you have authorized:
+  #   identity = ses.identities.verify('email@yourdomain.com')
+  #   identity.verified? #=> false
   #
-  #   ses.email_addresses.each do |address|
-  #     puts address
-  #   end
+  # You will be sent an email address with a link.  Follow the link to
+  # verify the email address.
   #
-  # See {EmailAddressCollection} for more information on working with SES email
-  # addresses.
+  # == Verifying Domains
+  #
+  # You can also verify an entire domain for sending and receiving emails.
+  # 
+  #   identity = ses.identities.verify('yourdomain.com')
+  #   identity.verification_token
+  #   #=> "216D+lZbhUL0zOoAkC83/0TAl5lJSzLmzsOjtXM7AeM="
+  #
+  # You will be expected to update the DNS records for your domain with
+  # the given verification token.  See the service documentation for
+  # more details.
+  #
+  # == Listing Identities
+  # 
+  # You can enumerate all identies:
+  #
+  #   ses.identites.map(&:identity)
+  #   #=> ['email@foo.com', 'somedomain.com']
+  #
+  # You can filter the types of identities enumerated:
+  #
+  #   domains = ses.identities.domains.map(&:identity)
+  #   email_addresses = ses.identities.email_addresses.map(&:identity)
+  #
+  # You can get the verfication status and token from identities as well.
+  #
+  #   # for an email address
+  #   identity = ses.identities['youremail@yourdomain.com']
+  #   identity.verified? #=> true/false
+  #
+  #   # for a domain
+  #   identity = ses.identities['yourdomain.com']
+  #   identity.verified? #=> true/false
+  #   identity.verification_token #=> '...'
   #
   # = Sending Email
   #
@@ -139,16 +174,24 @@ module AWS
       autoload :Client,                 'client'
       autoload :Errors,                 'errors'
       autoload :EmailAddressCollection, 'email_address_collection'
+      autoload :Identity,               'identity'
+      autoload :IdentityCollection,     'identity_collection'
       autoload :Quotas,                 'quotas'
       autoload :Request,                'request'
     end
 
     include Core::ServiceInterface
 
+    # @note This method is deprecated.  Use {#identities} instead.
     # @return [EmailAddressCollection] Returns a collection that represents
     #   all of the verified email addresses for your account.
     def email_addresses
       EmailAddressCollection.new(:config => config)
+    end
+
+    # @return [IdentityCollection]
+    def identities
+      IdentityCollection.new(:config => config)
     end
 
     # Sends an email.  

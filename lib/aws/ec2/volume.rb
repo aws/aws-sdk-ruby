@@ -47,6 +47,7 @@ module AWS
     #
     # @attr_reader [Time] create_time The time at which the volume
     #   was created.
+    #
     class Volume < Resource
 
       include TaggedItem

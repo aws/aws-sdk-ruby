@@ -43,18 +43,19 @@ module AWS
       # === Options:
       #
       # * +:name+ - *required* - (String) The name of the federated user
-      #   associated with the session.
-      # * +:policy+ - (String) A policy specifying the permissions associated
-      #   with the session. The caller can delegate their own permissions by
-      #   specifying a policy for the session, and both policies will be
-      #   checked when a service call is made. In other words, permissions of
-      #   the session credentials are the intersection of the policy specified
-      #   in the API and the policies associated with the user who issued the
-      #   session.
+      #   associated with the credentials. For information about limitations on
+      #   user names, go to Limitations on IAM Entities in Using AWS Identity
+      #   and Access Management.
+      # * +:policy+ - (String) A policy specifying the permissions to associate
+      #   with the credentials. The caller can delegate their own permissions
+      #   by specifying a policy, and both policies will be checked when a
+      #   service call is made. For more information about how permissions work
+      #   in the context of temporary credentials, see Controlling Permissions
+      #   in Temporary Credentials in Using AWS Identity and Access Management.
       # * +:duration_seconds+ - (Integer) The duration, in seconds, that the
       #   session should last. Acceptable durations for federation sessions
-      #   range from 3600s (1 hour) to 129600s (36 hours), with 43200 as the
-      #   default.
+      #   range from 3600s (one hour) to 129600s (36 hours), with 43200s (12
+      #   hours) as the default.
       #
       # === Response Structure:
       #
@@ -78,10 +79,12 @@ module AWS
       # === Options:
       #
       # * +:duration_seconds+ - (Integer) The duration, in seconds, that the
-      #   session should last. Acceptable durations for IAM user sessions range
-      #   from 3600s (1 hour) to 129600s (36 hours), with 43200 as the default.
-      #   Sessions started for AWS Account owners are restricted to a maximum
-      #   3600s.
+      #   credentials should remain valid. Acceptable durations for IAM user
+      #   sessions range from 3600s (one hour) to 129600s (36 hours), with
+      #   43200s (12 hours) as the default. Sessions for AWS account owners are
+      #   restricted to a maximum of 3600s (one hour).
+      # * +:serial_number+ - (String)
+      # * +:token_code+ - (String)
       #
       # === Response Structure:
       #

@@ -13,6 +13,19 @@
 
 ---
 :operations:
+- :name: AddRoleToInstanceProfile
+  :method: :add_role_to_instance_profile
+  :inputs:
+    InstanceProfileName:
+    - :string
+    - :required
+    RoleName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AddRoleToInstanceProfileResult:
+        :ignore: true
 - :name: AddUserToGroup
   :method: :add_user_to_group
   :inputs:
@@ -80,6 +93,32 @@
             :children:
               CreateDate:
                 :type: :time
+- :name: CreateInstanceProfile
+  :method: :create_instance_profile
+  :inputs:
+    InstanceProfileName:
+    - :string
+    - :required
+    Path:
+    - :string
+  :outputs:
+    :children:
+      CreateInstanceProfileResult:
+        :ignore: true
+        :children:
+          InstanceProfile:
+            :children:
+              CreateDate:
+                :type: :time
+              Roles:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :roles
+                    :list: true
+                    :children:
+                      CreateDate:
+                        :type: :time
 - :name: CreateLoginProfile
   :method: :create_login_profile
   :inputs:
@@ -95,6 +134,26 @@
         :ignore: true
         :children:
           LoginProfile:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: CreateRole
+  :method: :create_role
+  :inputs:
+    Path:
+    - :string
+    RoleName:
+    - :string
+    - :required
+    AssumeRolePolicyDocument:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateRoleResult:
+        :ignore: true
+        :children:
+          Role:
             :children:
               CreateDate:
                 :type: :time
@@ -205,6 +264,16 @@
     :children:
       DeleteGroupPolicyResult:
         :ignore: true
+- :name: DeleteInstanceProfile
+  :method: :delete_instance_profile
+  :inputs:
+    InstanceProfileName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteInstanceProfileResult:
+        :ignore: true
 - :name: DeleteLoginProfile
   :method: :delete_login_profile
   :inputs:
@@ -214,6 +283,29 @@
   :outputs:
     :children:
       DeleteLoginProfileResult:
+        :ignore: true
+- :name: DeleteRole
+  :method: :delete_role
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteRoleResult:
+        :ignore: true
+- :name: DeleteRolePolicy
+  :method: :delete_role_policy
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteRolePolicyResult:
         :ignore: true
 - :name: DeleteServerCertificate
   :method: :delete_server_certificate
@@ -309,6 +401,8 @@
                 :type: :boolean
               RequireLowercaseCharacters:
                 :type: :boolean
+              AllowUsersToChangePassword:
+                :type: :boolean
 - :name: GetAccountSummary
   :method: :get_account_summary
   :inputs: {}
@@ -371,6 +465,30 @@
     :children:
       GetGroupPolicyResult:
         :ignore: true
+- :name: GetInstanceProfile
+  :method: :get_instance_profile
+  :inputs:
+    InstanceProfileName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetInstanceProfileResult:
+        :ignore: true
+        :children:
+          InstanceProfile:
+            :children:
+              CreateDate:
+                :type: :time
+              Roles:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :roles
+                    :list: true
+                    :children:
+                      CreateDate:
+                        :type: :time
 - :name: GetLoginProfile
   :method: :get_login_profile
   :inputs:
@@ -386,6 +504,34 @@
             :children:
               CreateDate:
                 :type: :time
+- :name: GetRole
+  :method: :get_role
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetRoleResult:
+        :ignore: true
+        :children:
+          Role:
+            :children:
+              CreateDate:
+                :type: :time
+- :name: GetRolePolicy
+  :method: :get_role_policy
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetRolePolicyResult:
+        :ignore: true
 - :name: GetServerCertificate
   :method: :get_server_certificate
   :inputs:
@@ -549,6 +695,75 @@
                     :type: :time
           IsTruncated:
             :type: :boolean
+- :name: ListInstanceProfiles
+  :method: :list_instance_profiles
+  :inputs:
+    PathPrefix:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListInstanceProfilesResult:
+        :ignore: true
+        :children:
+          InstanceProfiles:
+            :ignore: true
+            :children:
+              member:
+                :rename: :instance_profiles
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+                  Roles:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :roles
+                        :list: true
+                        :children:
+                          CreateDate:
+                            :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListInstanceProfilesForRole
+  :method: :list_instance_profiles_for_role
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListInstanceProfilesForRoleResult:
+        :ignore: true
+        :children:
+          InstanceProfiles:
+            :ignore: true
+            :children:
+              member:
+                :rename: :instance_profiles
+                :list: true
+                :children:
+                  CreateDate:
+                    :type: :time
+                  Roles:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :roles
+                        :list: true
+                        :children:
+                          CreateDate:
+                            :type: :time
+          IsTruncated:
+            :type: :boolean
 - :name: ListMFADevices
   :method: :list_mfa_devices
   :inputs:
@@ -571,6 +786,54 @@
                 :list: true
                 :children:
                   EnableDate:
+                    :type: :time
+          IsTruncated:
+            :type: :boolean
+- :name: ListRolePolicies
+  :method: :list_role_policies
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListRolePoliciesResult:
+        :ignore: true
+        :children:
+          PolicyNames:
+            :ignore: true
+            :children:
+              member:
+                :rename: :policy_names
+                :list: true
+          IsTruncated:
+            :type: :boolean
+- :name: ListRoles
+  :method: :list_roles
+  :inputs:
+    PathPrefix:
+    - :string
+    Marker:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListRolesResult:
+        :ignore: true
+        :children:
+          Roles:
+            :ignore: true
+            :children:
+              member:
+                :rename: :roles
+                :list: true
+                :children:
+                  CreateDate:
                     :type: :time
           IsTruncated:
             :type: :boolean
@@ -721,6 +984,22 @@
     :children:
       PutGroupPolicyResult:
         :ignore: true
+- :name: PutRolePolicy
+  :method: :put_role_policy
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    PolicyName:
+    - :string
+    - :required
+    PolicyDocument:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      PutRolePolicyResult:
+        :ignore: true
 - :name: PutUserPolicy
   :method: :put_user_policy
   :inputs:
@@ -736,6 +1015,19 @@
   :outputs:
     :children:
       PutUserPolicyResult:
+        :ignore: true
+- :name: RemoveRoleFromInstanceProfile
+  :method: :remove_role_from_instance_profile
+  :inputs:
+    InstanceProfileName:
+    - :string
+    - :required
+    RoleName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RemoveRoleFromInstanceProfileResult:
         :ignore: true
 - :name: RemoveUserFromGroup
   :method: :remove_user_from_group
@@ -797,9 +1089,24 @@
     - :boolean
     RequireLowercaseCharacters:
     - :boolean
+    AllowUsersToChangePassword:
+    - :boolean
   :outputs:
     :children:
       UpdateAccountPasswordPolicyResult:
+        :ignore: true
+- :name: UpdateAssumeRolePolicy
+  :method: :update_assume_role_policy
+  :inputs:
+    RoleName:
+    - :string
+    - :required
+    PolicyDocument:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UpdateAssumeRolePolicyResult:
         :ignore: true
 - :name: UpdateGroup
   :method: :update_group

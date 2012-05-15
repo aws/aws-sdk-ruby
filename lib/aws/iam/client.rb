@@ -23,16 +23,39 @@ module AWS
 
       # @private
       CACHEABLE_REQUESTS = Set[
+        :get_group,
+        :get_group_policy,
+        :get_instance_profile,
+        :get_role_policy,
         :list_groups,
         :list_group_policies,
         :list_groups_for_user,
+        :list_instance_profiles,
+        :list_instance_profiles_for_role,
+        :list_role_policies,
+        :list_roles,
         :list_server_certificates,
         :list_virtual_mfa_devices,
-        :get_group,
-        :get_group_policy
       ]
 
       ## client methods ##
+
+      # Calls the AddRoleToInstanceProfile API operation.
+      # @method add_role_to_instance_profile(options = {})
+      #
+      # === Options:
+      #
+      # * +:instance_profile_name+ - *required* - (String) Name of the instance
+      #   profile to update.
+      # * +:role_name+ - *required* - (String) Name of the role to add.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :add_role_to_instance_profile, 'AddRoleToInstanceProfile'
 
       # Calls the AddUserToGroup API operation.
       # @method add_user_to_group(options = {})
@@ -128,6 +151,38 @@ module AWS
       #
       define_client_method :create_group, 'CreateGroup'
 
+      # Calls the CreateInstanceProfile API operation.
+      # @method create_instance_profile(options = {})
+      #
+      # === Options:
+      #
+      # * +:instance_profile_name+ - *required* - (String) Name of the instance
+      #   profile to create.
+      # * +:path+ - (String) The path to the instance profile. For more
+      #   information about paths, see Identifiers for IAM Entities in Using
+      #   AWS Identity and Access Management. This parameter is optional. If it
+      #   is not included, it defaults to a slash (/).
+      #
+      # === Response Structure:
+      #
+      # * +:instance_profile+ - (Hash)
+      #   * +:path+ - (String)
+      #   * +:instance_profile_name+ - (String)
+      #   * +:instance_profile_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:roles+ - (Array<Hash>)
+      #     * +:path+ - (String)
+      #     * +:role_name+ - (String)
+      #     * +:role_id+ - (String)
+      #     * +:arn+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:assume_role_policy_document+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :create_instance_profile, 'CreateInstanceProfile'
+
       # Calls the CreateLoginProfile API operation.
       # @method create_login_profile(options = {})
       #
@@ -147,6 +202,33 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :create_login_profile, 'CreateLoginProfile'
+
+      # Calls the CreateRole API operation.
+      # @method create_role(options = {})
+      #
+      # === Options:
+      #
+      # * +:path+ - (String) The path to the role. For more information about
+      #   paths, see Identifiers for IAM Entities in Using AWS Identity and
+      #   Access Management. This parameter is optional. If it is not included,
+      #   it defaults to a slash (/).
+      # * +:role_name+ - *required* - (String) Name of the role to create.
+      # * +:assume_role_policy_document+ - *required* - (String) The policy
+      #   govering by who and under what conditions the role can be assumed.
+      #
+      # === Response Structure:
+      #
+      # * +:role+ - (Hash)
+      #   * +:path+ - (String)
+      #   * +:role_name+ - (String)
+      #   * +:role_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:assume_role_policy_document+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :create_role, 'CreateRole'
 
       # Calls the CreateUser API operation.
       # @method create_user(options = {})
@@ -304,6 +386,22 @@ module AWS
       #
       define_client_method :delete_group_policy, 'DeleteGroupPolicy'
 
+      # Calls the DeleteInstanceProfile API operation.
+      # @method delete_instance_profile(options = {})
+      #
+      # === Options:
+      #
+      # * +:instance_profile_name+ - *required* - (String) Name of the instance
+      #   profile to delete.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :delete_instance_profile, 'DeleteInstanceProfile'
+
       # Calls the DeleteLoginProfile API operation.
       # @method delete_login_profile(options = {})
       #
@@ -319,6 +417,39 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :delete_login_profile, 'DeleteLoginProfile'
+
+      # Calls the DeleteRole API operation.
+      # @method delete_role(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role to delete.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :delete_role, 'DeleteRole'
+
+      # Calls the DeleteRolePolicy API operation.
+      # @method delete_role_policy(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role the policy is
+      #   associated with.
+      # * +:policy_name+ - *required* - (String) Name of the policy document to
+      #   delete.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :delete_role_policy, 'DeleteRolePolicy'
 
       # Calls the DeleteServerCertificate API operation.
       # @method delete_server_certificate(options = {})
@@ -442,6 +573,7 @@ module AWS
       #   * +:require_numbers+ - (Boolean)
       #   * +:require_uppercase_characters+ - (Boolean)
       #   * +:require_lowercase_characters+ - (Boolean)
+      #   * +:allow_users_to_change_password+ - (Boolean)
       #
       # @return [Core::Response]
       #
@@ -518,13 +650,41 @@ module AWS
       #
       define_client_method :get_group_policy, 'GetGroupPolicy'
 
+      # Calls the GetInstanceProfile API operation.
+      # @method get_instance_profile(options = {})
+      #
+      # === Options:
+      #
+      # * +:instance_profile_name+ - *required* - (String) Name of the instance
+      #   profile to get information about.
+      #
+      # === Response Structure:
+      #
+      # * +:instance_profile+ - (Hash)
+      #   * +:path+ - (String)
+      #   * +:instance_profile_name+ - (String)
+      #   * +:instance_profile_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:roles+ - (Array<Hash>)
+      #     * +:path+ - (String)
+      #     * +:role_name+ - (String)
+      #     * +:role_id+ - (String)
+      #     * +:arn+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:assume_role_policy_document+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :get_instance_profile, 'GetInstanceProfile'
+
       # Calls the GetLoginProfile API operation.
       # @method get_login_profile(options = {})
       #
       # === Options:
       #
-      # * +:user_name+ - *required* - (String) Name of the user whose password
-      #   you want to retrieve.
+      # * +:user_name+ - *required* - (String) Name of the user whose login
+      #   profile you want to retrieve.
       #
       # === Response Structure:
       #
@@ -535,6 +695,48 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :get_login_profile, 'GetLoginProfile'
+
+      # Calls the GetRole API operation.
+      # @method get_role(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role to get
+      #   information about.
+      #
+      # === Response Structure:
+      #
+      # * +:role+ - (Hash)
+      #   * +:path+ - (String)
+      #   * +:role_name+ - (String)
+      #   * +:role_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:assume_role_policy_document+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :get_role, 'GetRole'
+
+      # Calls the GetRolePolicy API operation.
+      # @method get_role_policy(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role who the policy
+      #   is associated with.
+      # * +:policy_name+ - *required* - (String) Name of the policy document to
+      #   get.
+      #
+      # === Response Structure:
+      #
+      # * +:role_name+ - (String)
+      # * +:policy_name+ - (String)
+      # * +:policy_document+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :get_role_policy, 'GetRolePolicy'
 
       # Calls the GetServerCertificate API operation.
       # @method get_server_certificate(options = {})
@@ -746,6 +948,86 @@ module AWS
       #
       define_client_method :list_groups_for_user, 'ListGroupsForUser'
 
+      # Calls the ListInstanceProfiles API operation.
+      # @method list_instance_profiles(options = {})
+      #
+      # === Options:
+      #
+      # * +:path_prefix+ - (String) The path prefix for filtering the results.
+      #   For example: /application_abc/component_xyz/, which would get all
+      #   instance profiles whose path starts with
+      #   /application_abc/component_xyz/. This parameter is optional. If it is
+      #   not included, it defaults to a slash (/), listing all instance
+      #   profiles.
+      # * +:marker+ - (String) Use this parameter only when paginating results,
+      #   and only in a subsequent request after you've received a response
+      #   where the results are truncated. Set it to the value of the Marker
+      #   element in the response you just received.
+      # * +:max_items+ - (Integer) Use this parameter only when paginating
+      #   results to indicate the maximum number of user names you want in the
+      #   response. If there are additional user names beyond the maximum you
+      #   specify, the IsTruncated response element is +true+ .
+      #
+      # === Response Structure:
+      #
+      # * +:instance_profiles+ - (Array<Hash>)
+      #   * +:path+ - (String)
+      #   * +:instance_profile_name+ - (String)
+      #   * +:instance_profile_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:roles+ - (Array<Hash>)
+      #     * +:path+ - (String)
+      #     * +:role_name+ - (String)
+      #     * +:role_id+ - (String)
+      #     * +:arn+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:assume_role_policy_document+ - (String)
+      # * +:is_truncated+ - (Boolean)
+      # * +:marker+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :list_instance_profiles, 'ListInstanceProfiles'
+
+      # Calls the ListInstanceProfilesForRole API operation.
+      # @method list_instance_profiles_for_role(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) The name of the role to list
+      #   instance profiles for.
+      # * +:marker+ - (String) Use this parameter only when paginating results,
+      #   and only in a subsequent request after you've received a response
+      #   where the results are truncated. Set it to the value of the Marker
+      #   element in the response you just received.
+      # * +:max_items+ - (Integer) Use this parameter only when paginating
+      #   results to indicate the maximum number of user names you want in the
+      #   response. If there are additional user names beyond the maximum you
+      #   specify, the IsTruncated response element is +true+ .
+      #
+      # === Response Structure:
+      #
+      # * +:instance_profiles+ - (Array<Hash>)
+      #   * +:path+ - (String)
+      #   * +:instance_profile_name+ - (String)
+      #   * +:instance_profile_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:roles+ - (Array<Hash>)
+      #     * +:path+ - (String)
+      #     * +:role_name+ - (String)
+      #     * +:role_id+ - (String)
+      #     * +:arn+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:assume_role_policy_document+ - (String)
+      # * +:is_truncated+ - (Boolean)
+      # * +:marker+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :list_instance_profiles_for_role, 'ListInstanceProfilesForRole'
+
       # Calls the ListMFADevices API operation.
       # @method list_mfa_devices(options = {})
       #
@@ -774,6 +1056,67 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :list_mfa_devices, 'ListMFADevices'
+
+      # Calls the ListRolePolicies API operation.
+      # @method list_role_policies(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) The name of the role to list
+      #   policies for.
+      # * +:marker+ - (String) Use this parameter only when paginating results,
+      #   and only in a subsequent request after you've received a response
+      #   where the results are truncated. Set it to the value of the Marker
+      #   element in the response you just received.
+      # * +:max_items+ - (Integer) Use this parameter only when paginating
+      #   results to indicate the maximum number of user names you want in the
+      #   response. If there are additional user names beyond the maximum you
+      #   specify, the IsTruncated response element is +true+ .
+      #
+      # === Response Structure:
+      #
+      # * +:policy_names+ - (Array<String>)
+      # * +:is_truncated+ - (Boolean)
+      # * +:marker+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :list_role_policies, 'ListRolePolicies'
+
+      # Calls the ListRoles API operation.
+      # @method list_roles(options = {})
+      #
+      # === Options:
+      #
+      # * +:path_prefix+ - (String) The path prefix for filtering the results.
+      #   For example: /application_abc/component_xyz/, which would get all
+      #   roles whose path starts with /application_abc/component_xyz/. This
+      #   parameter is optional. If it is not included, it defaults to a slash
+      #   (/), listing all roles.
+      # * +:marker+ - (String) Use this parameter only when paginating results,
+      #   and only in a subsequent request after you've received a response
+      #   where the results are truncated. Set it to the value of the Marker
+      #   element in the response you just received.
+      # * +:max_items+ - (Integer) Use this parameter only when paginating
+      #   results to indicate the maximum number of user names you want in the
+      #   response. If there are additional user names beyond the maximum you
+      #   specify, the IsTruncated response element is +true+ .
+      #
+      # === Response Structure:
+      #
+      # * +:roles+ - (Array<Hash>)
+      #   * +:path+ - (String)
+      #   * +:role_name+ - (String)
+      #   * +:role_id+ - (String)
+      #   * +:arn+ - (String)
+      #   * +:create_date+ - (Time)
+      #   * +:assume_role_policy_document+ - (String)
+      # * +:is_truncated+ - (Boolean)
+      # * +:marker+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :list_roles, 'ListRoles'
 
       # Calls the ListServerCertificates API operation.
       # @method list_server_certificates(options = {})
@@ -956,6 +1299,24 @@ module AWS
       #
       define_client_method :put_group_policy, 'PutGroupPolicy'
 
+      # Calls the PutRolePolicy API operation.
+      # @method put_role_policy(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role to associate
+      #   the policy with.
+      # * +:policy_name+ - *required* - (String) Name of the policy document.
+      # * +:policy_document+ - *required* - (String) The policy document.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :put_role_policy, 'PutRolePolicy'
+
       # Calls the PutUserPolicy API operation.
       # @method put_user_policy(options = {})
       #
@@ -973,6 +1334,23 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :put_user_policy, 'PutUserPolicy'
+
+      # Calls the RemoveRoleFromInstanceProfile API operation.
+      # @method remove_role_from_instance_profile(options = {})
+      #
+      # === Options:
+      #
+      # * +:instance_profile_name+ - *required* - (String) Name of the instance
+      #   profile to update.
+      # * +:role_name+ - *required* - (String) Name of the role to remove.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :remove_role_from_instance_profile, 'RemoveRoleFromInstanceProfile'
 
       # Calls the RemoveUserFromGroup API operation.
       # @method remove_user_from_group(options = {})
@@ -1043,6 +1421,7 @@ module AWS
       # * +:require_numbers+ - (Boolean)
       # * +:require_uppercase_characters+ - (Boolean)
       # * +:require_lowercase_characters+ - (Boolean)
+      # * +:allow_users_to_change_password+ - (Boolean)
       #
       # === Response Structure:
       #
@@ -1051,6 +1430,23 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :update_account_password_policy, 'UpdateAccountPasswordPolicy'
+
+      # Calls the UpdateAssumeRolePolicy API operation.
+      # @method update_assume_role_policy(options = {})
+      #
+      # === Options:
+      #
+      # * +:role_name+ - *required* - (String) Name of the role to update.
+      # * +:policy_document+ - *required* - (String) The policy govering by who
+      #   and under what conditions the role can be assumed.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :update_assume_role_policy, 'UpdateAssumeRolePolicy'
 
       # Calls the UpdateGroup API operation.
       # @method update_group(options = {})

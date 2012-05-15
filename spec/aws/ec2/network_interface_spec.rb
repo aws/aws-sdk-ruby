@@ -221,6 +221,34 @@ module AWS
 
         end
 
+        context "#association" do
+
+          let(:assoc) {{
+            :public_ip => '1.2.3.4', 
+            :ip_owner_id => '12345', 
+            :association_id => "eipassoc-12345",
+          }}
+          
+          it 'returns nil when not present' do
+            network_interface.association.should == nil
+            network_interface.elastic_ip.should == nil
+          end
+
+          it 'returns a hash of data when present' do
+            details[:association] = assoc
+            network_interface.association.should == assoc
+          end
+
+          it 'returns an elastic ip when present' do
+            details[:association] = assoc
+            ip = network_interface.elastic_ip
+            ip.should be_an(ElasticIp)
+            ip.public_ip.should == assoc[:public_ip]
+            ip.config.should == config
+          end
+
+        end
+
         context '#exists?' do
 
           it 'returns true if it can be described' do

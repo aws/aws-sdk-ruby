@@ -28,6 +28,22 @@ module AWS
 
       ## client methods ##
 
+      # Calls the DeleteIdentity API operation.
+      # @method delete_identity(options = {})
+      #
+      # === Options:
+      #
+      # * +:identity+ - *required* - (String) The name of the identity to be
+      #   removed from the list of verified identities.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :delete_identity, 'DeleteIdentity'
+
       # Calls the DeleteVerifiedEmailAddress API operation.
       # @method delete_verified_email_address(options = {})
       #
@@ -43,6 +59,23 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :delete_verified_email_address, 'DeleteVerifiedEmailAddress'
+
+      # Calls the GetIdentityVerificationAttributes API operation.
+      # @method get_identity_verification_attributes(options = {})
+      #
+      # === Options:
+      #
+      # * +:identities+ - *required* - (Array<String>)
+      #
+      # === Response Structure:
+      #
+      # * +:verification_attributes+ - (Hash<String,Hash>)
+      #   * +:verification_status+ - (String)
+      #   * +:verification_token+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :get_identity_verification_attributes, 'GetIdentityVerificationAttributes'
 
       # Calls the GetSendQuota API operation.
       # @method get_send_quota(options = {})
@@ -81,6 +114,26 @@ module AWS
       #
       define_client_method :get_send_statistics, 'GetSendStatistics'
 
+      # Calls the ListIdentities API operation.
+      # @method list_identities(options = {})
+      #
+      # === Options:
+      #
+      # * +:identity_type+ - (String) The type of the identities listed.
+      #   Possible values are: "EmailAddress", "Domain" or null.
+      # * +:next_token+ - (String) The token used for retrieving the next set
+      #   of items.
+      # * +:max_items+ - (Integer) The maximum number of items returned.
+      #
+      # === Response Structure:
+      #
+      # * +:identities+ - (Array<String>)
+      # * +:next_token+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :list_identities, 'ListIdentities'
+
       # Calls the ListVerifiedEmailAddresses API operation.
       # @method list_verified_email_addresses(options = {})
       #
@@ -101,7 +154,7 @@ module AWS
       #
       # === Options:
       #
-      # * +:source+ - *required* - (String) The sender's email address.
+      # * +:source+ - *required* - (String) The identity's email address.
       # * +:destination+ - *required* - (Hash) The destination for this email,
       #   composed of To:, CC:, and BCC: fields.
       #   * +:to_addresses+ - (Array<String>) The To: field(s) of the message.
@@ -150,7 +203,7 @@ module AWS
       #
       # === Options:
       #
-      # * +:source+ - (String) The sender's email address. If you specify the
+      # * +:source+ - (String) The identity's email address. If you specify the
       #   Source parameter, then bounce notifications and complaints will be
       #   sent to this email address. This takes precedence over any
       #   Return-Path header that you might include in the raw text of the
@@ -168,7 +221,7 @@ module AWS
       #     client must ensure that the message format complies with Internet
       #     email standards regarding email header fields, MIME types, MIME
       #     encoding, and base64 encoding (if necessary). For more information,
-      #     go to the Amazon SES Developer Guide.
+      #     go to theAmazon SES Developer Guide.
       #
       # === Response Structure:
       #
@@ -177,6 +230,22 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :send_raw_email, 'SendRawEmail'
+
+      # Calls the VerifyDomainIdentity API operation.
+      # @method verify_domain_identity(options = {})
+      #
+      # === Options:
+      #
+      # * +:domain+ - *required* - (String) The name of the domain to be
+      #   verified.
+      #
+      # === Response Structure:
+      #
+      # * +:verification_token+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :verify_domain_identity, 'VerifyDomainIdentity'
 
       # Calls the VerifyEmailAddress API operation.
       # @method verify_email_address(options = {})
@@ -193,6 +262,22 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :verify_email_address, 'VerifyEmailAddress'
+
+      # Calls the VerifyEmailIdentity API operation.
+      # @method verify_email_identity(options = {})
+      #
+      # === Options:
+      #
+      # * +:email_address+ - *required* - (String) The email address to be
+      #   verified.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :verify_email_identity, 'VerifyEmailIdentity'
 
       ## end client methods ##
 
