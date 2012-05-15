@@ -13,6 +13,16 @@
 
 ---
 :operations:
+- :name: DeleteIdentity
+  :method: :delete_identity
+  :inputs:
+    Identity:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteIdentityResult:
+        :ignore: true
 - :name: DeleteVerifiedEmailAddress
   :method: :delete_verified_email_address
   :inputs:
@@ -23,6 +33,26 @@
     :children:
       DeleteVerifiedEmailAddressResult:
         :ignore: true
+- :name: GetIdentityVerificationAttributes
+  :method: :get_identity_verification_attributes
+  :inputs:
+    Identities:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      GetIdentityVerificationAttributesResult:
+        :ignore: true
+        :children:
+          VerificationAttributes:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :verification_attributes
+                :map:
+                - key
+                - value
 - :name: GetSendQuota
   :method: :get_send_quota
   :inputs: {}
@@ -62,6 +92,26 @@
                     :type: :integer
                   Rejects:
                     :type: :integer
+- :name: ListIdentities
+  :method: :list_identities
+  :inputs:
+    IdentityType:
+    - :string
+    NextToken:
+    - :string
+    MaxItems:
+    - :integer
+  :outputs:
+    :children:
+      ListIdentitiesResult:
+        :ignore: true
+        :children:
+          Identities:
+            :ignore: true
+            :children:
+              member:
+                :rename: :identities
+                :list: true
 - :name: ListVerifiedEmailAddresses
   :method: :list_verified_email_addresses
   :inputs: {}
@@ -149,6 +199,16 @@
     :children:
       SendRawEmailResult:
         :ignore: true
+- :name: VerifyDomainIdentity
+  :method: :verify_domain_identity
+  :inputs:
+    Domain:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      VerifyDomainIdentityResult:
+        :ignore: true
 - :name: VerifyEmailAddress
   :method: :verify_email_address
   :inputs:
@@ -158,4 +218,14 @@
   :outputs:
     :children:
       VerifyEmailAddressResult:
+        :ignore: true
+- :name: VerifyEmailIdentity
+  :method: :verify_email_identity
+  :inputs:
+    EmailAddress:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      VerifyEmailIdentityResult:
         :ignore: true

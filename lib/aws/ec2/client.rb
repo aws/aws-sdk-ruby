@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::Client
 
-      API_VERSION = '2011-12-15'
+      API_VERSION = '2012-04-01'
 
       extend Core::Client::QueryXML
 
@@ -39,6 +39,7 @@ module AWS
         :describe_snapshot_attribute,
         :describe_snapshots,
         :describe_subnets,
+        :describe_volume_status,
         :describe_volumes,
         :describe_vpcs,
         :describe_vpn_connections,
@@ -1606,6 +1607,7 @@ module AWS
       #   * +:group+ - (String)
       # * +:product_codes+ - (Array<Hash>)
       #   * +:product_code+ - (String)
+      #   * +:type+ - (String)
       # * +:kernel+ - (Hash)
       #   * +:value+ - (String)
       # * +:ramdisk+ - (Hash)
@@ -1658,6 +1660,7 @@ module AWS
       #   * +:is_public+ - (Boolean)
       #   * +:product_codes+ - (Array<Hash>)
       #     * +:product_code+ - (String)
+      #     * +:type+ - (String)
       #   * +:architecture+ - (String)
       #   * +:image_type+ - (String)
       #   * +:kernel_id+ - (String)
@@ -1725,6 +1728,9 @@ module AWS
       #     * +:status+ - (String)
       #     * +:attach_time+ - (Time)
       #     * +:delete_on_termination+ - (Boolean)
+      # * +:product_codes+ - (Array<Hash>)
+      #   * +:product_code+ - (String)
+      #   * +:type+ - (String)
       #
       # @return [Core::Response]
       #
@@ -1812,6 +1818,7 @@ module AWS
       #     * +:ami_launch_index+ - (Integer)
       #     * +:product_codes+ - (Array<Hash>)
       #       * +:product_code+ - (String)
+      #       * +:type+ - (String)
       #     * +:instance_type+ - (String)
       #     * +:launch_time+ - (Time)
       #     * +:placement+ - (Hash)
@@ -2336,6 +2343,9 @@ module AWS
       # * +:create_volume_permission+ - (Array<Hash>)
       #   * +:user_id+ - (String)
       #   * +:group+ - (String)
+      # * +:product_codes+ - (Array<Hash>)
+      #   * +:product_code+ - (String)
+      #   * +:type+ - (String)
       #
       # @return [Core::Response]
       #
@@ -2562,6 +2572,67 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :describe_tags, 'DescribeTags'
+
+      # Calls the DescribeVolumeAttribute API operation.
+      # @method describe_volume_attribute(options = {})
+      #
+      # === Options:
+      #
+      # * +:volume_id+ - *required* - (String)
+      # * +:attribute+ - (String)
+      #
+      # === Response Structure:
+      #
+      # * +:volume_id+ - (String)
+      # * +:auto_enable_io+ - (Hash)
+      #   * +:value+ - (Boolean)
+      # * +:product_codes+ - (Array<Hash>)
+      #   * +:product_code+ - (String)
+      #   * +:type+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :describe_volume_attribute, 'DescribeVolumeAttribute'
+
+      # Calls the DescribeVolumeStatus API operation.
+      # @method describe_volume_status(options = {})
+      #
+      # === Options:
+      #
+      # * +:volume_ids+ - (Array<String>)
+      # * +:filters+ - (Array<Hash>)
+      #   * +:name+ - (String) Specifies the name of the filter.
+      #   * +:values+ - (Array<String>) Contains one or more values for the
+      #     filter.
+      # * +:next_token+ - (String)
+      # * +:max_results+ - (Integer)
+      #
+      # === Response Structure:
+      #
+      # * +:volume_status_set+ - (Array<Hash>)
+      #   * +:volume_id+ - (String)
+      #   * +:availability_zone+ - (String)
+      #   * +:volume_status+ - (Hash)
+      #     * +:status+ - (String)
+      #     * +:details+ - (Array<Hash>)
+      #       * +:name+ - (String)
+      #       * +:status+ - (String)
+      #   * +:events_set+ - (Array<Hash>)
+      #     * +:event_type+ - (String)
+      #     * +:description+ - (String)
+      #     * +:not_before+ - (Time)
+      #     * +:not_after+ - (Time)
+      #     * +:event_id+ - (String)
+      #   * +:actions_set+ - (Array<Hash>)
+      #     * +:code+ - (String)
+      #     * +:description+ - (String)
+      #     * +:event_type+ - (String)
+      #     * +:event_id+ - (String)
+      # * +:next_token+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :describe_volume_status, 'DescribeVolumeStatus'
 
       # Calls the DescribeVolumes API operation.
       # @method describe_volumes(options = {})
@@ -2820,6 +2891,21 @@ module AWS
       #
       define_client_method :disassociate_route_table, 'DisassociateRouteTable'
 
+      # Calls the EnableVolumeIO API operation.
+      # @method enable_volume_io(options = {})
+      #
+      # === Options:
+      #
+      # * +:volume_id+ - *required* - (String)
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :enable_volume_io, 'EnableVolumeIO'
+
       # Calls the GetConsoleOutput API operation.
       # @method get_console_output(options = {})
       #
@@ -2877,8 +2963,9 @@ module AWS
       #       group to ensure fast connection speeds.
       #     * +:tenancy+ - (String) The allowed tenancy of instances launched
       #       into the VPC. A value of default means instances can be launched
-      #       with any tenancy; a value of dedicated means instances must be
-      #       launched with tenancy as dedicated.
+      #       with any tenancy; a value of dedicated means all instances
+      #       launched into the VPC will be launched as dedicated tenancy
+      #       regardless of the tenancy assigned to the instance at launch.
       #   * +:block_device_mappings+ - (Array<Hash>)
       #     * +:virtual_name+ - (String) Specifies the virtual device name.
       #     * +:device_name+ - (String) Specifies the device name (e.g.,
@@ -3193,6 +3280,22 @@ module AWS
       #
       define_client_method :modify_snapshot_attribute, 'ModifySnapshotAttribute'
 
+      # Calls the ModifyVolumeAttribute API operation.
+      # @method modify_volume_attribute(options = {})
+      #
+      # === Options:
+      #
+      # * +:volume_id+ - *required* - (String)
+      # * +:auto_enable_io+ - (Boolean)
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :modify_volume_attribute, 'ModifyVolumeAttribute'
+
       # Calls the MonitorInstances API operation.
       # @method monitor_instances(options = {})
       #
@@ -3418,8 +3521,7 @@ module AWS
       # * +:status+ - (String)
       # * +:start_time+ - (String<ISO8601 datetime>)
       # * +:end_time+ - (String<ISO8601 datetime>)
-      # * +:reason_codes+ - (Array<Hash>)
-      #   * +:reason_code+ - (String)
+      # * +:reason_codes+ - (Array<String>)
       # * +:description+ - (String)
       #
       # === Response Structure:
@@ -3771,8 +3873,9 @@ module AWS
       #     ensure fast connection speeds.
       #   * +:tenancy+ - (String) The allowed tenancy of instances launched
       #     into the VPC. A value of default means instances can be launched
-      #     with any tenancy; a value of dedicated means instances must be
-      #     launched with tenancy as dedicated.
+      #     with any tenancy; a value of dedicated means all instances launched
+      #     into the VPC will be launched as dedicated tenancy regardless of
+      #     the tenancy assigned to the instance at launch.
       # * +:kernel_id+ - (String) The ID of the kernel with which to launch the
       #   instance.
       # * +:ramdisk_id+ - (String) The ID of the RAM disk with which to launch
@@ -3848,6 +3951,7 @@ module AWS
       #   * +:ami_launch_index+ - (Integer)
       #   * +:product_codes+ - (Array<Hash>)
       #     * +:product_code+ - (String)
+      #     * +:type+ - (String)
       #   * +:instance_type+ - (String)
       #   * +:launch_time+ - (Time)
       #   * +:placement+ - (Hash)

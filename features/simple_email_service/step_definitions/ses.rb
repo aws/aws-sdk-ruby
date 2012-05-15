@@ -16,8 +16,14 @@ Before("@ses") do
   @ses = SimpleEmailService.new
   @ses_client = @ses.client
 
+  @created_identities = []
+
 end
 
 After("@ses") do
-  # no cleanup yet
+  
+  @created_identities.each do |identity|
+    identity.delete
+  end
+
 end

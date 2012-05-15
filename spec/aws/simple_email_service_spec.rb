@@ -20,7 +20,7 @@ module AWS
 
     let(:client) { config.simple_email_service_client }
 
-    let(:ses) { SimpleEmailService.new(:simple_email_service_client => client) }
+    let(:ses) { SimpleEmailService.new(:config => config) }
 
     it_behaves_like 'a class that accepts configuration', 
       :simple_email_service_client
@@ -242,6 +242,16 @@ module AWS
               :source => 'from')
           ses.send_raw_email(raw, :from => 'from')
         end
+      end
+
+    end
+
+    context '#identities' do
+
+      it 'returns an identity collection' do
+        identities = ses.identities
+        identities.should be_an(SimpleEmailService::IdentityCollection)
+        identities.config.should == config
       end
 
     end

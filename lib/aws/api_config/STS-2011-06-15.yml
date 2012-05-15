@@ -39,6 +39,10 @@
   :inputs:
     DurationSeconds:
     - :integer
+    SerialNumber:
+    - :string
+    TokenCode:
+    - :string
   :outputs:
     :children:
       GetSessionTokenResult:

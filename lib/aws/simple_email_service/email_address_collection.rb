@@ -15,6 +15,8 @@ module AWS
   class SimpleEmailService
 
     # Helps you manage your verified SimpleEmailService email addresses.
+    # @note This class is deprecated. Please use 
+    #   {SimpleEmailService#identities} instead.
     class EmailAddressCollection
 
       include Core::Model
@@ -26,6 +28,7 @@ module AWS
       #
       # @param [String] email_address The email address to verify.
       # @return [nil]
+      # @note This method is deprecated.
       def verify email_address
         client.verify_email_address(:email_address => email_address)
         nil
@@ -36,11 +39,13 @@ module AWS
       #   of verified email addresses.  Useful for cleanup as there is a 100
       #   email address limit.
       # @return [nil]
+      # @note This method is deprecated.
       def delete email_address
         client.delete_verified_email_address(:email_address => email_address)
         nil
       end
 
+      # @note This method is deprecated.
       def include?
         # this is so jruby can detect that verified? is an alias
         super
@@ -50,6 +55,7 @@ module AWS
       # Yields each verified email address as a string.
       # @return [nil]
       #   yielded.
+      # @note This method is deprecated.
       def each &block
         response = client.list_verified_email_addresses({})
         response.verified_email_addresses.each do |email_address|
