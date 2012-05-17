@@ -422,29 +422,6 @@ module AWS
       # 
       def batch_put items
         batch = BatchWrite.new(:config => config)
-        batch.put(self, options)
-        batch.process!
-      end
-
-      # Batch delets up to 25 items.
-      #
-      #   table.batch_delete(%w(id1 id2 id3 id4))
-      #
-      # @param [Array<String>,Array<Array>] items A list of item keys to 
-      #   delete.  For tables without a range key, items should be an array
-      #   of hash key strings.
-      #
-      #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
-      #
-      #   For tables with a range key, items should be an array of 
-      #   hash key and range key pairs.
-      #
-      #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
-      #
-      # @return (see BatchWrite#process!)
-      # 
-      def batch_put items
-        batch = BatchWrite.new(:config => config)
         batch.put(self, items)
         batch.process!
       end
