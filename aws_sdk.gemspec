@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name    = 'aws_sdk'
-  s.version = '0.0.1'
+  s.version = '3.1.5'
   s.summary = 'AWS SDK for ruby with patch for batch writes'
 
   s.author   = 'Joshua Orion Skylar Hickman'
