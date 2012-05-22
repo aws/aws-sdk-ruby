@@ -70,5 +70,9 @@ module AWS
       SubscriptionCollection.new(:config => config)
     end
 
+    def authentic_message?(message)
+      MessageAuthenticator.new.authentic? message
+    end
+
   end
 end
