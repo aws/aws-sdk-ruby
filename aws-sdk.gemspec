@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/JoshuaOSHickman/aws-sdk-for-ruby'
 
   # Include everything in the lib folder
-  s.files = Dir['lib/**/*']
+  #s.files = Dir['lib/**/*']
 
   # Supress the warning about no rubyforge project
   s.rubyforge_project = 'nowarning'
