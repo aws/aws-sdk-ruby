@@ -13,6 +13,7 @@
 
 require 'aws/core'
 require 'aws/ec2/config'
+require 'aws/ec2/metadata'
 
 module AWS
 
@@ -270,7 +271,6 @@ module AWS
       autoload :InternetGatewayCollection, 'internet_gateway_collection'
       autoload :KeyPair, 'key_pair'
       autoload :KeyPairCollection, 'key_pair_collection'
-      autoload :Metadata, 'metadata'
       autoload :NetworkACL, 'network_acl'
       autoload :NetworkACLCollection, 'network_acl_collection'
       autoload :NetworkInterface, 'network_interface'
