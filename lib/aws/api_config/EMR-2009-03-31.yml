@@ -1,5 +1,73 @@
 ---
 :operations:
+- :name: AddInstanceGroups
+  :method: :add_instance_groups
+  :inputs:
+    JobFlowId:
+      - :string
+      - :required
+    InstanceGroups.member:
+    - :list: &InstanceGroupConfig
+      - :structure:
+          BidPrice:
+            - :string
+          InstanceCount:
+            - :integer
+            - :required
+          InstanceRole:
+            - :string
+            - :required
+          InstanceType:
+            - :string
+            - :required
+          Market:
+            - :string
+          Name:
+            - :string
+    - :required
+    - :rename: InstanceGroups
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+- :name: AddJobFlowSteps
+  :method: :add_job_flow_steps
+  :inputs:
+    JobFlowId:
+      - :string
+      - :required
+    Steps.member: &StepConfig
+    - :list:
+      - :structure:
+          ActionOnFailure:
+            - :string
+          HadoopJarStep:
+          - :structure:
+              Args:
+                - :string
+                - :required
+              Jar:
+                - :string
+                - :required
+              MainClass:
+                - :string
+                - :required
+              Properties:
+              - :map:
+                  :key:
+                  - :string
+                  :value:
+                  - :string
+                  :key_param: Name
+                  :value_param: Value
+          Name:
+            - :string
+    - :required
+    - :rename: Steps
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
 - :name: DescribeJobFlows
   :method: :describe_job_flows
   :inputs:
@@ -7,14 +75,14 @@
     - :timestamp
     CreatedBefore:
     - :timestamp
-    JobFlowIds:
+    JobFlowIds.member:
     - :list:
       - :string
-    - :rename: JobFlowIds.member
-    JobFlowStates:
+    - :rename: JobFlowIds
+    JobFlowStates.member:
     - :list:
       - :string
-    - :rename: JobFlowStates.member
+    - :rename: JobFlowStates
   :outputs:
     :children:
       DescribeJobFlowsResult:
@@ -29,4 +97,95 @@
                 :children:
                   Steps:
                     :list: true
+- :name: ModifyInstanceGroups
+  :method: :modify_instance_groups
+  :inputs:
+    InstanceGroups.member:
+    - :list:
+      - :structure:
+          InstanceGroupId:
+            - :string
+            - :required
+          InstanceCount:
+            - :integer
+            - :required
+    - :required
+    - :rename: InstanceGroups
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+- :name: RunJobFlow
+  :method: :run_job_flow
+  :inputs:
+    AdditionalInfo:
+      - :string
+    AmiVersion:
+      - :string
+    BootstrapActions:
+    Instances:
+      - :structure:
+          Ec2KeyName:
+            - :string
+          Ec2SubnetId:
+            - :string
+          HadoopVersion:
+            - :string
+          InstanceCount:
+            - :integer
+            - :required
+          InstanceGroups: *InstanceGroupConfig
+          KeepJobFlowAliveWhenNoSteps:
+            - :boolean
+            - :required
+          MasterInstanceType:
+            - :string
+            - :required
+          Placement:
+            - :structure:
+                AvailabilityZone:
+                  - :string
+                  - :required
+          SlaveInstanceType:
+            - :string
+            - :required
+          TerminationProtected:
+            - :boolean
+    LogUri:
+      - :string
+    Name:
+      - :string
+      - :required
+    Steps.member: *StepConfig
+    SupportedProducts.member:
+      - :list:
+        - :string
+      - :rename: SupportedProducts
+- :name: SetTerminationProtection
+  :method: :set_termination_protection
+  :inputs:
+    JobFlowIds.member:
+    - :required
+    - :list:
+      - :string
+    - :rename: JobFlowIds
+    TerminationProtected:
+    - :required
+    - :boolean
+  :outputs:
+    :children:
+      TerminateJobFlowsResponse:
+        :ignore: true
+- :name: TerminateJobFlows
+  :method: :terminate_job_flows
+  :inputs:
+    JobFlowIds.member:
+    - :required
+    - :list:
+      - :string
+    - :rename: JobFlowIds
+  :outputs:
+    :children:
+      TerminateJobFlowsResponse:
+        :ignore: true
 
