@@ -1,0 +1,32 @@
+---
+:operations:
+- :name: DescribeJobFlows
+  :method: :describe_job_flows
+  :inputs:
+    CreatedAfter:
+    - :timestamp
+    CreatedBefore:
+    - :timestamp
+    JobFlowIds:
+    - :list:
+      - :string
+    - :rename: JobFlowIds.member
+    JobFlowStates:
+    - :list:
+      - :string
+    - :rename: JobFlowStates.member
+  :outputs:
+    :children:
+      DescribeJobFlowsResult:
+        :ignore: true
+        :children:
+          JobFlows:
+            :ignore: true
+            :children:
+              member:
+                :list: true
+                :rename: :job_flows
+                :children:
+                  Steps:
+                    :list: true
+
