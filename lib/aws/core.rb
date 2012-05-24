@@ -25,6 +25,7 @@ require 'aws/core/autoloader'
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ELB}
+# * {AWS::EMR}
 # * {AWS::IAM}
 # * {AWS::S3}
 # * {AWS::SNS}
