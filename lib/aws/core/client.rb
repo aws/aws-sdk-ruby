@@ -113,7 +113,8 @@ module AWS
       #
       #   s3_with_logging = s3.with_http_handler do |request, response|
       #     $stderr.puts request.inspect
-      #     super
+      #     super(request, response)
+      #     $stderr.puts response.inspect
       #   end
       #
       # The block executes in the context of an HttpHandler
