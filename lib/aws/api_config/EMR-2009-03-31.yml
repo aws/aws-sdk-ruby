@@ -43,16 +43,16 @@
             - :string
           HadoopJarStep:
           - :structure:
-              Args:
+              Args.member:
+              - :list:
                 - :string
-                - :required
+              - :rename: args
               Jar:
                 - :string
                 - :required
               MainClass:
                 - :string
-                - :required
-              Properties:
+              Properties.member:
               - :map:
                   :key:
                   - :string
@@ -60,8 +60,10 @@
                   - :string
                   :key_param: Name
                   :value_param: Value
+              - :rename: properties
           Name:
             - :string
+            - :required
     - :required
     - :rename: Steps
   :outputs:
@@ -96,7 +98,59 @@
                 :rename: :job_flows
                 :children:
                   Steps:
-                    :list: true
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :steps
+                        :children:
+                          StepConfig:
+                            :children:
+                              HadoopJarStep:
+                                :children:
+                                  Properties:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :properties
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :args
+                  Instances:
+                    :children:
+                      InstanceGroups:
+                        :ignore: true
+                        :children:
+                          member:
+                            :list: true
+                            :rename: :instance_groups
+                  BootstrapActions:
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :bootstrap_actions
+                        :children:
+                          BootstrapActionConfig:
+                            :children:
+                              ScriptBootstrapAction:
+                                :children:
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :args
+                  SupportedProducts:
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :supported_products
 - :name: ModifyInstanceGroups
   :method: :modify_instance_groups
   :inputs:
@@ -122,7 +176,22 @@
       - :string
     AmiVersion:
       - :string
-    BootstrapActions:
+    BootstrapActions.member:
+    - :list:
+      - :structure:
+          Name:
+            - :string
+            - :required
+          ScriptBootstrapAction:
+          - :structure:
+              Args.member:
+              - :list:
+                - :string
+              - :rename: args
+              Path:
+                - :string
+                - :required
+    - :rename: BootstrapActions
     Instances:
       - :structure:
           Ec2KeyName:
