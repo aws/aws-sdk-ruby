@@ -310,7 +310,7 @@ module AWS
         else
           opts = { :bucket_name => bucket.name, :key => key }
           resp = client.put_object(opts.merge(put_options).merge(data_options))
-          if resp.version_id
+          if resp.respond_to? :version_id
             ObjectVersion.new(self, resp.version_id)
           else
             self
