@@ -4,6 +4,7 @@ module AWS
       attr_accessor :job_flow_id, :description
 
       include Core::Model
+      include Core::LogClient
 
       def initialize(job_flow_id, description, options = {})
         @job_flow_id = job_flow_id
@@ -41,7 +42,12 @@ module AWS
       end
 
       def ssh_command
-        "ssh -o ServerAliveInterval=10 -o StrictHostKeyChecking=no -i #{@config.key_pair_file} hadoop@#{description[:instances][:master_public_dns_name]}"
+        describe unless description[:instances][:master_public_dns_name]
+        if description[:instances][:master_public_dns_name]
+          "ssh -o ServerAliveInterval=10 -o StrictHostKeyChecking=no -i #{@config.emr_key_pair_file} hadoop@#{description[:instances][:master_public_dns_name]}"
+        else
+          "No Master Node currently available"
+        end
       end
 
       def add_steps(steps)
@@ -77,16 +83,9 @@ module AWS
 
       def terminate
         client.terminate_job_flows(:job_flow_ids => [job_flow_id])
+        describe
       end
 
-      private
-      def log_client
-        client.with_http_handler do |request, response|
-          $stderr.puts request.inspect
-          super(request, response)
-          $stderr.puts response.inspect
-        end
-      end
     end
   end
 end

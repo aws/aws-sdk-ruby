@@ -36,9 +36,9 @@
     JobFlowId:
       - :string
       - :required
-    Steps.member: &StepConfig
+    Steps.member:
     - :list:
-      - :structure:
+      - :structure: &StepConfig
           ActionOnFailure:
             - :string
           HadoopJarStep:
@@ -77,6 +77,8 @@
     - :timestamp
     CreatedBefore:
     - :timestamp
+    DescriptionType:    # secret param called with 'EXTENDED' in client
+    - :string
     JobFlowIds.member:
     - :list:
       - :string
@@ -225,11 +227,18 @@
     Name:
       - :string
       - :required
-    Steps.member: *StepConfig
+    Steps.member:
+      - :list:
+        - :structure: *StepConfig
+      - :rename: Steps
     SupportedProducts.member:
       - :list:
         - :string
       - :rename: SupportedProducts
+  :outputs:
+    :children:
+      RunJobFlowResult:
+        :ignore: true
 - :name: SetTerminationProtection
   :method: :set_termination_protection
   :inputs:

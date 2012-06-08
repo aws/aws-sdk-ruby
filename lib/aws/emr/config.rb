@@ -2,7 +2,7 @@ AWS::Core::Configuration.module_eval do
 
   add_service 'EMR', 'emr', 'us-east-1.elasticmapreduce.amazonaws.com'
 
-  add_option :key_pair
-  add_option :key_pair_file
+  add_option :emr_key_pair, nil
+  add_option :emr_key_pair_file, nil
 
 end
