@@ -52,11 +52,11 @@ module AWS
 
     def jobs(options = {})
 
-      if options[:job_flow_id] and !options[:job_flow_ids]
+      if options[:job_flow_id] && !options[:job_flow_ids]
         options[:job_flow_ids] = [options[:job_flow_id]]
         options.delete(:job_flow_id)
       end
-      if (options[:active] or options[:alive]) and !options[:job_flow_states]
+      if (options[:active] or options[:alive]) && !options[:job_flow_states]
         options[:job_flow_states] = [JobFlowStates[:running], JobFlowStates[:waiting],
                                      JobFlowStates[:shutting_down], JobFlowStates[:starting]]
         options.delete(:active)
