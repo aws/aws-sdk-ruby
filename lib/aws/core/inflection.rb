@@ -26,8 +26,14 @@ module AWS
         #  downcase
 
         return 'etag' if aws_name == 'ETag'
+        # Customize handling of starts_with Ec2
+        prefix = ''
+        if "ec2".casecmp(aws_name[0,3]) == 0 and aws_name.length > 3
+          prefix = 'ec2_'
+          aws_name = aws_name[3..-1]
+        end
 
-        aws_name.
+        prefix + aws_name.
           sub(/^.*:/, '').                          # strip namespace
           gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms from words
           scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split remaining words
