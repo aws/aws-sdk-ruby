@@ -64,12 +64,15 @@ module AWS::Core
         Inflection.ruby_name('MD5OfBody').should == 'md5_of_body'
       end
 
-      ## exceptional case, this one is handled individually currently
+      ## exceptional cases, these are handled individually currently
 
       it 'inflects ETag to etag (irregular inflection, should be e_tag)' do
         Inflection.ruby_name('ETag').should == 'etag'
       end
 
+      it 'inflects Ec2KeyName to ec2_key_name' do
+        Inflection.ruby_name('Ec2KeyName').should == 'ec2_key_name'
+      end
     end
 
     context '#class_name' do
