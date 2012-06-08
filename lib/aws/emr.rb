@@ -13,6 +13,7 @@ module AWS
     end
 
     include Core::ServiceInterface
+    include Core::LogClient
 
     JobFlowStates = {
         :running => 'RUNNING',
@@ -34,7 +35,13 @@ module AWS
     }
 
     def create(job_flow)
-      client.run_job_flow(job_flow)
+      job_flow[:ami_version] ||= 'latest'
+      job_flow[:instances] ||= {}
+      job_flow[:instances][:ec2_key_name] ||= @config.emr_key_pair if @config.emr_key_pair
+      job_flow[:instances][:hadoop_version] ||= default_hadoop_version(job_flow)
+
+      job_flow_id = client.run_job_flow(job_flow)[:job_flow_id]
+      jobs(:job_flow_id => job_flow_id)
     end
 
     def terminate(job_flow_id)
@@ -49,10 +56,11 @@ module AWS
         options[:job_flow_ids] = [options[:job_flow_id]]
         options.delete(:job_flow_id)
       end
-      if options[:active] and !options[:job_flow_states]
+      if (options[:active] or options[:alive]) and !options[:job_flow_states]
         options[:job_flow_states] = [JobFlowStates[:running], JobFlowStates[:waiting],
                                      JobFlowStates[:shutting_down], JobFlowStates[:starting]]
         options.delete(:active)
+        options.delete(:alive)
       end
 
       unless options[:created_after] or options[:created_before]
@@ -67,12 +75,19 @@ module AWS
       jobs = []
       response = client.describe_job_flows(options).to_h
       response[:job_flows].each do |job|
-        jobs << JobFlow.new(job[:job_flow_id], job, :config => @config)
+        jobs << JobFlow.new(job[:job_flow_id], job, :config => config)
       end
 
       return jobs[0] if jobs.size == 1
       jobs
     end
+
+    private
+
+      def default_hadoop_version(create_command)
+        return "0.20"     if create_command[:ami_version] == "1.0"
+        return "0.20.205"
+      end
 
   end
 end
