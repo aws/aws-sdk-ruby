@@ -28,7 +28,7 @@ module AWS
         return 'etag' if aws_name == 'ETag'
         # Customize handling of starts_with Ec2
         prefix = ''
-        if "ec2".casecmp(aws_name[0,3]) == 0 and aws_name.length > 3
+        if "ec2".casecmp(aws_name[0,3]) == 0 && aws_name.length > 3
           prefix = 'ec2_'
           aws_name = aws_name[3..-1]
         end
