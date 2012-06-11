@@ -69,7 +69,7 @@ module AWS
 
   module Core
 
-    AWS.register_autoloads(self) do
+    AWS.register_autoloads(self, "aws/core") do
       autoload :AsyncHandle,               'async_handle'
       autoload :Cacheable,                 'cacheable'
       autoload :Client,                    'client'

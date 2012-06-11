@@ -233,9 +233,9 @@ module AWS
         { :delete_request => { :key => key}}
 
       end
-
+      
       def str2sym key_desc
-        type, value = key_desc.to_a.flatten
+        type, value = key_desc.to_a.flatten(1)
         case type
         when "S"  then { :s  => value }
         when "N"  then { :n  => value }
