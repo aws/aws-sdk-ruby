@@ -158,6 +158,24 @@ module AWS
         end
   
         # @private
+        module Float
+  
+          extend NoArgs
+  
+          def validate(value, context = nil)
+            raise format_error("float value", context) unless
+              value.respond_to? :to_float
+          end
+  
+          def encode_value(value)
+            value.to_s
+          end
+  
+        end
+
+        Double = Float
+ 
+        # @private
         module Rename
           def self.apply(option, new_name)
             new_name = Inflection.ruby_name(new_name)
