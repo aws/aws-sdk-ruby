@@ -156,8 +156,8 @@ module AWS
     # @attr_reader [String] simple_workflow_endpoint ('swf.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Workflow Service.
     #
-    # @attr_reader [Object] signer 
-    #   The request signer. Defaults to a default request signer implementation.
+    # @attr_reader [CredentialProvider::Provider] credential_provider 
+    #   Returns the object that is responsible for loading credentials.
     #
     # @attr_reader [String] ssl_ca_file The path to a CA cert bundle in 
     #   PEM format.
@@ -206,7 +206,14 @@ module AWS
       def initialize options = {}
   
         @created = options.delete(:__created__) || {}
-  
+
+        # :signer is now a deprecated option, this ensures it will still
+        # work, but its now prefered to set :credential_provider instead.
+        # Credentail providers don't have to provide a #sign method.
+        if signer = options.delete(:signer)
+          options[:credential_provider] = signer
+        end
+
         options.each_pair do |opt_name, value|
           opt_name = opt_name.to_sym
           if self.class.accepted_options.include?(opt_name)
@@ -219,9 +226,11 @@ module AWS
       # @return [Hash] Returns a hash with your configured credentials.
       def credentials
         credentials = {}
-        credentials[:access_key_id] = access_key_id
-        credentials[:secret_access_key] = secret_access_key
-        credentials[:session_token] = session_token if session_token
+        [:access_key_id, :secret_access_key, :session_token].each do |opt|
+          if value = credential_provider.send(opt)
+            credentials[opt] = value
+          end
+        end
         credentials
       end
   
@@ -371,7 +380,7 @@ module AWS
           end
 
           needs = [
-            :signer, 
+            :credential_provider, 
             :http_handler, 
             :"#{ruby_name}_endpoint",
             :"#{ruby_name}_port",
@@ -397,10 +406,10 @@ module AWS
   
       end
 
-      add_option :access_key_id, 
+      add_option :access_key_id,
         ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID']
   
-      add_option :secret_access_key, 
+      add_option :secret_access_key,
         ENV['AWS_SECRET_ACCESS_KEY'] || ENV['AMAZON_SECRET_ACCESS_KEY']
   
       add_option :session_token
@@ -417,13 +426,13 @@ module AWS
   
       add_option :proxy_uri do |config,uri| uri ? URI.parse(uri.to_s) : nil end
   
-      add_option_with_needs :signer, 
+      add_option_with_needs :credential_provider, 
         [:access_key_id, :secret_access_key, :session_token] do |config|
-  
-        DefaultSigner.new(
-          config.access_key_id, 
-          config.secret_access_key, 
-          config.session_token)
+
+        CredentialProviders::DefaultProvider.new(
+          :access_key_id => config.access_key_id,
+          :secret_access_key => config.secret_access_key,
+          :session_token => config.session_token)
   
       end
   

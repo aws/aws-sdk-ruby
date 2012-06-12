@@ -20,10 +20,13 @@ module AWS
 
       let(:request) { described_class.new }
 
-      let(:signer) { double("signer",
-                            :sign => "SIGNATURE",
-                            :access_key_id => "KEY",
-                            :session_token => "TOKEN") }
+      let(:credential_provider) {
+        Core::CredentialProviders::StaticProvider.new({
+          :access_key_id => 'KEY',
+          :secret_access_key => 'SECRET',
+          :session_token => 'TOKEN',
+        })
+      }
 
       context '#uri' do
 
@@ -41,11 +44,6 @@ module AWS
           request.stub(:headers_to_sign).and_return(["h1", "h2"])
         end
 
-        it 'should set the access key ID on the request object' do
-          request.add_authorization!(signer)
-          request.access_key_id.should == "KEY"
-        end
-
         it 'should add the date and x-amz-date headers before computing the string to sign' do
           now = Time.now
           Time.stub(:now).and_return(now)
@@ -54,7 +52,7 @@ module AWS
             request.headers["x-amz-date"].should == now.rfc822
             "S2S"
           end
-          request.add_authorization!(signer)
+          request.add_authorization!(credential_provider)
         end
 
         it 'should set the host header before computing the string to sign' do
@@ -63,22 +61,13 @@ module AWS
             request.headers["host"].should == "example.host"
             "S2S"
           end
-          request.add_authorization!(signer)
-        end
-
-        it 'should pass a SHA256 hash of the string to sign to the signer' do
-          request.stub(:string_to_sign).and_return("S2S")
-          signer.should_receive(:sign).
-            # this is the SHA256 of "S2S"
-            with("\xFE\xEC\xE7\xCB\x97\xD1\xEB\x10\xD3\xFE\xA6\xC8\xB7V\x8A\x1C\x99\nW2\x98\xDC\xD4\x98\tYT\xB1\xB2\xCE\x92v").
-            and_return("SIGNATURE")
-          request.add_authorization!(signer)
+          request.add_authorization!(credential_provider)
         end
 
         context 'x-amzn-authorization header' do
 
           let(:authz) do
-            request.add_authorization!(signer)
+            request.add_authorization!(credential_provider)
             request.headers["x-amzn-authorization"]
           end
 
@@ -86,23 +75,16 @@ module AWS
             authz.should =~ /^AWS3 /
           end
 
-          it 'should include the access key, signing algorithm, signature, and signed headers' do
-            authz.should include("AWSAccessKeyId=KEY,"+
-                                 "Algorithm=HmacSHA256,"+
-                                 "SignedHeaders=h1;h2,"+
-                                 "Signature=SIGNATURE")
-          end
-
         end
 
         context 'x-amz-security-token' do
 
-          it 'should be the session token from the signer before the string to sign is computed' do
+          it 'should be the session token from the credentials' do
             request.should_receive(:string_to_sign) do
               request.headers["x-amz-security-token"].should == "TOKEN"
               "S2S"
             end
-            request.add_authorization!(signer)
+            request.add_authorization!(credential_provider)
           end
 
         end
@@ -162,48 +144,6 @@ module AWS
           request.headers["bar"] = "v2"
           request.headers["baz"] = "v3"
           request.send(:canonical_headers).should == "bar:v2\nfoo:v1\n"
-        end
-
-      end
-
-      context '#string_to_sign' do
-
-        before(:each) do
-          request.stub(:canonical_headers).and_return("HEADERS")
-          request.stub(:body).and_return("BODY")
-          request.stub(:http_method).and_return("POST")
-        end
-
-        let(:string_to_sign) { request.send(:string_to_sign) }
-
-        let(:lines) { string_to_sign.split("\n") }
-
-        it 'should be five lines long' do
-          lines.size.should == 5
-        end
-
-        it 'should have the request method in the first line' do
-          lines[0].should == "POST"
-        end
-
-        it 'should have "/" in the second line' do
-          lines[1].should == "/"
-        end
-
-        it 'should leave the third line blank' do
-          lines[2].should == ""
-        end
-
-        it 'should have the canonical headers starting at the fourth line' do
-          lines[3].should == "HEADERS"
-        end
-
-        it 'should have the request body as the last line' do
-          lines[4].should == "BODY"
-        end
-
-        it 'should not end with a newline' do
-          string_to_sign[-1,1].should_not == "\n"
         end
 
       end

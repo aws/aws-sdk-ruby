@@ -133,7 +133,7 @@ module AWS
 
       # @return [String,nil]
       def expiration_rule_id
-        head.expiration_date
+        head.expiration_rule_id
       end
 
       # @return [Symbol, nil] Returns the algorithm used to encrypt
@@ -310,8 +310,8 @@ module AWS
         else
           opts = { :bucket_name => bucket.name, :key => key }
           resp = client.put_object(opts.merge(put_options).merge(data_options))
-          if resp.respond_to? :version_id
-            ObjectVersion.new(self, resp.version_id)
+          if resp.data[:version_id]
+            ObjectVersion.new(self, resp.data[:version_id])
           else
             self
           end
@@ -836,12 +836,12 @@ module AWS
 
         method = http_method(method)
         expires = expiration_timestamp(options[:expires])
-        req.add_param("AWSAccessKeyId", config.signer.access_key_id)
+        req.add_param("AWSAccessKeyId", config.credential_provider.access_key_id)
         req.add_param("versionId", options[:version_id]) if options[:version_id]
         req.add_param("Signature", signature(method, expires, req))
         req.add_param("Expires", expires)
-        req.add_param("x-amz-security-token", config.signer.session_token) if
-          config.signer.session_token
+        req.add_param("x-amz-security-token", config.credential_provider.session_token) if
+          config.credential_provider.session_token
 
         build_uri(options[:secure] != false, req)
       end
@@ -906,13 +906,14 @@ module AWS
         parts << ""
         parts << ""
         parts << expires
-        parts << "x-amz-security-token:#{config.signer.session_token}" if
-          config.signer.session_token
+        parts << "x-amz-security-token:#{config.credential_provider.session_token}" if
+          config.credential_provider.session_token
         parts << request.canonicalized_resource
 
         string_to_sign = parts.join("\n")
 
-        config.signer.sign(string_to_sign, "sha1")
+        secret = config.credential_provider.secret_access_key
+        Core::Signer.sign(secret, string_to_sign, 'sha1')
 
       end
 

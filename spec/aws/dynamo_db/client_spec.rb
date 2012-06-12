@@ -194,16 +194,9 @@ module AWS
 
           before(:each) { http_handler.access_fail }
           
-          it 'does not retry when using the default signer' do
-            lambda { 
-              make_request
-            }.should raise_error(Errors::ExpiredTokenException)
-            http_handler.call_count.should == 1
-          end
-
-          it 'retries only once when the signer can refresh' do
-            client.config.signer.stub(:refresh_session)
-            client.config.signer.should_receive(:refresh_session).exactly(1).times
+          it 'retries once after refeshing the signer' do
+            client.config.credential_provider.stub(:refresh)
+            client.config.credential_provider.should_receive(:refresh).once
             lambda { 
               make_request
             }.should raise_error(Errors::ExpiredTokenException)
@@ -212,8 +205,8 @@ module AWS
 
           it 'does not retry when configured to max_retries => 0' do
             config[:max_retries] = 0
-            client.config.signer.stub(:refresh_session)
-            client.config.signer.should_not_receive(:refresh_session)
+            client.config.credential_provider.stub(:refresh)
+            client.config.credential_provider.should_not_receive(:refresh)
             lambda { 
               make_request
             }.should raise_error(Errors::ExpiredTokenException)
@@ -222,8 +215,8 @@ module AWS
 
           it 'retries once when configured to max_retries > 0' do
             config[:max_retries] = 5
-            client.config.signer.stub(:refresh_session)
-            client.config.signer.should_receive(:refresh_session).exactly(1).times
+            client.config.credential_provider.stub(:refresh)
+            client.config.credential_provider.should_receive(:refresh).once
             lambda { 
               make_request
             }.should raise_error(Errors::ExpiredTokenException)

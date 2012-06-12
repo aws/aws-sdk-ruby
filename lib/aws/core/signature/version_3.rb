@@ -19,37 +19,37 @@ module AWS
     module Signature
       module Version3
 
-        def add_authorization!(signer)
+        def self.included base
+          base.send(:include, Signer)
+        end
 
-          self.access_key_id = signer.access_key_id
+        def add_authorization! credentials
 
           headers["x-amz-date"] ||= (headers["date"] ||= Time.now.rfc822)
           headers["host"] ||= host
 
-          headers["x-amz-security-token"] = signer.session_token if 
-            signer.respond_to?(:session_token) and signer.session_token
+          headers["x-amz-security-token"] = credentials.session_token if 
+            credentials.session_token
 
           # compute the authorization
-          request_hash = OpenSSL::Digest::SHA256.digest(string_to_sign)
-          signature = signer.sign(request_hash)
           headers["x-amzn-authorization"] =
             "AWS3 "+
-            "AWSAccessKeyId=#{signer.access_key_id},"+
+            "AWSAccessKeyId=#{credentials.access_key_id},"+
             "Algorithm=HmacSHA256,"+
             "SignedHeaders=#{headers_to_sign.join(';')},"+
-            "Signature=#{signature}"
+            "Signature=#{sign(credentials.secret_access_key, string_to_sign)}"
         end
 
         protected
 
         def string_to_sign
-          [
+          OpenSSL::Digest::SHA256.digest([
             http_method,
             "/",
             "",
             canonical_headers,
             body
-          ].join("\n")
+          ].join("\n"))
         end
 
         def canonical_headers

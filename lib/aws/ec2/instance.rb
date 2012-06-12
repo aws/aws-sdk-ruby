@@ -144,6 +144,10 @@ module AWS
     # @attr_reader [String,nil] subnet_id Instances launched in a VPC have
     #   a subnet_id.  Normal EC2 instances return nil.
     #
+    # @attr_reader [String,nil] iam_instance_profile_id
+    #
+    # @attr_reader [String,nil] iam_instance_profile_arn
+    #
     class Instance < Resource
 
       include TaggedItem
@@ -259,6 +263,18 @@ module AWS
       describe_call_attribute :vpc_id, :static => true
 
       describe_call_attribute :subnet_id, :static => true
+
+      describe_call_attribute :iam_instance_profile_id, 
+        :as => :iam_instance_profile,
+        :static => true do
+        translates_output{|profile| profile[:id] }
+      end
+
+      describe_call_attribute :iam_instance_profile_arn, 
+        :as => :iam_instance_profile,
+        :static => true do
+        translates_output{|profile| profile[:arn] }
+      end
 
       attribute :status do
         translates_output{|state| state.name.tr("-","_").to_sym }
@@ -631,20 +647,17 @@ module AWS
         instance_action :stop
       end
 
-      # @private
       protected
+
       def find_in_response resp
         resp.instance_index[id]
       end
 
-      # @private
-      protected
       def instance_action name 
         client.send("#{name}_instances", :instance_ids => [id])
         nil
       end
 
-      protected
       def get_resource attribute
         if self.class.mutable_describe_attributes.include?(attribute.name)
           describe_attribute_call(attribute)
@@ -653,7 +666,6 @@ module AWS
         end
       end
 
-      protected
       def attributes_from_response_object(obj)
         if atts = super(obj)
           if obj[:instance_state]

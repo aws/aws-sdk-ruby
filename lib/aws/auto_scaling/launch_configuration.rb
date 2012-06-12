@@ -37,6 +37,10 @@ module AWS
     # @attr_reader [String,nil] user_data
     #
     # @attr_reader [Array<Hash>] block_device_mappings
+    # 
+    # @attr_reader [String] iam_instance_profile
+    #
+    # @attr_reader [String] spot_price
     #
     class LaunchConfiguration < Core::Resource
 
@@ -70,6 +74,10 @@ module AWS
       attribute :arn, :as => :launch_configuration_arn, :static => true
 
       attribute :ramdisk_id, :static => true
+
+      attribute :iam_instance_profile, :static => true
+
+      attribute :spot_price, :static => true
 
       attribute :user_data, :static => true do
         translates_output{|v| Base64.decode64(v) }

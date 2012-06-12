@@ -27,33 +27,12 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[]
   
-      # Creates a new low-level client.
-      #
-      # == Required Options
-      #
-      # To create a client you must provide access to AWS credentials.
-      # There are two options:
-      #
-      # * +:signer+ -- An object that responds to +access_key_id+
-      #   (to return the AWS Access Key ID) and to
-      #   <code>sign(string_to_sign)</code> (to return a signature
-      #   for a given string).  An example implementation is
-      #   AWS::Core::DefaultSigner.  This option is useful if you want to
-      #   more tightly control access to your secret access key (for
-      #   example by moving the signature computation into a
-      #   different process).
-      #
-      # * +:access_key_id+ and +:secret_access_key+ -- You can use
-      #   these options to provide the AWS Access Key ID and AWS
-      #   Secret Access Key directly to the client.
-      #
-      # == Optional
-      #
-      # * +:http_handler+ -- Any object that implements a
-      #   <code>handle(request, response)</code> method; an example
-      #   is BuiltinHttpHandler.  This method is used to perform the
-      #   HTTP requests that this client constructs.
-      #
+      # Creates a new low-level client.  
+      # @param [Hash] options
+      # @option options [Core::Configuration] :config (AWS.config) 
+      #   The base configuration object to use.  All other options
+      #   are merged with this.  Defaults to the AWS.config.
+      # @option (see AWS.config)
       def initialize options = {}
 
         options = options.dup # so we don't modify the options passed in
@@ -72,7 +51,7 @@ module AWS
         @config ||= AWS.config
         @config = @config.with(options)
 
-        @signer = @config.signer
+        @credential_provider = @config.credential_provider
         @http_handler = @config.http_handler
         @endpoint = config.send(:"#{service_ruby_name}_endpoint")
         @port = config.send(:"#{service_ruby_name}_port")
@@ -82,11 +61,10 @@ module AWS
       # @return [Configuration] This clients configuration.
       attr_reader :config
   
-      # @return [DefaultSigner,Object] Returns the signer for this client.
-      #   This is normally a DefaultSigner, but it can be configured to
-      #   an other object.
+      # @return [CredentialProviders::Provider] Returns the credentail
+      #   provider for this client.
       # @private
-      attr_reader :signer
+      attr_reader :credential_provider
 
       # @return [String] The snake-cased ruby name for the service
       #   (e.g. 's3', 'iam', 'dynamo_db', etc).
@@ -133,8 +111,14 @@ module AWS
         with_options(:http_handler => handler)
       end
   
+      # Returns a new client with the passed configuration options
+      # merged with the current configuration options.
+      #
+      #   no_retry_client = client.with_options(:max_retries => 0)
+      #
       # @param [Hash] options
-      # @see AWS.config detailed list of accepted options.
+      # @option (see AWS.config)
+      # @return [Client]
       def with_options options
         with_config(config.with(options))
       end
@@ -142,6 +126,7 @@ module AWS
       # @param [Configuration] config The configuration object to use.
       # @return [Core::Client] Returns a new client object with the given
       #   configuration.
+      # @private
       def with_config config
         self.class.new(:config => config)
       end
@@ -249,13 +234,18 @@ module AWS
       end
 
       def rebuild_http_request response
+        credential_provider.refresh if expired_credentials?(response)
         response.rebuild_request
         response.retry_count += 1
       end
   
       def sleep_durations response
-        factor = scaling_factor(response)
-        Array.new(config.max_retries) {|n| (2 ** n) * factor }
+        if expired_credentials?(response)
+          [0]
+        else
+          factor = scaling_factor(response)
+          Array.new(config.max_retries) {|n| (2 ** n) * factor }
+        end
       end
   
       def scaling_factor response
@@ -263,9 +253,18 @@ module AWS
       end
   
       def should_retry? response
+        expired_credentials?(response) or
         response.timeout? or
-          response.throttled? or
-          response.error.kind_of?(Errors::ServerError)
+        response.throttled? or
+        response.error.kind_of?(Errors::ServerError)
+      end
+
+      # @return [Boolean] Returns +true+ if the response contains an
+      #   error message that indicates credentials have expired.
+      def expired_credentials? response
+        response.error and 
+        response.error.respond_to?(:code) and
+        response.error.code == 'ExpiredTokenException'
       end
   
       def return_or_raise options, &block
@@ -429,6 +428,7 @@ module AWS
         opts.delete(:async)
   
         http_request = new_request
+        http_request.access_key_id = credential_provider.access_key_id
   
         # configure the http request
         http_request.service_ruby_name = service_ruby_name
@@ -444,7 +444,7 @@ module AWS
         send("configure_#{name}_request", http_request, opts, &block)
 
         http_request.headers["user-agent"] = user_agent_string
-        http_request.add_authorization!(signer)
+        http_request.add_authorization!(credential_provider)
 
         http_request
 

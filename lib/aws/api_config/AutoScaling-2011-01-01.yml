@@ -106,6 +106,10 @@
     - :structure:
         Enabled:
         - :boolean
+    SpotPrice:
+    - :string
+    IamInstanceProfile:
+    - :string
   :outputs:
     :children:
       CreateLaunchConfigurationResult:
@@ -455,7 +459,7 @@
                       member:
                         :rename: :alarms
                         :list: true
-                  MinAdjustmentMagnitude:
+                  MinAdjustmentStep:
                     :type: :integer
 - :name: DescribeScalingActivities
   :method: :describe_scaling_activities
@@ -647,7 +651,7 @@
     - :required
     Cooldown:
     - :integer
-    MinAdjustmentMagnitude:
+    MinAdjustmentStep:
     - :integer
   :outputs:
     :children:

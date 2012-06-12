@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::Client
 
-      API_VERSION = '2012-04-01'
+      API_VERSION = '2012-06-01'
 
       extend Core::Client::QueryXML
 
@@ -1883,6 +1883,9 @@ module AWS
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
       #         * +:ip_owner_id+ - (String)
+      #     * +:iam_instance_profile+ - (Hash)
+      #       * +:arn+ - (String)
+      #       * +:id+ - (String)
       #
       # @return [Core::Response]
       #
@@ -2471,6 +2474,9 @@ module AWS
       #       * +:private_ip_address+ - (String)
       #       * +:security_group_id+ - (Array<String>)
       #       * +:delete_on_termination+ - (Boolean)
+      #     * +:iam_instance_profile+ - (Hash)
+      #       * +:arn+ - (String)
+      #       * +:name+ - (String)
       #   * +:instance_id+ - (String)
       #   * +:create_time+ - (Time)
       #   * +:product_description+ - (String)
@@ -3612,6 +3618,9 @@ module AWS
       #     * +:private_ip_address+ - (String)
       #     * +:groups+ - (Array<String>)
       #     * +:delete_on_termination+ - (Boolean)
+      #   * +:iam_instance_profile+ - (Hash)
+      #     * +:arn+ - (String)
+      #     * +:name+ - (String)
       #
       # === Response Structure:
       #
@@ -3659,6 +3668,9 @@ module AWS
       #       * +:private_ip_address+ - (String)
       #       * +:security_group_id+ - (Array<String>)
       #       * +:delete_on_termination+ - (Boolean)
+      #     * +:iam_instance_profile+ - (Hash)
+      #       * +:arn+ - (String)
+      #       * +:name+ - (String)
       #   * +:instance_id+ - (String)
       #   * +:create_time+ - (Time)
       #   * +:product_description+ - (String)
@@ -3929,6 +3941,9 @@ module AWS
       #   * +:private_ip_address+ - (String)
       #   * +:groups+ - (Array<String>)
       #   * +:delete_on_termination+ - (Boolean)
+      # * +:iam_instance_profile+ - (Hash)
+      #   * +:arn+ - (String)
+      #   * +:name+ - (String)
       #
       # === Response Structure:
       #
@@ -4016,6 +4031,9 @@ module AWS
       #     * +:association+ - (Hash)
       #       * +:public_ip+ - (String)
       #       * +:ip_owner_id+ - (String)
+      #   * +:iam_instance_profile+ - (Hash)
+      #     * +:arn+ - (String)
+      #     * +:id+ - (String)
       #
       # @return [Core::Response]
       #

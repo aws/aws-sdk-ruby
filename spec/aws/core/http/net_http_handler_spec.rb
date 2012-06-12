@@ -22,6 +22,7 @@ module AWS::Core::Http
       double('aws-request',
         :http_method => 'POST',
         :host => 'host.com',
+        :port => '443',
         :uri => '/path?querystring',
         :body => 'body',
         :proxy_uri => nil,
@@ -59,22 +60,6 @@ module AWS::Core::Http
         request.stub(:host).and_return('hostname.com')
         Net::HTTP.should_receive(:new).
           with('hostname.com', anything).
-          and_return(http)
-        handle!
-      end
-
-      it 'uses port 80 for non-ssl requests' do
-        request.stub(:use_ssl?).and_return(false)
-        Net::HTTP.should_receive(:new).
-          with(anything, 80).
-          and_return(http)
-        handle!
-      end
-
-      it 'uses port 443 for ssl requests' do
-        request.stub(:use_ssl?).and_return(true)
-        Net::HTTP.should_receive(:new).
-          with(request.host, 443).
           and_return(http)
         handle!
       end

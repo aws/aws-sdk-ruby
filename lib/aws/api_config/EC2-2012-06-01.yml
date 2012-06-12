@@ -1304,6 +1304,12 @@
                     :type: :time
                   deleteOnTermination:
                     :type: :boolean
+      productCodes:
+        :ignore: true
+        :children:
+          item:
+            :rename: :product_codes
+            :list: true
 - :name: DescribeInstanceStatus
   :method: :describe_instance_status
   :inputs:
@@ -2041,6 +2047,12 @@
           item:
             :rename: :create_volume_permission
             :list: true
+      productCodes:
+        :ignore: true
+        :children:
+          item:
+            :rename: :product_codes
+            :list: true
 - :name: DescribeSnapshots
   :method: :describe_snapshots
   :inputs:
@@ -2273,6 +2285,81 @@
               - :resource_id
               - :key
               :name: :tag_index
+- :name: DescribeVolumeAttribute
+  :method: :describe_volume_attribute
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    Attribute:
+    - :string
+  :outputs:
+    :children:
+      autoEnableIO:
+        :children:
+          value:
+            :type: :boolean
+      productCodes:
+        :ignore: true
+        :children:
+          item:
+            :rename: :product_codes
+            :list: true
+- :name: DescribeVolumeStatus
+  :method: :describe_volume_status
+  :inputs:
+    VolumeId:
+    - :list:
+      - :string
+    - :rename: VolumeIds
+    Filter:
+    - :list:
+      - :structure:
+          Name:
+          - :string
+          Value:
+          - :list:
+            - :string
+          - :rename: Values
+    - :rename: filters
+    NextToken:
+    - :string
+    MaxResults:
+    - :integer
+  :outputs:
+    :children:
+      volumeStatusSet:
+        :ignore: true
+        :children:
+          item:
+            :rename: :volume_status_set
+            :list: true
+            :children:
+              volumeStatus:
+                :children:
+                  details:
+                    :ignore: true
+                    :children:
+                      item:
+                        :rename: :details
+                        :list: true
+              eventsSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :events_set
+                    :list: true
+                    :children:
+                      notBefore:
+                        :type: :time
+                      notAfter:
+                        :type: :time
+              actionsSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :actions_set
+                    :list: true
 - :name: DescribeVolumes
   :method: :describe_volumes
   :inputs:
@@ -2499,6 +2586,13 @@
   :method: :disassociate_route_table
   :inputs:
     AssociationId:
+    - :string
+    - :required
+  :outputs: {}
+- :name: EnableVolumeIO
+  :method: :enable_volume_io
+  :inputs:
+    VolumeId:
     - :string
     - :required
   :outputs: {}
@@ -2892,6 +2986,15 @@
               - :string
               - :rename: Group
   :outputs: {}
+- :name: ModifyVolumeAttribute
+  :method: :modify_volume_attribute
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    AutoEnableIO:
+    - :boolean
+  :outputs: {}
 - :name: MonitorInstances
   :method: :monitor_instances
   :inputs:
@@ -3059,9 +3162,7 @@
     - :timestamp
     ReasonCode:
     - :list:
-      - :structure:
-          ReasonCode:
-          - :string
+      - :string
     - :rename: reasonCodes
     Description:
     - :string
@@ -3159,6 +3260,12 @@
               DeleteOnTermination:
               - :boolean
         - :rename: networkInterfaces
+        IamInstanceProfile:
+        - :structure:
+            Arn:
+            - :string
+            Name:
+            - :string
   :outputs:
     :children:
       spotInstanceRequestSet:
@@ -3464,6 +3571,12 @@
           DeleteOnTermination:
           - :boolean
     - :rename: networkInterfaces
+    IamInstanceProfile:
+    - :structure:
+        Arn:
+        - :string
+        Name:
+        - :string
   :outputs:
     :children:
       groupSet:

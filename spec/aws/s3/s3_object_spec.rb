@@ -355,7 +355,7 @@ module AWS
           end
 
           it 'should be an object version with the returned version ID' do
-            resp.stub(:version_id).and_return("abc123")
+            resp.data[:version_id] = "abc123"
             return_value.should be_an(ObjectVersion)
             return_value.config.should be(config)
             return_value.object.should be(object)
@@ -720,16 +720,16 @@ module AWS
 
         let(:http_request) { Request.new }
 
-        let(:signer) { 
-          double("signer",
+        let(:credential_provider) { 
+          Core::CredentialProviders::StaticProvider.new({
             :access_key_id => "ACCESS_KEY",
-            :session_token => nil,
-            :sign => "SIGNATURE") 
+            :secret_access_key => "SECRET",
+          })
         }
 
         before(:each) do
           http_request.stub(:canonicalized_resource).and_return("/foo/bar")
-          config.stub(:signer).and_return(signer)
+          config.stub(:credential_provider).and_return(credential_provider)
           Request.stub(:new).and_return(http_request)
         end
 
@@ -769,29 +769,20 @@ module AWS
           object.url_for(:read, :version_id => 'version-id-string')
         end
 
-        it 'should sign the request using SHA1' do
-          signer.should_receive(:sign).with(an_instance_of(String),
-                                            "sha1")
-          object.url_for(:get)
-        end
-
         context 'federated sessions' do
 
-          before(:each) do
-            signer.stub(:session_token).and_return('session-token')
-          end
+          let(:credential_provider) { 
+            Core::CredentialProviders::StaticProvider.new({
+              :access_key_id => "ACCESS_KEY",
+              :secret_access_key => "SECRET",
+              :session_token => "SESSION_TOKEN",
+            })
+          }
 
           it 'adds the security token to the request' do
             http_request.stub(:add_param)
             http_request.should_receive(:add_param).
-              with('x-amz-security-token', 'session-token')
-            object.url_for(:get)
-          end
-
-          it 'addes the security token to the string to sign' do
-            signer.should_receive(:sign).with do |string,type|
-              string.should =~ /x-amz-security-token:session-token/
-            end
+              with('x-amz-security-token', 'SESSION_TOKEN')
             object.url_for(:get)
           end
 
@@ -833,77 +824,10 @@ module AWS
         it_should_behave_like("presigned url request parameter",
                               :response_content_encoding, "response-content-encoding")
 
-        context 'string to sign' do
-
-          let(:string) do
-            sts = nil
-            signer.should_receive(:sign) do |string, digest|
-              sts = string
-            end
-            object.url_for(*args)
-            sts
-          end
-
-          let(:lines) { string.split("\n", -1) }
-
-          let(:args) { [:get] }
-
-          it 'should have GET on the first line by default' do
-            lines.first.should == "GET"
-          end
-
-          it 'should accept a symbol HTTP method name' do
-            args.replace([:put])
-            lines.first.should == "PUT"
-          end
-
-          it 'should accept a string HTTP method name' do
-            args.replace(["PUT"])
-            lines.first.should == "PUT"
-          end
-
-          it 'should interpret :read as GET' do
-            args.replace([:read])
-            lines.first.should == "GET"
-          end
-
-          it 'should interpret :write as PUT' do
-            args.replace([:write])
-            lines.first.should == "PUT"
-          end
-
-          it 'should have 2 blank lines after the first one by default' do
-            lines[1,2].should == [""] * 2
-          end
-
-          it 'should expire in one hour by default' do
-            Time.stub(:now).and_return(Time.parse("2011-05-23 17:34:48 -0700"))
-            lines[3].should == Time.parse("2011-05-23 18:34:48 -0700").to_i.to_s
-          end
-
-          it 'should have the canonicalized resource on the last line' do
-            lines.last.should == "/foo/bar"
-          end
-
-          it 'should not end with a newline' do
-            string[-1].should_not == "\n"
-          end
-
-        end
 
         it 'should add a parameter for the access key' do
           object.url_for(:get).query.split("&").
             should include("AWSAccessKeyId=ACCESS_KEY")
-        end
-
-        it 'should add a parameter for the signature' do
-          object.url_for(:get).query.split("&").
-            should include("Signature=SIGNATURE")
-        end
-
-        it 'should add a parameter for the signature' do
-          object.url_for(:get).query.split("&").
-            should include("Signature=SIGNATURE")
         end
 
         it 'should add a parameter for the expiration timestamp' do

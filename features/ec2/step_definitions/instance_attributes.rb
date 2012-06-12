@@ -191,9 +191,9 @@ Given /^I request to run an instance from a windows image$/ do
   @instance = @ec2.images.
     filter("is-public", "true").
     filter("platform", "windows").
-    filter("manifest-location", "*English-Base*").
+    #filter("manifest-location", "*English-Base*").
     sort_by { |i| i.location }.last.
-    run_instance(:instance_type => "t1.micro")
+    run_instance(:instance_type => "m1.small")
 end
 
 When /^I list instances filtering by the instance ID I just created$/ do

@@ -34,7 +34,8 @@ module AWS
       # @private
       EMPTY_BODY_ERRORS = {
         304 => Errors::NotModified,
-        404 => Errors::NoSuchKey
+        403 => Errors::Forbidden,
+        404 => Errors::NoSuchKey,
       }
 
       # @private

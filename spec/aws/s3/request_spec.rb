@@ -159,27 +159,19 @@ module AWS
 
       context '#add_authorization!' do
 
-        let(:signer) { Core::DefaultSigner.new('KEY', 'secret') }
+        let(:credential_provider) { 
+          Core::CredentialProviders::StaticProvider.new({
+            :access_key_id => 'KEY',
+            :secret_access_key => 'SECRET',
+            :session_token => 'TOKEN',
+          })
+        }
 
-        before(:each) do
-          signer.stub(:sign).and_return('SIGNATURE')
-        end
-
-        context 'signer does not support a session token' do
-
-          it 'should not add the x-amz-security-token header' do
-            request.add_authorization!(signer)
-            request.headers.
-              should_not include("x-amz-security-token")
-          end
-
-        end
-
-        context 'signer does not have a session token configured' do
+        context 'credentials does not provide a session token' do
 
           it 'should not add the x-amz-security-token header' do
-            signer.stub(:session_token)
-            request.add_authorization!(signer)
+            credential_provider.stub(:session_token).and_return(nil)
+            request.add_authorization!(credential_provider)
             request.headers.
               should_not include("x-amz-security-token")
           end
@@ -189,12 +181,11 @@ module AWS
         context 'signer has a session token configured' do
 
           it 'should add the x-amz-security-token header prior to computing the signature' do
-            signer.stub(:session_token).and_return("TOKEN")
-            signer.should_receive(:sign) do |*args|
+            Core::Signer.should_receive(:sign) do |*args|
               request.headers["x-amz-security-token"].should == "TOKEN"
               "SIGNATURE"
             end
-            request.add_authorization!(signer)
+            request.add_authorization!(credential_provider)
           end
 
         end

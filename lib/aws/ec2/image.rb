@@ -146,15 +146,15 @@ module AWS
       # @return [Hash] Returns a hash of block
       #   device mappings for the image.  In each entry, the key is
       #   the device name (e.g. +"/dev/sda1"+) and the value is an
-      #   object with the following methods that return information
+      #   hash with the following keys that return information
       #   about the block device:
       #
-      #   [snapshot_id] The ID of the snapshot that will be used to
+      #   [:snapshot_id] The ID of the snapshot that will be used to
       #                 create this device (may be nil).
       #
-      #   [volume_size] The size of the volume, in GiBs.
+      #   [:volume_size] The size of the volume, in GiBs.
       #
-      #   [delete_on_termination] True if the Amazon EBS volume is
+      #   [:delete_on_termination] True if the Amazon EBS volume is
       #                           deleted on instance termination.
       def block_device_mappings
         (block_device_mapping || []).inject({}) do |h,mapping|

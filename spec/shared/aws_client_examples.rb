@@ -455,19 +455,24 @@ module AWS::Core
       end
 
       it 'should call add_authorization! on the request' do
-        fake_request.should_receive(:add_authorization!).with(client.signer)
+        fake_request.
+          should_receive(:add_authorization!).
+          with(client.credential_provider)
         client.send(method, opts)
       end
 
-      it 'should call add_authorization! with the signer' do
+      it 'should call add_authorization! with the credential provider' do
 
-        fake_signer = double("signer",
+        credential_provider = double("credential_provider",
            :access_key_id => "foo",
-           :sign => "bar")
+           :secret_access_key => "bar",
+           :session_token => "yuck")
 
-        client.stub(:signer).and_return(fake_signer)
+        client.stub(:credential_provider).and_return(credential_provider)
 
-        fake_request.should_receive(:add_authorization!).with(fake_signer)
+        fake_request.
+          should_receive(:add_authorization!).
+          with(credential_provider)
 
         client.send(method, opts)
 
