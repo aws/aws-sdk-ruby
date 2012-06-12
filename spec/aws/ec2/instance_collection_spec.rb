@@ -179,6 +179,34 @@ module AWS
 
           end
 
+          context ':iam_instance_profile' do
+
+            it 'accepts an arn' do
+              arn = 'arn:aws:iam::arn:aws:iam::12345678:instance-profile/name'
+              client.should_receive(:run_instances).with(hash_including(
+                :iam_instance_profile => { :arn => arn }
+              )).and_return(resp)
+              collection.create :iam_instance_profile => arn
+            end
+
+            it 'accepts a name' do
+              name = 'instance-profile-name'
+              client.should_receive(:run_instances).with(hash_including(
+                :iam_instance_profile => { :name => name }
+              )).and_return(resp)
+              collection.create :iam_instance_profile => name
+            end
+
+            it 'accepts a hash' do
+              profile = { :name => 'instance-profile-name' }
+              client.should_receive(:run_instances).with(hash_including(
+                :iam_instance_profile => profile
+              )).and_return(resp)
+              collection.create :iam_instance_profile => profile
+            end
+
+          end
+
           context ':image' do
             let(:id_param) { :image_id }
             let(:resource_param) { :image }

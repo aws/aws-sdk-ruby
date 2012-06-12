@@ -22,7 +22,7 @@ module AWS
 
       let(:config) { stub_config }
 
-      let(:signer) { config.signer }
+      let(:credential_provider) { config.credential_provider }
 
       let(:bucket) { Bucket.new("foo", :config => config) }
 
@@ -210,7 +210,7 @@ module AWS
           end
 
           it 'should apply the x-amz-security token condition when appropriate' do
-            signer.stub(:session_token).and_return('abc')
+            credential_provider.stub(:session_token).and_return('abc')
             policy_conditions(original_post).
               should include({ "x-amz-security-token" => "abc" })
           end
@@ -276,15 +276,6 @@ module AWS
 
         it 'should be an empty hash by default' do
           post.metadata.should == {}
-        end
-
-      end
-
-      context '#fields' do
-        
-        it 'should include the session token when provided' do
-          signer.stub(:session_token).and_return('abc')
-          post.fields['x-amz-security-token'].should == 'abc'
         end
 
       end
@@ -447,7 +438,7 @@ module AWS
       context '#fields' do
 
         it 'should include AWSAccessKeyId' do
-          post.fields["AWSAccessKeyId"].should == signer.access_key_id
+          post.fields["AWSAccessKeyId"].should == credential_provider.access_key_id
         end
 
         it 'should include key if provided' do
@@ -482,6 +473,8 @@ module AWS
 
         context 'signature' do
 
+          let(:signer) { Core::Signer }
+
           before(:each) do
             signer.stub(:sign).and_return("SIGNATURE")
           end
@@ -493,7 +486,7 @@ module AWS
           it 'should sign the policy' do
             post.stub(:policy).and_return("POLICY")
             signer.should_receive(:sign).
-              with("POLICY", "sha1").and_return("SIGNATURE")
+              with("SECRET_ACCESS_KEY", "POLICY", "sha1").and_return("SIGNATURE")
             post.fields
           end
 

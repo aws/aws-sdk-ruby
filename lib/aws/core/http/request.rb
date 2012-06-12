@@ -58,10 +58,6 @@ module AWS
         # @return [String] path of the request URI, defaults to /
         attr_accessor :path
   
-        # @return [String] the AWS access key ID used to authorize the
-        #   request
-        attr_accessor :access_key_id
-  
         # @return [nil, URI] The URI to the proxy server requests are 
         #   sent through if configured.  Returns nil if there is no proxy.
         attr_accessor :proxy_uri
@@ -69,6 +65,10 @@ module AWS
         # @return [String] The region name this request is for.  Only needs
         #   to be populated for requests against signature v4 endpoints.
         attr_accessor :region
+
+        # @return [String]
+        # @private
+        attr_accessor :access_key_id
   
         # @param [Boolean] state If the request should be sent over ssl or not.
         def use_ssl= state

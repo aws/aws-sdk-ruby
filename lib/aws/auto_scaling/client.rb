@@ -92,6 +92,8 @@ module AWS
       #     * +:volume_size+ - (Integer)
       # * +:instance_monitoring+ - (Hash)
       #   * +:enabled+ - (Boolean)
+      # * +:spot_price+ - (String)
+      # * +:iam_instance_profile+ - (String)
       #
       # === Response Structure:
       #
@@ -355,6 +357,8 @@ module AWS
       #       * +:volume_size+ - (Integer)
       #   * +:instance_monitoring+ - (Hash)
       #     * +:enabled+ - (Boolean)
+      #   * +:spot_price+ - (String)
+      #   * +:iam_instance_profile+ - (String)
       #   * +:created_time+ - (Time)
       # * +:next_token+ - (String)
       #
@@ -423,7 +427,7 @@ module AWS
       #   * +:alarms+ - (Array<Hash>)
       #     * +:alarm_name+ - (String)
       #     * +:alarm_arn+ - (String)
-      #   * +:min_adjustment_magnitude+ - (Integer)
+      #   * +:min_adjustment_step+ - (Integer)
       # * +:next_token+ - (String)
       #
       # @return [Core::Response]
@@ -608,7 +612,7 @@ module AWS
       # * +:scaling_adjustment+ - *required* - (Integer)
       # * +:adjustment_type+ - *required* - (String)
       # * +:cooldown+ - (Integer)
-      # * +:min_adjustment_magnitude+ - (Integer)
+      # * +:min_adjustment_step+ - (Integer)
       #
       # === Response Structure:
       #

@@ -27,7 +27,7 @@ end
 
 When /^I batch put (\d+) items to each table$/ do |count|
 
-  put = (1..count.to_i).map{|n| { :id => n.to_s }}
+  put = (1..count.to_i).map{|n| { :id => n.to_s, :counts => [n, n+1] }}
 
   @dynamo_db.batch_write do |batch|
     @created_tables.each do |table|

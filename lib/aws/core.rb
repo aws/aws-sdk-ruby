@@ -61,7 +61,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.5.2"
+  VERSION = "1.5.3"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -75,8 +75,8 @@ module AWS
       autoload :Client,                    'client'
       autoload :Collection,                'collection'
       autoload :Configuration,             'configuration'
+      autoload :CredentialProviders,       'credential_providers'
       autoload :Data,                      'data'
-      autoload :DefaultSigner,             'default_signer'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
       autoload :LazyErrorClasses,          'lazy_error_classes'
@@ -92,7 +92,7 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
       autoload :ServiceInterface,          'service_interface'
-      autoload :SessionSigner,             'session_signer'
+      autoload :Signer,                    'signer'
       autoload :UriEscape,                 'uri_escape'
     end
 
@@ -175,13 +175,13 @@ module AWS
     #
     # @param [Hash] options
     #
-    # @option options [String] :access_key_id (nil) AWS access key id 
+    # @option options [String] :access_key_id AWS access key id 
     #   credential.
     #
-    # @option options [String] :secret_access_key (nil) AWS secret access 
+    # @option options [String] :secret_access_key AWS secret access 
     #   key credential.
     #
-    # @option options [String,nil] :session_token (nil) AWS secret token 
+    # @option options [String,nil] :session_token AWS secret token 
     #   credential.
     #
     # @option options [String] :auto_scaling_endpoint ('autoscaling.us-east-1.amazonaws.com')
@@ -221,11 +221,11 @@ module AWS
     #
     # @option options [Object] :log_formatter The log formatter is responsible
     #   for building log messages from responses. You can quickly change 
-    #   log formats by providing a canned log formatter.
+    #   log formats by providing a pre-configured log formatter.
     #
     #     AWS.config(:log_formatter => AWS::Core::LogFormatter.colored)
     # 
-    #   Here is the complete list of canned log formatters:
+    #   Here is a list of pre-configured log formatters:
     #
     #   * +AWS::Core::LogFormatter.default+
     #   * +AWS::Core::LogFormatter.short+
@@ -298,8 +298,10 @@ module AWS
     # @option options [String] :simple_workflow_service ('swf.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Workflow Service.
     #
-    # @option options [Object] :signer (AWS::DefaultSigner) The request signer.  Defaults to
-    #   a default request signer implementation.
+    # @option options [Object] :credential_provider (AWS::Core::CredentialProviders::DefaultProvider.new) 
+    #   Returns the credential provider.  The default credential provider
+    #   attempts to check for statically assigned credentials, ENV credentials
+    #   and credentials in the metadata service of EC2.
     #
     # @option options [String] :ssl_ca_file The path to a CA cert bundle in 
     #   PEM format.
@@ -320,7 +322,7 @@ module AWS
     #   man-in-the-middle attacks and can pose a serious security
     #   risk.
     #
-    # @option options[Boolean] :stub_requests (false) When +true+ requests 
+    # @option options [Boolean] :stub_requests (false) When +true+ requests 
     #   are not sent to AWS, instead empty reponses are generated and 
     #   returned to each service request.
     #

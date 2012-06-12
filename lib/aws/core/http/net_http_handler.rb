@@ -31,6 +31,7 @@ module AWS
         def handle request, response
 
           options = {}
+          options[:port] = request.port
           options[:ssl] = request.use_ssl?
           options[:proxy_uri] = request.proxy_uri
           options[:ssl_verify_peer] = request.ssl_verify_peer?

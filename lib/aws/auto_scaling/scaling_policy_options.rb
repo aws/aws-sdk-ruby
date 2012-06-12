@@ -40,6 +40,8 @@ module AWS
       #   after a scaling activity completes before any further 
       #   trigger-related scaling activities can start.
       #
+      # @option options [Integer] :min_adjustment_magnitude
+      #
       # @return [Hash]
       #
       def scaling_policy_options auto_scaling_group, policy_name, options

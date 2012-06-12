@@ -478,6 +478,22 @@ module AWS
 
       end
 
+      context '#iam_instance_profile_id' do
+        let(:attribute) { :iam_instance_profile_id }
+        let(:response_field) { :iam_instance_profile }
+        let(:response_value) {{ :id => 'profile-id', :arn => 'profile-arn' }}
+        let(:translated_value) { 'profile-id' }
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
+      end
+
+      context '#iam_instance_profile_arn' do
+        let(:attribute) { :iam_instance_profile_arn }
+        let(:response_field) { :iam_instance_profile }
+        let(:response_value) {{ :id => 'profile-id', :arn => 'profile-arn' }}
+        let(:translated_value) { 'profile-arn' }
+        it_should_behave_like "ec2 instance attribute accessor (describe_instances)"
+      end
+
       context '#image_id' do
         let(:attribute) { :image_id }
         let(:response_field) { attribute }

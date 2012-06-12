@@ -36,11 +36,16 @@ module AWS::Core
 
       let(:resource) { AWS::SomeService::MyResource.new }
 
-      let(:signer) { double("signer", :access_key_id => "ACCESS_KEY") }
+      let(:credential_provider) { 
+        double("creds", :access_key_id => "ACCESS_KEY") 
+      }
 
-      let(:config) { double("config",
-                            :signer => signer,
-                            :some_service_endpoint => "ENDPOINT") }
+      let(:config) { 
+        double("config", {
+          :credential_provider => credential_provider,
+          :some_service_endpoint => "ENDPOINT",
+        })
+      }
 
       before(:each) do
         resource.stub(:config).and_return(config)

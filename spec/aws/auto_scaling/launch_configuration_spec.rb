@@ -47,6 +47,8 @@ module AWS
             { :mapping => 2 },
           ],
           :security_groups => groups,
+          :iam_instance_profile => 'iam-profile',
+          :spot_price => '123.45',
         }
       }
 
@@ -79,6 +81,8 @@ module AWS
             { :mapping => 1 },
             { :mapping => 2 },
           ]
+          launch_config.iam_instance_profile.should == 'iam-profile'
+          launch_config.spot_price.should == '123.45'
         end
 
       end
