@@ -25,7 +25,7 @@ module AWS
 
       # Request verification for an email address or a domain.
       # @param [String] email_or_domain
-      # @return [Identity] Returns an {Iidentity} object.  Identities for 
+      # @return [Identity] Returns an {Identity} object.  Identities for 
       #   domains will have a #verification_token.
       def verify email_or_domain
 

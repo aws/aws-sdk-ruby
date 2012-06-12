@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'uri'
-require 'base64'
 require 'time'
 
 module AWS
@@ -343,17 +342,19 @@ module AWS
       #   {#where}).
       def fields
 
-        signature = config.signer.sign(policy, "sha1")
+        secret = config.credential_provider.secret_access_key
+        signature = Core::Signer.sign(secret, policy, 'sha1')
 
         fields = {
-          "AWSAccessKeyId" => config.signer.access_key_id,
+          "AWSAccessKeyId" => config.credential_provider.access_key_id,
           "key" => key,
           "policy" => policy,
           "signature" => signature
         }.merge(optional_fields)
 
-        fields["x-amz-security-token"] = config.signer.session_token if
-          config.signer.session_token
+        if token = config.credential_provider.session_token
+          fields["x-amz-security-token"] = token
+        end
 
         fields.merge(optional_fields)
 
@@ -501,8 +502,8 @@ module AWS
         conditions += range_conditions
         conditions += ignored_conditions
         
-        if config.signer.session_token
-          conditions << {"x-amz-security-token" => config.signer.session_token}
+        if token = config.credential_provider.session_token
+          conditions << { "x-amz-security-token" => token }
         end
 
         conditions

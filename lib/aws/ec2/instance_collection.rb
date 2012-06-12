@@ -76,12 +76,16 @@ module AWS
       # @param [Hash] options Options for new instance.  +:image_id+ is
       #   the only required option.
       #
-      # @option options :count How many instances to request.  By
+      # @option options [Integer] :count How many instances to request.  By
       #   default one instance is requested.  You can specify this
       #   either as an integer or as a Range, to indicate the
       #   minimum and maximum number of instances to run.  Note that
       #   for a new account you can request at most 20 instances at
       #   once.
+      #
+      # @option options [String] :iam_instance_profile The name or
+      #   ARN of an IAM instance profile.  This provides credentials
+      #   to the EC2 instance(s) via the instance metadata service.
       #
       # @option options [Hash] :block_device_mappings This must be a
       #   hash; the keys are device names to map, and the value for
@@ -191,6 +195,17 @@ module AWS
       #   objects.
       #
       def create options = {}
+
+        if profile = options.delete(:iam_instance_profile)
+          profile = case profile
+          when /^arn:aws:iam::/ then { :arn => profile }
+          when String then { :name => profile }
+          when Hash then profile
+          else 
+            msg = "expected a name or ARN string for :iam_instance_profile"
+          end
+          options[:iam_instance_profile] = profile
+        end
 
         if image = options.delete(:image)
           options[:image_id] = image.id

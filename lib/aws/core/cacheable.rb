@@ -35,7 +35,7 @@ module AWS
       def cache_key
         @cache_key ||= begin
           endpoint_method = self.class.service_ruby_name + "_endpoint"
-          config.signer.access_key_id + ":" +
+          config.credential_provider.access_key_id + ":" +
             config.send(endpoint_method) + ":" +
             self.class.name + ":" +
             local_cache_key

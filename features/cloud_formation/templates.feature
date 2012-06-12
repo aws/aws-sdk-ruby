@@ -70,5 +70,5 @@ Feature: CloudFormations templates
     """
     Then I should get a response like:
     """
-    {:code=>"ValidationError", :message=>"Invalid template resource property ConfigurationTemplates"} 
+    {:code=>"ValidationError", :message=>"Invalid template resource property 'ConfigurationTemplates'"} 
     """

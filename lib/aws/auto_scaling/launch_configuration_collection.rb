@@ -57,6 +57,10 @@ module AWS
       #
       # @option options [String] :user_data The user data available to 
       #   the launched Amazon EC2 instances.
+      #
+      # @option options [String] :iam_instance_profile
+      #
+      # @option options [String] :spot_price
       # 
       # @return [LaunchConfiguration]
       #
@@ -66,16 +70,22 @@ module AWS
         client_opts[:launch_configuration_name] = name
         client_opts[:image_id] = image_id_opt(image)
         client_opts[:instance_type] = instance_type
-        client_opts[:block_device_mappings] = options[:block_device_mappings] if
-          options.key?(:block_device_mappings)
         client_opts[:instance_monitoring] = instance_monitoring_opt(options) if
           options.key?(:detailed_instance_monitoring)
-        client_opts[:kernel_id] = options[:kernel_id] if options[:kernel_id]
         client_opts[:key_name] = key_name_opt(options) if options[:key_pair]
-        client_opts[:ramdisk_id] = options[:ramdisk_id] if options[:ramdisk_id]
         client_opts[:security_groups] = security_groups_opt(options) if
           options.key?(:security_groups)
         client_opts[:user_data] = user_data_opt(options) if options[:user_data]
+
+        [
+          :iam_instance_profile,
+          :spot_price,
+          :kernel_id,
+          :ramdisk_id,
+          :block_device_mappings,
+        ].each do |opt|
+          client_opts[opt] = options[opt] if options.key?(opt)
+        end
 
         client.create_launch_configuration(client_opts)
 

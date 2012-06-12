@@ -146,7 +146,7 @@ module AWS
   # send and how quickly you can send it. These sending limits are defined
   # as follows:
   #
-  # * +:max_send_rate+ — Maximum number of emails you can send per second.
+  # * +:max_send_rate+ - Maximum number of emails you can send per second.
   # * +:max_24_hour_send+ - Maximum number of emails you can send in a 
   #   24-hour period.
   #

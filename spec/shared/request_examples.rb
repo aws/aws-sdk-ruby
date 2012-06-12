@@ -28,8 +28,10 @@ module AWS::Core
     end
     
     context '#string_to_sign' do
+      
+      let(:string_to_sign) { request.send(:string_to_sign) }
 
-      let(:lines) { request.string_to_sign.split(/\n/, 4) }
+      let(:lines) { string_to_sign.split(/\n/, 4) }
       
       it 'first line should match the request http method' do
         lines[0].should == request.http_method
@@ -46,41 +48,38 @@ module AWS::Core
       it '4th line should be sorted encoded key/value pairs' do
         request.add_param('xyz', 'mno')
         request.add_param('abc', 'a c')
-        request.string_to_sign.split(/\n/)[3].should == 'abc=a%20c&xyz=mno'
+        string_to_sign.split(/\n/)[3].should == 'abc=a%20c&xyz=mno'
       end
 
     end
 
     context '#add_authorization!' do
 
-      let(:signer) { DefaultSigner.new('KEY', 'secret') }
-
-      before(:each) do
-        signer.stub(:sign).and_return('SIGNATURE')
-      end
-
-      it 'sets the access key ID' do
-        request.add_authorization!(signer)
-        request.access_key_id.should == "KEY"
-      end
+      let(:credential_provider) {
+        CredentialProviders::StaticProvider.new({
+          :access_key_id => 'KEY',
+          :secret_access_key => 'secret',
+        })
+      }
 
       it 'adds a signature version param' do
-        request.add_authorization!(signer)
+        request.add_authorization!(credential_provider)
         request.get_param('SignatureVersion').value.should == '2'
       end
 
       it 'adds a signature method param' do
-        request.add_authorization!(signer)
+        request.add_authorization!(credential_provider)
         request.get_param('SignatureMethod').value.should == 'HmacSHA256'
       end
 
       it 'adds a signature param' do
-        request.add_authorization!(signer)
-        request.get_param('Signature').value.should == 'SIGNATURE'
+        request.add_authorization!(credential_provider)
+        request.get_param('Signature').value.should ==
+          "Se10W1eBHf09PwK7gAdetObg5bzUuo8vNxrIaCDgwJw="
       end
 
       it 'adds the access key id param' do
-        request.add_authorization!(signer)
+        request.add_authorization!(credential_provider)
         request.get_param('AWSAccessKeyId').value.should == 'KEY'
       end
 
@@ -94,42 +93,36 @@ module AWS::Core
 
     context '#add_authorization!' do
 
-      let(:signer) { DefaultSigner.new('KEY', 'secret') }
+      context 'no configured session token' do
 
-      before(:each) do
-        signer.stub(:sign).and_return('SIGNATURE')
-      end
-
-      context 'signer does not support a session token' do
+        let(:credential_provider) {
+          CredentialProviders::StaticProvider.new({
+            :access_key_id => 'KEY',
+            :secret_access_key => 'secret',
+          })
+        }
 
         it 'should not add the SecurityToken parameter' do
-          request.add_authorization!(signer)
+          request.add_authorization!(credential_provider)
           request.params.map { |p| p.name }.
             should_not include("SecurityToken")
         end
 
       end
 
-      context 'signer does not have a session token configured' do
+      context 'has a session token configured' do
 
-        it 'should not add the SecurityToken parameter' do
-          signer.stub(:session_token)
-          request.add_authorization!(signer)
-          request.params.map { |p| p.name }.
-            should_not include("SecurityToken")
-        end
+        let(:credential_provider) {
+          CredentialProviders::StaticProvider.new({
+            :access_key_id => 'KEY',
+            :secret_access_key => 'secret',
+            :session_token => 'TOKEN',
+          })
+        }
 
-      end
-
-      context 'signer has a session token configured' do
-
-        it 'should add the SecurityToken parameter prior to computing the signature' do
-          signer.stub(:session_token).and_return("TOKEN")
-          signer.should_receive(:sign) do |*args|
-            request.get_param("SecurityToken").value.should == "TOKEN"
-            "SIGNATURE"
-          end
-          request.add_authorization!(signer)
+        it 'should add the SecurityToken parameter' do
+          request.add_authorization!(credential_provider)
+          request.get_param("SecurityToken").value.should == "TOKEN"
         end
 
       end
@@ -142,11 +135,12 @@ module AWS::Core
 
     let(:request) { described_class.new }
 
-    let(:signer) { DefaultSigner.new('KEY', 'SECRET') }
-
-    before(:each) do
-      signer.stub(:sign).and_return('SIGNATURE')
-    end
+    let(:credential_provider) {
+      CredentialProviders::StaticProvider.new({
+        :access_key_id => 'KEY',
+        :secret_access_key => 'SECRET',
+      })
+    }
 
     context '#string_to_sign' do
       
@@ -161,8 +155,7 @@ module AWS::Core
     context '#add_authorization!' do
 
       it 'adds a signature string to the headers' do
-        signer.stub(:sign).and_return('SIGN')
-        request.add_authorization!(signer)
+        request.add_authorization!(credential_provider)
         request.headers['x-amzn-authorization'].should ==
           "AWS3-HTTPS AWSAccessKeyId=KEY,Algorithm=HmacSHA256,Signature=SIGN"
       end

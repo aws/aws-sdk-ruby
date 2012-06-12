@@ -73,6 +73,8 @@ module AWS
             :ramdisk_id => 'ramdisk-id',
             :security_groups => %w(sg-12345678 sg-22345678),
             :user_data => Base64.encode64('user-data'),
+            :iam_instance_profile => 'iam-profile',
+            :spot_price => '123.45',
           })
 
           launch_configurations.create('name', 'image', 'type', {
@@ -95,6 +97,8 @@ module AWS
             :ramdisk_id => 'ramdisk-id',
             :security_groups => %w(sg-12345678 sg-22345678),
             :user_data => 'user-data',
+            :iam_instance_profile => 'iam-profile',
+            :spot_price => '123.45',
           })
         end
 

@@ -56,7 +56,9 @@ When /^I delete the auto scaling group$/ do
 end
 
 Then /^the auto scaling group should not exist$/ do
-  @auto_scaling_group.exists?.should == false
+  eventually do
+    @auto_scaling_group.exists?.should == false
+  end
 end
 
 When /^I get the auto scaling group by name$/ do

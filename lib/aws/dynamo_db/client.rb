@@ -35,12 +35,13 @@ module AWS
 
         super
 
-        # If the signer does not provide a session token, then we will
-        # replace it with another signer that manages an AWS STS session.
-        # This session will auto renew whenever it has expired and will
-        # be shared across threads.
-        if config.signer.session_token.nil?
-          @signer = Core::SessionSigner.for(config) 
+        # Replaces the current credential provider with a SessionProvider
+        # that provides refreshable STS session credentials.  DynamoDB
+        # requires session credentials.
+        if credential_provider.session_token.nil?
+          long_term_credentials = credential_provider.credentials
+          @credential_provider = Core::CredentialProviders::SessionProvider.for(
+            long_term_credentials)
         end
 
       end
@@ -839,26 +840,17 @@ module AWS
       end
 
       def should_retry? response 
-        if possible_expired_credentials?(response)
-          true
-        elsif response.error.is_a?(Errors::ProvisionedThroughputExceededException)
+        if response.error.is_a?(Errors::ProvisionedThroughputExceededException)
           config.dynamo_db_retry_throughput_errors?
         else
           super
         end
       end
 
-      def rebuild_http_request response
-        # called when a request is going to be retried, in case of 
-        # expired credentials we should refresh the session
-        signer.refresh_session if possible_expired_credentials?(response)
-        super
-      end
-
       def sleep_durations response
 
         retry_count = 
-          if possible_expired_credentials?(response)
+          if expired_credentials?(response)
             config.max_retries == 0 ? 0 : 1
           else
             config.max_retries { 10 }
@@ -874,13 +866,6 @@ module AWS
           end
         end
 
-      end
-
-      # Returns true if we get an access denied error from the service AND
-      # our signer is capible of getting new short-term credentials
-      def possible_expired_credentials? response
-        signer.respond_to?(:refresh_session) and
-        response.error.is_a?(Errors::ExpiredTokenException)
       end
 
     end
