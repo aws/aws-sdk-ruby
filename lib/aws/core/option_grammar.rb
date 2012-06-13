@@ -164,11 +164,12 @@ module AWS
   
           def validate(value, context = nil)
             raise format_error("float value", context) unless
-              value.respond_to? :to_float
+              value.kind_of?(Numeric) or
+              value.respond_to? :to_f
           end
   
           def encode_value(value)
-            value.to_s
+            value.to_f.to_s
           end
   
         end
