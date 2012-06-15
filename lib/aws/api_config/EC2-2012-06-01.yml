@@ -34,7 +34,6 @@
   :inputs:
     InstanceId:
     - :string
-    - :required
     PublicIp:
     - :string
     AllocationId:

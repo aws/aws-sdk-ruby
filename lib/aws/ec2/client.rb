@@ -103,7 +103,7 @@ module AWS
       #
       # === Options:
       #
-      # * +:instance_id+ - *required* - (String) The instance to associate with
+      # * +:instance_id+ - (String) The instance to associate with
       #   the IP address.
       # * +:public_ip+ - (String) IP address that you are assigning to the
       #   instance.
