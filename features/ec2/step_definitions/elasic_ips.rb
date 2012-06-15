@@ -71,3 +71,12 @@ Then /^the elastic ip should not exist$/ do
     @elastic_ip.exists?.should == false
   end
 end
+
+When /^I associate the network interface to the elastic ip$/ do
+  @elastic_ip.associate :network_interface => @network_interface
+end
+
+Then /^the elastic ip should be assigned to the network interface$/ do
+  @elastic_ip.network_interface.should == @network_interface
+end
+

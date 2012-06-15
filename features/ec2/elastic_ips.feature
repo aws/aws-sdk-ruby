@@ -62,3 +62,16 @@ Feature: EC2 Elastic IPs
     When I disassociate the elastic ip address
     And I release the elastic ip address
     Then the elastic ip should not exits
+
+  Scenario: Associating an elastic ip with a network interface
+    Given I create a vpc
+    And I create a subnet
+    And I create an internet gateway
+    And I attach the internet gateway to the vpc
+    And I create a network interface
+    And I allocate a VPC elastic ip
+    When I associate the network interface to the elastic ip
+    Then the elastic ip should be assigned to the network interface
+    # cleanup some (the normal test cleanup can get the rest)
+    When I disassociate the elastic ip address
+    And I release the elastic ip address

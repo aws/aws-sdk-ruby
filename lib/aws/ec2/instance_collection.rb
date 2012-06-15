@@ -24,7 +24,7 @@ module AWS
     #
     # To run an instance:
     #
-    #   ec2.instances.create(:image_id => "ami-8c1fece5")
+    #   ec2.instances.create(:image_id => "ami-1b814f72")
     #
     # To get an instance by ID:
     #

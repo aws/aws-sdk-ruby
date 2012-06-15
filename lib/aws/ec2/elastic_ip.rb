@@ -21,13 +21,14 @@ module AWS
     #   The ID representing the allocation of the address for use with Amazon 
     #   VPC.
     #
-    # @attr_reader [String] Indicates whether this elastic ip address is for 
-    #   EC2 instances ('standard') or VPC instances ('vpc').
+    # @attr_reader [String] domain Indicates whether this elastic ip address 
+    #   is for EC2 instances ('standard') or VPC instances ('vpc').
     #
-    # @attr_reader [String,nil] The ID of the association between this elastic
-    #   ip address and an EC2 VPC instance (VPC only).
+    # @attr_reader [String,nil] association_id The ID of the association 
+    #   between this elastic ip address and an EC2 VPC instance (VPC only).
     #
-    # @attr_reader [String,nil] The ID of the network interface (VPC only).
+    # @attr_reader [String,nil] network_interface_id The ID of the network 
+    #   interface (VPC only).
     #
     # @attr_reader [String,nil] network_interface_owner_id 
     #   The ID of the AWS account that owns the network interface (VPC only).
@@ -67,10 +68,10 @@ module AWS
         domain == 'vpc'
       end
 
-      # @return [Boolean] Returns true if this IP address is attached to
-      #   an EC2 instance.
+      # @return [Boolean] Returns true if this IP address is associated
+      #   with an EC2 instance or a network interface.
       def associated?
-        !!instance_id
+        !!(instance_id || association_id)
       end
 
       alias_method :attached?, :associated?
@@ -80,6 +81,15 @@ module AWS
       def instance
         if instance_id = self.instance_id
           Instance.new(instance_id, :config => config)
+        end
+      end
+
+      # @return [NetworkInterface,nil] Returns the network interface this
+      #   elastic ip is associated with.  Returns +nil+ if this is not
+      #   associated with an elastic ip address.
+      def network_interface
+        if nid = network_interface_id
+          NetworkInterface.new(nid, :config => config)
         end
       end
 
@@ -98,6 +108,47 @@ module AWS
         nil
       end
       alias_method :release, :delete
+
+      # Associates this elastic IP address with an instance or a network
+      # interface.  You may provide +:instance+ or +:network_interface+
+      # but not both options.
+      #
+      #   # associate with an instance
+      #   eip.associate :instance => 'i-12345678'
+      #
+      #   # associate with a network interface
+      #   eip.associate :network_interface => 'ni-12345678'
+      #
+      # @param [Hash] options
+      #
+      # @option options [String,Instance] :instance The id of an instance
+      #   or an {Instance} object.  
+      #
+      # @option options [String,NetworkInterface] :network_interface The id
+      #   of a network interface or a {NetworkInterface} object.
+      #
+      # @return [String] Returns the resulting association id.
+      #
+      def associate options
+
+        client_opts = {}
+
+        [:instance,:network_interface].each do |opt|
+          if value = options[opt]
+            client_opts[:"#{opt}_id"] = value.is_a?(Resource) ? value.id : value
+          end
+        end
+
+        if vpc?
+          client_opts[:allocation_id] = allocation_id
+        else
+          client_opts[:public_ip] = public_ip
+        end
+
+        resp = client.associate_address(client_opts)
+        resp.data[:association_id]
+
+      end
 
       # Disassociates this elastic IP address from an EC2 instance.
       # Raises an exception if this elastic IP is not currently
