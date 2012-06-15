@@ -92,12 +92,13 @@ module AWS
   
           begin
             http_response = self.class.send(method, url, opts)
+            unless http_response.nil?
+              response.body = http_response.body
+              response.status = http_response.code.to_i
+              response.headers = http_response.to_hash
+            end
           rescue Timeout::Error, Errno::ETIMEDOUT => e
             response.timeout = true
-          else
-            response.body = http_response.body
-            response.status = http_response.code.to_i
-            response.headers = http_response.to_hash
           end
         end
       end
