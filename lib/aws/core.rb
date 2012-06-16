@@ -128,6 +128,7 @@ module AWS
         autoload :Handler,         'handler'
         autoload :NetHttpHandler,  'net_http_handler'
         autoload :HTTPartyHandler, 'httparty_handler' # non-standard inflection
+        autoload :EMHttpHandler,   'em_http_handler'
         autoload :Request,         'request'
         autoload :Response,        'response'
       end
