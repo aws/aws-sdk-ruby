@@ -1,0 +1,269 @@
+---
+:operations:
+- :name: AddInstanceGroups
+  :method: :add_instance_groups
+  :inputs:
+    JobFlowId:
+      - :string
+      - :required
+    InstanceGroups.member:
+    - :list: &InstanceGroupConfig
+      - :structure:
+          BidPrice:
+            - :string
+          InstanceCount:
+            - :integer
+            - :required
+          InstanceRole:
+            - :string
+            - :required
+          InstanceType:
+            - :string
+            - :required
+          Market:
+            - :string
+          Name:
+            - :string
+    - :required
+    - :rename: InstanceGroups
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+- :name: AddJobFlowSteps
+  :method: :add_job_flow_steps
+  :inputs:
+    JobFlowId:
+      - :string
+      - :required
+    Steps.member:
+    - :list:
+      - :structure: &StepConfig
+          ActionOnFailure:
+            - :string
+          HadoopJarStep:
+          - :structure:
+              Args.member:
+              - :list:
+                - :string
+              - :rename: args
+              Jar:
+                - :string
+                - :required
+              MainClass:
+                - :string
+              Properties.member:
+              - :map:
+                  :key:
+                  - :string
+                  :value:
+                  - :string
+                  :key_param: Name
+                  :value_param: Value
+              - :rename: properties
+          Name:
+            - :string
+            - :required
+    - :required
+    - :rename: Steps
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+- :name: DescribeJobFlows
+  :method: :describe_job_flows
+  :inputs:
+    CreatedAfter:
+    - :timestamp
+    CreatedBefore:
+    - :timestamp
+    DescriptionType:    # secret param called with 'EXTENDED' in client
+    - :string
+    JobFlowIds.member:
+    - :list:
+      - :string
+    - :rename: JobFlowIds
+    JobFlowStates.member:
+    - :list:
+      - :string
+    - :rename: JobFlowStates
+  :outputs:
+    :children:
+      DescribeJobFlowsResult:
+        :ignore: true
+        :children:
+          JobFlows:
+            :ignore: true
+            :children:
+              member:
+                :list: true
+                :rename: :job_flows
+                :children:
+                  Steps:
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :steps
+                        :children:
+                          StepConfig:
+                            :children:
+                              HadoopJarStep:
+                                :children:
+                                  Properties:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :properties
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :args
+                  Instances:
+                    :children:
+                      InstanceGroups:
+                        :ignore: true
+                        :children:
+                          member:
+                            :list: true
+                            :rename: :instance_groups
+                  BootstrapActions:
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :bootstrap_actions
+                        :children:
+                          BootstrapActionConfig:
+                            :children:
+                              ScriptBootstrapAction:
+                                :children:
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :list: true
+                                        :rename: :args
+                  SupportedProducts:
+                    :ignore: true
+                    :children:
+                      member:
+                        :list: true
+                        :rename: :supported_products
+- :name: ModifyInstanceGroups
+  :method: :modify_instance_groups
+  :inputs:
+    InstanceGroups.member:
+    - :list:
+      - :structure:
+          InstanceGroupId:
+            - :string
+            - :required
+          InstanceCount:
+            - :integer
+            - :required
+    - :required
+    - :rename: InstanceGroups
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+- :name: RunJobFlow
+  :method: :run_job_flow
+  :inputs:
+    AdditionalInfo:
+      - :string
+    AmiVersion:
+      - :string
+    BootstrapActions.member:
+    - :list:
+      - :structure:
+          Name:
+            - :string
+            - :required
+          ScriptBootstrapAction:
+          - :structure:
+              Args.member:
+              - :list:
+                - :string
+              - :rename: args
+              Path:
+                - :string
+                - :required
+    - :rename: BootstrapActions
+    Instances:
+      - :structure:
+          Ec2KeyName:
+            - :string
+          Ec2SubnetId:
+            - :string
+          HadoopVersion:
+            - :string
+          InstanceCount:
+            - :integer
+            - :required
+          InstanceGroups: *InstanceGroupConfig
+          KeepJobFlowAliveWhenNoSteps:
+            - :boolean
+            - :required
+          MasterInstanceType:
+            - :string
+            - :required
+          Placement:
+            - :structure:
+                AvailabilityZone:
+                  - :string
+                  - :required
+          SlaveInstanceType:
+            - :string
+            - :required
+          TerminationProtected:
+            - :boolean
+    LogUri:
+      - :string
+    Name:
+      - :string
+      - :required
+    Steps.member:
+      - :list:
+        - :structure: *StepConfig
+      - :rename: Steps
+    SupportedProducts.member:
+      - :list:
+        - :string
+      - :rename: SupportedProducts
+  :outputs:
+    :children:
+      RunJobFlowResult:
+        :ignore: true
+- :name: SetTerminationProtection
+  :method: :set_termination_protection
+  :inputs:
+    JobFlowIds.member:
+    - :required
+    - :list:
+      - :string
+    - :rename: JobFlowIds
+    TerminationProtected:
+    - :required
+    - :boolean
+  :outputs:
+    :children:
+      TerminateJobFlowsResponse:
+        :ignore: true
+- :name: TerminateJobFlows
+  :method: :terminate_job_flows
+  :inputs:
+    JobFlowIds.member:
+    - :required
+    - :list:
+      - :string
+    - :rename: JobFlowIds
+  :outputs:
+    :children:
+      TerminateJobFlowsResponse:
+        :ignore: true
+

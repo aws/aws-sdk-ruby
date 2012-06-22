@@ -25,6 +25,7 @@ require 'aws/core/autoloader'
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ELB}
+# * {AWS::EMR}
 # * {AWS::IAM}
 # * {AWS::S3}
 # * {AWS::SNS}
@@ -80,6 +81,7 @@ module AWS
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
       autoload :LazyErrorClasses,          'lazy_error_classes'
+      autoload :LogClient,                 'log_client'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
       autoload :Model,                     'model'
