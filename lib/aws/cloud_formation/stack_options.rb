@@ -27,7 +27,7 @@ module AWS
       def apply_template opts
         if template = opts.delete(:template)
           case template
-          when String 
+          when String
             if template.match(/http/)
               opts[:template_url] = template
             else
@@ -35,7 +35,7 @@ module AWS
             end
           when URI then opts[:template_url] = template.to_s
           when S3::S3Object then opts[:template_body] = template.read
-          else 
+          else
             opts[:template_body] = template.to_json
           end
         end
