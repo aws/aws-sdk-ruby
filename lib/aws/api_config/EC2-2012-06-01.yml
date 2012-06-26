@@ -271,6 +271,13 @@
     ReasonMessage:
     - :string
   :outputs: {}
+- :name: CancelExportTask
+  :method: :cancel_export_task
+  :inputs:
+    ExportTaskId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: CancelSpotInstanceRequests
   :method: :cancel_spot_instance_requests
   :inputs:
@@ -371,6 +378,29 @@
     - :string
     NoReboot:
     - :boolean
+  :outputs: {}
+- :name: CreateInstanceExportTask
+  :method: :create_instance_export_task
+  :inputs:
+    Description:
+    - :string
+    InstanceId:
+    - :string
+    - :required
+    TargetEnvironment:
+    - :string
+    - :required
+    ExportToS3:
+    - :structure:
+        DiskImageFormat:
+        - :string
+        ContainerFormat:
+        - :string
+        S3Bucket:
+        - :string
+        - :required
+        S3Prefix:
+        - :string
   :outputs: {}
 - :name: CreateInternetGateway
   :method: :create_internet_gateway
@@ -1175,6 +1205,21 @@
                   item:
                     :rename: :tag_set
                     :list: true
+- :name: DescribeExportTasks
+  :method: :describe_export_tasks
+  :inputs:
+    ExportTaskId:
+    - :list:
+      - :string
+    - :rename: exportTaskIds
+  :outputs:
+    :children:
+      exportTaskSet:
+        :ignore: true
+        :children:
+          item:
+            :rename: :export_task_set
+            :list: true
 - :name: DescribeImageAttribute
   :method: :describe_image_attribute
   :inputs:
@@ -2664,7 +2709,9 @@
               - :string
         - :rename: blockDeviceMappings
         Monitoring:
-        - :boolean
+        - :structure:
+            Enabled:
+            - :boolean
         SubnetId:
         - :string
         DisableApiTermination:
@@ -2991,6 +3038,10 @@
     VolumeId:
     - :string
     - :required
+    Attribute:
+    - :string
+    OperationType:
+    - :string
     AutoEnableIO:
     - :boolean
   :outputs: {}
@@ -3259,12 +3310,6 @@
               DeleteOnTermination:
               - :boolean
         - :rename: networkInterfaces
-        IamInstanceProfile:
-        - :structure:
-            Arn:
-            - :string
-            Name:
-            - :string
   :outputs:
     :children:
       spotInstanceRequestSet:
@@ -3570,12 +3615,6 @@
           DeleteOnTermination:
           - :boolean
     - :rename: networkInterfaces
-    IamInstanceProfile:
-    - :structure:
-        Arn:
-        - :string
-        Name:
-        - :string
   :outputs:
     :children:
       groupSet:

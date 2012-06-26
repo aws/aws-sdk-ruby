@@ -61,3 +61,46 @@ When /^I enumerate identities with a limit of (\d+) and batch size of (\d+)$/ do
     #...
   end
 end
+
+When /^I set the SES identity bounce topic$/ do
+  @identity.bounce_topic = @topic
+end
+
+When /^I set the SES identity complaint topic$/ do
+  @identity.complaint_topic = @topic
+end
+
+When /^I disable the SES identity forwarding$/ do
+  @identity.forwarding_enabled = false
+end
+
+When /^I enable the SES identity forwarding$/ do
+  @identity.forwarding_enabled = true
+end
+
+Then /^the SES identity forwarding should be disabled$/ do
+  eventually do
+    @identity.forwarding_enabled.should eq(false)
+  end
+end
+
+When /^I set the SES identity bounce topic to nil$/ do
+  @identity.bounce_topic = nil
+end
+
+When /^I set the SES identity complaint topic to nil$/ do
+  @identity.complaint_topic = nil
+end
+
+Then /^the SES identity bounce topic should be nil$/ do
+  eventually do
+    @identity.bounce_topic.should eq(nil)
+  end
+end
+
+Then /^the SES identity complaint topic should be nil$/ do
+  eventually do
+    @identity.complaint_topic.should eq(nil)
+  end
+end
+

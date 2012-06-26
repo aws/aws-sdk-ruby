@@ -647,6 +647,87 @@ module AWS
         instance_action :stop
       end
 
+      # This produces an image of an EC2 instance for use in another
+      # virtualization environment and then writes the image to a
+      # S3 bucket.  
+      #
+      # == Granting EC2 write access to your bucket
+      #
+      # Before you can export an image to an S3 bucket, you must modify
+      # the bucket ACL.  You only need to do this once per bucket.
+      #
+      #   s3.buckets['bucket-name'].acl.change do |acl|
+      #     acl.grant(:read_acp).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #     acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #   end
+      #
+      # == Performing the export
+      #
+      # Simply call #export_to_s3 on your instance.   Only instances
+      # derived from your own ImportInstance tasks may be exported.
+      #
+      #    task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
+      #
+      # == Downloading the results
+      #
+      # Given a completed export task you can download the final image:
+      #
+      #   File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
+      #
+      # @param [S3::Bucket,String] bucket The destination bucket.  May
+      #   be the name of the bucket (string) or a {S3::Bucket} object. The 
+      #   bucket must exist and grant write permissiosn to the AWS account
+      #   'vm-import-export@amazon.com.'.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :target_environment ('vmware') The target 
+      #   virtualization environment.  Valid values include: 'vmware', 'citrix'
+      #   and 'microsoft'.
+      #
+      # @option options [String] :disk_image_format The format for the exported
+      #    image.  Defaults to 'vmdk' if +:target_environemnt+ is 'vmware', 
+      #    otherwise, 'vhd'.
+      #
+      # @option options [String] :container_format The container format used to 
+      #   combine disk images with metadata (such as OVF). If absent, only
+      #   the disk image will be exported.  Defaults to 'ova' if 
+      #   +:target_environment+ is 'vmware', otherwise ommited.
+      #
+      # @option options [String] :description Description of the conversion 
+      #   task or the resource being exported.
+      #
+      # @option options [String] :prefix (nil) The image is written to a 
+      #   single object in the bucket at the key:
+      #
+      #     "#{prefix}#{export_task_id}.#{disk_image_format}"
+      #
+      # @return [ExportTask]
+      #
+      def export_to_s3 bucket, options = {}
+
+        bucket_name = bucket.is_a?(S3::Bucket) ? bucket.name : bucket.to_s
+
+        opts = {}
+        opts[:instance_id] = instance_id
+        opts[:description] = options[:description] if options[:description]
+        opts[:target_environment] = options[:target_environment] || 'vmware'
+        opts[:export_to_s3] = {}
+        opts[:export_to_s3][:s3_bucket] = bucket_name
+        [:disk_image_format, :container_format, :s3_prefix].each do |opt|
+          opts[:export_to_s3][opt] = options[opt] if options.key?(opt)
+        end
+
+        resp = client.create_instance_export_task(opts)
+
+        ExportTask.new_from(
+          :create_instance_export_task, 
+          resp[:export_task],
+          resp[:export_task][:export_task_id], 
+          :config => config)
+
+      end
+
       protected
 
       def find_in_response resp

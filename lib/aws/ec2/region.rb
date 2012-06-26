@@ -77,6 +77,7 @@ module AWS
         :vpn_gateways,
         :dhcp_options,
         :vpn_connections,
+        :export_tasks,
       ]
 
       PROXIED_METHODS.each do |method|

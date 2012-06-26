@@ -89,8 +89,9 @@ module AWS
 
       context '#associated?' do
 
-        it 'returns false when :instance_id is not set' do
+        it 'returns false when :instance_id and :association_id are not set' do
           ip.stub(:instance_id).and_return(nil)
+          ip.stub(:association_id).and_return(nil)
           ip.associated?.should == false
         end
 

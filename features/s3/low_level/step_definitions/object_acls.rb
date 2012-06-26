@@ -57,7 +57,7 @@ When /^I ask the client to set an object ACL using an AccessControlList object$/
   }
   @result = @s3_client.set_object_acl(:bucket_name => @bucket_name,
                                    :key => @object_key,
-                                   :acl => acl)
+                                   :acl => AWS::S3::AccessControlList.new(acl))
 end
 
 Then /^the client should have made a "([^\"]*)" request to the object ACL$/ do |method|

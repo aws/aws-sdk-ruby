@@ -45,10 +45,10 @@ module AWS
       #   to AWS.config when not provided.
       #
       def initialize options = {}
-        @config = options[:config]
-        @config ||= AWS.config
+        options = options.dup
+        @config = (options.delete(:config) || AWS.config)
         @config = @config.with(options)
-        @client = config.send(Inflection.ruby_name(self.class.to_s) + '_client')
+        @client = @config.send(Inflection.ruby_name(self.class.to_s) + '_client')
       end
 
       # @return [String]

@@ -51,7 +51,6 @@ module AWS::Core::Http
       http.stub(:request).and_return(http_response)
       http.stub(:started?).and_return(true)
       Net::HTTP.stub(:new).and_return(http)
-      AWS::Core::Http::NetHttpHandler.pool.empty!
     end
 
     context 'http session' do

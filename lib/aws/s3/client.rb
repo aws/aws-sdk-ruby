@@ -56,15 +56,22 @@ module AWS
         add_client_request_method(method_name) do
 
           configure_request do |req, options|
-              require_bucket_name!(options[:bucket_name])
+
+            require_bucket_name!(options[:bucket_name])
+
             req.http_method = verb
             req.bucket = options[:bucket_name]
             req.add_param(subresource) if subresource
 
             if header_options = method_options[:header_options]
-              header_options.each do |(option_name, header)|
-                req.headers[header] = options[option_name] if
-                  options[option_name]
+              header_options.each do |(opt, header)|
+                if value = options[opt]
+                  # for backwards compatability we translate canned acls
+                  # header values from symbols to strings (e.g. 
+                  # :public_read translates to 'public-read')
+                  value = (opt == :acl ? value.to_s.tr('_', '-') : value)
+                  req.headers[header] = value
+                end
               end
             end
 
@@ -109,11 +116,26 @@ module AWS
       # @overload create_bucket(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
-      bucket_method(:create_bucket, :put) do
+      bucket_method(:create_bucket, :put, :header_options => {
+        :acl => 'x-amz-acl',
+        :grant_read => 'x-amz-grant-read',
+        :grant_write => 'x-amz-grant-write',
+        :grant_read_acp => 'x-amz-grant-read-acp',
+        :grant_write_acp => 'x-amz-grant-write-acp',
+        :grant_full_control => 'x-amz-grant-full-control',
+      }) do
+
         configure_request do |req, options|
           validate_bucket_name!(options[:bucket_name])
-          req.canned_acl = options[:acl]
           if location = options[:location_constraint]
             xmlns = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
             req.body = <<-XML
@@ -124,7 +146,9 @@ module AWS
           end
           super(req, options)
         end
+
       end
+      alias_method :put_bucket, :create_bucket
 
       # Deletes an empty bucket.
       # @overload delete_bucket(options = {})
@@ -308,32 +332,87 @@ module AWS
 
       end
 
-      # Sets the access control list for a bucket.
-      # @overload set_bucket_acl(options = {})
+      # Sets the access control list for a bucket.  You must specify an ACL
+      # via one of the following methods:
+      #
+      # * as a canned ACL (via +:acl+)
+      # * as a list of grants (via the +:grant_*+ options)
+      # * as an access control policy document (via +:access_control_policy+)
+      #
+      # @example Using a canned acl
+      #   s3_client.put_bucket_acl(
+      #     :bucket_name => 'bucket-name', 
+      #     :acl => 'public-read')
+      #
+      # @example Using grants
+      #   s3_client.put_bucket_acl(
+      #     :bucket_name => 'bucket-name', 
+      #     :grant_read => 'uri="http://acs.amazonaws.com/groups/global/AllUsers"',
+      #     :grant_full_control => 'emailAddress="xyz@amazon.com", id="8a9...fa7"')
+      #
+      # @example Using an access control policy document
+      #   policy_xml = <<-XML
+      #     <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      #       <Owner>
+      #         <ID>852b113e7a2f25102679df27bb0ae12b3f85be6BucketOwnerCanonicalUserID</ID>
+      #         <DisplayName>OwnerDisplayName</DisplayName>
+      #       </Owner>
+      #       <AccessControlList>
+      #         <Grant>
+      #           <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+      #             <ID>BucketOwnerCanonicalUserID</ID>
+      #             <DisplayName>OwnerDisplayName</DisplayName>
+      #           </Grantee>
+      #           <Permission>FULL_CONTROL</Permission>
+      #         </Grant>
+      #         <Grant>
+      #           <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+      #             <URI xmlns="">http://acs.amazonaws.com/groups/global/AllUsers</URI>
+      #           </Grantee>
+      #           <Permission xmlns="">READ</Permission>
+      #         </Grant>
+      #       </AccessControlList>
+      #     </AccessControlPolicy>
+      #
+      #   XML
+      #   s3_client.put_bucket_acl(
+      #     :bucket_name => 'bucket-name',
+      #     :access_control_policy => policy_xml)
+      #
+      # @overload put_bucket_acl(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
-      #   @option options [required,String,AccessControlList,Hash] :acl
-      #     This may be any of the following:
-      #     * An XML policy as a  string (which is passed to S3 uninterpreted)
-      #     * An {AccessControlList} object
-      #     * Any object that responds to +#to_xml+
-      #     * A hash that is compatible with {AccessControlList} #new.
+      #   @option options [String] :access_control_policy An access control
+      #     policy description as a string of XML.  See the S3 API
+      #     documentation for a description.
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
-      bucket_method(:set_bucket_acl, :put, 'acl') do
+      bucket_method(:put_bucket_acl, :put, 'acl', :header_options => {
+        :acl => 'x-amz-acl',
+        :grant_read => 'x-amz-grant-read',
+        :grant_write => 'x-amz-grant-write',
+        :grant_read_acp => 'x-amz-grant-read-acp',
+        :grant_write_acp => 'x-amz-grant-write-acp',
+        :grant_full_control => 'x-amz-grant-full-control',
+      }) do
 
         configure_request do |req, options|
-            require_acl!(options[:acl])
+          move_access_control_policy(options) 
+          require_acl!(options)
           super(req, options)
-          if options[:acl].kind_of?(Hash)
-            req.body = AccessControlList.new(options[:acl]).to_xml
-          elsif options[:acl].respond_to?(:to_str)
-            req.body = options[:acl]
-          else
-            req.body = options[:acl].to_xml
-          end
+          req.body = options[:access_control_policy] if 
+             options[:access_control_policy]
         end
 
       end
+      alias_method :set_bucket_acl, :put_bucket_acl
 
       # Gets the access control list for a bucket.
       # @overload get_bucket_acl(options = {})
@@ -342,33 +421,91 @@ module AWS
       #   @return [Core::Response]
       bucket_method(:get_bucket_acl, :get, 'acl', XML::GetBucketAcl)
 
-      # Sets the access control list for an object.
-      # @overload set_object_acl(options = {})
+      # Sets the access control list for an object.  You must specify an ACL
+      # via one of the following methods:
+      #
+      # * as a canned ACL (via +:acl+)
+      # * as a list of grants (via the +:grant_*+ options)
+      # * as an access control policy document (via +:access_control_policy+)
+      #
+      # @example Using a canned acl
+      #   s3_client.put_object_acl(
+      #     :bucket_name => 'bucket-name', 
+      #     :key => 'object-key',
+      #     :acl => 'public-read')
+      #
+      # @example Using grants
+      #   s3_client.put_bucket_acl(
+      #     :bucket_name => 'bucket-name',
+      #     :key => 'object-key',
+      #     :grant_read => 'uri="http://acs.amazonaws.com/groups/global/AllUsers"',
+      #     :grant_full_control => 'emailAddress="xyz@amazon.com", id="8a9...fa7"')
+      #
+      # @example Using an access control policy document
+      #   policy_xml = <<-XML
+      #     <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      #       <Owner>
+      #         <ID>852b113e7a2f25102679df27bb0ae12b3f85be6BucketOwnerCanonicalUserID</ID>
+      #         <DisplayName>OwnerDisplayName</DisplayName>
+      #       </Owner>
+      #       <AccessControlList>
+      #         <Grant>
+      #           <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+      #             <ID>BucketOwnerCanonicalUserID</ID>
+      #             <DisplayName>OwnerDisplayName</DisplayName>
+      #           </Grantee>
+      #           <Permission>FULL_CONTROL</Permission>
+      #         </Grant>
+      #         <Grant>
+      #           <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+      #             <URI xmlns="">http://acs.amazonaws.com/groups/global/AllUsers</URI>
+      #           </Grantee>
+      #           <Permission xmlns="">READ</Permission>
+      #         </Grant>
+      #       </AccessControlList>
+      #     </AccessControlPolicy>
+      #
+      #   XML
+      #   s3_client.put_bucket_acl(
+      #     :bucket_name => 'bucket-name',
+      #     :key => 'object-key',
+      #     :access_control_policy => policy_xml)
+      #
+      # @overload put_object_acl(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
-      #   @option options [required,String,AccessControlList,Hash] :acl
-      #     This may be any of the following:
-      #     * An XML policy as a  string (which is passed to S3 uninterpreted)
-      #     * An {AccessControlList} object
-      #     * Any object that responds to +#to_xml+
-      #     * A hash that is compatible with {AccessControlList} #new.
+      #   @option options [String] :access_control_policy An access control
+      #     policy description as a string of XML.  See the S3 API
+      #     documentation for a description.
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
-      object_method(:set_object_acl, :put, 'acl') do
+      object_method(:put_object_acl, :put, 'acl', :header_options => {
+        :acl => 'x-amz-acl',
+        :grant_read => 'x-amz-grant-read',
+        :grant_write => 'x-amz-grant-write',
+        :grant_read_acp => 'x-amz-grant-read-acp',
+        :grant_write_acp => 'x-amz-grant-write-acp',
+        :grant_full_control => 'x-amz-grant-full-control',
+      }) do
+
         configure_request do |req, options|
-          require_acl!(options[:acl]) unless options[:acl].kind_of?(Symbol)
+          move_access_control_policy(options) 
+          require_acl!(options)
           super(req, options)
-          if options[:acl].kind_of?(Hash)
-            req.body = AccessControlList.new(options[:acl]).to_xml
-          elsif options[:acl].kind_of?(Symbol)
-            req.headers["x-amz-acl"] = options[:acl].to_s.tr("_","-")
-          elsif options[:acl].respond_to?(:to_str)
-            req.body = options[:acl]
-          else
-            req.body = options[:acl].to_xml
-          end
+          req.body = options[:access_control_policy] if 
+             options[:access_control_policy]
         end
+
       end
+      alias_method :set_object_acl, :put_object_acl
 
       # Gets the access control list for an object.
       # @overload get_object_acl(options = {})
@@ -442,7 +579,7 @@ module AWS
       #     +:reduced_redundancy+.
       #   @option options [String] :cache_control
       #     Can be used to specify caching behavior.
-      #   @option opitons [String] :content_disposition
+      #   @option options [String] :content_disposition
       #     Specifies presentational information.
       #   @option options [String] :content_encoding
       #     Specifies the content encoding.
@@ -451,19 +588,33 @@ module AWS
       #   @option options [String] :content_type
       #     Specifies the content type.
       #   @option options [String] :expires
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
       #
-      object_method(:put_object, :put,
-                    :header_options => {
-                      :content_md5 => 'Content-MD5',
-                      :cache_control => 'Cache-Control',
-                      :content_disposition => 'Content-Disposition',
-                      :content_encoding => 'Content-Encoding',
-                      :content_type => 'Content-Type',
-                      :storage_class => 'x-amz-storage-class',
-                      :server_side_encryption => 'x-amz-server-side-encryption',
-                      :expires => 'Expires'
-                    }) do
+      object_method(:put_object, :put, :header_options => {
+        :acl => 'x-amz-acl',
+        :grant_read => 'x-amz-grant-read',
+        :grant_write => 'x-amz-grant-write',
+        :grant_read_acp => 'x-amz-grant-read-acp',
+        :grant_write_acp => 'x-amz-grant-write-acp',
+        :grant_full_control => 'x-amz-grant-full-control',
+        :content_md5 => 'Content-MD5',
+        :cache_control => 'Cache-Control',
+        :content_disposition => 'Content-Disposition',
+        :content_encoding => 'Content-Encoding',
+        :content_type => 'Content-Type',
+        :storage_class => 'x-amz-storage-class',
+        :server_side_encryption => 'x-amz-server-side-encryption',
+        :expires => 'Expires'
+      }) do
+
         configure_request do |request, options, block|
           options[:server_side_encryption] =
             options[:server_side_encryption].to_s.upcase if
@@ -471,7 +622,6 @@ module AWS
           super(request, options)
           set_request_data(request, options, block)
           request.metadata = options[:metadata]
-          request.canned_acl = options[:acl]
           request.storage_class = options[:storage_class]
         end
 
@@ -679,10 +829,24 @@ module AWS
       #   @option options [String] :storage_class
       #   @option options [String] :server_side_encryption
       #   @option options [String] :expires
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
       object_method(:initiate_multipart_upload, :post, 'uploads',
                     XML::InitiateMultipartUpload,
                     :header_options => {
+                      :acl => 'x-amz-acl',
+                      :grant_read => 'x-amz-grant-read',
+                      :grant_write => 'x-amz-grant-write',
+                      :grant_read_acp => 'x-amz-grant-read-acp',
+                      :grant_write_acp => 'x-amz-grant-write-acp',
+                      :grant_full_control => 'x-amz-grant-full-control',
                       :cache_control => 'Cache-Control',
                       :content_disposition => 'Content-Disposition',
                       :content_encoding => 'Content-Encoding',
@@ -691,13 +855,13 @@ module AWS
                       :server_side_encryption => 'x-amz-server-side-encryption',
                       :expires => 'Expires'
                     }) do
+
         configure_request do |req, options|
           options[:server_side_encryption] =
             options[:server_side_encryption].to_s.upcase if
             options[:server_side_encryption].kind_of?(Symbol)
           super(req, options)
           req.metadata = options[:metadata]
-          req.canned_acl = options[:acl]
           req.storage_class = options[:storage_class]
         end
 
@@ -884,17 +1048,29 @@ module AWS
       #     bucket name and key, joined by a forward slash ('/').
       #     This string must be URL-encoded. Additionally, you must
       #     have read access to the source object.
-      #   @option options [Symbol] :acl
+      #   @option options [String] :acl A canned ACL (e.g. 'private', 
+      #     'public-read', etc).  See the S3 API documentation for 
+      #     a complete list of valid values.
+      #   @option options [String] :grant_read
+      #   @option options [String] :grant_write
+      #   @option options [String] :grant_read_acp
+      #   @option options [String] :grant_write_acp
+      #   @option options [String] :grant_full_control
       #   @return [Core::Response]
-      object_method(:copy_object, :put,
-                    :header_options => {
-                      :copy_source => 'x-amz-copy-source',
-                      :cache_control => 'Cache-Control',
-                      :metadata_directive => 'x-amz-metadata-directive',
-                      :storage_class => 'x-amz-storage-class',
-                      :server_side_encryption => 'x-amz-server-side-encryption',
-                      :content_type => 'Content-Type',
-                    }) do
+      object_method(:copy_object, :put, :header_options => {
+        :acl => 'x-amz-acl',
+        :grant_read => 'x-amz-grant-read',
+        :grant_write => 'x-amz-grant-write',
+        :grant_read_acp => 'x-amz-grant-read-acp',
+        :grant_write_acp => 'x-amz-grant-write-acp',
+        :grant_full_control => 'x-amz-grant-full-control',
+        :copy_source => 'x-amz-copy-source',
+        :cache_control => 'Cache-Control',
+        :metadata_directive => 'x-amz-metadata-directive',
+        :storage_class => 'x-amz-storage-class',
+        :server_side_encryption => 'x-amz-server-side-encryption',
+        :content_type => 'Content-Type',
+      }) do
 
         configure_request do |req, options|
           # TODO : validate metadata directive COPY / REPLACE
@@ -908,7 +1084,6 @@ module AWS
             options[:server_side_encryption].to_s.upcase if
             options[:server_side_encryption].kind_of?(Symbol)
           super(req, options)
-          req.canned_acl = options[:acl]
           req.metadata = options[:metadata]
           req.storage_class = options[:storage_class]
           if options[:version_id]
@@ -978,6 +1153,30 @@ module AWS
           sse = sse.downcase.to_sym
         end
         response.data[:server_side_encryption] = sse
+      end
+
+      # Previously the access control policy could be specified via :acl
+      # as a string or an object that responds to #to_xml.  The prefered
+      # method now is to pass :access_control_policy an xml document.
+      def move_access_control_policy options
+        if acl = options[:acl]
+          if acl.is_a?(String) and is_xml?(acl)
+            options[:access_control_policy] = options.delete(:acl)
+          elsif acl.respond_to?(:to_xml)
+            options[:access_control_policy] = options.delete(:acl).to_xml
+          end
+        end
+      end
+
+      # @param [String] possible_xml
+      # @reutrn [Boolean] Returns +true+ if the given string is a valid xml 
+      #   document.
+      def is_xml? possible_xml
+        begin
+          REXML::Document.new(possible_xml).has_elements?
+        rescue
+          false
+        end
       end
 
       module Validators
@@ -1102,19 +1301,20 @@ module AWS
           end
         end
 
-        def require_acl!(acl)
-          validate!('acl', acl) do
-            case
-            when acl.kind_of?(Hash)
-              AccessControlList.new(acl).validate!
-              nil
-            when !acl.respond_to?(:to_str) && !acl.respond_to?(:to_xml)
-              "must support to_xml: #{acl.inspect}"
-            when acl.nil? || acl == ''
-              'may not be blank'
-            else
-              xml_validation_message(acl)
-            end
+        def require_acl! options
+          acl_options = [
+            :acl,
+            :grant_read,
+            :grant_write,
+            :grant_read_acp,
+            :grant_write_acp,
+            :grant_full_control,
+            :access_control_policy,
+          ]
+          unless options.keys.any?{|opt| acl_options.include?(opt) }
+            msg = "missing a required ACL option, must provide an ACL " +
+                  "via :acl, :grant_* or :access_control_policy"
+            raise ArgumentError, msg
           end
         end
 
@@ -1156,22 +1356,6 @@ module AWS
             error = e
           end
           "contains invalid JSON: #{error}" if error
-        end
-
-        def xml_validation_message(obj)
-          if obj.respond_to?(:to_str)
-            obj = obj.to_str
-          elsif obj.respond_to?(:to_xml)
-            obj = obj.to_xml
-          end
-
-          error = nil
-          begin
-            REXML::Document.new(obj)
-          rescue => e
-            error = e
-          end
-          "contains invalid XML: #{error}" if error
         end
 
       end

@@ -390,9 +390,13 @@ module AWS
 
             attr = @klass.attributes[attr_name]
 
-            method = options[:get_as] || attr.get_as
-  
-            v = resp_obj.key?(method) ? resp_obj[method] : resp_obj[method.to_s]
+            methods = [options[:get_as] || attr.get_as].flatten
+
+            v = resp_obj
+            methods.each do |method|
+              v = v.key?(method) ? v[method] : v[method.to_s]
+              break if v.nil?
+            end
             v = v[:value] if v and options[:value_wrapped]
             v = attr.translate_output_value(v)
 

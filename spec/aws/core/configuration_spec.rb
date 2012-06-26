@@ -215,16 +215,16 @@ module AWS::Core
 
           add_option :xyz
 
-          add_option_with_needs :dummy1, [:abc, :mno] do |config|
+          add_option_with_needs :dummy1, [:abc, :mno] do |config,opts|
             DummyClass.new(:abc => config.abc, :mno => config.mno)
           end
 
-          add_option_with_needs :dummy2, [:dummy1] do |config|
-            DummyClass.new(:dummy1 => config.dummy1)
+          add_option_with_needs :dummy2, [:dummy1] do |config,opts|
+            DummyClass.new(:dummy1 => opts[:dummy1])
           end
 
-          add_option_with_needs :dummy3, [:dummy2, :xyz] do |config|
-            DummyClass.new(:dummy2 => config.dummy2, :xyz => config.xyz)
+          add_option_with_needs :dummy3, [:dummy2, :xyz] do |config,opts|
+            DummyClass.new(opts)
           end
 
         end

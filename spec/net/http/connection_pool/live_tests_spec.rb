@@ -59,7 +59,7 @@ describe Net::HTTP::ConnectionPool do
 
   it 'drops idle connections from the pool' do
 
-    pool = described_class.new(:idle_timeout => 0.2)
+    pool = described_class.new(:http_idle_timeout => 0.2)
 
     threads = []
     4.times do 
@@ -71,7 +71,7 @@ describe Net::HTTP::ConnectionPool do
     threads.map(&:join)
     pool.size.should == 4
 
-    sleep(0.1)
+    sleep(0.3)
 
     # reuse one of the original 4 connections, keeping it alive
     connection = pool.connection_for(@host, :port => @port, :ssl => false)

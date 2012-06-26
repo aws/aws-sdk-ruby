@@ -47,6 +47,32 @@ module AWS
           buckets.create('name', :foo => 'bar')
         end
 
+        it 'passes the acl option to #create_bucket as a string' do
+          client.should_receive(:create_bucket).with(hash_including({
+            :acl => 'public-read',
+          }))
+          buckets.create('name', :acl => :public_read)
+        end
+
+        it 'passes the grant options to #create_bucket' do
+
+          client.should_receive(:create_bucket).with(hash_including({
+            :grant_read => 'read',
+            :grant_write => 'write',
+            :grant_read_acp => 'read-acp',
+            :grant_write_acp => 'read-acp',
+            :grant_full_control => 'full-control',
+          }))
+
+          buckets.create('name',
+            :grant_read => 'read',
+            :grant_write => 'write',
+            :grant_read_acp => 'read-acp',
+            :grant_write_acp => 'read-acp',
+            :grant_full_control => 'full-control')
+
+        end
+
         it 'sets no location constraint by default' do
           config.stub(:s3_endpoint).and_return('s3.amazonaws.com')
           buckets.client.should_receive(:create_bucket).with(:bucket_name => 'name')

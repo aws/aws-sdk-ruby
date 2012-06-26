@@ -33,6 +33,31 @@
     :children:
       DeleteVerifiedEmailAddressResult:
         :ignore: true
+- :name: GetIdentityNotificationAttributes
+  :method: :get_identity_notification_attributes
+  :inputs:
+    Identities:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      GetIdentityNotificationAttributesResult:
+        :ignore: true
+        :children:
+          NotificationAttributes:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :notification_attributes
+                :map:
+                - key
+                - value
+                :children:
+                  value:
+                    :children:
+                      ForwardingEnabled:
+                        :type: :boolean
 - :name: GetIdentityVerificationAttributes
   :method: :get_identity_verification_attributes
   :inputs:
@@ -198,6 +223,34 @@
   :outputs:
     :children:
       SendRawEmailResult:
+        :ignore: true
+- :name: SetIdentityFeedbackForwardingEnabled
+  :method: :set_identity_feedback_forwarding_enabled
+  :inputs:
+    Identity:
+    - :string
+    - :required
+    ForwardingEnabled:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetIdentityFeedbackForwardingEnabledResult:
+        :ignore: true
+- :name: SetIdentityNotificationTopic
+  :method: :set_identity_notification_topic
+  :inputs:
+    Identity:
+    - :string
+    - :required
+    NotificationType:
+    - :string
+    - :required
+    SnsTopic:
+    - :string
+  :outputs:
+    :children:
+      SetIdentityNotificationTopicResult:
         :ignore: true
 - :name: VerifyDomainIdentity
   :method: :verify_domain_identity
