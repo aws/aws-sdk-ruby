@@ -19,6 +19,7 @@ module AWS
           it 'has opts[:template_body]' do
             stack_options.send(:apply_template, opts)
             opts.should have_key(:template_body)
+            opts.should_not have_key(:template_url)
           end
 
           context 'include "http"' do
@@ -26,9 +27,27 @@ module AWS
             it 'has opts[:template_body]' do
               stack_options.send(:apply_template, opts)
               opts.should have_key(:template_body)
+              opts.should_not have_key(:template_url)
             end
           end
+        end
 
+        context 'opts[:template] is String as a http url' do
+          let(:opts) { { :template => 'http://s3.amazon.com/bucket_name/key' } }
+          it 'has opts[:template_url]' do
+            stack_options.send(:apply_template, opts)
+            opts.should_not have_key(:template_body)
+            opts.should have_key(:template_url)
+          end
+        end
+
+        context 'opts[:template] is String as a https url' do
+          let(:opts) { { :template => 'https://s3.amazon.com/bucket_name/key' } }
+          it 'has opts[:template_url]' do
+            stack_options.send(:apply_template, opts)
+            opts.should_not have_key(:template_body)
+            opts.should have_key(:template_url)
+          end
         end
       end
     end
