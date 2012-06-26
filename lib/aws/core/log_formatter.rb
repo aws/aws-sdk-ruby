@@ -171,6 +171,12 @@ module AWS
         pattern.gsub(/:(\w+)/) {|sym| send("_#{sym[1..-1]}", response) }
       end
 
+      # @private
+      def eql? other
+        other.is_a?(self.class) and other.pattern == self.pattern
+      end
+      alias_method :==, :eql?
+
       protected
 
       def method_missing method_name, *args

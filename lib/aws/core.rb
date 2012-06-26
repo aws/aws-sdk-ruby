@@ -56,12 +56,17 @@ require 'aws/core/autoloader'
 # If you are loading AWS inside a Rails web application, it is recomended to 
 # place your configuration inside:
 #
-#   config/initializers/aws.rb
+#   config/initializers/aws-sdk.rb
+#
+# Optionally you can create a Yaml configuration file at 
+# RAILS_ROOT/config/aws.yaml; This should be formatted in the same manor
+# as the default RAILS_ROOT/config/database.yml file (one section for
+# each Rails environment).
 #
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.5.4"
+  VERSION = "1.5.5"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -201,10 +206,27 @@ module AWS
     #   service endpoint for Amazon EC2.
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
-    #   The server endpoint for Elastic Load Balancing.
+    #   The service endpoint for Elastic Load Balancing.
     #
-    # @option options [Object] :http_handler (AWS::HTTPartyHandler) The 
-    #   http handler that sends requests to AWS.
+    # @option options [Object] :http_handler (AWS::Core::Http::NetHttpHandler) 
+    #   The http handler that sends requests to AWS.
+    #
+    # @option options [Integer] :http_idle_timeout (60) The number of seconds
+    #   a persistent connection is allowed to sit idle before it should no
+    #   longer be used.
+    #
+    # @option options [Integer] :http_open_timeout (15) The number of seconds
+    #   before the +:http_handler+ should timeout while trying to open a new
+    #   HTTP sesssion.
+    #
+    # @option options [Integer] :http_read_timeout (60) The number of seconds
+    #   before the +:http_handler+ should timeout while waiting for a HTTP 
+    #   response.
+    #
+    # @option options [Boolean] :http_wire_trace (false) When +true+, the 
+    #   http handler will log all wire traces to the +:logger+.  If a 
+    #   +:logger+ is not configured, then wire traces will be sent to 
+    #   standard out.
     #
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The 
     #   service endpoint for AWS Idenity Access Management (IAM).
@@ -285,8 +307,8 @@ module AWS
     #   * {S3::S3Object#presigned_post}
     #   * {S3::Bucket#presigned_post}
     #
-    # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com') The
-    #   service endpoint for Amazon SimpleDB.
+    # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com') 
+    #   The service endpoint for Amazon SimpleDB.
     #
     # @option options [Boolean] :simple_db_consistent_reads (false) Determines
     #   if all SimpleDB read requests should be done consistently.
@@ -298,7 +320,7 @@ module AWS
     # @option options [String] :simple_workflow_service ('swf.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Workflow Service.
     #
-    # @option options [Object] :credential_provider (AWS::Core::CredentialProviders::DefaultProvider.new) 
+    # @option options [CredentialProviders::Provider] :credential_provider (AWS::Core::CredentialProviders::DefaultProvider.new) 
     #   Returns the credential provider.  The default credential provider
     #   attempts to check for statically assigned credentials, ENV credentials
     #   and credentials in the metadata service of EC2.
@@ -438,7 +460,6 @@ module AWS
     # are discarded.
     def memoize
       return yield if memoizing?
-
       begin
         start_memoizing
         yield if block_given?

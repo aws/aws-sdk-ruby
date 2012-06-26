@@ -37,14 +37,6 @@ module AWS
         end
       end
 
-      def canned_acl= acl
-        if acl.kind_of?(Symbol)
-          headers["x-amz-acl"] = acl.to_s.gsub("_", "-")
-        elsif acl
-          headers["x-amz-acl"] = acl
-        end
-      end
-
       def storage_class= storage_class
         if storage_class.kind_of?(Symbol)
           headers["x-amz-storage-class"] = storage_class.to_s.upcase

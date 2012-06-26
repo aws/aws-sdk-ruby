@@ -52,7 +52,7 @@ class Net::HTTP::ConnectionPool
 
     class << self
 
-      def for connection, open_timeout
+      def for connection, open_timeout, debug_logger = nil
 
         http_args = []
         http_args << connection.host
@@ -65,7 +65,7 @@ class Net::HTTP::ConnectionPool
         end
 
         http = Net::HTTP.new(*http_args)
-        #http.set_debug_output($stdout)
+        http.set_debug_output(debug_logger)
         http.open_timeout = open_timeout
 
         if connection.ssl?

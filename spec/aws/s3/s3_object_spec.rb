@@ -30,7 +30,7 @@ module AWS
       let(:object) { S3Object.new(bucket, 'foo') }
 
       it_behaves_like('it has an ACL',
-                      :set_method => :set_object_acl,
+                      :set_method => :put_object_acl,
                       :get_method => :get_object_acl,
                       :options => {
                         :bucket_name => "foobucket",
@@ -211,6 +211,33 @@ module AWS
                      :content_md5 => "62HurZDjuJnGvL4nrFgWYA==").
               and_return(client.stub_for(:put_object))
               object.write(:content_md5 => "62HurZDjuJnGvL4nrFgWYA==")
+            end
+
+          end
+
+          context 'with acl options' do
+
+            it 'should convert symbolized canned acls to strings' do
+              client.should_receive(:put_object).with(hash_including({
+                :acl => 'public-read',
+              })).and_return(client.stub_for(:put_object))
+              object.write(:acl => :public_read)
+            end
+
+            it 'passes :grant_* options along to the client' do
+              client.should_receive(:put_object).with(hash_including({
+                :grant_read => 'read',
+                :grant_write => 'write',
+                :grant_read_acp => 'read-acp',
+                :grant_write_acp => 'read-acp',
+                :grant_full_control => 'full-control',
+              })).and_return(client.stub_for(:put_object))
+              object.write('data',
+                :grant_read => 'read',
+                :grant_write => 'write',
+                :grant_read_acp => 'read-acp',
+                :grant_write_acp => 'read-acp',
+                :grant_full_control => 'full-control')
             end
 
           end

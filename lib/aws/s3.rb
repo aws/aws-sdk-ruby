@@ -97,6 +97,7 @@ module AWS
     AWS.register_autoloads(self) do
       autoload :AccessControlList,            'access_control_list'
       autoload :ACLObject,                    'acl_object'
+      autoload :ACLOptions,                   'acl_options'
       autoload :Bucket,                       'bucket'
       autoload :BucketCollection,             'bucket_collection'
       autoload :BucketLifecycleConfiguration, 'bucket_lifecycle_configuration'

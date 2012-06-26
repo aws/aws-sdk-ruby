@@ -428,6 +428,21 @@ module AWS
       #
       define_client_method :cancel_conversion_task, 'CancelConversionTask'
 
+      # Calls the CancelExportTask API operation.
+      # @method cancel_export_task(options = {})
+      #
+      # === Options:
+      #
+      # * +:export_task_id+ - *required* - (String)
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :cancel_export_task, 'CancelExportTask'
+
       # Calls the CancelSpotInstanceRequests API operation.
       # @method cancel_spot_instance_requests(options = {})
       #
@@ -543,6 +558,41 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :create_image, 'CreateImage'
+
+      # Calls the CreateInstanceExportTask API operation.
+      # @method create_instance_export_task(options = {})
+      #
+      # === Options:
+      #
+      # * +:description+ - (String)
+      # * +:instance_id+ - *required* - (String)
+      # * +:target_environment+ - *required* - (String)
+      # * +:export_to_s3+ - (Hash)
+      #   * +:disk_image_format+ - (String)
+      #   * +:container_format+ - (String)
+      #   * +:s3_bucket+ - *required* - (String)
+      #   * +:s3_prefix+ - (String)
+      #
+      # === Response Structure:
+      #
+      # * +:request_id+ - (String)
+      # * +:export_task+ - (Hash)
+      #   * +:export_task_id+ - (String)
+      #   * +:description+ - (String)
+      #   * +:state+ - (String)
+      #   * +:status_message+ - (String)
+      #   * +:instance_export+ - (Hash)
+      #     * +:instance_id+ - (String)
+      #     * +:target_environment+ - (String)
+      #   * +:export_to_s3+ - (Hash)
+      #     * +:disk_image_format+ - (String)
+      #     * +:container_format+ - (String)
+      #     * +:s3_bucket+ - (String)
+      #     * +:s3_key+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :create_instance_export_task, 'CreateInstanceExportTask'
 
       # Calls the CreateInternetGateway API operation.
       # @method create_internet_gateway(options = {})
@@ -1587,6 +1637,34 @@ module AWS
       # @return [Core::Response]
       #
       define_client_method :describe_dhcp_options, 'DescribeDhcpOptions'
+
+      # Calls the DescribeExportTasks API operation.
+      # @method describe_export_tasks(options = {})
+      #
+      # === Options:
+      #
+      # * +:export_task_ids+ - (Array<String>)
+      #
+      # === Response Structure:
+      #
+      # * +:request_id+ - (String)
+      # * +:export_task_set+ - (Array<Hash>)
+      #   * +:export_task_id+ - (String)
+      #   * +:description+ - (String)
+      #   * +:state+ - (String)
+      #   * +:status_message+ - (String)
+      #   * +:instance_export+ - (Hash)
+      #     * +:instance_id+ - (String)
+      #     * +:target_environment+ - (String)
+      #   * +:export_to_s3+ - (Hash)
+      #     * +:disk_image_format+ - (String)
+      #     * +:container_format+ - (String)
+      #     * +:s3_bucket+ - (String)
+      #     * +:s3_key+ - (String)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :describe_export_tasks, 'DescribeExportTasks'
 
       # Calls the DescribeImageAttribute API operation.
       # @method describe_image_attribute(options = {})
@@ -2986,7 +3064,8 @@ module AWS
       #         Amazon EBS volume is deleted on instance termination.
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
-      #   * +:monitoring+ - (Boolean)
+      #   * +:monitoring+ - (Hash)
+      #     * +:enabled+ - (Boolean)
       #   * +:subnet_id+ - (String)
       #   * +:disable_api_termination+ - (Boolean)
       #   * +:instance_initiated_shutdown_behavior+ - (String)

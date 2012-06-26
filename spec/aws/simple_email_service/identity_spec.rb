@@ -23,7 +23,214 @@ module AWS
 
       shared_examples_for "an ses identity" do
 
-        context 'attributes' do
+        context 'notification attributes' do
+
+          let(:resp) { client.stub_for(:get_identity_notification_attributes) }
+
+          let(:attributes) {{}}
+
+          before(:each) do
+            resp.data[:notification_attributes] = {}
+            resp.data[:notification_attributes][identity.identity] = attributes
+            client.stub(:get_identity_notification_attributes).and_return(resp)
+          end
+
+          context '#bounce_topic_arn' do
+
+            it 'calls #get_identity_notification_attributes on the client' do
+              client.should_receive(:get_identity_notification_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+              identity.bounce_topic_arn
+            end
+
+            it 'returns the bounce notification topic arn' do
+              attributes[:bounce_topic] = 'bounce-arn'
+              identity.bounce_topic_arn.should eq('bounce-arn')
+            end
+
+            it 'returns nil when not present' do
+              attributes.delete(:bounce_topic)
+              identity.bounce_topic_arn.should eq(nil)
+            end
+            
+            it 'is mutable' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Bounce',
+                :sns_topic => 'arn')
+              identity.bounce_topic_arn = 'arn'
+            end
+            
+            it 'accepts nil' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Bounce')
+              identity.bounce_topic_arn = nil
+            end
+
+          end
+
+          context '#complaint_topic_arn' do
+
+            it 'calls #get_identity_notification_attributes on the client' do
+              client.should_receive(:get_identity_notification_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+              identity.complaint_topic_arn
+            end
+
+            it 'returns the complaint notification topic arn' do
+              attributes[:complaint_topic] = 'complaint-arn'
+              identity.complaint_topic_arn.should eq('complaint-arn')
+            end
+
+            it 'returns nil when not present' do
+              attributes.delete(:complaint_topic)
+              identity.complaint_topic_arn.should eq(nil)
+            end
+            
+            it 'is mutable' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Complaint',
+                :sns_topic => 'arn')
+              identity.complaint_topic_arn = 'arn'
+            end
+            
+            it 'accepts nil' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Complaint')
+              identity.complaint_topic_arn = nil
+            end
+
+          end
+
+          context '#forwarding_enabled' do
+
+            it 'calls #get_identity_notification_attributes on the client' do
+              client.should_receive(:get_identity_notification_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+              identity.forwarding_enabled
+            end
+
+            it 'returns the state' do
+              attributes[:forwarding_enabled] = true
+              identity.forwarding_enabled?.should == true
+            end
+
+            it 'is aliased with a question mark' do
+              identity.method(:forwarding_enabled?).should
+                eq(identity.method(:forwarding_enabled))
+            end
+            
+            it 'is mutable' do
+              client.should_receive(:set_identity_feedback_forwarding_enabled).with(
+                :identity => identity.identity,
+                :forwarding_enabled => true)
+              identity.forwarding_enabled = true
+            end
+            
+            it 'can be set to false' do
+              client.should_receive(:set_identity_feedback_forwarding_enabled).with(
+                :identity => identity.identity,
+                :forwarding_enabled => false)
+              identity.forwarding_enabled = false
+            end
+
+          end
+
+          context '#bounce_topic' do
+
+            it 'wraps the arn in a sns topic' do
+              attributes[:bounce_topic] = 'topic-arn'
+              identity.bounce_topic.should be_a(SNS::Topic)
+              identity.bounce_topic.arn.should eq('topic-arn')
+              identity.config.should eq(config)
+            end
+
+            it 'returns nil when there is not arn' do
+              attributes.delete(:bounce_topic)
+              identity.bounce_topic.should eq(nil)
+            end
+
+          end
+
+          context '#bounce_topic=' do
+
+            it 'accpets a topic object' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Bounce',
+                :sns_topic => 'arn')
+              identity.bounce_topic = SNS::Topic.new('arn')
+            end
+
+            it 'accepts a topic arn' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Bounce',
+                :sns_topic => 'arn')
+              identity.bounce_topic = 'arn'
+            end
+
+            it 'accepts nil' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Bounce')
+              identity.bounce_topic = nil
+            end
+
+          end
+
+          context '#complaint_topic' do
+
+            it 'wraps the arn in a sns topic' do
+              attributes[:complaint_topic] = 'topic-arn'
+              identity.complaint_topic.should be_a(SNS::Topic)
+              identity.complaint_topic.arn.should eq('topic-arn')
+              identity.config.should eq(config)
+            end
+
+            it 'returns nil when there is not arn' do
+              attributes.delete(:complaint_topic)
+              identity.complaint_topic.should eq(nil)
+            end
+
+          end
+
+          context '#complaint_topic=' do
+
+            it 'accpets a topic object' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Complaint',
+                :sns_topic => 'arn')
+              identity.complaint_topic = SNS::Topic.new('arn')
+            end
+
+            it 'accepts a topic arn' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Complaint',
+                :sns_topic => 'arn')
+              identity.complaint_topic = 'arn'
+            end
+
+            it 'accepts nil' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Complaint')
+              identity.complaint_topic = nil
+            end
+
+          end
+
+        end
+
+        context 'verification attributes' do
 
           let(:resp) { client.stub_for(:get_identity_verification_attributes) }
 

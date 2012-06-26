@@ -247,6 +247,8 @@ module AWS
       autoload :ElasticIp, 'elastic_ip'
       autoload :ElasticIpCollection, 'elastic_ip_collection'
       autoload :Errors, 'errors'
+      autoload :ExportTask, 'export_task'
+      autoload :ExportTaskCollection, 'export_task_collection'
       autoload :FilteredCollection, 'filtered_collection'
       autoload :HasPermissions, 'has_permissions'
       autoload :Image, 'image'
@@ -425,6 +427,11 @@ module AWS
     #   represents all of vpn connections for this account.
     def vpn_connections
       VPNConnectionCollection.new(:config => config)
+    end
+
+    # @return [ExportTaskCollection]
+    def export_tasks
+      ExportTaskCollection.new(:config => config)
     end
 
   end

@@ -281,6 +281,54 @@ module AWS
 
       end
 
+      shared_examples_for "accepts simplified ACL header options" do
+
+        def headers_for acl_opts
+          headers = nil
+          client = with_http_handler do |req, resp|
+            headers = req.headers
+          end
+          client.send(method, opts.merge(acl_opts))
+          headers
+        end
+
+        it 'accpets :grant_read' do
+          headers_for(:grant_read => 'abc')['x-amz-grant-read'].should == 'abc'
+        end
+
+        it 'accpets :grant_write' do
+          headers_for(:grant_write => 'abc')['x-amz-grant-write'].should == 'abc'
+        end
+        
+        it 'accpets :grant_read_acp' do
+          headers_for(:grant_read_acp => 'abc')['x-amz-grant-read-acp'].should == 'abc'
+        end
+
+        it 'accpets :grant_write_acp' do
+          headers_for(:grant_read_acp => 'abc')['x-amz-grant-read-acp'].should == 'abc'
+        end
+
+        it 'accpets :grant_write_acp' do
+          headers_for(:grant_full_control => 'abc')['x-amz-grant-full-control'].should == 'abc'
+        end
+
+        it 'accpets :grant_write_acp' do
+          headers = headers_for({
+            :grant_read => 'a',
+            :grant_write => 'b',
+            :grant_read_acp => 'c',
+            :grant_write_acp => 'd',
+            :grant_full_control => 'e',
+          })
+          headers['x-amz-grant-read'].should == 'a'
+          headers['x-amz-grant-write'].should == 'b'
+          headers['x-amz-grant-read-acp'].should == 'c'
+          headers['x-amz-grant-write-acp'].should == 'd'
+          headers['x-amz-grant-full-control'].should == 'e'
+        end
+
+      end
+
       shared_examples_for "accepts an ACL" do
 
         let(:opts_without_acl) do
@@ -289,64 +337,17 @@ module AWS
           o
         end
 
+        it 'moves the :acl option to the body if it is xml' do
+          http_handler.should_receive(:handle).with do |req, resp|
+            req.body.should == '<xml/>'
+          end
+          client.send(method, opts_without_acl.merge(:acl => '<xml/>'))
+        end
+
         it 'should raise an argument error for a missing acl' do
           lambda {
             client.send(method, opts_without_acl)
           }.should raise_error(ArgumentError, /acl/)
-        end
-
-        it 'should raise an argument error for a blank acl' do
-          lambda {
-            client.send(method, opts.merge(:acl => ''))
-          }.should raise_error(ArgumentError, /acl may not be blank/)
-        end
-
-        it 'should raise an argument error for invalid XML' do
-          lambda {
-            client.send(method, opts.merge(:acl => '<acl'))
-          }.should raise_error(ArgumentError, /contains invalid XML/)
-        end
-
-        it 'should raise an argument error for an object whose to_xml method returns invalid XML' do
-          obj = Object.new
-          Core::MetaUtils.extend_method(obj, :to_xml) { "<acl" }
-          lambda {
-            client.send(method, opts.merge(:acl => obj))
-          }.should raise_error(ArgumentError, /acl contains invalid XML/)
-        end
-
-        context 'hash with invalid params' do
-
-          it 'should raise an argument error' do
-            lambda do
-              client.send(method, opts.merge(:acl => { :owner => [] }))
-            end.should raise_error(ArgumentError, /expected Owner/)
-          end
-
-        end
-
-        context 'hash missing required data' do
-
-          it 'should raise an error' do
-            owner = S3::AccessControlList::Owner.new
-            lambda do
-              client.send(method, opts.merge(:acl => { :owner => owner }))
-            end.should raise_error(/missing id/)
-          end
-
-        end
-
-        it 'should raise an error for a hash that respresents an invalid AccessControlList' do
-          lambda do
-            client.send(method, opts.merge(:acl => { :owner => [] }))
-          end.should raise_error(ArgumentError, /expected Owner/)
-        end
-
-        it 'should raise an argument error for an object with no to_xml method' do
-          obj = Object.new
-          lambda {
-            client.send(method, opts.merge(:acl => obj))
-          }.should raise_error(ArgumentError, /acl must support to_xml/)
         end
 
         it 'should send the acl in the request body' do
@@ -365,23 +366,6 @@ module AWS
               req.body.should == "<foo/>"
             end
             client.send(method, opts.merge(:acl => obj))
-          end
-
-        end
-
-        context 'ACL as hash' do
-
-          it 'should construct an AccessControlList' do
-            acl = {}
-            obj = Object.new
-            obj.stub(:to_xml).and_return("<foo/>")
-            obj.stub(:validate!)
-            S3::AccessControlList.should_receive(:new).twice.with(acl).
-              and_return(obj)
-            http_handler.should_receive(:handle).with do |req, resp|
-              req.body.should == "<foo/>"
-            end
-            client.send(method, opts.merge(:acl => acl))
           end
 
         end
@@ -769,6 +753,12 @@ module AWS
 
         it_should_behave_like "an s3 http request", 'PUT'
 
+        it_should_behave_like "accepts simplified ACL header options"
+
+        it 'is aliased as create_bucket' do
+          client.method(:create_bucket).should == client.method(:put_bucket)
+        end
+
         it 'raises argument error for invalid bucket names' do
           lambda {
             client.send(method, opts.merge(:bucket_name => 'bad name'))
@@ -1052,6 +1042,13 @@ module AWS
 
         it_should_behave_like "accepts an ACL"
 
+        it_should_behave_like "accepts simplified ACL header options"
+
+        it 'is aliased as put_bucket_acl' do
+          client.method(:put_bucket_acl).should == 
+            client.method(:set_bucket_acl)
+        end
+
       end
 
       context '#get_bucket_acl' do
@@ -1074,6 +1071,11 @@ module AWS
 
         let(:opts) { { :bucket_name => 'foo', :key => 'bar', :acl => '<acl/>' } }
 
+        it 'is aliased as put_object_acl' do
+          client.method(:put_object_acl).should ==
+            client.method(:set_object_acl)
+        end
+
         it_should_behave_like "requires bucket_name"
 
         it_should_behave_like "requires key"
@@ -1083,6 +1085,8 @@ module AWS
         it_should_behave_like "a subresource request", 'acl'
 
         it_should_behave_like "accepts an ACL"
+
+        it_should_behave_like "accepts simplified ACL header options"
 
         it 'should accept a canned ACL as a symbol' do
           http_handler.should_receive(:handle).with do |req, resp|
@@ -1119,6 +1123,8 @@ module AWS
 
         it_should_behave_like "an s3 http request", 'PUT'
 
+        it_should_behave_like "accepts simplified ACL header options"
+
         it_should_behave_like "requires key"
 
         it_should_behave_like "returns version id"
@@ -1144,6 +1150,8 @@ module AWS
           :key => 'some/key',
           :copy_source => 'bar'
         }}
+
+        it_should_behave_like "accepts simplified ACL header options"
 
         it_should_behave_like "an s3 http request", 'PUT'
 
@@ -1388,6 +1396,8 @@ module AWS
         let(:method) { :initiate_multipart_upload }
 
         let(:opts) { { :bucket_name => 'foo', :key => 'bar' } }
+
+        it_should_behave_like "accepts simplified ACL header options"
 
         it_should_behave_like "requires bucket_name"
 

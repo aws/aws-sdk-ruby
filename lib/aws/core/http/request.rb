@@ -30,13 +30,13 @@ module AWS
           @params = []
           @use_ssl = true
           @port = nil
-          @read_timeout = 60 
+          @default_read_timeout = 60 
         end
 
         # @return [Integer] The number of seconds the service has to respond
         #   before a timeout error is raised on the request.  Defaults to 
         #   60 seconds.
-        attr_accessor :read_timeout
+        attr_accessor :default_read_timeout
 
         # @return [String] The snake-cased ruby name for the service
         #   (e.g. 's3', 'iam', 'dynamo_db', etc).
@@ -69,6 +69,14 @@ module AWS
         # @return [String]
         # @private
         attr_accessor :access_key_id
+
+        # Some subclasses override this method to obseve requirements
+        # set by the services (e.q. SimpleWorlfow and SQS have special
+        # long-pulling requirements and require special read timeouts).
+        # @private
+        def read_timeout
+          default_read_timeout
+        end
   
         # @param [Boolean] state If the request should be sent over ssl or not.
         def use_ssl= state

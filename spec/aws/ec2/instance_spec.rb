@@ -1289,6 +1289,16 @@ module AWS
 
       end
 
+      context '#export' do
+
+        it 'calls #create_instance_export_task on the client'
+
+        it 'returns a populated ExportTask object'
+
+        it 'calling #cancel terminates the export task'
+
+      end
+
     end
 
   end
