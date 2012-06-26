@@ -28,7 +28,7 @@ module AWS
         if template = opts.delete(:template)
           case template
           when String
-            if template.match(/http/)
+            if template.match(/^http/)
               opts[:template_url] = template
             else
               opts[:template_body] = template
