@@ -17,21 +17,24 @@ module AWS
     # @private
     module Inflection
 
-      def ruby_name(aws_name)
+      def ruby_name aws_name
 
-        #aws_name.sub(/^.*:/, '').
-        #  gsub(/[A-Z]+[a-z]+/){|str| "_#{str.downcase}_" }.
-        #  gsub(/(^_|_$)/, '').
-        #  gsub(/__/, '_').
-        #  downcase
+        inflector = Hash.new do |hash,key|
 
-        return 'etag' if aws_name == 'ETag'
+          key.
+            sub(/^.*:/, '').                          # strip namespace
+            gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms from words
+            scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split remaining words
+            join('_').downcase                        # join parts _ and downcase
 
-        aws_name.
-          sub(/^.*:/, '').                          # strip namespace
-          gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms from words
-          scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split remaining words
-          join('_').downcase                        # join parts _ and downcase
+        end
+
+        # add a few irregular inflections
+        inflector['ETag'] = 'etag'
+        inflector['s3Bucket'] = 's3_bucket'
+        inflector['s3Key'] = 's3_key'
+
+        inflector[aws_name]
 
       end
       module_function :ruby_name

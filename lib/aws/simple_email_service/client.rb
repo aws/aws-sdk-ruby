@@ -33,8 +33,8 @@ module AWS
       #
       # === Options:
       #
-      # * +:identity+ - *required* - (String) The name of the identity to be
-      #   removed from the list of verified identities.
+      # * +:identity+ - *required* - (String) The identity to be removed from
+      #   the list of identities for the AWS Account.
       #
       # === Response Structure:
       #
@@ -50,7 +50,7 @@ module AWS
       # === Options:
       #
       # * +:email_address+ - *required* - (String) An email address to be
-      #   removed from the list of verified addreses.
+      #   removed from the list of verified addresses.
       #
       # === Response Structure:
       #
@@ -60,12 +60,31 @@ module AWS
       #
       define_client_method :delete_verified_email_address, 'DeleteVerifiedEmailAddress'
 
+      # Calls the GetIdentityNotificationAttributes API operation.
+      # @method get_identity_notification_attributes(options = {})
+      #
+      # === Options:
+      #
+      # * +:identities+ - *required* - (Array<String>) A list of one or more
+      #   identities.
+      #
+      # === Response Structure:
+      #
+      # * +:notification_attributes+ - (Hash<String,Hash>)
+      #   * +:bounce_topic+ - (String)
+      #   * +:complaint_topic+ - (String)
+      #   * +:forwarding_enabled+ - (Boolean)
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :get_identity_notification_attributes, 'GetIdentityNotificationAttributes'
+
       # Calls the GetIdentityVerificationAttributes API operation.
       # @method get_identity_verification_attributes(options = {})
       #
       # === Options:
       #
-      # * +:identities+ - *required* - (Array<String>)
+      # * +:identities+ - *required* - (Array<String>) A list of identities.
       #
       # === Response Structure:
       #
@@ -119,11 +138,12 @@ module AWS
       #
       # === Options:
       #
-      # * +:identity_type+ - (String) The type of the identities listed.
-      #   Possible values are: "EmailAddress", "Domain" or null.
-      # * +:next_token+ - (String) The token used for retrieving the next set
-      #   of items.
-      # * +:max_items+ - (Integer) The maximum number of items returned.
+      # * +:identity_type+ - (String) The type of the identities to list.
+      #   Possible values are "EmailAddress" and "Domain". If this parameter is
+      #   omitted, then all identities will be listed.
+      # * +:next_token+ - (String) The token to use for pagination.
+      # * +:max_items+ - (Integer) The maximum number of identities per page.
+      #   Possible values are 1-100 inclusive.
       #
       # === Response Structure:
       #
@@ -231,13 +251,58 @@ module AWS
       #
       define_client_method :send_raw_email, 'SendRawEmail'
 
+      # Calls the SetIdentityFeedbackForwardingEnabled API operation.
+      # @method set_identity_feedback_forwarding_enabled(options = {})
+      #
+      # === Options:
+      #
+      # * +:identity+ - *required* - (String) The identity for which to set
+      #   feedback notification forwarding. Examples: user@example.com,
+      #   example.com.
+      # * +:forwarding_enabled+ - *required* - (Boolean) Sets whether Amazon
+      #   SES will forward feedback notifications as email. +true+ specifies
+      #   that Amazon SES will forward feedback notifications as email, in
+      #   addition to any Amazon SNS topic publishing otherwise specified.
+      #   +false+ specifies that Amazon SES will publish feedback notifications
+      #   only through Amazon SNS. This value can only be set to +false+ when
+      #   topics are specified for both Bounce and Complaint topic types.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :set_identity_feedback_forwarding_enabled, 'SetIdentityFeedbackForwardingEnabled'
+
+      # Calls the SetIdentityNotificationTopic API operation.
+      # @method set_identity_notification_topic(options = {})
+      #
+      # === Options:
+      #
+      # * +:identity+ - *required* - (String) The identity for which the topic
+      #   will be set. Examples: user@example.com, example.com.
+      # * +:notification_type+ - *required* - (String) The type of feedback
+      #   notifications that will be published to the specified topic.
+      # * +:sns_topic+ - (String) The Amazon Resource Name (ARN) of the Amazon
+      #   Simple Notification Service (Amazon SNS) topic. If the parameter is
+      #   ommited from the request or a null value is passed, the topic is
+      #   cleared and publishing is disabled.
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
+      define_client_method :set_identity_notification_topic, 'SetIdentityNotificationTopic'
+
       # Calls the VerifyDomainIdentity API operation.
       # @method verify_domain_identity(options = {})
       #
       # === Options:
       #
-      # * +:domain+ - *required* - (String) The name of the domain to be
-      #   verified.
+      # * +:domain+ - *required* - (String) The domain to be verified.
       #
       # === Response Structure:
       #

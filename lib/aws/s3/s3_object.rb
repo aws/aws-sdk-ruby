@@ -39,6 +39,7 @@ module AWS
 
       include Core::Model
       include DataOptions
+      include ACLOptions
 
       # @param [Bucket] bucket The bucket this object belongs to.
       # @param [String] key The object's key.
@@ -247,7 +248,7 @@ module AWS
       #   headers prefixed with +x-amz-meta+.  Each name, value pair
       #   must conform to US-ASCII.
       #
-      # @option options [Symbol] :acl (private) A canned access
+      # @option options [Symbol,String] :acl (:private) A canned access
       #   control policy.  Valid values are:
       #
       #   * +:private+
@@ -256,6 +257,12 @@ module AWS
       #   * +:authenticated_read+
       #   * +:bucket_owner_read+
       #   * +:bucket_owner_full_control+
+      #
+      # @option options [String] :grant_read
+      # @option options [String] :grant_write
+      # @option options [String] :grant_read_acp
+      # @option options [String] :grant_write_acp
+      # @option options [String] :grant_full_control
       #
       # @option options [Symbol] :storage_class Controls whether
       #   Reduced Redundancy Storage is enabled for the object.
@@ -293,10 +300,15 @@ module AWS
       #   enabled, returns the {ObjectVersion} representing the
       #   version that was uploaded.  If versioning is disabled,
       #   returns self.
+      #
       def write(options_or_data = nil, options = nil)
 
         (data_options, put_options) =
           compute_put_options(options_or_data, options)
+
+        if acl = put_options[:acl]
+          put_options[:acl] = acl.to_s.tr('_', '-')
+        end
 
         add_configured_write_options(put_options)
 
@@ -747,21 +759,19 @@ module AWS
 
       end
 
-      # Sets the object's access control list.  +acl+ can be:
-      # * An XML policy as a  string (which is passed to S3 uninterpreted)
-      # * An AccessControlList object
-      # * Any object that responds to +to_xml+
-      # * Any Hash that is acceptable as an argument to
-      #   AccessControlList#initialize.
-      #
-      # @param (see Bucket#acl=)
+      # Sets the objects's ACL (access control list).  You can provide an ACL
+      # in a number of different formats.
+      # @param (see ACLOptions#acl_options)
       # @return [nil]
       def acl=(acl)
-        client.set_object_acl(
-          :bucket_name => bucket.name,
-          :key => key,
-          :acl => acl)
+
+        client_opts = {}
+        client_opts[:bucket_name] = bucket.name
+        client_opts[:key] = key
+
+        client.put_object_acl(acl_options(acl).merge(client_opts))
         nil
+
       end
 
       # @private

@@ -27,6 +27,7 @@ module AWS
     class Bucket
 
       include Core::Model
+      include ACLOptions
 
       # @param [String] name
       # @param [Hash] options
@@ -212,18 +213,12 @@ module AWS
 
       end
 
-      # Sets the bucket's access control list.  +acl+ can be:
-      #
-      # * An XML policy as a string (which is passed to S3 uninterpreted)
-      # * An AccessControlList object
-      # * Any object that responds to +to_xml+
-      # * Any Hash that is acceptable as an argument to
-      #   AccessControlList#initialize.
-      # 
-      # @param [AccessControlList] acl
+      # Sets the bucket's ACL (access control list).  You can provide an ACL
+      # in a number of different formats.
+      # @param (see ACLOptions#acl_options)
       # @return [nil]
-      def acl=(acl)
-        client.set_bucket_acl(:bucket_name => name, :acl => acl)
+      def acl= acl
+        client.set_bucket_acl(acl_options(acl).merge(:bucket_name => name))
         nil
       end
 

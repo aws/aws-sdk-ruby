@@ -98,13 +98,17 @@ module AWS
       class Grantee
         include ACLObject
 
-        SIGNAL_ATTRIBUTES = [:amazon_customer_email,
-                             :canonical_user_id,
-                             :group_uri]
+        SIGNAL_ATTRIBUTES = [
+          :amazon_customer_email,
+          :canonical_user_id,
+          :group_uri,
+          :uri,
+        ]
 
         string_attr "EmailAddress", :method_name => "amazon_customer_email"
         string_attr "ID", :method_name => "canonical_user_id"
         string_attr "URI", :method_name => "group_uri"
+        string_attr "URI", :method_name => "uri"
         string_attr "DisplayName"
 
         # (see ACLObject#validate!)
@@ -133,9 +137,12 @@ module AWS
 
         # @private
         def type_for_attr(attr)
-          { :amazon_customer_email => "AmazonCustomerByEmail",
+          { 
+            :amazon_customer_email => "AmazonCustomerByEmail",
             :canonical_user_id => "CanonicalUser",
-            :group_uri => "Group" }[attr]
+            :group_uri => "Group",
+            :uri => "Group",
+          }[attr]
         end
 
       end

@@ -17,16 +17,23 @@ module AWS
 
   shared_examples_for 'a class that accepts configuration' do |*used_config|
 
+    it 'accepts and returns a :config option' do
+      config = double('config').as_null_object
+      config.stub(:with).and_return(config)
+      described_class.new(:config => config).config.should == config
+    end
+
     it 'constructor passes options to Configuration#with' do
+      config = AWS.config.with(:access_key_id => 'a', :secret_access_key => 'b')
+      config.max_retries.should_not eq(123)
+      described_class.new(:config => config, :max_retries => 123).
+        config.max_retries.should eq(123)
+    end
 
-      credentials = { :access_key_id => 'foo', :secret_access_key => 'bar' }
-
-      configured = AWS.config.with(credentials)
-
-      AWS.config.should_receive(:with).with(credentials).and_return(configured)
-
-      described_class.new(:access_key_id => "foo", :secret_access_key => "bar")
-
+    it 'returns the merged config' do
+      new_config = double('new-config').as_null_object
+      config = double('config', :with => new_config).as_null_object
+      described_class.new(:config => config).config.should == new_config
     end
 
   end

@@ -58,6 +58,7 @@ module AWS
       #   bucket.exists? #=> true
       #
       # @param [String] bucket_name
+      #
       # @param [Hash] options
       #
       # @option options [String] :location_constraint (nil) The
@@ -71,12 +72,28 @@ module AWS
       #     bucket = s3.buckets.create("my-us-west-bucket")
       #     bucket.location_constraint # => "us-west-1"
       #
-      # @option options [String] :acl (:private) Sets the ACL of the bucket 
-      #   you are creating.  Valid Values include :private, :public_read, 
-      #   :public_read_write, :authenticated_read, :bucket_owner_read and
-      #   :bucket_owner_full_control
+      # @option options [Symbol,String] :acl (:private) Sets the ACL of the 
+      #   bucket you are creating.  Valid Values include:
+      #   * +:private+
+      #   * +:public_read+
+      #   * +:public_read_write+
+      #   * +:authenticated_read+
+      #   * +:log_delivery_write+
+      #
+      # @option options [String] :grant_read
+      # @option options [String] :grant_write
+      # @option options [String] :grant_read_acp
+      # @option options [String] :grant_write_acp
+      # @option options [String] :grant_full_control
+      #
       # @return [Bucket]
+      #
       def create bucket_name, options = {}
+
+        # convert the symbolized-canned acl into the string version
+        if acl = options[:acl]
+          options[:acl] = acl.to_s.tr('_', '-')
+        end
 
         # auto set the location constraint for the user if it is not 
         # passed in and the endpoint is not the us-standard region.  don't 

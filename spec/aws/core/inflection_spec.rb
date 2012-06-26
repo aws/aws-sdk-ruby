@@ -18,15 +18,15 @@ module AWS::Core
 
     context '#ruby_name' do
 
-      it 'strips namespace' do
+      it 'strips namespaces (Foo::Bar::Yuck::AbcXyz => abc_xyz)' do
         Inflection.ruby_name('Foo::Bar::Yuck::AbcXyz').should == 'abc_xyz'
       end
 
-      it 'leaves lowercased words alone' do
+      it 'does not modify lowercase words (foo => foo)' do
         Inflection.ruby_name('foo').should == 'foo'
       end
 
-      it 'leaves lowercased underscored words alone' do
+      it 'does not modify lowercase words w/underscores (foo_bar => foo_bar)' do
         Inflection.ruby_name('foo_bar').should == 'foo_bar'
       end
 
@@ -34,7 +34,7 @@ module AWS::Core
         Inflection.ruby_name('Foo').should == 'foo'
       end
 
-      it 'inflects acroynms' do
+      it 'inflects AWS to aws' do
         Inflection.ruby_name('AWS').should == 'aws'
       end
 
@@ -62,6 +62,11 @@ module AWS::Core
 
       it 'inflects MD5OfBody to md5_of_body' do
         Inflection.ruby_name('MD5OfBody').should == 'md5_of_body'
+      end
+
+      it 'deals with words that start with a lower case letter' do
+        Inflection.ruby_name('s3Key').should == 's3_key'
+        Inflection.ruby_name('s3Bucket').should == 's3_bucket'
       end
 
       ## exceptional case, this one is handled individually currently

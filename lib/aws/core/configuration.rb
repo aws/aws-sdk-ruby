@@ -19,7 +19,7 @@ module AWS
 
     # A configuration object for AWS interfaces and clients.
     #
-    # == Configuring Credential
+    # == Configuring Credentials
     #
     # In order to do anything with AWS you will need to assign credentials.
     # The simplest method is to assing your credentials into the default
@@ -85,6 +85,22 @@ module AWS
     # @attr_reader [Object] http_handler The http handler that sends requests
     #   to AWS.  Defaults to an HTTP handler built on net/http.
     #
+    # @attr_reader [Integer] http_idle_timeout The number of seconds a
+    #   persistent connection is allowed to sit idle before it should no
+    #   longer be used.
+    #
+    # @attr_reader [Integer] http_open_timeout The number of seconds before
+    #   the +http_handler+ should timeout while trying to open a new HTTP 
+    #   sesssion.
+    #
+    # @attr_reader [Integer] http_read_timeout The number of seconds before
+    #   the +http_handler+ should timeout while waiting for a HTTP 
+    #   response.
+    #
+    # @attr_reader [Boolean] http_wire_trace When +true+, the http handler
+    #   will log all wire traces to the +:logger+.  If a +:logger+ is not
+    #   configured, then wire traces will be sent to standard out.
+    #
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
     #   The service endpoint for AWS Idenity Access Management (IAM).
     #
@@ -99,11 +115,8 @@ module AWS
     #   backoff in between service request retries, so the more retries the
     #   longer it can take to fail.
     #
-    # @attr_reader [String, URI, nil] proxy_uri (nil) The URI of the proxy 
-    #    to send service requests through.  You can pass a URI object or a 
-    #    URI string.  Defautls to +nil+.
-    #
-    #      AWS.config(:proxy_uri => 'https://user:pass@my.proxy:443')
+    # @attr_reader [URI,nil] proxy_uri (nil) The URI of the proxy 
+    #    to send service requests through.
     #
     # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
     #   The service endpoint for Amazon S3.
@@ -272,18 +285,17 @@ module AWS
       # @return [Hash] Returns a hash of all configuration values.
       def to_h
         self.class.accepted_options.inject({}) do |h,k|
-          h[k] = send(k)
-          h
+          h.merge(k => send(k))
         end
       end
+      alias_method :to_hash, :to_h
   
       # @return [Boolean] Returns true if the two configuration objects have
       #   the same values.
-      def == other
+      def eql? other
         other.is_a?(self.class) and self.supplied == other.supplied
       end
-  
-      alias_method :eql, :==
+      alias_method :==, :eql?
   
       # @private
       def inspect
@@ -291,6 +303,7 @@ module AWS
       end
   
       protected
+
       def supplied
         @supplied ||= {}
       end
@@ -338,11 +351,11 @@ module AWS
   
             return supplied[name] if supplied.has_key?(name)
   
-            needed = needs.collect{|need| send(need) }
+            needed = needs.inject({}) {|h,need| h.merge(need => send(need)) }
   
             unless @created.key?(name) and @created[name][:needed] == needed
               @created[name] = {}
-              @created[name][:object] = create_block.call(self)
+              @created[name][:object] = create_block.call(self,needed)
               @created[name][:needed] = needed
             end
   
@@ -380,23 +393,26 @@ module AWS
           end
 
           needs = [
-            :credential_provider, 
-            :http_handler, 
             :"#{ruby_name}_endpoint",
             :"#{ruby_name}_port",
-            :max_retries,
-            :stub_requests?,
-            :proxy_uri,
-            :use_ssl?,
-            :ssl_verify_peer?,
-            :ssl_ca_file,
-            :user_agent_prefix,
-            :logger,
+            :"#{ruby_name}_region",
+            :credential_provider, 
+            :http_handler, 
+            :http_read_timeout,
             :log_formatter,
             :log_level,
+            :logger,
+            :proxy_uri,
+            :max_retries,
+            :stub_requests?,
+            :ssl_verify_peer?,
+            :ssl_ca_file,
+            :ssl_ca_path,
+            :use_ssl?,
+            :user_agent_prefix,
           ]
 
-          create_block = lambda do |config| 
+          create_block = lambda do |config,client_options| 
             AWS.const_get(name)::Client.new(:config => config)
           end
 
@@ -406,15 +422,38 @@ module AWS
   
       end
 
-      add_option :access_key_id,
-        ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID']
+      add_option :access_key_id
   
-      add_option :secret_access_key,
-        ENV['AWS_SECRET_ACCESS_KEY'] || ENV['AMAZON_SECRET_ACCESS_KEY']
+      add_option :secret_access_key
   
       add_option :session_token
+  
+      add_option_with_needs :credential_provider,
+        [:access_key_id, :secret_access_key, :session_token] do |cfg,static_creds|
 
-      add_option :http_handler, Http::NetHttpHandler.new
+        CredentialProviders::DefaultProvider.new(static_creds)
+  
+      end
+
+      add_option :http_open_timeout, 15
+
+      add_option :http_read_timeout, 60
+
+      add_option :http_idle_timeout, 60
+
+      add_option :http_wire_trace, false, :boolean => true
+
+      add_option_with_needs :http_handler, 
+        [
+          :http_open_timeout, 
+          :http_idle_timeout,
+          :http_wire_trace, 
+          :logger, 
+        ] do |config,handler_options|
+
+        Http::NetHttpHandler.new(handler_options)
+
+      end
   
       add_option :logger
 
@@ -425,16 +464,6 @@ module AWS
       add_option :max_retries, 3
   
       add_option :proxy_uri do |config,uri| uri ? URI.parse(uri.to_s) : nil end
-  
-      add_option_with_needs :credential_provider, 
-        [:access_key_id, :secret_access_key, :session_token] do |config|
-
-        CredentialProviders::DefaultProvider.new(
-          :access_key_id => config.access_key_id,
-          :secret_access_key => config.secret_access_key,
-          :session_token => config.session_token)
-  
-      end
   
       add_option :ssl_verify_peer, true, :boolean => true
   

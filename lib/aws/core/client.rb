@@ -47,14 +47,14 @@ module AWS
           end
         end
   
-        @config = options.delete(:config)
-        @config ||= AWS.config
+        @config = (options.delete(:config) || AWS.config)
         @config = @config.with(options)
 
         @credential_provider = @config.credential_provider
         @http_handler = @config.http_handler
         @endpoint = config.send(:"#{service_ruby_name}_endpoint")
         @port = config.send(:"#{service_ruby_name}_port")
+        @http_read_timeout = @config.http_read_timeout
 
       end
   
@@ -74,6 +74,10 @@ module AWS
       # @return [Integer] What port this client makes requests via.
       # @private
       attr_reader :port
+
+      # @return [Integer] The number of secords before requests made by
+      #   this client should timeout if they have not received a response.
+      attr_reader :http_read_timeout
 
       # @return [String] Returns the service endpoint (hostname) this client
       #   makes requests against.
@@ -432,6 +436,7 @@ module AWS
   
         # configure the http request
         http_request.service_ruby_name = service_ruby_name
+        http_request.default_read_timeout = http_read_timeout
         http_request.host = endpoint
         http_request.port = port
         http_request.region = config.send(:"#{service_ruby_name}_region")

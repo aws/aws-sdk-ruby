@@ -27,7 +27,7 @@ module AWS
     #
     #     string_attr :title
     #     string_attr :author
-    #     integer :number_of_pages
+    #     integer_attr :number_of_pages
     #
     #     timestamps # adds a :created_at and :updated_at pair of timestamps
     #

@@ -22,8 +22,7 @@ module AWS
 
     let(:sts) { STS.new(:sts_client => client) }
 
-    it_behaves_like 'a class that accepts configuration',
-      :sts_client
+    it_behaves_like 'a class that accepts configuration', :sts_client
 
     let(:response_credentials) {{
        :access_key_id => "FOO",

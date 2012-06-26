@@ -17,17 +17,28 @@ module AWS
   module Core
     module Http
   
-      # The default http request handler for the aws-sdk gem.  It is based
-      # on Net::Http.
+      # = NetHttpHandler
+      #
+      # This is the default HTTP handler for the aws-sdk gem.  It uses
+      # Ruby's Net::HTTP to make requests.  It uses persistent connections
+      # and a connection pool.
+      #
       class NetHttpHandler
 
-        @@pool = Net::HTTP::ConnectionPool.new
-
-        # @private
-        def self.pool
-          @@pool
+        # (see Net::HTTP::ConnectionPool.new)
+        def initialize options = {}
+          @pool = Net::HTTP::ConnectionPool.new(options)
         end
+
+        # @return [Net::HTTP::ConnectionPool]
+        attr_reader :pool
   
+        # Given a populated request object and an empty response object,
+        # this method will make the request and them populate the 
+        # response.
+        # @param [Request] request
+        # @param [Response] response
+        # @return [nil]
         def handle request, response
 
           options = {}
@@ -38,23 +49,28 @@ module AWS
           options[:ssl_ca_file] = request.ssl_ca_file if request.ssl_ca_file
           options[:ssl_ca_path] = request.ssl_ca_path if request.ssl_ca_path
 
-          connection = self.class.pool.connection_for(request.host, options)
+          connection = pool.connection_for(request.host, options)
           connection.read_timeout = request.read_timeout
 
           begin
-            http_response = connection.request(build_request(request))
+            http_response = connection.request(build_net_http_request(request))
             response.body = http_response.body
             response.status = http_response.code.to_i
             response.headers = http_response.to_hash
           rescue Timeout::Error, Errno::ETIMEDOUT => e
             response.timeout = true
           end
+          nil
 
         end
 
-        # @private
         protected
-        def build_request request
+
+        # Given an AWS::Core::HttpRequest, this method translates
+        # it into a Net::HTTPRequest (Get, Put, Post, Head or Delete).
+        # @param [Request]
+        # @return [Net::HTTPRequest]
+        def build_net_http_request request
 
           # Net::HTTP adds a content-type header automatically unless its set
           # and this messes with request signature signing.  Also, it expects
@@ -64,16 +80,16 @@ module AWS
             headers[key] = value.to_s
           end
 
-          req_class = case request.http_method
+          request_class = case request.http_method
             when 'GET'    then Net::HTTP::Get
             when 'PUT'    then Net::HTTP::Put
             when 'POST'   then Net::HTTP::Post
             when 'HEAD'   then Net::HTTP::Head
             when 'DELETE' then Net::HTTP::Delete
             else raise "unsupported http method: #{request.http_method}"
-          end
+            end
 
-          net_http_req = req_class.new(request.uri, headers)
+          net_http_req = request_class.new(request.uri, headers)
           net_http_req.body = request.body
           net_http_req
 

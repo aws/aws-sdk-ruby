@@ -61,3 +61,24 @@ Feature: Managing SES identities
     | param       | MaxItems  | 1              |
     | param_match | NextToken | .+             |
 
+  @sns
+  Scenario: Disabling forwarding enabled
+    Given I ask to verify the identity "noreply@amazon.com"
+    And I create an SNS topic
+    When I set the SES identity bounce topic
+    And I set the SES identity complaint topic
+    And I disable the SES identity forwarding
+    Then the SES identity forwarding should be disabled
+
+  @sns
+  Scenario: Removing notification topics
+    Given I ask to verify the identity "noreply@amazon.com"
+    And I create an SNS topic
+    And I set the SES identity bounce topic
+    And I set the SES identity complaint topic
+    And I disable the SES identity forwarding
+    And I enable the SES identity forwarding
+    When I set the SES identity bounce topic to nil
+    When I set the SES identity complaint topic to nil
+    Then the SES identity bounce topic should be nil
+    Then the SES identity complaint topic should be nil

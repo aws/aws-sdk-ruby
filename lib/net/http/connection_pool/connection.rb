@@ -112,6 +112,9 @@ class Net::HTTP::ConnectionPool
       !!proxy_address
     end
 
+    # Makes a HTTP request.  See Net::HTTPSession#request documentation
+    # from the Ruby standard library for information about argments.
+    # @return [Net::HTTPResponse]
     def request *args, &block
       pool.request(self, *args, &block)
     end

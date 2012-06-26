@@ -14,6 +14,7 @@
 require 'net/http/connection_pool/session'
 require 'net/http/connection_pool/connection'
 require 'thread'
+require 'logger'
 
 # @private
 class Net::HTTP::ConnectionPool
@@ -29,18 +30,26 @@ class Net::HTTP::ConnectionPool
 
   # @param [Hash] options
   #
-  # @option options [Numeric] :idle_timeout (60) The number of seconds a 
+  # @option options [Numeric] :http_idle_timeout (60) The number of seconds a
   #   connection is allowed to sit idle before it is closed and removed
   #   from the pool.
   #
-  # @option options [Numeric] :open_timeout (15) The number of seconds to 
+  # @option options [Numeric] :http_open_timeout (15) The number of seconds to
   #   wait when opening a http session before raising a timeout exception.
+  #
+  # @option options [Boolean] :http_wire_trace (false) When +true+, HTTP
+  #   debug output will be sent to the +:logger+.
+  #
+  # @option options [Logger] :logger (Logger.new($stdout)) Where debug out
+  #   is sent (wire traces).
   # 
   def initialize options = {}
     @pool = []
     @pool_mutex = Mutex.new
-    @open_timeout = options[:open_timeout] || 15
-    @idle_timeout = options[:idle_timeout] || 60
+    @open_timeout = options[:http_open_timeout] || 15
+    @idle_timeout = options[:http_idle_timeout] || 60
+    @log_wire_trace = !!options[:http_wire_trace]
+    @logger = options[:logger] || Logger.new($stdout)
   end
 
   # @return [Integer] 
@@ -49,20 +58,32 @@ class Net::HTTP::ConnectionPool
   # @return [Integer]
   attr_accessor :open_timeout
 
-  # Requests a http session from the connection pool.  
+  # @return [Boolean] Returns +true+ when HTTP debug output (wire traces)
+  #   will be logged.
+  attr_reader :log_wire_trace
+
+  alias_method :log_wire_trace?, :log_wire_trace
+
+  # @return [Logger] Where debug output is sent.
+  attr_reader :logger
+
+  # Requests a connection object from the connection pool.
   #
+  #   connection = pool.connection_for('domain.com')
+  #   connection.request(Net::HTTP::Get.new('/index.html'))
+  #   connection.request(Net::HTTP::Get.new('/about.html'))
+  #
+  #   # same thing in block form
   #   pool.connection_for('domain.com') do |connection|
-  #
-  #     # make 
   #     connection.request(Net::HTTP::Get.new('/index.html'))
   #     connection.request(Net::HTTP::Get.new('/about.html'))
-  #
   #   end
   #
-  # The yielded connection object is a thin wrapper around the persistent 
-  # http session object.  You generally want to call {Connection#request}
-  # on the yielded object.  When the block is complete the connection
-  # will be returned to the pool.
+  # Because the pool manages HTTP sessions you do not have to
+  # worry about closing a connection or returning a connection
+  # to the pool.  Every time you call request on a connection
+  # object, a HTTP session received from the pool and returned after
+  # the request is complete.
   #
   # @param [String] host
   #
@@ -76,7 +97,7 @@ class Net::HTTP::ConnectionPool
   #   to +true+.
   #
   # @option options [Boolean] :ssl_verify_peer (true) If true, ssl 
-  #   connections will verify peer certificates.  This should only ever be
+  #   connections should verify peer certificates.  This should only ever be
   #   set false false for debugging purposes.
   #
   # @option options [String] :ssl_ca_file Full path to the SSL certificate
@@ -90,8 +111,8 @@ class Net::HTTP::ConnectionPool
   #   the the system default will be used if available.
   #
   # @option options [URI::HTTP,String] :proxy_uri (nil) A URI string or
-  #   URI::HTTP for a proxy reqeusts should be made through.  You should
-  #   not pass both +:proxy_uri+ with any of the other proxy options.
+  #   URI::HTTP object to use as a proxy.  You should not provide 
+  #   +:proxy_uri+ with any other proxy options.
   #
   #     :proxy_uri => 'http://user:pass@host.com:80'
   #
@@ -103,19 +124,19 @@ class Net::HTTP::ConnectionPool
   #
   # @option options [String] :proxy_password
   #
-  # @yieldparam [Connection] connection
+  # @yield [connection]
   #
-  # @return [nil]
+  # @yieldparam [optional,Connection] connection
+  #
+  # @return [Connection]
   #
   def connection_for host, options = {}, &block
     connection = Connection.new(self, host, options)
-    if block_given?
-      yield(connection)
-    else
-      connection
-    end
+    yield(connection) if block_given?
+    connection
   end
 
+  # @private
   def request connection, *request_args, &block
 
     session = nil
@@ -187,7 +208,8 @@ class Net::HTTP::ConnectionPool
     end
 
     if session.nil?
-      session = Session.for(connection, open_timeout)
+      logger = log_wire_trace? ? self.logger : nil 
+      session = Session.for(connection, open_timeout, logger)
     end
 
     session

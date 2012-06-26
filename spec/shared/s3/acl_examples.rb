@@ -26,17 +26,93 @@ module AWS
 
     context '#acl=' do
 
-      it "calls #{setter} on the client" do
+      it 'passes along canned acls symbols as strings' do
         client.should_receive(setter).
-          with(opts.merge(:acl => "<ACL/>"))
+          with(opts.merge(:acl => 'public-read'))
+        model_obj.acl = :public_read
+      end
+
+      it 'passes along non-xml strings as canned acls' do
+        client.should_receive(setter).with(opts.merge(:acl => 'abc'))
+        model_obj.acl = 'abc'
+      end
+
+      it 'passes along xml as an AccessControlList as xml' do
+
+        acl = AWS::S3::AccessControlList.new
+        acl.stub(:to_xml).and_return('<xml/>')
+
+        client.should_receive(setter).
+          with(opts.merge(:access_control_policy => '<xml/>'))
+
+        model_obj.acl = acl
+
+      end
+
+      it 'passes xml strings along as :access_control_policy' do
+        client.should_receive(setter).
+          with(opts.merge(:access_control_policy => "<ACL/>"))
         model_obj.acl = "<ACL/>"
+      end
+
+      it 'passes along a hash grant' do
+        client.should_receive(setter).with(opts.merge({
+          :grant_read => 'a',
+          :grant_write => 'b',
+          :grant_read_acp => 'c',
+          :grant_write_acp => 'd',
+          :grant_full_control => 'e',
+        }))
+        model_obj.acl = {
+          :grant_read => 'a',
+          :grant_write => 'b',
+          :grant_read_acp => 'c',
+          :grant_write_acp => 'd',
+          :grant_full_control => 'e',
+        }
+      end
+
+      it 'translates grants' do
+        client.should_receive(setter).with(opts.merge(
+          :grant_read => 'string-value',
+          :grant_write => 'array, of, strings',
+          :grant_read_acp => 'emailAddress="value"',
+          :grant_write_acp => 'id="abc", id="xyz"',
+          :grant_full_control => 'id="id", uri="http://", emailAddress="email"'
+        ))
+        # accepts strings, arrays of strings, hashes and arrays of hashes,
+        # hashes should have exactly 1 key
+        model_obj.acl = {
+          :grant_read => 'string-value',
+          :grant_write => ['array', 'of', 'strings'],
+          :grant_read_acp => { 'emailAddress' => 'value' },
+          :grant_write_acp => [{ :id => 'abc', }, { :id => 'xyz' }],
+          :grant_full_control => [{ :id => 'id'}, {:uri => 'http://'}, {:email_address => 'email' }]
+        }
+      end
+
+      it 'raises an error if the grant hashes grantees have more than 1 key' do
+        lambda {
+          model_obj.acl = {
+            :grant_read => [
+              { :foo => 'bar' }, # this is okay
+              { :foo => 'bar', :oops => 'bar' }, # can't have 2 keys
+            ]
+          }
+        }.should raise_error(ArgumentError)
+      end
+
+      it 'raises an argument error for anything else' do
+        lambda {
+          model_obj.acl = double('invalid-acl')
+        }.should raise_error(ArgumentError, /ACL/)
       end
 
     end
 
     context '#acl' do
 
-      let(:acl) { double('acl') }
+      let(:acl) { '<ACL/>' }
 
       let(:resp) { client.new_stub_for(getter) }
 
@@ -71,7 +147,7 @@ module AWS
         it "should call #{setter} at the end of the block" do
           model_obj.acl.change do |a|
             client.should_receive(setter).
-              with(opts.merge(:acl => a))
+              with(opts.merge(:access_control_policy => a))
           end
         end
 
