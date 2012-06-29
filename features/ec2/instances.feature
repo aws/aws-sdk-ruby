@@ -33,6 +33,36 @@ Feature: Basic Instance Operations
     | param       | MaxCount    | 1                          |
     | param_match | ClientToken | ^([0-9a-f]+-){4}[0-9a-f]+$ |
 
+  Scenario: Run instance with IAM profile name
+    When I request to run an instance with the following parameters:
+    | parameter            | value        |
+    | image_id             | ami-8c1fece5 |
+    | iam_instance_profile | profile-name |
+    Then an error should have been raise with a message like
+    """
+    Invalid IAM Instance Profile name
+    """
+    And a request should have been made like:
+    | TYPE        | NAME                    | VALUE        |
+    | param       | Action                  | RunInstances |
+    | param       | ImageId                 | ami-8c1fece5 |
+    | param       | IamInstanceProfile.Name | profile-name |
+
+  Scenario: Run instance with IAM profile ARN
+    When I request to run an instance with the following parameters:
+    | parameter            | value                    |
+    | image_id             | ami-8c1fece5             |
+    | iam_instance_profile | arn:aws:iam::profile-arn |
+    Then an error should have been raise with a message like
+    """
+    Invalid IAM Instance Profile ARN
+    """
+    And a request should have been made like:
+    | TYPE        | NAME                   | VALUE                     |
+    | param       | Action                 | RunInstances              |
+    | param       | ImageId                | ami-8c1fece5              |
+    | param       | IamInstanceProfile.Arn | arn:aws:iam::profile-arn  |
+
   Scenario: Run multiple instances
     When I request to run between 1 and 10 instances with the following parameters:
     | parameter | value        |

@@ -29,9 +29,12 @@ When /^I request to run an instance with the following parameters:$/ do |table|
 
   opts[:subnet] = @subnet if @run_in_vpc
 
-  @instance = @result = @ec2.instances.create(opts)
-
-  @started_instances << @instance
+  begin
+    @instance = @result = @ec2.instances.create(opts)
+    @started_instances << @instance
+  rescue => e
+    @error = e
+  end
 
   sleep 0.1
 end
@@ -142,3 +145,9 @@ end
 When /^I get the instance status$/ do
   @result = @instance.status
 end
+
+Then /^an error should have been raise with a message like$/ do |pattern|
+  @error.should be_a(StandardError)
+  @error.message.should match(pattern)
+end
+
