@@ -3310,6 +3310,12 @@
               DeleteOnTermination:
               - :boolean
         - :rename: networkInterfaces
+        IamInstanceProfile:
+        - :structure:
+            Arn:
+            - :string
+            Name:
+            - :string
   :outputs:
     :children:
       spotInstanceRequestSet:
@@ -3615,6 +3621,12 @@
           DeleteOnTermination:
           - :boolean
     - :rename: networkInterfaces
+    IamInstanceProfile:
+    - :structure:
+        Arn:
+        - :string
+        Name:
+        - :string
   :outputs:
     :children:
       groupSet:
