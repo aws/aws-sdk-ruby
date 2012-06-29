@@ -68,7 +68,7 @@ module AWS
 
         # Given an AWS::Core::HttpRequest, this method translates
         # it into a Net::HTTPRequest (Get, Put, Post, Head or Delete).
-        # @param [Request]
+        # @param [Request] request
         # @return [Net::HTTPRequest]
         def build_net_http_request request
 
