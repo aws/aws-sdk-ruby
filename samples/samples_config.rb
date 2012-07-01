@@ -21,8 +21,8 @@ unless File.exist?(config_file)
   puts <<END
 To run the samples, put your credentials in config.yml as follows:
 
-access_key_id: YOUR_ACCESS_KEY_ID
-secret_access_key: YOUR_SECRET_ACCESS_KEY
+access_key_id: AKIAIPIXWBOUJNIQNRWQ
+secret_access_key: Wjj5fcUiaQxzmtsBWfGalkakHlSmvJ/Ebfo8xPkI
 
 END
   exit 1
@@ -34,8 +34,8 @@ unless config.kind_of?(Hash)
   puts <<END
 config.yml is formatted incorrectly.  Please use the following format:
 
-access_key_id: YOUR_ACCESS_KEY_ID
-secret_access_key: YOUR_SECRET_ACCESS_KEY
+access_key_id: AKIAIPIXWBOUJNIQNRWQ
+secret_access_key: Wjj5fcUiaQxzmtsBWfGalkakHlSmvJ/Ebfo8xPkI
 
 END
   exit 1
