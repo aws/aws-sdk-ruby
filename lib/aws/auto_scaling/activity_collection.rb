@@ -36,7 +36,7 @@ module AWS
     #   
     class ActivityCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       
       # @private
       def initialize options = {}

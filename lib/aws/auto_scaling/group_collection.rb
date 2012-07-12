@@ -17,7 +17,7 @@ module AWS
     class GroupCollection
 
       include GroupOptions
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # Creates an Auto Scaling Group.
       #

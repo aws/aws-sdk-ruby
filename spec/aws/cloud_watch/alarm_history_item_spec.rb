@@ -21,53 +21,40 @@ module AWS
 
       let(:client) { config.cloud_watch_client }
 
-      let(:alarm_history_item) { AlarmHistoryItem.new('alarm_name', :history_data => 'history_data',
-                                                      :history_item_type => 'history_item_type',
-                                                      :history_summary => 'history_summary',
-                                                      :timestamp => now, :config => config) }
+      let(:alarm_history_item) { 
+        AlarmHistoryItem.new(
+          :alarm_name => 'alarm_name', 
+          :history_data => 'history_data',
+          :history_item_type => 'history_item_type',
+          :history_summary => 'history_summary',
+          :timestamp => now, :config => config) 
+      }
 
-      let(:response) { client.stub_for(:describe_alarm_history) }
+      shared_examples_for 'alarm history item attribute' do |attr_name,aka|
 
-      let(:now) { Time.now }
+        context "##{attr_name}" do
 
-      let(:alarm_history_items) { [] }
+          it "returns the :#{attr_name} option passed to initialize" do
+            v = double('attribute-value')
+            AlarmHistoryItem.new(attr_name => v).send(attr_name).should eq(v)
+          end
 
-      let(:details) {{
-        :alarm_name => alarm_history_item.alarm_name,
-        :history_data => alarm_history_item.history_data,
-        :history_item_type => alarm_history_item.history_item_type,
-        :history_summary => alarm_history_item.history_summary,
-        :timestamp => alarm_history_item.timestamp,
-      }}
+          if aka
+            it "aliases #{attr_name} as #{aka}" do
+              item = AlarmHistoryItem.new({})
+              item.method(attr_name).should eq(item.method(aka))
+            end
+          end
 
-      before(:each) do
-        response.data[:alarm_history_items] = [details]
-        client.stub(:describe_alarm_history).and_return(response)
-      end
-
-      context '#data' do
-
-        it 'is aliased' do
-          alarm_history_item.data.should == alarm_history_item.history_data
         end
 
       end
 
-      context '#item_type' do
-
-        it 'is aliased' do
-          alarm_history_item.type.should == alarm_history_item.history_item_type
-        end
-
-      end
-
-      context '#summary' do
-
-        it 'is aliased' do
-          alarm_history_item.summary.should == alarm_history_item.history_summary
-        end
-
-      end
+      it_behaves_like "alarm history item attribute", :alarm_name, false
+      it_behaves_like "alarm history item attribute", :history_data, :data
+      it_behaves_like "alarm history item attribute", :history_item_type, :type
+      it_behaves_like "alarm history item attribute", :history_summary, :summary
+      it_behaves_like "alarm history item attribute", :timestamp, false
 
     end
   end

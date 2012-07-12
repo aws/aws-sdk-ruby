@@ -15,13 +15,13 @@ require 'spec_helper'
 
 module AWS
   class CloudWatch
-    describe MetricAlarm do
+    describe Alarm do
 
       let(:config) { stub_config }
 
       let(:client) { config.cloud_watch_client }
 
-      let(:metric_alarm) { MetricAlarm.new('alarm_name', :config => config) }
+      let(:metric_alarm) { Alarm.new('alarm_name', :config => config) }
 
       let(:response) { client.stub_for(:describe_alarms) }
 
@@ -114,6 +114,10 @@ module AWS
 
         it 'returns alarm history' do
           metric_alarm.histories.should be_an(AlarmHistoryItemCollection)
+        end
+
+        it 'returns a collection with the proper config' do
+          metric_alarm.histories.config.should eq(config)
         end
 
       end

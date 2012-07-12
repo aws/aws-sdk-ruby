@@ -18,7 +18,7 @@ module AWS
 
     class ScheduledActionCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       
       # @private
       def initialize options = {}

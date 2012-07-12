@@ -47,7 +47,7 @@ module AWS
     #
     class NotificationConfigurationCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       
       # @private
       def initialize options = {}

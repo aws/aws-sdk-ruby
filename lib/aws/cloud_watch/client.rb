@@ -51,21 +51,21 @@ module AWS
       #
       # === Options:
       #
-      # * +:alarm_name+ - - (String)
-      # * +:end_date+ - - (Time)
-      # * +:history_item_type+ - - (String)
-      # * +:max_records+ - - (Integer)
-      # * +:next_token+ - - (String)
-      # * +:start_date+ - - (Time)
+      # * +:alarm_name+ - (String)
+      # * +:history_item_type+ - (String)
+      # * +:start_date+ - (String<ISO8601 datetime>)
+      # * +:end_date+ - (String<ISO8601 datetime>)
+      # * +:max_records+ - (Integer)
+      # * +:next_token+ - (String)
       #
       # === Response Structure:
       #
       # * +:alarm_history_items+ - (Array<Hash>)
       #   * +:alarm_name+ - (String)
-      #   * +:history_data+ - (String)
+      #   * +:timestamp+ - (Time)
       #   * +:history_item_type+ - (String)
       #   * +:history_summary+ - (String)
-      #   * +:timestamp+ - (Time)
+      #   * +:history_data+ - (String)
       # * +:next_token+ - (String)
       #
       # @return [Core::Response]
@@ -77,37 +77,39 @@ module AWS
       #
       # === Options:
       #
-      # * +:action_prefix+ - - (String)
-      # * +:alarm_name_prefix+ - - (String)
-      # * +:alarm_names+ - - (Array<String>)
-      # * +:max_records+ - - (Integer)
-      # * +:next_token+ - - (String)
-      # * +:state_value+ - - (String)
+      # * +:alarm_names+ - (Array<String>)
+      # * +:alarm_name_prefix+ - (String)
+      # * +:state_value+ - (String)
+      # * +:action_prefix+ - (String)
+      # * +:max_records+ - (Integer)
+      # * +:next_token+ - (String)
       #
       # === Response Structure:
       #
       # * +:metric_alarms+ - (Array<Hash>)
-      #   * +:actions_enabled+ - (Boolean)
-      #   * +:alarm_actions+ - (Array<String>)
-      #   * +:alarm_arn+ - (String)
-      #   * +:alarm_configuration_updated_timestamp+ - (Time)
-      #   * +:alarm_description+ - (String)
       #   * +:alarm_name+ - (String)
-      #   * +:comparison_operator+ - (String)
-      #   * +:dimensions+ - (Array<Hash>)
-      #   * +:evaluation_periods+ - (Integer)
-      #   * +:insufficient_data_actions+ - (Array<String>)
-      #   * +:metric_name+ - (String)
-      #   * +:namespace+ - (String)
+      #   * +:alarm_arn+ - (String)
+      #   * +:alarm_description+ - (String)
+      #   * +:alarm_configuration_updated_timestamp+ - (Time)
+      #   * +:actions_enabled+ - (Boolean)
       #   * +:ok_actions+ - (Array<String>)
-      #   * +:period+ - (Integer)
+      #   * +:alarm_actions+ - (Array<String>)
+      #   * +:insufficient_data_actions+ - (Array<String>)
+      #   * +:state_value+ - (String)
       #   * +:state_reason+ - (String)
       #   * +:state_reason_data+ - (String)
       #   * +:state_updated_timestamp+ - (Time)
-      #   * +:state_value+ - (String)
+      #   * +:metric_name+ - (String)
+      #   * +:namespace+ - (String)
       #   * +:statistic+ - (String)
-      #   * +:threshold+ - (Float)
+      #   * +:dimensions+ - (Array<Hash>)
+      #     * +:name+ - (String)
+      #     * +:value+ - (String)
+      #   * +:period+ - (Integer)
       #   * +:unit+ - (String)
+      #   * +:evaluation_periods+ - (Integer)
+      #   * +:threshold+ - (Numeric)
+      #   * +:comparison_operator+ - (String)
       # * +:next_token+ - (String)
       #
       # @return [Core::Response]
@@ -119,38 +121,41 @@ module AWS
       #
       # === Options:
       #
-      # * +:dimensions+ - - (Array<Hash>)
       # * +:metric_name+ - *required* - (String)
       # * +:namespace+ - *required* - (String)
-      # * +:period+ - - (Integer)
-      # * +:statistic+ - - (String)
-      # * +:unit+ - - (String)
+      # * +:statistic+ - (String)
+      # * +:dimensions+ - (Array<Hash>)
+      #   * +:name+ - *required* - (String)
+      #   * +:value+ - *required* - (String)
+      # * +:period+ - (Integer)
+      # * +:unit+ - (String)
       #
       # === Response Structure:
       #
       # * +:metric_alarms+ - (Array<Hash>)
-      #   * +:actions_enabled+ - (Boolean)
-      #   * +:alarm_actions+ - (Array<String>)
-      #   * +:alarm_arn+ - (String)
-      #   * +:alarm_configuration_updated_timestamp+ - (Time)
-      #   * +:alarm_description+ - (String)
       #   * +:alarm_name+ - (String)
-      #   * +:comparison_operator+ - (String)
-      #   * +:dimensions+ - (Array<Hash>)
-      #   * +:evaluation_periods+ - (Integer)
-      #   * +:insufficient_data_actions+ - (Array<String>)
-      #   * +:metric_name+ - (String)
-      #   * +:namespace+ - (String)
+      #   * +:alarm_arn+ - (String)
+      #   * +:alarm_description+ - (String)
+      #   * +:alarm_configuration_updated_timestamp+ - (Time)
+      #   * +:actions_enabled+ - (Boolean)
       #   * +:ok_actions+ - (Array<String>)
-      #   * +:period+ - (Integer)
+      #   * +:alarm_actions+ - (Array<String>)
+      #   * +:insufficient_data_actions+ - (Array<String>)
+      #   * +:state_value+ - (String)
       #   * +:state_reason+ - (String)
       #   * +:state_reason_data+ - (String)
       #   * +:state_updated_timestamp+ - (Time)
-      #   * +:state_value+ - (String)
+      #   * +:metric_name+ - (String)
+      #   * +:namespace+ - (String)
       #   * +:statistic+ - (String)
-      #   * +:threshold+ - (Float)
+      #   * +:dimensions+ - (Array<Hash>)
+      #     * +:name+ - (String)
+      #     * +:value+ - (String)
+      #   * +:period+ - (Integer)
       #   * +:unit+ - (String)
-      # * +:next_token+ - (String)
+      #   * +:evaluation_periods+ - (Integer)
+      #   * +:threshold+ - (Numeric)
+      #   * +:comparison_operator+ - (String)
       #
       # @return [Core::Response]
       #
@@ -186,7 +191,36 @@ module AWS
       #
       define_client_method :enable_alarm_actions, 'EnableAlarmActions'
 
-      # TODO: documentation
+      # Calls the GetMetricStatistics API operation.
+      # @method get_metric_statistics(options = {})
+      #
+      # === Options:
+      #
+      # * +:namespace+ - *required* - (String)
+      # * +:metric_name+ - *required* - (String)
+      # * +:dimensions+ - (Array<Hash>)
+      #   * +:name+ - *required* - (String)
+      #   * +:value+ - *required* - (String)
+      # * +:start_time+ - *required* - (String<ISO8601 datetime>)
+      # * +:end_time+ - *required* - (String<ISO8601 datetime>)
+      # * +:period+ - *required* - (Integer)
+      # * +:statistics+ - *required* - (Array<String>)
+      # * +:unit+ - (String)
+      #
+      # === Response Structure:
+      #
+      # * +:label+ - (String)
+      # * +:datapoints+ - (Array<Hash>)
+      #   * +:timestamp+ - (Time)
+      #   * +:sample_count+ - (Numeric)
+      #   * +:average+ - (Numeric)
+      #   * +:sum+ - (Numeric)
+      #   * +:minimum+ - (Numeric)
+      #   * +:maximum+ - (Numeric)
+      #   * +:unit+ - (String)
+      #
+      # @return [Core::Response]
+      #
       define_client_method :get_metric_statistics, 'GetMetricStatistics'
 
       # Calls the ListMetrics API operation.
@@ -194,17 +228,21 @@ module AWS
       #
       # === Options:
       #
-      # * +:dimensions+ - - (Array<Hash>)
-      # * +:metric_name+ - - (String)
-      # * +:namespace+ - - (String)
-      # * +:next_token+ - - (String)
+      # * +:namespace+ - (String)
+      # * +:metric_name+ - (String)
+      # * +:dimensions+ - (Array<Hash>)
+      #   * +:name+ - *required* - (String)
+      #   * +:value+ - (String)
+      # * +:next_token+ - (String)
       #
       # === Response Structure:
       #
       # * +:metrics+ - (Array<Hash>)
-      #   * +:dimensions+ - (Array<Hash>)
-      #   * +:metric_name+ - (String)
       #   * +:namespace+ - (String)
+      #   * +:metric_name+ - (String)
+      #   * +:dimensions+ - (Array<Hash>)
+      #     * +:name+ - (String)
+      #     * +:value+ - (String)
       # * +:next_token+ - (String)
       #
       # @return [Core::Response]
@@ -216,21 +254,23 @@ module AWS
       #
       # === Options:
       #
-      # * +:actions_enabled+ - - (Boolean)
-      # * +:alarm_actions+ - - (Array<String>)
-      # * +:alarm_description+ - - (String)
       # * +:alarm_name+ - *required* - (String)
-      # * +:comparison_operator+ - *required* - (String)
-      # * +:dimensions+ - - (Array<Hash>)
-      # * +:evaluation_periods+ - *required* - (Integer)
-      # * +:insufficient_data_actions+ - - (Array<String>)
+      # * +:alarm_description+ - (String)
+      # * +:actions_enabled+ - (Boolean)
+      # * +:ok_actions+ - (Array<String>)
+      # * +:alarm_actions+ - (Array<String>)
+      # * +:insufficient_data_actions+ - (Array<String>)
       # * +:metric_name+ - *required* - (String)
       # * +:namespace+ - *required* - (String)
-      # * +:ok_actions+ - - (Array<String>)
-      # * +:period+ - *required* - (Integer)
       # * +:statistic+ - *required* - (String)
+      # * +:dimensions+ - (Array<Hash>)
+      #   * +:name+ - *required* - (String)
+      #   * +:value+ - *required* - (String)
+      # * +:period+ - *required* - (Integer)
+      # * +:unit+ - (String)
+      # * +:evaluation_periods+ - *required* - (Integer)
       # * +:threshold+ - *required* - (Float)
-      # * +:unit+ - - (String)
+      # * +:comparison_operator+ - *required* - (String)
       #
       # === Response Structure:
       #
@@ -240,7 +280,32 @@ module AWS
       #
       define_client_method :put_metric_alarm, 'PutMetricAlarm'
 
-      # TODO: documentation
+      # Calls the PutMetricData API operation.
+      # @method put_metric_data(options = {})
+      #
+      # === Options:
+      #
+      # * +:namespace+ - *required* - (String)
+      # * +:metric_data+ - *required* - (Array<Hash>)
+      #   * +:metric_name+ - *required* - (String)
+      #   * +:dimensions+ - (Array<Hash>)
+      #     * +:name+ - *required* - (String)
+      #     * +:value+ - *required* - (String)
+      #   * +:timestamp+ - (String<ISO8601 datetime>)
+      #   * +:value+ - (Float)
+      #   * +:statistic_values+ - (Hash)
+      #     * +:sample_count+ - *required* - (Float)
+      #     * +:sum+ - *required* - (Float)
+      #     * +:minimum+ - *required* - (Float)
+      #     * +:maximum+ - *required* - (Float)
+      #   * +:unit+ - (String)
+      #
+      # === Response Structure:
+      #
+      # This method returns no response data.
+      #
+      # @return [Core::Response]
+      #
       define_client_method :put_metric_data, 'PutMetricData'
 
       # Calls the SetAlarmState API operation.
@@ -248,10 +313,10 @@ module AWS
       #
       # === Options:
       #
-      # * +:alarm_name+ - - (String)
-      # * +:state_reason+ - - (String)
-      # * +:state_reason_data+ - - (String)
-      # * +:state_value+ - - (String)
+      # * +:alarm_name+ - *required* - (String)
+      # * +:state_value+ - *required* - (String)
+      # * +:state_reason+ - *required* - (String)
+      # * +:state_reason_data+ - (String)
       #
       # === Response Structure:
       #

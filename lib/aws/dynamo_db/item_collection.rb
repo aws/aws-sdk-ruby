@@ -88,7 +88,7 @@ module AWS
     # 
     class ItemCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       include Types
       include Expectations
 

@@ -22,7 +22,7 @@ module AWS
     #
     class HistoryEventCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # @param [WorkflowExecution] workflow_execution The execution this 
       #   history event belongs to.

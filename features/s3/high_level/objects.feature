@@ -47,6 +47,17 @@ Feature: CRUD Objects (High Level)
     | http | uri  | /foo  |
 
   @head_object
+  Scenario: Ask if an S3 object exists (does exist)
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    When I ask if the object exists
+    Then the result should be true
+    And a request should have been made like:
+    | TYPE | NAME | VALUE |
+    | http | verb | HEAD  |
+    | http | uri  | /foo  |
+
+  @head_object
   Scenario: Get an object's ETag
     Given I ask for the object with key "foo"
     And I write the string "HELLO" to it

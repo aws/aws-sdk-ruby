@@ -19,7 +19,7 @@ module AWS
     class TypeCollection
 
       include OptionFormatters
-      include Core::Collection::Limitable 
+      include Core::Collection::WithLimitAndNextToken 
 
       # @param [Domain] domain The domain the (workflow or activity types 
       #   belong to.

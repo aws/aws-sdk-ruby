@@ -1169,7 +1169,7 @@ module AWS
       end
 
       # @param [String] possible_xml
-      # @reutrn [Boolean] Returns +true+ if the given string is a valid xml 
+      # @return [Boolean] Returns +true+ if the given string is a valid xml 
       #   document.
       def is_xml? possible_xml
         begin

@@ -15,7 +15,7 @@ module AWS
   module Core
     module Collection
 
-      # AWS::Core::Collection::Simple is used by collections that always 
+      # AWS::Core::Collection::Simple is used by collections that always
       # recieve every matching items in a single response.
       #
       # This means:
@@ -25,7 +25,7 @@ module AWS
       # * Next tokens are artificial (guessable numeric offsets)
       #
       # AWS services generally return all items only for requests with a
-      # small maximum number of results.  
+      # small maximum number of results.
       #
       # See {AWS::Core::Collection} for documentation on the available
       # collection methods.
@@ -35,37 +35,36 @@ module AWS
         include Enumerable
         include Collection
 
-        # (see AWS::Core::Collection#each_batch)
-        def each_batch options = {}, &block
+        protected
 
-          each_opts  = options.dup
-          limit      = each_opts.delete(:limit)
-          limit      = limit.to_i if limit
-          next_token = each_opts.delete(:next_token)
-          offset     = next_token ? next_token.to_i - 1 : 0
-          total      = 0
+        def _each_batch options = {}, &block
 
-          nil_or_next_token = nil
+          limit = _extract_limit(options)
+          next_token = _extract_next_token(options)
+          offset = next_token ? next_token.to_i - 1 : 0
+
+          total = 0
+          skipped = 0
+          simulated_next_token = nil
 
           batch = []
-          _each_item(each_opts.dup) do |item|
+          _each_item(options.dup) do |item|
 
             total += 1
 
             # skip until we reach our offset (derived from the "next token")
-            next if total <= offset
+            if skipped < offset
+              skipped += 1
+              next
+            end
 
             if limit
-
               if batch.size < limit
                 batch << item
               else
-                # allow _each_item to yield one more item than needed
-                # so we can determine if we should return a "next token"
-                nil_or_next_token = total
+                simulated_next_token = total
                 break
               end
-
             else
               batch << item
             end
@@ -74,17 +73,10 @@ module AWS
 
           yield(batch)
 
-          nil_or_next_token
+          simulated_next_token
 
         end
-
-        protected
-        def _each_item options = {}, &block
-          raise NotImplementedError
-        end
-
       end
-
     end
   end
 end

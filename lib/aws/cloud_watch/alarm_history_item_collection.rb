@@ -11,61 +11,72 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'date'
+require 'time'
+
 module AWS
   class CloudWatch
-
-    #
-    # @attr_reader [String] alarm_name
-    #
-    # @attr_reader [Time] end_date
-    #
-    # @attr_reader [String] history_item_type
-    #
-    # @attr_reader [Time] start_date
-    #
     class AlarmHistoryItemCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # @private
       def initialize options = {}
-        @alarm_name = options[:alarm_name]
-        @end_date = options[:end_date]
-        @history_item_type = options[:history_item_type]
-        @start_date = options[:start_date]
+        @filters = options[:filters] || {}
         super
       end
 
-      attr_reader :alarm_name
+      # @param [String,Symbol] name
+      # @param [String] value
+      # @return [AlarmHistoryItemCollection]
+      def filter name, value
+        filters = @filters.merge(name.to_s.to_sym => value)
+        AlarmHistoryItemCollection.new(:filters => filters, :config => config)
+      end
 
-      attr_reader :end_date
+      # @param [String] name
+      # @return [AlarmHistoryItemCollection]
+      def with_alarm_name name
+        filter(:alarm_name, name)
+      end
 
-      attr_reader :history_item_type
+      # @param [Time,DateTime,String<ISO8601>] date
+      # @return [AlarmHistoryItemCollection]
+      def with_start_date date
+        date = date.iso8601 if date.respond_to?(:iso8601)
+        filter(:start_date, date)
+      end
 
-      alias_method :item_type, :history_item_type
+      # @param [Time,DateTime,String<ISO8601>] date
+      # @return [AlarmHistoryItemCollection]
+      def with_end_date date
+        date = date.iso8601 if date.respond_to?(:iso8601)
+        filter(:end_date, date)
+      end
 
-      attr_reader :start_date
+      # @param [String] type
+      # @return [AlarmHistoryItemCollection]
+      def with_type type
+        filter(:history_item_type, type)
+      end
 
       protected
+
       def _each_item next_token, limit, options = {}, &block
-        options[:alarm_name] = alarm_name if alarm_name
-        options[:end_date] = end_date if end_date
-        options[:history_item_type] = history_item_type if history_item_type
-        options[:start_date] = start_date if start_date
+        
+        options = @filters.merge(options)
         options[:max_records] = limit if limit
         options[:next_token] = next_token if next_token
 
         resp = client.describe_alarm_history(options)
-        resp.alarm_history_items.each do |details|
-          alarm = AlarmHistoryItem.new_from(
-            :describe_alarm_history, details, 
-            details.alarm_name, 
-            :history_data => details[:history_data], :history_item_type => details[:history_item_type],
-            :history_summary => details[:history_summary], :timestamp => details[:timestamp],
-            :config => config)
-          yield(alarm)
+        resp.data[:alarm_history_items].each do |details|
+          
+          yield(AlarmHistoryItem.new(details))
+
         end
-        resp.data[:next_token]
+
+       resp.data[:next_token]
+
       end
 
     end

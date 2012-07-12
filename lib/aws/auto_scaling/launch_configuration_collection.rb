@@ -17,7 +17,7 @@ module AWS
   class AutoScaling
     class LaunchConfigurationCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # Creates an Auto Scaling launch configuration.
       #

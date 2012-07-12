@@ -11,10 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'set'
 require 'aws/core/client/query_xml'
 require 'aws/core/client/query_json'
-require 'json'
+require 'set'
+require 'yaml'
 
 module AWS
   module Core

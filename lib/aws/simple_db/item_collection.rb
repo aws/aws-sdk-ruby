@@ -30,7 +30,7 @@ module AWS
 
       include ConsistentReadOption
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # @return [Domain] The domain the items belong to.
       attr_reader :domain
@@ -447,7 +447,7 @@ module AWS
         return @limit if args.empty?
         collection_with(:limit => Integer(args.first))
       end
-      alias_method :_limit, :limit # for Collection::Limitable
+      alias_method :_limit, :limit # for Collection::WithLimitAndNextToken
 
       # Applies standard scope options (e.g. :where => 'foo') and removes them from
       # the options hash by calling their method (e.g. by calling #where('foo')).

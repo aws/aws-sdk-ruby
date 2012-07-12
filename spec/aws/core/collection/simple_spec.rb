@@ -339,11 +339,9 @@ module AWS
 
           end
 
-
         end
 
       end
-
     end
   end
 end
