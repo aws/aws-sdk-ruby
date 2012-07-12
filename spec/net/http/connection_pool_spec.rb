@@ -32,6 +32,48 @@ describe Net::HTTP::ConnectionPool do
 
     end
 
+    context '#http_wire_trace' do
+
+      it 'defaults to false' do
+        pool.http_wire_trace.should eq(false)
+      end
+
+      it 'can be set to true' do
+        pool = described_class.new(:http_wire_trace => true)
+        pool.http_wire_trace.should eq(true)
+      end
+
+    end
+
+    context '#logger' do
+
+      it 'defaults to nil' do
+        pool.logger.should eq(nil)
+      end
+
+      it 'defaults to a $stdout logger when :http_wire_trace set to true' do
+        logger = double('standard-out-logger')
+        Logger.should_receive(:new).with($stdout).and_return(logger)
+        pool = described_class.new(:http_wire_trace => true)
+        pool.logger.should == logger
+      end
+
+      it 'can be set to any logger, does not affect wire trace logging' do
+        logger = double('logger')
+        pool = described_class.new(:logger => logger)
+        pool.http_wire_trace.should eq(false)
+        pool.logger.should eq(logger)
+      end
+
+      it 'can be set with :http_wire_trace, overriding default stdout logger' do
+        logger = double('logger')
+        pool = described_class.new(:logger => logger, :http_wire_trace => true)
+        pool.http_wire_trace.should eq(true)
+        pool.logger.should eq(logger)
+      end
+
+    end
+
     context ':open_timeout' do
 
       let(:session) { double('net-http-session').as_null_object }

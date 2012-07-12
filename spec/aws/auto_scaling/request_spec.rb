@@ -14,27 +14,17 @@
 require 'spec_helper'
 
 module AWS
-  class CloudWatch
-    describe Dimension do
+  class SimpleEmailService
+    describe Request do
+      
+      it_should_behave_like "an authorize v4 request"
 
-      let(:dimension) { Dimension.new('foo', 'bar') }
+      it_should_behave_like "an aws query request"
 
-      context '#to_hash' do
-
-        it 'is equals' do
-          dimension.to_hash.should == {:name => 'foo', :value => 'bar'}
-        end
-
-      end
-
-      context '#==' do
-
-        it 'is equals' do
-          dimension.should == Dimension.new('foo', 'bar')
-        end
-
-        it 'is not equals' do
-          dimension.should_not == Dimension.new('hoge', 'fuga')
+      context '#service' do
+        
+        it 'should be ses' do
+          Request.new.service.should eq('ses')
         end
 
       end

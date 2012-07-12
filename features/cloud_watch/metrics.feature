@@ -11,22 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'spec_helper'
+# language: en
+@cloud_watch @metrics
+Feature: CloudWatch metrics
 
-module AWS
-  class DynamoDB
-    describe Request do
-      
-      it_should_behave_like "an authorize v4 request"
-
-      context '#service' do
-        
-        it 'should be dynamodb' do
-          Request.new.service.should eq('dynamodb')
-        end
-
-      end
-
-    end
-  end
-end
+  @slow
+  Scenario: Putting metric data
+    Given I have a metric
+    And I put data for the metric
+    Then I should be able to get statistics for the metric

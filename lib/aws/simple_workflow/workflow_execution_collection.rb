@@ -40,7 +40,7 @@ module AWS
         :closed_after,
       ]
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       include OptionFormatters
 
       # @private

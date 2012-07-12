@@ -31,7 +31,7 @@ module AWS
 
     context '#each' do
 
-      it 'calls the clients method to list objects' do
+      it 'calls the client method to list objects' do
         if request_options.empty?
           client.should_receive(client_method).and_return(response)
         else
@@ -50,19 +50,42 @@ module AWS
 
   end
 
-  shared_examples_for "a batchable collection" do
+  shared_examples_for "a pageable collection" do
 
     let(:collection)      { raise NotImplementedError }
     let(:client_method)   { raise NotImplementedError }
     let(:next_token_key)  { raise NotImplementedError }
+    let(:next_token_response_key) { next_token_key }
     let(:response)        { client.new_stub_for(client_method) }
     let(:request_options) { {} }
 
     before(:each) do
       client.stub(client_method).and_return(response)
+      stub_n_members(response, 0)
     end
 
     it_behaves_like "a collection with #enum"
+
+    context '#each' do
+
+      it 'calls the client method to list objects' do
+        client.should_receive(client_method).and_return(response)
+        collection.each{|obj|}
+      end
+
+      it 'passes options to the client method' do
+        client.should_receive(client_method).
+          with(hash_including(:foo => 'bar')).
+          and_return(response)
+        collection.each(:foo => 'bar'){|obj|}
+      end
+
+      it 'yields once for each member' do
+        stub_n_members(response, 3)
+        collection.to_a.size.should eq(3)
+      end
+
+    end
 
   end
 

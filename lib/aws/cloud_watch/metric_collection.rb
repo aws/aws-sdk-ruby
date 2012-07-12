@@ -13,54 +13,119 @@
 
 module AWS
   class CloudWatch
-
-    #
-    # @attr_reader [String] namespace
-    #
-    # @attr_reader [String] metric_name
-    #
-    # @attr_reader [Array<Hash>] dimensions
-    #
     class MetricCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithNextToken
 
       # @private
       def initialize options = {}
-        @namespace = options[:namespace]
-        @metric_name = options[:metric_name]
-        @dimensions = options[:dimensions]
+        @filters = options[:filters] || {}
         super
       end
 
-      attr_reader :namespace
+      # Returns a new collection that will filter results when enumerated.
+      #
+      # @example Filtering by a namespace
+      #
+      #   trafic_metrics = metrics.filter('namespace', 'traffic')
+      #
+      # @example Filtering by a metric name
+      #
+      #   my_metric = metrics.filter('metric_name', 'my-metric').first
+      #
+      # @example Filtering by one or more dimensions
+      #
+      #   metrics = metrics.filter('dimensions', [
+      #     { :name => 'n1', :value => 'v1' },
+      #     { :name => 'n2', :value => 'v2' },
+      #     { :name => 'n3', :value => 'v3' },
+      #   ])
+      #
+      # @param [String,Symbol] name
+      # @param [String,Array<String>] value
+      # @return [MetricCollection]
+      def filter name, value
+        filters = @filters.merge(name.to_s.to_sym => value)
+        MetricCollection.new(:filters => filters, :config => config)
+      end
 
-      attr_reader :metric_name
+      # @param [String] namespace
+      # @return [MetricCollection]
+      def with_namespace namespace
+        filter(:namespace, namespace)
+      end
 
-      alias_method :name, :metric_name
+      # @param [String] name
+      # @return [MetricCollection]
+      def with_metric_name name
+        filter(:metric_name, name)
+      end
 
-      attr_reader :dimensions
+      # Returns a collection filtered by the given dimension:
+      #
+      #   metric = metrics.with_dimension('name', 'value').first
+      #
+      # You can chain calls to #with_dimension.  Additional dimensions are
+      # added.
+      #
+      #   metrics = metrics.
+      #     with_dimension('d1', 'v1').
+      #     with_dimension('d2', 'v2').
+      #     with_dimension('d3', 'v3')
+      #
+      #   metrics.each{|metric|} # filtered by all three dimensions
+      #
+      # @param [String] name
+      # @param [String] value
+      # @return [MetricCollection]
+      def with_dimension name, value
+        with_dimensions([{ :name => name, :value => value }])
+      end
 
+      # Returns a collection filtered by the given dimensions.
+      #
+      #   metrics.with_dimensions([
+      #     { :name => 'd1', :value => 'v1' },
+      #     { :name => 'd2', :value => 'v2' },
+      #     { :name => 'd3', :value => 'v3' },
+      #   ]).each do |metric|
+      #     # ...
+      #   end
+      #
+      # Multiple calls to #with_dimensions will add to previous dimensions.
+      # @param [Array<Hash>] dimensions An array of dimensions.  Each dimension
+      #   should be a Hash with a +:name+ and +:value+.
+      # @return [MetricCollection]
+      def with_dimensions *dimensions
+        dimensions = @filters[:dimensions] || []
+        dimensions += dimensions.flatten
+        filter(:dimensions, dimensions)
+      end
+      
       protected
-      def _each_item next_token, limit, options = {}, &block
-        options[:namespace] = namespace if namespace
-        options[:metric_name] = metric_name if metric_name
-        if dimensions and not dimensions.empty?
-          options[:dimensions] = dimensions.to_a.map { |d| d.is_a?(Hash) ? d : d.to_hash }
-        end
+
+      def _each_item next_token, options = {}, &block
+
+        options = @filters.merge(options)
         options[:next_token] = next_token if next_token
-        options[:max_records] = limit if limit
 
         resp = client.list_metrics(options)
-        resp.metrics.each do |details|
+        resp.data[:metrics].each do |details|
+
           metric = Metric.new_from(
             :list_metrics, details, 
-            details.namespace, details.metric_name,
-            :dimensions => details[:dimensions], :config => config)
+            details[:namespace],
+            details[:metric_name],
+            details.merge(:config => config))
+
           yield(metric)
+
         end
+
         resp.data[:next_token]
+
       end
+
     end
   end
 end

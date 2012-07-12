@@ -13,7 +13,6 @@
 
 module AWS
   module Core
-
     class PageResult < Array
 
       # @return [Collection] Returns the collection that was used to
@@ -51,6 +50,9 @@ module AWS
         super(items)
       end
 
+      # @return [PageResult]
+      # @raise [RuntimeError] Raises a runtime error when called against
+      #   a collection that has no more results (i.e. #last_page? == true).
       def next_page
         if last_page?
           raise 'unable to get the next page, already at the last page'
@@ -58,12 +60,12 @@ module AWS
         collection.page(:per_page => per_page, :next_token => next_token)
       end
 
-      # @return [Boolean] Returns true if this is the last page of results.
+      # @return [Boolean] Returns +true+ if this is the last page of results.
       def last_page?
         next_token.nil?
       end
 
-      # @return [Boolean] Returns true if there are more pages of results.
+      # @return [Boolean] Returns +true+ if there are more pages of results.
       def more?
         !!next_token
       end

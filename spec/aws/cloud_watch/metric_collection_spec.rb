@@ -23,12 +23,11 @@ module AWS
 
       let(:metrics) { MetricCollection.new(:config => config) }
 
-      it_behaves_like "a pageable collection with limits" do
+      it_behaves_like "a pageable collection" do
 
         let(:collection)      { metrics }
         let(:client_method)   { :list_metrics }
         let(:next_token_key)  { :next_token }
-        let(:limit_key)       { :max_records }
         let(:request_options) {{}}
 
         def stub_next_token(response, token)

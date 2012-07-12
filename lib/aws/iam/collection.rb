@@ -14,7 +14,7 @@ module AWS
   class IAM
     module Collection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # Common methods for collection classes that can be filtered by
       # a path prefix.

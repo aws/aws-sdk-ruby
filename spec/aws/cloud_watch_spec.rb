@@ -36,12 +36,19 @@ module AWS
 
     end
 
+    context '#put_metric_data' do
+      
+      it 'calls #put_metric_data on the client' do
+        options = double('options-hash')
+        client.should_receive(:put_metric_data).with(options)
+        cloud_watch.put_metric_data(options)
+      end
+
+    end
+
     context '#alarms' do
       it_should_behave_like 'an cloud watch service collection',
-        :alarms, CloudWatch::MetricAlarmCollection
-
-      it_should_behave_like 'an cloud watch service collection',
-        :metric_alarms, CloudWatch::MetricAlarmCollection
+        :alarms, CloudWatch::AlarmCollection
     end
 
     context '#metrics' do

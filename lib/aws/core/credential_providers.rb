@@ -390,6 +390,42 @@ module AWS
     
       end
 
+      # Returns a set of fake credentials, should only be used for testing.
+      class FakeProvider < StaticProvider
+
+        # @param [Hash] options
+        # @option options [Boolean] :with_session_token (false) When +true+ a 
+        #   fake session token will also be provided.
+        def initialize options = {}
+          options[:access_key_id] ||= fake_access_key_id
+          options[:secret_access_key] ||= fake_secret_access_key
+          if options.delete(:with_session_token)
+            options[:session_token] ||= fake_session_token
+          end
+          super
+        end
+
+        protected
+
+        def fake_access_key_id
+          "AKIA" + random_chars(16).upcase
+        end
+
+        def fake_secret_access_key
+          random_chars(40)
+        end
+
+        def fake_session_token
+          random_chars(260)
+        end
+
+        def random_chars count
+          chars = ('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a
+          (1..count).map{ chars[rand(chars.size)] }.join
+        end
+
+      end
+
     end
   end
 end

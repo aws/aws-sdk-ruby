@@ -15,37 +15,61 @@ require 'aws/core'
 require 'aws/cloud_watch/config'
 
 module AWS
-
   class CloudWatch
 
     AWS.register_autoloads(self, 'aws/cloud_watch') do
+      autoload :Alarm, 'alarm'
+      autoload :AlarmCollection, 'alarm_collection'
       autoload :AlarmHistoryItem, 'alarm_history_item'
       autoload :AlarmHistoryItemCollection, 'alarm_history_item_collection'
       autoload :Client, 'client'
-#     autoload :Datapoint, 'datapoint'
-      autoload :Dimension, 'dimension'
-      autoload :DimensionFilter, 'dimension'
       autoload :Errors, 'errors'
       autoload :Metric, 'metric'
       autoload :MetricCollection, 'metric_collection'
-      autoload :MetricAlarm, 'metric_alarm'
       autoload :MetricAlarmCollection, 'metric_alarm_collection'
-#     autoload :MetricDatum, 'metric_datum'
-#     autoload :StatisticSet, 'statistic_set'
+      autoload :MetricStatistics, 'metric_statistics'
       autoload :Request, 'request'
     end
 
     include Core::ServiceInterface
 
-    # @return [MetricAlarmCollection]
-    def alarms options = {}
-      MetricAlarmCollection.new(options.merge(:config => config))
+    # Puts data for a metric.  The metric is created if it does not already
+    # exist.
+    #
+    #   cw.put_metric_data(
+    #     :namespace => 'test/cli',
+    #     :metric_data => [
+    #       { :metric_name => 'sample', :value => 1 },
+    #       { :metric_name => 'sample', :value => 2 },
+    #       { :metric_name => 'sample', :value => 3 },
+    #       { :metric_name => 'sample', :value => 4 },
+    #       { :metric_name => 'sample', :value => 5 },
+    #     ]
+    #   )
+    #
+    # @param [Hash] options
+    # @see Client#put_metric_data
+    # @return [nil]
+    #
+    def put_metric_data options = {}
+      client.put_metric_data(options)
+      nil
     end
-    alias_method :metric_alarms, :alarms
+
+    # @return [AlarmCollection]
+    def alarms
+      AlarmCollection.new(:config => config)
+    end
+
+    # @return [AlarmHistoryItemCollection]
+    def alarm_history_items
+      AlarmHistoryItemCollection.new(:config => config)
+    end
 
     # @return [MetricCollection]
     def metrics options = {}
       MetricCollection.new(options.merge(:config => config))
     end
+
   end
 end

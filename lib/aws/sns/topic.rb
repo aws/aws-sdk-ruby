@@ -126,7 +126,7 @@ module AWS
       # @param [Hash] options Additional options for confirming the
       #   subscription.
       #
-      # @option :options [Boolean] :authenticate_on_unsubscribe
+      # @option options [Boolean] :authenticate_on_unsubscribe
       #   Indicates that you want to disable unauthenticated
       #   unsubsciption of the subscription.
       #

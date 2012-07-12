@@ -15,7 +15,7 @@ module AWS
   class AutoScaling
     class ScalingPolicyCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       include ScalingPolicyOptions
       
       def initialize auto_scaling_group, options = {}

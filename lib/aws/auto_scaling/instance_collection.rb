@@ -28,7 +28,7 @@ module AWS
     #
     class InstanceCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
       
       # @param [String] instance_id An {EC2::Instance} id string.
       # @return [AutoScaling::Instance]
