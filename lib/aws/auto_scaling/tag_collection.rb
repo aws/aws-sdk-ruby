@@ -59,7 +59,7 @@ module AWS
     # 
     class TagCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # @private
       def initialize options = {}

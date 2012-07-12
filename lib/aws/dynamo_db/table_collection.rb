@@ -37,7 +37,7 @@ module AWS
     #
     class TableCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # Creates a new table.
       #

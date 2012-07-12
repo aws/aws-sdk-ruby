@@ -34,10 +34,11 @@ module AWS
     #     puts domain.name
     #   end
     #
+    # @see Core::Collection
+    #
     class DomainCollection
 
-      include Core::Model
-      include Enumerable
+      include Core::Collection::WithLimitAndNextToken
 
       # Creates a domain in SimpleDB and returns a domain object.
       #
@@ -50,7 +51,7 @@ module AWS
       # @return [Domain] Returns a new domain with the given name.
       def create(domain_name)
         client.create_domain(:domain_name => domain_name)
-        domain_named(domain_name)
+        self[domain_name]
       end
 
       # Returns a domain object with the given name.
@@ -61,51 +62,23 @@ module AWS
       # @param [String] domain_name The name of the domain to return.
       # @return [Domain] Returns the domain with the given name.
       def [] domain_name
-        domain_named(domain_name)
+        Domain.new(domain_name.to_s, :config => config)
       end
 
-      # @note Normally your account has a limit of 100 SimpleDB domains.  You can {request more here}[http://aws.amazon.com/contact-us/simpledb-limit-request/]
-      # @yield [domain] Yields once for every domain in your account. 
-      # @yieldparam [Domain] domain
-      # @param [Hash] options
-      # @option options [Integer] :limit (nil) The maximum number of 
-      #   domains to yield.
-      # @option options [Integer] :batch_size (100) The number of domains to
-      #   fetch each request to SimpleDB.  Maximum is 100.
-      # @return [nil]
-      def each options = {}, &block
-
-        total_limit = options[:limit]
-        batch_size = options[:batch_size] || 100
-        received = 0
-        next_token = nil
-
-        begin
-
-          limit = total_limit ? 
-            [total_limit - received, batch_size].min : 
-            batch_size
-
-          list_options = { :max_number_of_domains => limit }
-          list_options[:next_token] = next_token if next_token
-          list = client.list_domains(list_options)
-
-          next_token = list[:next_token]
-          received += list[:domain_names].size
-
-          list[:domain_names].each do |name|
-            yield(domain_named(name))
-          end
-        
-        end while next_token and (total_limit.nil? or received < total_limit)
-        nil
-      end
-
-      # @return [Domain] Returns a domain with the given name.
-      # @private
       protected
-      def domain_named name
-        Domain.new(name.to_s, :config => config)
+
+      def _each_item next_token, limit, options = {}
+
+        options[:next_token] = next_token if next_token
+        options[:max_number_of_domains] = limit if limit
+
+        resp = client.list_domains(options)
+        resp.data[:domain_names].each do |name|
+          yield(self[name])
+        end
+
+        resp.data[:next_token]
+
       end
 
     end

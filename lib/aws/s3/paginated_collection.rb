@@ -17,7 +17,7 @@ module AWS
     # @private
     module PaginatedCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       protected
       def _each_item markers, limit, options = {}, &block

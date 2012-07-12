@@ -48,8 +48,12 @@ class Net::HTTP::ConnectionPool
     @pool_mutex = Mutex.new
     @open_timeout = options[:http_open_timeout] || 15
     @idle_timeout = options[:http_idle_timeout] || 60
-    @log_wire_trace = !!options[:http_wire_trace]
-    @logger = options[:logger] || Logger.new($stdout)
+    @http_wire_trace = !!options[:http_wire_trace]
+    if logger = options[:logger]
+      @logger = logger
+    elsif http_wire_trace?
+      @logger = Logger.new($stdout)
+    end
   end
 
   # @return [Integer] 
@@ -60,9 +64,11 @@ class Net::HTTP::ConnectionPool
 
   # @return [Boolean] Returns +true+ when HTTP debug output (wire traces)
   #   will be logged.
-  attr_reader :log_wire_trace
+  attr_reader :http_wire_trace
 
-  alias_method :log_wire_trace?, :log_wire_trace
+  alias_method :http_wire_trace?, :http_wire_trace
+  alias_method :log_wire_trace?, :http_wire_trace
+  alias_method :log_wire_trace, :http_wire_trace
 
   # @return [Logger] Where debug output is sent.
   attr_reader :logger
@@ -208,7 +214,7 @@ class Net::HTTP::ConnectionPool
     end
 
     if session.nil?
-      logger = log_wire_trace? ? self.logger : nil 
+      logger = http_wire_trace? ? self.logger : nil 
       session = Session.for(connection, open_timeout, logger)
     end
 

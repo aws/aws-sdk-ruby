@@ -50,7 +50,7 @@ module AWS
     class DomainCollection
 
       include OptionFormatters
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       def initialize options = {}
         

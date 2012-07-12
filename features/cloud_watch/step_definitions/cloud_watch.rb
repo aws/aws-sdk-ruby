@@ -1,6 +1,5 @@
 # Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#.kkk:w
-
+#
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
 # the License is located at
@@ -12,34 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class CloudWatch
-    #
-    # @attr_reader [String] name
-    #
-    # @attr_reader [String] value
-    #
-    class Dimension
-      # @private
-      def initialize name, value
-        @name = name
-        @value = value
-      end
+Before("@cloud_watch") do
 
-      attr_reader :name
+  @cloud_watch = AWS::CloudWatch.new
+  @cloud_watch_client = @cloud_watch.client
 
-      attr_reader :value
+  @created_alarms = []
 
-      def to_hash
-        {:name => name, :value => value}
-      end
+end
 
-      def ==(other)
-        name == other.name and value == other.value
-      end
-    end
+After("@cloud_watch") do
 
-    class DimensionFilter < Dimension
-    end
+  @created_alarms.each do |alarm|
+    @alarm.delete
   end
+
 end

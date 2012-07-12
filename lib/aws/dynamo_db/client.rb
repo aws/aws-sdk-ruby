@@ -30,22 +30,6 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
 
-      # @private
-      def initialize *args
-
-        super
-
-        # Replaces the current credential provider with a SessionProvider
-        # that provides refreshable STS session credentials.  DynamoDB
-        # requires session credentials.
-        if credential_provider.session_token.nil?
-          long_term_credentials = credential_provider.credentials
-          @credential_provider = Core::CredentialProviders::SessionProvider.for(
-            long_term_credentials)
-        end
-
-      end
-
       ## client methods ##
 
       # Calls the BatchGetItem API operation.

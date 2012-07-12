@@ -15,7 +15,7 @@ module AWS
   class SimpleEmailService
     class IdentityCollection
 
-      include Core::Collection::Limitable
+      include Core::Collection::WithLimitAndNextToken
 
       # @private
       def initialize options = {}
