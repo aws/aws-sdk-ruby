@@ -14,12 +14,11 @@
 $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
 require 'rspec'
+require 'aws'
 
 # require all _examples.rb files in spec/shared/
 Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file
 end
-
-require 'aws'
 
 AWS.eager_autoload!
