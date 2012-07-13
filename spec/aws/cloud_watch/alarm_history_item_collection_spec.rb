@@ -38,7 +38,7 @@ module AWS
         it 'returns a collection that applies the filter when enumerating' do
           client.should_receive(:describe_alarm_history).with(
             :abc => 'xyz',
-            :mno => 'hjk',
+            :mno => 'hjk'
           ).and_return(client.stub_for(:describe_alarm_history))
           items.filter('abc', 'xyz').filter('mno', 'hjk').to_a
         end
