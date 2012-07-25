@@ -16,11 +16,11 @@ require 'spec_helper'
 describe AWS::SNS::FromAutoScaling do
   [
     {
-      read_from: "#{File.dirname __FILE__}/support/sns_as_instance_terminate.json",
+      read_from: "#{File.dirname __FILE__}/../support/sns_as_instance_terminate.json",
       group_name: "pete-ReverseProxyAsG-AX2MGMM4X8IM"
     },
     {
-      read_from: "#{File.dirname __FILE__}/support/sns_as_instance_launch.json",
+      read_from: "#{File.dirname __FILE__}/../support/sns_as_instance_launch.json",
       group_name: "pete-ReverseProxyAsG-AX2MGMM4X8IM"
     }
   ].each do |example|
