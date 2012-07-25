@@ -13,11 +13,16 @@
 
 module AWS
   class SNS
+
+    # A module to enrich {Message} based on it originating from AutoScaling,
+    # which have a particular subject and message payload.
+    # Parses such messages into a more rich representation.
     module FromAutoScaling
       def self.extended base
         base.origin = :autoscaling
       end
 
+      # @return [Boolean] true when the SNS originates from auto-scaling
       def applicable? sns
         sns['Subject'] =~ /.*autoscaling:.*/i
       end
@@ -29,6 +34,7 @@ module AWS
         @body = self.parse_from self.raw['Message']
       end
 
+      # @return [Symbol] the auto-scaling event name
       def event
         return @event if defined? @event
         e = body['Event']
@@ -42,6 +48,7 @@ module AWS
         end
       end
 
+      # @return [String] the auto-scaling group name
       def group_name
         body['AutoScalingGroupName']
       end
@@ -50,9 +57,12 @@ module AWS
         body['StatusCode']
       end
 
+      # @return [String] the instance-ID that is the subject of this event
       def instance_id
         body['EC2InstanceId']
       end
+
+      # TODO: Further methods to fully expose what AS-SNS' carry as payload.
     end
   end
 end

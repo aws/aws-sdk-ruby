@@ -20,9 +20,22 @@ module AWS
   class SNS
     class MessageWasNotAuthenticError < StandardError
     end
+
+    # Represents a single SNS message.
+    #
+    # See also http://docs.amazonwebservices.com/sns/latest/gsg/json-formats.html
+    #
+    # = Originators
+    # Originators are sources of SNS messages.  {FromAutoScaling} is one.  {Message}
+    # can be extended by originators if their #applicable? method returns true when
+    # passed the raw message.
+    # Originator modules must implement `applicable? sns` module function.
+    # If an originator is applicable, it should set the `@origin` accessor to denote 
+    # itself.
     class Message
       attr_accessor :origin, :raw
 
+      # @return {Message} Constructs a new {Message} from the raw SNS, sets origin
       def initialize sns
         if sns.is_a? String
           @raw = parse_from sns
@@ -33,10 +46,18 @@ module AWS
         self.extend FromAutoScaling if FromAutoScaling.applicable? @raw
       end
 
+      # @param [String] indexer into raw SNS JSON message
+      # @return [String] the value of the SNS' field
       def [] key
         @raw[key]
       end
 
+      # @return [Boolean] true when the {Message} is authentic:
+      #   SigningCert is hosted at amazonaws.com, on https
+      #   correctly cryptographically signed by sender
+      #   nothing went wrong during authenticating the {Message}
+      #
+      # See http://docs.amazonwebservices.com/sns/latest/gsg/SendMessageToHttp.verify.signature.html
       def authentic?
         begin
           decoded_from_base64 = decode signature
@@ -47,6 +68,7 @@ module AWS
         end
       end
 
+      # @return[Symbol] the message type
       def type
         case when @raw['Type'] =~ /SubscriptionConfirmation/i
           then :SubscriptionConfirmation
@@ -111,6 +133,7 @@ module AWS
       end
 
       def canonical_string
+        # TODO: Support SubscriptionConfirmation and UnsubscribeConfirmation messages
         text = "Message\n#{message}\n"
         text += "MessageId\n#{message_id}\n"
         text += "Subject\n#{subject}\n" unless subject.nil? or subject.empty?
