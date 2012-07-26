@@ -14,6 +14,7 @@
 require 'base64'
 require 'json'
 require 'openssl'
+Dir.glob("#{File.dirname __FILE__}/originators/*.rb").each { |rb| require rb }
 
 module AWS
   class SNS
@@ -23,8 +24,17 @@ module AWS
     # Represents a single SNS message.
     #
     # See also http://docs.amazonwebservices.com/sns/latest/gsg/json-formats.html
+    #
+    # = Originators
+    # Originators are sources of SNS messages.  {FromAutoScaling} is one.  {Message}
+    # can be extended by originators if their #applicable? method returns true when
+    # passed the raw message.
+    # Originator modules must implement `applicable? sns` module function.
+    # If an originator is applicable, it should set the `@origin` accessor to denote 
+    # itself.
     class Message
       attr_reader :raw
+      attr_accessor :origin
 
       # @return {Message} Constructs a new {Message} from the raw SNS, sets origin
       def initialize sns
@@ -33,6 +43,8 @@ module AWS
         else
           @raw = sns
         end
+        @origin = :sns
+        self.extend FromAutoScaling if FromAutoScaling.applicable? @raw
       end
 
       # @param [String] indexer into raw SNS JSON message
