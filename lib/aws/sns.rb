@@ -13,6 +13,7 @@
 
 require 'aws/core'
 require 'aws/sns/config'
+require 'aws/sns/message'
 
 module AWS
 
