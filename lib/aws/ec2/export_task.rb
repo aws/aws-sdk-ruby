@@ -41,7 +41,7 @@ module AWS
     #   the image will be exported to.
     #
     class ExportTask < Resource
-      
+
       # @private
       def initialize export_task_id, options = {}
         @export_task_id = export_task_id
@@ -60,27 +60,27 @@ module AWS
       attribute :status_message
 
       attribute :instance_id, 
-        :as => [:instance_export, :instance_id],
+        :from => [:instance_export, :instance_id],
         :static => true
 
       attribute :target_environment,
-        :as => [:instance_export, :target_environment],
+        :from => [:instance_export, :target_environment],
         :static => true
 
       attribute :disk_image_format,
-        :as => [:export_to_s3, :disk_image_format],
+        :from => [:export_to_s3, :disk_image_format],
         :static => true
 
       attribute :container_format,
-        :as => [:export_to_s3, :container_format],
+        :from => [:export_to_s3, :container_format],
         :static => true
 
       attribute :s3_bucket_name,
-        :as => [:export_to_s3, :s3_bucket],
+        :from => [:export_to_s3, :s3_bucket],
         :static => true
 
       attribute :s3_key,
-        :as => [:export_to_s3, :s3_key],
+        :from => [:export_to_s3, :s3_key],
         :static => true
 
       populates_from(:create_instance_export_task) do |resp|

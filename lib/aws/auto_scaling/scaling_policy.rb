@@ -47,7 +47,7 @@ module AWS
       # @return [String]
       attr_reader :name
 
-      attribute :arn, :as => :policy_arn, :static => true
+      attribute :arn, :from => :policy_arn, :static => true
 
       attribute :adjustment_type
 

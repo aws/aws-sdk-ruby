@@ -43,13 +43,14 @@ Feature: Managing SES identities
     | TYPE  | NAME     | VALUE          |
     | param | Action   | DeleteIdentity |
     | param | Identity | amazon.com     |
-  
+
   Scenario: Enumerating identites
     Given I ask to verify the identity "amazon.com"
     Then the identity should be in the identies collection
 
+  @wip
   Scenario: Paging identies
-    Given I verify 3 identities 
+    Given I verify 3 identities
     When I enumerate identities with a limit of 3 and batch size of 2
     Then a request should have been made like:
     | TYPE        | NAME      | VALUE          |
@@ -70,7 +71,8 @@ Feature: Managing SES identities
     And I disable the SES identity forwarding
     Then the SES identity forwarding should be disabled
 
-  @sns
+  # can no longer set bounce topics on unverified identies
+  @sns @wip
   Scenario: Removing notification topics
     Given I ask to verify the identity "noreply@amazon.com"
     And I create an SNS topic

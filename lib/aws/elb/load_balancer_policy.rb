@@ -24,9 +24,9 @@ module AWS
       # @return [LoadBalancer] Returns the load balancer this policy belongs to.
       attr_reader :load_balancer
 
-      attribute :name, :static => true, :as => :policy_name
+      attribute :name, :static => true, :from => :policy_name
 
-      attribute :type, :static => true, :as => :policy_type_name
+      attribute :type, :static => true, :from => :policy_type_name
 
       attribute :policy_attribute_descriptions, :static => true
 

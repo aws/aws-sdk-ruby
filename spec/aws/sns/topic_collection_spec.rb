@@ -23,8 +23,6 @@ module AWS
 
       let(:topics) { TopicCollection.new(:config => config) }
 
-      it_behaves_like 'enumerable'
-
       context '#create' do
 
         let(:response) { client.stub_for(:create_topic) }
@@ -33,7 +31,7 @@ module AWS
           response.data[:topic_arn] = 'arn'
           client.stub(:create_topic).and_return(response)
         end
-        
+
         it 'call create_topic on the client' do
           client.should_receive(:create_topic).with(:name => 'topic-name')
           topics.create('topic-name')
@@ -53,21 +51,26 @@ module AWS
 
       end
 
+      it_should_behave_like "a pageable collection" do
+
+        let(:collection) { topics }
+        let(:client_method) { :list_topics }
+        let(:next_token_key) { :next_token }
+
+        def stub_n_members resp, count
+          resp.data[:topics] = (1..count).map do |n|
+            { :topic_arn => "topic-arn-#{n}" }
+          end
+        end
+
+        it_should_behave_like "an indexed collection" do
+          let(:identity) { 'arn:aws:sns:foo' }
+          let(:identity_method) { :arn }
+        end
+
+      end
+
       context '#[]' do
-
-        it 'returns a topic' do
-          topics['arn:aws:sns:us-east-1:599169622985:topic'].should be_a(Topic)
-        end
-        
-        it 'returns a topic with the given arn' do
-          topics['arn:aws:sns:us-east-1:599169622985:topic'].arn.should == 
-            'arn:aws:sns:us-east-1:599169622985:topic'
-        end
-
-        it 'returns a topic with the correct config' do
-          topics['arn:aws:sns:us-east-1:599169622985:topic'].config.should == 
-            topics.config
-        end
 
         it 'raises an argument error when an invalid topic arn is passed' do
           lambda {
@@ -77,74 +80,8 @@ module AWS
 
       end
 
-      context '#each' do
-
-        let(:response) { client.stub_for(:list_topics) }
-
-        before(:each) do
-          response.data[:topics] = [
-            { :topic_arn => 'arn1' },
-            { :topic_arn => 'arn2' },
-          ]
-          client.stub(:list_topics).and_return(response)
-        end
-
-        it 'calls list_topics on the client' do
-          client.should_receive(:list_topics).with({})
-          topics.each{|topic|}
-        end
-
-        it 'yields once for each returned topic' do
-          yielded = 0
-          topics.each{|topic| yielded += 1 }
-          yielded.should == 2
-        end
-
-        it 'yields topic objects with the correct arns and configs' do
-          yielded = []
-          topics.each{|topic| yielded << topic }
-          yielded.all?{|topic| topic.should be_a(Topic) }
-          yielded.all?{|topic| topic.config.should == config }
-          yielded.collect{|t| t.arn }.should == %w(arn1 arn2)
-        end
-
-        it 'continunes calling get_topics when a next_token is returned' do
-
-          ## 3 stub responses, first 2 have a next token, the 3rd doesn't
-
-          r1 = client.new_stub_for(:list_topics)
-          r1.data[:topics] = [{ :topic_arn => 'arn1' }]
-          r1.data[:next_token] = 'abc'
-
-          r2 = client.new_stub_for(:list_topics)
-          r2.data[:topics] = [{ :topic_arn => 'arn2' }]
-          r2.data[:next_token] = 'xyz'
-
-          r3 = response
-          r3.data[:topics] = [{ :topic_arn => 'arn3' }]
-
-          ## client should recieve list topics 3 times with the correct 
-          ## next tokens (those returned by the previous response)
-
-          client.should_receive(:list_topics).with({}).
-            ordered.and_return(r1)
-
-          client.should_receive(:list_topics).with(:next_token => 'abc').
-            ordered.and_return(r2)
-
-          client.should_receive(:list_topics).with(:next_token => 'xyz').
-            ordered.and_return(r3)
-
-          ## each response returned 1 topic, so we should have 3
-
-          yielded = []
-          topics.each{|t| yielded << t }
-          yielded.length.should == 3
-
-        end
-
-      end
-
     end
+
   end
+
 end

@@ -36,10 +36,10 @@ module AWS
         super(options.merge(:name => name.to_s))
       end
 
-      attribute :name, :as => :load_balancer_name, :static => true
+      attribute :name, :from => :load_balancer_name, :static => true
 
       #availability_zones
-      attribute :availability_zone_names, :as => :availability_zones
+      attribute :availability_zone_names, :from => :availability_zones
 
       #backend_server_policies
       attribute :backend_server_descriptions
@@ -53,17 +53,17 @@ module AWS
       attribute :dns_name, :static => true
 
       #health_check_configuration
-      attribute :health_check_description, :as => :health_check
+      attribute :health_check_description, :from => :health_check
 
       #instances
-      attribute :instance_descriptions, :as => :instances
+      attribute :instance_descriptions, :from => :instances
 
       #listeners
       attribute :listener_descriptions
 
       #source_security_group
       attribute :security_group_description, 
-        :as => :source_security_group, 
+        :from => :source_security_group, 
         :static => true
 
       populates_from(:describe_load_balancers) do |resp|

@@ -63,6 +63,7 @@ Feature: EC2 Elastic IPs
     And I release the elastic ip address
     Then the elastic ip should not exits
 
+  @vpc @subnet @instances @elastic_ips @internet_gatweays @slow
   Scenario: Associating an elastic ip with a network interface
     Given I create a vpc
     And I create a subnet

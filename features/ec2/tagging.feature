@@ -26,7 +26,7 @@ Feature: EC2 Tagging
     When I call the "instance" resource
     Then the resource should be taggable
 
-  @instances @memoized
+  @instances @memoized @slow
   Scenario: Instance tags memoized from DescribeInstances
     Given I request to run an instance with the following parameters:
     | parameter | value        |

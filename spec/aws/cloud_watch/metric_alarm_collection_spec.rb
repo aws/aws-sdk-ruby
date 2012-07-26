@@ -27,8 +27,8 @@ module AWS
 
       let(:dimensions) {[{:name => 'd1', :value => 'v1'}]}
 
-      let(:metric) { 
-        Metric.new(namespace, metric_name, 
+      let(:metric) {
+        Metric.new(namespace, metric_name,
           :dimensions => dimensions,
           :config => config)
       }
@@ -58,7 +58,7 @@ module AWS
             :statistic => 'Average',
             :threshold => 50)
 
-          metric_alarms.create('alarm_name', 
+          metric_alarms.create('alarm_name',
             :comparison_operator => 'GreaterThanThreshold',
             :evaluation_periods => 60,
             :period => 300,
@@ -104,7 +104,12 @@ module AWS
         let(:collection)      { metric_alarms }
         let(:client_method)   { :describe_alarms_for_metric }
         let(:next_token_key)  { :next_token }
-        let(:request_options) {{}}
+        let(:member_class)    { Alarm }
+        let(:request_options) {{ 
+          :namespace => metric.namespace,
+          :metric_name => metric.metric_name,
+          :dimensions => metric.dimensions,
+        }}
 
         def stub_next_token(response, token)
           response.data[:next_token] = token

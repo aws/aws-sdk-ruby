@@ -103,25 +103,25 @@ module AWS
 
       alias_method :created_at, :creation_date_time
 
-      attribute :status, :as => 'TableStatus', :to_sym => true
+      attribute :status, :from => 'TableStatus', :to_sym => true
 
       attribute :throughput_last_increased_at,
-        :as => 'LastIncreaseDateTime',
+        :from => 'LastIncreaseDateTime',
         :timestamp => true
 
       attribute :throughput_last_decreased_at, 
-        :as => 'LastDecreaseDateTime',
+        :from => 'LastDecreaseDateTime',
         :timestamp => true
 
       attribute :read_capacity_units
 
       attribute :write_capacity_units
 
-      attribute :hash_key, :as => "HashKeyElement", :static => true do
+      attribute :hash_key, :from => "HashKeyElement", :static => true do
         translates_output {|v| PrimaryKeyElement.new(v) }
       end
 
-      attribute :range_key, :as => "RangeKeyElement", :static => true do
+      attribute :range_key, :from => "RangeKeyElement", :static => true do
         translates_output {|v| PrimaryKeyElement.new(v) }
       end
       alias_method :range_key_without_schema_override, :range_key

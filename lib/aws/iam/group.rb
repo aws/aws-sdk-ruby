@@ -36,9 +36,9 @@ module AWS
         super
       end
 
-      mutable_attribute :name, :static => true, :as => :group_name
+      mutable_attribute :name, :static => true, :from => :group_name
 
-      attribute :id, :static => true, :as => :group_id
+      attribute :id, :static => true, :from => :group_id
 
       attribute :create_date, :static => true
 

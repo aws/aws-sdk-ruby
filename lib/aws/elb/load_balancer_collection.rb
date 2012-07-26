@@ -36,7 +36,7 @@ module AWS
       #       :instance_port => 80,
       #       :instance_protocol => :http,
       #     }])
-      # 
+      #
       # @param [String] name The name of your load balancer.  The name must
       #   be unique within your set of load balancers.
       #
@@ -60,11 +60,19 @@ module AWS
       #   for more detailed description of each option.
       #
       # @option options [String,IAM::ServerCertificate] :server_certificate (nil)
-      #   The ARN string of an IAM::ServerCertifcate or an 
+      #   The ARN string of an IAM::ServerCertifcate or an
       #   IAM::ServerCertificate object.  Reqruied for HTTPs listeners.
       #
       def create name, options = {}
-        
+
+        unless options[:availability_zones]
+          raise ArgumentError, "missing required :availability_zones option"
+        end
+
+        unless options[:listeners]
+          raise ArgumentError, "missing required :listeners option"
+        end
+
         zones = [options[:availability_zones]].flatten.collect do |zone|
           zone.is_a?(EC2::AvailabilityZone) ? zone.name : zone
         end
@@ -94,20 +102,20 @@ module AWS
 
       protected
       def _each_item options = {}, &block
-        response = client.describe_load_balancers
-        response.load_balancer_descriptions.each do |description|
+        response = client.describe_load_balancers(options)
+        response.data[:load_balancer_descriptions].each do |description|
 
           load_balancer = LoadBalancer.new_from(
-            :describe_load_balancers, 
-            description, 
-            description.load_balancer_name,
+            :describe_load_balancers,
+            description,
+            description[:load_balancer_name],
             :config => config)
 
           yield(load_balancer)
 
         end
       end
-      
+
     end
   end
 end

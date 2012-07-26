@@ -12,6 +12,8 @@
 # language governing permissions and limitations under the License.
 
 require 'base64'
+require 'date'
+require 'time'
 
 module AWS
   module Core
@@ -200,7 +202,7 @@ module AWS
         end
 
         def wrapped?
-          @rules[:wrap]  
+          @rules[:wrap]
         end
         alias_method :wrapper, :wrapped?
 
@@ -235,7 +237,7 @@ module AWS
             klass.parse(@text)
           end
         end
-        
+
       end
     end
   end

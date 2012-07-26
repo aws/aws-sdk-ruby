@@ -23,7 +23,7 @@ module AWS
       let(:client) { config.auto_scaling_client }
 
       let(:launch_configurations) { 
-        LaunchConfigurationCollection.new(:config => config) 
+        LaunchConfigurationCollection.new(:config => config)
       }
 
       context '#create' do

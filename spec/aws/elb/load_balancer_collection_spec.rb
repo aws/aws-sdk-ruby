@@ -34,7 +34,7 @@ module AWS
         end
 
         def new_load_balancer
-          load_balancers.create('load-balancer-name', 
+          load_balancers.create('load-balancer-name',
             :availability_zones => 'us-east-1a',
             :listeners => {
               :port => 443,
@@ -87,7 +87,7 @@ module AWS
         it 'returns a load balancer' do
           load_balancers['name'].should be_a(LoadBalancer)
         end
-        
+
         it 'returns the load balancer with the given name' do
           load_balancers['name'].name.should == 'name'
         end
@@ -104,9 +104,10 @@ module AWS
 
       it_should_behave_like "a simple collection" do
 
-        let(:collection)    { load_balancers }
+        let(:collection) { load_balancers }
         let(:client_method) { :describe_load_balancers }
-        let(:now)           { Time.now }
+        let(:now) { Time.now }
+        let(:request_options) {{}}
 
         it_should_behave_like "a collection that yields models" do
           let(:member_class)  { LoadBalancer }

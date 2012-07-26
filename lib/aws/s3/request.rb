@@ -31,6 +31,9 @@ module AWS
       # @private
       attr_accessor :body_stream
 
+      # @private
+      attr_accessor :force_path_style
+
       def metadata= metadata
         Array(metadata).each do |name, value|
           headers["x-amz-meta-#{name}"] = value
@@ -46,12 +49,20 @@ module AWS
       end
 
       def host
-        Client.path_style_bucket_name?(bucket) ? @host : "#{bucket}.#{@host}"
+        path_style? ? @host : "#{bucket}.#{@host}"
+      end
+
+      def path_style?
+        if force_path_style
+          true
+        else
+          Client.path_style_bucket_name?(bucket)
+        end
       end
 
       def path
         parts = []
-        parts << bucket if bucket and Client.path_style_bucket_name?(bucket)
+        parts << bucket if bucket and path_style?
         parts << escape_path(key) if key
         "/#{parts.join('/')}"
       end
@@ -120,10 +131,7 @@ module AWS
 
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
-        if 
-          Client.dns_compatible_bucket_name?(bucket) and
-          !Client.path_style_bucket_name?(bucket)
-        then
+        if Client.dns_compatible_bucket_name?(bucket) and !path_style?
           parts << "/#{bucket}"
         end
   

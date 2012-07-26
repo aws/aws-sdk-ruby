@@ -62,6 +62,7 @@ module AWS
         let(:client_method)   { :get_group }
         let(:now)             { Time.now }
         let(:request_options) {{ :group_name => group.name }}
+        let(:member_class)    { User }
 
         def stub_n_members response, n
           response.data[:users] = (1..n).collect{|i|

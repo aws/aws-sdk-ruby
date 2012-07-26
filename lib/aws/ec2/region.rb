@@ -41,7 +41,7 @@ module AWS
       # @return [String] The name of the region (e.g. "us-east-1").
       attr_reader :name
 
-      attribute :endpoint, :as => :region_endpoint, :static => true
+      attribute :endpoint, :from => :region_endpoint, :static => true
 
       populates_from(:describe_regions) do |resp|
         resp.region_info.find{|r| r.region_name == name }

@@ -144,3 +144,12 @@ Then /^the client should have made a "([^\"]*)" request to the bucket$/ do |verb
   r.http_method.should == verb
   r.host.should == "#@bucket_name.s3.amazonaws.com"
 end
+
+Given /^I force s(\d+) to use path style requests$/ do |arg1|
+  @s3_client = @s3_client.with_options(:s3_force_path_style => true)
+end
+
+When /^I call get_bucket$/ do
+  @s3_client.get_bucket(:bucket_name => @bucket_name)
+end
+

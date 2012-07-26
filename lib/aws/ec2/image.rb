@@ -99,17 +99,17 @@ module AWS
 
       mutable_attribute :description
 
-      attribute :location, :as => :image_location, :static => true
+      attribute :location, :from => :image_location, :static => true
 
-      attribute :state, :as => :image_state, :to_sym => true
+      attribute :state, :from => :image_state, :to_sym => true
 
-      attribute :owner_id, :as => :image_owner_id, :static => true
+      attribute :owner_id, :from => :image_owner_id, :static => true
 
-      attribute :owner_alias, :as => :image_owner_alias, :static => true
+      attribute :owner_alias, :from => :image_owner_alias, :static => true
 
       attribute :architecture, :to_sym => true, :static => true
 
-      attribute :type, :as => :image_type, :to_sym => true, :static => true
+      attribute :type, :from => :image_type, :to_sym => true, :static => true
 
       attribute :kernel_id, :static => true
 

@@ -66,7 +66,7 @@ module AWS
 
       ## returned by GetTemplate
 
-      template_attribute :template, :as => :template_body
+      template_attribute :template, :from => :template_body
 
       alias_method :template_body, :template
 
@@ -78,21 +78,21 @@ module AWS
 
       describe_attribute :stack_id, :static => true
 
-      describe_attribute :status, :as => :stack_status
+      describe_attribute :status, :from => :stack_status
 
-      describe_attribute :status_reason, :as => :stack_status_reason
+      describe_attribute :status_reason, :from => :stack_status_reason
 
       describe_attribute :capabilities
 
       describe_attribute :description
 
-      describe_attribute :disable_rollback, :as => :disable_rollback?
-      
+      describe_attribute :disable_rollback, :from => :disable_rollback?
+
       alias_method :disable_rollback?, :disable_rollback
 
       describe_attribute :notification_arns
 
-      describe_attribute :output_details, :as => :outputs
+      describe_attribute :output_details, :from => :outputs
 
       protected :output_details
 
@@ -104,7 +104,7 @@ module AWS
         end
       end
 
-      describe_attribute :timeout, :as => :timeout_in_minutes
+      describe_attribute :timeout, :from => :timeout_in_minutes
 
       alias_method :timeout_in_minutes, :timeout
 

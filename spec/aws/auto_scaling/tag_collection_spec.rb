@@ -26,10 +26,10 @@ module AWS
       context '#filter' do
 
         let(:response) { client.stub_for(:describe_tags) }
-        
+
         it 'filters the describe call' do
           client.should_receive(:describe_tags).with(:filters =>[
-            { :name => 'key', :values => ['abc'] },  
+            { :name => 'key', :values => ['abc'] },
           ]).and_return(response)
           tags.filter(:key, 'abc').to_a
         end
@@ -40,7 +40,7 @@ module AWS
           ]).and_return(response)
           tags.filter(:key, 'abc', 'mno', 'xyz').to_a
         end
-        
+
         it 'accepts multiple filter values as an array' do
           client.should_receive(:describe_tags).with(:filters =>[
             { :name => 'key', :values => %w(abc mno xyz) },

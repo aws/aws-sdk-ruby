@@ -41,7 +41,7 @@ module AWS
 
       alias_method :access_key_id, :id
 
-      attribute :secret_value, :as => :secret_access_key, :static => true
+      attribute :secret_value, :from => :secret_access_key, :static => true
 
       protected :secret_value
 

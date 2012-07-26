@@ -306,10 +306,10 @@ Feature: Instance attributes
     Given I request to run an instance with the following parameters:
     | parameter         | value        |
     | image_id          | ami-8c1fece5 |
-    | availability_zone | us-east-1d   |
+    | availability_zone | us-east-1b   |
     And I wait for the instance to exist
     When I get the instance's availability zone
-    Then the result should be "us-east-1d"
+    Then the result should be "us-east-1b"
 
   @get @slow
   Scenario: Check monitoring status

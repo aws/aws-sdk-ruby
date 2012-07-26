@@ -34,7 +34,7 @@ module AWS
     #   instance = response.data[:reservation_set].first[:instance_set].first
     #
     #   instance[:status] #=> 'running'
-    # 
+    #
     # == Response Metadata
     #
     # In addition to the response data, there is additional information
@@ -53,34 +53,34 @@ module AWS
     #   response.http_response #=> #<AWS::Core::Http::Response>
     #
     class Response
-  
+
       include AsyncHandle
 
       # @return [Hash] Returns the response data as a hash.
       attr_accessor :data
-  
-      # @return [Symbol] The name of the client request method that 
+
+      # @return [Symbol] The name of the client request method that
       #   returned this response.
       attr_accessor :request_type
-      
+
       # @return [Hash] Returns the hash of options passed to the client
       #   request method that generated this response.
       attr_accessor :request_options
-      
+
       # @return [Core::Http::Request]
       attr_accessor :http_request
-  
+
       # @return [Core::Http::Response]
       attr_accessor :http_response
-  
+
       # @return [Boolean] true if the response was generated from a
       #   another cached response.
       attr_accessor :cached
 
       alias_method :cached?, :cached
-  
+
       # @return [AWS::Error,nil] Returns nil unless the request failed.
-      #   Normally this will be nil unless you are using the Asynchronous 
+      #   Normally this will be nil unless you are using the Asynchronous
       #   interface.
       attr_accessor :error
 
@@ -91,7 +91,7 @@ module AWS
       # @return [Float] The total number of seconds taken to make the
       #   request and return the response.
       attr_accessor :duration
-  
+
       # @param [Http::Request] http_request
       # @param [Http::Response] http_response
       def initialize http_request = nil, http_response = nil, &block
@@ -112,12 +112,12 @@ module AWS
       def [] key
         data[key]
       end
-  
+
       # @return [Boolean] Returns true if there is no response error.
       def successful?
         error.nil?
       end
-  
+
       # @return [Boolean] Returns true if the http request was throttled
       #   by AWS.
       def throttled?
@@ -129,18 +129,18 @@ module AWS
           false
         end
       end
-  
+
       # @return [Boolean] Returns true if the http request timed out.
       def timeout?
         http_response.timeout?
       end
-  
+
       # @return [String]
       # @private
       def inspect
         data.inspect
       end
-  
+
       # @return [String]
       # @private
       def cache_key
@@ -151,7 +151,7 @@ module AWS
           serialized_options
         ].join(":")
       end
-  
+
       # Rebuilds the HTTP request using the block passed to the initializer.
       # This is primarily used by the client when a request must be retried
       # (throttling, server errors, socket errors, etc).
@@ -163,7 +163,7 @@ module AWS
       protected
 
       # @note The prefered method to get as response data is to use {#[]}.
-      # 
+      #
       # This provides a backwards-compat layer to the old response objects
       # where each response value had a method extended onto this object.
       # Now all response data is accessible as a hash.
@@ -174,17 +174,17 @@ module AWS
       def method_missing *args, &block
         Core::Data.new(data).send(*args, &block)
       end
-  
+
       def serialized_options
         serialize_options_hash(request_options)
       end
-  
+
       def serialize_options_hash(hash)
         "(" + hash.keys.sort_by(&:to_s).map do |key|
           "#{key}=#{serialize_options_value(hash[key])}"
         end.join(" ") + ")"
       end
-  
+
       def serialize_options_value(value)
         case value
         when Hash  then serialize_options_hash(value)
@@ -192,11 +192,11 @@ module AWS
         else value.inspect
         end
       end
-  
+
       def serialize_options_array array
         "[" + array.map{|v| serialize_options_value(v) }.join(" ") + "]"
       end
-  
+
     end
   end
 end

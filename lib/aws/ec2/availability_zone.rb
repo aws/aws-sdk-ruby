@@ -34,7 +34,6 @@ module AWS
         @name = name
         if options[:region]
           options[:region_name] = options[:region].name
-          
         end
         super
       end
@@ -49,9 +48,9 @@ module AWS
 
       attribute :region_name, :static => true
 
-      attribute :state, :as => :zone_state, :to_sym => true
+      attribute :state, :from => :zone_state, :to_sym => true
 
-      attribute :messages, :as => :message_set do
+      attribute :messages, :from => :message_set do
         translates_output do |messages|
           messages ? messages.collect{|m| m.message } : []
         end

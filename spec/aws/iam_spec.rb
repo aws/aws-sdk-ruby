@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   describe IAM do
-    
+
     let(:config) { stub_config }
 
     let(:client) { config.iam_client }
@@ -111,7 +111,7 @@ module AWS
     end
 
     context '#account_alias=' do
-      
+
       it 'replaces the account alias' do
         client.should_receive(:create_account_alias).
           with(:account_alias => 'foo')
@@ -121,7 +121,7 @@ module AWS
       it 'deletes the account alias if received nil' do
 
         resp = client.stub_for(:list_account_aliases)
-        resp.stub(:account_aliases).and_return(['foo'])
+        resp.data[:account_aliases] = ['foo']
         client.should_receive(:list_account_aliases).and_return(resp)
         client.should_receive(:delete_account_alias).
           with(:account_alias => 'foo')
@@ -133,11 +133,12 @@ module AWS
     end
 
     context '#remove_account_alias' do
-      
+
       it 'calls delete on the current account alias' do
 
         resp = client.stub_for(:list_account_aliases)
-        resp.stub(:account_aliases).and_return(['foo'])
+        resp.data[:account_aliases] = ['foo']
+
         client.should_receive(:list_account_aliases).and_return(resp)
         client.should_receive(:delete_account_alias).
           with(:account_alias => 'foo')
@@ -180,7 +181,7 @@ module AWS
     end
 
     context '#update_account_password_policy' do
-      
+
       it 'calss #update_account_password_policy on the client' do
         client.should_receive(:update_account_password_policy).with(
           :minimum_password_length => 10,

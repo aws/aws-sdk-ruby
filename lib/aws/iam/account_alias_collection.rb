@@ -39,7 +39,7 @@ module AWS
       #
       #   iam.account_aliases.create('myaccountalias')
       #
-      # For information about account alias restrictions and usage, 
+      # For information about account alias restrictions and usage,
       # see http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
       #
       # @param [String] account_alias
@@ -69,7 +69,7 @@ module AWS
       # @private
       protected
       def each_item response, &block
-        response.account_aliases.each do |account_alias|
+        response.data[:account_aliases].each do |account_alias|
           yield(account_alias)
         end
       end

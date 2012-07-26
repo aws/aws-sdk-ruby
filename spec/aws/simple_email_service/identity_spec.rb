@@ -53,7 +53,7 @@ module AWS
               attributes.delete(:bounce_topic)
               identity.bounce_topic_arn.should eq(nil)
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -61,7 +61,7 @@ module AWS
                 :sns_topic => 'arn')
               identity.bounce_topic_arn = 'arn'
             end
-            
+
             it 'accepts nil' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -89,7 +89,7 @@ module AWS
               attributes.delete(:complaint_topic)
               identity.complaint_topic_arn.should eq(nil)
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -97,7 +97,7 @@ module AWS
                 :sns_topic => 'arn')
               identity.complaint_topic_arn = 'arn'
             end
-            
+
             it 'accepts nil' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -125,14 +125,14 @@ module AWS
               identity.method(:forwarding_enabled?).should
                 eq(identity.method(:forwarding_enabled))
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_feedback_forwarding_enabled).with(
                 :identity => identity.identity,
                 :forwarding_enabled => true)
               identity.forwarding_enabled = true
             end
-            
+
             it 'can be set to false' do
               client.should_receive(:set_identity_feedback_forwarding_enabled).with(
                 :identity => identity.identity,
@@ -334,7 +334,7 @@ module AWS
       end
 
       context 'email addresses' do
-        
+
         let(:identity) { Identity.new('email@domain.com', :config => config) }
 
         it_should_behave_like "an ses identity"
@@ -350,7 +350,7 @@ module AWS
       end
 
       context 'domains' do
-        
+
         let(:identity) { Identity.new('domain.com', :config => config) }
 
         it_should_behave_like "an ses identity"

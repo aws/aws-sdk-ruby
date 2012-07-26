@@ -26,12 +26,12 @@ module AWS
 
         # The list of possible keys in the hash returned by {#credentials}.
         KEYS = Set[:access_key_id, :secret_access_key, :session_token]
-        
+
         # @return [Hash] Returns a hash of credentials containg at least
-        #   the +:access_key_id+ and +:secret_access_key+.  The hash may 
+        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
         #   also contain a +:session_token+.
         #
-        # @raise [Errors::MissingCredentialsError] Raised when the 
+        # @raise [Errors::MissingCredentialsError] Raised when the
         #   +:access_key_id+ or the +:secret_access_key+ can not be found.
         #
         def credentials
@@ -91,7 +91,7 @@ module AWS
       #   * Static credentials from AWS.config (e.g. AWS.config.access_key_id,
       #     AWS.config.secret_access_key)
       #
-      #   * The environment (e.g. ENV['AWS_ACCESS_KEY_ID'] or 
+      #   * The environment (e.g. ENV['AWS_ACCESS_KEY_ID'] or
       #     ENV['AMAZON_ACCESS_KEY_ID'])
       #
       #   * EC2 metadata service (checks for credentials provided by
@@ -200,7 +200,7 @@ module AWS
         # @private
         class FailedRequestError < StandardError; end
 
-        # These are the errors we trap when attempting to talk to the 
+        # These are the errors we trap when attempting to talk to the
         # instance metadata service.  Any of these imply the service
         # is not present, no responding or some other non-recoverable
         # error.
@@ -280,7 +280,7 @@ module AWS
           end
         end
 
-        # Makes an HTTP Get request with the given path.  If a non-200 
+        # Makes an HTTP Get request with the given path.  If a non-200
         # response is received, then a FailedRequestError is raised.
         # a {FailedRequestError} is raised.
         # @param [Net::HTTPSession] session
@@ -310,20 +310,20 @@ module AWS
       # This session provider is currently only used for DynamoDB which
       # requires session credentials.
       class SessionProvider
-  
+
         include Provider
-    
+
         @create_mutex = Mutex.new
 
         class << self
 
-          # @param [Hash] long_term_credentials A hash of credentials with 
-          #   +:access_key_id+ and +:secret_access_key+ (but not 
+          # @param [Hash] long_term_credentials A hash of credentials with
+          #   +:access_key_id+ and +:secret_access_key+ (but not
           #   +:session_token+).
           def for long_term_credentials
             @create_mutex.synchronize do
               @session_providers ||= {}
-              @session_providers[long_term_credentials[:access_key_id]] = 
+              @session_providers[long_term_credentials[:access_key_id]] =
                 self.new(long_term_credentials)
             end
           end
@@ -333,9 +333,9 @@ module AWS
           protected :new
 
         end
-    
-        # @param [Hash] long_term_credentials A hash of credentials with 
-        #   +:access_key_id+ and +:secret_access_key+ (but not 
+
+        # @param [Hash] long_term_credentials A hash of credentials with
+        #   +:access_key_id+ and +:secret_access_key+ (but not
         #   +:session_token+).
         def initialize long_term_credentials
           @static = StaticProvider.new(long_term_credentials)
@@ -349,27 +349,27 @@ module AWS
         # method defined in this class.
         alias_method :orig_refresh, :refresh
         protected :orig_refresh
-        
+
         # (see Provider#refresh)
         def refresh
           refresh_session
           orig_refresh
         end
-  
+
         protected
-  
+
         # (see Provider#get_credentials)
         def get_credentials
           session = cached_session
           if session.nil?
-            refresh_session 
+            refresh_session
             session = cached_session
           end
           session.credentials
         end
-  
+
         # Replaces the cached STS session with a new one.
-        # @return [nil] 
+        # @return [nil]
         def refresh_session
           sts = AWS::STS.new(@static.credentials.merge(:use_ssl => true))
           @session_mutex.synchronize do
@@ -377,7 +377,7 @@ module AWS
           end
           nil
         end
-  
+
         # @return [nil,STS::Session] Returns nil if a session has not
         #   already been started.
         def cached_session
@@ -387,14 +387,14 @@ module AWS
           end
           local_session
         end
-    
+
       end
 
       # Returns a set of fake credentials, should only be used for testing.
       class FakeProvider < StaticProvider
 
         # @param [Hash] options
-        # @option options [Boolean] :with_session_token (false) When +true+ a 
+        # @option options [Boolean] :with_session_token (false) When +true+ a
         #   fake session token will also be provided.
         def initialize options = {}
           options[:access_key_id] ||= fake_access_key_id

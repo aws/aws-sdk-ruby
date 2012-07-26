@@ -175,7 +175,7 @@ module AWS
         attr = attribute(name, options, &block)
         reservation_attributes[attr.name] = attr
       end
-      
+
       # @private
       def self.describe_call_attributes
         @describe_call_attributes ||= {}
@@ -220,7 +220,7 @@ module AWS
 
       describe_call_attribute :ami_launch_index, :static => true
 
-      describe_call_attribute :monitoring do 
+      describe_call_attribute :monitoring do
         translates_output {|v| v.state.to_sym }
       end
 
@@ -239,7 +239,7 @@ module AWS
       describe_call_attribute :block_device_mapping
 
       protected :block_device_mapping
-      
+
       describe_call_attribute :instance_lifecycle, :to_sym => true
 
       describe_call_attribute :virtualization_type, :to_sym => true, :static => true
@@ -248,7 +248,7 @@ module AWS
 
       describe_call_attribute :placement, :static => true
 
-      describe_call_attribute :state_transition_reason, :get_as => :reason
+      describe_call_attribute :state_transition_reason, :from => :reason
 
       describe_call_attribute :launch_time, :static => true
 
@@ -264,14 +264,14 @@ module AWS
 
       describe_call_attribute :subnet_id, :static => true
 
-      describe_call_attribute :iam_instance_profile_id, 
-        :as => :iam_instance_profile,
+      describe_call_attribute :iam_instance_profile_id,
+        :from => :iam_instance_profile,
         :static => true do
         translates_output{|profile| profile[:id] }
       end
 
-      describe_call_attribute :iam_instance_profile_arn, 
-        :as => :iam_instance_profile,
+      describe_call_attribute :iam_instance_profile_arn,
+        :from => :iam_instance_profile,
         :static => true do
         translates_output{|profile| profile[:arn] }
       end
@@ -280,9 +280,9 @@ module AWS
         translates_output{|state| state.name.tr("-","_").to_sym }
       end
 
-      attribute :status_code do 
-        translates_output{|state| state.code }
-      end
+      attribute :status, :from => [:instance_state, :name], :to_sym => true
+
+      attribute :status_code, :from => [:instance_state, :code]
 
       mutable_describe_call_attribute :instance_type
 
@@ -306,7 +306,7 @@ module AWS
       end
 
       mutable_describe_attribute :api_termination_disabled?,
-        :as => :disable_api_termination
+        :from => :disable_api_termination
 
       mutable_describe_attribute :instance_initiated_shutdown_behavior
 
@@ -318,15 +318,15 @@ module AWS
       provider(:describe_instances) do |provider|
         provider.find {|resp| resp.instance_index[id] }
         provider.provides *describe_call_attributes.keys
-        provider.provides :status, :get_as => :instance_state
-        provider.provides :status_code, :get_as => :instance_state
+        provider.provides :status
+        provider.provides :status_code
       end
 
       provider(:run_instances) do |provider|
         provider.find {|resp| resp.instances_set.find{|i| i.instance_id == id } }
         provider.provides *describe_call_attributes.keys
-        provider.provides :status, :get_as => :instance_state
-        provider.provides :status_code, :get_as => :instance_state
+        provider.provides :status
+        provider.provides :status_code
       end
 
       provider(:run_instances) do |provider|
@@ -334,13 +334,13 @@ module AWS
         provider.provides *reservation_attributes.keys
       end
 
-      # These are the few attributes that are only returned by 
+      # These are the few attributes that are only returned by
       # :desribe_instance_attribute and are *NOT* returned by
       # :describe_instances.  To make matters worse, only one of
       # them is returned per :describe_instance_attribute call.
       mutable_describe_attributes.values.each do |attr|
 
-        attr_opt_name = Core::Inflection.class_name(attr.get_as.to_s)
+        attr_opt_name = Core::Inflection.class_name(attr.from.to_s)
         attr_opt_name = attr_opt_name[0,1].downcase + attr_opt_name[1..-1]
 
         provider(:describe_instance_attribute) do |provider|
@@ -358,13 +358,13 @@ module AWS
       end
 
       provider(:terminate_instances, :start_instances, :stop_instances) do |provider|
-        provider.find do |resp| 
+        provider.find do |resp|
           resp.instances_set.find {|i| i.instance_id == id }
         end
-        provider.provides :status, :get_as => :current_state
-        provider.provides :status_code, :get_as => :current_state
+        provider.provides :status, :from => [:current_state, :name]
+        provider.provides :status_code, :from => [:current_state, :code]
       end
-      
+
       provider(:monitor_instances, :unmonitor_instances) do |provider|
         provider.find do |resp|
           resp.instances_set.find {|i| i.instance_id == id }
@@ -384,7 +384,7 @@ module AWS
           VPC.new(vpc_id, :config => config)
         end
       end
-      
+
       # @return [Subnet,nil] Returns the VPC subnet this instance was
       #   launched in.  Returns nil if this was not launched in a VPC.
       def subnet
@@ -415,7 +415,7 @@ module AWS
       # @return [nil]
       #
       def attach_network_interface network_interface, options = {}
-        if network_interface.is_a?(NetworkInterface) 
+        if network_interface.is_a?(NetworkInterface)
           network_interface.attach(self, options)
         else
           i = NetworkInterface.new(network_interface, :config => config)
@@ -424,8 +424,8 @@ module AWS
         nil
       end
 
-      # @return [Array<SecurityGroup>] Returns a list of security 
-      #   groups the instance belongs to. 
+      # @return [Array<SecurityGroup>] Returns a list of security
+      #   groups the instance belongs to.
       def security_groups
         (group_set || []).collect do |g|
           SecurityGroup.new(g.group_id, :name => g.group_name, :config => config)
@@ -468,7 +468,7 @@ module AWS
         state ? enable_monitoring : disable_monitoring
       end
 
-      # @return [Booelan] Returns +true+ if CloudWatch monitoring is 
+      # @return [Booelan] Returns +true+ if CloudWatch monitoring is
       #   enabled for this instance.
       def monitoring_enabled?
         monitoring == :enabled
@@ -595,7 +595,7 @@ module AWS
         ips.filter('instance-id', id).first
       end
 
-      # @return [Boolean] Returns true if an elastic IP address is 
+      # @return [Boolean] Returns true if an elastic IP address is
       #   associated with this instance, false otherwise.
       def has_elastic_ip?
         !elastic_ip.nil?
@@ -649,7 +649,7 @@ module AWS
 
       # This produces an image of an EC2 instance for use in another
       # virtualization environment and then writes the image to a
-      # S3 bucket.  
+      # S3 bucket.
       #
       # == Granting EC2 write access to your bucket
       #
@@ -675,29 +675,29 @@ module AWS
       #   File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
       #
       # @param [S3::Bucket,String] bucket The destination bucket.  May
-      #   be the name of the bucket (string) or a {S3::Bucket} object. The 
+      #   be the name of the bucket (string) or a {S3::Bucket} object. The
       #   bucket must exist and grant write permissiosn to the AWS account
       #   'vm-import-export@amazon.com.'.
       #
       # @param [Hash] options
       #
-      # @option options [String] :target_environment ('vmware') The target 
+      # @option options [String] :target_environment ('vmware') The target
       #   virtualization environment.  Valid values include: 'vmware', 'citrix'
       #   and 'microsoft'.
       #
       # @option options [String] :disk_image_format The format for the exported
-      #    image.  Defaults to 'vmdk' if +:target_environemnt+ is 'vmware', 
+      #    image.  Defaults to 'vmdk' if +:target_environemnt+ is 'vmware',
       #    otherwise, 'vhd'.
       #
-      # @option options [String] :container_format The container format used to 
+      # @option options [String] :container_format The container format used to
       #   combine disk images with metadata (such as OVF). If absent, only
-      #   the disk image will be exported.  Defaults to 'ova' if 
+      #   the disk image will be exported.  Defaults to 'ova' if
       #   +:target_environment+ is 'vmware', otherwise ommited.
       #
-      # @option options [String] :description Description of the conversion 
+      # @option options [String] :description Description of the conversion
       #   task or the resource being exported.
       #
-      # @option options [String] :prefix (nil) The image is written to a 
+      # @option options [String] :prefix (nil) The image is written to a
       #   single object in the bucket at the key:
       #
       #     "#{prefix}#{export_task_id}.#{disk_image_format}"
@@ -721,9 +721,9 @@ module AWS
         resp = client.create_instance_export_task(opts)
 
         ExportTask.new_from(
-          :create_instance_export_task, 
+          :create_instance_export_task,
           resp[:export_task],
-          resp[:export_task][:export_task_id], 
+          resp[:export_task][:export_task_id],
           :config => config)
 
       end
@@ -734,7 +734,7 @@ module AWS
         resp.instance_index[id]
       end
 
-      def instance_action name 
+      def instance_action name
         client.send("#{name}_instances", :instance_ids => [id])
         nil
       end
@@ -750,7 +750,7 @@ module AWS
       def attributes_from_response_object(obj)
         if atts = super(obj)
           if obj[:instance_state]
-            atts[:status] = obj[:instance_state].name.tr("-","_").to_sym 
+            atts[:status] = obj[:instance_state].name.tr("-","_").to_sym
           end
           atts
         end

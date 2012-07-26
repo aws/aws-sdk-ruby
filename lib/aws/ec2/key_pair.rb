@@ -28,7 +28,7 @@ module AWS
       # @return [String] The name of the key pair.
       attr_reader :name
 
-      attribute :fingerprint, :as => :key_fingerprint, :static => true
+      attribute :fingerprint, :from => :key_fingerprint, :static => true
 
       populates_from(:create_key_pair, :import_key_pair) do |resp|
         resp if resp.key_name == name

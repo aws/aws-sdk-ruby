@@ -22,14 +22,11 @@ module AWS
     #  topic.subscriptions.
     #    select { |s| s.protocol == :email }.
     #    map(&:endpoint)
+    #
     class TopicSubscriptionCollection < SubscriptionCollection
 
       include Core::Model
       include Enumerable
-
-      # @return [Topic] The topic to which all the subscriptions
-      # belong.
-      attr_reader :topic
 
       # @private
       def initialize(topic, opts = {})
@@ -37,15 +34,17 @@ module AWS
         super
       end
 
-      # @private
+      # @return [Topic] The topic to which all the subscriptions
+      # belong.
+      attr_reader :topic
+
       protected
-      def list_request
+
+      def client_method
         :list_subscriptions_by_topic
       end
 
-      # @private
-      protected
-      def request_opts
+      def request_options
         { :topic_arn => topic.arn }
       end
 

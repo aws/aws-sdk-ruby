@@ -96,27 +96,27 @@ module AWS
       info_attribute :close_status, :to_sym => true
       protected :close_status
 
-      info_attribute :closed_at, :as => 'closeTimestamp', :timestamp => true
+      info_attribute :closed_at, :from => 'closeTimestamp', :timestamp => true
 
       info_attribute :execution_status, :to_sym => true
       protected :execution_status
 
-      info_attribute :parent_details, :as => 'parent', :static => true
+      info_attribute :parent_details, :from => 'parent', :static => true
       protected :parent_details
 
       info_attribute :started_at, 
-        :as => 'startTimestamp', 
+        :from => 'startTimestamp', 
         :timestamp => true,
         :static => true
 
       info_attribute :tag_list, :static => true
       protected :tag_list
 
-      info_attribute :type_details, :as => 'workflowType', :static => true
+      info_attribute :type_details, :from => 'workflowType', :static => true
       protected :type_details
 
       attribute :latest_activity_task_scheduled_at, 
-        :as => 'latestActivityTaskTimestamp',
+        :from => 'latestActivityTaskTimestamp',
         :timestamp => true
 
       attribute :latest_execution_context

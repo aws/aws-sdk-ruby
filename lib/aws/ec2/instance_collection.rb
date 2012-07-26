@@ -113,8 +113,8 @@ module AWS
       #                              to delete the volume when the
       #                              instance is terminated.
       #
-      # @option options [Boolean] :monitoring Setting this to true
-      #   enables CloudWatch monitoring on the instances once they
+      # @option options [Boolean] :monitoring_enabled Setting this to
+      #   +true+ enables CloudWatch monitoring on the instances once they
       #   are started.
       #
       # @option options [String] :availability_zone Specifies the
@@ -127,6 +127,9 @@ module AWS
       # @option options [String] :key_name The name of the key pair to
       #   use.  Note: Launching public images without a key pair ID
       #   will leave them inaccessible.
+      #
+      # @option options [KeyPair] :key_pair A {KeyPair} that should
+      #   be used when launching an instance.
       #
       # @option options [Array] :security_groups Security groups are used
       #   to determine network access rules for the instances.  

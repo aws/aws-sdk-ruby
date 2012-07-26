@@ -26,13 +26,13 @@ module AWS
 
         super()
 
-        @resource = 
+        @resource =
           case options[:resource_type]
-          when 'auto-scaling-group' 
+          when 'auto-scaling-group'
             group_name = options[:resource_id]
             config = options.delete(:config)
             Group.new(group_name, :config => config)
-          else 
+          else
             msg = "unhandled resource type: #{options[:resource_type]}"
             raise ArgumentError, msg
           end

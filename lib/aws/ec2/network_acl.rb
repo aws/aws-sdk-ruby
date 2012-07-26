@@ -37,7 +37,7 @@ module AWS
       attr_reader :network_acl_id
 
       alias_method :id, :network_acl_id
-    
+
       attribute :vpc_id, :static => true
 
       attribute :default, :static => true

@@ -18,7 +18,7 @@ module AWS
     class Client < Core::Client
 
       API_VERSION = '2010-05-08'
-      
+
       extend Core::Client::QueryXML
 
       # @private

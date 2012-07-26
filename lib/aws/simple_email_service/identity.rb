@@ -23,7 +23,7 @@ module AWS
     # @attr [String] complaint_topic_arn
     #
     # @attr [Boolean] forwarding_enabled When +false+, complaint and bounce
-    #   notifications will not be forwarded via email.  Can only be set to 
+    #   notifications will not be forwarded via email.  Can only be set to
     #   +false+ when there is both a +bounce_topic+ and +complaint_topic+.
     #
     class Identity < Core::Resource
@@ -42,9 +42,9 @@ module AWS
 
       attribute :verification_token, :static => true
 
-      mutable_attribute :bounce_topic_arn, :as => :bounce_topic
+      mutable_attribute :bounce_topic_arn, :from => :bounce_topic
 
-      mutable_attribute :complaint_topic_arn, :as => :complaint_topic
+      mutable_attribute :complaint_topic_arn, :from => :complaint_topic
 
       mutable_attribute :forwarding_enabled
 
@@ -109,7 +109,7 @@ module AWS
         verification_status == 'Success'
       end
 
-      # @return [Boolean] Returns +true+ if verification for this email 
+      # @return [Boolean] Returns +true+ if verification for this email
       #   address/domain is still pending.
       def pending?
         verification_status == 'Pending'
@@ -118,13 +118,15 @@ module AWS
       # Deletes the current identity.
       # @return [nil]
       def delete
-        client.delete_identity(:identity => identity)  
+        client.delete_identity(:identity => identity)
         nil
       end
 
       # @return [Boolean] Returns true if the identity exists.
       def exists?
-        !!get_resource[:verification_attributes][identity]
+        options = { :identities => [identity] }
+        resp = client.get_identity_verification_attributes(options)
+        !!resp[:verification_attributes][identity]
       end
 
       protected
@@ -158,7 +160,7 @@ module AWS
         when :forwarding_enabled
           method = :set_identity_feedback_forwarding_enabled
           client_opts[:forwarding_enabled] = value
-        else raise "unhandled attribute: #{attr.name}" 
+        else raise "unhandled attribute: #{attr.name}"
         end
         client.send(method, client_opts)
       end

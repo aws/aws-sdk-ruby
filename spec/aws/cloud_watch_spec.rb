@@ -37,7 +37,7 @@ module AWS
     end
 
     context '#put_metric_data' do
-      
+
       it 'calls #put_metric_data on the client' do
         options = double('options-hash')
         client.should_receive(:put_metric_data).with(options)

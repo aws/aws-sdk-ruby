@@ -33,6 +33,8 @@ module AWS
         inflector['ETag'] = 'etag'
         inflector['s3Bucket'] = 's3_bucket'
         inflector['s3Key'] = 's3_key'
+        inflector['Ec2KeyName'] = 'ec2_key_name'
+        inflector['Ec2SubnetId'] = 'ec2_subnet_id'
 
         inflector[aws_name]
 

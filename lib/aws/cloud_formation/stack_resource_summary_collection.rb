@@ -32,10 +32,10 @@ module AWS
     # * +:resource_status+
     # * +:resource_status_reason+
     # * +:last_updated_timestamp+
-    # 
+    #
     class StackResourceSummaryCollection
 
-      include Core::Collection::Simple
+      include Core::Collection::WithNextToken
 
       # @param [Stack] stack
       # @param [Hash] options
@@ -49,22 +49,14 @@ module AWS
 
       protected
 
-      def _each_item options = {}
-        next_token = nil
-        begin
-
-          options = {}
-          options[:next_token] = next_token if next_token
-          options[:stack_name] = stack.name
-          resp = client.list_stack_resources(options)
-
-          resp.stack_resource_summaries.each do |summary|
-            yield(summary.to_hash)
-          end
-
-          next_token = resp.data[:next_token]
-
-        end while next_token
+      def _each_item next_token, options = {}, &block
+        options[:next_token] = next_token if next_token
+        options[:stack_name] = stack.name
+        resp = client.list_stack_resources(options)
+        resp.data[:stack_resource_summaries].each do |summary|
+          yield(summary)
+        end
+        resp.data[:next_token]
       end
 
     end

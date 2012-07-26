@@ -22,26 +22,31 @@ module AWS
 
       let(:client) { config.sqs_client }
 
-      let(:collection) do
-        described_class.new(:config => config)
-      end
+      let(:queues) { described_class.new(:config => config) }
 
-      it_should_behave_like "an SQS model object", {}
+      it_should_behave_like "a simple collection" do
 
-      it_should_behave_like "collection object" do
-
+        let(:collection) { queues }
         let(:client_method) { :list_queues }
-
         let(:member_class) { Queue }
+        let(:request_options) {{}}
 
-        def stub_two_members(resp)
-          resp.data[:queue_urls] = ["one", "two"]
+        def stub_n_members resp, count
+          resp.data[:queue_urls] = (1..count).map {|n| n.to_s }
+        end
+
+        it_should_behave_like "an indexed collection" do
+          let(:identity_method) { :url }
         end
 
         context 'yielded objects' do
 
+          before(:each) do
+            stub_n_members(response, 2)
+          end
+
           it 'should have the correct queue URL' do
-            collection.map(&:url).should == ["one", "two"]
+            collection.map(&:url).should == ["1", "2"]
           end
 
         end
@@ -59,7 +64,7 @@ module AWS
 
         it 'should call create_queue' do
           client.should_receive(:create_queue).with(:queue_name => "foo")
-          collection.create("foo")
+          queues.create("foo")
         end
 
         it 'should pass additional options' do
@@ -67,11 +72,11 @@ module AWS
             with(:queue_name => "foo", :attributes => { 
               'Foo' => 'bar',
             })
-          collection.create("foo", :foo => "bar")
+          queues.create("foo", :foo => "bar")
         end
 
         it 'should return a queue object with the URL set' do
-          q = collection.create("foo")
+          q = queues.create("foo")
           q.should be_a(Queue)
           q.url.should == "url"
           q.config.should be(config)
@@ -81,7 +86,7 @@ module AWS
           client.should_receive(:create_queue).with(
             :queue_name => 'name',
             :attributes => { 'VisibilityTimeout' => '1000' })
-          collection.create('name', :default_visibility_timeout => 1000)
+          queues.create('name', :default_visibility_timeout => 1000)
         end
 
         it 'passes policy strings unmodified' do
@@ -89,7 +94,7 @@ module AWS
             :queue_name => 'name',
             :attributes => { 'Policy' => 'policy-json' })
           policy = 'policy-json'
-          collection.create('name', :policy => policy)
+          queues.create('name', :policy => policy)
         end
 
         it 'calls #to_json on all other policy options' do
@@ -97,7 +102,7 @@ module AWS
             :queue_name => 'name',
             :attributes => { 'Policy' => 'policy-json' })
           policy = double('policy', :to_json => 'policy-json')
-          collection.create('name', :policy => policy)
+          queues.create('name', :policy => policy)
         end
 
         it 'merges multiple options/attributes' do
@@ -105,7 +110,7 @@ module AWS
             :queue_name => 'name',
             :attributes => { 'Abc' => 'xyz', 'Foo' => 'bar' }
           ).and_return(resp)
-          collection.create("name", :foo => 'bar', :abc => 'xyz')
+          queues.create("name", :foo => 'bar', :abc => 'xyz')
         end
 
       end
@@ -113,7 +118,7 @@ module AWS
       context '#url_for' do
 
         let(:response) { client.stub_for(:get_queue_url) }
-        
+
         before(:each) do
           response.data[:queue_url] = 'url'
           client.stub(:get_queue_url).and_return(response)
@@ -123,7 +128,7 @@ module AWS
           client.should_receive(:get_queue_url).
             with(:queue_name => 'name').
             and_return(response)
-          collection.url_for('name')
+          queues.url_for('name')
         end
 
         it 'accepts an :queue_owner_aws_account_id' do
@@ -131,11 +136,11 @@ module AWS
             :queue_name => 'name',
             :queue_owner_aws_account_id => 'id'
           ).and_return(response)
-          collection.url_for('name', :queue_owner_aws_account_id => 'id')
+          queues.url_for('name', :queue_owner_aws_account_id => 'id')
         end
 
         it 'returns the queue url from the response' do
-          collection.url_for('name').should == 'url'
+          queues.url_for('name').should == 'url'
         end
 
       end
@@ -143,34 +148,23 @@ module AWS
       context '#with_prefix' do
 
         it 'should return a collection with the prefix' do
-          collection.with_prefix("foo").prefix.should == "foo"
+          queues.with_prefix("foo").prefix.should == "foo"
         end
 
         it 'should preserve the config' do
-          collection.with_prefix("foo").config.should be(config)
+          queues.with_prefix("foo").config.should be(config)
         end
 
         it 'should not modify the original' do
-          collection.with_prefix("foo")
-          collection.prefix.should be_nil
+          queues.with_prefix("foo")
+          queues.prefix.should be_nil
         end
 
         it 'should pass :queue_name_prefix to the client' do
           client.should_receive(:list_queues).
             with(hash_including(:queue_name_prefix => "foo")).
             and_return(client.stub_for(:list_queues))
-          collection.with_prefix("foo").to_a
-        end
-
-      end
-
-      context '#[]' do
-
-        it 'should return a queue object with the given url' do
-          q = collection["foo"]
-          q.should be_a(Queue)
-          q.url.should == "foo"
-          q.config.should be(config)
+          queues.with_prefix("foo").to_a
         end
 
       end
@@ -178,4 +172,5 @@ module AWS
     end
 
   end
+
 end

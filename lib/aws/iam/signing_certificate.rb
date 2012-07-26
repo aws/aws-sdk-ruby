@@ -71,7 +71,7 @@ module AWS
       #   then that user is the implied owner.
       attr_reader :user
 
-      attribute :contents, :as => :certificate_body, :static => true
+      attribute :contents, :from => :certificate_body, :static => true
 
       mutable_attribute :status, :to_sym => true
 

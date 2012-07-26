@@ -60,7 +60,7 @@ module AWS
 
       alias_method :arn, :auto_scaling_group_arn
 
-      attribute :availability_zone_names, :as => :availability_zones
+      attribute :availability_zone_names, :from => :availability_zones
 
       attribute :created_time, :static => true
 
@@ -102,7 +102,7 @@ module AWS
         end
       end
 
-      attribute :tag_details, :as => :tags
+      attribute :tag_details, :from => :tags
 
       protected :tag_details
 

@@ -75,7 +75,7 @@ module AWS
       attribute :mac_address, :static => true
 
       attribute :availability_zone_name,
-        :as => :availability_zone, 
+        :from => :availability_zone, 
         :static => true
 
       mutable_attribute :source_dest_check
@@ -90,7 +90,7 @@ module AWS
         translates_output {|assoc| assoc.to_hash }
       end
 
-      attribute :attachment_details, :as => :attachment
+      attribute :attachment_details, :from => :attachment
 
       protected :attachment_details
 

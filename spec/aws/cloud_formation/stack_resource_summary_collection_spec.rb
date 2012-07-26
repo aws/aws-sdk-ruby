@@ -33,15 +33,16 @@ module AWS
 
       end
 
-      it_behaves_like "a simple collection" do
+      it_behaves_like "a pageable collection" do
 
         let(:collection)      { summaries }
         let(:client_method)   { :list_stack_resources }
-        let(:request_options) {{}}
+        let(:request_options) {{ :stack_name => stack.name }}
         let(:now)             { Time.now }
+        let(:member_class)    { Hash }
 
         def stub_n_members response, n
-          response.stub(:stack_resource_summaries).and_return((1..n).map{|i|
+          response.data[:stack_resource_summaries] = (1..n).map do |i|
             {
               :logical_resource_id => "log-#{i}",
               :physical_resource_id => "pid-#{i}",
@@ -50,10 +51,11 @@ module AWS
               :resrouce_status_reason => 'reason',
               :last_updated_timestamp => now,
             }
-          })
+          end
         end
 
         it 'yields populated stack summaries' do
+          stub_n_members(response, 2)
           summaries.to_a.should == [
             {
               :logical_resource_id => "log-1",

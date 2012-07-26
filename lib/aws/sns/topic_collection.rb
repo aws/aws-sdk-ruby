@@ -16,9 +16,7 @@ module AWS
 
     class TopicCollection
 
-      include Core::Model
-      include Enumerable
-
+      include Core::Collection::WithNextToken
 
       # Creates and returns a new SNS Topic.
       # @return [Topic] Returns a new topic with the given name.
@@ -40,25 +38,22 @@ module AWS
         Topic.new(topic_arn, :config => config)
       end
 
-      # Yields once for each topic.
-      # @yieldparam [Topic] topic
-      # @return [nil]
-      def each &block
+      protected
 
-        next_token = nil
+      def _each_item next_token, options, &block
 
-        begin
-          
-          list_options = next_token ? { :next_token => next_token } : {} 
-          response = client.list_topics(list_options)
+        options[:next_token] = next_token if next_token
 
-          response.topics.each do |t|
-            topic = Topic.new(t.topic_arn, :config => config)
-            yield(topic)
-          end
+        resp = client.list_topics(options)
+        resp.data[:topics].each do |details|
 
-        end while(next_token = response.data[:next_token])
-        nil
+          topic = Topic.new(details[:topic_arn], :config => config)
+
+          yield(topic)
+
+        end
+
+        resp.data[:next_token]
 
       end
 

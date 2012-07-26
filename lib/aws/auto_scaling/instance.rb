@@ -71,7 +71,7 @@ module AWS
       attribute :auto_scaling_group_name, :static => true
 
       attribute :availability_zone_name, 
-        :as => :availability_zone,
+        :from => :availability_zone,
         :static => true
           
       attribute :health_status

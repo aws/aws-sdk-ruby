@@ -69,7 +69,7 @@ module AWS
 
       attribute :size, :static => true
 
-      attribute :availability_zone_name, :as => :availability_zone,
+      attribute :availability_zone_name, :from => :availability_zone,
         :static => true
 
       attribute :create_time, :static => true

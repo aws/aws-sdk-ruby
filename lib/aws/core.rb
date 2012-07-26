@@ -22,9 +22,11 @@ require 'aws/core/autoloader'
 #
 # * {AWS::AutoScaling}
 # * {AWS::CloudFormation}
+# * {AWS::CloudWatch}
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ELB}
+# * {AWS::EMR}
 # * {AWS::IAM}
 # * {AWS::S3}
 # * {AWS::SNS}
@@ -66,7 +68,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.5.7"
+  VERSION = "1.5.8"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -277,6 +279,10 @@ module AWS
     #
     # @option options [String] :s3_endpoint ('s3.amazonaws.com') The 
     #   service endpoint for Amazon S3.
+    #
+    # @option options [Boolean] :s3_force_path_style (false) When
+    #   +true+, requests will always use path style.  This can be useful
+    #   for testing environments.
     #
     # @option options [Integer] :s3_multipart_max_parts (1000) The maximum 
     #   number of parts to split a file into when uploading in parts to S3.

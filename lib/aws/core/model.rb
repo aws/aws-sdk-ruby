@@ -16,8 +16,8 @@ module AWS
 
     # @private
     module Model
-  
-      # @private 
+
+      # @private
       def initialize(*args)
         options = args.last.kind_of?(Hash) ? args.last : {}
         @config = case
@@ -26,10 +26,10 @@ module AWS
         else AWS.config
         end
       end
-  
+
       # @return [Configuration] Returns the configuration for this object.
       attr_reader :config
-  
+
       # Each class including this module has its own client class.
       # Generally it is the service namespace suffixed by client:
       #
@@ -40,13 +40,13 @@ module AWS
       def client
         @config.send("#{config_prefix}_client")
       end
-  
+
       # @return [String] The short name of the service as used in coniguration.
       #   (e.g. SimpleDB::Client.config_prefix #=> 'simple_db')
       def config_prefix
         Inflection.ruby_name(self.class.to_s.split(/::/)[1])
       end
-  
+
       # @return [String] A sensible default inspect string.
       def inspect
         "<#{self.class}>"

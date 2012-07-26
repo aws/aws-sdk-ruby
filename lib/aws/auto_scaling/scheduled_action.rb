@@ -43,7 +43,7 @@ module AWS
       # @return [String]
       attr_reader :name
 
-      attribute :arn, :as => :scheduled_action_arn
+      attribute :arn, :from => :scheduled_action_arn
 
       attribute :auto_scaling_group_name, :static => true
 

@@ -50,17 +50,17 @@ module AWS
 
       alias_method :id, :security_group_id
 
-      attribute :name, :as => :group_name, :static => true
+      attribute :name, :from => :group_name, :static => true
 
       attribute :owner_id, :static => true
 
       attribute :vpc_id, :static => true
 
-      attribute :description, :as => :group_description, :static => true
+      attribute :description, :from => :group_description, :static => true
 
-      attribute :ip_permissions_list, :as => :ip_permissions
+      attribute :ip_permissions_list, :from => :ip_permissions
 
-      attribute :ip_permissions_list_egress, :as => :ip_permissions_egress
+      attribute :ip_permissions_list_egress, :from => :ip_permissions_egress
 
       populates_from(:describe_security_groups) do |resp|
         resp.security_group_index[id]

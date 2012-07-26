@@ -240,6 +240,19 @@ module AWS
           request_host.should == 'dns-compat.s3.amazonaws.com'
         end
 
+        it 'puts dns compat bucket name in the uri when forced to' do
+          request_uri = nil
+          request_host = nil
+          client = with_http_handler do |req, response|
+            request_uri = req.uri
+            request_host = req.host
+          end
+          client.config.stub(:s3_force_path_style?).and_return(true)
+          client.send(method, opts.merge(:bucket_name => 'dns-compat'))
+          request_host.should == 's3.amazonaws.com'
+          request_uri.should match(/^\/dns-compat/)
+        end
+
       end
 
       shared_examples_for "a subresource request" do |sub_resource|

@@ -99,7 +99,7 @@ module AWS
           end
         end
         provider.provides *common_attributes.keys
-        provider.provides :last_updated_timestamp, :get_as => :timestamp
+        provider.provides :last_updated_timestamp, :from => :timestamp
       end
 
       protected

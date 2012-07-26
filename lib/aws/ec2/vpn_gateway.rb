@@ -29,12 +29,12 @@ module AWS
       attr_reader :vpn_gateway_id
 
       alias_method :id, :vpn_gateway_id
-    
+
       attribute :state, :to_sym => true
 
       attribute :vpn_type, :static => true
 
-      attribute :attachment_set, :as => :attachments
+      attribute :attachment_set, :from => :attachments
 
       protected :attachment_set
 

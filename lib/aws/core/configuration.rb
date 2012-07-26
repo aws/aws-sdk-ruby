@@ -121,6 +121,10 @@ module AWS
     # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
     #   The service endpoint for Amazon S3.
     #
+    # @attr_reader [Boolean] s3_force_path_style (false) When
+    #   +true+, requests will always use path style.  This can be useful
+    #   for testing environments.
+    #
     # @attr_reader [Integer] s3_multipart_max_parts (1000) 
     #   The maximum number of parts to split a file into when uploading 
     #   in parts to S3.

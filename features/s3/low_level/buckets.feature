@@ -70,3 +70,71 @@ Feature: Working with Buckets
     When I ask the client to list buckets
     Then the bucket should be in the response
     And the client should have made a GET request to the service
+
+  Scenario: Forcing path style
+    Given I force s3 to use path style requests
+    Given I call create_bucket
+    When I call get_bucket
+    Then a request should have been made like:
+    | TYPE   | NAME       | VALUE              |
+    | http   | verb       | GET                |
+    | http   | host       | s3.amazonaws.com   |
+    | http   | path_match | /ruby-test-\d+-\d+ |
+
+  @create_bucket
+  Scenario: Invalid bucket name
+    When I ask the client to create a bucket with an invalid name
+    Then the client should raise an argument error
+    And the client should not make any requests
+
+  # this should raise an error instead of actually creating the bucket
+  @create_bucket
+  Scenario: DNS-incompatible bucket name
+    When I ask the client to create a dns incompatible bucket
+    Then the bucket should exist
+    Then a request should have been made like:
+    | TYPE  | NAME      | VALUE                      |
+    | http  | verb      | PUT                        |
+    | http  | host      | s3.amazonaws.com           |
+    | http  | uri_match | /ruby_integration_test_\d+ |
+
+  @create_bucket @endpoint
+  Scenario: Create a bucket in a different region
+    When I ask the client to create a bucket in "s3-us-west-1.amazonaws.com"
+    Then a request should have been made like:
+    | TYPE  | NAME       | VALUE                                               |
+    | http  | verb       | PUT                                                 |
+    | http  | host_match | ruby-integration-test-.*.s3-us-west-1.amazonaws.com |
+
+  @delete_bucket
+  Scenario: Delete bucket
+    Given I call create_bucket
+    When I ask the client to delete the bucket
+    Then the result should be a successful response
+    And the bucket should not exist
+    And the client should have made a DELETE request to the bucket
+
+  @delete_bucket
+  Scenario: Delete bucket that does not exist
+    When I ask the client to delete a bucket that does not exist
+    Then the client should raise a client error
+    And the client should have made a DELETE request to the bucket
+
+  @list_buckets
+  Scenario: List buckets
+    Given I call create_bucket
+    When I ask the client to list buckets
+    Then the bucket should be in the response
+    And the client should have made a GET request to the service
+
+  Scenario: Forcing path style requests
+    When I ask the client to create a bucket in "s3-us-west-1.amazonaws.com"
+    Then a request should have been made like:
+    | TYPE  | NAME       | VALUE                                               |
+    | http  | verb       | PUT                                                 |
+    | http  | host_match | ruby-integration-test-.*.s3-us-west-1.amazonaws.com |
+    When I ask the client to create a bucket in "s3-us-west-1.amazonaws.com"
+    Then a request should have been made like:
+    | TYPE  | NAME       | VALUE                                               |
+    | http  | verb       | PUT                                                 |
+    | http  | host_match | ruby-integration-test-.*.s3-us-west-1.amazonaws.com |
