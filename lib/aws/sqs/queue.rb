@@ -540,14 +540,14 @@ module AWS
 
       end
 
-      # @overload batch_change_message_visibility(visibility_timeout, *messages)
+      # @overload batch_change_visibility(visibility_timeout, *messages)
       #
       #   Accepts a single +:visibility_timeout+ value and a list of 
       #   messages ({ReceivedMessage} objects or receipt handle strings).  
       #   This form of the method is useful when you want to set the same
       #   timeout value for each message.
       #
-      #     queue.bacth_change_message_visibility(10, messages)
+      #     queue.batch_change_visibility(10, messages)
       #
       #   @param [Integer] visibility_timeout The new value for the message's 
       #     visibility timeout (in seconds).
@@ -560,7 +560,7 @@ module AWS
       #
       #   @return [nil]
       #
-      # @overload batch_change_message_visibility(*messages_with_timeouts)
+      # @overload batch_change_visibility(*messages_with_timeouts)
       #
       #   Accepts a list of hashes.  Each hash should provide the visibility
       #   timeout and message (a {ReceivedMessage} object or the recipt handle
@@ -572,7 +572,7 @@ module AWS
       #     messages << { :message => 'handle1', :visibility_timeout => 5 }
       #     messages << { :message => 'handle2', :visibility_timeout => 10 }
       #
-      #     queue.bacth_change_message_visibility(*messages)
+      #     queue.batch_change_visibility(*messages)
       #
       #   @param [Hash] message A list hashes, each with a +:visibility_timeout+
       #     and a +:message+.  
