@@ -11,25 +11,24 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/core/client/query_xml'
-require 'aws/core/client/query_json'
+require 'json'
 require 'set'
 require 'yaml'
 
 module AWS
   module Core
-    
+
     # Base client class for all of the Amazon AWS service clients.
     class Client
-  
+
       extend Naming
-  
+
       # @private
       CACHEABLE_REQUESTS = Set[]
-  
-      # Creates a new low-level client.  
+
+      # Creates a new low-level client.
       # @param [Hash] options
-      # @option options [Core::Configuration] :config (AWS.config) 
+      # @option options [Core::Configuration] :config (AWS.config)
       #   The base configuration object to use.  All other options
       #   are merged with this.  Defaults to the AWS.config.
       # @option (see AWS.config)
@@ -38,7 +37,7 @@ module AWS
         options = options.dup # so we don't modify the options passed in
 
         @service_ruby_name = self.class.service_ruby_name
-  
+
         # translate these into service specific configuration options,
         # e.g. :endpoint into :s3_endpoint
         [:endpoint, :region, :port].each do |opt|
@@ -46,7 +45,7 @@ module AWS
             options[:"#{service_ruby_name}_#{opt}"] = options.delete(opt)
           end
         end
-  
+
         @config = (options.delete(:config) || AWS.config)
         @config = @config.with(options)
 
@@ -57,10 +56,10 @@ module AWS
         @http_read_timeout = @config.http_read_timeout
 
       end
-  
+
       # @return [Configuration] This clients configuration.
       attr_reader :config
-  
+
       # @return [CredentialProviders::Provider] Returns the credentail
       #   provider for this client.
       # @private
@@ -88,7 +87,7 @@ module AWS
       def operations
         self.class.operations
       end
-  
+
       # Returns a copy of the client with a different HTTP handler.
       # You can pass an object like BuiltinHttpHandler or you can
       # use a block; for example:
@@ -114,7 +113,7 @@ module AWS
         handler ||= Http::Handler.new(@http_handler, &blk)
         with_options(:http_handler => handler)
       end
-  
+
       # Returns a new client with the passed configuration options
       # merged with the current configuration options.
       #
@@ -126,7 +125,7 @@ module AWS
       def with_options options
         with_config(config.with(options))
       end
-  
+
       # @param [Configuration] config The configuration object to use.
       # @return [Core::Client] Returns a new client object with the given
       #   configuration.
@@ -134,7 +133,7 @@ module AWS
       def with_config config
         self.class.new(:config => config)
       end
-  
+
       # The stub returned is memoized.
       # @see new_stub_for
       # @private
@@ -142,8 +141,8 @@ module AWS
         @stubs ||= {}
         @stubs[method_name] ||= new_stub_for(method_name)
       end
-  
-      # Primarily used for testing, this method returns an empty psuedo 
+
+      # Primarily used for testing, this method returns an empty psuedo
       # service response without making a request.  Its used primarily for
       # testing the ligher level service interfaces.
       # @private
@@ -155,29 +154,29 @@ module AWS
         response.signal_success
         response
       end
-  
+
       protected
 
       def new_request
         eval(self.class.name.sub(/::Client$/, ''))::Request.new
       end
-  
+
       def new_response(*args, &block)
         Response.new(*args, &block)
       end
-  
+
       def make_async_request response
-  
+
         pauses = async_request_with_retries(response, response.http_request)
-  
+
         response
-  
+
       end
-  
+
       def async_request_with_retries response, http_request, retry_delays = nil
-  
+
         response.http_response = Http::Response.new
-  
+
         handle = Object.new
         handle.extend AsyncHandle
         handle.on_complete do |status|
@@ -200,30 +199,30 @@ module AWS
             end
           end
         end
-  
+
         @http_handler.handle_async(http_request, response.http_response, handle)
-  
+
       end
-  
+
       def make_sync_request response
         retry_server_errors do
-  
+
           response.http_response = http_response =
             Http::Response.new
-  
+
           @http_handler.handle(response.http_request, http_response)
 
           populate_error(response)
           response.signal_success unless response.error
           response
-  
+
         end
       end
-  
+
       def retry_server_errors &block
-  
+
         response = yield
-  
+
         sleeps = sleep_durations(response)
         while should_retry?(response)
           break if sleeps.empty?
@@ -232,9 +231,9 @@ module AWS
           rebuild_http_request(response)
           response = yield
         end
-  
+
         response
-  
+
       end
 
       def rebuild_http_request response
@@ -242,7 +241,7 @@ module AWS
         response.rebuild_request
         response.retry_count += 1
       end
-  
+
       def sleep_durations response
         if expired_credentials?(response)
           [0]
@@ -251,11 +250,11 @@ module AWS
           Array.new(config.max_retries) {|n| (2 ** n) * factor }
         end
       end
-  
+
       def scaling_factor response
         response.throttled? ? (0.5 + Kernel.rand * 0.1) : 0.3
       end
-  
+
       def should_retry? response
         expired_credentials?(response) or
         response.timeout? or
@@ -266,11 +265,11 @@ module AWS
       # @return [Boolean] Returns +true+ if the response contains an
       #   error message that indicates credentials have expired.
       def expired_credentials? response
-        response.error and 
+        response.error and
         response.error.respond_to?(:code) and
         response.error.code == 'ExpiredTokenException'
       end
-  
+
       def return_or_raise options, &block
         response = yield
         unless options[:async]
@@ -279,10 +278,10 @@ module AWS
         response
       end
 
-      # Yields to the given block (which should be making a 
-      # request and returning a {Response} object).  The results of the 
+      # Yields to the given block (which should be making a
+      # request and returning a {Response} object).  The results of the
       # request/response are logged.
-      # 
+      #
       # @param [Hash] options
       # @option options [Boolean] :async
       # @return [Response]
@@ -293,12 +292,12 @@ module AWS
         response = yield
         response.duration = Time.now - start
 
-        if options[:async] 
-          response.on_complete { log_response(response) } 
+        if options[:async]
+          response.on_complete { log_response(response) }
         else
           log_response(response)
         end
-  
+
         response
 
       end
@@ -313,13 +312,13 @@ module AWS
         end
         nil
       end
-  
+
       def populate_error response
         response.error = extract_error(response)
       end
 
       # If the response contains error, this method will construct
-      # and return an error object.  If no error is contained in the 
+      # and return an error object.  If no error is contained in the
       # response, then nil is returned.
       # @param [Response] response
       # @return [Errors::Base,nil]
@@ -352,7 +351,7 @@ module AWS
       #   #=> AWS::EC2::Errors::InvalidInstanceId
       #
       # @param [String] error_code The error code string as returned by
-      #   the service.  If this class contains periods, they will be 
+      #   the service.  If this class contains periods, they will be
       #   converted into namespaces (e.g. 'Foo.Bar' becomes Errors::Foo::Bar).
       #
       # @return [Class]
@@ -371,26 +370,26 @@ module AWS
       def errors_module
         AWS.const_get(self.class.to_s[/(\w+)::Client/, 1])::Errors
       end
-  
+
       def client_request name, options, &block
         return_or_raise(options) do
           log_client_request(options) do
-  
+
             if config.stub_requests?
-  
+
               response = stub_for(name)
               response.http_request = build_request(name, options, &block)
               response.request_options = options
               response
-  
+
             else
-  
+
               client = self
               response = new_response { client.send(:build_request, name, options, &block) }
               response.request_type = name
               response.request_options = options
-  
-              if 
+
+              if
                 cacheable_request?(name, options) and
                 cache = AWS.response_cache and
                 cached_response = cache.cached(response)
@@ -402,7 +401,7 @@ module AWS
                 options[:async] ?
                 make_async_request(response) :
                   make_sync_request(response)
-  
+
                 # process the http response
                 response.on_success do
                   send("process_#{name}_response", response)
@@ -410,13 +409,13 @@ module AWS
                     cache.add(response)
                   end
                 end
-  
+
                 response
-  
+
               end
-  
+
             end
-  
+
           end
         end
       end
@@ -424,16 +423,16 @@ module AWS
       def cacheable_request? name, options
         self.class::CACHEABLE_REQUESTS.include?(name)
       end
-  
+
       def build_request(name, options, &block)
 
         # we dont want to pass the async option to the configure block
         opts = options.dup
         opts.delete(:async)
-  
+
         http_request = new_request
         http_request.access_key_id = credential_provider.access_key_id
-  
+
         # configure the http request
         http_request.service_ruby_name = service_ruby_name
         http_request.default_read_timeout = http_read_timeout
@@ -445,7 +444,7 @@ module AWS
         http_request.ssl_verify_peer = config.ssl_verify_peer?
         http_request.ssl_ca_file = config.ssl_ca_file if config.ssl_ca_file
         http_request.ssl_ca_path = config.ssl_ca_path if config.ssl_ca_path
-  
+
         send("configure_#{name}_request", http_request, opts, &block)
 
         http_request.headers["user-agent"] = user_agent_string
@@ -454,7 +453,7 @@ module AWS
         http_request
 
       end
-  
+
       def user_agent_string
         engine = (RUBY_ENGINE rescue nil or "ruby")
         user_agent = "%s aws-sdk-ruby/#{VERSION} %s/%s %s" %
@@ -465,7 +464,7 @@ module AWS
         end
         user_agent
       end
-  
+
       # Adds a single method to the current client class.  This method
       # yields a request method builder that allows you to specify how:
       #
@@ -476,24 +475,24 @@ module AWS
       def self.add_client_request_method method_name, options = {}, &block
 
         self.operations << method_name
-  
+
         ClientRequestMethodBuilder.new(self, method_name, &block)
-  
+
         module_eval <<-END
           def #{method_name}(*args, &block)
             options = args.first ? args.first : {}
             client_request(#{method_name.inspect}, options, &block)
           end
         END
-  
+
       end
 
       # Parses the service's API configuration yaml file.  This file has
       # configuration that drives the request and response DSLs.
       # @return [Hash]
       def self.api_config
-        config_file = 
-          File.dirname(File.dirname(__FILE__)) + 
+        config_file =
+          File.dirname(File.dirname(__FILE__)) +
           "/api_config/#{service_name}-#{self::API_VERSION}.yml"
         YAML.load(File.read(config_file))
       end
@@ -503,10 +502,10 @@ module AWS
       def self.operations
         @operations ||= []
       end
-  
+
       # @private
       class ClientRequestMethodBuilder
-  
+
         def initialize client_class, method_name, &block
           @client_class = client_class
           @method_name = method_name
@@ -515,7 +514,7 @@ module AWS
           simulate_response {|response|}
           instance_eval(&block)
         end
-  
+
         def configure_request options = {}, &block
           name = "configure_#{@method_name}_request"
           MetaUtils.class_extend_method(@client_class, name, &block)
@@ -529,19 +528,19 @@ module AWS
             @client_class.send(:include, m)
           end
         end
-  
+
         def process_response &block
           name = "process_#{@method_name}_response"
           MetaUtils.class_extend_method(@client_class, name, &block)
         end
-  
+
         def simulate_response &block
           name = "simulate_#{@method_name}_response"
           MetaUtils.class_extend_method(@client_class, name, &block)
         end
-  
+
       end
-  
+
     end
   end
 end

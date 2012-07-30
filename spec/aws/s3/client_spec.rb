@@ -28,9 +28,9 @@ module AWS
       def should_add_param_as opt_name, param_name
         param = nil
         client.with_http_handler do |req, resp|
-          param = req.get_param(param_name).value
-        end.send(method, opts.merge(opt_name => 'value'))
-        param.should == 'value'
+          param = req.querystring.match(/#{param_name}=(\w+)\b/)[1]
+        end.send(method, opts.merge(opt_name => 'VALUE'))
+        param.should == 'VALUE'
       end
 
       let(:test_credentials) do
@@ -132,20 +132,20 @@ module AWS
       shared_examples_for "accepts version id" do
 
         it 'adds no param wheren version_id is nil' do
+          querystring = false
           opts.delete(:version_id)
-          lambda {
-            client.with_http_handler do |req, resp|
-              param = req.get_param('versionId').value
-            end.send(method, opts)
-          }.should raise_error(/undefined param/)
+          client.with_http_handler do |req, resp|
+            querystring = req.querystring
+          end.send(method, opts)
+          querystring.should == nil
         end
 
         it 'adds a params when version_id is passed' do
-          param = nil
+          version_id = nil
           client.with_http_handler do |req, resp|
-            param = req.get_param('versionId').value
-          end.send(method, opts.merge(:version_id => 'foo-version'))
-          param.should == 'foo-version'
+            version_id = req.querystring.match(/versionId=(\w+)\b/)[1]
+          end.send(method, opts.merge(:version_id => 'VERSION'))
+          version_id.should == 'VERSION'
         end
 
       end

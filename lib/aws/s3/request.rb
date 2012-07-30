@@ -60,15 +60,20 @@ module AWS
         end
       end
 
-      def path
+      def uri
+
         parts = []
         parts << bucket if bucket and path_style?
         parts << escape_path(key) if key
-        "/#{parts.join('/')}"
-      end
 
-      def querystring
-        url_encoded_params
+        path = '/' + parts.join('/')
+        querystring = url_encoded_params
+
+        uri = ''
+        uri << path
+        uri << "?#{querystring}" if querystring
+        uri
+
       end
 
       # @param [String, IO] body The http request body.  This can be a string or

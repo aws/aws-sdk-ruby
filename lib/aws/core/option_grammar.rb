@@ -211,8 +211,17 @@ module AWS
             def apply(option, member_descriptors)
               super(option)
               member_option = option.member_option if option.respond_to?(:member_option)
+
+              # ignoring member name descriptors for lists, only useful for rest
+              descriptors = []
+              member_descriptors.each do |descriptor|
+                unless descriptor.is_a?(Hash) and descriptor[:member_name]
+                  descriptors << descriptor
+                end
+              end
+
               member_option ||= ListMember.new
-              member_option = member_option.extend_with_config(*member_descriptors)
+              member_option = member_option.extend_with_config(*descriptors)
               MetaUtils.extend_method(option, :member_option) { member_option }
             end
   

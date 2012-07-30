@@ -73,34 +73,18 @@ module AWS
   
         def canonical_request
           parts = []
-          parts << action_name
-          parts << canonical_uri
-          parts << canonical_querystring
+          parts << http_method
+          parts << path
+          parts << querystring
           parts << canonical_headers + "\n"
           parts << signed_headers
-          parts << hex16(hash(payload))
+          parts << hex16(hash(body || ''))
           parts.join("\n")
         end
   
         def service
           # this method is implemented in the request class for each service
           raise NotImplementedError
-        end
-  
-        def action_name
-          http_method.to_s.upcase
-        end
-  
-        def canonical_uri
-          path
-        end
-  
-        def payload
-          body || ''
-        end
-  
-        def canonical_querystring
-          http_method.to_s.upcase == 'GET' ? url_encoded_params : ''
         end
   
         def signed_headers
@@ -112,8 +96,7 @@ module AWS
         def canonical_headers
           headers = []
           self.headers.each_pair do |k,v|
-            header = [k.to_s.downcase, v]
-            headers << header unless header.first == 'authorization'
+            headers << [k,v] unless k == 'authorization'
           end
           headers = headers.sort_by(&:first)
           headers.map{|k,v| "#{k}:#{canonical_header_values(v)}" }.join("\n")

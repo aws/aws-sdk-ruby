@@ -16,10 +16,6 @@ module AWS
     module Signature
       module Version2
 
-        def self.included base
-          base.send(:include, Signer)
-        end
-
         def add_authorization! credentials
           add_param('AWSAccessKeyId', credentials.access_key_id)
           if token = credentials.session_token
@@ -27,14 +23,18 @@ module AWS
           end
           add_param('SignatureVersion', '2')
           add_param('SignatureMethod', 'HmacSHA256')
-          add_param('Signature', sign(credentials.secret_access_key, string_to_sign))
+          add_param('Signature', signature(credentials))
         end
 
         protected
 
+        def signature credentials
+          Signer.sign(credentials.secret_access_key, string_to_sign)
+        end
+
         def string_to_sign
 
-          host = 
+          host =
             case port
             when 80, 443 then self.host
             else "#{self.host}:#{port}"
@@ -42,7 +42,7 @@ module AWS
 
           [
             http_method,
-            host,
+            host.to_s.downcase,
             path,
             params.sort.collect { |p| p.encoded }.join('&'),
           ].join("\n")

@@ -127,9 +127,8 @@ module AWS
 
         def validate_config_method(method)
           allow_methods = %w(
-            rename attribute_name boolean integer long float list force
-            ignore collect_values symbol_value timestamp map_entry map
-            blob string
+            rename attribute_name boolean integer long float list force string
+            ignore collect_values symbol_value timestamp map_entry map blob
           )
           unless allow_methods.include?(method.to_s)
             raise "#{method} cannot be used in configuration"
@@ -285,6 +284,12 @@ module AWS
           other.is_a?(Grammar) and self.rules == other.rules
         end
         alias_method :==, :eql?
+
+        def http_trait *args; end
+        alias_method :http_header, :http_trait
+        alias_method :http_uri_label, :http_trait
+        alias_method :http_payload, :http_trait
+        alias_method :http_status, :http_trait
 
         protected
         def context_for_child child_element_name

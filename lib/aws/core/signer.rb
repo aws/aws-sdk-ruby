@@ -15,7 +15,7 @@ require 'base64'
 
 module AWS
   module Core
-    
+
     # This module provides a {#sign} method that accepts a secret
     # and a string to sign.
     module Signer

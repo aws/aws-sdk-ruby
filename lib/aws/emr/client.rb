@@ -17,7 +17,7 @@ module AWS
 
       API_VERSION = '2009-03-31'
 
-      extend Core::Client::QueryXML
+      extend Core::QueryClient
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -44,8 +44,8 @@ module AWS
       #   * +:job_flow_id+ - *required* - (String) Job flow in which to add the
       #     instance groups.
       # @return [Core::Response]
-      #   Returns a reponse object whos #data method returns a hash
-      #   the following structure:
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
       #   * +:instance_group_ids+ - (Array<String>)
       define_client_method :add_instance_groups, 'AddInstanceGroups'
@@ -90,8 +90,8 @@ module AWS
       #   * +:job_flow_states+ - (Array<String>) Return only job flows whose
       #     state is contained in this list.
       # @return [Core::Response]
-      #   Returns a reponse object whos #data method returns a hash
-      #   the following structure:
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
       #   * +:job_flows+ - (Array<Hash>)
       #     * +:job_flow_id+ - (String)
       #     * +:name+ - (String)
@@ -275,8 +275,8 @@ module AWS
       #     value is "karmasphere-enterprise-utility", which tags the job flow
       #     for management by Karmasphere.
       # @return [Core::Response]
-      #   Returns a reponse object whos #data method returns a hash
-      #   the following structure:
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
       define_client_method :run_job_flow, 'RunJobFlow'
 

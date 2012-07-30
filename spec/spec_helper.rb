@@ -16,6 +16,12 @@ $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 require 'rspec'
 require 'aws'
 
+RSpec.configure do |c|
+  c.filter_run_excluding :ruby => lambda {|version|
+    !(RUBY_VERSION.to_s =~ /^#{version.to_s}/)
+  }
+end
+
 # require all _examples.rb files in spec/shared/
 Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file

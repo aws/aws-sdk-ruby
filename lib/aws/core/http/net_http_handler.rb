@@ -16,7 +16,7 @@ require 'net/http/connection_pool'
 module AWS
   module Core
     module Http
-  
+
       # = NetHttpHandler
       #
       # This is the default HTTP handler for the aws-sdk gem.  It uses
@@ -32,9 +32,9 @@ module AWS
 
         # @return [Net::HTTP::ConnectionPool]
         attr_reader :pool
-  
+
         # Given a populated request object and an empty response object,
-        # this method will make the request and them populate the 
+        # this method will make the request and them populate the
         # response.
         # @param [Request] request
         # @param [Response] response

@@ -69,20 +69,6 @@ module AWS::Core
 
       end
 
-      context '#path' do
-
-        it 'defaults to /' do
-          Request.new.path.should == '/'
-        end
-
-        it 'can be set directly' do
-          req = Request.new
-          req.path = '/foo'
-          req.path.should == '/foo'
-        end
-
-      end
-
       context '#headers' do
 
         it 'defaults headers to an empty hash' do
@@ -91,16 +77,86 @@ module AWS::Core
 
       end
 
+      context '#port' do
+
+        it 'defaults to 443' do
+          Request.new.port.should == 443
+        end
+
+        it 'defaults to 80 when ssl is disabled' do
+          r = Request.new
+          r.use_ssl = false
+          r.port.should == 80
+        end
+
+        it 'can be manually set' do
+          r = Request.new
+          r.port = 8080
+          r.port.should == 8080
+        end
+
+        it 'manual port value overrides non-http value' do
+          r = Request.new
+          r.use_ssl = false
+          r.port.should == 80
+          r.port = 4000
+          r.port.should == 4000
+        end
+        
+      end
+
       context '#uri' do
 
-        it 'is /' do
+        it 'defaults to /' do
           Request.new.uri.should == '/'
         end
 
-        it 'can not be changed' do
+        it 'can be changed' do
+          req = Request.new
+          req.uri = '/abc?mno=xyz'
+          req.uri.should == '/abc?mno=xyz'
+        end
+
+      end
+
+      context '#path' do
+        
+        it 'defaults to /' do
+          Request.new.path.should == '/'
+        end
+        
+        it 'is a read-only attribute' do
+          r = Request.new
           lambda {
-            Request.new.uri = 'foo'
+            r.path = '/abc'
           }.should raise_error(NoMethodError)
+        end
+        
+        it 'is mutable via #url=' do
+          r = Request.new
+          r.uri = '/abc?mno=xyz'
+          r.path.should == '/abc'
+        end
+
+      end
+
+      context '#querystring' do
+        
+        it 'defaults to nil' do
+          Request.new.querystring.should == nil
+        end
+        
+        it 'is a read-only attribute' do
+          r = Request.new
+          lambda {
+            r.querystring = 'foo=bar'
+          }.should raise_error(NoMethodError)
+        end
+        
+        it 'is mutable via #url=' do
+          r = Request.new
+          r.uri = '/abc?mno=xyz&123=456'
+          r.querystring.should == 'mno=xyz&123=456'
         end
 
       end
@@ -150,9 +206,16 @@ module AWS::Core
         it 'defaults to nil' do
           Request.new.body.should be_nil
         end
-       
-        it 'contains the url_encoded_params' do
+
+        it 'can be set directly' do
           r = Request.new
+          r.body = 'abc'
+          r.body.should == 'abc'
+        end
+       
+        it 'defaults to url encoded params when not provided' do
+          r = Request.new
+          r.body.should == nil
           r.add_param('foo', 'bar')
           r.body.should == r.url_encoded_params 
           r.body.should == 'foo=bar'
@@ -198,17 +261,6 @@ module AWS::Core
           req.params.length.should == 2
         end
          
-      end
-
-      context '#get_param' do
-        
-        it 'should raise an error for non-existant params' do
-          req = Request.new
-          lambda {
-            req.get_param('foo')
-          }.should raise_error(/undefined param/)
-        end
-
       end
 
     end

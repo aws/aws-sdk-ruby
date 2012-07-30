@@ -714,7 +714,7 @@ module AWS
       protected
       def set_attribute(name, value)
         client.set_queue_attributes({
-          :queue_url => url, 
+          :queue_url => url,
           :attributes => { name => value },
         })
       end

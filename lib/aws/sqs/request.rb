@@ -27,6 +27,10 @@ module AWS
         full_url.host
       end
 
+      def uri
+        path
+      end
+
       private
 
       def full_url

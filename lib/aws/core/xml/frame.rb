@@ -172,14 +172,14 @@ module AWS
             rules[:type] == :boolean ? false : nil
           else
             case rules[:type]
-            when nil       then @text
-            when :datetime then datetime_like_value(DateTime, :civil)
-            when :time     then datetime_like_value(Time, :utc)
-            when :integer  then @text.to_i
-            when :float    then @text.to_f
-            when :boolean  then @text == 'true'
-            when :blob     then Base64.decode64(@text)
-            when :symbol   then Core::Inflection.ruby_name(@text).to_sym
+            when nil, :string then @text
+            when :datetime    then datetime_like_value(DateTime, :civil)
+            when :time        then datetime_like_value(Time, :utc)
+            when :integer     then @text.to_i
+            when :float       then @text.to_f
+            when :boolean     then @text == 'true'
+            when :blob        then Base64.decode64(@text)
+            when :symbol      then Core::Inflection.ruby_name(@text).to_sym
             else raise "unhandled type"
             end
           end
