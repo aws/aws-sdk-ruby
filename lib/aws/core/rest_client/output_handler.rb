@@ -36,6 +36,10 @@ module AWS
           @parser.parse(response.http_response.body)
         end
 
+        def simulate
+          @parser.simulate
+        end
+
       end
 
     end

@@ -60,12 +60,26 @@ module AWS
   class Route53
 
     AWS.register_autoloads(self, 'aws/route_53') do
-      autoload :Client,  'client'
-      autoload :Errors,  'errors'
+      autoload :ChangeRequest, 'change_batch'
+      autoload :ChangeBatch, 'change_batch'
+      autoload :ChangeInfo, 'change_info'
+      autoload :Client, 'client'
+      autoload :CreateRequest, 'change_batch'
+      autoload :DeleteRequest, 'change_batch'
+      autoload :Errors, 'errors'
+      autoload :HostedZone, 'hosted_zone'
+      autoload :HostedZoneCollection, 'hosted_zone_collection'
       autoload :Request, 'request'
+      autoload :ResourceRecordSet, 'resource_record_set'
+      autoload :ResourceRecordSetCollection, 'resource_record_set_collection'
     end
 
     include Core::ServiceInterface
+
+    # @return [HostedZoneCollection]
+    def hosted_zones
+      HostedZoneCollection.new(:config => config)
+    end
 
   end
 end
