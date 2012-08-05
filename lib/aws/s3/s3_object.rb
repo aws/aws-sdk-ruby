@@ -471,7 +471,7 @@ module AWS
       # If you need to move an object to a different bucket, pass
       # +:bucket+ or +:bucket_name+.
       #
-      #   obj = s3.buckets['old-bucket'].objects['old-key]
+      #   obj = s3.buckets['old-bucket'].objects['old-key']
       #   obj.move_to('new-key', :bucket_name => 'new_bucket')
       # 
       # If the copy succeeds, but the then the delete fails, an error
