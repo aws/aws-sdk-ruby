@@ -29,6 +29,21 @@
     Domain:
     - :string
   :outputs: {}
+- :name: AssignPrivateIpAddresses
+  :method: :assign_private_ip_addresses
+  :inputs:
+    NetworkInterfaceId:
+    - :string
+    - :required
+    PrivateIpAddress:
+    - :list:
+      - :string
+    - :rename: privateIpAddresses
+    SecondaryPrivateIpAddressCount:
+    - :integer
+    AllowReassignment:
+    - :boolean
+  :outputs: {}
 - :name: AssociateAddress
   :method: :associate_address
   :inputs:
@@ -40,6 +55,10 @@
     - :string
     NetworkInterfaceId:
     - :string
+    PrivateIpAddress:
+    - :string
+    AllowReassociation:
+    - :boolean
   :outputs: {}
 - :name: AssociateDhcpOptions
   :method: :associate_dhcp_options
@@ -378,6 +397,30 @@
     - :string
     NoReboot:
     - :boolean
+    BlockDeviceMapping:
+    - :list:
+      - :structure:
+          VirtualName:
+          - :string
+          - :rename: VirtualName
+          DeviceName:
+          - :string
+          - :rename: DeviceName
+          Ebs:
+          - :structure:
+              SnapshotId:
+              - :string
+              VolumeSize:
+              - :integer
+              DeleteOnTermination:
+              - :boolean
+              VolumeType:
+              - :string
+              Iops:
+              - :integer
+          NoDevice:
+          - :string
+    - :rename: blockDeviceMappings
   :outputs: {}
 - :name: CreateInstanceExportTask
   :method: :create_instance_export_task
@@ -389,7 +432,6 @@
     - :required
     TargetEnvironment:
     - :string
-    - :required
     ExportToS3:
     - :structure:
         DiskImageFormat:
@@ -398,9 +440,9 @@
         - :string
         S3Bucket:
         - :string
-        - :required
         S3Prefix:
         - :string
+    - :rename: exportToS3Task
   :outputs: {}
 - :name: CreateInternetGateway
   :method: :create_internet_gateway
@@ -524,6 +566,16 @@
     - :list:
       - :string
     - :rename: groups
+    PrivateIpAddresses:
+    - :list:
+      - :structure:
+          PrivateIpAddress:
+          - :string
+          - :required
+          Primary:
+          - :boolean
+    SecondaryPrivateIpAddressCount:
+    - :integer
   :outputs:
     :children:
       networkInterface:
@@ -552,6 +604,15 @@
               item:
                 :rename: :tag_set
                 :list: true
+          privateIpAddressesSet:
+            :ignore: true
+            :children:
+              item:
+                :rename: :private_ip_addresses_set
+                :list: true
+                :children:
+                  primary:
+                    :type: :boolean
 - :name: CreatePlacementGroup
   :method: :create_placement_group
   :inputs:
@@ -702,6 +763,10 @@
     AvailabilityZone:
     - :string
     - :required
+    VolumeType:
+    - :string
+    Iops:
+    - :integer
   :outputs:
     :children:
       size:
@@ -725,6 +790,8 @@
           item:
             :rename: :tag_set
             :list: true
+      iops:
+        :type: :integer
 - :name: CreateVpc
   :method: :create_vpc
   :inputs:
@@ -1256,6 +1323,8 @@
                     :type: :integer
                   deleteOnTermination:
                     :type: :boolean
+                  iops:
+                    :type: :integer
 - :name: DescribeImages
   :method: :describe_images
   :inputs:
@@ -1311,6 +1380,8 @@
                             :type: :integer
                           deleteOnTermination:
                             :type: :boolean
+                          iops:
+                            :type: :integer
               tagSet:
                 :ignore: true
                 :children:
@@ -1354,6 +1425,10 @@
           item:
             :rename: :product_codes
             :list: true
+      ebsOptimized:
+        :children:
+          value:
+            :type: :boolean
 - :name: DescribeInstanceStatus
   :method: :describe_instance_status
   :inputs:
@@ -1375,6 +1450,8 @@
     - :string
     MaxResults:
     - :integer
+    IncludeAllInstances:
+    - :boolean
   :outputs:
     :children:
       instanceStatusSet:
@@ -1407,6 +1484,9 @@
                       item:
                         :rename: :details
                         :list: true
+                        :children:
+                          impairedSince:
+                            :type: :time
               instanceStatus:
                 :children:
                   details:
@@ -1415,6 +1495,9 @@
                       item:
                         :rename: :details
                         :list: true
+                        :children:
+                          impairedSince:
+                            :type: :time
 - :name: DescribeInstances
   :method: :describe_instances
   :inputs:
@@ -1518,6 +1601,8 @@
                                     :type: :time
                                   deleteOnTermination:
                                     :type: :boolean
+                      ebsOptimized:
+                        :type: :boolean
                     :index:
                       :key: :instance_id
                       :name: :instance_index
@@ -1785,6 +1870,15 @@
                   item:
                     :rename: :tag_set
                     :list: true
+              privateIpAddressesSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :private_ip_addresses_set
+                    :list: true
+                    :children:
+                      primary:
+                        :type: :boolean
         :rename: :set
 - :name: DescribePlacementGroups
   :method: :describe_placement_groups
@@ -2199,6 +2293,8 @@
                                 :type: :integer
                               deleteOnTermination:
                                 :type: :boolean
+                              iops:
+                                :type: :integer
                   monitoringEnabled:
                     :type: :boolean
                   networkInterfaceSet:
@@ -2218,6 +2314,19 @@
                                 :list: true
                           deleteOnTermination:
                             :type: :boolean
+                          privateIpAddressesSet:
+                            :ignore: true
+                            :children:
+                              item:
+                                :rename: :private_ip_addresses_set
+                                :list: true
+                                :children:
+                                  primary:
+                                    :type: :boolean
+                          secondaryPrivateIpAddressCount:
+                            :type: :integer
+                  ebsOptimized:
+                    :type: :boolean
               createTime:
                 :type: :time
               tagSet:
@@ -2451,6 +2560,8 @@
                   item:
                     :rename: :tag_set
                     :list: true
+              iops:
+                :type: :integer
             :index:
               :key: :volume_id
               :name: :volume_index
@@ -2705,13 +2816,15 @@
                   - :integer
                   DeleteOnTermination:
                   - :boolean
+                  VolumeType:
+                  - :string
+                  Iops:
+                  - :integer
               NoDevice:
               - :string
         - :rename: blockDeviceMappings
         Monitoring:
-        - :structure:
-            Enabled:
-            - :boolean
+        - :boolean
         SubnetId:
         - :string
         DisableApiTermination:
@@ -2967,6 +3080,10 @@
     - :list:
       - :string
     - :rename: groups
+    EbsOptimized:
+    - :structure:
+        Value:
+        - :boolean
   :outputs: {}
 - :name: ModifyNetworkInterfaceAttribute
   :method: :modify_network_interface_attribute
@@ -3038,10 +3155,6 @@
     VolumeId:
     - :string
     - :required
-    Attribute:
-    - :string
-    OperationType:
-    - :string
     AutoEnableIO:
     - :boolean
   :outputs: {}
@@ -3114,6 +3227,10 @@
               - :integer
               DeleteOnTermination:
               - :boolean
+              VolumeType:
+              - :string
+              Iops:
+              - :integer
           NoDevice:
           - :string
     - :rename: blockDeviceMappings
@@ -3283,6 +3400,10 @@
                   - :integer
                   DeleteOnTermination:
                   - :boolean
+                  VolumeType:
+                  - :string
+                  Iops:
+                  - :integer
               NoDevice:
               - :string
         - :rename: blockDeviceMappings
@@ -3309,6 +3430,17 @@
               - :rename: groups
               DeleteOnTermination:
               - :boolean
+              PrivateIpAddressesSet:
+              - :list:
+                - :structure:
+                    PrivateIpAddress:
+                    - :string
+                    - :required
+                    Primary:
+                    - :boolean
+              - :rename: privateIpAddresses
+              SecondaryPrivateIpAddressCount:
+              - :integer
         - :rename: networkInterfaces
         IamInstanceProfile:
         - :structure:
@@ -3316,6 +3448,8 @@
             - :string
             Name:
             - :string
+        EbsOptimized:
+        - :boolean
   :outputs:
     :children:
       spotInstanceRequestSet:
@@ -3350,6 +3484,8 @@
                                 :type: :integer
                               deleteOnTermination:
                                 :type: :boolean
+                              iops:
+                                :type: :integer
                   monitoringEnabled:
                     :type: :boolean
                   networkInterfaceSet:
@@ -3369,6 +3505,19 @@
                                 :list: true
                           deleteOnTermination:
                             :type: :boolean
+                          privateIpAddressesSet:
+                            :ignore: true
+                            :children:
+                              item:
+                                :rename: :private_ip_addresses_set
+                                :list: true
+                                :children:
+                                  primary:
+                                    :type: :boolean
+                          secondaryPrivateIpAddressCount:
+                            :type: :integer
+                  ebsOptimized:
+                    :type: :boolean
               createTime:
                 :type: :time
               tagSet:
@@ -3577,6 +3726,10 @@
               - :integer
               DeleteOnTermination:
               - :boolean
+              VolumeType:
+              - :string
+              Iops:
+              - :integer
           NoDevice:
           - :string
     - :rename: BlockDeviceMappings
@@ -3620,6 +3773,17 @@
           - :rename: groups
           DeleteOnTermination:
           - :boolean
+          PrivateIpAddressesSet:
+          - :list:
+            - :structure:
+                PrivateIpAddress:
+                - :string
+                - :required
+                Primary:
+                - :boolean
+          - :rename: privateIpAddresses
+          SecondaryPrivateIpAddressCount:
+          - :integer
     - :rename: networkInterfaces
     IamInstanceProfile:
     - :structure:
@@ -3627,6 +3791,8 @@
         - :string
         Name:
         - :string
+    EbsOptimized:
+    - :boolean
   :outputs:
     :children:
       groupSet:
@@ -3706,6 +3872,8 @@
                             :type: :time
                           deleteOnTermination:
                             :type: :boolean
+              ebsOptimized:
+                :type: :boolean
 - :name: StartInstances
   :method: :start_instances
   :inputs:
@@ -3714,6 +3882,8 @@
       - :string
     - :required
     - :rename: InstanceIds
+    AdditionalInfo:
+    - :string
   :outputs:
     :children:
       instancesSet:
@@ -3783,6 +3953,18 @@
                 :children:
                   code:
                     :type: :integer
+- :name: UnassignPrivateIpAddresses
+  :method: :unassign_private_ip_addresses
+  :inputs:
+    NetworkInterfaceId:
+    - :string
+    - :required
+    PrivateIpAddress:
+    - :list:
+      - :string
+    - :required
+    - :rename: privateIpAddresses
+  :outputs: {}
 - :name: UnmonitorInstances
   :method: :unmonitor_instances
   :inputs:

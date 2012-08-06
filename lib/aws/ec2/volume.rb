@@ -48,6 +48,8 @@ module AWS
     # @attr_reader [Time] create_time The time at which the volume
     #   was created.
     #
+    # @attr_reader [String] iops
+    #
     class Volume < Resource
 
       include TaggedItem
@@ -75,6 +77,8 @@ module AWS
       attribute :create_time, :static => true
 
       attribute :attachment_set
+
+      attribute :iops, :static => true
 
       populates_from(:create_volume) do |resp|
         resp if resp.volume_id == id

@@ -46,6 +46,7 @@ module AWS
           before(:each) do
             resp.data[:volume_id] = 'vol-123'
             resp.data[:create_time] = now
+            resp.data[:iops] = 'iops'
             client.stub(:create_volume).and_return(resp)
           end
 
@@ -65,6 +66,7 @@ module AWS
             volume.should be_a(Volume)
             volume.id.should == 'vol-123'
             volume.create_time.should == now
+            volume.iops.should == 'iops'
             volume.config.should == config
           end
 

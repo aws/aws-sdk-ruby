@@ -32,8 +32,18 @@ module AWS
         # hash of response data.
         # @param [Response] response
         # @return [Hash]
-        def extract_data response 
-          @parser.parse(response.http_response.body)
+        def extract_data response
+
+          # parse the response XML body
+          data = @parser.parse(response.http_response.body)
+
+          # extract headers and insert into response
+          (@http[:response_headers] || {}).each_pair do |name,header_name|
+            data[name] = response.http_response.headers[header_name]
+          end
+
+          data
+
         end
 
       end

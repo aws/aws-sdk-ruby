@@ -13,6 +13,48 @@
 
 ---
 :operations:
+- :name: ApplySecurityGroupsToLoadBalancer
+  :method: :apply_security_groups_to_load_balancer
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+    SecurityGroups:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      ApplySecurityGroupsToLoadBalancerResult:
+        :ignore: true
+        :children:
+          SecurityGroups:
+            :ignore: true
+            :children:
+              member:
+                :rename: :security_groups
+                :list: true
+- :name: AttachLoadBalancerToSubnets
+  :method: :attach_load_balancer_to_subnets
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+    Subnets:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      AttachLoadBalancerToSubnetsResult:
+        :ignore: true
+        :children:
+          Subnets:
+            :ignore: true
+            :children:
+              member:
+                :rename: :subnets
+                :list: true
 - :name: ConfigureHealthCheck
   :method: :configure_health_check
   :inputs:
@@ -109,7 +151,14 @@
     AvailabilityZones:
     - :membered_list:
       - :string
-    - :required
+    Subnets:
+    - :membered_list:
+      - :string
+    SecurityGroups:
+    - :membered_list:
+      - :string
+    Scheme:
+    - :string
   :outputs:
     :children:
       CreateLoadBalancerResult:
@@ -302,6 +351,8 @@
     LoadBalancerNames:
     - :membered_list:
       - :string
+    Marker:
+    - :string
   :outputs:
     :children:
       DescribeLoadBalancersResult:
@@ -377,6 +428,12 @@
                       member:
                         :rename: :availability_zones
                         :list: true
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :subnets
+                        :list: true
                   Instances:
                     :ignore: true
                     :children:
@@ -393,8 +450,35 @@
                         :type: :integer
                       HealthyThreshold:
                         :type: :integer
+                  SecurityGroups:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :security_groups
+                        :list: true
                   CreatedTime:
                     :type: :time
+- :name: DetachLoadBalancerFromSubnets
+  :method: :detach_load_balancer_from_subnets
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+    Subnets:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      DetachLoadBalancerFromSubnetsResult:
+        :ignore: true
+        :children:
+          Subnets:
+            :ignore: true
+            :children:
+              member:
+                :rename: :subnets
+                :list: true
 - :name: DisableAvailabilityZonesForLoadBalancer
   :method: :disable_availability_zones_for_load_balancer
   :inputs:

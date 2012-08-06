@@ -32,6 +32,10 @@ module SecretScanner
     /WorkflowExecutionTimedOutEventAttributes/,
     /WorkflowExecutionCanceledEventAttributes/,
     /workflowExecutionTimedOutEventAttributes/,
+    /CreateCloudFrontOriginAccessIdentity2012/,
+    /DeleteCloudFrontOriginAccessIdentity2012/,
+    /ListCloudFrontOriginAccessIdentities2012/,
+    /UpdateCloudFrontOriginAccessIdentity2012/,
   ]
 
   WHITELIST_FILES = [

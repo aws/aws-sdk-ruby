@@ -99,8 +99,8 @@ XML
           handler.should_receive(:handle) do |req,resp|
             resp.status = 200
             resp.body = <<-XML.strip
-              <?xml version=\"1.0\"?>
-              <ChangeResourceRecordSetsResponse xmlns=\"https://route53.amazonaws.com/doc/2012-02-29/\">
+              <?xml version="1.0"?>
+              <ChangeResourceRecordSetsResponse #{namespace}>
                 <ChangeInfo>
                   <Id>/change/change-id</Id>
                   <Status>PENDING</Status>
@@ -166,7 +166,7 @@ XML
         it 'parses the XML response and headers' do
           handler.should_receive(:handle) do |req,resp|
             resp.status = 201
-            resp.headers[:location] = 'LOC-HEADER'
+            resp.headers['Location'] = 'location-header-value'
             resp.body = <<-XML.strip
               <?xml version="1.0"?>
               <CreateHostedZoneResponse #{namespace}>
@@ -218,6 +218,7 @@ XML
                 "ns-1418.awsdns-49.org"
               ],
             },
+            :location => 'location-header-value',
           })
         end
 
@@ -381,7 +382,7 @@ XML
           handler.should_receive(:handle) do |req,resp|
             resp.status = 200
             resp.body = <<-XML.strip
-              <?xml version=\"1.0\"?>
+              <?xml version="1.0"?>
               <ListHostedZonesResponse #{namespace}>
                 <HostedZones>
                   <HostedZone>
@@ -455,7 +456,7 @@ XML
           handler.should_receive(:handle) do |req,resp|
             resp.status = 200
             resp.body = <<-XML.strip
-              <?xml version=\"1.0\"?>\n
+              <?xml version="1.0"?>\n
               <ListResourceRecordSetsResponse #{namespace}>
                 <ResourceRecordSets>
                   <ResourceRecordSet>

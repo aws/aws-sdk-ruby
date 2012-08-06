@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::Client
 
-      API_VERSION = '2012-06-01'
+      API_VERSION = '2012-07-20'
 
       extend Core::QueryClient
 
@@ -78,27 +78,31 @@ module AWS
       #   * +:domain+ - (String) Set to vpc to allocate the address to your
       #     VPC. By default, will allocate to EC2.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:public_ip+ - (String)
-      #   * +:domain+ - (String)
-      #   * +:allocation_id+ - (String)
       define_client_method :allocate_address, 'AllocateAddress'
+
+      # Calls the AssignPrivateIpAddresses API operation.
+      # @method assign_private_ip_addresses(options = {})
+      # @param [Hash] options
+      #   * +:network_interface_id+ - *required* - (String)
+      #   * +:private_ip_addresses+ - (Array<String>)
+      #   * +:secondary_private_ip_address_count+ - (Integer)
+      #   * +:allow_reassignment+ - (Boolean)
+      # @return [Core::Response]
+      define_client_method :assign_private_ip_addresses, 'AssignPrivateIpAddresses'
 
       # Calls the AssociateAddress API operation.
       # @method associate_address(options = {})
       # @param [Hash] options
-      #   * +:instance_id+ - *required* - (String) The instance to associate
-      #     with the IP address.
+      #   * +:instance_id+ - (String) The instance to associate with the IP
+      #     address.
       #   * +:public_ip+ - (String) IP address that you are assigning to the
       #     instance.
       #   * +:allocation_id+ - (String) The allocation ID that AWS returned
       #     when you allocated the elastic IP address for use with Amazon VPC.
       #   * +:network_interface_id+ - (String)
+      #   * +:private_ip_address+ - (String)
+      #   * +:allow_reassociation+ - (Boolean)
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:association_id+ - (String)
       define_client_method :associate_address, 'AssociateAddress'
 
       # Calls the AssociateDhcpOptions API operation.
@@ -119,9 +123,6 @@ module AWS
       #   * +:route_table_id+ - *required* - (String) The ID of the route
       #     table.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:association_id+ - (String)
       define_client_method :associate_route_table, 'AssociateRouteTable'
 
       # Calls the AttachInternetGateway API operation.
@@ -140,9 +141,6 @@ module AWS
       #   * +:instance_id+ - *required* - (String)
       #   * +:device_index+ - *required* - (Integer)
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:attachment_id+ - (String)
       define_client_method :attach_network_interface, 'AttachNetworkInterface'
 
       # Calls the AttachVolume API operation.
@@ -159,10 +157,6 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:volume_id+ - (String)
-      #   * +:instance_id+ - (String)
-      #   * +:device+ - (String)
-      #   * +:status+ - (String)
       #   * +:attach_time+ - (Time)
       #   * +:delete_on_termination+ - (Boolean)
       define_client_method :attach_volume, 'AttachVolume'
@@ -175,11 +169,6 @@ module AWS
       #   * +:vpc_id+ - *required* - (String) The ID of the VPC to attach to
       #     the VPN gateway.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:attachment+ - (Hash)
-      #     * +:vpc_id+ - (String)
-      #     * +:state+ - (String)
       define_client_method :attach_vpn_gateway, 'AttachVpnGateway'
 
       # Calls the AuthorizeSecurityGroupEgress API operation.
@@ -288,22 +277,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:bundle_instance_task+ - (Hash)
-      #     * +:instance_id+ - (String)
-      #     * +:bundle_id+ - (String)
-      #     * +:state+ - (String)
       #     * +:start_time+ - (Time)
       #     * +:update_time+ - (Time)
-      #     * +:storage+ - (Hash)
-      #       * +:s3+ - (Hash)
-      #         * +:bucket+ - (String)
-      #         * +:prefix+ - (String)
-      #         * +:aws_access_key_id+ - (String)
-      #         * +:upload_policy+ - (String)
-      #         * +:upload_policy_signature+ - (String)
-      #     * +:progress+ - (String)
-      #     * +:error+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       define_client_method :bundle_instance, 'BundleInstance'
 
       # Calls the CancelBundleTask API operation.
@@ -315,22 +290,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:bundle_instance_task+ - (Hash)
-      #     * +:instance_id+ - (String)
-      #     * +:bundle_id+ - (String)
-      #     * +:state+ - (String)
       #     * +:start_time+ - (Time)
       #     * +:update_time+ - (Time)
-      #     * +:storage+ - (Hash)
-      #       * +:s3+ - (Hash)
-      #         * +:bucket+ - (String)
-      #         * +:prefix+ - (String)
-      #         * +:aws_access_key_id+ - (String)
-      #         * +:upload_policy+ - (String)
-      #         * +:upload_policy_signature+ - (String)
-      #     * +:progress+ - (String)
-      #     * +:error+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       define_client_method :cancel_bundle_task, 'CancelBundleTask'
 
       # Calls the CancelConversionTask API operation.
@@ -356,9 +317,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:spot_instance_request_set+ - (Array<Hash>)
-      #     * +:spot_instance_request_id+ - (String)
-      #     * +:state+ - (String)
+      #   * +:spot_instance_request_set+ - (Array<>)
       define_client_method :cancel_spot_instance_requests, 'CancelSpotInstanceRequests'
 
       # Calls the ConfirmProductInstance API operation.
@@ -369,9 +328,6 @@ module AWS
       #   * +:instance_id+ - *required* - (String) The ID of the instance to
       #     confirm.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:owner_id+ - (String)
       define_client_method :confirm_product_instance, 'ConfirmProductInstance'
 
       # Calls the CreateCustomerGateway API operation.
@@ -388,14 +344,7 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:customer_gateway+ - (Hash)
-      #     * +:customer_gateway_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:type+ - (String)
-      #     * +:ip_address+ - (String)
-      #     * +:bgp_asn+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_customer_gateway, 'CreateCustomerGateway'
 
       # Calls the CreateDhcpOptions API operation.
@@ -410,13 +359,9 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:dhcp_options+ - (Hash)
-      #     * +:dhcp_options_id+ - (String)
       #     * +:dhcp_configuration_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value_set+ - (Array<String>)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #       * +:value_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_dhcp_options, 'CreateDhcpOptions'
 
       # Calls the CreateImage API operation.
@@ -434,10 +379,23 @@ module AWS
       #     to +true+ , Amazon EC2 will not shut down the instance before
       #     creating the image. When this option is used, file system integrity
       #     on the created image cannot be guaranteed.
+      #   * +:block_device_mappings+ - (Array<Hash>)
+      #     * +:virtual_name+ - (String) Specifies the virtual device name.
+      #     * +:device_name+ - (String) Specifies the device name (e.g.,
+      #       /dev/sdh).
+      #     * +:ebs+ - (Hash) Specifies parameters used to automatically setup
+      #       Amazon EBS volumes when the instance is launched.
+      #       * +:snapshot_id+ - (String) The ID of the snapshot from which the
+      #         volume will be created.
+      #       * +:volume_size+ - (Integer) The size of the volume, in
+      #         gigabytes.
+      #       * +:delete_on_termination+ - (Boolean) Specifies whether the
+      #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
+      #     * +:no_device+ - (String) Specifies the device name to suppress
+      #       during instance launch.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:image_id+ - (String)
       define_client_method :create_image, 'CreateImage'
 
       # Calls the CreateInstanceExportTask API operation.
@@ -445,29 +403,13 @@ module AWS
       # @param [Hash] options
       #   * +:description+ - (String)
       #   * +:instance_id+ - *required* - (String)
-      #   * +:target_environment+ - *required* - (String)
-      #   * +:export_to_s3+ - (Hash)
+      #   * +:target_environment+ - (String)
+      #   * +:export_to_s3_task+ - (Hash)
       #     * +:disk_image_format+ - (String)
       #     * +:container_format+ - (String)
-      #     * +:s3_bucket+ - *required* - (String)
+      #     * +:s3_bucket+ - (String)
       #     * +:s3_prefix+ - (String)
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:request_id+ - (String)
-      #   * +:export_task+ - (Hash)
-      #     * +:export_task_id+ - (String)
-      #     * +:description+ - (String)
-      #     * +:state+ - (String)
-      #     * +:status_message+ - (String)
-      #     * +:instance_export+ - (Hash)
-      #       * +:instance_id+ - (String)
-      #       * +:target_environment+ - (String)
-      #     * +:export_to_s3+ - (Hash)
-      #       * +:disk_image_format+ - (String)
-      #       * +:container_format+ - (String)
-      #       * +:s3_bucket+ - (String)
-      #       * +:s3_key+ - (String)
       define_client_method :create_instance_export_task, 'CreateInstanceExportTask'
 
       # Calls the CreateInternetGateway API operation.
@@ -477,13 +419,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:internet_gateway+ - (Hash)
-      #     * +:internet_gateway_id+ - (String)
-      #     * +:attachment_set+ - (Array<Hash>)
-      #       * +:vpc_id+ - (String)
-      #       * +:state+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:attachment_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_internet_gateway, 'CreateInternetGateway'
 
       # Calls the CreateKeyPair API operation.
@@ -492,12 +429,6 @@ module AWS
       #   * +:key_name+ - *required* - (String) The unique name for the new key
       #     pair.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:key_pair+ - (Hash)
-      #     * +:key_name+ - (String)
-      #     * +:key_fingerprint+ - (String)
-      #     * +:key_material+ - (String)
       define_client_method :create_key_pair, 'CreateKeyPair'
 
       # Calls the CreateNetworkAcl API operation.
@@ -509,28 +440,18 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:network_acl+ - (Hash)
-      #     * +:network_acl_id+ - (String)
-      #     * +:vpc_id+ - (String)
       #     * +:default+ - (Boolean)
       #     * +:entry_set+ - (Array<Hash>)
       #       * +:rule_number+ - (Integer)
-      #       * +:protocol+ - (String)
-      #       * +:rule_action+ - (String)
       #       * +:egress+ - (Boolean)
-      #       * +:cidr_block+ - (String)
       #       * +:icmp_type_code+ - (Hash)
       #         * +:type+ - (Integer)
       #         * +:code+ - (Integer)
       #       * +:port_range+ - (Hash)
       #         * +:from+ - (Integer)
       #         * +:to+ - (Integer)
-      #     * +:association_set+ - (Array<Hash>)
-      #       * +:network_acl_association_id+ - (String)
-      #       * +:network_acl_id+ - (String)
-      #       * +:subnet_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:association_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_network_acl, 'CreateNetworkAcl'
 
       # Calls the CreateNetworkAclEntry API operation.
@@ -572,42 +493,24 @@ module AWS
       #   * +:description+ - (String)
       #   * +:private_ip_address+ - (String)
       #   * +:groups+ - (Array<String>)
+      #   * +:private_ip_addresses+ - (Array<Hash>)
+      #     * +:private_ip_address+ - *required* - (String)
+      #     * +:primary+ - (Boolean)
+      #   * +:secondary_private_ip_address_count+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:network_interface+ - (Hash)
-      #     * +:network_interface_id+ - (String)
-      #     * +:subnet_id+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:availability_zone+ - (String)
-      #     * +:description+ - (String)
-      #     * +:owner_id+ - (String)
-      #     * +:requester_id+ - (String)
       #     * +:requester_managed+ - (Boolean)
-      #     * +:status+ - (String)
-      #     * +:mac_address+ - (String)
-      #     * +:private_ip_address+ - (String)
-      #     * +:private_dns_name+ - (String)
       #     * +:source_dest_check+ - (Boolean)
-      #     * +:group_set+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
+      #     * +:group_set+ - (Array<>)
       #     * +:attachment+ - (Hash)
-      #       * +:attachment_id+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:instance_owner_id+ - (String)
       #       * +:device_index+ - (Integer)
-      #       * +:status+ - (String)
       #       * +:attach_time+ - (Time)
       #       * +:delete_on_termination+ - (Boolean)
-      #     * +:association+ - (Hash)
-      #       * +:public_ip+ - (String)
-      #       * +:ip_owner_id+ - (String)
-      #       * +:allocation_id+ - (String)
-      #       * +:association_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
+      #     * +:private_ip_addresses_set+ - (Array<Hash>)
+      #       * +:primary+ - (Boolean)
       define_client_method :create_network_interface, 'CreateNetworkInterface'
 
       # Calls the CreatePlacementGroup API operation.
@@ -645,23 +548,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:route_table+ - (Hash)
-      #     * +:route_table_id+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:instance_owner_id+ - (String)
-      #       * +:network_interface_id+ - (String)
-      #       * +:state+ - (String)
+      #     * +:route_set+ - (Array<>)
       #     * +:association_set+ - (Array<Hash>)
-      #       * +:route_table_association_id+ - (String)
-      #       * +:route_table_id+ - (String)
-      #       * +:subnet_id+ - (String)
       #       * +:main+ - (Boolean)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_route_table, 'CreateRouteTable'
 
       # Calls the CreateSecurityGroup API operation.
@@ -672,9 +562,6 @@ module AWS
       #     This is informational only.
       #   * +:vpc_id+ - (String) ID of the VPC.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:group_id+ - (String)
       define_client_method :create_security_group, 'CreateSecurityGroup'
 
       # Calls the CreateSnapshot API operation.
@@ -686,18 +573,9 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:snapshot_id+ - (String)
-      #   * +:volume_id+ - (String)
-      #   * +:status+ - (String)
       #   * +:start_time+ - (Time)
-      #   * +:progress+ - (String)
-      #   * +:owner_id+ - (String)
-      #   * +:description+ - (String)
       #   * +:volume_size+ - (Integer)
-      #   * +:owner_alias+ - (String)
-      #   * +:tag_set+ - (Array<Hash>)
-      #     * +:key+ - (String)
-      #     * +:value+ - (String)
+      #   * +:tag_set+ - (Array<>)
       define_client_method :create_snapshot, 'CreateSnapshot'
 
       # Calls the CreateSpotDatafeedSubscription API operation.
@@ -708,16 +586,6 @@ module AWS
       #   * +:prefix+ - (String) The prefix that is prepended to datafeed
       #     files.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:spot_datafeed_subscription+ - (Hash)
-      #     * +:owner_id+ - (String)
-      #     * +:bucket+ - (String)
-      #     * +:prefix+ - (String)
-      #     * +:state+ - (String)
-      #     * +:fault+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       define_client_method :create_spot_datafeed_subscription, 'CreateSpotDatafeedSubscription'
 
       # Calls the CreateSubnet API operation.
@@ -733,15 +601,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:subnet+ - (Hash)
-      #     * +:subnet_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
-      #     * +:availability_zone+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_subnet, 'CreateSubnet'
 
       # Calls the CreateTags API operation.
@@ -767,25 +628,18 @@ module AWS
       #     create the new volume.
       #   * +:availability_zone+ - *required* - (String) The Availability Zone
       #     in which to create the new volume.
+      #   * +:volume_type+ - (String)
+      #   * +:iops+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:volume_id+ - (String)
       #   * +:size+ - (Integer)
-      #   * +:snapshot_id+ - (String)
-      #   * +:availability_zone+ - (String)
-      #   * +:status+ - (String)
       #   * +:create_time+ - (Time)
       #   * +:attachment_set+ - (Array<Hash>)
-      #     * +:volume_id+ - (String)
-      #     * +:instance_id+ - (String)
-      #     * +:device+ - (String)
-      #     * +:status+ - (String)
       #     * +:attach_time+ - (Time)
       #     * +:delete_on_termination+ - (Boolean)
-      #   * +:tag_set+ - (Array<Hash>)
-      #     * +:key+ - (String)
-      #     * +:value+ - (String)
+      #   * +:tag_set+ - (Array<>)
+      #   * +:iops+ - (Integer)
       define_client_method :create_volume, 'CreateVolume'
 
       # Calls the CreateVpc API operation.
@@ -800,14 +654,7 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpc+ - (Hash)
-      #     * +:vpc_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:cidr_block+ - (String)
-      #     * +:dhcp_options_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:instance_tenancy+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :create_vpc, 'CreateVpc'
 
       # Calls the CreateVpnConnection API operation.
@@ -822,20 +669,9 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpn_connection+ - (Hash)
-      #     * +:vpn_connection_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:customer_gateway_configuration+ - (String)
-      #     * +:type+ - (String)
-      #     * +:customer_gateway_id+ - (String)
-      #     * +:vpn_gateway_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       #     * +:vgw_telemetry+ - (Array<Hash>)
-      #       * +:outside_ip_address+ - (String)
-      #       * +:status+ - (String)
       #       * +:last_status_change+ - (Time)
-      #       * +:status_message+ - (String)
       #       * +:accepted_route_count+ - (Integer)
       define_client_method :create_vpn_connection, 'CreateVpnConnection'
 
@@ -850,16 +686,9 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpn_gateway+ - (Hash)
-      #     * +:vpn_gateway_id+ - (String)
-      #     * +:state+ - (String)
+      #     * +:attachments+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       #     * +:vpn_type+ - (String)
-      #     * +:availability_zone+ - (String)
-      #     * +:attachments+ - (Array<Hash>)
-      #       * +:vpc_id+ - (String)
-      #       * +:state+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
       define_client_method :create_vpn_gateway, 'CreateVpnGateway'
 
       # Calls the DeactivateLicense API operation.
@@ -1059,14 +888,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:addresses_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:public_ip+ - (String)
-      #     * +:allocation_id+ - (String)
-      #     * +:association_id+ - (String)
-      #     * +:domain+ - (String)
-      #     * +:network_interface_id+ - (String)
-      #     * +:network_interface_owner_id+ - (String)
+      #   * +:addresses_set+ - (Array<>)
       define_client_method :describe_addresses, 'DescribeAddresses'
 
       # Calls the DescribeAvailabilityZones API operation.
@@ -1085,11 +907,7 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:availability_zone_info+ - (Array<Hash>)
-      #     * +:zone_name+ - (String)
-      #     * +:zone_state+ - (String)
-      #     * +:region_name+ - (String)
-      #     * +:message_set+ - (Array<Hash>)
-      #       * +:message+ - (String)
+      #     * +:message_set+ - (Array<>)
       define_client_method :describe_availability_zones, 'DescribeAvailabilityZones'
 
       # Calls the DescribeBundleTasks API operation.
@@ -1108,22 +926,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:bundle_instance_tasks_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:bundle_id+ - (String)
-      #     * +:state+ - (String)
       #     * +:start_time+ - (Time)
       #     * +:update_time+ - (Time)
-      #     * +:storage+ - (Hash)
-      #       * +:s3+ - (Hash)
-      #         * +:bucket+ - (String)
-      #         * +:prefix+ - (String)
-      #         * +:aws_access_key_id+ - (String)
-      #         * +:upload_policy+ - (String)
-      #         * +:upload_policy_signature+ - (String)
-      #     * +:progress+ - (String)
-      #     * +:error+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       define_client_method :describe_bundle_tasks, 'DescribeBundleTasks'
 
       # Calls the DescribeConversionTasks API operation.
@@ -1138,43 +942,20 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:conversion_tasks+ - (Array<Hash>)
-      #     * +:conversion_task_id+ - (String)
-      #     * +:expiration_time+ - (String)
       #     * +:import_instance+ - (Hash)
       #       * +:volumes+ - (Array<Hash>)
       #         * +:bytes_converted+ - (Integer)
-      #         * +:availability_zone+ - (String)
       #         * +:image+ - (Hash)
-      #           * +:format+ - (String)
       #           * +:size+ - (Integer)
-      #           * +:import_manifest_url+ - (String)
-      #           * +:checksum+ - (String)
       #         * +:volume+ - (Hash)
       #           * +:size+ - (Integer)
-      #           * +:id+ - (String)
-      #         * +:status+ - (String)
-      #         * +:status_message+ - (String)
-      #         * +:description+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:platform+ - (String)
-      #       * +:description+ - (String)
       #     * +:import_volume+ - (Hash)
       #       * +:bytes_converted+ - (Integer)
-      #       * +:availability_zone+ - (String)
-      #       * +:description+ - (String)
       #       * +:image+ - (Hash)
-      #         * +:format+ - (String)
       #         * +:size+ - (Integer)
-      #         * +:import_manifest_url+ - (String)
-      #         * +:checksum+ - (String)
       #       * +:volume+ - (Hash)
       #         * +:size+ - (Integer)
-      #         * +:id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:status_message+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_conversion_tasks, 'DescribeConversionTasks'
 
       # Calls the DescribeCustomerGateways API operation.
@@ -1193,14 +974,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:customer_gateway_set+ - (Array<Hash>)
-      #     * +:customer_gateway_id+ - (String)
-      #     * +:state+ - (String)
+      #     * +:tag_set+ - (Array<>)
       #     * +:vpn_type+ - (String)
-      #     * +:ip_address+ - (String)
-      #     * +:bgp_asn+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
       define_client_method :describe_customer_gateways, 'DescribeCustomerGateways'
 
       # Calls the DescribeDhcpOptions API operation.
@@ -1218,13 +993,9 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:dhcp_options_set+ - (Array<Hash>)
-      #     * +:dhcp_options_id+ - (String)
       #     * +:dhcp_configuration_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value_set+ - (Array<String>)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #       * +:value_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_dhcp_options, 'DescribeDhcpOptions'
 
       # Calls the DescribeExportTasks API operation.
@@ -1234,20 +1005,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:request_id+ - (String)
-      #   * +:export_task_set+ - (Array<Hash>)
-      #     * +:export_task_id+ - (String)
-      #     * +:description+ - (String)
-      #     * +:state+ - (String)
-      #     * +:status_message+ - (String)
-      #     * +:instance_export+ - (Hash)
-      #       * +:instance_id+ - (String)
-      #       * +:target_environment+ - (String)
-      #     * +:export_to_s3+ - (Hash)
-      #       * +:disk_image_format+ - (String)
-      #       * +:container_format+ - (String)
-      #       * +:s3_bucket+ - (String)
-      #       * +:s3_key+ - (String)
+      #   * +:export_task_set+ - (Array<>)
       define_client_method :describe_export_tasks, 'DescribeExportTasks'
 
       # Calls the DescribeImageAttribute API operation.
@@ -1261,27 +1019,13 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:image_id+ - (String)
-      #   * +:launch_permission+ - (Array<Hash>)
-      #     * +:user_id+ - (String)
-      #     * +:group+ - (String)
-      #   * +:product_codes+ - (Array<Hash>)
-      #     * +:product_code+ - (String)
-      #     * +:type+ - (String)
-      #   * +:kernel+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:ramdisk+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:description+ - (Hash)
-      #     * +:value+ - (String)
+      #   * +:launch_permission+ - (Array<>)
+      #   * +:product_codes+ - (Array<>)
       #   * +:block_device_mapping+ - (Array<Hash>)
-      #     * +:virtual_name+ - (String)
-      #     * +:device_name+ - (String)
       #     * +:ebs+ - (Hash)
-      #       * +:snapshot_id+ - (String)
       #       * +:volume_size+ - (Integer)
       #       * +:delete_on_termination+ - (Boolean)
-      #     * +:no_device+ - (String)
+      #       * +:iops+ - (Integer)
       define_client_method :describe_image_attribute, 'DescribeImageAttribute'
 
       # Calls the DescribeImages API operation.
@@ -1308,40 +1052,14 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:images_set+ - (Array<Hash>)
-      #     * +:image_id+ - (String)
-      #     * +:image_location+ - (String)
-      #     * +:image_state+ - (String)
-      #     * +:image_owner_id+ - (String)
       #     * +:is_public+ - (Boolean)
-      #     * +:product_codes+ - (Array<Hash>)
-      #       * +:product_code+ - (String)
-      #       * +:type+ - (String)
-      #     * +:architecture+ - (String)
-      #     * +:image_type+ - (String)
-      #     * +:kernel_id+ - (String)
-      #     * +:ramdisk_id+ - (String)
-      #     * +:platform+ - (String)
-      #     * +:state_reason+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
-      #     * +:image_owner_alias+ - (String)
-      #     * +:name+ - (String)
-      #     * +:description+ - (String)
-      #     * +:root_device_type+ - (String)
-      #     * +:root_device_name+ - (String)
+      #     * +:product_codes+ - (Array<>)
       #     * +:block_device_mapping+ - (Array<Hash>)
-      #       * +:virtual_name+ - (String)
-      #       * +:device_name+ - (String)
       #       * +:ebs+ - (Hash)
-      #         * +:snapshot_id+ - (String)
       #         * +:volume_size+ - (Integer)
       #         * +:delete_on_termination+ - (Boolean)
-      #       * +:no_device+ - (String)
-      #     * +:virtualization_type+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:hypervisor+ - (String)
+      #         * +:iops+ - (Integer)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_images, 'DescribeImages'
 
       # Calls the DescribeInstanceAttribute API operation.
@@ -1356,31 +1074,15 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instance_id+ - (String)
-      #   * +:instance_type+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:kernel+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:ramdisk+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:user_data+ - (Hash)
-      #     * +:value+ - (String)
       #   * +:disable_api_termination+ - (Hash)
       #     * +:value+ - (Boolean)
-      #   * +:instance_initiated_shutdown_behavior+ - (Hash)
-      #     * +:value+ - (String)
-      #   * +:root_device_name+ - (Hash)
-      #     * +:value+ - (String)
       #   * +:block_device_mapping+ - (Array<Hash>)
-      #     * +:device_name+ - (String)
       #     * +:ebs+ - (Hash)
-      #       * +:volume_id+ - (String)
-      #       * +:status+ - (String)
       #       * +:attach_time+ - (Time)
       #       * +:delete_on_termination+ - (Boolean)
-      #   * +:product_codes+ - (Array<Hash>)
-      #     * +:product_code+ - (String)
-      #     * +:type+ - (String)
+      #   * +:product_codes+ - (Array<>)
+      #   * +:ebs_optimized+ - (Hash)
+      #     * +:value+ - (Boolean)
       define_client_method :describe_instance_attribute, 'DescribeInstanceAttribute'
 
       # Calls the DescribeInstanceStatus API operation.
@@ -1397,31 +1099,22 @@ module AWS
       #     of results to return.
       #   * +:max_results+ - (Integer) The maximum number of paginated instance
       #     items per response.
+      #   * +:include_all_instances+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:instance_status_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:availability_zone+ - (String)
       #     * +:events_set+ - (Array<Hash>)
-      #       * +:code+ - (String)
-      #       * +:description+ - (String)
       #       * +:not_before+ - (Time)
       #       * +:not_after+ - (Time)
       #     * +:instance_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       #     * +:system_status+ - (Hash)
-      #       * +:status+ - (String)
       #       * +:details+ - (Array<Hash>)
-      #         * +:name+ - (String)
-      #         * +:status+ - (String)
+      #         * +:impaired_since+ - (Time)
       #     * +:instance_status+ - (Hash)
-      #       * +:status+ - (String)
       #       * +:details+ - (Array<Hash>)
-      #         * +:name+ - (String)
-      #         * +:status+ - (String)
-      #   * +:next_token+ - (String)
+      #         * +:impaired_since+ - (Time)
       define_client_method :describe_instance_status, 'DescribeInstanceStatus'
 
       # Calls the DescribeInstances API operation.
@@ -1439,93 +1132,28 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:reservation_set+ - (Array<Hash>)
-      #     * +:reservation_id+ - (String)
-      #     * +:owner_id+ - (String)
-      #     * +:requester_id+ - (String)
-      #     * +:group_set+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
+      #     * +:group_set+ - (Array<>)
       #     * +:instances_set+ - (Array<Hash>)
-      #       * +:instance_id+ - (String)
-      #       * +:image_id+ - (String)
       #       * +:instance_state+ - (Hash)
       #         * +:code+ - (Integer)
-      #         * +:name+ - (String)
-      #       * +:private_dns_name+ - (String)
-      #       * +:dns_name+ - (String)
-      #       * +:reason+ - (String)
-      #       * +:key_name+ - (String)
       #       * +:ami_launch_index+ - (Integer)
-      #       * +:product_codes+ - (Array<Hash>)
-      #         * +:product_code+ - (String)
-      #         * +:type+ - (String)
-      #       * +:instance_type+ - (String)
+      #       * +:product_codes+ - (Array<>)
       #       * +:launch_time+ - (Time)
-      #       * +:placement+ - (Hash)
-      #         * +:availability_zone+ - (String)
-      #         * +:group_name+ - (String)
-      #         * +:tenancy+ - (String)
-      #       * +:kernel_id+ - (String)
-      #       * +:ramdisk_id+ - (String)
-      #       * +:platform+ - (String)
-      #       * +:monitoring+ - (Hash)
-      #         * +:state+ - (String)
-      #       * +:subnet_id+ - (String)
-      #       * +:vpc_id+ - (String)
-      #       * +:private_ip_address+ - (String)
-      #       * +:ip_address+ - (String)
-      #       * +:state_reason+ - (Hash)
-      #         * +:code+ - (String)
-      #         * +:message+ - (String)
-      #       * +:architecture+ - (String)
-      #       * +:root_device_type+ - (String)
-      #       * +:root_device_name+ - (String)
       #       * +:block_device_mapping+ - (Array<Hash>)
-      #         * +:device_name+ - (String)
       #         * +:ebs+ - (Hash)
-      #           * +:volume_id+ - (String)
-      #           * +:status+ - (String)
       #           * +:attach_time+ - (Time)
       #           * +:delete_on_termination+ - (Boolean)
-      #       * +:virtualization_type+ - (String)
-      #       * +:instance_lifecycle+ - (String)
-      #       * +:spot_instance_request_id+ - (String)
-      #       * +:license+ - (Hash)
-      #         * +:pool+ - (String)
-      #       * +:client_token+ - (String)
-      #       * +:tag_set+ - (Array<Hash>)
-      #         * +:key+ - (String)
-      #         * +:value+ - (String)
-      #       * +:group_set+ - (Array<Hash>)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
+      #       * +:tag_set+ - (Array<>)
+      #       * +:group_set+ - (Array<>)
       #       * +:source_dest_check+ - (Boolean)
-      #       * +:hypervisor+ - (String)
       #       * +:network_interface_set+ - (Array<Hash>)
-      #         * +:network_interface_id+ - (String)
-      #         * +:subnet_id+ - (String)
-      #         * +:vpc_id+ - (String)
-      #         * +:description+ - (String)
-      #         * +:owner_id+ - (String)
-      #         * +:status+ - (String)
-      #         * +:private_ip_address+ - (String)
-      #         * +:private_dns_name+ - (String)
       #         * +:source_dest_check+ - (Boolean)
-      #         * +:group_set+ - (Array<Hash>)
-      #           * +:group_name+ - (String)
-      #           * +:group_id+ - (String)
+      #         * +:group_set+ - (Array<>)
       #         * +:attachment+ - (Hash)
-      #           * +:attachment_id+ - (String)
       #           * +:device_index+ - (Integer)
-      #           * +:status+ - (String)
       #           * +:attach_time+ - (Time)
       #           * +:delete_on_termination+ - (Boolean)
-      #         * +:association+ - (Hash)
-      #           * +:public_ip+ - (String)
-      #           * +:ip_owner_id+ - (String)
-      #       * +:iam_instance_profile+ - (Hash)
-      #         * +:arn+ - (String)
-      #         * +:id+ - (String)
+      #       * +:ebs_optimized+ - (Boolean)
       define_client_method :describe_instances, 'DescribeInstances'
 
       # Calls the DescribeInternetGateways API operation.
@@ -1544,13 +1172,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:internet_gateway_set+ - (Array<Hash>)
-      #     * +:internet_gateway_id+ - (String)
-      #     * +:attachment_set+ - (Array<Hash>)
-      #       * +:vpc_id+ - (String)
-      #       * +:state+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:attachment_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_internet_gateways, 'DescribeInternetGateways'
 
       # Calls the DescribeKeyPairs API operation.
@@ -1567,9 +1190,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:key_set+ - (Array<Hash>)
-      #     * +:key_name+ - (String)
-      #     * +:key_fingerprint+ - (String)
+      #   * +:key_set+ - (Array<>)
       define_client_method :describe_key_pairs, 'DescribeKeyPairs'
 
       # Calls the DescribeLicenses API operation.
@@ -1587,17 +1208,11 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:license_set+ - (Array<Hash>)
-      #     * +:license_id+ - (String)
-      #     * +:type+ - (String)
-      #     * +:pool+ - (String)
       #     * +:capacity_set+ - (Array<Hash>)
       #       * +:capacity+ - (Integer)
       #       * +:instance_capacity+ - (Integer)
-      #       * +:state+ - (String)
       #       * +:earliest_allowed_deactivation_time+ - (Time)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_licenses, 'DescribeLicenses'
 
       # Calls the DescribeNetworkAcls API operation.
@@ -1615,28 +1230,18 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:network_acl_set+ - (Array<Hash>)
-      #     * +:network_acl_id+ - (String)
-      #     * +:vpc_id+ - (String)
       #     * +:default+ - (Boolean)
       #     * +:entry_set+ - (Array<Hash>)
       #       * +:rule_number+ - (Integer)
-      #       * +:protocol+ - (String)
-      #       * +:rule_action+ - (String)
       #       * +:egress+ - (Boolean)
-      #       * +:cidr_block+ - (String)
       #       * +:icmp_type_code+ - (Hash)
       #         * +:type+ - (Integer)
       #         * +:code+ - (Integer)
       #       * +:port_range+ - (Hash)
       #         * +:from+ - (Integer)
       #         * +:to+ - (Integer)
-      #     * +:association_set+ - (Array<Hash>)
-      #       * +:network_acl_association_id+ - (String)
-      #       * +:network_acl_id+ - (String)
-      #       * +:subnet_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:association_set+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_network_acls, 'DescribeNetworkAcls'
 
       # Calls the DescribeNetworkInterfaceAttribute API operation.
@@ -1650,20 +1255,11 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:network_interface_id+ - (String)
-      #   * +:description+ - (Hash)
-      #     * +:value+ - (String)
       #   * +:source_dest_check+ - (Hash)
       #     * +:value+ - (Boolean)
-      #   * +:group_set+ - (Array<Hash>)
-      #     * +:group_name+ - (String)
-      #     * +:group_id+ - (String)
+      #   * +:group_set+ - (Array<>)
       #   * +:attachment+ - (Hash)
-      #     * +:attachment_id+ - (String)
-      #     * +:instance_id+ - (String)
-      #     * +:instance_owner_id+ - (String)
       #     * +:device_index+ - (Integer)
-      #     * +:status+ - (String)
       #     * +:attach_time+ - (Time)
       #     * +:delete_on_termination+ - (Boolean)
       define_client_method :describe_network_interface_attribute, 'DescribeNetworkInterfaceAttribute'
@@ -1680,38 +1276,16 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:network_interface_set+ - (Array<Hash>)
-      #     * +:network_interface_id+ - (String)
-      #     * +:subnet_id+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:availability_zone+ - (String)
-      #     * +:description+ - (String)
-      #     * +:owner_id+ - (String)
-      #     * +:requester_id+ - (String)
       #     * +:requester_managed+ - (Boolean)
-      #     * +:status+ - (String)
-      #     * +:mac_address+ - (String)
-      #     * +:private_ip_address+ - (String)
-      #     * +:private_dns_name+ - (String)
       #     * +:source_dest_check+ - (Boolean)
-      #     * +:groups+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
+      #     * +:groups+ - (Array<>)
       #     * +:attachment+ - (Hash)
-      #       * +:attachment_id+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:instance_owner_id+ - (String)
       #       * +:device_index+ - (Integer)
-      #       * +:status+ - (String)
       #       * +:attach_time+ - (Time)
       #       * +:delete_on_termination+ - (Boolean)
-      #     * +:association+ - (Hash)
-      #       * +:public_ip+ - (String)
-      #       * +:ip_owner_id+ - (String)
-      #       * +:allocation_id+ - (String)
-      #       * +:association_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
+      #     * +:private_ip_addresses_set+ - (Array<Hash>)
+      #       * +:primary+ - (Boolean)
       define_client_method :describe_network_interfaces, 'DescribeNetworkInterfaces'
 
       # Calls the DescribePlacementGroups API operation.
@@ -1728,10 +1302,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:placement_group_set+ - (Array<Hash>)
-      #     * +:group_name+ - (String)
-      #     * +:strategy+ - (String)
-      #     * +:state+ - (String)
+      #   * +:placement_group_set+ - (Array<>)
       define_client_method :describe_placement_groups, 'DescribePlacementGroups'
 
       # Calls the DescribeRegions API operation.
@@ -1748,9 +1319,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:region_info+ - (Array<Hash>)
-      #     * +:region_name+ - (String)
-      #     * +:region_endpoint+ - (String)
+      #   * +:region_info+ - (Array<>)
       define_client_method :describe_regions, 'DescribeRegions'
 
       # Calls the DescribeReservedInstances API operation.
@@ -1770,24 +1339,13 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:reserved_instances_set+ - (Array<Hash>)
-      #     * +:reserved_instances_id+ - (String)
-      #     * +:instance_type+ - (String)
-      #     * +:availability_zone+ - (String)
       #     * +:start+ - (Time)
       #     * +:duration+ - (Integer)
       #     * +:usage_price+ - (Numeric)
       #     * +:fixed_price+ - (Numeric)
       #     * +:instance_count+ - (Integer)
-      #     * +:product_description+ - (String)
-      #     * +:state+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:instance_tenancy+ - (String)
-      #     * +:currency_code+ - (String)
-      #     * +:offering_type+ - (String)
+      #     * +:tag_set+ - (Array<>)
       #     * +:recurring_charges+ - (Array<Hash>)
-      #       * +:frequency+ - (String)
       #       * +:amount+ - (Numeric)
       define_client_method :describe_reserved_instances, 'DescribeReservedInstances'
 
@@ -1818,18 +1376,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:reserved_instances_offerings_set+ - (Array<Hash>)
-      #     * +:reserved_instances_offering_id+ - (String)
-      #     * +:instance_type+ - (String)
-      #     * +:availability_zone+ - (String)
       #     * +:duration+ - (Integer)
       #     * +:usage_price+ - (Numeric)
       #     * +:fixed_price+ - (Numeric)
-      #     * +:product_description+ - (String)
-      #     * +:instance_tenancy+ - (String)
-      #     * +:currency_code+ - (String)
-      #     * +:offering_type+ - (String)
       #     * +:recurring_charges+ - (Array<Hash>)
-      #       * +:frequency+ - (String)
       #       * +:amount+ - (Numeric)
       define_client_method :describe_reserved_instances_offerings, 'DescribeReservedInstancesOfferings'
 
@@ -1848,23 +1398,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:route_table_set+ - (Array<Hash>)
-      #     * +:route_table_id+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:instance_owner_id+ - (String)
-      #       * +:network_interface_id+ - (String)
-      #       * +:state+ - (String)
+      #     * +:route_set+ - (Array<>)
       #     * +:association_set+ - (Array<Hash>)
-      #       * +:route_table_association_id+ - (String)
-      #       * +:route_table_id+ - (String)
-      #       * +:subnet_id+ - (String)
       #       * +:main+ - (Boolean)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_route_tables, 'DescribeRouteTables'
 
       # Calls the DescribeSecurityGroups API operation.
@@ -1884,34 +1421,18 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:security_group_info+ - (Array<Hash>)
-      #     * +:owner_id+ - (String)
-      #     * +:group_name+ - (String)
-      #     * +:group_id+ - (String)
-      #     * +:group_description+ - (String)
       #     * +:ip_permissions+ - (Array<Hash>)
-      #       * +:ip_protocol+ - (String)
       #       * +:from_port+ - (Integer)
       #       * +:to_port+ - (Integer)
-      #       * +:groups+ - (Array<Hash>)
-      #         * +:user_id+ - (String)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
-      #       * +:ip_ranges+ - (Array<Hash>)
-      #         * +:cidr_ip+ - (String)
+      #       * +:groups+ - (Array<>)
+      #       * +:ip_ranges+ - (Array<>)
+      #       * +:ip_protocol+ - (String)
       #     * +:ip_permissions_egress+ - (Array<Hash>)
-      #       * +:ip_protocol+ - (String)
       #       * +:from_port+ - (Integer)
       #       * +:to_port+ - (Integer)
-      #       * +:groups+ - (Array<Hash>)
-      #         * +:user_id+ - (String)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
-      #       * +:ip_ranges+ - (Array<Hash>)
-      #         * +:cidr_ip+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #       * +:groups+ - (Array<>)
+      #       * +:ip_ranges+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_security_groups, 'DescribeSecurityGroups'
 
       # Calls the DescribeSnapshotAttribute API operation.
@@ -1924,13 +1445,8 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:snapshot_id+ - (String)
-      #   * +:create_volume_permission+ - (Array<Hash>)
-      #     * +:user_id+ - (String)
-      #     * +:group+ - (String)
-      #   * +:product_codes+ - (Array<Hash>)
-      #     * +:product_code+ - (String)
-      #     * +:type+ - (String)
+      #   * +:create_volume_permission+ - (Array<>)
+      #   * +:product_codes+ - (Array<>)
       define_client_method :describe_snapshot_attribute, 'DescribeSnapshotAttribute'
 
       # Calls the DescribeSnapshots API operation.
@@ -1953,34 +1469,15 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:snapshot_set+ - (Array<Hash>)
-      #     * +:snapshot_id+ - (String)
-      #     * +:volume_id+ - (String)
-      #     * +:status+ - (String)
       #     * +:start_time+ - (Time)
-      #     * +:progress+ - (String)
-      #     * +:owner_id+ - (String)
-      #     * +:description+ - (String)
       #     * +:volume_size+ - (Integer)
-      #     * +:owner_alias+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_snapshots, 'DescribeSnapshots'
 
       # Calls the DescribeSpotDatafeedSubscription API operation.
       # @method describe_spot_datafeed_subscription(options = {})
       # @param [Hash] options
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:spot_datafeed_subscription+ - (Hash)
-      #     * +:owner_id+ - (String)
-      #     * +:bucket+ - (String)
-      #     * +:prefix+ - (String)
-      #     * +:state+ - (String)
-      #     * +:fault+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       define_client_method :describe_spot_datafeed_subscription, 'DescribeSpotDatafeedSubscription'
 
       # Calls the DescribeSpotInstanceRequests API operation.
@@ -1999,59 +1496,26 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:spot_instance_request_set+ - (Array<Hash>)
-      #     * +:spot_instance_request_id+ - (String)
-      #     * +:spot_price+ - (String)
-      #     * +:type+ - (String)
-      #     * +:state+ - (String)
-      #     * +:fault+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       #     * +:valid_from+ - (Time)
       #     * +:valid_until+ - (Time)
-      #     * +:launch_group+ - (String)
-      #     * +:availability_zone_group+ - (String)
       #     * +:launch_specification+ - (Hash)
-      #       * +:image_id+ - (String)
-      #       * +:key_name+ - (String)
-      #       * +:group_set+ - (Array<Hash>)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
-      #       * +:user_data+ - (String)
-      #       * +:addressing_type+ - (String)
-      #       * +:instance_type+ - (String)
-      #       * +:placement+ - (Hash)
-      #         * +:availability_zone+ - (String)
-      #         * +:group_name+ - (String)
-      #       * +:kernel_id+ - (String)
-      #       * +:ramdisk_id+ - (String)
+      #       * +:group_set+ - (Array<>)
       #       * +:block_device_mapping+ - (Array<Hash>)
-      #         * +:virtual_name+ - (String)
-      #         * +:device_name+ - (String)
       #         * +:ebs+ - (Hash)
-      #           * +:snapshot_id+ - (String)
       #           * +:volume_size+ - (Integer)
       #           * +:delete_on_termination+ - (Boolean)
-      #         * +:no_device+ - (String)
+      #           * +:iops+ - (Integer)
       #       * +:monitoring_enabled+ - (Boolean)
-      #       * +:subnet_id+ - (String)
       #       * +:network_interface_set+ - (Array<Hash>)
-      #         * +:network_interface_id+ - (String)
       #         * +:device_index+ - (Integer)
-      #         * +:subnet_id+ - (String)
-      #         * +:description+ - (String)
-      #         * +:private_ip_address+ - (String)
-      #         * +:security_group_id+ - (Array<String>)
+      #         * +:security_group_id+ - (Array<>)
       #         * +:delete_on_termination+ - (Boolean)
-      #       * +:iam_instance_profile+ - (Hash)
-      #         * +:arn+ - (String)
-      #         * +:name+ - (String)
-      #     * +:instance_id+ - (String)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:primary+ - (Boolean)
+      #         * +:secondary_private_ip_address_count+ - (Integer)
+      #       * +:ebs_optimized+ - (Boolean)
       #     * +:create_time+ - (Time)
-      #     * +:product_description+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:launched_availability_zone+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_spot_instance_requests, 'DescribeSpotInstanceRequests'
 
       # Calls the DescribeSpotPriceHistory API operation.
@@ -2080,12 +1544,7 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:spot_price_history_set+ - (Array<Hash>)
-      #     * +:instance_type+ - (String)
-      #     * +:product_description+ - (String)
-      #     * +:spot_price+ - (String)
       #     * +:timestamp+ - (Time)
-      #     * +:availability_zone+ - (String)
-      #   * +:next_token+ - (String)
       define_client_method :describe_spot_price_history, 'DescribeSpotPriceHistory'
 
       # Calls the DescribeSubnets API operation.
@@ -2102,15 +1561,8 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:subnet_set+ - (Array<Hash>)
-      #     * +:subnet_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
-      #     * +:availability_zone+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_subnets, 'DescribeSubnets'
 
       # Calls the DescribeTags API operation.
@@ -2124,11 +1576,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:tag_set+ - (Array<Hash>)
-      #     * +:resource_id+ - (String)
-      #     * +:resource_type+ - (String)
-      #     * +:key+ - (String)
-      #     * +:value+ - (String)
+      #   * +:tag_set+ - (Array<>)
       define_client_method :describe_tags, 'DescribeTags'
 
       # Calls the DescribeVolumeAttribute API operation.
@@ -2139,12 +1587,9 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:volume_id+ - (String)
       #   * +:auto_enable_io+ - (Hash)
       #     * +:value+ - (Boolean)
-      #   * +:product_codes+ - (Array<Hash>)
-      #     * +:product_code+ - (String)
-      #     * +:type+ - (String)
+      #   * +:product_codes+ - (Array<>)
       define_client_method :describe_volume_attribute, 'DescribeVolumeAttribute'
 
       # Calls the DescribeVolumeStatus API operation.
@@ -2161,25 +1606,12 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:volume_status_set+ - (Array<Hash>)
-      #     * +:volume_id+ - (String)
-      #     * +:availability_zone+ - (String)
       #     * +:volume_status+ - (Hash)
-      #       * +:status+ - (String)
-      #       * +:details+ - (Array<Hash>)
-      #         * +:name+ - (String)
-      #         * +:status+ - (String)
+      #       * +:details+ - (Array<>)
       #     * +:events_set+ - (Array<Hash>)
-      #       * +:event_type+ - (String)
-      #       * +:description+ - (String)
       #       * +:not_before+ - (Time)
       #       * +:not_after+ - (Time)
-      #       * +:event_id+ - (String)
-      #     * +:actions_set+ - (Array<Hash>)
-      #       * +:code+ - (String)
-      #       * +:description+ - (String)
-      #       * +:event_type+ - (String)
-      #       * +:event_id+ - (String)
-      #   * +:next_token+ - (String)
+      #     * +:actions_set+ - (Array<>)
       define_client_method :describe_volume_status, 'DescribeVolumeStatus'
 
       # Calls the DescribeVolumes API operation.
@@ -2197,22 +1629,13 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:volume_set+ - (Array<Hash>)
-      #     * +:volume_id+ - (String)
       #     * +:size+ - (Integer)
-      #     * +:snapshot_id+ - (String)
-      #     * +:availability_zone+ - (String)
-      #     * +:status+ - (String)
       #     * +:create_time+ - (Time)
       #     * +:attachment_set+ - (Array<Hash>)
-      #       * +:volume_id+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:device+ - (String)
-      #       * +:status+ - (String)
       #       * +:attach_time+ - (Time)
       #       * +:delete_on_termination+ - (Boolean)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
+      #     * +:iops+ - (Integer)
       define_client_method :describe_volumes, 'DescribeVolumes'
 
       # Calls the DescribeVpcs API operation.
@@ -2230,14 +1653,7 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpc_set+ - (Array<Hash>)
-      #     * +:vpc_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:cidr_block+ - (String)
-      #     * +:dhcp_options_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:instance_tenancy+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :describe_vpcs, 'DescribeVpcs'
 
       # Calls the DescribeVpnConnections API operation.
@@ -2256,21 +1672,11 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpn_connection_set+ - (Array<Hash>)
-      #     * +:vpn_connection_id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:customer_gateway_configuration+ - (String)
-      #     * +:vpn_type+ - (String)
-      #     * +:customer_gateway_id+ - (String)
-      #     * +:vpn_gateway_id+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       #     * +:vgw_telemetry+ - (Array<Hash>)
-      #       * +:outside_ip_address+ - (String)
-      #       * +:status+ - (String)
       #       * +:last_status_change+ - (Time)
-      #       * +:status_message+ - (String)
       #       * +:accepted_route_count+ - (Integer)
+      #     * +:vpn_type+ - (String)
       define_client_method :describe_vpn_connections, 'DescribeVpnConnections'
 
       # Calls the DescribeVpnGateways API operation.
@@ -2291,16 +1697,9 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:vpn_gateway_set+ - (Array<Hash>)
-      #     * +:vpn_gateway_id+ - (String)
-      #     * +:state+ - (String)
+      #     * +:attachments+ - (Array<>)
+      #     * +:tag_set+ - (Array<>)
       #     * +:vpn_type+ - (String)
-      #     * +:availability_zone+ - (String)
-      #     * +:attachments+ - (Array<Hash>)
-      #       * +:vpc_id+ - (String)
-      #       * +:state+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
       define_client_method :describe_vpn_gateways, 'DescribeVpnGateways'
 
       # Calls the DetachInternetGateway API operation.
@@ -2340,10 +1739,6 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:volume_id+ - (String)
-      #   * +:instance_id+ - (String)
-      #   * +:device+ - (String)
-      #   * +:status+ - (String)
       #   * +:attach_time+ - (Time)
       #   * +:delete_on_termination+ - (Boolean)
       define_client_method :detach_volume, 'DetachVolume'
@@ -2392,9 +1787,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instance_id+ - (String)
       #   * +:timestamp+ - (Time)
-      #   * +:output+ - (String)
       define_client_method :get_console_output, 'GetConsoleOutput'
 
       # Calls the GetPasswordData API operation.
@@ -2405,9 +1798,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instance_id+ - (String)
       #   * +:timestamp+ - (Time)
-      #   * +:password_data+ - (String)
       define_client_method :get_password_data, 'GetPasswordData'
 
       # Calls the ImportInstance API operation.
@@ -2445,10 +1836,11 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
+      #         * +:volume_type+ - (String)
+      #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
-      #     * +:monitoring+ - (Hash)
-      #       * +:enabled+ - (Boolean)
+      #     * +:monitoring+ - (Boolean)
       #     * +:subnet_id+ - (String)
       #     * +:disable_api_termination+ - (Boolean)
       #     * +:instance_initiated_shutdown_behavior+ - (String)
@@ -2466,43 +1858,20 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:conversion_task+ - (Hash)
-      #     * +:conversion_task_id+ - (String)
-      #     * +:expiration_time+ - (String)
       #     * +:import_instance+ - (Hash)
       #       * +:volumes+ - (Array<Hash>)
       #         * +:bytes_converted+ - (Integer)
-      #         * +:availability_zone+ - (String)
       #         * +:image+ - (Hash)
-      #           * +:format+ - (String)
       #           * +:size+ - (Integer)
-      #           * +:import_manifest_url+ - (String)
-      #           * +:checksum+ - (String)
       #         * +:volume+ - (Hash)
       #           * +:size+ - (Integer)
-      #           * +:id+ - (String)
-      #         * +:status+ - (String)
-      #         * +:status_message+ - (String)
-      #         * +:description+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:platform+ - (String)
-      #       * +:description+ - (String)
       #     * +:import_volume+ - (Hash)
       #       * +:bytes_converted+ - (Integer)
-      #       * +:availability_zone+ - (String)
-      #       * +:description+ - (String)
       #       * +:image+ - (Hash)
-      #         * +:format+ - (String)
       #         * +:size+ - (Integer)
-      #         * +:import_manifest_url+ - (String)
-      #         * +:checksum+ - (String)
       #       * +:volume+ - (Hash)
       #         * +:size+ - (Integer)
-      #         * +:id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:status_message+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :import_instance, 'ImportInstance'
 
       # Calls the ImportKeyPair API operation.
@@ -2513,10 +1882,6 @@ module AWS
       #   * +:public_key_material+ - *required* - (String) The public key
       #     portion of the key pair being imported.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:key_name+ - (String)
-      #   * +:key_fingerprint+ - (String)
       define_client_method :import_key_pair, 'ImportKeyPair'
 
       # Calls the ImportVolume API operation.
@@ -2534,43 +1899,20 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:conversion_task+ - (Hash)
-      #     * +:conversion_task_id+ - (String)
-      #     * +:expiration_time+ - (String)
       #     * +:import_instance+ - (Hash)
       #       * +:volumes+ - (Array<Hash>)
       #         * +:bytes_converted+ - (Integer)
-      #         * +:availability_zone+ - (String)
       #         * +:image+ - (Hash)
-      #           * +:format+ - (String)
       #           * +:size+ - (Integer)
-      #           * +:import_manifest_url+ - (String)
-      #           * +:checksum+ - (String)
       #         * +:volume+ - (Hash)
       #           * +:size+ - (Integer)
-      #           * +:id+ - (String)
-      #         * +:status+ - (String)
-      #         * +:status_message+ - (String)
-      #         * +:description+ - (String)
-      #       * +:instance_id+ - (String)
-      #       * +:platform+ - (String)
-      #       * +:description+ - (String)
       #     * +:import_volume+ - (Hash)
       #       * +:bytes_converted+ - (Integer)
-      #       * +:availability_zone+ - (String)
-      #       * +:description+ - (String)
       #       * +:image+ - (Hash)
-      #         * +:format+ - (String)
       #         * +:size+ - (Integer)
-      #         * +:import_manifest_url+ - (String)
-      #         * +:checksum+ - (String)
       #       * +:volume+ - (Hash)
       #         * +:size+ - (Integer)
-      #         * +:id+ - (String)
-      #     * +:state+ - (String)
-      #     * +:status_message+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :import_volume, 'ImportVolume'
 
       # Calls the ModifyImageAttribute API operation.
@@ -2656,6 +1998,8 @@ module AWS
       #   * +:instance_initiated_shutdown_behavior+ - (Hash)
       #     * +:value+ - (String) String value
       #   * +:groups+ - (Array<String>)
+      #   * +:ebs_optimized+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
       # @return [Core::Response]
       define_client_method :modify_instance_attribute, 'ModifyInstanceAttribute'
 
@@ -2721,10 +2065,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:monitoring+ - (Hash)
-      #       * +:state+ - (String)
+      #   * +:instances_set+ - (Array<>)
       define_client_method :monitor_instances, 'MonitorInstances'
 
       # Calls the PurchaseReservedInstancesOffering API operation.
@@ -2735,9 +2076,6 @@ module AWS
       #   * +:instance_count+ - *required* - (Integer) The number of Reserved
       #     Instances to purchase.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:reserved_instances_id+ - (String)
       define_client_method :purchase_reserved_instances_offering, 'PurchaseReservedInstancesOffering'
 
       # Calls the RebootInstances API operation.
@@ -2782,12 +2120,11 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:image_id+ - (String)
       define_client_method :register_image, 'RegisterImage'
 
       # Calls the ReleaseAddress API operation.
@@ -2809,9 +2146,6 @@ module AWS
       #   * +:network_acl_id+ - *required* - (String) The ID of the new ACL to
       #     associate with the subnet.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:new_association_id+ - (String)
       define_client_method :replace_network_acl_association, 'ReplaceNetworkAclAssociation'
 
       # Calls the ReplaceNetworkAclEntry API operation.
@@ -2870,9 +2204,6 @@ module AWS
       #   * +:route_table_id+ - *required* - (String) The ID of the new route
       #     table to associate with the subnet.
       # @return [Core::Response]
-      #   The #data method of the response object returns
-      #   a hash with the following structure:
-      #   * +:new_association_id+ - (String)
       define_client_method :replace_route_table_association, 'ReplaceRouteTableAssociation'
 
       # Calls the ReportInstanceStatus API operation.
@@ -2952,6 +2283,8 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
+      #         * +:volume_type+ - (String)
+      #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
       #     * +:monitoring_enabled+ - (Boolean) Enables monitoring for the
@@ -2966,66 +2299,38 @@ module AWS
       #       * +:private_ip_address+ - (String)
       #       * +:groups+ - (Array<String>)
       #       * +:delete_on_termination+ - (Boolean)
+      #       * +:private_ip_addresses+ - (Array<Hash>)
+      #         * +:private_ip_address+ - *required* - (String)
+      #         * +:primary+ - (Boolean)
+      #       * +:secondary_private_ip_address_count+ - (Integer)
       #     * +:iam_instance_profile+ - (Hash)
       #       * +:arn+ - (String)
       #       * +:name+ - (String)
+      #     * +:ebs_optimized+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:spot_instance_request_set+ - (Array<Hash>)
-      #     * +:spot_instance_request_id+ - (String)
-      #     * +:spot_price+ - (String)
-      #     * +:type+ - (String)
-      #     * +:state+ - (String)
-      #     * +:fault+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
       #     * +:valid_from+ - (Time)
       #     * +:valid_until+ - (Time)
-      #     * +:launch_group+ - (String)
-      #     * +:availability_zone_group+ - (String)
       #     * +:launch_specification+ - (Hash)
-      #       * +:image_id+ - (String)
-      #       * +:key_name+ - (String)
-      #       * +:group_set+ - (Array<Hash>)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
-      #       * +:user_data+ - (String)
-      #       * +:addressing_type+ - (String)
-      #       * +:instance_type+ - (String)
-      #       * +:placement+ - (Hash)
-      #         * +:availability_zone+ - (String)
-      #         * +:group_name+ - (String)
-      #       * +:kernel_id+ - (String)
-      #       * +:ramdisk_id+ - (String)
+      #       * +:group_set+ - (Array<>)
       #       * +:block_device_mapping+ - (Array<Hash>)
-      #         * +:virtual_name+ - (String)
-      #         * +:device_name+ - (String)
       #         * +:ebs+ - (Hash)
-      #           * +:snapshot_id+ - (String)
       #           * +:volume_size+ - (Integer)
       #           * +:delete_on_termination+ - (Boolean)
-      #         * +:no_device+ - (String)
+      #           * +:iops+ - (Integer)
       #       * +:monitoring_enabled+ - (Boolean)
-      #       * +:subnet_id+ - (String)
       #       * +:network_interface_set+ - (Array<Hash>)
-      #         * +:network_interface_id+ - (String)
       #         * +:device_index+ - (Integer)
-      #         * +:subnet_id+ - (String)
-      #         * +:description+ - (String)
-      #         * +:private_ip_address+ - (String)
-      #         * +:security_group_id+ - (Array<String>)
+      #         * +:security_group_id+ - (Array<>)
       #         * +:delete_on_termination+ - (Boolean)
-      #       * +:iam_instance_profile+ - (Hash)
-      #         * +:arn+ - (String)
-      #         * +:name+ - (String)
-      #     * +:instance_id+ - (String)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:primary+ - (Boolean)
+      #         * +:secondary_private_ip_address_count+ - (Integer)
+      #       * +:ebs_optimized+ - (Boolean)
       #     * +:create_time+ - (Time)
-      #     * +:product_description+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:launched_availability_zone+ - (String)
+      #     * +:tag_set+ - (Array<>)
       define_client_method :request_spot_instances, 'RequestSpotInstances'
 
       # Calls the ResetImageAttribute API operation.
@@ -3205,6 +2510,8 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
       #   * +:monitoring+ - (Hash) Enables monitoring for the instance.
@@ -3239,99 +2546,39 @@ module AWS
       #     * +:private_ip_address+ - (String)
       #     * +:groups+ - (Array<String>)
       #     * +:delete_on_termination+ - (Boolean)
+      #     * +:private_ip_addresses+ - (Array<Hash>)
+      #       * +:private_ip_address+ - *required* - (String)
+      #       * +:primary+ - (Boolean)
+      #     * +:secondary_private_ip_address_count+ - (Integer)
       #   * +:iam_instance_profile+ - (Hash)
       #     * +:arn+ - (String)
       #     * +:name+ - (String)
+      #   * +:ebs_optimized+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:reservation_id+ - (String)
-      #   * +:owner_id+ - (String)
-      #   * +:requester_id+ - (String)
-      #   * +:group_set+ - (Array<Hash>)
-      #     * +:group_name+ - (String)
-      #     * +:group_id+ - (String)
+      #   * +:group_set+ - (Array<>)
       #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:image_id+ - (String)
       #     * +:instance_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
-      #     * +:private_dns_name+ - (String)
-      #     * +:dns_name+ - (String)
-      #     * +:reason+ - (String)
-      #     * +:key_name+ - (String)
       #     * +:ami_launch_index+ - (Integer)
-      #     * +:product_codes+ - (Array<Hash>)
-      #       * +:product_code+ - (String)
-      #       * +:type+ - (String)
-      #     * +:instance_type+ - (String)
+      #     * +:product_codes+ - (Array<>)
       #     * +:launch_time+ - (Time)
-      #     * +:placement+ - (Hash)
-      #       * +:availability_zone+ - (String)
-      #       * +:group_name+ - (String)
-      #       * +:tenancy+ - (String)
-      #     * +:kernel_id+ - (String)
-      #     * +:ramdisk_id+ - (String)
-      #     * +:platform+ - (String)
-      #     * +:monitoring+ - (Hash)
-      #       * +:state+ - (String)
-      #     * +:subnet_id+ - (String)
-      #     * +:vpc_id+ - (String)
-      #     * +:private_ip_address+ - (String)
-      #     * +:ip_address+ - (String)
-      #     * +:state_reason+ - (Hash)
-      #       * +:code+ - (String)
-      #       * +:message+ - (String)
-      #     * +:architecture+ - (String)
-      #     * +:root_device_type+ - (String)
-      #     * +:root_device_name+ - (String)
       #     * +:block_device_mapping+ - (Array<Hash>)
-      #       * +:device_name+ - (String)
       #       * +:ebs+ - (Hash)
-      #         * +:volume_id+ - (String)
-      #         * +:status+ - (String)
       #         * +:attach_time+ - (Time)
       #         * +:delete_on_termination+ - (Boolean)
-      #     * +:virtualization_type+ - (String)
-      #     * +:instance_lifecycle+ - (String)
-      #     * +:spot_instance_request_id+ - (String)
-      #     * +:license+ - (Hash)
-      #       * +:pool+ - (String)
-      #     * +:client_token+ - (String)
-      #     * +:tag_set+ - (Array<Hash>)
-      #       * +:key+ - (String)
-      #       * +:value+ - (String)
-      #     * +:group_set+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
+      #     * +:tag_set+ - (Array<>)
+      #     * +:group_set+ - (Array<>)
       #     * +:source_dest_check+ - (Boolean)
-      #     * +:hypervisor+ - (String)
       #     * +:network_interface_set+ - (Array<Hash>)
-      #       * +:network_interface_id+ - (String)
-      #       * +:subnet_id+ - (String)
-      #       * +:vpc_id+ - (String)
-      #       * +:description+ - (String)
-      #       * +:owner_id+ - (String)
-      #       * +:status+ - (String)
-      #       * +:private_ip_address+ - (String)
-      #       * +:private_dns_name+ - (String)
       #       * +:source_dest_check+ - (Boolean)
-      #       * +:group_set+ - (Array<Hash>)
-      #         * +:group_name+ - (String)
-      #         * +:group_id+ - (String)
+      #       * +:group_set+ - (Array<>)
       #       * +:attachment+ - (Hash)
-      #         * +:attachment_id+ - (String)
       #         * +:device_index+ - (Integer)
-      #         * +:status+ - (String)
       #         * +:attach_time+ - (Time)
       #         * +:delete_on_termination+ - (Boolean)
-      #       * +:association+ - (Hash)
-      #         * +:public_ip+ - (String)
-      #         * +:ip_owner_id+ - (String)
-      #     * +:iam_instance_profile+ - (Hash)
-      #       * +:arn+ - (String)
-      #       * +:id+ - (String)
+      #     * +:ebs_optimized+ - (Boolean)
       define_client_method :run_instances, 'RunInstances'
 
       # Calls the StartInstances API operation.
@@ -3339,17 +2586,15 @@ module AWS
       # @param [Hash] options
       #   * +:instance_ids+ - *required* - (Array<String>) The list of Amazon
       #     EC2 instances to start.
+      #   * +:additional_info+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
       #     * +:current_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       #     * +:previous_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       define_client_method :start_instances, 'StartInstances'
 
       # Calls the StopInstances API operation.
@@ -3366,13 +2611,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
       #     * +:current_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       #     * +:previous_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       define_client_method :stop_instances, 'StopInstances'
 
       # Calls the TerminateInstances API operation.
@@ -3384,14 +2626,19 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
       #     * +:current_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       #     * +:previous_state+ - (Hash)
       #       * +:code+ - (Integer)
-      #       * +:name+ - (String)
       define_client_method :terminate_instances, 'TerminateInstances'
+
+      # Calls the UnassignPrivateIpAddresses API operation.
+      # @method unassign_private_ip_addresses(options = {})
+      # @param [Hash] options
+      #   * +:network_interface_id+ - *required* - (String)
+      #   * +:private_ip_addresses+ - *required* - (Array<String>)
+      # @return [Core::Response]
+      define_client_method :unassign_private_ip_addresses, 'UnassignPrivateIpAddresses'
 
       # Calls the UnmonitorInstances API operation.
       # @method unmonitor_instances(options = {})
@@ -3401,10 +2648,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instances_set+ - (Array<Hash>)
-      #     * +:instance_id+ - (String)
-      #     * +:monitoring+ - (Hash)
-      #       * +:state+ - (String)
+      #   * +:instances_set+ - (Array<>)
       define_client_method :unmonitor_instances, 'UnmonitorInstances'
 
       ## end client methods ##

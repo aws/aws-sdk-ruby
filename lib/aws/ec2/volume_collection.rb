@@ -75,6 +75,10 @@ module AWS
       #   To get a list of the availability zones you can use, see
       #   {EC2#availability_zones}.
       #
+      # @option options [String] :iops
+      #
+      # @option options [String] :volume_type
+      #
       # @return [Volume]
       #
       def create options = {}
