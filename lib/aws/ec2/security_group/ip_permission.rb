@@ -43,7 +43,7 @@ module AWS
 
           @groups = Array(options[:groups])
 
-          @egress = options[:egress]
+          @egress = options[:egress] || false
 
           # not all egress permissions require port ranges, depends on the
           # protocol
@@ -71,6 +71,9 @@ module AWS
         # @return [Array] An array of security groups that have been 
         # granted access with this permission.
         attr_reader :groups
+
+        # @return [Boolean] True if this is an egress permission
+        attr_reader :egress
 
         # @return [Boolean] Returns true if this is an egress permission.
         def egress?
