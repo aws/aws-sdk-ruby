@@ -11,6 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'simplecov'
+SimpleCov.start
+
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
 require 'aws'
@@ -20,6 +23,7 @@ include Mocha::API
 require 'net/http'
 require 'uri'
 require 'yaml'
+
 
 # find a config file
 dir = Dir.getwd
@@ -60,9 +64,9 @@ end
 
 AfterConfiguration do
   AWS.config(test_config)
-  handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp|
+  handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp, read_block|
     (@requests_made ||= []) << req
-    super(req, resp)
+    super(req, resp, &read_block)
     @last_response = resp
   end
   class << handler

@@ -290,7 +290,7 @@ end
 
 Given /^I have the following objects:$/ do |table|
   table.hashes.each do |hash|
-    @bucket.objects[hash['KEY']].write(hash['DATA'])
+    @bucket.objects[hash['KEY']].write(hash['DATA'] || '')
   end
 end
 

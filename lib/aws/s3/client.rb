@@ -295,7 +295,7 @@ module AWS
 
         process_response do |response|
           regex = />(.*)<\/LocationConstraint>/
-          matches = response.http_response.body.match(regex)
+          matches = response.http_response.body.to_s.match(regex)
           response.data[:location_constraint] = matches ? matches[1] : nil
         end
 
@@ -573,10 +573,14 @@ module AWS
       #     * +:private+
       #     * +:public_read+
       #     * ...
-      #   @option options [Symbol] :storage_class+ (:standard)
+      #   @option options [String] :storage_class+ ('STANDARD')
       #     Controls whether Reduced Redundancy Storage is enabled for
-      #     the object.  Valid values are +:standard+ and
-      #     +:reduced_redundancy+.
+      #     the object.  Valid values are 'STANDARD' and
+      #     'REDUCED_REDUNDANCY'.
+      #   @option options [Symbol,String] :server_side_encryption (nil) The
+      #     algorithm used to encrypt the object on the server side
+      #     (e.g. :aes256).
+      #   object on the server side, e.g. +:aes256+)
       #   @option options [String] :cache_control
       #     Can be used to specify caching behavior.
       #   @option options [String] :content_disposition
@@ -610,19 +614,20 @@ module AWS
         :content_disposition => 'Content-Disposition',
         :content_encoding => 'Content-Encoding',
         :content_type => 'Content-Type',
-        :storage_class => 'x-amz-storage-class',
-        :server_side_encryption => 'x-amz-server-side-encryption',
         :expires => 'Expires'
       }) do
 
-        configure_request do |request, options, block|
-          options[:server_side_encryption] =
-            options[:server_side_encryption].to_s.upcase if
-            options[:server_side_encryption].kind_of?(Symbol)
-          super(request, options)
-          set_request_data(request, options, block)
+        configure_request do |request, options|
+
+          options = compute_write_options(options)
+          set_body_stream_and_content_length(request, options)
+
           request.metadata = options[:metadata]
           request.storage_class = options[:storage_class]
+          request.server_side_encryption = options[:server_side_encryption]
+
+          super(request, options)
+
         end
 
         process_response do |response|
@@ -637,6 +642,7 @@ module AWS
           end
 
           add_sse_to_response(response)
+
         end
 
         simulate_response do |response|
@@ -826,8 +832,13 @@ module AWS
       #   @option options [String] :content_disposition
       #   @option options [String] :content_encoding
       #   @option options [String] :content_type
-      #   @option options [String] :storage_class
-      #   @option options [String] :server_side_encryption
+      #   @option options [String] :storage_class+ ('STANDARD')
+      #     Controls whether Reduced Redundancy Storage is enabled for
+      #     the object.  Valid values are 'STANDARD' and
+      #     'REDUCED_REDUNDANCY'.
+      #   @option options [Symbol,String] :server_side_encryption (nil) The
+      #     algorithm used to encrypt the object on the server side
+      #     (e.g. :aes256).
       #   @option options [String] :expires
       #   @option options [String] :acl A canned ACL (e.g. 'private',
       #     'public-read', etc).  See the S3 API documentation for
@@ -851,23 +862,20 @@ module AWS
                       :content_disposition => 'Content-Disposition',
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
-                      :storage_class => 'x-amz-storage-class',
-                      :server_side_encryption => 'x-amz-server-side-encryption',
                       :expires => 'Expires'
                     }) do
 
         configure_request do |req, options|
-          options[:server_side_encryption] =
-            options[:server_side_encryption].to_s.upcase if
-            options[:server_side_encryption].kind_of?(Symbol)
-          super(req, options)
           req.metadata = options[:metadata]
           req.storage_class = options[:storage_class]
+          req.server_side_encryption = options[:server_side_encryption]
+          super(req, options)
         end
 
         process_response do |response|
           add_sse_to_response(response)
         end
+
       end
 
       # @overload list_multipart_uploads(options = {})
@@ -933,26 +941,30 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
+      #   @option options [required,String] :upload_id
+      #   @option options [required,Integer] :part_number
       #   @option options [required,String,Pathname,File,IO] :data
       #     The data to upload.  This can be provided as a string,
       #     a Pathname object, or any object that responds to
       #     +#read+ and +#eof?+ (e.g. IO, File, Tempfile, StringIO, etc).
-      #   @option options [required,String] :upload_id
-      #   @option options [required,Integer] :part_number
       #   @return [Core::Response]
       object_method(:upload_part, :put,
                     :header_options => {
                       :content_md5 => 'Content-MD5'
                     }) do
-        configure_request do |request, options, block|
-            require_upload_id!(options[:upload_id])
-          validate!("part_number", options[:part_number]) do
-            "must not be blank" if options[:part_number].to_s.empty?
-          end
-          super(request, options)
-          set_request_data(request, options, block)
+        configure_request do |request, options|
+
+          options = compute_write_options(options)
+          set_body_stream_and_content_length(request, options)
+
+          require_upload_id!(options[:upload_id])
           request.add_param('uploadId', options[:upload_id])
+
+          require_part_number!(options[:part_number])
           request.add_param('partNumber', options[:part_number])
+
+          super(request, options)
+
         end
 
         process_response do |response|
@@ -1051,6 +1063,13 @@ module AWS
       #   @option options [String] :acl A canned ACL (e.g. 'private',
       #     'public-read', etc).  See the S3 API documentation for
       #     a complete list of valid values.
+      #   @option options [Symbol,String] :server_side_encryption (nil) The
+      #     algorithm used to encrypt the object on the server side
+      #     (e.g. :aes256).
+      #   @option options [String] :storage_class+ ('STANDARD')
+      #     Controls whether Reduced Redundancy Storage is enabled for
+      #     the object.  Valid values are 'STANDARD' and
+      #     'REDUCED_REDUNDANCY'.
       #   @option options [String] :grant_read
       #   @option options [String] :grant_write
       #   @option options [String] :grant_read_acp
@@ -1067,25 +1086,21 @@ module AWS
         :copy_source => 'x-amz-copy-source',
         :cache_control => 'Cache-Control',
         :metadata_directive => 'x-amz-metadata-directive',
-        :storage_class => 'x-amz-storage-class',
-        :server_side_encryption => 'x-amz-server-side-encryption',
         :content_type => 'Content-Type',
       }) do
 
         configure_request do |req, options|
-          # TODO : validate metadata directive COPY / REPLACE
-          # TODO : validate storage class STANDARD / REDUCED_REDUNDANCY
-          # TODO : add validations for storage class in other places used
+
           validate!(:copy_source, options[:copy_source]) do
             "may not be blank" if options[:copy_source].to_s.empty?
           end
+
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
-          options[:server_side_encryption] =
-            options[:server_side_encryption].to_s.upcase if
-            options[:server_side_encryption].kind_of?(Symbol)
           super(req, options)
           req.metadata = options[:metadata]
           req.storage_class = options[:storage_class]
+          req.server_side_encryption = options[:server_side_encryption]
+
           if options[:version_id]
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
           end
@@ -1130,18 +1145,13 @@ module AWS
         end
       end
 
-      def should_retry? response
+      def retryable_error? response
         super or
-          response.request_type == :complete_multipart_upload &&
-          extract_error_details(response)
+          (response.request_type == :complete_multipart_upload &&
+          extract_error_details(response))
           # complete multipart upload can return an error inside a
           # 200 level response -- this forces us to parse the
           # response for errors every time
-      end
-
-      def set_request_data request, options, block
-        request.body_stream = data_stream_from(options, &block)
-        request.headers['Content-Length'] = content_length_from(options)
       end
 
       def new_request
@@ -1320,9 +1330,29 @@ module AWS
           end
         end
 
+        def set_body_stream_and_content_length request, options
+
+          unless options[:content_length]
+            msg = "S3 requires a content-length header, unable to determine "
+            msg << "the content length of the data provided, please set "
+            msg << ":content_length"
+            raise ArgumentError, msg
+          end
+
+          request.headers['content-length'] = options[:content_length]
+          request.body_stream = options[:data]
+
+        end
+
         def require_upload_id!(upload_id)
           validate!("upload_id", upload_id) do
             "must not be blank" if upload_id.to_s.empty?
+          end
+        end
+
+        def require_part_number! part_number
+          validate!("part_number", part_number) do
+            "must not be blank" if part_number.to_s.empty?
           end
         end
 

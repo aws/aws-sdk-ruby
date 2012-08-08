@@ -29,9 +29,6 @@ module AWS
       attr_accessor :key
 
       # @private
-      attr_accessor :body_stream
-
-      # @private
       attr_accessor :force_path_style
 
       def metadata= metadata
@@ -45,6 +42,14 @@ module AWS
           headers["x-amz-storage-class"] = storage_class.to_s.upcase
         elsif storage_class
           headers["x-amz-storage-class"] = storage_class
+        end
+      end
+
+      def server_side_encryption= sse
+        if sse.is_a?(Symbol)
+          headers['x-amz-server-side-encryption'] = sse.to_s.upcase
+        elsif sse
+          headers['x-amz-server-side-encryption'] = sse
         end
       end
 
@@ -76,30 +81,13 @@ module AWS
 
       end
 
-      # @param [String, IO] body The http request body.  This can be a string or
-      #   any object that responds to #read and #eof? (like an IO object).
-      def body= body
-        @body_stream = StringIO.new(body)
-      end
-
-      # @return [String, nil] The http request body.
-      def body
-        if @body_stream
-          string = @body_stream.read
-          @body_stream.rewind
-          string
-        else
-          nil
-        end
-      end
-
       # From the S3 developer guide:
       #
-      # StringToSign = 
-      #   HTTP-Verb + "\n" + 
-      #   content-md5 + "\n" + 
-      #   content-type + "\n" + 
-      #   date + "\n" + 
+      # StringToSign =
+      #   HTTP-Verb + "\n" +
+      #   content-md5 + "\n" +
+      #   content-type + "\n" +
+      #   date + "\n" +
       #   CanonicalizedAmzHeaders + CanonicalizedResource;
       #
       def string_to_sign
@@ -124,11 +112,11 @@ module AWS
 
       # From the S3 developer guide
       #
-      #   CanonicalizedResource = 
-      #     [ "/" + Bucket ] + 
+      #   CanonicalizedResource =
+      #     [ "/" + Bucket ] +
       #     <HTTP-Request-URI, from the protocol name up to the querystring> +
-      #     [ sub-resource, if present. e.g. "?acl", "?location", 
-      #     "?logging", or "?torrent"]; 
+      #     [ sub-resource, if present. e.g. "?acl", "?location",
+      #     "?logging", or "?torrent"];
       #
       def canonicalized_resource
 
@@ -139,11 +127,11 @@ module AWS
         if Client.dns_compatible_bucket_name?(bucket) and !path_style?
           parts << "/#{bucket}"
         end
-  
+
         # all requests require the portion of the un-decoded uri up to
         # but not including the query string
         parts << path
- 
+
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
         params = (sub_resource_params + query_parameters_for_signature)
@@ -190,8 +178,8 @@ module AWS
       class << self
 
         def sub_resources
-          %w(acl location logging notification partNumber policy 
-             requestPayment torrent uploadId uploads versionId 
+          %w(acl location logging notification partNumber policy
+             requestPayment torrent uploadId uploads versionId
              versioning versions delete lifecycle)
         end
 

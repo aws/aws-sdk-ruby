@@ -131,7 +131,8 @@ After("@ec2") do
   @created_volumes.each do |volume|
     begin
       volume.delete
-    rescue AWS::EC2::Errors::InvalidVolumeID::NotFound
+    rescue AWS::EC2::Errors::InvalidVolumeID::NotFound,
+      AWS::EC2::Errors::InvalidVolume::NotFound
       # already deleted
     end
   end

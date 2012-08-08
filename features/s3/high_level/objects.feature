@@ -87,11 +87,6 @@ Feature: CRUD Objects (High Level)
     When I write the string "HELLO" to it
     Then the result should be the object with key "foo"
     And the object should eventually have "HELLO" as its body
-    And a request should have been made like:
-    | TYPE | NAME | VALUE |
-    | http | verb | PUT   |
-    | http | uri  | /foo  |
-    | http | body | HELLO |
 
   @put_object @multibyte
   Scenario: Write an object with a multibyte string

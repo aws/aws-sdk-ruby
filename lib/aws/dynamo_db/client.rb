@@ -761,7 +761,7 @@ module AWS
         end
       end
 
-      def should_retry? response 
+      def retryable_error? response
         if response.error.is_a?(Errors::ProvisionedThroughputExceededException)
           config.dynamo_db_retry_throughput_errors?
         else
@@ -771,7 +771,7 @@ module AWS
 
       def sleep_durations response
 
-        retry_count = 
+        retry_count =
           if expired_credentials?(response)
             config.max_retries == 0 ? 0 : 1
           else

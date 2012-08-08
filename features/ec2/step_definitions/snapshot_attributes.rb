@@ -41,9 +41,17 @@ Then /^the snapshot owner alias should be nil$/ do
 end
 
 Given /^I create a snapshot with description "([^\"]*)"$/ do |description|
+
   Given %(I create a volume)
-  @snapshot = @volume.create_snapshot(description)
+
+  # it can take a while before the volume is in a state where snapshots 
+  # are allowed
+  eventually do
+    @snapshot = @volume.create_snapshot(description)
+  end
+
   @created_snapshots << @snapshot
+
 end
 
 Then /^the snapshot description should be "([^\"]*)"$/ do |description|

@@ -93,6 +93,7 @@ module AWS
             parser.request_params(options).each do |param|
               request.add_param(param)
             end
+            request.body = request.url_encoded_params
 
           end
 

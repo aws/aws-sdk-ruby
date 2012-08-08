@@ -16,14 +16,18 @@ module AWS
 
     # = Response
     #
-    # Each service request returns a response object.  Responses provide
-    # access to response data and request/response metadata.
+    # Each Service has a Client class.  There is one method per service
+    # operation defined on the client.  These methods all return a {Response}
+    # object.
+    #
+    # In addition to the response data, these responses provide metadata
+    # about the HTTP request made and the HTTP response received.
     #
     # == Response Data
     #
-    # Each response has a hash of data that represents the data
-    # returned by the service.  You can get at this data by
-    # calling {#data} (you can also use the {#[]} method as a shortcut)
+    # You can access the response data for a client request using the {#data}
+    # method or the {#[]} method.  Response data is a hash and {#[]} is
+    # a shortcut for accessing this hash.
     #
     #   # make a request to describe one instance
     #   ec2 = AWS::EC2.new
@@ -40,10 +44,10 @@ module AWS
     # In addition to the response data, there is additional information
     # available with the response, including:
     #
-    # * the name of the client request method called
-    # * the hash of options passed to the client request
-    # * the HTTP request object (useful for debugging)
-    # * the HTTP response object (useful for debugging)
+    # * {#request_type} - the name of the client request method
+    # * {#request_options} - the hash of options passed to the client method
+    # * {#http_request} - The HTTP request made
+    # * {#http_response} - the HTTP response received
     #
     # Given the example and response object from above:
     #
@@ -101,7 +105,7 @@ module AWS
         @data = {}
         @retry_count = 0
         @duration = 0
-        rebuild_request if @request_builder && !http_request
+        build_request if @request_builder && !http_request
       end
 
       # Provides access to the response data.  This is a short-cut
@@ -130,9 +134,10 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns true if the http request timed out.
-      def timeout?
-        http_response.timeout?
+      # @return [Boolean] Returns +true+ if the http request failed due to
+      #   a networking issue.
+      def network_error?
+        http_response.network_error?
       end
 
       # @return [String]
@@ -157,10 +162,23 @@ module AWS
       # (throttling, server errors, socket errors, etc).
       # @private
       def rebuild_request
-        @http_request = @request_builder.call
+        build_request
+        @http_request.body_stream.rewind if @http_request.body_stream
+      end
+
+      # @return [Boolean] Returns +false+ if it is not safe to retry a
+      #   request.  This happens when the http request body is an IO
+      #   object that can not be rewound and re-streamed.
+      def safe_to_retry?
+        @http_request.body_stream.nil? or
+        @http_request.body_stream.respond_to?(:rewind)
       end
 
       protected
+
+      def build_request
+        @http_request = @request_builder.call
+      end
 
       # @note The prefered method to get as response data is to use {#[]}.
       #

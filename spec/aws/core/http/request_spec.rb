@@ -16,7 +16,7 @@ require 'spec_helper'
 module AWS::Core
   module Http
     describe Request do
-      
+
       context '#initialize' do
 
         it 'accepts no params' do
@@ -30,7 +30,7 @@ module AWS::Core
       context '#use_ssl?' do
 
         it 'defaults to true' do
-          Request.new.use_ssl?.should == true  
+          Request.new.use_ssl?.should == true
         end
 
         it 'can be set to false' do
@@ -162,7 +162,7 @@ module AWS::Core
       end
 
       context '#url_encoded_params' do
-        
+
         it 'defaults to nil' do
           Request.new.url_encoded_params.should be_nil
         end
@@ -207,24 +207,54 @@ module AWS::Core
           Request.new.body.should be_nil
         end
 
-        it 'can be set directly' do
+        it 'is mutable' do
           r = Request.new
           r.body = 'abc'
-          r.body.should == 'abc'
+          r.body.should eq('abc')
         end
-       
-        it 'defaults to url encoded params when not provided' do
+
+        it 'returns the body stream read into a single string' do
+
+          # the io will get read once and then cached, multiple calls
+          # should not re-read the stream
+          io = double('io')
+          io.should_receive(:read).exactly(1).times.and_return('abc')
+          io.should_receive(:rewind)
+
           r = Request.new
-          r.body.should == nil
-          r.add_param('foo', 'bar')
-          r.body.should == r.url_encoded_params 
-          r.body.should == 'foo=bar'
+          r.body.should eq(nil)
+          r.body_stream = io
+          r.body.should eq('abc')
+          r.body.should eq('abc') # it rewinds the stream when needed
+
+        end
+
+      end
+
+      context '#body_stream' do
+
+        it 'defaults to nil' do
+          Request.new.body_stream.should eq(nil)
+        end
+
+        it 'can be set' do
+          io = StringIO.new('abc')
+          r = Request.new
+          r.body_stream = io
+          r.body_stream.should eq(io)
+        end
+
+        it 'returns the body wrapped in a string io' do
+          r = Request.new
+          r.body = 'body'
+          r.body_stream.should be_a(StringIO)
+          r.body_stream.read.should eq('body')
         end
 
       end
 
       context '#params' do
-        
+
         it 'should return an array' do
           Request.new.params.should be_an(Array)
         end
@@ -241,7 +271,7 @@ module AWS::Core
       end
 
       context '#add_param' do
-        
+
         it 'should add a param' do
           req = Request.new
           req.add_param('foo')
@@ -253,14 +283,14 @@ module AWS::Core
           req.add_param('foo', 'bar')
           req.params.last.value.should == 'bar'
         end
-        
+
         it 'should increase the number of params' do
           req = Request.new
           req.add_param('foo')
           req.add_param('bar')
           req.params.length.should == 2
         end
-         
+
       end
 
     end

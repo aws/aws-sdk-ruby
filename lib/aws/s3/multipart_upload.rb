@@ -110,8 +110,10 @@ module AWS
       # storage consumed by all parts.
       # @return [nil]
       def abort
-        client.abort_multipart_upload(base_opts)
-        @aborted = true
+        unless aborted?
+          client.abort_multipart_upload(base_opts)
+          @aborted = true
+        end
         nil
       end
       alias_method :delete, :abort
@@ -257,8 +259,9 @@ module AWS
       #   returns the object.  If no upload was attempted (e.g. if it
       #   was aborted or if no parts were uploaded), returns +nil+.
       def close
-        return if aborted?
-        if completed_parts.empty?
+        if aborted?
+          nil
+        elsif completed_parts.empty?
           abort
         else
           complete

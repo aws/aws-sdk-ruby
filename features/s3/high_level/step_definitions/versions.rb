@@ -36,11 +36,15 @@ When /^the bucket should be versioned$/ do
 end
 
 When /^the bucket should not be versioned$/ do
-  @bucket.versioned?.should == false
+  eventually do
+    @bucket.versioned?.should == false
+  end
 end
 
 When /^the bucket versioning state should be "([^"]*)"$/ do |state|
-  @bucket.versioning_state.should == state.to_sym
+  eventually do
+    @bucket.versioning_state.should == state.to_sym
+  end
 end
 
 Then /^there should be (\d+) versions for the object$/ do |count|

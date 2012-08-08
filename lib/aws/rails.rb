@@ -35,7 +35,7 @@ module AWS
   # for rails 2 and bundler for rails 3) then {setup} is called
   # automatically.
   module Rails
-    
+
     # Adds extra functionality to Rails.
     #
     # Normailly this method is invoked automatically when you require this
@@ -56,13 +56,13 @@ module AWS
       log_to_rails_logger
       nil
     end
-  
+
     # Loads AWS configuration options from +RAILS_ROOT/config/aws.yml+.
     #
     # This configuration file is optional.  You can omit this file and instead
     # use ruby to configure AWS inside a configuration initialization script
     # (e.g. RAILS_ROOT/config/intializers/aws.rb).
-    # 
+    #
     # If you have a yaml configuration file it should be formatted like the
     # standard +database.yml+ file in a Rails application.  This means there
     # should be one section for Rails environment:
@@ -76,8 +76,8 @@ module AWS
     #     access_key_id: YOUR_ACCESS_KEY_ID
     #     secret_access_key: YOUR_SECRET_ACCESS_KEY
     #     simple_db_consistent_reads: true
-    #     
-    # You should also consider DRYing up your configuration file using 
+    #
+    # You should also consider DRYing up your configuration file using
     # YAML references:
     #
     #   development:
@@ -90,7 +90,7 @@ module AWS
     #     simple_db_consistent_reads: true
     #
     # The yaml file will also be ERB parsed so you can use ruby inside of it:
-    # 
+    #
     #   development:
     #     access_key_id: YOUR_ACCESS_KEY_ID
     #     secret_access_key: <%= read_secret_from_a_secure_location %>
@@ -101,9 +101,9 @@ module AWS
     #     simple_db_consistent_reads: true
     #
     def self.load_yaml_config
-  
+
       path = Pathname.new("#{rails_root}/config/aws.yml")
-  
+
       if File.exists?(path)
         cfg = YAML::load(ERB.new(File.read(path)).result)
         unless cfg[rails_env]
@@ -111,9 +111,9 @@ module AWS
         end
         AWS.config(cfg[rails_env])
       end
-  
+
     end
-  
+
     # Adds a delivery method to ActionMailer that uses
     # {AWS::SimpleEmailService}.
     #

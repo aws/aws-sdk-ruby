@@ -128,7 +128,7 @@ module AWS
     #   +true+, requests will always use path style.  This can be useful
     #   for testing environments.
     #
-    # @attr_reader [Integer] s3_multipart_max_parts (1000)
+    # @attr_reader [Integer] s3_multipart_max_parts (10000)
     #   The maximum number of parts to split a file into when uploading
     #   in parts to S3.
     #
@@ -162,6 +162,17 @@ module AWS
     #   stores data using server side encryption as follows:
     #
     #     s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
+    #
+    # @attr_reader [OpenSSL::PKey::RSA, String] s3_encryption_key
+    #   If this is set, AWS::S3::S3Object #read and #write methods will always
+    #   perform client-side encryption with this key. The key can be overridden
+    #   at runtime by using the :encryption_key option.  A value of nil
+    #   means that client-side encryption will not be used.
+    #
+    # @attr_reader [Symbol] s3_encryption_materials_location
+    #   When set to +:instruction_file+, AWS::S3::S3Object will store
+    #   encryption materials in a seperate object, instead of the object
+    #   metadata.
     #
     # @attr_reader [String] simple_db_endpoint ('sdb.amazonaws.com')
     #   The service endpoint for Amazon SimpleDB.

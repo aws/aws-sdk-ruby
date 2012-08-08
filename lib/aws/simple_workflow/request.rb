@@ -19,9 +19,6 @@ module AWS
 
       include Core::Signature::Version3
 
-      # @return [String,nil]
-      attr_accessor :body
-
       def read_timeout
         # increase read timeout for long polling
         if headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/

@@ -21,6 +21,11 @@ module AWS
     # Base client class for all of the Amazon AWS service clients.
     class Client
 
+      # Raised when a request failed due to a networking issue (e.g.
+      # EOFError, IOError, Errno::ECONNRESET, Errno::EPIPE,
+      # Timeout::Error, etc)
+      class NetworkError < StandardError; end
+
       extend Naming
 
       # @private
@@ -155,6 +160,19 @@ module AWS
         response
       end
 
+      # Logs the warning to the configured logger, otherwise to stderr.
+      # @param [String] warning
+      # @return [nil]
+      def log_warning warning
+        message = '[aws-sdk-gem-warning] ' + warning
+        if config.logger
+          config.logger.warn(message)
+        else
+          $stderr.puts(message)
+        end
+        nil
+      end
+
       protected
 
       def new_request
@@ -204,13 +222,30 @@ module AWS
 
       end
 
-      def make_sync_request response
+      def make_sync_request response, &read_block
         retry_server_errors do
 
-          response.http_response = http_response =
-            Http::Response.new
+          response.http_response = Http::Response.new
 
-          @http_handler.handle(response.http_request, http_response)
+          @http_handler.handle(
+            response.http_request,
+            response.http_response,
+            &read_block)
+
+          if
+            block_given? and
+            response.http_response.status < 300 and
+            response.http_response.body
+          then
+
+            msg = ":http_handler read the entire http response body into "
+            msg << "memory, it should have instead yielded chunks"
+            log_warning(msg)
+
+            # go ahead and yield the body on behalf of the handler
+            yield(response.http_response.body)
+
+          end
 
           populate_error(response)
           response.signal_success unless response.error
@@ -227,7 +262,6 @@ module AWS
         while should_retry?(response)
           break if sleeps.empty?
           Kernel.sleep(sleeps.shift)
-          # rebuild the request to get a fresh signature
           rebuild_http_request(response)
           response = yield
         end
@@ -256,8 +290,16 @@ module AWS
       end
 
       def should_retry? response
+        if retryable_error?(response)
+          response.safe_to_retry?
+        else
+          false
+        end
+      end
+
+      def retryable_error? response
         expired_credentials?(response) or
-        response.timeout? or
+        response.network_error? or
         response.throttled? or
         response.error.kind_of?(Errors::ServerError)
       end
@@ -303,7 +345,7 @@ module AWS
       end
 
       # Logs the response to the configured logger.
-      # @param [Resposne] response
+      # @param [Response] response
       # @return [nil]
       def log_response response
         if config.logger
@@ -336,10 +378,10 @@ module AWS
         ]
 
         case
-        when response.timeout? then TimeoutError.new
-        when error_code        then error_class(error_code).new(*error_args)
-        when status >= 500     then Errors::ServerError.new(*error_args)
-        when status >= 300     then Errors::ClientError.new(*error_args)
+        when response.network_error? then NetworkError.new
+        when error_code              then error_class(error_code).new(*error_args)
+        when status >= 500           then Errors::ServerError.new(*error_args)
+        when status >= 300           then Errors::ClientError.new(*error_args)
         else nil # no error
         end
 
@@ -371,21 +413,25 @@ module AWS
         AWS.const_get(self.class.to_s[/(\w+)::Client/, 1])::Errors
       end
 
-      def client_request name, options, &block
+      def client_request name, options, &read_block
         return_or_raise(options) do
           log_client_request(options) do
 
             if config.stub_requests?
 
               response = stub_for(name)
-              response.http_request = build_request(name, options, &block)
+              response.http_request = build_request(name, options)
               response.request_options = options
               response
 
             else
 
               client = self
-              response = new_response { client.send(:build_request, name, options, &block) }
+
+              response = new_response do
+                client.send(:build_request, name, options)
+              end
+
               response.request_type = name
               response.request_options = options
 
@@ -399,8 +445,8 @@ module AWS
               else
                 # process the http request
                 options[:async] ?
-                make_async_request(response) :
-                  make_sync_request(response)
+                make_async_request(response, &read_block) :
+                  make_sync_request(response, &read_block)
 
                 # process the http response
                 response.on_success do
@@ -424,7 +470,7 @@ module AWS
         self.class::CACHEABLE_REQUESTS.include?(name)
       end
 
-      def build_request(name, options, &block)
+      def build_request name, options
 
         # we dont want to pass the async option to the configure block
         opts = options.dup
@@ -445,7 +491,7 @@ module AWS
         http_request.ssl_ca_file = config.ssl_ca_file if config.ssl_ca_file
         http_request.ssl_ca_path = config.ssl_ca_path if config.ssl_ca_path
 
-        send("configure_#{name}_request", http_request, opts, &block)
+        send("configure_#{name}_request", http_request, opts)
 
         http_request.headers["user-agent"] = user_agent_string
         http_request.add_authorization!(credential_provider)
@@ -474,16 +520,18 @@ module AWS
       #
       def self.add_client_request_method method_name, options = {}, &block
 
-        self.operations << method_name
+        operations << method_name
 
         ClientRequestMethodBuilder.new(self, method_name, &block)
 
-        module_eval <<-END
+        method_def = <<-METHOD
           def #{method_name}(*args, &block)
             options = args.first ? args.first : {}
             client_request(#{method_name.inspect}, options, &block)
           end
-        END
+        METHOD
+
+        module_eval(method_def)
 
       end
 
@@ -518,15 +566,6 @@ module AWS
         def configure_request options = {}, &block
           name = "configure_#{@method_name}_request"
           MetaUtils.class_extend_method(@client_class, name, &block)
-          if block.arity == 3
-            m = Module.new
-            m.module_eval(<<-END)
-              def #{name}(req, options, &block)
-                super(req, options, block)
-              end
-            END
-            @client_class.send(:include, m)
-          end
         end
 
         def process_response &block

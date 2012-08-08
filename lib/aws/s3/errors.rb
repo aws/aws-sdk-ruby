@@ -76,6 +76,20 @@ module AWS
 
       end
 
+      # This error is special, because S3 must first retrieve the client
+      #   side encryption key in it's encrypted form before finding if the
+      #   key is incorrect.
+      class IncorrectClientSideEncryptionKey < AWS::Errors::Base
+
+        include AWS::Errors::ClientError
+
+        def initialize(msg)
+          super("",
+                "",
+                "IncorrectClientSideEncryptionKey",
+                msg)
+        end
+      end
     end
   end
 end

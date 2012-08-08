@@ -39,6 +39,7 @@ group :build do
   gem 'rspec', '2.5'
   gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
   gem 'rcov', '0.9.9'
+  gem 'simplecov', :require => false
   gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
 end
 

@@ -154,7 +154,7 @@ describe AWS do
         end
 
         it 'uses the configured timeouts, logger and wire logging' do
-          
+
           logger = double('logger')
 
           cfg = config(

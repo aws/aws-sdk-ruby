@@ -36,7 +36,7 @@ module AWS
         #   60 seconds.
         attr_accessor :default_read_timeout
 
-        # @return [String] Returns hostname of the request.
+        # @return [String] hostname of the request
         attr_accessor :host
 
         # @return [Integer] Returns the port number this request will be
@@ -47,7 +47,7 @@ module AWS
         #   'POST', 'HEAD' or 'DELETE').  Defaults to 'POST'.
         attr_accessor :http_method
 
-        # @return [Hash] Returns a hash of header values.
+        # @return [CaseInsensitiveHash] request headers
         attr_accessor :headers
 
         # @return [String] Returns the request URI (path + querystring).
@@ -57,23 +57,17 @@ module AWS
         #   to be populated for requests against signature v4 endpoints.
         attr_accessor :region
 
-        # @return [String]
+        # @return [String] Returns the AWS access key ID used to authorize the
+        #   request.
         # @private
         attr_accessor :access_key_id
 
-        # @private
         # @return [Array<Param>] Returns an array of request params.  Requests
         #   that use signature version 2 add params to the request and then
         #   sign those before building the {#body}.  Normally the {#body}
         #   should be set directly with the HTTP payload.
+        # @private
         attr_accessor :params
-
-        # @return [String] Returns the HTTP request payload (body).
-        attr_accessor :body
-
-        # @return [String] Returns the AWS access key ID used to authorize the
-        #   request.
-        attr_accessor :access_key_id
 
         # @return [String] The name of the service for Signature v4 signing.
         #   This does not always match the ruby name (e.g.
@@ -125,11 +119,6 @@ module AWS
           default_read_timeout
         end
 
-        # @return [String,nil] Returns the request body (payload).
-        def body
-          @body || url_encoded_params
-        end
-
         # @return [String] Returns the HTTP request path.
         def path
           uri.split(/\?/)[0]
@@ -165,6 +154,53 @@ module AWS
         #   are no params, then nil is returned.
         def url_encoded_params
           params.empty? ? nil : params.sort.collect(&:encoded).join('&')
+        end
+
+        # @param [String] body
+        def body= body
+          @body = body
+          if body
+            headers['content-length'] = body.size if body
+          else
+            headers.delete('content-length')
+          end
+        end
+
+        # @note Calling #body on a request with a #body_stream
+        #   will cause the entire stream to be read into memory.
+        # @return [String,nil] Returns the request body.
+        def body
+          if @body
+            @body
+          elsif @body_stream
+            @body = @body_stream.read
+            if @body_stream.respond_to?(:rewind)
+              @body_stream.rewind
+            else
+              @body_stream = StringIO.new(@body)
+            end
+            @body
+          else
+            nil
+          end
+        end
+
+        # Sets the request body as an IO object that will be streamed.
+        # @note You must also set the #headers['content-length']
+        # @param [IO] stream An object that responds to #read and #eof.
+        def body_stream= stream
+          @body_stream = stream
+        end
+
+        # @return [IO,nil]
+        def body_stream
+          if @body_stream
+            @body_stream
+          elsif @body
+            StringIO.new(@body)
+          else
+            nil
+          end
         end
 
         # @private

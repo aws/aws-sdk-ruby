@@ -69,7 +69,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.2"
+  VERSION = "1.6.3"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -299,7 +299,7 @@ module AWS
     #   +true+, requests will always use path style.  This can be useful
     #   for testing environments.
     #
-    # @option options [Integer] :s3_multipart_max_parts (1000) The maximum
+    # @option options [Integer] :s3_multipart_max_parts (10000) The maximum
     #   number of parts to split a file into when uploading in parts to S3.
     #
     # @option options [Integer] :s3_multipart_threshold (16777216) When
@@ -327,6 +327,17 @@ module AWS
     #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
     #   * {S3::S3Object#presigned_post}
     #   * {S3::Bucket#presigned_post}
+    #
+    # @option options [OpenSSL::PKey::RSA, String] :s3_encryption_key (nil)
+    #   If this is set, AWS::S3::S3Object #read and #write methods will always
+    #   perform client-side encryption with this key. The key can be overridden
+    #   at runtime by using the :encryption_key option.  A value of nil
+    #   means that client-side encryption will not be used.
+    #
+    # @option options [Symbol] :s3_encryption_materials_location (:metadata)
+    #   When set to +:instruction_file+, AWS::S3::S3Object will store
+    #   encryption materials in a seperate object, instead of the object
+    #   metadata.
     #
     # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com')
     #   The service endpoint for Amazon SimpleDB.

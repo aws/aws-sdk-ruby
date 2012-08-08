@@ -13,20 +13,14 @@
 
 module AWS
   class DynamoDB
-
     # @private
     class Request < Core::Http::Request
-
       include Core::Signature::Version4
 
       def service
         'dynamodb'
       end
 
-      # @return [String,nil]
-      attr_accessor :body
-
     end
-
   end
 end

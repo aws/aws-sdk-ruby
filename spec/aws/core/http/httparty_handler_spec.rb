@@ -74,11 +74,11 @@ module AWS::Core
               should_not raise_error
           end
 
-          it 'should indicate that there was a timeout' do
+          it 'should indicate that there was a network error' do
             HTTPartyHandler.stub(:post).
               and_raise(Errno::ETIMEDOUT)
             handler.handle(req, resp)
-            resp.timeout?.should be_true
+            resp.network_error?.should be_true
           end
 
         end

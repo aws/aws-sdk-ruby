@@ -19,7 +19,7 @@ module AWS
   module Core
     module Signature
       module Version4
-  
+
         def self.included base
           base.send(:include, Signer)
         end
@@ -29,13 +29,13 @@ module AWS
           headers['content-type'] ||= 'application/x-www-form-urlencoded'
           headers['host'] = host
           headers['x-amz-date'] = datetime
-          headers['x-amz-security-token'] = credentials.session_token if 
+          headers['x-amz-security-token'] = credentials.session_token if
             credentials.session_token
           headers['authorization'] = authorization(credentials, datetime)
         end
-        
+
         protected
-  
+
         def authorization credentials, datetime
           parts = []
           parts << "AWS4-HMAC-SHA256 Credential=#{credentials.access_key_id}/#{credential_string(datetime)}"
@@ -43,7 +43,7 @@ module AWS
           parts << "Signature=#{hex16(signature(credentials, datetime))}"
           parts.join(', ')
         end
-  
+
         def signature credentials, datetime
           k_secret = credentials.secret_access_key
           k_date = hmac("AWS4" + k_secret, datetime[0,8])
@@ -52,7 +52,7 @@ module AWS
           k_credentials = hmac(k_service, 'aws4_request')
           hmac(k_credentials, string_to_sign(datetime))
         end
-  
+
         def string_to_sign datetime
           parts = []
           parts << 'AWS4-HMAC-SHA256'
@@ -61,8 +61,8 @@ module AWS
           parts << hex16(hash(canonical_request))
           parts.join("\n")
         end
-  
-        def credential_string datetime 
+
+        def credential_string datetime
           parts = []
           parts << datetime[0,8]
           parts << region
@@ -70,7 +70,7 @@ module AWS
           parts << 'aws4_request'
           parts.join("/")
         end
-  
+
         def canonical_request
           parts = []
           parts << http_method
@@ -81,18 +81,18 @@ module AWS
           parts << hex16(hash(body || ''))
           parts.join("\n")
         end
-  
+
         def service
           # this method is implemented in the request class for each service
           raise NotImplementedError
         end
-  
+
         def signed_headers
           to_sign = headers.keys.map{|k| k.to_s.downcase }
           to_sign.delete('authorization')
           to_sign.sort.join(";")
         end
-  
+
         def canonical_headers
           headers = []
           self.headers.each_pair do |k,v|
@@ -101,20 +101,20 @@ module AWS
           headers = headers.sort_by(&:first)
           headers.map{|k,v| "#{k}:#{canonical_header_values(v)}" }.join("\n")
         end
-  
+
         def canonical_header_values values
           values = [values] unless values.is_a?(Array)
           values.map(&:to_s).map(&:strip).join(',')
         end
-  
+
         def hex16 string
           string.unpack('H*').first
         end
-  
+
         def hash string
           Digest::SHA256.digest(string)
         end
-  
+
       end
     end
   end

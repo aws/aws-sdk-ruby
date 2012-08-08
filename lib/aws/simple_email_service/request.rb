@@ -13,7 +13,6 @@
 
 module AWS
   class SimpleEmailService
-
     # @private
     class Request < Core::Http::Request
 
@@ -24,6 +23,5 @@ module AWS
       end
 
     end
-
   end
 end

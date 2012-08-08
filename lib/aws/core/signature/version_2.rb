@@ -24,6 +24,7 @@ module AWS
           add_param('SignatureVersion', '2')
           add_param('SignatureMethod', 'HmacSHA256')
           add_param('Signature', signature(credentials))
+          self.body = url_encoded_params
         end
 
         protected

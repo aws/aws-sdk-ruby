@@ -14,27 +14,39 @@
 module AWS
   module Core
     module Http
-      
+
       # @private
       class Handler
-  
+
         attr_reader :base
-  
+
         def initialize(base, &block)
           @base = base
           if base.respond_to?(:handle)
-  
-            unless block.arity == 2
-              raise ArgumentError, 'passed block must accept 2 arguments'
+
+            unless [2,3].include?(block.arity)
+              raise ArgumentError, 'passed block must accept 2 or 3 arguments'
             end
+
             MetaUtils.extend_method(self, :handle, &block)
-  
+
+            if block.arity == 3
+              m = Module.new do
+                eval(<<-DEF)
+                  def handle req, resp, &read_block
+                    super(req, resp, read_block)
+                  end
+                DEF
+              end
+              self.extend(m)
+            end
+
           elsif base.respond_to?(:handle_async)
-  
+
             unless block.arity == 3
               raise ArgumentError, 'passed block must accept 3 arguments'
             end
-  
+
             MetaUtils.extend_method(self, :handle_async) do |req, resp, handle|
               @base.handle_async(req, resp, handle)
             end
@@ -44,16 +56,16 @@ module AWS
               end
               define_method(:handle_async, &block)
             end
-  
+
           else
             raise ArgumentError, 'base must respond to #handle or #handle_async'
           end
         end
-  
-        def handle(request, http_response)
-          @base.handle(request, http_response)
+
+        def handle(request, http_response, &read_block)
+          @base.handle(request, http_response, &read_block)
         end
-  
+
         def handle_async(request, http_response, handle)
           Thread.new do
             begin
@@ -65,12 +77,12 @@ module AWS
             end
           end
         end
-  
+
         def sleep_with_callback seconds, &block
           Kernel.sleep(seconds)
           yield
         end
-  
+
       end
     end
   end

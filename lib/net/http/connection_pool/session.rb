@@ -17,9 +17,13 @@ require 'openssl'
 
 class Net::HTTP::ConnectionPool
 
+  # Used by Net::HTTP::ConnectionPool to wrap Net::HTTP::Session objects.
+  # Users should never need to interact with these session wrappers.
   # @private
   class Session
 
+    # @param [Net::HTTPSession] http_session
+    # @param [String] key
     def initialize http_session, key
       @http_session = http_session
       @key = key
@@ -27,20 +31,42 @@ class Net::HTTP::ConnectionPool
       @last_used_at = nil
     end
 
+    # @return [Net::HTTPSession]
     attr_reader :http_session
 
+    # @return [String]
     attr_reader :key
 
+    # @return [Time]
     attr_reader :created_at
 
+    # @return [Time]
     attr_reader :last_used_at
 
-    def request *args, &block
-      response = http_session.request(*args, &block)
-      @last_used_at = Time.now
-      response
+    # @param [Integer] timeout Number of seconds before Net::HTTP should
+    #   timeout while waiting to read a response.
+    def read_timeout= timeout
+      http_session.read_timeout = timeout
     end
 
+    # Makes a HTTP request.  See Net::HTTPSession#request documentation
+    # from the Ruby standard library for information about argments.
+    #
+    #   connection.request(Net::HTTP::Get.new('/')) do |response|
+    #     # Parse the response (status, headers and body) here.
+    #     # You should be done with the response by the end of the block.
+    #   end
+    #
+    # @yield [response]
+    # @yieldparam [Net::HTTPResponse] response
+    # @return [nil]
+    def request *args, &block
+      http_session.request(*args, &block)
+      @last_used_at = Time.now
+      nil
+    end
+
+    # Attempts to cleanly close the HTTP session.
     # @return [nil]
     def finish
       begin
@@ -52,7 +78,15 @@ class Net::HTTP::ConnectionPool
 
     class << self
 
-      def for connection, open_timeout, debug_logger = nil
+      # Starts a new HTTP session and returns it wrapped in a {Session} object.
+      # @param [Connection] connection
+      # @param [Hash] options
+      # @option options [Integer] :open_timeout (15) The number of seconds to
+      #   wait while trying to open the HTTP session before timeing out.
+      # @option options [Logger] :debug_logger HTTP wire traces are logged
+      #   here when specified.
+      # @return [Session]
+      def start connection, options = {}
 
         http_args = []
         http_args << connection.host
@@ -65,8 +99,8 @@ class Net::HTTP::ConnectionPool
         end
 
         http = Net::HTTP.new(*http_args)
-        http.set_debug_output(debug_logger)
-        http.open_timeout = open_timeout
+        http.set_debug_output(options[:debug_logger]) if options[:debug_logger]
+        http.open_timeout = options[:open_timeout] || 15
 
         if connection.ssl?
           http.use_ssl = true
@@ -88,6 +122,5 @@ class Net::HTTP::ConnectionPool
       end
 
     end
-
   end
 end

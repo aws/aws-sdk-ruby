@@ -14,15 +14,180 @@
 module AWS
   class S3
 
-    # Represents a single S3 bucket.  
+    # Represents a bucket in S3.
     #
-    # @example Creating a Bucket
-    # 
-    #   bucket = s3.buckets.create('mybucket')
+    # = Creating Buckets
     #
-    # @example Getting an Existing Bucket
+    # You create a bucket by name.  Bucket names must be globally unique
+    # and must be DNS compatible.
     #
-    #   bucket = s3.buckets['mybucket']
+    #   s3 = AWS::S3.new
+    #   bucket = s3.buckets.create('dns-compat-bucket-name')
+    #
+    # = Getting a Bucket
+    #
+    # You can create a reference to a bucket, given its name.
+    #
+    #   bucket = s3.buckets['bucket-name'] # makes no request
+    #   bucket.exists? #=> returns true/false
+    #
+    # = Enumerating Buckets
+    #
+    # The {BucketCollection} class is enumerable.
+    #
+    #   s3.buckets.each do |bucket|
+    #     puts bucket.name
+    #   end
+    #
+    # = Deleting a Bucket
+    #
+    # You can delete an empty bucket you own.
+    #
+    #   bucket = s3.buckets.create('my-temp-bucket')
+    #   bucket.objects['abc'].write('xyz')
+    #
+    #   bucket.clear! # deletes all object versions in batches
+    #   bucket.delete
+    #
+    # You can alternatively call {#delete!} which will clear
+    # the bucket for your first.
+    #
+    #   bucket.delete!
+    #
+    # = Objects
+    #
+    # Given a bucket you can access its objects, either by key or by
+    # enumeration.
+    #
+    #   bucket.objects['key'] #=> makes no request, returns an S3Object
+    #
+    #   bucket.objects.each do |obj|
+    #     puts obj.key
+    #   end
+    #
+    # See {ObjectCollection} and {S3Object} for more information on working
+    # with objects.
+    #
+    # = Bucket Policies and ACLs
+    #
+    # You can control access to your bucket and its contents a number
+    # of ways.  You can specify a bucket ACL (access control list)
+    # or a bucket policy.
+    #
+    # == ACLs
+    #
+    # ACLs control access to your bucket and its contents via a list of
+    # grants and grantees.
+    #
+    # === Canned ACLs
+    #
+    # The simplest way to specify an ACL is to use one of Amazon's "canned"
+    # ACLs.  Amazon accepts the following canned ACLs:
+    #
+    # * +:private+
+    # * +:public_read+
+    # * +:public_read_write+
+    # * +:authenticated_read+
+    # * +:bucket_owner_read+
+    # * +:bucket_owner_full_control+
+    #
+    # You can specify a the ACL at bucket creation or later update a bucket.
+    #
+    #   # at create time, defaults to :private when not specified
+    #   bucket = s3.buckets.create('name', :acl => :public_read)
+    #
+    #   # replacing an existing bucket ACL
+    #   bucket.acl = :private
+    #
+    # === Grants
+    #
+    # Alternatively you can specify a hash of grants.  Each entry in the
+    # +:grant+ hash has a grant (key) and a list of grantees (values).
+    # Valid grant keys are:
+    #
+    # * +:grant_read+
+    # * +:grant_write+
+    # * +:grant_read_acp+
+    # * +:grant_write_acp+
+    # * +:grant_full_control+
+    #
+    # Each grantee can be a String, Hash or array of strings or hashes.
+    # The following example uses grants to provide public read
+    # to everyone while providing full control to a user by email address
+    # and to another by their account id (cannonical user id).
+    #
+    #   bucket = s3.buckets.create('name', :grants => {
+    #     :grant_read => [
+    #       { :uri => "http://acs.amazonaws.com/groups/global/AllUsers" },
+    #     ],
+    #     :grant_full_control => [
+    #       { :id => 'abc...mno' }               # cannonical user id
+    #       { :email_address => 'foo@bar.com' }, # email address
+    #     ]
+    #   })
+    #
+    # === ACL Object
+    #
+    # Lastly, you can build an ACL object and use a Ruby DSL to specify grants
+    # and grantees.  See {ACLObject} for more information.
+    #
+    #   # updating an existing bucket acl using ACLObject
+    #   bucket.acl.change do |acl|
+    #     acl.grants.reject! do |g|
+    #       g.grantee.canonical_user_id != bucket.owner.id
+    #     end
+    #   end
+    #
+    # == Policies
+    #
+    # You can also work with bucket policies.
+    #
+    #   policy = AWS::S3::Policy.new
+    #   policy.allow(
+    #     :actions => [:put_object, :get_object]
+    #     :resources => [bucket]
+    #     :principals => :any)
+    #
+    #   bucket.policy = policy
+    #
+    # See {Core::Policy} and {S3::Policy} for more information on build
+    # policy objects.
+    #
+    # = Versioned Buckets
+    #
+    # You can enable versioning on a bucket you control.  When versioning
+    # is enabled, S3 will keep track of each version of each object you
+    # write to the bucket (even deletions).
+    #
+    #   bucket.versioning_enabled? #=> false
+    #   bucket.enable_versioning
+    #   # there is also a #disable_versioning method
+    #
+    #   obj = bucket.objects['my-obj']
+    #   obj.write('a')
+    #   obj.write('b')
+    #   obj.delete
+    #   obj.write('c')
+    #
+    #   obj.versions.each do |obj_version|
+    #     if obj_version.delete_marker?
+    #       puts obj_version.read
+    #     else
+    #       puts "- DELETE MARKER"
+    #     end
+    #   end
+    #
+    # Alternatively you can enumerate all versions of all objects in your
+    # bucket.
+    #
+    #   bucket.versions.each do |obj_version|
+    #     puts obj_version.key + " : " + obj_version.version_id
+    #   end
+    #
+    # See {BucketVersionCollection}, {ObjectVersionCollection} and
+    # {ObjectVersion} for more information on working with objects in
+    # a versioned bucket.  Also see the S3 documentation for information
+    # on object versioning.
     #
     class Bucket
 
