@@ -16,10 +16,10 @@ module AWS
     module XML
 
       # A class that simplifies building XML {Parser} rules.  This is also
-      # a compatability layer between the old and new formats of the api 
+      # a compatability layer between the old and new formats of the api
       # config.
       class Grammar
-        
+
         def initialize rules = {}, options = {}
           @rules = rules
           @context = @rules
@@ -28,7 +28,7 @@ module AWS
             options[:inflect_rename] : true
         end
 
-        # Parses the XML with the rules provided by the current grammar.  
+        # Parses the XML with the rules provided by the current grammar.
         # This method is meant to provide backwards compatability with
         # the old XmlGrammar class that handled rules and parsing.
         # @param [String] xml
@@ -86,7 +86,7 @@ module AWS
 
         protected
 
-        # Performs a deep copy of the rules hash so that it can be 
+        # Performs a deep copy of the rules hash so that it can be
         # customized without chaning the parent grammar.
         def self.deep_copy rules
           rules.inject({}) do |copy,(key,value)|
@@ -129,6 +129,7 @@ module AWS
           allow_methods = %w(
             rename attribute_name boolean integer long float list force string
             ignore collect_values symbol_value timestamp map_entry map blob
+            position
           )
           unless allow_methods.include?(method.to_s)
             raise "#{method} cannot be used in configuration"
@@ -151,21 +152,21 @@ module AWS
         end
 
         ##
-        ## customization methods 
+        ## customization methods
         ##
 
         def element element_name, &block
 
           parent_context = @context
           parent_element_name = @element_name
-          
+
           @context = context_for_child(element_name)
 
           @element_name = element_name
 
           begin
             if block_given?
-              block.arity == 1 ? yield(parent_element_name) : yield   
+              block.arity == 1 ? yield(parent_element_name) : yield
             end
           ensure
             @context = parent_context
@@ -223,7 +224,7 @@ module AWS
         def map map_element_name, key_element_name, value_element_name
           ignore
           element(map_element_name) do |parent_element_name|
-            rename(parent_element_name)  
+            rename(parent_element_name)
             map_entry(key_element_name, value_element_name)
           end
         end
@@ -285,11 +286,13 @@ module AWS
         end
         alias_method :==, :eql?
 
+        def position *args; end
         def http_trait *args; end
         alias_method :http_header, :http_trait
         alias_method :http_uri_label, :http_trait
         alias_method :http_payload, :http_trait
         alias_method :http_status, :http_trait
+
 
         protected
         def context_for_child child_element_name

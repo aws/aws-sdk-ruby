@@ -76,11 +76,16 @@ module AWS
 
           case value
           when Hash
+
             builder.tag!(xml_name) do
-              value.each_pair do |m_name, m_value|
-                to_xml(builder, m_name, rules[:members][m_name], m_value)
+              xml_ordered_members(rules[:members]).each do |member_name|
+                if value.key?(member_name)
+                  member_value = value[member_name]
+                  to_xml(builder, member_name, rules[:members][member_name], member_value)
+                end
               end
             end
+
           when Array
             builder.tag!(xml_name) do
               value.each do |member_value|
@@ -90,6 +95,12 @@ module AWS
           else builder.tag!(xml_name, value)
           end
 
+        end
+
+        def xml_ordered_members members
+          members.inject([]) do |list,(member_name, member)|
+            list << [member[:position] || 0, member_name]
+          end.sort_by(&:first).map(&:last)
         end
 
       end

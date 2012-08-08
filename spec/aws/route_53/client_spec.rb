@@ -45,19 +45,21 @@ module AWS
               {
                 :action => 'CREATE',
                 :resource_record_set => {
-                  :name => 'sub.domain.com',
-                  :type => 'CNAME',
+                  # order of hash keys purposefully jumbled to test
+                  # xml member ordering
                   :ttl => 3600,
                   :resource_records => [
                     { :value => 'value1' },
                   ],
+                  :type => 'CNAME',
+                  :name => 'sub.domain.com',
                 },
               },
             ]
           }
         }}
 
-        it 'makes a POST request', :ruby => '1.9' do
+        it 'makes a POST request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
             req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset/')

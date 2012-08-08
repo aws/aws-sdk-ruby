@@ -149,6 +149,41 @@ module AWS
 XML
             end
 
+            context 'with ordered members' do
+
+              ## route53 cares about the order of sibling xml elements
+              ## so we are adding support for :order to the xml serializer
+
+              it 'encodes hashes into nested xml elements in the order' do
+                rules[:ordered_hash] = {
+                  :name => 'OrderedHash',
+                  :type => :hash,
+                  :members => {
+                    :last => { :name => 'Last', :position => 2 },
+                    :first => { :name => 'First', :position => 0 },
+                    :second => { :name => 'Second', :position => 1 },
+                  },
+                }
+
+                options[:ordered_hash] = {
+                  :second => 'b',
+                  :last => 'c',
+                  :first => 'a',
+                }
+
+                xml.should == <<-XML.strip + "\n"
+<OperationNameRequest xmlns="http://namespace.com/doc/">
+  <OrderedHash>
+    <First>a</First>
+    <Second>b</Second>
+    <Last>c</Last>
+  </OrderedHash>
+</OperationNameRequest>
+XML
+              end
+
+            end
+
           end
 
           context 'arrays' do
