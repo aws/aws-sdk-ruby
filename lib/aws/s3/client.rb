@@ -1087,6 +1087,7 @@ module AWS
         :cache_control => 'Cache-Control',
         :metadata_directive => 'x-amz-metadata-directive',
         :content_type => 'Content-Type',
+        :content_disposition => 'Content-Disposition',
       }) do
 
         configure_request do |req, options|
