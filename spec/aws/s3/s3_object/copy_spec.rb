@@ -85,6 +85,14 @@ module AWS
           obj1.copy_from('bucket/key', :metadata => { 'foo' => 'bar' })
         end
 
+        it 'allows you to change content disposition' do
+          client.should_receive(:copy_object).with(hash_including(
+            :metadata_directive => 'REPLACE',
+            :content_disposition => "inline"
+          ))
+          obj1.copy_from("bucket/key", :content_disposition => "inline")
+        end
+
         it 'allows you to change content type' do
           client.should_receive(:copy_object).with(hash_including(
             :metadata_directive => 'REPLACE',
