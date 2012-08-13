@@ -920,7 +920,7 @@ module AWS
           keys = options[:objects] || options[:keys]
 
           objects = keys.inject('') do |xml,o|
-            xml << "<Object><Key>#{o[:key]}</Key>"
+            xml << "<Object><Key>#{REXML::Text.normalize(o[:key])}</Key>"
             xml << "<VersionId>#{o[:version_id]}</VersionId>" if o[:version_id]
             xml << "</Object>"
           end
