@@ -809,6 +809,11 @@ module AWS
           end
         end
 
+        if options[:content_disposition]
+          copy_opts[:content_disposition] = options[:content_disposition]
+          copy_opts[:metadata_directive] = "REPLACE"
+        end
+
         if options[:content_type]
           copy_opts[:content_type] = options[:content_type]
           copy_opts[:metadata_directive] = "REPLACE"
