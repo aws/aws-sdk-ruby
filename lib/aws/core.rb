@@ -209,6 +209,9 @@ module AWS
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @option options [String] :cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudWatch.
+    #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
     #
