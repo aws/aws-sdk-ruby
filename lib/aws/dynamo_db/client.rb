@@ -15,17 +15,12 @@ module AWS
   class DynamoDB
 
     # Client class for Amazon DynamoDB.
-    class Client < Core::Client
+    class Client < Core::JSONClient
 
-      API_VERSION = '2011-12-05'
-
-      extend Core::JSONClient
+      define_client_methods('2011-12-05')
 
       # @private
       REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
-
-      # @private
-      TARGET_PREFIX = "DynamoDB_20111205."
 
       # @private
       CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
@@ -48,8 +43,11 @@ module AWS
       #         * +:n+ - (String) Numbers are positive or negative exact-value
       #           decimals and integers. A number can have up to 38 digits
       #           precision and can be between 10^-128 to 10^+126.
+      #         * +:b+ - (String) Binary attributes are sequences of unsigned
+      #           bytes.
       #         * +:ss+ - (Array<String>) A set of strings.
       #         * +:ns+ - (Array<String>) A set of numbers.
+      #         * +:bs+ - (Array<String>) A set of binary attributes.
       #       * +:range_key_element+ - (Hash) A range key element is treated as
       #         a secondary key (used in conjunction with the primary key), and
       #         can be a string or a number, and is only used for
@@ -62,8 +60,11 @@ module AWS
       #         * +:n+ - (String) Numbers are positive or negative exact-value
       #           decimals and integers. A number can have up to 38 digits
       #           precision and can be between 10^-128 to 10^+126.
+      #         * +:b+ - (String) Binary attributes are sequences of unsigned
+      #           bytes.
       #         * +:ss+ - (Array<String>) A set of strings.
       #         * +:ns+ - (Array<String>) A set of numbers.
+      #         * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:attributes_to_get+ - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -72,23 +73,28 @@ module AWS
       #     * +member+ - (Hash<String,Hash>)
       #       * +S+ - (String)
       #       * +N+ - (String)
+      #       * +B+ - (String)
       #       * +SS+ - (Array<String>)
       #       * +NS+ - (Array<String>)
+      #       * +BS+ - (Array<Blob>)
       #     * +ConsumedCapacityUnits+ - (Numeric)
       #   * +UnprocessedKeys+ - (Hash<String,Hash>)
       #     * +Keys+ - (Array<Hash>)
       #       * +HashKeyElement+ - (Hash)
       #         * +S+ - (String)
       #         * +N+ - (String)
+      #         * +B+ - (String)
       #         * +SS+ - (Array<String>)
       #         * +NS+ - (Array<String>)
+      #         * +BS+ - (Array<Blob>)
       #       * +RangeKeyElement+ - (Hash)
       #         * +S+ - (String)
       #         * +N+ - (String)
+      #         * +B+ - (String)
       #         * +SS+ - (Array<String>)
       #         * +NS+ - (Array<String>)
+      #         * +BS+ - (Array<Blob>)
       #     * +AttributesToGet+ - (Array<String>)
-      define_client_method :batch_get_item, 'BatchGetItem'
 
       # Calls the BatchWriteItem API operation.
       # @method batch_write_item(options = {})
@@ -105,8 +111,11 @@ module AWS
       #         * +:n+ - (String) Numbers are positive or negative exact-value
       #           decimals and integers. A number can have up to 38 digits
       #           precision and can be between 10^-128 to 10^+126.
+      #         * +:b+ - (String) Binary attributes are sequences of unsigned
+      #           bytes.
       #         * +:ss+ - (Array<String>) A set of strings.
       #         * +:ns+ - (Array<String>) A set of numbers.
+      #         * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:delete_request+ - (Hash)
       #       * +:key+ - *required* - (Hash) The item's key to be delete
       #         * +:hash_key_element+ - *required* - (Hash) A hash key element
@@ -120,8 +129,11 @@ module AWS
       #           * +:n+ - (String) Numbers are positive or negative
       #             exact-value decimals and integers. A number can have up to
       #             38 digits precision and can be between 10^-128 to 10^+126.
+      #           * +:b+ - (String) Binary attributes are sequences of unsigned
+      #             bytes.
       #           * +:ss+ - (Array<String>) A set of strings.
       #           * +:ns+ - (Array<String>) A set of numbers.
+      #           * +:bs+ - (Array<String>) A set of binary attributes.
       #         * +:range_key_element+ - (Hash) A range key element is treated
       #           as a secondary key (used in conjunction with the primary
       #           key), and can be a string or a number, and is only used for
@@ -134,8 +146,11 @@ module AWS
       #           * +:n+ - (String) Numbers are positive or negative
       #             exact-value decimals and integers. A number can have up to
       #             38 digits precision and can be between 10^-128 to 10^+126.
+      #           * +:b+ - (String) Binary attributes are sequences of unsigned
+      #             bytes.
       #           * +:ss+ - (Array<String>) A set of strings.
       #           * +:ns+ - (Array<String>) A set of numbers.
+      #           * +:bs+ - (Array<String>) A set of binary attributes.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -147,21 +162,26 @@ module AWS
       #         * +Item+ - (Hash<String,Hash>)
       #           * +S+ - (String)
       #           * +N+ - (String)
+      #           * +B+ - (String)
       #           * +SS+ - (Array<String>)
       #           * +NS+ - (Array<String>)
+      #           * +BS+ - (Array<Blob>)
       #       * +DeleteRequest+ - (Hash)
       #         * +Key+ - (Hash)
       #           * +HashKeyElement+ - (Hash)
       #             * +S+ - (String)
       #             * +N+ - (String)
+      #             * +B+ - (String)
       #             * +SS+ - (Array<String>)
       #             * +NS+ - (Array<String>)
+      #             * +BS+ - (Array<Blob>)
       #           * +RangeKeyElement+ - (Hash)
       #             * +S+ - (String)
       #             * +N+ - (String)
+      #             * +B+ - (String)
       #             * +SS+ - (Array<String>)
       #             * +NS+ - (Array<String>)
-      define_client_method :batch_write_item, 'BatchWriteItem'
+      #             * +BS+ - (Array<Blob>)
 
       # Calls the CreateTable API operation.
       # @method create_table(options = {})
@@ -218,7 +238,6 @@ module AWS
       #       * +WriteCapacityUnits+ - (Integer)
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
-      define_client_method :create_table, 'CreateTable'
 
       # Calls the DeleteItem API operation.
       # @method delete_item(options = {})
@@ -238,8 +257,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -252,8 +274,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #   * +:expected+ - (Hash<String,Hash>)
       #     * +:value+ - (Hash) Specify whether or not a value already exists
       #       and has a specific content for the attribute name-value pair.
@@ -264,8 +289,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
       #   * +:return_values+ - (String)
@@ -275,10 +303,11 @@ module AWS
       #   * +Attributes+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :delete_item, 'DeleteItem'
 
       # Calls the DeleteTable API operation.
       # @method delete_table(options = {})
@@ -307,7 +336,6 @@ module AWS
       #       * +WriteCapacityUnits+ - (Integer)
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
-      define_client_method :delete_table, 'DeleteTable'
 
       # Calls the DescribeTable API operation.
       # @method describe_table(options = {})
@@ -336,7 +364,6 @@ module AWS
       #       * +WriteCapacityUnits+ - (Integer)
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
-      define_client_method :describe_table, 'DescribeTable'
 
       # Calls the GetItem API operation.
       # @method get_item(options = {})
@@ -356,8 +383,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -370,8 +400,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #   * +:attributes_to_get+ - (Array<String>)
       #   * +:consistent_read+ - (Boolean)
       # @return [Core::Response]
@@ -380,10 +413,11 @@ module AWS
       #   * +Item+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :get_item, 'GetItem'
 
       # Calls the ListTables API operation.
       # @method list_tables(options = {})
@@ -398,7 +432,6 @@ module AWS
       #   a hash with the following structure:
       #   * +TableNames+ - (Array<String>)
       #   * +LastEvaluatedTableName+ - (String)
-      define_client_method :list_tables, 'ListTables'
 
       # Calls the PutItem API operation.
       # @method put_item(options = {})
@@ -414,8 +447,11 @@ module AWS
       #     * +:n+ - (String) Numbers are positive or negative exact-value
       #       decimals and integers. A number can have up to 38 digits
       #       precision and can be between 10^-128 to 10^+126.
+      #     * +:b+ - (String) Binary attributes are sequences of unsigned
+      #       bytes.
       #     * +:ss+ - (Array<String>) A set of strings.
       #     * +:ns+ - (Array<String>) A set of numbers.
+      #     * +:bs+ - (Array<String>) A set of binary attributes.
       #   * +:expected+ - (Hash<String,Hash>)
       #     * +:value+ - (Hash) Specify whether or not a value already exists
       #       and has a specific content for the attribute name-value pair.
@@ -426,8 +462,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
       #   * +:return_values+ - (String)
@@ -437,10 +476,11 @@ module AWS
       #   * +Attributes+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :put_item, 'PutItem'
 
       # Calls the Query API operation.
       # @method query(options = {})
@@ -472,8 +512,11 @@ module AWS
       #     * +:n+ - (String) Numbers are positive or negative exact-value
       #       decimals and integers. A number can have up to 38 digits
       #       precision and can be between 10^-128 to 10^+126.
+      #     * +:b+ - (String) Binary attributes are sequences of unsigned
+      #       bytes.
       #     * +:ss+ - (Array<String>) A set of strings.
       #     * +:ns+ - (Array<String>) A set of numbers.
+      #     * +:bs+ - (Array<String>) A set of binary attributes.
       #   * +:range_key_condition+ - (Hash) A container for the attribute
       #     values and comparison operators to use for the query.
       #     * +:attribute_value_list+ - (Array<Hash>)
@@ -484,8 +527,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:comparison_operator+ - *required* - (String)
       #   * +:scan_index_forward+ - (Boolean) Specifies forward or backward
       #     traversal of the index. Amazon DynamoDB returns results reflecting
@@ -509,8 +555,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -523,30 +572,38 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +member+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +Count+ - (Integer)
       #   * +LastEvaluatedKey+ - (Hash)
       #     * +HashKeyElement+ - (Hash)
       #       * +S+ - (String)
       #       * +N+ - (String)
+      #       * +B+ - (String)
       #       * +SS+ - (Array<String>)
       #       * +NS+ - (Array<String>)
+      #       * +BS+ - (Array<Blob>)
       #     * +RangeKeyElement+ - (Hash)
       #       * +S+ - (String)
       #       * +N+ - (String)
+      #       * +B+ - (String)
       #       * +SS+ - (Array<String>)
       #       * +NS+ - (Array<String>)
+      #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :query, 'Query'
 
       # Calls the Scan API operation.
       # @method scan(options = {})
@@ -578,8 +635,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:comparison_operator+ - *required* - (String)
       #   * +:exclusive_start_key+ - (Hash) Primary key of the item from which
       #     to continue an earlier scan. An earlier scan might provide this
@@ -598,8 +658,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -612,31 +675,39 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +member+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +Count+ - (Integer)
       #   * +ScannedCount+ - (Integer)
       #   * +LastEvaluatedKey+ - (Hash)
       #     * +HashKeyElement+ - (Hash)
       #       * +S+ - (String)
       #       * +N+ - (String)
+      #       * +B+ - (String)
       #       * +SS+ - (Array<String>)
       #       * +NS+ - (Array<String>)
+      #       * +BS+ - (Array<Blob>)
       #     * +RangeKeyElement+ - (Hash)
       #       * +S+ - (String)
       #       * +N+ - (String)
+      #       * +B+ - (String)
       #       * +SS+ - (Array<String>)
       #       * +NS+ - (Array<String>)
+      #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :scan, 'Scan'
 
       # Calls the UpdateItem API operation.
       # @method update_item(options = {})
@@ -656,8 +727,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -670,8 +744,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #   * +:attribute_updates+ - *required* - (Hash<String,Hash>)
       #     * +:value+ - (Hash)
       #       * +:s+ - (String) Strings are Unicode with UTF-8 binary encoding.
@@ -681,8 +758,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:action+ - (String)
       #   * +:expected+ - (Hash<String,Hash>)
       #     * +:value+ - (Hash) Specify whether or not a value already exists
@@ -694,8 +774,11 @@ module AWS
       #       * +:n+ - (String) Numbers are positive or negative exact-value
       #         decimals and integers. A number can have up to 38 digits
       #         precision and can be between 10^-128 to 10^+126.
+      #       * +:b+ - (String) Binary attributes are sequences of unsigned
+      #         bytes.
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
+      #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
       #   * +:return_values+ - (String)
@@ -705,10 +788,11 @@ module AWS
       #   * +Attributes+ - (Hash<String,Hash>)
       #     * +S+ - (String)
       #     * +N+ - (String)
+      #     * +B+ - (String)
       #     * +SS+ - (Array<String>)
       #     * +NS+ - (Array<String>)
+      #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
-      define_client_method :update_item, 'UpdateItem'
 
       # Calls the UpdateTable API operation.
       # @method update_table(options = {})
@@ -747,7 +831,6 @@ module AWS
       #       * +WriteCapacityUnits+ - (Integer)
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
-      define_client_method :update_table, 'UpdateTable'
 
       ## end client methods ##
 

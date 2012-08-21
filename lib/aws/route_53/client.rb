@@ -13,11 +13,9 @@
 
 module AWS
   class Route53
-    class Client < Core::Client
+    class Client < Core::RESTClient
 
-      API_VERSION = '2012-02-29'
-
-      extend Core::RESTClient
+      define_client_methods('2012-02-29')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -49,10 +47,10 @@ module AWS
       #         resource record set.
       #       * +:type+ - *required* - (String) The type of the current
       #         resource record set.
-      #       * +:set_identifier+ - (String) Weighted resource record sets or
-      #         Regional resource record sets only: An identifier that
-      #         differentiates among multiple resource record sets that have
-      #         the same combination of DNS name and type.
+      #       * +:set_identifier+ - (String) Weighted resource record sets
+      #         only: An identifier that differentiates among multiple resource
+      #         record sets that have the same combination of DNS name and
+      #         type.
       #       * +:weight+ - (Integer) Weighted resource record sets only: Among
       #         resource record sets that have the same combination of DNS name
       #         and type, a value that determines what portion of traffic for
@@ -96,7 +94,6 @@ module AWS
       #     * +:status+ - (String)
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
-      define_client_method :change_resource_record_sets, 'ChangeResourceRecordSets'
 
       # Calls the POST CreateHostedZone API operation.
       # @method create_hosted_zone(options = {})
@@ -141,7 +138,6 @@ module AWS
       #     * +:comment+ - (String)
       #   * +:delegation_set+ - (Hash)
       #     * +:name_servers+ - (Array<String>)
-      define_client_method :create_hosted_zone, 'CreateHostedZone'
 
       # Calls the DELETE DeleteHostedZone API operation.
       # @method delete_hosted_zone(options = {})
@@ -157,7 +153,6 @@ module AWS
       #     * +:status+ - (String)
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
-      define_client_method :delete_hosted_zone, 'DeleteHostedZone'
 
       # Calls the GET GetChange API operation.
       # @method get_change(options = {})
@@ -174,7 +169,6 @@ module AWS
       #     * +:status+ - (String)
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
-      define_client_method :get_change, 'GetChange'
 
       # Calls the GET GetHostedZone API operation.
       # @method get_hosted_zone(options = {})
@@ -193,7 +187,6 @@ module AWS
       #     * +:resource_record_set_count+ - (Integer)
       #   * +:delegation_set+ - (Hash)
       #     * +:name_servers+ - (Array<String>)
-      define_client_method :get_hosted_zone, 'GetHostedZone'
 
       # Calls the GET ListHostedZones API operation.
       # @method list_hosted_zones(options = {})
@@ -218,7 +211,6 @@ module AWS
       #   * +:is_truncated+ - (Boolean)
       #   * +:next_marker+ - (String)
       #   * +:max_items+ - (Integer)
-      define_client_method :list_hosted_zones, 'ListHostedZones'
 
       # Calls the GET ListResourceRecordSets API operation.
       # @method list_resource_record_sets(options = {})
@@ -231,7 +223,6 @@ module AWS
       # * +:start_record_type+ - (String) The DNS type at which to begin the
       #   listing of resource record sets. Valid values: A | AAAA | CNAME | MX
       #   | NS | PTR | SOA | SPF | SRV | TXT Values for Weighted Resource
-      #   Record Sets: A | AAAA | CNAME | TXT Values for Regional Resource
       #   Record Sets: A | AAAA | CNAME | TXT Values for Alias Resource Record
       #   Sets: A | AAAA Constraint: Specifying type without specifying name
       #   returns an InvalidInput error.
@@ -263,7 +254,6 @@ module AWS
       #   * +:next_record_type+ - (String)
       #   * +:next_record_identifier+ - (String)
       #   * +:max_items+ - (Integer)
-      define_client_method :list_resource_record_sets, 'ListResourceRecordSets'
 
       ## end client methods ##
 

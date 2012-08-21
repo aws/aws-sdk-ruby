@@ -15,11 +15,9 @@ module AWS
   class IAM
 
     # Client class for AWS Identity and Access Management (IAM).
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2010-05-08'
-
-      extend Core::QueryClient
+      define_client_methods('2010-05-08')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -47,7 +45,6 @@ module AWS
       #     instance profile to update.
       #   * +:role_name+ - *required* - (String) Name of the role to add.
       # @return [Core::Response]
-      define_client_method :add_role_to_instance_profile, 'AddRoleToInstanceProfile'
 
       # Calls the AddUserToGroup API operation.
       # @method add_user_to_group(options = {})
@@ -55,7 +52,6 @@ module AWS
       #   * +:group_name+ - *required* - (String) Name of the group to update.
       #   * +:user_name+ - *required* - (String) Name of the user to add.
       # @return [Core::Response]
-      define_client_method :add_user_to_group, 'AddUserToGroup'
 
       # Calls the ChangePassword API operation.
       # @method change_password(options = {})
@@ -63,7 +59,6 @@ module AWS
       #   * +:old_password+ - *required* - (String)
       #   * +:new_password+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :change_password, 'ChangePassword'
 
       # Calls the CreateAccessKey API operation.
       # @method create_access_key(options = {})
@@ -79,7 +74,6 @@ module AWS
       #     * +:status+ - (String)
       #     * +:secret_access_key+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :create_access_key, 'CreateAccessKey'
 
       # Calls the CreateAccountAlias API operation.
       # @method create_account_alias(options = {})
@@ -87,7 +81,6 @@ module AWS
       #   * +:account_alias+ - *required* - (String) Name of the account alias
       #     to create.
       # @return [Core::Response]
-      define_client_method :create_account_alias, 'CreateAccountAlias'
 
       # Calls the CreateGroup API operation.
       # @method create_group(options = {})
@@ -107,7 +100,6 @@ module AWS
       #     * +:group_id+ - (String)
       #     * +:arn+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :create_group, 'CreateGroup'
 
       # Calls the CreateInstanceProfile API operation.
       # @method create_instance_profile(options = {})
@@ -134,7 +126,6 @@ module AWS
       #       * +:arn+ - (String)
       #       * +:create_date+ - (Time)
       #       * +:assume_role_policy_document+ - (String)
-      define_client_method :create_instance_profile, 'CreateInstanceProfile'
 
       # Calls the CreateLoginProfile API operation.
       # @method create_login_profile(options = {})
@@ -149,7 +140,6 @@ module AWS
       #   * +:login_profile+ - (Hash)
       #     * +:user_name+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :create_login_profile, 'CreateLoginProfile'
 
       # Calls the CreateRole API operation.
       # @method create_role(options = {})
@@ -160,7 +150,7 @@ module AWS
       #     included, it defaults to a slash (/).
       #   * +:role_name+ - *required* - (String) Name of the role to create.
       #   * +:assume_role_policy_document+ - *required* - (String) The policy
-      #     govering by who and under what conditions the role can be assumed.
+      #     that grants an entity permission to assume the role.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -171,7 +161,6 @@ module AWS
       #     * +:arn+ - (String)
       #     * +:create_date+ - (Time)
       #     * +:assume_role_policy_document+ - (String)
-      define_client_method :create_role, 'CreateRole'
 
       # Calls the CreateUser API operation.
       # @method create_user(options = {})
@@ -190,7 +179,6 @@ module AWS
       #     * +:user_id+ - (String)
       #     * +:arn+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :create_user, 'CreateUser'
 
       # Calls the CreateVirtualMFADevice API operation.
       # @method create_virtual_mfa_device(options = {})
@@ -216,7 +204,6 @@ module AWS
       #       * +:arn+ - (String)
       #       * +:create_date+ - (Time)
       #     * +:enable_date+ - (Time)
-      define_client_method :create_virtual_mfa_device, 'CreateVirtualMFADevice'
 
       # Calls the DeactivateMFADevice API operation.
       # @method deactivate_mfa_device(options = {})
@@ -227,7 +214,6 @@ module AWS
       #     uniquely identifies the MFA device. For virtual MFA devices, the
       #     serial number is the device ARN.
       # @return [Core::Response]
-      define_client_method :deactivate_mfa_device, 'DeactivateMFADevice'
 
       # Calls the DeleteAccessKey API operation.
       # @method delete_access_key(options = {})
@@ -237,7 +223,6 @@ module AWS
       #   * +:access_key_id+ - *required* - (String) The Access Key ID for the
       #     Access Key ID and Secret Access Key you want to delete.
       # @return [Core::Response]
-      define_client_method :delete_access_key, 'DeleteAccessKey'
 
       # Calls the DeleteAccountAlias API operation.
       # @method delete_account_alias(options = {})
@@ -245,20 +230,17 @@ module AWS
       #   * +:account_alias+ - *required* - (String) Name of the account alias
       #     to delete.
       # @return [Core::Response]
-      define_client_method :delete_account_alias, 'DeleteAccountAlias'
 
       # Calls the DeleteAccountPasswordPolicy API operation.
       # @method delete_account_password_policy(options = {})
       # @param [Hash] options
       # @return [Core::Response]
-      define_client_method :delete_account_password_policy, 'DeleteAccountPasswordPolicy'
 
       # Calls the DeleteGroup API operation.
       # @method delete_group(options = {})
       # @param [Hash] options
       #   * +:group_name+ - *required* - (String) Name of the group to delete.
       # @return [Core::Response]
-      define_client_method :delete_group, 'DeleteGroup'
 
       # Calls the DeleteGroupPolicy API operation.
       # @method delete_group_policy(options = {})
@@ -268,7 +250,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) Name of the policy document
       #     to delete.
       # @return [Core::Response]
-      define_client_method :delete_group_policy, 'DeleteGroupPolicy'
 
       # Calls the DeleteInstanceProfile API operation.
       # @method delete_instance_profile(options = {})
@@ -276,7 +257,6 @@ module AWS
       #   * +:instance_profile_name+ - *required* - (String) Name of the
       #     instance profile to delete.
       # @return [Core::Response]
-      define_client_method :delete_instance_profile, 'DeleteInstanceProfile'
 
       # Calls the DeleteLoginProfile API operation.
       # @method delete_login_profile(options = {})
@@ -284,24 +264,21 @@ module AWS
       #   * +:user_name+ - *required* - (String) Name of the user whose
       #     password you want to delete.
       # @return [Core::Response]
-      define_client_method :delete_login_profile, 'DeleteLoginProfile'
 
       # Calls the DeleteRole API operation.
       # @method delete_role(options = {})
       # @param [Hash] options
       #   * +:role_name+ - *required* - (String) Name of the role to delete.
       # @return [Core::Response]
-      define_client_method :delete_role, 'DeleteRole'
 
       # Calls the DeleteRolePolicy API operation.
       # @method delete_role_policy(options = {})
       # @param [Hash] options
-      #   * +:role_name+ - *required* - (String) Name of the role the policy is
-      #     associated with.
+      #   * +:role_name+ - *required* - (String) Name of the role the
+      #     associated with the policy.
       #   * +:policy_name+ - *required* - (String) Name of the policy document
       #     to delete.
       # @return [Core::Response]
-      define_client_method :delete_role_policy, 'DeleteRolePolicy'
 
       # Calls the DeleteServerCertificate API operation.
       # @method delete_server_certificate(options = {})
@@ -309,7 +286,6 @@ module AWS
       #   * +:server_certificate_name+ - *required* - (String) The name of the
       #     server certificate you want to delete.
       # @return [Core::Response]
-      define_client_method :delete_server_certificate, 'DeleteServerCertificate'
 
       # Calls the DeleteSigningCertificate API operation.
       # @method delete_signing_certificate(options = {})
@@ -319,14 +295,12 @@ module AWS
       #   * +:certificate_id+ - *required* - (String) ID of the signing
       #     certificate to delete.
       # @return [Core::Response]
-      define_client_method :delete_signing_certificate, 'DeleteSigningCertificate'
 
       # Calls the DeleteUser API operation.
       # @method delete_user(options = {})
       # @param [Hash] options
       #   * +:user_name+ - *required* - (String) Name of the user to delete.
       # @return [Core::Response]
-      define_client_method :delete_user, 'DeleteUser'
 
       # Calls the DeleteUserPolicy API operation.
       # @method delete_user_policy(options = {})
@@ -336,7 +310,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) Name of the policy document
       #     to delete.
       # @return [Core::Response]
-      define_client_method :delete_user_policy, 'DeleteUserPolicy'
 
       # Calls the DeleteVirtualMFADevice API operation.
       # @method delete_virtual_mfa_device(options = {})
@@ -345,7 +318,6 @@ module AWS
       #     uniquely identifies the MFA device. For virtual MFA devices, the
       #     serial number is the same as the ARN.
       # @return [Core::Response]
-      define_client_method :delete_virtual_mfa_device, 'DeleteVirtualMFADevice'
 
       # Calls the EnableMFADevice API operation.
       # @method enable_mfa_device(options = {})
@@ -360,7 +332,6 @@ module AWS
       #   * +:authentication_code_2+ - *required* - (String) A subsequent
       #     authentication code emitted by the device.
       # @return [Core::Response]
-      define_client_method :enable_mfa_device, 'EnableMFADevice'
 
       # Calls the GetAccountPasswordPolicy API operation.
       # @method get_account_password_policy(options = {})
@@ -375,7 +346,6 @@ module AWS
       #     * +:require_uppercase_characters+ - (Boolean)
       #     * +:require_lowercase_characters+ - (Boolean)
       #     * +:allow_users_to_change_password+ - (Boolean)
-      define_client_method :get_account_password_policy, 'GetAccountPasswordPolicy'
 
       # Calls the GetAccountSummary API operation.
       # @method get_account_summary(options = {})
@@ -384,7 +354,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:summary_map+ - (Hash<String,Integer>)
-      define_client_method :get_account_summary, 'GetAccountSummary'
 
       # Calls the GetGroup API operation.
       # @method get_group(options = {})
@@ -415,7 +384,6 @@ module AWS
       #     * +:create_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :get_group, 'GetGroup'
 
       # Calls the GetGroupPolicy API operation.
       # @method get_group_policy(options = {})
@@ -430,7 +398,6 @@ module AWS
       #   * +:group_name+ - (String)
       #   * +:policy_name+ - (String)
       #   * +:policy_document+ - (String)
-      define_client_method :get_group_policy, 'GetGroupPolicy'
 
       # Calls the GetInstanceProfile API operation.
       # @method get_instance_profile(options = {})
@@ -453,7 +420,6 @@ module AWS
       #       * +:arn+ - (String)
       #       * +:create_date+ - (Time)
       #       * +:assume_role_policy_document+ - (String)
-      define_client_method :get_instance_profile, 'GetInstanceProfile'
 
       # Calls the GetLoginProfile API operation.
       # @method get_login_profile(options = {})
@@ -466,7 +432,6 @@ module AWS
       #   * +:login_profile+ - (Hash)
       #     * +:user_name+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :get_login_profile, 'GetLoginProfile'
 
       # Calls the GetRole API operation.
       # @method get_role(options = {})
@@ -483,13 +448,12 @@ module AWS
       #     * +:arn+ - (String)
       #     * +:create_date+ - (Time)
       #     * +:assume_role_policy_document+ - (String)
-      define_client_method :get_role, 'GetRole'
 
       # Calls the GetRolePolicy API operation.
       # @method get_role_policy(options = {})
       # @param [Hash] options
-      #   * +:role_name+ - *required* - (String) Name of the role who the
-      #     policy is associated with.
+      #   * +:role_name+ - *required* - (String) Name of the role associated
+      #     with the policy.
       #   * +:policy_name+ - *required* - (String) Name of the policy document
       #     to get.
       # @return [Core::Response]
@@ -498,7 +462,6 @@ module AWS
       #   * +:role_name+ - (String)
       #   * +:policy_name+ - (String)
       #   * +:policy_document+ - (String)
-      define_client_method :get_role_policy, 'GetRolePolicy'
 
       # Calls the GetServerCertificate API operation.
       # @method get_server_certificate(options = {})
@@ -517,7 +480,6 @@ module AWS
       #       * +:upload_date+ - (Time)
       #     * +:certificate_body+ - (String)
       #     * +:certificate_chain+ - (String)
-      define_client_method :get_server_certificate, 'GetServerCertificate'
 
       # Calls the GetUser API operation.
       # @method get_user(options = {})
@@ -534,7 +496,6 @@ module AWS
       #     * +:user_id+ - (String)
       #     * +:arn+ - (String)
       #     * +:create_date+ - (Time)
-      define_client_method :get_user, 'GetUser'
 
       # Calls the GetUserPolicy API operation.
       # @method get_user_policy(options = {})
@@ -549,7 +510,6 @@ module AWS
       #   * +:user_name+ - (String)
       #   * +:policy_name+ - (String)
       #   * +:policy_document+ - (String)
-      define_client_method :get_user_policy, 'GetUserPolicy'
 
       # Calls the ListAccessKeys API operation.
       # @method list_access_keys(options = {})
@@ -573,7 +533,6 @@ module AWS
       #     * +:create_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_access_keys, 'ListAccessKeys'
 
       # Calls the ListAccountAliases API operation.
       # @method list_account_aliases(options = {})
@@ -592,7 +551,6 @@ module AWS
       #   * +:account_aliases+ - (Array<String>)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_account_aliases, 'ListAccountAliases'
 
       # Calls the ListGroupPolicies API operation.
       # @method list_group_policies(options = {})
@@ -613,7 +571,6 @@ module AWS
       #   * +:policy_names+ - (Array<String>)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_group_policies, 'ListGroupPolicies'
 
       # Calls the ListGroups API operation.
       # @method list_groups(options = {})
@@ -642,7 +599,6 @@ module AWS
       #     * +:create_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_groups, 'ListGroups'
 
       # Calls the ListGroupsForUser API operation.
       # @method list_groups_for_user(options = {})
@@ -668,7 +624,6 @@ module AWS
       #     * +:create_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_groups_for_user, 'ListGroupsForUser'
 
       # Calls the ListInstanceProfiles API operation.
       # @method list_instance_profiles(options = {})
@@ -705,7 +660,6 @@ module AWS
       #       * +:assume_role_policy_document+ - (String)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_instance_profiles, 'ListInstanceProfiles'
 
       # Calls the ListInstanceProfilesForRole API operation.
       # @method list_instance_profiles_for_role(options = {})
@@ -738,7 +692,6 @@ module AWS
       #       * +:assume_role_policy_document+ - (String)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_instance_profiles_for_role, 'ListInstanceProfilesForRole'
 
       # Calls the ListMFADevices API operation.
       # @method list_mfa_devices(options = {})
@@ -762,7 +715,6 @@ module AWS
       #     * +:enable_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_mfa_devices, 'ListMFADevices'
 
       # Calls the ListRolePolicies API operation.
       # @method list_role_policies(options = {})
@@ -783,7 +735,6 @@ module AWS
       #   * +:policy_names+ - (Array<String>)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_role_policies, 'ListRolePolicies'
 
       # Calls the ListRoles API operation.
       # @method list_roles(options = {})
@@ -813,7 +764,6 @@ module AWS
       #     * +:assume_role_policy_document+ - (String)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_roles, 'ListRoles'
 
       # Calls the ListServerCertificates API operation.
       # @method list_server_certificates(options = {})
@@ -843,7 +793,6 @@ module AWS
       #     * +:upload_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_server_certificates, 'ListServerCertificates'
 
       # Calls the ListSigningCertificates API operation.
       # @method list_signing_certificates(options = {})
@@ -868,7 +817,6 @@ module AWS
       #     * +:upload_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_signing_certificates, 'ListSigningCertificates'
 
       # Calls the ListUserPolicies API operation.
       # @method list_user_policies(options = {})
@@ -889,7 +837,6 @@ module AWS
       #   * +:policy_names+ - (Array<String>)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_user_policies, 'ListUserPolicies'
 
       # Calls the ListUsers API operation.
       # @method list_users(options = {})
@@ -919,7 +866,6 @@ module AWS
       #     * +:create_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_users, 'ListUsers'
 
       # Calls the ListVirtualMFADevices API operation.
       # @method list_virtual_mfa_devices(options = {})
@@ -952,7 +898,6 @@ module AWS
       #     * +:enable_date+ - (Time)
       #   * +:is_truncated+ - (Boolean)
       #   * +:marker+ - (String)
-      define_client_method :list_virtual_mfa_devices, 'ListVirtualMFADevices'
 
       # Calls the PutGroupPolicy API operation.
       # @method put_group_policy(options = {})
@@ -962,7 +907,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) Name of the policy document.
       #   * +:policy_document+ - *required* - (String) The policy document.
       # @return [Core::Response]
-      define_client_method :put_group_policy, 'PutGroupPolicy'
 
       # Calls the PutRolePolicy API operation.
       # @method put_role_policy(options = {})
@@ -972,7 +916,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) Name of the policy document.
       #   * +:policy_document+ - *required* - (String) The policy document.
       # @return [Core::Response]
-      define_client_method :put_role_policy, 'PutRolePolicy'
 
       # Calls the PutUserPolicy API operation.
       # @method put_user_policy(options = {})
@@ -982,7 +925,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) Name of the policy document.
       #   * +:policy_document+ - *required* - (String) The policy document.
       # @return [Core::Response]
-      define_client_method :put_user_policy, 'PutUserPolicy'
 
       # Calls the RemoveRoleFromInstanceProfile API operation.
       # @method remove_role_from_instance_profile(options = {})
@@ -991,7 +933,6 @@ module AWS
       #     instance profile to update.
       #   * +:role_name+ - *required* - (String) Name of the role to remove.
       # @return [Core::Response]
-      define_client_method :remove_role_from_instance_profile, 'RemoveRoleFromInstanceProfile'
 
       # Calls the RemoveUserFromGroup API operation.
       # @method remove_user_from_group(options = {})
@@ -999,7 +940,6 @@ module AWS
       #   * +:group_name+ - *required* - (String) Name of the group to update.
       #   * +:user_name+ - *required* - (String) Name of the user to remove.
       # @return [Core::Response]
-      define_client_method :remove_user_from_group, 'RemoveUserFromGroup'
 
       # Calls the ResyncMFADevice API operation.
       # @method resync_mfa_device(options = {})
@@ -1013,7 +953,6 @@ module AWS
       #   * +:authentication_code_2+ - *required* - (String) A subsequent
       #     authentication code emitted by the device.
       # @return [Core::Response]
-      define_client_method :resync_mfa_device, 'ResyncMFADevice'
 
       # Calls the UpdateAccessKey API operation.
       # @method update_access_key(options = {})
@@ -1026,7 +965,6 @@ module AWS
       #     the Secret Access Key. Active means the key can be used for API
       #     calls to AWS, while Inactive means the key cannot be used.
       # @return [Core::Response]
-      define_client_method :update_access_key, 'UpdateAccessKey'
 
       # Calls the UpdateAccountPasswordPolicy API operation.
       # @method update_account_password_policy(options = {})
@@ -1038,16 +976,14 @@ module AWS
       #   * +:require_lowercase_characters+ - (Boolean)
       #   * +:allow_users_to_change_password+ - (Boolean)
       # @return [Core::Response]
-      define_client_method :update_account_password_policy, 'UpdateAccountPasswordPolicy'
 
       # Calls the UpdateAssumeRolePolicy API operation.
       # @method update_assume_role_policy(options = {})
       # @param [Hash] options
       #   * +:role_name+ - *required* - (String) Name of the role to update.
-      #   * +:policy_document+ - *required* - (String) The policy govering by
-      #     who and under what conditions the role can be assumed.
+      #   * +:policy_document+ - *required* - (String) The policy that grants
+      #     an entity permission to assume the role.
       # @return [Core::Response]
-      define_client_method :update_assume_role_policy, 'UpdateAssumeRolePolicy'
 
       # Calls the UpdateGroup API operation.
       # @method update_group(options = {})
@@ -1060,7 +996,6 @@ module AWS
       #   * +:new_group_name+ - (String) New name for the group. Only include
       #     this if changing the group's name.
       # @return [Core::Response]
-      define_client_method :update_group, 'UpdateGroup'
 
       # Calls the UpdateLoginProfile API operation.
       # @method update_login_profile(options = {})
@@ -1069,7 +1004,6 @@ module AWS
       #     password you want to update.
       #   * +:password+ - (String) The new password for the user name.
       # @return [Core::Response]
-      define_client_method :update_login_profile, 'UpdateLoginProfile'
 
       # Calls the UpdateServerCertificate API operation.
       # @method update_server_certificate(options = {})
@@ -1083,7 +1017,6 @@ module AWS
       #     server certificate. Include this only if you are updating the
       #     server certificate's name.
       # @return [Core::Response]
-      define_client_method :update_server_certificate, 'UpdateServerCertificate'
 
       # Calls the UpdateSigningCertificate API operation.
       # @method update_signing_certificate(options = {})
@@ -1096,7 +1029,6 @@ module AWS
       #     the certificate. Active means the certificate can be used for API
       #     calls to AWS, while Inactive means the certificate cannot be used.
       # @return [Core::Response]
-      define_client_method :update_signing_certificate, 'UpdateSigningCertificate'
 
       # Calls the UpdateUser API operation.
       # @method update_user(options = {})
@@ -1109,7 +1041,6 @@ module AWS
       #   * +:new_user_name+ - (String) New name for the user. Include this
       #     parameter only if you're changing the user's name.
       # @return [Core::Response]
-      define_client_method :update_user, 'UpdateUser'
 
       # Calls the UploadServerCertificate API operation.
       # @method upload_server_certificate(options = {})
@@ -1136,7 +1067,6 @@ module AWS
       #     * +:server_certificate_id+ - (String)
       #     * +:arn+ - (String)
       #     * +:upload_date+ - (Time)
-      define_client_method :upload_server_certificate, 'UploadServerCertificate'
 
       # Calls the UploadSigningCertificate API operation.
       # @method upload_signing_certificate(options = {})
@@ -1154,7 +1084,6 @@ module AWS
       #     * +:certificate_body+ - (String)
       #     * +:status+ - (String)
       #     * +:upload_date+ - (Time)
-      define_client_method :upload_signing_certificate, 'UploadSigningCertificate'
 
       ## end client methods ##
 

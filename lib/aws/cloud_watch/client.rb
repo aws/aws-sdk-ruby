@@ -15,11 +15,9 @@ module AWS
   class CloudWatch
 
     # Client class for Cloud Watch
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2010-08-01'
-
-      extend Core::QueryClient
+      define_client_methods('2010-08-01')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -36,7 +34,6 @@ module AWS
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
-      define_client_method :delete_alarms, 'DeleteAlarms'
 
       # Calls the DescribeAlarmHistory API operation.
       # @method describe_alarm_history(options = {})
@@ -57,7 +54,6 @@ module AWS
       #     * +:history_summary+ - (String)
       #     * +:history_data+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :describe_alarm_history, 'DescribeAlarmHistory'
 
       # Calls the DescribeAlarms API operation.
       # @method describe_alarms(options = {})
@@ -96,7 +92,6 @@ module AWS
       #     * +:threshold+ - (Numeric)
       #     * +:comparison_operator+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :describe_alarms, 'DescribeAlarms'
 
       # Calls the DescribeAlarmsForMetric API operation.
       # @method describe_alarms_for_metric(options = {})
@@ -136,21 +131,18 @@ module AWS
       #     * +:evaluation_periods+ - (Integer)
       #     * +:threshold+ - (Numeric)
       #     * +:comparison_operator+ - (String)
-      define_client_method :describe_alarms_for_metric, 'DescribeAlarmsForMetric'
 
       # Calls the DisableAlarmActions API operation.
       # @method disable_alarm_actions(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
-      define_client_method :disable_alarm_actions, 'DisableAlarmActions'
 
       # Calls the EnableAlarmActions API operation.
       # @method enable_alarm_actions(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
-      define_client_method :enable_alarm_actions, 'EnableAlarmActions'
 
       # Calls the GetMetricStatistics API operation.
       # @method get_metric_statistics(options = {})
@@ -177,7 +169,6 @@ module AWS
       #     * +:minimum+ - (Numeric)
       #     * +:maximum+ - (Numeric)
       #     * +:unit+ - (String)
-      define_client_method :get_metric_statistics, 'GetMetricStatistics'
 
       # Calls the ListMetrics API operation.
       # @method list_metrics(options = {})
@@ -198,7 +189,6 @@ module AWS
       #       * +:name+ - (String)
       #       * +:value+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :list_metrics, 'ListMetrics'
 
       # Calls the PutMetricAlarm API operation.
       # @method put_metric_alarm(options = {})
@@ -221,7 +211,6 @@ module AWS
       #   * +:threshold+ - *required* - (Float)
       #   * +:comparison_operator+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :put_metric_alarm, 'PutMetricAlarm'
 
       # Calls the PutMetricData API operation.
       # @method put_metric_data(options = {})
@@ -241,7 +230,6 @@ module AWS
       #       * +:maximum+ - *required* - (Float)
       #     * +:unit+ - (String)
       # @return [Core::Response]
-      define_client_method :put_metric_data, 'PutMetricData'
 
       # Calls the SetAlarmState API operation.
       # @method set_alarm_state(options = {})
@@ -251,7 +239,6 @@ module AWS
       #   * +:state_reason+ - *required* - (String)
       #   * +:state_reason_data+ - (String)
       # @return [Core::Response]
-      define_client_method :set_alarm_state, 'SetAlarmState'
 
       ## end client methods ##
 

@@ -77,7 +77,7 @@ module AWS
       end
 
       context 'retry logic' do
-        
+
         # always fails with a throughput error
         class FailHandler
           def initialize
@@ -111,10 +111,10 @@ module AWS
         let(:http_handler) { FailHandler.new }
 
         let(:config) do
-          { 
+          {
             :access_key_id => "access key id",
             :secret_access_key => "secret access key",
-            :session_token => "token" 
+            :session_token => "token"
           }
         end
 
@@ -122,7 +122,7 @@ module AWS
 
         let(:opts) {{
           :table_name => "table",
-          :key => { :hash_key_element => { :s => "key" } } 
+          :key => { :hash_key_element => { :s => "key" } }
         }}
 
         let(:make_request) { client.get_item(opts) }
@@ -130,7 +130,7 @@ module AWS
         before(:each) { Kernel.stub(:sleep) }
 
         context 'server errors' do
-        
+
           before(:each) { http_handler.server_fail }
 
           it 'retries 10 times by default' do
@@ -144,16 +144,16 @@ module AWS
             Kernel.should_receive(:sleep).ordered.with(3.2)
             Kernel.should_receive(:sleep).ordered.with(6.4)
             Kernel.should_receive(:sleep).ordered.with(12.8)
-            lambda { 
-              make_request 
+            lambda {
+              make_request
             }.should raise_error(Errors::ServerFailure)
             http_handler.call_count.should == 11
           end
 
           it 'retries n times if specified in the config' do
             config[:max_retries] = 2
-            lambda { 
-              make_request 
+            lambda {
+              make_request
             }.should raise_error(Errors::ServerFailure)
             http_handler.call_count.should == 3
           end
@@ -165,7 +165,7 @@ module AWS
           before(:each) { http_handler.throughput_fail }
 
           it 'retries 10 times by default' do
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ProvisionedThroughputExceededException)
             http_handler.call_count.should == 11
@@ -173,7 +173,7 @@ module AWS
 
           it 'retries n times if specified in the config' do
             config[:max_retries] = 5
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ProvisionedThroughputExceededException)
             http_handler.call_count.should == 6
@@ -182,7 +182,7 @@ module AWS
           it 'does not retry when max_retries > 0 and retry throttle == false' do
             config[:max_retries] = 2
             config[:dynamo_db_retry_throughput_errors] = false
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ProvisionedThroughputExceededException)
             http_handler.call_count.should == 1
@@ -193,11 +193,11 @@ module AWS
         context 'expired credential errors' do
 
           before(:each) { http_handler.access_fail }
-          
+
           it 'retries once after refeshing the signer' do
             client.config.credential_provider.stub(:refresh)
             client.config.credential_provider.should_receive(:refresh).once
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 2
@@ -207,7 +207,7 @@ module AWS
             config[:max_retries] = 0
             client.config.credential_provider.stub(:refresh)
             client.config.credential_provider.should_not_receive(:refresh)
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 1
@@ -217,7 +217,7 @@ module AWS
             config[:max_retries] = 5
             client.config.credential_provider.stub(:refresh)
             client.config.credential_provider.should_receive(:refresh).once
-            lambda { 
+            lambda {
               make_request
             }.should raise_error(Errors::ExpiredTokenException)
             http_handler.call_count.should == 2

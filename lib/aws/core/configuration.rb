@@ -69,6 +69,12 @@ module AWS
     # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @attr_reader [Boolean] dynamo_db_big_decimals (true) When +true+,
+    #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
+    #   from strings to BigDecimal objects.  If you set this to +false+,
+    #   they will be convereted from strings into floats (with a potential
+    #   loss of precision).
+    #
     # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
     #

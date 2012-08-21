@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2010-05-08'
 :operations:
 - :name: AddRoleToInstanceProfile
   :method: :add_role_to_instance_profile

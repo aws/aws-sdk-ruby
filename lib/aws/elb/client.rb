@@ -15,11 +15,9 @@ module AWS
   class ELB
 
     # Client class for Elastic Load Balancing (ELB).
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2012-06-01'
-
-      extend Core::QueryClient
+      define_client_methods('2012-06-01')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -39,8 +37,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:security_groups+ - (Array<>)
-      define_client_method :apply_security_groups_to_load_balancer, 'ApplySecurityGroupsToLoadBalancer'
+      #   * +:security_groups+ - (Array<String>)
 
       # Calls the AttachLoadBalancerToSubnets API operation.
       # @method attach_load_balancer_to_subnets(options = {})
@@ -53,8 +50,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subnets+ - (Array<>)
-      define_client_method :attach_load_balancer_to_subnets, 'AttachLoadBalancerToSubnets'
+      #   * +:subnets+ - (Array<String>)
 
       # Calls the ConfigureHealthCheck API operation.
       # @method configure_health_check(options = {})
@@ -96,11 +92,11 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:health_check+ - (Hash)
+      #     * +:target+ - (String)
       #     * +:interval+ - (Integer)
       #     * +:timeout+ - (Integer)
       #     * +:unhealthy_threshold+ - (Integer)
       #     * +:healthy_threshold+ - (Integer)
-      define_client_method :configure_health_check, 'ConfigureHealthCheck'
 
       # Calls the CreateAppCookieStickinessPolicy API operation.
       # @method create_app_cookie_stickiness_policy(options = {})
@@ -114,7 +110,6 @@ module AWS
       #   * +:cookie_name+ - *required* - (String) Name of the application
       #     cookie used for stickiness.
       # @return [Core::Response]
-      define_client_method :create_app_cookie_stickiness_policy, 'CreateAppCookieStickinessPolicy'
 
       # Calls the CreateLBCookieStickinessPolicy API operation.
       # @method create_lb_cookie_stickiness_policy(options = {})
@@ -130,7 +125,6 @@ module AWS
       #     this parameter indicates that the sticky session will last for the
       #     duration of the browser session.
       # @return [Core::Response]
-      define_client_method :create_lb_cookie_stickiness_policy, 'CreateLBCookieStickinessPolicy'
 
       # Calls the CreateLoadBalancer API operation.
       # @method create_load_balancer(options = {})
@@ -182,7 +176,9 @@ module AWS
       #     an internal load balancer with a DNS name that resolves to private
       #     IP addresses.
       # @return [Core::Response]
-      define_client_method :create_load_balancer, 'CreateLoadBalancer'
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:dns_name+ - (String)
 
       # Calls the CreateLoadBalancerListeners API operation.
       # @method create_load_balancer_listeners(options = {})
@@ -218,7 +214,6 @@ module AWS
       #       certificate. To get the ARN of the server certificate, call the
       #       AWS Identity and Access Management UploadServerCertificate API.
       # @return [Core::Response]
-      define_client_method :create_load_balancer_listeners, 'CreateLoadBalancerListeners'
 
       # Calls the CreateLoadBalancerPolicy API operation.
       # @method create_load_balancer_policy(options = {})
@@ -239,7 +234,6 @@ module AWS
       #     * +:attribute_value+ - (String) The value of the attribute
       #       associated with the policy.
       # @return [Core::Response]
-      define_client_method :create_load_balancer_policy, 'CreateLoadBalancerPolicy'
 
       # Calls the DeleteLoadBalancer API operation.
       # @method delete_load_balancer(options = {})
@@ -248,7 +242,6 @@ module AWS
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
       # @return [Core::Response]
-      define_client_method :delete_load_balancer, 'DeleteLoadBalancer'
 
       # Calls the DeleteLoadBalancerListeners API operation.
       # @method delete_load_balancer_listeners(options = {})
@@ -258,7 +251,6 @@ module AWS
       #   * +:load_balancer_ports+ - *required* - (Array<Integer>) The client
       #     port number(s) of the LoadBalancerListener(s) to be removed.
       # @return [Core::Response]
-      define_client_method :delete_load_balancer_listeners, 'DeleteLoadBalancerListeners'
 
       # Calls the DeleteLoadBalancerPolicy API operation.
       # @method delete_load_balancer_policy(options = {})
@@ -269,7 +261,6 @@ module AWS
       #   * +:policy_name+ - *required* - (String) The mnemonic name for the
       #     policy being deleted.
       # @return [Core::Response]
-      define_client_method :delete_load_balancer_policy, 'DeleteLoadBalancerPolicy'
 
       # Calls the DeregisterInstancesFromLoadBalancer API operation.
       # @method deregister_instances_from_load_balancer(options = {})
@@ -283,8 +274,8 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instances+ - (Array<String>)
-      define_client_method :deregister_instances_from_load_balancer, 'DeregisterInstancesFromLoadBalancer'
+      #   * +:instances+ - (Array<Hash>)
+      #     * +:instance_id+ - (String)
 
       # Calls the DescribeInstanceHealth API operation.
       # @method describe_instance_health(options = {})
@@ -298,8 +289,11 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instance_states+ - (Array<>)
-      define_client_method :describe_instance_health, 'DescribeInstanceHealth'
+      #   * +:instance_states+ - (Array<Hash>)
+      #     * +:instance_id+ - (String)
+      #     * +:state+ - (String)
+      #     * +:reason_code+ - (String)
+      #     * +:description+ - (String)
 
       # Calls the DescribeLoadBalancerPolicies API operation.
       # @method describe_load_balancer_policies(options = {})
@@ -315,8 +309,11 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:policy_descriptions+ - (Array<Hash>)
-      #     * +:policy_attribute_descriptions+ - (Array<>)
-      define_client_method :describe_load_balancer_policies, 'DescribeLoadBalancerPolicies'
+      #     * +:policy_name+ - (String)
+      #     * +:policy_type_name+ - (String)
+      #     * +:policy_attribute_descriptions+ - (Array<Hash>)
+      #       * +:attribute_name+ - (String)
+      #       * +:attribute_value+ - (String)
 
       # Calls the DescribeLoadBalancerPolicyTypes API operation.
       # @method describe_load_balancer_policy_types(options = {})
@@ -328,8 +325,14 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:policy_type_descriptions+ - (Array<Hash>)
-      #     * +:policy_attribute_type_descriptions+ - (Array<>)
-      define_client_method :describe_load_balancer_policy_types, 'DescribeLoadBalancerPolicyTypes'
+      #     * +:policy_type_name+ - (String)
+      #     * +:description+ - (String)
+      #     * +:policy_attribute_type_descriptions+ - (Array<Hash>)
+      #       * +:attribute_name+ - (String)
+      #       * +:attribute_type+ - (String)
+      #       * +:description+ - (String)
+      #       * +:default_value+ - (String)
+      #       * +:cardinality+ - (String)
 
       # Calls the DescribeLoadBalancers API operation.
       # @method describe_load_balancers(options = {})
@@ -341,30 +344,47 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:load_balancer_descriptions+ - (Array<Hash>)
+      #     * +:load_balancer_name+ - (String)
+      #     * +:dns_name+ - (String)
+      #     * +:canonical_hosted_zone_name+ - (String)
+      #     * +:canonical_hosted_zone_name_id+ - (String)
       #     * +:listener_descriptions+ - (Array<Hash>)
       #       * +:listener+ - (Hash)
+      #         * +:protocol+ - (String)
       #         * +:load_balancer_port+ - (Integer)
+      #         * +:instance_protocol+ - (String)
       #         * +:instance_port+ - (Integer)
-      #       * +:policy_names+ - (Array<>)
+      #         * +:ssl_certificate_id+ - (String)
+      #       * +:policy_names+ - (Array<String>)
       #     * +:policies+ - (Hash)
-      #       * +:app_cookie_stickiness_policies+ - (Array<>)
+      #       * +:app_cookie_stickiness_policies+ - (Array<Hash>)
+      #         * +:policy_name+ - (String)
+      #         * +:cookie_name+ - (String)
       #       * +:lb_cookie_stickiness_policies+ - (Array<Hash>)
+      #         * +:policy_name+ - (String)
       #         * +:cookie_expiration_period+ - (Integer)
-      #       * +:other_policies+ - (Array<>)
+      #       * +:other_policies+ - (Array<String>)
       #     * +:backend_server_descriptions+ - (Array<Hash>)
       #       * +:instance_port+ - (Integer)
-      #       * +:policy_names+ - (Array<>)
-      #     * +:availability_zones+ - (Array<>)
-      #     * +:subnets+ - (Array<>)
-      #     * +:instances+ - (Array<>)
+      #       * +:policy_names+ - (Array<String>)
+      #     * +:availability_zones+ - (Array<String>)
+      #     * +:subnets+ - (Array<String>)
+      #     * +:vpc_id+ - (String)
+      #     * +:instances+ - (Array<Hash>)
+      #       * +:instance_id+ - (String)
       #     * +:health_check+ - (Hash)
+      #       * +:target+ - (String)
       #       * +:interval+ - (Integer)
       #       * +:timeout+ - (Integer)
       #       * +:unhealthy_threshold+ - (Integer)
       #       * +:healthy_threshold+ - (Integer)
-      #     * +:security_groups+ - (Array<>)
+      #     * +:source_security_group+ - (Hash)
+      #       * +:owner_alias+ - (String)
+      #       * +:group_name+ - (String)
+      #     * +:security_groups+ - (Array<String>)
       #     * +:created_time+ - (Time)
-      define_client_method :describe_load_balancers, 'DescribeLoadBalancers'
+      #     * +:scheme+ - (String)
+      #   * +:next_marker+ - (String)
 
       # Calls the DetachLoadBalancerFromSubnets API operation.
       # @method detach_load_balancer_from_subnets(options = {})
@@ -377,8 +397,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subnets+ - (Array<>)
-      define_client_method :detach_load_balancer_from_subnets, 'DetachLoadBalancerFromSubnets'
+      #   * +:subnets+ - (Array<String>)
 
       # Calls the DisableAvailabilityZonesForLoadBalancer API operation.
       # @method disable_availability_zones_for_load_balancer(options = {})
@@ -395,8 +414,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:availability_zones+ - (Array<>)
-      define_client_method :disable_availability_zones_for_load_balancer, 'DisableAvailabilityZonesForLoadBalancer'
+      #   * +:availability_zones+ - (Array<String>)
 
       # Calls the EnableAvailabilityZonesForLoadBalancer API operation.
       # @method enable_availability_zones_for_load_balancer(options = {})
@@ -410,8 +428,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:availability_zones+ - (Array<>)
-      define_client_method :enable_availability_zones_for_load_balancer, 'EnableAvailabilityZonesForLoadBalancer'
+      #   * +:availability_zones+ - (Array<String>)
 
       # Calls the RegisterInstancesWithLoadBalancer API operation.
       # @method register_instances_with_load_balancer(options = {})
@@ -433,8 +450,8 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:instances+ - (Array<>)
-      define_client_method :register_instances_with_load_balancer, 'RegisterInstancesWithLoadBalancer'
+      #   * +:instances+ - (Array<Hash>)
+      #     * +:instance_id+ - (String)
 
       # Calls the SetLoadBalancerListenerSSLCertificate API operation.
       # @method set_load_balancer_listener_ssl_certificate(options = {})
@@ -448,7 +465,6 @@ module AWS
       #     see Managing Server Certificates in the AWS Identity and Access
       #     Management documentation.
       # @return [Core::Response]
-      define_client_method :set_load_balancer_listener_ssl_certificate, 'SetLoadBalancerListenerSSLCertificate'
 
       # Calls the SetLoadBalancerPoliciesForBackendServer API operation.
       # @method set_load_balancer_policies_for_backend_server(options = {})
@@ -462,7 +478,6 @@ module AWS
       #     to be set. If the list is empty, then all current polices are
       #     removed from the back-end server.
       # @return [Core::Response]
-      define_client_method :set_load_balancer_policies_for_backend_server, 'SetLoadBalancerPoliciesForBackendServer'
 
       # Calls the SetLoadBalancerPoliciesOfListener API operation.
       # @method set_load_balancer_policies_of_listener(options = {})
@@ -477,7 +492,6 @@ module AWS
       #     most one policy. If the list is empty, the current policy is
       #     removed from the listener.
       # @return [Core::Response]
-      define_client_method :set_load_balancer_policies_of_listener, 'SetLoadBalancerPoliciesOfListener'
 
       ## end client methods ##
 

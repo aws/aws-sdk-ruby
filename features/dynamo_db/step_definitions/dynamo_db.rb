@@ -33,15 +33,25 @@ After("@dynamo_db") do |scenario|
 
 end
 
+
+
+Given /^I configure dynamo DB to not convert numbers to big decimal$/ do
+  config = @dynamo_db.config.with(:dynamo_db_big_decimals => false)
+  @dynamo_db = AWS::DynamoDB.new(:config => config)
+end
+
 Given /^I have an empty DynamoDB table with options:$/ do |string|
 
   table_name = "ruby-shared-test-#{Digest::MD5.hexdigest(string)}"
 
   begin
+
     @table = @dynamo_db.tables.create(table_name, 10, 10, eval(string))
+
     eventually do
       @table.exists?.should == true and @table.status.should == :active
     end
+
   rescue DynamoDB::Errors::ResourceInUseException => e
     @table = @dynamo_db.tables[table_name]
     case @table.status

@@ -356,15 +356,6 @@ module AWS
       end
 
       def populate_error response
-        response.error = extract_error(response)
-      end
-
-      # If the response contains error, this method will construct
-      # and return an error object.  If no error is contained in the
-      # response, then nil is returned.
-      # @param [Response] response
-      # @return [Errors::Base,nil]
-      def extract_error response
 
         status = response.http_response.status
 
@@ -377,14 +368,25 @@ module AWS
           error_message
         ]
 
-        case
-        when response.network_error? then NetworkError.new
-        when error_code              then error_class(error_code).new(*error_args)
-        when status >= 500           then Errors::ServerError.new(*error_args)
-        when status >= 300           then Errors::ClientError.new(*error_args)
-        else nil # no error
-        end
+        response.error =
+          case
+          when response.network_error? then NetworkError.new
+          when error_code then error_class(error_code).new(*error_args)
+          when status >= 500 then Errors::ServerError.new(*error_args)
+          when status >= 300 then Errors::ClientError.new(*error_args)
+          else nil # no error
+          end
 
+      end
+
+      # Extracts the error code and error message from a response
+      # if it contains an error.  Returns nil otherwise.  Should be defined
+      # in sub-classes (e.g. QueryClient, RESTClient, etc).
+      # @param [Response] response
+      # @return [Array<Code,Message>,nil] Should return an array with an
+      #   error code and message, or +nil+.
+      def extract_error_details response
+        raise NotImplementedError
       end
 
       # Given an error code string, this method will return an error class.
@@ -511,44 +513,111 @@ module AWS
         user_agent
       end
 
-      # Adds a single method to the current client class.  This method
-      # yields a request method builder that allows you to specify how:
-      #
-      # * the request is built
-      # * the response is processed
-      # * the response is stubbed for testing
-      #
-      def self.add_client_request_method method_name, options = {}, &block
+      class << self
 
-        operations << method_name
+        # @return [Array<Symbol>] Returns a list of service operations as
+        #   method names supported by this client.
+        def operations
+          @operations ||= []
+        end
 
-        ClientRequestMethodBuilder.new(self, method_name, &block)
+        # @private
+        def request_builders
+          @request_builders ||= {}
+        end
 
-        method_def = <<-METHOD
-          def #{method_name}(*args, &block)
-            options = args.first ? args.first : {}
-            client_request(#{method_name.inspect}, options, &block)
+        # @private
+        def response_parsers
+          @response_parsers ||= {}
+        end
+
+        protected
+
+        # Define this in sub-classes (e.g. QueryClient, RESTClient, etc)
+        def request_builder_for api_config, operation
+          raise NotImplementedError
+        end
+
+        # Define this in sub-classes (e.g. QueryClient, RESTClient, etc)
+        def response_parser_for api_config, operation
+          raise NotImplementedError
+        end
+
+        # Adds a single method to the current client class.  This method
+        # yields a request method builder that allows you to specify how:
+        #
+        # * the request is built
+        # * the response is processed
+        # * the response is stubbed for testing
+        #
+        def add_client_request_method method_name, options = {}, &block
+
+          operations << method_name
+
+          ClientRequestMethodBuilder.new(self, method_name, &block)
+
+          method_def = <<-METHOD
+            def #{method_name}(*args, &block)
+              options = args.first ? args.first : {}
+              client_request(#{method_name.inspect}, options, &block)
+            end
+          METHOD
+
+          module_eval(method_def)
+
+        end
+
+        # Loads the API configuration for the given API version.
+        # @param [String] api_version The API version date string
+        #   (e.g. '2012-01-05').
+        # @return [Hash]
+        def load_api_config api_version
+          lib = File.dirname(File.dirname(__FILE__))
+          path = "#{lib}/api_config/#{service_name}-#{api_version}.yml"
+          YAML.load(File.read(path))
+        end
+
+        # Defines one method for each service operation described in
+        # the API configuration.
+        # @param [String] api_version
+        def define_client_methods api_version
+
+          const_set(:API_VERSION, api_version)
+
+          api_config = load_api_config(api_version)
+
+          api_config[:operations].each do |operation|
+
+            builder = request_builder_for(api_config, operation)
+            parser = response_parser_for(api_config, operation)
+
+            define_client_method(operation[:method], builder, parser)
+
           end
-        METHOD
+        end
 
-        module_eval(method_def)
+        def define_client_method method_name, builder, parser
 
-      end
+          request_builders[method_name] = builder
+          response_parsers[method_name] = parser
 
-      # Parses the service's API configuration yaml file.  This file has
-      # configuration that drives the request and response DSLs.
-      # @return [Hash]
-      def self.api_config
-        config_file =
-          File.dirname(File.dirname(__FILE__)) +
-          "/api_config/#{service_name}-#{self::API_VERSION}.yml"
-        YAML.load(File.read(config_file))
-      end
+          add_client_request_method(method_name) do
 
-      # @return [Array<Symbol>] Returns a list of service operations as
-      #   method names supported by this client.
-      def self.operations
-        @operations ||= []
+            configure_request do |request, request_options|
+              builder.populate_request(request, request_options)
+            end
+
+            process_response do |response|
+              response.data = parser.extract_data(response)
+            end
+
+            simulate_response do |response|
+              response.data = parser.simulate
+            end
+
+          end
+        end
+
       end
 
       # @private

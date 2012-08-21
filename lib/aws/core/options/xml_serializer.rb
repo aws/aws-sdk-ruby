@@ -53,9 +53,9 @@ module AWS
           xml = []
           builder = Builder::XmlMarkup.new(:target => xml, :indent => 2)
           builder.tag!("#{operation_name}Request", :xmlns => namespace) do
-            request_options.each_pair do |opt_name, opt_value|
-              to_xml(builder, opt_name, rules[opt_name], opt_value)
-            end
+
+            hash_members_xml(request_options, rules, builder)
+
           end
           xml.join
         end
@@ -78,12 +78,7 @@ module AWS
           when Hash
 
             builder.tag!(xml_name) do
-              xml_ordered_members(rules[:members]).each do |member_name|
-                if value.key?(member_name)
-                  member_value = value[member_name]
-                  to_xml(builder, member_name, rules[:members][member_name], member_value)
-                end
-              end
+              hash_members_xml(value, rules[:members], builder)
             end
 
           when Array
@@ -95,6 +90,15 @@ module AWS
           else builder.tag!(xml_name, value)
           end
 
+        end
+
+        def hash_members_xml hash, rules, builder
+          xml_ordered_members(rules).each do |member_name|
+            if hash.key?(member_name)
+              value = hash[member_name]
+              to_xml(builder, member_name, rules[member_name], value)
+            end
+          end
         end
 
         def xml_ordered_members members

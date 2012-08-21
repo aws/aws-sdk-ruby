@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2009-03-31'
 :operations:
 - :name: AddInstanceGroups
   :method: :add_instance_groups

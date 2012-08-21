@@ -15,11 +15,9 @@ module AWS
   class SQS
 
     # Client class for Amazon Simple Queue Service (SQS).
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2011-10-01'
-
-      extend Core::QueryClient
+      define_client_methods('2011-10-01')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -42,7 +40,6 @@ module AWS
       #   * +:actions+ - *required* - (Array<String>) The action the client
       #     wants to allow for the specified principal.
       # @return [Core::Response]
-      define_client_method :add_permission, 'AddPermission'
 
       # Calls the ChangeMessageVisibility API operation.
       # @method change_message_visibility(options = {})
@@ -55,7 +52,6 @@ module AWS
       #   * +:visibility_timeout+ - *required* - (Integer) The new value (in
       #     seconds) for the message's visibility timeout.
       # @return [Core::Response]
-      define_client_method :change_message_visibility, 'ChangeMessageVisibility'
 
       # Calls the ChangeMessageVisibilityBatch API operation.
       # @method change_message_visibility_batch(options = {})
@@ -80,7 +76,6 @@ module AWS
       #     * +:sender_fault+ - (Boolean)
       #     * +:code+ - (String)
       #     * +:message+ - (String)
-      define_client_method :change_message_visibility_batch, 'ChangeMessageVisibilityBatch'
 
       # Calls the CreateQueue API operation.
       # @method create_queue(options = {})
@@ -93,7 +88,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:queue_url+ - (String)
-      define_client_method :create_queue, 'CreateQueue'
 
       # Calls the DeleteMessage API operation.
       # @method delete_message(options = {})
@@ -103,7 +97,6 @@ module AWS
       #   * +:receipt_handle+ - *required* - (String) The receipt handle
       #     associated with the message to delete.
       # @return [Core::Response]
-      define_client_method :delete_message, 'DeleteMessage'
 
       # Calls the DeleteMessageBatch API operation.
       # @method delete_message_batch(options = {})
@@ -126,7 +119,6 @@ module AWS
       #     * +:sender_fault+ - (Boolean)
       #     * +:code+ - (String)
       #     * +:message+ - (String)
-      define_client_method :delete_message_batch, 'DeleteMessageBatch'
 
       # Calls the DeleteQueue API operation.
       # @method delete_queue(options = {})
@@ -134,7 +126,6 @@ module AWS
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
       # @return [Core::Response]
-      define_client_method :delete_queue, 'DeleteQueue'
 
       # Calls the GetQueueAttributes API operation.
       # @method get_queue_attributes(options = {})
@@ -147,7 +138,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
-      define_client_method :get_queue_attributes, 'GetQueueAttributes'
 
       # Calls the GetQueueUrl API operation.
       # @method get_queue_url(options = {})
@@ -160,7 +150,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:queue_url+ - (String)
-      define_client_method :get_queue_url, 'GetQueueUrl'
 
       # Calls the ListQueues API operation.
       # @method list_queues(options = {})
@@ -172,7 +161,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:queue_urls+ - (Array<String>)
-      define_client_method :list_queues, 'ListQueues'
 
       # Calls the ReceiveMessage API operation.
       # @method receive_message(options = {})
@@ -197,7 +185,6 @@ module AWS
       #     * +:md5_of_body+ - (String)
       #     * +:body+ - (String)
       #     * +:attributes+ - (Hash<String,String>)
-      define_client_method :receive_message, 'ReceiveMessage'
 
       # Calls the RemovePermission API operation.
       # @method remove_permission(options = {})
@@ -208,7 +195,6 @@ module AWS
       #     permission to remove. This is the label added with the
       #     AddPermission operation.
       # @return [Core::Response]
-      define_client_method :remove_permission, 'RemovePermission'
 
       # Calls the SendMessage API operation.
       # @method send_message(options = {})
@@ -223,7 +209,6 @@ module AWS
       #   a hash with the following structure:
       #   * +:md5_of_message_body+ - (String)
       #   * +:message_id+ - (String)
-      define_client_method :send_message, 'SendMessage'
 
       # Calls the SendMessageBatch API operation.
       # @method send_message_batch(options = {})
@@ -250,7 +235,6 @@ module AWS
       #     * +:sender_fault+ - (Boolean)
       #     * +:code+ - (String)
       #     * +:message+ - (String)
-      define_client_method :send_message_batch, 'SendMessageBatch'
 
       # Calls the SetQueueAttributes API operation.
       # @method set_queue_attributes(options = {})
@@ -260,7 +244,6 @@ module AWS
       #   * +:attributes+ - *required* - (Hash<String,String>) A map of
       #     attributes to set.
       # @return [Core::Response]
-      define_client_method :set_queue_attributes, 'SetQueueAttributes'
 
       ## end client methods ##
 

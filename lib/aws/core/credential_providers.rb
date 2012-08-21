@@ -14,6 +14,7 @@
 require 'set'
 require 'net/http'
 require 'timeout'
+require 'thread'
 
 module AWS
   module Core

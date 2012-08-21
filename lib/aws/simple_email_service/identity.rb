@@ -26,6 +26,16 @@ module AWS
     #   notifications will not be forwarded via email.  Can only be set to
     #   +false+ when there is both a +bounce_topic+ and +complaint_topic+.
     #
+    # @attr [Boolean] dkim_enabled When set to +true+, Easy DKIM signing will
+    #   be enabled for email sent from this identity.
+    #
+    # @attr_reader [Array<String>] dkim_tokens Returns a set of DNS records,
+    #   or tokens, that must be published in the domain name's DNS to 
+    #   complete the DKIM verification process.  Call {#verify_dkim} if this
+    #   returns an empty list.
+    #
+    # @attr_reader [String] dkim_verification_status
+    #
     class Identity < Core::Resource
 
       # @private
@@ -42,6 +52,12 @@ module AWS
 
       attribute :verification_token, :static => true
 
+      mutable_attribute :dkim_enabled, :alias => :dkim_enabled?
+
+      attribute :dkim_tokens
+
+      attribute :dkim_verification_status
+
       mutable_attribute :bounce_topic_arn, :from => :bounce_topic
 
       mutable_attribute :complaint_topic_arn, :from => :complaint_topic
@@ -53,14 +69,31 @@ module AWS
       provider(:get_identity_verification_attributes) do |provider|
         provider.provides :verification_token
         provider.provides :verification_status
-        provider.find{|resp| resp.data[:verification_attributes][identity] }
+        provider.find{|resp| resp[:verification_attributes][identity] }
       end
 
       provider(:get_identity_notification_attributes) do |provider|
         provider.provides :bounce_topic_arn
         provider.provides :complaint_topic_arn
         provider.provides :forwarding_enabled
-        provider.find{|resp| resp.data[:notification_attributes][identity] }
+        provider.find{|resp| resp[:notification_attributes][identity] }
+      end
+
+      provider(:get_identity_dkim_attributes) do |provider|
+        provider.provides :dkim_enabled
+        provider.provides :dkim_verification_status
+        provider.provides :dkim_tokens
+        provider.find{|resp| resp[:dkim_attributes][identity] }
+      end
+
+      # @return [Array<String>] Returns an array of DKIM tokens.
+      def verify_dkim
+        if domain?
+          resp = client.verify_domain_dkim(:domain => identity)
+          reps[:dkim_tokens]
+        else
+          raise "unable to verify dkim for an email address"
+        end
       end
 
       # @param [String,SNS::Topic] topic The topic (ARN string or topic
@@ -94,7 +127,7 @@ module AWS
       # @return [Boolean] Returns +true+ if this {Identity} represents an
       #   email address.
       def email_address?
-        identity =~ /@/ ? true : false
+        identity.match(/@/) ? true : false
       end
 
       # @return [Boolean] Returns +true+ if this {Identity} represents a
@@ -136,13 +169,16 @@ module AWS
       end
 
       def get_resource attr
-        client_opts = {}
-        client_opts[:identities] = [identity]
-        if attr.name.to_s.match(/verification/)
-          client.get_identity_verification_attributes(client_opts)
-        else
-          client.get_identity_notification_attributes(client_opts)
-        end
+
+        method_name =
+          case attr.name.to_s
+          when /dkim/         then :get_identity_dkim_attributes
+          when /verification/ then :get_identity_verification_attributes
+          else                     :get_identity_notification_attributes
+          end
+
+        client.send(method_name, :identities => [identity])
+
       end
 
       def update_resource attr, value
@@ -160,6 +196,9 @@ module AWS
         when :forwarding_enabled
           method = :set_identity_feedback_forwarding_enabled
           client_opts[:forwarding_enabled] = value
+        when :dkim_enabled
+          method = :set_identity_dkim_enabled
+          client_opts[:dkim_enabled] = value
         else raise "unhandled attribute: #{attr.name}"
         end
         client.send(method, client_opts)

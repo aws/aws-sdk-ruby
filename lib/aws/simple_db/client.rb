@@ -15,11 +15,9 @@ module AWS
   class SimpleDB
 
     # Client class for Amazon SimpleDB.
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2009-04-15'
-
-      extend Core::QueryClient
+      define_client_methods('2009-04-15')
 
       # @private
       REGION_US_E1 = 'sdb.amazonaws.com'
@@ -75,7 +73,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :batch_delete_attributes, 'BatchDeleteAttributes'
 
       # Calls the BatchPutAttributes API operation.
       # @method batch_put_attributes(options = {})
@@ -100,7 +97,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :batch_put_attributes, 'BatchPutAttributes'
 
       # Calls the CreateDomain API operation.
       # @method create_domain(options = {})
@@ -114,7 +110,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :create_domain, 'CreateDomain'
 
       # Calls the DeleteAttributes API operation.
       # @method delete_attributes(options = {})
@@ -149,7 +144,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :delete_attributes, 'DeleteAttributes'
 
       # Calls the DeleteDomain API operation.
       # @method delete_domain(options = {})
@@ -162,7 +156,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :delete_domain, 'DeleteDomain'
 
       # Calls the DomainMetadata API operation.
       # @method domain_metadata(options = {})
@@ -182,7 +175,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :domain_metadata, 'DomainMetadata'
 
       # Calls the GetAttributes API operation.
       # @method get_attributes(options = {})
@@ -207,7 +199,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :get_attributes, 'GetAttributes'
 
       # Calls the ListDomains API operation.
       # @method list_domains(options = {})
@@ -225,7 +216,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :list_domains, 'ListDomains'
 
       # Calls the PutAttributes API operation.
       # @method put_attributes(options = {})
@@ -261,7 +251,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :put_attributes, 'PutAttributes'
 
       # Calls the Select API operation.
       # @method select(options = {})
@@ -290,7 +279,6 @@ module AWS
       #   * +:response_metadata+ - (Hash)
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
-      define_client_method :select, 'Select'
 
       ## end client methods ##
 

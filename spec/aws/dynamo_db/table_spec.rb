@@ -155,9 +155,9 @@ module AWS
 
           it 'should provide the creation_date_time attribute' do
             now = Time.now
-            response_table["CreationDateTime"] = Time.now.to_f
+            response_table["CreationDateTime"] = now
             # float equality comparison doesn't work reliably
-            attributes[:creation_date_time].should be_within(1).of(now)
+            attributes[:creation_date_time].should eq(now)
           end
 
           it 'should provide the status attribute' do

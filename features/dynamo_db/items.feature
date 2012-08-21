@@ -56,6 +56,30 @@ Feature: DynamoDB items
       "title" => "Cat" }
     """
 
+  Scenario: Put an item with a binary key
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string },
+      :range_key => { :range => :binary } }
+    """
+    When I put an item with the following attributes:
+    """
+    {
+      "id" => "abc",
+      "range" => AWS::DynamoDB::Binary.new('abc'),
+      "data" => AWS::DynamoDB::Binary.new('data'),
+    }
+    """
+    Then the result should be a DynamoDB item
+    And the item should have the following attributes:
+    """
+    {
+      "id" => "abc",
+      "range" => AWS::DynamoDB::Binary.new('abc'),
+      "data" => AWS::DynamoDB::Binary.new('data'),
+    }
+    """
+
   Scenario: DynamoDB Put Item with set-valued attributes
     Given I have an empty DynamoDB table with options:
     """
@@ -63,17 +87,57 @@ Feature: DynamoDB items
     """
     When I put an item with the following attributes:
     """
-    { "id" => "Cat",
+    {
+      "id" => "Cat",
       "features" => ["tail", "night vision"],
-      "ranks" => [12.3, BigDecimal("21.4179232578941663312")] }
+      "ranks" => [12.3, BigDecimal("21.4179232578941663312")],
+      "data" => [
+        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('b'),
+      ],
+    }
     """
     Then the result should be a DynamoDB item
     And the item should have the following attributes:
     """
-    { "id" => "Cat",
-      "features" => Set["tail", "night vision"],
-      "ranks" => Set[BigDecimal("12.3"),
-                     BigDecimal("21.4179232578941663312")] }
+    {
+      "id" => "Cat",
+      "features" => Set.new(["tail", "night vision"]),
+      "ranks" => Set.new([
+        BigDecimal("12.3"),
+        BigDecimal("21.4179232578941663312"),
+      ]),
+      "data" => Set.new([
+        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('b'),
+      ]),
+    }
+    """
+
+  @foo
+  Scenario: Disabling BigDecimal conversion for number attributes
+    Given I configure dynamo DB to not convert numbers to big decimal
+    And I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string },
+      :range_key => { :range => :number } }
+    """
+    When I put an item with the following attributes:
+    """
+    {
+      "id" => "id",
+      "range" => 123.456,
+      "sizes" => [1.2, 3.4, 5.6],
+    }
+    """
+    Then the result should be a DynamoDB item
+    And the item should have the following attributes:
+    """
+    {
+      "id" => "id",
+      "range" => 123.456,
+      "sizes" => Set.new([1.2, 3.4, 5.6]),
+    }
     """
 
   Scenario: DynamoDB Put Item returning overwritten data

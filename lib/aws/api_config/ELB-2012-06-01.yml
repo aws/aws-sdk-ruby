@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2012-06-01'
 :operations:
 - :name: ApplySecurityGroupsToLoadBalancer
   :method: :apply_security_groups_to_load_balancer

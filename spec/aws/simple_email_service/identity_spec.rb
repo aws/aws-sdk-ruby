@@ -230,6 +230,101 @@ module AWS
 
         end
 
+        context 'dkim attributes' do
+
+          let(:resp) { client.stub_for(:get_identity_dkim_attributes) }
+
+          let(:attributes) {{}}
+
+          before(:each) do
+            resp.data[:dkim_attributes] = {}
+            resp.data[:dkim_attributes][identity.identity] = attributes
+            client.stub(:get_identity_dkim_attributes).and_return(resp)
+          end
+
+          context '#dkim_enabled' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_enabled
+
+            end
+
+            it 'is aliased as #dkim_enabled?' do
+              identity.method(:dkim_enabled).should
+                eq(identity.method(:dkim_enabled?))
+            end
+
+            it 'returns the dkim enabled state' do
+              state = double('dkim-enabled-state')
+              attributes[:dkim_enabled] = state
+              identity.dkim_enabled.should eq(state)
+            end
+
+          end
+
+          context '#dkim_enabled=' do
+
+            it '#calls #set_identity_dkim_enabled with the state' do
+
+              state = double('dkim-enabled-state')
+
+              client.should_receive(:set_identity_dkim_enabled).with(
+                :identity => identity.identity,
+                :dkim_enabled => state)
+
+              identity.dkim_enabled = state
+
+            end
+
+          end
+
+          context '#dkim_tokens' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_tokens
+
+            end
+
+            it 'returns the dkim tokens' do
+              tokens = double('dkim-enabled-tokens')
+              attributes[:dkim_tokens] = tokens
+              identity.dkim_tokens.should eq(tokens)
+            end
+
+          end
+
+          context '#dkim_verification_status' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_verification_status
+
+            end
+
+            it 'returns the dkim verification status' do
+              status = double('dkim-verification-status')
+              attributes[:dkim_verification_status] = status
+              identity.dkim_verification_status.should eq(status)
+            end
+
+          end
+
+        end
+
         context 'verification attributes' do
 
           let(:resp) { client.stub_for(:get_identity_verification_attributes) }

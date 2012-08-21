@@ -66,11 +66,6 @@ module AWS
 
       # Checks for any formatting problems for keys and initialization vectors
       #   supported with EncryptionUtils.
-      #
-      # @param [OpenSSL::PKey::RSA, String] key Key used to encrypt.
-      #
-      # @param [String] data Data to be encrypted.
-      #
       def check_encryption_materials mode, key
         rsa = OpenSSL::PKey::RSA
         case key
@@ -116,8 +111,8 @@ module AWS
         cipher
       end
 
-      # @param  [Fixnum] Size of data given.
-      # @return [Fixnum] Returns the AES encrypted size based on a given size.
+      # @param  [Integer] size Size of data given.
+      # @return [Integer] Returns the AES encrypted size based on a given size.
       def get_encrypted_size size
         # The next multiple of 16
         ((size / 16) + 1) * 16

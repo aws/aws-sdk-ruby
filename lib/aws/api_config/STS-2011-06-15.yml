@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2011-06-15'
 :operations:
 - :name: GetFederationToken
   :method: :get_federation_token

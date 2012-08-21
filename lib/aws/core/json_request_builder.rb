@@ -13,29 +13,22 @@
 
 module AWS
   module Core
-    class RESTClient < Core::Client
 
-      protected
+    # @private
+    class JSONRequestBuilder
 
-      def self.request_builder_for api_config, operation
-        RESTRequestBuilder.new(api_config[:namespace], operation)
+      def initialize target_prefix, operation
+        @x_amz_target = target_prefix + operation[:name]
+        @grammar = OptionGrammar.customize(operation[:inputs])
       end
 
-      def self.response_parser_for api_config, operation
-        RESTResponseParser.new(operation)
-      end
-
-      def extract_error_details response
-        if
-          response.http_response.status >= 300 and
-          body = response.http_response.body and
-          error = errors_module::GRAMMAR.parse(body) and
-          error[:code]
-        then
-          [error[:code], error[:message]]
-        end
+      def populate_request request, options
+        request.headers["content-type"] = "application/x-amz-json-1.0"
+        request.headers["x-amz-target"] = @x_amz_target
+        request.body = @grammar.to_json(options)
       end
 
     end
+
   end
 end

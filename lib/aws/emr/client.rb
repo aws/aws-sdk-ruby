@@ -13,11 +13,9 @@
 
 module AWS
   class EMR
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2009-03-31'
-
-      extend Core::QueryClient
+      define_client_methods('2009-03-31')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -48,7 +46,6 @@ module AWS
       #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
       #   * +:instance_group_ids+ - (Array<String>)
-      define_client_method :add_instance_groups, 'AddInstanceGroups'
 
       # Calls the AddJobFlowSteps API operation.
       # @method add_job_flow_steps(options = {})
@@ -76,7 +73,6 @@ module AWS
       #       * +:args+ - (Array<String>) A list of command line arguments
       #         passed to the JAR file's main function when executed.
       # @return [Core::Response]
-      define_client_method :add_job_flow_steps, 'AddJobFlowSteps'
 
       # Calls the DescribeJobFlows API operation.
       # @method describe_job_flows(options = {})
@@ -157,7 +153,6 @@ module AWS
       #           * +:path+ - (String)
       #           * +:args+ - (Array<String>)
       #     * +:supported_products+ - (Array<String>)
-      define_client_method :describe_job_flows, 'DescribeJobFlows'
 
       # Calls the ModifyInstanceGroups API operation.
       # @method modify_instance_groups(options = {})
@@ -168,7 +163,6 @@ module AWS
       #     * +:instance_count+ - *required* - (Integer) Target size for the
       #       instance group.
       # @return [Core::Response]
-      define_client_method :modify_instance_groups, 'ModifyInstanceGroups'
 
       # Calls the RunJobFlow API operation.
       # @method run_job_flow(options = {})
@@ -278,7 +272,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
-      define_client_method :run_job_flow, 'RunJobFlow'
 
       # Calls the SetTerminationProtection API operation.
       # @method set_termination_protection(options = {})
@@ -292,7 +285,6 @@ module AWS
       #     EC2 instances in the cluster from shutting down due to API calls,
       #     user intervention, or job-flow error.
       # @return [Core::Response]
-      define_client_method :set_termination_protection, 'SetTerminationProtection'
 
       # Calls the TerminateJobFlows API operation.
       # @method terminate_job_flows(options = {})
@@ -300,7 +292,6 @@ module AWS
       #   * +:job_flow_ids+ - *required* - (Array<String>) A list of job flows
       #     to be shutdown.
       # @return [Core::Response]
-      define_client_method :terminate_job_flows, 'TerminateJobFlows'
 
       ## end client methods ##
 

@@ -128,8 +128,8 @@ XML
       context '#create_hosted_zone' do
 
         let(:options) {{
-          :name => 'ZONE-NAME',
-          :caller_reference => 'CALLER-REF',
+          :caller_reference => 'CALLER-REF', # purposefully ordered these
+          :name => 'ZONE-NAME',              # backwards to test xml ordering
           :hosted_zone_config => {
             :comment => 'OPTIONAL-COMMENT',
           },

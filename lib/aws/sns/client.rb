@@ -15,11 +15,9 @@ module AWS
   class SNS
 
     # Client class for Amazon Simple Notifications Service (SNS).
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2010-03-31'
-
-      extend Core::QueryClient
+      define_client_methods('2010-03-31')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
@@ -41,7 +39,6 @@ module AWS
       #     to allow for the specified principal(s). Valid values: any Amazon
       #     SNS action name.
       # @return [Core::Response]
-      define_client_method :add_permission, 'AddPermission'
 
       # Calls the ConfirmSubscription API operation.
       # @method confirm_subscription(options = {})
@@ -59,7 +56,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:subscription_arn+ - (String)
-      define_client_method :confirm_subscription, 'ConfirmSubscription'
 
       # Calls the CreateTopic API operation.
       # @method create_topic(options = {})
@@ -72,7 +68,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:topic_arn+ - (String)
-      define_client_method :create_topic, 'CreateTopic'
 
       # Calls the DeleteTopic API operation.
       # @method delete_topic(options = {})
@@ -90,7 +85,6 @@ module AWS
       #     <RequestId>fba800b9-3765-11df-8cf3-c58c53254dfb</RequestId>
       #     </ResponseMetadata> </DeleteTopicResponse>
       # @return [Core::Response]
-      define_client_method :delete_topic, 'DeleteTopic'
 
       # Calls the GetSubscriptionAttributes API operation.
       # @method get_subscription_attributes(options = {})
@@ -101,7 +95,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
-      define_client_method :get_subscription_attributes, 'GetSubscriptionAttributes'
 
       # Calls the GetTopicAttributes API operation.
       # @method get_topic_attributes(options = {})
@@ -112,7 +105,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
-      define_client_method :get_topic_attributes, 'GetTopicAttributes'
 
       # Calls the ListSubscriptions API operation.
       # @method list_subscriptions(options = {})
@@ -129,7 +121,6 @@ module AWS
       #     * +:endpoint+ - (String)
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :list_subscriptions, 'ListSubscriptions'
 
       # Calls the ListSubscriptionsByTopic API operation.
       # @method list_subscriptions_by_topic(options = {})
@@ -148,7 +139,6 @@ module AWS
       #     * +:endpoint+ - (String)
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :list_subscriptions_by_topic, 'ListSubscriptionsByTopic'
 
       # Calls the ListTopics API operation.
       # @method list_topics(options = {})
@@ -161,7 +151,6 @@ module AWS
       #   * +:topics+ - (Array<Hash>)
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
-      define_client_method :list_topics, 'ListTopics'
 
       # Calls the Publish API operation.
       # @method publish(options = {})
@@ -203,7 +192,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:message_id+ - (String)
-      define_client_method :publish, 'Publish'
 
       # Calls the RemovePermission API operation.
       # @method remove_permission(options = {})
@@ -213,7 +201,6 @@ module AWS
       #   * +:label+ - *required* - (String) The unique label of the statement
       #     you want to remove.
       # @return [Core::Response]
-      define_client_method :remove_permission, 'RemovePermission'
 
       # Calls the SetSubscriptionAttributes API operation.
       # @method set_subscription_attributes(options = {})
@@ -226,7 +213,6 @@ module AWS
       #   * +:attribute_value+ - *required* - (String) The new value for the
       #     attribute.
       # @return [Core::Response]
-      define_client_method :set_subscription_attributes, 'SetSubscriptionAttributes'
 
       # Calls the SetTopicAttributes API operation.
       # @method set_topic_attributes(options = {})
@@ -239,7 +225,6 @@ module AWS
       #   * +:attribute_value+ - *required* - (String) The new value for the
       #     attribute.
       # @return [Core::Response]
-      define_client_method :set_topic_attributes, 'SetTopicAttributes'
 
       # Calls the Subscribe API operation.
       # @method subscribe(options = {})
@@ -266,7 +251,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:subscription_arn+ - (String)
-      define_client_method :subscribe, 'Subscribe'
 
       # Calls the Unsubscribe API operation.
       # @method unsubscribe(options = {})
@@ -274,7 +258,6 @@ module AWS
       #   * +:subscription_arn+ - *required* - (String) The ARN of the
       #     subscription to be deleted.
       # @return [Core::Response]
-      define_client_method :unsubscribe, 'Unsubscribe'
 
       ## end client methods ##
 

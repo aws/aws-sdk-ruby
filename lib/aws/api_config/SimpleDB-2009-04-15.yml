@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2009-04-15'
 :operations:
 - :name: BatchDeleteAttributes
   :method: :batch_delete_attributes

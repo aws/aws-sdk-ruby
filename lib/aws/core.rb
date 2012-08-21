@@ -62,14 +62,14 @@ require 'aws/core/autoloader'
 #   config/initializers/aws-sdk.rb
 #
 # Optionally you can create a Yaml configuration file at
-# RAILS_ROOT/config/aws.yaml; This should be formatted in the same manor
+# RAILS_ROOT/config/aws.yml; This should be formatted in the same manor
 # as the default RAILS_ROOT/config/database.yml file (one section for
 # each Rails environment).
 #
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.3"
+  VERSION = "1.6.4"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -78,6 +78,7 @@ module AWS
   module Core
 
     AWS.register_autoloads(self) do
+
       autoload :AsyncHandle,               'async_handle'
       autoload :Cacheable,                 'cacheable'
       autoload :Client,                    'client'
@@ -87,9 +88,11 @@ module AWS
       autoload :Data,                      'data'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
+
       autoload :JSONClient,                'json_client'
-      autoload :QueryClient,               'query_client'
-      autoload :RESTClient,                'rest_client'
+      autoload :JSONRequestBuilder,        'json_request_builder'
+      autoload :JSONResponseParser,        'json_response_parser'
+
       autoload :LazyErrorClasses,          'lazy_error_classes'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
@@ -98,13 +101,24 @@ module AWS
       autoload :OptionGrammar,             'option_grammar'
       autoload :PageResult,                'page_result'
       autoload :Policy,                    'policy'
+
+      autoload :QueryClient,               'query_client'
+      autoload :QueryRequestBuilder,       'query_request_builder'
+      autoload :QueryResponseParser,       'query_response_parser'
+
       autoload :Resource,                  'resource'
       autoload :ResourceCache,             'resource_cache'
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
+
+      autoload :RESTClient,                'rest_client'
+      autoload :RESTRequestBuilder,        'rest_request_builder'
+      autoload :RESTResponseParser,        'rest_response_parser'
+
       autoload :ServiceInterface,          'service_interface'
       autoload :Signer,                    'signer'
       autoload :UriEscape,                 'uri_escape'
+
     end
 
     module Options
@@ -208,6 +222,12 @@ module AWS
     #
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
+    #
+    # @option options [Boolean] :dynamo_db_big_decimals (true) When +true+,
+    #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
+    #   from strings to BigDecimal objects.  If you set this to +false+,
+    #   they will be convereted from strings into floats (with a potential
+    #              # backwards to test xml ordering   loss of precision).
     #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.

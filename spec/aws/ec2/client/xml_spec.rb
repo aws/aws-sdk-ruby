@@ -42,7 +42,9 @@ module AWS
     describe Client do
 
       def parse method, xml
-        Core::Data.new(Client.xml_parsers[method].parse(xml))
+        response = double('response')
+        response.stub_chain(:http_response, :body).and_return(xml)
+        Core::Data.new(Client.response_parsers[method].extract_data(response))
       end
 
       context 'RunInstances' do

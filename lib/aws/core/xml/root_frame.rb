@@ -16,7 +16,7 @@ module AWS
     module XML
 
       class RootFrame < Frame
-        
+
         def initialize rules
           @inflected = {}
           @indexes = {}

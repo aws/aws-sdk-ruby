@@ -84,27 +84,27 @@ module AWS
   #   # get an existing table by name and specify its hash key
   #   table = dynamo_db.tables['another-table']
   #   table.hash_key = [:id, :number]
-  # 
+  #
   #   # add an item
   #   item = table.items.create('id' => 12345, 'foo' => 'bar')
-  # 
+  #
   #   # add attributes to an item
   #   item.attributes.add 'category' => %w(demo), 'tags' => %w(sample item)
-  # 
+  #
   #   # update an item with mixed add, delete, update
   #   item.attributes.update do |u|
   #     u.add 'colors' => %w(red)
   #     u.set 'category' => 'demo-category'
   #     u.delete 'foo'
   #   end
-  # 
+  #
   #   # delete attributes
   #   item.attributes.delete 'colors', 'category'
-  # 
+  #
   #   # get attributes
   #   item.attributes.to_h
   #   #=> {"id"=>#<BigDecimal:10155f5d0,'0.12345E5',9(18)>, "tags"=>#<Set: {"item", "sample"}>}
-  # 
+  #
   #   # delete an item and all of its attributes
   #   item.delete
   #
@@ -114,6 +114,7 @@ module AWS
       autoload :AttributeCollection, 'attribute_collection'
       autoload :BatchGet, 'batch_get'
       autoload :BatchWrite, 'batch_write'
+      autoload :Binary, 'binary'
       autoload :Client, 'client'
       autoload :Errors, 'errors'
       autoload :Expectations, 'expectations'
@@ -147,7 +148,7 @@ module AWS
     #   end
     #
     # The value returned by #batch_get is an enumerable object that yields
-    # the table name (as a string) and a hash of attributes.  The 
+    # the table name (as a string) and a hash of attributes.  The
     # enumerable yields once per item received in the batch get.
     #
     # == Configuring the batch
@@ -162,9 +163,9 @@ module AWS
     # @yield [String, Hash] Yields the table name as a string and a hash
     #   of attributes for each item received in the bach get request.
     #
-    # @return [Enumerable] 
+    # @return [Enumerable]
     #
-    def batch_get &block 
+    def batch_get &block
       batch = BatchGet.new(:config => config)
       yield(batch)
       batch.enumerator

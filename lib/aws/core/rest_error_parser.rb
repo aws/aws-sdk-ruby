@@ -13,29 +13,12 @@
 
 module AWS
   module Core
-    class RESTClient < Core::Client
 
-      protected
+    # @private
+    module RESTErrorParser
 
-      def self.request_builder_for api_config, operation
-        RESTRequestBuilder.new(api_config[:namespace], operation)
-      end
-
-      def self.response_parser_for api_config, operation
-        RESTResponseParser.new(operation)
-      end
-
-      def extract_error_details response
-        if
-          response.http_response.status >= 300 and
-          body = response.http_response.body and
-          error = errors_module::GRAMMAR.parse(body) and
-          error[:code]
-        then
-          [error[:code], error[:message]]
-        end
-      end
 
     end
+
   end
 end

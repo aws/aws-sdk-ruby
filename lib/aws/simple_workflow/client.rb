@@ -15,14 +15,9 @@ module AWS
   class SimpleWorkflow
 
     # Client class for Amazon Simple Workflow Service (SWF).
-    class Client < Core::Client
+    class Client < Core::JSONClient
 
-      API_VERSION = '2012-01-25'
-
-      extend Core::JSONClient
-
-      # @private
-      TARGET_PREFIX = "SimpleWorkflowService."
+      define_client_methods('2012-01-25')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -69,7 +64,6 @@ module AWS
       #   a hash with the following structure:
       #   * +count+ - (Integer)
       #   * +truncated+ - (Boolean)
-      define_client_method :count_closed_workflow_executions, 'CountClosedWorkflowExecutions'
 
       # Calls the CountOpenWorkflowExecutions API operation.
       # @method count_open_workflow_executions(options = {})
@@ -90,7 +84,6 @@ module AWS
       #   a hash with the following structure:
       #   * +count+ - (Integer)
       #   * +truncated+ - (Boolean)
-      define_client_method :count_open_workflow_executions, 'CountOpenWorkflowExecutions'
 
       # Calls the CountPendingActivityTasks API operation.
       # @method count_pending_activity_tasks(options = {})
@@ -103,7 +96,6 @@ module AWS
       #   a hash with the following structure:
       #   * +count+ - (Integer)
       #   * +truncated+ - (Boolean)
-      define_client_method :count_pending_activity_tasks, 'CountPendingActivityTasks'
 
       # Calls the CountPendingDecisionTasks API operation.
       # @method count_pending_decision_tasks(options = {})
@@ -116,7 +108,6 @@ module AWS
       #   a hash with the following structure:
       #   * +count+ - (Integer)
       #   * +truncated+ - (Boolean)
-      define_client_method :count_pending_decision_tasks, 'CountPendingDecisionTasks'
 
       # Calls the DeprecateActivityType API operation.
       # @method deprecate_activity_type(options = {})
@@ -126,14 +117,12 @@ module AWS
       #     * +:name+ - *required* - (String)
       #     * +:version+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :deprecate_activity_type, 'DeprecateActivityType'
 
       # Calls the DeprecateDomain API operation.
       # @method deprecate_domain(options = {})
       # @param [Hash] options
       #   * +:name+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :deprecate_domain, 'DeprecateDomain'
 
       # Calls the DeprecateWorkflowType API operation.
       # @method deprecate_workflow_type(options = {})
@@ -143,7 +132,6 @@ module AWS
       #     * +:name+ - *required* - (String)
       #     * +:version+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :deprecate_workflow_type, 'DeprecateWorkflowType'
 
       # Calls the DescribeActivityType API operation.
       # @method describe_activity_type(options = {})
@@ -170,7 +158,6 @@ module AWS
       #       * +name+ - (String)
       #     * +defaultTaskScheduleToStartTimeout+ - (String)
       #     * +defaultTaskScheduleToCloseTimeout+ - (String)
-      define_client_method :describe_activity_type, 'DescribeActivityType'
 
       # Calls the DescribeDomain API operation.
       # @method describe_domain(options = {})
@@ -185,7 +172,6 @@ module AWS
       #     * +description+ - (String)
       #   * +configuration+ - (Hash)
       #     * +workflowExecutionRetentionPeriodInDays+ - (String)
-      define_client_method :describe_domain, 'DescribeDomain'
 
       # Calls the DescribeWorkflowExecution API operation.
       # @method describe_workflow_execution(options = {})
@@ -226,7 +212,6 @@ module AWS
       #     * +openChildWorkflowExecutions+ - (Integer)
       #   * +latestActivityTaskTimestamp+ - (Time)
       #   * +latestExecutionContext+ - (String)
-      define_client_method :describe_workflow_execution, 'DescribeWorkflowExecution'
 
       # Calls the DescribeWorkflowType API operation.
       # @method describe_workflow_type(options = {})
@@ -252,7 +237,6 @@ module AWS
       #     * +defaultTaskList+ - (Hash)
       #       * +name+ - (String)
       #     * +defaultChildPolicy+ - (String)
-      define_client_method :describe_workflow_type, 'DescribeWorkflowType'
 
       # Calls the GetWorkflowExecutionHistory API operation.
       # @method get_workflow_execution_history(options = {})
@@ -547,7 +531,6 @@ module AWS
       #       * +initiatedEventId+ - (Integer)
       #       * +decisionTaskCompletedEventId+ - (Integer)
       #   * +nextPageToken+ - (String)
-      define_client_method :get_workflow_execution_history, 'GetWorkflowExecutionHistory'
 
       # Calls the ListActivityTypes API operation.
       # @method list_activity_types(options = {})
@@ -570,7 +553,6 @@ module AWS
       #     * +creationDate+ - (Time)
       #     * +deprecationDate+ - (Time)
       #   * +nextPageToken+ - (String)
-      define_client_method :list_activity_types, 'ListActivityTypes'
 
       # Calls the ListClosedWorkflowExecutions API operation.
       # @method list_closed_workflow_executions(options = {})
@@ -614,7 +596,6 @@ module AWS
       #     * +tagList+ - (Array<String>)
       #     * +cancelRequested+ - (Boolean)
       #   * +nextPageToken+ - (String)
-      define_client_method :list_closed_workflow_executions, 'ListClosedWorkflowExecutions'
 
       # Calls the ListDomains API operation.
       # @method list_domains(options = {})
@@ -631,7 +612,6 @@ module AWS
       #     * +status+ - (String)
       #     * +description+ - (String)
       #   * +nextPageToken+ - (String)
-      define_client_method :list_domains, 'ListDomains'
 
       # Calls the ListOpenWorkflowExecutions API operation.
       # @method list_open_workflow_executions(options = {})
@@ -670,7 +650,6 @@ module AWS
       #     * +tagList+ - (Array<String>)
       #     * +cancelRequested+ - (Boolean)
       #   * +nextPageToken+ - (String)
-      define_client_method :list_open_workflow_executions, 'ListOpenWorkflowExecutions'
 
       # Calls the ListWorkflowTypes API operation.
       # @method list_workflow_types(options = {})
@@ -693,7 +672,6 @@ module AWS
       #     * +creationDate+ - (Time)
       #     * +deprecationDate+ - (Time)
       #   * +nextPageToken+ - (String)
-      define_client_method :list_workflow_types, 'ListWorkflowTypes'
 
       # Calls the PollForActivityTask API operation.
       # @method poll_for_activity_task(options = {})
@@ -715,7 +693,6 @@ module AWS
       #     * +name+ - (String)
       #     * +version+ - (String)
       #   * +input+ - (String)
-      define_client_method :poll_for_activity_task, 'PollForActivityTask'
 
       # Calls the PollForDecisionTask API operation.
       # @method poll_for_decision_task(options = {})
@@ -1019,7 +996,6 @@ module AWS
       #       * +decisionTaskCompletedEventId+ - (Integer)
       #   * +nextPageToken+ - (String)
       #   * +previousStartedEventId+ - (Integer)
-      define_client_method :poll_for_decision_task, 'PollForDecisionTask'
 
       # Calls the RecordActivityTaskHeartbeat API operation.
       # @method record_activity_task_heartbeat(options = {})
@@ -1030,7 +1006,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +cancelRequested+ - (Boolean)
-      define_client_method :record_activity_task_heartbeat, 'RecordActivityTaskHeartbeat'
 
       # Calls the RegisterActivityType API operation.
       # @method register_activity_type(options = {})
@@ -1046,7 +1021,6 @@ module AWS
       #   * +:default_task_schedule_to_start_timeout+ - (String)
       #   * +:default_task_schedule_to_close_timeout+ - (String)
       # @return [Core::Response]
-      define_client_method :register_activity_type, 'RegisterActivityType'
 
       # Calls the RegisterDomain API operation.
       # @method register_domain(options = {})
@@ -1055,7 +1029,6 @@ module AWS
       #   * +:description+ - (String)
       #   * +:workflow_execution_retention_period_in_days+ - *required* - (String)
       # @return [Core::Response]
-      define_client_method :register_domain, 'RegisterDomain'
 
       # Calls the RegisterWorkflowType API operation.
       # @method register_workflow_type(options = {})
@@ -1070,7 +1043,6 @@ module AWS
       #     * +:name+ - *required* - (String)
       #   * +:default_child_policy+ - (String)
       # @return [Core::Response]
-      define_client_method :register_workflow_type, 'RegisterWorkflowType'
 
       # Calls the RequestCancelWorkflowExecution API operation.
       # @method request_cancel_workflow_execution(options = {})
@@ -1079,7 +1051,6 @@ module AWS
       #   * +:workflow_id+ - *required* - (String)
       #   * +:run_id+ - (String)
       # @return [Core::Response]
-      define_client_method :request_cancel_workflow_execution, 'RequestCancelWorkflowExecution'
 
       # Calls the RespondActivityTaskCanceled API operation.
       # @method respond_activity_task_canceled(options = {})
@@ -1087,7 +1058,6 @@ module AWS
       #   * +:task_token+ - *required* - (String)
       #   * +:details+ - (String)
       # @return [Core::Response]
-      define_client_method :respond_activity_task_canceled, 'RespondActivityTaskCanceled'
 
       # Calls the RespondActivityTaskCompleted API operation.
       # @method respond_activity_task_completed(options = {})
@@ -1095,7 +1065,6 @@ module AWS
       #   * +:task_token+ - *required* - (String)
       #   * +:result+ - (String)
       # @return [Core::Response]
-      define_client_method :respond_activity_task_completed, 'RespondActivityTaskCompleted'
 
       # Calls the RespondActivityTaskFailed API operation.
       # @method respond_activity_task_failed(options = {})
@@ -1104,7 +1073,6 @@ module AWS
       #   * +:reason+ - (String)
       #   * +:details+ - (String)
       # @return [Core::Response]
-      define_client_method :respond_activity_task_failed, 'RespondActivityTaskFailed'
 
       # Calls the RespondDecisionTaskCompleted API operation.
       # @method respond_decision_task_completed(options = {})
@@ -1177,7 +1145,6 @@ module AWS
       #       * +:tag_list+ - (Array<String>)
       #   * +:execution_context+ - (String)
       # @return [Core::Response]
-      define_client_method :respond_decision_task_completed, 'RespondDecisionTaskCompleted'
 
       # Calls the SignalWorkflowExecution API operation.
       # @method signal_workflow_execution(options = {})
@@ -1188,7 +1155,6 @@ module AWS
       #   * +:signal_name+ - *required* - (String)
       #   * +:input+ - (String)
       # @return [Core::Response]
-      define_client_method :signal_workflow_execution, 'SignalWorkflowExecution'
 
       # Calls the StartWorkflowExecution API operation.
       # @method start_workflow_execution(options = {})
@@ -1209,7 +1175,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +runId+ - (String)
-      define_client_method :start_workflow_execution, 'StartWorkflowExecution'
 
       # Calls the TerminateWorkflowExecution API operation.
       # @method terminate_workflow_execution(options = {})
@@ -1221,7 +1186,6 @@ module AWS
       #   * +:details+ - (String)
       #   * +:child_policy+ - (String)
       # @return [Core::Response]
-      define_client_method :terminate_workflow_execution, 'TerminateWorkflowExecution'
 
       ## end client methods ##
 

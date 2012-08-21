@@ -21,7 +21,8 @@ module AWS
 
       ATTRIBUTE_TYPES = {
         "S" => :string,
-        "N" => :number
+        "N" => :number,
+        "B" => :binary,
       }
 
       def initialize(hash)

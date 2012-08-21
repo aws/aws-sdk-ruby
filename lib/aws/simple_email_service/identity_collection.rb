@@ -25,7 +25,7 @@ module AWS
 
       # Request verification for an email address or a domain.
       # @param [String] email_or_domain
-      # @return [Identity] Returns an {Identity} object.  Identities for 
+      # @return [Identity] Returns an {Identity} object.  Identities for
       #   domains will have a #verification_token.
       def verify email_or_domain
 
@@ -33,7 +33,7 @@ module AWS
           client.verify_email_identity(:email_address => email_or_domain) :
           client.verify_domain_identity(:domain => email_or_domain)
 
-        Identity.new(email_or_domain, 
+        Identity.new(email_or_domain,
           :verification_token => resp.data[:verification_token],
           :config => config)
 
@@ -41,8 +41,8 @@ module AWS
       alias_method :create, :verify
 
       # @param [String] email_or_domain
-      # @return [Identity] Returns an {Identity} with the given
-      #   email address or domain name.
+      # @return [DomainIdentity,EmailIdentity] Returns an {Identity} with
+      #   the given email address or domain name.
       def [] email_or_domain
         Identity.new(email_or_domain, :config => config)
       end

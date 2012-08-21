@@ -13,29 +13,23 @@
 
 module AWS
   module Core
-    class RESTClient < Core::Client
 
-      protected
+    # @private
+    class QueryResponseParser
 
-      def self.request_builder_for api_config, operation
-        RESTRequestBuilder.new(api_config[:namespace], operation)
+      def initialize parsing_rules
+        @parser = XML::Parser.new(parsing_rules)
       end
 
-      def self.response_parser_for api_config, operation
-        RESTResponseParser.new(operation)
+      def extract_data response
+        @parser.parse(response.http_response.body)
       end
 
-      def extract_error_details response
-        if
-          response.http_response.status >= 300 and
-          body = response.http_response.body and
-          error = errors_module::GRAMMAR.parse(body) and
-          error[:code]
-        then
-          [error[:code], error[:message]]
-        end
+      def simulate
+        @parser.simulate
       end
 
     end
+
   end
 end

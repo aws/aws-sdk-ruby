@@ -51,8 +51,8 @@ module AWS
     # * {LogFormatter.colored}
     #
     # = Pattern Substitutions
-    # 
-    # You can put any of these placeholders into you pattern.  
+    #
+    # You can put any of these placeholders into you pattern.
     #
     # [+:service+]
     #   The AWS service name (e.g. 'S3', 'EC2', 'SimpleDB', etc)
@@ -61,32 +61,32 @@ module AWS
     #   The AWS region name (e.g. 'us-east-1', 'us-west-1', etc)
     #
     # [+:operation+]
-    #   The name of the client request method.  This maps to the name of 
+    #   The name of the client request method.  This maps to the name of
     #   the serivce API operation (e.g. :describe_instances).
     #
-    # [+:options+] 
+    # [+:options+]
     #   The hash of options passed to the client request method.
     #   Long strings are truncated/summarized if they excede the log
     #   formatters {#max_string_size}.  Other objects are inspected.
-    # 
-    # [+:retry_count+] 
+    #
+    # [+:retry_count+]
     #   The number of times a client request was retried.
     #   Throttlings and service errors trigger the automatic retry logic.
     #   This value indicates how many extra attempts were made before
     #   getting a successful response or giving up.
     #
-    # [+:duration+] 
+    # [+:duration+]
     #   The time it took to generate a response, expressed
     #   in decimal seconds.  This time includes everything from
     #   calling the client request method, until that method returns
     #   a value (event retries and retry delays).
     #
-    # [+:error_class+] 
-    #   The class name of the error returned by the 
+    # [+:error_class+]
+    #   The class name of the error returned by the
     #   service.  If no error was returned, this will be replcaed by
     #   an empty string.
     #
-    # [+:error_message+]  
+    # [+:error_message+]
     #   The message of the error returned.  If
     #   no error was returned by the service, this will be an empty
     #   string.
@@ -94,17 +94,17 @@ module AWS
     # [+:http_request_method+]
     #   The HTTP request verb (e.g. 'POST', 'PUT', 'GET', etc).
     #
-    # [+:http_request_protocol+] 
+    # [+:http_request_protocol+]
     #   This is replaced by 'http' or 'https'.
     #
-    # [+:http_request_host+]  
+    # [+:http_request_host+]
     #   The host name of the http request endpoint (e.g. 's3.amazon.com').
     #
-    # [+:http_request_port+] 
+    # [+:http_request_port+]
     #   The port number (e.g. '443' or '80').
     #
     # [+:http_request_uri+]
-    #   The http request uri folling the host (e.g. 
+    #   The http request uri folling the host (e.g.
     #   '/bucket_name/objects/key?versions').
     #
     # [+:http_request_body+]
@@ -124,7 +124,7 @@ module AWS
     #
     # [+:http_response_body+]
     #   The http response body contents.
-    # 
+    #
     class LogFormatter
 
       # @param [String] pattern The log format pattern should be a string
@@ -272,7 +272,7 @@ module AWS
       # @return [String]
       def summarize_hash hash
         hash.map do |key,v|
-          ":#{key}=>#{summarize_value(v)}"
+          "#{key.inspect}=>#{summarize_value(v)}"
         end.sort.join(",")
       end
 
@@ -288,7 +288,7 @@ module AWS
         else value.inspect
         end
       end
-  
+
       # @param [String] str
       # @return [String]
       def summarize_string str
@@ -307,7 +307,7 @@ module AWS
       def summarize_file path
         "#<File:#{path} (#{File.size(path)} bytes)>"
       end
-  
+
       # @param [Array] array
       # @return [String]
       def summarize_array array
@@ -315,13 +315,13 @@ module AWS
       end
 
       class << self
-      
+
         # The default log format.
         #
         # @example A sample of the default format.
         #
         #   [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
-        # 
+        #
         # @return [LogFormatter]
         #
         def default
@@ -346,7 +346,7 @@ module AWS
         # @example A sample of the short format
         #
         #   [AWS SimpleEmailService 200 0.494532] list_verified_email_addresses
-        # 
+        #
         # @return [LogFormatter]
         #
         def short
@@ -375,7 +375,7 @@ module AWS
         #   +-------------------------------------------------------------------------------
         #   |    METHOD: POST
         #   |       URL: https://email.us-east-1.amazonaws.com::443:/
-        #   |   HEADERS: {"content-type"=>"application/x-www-form-urlencoded" ... 
+        #   |   HEADERS: {"content-type"=>"application/x-www-form-urlencoded" ...
         #   |      BODY: Action=ListVerifiedEmailAddresses&Timestamp= ...
         #   +-------------------------------------------------------------------------------
         #   |  RESPONSE
@@ -383,7 +383,7 @@ module AWS
         #   |    STATUS: 200
         #   |   HEADERS: {"x-amzn-requestid"=>["..."], ...
         #   |      BODY: <ListVerifiedEmailAddressesResponse ...
-        #   
+        #
         # @return [LogFormatter]
         #
         def debug
@@ -404,7 +404,7 @@ module AWS
           uri_pattern << ':'
           uri_pattern << ':http_request_uri'
 
-          line = "+" + '-' * 79 
+          line = "+" + '-' * 79
 
           pattern = []
           pattern << line
@@ -432,7 +432,7 @@ module AWS
         # @example A sample of the colored format (sans the ansi colors).
         #
         #   [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
-        # 
+        #
         # @return [LogFormatter]
         #
         def colored

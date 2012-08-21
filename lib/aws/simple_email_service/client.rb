@@ -15,11 +15,9 @@ module AWS
   class SimpleEmailService
 
     # Client class for Amazon Simple E-mail Service (SES).
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2010-12-01'
-
-      extend Core::QueryClient
+      define_client_methods('2010-12-01')
 
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
@@ -34,7 +32,6 @@ module AWS
       #   * +:identity+ - *required* - (String) The identity to be removed from
       #     the list of identities for the AWS Account.
       # @return [Core::Response]
-      define_client_method :delete_identity, 'DeleteIdentity'
 
       # Calls the DeleteVerifiedEmailAddress API operation.
       # @method delete_verified_email_address(options = {})
@@ -42,7 +39,19 @@ module AWS
       #   * +:email_address+ - *required* - (String) An email address to be
       #     removed from the list of verified addresses.
       # @return [Core::Response]
-      define_client_method :delete_verified_email_address, 'DeleteVerifiedEmailAddress'
+
+      # Calls the GetIdentityDkimAttributes API operation.
+      # @method get_identity_dkim_attributes(options = {})
+      # @param [Hash] options
+      #   * +:identities+ - *required* - (Array<String>) A list of one or more
+      #     verified identities - email addresses, domains, or both.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:dkim_attributes+ - (Hash<String,Hash>)
+      #     * +:dkim_enabled+ - (Boolean)
+      #     * +:dkim_verification_status+ - (String)
+      #     * +:dkim_tokens+ - (Array<String>)
 
       # Calls the GetIdentityNotificationAttributes API operation.
       # @method get_identity_notification_attributes(options = {})
@@ -56,7 +65,6 @@ module AWS
       #     * +:bounce_topic+ - (String)
       #     * +:complaint_topic+ - (String)
       #     * +:forwarding_enabled+ - (Boolean)
-      define_client_method :get_identity_notification_attributes, 'GetIdentityNotificationAttributes'
 
       # Calls the GetIdentityVerificationAttributes API operation.
       # @method get_identity_verification_attributes(options = {})
@@ -68,7 +76,6 @@ module AWS
       #   * +:verification_attributes+ - (Hash<String,Hash>)
       #     * +:verification_status+ - (String)
       #     * +:verification_token+ - (String)
-      define_client_method :get_identity_verification_attributes, 'GetIdentityVerificationAttributes'
 
       # Calls the GetSendQuota API operation.
       # @method get_send_quota(options = {})
@@ -79,7 +86,6 @@ module AWS
       #   * +:max_24_hour_send+ - (Numeric)
       #   * +:max_send_rate+ - (Numeric)
       #   * +:sent_last_24_hours+ - (Numeric)
-      define_client_method :get_send_quota, 'GetSendQuota'
 
       # Calls the GetSendStatistics API operation.
       # @method get_send_statistics(options = {})
@@ -93,7 +99,6 @@ module AWS
       #     * +:bounces+ - (Integer)
       #     * +:complaints+ - (Integer)
       #     * +:rejects+ - (Integer)
-      define_client_method :get_send_statistics, 'GetSendStatistics'
 
       # Calls the ListIdentities API operation.
       # @method list_identities(options = {})
@@ -109,7 +114,6 @@ module AWS
       #   a hash with the following structure:
       #   * +:identities+ - (Array<String>)
       #   * +:next_token+ - (String)
-      define_client_method :list_identities, 'ListIdentities'
 
       # Calls the ListVerifiedEmailAddresses API operation.
       # @method list_verified_email_addresses(options = {})
@@ -118,7 +122,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:verified_email_addresses+ - (Array<String>)
-      define_client_method :list_verified_email_addresses, 'ListVerifiedEmailAddresses'
 
       # Calls the SendEmail API operation.
       # @method send_email(options = {})
@@ -165,7 +168,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:message_id+ - (String)
-      define_client_method :send_email, 'SendEmail'
 
       # Calls the SendRawEmail API operation.
       # @method send_raw_email(options = {})
@@ -194,7 +196,16 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:message_id+ - (String)
-      define_client_method :send_raw_email, 'SendRawEmail'
+
+      # Calls the SetIdentityDkimEnabled API operation.
+      # @method set_identity_dkim_enabled(options = {})
+      # @param [Hash] options
+      #   * +:identity+ - *required* - (String) The identity for which DKIM
+      #     signing should be enabled or disabled.
+      #   * +:dkim_enabled+ - *required* - (Boolean) Sets whether DKIM signing
+      #     is enabled for an identity. Set to +true+ to enable DKIM signing
+      #     for this identity; +false+ to disable it.
+      # @return [Core::Response]
 
       # Calls the SetIdentityFeedbackForwardingEnabled API operation.
       # @method set_identity_feedback_forwarding_enabled(options = {})
@@ -211,7 +222,6 @@ module AWS
       #     to +false+ when topics are specified for both Bounce and Complaint
       #     topic types.
       # @return [Core::Response]
-      define_client_method :set_identity_feedback_forwarding_enabled, 'SetIdentityFeedbackForwardingEnabled'
 
       # Calls the SetIdentityNotificationTopic API operation.
       # @method set_identity_notification_topic(options = {})
@@ -225,7 +235,16 @@ module AWS
       #     parameter is ommited from the request or a null value is passed,
       #     the topic is cleared and publishing is disabled.
       # @return [Core::Response]
-      define_client_method :set_identity_notification_topic, 'SetIdentityNotificationTopic'
+
+      # Calls the VerifyDomainDkim API operation.
+      # @method verify_domain_dkim(options = {})
+      # @param [Hash] options
+      #   * +:domain+ - *required* - (String) The name of the domain to be
+      #     verified for Easy DKIM signing.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:dkim_tokens+ - (Array<String>)
 
       # Calls the VerifyDomainIdentity API operation.
       # @method verify_domain_identity(options = {})
@@ -235,7 +254,6 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:verification_token+ - (String)
-      define_client_method :verify_domain_identity, 'VerifyDomainIdentity'
 
       # Calls the VerifyEmailAddress API operation.
       # @method verify_email_address(options = {})
@@ -243,7 +261,6 @@ module AWS
       #   * +:email_address+ - *required* - (String) The email address to be
       #     verified.
       # @return [Core::Response]
-      define_client_method :verify_email_address, 'VerifyEmailAddress'
 
       # Calls the VerifyEmailIdentity API operation.
       # @method verify_email_identity(options = {})
@@ -251,7 +268,6 @@ module AWS
       #   * +:email_address+ - *required* - (String) The email address to be
       #     verified.
       # @return [Core::Response]
-      define_client_method :verify_email_identity, 'VerifyEmailIdentity'
 
       ## end client methods ##
 

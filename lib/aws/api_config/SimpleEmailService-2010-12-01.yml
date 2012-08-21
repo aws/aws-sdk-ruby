@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2010-12-01'
 :operations:
 - :name: DeleteIdentity
   :method: :delete_identity
@@ -33,6 +34,37 @@
     :children:
       DeleteVerifiedEmailAddressResult:
         :ignore: true
+- :name: GetIdentityDkimAttributes
+  :method: :get_identity_dkim_attributes
+  :inputs:
+    Identities:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      GetIdentityDkimAttributesResult:
+        :ignore: true
+        :children:
+          DkimAttributes:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :dkim_attributes
+                :map:
+                - key
+                - value
+                :children:
+                  value:
+                    :children:
+                      DkimEnabled:
+                        :type: :boolean
+                      DkimTokens:
+                        :ignore: true
+                        :children:
+                          member:
+                            :rename: :dkim_tokens
+                            :list: true
 - :name: GetIdentityNotificationAttributes
   :method: :get_identity_notification_attributes
   :inputs:
@@ -224,6 +256,19 @@
     :children:
       SendRawEmailResult:
         :ignore: true
+- :name: SetIdentityDkimEnabled
+  :method: :set_identity_dkim_enabled
+  :inputs:
+    Identity:
+    - :string
+    - :required
+    DkimEnabled:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetIdentityDkimEnabledResult:
+        :ignore: true
 - :name: SetIdentityFeedbackForwardingEnabled
   :method: :set_identity_feedback_forwarding_enabled
   :inputs:
@@ -252,6 +297,23 @@
     :children:
       SetIdentityNotificationTopicResult:
         :ignore: true
+- :name: VerifyDomainDkim
+  :method: :verify_domain_dkim
+  :inputs:
+    Domain:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      VerifyDomainDkimResult:
+        :ignore: true
+        :children:
+          DkimTokens:
+            :ignore: true
+            :children:
+              member:
+                :rename: :dkim_tokens
+                :list: true
 - :name: VerifyDomainIdentity
   :method: :verify_domain_identity
   :inputs:

@@ -102,6 +102,9 @@ module AWS
 
       # @private
       def self.new_from(op, response_object, table, *args)
+
+        config = args.last.is_a?(Hash) ? args.last : AWS.config
+
         table.assert_schema!
         hash_value =
           value_from_response(response_object[table.hash_key.name])

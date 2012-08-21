@@ -46,12 +46,23 @@ END
         it 'should strip the AWS.SimpleQueueService prefix when forming the class name' do
           http_handler.stub(:handle) do |req, resp|
             resp.status = 400
-            resp.body = <<END
-<ErrorResponse xmlns="http://queue.amazonaws.com/doc/2009-02-01/"><Error><Type>Sender</Type><Code>AWS.SimpleQueueService.Foo</Code><Message>BAR</Message><Detail/></Error><RequestId>abc123</RequestId></ErrorResponse>
-END
+            resp.body = <<-XML
+<ErrorResponse xmlns="http://queue.amazonaws.com/doc/2009-02-01/">
+  <Error>
+    <Type>Sender</Type>
+      <Code>AWS.SimpleQueueService.Foo</Code>
+      <Message>BAR</Message>
+      <Detail/>
+  </Error>
+  <RequestId>abc123</RequestId>
+</ErrorResponse>
+            XML
           end
-          lambda { client.list_queues }.
-            should raise_error(SQS::Errors::Foo, "BAR")
+
+          lambda {
+            client.list_queues
+          }.should raise_error(SQS::Errors::Foo, "BAR")
+
         end
 
       end
