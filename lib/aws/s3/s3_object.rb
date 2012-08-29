@@ -819,13 +819,16 @@ module AWS
           copy_opts[:metadata_directive] = "REPLACE"
         end
 
+        if options[:cache_control]
+          copy_opts[:cache_control] = options[:cache_control]
+          copy_opts[:metadata_directive] = "REPLACE"
+        end
+
         copy_opts[:acl] = options[:acl] if options[:acl]
         copy_opts[:version_id] = options[:version_id] if options[:version_id]
         copy_opts[:server_side_encryption] =
           options[:server_side_encryption] if
           options.key?(:server_side_encryption)
-        copy_opts[:cache_control] = options[:cache_control] if
-          options[:cache_control]
         add_sse_options(copy_opts)
 
         if options[:reduced_redundancy]
