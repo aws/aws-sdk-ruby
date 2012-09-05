@@ -1105,6 +1105,7 @@ module AWS
           if options[:version_id]
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
           end
+  				req.headers['transfer-encoding'] = ''
         end
 
         process_response do |response|
