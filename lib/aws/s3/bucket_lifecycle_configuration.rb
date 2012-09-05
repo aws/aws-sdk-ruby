@@ -31,9 +31,9 @@ module AWS
     # * +#status+
     # * +#id+
     #
-    # Objects with keys matching a rule prefix will be deleted after 
+    # Objects with keys matching a rule prefix will be deleted after
     # #expiration_days have passed.
-    # 
+    #
     # A rule is comprised primarily of a prefix and number of expiration days.
     # Objects with keys that start with the given prefix will be automatically
     # deleted after "expiration days" have passed.  Rules also have an
@@ -80,15 +80,15 @@ module AWS
     #       remove_rule(rule) if rule.disabled?
     #     end
     #   end
-    #   
+    #
     # You can also remove all rules in a single call:
     #
     #   # remove all rules from this lifecycle configuration
     #   bucket.lifecycle_configuration.clear
-    # 
+    #
     # == Editing Existing Rules
     #
-    # You can also make changes to existing rules.  
+    # You can also make changes to existing rules.
     #
     #   # change the expiration days to 10 for EVERY rule
     #   bucket.lifecycle_configuration.update do
@@ -102,7 +102,7 @@ module AWS
     # or the changes will not be persisted.
     #
     class BucketLifecycleConfiguration
-      
+
       # @private
       def initialize bucket, options = {}
         @bucket = bucket
@@ -110,7 +110,7 @@ module AWS
         @rules = [] if options[:empty] == true
       end
 
-      # @return [Bucket] Returns the bucket this lifecycle configuration 
+      # @return [Bucket] Returns the bucket this lifecycle configuration
       #   belongs to.
       attr_reader :bucket
 
@@ -127,7 +127,7 @@ module AWS
         end
       end
 
-      # @param [String] prefix 
+      # @param [String] prefix
       #
       # @param [Integer] expiration_days Indicates the lifetime for objects
       #   matching the given prefix.
@@ -158,7 +158,7 @@ module AWS
       #   bucket.lifecycle_configuration.update do
       #     remove_rule('rule-id')
       #   end
-      #   
+      #
       #   # remove all disabled rules
       #   bucket.lifecycle_configuration.update do
       #     rules.each do |rule|
@@ -172,7 +172,7 @@ module AWS
       # @param [Rule,String] rule_or_rule_id
       #
       # @return [nil]
-      # 
+      #
       def remove_rule rule_or_rule_id
         rule_id = rule_or_rule_id
         if rule_id.nil?
@@ -184,7 +184,7 @@ module AWS
       end
 
       # Saves changes made to this lifecycle configuration.
-      # 
+      #
       #   # set the number of days before expiration for all rules to 10
       #   config = bucket.lifecycle_configuration
       #   config.rules.each do |rule|
@@ -213,7 +213,7 @@ module AWS
       #  # 2 requests
       #  bucket.lifecycle_configuration.add_rule 'prefix/a', 10
       #  bucket.lifecycle_configuration.add_rule 'prefix/b', 5
-      # 
+      #
       # @return [nil]
       #
       def update &block
@@ -229,7 +229,7 @@ module AWS
 
       # Yields to the given block.  Before yielding, the current
       # rules will be blanked out.  This allows you to provide all
-      # new rules. 
+      # new rules.
       #
       # When the block is complete, a single call will be made to save
       # the new rules.
@@ -257,19 +257,20 @@ module AWS
       # @return [String] Returns an xml string representation of this
       #   bucket lifecycle configuration.
       def to_xml
-        xml = Builder::XmlMarkup.new(:indent => 2)
-        xml.LifecycleConfiguration do
-          rules.each do |rule|
-            xml.Rule do
-              xml.ID rule.id
-              xml.Prefix rule.prefix
-              xml.Status rule.status
-              xml.Expiration do
-                xml.Days rule.expiration_days
+        Nokogiri::XML::Builder.new do |xml|
+          xml.LifecycleConfiguration do
+            rules.each do |rule|
+              xml.Rule do
+                xml.ID rule.id
+                xml.Prefix rule.prefix
+                xml.Status rule.status
+                xml.Expiration do
+                  xml.Days rule.expiration_days
+                end
               end
             end
           end
-        end.strip
+        end.doc.root.to_xml
       end
 
       protected
@@ -299,7 +300,7 @@ module AWS
       #   # remove the rule created above
       #   bucket.lifecycle_configuration.remove_rule 'temporary/'
       #
-      # 
+      #
       class Rule
 
         def initialize configuration, id, prefix, expiration_days, status

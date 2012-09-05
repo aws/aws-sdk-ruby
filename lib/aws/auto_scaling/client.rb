@@ -17,8 +17,6 @@ module AWS
     # Client class for Auto Scaling.
     class Client < Core::QueryClient
 
-      define_client_methods('2011-01-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -502,6 +500,8 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
+
+      define_client_methods('2011-01-01')
 
     end
   end

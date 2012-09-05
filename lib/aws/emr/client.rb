@@ -15,8 +15,6 @@ module AWS
   class EMR
     class Client < Core::QueryClient
 
-      define_client_methods('2009-03-31')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
@@ -294,6 +292,8 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
+
+      define_client_methods('2009-03-31')
 
     end
   end

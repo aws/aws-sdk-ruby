@@ -80,6 +80,49 @@ module AWS
           new_load_balancer
         end
 
+        it 'accepts a list of subnet ids' do
+          client.should_receive(:create_load_balancer).with(
+            :load_balancer_name => 'name',
+            :subnets => %w(id1 id2 id3))
+          load_balancers.create('name', :subnets => %w(id1 id2 id3))
+        end
+
+        it 'accepts a list of subnets objects' do
+          subnets = []
+          subnets << EC2::Subnet.new('id1')
+          subnets << EC2::Subnet.new('id2')
+          subnets << EC2::Subnet.new('id3')
+          client.should_receive(:create_load_balancer).with(
+            :load_balancer_name => 'name',
+            :subnets => %w(id1 id2 id3))
+          load_balancers.create('name', :subnets => subnets)
+        end
+
+        it 'accepts a list of security group ids' do
+          client.should_receive(:create_load_balancer).with(
+            :load_balancer_name => 'name',
+            :security_groups => %w(id1 id2 id3))
+          load_balancers.create('name', :security_groups => %w(id1 id2 id3))
+        end
+
+        it 'accepts a list of security group objects' do
+          groups = []
+          groups << EC2::SecurityGroup.new('id1')
+          groups << EC2::SecurityGroup.new('id2')
+          groups << EC2::SecurityGroup.new('id3')
+          client.should_receive(:create_load_balancer).with(
+            :load_balancer_name => 'name',
+            :security_groups => %w(id1 id2 id3))
+          load_balancers.create('name', :security_groups => groups)
+        end
+
+        it 'accepts a scheme' do
+          client.should_receive(:create_load_balancer).with(
+            :load_balancer_name => 'name',
+            :scheme => 'internal')
+          load_balancers.create('name', :scheme => 'internal')
+        end
+
       end
 
       context '#[]' do

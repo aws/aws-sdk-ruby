@@ -446,6 +446,17 @@ module AWS
         end
       end
 
+      context '#<=>' do
+
+        it 'sorts security groups by their ids' do
+          g1 = SecurityGroup.new('a')
+          g2 = SecurityGroup.new('b')
+          g3 = SecurityGroup.new('c')
+          [g3,g2,g1].sort.should eq([g1, g2, g3])
+        end
+
+      end
+
       context '#delete' do
 
         it 'calls #delete_security_group on the client with the correct id' do

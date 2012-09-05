@@ -90,7 +90,7 @@ module AWS
       end
 
       context '#remove_rule' do
-        
+
         let(:rule1) { lifecycle.add_rule('prefix-1', 1, :id => 'id-1') }
         let(:rule2) { lifecycle.add_rule('prefix-2', 2, :id => 'id-2') }
 
@@ -203,7 +203,7 @@ module AWS
       end
 
       context '#clear' do
-        
+
         it 'deletes the lifecycle configuration' do
           client.should_receive(:delete_bucket_lifecycle_configuration).
             with(:bucket_name => bucket.name)

@@ -17,8 +17,6 @@ module AWS
     # Client class for AWS Identity and Access Management (IAM).
     class Client < Core::QueryClient
 
-      define_client_methods('2010-05-08')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :get_group,
@@ -1086,6 +1084,8 @@ module AWS
       #     * +:upload_date+ - (Time)
 
       ## end client methods ##
+
+      define_client_methods('2010-05-08')
 
     end
   end

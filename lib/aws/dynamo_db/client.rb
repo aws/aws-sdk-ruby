@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon DynamoDB.
     class Client < Core::JSONClient
 
-      define_client_methods('2011-12-05')
-
       # @private
       REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
 
@@ -872,6 +870,8 @@ module AWS
         end
 
       end
+
+      define_client_methods('2011-12-05')
 
     end
   end

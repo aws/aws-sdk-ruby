@@ -69,7 +69,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.4"
+  VERSION = "1.6.5"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -222,6 +222,9 @@ module AWS
     #
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
+    #
+    # @option options [String] :cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudWatch.
     #
     # @option options [Boolean] :dynamo_db_big_decimals (true) When +true+,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}

@@ -252,7 +252,7 @@ module AWS
               }
             }
 
-            request.body.should == <<-XML.strip + "\n"
+            request.body.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Data>
     <Name>name-string</Name>

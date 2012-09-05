@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon Simple E-mail Service (SES).
     class Client < Core::QueryClient
 
-      define_client_methods('2010-12-01')
-
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
       # @private
@@ -270,6 +268,8 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
+
+      define_client_methods('2010-12-01')
 
     end
   end

@@ -14,7 +14,7 @@
 module AWS
   class ELB
     class LoadBalancerPolicy < Core::Resource
-      
+
       # @private
       def initialize load_balancer, name, options = {}
         @load_balancer = load_balancer

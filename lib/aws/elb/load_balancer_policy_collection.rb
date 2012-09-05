@@ -15,7 +15,7 @@ module AWS
   class ELB
 
     class LoadBalancerPolicyCollection
-      
+
       include Core::Collection::Simple
 
       def initialize load_balancer, options = {}
@@ -25,10 +25,10 @@ module AWS
 
       attr_reader :load_balancer
 
-      # Creates a new load balancer policy that contains the necessary 
-      # attributes depending on the policy type. Policies are settings 
-      # that are saved for your load balancer and that can be applied to 
-      # the front-end listener, or the back-end application server, 
+      # Creates a new load balancer policy that contains the necessary
+      # attributes depending on the policy type. Policies are settings
+      # that are saved for your load balancer and that can be applied to
+      # the front-end listener, or the back-end application server,
       # depending on your policy type.
       #
       # == Applying Policies
@@ -161,9 +161,9 @@ module AWS
 
         attributes.each do |attr_name,values|
           [values].flatten.each do |value|
-            attribute_list << { 
-              :attribute_name => attr_name, 
-              :attribute_value => value.to_s 
+            attribute_list << {
+              :attribute_name => attr_name,
+              :attribute_value => value.to_s
             }
           end
         end
@@ -194,7 +194,7 @@ module AWS
         response.policy_descriptions.each do |desc|
 
           load_balancer_policy = LoadBalancerPolicy.new_from(
-            :describe_load_balancer_policies, 
+            :describe_load_balancer_policies,
             desc, load_balancer, desc.policy_name)
 
           yield(load_balancer_policy)

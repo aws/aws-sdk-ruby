@@ -50,24 +50,15 @@ module AWS
         #   @return [String] Returns an string of the request parameters
         #     serialized into XML.
         def serialize request_options
-          xml = []
-          builder = Builder::XmlMarkup.new(:target => xml, :indent => 2)
-          builder.tag!("#{operation_name}Request", :xmlns => namespace) do
-
-            hash_members_xml(request_options, rules, builder)
-
+          xml = Nokogiri::XML::Builder.new
+          xml.send("#{operation_name}Request", :xmlns => namespace) do |xml|
+            hash_members_xml(request_options, rules, xml)
           end
-          xml.join
+          xml.doc.root.to_xml
         end
 
         protected
 
-        # @param [Builder::XmlMarkup] builder An XML builder object that should
-        #   be used to build the xml.
-        # @param [String,Symbol] opt_name The name of the input option.
-        # @param [Hash] rules The hash to XML conversion rules.
-        # @param [Mixed] value
-        # @return [String] Returns an XML string.
         def to_xml builder, opt_name, rules, value
 
           xml_name = rules[:name]
@@ -77,17 +68,17 @@ module AWS
           case value
           when Hash
 
-            builder.tag!(xml_name) do
+            builder.send(xml_name) do |builder|
               hash_members_xml(value, rules[:members], builder)
             end
 
           when Array
-            builder.tag!(xml_name) do
+            builder.send(xml_name) do
               value.each do |member_value|
                 to_xml(builder, 'member', rules[:members], member_value)
               end
             end
-          else builder.tag!(xml_name, value)
+          else builder.send(xml_name, value)
           end
 
         end

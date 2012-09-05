@@ -17,8 +17,6 @@ module AWS
     # Client class for AWS Security Token Service (STS).
     class Client < Core::QueryClient
 
-      define_client_methods('2011-06-15')
-
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @private
@@ -100,6 +98,8 @@ module AWS
       #     * +:expiration+ - (Time)
 
       ## end client methods ##
+
+      define_client_methods('2011-06-15')
 
     end
   end

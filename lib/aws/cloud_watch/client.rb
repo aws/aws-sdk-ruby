@@ -17,8 +17,6 @@ module AWS
     # Client class for Cloud Watch
     class Client < Core::QueryClient
 
-      define_client_methods('2010-08-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_alarm_history,
@@ -241,6 +239,8 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
+
+      define_client_methods('2010-08-01')
 
     end
   end

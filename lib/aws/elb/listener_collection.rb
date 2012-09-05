@@ -30,18 +30,18 @@ module AWS
       # @param [Hash] options
       #
       # @option options [Integer] :port Specifies the external
-      #   load balancer port number. This property cannot be modified for 
+      #   load balancer port number. This property cannot be modified for
       #   the life of the LoadBalancer.
       #
       # @option options [String,Symbol] :protocol Specifies the load balancer
       #   transport protocol to use for routing.  Valid values include:
       #
-      # @option options [Integer] :instance_port Specifies the TCP port on 
-      #   which the instance server is listening. This property cannot be 
+      # @option options [Integer] :instance_port Specifies the TCP port on
+      #   which the instance server is listening. This property cannot be
       #   modified for the life of the load balancer.
       #
-      # @option options [String,Symbol] :instance_protocol Specifies the 
-      #   protocol to use for routing traffic to back-end instances.  Valid 
+      # @option options [String,Symbol] :instance_protocol Specifies the
+      #   protocol to use for routing traffic to back-end instances.  Valid
       #   values include:
       #
       #   * :http, 'HTTP'
@@ -53,14 +53,14 @@ module AWS
       #
       #   NOTE: If the front-end protocol is HTTP or HTTPS, +:instance_protocol+
       #   has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise,
-      #   if the front-end protocol is TCP or SSL, +:instance_protocol+ has 
+      #   if the front-end protocol is TCP or SSL, +:instance_protocol+ has
       #   to be TCP or SSL.
       #
       #   NOTE: If there is another listener with the same +:instance_port+
-      #   whose +:instance_protocol+ is secure, i.e., HTTPS or SSL, the 
-      #   listener's +:instance_protocol+ has to be secure, i.e., HTTPS 
+      #   whose +:instance_protocol+ is secure, i.e., HTTPS or SSL, the
+      #   listener's +:instance_protocol+ has to be secure, i.e., HTTPS
       #   or SSL. If there is another listener with the same +:instance_port+
-      #   whose +:instance_protocol+ is HTTP or TCP, the listener's 
+      #   whose +:instance_protocol+ is HTTP or TCP, the listener's
       #   +:instance_protocol+ must be either HTTP or TCP.
       #
       #   * :tcp, 'TCP'
@@ -69,20 +69,20 @@ module AWS
       #   This property cannot be modified for the life of the load balancer.
       #
       # @option options [String,IAM::ServerCertificate] :server_certificate The
-      #   ARN string of an IAM::ServerCertifcate or an IAM::ServerCertificate 
+      #   ARN string of an IAM::ServerCertifcate or an IAM::ServerCertificate
       #   object.  Reqruied for HTTPs listeners.
       #
       # @return [Listener]
       def create options = {}
-        
+
         format_listener_opts(options)
 
         client.create_load_balancer_listeners(
           :load_balancer_name => load_balancer.name,
           :listeners => [options])
 
-        Listener.new(load_balancer, 
-          options[:load_balancer_port], 
+        Listener.new(load_balancer,
+          options[:load_balancer_port],
           options.merge(:config => config))
 
       end
@@ -94,25 +94,19 @@ module AWS
 
       protected
       def _each_item options = {}
-        load_balancer.listener_descriptions.each do |desc|
+        load_balancer.listener_descriptions.each do |description|
 
-          desc = desc.listener
+          port = description[:listener][:load_balancer_port]
 
-          opts = {}
-          opts[:config] = config
-          opts[:protocol] = desc.protocol
-          opts[:instance_port] =  desc.instance_port
-          opts[:instance_protocol] = desc.instance_protocol
-          opts[:ssl_certificate_id] = desc.ssl_certificate_id if
-            desc.respond_to?(:ssl_certificate_id)
+          options = {}
+          options[:config] = config
+          options.merge!(description[:listener])
 
-          listener = Listener.new(load_balancer, desc.load_balancer_port, opts)
-
-          yield(listener)
+          yield(Listener.new(load_balancer, port, options))
 
         end
       end
-      
+
     end
 
   end

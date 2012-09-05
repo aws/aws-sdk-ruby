@@ -63,7 +63,7 @@ module AWS
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
             req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset/')
-            req.body.should eq(<<-XML.lstrip)
+            req.body.should eq(<<-XML.strip)
 <ChangeResourceRecordSetsRequest #{namespace}>
   <ChangeBatch>
     <Changes>
@@ -139,7 +139,7 @@ XML
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
             req.uri.should eq('/2012-02-29/hostedzone')
-            req.body.should eq(<<-XML.lstrip)
+            req.body.should eq(<<-XML.strip)
 <CreateHostedZoneRequest #{namespace}>
   <Name>ZONE-NAME</Name>
   <CallerReference>CALLER-REF</CallerReference>
@@ -154,7 +154,7 @@ XML
 
         it 'does not require the comment param', :ruby => '1.9' do
           handler.should_receive(:handle) do |req,resp|
-            req.body.should eq(<<-XML.lstrip)
+            req.body.should eq(<<-XML.strip)
 <CreateHostedZoneRequest #{namespace}>
   <Name>ZONE-NAME</Name>
   <CallerReference>CALLER-REF</CallerReference>
@@ -295,7 +295,7 @@ XML
 
           handler.should_receive(:handle) do |req,resp|
             resp.status = 200
-            resp.body = <<-XML.lstrip
+            resp.body = <<-XML.strip
               <?xml version="1.0"?>
               <GetChangeResponse #{namespace}>
                 <ChangeInfo>

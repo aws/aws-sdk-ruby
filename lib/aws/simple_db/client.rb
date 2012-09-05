@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon SimpleDB.
     class Client < Core::QueryClient
 
-      define_client_methods('2009-04-15')
-
       # @private
       REGION_US_E1 = 'sdb.amazonaws.com'
 
@@ -281,6 +279,8 @@ module AWS
       #     * +:response_id+ - (String)
 
       ## end client methods ##
+
+      define_client_methods('2009-04-15')
 
     end
   end

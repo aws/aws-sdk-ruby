@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'uri'
+require 'base64'
 
 module AWS
   class S3

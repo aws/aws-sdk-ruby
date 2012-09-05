@@ -17,8 +17,6 @@ module AWS
     # Client class for AWS CloudFormation.
     class Client < Core::QueryClient
 
-      define_client_methods('2010-05-15')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -249,6 +247,8 @@ module AWS
       #   * +:capabilities_reason+ - (String)
 
       ## end client methods ##
+
+      define_client_methods('2010-05-15')
 
     end
   end

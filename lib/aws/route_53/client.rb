@@ -15,8 +15,6 @@ module AWS
   class Route53
     class Client < Core::RESTClient
 
-      define_client_methods('2012-02-29')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
@@ -256,6 +254,8 @@ module AWS
       #   * +:max_items+ - (Integer)
 
       ## end client methods ##
+
+      define_client_methods('2012-02-29')
 
     end
   end

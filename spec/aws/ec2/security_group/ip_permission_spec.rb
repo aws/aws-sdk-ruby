@@ -29,7 +29,7 @@ module AWS
         it_should_behave_like "an ec2 model object", 'foo', :tcp, 80
 
         context '#security_group' do
-          
+
           it 'should return the correct security group' do
             ip_permission.security_group.should == group
           end
@@ -51,7 +51,7 @@ module AWS
             # for egress ip permissions
             IpPermission.new(group, '-1', 80).protocol.should == :any
           end
-          
+
         end
 
         context '#port_range' do
@@ -78,7 +78,7 @@ module AWS
         end
 
         context '#ip_ranges' do
-          
+
           it 'defaults to []' do
             ip_permission.ip_ranges.should == []
           end
@@ -91,7 +91,7 @@ module AWS
         end
 
         context '#groups' do
-          
+
           it 'defaults to []' do
             ip_permission.groups.should == []
           end
@@ -117,7 +117,7 @@ module AWS
         end
 
         context '#authorize' do
-          
+
           it 'calls authorize_security_group_ingress' do
 
             client.should_receive(:authorize_security_group_ingress).
@@ -129,7 +129,7 @@ module AWS
                   ],
                   :user_id_group_pairs => [
                     { :group_id => 'other-id', :user_id => 'abc' },
-                  ], 
+                  ],
                 }
               ])
 
@@ -139,6 +139,42 @@ module AWS
               :groups => other_group)
             p.authorize
 
+          end
+
+        end
+
+        context '#eql?' do
+
+          it 'sorts ip_ranges and groups when comparing' do
+
+            sg1 = SecurityGroup.new('id-1')
+            sg2 = SecurityGroup.new('id-2')
+            sg3 = SecurityGroup.new('id-3')
+
+            protocol = :tcp
+            port_range = 80..80
+            ips = ['1.1.1.1', '2.2.2.2']
+            groups = [sg2, sg3]
+            egress = true
+
+            p1 = IpPermission.new(sg1, protocol, port_range, 
+              :ip_ranges => ips,
+              :groups => groups,
+              :egress => egress,
+              :config => config)
+
+            p2 = IpPermission.new(sg1, protocol, port_range, 
+              :ip_ranges => ips.reverse,
+              :groups => groups.reverse,
+              :egress => egress,
+              :config => config)
+
+            p1.eql?(p2).should eq(true)
+
+          end
+
+          it 'is aliased as #==' do
+            ip_permission.method(:eql?).should eq(ip_permission.method(:==))
           end
 
         end
@@ -156,7 +192,7 @@ module AWS
                   ],
                   :user_id_group_pairs => [
                     { :group_id => 'other-id', :user_id => 'abc' },
-                  ], 
+                  ],
                 }
               ])
 

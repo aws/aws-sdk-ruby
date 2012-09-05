@@ -90,7 +90,7 @@ module AWS
           options[:private_key] = response.data[:key_material]
         end
 
-        KeyPair.new(response.key_name, options)
+        KeyPair.new(response.key_name, options.merge(:config => config))
 
       end
 

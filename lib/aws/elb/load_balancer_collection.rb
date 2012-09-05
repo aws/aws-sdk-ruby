@@ -46,14 +46,13 @@ module AWS
       #   one or more availability zones.  Values may be availability zone
       #   name strings, or {AWS::EC2::AvailabilityZone} objects.
       #
-      # @option options [required,Array] :listeners An array of load balancer
-      #   listener options.  Each value must be an array with the following
-      #   keys:
-      #
-      #   +:port+
-      #   +:protocol+
-      #   +:instance_port+
-      #   +:instance_protocol+
+      # @option options [required,Array<Hash>] :listeners An array of load 
+      #   balancer listener options.  Each value must be an array with the
+      #   following keys:
+      #   * +:port+
+      #   * +:protocol+
+      #   * +:instance_port+
+      #   * +:instance_protocol+
       #
       #   Port values should be integers, and protocols should be symbols or
       #   strings (e.g. :http, or 'HTTP').  See {ListenerCollection#create}
@@ -63,34 +62,48 @@ module AWS
       #   The ARN string of an IAM::ServerCertifcate or an
       #   IAM::ServerCertificate object.  Reqruied for HTTPs listeners.
       #
+      # @option options [Array] :subnets An list of VPC subets to attach the
+      #   load balancer to.  This can be an array of subnet ids (strings) or
+      #   {EC2::Subnet} objects. VPC only.
+      #
+      # @option options [Array] :security_groups The security groups assigned to
+      #   your load balancer within your VPC.  This can be an array of
+      #   security group ids or {EC2::SecurityGroup} objects. VPC only.
+      #
+      # @option options [String] :scheme ('internal' The type of a load 
+      #   balancer.  Accepts 'internet-facing' or 'internal'. VPC only.
+      #
       def create name, options = {}
 
-        unless options[:availability_zones]
-          raise ArgumentError, "missing required :availability_zones option"
+        if listeners = options[:listeners]
+          options[:listeners] = [listeners].flatten.map do |listener|
+            format_listener_opts(listener)
+          end
         end
 
-        unless options[:listeners]
-          raise ArgumentError, "missing required :listeners option"
+        if zones = options[:availability_zones]
+          options[:availability_zones] = [zones].flatten.map do |zone|
+            zone.is_a?(EC2::AvailabilityZone) ? zone.name : zone
+          end
         end
 
-        zones = [options[:availability_zones]].flatten.collect do |zone|
-          zone.is_a?(EC2::AvailabilityZone) ? zone.name : zone
+        if groups = options[:security_groups]
+          options[:security_groups] = [groups].flatten.map do |group|
+            group.is_a?(EC2::SecurityGroup) ? group.id : group
+          end
         end
 
-        listeners = [options[:listeners]].flatten.collect do |listener_opts|
-          format_listener_opts(listener_opts)
+        if subnets = options[:subnets]
+          options[:subnets] = [subnets].flatten.map do |subnet|
+            subnet.is_a?(EC2::Subnet) ? subnet.id : subnet
+          end
         end
 
-        response = client.create_load_balancer(
-          :load_balancer_name => name.to_s,
-          :availability_zones => zones,
-          :listeners => listeners)
+        options[:load_balancer_name] = name.to_s
 
-        opts = {}
-        opts[:config] = config
-        opts[:dns_name] = response.dns_name
+        resp = client.create_load_balancer(options)
 
-        LoadBalancer.new(name, opts)
+        LoadBalancer.new(name, :dns_name => resp[:dns_name], :config => config)
 
       end
 

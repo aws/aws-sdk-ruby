@@ -132,7 +132,7 @@ module AWS
                 :xyz => now,
                 :list => [1,2,3],
               }
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Configuration>
     <Abc>abc-value</Abc>
@@ -171,7 +171,7 @@ XML
                   :first => 'a',
                 }
 
-                xml.should == <<-XML.strip + "\n"
+                xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <OrderedHash>
     <First>a</First>
@@ -195,7 +195,7 @@ XML
                 :members => { :type => :string, :name => 'Value' },
               }
               options[:list] = %w(abc mno xyz)
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <List>
     <Value>abc</Value>
@@ -213,7 +213,7 @@ XML
                 :members => { :type => :integer, :name => 'Year' },
               }
               options[:list] = [1990, 1995, 2000]
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Years>
     <Year>1990</Year>
@@ -231,7 +231,7 @@ XML
                 :members => { :type => :boolean, :name => 'state' },
               }
               options[:states] = [true, true, false]
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Statuses>
     <state>true</state>
@@ -250,7 +250,7 @@ XML
                 :members => { :type => :timestamp, :name => 'When' },
               }
               options[:times] = times
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Timestamps>
     <When>#{times[0]}</When>
@@ -277,7 +277,7 @@ XML
                 { :key => 'abc', :value => '1' },
                 { :key => 'mno', :value => '2' },
               ]
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Tags>
     <Tag>
@@ -296,7 +296,7 @@ XML
             it 'defaults list member names to "member"' do
               rules[:list] = { :type => :array, :members => { :type => :integer }}
               options[:list] = [1,2,3]
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <List>
     <member>1</member>
@@ -341,7 +341,7 @@ XML
                   ],
                 ]
               ]
-              xml.should == <<-XML.strip + "\n"
+              xml.should == <<-XML.strip
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Buckets>
     <Bucket>

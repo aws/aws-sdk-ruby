@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-07-20')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
@@ -81,6 +79,15 @@ module AWS
       #   * +:domain+ - (String)
       #   * +:allocation_id+ - (String)
 
+      # Calls the AssignPrivateIpAddresses API operation.
+      # @method assign_private_ip_addresses(options = {})
+      # @param [Hash] options
+      #   * +:network_interface_id+ - *required* - (String)
+      #   * +:private_ip_addresses+ - (Array<String>)
+      #   * +:secondary_private_ip_address_count+ - (Integer)
+      #   * +:allow_reassignment+ - (Boolean)
+      # @return [Core::Response]
+
       # Calls the AssociateAddress API operation.
       # @method associate_address(options = {})
       # @param [Hash] options
@@ -91,6 +98,8 @@ module AWS
       #   * +:allocation_id+ - (String) The allocation ID that AWS returned
       #     when you allocated the elastic IP address for use with Amazon VPC.
       #   * +:network_interface_id+ - (String)
+      #   * +:private_ip_address+ - (String)
+      #   * +:allow_reassociation+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -325,6 +334,12 @@ module AWS
       #   * +:reason_message+ - (String)
       # @return [Core::Response]
 
+      # Calls the CancelExportTask API operation.
+      # @method cancel_export_task(options = {})
+      # @param [Hash] options
+      #   * +:export_task_id+ - *required* - (String)
+      # @return [Core::Response]
+
       # Calls the CancelSpotInstanceRequests API operation.
       # @method cancel_spot_instance_requests(options = {})
       # @param [Hash] options
@@ -407,10 +422,54 @@ module AWS
       #     to +true+ , Amazon EC2 will not shut down the instance before
       #     creating the image. When this option is used, file system integrity
       #     on the created image cannot be guaranteed.
+      #   * +:block_device_mappings+ - (Array<Hash>)
+      #     * +:virtual_name+ - (String) Specifies the virtual device name.
+      #     * +:device_name+ - (String) Specifies the device name (e.g.,
+      #       /dev/sdh).
+      #     * +:ebs+ - (Hash) Specifies parameters used to automatically setup
+      #       Amazon EBS volumes when the instance is launched.
+      #       * +:snapshot_id+ - (String) The ID of the snapshot from which the
+      #         volume will be created.
+      #       * +:volume_size+ - (Integer) The size of the volume, in
+      #         gigabytes.
+      #       * +:delete_on_termination+ - (Boolean) Specifies whether the
+      #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
+      #     * +:no_device+ - (String) Specifies the device name to suppress
+      #       during instance launch.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:image_id+ - (String)
+
+      # Calls the CreateInstanceExportTask API operation.
+      # @method create_instance_export_task(options = {})
+      # @param [Hash] options
+      #   * +:description+ - (String)
+      #   * +:instance_id+ - *required* - (String)
+      #   * +:target_environment+ - (String)
+      #   * +:export_to_s3_task+ - (Hash)
+      #     * +:disk_image_format+ - (String)
+      #     * +:container_format+ - (String)
+      #     * +:s3_bucket+ - (String)
+      #     * +:s3_prefix+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:export_task+ - (Hash)
+      #     * +:export_task_id+ - (String)
+      #     * +:description+ - (String)
+      #     * +:state+ - (String)
+      #     * +:status_message+ - (String)
+      #     * +:instance_export+ - (Hash)
+      #       * +:instance_id+ - (String)
+      #       * +:target_environment+ - (String)
+      #     * +:export_to_s3+ - (Hash)
+      #       * +:disk_image_format+ - (String)
+      #       * +:container_format+ - (String)
+      #       * +:s3_bucket+ - (String)
+      #       * +:s3_key+ - (String)
 
       # Calls the CreateInternetGateway API operation.
       # @method create_internet_gateway(options = {})
@@ -510,6 +569,10 @@ module AWS
       #   * +:description+ - (String)
       #   * +:private_ip_address+ - (String)
       #   * +:groups+ - (Array<String>)
+      #   * +:private_ip_addresses+ - (Array<Hash>)
+      #     * +:private_ip_address+ - *required* - (String)
+      #     * +:primary+ - (Boolean)
+      #   * +:secondary_private_ip_address_count+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -546,6 +609,14 @@ module AWS
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
+      #     * +:private_ip_addresses_set+ - (Array<Hash>)
+      #       * +:private_ip_address+ - (String)
+      #       * +:primary+ - (Boolean)
+      #       * +:association+ - (Hash)
+      #         * +:public_ip+ - (String)
+      #         * +:ip_owner_id+ - (String)
+      #         * +:allocation_id+ - (String)
+      #         * +:association_id+ - (String)
 
       # Calls the CreatePlacementGroup API operation.
       # @method create_placement_group(options = {})
@@ -697,7 +768,7 @@ module AWS
       #   * +:availability_zone+ - *required* - (String) The Availability Zone
       #     in which to create the new volume.
       #   * +:volume_type+ - (String)
-      #   * +:iops+ - (String)
+      #   * +:iops+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -718,7 +789,7 @@ module AWS
       #     * +:key+ - (String)
       #     * +:value+ - (String)
       #   * +:volume_type+ - (String)
-      #   * +:iops+ - (String)
+      #   * +:iops+ - (Integer)
 
       # Calls the CreateVpc API operation.
       # @method create_vpc(options = {})
@@ -975,6 +1046,7 @@ module AWS
       #     * +:domain+ - (String)
       #     * +:network_interface_id+ - (String)
       #     * +:network_interface_owner_id+ - (String)
+      #     * +:private_ip_address+ - (String)
 
       # Calls the DescribeAvailabilityZones API operation.
       # @method describe_availability_zones(options = {})
@@ -1129,6 +1201,27 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
 
+      # Calls the DescribeExportTasks API operation.
+      # @method describe_export_tasks(options = {})
+      # @param [Hash] options
+      #   * +:export_task_ids+ - (Array<String>)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:export_task_set+ - (Array<Hash>)
+      #     * +:export_task_id+ - (String)
+      #     * +:description+ - (String)
+      #     * +:state+ - (String)
+      #     * +:status_message+ - (String)
+      #     * +:instance_export+ - (Hash)
+      #       * +:instance_id+ - (String)
+      #       * +:target_environment+ - (String)
+      #     * +:export_to_s3+ - (Hash)
+      #       * +:disk_image_format+ - (String)
+      #       * +:container_format+ - (String)
+      #       * +:s3_bucket+ - (String)
+      #       * +:s3_key+ - (String)
+
       # Calls the DescribeImageAttribute API operation.
       # @method describe_image_attribute(options = {})
       # @param [Hash] options
@@ -1160,6 +1253,8 @@ module AWS
       #       * +:snapshot_id+ - (String)
       #       * +:volume_size+ - (Integer)
       #       * +:delete_on_termination+ - (Boolean)
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String)
 
       # Calls the DescribeImages API operation.
@@ -1214,6 +1309,8 @@ module AWS
       #         * +:snapshot_id+ - (String)
       #         * +:volume_size+ - (Integer)
       #         * +:delete_on_termination+ - (Boolean)
+      #         * +:volume_type+ - (String)
+      #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String)
       #     * +:virtualization_type+ - (String)
       #     * +:tag_set+ - (Array<Hash>)
@@ -1255,6 +1352,11 @@ module AWS
       #       * +:status+ - (String)
       #       * +:attach_time+ - (Time)
       #       * +:delete_on_termination+ - (Boolean)
+      #   * +:product_codes+ - (Array<Hash>)
+      #     * +:product_code+ - (String)
+      #     * +:type+ - (String)
+      #   * +:ebs_optimized+ - (Hash)
+      #     * +:value+ - (Boolean)
 
       # Calls the DescribeInstanceStatus API operation.
       # @method describe_instance_status(options = {})
@@ -1270,6 +1372,7 @@ module AWS
       #     of results to return.
       #   * +:max_results+ - (Integer) The maximum number of paginated instance
       #     items per response.
+      #   * +:include_all_instances+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1289,11 +1392,13 @@ module AWS
       #       * +:details+ - (Array<Hash>)
       #         * +:name+ - (String)
       #         * +:status+ - (String)
+      #         * +:impaired_since+ - (Time)
       #     * +:instance_status+ - (Hash)
       #       * +:status+ - (String)
       #       * +:details+ - (Array<Hash>)
       #         * +:name+ - (String)
       #         * +:status+ - (String)
+      #         * +:impaired_since+ - (Time)
       #   * +:next_token+ - (String)
 
       # Calls the DescribeInstances API operation.
@@ -1395,6 +1500,10 @@ module AWS
       #         * +:association+ - (Hash)
       #           * +:public_ip+ - (String)
       #           * +:ip_owner_id+ - (String)
+      #       * +:iam_instance_profile+ - (Hash)
+      #         * +:arn+ - (String)
+      #         * +:id+ - (String)
+      #       * +:ebs_optimized+ - (Boolean)
 
       # Calls the DescribeInternetGateways API operation.
       # @method describe_internet_gateways(options = {})
@@ -1575,6 +1684,14 @@ module AWS
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
+      #     * +:private_ip_addresses_set+ - (Array<Hash>)
+      #       * +:private_ip_address+ - (String)
+      #       * +:primary+ - (Boolean)
+      #       * +:association+ - (Hash)
+      #         * +:public_ip+ - (String)
+      #         * +:ip_owner_id+ - (String)
+      #         * +:allocation_id+ - (String)
+      #         * +:association_id+ - (String)
 
       # Calls the DescribePlacementGroups API operation.
       # @method describe_placement_groups(options = {})
@@ -1784,6 +1901,9 @@ module AWS
       #   * +:create_volume_permission+ - (Array<Hash>)
       #     * +:user_id+ - (String)
       #     * +:group+ - (String)
+      #   * +:product_codes+ - (Array<Hash>)
+      #     * +:product_code+ - (String)
+      #     * +:type+ - (String)
 
       # Calls the DescribeSnapshots API operation.
       # @method describe_snapshots(options = {})
@@ -1881,6 +2001,8 @@ module AWS
       #           * +:snapshot_id+ - (String)
       #           * +:volume_size+ - (Integer)
       #           * +:delete_on_termination+ - (Boolean)
+      #           * +:volume_type+ - (String)
+      #           * +:iops+ - (Integer)
       #         * +:no_device+ - (String)
       #       * +:monitoring_enabled+ - (Boolean)
       #       * +:subnet_id+ - (String)
@@ -1892,6 +2014,14 @@ module AWS
       #         * +:private_ip_address+ - (String)
       #         * +:security_group_id+ - (Array<String>)
       #         * +:delete_on_termination+ - (Boolean)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:private_ip_address+ - (String)
+      #           * +:primary+ - (Boolean)
+      #         * +:secondary_private_ip_address_count+ - (Integer)
+      #       * +:iam_instance_profile+ - (Hash)
+      #         * +:arn+ - (String)
+      #         * +:name+ - (String)
+      #       * +:ebs_optimized+ - (Boolean)
       #     * +:instance_id+ - (String)
       #     * +:create_time+ - (Time)
       #     * +:product_description+ - (String)
@@ -1985,6 +2115,9 @@ module AWS
       #   * +:volume_id+ - (String)
       #   * +:auto_enable_io+ - (Hash)
       #     * +:value+ - (Boolean)
+      #   * +:product_codes+ - (Array<Hash>)
+      #     * +:product_code+ - (String)
+      #     * +:type+ - (String)
 
       # Calls the DescribeVolumeStatus API operation.
       # @method describe_volume_status(options = {})
@@ -2052,7 +2185,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #     * +:volume_type+ - (String)
-      #     * +:iops+ - (String)
+      #     * +:iops+ - (Integer)
 
       # Calls the DescribeVpcs API operation.
       # @method describe_vpcs(options = {})
@@ -2272,6 +2405,8 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
+      #         * +:volume_type+ - (String)
+      #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
       #     * +:monitoring+ - (Boolean)
@@ -2478,6 +2613,8 @@ module AWS
       #   * +:instance_initiated_shutdown_behavior+ - (Hash)
       #     * +:value+ - (String) String value
       #   * +:groups+ - (Array<String>)
+      #   * +:ebs_optimized+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
       # @return [Core::Response]
 
       # Calls the ModifyNetworkInterfaceAttribute API operation.
@@ -2597,6 +2734,8 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
       # @return [Core::Response]
@@ -2760,6 +2899,8 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
+      #         * +:volume_type+ - (String)
+      #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
       #     * +:monitoring_enabled+ - (Boolean) Enables monitoring for the
@@ -2774,6 +2915,14 @@ module AWS
       #       * +:private_ip_address+ - (String)
       #       * +:groups+ - (Array<String>)
       #       * +:delete_on_termination+ - (Boolean)
+      #       * +:private_ip_addresses+ - (Array<Hash>)
+      #         * +:private_ip_address+ - *required* - (String)
+      #         * +:primary+ - (Boolean)
+      #       * +:secondary_private_ip_address_count+ - (Integer)
+      #     * +:iam_instance_profile+ - (Hash)
+      #       * +:arn+ - (String)
+      #       * +:name+ - (String)
+      #     * +:ebs_optimized+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2810,6 +2959,8 @@ module AWS
       #           * +:snapshot_id+ - (String)
       #           * +:volume_size+ - (Integer)
       #           * +:delete_on_termination+ - (Boolean)
+      #           * +:volume_type+ - (String)
+      #           * +:iops+ - (Integer)
       #         * +:no_device+ - (String)
       #       * +:monitoring_enabled+ - (Boolean)
       #       * +:subnet_id+ - (String)
@@ -2821,6 +2972,14 @@ module AWS
       #         * +:private_ip_address+ - (String)
       #         * +:security_group_id+ - (Array<String>)
       #         * +:delete_on_termination+ - (Boolean)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:private_ip_address+ - (String)
+      #           * +:primary+ - (Boolean)
+      #         * +:secondary_private_ip_address_count+ - (Integer)
+      #       * +:iam_instance_profile+ - (Hash)
+      #         * +:arn+ - (String)
+      #         * +:name+ - (String)
+      #       * +:ebs_optimized+ - (Boolean)
       #     * +:instance_id+ - (String)
       #     * +:create_time+ - (Time)
       #     * +:product_description+ - (String)
@@ -3000,6 +3159,8 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
+      #       * +:volume_type+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
       #   * +:monitoring+ - (Hash) Enables monitoring for the instance.
@@ -3034,6 +3195,14 @@ module AWS
       #     * +:private_ip_address+ - (String)
       #     * +:groups+ - (Array<String>)
       #     * +:delete_on_termination+ - (Boolean)
+      #     * +:private_ip_addresses+ - (Array<Hash>)
+      #       * +:private_ip_address+ - *required* - (String)
+      #       * +:primary+ - (Boolean)
+      #     * +:secondary_private_ip_address_count+ - (Integer)
+      #   * +:iam_instance_profile+ - (Hash)
+      #     * +:arn+ - (String)
+      #     * +:name+ - (String)
+      #   * +:ebs_optimized+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -3121,12 +3290,17 @@ module AWS
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
       #         * +:ip_owner_id+ - (String)
+      #     * +:iam_instance_profile+ - (Hash)
+      #       * +:arn+ - (String)
+      #       * +:id+ - (String)
+      #     * +:ebs_optimized+ - (Boolean)
 
       # Calls the StartInstances API operation.
       # @method start_instances(options = {})
       # @param [Hash] options
       #   * +:instance_ids+ - *required* - (Array<String>) The list of Amazon
       #     EC2 instances to start.
+      #   * +:additional_info+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -3178,6 +3352,13 @@ module AWS
       #       * +:code+ - (Integer)
       #       * +:name+ - (String)
 
+      # Calls the UnassignPrivateIpAddresses API operation.
+      # @method unassign_private_ip_addresses(options = {})
+      # @param [Hash] options
+      #   * +:network_interface_id+ - *required* - (String)
+      #   * +:private_ip_addresses+ - *required* - (Array<String>)
+      # @return [Core::Response]
+
       # Calls the UnmonitorInstances API operation.
       # @method unmonitor_instances(options = {})
       # @param [Hash] options
@@ -3192,6 +3373,8 @@ module AWS
       #       * +:state+ - (String)
 
       ## end client methods ##
+
+      define_client_methods('2012-07-20')
 
     end
   end

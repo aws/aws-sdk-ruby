@@ -16,7 +16,7 @@ source 'http://rubygems.org'
 gem 'uuidtools', '~> 2.1'
 gem 'httparty', '~> 0.7'
 gem 'nokogiri', '>= 1.4.4'
-gem 'json', '~> 1.4.6'
+gem 'json', '>= 1.4.6'
 
 group :debug do
   gem 'ruby-debug', :platforms => :ruby_18

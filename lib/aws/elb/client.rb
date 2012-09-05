@@ -17,8 +17,6 @@ module AWS
     # Client class for Elastic Load Balancing (ELB).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-06-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
@@ -494,6 +492,8 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
+
+      define_client_methods('2012-06-01')
 
     end
   end
