@@ -356,8 +356,22 @@ module AWS
 
           it 'calls set_bucket_versioning with :enabled' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :enabled)
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.enable_versioning
+          end
+
+          it 'calls set_bucket_versioning with MFA credentials when MFA delete is being enabled' do
+            bucket.client.should_receive(:set_bucket_versioning).
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => 'Enabled',
+                   :mfa         => '123456 7890'
+                  )
+            bucket.enable_versioning(:mfa_delete => 'Enabled', :mfa => '123456 7890')
           end
 
         end
@@ -366,7 +380,11 @@ module AWS
 
           it 'calls set_bucket_versioning with :suspended' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :suspended)
+              with(:bucket_name => bucket.name,
+                   :state       => :suspended,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.suspend_versioning
           end
 

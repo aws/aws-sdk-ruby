@@ -67,7 +67,7 @@ module AWS
     #   account owners are restricted to a maximum of 3600s (one
     #   hour).
     #
-    # @option opts [String] :serial_nubmer The identification number of the
+    # @option opts [String] :serial_number The identification number of the
     #   Multi-Factor Authentication (MFA) device for the user.
     #
     # @option opts [String] :token_code The value provided by the MFA device.

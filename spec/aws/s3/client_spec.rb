@@ -1133,6 +1133,18 @@ module AWS
           req_body.should match(/<Status>Suspended<\/Status>/)
         end
 
+        it 'should include the x-amz-mfa header for MFA versioning requests' do
+          req_headers = req_body = nil
+          client.with_http_handler do |req, resp|
+            req_body = req.body
+            req_headers = req.headers
+          end.set_bucket_versioning(opts.merge(:state      => :enabled,
+                                               :mfa_delete => :enabled,
+                                               :mfa        => '123456 7890'
+                                              ))
+          req_body.should match(/<MfaDelete>Enabled<\/MfaDelete>/)
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
       end
 
       context '#get_bucket_policy' do
