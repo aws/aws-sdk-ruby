@@ -121,6 +121,12 @@ module AWS
           {}
         end
 
+        def refresh
+          providers.each do |provider|
+            provider.refresh
+          end
+          super
+        end
       end
 
       # Static credentials are provided directly to config via
