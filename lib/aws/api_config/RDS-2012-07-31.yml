@@ -1,0 +1,106 @@
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:api_version: '2012-07-31'
+:operations:
+- :name: DescribeDBInstances
+  :method: :describe_db_instances
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    Marker:
+    - :string
+    MaxRecords:
+    - :string
+  :outputs:
+    :children:
+      DescribeDBInstancesResult:
+        :ignore: true
+        :children:
+          DBInstances:
+            :ignore: true
+            :children:
+              DBInstance:
+                :rename: :db_instances
+                :list: true
+                :children:
+                  DBParameterGroups:
+                    :ignore: true
+                    :children:
+                      DBParameterGroup:
+                        :rename: db_parameter_groups
+                        :list: true
+                  DBSecurityGroups:
+                    :ignore: true
+                    :children:
+                      DBSecurityGroup:
+                        :rename: db_security_groups
+                        :list: true
+- :name: DeleteDBInstance
+  :method: :delete_db_instance
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    SkipFinalSnapshot:
+    - :boolean
+    FinalDBSnapshotIdentifier:
+    - :string
+  :outputs:
+    :children:
+      DeleteDBInstanceResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: db_parameter_groups
+                    :list: true
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: db_security_groups
+                    :list: true
+- :name: DescribeEvents
+  :method: :describe_events
+  :inputs:
+    Duration:
+    - :integer
+    StartTime:
+    - :timestamp
+    EndTime:
+    - :timestamp
+    Marker:
+    - :string
+    MaxRecords:
+    - :string
+    SourceIdentifier:
+    - :string
+    SourceType:
+    - :string
+  :outputs:
+    :children:
+      DescribeEventsResult:
+        :ignore: true
+        :children:
+          Events:
+            :ignore: true
+            :children:
+              Event:
+                :rename: :events
+                :list: true

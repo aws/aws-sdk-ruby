@@ -28,6 +28,7 @@ require 'aws/core/autoloader'
 # * {AWS::ELB}
 # * {AWS::EMR}
 # * {AWS::IAM}
+# * {AWS::RDS}
 # * {AWS::Route53}
 # * {AWS::S3}
 # * {AWS::SNS}
