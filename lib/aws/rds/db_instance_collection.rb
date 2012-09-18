@@ -19,7 +19,8 @@ module AWS
         DBInstance.new(db_instance_id, :config => config)
       end
 
-      def create options = {}
+      def create name, options = {}
+        options[:db_instance_identifier] = name
         response = client.create_db_instance(options)
 
         self[response.data[:db_instance][:db_instance_identifier]]
