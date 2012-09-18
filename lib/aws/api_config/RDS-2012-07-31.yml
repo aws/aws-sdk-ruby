@@ -70,6 +70,10 @@
                 :rename: :db_instances
                 :list: true
                 :children:
+                  InstanceCreateTime:
+                    :type: :time
+                  LatestRestorableTime:
+                    :type: :time
                   DBSubnetGroup:
                     :children:
                       Subnets:
@@ -107,6 +111,10 @@
         :children:
           DBInstance:
             :children:
+              InstanceCreateTime:
+                :type: :time
+              LatestRestorableTime:
+                :type: :time
               DBSubnetGroup:
                 :children:
                   Subnets:
@@ -250,6 +258,10 @@
         :children:
           DBInstance:
             :children:
+              InstanceCreateTime:
+                :type: :time
+              LatestRestorableTime:
+                :type: :time
               DBSubnetGroup:
                 :children:
                   Subnets:
@@ -315,6 +327,10 @@
         :children:
           DBInstance:
             :children:
+              InstanceCreateTime:
+                :type: :time
+              LatestRestorableTime:
+                :type: :time
               DBSubnetGroup:
                 :children:
                   Subnets:
@@ -350,6 +366,10 @@
         :children:
           DBInstance:
             :children:
+              InstanceCreateTime:
+                :type: :time
+              LatestRestorableTime:
+                :type: :time
               DBSubnetGroup:
                 :children:
                   Subnets:
@@ -466,6 +486,10 @@
         :children:
           DBInstance:
             :children:
+              InstanceCreateTime:
+                :type: :time
+              LatestRestorableTime:
+                :type: :time
               DBSubnetGroup:
                 :children:
                   Subnets:
@@ -528,3 +552,35 @@
           - :string
           - :required
   :outputs: {}
+- :name: DescribeReservedDBInstances
+  :method: :describe_reserved_db_instances
+  :inputs:
+    DBInstanceClass:
+    - :string
+    Duration:
+    - :string
+    Marker:
+    - :string
+    MaxRecords:
+    - :integer
+    MultiAZ:
+    - :string
+    OfferingType:
+    - :string
+    ProductDescription:
+    - :string
+    ReservedDBInstanceId:
+    - :string
+    ReservedDBInstancesOfferingId:
+    - :string
+  :outputs:
+    :children:
+      DescribeReservedDBInstancesResult:
+        :ignore: true
+        :children:
+          ReservedDBInstances:
+            :ignore: true
+            :children:
+              ReservedDBInstance:
+                :rename: :reserved_db_instances
+                :list: true
