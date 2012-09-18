@@ -14,6 +14,41 @@
 ---
 :api_version: '2012-07-31'
 :operations:
+- :name: DescribeDBEngineVersions
+  :method: describe_db_engine_versions
+  :inputs:
+    DBParameterGroupFamily:
+    - :string
+    DefaultOnly:
+    - :boolean
+    Engine:
+    - :string
+    EngineVersion:
+    - :string
+    ListSupportedCharacterSets:
+    - :boolean
+    Marker:
+    - :string
+    MaxRecords:
+    - :integer
+  :outputs:
+    :children:
+      DescribeDBEngineVersionsResult:
+        :ignore: true
+        :children:
+          DBEngineVersions:
+            :ignore: true
+            :children:
+              DBEngineVersion:
+                :rename: :db_engine_versions
+                :list: true
+                :children:
+                  SupportedCharacterSets:
+                    :ignore: true
+                    :children:
+                      CharacterSet:
+                        :rename: :supported_character_sets
+                        :list: true
 - :name: DescribeDBInstances
   :method: :describe_db_instances
   :inputs:
@@ -22,7 +57,7 @@
     Marker:
     - :string
     MaxRecords:
-    - :string
+    - :integer
   :outputs:
     :children:
       DescribeDBInstancesResult:
@@ -35,6 +70,14 @@
                 :rename: :db_instances
                 :list: true
                 :children:
+                  DBSubnetGroup:
+                    :children:
+                      Subnets:
+                        :ignore: true
+                        :children:
+                          Subnet:
+                            :rename: subnets
+                            :list: true
                   DBParameterGroups:
                     :ignore: true
                     :children:
@@ -64,6 +107,14 @@
         :children:
           DBInstance:
             :children:
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: subnets
+                        :list: true
               DBParameterGroups:
                 :ignore: true
                 :children:
@@ -88,7 +139,7 @@
     Marker:
     - :string
     MaxRecords:
-    - :string
+    - :integer
     SourceIdentifier:
     - :string
     SourceType:
@@ -104,3 +155,376 @@
               Event:
                 :rename: :events
                 :list: true
+- :name: DescribeOrderableDBInstanceOptions
+  :method: describe_orderable_db_instance_options
+  :inputs:
+    DBInstanceClass:
+    - :string
+    Engine:
+    - :string
+    - :required
+    EngineVersion:
+    - :string
+    LicenseModel:
+    - :string
+    Marker:
+    - :string
+    MaxRecords:
+    - :integer
+    Vpc:
+    - :boolean
+  :outputs:
+    :children:
+      DescribeOrderableDBInstanceOptionsResult:
+        :ignore: true
+        :children:
+          OrderableDBInstanceOptions:
+            :ignore: true
+            :children:
+              OrderableDBInstanceOption:
+                :rename: orderable_db_instance_options
+                :list: true
+                :children:
+                  AvailabilityZones:
+                    :ignore: true
+                    :children:
+                      AvailabilityZone:
+                        :rename: :availability_zones
+                        :list: true
+- :name: CreateDBInstance
+  :method: :create_db_instance
+  :inputs:
+    AllocatedStorage:
+    - :integer
+    - :required
+    AutoMinorVersionUpgrade:
+    - :boolean
+    AvailabilityZone:
+    - :string
+    BackupRetentionPeriod:
+    - :integer
+    CharacterSetName:
+    - :string
+    DBInstanceClass:
+    - :string
+    - :required
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    DBName:
+    - :string
+    DBParameterGroupName:
+    - :string
+    DBSecurityGroups:
+    - :membered_list:
+      - :string
+    DBSubnetGroupName:
+    - :string
+    Engine:
+    - :string
+    - :required
+    EngineVersion:
+    - :string
+    LicenseModel:
+    - :string
+    MasterUserPassword:
+    - :string
+    - :required
+    MasterUsername:
+    - :string
+    - :required
+    MultiAZ:
+    - :boolean
+    OptionGroupName:
+    - :string
+    Port:
+    - :integer
+    PreferredBackupWindow:
+    - :string
+    PreferredMaintenanceWindow:
+    - :string
+  :outputs:
+    :children:
+      CreateDBInstanceResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: subnets
+                        :list: true
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: db_parameter_groups
+                    :list: true
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: db_security_groups
+                    :list: true
+- :name: ModifyDBInstance
+  :method: :modify_db_instance
+  :inputs:
+    AllocatedStorage:
+    - :integer
+    AllowMajorVersionUpgrade:
+    - :boolean
+    ApplyImmediately:
+    - :boolean
+    AutoMinorVersionUpgrade:
+    - :boolean
+    BackupRetentionPeriod:
+    - :integer
+    DBInstanceClass:
+    - :string
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    DBParameterGroupName:
+    - :string
+    DBSecurityGroups:
+    - :membered_list:
+      - :string
+    EngineVersion:
+    - :string
+    MasterUserPassword:
+    - :string
+    MasterUsername:
+    - :string
+    - :required
+    MultiAZ:
+    - :boolean
+    OptionGroupName:
+    - :string
+    PreferredBackupWindow:
+    - :string
+    PreferredMaintenanceWindow:
+    - :string
+  :outputs:
+    :children:
+      ModifyDBInstanceResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: subnets
+                        :list: true
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: db_parameter_groups
+                    :list: true
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: db_security_groups
+                    :list: true
+- :name: RebootDBInstance
+  :method: :reboot_db_instance
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    ForceFailover:
+    - :boolean
+  :outputs:
+    :children:
+      RebootDBInstanceResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: subnets
+                        :list: true
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: db_parameter_groups
+                    :list: true
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: db_security_groups
+                    :list: true
+- :name: DescribeDBSnapshots
+  :method: :describe_db_snapshots
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    DBSnapshotIdentifier:
+    - :string
+    SnapshotType:
+    - :string
+    Marker:
+    - :string
+    MaxRecords:
+    - :integer
+  :outputs:
+    :children:
+      DescribeDBSnapshotsResult:
+        :ignore: true
+        :children:
+          DBSnapshots:
+            :ignore: true
+            :children:
+              DBSnapshot:
+                :rename: db_snapshots
+                :list: true
+- :name: CreateDBSnapshot
+  :method: create_db_snapshot
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    DBSnapshotIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateDBSnapshotResult:
+        :ignore: true
+- :name: CopyDBSnapshot
+  :method: copy_db_snapshot
+  :inputs:
+    SourceDBSnapshotIdentifier:
+    - :string
+    - :required
+    TargetDBSnapshotIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CopyDBSnapshotResult:
+        :ignore: true
+- :name: DeleteDBSnapshot
+  :method: delete_db_snapshot
+  :inputs:
+    DBSnapshotIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteDBSnapshotResult:
+        :ignore: true
+- :name: RestoreDBInstanceFromDBSnapshot
+  :method: restore_db_instance_from_db_snapshot
+  :inputs:
+    AutoMinorVersionUpgrade:
+    - :boolean
+    AvailabilityZone:
+    - :string
+    DBInstanceClass:
+    - :string
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    DBName:
+    - :string
+    DBSnapshotIdentifier:
+    - :string
+    - :required
+    DBSubnetGroupName:
+    - :string
+    Engine:
+    - :string
+    LicenseModel:
+    - :string
+    MultiAZ:
+    - :boolean
+    OptionGroupName:
+    - :string
+    Port:
+    - :integer
+  :outputs:
+    :children:
+      RestoreDBInstanceFromDBSnapshotResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: subnets
+                        :list: true
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: db_parameter_groups
+                    :list: true
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: db_security_groups
+                    :list: true
+- :name: AddTagsToResource
+  :method: add_tags_to_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
+          - :required
+  :outputs: {}
+- :name: ListTagsForResource
+  :method: list_tags_for_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ListTagsForResourceResult:
+        :ignore: true
+- :name: RemoveTagsFromResource
+  :method: remove_tags_from_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
+          - :required
+  :outputs: {}
