@@ -24,8 +24,6 @@ module AWS
       autoload :Errors, 'errors'
       autoload :DBInstance, 'db_instance'
       autoload :DBInstanceCollection, 'db_instance_collection'
-      #autoload :JobFlow, 'job_flow'
-      #autoload :JobFlowCollection, 'job_flow_collection'
       autoload :Request, 'request'
     end
 
