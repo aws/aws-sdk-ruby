@@ -22,14 +22,19 @@ module AWS
     AWS.register_autoloads(self) do
       autoload :Client, 'client'
       autoload :Errors, 'errors'
-      #autoload :InstanceGroup, 'instance_group'
-      #autoload :InstanceGroupCollection, 'instance_group_collection'
+      autoload :DBInstance, 'db_instance'
+      autoload :DBInstanceCollection, 'db_instance_collection'
       #autoload :JobFlow, 'job_flow'
       #autoload :JobFlowCollection, 'job_flow_collection'
       autoload :Request, 'request'
     end
 
     include Core::ServiceInterface
+
+    def db_instances
+      DBInstanceCollection.new(:config => config)
+    end
+    alias_method :instances, :db_instances
 
   end
 end
