@@ -203,6 +203,50 @@ module AWS
             end
 
           end
+
+          context 'with a custom matdesc' do
+
+            it 'should pass along the matdesc' do
+
+              client.should_receive(:put_object).with(
+                hash_including(:metadata => hash_including(
+                    'x-amz-matdesc' => '{"custom":"matdesc"}'
+                  )
+                )
+              ).and_return(client.stub_for(:put_object))
+
+              opts = {
+                :encryption_key => "12345678901234567890123456789012",
+                :encryption_matdesc => '{"custom":"matdesc"}',
+              }
+
+              object.write("HELLO", opts)
+
+            end
+
+          end
+
+          context 'it defaults the to the configured matdesc' do
+
+            it 'should pass along the matdesc' do
+
+              client.config.stub(:s3_encryption_matdesc).
+                and_return('{"configured":"matdesc"}')
+
+              client.should_receive(:put_object).with(
+                hash_including(:metadata => hash_including(
+                    'x-amz-matdesc' => '{"configured":"matdesc"}'
+                  )
+                )
+              ).and_return(client.stub_for(:put_object))
+
+              opts = { :encryption_key => "12345678901234567890123456789012" }
+              object.write("HELLO", opts)
+
+            end
+
+          end
+
           context 'with a string using instruction' do
 
             it 'should call put_object with the bucket, key and data' do

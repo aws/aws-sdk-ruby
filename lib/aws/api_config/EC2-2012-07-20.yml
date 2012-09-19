@@ -298,6 +298,53 @@
     - :string
     - :required
   :outputs: {}
+- :name: CancelReservedInstancesListing
+  :method: :cancel_reserved_instances_listing
+  :inputs:
+    ReservedInstancesListingId:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      reservedInstancesListingsSet:
+        :ignore: true
+        :children:
+          item:
+            :rename: :reserved_instances_listings_set
+            :list: true
+            :children:
+              createDate:
+                :type: :time
+              updateDate:
+                :type: :time
+              instanceCounts:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :instance_counts
+                    :list: true
+                    :children:
+                      instanceCount:
+                        :type: :integer
+              priceSchedules:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :price_schedules
+                    :list: true
+                    :children:
+                      term:
+                        :type: :integer
+                      price:
+                        :type: :float
+                      active:
+                        :type: :boolean
+              tagSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :tag_set
+                    :list: true
 - :name: CancelSpotInstanceRequests
   :method: :cancel_spot_instance_requests
   :inputs:
@@ -624,6 +671,69 @@
     - :string
     - :required
   :outputs: {}
+- :name: CreateReservedInstancesListing
+  :method: :create_reserved_instances_listing
+  :inputs:
+    ReservedInstancesId:
+    - :string
+    - :required
+    InstanceCount:
+    - :integer
+    - :required
+    PriceSchedules:
+    - :list:
+      - :structure:
+          Term:
+          - :long
+          Price:
+          - :double
+          CurrencyCode:
+          - :string
+    - :required
+    ClientToken:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      reservedInstancesListingsSet:
+        :ignore: true
+        :children:
+          item:
+            :rename: :reserved_instances_listings_set
+            :list: true
+            :children:
+              createDate:
+                :type: :time
+              updateDate:
+                :type: :time
+              instanceCounts:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :instance_counts
+                    :list: true
+                    :children:
+                      instanceCount:
+                        :type: :integer
+              priceSchedules:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :price_schedules
+                    :list: true
+                    :children:
+                      term:
+                        :type: :integer
+                      price:
+                        :type: :float
+                      active:
+                        :type: :boolean
+              tagSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :tag_set
+                    :list: true
 - :name: CreateRoute
   :method: :create_route
   :inputs:
@@ -670,6 +780,18 @@
             :children:
               item:
                 :rename: :tag_set
+                :list: true
+          propagatingVgwSet:
+            :ignore: true
+            :children:
+              item:
+                :rename: :propagating_vgw_set
+                :list: true
+          propagatedRouteSet:
+            :ignore: true
+            :children:
+              item:
+                :rename: :propagated_route_set
                 :list: true
 - :name: CreateSecurityGroup
   :method: :create_security_group
@@ -823,6 +945,10 @@
     VpnGatewayId:
     - :string
     - :required
+    Options:
+    - :structure:
+        StaticRoutesOnly:
+        - :boolean
   :outputs:
     :children:
       vpnConnection:
@@ -844,6 +970,26 @@
                     :type: :time
                   acceptedRouteCount:
                     :type: :integer
+          options:
+            :children:
+              staticRoutesOnly:
+                :type: :boolean
+          routes:
+            :ignore: true
+            :children:
+              item:
+                :rename: :routes
+                :list: true
+- :name: CreateVpnConnectionRoute
+  :method: :create_vpn_connection_route
+  :inputs:
+    VpnConnectionId:
+    - :string
+    - :required
+    DestinationCidrBlock:
+    - :string
+    - :required
+  :outputs: {}
 - :name: CreateVpnGateway
   :method: :create_vpn_gateway
   :inputs:
@@ -1020,6 +1166,16 @@
   :method: :delete_vpn_connection
   :inputs:
     VpnConnectionId:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DeleteVpnConnectionRoute
+  :method: :delete_vpn_connection_route
+  :inputs:
+    VpnConnectionId:
+    - :string
+    - :required
+    DestinationCidrBlock:
     - :string
     - :required
   :outputs: {}
@@ -1984,6 +2140,63 @@
                     :children:
                       amount:
                         :type: :float
+- :name: DescribeReservedInstancesListings
+  :method: :describe_reserved_instances_listings
+  :inputs:
+    ReservedInstancesId:
+    - :string
+    ReservedInstancesListingId:
+    - :string
+    Filters:
+    - :list:
+      - :structure:
+          Name:
+          - :string
+          Value:
+          - :list:
+            - :string
+          - :rename: Values
+  :outputs:
+    :children:
+      reservedInstancesListingsSet:
+        :ignore: true
+        :children:
+          item:
+            :rename: :reserved_instances_listings_set
+            :list: true
+            :children:
+              createDate:
+                :type: :time
+              updateDate:
+                :type: :time
+              instanceCounts:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :instance_counts
+                    :list: true
+                    :children:
+                      instanceCount:
+                        :type: :integer
+              priceSchedules:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :price_schedules
+                    :list: true
+                    :children:
+                      term:
+                        :type: :integer
+                      price:
+                        :type: :float
+                      active:
+                        :type: :boolean
+              tagSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :tag_set
+                    :list: true
 - :name: DescribeReservedInstancesOfferings
   :method: :describe_reserved_instances_offerings
   :inputs:
@@ -2035,6 +2248,19 @@
                     :children:
                       amount:
                         :type: :float
+              marketplace:
+                :type: :boolean
+              pricingDetailsSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :pricing_details_set
+                    :list: true
+                    :children:
+                      price:
+                        :type: :float
+                      count:
+                        :type: :integer
 - :name: DescribeRouteTables
   :method: :describe_route_tables
   :inputs:
@@ -2081,6 +2307,18 @@
                 :children:
                   item:
                     :rename: :tag_set
+                    :list: true
+              propagatingVgwSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :propagating_vgw_set
+                    :list: true
+              propagatedRouteSet:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :propagated_route_set
                     :list: true
 - :name: DescribeSecurityGroups
   :method: :describe_security_groups
@@ -2641,6 +2879,16 @@
                         :type: :time
                       acceptedRouteCount:
                         :type: :integer
+              options:
+                :children:
+                  staticRoutesOnly:
+                    :type: :boolean
+              routes:
+                :ignore: true
+                :children:
+                  item:
+                    :rename: :routes
+                    :list: true
               type:
                 :rename: :vpn_type
 - :name: DescribeVpnGateways
@@ -2730,6 +2978,16 @@
     - :string
     - :required
   :outputs: {}
+- :name: DisableVgwRoutePropagation
+  :method: :disable_vgw_route_propagation
+  :inputs:
+    RouteTableId:
+    - :string
+    - :required
+    GatewayId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: DisassociateAddress
   :method: :disassociate_address
   :inputs:
@@ -2742,6 +3000,16 @@
   :method: :disassociate_route_table
   :inputs:
     AssociationId:
+    - :string
+    - :required
+  :outputs: {}
+- :name: EnableVgwRoutePropagation
+  :method: :enable_vgw_route_propagation
+  :inputs:
+    RouteTableId:
+    - :string
+    - :required
+    GatewayId:
     - :string
     - :required
   :outputs: {}
@@ -3184,6 +3452,12 @@
     InstanceCount:
     - :integer
     - :required
+    LimitPrice:
+    - :structure:
+        Amount:
+        - :double
+        CurrencyCode:
+        - :string
   :outputs: {}
 - :name: RebootInstances
   :method: :reboot_instances
@@ -3359,15 +3633,6 @@
         - :string
         KeyName:
         - :string
-        GroupSet:
-        - :list:
-          - :structure:
-              GroupName:
-              - :string
-              - :rename: GroupName
-              GroupId:
-              - :string
-        - :rename: SecurityGroups
         UserData:
         - :string
         AddressingType:
@@ -3451,6 +3716,15 @@
             - :string
         EbsOptimized:
         - :boolean
+        SecurityGroup:
+        - :list:
+          - :structure:
+              GroupName:
+              - :string
+              - :rename: GroupName
+              GroupId:
+              - :string
+        - :rename: SecurityGroups
   :outputs:
     :children:
       spotInstanceRequestSet:

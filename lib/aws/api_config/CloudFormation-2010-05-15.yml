@@ -159,7 +159,7 @@
                     :ignore: true
                     :children:
                       member:
-                        :rename: :notification_ar_ns
+                        :rename: :notification_arns
                         :list: true
                   TimeoutInMinutes:
                     :type: :integer

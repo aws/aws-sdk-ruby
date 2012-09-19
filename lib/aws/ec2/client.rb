@@ -340,6 +340,33 @@ module AWS
       #   * +:export_task_id+ - *required* - (String)
       # @return [Core::Response]
 
+      # Calls the CancelReservedInstancesListing API operation.
+      # @method cancel_reserved_instances_listing(options = {})
+      # @param [Hash] options
+      #   * +:reserved_instances_listing_id+ - *required* - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:reserved_instances_listings_set+ - (Array<Hash>)
+      #     * +:reserved_instances_listing_id+ - (String)
+      #     * +:reserved_instances_id+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:update_date+ - (Time)
+      #     * +:status+ - (String)
+      #     * +:status_message+ - (String)
+      #     * +:instance_counts+ - (Array<Hash>)
+      #       * +:state+ - (String)
+      #       * +:instance_count+ - (Integer)
+      #     * +:price_schedules+ - (Array<Hash>)
+      #       * +:term+ - (Integer)
+      #       * +:price+ - (Numeric)
+      #       * +:currency_code+ - (String)
+      #       * +:active+ - (Boolean)
+      #     * +:tag_set+ - (Array<Hash>)
+      #       * +:key+ - (String)
+      #       * +:value+ - (String)
+      #     * +:client_token+ - (String)
+
       # Calls the CancelSpotInstanceRequests API operation.
       # @method cancel_spot_instance_requests(options = {})
       # @param [Hash] options
@@ -626,6 +653,39 @@ module AWS
       #   * +:strategy+ - *required* - (String) The PlacementGroup strategy.
       # @return [Core::Response]
 
+      # Calls the CreateReservedInstancesListing API operation.
+      # @method create_reserved_instances_listing(options = {})
+      # @param [Hash] options
+      #   * +:reserved_instances_id+ - *required* - (String)
+      #   * +:instance_count+ - *required* - (Integer)
+      #   * +:price_schedules+ - *required* - (Array<Hash>)
+      #     * +:term+ - (Integer)
+      #     * +:price+ - (Float)
+      #     * +:currency_code+ - (String)
+      #   * +:client_token+ - *required* - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:reserved_instances_listings_set+ - (Array<Hash>)
+      #     * +:reserved_instances_listing_id+ - (String)
+      #     * +:reserved_instances_id+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:update_date+ - (Time)
+      #     * +:status+ - (String)
+      #     * +:status_message+ - (String)
+      #     * +:instance_counts+ - (Array<Hash>)
+      #       * +:state+ - (String)
+      #       * +:instance_count+ - (Integer)
+      #     * +:price_schedules+ - (Array<Hash>)
+      #       * +:term+ - (Integer)
+      #       * +:price+ - (Numeric)
+      #       * +:currency_code+ - (String)
+      #       * +:active+ - (Boolean)
+      #     * +:tag_set+ - (Array<Hash>)
+      #       * +:key+ - (String)
+      #       * +:value+ - (String)
+      #     * +:client_token+ - (String)
+
       # Calls the CreateRoute API operation.
       # @method create_route(options = {})
       # @param [Hash] options
@@ -668,6 +728,13 @@ module AWS
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
+      #     * +:propagating_vgw_set+ - (Array<Hash>)
+      #       * +:gateway_id+ - (String)
+      #     * +:propagated_route_set+ - (Array<Hash>)
+      #       * +:destination_cidr_block+ - (String)
+      #       * +:gateway_id+ - (String)
+      #       * +:status+ - (String)
+      #       * +:source_id+ - (String)
 
       # Calls the CreateSecurityGroup API operation.
       # @method create_security_group(options = {})
@@ -820,6 +887,8 @@ module AWS
       #     customer gateway.
       #   * +:vpn_gateway_id+ - *required* - (String) The ID of the VPN
       #     gateway.
+      #   * +:options+ - (Hash)
+      #     * +:static_routes_only+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -839,6 +908,19 @@ module AWS
       #       * +:last_status_change+ - (Time)
       #       * +:status_message+ - (String)
       #       * +:accepted_route_count+ - (Integer)
+      #     * +:options+ - (Hash)
+      #       * +:static_routes_only+ - (Boolean)
+      #     * +:routes+ - (Array<Hash>)
+      #       * +:destination_cidr_block+ - (String)
+      #       * +:source+ - (String)
+      #       * +:state+ - (String)
+
+      # Calls the CreateVpnConnectionRoute API operation.
+      # @method create_vpn_connection_route(options = {})
+      # @param [Hash] options
+      #   * +:vpn_connection_id+ - *required* - (String)
+      #   * +:destination_cidr_block+ - *required* - (String)
+      # @return [Core::Response]
 
       # Calls the CreateVpnGateway API operation.
       # @method create_vpn_gateway(options = {})
@@ -1007,6 +1089,13 @@ module AWS
       # @param [Hash] options
       #   * +:vpn_connection_id+ - *required* - (String) The ID of the VPN
       #     connection to delete
+      # @return [Core::Response]
+
+      # Calls the DeleteVpnConnectionRoute API operation.
+      # @method delete_vpn_connection_route(options = {})
+      # @param [Hash] options
+      #   * +:vpn_connection_id+ - *required* - (String)
+      #   * +:destination_cidr_block+ - *required* - (String)
       # @return [Core::Response]
 
       # Calls the DeleteVpnGateway API operation.
@@ -1767,6 +1856,38 @@ module AWS
       #       * +:frequency+ - (String)
       #       * +:amount+ - (Numeric)
 
+      # Calls the DescribeReservedInstancesListings API operation.
+      # @method describe_reserved_instances_listings(options = {})
+      # @param [Hash] options
+      #   * +:reserved_instances_id+ - (String)
+      #   * +:reserved_instances_listing_id+ - (String)
+      #   * +:filters+ - (Array<Hash>)
+      #     * +:name+ - (String) Specifies the name of the filter.
+      #     * +:values+ - (Array<String>) Contains one or more values for the
+      #       filter.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:reserved_instances_listings_set+ - (Array<Hash>)
+      #     * +:reserved_instances_listing_id+ - (String)
+      #     * +:reserved_instances_id+ - (String)
+      #     * +:create_date+ - (Time)
+      #     * +:update_date+ - (Time)
+      #     * +:status+ - (String)
+      #     * +:status_message+ - (String)
+      #     * +:instance_counts+ - (Array<Hash>)
+      #       * +:state+ - (String)
+      #       * +:instance_count+ - (Integer)
+      #     * +:price_schedules+ - (Array<Hash>)
+      #       * +:term+ - (Integer)
+      #       * +:price+ - (Numeric)
+      #       * +:currency_code+ - (String)
+      #       * +:active+ - (Boolean)
+      #     * +:tag_set+ - (Array<Hash>)
+      #       * +:key+ - (String)
+      #       * +:value+ - (String)
+      #     * +:client_token+ - (String)
+
       # Calls the DescribeReservedInstancesOfferings API operation.
       # @method describe_reserved_instances_offerings(options = {})
       # @param [Hash] options
@@ -1807,6 +1928,11 @@ module AWS
       #     * +:recurring_charges+ - (Array<Hash>)
       #       * +:frequency+ - (String)
       #       * +:amount+ - (Numeric)
+      #     * +:marketplace+ - (Boolean)
+      #     * +:pricing_details_set+ - (Array<Hash>)
+      #       * +:price+ - (Numeric)
+      #       * +:count+ - (Integer)
+      #   * +:next_token+ - (String)
 
       # Calls the DescribeRouteTables API operation.
       # @method describe_route_tables(options = {})
@@ -1840,6 +1966,13 @@ module AWS
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
+      #     * +:propagating_vgw_set+ - (Array<Hash>)
+      #       * +:gateway_id+ - (String)
+      #     * +:propagated_route_set+ - (Array<Hash>)
+      #       * +:destination_cidr_block+ - (String)
+      #       * +:gateway_id+ - (String)
+      #       * +:status+ - (String)
+      #       * +:source_id+ - (String)
 
       # Calls the DescribeSecurityGroups API operation.
       # @method describe_security_groups(options = {})
@@ -2242,6 +2375,12 @@ module AWS
       #       * +:last_status_change+ - (Time)
       #       * +:status_message+ - (String)
       #       * +:accepted_route_count+ - (Integer)
+      #     * +:options+ - (Hash)
+      #       * +:static_routes_only+ - (Boolean)
+      #     * +:routes+ - (Array<Hash>)
+      #       * +:destination_cidr_block+ - (String)
+      #       * +:source+ - (String)
+      #       * +:state+ - (String)
 
       # Calls the DescribeVpnGateways API operation.
       # @method describe_vpn_gateways(options = {})
@@ -2323,6 +2462,13 @@ module AWS
       #     VPN gateway from.
       # @return [Core::Response]
 
+      # Calls the DisableVgwRoutePropagation API operation.
+      # @method disable_vgw_route_propagation(options = {})
+      # @param [Hash] options
+      #   * +:route_table_id+ - *required* - (String)
+      #   * +:gateway_id+ - *required* - (String)
+      # @return [Core::Response]
+
       # Calls the DisassociateAddress API operation.
       # @method disassociate_address(options = {})
       # @param [Hash] options
@@ -2338,6 +2484,13 @@ module AWS
       #   * +:association_id+ - *required* - (String) The association ID
       #     representing the current association between the route table and
       #     subnet.
+      # @return [Core::Response]
+
+      # Calls the EnableVgwRoutePropagation API operation.
+      # @method enable_vgw_route_propagation(options = {})
+      # @param [Hash] options
+      #   * +:route_table_id+ - *required* - (String)
+      #   * +:gateway_id+ - *required* - (String)
       # @return [Core::Response]
 
       # Calls the EnableVolumeIO API operation.
@@ -2688,6 +2841,9 @@ module AWS
       #     unique ID of the Reserved Instances offering being purchased.
       #   * +:instance_count+ - *required* - (Integer) The number of Reserved
       #     Instances to purchase.
+      #   * +:limit_price+ - (Hash)
+      #     * +:amount+ - (Float)
+      #     * +:currency_code+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2864,9 +3020,6 @@ module AWS
       #     instance information.
       #     * +:image_id+ - (String) The AMI ID.
       #     * +:key_name+ - (String) The name of the key pair.
-      #     * +:security_groups+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
       #     * +:user_data+ - (String) Optional data, specific to a user's
       #       application, to provide in the launch request. All instances that
       #       collectively comprise the launch request have access to this
@@ -2923,6 +3076,9 @@ module AWS
       #       * +:arn+ - (String)
       #       * +:name+ - (String)
       #     * +:ebs_optimized+ - (Boolean)
+      #     * +:security_groups+ - (Array<Hash>)
+      #       * +:group_name+ - (String)
+      #       * +:group_id+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

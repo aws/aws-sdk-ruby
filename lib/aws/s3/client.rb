@@ -16,6 +16,7 @@ require 'pathname'
 require 'stringio'
 require 'json'
 require 'digest/md5'
+require 'nokogiri'
 
 module AWS
   class S3
@@ -166,10 +167,9 @@ module AWS
 
         configure_request do |req, options|
           xml = options[:lifecycle_configuration]
-          md5 = Base64.encode64(Digest::MD5.digest(xml)).strip
           req.add_param('lifecycle')
           req.body = xml
-          req.headers['content-md5'] = md5
+          req.headers['content-md5'] = md5(xml)
           super(req, options)
         end
 
@@ -204,6 +204,166 @@ module AWS
           super(req, options)
         end
 
+      end
+
+      # @overload put_bucket_cors(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [required,Array<Hash>] :rules An array of rule hashes.
+      #     * +:id+ - (String) A unique identifier for the rule. The ID
+      #       value can be up to 255 characters long. The IDs help you find
+      #       a rule in the configuration.
+      #     * +:allowed_methods+ - (required,Array<String>) A list of HTTP
+      #       methods that you want to allow the origin to execute.
+      #       Each rule must identify at least one method.
+      #     * +:allowed_origins+ - (required,Array<String>) A list of origins
+      #       you want to allow cross-domain requests from. This can
+      #       contain at most one * wild character.
+      #     * +:allowed_headers+ - (Array<String>) A list of headers allowed
+      #       in a pre-flight OPTIONS request via the
+      #       Access-Control-Request-Headers header. Each header name
+      #       specified in the Access-Control-Request-Headers header must
+      #       have a corresponding entry in the rule.
+      #       Amazon S3 will send only the allowed headers in a response
+      #       that were requested. This can contain at most one * wild
+      #       character.
+      #     * +:max_age_seconds+ - (Integer) The time in seconds that your
+      #       browser is to cache the preflight response for the specified
+      #       resource.
+      #     * +:expose_headers+ - (Array<String>) One or more headers in
+      #       the response that you want customers to be able to access
+      #       from their applications (for example, from a JavaScript
+      #       XMLHttpRequest object).
+      #   @return [Core::Response]
+      bucket_method(:put_bucket_cors, :put) do
+        configure_request do |req, options|
+
+          req.add_param('cors')
+
+          xml = Nokogiri::XML::Builder.new do |xml|
+            xml.CORSConfiguration do
+              options[:rules].each do |rule|
+                xml.CORSRule do
+
+                  xml.ID(rule[:id]) if rule[:id]
+
+                  (rule[:allowed_methods] || []).each do |method|
+                    xml.AllowedMethod(method)
+                  end
+
+                  (rule[:allowed_origins] || []).each do |origin|
+                    xml.AllowedOrigin(origin)
+                  end
+
+                  (rule[:allowed_headers] || []).each do |header|
+                    xml.AllowedHeader(header)
+                  end
+
+                  xml.MaxAgeSeconds(rule[:max_age_seconds]) if
+                    rule[:max_age_seconds]
+
+                  (rule[:expose_headers] || []).each do |header|
+                    xml.ExposeHeader(header)
+                  end
+
+                end
+              end
+            end
+          end.doc.root.to_xml
+
+          req.body = xml
+          req.headers['content-md5'] = md5(xml)
+
+          super(req, options)
+
+        end
+      end
+
+      # @overload get_bucket_cors(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_cors, :get) do
+
+        configure_request do |req, options|
+          req.add_param('cors')
+          super(req, options)
+        end
+
+        process_response do |resp|
+          resp.data = XML::GetBucketCors.parse(resp.http_response.body)
+        end
+
+      end
+
+      # @overload delete_bucket_cors(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:delete_bucket_cors, :delete) do
+        configure_request do |req, options|
+          req.add_param('cors')
+          super(req, options)
+        end
+      end
+
+      # @overload put_bucket_tagging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [Hash] :tags
+      #   @return [Core::Response]
+      bucket_method(:put_bucket_tagging, :put) do
+        configure_request do |req, options|
+
+          req.add_param('tagging')
+
+          xml = Nokogiri::XML::Builder.new
+          xml.Tagging do |xml|
+            xml.TagSet do
+              options[:tags].each_pair do |key,value|
+                xml.Tag do
+                  xml.Key(key)
+                  xml.Value(value)
+                end
+              end
+            end
+          end
+
+          xml = xml.doc.root.to_xml
+          req.body = xml
+          req.headers['content-md5'] = md5(xml)
+
+          super(req, options)
+
+        end
+      end
+
+      # @overload get_bucket_tagging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_tagging, :get) do
+
+        configure_request do |req, options|
+          req.add_param('tagging')
+          super(req, options)
+        end
+
+        process_response do |resp|
+          resp.data = XML::GetBucketTagging.parse(resp.http_response.body)
+        end
+
+      end
+
+      # @overload delete_bucket_tagging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:delete_bucket_tagging, :delete) do
+        configure_request do |req, options|
+          req.add_param('tagging')
+          super(req, options)
+        end
       end
 
       # @overload list_buckets(options = {})
@@ -929,10 +1089,7 @@ module AWS
           xml << "<Delete><Quiet>#{quiet}</Quiet>#{objects}</Delete>"
 
           req.body = xml
-
-          md5 = Base64.encode64(Digest::MD5.digest(xml)).strip
-
-          req.headers['content-md5'] = md5
+          req.headers['content-md5'] = md5(xml)
 
         end
       end
@@ -1190,6 +1347,10 @@ module AWS
         rescue
           false
         end
+      end
+
+      def md5 str
+        Base64.encode64(Digest::MD5.digest(str)).strip
       end
 
       module Validators

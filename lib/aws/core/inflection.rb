@@ -35,6 +35,7 @@ module AWS
         inflector['s3Key'] = 's3_key'
         inflector['Ec2KeyName'] = 'ec2_key_name'
         inflector['Ec2SubnetId'] = 'ec2_subnet_id'
+        inflector['NotificationARNs'] = 'notification_arns'
 
         inflector[aws_name]
 

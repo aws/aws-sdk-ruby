@@ -1384,9 +1384,11 @@ module AWS
         # Ensure metadata exists
         options[:metadata] = {} unless options[:metadata]
 
+        matdesc = options[:encryption_matdesc] || config.s3_encryption_matdesc
+
         encryption_materials = {'x-amz-key' => enc_envelope_key,
                                 'x-amz-iv'  => enc_envelope_iv,
-                                'x-amz-matdesc' => "{}"}
+                                'x-amz-matdesc' => matdesc}
         orig_headers = {}
 
         # Save the unencrypted content length

@@ -46,7 +46,7 @@ module AWS
       #     * +:parameter_value+ - (String)
       #   * +:disable_rollback+ - (Boolean)
       #   * +:timeout_in_minutes+ - (Integer)
-      #   * +:notification_ar_ns+ - (Array<String>)
+      #   * +:notification_arns+ - (Array<String>)
       #   * +:capabilities+ - (Array<String>)
       #   * +:on_failure+ - (String)
       # @return [Core::Response]
@@ -148,7 +148,7 @@ module AWS
       #     * +:stack_status+ - (String)
       #     * +:stack_status_reason+ - (String)
       #     * +:disable_rollback+ - (Boolean)
-      #     * +:notification_ar_ns+ - (Array<String>)
+      #     * +:notification_arns+ - (Array<String>)
       #     * +:timeout_in_minutes+ - (Integer)
       #     * +:capabilities+ - (Array<String>)
       #     * +:outputs+ - (Array<Hash>)

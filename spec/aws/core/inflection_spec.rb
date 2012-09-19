@@ -79,6 +79,10 @@ module AWS::Core
         Inflection.ruby_name('Ec2KeyName').should == 'ec2_key_name'
       end
 
+      it 'inflects NotificationARNs to notification_arns' do
+        Inflection.ruby_name('NotificationARNs').should == 'notification_arns'
+      end
+
     end
 
     context '#class_name' do

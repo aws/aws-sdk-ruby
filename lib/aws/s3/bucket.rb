@@ -225,13 +225,67 @@ module AWS
         versions.first ? false : true
       end
 
-      # @return [String,nil] Returns the location constraint for a bucket 
+      # @return [String,nil] Returns the location constraint for a bucket
       #   (if it has one), nil otherwise.
       def location_constraint
         client.get_bucket_location(:bucket_name => name).location_constraint
       end
 
-      # Enables versioning on this bucket. 
+      # Returns the tags for this bucket.
+      #
+      #   tags = bucket.tags
+      #   #=> <AWS::S3::BucketTagCollection>
+      #
+      #   # adds a tag to the bucket
+      #   tags['foo'] = 'abc'
+      #
+      #   # replaces all tags
+      #   tags.set('new' => 'tags')
+      #
+      #   # removes all tags from the bucket
+      #   tags.clear
+      #
+      #   # returns tags as a hash
+      #   tags.to_h
+      #
+      # @return [BucketTagCollection] Returns a collection that represents
+      #   the tags for this bucket.
+      #
+      def tags
+        BucketTagCollection.new(self)
+      end
+
+      # Sets the tags for this bucket.
+      #
+      #   bucket.tags = { 'contents' => 'photots' }
+      #
+      # You can remove all tags for the bucket by passing an empty
+      # hash or +nil+.
+      #
+      #   bucket.tags = nil # {} also deletes all tags
+      #   bucket.tags
+      #   #=> {}
+      #
+      # @param [Hash,nil] tags The tags to set on this bucket.
+      #
+      def tags= tags
+        self.tags.set(tags)
+      end
+
+      # @return [CORSRuleCollection] Returns a collection that can be
+      #   used to manage (add, edit and delete) CORS rules for this bucket.
+      def cors
+        CORSRuleCollection.new(self)
+      end
+
+      # Sets the bucket CORS rules.
+      # @param (see CORSRuleCollection#set)
+      # @see CORSRuleCollection#set
+      def cors= *rules
+        self.cors.set(*rules)
+      end
+
+      # Enables versioning on this bucket.
       # @return [nil]
       def enable_versioning
         client.set_bucket_versioning(
@@ -240,7 +294,7 @@ module AWS
         nil
       end
 
-      # Suspends versioning on this bucket. 
+      # Suspends versioning on this bucket.
       # @return [nil]
       def suspend_versioning
         client.set_bucket_versioning(
@@ -316,7 +370,7 @@ module AWS
         begin
           versioned? # makes a get bucket request without listing contents
                      # raises a client error if the bucket doesn't exist or
-                     # if you don't have permission to get the bucket 
+                     # if you don't have permission to get the bucket
                      # versioning status.
           true
         rescue Errors::NoSuchBucket => e
@@ -326,7 +380,7 @@ module AWS
         end
       end
 
-      # @return [ObjectCollection] Represents all objects(keys) in 
+      # @return [ObjectCollection] Represents all objects(keys) in
       #   this bucket.
       def objects
         ObjectCollection.new(self)
@@ -482,11 +536,11 @@ module AWS
       #
       #   bucket.lifecycle_configuration = other_bucket.lifecycle_configuration
       #
-      # If you call this method, passing nil, the lifecycle configuration 
+      # If you call this method, passing nil, the lifecycle configuration
       # for this bucket will be deleted.
       #
-      # @param [String,Object] config You can pass an xml string or any 
-      #   other object that responds to #to_xml (e.g. 
+      # @param [String,Object] config You can pass an xml string or any
+      #   other object that responds to #to_xml (e.g.
       #   BucketLifecycleConfiguration).
       #
       # @return [nil]
@@ -502,7 +556,7 @@ module AWS
           @lifecycle_cfg = BucketLifecycleConfiguration.new(self, :empty => true)
 
         else
-        
+
           xml = config.is_a?(String) ? config : config.to_xml
 
           client_opts = {}

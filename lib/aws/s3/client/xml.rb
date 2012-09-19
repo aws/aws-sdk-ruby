@@ -164,9 +164,45 @@ module AWS
         GetBucketLifecycleConfiguration = BaseGrammar.customize do
           element("Rule") do
             list
-            rename(:rules)  
+            rename(:rules)
             element("Expiration") do
               element("Days") { integer_value }
+            end
+          end
+        end
+
+        GetBucketCors = BaseGrammar.customize do
+          element "CORSRule" do
+            list
+            rename :rules
+            element "AllowedMethod" do
+              list
+              rename :allowed_methods
+            end
+            element "AllowedOrigin" do
+              list
+              rename :allowed_origins
+            end
+            element "AllowedHeader" do
+              list
+              rename :allowed_headers
+            end
+            element "MaxAgeSeconds" do
+              integer
+            end
+            element "ExposeHeader" do
+              list
+              rename :expose_headers
+            end
+          end
+        end
+
+        GetBucketTagging = BaseGrammar.customize do
+          element "TagSet" do
+            ignore
+            element "Tag" do
+              map_entry("Key", "Value")
+              rename :tags
             end
           end
         end

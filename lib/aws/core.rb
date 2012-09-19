@@ -69,7 +69,7 @@ require 'aws/core/autoloader'
 module AWS
 
   # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.5"
+  VERSION = "1.6.6"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'

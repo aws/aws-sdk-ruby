@@ -37,7 +37,7 @@ module AWS
           if code == 'RequestEntityTooLarge'
             message = 'Request body must be less than 1 MB'
           else
-            message = json['message']
+            message = json['message'] || json['Message']
           end
           [code, message]
         end

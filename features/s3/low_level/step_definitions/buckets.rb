@@ -17,6 +17,23 @@ def get_bucket
   Net::HTTP.get(URI.parse("http://#{@endpoint}/#{@bucket_name}/"))
 end
 
+def create_bucket_low_level options = {}
+  options[:bucket_name] ||= "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @bucket_name = options[:bucket_name]
+  @endpoint = options[:endpoint] || @s3_client.config.s3_endpoint
+  @result = @s3_client.create_bucket(options)
+  @buckets_created << [@bucket_name, @endpoint]
+  sleep 0.5 # Dumb insurance against eventual consistency
+end
+
+def create_bucket_high_level options = {}
+  @bucket_name = options.delete(:name) || "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @endpoint = @s3.client.config.s3_endpoint
+  @bucket = @s3.buckets.create(@bucket_name, options)
+  @buckets_created << [@bucket_name, @endpoint]
+  @bucket
+end
+
 When /^I call create_bucket( asynchronously)?$/ do |async|
   create_bucket_low_level(:async => !async.to_s.strip.empty?)
 end

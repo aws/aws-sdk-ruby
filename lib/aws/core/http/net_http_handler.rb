@@ -27,6 +27,7 @@ module AWS
 
         # @private
         NETWORK_ERRORS = [
+          SocketError,
           EOFError,
           IOError,
           Errno::ECONNABORTED,

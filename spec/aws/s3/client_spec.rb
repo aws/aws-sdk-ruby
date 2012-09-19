@@ -87,6 +87,214 @@ module AWS
 
       end
 
+      context 'cors', :cors => true do
+
+        let(:xml) { <<-XML.strip }
+<CORSConfiguration>
+  <CORSRule>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedHeader>header-a</AllowedHeader>
+    <AllowedHeader>header-b</AllowedHeader>
+    <MaxAgeSeconds>123</MaxAgeSeconds>
+    <ExposeHeader>header-c</ExposeHeader>
+    <ExposeHeader>header-d</ExposeHeader>
+  </CORSRule>
+  <CORSRule>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedOrigin>http://example.com</AllowedOrigin>
+    <AllowedOrigin>http://foo.com</AllowedOrigin>
+  </CORSRule>
+</CORSConfiguration>
+        XML
+
+        let(:rules) {
+          [
+            {
+              :allowed_methods => %w(GET PUT),
+              :allowed_origins => %w(*),
+              :allowed_headers => %w(header-a header-b),
+              :max_age_seconds => 123,
+              :expose_headers => %w(header-c header-d),
+            },{
+              :allowed_methods => %w(POST),
+              :allowed_origins => %w(http://example.com http://foo.com),
+              :allowed_headers => [],
+              :expose_headers => [],
+            }
+          ]
+        }
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_cors' do
+
+          it 'make a put request to the cors subresource' do
+
+            request = get_request(:put_bucket_cors, {
+              :bucket_name => 'bucket-name',
+              :rules => rules,
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('cors')
+            request.headers['content-md5'].should eq(client.send(:md5, xml))
+            request.body.should eq(xml)
+
+          end
+
+        end
+
+        context '#get_bucket_cors' do
+
+          it 'make a get request to the cors subresource' do
+            req = get_request(:get_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_cors,
+              {
+                :bucket_name => 'bucket',
+              }, {
+                :status => 200,
+                :headers => {},
+                :body => xml,
+              }
+            )
+            resp.data.should eq(:rules => rules)
+          end
+
+        end
+
+        context '#delete_bucket_cors' do
+
+          it 'make a delete request to the cors subresource' do
+            req = get_request(:delete_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
+      context 'tagging', :tagging => true do
+
+        let(:xml) { <<-XML.strip }
+<Tagging>
+  <TagSet>
+    <Tag>
+      <Key>foo</Key>
+      <Value>bar</Value>
+    </Tag>
+    <Tag>
+      <Key>abc</Key>
+      <Value>xyz</Value>
+    </Tag>
+  </TagSet>
+</Tagging>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_tagging' do
+
+          it 'make a put request to the tagging subresource' do
+
+            request = get_request(:put_bucket_tagging, {
+              :bucket_name => 'bucket-name',
+              :tags => { 'foo' => 'bar', :abc => 'xyz' }, # mixed key types
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('tagging')
+            request.headers['content-md5'].should eq(client.send(:md5, xml))
+            request.body.should eq(xml)
+
+          end
+
+        end
+
+        context '#get_bucket_tagging' do
+
+          it 'make a get request to the tagging subresource' do
+            req = get_request(:get_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_tagging,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :tags => { 'foo' => 'bar', 'abc' => 'xyz' }
+            })
+          end
+
+        end
+
+        context '#delete_bucket_tagging' do
+
+          it 'make a delete request to the tagging subresource' do
+            req = get_request(:delete_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
       shared_examples_for "an s3 http request" do |verb|
 
         it_should_behave_like "an aws http request", verb

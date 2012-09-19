@@ -29,6 +29,8 @@ AWS::Core::Configuration.module_eval do
 
   add_option :s3_encryption_materials_location, :metadata
 
+  add_option :s3_encryption_matdesc, '{}'
+
   add_option :s3_storage_class, 'STANDARD'
 
 end

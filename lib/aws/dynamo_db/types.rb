@@ -68,7 +68,7 @@ module AWS
         cfg = self.respond_to?(:config) ? self.config :
           (options[:config] || AWS.config)
 
-        cfg.dynamo_db_big_decimals ? BigDecimal.new(number) : number.to_f
+        cfg.dynamo_db_big_decimals ?  BigDecimal.new(number.to_s) : number.to_f
 
       end
 
