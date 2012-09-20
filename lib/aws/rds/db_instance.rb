@@ -50,6 +50,17 @@ module AWS
         resp.data[:db_instances].find{|j| j[:db_instance_identifier] == db_instance_identifier }
       end
 
+      def snapshots
+        DBSnapshotCollection.new.db_instance(db_instance_identifier)
+      end
+
+      def create_snapshot name
+        options = {:db_instance_identifier => db_instance_identifier,
+                   :db_snapshot_identifier => name}
+        client.create_db_snapshot(options)
+        nil
+      end
+
       def reboot options={}
         options[:db_instance_identifier] = db_instance_identifier
         client.reboot_db_instance(options)
@@ -60,6 +71,11 @@ module AWS
         options[:db_instance_identifier] = db_instance_identifier
         client.delete_db_instance(options)
         nil
+      end
+
+      # @return [Boolean] Returns +true+ if the db instance exists.
+      def exists?
+        !get_resource.data[:db_instances].empty?
       end
 
       protected

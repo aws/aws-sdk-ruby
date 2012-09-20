@@ -28,10 +28,11 @@ module AWS
 
       protected
 
-      def _each_item marker, max_items, options = {}, &block
+      def _each_item marker, max_records, options = {}, &block
 
+        options = @filters.merge(options)
         options[:marker] = marker if marker
-        options[:max_items] = max_items if max_items
+        options[:max_records] = [[20,max_records].max,100].min if max_records
 
         response = client.describe_db_instances(@filters.merge(options))
         response.data[:db_instances].each do |details|

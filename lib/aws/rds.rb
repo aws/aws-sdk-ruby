@@ -24,6 +24,8 @@ module AWS
       autoload :Errors, 'errors'
       autoload :DBInstance, 'db_instance'
       autoload :DBInstanceCollection, 'db_instance_collection'
+      autoload :DBSnapshot, 'db_snapshot'
+      autoload :DBSnapshotCollection, 'db_snapshot_collection'
       autoload :Request, 'request'
     end
 
@@ -33,6 +35,11 @@ module AWS
       DBInstanceCollection.new(:config => config)
     end
     alias_method :instances, :db_instances
+
+    def db_snapshots
+      DBSnapshotCollection.new(:config => config)
+    end
+    alias_method :snapshots, :db_snapshots
 
   end
 end
