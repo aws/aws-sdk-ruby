@@ -428,20 +428,29 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :state
+      #   @option options [String] :mfa_delete
+      #   @option options [String] :mfa
       #   @return [Core::Response]
-      bucket_method(:set_bucket_versioning, :put, 'versioning') do
+      bucket_method(:set_bucket_versioning, :put, 'versioning', :header_options => { :mfa => "x-amz-mfa" }) do
 
         configure_request do |req, options|
           state = options[:state].to_s.downcase.capitalize
           unless state =~ /^(Enabled|Suspended)$/
             raise ArgumentError, "invalid versioning state `#{state}`"
           end
+
+          # Leave validation of MFA options to S3
+          mfa_delete = options[:mfa_delete].to_s.downcase.capitalize if options[:mfa_delete]
+
+          # Generate XML request for versioning
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.VersioningConfiguration('xmlns' => XMLNS) do
+              xml.Status(state)
+              xml.MfaDelete(mfa_delete) if mfa_delete
+            end
+          end.doc.root.to_xml
+
           super(req, options)
-          req.body = <<-XML.strip
-            <VersioningConfiguration xmlns="#{XMLNS}">
-              <Status>#{state}</Status>
-            </VersioningConfiguration>
-          XML
         end
 
       end
