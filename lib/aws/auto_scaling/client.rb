@@ -17,6 +17,8 @@ module AWS
     # Client class for Auto Scaling.
     class Client < Core::QueryClient
 
+      define_client_methods('2011-01-01')
+
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -35,8 +37,8 @@ module AWS
 
       ## client methods ##
 
+      # @!method create_auto_scaling_group(options = {})
       # Calls the CreateAutoScalingGroup API operation.
-      # @method create_auto_scaling_group(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:launch_configuration_name+ - *required* - (String)
@@ -58,8 +60,8 @@ module AWS
       #     * +:propagate_at_launch+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method create_launch_configuration(options = {})
       # Calls the CreateLaunchConfiguration API operation.
-      # @method create_launch_configuration(options = {})
       # @param [Hash] options
       #   * +:launch_configuration_name+ - *required* - (String)
       #   * +:image_id+ - *required* - (String)
@@ -81,8 +83,8 @@ module AWS
       #   * +:iam_instance_profile+ - (String)
       # @return [Core::Response]
 
+      # @!method create_or_update_tags(options = {})
       # Calls the CreateOrUpdateTags API operation.
-      # @method create_or_update_tags(options = {})
       # @param [Hash] options
       #   * +:tags+ - *required* - (Array<Hash>)
       #     * +:resource_id+ - (String)
@@ -92,42 +94,42 @@ module AWS
       #     * +:propagate_at_launch+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method delete_auto_scaling_group(options = {})
       # Calls the DeleteAutoScalingGroup API operation.
-      # @method delete_auto_scaling_group(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:force_delete+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method delete_launch_configuration(options = {})
       # Calls the DeleteLaunchConfiguration API operation.
-      # @method delete_launch_configuration(options = {})
       # @param [Hash] options
       #   * +:launch_configuration_name+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method delete_notification_configuration(options = {})
       # Calls the DeleteNotificationConfiguration API operation.
-      # @method delete_notification_configuration(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:topic_arn+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method delete_policy(options = {})
       # Calls the DeletePolicy API operation.
-      # @method delete_policy(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - (String)
       #   * +:policy_name+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method delete_scheduled_action(options = {})
       # Calls the DeleteScheduledAction API operation.
-      # @method delete_scheduled_action(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - (String)
       #   * +:scheduled_action_name+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method delete_tags(options = {})
       # Calls the DeleteTags API operation.
-      # @method delete_tags(options = {})
       # @param [Hash] options
       #   * +:tags+ - *required* - (Array<Hash>)
       #     * +:resource_id+ - (String)
@@ -137,8 +139,8 @@ module AWS
       #     * +:propagate_at_launch+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method describe_adjustment_types(options = {})
       # Calls the DescribeAdjustmentTypes API operation.
-      # @method describe_adjustment_types(options = {})
       # @param [Hash] options
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -146,8 +148,8 @@ module AWS
       #   * +:adjustment_types+ - (Array<Hash>)
       #     * +:adjustment_type+ - (String)
 
+      # @!method describe_auto_scaling_groups(options = {})
       # Calls the DescribeAutoScalingGroups API operation.
-      # @method describe_auto_scaling_groups(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_names+ - (Array<String>)
       #   * +:next_token+ - (String)
@@ -191,8 +193,8 @@ module AWS
       #       * +:propagate_at_launch+ - (Boolean)
       #   * +:next_token+ - (String)
 
+      # @!method describe_auto_scaling_instances(options = {})
       # Calls the DescribeAutoScalingInstances API operation.
-      # @method describe_auto_scaling_instances(options = {})
       # @param [Hash] options
       #   * +:instance_ids+ - (Array<String>)
       #   * +:max_records+ - (Integer)
@@ -209,16 +211,16 @@ module AWS
       #     * +:launch_configuration_name+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_auto_scaling_notification_types(options = {})
       # Calls the DescribeAutoScalingNotificationTypes API operation.
-      # @method describe_auto_scaling_notification_types(options = {})
       # @param [Hash] options
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:auto_scaling_notification_types+ - (Array<String>)
 
+      # @!method describe_launch_configurations(options = {})
       # Calls the DescribeLaunchConfigurations API operation.
-      # @method describe_launch_configurations(options = {})
       # @param [Hash] options
       #   * +:launch_configuration_names+ - (Array<String>)
       #   * +:next_token+ - (String)
@@ -249,8 +251,8 @@ module AWS
       #     * +:created_time+ - (Time)
       #   * +:next_token+ - (String)
 
+      # @!method describe_metric_collection_types(options = {})
       # Calls the DescribeMetricCollectionTypes API operation.
-      # @method describe_metric_collection_types(options = {})
       # @param [Hash] options
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -260,8 +262,8 @@ module AWS
       #   * +:granularities+ - (Array<Hash>)
       #     * +:granularity+ - (String)
 
+      # @!method describe_notification_configurations(options = {})
       # Calls the DescribeNotificationConfigurations API operation.
-      # @method describe_notification_configurations(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_names+ - (Array<String>)
       #   * +:next_token+ - (String)
@@ -275,8 +277,8 @@ module AWS
       #     * +:notification_type+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_policies(options = {})
       # Calls the DescribePolicies API operation.
-      # @method describe_policies(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - (String)
       #   * +:policy_names+ - (Array<String>)
@@ -298,8 +300,8 @@ module AWS
       #     * +:min_adjustment_step+ - (Integer)
       #   * +:next_token+ - (String)
 
+      # @!method describe_scaling_activities(options = {})
       # Calls the DescribeScalingActivities API operation.
-      # @method describe_scaling_activities(options = {})
       # @param [Hash] options
       #   * +:activity_ids+ - (Array<String>)
       #   * +:auto_scaling_group_name+ - (String)
@@ -321,8 +323,8 @@ module AWS
       #     * +:details+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_scaling_process_types(options = {})
       # Calls the DescribeScalingProcessTypes API operation.
-      # @method describe_scaling_process_types(options = {})
       # @param [Hash] options
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -330,8 +332,8 @@ module AWS
       #   * +:processes+ - (Array<Hash>)
       #     * +:process_name+ - (String)
 
+      # @!method describe_scheduled_actions(options = {})
       # Calls the DescribeScheduledActions API operation.
-      # @method describe_scheduled_actions(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - (String)
       #   * +:scheduled_action_names+ - (Array<String>)
@@ -355,8 +357,8 @@ module AWS
       #     * +:desired_capacity+ - (Integer)
       #   * +:next_token+ - (String)
 
+      # @!method describe_tags(options = {})
       # Calls the DescribeTags API operation.
-      # @method describe_tags(options = {})
       # @param [Hash] options
       #   * +:filters+ - (Array<Hash>)
       #     * +:name+ - (String)
@@ -374,39 +376,39 @@ module AWS
       #     * +:propagate_at_launch+ - (Boolean)
       #   * +:next_token+ - (String)
 
+      # @!method disable_metrics_collection(options = {})
       # Calls the DisableMetricsCollection API operation.
-      # @method disable_metrics_collection(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:metrics+ - (Array<String>)
       # @return [Core::Response]
 
+      # @!method enable_metrics_collection(options = {})
       # Calls the EnableMetricsCollection API operation.
-      # @method enable_metrics_collection(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:metrics+ - (Array<String>)
       #   * +:granularity+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method execute_policy(options = {})
       # Calls the ExecutePolicy API operation.
-      # @method execute_policy(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - (String)
       #   * +:policy_name+ - *required* - (String)
       #   * +:honor_cooldown+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method put_notification_configuration(options = {})
       # Calls the PutNotificationConfiguration API operation.
-      # @method put_notification_configuration(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:topic_arn+ - *required* - (String)
       #   * +:notification_types+ - *required* - (Array<String>)
       # @return [Core::Response]
 
+      # @!method put_scaling_policy(options = {})
       # Calls the PutScalingPolicy API operation.
-      # @method put_scaling_policy(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:policy_name+ - *required* - (String)
@@ -419,8 +421,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:policy_arn+ - (String)
 
+      # @!method put_scheduled_update_group_action(options = {})
       # Calls the PutScheduledUpdateGroupAction API operation.
-      # @method put_scheduled_update_group_action(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:scheduled_action_name+ - *required* - (String)
@@ -433,38 +435,38 @@ module AWS
       #   * +:desired_capacity+ - (Integer)
       # @return [Core::Response]
 
+      # @!method resume_processes(options = {})
       # Calls the ResumeProcesses API operation.
-      # @method resume_processes(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:scaling_processes+ - (Array<String>)
       # @return [Core::Response]
 
+      # @!method set_desired_capacity(options = {})
       # Calls the SetDesiredCapacity API operation.
-      # @method set_desired_capacity(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:desired_capacity+ - *required* - (Integer)
       #   * +:honor_cooldown+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method set_instance_health(options = {})
       # Calls the SetInstanceHealth API operation.
-      # @method set_instance_health(options = {})
       # @param [Hash] options
       #   * +:instance_id+ - *required* - (String)
       #   * +:health_status+ - *required* - (String)
       #   * +:should_respect_grace_period+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method suspend_processes(options = {})
       # Calls the SuspendProcesses API operation.
-      # @method suspend_processes(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:scaling_processes+ - (Array<String>)
       # @return [Core::Response]
 
+      # @!method terminate_instance_in_auto_scaling_group(options = {})
       # Calls the TerminateInstanceInAutoScalingGroup API operation.
-      # @method terminate_instance_in_auto_scaling_group(options = {})
       # @param [Hash] options
       #   * +:instance_id+ - *required* - (String)
       #   * +:should_decrement_desired_capacity+ - *required* - (Boolean)
@@ -483,8 +485,8 @@ module AWS
       #     * +:progress+ - (Integer)
       #     * +:details+ - (String)
 
+      # @!method update_auto_scaling_group(options = {})
       # Calls the UpdateAutoScalingGroup API operation.
-      # @method update_auto_scaling_group(options = {})
       # @param [Hash] options
       #   * +:auto_scaling_group_name+ - *required* - (String)
       #   * +:launch_configuration_name+ - (String)
@@ -500,8 +502,6 @@ module AWS
       # @return [Core::Response]
 
       ## end client methods ##
-
-      define_client_methods('2011-01-01')
 
     end
   end

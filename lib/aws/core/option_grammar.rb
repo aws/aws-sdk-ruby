@@ -112,11 +112,11 @@ module AWS
           end
 
           def encode_value(value)
-            Base64.encode64(value.to_s)
+            Base64.strict_encode64(value.to_s)
           end
 
           def hash_format(value)
-            Base64.encode64(value.to_s).strip
+            Base64.strict_encode64(value.to_s)
           end
 
         end

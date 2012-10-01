@@ -13,15 +13,19 @@
 
 module AWS
   class EMR
+
+    # Client class for Elastic MapReduce (EMR).
     class Client < Core::QueryClient
+
+      define_client_methods('2009-03-31')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
 
       ## client methods ##
 
+      # @!method add_instance_groups(options = {})
       # Calls the AddInstanceGroups API operation.
-      # @method add_instance_groups(options = {})
       # @param [Hash] options
       #   * +:instance_groups+ - *required* - (Array<Hash>) Instance Groups to
       #     add.
@@ -45,8 +49,8 @@ module AWS
       #   * +:job_flow_id+ - (String)
       #   * +:instance_group_ids+ - (Array<String>)
 
+      # @!method add_job_flow_steps(options = {})
       # Calls the AddJobFlowSteps API operation.
-      # @method add_job_flow_steps(options = {})
       # @param [Hash] options
       #   * +:job_flow_id+ - *required* - (String) A string that uniquely
       #     identifies the job flow. This identifier is returned by RunJobFlow
@@ -72,8 +76,8 @@ module AWS
       #         passed to the JAR file's main function when executed.
       # @return [Core::Response]
 
+      # @!method describe_job_flows(options = {})
       # Calls the DescribeJobFlows API operation.
-      # @method describe_job_flows(options = {})
       # @param [Hash] options
       #   * +:created_after+ - (String<ISO8601 datetime>) Return only job flows
       #     created after this date and time.
@@ -152,8 +156,8 @@ module AWS
       #           * +:args+ - (Array<String>)
       #     * +:supported_products+ - (Array<String>)
 
+      # @!method modify_instance_groups(options = {})
       # Calls the ModifyInstanceGroups API operation.
-      # @method modify_instance_groups(options = {})
       # @param [Hash] options
       #   * +:instance_groups+ - (Array<Hash>) Instance groups to change.
       #     * +:instance_group_id+ - *required* - (String) Unique ID of the
@@ -162,8 +166,8 @@ module AWS
       #       instance group.
       # @return [Core::Response]
 
+      # @!method run_job_flow(options = {})
       # Calls the RunJobFlow API operation.
-      # @method run_job_flow(options = {})
       # @param [Hash] options
       #   * +:name+ - *required* - (String) The name of the job flow.
       #   * +:log_uri+ - (String) Specifies the location in Amazon S3 to write
@@ -271,8 +275,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
 
+      # @!method set_termination_protection(options = {})
       # Calls the SetTerminationProtection API operation.
-      # @method set_termination_protection(options = {})
       # @param [Hash] options
       #   * +:job_flow_ids+ - *required* - (Array<String>) A list of strings
       #     that uniquely identify the job flows to protect. This identifier is
@@ -284,16 +288,14 @@ module AWS
       #     user intervention, or job-flow error.
       # @return [Core::Response]
 
+      # @!method terminate_job_flows(options = {})
       # Calls the TerminateJobFlows API operation.
-      # @method terminate_job_flows(options = {})
       # @param [Hash] options
       #   * +:job_flow_ids+ - *required* - (Array<String>) A list of job flows
       #     to be shutdown.
       # @return [Core::Response]
 
       ## end client methods ##
-
-      define_client_methods('2009-03-31')
 
     end
   end

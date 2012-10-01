@@ -13,15 +13,19 @@
 
 module AWS
   class Route53
+
+    # Client class for Route53.
     class Client < Core::RESTClient
+
+      define_client_methods('2012-02-29')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
 
       ## client methods ##
 
+      # @!method change_resource_record_sets(options = {})
       # Calls the POST ChangeResourceRecordSets API operation.
-      # @method change_resource_record_sets(options = {})
       # @param [Hash] options
       # * +:hosted_zone_id+ - *required* - (String) Alias resource record sets
       #   only: The value of the hosted zone ID, CanonicalHostedZoneNameId, for
@@ -93,8 +97,8 @@ module AWS
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
 
+      # @!method create_hosted_zone(options = {})
       # Calls the POST CreateHostedZone API operation.
-      # @method create_hosted_zone(options = {})
       # @param [Hash] options
       # * +:name+ - *required* - (String) The name of the domain. This must be
       #   a fully-specified domain, for example, www.example.com. The trailing
@@ -137,8 +141,8 @@ module AWS
       #   * +:delegation_set+ - (Hash)
       #     * +:name_servers+ - (Array<String>)
 
+      # @!method delete_hosted_zone(options = {})
       # Calls the DELETE DeleteHostedZone API operation.
-      # @method delete_hosted_zone(options = {})
       # @param [Hash] options
       # * +:id+ - *required* - (String) The ID of the request. Include this ID
       #   in a call to GetChange to track when the change has propagated to all
@@ -152,8 +156,8 @@ module AWS
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
 
+      # @!method get_change(options = {})
       # Calls the GET GetChange API operation.
-      # @method get_change(options = {})
       # @param [Hash] options
       # * +:id+ - *required* - (String) The ID of the change batch request. The
       #   value that you specify here is the value that
@@ -168,8 +172,8 @@ module AWS
       #     * +:submitted_at+ - (Time)
       #     * +:comment+ - (String)
 
+      # @!method get_hosted_zone(options = {})
       # Calls the GET GetHostedZone API operation.
-      # @method get_hosted_zone(options = {})
       # @param [Hash] options
       # * +:id+ - *required* - (String) The ID of the hosted zone for which you
       #   want to get a list of the name servers in the delegation set.
@@ -186,8 +190,8 @@ module AWS
       #   * +:delegation_set+ - (Hash)
       #     * +:name_servers+ - (Array<String>)
 
+      # @!method list_hosted_zones(options = {})
       # Calls the GET ListHostedZones API operation.
-      # @method list_hosted_zones(options = {})
       # @param [Hash] options
       # * +:marker+ - (String) If the request returned more than one page of
       #   results, submit another request and specify the value of NextMarker
@@ -210,8 +214,8 @@ module AWS
       #   * +:next_marker+ - (String)
       #   * +:max_items+ - (Integer)
 
+      # @!method list_resource_record_sets(options = {})
       # Calls the GET ListResourceRecordSets API operation.
-      # @method list_resource_record_sets(options = {})
       # @param [Hash] options
       # * +:hosted_zone_id+ - *required* - (String) The ID of the hosted zone
       #   that contains the resource record sets that you want to get.
@@ -254,8 +258,6 @@ module AWS
       #   * +:max_items+ - (Integer)
 
       ## end client methods ##
-
-      define_client_methods('2012-02-29')
 
     end
   end

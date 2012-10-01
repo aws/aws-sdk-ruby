@@ -17,6 +17,8 @@ module AWS
     # Client class for AWS Security Token Service (STS).
     class Client < Core::QueryClient
 
+      define_client_methods('2011-06-15')
+
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @private
@@ -33,8 +35,8 @@ module AWS
 
       ## client methods ##
 
+      # @!method get_federation_token(options = {})
       # Calls the GetFederationToken API operation.
-      # @method get_federation_token(options = {})
       # @param [Hash] options
       #   * +:name+ - *required* - (String) The name of the federated user
       #     associated with the credentials. For information about limitations
@@ -64,8 +66,8 @@ module AWS
       #     * +:arn+ - (String)
       #   * +:packed_policy_size+ - (Integer)
 
+      # @!method get_session_token(options = {})
       # Calls the GetSessionToken API operation.
-      # @method get_session_token(options = {})
       # @param [Hash] options
       #   * +:duration_seconds+ - (Integer) The duration, in seconds, that the
       #     credentials should remain valid. Acceptable durations for IAM user
@@ -98,8 +100,6 @@ module AWS
       #     * +:expiration+ - (Time)
 
       ## end client methods ##
-
-      define_client_methods('2011-06-15')
 
     end
   end

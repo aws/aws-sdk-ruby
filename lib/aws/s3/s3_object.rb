@@ -1201,7 +1201,7 @@ module AWS
 
       # @return [Boolean]
       def should_decrypt? options
-        options[:encryption_key]
+        options[:encryption_key] or config.s3_encryption_key
       end
 
       # A small wrapper around client#get_object
@@ -1453,7 +1453,7 @@ module AWS
           cipher =
           decryption_materials(location) do |envelope_key, envelope_iv|
             envelope_key, envelope_iv =
-              decode_envelope_key(envelope_key, envelope_iv, options)
+              decode_envelope_key(envelope_key, envelope_iv, encryption_key)
             get_aes_cipher(:decrypt, :CBC, envelope_key, envelope_iv)
           end
 
@@ -1465,10 +1465,10 @@ module AWS
       end
 
       # Decodes the envelope key for decryption
-      def decode_envelope_key envelope_key, envelope_iv, options
+      def decode_envelope_key envelope_key, envelope_iv, encryption_key
         decrypted_key =
         begin
-          decrypt(decode64(envelope_key), options[:encryption_key])
+          decrypt(decode64(envelope_key), encryption_key)
         rescue RuntimeError
           msg = "Master key used to decrypt data key is not correct."
           raise AWS::S3::Errors::IncorrectClientSideEncryptionKey, msg

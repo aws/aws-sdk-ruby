@@ -17,6 +17,8 @@ module AWS
     # Client class for AWS CloudFormation.
     class Client < Core::QueryClient
 
+      define_client_methods('2010-05-15')
+
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -35,8 +37,8 @@ module AWS
 
       ## client methods ##
 
+      # @!method create_stack(options = {})
       # Calls the CreateStack API operation.
-      # @method create_stack(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       #   * +:template_body+ - (String)
@@ -54,22 +56,22 @@ module AWS
       #   a hash with the following structure:
       #   * +:stack_id+ - (String)
 
+      # @!method create_upload_bucket(options = {})
       # Calls the CreateUploadBucket API operation.
-      # @method create_upload_bucket(options = {})
       # @param [Hash] options
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:bucket_name+ - (String)
 
+      # @!method delete_stack(options = {})
       # Calls the DeleteStack API operation.
-      # @method delete_stack(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method describe_stack_events(options = {})
       # Calls the DescribeStackEvents API operation.
-      # @method describe_stack_events(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - (String)
       #   * +:next_token+ - (String)
@@ -89,8 +91,8 @@ module AWS
       #     * +:resource_properties+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_stack_resource(options = {})
       # Calls the DescribeStackResource API operation.
-      # @method describe_stack_resource(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       #   * +:logical_resource_id+ - *required* - (String)
@@ -109,8 +111,8 @@ module AWS
       #     * +:description+ - (String)
       #     * +:metadata+ - (String)
 
+      # @!method describe_stack_resources(options = {})
       # Calls the DescribeStackResources API operation.
-      # @method describe_stack_resources(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - (String)
       #   * +:logical_resource_id+ - (String)
@@ -129,8 +131,8 @@ module AWS
       #     * +:resource_status_reason+ - (String)
       #     * +:description+ - (String)
 
+      # @!method describe_stacks(options = {})
       # Calls the DescribeStacks API operation.
-      # @method describe_stacks(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - (String)
       # @return [Core::Response]
@@ -156,8 +158,8 @@ module AWS
       #       * +:output_value+ - (String)
       #       * +:description+ - (String)
 
+      # @!method estimate_template_cost(options = {})
       # Calls the EstimateTemplateCost API operation.
-      # @method estimate_template_cost(options = {})
       # @param [Hash] options
       #   * +:template_body+ - (String)
       #   * +:template_url+ - (String)
@@ -169,8 +171,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:url+ - (String)
 
+      # @!method get_template(options = {})
       # Calls the GetTemplate API operation.
-      # @method get_template(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       # @return [Core::Response]
@@ -178,8 +180,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:template_body+ - (String)
 
+      # @!method list_stack_resources(options = {})
       # Calls the ListStackResources API operation.
-      # @method list_stack_resources(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       #   * +:next_token+ - (String)
@@ -195,8 +197,8 @@ module AWS
       #     * +:resource_status_reason+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method list_stacks(options = {})
       # Calls the ListStacks API operation.
-      # @method list_stacks(options = {})
       # @param [Hash] options
       #   * +:next_token+ - (String)
       #   * +:stack_status_filter+ - (Array<String>)
@@ -214,8 +216,8 @@ module AWS
       #     * +:stack_status_reason+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method update_stack(options = {})
       # Calls the UpdateStack API operation.
-      # @method update_stack(options = {})
       # @param [Hash] options
       #   * +:stack_name+ - *required* - (String)
       #   * +:template_body+ - (String)
@@ -229,8 +231,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:stack_id+ - (String)
 
+      # @!method validate_template(options = {})
       # Calls the ValidateTemplate API operation.
-      # @method validate_template(options = {})
       # @param [Hash] options
       #   * +:template_body+ - (String)
       #   * +:template_url+ - (String)
@@ -247,8 +249,6 @@ module AWS
       #   * +:capabilities_reason+ - (String)
 
       ## end client methods ##
-
-      define_client_methods('2010-05-15')
 
     end
   end

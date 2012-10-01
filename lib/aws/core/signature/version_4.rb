@@ -104,7 +104,7 @@ module AWS
 
         def canonical_header_values values
           values = [values] unless values.is_a?(Array)
-          values.map(&:to_s).map(&:strip).join(',')
+          values.map(&:to_s).join(',').gsub(/\s+/, ' ').strip
         end
 
         def hex16 string

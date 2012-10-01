@@ -17,6 +17,8 @@ module AWS
     # Client class for Amazon DynamoDB.
     class Client < Core::JSONClient
 
+      define_client_methods('2011-12-05')
+
       # @private
       REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
 
@@ -25,8 +27,8 @@ module AWS
 
       ## client methods ##
 
+      # @!method batch_get_item(options = {})
       # Calls the BatchGetItem API operation.
-      # @method batch_get_item(options = {})
       # @param [Hash] options
       #   * +:request_items+ - *required* - (Hash<String,Hash>)
       #     * +:keys+ - *required* - (Array<Hash>)
@@ -94,8 +96,8 @@ module AWS
       #         * +BS+ - (Array<Blob>)
       #     * +AttributesToGet+ - (Array<String>)
 
+      # @!method batch_write_item(options = {})
       # Calls the BatchWriteItem API operation.
-      # @method batch_write_item(options = {})
       # @param [Hash] options
       #   * +:request_items+ - *required* - (Hash<String,Array<Hash>>) A map of
       #     table name to list-of-write-requests. Used as input to the
@@ -181,8 +183,8 @@ module AWS
       #             * +NS+ - (Array<String>)
       #             * +BS+ - (Array<Blob>)
 
+      # @!method create_table(options = {})
       # Calls the CreateTable API operation.
-      # @method create_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to create. Allowed characters are a-z, A-Z, 0-9, _
@@ -237,8 +239,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method delete_item(options = {})
       # Calls the DeleteItem API operation.
-      # @method delete_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to delete an item. Allowed characters are a-z, A-Z,
@@ -307,8 +309,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method delete_table(options = {})
       # Calls the DeleteTable API operation.
-      # @method delete_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to delete. Allowed characters are a-z, A-Z, 0-9, _
@@ -335,8 +337,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method describe_table(options = {})
       # Calls the DescribeTable API operation.
-      # @method describe_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to describe. Allowed characters are a-z, A-Z, 0-9, _
@@ -363,8 +365,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method get_item(options = {})
       # Calls the GetItem API operation.
-      # @method get_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to get an item. Allowed characters are a-z, A-Z,
@@ -417,8 +419,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method list_tables(options = {})
       # Calls the ListTables API operation.
-      # @method list_tables(options = {})
       # @param [Hash] options
       #   * +:exclusive_start_table_name+ - (String) The name of the table that
       #     starts the list. If you already ran a ListTables operation and
@@ -431,8 +433,8 @@ module AWS
       #   * +TableNames+ - (Array<String>)
       #   * +LastEvaluatedTableName+ - (String)
 
+      # @!method put_item(options = {})
       # Calls the PutItem API operation.
-      # @method put_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to put an item. Allowed characters are a-z, A-Z,
@@ -480,8 +482,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method query(options = {})
       # Calls the Query API operation.
-      # @method query(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to query. Allowed characters are a-z, A-Z, 0-9, _
@@ -603,8 +605,8 @@ module AWS
       #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method scan(options = {})
       # Calls the Scan API operation.
-      # @method scan(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to scan. Allowed characters are a-z, A-Z, 0-9, _
@@ -707,8 +709,8 @@ module AWS
       #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method update_item(options = {})
       # Calls the UpdateItem API operation.
-      # @method update_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to update an item. Allowed characters are a-z, A-Z,
@@ -792,8 +794,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method update_table(options = {})
       # Calls the UpdateTable API operation.
-      # @method update_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to update. Allowed characters are a-z, A-Z, 0-9, _
@@ -870,8 +872,6 @@ module AWS
         end
 
       end
-
-      define_client_methods('2011-12-05')
 
     end
   end

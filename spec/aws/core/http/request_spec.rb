@@ -229,6 +229,23 @@ module AWS::Core
 
         end
 
+        it 'populates content-length when you set the body' do
+          r = Request.new
+          r.body = 'abc'
+          r.headers['content-length'].should eq(3)
+        end
+
+        it 'sets the content length to the body bytesize' do
+
+          string = double('body-string')
+          string.should_receive(:bytesize).and_return(4)
+
+          r = Request.new
+          r.body = string
+          r.headers['content-length'].should eq(4)
+
+        end
+
       end
 
       context '#body_stream' do

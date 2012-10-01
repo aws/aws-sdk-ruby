@@ -17,6 +17,8 @@ module AWS
     # Client class for Amazon SimpleDB.
     class Client < Core::QueryClient
 
+      define_client_methods('2009-04-15')
+
       # @private
       REGION_US_E1 = 'sdb.amazonaws.com'
 
@@ -54,8 +56,8 @@ module AWS
 
       ## client methods ##
 
+      # @!method batch_delete_attributes(options = {})
       # Calls the BatchDeleteAttributes API operation.
-      # @method batch_delete_attributes(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain in
       #     which the attributes are being deleted.
@@ -72,8 +74,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method batch_put_attributes(options = {})
       # Calls the BatchPutAttributes API operation.
-      # @method batch_put_attributes(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain in
       #     which the attributes are being stored.
@@ -96,8 +98,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method create_domain(options = {})
       # Calls the CreateDomain API operation.
-      # @method create_domain(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain to
       #     create. The name can range between 3 and 255 characters and can
@@ -109,8 +111,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method delete_attributes(options = {})
       # Calls the DeleteAttributes API operation.
-      # @method delete_attributes(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain in
       #     which to perform the operation.
@@ -143,8 +145,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method delete_domain(options = {})
       # Calls the DeleteDomain API operation.
-      # @method delete_domain(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain to
       #     delete.
@@ -155,8 +157,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method domain_metadata(options = {})
       # Calls the DomainMetadata API operation.
-      # @method domain_metadata(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain for
       #     which to display the metadata of.
@@ -174,8 +176,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method get_attributes(options = {})
       # Calls the GetAttributes API operation.
-      # @method get_attributes(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain in
       #     which to perform the operation.
@@ -198,8 +200,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method list_domains(options = {})
       # Calls the ListDomains API operation.
-      # @method list_domains(options = {})
       # @param [Hash] options
       #   * +:max_number_of_domains+ - (Integer) The maximum number of domain
       #     names you want returned. The range is 1 to 100. The default setting
@@ -215,8 +217,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method put_attributes(options = {})
       # Calls the PutAttributes API operation.
-      # @method put_attributes(options = {})
       # @param [Hash] options
       #   * +:domain_name+ - *required* - (String) The name of the domain in
       #     which to perform the operation.
@@ -250,8 +252,8 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
+      # @!method select(options = {})
       # Calls the Select API operation.
-      # @method select(options = {})
       # @param [Hash] options
       #   * +:select_expression+ - *required* - (String) The expression used to
       #     query the domain.
@@ -279,8 +281,6 @@ module AWS
       #     * +:response_id+ - (String)
 
       ## end client methods ##
-
-      define_client_methods('2009-04-15')
 
     end
   end

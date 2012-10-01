@@ -92,7 +92,7 @@ Feature: DynamoDB items
       "features" => ["tail", "night vision"],
       "ranks" => [12.3, BigDecimal("21.4179232578941663312")],
       "data" => [
-        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('a' * 200),
         AWS::DynamoDB::Binary.new('b'),
       ],
     }
@@ -108,13 +108,12 @@ Feature: DynamoDB items
         BigDecimal("21.4179232578941663312"),
       ]),
       "data" => Set.new([
-        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('a' * 200),
         AWS::DynamoDB::Binary.new('b'),
       ]),
     }
     """
 
-  @foo
   Scenario: Disabling BigDecimal conversion for number attributes
     Given I configure dynamo DB to not convert numbers to big decimal
     And I have an empty DynamoDB table with options:

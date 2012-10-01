@@ -160,7 +160,7 @@ module AWS
         def body= body
           @body = body
           if body
-            headers['content-length'] = body.size if body
+            headers['content-length'] = body.bytesize if body
           else
             headers.delete('content-length')
           end
