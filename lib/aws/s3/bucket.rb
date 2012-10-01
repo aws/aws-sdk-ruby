@@ -286,20 +286,42 @@ module AWS
       end
 
       # Enables versioning on this bucket.
+      #
+      # @option opts [String] :mfa_delete Set to 'Enabled' or 'Disabled'
+      #   to control the state of MFA delete on the bucket versioning.
+      #   Setting this option requires the :mfa option to also be set.
+      #
+      # @option opts [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
       # @return [nil]
-      def enable_versioning
+      def enable_versioning(opts = {})
         client.set_bucket_versioning(
           :bucket_name => @name,
-          :state => :enabled)
+          :state       => :enabled,
+          :mfa_delete  => opts[:mfa_delete],
+          :mfa         => opts[:mfa])
         nil
       end
 
       # Suspends versioning on this bucket.
+      #
+      # @option opts [String] :mfa_delete Set to 'Enabled' or 'Disabled'
+      #   to control the state of MFA delete on the bucket versioning.
+      #   Setting this option requires the :mfa option to also be set.
+      #
+      # @option opts [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
       # @return [nil]
-      def suspend_versioning
+      def suspend_versioning(opts = {})
         client.set_bucket_versioning(
           :bucket_name => @name,
-          :state => :suspended)
+          :state       => :suspended,
+          :mfa_delete  => opts[:mfa_delete],
+          :mfa         => opts[:mfa])
         nil
       end
 
