@@ -11,7 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'base64'
 require 'bigdecimal'
 require 'json'
 
@@ -112,11 +111,11 @@ module AWS
           end
 
           def encode_value(value)
-            Base64.strict_encode64(value.to_s)
+            [value.to_s].pack("m0").gsub("\n", '')
           end
 
           def hash_format(value)
-            Base64.strict_encode64(value.to_s)
+            [value.to_s].pack("m0").gsub("\n", '')
           end
 
         end
