@@ -21,5 +21,6 @@ task :scan do
     puts "*** Possible credentials in gem files ***"
     puts "***                                   ***"
     puts matches
+    exit(1)
   end
 end
