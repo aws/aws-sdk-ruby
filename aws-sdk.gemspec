@@ -1,3 +1,5 @@
+$:.unshift(File.dirname(__FILE__) + '/lib')
+require 'aws/core'
 Gem::Specification.new do |s|
   s.name = 'aws-sdk'
   s.version = AWS::VERSION
@@ -12,14 +14,14 @@ Gem::Specification.new do |s|
   s.add_dependency('nokogiri', '>= 1.4.4')
   s.add_dependency('json', '~> 1.4')
 
-  s.files = FileList[
+  s.files = [
     'ca-bundle.crt',
     'rails/init.rb',    # for compatability with older versions of rails
-    'lib/**/*.rb',
-    'lib/**/*.yml',
     '.yardopts',
     'README.rdoc',
     'NOTICE.txt',
     'LICENSE.txt',
   ]
+  s.files += Dir['lib/**/*.rb']
+  s.files += Dir['lib/**/*.yml']
 end
