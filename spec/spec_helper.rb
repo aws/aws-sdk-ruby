@@ -15,7 +15,7 @@ begin
   require 'simplecov'
   SimpleCov.start
 rescue LoadError
-end
+end if ENV['COVERAGE']
 
 $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
