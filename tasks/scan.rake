@@ -13,6 +13,7 @@
 
 require 'secret_scanner'
 
+desc 'Scan code for possible credentials'
 task :scan do
   matches = SecretScanner.scan_dirs('.')
   unless matches.empty?
