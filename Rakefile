@@ -25,3 +25,5 @@ require 'aws/core' # for the version number
 Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file
 end
+
+task :default => :spec
