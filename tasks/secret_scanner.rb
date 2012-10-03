@@ -51,23 +51,23 @@ module SecretScanner
     'lib/aws/iam/signing_certificate_collection.rb',
   ]
 
-  def self.scan_dirs *directories
+  def self.scan_dirs(directories, regexes = [CERTIFICATE, ACCESS_KEY_ID_REGEX], whitelists = WHITELIST_FILES)
     matches = []
-    directories.each do |dir_path|
+    [directories].flatten.each do |dir_path|
       matches += scan_files(Dir.glob("#{dir_path}/**/*"))
     end
     matches
   end
 
-  def self.scan_files file_paths
+  def self.scan_files(file_paths, regexes = [CERTIFICATE, ACCESS_KEY_ID_REGEX], whitelists = WHITELIST_FILES)
 
     matches = []
 
-    file_paths.each do |file_path|
+    [file_paths].flatten.each do |file_path|
 
       next if File.directory?(file_path)
 
-      next if WHITELIST_FILES.any?{|path| file_path =~ /#{path}$/ }
+      next if whitelists.any?{|path| file_path =~ /#{path}$/ }
 
       file = File.read(file_path)
       begin
@@ -76,7 +76,7 @@ module SecretScanner
         next # don't bother scanning files that can't be split (e.g. images)
       end
 
-      [CERTIFICATE, ACCESS_KEY_ID_REGEX, SECRET_ACCESS_KEY_REGEX].each do |regex|
+      regexes.each do |regex|
         unless (matched_lines = lines.grep(regex)).empty?
           matched_lines.each do |line|
             next if WHITELIST_PATTERNS.any?{|pattern| line =~ pattern }
