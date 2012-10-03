@@ -1,0 +1,40 @@
+2012-10-03 Loren Segal <lsegal@amazon.com>
+
+  * LICENSE.txt, NOTICE.txt: Remove NOTICE.txt; only LICENSE.txt is needed.
+
+  Apache License 2.0 is still being used.
+
+  * tasks/secret_scanner.rb: Make secret scanning configurable
+
+2012-10-02 Loren Segal <lsegal@amazon.com>
+
+  * Rakefile: Set default rake task to unit tests
+
+  * tasks/gems.rake: Gems tasks no longer necessary
+
+  * lib/aws/core.rb, lib/aws/version.rb: Move AWS::VERSION to separate file
+
+  * .gitignore: Ignore .gem files from repository
+
+  * spec/spec_helper.rb: Only use simplecov if COVERAGE env is set
+
+  * aws-sdk.gemspec: Fix gemspec
+
+  * aws-sdk.gemspec: Add gemspec
+
+  * tasks/scan.rake: Exit with nonzero status if scan finds matches
+
+  * .gitignore: Add .gitignore
+
+  * tasks/scan.rake: Name secret scanner task
+
+2012-10-01 Diego Elio Pettenò <flameeyes@flameeyes.eu>
+
+  * spec/aws/s3/client_spec.rb: spec: do not compare data that can be
+  differently sorter on Ruby 1.8
+
+  * lib/aws/core/option_grammar.rb: Replace Ruby 1.9-specific syntax with
+  syntax working for 1.8 as well.
+
+  While it's less arcane, the 1.9-specific syntax break compatibility
+  for nothing more than a function name.
