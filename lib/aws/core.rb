@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'aws/version'
 require 'aws/core/autoloader'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
@@ -67,9 +68,6 @@ require 'aws/core/autoloader'
 # each Rails environment).
 #
 module AWS
-
-  # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.8"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
