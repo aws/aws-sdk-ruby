@@ -4,6 +4,7 @@
 /.yardoc
 /coverage
 /pkg
+*.gem
 
 # credentials for testing features against live services
 /.ruby_sdk_test_config.yml
