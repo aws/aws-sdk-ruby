@@ -361,9 +361,12 @@ module AWS
       #   if you use client-side encryption and the encryption materials
       #   were stored in a separate object in S3 (key.instruction).
       #
+      # @option [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
       # @return [nil]
       def delete options = {}
-
         client.delete_object(options.merge(
           :bucket_name => bucket.name,
           :key => key))

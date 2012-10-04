@@ -170,6 +170,12 @@ module AWS
           version.delete
         end
 
+        it 'should call delete on the object with mfa credentials if specified' do
+          object.should_receive(:delete).
+            with(hash_including(:mfa => '123456 7890'))
+          version.delete(:mfa => '123456 7890')
+        end
+
       end
 
       context '#read' do

@@ -953,8 +953,9 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [String] :version_id
+      #   @option options [String] :mfa
       #   @return [Core::Response]
-      object_method(:delete_object, :delete) do
+      object_method(:delete_object, :delete, :header_options => { :mfa => "x-amz-mfa" }) do
 
         configure_request do |req, options|
           super(req, options)
