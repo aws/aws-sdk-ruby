@@ -3718,13 +3718,12 @@
         - :boolean
         SecurityGroup:
         - :list:
-          - :structure:
-              GroupName:
-              - :string
-              - :rename: GroupName
-              GroupId:
-              - :string
+          - :string
         - :rename: SecurityGroups
+        SecurityGroupId:
+        - :list:
+          - :string
+        - :rename: SecurityGroupIds
   :outputs:
     :children:
       spotInstanceRequestSet:

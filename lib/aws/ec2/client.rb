@@ -3078,9 +3078,8 @@ module AWS
       #       * +:arn+ - (String)
       #       * +:name+ - (String)
       #     * +:ebs_optimized+ - (Boolean)
-      #     * +:security_groups+ - (Array<Hash>)
-      #       * +:group_name+ - (String)
-      #       * +:group_id+ - (String)
+      #     * +:security_groups+ - (Array<String>)
+      #     * +:security_group_ids+ - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
