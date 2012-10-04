@@ -1,4 +1,17 @@
+2012-10-04 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/version.rb: Bump version to 1.6.9
+
+  * .yardopts, aws-sdk.gemspec: Removed NOTICE.txt from gem specification and
+  yardopts.
+
+  * lib/aws/api_config/EC2-2012-07-20.yml, lib/aws/ec2/client.rb: Resolved an
+  issue with specifying security groups while requesting spot instances with
+  AWS::EC2::Client.
+
 2012-10-03 Loren Segal <lsegal@amazon.com>
+
+  * ChangeLog: Add ChangeLog
 
   * LICENSE.txt, NOTICE.txt: Remove NOTICE.txt; only LICENSE.txt is needed.
 
