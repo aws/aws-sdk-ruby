@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
     'rails/init.rb',    # for compatability with older versions of rails
     '.yardopts',
     'README.rdoc',
-    'NOTICE.txt',
     'LICENSE.txt',
   ]
   s.files += Dir['lib/**/*.rb']
