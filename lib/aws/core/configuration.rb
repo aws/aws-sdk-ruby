@@ -138,6 +138,9 @@ module AWS
     # @attr_reader [URI,nil] route_53_endpoint ('route53.amazonaws.com')
     #   The service endpoint for Amazon Route 53.
     #
+    # @attr_reader [URI,nil] rds_endpoint ('rds.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Relational Database Service (RDS).
+    #
     # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
     #   The service endpoint for Amazon S3.
     #

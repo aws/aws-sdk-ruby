@@ -32,6 +32,7 @@ require 'aws/core/autoloader'
 # * {AWS::ELB}
 # * {AWS::EMR}
 # * {AWS::IAM}
+# * {AWS::RDS}
 # * {AWS::Route53}
 # * {AWS::S3}
 # * {AWS::SNS}
@@ -321,11 +322,14 @@ module AWS
     #
     #       AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
     #
-    # @option options [String] :s3_endpoint ('s3.amazonaws.com') The
-    #   service endpoint for Amazon S3.
+    # @option options [String] :rds_endpoint ('rds.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Relational Database Service (RDS).
     #
     # @option options [String] :route_53_endpoint ('route53.amazonaws.com')
     #   The service endpoint for Amazon Route 53.
+    #
+    # @option options [String] :s3_endpoint ('s3.amazonaws.com') The
+    #   service endpoint for Amazon S3.
     #
     # @option options [Boolean] :s3_force_path_style (false) When
     #   +true+, requests will always use path style.  This can be useful
