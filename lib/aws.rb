@@ -15,6 +15,7 @@ require 'aws/core'
 
 require 'aws/auto_scaling/config'
 require 'aws/cloud_formation/config'
+require 'aws/cloud_search/config'
 require 'aws/cloud_watch/config'
 require 'aws/dynamo_db/config'
 require 'aws/ec2/config'
@@ -34,6 +35,7 @@ module AWS
   register_autoloads(self) do
     autoload :AutoScaling, 'auto_scaling'
     autoload :CloudFormation, 'cloud_formation'
+    autoload :CloudSearch, 'cloud_search'
     autoload :CloudWatch, 'cloud_watch'
     autoload :DynamoDB, 'dynamo_db'
     autoload :EC2, 'ec2'

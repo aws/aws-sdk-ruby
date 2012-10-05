@@ -69,6 +69,9 @@ module AWS
     # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @attr_reader [String] cloud_search ('cloudsearch.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudSearch.
+    #
     # @attr_reader [String] cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
     #

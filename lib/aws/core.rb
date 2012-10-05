@@ -23,6 +23,7 @@ require 'aws/core/autoloader'
 #
 # * {AWS::AutoScaling}
 # * {AWS::CloudFormation}
+# * {AWS::CloudSearch}
 # * {AWS::CloudWatch}
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
@@ -220,6 +221,9 @@ module AWS
     #
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
+    #
+    # @option options [String] :cloud_search ('cloudsearch.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudSearch.
     #
     # @option options [String] :cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
