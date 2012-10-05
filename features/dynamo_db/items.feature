@@ -114,6 +114,14 @@ Feature: DynamoDB items
     }
     """
 
+  Scenario: Uploading a small image as a binary attribute
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string } }
+    """
+    When I put an item with an image as a binary attribute
+    Then the item's binary attribute should match the image.
+
   Scenario: Disabling BigDecimal conversion for number attributes
     Given I configure dynamo DB to not convert numbers to big decimal
     And I have an empty DynamoDB table with options:

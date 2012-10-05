@@ -76,3 +76,16 @@ end
 When /^I list DynamoDB items with a limit of (\d+) and batch_size of (\d+)$/ do |limit, batch|
   @table.items.each(:limit => limit.to_i, :batch_size => batch.to_i) { |i| }
 end
+
+When /^I put an item with an image as a binary attribute$/ do
+  File.open(File.dirname(__FILE__) + '/img.jpg', 'rb') do |file|
+    data = AWS::DynamoDB::Binary.new(file.read)
+    @item = @table.items.put('id' => 'image', 'data' => data)
+  end
+end
+
+Then /^the item's binary attribute should match the image\.$/ do
+  File.open(File.dirname(__FILE__) + '/img.jpg', 'rb') do |file|
+    @item.attributes['data'].should eq(file.read)
+  end
+end
