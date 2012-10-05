@@ -357,6 +357,22 @@ module AWS
 
       end
 
+      context '#set_visible_to_all_users' do
+
+        it 'calls #set_visible_to_all_users on the client' do
+
+          state = double('state')
+
+          client.should_receive(:set_visible_to_all_users).with(
+              :visible_to_all_users => state,
+              :job_flow_ids => [job_flow_id])
+
+          job_flow.set_visible_to_all_users(state)
+
+        end
+
+      end
+
       context '#terminate' do
 
         it 'should call #terminate_job_flows on the client' do
