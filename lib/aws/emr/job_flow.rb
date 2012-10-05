@@ -268,6 +268,16 @@ module AWS
         nil
       end
 
+      # @param [Boolean] state
+      # @return [nil]
+      def set_visible_to_all_users state
+        options = {}
+        options[:visible_to_all_users] = state
+        options[:job_flow_ids] = [job_flow_id]
+        client.set_visible_to_all_users(options)
+        nil
+      end
+
       # Terminates the current job flow.
       # @return [nil]
       def terminate
