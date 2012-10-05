@@ -26,6 +26,8 @@ module AWS
         :product_description,
         :instance_tenancy,
         :currency_code,
+        :recurring_charges,
+        :offering_type,
       ]
 
       include TaggedItem
