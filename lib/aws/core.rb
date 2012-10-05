@@ -28,6 +28,7 @@ require 'aws/core/autoloader'
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ElastiCache}
+# * {AWS::ElasticBeanstalk}
 # * {AWS::ELB}
 # * {AWS::EMR}
 # * {AWS::IAM}
@@ -246,6 +247,9 @@ module AWS
     #   service endpoint for Amazon EC2.
     #
     # @option options [String] :elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
+    #
+    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com') 
+    #   The service endpoint for AWS Elastic Beanstalk.
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.

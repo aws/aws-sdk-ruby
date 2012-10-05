@@ -93,6 +93,9 @@ module AWS
     #
     # @attr_reader [String] elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
     #
+    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com') 
+    #   The service endpoint for AWS Elastic Beanstalk.
+    #
     # @attr_reader [String] elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
     #
