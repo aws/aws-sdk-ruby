@@ -546,14 +546,13 @@ module AWS
           end
 
           it 'should raise error for wrong data key' do
-            msg = "bad decrypt"
             lambda do
               client.should_receive(:head_object)
               client.should_receive(:get_object).
                   with(:bucket_name => "foobucket", :key => "foo")
               object.read(:encryption_key => master_sym_key,
                           :encryption_materials_location => :metadata)
-            end.should raise_error(msg)
+            end.should raise_error(OpenSSL::Cipher::CipherError)
 
           end
 

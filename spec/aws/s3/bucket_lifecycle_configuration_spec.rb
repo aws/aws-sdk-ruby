@@ -114,7 +114,7 @@ module AWS
       context '#update' do
 
         it 'persists the current rule set to s3' do
-            xml = <<-XML.strip
+            xml = <<-XML.xml_cleanup
 <LifecycleConfiguration>
   <Rule>
     <ID>#{uuid}</ID>
@@ -135,9 +135,10 @@ module AWS
 </LifecycleConfiguration>
             XML
 
-          client.should_receive(:set_bucket_lifecycle_configuration).with(
-            :bucket_name => bucket.name,
-            :lifecycle_configuration => xml)
+          client.should_receive(:set_bucket_lifecycle_configuration) do |hash|
+            hash[:bucket_name].should eq(bucket.name)
+            hash[:lifecycle_configuration].xml_cleanup.should eq(xml)
+          end
 
           lifecycle.add_rule 'foo/bar', 10
           lifecycle.add_rule 'bar/foo', 11, :id => 'abc-xyz', :disabled => true
@@ -146,7 +147,7 @@ module AWS
         end
 
         it 'can be called in block form' do
-            xml = <<-XML.strip
+            xml = <<-XML.xml_cleanup
 <LifecycleConfiguration>
   <Rule>
     <ID>#{uuid}</ID>
@@ -167,9 +168,10 @@ module AWS
 </LifecycleConfiguration>
             XML
 
-          client.should_receive(:set_bucket_lifecycle_configuration).with(
-            :bucket_name => bucket.name,
-            :lifecycle_configuration => xml)
+          client.should_receive(:set_bucket_lifecycle_configuration) do |hash|
+            hash[:bucket_name].should eq(bucket.name)
+            hash[:lifecycle_configuration].xml_cleanup.should eq(xml)
+          end
 
           lifecycle.update do
             add_rule 'foo/bar', 10

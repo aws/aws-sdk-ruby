@@ -31,5 +31,6 @@ group :test do
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post', '~> 1.1.2'
   gem 'rotp', '~> 1.3.0'
+  gem 'jruby-openssl', :platforms => :jruby
 end
 

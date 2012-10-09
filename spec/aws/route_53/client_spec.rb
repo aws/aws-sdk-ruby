@@ -63,7 +63,7 @@ module AWS
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
             req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset/')
-            req.body.should eq(<<-XML.strip)
+            req.body.xml_cleanup.should eq(<<-XML.xml_cleanup)
 <ChangeResourceRecordSetsRequest #{namespace}>
   <ChangeBatch>
     <Changes>

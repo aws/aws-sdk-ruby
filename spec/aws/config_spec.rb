@@ -337,11 +337,9 @@ describe AWS do
         end
 
         it 'can be changed to true' do
-          config(:stub_requests => true).stub_requests.should eq(true)
-        end
-
-        it 'is aliased with a question mark' do
-          config.method(:stub_requests).should eq(config.method(:stub_requests?))
+          c = config(:stub_requests => true)
+          c.stub_requests.should eq(true)
+          c.stub_requests?.should eq(true)
         end
 
       end
@@ -353,11 +351,9 @@ describe AWS do
         end
 
         it 'can be changed to false' do
-          config(:use_ssl => false).use_ssl.should eq(false)
-        end
-
-        it 'is aliased with a question mark' do
-          config.method(:use_ssl).should eq(config.method(:use_ssl?))
+          c = config(:use_ssl => false)
+          c.use_ssl.should eq(false)
+          c.use_ssl?.should eq(false)
         end
 
       end

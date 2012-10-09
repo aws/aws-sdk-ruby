@@ -33,4 +33,10 @@ Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file
 end
 
+class String
+  def xml_cleanup
+    gsub(/^\s*|\s*|\n$/m, '')
+  end
+end
+
 AWS.eager_autoload!

@@ -89,7 +89,7 @@ module AWS
 
       context 'cors', :cors => true do
 
-        let(:xml) { <<-XML.strip }
+        let(:xml) { <<-XML.strip.xml_cleanup }
 <CORSConfiguration>
   <CORSRule>
     <AllowedMethod>GET</AllowedMethod>
@@ -155,8 +155,8 @@ module AWS
 
             request.http_method.should eq('PUT')
             request.querystring.should eq('cors')
-            request.headers['content-md5'].should eq(client.send(:md5, xml))
-            request.body.should eq(xml)
+            request.headers['content-md5'].should eq(client.send(:md5, request.body))
+            request.body.xml_cleanup.should eq(xml)
 
           end
 
