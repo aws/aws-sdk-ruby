@@ -13,7 +13,7 @@
 
 require 'bundler/setup'
 
-Bundler.require(:default, :build, :integration)
+Bundler.require(:default, :test, :development)
 
 root = File.dirname(__FILE__)
 tasks_dir = File.join(root, "tasks")

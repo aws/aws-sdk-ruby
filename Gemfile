@@ -18,14 +18,13 @@ gem 'httparty', '~> 0.7'
 gem 'nokogiri', '>= 1.4.4'
 gem 'json', '>= 1.4.6'
 
-group :build do
+group :development do
   gem 'yard'
-  gem 'rspec'
-  gem 'rspec', :require => 'rspec/core/rake_task'
-  gem 'simplecov', :require => false
 end
 
-group :integration do
+group :test do
+  gem 'rspec'
+  gem 'simplecov', :require => false
   gem 'cucumber', '~> 0.10.2', :require => 'cucumber/rake/task'
   gem 'bourne', '1.0'
   gem 'mocha', '0.9.8'
