@@ -18,17 +18,10 @@ gem 'httparty', '~> 0.7'
 gem 'nokogiri', '>= 1.4.4'
 gem 'json', '>= 1.4.6'
 
-group :debug do
-  gem 'ruby-debug', :platforms => :ruby_18
-  gem 'ruby-debug19', :platforms => :ruby_19
-  gem 'ruby-prof', :platforms => [:mri_18]
-end
-
 group :build do
   gem 'yard'
-  gem 'rspec', '2.5'
-  gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
-  gem 'rcov', '0.9.9'
+  gem 'rspec'
+  gem 'rspec', :require => 'rspec/core/rake_task'
   gem 'simplecov', :require => false
 end
 
