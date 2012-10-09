@@ -24,16 +24,6 @@ group :debug do
   gem 'ruby-prof', :platforms => [:mri_18]
 end
 
-group :autotest do
-  gem 'ZenTest', '~> 4.4'
-  gem 'autotest-fsevent', '~> 0.2.4'
-  gem 'autotest-growl', '~> 0.2.9'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'rb-fsevent'
-  gem 'growl'
-end
-
 group :build do
   gem 'yard'
   gem 'rspec', '2.5'
