@@ -178,11 +178,11 @@ module AWS
       #     additional features.
       #   * +:ami_version+ - (String) The version of the Amazon Machine Image
       #     (AMI) to use when launching Amazon EC2 instances in the job flow.
-      #     The following values ane valid: "latest" (latest AMI version;
+      #     The following values are valid: "latest" (latest AMI version;
       #     currently AMI 2.0, Hadoop 0.20.205) "2.0" (AMI 2.0, Hadoop
       #     0.20.205) "1.0" (AMI 1.0, Hadoop 0.18) If this value is not
       #     specified, the job flow uses the default of (AMI 1.0, Hadoop 0.18).
-      #     If the AMI supports multiple verisons of Hadoop (for example, AMI
+      #     If the AMI supports multiple versions of Hadoop (for example, AMI
       #     1.0 supports both Hadoop 0.18 and 0.20) you can use the
       #     JobFlowInstancesConfig HadoopVersion parameter to modify the
       #     version of Hadoop from the defaults shown above. For details about
@@ -296,6 +296,20 @@ module AWS
       #     indicates whether to protect the job flow and prevent the Amazon
       #     EC2 instances in the cluster from shutting down due to API calls,
       #     user intervention, or job-flow error.
+      # @return [Core::Response]
+
+      # @!method set_visible_to_all_users(options = {})
+      # Calls the SetVisibleToAllUsers API operation.
+      # @param [Hash] options
+      #   * +:job_flow_ids+ - *required* - (Array<String>) Identifiers of the
+      #     job flows to receive the new visibility setting.
+      #   * +:visible_to_all_users+ - *required* - (Boolean) Whether the
+      #     specified job flows are visible to all IAM users of the AWS account
+      #     associated with the job flow. If this value is set to True, all IAM
+      #     users of that AWS account can view and, if they have the proper IAM
+      #     policy permissions set, manage the job flows. If it is set to
+      #     False, only the IAM user that created a job flow can view and
+      #     manage it.
       # @return [Core::Response]
 
       # @!method terminate_job_flows(options = {})
