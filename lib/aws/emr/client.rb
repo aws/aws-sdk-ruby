@@ -155,6 +155,7 @@ module AWS
       #           * +:path+ - (String)
       #           * +:args+ - (Array<String>)
       #     * +:supported_products+ - (Array<String>)
+      #     * +:visible_to_all_users+ - (Boolean)
 
       # @!method modify_instance_groups(options = {})
       # Calls the ModifyInstanceGroups API operation.
@@ -266,10 +267,19 @@ module AWS
       #         S3 or on a local file system.
       #       * +:args+ - (Array<String>) A list of command line arguments to
       #         pass to the bootstrap action script.
-      #   * +:supported_products+ - (Array<String>) A list of strings used by
-      #     third-party software to tag the job flow. Currently the only valid
-      #     value is "karmasphere-enterprise-utility", which tags the job flow
-      #     for management by Karmasphere.
+      #   * +:supported_products+ - (Array<String>) A list of strings that
+      #     indicates third-party software to use with the job flow. For more
+      #     information, go to Use Third Party Applications with Amazon EMR.
+      #     Currently supported values are: "karmasphere-enterprise-utility" -
+      #     tag the job flow for management by Karmasphere. "mapr-m3" - launch
+      #     the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow
+      #     using MapR M5 Edition.
+      #   * +:visible_to_all_users+ - (Boolean) Whether the job flow is visible
+      #     to all IAM users of the AWS account associated with the job flow.
+      #     If this value is set to +true+ , all IAM users of that AWS account
+      #     can view and (if they have the proper policy permissions set)
+      #     manage the job flow. If it is set to +false+ , only the IAM user
+      #     that created the job flow can view and manage it.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

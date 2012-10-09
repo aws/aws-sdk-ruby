@@ -205,6 +205,8 @@
                       member:
                         :rename: :supported_products
                         :list: true
+                  VisibleToAllUsers:
+                    :type: :boolean
 - :name: ModifyInstanceGroups
   :method: :modify_instance_groups
   :inputs:
@@ -319,6 +321,8 @@
     SupportedProducts:
     - :membered_list:
       - :string
+    VisibleToAllUsers:
+    - :boolean
   :outputs:
     :children:
       RunJobFlowResult:
