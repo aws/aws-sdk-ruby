@@ -11,6 +11,16 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'rspec/core/rake_task'
+
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = '--format=doc --color'
+  if ENV['COVERAGE']
+    begin
+      require 'simplecov'
+    rescue
+      t.rcov = true
+      t.rcov_opts = '-x gem,spec'
+    end
+  end
 end
