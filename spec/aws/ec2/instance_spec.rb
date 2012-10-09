@@ -1292,11 +1292,11 @@ module AWS
 
       context '#export' do
 
-        it 'calls #create_instance_export_task on the client'
+        #it 'calls #create_instance_export_task on the client'
 
-        it 'returns a populated ExportTask object'
+        #it 'returns a populated ExportTask object'
 
-        it 'calling #cancel terminates the export task'
+        #it 'calling #cancel terminates the export task'
 
       end
 

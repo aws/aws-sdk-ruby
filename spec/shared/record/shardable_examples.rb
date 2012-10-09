@@ -42,11 +42,6 @@ module AWS
           klass.shard_name.should == 'Products'
         end
 
-        it 'finds an object via the correct shard' do
-          obj = klass.shard('shard-name').find('item-id')
-          pending
-        end
-
       end
 
       context 'constructing a record from a shard' do
