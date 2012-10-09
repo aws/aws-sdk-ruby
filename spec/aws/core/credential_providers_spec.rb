@@ -19,6 +19,9 @@ module AWS
     module CredentialProviders
 
       describe DefaultProvider do
+        before do
+          ENV.stub(:[]) { nil } # Stub out all environment variables
+        end
 
         it 'raises an error when no credentials are present' do
           lambda {
