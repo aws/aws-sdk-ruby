@@ -341,6 +341,27 @@ module AWS
 
       end
 
+      shared_examples_for "accepts mfa credentials" do
+
+        it 'adds no header when mfa is nil' do
+          req_headers = nil
+          opts.delete(:mfa)
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts)
+          req_headers['x-amz-mfa'].should == nil
+        end
+
+        it 'adds a header when mfa is passed' do
+          req_headers = nil
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts.merge(:mfa => '123456 7890'))
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
+
+      end
+
       shared_examples_for "accepts version id" do
 
         it 'adds no param wheren version_id is nil' do
@@ -1536,6 +1557,7 @@ module AWS
 
         it_should_behave_like "accepts version id"
 
+        it_should_behave_like "accepts mfa credentials"
       end
 
       context '#delete_objects' do
