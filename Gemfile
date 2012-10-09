@@ -25,6 +25,7 @@ end
 group :test do
   gem 'rspec'
   gem 'simplecov', :require => false
+  gem 'rvm-tester'
   gem 'cucumber', '~> 0.10.2', :require => 'cucumber/rake/task'
   gem 'bourne', '1.0'
   gem 'mocha', '0.9.8'
