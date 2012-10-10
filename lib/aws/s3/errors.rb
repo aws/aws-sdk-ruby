@@ -28,7 +28,6 @@ module AWS
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.
-    # @private
     module Errors
 
       # @private
