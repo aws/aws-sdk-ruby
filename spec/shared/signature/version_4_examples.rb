@@ -26,7 +26,7 @@ module AWS
       })
     }
 
-    let(:now) { Time.parse('2012-01-01') }
+    let(:now) { Time.utc(2012, 1, 1) }
 
     before(:each) do
       Time.stub(:now).and_return(now)
@@ -73,13 +73,13 @@ module AWS
       it 'popualtes the authorization header' do
         request.headers['authorization'].should eq(nil)
         request.add_authorization!(credentials)
-        request.headers['authorization'].should eq("AWS4-HMAC-SHA256 Credential=akid/20120101/region-name/service-name/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=58ba42aa064264dc8b8d056d1e1a174679d2fcfa545bb860145b23ee20342346")
+        request.headers['authorization'].should eq("AWS4-HMAC-SHA256 Credential=akid/20120101/region-name/service-name/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=4c92fc6d5415ff9cc6e8a667ffab3986890c987d043c2bf96d27449a95cebe43")
       end
 
       it 'includes the session token in the signature when present' do
         credentials.stub(:session_token).and_return('SESSION')
         request.add_authorization!(credentials)
-        request.headers['authorization'].should eq("AWS4-HMAC-SHA256 Credential=akid/20120101/region-name/service-name/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-security-token, Signature=c6345f040b0b32469729beb2f57fb706b133e65ef32f8bc2a18aee77c51c8991")
+        request.headers['authorization'].should eq("AWS4-HMAC-SHA256 Credential=akid/20120101/region-name/service-name/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-security-token, Signature=f3794f9465cdf96f2e54f7db05f5cdaca79cbbcf83a1d3cce4f69c4da6f1d1e3")
       end
 
     end
