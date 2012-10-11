@@ -116,7 +116,10 @@ module AWS
           end
   
           after(:each) do
-            AWS.config(:stub_requests => false)
+            AWS.config(
+              :stub_requests => false,
+              :access_key_id => nil,
+              :secret_access_key => nil)
           end
   
           it 'defines a method for older versions of rails' do
