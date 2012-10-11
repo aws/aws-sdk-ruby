@@ -4,6 +4,7 @@
 /.yardoc
 /coverage
 /pkg
+/vendor
 *.gem
 
 # credentials for testing features against live services
