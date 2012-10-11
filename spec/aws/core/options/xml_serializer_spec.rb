@@ -55,7 +55,7 @@ module AWS
             it 'returns string as is' do
               rules[:name] = { :name => 'Name', :type => :string }
               options[:name] = 'name-value'
-              xml.should match("<Name>name-value</Name>")
+              xml.should include("<Name>name-value</Name>")
             end
 
           end
@@ -65,7 +65,7 @@ module AWS
             it 'returns integers as is' do
               rules[:count] = { :name => 'Count', :type => :integer }
               options[:count] = 123
-              xml.should match("<Count>123</Count>")
+              xml.should include("<Count>123</Count>")
             end
 
           end
@@ -75,13 +75,13 @@ module AWS
             it 'it encodes true as a string' do
               rules[:enabled] = { :name => 'Enabled', :type => :boolean }
               options[:enabled] = true
-              xml.should match("<Enabled>true</Enabled>")
+              xml.should include("<Enabled>true</Enabled>")
             end
 
             it 'it encodes false as a string' do
               rules[:enabled] = { :name => 'Enabled', :type => :boolean }
               options[:enabled] = false
-              xml.should match("<Enabled>false</Enabled>")
+              xml.should include("<Enabled>false</Enabled>")
             end
 
           end
@@ -91,14 +91,14 @@ module AWS
             it 'encodes numbers as strings' do
               rules[:date] = { :name => 'Date', :type => :timestamp }
               options[:date] = 123456789
-              xml.should match("<Date>123456789</Date>")
+              xml.should include("<Date>123456789</Date>")
             end
 
             it 'calls #to_s on other date-like objects' do
               now = Time.now
               rules[:date] = { :name => 'Date', :type => :timestamp }
               options[:date] = now
-              xml.should match("<Date>#{now.to_s}</Date>")
+              xml.should include("<Date>#{now.to_s}</Date>")
             end
 
           end
