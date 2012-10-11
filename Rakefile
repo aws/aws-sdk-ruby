@@ -26,4 +26,9 @@ Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file
 end
 
+# Vendor tasks
+Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
+  load vendor_rakefile
+end
+
 task :default => :spec
