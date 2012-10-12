@@ -13,5 +13,6 @@
 
 RVM::Tester::TesterTask.new do |t|
   t.bundle_install = false # don't need to do this all the time
+  t.rubies = %w(1.8.7 ree 1.9.3 1.9.2 jruby)
   t.verbose = true
 end
