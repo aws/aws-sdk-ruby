@@ -1,4 +1,4 @@
-= Getting Started with the AWS SDK for Ruby {<img src="https://secure.travis-ci.org/amazonwebservices/aws-sdk-for-ruby.png" alt="Build Status" />}[http://travis-ci.org/amazonwebservices/aws-sdk-for-ruby]
+= Getting Started with the AWS SDK for Ruby {<img src="https://secure.travis-ci.org/amazonwebservices/aws-sdk-for-ruby.png?branch=master" alt="Build Status" />}[http://travis-ci.org/amazonwebservices/aws-sdk-for-ruby]
 
 The AWS SDK for Ruby helps you to get started building applications
 using AWS infrastructure services, including Amazon Simple Storage

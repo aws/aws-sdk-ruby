@@ -9,3 +9,7 @@ rvm:
 
 script: "bundle exec rake"
 env: "CI=1 SUITE=1 "
+
+branches:
+  only:
+    - master
