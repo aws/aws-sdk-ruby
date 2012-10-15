@@ -1117,6 +1117,16 @@ module AWS
       # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
+      # @option options [String] :endpoint Sets the hostname of the
+      #   endpoint (overrides config.s3_endpoint).
+      #
+      # @option options [Integer] :port Sets the port of the
+      #   endpoint (overrides config.s3_port).
+      #
+      # @option options [Boolean] :force_path_style (false) Indicates
+      #   whether the generated URL should place the bucket name in
+      #   the path (true) or as a subdomain (false).
+      #
       # @option options [String] :response_content_type Sets the
       #   Content-Type header of the response when performing an
       #   HTTP GET on the returned URL.
@@ -1155,7 +1165,8 @@ module AWS
                       config.credential_provider.session_token) if
           config.credential_provider.session_token
 
-        build_uri(options[:secure] != false, req)
+        secure = options.fetch(:secure, config.use_ssl?)
+        build_uri(secure != false, req)
       end
 
       # Generates a public (not authenticated) URL for the object.
@@ -1271,6 +1282,7 @@ module AWS
       def build_uri(secure, request)
         uri_class = secure ? URI::HTTPS : URI::HTTP
         uri_class.build(:host => request.host,
+                        :port => request.port,
                         :path => request.path,
                         :query => request.querystring)
       end
@@ -1325,7 +1337,9 @@ module AWS
 
         req.bucket = bucket.name
         req.key = key
-        req.host = config.s3_endpoint
+        req.host = options.fetch(:endpoint, config.s3_endpoint)
+        req.port = options.fetch(:port, config.s3_port)
+        req.force_path_style = options.fetch(:force_path_style, config.s3_force_path_style)
 
         REQUEST_PARAMETERS.each do |param|
           req.add_param(param.to_s.tr("_","-"),
