@@ -952,6 +952,50 @@ module AWS
           object.url_for(:get).query.should == "something=itsvalue"
         end
 
+        it 'should default to the general use_ssl parameter for urls' do
+          config.stub(:use_ssl?).and_return true
+          object.url_for(:get).scheme.should == "https"
+          config.stub(:use_ssl?).and_return false
+          object.url_for(:get).scheme.should == "http"
+        end
+
+        it 'should prefer :secure over the general use_ssl parameter for urls' do
+          config.stub(:use_ssl?).and_return true
+          object.url_for(:get, :secure => false).scheme.should == "http"
+          config.stub(:use_ssl?).and_return false
+          object.url_for(:get, :secure => true).scheme.should == "https"
+        end
+
+        it 'should default to the :s3_port value for urls' do
+          config.stub(:s3_port).and_return nil
+          object.url_for(:get).port.should == 443
+          config.stub(:s3_port).and_return 8080
+          object.url_for(:get).port.should == 8080
+        end
+
+        it 'should prefer :port over the general :s3_port parameter for urls' do
+          config.stub(:s3_port).and_return 8080
+          object.url_for(:get, :port => 80).port.should == 80
+        end
+
+        it 'should default to the general :s3_force_path_style value for urls' do
+          config.stub(:s3_force_path_style).and_return false
+          url = object.url_for(:get)
+          url.host.should == "foobucket.s3.amazonaws.com"
+          url.path.should_not =~ /^\/foobucket\//
+
+          config.stub(:s3_force_path_style).and_return true
+          url = object.url_for(:get)
+          url.host.should == "s3.amazonaws.com"
+          url.path.should =~ /^\/foobucket\//
+        end
+
+        it 'should prefer :force_path_style over the general :s3_force_path_style parameter for urls' do
+          config.stub(:s3_force_path_style).and_return true
+          url = object.url_for(:get, :force_path_style => false)
+          url.host.should == "foobucket.s3.amazonaws.com"
+          url.path.should_not =~ /^\/foobucket\//
+        end
       end
 
       context '#public_url' do
