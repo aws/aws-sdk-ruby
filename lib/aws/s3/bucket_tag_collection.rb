@@ -20,7 +20,7 @@ module AWS
     #
     #   bucket.tags['key'] = 'value'
     #
-    # @exapmle Getting a tag.
+    # @example Getting a tag.
     #
     #   bucket.tags['key']
     #   #=> 'value'
