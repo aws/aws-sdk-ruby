@@ -23,7 +23,7 @@ module AWS
     # @attr_reader [Boolean] enabled Indicates whether actions 
     #   should be executed during any changes to the alarm's state.
     #
-    # @attr_reader [Array<String>] actions The list of actions to execute 
+    # @attr_reader [Array<String>] alarm_actions The list of actions to execute 
     #   when this alarm transitions into an ALARM state from any other 
     #   state.
     #
