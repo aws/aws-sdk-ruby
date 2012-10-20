@@ -1568,6 +1568,8 @@ module AWS
 
         it_should_behave_like "requires bucket_name"
 
+        it_should_behave_like "accepts mfa credentials"
+
         #it_should_behave_like "an s3 http request", 'POST'
 
       end
