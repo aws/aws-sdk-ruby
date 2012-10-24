@@ -106,7 +106,7 @@ module AWS
         options[:period] ||= 60
 
         resp = client.get_metric_statistics(options)
-        
+
         MetricStatistics.new(self, resp[:label], resp[:datapoints])
 
       end
@@ -120,8 +120,8 @@ module AWS
 
       def resource_identifiers
         [
-          [:namespace, namespace], 
-          [:metric_item, metric_name], 
+          [:namespace, namespace],
+          [:metric_name, metric_name],
           [:dimensions, dimensions],
         ]
       end
