@@ -55,7 +55,7 @@ Given /^I have an empty DynamoDB table with options:$/ do |string|
   rescue DynamoDB::Errors::ResourceInUseException => e
     @table = @dynamo_db.tables[table_name]
     case @table.status
-    when :active 
+    when :active
       @table.load_schema
       @table.items.each(&:delete)
     when :creating, :updating
