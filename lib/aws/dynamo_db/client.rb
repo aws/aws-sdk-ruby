@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'zlib'
+
 module AWS
   class DynamoDB
 
@@ -839,14 +841,19 @@ module AWS
       def extract_error_details response
         if response.http_response.status == 413
           ['RequestEntityTooLarge', 'Request entity too large']
+        elsif crc32_is_valid?(response) == false
+          ['CRC32CheckFailed', 'CRC32 integrity check failed']
         else
           super
         end
       end
 
       def retryable_error? response
-        if response.error.is_a?(Errors::ProvisionedThroughputExceededException)
+        case response.error
+        when Errors::ProvisionedThroughputExceededException
           config.dynamo_db_retry_throughput_errors?
+        when Errors::CRC32CheckFailed
+          true
         else
           super
         end
@@ -871,6 +878,23 @@ module AWS
           end
         end
 
+      end
+
+      private
+
+      # @return [Boolean] whether the CRC32 response header matches the body.
+      # @return [nil] if no CRC32 header is present or we are not verifying CRC32
+      def crc32_is_valid? response
+        return nil unless config.dynamo_db_crc32
+        if crcs = response.http_response.headers['x-amz-crc32']
+          crcs[0].to_i == calculate_crc32(response)
+        else
+          nil
+        end
+      end
+
+      def calculate_crc32 response
+        Zlib.crc32(response.http_response.body)
       end
 
     end

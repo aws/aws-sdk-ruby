@@ -28,7 +28,7 @@ module AWS
                                   :handle => true) }
 
       let(:client) do
-        Client.new(test_credentials.merge(:http_handler => http_handler))
+        Client.new(test_credentials).with_http_handler(http_handler)
       end
 
       let(:response_body) { "{}" }
@@ -41,6 +41,52 @@ module AWS
         end
         client.send(method, opts)
         http_request
+      end
+
+      context 'CRC32 checking' do
+        def run(crc = nil, body = nil)
+          @client ||= client
+          @client = @client.with_options(:max_retries => 2)
+          body ||= '{"TableNames":["tbl1", "tbl2"]}'
+          crc ||= Zlib.crc32(body)
+          @num_tries = 0
+          http_handler.stub(:handle) do |req, resp|
+            resp.headers['x-amz-crc32'] = [crc.to_s]
+            resp.body = body
+            resp.status = 200
+            @num_tries += 1
+          end
+
+          @result = @client.list_tables
+        end
+
+        it 'should accept response if CRC32 check succeeds' do
+          run
+
+          @num_tries.should == 1
+          @result["TableNames"].should == %w(tbl1 tbl2)
+        end
+
+        it 'should attempt to retry if CRC32 check fails' do
+          lambda { run(123456) }.should raise_error
+
+          @num_tries.should == 3
+          @result.should be_nil
+        end
+
+        it 'should raise CRC32 error if CRC32 check fails and retries fail' do
+          lambda { run(123456) }.
+            should raise_error(Errors::CRC32CheckFailed)
+          @num_tries.should == client.config.max_retries
+        end
+
+        it 'should ignore invalid CRC check if dynamo_db_crc32 is off' do
+          @client = client.with_options(:dynamo_db_crc32 => false)
+          run(123456, '{"TableNames": ["tAABLE"]}')
+
+          @num_tries.should == 1
+          @result["TableNames"].should == %w(tAABLE)
+        end
       end
 
       shared_examples_for "DynamoDB request" do

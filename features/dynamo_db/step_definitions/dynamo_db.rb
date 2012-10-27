@@ -33,15 +33,7 @@ After("@dynamo_db") do |scenario|
 
 end
 
-
-
-Given /^I configure dynamo DB to not convert numbers to big decimal$/ do
-  config = @dynamo_db.config.with(:dynamo_db_big_decimals => false)
-  @dynamo_db = AWS::DynamoDB.new(:config => config)
-end
-
-Given /^I have an empty DynamoDB table with options:$/ do |string|
-
+def create_table(string)
   table_name = "ruby-shared-test-#{Digest::MD5.hexdigest(string)}"
 
   begin
@@ -68,5 +60,17 @@ Given /^I have an empty DynamoDB table with options:$/ do |string|
       raise "Not sure how to make table #{@table.name.inspect} active"
     end
   end
+end
 
+Given /^I configure dynamo DB to not convert numbers to big decimal$/ do
+  config = @dynamo_db.config.with(:dynamo_db_big_decimals => false)
+  @dynamo_db = AWS::DynamoDB.new(:config => config)
+end
+
+Given /^I have an empty DynamoDB table$/ do
+  create_table "{ :hash_key => { :id => :string } }"
+end
+
+Given /^I have an empty DynamoDB table with options:$/ do |string|
+  create_table(string)
 end
