@@ -75,10 +75,10 @@ module AWS
     #   end
     #
     # If you want item data objects with all attributes just call select
-    # without any arguments:
+    # without a list of attributes (#select still accepts options).
     #
     #   # request a maximum of 10 items from Amazon DynamoDB
-    #   table.items.select.limit(10).each do |item_data|
+    #   table.items.select(:limit => 10).each do |item_data|
     #     item_data.attributes #=> { 'id' => 'abc', 'category' => 'foo', ... }
     #   end
     #
