@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'RDS', 'rds', 'us-east-1.rds.amazonaws.com'
+  add_service 'RDS', 'rds', 'rds.us-east-1.amazonaws.com'
 
 end
