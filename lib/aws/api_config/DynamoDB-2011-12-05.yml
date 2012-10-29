@@ -66,6 +66,8 @@
             AttributesToGet:
             - :list:
               - :string
+            ConsistentRead:
+            - :boolean
     - :required
   :outputs:
     Responses:
@@ -132,6 +134,8 @@
                     :type: :blob
           AttributesToGet:
             :type: :string
+          ConsistentRead:
+            :type: :boolean
 - :name: BatchWriteItem
   :method: :batch_write_item
   :inputs:

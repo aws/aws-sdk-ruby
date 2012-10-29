@@ -68,6 +68,7 @@ module AWS
       #         * +:ns+ - (Array<String>) A set of numbers.
       #         * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:attributes_to_get+ - (Array<String>)
+      #     * +:consistent_read+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -97,6 +98,7 @@ module AWS
       #         * +NS+ - (Array<String>)
       #         * +BS+ - (Array<Blob>)
       #     * +AttributesToGet+ - (Array<String>)
+      #     * +ConsistentRead+ - (Boolean)
 
       # @!method batch_write_item(options = {})
       # Calls the BatchWriteItem API operation.
