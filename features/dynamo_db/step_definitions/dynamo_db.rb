@@ -18,6 +18,7 @@ Before("@dynamo_db") do
   session = AWS::STS.new.new_session
 
   @dynamo_db = AWS::DynamoDB.new
+  @tables = []
   @created_tables = []
 
 end
@@ -39,6 +40,7 @@ def create_table(string)
   begin
 
     @table = @dynamo_db.tables.create(table_name, 10, 10, eval(string))
+    @tables << @table
 
     eventually do
       @table.exists?.should == true and @table.status.should == :active

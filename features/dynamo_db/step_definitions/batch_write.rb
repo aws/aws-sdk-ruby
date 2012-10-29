@@ -27,10 +27,10 @@ end
 
 When /^I batch put (\d+) items to each table$/ do |count|
 
-  put = (1..count.to_i).map{|n| { :id => n.to_s, :counts => [n, n+1] }}
+  put = (1..count.to_i).map{|n| { :id => n.to_s, :range => [n, n+1] }}
 
   @dynamo_db.batch_write do |batch|
-    @created_tables.each do |table|
+    @tables.each do |table|
       batch.write(table, :put => put)
     end
   end
@@ -38,7 +38,7 @@ When /^I batch put (\d+) items to each table$/ do |count|
 end
 
 Then /^the tables should have (\d+) items each$/ do |count|
-  @created_tables.each do |table|
+  @tables.each do |table|
     table.items.count.should == count.to_i
   end
 end
