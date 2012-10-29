@@ -13,7 +13,7 @@
 
 module AWS
   class DynamoDB
-    
+
     # A utility class for configuring a list of tables, attributes and
     # items to request information for.
     #
@@ -31,7 +31,7 @@ module AWS
         @request_items = {}
       end
 
-      # Add a list of items to fetch in this batch.  
+      # Add a list of items to fetch in this batch.
       #
       # @param [Table,String] table The name of the table to fetch attributes
       #   from.
@@ -61,9 +61,15 @@ module AWS
       #
       #     batch_get.table('mytable', :all, [%w(hk1 rk1), %w(hk1 rk2), ...])
       #
+      # @param [Hash] options
+      #
+      # @option options [Boolean] :consistent_read (false) When +true+, items
+      #   are read from this table with consistent reads.  When +false+, reads
+      #   are eventually consistent.
+      #
       # @return [nil]
       #
-      def table table, attributes, items
+      def table table, attributes, items, options = {}
 
         table = table.is_a?(Table) ? table.name : table.to_s
 
@@ -72,7 +78,7 @@ module AWS
         keys = items.collect do |item|
           case item
           when Item then item_key_hash(item)
-          when Array 
+          when Array
             {
               :hash_key_element => format_attribute_value(item[0]),
               :range_key_element => format_attribute_value(item[1]),
@@ -85,8 +91,8 @@ module AWS
         ## ensure we don't receive 2 different lists of attributes for
         ## the same table
 
-        if 
-          @request_items.has_key?(table) and 
+        if
+          @request_items.has_key?(table) and
           @request_items[table][:attributes_to_get] != attributes
         then
           msg = "When batch getting attributes, you may only provide " +
@@ -97,9 +103,10 @@ module AWS
 
         ## merge attributes and items with the request items
 
-        @request_items[table] ||= { :keys => [] } 
+        @request_items[table] ||= { :keys => [] }
         @request_items[table][:attributes_to_get] = attributes if attributes
         @request_items[table][:keys] += keys
+        @request_items[table].merge!(options)
 
         nil
 
@@ -123,7 +130,7 @@ module AWS
       #     batch_get.table('mytable', ['name', 'size'], items)
       #
       # @param [Item] items One or more {Item} objects to fetch attributes
-      #   for.  These items may come from any number of different tables.  
+      #   for.  These items may come from any number of different tables.
       #
       def items attributes, *items
         [items].flatten.each do |item|
@@ -156,7 +163,7 @@ module AWS
       end
 
       # Yields only attribute hashes.  This removes the outer hash that
-      # normally provides the :table_name and :attributes keys. This is 
+      # normally provides the :table_name and :attributes keys. This is
       # useful when your batch get requested items from a single table.
       def each_attributes
         each do |table_name, attributes|
@@ -166,16 +173,16 @@ module AWS
 
       protected
       def convert_unprocessed_keys response
-        
+
         return nil if response.data['UnprocessedKeys'].empty?
-        
+
         # convert the json response keys into symbolized keys
         str2sym = lambda do |key_desc|
           type, value = key_desc.to_a.flatten
           case type
           when "S" then { :s => value }
           when "N" then { :n => value }
-          else 
+          else
             raise "unhandled key type: #{type}"
           end
         end
