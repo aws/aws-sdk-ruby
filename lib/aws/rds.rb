@@ -17,6 +17,29 @@ require 'time'
 
 module AWS
 
+  # This class is the starting point for working with Amazon Relational
+  # Database Service (RDS).
+  #
+  # For more information about RDS:
+  #
+  # * {Amazon RDS}[http://aws.amazon.com/rds/]
+  # * {Amazon RDS Documentation}[http://aws.amazon.com/documentation/rds/]
+  #
+  # = Credentials
+  #
+  # You can setup default credentials for all AWS services via
+  # AWS.config:
+  #
+  #   AWS.config(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
+  # Or you can set them directly on the AWS::RDS interface:
+  #
+  #   rds = AWS::RDS.new(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
   class RDS
 
     AWS.register_autoloads(self) do
@@ -31,11 +54,13 @@ module AWS
 
     include Core::ServiceInterface
 
+    # @return [DBInstanceCollection]
     def db_instances
       DBInstanceCollection.new(:config => config)
     end
     alias_method :instances, :db_instances
 
+    # @return [DBSnapshotCollection]]
     def db_snapshots
       DBSnapshotCollection.new(:config => config)
     end
