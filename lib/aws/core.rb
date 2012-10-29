@@ -235,7 +235,7 @@ module AWS
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
     #   from strings to BigDecimal objects.  If you set this to +false+,
     #   they will be convereted from strings into floats (with a potential
-    #              # backwards to test xml ordering   loss of precision).
+    #   loss of precision).
     #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
