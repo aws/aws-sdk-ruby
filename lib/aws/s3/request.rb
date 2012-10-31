@@ -152,7 +152,7 @@ module AWS
         x_amz = headers.select{|name, value| name.to_s =~ /^x-amz-/i }
         x_amz = x_amz.collect{|name, value| [name.downcase, value] }
         x_amz = x_amz.sort_by{|name, value| name }
-        x_amz = x_amz.collect{|name, value| "#{name}:#{value}" }.join("\n")
+        x_amz = x_amz.collect{|name, value| "#{name}:#{value.strip}" }.join("\n")
         x_amz == '' ? nil : x_amz
       end
 

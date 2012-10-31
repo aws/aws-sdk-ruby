@@ -124,6 +124,12 @@ Feature: CRUD Objects (High Level)
     | http   | verb             | PUT   |
     | header | x-amz-meta-color | blue  |
 
+  @put_object
+  Scenario: Write object metadata with trailing spaces
+    Given I ask for the object with key "foo"
+    When I write data passing metadata attribute "color" with value "blue "
+    Then the object should eventually have metadata "color" set to "blue"
+
   @delete_object
   Scenario: Delete an object
     Given the bucket has an object with key "foo"
