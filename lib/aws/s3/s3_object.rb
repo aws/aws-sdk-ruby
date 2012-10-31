@@ -1152,6 +1152,9 @@ module AWS
       #   HTTP GET on the returned URL.
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
+
+        options[:secure] = config.use_ssl? unless options.key?(:secure)
+
         req = request_for_signing(options)
 
         method = http_method(method)
@@ -1294,9 +1297,8 @@ module AWS
         parts << ""
         parts << ""
         parts << expires
-        if config.credential_provider.session_token
-          parts << "x-amz-security-token:"
-          parts << "#{config.credential_provider.session_token}"
+        if token = config.credential_provider.session_token
+          parts << "x-amz-security-token:#{token}"
         end
         parts << request.canonicalized_resource
 
@@ -1338,7 +1340,7 @@ module AWS
         req.bucket = bucket.name
         req.key = key
         req.host = options.fetch(:endpoint, config.s3_endpoint)
-        req.port = options.fetch(:port, config.s3_port)
+        req.port = options.fetch(:port, options[:secure] ? 443 : 80)
         req.force_path_style = options.fetch(:force_path_style, config.s3_force_path_style)
 
         REQUEST_PARAMETERS.each do |param|
