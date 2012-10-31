@@ -1169,7 +1169,7 @@ module AWS
           config.credential_provider.session_token
 
         secure = options.fetch(:secure, config.use_ssl?)
-        build_uri(secure != false, req)
+        build_uri(req, options)
       end
 
       # Generates a public (not authenticated) URL for the object.
@@ -1182,8 +1182,8 @@ module AWS
       # @return [URI::HTTP, URI::HTTPS]
       #
       def public_url(options = {})
-        req = request_for_signing(options)
-        build_uri(options[:secure] != false, req)
+        options[:secure] = config.use_ssl? unless options.key?(:secure)
+        build_uri(request_for_signing(options), options)
       end
 
       # Generates fields for a presigned POST to this object.  This
@@ -1282,8 +1282,8 @@ module AWS
         estimate
       end
 
-      def build_uri(secure, request)
-        uri_class = secure ? URI::HTTPS : URI::HTTP
+      def build_uri(request, options)
+        uri_class = options[:secure] ? URI::HTTPS : URI::HTTP
         uri_class.build(:host => request.host,
                         :port => request.port,
                         :path => request.path,
@@ -1335,12 +1335,17 @@ module AWS
       end
 
       def request_for_signing(options)
+
+        port = [443, 80].include?(config.s3_port) ? 
+          (options[:secure] ? 443 : 80) :
+          config.s3_port
+
         req = Request.new
 
         req.bucket = bucket.name
         req.key = key
         req.host = options.fetch(:endpoint, config.s3_endpoint)
-        req.port = options.fetch(:port, options[:secure] ? 443 : 80)
+        req.port = options.fetch(:port, port)
         req.force_path_style = options.fetch(:force_path_style, config.s3_force_path_style)
 
         REQUEST_PARAMETERS.each do |param|
