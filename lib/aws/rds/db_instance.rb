@@ -143,11 +143,15 @@ module AWS
 
       # @return [DBSnapshot]
       def create_snapshot db_snapshot_id
+
         options = {}
         options[:db_snapshot_identifier] = db_snapshot_id
         options[:db_instance_identifier] = db_instance_identifier
-        client.create_db_snapshot(options)
-        snapshots[db_snapshot_id]
+        resp = client.create_db_snapshot(options)
+
+        DBSnapshot.new_from(:create_db_snapshot, resp,
+          resp[:db_snapshot_identifier], :config => config)
+
       end
 
       # Reboots this databse instance.

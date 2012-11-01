@@ -30,6 +30,8 @@ module AWS
 
       let(:client) { config.rds_client }
 
+      let(:now) { Time.now }
+
       let(:namespace) {
         'http://rds.amazonaws.com/doc/2012-07-31/'
       }
@@ -38,10 +40,8 @@ module AWS
 
         it 'correctly removes both wrapping xml elements' do
 
-          time = Time.parse('2012-11-01 06:23:15 UTC')
-
           xml = <<-XML.strip
-<CreateDBSnapshotResponse xmlns="#{namespace}"/>
+<CreateDBSnapshotResponse xmlns="#{namespace}">
   <CreateDBSnapshotResult>
     <DBSnapshot>
       <Port>3306</Port>
@@ -53,7 +53,7 @@ module AWS
       <EngineVersion>5.5.27</EngineVersion>
       <DBSnapshotIdentifier>name5</DBSnapshotIdentifier>
       <AvailabilityZone>us-east-1a</AvailabilityZone>
-      <InstanceCreateTime>2012-11-01T06:23:15.541Z</InstanceCreateTime>
+      <InstanceCreateTime>#{now.iso8601}</InstanceCreateTime>
       <AllocatedStorage>1024</AllocatedStorage>
       <MasterUsername>root</MasterUsername>
     </DBSnapshot>
@@ -73,7 +73,7 @@ module AWS
           options[:db_instance_identifier] = 'abc'
           options[:db_snapshot_identifier] = 'abc'
           resp = client.create_db_snapshot(options)
-          resp.data.should eq({:port=>3306, :engine=>"mysql", :status=>"creating", :snapshot_type=>"manual", :license_model=>"general-public-license", :db_instance_identifier=>"abc", :engine_version=>"5.5.27", :db_snapshot_identifier=>"name5", :availability_zone=>"us-east-1a", :instance_create_time=>time, :allocated_storage=>1024, :master_username=>"root", :response_metadata=>{:request_id=>"984e0bd4-23f4-11e2-b390-91eea8f6e859"}})
+          resp.data.should eq({:port=>3306, :engine=>"mysql", :status=>"creating", :snapshot_type=>"manual", :license_model=>"general-public-license", :db_instance_identifier=>"abc", :engine_version=>"5.5.27", :db_snapshot_identifier=>"name5", :availability_zone=>"us-east-1a", :instance_create_time=>Time.parse(now.iso8601), :allocated_storage=>1024, :master_username=>"root", :response_metadata=>{:request_id=>"984e0bd4-23f4-11e2-b390-91eea8f6e859"}})
         end
 
       end

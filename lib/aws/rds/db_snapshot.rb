@@ -88,8 +88,17 @@ module AWS
 
       attribute :instance_create_time, :static => true
 
+      populates_from(:create_db_snapshot) do |resp|
+        resp.data if resp[:db_snapshot_identifier] == id
+      end
+
       populates_from(:describe_db_snapshots) do |resp|
         resp.data[:db_snapshots].find{|j| j[:db_snapshot_identifier] == db_snapshot_identifier }
+      end
+
+      # @return [DBInstance]
+      def db_instance
+        DBInstance.new(db_instance_id, :config => config)
       end
 
       # Copies this database snapshot.
