@@ -450,6 +450,36 @@ module AWS
             data.tree.branch.leaf_c.should == 'leaf c'
           end
 
+          context 'nested ignore rules' do
+
+            let(:grammar) {
+              Grammar.customize do
+                element "Base" do
+                  ignore
+                  element "Nested" do
+                    ignore
+                    element("Count") { integer } # not ignored
+                  end
+                end
+              end
+            }
+
+            let(:xml) { <<-XML.strip }
+              <XML>
+                <Base>
+                  <Nested>
+                    <Count>123</Count>
+                  </Nested>
+                </Base>
+              </XML>
+            XML
+
+            it 'should support nested ignores' do
+              data.count.should eq(123)
+            end
+
+          end
+
         end
 
         context 'indexing elements' do
