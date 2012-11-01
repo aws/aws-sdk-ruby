@@ -64,7 +64,8 @@ module AWS
 
       attribute :db_instance_id,
         :from => :db_instance_identifier,
-        :static => true
+        :static => true,
+        :alias => :db_instance_identifier
 
       attribute :engine, :static => true
 
@@ -88,12 +89,12 @@ module AWS
 
       attribute :instance_create_time, :static => true
 
-      populates_from(:create_db_snapshot) do |resp|
+      populates_from(:create_db_snapshot, :copy_db_snapshot) do |resp|
         resp.data if resp[:db_snapshot_identifier] == id
       end
 
       populates_from(:describe_db_snapshots) do |resp|
-        resp.data[:db_snapshots].find{|j| j[:db_snapshot_identifier] == db_snapshot_identifier }
+        resp.data[:db_snapshots].find{|s| s[:db_snapshot_identifier] == id }
       end
 
       # @return [DBInstance]
@@ -102,13 +103,18 @@ module AWS
       end
 
       # Copies this database snapshot.
-      # @param [String] db_instance_id
-      # @return [nil]
-      def copy db_instance_id
-        options = {:source_db_snapshot_identifier => db_snapshot_identifier,
-                   :target_db_snapshot_identifier => db_instance_id}
-        client.copy_db_snapshot(options)
-        nil
+      # @param [String] new_snapshot_id
+      # @return [DBSnapshot]
+      def copy new_snapshot_id
+
+        options = {}
+        options[:source_db_snapshot_identifier] = id
+        options[:target_db_snapshot_identifier] = new_snapshot_id
+        resp = client.copy_db_snapshot(options)
+
+        DBSnapshot.new_from(:copy_db_snapshot, resp,
+          resp[:db_snapshot_identifier], :config => config)
+
       end
 
       # Deletes this database snapshot.
@@ -118,14 +124,26 @@ module AWS
         nil
       end
 
-      # Restores the database instance from this snapshot.
-      # @param [String] db_instance_id
-      # @see Client#restore_db_instance_from_db_snapshot
-      def restore_instance db_instance_id, options = {}
-        options[:db_instance_identifier] = db_instance_id
+      # Restores the database instance from this snapshot.  You may optionally
+      # specify the db instance id if you wish to restore to a different db.
+      #
+      # @param (see Client#restore_db_instance_from_db_snapshot)
+      # @option (see Client#restore_db_instance_from_db_snapshot)
+      def restore_instance options = {}
         options[:db_snapshot_identifier] = db_snapshot_identifier
+        options[:db_instance_identifier] ||= db_instance_id
         client.restore_db_instance_from_db_snapshot(options)
         nil
+      end
+
+      # @return [Boolean] Returns +true+ if the db snapshot exists.
+      def exists?
+        begin
+          get_resource
+          true
+        rescue AWS::RDS::Errors::DBSnapshotNotFound
+          false
+        end
       end
 
       protected
