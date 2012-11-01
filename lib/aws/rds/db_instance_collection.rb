@@ -21,22 +21,23 @@ module AWS
 
       include Core::Collection::WithLimitAndNextToken
 
-      # @private
-      def initialize options = {}
-        @filters = options[:filters] || {}
-        super
-      end
-
-      # @param [String] db_instance_id
+      # @param [String] db_instance_id The DB instance identifier.
+      #   This should be a lowercase string.
       # @return [DBInstance] Returns a {DBInstance} with the given ID.
       def [] db_instance_id
-        DBInstance.new(db_instance_id, :config => config)
+        DBInstance.new(db_instance_id.to_s.downcase, :config => config)
       end
 
-      def create name, options = {}
-        options[:db_instance_identifier] = name
+      # Creates a database instance.  See {Client#create_db_instance}
+      # for documentation on the accepted (and required) options.
+      # @param [String] db_instance_id The DB instance identifier.
+      #   This should be a lowercase string.
+      # @param [Hash] options
+      # @option (see Client#create_db_instance)
+      # @return [DBInstance]
+      def create db_instance_id, options = {}
+        options[:db_instance_identifier] = db_instance_id
         response = client.create_db_instance(options)
-
         self[response.data[:db_instance][:db_instance_identifier]]
       end
 
@@ -44,11 +45,10 @@ module AWS
 
       def _each_item marker, max_records, options = {}, &block
 
-        options = @filters.merge(options)
         options[:marker] = marker if marker
         options[:max_records] = [[20,max_records].max,100].min if max_records
 
-        response = client.describe_db_instances(@filters.merge(options))
+        response = client.describe_db_instances(options)
         response.data[:db_instances].each do |details|
 
           db_instance = DBInstance.new_from(
@@ -62,6 +62,7 @@ module AWS
         end
 
         response.data[:marker]
+
       end
 
     end

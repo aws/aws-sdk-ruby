@@ -13,12 +13,12 @@
 
 module AWS
   class RDS
+
+    # Client class for Amazon Relational Database Service (RDS).
     class Client < Core::QueryClient
 
       # @private
       CACHEABLE_REQUESTS = Set[]
-
-      define_client_methods('2012-07-31')
 
       ## client methods ##
 
@@ -1584,6 +1584,8 @@ module AWS
       #     * +:cidrip+ - (String)
 
       ## end client methods ##
+
+      define_client_methods('2012-07-31')
 
     end
   end

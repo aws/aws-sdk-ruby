@@ -13,7 +13,6 @@
 
 require 'aws/core'
 require 'aws/rds/config'
-require 'time'
 
 module AWS
 

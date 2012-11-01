@@ -14,82 +14,168 @@
 
 module AWS
   class RDS
+
+    # @attr_reader [String] db_instance_class
+    #
+    # @attr_reader [String] engine
+    #
+    # @attr_reader [String] db_instance_status
+    #
+    # @attr_reader [String] master_username
+    #
+    # @attr_reader [String] db_name
+    #
+    # @attr_reader [String] endpoint_address
+    #
+    # @attr_reader [Integer] endpoint_port
+    #
+    # @attr_reader [Integer] allocated_storage
+    #
+    # @attr_reader [Time] creation_date_time
+    #
+    # @attr_reader [String] preferred_backup_window
+    #
+    # @attr_reader [Integer] backup_retention_period
+    #
+    # @attr_reader [String] availability_zone_name
+    #
+    # @attr_reader [String] preferred_maintenance_window
+    #
+    # @attr_reader [Time] latest_restorable_time
+    #
+    # @attr_reader [Boolean] multi_az
+    #
+    # @attr_reader [String] engine_version
+    #
+    # @attr_reader [Boolean] auto_minor_version_upgrade
+    #
+    # @attr_reader [String] read_replica_source_db_instance_identifier
+    #
+    # @attr_reader [Array<String>] read_replica_db_instance_identifiers
+    #
+    # @attr_reader [String] license_model
+    #
+    # @attr_reader [String] character_set_name
+    #
     class DBInstance < Core::Resource
 
-      # @param [String] job_flow_id
+      # @param [String] db_instance_id
       # @param [Hash] options
-      # @private
       def initialize db_instance_id, options = {}
         @db_instance_identifier = db_instance_id
         super
       end
 
+      # @return [String]
       attr_reader :db_instance_identifier
 
       alias_method :id, :db_instance_identifier
 
-      attribute :allocated_storage, :static => true
-      alias_method :size, :allocated_storage
+      alias_method :db_instance_id, :db_instance_identifier
 
-      attribute :availability_zone, :static => true
+      attribute :allocated_storage, :static => true, :alias => :size
+
+      attribute :auto_minor_version_upgrade
+
+      attribute :availability_zone_name,
+        :from => :availability_zone,
+        :static => true
+
       attribute :backup_retention_period, :static => true
+
       attribute :character_set_name, :static => true
-      attribute :db_instance_class, :static => true
-      attribute :db_name, :static => true
-      attribute :engine, :static => true
-      attribute :engine_version, :static => true
-      attribute :master_username, :static => true
-      attribute :multi_az, :static => true
-      attribute :preferred_backup_window, :static => true
-      attribute :preferred_maintenance_window, :static => true
-      attribute :read_replica_db_instance_identifiers, :static => true
-      attribute :read_replica_source_db_instance_identifier, :static => true
-
-      attribute :db_instance_status
-      alias_method :status, :db_instance_status
-
-      attribute :endpoint_address,
-                :from => [:endpoint, :address], :static => true
-      attribute :endpoint_port,
-                :from => [:endpoint, :port], :static => true
 
       attribute :creation_date_time,
-                :from => [:instance_create_time],
-                :static => true,
-                :alias => :created_at
+        :from => :instance_create_time,
+        :static => true,
+        :alias => :created_at
+
+      attribute :db_instance_class, :static => true
+
+      attribute :db_instance_status, :alias => :status
+
+      attribute :db_name, :static => true, :alias => :name
+
+      attribute :endpoint_address,
+        :from => [:endpoint, :address],
+        :static => true
+
+      attribute :endpoint_port,
+        :from => [:endpoint, :port],
+        :static => true
+
+      attribute :engine, :static => true
+
+      attribute :engine_version, :static => true
 
       attribute :latest_restorable_time
 
+      attribute :license_model
+
+      attribute :master_username, :static => true
+
+      attribute :multi_az, :static => true, :alias => :multi_az?
+
+      attribute :preferred_backup_window, :static => true
+
+      attribute :preferred_maintenance_window, :static => true
+
+      attribute :read_replica_db_instance_identifiers, :static => true
+
+      attribute :read_replica_source_db_instance_identifier, :static => true
+
       populates_from(:describe_db_instances) do |resp|
-        resp.data[:db_instances].find{|j| j[:db_instance_identifier] == db_instance_identifier }
+        resp.data[:db_instances].find{|j| j[:db_instance_identifier] == id }
       end
 
+      # Modifies the database instance.
+      # @note You do not need to set +:db_instance_identifier+.
+      # @see Client#modify_db_instance
+      # @param (see Client#modify_db_instance)
+      def modify options = {}
+        client.modify_db_instance(options.merge(:db_instance_identifier => id))
+      end
+
+      # @return [DBSnapshotCollection]
       def snapshots
-        DBSnapshotCollection.new.db_instance(db_instance_identifier)
+        DBSnapshotCollection.new(:config => config).with_id(id)
       end
 
-      def create_snapshot name
-        options = {:db_instance_identifier => db_instance_identifier,
-                   :db_snapshot_identifier => name}
+      # @return [DBSnapshot]
+      def create_snapshot db_snapshot_id
+        options = {}
+        options[:db_snapshot_identifier] = db_snapshot_id
+        options[:db_instance_identifier] = db_instance_identifier
         client.create_db_snapshot(options)
+        snapshots[db_snapshot_id]
+      end
+
+      # Reboots this databse instance.
+      # @param [Hash] options
+      # @option options [Boolean] :force_failover When +true+, the reboot will be
+      #   conducted through a MultiAZ failover. Constraint: You cannot
+      #   specify +true+ if the instance is not configured for MultiAZ.
+      # @return [nil]
+      def reboot options = {}
+        client.reboot_db_instance(options.merge(:db_instance_identifier => id))
         nil
       end
 
-      def reboot options={}
-        options[:db_instance_identifier] = db_instance_identifier
-        client.reboot_db_instance(options)
-        nil
-      end
-
-      def delete options={}
-        options[:db_instance_identifier] = db_instance_identifier
-        client.delete_db_instance(options)
+      # Terminates (deletes) this database instance.
+      # @return [nil]
+      def delete options = {}
+        client.delete_db_instance(options.merge(:db_instance_identifier => id))
         nil
       end
 
       # @return [Boolean] Returns +true+ if the db instance exists.
       def exists?
-        !get_resource.data[:db_instances].empty?
+        begin
+          get_resource
+          true
+        rescue AWS::RDS::Errors::DBInstanceNotFound
+          false
+        end
       end
 
       protected
@@ -99,7 +185,7 @@ module AWS
       end
 
       def get_resource attr = nil
-        client.describe_db_instances(:db_instance_identifier => db_instance_identifier)
+        client.describe_db_instances(:db_instance_identifier => id)
       end
 
     end

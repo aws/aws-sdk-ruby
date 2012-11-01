@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
-require 'date'
-require 'time'
-
 module AWS
   class RDS
     class DBSnapshotCollection
@@ -33,13 +29,15 @@ module AWS
         DBSnapshot.new(db_snapshot_id, :config => config)
       end
 
-      def db_instance db_instance_id
+      def with_id db_instance_id
         filter(:db_instance_identifier, db_instance_id)
       end
+      alias_method :db_instance, :with_id
 
-      def type snapshot_type
+      def with_type snapshot_type
         filter(:snapshot_type, snapshot_type)
       end
+      alias_method :type, :with_type
 
       # @param [String,Symbol] name
       # @param [Mixed] value
@@ -59,7 +57,7 @@ module AWS
         options[:marker] = marker if marker
         options[:max_records] = [[20,max_records].max,100].min if max_records
 
-        response = client.describe_db_snapshots(@filters.merge(options))
+        response = client.describe_db_snapshots(options)
         response.data[:db_snapshots].each do |details|
 
           db_snapshot = DBSnapshot.new_from(
