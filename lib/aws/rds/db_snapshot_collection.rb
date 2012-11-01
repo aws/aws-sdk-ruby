@@ -29,11 +29,22 @@ module AWS
         DBSnapshot.new(db_snapshot_id, :config => config)
       end
 
-      def with_id db_instance_id
-        filter(:db_instance_identifier, db_instance_id)
+      # Filters the DB snapshots to those beloning to a single db instance.
+      # You may pass the ID of a db instance or a {DBInstance} object.
+      #
+      # @param [String,DBInstance] db_instance A db instance identifier
+      #   string or a {DBInstance} object.
+      #
+      # @return [DBSnapshotCollection]
+      #
+      def db_instance db_instance
+        id = db_instance.is_a?(Core::Model) ? db_instance.id : db_instance
+        filter(:db_instance_identifier, id.to_s.downcase)
       end
-      alias_method :db_instance, :with_id
 
+      # Filters the DB snapshots to those of a given snapshot type.
+      # @param [String] snapshot_type
+      # @return [DBSnapshotCollection]
       def with_type snapshot_type
         filter(:snapshot_type, snapshot_type)
       end
