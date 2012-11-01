@@ -1,4 +1,3 @@
-
 # Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -12,15 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-# language: en
-@rds @client
-Feature: RDS Client
 
-  Scenario: DescribeEvents
-    When I call #describe_events on the client
-    Then a request should have been made like:
-    | TYPE   | NAME             | VALUE                                             |
-    | http   | verb             | POST                                              |
-    | http   | uri              | /                                                 |
-    | param  | Action           | DescribeEvents                                    |
-
+When /^I call \#(\w+) on the client$/ do |operation|
+  @response = @rds.client.send(operation, {})
+end
