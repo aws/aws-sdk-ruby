@@ -142,7 +142,7 @@ module AWS
 
       # @return [DBSnapshotCollection]
       def snapshots
-        DBSnapshotCollection.new(:config => config).with_id(id)
+        DBSnapshotCollection.new(:config => config).db_instance(self)
       end
 
       # @return [DBSnapshot]
