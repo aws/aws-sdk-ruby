@@ -124,6 +124,10 @@ module AWS
 
       attribute :read_replica_source_db_instance_identifier, :static => true
 
+      populates_from(:create_db_instance) do |resp|
+        resp.data if resp.data[:db_instance_identifier] == id
+      end
+
       populates_from(:describe_db_instances) do |resp|
         resp.data[:db_instances].find{|j| j[:db_instance_identifier] == id }
       end

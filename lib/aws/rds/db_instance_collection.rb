@@ -36,9 +36,14 @@ module AWS
       # @option (see Client#create_db_instance)
       # @return [DBInstance]
       def create db_instance_id, options = {}
+
         options[:db_instance_identifier] = db_instance_id
-        response = client.create_db_instance(options)
-        self[response.data[:db_instance][:db_instance_identifier]]
+
+        resp = client.create_db_instance(options)
+
+        DBInstance.new_from(:create_db_instance, resp,
+          resp[:db_instance_identifier], :config => config)
+
       end
 
       protected
