@@ -558,22 +558,19 @@
       DescribeDBEngineVersionsResult:
         :ignore: true
         :children:
-          DBEngineVersionMessage:
-            :children:
-              DBEngineVersions:
-                :ignore: true
-                :children:
-                  DBEngineVersion:
-                    :rename: :db_engine_versions
-                    :list: true
-                    :children:
-                      SupportedCharacterSets:
-                        :ignore: true
-                        :children:
-                          CharacterSet:
-                            :rename: :supported_character_sets
-                            :list: true
+          DBEngineVersions:
             :ignore: true
+            :children:
+              DBEngineVersion:
+                :rename: :db_engine_versions
+                :list: true
+                :children:
+                  SupportedCharacterSets:
+                    :ignore: true
+                    :children:
+                      CharacterSet:
+                        :rename: :supported_character_sets
+                        :list: true
 - :name: DescribeDBInstances
   :method: :describe_db_instances
   :inputs:
@@ -588,68 +585,65 @@
       DescribeDBInstancesResult:
         :ignore: true
         :children:
-          DBInstanceMessage:
+          DBInstances:
+            :ignore: true
             :children:
-              DBInstances:
-                :ignore: true
+              DBInstance:
+                :rename: :db_instances
+                :list: true
                 :children:
-                  DBInstance:
-                    :rename: :db_instances
-                    :list: true
+                  Endpoint:
                     :children:
-                      Endpoint:
+                      Port:
+                        :type: :integer
+                  AllocatedStorage:
+                    :type: :integer
+                  InstanceCreateTime:
+                    :type: :time
+                  BackupRetentionPeriod:
+                    :type: :integer
+                  DBSecurityGroups:
+                    :ignore: true
+                    :children:
+                      DBSecurityGroup:
+                        :rename: :db_security_groups
+                        :list: true
+                  DBParameterGroups:
+                    :ignore: true
+                    :children:
+                      DBParameterGroup:
+                        :rename: :db_parameter_groups
+                        :list: true
+                  DBSubnetGroup:
+                    :children:
+                      Subnets:
+                        :ignore: true
                         :children:
-                          Port:
-                            :type: :integer
+                          Subnet:
+                            :rename: :subnets
+                            :list: true
+                  PendingModifiedValues:
+                    :children:
                       AllocatedStorage:
                         :type: :integer
-                      InstanceCreateTime:
-                        :type: :time
+                      Port:
+                        :type: :integer
                       BackupRetentionPeriod:
                         :type: :integer
-                      DBSecurityGroups:
-                        :ignore: true
-                        :children:
-                          DBSecurityGroup:
-                            :rename: :db_security_groups
-                            :list: true
-                      DBParameterGroups:
-                        :ignore: true
-                        :children:
-                          DBParameterGroup:
-                            :rename: :db_parameter_groups
-                            :list: true
-                      DBSubnetGroup:
-                        :children:
-                          Subnets:
-                            :ignore: true
-                            :children:
-                              Subnet:
-                                :rename: :subnets
-                                :list: true
-                      PendingModifiedValues:
-                        :children:
-                          AllocatedStorage:
-                            :type: :integer
-                          Port:
-                            :type: :integer
-                          BackupRetentionPeriod:
-                            :type: :integer
-                          MultiAZ:
-                            :type: :boolean
-                      LatestRestorableTime:
-                        :type: :time
                       MultiAZ:
                         :type: :boolean
-                      AutoMinorVersionUpgrade:
-                        :type: :boolean
-                      ReadReplicaDBInstanceIdentifiers:
-                        :ignore: true
-                        :children:
-                          ReadReplicaDBInstanceIdentifier:
-                            :rename: :read_replica_db_instance_identifiers
-                            :list: true
-            :ignore: true
+                  LatestRestorableTime:
+                    :type: :time
+                  MultiAZ:
+                    :type: :boolean
+                  AutoMinorVersionUpgrade:
+                    :type: :boolean
+                  ReadReplicaDBInstanceIdentifiers:
+                    :ignore: true
+                    :children:
+                      ReadReplicaDBInstanceIdentifier:
+                        :rename: :read_replica_db_instance_identifiers
+                        :list: true
 - :name: DescribeDBParameterGroups
   :method: :describe_db_parameter_groups
   :inputs:
@@ -664,15 +658,12 @@
       DescribeDBParameterGroupsResult:
         :ignore: true
         :children:
-          DBParameterGroupsMessage:
-            :children:
-              DBParameterGroups:
-                :ignore: true
-                :children:
-                  DBParameterGroup:
-                    :rename: :db_parameter_groups
-                    :list: true
+          DBParameterGroups:
             :ignore: true
+            :children:
+              DBParameterGroup:
+                :rename: :db_parameter_groups
+                :list: true
 - :name: DescribeDBParameters
   :method: :describe_db_parameters
   :inputs:
@@ -690,18 +681,15 @@
       DescribeDBParametersResult:
         :ignore: true
         :children:
-          DBParameterGroupDetails:
-            :children:
-              Parameters:
-                :ignore: true
-                :children:
-                  Parameter:
-                    :rename: :parameters
-                    :list: true
-                    :children:
-                      IsModifiable:
-                        :type: :boolean
+          Parameters:
             :ignore: true
+            :children:
+              Parameter:
+                :rename: :parameters
+                :list: true
+                :children:
+                  IsModifiable:
+                    :type: :boolean
 - :name: DescribeDBSecurityGroups
   :method: :describe_db_security_groups
   :inputs:
@@ -716,28 +704,25 @@
       DescribeDBSecurityGroupsResult:
         :ignore: true
         :children:
-          DBSecurityGroupMessage:
-            :children:
-              DBSecurityGroups:
-                :ignore: true
-                :children:
-                  DBSecurityGroup:
-                    :rename: :db_security_groups
-                    :list: true
-                    :children:
-                      EC2SecurityGroups:
-                        :ignore: true
-                        :children:
-                          EC2SecurityGroup:
-                            :rename: :ec2_security_groups
-                            :list: true
-                      IPRanges:
-                        :ignore: true
-                        :children:
-                          IPRange:
-                            :rename: :ip_ranges
-                            :list: true
+          DBSecurityGroups:
             :ignore: true
+            :children:
+              DBSecurityGroup:
+                :rename: :db_security_groups
+                :list: true
+                :children:
+                  EC2SecurityGroups:
+                    :ignore: true
+                    :children:
+                      EC2SecurityGroup:
+                        :rename: :ec2_security_groups
+                        :list: true
+                  IPRanges:
+                    :ignore: true
+                    :children:
+                      IPRange:
+                        :rename: :ip_ranges
+                        :list: true
 - :name: DescribeDBSnapshots
   :method: :describe_db_snapshots
   :inputs:
@@ -756,24 +741,21 @@
       DescribeDBSnapshotsResult:
         :ignore: true
         :children:
-          DBSnapshotMessage:
-            :children:
-              DBSnapshots:
-                :ignore: true
-                :children:
-                  DBSnapshot:
-                    :rename: :db_snapshots
-                    :list: true
-                    :children:
-                      SnapshotCreateTime:
-                        :type: :time
-                      AllocatedStorage:
-                        :type: :integer
-                      Port:
-                        :type: :integer
-                      InstanceCreateTime:
-                        :type: :time
+          DBSnapshots:
             :ignore: true
+            :children:
+              DBSnapshot:
+                :rename: :db_snapshots
+                :list: true
+                :children:
+                  SnapshotCreateTime:
+                    :type: :time
+                  AllocatedStorage:
+                    :type: :integer
+                  Port:
+                    :type: :integer
+                  InstanceCreateTime:
+                    :type: :time
 - :name: DescribeDBSubnetGroups
   :method: :describe_db_subnet_groups
   :inputs:
@@ -788,22 +770,19 @@
       DescribeDBSubnetGroupsResult:
         :ignore: true
         :children:
-          DBSubnetGroupMessage:
-            :children:
-              DBSubnetGroups:
-                :ignore: true
-                :children:
-                  DBSubnetGroup:
-                    :rename: :db_subnet_groups
-                    :list: true
-                    :children:
-                      Subnets:
-                        :ignore: true
-                        :children:
-                          Subnet:
-                            :rename: :subnets
-                            :list: true
+          DBSubnetGroups:
             :ignore: true
+            :children:
+              DBSubnetGroup:
+                :rename: :db_subnet_groups
+                :list: true
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: :subnets
+                        :list: true
 - :name: DescribeEngineDefaultParameters
   :method: :describe_engine_default_parameters
   :inputs:
@@ -853,18 +832,15 @@
       DescribeEventsResult:
         :ignore: true
         :children:
-          EventsMessage:
-            :children:
-              Events:
-                :ignore: true
-                :children:
-                  Event:
-                    :rename: :events
-                    :list: true
-                    :children:
-                      Date:
-                        :type: :time
+          Events:
             :ignore: true
+            :children:
+              Event:
+                :rename: :events
+                :list: true
+                :children:
+                  Date:
+                    :type: :time
 - :name: DescribeOptionGroupOptions
   :method: :describe_option_group_options
   :inputs:
@@ -882,26 +858,23 @@
       DescribeOptionGroupOptionsResult:
         :ignore: true
         :children:
-          OptionGroupOptionsMessage:
-            :children:
-              OptionGroupOptions:
-                :ignore: true
-                :children:
-                  OptionGroupOption:
-                    :rename: :option_group_options
-                    :list: true
-                    :children:
-                      PortRequired:
-                        :type: :boolean
-                      DefaultPort:
-                        :type: :integer
-                      OptionsDependedOn:
-                        :ignore: true
-                        :children:
-                          OptionName:
-                            :rename: :options_depended_on
-                            :list: true
+          OptionGroupOptions:
             :ignore: true
+            :children:
+              OptionGroupOption:
+                :rename: :option_group_options
+                :list: true
+                :children:
+                  PortRequired:
+                    :type: :boolean
+                  DefaultPort:
+                    :type: :integer
+                  OptionsDependedOn:
+                    :ignore: true
+                    :children:
+                      OptionName:
+                        :rename: :options_depended_on
+                        :list: true
 - :name: DescribeOptionGroups
   :method: :describe_option_groups
   :inputs:
@@ -920,31 +893,28 @@
       DescribeOptionGroupsResult:
         :ignore: true
         :children:
-          OptionGroups:
-            :children:
-              OptionGroupsList:
-                :ignore: true
-                :children:
-                  OptionGroup:
-                    :rename: :option_groups_list
-                    :list: true
-                    :children:
-                      Options:
-                        :ignore: true
-                        :children:
-                          Option:
-                            :rename: :options
-                            :list: true
-                            :children:
-                              Port:
-                                :type: :integer
-                              DBSecurityGroupMemberships:
-                                :ignore: true
-                                :children:
-                                  DBSecurityGroup:
-                                    :rename: :db_security_group_memberships
-                                    :list: true
+          OptionGroupsList:
             :ignore: true
+            :children:
+              OptionGroup:
+                :rename: :option_groups_list
+                :list: true
+                :children:
+                  Options:
+                    :ignore: true
+                    :children:
+                      Option:
+                        :rename: :options
+                        :list: true
+                        :children:
+                          Port:
+                            :type: :integer
+                          DBSecurityGroupMemberships:
+                            :ignore: true
+                            :children:
+                              DBSecurityGroup:
+                                :rename: :db_security_group_memberships
+                                :list: true
 - :name: DescribeOrderableDBInstanceOptions
   :method: :describe_orderable_db_instance_options
   :inputs:
@@ -966,32 +936,29 @@
       DescribeOrderableDBInstanceOptionsResult:
         :ignore: true
         :children:
-          OrderableDBInstanceOptionsMessage:
-            :children:
-              OrderableDBInstanceOptions:
-                :ignore: true
-                :children:
-                  OrderableDBInstanceOption:
-                    :rename: :orderable_db_instance_options
-                    :list: true
-                    :children:
-                      AvailabilityZones:
-                        :ignore: true
-                        :children:
-                          AvailabilityZone:
-                            :rename: :availability_zones
-                            :list: true
-                      MultiAZCapable:
-                        :type: :boolean
-                      ReadReplicaCapable:
-                        :type: :boolean
-                      VpcCapable:
-                        :type: :boolean
-                      VpcMultiAZCapable:
-                        :type: :boolean
-                      VpcReadReplicaCapable:
-                        :type: :boolean
+          OrderableDBInstanceOptions:
             :ignore: true
+            :children:
+              OrderableDBInstanceOption:
+                :rename: :orderable_db_instance_options
+                :list: true
+                :children:
+                  AvailabilityZones:
+                    :ignore: true
+                    :children:
+                      AvailabilityZone:
+                        :rename: :availability_zones
+                        :list: true
+                  MultiAZCapable:
+                    :type: :boolean
+                  ReadReplicaCapable:
+                    :type: :boolean
+                  VpcCapable:
+                    :type: :boolean
+                  VpcMultiAZCapable:
+                    :type: :boolean
+                  VpcReadReplicaCapable:
+                    :type: :boolean
 - :name: DescribeReservedDBInstances
   :method: :describe_reserved_db_instances
   :inputs:
@@ -1018,37 +985,34 @@
       DescribeReservedDBInstancesResult:
         :ignore: true
         :children:
-          ReservedDBInstanceMessage:
-            :children:
-              ReservedDBInstances:
-                :ignore: true
-                :children:
-                  ReservedDBInstance:
-                    :rename: :reserved_db_instances
-                    :list: true
-                    :children:
-                      StartTime:
-                        :type: :time
-                      Duration:
-                        :type: :integer
-                      FixedPrice:
-                        :type: :float
-                      UsagePrice:
-                        :type: :float
-                      DBInstanceCount:
-                        :type: :integer
-                      MultiAZ:
-                        :type: :boolean
-                      RecurringCharges:
-                        :ignore: true
-                        :children:
-                          RecurringCharge:
-                            :rename: :recurring_charges
-                            :list: true
-                            :children:
-                              RecurringChargeAmount:
-                                :type: :float
+          ReservedDBInstances:
             :ignore: true
+            :children:
+              ReservedDBInstance:
+                :rename: :reserved_db_instances
+                :list: true
+                :children:
+                  StartTime:
+                    :type: :time
+                  Duration:
+                    :type: :integer
+                  FixedPrice:
+                    :type: :float
+                  UsagePrice:
+                    :type: :float
+                  DBInstanceCount:
+                    :type: :integer
+                  MultiAZ:
+                    :type: :boolean
+                  RecurringCharges:
+                    :ignore: true
+                    :children:
+                      RecurringCharge:
+                        :rename: :recurring_charges
+                        :list: true
+                        :children:
+                          RecurringChargeAmount:
+                            :type: :float
 - :name: DescribeReservedDBInstancesOfferings
   :method: :describe_reserved_db_instances_offerings
   :inputs:
@@ -1073,33 +1037,30 @@
       DescribeReservedDBInstancesOfferingsResult:
         :ignore: true
         :children:
-          ReservedDBInstancesOfferingMessage:
-            :children:
-              ReservedDBInstancesOfferings:
-                :ignore: true
-                :children:
-                  ReservedDBInstancesOffering:
-                    :rename: :reserved_db_instances_offerings
-                    :list: true
-                    :children:
-                      Duration:
-                        :type: :integer
-                      FixedPrice:
-                        :type: :float
-                      UsagePrice:
-                        :type: :float
-                      MultiAZ:
-                        :type: :boolean
-                      RecurringCharges:
-                        :ignore: true
-                        :children:
-                          RecurringCharge:
-                            :rename: :recurring_charges
-                            :list: true
-                            :children:
-                              RecurringChargeAmount:
-                                :type: :float
+          ReservedDBInstancesOfferings:
             :ignore: true
+            :children:
+              ReservedDBInstancesOffering:
+                :rename: :reserved_db_instances_offerings
+                :list: true
+                :children:
+                  Duration:
+                    :type: :integer
+                  FixedPrice:
+                    :type: :float
+                  UsagePrice:
+                    :type: :float
+                  MultiAZ:
+                    :type: :boolean
+                  RecurringCharges:
+                    :ignore: true
+                    :children:
+                      RecurringCharge:
+                        :rename: :recurring_charges
+                        :list: true
+                        :children:
+                          RecurringChargeAmount:
+                            :type: :float
 - :name: ModifyDBInstance
   :method: :modify_db_instance
   :inputs:
@@ -1229,9 +1190,6 @@
     :children:
       ModifyDBParameterGroupResult:
         :ignore: true
-        :children:
-          DBParameterGroupNameMessage:
-            :ignore: true
 - :name: ModifyDBSubnetGroup
   :method: :modify_db_subnet_group
   :inputs:
@@ -1445,9 +1403,6 @@
     :children:
       ResetDBParameterGroupResult:
         :ignore: true
-        :children:
-          DBParameterGroupNameMessage:
-            :ignore: true
 - :name: RestoreDBInstanceFromDBSnapshot
   :method: :restore_db_instance_from_db_snapshot
   :inputs:

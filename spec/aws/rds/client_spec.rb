@@ -78,6 +78,36 @@ module AWS
 
       end
 
+      context '#describe_events' do
+
+        it 'correct casts events as an array when empty' do
+          xml = <<-XML.strip
+<DescribeEventsResponse xmlns="#{namespace}">
+  <DescribeEventsResult>
+    <Events/>
+  </DescribeEventsResult>
+  <ResponseMetadata>
+    <RequestId>255038f7-2464-11e2-a1e9-ab7810d180d5</RequestId>
+  </ResponseMetadata>
+</DescribeEventsResponse>
+          XML
+
+          handler.should_receive(:handle) do |req,resp|
+            resp.status = 200
+            resp.body = xml
+          end
+
+          resp = client.describe_events
+          resp.data.should eq({
+            :events => [],
+            :response_metadata => {
+              :request_id => '255038f7-2464-11e2-a1e9-ab7810d180d5',
+            },
+          })
+
+        end
+      end
+
     end
   end
 end
