@@ -19,8 +19,8 @@ Feature: RDS Client
   Scenario: DescribeEvents
     When I call #describe_events on the client
     Then a request should have been made like:
-    | TYPE   | NAME             | VALUE                                             |
-    | http   | verb             | POST                                              |
-    | http   | uri              | /                                                 |
-    | param  | Action           | DescribeEvents                                    |
+    | TYPE   | NAME   | VALUE          |
+    | http   | verb   | POST           |
+    | http   | uri    | /              |
+    | param  | Action | DescribeEvents |
 
