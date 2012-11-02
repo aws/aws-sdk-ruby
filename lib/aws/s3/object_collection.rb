@@ -116,13 +116,21 @@ module AWS
       #
       #   bucket.objects.delete(to_delete)
       #
-      # @param [Mixed] objects One or more objects to delete.  Each object
-      #   can be one of the following:
+      # @overload delete(objects)
+      #   @param [Mixed] objects One or more objects to delete.  Each object
+      #     can be one of the following:
       #
-      #   * An object key (string)
-      #   * A hash with :key and :version_id (for versioned objects)
-      #   * An {S3Object} instance
-      #   * An {ObjectVersion} instance
+      #     * An object key (string)
+      #     * A hash with :key and :version_id (for versioned objects)
+      #     * An {S3Object} instance
+      #     * An {ObjectVersion} instance
+      #
+      # @overload delete(objects, options)
+      #   Deletes multiple objects, with additional options. The array can
+      #   contain any of the types of objects the first method invocation style
+      #   accepts.
+      #   @param [Array] objects One or more objects to delete.
+      #   @param [Hash] options Optional headers to pass on.
       #
       # @raise [BatchDeleteError] If any of the objects failed to delete,
       #   a BatchDeleteError will be raised with a summary of the errors.
@@ -130,6 +138,17 @@ module AWS
       # @return [nil]
       #
       def delete *objects
+
+        # Detect and retrieve options from the end of the splat.
+        if
+          objects.size == 2 and
+          objects[0].is_a?(Array) and
+          objects[1].is_a?(Hash)
+        then
+          client_opts = objects.pop
+        else
+          client_opts = {}
+        end
 
         objects = objects.flatten.collect do |obj|
           case obj
@@ -146,7 +165,6 @@ module AWS
         end
 
         batch_helper = BatchHelper.new(1000) do |batch|
-          client_opts = {}
           client_opts[:bucket_name] = bucket.name
           client_opts[:quiet] = true
           client_opts[:objects] = batch
