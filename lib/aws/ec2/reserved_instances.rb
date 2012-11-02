@@ -28,6 +28,7 @@ module AWS
         :currency_code,
         :recurring_charges,
         :offering_type,
+        :state,
       ]
 
       include TaggedItem
