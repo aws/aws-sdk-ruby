@@ -1078,8 +1078,9 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,Array<String>] :keys
       #   @option options [Boolean] :quiet (true)
+      #   @option options [String] :mfa
       #   @return [Core::Response]
-      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects) do
+      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects, :header_options => { :mfa => "x-amz-mfa" }) do
         configure_request do |req, options|
 
           super(req, options)
