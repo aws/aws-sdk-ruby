@@ -1,3 +1,84 @@
+2012-11-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/signature/version_3_https.rb: Added x-amz-security-token
+  header for signature version 3 https requests when a session token is
+  provided.
+
+2012-11-02 Trevor Rowe <trevorrowe@gmail.com>
+
+  * CONTRIBUTORS.txt: Added a contributors file.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.7.0
+
+2012-10-29 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/dynamo_db/batch_get.feature,
+  features/dynamo_db/step_definitions/batch_get.rb,
+  features/dynamo_db/step_definitions/batch_write.rb,
+  lib/aws/dynamo_db/batch_get.rb, lib/aws/dynamo_db/table.rb,
+  spec/aws/dynamo_db/batch_get_spec.rb, spec/aws/dynamo_db/table_spec.rb:
+  Added support for consistent reads to AWS::DynamoDB::BatchGet.
+
+  * features/dynamo_db/batch_write.feature,
+  features/dynamo_db/step_definitions/batch_write.rb,
+  features/dynamo_db/step_definitions/dynamo_db.rb: Sped up a few of the
+  DynamoDB batch write integration tests.
+
+  * lib/aws/api_config/DynamoDB-2011-12-05.yml, lib/aws/dynamo_db/client.rb:
+  Added consistent read to AWS::DynamoDB::Client#batch_get input and outputs.
+
+  * lib/aws/rds/event_collection.rb: Removed the empty file for
+  AWS::RDS::EventCollection.
+
+  * lib/aws/core.rb: Corrected the documentation on
+  AWS.config.dynamo_db_big_decimals.
+
+  * lib/aws/rds/config.rb: Corrected the default RDS endpoint, now
+  'rds.us-east-1.amazonaws.com'.
+
+  * lib/aws/rds/client.rb: Documented AWS::RDS::Client API operation methods.
+
+  * lib/aws/rds.rb: Added basic documentation for the AWS::RDS service
+  interface.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds/db_instance.rb,
+  lib/aws/rds/db_instance_collection.rb, lib/aws/rds/db_snapshot.rb,
+  lib/aws/rds/db_snapshot_collection.rb, lib/aws/rds/event_collection.rb:
+  Added missing attribution comment blocks to a few scripts.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml: Revert "Added api configuration for
+  RDS."
+
+  This reverts commit c6beb0537b7bbe84190e6aeed1e73e19aaff2ea4.
+
+  * lib/aws/rds.rb, lib/aws/rds/client.rb, lib/aws/rds/config.rb,
+  lib/aws/rds/errors.rb, lib/aws/rds/request.rb: Revert "Wired up a basic RDS
+  client."
+
+  This reverts commit cdabb8967b6c20cb4e2458d406688b47228d3c70.
+
+  * lib/aws/rds/client.rb: Revert "Documented the RDS API operations in
+  AWS::RDS::Client."
+
+  This reverts commit 5db2951ab8a24004631ef4b3fc25e3979bdfc89a.
+
+  * lib/aws/dynamo_db/item_collection.rb: Corrected documentation on
+  AWS::DynamoDB::ItemCollection on how to limit items returned.
+
+2012-10-26 Loren Segal <lsegal@amazon.com>
+
+  * features/dynamo_db/crc32.feature,
+  features/dynamo_db/step_definitions/crc32.rb,
+  features/dynamo_db/step_definitions/dynamo_db.rb,
+  lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/config.rb,
+  spec/aws/dynamo_db/client_spec.rb: Add CRC32 integrity checking to DynamoDB
+
+  * features/support/common.rb: Only run SimpleCov on cucumber when COVERAGE
+  is set
+
+  * features/dynamo_db/step_definitions/dynamo_db.rb: Remove extra whitespace
+  in a test
+
 2012-11-01 Trevor Rowe <trevorrowe@gmail.com>
 
   * features/rds/client.feature, features/rds/step_definitions/client.rb:
@@ -63,46 +144,6 @@
   features/sts/step_definitions/sessions.rb, lib/aws/s3/s3_object.rb: Fixed a
   bug in generating presigned GET requests for S3.
 
-2012-10-29 Trevor Rowe <trevorrowe@gmail.com>
-
-  * lib/aws/rds/event_collection.rb: Removed the empty file for
-  AWS::RDS::EventCollection.
-
-  * lib/aws/core.rb: Corrected the documentation on
-  AWS.config.dynamo_db_big_decimals.
-
-  * lib/aws/rds/config.rb: Corrected the default RDS endpoint, now
-  'rds.us-east-1.amazonaws.com'.
-
-  * lib/aws/rds/client.rb: Documented AWS::RDS::Client API operation methods.
-
-  * lib/aws/rds.rb: Added basic documentation for the AWS::RDS service
-  interface.
-
-  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds/db_instance.rb,
-  lib/aws/rds/db_instance_collection.rb, lib/aws/rds/db_snapshot.rb,
-  lib/aws/rds/db_snapshot_collection.rb, lib/aws/rds/event_collection.rb:
-  Added missing attribution comment blocks to a few scripts.
-
-  * lib/aws/api_config/RDS-2012-07-31.yml: Revert "Added api configuration for
-  RDS."
-
-  This reverts commit c6beb0537b7bbe84190e6aeed1e73e19aaff2ea4.
-
-  * lib/aws/rds.rb, lib/aws/rds/client.rb, lib/aws/rds/config.rb,
-  lib/aws/rds/errors.rb, lib/aws/rds/request.rb: Revert "Wired up a basic RDS
-  client."
-
-  This reverts commit cdabb8967b6c20cb4e2458d406688b47228d3c70.
-
-  * lib/aws/rds/client.rb: Revert "Documented the RDS API operations in
-  AWS::RDS::Client."
-
-  This reverts commit 5db2951ab8a24004631ef4b3fc25e3979bdfc89a.
-
-  * lib/aws/dynamo_db/item_collection.rb: Corrected documentation on
-  AWS::DynamoDB::ItemCollection on how to limit items returned.
-
 2012-09-20 Neville Kadwa <neville@kadwa.com>
 
   * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds.rb,
@@ -130,14 +171,6 @@
 
   * lib/aws/ec2/reserved_instances.rb: Added state attribute to
   reserved_instances
-
-2012-10-26 Loren Segal <lsegal@amazon.com>
-
-  * features/support/common.rb: Only run SimpleCov on cucumber when COVERAGE
-  is set
-
-  * features/dynamo_db/step_definitions/dynamo_db.rb: Remove extra whitespace
-  in a test
 
 2012-10-24 Marco Carvalho <marco@ebehavior.com.br>
 
