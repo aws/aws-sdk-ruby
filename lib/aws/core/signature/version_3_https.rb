@@ -32,6 +32,9 @@ module AWS
           parts << "Signature=#{signature(credentials)}"
           headers['x-amzn-authorization'] = parts.join(',')
 
+          headers['x-amz-security-token'] = credentials.session_token if
+            credentials.session_token
+
         end
 
         protected
