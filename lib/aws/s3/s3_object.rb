@@ -246,6 +246,7 @@ module AWS
         super
         @key = key
         @bucket = bucket
+        @etag = opts['etag'] || nil
       end
 
       # @return [String] The objects unique key
@@ -303,7 +304,10 @@ module AWS
       #
       # @return [String] Returns the object's ETag
       def etag
-        head.etag
+        unless etag
+          @etag = head.etag
+        end
+        @etag
       end
 
       # Returns the object's last modified time.
