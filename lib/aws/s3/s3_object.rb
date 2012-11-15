@@ -304,7 +304,7 @@ module AWS
       #
       # @return [String] Returns the object's ETag
       def etag
-        unless etag
+        unless @etag
           @etag = head.etag
         end
         @etag
