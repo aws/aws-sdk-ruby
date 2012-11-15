@@ -78,7 +78,7 @@ Now that you've installed the gem, you can run the samples, which you
 can find in our GitHub repository:
 
   $ git clone git://github.com/aws/aws-sdk-ruby
-  $ cd aws-sdk-for-ruby/samples/
+  $ cd aws-sdk-ruby/samples/
 
 The subdirectories of the +samples+ directory contain several code
 samples that you can run.  These samples demonstrate basic usage of
