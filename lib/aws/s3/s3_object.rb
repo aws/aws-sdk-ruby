@@ -303,19 +303,19 @@ module AWS
       #
       # @return [String] Returns the object's ETag
       def etag
-        head.etag
+        head[:etag]
       end
 
       # Returns the object's last modified time.
       #
       # @return [Time] Returns the object's last modified time.
       def last_modified
-        head.last_modified
+        head[:last_modified]
       end
 
       # @return [Integer] Size of the object in bytes.
       def content_length
-        head.content_length
+        head[:content_length]
       end
 
       # @note S3 does not compute content-type.  It reports the content-type
@@ -323,24 +323,24 @@ module AWS
       # @return [String] Returns the content type as reported by S3,
       #   defaults to an empty string when not provided during upload.
       def content_type
-        head.content_type
+        head[:content_type]
       end
 
       # @return [DateTime,nil]
       def expiration_date
-        head.expiration_date
+        head[:expiration_date]
       end
 
       # @return [String,nil]
       def expiration_rule_id
-        head.expiration_rule_id
+        head[:expiration_rule_id]
       end
 
       # @return [Symbol, nil] Returns the algorithm used to encrypt
       #   the object on the server side, or +nil+ if SSE was not used
       #   when storing the object.
       def server_side_encryption
-        head.server_side_encryption
+        head[:server_side_encryption]
       end
 
       # @return [true, false] Returns true if the object was stored
@@ -354,7 +354,7 @@ module AWS
       # @see #restore_expiration_date
       # @since 1.7.2
       def restore_in_progress?
-        head.restore_in_progress
+        head[:restore_in_progress]
       end
 
       # @return [DateTime] the time when the temporarily restored object
@@ -364,14 +364,14 @@ module AWS
       #   copy
       # @since 1.7.2
       def restore_expiration_date
-        head.restore_expiration_date
+        head[:restore_expiration_date]
       end
 
       # @return [Boolean] whether the object is a temporary copy of an
       #   archived object in the Glacier storage class.
       # @since 1.7.2
       def restored_object?
-        !!head.restore_expiration_date
+        !!head[:restore_expiration_date]
       end
 
       # Deletes the object from its S3 bucket.

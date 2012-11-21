@@ -152,6 +152,58 @@ module AWS
       end
       alias_method :put_bucket, :create_bucket
 
+      # @overload put_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [required,Hash] :index_document
+      #     * +:suffix+ - (*required*, String) - A suffix that is appended to
+      #       a request that is for a directory on the website endpoint
+      #       (e.g. if the suffix is index.html and you make a request to
+      #       samplebucket/images/ the data that is returned will be for
+      #       the object with the key name images/index.html).
+      #       The suffix must not be empty and must not include a
+      #       slash character.
+      #   @option options [Hash] :error_document
+      #     * +:key+ - (*required*, String) - The object key name to use
+      #       when a 4XX class error occurs.
+      #   @return [Core::Response]
+      bucket_method(:put_bucket_website, :put, 'website') do
+
+        configure_request do |req, options|
+          validate_bucket_name!(options[:bucket_name])
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.WebsiteConfiguration(:xmlns => XMLNS) do
+              xml.IndexDocument do
+                xml.Suffix(options[:index_document][:suffix])
+              end
+              if options[:error_document]
+                xml.ErrorDocument do
+                  xml.Key(options[:error_document][:key])
+                end
+              end
+            end
+          end.doc.root.to_xml
+          super(req, options)
+        end
+
+      end
+
+      # @overload get_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      #     * +:index_document+ - (Hash)
+      #       * +:suffix+ - (String)
+      #     * +:error_document+ - (Hash)
+      #       * +:key+ - (String)
+      bucket_method(:get_bucket_website, :get, 'website', XML::GetBucketWebsite)
+
+      # @overload delete_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:delete_bucket_website, :delete, 'website')
+
       # Deletes an empty bucket.
       # @overload delete_bucket(options = {})
       #   @param [Hash] options
@@ -734,6 +786,9 @@ module AWS
       #     is made to determine the content length of strings, files,
       #     tempfiles, io objects, and any object that responds
       #     to +#length+ or +#size+.
+      #   @option options [String] :website_redirect_location If the bucket is
+      #     configured as a website, redirects requests for this object to
+      #     another object in the same bucket or to an external URL.
       #   @option options [Hash] :metadata
       #     A hash of metadata to be included with the
       #     object.  These will be sent to S3 as headers prefixed with
@@ -774,6 +829,7 @@ module AWS
       #   @return [Core::Response]
       #
       object_method(:put_object, :put, :header_options => {
+        :website_redirect_location => 'x-amz-website-redirect-location',
         :acl => 'x-amz-acl',
         :grant_read => 'x-amz-grant-read',
         :grant_write => 'x-amz-grant-write',
@@ -887,6 +943,9 @@ module AWS
         process_response do |resp|
           resp.data[:data] = resp.http_response.body
           resp.data[:version_id] = resp.http_response.header('x-amz-version-id')
+          resp.data[:website_redirect_location] =
+            resp.http_response.header('x-amz-website-redirect-location') if
+            resp.http_response.header('x-amz-website-redirect-location')
           add_sse_to_response(resp)
         end
       end
@@ -943,6 +1002,7 @@ module AWS
 
           {
             'x-amz-version-id' => :version_id,
+            'x-amz-website-redirect-location' => :website_redirect_location,
             'content-type' => :content_type,
             'etag' => :etag,
           }.each_pair do |header,method|
@@ -1040,6 +1100,9 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
+      #   @option options [String] :website_redirect_location If the bucket is
+      #     configured as a website, redirects requests for this object to
+      #     another object in the same bucket or to an external URL.
       #   @option options [Hash] :metadata
       #   @option options [Symbol] :acl
       #   @option options [String] :cache_control
@@ -1067,6 +1130,7 @@ module AWS
       object_method(:initiate_multipart_upload, :post, 'uploads',
                     XML::InitiateMultipartUpload,
                     :header_options => {
+                      :website_redirect_location => 'x-amz-website-redirect-location',
                       :acl => 'x-amz-acl',
                       :grant_read => 'x-amz-grant-read',
                       :grant_write => 'x-amz-grant-write',
@@ -1269,6 +1333,9 @@ module AWS
       #     to copy a object into.
       #   @option options [required, String] :key Where (object key) in the
       #     bucket the object should be copied to.
+      #   @option options [String] :website_redirect_location If the bucket is
+      #     configured as a website, redirects requests for this object to
+      #     another object in the same bucket or to an external URL.
       #   @option options [required, String] :copy_source The source
       #     bucket name and key, joined by a forward slash ('/').
       #     This string must be URL-encoded. Additionally, you must
@@ -1292,6 +1359,7 @@ module AWS
       #   @option options [String] :grant_full_control
       #   @return [Core::Response]
       object_method(:copy_object, :put, :header_options => {
+        :website_redirect_location => 'x-amz-website-redirect-location',
         :acl => 'x-amz-acl',
         :grant_read => 'x-amz-grant-read',
         :grant_write => 'x-amz-grant-write',
