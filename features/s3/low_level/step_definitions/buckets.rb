@@ -17,6 +17,23 @@ def get_bucket
   Net::HTTP.get(URI.parse("http://#{@endpoint}/#{@bucket_name}/"))
 end
 
+def create_bucket_low_level options = {}
+  options[:bucket_name] ||= "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @bucket_name = options[:bucket_name]
+  @endpoint = options[:endpoint] || @s3_client.config.s3_endpoint
+  @result = @s3_client.create_bucket(options)
+  @buckets_created << [@bucket_name, @endpoint]
+  sleep 0.5 # Dumb insurance against eventual consistency
+end
+
+def create_bucket_high_level options = {}
+  @bucket_name = options.delete(:name) || "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @endpoint = @s3.client.config.s3_endpoint
+  @bucket = @s3.buckets.create(@bucket_name, options)
+  @buckets_created << [@bucket_name, @endpoint]
+  @bucket
+end
+
 When /^I call create_bucket( asynchronously)?$/ do |async|
   create_bucket_low_level(:async => !async.to_s.strip.empty?)
 end
@@ -144,3 +161,12 @@ Then /^the client should have made a "([^\"]*)" request to the bucket$/ do |verb
   r.http_method.should == verb
   r.host.should == "#@bucket_name.s3.amazonaws.com"
 end
+
+Given /^I force s(\d+) to use path style requests$/ do |arg1|
+  @s3_client = @s3_client.with_options(:s3_force_path_style => true)
+end
+
+When /^I call get_bucket$/ do
+  @s3_client.get_bucket(:bucket_name => @bucket_name)
+end
+

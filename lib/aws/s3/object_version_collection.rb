@@ -16,15 +16,15 @@ module AWS
 
     # For S3 buckets with versioning enabled, objects will store versions
     # each time you write to them.
-    # 
+    #
     #   object = bucket.objects['myobj']
     #   object.write('1')
     #   object.write('2')
     #   object.write('3')
     #
     #   object.versions.collect(&:read)
-    #   #=> ['1', '2', '3']         
-    #                                         
+    #   #=> ['1', '2', '3']
+    #
     # To see all the version id for a particular object, access the any particular version,
     # and see the latest version:
     #
@@ -32,7 +32,7 @@ module AWS
     #   #=> T2TwAiZ3SmNr7tOfe0QBa4RZnSb3GSLq
     #   #=> kAEHC_ysT65bT4P3zyYOP1ELA6ajar_6
     #   #=> itHPX6m8na_sog0cAtkgP3QITEE8v5ij
-    #  
+    #
     #   object.versions['itHPX6m8na_sog0cAtkgP3QITEE8v5ij']
     #   #=> <AWS::S3::ObjectVersion:<<bucket>>:myobj:itHPX6m8na_sog0cAtkgP3QITEE8v5ij>
     #
@@ -42,7 +42,7 @@ module AWS
     # If you know the id of a particular version you can get that object.
     #
     #   bucket.objects['myobj'].version[version_id].delete
-    #   
+    #
     class ObjectVersionCollection
 
       include Core::Model
@@ -58,7 +58,7 @@ module AWS
       end
 
       # Returns an object that represents a single version of the {#object}.
-      # @param [String] version_id 
+      # @param [String] version_id
       # @return [ObjectVersion]
       def [] version_id
         ObjectVersion.new(object, version_id)

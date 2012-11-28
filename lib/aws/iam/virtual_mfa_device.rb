@@ -49,7 +49,7 @@ module AWS
 
       attribute :enable_date, :static => true
 
-      attribute :user_details, :as => :user
+      attribute :user_details, :from => :user
 
       protected :user_details
 

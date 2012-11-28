@@ -46,11 +46,6 @@ module AWS
           exception.should be_kind_of(base)
         end
 
-        it "should expose box_usage as a float" do
-          pending
-          exception.box_usage.should == 1.234
-        end
-
       end
 
       describe DuplicateItemName do

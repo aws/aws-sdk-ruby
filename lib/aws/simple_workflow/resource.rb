@@ -29,12 +29,12 @@ module AWS
 
         # the simple workflow attributes are all given as 'lowerCamelCase'
         # this converts the :snake_case name to the correct format
-        unless options[:as]
+        unless options[:from]
           parts = []
           name.to_s.split(/_/).each_with_index do |part,n|
             parts << (n == 0 ? part : part.capitalize)
           end
-          options[:as] = parts.join.to_sym
+          options[:from] = parts.join.to_sym
         end
 
         if options[:duration]

@@ -15,11 +15,9 @@ module AWS
   class CloudFormation
 
     # Client class for AWS CloudFormation.
-    class Client < Core::Client
+    class Client < Core::QueryClient
 
-      API_VERSION = '2010-05-15'
-
-      extend Core::Client::QueryXML
+      define_client_methods('2010-05-15')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -39,298 +37,216 @@ module AWS
 
       ## client methods ##
 
+      # @!method create_stack(options = {})
       # Calls the CreateStack API operation.
-      # @method create_stack(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      # * +:template_body+ - (String)
-      # * +:template_url+ - (String)
-      # * +:parameters+ - (Array<Hash>)
-      #   * +:parameter_key+ - (String)
-      #   * +:parameter_value+ - (String)
-      # * +:disable_rollback+ - (Boolean)
-      # * +:timeout_in_minutes+ - (Integer)
-      # * +:notification_ar_ns+ - (Array<String>)
-      # * +:capabilities+ - (Array<String>)
-      # * +:on_failure+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_id+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :create_stack, 'CreateStack'
-
-      # Calls the CreateUploadBucket API operation.
-      # @method create_upload_bucket(options = {})
-      #
-      # === Options:
-      #
-      # This method accepts no options.
-      #
-      # === Response Structure:
-      #
-      # * +:bucket_name+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :create_upload_bucket, 'CreateUploadBucket'
-
-      # Calls the DeleteStack API operation.
-      # @method delete_stack(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      #
-      # === Response Structure:
-      #
-      # This method returns no response data.
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :delete_stack, 'DeleteStack'
-
-      # Calls the DescribeStackEvents API operation.
-      # @method describe_stack_events(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - (String)
-      # * +:next_token+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_events+ - (Array<Hash>)
-      #   * +:stack_id+ - (String)
-      #   * +:event_id+ - (String)
-      #   * +:stack_name+ - (String)
-      #   * +:logical_resource_id+ - (String)
-      #   * +:physical_resource_id+ - (String)
-      #   * +:resource_type+ - (String)
-      #   * +:timestamp+ - (Time)
-      #   * +:resource_status+ - (String)
-      #   * +:resource_status_reason+ - (String)
-      #   * +:resource_properties+ - (String)
-      # * +:next_token+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :describe_stack_events, 'DescribeStackEvents'
-
-      # Calls the DescribeStackResource API operation.
-      # @method describe_stack_resource(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      # * +:logical_resource_id+ - *required* - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_resource_detail+ - (Hash)
-      #   * +:stack_name+ - (String)
-      #   * +:stack_id+ - (String)
-      #   * +:logical_resource_id+ - (String)
-      #   * +:physical_resource_id+ - (String)
-      #   * +:resource_type+ - (String)
-      #   * +:last_updated_timestamp+ - (Time)
-      #   * +:resource_status+ - (String)
-      #   * +:resource_status_reason+ - (String)
-      #   * +:description+ - (String)
-      #   * +:metadata+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :describe_stack_resource, 'DescribeStackResource'
-
-      # Calls the DescribeStackResources API operation.
-      # @method describe_stack_resources(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - (String)
-      # * +:logical_resource_id+ - (String)
-      # * +:physical_resource_id+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_resources+ - (Array<Hash>)
-      #   * +:stack_name+ - (String)
-      #   * +:stack_id+ - (String)
-      #   * +:logical_resource_id+ - (String)
-      #   * +:physical_resource_id+ - (String)
-      #   * +:resource_type+ - (String)
-      #   * +:timestamp+ - (Time)
-      #   * +:resource_status+ - (String)
-      #   * +:resource_status_reason+ - (String)
-      #   * +:description+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :describe_stack_resources, 'DescribeStackResources'
-
-      # Calls the DescribeStacks API operation.
-      # @method describe_stacks(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stacks+ - (Array<Hash>)
-      #   * +:stack_id+ - (String)
-      #   * +:stack_name+ - (String)
-      #   * +:description+ - (String)
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      #   * +:template_body+ - (String)
+      #   * +:template_url+ - (String)
       #   * +:parameters+ - (Array<Hash>)
       #     * +:parameter_key+ - (String)
       #     * +:parameter_value+ - (String)
-      #   * +:creation_time+ - (Time)
-      #   * +:last_updated_time+ - (Time)
-      #   * +:stack_status+ - (String)
-      #   * +:stack_status_reason+ - (String)
       #   * +:disable_rollback+ - (Boolean)
-      #   * +:notification_ar_ns+ - (Array<String>)
       #   * +:timeout_in_minutes+ - (Integer)
+      #   * +:notification_arns+ - (Array<String>)
       #   * +:capabilities+ - (Array<String>)
-      #   * +:outputs+ - (Array<Hash>)
-      #     * +:output_key+ - (String)
-      #     * +:output_value+ - (String)
+      #   * +:on_failure+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_id+ - (String)
+
+      # @!method create_upload_bucket(options = {})
+      # Calls the CreateUploadBucket API operation.
+      # @param [Hash] options
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:bucket_name+ - (String)
+
+      # @!method delete_stack(options = {})
+      # Calls the DeleteStack API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      # @return [Core::Response]
+
+      # @!method describe_stack_events(options = {})
+      # Calls the DescribeStackEvents API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - (String)
+      #   * +:next_token+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_events+ - (Array<Hash>)
+      #     * +:stack_id+ - (String)
+      #     * +:event_id+ - (String)
+      #     * +:stack_name+ - (String)
+      #     * +:logical_resource_id+ - (String)
+      #     * +:physical_resource_id+ - (String)
+      #     * +:resource_type+ - (String)
+      #     * +:timestamp+ - (Time)
+      #     * +:resource_status+ - (String)
+      #     * +:resource_status_reason+ - (String)
+      #     * +:resource_properties+ - (String)
+      #   * +:next_token+ - (String)
+
+      # @!method describe_stack_resource(options = {})
+      # Calls the DescribeStackResource API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      #   * +:logical_resource_id+ - *required* - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_resource_detail+ - (Hash)
+      #     * +:stack_name+ - (String)
+      #     * +:stack_id+ - (String)
+      #     * +:logical_resource_id+ - (String)
+      #     * +:physical_resource_id+ - (String)
+      #     * +:resource_type+ - (String)
+      #     * +:last_updated_timestamp+ - (Time)
+      #     * +:resource_status+ - (String)
+      #     * +:resource_status_reason+ - (String)
       #     * +:description+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :describe_stacks, 'DescribeStacks'
+      #     * +:metadata+ - (String)
 
-      # Calls the EstimateTemplateCost API operation.
-      # @method estimate_template_cost(options = {})
-      #
-      # === Options:
-      #
-      # * +:template_body+ - (String)
-      # * +:template_url+ - (String)
-      # * +:parameters+ - (Array<Hash>)
-      #   * +:parameter_key+ - (String)
-      #   * +:parameter_value+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:url+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :estimate_template_cost, 'EstimateTemplateCost'
-
-      # Calls the GetTemplate API operation.
-      # @method get_template(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:template_body+ - (String)
-      #
-      # @return [Core::Response]
-      #
-      define_client_method :get_template, 'GetTemplate'
-
-      # Calls the ListStackResources API operation.
-      # @method list_stack_resources(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      # * +:next_token+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_resource_summaries+ - (Array<Hash>)
+      # @!method describe_stack_resources(options = {})
+      # Calls the DescribeStackResources API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - (String)
       #   * +:logical_resource_id+ - (String)
       #   * +:physical_resource_id+ - (String)
-      #   * +:resource_type+ - (String)
-      #   * +:last_updated_timestamp+ - (Time)
-      #   * +:resource_status+ - (String)
-      #   * +:resource_status_reason+ - (String)
-      # * +:next_token+ - (String)
-      #
       # @return [Core::Response]
-      #
-      define_client_method :list_stack_resources, 'ListStackResources'
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_resources+ - (Array<Hash>)
+      #     * +:stack_name+ - (String)
+      #     * +:stack_id+ - (String)
+      #     * +:logical_resource_id+ - (String)
+      #     * +:physical_resource_id+ - (String)
+      #     * +:resource_type+ - (String)
+      #     * +:timestamp+ - (Time)
+      #     * +:resource_status+ - (String)
+      #     * +:resource_status_reason+ - (String)
+      #     * +:description+ - (String)
 
-      # Calls the ListStacks API operation.
-      # @method list_stacks(options = {})
-      #
-      # === Options:
-      #
-      # * +:next_token+ - (String)
-      # * +:stack_status_filter+ - (Array<String>)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_summaries+ - (Array<Hash>)
-      #   * +:stack_id+ - (String)
+      # @!method describe_stacks(options = {})
+      # Calls the DescribeStacks API operation.
+      # @param [Hash] options
       #   * +:stack_name+ - (String)
-      #   * +:template_description+ - (String)
-      #   * +:creation_time+ - (Time)
-      #   * +:last_updated_time+ - (Time)
-      #   * +:deletion_time+ - (Time)
-      #   * +:stack_status+ - (String)
-      #   * +:stack_status_reason+ - (String)
-      # * +:next_token+ - (String)
-      #
       # @return [Core::Response]
-      #
-      define_client_method :list_stacks, 'ListStacks'
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stacks+ - (Array<Hash>)
+      #     * +:stack_id+ - (String)
+      #     * +:stack_name+ - (String)
+      #     * +:description+ - (String)
+      #     * +:parameters+ - (Array<Hash>)
+      #       * +:parameter_key+ - (String)
+      #       * +:parameter_value+ - (String)
+      #     * +:creation_time+ - (Time)
+      #     * +:last_updated_time+ - (Time)
+      #     * +:stack_status+ - (String)
+      #     * +:stack_status_reason+ - (String)
+      #     * +:disable_rollback+ - (Boolean)
+      #     * +:notification_arns+ - (Array<String>)
+      #     * +:timeout_in_minutes+ - (Integer)
+      #     * +:capabilities+ - (Array<String>)
+      #     * +:outputs+ - (Array<Hash>)
+      #       * +:output_key+ - (String)
+      #       * +:output_value+ - (String)
+      #       * +:description+ - (String)
 
+      # @!method estimate_template_cost(options = {})
+      # Calls the EstimateTemplateCost API operation.
+      # @param [Hash] options
+      #   * +:template_body+ - (String)
+      #   * +:template_url+ - (String)
+      #   * +:parameters+ - (Array<Hash>)
+      #     * +:parameter_key+ - (String)
+      #     * +:parameter_value+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:url+ - (String)
+
+      # @!method get_template(options = {})
+      # Calls the GetTemplate API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:template_body+ - (String)
+
+      # @!method list_stack_resources(options = {})
+      # Calls the ListStackResources API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      #   * +:next_token+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_resource_summaries+ - (Array<Hash>)
+      #     * +:logical_resource_id+ - (String)
+      #     * +:physical_resource_id+ - (String)
+      #     * +:resource_type+ - (String)
+      #     * +:last_updated_timestamp+ - (Time)
+      #     * +:resource_status+ - (String)
+      #     * +:resource_status_reason+ - (String)
+      #   * +:next_token+ - (String)
+
+      # @!method list_stacks(options = {})
+      # Calls the ListStacks API operation.
+      # @param [Hash] options
+      #   * +:next_token+ - (String)
+      #   * +:stack_status_filter+ - (Array<String>)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_summaries+ - (Array<Hash>)
+      #     * +:stack_id+ - (String)
+      #     * +:stack_name+ - (String)
+      #     * +:template_description+ - (String)
+      #     * +:creation_time+ - (Time)
+      #     * +:last_updated_time+ - (Time)
+      #     * +:deletion_time+ - (Time)
+      #     * +:stack_status+ - (String)
+      #     * +:stack_status_reason+ - (String)
+      #   * +:next_token+ - (String)
+
+      # @!method update_stack(options = {})
       # Calls the UpdateStack API operation.
-      # @method update_stack(options = {})
-      #
-      # === Options:
-      #
-      # * +:stack_name+ - *required* - (String)
-      # * +:template_body+ - (String)
-      # * +:template_url+ - (String)
-      # * +:parameters+ - (Array<Hash>)
-      #   * +:parameter_key+ - (String)
-      #   * +:parameter_value+ - (String)
-      # * +:capabilities+ - (Array<String>)
-      #
-      # === Response Structure:
-      #
-      # * +:stack_id+ - (String)
-      #
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String)
+      #   * +:template_body+ - (String)
+      #   * +:template_url+ - (String)
+      #   * +:parameters+ - (Array<Hash>)
+      #     * +:parameter_key+ - (String)
+      #     * +:parameter_value+ - (String)
+      #   * +:capabilities+ - (Array<String>)
       # @return [Core::Response]
-      #
-      define_client_method :update_stack, 'UpdateStack'
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:stack_id+ - (String)
 
+      # @!method validate_template(options = {})
       # Calls the ValidateTemplate API operation.
-      # @method validate_template(options = {})
-      #
-      # === Options:
-      #
-      # * +:template_body+ - (String)
-      # * +:template_url+ - (String)
-      #
-      # === Response Structure:
-      #
-      # * +:parameters+ - (Array<Hash>)
-      #   * +:parameter_key+ - (String)
-      #   * +:default_value+ - (String)
-      #   * +:no_echo+ - (Boolean)
-      #   * +:description+ - (String)
-      # * +:description+ - (String)
-      # * +:capabilities+ - (Array<String>)
-      # * +:capabilities_reason+ - (String)
-      #
+      # @param [Hash] options
+      #   * +:template_body+ - (String)
+      #   * +:template_url+ - (String)
       # @return [Core::Response]
-      #
-      define_client_method :validate_template, 'ValidateTemplate'
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:parameters+ - (Array<Hash>)
+      #     * +:parameter_key+ - (String)
+      #     * +:default_value+ - (String)
+      #     * +:no_echo+ - (Boolean)
+      #     * +:description+ - (String)
+      #   * +:description+ - (String)
+      #   * +:capabilities+ - (Array<String>)
+      #   * +:capabilities_reason+ - (String)
 
       ## end client methods ##
 

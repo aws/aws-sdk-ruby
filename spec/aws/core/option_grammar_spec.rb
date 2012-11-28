@@ -526,8 +526,6 @@ module AWS::Core
                                    "expected string value for value at key foo of option foo")
             end
 
-            it 'should generate the correct query parameters'
-
             context 'hash format' do
 
               it 'should pass the hash as is' do
@@ -557,8 +555,6 @@ module AWS::Core
                                    "of value at key bar of option foo")
             end
 
-            it 'should generate the correct query parameters'
-
             context 'hash format' do
 
               it 'should pass the hash as is' do
@@ -582,8 +578,6 @@ module AWS::Core
                  }
                }]
             end
-
-            it 'should generate the correct query parameters'
 
             context 'hash format' do
 

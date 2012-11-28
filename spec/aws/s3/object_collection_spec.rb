@@ -228,6 +228,22 @@ module AWS
 
         end
 
+        it 'uses an array of objects and hash of options when present' do
+
+          objects = ['key1','key2']
+          mfa     = '123456 7890'
+
+          client.should_receive(:delete_objects).with(
+            :bucket_name => bucket.name,
+            :quiet => true,
+            :objects => [{:key => 'key1'}, {:key => 'key2'}],
+            :mfa     => mfa).
+            and_return(delete_response)
+
+          collection.delete(objects, {:mfa => mfa})
+
+        end
+
       end
 
       context '#delete_if' do

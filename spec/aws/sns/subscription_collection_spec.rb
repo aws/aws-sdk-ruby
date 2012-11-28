@@ -22,35 +22,37 @@ module AWS
 
       let(:client) { config.sns_client }
 
-      let(:collection) { described_class.new(:config => config) }
+      let(:subscriptions) { described_class.new(:config => config) }
 
-      it_should_behave_like "collection object" do
+      it_should_behave_like "a pageable collection" do
+
+        let(:collection) { subscriptions }
 
         let(:client_method) { :list_subscriptions }
 
         let(:member_class) { Subscription }
 
-        def stub_two_members(resp)
-          resp.data[:subscriptions] = [
+        def stub_n_members resp, count
+          resp.data[:subscriptions] = (1..count).map do |n|
             {
-              :subscription_arn => "arn1",
-              :endpoint => "e1",
-              :protocol => "p-1",
-              :owner => "o1",
-              :topic_arn => "t1",
-            }, {
-              :subscription_arn => "arn2",
-              :endpoint => "e2",
-              :protocol => "p-2",
-              :owner => "o2",
-              :topic_arn => "t2",
-            },
-          ]
+              :subscription_arn => "arn#{n}",
+              :endpoint => "e#{n}",
+              :protocol => "p-#{n}",
+              :owner => "o#{n}",
+              :topic_arn => "t#{n}",
+            }
+          end
         end
 
-        it_should_behave_like "paginated collection"
+        it_should_behave_like "an indexed collection" do
+          let(:identity_method) { :arn }
+        end
 
         context 'yielded objects' do
+
+          before(:each) do
+            stub_n_members(response, 2)
+          end
 
           it 'should have the correct arns' do
             collection.map(&:arn).should == ["arn1", "arn2"]
@@ -80,18 +82,8 @@ module AWS
 
       end
 
-      context '#[]' do
-
-        it 'should return a subscription object' do
-          sub = collection["arn"]
-          sub.should be_a(Subscription)
-          sub.arn.should == "arn"
-          sub.config.should be(config)
-        end
-
-      end
-
     end
 
   end
+
 end

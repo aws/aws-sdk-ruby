@@ -49,7 +49,7 @@ module AWS
           :get_bucket_notification => "s3:GetBucketNotification",
           :set_bucket_notification => "s3:PutBucketNotification"
         }
-        
+
         protected
         def resource_arn resource
           prefix = 'arn:aws:s3:::'

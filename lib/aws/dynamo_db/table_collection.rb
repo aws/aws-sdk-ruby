@@ -20,7 +20,7 @@ module AWS
     # == Schemas
     #
     # Before you can operate on items in a table you must specify the schema.
-    # You do this by calling #hash_key= (and optionally #range_key=) on 
+    # You do this by calling #hash_key= (and optionally #range_key=) on
     # a table.
     #
     #   table = dynamo_db.tables['mytable']
@@ -44,19 +44,19 @@ module AWS
       #   table = dynamo_db.tables.create('mytable', 25, 25,
       #     :hash_key => { :id => :string })
       #
-      # @note Creating a table is an eventualy consistent operation.  You 
-      #   can not interact with the table until its status 
+      # @note Creating a table is an eventualy consistent operation.  You
+      #   can not interact with the table until its status
       #   ({Table#status}) is +:active+.
       #
       # @param [String] name The name of the table.
       #
-      # @param [Integer] read_capacity_units Sets the minimum 
+      # @param [Integer] read_capacity_units Sets the minimum
       #   number of reads supported before read requests are throttled.
       #
-      # @param [Integer] write_capacity_units Sets the minimum 
+      # @param [Integer] write_capacity_units Sets the minimum
       #   number of writes supported before writes requests are throttled.
       #
-      # @param [Hash] options 
+      # @param [Hash] options
       #
       # @option options [Hash] :hash_key A hash key is a combination
       #   of an attribute name and type.  If you want to have the
@@ -65,20 +65,20 @@ module AWS
       #
       #      :hash_key => { :username => :string }
       #
-      #   The other supported type is +:number+.  If you wanted to 
-      #   set the hash key on a numeric (integer) attribute then you
+      #   The other supported types are +:number+ and +:binary+.  If you
+      #   wanted to set the hash key on a numeric (integer) attribute then you
       #   could call #create with:
       #
       #      :hash_key => { :id => :number }
       #
-      #   All tables require a hash key.  If +:hash_key+ is not provided 
+      #   All tables require a hash key.  If +:hash_key+ is not provided
       #   then a default hash key will be provided.  The default hash
       #   key is:
-      #  
+      #
       #      :hash_key => { :id => :string }
       #
       # @option options [String] :range_key You can setup a table to use
-      #   composite keys by providing a +:range_key+.  Range keys are 
+      #   composite keys by providing a +:range_key+.  Range keys are
       #   configured the same way as hash keys.  They are useful
       #   for ordering items that share the same hash key.
       #
@@ -149,8 +149,8 @@ module AWS
 
         (name, type) = desc.to_a.first
 
-        unless type == :string or type == :number
-          msg = "invalid #{key_type} key type, expected :string or :number"
+        unless [:string, :number, :binary].include?(type)
+          msg = "invalid #{key_type} key type, expected :string, :number or :binary"
           raise ArgumentError, msg
         end
 

@@ -26,7 +26,7 @@ module AWS
   # * {Amazon S3}[http://aws.amazon.com/s3/]
   # * {Amazon S3 Documentation}[http://aws.amazon.com/documentation/s3/]
   #
-  # == Credentials
+  # = Credentials
   #
   # You can setup default credentials for all AWS services via 
   # AWS.config:
@@ -34,63 +34,76 @@ module AWS
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the S3 interface:
   #
   #   s3 = AWS::S3.new(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # == Buckets Keys and Objects
+  # = Buckets
   #
-  # S3 stores objects in buckets.
+  # Before you can upload files to S3, you need to create a bucket.
   #
-  # To create a bucket:
+  #   s3 = AWS::S3.new
+  #   bucket = s3.buckets.create('my-bucket')
   #
-  #   bucket = s3.buckets.create('mybucket')
+  # If a bucket already exists, you can get a reference to the bucket.
   #
-  # To get a bucket:
+  #   bucket = s3.buckets['my-bucket'] # no request made
   #
-  #   bucket = s3.buckets[:mybucket]
-  #   bucket = s3.buckets['mybucket']
+  # You can also enumerate all buckets in your account.
   #
-  # Listing buckets:
-  # 
   #   s3.buckets.each do |bucket|
   #     puts bucket.name
   #   end
   #
-  # See {Bucket} and {BucketCollection} for more information on working
-  # with S3 buckets.
+  # See {BucketCollection} and {Bucket} for more information on working 
+  # with buckets.
   #
-  # == Listing Objects
+  # = Objects
   #
-  # Enumerating objects in a bucket:
+  # Buckets contain objects.  Each object in a bucket has a unique key.
   #
-  #   bucket.objects.each do |object|
-  #     puts object.key #=> no data is fetched from s3, just a list of keys
+  # == Getting an Object
+  #
+  # If the object already exists, you can get a reference to the object.
+  #
+  #   # makes no request, returns an AWS::S3::S3Object
+  #   obj = bucket.objects['key']
+  #
+  # == Reading and Writing an Object
+  #
+  # The example above returns an {S3Object}.  You call {S3Object#write} and 
+  # {S3Object#read} to upload to and download from S3 respectively.
+  #
+  #   # streaming upload a file to S3
+  #   obj.write(Pathname.new('/path/to/file.txt'))
+  #
+  #   # streaming download from S3 to a file on disk
+  #   File.open('file.txt', 'w') do |file|
+  #     obj.read do |chunk|
+  #        file.write(chunk)
+  #     end
   #   end
   #
-  # You can limit the list of objects with a prefix, or explore the objects
-  # in a bucket as a tree.  See {ObjectCollection} for more information.
+  # == Enumerating Objects
   #
-  # == Reading and Writing to S3
+  # You can enumerate objects in your buckets.
   #
-  # Each object in a bucket has a unique key.
-  #
-  #   photo = s3.buckets['mybucket'].objects['photo.jpg']
-  #
-  # Writing to an S3Object:
-  #
-  #   photo.write(File.read('/some/photo.jpg'))
-  #
-  # Reading from an S3Object:
-  #
-  #   File.open("/some/path/on/disk.jpg", "w") do |f|
-  #     f.write(photo.read)
+  #   # enumerate ALL objects in the bucket (even if the bucket contains 
+  #   # more than 1k objects)
+  #   bucket.objects.each do |obj|
+  #     puts obj.key
   #   end
   #
-  # See {S3Object} for more information on reading and writing to S3.
+  #   # enumerate at most 20 objects with the given prefix
+  #   bucket.objects.with_prefix('photos/').each(:limit => 20).each do |photo|
+  #     puts photo.key
+  #   end
+  #
+  # See {ObjectCollection} and {S3Object} for more information on working
+  # with objects.
   #
   class S3
 
@@ -100,10 +113,15 @@ module AWS
       autoload :ACLOptions,                   'acl_options'
       autoload :Bucket,                       'bucket'
       autoload :BucketCollection,             'bucket_collection'
+      autoload :BucketTagCollection,          'bucket_tag_collection'
       autoload :BucketLifecycleConfiguration, 'bucket_lifecycle_configuration'
       autoload :BucketVersionCollection,      'bucket_version_collection'
       autoload :Client,                       'client'
+      autoload :CORSRule,                     'cors_rule'
+      autoload :CORSRuleCollection,           'cors_rule_collection'
       autoload :DataOptions,                  'data_options'
+      autoload :EncryptionUtils,              'encryption_utils'
+      autoload :CipherIO,                     'cipher_io'
       autoload :Errors,                       'errors'
       autoload :MultipartUpload,              'multipart_upload'
       autoload :MultipartUploadCollection,    'multipart_upload_collection'

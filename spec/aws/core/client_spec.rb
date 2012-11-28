@@ -43,9 +43,8 @@ module AWS
           end
         end
 
-        config.stub(:dummy_endpoint).and_return('dummy.amazonaws.com')
-        config.stub(:dummy_port).and_return('443')
-        config.stub(:dummy_region).and_return('us-east-1')
+        AWS::Core::Configuration.add_service(
+          'Dummy', 'dummy', 'dummy.amazonaws.com')
 
       end
 
@@ -58,7 +57,7 @@ module AWS
       let(:request_class) { ::AWS::Dummy::Request }
 
       let(:config_options) {{}}
-      
+
       let(:config) { stub_config.with(config_options) }
 
       let(:client) { client_class.new(:config => config) }
@@ -70,12 +69,6 @@ module AWS
         let(:config_options) {{ :logger => logger }}
 
         let(:response) { client.stub_for(:sample_method) }
-
-        before(:each) do
-          client_class.add_client_request_method(:sample_method) do
-            # method definition not important for logger tests
-          end
-        end
 
         it 'logs to the configured logger after each request' do
           logger.should_receive(:info)
@@ -103,6 +96,26 @@ module AWS
           logger.should_receive(:info).with('LOG-MESSAGE')
 
           client.sample_method
+
+        end
+
+        context '#log_warning' do
+
+          it 'sends warning messages here' do
+            logger.should_receive(:warn).with do |msg|
+              msg.should match(/^\[aws-sdk-gem-warning\] msg/)
+              msg
+            end
+            client.log_warning('msg')
+          end
+
+          it 'sends warning messages to $stderr when no logger is configured' do
+            $stderr.should_receive(:puts).with do |msg|
+              msg.should match(/^\[aws-sdk-gem-warning\] msg/)
+              msg
+            end
+            client.with_options(:logger => nil).log_warning('msg')
+          end
 
         end
 

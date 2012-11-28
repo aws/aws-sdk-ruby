@@ -13,7 +13,6 @@
 
 module AWS
   class EC2
-
     # @private
     class Request < Core::Http::Request
       include Core::Signature::Version2

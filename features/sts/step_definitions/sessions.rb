@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 When /^I ask for temporary security credentials$/ do
-  @result = @sts.new_session
+  @result = @session = @sts.new_session
 end
 
 Then /^the result should contain credentials$/ do

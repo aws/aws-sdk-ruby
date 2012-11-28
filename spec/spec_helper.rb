@@ -11,14 +11,32 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+begin
+  require 'simplecov'
+  SimpleCov.start
+rescue LoadError
+end if ENV['COVERAGE']
+
 $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
 require 'rspec'
 require 'aws'
 
+RSpec.configure do |c|
+  c.filter_run_excluding :ruby => lambda {|version|
+    !(RUBY_VERSION.to_s =~ /^#{version.to_s}/)
+  }
+end
+
 # require all _examples.rb files in spec/shared/
 Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file
+end
+
+class String
+  def xml_cleanup
+    gsub(/^\s*|\s*|\n$/m, '')
+  end
 end
 
 AWS.eager_autoload!

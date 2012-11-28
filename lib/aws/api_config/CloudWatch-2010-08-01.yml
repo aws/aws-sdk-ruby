@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2010-08-01'
 :operations:
 - :name: DeleteAlarms
   :method: :delete_alarms
@@ -134,9 +135,11 @@
           Name:
           - :string
           - :required
+          - :position: 0
           Value:
           - :string
           - :required
+          - :position: 1
     Period:
     - :integer
     Unit:
@@ -226,9 +229,11 @@
           Name:
           - :string
           - :required
+          - :position: 0
           Value:
           - :string
           - :required
+          - :position: 1
     StartTime:
     - :timestamp
     - :required
@@ -337,9 +342,11 @@
           Name:
           - :string
           - :required
+          - :position: 0
           Value:
           - :string
           - :required
+          - :position: 1
     Period:
     - :integer
     - :required
@@ -376,9 +383,11 @@
                 Name:
                 - :string
                 - :required
+                - :position: 0
                 Value:
                 - :string
                 - :required
+                - :position: 1
           Timestamp:
           - :timestamp
           Value:

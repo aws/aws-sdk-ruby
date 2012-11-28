@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2010-05-15'
 :operations:
 - :name: CreateStack
   :method: :create_stack
@@ -158,7 +159,7 @@
                     :ignore: true
                     :children:
                       member:
-                        :rename: :notification_ar_ns
+                        :rename: :notification_arns
                         :list: true
                   TimeoutInMinutes:
                     :type: :integer

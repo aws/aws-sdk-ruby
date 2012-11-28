@@ -19,21 +19,19 @@ module AWS
     describe Request do
 
       let(:request) { described_class.new }
-      
-      it_should_behave_like "an authorize v2 request"
 
-      it_should_behave_like "an authorize v2 request with a session token"
+      it_should_behave_like "an authorize v2 request"
 
       it_should_behave_like "an aws query request"
 
       before(:each) do
-        request.host = "endpoint"
+        request.host = "hostname.com"
       end
 
       context 'no queue URL parameter' do
 
         it 'should use the endpoint as the host' do
-          request.host.should == "endpoint"
+          request.host.should == "hostname.com"
         end
 
         it 'should have the path "/"' do

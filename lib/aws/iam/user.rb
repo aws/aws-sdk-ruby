@@ -80,10 +80,10 @@ module AWS
       end
 
       # @attr [String] The IAM user name.
-      mutable_attribute :name, :static => true, :as => :user_name
+      mutable_attribute :name, :static => true, :from => :user_name
 
       # @attr_reader [String] The user's unique ID.
-      attribute :id, :static => true, :as => :user_id
+      attribute :id, :static => true, :from => :user_id
 
       # @attr_reader [Time] When the user was created.
       attribute :create_date, :static => true

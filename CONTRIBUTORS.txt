@@ -1,0 +1,11 @@
+This file contains a list of people who have made large or regular contributions
+to the AWS SDK for Ruby.  Give them a special thanks and buy them a beer
+next time you meet them!
+
+Infogroup Data Axle
+www.infogroup.com
+https://github.com/kadwanev
+
+https://github.com/yyuu
+
+https://github.com/Flameeyes

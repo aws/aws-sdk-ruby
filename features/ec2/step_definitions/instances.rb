@@ -34,6 +34,7 @@ When /^I request to run an instance with the following parameters:$/ do |table|
     @started_instances << @instance
   rescue => e
     @error = e
+    puts e.message
   end
 
   sleep 0.1

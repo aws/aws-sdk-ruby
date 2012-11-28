@@ -65,7 +65,7 @@ module AWS
         it 'should have the correct action param' do
           action = nil
           client.with_http_handler {|req, resp| 
-            action = req.get_param('Action').value
+            action = req.body.match(/Action=(\w+)\b/)[1]
           }.send(method, opts)
           action.should == method.to_s.split(/_/).collect{|s| s.capitalize }.join
         end
@@ -73,17 +73,18 @@ module AWS
         it 'should have version param' do
           api_version = nil
           client.with_http_handler {|req, resp| 
-            api_version = req.get_param('Version').value
+            api_version = req.body.match(/Version=(#{Client::API_VERSION})\b/)[1]
           }.send(method, opts)
           api_version.should == Client::API_VERSION
         end
 
         it 'should have a timestamp param' do
+          regex = '\d{4}-\d\d-\d\dT\d\d%3A\d\d%3A\d\dZ'
           timestamp = nil
           client.with_http_handler {|req, resp| 
-            timestamp = req.get_param('Timestamp').value
+            timestamp = req.body.match(/Timestamp=(#{regex})/)[1]
           }.send(method, opts)
-          timestamp.should match(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$/)
+          timestamp.should match(/^#{regex}$/)
         end
 
         it 'should be a post request' do
@@ -165,9 +166,9 @@ module AWS
         it 'should have the domain name as a param' do
           name_param = nil
           client.with_http_handler { |req, resp|
-            name_param = req.get_param('DomainName').value
-          }.send(method, opts.merge(:domain_name => 'some-domain-name'))
-          name_param.should == 'some-domain-name'
+            name_param = req.body.match(/DomainName=(\w+)\b/)[1]
+          }.send(method, opts.merge(:domain_name => 'somedomainname'))
+          name_param.should == 'somedomainname'
         end
 
       end
@@ -199,7 +200,7 @@ module AWS
         it 'should accept a limit and pass it as a request param' do
           limit = nil
           client.with_http_handler { |req, resp|
-            limit = req.get_param('MaxNumberOfDomains').value
+            limit = req.body.match(/MaxNumberOfDomains=(\w+)\b/)[1]
           }.list_domains(:max_number_of_domains => 10)
           limit.should == "10"
         end
@@ -207,9 +208,9 @@ module AWS
         it 'should accept a next_token and pass it as a request param' do
           next_token = nil
           client.with_http_handler { |req, resp|
-            next_token = req.get_param('NextToken').value
-          }.list_domains(:next_token => 'my-next-token')
-          next_token.should == 'my-next-token'
+            next_token = req.body.match(/NextToken=(\w+)\b/)[1]
+          }.list_domains(:next_token => 'token')
+          next_token.should == 'token'
         end
 
         let(:response_body) { <<-XML }

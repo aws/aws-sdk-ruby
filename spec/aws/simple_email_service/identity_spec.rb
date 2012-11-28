@@ -53,7 +53,7 @@ module AWS
               attributes.delete(:bounce_topic)
               identity.bounce_topic_arn.should eq(nil)
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -61,7 +61,7 @@ module AWS
                 :sns_topic => 'arn')
               identity.bounce_topic_arn = 'arn'
             end
-            
+
             it 'accepts nil' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -89,7 +89,7 @@ module AWS
               attributes.delete(:complaint_topic)
               identity.complaint_topic_arn.should eq(nil)
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -97,7 +97,7 @@ module AWS
                 :sns_topic => 'arn')
               identity.complaint_topic_arn = 'arn'
             end
-            
+
             it 'accepts nil' do
               client.should_receive(:set_identity_notification_topic).with(
                 :identity => identity.identity,
@@ -125,14 +125,14 @@ module AWS
               identity.method(:forwarding_enabled?).should
                 eq(identity.method(:forwarding_enabled))
             end
-            
+
             it 'is mutable' do
               client.should_receive(:set_identity_feedback_forwarding_enabled).with(
                 :identity => identity.identity,
                 :forwarding_enabled => true)
               identity.forwarding_enabled = true
             end
-            
+
             it 'can be set to false' do
               client.should_receive(:set_identity_feedback_forwarding_enabled).with(
                 :identity => identity.identity,
@@ -224,6 +224,101 @@ module AWS
                 :identity => identity.identity,
                 :notification_type => 'Complaint')
               identity.complaint_topic = nil
+            end
+
+          end
+
+        end
+
+        context 'dkim attributes' do
+
+          let(:resp) { client.stub_for(:get_identity_dkim_attributes) }
+
+          let(:attributes) {{}}
+
+          before(:each) do
+            resp.data[:dkim_attributes] = {}
+            resp.data[:dkim_attributes][identity.identity] = attributes
+            client.stub(:get_identity_dkim_attributes).and_return(resp)
+          end
+
+          context '#dkim_enabled' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_enabled
+
+            end
+
+            it 'is aliased as #dkim_enabled?' do
+              identity.method(:dkim_enabled).should
+                eq(identity.method(:dkim_enabled?))
+            end
+
+            it 'returns the dkim enabled state' do
+              state = double('dkim-enabled-state')
+              attributes[:dkim_enabled] = state
+              identity.dkim_enabled.should eq(state)
+            end
+
+          end
+
+          context '#dkim_enabled=' do
+
+            it '#calls #set_identity_dkim_enabled with the state' do
+
+              state = double('dkim-enabled-state')
+
+              client.should_receive(:set_identity_dkim_enabled).with(
+                :identity => identity.identity,
+                :dkim_enabled => state)
+
+              identity.dkim_enabled = state
+
+            end
+
+          end
+
+          context '#dkim_tokens' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_tokens
+
+            end
+
+            it 'returns the dkim tokens' do
+              tokens = double('dkim-enabled-tokens')
+              attributes[:dkim_tokens] = tokens
+              identity.dkim_tokens.should eq(tokens)
+            end
+
+          end
+
+          context '#dkim_verification_status' do
+
+            it 'calls #get_identity_dkim_attributes on the client' do
+
+              client.should_receive(:get_identity_dkim_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+
+              identity.dkim_verification_status
+
+            end
+
+            it 'returns the dkim verification status' do
+              status = double('dkim-verification-status')
+              attributes[:dkim_verification_status] = status
+              identity.dkim_verification_status.should eq(status)
             end
 
           end
@@ -334,7 +429,7 @@ module AWS
       end
 
       context 'email addresses' do
-        
+
         let(:identity) { Identity.new('email@domain.com', :config => config) }
 
         it_should_behave_like "an ses identity"
@@ -350,7 +445,7 @@ module AWS
       end
 
       context 'domains' do
-        
+
         let(:identity) { Identity.new('domain.com', :config => config) }
 
         it_should_behave_like "an ses identity"

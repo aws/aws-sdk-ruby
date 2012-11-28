@@ -15,6 +15,8 @@ AWS::Core::Configuration.module_eval do
 
   add_service 'S3', 's3', 's3.amazonaws.com'
 
+  add_option :s3_force_path_style, false, :boolean => true
+
   add_option :s3_multipart_threshold, 16 * 1024 * 1024
 
   add_option :s3_multipart_min_part_size, 5 * 1024 * 1024
@@ -22,5 +24,13 @@ AWS::Core::Configuration.module_eval do
   add_option :s3_multipart_max_parts, 10000
 
   add_option :s3_server_side_encryption, nil
+
+  add_option :s3_encryption_key, nil
+
+  add_option :s3_encryption_materials_location, :metadata
+
+  add_option :s3_encryption_matdesc, '{}'
+
+  add_option :s3_storage_class, 'STANDARD'
 
 end

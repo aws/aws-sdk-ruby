@@ -16,7 +16,7 @@ require 'net/http/connection_pool'
 module AWS
   module Core
     module Http
-  
+
       # = NetHttpHandler
       #
       # This is the default HTTP handler for the aws-sdk gem.  It uses
@@ -25,6 +25,19 @@ module AWS
       #
       class NetHttpHandler
 
+        # @private
+        NETWORK_ERRORS = [
+          SocketError,
+          EOFError,
+          IOError,
+          Errno::ECONNABORTED,
+          Errno::ECONNRESET,
+          Errno::EPIPE,
+          Errno::EINVAL,
+          Timeout::Error,
+          Errno::ETIMEDOUT,
+        ]
+
         # (see Net::HTTP::ConnectionPool.new)
         def initialize options = {}
           @pool = Net::HTTP::ConnectionPool.new(options)
@@ -32,14 +45,14 @@ module AWS
 
         # @return [Net::HTTP::ConnectionPool]
         attr_reader :pool
-  
+
         # Given a populated request object and an empty response object,
-        # this method will make the request and them populate the 
+        # this method will make the request and them populate the
         # response.
         # @param [Request] request
         # @param [Response] response
         # @return [nil]
-        def handle request, response
+        def handle request, response, &read_block
 
           options = {}
           options[:port] = request.port
@@ -49,17 +62,25 @@ module AWS
           options[:ssl_ca_file] = request.ssl_ca_file if request.ssl_ca_file
           options[:ssl_ca_path] = request.ssl_ca_path if request.ssl_ca_path
 
-          connection = pool.connection_for(request.host, options)
-          connection.read_timeout = request.read_timeout
-
           begin
-            http_response = connection.request(build_net_http_request(request))
-            response.body = http_response.body
-            response.status = http_response.code.to_i
-            response.headers = http_response.to_hash
-          rescue Timeout::Error, Errno::ETIMEDOUT => e
-            response.timeout = true
+
+            connection = pool.connection_for(request.host, options)
+            connection.read_timeout = request.read_timeout
+
+            connection.request(build_net_http_request(request)) do |http_resp|
+              response.status = http_resp.code.to_i
+              response.headers = http_resp.to_hash
+              if block_given? and response.status < 300
+                http_resp.read_body(&read_block)
+              else
+                response.body = http_resp.read_body
+              end
+            end
+
+          rescue *NETWORK_ERRORS
+            response.network_error = true
           end
+
           nil
 
         end
@@ -90,7 +111,7 @@ module AWS
             end
 
           net_http_req = request_class.new(request.uri, headers)
-          net_http_req.body = request.body
+          net_http_req.body_stream = request.body_stream
           net_http_req
 
         end

@@ -31,8 +31,7 @@ module AWS
     #   sqs.queues[url].send_message("HELLO")
     class QueueCollection
 
-      include Core::Model
-      include Enumerable
+      include Core::Collection::Simple
 
       # @private
       def initialize(opts = {})
@@ -109,16 +108,6 @@ module AWS
 
       end
 
-      # @yieldparam [Queue] queue Each {Queue} object in the collection.
-      def each(&block)
-        options = {}
-        options[:queue_name_prefix] = prefix if prefix
-        client.list_queues(options)[:queue_urls].each do |url|
-          queue = self[url]
-          yield(queue)
-        end
-      end
-
       # @param [String] prefix The queue name prefix.
       # @return [QueueCollection] A new collection representing only
       #   the queues whose names start with the given prefix.
@@ -130,7 +119,7 @@ module AWS
       def [] url
         Queue.new(url, :config => config)
       end
-      
+
       # Returns the queue with the given name.  This requires making
       # a request to SQS to get the queue url.  If you know the url,
       # you should use {#[]} instead.
@@ -162,6 +151,21 @@ module AWS
         client_opts = {}
         client_opts[:queue_name] = queue_name
         client.get_queue_url(client_opts.merge(options))[:queue_url]
+      end
+
+      protected
+
+      # @yieldparam [Queue] queue Each {Queue} object in the collection.
+      def _each_item options, &block
+
+        options[:queue_name_prefix] = prefix if prefix
+
+        resp = client.list_queues(options)
+        resp.data[:queue_urls].each do |url|
+          queue = self[url]
+          yield(queue)
+        end
+
       end
 
     end

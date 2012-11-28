@@ -38,13 +38,13 @@ module AWS
           }
           client.stub(:create_user).and_return(response)
         end
-        
-        it 'call create_user on the client' do 
+
+        it 'call create_user on the client' do
           client.should_receive(:create_user).with(:user_name => 'name')
           users.create('name')
         end
 
-        it 'accepts a :path' do 
+        it 'accepts a :path' do
           client.should_receive(:create_user).with(
             :user_name => 'name', :path => '/foo/bar')
           users.create('name', :path => '/foo/bar')

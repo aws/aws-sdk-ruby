@@ -30,7 +30,7 @@ module AWS
       attr_reader :route_table_id
 
       alias_method :id, :route_table_id
-    
+
       attribute :vpc_id, :static => true
 
       attribute :route_set

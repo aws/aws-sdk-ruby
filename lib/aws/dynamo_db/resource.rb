@@ -20,8 +20,8 @@ module AWS
 
         # DynamoDB attributes are all returned in UpperCamelCase, this
         # converts the :snake_case name into the correct format.
-        unless options[:as]
-          options[:as] = name.to_s.split(/_/).map(&:capitalize).join
+        unless options[:from]
+          options[:from] = name.to_s.split(/_/).map(&:capitalize).join
         end
 
         super(name, options)

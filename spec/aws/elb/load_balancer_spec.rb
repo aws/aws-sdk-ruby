@@ -29,6 +29,14 @@ module AWS
         let(:comparison_instances) { [described_class.new("name2")] }
       end
 
+      let(:response) { client.stub_for(:describe_load_balancers) }
+
+      let(:description) {{ :load_balancer_name => load_balancer.name }}
+
+      before(:each) do
+        response.data[:load_balancer_descriptions] = [description]
+      end
+
       context '#initialize' do
 
         it 'should store the name' do
@@ -178,6 +186,39 @@ module AWS
         it 'returns an az collection with the proper config' do
           load_balancer.availability_zones.config.should == load_balancer.config
         end
+
+      end
+
+      context '#security_groups' do
+
+        it 'returns an array of security groups' do
+          description[:security_groups] = %w(id1 id2)
+          load_balancer.security_groups.should eq([
+            EC2::SecurityGroup.new('id1', :config => config),
+            EC2::SecurityGroup.new('id2', :config => config),
+          ])
+        end
+
+      end
+
+      context '#subnets' do
+
+        it 'returns an array of subnets groups' do
+          description[:subnets] = %w(id1 id2)
+          load_balancer.subnets.should eq([
+            EC2::Subnet.new('id1', :config => config),
+            EC2::Subnet.new('id2', :config => config),
+          ])
+        end
+
+      end
+
+      context '#scheme' do
+
+       it 'returns the scheme' do
+        description[:scheme] = 'scheme-value'
+        load_balancer.scheme.should eq('scheme-value')
+       end
 
       end
 

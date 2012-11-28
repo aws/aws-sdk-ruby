@@ -22,13 +22,13 @@ module AWS
         super(code.sub(/^AWS\.SimpleQueueService\./, ''))
       end
 
-      # Raised when one or more messages fail to delete during a 
-      # batch delete operation.  
+      # Raised when one or more messages fail to delete during a
+      # batch delete operation.
       #
       # See {#failures} for a complete list of failures.
       #
       class BatchDeleteError < StandardError
-        
+
         def initialize failures
           @failures = failures
           super("Failed to delete #{failures.size} messages")
@@ -53,7 +53,7 @@ module AWS
       # See {#failures} for a complete list of failures.
       #
       class BatchChangeVisibilityError < StandardError
-        
+
         def initialize failures
           @failures = failures
           super("Failed to change visibility for #{failures.size} messages")
@@ -80,7 +80,7 @@ module AWS
           super("Failed to send #{failures.size} messages")
         end
 
-        # @return [Array<Queue::SentMessage>] Returns a list of 
+        # @return [Array<Queue::SentMessage>] Returns a list of
         #   {Queue::SentMessage} objects.
         attr_reader :sent
 

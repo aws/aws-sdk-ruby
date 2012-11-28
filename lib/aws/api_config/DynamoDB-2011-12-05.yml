@@ -12,6 +12,8 @@
 # language governing permissions and limitations under the License.
 
 ---
+:target_prefix: DynamoDB_20111205.
+:api_version: '2011-12-05'
 :operations:
 - :name: BatchGetItem
   :method: :batch_get_item
@@ -31,12 +33,17 @@
                       - :string
                       N:
                       - :string
+                      B:
+                      - :blob
                       SS:
                       - :list:
                         - :string
                       NS:
                       - :list:
                         - :string
+                      BS:
+                      - :list:
+                        - :blob
                   - :required
                   RangeKeyElement:
                   - :structure:
@@ -44,17 +51,91 @@
                       - :string
                       N:
                       - :string
+                      B:
+                      - :blob
                       SS:
                       - :list:
                         - :string
                       NS:
                       - :list:
                         - :string
+                      BS:
+                      - :list:
+                        - :blob
             - :required
             AttributesToGet:
             - :list:
               - :string
+            ConsistentRead:
+            - :boolean
     - :required
+  :outputs:
+    Responses:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          Items:
+            :type: :map
+            :members:
+              :type: :hash
+              :members:
+                S:
+                  :type: :string
+                N:
+                  :type: :string
+                B:
+                  :type: :blob
+                SS:
+                  :type: :string
+                NS:
+                  :type: :string
+                BS:
+                  :type: :blob
+          ConsumedCapacityUnits:
+            :type: :float
+    UnprocessedKeys:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          Keys:
+            :type: :hash
+            :members:
+              HashKeyElement:
+                :type: :hash
+                :members:
+                  S:
+                    :type: :string
+                  N:
+                    :type: :string
+                  B:
+                    :type: :blob
+                  SS:
+                    :type: :string
+                  NS:
+                    :type: :string
+                  BS:
+                    :type: :blob
+              RangeKeyElement:
+                :type: :hash
+                :members:
+                  S:
+                    :type: :string
+                  N:
+                    :type: :string
+                  B:
+                    :type: :blob
+                  SS:
+                    :type: :string
+                  NS:
+                    :type: :string
+                  BS:
+                    :type: :blob
+          AttributesToGet:
+            :type: :string
+          ConsistentRead:
+            :type: :boolean
 - :name: BatchWriteItem
   :method: :batch_write_item
   :inputs:
@@ -77,12 +158,17 @@
                           - :string
                           N:
                           - :string
+                          B:
+                          - :blob
                           SS:
                           - :list:
                             - :string
                           NS:
                           - :list:
                             - :string
+                          BS:
+                          - :list:
+                            - :blob
                   - :required
               DeleteRequest:
               - :structure:
@@ -94,12 +180,17 @@
                           - :string
                           N:
                           - :string
+                          B:
+                          - :blob
                           SS:
                           - :list:
                             - :string
                           NS:
                           - :list:
                             - :string
+                          BS:
+                          - :list:
+                            - :blob
                       - :required
                       RangeKeyElement:
                       - :structure:
@@ -107,14 +198,88 @@
                           - :string
                           N:
                           - :string
+                          B:
+                          - :blob
                           SS:
                           - :list:
                             - :string
                           NS:
                           - :list:
                             - :string
+                          BS:
+                          - :list:
+                            - :blob
                   - :required
     - :required
+  :outputs:
+    Responses:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          ConsumedCapacityUnits:
+            :type: :float
+    UnprocessedItems:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          PutRequest:
+            :type: :hash
+            :members:
+              Item:
+                :type: :map
+                :members:
+                  :type: :hash
+                  :members:
+                    S:
+                      :type: :string
+                    N:
+                      :type: :string
+                    B:
+                      :type: :blob
+                    SS:
+                      :type: :string
+                    NS:
+                      :type: :string
+                    BS:
+                      :type: :blob
+          DeleteRequest:
+            :type: :hash
+            :members:
+              Key:
+                :type: :hash
+                :members:
+                  HashKeyElement:
+                    :type: :hash
+                    :members:
+                      S:
+                        :type: :string
+                      N:
+                        :type: :string
+                      B:
+                        :type: :blob
+                      SS:
+                        :type: :string
+                      NS:
+                        :type: :string
+                      BS:
+                        :type: :blob
+                  RangeKeyElement:
+                    :type: :hash
+                    :members:
+                      S:
+                        :type: :string
+                      N:
+                        :type: :string
+                      B:
+                        :type: :blob
+                      SS:
+                        :type: :string
+                      NS:
+                        :type: :string
+                      BS:
+                        :type: :blob
 - :name: CreateTable
   :method: :create_table
   :inputs:
@@ -150,6 +315,48 @@
         - :long
         - :required
     - :required
+  :outputs:
+    TableDescription:
+      :type: :hash
+      :members:
+        TableName:
+          :type: :string
+        KeySchema:
+          :type: :hash
+          :members:
+            HashKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+            RangeKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+        TableStatus:
+          :type: :string
+        CreationDateTime:
+          :type: :time
+        ProvisionedThroughput:
+          :type: :hash
+          :members:
+            LastIncreaseDateTime:
+              :type: :time
+            LastDecreaseDateTime:
+              :type: :time
+            ReadCapacityUnits:
+              :type: :integer
+            WriteCapacityUnits:
+              :type: :integer
+        TableSizeBytes:
+          :type: :integer
+        ItemCount:
+          :type: :integer
 - :name: DeleteItem
   :method: :delete_item
   :inputs:
@@ -164,12 +371,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
         - :required
         RangeKeyElement:
         - :structure:
@@ -177,12 +389,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
     - :required
     Expected:
     - :map:
@@ -196,28 +413,137 @@
                 - :string
                 N:
                 - :string
+                B:
+                - :blob
                 SS:
                 - :list:
                   - :string
                 NS:
                 - :list:
                   - :string
+                BS:
+                - :list:
+                  - :blob
             Exists:
             - :boolean
     ReturnValues:
     - :string
+  :outputs:
+    Attributes:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: DeleteTable
   :method: :delete_table
   :inputs:
     TableName:
     - :string
     - :required
+  :outputs:
+    TableDescription:
+      :type: :hash
+      :members:
+        TableName:
+          :type: :string
+        KeySchema:
+          :type: :hash
+          :members:
+            HashKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+            RangeKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+        TableStatus:
+          :type: :string
+        CreationDateTime:
+          :type: :time
+        ProvisionedThroughput:
+          :type: :hash
+          :members:
+            LastIncreaseDateTime:
+              :type: :time
+            LastDecreaseDateTime:
+              :type: :time
+            ReadCapacityUnits:
+              :type: :integer
+            WriteCapacityUnits:
+              :type: :integer
+        TableSizeBytes:
+          :type: :integer
+        ItemCount:
+          :type: :integer
 - :name: DescribeTable
   :method: :describe_table
   :inputs:
     TableName:
     - :string
     - :required
+  :outputs:
+    Table:
+      :type: :hash
+      :members:
+        TableName:
+          :type: :string
+        KeySchema:
+          :type: :hash
+          :members:
+            HashKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+            RangeKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+        TableStatus:
+          :type: :string
+        CreationDateTime:
+          :type: :time
+        ProvisionedThroughput:
+          :type: :hash
+          :members:
+            LastIncreaseDateTime:
+              :type: :time
+            LastDecreaseDateTime:
+              :type: :time
+            ReadCapacityUnits:
+              :type: :integer
+            WriteCapacityUnits:
+              :type: :integer
+        TableSizeBytes:
+          :type: :integer
+        ItemCount:
+          :type: :integer
 - :name: GetItem
   :method: :get_item
   :inputs:
@@ -232,12 +558,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
         - :required
         RangeKeyElement:
         - :structure:
@@ -245,18 +576,43 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
     - :required
     AttributesToGet:
     - :list:
       - :string
     ConsistentRead:
     - :boolean
+  :outputs:
+    Item:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: ListTables
   :method: :list_tables
   :inputs:
@@ -264,6 +620,11 @@
     - :string
     Limit:
     - :integer
+  :outputs:
+    TableNames:
+      :type: :string
+    LastEvaluatedTableName:
+      :type: :string
 - :name: PutItem
   :method: :put_item
   :inputs:
@@ -280,12 +641,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
     - :required
     Expected:
     - :map:
@@ -299,16 +665,41 @@
                 - :string
                 N:
                 - :string
+                B:
+                - :blob
                 SS:
                 - :list:
                   - :string
                 NS:
                 - :list:
                   - :string
+                BS:
+                - :list:
+                  - :blob
             Exists:
             - :boolean
     ReturnValues:
     - :string
+  :outputs:
+    Attributes:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: Query
   :method: :query
   :inputs:
@@ -330,12 +721,17 @@
         - :string
         N:
         - :string
+        B:
+        - :blob
         SS:
         - :list:
           - :string
         NS:
         - :list:
           - :string
+        BS:
+        - :list:
+          - :blob
     - :required
     RangeKeyCondition:
     - :structure:
@@ -346,12 +742,17 @@
               - :string
               N:
               - :string
+              B:
+              - :blob
               SS:
               - :list:
                 - :string
               NS:
               - :list:
                 - :string
+              BS:
+              - :list:
+                - :blob
         ComparisonOperator:
         - :string
         - :required
@@ -365,12 +766,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
         - :required
         RangeKeyElement:
         - :structure:
@@ -378,12 +784,72 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
+  :outputs:
+    Items:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    Count:
+      :type: :integer
+    LastEvaluatedKey:
+      :type: :hash
+      :members:
+        HashKeyElement:
+          :type: :hash
+          :members:
+            S:
+              :type: :string
+            N:
+              :type: :string
+            B:
+              :type: :blob
+            SS:
+              :type: :string
+            NS:
+              :type: :string
+            BS:
+              :type: :blob
+        RangeKeyElement:
+          :type: :hash
+          :members:
+            S:
+              :type: :string
+            N:
+              :type: :string
+            B:
+              :type: :blob
+            SS:
+              :type: :string
+            NS:
+              :type: :string
+            BS:
+              :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: Scan
   :method: :scan
   :inputs:
@@ -410,12 +876,17 @@
                   - :string
                   N:
                   - :string
+                  B:
+                  - :blob
                   SS:
                   - :list:
                     - :string
                   NS:
                   - :list:
                     - :string
+                  BS:
+                  - :list:
+                    - :blob
             ComparisonOperator:
             - :string
             - :required
@@ -427,12 +898,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
         - :required
         RangeKeyElement:
         - :structure:
@@ -440,12 +916,74 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
+  :outputs:
+    Items:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    Count:
+      :type: :integer
+    ScannedCount:
+      :type: :integer
+    LastEvaluatedKey:
+      :type: :hash
+      :members:
+        HashKeyElement:
+          :type: :hash
+          :members:
+            S:
+              :type: :string
+            N:
+              :type: :string
+            B:
+              :type: :blob
+            SS:
+              :type: :string
+            NS:
+              :type: :string
+            BS:
+              :type: :blob
+        RangeKeyElement:
+          :type: :hash
+          :members:
+            S:
+              :type: :string
+            N:
+              :type: :string
+            B:
+              :type: :blob
+            SS:
+              :type: :string
+            NS:
+              :type: :string
+            BS:
+              :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: UpdateItem
   :method: :update_item
   :inputs:
@@ -460,12 +998,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
         - :required
         RangeKeyElement:
         - :structure:
@@ -473,12 +1016,17 @@
             - :string
             N:
             - :string
+            B:
+            - :blob
             SS:
             - :list:
               - :string
             NS:
             - :list:
               - :string
+            BS:
+            - :list:
+              - :blob
     - :required
     AttributeUpdates:
     - :map:
@@ -492,12 +1040,17 @@
                 - :string
                 N:
                 - :string
+                B:
+                - :blob
                 SS:
                 - :list:
                   - :string
                 NS:
                 - :list:
                   - :string
+                BS:
+                - :list:
+                  - :blob
             Action:
             - :string
     - :required
@@ -513,16 +1066,41 @@
                 - :string
                 N:
                 - :string
+                B:
+                - :blob
                 SS:
                 - :list:
                   - :string
                 NS:
                 - :list:
                   - :string
+                BS:
+                - :list:
+                  - :blob
             Exists:
             - :boolean
     ReturnValues:
     - :string
+  :outputs:
+    Attributes:
+      :type: :map
+      :members:
+        :type: :hash
+        :members:
+          S:
+            :type: :string
+          N:
+            :type: :string
+          B:
+            :type: :blob
+          SS:
+            :type: :string
+          NS:
+            :type: :string
+          BS:
+            :type: :blob
+    ConsumedCapacityUnits:
+      :type: :float
 - :name: UpdateTable
   :method: :update_table
   :inputs:
@@ -538,3 +1116,45 @@
         - :long
         - :required
     - :required
+  :outputs:
+    TableDescription:
+      :type: :hash
+      :members:
+        TableName:
+          :type: :string
+        KeySchema:
+          :type: :hash
+          :members:
+            HashKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+            RangeKeyElement:
+              :type: :hash
+              :members:
+                AttributeName:
+                  :type: :string
+                AttributeType:
+                  :type: :string
+        TableStatus:
+          :type: :string
+        CreationDateTime:
+          :type: :time
+        ProvisionedThroughput:
+          :type: :hash
+          :members:
+            LastIncreaseDateTime:
+              :type: :time
+            LastDecreaseDateTime:
+              :type: :time
+            ReadCapacityUnits:
+              :type: :integer
+            WriteCapacityUnits:
+              :type: :integer
+        TableSizeBytes:
+          :type: :integer
+        ItemCount:
+          :type: :integer

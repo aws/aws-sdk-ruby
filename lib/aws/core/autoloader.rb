@@ -42,7 +42,7 @@ module AWS
 
     # @private
     class Autoloader
-      
+
       def initialize klass, prefix = nil
         @klass = klass
         @prefix = prefix || klass.name.gsub(/::/, '/').downcase

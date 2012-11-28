@@ -19,6 +19,9 @@ module AWS
     module CredentialProviders
 
       describe DefaultProvider do
+        before do
+          ENV.stub(:[]) { nil } # Stub out all environment variables
+        end
 
         it 'raises an error when no credentials are present' do
           lambda {
@@ -60,6 +63,15 @@ module AWS
 
         end
 
+        it 'refreshes its provider chain' do
+          p1 = double('provider-1')
+          p1.should_receive(:refresh)
+          
+          provider = DefaultProvider.new
+          provider.providers.clear
+          provider.providers << p1
+          provider.refresh
+        end
       end
 
       describe StaticProvider do

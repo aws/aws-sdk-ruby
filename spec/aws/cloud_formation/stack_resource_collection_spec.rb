@@ -66,6 +66,7 @@ module AWS
         end
 
         it 'enumerates stack resources' do
+          stub_n_members(response, 1)
           res = resources.first
           res.should be_a(StackResource)
           res.stack_name.should == 'stack-name'

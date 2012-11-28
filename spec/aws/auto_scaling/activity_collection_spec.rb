@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   class AutoScaling
-    describe LaunchConfigurationCollection do
+    describe ActivityCollection do
 
       let(:config) { stub_config }
 

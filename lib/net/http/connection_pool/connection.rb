@@ -15,17 +15,34 @@ require 'uri'
 
 class Net::HTTP::ConnectionPool
 
-  # A light wrapper around Net::HTTP.  
+  # Represents a HTTP connection.  Call {#request} on a connection like
+  # you would with a Net::HTTPSession object.
   #
-  # You should not need to construct connection objects yourself.  
-  # You receive them as a response to {ConnectionPool#connection_for}.
+  # == Getting a Connection object
+  #
+  # To get a connection object, you start with a connection pool:
+  #
+  #   pool = Net::HTTP::ConnectionPool.new
+  #   connection = pool.connection_for('domain.com')
+  #
+  # {ConnectionPool#connection_for} accepts a number of options to control
+  # the connection settings (SSL, proxy, timeouts, etc).
+  #
+  # == Making Requests
+  #
+  # Given a connection object, you call #request.  {Connection#request}
+  # yields Net::HTTPResponse objects (when given a block).  You should 
+  # read the response (via #body or #read_body) before the end of the
+  # block.
+  #
+  #   connection.request(Net::HTTP::Get.new('/')) do |resp|
+  #     puts resp.body
+  #   end
   #
   class Connection
 
-    # @param [ConnectionPool] pool
-    # @param (see ConnectionPool#connection_for) 
-    # @option (see ConnectionPool#connection_for)
-    # @return [Connection]
+    # Use {ConnectionPool#connection_for} to construct {Connection} objects.
+    # @private
     def initialize pool, host, options = {}
 
       @pool = pool
@@ -96,35 +113,72 @@ class Net::HTTP::ConnectionPool
     # @return [Numeric,nil]
     attr_accessor :read_timeout
 
-    # @return [Boolean] Returns true if this connection requires SSL.
+    # @return [Boolean] Returns +true+ if this connection requires SSL.
     def ssl?
       @ssl
     end
 
-    # @return [Boolean] Returns true if ssl connections should verify the
+    # @return [Boolean] Returns +true+ if ssl connections should verify the
     #   peer certificate.
     def ssl_verify_peer?
       @ssl_verify_peer
     end
 
-    # @return [Boolean] Returns true if this connection proxies requests.
+    # @return [Boolean] Returns +true+ if this connection proxies requests.
     def proxy?
       !!proxy_address
     end
 
-    # Makes a HTTP request.  See Net::HTTPSession#request documentation
-    # from the Ruby standard library for information about argments.
-    # @return [Net::HTTPResponse]
+    # Makes a single HTTP request.  The Net::HTTPResponse is yielded to the
+    # given block.
+    #
+    #   pool = Net::HTTP::ConnectionPool.new
+    #   connection = pool.connection_for('www.google.com')
+    #
+    #   connection.request(Net::HTTP::Get.new('/')) do |response|
+    #     # yeilds a Net::HTTPResponse object
+    #     puts "STATUS CODE: #{response.code}"
+    #     puts "HEADERS: #{response.to_hash.inspect}"
+    #     puts "BODY:\n#{response.body}"
+    #   end
+    #
+    # If you want to read the HTTP response body in chunks (useful for
+    # large responses you do not want to load into memory), you should
+    # pass a block to the #read_body method of the yielded response.
+    #
+    #   File.open('output.txt', 'w') do |file|
+    #     connection.request(Net::HTTP::Get.new('/')) do |response|
+    #       response.read_body do |chunk|
+    #         file.write(chunk)
+    #       end
+    #     end
+    #   end
+    #
+    # If you omit the block when calling #request, you will not be able
+    # to read the response.  This method never returns the 
+    # Net::HTTPResponse generated.
+    #
+    # This method passes *args to Net::HTTPSession#request.  See the
+    # Ruby standard lib documentation for more documentation about 
+    # accepted arguments.
+    #
+    # @note You should read the yielded response object before the end
+    #  of the passed block. Do no save a reference to yielded response
+    #  objects.
+    #
+    # @yield [response]
+    # @yieldparam [Net::HTTPResponse] response
+    # @return [nil]
     def request *args, &block
       pool.request(self, *args, &block)
     end
 
     # @return [String] Returns a key that can be used to group connections
-    #   that connection to the same host.
+    #   that may share the same HTTP sessions.
     def key
       @key ||= begin
         %w(
-          host port 
+          host port
           ssl ssl_verify_peer ssl_ca_file ssl_ca_path
           proxy_address proxy_port proxy_user proxy_password
         ).map{|part| send(part).to_s }.join(":")

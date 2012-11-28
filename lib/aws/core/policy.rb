@@ -32,20 +32,20 @@ module AWS
     # @see #initialize More ways to construct a policy.
     # @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
     class Policy
-  
+
       # @see Statement
       # @return [Array] An array of policy statements.
       attr_reader :statements
-  
-      # @return [String] The version of the policy language used in this 
+
+      # @return [String] The version of the policy language used in this
       #   policy object.
       attr_reader :version
-  
+
       # @return [String] A unique ID for the policy.
       attr_reader :id
-  
+
       class Statement; end
-  
+
       # Constructs a policy.  There are a few different ways to
       # build a policy:
       #
@@ -55,7 +55,7 @@ module AWS
       #       { :effect => :allow,
       #         :actions => :all,
       #         :principals => ["abc123"],
-      #         :resources => "mybucket/mykey" 
+      #         :resources => "mybucket/mykey"
       #       }
       #     ])
       #
@@ -81,7 +81,7 @@ module AWS
         end.flatten.map do |stmt|
           self.class::Statement.new(stmt)
         end
-  
+
         if opts.has_key?(:id) or opts.has_key?("Id")
           @id = opts[:id] || opts["Id"]
         else
@@ -92,10 +92,10 @@ module AWS
         else
           @version = "2008-10-17"
         end
-  
+
         yield(self) if block_given?
       end
-  
+
       # @return [Boolean] Returns true if the two policies are the same.
       def ==(other)
         if other.kind_of?(Core::Policy)
@@ -105,7 +105,7 @@ module AWS
         end
       end
       alias_method :eql?, :==
-  
+
       # Removes the ids from the policy and its statements for the purpose
       # of comparing two policies for equivilence.
       # @return [Hash] Returns the policy as a hash with no ids
@@ -118,8 +118,8 @@ module AWS
         end
         hash
       end
-      protected :hash_without_ids 
-  
+      protected :hash_without_ids
+
       # Returns a hash representation of the policy. The following
       # statements are equivalent:
       #
@@ -128,18 +128,18 @@ module AWS
       #
       # @return [Hash]
       def to_h
-        { 
+        {
           "Version" => version,
           "Id" => id,
-          "Statement" => statements.map { |st| st.to_h } 
+          "Statement" => statements.map { |st| st.to_h }
         }
       end
-  
+
       # @return [String] a JSON representation of the policy.
       def to_json
         to_h.to_json
       end
-  
+
       # Constructs a policy from a JSON representation.
       # @see #initialize
       # @return [Policy] Returns a Policy object constructed by parsing
@@ -147,7 +147,7 @@ module AWS
       def self.from_json(json)
         new(JSON.parse(json))
       end
-  
+
       # Convenient syntax for expressing operators in statement
       # condition blocks.  For example, the following:
       #
@@ -163,33 +163,33 @@ module AWS
       #
       # @see ConditionBlock#add
       class OperatorBuilder
-  
+
         # @private
         def initialize(condition_builder, key)
           @condition_builder = condition_builder
           @key = key
         end
-  
+
         def method_missing(m, *values)
           @condition_builder.conditions.add(m, @key, *values)
           @condition_builder
         end
-  
+
       end
-  
+
       # Convenient syntax for adding conditions to a statement.
       # @see Policy#allow
       # @see Policy#deny
       class ConditionBuilder
-  
+
         # @return [Array] Returns an array of policy conditions.
         attr_reader :conditions
-  
+
         # @private
         def initialize(conditions)
           @conditions = conditions
         end
-  
+
         # Adds a condition for the given key.  For example:
         #
         #   policy.allow(...).where(:current_time).lte(Date.today + 1)
@@ -203,9 +203,9 @@ module AWS
             OperatorBuilder.new(self, key)
           end
         end
-  
+
       end
-  
+
       # Convenience method for constructing a new statement with the
       # "Allow" effect and adding it to the policy.  For example:
       #
@@ -222,7 +222,7 @@ module AWS
         statements << stmt
         ConditionBuilder.new(stmt.conditions)
       end
-  
+
       # Convenience method for constructing a new statement with the
       # "Deny" effect and adding it to the policy.  For example:
       #
@@ -240,7 +240,7 @@ module AWS
         statements << stmt
         ConditionBuilder.new(stmt.conditions)
       end
-  
+
       # Represents the condition block of a policy.  In JSON,
       # condition blocks look like this:
       #
@@ -294,13 +294,13 @@ module AWS
       #   s3:max-keys may be any of: 10
       #
       class ConditionBlock
-  
+
         # @private
         def initialize(conditions = {})
           # filter makes a copy
           @conditions = filter_conditions(conditions)
         end
-  
+
         # Adds a condition to the block.  This method defines a
         # convenient set of abbreviations for operators based on the
         # type of value passed in.  For example:
@@ -374,12 +374,12 @@ module AWS
           raise "duplicate #{operator} conditions for #{key}" if op[key]
           op[translate_key(key)] = converted_values
         end
-  
+
         # @private
         def to_h
           @conditions
         end
-  
+
         # Filters the conditions described in the block, returning a
         # new ConditionBlock that contains only the matching
         # conditions.  Each argument is matched against either the
@@ -420,19 +420,19 @@ module AWS
           end
           self.class.new(filtered)
         end
-  
+
         # @return [Array] Returns an array of operators used in this block.
         def operators
           @conditions.keys
         end
-  
+
         # @return [Array] Returns an array of unique keys used in the block.
         def keys
           @conditions.values.map do |keys|
             keys.keys if keys
           end.compact.flatten.uniq
         end
-  
+
         # Returns all values used in the block.  Note that the
         # values may not all be from the same condition; for example:
         #
@@ -446,7 +446,7 @@ module AWS
             keys.values
           end.compact.flatten
         end
-  
+
         # @private
         protected
         def match_triple(filter, type, op, key, value)
@@ -467,7 +467,7 @@ module AWS
           end
           [match, type]
         end
-  
+
         # @private
         protected
         def match_operator(filter, op, value)
@@ -476,13 +476,13 @@ module AWS
           value = Date.today if op =~ /^Date/
           translate_operator(filter, value) == op
         end
-  
+
         # @private
         protected
         def match_key(filter, key, value = nil)
           translate_key(filter) == key
         end
-  
+
         # @private
         protected
         def filter_conditions(conditions = @conditions)
@@ -495,7 +495,7 @@ module AWS
             m
           end
         end
-  
+
         # @private
         protected
         def translate_key(key)
@@ -516,13 +516,13 @@ module AWS
             key
           end
         end
-  
+
         # @private
         MODIFIERS = {
           /_ignoring_case$/ => "IgnoreCase",
           /_equals$/ => "Equals"
         }
-  
+
         # @private
         protected
         def valid_operator?(operator)
@@ -531,113 +531,113 @@ module AWS
         rescue ArgumentError => e
           false
         end
-  
+
         # @private
         protected
         def translate_operator(operator, example_value)
           return operator if operator.kind_of?(String)
-  
+
           original_operator = operator
           (operator, opts) = strip_modifiers(operator)
-  
+
           raise ArgumentError.new("unrecognized operator #{original_operator}") unless
             respond_to?("translate_#{operator}", true)
           send("translate_#{operator}", example_value, opts)
         end
-  
+
         # @private
         protected
         def translate_is(example, opts)
           return "Bool" if type_notation(example) == "Bool"
           base_translate(example, "Equals", opts[:ignore_case])
         end
-  
+
         # @private
         protected
         def translate_not(example, opts)
           base_translate(example, "NotEquals", opts[:ignore_case])
         end
-  
+
         # @private
         protected
         def translate_like(example, opts)
           base_translate(example, "Like")
         end
-  
+
         # @private
         protected
         def translate_not_like(example, opts)
           base_translate(example, "NotLike")
         end
-  
+
         # @private
         protected
         def translate_less_than(example, opts)
           base_translate(example, "LessThan", opts[:equals])
         end
         alias_method :translate_lt, :translate_less_than
-  
+
         # @private
         protected
         def translate_lte(example, opts)
           translate_less_than(example, { :equals => "Equals" })
         end
-  
+
         # @private
         protected
         def translate_greater_than(example, opts)
           base_translate(example, "GreaterThan", opts[:equals])
         end
         alias_method :translate_gt, :translate_greater_than
-  
+
         # @private
         protected
         def translate_gte(example, opts)
           translate_greater_than(example, { :equals => "Equals" })
         end
-  
+
         # @private
         protected
         def translate_is_ip_address(example, opts)
           "IpAddress"
         end
-  
+
         # @private
         protected
         def translate_not_ip_address(example, opts)
           "NotIpAddress"
         end
-  
+
         # @private
         protected
         def translate_is_arn(example, opts)
           "ArnEquals"
         end
-  
+
         # @private
         protected
         def translate_not_arn(example, opts)
           "ArnNotEquals"
         end
-  
+
         # @private
         protected
         def translate_is_arn_like(example, opts)
           "ArnLike"
         end
-  
+
         # @private
         protected
         def translate_not_arn_like(example, opts)
           "ArnNotLike"
         end
-  
+
         # @private
         protected
         def base_translate(example, base_operator, *modifiers)
           "#{type_notation(example)}#{base_operator}#{modifiers.join}"
         end
-  
+
         # @private
         protected
         def type_notation(example)
@@ -652,7 +652,7 @@ module AWS
             "Bool"
           end
         end
-  
+
         # @private
         protected
         def convert_value(value)
@@ -665,7 +665,7 @@ module AWS
             value
           end
         end
-  
+
         # @private
         protected
         def strip_modifiers(operator)
@@ -680,40 +680,40 @@ module AWS
           end
           [operator, opts]
         end
-  
+
       end
-  
+
       # Represents a statement in a policy.
       #
       # @see Policy#allow
       # @see Policy#deny
       class Statement
-  
+
         # @return [String] Returns the statement id
         attr_accessor :sid
-  
+
         # @return [String] Returns the statement effect, either "Allow" or
         #   "Deny"
         attr_accessor :effect
-  
+
         # @return [Array] Returns an array of principals.
         attr_accessor :principals
-  
+
         # @return [Array] Returns an array of statement actions included
         #   by this policy statement.
         attr_accessor :actions
-  
+
         # @return [Array] Returns an array of actions excluded by this
         #   policy statement.
         attr_accessor :excluded_actions
-  
+
         # @return [Array] Returns an array of resources affected by this
         #   policy statement.
         attr_accessor :resources
-  
+
         # @return [Array] Returns an array of conditions for this policy.
         attr_accessor :conditions
-  
+
         # Constructs a new statement.
         #
         # @option opts [String] :sid The statement ID.  This is optional; if
@@ -748,12 +748,12 @@ module AWS
         def initialize(opts = {})
           self.sid = UUIDTools::UUID.timestamp_create.to_s.tr('-','')
           self.conditions = ConditionBlock.new
-  
+
           parse_options(opts)
-  
+
           yield(self) if block_given?
         end
-  
+
         # Convenience method to add to the list of actions affected
         # by this statement.
         def include_actions(*actions)
@@ -761,7 +761,7 @@ module AWS
           self.actions.push(*actions)
         end
         alias_method :include_action, :include_actions
-  
+
         # Convenience method to add to the list of actions
         # explicitly not affected by this statement.
         def exclude_actions(*actions)
@@ -769,7 +769,7 @@ module AWS
           self.excluded_actions.push(*actions)
         end
         alias_method :exclude_action, :exclude_actions
-  
+
         # @private
         def to_h
           stmt = {
@@ -788,7 +788,7 @@ module AWS
           end
           stmt
         end
-  
+
         protected
         def parse_options(options)
           options.each do |name, value|
@@ -798,47 +798,47 @@ module AWS
               respond_to?("parse_#{name}_option", true)
           end
         end
-  
+
         protected
         def parse_effect_option(value)
           self.effect = value
         end
-  
+
         protected
         def parse_sid_option(value)
           self.sid = value
         end
-  
+
         protected
         def parse_action_option(value)
           coerce_array_option(:actions, value)
         end
-  
+
         protected
         def parse_not_action_option(value)
           coerce_array_option(:excluded_actions, value)
         end
         alias_method :parse_excluded_action_option, :parse_not_action_option
-  
+
         protected
         def parse_principal_option(value)
           if value and value.kind_of?(Hash)
             value = value["AWS"] || []
           end
-  
+
           coerce_array_option(:principals, value)
         end
-  
+
         protected
         def parse_resource_option(value)
           coerce_array_option(:resources, value)
         end
-  
+
         protected
         def parse_condition_option(value)
           self.conditions = ConditionBlock.new(value)
         end
-  
+
         protected
         def coerce_array_option(attr, value)
           if value.kind_of?(Array)
@@ -847,7 +847,7 @@ module AWS
             send("#{attr}=", [value])
           end
         end
-  
+
         protected
         def principals_hash
           return nil unless principals
@@ -856,29 +856,29 @@ module AWS
               principal == :any ? "*" : principal
             end }
         end
-  
+
         protected
         def translate_action(action)
           case action
           when String then action
           when :any   then '*'
           when Symbol
-  
+
             if self.class == Core::Policy::Statement
               msg = 'symbolized action names are only accepted by service ' +
               'specific policies (e.g. AWS::S3::Policy)'
               raise ArgumentError, msg
             end
-  
+
             unless self.class::ACTION_MAPPING.has_key?(action)
               raise ArgumentError, "unrecognized action: #{action}"
             end
-  
+
             self.class::ACTION_MAPPING[action]
-  
+
           end
         end
-  
+
         protected
         def translated_actions
           return nil unless actions
@@ -886,31 +886,31 @@ module AWS
             translate_action(action)
           end
         end
-  
+
         protected
         def translated_excluded_actions
           return nil unless excluded_actions
           excluded_actions.map { |a| translate_action(a) }
         end
-  
+
         protected
         def resource_arns
           return nil unless resources
-          resources.map do |resource| 
+          resources.map do |resource|
             case resource
             when :any    then "*"
             else resource_arn(resource)
             end
           end
         end
-  
+
         protected
         def resource_arn resource
           resource.to_s
         end
-  
+
       end
-  
+
     end
   end
 end

@@ -16,7 +16,7 @@
 Feature: High-Level Bucket and Object Versioning
 
   As a user of the high-level S3 interface
-  I want to work with versioned buckets and objects 
+  I want to work with versioned buckets and objects
   So that I can store multiple versions of objects
 
   @bucket
@@ -24,7 +24,7 @@ Feature: High-Level Bucket and Object Versioning
     When I create a new bucket
     Then the bucket should not be versioned
     And the bucket versioning state should be "unversioned"
-  
+
   @bucket
   Scenario: Enable bucket versioning
     Given I create a new bucket

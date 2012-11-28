@@ -13,6 +13,7 @@
 
 require 'bigdecimal'
 require 'set'
+require 'base64'
 
 module AWS
   class DynamoDB
@@ -20,7 +21,7 @@ module AWS
     # @private
     module Types
 
-      def value_from_response(hash)
+      def value_from_response(hash, options = {})
         (type, value) = hash.to_a.first
         case type
         when "S", :s
@@ -28,31 +29,56 @@ module AWS
         when "SS", :ss
           Set[*value]
         when "N", :n
-          BigDecimal(value.to_s)
+          cast_number(value, options)
         when "NS", :ns
-          Set[*value.map { |v| BigDecimal(v.to_s) }]
+          Set[*value.map {|v| cast_number(v, options) }]
+        when "B", :b
+          cast_binary(value)
+        when "BS", :bs
+          Set[*value.map{|v| cast_binary(v) }]
         end
       end
 
-      def values_from_response_hash(hash)
+      def values_from_response_hash(hash, options = {})
         hash.inject({}) do |h, (key, value_hash)|
           h.update(key => value_from_response(value_hash))
         end
       end
 
       def format_attribute_value(value, context = nil)
+
         indicator = type_indicator(value, context)
 
-        value = [] if value == :empty_number_set
-        value = value.to_s if indicator == :n
-        value = value.map(&:to_s) if indicator == :ns
+        value =
+          case
+          when value == :empty_number_set then []
+          when indicator == :n  then value.to_s
+          when indicator == :ns then value.map(&:to_s)
+          else value
+          end
 
-        Hash[[[indicator, value]]]
+        { indicator => value }
+
       end
 
       protected
+
+      def cast_number number, options = {}
+
+        cfg = self.respond_to?(:config) ? self.config :
+          (options[:config] || AWS.config)
+
+        cfg.dynamo_db_big_decimals ?  BigDecimal.new(number.to_s) : number.to_f
+
+      end
+
+      def cast_binary data
+        DynamoDB::Binary.new(data)
+      end
+
       def type_indicator(value, context)
         case
+        when value.kind_of?(DynamoDB::Binary) then :b
         when value.respond_to?(:to_str) then :s
         when value.kind_of?(Numeric) then :n
         when value.respond_to?(:each)
@@ -74,7 +100,6 @@ module AWS
         end
       end
 
-      protected
       def raise_error(msg, context)
         msg = "#{msg} in #{context}" if context
         raise ArgumentError, msg

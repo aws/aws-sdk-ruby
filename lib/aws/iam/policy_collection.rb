@@ -179,7 +179,7 @@ module AWS
 
       protected
       def each_item(response, &block)
-        response.policy_names.each(&block)
+        response.data[:policy_names].each(&block)
       end
 
     end

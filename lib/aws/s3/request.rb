@@ -29,7 +29,7 @@ module AWS
       attr_accessor :key
 
       # @private
-      attr_accessor :body_stream
+      attr_accessor :force_path_style
 
       def metadata= metadata
         Array(metadata).each do |name, value|
@@ -45,45 +45,49 @@ module AWS
         end
       end
 
-      def host
-        Client.path_style_bucket_name?(bucket) ? @host : "#{bucket}.#{@host}"
-      end
-
-      def path
-        parts = []
-        parts << bucket if bucket and Client.path_style_bucket_name?(bucket)
-        parts << escape_path(key) if key
-        "/#{parts.join('/')}"
-      end
-
-      def querystring
-        url_encoded_params
-      end
-
-      # @param [String, IO] body The http request body.  This can be a string or
-      #   any object that responds to #read and #eof? (like an IO object).
-      def body= body
-        @body_stream = StringIO.new(body)
-      end
-
-      # @return [String, nil] The http request body.
-      def body
-        if @body_stream
-          string = @body_stream.read
-          @body_stream.rewind
-          string
-        else
-          nil
+      def server_side_encryption= sse
+        if sse.is_a?(Symbol)
+          headers['x-amz-server-side-encryption'] = sse.to_s.upcase
+        elsif sse
+          headers['x-amz-server-side-encryption'] = sse
         end
+      end
+
+      def host
+        path_style? ? @host : "#{bucket}.#{@host}"
+      end
+
+      def path_style?
+        if force_path_style
+          true
+        else
+          Client.path_style_bucket_name?(bucket)
+        end
+      end
+
+      def uri
+
+        parts = []
+        parts << bucket if bucket and path_style?
+        parts << escape_path(key) if key
+
+        path = '/' + parts.join('/')
+        querystring = url_encoded_params
+
+        uri = ''
+        uri << path
+        uri << "?#{querystring}" if querystring
+        uri
+
       end
 
       # From the S3 developer guide:
       #
-      # StringToSign = 
-      #   HTTP-Verb + "\n" + 
-      #   content-md5 + "\n" + 
-      #   content-type + "\n" + 
-      #   date + "\n" + 
+      # StringToSign =
+      #   HTTP-Verb + "\n" +
+      #   content-md5 + "\n" +
+      #   content-type + "\n" +
+      #   date + "\n" +
       #   CanonicalizedAmzHeaders + CanonicalizedResource;
       #
       def string_to_sign
@@ -108,11 +112,11 @@ module AWS
 
       # From the S3 developer guide
       #
-      #   CanonicalizedResource = 
-      #     [ "/" + Bucket ] + 
+      #   CanonicalizedResource =
+      #     [ "/" + Bucket ] +
       #     <HTTP-Request-URI, from the protocol name up to the querystring> +
-      #     [ sub-resource, if present. e.g. "?acl", "?location", 
-      #     "?logging", or "?torrent"]; 
+      #     [ sub-resource, if present. e.g. "?acl", "?location",
+      #     "?logging", or "?torrent"];
       #
       def canonicalized_resource
 
@@ -120,17 +124,14 @@ module AWS
 
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
-        if 
-          Client.dns_compatible_bucket_name?(bucket) and
-          !Client.path_style_bucket_name?(bucket)
-        then
+        if Client.dns_compatible_bucket_name?(bucket) and !path_style?
           parts << "/#{bucket}"
         end
-  
+
         # all requests require the portion of the un-decoded uri up to
         # but not including the query string
         parts << path
- 
+
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
         params = (sub_resource_params + query_parameters_for_signature)
@@ -151,7 +152,7 @@ module AWS
         x_amz = headers.select{|name, value| name.to_s =~ /^x-amz-/i }
         x_amz = x_amz.collect{|name, value| [name.downcase, value] }
         x_amz = x_amz.sort_by{|name, value| name }
-        x_amz = x_amz.collect{|name, value| "#{name}:#{value}" }.join("\n")
+        x_amz = x_amz.collect{|name, value| "#{name}:#{value.to_s.strip}" }.join("\n")
         x_amz == '' ? nil : x_amz
       end
 
@@ -177,9 +178,9 @@ module AWS
       class << self
 
         def sub_resources
-          %w(acl location logging notification partNumber policy 
-             requestPayment torrent uploadId uploads versionId 
-             versioning versions delete lifecycle)
+          %w(acl location logging notification partNumber policy
+             requestPayment torrent uploadId uploads versionId
+             versioning versions delete lifecycle tagging cors)
         end
 
         def query_parameters

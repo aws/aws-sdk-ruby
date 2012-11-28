@@ -12,7 +12,8 @@
 # language governing permissions and limitations under the License.
 
 When /^I batch put (\d+) items to the table$/ do |count|
-  @table.batch_put((1..count.to_i).map{|n| { :id => n.to_s }})
+  @put = (1..count.to_i).map{|n| { 'id' => n.to_s }}
+  @table.batch_put(@put)
 end
 
 When /^I batch delete (\d+) items from the table$/ do |count|
@@ -27,10 +28,10 @@ end
 
 When /^I batch put (\d+) items to each table$/ do |count|
 
-  put = (1..count.to_i).map{|n| { :id => n.to_s, :counts => [n, n+1] }}
+  put = (1..count.to_i).map{|n| { 'id' => n.to_s, 'range' => [n, n+1] }}
 
   @dynamo_db.batch_write do |batch|
-    @created_tables.each do |table|
+    @tables.each do |table|
       batch.write(table, :put => put)
     end
   end
@@ -38,7 +39,7 @@ When /^I batch put (\d+) items to each table$/ do |count|
 end
 
 Then /^the tables should have (\d+) items each$/ do |count|
-  @created_tables.each do |table|
+  @tables.each do |table|
     table.items.count.should == count.to_i
   end
 end

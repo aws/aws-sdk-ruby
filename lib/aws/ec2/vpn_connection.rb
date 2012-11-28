@@ -54,7 +54,7 @@ module AWS
 
       attribute :customer_gateway_configuration, :static => true
 
-      attribute :vgw_telemetry_details, :as => :vgw_telemetry
+      attribute :vgw_telemetry_details, :from => :vgw_telemetry
 
       protected :vgw_telemetry_details
     

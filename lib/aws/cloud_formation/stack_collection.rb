@@ -88,7 +88,7 @@ module AWS
       #     'SecurityGroup' => 'security-group-name',
       #     'InstanceType' => 'm1.large',
       #   })
-      # 
+      #
       # @param [String] stack_name
       #
       # @param [String,URI,S3::S3Object,Object] template The stack template.
@@ -103,10 +103,10 @@ module AWS
       # @param [Hash] options
       #
       # @option options [Array<String>] :capabilities The list of capabilities
-      #   that you want to allow in the stack. If your stack contains IAM 
-      #   resources, you must specify the CAPABILITY_IAM value for this 
-      #   parameter; otherwise, this action returns an 
-      #   InsufficientCapabilities error. IAM resources are the following: 
+      #   that you want to allow in the stack. If your stack contains IAM
+      #   resources, you must specify the CAPABILITY_IAM value for this
+      #   parameter; otherwise, this action returns an
+      #   InsufficientCapabilities error. IAM resources are the following:
       #
       #   * AWS::IAM::AccessKey
       #   * AWS::IAM::Group
@@ -119,14 +119,14 @@ module AWS
       #
       # @option options [Object] :notify One or more SNS topics ARN
       #   string or {SNS::Topic} objects.  This param may be passed
-      #   as a single value or as an array. CloudFormation will publish 
+      #   as a single value or as an array. CloudFormation will publish
       #   stack related events to these topics.
       #
       # @option options [Hash] :parameters A hash that specifies the
       #   input parameters of the new stack.
       #
-      # @option options [Integer] :timeout The number of minutes 
-      #   that may pass before the stack creation fails.  If 
+      # @option options [Integer] :timeout The number of minutes
+      #   that may pass before the stack creation fails.  If
       #   +:disable_rollback+ is false, the stack will be rolled back.
       #
       # @return [Stack]
@@ -158,7 +158,7 @@ module AWS
       #   cloud_formation.stacks.with_status(:create_complete).each do |stack|
       #     puts stack.name
       #   end
-      # 
+      #
       # @param [Symbol,String] status_filter A status to filter stacks with.
       #   Valid values include:
       #   * +:create_in_progress+
@@ -188,12 +188,12 @@ module AWS
       protected
 
       def _each_item options = {}
-        client.describe_stacks.data[:stacks].each do |summary|
+        client.describe_stacks(options).data[:stacks].each do |summary|
 
           stack = Stack.new_from(
-            :describe_stacks, 
-            summary, 
-            summary[:stack_name], 
+            :describe_stacks,
+            summary,
+            summary[:stack_name],
             :config => config)
 
           yield(stack)

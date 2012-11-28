@@ -28,9 +28,9 @@ module AWS
       def should_add_param_as opt_name, param_name
         param = nil
         client.with_http_handler do |req, resp|
-          param = req.get_param(param_name).value
-        end.send(method, opts.merge(opt_name => 'value'))
-        param.should == 'value'
+          param = req.querystring.match(/#{param_name}=(\w+)\b/)[1]
+        end.send(method, opts.merge(opt_name => 'VALUE'))
+        param.should == 'VALUE'
       end
 
       let(:test_credentials) do
@@ -38,8 +38,8 @@ module AWS
           :secret_access_key => "secret access key" }
       end
 
-      let(:http_handler) { 
-        double("a handler", :handle => true, :handle_async => true) 
+      let(:http_handler) {
+        double("a handler", :handle => true, :handle_async => true)
       }
 
       let(:client) do
@@ -48,7 +48,7 @@ module AWS
 
       it 'should be accessible from the configuration' do
         config = AWS.config.with(
-                                 :access_key_id => 'foo', 
+                                 :access_key_id => 'foo',
                                  :secret_access_key => 'bar')
         config.s3_client.should be_a(S3::Client)
       end
@@ -83,6 +83,218 @@ module AWS
         it "should raise an instance of #{kind}" do
           lambda { client.send(method, opts) }.
             should raise_error(kind)
+        end
+
+      end
+
+      context 'cors', :cors => true do
+
+        let(:xml) { <<-XML.strip.xml_cleanup }
+<CORSConfiguration>
+  <CORSRule>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedHeader>header-a</AllowedHeader>
+    <AllowedHeader>header-b</AllowedHeader>
+    <MaxAgeSeconds>123</MaxAgeSeconds>
+    <ExposeHeader>header-c</ExposeHeader>
+    <ExposeHeader>header-d</ExposeHeader>
+  </CORSRule>
+  <CORSRule>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedOrigin>http://example.com</AllowedOrigin>
+    <AllowedOrigin>http://foo.com</AllowedOrigin>
+  </CORSRule>
+</CORSConfiguration>
+        XML
+
+        let(:rules) {
+          [
+            {
+              :allowed_methods => %w(GET PUT),
+              :allowed_origins => %w(*),
+              :allowed_headers => %w(header-a header-b),
+              :max_age_seconds => 123,
+              :expose_headers => %w(header-c header-d),
+            },{
+              :allowed_methods => %w(POST),
+              :allowed_origins => %w(http://example.com http://foo.com),
+              :allowed_headers => [],
+              :expose_headers => [],
+            }
+          ]
+        }
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_cors' do
+
+          it 'make a put request to the cors subresource' do
+
+            request = get_request(:put_bucket_cors, {
+              :bucket_name => 'bucket-name',
+              :rules => rules,
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('cors')
+            request.headers['content-md5'].should eq(client.send(:md5, request.body))
+            request.body.xml_cleanup.should eq(xml)
+
+          end
+
+        end
+
+        context '#get_bucket_cors' do
+
+          it 'make a get request to the cors subresource' do
+            req = get_request(:get_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_cors,
+              {
+                :bucket_name => 'bucket',
+              }, {
+                :status => 200,
+                :headers => {},
+                :body => xml,
+              }
+            )
+            resp.data.should eq(:rules => rules)
+          end
+
+        end
+
+        context '#delete_bucket_cors' do
+
+          it 'make a delete request to the cors subresource' do
+            req = get_request(:delete_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
+      context 'tagging', :tagging => true do
+
+        let(:xml) { <<-XML.strip }
+<Tagging>
+  <TagSet>
+    <Tag>
+      <Key>foo</Key>
+      <Value>bar</Value>
+    </Tag>
+    <Tag>
+      <Key>abc</Key>
+      <Value>xyz</Value>
+    </Tag>
+  </TagSet>
+</Tagging>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_tagging' do
+
+          it 'make a put request to the tagging subresource' do
+
+            request = get_request(:put_bucket_tagging, {
+              :bucket_name => 'bucket-name',
+              :tags => { 'foo' => 'bar', :abc => 'xyz' }, # mixed key types
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('tagging')
+
+            # the array is differently sorted on Ruby 1.8
+            unless RUBY_VERSION =~ /^1.8/
+              request.headers['content-md5'].should eq(client.send(:md5, xml))
+              request.body.should eq(xml)
+            end
+
+          end
+
+        end
+
+        context '#get_bucket_tagging' do
+
+          it 'make a get request to the tagging subresource' do
+            req = get_request(:get_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_tagging,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :tags => { 'foo' => 'bar', 'abc' => 'xyz' }
+            })
+          end
+
+        end
+
+        context '#delete_bucket_tagging' do
+
+          it 'make a delete request to the tagging subresource' do
+            req = get_request(:delete_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
         end
 
       end
@@ -129,23 +341,44 @@ module AWS
 
       end
 
+      shared_examples_for "accepts mfa credentials" do
+
+        it 'adds no header when mfa is nil' do
+          req_headers = nil
+          opts.delete(:mfa)
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts)
+          req_headers['x-amz-mfa'].should == nil
+        end
+
+        it 'adds a header when mfa is passed' do
+          req_headers = nil
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts.merge(:mfa => '123456 7890'))
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
+
+      end
+
       shared_examples_for "accepts version id" do
 
         it 'adds no param wheren version_id is nil' do
+          querystring = false
           opts.delete(:version_id)
-          lambda {
-            client.with_http_handler do |req, resp|
-              param = req.get_param('versionId').value
-            end.send(method, opts)
-          }.should raise_error(/undefined param/)
+          client.with_http_handler do |req, resp|
+            querystring = req.querystring
+          end.send(method, opts)
+          querystring.should == nil
         end
 
         it 'adds a params when version_id is passed' do
-          param = nil
+          version_id = nil
           client.with_http_handler do |req, resp|
-            param = req.get_param('versionId').value
-          end.send(method, opts.merge(:version_id => 'foo-version'))
-          param.should == 'foo-version'
+            version_id = req.querystring.match(/versionId=(\w+)\b/)[1]
+          end.send(method, opts.merge(:version_id => 'VERSION'))
+          version_id.should == 'VERSION'
         end
 
       end
@@ -156,7 +389,7 @@ module AWS
           resp = client.send(method, opts)
           resp.version_id.should be_nil
         end
-        
+
         it 'populates the version when present' do
           resp = client.with_http_handler do |req, resp|
             resp.headers['x-amz-version-id'] = ['foo']
@@ -240,6 +473,19 @@ module AWS
           request_host.should == 'dns-compat.s3.amazonaws.com'
         end
 
+        it 'puts dns compat bucket name in the uri when forced to' do
+          request_uri = nil
+          request_host = nil
+          client = with_http_handler do |req, response|
+            request_uri = req.uri
+            request_host = req.host
+          end
+          client.config.stub(:s3_force_path_style?).and_return(true)
+          client.send(method, opts.merge(:bucket_name => 'dns-compat'))
+          request_host.should == 's3.amazonaws.com'
+          request_uri.should match(/^\/dns-compat/)
+        end
+
       end
 
       shared_examples_for "a subresource request" do |sub_resource|
@@ -299,7 +545,7 @@ module AWS
         it 'accpets :grant_write' do
           headers_for(:grant_write => 'abc')['x-amz-grant-write'].should == 'abc'
         end
-        
+
         it 'accpets :grant_read_acp' do
           headers_for(:grant_read_acp => 'abc')['x-amz-grant-read-acp'].should == 'abc'
         end
@@ -412,21 +658,9 @@ module AWS
             }.should raise_error(ArgumentError, /data/)
           end
 
-          it 'is accepted from blocks with 1 argument' do
-            lambda {
-              client.send(method, block_form_opts) {|handle| }
-            }.should_not raise_error
-          end
-
           it 'is rejected from blocks with no args' do
             lambda {
               client.send(method, block_form_opts) {}
-            }.should raise_error(ArgumentError, /data/)
-          end
-
-          it 'is rejected from blocks with more than 1 arg' do
-            lambda {
-              client.send(method, block_form_opts) {|a,b|}
             }.should raise_error(ArgumentError, /data/)
           end
 
@@ -457,9 +691,7 @@ module AWS
 
           it 'is accepted as an io object' do
             lambda {
-              io = StringIO.new
-              io << 'sample data'
-              io.rewind
+              io = StringIO.new('sample data')
               client.send(method, opts.merge(:data => io))
             }.should_not raise_error
           end
@@ -469,38 +701,6 @@ module AWS
             lambda {
               client.send(method, opts.merge(:data => data))
             }.should_not raise_error
-          end
-
-          it 'may not be passed as :data and as a block' do
-            lambda{
-              client.send(method, opts.merge(:data => 'data')) { |buffer| }
-            }.should raise_error(ArgumentError, /data/)
-          end
-
-          context 'blocks' do
-
-            it 'yields a buffer to write to' do
-
-              buffer_responds = false
-              client.send(method, block_form_opts) do |buffer|
-                buffer_responds = buffer.respond_to?(:write)
-              end
-              buffer_responds.should == true
-
-            end
-
-            it 'collects data written to the buffer for the body' do
-              data = 'string data'
-              request_body = nil
-              client = with_http_handler do |req, resp|
-                request_body = req.body
-              end
-              client.send(method, block_form_opts) do |buffer|
-                buffer.write(data)
-              end
-              request_body.should == data
-            end
-
           end
 
           context 'strings' do
@@ -530,13 +730,16 @@ module AWS
           context 'file names' do
 
             def expect_file_body(path)
-              stream = double("stream")
-              File.should_receive(:open).
-                with(path, *file_opts).and_return(stream)
-              File.should_receive(:size).
-                with(path).and_return(12)
+
+              file = double("file")
+              file.stub(:path).and_return(path)
+              file.stub(:read).and_return('')
+              file.stub(:eof?).and_return(true)
+
+              File.should_receive(:open).with(path, *file_opts).and_return(file)
+              File.should_receive(:size).with(path).and_return(12)
               http_handler.should_receive(:handle).with do |req, resp|
-                req.body_stream.should be(stream)
+                req.body_stream.should be(file)
                 req.headers["Content-Length"].should == 12
               end
             end
@@ -622,10 +825,9 @@ module AWS
             end
 
             it 'gets calculated on objects that respond to #bytesize' do
-              data = "foo"
-              data.stub(:bytesize).and_return(12)
+              data = [35843 ,222, 333].pack('U*')
               data.stub(:force_encoding)
-              should_determine_content_length_for(data, data.bytesize)
+              should_determine_content_length_for(data, 7)
             end
 
             it 'is accepted as an option' do
@@ -644,12 +846,6 @@ module AWS
               }.should raise_error(ArgumentError, /content_length/)
             end
 
-            it 'is required for block form' do
-              lambda {
-                client.send(method, no_data_opts) { |buffer| }
-              }.should raise_error(ArgumentError, /content_length/)
-            end
-
           end
 
           it_should_behave_like "sends option as header", :content_md5, "Content-MD5"
@@ -662,7 +858,7 @@ module AWS
 
         # copy_object doesn't require support for these headers
         if accepts_file_data
-          it_should_behave_like "sends option as header", 
+          it_should_behave_like "sends option as header",
             :cache_control, "Cache-Control"
           it_should_behave_like("sends option as header",
             :content_disposition, "Content-Disposition")
@@ -744,7 +940,7 @@ module AWS
       end
 
       context '#create_bucket' do
-        
+
         let(:method) { :create_bucket }
 
         let(:opts) { { :bucket_name => 'foo' } }
@@ -767,7 +963,7 @@ module AWS
 
         it 'adds location constraints to request body' do
           r = client.send(:create_bucket, opts.merge(:location => 'EU'))
-          r.http_request.body.should 
+          r.http_request.body.should
             match("<LocationConstraint>EU</LocationConstraint>")
         end
 
@@ -876,7 +1072,7 @@ module AWS
       end
 
       context '#get_bucket_location' do
-        
+
         let(:method) { :get_bucket_location }
 
         let(:opts) { { :bucket_name => 'foo' } }
@@ -962,6 +1158,18 @@ module AWS
           req_body.should match(/<Status>Suspended<\/Status>/)
         end
 
+        it 'should include the x-amz-mfa header for MFA versioning requests' do
+          req_headers = req_body = nil
+          client.with_http_handler do |req, resp|
+            req_body = req.body
+            req_headers = req.headers
+          end.set_bucket_versioning(opts.merge(:state      => :enabled,
+                                               :mfa_delete => :enabled,
+                                               :mfa        => '123456 7890'
+                                              ))
+          req_body.should match(/<MfaDelete>Enabled<\/MfaDelete>/)
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
       end
 
       context '#get_bucket_policy' do
@@ -983,7 +1191,7 @@ module AWS
       context '#list_object_versions' do
 
         let(:method) { :list_object_versions }
-        
+
         let(:opts) { { :bucket_name => 'foo' } }
 
         it_should_behave_like "an s3 http request", 'GET'
@@ -1045,7 +1253,7 @@ module AWS
         it_should_behave_like "accepts simplified ACL header options"
 
         it 'is aliased as put_bucket_acl' do
-          client.method(:put_bucket_acl).should == 
+          client.method(:put_bucket_acl).should ==
             client.method(:set_bucket_acl)
         end
 
@@ -1145,7 +1353,7 @@ module AWS
 
         let(:method) { :copy_object }
 
-        let(:opts) {{ 
+        let(:opts) {{
           :bucket_name => 'foo',
           :key => 'some/key',
           :copy_source => 'bar'
@@ -1320,7 +1528,7 @@ module AWS
 
           it 'parses x-amz-expiration headers' do
             r = client.with_http_handler do |req, resp|
-              resp.headers['x-amz-expiration'] = 
+              resp.headers['x-amz-expiration'] =
                 ["expiry-date=\"Fri, 27 Jan 2012 00:00:00 GMT\", rule-id=\"temp-rule\""]
             end.head_object(opts)
             r.expiration_date.should be_a(DateTime)
@@ -1349,6 +1557,7 @@ module AWS
 
         it_should_behave_like "accepts version id"
 
+        it_should_behave_like "accepts mfa credentials"
       end
 
       context '#delete_objects' do
@@ -1358,6 +1567,8 @@ module AWS
         let(:opts) { { :bucket_name => 'foo', :key => 'some/key' } }
 
         it_should_behave_like "requires bucket_name"
+
+        it_should_behave_like "accepts mfa credentials"
 
         #it_should_behave_like "an s3 http request", 'POST'
 

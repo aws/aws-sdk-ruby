@@ -33,9 +33,9 @@ module AWS
       def _each_item options = {}
         options[:stack_name] = stack.name
         resp = client.describe_stack_events(options)
-        resp.stack_events.each do |details|
+        resp.data[:stack_events].each do |details|
 
-          event = StackEvent.new(stack, details.to_hash)
+          event = StackEvent.new(stack, details)
 
           yield(event)
 

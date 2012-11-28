@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
+:api_version: '2011-01-01'
 :operations:
 - :name: CreateAutoScalingGroup
   :method: :create_auto_scaling_group

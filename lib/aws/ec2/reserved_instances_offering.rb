@@ -24,6 +24,8 @@ module AWS
         :product_description,
         :instance_tenancy,
         :currency_code,
+        :recurring_charges,
+        :offering_type,
       ]
 
       include TaggedItem
@@ -48,7 +50,7 @@ module AWS
 
       def purchase options = {}
         options[:instance_count] = 1 unless options[:instance_count]
-        options[:reserved_instances_offering_id] = id 
+        options[:reserved_instances_offering_id] = id
         response = client.purchase_reserved_instances_offering(options)
         ReservedInstances.new(response.reserved_instances_id, :config => config)
       end

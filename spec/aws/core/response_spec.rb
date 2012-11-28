@@ -16,7 +16,7 @@ require 'spec_helper'
 module AWS::Core
   describe Response do
 
-    let(:http_request) { double('http-request') }
+    let(:http_request) { double('http-request', :body_stream => nil) }
 
     let(:http_response) { double('http-request') }
 
@@ -64,16 +64,17 @@ module AWS::Core
     context '#rebuild_request' do
 
       it 'should call the block passed to initialize' do
-        obj = double("obj")
-        obj.should_receive(:call)
-        Response.new(http_request, http_response) { obj.call }.
+        called = false
+        Response.new(http_request, http_response) { called = true; http_request }.
           rebuild_request
+        called.should eq(true)
       end
 
       it 'should set http_request to the return value of the block' do
-        r = Response.new(http_request, http_response) { "foo" }
+        new_req = double('new-request').as_null_object
+        r = Response.new(http_request, http_response) { new_req }
         r.rebuild_request
-        r.http_request.should == "foo"
+        r.http_request.should == new_req
       end
 
     end
@@ -100,12 +101,12 @@ module AWS::Core
     end
 
     context '#successful?' do
-      
+
       it 'returns true if error is not nil' do
         response.error = StandardError.new('foo')
         response.successful?.should == false
       end
-      
+
       it 'returns true if error is nil' do
         response.error = nil
         response.successful?.should == true
@@ -135,16 +136,16 @@ module AWS::Core
 
     end
 
-    context '#timeout?' do
+    context '#network_error?' do
 
       it 'returns fals if the http request did not time out' do
-        http_response.stub(:timeout?).and_return(false)
-        response.timeout?.should == false
+        http_response.stub(:network_error?).and_return(false)
+        response.network_error?.should == false
       end
 
       it 'returns true if the http request timed out' do
-        http_response.stub(:timeout?).and_return(true)
-        response.timeout?.should == true
+        http_response.stub(:network_error?).and_return(true)
+        response.network_error?.should == true
       end
 
     end
@@ -166,8 +167,8 @@ module AWS::Core
 
     context '#cache_key' do
 
-      let(:request) { 
-        double("request", :host => "ENDPOINT", :access_key_id => "KEY") 
+      let(:request) {
+        double("request", :host => "ENDPOINT", :access_key_id => "KEY")
       }
 
       before(:each) do

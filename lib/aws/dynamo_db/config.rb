@@ -17,4 +17,8 @@ AWS::Core::Configuration.module_eval do
 
   add_option :dynamo_db_retry_throughput_errors, true, :boolean => true
 
+  add_option :dynamo_db_big_decimals, true, :boolean => true
+
+  add_option :dynamo_db_crc32, true, :boolean => true
+
 end

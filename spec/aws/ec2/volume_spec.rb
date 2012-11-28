@@ -306,6 +306,14 @@ module AWS
         it_should_behave_like "ec2 volume attribute accessor"
       end
 
+      context '#iops' do
+        let(:attribute) { :iops }
+        let(:response_field) { attribute }
+        let(:response_value) { "iops" }
+        let(:translated_value) { "iops" }
+        it_should_behave_like "ec2 volume attribute accessor"
+      end
+
     end
 
   end

@@ -94,9 +94,14 @@ module AWS
       end
 
       # Deletes this object version from S3.
+      # @option options [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
       # @return (see S3Object#delete)
-      def delete
-        object.delete(:version_id => @version_id)
+      def delete(options = {})
+        object.delete(:version_id => @version_id,
+                      :mfa        => options[:mfa]
+                     )
       end
 
       # @return [Boolean] Returns this if this is the latest version of

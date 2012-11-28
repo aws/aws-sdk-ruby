@@ -15,7 +15,7 @@ module AWS
   class ELB
 
     class InstanceCollection
-      
+
       include Core::Collection::Simple
 
       def initialize load_balancer, options = {}
@@ -57,7 +57,7 @@ module AWS
         end
 
         instance
-        
+
       end
 
       # Returns an array of instance health descriptions.  Each description
@@ -69,9 +69,9 @@ module AWS
       #
       #   * +:state+ - Specifies the current state of the instance.
       #
-      #   * +:reason_code+ - Provides information about the cause of 
-      #     OutOfService instances. Specifically, it indicates whether the 
-      #     cause is Elastic Load Balancing or the instance behind the 
+      #   * +:reason_code+ - Provides information about the cause of
+      #     OutOfService instances. Specifically, it indicates whether the
+      #     cause is Elastic Load Balancing or the instance behind the
       #     load balancer.
       #
       # You can get the health of all instances for this load balancer
@@ -93,7 +93,7 @@ module AWS
       #
       # == Health for a Single Instance
       #
-      # If you want the health of a single instance you can use the {#[]} 
+      # If you want the health of a single instance you can use the {#[]}
       # instead:
       #
       #   load_balancer.instances['i-123456'].elb_health
@@ -125,7 +125,7 @@ module AWS
 
       end
 
-      # @return [LoadBalancer] Returns the load balancer this collection 
+      # @return [LoadBalancer] Returns the load balancer this collection
       #   belongs to.
       attr_reader :load_balancer
 
@@ -164,8 +164,7 @@ module AWS
       protected
       def _each_item options = {}
         load_balancer.instance_descriptions.each do |instance|
-          instance = self[instance.instance_id]
-          yield(instance)
+          yield(self[instance[:instance_id]])
         end
       end
 

@@ -27,8 +27,8 @@ module AWS::Core
           Response.new.headers.should == {}
         end
 
-        it 'should default body to an empty string' do
-          Response.new.body.should == ''
+        it 'should default body to nil' do
+          Response.new.body.should == nil
         end
         
       end

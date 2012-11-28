@@ -64,15 +64,23 @@ module AWS::Core
         Inflection.ruby_name('MD5OfBody').should == 'md5_of_body'
       end
 
+      ## exceptional cases, these are handled specially
+
       it 'deals with words that start with a lower case letter' do
         Inflection.ruby_name('s3Key').should == 's3_key'
         Inflection.ruby_name('s3Bucket').should == 's3_bucket'
       end
 
-      ## exceptional case, this one is handled individually currently
-
       it 'inflects ETag to etag (irregular inflection, should be e_tag)' do
         Inflection.ruby_name('ETag').should == 'etag'
+      end
+
+      it 'inflects Ec2KeyName to ec2_key_name' do
+        Inflection.ruby_name('Ec2KeyName').should == 'ec2_key_name'
+      end
+
+      it 'inflects NotificationARNs to notification_arns' do
+        Inflection.ruby_name('NotificationARNs').should == 'notification_arns'
       end
 
     end

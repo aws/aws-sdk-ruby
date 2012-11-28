@@ -16,7 +16,7 @@ require 'thread'
 module AWS
   module Core
     module Http
-  
+
       # @private
       class CurbHandler
 
@@ -86,10 +86,10 @@ module AWS
 
         private
         def make_easy_handle request, response, thread = nil
-  
+
           protocol = request.use_ssl? ? 'https' : 'http'
           url = "#{protocol}://#{request.host}:#{request.port}#{request.uri}"
-  
+
           curl = Curl::Easy.new(url)
           # curl.verbose = true
           request.headers.each {|k, v| curl.headers[k] = v}

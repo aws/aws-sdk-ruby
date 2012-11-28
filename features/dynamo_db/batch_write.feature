@@ -15,19 +15,25 @@
 @dynamo_db @batch_write
 Feature: DynamoDB Tables
 
-  @slow
   Scenario: Batch Writing items
-    Given I create a DynamoDB table
-    And the table should eventually be active
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string } }
+    """
     When I batch put 25 items to the table
     Then the table should have 25 items
     When I batch delete 25 items from the table
     Then the table should have 0 items
 
-  @slow
   Scenario: Batch Writing across tables
-    Given I create a DynamoDB table
-    And I create a DynamoDB table
-    And the tables are eventually active
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string } }
+    """
+    And I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string },
+      :range_key => { :range => :number } }
+    """
     When I batch put 10 items to each table
     Then the tables should have 10 items each

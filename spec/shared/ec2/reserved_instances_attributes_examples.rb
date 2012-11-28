@@ -81,6 +81,22 @@ module AWS
       it_should_behave_like "ec2 resource attribute accessor (describe call)"
     end
 
+    context '#recurring_charges' do
+      let(:attribute) { :recurring_charges }
+      let(:response_field) { attribute }
+      let(:response_value) { "" }
+      let(:translated_value) { response_value }
+      it_should_behave_like "ec2 resource attribute accessor (describe call)"
+    end
+
+    context '#offering_type' do
+      let(:attribute) { :offering_type }
+      let(:response_field) { attribute }
+      let(:response_value) { "Light Utilization" }
+      let(:translated_value) { response_value }
+      it_should_behave_like "ec2 resource attribute accessor (describe call)"
+    end
+
   end
 
 end

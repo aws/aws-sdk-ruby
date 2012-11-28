@@ -18,13 +18,13 @@ module AWS
     #
     # == Working with Tables
     #
-    # Dynamo DB allows you to organize data into tables.  Tables have a 
+    # Dynamo DB allows you to organize data into tables.  Tables have a
     # unique name and a key schema.  A key schema is comprised of a
-    # hash key and an optional range key.  
+    # hash key and an optional range key.
     #
-    # Dynamo DB automatically partitions the data contained in a table 
-    # across multiple nodes so that the data throughput is not constrained 
-    # by the scale of a single box. You can reserve the required throughput 
+    # Dynamo DB automatically partitions the data contained in a table
+    # across multiple nodes so that the data throughput is not constrained
+    # by the scale of a single box. You can reserve the required throughput
     # by specifying a number of reads and writes per second to support.
     #
     # == Creating a Table
@@ -40,9 +40,9 @@ module AWS
     #
     #   dynamo_db.tables.create('comments', 10, 5,
     #     :hash_key => { :blog_post_id => :number },
-    #     :range_key => { :comment_id => :number } 
+    #     :range_key => { :comment_id => :number }
     #   )
-    # 
+    #
     # == Provisioning Throughput
     #
     # You must specify the desired read and write capacity when
@@ -56,12 +56,12 @@ module AWS
     #
     #   table.provision_throughput :read_capacity_units => 100, :write_capacity_units => 100
     #
-    # Please note that provisioned throughput can be decreased only once 
+    # Please note that provisioned throughput can be decreased only once
     # within a 24 hour period.
     #
     # == Table Status
     #
-    # When you create or update a table the changes can take some time to 
+    # When you create or update a table the changes can take some time to
     # apply.  You can query the status of your table at any time:
     #
     #   # creating a table can be a *very* slow operation
@@ -71,7 +71,7 @@ module AWS
     #
     # @attr_reader [Time] created_at When the table was first creatd.
     #
-    # @attr_reader [Symbol] status 
+    # @attr_reader [Symbol] status
     #
     # @attr [Integer] read_capacity_units
     #
@@ -80,12 +80,12 @@ module AWS
     # @attr [Time] throughput_last_increased_at
     #
     # @attr [Time] throughput_last_decreased_at
-    # 
+    #
     # @attr [PrimaryKeyElement] hash_key Returns the hash key element
     #   for this table.
     #
     # @attr [PrimaryKeyElement,nil] range_key Returns the range key
-    #   element for this table, or nil if the table does not have a range 
+    #   element for this table, or nil if the table does not have a range
     #   key.
     #
     class Table < Resource
@@ -99,29 +99,25 @@ module AWS
       # @return [String] The name of this table.
       attr_reader :name
 
-      attribute :creation_date_time, :timestamp => true, :static => true
+      attribute :creation_date_time, :static => true
 
       alias_method :created_at, :creation_date_time
 
-      attribute :status, :as => 'TableStatus', :to_sym => true
+      attribute :status, :from => 'TableStatus', :to_sym => true
 
-      attribute :throughput_last_increased_at,
-        :as => 'LastIncreaseDateTime',
-        :timestamp => true
+      attribute :throughput_last_increased_at, :from => 'LastIncreaseDateTime'
 
-      attribute :throughput_last_decreased_at, 
-        :as => 'LastDecreaseDateTime',
-        :timestamp => true
+      attribute :throughput_last_decreased_at, :from => 'LastDecreaseDateTime'
 
       attribute :read_capacity_units
 
       attribute :write_capacity_units
 
-      attribute :hash_key, :as => "HashKeyElement", :static => true do
+      attribute :hash_key, :from => "HashKeyElement", :static => true do
         translates_output {|v| PrimaryKeyElement.new(v) }
       end
 
-      attribute :range_key, :as => "RangeKeyElement", :static => true do
+      attribute :range_key, :from => "RangeKeyElement", :static => true do
         translates_output {|v| PrimaryKeyElement.new(v) }
       end
       alias_method :range_key_without_schema_override, :range_key
@@ -186,7 +182,7 @@ module AWS
         provision_throughput(:write_capacity_units => write_capacity_units)
       end
 
-      # @return [Boolean] Returns true if the table has a hash key and no 
+      # @return [Boolean] Returns true if the table has a hash key and no
       #   range key.
       def simple_key?
         range_key.nil?
@@ -251,7 +247,7 @@ module AWS
       # @param description A description of the hash key element.  If
       #   this is a hash, it may contain a single mapping; the key is
       #   the name of the hash key attribute and the value is the type
-      #   (+:string+ or +:number+).  If it is an array, the first
+      #   (+:string+, +:number+ or +:binary+).  If it is an array, the first
       #   element is the name and the second element is the type.
       #
       def hash_key= description
@@ -273,7 +269,7 @@ module AWS
       # @param description A description of the range key element.  If
       #   this is a hash, it may contain a single mapping; the key is
       #   the name of the hash key attribute and the value is the type
-      #   (+:string+ or +:number+).  If it is an array, the first
+      #   (+:string+, +:number+ or +:binary+).  If it is an array, the first
       #   element is the name and the second element is the type.
       #
       def range_key= description
@@ -295,7 +291,7 @@ module AWS
         nil
       end
 
-      # @return [ItemCollection] Returns an object representing all the 
+      # @return [ItemCollection] Returns an object representing all the
       #   items in the table.
       def items
         ItemCollection.new(self)
@@ -318,7 +314,7 @@ module AWS
       # multiple tables, see {DynamoDB#batch_get}.
       #
       # You can call this method in two forms:
-      # 
+      #
       #   # block form
       #   table.batch_get(:all, items) do |attributes|
       #     # yeilds one hash of attribute names/values for each item
@@ -336,7 +332,7 @@ module AWS
       # == Attributes
       #
       # You can specify the list of attributes to request in 3 ways:
-      # 
+      #
       # * The symbol +:all+ (to recieve all attributes)
       # * A single attribute name (e.g. 'size')
       # * An array of attribute names (e.g. ['size', 'color'])
@@ -363,7 +359,7 @@ module AWS
       #
       # Here are a few examples:
       #
-      #   # items as a list of hash key values 
+      #   # items as a list of hash key values
       #   items = %w(hashkey1 hashkey2 hashkey3)
       #   table.batch_get(:all, items)
       #
@@ -376,11 +372,11 @@ module AWS
       #   items << Item.new(table, 'hashkey1')
       #   items << Item.new(table, 'hashkey2')
       #   table.batch_get(:all, items)
-      #   
+      #
       # Please note that you must provide both hash and range keys for tables
       # that include a range key in the schema.
       #
-      # @param [:all, String, Array<String>] attributes The list of 
+      # @param [:all, String, Array<String>] attributes The list of
       #   attributes you want to fetch for each item.  +attributes+ may be:
       #
       #   * the symbol +:all+
@@ -389,19 +385,25 @@ module AWS
       #
       # @param [Mixed] items A list of 2 or more items to fetch attributes
       #   for.  You may provide +items+ as:
-      #   
+      #
       #   * an array of hash key value strings
       #   * an array of hash and range key value pairs (nested arrays)
       #   * an array of {Item} objects
       #
+      # @param [Hash] options
+      #
+      # @option options [Boolean] :consistent_read (false) When +true+, items
+      #   are read from this table with consistent reads.  When +false+, reads
+      #   are eventually consistent.
+      #
       # @yield [Hash] Yields a hash of attributes for each item.
       #
-      # @return [Enumerable] Returns an enumerable object that yields 
+      # @return [Enumerable] Returns an enumerable object that yields
       #   hashes of attributes.
       #
-      def batch_get attributes, items, &block
+      def batch_get attributes, items, options = {}, &block
         batch = BatchGet.new(:config => config)
-        batch.table(name, attributes, items)
+        batch.table(name, attributes, items, options)
         enum = batch.to_enum(:each_attributes)
         block_given? ? enum.each(&block) : enum
       end
@@ -415,11 +417,11 @@ module AWS
       #   ])
       #
       # @param [Array<Hash>] items A list of item attributes to put.
-      #   The hash must contain the table hash key element and range key 
+      #   The hash must contain the table hash key element and range key
       #   element (if one is defined).
       #
       # @return (see BatchWrite#process!)
-      # 
+      #
       def batch_put items
         batch = BatchWrite.new(:config => config)
         batch.put(self, items)
@@ -443,7 +445,7 @@ module AWS
       # @option options (BatchWrite#write)
       #
       # @return (see BatchWrite#process!)
-      # 
+      #
       def batch_write options = {}
         batch = BatchWrite.new(:config => config)
         batch.write(self, options)
@@ -454,19 +456,19 @@ module AWS
       #
       #   table.batch_delete(%w(id1 id2 id3 id4 id5))
       #
-      # @param [Array<String>,Array<Array>] items A list of item keys to 
+      # @param [Array<String>,Array<Array>] items A list of item keys to
       #   delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
       #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
       #
-      #   For tables with a range key, items should be an array of 
+      #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
       #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       # @return (see BatchWrite#process!)
-      # 
+      #
       def batch_delete items
         batch = BatchWrite.new(:config => config)
         batch.delete(self, items)

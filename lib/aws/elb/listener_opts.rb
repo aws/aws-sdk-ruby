@@ -16,7 +16,7 @@ module AWS
 
     # @private
     module ListenerOpts
-      
+
       # convert protocols from symbols to strings (e.g. :http to 'HTTP')
       protected
       def format_listener_opts options

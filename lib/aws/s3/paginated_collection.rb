@@ -29,7 +29,7 @@ module AWS
         response = list_request(options)
 
         each_member_in_page(response, &block)
-      
+
         response.data[:truncated] ? next_markers(response) : nil
 
       end

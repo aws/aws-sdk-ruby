@@ -87,11 +87,6 @@ Feature: CRUD Objects (High Level)
     When I write the string "HELLO" to it
     Then the result should be the object with key "foo"
     And the object should eventually have "HELLO" as its body
-    And a request should have been made like:
-    | TYPE | NAME | VALUE |
-    | http | verb | PUT   |
-    | http | uri  | /foo  |
-    | http | body | HELLO |
 
   @put_object @multibyte
   Scenario: Write an object with a multibyte string
@@ -128,6 +123,12 @@ Feature: CRUD Objects (High Level)
     | TYPE   | NAME             | VALUE |
     | http   | verb             | PUT   |
     | header | x-amz-meta-color | blue  |
+
+  @put_object
+  Scenario: Write object metadata with trailing spaces
+    Given I ask for the object with key "foo"
+    When I write data passing metadata attribute "color" with value "blue "
+    Then the object should eventually have metadata "color" set to "blue"
 
   @delete_object
   Scenario: Delete an object
@@ -358,6 +359,28 @@ Feature: CRUD Objects (High Level)
     | TYPE   | NAME      | VALUE       |
     | http   | verb      | PUT         |
     | header | x-amz-acl | public-read |
+
+  @presigned
+  Scenario: Presigned HTTPS get
+    Given I write "world" to the key "hello"
+    When I create a pre-signed https "GET" uri
+    When I make a https get request to the presigned uri
+    Then the returned value should "world"
+
+  @presigned
+  Scenario: Presigned HTTP get
+    Given I write "world" to the key "hello"
+    When I create a pre-signed http "GET" uri
+    When I make a http get request to the presigned uri
+    Then the returned value should "world"
+
+  @sts @presigned
+  Scenario: Presigned get with session credentials
+    Given I write "world" to the key "hello"
+    And I ask for temporary security credentials
+    When I create a pre-signed "GET" uri using the session credentials
+    When I make a https get request to the presigned uri
+    Then the returned value should "world"
 
   @batch_delete
   Scenario: Multi-object delete with delete_if

@@ -59,7 +59,7 @@ module AWS
       end
 
       context '#lifecycle_configuration' do
-        
+
         it 'returns a lifecycle configuration for this bucket' do
           cfg = bucket.lifecycle_configuration
           cfg.should be_a(BucketLifecycleConfiguration)
@@ -75,7 +75,7 @@ module AWS
 
       context '#lifecycle_configuration=' do
 
-        let(:xml) { <<-XML.strip } 
+        let(:xml) { <<-XML.strip }
 <LifecycleConfiguration>
   <Rule>
     <ID>id</ID>
@@ -108,7 +108,7 @@ module AWS
         end
 
         it 'updates the cached lifecycle configuration' do
-          
+
           client.should_not_receive(:get_bucket_lifecycle_configuration)
 
           bucket.lifecycle_configuration = xml
@@ -135,6 +135,86 @@ module AWS
 
       end
 
+      context '#tags' do
+
+        it 'calls #get_bucket_tagging with the bucket name' do
+
+          resp = double('resp', :data => { :tags => { 'foo' => 'bar' }})
+
+          client.should_receive(:get_bucket_tagging).
+            with(:bucket_name => bucket.name).
+            and_return(resp)
+
+          bucket.tags.should eq('foo' => 'bar')
+
+        end
+
+        it 'returns {} when there are no tags' do
+          err = AWS::S3::Errors::NoSuchTagSet.new
+          client.stub(:get_bucket_tagging).and_raise(err)
+          bucket.tags.should eq({})
+        end
+
+      end
+
+      context '#cors' do
+
+        it 'returns a cors rule collection' do
+          bucket.cors.should be_a(CORSRuleCollection)
+          bucket.cors.bucket.should eq(bucket)
+          bucket.cors.bucket.config.should eq(config)
+        end
+
+      end
+
+      context '#cors=' do
+
+        it 'calls set on the cors rule collection' do
+
+          rules = double('rules')
+          cors = double('cors-rule-collection')
+          cors.should_receive(:set).with(rules)
+          bucket.stub(:cors).and_return(cors)
+
+          bucket.cors = rules
+
+        end
+
+      end
+
+      context '#tags=' do
+
+        it 'calls #put_bucket_tagging' do
+
+          tags = { 'foo' => 'bar' }
+
+          client.should_receive(:put_bucket_tagging).
+            with(:bucket_name => bucket.name, :tags => tags)
+
+          bucket.tags = tags
+
+        end
+
+        it 'calls #delete_bucket_tagging when tags are empty' do
+
+          client.should_receive(:delete_bucket_tagging).
+            with(:bucket_name => bucket.name)
+
+          bucket.tags = {}
+
+        end
+
+        it 'calls #delete_bucket_tagging when tags are nil' do
+
+          client.should_receive(:delete_bucket_tagging).
+            with(:bucket_name => bucket.name)
+
+          bucket.tags = nil
+
+        end
+
+      end
+
       context '#delete' do
 
         it 'should call delete_bucket on the client with the bucket name' do
@@ -148,8 +228,8 @@ module AWS
       context '#clear!' do
 
         let(:response) { client.stub_for(:delete_objects) }
-        
-        it 'should delete the bucket objects in batches' do 
+
+        it 'should delete the bucket objects in batches' do
 
           key = { :key => 'key', :version_id => "null" }
 
@@ -164,22 +244,22 @@ module AWS
             and_yield(versions3)
 
           bucket.stub(:versions).and_return(versions)
-          
+
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions1).
             and_return(response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions2).
             and_return(response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions3).
             and_return(response)
-              
+
           bucket.clear!
 
         end
@@ -257,15 +337,15 @@ module AWS
         end
 
         context '#versions' do
-          
+
           it 'returns a bucket version collection' do
             bucket.versions.should be_a(BucketVersionCollection)
           end
-          
+
           it 'returns collection with the correct bucket' do
             bucket.versions.bucket.should == bucket
           end
-          
+
           it 'returns collection with the correct client' do
             bucket.versions.client.should == bucket.client
           end
@@ -276,8 +356,22 @@ module AWS
 
           it 'calls set_bucket_versioning with :enabled' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :enabled)
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.enable_versioning
+          end
+
+          it 'calls set_bucket_versioning with MFA credentials when MFA delete is being enabled' do
+            bucket.client.should_receive(:set_bucket_versioning).
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => 'Enabled',
+                   :mfa         => '123456 7890'
+                  )
+            bucket.enable_versioning(:mfa_delete => 'Enabled', :mfa => '123456 7890')
           end
 
         end
@@ -286,7 +380,11 @@ module AWS
 
           it 'calls set_bucket_versioning with :suspended' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :suspended)
+              with(:bucket_name => bucket.name,
+                   :state       => :suspended,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.suspend_versioning
           end
 
@@ -299,7 +397,7 @@ module AWS
               with(:bucket_name => bucket.name)
             bucket.versioning_enabled?
           end
-          
+
           it 'returns true if bucket versioning is :enabled' do
             response.stub(:status).and_return(:enabled)
             bucket.versioning_enabled?.should == true
@@ -316,7 +414,7 @@ module AWS
           end
 
           it 'provides a #versioned? alias' do
-            bucket.method(:versioned?).should == 
+            bucket.method(:versioned?).should ==
               bucket.method(:versioning_enabled?)
           end
 
@@ -329,7 +427,7 @@ module AWS
               with(:bucket_name => bucket.name)
             bucket.versioning_state
           end
-          
+
           it 'returns the status from get_bucket_versioning' do
             response.stub(:status).and_return('fake status')
             bucket.versioning_state.should == 'fake status'
@@ -380,12 +478,12 @@ module AWS
       end
 
       context '#eql?' do
-        
+
         it 'should identify the same bucket correctly' do
           bucket = Bucket.new('a')
           bucket.eql?(bucket).should be_true
         end
-        
+
         it 'should identify buckets with the same name correctly' do
           bucket = Bucket.new('a')
           another_bucket_same_name = Bucket.new('a')

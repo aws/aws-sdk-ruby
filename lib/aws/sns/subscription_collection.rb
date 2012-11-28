@@ -25,52 +25,50 @@ module AWS
     #
     class SubscriptionCollection
 
-      include Core::Model
-      include Enumerable
+      include Core::Collection::WithNextToken
+
+      # Returns a subscription with the given ARN.  This does not make
+      # a request to AWS.
+      # @param [String] arn The subscription ARN.
+      # @return [Subscription]
+      def [] arn
+        Subscription.new(arn, :config => config)
+      end
+
+      protected
 
       # Yield each subscription belonging to this account.
       # @yieldparam [Subscription] subscription Each of the
       #   subscriptions in the account.
       # @return [nil]
-      def each
-        next_token = nil
-        begin
-          opts = request_opts
-          opts[:next_token] = next_token if next_token
-          resp = client.send(list_request, opts)
-          resp.subscriptions.each do |sub|
-            subscription = Subscription.new(sub.subscription_arn,
-              :endpoint => sub.endpoint,
-              :protocol => sub.protocol.tr('-','_').to_sym,
-              :owner_id => sub.owner,
-              :topic_arn => sub.topic_arn,
-              :config => config
-            )
-            yield(subscription)
-          end
-          next_token = resp.data[:next_token]
-        end until next_token.nil?
-        nil
+      def _each_item next_token, options, &block
+
+        options[:next_token] = next_token if next_token
+
+        resp = client.send(client_method, options.merge(request_options))
+        resp.data[:subscriptions].each do |sub|
+
+          subscription = Subscription.new(
+            sub[:subscription_arn],
+            :endpoint => sub[:endpoint],
+            :protocol => sub[:protocol].tr('-','_').to_sym,
+            :owner_id => sub[:owner],
+            :topic_arn => sub[:topic_arn],
+            :config => config)
+
+          yield(subscription)
+
+        end
+
+        resp.data[:next_token]
+
       end
 
-      # Retrieves a subscription object by ARN.  This method does not
-      # make any requests to the service.
-      #
-      # @param [String] arn The ARN of the subscription to retrieve.
-      # @return [Subscription] The subscription with the given ARN.
-      def [] arn
-        Subscription.new(arn, :config => config)
-      end
-
-      # @private
-      protected
-      def list_request
+      def client_method
         :list_subscriptions
       end
 
-      # @private
-      protected
-      def request_opts
+      def request_options
         {}
       end
 

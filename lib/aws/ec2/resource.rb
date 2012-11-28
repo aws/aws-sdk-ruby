@@ -76,7 +76,7 @@ module AWS
       def describe_attribute_call(attribute)
         name = describe_attribute_call_name
 
-        attr_opt_name = Core::Inflection.class_name(attribute.get_as.to_s)
+        attr_opt_name = Core::Inflection.class_name(attribute.from.to_s)
         attr_opt_name = attr_opt_name[0,1].downcase + attr_opt_name[1..-1]
 
         client.send(name, Hash[[[response_id_method.to_sym,

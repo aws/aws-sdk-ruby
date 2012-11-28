@@ -1,0 +1,416 @@
+2012-11-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/signature/version_3_https.rb: Added x-amz-security-token
+  header for signature version 3 https requests when a session token is
+  provided.
+
+2012-11-02 Trevor Rowe <trevorrowe@gmail.com>
+
+  * CONTRIBUTORS.txt: Added a contributors file.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.7.0
+
+2012-10-29 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/dynamo_db/batch_get.feature,
+  features/dynamo_db/step_definitions/batch_get.rb,
+  features/dynamo_db/step_definitions/batch_write.rb,
+  lib/aws/dynamo_db/batch_get.rb, lib/aws/dynamo_db/table.rb,
+  spec/aws/dynamo_db/batch_get_spec.rb, spec/aws/dynamo_db/table_spec.rb:
+  Added support for consistent reads to AWS::DynamoDB::BatchGet.
+
+  * features/dynamo_db/batch_write.feature,
+  features/dynamo_db/step_definitions/batch_write.rb,
+  features/dynamo_db/step_definitions/dynamo_db.rb: Sped up a few of the
+  DynamoDB batch write integration tests.
+
+  * lib/aws/api_config/DynamoDB-2011-12-05.yml, lib/aws/dynamo_db/client.rb:
+  Added consistent read to AWS::DynamoDB::Client#batch_get input and outputs.
+
+  * lib/aws/rds/event_collection.rb: Removed the empty file for
+  AWS::RDS::EventCollection.
+
+  * lib/aws/core.rb: Corrected the documentation on
+  AWS.config.dynamo_db_big_decimals.
+
+  * lib/aws/rds/config.rb: Corrected the default RDS endpoint, now
+  'rds.us-east-1.amazonaws.com'.
+
+  * lib/aws/rds/client.rb: Documented AWS::RDS::Client API operation methods.
+
+  * lib/aws/rds.rb: Added basic documentation for the AWS::RDS service
+  interface.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds/db_instance.rb,
+  lib/aws/rds/db_instance_collection.rb, lib/aws/rds/db_snapshot.rb,
+  lib/aws/rds/db_snapshot_collection.rb, lib/aws/rds/event_collection.rb:
+  Added missing attribution comment blocks to a few scripts.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml: Revert "Added api configuration for
+  RDS."
+
+  This reverts commit c6beb0537b7bbe84190e6aeed1e73e19aaff2ea4.
+
+  * lib/aws/rds.rb, lib/aws/rds/client.rb, lib/aws/rds/config.rb,
+  lib/aws/rds/errors.rb, lib/aws/rds/request.rb: Revert "Wired up a basic RDS
+  client."
+
+  This reverts commit cdabb8967b6c20cb4e2458d406688b47228d3c70.
+
+  * lib/aws/rds/client.rb: Revert "Documented the RDS API operations in
+  AWS::RDS::Client."
+
+  This reverts commit 5db2951ab8a24004631ef4b3fc25e3979bdfc89a.
+
+  * lib/aws/dynamo_db/item_collection.rb: Corrected documentation on
+  AWS::DynamoDB::ItemCollection on how to limit items returned.
+
+2012-10-26 Loren Segal <lsegal@amazon.com>
+
+  * features/dynamo_db/crc32.feature,
+  features/dynamo_db/step_definitions/crc32.rb,
+  features/dynamo_db/step_definitions/dynamo_db.rb,
+  lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/config.rb,
+  spec/aws/dynamo_db/client_spec.rb: Add CRC32 integrity checking to DynamoDB
+
+  * features/support/common.rb: Only run SimpleCov on cucumber when COVERAGE
+  is set
+
+  * features/dynamo_db/step_definitions/dynamo_db.rb: Remove extra whitespace
+  in a test
+
+2012-11-01 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/rds/client.feature, features/rds/step_definitions/client.rb:
+  Shortened the feature/scenario table for RDS::Client#describe_events.
+
+  * features/rds/client.feature, features/rds/step_definitions/client.rb:
+  Added a basic integration test for the RDS client.
+
+  * features/rds/client.feature, features/rds/step_definitions/rds.rb,
+  lib/aws/rds/db_instance.rb: AWS::RDS::DBInstance#snapshots now uses the
+  correct filter.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, spec/aws/rds/client_spec.rb: Fixed
+  a bug in the api_config for RDS where EVERY element was wrapped, when not
+  all are.
+
+  * lib/aws/rds/db_snapshot.rb, spec/aws/rds/db_snapshot_spec.rb: Added unit
+  tests for AWS::RDS::DBSnapshot.
+
+  * lib/aws/rds/db_snapshot_collection.rb,
+  spec/aws/rds/db_snapshot_collection_spec.rb: Added unit tests for
+  RDS::DBSnapshotCollection.
+
+  * lib/aws/rds/db_instance.rb, lib/aws/rds/db_instance_collection.rb,
+  spec/aws/rds/db_instance_collection_spec.rb,
+  spec/shared/collection/with_limit_and_next_token_examples.rb: Added unit
+  tests for AWS::RDS::DBInstanceCollection.
+
+  * lib/aws/rds/db_instance.rb, lib/aws/rds/db_snapshot.rb,
+  spec/aws/rds/client_spec.rb, spec/aws/rds/db_instance_spec.rb: Added unit
+  tests for AWS::RDS::DBInstance.
+
+  * spec/aws/core/xml/parser_spec.rb, spec/aws/rds/client_spec.rb: Added unit
+  test for nested ignore rules to the XML parser.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml: Added wrapping elements to the RDS
+  output shapes so the XML can be correctly parsed.
+
+2012-10-31 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/rds.rb, lib/aws/rds/client.rb, lib/aws/rds/db_instance.rb,
+  lib/aws/rds/db_instance_collection.rb, lib/aws/rds/db_snapshot.rb,
+  lib/aws/rds/db_snapshot_collection.rb: Documented a large number of
+  methods/attributes, added additional attirbutes to the RDS interfaces.
+
+  * lib/aws/s3/request.rb, lib/aws/s3/s3_object.rb: AWS::S3::S3Object #url_for
+  and #public_url now share the same default behavior.
+
+  Previously, #url_for would check config.use_ssl for the default
+  http/https mode.  #public_url instead always defaulted to https,
+  ignoring config.use_ssl.  They both now default to the mode specified
+  in config.use_ssl.
+
+  Also, they both now work with alternative ports for testing against
+  local endpoints at non-standard ports (outside of 443 and 80).
+
+  * features/s3/high_level/objects.feature, lib/aws/s3/request.rb: Fixed an S3
+  signing bug where the canonicalized amz header values were not trimmed of
+  whitespace.
+
+  * features/s3/high_level/objects.feature,
+  features/s3/high_level/step_definitions/objects.rb,
+  features/sts/step_definitions/sessions.rb, lib/aws/s3/s3_object.rb: Fixed a
+  bug in generating presigned GET requests for S3.
+
+2012-09-20 Neville Kadwa <neville@kadwa.com>
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds.rb,
+  lib/aws/rds/db_instance.rb, lib/aws/rds/db_instance_collection.rb,
+  lib/aws/rds/db_snapshot.rb, lib/aws/rds/db_snapshot_collection.rb,
+  lib/aws/rds/event_collection.rb: add snapshot modeling
+
+2012-09-18 Neville Kadwa <neville@kadwa.com>
+
+  * lib/aws/rds.rb, lib/aws/rds/db_instance_collection.rb: cleanup
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds.rb,
+  lib/aws/rds/db_instance.rb, lib/aws/rds/db_instance_collection.rb: add
+  db_instance collection and instance funcitonality
+
+2012-09-17 Neville Kadwa <neville@kadwa.com>
+
+  * lib/aws/api_config/RDS-2012-07-31.yml: needed methods working
+
+  * lib/aws/api_config/RDS-2012-07-31.yml, lib/aws/rds.rb,
+  lib/aws/rds/client.rb, lib/aws/rds/config.rb, lib/aws/rds/errors.rb,
+  lib/aws/rds/request.rb: base rds implementation
+
+2012-10-30 Nate Mueller <nate@nearbuysystems.com>
+
+  * lib/aws/ec2/reserved_instances.rb: Added state attribute to
+  reserved_instances
+
+2012-10-24 Marco Carvalho <marco@ebehavior.com.br>
+
+  * lib/aws/cloud_watch/metric.rb: Fixed: Wrong param name: expected
+  metric_name and metric_item was set
+
+2012-10-20 Oliver Hookins <oliver@soundcloud.com>
+
+  * lib/aws/s3/client.rb, lib/aws/s3/object_collection.rb,
+  spec/aws/s3/client_spec.rb, spec/aws/s3/object_collection_spec.rb: Add MFA
+  authentication to S3 multiple object deletions.
+
+2012-10-19 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/cloud_watch/alarm.rb: Corrected documentation on
+  AWS::CloudWatch::Alarm#alarm_actions.
+
+  * lib/aws/s3/bucket_tag_collection.rb: Corrected a yard doc tag (typo in tag
+  name).
+
+2012-10-16 carljparker <carljparker@gmail.com>
+
+  * lib/aws/s3/s3_object.rb: Update lib/aws/s3/s3_object.rb
+
+  Fix typo: server_size_encryption should be server_side_encryption
+2012-10-15 Jamis Buck <jamis@37signals.com>
+
+  * lib/aws/s3/s3_object.rb, spec/aws/s3/s3_object_spec.rb: endpoint, port,
+  and force_path_style should be inherited from config
+
+2012-10-12 Loren Segal <lsegal@amazon.com>
+
+  * .travis.yml, README.rdoc: Only run Travis on master branch
+
+2012-10-11 Loren Segal <lsegal@amazon.com>
+
+  * README.rdoc: Update README with Travis build status
+
+  * .travis.yml, tasks/rvm_tester.rake: Don't test jruby on Travis (running
+  out of memory)
+
+  * tasks/rspec.rake: Don't need specdoc output for RSpec
+
+  * spec/aws/rails_spec.rb: Reset Config after Rails tests
+
+  * spec/aws/core/options/xml_serializer_spec.rb: Fix XML serializer tests
+  matcher usage
+
+  * spec/shared/signature/version_4_examples.rb: Fix broken tests that were
+  hashed for GMT-8
+
+  * spec/aws/record/hash_model/class_methods_spec.rb: Cleanup after modifying
+  AWS.config in test
+
+2012-10-10 Loren Segal <lsegal@amazon.com>
+
+  * tasks/scan.rake, tasks/secret_scanner.rb: Secret scanner rake task no
+  longer used
+
+  * Rakefile: Load vendor Rakefiles into rake tasks
+
+  * .gitignore: Ignore vendor from git
+
+  * lib/aws/s3/errors.rb: Removed a @private documentation tag from the
+  AWS::S3::Errors module.
+
+2012-10-09 Loren Segal <lsegal@amazon.com>
+
+  * .travis.yml, Gemfile, tasks/rspec.rake, tasks/rvm_tester.rake: Add RVM
+  tester and Travis CI support
+
+  * spec/net/http/connection_pool/live_tests_spec.rb: Make
+  Net::HTTP::ConnectionPool tests more reliable
+
+  * Gemfile, spec/aws/config_spec.rb,
+  spec/aws/core/options/xml_serializer_spec.rb,
+  spec/aws/route_53/client_spec.rb,
+  spec/aws/s3/bucket_lifecycle_configuration_spec.rb,
+  spec/aws/s3/client_spec.rb, spec/aws/s3/s3_object_encrypt_spec.rb,
+  spec/spec_helper.rb: Fix tests in JRuby
+
+  * spec/shared/s3/paginated_collection_examples.rb: Fix broken spec
+
+  * Gemfile, Rakefile: Reorder Gemfile to use standard group names
+
+  * tasks/rcov.rake, tasks/rspec.rake: Remove rcov rake task, spec task takes
+  COVERAGE env var
+
+  * spec/aws/core/option_grammar_spec.rb, spec/aws/ec2/instance_spec.rb,
+  spec/aws/simple_db/errors_spec.rb, spec/shared/record/shardable_examples.rb:
+  Remove some pending tests and comment out EC2 instance tests for now
+
+  * Gemfile: Update Gemfile with newer versions of RSpec, remove debug group
+
+  * Gemfile: CI reporter library no longer used.
+
+  * Gemfile: Remove autotest group from Gemfile
+
+  * spec/aws/core/credential_providers_spec.rb: Stub out environment variables
+  in DefaultProvider specs
+
+  Avoids test failure if user has access keys provided in env.
+
+  * lib/aws/api_config/EMR-2009-03-31.yml, lib/aws/emr/client.rb: Documented
+  set_visible_to_all_users method on EMR client and alphabetized the api
+  configuration.
+
+  * lib/aws/api_config/EMR-2009-03-31.yml, lib/aws/emr/client.rb: Added
+  VisibleToAllUser attributes to the EMR api configuration and documented them
+  in the client.
+
+2012-10-05 Neville Kadwa <neville@kadwa.com>
+
+  * lib/aws/api_config/EMR-2009-03-31.yml, lib/aws/emr/job_flow.rb,
+  spec/aws/emr/job_flow_spec.rb: EMR added set_visible_to_all_users call,
+  expose this through client
+
+  * lib/aws.rb, lib/aws/core.rb, lib/aws/core/configuration.rb: Documented
+  Cloud Search configurations and added autoloading hooks.
+
+  * lib/aws/cloud_search/client.rb: Documented AWS::CloudSearch::Client
+  control plane operations.
+
+  * lib/aws/cloud_search.rb, lib/aws/cloud_search/client.rb,
+  lib/aws/cloud_search/config.rb, lib/aws/cloud_search/errors.rb,
+  lib/aws/cloud_search/request.rb: Added Cloud Search control plane API
+  classes.
+
+  * lib/aws/api_config/CloudSearch-2011-02-01.yml: Added Cloud Search API
+  configuration file.
+
+  * lib/aws/ec2/reserved_instances.rb,
+  lib/aws/ec2/reserved_instances_offering.rb,
+  spec/shared/ec2/reserved_instances_attributes_examples.rb: Added new
+  attributes to reserved_instances(_offerings)
+
+  recurring_charges and offering_type
+
+2012-10-04 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws.rb, lib/aws/core.rb, lib/aws/core/configuration.rb: Added endpoint
+  documentation and autoloading for RDS.
+
+  * lib/aws/rds/client.rb: Documented the RDS API operations in
+  AWS::RDS::Client.
+
+  * lib/aws/rds.rb, lib/aws/rds/client.rb, lib/aws/rds/config.rb,
+  lib/aws/rds/errors.rb, lib/aws/rds/request.rb: Wired up a basic RDS client.
+
+  * lib/aws/api_config/RDS-2012-07-31.yml: Added api configuration for RDS.
+
+  * lib/aws.rb, lib/aws/core.rb, lib/aws/core/configuration.rb: Added
+  AWS::ElasticBeanstalk configuration documentation and autoloading hoooks.
+
+  * lib/aws/api_config/ElasticBeanstalk-2010-12-01.yml,
+  lib/aws/elastic_beanstalk.rb, lib/aws/elastic_beanstalk/client.rb,
+  lib/aws/elastic_beanstalk/config.rb, lib/aws/elastic_beanstalk/errors.rb,
+  lib/aws/elastic_beanstalk/request.rb: Added basic support for AWS Elastic
+  Beanstalk.
+
+  * lib/aws/core/inflection.rb, lib/aws/core/service_interface.rb: Provided a
+  better inflection for ElastiCache (elasticache instead of elasti_cache).
+
+  * lib/aws.rb, lib/aws/core.rb, lib/aws/core/configuration.rb: Documented
+  ElastiCache endpoints and added autoloading hooks.
+
+  * lib/aws/elasticache/client.rb: Documented ElastiCache client methods.
+
+  * lib/aws/elasticache.rb, lib/aws/elasticache/client.rb,
+  lib/aws/elasticache/config.rb, lib/aws/elasticache/errors.rb,
+  lib/aws/elasticache/request.rb: Added basic ElastiCache classes.
+
+  * lib/aws/api_config/ElastiCache-2012-03-09.yml: Added API configuration for
+  ElastiCache.
+
+  * features/dynamo_db/items.feature,
+  features/dynamo_db/step_definitions/img.jpg,
+  features/dynamo_db/step_definitions/items.rb: Added an integration test that
+  uploads a small image as a DynamoDB attribute.
+
+  * ChangeLog: Updated changelog.
+
+  * lib/aws/version.rb: Bump version to 1.6.9
+
+  * .yardopts, aws-sdk.gemspec: Removed NOTICE.txt from gem specification and
+  yardopts.
+
+  * lib/aws/api_config/EC2-2012-07-20.yml, lib/aws/ec2/client.rb: Resolved an
+  issue with specifying security groups while requesting spot instances with
+  AWS::EC2::Client.
+
+  * lib/aws/s3/client.rb, lib/aws/s3/object_version.rb,
+  lib/aws/s3/s3_object.rb, spec/aws/s3/client_spec.rb,
+  spec/aws/s3/object_version_spec.rb: Add MFA credential support to S3 object
+  version delete methods.
+
+2012-10-08 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/object_collection.rb: Removed trailing whitespace from
+  AWS::S3::ObjectCollection class file.
+
+2012-10-03 Loren Segal <lsegal@amazon.com>
+
+  * ChangeLog: Add ChangeLog
+
+  * LICENSE.txt, NOTICE.txt: Remove NOTICE.txt; only LICENSE.txt is needed.
+
+  Apache License 2.0 is still being used.
+
+  * tasks/secret_scanner.rb: Make secret scanning configurable
+
+2012-10-02 Loren Segal <lsegal@amazon.com>
+
+  * Rakefile: Set default rake task to unit tests
+
+  * tasks/gems.rake: Gems tasks no longer necessary
+
+  * lib/aws/core.rb, lib/aws/version.rb: Move AWS::VERSION to separate file
+
+  * .gitignore: Ignore .gem files from repository
+
+  * spec/spec_helper.rb: Only use simplecov if COVERAGE env is set
+
+  * aws-sdk.gemspec: Fix gemspec
+
+  * aws-sdk.gemspec: Add gemspec
+
+  * tasks/scan.rake: Exit with nonzero status if scan finds matches
+
+  * .gitignore: Add .gitignore
+
+  * tasks/scan.rake: Name secret scanner task
+
+2012-10-01 Diego Elio Pettenò <flameeyes@flameeyes.eu>
+
+  * spec/aws/s3/client_spec.rb: spec: do not compare data that can be
+  differently sorter on Ruby 1.8
+
+  * lib/aws/core/option_grammar.rb: Replace Ruby 1.9-specific syntax with
+  syntax working for 1.8 as well.
+
+  While it's less arcane, the 1.9-specific syntax break compatibility
+  for nothing more than a function name.

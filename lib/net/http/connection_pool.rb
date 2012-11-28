@@ -16,17 +16,18 @@ require 'net/http/connection_pool/connection'
 require 'thread'
 require 'logger'
 
+# A wrapper around Net::HTTP that provides a manged pool of persistant HTTP
+# connections.
+#
+#   pool = Net::HTTP::ConnectionPool.new
+#   connection = pool.connection_for('domain.com')
+#   connection.request(Net::HTTP::Get.new('/')) do |resp|
+#     # Connection#request yields Net::HTTPResponse objects
+#     puts resp.body
+#   end
+#
 # @private
 class Net::HTTP::ConnectionPool
-
-  SOCKET_ERRORS = [
-    EOFError, 
-    IOError, 
-    Errno::ECONNABORTED, 
-    Errno::ECONNRESET, 
-    Errno::EPIPE, 
-    Errno::EINVAL 
-  ]
 
   # @param [Hash] options
   #
@@ -42,10 +43,10 @@ class Net::HTTP::ConnectionPool
   #
   # @option options [Logger] :logger (Logger.new($stdout)) Where debug out
   #   is sent (wire traces).
-  # 
+  #
   def initialize options = {}
-    @pool = []
     @pool_mutex = Mutex.new
+    @pool = []
     @open_timeout = options[:http_open_timeout] || 15
     @idle_timeout = options[:http_idle_timeout] || 60
     @http_wire_trace = !!options[:http_wire_trace]
@@ -56,7 +57,7 @@ class Net::HTTP::ConnectionPool
     end
   end
 
-  # @return [Integer] 
+  # @return [Integer]
   attr_reader :idle_timeout
 
   # @return [Integer]
@@ -76,20 +77,18 @@ class Net::HTTP::ConnectionPool
   # Requests a connection object from the connection pool.
   #
   #   connection = pool.connection_for('domain.com')
-  #   connection.request(Net::HTTP::Get.new('/index.html'))
-  #   connection.request(Net::HTTP::Get.new('/about.html'))
+  #   connection.request(Net::HTTP::Get.new('/index.html')) {|resp|}
+  #   connection.request(Net::HTTP::Get.new('/about.html')) {|resp|}
   #
   #   # same thing in block form
   #   pool.connection_for('domain.com') do |connection|
-  #     connection.request(Net::HTTP::Get.new('/index.html'))
-  #     connection.request(Net::HTTP::Get.new('/about.html'))
+  #     connection.request(Net::HTTP::Get.new('/index.html')) {|resp|}
+  #     connection.request(Net::HTTP::Get.new('/about.html')) {|resp|}
   #   end
   #
   # Because the pool manages HTTP sessions you do not have to
   # worry about closing a connection or returning a connection
-  # to the pool.  Every time you call request on a connection
-  # object, a HTTP session received from the pool and returned after
-  # the request is complete.
+  # to the pool.
   #
   # @param [String] host
   #
@@ -102,12 +101,12 @@ class Net::HTTP::ConnectionPool
   #   SSL.  Defaults to +false+, unless +:port+ is 443, then it defaults
   #   to +true+.
   #
-  # @option options [Boolean] :ssl_verify_peer (true) If true, ssl 
+  # @option options [Boolean] :ssl_verify_peer (true) If true, ssl
   #   connections should verify peer certificates.  This should only ever be
   #   set false false for debugging purposes.
   #
   # @option options [String] :ssl_ca_file Full path to the SSL certificate
-  #   authority bundle file that should be used when verifying peer 
+  #   authority bundle file that should be used when verifying peer
   #   certificates.  If you do not pass +:ssl_ca_file+ or +:ssl_ca_path+
   #   the the system default will be used if available.
   #
@@ -117,7 +116,7 @@ class Net::HTTP::ConnectionPool
   #   the the system default will be used if available.
   #
   # @option options [URI::HTTP,String] :proxy_uri (nil) A URI string or
-  #   URI::HTTP object to use as a proxy.  You should not provide 
+  #   URI::HTTP object to use as a proxy.  You should not provide
   #   +:proxy_uri+ with any other proxy options.
   #
   #     :proxy_uri => 'http://user:pass@host.com:80'
@@ -142,54 +141,19 @@ class Net::HTTP::ConnectionPool
     connection
   end
 
-  # @private
-  def request connection, *request_args, &block
-
-    session = nil
-    response = nil
-    retried = false
-
-    begin
-
-      session = session_for(connection, retried)
-      session.http_session.read_timeout = connection.read_timeout
-      response = session.request(*request_args, &block)
-
-    rescue Exception => error
-
-      # close the http session to prevent the connection from being
-      # left open and risk the other side sending data
-      session.finish if session
-
-      # retry socket errors once on a new session
-      if SOCKET_ERRORS.include?(error.class) and !retried
-        retried = true
-        retry
-      end
-
-      raise error
-
-    else
-      @pool_mutex.synchronize { @pool << session }
-    end
-
-    response
-
-  end
-
   # Returns the number of sessions currently in the pool, not counting those
   # currently in use.
   def size
-    @pool_mutex.synchronize { @pool.size }  
+    @pool_mutex.synchronize { @pool.size }
   end
 
-  # Removes stale http sessions from the pool (that have exceeded 
+  # Removes stale http sessions from the pool (that have exceeded
   # the idle timeout).
   def clean!
     @pool_mutex.synchronize { _clean }
   end
 
-  # Closes and removes removes all sessions from the pool.  
+  # Closes and removes removes all sessions from the pool.
   # If empty! is called while there are outstanding requests they may
   # get checked back into the pool, leaving the pool in a non-empty state.
   def empty!
@@ -199,33 +163,57 @@ class Net::HTTP::ConnectionPool
     end
   end
 
-  # Returns a suitable session from the pool or creates a new one
-  private
-  def session_for connection, force_new = false
+  # Makes a single HTTP request.  See {Connection#request} for more information
+  # on making an HTTP request.
+  # @return [nil]
+  # @private
+  def request connection, *args, &block
+    session_for(connection) do |session|
+      session.read_timeout = connection.read_timeout
+      session.request(*args, &block)
+    end
+  end
+
+  protected
+
+  # Yields an open http session for the given connection.
+  def session_for connection, &block
 
     session = nil
 
-    unless force_new
-      @pool_mutex.synchronize do
-        _clean
-        session = @pool.find{|idle_session| idle_session.key == connection.key }
-        @pool.delete(session) if session
-      end
+    # search the pool for an idle session that can be used
+    @pool_mutex.synchronize do
+      _clean # removes stale sessions
+      session = @pool.find{|idle_session| idle_session.key == connection.key }
+      @pool.delete(session) if session
     end
 
-    if session.nil?
-      logger = http_wire_trace? ? self.logger : nil 
-      session = Session.for(connection, open_timeout, logger)
+    begin
+      # opens a new HTTP session if no suitable idle session was found
+      session = _create_session(connection) unless session
+      yield(session)
+    rescue Exception => error
+      session.finish if session
+      raise error
+    else
+      # only check the session back into the pool if no errors were raised
+      @pool_mutex.synchronize { @pool << session }
     end
 
-    session
+    nil
+
   end
 
-  private
+  def _create_session connection
+    Session.start(connection,
+      :open_timeout => open_timeout,
+      :debug_logger => log_wire_trace? ? logger : nil)
+  end
+
   def _clean
     now = Time.now
     @pool.delete_if do |idle_session|
-      if 
+      if
         idle_session.last_used_at.nil? or
         now - idle_session.last_used_at > idle_timeout
       then

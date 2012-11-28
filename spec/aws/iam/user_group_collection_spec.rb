@@ -64,6 +64,7 @@ module AWS
         let(:request_options) {{ :user_name => user.name }}
         let(:next_token_key)  { :marker }
         let(:limit_key)       { :max_items }
+        let(:member_class)    { Group }
 
         def stub_n_members response, n
           response.data[:groups] = (1..n).collect{|i|

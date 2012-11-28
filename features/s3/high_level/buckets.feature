@@ -87,3 +87,46 @@ Feature: CRUD Buckets (High Level)
   Scenario: Creating a bucket with a location constraint
     When I create a bucket with the location constraint "EU"
     Then the bucket should have the location constraint of "EU"
+
+  @tagging
+  Scenario: Setting bucket tags
+    Given I create a new bucket
+    When I set the bucket tags to
+    | TAG | VALUE |
+    | foo | bar   |
+    | abc | xyz   |
+    Then the tags should be
+    | TAG | VALUE |
+    | foo | bar   |
+    | abc | xyz   |
+
+  @tagging
+  Scenario: Deleting bucket tags
+    Given I create a new bucket
+    When I set the bucket tags to
+    | TAG | VALUE |
+    | foo | bar   |
+    | abc | xyz   |
+    When I set the bucket tags to an empty hash
+    Then the bucket tags should be empty
+
+  @cors
+  Scenario: Setting bucket CORS rules
+    Given I create a new bucket
+    When I set the bucket rules
+    Then the bucket rules should match
+
+  @cors
+  Scenario: Adding bucket CORS rules
+    Given I create a new bucket
+    And I set the bucket rules
+    When I add a rule
+    Then the bucket rules should match
+
+  @cors
+  Scenario: Deleting bucket CORS rules
+    Given I create a new bucket
+    And I set the bucket rules
+    When I clear the bucket rules
+    Then the bucket should have no rules
+

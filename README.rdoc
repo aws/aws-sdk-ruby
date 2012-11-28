@@ -1,4 +1,4 @@
-= Getting Started with the AWS SDK for Ruby
+= Getting Started with the AWS SDK for Ruby {<img src="https://secure.travis-ci.org/aws/aws-sdk-ruby.png?branch=master" alt="Build Status" />}[http://travis-ci.org/aws/aws-sdk-ruby]
 
 The AWS SDK for Ruby helps you to get started building applications
 using AWS infrastructure services, including Amazon Simple Storage
@@ -77,8 +77,8 @@ To install the AWS Ruby gem, just enter:
 Now that you've installed the gem, you can run the samples, which you
 can find in our GitHub repository:
 
-  $ git clone git://github.com/amazonwebservices/aws-sdk-for-ruby.git
-  $ cd aws-sdk-for-ruby/samples/
+  $ git clone git://github.com/aws/aws-sdk-ruby
+  $ cd aws-sdk-ruby/samples/
 
 The subdirectories of the +samples+ directory contain several code
 samples that you can run.  These samples demonstrate basic usage of

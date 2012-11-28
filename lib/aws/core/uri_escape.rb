@@ -25,6 +25,7 @@ module AWS
         value = value.encode("UTF-8") if value.respond_to?(:encode)
         CGI::escape(value.to_s).gsub('+', '%20').gsub('%7E', '~')
       end
+      module_function :escape
 
       # @param [String] value
       # @return [String] Returns a URI-escaped path without escaping the 
@@ -36,6 +37,7 @@ module AWS
         end
         escaped
       end
+      module_function :escape_path
 
     end
   end

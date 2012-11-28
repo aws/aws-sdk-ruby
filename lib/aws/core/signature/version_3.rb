@@ -37,10 +37,14 @@ module AWS
             "AWSAccessKeyId=#{credentials.access_key_id},"+
             "Algorithm=HmacSHA256,"+
             "SignedHeaders=#{headers_to_sign.join(';')},"+
-            "Signature=#{sign(credentials.secret_access_key, string_to_sign)}"
+            "Signature=#{signature(credentials)}"
         end
 
         protected
+
+        def signature credentials
+          Signer.sign(credentials.secret_access_key, string_to_sign)  
+        end
 
         def string_to_sign
           OpenSSL::Digest::SHA256.digest([

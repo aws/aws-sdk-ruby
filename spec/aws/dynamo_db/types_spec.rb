@@ -20,6 +20,14 @@ module AWS
 
       let(:mod) { Module.new { extend Types } }
 
+      let(:bin_value) { 'bin-value' }
+
+      let(:wrapped_bin_value) { DynamoDB::Binary.new(bin_value) }
+
+      before(:each) do
+        mod.stub_chain(:config, :dynamo_db_big_decimals).and_return(true)
+      end
+
       context '#value_from_response' do
 
         it 'should extract string values' do
@@ -36,6 +44,13 @@ module AWS
           n.should == BigDecimal("12")
         end
 
+        it 'should convert number values to floats when configured' do
+          mod.stub_chain(:config, :dynamo_db_big_decimals).and_return(false)
+          n = mod.value_from_response("N" => "12")
+          n.should be_a(Float)
+          n.should eq(12.0)
+        end
+
         it 'should work with numeric literals' do
           n = mod.value_from_response("N" => 12)
           n.should be_a(BigDecimal)
@@ -46,6 +61,16 @@ module AWS
           n = mod.value_from_response(:n => "12")
           n.should be_a(BigDecimal)
           n.should == BigDecimal("12")
+        end
+
+        it 'should work with :b' do
+          b = mod.value_from_response("B" => bin_value)
+          b.should eq(wrapped_bin_value)
+        end
+
+        it 'should extract bin sets' do
+          mod.value_from_response("BS" => [bin_value]).should
+            eq(Set[wrapped_bin_value])
         end
 
         it 'should extract string sets' do
@@ -112,6 +137,16 @@ module AWS
       end
 
       context '#format_attribute_value' do
+
+        it 'should use :b for DynamoDB::Binary' do
+          mod.format_attribute_value(wrapped_bin_value).should
+            eq(:b => bin_value)
+        end
+
+        it 'should use :bs for DynamoDB::Binary sets' do
+          mod.format_attribute_value([wrapped_bin_value]).should
+            eq(:bs => [bin_value])
+        end
 
         it 'should use :s for strings' do
           mod.format_attribute_value("foo").should == { :s => "foo" }

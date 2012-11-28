@@ -155,9 +155,9 @@ module AWS
 
           it 'should provide the creation_date_time attribute' do
             now = Time.now
-            response_table["CreationDateTime"] = Time.now.to_f
+            response_table["CreationDateTime"] = now
             # float equality comparison doesn't work reliably
-            attributes[:creation_date_time].should be_within(1).of(now)
+            attributes[:creation_date_time].should eq(now)
           end
 
           it 'should provide the status attribute' do
@@ -407,10 +407,23 @@ module AWS
           items = double('items')
 
           batch = double('batch').as_null_object
-          batch.should_receive(:table).with(table.name, attributes, items)
+          batch.should_receive(:table).with(table.name, attributes, items, {})
           BatchGet.stub(:new).and_return(batch)
 
           table.batch_get(attributes, items)
+
+        end
+
+        it 'passes along the :consistent_read option' do
+
+          attributes = double('attribute-list')
+          items = double('items')
+
+          batch = double('batch').as_null_object
+          batch.should_receive(:table).with(table.name, attributes, items, :consitent_read => true)
+          BatchGet.stub(:new).and_return(batch)
+
+          table.batch_get(attributes, items, :consitent_read => true)
 
         end
 

@@ -18,7 +18,7 @@ module AWS
 
   # This class is the starting point for working with Auto Scaling.
   #
-  # To use Auto Scaling you must first 
+  # To use Auto Scaling you must first
   # {sign up here}[http://aws.amazon.com/autoscaling/].
   #
   # For more information about Auto Scaling:
@@ -28,13 +28,13 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the AWS::AutoSclaing interface:
   #
   #   auto_scaling = AWS::AutoScaling.new(
@@ -48,9 +48,9 @@ module AWS
   #
   #   # needs a name, image id, and instance type
   #   launch_config = auto_scaling.launch_configurations.create(
-  #     'launch-config-name', 'ami-12345', 'm1-small')
+  #     'launch-config-name', 'ami-12345', 'm1.small')
   #
-  # If you have previously created a launch configuration you can 
+  # If you have previously created a launch configuration you can
   # reference using the {LaunchConfigurationCollection}.
   #
   #   launch_config = auto_scaling.launch_configurations['launch-config-name']
@@ -59,9 +59,9 @@ module AWS
   #
   # Given a launch configuration, you can now create an Auto Scaling {Group}.
   #
-  #   group = auto_scaling.groups.create('group-name', 
+  #   group = auto_scaling.groups.create('group-name',
   #     :launch_configuration => launch_config,
-  #     :availability_zones => %(us-east-1a us-east-1b),
+  #     :availability_zones => %w(us-east-1a us-east-1b),
   #     :min_size => 1,
   #     :max_size => 4)
   #
@@ -130,7 +130,7 @@ module AWS
       ScheduledActionCollection.new(:config => config)
     end
 
-    # Returns a list of all notification types that are supported by 
+    # Returns a list of all notification types that are supported by
     # Auto Scaling.
     # @return [Array<String>]
     def notification_types

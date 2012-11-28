@@ -49,7 +49,7 @@ module AWS
         super(options.merge(:name => name))
       end
 
-      attribute :name, :as => :launch_configuration_name, :static => true
+      attribute :name, :from => :launch_configuration_name, :static => true
 
       attribute :created_time, :static => true
 
@@ -58,7 +58,7 @@ module AWS
       attribute :image_id, :static => true
 
       attribute :detailed_instance_monitoring,
-        :as => :instance_monitoring,
+        :from => :instance_monitoring,
         :static => true do
         translates_output {|value| value[:enabled] }
       end
@@ -71,7 +71,7 @@ module AWS
 
       attribute :key_name, :static => true
 
-      attribute :arn, :as => :launch_configuration_arn, :static => true
+      attribute :arn, :from => :launch_configuration_arn, :static => true
 
       attribute :ramdisk_id, :static => true
 
@@ -89,7 +89,7 @@ module AWS
       end
 
       attribute :security_group_details, 
-        :as => :security_groups, 
+        :from => :security_groups, 
         :static => true
 
       protected :security_group_details

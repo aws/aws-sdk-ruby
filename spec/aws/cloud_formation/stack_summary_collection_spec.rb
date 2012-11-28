@@ -76,15 +76,16 @@ module AWS
 
       end
 
-      it_behaves_like "a simple collection" do
+      it_behaves_like "a pageable collection" do
 
         let(:collection)      { summaries }
         let(:client_method)   { :list_stacks }
         let(:request_options) {{}}
         let(:now)             { Time.now }
+        let(:member_class)    { Hash }
 
         def stub_n_members response, n
-          response.stub(:stack_summaries).and_return((1..n).map{|i|
+          response.data[:stack_summaries] = (1..n).map do |i|
             {
               :creation_time => now,
               :last_updated_time => now,
@@ -95,10 +96,11 @@ module AWS
               :deletion_time => now,
               :template_description => 'template-desc',
             }
-          })
+          end
         end
 
         it 'yields populated stack summaries' do
+          stub_n_members(response, 2)
           summaries.to_a.should == [
             {
               :creation_time => now,

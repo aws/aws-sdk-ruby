@@ -34,7 +34,7 @@ module AWS
         let(:now)             { Time.now }
 
         def stub_n_members response, n
-          response.stub(:stack_events).and_return((1..n).map{|i|
+          response.data[:stack_events] = (1..n).map do |i|
             {
               :stack_name => stack.name,
               :stack_id => 'stack-id',
@@ -47,10 +47,11 @@ module AWS
               :logical_resource_id => 'lid',
               :event_id => "id-#{i}",
             }
-          })
+          end
         end
 
         it 'yields popualted events' do
+          stub_n_members(response, 1)
           event = events.first
           event.stack.should == stack
           event.stack_name.should == stack.name

@@ -23,16 +23,16 @@ module AWS::Core
 
     let(:request) { described_class.new }
 
-    before(:each) do 
+    before(:each) do
       request.host = 'hostname.com'
     end
-    
+
     context '#string_to_sign' do
-      
+
       let(:string_to_sign) { request.send(:string_to_sign) }
 
       let(:lines) { string_to_sign.split(/\n/, 4) }
-      
+
       it 'first line should match the request http method' do
         lines[0].should == request.http_method
       end
@@ -64,23 +64,22 @@ module AWS::Core
 
       it 'adds a signature version param' do
         request.add_authorization!(credential_provider)
-        request.get_param('SignatureVersion').value.should == '2'
+        request.body.should =~ /SignatureVersion=2/
       end
 
       it 'adds a signature method param' do
         request.add_authorization!(credential_provider)
-        request.get_param('SignatureMethod').value.should == 'HmacSHA256'
+        request.body.should =~ /SignatureMethod=HmacSHA256/
       end
 
       it 'adds a signature param' do
         request.add_authorization!(credential_provider)
-        request.get_param('Signature').value.should ==
-          "Se10W1eBHf09PwK7gAdetObg5bzUuo8vNxrIaCDgwJw="
+        request.body.should match("AWSAccessKeyId=KEY&Signature=Se10W1eBHf09PwK7gAdetObg5bzUuo8vNxrIaCDgwJw%3D&SignatureMethod=HmacSHA256&SignatureVersion=2")
       end
 
       it 'adds the access key id param' do
         request.add_authorization!(credential_provider)
-        request.get_param('AWSAccessKeyId').value.should == 'KEY'
+        request.body.should =~ /AWSAccessKeyId=KEY/
       end
 
     end
@@ -120,9 +119,9 @@ module AWS::Core
           })
         }
 
-        it 'should add the SecurityToken parameter' do
+        it 'should add the SecurityToken parameter prior to computing the signature' do
           request.add_authorization!(credential_provider)
-          request.get_param("SecurityToken").value.should == "TOKEN"
+          request.body.should match("AWSAccessKeyId=KEY&SecurityToken=TOKEN&Signature=zou0VOLN0m%2Fkrb1O0jIuNHmUYu49w%2Fn3sr8PbOv4J5U%3D&SignatureMethod=HmacSHA256&SignatureVersion=2")
         end
 
       end
@@ -143,7 +142,7 @@ module AWS::Core
     }
 
     context '#string_to_sign' do
-      
+
       it 'should return a rfc822 formatted time sting' do
         now = Time.now
         Time.stub(:now).and_return(now)

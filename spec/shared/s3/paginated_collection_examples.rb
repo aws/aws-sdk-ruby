@@ -99,7 +99,7 @@ module AWS
           stub_markers(result, name)
         end
 
-        [0, 1, 0].zip(results).each do |quantity, result|
+        [1, 1, 0].zip(results).each do |quantity, result|
           stub_members(result, quantity)
         end
 

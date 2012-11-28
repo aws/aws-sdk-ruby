@@ -22,7 +22,7 @@ Feature: Managing Domains in Simple Workflow
     | TYPE       | NAME     | VALUE                    |
     | target     | like     | RegisterDomain           |
     | json_match | ["name"] | ruby-integration-test-.+ |
-    
+
   @create @memoized
   Scenario: Getting memoized domain details
     Given I register a simple workflow domain
@@ -30,7 +30,7 @@ Feature: Managing Domains in Simple Workflow
     And no requests should have been made like:
     | TYPE       | NAME     | VALUE                    |
     | target     | like     | DescribeDomain           |
-    
+
   @delete
   Scenario: Deprecating a domain
     Given I register a simple workflow domain

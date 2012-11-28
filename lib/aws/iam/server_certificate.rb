@@ -32,11 +32,11 @@ module AWS
 
       # @attr [String] The name that identifies the server
       #   certificate.
-      mutable_attribute :name, :static => true, :as => :server_certificate_name
+      mutable_attribute :name, :static => true, :from => :server_certificate_name
 
       # @attr_reader [String] The stable and unique string identifying
       #   the server certificate.
-      attribute :id, :static => true, :as => :server_certificate_id
+      attribute :id, :static => true, :from => :server_certificate_id
 
       # @attr_reader [Time] The date when the server certificate was
       #   uploaded.

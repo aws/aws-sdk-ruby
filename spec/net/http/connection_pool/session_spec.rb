@@ -25,7 +25,16 @@ class Net::HTTP::ConnectionPool
 
     let(:open_timeout) { 10 }
 
-    let(:get_session) { Session.for(connection, open_timeout) }
+    let(:debug_logger) { nil }
+
+    let(:session_opts) {
+      opts = {}
+      opts[:open_timeout] = open_timeout if open_timeout
+      opts[:debug_logger] = debug_logger if debug_logger
+      opts
+    }
+
+    let(:get_session) { Session.start(connection, session_opts) }
 
     before(:each) do
       Net::HTTP.stub(:new).and_return(http_session)
@@ -48,7 +57,7 @@ class Net::HTTP::ConnectionPool
     end
 
     context 'timestamps' do
-      
+
       let(:now) { Time.at(123456789) }
 
       before(:each) do
@@ -133,7 +142,7 @@ class Net::HTTP::ConnectionPool
         connection = pool.connection_for('host.com', :port => 123,
           :proxy_uri => 'http://u:p@proxy.com:8088/')
 
-        Session.for(connection, open_timeout) 
+        Session.start(connection, session_opts)
 
       end
 
@@ -147,7 +156,7 @@ class Net::HTTP::ConnectionPool
 
         connection = pool.connection_for('host.com', :ssl => true)
 
-        Session.for(connection, open_timeout) 
+        Session.start(connection, session_opts)
 
       end
 
@@ -162,7 +171,7 @@ class Net::HTTP::ConnectionPool
         connection = pool.connection_for('host.com', :port => 443,
           :ssl_ca_file => 'ca-file')
 
-        Session.for(connection, open_timeout) 
+        Session.start(connection, session_opts)
 
       end
 
@@ -177,7 +186,7 @@ class Net::HTTP::ConnectionPool
         connection = pool.connection_for('host.com', :ssl => true,
           :ssl_ca_path => 'ca-path')
 
-        Session.for(connection, open_timeout) 
+        Session.start(connection, session_opts)
 
       end
 
@@ -189,11 +198,11 @@ class Net::HTTP::ConnectionPool
         http_session.should_not_receive(:ca_file=)
         http_session.should_not_receive(:ca_path=)
 
-        connection = pool.connection_for('host.com', 
-          :ssl => true, 
+        connection = pool.connection_for('host.com',
+          :ssl => true,
           :ssl_verify_peer => false)
 
-        Session.for(connection, open_timeout) 
+        Session.start(connection, session_opts)
 
       end
 

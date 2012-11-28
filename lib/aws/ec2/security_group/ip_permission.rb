@@ -31,7 +31,7 @@ module AWS
         #   grant permission to.
         #
         # @option options [Boolean] :egress (false) When true this IpPermission
-        #   is assumed to be an egree permission.
+        #   is assumed to be an egress permission.
         #
         def initialize security_group, protocol, ports, options = {}
 
@@ -43,7 +43,7 @@ module AWS
 
           @groups = Array(options[:groups])
 
-          @egress = options[:egress]
+          @egress = options[:egress] || false
 
           # not all egress permissions require port ranges, depends on the
           # protocol
@@ -55,7 +55,7 @@ module AWS
 
         end
 
-        # @return [SecurityGroup] The security group this permission is 
+        # @return [SecurityGroup] The security group this permission is
         #   authorized for.
         attr_reader :security_group
 
@@ -68,9 +68,12 @@ module AWS
         # @return [Array] An array of string CIDR ip addresses.
         attr_reader :ip_ranges
 
-        # @return [Array] An array of security groups that have been 
-        # granted access with this permission.
+        # @return [Array] An array of security groups that have been
+        #   granted access with this permission.
         attr_reader :groups
+
+        # @return [Boolean] True if this is an egress permission
+        attr_reader :egress
 
         # @return [Boolean] Returns true if this is an egress permission.
         def egress?
@@ -96,9 +99,9 @@ module AWS
           other.security_group == security_group and
           other.protocol == protocol and
           other.port_range == port_range and
-          other.ip_ranges == ip_ranges and
-          other.groups == groups and
-          other.egress == egress?
+          other.ip_ranges.sort == ip_ranges.sort and
+          other.groups.sort == groups.sort and
+          other.egress? == egress?
         end
         alias_method :==, :eql?
 

@@ -22,6 +22,10 @@ module AWS
         klass.stub(:name).and_return("ExampleClass")
       end
 
+      after(:each) do
+        AWS.config(:access_key_id => nil, :secret_access_key => nil)
+      end
+
       let(:klass) { Class.new(AWS::Record::HashModel) }
 
       context 'create_table' do

@@ -98,6 +98,11 @@ module AWS
             perm.groups[1].owner_id.should == 'grp2-user-id'
           end
 
+          it 'should properly execute include?' do
+            perm = collection.to_a.first
+            collection.include?(perm).should be(true)
+          end
+
           context 'vpc security group without ports' do
             
             let(:ip_permissions) do

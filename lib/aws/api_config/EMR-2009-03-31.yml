@@ -1,0 +1,368 @@
+# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:api_version: '2009-03-31'
+:operations:
+- :name: AddInstanceGroups
+  :method: :add_instance_groups
+  :inputs:
+    InstanceGroups:
+    - :membered_list:
+      - :structure:
+          Name:
+          - :string
+          Market:
+          - :string
+          InstanceRole:
+          - :string
+          - :required
+          BidPrice:
+          - :string
+          InstanceType:
+          - :string
+          - :required
+          InstanceCount:
+          - :integer
+          - :required
+    - :required
+    JobFlowId:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AddInstanceGroupsResult:
+        :ignore: true
+        :children:
+          InstanceGroupIds:
+            :ignore: true
+            :children:
+              member:
+                :rename: :instance_group_ids
+                :list: true
+- :name: AddJobFlowSteps
+  :method: :add_job_flow_steps
+  :inputs:
+    JobFlowId:
+    - :string
+    - :required
+    Steps:
+    - :membered_list:
+      - :structure:
+          Name:
+          - :string
+          - :required
+          ActionOnFailure:
+          - :string
+          HadoopJarStep:
+          - :structure:
+              Properties:
+              - :membered_list:
+                - :structure:
+                    Key:
+                    - :string
+                    Value:
+                    - :string
+              Jar:
+              - :string
+              - :required
+              MainClass:
+              - :string
+              Args:
+              - :membered_list:
+                - :string
+          - :required
+    - :required
+  :outputs:
+    :children:
+      AddJobFlowStepsResult:
+        :ignore: true
+- :name: DescribeJobFlows
+  :method: :describe_job_flows
+  :inputs:
+    CreatedAfter:
+    - :timestamp
+    CreatedBefore:
+    - :timestamp
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    JobFlowStates:
+    - :membered_list:
+      - :string
+  :outputs:
+    :children:
+      DescribeJobFlowsResult:
+        :ignore: true
+        :children:
+          JobFlows:
+            :ignore: true
+            :children:
+              member:
+                :rename: :job_flows
+                :list: true
+                :children:
+                  ExecutionStatusDetail:
+                    :children:
+                      CreationDateTime:
+                        :type: :time
+                      StartDateTime:
+                        :type: :time
+                      ReadyDateTime:
+                        :type: :time
+                      EndDateTime:
+                        :type: :time
+                  Instances:
+                    :children:
+                      InstanceCount:
+                        :type: :integer
+                      InstanceGroups:
+                        :ignore: true
+                        :children:
+                          member:
+                            :rename: :instance_groups
+                            :list: true
+                            :children:
+                              InstanceRequestCount:
+                                :type: :integer
+                              InstanceRunningCount:
+                                :type: :integer
+                              CreationDateTime:
+                                :type: :time
+                              StartDateTime:
+                                :type: :time
+                              ReadyDateTime:
+                                :type: :time
+                              EndDateTime:
+                                :type: :time
+                      NormalizedInstanceHours:
+                        :type: :integer
+                      KeepJobFlowAliveWhenNoSteps:
+                        :type: :boolean
+                      TerminationProtected:
+                        :type: :boolean
+                  Steps:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :steps
+                        :list: true
+                        :children:
+                          StepConfig:
+                            :children:
+                              HadoopJarStep:
+                                :children:
+                                  Properties:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :rename: :properties
+                                        :list: true
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :rename: :args
+                                        :list: true
+                          ExecutionStatusDetail:
+                            :children:
+                              CreationDateTime:
+                                :type: :time
+                              StartDateTime:
+                                :type: :time
+                              EndDateTime:
+                                :type: :time
+                  BootstrapActions:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :bootstrap_actions
+                        :list: true
+                        :children:
+                          BootstrapActionConfig:
+                            :children:
+                              ScriptBootstrapAction:
+                                :children:
+                                  Args:
+                                    :ignore: true
+                                    :children:
+                                      member:
+                                        :rename: :args
+                                        :list: true
+                  SupportedProducts:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :supported_products
+                        :list: true
+                  VisibleToAllUsers:
+                    :type: :boolean
+- :name: ModifyInstanceGroups
+  :method: :modify_instance_groups
+  :inputs:
+    InstanceGroups:
+    - :membered_list:
+      - :structure:
+          InstanceGroupId:
+          - :string
+          - :required
+          InstanceCount:
+          - :integer
+          - :required
+  :outputs:
+    :children:
+      ModifyInstanceGroupsResult:
+        :ignore: true
+- :name: RunJobFlow
+  :method: :run_job_flow
+  :inputs:
+    Name:
+    - :string
+    - :required
+    LogUri:
+    - :string
+    AdditionalInfo:
+    - :string
+    AmiVersion:
+    - :string
+    Instances:
+    - :structure:
+        MasterInstanceType:
+        - :string
+        SlaveInstanceType:
+        - :string
+        InstanceCount:
+        - :integer
+        InstanceGroups:
+        - :membered_list:
+          - :structure:
+              Name:
+              - :string
+              Market:
+              - :string
+              InstanceRole:
+              - :string
+              - :required
+              BidPrice:
+              - :string
+              InstanceType:
+              - :string
+              - :required
+              InstanceCount:
+              - :integer
+              - :required
+        Ec2KeyName:
+        - :string
+        Placement:
+        - :structure:
+            AvailabilityZone:
+            - :string
+            - :required
+        KeepJobFlowAliveWhenNoSteps:
+        - :boolean
+        TerminationProtected:
+        - :boolean
+        HadoopVersion:
+        - :string
+        Ec2SubnetId:
+        - :string
+    - :required
+    Steps:
+    - :membered_list:
+      - :structure:
+          Name:
+          - :string
+          - :required
+          ActionOnFailure:
+          - :string
+          HadoopJarStep:
+          - :structure:
+              Properties:
+              - :membered_list:
+                - :structure:
+                    Key:
+                    - :string
+                    Value:
+                    - :string
+              Jar:
+              - :string
+              - :required
+              MainClass:
+              - :string
+              Args:
+              - :membered_list:
+                - :string
+          - :required
+    BootstrapActions:
+    - :membered_list:
+      - :structure:
+          Name:
+          - :string
+          - :required
+          ScriptBootstrapAction:
+          - :structure:
+              Path:
+              - :string
+              - :required
+              Args:
+              - :membered_list:
+                - :string
+          - :required
+    SupportedProducts:
+    - :membered_list:
+      - :string
+    VisibleToAllUsers:
+    - :boolean
+  :outputs:
+    :children:
+      RunJobFlowResult:
+        :ignore: true
+- :name: SetTerminationProtection
+  :method: :set_termination_protection
+  :inputs:
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    - :required
+    TerminationProtected:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetTerminationProtectionResult:
+        :ignore: true
+- :name: SetVisibleToAllUsers
+  :method: :set_visible_to_all_users
+  :inputs:
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    - :required
+    VisibleToAllUsers:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetVisibleToAllUsersResult:
+        :ignore: true
+- :name: TerminateJobFlows
+  :method: :terminate_job_flows
+  :inputs:
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      TerminateJobFlowsResult:
+        :ignore: true

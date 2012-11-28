@@ -23,12 +23,12 @@ module AWS
       end
 
       include Enumerable
-  
+
       # Yields once for every item in this collection.
       #
       #   collection.each {|item| ... }
       #
-      # @note If you want fewer than all items, it is generally better 
+      # @note If you want fewer than all items, it is generally better
       #   to call {#page} than {#each} with a +:limit+.
       #
       # @param [Hash] options
@@ -36,13 +36,13 @@ module AWS
       # @option options [Integer] :limit (nil) The maximum number of
       #   items to enumerate from this collection.
       #
-      # @option options [next_token] :next_token (nil) 
+      # @option options [next_token] :next_token (nil)
       #   Acts as an offset.  +:next_token+ may be returned by {#each} and
       #   {#each_batch} when a +:limit+ is provided.
       #
       # @return [nil_or_next_token] Returns nil if all items were enumerated.
       #   If some items were excluded because of a +:limit+ option then
-      #   a +next_token+ is returned.  Calling an enumerable method on 
+      #   a +next_token+ is returned.  Calling an enumerable method on
       #   the same collection with the +next_token+ acts like an offset.
       #
       def each options = {}, &block
@@ -82,7 +82,7 @@ module AWS
         _each_batch(options.dup, &block)
       end
 
-      # Use this method when you want to call a method provided by 
+      # Use this method when you want to call a method provided by
       # Enumerable, but you need to pass options:
       #
       #   # raises an error because collect does not accept arguments
@@ -99,7 +99,7 @@ module AWS
       #   collection.
       #
       def enum options = {}
-        Enumerator.new(self, :each, options) 
+        Enumerator.new(self, :each, options)
       end
       alias_method :enumerator, :enum
 
@@ -113,7 +113,7 @@ module AWS
       end
 
       # Yields items from this collection in groups of an exact
-      # size (except for perhaps the last group). 
+      # size (except for perhaps the last group).
       #
       #   collection.in_groups_of (10, :limit => 30) do |group|
       #
@@ -124,7 +124,7 @@ module AWS
       #     end
       #
       #   end
-      #   
+      #
       # @param [Integer] size Size each each group of objects
       #   should be yielded in.
       # @param [Hash] options
@@ -187,13 +187,13 @@ module AWS
       #
       # @option options [String] :next_token (nil) A token that indicates
       #   an offset to use when paging items.  Next tokens are returned
-      #   by {PageResult#next_token}.  
+      #   by {PageResult#next_token}.
       #
       #   Next tokens should only be consumed by the same collection that
       #   created them.
       #
       def page options = {}
-        
+
         each_opts = options.dup
 
         per_page = each_opts.delete(:per_page)
@@ -241,7 +241,7 @@ module AWS
         limit = limit.to_i if limit
         limit
       end
-  
+
       # Override this method in collection classes that provide
       # an alternative way to provide the limit than passinging
       # it to the enumerable method as :limit.
@@ -252,7 +252,7 @@ module AWS
       #
       # The collection class including this module should define _limit
       # and return the cached limit value (of 10 from this example).
-      # This value may still be overridden by a locally passed 
+      # This value may still be overridden by a locally passed
       # +:limit+ option:
       #
       #   # limit 5 wins out

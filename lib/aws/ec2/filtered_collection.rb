@@ -14,7 +14,6 @@
 module AWS
   class EC2
 
-    # @private
     module FilteredCollection
 
       def initialize options = {}
@@ -25,11 +24,11 @@ module AWS
       # Specify one or more criteria to filter elastic IP addresses by.
       # A subsequent call to #each will limit the results returned
       # by provided filters.
-      # 
+      #
       # * Chain multiple calls of #filter together to AND multiple conditions
       #   together.
       #
-      # * Supply multiple values to a singler #filter call to OR those 
+      # * Supply multiple values to a singler #filter call to OR those
       #   value conditions together.
       #
       # * '*' matches one or more characters and '?' matches any one

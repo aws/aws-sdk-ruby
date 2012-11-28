@@ -27,8 +27,8 @@ module AWS
       context '#create' do
 
         let(:response) { client.stub_for(:create_account_alias) }
-        
-        it 'calls create_account_alias on the client' do 
+
+        it 'calls create_account_alias on the client' do
           client.should_receive(:create_account_alias).
             with(:account_alias => 'alias')
           aliases.create('alias')
@@ -42,12 +42,10 @@ module AWS
 
       context '#delete' do
 
-        let(:response) { client.stub_for(:delete_account_alias) }
-        
-        it 'calls delete_account_alias on the client' do 
+        it 'calls delete_account_alias on the client' do
           client.should_receive(:delete_account_alias).
             with(:account_alias => 'alias')
-          aliases.delete('alias')
+            aliases.delete('alias')
         end
 
         it 'returns nil' do
@@ -62,11 +60,12 @@ module AWS
         let(:client_method)  { :list_account_aliases }
         let(:next_token_key) { :marker }
         let(:limit_key)      { :max_items }
+        let(:member_class)   { String }
 
-        def stub_n_members response, n
-          response.data[:account_aliases] = (1..n).collect{|i|
-            "accountalias#{i}"
-          }
+        def stub_n_members response, count
+          response.data[:account_aliases] = (1..count).map do |n|
+            "account-alias-#{n}"
+          end
         end
 
       end

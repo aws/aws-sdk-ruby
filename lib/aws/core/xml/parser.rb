@@ -15,7 +15,7 @@ module AWS
   module Core
     module XML
       class Parser
-  
+
         # @param [Hash] rules A has of xml parsing rules.  Generally
         #   rules will come from an xml grammar.
         def initialize rules = {}
@@ -25,7 +25,7 @@ module AWS
         # @return [Hash] Returns the rules for this xml parser that define
         #   how it should transform the XMl into Ruby.
         attr_reader :rules
-  
+
         # @param [String] xml An XML document string to parse.
         # @return [Hash] Returns a hash of parsed xml data.
         def parse xml

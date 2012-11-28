@@ -45,7 +45,7 @@ module AWS
       info_attribute :status, :to_sym => true
 
       config_attribute :retention_period, 
-        :as => 'workflowExecutionRetentionPeriodInDays',
+        :from => 'workflowExecutionRetentionPeriodInDays',
         :duration => true,
         :static => true
 

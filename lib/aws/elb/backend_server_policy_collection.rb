@@ -18,9 +18,9 @@ module AWS
     #
     # == Creating a Backend Server Policy
     #
-    # Creating a backend server policy can be a bit tricky.  A 
-    # BackendServerAuthenticationPolicyType policy only has one 
-    # attribute, a list of public key policies.  
+    # Creating a backend server policy can be a bit tricky.  A
+    # BackendServerAuthenticationPolicyType policy only has one
+    # attribute, a list of public key policies.
     #
     # Before you can assign a policy to a backend server instance port you
     # must create on of the appropriate type:
@@ -36,7 +36,7 @@ module AWS
     #   KEY
     #
     #   public_key_policy = load_balancer.policies.create("pkp",
-    #     'PublicKeyPolicyType', 'PublicKey' => public_key.strip)  
+    #     'PublicKeyPolicyType', 'PublicKey' => public_key.strip)
     #
     #   # step 2, create the backend server policy, passing the public key policy
     #
@@ -54,16 +54,16 @@ module AWS
     # can assign it to a backend instance port:
     #
     #   load_balancer.backend_server_policies[80] = backend_policy
-    # 
+    #
     # If you want to remove the policy you can pass nil instead.
     #
     #   # removes the policy from instance port 80
-    #   load_balancer.backend_server_policies[80] = nil 
+    #   load_balancer.backend_server_policies[80] = nil
     #
     # You can also get the current policy:
     #
     #   load_balancer.backend_server_policies[80] # returns a policy or nil
-    # 
+    #
     class BackendServerPolicyCollection
 
       include Core::Collection::Simple
@@ -78,7 +78,7 @@ module AWS
 
       # Returns the policy currently assigned to the given instance port.
       #
-      # @param [Integer] instance_port The backend server port to 
+      # @param [Integer] instance_port The backend server port to
       #   get the currently policy of.
       #
       # @return [LoadBalancerPolicy,nil] Returns the load balancer policy
@@ -125,10 +125,9 @@ module AWS
         instance_port = options[:instance_port]
 
         load_balancer.backend_server_descriptions.each do |desc|
-          if instance_port.nil? or desc.instance_port == instance_port
-            desc.policy_names.collect do |policy_name|
-              policy = load_balancer.policies[policy_name]
-              yield(policy)
+          if instance_port.nil? or desc[:instance_port] == instance_port
+            desc[:policy_names].each do |policy_name|
+              yield(load_balancer.policies[policy_name])
             end
           end
         end

@@ -13,7 +13,7 @@
 
 require 'bundler/setup'
 
-Bundler.require(:default, :build, :integration)
+Bundler.require(:default, :test, :development)
 
 root = File.dirname(__FILE__)
 tasks_dir = File.join(root, "tasks")
@@ -25,3 +25,10 @@ require 'aws/core' # for the version number
 Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file
 end
+
+# Vendor tasks
+Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
+  load vendor_rakefile
+end
+
+task :default => :spec

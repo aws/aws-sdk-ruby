@@ -47,7 +47,7 @@ module AWS
       attribute :available_ip_address_count, :integer => true, :static => true
 
       attribute :availability_zone_name,
-        :as => :availability_zone, :static => true
+        :from => :availability_zone, :static => true
 
       populates_from(:create_subnet) do |resp|
         resp.subnet if resp.subnet.subnet_id == subnet_id

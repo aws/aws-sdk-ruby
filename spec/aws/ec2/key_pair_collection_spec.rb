@@ -69,6 +69,10 @@ module AWS
             collection.create('key-name').private_key.should == 'privatekey'
           end
 
+          it 'returns a key pair with the correct config' do
+            collection.create('key-name').config.should eq(config)
+          end
+
         end
 
         context '#import' do

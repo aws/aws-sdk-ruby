@@ -51,7 +51,7 @@ module AWS
       end
 
       context '#load_balancer' do
-        
+
         it 'returns the load balancer' do
           listener.load_balancer.should == load_balancer
         end
@@ -71,7 +71,7 @@ module AWS
         it 'stringifies the port' do
           Listener.new(load_balancer, '443').port.should == 443
         end
-        
+
       end
 
       context '#protocol' do
@@ -155,7 +155,7 @@ module AWS
       end
 
       context '#policy=' do
-        
+
         it 'accepts policy names' do
 
           client.should_receive(:set_load_balancer_policies_of_listener).with(
@@ -200,11 +200,11 @@ module AWS
 
           # no load balancers defined
           response = client.stub_for(:describe_load_balancers)
-          response.stub(:load_balancer_descriptions).and_return([])
+          response.data[:load_balancer_descriptions] = []
           client.stub(:describe_load_balancers).and_return(response)
-          
+
           listener.exists?.should == false
-          
+
         end
 
         it 'returns false if the load balancer policy does not exist' do
@@ -217,7 +217,7 @@ module AWS
             }
           ]
           client.stub(:describe_load_balancers).and_return(response)
-          
+
           listener.exists?.should == false
 
         end
@@ -235,7 +235,7 @@ module AWS
           ]
 
           client.stub(:describe_load_balancers).and_return(response)
-          
+
           listener.exists?.should == true
 
         end
@@ -243,7 +243,7 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls delete_load_balancer_listeners on the client' do
           client.should_receive(:delete_load_balancer_listeners).with(
             :load_balancer_name => load_balancer.name,

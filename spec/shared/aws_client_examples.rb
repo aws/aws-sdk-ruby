@@ -109,13 +109,13 @@ module AWS::Core
   shared_examples_for "an aws http request" do |http_verb|
 
     it_should_behave_like "supports async option"
-  
+
     before(:each) do
       Kernel.stub!(:sleep)
     end
 
     let(:server_error_client) {
-      client.with_http_handler do |request, response| 
+      client.with_http_handler do |request, response|
         response.status = 500
       end
     }
@@ -205,7 +205,7 @@ module AWS::Core
       statuses = [500, 200]
       client.with_http_handler{|req, resp|
         resp.status = statuses.shift
-        requests_made += 1 
+        requests_made += 1
       }.send(method, opts)
       requests_made.should == 2
     end
@@ -215,7 +215,7 @@ module AWS::Core
       statuses = [503, 200]
       client.with_http_handler{|req, resp|
         resp.status = statuses.shift
-        requests_made += 1 
+        requests_made += 1
       }.send(method, opts)
       requests_made.should == 2
     end
@@ -227,7 +227,7 @@ module AWS::Core
       client.with_http_handler{|req, resp|
         resp.status = statuses.shift
         resp.body = bodies.shift
-        requests_made += 1 
+        requests_made += 1
       }.send(method, opts)
       requests_made.should == 2
     end
@@ -253,8 +253,8 @@ module AWS::Core
       begin
         client.with_http_handler{|req, resp|
           resp.status = 500
-          requests_made += 1 
-        }.send(method, opts) 
+          requests_made += 1
+        }.send(method, opts)
       rescue AWS::Errors::ServerError
       end
       requests_made.should == 4
@@ -278,11 +278,11 @@ module AWS::Core
       requests_made = 0
       new_client = client.with_http_handler{|req, resp|
         resp.status = 500
-        requests_made += 1 
+        requests_made += 1
       }
       new_client.config.stub(:max_retries).and_return(5)
       begin
-        new_client.send(method, opts) 
+        new_client.send(method, opts)
       rescue AWS::Errors::ServerError
       end
       requests_made.should == 6
@@ -296,27 +296,35 @@ module AWS::Core
       }.should raise_error(AWS::Errors::ServerError)
     end
 
-    it 'should re-raise the timeout error after retries fail' do
+    it 'should raise a network error after retries fail due to timeout' do
       lambda do
         client.with_http_handler{|req, resp|
           resp.timeout = true
         }.send(method, opts)
-      end.should raise_error(Timeout::Error)
+      end.should raise_error(Client::NetworkError)
+    end
+
+    it 'should raise a network error after retries fail' do
+      lambda do
+        client.with_http_handler{|req, resp|
+          resp.network_error = true
+        }.send(method, opts)
+      end.should raise_error(Client::NetworkError)
     end
 
     it 'should sleep between retries' do
       Kernel.should_receive(:sleep).exactly(3).times
-      begin 
+      begin
         client.with_http_handler{|req, resp|
           resp.status = 500
-        }.send(method, opts); 
+        }.send(method, opts);
       rescue
       end
     end
 
     it 'it backs off exponentially' do
       Kernel.should_receive(:sleep).with(0.3).with(0.6).with(1.2)
-      begin 
+      begin
         client.with_http_handler{|req, resp|
           resp.status = 500
         }.send(method, opts)
@@ -327,7 +335,7 @@ module AWS::Core
     it 'it uses a randomized scaling factor for throttled requests' do
       Kernel.stub!(:rand) { 0.5 }
       Kernel.should_receive(:sleep).with(0.55).with(1.1).with(2.2)
-      begin 
+      begin
         client.with_http_handler{|req, resp|
           resp.status = 500
           resp.body = "<FOO><Code>Throttling</Code></FOO>"
@@ -418,13 +426,13 @@ module AWS::Core
     end
 
     context 'logging' do
-      
+
       let(:service) { described_class.to_s.gsub(/^AWS::/, '') }
 
       let(:logger) { double('logger') }
 
-      let(:logging_client) { 
-        client.class.new(:config => client.config.with(:logger => logger)) 
+      let(:logging_client) {
+        client.class.new(:config => client.config.with(:logger => logger))
       }
 
       it 'should log the client request' do
@@ -437,7 +445,7 @@ module AWS::Core
         begin
           logging_client.with_http_handler do |req,resp|
             resp.status = 502
-            resp.body = 'Service busy' 
+            resp.body = 'Service busy'
           end.send(method, opts)
         rescue AWS::Errors::ServerError
         end
@@ -451,7 +459,7 @@ module AWS::Core
 
       before(:each) do
         fake_request
-        client.stub(:new_request).and_return(fake_request) 
+        client.stub(:new_request).and_return(fake_request)
       end
 
       it 'should call add_authorization! on the request' do
@@ -594,7 +602,7 @@ module AWS::Core
         new_client = client.with_http_handler do |req, resp|
           resp.status = 500
         end
-        
+
         http_handler = new_client.config.http_handler
         Kernel.should_receive(:sleep).with(0.3).with(0.6).with(1.2)
 
@@ -626,7 +634,7 @@ module AWS::Core
         response.on_complete do |status|
           complete = true
           status.should == :failure
-          response.error.should be_a(Timeout::Error)
+          response.error.should be_a(AWS::Core::Client::NetworkError)
         end
 
         sleep 0.001 until complete

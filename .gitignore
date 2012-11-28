@@ -1,0 +1,15 @@
+/.bundle
+/Gemfile.lock
+/doc
+/.yardoc
+/coverage
+/pkg
+/vendor
+*.gem
+
+# credentials for testing features against live services
+/.ruby_sdk_test_config.yml
+/.aws-irb.config.yml
+
+# tells autotest to use rspec extensions
+/.rspec

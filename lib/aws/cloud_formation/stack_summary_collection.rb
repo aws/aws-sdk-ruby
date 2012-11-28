@@ -49,7 +49,7 @@ module AWS
     #
     class StackSummaryCollection
 
-      include Core::Collection::Simple
+      include Core::Collection::WithNextToken
 
       # @private
       def initialize options = {}
@@ -72,7 +72,7 @@ module AWS
       #
       # Status names may be symbolized (snake-cased) or upper-cased strings
       # (e.g. :create_in_progress, 'CREATE_IN_PROGRESS').
-      # 
+      #
       # @param [Symbol,String] status_filters One or more statuses to filter
       #   stacks with. Valid values include:
       #   * +:create_in_progress+
@@ -93,7 +93,7 @@ module AWS
       #   * +:update_rollback_complete+
       #
       # @return [StackSummaryCollection] Returns a new stack summary
-      #   collection that restricts what stack summariess will be 
+      #   collection that restricts what stack summariess will be
       #   enumerated.
       #
       def with_status *status_filters
@@ -104,22 +104,18 @@ module AWS
 
       protected
 
-      def _each_item options = {}
-        next_token = nil
-        begin
-          
-          client_opts = {}
-          client_opts[:next_token] = next_token if next_token
-          client_opts[:stack_status_filter] = @filters if @filters
-          resp = client.list_stacks(client_opts)
+      def _each_item next_token, options = {}, &block
 
-          resp.stack_summaries.each do |summary|
-            yield(summary.to_hash)
-          end
+        options[:next_token] = next_token if next_token
+        options[:stack_status_filter] = @filters if @filters
 
-          next_token = resp.data[:next_token]
+        resp = client.list_stacks(options)
+        resp.data[:stack_summaries].each do |summary|
+          yield(summary)
+        end
 
-        end while next_token
+        resp.data[:next_token]
+
       end
 
     end

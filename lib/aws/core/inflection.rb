@@ -23,9 +23,9 @@ module AWS
 
           key.
             sub(/^.*:/, '').                          # strip namespace
-            gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms from words
-            scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split remaining words
-            join('_').downcase                        # join parts _ and downcase
+            gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms
+            scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split words
+            join('_').downcase                        # join parts
 
         end
 
@@ -33,6 +33,10 @@ module AWS
         inflector['ETag'] = 'etag'
         inflector['s3Bucket'] = 's3_bucket'
         inflector['s3Key'] = 's3_key'
+        inflector['Ec2KeyName'] = 'ec2_key_name'
+        inflector['Ec2SubnetId'] = 'ec2_subnet_id'
+        inflector['ElastiCache'] = 'elasticache'
+        inflector['NotificationARNs'] = 'notification_arns'
 
         inflector[aws_name]
 

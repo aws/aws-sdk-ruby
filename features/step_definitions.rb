@@ -216,7 +216,7 @@ def table_formatted_requests requests
 #   tables.collect{|t| t.to_s(:color => false, :prefixes => Hash.new('')) }
   tables = requests.collect do |req| 
     table = []
-    if req.headers["content-type"].include?("json")
+    if req.headers["content-type"] and req.headers["content-type"].include?("json")
       table << %w(TYPE NAME VALUE)
       table << ['header', 'x-amz-target', req.headers["x-amz-target"]]
       body = JSON.load(req.body)
