@@ -90,7 +90,7 @@ module AWS
       #    bucket.cors.clear
       #    bucket.cors.set([])
       #
-      # @param [Hash,CORSRule,CORSRuleCollection] rule A list or array
+      # @param [Hash,CORSRule,CORSRuleCollection] rules A list or array
       #   of one or more rules to set.  Each rule may be a Hash, a CORSRule
       #   or a CORSRuleCollection.
       #
