@@ -29,16 +29,20 @@ require 'yaml'
 
 
 # find a config file
-dir = Dir.getwd
-while dir != "/" and
-    !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
-  dir = File.dirname(dir)
+if ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID']
+  test_config = {}
+else
+  dir = Dir.getwd
+  while dir != "/" and
+      !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
+    dir = File.dirname(dir)
+  end
+  test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
+  test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
+    File.exists?(test_config_file)
+  raise "No config file" unless File.exists?(test_config_file)
+  test_config = YAML.load(File.read(test_config_file))
 end
-test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
-test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
-  File.exists?(test_config_file)
-raise "No config file" unless File.exists?(test_config_file)
-test_config = YAML.load(File.read(test_config_file))
 
 if ENV['SLOW'] == 'true'
   puts "setup slow stuff"
