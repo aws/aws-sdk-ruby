@@ -271,6 +271,20 @@ module AWS
       def tags= tags
         self.tags.set(tags)
       end
+      
+      # @return [WebsiteConfiguration] Returns an object which can be used to
+      #   set and delete website configuration information.
+      def website
+        WebsiteConfiguration.new(self)
+      end
+      
+      # Sets the bucket's website configuration.
+      # @param (see WebsiteConfiguration#set)
+      # @see WebsiteConfiguration#set
+      def website=(config)
+        self.website.set(config)
+        nil
+      end
 
       # @return [CORSRuleCollection] Returns a collection that can be
       #   used to manage (add, edit and delete) CORS rules for this bucket.

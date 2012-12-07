@@ -206,7 +206,21 @@ module AWS
             end
           end
         end
-
+        
+        GetBucketWebsite = BaseGrammar.customize do
+          element("WebsiteConfiguration") do
+            ignore
+            element("IndexDocument") do
+              ignore
+              element("Suffix") { rename :index }
+            end
+            element("ErrorDocument") do
+              ignore
+              element("Key") { rename :error }
+            end
+          end
+        end
+        
       end
     end
   end

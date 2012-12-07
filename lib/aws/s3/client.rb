@@ -306,6 +306,79 @@ module AWS
           super(req, options)
         end
       end
+      
+      # @overload put_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [String] :index
+      #   @option options [String] :error
+      bucket_method(:put_bucket_website, :put) do
+        configure_request do |req, options|    
+          
+          req.add_param('website')
+          xml = Nokogiri::XML::Builder.new
+          xml.WebsiteConfiguration do
+            xml.IndexDocument do
+              xml.Suffix(options[:index_document] || 'index.html')
+            end
+            
+            xml.ErrorDocument do
+              xml.Key(options[:error_document] || 'error.html')
+            end
+          end
+          
+          xml = xml.doc.root.to_xml
+          req.body = xml
+          req.headers['content-md5'] = md5(xml)
+          
+          super(req, options)
+        end
+      end
+      
+      # @overload get_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_website, :get) do
+      
+        configure_request do |req, options|
+          req.add_param('website')
+          super(req, options)
+        end
+      
+        process_response do |resp|
+          resp.data = XML::GetBucketWebsite.parse(resp.http_response.body)
+        end
+      
+      end
+      
+      # @overload delete_bucket_website(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:delete_bucket_website, :delete) do
+        configure_request do |req, options|
+          req.add_param('website')
+          super(req, options)
+        end
+      end
+      
+      # @overload get_bucket_tagging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_tagging, :get) do
+      
+        configure_request do |req, options|
+          req.add_param('tagging')
+          super(req, options)
+        end
+      
+        process_response do |resp|
+          resp.data = XML::GetBucketTagging.parse(resp.http_response.body)
+        end
+      
+      end
 
       # @overload put_bucket_tagging(options = {})
       #   @param [Hash] options

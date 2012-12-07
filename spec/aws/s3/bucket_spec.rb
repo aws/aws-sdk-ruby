@@ -181,6 +181,43 @@ module AWS
         end
 
       end
+      
+      context '#website=' do
+      
+        it 'calls #put_bucket_website' do
+      
+          options = {
+            :index_document => 'index.html',
+            :error_document => 'error.html' }
+      
+          client.should_receive(:put_bucket_website).
+            with(:bucket_name => bucket.name,
+                 :index_document => 'index.html',
+                 :error_document => 'error.html')
+      
+          bucket.website = options
+      
+        end
+      
+        it 'calls #delete_bucket_website when passed a empty hash' do
+      
+          client.should_receive(:delete_bucket_website).
+            with(:bucket_name => bucket.name)
+      
+          bucket.website = {}
+      
+        end
+      
+        it 'calls #delete_bucket_website when website is nil' do
+      
+          client.should_receive(:delete_bucket_website).
+            with(:bucket_name => bucket.name)
+      
+          bucket.website = nil
+      
+        end
+      
+      end
 
       context '#tags=' do
 
