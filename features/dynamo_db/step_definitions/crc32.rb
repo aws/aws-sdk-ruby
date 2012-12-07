@@ -62,3 +62,15 @@ end
 Then /^the request should fail with a CRC checking error$/ do
   @error.should be_a(AWS::DynamoDB::Errors::CRC32CheckFailed)
 end
+
+Given /^I have a large item "(.*?)" in the table$/ do |item|
+  @item = @table.items.put({:id => item, :data => "DATA" * 4000})
+end
+
+And /^I get the attribute "(.*?)" from the key "(.*?)"$/ do |attribute, item|
+  @data = @table.items[item].attributes[attribute]
+end
+
+Then /^the attribute length should be greater than (\d+)/ do |size|
+  @data.size.should > size.to_i
+end

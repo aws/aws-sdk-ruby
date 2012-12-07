@@ -56,11 +56,11 @@ When /^I ask if the DynamoDB item exists$/ do
 end
 
 Given /^I ask for the item with the hash key value "([^\"]*)"$/ do |hash|
-  @item = @table.items[hash]
+  @result = @item = @table.items[hash]
 end
 
 Given /^I ask for the item with the hash key value "([^\"]*)" and range key value (\d+)$/ do |hash, range|
-  @item = @table.items.at(hash, range.to_i)
+  @result = @item = @table.items.at(hash, range.to_i)
 end
 
 Given /^I create (\d+) DynamoDB items$/ do |n|

@@ -35,3 +35,8 @@ Feature: CRC32 response validation
     When I list all tables
     Then the request should not be retried
     And the response should not contain the table
+
+  Scenario: Handling large data responses
+    Given I have a large item "LargeItem" in the table
+    And I get the attribute "data" from the key "LargeItem"
+    Then the attribute length should be greater than 4096
