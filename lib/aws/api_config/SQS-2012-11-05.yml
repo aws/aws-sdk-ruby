@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2011-10-01'
+:api_version: '2012-11-05'
 :operations:
 - :name: AddPermission
   :method: :add_permission

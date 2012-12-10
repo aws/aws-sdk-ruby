@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Simple Queue Service (SQS).
     class Client < Core::QueryClient
 
-      define_client_methods('2011-10-01')
+      define_client_methods('2012-11-05')
 
       # @private
       CACHEABLE_REQUESTS = Set[]
