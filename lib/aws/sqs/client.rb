@@ -167,8 +167,10 @@ module AWS
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
-      #   * +:attribute_names+ - (Array<String>) A list of attributes to
-      #     retrieve information for.
+      #   * +:attribute_names+ - (Array<String>) A list of attributes that need
+      #     to be returned along with each message. The set of valid attributes
+      #     are [SenderId, ApproximateFirstReceiveTimestamp,
+      #     ApproximateReceiveCount, SentTimestamp].
       #   * +:max_number_of_messages+ - (Integer) The maximum number of
       #     messages to return. Amazon SQS never returns more messages than
       #     this value but may return fewer. All of the messages are not
@@ -176,6 +178,10 @@ module AWS
       #   * +:visibility_timeout+ - (Integer) The duration (in seconds) that
       #     the received messages are hidden from subsequent retrieve requests
       #     after being retrieved by a ReceiveMessage request.
+      #   * +:wait_time_seconds+ - (Integer) The duration (in seconds) for
+      #     which the call will wait for a message to arrive in the queue
+      #     before returning. If a message is available, the call will return
+      #     sooner than WaitTimeSeconds.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
