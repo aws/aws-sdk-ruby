@@ -284,13 +284,6 @@ module AWS
         end
       end
 
-      protected
-      def parse_xml xml
-        Client::XML::GetBucketLifecycleConfiguration.parse(xml).rules.map do |r|
-          Rule.new(self, r.id, r.prefix, r.expiration.days, r.status)
-        end
-      end
-
       # Represents a single rule from an Amazon S3 bucket lifecycle
       # configuration.
       #
@@ -353,6 +346,14 @@ module AWS
         end
         alias_method :==, :eql?
 
+      end
+
+      protected
+
+      def parse_xml xml
+        Client::XML::GetBucketLifecycleConfiguration.parse(xml).rules.map do |r|
+          Rule.new(self, r.id, r.prefix, r.expiration.days, r.status)
+        end
       end
 
     end
