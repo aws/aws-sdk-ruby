@@ -787,7 +787,7 @@ module AWS
       # @return [nil]
       def copy_from source, options = {}
 
-        copy_opts = { :bucket_name => bucket.name, :key => key }
+        copy_opts = { :bucket_name => bucket.name, :key => key.gsub(%r{^/}, '') }
 
         copy_opts[:copy_source] = case source
         when S3Object
