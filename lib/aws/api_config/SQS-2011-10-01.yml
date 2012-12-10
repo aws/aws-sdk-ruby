@@ -218,6 +218,8 @@
     - :integer
     VisibilityTimeout:
     - :integer
+    WaitTimeSeconds:
+    - :integer
   :outputs:
     :children:
       ReceiveMessageResult:
