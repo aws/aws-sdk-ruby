@@ -791,7 +791,7 @@ module AWS
 
         copy_opts[:copy_source] = case source
         when S3Object
-          "#{source.bucket.name}/#{source.key}"
+          "#{source.bucket.name}/#{source.key.gsub(%r{^/},'')}"
         when ObjectVersion
           copy_opts[:version_id] = source.version_id
           "#{source.object.bucket.name}/#{source.object.key}"
