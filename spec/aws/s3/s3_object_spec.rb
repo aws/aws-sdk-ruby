@@ -914,6 +914,13 @@ module AWS
             should include("Expires=1306201144")
         end
 
+        it 'should accept an object that responds to #to_int' do
+          Time.stub(:now).and_return(10)
+          seconds = double('seconds', :to_int => 10)
+          object.url_for(:get, :expires => seconds).
+            query.split("&").should include("Expires=20")
+        end
+
         it 'should accept a Time object for :expires' do
           object.url_for(:get, :expires =>
                                Time.parse("2011-05-23 18:39:04 -0700")).

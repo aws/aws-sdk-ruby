@@ -1310,17 +1310,13 @@ module AWS
       end
 
       def expiration_timestamp(input)
+        input = input.to_int if input.respond_to?(:to_int)
         case input
-        when Time
-          expires = input.to_i
-        when DateTime
-          expires = Time.parse(input.to_s).to_i
-        when Integer
-          expires = (Time.now + input).to_i
-        when String
-          expires = Time.parse(input).to_i
-        else
-          expires = (Time.now + 60*60).to_i
+        when Time then input.to_i
+        when DateTime then Time.parse(input.to_s).to_i
+        when Integer then (Time.now + input).to_i
+        when String then Time.parse(input).to_i
+        else (Time.now + 60*60).to_i
         end
       end
 
