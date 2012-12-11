@@ -29,7 +29,14 @@ module AWS
 
       # The default number of seconds to wait between polling requests for
       # new messages.  
+      # @deprecated No longer used by {#poll}
       DEFAULT_POLL_INTERVAL = 1
+
+      # The default number of seconds to pass in as the SQS long polling
+      # value (+:wait_time_seconds+) in {#receive_message}.
+      #
+      # @since 1.7.2
+      DEFAULT_WAIT_TIME_SECONDS = 15
 
       include Core::Model
 
@@ -147,6 +154,12 @@ module AWS
       #   (for more information, see the preceding note about
       #   machine sampling).
       #
+      # @option opts [Integer] :wait_time_seconds The number of seconds
+      #   the service should wait for a response when requesting a new message.
+      #   Defaults to the {#wait_time_seconds} attribute defined on the queue.
+      #   See {#wait_time_seconds} to set the global long poll setting
+      #   on the queue.
+      #
       # @option opts [Integer] :visibilitiy_timeout The duration (in
       #   seconds) that the received messages are hidden from
       #   subsequent retrieve requests.  Valid values: integer from
@@ -209,9 +222,12 @@ module AWS
       #
       # @param [Hash] opts Options for polling.
       #
-      # @option opts [Float, Integer] :poll_interval The number of
-      #   seconds to wait before retrying when no messages are
-      #   received.  The default is 1 second.
+      # @option opts [Integer] :wait_time_seconds The number of seconds
+      #   the service should wait for a response when requesting a new message.
+      #   Defaults to {DEFAULT_WAIT_TIME_SECONDS}. Use +nil+ to
+      #   use the queue's global long polling wait time setting.
+      #   See {#wait_time_seconds} to set the global long poll setting
+      #   on the queue.
       #
       # @option opts [Integer] :idle_timeout The maximum number of
       #   seconds to spend polling while no messages are being
@@ -247,11 +263,17 @@ module AWS
       #   See {ReceivedMessage} for documentation on each
       #   attribute's meaning.
       #
+      # @option opts [Float, Integer] :poll_interval As of
+      #   v1.7.2, this option is no longer used. See the
+      #   +:wait_time_seonds+ option for long polling instead.
+      #
       # @return [nil]
       def poll(opts = {}, &block)
-        poll_interval = opts[:poll_interval] || DEFAULT_POLL_INTERVAL
         opts[:limit] = opts.delete(:batch_size) if
           opts.key?(:batch_size)
+
+        opts[:wait_time_seconds] = DEFAULT_WAIT_TIME_SECONDS unless
+          opts.has_key?(:wait_time_seconds)
 
         last_message_at = Time.now
         got_first = false
@@ -263,7 +285,6 @@ module AWS
             yield(message)
           end
           unless got_msg
-            Kernel.sleep(poll_interval) unless poll_interval == 0
             return if hit_timeout?(got_first, last_message_at, opts)
           end
         end
@@ -368,6 +389,21 @@ module AWS
       # @param [Integer] seconds How many seconds a message will be delayed.
       def delay_seconds= seconds
         set_attribute("DelaySeconds", seconds.to_s)
+      end
+
+      # @return [Integer] Gets the number of seconds the service will wait
+      #   for a response when requesting a new message
+      # @since 1.7.2
+      def wait_time_seconds
+        get_attribute("ReceiveMessageWaitTimeSeconds").to_i
+      end
+
+      # Sets the number of seconds that the service should wait for a response
+      # when requesting a new message
+      # @param [Integer] seconds How many seconds to wait for a response
+      # @since 1.7.2
+      def wait_time_seconds= seconds
+        set_attribute("ReceiveMessageWaitTimeSeconds", seconds.to_s)
       end
 
       # @return [Integer] Returns an approximate count of messages delayed.
@@ -673,6 +709,9 @@ module AWS
           opts[:visibility_timeout]
         receive_opts[:max_number_of_messages] = opts[:limit] if
           opts[:limit]
+        receive_opts[:wait_time_seconds] = opts[:wait_time_seconds] if
+          opts[:wait_time_seconds]
+
         if names = opts[:attributes]
           receive_opts[:attribute_names] = names.map do |name|
             name = ReceivedMessage::ATTRIBUTE_ALIASES[name.to_sym] if

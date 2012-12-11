@@ -57,6 +57,7 @@ Feature: SQS Queues
     | visibility_timeout       |
     | maximum_message_size     |
     | message_retention_period |
+    | wait_time_seconds        |
     And the following date/time fields should contain values within the last hour:
     | created_timestamp       |
     | last_modified_timestamp |
@@ -76,6 +77,11 @@ Feature: SQS Queues
     Given I create a queue
     When I set the queue's message retention period to 3600
     Then the queue's message retention period should eventually be 3600
+
+  Scenario: Set SQS wait time seconds
+    Given I create a queue
+    When I set wait time on the queue to 7
+    Then the queue wait time should eventually be 7
 
   Scenario: Getting a queue by its name
     Given I create a queue
@@ -127,4 +133,3 @@ Feature: SQS Queues
     Then a request should have been made like:
     | TYPE  | NAME   | VALUE              |
     | param | Action | DeleteMessageBatch |
-    
