@@ -201,6 +201,102 @@ module AWS
 
       end
 
+      context 'website', :tagging => true do
+
+        let(:xml) { <<-XML.strip }
+<WebsiteConfiguration>
+  <IndexDocument>
+    <Suffix>index.html</Suffix>
+  </IndexDocument>
+  <ErrorDocument>
+    <Key>error.html</Key>
+  </ErrorDocument>
+</WebsiteConfiguration>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_website' do
+
+          it 'make a put request to the tagging subresource' do
+
+            request = get_request(:put_bucket_website, {
+              :bucket_name => 'bucket-name',
+              :index_document => 'index.html',
+              :error_document => 'error.html' # mixed key types
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('website')
+
+            # the array is differently sorted on Ruby 1.8
+            unless RUBY_VERSION =~ /^1.8/
+              request.headers['content-md5'].should eq(client.send(:md5, xml))
+              request.body.should eq(xml)
+            end
+
+          end
+
+        end
+
+        context '#get_bucket_website' do
+
+          it 'make a get request to the website subresource' do
+            req = get_request(:get_bucket_website, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('website')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_website,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :index_document=>{:suffix=>"index.html"},
+              :error_document=>{:key=>"error.html"}
+            })
+          end
+
+        end
+
+        context '#delete_bucket_wesbite' do
+
+          it 'make a delete request to the tagging subresource' do
+            req = get_request(:delete_bucket_website, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('website')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
       context 'tagging', :tagging => true do
 
         let(:xml) { <<-XML.strip }

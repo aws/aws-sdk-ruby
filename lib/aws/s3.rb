@@ -140,6 +140,7 @@ module AWS
       autoload :Tree,                         'tree'
       autoload :UploadedPart,                 'uploaded_part'
       autoload :UploadedPartCollection,       'uploaded_part_collection'
+      autoload :WebsiteConfiguration,         'website_configuration'
     end
 
     include Core::ServiceInterface
