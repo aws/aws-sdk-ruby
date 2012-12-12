@@ -50,8 +50,8 @@ module AWS
   #
   #   cf = AWS::CloudFront.new
   #
-  #   resp = cf.client.list_hosted_zones
-  #   resp[:hosted_zones].each do |zone|
+  #   resp = cf.client.list_distributions
+  #   resp[:distribution_list].each do |distribution|
   #     # ...
   #   end
   #
