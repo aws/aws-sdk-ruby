@@ -278,6 +278,9 @@ module AWS
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The
     #   service endpoint for AWS Idenity Access Management (IAM).
     #
+    # @option options [String] :import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
+    #
     # @option options [Logger,nil] :logger (nil) A logger to send
     #   log messages to.  Here is an example that logs to standard out.
     #
