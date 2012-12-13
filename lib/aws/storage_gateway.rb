@@ -51,7 +51,7 @@ module AWS
   #   sg = AWS::StorageGateway.new
   #
   #   resp = sg.client.list_gateways
-  #   resp[:gateway_list].each do |gateway|
+  #   resp[:gateways].each do |gateway|
   #     puts gateway[:gateway_arn]
   #   end
   #
