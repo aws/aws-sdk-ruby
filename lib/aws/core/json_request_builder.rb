@@ -17,13 +17,14 @@ module AWS
     # @private
     class JSONRequestBuilder
 
-      def initialize target_prefix, operation
-        @x_amz_target = target_prefix + operation[:name]
+      def initialize api, operation
+        @x_amz_target = api[:target_prefix] + operation[:name]
+        @content_type = "application/x-amz-json-#{api[:json_version] || 1.0}"
         @grammar = OptionGrammar.customize(operation[:inputs])
       end
 
       def populate_request request, options
-        request.headers["content-type"] = "application/x-amz-json-1.0"
+        request.headers["content-type"] = @content_type
         request.headers["x-amz-target"] = @x_amz_target
         request.body = @grammar.to_json(options)
       end
