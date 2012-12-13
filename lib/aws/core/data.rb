@@ -84,6 +84,11 @@ module AWS
         end
         alias_method :==, :eql?
 
+        def dup
+          Data.cast(@data.dup)
+        end
+        alias_method :clone, :dup
+
         protected
 
         def method_missing *args, &block
