@@ -18,7 +18,7 @@ module AWS
       protected
 
       def self.request_builder_for api_config, operation
-        JSONRequestBuilder.new(api_config[:target_prefix], operation)
+        JSONRequestBuilder.new(api_config, operation)
       end
 
       def self.response_parser_for api_config, operation
@@ -30,10 +30,9 @@ module AWS
           response.http_response.status >= 300 and
           body = response.http_response.body and
           json = (::JSON.load(body) rescue nil) and
-          type = json["__type"] and
-          matches = type.match(/\#(.*)$/)
+          type = json["__type"]
         then
-          code = matches[1]
+          code = type.split('#').last
           if code == 'RequestEntityTooLarge'
             message = 'Request body must be less than 1 MB'
           else

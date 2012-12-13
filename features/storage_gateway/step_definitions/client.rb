@@ -11,25 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  module Core
 
-    # @private
-    class JSONRequestBuilder
+When /^I use the client to list gateways with a limit of (\d+)$/ do |limit|
+  @response = @storage_gateway_client.list_gateways(:limit => limit.to_i)
+end
 
-      def initialize api, operation
-        @x_amz_target = api[:target_prefix] + operation[:name]
-        @content_type = "application/x-amz-json-#{api[:json_version] || 1.0}"
-        @grammar = OptionGrammar.customize(operation[:inputs])
-      end
+Then /^the result should have an array of gateways$/ do
+  @response[:gateways].should be_an(Array)
+end
 
-      def populate_request request, options
-        request.headers["content-type"] = @content_type
-        request.headers["x-amz-target"] = @x_amz_target
-        request.body = @grammar.to_json(options)
-      end
-
-    end
-
+When /^I use the client to describe a non\-existent gateway$/ do
+  begin
+    @response = @storage_gateway_client.describe_gateway_information(:gateway_arn => 'abc')
+  rescue => @error
   end
+end
+
+Then /^I should receive an error with an appropriate code and message$/ do
+  @error.code.should eq('ValidationException')
 end

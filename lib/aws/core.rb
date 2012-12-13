@@ -428,6 +428,9 @@ module AWS
     # @option options [String] :sqs_endpoint ('sqs.us-east-1.amazonaws.com') The
     #   service endpoint for Amazon SQS.
     #
+    # @option options [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
+    #
     # @option options [String] :sts_endpoint ('sts.amazonaws.com') The
     #   service endpoint for AWS Security Token Service.
     #

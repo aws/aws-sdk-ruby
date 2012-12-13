@@ -245,6 +245,9 @@ module AWS
     # @attr_reader [String] sqs_endpoint ('sqs.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon SQS.
     #
+    # @attr_reader [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
+    #
     # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
     #   The service endpoint for AWS Security Token Service.
     #
