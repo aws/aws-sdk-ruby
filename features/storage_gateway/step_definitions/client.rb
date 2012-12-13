@@ -22,11 +22,8 @@ end
 
 When /^I use the client to describe a non\-existent gateway$/ do
   begin
-    @response = @storage_gateway_client.describe_gateway_information(:gateway_arn => 'abc')
+    arn = "arn:aws:storagegateway:us-east-1:111122223333:gateway/mygateway"
+    @response = @storage_gateway_client.describe_gateway_information(:gateway_arn => arn)
   rescue => @error
   end
-end
-
-Then /^I should receive an error with an appropriate code and message$/ do
-  @error.code.should eq('ValidationException')
 end

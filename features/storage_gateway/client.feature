@@ -25,4 +25,6 @@ Feature: AWS Storage Gateway client
 
   Scenario: Errors
     When I use the client to describe a non-existent gateway
-    Then I should receive an error with an appropriate code and message
+    Then I should receive an error with:
+    | code                           | message                                                                            |
+    | InvalidGatewayRequestException | Resource not found arn:aws:storagegateway:us-east-1:111122223333:gateway/mygateway |
