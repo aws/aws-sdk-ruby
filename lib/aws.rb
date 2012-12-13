@@ -32,6 +32,7 @@ require 'aws/simple_email_service/config'
 require 'aws/simple_workflow/config'
 require 'aws/sns/config'
 require 'aws/sqs/config'
+require 'aws/storage_gateway/config'
 require 'aws/sts/config'
 
 module AWS
@@ -55,6 +56,7 @@ module AWS
     autoload :SimpleWorkflow, 'simple_workflow'
     autoload :SNS, 'sns'
     autoload :SQS, 'sqs'
+    autoload :StorageGateway, 'storage_gateway'
     autoload :STS, 'sts'
     autoload :Record, 'record'
   end
