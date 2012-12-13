@@ -225,6 +225,9 @@ module AWS
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @option options [String] :cloud_front_endpoint ('cloudfront.amazonaws.com')
+    #   The service endpoint for Amazon CloudFront.
+    #
     # @option options [String] :cloud_search ('cloudsearch.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudSearch.
     #
