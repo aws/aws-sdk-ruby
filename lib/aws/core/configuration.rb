@@ -121,6 +121,9 @@ module AWS
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
     #   The service endpoint for AWS Idenity Access Management (IAM).
     #
+    # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
+    #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
     # @attr_reader [Symbol] log_level (:info) The log level.
