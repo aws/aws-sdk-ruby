@@ -23,3 +23,10 @@ end
 Then /^an integer value for quantity$/ do
   @response[:quantity].should be_an(Integer)
 end
+
+When /^I use the client to get a non\-existent distribution$/ do
+  begin
+    @cloud_front_client.get_distribution(:id => 'abc')
+  rescue => @error
+  end
+end

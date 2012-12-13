@@ -19,3 +19,9 @@ Feature: AWS Import/Export Client
     When I use the client to list jobs
     Then the result should have an array of jobs
     And a boolean value for truncated
+
+  Scenario: Errors
+    When I use the client to get status on a non-existent job
+    Then I should receive an error with:
+    | code                  | message                          |
+    | InvalidJobIdException | No such job abc for your account |

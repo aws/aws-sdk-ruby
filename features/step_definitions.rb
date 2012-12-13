@@ -268,3 +268,10 @@ end
 Then /^the result should be:$/ do |string|
   @result.should == eval(string)
 end
+
+Then /^I should receive an error with:$/ do |table|
+  code = table.hashes[0]['code']
+  message = table.hashes[0]['message']
+  @error.code.should eq(code)
+  @error.message.should eq(message)
+end

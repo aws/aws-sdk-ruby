@@ -19,3 +19,9 @@ Feature: CloudFront Client
     When I use the client to list distributions
     Then the result should have an array of distributions
     And an integer value for quantity
+
+  Scenario: Errors
+    When I use the client to get a non-existent distribution
+    Then I should receive an error with:
+    | code               | message                                    |
+    | NoSuchDistribution | The specified distribution does not exist. |

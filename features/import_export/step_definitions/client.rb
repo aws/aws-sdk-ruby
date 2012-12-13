@@ -23,3 +23,10 @@ end
 Then /^a boolean value for truncated$/ do
   [true,false].should include(@response[:is_truncated])
 end
+
+When /^I use the client to get status on a non\-existent job$/ do
+  begin
+    @import_export_client.get_status(:job_id => 'abc')
+  rescue => @error
+  end
+end
