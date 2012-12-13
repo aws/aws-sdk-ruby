@@ -278,9 +278,7 @@ module AWS
             options[:min_count] == 1
           self[resp.instances_set.first.instance_id]
         else
-          resp.instances_set.map do |i|
-            self[i.instance_id]
-          end
+          resp[:instances_set].map {|i| self[i[:instance_id]] }
         end
       end
 
