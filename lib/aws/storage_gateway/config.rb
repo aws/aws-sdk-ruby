@@ -11,25 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  module Core
+AWS::Core::Configuration.module_eval do
 
-    # @private
-    class JSONRequestBuilder
+  add_service 'StorageGateway', 'storage_gateway', 'storagegateway.us-east-1.amazonaws.com'
 
-      def initialize api, operation
-        @x_amz_target = api[:target_prefix] + operation[:name]
-        @content_type = "application/x-amz-json-#{api[:json_version] || 1.0}"
-        @grammar = OptionGrammar.customize(operation[:inputs])
-      end
-
-      def populate_request request, options
-        request.headers["content-type"] = @content_type
-        request.headers["x-amz-target"] = @x_amz_target
-        request.body = @grammar.to_json(options)
-      end
-
-    end
-
-  end
 end
