@@ -19,7 +19,7 @@ Feature: Bucket Lifecycle Configuration
     Given I create a new bucket
     Then the lifecycle configuration should have 0 rules
 
-  Scenario: Adding rules
+  Scenario: Adding expiration rule
     Given I create a new bucket
     When I add a rule with the prefix "abc" that expires in 10 days
     And I add a rule with the prefix "xyz" that expires in 5 days
@@ -32,7 +32,46 @@ Feature: Bucket Lifecycle Configuration
     | TYPE   | NAME          | VALUE       |
     | http   | verb          | PUT         |
     | http   | uri           | /?lifecycle |
-    
+
+  @expiration_date
+  Scenario: Adding expiration rule with date time
+    Given I create a new bucket
+    When I update the lifecycle configuration like:
+    """
+      @bucket.lifecycle_configuration.update do
+        add_rule 'prefix/a', :id => 'id-1',
+          :expiration_time => DateTime.new(2013, 01, 03)
+      end
+    """
+    Then the lifecycle configuration should have the following rules:
+    | ID   | PREFIX   | EXP                       | STATUS   |
+    | id-1 | prefix/a | 2013-01-03T00:00:00+00:00 | Enabled  |
+    And 1 request should have been made like:
+    | TYPE   | NAME          | VALUE       |
+    | http   | verb          | PUT         |
+    | http   | uri           | /?lifecycle |
+
+  @tiered_storage
+  Scenario: Adding Amazon Glacier transition rule
+    Given I create a new bucket
+    When I update the lifecycle configuration like:
+    """
+      @bucket.lifecycle_configuration.update do
+        add_rule 'prefix/a', :id => 'id-1',
+          :glacier_transition_time => DateTime.new(2013, 01, 03)
+        add_rule 'prefix/b', :id => 'id-2',
+          :glacier_transition_time => 15
+      end
+    """
+    Then the lifecycle configuration should have the following rules:
+    | ID   | PREFIX   | GLACIER                   | STATUS   |
+    | id-1 | prefix/a | 2013-01-03T00:00:00+00:00 | Enabled  |
+    | id-2 | prefix/b | 15                        | Enabled  |
+    And 1 request should have been made like:
+    | TYPE   | NAME          | VALUE       |
+    | http   | verb          | PUT         |
+    | http   | uri           | /?lifecycle |
+
   Scenario: Updating a lifecycle configuration (block style)
     Given I create a new bucket
     When I update the lifecycle configuration like:
@@ -43,9 +82,9 @@ Feature: Bucket Lifecycle Configuration
       end
     """
     Then the lifecycle configuration should have the following rules:
-    | ID   | PREFIX   | EXP_DAYS | STATUS   |
-    | id-1 | prefix/a | 4        | Enabled  |
-    | id-2 | prefix/b | 5        | Disabled |
+    | ID   | PREFIX   | EXP | STATUS   |
+    | id-1 | prefix/a | 4   | Enabled  |
+    | id-2 | prefix/b | 5   | Disabled |
     And 1 request should have been made like:
     | TYPE   | NAME          | VALUE       |
     | http   | verb          | PUT         |
@@ -64,9 +103,9 @@ Feature: Bucket Lifecycle Configuration
     When I remove the rule with the id "id-2"
     And I update the lifecycle configuration
     Then the lifecycle configuration should have the following rules:
-    | ID   | PREFIX   | EXP_DAYS | STATUS   |
-    | id-1 | prefix/a | 4        | Enabled  |
-    | id-3 | prefix/c | 6        | Disabled |
+    | ID   | PREFIX   | EXP | STATUS   |
+    | id-1 | prefix/a | 4   | Enabled  |
+    | id-3 | prefix/c | 6   | Disabled |
 
   Scenario: Replacing a lifecycle configuration
     Given I create a new bucket
@@ -85,5 +124,5 @@ Feature: Bucket Lifecycle Configuration
       end
     """
     Then the lifecycle configuration should have the following rules:
-    | ID   | PREFIX   | EXP_DAYS | STATUS   |
-    | id-3 | prefix/c | 6        | Enabled  |
+    | ID   | PREFIX   | EXP | STATUS   |
+    | id-3 | prefix/c | 6   | Enabled  |

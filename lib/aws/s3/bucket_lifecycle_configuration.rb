@@ -129,9 +129,6 @@ module AWS
 
       # @param [String] prefix
       #
-      # @param [Integer] expiration_days Indicates the lifetime for objects
-      #   matching the given prefix.
-      #
       # @param [Hash] options
       #
       # @option options [String] :id A unique ID for this rule.  If an ID
@@ -141,12 +138,29 @@ module AWS
       #   will have the status of enabled.  You can override this default
       #   by passing +:disabled+ => true.
       #
+      # @option options [DateTime, Integer] expiration_time (nil) Indicates
+      #   the lifetime for objects matching the given prefix.
+      #
+      # @option options [DateTime, Integer] glacier_transition_time (nil)
+      #   Indicates the time before objects matching the given prefix will
+      #   be transitioned into the Amazon Glacier storage tier.
+      #
       # @return [Rule] Returns the rule that was added, as a {Rule} object.
       #
-      def add_rule prefix, expiration_days, options = {}
+      def add_rule prefix, expiration_time = nil, options = {}
+        if Hash === expiration_time
+          options = expiration_time
+        else
+          options[:expiration_time] = expiration_time
+        end
+
         id = options[:id] || UUIDTools::UUID.random_create.to_s
-        status = options[:disabled] == true ? 'Disabled' : 'Enabled'
-        rule = Rule.new(self, id, prefix, expiration_days, status)
+        opts = {
+          :status => options[:disabled] == true ? 'Disabled' : 'Enabled',
+          :expiration_time => options[:expiration_time],
+          :glacier_transition_time => options[:glacier_transition_time]
+        }
+        rule = Rule.new(self, id, prefix, opts)
         self.rules << rule
         rule
       end
@@ -188,7 +202,7 @@ module AWS
       #   # set the number of days before expiration for all rules to 10
       #   config = bucket.lifecycle_configuration
       #   config.rules.each do |rule|
-      #     rule.expiration_days = 10
+      #     rule.expiration_time = 10
       #   end
       #   config.update
       #
@@ -197,7 +211,7 @@ module AWS
       #
       #   # shorter version of the example above
       #   bucket.lifecycle_configuration.update do
-      #     rules.each {|rule| rule.expiration_days = 10 }
+      #     rules.each {|rule| rule.expiration_time = 10 }
       #   end
       #
       # A block method for updating a BucketLifecycleConfiguration.
@@ -265,8 +279,20 @@ module AWS
                 xml.Prefix rule.prefix
                 xml.Status rule.status
                 xml.Expiration do
-                  xml.Days rule.expiration_days
-                end
+                  if Integer === rule.expiration_time
+                    xml.Days rule.expiration_time
+                  else
+                    xml.Date rule.expiration_time.iso8601
+                  end
+                end if rule.expiration_time
+                xml.Transition do
+                  xml.StorageClass 'GLACIER'
+                  if Integer === rule.glacier_transition_time
+                    xml.Days rule.glacier_transition_time
+                  else
+                    xml.Date rule.glacier_transition_time.iso8601
+                  end
+                end if rule.glacier_transition_time
               end
             end
           end
@@ -296,12 +322,20 @@ module AWS
       #
       class Rule
 
-        def initialize configuration, id, prefix, expiration_days, status
+        def initialize configuration, id, prefix, expiration_time = nil, status = nil
           @configuration = configuration
           @id = id
           @prefix = prefix
-          @expiration_days = expiration_days
-          @status = status
+
+          if Hash === expiration_time
+            options = expiration_time
+            options.each do |key, value|
+              send("#{key}=", value) if respond_to?("#{key}=")
+            end
+          else
+            @expiration_time = expiration_time
+            @status = status
+          end
         end
 
         # @return [BucketLifecycleConfiguration]
@@ -313,8 +347,18 @@ module AWS
         # @return [String]
         attr_accessor :prefix
 
-        # @return [Integer]
-        attr_accessor :expiration_days
+        # @return [DateTime, Time] the date/time the objects will expire
+        # @return [Integer] if the value is an integer, returns the number
+        #   of days before the object will expire.
+        attr_accessor :expiration_time
+        alias expiration_days expiration_time
+
+        # @return [DateTime, Time] the date/time the objects will be
+        #   transitioned into the Amazon Glacier storage tier.
+        # @return [Integer] if the value is an integer, returns the number
+        #   of days before the object is transitioned into the Amazon Glacier
+        #   storage tier.
+        attr_accessor :glacier_transition_time
 
         # @return [String] Returns the rule status, 'Enabled' or 'Disabled'
         attr_accessor :status
@@ -341,7 +385,8 @@ module AWS
           other.configuration.bucket == configuration.bucket and
           other.id == id and
           other.prefix == prefix and
-          other.expiration_days == expiration_days and
+          other.expiration_time == expiration_time and
+          other.glacier_transition_time == glacier_transition_time and
           other.status == status
         end
         alias_method :==, :eql?
@@ -352,7 +397,19 @@ module AWS
 
       def parse_xml xml
         Client::XML::GetBucketLifecycleConfiguration.parse(xml).rules.map do |r|
-          Rule.new(self, r.id, r.prefix, r.expiration.days, r.status)
+          opts = { :status => r[:status] }
+
+          if r[:expiration]
+            opts[:expiration_time] =
+              r[:expiration][:days] || r[:expiration][:date]
+          end
+
+          if r[:transition]
+            opts[:glacier_transition_time] =
+              r[:transition][:days] || r[:transition][:date]
+          end
+
+          Rule.new(self, r[:id], r[:prefix], opts)
         end
       end
 
