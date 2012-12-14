@@ -22,11 +22,19 @@ module AWS
 
         let(:rules) {{}}
 
+        let(:http) { nil }
+
+        let(:operation) {{ :inputs => rules }}
+
         let(:serializer) {
-          XMLSerializer.new('http://namespace.com/doc/', 'OperationName', rules)
+          XMLSerializer.new('http://namespace.com/doc/', 'OperationName', operation)
         }
 
         let(:xml) { serializer.serialize(options) }
+
+        before(:each) do
+          operation[:http] = http if http
+        end
 
         context '#rules' do
 
@@ -49,6 +57,21 @@ module AWS
         end
 
         context '#serialize' do
+
+          context 'with request payload' do
+
+            let(:http) {{ :request_payload => :config }}
+
+            it 'uses the name of the request payload as the root xml element' do
+              rules[:config] = {
+                :name => 'Configuration',
+                :type => :hash,
+                :members => {},
+              }
+              xml.should eq("<Configuration xmlns=\"http://namespace.com/doc/\"/>")
+            end
+
+          end
 
           context 'strings' do
 

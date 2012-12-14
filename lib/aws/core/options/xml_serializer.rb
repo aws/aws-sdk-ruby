@@ -54,13 +54,15 @@ module AWS
         #   @return [String] Returns an string of the request parameters
         #     serialized into XML.
         def serialize request_options
-          if payload = http[:request_payload]
+          if http && http[:request_payload]
+            payload = http[:request_payload]
             root_node_name = rules[payload][:name]
             params = request_options[payload]
             rules = self.rules[payload][:members]
           else
             root_node_name = "#{operation_name}Request"
             params = request_options
+            rules = self.rules
           end
           xml = Nokogiri::XML::Builder.new
           xml.send(root_node_name, :xmlns => namespace) do |xml|
