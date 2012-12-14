@@ -138,10 +138,10 @@ module AWS
       #   will have the status of enabled.  You can override this default
       #   by passing +:disabled+ => true.
       #
-      # @option options [DateTime, Integer] expiration_time (nil) Indicates
+      # @option options [Date, Integer] expiration_time (nil) Indicates
       #   the lifetime for objects matching the given prefix.
       #
-      # @option options [DateTime, Integer] glacier_transition_time (nil)
+      # @option options [Date, Integer] glacier_transition_time (nil)
       #   Indicates the time before objects matching the given prefix will
       #   be transitioned into the Amazon Glacier storage tier.
       #
@@ -282,7 +282,8 @@ module AWS
                   if Integer === rule.expiration_time
                     xml.Days rule.expiration_time
                   else
-                    xml.Date rule.expiration_time.iso8601
+                    date = rule.expiration_time.to_s
+                    xml.Date "#{date}T00:00:00Z"
                   end
                 end if rule.expiration_time
                 xml.Transition do
@@ -290,7 +291,8 @@ module AWS
                   if Integer === rule.glacier_transition_time
                     xml.Days rule.glacier_transition_time
                   else
-                    xml.Date rule.glacier_transition_time.iso8601
+                    date = rule.glacier_transition_time.to_s
+                    xml.Date "#{date}T00:00:00Z"
                   end
                 end if rule.glacier_transition_time
               end
@@ -333,8 +335,8 @@ module AWS
               send("#{key}=", value) if respond_to?("#{key}=")
             end
           else
-            @expiration_time = expiration_time
-            @status = status
+            self.expiration_time = expiration_time
+            self.status = status
           end
         end
 
@@ -347,18 +349,30 @@ module AWS
         # @return [String]
         attr_accessor :prefix
 
-        # @return [DateTime, Time] the date/time the objects will expire
+        # @return [Date] the date the objects will expire
         # @return [Integer] if the value is an integer, returns the number
         #   of days before the object will expire.
-        attr_accessor :expiration_time
-        alias expiration_days expiration_time
+        attr_reader :expiration_time
 
-        # @return [DateTime, Time] the date/time the objects will be
+        # Converts any time values to Date objects
+        def expiration_time=(value)
+          @expiration_time = convert_time_value(value)
+        end
+
+        alias expiration_days expiration_time
+        alias expiration_days= expiration_time=
+
+        # @return [Date] the date the objects will be
         #   transitioned into the Amazon Glacier storage tier.
         # @return [Integer] if the value is an integer, returns the number
         #   of days before the object is transitioned into the Amazon Glacier
         #   storage tier.
-        attr_accessor :glacier_transition_time
+        attr_reader :glacier_transition_time
+
+        # Converts any time values to Date objects
+        def glacier_transition_time=(value)
+          @glacier_transition_time = convert_time_value(value)
+        end
 
         # @return [String] Returns the rule status, 'Enabled' or 'Disabled'
         attr_accessor :status
@@ -390,6 +404,19 @@ module AWS
           other.status == status
         end
         alias_method :==, :eql?
+
+        private
+
+        # If an integer, returns the integer as days, otherwise
+        # converts any time-like values into Date objects
+        # @return [Integer] if the value is an integer
+        # @return [Date] if the value is a time-like object
+        # @return [nil] if the value is nil
+        def convert_time_value(value)
+          return nil if value.nil?
+          return value if value.is_a?(Integer)
+          Date.parse(value.to_s)
+        end
 
       end
 

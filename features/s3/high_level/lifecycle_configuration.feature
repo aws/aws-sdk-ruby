@@ -40,12 +40,12 @@ Feature: Bucket Lifecycle Configuration
     """
       @bucket.lifecycle_configuration.update do
         add_rule 'prefix/a', :id => 'id-1',
-          :expiration_time => DateTime.new(2013, 01, 03)
+          :expiration_time => Date.new(2013, 01, 03)
       end
     """
     Then the lifecycle configuration should have the following rules:
-    | ID   | PREFIX   | EXP                       | STATUS   |
-    | id-1 | prefix/a | 2013-01-03T00:00:00+00:00 | Enabled  |
+    | ID   | PREFIX   | EXP        | STATUS   |
+    | id-1 | prefix/a | 2013-01-03 | Enabled  |
     And 1 request should have been made like:
     | TYPE   | NAME          | VALUE       |
     | http   | verb          | PUT         |
@@ -58,15 +58,15 @@ Feature: Bucket Lifecycle Configuration
     """
       @bucket.lifecycle_configuration.update do
         add_rule 'prefix/a', :id => 'id-1',
-          :glacier_transition_time => DateTime.new(2013, 01, 03)
+          :glacier_transition_time => Date.new(2013, 01, 03)
         add_rule 'prefix/b', :id => 'id-2',
           :glacier_transition_time => 15
       end
     """
     Then the lifecycle configuration should have the following rules:
-    | ID   | PREFIX   | GLACIER                   | STATUS   |
-    | id-1 | prefix/a | 2013-01-03T00:00:00+00:00 | Enabled  |
-    | id-2 | prefix/b | 15                        | Enabled  |
+    | ID   | PREFIX   | GLACIER    | STATUS   |
+    | id-1 | prefix/a | 2013-01-03 | Enabled  |
+    | id-2 | prefix/b | 15         | Enabled  |
     And 1 request should have been made like:
     | TYPE   | NAME          | VALUE       |
     | http   | verb          | PUT         |

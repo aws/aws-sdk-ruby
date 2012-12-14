@@ -31,13 +31,13 @@ Then /^the lifecycle configuration should have the following rules:$/ do |table|
 
   rule_expectations = table.hashes.map {|h| {
     :id => h['ID'], :prefix => h['PREFIX'], :status => h['STATUS'],
-    :exp => (Integer(h['EXP']) rescue DateTime.parse(h['EXP']) rescue nil),
-    :glacier => (Integer(h['GLACIER']) rescue DateTime.parse(h['GLACIER']) rescue nil)
+    :exp => (Integer(h['EXP']) rescue Date.parse(h['EXP']) rescue nil) || 0,
+    :glacier => (Integer(h['GLACIER']) rescue Date.parse(h['GLACIER']) rescue nil) || 0
   }}
   
   rules = @bucket.lifecycle_configuration.rules.map {|r| {
     :id => r.id, :prefix => r.prefix, :status => r.status,
-    :exp => r.expiration_time, :glacier => r.glacier_transition_time
+    :exp => r.expiration_time || 0, :glacier => r.glacier_transition_time || 0
   }}
 
   rules.should == rule_expectations

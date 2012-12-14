@@ -91,13 +91,13 @@ module AWS
         it 'accepts a date for expiration time' do
           time = Time.now.utc
           rule = lifecycle.add_rule('prefix', :expiration_time => time)
-          rule.expiration_time.should == time
+          rule.expiration_time.should == Date.parse(time.to_s)
         end
 
         it 'accepts a date for Glacier transition time' do
           time = Time.now.utc
           rule = lifecycle.add_rule('prefix', :glacier_transition_time => time)
-          rule.glacier_transition_time.should == time
+          rule.glacier_transition_time.should == Date.parse(time.to_s)
         end
 
         it 'accepts days for Glacier transition time' do
@@ -147,7 +147,7 @@ module AWS
     <Prefix>foo/bar1</Prefix>
     <Status>Enabled</Status>
     <Expiration>
-      <Date>2013-01-03T00:00:00+00:00</Date>
+      <Date>2013-01-03T00:00:00Z</Date>
     </Expiration>
   </Rule>
   <Rule>
@@ -165,7 +165,7 @@ module AWS
     <Status>Enabled</Status>
     <Transition>
       <StorageClass>GLACIER</StorageClass>
-      <Date>2013-01-03T00:00:00+00:00</Date>
+      <Date>2013-01-03T00:00:00Z</Date>
     </Transition>
   </Rule>
   <Rule>
