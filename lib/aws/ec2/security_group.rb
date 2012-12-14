@@ -347,7 +347,7 @@ module AWS
       def ingress_opts protocol, ports, sources
 
         opts = {}
-        opts[:ip_protocol] = protocol.to_s.downcase
+        opts[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s.downcase
         opts[:from_port] = Array(ports).first.to_i
         opts[:to_port] = Array(ports).last.to_i
 
