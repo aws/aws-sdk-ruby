@@ -28,7 +28,7 @@ module AWS
         @validator = Options::Validator.new(@rules)
 
         @xml_serializer = Options::XMLSerializer.new(
-          namespace, operation[:name], @rules)
+          namespace, operation[:name], operation)
 
       end
 

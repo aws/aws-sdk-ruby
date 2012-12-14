@@ -13,6 +13,7 @@
 
 ---
 :api_version: '2012-05-05'
+:namespace: http://cloudfront.amazonaws.com/doc/2012-07-01/
 :operations:
 - :name: CreateCloudFrontOriginAccessIdentity2012_05_05
   :method: :create_cloud_front_origin_access_identity

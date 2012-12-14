@@ -25,3 +25,12 @@ Feature: CloudFront Client
     Then I should receive an error with:
     | code               | message                                    |
     | NoSuchDistribution | The specified distribution does not exist. |
+
+  # This test ensures the request payload is properly serialized.  If it is
+  # not, then we do not get the NoSuchOrigin error.
+  Scenario: Making a request for an operation with a request payload
+    When I use the client to create a distrubtion for a non-existent origin
+    Then I should receive an error with:
+    | code         | message                                   |
+    | NoSuchOrigin | One or more of your origins do not exist. |
+

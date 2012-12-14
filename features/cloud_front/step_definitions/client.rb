@@ -30,3 +30,42 @@ When /^I use the client to get a non\-existent distribution$/ do
   rescue => @error
   end
 end
+
+When /^I use the client to create a distrubtion for a non\-existent origin$/ do
+  begin
+    @cloud_front_client.create_distribution({
+      :distribution_config => {
+        :caller_reference => '123',
+        :aliases => {
+          :quantity => 0,
+        }, 
+        :default_root_object => '/',
+        :origins => {
+          :quantity => 0,
+        },
+        :default_cache_behavior => {
+          :target_origin_id => 'abc',
+          :forwarded_values => {
+            :query_string => true,
+          },
+          :trusted_signers => {
+            :enabled => false,
+            :quantity => 0,
+          },
+          :viewer_protocol_policy => 'allow-all',
+          :min_ttl => 10,
+        },
+        :cache_behaviors => {
+          :quantity => 0,
+        },
+        :comment=> 'abc',
+        :logging => {
+          :enabled => false,
+          :bucket => 'aws-sdk',
+          :prefix => 'prefix',
+        }, :enabled => false
+      },
+    })
+  rescue => @error
+  end
+end
