@@ -15,35 +15,49 @@ module AWS
   class EC2
     class SecurityGroup < Resource
 
-      class IngressIpPermissionCollection
+      class IpPermissionCollection
 
-        include Core::Model
-        include Enumerable
+        include Core::Collection::Simple
 
         def initialize security_group, options = {}
           @security_group = security_group
+          @egress = !!options[:egress]
           super
         end
 
         # @return [SecurityGroup]
         attr_reader :security_group
 
-        def each
-          security_group.ip_permissions_list.each do |p|
+        # @return [Boolean]
+        attr_reader :egress
 
+        alias_method :egress?, :egress
+
+        private
+
+        def _each_item options = {}
+
+          list_method = 'ip_permissions_list'
+          list_method += '_egress' if egress?
+
+          security_group.send(list_method).each do |p|
+
+            # egress permissions don't always have ports
             ports = p[:from_port] ? [p[:from_port], p[:to_port]] : nil
 
-            ip_ranges = p.ip_ranges.collect{|ip| ip.cidr_ip }
+            ip_ranges = p[:ip_ranges].collect{|ip| ip[:cidr_ip] }
 
-            groups = p.groups.collect do |group|
-              SecurityGroup.new(group.group_id,
-                :owner_id => group.user_id,
+            groups = p[:groups].collect do |group|
+              SecurityGroup.new(group[:group_id],
+                :owner_id => group[:user_id],
+                :vpc_id => security_group.vpc_id,
                 :config => config)
             end
 
-            permission = IpPermission.new(security_group, p.ip_protocol, ports,
+            permission = IpPermission.new(security_group, p[:ip_protocol], ports,
               :ip_ranges => ip_ranges,
               :groups => groups,
+              :egress => egress?,
               :config => config)
 
             yield(permission)
@@ -53,8 +67,15 @@ module AWS
 
       end
 
-      # alias for ingress permissions
-      IpPermissionCollection = IngressIpPermissionCollection
+      class IngressIpPermissionCollection < IpPermissionCollection; end
+
+      class EgressIpPermissionCollection < IpPermissionCollection
+
+        def initialize security_group, options = {}
+          super(security_group, options.merge(:egress => true))
+        end
+
+      end
 
     end
   end

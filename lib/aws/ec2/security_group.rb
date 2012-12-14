@@ -31,9 +31,9 @@ module AWS
 
       AWS.register_autoloads(self, 'aws/ec2/security_group') do
         autoload :IpPermission,                  'ip_permission'
-        autoload :IpPermissionCollection,        'ingress_ip_permission_collection'
-        autoload :IngressIpPermissionCollection, 'ingress_ip_permission_collection'
-        autoload :EgressIpPermissionCollection,  'egress_ip_permission_collection'
+        autoload :IpPermissionCollection,        'ip_permission_collection'
+        autoload :IngressIpPermissionCollection, 'ip_permission_collection'
+        autoload :EgressIpPermissionCollection,  'ip_permission_collection'
       end
 
       include TaggedItem
@@ -63,7 +63,7 @@ module AWS
       attribute :ip_permissions_list_egress, :from => :ip_permissions_egress
 
       populates_from(:describe_security_groups) do |resp|
-        resp.security_group_index[id]
+        resp[:security_group_index][id]
       end
 
       # @return [Boolean] True if the security group exists.
