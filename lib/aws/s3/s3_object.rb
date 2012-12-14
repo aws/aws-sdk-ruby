@@ -349,6 +349,31 @@ module AWS
         !server_side_encryption.nil?
       end
 
+      # @return [Boolean] whether a {#restore} operation on the
+      #   object is currently being performed on the object.
+      # @see #restore_expiration_date
+      # @since 1.7.2
+      def restore_in_progress?
+        head.restore_in_progress
+      end
+
+      # @return [DateTime] the time when the temporarily restored object
+      #   will be removed from S3. Note that the original object will remain
+      #   available in Glacier.
+      # @return [nil] if the object was not restored from an archived
+      #   copy
+      # @since 1.7.2
+      def restore_expiration_date
+        head.restore_expiration_date
+      end
+
+      # @return [Boolean] whether the object is a temporary copy of an
+      #   archived object in the Glacier storage class.
+      # @since 1.7.2
+      def restored_object?
+        !!head.restore_expiration_date
+      end
+
       # Deletes the object from its S3 bucket.
       #
       # @param [Hash] options
@@ -379,6 +404,27 @@ module AWS
 
         nil
 
+      end
+
+      # Restores a temporary copy of an archived object from the
+      # Glacier storage tier. After the specified +days+, Amazon
+      # S3 deletes the temporary copy. Note that the object
+      # remains archived; Amazon S3 deletes only the restored copy.
+      #
+      # Restoring an object does not occur immediately. Use
+      # {#restore_in_progress?} to check the status of the operation.
+      #
+      # @option [Integer] :days (1) the number of days to keep the object
+      # @return [Boolean] +true+ if a restore can be initiated.
+      # @since 1.7.2
+      def restore options = {}
+        options[:days] ||= 1
+
+        client.restore_object(
+          :bucket_name => bucket.name,
+          :key => key, :days => options[:days])
+
+        true
       end
 
       # @option [String] :version_id (nil) If present the metadata object

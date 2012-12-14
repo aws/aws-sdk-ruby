@@ -412,3 +412,14 @@ Feature: CRUD Objects (High Level)
     | http  | verb    | POST  |
     | param | delete  |       |
     And the bucket should be empty
+
+  @restore @tiered_storage
+  Scenario: Restoring an object that is not archived
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I try to restore the object
+    Then I should get a "InvalidObjectState" client exception as follows:
+    | field   | value                                                            |
+    | code    | InvalidObjectState                                               |
+    | message | Restore is not allowed, as object's storage class is not GLACIER |

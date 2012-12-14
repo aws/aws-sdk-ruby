@@ -1537,6 +1537,30 @@ module AWS
             r.expiration_rule_id.should == 'temp-rule'
           end
 
+          it 'defaults restore_expiration_date and progress to nil' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] = nil
+            end.head_object(opts)
+            r.restore_expiration_date.should == nil
+            r.restore_in_progress.should == false
+          end
+
+          it 'parses x-amz-restore headers' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="false", expiry-date="Fri, 27 Jan 2012 00:00:00 GMT"']
+            end.head_object(opts)
+            r.restore_expiration_date.should be_a(DateTime)
+            r.restore_expiration_date.to_s.should == "2012-01-27T00:00:00+00:00"
+            r.restore_in_progress.should == false
+
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="true", expiry-date="Fri, 27 Jan 2012 00:00:00 GMT"']
+            end.head_object(opts)
+            r.restore_in_progress.should == true
+          end
+
         end
 
       end
