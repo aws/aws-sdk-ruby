@@ -2373,8 +2373,6 @@
                           item:
                             :rename: :ip_ranges
                             :list: true
-                      ipProtocol:
-                        :type: :symbol
               ipPermissionsEgress:
                 :ignore: true
                 :children:
