@@ -115,6 +115,8 @@
     - :integer
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     EngineVersion:
     - :string
     AutoMinorVersionUpgrade:
@@ -172,10 +174,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -251,10 +257,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -461,10 +471,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -632,10 +646,14 @@
                         :type: :integer
                       MultiAZ:
                         :type: :boolean
+                      Iops:
+                        :type: :integer
                   LatestRestorableTime:
                     :type: :time
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
                   AutoMinorVersionUpgrade:
                     :type: :boolean
                   ReadReplicaDBInstanceIdentifiers:
@@ -976,6 +994,8 @@
     - :string
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     MaxRecords:
     - :integer
     Marker:
@@ -1004,6 +1024,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
                   RecurringCharges:
                     :ignore: true
                     :children:
@@ -1028,6 +1050,8 @@
     - :string
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     MaxRecords:
     - :integer
     Marker:
@@ -1052,6 +1076,8 @@
                     :type: :float
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
                   RecurringCharges:
                     :ignore: true
                     :children:
@@ -1088,6 +1114,8 @@
     - :string
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     EngineVersion:
     - :string
     AllowMajorVersionUpgrade:
@@ -1143,10 +1171,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -1290,6 +1322,8 @@
                 :type: :integer
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               RecurringCharges:
                 :ignore: true
                 :children:
@@ -1355,10 +1389,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -1422,6 +1460,8 @@
     - :string
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     AutoMinorVersionUpgrade:
     - :boolean
     LicenseModel:
@@ -1479,10 +1519,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
@@ -1515,6 +1559,8 @@
     - :string
     MultiAZ:
     - :boolean
+    Iops:
+    - :integer
     AutoMinorVersionUpgrade:
     - :boolean
     LicenseModel:
@@ -1572,10 +1618,14 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
                 :type: :boolean
+              Iops:
+                :type: :integer
               AutoMinorVersionUpgrade:
                 :type: :boolean
               ReadReplicaDBInstanceIdentifiers:
