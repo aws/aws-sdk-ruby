@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-07-31'
+:api_version: '2012-09-17'
 :operations:
 - :name: AuthorizeDBSecurityGroupIngress
   :method: :authorize_db_security_group_ingress

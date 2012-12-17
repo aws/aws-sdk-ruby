@@ -1585,7 +1585,7 @@ module AWS
 
       ## end client methods ##
 
-      define_client_methods('2012-07-31')
+      define_client_methods('2012-09-17')
 
     end
   end
