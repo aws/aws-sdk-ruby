@@ -116,7 +116,7 @@ module AWS
 
       attribute :multi_az, :static => true, :alias => :multi_az?
 
-      attribute :piops, :static => true
+      attribute :iops, :static => true
 
       attribute :preferred_backup_window, :static => true
 
