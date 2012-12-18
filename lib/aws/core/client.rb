@@ -309,7 +309,7 @@ module AWS
       def expired_credentials? response
         response.error and
         response.error.respond_to?(:code) and
-        response.error.code == 'ExpiredTokenException'
+        (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
       end
 
       def return_or_raise options, &block
