@@ -45,6 +45,8 @@ module AWS
     #
     # @attr_reader [Boolean] multi_az
     #
+    # @attr_reader [Integer] iops
+    #
     # @attr_reader [String] engine_version
     #
     # @attr_reader [Boolean] auto_minor_version_upgrade
