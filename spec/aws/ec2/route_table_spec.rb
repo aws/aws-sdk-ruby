@@ -243,6 +243,7 @@ module AWS
             route_set << {
               :destination_cidr_block => 'cidr-block-1',
               :gateway_id => 'igw-123',
+              :origin => 'CreateRoute',
               :state => 'active',
             }
 
@@ -250,12 +251,14 @@ module AWS
               :destination_cidr_block => 'cidr-block-2',
               :instance_id => 'i-123',
               :instance_owner_id => 'owner-id',
+              :origin => 'CreateRouteTable',
               :state => 'pending',
             }
 
             route_set << {
               :destination_cidr_block => 'cidr-block-3',
               :network_interface_id => 'ni-123',
+              :origin => 'EnableVgwRoutePropagation',
               :state => 'foo',
             }
 
@@ -263,17 +266,20 @@ module AWS
 
             routes[0].destination_cidr_block.should == 'cidr-block-1'
             routes[0].target.should == InternetGateway.new('igw-123', :config => config)
+            routes[0].origin.should == :create_route
             routes[0].state.should == :active
             routes[0].target.should == routes[0].internet_gateway
 
             routes[1].destination_cidr_block.should == 'cidr-block-2'
             routes[1].target.should == Instance.new('i-123', :config => config)
+            routes[1].origin.should == :create_route_table
             routes[1].state.should == :pending
             routes[1].target.should == routes[1].instance
             routes[1].instance.owner_id.should == 'owner-id'
 
             routes[2].destination_cidr_block.should == 'cidr-block-3'
             routes[2].target.should == NetworkInterface.new('ni-123', :config => config)
+            routes[2].origin.should == :enable_vgw_route_propagation
             routes[2].state.should == :foo
             routes[2].target.should == routes[2].network_interface
 

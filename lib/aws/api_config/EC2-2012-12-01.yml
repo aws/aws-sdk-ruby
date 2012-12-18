@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-07-20'
+:api_version: '2012-12-01'
 :operations:
 - :name: ActivateLicense
   :method: :activate_license

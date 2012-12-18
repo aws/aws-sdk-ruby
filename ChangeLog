@@ -1,3 +1,11 @@
+2012-12-12 Soenke Ruempler <soenke@jimdo.com>
+
+  * lib/aws/ec2/route_table/route.rb, spec/aws/ec2/route_table_spec.rb:
+  Added support for route origin
+  * lib/aws/api_config/EC2-2012-07-20.yml,
+  lib/aws/api_config/EC2-2012-12-01.yml
+  lib/aws/ec2/client.rb: version bump to EC2-2012-12-01
+
 2012-11-06 Trevor Rowe <trevorrowe@gmail.com>
 
   * lib/aws/core/signature/version_3_https.rb: Added x-amz-security-token

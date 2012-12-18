@@ -54,6 +54,10 @@ module AWS
 
           @target = (internet_gateway || instance || network_interface)
 
+          @origin = { 'CreateRoute' => :create_route, 'CreateRouteTable' => :create_route_table, 'EnableVgwRoutePropagation' => :enable_vgw_route_propagation }[details.origin]
+            
+            details.origin.to_sym
+
           @state = details.state.to_sym
 
         end
@@ -80,6 +84,10 @@ module AWS
         #   network interface.
         attr_reader :target
 
+        # @return [Symbol] Returns the origin (:create_route,
+        # :create_route_table or :enable_vgw_route_propagation)
+        attr_reader :origin
+        
         # @return [Symbol] Returns the state (:active or :blackhole).
         attr_reader :state
 
