@@ -78,8 +78,8 @@ module AWS
     #
     #   # replace all existing rules with the following
     #   bucket.lifecycle_configuration.replace do
-    #     add_rule('backups/', 30)
-    #     add_rule('temp/', 10)
+    #     add_rule('backups/', :glacier_transition_time => 10)
+    #     add_rule('temp/', :expiration_time => 30)
     #   end
     #
     # == Removing Rules
@@ -105,7 +105,7 @@ module AWS
     #   # change the expiration days to 10 for EVERY rule
     #   bucket.lifecycle_configuration.update do
     #     rules.each do |rule|
-    #       rule.expiration_days = 10
+    #       rule.expiration_time = 10
     #     end
     #   end
     #
