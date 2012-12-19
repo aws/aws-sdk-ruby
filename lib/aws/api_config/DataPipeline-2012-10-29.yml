@@ -55,6 +55,8 @@
     - :list:
       - :string
     - :required
+    evaluateExpressions:
+    - :boolean
     marker:
     - :string
   :outputs:
@@ -332,6 +334,20 @@
   :outputs:
     canceled:
       :sym: :canceled
+      :type: :boolean
+- :name: ReportTaskRunnerHeartbeat
+  :method: :report_task_runner_heartbeat
+  :inputs:
+    taskrunnerId:
+    - :string
+    - :required
+    workerGroup:
+    - :string
+    hostname:
+    - :string
+  :outputs:
+    terminate:
+      :sym: :terminate
       :type: :boolean
 - :name: SetStatus
   :method: :set_status
