@@ -100,6 +100,7 @@ module AWS
       autoload :LazyErrorClasses,          'lazy_error_classes'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
+      autoload :ManagedFile,               'managed_file'
       autoload :Model,                     'model'
       autoload :Naming,                    'naming'
       autoload :OptionGrammar,             'option_grammar'
