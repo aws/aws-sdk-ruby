@@ -106,7 +106,11 @@ module AWS
         }
       end
 
-    end
+      # @return [Hash] Returns the decoded message body as a hash.
+      def body_message_as_h
+        @body_message_as_h ||= JSON.parse(to_h[:body])
+      end
 
+    end
   end
 end
