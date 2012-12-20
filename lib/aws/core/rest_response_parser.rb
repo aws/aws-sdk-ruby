@@ -19,9 +19,14 @@ module AWS
     class RESTResponseParser
 
       # @private
-      def initialize operation
+      def initialize operation, options
         @http = operation[:http]
-        @parser = XML::Parser.new(operation[:outputs])
+        @parser =
+          case options[:format]
+          when :xml then XML::Parser.new(operation[:outputs])
+          when :json then Core::JSONParser.new(operation[:outputs])
+          else raise "unhandled format: #{options[:format].inspect}"
+          end
       end
 
       # Given a response object, this method extract and returns a
@@ -30,16 +35,20 @@ module AWS
       # @return [Hash]
       def extract_data response
 
-        # parse the response XML body
         data = @parser.parse(response.http_response.body)
 
         # extract headers and insert into response
         (@http[:response_headers] || {}).each_pair do |name,header_name|
-          data[name] = response.http_response.headers[header_name]
+          header = response.http_response.headers[header_name.downcase]
+          data[name] = [header].flatten.first
         end
 
         data
 
+      end
+
+      def simulate
+        {}
       end
 
     end

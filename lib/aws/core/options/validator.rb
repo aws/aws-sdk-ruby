@@ -129,6 +129,10 @@ module AWS
           value.to_s
         end
 
+        def validate_blob rules, value, opt_name, context = nil
+          value
+        end
+
         def format_error description, opt_name, context
           context = context || "option :#{opt_name}"
           raise ArgumentError, "expected #{description} for #{context}"
