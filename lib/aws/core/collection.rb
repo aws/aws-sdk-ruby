@@ -99,7 +99,7 @@ module AWS
       #   collection.
       #
       def enum options = {}
-        Enumerator.new(self, :each, options)
+        to_enum(:each, options)
       end
       alias_method :enumerator, :enum
 
