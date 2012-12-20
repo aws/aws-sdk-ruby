@@ -19,42 +19,66 @@ module AWS
     class RESTRequestBuilder
 
       # @private
-      def initialize namespace, operation
+      def initialize operation, options = {}
 
         @http = operation[:http]
-
         @rules = operation[:inputs]
 
         @validator = Options::Validator.new(@rules)
 
-        @xml_serializer = Options::XMLSerializer.new(
-          namespace, operation[:name], operation)
+        @serializer =
+          case options[:format]
+          when :xml
+            namespace = options[:xmlnamespace]
+            name = operation[:name]
+            Options::XMLSerializer.new(namespace, name, @rules)
+          when :json
+            Options::JSONSerializer.new(@rules, @http[:request_payload])
+          else
+            raise ArgumentError, "unhandled format: #{options[:format]}"
+          end
 
       end
 
-      # Populates an http request object with params in the uri, headers,
-      # and body.
+      # Populates a Http::Request with the following:
+      # 
+      # * HTTP method
+      # * URI
+      # * headers
+      # * body
+      #
       # @param [Http::Request] request
-      # @param [Hash] request_options A hash of options to send with
-      #   the request.
+      #
+      # @param [Hash] request_options The hash of request options provided 
+      #   to the client request method.  This will be used to populate
+      #   the headers, uri and body.
+      #
       # @raise [ArgumentError] Raises ArgumentError when any of the
       #   request options are invalid (wrong type, missing, unknown, etc).
-      # @return [Http::Request]
-      def populate_request request, request_options
-
-        params = @validator.validate!(request_options)
-
-        request.http_method = @http[:verb]
-        request.uri = extract_uri(params)
-        extract_headers(params).each_pair do |header_name, header_value|
-          request.headers[header_name] = header_value
-        end
-        request.body = build_body(params)
-        request
-
+      #
+      def populate_request request, params
+        params = @validator.validate!(params)
+        populate_method(request)
+        populate_uri(request, params)
+        populate_headers(request, params)
+        populate_body(request, params)
       end
 
       protected
+
+      def populate_method request
+        request.http_method = @http[:verb]
+      end
+
+      def populate_uri request, params
+        request.uri = extract_uri(params)
+      end
+
+      def populate_headers request, params
+        extract_headers(params).each_pair do |header_name, header_value|
+          request.headers[header_name] = header_value
+        end
+      end
 
       # @param [Hash] params
       # @return [String]
@@ -63,15 +87,11 @@ module AWS
         path, querystring = @http[:uri].split(/\?/)
 
         uri = path.gsub(/:\w+/) do |param_name|
-          unless param = params.delete(param_name[1..-1].to_sym)
-            msg = "missing required uri argument :#{param_name[1..-1]}"
-            raise ArgumentError, msg
-          end
-          UriEscape.escape(param)
+          UriEscape.escape(params.delete(param_name.sub(/^:/, '').to_sym))
         end
 
         querystring_parts = []
-        querystring.to_s.split(/&/).each do |part|
+        querystring.to_s.split(/&|;/).each do |part|
           param_name = part.match(/:(\w+)/)[1]
           if param = params.delete(param_name.to_sym)
             param = UriEscape.escape(param)
@@ -91,28 +111,28 @@ module AWS
       # @return [Hash]
       def extract_headers params
         headers = {}
-        (@http[:request_headers] || {}).each_pair do |param_name,header_name|
-          if param_value = params.delete(param_name)
-            headers[header_name] = param_value
-          end
+        (@http[:request_headers] || {}).each_pair do |param,header|
+          headers[header] = params[param] if params.key?(param)
         end
         headers
       end
 
       # @param [Hash] params
       # @return [String,nil]
-      def build_body params
+      def populate_body request, params
         if params.empty?
-          nil
+          request.body = nil
+        elsif payload = streaming_param # streaming request
+          request.body_stream = params[payload]
+          request.headers['Content-Length'] = params[payload].size
         else
-          if
-            payload = @http[:request_payload] and
-            @rules[payload][:type] != :hash
-          then
-            params[payload]
-          else
-            @xml_serializer.serialize(params)
-          end
+          request.body = @serializer.serialize(params)
+        end
+      end
+
+      def streaming_param
+        if payload = @http[:request_payload]
+          @rules[payload][:type] == :blob ? payload : nil
         end
       end
 

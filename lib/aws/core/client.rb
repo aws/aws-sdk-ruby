@@ -458,6 +458,13 @@ module AWS
                   end
                 end
 
+                # close files we opened
+                response.on_complete do
+                  if response.http_request.body_stream.is_a?(ManagedFile)
+                    response.http_request.body_stream.close
+                  end
+                end
+
                 response
 
               end
