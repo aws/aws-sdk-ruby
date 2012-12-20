@@ -31,6 +31,7 @@ require 'aws/core/autoloader'
 # * {AWS::ElasticBeanstalk}
 # * {AWS::ELB}
 # * {AWS::EMR}
+# * {AWS::Glacier}
 # * {AWS::IAM}
 # * {AWS::RDS}
 # * {AWS::Route53}
@@ -260,6 +261,9 @@ module AWS
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
+    #
+    # @option options [String] :glacier_endpoint ('glacier.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Glacier.
     #
     # @option options [Object] :http_handler (AWS::Core::Http::NetHttpHandler)
     #   The http handler that sends requests to AWS.
