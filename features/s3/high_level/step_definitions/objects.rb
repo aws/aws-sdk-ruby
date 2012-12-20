@@ -374,3 +374,11 @@ When /^I create a pre\-signed "([^"]*)" uri using the session credentials$/ do |
   s3 = AWS::S3.new(@session.credentials)
   @presigned_uri = s3.buckets[@bucket.name].objects[@object.key].url_for(http_method)
 end
+
+Given /^I try to restore the object$/ do
+  begin
+    @object.restore
+  rescue => e
+    @exception = e
+  end
+end

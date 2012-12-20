@@ -167,6 +167,12 @@ module AWS
             rename(:rules)
             element("Expiration") do
               element("Days") { integer_value }
+              element("Date") { datetime_value }
+            end
+            element("Transition") do
+              element("StorageClass") { }
+              element("Days") { integer_value }
+              element("Date") { datetime_value }
             end
           end
         end
