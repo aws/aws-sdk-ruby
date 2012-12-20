@@ -31,7 +31,7 @@ module AWS
           when :xml
             namespace = options[:xmlnamespace]
             name = operation[:name]
-            Options::XMLSerializer.new(namespace, name, @rules)
+            Options::XMLSerializer.new(namespace, name, operation)
           when :json
             Options::JSONSerializer.new(@rules, @http[:request_payload])
           else
@@ -87,7 +87,11 @@ module AWS
         path, querystring = @http[:uri].split(/\?/)
 
         uri = path.gsub(/:\w+/) do |param_name|
-          UriEscape.escape(params.delete(param_name.sub(/^:/, '').to_sym))
+          if param = params.delete(param_name.sub(/^:/, '').to_sym)
+            UriEscape.escape(param)
+          else
+            raise ArgumentError, "missing required option #{param_name}"
+          end
         end
 
         querystring_parts = []

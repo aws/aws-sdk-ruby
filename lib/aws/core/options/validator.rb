@@ -45,7 +45,7 @@ module AWS
           rules.each_pair do |opt_name, opt_rules|
             if opt_rules[:required]
               unless request_options.key?(opt_name)
-                raise ArgumentError, "missing required option :#{opt_name}"
+                raise ArgumentError, "missing required option #{opt_name.inspect}"
               end
             end
           end
