@@ -20,7 +20,7 @@ end if ENV['COVERAGE']
 $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
 require 'rspec'
-require 'aws'
+require 'aws-sdk'
 
 RSpec.configure do |c|
   c.filter_run_excluding :ruby => lambda {|version|

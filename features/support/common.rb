@@ -19,7 +19,7 @@ end if ENV['COVERAGE']
 
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
-require 'aws'
+require 'aws-sdk'
 
 require 'mocha'
 include Mocha::API
