@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-07-20')
+      define_client_methods('2012-12-01')
 
       # @private
       CACHEABLE_REQUESTS = Set[
