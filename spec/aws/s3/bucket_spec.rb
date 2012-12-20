@@ -114,7 +114,8 @@ module AWS
           bucket.lifecycle_configuration = xml
           cfg = bucket.lifecycle_configuration
           cfg.rules.should == [
-            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix', 5, 'Enabled')
+            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix',
+              :expiration_time => 5, :status => 'Enabled')
           ]
 
         end

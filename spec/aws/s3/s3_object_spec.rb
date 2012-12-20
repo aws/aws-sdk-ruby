@@ -786,6 +786,41 @@ module AWS
 
       end
 
+      context '#restore_in_progress?' do
+        it 'returns true if the object is being restored' do
+          head = double('head-object-response',
+                        :restore_in_progress => true)
+          client.stub(:head_object).and_return(head)
+          object.restore_in_progress?.should == true
+        end
+
+        it 'returns false if the object is not an archive copy' do
+          head = double('head-object-response',
+                        :restore_in_progress => false)
+          client.stub(:head_object).and_return(head)
+          object.restore_in_progress?.should == false
+        end
+      end
+
+      context '#restore_expiration_date' do
+        it 'returns the expiration date if it is an archive copy' do
+          time = Time.now
+          head = double('head-object-response',
+                        :restore_expiration_date => time)
+          client.stub(:head_object).and_return(head)
+          object.restore_expiration_date.should == time
+        end
+      end
+
+      context '#restored_object?' do
+        it 'returns false if the object is not an archive copy' do
+          head = double('head-object-response',
+                        :restore_expiration_date => nil)
+          client.stub(:head_object).and_return(head)
+          object.restored_object?.should == false
+        end
+      end
+
       context '#versions' do
 
         it 'returns a versioned object collection' do

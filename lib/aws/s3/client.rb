@@ -16,6 +16,7 @@ require 'pathname'
 require 'stringio'
 require 'json'
 require 'digest/md5'
+require 'base64'
 require 'nokogiri'
 
 module AWS
@@ -925,8 +926,19 @@ module AWS
             exp_rule_id = nil
           end
 
+          if restore = resp.http_response.headers['x-amz-restore']
+            restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
+            restoring = $1 == "true"
+            restore_date = DateTime.parse($2)
+          else
+            restoring = false
+            restore_date = nil
+          end
+
           resp.data[:expiration_date] = exp_date
           resp.data[:expiration_rule_id] = exp_rule_id
+          resp.data[:restore_in_progress] = restoring
+          resp.data[:restore_expiration_date] = restore_date
 
           {
             'x-amz-version-id' => :version_id,
@@ -969,6 +981,37 @@ module AWS
         end
 
       end
+
+      # @overload restore_object(options = {})
+      #   Restores a temporary copy of an archived object.
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [required,String] :key
+      #   @option options [required,Integer] :days the number of days to keep
+      #     the restored object.
+      #   @return [Core::Response]
+      # @since 1.7.2
+      object_method(:restore_object, :post, 'restore',
+          :header_options => { :content_md5 => 'Content-MD5' }) do
+        configure_request do |req, options|
+          super(req, options)
+
+          validate!(:days, options[:days]) do
+            "must be greater or equal to 1" if options[:days].to_i <= 0
+          end
+
+          xml = Nokogiri::XML::Builder.new do |xml|
+            xml.RestoreRequest('xmlns' => XMLNS) do
+              xml.Days(options[:days].to_i) if options[:days]
+            end
+          end.doc.root.to_xml
+
+          req.body = xml
+          req.headers['content-type'] = 'application/xml'
+          req.headers['content-md5'] = md5(xml)
+        end
+      end
+
 
       # @overload list_objects(options = {})
       #   @param [Hash] options

@@ -35,7 +35,7 @@ module AWS
       # The default number of seconds to pass in as the SQS long polling
       # value (+:wait_time_seconds+) in {#receive_message}.
       #
-      # @since 1.7.2
+      # @since 1.8.0
       DEFAULT_WAIT_TIME_SECONDS = 15
 
       include Core::Model
@@ -393,7 +393,7 @@ module AWS
 
       # @return [Integer] Gets the number of seconds the service will wait
       #   for a response when requesting a new message
-      # @since 1.7.2
+      # @since 1.8.0
       def wait_time_seconds
         get_attribute("ReceiveMessageWaitTimeSeconds").to_i
       end
@@ -401,7 +401,7 @@ module AWS
       # Sets the number of seconds that the service should wait for a response
       # when requesting a new message
       # @param [Integer] seconds How many seconds to wait for a response
-      # @since 1.7.2
+      # @since 1.8.0
       def wait_time_seconds= seconds
         set_attribute("ReceiveMessageWaitTimeSeconds", seconds.to_s)
       end
