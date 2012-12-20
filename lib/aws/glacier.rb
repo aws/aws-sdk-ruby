@@ -31,5 +31,20 @@ module AWS
 
     include Core::ServiceInterface
 
+    # @option options[String] :account_id ('-')
+    def intialize options = {}
+      @account_id = options[:account_id] || '-'
+      super
+    end
+
+    # @return [String]
+    attr_accessor :account_id
+
+    # @return [VaultCollection] Returns a collection for working with
+    #   vaults that belong to this account.
+    def vaults
+      VaultCollection.new(:config => config, :account_id => account_id)
+    end
+
   end
 end
