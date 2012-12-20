@@ -23,11 +23,11 @@ module AWS
       # are validated before returning JSON.
       class JSONSerializer
 
-        # @param [String] namespace
-        # @param [String] operation_name
         # @param [Hash] rules A hash of option rules to validate against.
-        def initialize rules
-          @rules = rules
+        # @param [String,nil] payload_param
+        def initialize rules, payload_param
+          @payload_param = payload_param
+          @rules = @payload_param ? rules[@payload_param][:members] : rules
         end
 
         # @return [String] Returns the name of the API operation.
@@ -45,6 +45,7 @@ module AWS
         #   @return [String] Returns an string of the request parameters
         #     serialized into XML.
         def serialize request_options
+          request_options = request_options[@payload_param] if @payload_param
           data = normalize_keys(request_options, rules)
           if rules.any?{|k,v| v[:location] == 'body' }
             data = data.values.first

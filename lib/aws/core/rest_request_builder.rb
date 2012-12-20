@@ -33,7 +33,7 @@ module AWS
             name = operation[:name]
             Options::XMLSerializer.new(namespace, name, @rules)
           when :json
-            Options::JSONSerializer.new(@rules)
+            Options::JSONSerializer.new(@rules, @http[:request_payload])
           else
             raise ArgumentError, "unhandled format: #{options[:format]}"
           end
