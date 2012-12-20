@@ -90,6 +90,7 @@ module AWS
       autoload :Data,                      'data'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
+      autoload :JSONParser,                'json_parser'
 
       autoload :JSONClient,                'json_client'
       autoload :JSONRequestBuilder,        'json_request_builder'
@@ -113,7 +114,8 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
 
-      autoload :RESTClient,                'rest_client'
+      autoload :RESTJSONClient,            'rest_json_client'
+      autoload :RESTXMLClient,             'rest_xml_client'
       autoload :RESTRequestBuilder,        'rest_request_builder'
       autoload :RESTResponseParser,        'rest_response_parser'
 
@@ -125,6 +127,7 @@ module AWS
 
     module Options
       AWS.register_autoloads(self) do
+        autoload :JSONSerializer, 'json_serializer'
         autoload :XMLSerializer, 'xml_serializer'
         autoload :Validator, 'validator'
       end
