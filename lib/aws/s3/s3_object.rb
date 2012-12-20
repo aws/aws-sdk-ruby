@@ -787,11 +787,11 @@ module AWS
       # @return [nil]
       def copy_from source, options = {}
 
-        copy_opts = { :bucket_name => bucket.name, :key => key }
+        copy_opts = { :bucket_name => bucket.name, :key => key.gsub(%r{^/}, '') }
 
         copy_opts[:copy_source] = case source
         when S3Object
-          "#{source.bucket.name}/#{source.key}"
+          "#{source.bucket.name}/#{source.key.gsub(%r{^/},'')}"
         when ObjectVersion
           copy_opts[:version_id] = source.version_id
           "#{source.object.bucket.name}/#{source.object.key}"
