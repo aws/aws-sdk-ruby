@@ -13,7 +13,7 @@
 
 module AWS
   class CloudFront
-    class Client < Core::RESTClient
+    class Client < Core::RESTXMLClient
 
       define_client_methods('2012-05-05')
 

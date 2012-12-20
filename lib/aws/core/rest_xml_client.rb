@@ -13,6 +13,7 @@
 
 module AWS
   module Core
+    # @since 1.8.0
     class RESTXMLClient < Core::Client
 
       protected
@@ -39,5 +40,8 @@ module AWS
       end
 
     end
+
+    # @deprecated Use RESTXMLClient instead.
+    RESTClient = RESTXMLClient
   end
 end

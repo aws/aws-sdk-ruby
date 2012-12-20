@@ -15,7 +15,7 @@ module AWS
   class Route53
 
     # Client class for Route53.
-    class Client < Core::RESTClient
+    class Client < Core::RESTXMLClient
 
       define_client_methods('2012-02-29')
 

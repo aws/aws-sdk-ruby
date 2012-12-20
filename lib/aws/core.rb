@@ -116,6 +116,7 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
 
+      autoload :RESTClient,                'rest_xml_client'
       autoload :RESTJSONClient,            'rest_json_client'
       autoload :RESTXMLClient,             'rest_xml_client'
       autoload :RESTRequestBuilder,        'rest_request_builder'
