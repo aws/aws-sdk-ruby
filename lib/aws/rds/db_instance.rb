@@ -45,6 +45,8 @@ module AWS
     #
     # @attr_reader [Boolean] multi_az
     #
+    # @attr_reader [Integer] iops
+    #
     # @attr_reader [String] engine_version
     #
     # @attr_reader [Boolean] auto_minor_version_upgrade
@@ -115,6 +117,8 @@ module AWS
       attribute :master_username, :static => true
 
       attribute :multi_az, :static => true, :alias => :multi_az?
+
+      attribute :iops, :static => true
 
       attribute :preferred_backup_window, :static => true
 
