@@ -45,6 +45,7 @@ module AWS
     autoload :CloudFront, 'cloud_front'
     autoload :CloudSearch, 'cloud_search'
     autoload :CloudWatch, 'cloud_watch'
+    autoload :DataPipeline, 'data_pipeline'
     autoload :DynamoDB, 'dynamo_db'
     autoload :EC2, 'ec2'
     autoload :ElastiCache, 'elasticache'
