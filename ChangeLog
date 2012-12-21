@@ -1,3 +1,341 @@
+2012-12-20 Loren Segal <lsegal@amazon.com>
+
+  * lib/aws-sdk.rb: Add missing require call to aws-sdk.rb
+
+  * lib/aws/api_config/Glacier-2012-06-01.yml: Update attributions for Amazon
+  Glacier
+
+  * lib/aws.rb: Add missing newline to aws.rb
+
+  * lib/aws-sdk.rb, lib/aws.rb: Flip aws.rb and aws-sdk.rb
+
+  Makes it possible to workaround #37 by adding `-raws` to the Ruby
+  process, ie.,
+
+    ruby -raws <file.rb>
+
+  or,
+
+    bundle exec ruby -raws <file.rb>
+
+  * Rakefile, tasks/cucumber.rake, tasks/docs.rake, tasks/rspec.rake,
+  tasks/rvm_tester.rake: Update Rakefile and tasks
+
+  * lib/aws/core/options/validator.rb, lib/aws/core/rest_request_builder.rb,
+  spec/aws/core/rest_request_builder_spec.rb,
+  spec/aws/route_53/client_spec.rb,
+  spec/shared/signature/version_4_examples.rb: Resolved some broken specs from
+  recently merged branches.
+
+  * lib/aws/cloud_front/client.rb, lib/aws/core.rb,
+  lib/aws/core/rest_xml_client.rb, lib/aws/route_53/client.rb: Re-add
+  deprecated RESTClient constant, update references
+
+  * lib/aws/sqs/queue.rb: Update @since tags on new methods
+
+  * lib/aws/core.rb, lib/aws/core/client.rb, lib/aws/core/managed_file.rb,
+  lib/aws/s3/data_options.rb: Fixed a bug where files opened by the S3 and
+  Glacier clients where not getting closed.
+
+  * README.rdoc, features/support/common.rb,
+  recipebook/config/initializers/aws.rb, spec/spec_helper.rb: Require
+  'aws-sdk' instead of 'aws'
+
+  References #37
+
+  * lib/aws/glacier.rb, lib/aws/glacier/archive.rb,
+  lib/aws/glacier/archive_collection.rb, lib/aws/glacier/resource.rb,
+  lib/aws/glacier/vault.rb, lib/aws/glacier/vault_collection.rb,
+  lib/aws/glacier/vault_notification_configuration.rb: Added a few higher
+  level abstractions to AWS::Glacier.
+
+  * lib/aws/core/options/json_serializer.rb,
+  lib/aws/core/rest_request_builder.rb: Updated the JSON serializer to work
+  with request payload rules.
+
+  * lib/aws.rb, lib/aws/api_config/Glacier-2012-06-01.yml, lib/aws/core.rb,
+  lib/aws/core/configuration.rb, lib/aws/glacier.rb,
+  lib/aws/glacier/client.rb, lib/aws/glacier/config.rb,
+  lib/aws/glacier/errors.rb, lib/aws/glacier/request.rb: Added Glacier client
+  and api configuration.
+
+  * lib/aws/core/options/validator.rb: Added a blob handler to the request
+  option validator.
+
+  * lib/aws/core/signature/version_4.rb: Improved sigv4 implementation,
+  possible fewer checksums calculated.
+
+  This is especially important for glacier support where the sigv4
+  body checksum is the same as the content sha256 hash header required
+  for streaming uploads.
+
+  * lib/aws/core.rb, lib/aws/core/json_parser.rb,
+  lib/aws/core/options/json_serializer.rb, lib/aws/core/rest_client.rb,
+  lib/aws/core/rest_json_client.rb, lib/aws/core/rest_request_builder.rb,
+  lib/aws/core/rest_response_parser.rb, lib/aws/core/rest_xml_client.rb: Split
+  Core::RESTClient and associated classes into RESTJSONClient and
+  RESTXMLClient.
+
+2012-12-18 Loren Segal <lsegal@amazon.com>
+
+  * lib/aws/s3/bucket_lifecycle_configuration.rb: More example updates in
+  BucketLifecycleConfiguration docs
+
+  * lib/aws/s3/bucket_lifecycle_configuration.rb: Update documentation for
+  BucketLifecycleConfiguration and Rule
+
+2012-12-14 Loren Segal <lsegal@amazon.com>
+
+  * features/s3/high_level/lifecycle_configuration.feature,
+  features/s3/high_level/step_definitions/lifecycle_configuration.rb,
+  lib/aws/s3/bucket_lifecycle_configuration.rb,
+  spec/aws/s3/bucket_lifecycle_configuration_spec.rb: Fix lifecycle
+  configuration Date support in 1.8.x
+
+  Also ensures that date values are always expressed at midnight GMT,
+  as per the lifecycle configuration specification.
+
+  * features/s3/high_level/objects.feature,
+  features/s3/high_level/step_definitions/objects.rb, lib/aws/s3/client.rb,
+  lib/aws/s3/request.rb, lib/aws/s3/s3_object.rb, spec/aws/s3/client_spec.rb,
+  spec/aws/s3/s3_object_spec.rb: Implement S3 restore operation
+
+  * Adds S3::Client#restore_object to send restore operation
+  * Modifies S3::Client#head_object to support x-amz-restore response header
+  * Adds S3Object#restore for high level client
+  * Adds S3Object#restore_in_progress? to report on status of restore
+  operation
+  * Adds S3Object#restore_expiration_date to report on expiration date of
+    the restored object
+  * Adds S3Object#restored_object? to return whether the object is a restored
+    object.
+
+  * features/s3/high_level/lifecycle_configuration.feature,
+  features/s3/high_level/step_definitions/lifecycle_configuration.rb,
+  lib/aws/s3/bucket_lifecycle_configuration.rb, lib/aws/s3/client/xml.rb,
+  spec/aws/s3/bucket_lifecycle_configuration_spec.rb,
+  spec/aws/s3/bucket_spec.rb: Add Transition and Date support to lifecycle
+  rules
+
+  * lib/aws/core/options/xml_serializer.rb,
+  spec/aws/core/options/xml_serializer_spec.rb: Added missing spec file
+  changes from previous commit.
+
+  * features/cloud_front/client.feature,
+  features/cloud_front/step_definitions/client.rb,
+  lib/aws/api_config/CloudFront-2012-05-05.yml,
+  lib/aws/core/options/xml_serializer.rb,
+  lib/aws/core/rest_request_builder.rb: Resolved an issue with AWS::CloudFront
+  where request payload rules were ignored when serializing requests.
+
+  * lib/aws/api_config/EC2-2012-07-20.yml: Resolved in issue where
+  AWS::EC2::SecurityGroup::IpPermission would incorrectly return :1 as the
+  value for protocol instead of :any.
+
+  * lib/aws/ec2/security_group.rb: Fixed an issue where revoking an ip
+  permission would fail when protocol is :any.
+
+  * lib/aws/ec2/security_group.rb,
+  lib/aws/ec2/security_group/egress_ip_permission_collection.rb,
+  lib/aws/ec2/security_group/ingress_ip_permission_collection.rb,
+  lib/aws/ec2/security_group/ip_permission_collection.rb: DRY'd up EC2 ingress
+  and egress ip permission collections.
+
+2012-12-19 Loren Segal <lsegal@amazon.com>
+
+  * features/data_pipeline/pipelines.feature,
+  features/data_pipeline/step_definitions/data_pipeline.rb,
+  features/data_pipeline/step_definitions/pipelines.rb: Add integration tests
+  for DataPipeline service
+
+  * lib/aws/api_config/DataPipeline-2012-10-29.yml,
+  lib/aws/data_pipeline/client.rb: Update DataPipeline model and client
+
+2012-12-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws.rb: Added autoloading hooks for DataPipeline.
+
+  * lib/aws/api_config/DataPipeline-2012-10-29.yml, lib/aws/data_pipeline.rb,
+  lib/aws/data_pipeline/client.rb, lib/aws/data_pipeline/config.rb,
+  lib/aws/data_pipeline/errors.rb, lib/aws/data_pipeline/request.rb: Added
+  bootstraping classes for DataPipeline.
+
+  * lib/aws/core/data.rb, spec/aws/core/data_spec.rb: Fixed a bug in
+  AWS::Core::Data and AWS::Core::Data::list #dup behavior.
+
+  * lib/aws/core/data.rb: Removed trailing whitespace.
+
+  * lib/aws/ec2/instance_collection.rb,
+  spec/aws/ec2/instance_collection_spec.rb: AWS::EC2::Instances#create now
+  returns a vanilla Array when running multiple instances.
+
+  * features/import_export/client.feature,
+  features/import_export/step_definitions/client.rb,
+  features/import_export/step_definitions/import_export.rb: Added basic
+  integration test for AWS::ImportExport.
+
+  * lib/aws/api_config/ImportExport-2010-06-01.yml,
+  lib/aws/import_export/client.rb: Added API configuration and documentation
+  for AWS::ImportExport.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb: Documented configuration
+  options for AWS::ImportExport.
+
+  * lib/aws.rb, lib/aws/import_export.rb, lib/aws/import_export/client.rb,
+  lib/aws/import_export/config.rb, lib/aws/import_export/errors.rb,
+  lib/aws/import_export/request.rb: Added bootstrap classes for AWS
+  Import/Export.
+
+  * features/cloud_front/client.feature,
+  features/cloud_front/step_definitions/client.rb,
+  features/cloud_front/step_definitions/cloud_front.rb: Added basic
+  integration test for AWS::CloudFront (listing distributions)
+
+  * lib/aws/api_config/CloudFront-2012-05-05.yml,
+  lib/aws/cloud_front/client.rb: Updated AWS::CloudFront api configuration,
+  removed wrapping elements from responses.
+
+  * lib/aws/cloud_front/config.rb, lib/aws/core.rb,
+  lib/aws/core/configuration.rb: Added AWS::CloudFront configuration options.
+
+  * lib/aws/cloud_front/request.rb: Added require time to CloudFront::Request,
+  as it needs Time#rfc822.
+
+  * lib/aws.rb: Added autoloading hooks for AWS::CloudFront.
+
+  * lib/aws/cloud_front/error.rb, lib/aws/cloud_front/errors.rb: Moved
+  CloudFront::Error source file to fix autoloading.
+
+  * lib/aws/cloud_front/client.rb: Added documentation for client methods.
+
+  * lib/aws/cloud_front.rb: Updated CloudFront example snippet.
+
+  * lib/aws/cloud_front.rb, lib/aws/cloud_front/client.rb,
+  lib/aws/cloud_front/error.rb, lib/aws/cloud_front/request.rb: Added
+  bootstrap classes for Amazon CloudFront support.
+
+2012-12-15 sanemat <o.gata.ken@gmail.com>
+
+  * lib/aws/core/collection.rb: Use Object#to_enum instead of Enumerator.new
+  without a block
+
+  Fix warning
+  warning: Enumerator.new without a block is deprecated; use Object#to_enum
+
+2012-12-13 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/storage_gateway/client.feature,
+  features/storage_gateway/step_definitions/client.rb: DRY'd up a feature for
+  storage gateway, now testing error case using a shared step definition.
+
+  * features/cloud_front/client.feature,
+  features/cloud_front/step_definitions/client.rb,
+  features/import_export/client.feature,
+  features/import_export/step_definitions/client.rb,
+  features/step_definitions.rb: Added integration tests to test error parsing.
+
+  * lib/aws/storage_gateway.rb: Corrected a sample given in the documentation
+  for AWS::StorageGateway.
+
+  * features/storage_gateway/client.feature,
+  features/storage_gateway/step_definitions/client.rb,
+  features/storage_gateway/step_definitions/storage_gateway.rb: Added a few
+  integration tests for storage gateway.
+
+  * lib/aws/api_config/StorageGateway-2012-06-30.yml: Added api configuration
+  for storage gateway.
+
+  * lib/aws/core/json_client.rb, lib/aws/core/json_request_builder.rb,
+  lib/aws/core/json_response_parser.rb: Updated JSON client classes to work
+  with json v1.1 protocol.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb: Documented storage gateway
+  configuration options.
+
+  * lib/aws/storage_gateway/client.rb: Documented client API operations for
+  AWS::StorageGateway.
+
+  * lib/aws.rb, lib/aws/storage_gateway.rb, lib/aws/storage_gateway/client.rb,
+  lib/aws/storage_gateway/config.rb, lib/aws/storage_gateway/errors.rb,
+  lib/aws/storage_gateway/request.rb: Added bootstrap classes for AWS
+  StorageGateway.
+
+2012-12-11 Loren Segal <lsegal@amazon.com>
+
+  * features/sqs/messages.feature, features/sqs/queues.feature,
+  features/sqs/step_definitions/messages.rb, lib/aws/sqs/queue.rb,
+  spec/aws/sqs/queue_spec.rb: Implement SQS long polling
+
+  Changes within AWS::SQS:
+
+  * Queue#poll now accept a :wait_time_seconds parameter which sets the
+    maximum amount of time that SQS should long poll for.
+    Defaults to 15 seconds. To use the default set for all messages
+    on the queue, pass in nil.
+  * The :wait_time_seconds default does not apply to
+    Queue#receive_message. For this method, you must pass the option
+    directly, or set the global Queue#wait_time_seconds long polling
+    value.
+  * Added Queue#wait_time_seconds attribute to set the queue-wide
+    long poll timeout value. This setting applies to all calls to
+    Queue#receive_message or Queue#poll
+  * Deprecates the Queue::DEFAULT_POLL_INTERVAL constant
+  * Queue#poll no longer uses :poll_interval; use :wait_time_seconds
+    instead.
+
+2012-12-10 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/s3_object.rb, spec/aws/s3/s3_object_spec.rb: S3Object#url_for
+  now accepts objects that respond to #to_int as the :expires option.
+
+  * lib/aws/sqs/client.rb: Update Amazon SQS client documentation
+
+  * lib/aws/api_config/SQS-2011-10-01.yml,
+  lib/aws/api_config/SQS-2012-11-05.yml, lib/aws/sqs/client.rb: Update Amazon
+  SQS api_version and client methods
+
+  * lib/aws/api_config/SQS-2011-10-01.yml: Update SQS with WaitTimeSeconds
+  input
+
+  * lib/aws/s3/bucket_lifecycle_configuration.rb: Resolved an issue where
+  AWS::S3::BucketLifecycleConfiguration::Rule documentation was not getting
+  generated (was behind private).
+
+2012-12-08 Sean Laurent <organicveggie@gmail.com>
+
+  * lib/aws/ec2/instance_collection.rb: Added documentation to
+  AWS::EC2::InstanceCollection.create() to describe support for launching
+  ebs_optimized instances.
+
+2012-12-06 Loren Segal <lsegal@amazon.com>
+
+  * features/dynamo_db/crc32.feature,
+  features/dynamo_db/step_definitions/crc32.rb,
+  features/dynamo_db/step_definitions/items.rb: Add DynamoDB CRC steps for
+  manipulating large items (gzip validation)
+
+  * features/support/common.rb: Allow loading test credentials from
+  environment
+
+2012-11-29 Loren Segal <lsegal@amazon.com>
+
+  * lib/aws/s3/cors_rule_collection.rb: Fix doc for incorrectly named param
+  tag
+
+2012-11-15 Loren Segal <lsegal@amazon.com>
+
+  * README.rdoc: Update getting started with samples command
+
+  References #85
+
+  * README.rdoc: Update README to point to new GitHub repository
+
+  Fixes #85
+
+2012-11-07 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.7.1
+
 2012-11-06 Trevor Rowe <trevorrowe@gmail.com>
 
   * lib/aws/core/signature/version_3_https.rb: Added x-amz-security-token
