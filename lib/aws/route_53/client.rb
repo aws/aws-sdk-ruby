@@ -17,12 +17,10 @@ module AWS
     # Client class for Route53.
     class Client < Core::RESTXMLClient
 
-      define_client_methods('2012-02-29')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method change_resource_record_sets(options = {})
       # Calls the POST ChangeResourceRecordSets API operation.
@@ -257,7 +255,9 @@ module AWS
       #   * +:next_record_identifier+ - (String)
       #   * +:max_items+ - (Integer)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-02-29')
 
     end
   end

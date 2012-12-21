@@ -17,12 +17,10 @@ module AWS
     # Client class for AWS Import/Export.
     class Client < Core::QueryClient
 
-      define_client_methods('2010-06-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method cancel_job(options = {})
       # Calls the CancelJob API operation.
@@ -102,7 +100,9 @@ module AWS
       #   * +:success+ - (Boolean)
       #   * +:warning_message+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-06-01')
 
     end
   end

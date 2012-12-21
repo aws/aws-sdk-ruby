@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon Simple Workflow Service (SWF).
     class Client < Core::JSONClient
 
-      define_client_methods('2012-01-25')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :count_pending_activity_tasks,
@@ -38,7 +36,7 @@ module AWS
         :list_workfow_types,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method count_closed_workflow_executions(options = {})
       # Calls the CountClosedWorkflowExecutions API operation.
@@ -1187,7 +1185,9 @@ module AWS
       #   * +:child_policy+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-01-25')
 
       protected
 

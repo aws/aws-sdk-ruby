@@ -17,12 +17,10 @@ module AWS
     # Client class for Amazon DynamoDB.
     class Client < Core::JSONClient
 
-      define_client_methods('2012-10-29')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method activate_pipeline(options = {})
       # Calls the ActivatePipeline API operation.
@@ -385,7 +383,9 @@ module AWS
       #     * +errors+ - (Array<String>)
       #   * +errored+ - (Boolean)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-10-29')
 
     end
   end

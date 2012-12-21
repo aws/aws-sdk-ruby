@@ -17,8 +17,6 @@ module AWS
     # Client class for Auto Scaling.
     class Client < Core::QueryClient
 
-      define_client_methods('2011-01-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -35,7 +33,7 @@ module AWS
         :describe_tags,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method create_auto_scaling_group(options = {})
       # Calls the CreateAutoScalingGroup API operation.
@@ -501,7 +499,9 @@ module AWS
       #   * +:vpc_zone_identifier+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2011-01-01')
 
     end
   end

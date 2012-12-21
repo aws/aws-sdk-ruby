@@ -17,12 +17,10 @@ module AWS
     # Client class for AWS Storage Gateway.
     class Client < Core::JSONClient
 
-      define_client_methods('2012-06-30')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method activate_gateway(options = {})
       # Calls the ActivateGateway API operation.
@@ -465,7 +463,9 @@ module AWS
       #   a hash with the following structure:
       #   * +VolumeARN+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-06-30')
 
     end
   end

@@ -17,12 +17,10 @@ module AWS
     # Client class for Amazon Simple Notifications Service (SNS).
     class Client < Core::QueryClient
 
-      define_client_methods('2010-03-31')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
@@ -259,7 +257,9 @@ module AWS
       #     subscription to be deleted.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-03-31')
 
     end
   end

@@ -17,12 +17,10 @@ module AWS
     # Client class for Amazon Simple Queue Service (SQS).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-11-05')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
@@ -251,7 +249,9 @@ module AWS
       #     attributes to set.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-11-05')
 
     end
   end

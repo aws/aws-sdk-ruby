@@ -17,12 +17,10 @@ module AWS
     # Client class for Elastic Load Balancing (ELB).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-06-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method apply_security_groups_to_load_balancer(options = {})
       # Calls the ApplySecurityGroupsToLoadBalancer API operation.
@@ -493,7 +491,9 @@ module AWS
       #     removed from the listener.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-06-01')
 
     end
   end

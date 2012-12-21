@@ -20,7 +20,7 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method authorize_db_security_group_ingress(options = {})
       # Calls the AuthorizeDBSecurityGroupIngress API operation.
@@ -1583,7 +1583,7 @@ module AWS
       #     * +:status+ - (String)
       #     * +:cidrip+ - (String)
 
-      ## end client methods ##
+      # end client methods #
 
       define_client_methods('2012-07-31')
 

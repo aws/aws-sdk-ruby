@@ -17,8 +17,6 @@ module AWS
     # Client class for AWS Security Token Service (STS).
     class Client < Core::QueryClient
 
-      define_client_methods('2011-06-15')
-
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @private
@@ -33,7 +31,7 @@ module AWS
         end
       end
 
-      ## client methods ##
+      # client methods #
 
       # @!method get_federation_token(options = {})
       # Calls the GetFederationToken API operation.
@@ -99,7 +97,9 @@ module AWS
       #     * +:session_token+ - (String)
       #     * +:expiration+ - (Time)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2011-06-15')
 
     end
   end

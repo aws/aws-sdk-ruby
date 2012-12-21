@@ -17,8 +17,6 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      define_client_methods('2012-07-20')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
@@ -58,7 +56,7 @@ module AWS
         :describe_network_interface_attribute,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method activate_license(options = {})
       # Calls the ActivateLicense API operation.
@@ -3529,7 +3527,9 @@ module AWS
       #     * +:monitoring+ - (Hash)
       #       * +:state+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-07-20')
 
     end
   end

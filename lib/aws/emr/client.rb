@@ -17,12 +17,10 @@ module AWS
     # Client class for Elastic MapReduce (EMR).
     class Client < Core::QueryClient
 
-      define_client_methods('2009-03-31')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method add_instance_groups(options = {})
       # Calls the AddInstanceGroups API operation.
@@ -319,7 +317,9 @@ module AWS
       #     to be shutdown.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2009-03-31')
 
     end
   end

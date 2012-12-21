@@ -15,12 +15,10 @@ module AWS
   class CloudFront
     class Client < Core::RESTXMLClient
 
-      define_client_methods('2012-05-05')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method create_cloud_front_origin_access_identity(options = {})
       # Calls the POST CreateCloudFrontOriginAccessIdentity2012_05_05 API operation.
@@ -1300,7 +1298,9 @@ module AWS
       #       * +:items+ - (Array<String>)
       #     * +:enabled+ - (Boolean)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-05-05')
 
     end
   end

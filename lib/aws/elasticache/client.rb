@@ -17,12 +17,10 @@ module AWS
     # Client class for Amazon ElastiCache.
     class Client < Core::QueryClient
 
-      define_client_methods('2012-03-09')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method authorize_cache_security_group_ingress(options = {})
       # Calls the AuthorizeCacheSecurityGroupIngress API operation.
@@ -750,8 +748,9 @@ module AWS
       #     * +:ec2_security_group_name+ - (String)
       #     * +:ec2_security_group_owner_id+ - (String)
 
-      ## end client methods ##
-      ## end clienet methods ##
+      # end client methods #
+
+      define_client_methods('2012-03-09')
 
     end
   end

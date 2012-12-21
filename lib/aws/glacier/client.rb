@@ -23,12 +23,10 @@ module AWS
     #
     class Client < Core::RESTJSONClient
 
-      define_client_methods('2012-06-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method abort_multipart_upload(options = {})
       # Calls the DELETE AbortMultipartUpload API operation.
@@ -279,7 +277,9 @@ module AWS
       # * +:content_sha256+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-06-01')
 
     end
   end

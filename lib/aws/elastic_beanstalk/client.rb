@@ -17,12 +17,10 @@ module AWS
     # Client class for AWS Elastic Beanstalk.
     class Client < Core::QueryClient
 
-      define_client_methods('2010-12-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method check_dns_availability(options = {})
       # Calls the CheckDNSAvailability API operation.
@@ -860,7 +858,9 @@ module AWS
       #     * +:namespace+ - (String)
       #     * +:option_name+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-12-01')
 
     end
   end

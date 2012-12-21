@@ -17,8 +17,6 @@ module AWS
     # Client class for Cloud Watch
     class Client < Core::QueryClient
 
-      define_client_methods('2010-08-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :describe_alarm_history,
@@ -27,7 +25,7 @@ module AWS
         :list_metrics,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method delete_alarms(options = {})
       # Calls the DeleteAlarms API operation.
@@ -240,7 +238,9 @@ module AWS
       #   * +:state_reason_data+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-08-01')
 
     end
   end

@@ -17,12 +17,10 @@ module AWS
     # Client class for Amazon Cloud Search.
     class Client < Core::QueryClient
 
-      define_client_methods('2011-02-01')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method create_domain(options = {})
       # Calls the CreateDomain API operation.
@@ -551,7 +549,9 @@ module AWS
       #       * +:update_version+ - (Integer)
       #       * +:state+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2011-02-01')
 
     end
   end
