@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'rvm-tester'
+
 RVM::Tester::TesterTask.new do |t|
   t.bundle_install = false # don't need to do this all the time
   t.rubies = %w(1.8.7 ree 1.9.3 1.9.2 jruby)

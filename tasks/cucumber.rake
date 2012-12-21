@@ -11,6 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "features --format pretty --tags ~@wip"
+desc 'Run Cucumber features'
+task :features do
+  cmd = "cucumber features --format pretty --tags ~@wip"
+  system(cmd)
+  raise "Command failed with status (#{$?.to_i}): #{cmd}" if $?.to_i != 0
 end
