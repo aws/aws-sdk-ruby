@@ -16,6 +16,47 @@ require 'aws/data_pipeline/config'
 
 module AWS
 
+  # This class is the starting point for working with AWS Data Pipeline.
+  #
+  # To use AWS Data Pipeline you must first
+  # {sign up here}[http://aws.amazon.com/datapipeline/].
+  #
+  # For more information about AWS Data Pipeline:
+  #
+  # * {AWS Data Pipeline}[http://aws.amazon.com/datapipeline/]
+  # * {AWS Data Pipeline Documentation}[http://aws.amazon.com/documentation/datapipeline/]
+  #
+  # = Credentials
+  #
+  # You can setup default credentials for all AWS services via
+  # AWS.config:
+  #
+  #   AWS.config(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
+  # Or you can set them directly on the AWS::DataPipeline interface:
+  #
+  #   datapipeline = AWS::DataPipeline.new(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
+  # = Using the Client
+  #
+  # AWS::DataPipeline does not provide higher level abstractions for AWS Data Pipeline
+  # this time.  You can still access all of the API methods using
+  # {AWS::DataPipeline::Client}.  Here is how you access the client and make
+  # a simple request:
+  #
+  #   data_pipeline = AWS::DataPipeline.new
+  #
+  #   resp = data_pipeline.client.describe_pipelines
+  #   resp[:pipeline_description_list].each do |pipeline|
+  #     puts pipeline[:pipeline_id]
+  #   end
+  #
+  # See {Client} for documentation on all of the supported operations.
+  #
   class DataPipeline
 
     AWS.register_autoloads(self, 'aws/data_pipeline') do

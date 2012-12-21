@@ -14,7 +14,7 @@
 module AWS
   class DataPipeline
 
-    # Client class for Amazon DynamoDB.
+    # Client class for AWS Data Pipeline.
     class Client < Core::JSONClient
 
       # @private
