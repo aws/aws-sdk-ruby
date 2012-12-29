@@ -714,6 +714,8 @@ module AWS
         # @return [Array] Returns an array of conditions for this policy.
         attr_accessor :conditions
 
+        attr_accessor :excluded_resources
+
         # Constructs a new statement.
         #
         # @option opts [String] :sid The statement ID.  This is optional; if
@@ -832,6 +834,10 @@ module AWS
         protected
         def parse_resource_option(value)
           coerce_array_option(:resources, value)
+        end
+
+        def parse_excluded_resource_option(value)
+          coerce_array_option(:excluded_resources, value)
         end
 
         protected
