@@ -784,6 +784,8 @@ module AWS
           }
           stmt.delete("Condition") if !conditions || conditions.to_h.empty?
           stmt.delete("Principal") unless principals_hash
+          stmt.delete("Resource") unless resource_arns
+          stmt.delete("NotResource") unless excluded_resource_arns
           if !translated_actions || translated_actions.empty?
             stmt["NotAction"] = translated_excluded_actions
           else
