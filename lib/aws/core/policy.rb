@@ -925,7 +925,7 @@ module AWS
           excluded_resources.map do |excluded_resource|
             case excluded_resource
             when :any    then "*"
-            else excluded_resource_arn(resource)
+            else excluded_resource_arn(excluded_resource)
             end
           end
         end
