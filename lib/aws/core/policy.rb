@@ -837,7 +837,7 @@ module AWS
           coerce_array_option(:resources, value)
         end
 
-        def parse_excluded_resource_option(value)
+        def parse_not_resource_option(value)
           coerce_array_option(:excluded_resources, value)
         end
         alias_method :parse_excluded_resource_option, :parse_not_resource_option
