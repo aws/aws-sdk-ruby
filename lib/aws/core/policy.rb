@@ -778,7 +778,8 @@ module AWS
             "Sid" => sid,
             "Effect" => Inflection.class_name(effect.to_s),
             "Principal" => principals_hash,
-            "Resource" => resource_arns,
+            "Resource" => (resource_arns if resource_arns),
+            "NotResource" => (excluded_resource_arns if excluded_resource_arns),
             "Condition" => (conditions.to_h if conditions)
           }
           stmt.delete("Condition") if !conditions || conditions.to_h.empty?
@@ -839,6 +840,7 @@ module AWS
         def parse_excluded_resource_option(value)
           coerce_array_option(:excluded_resources, value)
         end
+        alias_method :parse_excluded_resource_option, :parse_not_resource_option
 
         protected
         def parse_condition_option(value)
@@ -913,6 +915,22 @@ module AWS
         protected
         def resource_arn resource
           resource.to_s
+        end
+
+        protected
+        def excluded_resource_arns
+          return nil unless excluded_resources
+          excluded_resources.map do |excluded_resource|
+            case excluded_resource
+            when :any    then "*"
+            else excluded_resource_arn(resource)
+            end
+          end
+        end
+
+        protected
+        def excluded_resource_arn excluded_resource
+          excluded_resource.to_s
         end
 
       end
