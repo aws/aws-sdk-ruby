@@ -98,7 +98,7 @@ module AWS
   #   end
   #
   #   # enumerate at most 20 objects with the given prefix
-  #   bucket.objects.with_prefix('photos/').each(:limit => 20).each do |photo|
+  #   bucket.objects.with_prefix('photos/').each(:limit => 20) do |photo|
   #     puts photo.key
   #   end
   #
