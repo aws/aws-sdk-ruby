@@ -140,7 +140,7 @@ module AWS
         if block_given?
           _each_object(&block)
         else
-          Enumerator.new(self, :"_each_object")
+          to_enum(:"_each_object")
         end
       end
 
