@@ -5,6 +5,7 @@
 /coverage
 /pkg
 /vendor
+/samples/config.yml
 *.gem
 
 # credentials for testing features against live services
