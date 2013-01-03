@@ -320,7 +320,7 @@ module AWS
             :secret_access_key => 'secret-1',
             :session_token => 'token-1',
           }
-          provider.credentials_expiration = Time.now
+          provider.credentials_expiration = Time.now - 5 * 60
           provider.credentials.should == {
             :access_key_id => 'akid-2',
             :secret_access_key => 'secret-2',

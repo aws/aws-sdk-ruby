@@ -256,7 +256,7 @@ module AWS
         # @return [Time,nil]
         attr_accessor :credentials_expiration
 
-        # Refresh provider if existing credentials is expired
+        # Refresh provider if existing credentials will be expired in 5 min
         # @return [Hash] Returns a hash of credentials containg at least
         #   the +:access_key_id+ and +:secret_access_key+.  The hash may
         #   also contain a +:session_token+.
@@ -265,7 +265,7 @@ module AWS
         #   +:access_key_id+ or the +:secret_access_key+ can not be found.
         #
         def credentials
-          if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc
+          if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc - 5 * 60
             refresh
           end
           super
