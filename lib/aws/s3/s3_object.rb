@@ -855,20 +855,18 @@ module AWS
             end
           end
 
-        # copies client-side encryption materials (from the metadata or
-        # instruction file)
-        if options.delete(:client_side_encrypted)
-          metadata = options[:metadata] || {}
-          metadata.merge!(copy_cse_materials(source, options))
-          options[:metadata] = metadata unless metadata.empty?
-        end
-
         if [:metadata, :content_disposition, :content_type, :cache_control,
           ].any? {|opt| options.key?(opt) }
         then
           options[:metadata_directive] = 'REPLACE'
         else
           options[:metadata_directive] ||= 'COPY'
+        end
+
+        # copies client-side encryption materials (from the metadata or
+        # instruction file)
+        if options.delete(:client_side_encrypted)
+          copy_cse_materials(source, options)
         end
 
         add_sse_options(options)
@@ -1590,16 +1588,19 @@ module AWS
           meta['x-amz-unencrypted-content-md5'] if
             meta['x-amz-unencrypted-content-md5']
 
-        # Handling instruction file
-        unless cse_materials['x-amz-key'] and
-               cse_materials['x-amz-iv']  and
-               cse_materials['x-amz-matdesc']
+        if
+          cse_materials['x-amz-key'] and
+          cse_materials['x-amz-iv']  and
+          cse_materials['x-amz-matdesc']
+        then
+          options[:metadata] = (options[:metadata] || {}).merge(cse_materials)
+        else
+          # Handling instruction file
           source_inst = "#{source.key}.instruction"
           dest_inst   = "#{key}.instruction"
           self.bucket.objects[dest_inst].copy_from(
             source.bucket.objects[source_inst])
         end
-        cse_materials
       end
 
       # Removes unwanted options that should not be passed to the client.
