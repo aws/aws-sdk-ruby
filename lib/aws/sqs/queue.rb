@@ -265,7 +265,7 @@ module AWS
       #
       # @option opts [Float, Integer] :poll_interval As of
       #   v1.7.2, this option is no longer used. See the
-      #   +:wait_time_seonds+ option for long polling instead.
+      #   +:wait_time_seconds+ option for long polling instead.
       #
       # @return [nil]
       def poll(opts = {}, &block)
