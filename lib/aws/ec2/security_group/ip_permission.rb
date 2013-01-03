@@ -48,7 +48,11 @@ module AWS
           # not all egress permissions require port ranges, depends on the
           # protocol
           if ports
-            @port_range = Array(ports).first.to_i..Array(ports).last.to_i
+            if ports.is_a?(Range)
+              @port_range = ports
+            else
+              @port_range = Array(ports).first.to_i..Array(ports).last.to_i
+            end
           end
 
           super
