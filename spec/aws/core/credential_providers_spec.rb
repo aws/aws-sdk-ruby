@@ -314,6 +314,19 @@ module AWS
           }
         end
 
+        it 'refresh the credentials when cached one is expired' do
+          provider.credentials.should == {
+            :access_key_id => 'akid-1',
+            :secret_access_key => 'secret-1',
+            :session_token => 'token-1',
+          }
+          provider.credentials_expiration = Time.now
+          provider.credentials.should == {
+            :access_key_id => 'akid-2',
+            :secret_access_key => 'secret-2',
+            :session_token => 'token-2',
+          }
+        end
       end
 
       describe SessionProvider do
