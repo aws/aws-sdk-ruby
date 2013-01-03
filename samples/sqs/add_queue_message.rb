@@ -28,20 +28,20 @@ sqs = AWS::SQS.new
 puts "Creating queue '#{queue_name}' ..."
 q = nil
 begin
-	# Creates new queue or gets erxisting queue
-	q = sqs.queues.create queue_name
+  # Creates new queue or gets erxisting queue
+  q = sqs.queues.create queue_name
 rescue AWS::SQS::Errors::InvalidParameterValue => e
-	puts "Invalid queue name '#{queue_name}'. "+e.message
-	exit 1
+  puts "Invalid queue name '#{queue_name}'. "+e.message
+  exit 1
 end
 
 puts "Waiting for queue created on AWS"
-loop do	
-	if q.exists? 
-		puts "Queue is created on AWS" 
-		break
-	end
-	sleep 1
+loop do
+  if q.exists?
+    puts "Queue is created on AWS"
+    break
+  end
+  sleep 1
 end
 
 # Send message to queue
@@ -51,10 +51,9 @@ puts "A message is created on queue with id '#{m.id}'"
 
 # Now get  the first message from queue
 puts "Retrieving the first message from queue ..."
-q.poll( :initial_timeout => false,
-    :idle_timeout => 5 ) { |msg| 
-	puts "Retrieved the message '#{msg.body}'"
-}
+q.poll(:idle_timeout => 5) do |msg|
+  puts "Retrieved the message '#{msg.body}'"
+end
 
 # Clear up
 q.delete
