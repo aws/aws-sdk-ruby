@@ -114,18 +114,17 @@ module AWS
         # @return [Array<Provider>]
         attr_reader :providers
 
-        def get_credentials
+        def credentials
           providers.each do |provider|
             return provider.credentials rescue Errors::MissingCredentialsError
           end
-          {}
+          raise Errors::MissingCredentialsError
         end
 
         def refresh
           providers.each do |provider|
             provider.refresh
           end
-          super
         end
       end
 

@@ -66,11 +66,36 @@ module AWS
         it 'refreshes its provider chain' do
           p1 = double('provider-1')
           p1.should_receive(:refresh)
-          
+
           provider = DefaultProvider.new
           provider.providers.clear
           provider.providers << p1
           provider.refresh
+        end
+
+        it 'should not cache credentials as EC2Provider may refresh the credentials when the security token is expired' do
+          dp = DefaultProvider.new
+          ec2_provider = dp.providers[0] = EC2Provider.new
+          ec2_provider.stub(:credentials => {
+                              :access_key_id => 'akid-1',
+                              :secret_access_key => 'secret-1',
+                              :session_token => 'token-1'
+                            })
+          dp.credentials.should == {
+            :access_key_id => 'akid-1',
+            :secret_access_key => 'secret-1',
+            :session_token => 'token-1'
+          }
+          ec2_provider.stub(:credentials => {
+                              :access_key_id => 'akid-2',
+                              :secret_access_key => 'secret-2',
+                              :session_token => 'token-2'
+                            })
+          dp.credentials.should == {
+            :access_key_id => 'akid-2',
+            :secret_access_key => 'secret-2',
+            :session_token => 'token-2'
+          }
         end
       end
 
