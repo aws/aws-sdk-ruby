@@ -348,8 +348,12 @@ module AWS
 
         opts = {}
         opts[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s.downcase
-        opts[:from_port] = Array(ports).first.to_i
-        opts[:to_port] = Array(ports).last.to_i
+
+        unless ports.is_a?(Range)
+          ports = Array(ports)
+        end
+        opts[:from_port] = ports.first.to_i
+        opts[:to_port] = ports.last.to_i
 
         ips, groups = parse_sources(sources)
 
@@ -384,8 +388,14 @@ module AWS
             '-1' : options[:protocol].to_s.downcase
 
           if options[:ports]
-            opts[:from_port] = Array(options[:ports]).first.to_i
-            opts[:to_port] = Array(options[:ports]).last.to_i
+            if options[:ports].is_a?(Range)
+              ports = options[:ports]
+            else
+              ports = Array(options[:ports])
+            end
+
+            opts[:from_port] = ports.first.to_i
+            opts[:to_port] = ports.last.to_i
           end
 
           ips, groups = parse_sources(args)
