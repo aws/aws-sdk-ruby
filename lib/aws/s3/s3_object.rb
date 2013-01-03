@@ -830,64 +830,56 @@ module AWS
       #   caching behavior.  See
       #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
       #
+      # @option options [String] :expires The date and time at which the
+      #   object is no longer cacheable.
+      #
       # @return [nil]
       def copy_from source, options = {}
 
-        copy_opts = { :bucket_name => bucket.name, :key => key }
+        options = options.dup
 
-        copy_opts[:copy_source] = case source
-        when S3Object
-          "#{source.bucket.name}/#{source.key}"
-        when ObjectVersion
-          copy_opts[:version_id] = source.version_id
-          "#{source.object.bucket.name}/#{source.object.key}"
-        else
-          case
-          when options[:bucket]      then "#{options[:bucket].name}/#{source}"
-          when options[:bucket_name] then "#{options[:bucket_name]}/#{source}"
-          else "#{self.bucket.name}/#{source}"
+        options[:copy_source] =
+          case source
+          when S3Object
+            "#{source.bucket.name}/#{source.key}"
+          when ObjectVersion
+            options[:version_id] = source.version_id
+            "#{source.object.bucket.name}/#{source.object.key}"
+          else
+            if options[:bucket]
+              "#{options.delete(:bucket).name}/#{source}"
+            elsif options[:bucket_name]
+              "#{options.delete(:bucket_name)}/#{source}"
+            else
+              "#{self.bucket.name}/#{source}"
+            end
           end
+
+        # copies client-side encryption materials (from the metadata or
+        # instruction file)
+        if options.delete(:client_side_encrypted)
+          metadata = options[:metadata] || {}
+          metadata.merge!(copy_cse_materials(source, options))
+          options[:metadata] = metadata unless metadata.empty?
         end
 
-        copy_opts[:metadata_directive] = 'COPY'
-
-        # Saves client-side encryption headers and copies the instruction file
-        copy_cse_materials(source, options) do |cse_materials|
-          if options[:metadata]
-            copy_opts[:metadata] = options[:metadata].merge(cse_materials)
-            copy_opts[:metadata_directive] = 'REPLACE'
-          end
-        end
-
-        if options[:content_disposition]
-          copy_opts[:content_disposition] = options[:content_disposition]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        if options[:content_type]
-          copy_opts[:content_type] = options[:content_type]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        if options[:cache_control]
-          copy_opts[:cache_control] = options[:cache_control]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        copy_opts[:acl] = options[:acl] if options[:acl]
-        copy_opts[:version_id] = options[:version_id] if options[:version_id]
-        copy_opts[:server_side_encryption] =
-          options[:server_side_encryption] if
-          options.key?(:server_side_encryption)
-        add_sse_options(copy_opts)
-
-        if options[:reduced_redundancy]
-          copy_opts[:storage_class] = 'REDUCED_REDUNDANCY'
+        if [:metadata, :content_disposition, :content_type, :cache_control,
+          ].any? {|opt| options.key?(opt) }
+        then
+          options[:metadata_directive] = 'REPLACE'
         else
-          copy_opts[:storage_class] = 'STANDARD'
+          options[:metadata_directive] ||= 'COPY'
         end
 
-        client.copy_object(copy_opts)
+        add_sse_options(options)
+
+        options[:storage_class] = options.delete(:reduced_redundancy) ?
+          'REDUCED_REDUNDANCY' : 'STANDARD'
+
+        options[:bucket_name] = bucket.name
+        options[:key] = key
+
+        client.copy_object(options)
 
         nil
 
@@ -948,6 +940,9 @@ module AWS
       #   the client-side encryption materials will be copied. Without this
       #   option, the key and iv are not guaranteed to be transferred to
       #   the new object.
+      #
+      # @option options [String] :expires The date and time at which the
+      #   object is no longer cacheable.
       #
       # @return [S3Object] Returns the copy (target) object.
       #
@@ -1399,11 +1394,11 @@ module AWS
       end
 
       def add_sse_options(options)
-        options[:server_side_encryption] =
-          config.s3_server_side_encryption unless
-          options.key?(:server_side_encryption)
+        unless options.key?(:server_side_encryption)
+          options[:server_side_encryption] = config.s3_server_side_encryption
+        end
         options.delete(:server_side_encryption) if
-          options[:server_side_encryption] == nil
+          options[:server_side_encryption].nil?
       end
 
       # Adds client-side encryption metadata headers and encrypts key
@@ -1583,30 +1578,28 @@ module AWS
       # @yield [Hash] Yields the metadata to be saved for client-side encryption
       def copy_cse_materials source, options
         cse_materials = {}
-        if options[:client_side_encrypted]
-          meta = source.metadata.to_h
-          cse_materials['x-amz-key'] = meta['x-amz-key'] if meta['x-amz-key']
-          cse_materials['x-amz-iv'] = meta['x-amz-iv']   if meta['x-amz-iv']
-          cse_materials['x-amz-matdesc'] = meta['x-amz-matdesc'] if
-                                             meta['x-amz-matdesc']
-          cse_materials['x-amz-unencrypted-content-length'] =
-            meta['x-amz-unencrypted-content-length'] if
-              meta['x-amz-unencrypted-content-length']
-          cse_materials['x-amz-unencrypted-content-md5'] =
-            meta['x-amz-unencrypted-content-md5'] if
-              meta['x-amz-unencrypted-content-md5']
+        meta = source.metadata.to_h
+        cse_materials['x-amz-key'] = meta['x-amz-key'] if meta['x-amz-key']
+        cse_materials['x-amz-iv'] = meta['x-amz-iv']   if meta['x-amz-iv']
+        cse_materials['x-amz-matdesc'] = meta['x-amz-matdesc'] if
+                                           meta['x-amz-matdesc']
+        cse_materials['x-amz-unencrypted-content-length'] =
+          meta['x-amz-unencrypted-content-length'] if
+            meta['x-amz-unencrypted-content-length']
+        cse_materials['x-amz-unencrypted-content-md5'] =
+          meta['x-amz-unencrypted-content-md5'] if
+            meta['x-amz-unencrypted-content-md5']
 
-          # Handling instruction file
-          unless cse_materials['x-amz-key'] and
-                 cse_materials['x-amz-iv']  and
-                 cse_materials['x-amz-matdesc']
-            source_inst = "#{source.key}.instruction"
-            dest_inst   = "#{key}.instruction"
-            self.bucket.objects[dest_inst].copy_from(
-              source.bucket.objects[source_inst])
-          end
+        # Handling instruction file
+        unless cse_materials['x-amz-key'] and
+               cse_materials['x-amz-iv']  and
+               cse_materials['x-amz-matdesc']
+          source_inst = "#{source.key}.instruction"
+          dest_inst   = "#{key}.instruction"
+          self.bucket.objects[dest_inst].copy_from(
+            source.bucket.objects[source_inst])
         end
-        yield(cse_materials)
+        cse_materials
       end
 
       # Removes unwanted options that should not be passed to the client.

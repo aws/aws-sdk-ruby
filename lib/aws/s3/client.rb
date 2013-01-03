@@ -761,7 +761,8 @@ module AWS
       #     The base64 encoded content md5 of the +:data+.
       #   @option options [String] :content_type
       #     Specifies the content type.
-      #   @option options [String] :expires
+      #   @option options [String] :expires The date and time at which the
+      #     object is no longer cacheable.
       #   @option options [String] :acl A canned ACL (e.g. 'private',
       #     'public-read', etc).  See the S3 API documentation for
       #     a complete list of valid values.
@@ -1052,7 +1053,8 @@ module AWS
       #   @option options [Symbol,String] :server_side_encryption (nil) The
       #     algorithm used to encrypt the object on the server side
       #     (e.g. :aes256).
-      #   @option options [String] :expires
+      #   @option options [String] :expires The date and time at which the
+      #     object is no longer cacheable.
       #   @option options [String] :acl A canned ACL (e.g. 'private',
       #     'public-read', etc).  See the S3 API documentation for
       #     a complete list of valid values.
@@ -1281,6 +1283,8 @@ module AWS
       #     Controls whether Reduced Redundancy Storage is enabled for
       #     the object.  Valid values are 'STANDARD' and
       #     'REDUCED_REDUNDANCY'.
+      #   @option options [String] :expires The date and time at which the
+      #     object is no longer cacheable.
       #   @option options [String] :grant_read
       #   @option options [String] :grant_write
       #   @option options [String] :grant_read_acp
@@ -1299,6 +1303,7 @@ module AWS
         :metadata_directive => 'x-amz-metadata-directive',
         :content_type => 'Content-Type',
         :content_disposition => 'Content-Disposition',
+        :expires => 'Expires'
       }) do
 
         configure_request do |req, options|
