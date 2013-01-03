@@ -67,6 +67,22 @@ END
 
       end
 
+      context 'error handling' do
+        it 'should refresh credentials when it is expired' do
+          client.config.credential_provider.should_receive(:refresh).once
+          http_handler.should_receive(:handle) do |req, resp|
+            resp.body = <<END
+<ErrorResponse xmlns="http://queue.amazonaws.com/doc/2009-02-01/"><Error><Type>Sender</Type><Code>ExpiredToken</Code><Message> The security token included in the request is expired</Message><Detail/></Error><RequestId>abc123</RequestId></ErrorResponse>
+END
+            resp.status = 400
+          end.ordered
+          http_handler.should_receive(:handle) do |req, resp|
+            resp.body = ""
+            resp.status = 200
+          end.ordered
+          client.list_queues
+        end
+      end
     end
 
   end
