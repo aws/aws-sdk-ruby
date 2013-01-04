@@ -2521,6 +2521,10 @@
             :rename: :spot_instance_request_set
             :list: true
             :children:
+              status:
+                :children:
+                  updateTime:
+                    :type: :time
               validFrom:
                 :type: :time
               validUntil:
@@ -3747,6 +3751,10 @@
             :rename: :spot_instance_request_set
             :list: true
             :children:
+              status:
+                :children:
+                  updateTime:
+                    :type: :time
               validFrom:
                 :type: :time
               validUntil:
