@@ -73,6 +73,7 @@ module AWS
           :license_model => 'model',
           :master_username => 'root',
           :multi_az => true,
+          :iops => 1000,
           :preferred_backup_window => 'window',
           :preferred_maintenance_window => 'window2',
           :read_replica_db_instance_identifiers => %w(abc xyz),
@@ -98,6 +99,7 @@ module AWS
           i.license_model.should eq('model')
           i.master_username.should eq('root')
           i.multi_az.should eq(true)
+          i.iops.should eq(1000)
           i.preferred_backup_window.should eq('window')
           i.preferred_maintenance_window.should eq('window2')
           i.read_replica_db_instance_identifiers.should eq(['abc','xyz'])

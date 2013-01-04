@@ -126,6 +126,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. You cannot set the AvailabilityZone parameter if the
       #     MultiAZ parameter is set to +true+ .
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:engine_version+ - (String) The version number of the database
       #     engine to use. Example: 5.1.42
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
@@ -180,9 +182,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -262,9 +266,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -450,9 +456,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -614,9 +622,11 @@ module AWS
       #       * +:port+ - (Integer)
       #       * +:backup_retention_period+ - (Integer)
       #       * +:multi_az+ - (Boolean)
+      #       * +:iops+ - (Integer)
       #       * +:engine_version+ - (String)
       #     * +:latest_restorable_time+ - (Time)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #     * +:auto_minor_version_upgrade+ - (Boolean)
       #     * +:read_replica_source_db_instance_identifier+ - (String)
@@ -960,6 +970,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) The Multi-AZ filter value. Specify this
       #     parameter to show only those reservations matching the specified
       #     Multi-AZ parameter.
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more than the MaxRecords value is available, a
       #     marker is included in the response so that the following results
@@ -984,6 +996,7 @@ module AWS
       #     * +:product_description+ - (String)
       #     * +:offering_type+ - (String)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:state+ - (String)
       #     * +:recurring_charges+ - (Array<Hash>)
       #       * +:recurring_charge_amount+ - (Numeric)
@@ -1012,6 +1025,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) The Multi-AZ filter value. Specify this
       #     parameter to show only the available offerings matching the
       #     specified Multi-AZ parameter.
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more than the MaxRecords value is available, a
       #     marker is included in the response so that the following results
@@ -1033,6 +1048,7 @@ module AWS
       #     * +:product_description+ - (String)
       #     * +:offering_type+ - (String)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:recurring_charges+ - (Array<Hash>)
       #       * +:recurring_charge_amount+ - (Numeric)
       #       * +:recurring_charge_frequency+ - (String)
@@ -1086,6 +1102,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraints: Cannot be specified if the DB Instance is
       #     a read replica.
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:engine_version+ - (String) The version number of the database
       #     engine to upgrade to. For major version upgrades, if a nondefault
       #     DB Parameter Group is currently in use, a new DB Parameter Group in
@@ -1143,9 +1161,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -1271,6 +1291,7 @@ module AWS
       #   * +:product_description+ - (String)
       #   * +:offering_type+ - (String)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:state+ - (String)
       #   * +:recurring_charges+ - (Array<Hash>)
       #     * +:recurring_charge_amount+ - (Numeric)
@@ -1325,9 +1346,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -1395,6 +1418,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1448,9 +1473,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -1484,6 +1511,8 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
+      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
+      #     instance.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1537,9 +1566,11 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
+      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
+      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
@@ -1585,7 +1616,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-07-31')
+      define_client_methods('2012-09-17')
 
     end
   end
