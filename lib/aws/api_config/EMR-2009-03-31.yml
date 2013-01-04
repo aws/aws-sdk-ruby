@@ -327,6 +327,20 @@
     :children:
       RunJobFlowResult:
         :ignore: true
+- :name: SetVisibleToAllUsers
+  :method: :set_visible_to_all_users
+  :inputs:
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    - :required
+    VisibleToAllUsers:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetVisibleToAllUsersResult:
+        :ignore: true
 - :name: SetTerminationProtection
   :method: :set_termination_protection
   :inputs:
