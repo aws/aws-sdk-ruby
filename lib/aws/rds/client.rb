@@ -22,6 +22,27 @@ module AWS
 
       # client methods #
 
+      # @!method add_tags_to_resource(options = {})
+      # Calls the AddTagsToResource API operation.
+      # @param [Hash] options
+      #   * +:resource_name+ - *required* - (String) The DB Instance the tags
+      #     will be added to.
+      #   * +:tags+ - *required* - (Array<Hash>) The tags to be assigned to the
+      #     DB Instance.
+      #     * +:key+ - (String) A key is the required name of the tag. The
+      #       string value can be from 1 to 128 Unicode characters in length
+      #       and cannot be prefixed with "aws:". The string may only contain
+      #       only the set of Unicode letters, digits, white-space, '_', '.',
+      #       '/', '=', '+', '-' (Java regex:
+      #       "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+      #     * +:value+ - (String) A value is the optional value of the tag. The
+      #       string value can be from 1 to 256 Unicode characters in length
+      #       and cannot be prefixed with "aws:". The string may only contain
+      #       only the set of Unicode letters, digits, white-space, '_', '.',
+      #       '/', '=', '+', '-' (Java regex:
+      #       "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+      # @return [Core::Response]
+
       # @!method authorize_db_security_group_ingress(options = {})
       # Calls the AuthorizeDBSecurityGroupIngress API operation.
       # @param [Hash] options
@@ -82,6 +103,7 @@ module AWS
       #   * +:engine_version+ - (String)
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
+      #   * +:iops+ - (Integer)
 
       # @!method create_db_instance(options = {})
       # Calls the CreateDBInstance API operation.
@@ -126,8 +148,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. You cannot set the AvailabilityZone parameter if the
       #     MultiAZ parameter is set to +true+ .
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:engine_version+ - (String) The version number of the database
       #     engine to use. Example: 5.1.42
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
@@ -136,6 +156,9 @@ module AWS
       #   * +:license_model+ - (String) License model information for this DB
       #     Instance. Valid values: license-included | bring-your-own-license |
       #     general-public-license
+      #   * +:iops+ - (Integer) The amount of provisioned input/output
+      #     operations per second to be initially allocated for the database
+      #     instance. Constraints: Must be an integer Type: Integer
       #   * +:option_group_name+ - (String) Indicates that the DB Instance
       #     should be associated with the specified option group.
       #   * +:character_set_name+ - (String) For supported engines, indicates
@@ -173,6 +196,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -182,16 +206,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
@@ -224,6 +248,9 @@ module AWS
       #     engine upgrades will be applied automatically to the Read Replica
       #     during the maintenance window. Default: Inherits from the source DB
       #     Instance
+      #   * +:iops+ - (Integer) The amount of Provisioned IOPS (input/output
+      #     operations per second) to be initially allocated for the DB
+      #     Instance.
       #   * +:option_group_name+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -257,6 +284,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -266,16 +294,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
@@ -349,6 +377,7 @@ module AWS
       #   * +:engine_version+ - (String)
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
+      #   * +:iops+ - (Integer)
 
       # @!method create_db_subnet_group(options = {})
       # Calls the CreateDBSubnetGroup API operation.
@@ -372,6 +401,7 @@ module AWS
       #     * +:subnet_identifier+ - (String)
       #     * +:subnet_availability_zone+ - (Hash)
       #       * +:name+ - (String)
+      #       * +:provisioned_iops_capable+ - (Boolean)
       #     * +:subnet_status+ - (String)
 
       # @!method create_option_group(options = {})
@@ -403,6 +433,8 @@ module AWS
       #     * +:db_security_group_memberships+ - (Array<Hash>)
       #       * +:db_security_group_name+ - (String)
       #       * +:status+ - (String)
+      #   * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
+      #   * +:vpc_id+ - (String)
 
       # @!method delete_db_instance(options = {})
       # Calls the DeleteDBInstance API operation.
@@ -447,6 +479,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -456,16 +489,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
@@ -508,6 +541,7 @@ module AWS
       #   * +:engine_version+ - (String)
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
+      #   * +:iops+ - (Integer)
 
       # @!method delete_db_subnet_group(options = {})
       # Calls the DeleteDBSubnetGroup API operation.
@@ -560,6 +594,9 @@ module AWS
       #     * +:db_parameter_group_family+ - (String)
       #     * +:db_engine_description+ - (String)
       #     * +:db_engine_version_description+ - (String)
+      #     * +:default_character_set+ - (Hash)
+      #       * +:character_set_name+ - (String)
+      #       * +:character_set_description+ - (String)
       #     * +:supported_character_sets+ - (Array<Hash>)
       #       * +:character_set_name+ - (String)
       #       * +:character_set_description+ - (String)
@@ -613,6 +650,7 @@ module AWS
       #         * +:subnet_identifier+ - (String)
       #         * +:subnet_availability_zone+ - (Hash)
       #           * +:name+ - (String)
+      #           * +:provisioned_iops_capable+ - (Boolean)
       #         * +:subnet_status+ - (String)
       #     * +:preferred_maintenance_window+ - (String)
       #     * +:pending_modified_values+ - (Hash)
@@ -622,16 +660,16 @@ module AWS
       #       * +:port+ - (Integer)
       #       * +:backup_retention_period+ - (Integer)
       #       * +:multi_az+ - (Boolean)
-      #       * +:iops+ - (Integer)
       #       * +:engine_version+ - (String)
+      #       * +:iops+ - (Integer)
       #     * +:latest_restorable_time+ - (Time)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
       #     * +:auto_minor_version_upgrade+ - (Boolean)
       #     * +:read_replica_source_db_instance_identifier+ - (String)
       #     * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #     * +:license_model+ - (String)
+      #     * +:iops+ - (Integer)
       #     * +:option_group_membership+ - (Hash)
       #       * +:option_group_name+ - (String)
       #       * +:status+ - (String)
@@ -757,6 +795,7 @@ module AWS
       #     * +:engine_version+ - (String)
       #     * +:license_model+ - (String)
       #     * +:snapshot_type+ - (String)
+      #     * +:iops+ - (Integer)
 
       # @!method describe_db_subnet_groups(options = {})
       # Calls the DescribeDBSubnetGroups API operation.
@@ -785,6 +824,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
 
       # @!method describe_engine_default_parameters(options = {})
@@ -903,6 +943,8 @@ module AWS
       #       * +:db_security_group_memberships+ - (Array<Hash>)
       #         * +:db_security_group_name+ - (String)
       #         * +:status+ - (String)
+      #     * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
+      #     * +:vpc_id+ - (String)
       #   * +:marker+ - (String)
 
       # @!method describe_orderable_db_instance_options(options = {})
@@ -919,6 +961,8 @@ module AWS
       #   * +:license_model+ - (String) The license model filter value. Specify
       #     this parameter to show only the available offerings matching the
       #     specified license model.
+      #   * +:vpc+ - (Boolean) The VPC filter value. Specify this parameter to
+      #     show only the available VPC or non-VPC offerings.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more records exist than the specified
       #     MaxRecords value, a marker is included in the response so that the
@@ -938,11 +982,10 @@ module AWS
       #     * +:license_model+ - (String)
       #     * +:availability_zones+ - (Array<Hash>)
       #       * +:name+ - (String)
+      #       * +:provisioned_iops_capable+ - (Boolean)
       #     * +:multi_az_capable+ - (Boolean)
       #     * +:read_replica_capable+ - (Boolean)
-      #     * +:vpc_capable+ - (Boolean)
-      #     * +:vpc_multi_az_capable+ - (Boolean)
-      #     * +:vpc_read_replica_capable+ - (Boolean)
+      #     * +:vpc+ - (Boolean)
       #   * +:marker+ - (String)
 
       # @!method describe_reserved_db_instances(options = {})
@@ -970,8 +1013,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) The Multi-AZ filter value. Specify this
       #     parameter to show only those reservations matching the specified
       #     Multi-AZ parameter.
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more than the MaxRecords value is available, a
       #     marker is included in the response so that the following results
@@ -996,7 +1037,6 @@ module AWS
       #     * +:product_description+ - (String)
       #     * +:offering_type+ - (String)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:state+ - (String)
       #     * +:recurring_charges+ - (Array<Hash>)
       #       * +:recurring_charge_amount+ - (Numeric)
@@ -1025,8 +1065,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) The Multi-AZ filter value. Specify this
       #     parameter to show only the available offerings matching the
       #     specified Multi-AZ parameter.
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more than the MaxRecords value is available, a
       #     marker is included in the response so that the following results
@@ -1048,10 +1086,21 @@ module AWS
       #     * +:product_description+ - (String)
       #     * +:offering_type+ - (String)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:recurring_charges+ - (Array<Hash>)
       #       * +:recurring_charge_amount+ - (Numeric)
       #       * +:recurring_charge_frequency+ - (String)
+
+      # @!method list_tags_for_resource(options = {})
+      # Calls the ListTagsForResource API operation.
+      # @param [Hash] options
+      #   * +:resource_name+ - *required* - (String) The DB Instance with tags
+      #     to be listed.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:tag_list+ - (Array<Hash>)
+      #     * +:key+ - (String)
+      #     * +:value+ - (String)
 
       # @!method modify_db_instance(options = {})
       # Calls the ModifyDBInstance API operation.
@@ -1102,8 +1151,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraints: Cannot be specified if the DB Instance is
       #     a read replica.
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:engine_version+ - (String) The version number of the database
       #     engine to upgrade to. For major version upgrades, if a nondefault
       #     DB Parameter Group is currently in use, a new DB Parameter Group in
@@ -1118,6 +1165,14 @@ module AWS
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
+      #   * +:iops+ - (Integer) The new provisioned I/O operations per second
+      #     of the RDS instance. This change does not result in an outage and
+      #     is applied during the next maintenance window unless the
+      #     ApplyImmediately parameter is specified as +true+ for this request.
+      #     Default: Uses existing setting Constraints: Value supplied must be
+      #     at least 10% greater than the current value. Values that are not at
+      #     least 10% greater than the existing value are rounded up so that
+      #     they are 10% greater than the current value. Type: Integer
       #   * +:option_group_name+ - (String) Indicates that the DB Instance
       #     should be associated with the specified option group.
       # @return [Core::Response]
@@ -1152,6 +1207,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -1161,16 +1217,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
@@ -1233,6 +1289,7 @@ module AWS
       #     * +:subnet_identifier+ - (String)
       #     * +:subnet_availability_zone+ - (Hash)
       #       * +:name+ - (String)
+      #       * +:provisioned_iops_capable+ - (Boolean)
       #     * +:subnet_status+ - (String)
 
       # @!method modify_option_group(options = {})
@@ -1265,6 +1322,91 @@ module AWS
       #     * +:db_security_group_memberships+ - (Array<Hash>)
       #       * +:db_security_group_name+ - (String)
       #       * +:status+ - (String)
+      #   * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
+      #   * +:vpc_id+ - (String)
+
+      # @!method promote_read_replica(options = {})
+      # Calls the PromoteReadReplica API operation.
+      # @param [Hash] options
+      #   * +:db_instance_identifier+ - *required* - (String) The DB Instance
+      #     identifier. This value is stored as a lowercase string.
+      #     Constraints: Must be the identifier for an existing Read Replica DB
+      #     Instance Must contain from 1 to 63 alphanumeric characters or
+      #     hyphens First character must be a letter Cannot end with a hyphen
+      #     or contain two consecutive hyphens Example: mydbinstance
+      #   * +:backup_retention_period+ - (Integer) The number of days to retain
+      #     automated backups. Setting this parameter to a positive number
+      #     enables backups. Setting this parameter to 0 disables automated
+      #     backups. Default: 1 Constraints: Must be a value from 0 to 8
+      #   * +:preferred_backup_window+ - (String) The daily time range during
+      #     which automated backups are created if automated backups are
+      #     enabled, using the BackupRetentionPeriod parameter. Default: A
+      #     30-minute window selected at random from an 8-hour block of time
+      #     per region. The following list shows the time blocks for each
+      #     region from which the default backup windows are assigned. US-East
+      #     (Northern Virginia) Region: 03:00-11:00 UTC US-West (Northern
+      #     California) Region: 06:00-14:00 UTC EU (Ireland) Region:
+      #     22:00-06:00 UTC Asia Pacific (Singapore) Region: 14:00-22:00 UTC
+      #     Asia Pacific (Tokyo) Region: 17:00-03:00 UTC Constraints: Must be
+      #     in the format hh24:mi-hh24:mi. Times should be Universal Time
+      #     Coordinated (UTC). Must not conflict with the preferred maintenance
+      #     window. Must be at least 30 minutes.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:db_instance_identifier+ - (String)
+      #   * +:db_instance_class+ - (String)
+      #   * +:engine+ - (String)
+      #   * +:db_instance_status+ - (String)
+      #   * +:master_username+ - (String)
+      #   * +:db_name+ - (String)
+      #   * +:endpoint+ - (Hash)
+      #     * +:address+ - (String)
+      #     * +:port+ - (Integer)
+      #   * +:allocated_storage+ - (Integer)
+      #   * +:instance_create_time+ - (Time)
+      #   * +:preferred_backup_window+ - (String)
+      #   * +:backup_retention_period+ - (Integer)
+      #   * +:db_security_groups+ - (Array<Hash>)
+      #     * +:db_security_group_name+ - (String)
+      #     * +:status+ - (String)
+      #   * +:db_parameter_groups+ - (Array<Hash>)
+      #     * +:db_parameter_group_name+ - (String)
+      #     * +:parameter_apply_status+ - (String)
+      #   * +:availability_zone+ - (String)
+      #   * +:db_subnet_group+ - (Hash)
+      #     * +:db_subnet_group_name+ - (String)
+      #     * +:db_subnet_group_description+ - (String)
+      #     * +:vpc_id+ - (String)
+      #     * +:subnet_group_status+ - (String)
+      #     * +:subnets+ - (Array<Hash>)
+      #       * +:subnet_identifier+ - (String)
+      #       * +:subnet_availability_zone+ - (Hash)
+      #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
+      #       * +:subnet_status+ - (String)
+      #   * +:preferred_maintenance_window+ - (String)
+      #   * +:pending_modified_values+ - (Hash)
+      #     * +:db_instance_class+ - (String)
+      #     * +:allocated_storage+ - (Integer)
+      #     * +:master_user_password+ - (String)
+      #     * +:port+ - (Integer)
+      #     * +:backup_retention_period+ - (Integer)
+      #     * +:multi_az+ - (Boolean)
+      #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
+      #   * +:latest_restorable_time+ - (Time)
+      #   * +:multi_az+ - (Boolean)
+      #   * +:engine_version+ - (String)
+      #   * +:auto_minor_version_upgrade+ - (Boolean)
+      #   * +:read_replica_source_db_instance_identifier+ - (String)
+      #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
+      #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
+      #   * +:option_group_membership+ - (Hash)
+      #     * +:option_group_name+ - (String)
+      #     * +:status+ - (String)
+      #   * +:character_set_name+ - (String)
 
       # @!method purchase_reserved_db_instances_offering(options = {})
       # Calls the PurchaseReservedDBInstancesOffering API operation.
@@ -1291,7 +1433,6 @@ module AWS
       #   * +:product_description+ - (String)
       #   * +:offering_type+ - (String)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:state+ - (String)
       #   * +:recurring_charges+ - (Array<Hash>)
       #     * +:recurring_charge_amount+ - (Numeric)
@@ -1337,6 +1478,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -1346,20 +1488,29 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+
+      # @!method remove_tags_from_resource(options = {})
+      # Calls the RemoveTagsFromResource API operation.
+      # @param [Hash] options
+      #   * +:resource_name+ - *required* - (String) The DB Instance the tags
+      #     will be removed from.
+      #   * +:tag_keys+ - *required* - (Array<String>) The tag key (name) of
+      #     the tag to be removed.
+      # @return [Core::Response]
 
       # @!method reset_db_parameter_group(options = {})
       # Calls the ResetDBParameterGroup API operation.
@@ -1418,8 +1569,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1431,6 +1580,9 @@ module AWS
       #   * +:engine+ - (String) The database engine to use for the new
       #     instance. Default: The same as source Constraint: Must be
       #     compatible with the engine of the source Example: oracle-ee
+      #   * +:iops+ - (Integer) The amount of Provisioned IOPS (input/output
+      #     operations per second) to be initially allocated for the DB
+      #     Instance. Constraints: Must be an integer greater than 1000.
       #   * +:option_group_name+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -1464,6 +1616,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -1473,16 +1626,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
@@ -1511,8 +1664,6 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
-      #   * +:iops+ - (Integer) The number of Provisioned IOPS for the database
-      #     instance.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1524,6 +1675,9 @@ module AWS
       #   * +:engine+ - (String) The database engine to use for the new
       #     instance. Default: The same as source Constraint: Must be
       #     compatible with the engine of the source Example: oracle-ee
+      #   * +:iops+ - (Integer) The amount of Provisioned IOPS (input/output
+      #     operations per second) to be initially allocated for the DB
+      #     Instance. Constraints: Must be an integer greater than 1000.
       #   * +:option_group_name+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -1557,6 +1711,7 @@ module AWS
       #       * +:subnet_identifier+ - (String)
       #       * +:subnet_availability_zone+ - (Hash)
       #         * +:name+ - (String)
+      #         * +:provisioned_iops_capable+ - (Boolean)
       #       * +:subnet_status+ - (String)
       #   * +:preferred_maintenance_window+ - (String)
       #   * +:pending_modified_values+ - (Hash)
@@ -1566,16 +1721,16 @@ module AWS
       #     * +:port+ - (Integer)
       #     * +:backup_retention_period+ - (Integer)
       #     * +:multi_az+ - (Boolean)
-      #     * +:iops+ - (Integer)
       #     * +:engine_version+ - (String)
+      #     * +:iops+ - (Integer)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
-      #   * +:iops+ - (Integer)
       #   * +:engine_version+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
       #   * +:read_replica_source_db_instance_identifier+ - (String)
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
+      #   * +:iops+ - (Integer)
       #   * +:option_group_membership+ - (Hash)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
