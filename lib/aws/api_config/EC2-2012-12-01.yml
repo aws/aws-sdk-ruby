@@ -371,6 +371,18 @@
     - :string
     - :required
   :outputs: {}
+- :name: CopySnapshot
+  :method: :copy_snapshot
+  :inputs:
+    SourceRegion:
+    - :string
+    - :required
+    SourceSnapshotId:
+    - :string
+    - :required
+    Description:
+    - :string
+  :outputs: {}
 - :name: CreateCustomerGateway
   :method: :create_customer_gateway
   :inputs:
