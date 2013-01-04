@@ -2236,6 +2236,10 @@
     - :string
     OfferingType:
     - :string
+    NextToken:
+    - :string
+    MaxResults:
+    - :integer
   :outputs:
     :children:
       reservedInstancesOfferingsSet:
