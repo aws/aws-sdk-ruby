@@ -114,18 +114,17 @@ module AWS
         # @return [Array<Provider>]
         attr_reader :providers
 
-        def get_credentials
+        def credentials
           providers.each do |provider|
             return provider.credentials rescue Errors::MissingCredentialsError
           end
-          {}
+          raise Errors::MissingCredentialsError
         end
 
         def refresh
           providers.each do |provider|
             provider.refresh
           end
-          super
         end
       end
 
@@ -253,6 +252,24 @@ module AWS
         # @return [Object,nil]
         attr_accessor :http_debug_output
 
+        # @return [Time,nil]
+        attr_accessor :credentials_expiration
+
+        # Refresh provider if existing credentials will be expired in 5 min
+        # @return [Hash] Returns a hash of credentials containg at least
+        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
+        #   also contain a +:session_token+.
+        #
+        # @raise [Errors::MissingCredentialsError] Raised when the
+        #   +:access_key_id+ or the +:secret_access_key+ can not be found.
+        #
+        def credentials
+          if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc - 5 * 60
+            refresh
+          end
+          super
+        end
+
         protected
 
         # (see Provider#get_credentials)
@@ -280,6 +297,8 @@ module AWS
             credentials[:access_key_id] = session['AccessKeyId']
             credentials[:secret_access_key] = session['SecretAccessKey']
             credentials[:session_token] = session['Token']
+            @credentials_expiration = Time.parse(session['Expiration'])
+
             credentials
 
           rescue *FAILURES => e
