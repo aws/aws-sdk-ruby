@@ -44,25 +44,30 @@ module AWS
       end
 
       # @param [String, Hash] hosted_zone_id
+      # @option options [String] :comment
+      # @option options [String] :caller_reference
       # @return [HostedZone]
       def create name, options = {}
         options[:name] = name
-        options[:caller_reference] = "CreateHostedZone, #{name}, #{Time.now.httpdate}" unless options[:caller_reference]
-        if options[:comment] and options[:hosted_zone_config] ||= {}
+        unless options[:caller_reference]
+          options[:caller_reference] = "CreateHostedZone, #{name}, #{Time.now.httpdate}"
+        end
+        if options[:comment]
+          options[:hosted_zone_config] ||= {}
           options[:hosted_zone_config][:comment] = options[:comment]
         end
+
         resp = client.create_hosted_zone(options)
-        if resp[:hosted_zone][:id]
-          change_info = ChangeInfo.new_from(:create_hosted_zone,
-                                            resp,
-                                            resp[:change_info][:id],
-                                            :config => config)
-          hosted_zone = HostedZone.new_from(:create_hosted_zone,
-                                            resp,
-                                            resp[:hosted_zone][:id],
-                                            :change_info => change_info, :config => config)
-          hosted_zone
-        end
+
+        change_info = ChangeInfo.new_from(:create_hosted_zone, resp,
+          resp[:change_info][:id],
+          :config => config)
+
+        HostedZone.new_from(:create_hosted_zone, resp,
+          resp[:hosted_zone][:id],
+          :change_info => change_info,
+          :config => config)
+
       end
 
       protected

@@ -54,6 +54,7 @@ module AWS
 
       before(:each) do
         response.data[:hosted_zone] = details
+        response.data[:change_info] = { :id => 'change-id' }
         client.stub(:create_hosted_zone).and_return(response)
       end
 
