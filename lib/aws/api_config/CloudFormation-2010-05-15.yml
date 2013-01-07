@@ -43,16 +43,16 @@
       - :string
     OnFailure:
     - :string
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateStackResult:
-        :ignore: true
-- :name: CreateUploadBucket
-  :method: :create_upload_bucket
-  :inputs: {}
-  :outputs:
-    :children:
-      CreateUploadBucketResult:
         :ignore: true
 - :name: DeleteStack
   :method: :delete_stack
@@ -131,6 +131,8 @@
   :inputs:
     StackName:
     - :string
+    NextToken:
+    - :string
   :outputs:
     :children:
       DescribeStacksResult:
@@ -174,6 +176,12 @@
                     :children:
                       member:
                         :rename: :outputs
+                        :list: true
+                  Tags:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :tags
                         :list: true
 - :name: EstimateTemplateCost
   :method: :estimate_template_cost
