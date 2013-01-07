@@ -36,7 +36,6 @@
     AvailabilityZones:
     - :membered_list:
       - :string
-    - :required
     LoadBalancerNames:
     - :membered_list:
       - :string
@@ -48,6 +47,9 @@
     - :string
     VPCZoneIdentifier:
     - :string
+    TerminationPolicies:
+    - :membered_list:
+      - :string
     Tags:
     - :membered_list:
       - :structure:
@@ -111,6 +113,8 @@
     - :string
     IamInstanceProfile:
     - :string
+    EbsOptimized:
+    - :boolean
   :outputs:
     :children:
       CreateLaunchConfigurationResult:
@@ -305,6 +309,12 @@
                         :children:
                           PropagateAtLaunch:
                             :type: :boolean
+                  TerminationPolicies:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :termination_policies
+                        :list: true
 - :name: DescribeAutoScalingInstances
   :method: :describe_auto_scaling_instances
   :inputs:
@@ -385,6 +395,8 @@
                         :type: :boolean
                   CreatedTime:
                     :type: :time
+                  EbsOptimized:
+                    :type: :boolean
 - :name: DescribeMetricCollectionTypes
   :method: :describe_metric_collection_types
   :inputs: {}
@@ -575,6 +587,20 @@
                 :children:
                   PropagateAtLaunch:
                     :type: :boolean
+- :name: DescribeTerminationPolicyTypes
+  :method: :describe_termination_policy_types
+  :inputs: {}
+  :outputs:
+    :children:
+      DescribeTerminationPolicyTypesResult:
+        :ignore: true
+        :children:
+          TerminationPolicyTypes:
+            :ignore: true
+            :children:
+              member:
+                :rename: :termination_policy_types
+                :list: true
 - :name: DisableMetricsCollection
   :method: :disable_metrics_collection
   :inputs:
@@ -790,6 +816,9 @@
     - :string
     VPCZoneIdentifier:
     - :string
+    TerminationPolicies:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       UpdateAutoScalingGroupResult:

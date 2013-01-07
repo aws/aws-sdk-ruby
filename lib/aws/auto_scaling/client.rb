@@ -44,12 +44,13 @@ module AWS
       #   * +:max_size+ - *required* - (Integer)
       #   * +:desired_capacity+ - (Integer)
       #   * +:default_cooldown+ - (Integer)
-      #   * +:availability_zones+ - *required* - (Array<String>)
+      #   * +:availability_zones+ - (Array<String>)
       #   * +:load_balancer_names+ - (Array<String>)
       #   * +:health_check_type+ - (String)
       #   * +:health_check_grace_period+ - (Integer)
       #   * +:placement_group+ - (String)
       #   * +:vpc_zone_identifier+ - (String)
+      #   * +:termination_policies+ - (Array<String>)
       #   * +:tags+ - (Array<Hash>)
       #     * +:resource_id+ - (String)
       #     * +:resource_type+ - (String)
@@ -79,6 +80,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
       #   * +:spot_price+ - (String)
       #   * +:iam_instance_profile+ - (String)
+      #   * +:ebs_optimized+ - (Boolean)
       # @return [Core::Response]
 
       # @!method create_or_update_tags(options = {})
@@ -189,6 +191,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #       * +:propagate_at_launch+ - (Boolean)
+      #     * +:termination_policies+ - (Array<String>)
       #   * +:next_token+ - (String)
 
       # @!method describe_auto_scaling_instances(options = {})
@@ -247,6 +250,7 @@ module AWS
       #     * +:spot_price+ - (String)
       #     * +:iam_instance_profile+ - (String)
       #     * +:created_time+ - (Time)
+      #     * +:ebs_optimized+ - (Boolean)
       #   * +:next_token+ - (String)
 
       # @!method describe_metric_collection_types(options = {})
@@ -374,6 +378,14 @@ module AWS
       #     * +:propagate_at_launch+ - (Boolean)
       #   * +:next_token+ - (String)
 
+      # @!method describe_termination_policy_types(options = {})
+      # Calls the DescribeTerminationPolicyTypes API operation.
+      # @param [Hash] options
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:termination_policy_types+ - (Array<String>)
+
       # @!method disable_metrics_collection(options = {})
       # Calls the DisableMetricsCollection API operation.
       # @param [Hash] options
@@ -497,6 +509,7 @@ module AWS
       #   * +:health_check_grace_period+ - (Integer)
       #   * +:placement_group+ - (String)
       #   * +:vpc_zone_identifier+ - (String)
+      #   * +:termination_policies+ - (Array<String>)
       # @return [Core::Response]
 
       # end client methods #
