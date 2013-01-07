@@ -82,15 +82,6 @@ module AWS
           }.should raise_error(ArgumentError, /:launch_configuration/)
         end
 
-        it 'raises an argument error if you omit :availability_zones' do
-          lambda {
-            groups.create('name', 
-              :launch_configuration => 'lc-name',
-              :min_size => 1,
-              :max_size => 2)
-          }.should raise_error(ArgumentError, /availability_zones/)
-        end
-
         it 'raises an argument error if you omit :min_size' do
           lambda {
             groups.create('name', 
