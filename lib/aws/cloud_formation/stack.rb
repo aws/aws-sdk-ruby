@@ -202,7 +202,6 @@ module AWS
       # @return [nil]
       #
       def update options = {}
-        
         client_opts = options.dup
 
         apply_stack_name(name, client_opts)
