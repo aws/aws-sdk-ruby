@@ -22,22 +22,27 @@ module AWS
 
       it_should_behave_like "ec2 collection object" do
 
+        # ec2 regions returns a region with an alternate configuration
+        # because of the new ec2 endpoint, the configuration specs
+        # don't apply here
+        let(:skip_config) { true }
+
         let(:member_class) { Region }
 
         let(:client_method) { :describe_regions }
 
-        it_should_behave_like "ec2 collection array access"
+        it_should_behave_like "ec2 collection array access" do
+          # ec2 regions returns a region with an alternate configuration
+          # because of the new ec2 endpoint, the configuration specs
+          # don't apply here
+          let(:skip_config) { true }
+        end
 
         def stub_two_members(resp)
-          resp.stub(:region_info).
-            and_return([double("region 1",
-                               :region_name => "region-1",
-                               :region_endpoint =>
-                               "ec2.region-1.amazonaws.com"),
-                        double("region 2",
-                               :region_name => "region-2",
-                               :region_endpoint =>
-                               "ec2.region-2.amazonaws.com")])
+          resp.data[:region_info] = [
+            { :region_name => 'region-1', :region_endpoint => 'ec2.region-1.amazonaws.com' },
+            { :region_name => 'region-2', :region_endpoint => 'ec2.region-2.amazonaws.com' },
+          ]
         end
 
         context '#[]' do

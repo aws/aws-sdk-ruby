@@ -18,6 +18,8 @@ module AWS
 
     shared_examples_for "ec2 collection object" do
 
+      let(:skip_config) { false }
+
       let(:config) { stub_config }
 
       let(:client) { config.ec2_client }
@@ -58,7 +60,9 @@ module AWS
         end
 
         it 'passes the config' do
-          collection.each { |obj| obj.config.should be(config) }
+          unless skip_config
+            collection.each { |obj| obj.config.should eq(config) }
+          end
         end
 
         it 'should yield the right number of objects' do

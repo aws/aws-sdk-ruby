@@ -18,6 +18,8 @@ module AWS
 
     shared_examples_for "ec2 collection array access" do
 
+      let(:skip_config) { false }
+
       context '#[]' do
 
         it 'returns an object of the member class' do
@@ -25,7 +27,9 @@ module AWS
         end
 
         it 'returns an object with the correct config' do
-          collection['abc'].config.should == collection.config
+          unless skip_config
+            collection['abc'].config.should == collection.config
+          end
         end
 
       end

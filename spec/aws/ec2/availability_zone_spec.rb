@@ -74,6 +74,7 @@ module AWS
       end
 
       context '#region' do
+
         let(:attribute) { :region }
         let(:response_field) { :region_name }
         let(:response_value) { "foo" }
@@ -86,10 +87,6 @@ module AWS
 
           it 'should return a region object' do
             zone.region.should be_a(Region)
-          end
-
-          it 'should pass the config' do
-            zone.region.config.should be(config)
           end
 
           it 'should memoize the result' do
