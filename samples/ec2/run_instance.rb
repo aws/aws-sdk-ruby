@@ -59,7 +59,7 @@ begin
   # launch the instance
   instance = image.run_instance(:key_pair => key_pair,
                                 :security_groups => group)
-  sleep 1 until instance.status != :pending
+  sleep 10 while instance.status == :pending
   puts "Launched instance #{instance.id}, status: #{instance.status}"
 
   exit 1 unless instance.status == :running
