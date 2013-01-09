@@ -45,7 +45,7 @@ module AWS
       #
       # @example Running a single instance
       #   i = ec2.instances.create(:image_id => "ami-8c1fece5")
-      #   sleep 1 while i.status == :pending
+      #   sleep 10 while i.status == :pending
       #
       # @example Running multiple instances with the same parameters
       #
