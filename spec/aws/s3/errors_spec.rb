@@ -45,6 +45,10 @@ module AWS
 
       end
 
+      describe BadRequest do
+        it_should_behave_like "modeled s3 exception", 400, ClientError
+      end
+
       describe NoSuchBucket do
         it_should_behave_like "modeled s3 exception", 404, ClientError
       end

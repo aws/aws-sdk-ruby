@@ -37,6 +37,7 @@ module AWS
       EMPTY_BODY_ERRORS = {
         304 => Errors::NotModified,
         403 => Errors::Forbidden,
+        400 => Errors::BadRequest,
         404 => Errors::NoSuchKey,
       }
 
