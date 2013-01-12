@@ -21,6 +21,7 @@ require 'aws/record/validators/inclusion'
 require 'aws/record/validators/length'
 require 'aws/record/validators/numericality'
 require 'aws/record/validators/presence'
+require 'aws/record/validators/uniqueness'
 require 'aws/record/validators/method'
 
 module AWS
@@ -681,6 +682,14 @@ module AWS
       #     is of the method/proc is false.
       def validates_presence_of *args
         validators << PresenceValidator.new(self, *args)
+      end
+
+      # Validates whether the value of the specified attributes are unique across 
+      # the system. Useful for making sure that only one user can be named “davidhh”.
+      #
+      # @overload validates_uniqueness_of(*attributes, options = {}, &block)
+      def validates_uniqueness_of *args
+        validators << UniquenessValidator.new(self, *args)
       end
 
       # @private

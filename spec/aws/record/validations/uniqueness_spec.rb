@@ -23,36 +23,43 @@ module AWS
 
           let(:validation_macro) { :validates_uniqueness_of }
 
-          it 'adds an error when the value is nil' do
-            klass.string_attr :name
-            klass.validates_uniqueness_of :name
-            obj.name = nil
-            obj.valid?
-            obj.errors[:name].should == ['may not be blank']
-          end
+          let(:invalid_value) do
+            klass.send(:string_attr,:name)
+            existing_obj = klass.new(:name => 'abc')
+            existing_obj.save
+            'abc'
+          end 
 
-          it 'adds an error when the value is an empty string' do
-            klass.string_attr :name
-            klass.validates_uniqueness_of :name
-            obj.name = ''
-            obj.valid?
-            obj.errors[:name].should == ['may not be blank']
-          end
+          #it 'adds an error when the value is nil' do
+            #klass.string_attr :name
+            #klass.validates_uniqueness_of :name
+            #obj.name = nil
+            #obj.valid?
+            #obj.errors[:name].should == ['is already taken']
+          #end
 
-          it 'adds an error when the value is an empty set' do
-            klass.string_attr :tags, :set => true
-            klass.validates_uniqueness_of :tags
-            obj.tags = []
-            obj.valid?
-            obj.errors[:tags].should == ['may not be blank']
-          end
+          #it 'adds an error when the value is an empty string' do
+            #klass.string_attr :name
+            #klass.validates_uniqueness_of :name
+            #obj.name = ''
+            #obj.valid?
+            #obj.errors[:name].should == ['is already taken']
+          #end
 
-          it 'defaults the message to "may not be blank"' do
-            klass.string_attr :name
-            klass.validates_uniqueness_of :name
-            obj.valid?
-            obj.errors[:name].should == ['may not be blank']
-          end
+          #it 'adds an error when the value is an empty set' do
+            #klass.string_attr :tags, :set => true
+            #klass.validates_uniqueness_of :tags
+            #obj.tags = []
+            #obj.valid?
+            #obj.errors[:tags].should == ['is already taken']
+          #end
+
+          #it 'defaults the message to "is already taken"' do
+            #klass.string_attr :name
+            #klass.validates_uniqueness_of :name
+            #obj.valid?
+            #obj.errors[:name].should == ['is already taken']
+          #end
 
         end
 
