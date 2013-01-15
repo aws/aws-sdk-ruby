@@ -22,7 +22,7 @@ module AWS
       ACCEPTED_OPTIONS = [
         :exactly, :within, :minimum, :maximum,
         :too_long, :too_short, :wrong_length,
-        :allow_nil, :on, :if, :unless,
+        :allow_nil, :allow_blank, :on, :if, :unless,
       ]
 
       def setup record_class

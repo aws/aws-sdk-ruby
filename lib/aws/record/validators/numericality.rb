@@ -23,7 +23,7 @@ module AWS
         :greater_than, :greater_than_or_equal_to,
         :less_than, :less_than_or_equal_to,
         :equal_to, :only_integer, :odd, :even,
-        :message, :allow_nil, :on, :if, :unless,
+        :message, :allow_nil, :allow_blank, :on, :if, :unless,
       ]
 
       COMPARISONS = {
