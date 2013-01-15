@@ -108,7 +108,7 @@ module AWS
         until data.eof?
 
           chunk = data.read(1024 * 1024) # read 1MB
-          tree_parts << tree_digest.update(chunk).to_s
+          tree_parts << tree_digest.update(chunk).digest
           tree_digest.reset
 
           digest.update(chunk)
@@ -127,13 +127,18 @@ module AWS
 
         until hashes.count == 1
           hashes = hashes.each_slice(2).map do |h1,h2|
-            h2 ? digest.update(h1 + h2).to_s : h1
+            digest.reset
+            if h2
+              digest.update(h1)
+              digest.update(h2)
+              digest.digest
+            else
+              h1
+            end
           end
-          digest.reset
         end
 
-        hashes.first
-
+        hashes.first.bytes.map{|x| x.to_i.to_s(16).rjust(2,'0')}.join('')
       end
 
     end
