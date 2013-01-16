@@ -19,7 +19,7 @@ module AWS
 
       context 'validates_confirmation_of' do
 
-        it_behaves_like("validation", :accepts_allow_nil => false) do 
+        it_behaves_like("validation", :accepts_allow_nil => false, :accepts_allow_blank => false) do 
 
           let(:validation_macro) { :validates_count_of }
 

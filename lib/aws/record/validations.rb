@@ -42,7 +42,8 @@ module AWS
     #
     #     validates_length_of :summary, 
     #       :max => 500,
-    #       :allow_nil => true
+    #       :allow_nil => true,
+    #       :allow_blank => true
     #
     #   end
     #
@@ -217,6 +218,8 @@ module AWS
       #     +:message+ is "must be accepted".
       #   @option options [Boolean] :allow_nil (true) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (true) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -265,7 +268,8 @@ module AWS
       # This validator works only with single-valued attributes.
       # It should not be used on attributes that have array or set values.
       #
-      # @note This validation method does not accept the +:allow_nil+ option.
+      # @note This validation method does not accept the +:allow_nil+ or the
+      # +:allow_blank+ options.
       #
       # @overload validates_confirmation_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
@@ -393,6 +397,8 @@ module AWS
       #   @param [Hash] options
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -439,6 +445,8 @@ module AWS
       #     +:message+ is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -488,6 +496,8 @@ module AWS
       #     +:message+ is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -525,6 +535,8 @@ module AWS
       #     +:message+ is "is not included in the list".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -586,6 +598,8 @@ module AWS
       #     length (should be %{exactly} characters"</code>
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -636,6 +650,8 @@ module AWS
       #     +:message+ is "is not a number".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
       #     * +:save+
@@ -672,6 +688,8 @@ module AWS
       #     * +:update+
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
       #     attribute value is +nil+.
+      #   @option options [Boolean] :allow_blank (false) Skip validation if the
+      #     attribute value is +blank+.
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or

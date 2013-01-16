@@ -97,8 +97,17 @@ module AWS
       def validate_attributes record
         attribute_names.each do |attribute_name|
           value = read_attribute_for_validation(record, attribute_name)
-          next if value.nil? and options[:allow_nil]
+          next if (value.nil? && options[:allow_nil]) || (blank?(value) && options[:allow_blank])
           validate_attribute(record, attribute_name, value)
+        end
+      end
+
+      def blank? value
+        case value
+        when nil        then true
+        when String     then value !~ /\S/
+        else
+          !value
         end
       end
 

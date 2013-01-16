@@ -19,7 +19,7 @@ module AWS
     # @private
     class ExclusionValidator < InclusionValidator
 
-      ACCEPTED_OPTIONS = [:in, :message, :allow_nil, :on, :if, :unless]
+      ACCEPTED_OPTIONS = [:in, :message, :allow_nil, :allow_blank, :on, :if, :unless]
 
       def setup record_class
         ensure_present(:in)
