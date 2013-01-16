@@ -22,7 +22,7 @@ module AWS
       end
     end
   
-    # Raised when calling #save! or #update_attributes! on a record that
+    # Raised when calling #save!, #create! or #update_attributes! on a record that
     # has validation errors.
     # @private
     class InvalidRecordError < StandardError
