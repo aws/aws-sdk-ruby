@@ -59,6 +59,14 @@ module AWS
         end
       end
 
+      # @return [Boolean] Returns +true+ if the vault exists.
+      def exists?
+        client.describe_vault(:vault_name => name, :account_id => account_id)
+        true
+      rescue Errors::ResourceNotFoundException
+        false
+      end
+
       # @return [ArchiveCollection]
       def archives
         ArchiveCollection.new(self)
