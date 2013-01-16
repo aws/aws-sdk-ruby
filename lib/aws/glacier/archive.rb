@@ -32,6 +32,8 @@ module AWS
       # @return [String]
       attr_reader :archive_id
 
+      alias_method :id, :archive_id
+
       # Deletes the current archive.
       # @return [nil]
       def delete
