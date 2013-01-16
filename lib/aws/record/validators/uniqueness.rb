@@ -20,25 +20,39 @@ module AWS
     class UniquenessValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :scope, :allow_nil, :allow_blank, :if, :unless]
-      
+
       def validate_attribute record, attribute_name, value
 
-        #blank = case
-        #when value.nil?                 then true
-        #when value.is_a?(String)        then value !~ /\S/
-        #when value == false             then false # defeat false.blank? == true
-        #when value.respond_to?(:empty?) then value.empty?
-        #when value.respond_to?(:blank?) then value.blank?
-        #else false
-        #end
+        # @TODO - Model the initial relation setup after the setup
+        # found in ActiveRecord::Validations::UniquenessValidator.
+        # Not sure it we have to go to such lengths or not...
+        relation = record.class
 
-         
-        record.errors.add(attribute_name, message) if false #blank
+        scope_array(options[:scope]).each do |scope_item|
+          scope_value = record.send(scope_item.to_sym)
+          relation = relation.where(scope_item.to_sym => scope_value)
+        end
+
+        existing_record = relation.where(attribute_name.to_sym => value).first
+        taken = !existing_record.nil?
+
+        record.errors.add(attribute_name, message) if taken #blank
 
       end
 
       def message
-        options[:message] || 'is already taken'
+        options[:message] || 'has already been taken'
+      end
+
+      protected
+      def scope_array(scope)
+        if scope.nil?
+          []
+        elsif scope.is_a? Array
+          scope
+        else
+          [scope]
+        end
       end
 
     end

@@ -19,17 +19,19 @@ module AWS
 
       context 'validates_uniqueness_of' do
 
-        it_behaves_like("validation", {}) do
+        it_behaves_like("validation", {:accepts_on => false}) do
 
           let(:validation_macro) { :validates_uniqueness_of }
 
           let(:invalid_value) do
-            klass.send(:string_attr,:name)
-            existing_obj = klass.new(:name => 'abc')
-            existing_obj.save
             'abc'
-          end 
+          end
 
+          before(:each) do
+            klass.string_attr :name
+            obj = klass.new :name => 'abc'
+            klass.stub_chain(:where,:first).and_return(obj)
+          end
           #it 'adds an error when the value is nil' do
             #klass.string_attr :name
             #klass.validates_uniqueness_of :name

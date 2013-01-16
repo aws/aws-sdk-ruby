@@ -685,22 +685,22 @@ module AWS
       end
 
       # Validates whether the value of the specified attributes are unique across 
-      # the system. Useful for making sure that only one user can be named “davidhh”.
+      # the system. Useful for making sure that only one user can be named “foo”.
       #
-      #   class Person < ActiveRecord::Base
+      #   class Person < AWS::Record::Model
       #     validates_uniqueness_of :user_name
       #   end
       #
       # It can also validate whether the value of the specified attributes are unique based on a scope parameter:
       #
-      #   class Person < ActiveRecord::Base
+      #   class Person < AWS::Record::Model
       #     validates_uniqueness_of :user_name, :scope => :account_id
       #   end
       #
       # Or even multiple scope parameters. For example, making sure that a teacher can only be on the schedule once
       # per semester for a particular class.
       #
-      #   class TeacherSchedule < ActiveRecord::Base
+      #   class TeacherSchedule < AWS::Record::Model
       #     validates_uniqueness_of :teacher_id, :scope => [:semester_id, :class_id]
       #   end
       #
@@ -711,9 +711,9 @@ module AWS
       # Configuration options:
       # * <tt>:message</tt> - Specifies a custom error message (default is: "has already been taken").
       # * <tt>:scope</tt> - One or more columns by which to limit the scope of the uniqueness constraint.
-      # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by non-text columns (+true+ by default).
+      # * <tt>:case_sensitive</tt> - Always +true+.  SimpleDB does not support case insensitive search.
       # * <tt>:allow_nil</tt> - If set to true, skips this validation if the attribute is +nil+ (default is +false+).
-      # * <tt>:allow_blank</tt> - If set to true, skips this validation if the attribute is blank (default is +false+).
+      # * <tt>:allow_blank</tt> - If set to true, skips this validation if the attribute is +blank+ (default is +false+).
       # * <tt>:if</tt> - Specifies a method, proc or string to call to determine if the validation should
       #   occur (e.g. <tt>:if => :allow_validation</tt>, or <tt>:if => Proc.new { |user| user.signup_step > 2 }</tt>).
       #   The method, proc or string should return or evaluate to a true or false value.
@@ -724,7 +724,7 @@ module AWS
       #
       # === Concurrency and integrity
       #
-      # Using this validation method in conjunction with ActiveRecord::Base#save
+      # Using this validation method in conjunction with AWS::Record::Model#save
       # does not guarantee the absence of duplicate record insertions, because
       # uniqueness checks on the application level are inherently prone to race
       # conditions. For example, suppose that two users try to post a Comment at
@@ -758,34 +758,10 @@ module AWS
       #                                      | # Boom! We now have a duplicate
       #                                      | # title!
       #
-      # This could even happen if you use transactions with the 'serializable'
-      # isolation level. The best way to work around this problem is to add a unique
-      # index to the database table using
-      # ActiveRecord::ConnectionAdapters::SchemaStatements#add_index. In the
-      # rare case that a race condition occurs, the database will guarantee
-      # the field's uniqueness.
-      #
-      # When the database catches such a duplicate insertion,
-      # ActiveRecord::Base#save will raise an ActiveRecord::StatementInvalid
-      # exception. You can either choose to let this error propagate (which
-      # will result in the default Rails exception page being shown), or you
-      # can catch it and restart the transaction (e.g. by telling the user
-      # that the title already exists, and asking him to re-enter the title).
-      # This technique is also known as optimistic concurrency control:
-      # http://en.wikipedia.org/wiki/Optimistic_concurrency_control
-      #
-      # The bundled ActiveRecord::ConnectionAdapters distinguish unique index
-      # constraint errors from other types of database errors by throwing an
-      # ActiveRecord::RecordNotUnique exception.
-      # For other adapters you will have to parse the (database-specific) exception
-      # message to detect such a case.
-      # The following bundled adapters throw the ActiveRecord::RecordNotUnique exception:
-      # * ActiveRecord::ConnectionAdapters::MysqlAdapter
-      # * ActiveRecord::ConnectionAdapters::Mysql2Adapter
-      # * ActiveRecord::ConnectionAdapters::SQLiteAdapter
-      # * ActiveRecord::ConnectionAdapters::SQLite3Adapter
-      # * ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
-      #      
+      # To guard against duplicates you should create a process to periodically
+      # scan your data and take appropriate action when duplicates are found.  (Ick!)
+      # This means that this validation is useful only in systems where the data creation
+      # events that trigger it are few and far between (relatively speaking).
       def validates_uniqueness_of *args
         validators << UniquenessValidator.new(self, *args)
       end
