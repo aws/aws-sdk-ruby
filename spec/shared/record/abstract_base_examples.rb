@@ -71,6 +71,36 @@ module AWS
   
       # see the subclasses of AbstractBase for dirty-tracking specifics
   
+
+      context '#create!' do
+
+        it 'raises an exception when create returns false' do
+          klass.any_instance.stub(:valid?).and_return(false)
+          klass.any_instance.stub_chain(:errors, :full_messages).and_return(['Foo is bad'])
+          lambda {
+            klass.create!
+          }.should raise_error(Record::InvalidRecordError)
+        end
+
+      end
+
+      context '#create' do
+
+        it 'returns false unless valid' do
+          klass.any_instance.stub(:valid?).and_return(false)
+          klass.create.should == false
+        end
+
+        context 'new records' do
+          it 'delegates to #save of a newly created object' do
+            klass.any_instance.should_receive(:save)
+            klass.create
+          end
+        end
+
+      end
+
+
       context 'standard attribute macros' do
   
         before(:each) do
