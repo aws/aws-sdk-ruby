@@ -130,9 +130,12 @@ module AWS
           !persisted?
         end
   
+        # @param [Hash] opts Pass :validate => false to skip validations
         # @return [Boolean] Returns true if this record has no validation errors.
-        def valid?
-          run_validations
+        def valid? opts = {}
+          opts = {} if opts.nil?
+          opts = {:validate => true}.merge(opts)
+          run_validations if opts[:validate]
           errors.empty?
         end
   
@@ -141,10 +144,11 @@ module AWS
         end
   
         # Creates new records, updates existing records.
+        # @param [Hash] opts Pass :validate => false to skip validations
         # @return [Boolean] Returns true if the record saved without errors,
         #   false otherwise.
-        def save
-          if valid?
+        def save opts = {}
+          if valid?(opts)
             persisted? ? update : create
             clear_changes!
             true
