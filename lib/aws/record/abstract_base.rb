@@ -572,7 +572,7 @@ module AWS
         #   # => true
         def create attributes = {}
           if attributes.is_a?(Array)
-            attributes.collect { |attr| create(attr, options, &block) }
+            attributes.collect { |attr| create(attr) }
           else
             object = new(attributes)
             object.save
@@ -600,7 +600,7 @@ module AWS
           if attributes.is_a?(Array)
             attributes.collect { |attr| create!(attr) }
           else
-            object = new(attributes, options)
+            object = new(attributes)
             object.save!
             object
           end

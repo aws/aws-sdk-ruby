@@ -86,9 +86,11 @@ module AWS
 
       context '#create' do
 
-        it 'returns false unless valid' do
+        it 'returns an invalid object if the attributes are invlalid' do
           klass.any_instance.stub(:valid?).and_return(false)
-          klass.create.should == false
+          obj = klass.create
+          obj.should_not be_persisted
+          obj.should_not be_valid
         end
 
         context 'new records' do
