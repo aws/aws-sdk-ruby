@@ -19,7 +19,7 @@ module AWS
     # @private
     class AcceptanceValidator < Validator
 
-      ACCEPTED_OPTIONS = [:accept, :message, :allow_nil, :on, :if, :unless]
+      ACCEPTED_OPTIONS = [:accept, :message, :allow_nil, :allow_blank, :on, :if, :unless]
 
       def setup record_class
         set_default(:allow_nil, true)

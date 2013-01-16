@@ -68,6 +68,26 @@ module AWS
             
           end
 
+          context ':allow_blank' do
+
+            it 'defaults to false' do
+              klass.string_attr :confirmation
+              klass.validates_acceptance_of :confirmation
+              obj = klass.new :confirmation => " "
+              obj.confirmation.should == " "
+              obj.valid?.should == false
+            end
+
+            it 'skips the validation when set to true and the value is blank' do
+              klass.string_attr :confirmation
+              klass.validates_acceptance_of :confirmation, :allow_blank => true
+              obj = klass.new :confirmation => " "
+              obj.confirmation.should == " "
+              obj.valid?.should == true
+            end
+
+          end
+
           context ':accept' do
 
             it 'specifies an additional value that is valid' do

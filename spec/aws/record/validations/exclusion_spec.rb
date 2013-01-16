@@ -23,7 +23,7 @@ module AWS
 
           let(:validation_macro) { :validates_exclusion_of }
 
-          let(:opts) { { :in => %w(abc xyz) } }
+          let(:opts) { { :in => ['abc', 'xyz', ' '] } }
 
           let(:invalid_value) { 'abc' }
 

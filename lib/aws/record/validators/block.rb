@@ -19,7 +19,7 @@ module AWS
     # @private
     class BlockValidator < Validator
 
-      ACCEPTED_OPTIONS = [:allow_nil, :on, :if, :unless]
+      ACCEPTED_OPTIONS = [:allow_nil, :allow_blank, :on, :if, :unless]
 
       def initialize *args, &block
         @block = block

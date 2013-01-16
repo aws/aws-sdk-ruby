@@ -21,7 +21,7 @@ module AWS
 
       ACCEPTED_OPTIONS = [
         :with, :without, 
-        :message, :allow_nil, :on, :if, :unless,
+        :message, :allow_nil, :allow_blank, :on, :if, :unless,
       ]
 
       def setup record_class

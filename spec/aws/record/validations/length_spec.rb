@@ -23,7 +23,7 @@ module AWS
 
           let(:validation_macro) { :validates_length_of }
 
-          let(:opts) { { :minimum => 1 } }
+          let(:opts) { { :minimum => 2 } }
           
           let(:message_opt) { :too_short }
 

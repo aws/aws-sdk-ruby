@@ -638,6 +638,24 @@ module AWS
 
           end
 
+          context ':allow_blank' do
+
+            it 'skips validation when true and the value is blank' do
+              klass.send(:attr_accessor, :value)
+              klass.validates_numericality_of :value, :allow_blank => true
+              obj.value = ""
+              obj.valid?.should == true
+            end
+
+            it 'defaults to false' do
+              klass.send(:attr_accessor, :value)
+              klass.validates_numericality_of :value
+              obj.value = ""
+              obj.valid?.should == false
+            end
+
+          end
+
           context 'multiple errors' do
 
             it 'can add multiple error messages' do
