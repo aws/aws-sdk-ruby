@@ -48,16 +48,16 @@ module AWS
 
         hash, tree_hash = compute_checksums(data)
 
-        options = {}
-        options[:vault_name] = vault.name
-        options[:account_id] = account_id
-        options[:body] = data
-        options[:checksum] = tree_hash
-        options[:content_sha256] = hash
-        options[:archive_description] = options[:description] if
+        upload_options = {}
+        upload_options[:vault_name] = vault.name
+        upload_options[:account_id] = account_id
+        upload_options[:body] = data
+        upload_options[:checksum] = tree_hash
+        upload_options[:content_sha256] = hash
+        upload_options[:archive_description] = options[:description] if
           options[:description]
 
-        resp = client.upload_archive(options)
+        resp = client.upload_archive(upload_options)
 
         self[resp[:archive_id]]
 
