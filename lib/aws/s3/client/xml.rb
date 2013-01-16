@@ -213,6 +213,15 @@ module AWS
           end
         end
 
+        GetBucketWebsite = BaseGrammar.customize do
+          element "IndexDocument" do
+            element "Suffix"
+          end
+          element "ErrorDocument" do
+            element "Key"
+          end
+        end
+
       end
     end
   end
