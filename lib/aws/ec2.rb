@@ -13,6 +13,7 @@
 
 require 'aws/core'
 require 'aws/ec2/config'
+require 'aws/ec2/metadata'
 
 module AWS
 
@@ -229,6 +230,19 @@ module AWS
   #  ec2.images.create(:image_location => "mybucket/manifest.xml",
   #                    :name => "my-image")
   #
+  # == Metadata
+  #
+  # EC2 instances frequently need to determine information about
+  # themselves. This metadata is retrievable from the metadata
+  # service, accessible from within the EC2 environment. This
+  # service isn't accessible externally. From the command-line,
+  # /opt/aws/bin/ec2-metadata exposes this same information.
+  #
+  # You can retrieve metadata by asking for the property name:
+  #
+  #  AWS::EC2.metadata 'public-hostname'
+  #
+  
   class EC2
 
     AWS.register_autoloads(self) do
