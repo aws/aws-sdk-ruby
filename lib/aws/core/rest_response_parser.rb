@@ -35,12 +35,21 @@ module AWS
       # @return [Hash]
       def extract_data response
 
-        data = @parser.parse(response.http_response.body)
+        if payload = @http[:response_payload]
+          data = { payload => response.http_response.body }
+        else
+          data = @parser.parse(response.http_response.body)
+        end
+
+        if header = response.http_response.headers['x-amzn-requestid']
+          data[:request_id] = [header].flatten.first
+        end
 
         # extract headers and insert into response
         (@http[:response_headers] || {}).each_pair do |name,header_name|
-          header = response.http_response.headers[header_name.downcase]
-          data[name] = [header].flatten.first
+          if header = response.http_response.headers[header_name.downcase]
+            data[name] = [header].flatten.first
+          end
         end
 
         data
