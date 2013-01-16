@@ -772,6 +772,7 @@ module AWS
       #   @option options [String] :grant_read_acp
       #   @option options [String] :grant_write_acp
       #   @option options [String] :grant_full_control
+      #   @option options [String] :website_redirect_location
       #   @return [Core::Response]
       #
       object_method(:put_object, :put, :header_options => {
@@ -786,7 +787,8 @@ module AWS
         :content_disposition => 'Content-Disposition',
         :content_encoding => 'Content-Encoding',
         :content_type => 'Content-Type',
-        :expires => 'Expires'
+        :expires => 'Expires',
+        :website_redirect_location => 'x-amz-website-redirect-location',
       }) do
 
         configure_request do |request, options|
@@ -802,19 +804,8 @@ module AWS
 
         end
 
-        process_response do |response|
-
-          response.data[:version_id] =
-            response.http_response.header('x-amz-version-id')
-
-          response.data[:etag] = response.http_response.header('ETag')
-
-          if time = response.http_response.header('Last-Modified')
-            response.data[:last_modified] = Time.parse(time)
-          end
-
-          add_sse_to_response(response)
-
+        process_response do |resp|
+          extract_object_headers(resp)
         end
 
         simulate_response do |response|
@@ -886,10 +877,10 @@ module AWS
         end
 
         process_response do |resp|
+          extract_object_headers(resp)
           resp.data[:data] = resp.http_response.body
-          resp.data[:version_id] = resp.http_response.header('x-amz-version-id')
-          add_sse_to_response(resp)
         end
+
       end
 
       # @overload head_object(options = {})
@@ -908,58 +899,9 @@ module AWS
         end
 
         process_response do |resp|
-
-          # create a hash of user-supplied metadata
-          meta = {}
-          resp.http_response.headers.each_pair do |name,value|
-            if name =~ /^x-amz-meta-(.+)$/i
-              meta[$1] = [value].flatten.join
-            end
-          end
-          meta
-          resp.data[:meta] = meta
-
-          if expiry = resp.http_response.headers['x-amz-expiration']
-            expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
-            exp_date = DateTime.parse($1)
-            exp_rule_id = $2
-          else
-            exp_date = nil
-            exp_rule_id = nil
-          end
-
-          if restore = resp.http_response.headers['x-amz-restore']
-            restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
-            restoring = $1 == "true"
-            restore_date = DateTime.parse($2)
-          else
-            restoring = false
-            restore_date = nil
-          end
-
-          resp.data[:expiration_date] = exp_date
-          resp.data[:expiration_rule_id] = exp_rule_id
-          resp.data[:restore_in_progress] = restoring
-          resp.data[:restore_expiration_date] = restore_date
-
-          {
-            'x-amz-version-id' => :version_id,
-            'content-type' => :content_type,
-            'etag' => :etag,
-          }.each_pair do |header,method|
-            resp.data[method] = resp.http_response.header(header)
-          end
-
-          if time = resp.http_response.header('Last-Modified')
-            resp.data[:last_modified] = Time.parse(time)
-          end
-
-          resp.data[:content_length] =
-            resp.http_response.header('content-length').to_i
-
-          add_sse_to_response(resp)
-
+          extract_object_headers(resp)
         end
+
       end
 
       # @overload delete_object(options = {})
@@ -1064,6 +1006,7 @@ module AWS
       #   @option options [String] :grant_read_acp
       #   @option options [String] :grant_write_acp
       #   @option options [String] :grant_full_control
+      #   @option options [String] :website_redirect_location
       #   @return [Core::Response]
       object_method(:initiate_multipart_upload, :post, 'uploads',
                     XML::InitiateMultipartUpload,
@@ -1078,7 +1021,8 @@ module AWS
                       :content_disposition => 'Content-Disposition',
                       :content_encoding => 'Content-Encoding',
                       :content_type => 'Content-Type',
-                      :expires => 'Expires'
+                      :expires => 'Expires',
+                      :website_redirect_location => 'x-amz-website-redirect-location',
                     }) do
 
         configure_request do |req, options|
@@ -1088,8 +1032,8 @@ module AWS
           super(req, options)
         end
 
-        process_response do |response|
-          add_sse_to_response(response)
+        process_response do |resp|
+          extract_object_headers(resp)
         end
 
       end
@@ -1181,12 +1125,8 @@ module AWS
 
         end
 
-        process_response do |response|
-          response.data[:etag] = response.http_response.header('ETag')
-          if time = response.http_response.header('Last-Modified')
-            response.data[:last_modified] = Time.parse(time)
-          end
-          add_sse_to_response(response)
+        process_response do |resp|
+          extract_object_headers(resp)
         end
 
         simulate_response do |response|
@@ -1218,15 +1158,14 @@ module AWS
             "<CompleteMultipartUpload>#{parts_xml}</CompleteMultipartUpload>"
         end
 
-        process_response do |response|
-          add_sse_to_response(response)
-          response.data[:version_id] =
-            response.http_response.header('x-amz-version-id')
+        process_response do |resp|
+          extract_object_headers(resp)
         end
 
         simulate_response do |response|
           response.data[:version_id] = nil
         end
+
       end
 
       # @overload abort_multipart_upload(options = {})
@@ -1291,6 +1230,7 @@ module AWS
       #   @option options [String] :grant_read_acp
       #   @option options [String] :grant_write_acp
       #   @option options [String] :grant_full_control
+      #   @option options [String] :website_redirect_location
       #   @return [Core::Response]
       object_method(:copy_object, :put, :header_options => {
         :acl => 'x-amz-acl',
@@ -1304,7 +1244,8 @@ module AWS
         :metadata_directive => 'x-amz-metadata-directive',
         :content_type => 'Content-Type',
         :content_disposition => 'Content-Disposition',
-        :expires => 'Expires'
+        :expires => 'Expires',
+        :website_redirect_location => 'x-amz-website-redirect-location',
       }) do
 
         configure_request do |req, options|
@@ -1324,14 +1265,8 @@ module AWS
           end
         end
 
-        process_response do |response|
-          response.data[:version_id] =
-            response.http_response.header('x-amz-version-id')
-          response.data[:etag] = response.http_response.header('ETag')
-          if time = response.http_response.header('Last-Modified')
-            response.data[:last_modified] = Time.parse(time)
-          end
-          add_sse_to_response(response)
+        process_response do |resp|
+          extract_object_headers(resp)
         end
 
       end
@@ -1378,13 +1313,6 @@ module AWS
         req
       end
 
-      def add_sse_to_response response
-        if sse = response.http_response.header('x-amz-server-side-encryption')
-          sse = sse.downcase.to_sym
-        end
-        response.data[:server_side_encryption] = sse
-      end
-
       # Previously the access control policy could be specified via :acl
       # as a string or an object that responds to #to_xml.  The prefered
       # method now is to pass :access_control_policy an xml document.
@@ -1411,6 +1339,61 @@ module AWS
 
       def md5 str
         Base64.encode64(Digest::MD5.digest(str)).strip
+      end
+
+      def extract_object_headers resp
+        meta = {}
+        resp.http_response.headers.each_pair do |name,value|
+          if name =~ /^x-amz-meta-(.+)$/i
+            meta[$1] = [value].flatten.join
+          end
+        end
+        resp.data[:meta] = meta
+
+        if expiry = resp.http_response.headers['x-amz-expiration']
+          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
+          exp_date = DateTime.parse($1)
+          exp_rule_id = $2
+        else
+          exp_date = nil
+          exp_rule_id = nil
+        end
+        resp.data[:expiration_date] = exp_date if exp_date
+        resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
+
+        if restore = resp.http_response.headers['x-amz-restore']
+          restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
+          restoring = $1 == "true"
+          restore_date = DateTime.parse($2)
+        else
+          restoring = false
+          restore_date = nil
+        end
+        resp.data[:restore_in_progress] = restoring
+        resp.data[:restore_expiration_date] = restore_date if restore_date
+
+        {
+          'x-amz-version-id' => :version_id,
+          'content-type' => :content_type,
+          'etag' => :etag,
+          'x-amz-website-redirect-location' => :website_redirect_location,
+        }.each_pair do |header,method|
+          if value = resp.http_response.header(header)
+            resp.data[method] = value
+          end
+        end
+
+        if time = resp.http_response.header('Last-Modified')
+          resp.data[:last_modified] = Time.parse(time)
+        end
+
+        if length = resp.http_response.header('content-length')
+          resp.data[:content_length] = length.to_i
+        end
+
+        if sse = resp.http_response.header('x-amz-server-side-encryption')
+          resp.data[:server_side_encryption] = sse.downcase.to_sym
+        end
       end
 
       module Validators

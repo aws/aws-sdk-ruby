@@ -387,14 +387,14 @@ module AWS
 
         it 'defaults version ids to nil' do
           resp = client.send(method, opts)
-          resp.version_id.should be_nil
+          resp[:version_id].should be(nil)
         end
 
         it 'populates the version when present' do
           resp = client.with_http_handler do |req, resp|
             resp.headers['x-amz-version-id'] = ['foo']
           end.send(method,opts)
-          resp.version_id.should == 'foo'
+          resp[:version_id].should eq('foo')
         end
 
       end
@@ -405,7 +405,7 @@ module AWS
           response = client.with_http_handler do |req, resp|
             resp.headers['ETag'] = ['abcxyz']
           end.send(method, opts)
-          response.etag.should == 'abcxyz'
+          response[:etag].should eq('abcxyz')
         end
 
       end
@@ -1522,8 +1522,8 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-expiration'] = nil
             end.head_object(opts)
-            r.expiration_date.should == nil
-            r.expiration_rule_id.should == nil
+            r[:expiration_date].should be(nil)
+            r[:expiration_rule_id].should be(nil)
           end
 
           it 'parses x-amz-expiration headers' do
@@ -1541,8 +1541,8 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-restore'] = nil
             end.head_object(opts)
-            r.restore_expiration_date.should == nil
-            r.restore_in_progress.should == false
+            r[:restore_expiration_date].should be(nil)
+            r[:restore_in_progress].should be(false)
           end
 
           it 'parses x-amz-restore headers' do
