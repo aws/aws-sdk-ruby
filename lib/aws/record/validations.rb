@@ -66,7 +66,7 @@ module AWS
     #
     #   validates_presence_of :created_at, :on => :create
     #
-    #   validates_presience_of :updated_at, :on => :update
+    #   validates_presence_of :updated_at, :on => :update
     # 
     # === Validate :if or :unless
     #
