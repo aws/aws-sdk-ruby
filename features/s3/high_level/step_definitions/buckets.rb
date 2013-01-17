@@ -123,3 +123,14 @@ Then /^the bucket should have no rules$/ do
   @bucket.cors.count.should eq(0)
 end
 
+Then /^the bucket be a website$/ do
+  @bucket.website?.should be(true)
+end
+
+Then /^the bucket should not be a website$/ do
+  @bucket.website?.should be(false)
+end
+
+When /^I enable website hosting$/ do
+  @bucket.configure_website
+end

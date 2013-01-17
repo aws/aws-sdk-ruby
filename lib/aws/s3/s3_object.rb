@@ -1253,7 +1253,7 @@ module AWS
         value
       end
 
-      protected
+      private
 
       # @return [Boolean]
       def should_decrypt? options

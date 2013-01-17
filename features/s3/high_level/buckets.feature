@@ -130,3 +130,9 @@ Feature: CRUD Buckets (High Level)
     When I clear the bucket rules
     Then the bucket should have no rules
 
+  @website
+  Scenario: Enable bucket website hosting
+    When I create a new bucket
+    Then the bucket should not be a website
+    When I enable website hosting
+    Then the bucket be a website
