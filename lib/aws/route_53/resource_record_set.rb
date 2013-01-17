@@ -13,7 +13,7 @@
 
 module AWS
   class Route53
-    #
+
     # = Modify resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
@@ -27,16 +27,6 @@ module AWS
     #   rrset = rrsets['foo.example.com.', 'A']
     #   rrset.delete
     #
-    # @attr_reader [String] hosted_zone_id
-    #
-    # @attr_reader [ChangeInfo] change_info
-    #
-    # @attr_reader [String] name
-    #
-    # @attr_reader [String] type
-    #
-    # @attr_reader [String] set_identifier
-    #
     # @attr_reader [Hash] alias_target
     #
     # @attr_reader [Integer] weight
@@ -48,6 +38,7 @@ module AWS
     # @attr_reader [Array<Hash>] resource_records
     #
     class ResourceRecordSet < Core::Resource
+
       # @private
       def initialize name, type, options = {}
         @name = name
@@ -59,73 +50,80 @@ module AWS
         super
       end
 
+      # @return [String] The hosted zone ID.
       attr_reader :hosted_zone_id
 
+      # @return [ChangeInfo]
       attr_reader :change_info
 
+      # @return [String] name
       attr_reader :name
 
-      # @param [String]
+      # @param [String] new_name
       # @return [String]
-      def name=(new_name)
+      def name= new_name
         @create_options[:name] = new_name
       end
 
+      # @return [String]
       attr_reader :type
 
-      # @param [String]
+      # @param [String] new_type
       # @return [String]
-      def type=(new_type)
+      def type= new_type
         @create_options[:type] = new_type
       end
 
+      # @return [String]
       attr_reader :set_identifier
+
       alias_method :identifier, :set_identifier
 
-      # @param [String]
+      # @param [String] new_identifier
       # @return [String]
-      def set_identifier=(new_identifier)
+      def set_identifier= new_identifier
         @create_options[:set_identifier] = new_identifier
       end
+
       alias_method :identifier=, :set_identifier=
 
       attribute :alias_target
 
-      # @param [Hash]
+      # @param [Hash] new_target
       # @return [Hash]
-      def alias_target=(new_target)
+      def alias_target= new_target
         @create_options[:alias_target] = new_target
       end
 
       attribute :weight
 
-      # @param [Integer]
+      # @param [Integer] new_weight
       # @return [Integer]
-      def weight=(new_weight)
+      def weight= new_weight
         @create_options[:weight] = new_weight
       end
 
       attribute :region
 
-      # @param [String]
+      # @param [String] new_region
       # @return [String]
-      def region=(new_region)
+      def region= new_region
         @create_options[:region] = new_region
       end
 
       attribute :ttl
 
-      # @param [Integer]
+      # @param [Integer] new_ttl
       # @return [Integer]
-      def ttl=(new_ttl)
+      def ttl= new_ttl
         @create_options[:ttl] = new_ttl
       end
 
       attribute :resource_records
 
-      # @param [Array<Hash>]
+      # @param [Array<Hash>] new_rrs
       # @return [Array<Hash>]
-      def resource_records=(new_rrs)
+      def resource_records= new_rrs
         @create_options[:resource_records] = new_rrs
       end
 
@@ -139,7 +137,7 @@ module AWS
         }
       end
 
-      # @return [Boolean] Returns true if this rrset exists.
+      # @return [Boolean] Returns +true+ if this rrset exists.
       def exists?
         !get_resource.data[:resource_record_sets].find { |details|
           if set_identifier
@@ -151,9 +149,9 @@ module AWS
       end
 
       # Update values of resource record set.
-      # @param [Hash]  Options for change batch.
+      # @param [Hash] options Options for change batch.
       # @return [ResourceRecordSet] New resource record set with current value.
-      def update(options={})
+      def update options = {}
         delete_options = {:name => name, :type => type}
         delete_options[:set_identifier] = set_identifier if set_identifier
         delete_options[:alias_target] = alias_target if alias_target
@@ -176,9 +174,9 @@ module AWS
       end
 
       # Delete resource record set.
-      # @param [Hash] Options for change batch.
+      # @param [Hash] options Options for change batch.
       # @return [ChangeInfo]
-      def delete(options={})
+      def delete options = {}
         delete_options = {:name => name, :type => type}
         delete_options[:set_identifier] = set_identifier if set_identifier
         delete_options[:alias_target] = alias_target if alias_target
@@ -193,7 +191,7 @@ module AWS
         change_info = batch.call()
       end
 
-      protected
+      private
 
       def resource_identifiers
         [[:name, name], [:type, type], [:set_identifier, set_identifier]]
@@ -208,6 +206,7 @@ module AWS
 
         client.list_resource_record_sets(options)
       end
+
     end
   end
 end

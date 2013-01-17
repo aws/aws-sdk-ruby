@@ -308,7 +308,7 @@ module AWS
 
       # Sets the website configuration.  Deletes the configuration if
       # +nil+ is passed.
-      # @param [WebsiteConfiguration,nil]
+      # @param [WebsiteConfiguration,nil] website_configuration
       # @see #configure_website
       # @see #website_configuration
       # @see #remove_website_configuration

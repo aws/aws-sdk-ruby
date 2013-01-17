@@ -13,27 +13,20 @@
 
 module AWS
   class Route53
-    #
+
     # = Delete existing hosted zone
     #
     #   hosted_zone = AWS::Route53::HostedZone.new(hosted_zone_id)
     #   hosted_zone.delete
     #
-    # @attr_reader [String] id
-    #   hosted zone id.
-    #
-    # @attr_reader [ChangeInfo] change_info
-    #   change info for the newly created HostedZone instance.
-    #
-    # @attr_reader [String] name
-    #   hosted zone name.
+    # @attr_reader [String] name The hosted zone name.
     #
     # @attr_reader [String] caller_reference
     #
     # @attr_reader [Integer] resource_record_set_count
-    #   resource record set count.
+    #   The resource record set count.
     #
-    # @attr_reader [Array<String>]
+    # @attr_reader [Array<String>] delegation_set
     #
     class HostedZone < Core::Resource
 
@@ -44,11 +37,14 @@ module AWS
         super
       end
 
+      # @return [String] The hosted zone ID.
       attr_reader :id
 
+      # @return [ChangeInfo] Change info for the newly created HostedZone
+      #   instance.
       attr_reader :change_info
 
-      # Hosted zone path.
+      # The Hosted zone path.
       # @return [String]
       def path
         "/hostedzone/#{id}"
@@ -88,7 +84,7 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns true if this hosted zone exists.
+      # @return [Boolean] Returns +true+ if this hosted zone exists.
       def exists?
         get_resource.data[:hosted_zone][:id] == path
       end
@@ -98,10 +94,9 @@ module AWS
       def resource_record_sets
         ResourceRecordSetCollection.new(id, :config => config)
       end
-
       alias_method :rrsets, :resource_record_sets
 
-      protected
+      private
 
       def resource_identifiers
         [[:id, id], [:name, name], [:caller_reference, caller_reference]]

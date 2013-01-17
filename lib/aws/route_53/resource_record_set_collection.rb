@@ -15,7 +15,7 @@ require 'time'
 
 module AWS
   class Route53
-    #
+
     # = Create new resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
@@ -25,9 +25,6 @@ module AWS
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
     #   rrset = rrsets['foo.example.com.', 'A']
-    # 
-    #
-    # @attr_reader [String] hosted_zone_id
     #
     class ResourceRecordSetCollection
 
@@ -40,17 +37,22 @@ module AWS
         super
       end
 
+      # @return [String]
       attr_reader :hosted_zone_id
 
       # Find resource record set by its name, type and identifier.
-      # @param [String, String, String] Name, type and identifier
+      # @param [String] name
+      # @param [String] type
+      # @param [String] set_identifier
       # @return [ResourceRecordSet]
-      def [] name, type, set_identifier=nil
+      def [] name, type, set_identifier = nil
         ResourceRecordSet.new(name, type, :set_identifier => set_identifier, :hosted_zone_id => hosted_zone_id, :config => config)
       end
 
       # Create new resource record set.
-      # @param [String, String, Hash] Name, type and options.
+      # @param [String] name
+      # @param [String] type
+      # @param [Hash] options
       # @return [ResourceRecordSet]
       def create name, type, options = {}
         batch = ChangeBatch.new(hosted_zone_id, :comment => options[:comment], :config => config)
@@ -67,7 +69,7 @@ module AWS
         end
       end
 
-      protected
+      private
 
       def _each_item next_token, limit, options = {}, &block
 

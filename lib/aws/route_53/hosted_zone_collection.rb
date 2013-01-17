@@ -15,7 +15,7 @@ require 'time'
 
 module AWS
   class Route53
-    #
+
     # = Create new hosted zone
     #
     #   r53 = AWS::Route53.new
@@ -43,7 +43,7 @@ module AWS
         HostedZone.new(hosted_zone_id, :config => config)
       end
 
-      # @param [String, Hash] hosted_zone_id
+      # @param [String] name
       # @option options [String] :comment
       # @option options [String] :caller_reference
       # @return [HostedZone]

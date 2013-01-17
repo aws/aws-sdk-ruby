@@ -24,7 +24,7 @@ module AWS
 
         # @param [String] namespace
         # @param [String] operation_name
-        # @param [Hash] rules A hash of option rules to validate against.
+        # @param [Hash] operation
         def initialize namespace, operation_name, operation
           @namespace = namespace
           @operation_name = operation_name

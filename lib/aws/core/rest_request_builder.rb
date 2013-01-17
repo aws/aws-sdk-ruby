@@ -41,7 +41,7 @@ module AWS
       end
 
       # Populates a Http::Request with the following:
-      # 
+      #
       # * HTTP method
       # * URI
       # * headers
@@ -49,7 +49,7 @@ module AWS
       #
       # @param [Http::Request] request
       #
-      # @param [Hash] request_options The hash of request options provided 
+      # @param [Hash] params The hash of request options provided
       #   to the client request method.  This will be used to populate
       #   the headers, uri and body.
       #
@@ -64,7 +64,7 @@ module AWS
         populate_body(request, params)
       end
 
-      protected
+      private
 
       def populate_method request
         request.http_method = @http[:verb]

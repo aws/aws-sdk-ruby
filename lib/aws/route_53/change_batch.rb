@@ -13,7 +13,7 @@
 
 module AWS
   class Route53
-    #
+
     # = Modify resource record sets with ChangeBatch
     #
     #   batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
@@ -24,43 +24,40 @@ module AWS
     #
     #   batch.call
     #
-    # @attr_reader [String] hosted_zone_id 
-    #
-    # @attr_reader [Array<ChangeRequest>] changes
-    #
-    # @attr_reader [String] comment
-    #
     class ChangeBatch
 
       include Enumerable
       include Core::Model
 
       # @private
-      def initialize(hosted_zone_id, options={})
+      def initialize hosted_zone_id, options = {}
         super(options)
         @hosted_zone_id = hosted_zone_id
         @comment = options[:comment]
         @changes = []
       end
 
+      # @return [String]
       attr_reader :hosted_zone_id
 
+      # @return [Array<ChangeRequest>]
       attr_reader :changes
 
+      # @return [String]
       attr_reader :comment
 
-      # @param [ChangeRequest]
+      # @param [ChangeRequest] change
       # @return [Array]
-      def push(change)
+      def push change
         @changes.push(change)
       end
 
       alias_method :<<, :push
 
       # Calls change batch request.
-      # @param [Hash]
+      # @option (see Client#change_resource_record_sets)
       # @return [ChangeInfo]
-      def call(options={})
+      def call options={}
         resp = client.change_resource_record_sets(options.merge(self.to_hash))
         if resp[:change_info][:id]
           ChangeInfo.new_from(:change_resource_record_sets,
@@ -99,6 +96,7 @@ module AWS
     end
 
     class ChangeRequest
+
       # @private
       def initialize(action, name, type, options={})
         @action = action
@@ -134,24 +132,28 @@ module AWS
       end
     end
 
-    #
     # A change request to create a resource record set.
-    #
     class CreateRequest < ChangeRequest
-      # @param [String, String, Hash]
-      def initialize(name, type, options={})
+
+      # @param [String] name
+      # @param [String] type
+      # @param [Hash] options
+      def initialize name, type, options = {}
         super('CREATE', name, type, options)
       end
+
     end
 
-    #
     # A change request to delete a resource record set.
-    #
     class DeleteRequest < ChangeRequest
-      # @param [String, String, Hash]
-      def initialize(name, type, options={})
+
+      # @param [String] name
+      # @param [String] type
+      # @param [Hash] options
+      def initialize name, type, options = {}
         super('DELETE', name, type, options)
       end
+
     end
   end
 end
