@@ -571,13 +571,7 @@ module AWS
         #   book.persisted? 
         #   # => true
         def create attributes = {}
-          if attributes.is_a?(Array)
-            attributes.collect { |attr| create(attr) }
-          else
-            object = new(attributes)
-            object.save
-            object
-          end
+          create_impl attributes, :create, :save
         end
 
         # Create a new instance of this class, calling #save! to persist
@@ -597,13 +591,7 @@ module AWS
         #   # => InvalidRecordError
         #
         def create! attributes = {}
-          if attributes.is_a?(Array)
-            attributes.collect { |attr| create!(attr) }
-          else
-            object = new(attributes)
-            object.save!
-            object
-          end
+          create_impl attributes, :create!, :save!
         end
 
         # @private
@@ -687,6 +675,17 @@ module AWS
 
           attribute
 
+        end
+
+        protected
+        def create_impl attributes = {}, create_method = :create, save_method = :save
+          if attributes.is_a?(Array)
+            attributes.collect { |attr| send(create_method,attributes) }
+          else
+            object = new(attributes)
+            object.send(save_method)
+            object
+          end
         end
 
       end
