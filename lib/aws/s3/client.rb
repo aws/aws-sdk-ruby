@@ -1419,13 +1419,16 @@ module AWS
         resp.data[:expiration_date] = exp_date if exp_date
         resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
 
+        restoring = false
+        restore_date = nil
+
         if restore = resp.http_response.headers['x-amz-restore']
-          restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
-          restoring = $1 == "true"
-          restore_date = DateTime.parse($2)
-        else
-          restoring = false
-          restore_date = nil
+          if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
+            restoring = $1 == "true"
+            restore_date = DateTime.parse($2)
+          elsif restore.first =~ /ongoing-request="(.+?)"/
+            restoring = $1 == "true"
+          end
         end
         resp.data[:restore_in_progress] = restoring
         resp.data[:restore_expiration_date] = restore_date if restore_date
