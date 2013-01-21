@@ -75,8 +75,8 @@ module AWS
 
           rescue *PASS_THROUGH_ERRORS => error
             raise error
-          rescue Exception
-            response.network_error = true
+          rescue Exception => error
+            response.network_error = error
           end
 
           nil

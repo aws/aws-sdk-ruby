@@ -247,6 +247,12 @@ module AWS::Core::Http
           response.network_error?.should == true
         end
 
+        it "provides access to the error" do
+          http.stub(:request).and_raise(klass)
+          handle!
+          response.network_error.should be_a(klass)
+        end
+
       end
 
       it_behaves_like(:traps_certain_errors_as_networking_errors, SocketError)
