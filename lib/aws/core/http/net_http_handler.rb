@@ -73,6 +73,11 @@ module AWS
               end
             end
 
+          # The first rescue clause is required because Timeout::Error is
+          # a SignalException (in Ruby 1.8, not 1.9).  Generally, SingalExceptions
+          # should not be retried, except for timeout errors.
+          rescue Timeout::Error => error
+            response.network_error = error
           rescue *PASS_THROUGH_ERRORS => error
             raise error
           rescue Exception => error
