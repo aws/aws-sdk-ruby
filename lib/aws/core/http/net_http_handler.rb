@@ -26,16 +26,12 @@ module AWS
       class NetHttpHandler
 
         # @private
-        NETWORK_ERRORS = [
-          SocketError,
-          EOFError,
-          IOError,
-          Errno::ECONNABORTED,
-          Errno::ECONNRESET,
-          Errno::EPIPE,
-          Errno::EINVAL,
-          Timeout::Error,
-          Errno::ETIMEDOUT,
+        PASS_THROUGH_ERRORS = [
+          NoMethodError, FloatDomainError, TypeError, NotImplementedError,
+          SystemExit, Interrupt, SyntaxError, RangeError, NoMemoryError,
+          ArgumentError, ZeroDivisionError, LoadError, NameError,
+          LocalJumpError, SignalException, ScriptError,
+          SystemStackError, RegexpError, IndexError,
         ]
 
         # (see Net::HTTP::ConnectionPool.new)
@@ -77,7 +73,9 @@ module AWS
               end
             end
 
-          rescue *NETWORK_ERRORS
+          rescue *PASS_THROUGH_ERRORS => error
+            raise error
+          rescue Exception
             response.network_error = true
           end
 
@@ -107,7 +105,9 @@ module AWS
             when 'POST'   then Net::HTTP::Post
             when 'HEAD'   then Net::HTTP::Head
             when 'DELETE' then Net::HTTP::Delete
-            else raise "unsupported http method: #{request.http_method}"
+            else
+              msg = "unsupported http method: #{request.http_method}"
+              raise ArgumentError, msg
             end
 
           net_http_req = request_class.new(request.uri, headers)
