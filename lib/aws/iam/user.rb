@@ -104,6 +104,9 @@ module AWS
         resp[:users].find{|u| u[:user_name] == name }
       end
 
+      # (see Resource#exists?)
+      def exists?; super; end
+
       # Deletes this user.
       # @return [nil]
       def delete
