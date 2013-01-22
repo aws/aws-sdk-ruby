@@ -14,7 +14,7 @@
 source 'http://rubygems.org'
 
 gem 'uuidtools', '~> 2.1'
-gem 'httparty', '~> 0.7'
+gem 'httparty', '~> 0.10.0'
 gem 'nokogiri', '>= 1.4.4'
 gem 'json', '>= 1.4.6'
 
