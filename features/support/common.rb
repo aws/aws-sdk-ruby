@@ -20,13 +20,7 @@ end if ENV['COVERAGE']
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
 require 'aws-sdk'
-
-require 'mocha'
-include Mocha::API
-require 'net/http'
-require 'uri'
 require 'yaml'
-
 
 # try to find a config file
 dir = Dir.getwd

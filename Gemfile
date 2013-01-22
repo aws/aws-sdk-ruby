@@ -23,15 +23,12 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '>= 2.12'
+  gem 'cucumber'
   gem 'simplecov', :require => false
   gem 'rvm-tester'
-  gem 'cucumber', '~> 0.10.2', :require => 'cucumber/rake/task'
-  gem 'bourne', '1.0'
-  gem 'mocha', '0.9.8'
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post', '~> 1.1.2'
   gem 'rotp', '~> 1.3.0'
-  gem 'jruby-openssl', :platforms => :jruby
 end
 
