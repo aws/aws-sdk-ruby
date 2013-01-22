@@ -41,7 +41,7 @@ end
 
 When /^I request to run an vpc instance with the following parameters:$/ do |table|
   @run_in_vpc = true
-  When "I request to run an instance with the following parameters:", table
+  step "I request to run an instance with the following parameters:", table
 end
 
 Then /^the instance should have the correct vpc_id$/ do
@@ -53,7 +53,7 @@ Then /^the instance should have the correct subnet_id$/ do
 end
 
 Given /^I create a vpc$/ do
-  Given 'I create a vpc with the cidr block "10.0.0.0/16"'
+  step 'I create a vpc with the cidr block "10.0.0.0/16"'
 end
 
 When /^I delete the VPC$/ do
@@ -62,7 +62,7 @@ end
 
 Given /^I create (\d+) vpcs$/ do |count|
   count.to_i.times do
-    Given 'I create a vpc'
+    step 'I create a vpc'
   end
 end
 

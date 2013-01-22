@@ -42,7 +42,7 @@ end
 
 Given /^I create a snapshot with description "([^\"]*)"$/ do |description|
 
-  Given %(I create a volume)
+  step %(I create a volume)
 
   # it can take a while before the volume is in a state where snapshots 
   # are allowed

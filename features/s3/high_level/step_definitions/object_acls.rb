@@ -33,8 +33,8 @@ END
 end
 
 Given /^I have set an object ACL$/ do
-  Given "my account has an object in it"
-  Given "I set the object ACL to a string"
+  step "my account has an object in it"
+  step "I set the object ACL to a string"
 end
 
 When /^I ask for the object ACL$/ do

@@ -36,7 +36,7 @@ end
 
 Then /^\#get_hosted_zone should raise "([^"]*)"$/ do |error_class_name|
   begin
-    Given "I call #delete_hosted_zone on the client with the zone id"
+    step "I call #delete_hosted_zone on the client with the zone id"
   rescue => @error
     @error.class.name.should eq(error_class_name)
   end
@@ -44,7 +44,7 @@ end
 
 Given /^I call \#create_hosted_zone on the client (\d+) times$/ do |count|
   count.to_i.times do
-    Given "I call #create_hosted_zone on the client"
+    step "I call #create_hosted_zone on the client"
   end
 end
 

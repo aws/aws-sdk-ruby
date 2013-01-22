@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 Then /^I should receive a bucket$/ do
-  Then "I should receive a bucket named \"#{@bucket_name}\""
+  step "I should receive a bucket named \"#{@bucket_name}\""
 end
 
 Then /^I should receive a bucket named "([^\"]*)"$/ do |name|

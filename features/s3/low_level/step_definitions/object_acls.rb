@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 Given /^my account has an object in it$/ do
-  Given "I call create_bucket"
+  step "I call create_bucket"
   @object_key = "foo"
   @s3_client.put_object(:bucket_name => @bucket_name,
                      :key => @object_key,

@@ -12,8 +12,8 @@
 # language governing permissions and limitations under the License.
 
 Given /^ my account has a versioned bucket in it$/ do
-  Given "I call create_bucket"  
-  And "I enable versioning for the bucket"
+  step "I call create_bucket"  
+  step "I enable versioning for the bucket"
 end
 
 When /^I call set_bucket_versioning with "([^\"]*)"$/ do |state|

@@ -45,7 +45,7 @@ When /^I ask if the snapshot exists$/ do
 end
 
 Given /^I create a snapshot$/ do
-  Given %(I create a volume)
+  step %(I create a volume)
   @snapshot = @volume.create_snapshot
   @created_snapshots << @snapshot
 end

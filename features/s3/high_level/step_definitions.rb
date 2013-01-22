@@ -35,15 +35,15 @@ Given /^I write "([^"]*)" to the key "([^"]*)"$/ do |data, key|
 end
 
 Given /^I have a bucket with the following keys:$/ do |table|
-  Given "I create a new bucket"
+  step "I create a new bucket"
   table.hashes.each do |hash|
-    Given "I write \"foo\" to the key \"#{hash['key']}\""
+    step "I write \"foo\" to the key \"#{hash['key']}\""
   end
 end
 
 Given /^I have a bucket with (\d+) keys$/ do |count|
-  Given "I create a new bucket" unless @bucket
+  step "I create a new bucket" unless @bucket
   count.to_i.times do |n|
-    Given "I write \"foo\" to the key \"#{'%04d' % n}\""
+    step "I write \"foo\" to the key \"#{'%04d' % n}\""
   end
 end

@@ -33,7 +33,7 @@ END
 end
 
 Given /^I have set a bucket ACL$/ do
-  Given "I call create_bucket"
+  step "I call create_bucket"
   @bucket = @s3.buckets[@bucket_name]
   @bucket.acl = {
     :owner => { :id => @bucket.owner.id },

@@ -16,11 +16,11 @@ Given /^I wait (\d+) seconds for eventual consistency$/ do |seconds|
 end
 
 When /^(.*), ignoring errors$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 When /^(.*) again$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 Given /^I start a memoization block$/ do

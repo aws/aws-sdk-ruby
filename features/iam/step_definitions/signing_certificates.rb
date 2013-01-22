@@ -24,13 +24,13 @@ Given /^I create an X\.509 cert$/ do
 end
 
 When /^I upload a signing certificate$/ do
-  Given "I create an X.509 cert" 
+  step "I create an X.509 cert" 
   @signing_certificate = @iam.signing_certificates.upload(@cert.to_pem)
   @uploaded_signing_certificates << @signing_certificate
 end
 
 When /^I upload a signing certificate for the user$/ do
-  Given "I create an X.509 cert" 
+  step "I create an X.509 cert" 
   @signing_certificate = @user.signing_certificates.upload(@cert.to_pem)
   @uploaded_signing_certificates << @signing_certificate
 end

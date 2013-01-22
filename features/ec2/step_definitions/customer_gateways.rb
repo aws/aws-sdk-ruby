@@ -17,7 +17,7 @@ When /^I create a customer gateway with the bgp_asn of (\d+) and ip address of "
 end
 
 When /^I create a customer gateway$/ do
-  When 'I create a customer gateway with the bgp_asn of 65534 and ip address of "1.2.3.4"'
+  step 'I create a customer gateway with the bgp_asn of 65534 and ip address of "1.2.3.4"'
 end
 
 When /^I get the customer gateway by id$/ do

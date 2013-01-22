@@ -13,7 +13,7 @@
 
 When /^I create a key pair$/ do
   name = "ruby-integration-text-#{Time.now.to_i}"
-  When "I create a key pair named \"#{name}\""
+  step "I create a key pair named \"#{name}\""
 end
 
 When /^I create a key pair named "([^\"]*)"$/ do |name|

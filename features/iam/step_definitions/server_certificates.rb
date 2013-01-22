@@ -97,7 +97,7 @@ Then /^the result should include the server certificate I created$/ do
 end
 
 Given /^I create (\d+) IAM server certificates$/ do |n|
-  n.to_i.times { Given "I upload an IAM server certificate" }
+  n.to_i.times { step "I upload an IAM server certificate" }
 end
 
 When /^I list IAM server certificates with a limit of (\d+) and batch_size of (\d+)$/ do |limit, batch_size|

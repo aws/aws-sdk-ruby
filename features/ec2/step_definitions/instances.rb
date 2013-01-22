@@ -101,7 +101,7 @@ Then /^the instance I started should be in the list$/ do
 end
 
 Given /^I wait for the instance status to be "([^\"]*)"$/ do |status|
-  Given %(the instance status should eventually be "#{status}")
+  step %(the instance status should eventually be "#{status}")
 end
 
 When /^I reboot the instance$/ do
