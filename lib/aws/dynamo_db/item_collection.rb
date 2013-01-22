@@ -14,7 +14,7 @@
 module AWS
   class DynamoDB
 
-    # Represents a collection of DynamoDB items.  
+    # Represents a collection of DynamoDB items.
     #
     # You can use an item collection to:
     #
@@ -31,7 +31,7 @@ module AWS
     #
     #   table.items.create('id' => 'abc', 'count' => 5, 'colors' => %w(red blue))
     #
-    # Attribute names can be symbols/strings and values can be strings or 
+    # Attribute names can be symbols/strings and values can be strings or
     # numbers or arrays/sets of strings/numbers.  The attributes must contain
     # the hash key name/value for the item and the value must be of the
     # correct type (e.g. string or number).
@@ -49,10 +49,10 @@ module AWS
     # == Enumerating Items
     #
     # You can enumerate items 2 ways:
-    # 
+    #
     # * Enuemrate {Item} objects
     # * Enumerate {ItemData} objects
-    # 
+    #
     # {Item} objects do not have any attribute data populated.  Think of
     # them as just references to the item in Amazon DynamoDB.  They only
     # konw the objects hash key (and optional range key).
@@ -85,7 +85,7 @@ module AWS
     # Please note that enumerating objects is done via the scan operation.
     # Refer to the Amazon DynamoDB documentation for more information
     # about scanning.
-    # 
+    #
     class ItemCollection
 
       include Core::Collection::WithLimitAndNextToken
@@ -465,7 +465,7 @@ module AWS
       # are filtered). A scan can result in no table data meeting the
       # filter criteria.
       #
-      # For more information about filtering the collection 
+      # For more information about filtering the collection
       # see the {#where} method.
       #
       # @param [Hash] options Options for iterating the collection.
@@ -527,11 +527,11 @@ module AWS
       #
       #   @param [Hash] options
       #
-      #   @option [Integer] :limit The maximum number of records to 
-      #     select (scan).  If more records are requested than can 
+      #   @option options [Integer] :limit The maximum number of records to
+      #     select (scan).  If more records are requested than can
       #     be returned in a single response, multiple requests
       #     will be made.
-      #  
+      #
       #   @yieldparam [ItemData] data The data for each item in the
       #     collection.  The attributes of each item will be populated
       #     in the ItemData object; however, {ItemData#item} will not be
@@ -540,7 +540,7 @@ module AWS
       #     table has a composite primary key, this method will only
       #     populate {ItemData#item} if the list of requested attributes
       #     includes both the hash key and range key attributes.
-      #  
+      #
       #   @return [Enumerator, nil] If a block is given, this method
       #     returns nil.  Otherwise, it returns an enumerator for the
       #     values that would have been yielded to the block.
