@@ -1561,6 +1561,14 @@ module AWS
             r.restore_in_progress.should == true
           end
 
+          it 'parses x-amz-restore headers while restore is in-progress' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="true"']
+            end.head_object(opts)
+            r.restore_in_progress.should == true
+          end
+
         end
 
       end
