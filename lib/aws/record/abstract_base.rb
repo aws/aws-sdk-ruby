@@ -560,6 +560,44 @@ module AWS
 
         end
 
+        # Creates an object (or multiple objects) and saves it to the 
+        # database, if validations pass. The resulting object is returned 
+        # whether the object was saved successfully to the database or not.
+        #
+        # The attributes parameter can be either be a Hash or an Array of Hashes. 
+        # These Hashes describe the attributes on the objects that are to be created.
+        #
+        #   class Book < AWS::Record::Model
+        #     string_attr :title
+        #   end
+        #
+        #   book = Book.create(:title => "The big book of tests")
+        #   book.persisted? 
+        #   # => true
+        def create attributes = {}
+          create_impl attributes, :create, :save
+        end
+
+        # Create a new instance of this class, calling #save! to persist
+        # the newly created object, raising an exception if the record
+        # is not valid.
+        #
+        #   class Book < AWS::Record::Model
+        #     string_attr :title
+        #     validates_presence_of :title
+        #   end
+        #
+        #   book = Book.create!(:title => "The big book of tests")
+        #   book.persisted? 
+        #   # => true
+        #
+        #   book = Book.create!()
+        #   # => InvalidRecordError
+        #
+        def create! attributes = {}
+          create_impl attributes, :create!, :save!
+        end
+
         # @private
         def new_scope
           self::Scope.new(self)
@@ -641,6 +679,17 @@ module AWS
 
           attribute
 
+        end
+
+        protected
+        def create_impl attributes = {}, create_method = :create, save_method = :save
+          if attributes.is_a?(Array)
+            attributes.collect { |attr| send(create_method,attributes) }
+          else
+            object = new(attributes)
+            object.send(save_method)
+            object
+          end
         end
 
       end
