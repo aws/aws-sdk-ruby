@@ -24,6 +24,8 @@ module AWS
 
       # @!method change_resource_record_sets(options = {})
       # Calls the POST ChangeResourceRecordSets API operation.
+      # Note: For each +:resource_record_set+, one of +:set_identifier+,
+      # +:alias_target+ or +:ttl+ is expected.
       # @param [Hash] options
       # * +:hosted_zone_id+ - *required* - (String) Alias resource record sets
       #   only: The value of the hosted zone ID, CanonicalHostedZoneNameId, for
