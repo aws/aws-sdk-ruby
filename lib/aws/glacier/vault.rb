@@ -105,7 +105,7 @@ module AWS
       end
 
       # Sets the notification configuration for this vault.  If you pass
-      # a +nil+ value, the notification configuraiton will be deleted
+      # a +nil+ value, the notification configuration will be deleted
       # @param [VaultNotificationConfiguration] cfg
       def notification_configuration= cfg
         if cfg
