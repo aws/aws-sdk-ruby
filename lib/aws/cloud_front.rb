@@ -51,7 +51,7 @@ module AWS
   #   cf = AWS::CloudFront.new
   #
   #   resp = cf.client.list_distributions
-  #   resp[:distribution_list].each do |distribution|
+  #   resp[:items].each do |distribution|
   #     # ...
   #   end
   #
