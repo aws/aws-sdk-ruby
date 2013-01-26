@@ -1,0 +1,100 @@
+Failing Scenarios:
+cucumber features/data_pipeline/pipelines.feature:49 # Scenario: Service errors
+cucumber features/ec2/dhcp_options.feature:45 # Scenario: Assigning dhcp options to vpcs
+cucumber features/ec2/image_attributes.feature:23 # Scenario: Get image location
+cucumber features/ec2/image_attributes.feature:32 # Scenario: Get image state
+cucumber features/ec2/image_attributes.feature:41 # Scenario: Get image owner ID
+cucumber features/ec2/image_attributes.feature:50 # Scenario: Get image owner alias
+cucumber features/ec2/image_attributes.feature:59 # Scenario: Ask if image is public
+cucumber features/ec2/image_attributes.feature:69 # Scenario: Get image launch permissions
+cucumber features/ec2/image_attributes.feature:78 # Scenario: Make image public
+cucumber features/ec2/image_attributes.feature:89 # Scenario: Remove explicit permission
+cucumber features/ec2/image_attributes.feature:102 # Scenario: Reset launch permissions
+cucumber features/ec2/image_attributes.feature:113 # Scenario: Add explicit permission
+cucumber features/ec2/image_attributes.feature:124 # Scenario: Memoized launch permissions
+cucumber features/ec2/image_attributes.feature:142 # Scenario: Get image architecture
+cucumber features/ec2/image_attributes.feature:152 # Scenario: Get image type
+cucumber features/ec2/image_attributes.feature:161 # Scenario: Get kernel ID
+cucumber features/ec2/image_attributes.feature:171 # Scenario: Get ramdisk ID
+cucumber features/ec2/image_attributes.feature:181 # Scenario: Get platform
+cucumber features/ec2/image_attributes.feature:197 # Scenario: Get image name
+cucumber features/ec2/image_attributes.feature:206 # Scenario: Get image description
+cucumber features/ec2/image_attributes.feature:216 # Scenario: Set image description
+cucumber features/ec2/image_attributes.feature:226 # Scenario: Get image root device type
+cucumber features/ec2/image_attributes.feature:235 # Scenario: Get image virtualization type
+cucumber features/ec2/image_attributes.feature:244 # Scenario: Get image hypervisor
+cucumber features/ec2/images.feature:43 # Scenario: Register S3-backed image
+cucumber features/ec2/images.feature:63 # Scenario: List images
+cucumber features/ec2/images.feature:110 # Scenario: List image EBS information with memoization
+cucumber features/ec2/images.feature:120 # Scenario: Deregister image
+cucumber features/ec2/images.feature:141 # Scenario: Check that an image exists (exists)
+cucumber features/ec2/internet_gateways.feature:25 # Scenario: Delete an internet gateway
+cucumber features/ec2/internet_gateways.feature:33 # Scenario: Attaching to a VPC
+cucumber features/ec2/regions.feature:38 # Scenario: Check that a region exists (does not exist)
+cucumber features/ec2/tagging.feature:51 # Scenario: Tagging an image
+cucumber features/ec2/tagging.feature:62 # Scenario: Image tags memoized from DescribeImages
+cucumber features/ec2/vpc.feature:41 # Scenario: Listing VPCs
+cucumber features/elb/instances.feature:34 # Scenario: Getting instance ELB health
+cucumber features/glacier/archives.feature:20 # Scenario: Uploading an archive
+cucumber features/iam/access_keys.feature:22 # Scenario: Create access keys
+cucumber features/iam/access_keys.feature:30 # Scenario: Get secret from a new access key
+cucumber features/iam/access_keys.feature:35 # Scenario: Get secret from a new access key
+cucumber features/iam/access_keys.feature:58 # Scenario: Working with access key status
+cucumber features/iam/access_keys.feature:72 # Scenario: Working with memoized access keys
+cucumber features/iam/server_certificates.feature:20 # Scenario: Upload IAM server certificate
+cucumber features/iam/server_certificates.feature:28 # Scenario: Upload IAM server certificate with a path
+cucumber features/iam/server_certificates.feature:38 # Scenario: Memoized IAM server certificate attributes from upload
+cucumber features/iam/server_certificates.feature:50 # Scenario: Change IAM server certificate path
+cucumber features/iam/server_certificates.feature:59 # Scenario: Delete IAM server certificate
+cucumber features/iam/server_certificates.feature:67 # Scenario: Ask if an IAM group exists (exists)
+cucumber features/iam/server_certificates.feature:78 # Scenario: List IAM server certificates
+cucumber features/iam/server_certificates.feature:87 # Scenario: Paging IAM server certificates
+cucumber features/iam/server_certificates.feature:101 # Scenario: List IAM server certificates memoization
+cucumber features/route_53/client.feature:18 # Scenario: CreateHostedZone
+cucumber features/route_53/client.feature:25 # Scenario: DeleteHostedZone
+cucumber features/route_53/client.feature:30 # Scenario: GetHostedZone
+cucumber features/route_53/client.feature:38 # Scenario: ListHostedZones
+cucumber features/s3/high_level/client_side_encryption.feature:157 # Scenario: Perform a multipart upload with CSE
+cucumber features/s3/high_level/client_side_encryption.feature:185 # Scenario: Performing a streaming read with a block and CSE and a large file uploaded with multipart
+cucumber features/s3/high_level/client_side_encryption.feature:197 # Scenario: Performing a streaming read with a block and CSE and a large file uploaded with multipart and instruction file material location using a symmetric key
+cucumber features/s3/high_level/client_side_encryption.feature:293 # Scenario: Write a file using an IO-like object multipart
+cucumber features/s3/high_level/client_side_encryption.feature:305 # Scenario: Write an IO like object with an estimated length of 5mb
+cucumber features/s3/high_level/client_side_encryption.feature:315 # Scenario: Delete an object uploaded with CSE and an instruction file
+cucumber features/s3/high_level/server_side_encryption.feature:52 # Scenario: Perform a multipart upload with SSE
+cucumber features/s3/high_level/server_side_encryption.feature:60 # Scenario: Perform a multipart upload with an Amazon S3 interface configured to use SSE
+cucumber features/s3/high_level/uploads.feature:23 # Scenario: Large file
+cucumber features/s3/high_level/uploads.feature:53 # Scenario: Large file with metadata
+cucumber features/s3/high_level/uploads.feature:91 # Scenario: Complete an upload with parts uploaded using the object
+cucumber features/s3/high_level/uploads.feature:102 # Scenario: Complete an upload with all parts in S3
+cucumber features/s3/low_level/uploads.feature:22 # Scenario: Upload with one part
+cucumber features/simple_db/high_level/items.feature:53 # Scenario: Adding values one at a time with an expected value
+cucumber features/simple_db/high_level/items.feature:69 # Scenario: Adding values one at a time with an expected no value for an attribute
+cucumber features/simple_db/high_level/items.feature:114 # Scenario: Replacing values on a single attribute with an expected value
+cucumber features/simple_db/high_level/items.feature:134 # Scenario: Replacing values on a single attribute expecting no value for an attribute
+cucumber features/simple_db/high_level/items.feature:277 # Scenario: Deleting attributes with an expected value
+cucumber features/simple_db/high_level/items.feature:300 # Scenario: Deleting attributes expecting an attribute not to exist
+cucumber features/simple_db/low_level/items.feature:47 # Scenario: Select with pagination
+cucumber features/simple_workflow/activity_types.feature:19 # Scenario: Register a activity type
+cucumber features/simple_workflow/activity_types.feature:39 # Scenario: Comparing activity types
+cucumber features/simple_workflow/activity_types.feature:44 # Scenario: Enumerating activity types
+cucumber features/simple_workflow/activity_types.feature:65 # Scenario: Deprecating a activity type
+cucumber features/simple_workflow/activity_types.feature:71 # Scenario: Accessing static attributes
+cucumber features/simple_workflow/activity_types.feature:91 # Scenario: Accessing non-static attributes
+cucumber features/simple_workflow/decision_tasks.feature:18 # Scenario: Counting decision tasks for a task list
+cucumber features/simple_workflow/domains.feature:19 # Scenario: Register a domain
+cucumber features/simple_workflow/domains.feature:27 # Scenario: Getting memoized domain details
+cucumber features/simple_workflow/domains.feature:35 # Scenario: Deprecating a domain
+cucumber features/simple_workflow/domains.feature:46 # Scenario: Getting domain details
+cucumber features/simple_workflow/domains.feature:57 # Scenario: Getting memoized domain details
+cucumber features/simple_workflow/workflow_executions.feature:18 # Scenario: Starting a workflow execution
+cucumber features/simple_workflow/workflow_executions.feature:26 # Scenario: Counting workflow executions of a single type
+cucumber features/simple_workflow/workflow_executions.feature:32 # Scenario: Starting and counting workflow executions
+cucumber features/simple_workflow/workflow_executions.feature:49 # Scenario: Signaling a workflow execution
+cucumber features/simple_workflow/workflow_executions.feature:56 # Scenario: Canceling a workflow execution
+cucumber features/simple_workflow/workflow_executions.feature:63 # Scenario: Terminiating a workflow execution
+cucumber features/simple_workflow/workflow_types.feature:19 # Scenario: Register a workflow type
+cucumber features/simple_workflow/workflow_types.feature:37 # Scenario: Comparing workflow types
+cucumber features/simple_workflow/workflow_types.feature:43 # Scenario: Enumerating workflow types
+cucumber features/simple_workflow/workflow_types.feature:64 # Scenario: Deprecating a workflow type
+cucumber features/simple_workflow/workflow_types.feature:70 # Scenario: Accessing static attributes
+cucumber features/simple_workflow/workflow_types.feature:89 # Scenario: Accessing non-static attributes
