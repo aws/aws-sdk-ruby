@@ -57,11 +57,11 @@ Then /^the launch configuration should not exist$/ do
   @launch_configuration.exists?.should == false
 end
 
-When /^I get the launch configuraiton by name$/ do
+When /^I get the launch configuration by name$/ do
   @launch_configuration = @as.launch_configurations[@launch_configuration.name]
 end
 
-Then /^the launch configuraiton should have the same attributes$/ do
+Then /^the launch configuration should have the same attributes$/ do
   lc = @launch_configuration
   lc.detailed_instance_monitoring?.should == false
   lc.kernel_id.should == 'kernel-id'

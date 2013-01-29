@@ -28,7 +28,7 @@ def resource_context &example_group_block
       end
 
       it 'can be specified in the constructor' do
-        config = double('configuraiton')
+        config = double('configuration')
         new_resource(:config => config).config.should eq(config)
       end
 

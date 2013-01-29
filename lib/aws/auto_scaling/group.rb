@@ -31,7 +31,7 @@ module AWS
     #
     # @attr_reader [Symbol] health_check_type Returns :ec2 or :vpc.
     #
-    # @attr_reader [String] launch_configuraiton_name
+    # @attr_reader [String] launch_configuration_name
     #
     # @attr_reader [Array<String>] load_balancer_names
     #
