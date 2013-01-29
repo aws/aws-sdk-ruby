@@ -167,7 +167,7 @@ module AWS
 
     context '#notification_configuration' do
 
-      it 'returns a notficiation configuraiton collection' do
+      it 'returns a notficiation configuration collection' do
         configs = auto_scaling.notification_configurations
         configs.should be_a(AutoScaling::NotificationConfigurationCollection)
         configs.group.should be_nil

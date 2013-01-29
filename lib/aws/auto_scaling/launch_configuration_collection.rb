@@ -96,7 +96,7 @@ module AWS
 
       end
 
-      # @param [String] name The name of a launch configuraiton.
+      # @param [String] name The name of a launch configuration.
       # @return [LaunchConfiguration]
       def [] name
         LaunchConfiguration.new(name, :config => config)

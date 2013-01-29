@@ -152,7 +152,7 @@ module AWS
 
       end
 
-      context '#launch_configuraiton' do
+      context '#launch_configuration' do
 
         it 'returns a launch configuration' do
           lc = group.launch_configuration
