@@ -17,6 +17,20 @@ module AWS
     class Client < Core::RESTJSONClient
 
       # @private
+      def extract_error_details response
+        if
+          response.http_response.status >= 300 and
+          body = response.http_response.body and
+          json = (::JSON.load(body) rescue nil)
+        then
+          headers = response.http_response.headers
+          code = headers['x-amzn-errortype'].first.split(':')[0]
+          message = json['message'] || json['Message']
+          [code, message]
+        end
+      end
+
+      # @private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

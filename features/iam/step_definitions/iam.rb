@@ -29,9 +29,18 @@ Before("@iam") do
 
   @created_mfa_devices = []
 
+  @created_role_names = []
+
 end
 
 After("@iam") do
+
+  @created_role_names.each do |role_name|
+    begin
+      @iam_client.delete_role(:role_name => role_name)
+    rescue AWS::IAM::Errors::NoSuchEntity
+    end
+  end
 
   if @set_account_password_policy
     @iam.delete_account_password_policy
