@@ -542,9 +542,11 @@ module AWS
           workflow_execution.keys.length == 2
         then
           options.merge!(workflow_execution)
+        elsif workflow_execution.is_a?(String)
+          options[:workflow_id] = workflow_execution
         else
           msg = 'expected workflow_execution to be a WorkflowExecution ' +
-            'object or a hash with :workflow_id and :run_id'
+            'object or workflow id or a hash with :workflow_id and :run_id'
           raise ArgumentError, msg
         end
 
