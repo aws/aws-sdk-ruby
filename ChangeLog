@@ -1,3 +1,20 @@
+2013-01-28 Trevor Rowe <trevorrowe@gmail.com>
+
+  * .travis.yml: Removed REE from travis configuration, currently broken on
+  travis-ci.org.
+
+  * aws-sdk.gemspec: Removed HTTParty from gem specification.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1
+
+  * features/elastic_transcoder/client.feature,
+  features/elastic_transcoder/step_definitions/client.rb,
+  features/elastic_transcoder/step_definitions/elastic_transcoder.rb,
+  features/iam/step_definitions/iam.rb,
+  features/iam/step_definitions/roles.rb,
+  lib/aws/elastic_transcoder/client.rb: Added support for Elastic Transcoding
+  errors and some integration tests.
+
 2013-01-21 Trevor Rowe <trevorrowe@gmail.com>
 
   * Gemfile, lib/aws/core.rb, lib/aws/core/http/httparty_handler.rb,
@@ -63,6 +80,15 @@
 
   * lib/aws/dynamo_db/item_collection.rb: Corrected documentation on
   AWS::DynamoDB::ItemCollection#select on how to :limit
+
+2013-01-25 Trevor Rowe <trevorrowe@gmail.com>
+
+  * failing_scenarios.txt, lib/aws-sdk.rb,
+  lib/aws/api_config/ElasticTranscoder-2012-09-25.yml, lib/aws/core.rb,
+  lib/aws/core/configuration.rb, lib/aws/elastic_transcoder.rb,
+  lib/aws/elastic_transcoder/client.rb, lib/aws/elastic_transcoder/config.rb,
+  lib/aws/elastic_transcoder/errors.rb, lib/aws/elastic_transcoder/request.rb:
+  Added a basic Elastic Transcoder client.
 
 2013-01-24 Trevor Rowe <trevorrowe@gmail.com>
 
