@@ -370,7 +370,7 @@ module AWS
 
         response.error =
           case
-          when response.network_error? then NetworkError.new
+          when response.network_error? then response.http_response.network_error
           when error_code then error_class(error_code).new(*error_args)
           when status >= 500 then Errors::ServerError.new(*error_args)
           when status >= 300 then Errors::ClientError.new(*error_args)

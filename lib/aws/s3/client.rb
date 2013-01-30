@@ -1219,7 +1219,7 @@ module AWS
         end
 
         simulate_response do |response|
-          response.data[:version_id] = nil
+          response.data = {}
         end
 
       end
