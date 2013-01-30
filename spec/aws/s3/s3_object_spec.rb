@@ -617,7 +617,7 @@ module AWS
           end
 
           it 'should be an object version with the returned version ID' do
-            resp.stub(:version_id).and_return("abc123")
+            resp.data[:version_id] = 'abc123'
             return_value.should be_an(ObjectVersion)
             return_value.config.should be(config)
             return_value.object.should be(object)

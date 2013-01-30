@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'timeout'
+
 module AWS::Core
 
   shared_examples_for "an aws client" do |sample_method|
@@ -242,7 +244,7 @@ module AWS::Core
           resp.body = "<ok/>"
         else
           timed_out = true
-          resp.timeout = true
+          resp.timeout = Timeout::Error.new
         end
       }.send(method, opts)
       requests_made.should == 2
@@ -297,19 +299,21 @@ module AWS::Core
     end
 
     it 'should raise a network error after retries fail due to timeout' do
+      err = Timeout::Error.new
       lambda do
         client.with_http_handler{|req, resp|
-          resp.timeout = true
+          resp.timeout = err
         }.send(method, opts)
-      end.should raise_error(Client::NetworkError)
+      end.should raise_error(err)
     end
 
     it 'should raise a network error after retries fail' do
+      err = StandardError.new('oops')
       lambda do
         client.with_http_handler{|req, resp|
-          resp.network_error = true
+          resp.network_error = err
         }.send(method, opts)
-      end.should raise_error(Client::NetworkError)
+      end.should raise_error(err)
     end
 
     it 'should sleep between retries' do
@@ -622,7 +626,7 @@ module AWS::Core
       it 'should retry timeouts' do
 
         new_client = client.with_http_handler do |req, resp|
-          resp.timeout = true
+          resp.timeout = TimeoutError.new
         end
 
         http_handler = new_client.config.http_handler
@@ -644,7 +648,7 @@ module AWS::Core
       it 'should build a new request for each retry' do
         seen_requests = []
         new_client = client.with_http_handler do |req, resp|
-          resp.timeout = true
+          resp.timeout = TimeoutError.new
           seen_requests << req
         end
 
