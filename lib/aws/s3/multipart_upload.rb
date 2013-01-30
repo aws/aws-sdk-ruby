@@ -242,8 +242,8 @@ module AWS
         raise "no parts uploaded" if complete_opts[:parts].empty?
 
         resp = client.complete_multipart_upload(complete_opts)
-        if resp.version_id
-          ObjectVersion.new(object, resp.version_id)
+        if resp.data[:version_id]
+          ObjectVersion.new(object, resp.data[:version_id])
         else
           object
         end
