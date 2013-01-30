@@ -116,7 +116,10 @@ module AWS
 
         def credentials
           providers.each do |provider|
-            return provider.credentials rescue Errors::MissingCredentialsError
+            begin
+              return provider.credentials
+            rescue Errors::MissingCredentialsError
+            end
           end
           raise Errors::MissingCredentialsError
         end

@@ -97,6 +97,17 @@ module AWS
             :session_token => 'token-2'
           }
         end
+
+        it 'should not hide real error of fetching credentials' do
+          dp = DefaultProvider.new
+          ec2_provider = dp.providers[0] = EC2Provider.new
+          ec2_provider.stub(:credentials) do
+            raise "Something wrong"
+          end
+          lambda {
+            dp.credentials
+          }.should raise_error('Something wrong')
+        end
       end
 
       describe StaticProvider do
