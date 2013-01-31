@@ -300,20 +300,30 @@ module AWS::Core
 
     it 'should raise a network error after retries fail due to timeout' do
       err = Timeout::Error.new
-      lambda do
+      raised = false
+      begin
         client.with_http_handler{|req, resp|
           resp.timeout = err
         }.send(method, opts)
-      end.should raise_error(err)
+      rescue Exception => e
+        e.should be(err)
+        raised = true
+      end
+      raised.should be(true)
     end
 
     it 'should raise a network error after retries fail' do
       err = StandardError.new('oops')
-      lambda do
+      raised = false
+      begin
         client.with_http_handler{|req, resp|
-          resp.network_error = err
+          resp.timeout = err
         }.send(method, opts)
-      end.should raise_error(err)
+      rescue Exception => e
+        e.should be(err)
+        raised = true
+      end
+      raised.should be(true)
     end
 
     it 'should sleep between retries' do
@@ -638,7 +648,7 @@ module AWS::Core
         response.on_complete do |status|
           complete = true
           status.should == :failure
-          response.error.should be_a(AWS::Core::Client::NetworkError)
+          response.error.should be_a(TimeoutError)
         end
 
         sleep 0.001 until complete
