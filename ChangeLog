@@ -1,4 +1,35 @@
+2013-01-30 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/client.rb, lib/aws/s3/client.rb,
+  spec/aws/s3/multipart_upload_spec.rb: Fixed an issue with the stubbed
+  responses for S3::Client#complete_multipart_upload.
+
+  A number of tests that should have failed were passing because the
+  simulate response for #complete_multipart upload was puttin in a nil
+  value for :version_id.  The version id actually should only be present
+  when not-nil.
+
+  * lib/aws/s3/multipart_upload.rb: Fix undefined method 'version_id' during
+  multipart upload
+
+  * lib/aws/core/credential_providers.rb,
+  spec/aws/core/credential_providers_spec.rb: Fix bug: default credential
+  provider hides sub credential provider's fetching
+  credentials error.
+
+  The default credential provider will try to rescue sub provider's
+  MissingCredentialsError for looking up the right credential provider.
+  However, the way using 'rescue' keyword is not correct, and it
+  actually rescued all the StandardError raised from sub provider's
+  credentials method.
+
+  * lib/aws/core/credential_providers.rb: missing require time lib for
+  Time.parse is used in EC2Provider, the test passed because there is an
+  example required the time lib
+
 2013-01-28 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1.1
 
   * .travis.yml: Removed REE from travis configuration, currently broken on
   travis-ci.org.
