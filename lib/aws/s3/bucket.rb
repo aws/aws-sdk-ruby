@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -67,6 +67,33 @@ module AWS
     #
     # See {ObjectCollection} and {S3Object} for more information on working
     # with objects.
+    #
+    # = Website Configuration
+    #
+    # It is easy to enable website hosting for a bucket.
+    #
+    #   bucket.configure_website
+    #
+    # You can specify the index and error documents by passing a block.
+    # If your bucket is already configured as a website, the current
+    # configuration will be yielded.  If you bucket it not currently
+    # configured as a website, a new configuration will be yielded
+    # with default values.
+    #
+    #   bucket.configure_website do |cfg|
+    #     cfg.index_document_suffix = 'index.html'
+    #     cfg.error_document_key = 'error.html'
+    #   end
+    #
+    # You can disable website hosting two ways:
+    #
+    #   bucket.remove_website_configuration
+    #   bucket.website_configuration = nil
+    #
+    # You can use {#website_configuration=} to copy a website configuration
+    # from one bucket to another.
+    #
+    #   bucket.website_configuration = other_bucket.website_configuration
     #
     # = Bucket Policies and ACLs
     #
@@ -229,6 +256,92 @@ module AWS
       #   (if it has one), nil otherwise.
       def location_constraint
         client.get_bucket_location(:bucket_name => name).location_constraint
+      end
+
+      # Configure the current bucket as a website.
+      #
+      #   bucket.configure_website
+      #
+      # If you pass a block, the website configuration object
+      # will be yielded.  You can modify it before it is saved.
+      #
+      #   bucket.configure_website do |cfg|
+      #     cfg.index_document_suffix = 'index.html'
+      #     cfg.error_document_key = 'error.html'
+      #   end
+      #
+      # If the bucket already has a website configuration, it will be loaded
+      # and yielded.  This makes it possible to modify an existing
+      # configuration.
+      #
+      #   # only rename the error document
+      #   bucket.configure_website do |cfg|
+      #     cfg.error_document_key = 'oops.html'
+      #   end
+      #
+      # @yieldparam [WebsiteConfiguration] website_config
+      # @return [WebsiteConfiguration]
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      # @see #website?
+      def configure_website &block
+        website_config = self.website_configuration
+        website_config ||= WebsiteConfiguration.new
+        yield(website_config) if block_given?
+        self.website_configuration = website_config
+      end
+
+      # Returns the bucket website configuration. Returns +nil+ if the bucket
+      # is not configured as a website.
+      # @return [WebsiteConfiguration,nil]
+      # @see #configure_website
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      # @see #website?
+      def website_configuration
+        resp = client.get_bucket_website(:bucket_name => name)
+        WebsiteConfiguration.new(resp.data)
+      rescue Errors::NoSuchWebsiteConfiguration
+        nil
+      end
+
+      # Sets the website configuration.  Deletes the configuration if
+      # +nil+ is passed.
+      # @param [WebsiteConfiguration,nil] website_configuration
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #remove_website_configuration
+      # @see #website?
+      def website_configuration= website_configuration
+        if website_configuration
+          client_opts = website_configuration.to_hash
+          client_opts[:bucket_name] = name
+          client.put_bucket_website(client_opts)
+        else
+          remove_website_configuration
+        end
+      end
+
+      # @return [nil] Deletes the bucket website configuration.
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #website?
+      def remove_website_configuration
+        client.delete_bucket_website(:bucket_name => name)
+        @website_configuration = false
+        nil
+      end
+
+      # @return [Boolean] Returns +true+ if this bucket is configured as
+      #   a website.
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      def website?
+        !!website_configuration
       end
 
       # Returns the tags for this bucket.

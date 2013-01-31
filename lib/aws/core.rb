@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,8 +29,10 @@ require 'aws/core/autoloader'
 # * {AWS::EC2}
 # * {AWS::ElastiCache}
 # * {AWS::ElasticBeanstalk}
+# * {AWS::ElasticTranscoder}
 # * {AWS::ELB}
 # * {AWS::EMR}
+# * {AWS::Glacier}
 # * {AWS::IAM}
 # * {AWS::RDS}
 # * {AWS::Route53}
@@ -90,6 +92,7 @@ module AWS
       autoload :Data,                      'data'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
+      autoload :JSONParser,                'json_parser'
 
       autoload :JSONClient,                'json_client'
       autoload :JSONRequestBuilder,        'json_request_builder'
@@ -98,6 +101,7 @@ module AWS
       autoload :LazyErrorClasses,          'lazy_error_classes'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
+      autoload :ManagedFile,               'managed_file'
       autoload :Model,                     'model'
       autoload :Naming,                    'naming'
       autoload :OptionGrammar,             'option_grammar'
@@ -113,7 +117,9 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
 
-      autoload :RESTClient,                'rest_client'
+      autoload :RESTClient,                'rest_xml_client'
+      autoload :RESTJSONClient,            'rest_json_client'
+      autoload :RESTXMLClient,             'rest_xml_client'
       autoload :RESTRequestBuilder,        'rest_request_builder'
       autoload :RESTResponseParser,        'rest_response_parser'
 
@@ -125,6 +131,7 @@ module AWS
 
     module Options
       AWS.register_autoloads(self) do
+        autoload :JSONSerializer, 'json_serializer'
         autoload :XMLSerializer, 'xml_serializer'
         autoload :Validator, 'validator'
       end
@@ -162,19 +169,11 @@ module AWS
       AWS.register_autoloads(self) do
         autoload :Handler,         'handler'
         autoload :NetHttpHandler,  'net_http_handler'
-        autoload :HTTPartyHandler, 'httparty_handler' # non-standard inflection
         autoload :Request,         'request'
         autoload :Response,        'response'
       end
     end
 
-  end
-
-  # the http party handler should still be accessible from its old namespace
-  module Http
-    AWS.register_autoloads(self, 'aws/core/http') do
-      autoload :HTTPartyHandler, 'httparty_handler'
-    end
   end
 
   class << self
@@ -225,6 +224,9 @@ module AWS
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @option options [String] :cloud_front_endpoint ('cloudfront.amazonaws.com')
+    #   The service endpoint for Amazon CloudFront.
+    #
     # @option options [String] :cloud_search ('cloudsearch.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudSearch.
     #
@@ -249,11 +251,17 @@ module AWS
     #
     # @option options [String] :elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
     #
-    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com') 
+    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
     #   The service endpoint for AWS Elastic Beanstalk.
+    #
+    # @option options [String] :elastic_transcoder_endpoint ('elastictranscoderbeanstalk.us-east-1.amazonaws.com')
+    #   The service endpoint for Elastic Transcoder.
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
+    #
+    # @option options [String] :glacier_endpoint ('glacier.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Glacier.
     #
     # @option options [Object] :http_handler (AWS::Core::Http::NetHttpHandler)
     #   The http handler that sends requests to AWS.
@@ -277,6 +285,9 @@ module AWS
     #
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The
     #   service endpoint for AWS Idenity Access Management (IAM).
+    #
+    # @option options [String] :import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
     #
     # @option options [Logger,nil] :logger (nil) A logger to send
     #   log messages to.  Here is an example that logs to standard out.
@@ -421,6 +432,9 @@ module AWS
     #
     # @option options [String] :sqs_endpoint ('sqs.us-east-1.amazonaws.com') The
     #   service endpoint for Amazon SQS.
+    #
+    # @option options [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
     #
     # @option options [String] :sts_endpoint ('sts.amazonaws.com') The
     #   service endpoint for AWS Security Token Service.

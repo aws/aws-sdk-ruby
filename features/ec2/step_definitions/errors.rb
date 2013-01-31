@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 When /^(.*) rescuing "([^\"]*)":$/ do |i_do_something, class_name, string|
   error = AWS.module_eval(class_name)
   begin
-    When i_do_something, string
+    step i_do_something, string
   rescue error => e
     @error = e
   end
@@ -23,7 +23,7 @@ end
 When /^(.*) rescuing "([^\"]*)"$/ do |i_do_something, class_name|
   error = AWS.module_eval(class_name)
   begin
-    When i_do_something
+    step i_do_something
   rescue error => e
     @error = e
   end

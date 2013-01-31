@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -45,7 +45,7 @@ module AWS
           rules.each_pair do |opt_name, opt_rules|
             if opt_rules[:required]
               unless request_options.key?(opt_name)
-                raise ArgumentError, "missing required option :#{opt_name}"
+                raise ArgumentError, "missing required option #{opt_name.inspect}"
               end
             end
           end
@@ -127,6 +127,10 @@ module AWS
         def validate_timestamp rules, value, opt_name, context = nil
           # TODO : add validation to timestamps values
           value.to_s
+        end
+
+        def validate_blob rules, value, opt_name, context = nil
+          value
         end
 
         def format_error description, opt_name, context

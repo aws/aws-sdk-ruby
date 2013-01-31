@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,8 +16,6 @@ module AWS
 
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
-
-      define_client_methods('2012-07-20')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -58,7 +56,7 @@ module AWS
         :describe_network_interface_attribute,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method activate_license(options = {})
       # Calls the ActivateLicense API operation.
@@ -392,6 +390,17 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:owner_id+ - (String)
+
+      # @!method copy_snapshot(options = {})
+      # Calls the CopySnapshot API operation.
+      # @param [Hash] options
+      #   * +:source_region+ - *required* - (String)
+      #   * +:source_snapshot_id+ - *required* - (String)
+      #   * +:description+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:snapshot_id+ - (String)
 
       # @!method create_customer_gateway(options = {})
       # Calls the CreateCustomerGateway API operation.
@@ -1913,6 +1922,8 @@ module AWS
       #     offering. A Reserved Instance with tenancy of dedicated will run on
       #     single-tenant hardware and can only be launched within a VPC.
       #   * +:offering_type+ - (String) The Reserved Instance offering type.
+      #   * +:next_token+ - (String)
+      #   * +:max_results+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2110,6 +2121,10 @@ module AWS
       #     * +:state+ - (String)
       #     * +:fault+ - (Hash)
       #       * +:code+ - (String)
+      #       * +:message+ - (String)
+      #     * +:status+ - (Hash)
+      #       * +:code+ - (String)
+      #       * +:update_time+ - (Time)
       #       * +:message+ - (String)
       #     * +:valid_from+ - (Time)
       #     * +:valid_until+ - (Time)
@@ -3091,6 +3106,10 @@ module AWS
       #     * +:fault+ - (Hash)
       #       * +:code+ - (String)
       #       * +:message+ - (String)
+      #     * +:status+ - (Hash)
+      #       * +:code+ - (String)
+      #       * +:update_time+ - (Time)
+      #       * +:message+ - (String)
       #     * +:valid_from+ - (Time)
       #     * +:valid_until+ - (Time)
       #     * +:launch_group+ - (String)
@@ -3529,7 +3548,9 @@ module AWS
       #     * +:monitoring+ - (Hash)
       #       * +:state+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-12-01')
 
     end
   end

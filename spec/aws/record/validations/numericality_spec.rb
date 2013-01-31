@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -633,6 +633,24 @@ module AWS
             it 'defaults to false' do
               klass.send(:attr_accessor, :value)
               klass.validates_numericality_of :value
+              obj.valid?.should == false
+            end
+
+          end
+
+          context ':allow_blank' do
+
+            it 'skips validation when true and the value is blank' do
+              klass.send(:attr_accessor, :value)
+              klass.validates_numericality_of :value, :allow_blank => true
+              obj.value = ""
+              obj.valid?.should == true
+            end
+
+            it 'defaults to false' do
+              klass.send(:attr_accessor, :value)
+              klass.validates_numericality_of :value
+              obj.value = ""
               obj.valid?.should == false
             end
 

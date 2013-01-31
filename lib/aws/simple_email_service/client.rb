@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,14 +17,12 @@ module AWS
     # Client class for Amazon Simple E-mail Service (SES).
     class Client < Core::QueryClient
 
-      define_client_methods('2010-12-01')
-
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method delete_identity(options = {})
       # Calls the DeleteIdentity API operation.
@@ -269,7 +267,9 @@ module AWS
       #     verified.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-12-01')
 
     end
   end

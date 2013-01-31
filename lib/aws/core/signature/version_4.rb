@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,6 +31,7 @@ module AWS
           headers['x-amz-date'] = datetime
           headers['x-amz-security-token'] = credentials.session_token if
             credentials.session_token
+          headers['x-amz-content-sha256'] ||= hexdigest(body || '')
           headers['authorization'] = authorization(credentials, datetime)
         end
 
@@ -40,7 +41,7 @@ module AWS
           parts = []
           parts << "AWS4-HMAC-SHA256 Credential=#{credentials.access_key_id}/#{credential_string(datetime)}"
           parts << "SignedHeaders=#{signed_headers}"
-          parts << "Signature=#{hex16(signature(credentials, datetime))}"
+          parts << "Signature=#{signature(credentials, datetime)}"
           parts.join(', ')
         end
 
@@ -50,7 +51,7 @@ module AWS
           k_region = hmac(k_date, region)
           k_service = hmac(k_region, service)
           k_credentials = hmac(k_service, 'aws4_request')
-          hmac(k_credentials, string_to_sign(datetime))
+          hexhmac(k_credentials, string_to_sign(datetime))
         end
 
         def string_to_sign datetime
@@ -58,7 +59,7 @@ module AWS
           parts << 'AWS4-HMAC-SHA256'
           parts << datetime
           parts << credential_string(datetime)
-          parts << hex16(hash(canonical_request))
+          parts << hexdigest(canonical_request)
           parts.join("\n")
         end
 
@@ -78,7 +79,7 @@ module AWS
           parts << querystring
           parts << canonical_headers + "\n"
           parts << signed_headers
-          parts << hex16(hash(body || ''))
+          parts << headers['x-amz-content-sha256']
           parts.join("\n")
         end
 
@@ -107,12 +108,25 @@ module AWS
           values.map(&:to_s).join(',').gsub(/\s+/, ' ').strip
         end
 
-        def hex16 string
-          string.unpack('H*').first
+        def hexdigest value
+          digest = Digest::SHA256.new
+          if value.respond_to?(:read)
+            chunk = nil
+            chunk_size = 1024 * 1024 # 1 megabyte
+            digest.update(chunk) while chunk = value.read(chunk_size)
+            value.rewind
+          else
+            digest.update(value)
+          end
+          digest.hexdigest
         end
 
-        def hash string
-          Digest::SHA256.digest(string)
+        def hmac key, value
+          OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'), key, value)
+        end
+
+        def hexhmac key, value
+          OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), key, value)
         end
 
       end

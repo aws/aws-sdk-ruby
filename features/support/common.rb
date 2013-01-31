@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,16 +19,10 @@ end if ENV['COVERAGE']
 
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
-require 'aws'
-
-require 'mocha'
-include Mocha::API
-require 'net/http'
-require 'uri'
+require 'aws-sdk'
 require 'yaml'
 
-
-# find a config file
+# try to find a config file
 dir = Dir.getwd
 while dir != "/" and
     !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
@@ -37,8 +31,9 @@ end
 test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
 test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
   File.exists?(test_config_file)
-raise "No config file" unless File.exists?(test_config_file)
-test_config = YAML.load(File.read(test_config_file))
+if File.exists?(test_config_file)
+  test_config = YAML.load(File.read(test_config_file))
+end
 
 if ENV['SLOW'] == 'true'
   puts "setup slow stuff"

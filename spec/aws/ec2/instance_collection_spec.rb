@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -49,8 +49,9 @@ module AWS
 
           before(:each) do
             client.stub(:run_instances).and_return(resp)
-            resp.stub(:instances_set).
-              and_return([double("inst", :instance_id => "i-123")])
+            resp.data[:instances_set] = [{
+              :instance_id => "i-123",
+            }]
           end
 
           context 'one instance' do
@@ -100,11 +101,10 @@ module AWS
             let(:resp) { client.new_stub_for(:run_instances) }
 
             before(:each) do
-              resp.stub(:instances_set).
-                and_return([double("inst 1",
-                                   :instance_id => "i-123"),
-                            double("instn 2",
-                                   :instance_id => "i-123")])
+              resp.data[:instances_set] = [
+                { :instance_id => "i-123" },
+                { :instance_id => "i-321" },
+              ]
               client.stub(:run_instances).and_return(resp)
             end
 
@@ -134,7 +134,7 @@ module AWS
                 end
 
                 it 'should use the instance IDs from the response' do
-                  return_value.map { |i| i.id }.should == ["i-123", "i-123"]
+                  return_value.map { |i| i.id }.should == ["i-123", "i-321"]
                 end
 
                 it 'should pass the config' do

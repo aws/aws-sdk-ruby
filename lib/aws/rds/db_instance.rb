@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -44,6 +44,8 @@ module AWS
     # @attr_reader [Time] latest_restorable_time
     #
     # @attr_reader [Boolean] multi_az
+    #
+    # @attr_reader [Integer] iops
     #
     # @attr_reader [String] engine_version
     #
@@ -115,6 +117,8 @@ module AWS
       attribute :master_username, :static => true
 
       attribute :multi_az, :static => true, :alias => :multi_az?
+
+      attribute :iops, :static => true
 
       attribute :preferred_backup_window, :static => true
 

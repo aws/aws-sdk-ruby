@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -69,6 +69,9 @@ module AWS
     # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @attr_reader [String] cloud_front_endpoint ('cloudfront.amazonaws.com')
+    #   The service endpoint for Amazon CloudFront.
+    #
     # @attr_reader [String] cloud_search ('cloudsearch.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudSearch.
     #
@@ -93,11 +96,17 @@ module AWS
     #
     # @attr_reader [String] elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
     #
-    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com') 
+    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
     #   The service endpoint for AWS Elastic Beanstalk.
+    #
+    # @attr_reader [String] elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
+    #   The service endpoint for Elastic Transcoder.
     #
     # @attr_reader [String] elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
+    #
+    # @attr_reader [String] glacier_endpoint ('glacier.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Glacier.
     #
     # @attr_reader [Object] http_handler The http handler that sends requests
     #   to AWS.  Defaults to an HTTP handler built on net/http.
@@ -120,6 +129,9 @@ module AWS
     #
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
     #   The service endpoint for AWS Idenity Access Management (IAM).
+    #
+    # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
     #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
@@ -238,6 +250,9 @@ module AWS
     #
     # @attr_reader [String] sqs_endpoint ('sqs.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon SQS.
+    #
+    # @attr_reader [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
     #
     # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
     #   The service endpoint for AWS Security Token Service.

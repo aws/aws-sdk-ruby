@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,7 +31,7 @@ module AWS
     #
     # @attr_reader [Symbol] health_check_type Returns :ec2 or :vpc.
     #
-    # @attr_reader [String] launch_configuraiton_name
+    # @attr_reader [String] launch_configuration_name
     #
     # @attr_reader [Array<String>] load_balancer_names
     #

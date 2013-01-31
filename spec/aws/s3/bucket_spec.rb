@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,7 +15,6 @@ require 'spec_helper'
 
 module AWS
   class S3
-
     describe Bucket do
 
       it_behaves_like 'an S3 model object', 'foo'
@@ -114,7 +113,8 @@ module AWS
           bucket.lifecycle_configuration = xml
           cfg = bucket.lifecycle_configuration
           cfg.rules.should == [
-            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix', 5, 'Enabled')
+            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix',
+              :expiration_time => 5, :status => 'Enabled')
           ]
 
         end
@@ -661,7 +661,146 @@ module AWS
 
       end
 
-    end
+      context 'website configuration' do
 
+        let(:default_opts) {{
+          :index_document => { :suffix => 'index.html' },
+          :error_document => { :key => 'error.html' },
+        }}
+
+        let(:response) {
+          resp = Core::Response.new
+          resp.data = default_opts
+          resp
+        }
+
+        context '#configure_website' do
+
+          before(:each) do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+          end
+
+          it 'calls #put_bucket_website on the client' do
+            client.should_receive(:put_bucket_website).
+              with(default_opts.merge(:bucket_name => bucket.name))
+            bucket.configure_website
+          end
+
+          it 'tries to load the current website configuration first' do
+            client.should_receive(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.configure_website
+          end
+
+          it 'yields a new website configuration when one is not found' do
+            yielded = false
+            bucket.configure_website do |cfg|
+              cfg.should be_a(WebsiteConfiguration)
+              cfg.index_document_suffix.should eq('index.html')
+              cfg.error_document_key.should eq('error.html')
+              yielded = true
+            end
+            yielded.should be(true)
+          end
+
+          it 'returns the configuration that is yielded' do
+            website_config = nil
+            bucket.configure_website do |cfg|
+              website_config = cfg
+            end.should be(website_config)
+          end
+
+          it 'calls #put_bucket_website using the yielded config' do
+            client.should_receive(:put_bucket_website).with({
+              :bucket_name => bucket.name,
+              :index_document => { :suffix => 'abc' },
+              :error_document => { :key => 'xyz' },
+            })
+            bucket.configure_website do |cfg|
+              cfg.index_document_suffix = 'abc'
+              cfg.error_document_key = 'xyz'
+            end
+          end
+
+          it 'yieldes the current configuration when found' do
+            response.data[:index_document][:suffix] = 'abc'
+            response.data[:error_document][:key] = 'xyz'
+            client.stub(:get_bucket_website).and_return(response)
+            bucket.configure_website do |cfg|
+              cfg.index_document_suffix.should eq('abc')
+              cfg.error_document_key.should eq('xyz')
+            end
+          end
+
+        end
+
+        context '#website_configuration' do
+
+          it 'returns a bucket website configuration when one exists' do
+            client.stub(:get_bucket_website).and_return(response)
+            cfg = bucket.website_configuration
+            cfg.should be_a(WebsiteConfiguration)
+            cfg.to_hash.should eq(default_opts)
+          end
+
+          it 'returns nil when one is not found' do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.website_configuration.should be(nil)
+          end
+
+        end
+
+        context '#website_configuration=' do
+
+          it 'puts the bucket website configuration' do
+            client.should_receive(:put_bucket_website).with({
+              :bucket_name => bucket.name,
+              :index_document => { :suffix => 'abc' },
+              :error_document => { :key => 'xyz' },
+            })
+            cfg = WebsiteConfiguration.new
+            cfg.index_document_suffix = 'abc'
+            cfg.error_document_key = 'xyz'
+            bucket.website_configuration = cfg
+          end
+
+          it 'deletes the bucket website configuration when passed nil' do
+            client.should_receive(:delete_bucket_website).
+              with(:bucket_name => bucket.name)
+            bucket.website_configuration = nil
+          end
+
+        end
+
+        context '#remove_website_configuration' do
+
+          it 'deletes the bucket website configuration when passed nil' do
+            client.should_receive(:delete_bucket_website).
+              with(:bucket_name => bucket.name)
+            bucket.website_configuration = nil
+          end
+
+        end
+
+        context '#website?' do
+
+          it 'returns true if the client returns a configuration' do
+            client.stub(:get_bucket_website).and_return(response)
+            bucket.website?.should be(true)
+          end
+
+          it 'returns false if the client raises an error' do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.website?.should be(false)
+          end
+
+        end
+
+      end
+
+    end
   end
 end

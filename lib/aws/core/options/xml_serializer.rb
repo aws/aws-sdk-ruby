@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,11 +24,12 @@ module AWS
 
         # @param [String] namespace
         # @param [String] operation_name
-        # @param [Hash] rules A hash of option rules to validate against.
-        def initialize namespace, operation_name, rules
+        # @param [Hash] operation
+        def initialize namespace, operation_name, operation
           @namespace = namespace
           @operation_name = operation_name
-          @rules = rules
+          @rules = operation[:inputs]
+          @http = operation[:http]
           @validator = Validator.new(rules)
         end
 
@@ -41,6 +42,9 @@ module AWS
         # @return [Hash]
         attr_reader :rules
 
+        # @return [Hash,nil]
+        attr_reader :http
+
         # @return [Validator]
         attr_reader :validator
 
@@ -50,9 +54,19 @@ module AWS
         #   @return [String] Returns an string of the request parameters
         #     serialized into XML.
         def serialize request_options
+          if http && http[:request_payload]
+            payload = http[:request_payload]
+            root_node_name = rules[payload][:name]
+            params = request_options[payload]
+            rules = self.rules[payload][:members]
+          else
+            root_node_name = "#{operation_name}Request"
+            params = request_options
+            rules = self.rules
+          end
           xml = Nokogiri::XML::Builder.new
-          xml.send("#{operation_name}Request", :xmlns => namespace) do |xml|
-            hash_members_xml(request_options, rules, xml)
+          xml.send(root_node_name, :xmlns => namespace) do |xml|
+            hash_members_xml(params, rules, xml)
           end
           xml.doc.root.to_xml
         end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -373,4 +373,12 @@ end
 When /^I create a pre\-signed "([^"]*)" uri using the session credentials$/ do |http_method|
   s3 = AWS::S3.new(@session.credentials)
   @presigned_uri = s3.buckets[@bucket.name].objects[@object.key].url_for(http_method)
+end
+
+Given /^I try to restore the object$/ do
+  begin
+    @object.restore
+  rescue => e
+    @exception = e
+  end
 end

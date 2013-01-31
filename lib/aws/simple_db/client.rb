@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,8 +16,6 @@ module AWS
 
     # Client class for Amazon SimpleDB.
     class Client < Core::QueryClient
-
-      define_client_methods('2009-04-15')
 
       # @private
       REGION_US_E1 = 'sdb.amazonaws.com'
@@ -54,7 +52,7 @@ module AWS
         name.to_s =~ /^[a-z_\-\.]{3,255}$/i ? true : false
       end
 
-      ## client methods ##
+      # client methods #
 
       # @!method batch_delete_attributes(options = {})
       # Calls the BatchDeleteAttributes API operation.
@@ -280,7 +278,9 @@ module AWS
       #     * +:box_usage+ - (Numeric)
       #     * +:response_id+ - (String)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2009-04-15')
 
     end
   end

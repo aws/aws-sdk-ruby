@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -71,6 +71,38 @@ module AWS
   
       # see the subclasses of AbstractBase for dirty-tracking specifics
   
+
+      context '#create!' do
+
+        it 'raises an exception when create returns false' do
+          klass.any_instance.stub(:valid?).and_return(false)
+          klass.any_instance.stub_chain(:errors, :full_messages).and_return(['Foo is bad'])
+          lambda {
+            klass.create!
+          }.should raise_error(Record::InvalidRecordError)
+        end
+
+      end
+
+      context '#create' do
+
+        it 'returns an invalid object if the attributes are invlalid' do
+          klass.any_instance.stub(:valid?).and_return(false)
+          obj = klass.create
+          obj.should_not be_persisted
+          obj.should_not be_valid
+        end
+
+        context 'new records' do
+          it 'delegates to #save of a newly created object' do
+            klass.any_instance.should_receive(:save)
+            klass.create
+          end
+        end
+
+      end
+
+
       context 'standard attribute macros' do
   
         before(:each) do

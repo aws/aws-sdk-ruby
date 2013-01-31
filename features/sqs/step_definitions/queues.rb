@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -51,7 +51,7 @@ When /^I ask if the queue exists$/ do
 end
 
 Given /^I wait for it to be in the list of all queues$/ do
-  Given "the queue should be in the list of all queues"
+  step "the queue should be in the list of all queues"
 end
 
 When /^I create a queue named "([^\"]*)"$/ do |name|

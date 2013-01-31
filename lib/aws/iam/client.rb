@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,8 +17,6 @@ module AWS
     # Client class for AWS Identity and Access Management (IAM).
     class Client < Core::QueryClient
 
-      define_client_methods('2010-05-08')
-
       # @private
       CACHEABLE_REQUESTS = Set[
         :get_group,
@@ -36,7 +34,7 @@ module AWS
         :list_virtual_mfa_devices,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method add_role_to_instance_profile(options = {})
       # Calls the AddRoleToInstanceProfile API operation.
@@ -1085,7 +1083,9 @@ module AWS
       #     * +:status+ - (String)
       #     * +:upload_date+ - (Time)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2010-05-08')
 
     end
   end

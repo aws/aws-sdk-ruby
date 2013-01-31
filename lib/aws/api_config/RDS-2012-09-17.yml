@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,8 +12,26 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-07-31'
+:api_version: '2012-09-17'
 :operations:
+- :name: AddTagsToResource
+  :method: :add_tags_to_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
+    - :required
+  :outputs:
+    :children:
+      AddTagsToResourceResult:
+        :ignore: true
 - :name: AuthorizeDBSecurityGroupIngress
   :method: :authorize_db_security_group_ingress
   :inputs:
@@ -72,6 +90,8 @@
                 :type: :integer
               InstanceCreateTime:
                 :type: :time
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: CreateDBInstance
   :method: :create_db_instance
@@ -121,6 +141,8 @@
     - :boolean
     LicenseModel:
     - :string
+    Iops:
+    - :integer
     OptionGroupName:
     - :string
     CharacterSetName:
@@ -162,6 +184,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -172,6 +199,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -184,6 +213,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: CreateDBInstanceReadReplica
   :method: :create_db_instance_read_replica
@@ -202,6 +233,8 @@
     - :integer
     AutoMinorVersionUpgrade:
     - :boolean
+    Iops:
+    - :integer
     OptionGroupName:
     - :string
   :outputs:
@@ -241,6 +274,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -251,6 +289,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -263,6 +303,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: CreateDBParameterGroup
   :method: :create_db_parameter_group
@@ -338,6 +380,8 @@
                 :type: :integer
               InstanceCreateTime:
                 :type: :time
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: CreateDBSubnetGroup
   :method: :create_db_subnet_group
@@ -365,6 +409,11 @@
                   Subnet:
                     :rename: :subnets
                     :list: true
+                    :children:
+                      SubnetAvailabilityZone:
+                        :children:
+                          ProvisionedIopsCapable:
+                            :type: :boolean
             :ignore: true
 - :name: CreateOptionGroup
   :method: :create_option_group
@@ -403,6 +452,8 @@
                           DBSecurityGroup:
                             :rename: :db_security_group_memberships
                             :list: true
+              AllowsVpcAndNonVpcInstanceMemberships:
+                :type: :boolean
             :ignore: true
 - :name: DeleteDBInstance
   :method: :delete_db_instance
@@ -451,6 +502,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -461,6 +517,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -473,6 +531,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: DeleteDBParameterGroup
   :method: :delete_db_parameter_group
@@ -515,6 +575,8 @@
                 :type: :integer
               InstanceCreateTime:
                 :type: :time
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: DeleteDBSubnetGroup
   :method: :delete_db_subnet_group
@@ -622,6 +684,11 @@
                           Subnet:
                             :rename: :subnets
                             :list: true
+                            :children:
+                              SubnetAvailabilityZone:
+                                :children:
+                                  ProvisionedIopsCapable:
+                                    :type: :boolean
                   PendingModifiedValues:
                     :children:
                       AllocatedStorage:
@@ -632,6 +699,8 @@
                         :type: :integer
                       MultiAZ:
                         :type: :boolean
+                      Iops:
+                        :type: :integer
                   LatestRestorableTime:
                     :type: :time
                   MultiAZ:
@@ -644,6 +713,8 @@
                       ReadReplicaDBInstanceIdentifier:
                         :rename: :read_replica_db_instance_identifiers
                         :list: true
+                  Iops:
+                    :type: :integer
 - :name: DescribeDBParameterGroups
   :method: :describe_db_parameter_groups
   :inputs:
@@ -756,6 +827,8 @@
                     :type: :integer
                   InstanceCreateTime:
                     :type: :time
+                  Iops:
+                    :type: :integer
 - :name: DescribeDBSubnetGroups
   :method: :describe_db_subnet_groups
   :inputs:
@@ -783,6 +856,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
 - :name: DescribeEngineDefaultParameters
   :method: :describe_engine_default_parameters
   :inputs:
@@ -915,6 +993,8 @@
                               DBSecurityGroup:
                                 :rename: :db_security_group_memberships
                                 :list: true
+                  AllowsVpcAndNonVpcInstanceMemberships:
+                    :type: :boolean
 - :name: DescribeOrderableDBInstanceOptions
   :method: :describe_orderable_db_instance_options
   :inputs:
@@ -927,6 +1007,8 @@
     - :string
     LicenseModel:
     - :string
+    Vpc:
+    - :boolean
     MaxRecords:
     - :integer
     Marker:
@@ -949,15 +1031,14 @@
                       AvailabilityZone:
                         :rename: :availability_zones
                         :list: true
+                        :children:
+                          ProvisionedIopsCapable:
+                            :type: :boolean
                   MultiAZCapable:
                     :type: :boolean
                   ReadReplicaCapable:
                     :type: :boolean
-                  VpcCapable:
-                    :type: :boolean
-                  VpcMultiAZCapable:
-                    :type: :boolean
-                  VpcReadReplicaCapable:
+                  Vpc:
                     :type: :boolean
 - :name: DescribeReservedDBInstances
   :method: :describe_reserved_db_instances
@@ -1061,6 +1142,23 @@
                         :children:
                           RecurringChargeAmount:
                             :type: :float
+- :name: ListTagsForResource
+  :method: :list_tags_for_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ListTagsForResourceResult:
+        :ignore: true
+        :children:
+          TagList:
+            :ignore: true
+            :children:
+              Tag:
+                :rename: :tag_list
+                :list: true
 - :name: ModifyDBInstance
   :method: :modify_db_instance
   :inputs:
@@ -1094,6 +1192,8 @@
     - :boolean
     AutoMinorVersionUpgrade:
     - :boolean
+    Iops:
+    - :integer
     OptionGroupName:
     - :string
   :outputs:
@@ -1133,6 +1233,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -1143,6 +1248,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -1155,6 +1262,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: ModifyDBParameterGroup
   :method: :modify_db_parameter_group
@@ -1215,6 +1324,11 @@
                   Subnet:
                     :rename: :subnets
                     :list: true
+                    :children:
+                      SubnetAvailabilityZone:
+                        :children:
+                          ProvisionedIopsCapable:
+                            :type: :boolean
             :ignore: true
 - :name: ModifyOptionGroup
   :method: :modify_option_group
@@ -1260,6 +1374,87 @@
                           DBSecurityGroup:
                             :rename: :db_security_group_memberships
                             :list: true
+              AllowsVpcAndNonVpcInstanceMemberships:
+                :type: :boolean
+            :ignore: true
+- :name: PromoteReadReplica
+  :method: :promote_read_replica
+  :inputs:
+    DBInstanceIdentifier:
+    - :string
+    - :required
+    BackupRetentionPeriod:
+    - :integer
+    PreferredBackupWindow:
+    - :string
+  :outputs:
+    :children:
+      PromoteReadReplicaResult:
+        :ignore: true
+        :children:
+          DBInstance:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              AllocatedStorage:
+                :type: :integer
+              InstanceCreateTime:
+                :type: :time
+              BackupRetentionPeriod:
+                :type: :integer
+              DBSecurityGroups:
+                :ignore: true
+                :children:
+                  DBSecurityGroup:
+                    :rename: :db_security_groups
+                    :list: true
+              DBParameterGroups:
+                :ignore: true
+                :children:
+                  DBParameterGroup:
+                    :rename: :db_parameter_groups
+                    :list: true
+              DBSubnetGroup:
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: :subnets
+                        :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
+              PendingModifiedValues:
+                :children:
+                  AllocatedStorage:
+                    :type: :integer
+                  Port:
+                    :type: :integer
+                  BackupRetentionPeriod:
+                    :type: :integer
+                  MultiAZ:
+                    :type: :boolean
+                  Iops:
+                    :type: :integer
+              LatestRestorableTime:
+                :type: :time
+              MultiAZ:
+                :type: :boolean
+              AutoMinorVersionUpgrade:
+                :type: :boolean
+              ReadReplicaDBInstanceIdentifiers:
+                :ignore: true
+                :children:
+                  ReadReplicaDBInstanceIdentifier:
+                    :rename: :read_replica_db_instance_identifiers
+                    :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: PurchaseReservedDBInstancesOffering
   :method: :purchase_reserved_db_instances_offering
@@ -1345,6 +1540,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -1355,6 +1555,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -1367,7 +1569,23 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
+- :name: RemoveTagsFromResource
+  :method: :remove_tags_from_resource
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    TagKeys:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      RemoveTagsFromResourceResult:
+        :ignore: true
 - :name: ResetDBParameterGroup
   :method: :reset_db_parameter_group
   :inputs:
@@ -1430,6 +1648,8 @@
     - :string
     Engine:
     - :string
+    Iops:
+    - :integer
     OptionGroupName:
     - :string
   :outputs:
@@ -1469,6 +1689,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -1479,6 +1704,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -1491,6 +1718,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: RestoreDBInstanceToPointInTime
   :method: :restore_db_instance_to_point_in_time
@@ -1523,6 +1752,8 @@
     - :string
     Engine:
     - :string
+    Iops:
+    - :integer
     OptionGroupName:
     - :string
   :outputs:
@@ -1562,6 +1793,11 @@
                       Subnet:
                         :rename: :subnets
                         :list: true
+                        :children:
+                          SubnetAvailabilityZone:
+                            :children:
+                              ProvisionedIopsCapable:
+                                :type: :boolean
               PendingModifiedValues:
                 :children:
                   AllocatedStorage:
@@ -1572,6 +1808,8 @@
                     :type: :integer
                   MultiAZ:
                     :type: :boolean
+                  Iops:
+                    :type: :integer
               LatestRestorableTime:
                 :type: :time
               MultiAZ:
@@ -1584,6 +1822,8 @@
                   ReadReplicaDBInstanceIdentifier:
                     :rename: :read_replica_db_instance_identifiers
                     :list: true
+              Iops:
+                :type: :integer
             :ignore: true
 - :name: RevokeDBSecurityGroupIngress
   :method: :revoke_db_security_group_ingress

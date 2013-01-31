@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,8 +16,6 @@ module AWS
 
     # Client class for Amazon Simple Workflow Service (SWF).
     class Client < Core::JSONClient
-
-      define_client_methods('2012-01-25')
 
       # @private
       CACHEABLE_REQUESTS = Set[
@@ -38,7 +36,7 @@ module AWS
         :list_workfow_types,
       ]
 
-      ## client methods ##
+      # client methods #
 
       # @!method count_closed_workflow_executions(options = {})
       # Calls the CountClosedWorkflowExecutions API operation.
@@ -1187,7 +1185,9 @@ module AWS
       #   * +:child_policy+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-01-25')
 
       protected
 

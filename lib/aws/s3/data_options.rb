@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -135,9 +135,7 @@ module AWS
       # @param [String] path Path to a file on disk.
       # @return [File] Given a path string, returns an open File.
       def open_file path
-        file_opts = ['rb']
-        file_opts << { :encoding => "BINARY" } if Object.const_defined?(:Encoding)
-        File.open(path, *file_opts)
+        Core::ManagedFile.open(path)
       end
 
       # A utility class that turns a block (with 2 args) into an

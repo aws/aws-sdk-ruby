@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,12 +17,10 @@ module AWS
     # Client class for Elastic MapReduce (EMR).
     class Client < Core::QueryClient
 
-      define_client_methods('2009-03-31')
-
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method add_instance_groups(options = {})
       # Calls the AddInstanceGroups API operation.
@@ -319,7 +317,9 @@ module AWS
       #     to be shutdown.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2009-03-31')
 
     end
   end

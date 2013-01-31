@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,7 @@
 
 Given /^I create a security group$/ do
   name = "ruby-integration-test-#{Time.now.to_i}"
-  Given "I create a security group named \"#{name}\""
+  step "I create a security group named \"#{name}\""
 end
 
 Given /^I create a security group named "([^\"]*)"$/ do |name|
@@ -24,7 +24,7 @@ end
 Given /^I create (\d+) security groups$/ do |count|
   count.to_i.times do |i|
     name = "ruby-integration-test-#{Time.now.to_i}-#{i}"
-    Given "I create a security group named \"#{name}\""
+    step "I create a security group named \"#{name}\""
   end
 end
 

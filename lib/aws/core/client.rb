@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -309,7 +309,7 @@ module AWS
       def expired_credentials? response
         response.error and
         response.error.respond_to?(:code) and
-        response.error.code == 'ExpiredTokenException'
+        (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
       end
 
       def return_or_raise options, &block
@@ -370,7 +370,7 @@ module AWS
 
         response.error =
           case
-          when response.network_error? then NetworkError.new
+          when response.network_error? then response.http_response.network_error
           when error_code then error_class(error_code).new(*error_args)
           when status >= 500 then Errors::ServerError.new(*error_args)
           when status >= 300 then Errors::ClientError.new(*error_args)
@@ -455,6 +455,13 @@ module AWS
                   send("process_#{name}_response", response)
                   if cache = AWS.response_cache
                     cache.add(response)
+                  end
+                end
+
+                # close files we opened
+                response.on_complete do
+                  if response.http_request.body_stream.is_a?(ManagedFile)
+                    response.http_request.body_stream.close
                   end
                 end
 

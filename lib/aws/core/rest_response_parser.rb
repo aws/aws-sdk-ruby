@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,9 +19,14 @@ module AWS
     class RESTResponseParser
 
       # @private
-      def initialize operation
+      def initialize operation, options
         @http = operation[:http]
-        @parser = XML::Parser.new(operation[:outputs])
+        @parser =
+          case options[:format]
+          when :xml then XML::Parser.new(operation[:outputs])
+          when :json then Core::JSONParser.new(operation[:outputs])
+          else raise "unhandled format: #{options[:format].inspect}"
+          end
       end
 
       # Given a response object, this method extract and returns a
@@ -30,16 +35,29 @@ module AWS
       # @return [Hash]
       def extract_data response
 
-        # parse the response XML body
-        data = @parser.parse(response.http_response.body)
+        if payload = @http[:response_payload]
+          data = { payload => response.http_response.body }
+        else
+          data = @parser.parse(response.http_response.body)
+        end
+
+        if header = response.http_response.headers['x-amzn-requestid']
+          data[:request_id] = [header].flatten.first
+        end
 
         # extract headers and insert into response
         (@http[:response_headers] || {}).each_pair do |name,header_name|
-          data[name] = response.http_response.headers[header_name]
+          if header = response.http_response.headers[header_name.downcase]
+            data[name] = [header].flatten.first
+          end
         end
 
         data
 
+      end
+
+      def simulate
+        {}
       end
 
     end

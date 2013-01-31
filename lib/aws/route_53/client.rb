@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,14 +15,12 @@ module AWS
   class Route53
 
     # Client class for Route53.
-    class Client < Core::RESTClient
-
-      define_client_methods('2012-02-29')
+    class Client < Core::RESTXMLClient
 
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
       # @!method change_resource_record_sets(options = {})
       # Calls the POST ChangeResourceRecordSets API operation.
@@ -257,7 +255,9 @@ module AWS
       #   * +:next_record_identifier+ - (String)
       #   * +:max_items+ - (Integer)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2012-02-29')
 
     end
   end

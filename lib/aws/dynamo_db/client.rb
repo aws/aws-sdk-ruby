@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,15 +19,13 @@ module AWS
     # Client class for Amazon DynamoDB.
     class Client < Core::JSONClient
 
-      define_client_methods('2011-12-05')
-
       # @private
       REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
 
       # @private
       CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
 
-      ## client methods ##
+      # client methods #
 
       # @!method batch_get_item(options = {})
       # Calls the BatchGetItem API operation.
@@ -836,7 +834,9 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2011-12-05')
 
       protected
 

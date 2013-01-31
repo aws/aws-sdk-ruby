@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -94,9 +94,13 @@ When /^I poll for messages with an idle timeout of (\d+) seconds$/ do |idle|
   @end_time = Time.now
 end
 
-Then /^I should have received all of the messages within (\d+) seconds$/ do |time|
-  (@numbers - @received).should be_empty
-  (@end_time - @start_time).should < time.to_i
+Then /^I should have received all of the messages within (\d+)(?:-(\d+))? seconds$/ do |begin_time, end_time|
+  (@numbers - @received).should be_empty if @numbers
+  if end_time.nil?
+    (@end_time - @start_time).should < begin_time.to_i
+  else
+    (begin_time.to_i..end_time.to_i).should include(@end_time - @start_time)
+  end
 end
 
 Then /^each message receipt handle should have been deleted$/ do
@@ -127,6 +131,26 @@ When /^I receive the message "([^\"]*)" requesting the following attributes:$/ d
     @message = @queue.receive_message(:attributes => attributes)
     @message.body.should == msg
   end
+end
+
+Given /^I set wait time on the queue to (\d+)$/ do |wait_time|
+  @queue.wait_time_seconds = wait_time.to_i
+end
+
+Then /^the queue wait time should eventually be (\d+)$/ do |wait_time|
+  eventually(60) { @queue.wait_time_seconds.should == wait_time.to_i }
+end
+
+When /^I poll for mesages with a wait time of "(.*?)"$/ do |time|
+  @numbers = nil
+  @start_time = Time.now
+
+  require 'timeout'
+  Timeout.timeout(120) do
+    @queue.poll(:wait_time_seconds => eval(time), :idle_timeout => 1) do |msg|
+    end
+  end
+  @end_time = Time.now
 end
 
 Then /^the message should have the following time fields:$/ do |table|

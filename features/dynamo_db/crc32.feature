@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,3 +35,8 @@ Feature: CRC32 response validation
     When I list all tables
     Then the request should not be retried
     And the response should not contain the table
+
+  Scenario: Handling large data responses
+    Given I have a large item "LargeItem" in the table
+    And I get the attribute "data" from the key "LargeItem"
+    Then the attribute length should be greater than 4096

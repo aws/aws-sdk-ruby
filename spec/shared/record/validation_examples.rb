@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -48,7 +48,7 @@ module AWS
       unless test_opts[:accepts_allow_nil] == false
 
         context ':allow_nil' do
-    
+
           it 'skips validation when :allow_nil and it has a nil value' do
             klass.send(validation_macro, :value, opts.merge(:allow_nil => true))
             obj = klass.new
@@ -59,6 +59,27 @@ module AWS
           it 'adds an error message when :allow_nil is false and it is invalid' do
             klass.send(validation_macro, :value, opts.merge(:allow_nil => false))
             obj.value = invalid_value
+            obj.valid?.should == false
+            obj.errors[:value].should_not be_empty
+          end
+
+        end
+      end
+
+      unless test_opts[:accepts_allow_blank] == false
+
+        context ':allow_blank' do
+
+          it 'skips validation when :allow_blank and it has a blank value' do
+            klass.send(validation_macro, :value, opts.merge(:allow_blank => true))
+            obj = klass.new :value => " "
+            obj.value.should == " "
+            obj.valid?.should == true
+          end
+
+          it 'adds an error message when :allow_blank is false and it is invalid' do
+            klass.send(validation_macro, :value, opts.merge(:allow_blank => false))
+            obj.value = " "
             obj.valid?.should == false
             obj.errors[:value].should_not be_empty
           end

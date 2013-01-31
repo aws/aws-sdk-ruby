@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,7 @@
 
 module AWS
   module Core
-    
+
     # Data is a light wrapper around a Ruby hash that provides
     # method missing access to the hash contents.
     #
@@ -66,7 +66,7 @@ module AWS
 
         # @private
         def id
-          self[:id] || self.id  
+          self[:id] || self.id
         end
 
         def [] index_or_key
@@ -83,6 +83,11 @@ module AWS
           end
         end
         alias_method :==, :eql?
+
+        def dup
+          Data.cast(@data.dup)
+        end
+        alias_method :clone, :dup
 
         protected
 
@@ -106,7 +111,7 @@ module AWS
       include MethodMissingProxy
 
       def method_missing method_name, *args, &block
-        if 
+        if
           args.empty? and !block_given? and
           key = _remove_question_mark(method_name) and
           @data.has_key?(key)
@@ -116,7 +121,7 @@ module AWS
           super
         end
       end
-      
+
       # @param [Hash] data The ruby hash of data you need wrapped.
       def initialize data
         @data = data
@@ -174,14 +179,14 @@ module AWS
       end
 
       class << self
-        
+
         # Given a hash, this method returns a {Data} object.  Given
         # an Array, this method returns a {Data::List} object.  Everything
         # else is returned as is.
         #
         # @param [Object] value The value to conditionally wrap.
         #
-        # @return [Data,Data::List,Object] Wraps hashes and lists with 
+        # @return [Data,Data::List,Object] Wraps hashes and lists with
         #   Data and List objects, all other objects are returned as
         #   is.
         #
@@ -198,7 +203,7 @@ module AWS
       class List
 
         include MethodMissingProxy
-        
+
         # @param [Array] array
         def initialize array
           @data = array
@@ -217,7 +222,7 @@ module AWS
         end
         alias_method :to_a, :to_ary
 
-        # #inject works on Core::Data::List in in 1.8.7 and 1.9.3, but not 
+        # #inject works on Core::Data::List in in 1.8.7 and 1.9.3, but not
         # in 1.9.2 unless we define it like so.
         # @private
         def inject *args, &block

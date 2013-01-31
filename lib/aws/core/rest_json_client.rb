@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,26 +13,25 @@
 
 module AWS
   module Core
-    class RESTClient < Core::Client
+    class RESTJSONClient < Core::Client
 
       protected
 
       def self.request_builder_for api_config, operation
-        RESTRequestBuilder.new(api_config[:namespace], operation)
+        Core::RESTRequestBuilder.new(operation, :format => :json)
       end
 
       def self.response_parser_for api_config, operation
-        RESTResponseParser.new(operation)
+        Core::RESTResponseParser.new(operation, :format => :json)
       end
 
       def extract_error_details response
         if
           response.http_response.status >= 300 and
           body = response.http_response.body and
-          error = errors_module::GRAMMAR.parse(body) and
-          error[:code]
+          json = (::JSON.load(body) rescue nil)
         then
-          [error[:code], error[:message]]
+          [json['code'], json['message']]
         end
       end
 

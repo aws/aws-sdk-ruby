@@ -1,0 +1,1036 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:api_version: '2012-09-25'
+:operations:
+- :name: CancelJob
+  :method: :cancel_job
+  :http:
+    :verb: DELETE
+    :uri: /2012-09-25/jobs/:id
+    :response_code: 202
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs: {}
+- :name: CreateJob
+  :method: :create_job
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/jobs
+    :response_code: 201
+  :inputs:
+    :pipeline_id:
+      :name: PipelineId
+      :type: :string
+      :required: true
+    :input:
+      :name: Input
+      :type: :hash
+      :required: true
+      :members:
+        :key:
+          :name: Key
+          :type: :string
+        :frame_rate:
+          :name: FrameRate
+          :type: :string
+        :resolution:
+          :name: Resolution
+          :type: :string
+        :aspect_ratio:
+          :name: AspectRatio
+          :type: :string
+        :interlaced:
+          :name: Interlaced
+          :type: :string
+        :container:
+          :name: Container
+          :type: :string
+    :output:
+      :name: Output
+      :type: :hash
+      :required: true
+      :members:
+        :key:
+          :name: Key
+          :type: :string
+        :thumbnail_pattern:
+          :name: ThumbnailPattern
+          :type: :string
+        :rotate:
+          :name: Rotate
+          :type: :string
+        :preset_id:
+          :name: PresetId
+          :type: :string
+  :outputs:
+    Job:
+      :sym: :job
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        PipelineId:
+          :sym: :pipeline_id
+          :type: :string
+        Input:
+          :sym: :input
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+            Interlaced:
+              :sym: :interlaced
+              :type: :string
+            Container:
+              :sym: :container
+              :type: :string
+        Output:
+          :sym: :output
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+- :name: CreatePipeline
+  :method: :create_pipeline
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/pipelines
+    :response_code: 201
+  :inputs:
+    :name:
+      :name: Name
+      :type: :string
+      :required: true
+    :input_bucket:
+      :name: InputBucket
+      :type: :string
+      :required: true
+    :output_bucket:
+      :name: OutputBucket
+      :type: :string
+      :required: true
+    :role:
+      :name: Role
+      :type: :string
+      :required: true
+    :notifications:
+      :name: Notifications
+      :type: :hash
+      :required: true
+      :members:
+        :progressing:
+          :name: Progressing
+          :type: :string
+        :completed:
+          :name: Completed
+          :type: :string
+        :warning:
+          :name: Warning
+          :type: :string
+        :error:
+          :name: Error
+          :type: :string
+  :outputs:
+    Pipeline:
+      :sym: :pipeline
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string
+- :name: CreatePreset
+  :method: :create_preset
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/presets
+    :response_code: 201
+  :inputs:
+    :name:
+      :name: Name
+      :type: :string
+      :required: true
+    :description:
+      :name: Description
+      :type: :string
+    :container:
+      :name: Container
+      :type: :string
+      :required: true
+    :video:
+      :name: Video
+      :type: :hash
+      :required: true
+      :members:
+        :codec:
+          :name: Codec
+          :type: :string
+        :codec_options:
+          :name: CodecOptions
+          :type: :map
+          :keys:
+            :name: key
+            :type: :string
+          :members:
+            :name: value
+            :type: :string
+        :keyframes_max_dist:
+          :name: KeyframesMaxDist
+          :type: :string
+        :fixed_gop:
+          :name: FixedGOP
+          :type: :string
+        :bit_rate:
+          :name: BitRate
+          :type: :string
+        :frame_rate:
+          :name: FrameRate
+          :type: :string
+        :resolution:
+          :name: Resolution
+          :type: :string
+        :aspect_ratio:
+          :name: AspectRatio
+          :type: :string
+    :audio:
+      :name: Audio
+      :type: :hash
+      :required: true
+      :members:
+        :codec:
+          :name: Codec
+          :type: :string
+        :sample_rate:
+          :name: SampleRate
+          :type: :string
+        :bit_rate:
+          :name: BitRate
+          :type: :string
+        :channels:
+          :name: Channels
+          :type: :string
+    :thumbnails:
+      :name: Thumbnails
+      :type: :hash
+      :required: true
+      :members:
+        :format:
+          :name: Format
+          :type: :string
+        :interval:
+          :name: Interval
+          :type: :string
+        :resolution:
+          :name: Resolution
+          :type: :string
+        :aspect_ratio:
+          :name: AspectRatio
+          :type: :string
+  :outputs:
+    Preset:
+      :sym: :preset
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Description:
+          :sym: :description
+          :type: :string
+        Container:
+          :sym: :container
+          :type: :string
+        Audio:
+          :sym: :audio
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            SampleRate:
+              :sym: :sample_rate
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            Channels:
+              :sym: :channels
+              :type: :string
+        Video:
+          :sym: :video
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :map
+              :members:
+                :sym: :map_value
+                :type: :string
+            KeyframesMaxDist:
+              :sym: :keyframes_max_dist
+              :type: :string
+            FixedGOP:
+              :sym: :fixed_gop
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Thumbnails:
+          :sym: :thumbnails
+          :type: :hash
+          :members:
+            Format:
+              :sym: :format
+              :type: :string
+            Interval:
+              :sym: :interval
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Type:
+          :sym: :type
+          :type: :string
+    Warning:
+      :sym: :warning
+      :type: :string
+- :name: DeletePipeline
+  :method: :delete_pipeline
+  :http:
+    :verb: DELETE
+    :uri: /2012-09-25/pipelines/:id
+    :response_code: 202
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs: {}
+- :name: DeletePreset
+  :method: :delete_preset
+  :http:
+    :verb: DELETE
+    :uri: /2012-09-25/presets/:id
+    :response_code: 202
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs: {}
+- :name: ListJobsByPipeline
+  :method: :list_jobs_by_pipeline
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/jobsByPipeline/:pipeline_id?Ascending=:ascending;PageToken=:page_token
+  :inputs:
+    :pipeline_id:
+      :type: :string
+      :required: true
+    :ascending:
+      :type: :string
+    :page_token:
+      :type: :string
+  :outputs:
+    Jobs:
+      :sym: :jobs
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        PipelineId:
+          :sym: :pipeline_id
+          :type: :string
+        Input:
+          :sym: :input
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+            Interlaced:
+              :sym: :interlaced
+              :type: :string
+            Container:
+              :sym: :container
+              :type: :string
+        Output:
+          :sym: :output
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+    NextPageToken:
+      :sym: :next_page_token
+      :type: :string
+- :name: ListJobsByStatus
+  :method: :list_jobs_by_status
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/jobsByStatus/:status?Ascending=:ascending;PageToken=:page_token
+  :inputs:
+    :status:
+      :type: :string
+      :required: true
+    :ascending:
+      :type: :string
+    :page_token:
+      :type: :string
+  :outputs:
+    Jobs:
+      :sym: :jobs
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        PipelineId:
+          :sym: :pipeline_id
+          :type: :string
+        Input:
+          :sym: :input
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+            Interlaced:
+              :sym: :interlaced
+              :type: :string
+            Container:
+              :sym: :container
+              :type: :string
+        Output:
+          :sym: :output
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+    NextPageToken:
+      :sym: :next_page_token
+      :type: :string
+- :name: ListPipelines
+  :method: :list_pipelines
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/pipelines
+  :inputs: {}
+  :outputs:
+    Pipelines:
+      :sym: :pipelines
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string
+- :name: ListPresets
+  :method: :list_presets
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/presets
+  :inputs: {}
+  :outputs:
+    Presets:
+      :sym: :presets
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Description:
+          :sym: :description
+          :type: :string
+        Container:
+          :sym: :container
+          :type: :string
+        Audio:
+          :sym: :audio
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            SampleRate:
+              :sym: :sample_rate
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            Channels:
+              :sym: :channels
+              :type: :string
+        Video:
+          :sym: :video
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :map
+              :members:
+                :sym: :map_value
+                :type: :string
+            KeyframesMaxDist:
+              :sym: :keyframes_max_dist
+              :type: :string
+            FixedGOP:
+              :sym: :fixed_gop
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Thumbnails:
+          :sym: :thumbnails
+          :type: :hash
+          :members:
+            Format:
+              :sym: :format
+              :type: :string
+            Interval:
+              :sym: :interval
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Type:
+          :sym: :type
+          :type: :string
+- :name: ReadJob
+  :method: :read_job
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/jobs/:id
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs:
+    Job:
+      :sym: :job
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        PipelineId:
+          :sym: :pipeline_id
+          :type: :string
+        Input:
+          :sym: :input
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+            Interlaced:
+              :sym: :interlaced
+              :type: :string
+            Container:
+              :sym: :container
+              :type: :string
+        Output:
+          :sym: :output
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+- :name: ReadPipeline
+  :method: :read_pipeline
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/pipelines/:id
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs:
+    Pipeline:
+      :sym: :pipeline
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string
+- :name: ReadPreset
+  :method: :read_preset
+  :http:
+    :verb: GET
+    :uri: /2012-09-25/presets/:id
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+  :outputs:
+    Preset:
+      :sym: :preset
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Description:
+          :sym: :description
+          :type: :string
+        Container:
+          :sym: :container
+          :type: :string
+        Audio:
+          :sym: :audio
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            SampleRate:
+              :sym: :sample_rate
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            Channels:
+              :sym: :channels
+              :type: :string
+        Video:
+          :sym: :video
+          :type: :hash
+          :members:
+            Codec:
+              :sym: :codec
+              :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :map
+              :members:
+                :sym: :map_value
+                :type: :string
+            KeyframesMaxDist:
+              :sym: :keyframes_max_dist
+              :type: :string
+            FixedGOP:
+              :sym: :fixed_gop
+              :type: :string
+            BitRate:
+              :sym: :bit_rate
+              :type: :string
+            FrameRate:
+              :sym: :frame_rate
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Thumbnails:
+          :sym: :thumbnails
+          :type: :hash
+          :members:
+            Format:
+              :sym: :format
+              :type: :string
+            Interval:
+              :sym: :interval
+              :type: :string
+            Resolution:
+              :sym: :resolution
+              :type: :string
+            AspectRatio:
+              :sym: :aspect_ratio
+              :type: :string
+        Type:
+          :sym: :type
+          :type: :string
+- :name: TestRole
+  :method: :test_role
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/roleTests
+  :inputs:
+    :role:
+      :name: Role
+      :type: :string
+      :required: true
+    :input_bucket:
+      :name: InputBucket
+      :type: :string
+      :required: true
+    :output_bucket:
+      :name: OutputBucket
+      :type: :string
+      :required: true
+    :topics:
+      :name: Topics
+      :type: :array
+      :required: true
+      :members:
+        :name: member
+        :type: :string
+  :outputs:
+    Success:
+      :sym: :success
+      :type: :string
+    Messages:
+      :sym: :messages
+      :type: :string
+- :name: UpdatePipelineNotifications
+  :method: :update_pipeline_notifications
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/pipelines/:id/notifications
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+    :notifications:
+      :name: Notifications
+      :type: :hash
+      :required: true
+      :members:
+        :progressing:
+          :name: Progressing
+          :type: :string
+        :completed:
+          :name: Completed
+          :type: :string
+        :warning:
+          :name: Warning
+          :type: :string
+        :error:
+          :name: Error
+          :type: :string
+  :outputs:
+    Pipeline:
+      :sym: :pipeline
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string
+- :name: UpdatePipelineStatus
+  :method: :update_pipeline_status
+  :http:
+    :verb: POST
+    :uri: /2012-09-25/pipelines/:id/status
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+    :status:
+      :name: Status
+      :type: :string
+      :required: true
+  :outputs:
+    Pipeline:
+      :sym: :pipeline
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string

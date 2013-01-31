@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -130,3 +130,9 @@ Feature: CRUD Buckets (High Level)
     When I clear the bucket rules
     Then the bucket should have no rules
 
+  @website
+  Scenario: Enable bucket website hosting
+    When I create a new bucket
+    Then the bucket should not be a website
+    When I enable website hosting
+    Then the bucket be a website

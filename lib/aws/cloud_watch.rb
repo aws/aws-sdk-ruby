@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,6 +15,48 @@ require 'aws/core'
 require 'aws/cloud_watch/config'
 
 module AWS
+
+  # This class is the starting point for working with Amazon CloudWatch.
+  #
+  # To use Amazon CloudWatch you must first
+  # {sign up here}[http://aws.amazon.com/cloudwatch/].
+  #
+  # For more information about Amazon CloudWatch:
+  #
+  # * {Amazon CloudWatch}[http://aws.amazon.com/cloudwatch/]
+  # * {Amazon CloudWatch Documentation}[http://aws.amazon.com/documentation/cloudwatch/]
+  #
+  # = Credentials
+  #
+  # You can setup default credentials for all AWS services via
+  # AWS.config:
+  #
+  #   AWS.config(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
+  # Or you can set them directly on the AWS::Route53 interface:
+  #
+  #   cw = AWS::CloudWatch.new(
+  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
+  # = Using the Client
+  #
+  # AWS::CloudWatch does not provide higher level abstractions for CloudWatch at
+  # this time.  You can still access all of the API methods using
+  # {AWS::CloudWatch::Client}.  Here is how you access the client and make
+  # a simple request:
+  #
+  #   cw = AWS::CloudWatch.new
+  #
+  #   resp = cw.client.describe_alarms
+  #   resp[:metric_alarams].each do |alarm|
+  #     puts alarm[:alarm_name]
+  #   end
+  #
+  # See {Client} for documentation on all of the supported operations.
+  #
   class CloudWatch
 
     AWS.register_autoloads(self, 'aws/cloud_watch') do

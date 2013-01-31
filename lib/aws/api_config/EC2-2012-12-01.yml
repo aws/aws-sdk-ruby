@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-07-20'
+:api_version: '2012-12-01'
 :operations:
 - :name: ActivateLicense
   :method: :activate_license
@@ -370,6 +370,18 @@
     InstanceId:
     - :string
     - :required
+  :outputs: {}
+- :name: CopySnapshot
+  :method: :copy_snapshot
+  :inputs:
+    SourceRegion:
+    - :string
+    - :required
+    SourceSnapshotId:
+    - :string
+    - :required
+    Description:
+    - :string
   :outputs: {}
 - :name: CreateCustomerGateway
   :method: :create_customer_gateway
@@ -2224,6 +2236,10 @@
     - :string
     OfferingType:
     - :string
+    NextToken:
+    - :string
+    MaxResults:
+    - :integer
   :outputs:
     :children:
       reservedInstancesOfferingsSet:
@@ -2373,8 +2389,6 @@
                           item:
                             :rename: :ip_ranges
                             :list: true
-                      ipProtocol:
-                        :type: :symbol
               ipPermissionsEgress:
                 :ignore: true
                 :children:
@@ -2507,6 +2521,10 @@
             :rename: :spot_instance_request_set
             :list: true
             :children:
+              status:
+                :children:
+                  updateTime:
+                    :type: :time
               validFrom:
                 :type: :time
               validUntil:
@@ -3733,6 +3751,10 @@
             :rename: :spot_instance_request_set
             :list: true
             :children:
+              status:
+                :children:
+                  updateTime:
+                    :type: :time
               validFrom:
                 :type: :time
               validUntil:
