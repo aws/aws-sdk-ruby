@@ -47,6 +47,28 @@ module AWS
         resp.data[:security_group_index] = { id => group }
       end
 
+      context '#instances' do
+
+        it 'returns a filtered instance collection' do
+          group.stub(:vpc?).and_return(false)
+          group.instances.should be_a(InstanceCollection)
+          group.instances.config.should eq(config)
+          client.should_receive(:describe_instances).
+            with(:filters => [{:name => 'group-id',:values => [group.id]}]).
+            and_return(client.stub_for(:describe_instances))
+          group.instances.each {|i|}
+        end
+
+        it 'filteres differently for vpc security groups' do
+          group.stub(:vpc?).and_return(true)
+          client.should_receive(:describe_instances).
+            with(:filters => [{:name => 'instance.group-id',:values => [group.id]}]).
+            and_return(client.stub_for(:describe_instances))
+          group.instances.each {|i|}
+        end
+
+      end
+
       context '#exists?' do
         let(:describe_call) { :describe_security_groups }
         let(:id_filter) { "group-id" }

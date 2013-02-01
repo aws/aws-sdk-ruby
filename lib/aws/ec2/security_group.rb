@@ -66,6 +66,17 @@ module AWS
         resp[:security_group_index][id]
       end
 
+      # @return [InstanceCollection] Returns an instance collection that will
+      #   only enumerate instances in this security group.
+      def instances
+        instances = InstanceCollection.new(:config => config)
+        if vpc?
+          instances.filter('instance.group-id', [group_id])
+        else
+          instances.filter('group-id', [group_id])
+        end
+      end
+
       # @return [Boolean] True if the security group exists.
       def exists?
         client.describe_security_groups(:filters => [
