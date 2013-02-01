@@ -46,7 +46,7 @@ module AWS
       # @note Creating a domain in SimpleDB is an idempotent operation; 
       #   running it multiple times using the same domain name will not 
       #   result in an error.
-      # @note You can create up to 100 domains per account.
+      # @note You can create up to 250 domains per account.
       # @param [String] domain_name 
       # @return [Domain] Returns a new domain with the given name.
       def create(domain_name)
