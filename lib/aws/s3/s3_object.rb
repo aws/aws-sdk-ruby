@@ -1510,7 +1510,7 @@ module AWS
             config.s3_encryption_materials_location
 
           cipher =
-          decryption_materials(location) do |envelope_key, envelope_iv|
+          decryption_materials(location, options) do |envelope_key, envelope_iv|
             envelope_key, envelope_iv =
               decode_envelope_key(envelope_key, envelope_iv, encryption_key)
             get_aes_cipher(:decrypt, :CBC, envelope_key, envelope_iv)
@@ -1539,10 +1539,10 @@ module AWS
 
       # @yield [String, String, String] Yields encryption materials for
       #   decryption
-      def decryption_materials location, &block
+      def decryption_materials location, options = {}, &block
 
         materials = case location
-          when :metadata then get_metadata_materials
+          when :metadata then get_metadata_materials(options)
           when :instruction_file then get_inst_file_materials
           else
             msg = "invalid :encryption_materials_location option, expected "
@@ -1562,8 +1562,10 @@ module AWS
 
       # @return [String, String, String] Returns the data key, envelope_iv, and the
       #   material description for decryption from the metadata.
-      def get_metadata_materials
-        metadata.to_h.values_at(*%w(x-amz-key x-amz-iv))
+      def get_metadata_materials(options)
+        opts = {}
+        opts[:version_id] = options[:version_id] if options[:version_id]
+        metadata(opts).to_h.values_at(*%w(x-amz-key x-amz-iv))
       end
 
       # @return [String, String, String] Returns the data key, envelope_iv, and the
