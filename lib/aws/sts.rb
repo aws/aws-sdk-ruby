@@ -50,6 +50,11 @@ module AWS
 
     include Core::ServiceInterface
 
+    # (see Client#assume_role)
+    def assume_role options = {}
+      client.assume_role(options).data
+    end
+
     # Returns a set of temporary credentials for an AWS account or IAM
     # User. The credentials consist of an Access Key ID, a Secret
     # Access Key, and a security token. These credentials are valid
