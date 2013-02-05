@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'thread'
+require 'stringio'
 
 module AWS
   module Core
@@ -28,11 +29,12 @@ module AWS
           start_processor
         end
 
-        def handle request, response
+        def handle request, response, &read_block
+
           raise "unsupport http reqest method: #{request.http_method}" unless
             ['GET', 'HEAD', 'PUT', 'POST', 'DELETE'].include? request.http_method
           @sem.synchronize do
-            @q << [request, response, Thread.current]
+            @q << [request, response, read_block, Thread.current]
             begin
              @processor.wakeup
             rescue ThreadError
@@ -85,7 +87,7 @@ module AWS
         end
 
         private
-        def make_easy_handle request, response, thread = nil
+        def make_easy_handle request, response, read_block, thread = nil
 
           protocol = request.use_ssl? ? 'https' : 'http'
           url = "#{protocol}://#{request.host}:#{request.port}#{request.uri}"
@@ -121,9 +123,26 @@ module AWS
             curl.delete = true
           end
 
+          buffer = StringIO.new
+
+          if read_block
+            curl.on_body do |chunk|
+              read_block.call(chunk)
+              chunk.size
+            end
+          else
+            curl.on_body do |chunk|
+              buffer << chunk
+              chunk.size
+            end
+          end
+
           curl.on_complete do
-            response.body = curl.body_str
             response.status = curl.response_code
+            unless read_block
+              buffer.rewind
+              response.body = buffer.read
+            end
             thread.run if thread
           end
 
