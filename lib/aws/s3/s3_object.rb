@@ -560,6 +560,9 @@ module AWS
       #     See
       #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
       #
+      #   @option options [String] :content_md5
+      #     The base64 encoded content md5 of the data.
+      #
       #   @option options :content_type A standard MIME type
       #     describing the format of the object data.
       #
