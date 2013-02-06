@@ -25,7 +25,7 @@ module AWS
     #
     # @attr_reader [String] stack_id Unique stack identifier.
     #
-    # @attr_reader [Symbol] status The status of the stack.
+    # @attr_reader [String] status The status of the stack.
     #
     # @attr_reader [String] status_reason Success/Failure message 
     #   associated with the +status+.
