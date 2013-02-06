@@ -693,8 +693,15 @@ module AWS
           object.read
         end
 
-        it 'should call get_object with the bucket name and key' do
+        it 'returns the object data from #get_object' do
           object.read.should == "HELLO"
+        end
+
+        it 'returns the #get_object response data if given a block' do
+          resp = object.read do |chunk|
+            # reading the data in chunks
+          end
+          resp.should be(response.data)
         end
 
       end

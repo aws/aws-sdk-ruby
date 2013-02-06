@@ -1049,7 +1049,8 @@ module AWS
         if should_decrypt?(options)
           get_encrypted_object(options, &read_block)
         else
-          get_object(options, &read_block)
+          resp_data = get_object(options, &read_block)
+          block_given? ? resp_data : resp_data[:data]
         end
 
       end
@@ -1262,19 +1263,20 @@ module AWS
 
       # A small wrapper around client#get_object
       def get_object options, &read_block
-        client.get_object(options, &read_block).data[:data]
+        client.get_object(options, &read_block).data
       end
 
       # A wrapper around get_object that decrypts
       def get_encrypted_object options, &read_block
         decryption_cipher(options) do |cipher|
           if block_given?
-            get_object(options) do |chunk|
+            resp = get_object(options) do |chunk|
               yield(cipher.update(chunk))
             end
             yield(cipher.final)
+            resp
           else
-            cipher.update(get_object(options)) + cipher.final
+            cipher.update(get_object(options)[:data]) + cipher.final
           end
         end
       end
