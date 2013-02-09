@@ -174,16 +174,24 @@ module AWS
         change_info = batch.call()
       end
 
+      # Return a new change batch for this hosted zone.
+      # @param [Hash] options Options for change batch.
+      # @return [ChangeBatch]
       def new_change_batch options = {}
         ChangeBatch.new(hosted_zone_id, options.merge(:config => config))
       end
 
+      # Return the create request that #update would include in its change
+      # batch. Note that #update also includes a delete request.
+      # @return [CreateRequest]
       def new_create_request
         create_options = delete_options.merge(@create_options)
         CreateRequest.new(create_options[:name], create_options[:type],
                           create_options)
       end
 
+      # Return a delete request that would delete this resource record set.
+      # @return [DeleteRequest]
       def new_delete_request
         options = delete_options
         DeleteRequest.new(options[:name], options[:type], options)
@@ -207,6 +215,9 @@ module AWS
         client.list_resource_record_sets(options)
       end
 
+      # Format a hash of options that can be used to initialize a change
+      # request.
+      # @return [Hash]
       def delete_options
         options = {:name => name, :type => type}
         options[:set_identifier] = set_identifier if set_identifier
