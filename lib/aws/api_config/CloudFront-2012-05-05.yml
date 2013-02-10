@@ -672,7 +672,7 @@
     :if_match:
       :type: :string
   :outputs: {}
-- :name: DeleteDistribution2012_05_05
+- :name: DeleteDistribution
   :method: :delete_distribution
   :http:
     :verb: DELETE
@@ -687,7 +687,7 @@
     :if_match:
       :type: :string
   :outputs: {}
-- :name: DeleteStreamingDistribution2012_05_05
+- :name: DeleteStreamingDistribution
   :method: :delete_streaming_distribution
   :http:
     :verb: DELETE
