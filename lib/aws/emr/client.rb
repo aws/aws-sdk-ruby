@@ -154,6 +154,7 @@ module AWS
       #           * +:args+ - (Array<String>)
       #     * +:supported_products+ - (Array<String>)
       #     * +:visible_to_all_users+ - (Boolean)
+      #     * +:job_flow_role+ - (String)
 
       # @!method modify_instance_groups(options = {})
       # Calls the ModifyInstanceGroups API operation.
@@ -176,13 +177,12 @@ module AWS
       #     additional features.
       #   * +:ami_version+ - (String) The version of the Amazon Machine Image
       #     (AMI) to use when launching Amazon EC2 instances in the job flow.
-      #     The following values are valid: "latest" (latest AMI version;
-      #     currently AMI 2.0, Hadoop 0.20.205) "2.0" (AMI 2.0, Hadoop
-      #     0.20.205) "1.0" (AMI 1.0, Hadoop 0.18) If this value is not
-      #     specified, the job flow uses the default of (AMI 1.0, Hadoop 0.18).
-      #     If the AMI supports multiple versions of Hadoop (for example, AMI
-      #     1.0 supports both Hadoop 0.18 and 0.20) you can use the
-      #     JobFlowInstancesConfig HadoopVersion parameter to modify the
+      #     The following values are valid: "latest" (uses the latest AMI) The
+      #     version number of the AMI to use, for example, "2.0" If this value
+      #     is not specified, the job flow uses the default of (AMI 1.0, Hadoop
+      #     0.18). If the AMI supports multiple versions of Hadoop (for
+      #     example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use
+      #     the JobFlowInstancesConfig HadoopVersion parameter to modify the
       #     version of Hadoop from the defaults shown above. For details about
       #     the AMI versions currently supported by Amazon ElasticMapReduce, go
       #     to AMI Versions Supported in Elastic MapReduce in the Amazon
@@ -278,6 +278,10 @@ module AWS
       #     can view and (if they have the proper policy permissions set)
       #     manage the job flow. If it is set to +false+ , only the IAM user
       #     that created the job flow can view and manage it.
+      #   * +:job_flow_role+ - (String) An IAM role for the job flow. The EC2
+      #     instances of the job flow assume this role. The default role is
+      #     EMRJobflowDefault. In order to use the default role, you must have
+      #     already created it using the CLI.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
