@@ -20,7 +20,7 @@ module AWS
 
       let(:request) { described_class.new }
 
-      it_should_behave_like "an authorize v2 request"
+      it_should_behave_like "an authorize v4 request"
 
       it_should_behave_like "an aws query request"
 
