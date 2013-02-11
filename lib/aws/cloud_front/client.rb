@@ -21,7 +21,7 @@ module AWS
       # client methods #
 
       # @!method create_cloud_front_origin_access_identity(options = {})
-      # Calls the POST CreateCloudFrontOriginAccessIdentity2012_05_05 API operation.
+      # Calls the POST CreateCloudFrontOriginAccessIdentity API operation.
       # @param [Hash] options
       # * +:cloud_front_origin_access_identity_config+ - *required* - (Hash)
       #   The origin access identity's configuration information.
@@ -51,7 +51,7 @@ module AWS
       #     * +:comment+ - (String)
 
       # @!method create_distribution(options = {})
-      # Calls the POST CreateDistribution2012_05_05 API operation.
+      # Calls the POST CreateDistribution API operation.
       # @param [Hash] options
       # * +:distribution_config+ - *required* - (Hash) The distribution's
       #   configuration information.
@@ -325,7 +325,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method create_invalidation(options = {})
-      # Calls the POST CreateInvalidation2012_05_05 API operation.
+      # Calls the POST CreateInvalidation API operation.
       # @param [Hash] options
       # * +:distribution_id+ - *required* - (String) The distribution's id.
       # * +:invalidation_batch+ - *required* - (Hash) The batch information for
@@ -366,7 +366,7 @@ module AWS
       #     * +:caller_reference+ - (String)
 
       # @!method create_streaming_distribution(options = {})
-      # Calls the POST CreateStreamingDistribution2012_05_05 API operation.
+      # Calls the POST CreateStreamingDistribution API operation.
       # @param [Hash] options
       # * +:streaming_distribution_config+ - *required* - (Hash) The streaming
       #   distribution's configuration information.
@@ -476,7 +476,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method delete_cloud_front_origin_access_identity(options = {})
-      # Calls the DELETE DeleteCloudFrontOriginAccessIdentity2012_05_05 API operation.
+      # Calls the DELETE DeleteCloudFrontOriginAccessIdentity API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The origin access identity's id.
       # * +:if_match+ - (String) The value of the ETag header you received from
@@ -484,7 +484,7 @@ module AWS
       # @return [Core::Response]
 
       # @!method delete_distribution(options = {})
-      # Calls the DELETE DeleteDistribution2012_05_05 API operation.
+      # Calls the DELETE DeleteDistribution API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The distribution id.
       # * +:if_match+ - (String) The value of the ETag header you received when
@@ -492,7 +492,7 @@ module AWS
       # @return [Core::Response]
 
       # @!method delete_streaming_distribution(options = {})
-      # Calls the DELETE DeleteStreamingDistribution2012_05_05 API operation.
+      # Calls the DELETE DeleteStreamingDistribution API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The distribution id.
       # * +:if_match+ - (String) The value of the ETag header you received when
@@ -500,7 +500,7 @@ module AWS
       # @return [Core::Response]
 
       # @!method get_cloud_front_origin_access_identity(options = {})
-      # Calls the GET GetCloudFrontOriginAccessIdentity2012_05_05 API operation.
+      # Calls the GET GetCloudFrontOriginAccessIdentity API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The identity's id.
       # @return [Core::Response]
@@ -513,7 +513,7 @@ module AWS
       #     * +:comment+ - (String)
 
       # @!method get_cloud_front_origin_access_identity_config(options = {})
-      # Calls the GET GetCloudFrontOriginAccessIdentityConfig2012_05_05 API operation.
+      # Calls the GET GetCloudFrontOriginAccessIdentityConfig API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The identity's id.
       # @return [Core::Response]
@@ -523,7 +523,7 @@ module AWS
       #   * +:comment+ - (String)
 
       # @!method get_distribution(options = {})
-      # Calls the GET GetDistribution2012_05_05 API operation.
+      # Calls the GET GetDistribution API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The distribution's id.
       # @return [Core::Response]
@@ -590,7 +590,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method get_distribution_config(options = {})
-      # Calls the GET GetDistributionConfig2012_05_05 API operation.
+      # Calls the GET GetDistributionConfig API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The distribution's id.
       # @return [Core::Response]
@@ -643,7 +643,7 @@ module AWS
       #   * +:enabled+ - (Boolean)
 
       # @!method get_invalidation(options = {})
-      # Calls the GET GetInvalidation2012_05_05 API operation.
+      # Calls the GET GetInvalidation API operation.
       # @param [Hash] options
       # * +:distribution_id+ - *required* - (String) The distribution's id.
       # * +:id+ - *required* - (String) The invalidation's id.
@@ -660,7 +660,7 @@ module AWS
       #     * +:caller_reference+ - (String)
 
       # @!method get_streaming_distribution(options = {})
-      # Calls the GET GetStreamingDistribution2012_05_05 API operation.
+      # Calls the GET GetStreamingDistribution API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The streaming distribution's id.
       # @return [Core::Response]
@@ -698,7 +698,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method get_streaming_distribution_config(options = {})
-      # Calls the GET GetStreamingDistributionConfig2012_05_05 API operation.
+      # Calls the GET GetStreamingDistributionConfig API operation.
       # @param [Hash] options
       # * +:id+ - *required* - (String) The streaming distribution's id.
       # @return [Core::Response]
@@ -723,7 +723,7 @@ module AWS
       #   * +:enabled+ - (Boolean)
 
       # @!method list_cloud_front_origin_access_identities(options = {})
-      # Calls the GET ListCloudFrontOriginAccessIdentities2012_05_05 API operation.
+      # Calls the GET ListCloudFrontOriginAccessIdentities API operation.
       # @param [Hash] options
       # * +:marker+ - (String) Use this when paginating results to indicate
       #   where to begin in your list of origin access identities. The results
@@ -747,7 +747,7 @@ module AWS
       #     * +:comment+ - (String)
 
       # @!method list_distributions(options = {})
-      # Calls the GET ListDistributions2012_05_05 API operation.
+      # Calls the GET ListDistributions API operation.
       # @param [Hash] options
       # * +:marker+ - (String) Use this when paginating results to indicate
       #   where to begin in your list of distributions. The results include
@@ -811,7 +811,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method list_invalidations(options = {})
-      # Calls the GET ListInvalidations2012_05_05 API operation.
+      # Calls the GET ListInvalidations API operation.
       # @param [Hash] options
       # * +:distribution_id+ - *required* - (String) The distribution's id.
       # * +:marker+ - (String) Use this parameter when paginating results to
@@ -837,7 +837,7 @@ module AWS
       #     * +:status+ - (String)
 
       # @!method list_streaming_distributions(options = {})
-      # Calls the GET ListStreamingDistributions2012_05_05 API operation.
+      # Calls the GET ListStreamingDistributions API operation.
       # @param [Hash] options
       # * +:marker+ - (String) Use this when paginating results to indicate
       #   where to begin in your list of streaming distributions. The results
@@ -874,7 +874,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method update_cloud_front_origin_access_identity(options = {})
-      # Calls the PUT UpdateCloudFrontOriginAccessIdentity2012_05_05 API operation.
+      # Calls the PUT UpdateCloudFrontOriginAccessIdentity API operation.
       # @param [Hash] options
       # * +:cloud_front_origin_access_identity_config+ - *required* - (Hash)
       #   The identity's configuration information.
@@ -907,7 +907,7 @@ module AWS
       #     * +:comment+ - (String)
 
       # @!method update_distribution(options = {})
-      # Calls the PUT UpdateDistribution2012_05_05 API operation.
+      # Calls the PUT UpdateDistribution API operation.
       # @param [Hash] options
       # * +:distribution_config+ - *required* - (Hash) The distribution's
       #   configuration information.
@@ -1185,7 +1185,7 @@ module AWS
       #     * +:enabled+ - (Boolean)
 
       # @!method update_streaming_distribution(options = {})
-      # Calls the PUT UpdateStreamingDistribution2012_05_05 API operation.
+      # Calls the PUT UpdateStreamingDistribution API operation.
       # @param [Hash] options
       # * +:streaming_distribution_config+ - *required* - (Hash) The streaming
       #   distribution's configuration information.

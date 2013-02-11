@@ -13,9 +13,8 @@
 
 ---
 :api_version: '2012-05-05'
-:namespace: http://cloudfront.amazonaws.com/doc/2012-07-01/
 :operations:
-- :name: CreateCloudFrontOriginAccessIdentity2012_05_05
+- :name: CreateCloudFrontOriginAccessIdentity
   :method: :create_cloud_front_origin_access_identity
   :http:
     :verb: POST
@@ -51,7 +50,7 @@
             :type: :string
           Comment:
             :type: :string
-- :name: CreateDistribution2012_05_05
+- :name: CreateDistribution
   :method: :create_distribution
   :http:
     :verb: POST
@@ -423,7 +422,7 @@
                 :type: :string
           Enabled:
             :type: :boolean
-- :name: CreateInvalidation2012_05_05
+- :name: CreateInvalidation
   :method: :create_invalidation
   :http:
     :verb: POST
@@ -483,7 +482,7 @@
                     :type: :string
           CallerReference:
             :type: :string
-- :name: CreateStreamingDistribution2012_05_05
+- :name: CreateStreamingDistribution
   :method: :create_streaming_distribution
   :http:
     :verb: POST
@@ -657,7 +656,7 @@
                     :type: :string
           Enabled:
             :type: :boolean
-- :name: DeleteCloudFrontOriginAccessIdentity2012_05_05
+- :name: DeleteCloudFrontOriginAccessIdentity
   :method: :delete_cloud_front_origin_access_identity
   :http:
     :verb: DELETE
@@ -702,7 +701,7 @@
     :if_match:
       :type: :string
   :outputs: {}
-- :name: GetCloudFrontOriginAccessIdentity2012_05_05
+- :name: GetCloudFrontOriginAccessIdentity
   :method: :get_cloud_front_origin_access_identity
   :http:
     :verb: GET
@@ -725,7 +724,7 @@
             :type: :string
           Comment:
             :type: :string
-- :name: GetCloudFrontOriginAccessIdentityConfig2012_05_05
+- :name: GetCloudFrontOriginAccessIdentityConfig
   :method: :get_cloud_front_origin_access_identity_config
   :http:
     :verb: GET
@@ -742,7 +741,7 @@
         :type: :string
       Comment:
         :type: :string
-- :name: GetDistribution2012_05_05
+- :name: GetDistribution
   :method: :get_distribution
   :http:
     :verb: GET
@@ -908,7 +907,7 @@
                 :type: :string
           Enabled:
             :type: :boolean
-- :name: GetDistributionConfig2012_05_05
+- :name: GetDistributionConfig
   :method: :get_distribution_config
   :http:
     :verb: GET
@@ -1036,7 +1035,7 @@
             :type: :string
       Enabled:
         :type: :boolean
-- :name: GetInvalidation2012_05_05
+- :name: GetInvalidation
   :method: :get_invalidation
   :http:
     :verb: GET
@@ -1071,7 +1070,7 @@
                     :type: :string
           CallerReference:
             :type: :string
-- :name: GetStreamingDistribution2012_05_05
+- :name: GetStreamingDistribution
   :method: :get_streaming_distribution
   :http:
     :verb: GET
@@ -1164,7 +1163,7 @@
                     :type: :string
           Enabled:
             :type: :boolean
-- :name: GetStreamingDistributionConfig2012_05_05
+- :name: GetStreamingDistributionConfig
   :method: :get_streaming_distribution_config
   :http:
     :verb: GET
@@ -1221,7 +1220,7 @@
                 :type: :string
       Enabled:
         :type: :boolean
-- :name: ListCloudFrontOriginAccessIdentities2012_05_05
+- :name: ListCloudFrontOriginAccessIdentities
   :method: :list_cloud_front_origin_access_identities
   :http:
     :verb: GET
@@ -1256,7 +1255,7 @@
                 :type: :string
               Comment:
                 :type: :string
-- :name: ListDistributions2012_05_05
+- :name: ListDistributions
   :method: :list_distributions
   :http:
     :verb: GET
@@ -1396,7 +1395,7 @@
                 :type: :string
               Enabled:
                 :type: :boolean
-- :name: ListInvalidations2012_05_05
+- :name: ListInvalidations
   :method: :list_invalidations
   :http:
     :verb: GET
@@ -1432,7 +1431,7 @@
                 :type: :string
               Status:
                 :type: :string
-- :name: ListStreamingDistributions2012_05_05
+- :name: ListStreamingDistributions
   :method: :list_streaming_distributions
   :http:
     :verb: GET
@@ -1503,7 +1502,7 @@
                 :type: :string
               Enabled:
                 :type: :boolean
-- :name: UpdateCloudFrontOriginAccessIdentity2012_05_05
+- :name: UpdateCloudFrontOriginAccessIdentity
   :method: :update_cloud_front_origin_access_identity
   :http:
     :verb: PUT
@@ -1544,7 +1543,7 @@
             :type: :string
           Comment:
             :type: :string
-- :name: UpdateDistribution2012_05_05
+- :name: UpdateDistribution
   :method: :update_distribution
   :http:
     :verb: PUT
@@ -1921,7 +1920,7 @@
                 :type: :string
           Enabled:
             :type: :boolean
-- :name: UpdateStreamingDistribution2012_05_05
+- :name: UpdateStreamingDistribution
   :method: :update_streaming_distribution
   :http:
     :verb: PUT
@@ -2100,3 +2099,4 @@
                     :type: :string
           Enabled:
             :type: :boolean
+:namespace: http://cloudfront.amazonaws.com/doc/2012-07-01/
