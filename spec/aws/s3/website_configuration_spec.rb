@@ -56,28 +56,6 @@ module AWS
 
       end
 
-      context '#eql?' do
-
-        it 'returns true if the configurations have the same hash' do
-          cfg1 = WebsiteConfiguration.new
-          cfg2 = WebsiteConfiguration.new
-          cfg1.should eql(cfg2)
-        end
-
-        it 'returns false if they differ' do
-          cfg1 = WebsiteConfiguration.new
-          cfg2 = WebsiteConfiguration.new(:index_document => { :suffix => 'a'})
-          cfg1.should_not eql(cfg2)
-        end
-
-        it 'is aliased as #==' do
-          cfg1 = WebsiteConfiguration.new
-          cfg2 = WebsiteConfiguration.new
-          (cfg1 == cfg2).should be(true)
-        end
-
-      end
-
     end
   end
 end

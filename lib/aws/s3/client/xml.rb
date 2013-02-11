@@ -220,6 +220,9 @@ module AWS
           element "ErrorDocument" do
             element "Key"
           end
+          element "RoutingRules" do
+            list("RoutingRule")
+          end
         end
 
       end

@@ -18,41 +18,54 @@ module AWS
   class S3
     class WebsiteConfiguration
 
-      # @private
+      # @option (see S3::Client#put_bucket_website)
       def initialize options = {}
-        @index_document_suffix = index_suffix(options)
-        @error_document_key = error_key(options)
+        @options = deep_copy(options)
+        if @options.empty?
+          @options[:index_document] = { :suffix => 'index.html' }
+          @options[:error_document] = { :key => 'error.html' }
+        end
       end
-
-      # @return [String]
-      attr_accessor :index_document_suffix
-
-      # @return [String]
-      attr_accessor :error_document_key
 
       # @return [Hash]
-      def to_hash
-        {
-          :index_document => { :suffix => index_document_suffix },
-          :error_document => { :key => error_document_key },
-        }
+      attr_reader :options
+
+      alias_method :to_hash, :options
+
+      # This method exists for backwards compatability.
+      # @return [String,nil]
+      # @private
+      def index_document_suffix
+        (@options[:index_document] || {})[:suffix]
       end
 
-      # @return [Boolean] Returns +true+ if the other configuration is
-      #   the same.
-      def eql? other
-        other.is_a?(WebsiteConfiguration) and other.to_hash == self.to_hash
+      # This method exists for backwards compatability.
+      # @private
+      def index_document_suffix= suffix
+        @options.delete(:redirect_all_requests_to)
+        @options[:index_document] ||= {}
+        @options[:index_document][:suffix] = suffix
       end
-      alias_method :==, :eql?
+
+      # This method exists for backwards compatability.
+      # @return [String,nil]
+      # @private
+      def error_document_key
+        (@options[:error_document] || {})[:key]
+      end
+
+      # This method exists for backwards compatability.
+      # @private
+      def error_document_key= key
+        @options.delete(:redirect_all_requests_to)
+        @options[:error_document] ||= {}
+        @options[:error_document][:key] = key
+      end
 
       private
 
-      def index_suffix options
-        (options[:index_document] || {})[:suffix] || 'index.html'
-      end
-
-      def error_key options
-        (options[:error_document] || {})[:key] || 'error.html'
+      def deep_copy hash
+        Marshal.load(Marshal.dump(hash))
       end
 
     end

@@ -156,7 +156,16 @@ module AWS
       # @overload put_bucket_website(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
-      #   @option options [required,Hash] :index_document
+      #   @option options [Hash] :redirect_all_requests_to
+      #     Describes the redirect behavior for every request to this
+      #     bucket's website endpoint. If this element is present, no
+      #     other options are are allowed.
+      #     * +:host_name+ - (*required*, String) 
+      #       Name of the host where requests will be redirected.
+      #     * +:protocol+ - (String)
+      #       Protocol to use (http, https) when redirecting requests. The
+      #       default is the protocol that is used in the original request.
+      #   @option options [Hash] :index_document
       #     * +:suffix+ - (*required*, String) - A suffix that is appended to
       #       a request that is for a directory on the website endpoint
       #       (e.g. if the suffix is index.html and you make a request to
@@ -167,6 +176,16 @@ module AWS
       #   @option options [Hash] :error_document
       #     * +:key+ - (*required*, String) - The object key name to use
       #       when a 4XX class error occurs.
+      #   @option options [Array<Hash>] :routing_rules
+      #     * +:redirect+ - (*required*, Hash)
+      #       * +:host_name+ - (String)
+      #       * +:protocol+ - (String)
+      #       * +:replace_key_prefix_with+ - (String)
+      #       * +:replace_key_with+ - (String)
+      #       * +:http_redirect_code+ - (String)
+      #     * +:condition+ - (Hash)
+      #       * +:key_prefix_equals+ - (String)
+      #       * +:http_error_code_returned_equals+ - (String)
       #   @return [Core::Response]
       bucket_method(:put_bucket_website, :put, 'website') do
 
@@ -174,14 +193,53 @@ module AWS
           validate_bucket_name!(options[:bucket_name])
           req.body = Nokogiri::XML::Builder.new do |xml|
             xml.WebsiteConfiguration(:xmlns => XMLNS) do
-              xml.IndexDocument do
-                xml.Suffix(options[:index_document][:suffix])
-              end
-              if options[:error_document]
-                xml.ErrorDocument do
-                  xml.Key(options[:error_document][:key])
+
+              if redirect = options[:redirect_all_requests_to]
+                xml.RedirectAllRequestsTo do
+                  xml.HostName(redirect[:host_name])
+                  xml.Protocol(redirect[:protocol]) if redirect[:protocol]
                 end
               end
+
+              if indx = options[:index_document]
+                xml.IndexDocument do
+                  xml.Suffix(indx[:suffix])
+                end
+              end
+
+              if err = options[:error_document]
+                xml.ErrorDocument do
+                  xml.Key(err[:key])
+                end
+              end
+
+              if rules = options[:routing_rules]
+                xml.RoutingRules do
+                  rules.each do |rule|
+                    xml.RoutingRule do
+
+puts rule.inspect
+                      redirect = rule[:redirect]
+                      xml.Redirect do
+                        xml.Protocol(redirect[:protocol]) if redirect[:protocol]
+                        xml.HostName(redirect[:host_name]) if redirect[:host_name]
+                        xml.ReplaceKeyPrefixWith(redirect[:replace_key_prefix_with]) if redirect[:replace_key_prefix_with]
+                        xml.ReplaceKeyWith(redirect[:replace_key_with]) if redirect[:replace_key_with]
+                        xml.HttpRedirectCode(redirect[:http_redirect_code]) if redirect[:http_redirect_code]
+                      end
+
+                      if condition = rule[:condition]
+                        xml.Condition do
+                          xml.KeyPrefixEquals(condition[:key_prefix_equals]) if condition[:key_prefix_equals]
+                          xml.HttpErrorCodeReturnedEquals(condition[:http_error_code_returned_equals]) if condition[:http_error_code_returned_equals]
+                        end
+                      end
+
+                    end
+                  end
+                end
+              end
+
             end
           end.doc.root.to_xml
           super(req, options)
