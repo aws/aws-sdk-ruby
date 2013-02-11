@@ -25,7 +25,7 @@ module AWS
 
         def add_authorization! credentials
 
-          headers["x-amz-date"] ||= (headers["date"] ||= Time.now.rfc822)
+          headers["x-amz-date"] ||= (headers["date"] ||= Time.now.httpdate)
           headers["host"] ||= host
 
           headers["x-amz-security-token"] = credentials.session_token if 

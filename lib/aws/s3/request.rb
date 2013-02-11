@@ -106,7 +106,7 @@ module AWS
         if headers.detect{|k,v| k.to_s =~ /^x-amz-date$/i }
           ''
         else
-          headers['date'] ||= Time.now.rfc822
+          headers['date'] ||= Time.now.httpdate
         end
       end
 

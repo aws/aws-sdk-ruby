@@ -44,7 +44,7 @@ module AWS
         end
 
         def string_to_sign
-          headers['date'] ||= Time.now.rfc822
+          headers['date'] ||= Time.now.httpdate
         end
 
       end
