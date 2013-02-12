@@ -15,7 +15,7 @@ module AWS
   class AutoScaling
 
     # This mixin provides a method for parsing Auto Scaling group options
-    # (for create and upate methods).
+    # (for create and update methods).
     # @private
     module GroupOptions
 

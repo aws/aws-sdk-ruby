@@ -31,7 +31,7 @@ module AWS
       # @return [Item] The item this collection belongs to.
       attr_reader :item
 
-      # Retuns an Attribute with the given name.
+      # Returns an Attribute with the given name.
       #
       # @note This does not make a request to SimpleDB.
       #
@@ -155,7 +155,7 @@ module AWS
         do_put(attribute_hashes(attributes, false), attributes)
       end
 
-      # Perform a mixed update of added and replace attribues.
+      # Perform a mixed update of added and replace attributes.
       #
       #   item.attributes.put(
       #     :add => { 'colors' => %w(green blue), 'tags' => 'cool' }

@@ -14,7 +14,7 @@
 module AWS
   class AutoScaling
 
-    # Provides a hepler method for parsing scaling policy options.
+    # Provides a helper method for parsing scaling policy options.
     # @private
     module ScalingPolicyOptions
 

@@ -16,7 +16,7 @@ require 'aws/elb/config'
 
 module AWS
 
-  # Provides an expressive, object-oriented interface to AWS Elastic Beantalk.
+  # Provides an expressive, object-oriented interface to AWS Elastic Beanstalk.
   #
   # == Credentials
   #

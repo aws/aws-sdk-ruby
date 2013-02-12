@@ -30,7 +30,7 @@ module AWS
     #     # ...
     #   end
     #
-    # If you know the id of an activity you can get a refernce to it:
+    # If you know the id of an activity you can get a reference to it:
     #
     #   activity = auto_scaling.activities['activity-id']
     #   

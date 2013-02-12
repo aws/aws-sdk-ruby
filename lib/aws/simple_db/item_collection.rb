@@ -74,7 +74,7 @@ module AWS
         item
       end
 
-      # Retuns an item with the given name.
+      # Returns an item with the given name.
       #
       # @note This does not make a request to SimpleDB.
       #
@@ -117,7 +117,7 @@ module AWS
       #
       # You can also pass the standard scope options to #each as well:
       #
-      #   # output the item names of the 10 most expesive items
+      #   # output the item names of the 10 most expensive items
       #   domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
       #     puts item.name
       #   end
@@ -126,7 +126,7 @@ module AWS
       #
       # @yieldparam [Item,ItemData] item If the item collection has been
       #   scoped by chaining +#select+ or by passing the +:select+ option
-      #   then {ItemData} objects (that contain a hash of attrbiutes) are 
+      #   then {ItemData} objects (that contain a hash of attributes) are
       #   yielded.  If no list of attributes has been provided, then#
       #   {Item} objects (with no populated data) are yielded.
       #
@@ -268,7 +268,7 @@ module AWS
       #  
       #   * +:all+ or '*' to request all attributes for each item
       #  
-      #   * A list or array of attribute names as strinsg or symbols
+      #   * A list or array of attribute names as strings or symbols
       #
       #     Attribute names may contain any characters that are valid
       #     in a SimpleDB attribute name; this method will handle
