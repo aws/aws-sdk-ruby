@@ -33,6 +33,7 @@ require 'aws/core/autoloader'
 # * {AWS::ELB}
 # * {AWS::EMR}
 # * {AWS::Glacier}
+# * {AWS::OpsWorks}
 # * {AWS::IAM}
 # * {AWS::Redshift}
 # * {AWS::RDS}
@@ -333,6 +334,9 @@ module AWS
     #    URI string:
     #
     #       AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
+    #
+    # @option options [String] :ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS OpsWorks.
     #
     # @option options [String] :redshift_endpoint ('redshift.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Redshift.

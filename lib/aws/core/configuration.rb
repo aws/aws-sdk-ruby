@@ -150,6 +150,9 @@ module AWS
     # @attr_reader [URI,nil] route_53_endpoint ('route53.amazonaws.com')
     #   The service endpoint for Amazon Route 53.
     #
+    # @attr_reader [URI,nil] ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS OpsWorks.
+    #
     # @attr_reader [URI,nil] redshift_endpoint ('redshift.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Redshift.
     #
