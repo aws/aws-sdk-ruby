@@ -67,8 +67,16 @@ module AWS
       #     parameter group to associate with this Cache cluster. If this
       #     argument is omitted, the default CacheParameterGroup for the
       #     specified engine will be used.
-      #   * +:cache_security_group_names+ - *required* - (Array<String>) A list
-      #     of Cache Security Group Names to associate with this Cache Cluster.
+      #   * +:cache_subnet_group_name+ - (String) The name of the Cache Subnet
+      #     Group to be used for the Cache Cluster. Use this parameter only
+      #     when you are creating a cluster in an Amazon Virtual Private Cloud
+      #     (VPC).
+      #   * +:cache_security_group_names+ - (Array<String>) A list of Cache
+      #     Security Group Names to associate with this Cache Cluster.
+      #   * +:security_group_ids+ - (Array<String>) Specifies the VPC Security
+      #     Groups associated with the Cache Cluster. Use this parameter only
+      #     when you are creating a cluster in an Amazon Virtual Private Cloud
+      #     (VPC).
       #   * +:preferred_availability_zone+ - (String) The EC2 Availability Zone
       #     that the Cache Cluster will be created in. In normal use, all
       #     CacheNodes belonging to a CacheCluster are placed in the preferred
@@ -91,6 +99,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:cache_cluster_id+ - (String)
+      #   * +:configuration_endpoint+ - (Hash)
+      #     * +:address+ - (String)
+      #     * +:port+ - (Integer)
+      #   * +:client_download_landing_page+ - (String)
       #   * +:cache_node_type+ - (String)
       #   * +:engine+ - (String)
       #   * +:engine_version+ - (String)
@@ -113,6 +125,7 @@ module AWS
       #     * +:cache_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
       #     * +:cache_node_ids_to_reboot+ - (Array<String>)
+      #   * +:cache_subnet_group_name+ - (String)
       #   * +:cache_nodes+ - (Array<Hash>)
       #     * +:cache_node_id+ - (String)
       #     * +:cache_node_status+ - (String)
@@ -122,6 +135,9 @@ module AWS
       #       * +:port+ - (Integer)
       #     * +:parameter_group_status+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
+      #   * +:security_groups+ - (Array<Hash>)
+      #     * +:security_group_id+ - (String)
+      #     * +:status+ - (String)
 
       # @!method create_cache_parameter_group(options = {})
       # Calls the CreateCacheParameterGroup API operation.
@@ -161,6 +177,28 @@ module AWS
       #     * +:ec2_security_group_name+ - (String)
       #     * +:ec2_security_group_owner_id+ - (String)
 
+      # @!method create_cache_subnet_group(options = {})
+      # Calls the CreateCacheSubnetGroup API operation.
+      # @param [Hash] options
+      #   * +:cache_subnet_group_name+ - *required* - (String) The name for the
+      #     Cache Subnet Group. This value is stored as a lowercase string.
+      #     Constraints: Must contain no more than 255 alphanumeric characters
+      #     or hyphens. Example: mysubnetgroup
+      #   * +:cache_subnet_group_description+ - *required* - (String) The
+      #     description for the Cache Subnet Group.
+      #   * +:subnet_ids+ - *required* - (Array<String>) The EC2 Subnet IDs for
+      #     the Cache Subnet Group.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:cache_subnet_group_name+ - (String)
+      #   * +:cache_subnet_group_description+ - (String)
+      #   * +:vpc_id+ - (String)
+      #   * +:subnets+ - (Array<Hash>)
+      #     * +:subnet_identifier+ - (String)
+      #     * +:subnet_availability_zone+ - (Hash)
+      #       * +:name+ - (String)
+
       # @!method delete_cache_cluster(options = {})
       # Calls the DeleteCacheCluster API operation.
       # @param [Hash] options
@@ -171,6 +209,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:cache_cluster_id+ - (String)
+      #   * +:configuration_endpoint+ - (Hash)
+      #     * +:address+ - (String)
+      #     * +:port+ - (Integer)
+      #   * +:client_download_landing_page+ - (String)
       #   * +:cache_node_type+ - (String)
       #   * +:engine+ - (String)
       #   * +:engine_version+ - (String)
@@ -193,6 +235,7 @@ module AWS
       #     * +:cache_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
       #     * +:cache_node_ids_to_reboot+ - (Array<String>)
+      #   * +:cache_subnet_group_name+ - (String)
       #   * +:cache_nodes+ - (Array<Hash>)
       #     * +:cache_node_id+ - (String)
       #     * +:cache_node_status+ - (String)
@@ -202,6 +245,9 @@ module AWS
       #       * +:port+ - (Integer)
       #     * +:parameter_group_status+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
+      #   * +:security_groups+ - (Array<Hash>)
+      #     * +:security_group_id+ - (String)
+      #     * +:status+ - (String)
 
       # @!method delete_cache_parameter_group(options = {})
       # Calls the DeleteCacheParameterGroup API operation.
@@ -217,6 +263,14 @@ module AWS
       #   * +:cache_security_group_name+ - *required* - (String) The name of
       #     the Cache Security Group to delete. You cannot delete the default
       #     security group.
+      # @return [Core::Response]
+
+      # @!method delete_cache_subnet_group(options = {})
+      # Calls the DeleteCacheSubnetGroup API operation.
+      # @param [Hash] options
+      #   * +:cache_subnet_group_name+ - *required* - (String) The name of the
+      #     Cache Subnet Group to delete. Constraints: Must contain no more
+      #     than 255 alphanumeric characters or hyphens.
       # @return [Core::Response]
 
       # @!method describe_cache_clusters(options = {})
@@ -244,6 +298,10 @@ module AWS
       #   * +:marker+ - (String)
       #   * +:cache_clusters+ - (Array<Hash>)
       #     * +:cache_cluster_id+ - (String)
+      #     * +:configuration_endpoint+ - (Hash)
+      #       * +:address+ - (String)
+      #       * +:port+ - (Integer)
+      #     * +:client_download_landing_page+ - (String)
       #     * +:cache_node_type+ - (String)
       #     * +:engine+ - (String)
       #     * +:engine_version+ - (String)
@@ -266,6 +324,7 @@ module AWS
       #       * +:cache_parameter_group_name+ - (String)
       #       * +:parameter_apply_status+ - (String)
       #       * +:cache_node_ids_to_reboot+ - (Array<String>)
+      #     * +:cache_subnet_group_name+ - (String)
       #     * +:cache_nodes+ - (Array<Hash>)
       #       * +:cache_node_id+ - (String)
       #       * +:cache_node_status+ - (String)
@@ -275,6 +334,41 @@ module AWS
       #         * +:port+ - (Integer)
       #       * +:parameter_group_status+ - (String)
       #     * +:auto_minor_version_upgrade+ - (Boolean)
+      #     * +:security_groups+ - (Array<Hash>)
+      #       * +:security_group_id+ - (String)
+      #       * +:status+ - (String)
+
+      # @!method describe_cache_engine_versions(options = {})
+      # Calls the DescribeCacheEngineVersions API operation.
+      # @param [Hash] options
+      #   * +:engine+ - (String) The cache engine to return.
+      #   * +:engine_version+ - (String) The cache engine version to return.
+      #     Example: 1.4.14
+      #   * +:cache_parameter_group_family+ - (String) The name of a specific
+      #     Cache Parameter Group family to return details for. Constraints:
+      #     Must be 1 to 255 alphanumeric characters First character must be a
+      #     letter Cannot end with a hyphen or contain two consecutive hyphens
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a marker is included in the response so that the
+      #     remaining results may be retrieved.
+      #   * +:marker+ - (String) An optional marker provided in the previous
+      #     DescribeCacheParameterGroups request. If this parameter is
+      #     specified, the response includes only records beyond the marker, up
+      #     to the value specified by MaxRecords.
+      #   * +:default_only+ - (Boolean) Indicates that only the default version
+      #     of the specified engine or engine and major version combination is
+      #     returned.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:marker+ - (String)
+      #   * +:cache_engine_versions+ - (Array<Hash>)
+      #     * +:engine+ - (String)
+      #     * +:engine_version+ - (String)
+      #     * +:cache_parameter_group_family+ - (String)
+      #     * +:cache_engine_description+ - (String)
+      #     * +:cache_engine_version_description+ - (String)
 
       # @!method describe_cache_parameter_groups(options = {})
       # Calls the DescribeCacheParameterGroups API operation.
@@ -364,6 +458,33 @@ module AWS
       #       * +:status+ - (String)
       #       * +:ec2_security_group_name+ - (String)
       #       * +:ec2_security_group_owner_id+ - (String)
+
+      # @!method describe_cache_subnet_groups(options = {})
+      # Calls the DescribeCacheSubnetGroups API operation.
+      # @param [Hash] options
+      #   * +:cache_subnet_group_name+ - (String) The name of the Cache Subnet
+      #     Group to return details for.
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a marker is included in the response so that the
+      #     remaining results may be retrieved. Default: 100 Constraints:
+      #     minimum 20, maximum 100
+      #   * +:marker+ - (String) An optional marker provided in the previous
+      #     DescribeCacheSubnetGroups request. If this parameter is specified,
+      #     the response includes only records beyond the marker, up to the
+      #     value specified by MaxRecords.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:marker+ - (String)
+      #   * +:cache_subnet_groups+ - (Array<Hash>)
+      #     * +:cache_subnet_group_name+ - (String)
+      #     * +:cache_subnet_group_description+ - (String)
+      #     * +:vpc_id+ - (String)
+      #     * +:subnets+ - (Array<Hash>)
+      #       * +:subnet_identifier+ - (String)
+      #       * +:subnet_availability_zone+ - (Hash)
+      #         * +:name+ - (String)
 
       # @!method describe_engine_default_parameters(options = {})
       # Calls the DescribeEngineDefaultParameters API operation.
@@ -553,6 +674,10 @@ module AWS
       #     change is asynchronously applied as soon as possible. Constraints:
       #     Must contain no more than 255 alphanumeric characters. Must not be
       #     "Default".
+      #   * +:security_group_ids+ - (Array<String>) Specifies the VPC Security
+      #     Groups associated with the Cache Cluster. This parameter can be
+      #     used only with clusters that are created in an Amazon Virtual
+      #     Private Cloud (VPC).
       #   * +:preferred_maintenance_window+ - (String) The weekly time range
       #     (in UTC) during which system maintenance can occur, which may
       #     result in an outage. This change is made immediately. If moving
@@ -585,6 +710,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:cache_cluster_id+ - (String)
+      #   * +:configuration_endpoint+ - (Hash)
+      #     * +:address+ - (String)
+      #     * +:port+ - (Integer)
+      #   * +:client_download_landing_page+ - (String)
       #   * +:cache_node_type+ - (String)
       #   * +:engine+ - (String)
       #   * +:engine_version+ - (String)
@@ -607,6 +736,7 @@ module AWS
       #     * +:cache_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
       #     * +:cache_node_ids_to_reboot+ - (Array<String>)
+      #   * +:cache_subnet_group_name+ - (String)
       #   * +:cache_nodes+ - (Array<Hash>)
       #     * +:cache_node_id+ - (String)
       #     * +:cache_node_status+ - (String)
@@ -616,6 +746,9 @@ module AWS
       #       * +:port+ - (Integer)
       #     * +:parameter_group_status+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
+      #   * +:security_groups+ - (Array<Hash>)
+      #     * +:security_group_id+ - (String)
+      #     * +:status+ - (String)
 
       # @!method modify_cache_parameter_group(options = {})
       # Calls the ModifyCacheParameterGroup API operation.
@@ -634,6 +767,28 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:cache_parameter_group_name+ - (String)
+
+      # @!method modify_cache_subnet_group(options = {})
+      # Calls the ModifyCacheSubnetGroup API operation.
+      # @param [Hash] options
+      #   * +:cache_subnet_group_name+ - *required* - (String) The name for the
+      #     Cache Subnet Group. This value is stored as a lowercase string.
+      #     Constraints: Must contain no more than 255 alphanumeric characters
+      #     or hyphens. Example: mysubnetgroup
+      #   * +:cache_subnet_group_description+ - (String) The description for
+      #     the Cache Subnet Group.
+      #   * +:subnet_ids+ - (Array<String>) The EC2 Subnet IDs for the Cache
+      #     Subnet Group.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:cache_subnet_group_name+ - (String)
+      #   * +:cache_subnet_group_description+ - (String)
+      #   * +:vpc_id+ - (String)
+      #   * +:subnets+ - (Array<Hash>)
+      #     * +:subnet_identifier+ - (String)
+      #     * +:subnet_availability_zone+ - (Hash)
+      #       * +:name+ - (String)
 
       # @!method purchase_reserved_cache_nodes_offering(options = {})
       # Calls the PurchaseReservedCacheNodesOffering API operation.
@@ -675,6 +830,10 @@ module AWS
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:cache_cluster_id+ - (String)
+      #   * +:configuration_endpoint+ - (Hash)
+      #     * +:address+ - (String)
+      #     * +:port+ - (Integer)
+      #   * +:client_download_landing_page+ - (String)
       #   * +:cache_node_type+ - (String)
       #   * +:engine+ - (String)
       #   * +:engine_version+ - (String)
@@ -697,6 +856,7 @@ module AWS
       #     * +:cache_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
       #     * +:cache_node_ids_to_reboot+ - (Array<String>)
+      #   * +:cache_subnet_group_name+ - (String)
       #   * +:cache_nodes+ - (Array<Hash>)
       #     * +:cache_node_id+ - (String)
       #     * +:cache_node_status+ - (String)
@@ -706,6 +866,9 @@ module AWS
       #       * +:port+ - (Integer)
       #     * +:parameter_group_status+ - (String)
       #   * +:auto_minor_version_upgrade+ - (Boolean)
+      #   * +:security_groups+ - (Array<Hash>)
+      #     * +:security_group_id+ - (String)
+      #     * +:status+ - (String)
 
       # @!method reset_cache_parameter_group(options = {})
       # Calls the ResetCacheParameterGroup API operation.
@@ -750,7 +913,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-03-09')
+      define_client_methods('2012-11-15')
 
     end
   end
