@@ -1,4 +1,104 @@
-2013-01-30 Trevor Rowe <trevorrowe@gmail.com>
+2013-02-11 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/client.rb: Removed a debugging statement.
+
+  * lib/aws/s3/client.rb, lib/aws/s3/client/xml.rb,
+  lib/aws/s3/website_configuration.rb,
+  spec/aws/s3/website_configuration_spec.rb: Added support for bucket website
+  redirection rules.
+
+  * spec/aws/sqs/request_spec.rb: Updated SQS request specs to tests for sigv4
+  signing.
+
+  * lib/aws/sqs/request.rb: Moved AWS::SQS to signature version 4.
+
+  * lib/aws/elastic_beanstalk/request.rb: Moved AWS::ElasticBeanstalk to
+  signature version 4.
+
+  * lib/aws/cloud_front/request.rb, lib/aws/core/signature/version_3.rb,
+  lib/aws/core/signature/version_3_https.rb, lib/aws/s3/request.rb,
+  spec/aws/s3/request_spec.rb, spec/shared/request_examples.rb: Replaced calls
+  to Time#rfc822 with Time#httpdate.
+
+  Fixes #154
+
+  * lib/aws/api_config/EMR-2009-03-31.yml, lib/aws/emr/client.rb: Added
+  support for IAM roles when creating EMR job flows.
+
+  Fixes #119
+
+  * lib/aws/api_config/CloudFront-2012-05-05.yml,
+  lib/aws/cloud_front/client.rb: Removed the API version from the Cloud Front
+  operations.
+
+  Fixes #157
+
+2013-02-10 Enis Konuk <enis@cloudvlab.com>
+
+  * lib/aws/api_config/CloudFront-2012-05-05.yml: Fix for Issues #156 -
+  DeleteDistribution and DeleteStreamingDistribution - CloudFront
+
+2013-02-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/cloud_formation/stack.rb: Corrected the documentation on the
+  return type of AWS::CloudFormation::Stack#status.
+
+  Fixes #141
+
+  * lib/aws/s3/s3_object.rb, spec/aws/s3/s3_object_spec.rb:
+  AWS::S3::S3Object#read now returns the extra response in block mode.
+
+  You can now get the object contents AND the object metadata in a single
+  call to S3Object#read.
+
+      obj = s3.buckets['foo'].objects['bar']
+
+      resp = obj.read do |chunk|
+        # write the data somewhere
+        file.write(chunk)
+      end
+
+      resp[:etag] #=> '...'
+      resp[:meta] #=> a hash of object metadata
+
+2013-02-05 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/http/curb_handler.rb: Added support to the CurbHandler for
+  streaming reads.
+
+  The AWS::Core::Http::CurbHandler is a drop-in replacement for the
+  net/http based default handler.  The curb-based handler did not
+  previously support a block for streading response data from the
+  response directly.  Instead it was buffering the entire response
+  into memory (and emitting a warning).
+
+2013-02-01 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/s3_object.rb, spec/aws/s3/s3_object_encrypt_spec.rb: Fixed a
+  bug reading client-side encrypted object versions.
+
+  * lib/aws/ec2/security_group.rb, spec/aws/ec2/security_group_spec.rb: Added
+  a SecurityGroup#instances method.
+
+  * lib/aws/api_config/STS-2011-06-15.yml, lib/aws/sts.rb,
+  lib/aws/sts/client.rb: Added support for STS assume role.
+
+  * lib/aws/simple_db/domain_collection.rb: Fix max domains per account
+  documentation
+2013-01-31 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/shared/aws_client_examples.rb: Reworked a test that was broken in
+  Ruby 1.8.7.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1.2
+
+2013-01-30 Jonathan Gold <jgold@bitgirder.com>
+
+  * lib/aws/s3/s3_object.rb: Adding doc for content_md5
+
+  * spec/aws/s3/s3_object_spec.rb, spec/shared/aws_client_examples.rb: Updated
+  specs to reflect the client now raises the actual error instead of a
+  NetworkError.
 
   * lib/aws/core/client.rb, lib/aws/s3/client.rb,
   spec/aws/s3/multipart_upload_spec.rb: Fixed an issue with the stubbed
