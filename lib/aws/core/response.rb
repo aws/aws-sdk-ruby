@@ -122,18 +122,6 @@ module AWS
         error.nil?
       end
 
-      # @return [Boolean] Returns true if the http request was throttled
-      #   by AWS.
-      def throttled?
-        if !successful? and http_response.body
-          error = XML::Parser.new.parse(http_response.body)
-          error = error[:error] if error[:error]
-          error[:code] == "Throttling"
-        else
-          false
-        end
-      end
-
       # @return [Boolean] Returns +true+ if the http request failed due to
       #   a networking issue.
       def network_error?

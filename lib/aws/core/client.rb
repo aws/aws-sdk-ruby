@@ -286,7 +286,7 @@ module AWS
       end
 
       def scaling_factor response
-        response.throttled? ? (0.5 + Kernel.rand * 0.1) : 0.3
+        throttled?(response) ? (0.5 + Kernel.rand * 0.1) : 0.3
       end
 
       def should_retry? response
@@ -300,7 +300,7 @@ module AWS
       def retryable_error? response
         expired_credentials?(response) or
         response.network_error? or
-        response.throttled? or
+        throttled?(response) or
         response.error.kind_of?(Errors::ServerError)
       end
 
@@ -310,6 +310,12 @@ module AWS
         response.error and
         response.error.respond_to?(:code) and
         (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
+      end
+
+      def throttled? response
+        response.error and
+        response.error.respond_to?(:code) and
+        response.error.code.to_s.match(/Throttling/i)
       end
 
       def return_or_raise options, &block

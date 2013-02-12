@@ -114,28 +114,6 @@ module AWS::Core
 
     end
 
-    context '#throttled?' do
-
-      it 'returns true if the request was throttled' do
-      end
-
-      it 'returns false for successful requests' do
-        response.stub(:successful?).and_return(true)
-        response.throttled?.should == false
-      end
-
-      it 'returns true for failed requests with a Throttling code' do
-        http_response.stub(:body).and_return(<<-XML.strip)
-          <xml>
-            <Code>Throttling</Code>
-          </xml>
-        XML
-        response.stub(:successful?).and_return(false)
-        response.throttled?.should == true
-      end
-
-    end
-
     context '#network_error?' do
 
       it 'returns fals if the http request did not time out' do
