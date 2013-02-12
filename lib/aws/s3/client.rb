@@ -218,7 +218,6 @@ module AWS
                   rules.each do |rule|
                     xml.RoutingRule do
 
-puts rule.inspect
                       redirect = rule[:redirect]
                       xml.Redirect do
                         xml.Protocol(redirect[:protocol]) if redirect[:protocol]
