@@ -25,7 +25,7 @@ module AWS
     #
     # See {WorkflowTypeCollection#register} for a complete list of options.
     #
-    # == Deprecating a workflwo type
+    # == Deprecating a workflow type
     #
     # WorkflowType inherits from the generic {Type} base class.  Defined in 
     # {Type} are a few useful methods including:

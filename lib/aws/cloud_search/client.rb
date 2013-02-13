@@ -170,7 +170,7 @@ module AWS
       #       expressions and supports: Integer, floating point, hex and octal
       #       literals Shortcut evaluation of logical operators such that an
       #       expression a || b evaluates to the value a if a is +true+ without
-      #       evaluting b at all JavaScript order of precendence for operators
+      #       evaluating b at all JavaScript order of precedence for operators
       #       Arithmetic operators: + - * / % Boolean operators (including the
       #       ternary operator) Bitwise operators Comparison operators Common
       #       mathematic functions: abs ceil erf exp floor lgamma ln log2 log10

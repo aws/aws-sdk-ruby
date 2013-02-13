@@ -154,7 +154,7 @@ module AWS
       # @option options [String,required] :comparison_operator The arithmetic
       #   operation to use when comparing the specified Statistic and 
       #   Threshold. The specified Statistic value is used as the first 
-      #   operand.  Valid values inlucde:
+      #   operand.  Valid values include:
       #   * 'GreaterThanOrEqualToThreshold'
       #   * 'GreaterThanThreshold'
       #   * 'LessThanThreshold'

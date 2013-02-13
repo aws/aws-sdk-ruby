@@ -157,7 +157,7 @@ module AWS
         end
       end
 
-      # @return [Symbol] Returns the status of this exeuction. Possible
+      # @return [Symbol] Returns the status of this execution. Possible
       #   return values are:
       #
       #   * +:open+ - The execution is still running.
@@ -171,7 +171,7 @@ module AWS
       #     means the current execution was completed and a new execution 
       #     was started to carry on the workflow.
       #   * +:terminated+ - The execution was force terminated.
-      #   * +:timed_out+ - The execution did not complete in the alloted
+      #   * +:timed_out+ - The execution did not complete in the allotted
       #     time and was automatically timed out.
       #   
       def status
@@ -361,7 +361,7 @@ module AWS
       #   +:open+.
       #
       # @return [Integer] Returns the count of executions that share
-      #   workflow id with the curren execution.
+      #   workflow id with the current execution.
       #
       def count_executions options = {}
         options[:workflow_id] = workflow_id

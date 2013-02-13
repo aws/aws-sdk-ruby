@@ -120,7 +120,7 @@ module AWS
   # = Lazy Execution
   #
   # Requests are not made until necessary.  This means you can drill down
-  # all the way to an attribute, by name, without making any requets
+  # all the way to an attribute, by name, without making any requests
   # to SimpleDB.
   #
   #   # makes no request to SimpleDB
@@ -176,7 +176,7 @@ module AWS
     #
     # === Other Modes
     #
-    # You can also use this same function to disable consistent reads insie
+    # You can also use this same function to disable consistent reads inside
     # a block.  This is useful if you have consistent reads enabled by 
     # default:
     #

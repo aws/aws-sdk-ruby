@@ -64,11 +64,11 @@ module AWS
     #  * {#request_cancel_external_workflow_execution}
     #  * {#start_child_workflow_execution}
     #
-    # The deicision methods are grouped above by concern.
+    # The decision methods are grouped above by concern.
     #
     # == Completing the Decision Task
     #
-    # Once you have finished adding deicions to the task, you need to 
+    # Once you have finished adding decisions to the task, you need to
     # complete it.  If you called {DecisionTaskCollection#poll} or 
     # {DecisionTaskCollection#poll_for_single_task} with a block
     # argument then the decision will be completed automatically at the

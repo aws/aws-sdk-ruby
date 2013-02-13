@@ -38,7 +38,7 @@ module AWS
 
     # Adds extra functionality to Rails.
     #
-    # Normailly this method is invoked automatically when you require this
+    # Normally this method is invoked automatically when you require this
     # gem in a Rails Application:
     #
     # Rails 3+ (RAILS_ROOT/Gemfile)

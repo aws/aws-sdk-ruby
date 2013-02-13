@@ -27,7 +27,7 @@ module AWS
       #
       # @example Filtering by a namespace
       #
-      #   trafic_metrics = metrics.filter('namespace', 'traffic')
+      #   traffic_metrics = metrics.filter('namespace', 'traffic')
       #
       # @example Filtering by a metric name
       #

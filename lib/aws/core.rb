@@ -63,7 +63,7 @@ require 'aws/core/autoloader'
 #
 # == Rails
 #
-# If you are loading AWS inside a Rails web application, it is recomended to
+# If you are loading AWS inside a Rails web application, it is recommended to
 # place your configuration inside:
 #
 #   config/initializers/aws-sdk.rb
@@ -181,7 +181,7 @@ module AWS
     # @private
     @@config = nil
 
-    # The global configuration for AWS.  Generally you set your prefered
+    # The global configuration for AWS.  Generally you set your preferred
     # configuration operations once after loading the aws-sdk gem.
     #
     #   AWS.config({
@@ -236,7 +236,7 @@ module AWS
     # @option options [Boolean] :dynamo_db_big_decimals (true) When +true+,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
     #   from strings to BigDecimal objects.  If you set this to +false+,
-    #   they will be convereted from strings into floats (with a potential
+    #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
@@ -272,7 +272,7 @@ module AWS
     #
     # @option options [Integer] :http_open_timeout (15) The number of seconds
     #   before the +:http_handler+ should timeout while trying to open a new
-    #   HTTP sesssion.
+    #   HTTP session.
     #
     # @option options [Integer] :http_read_timeout (60) The number of seconds
     #   before the +:http_handler+ should timeout while waiting for a HTTP
@@ -284,7 +284,7 @@ module AWS
     #   standard out.
     #
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The
-    #   service endpoint for AWS Idenity Access Management (IAM).
+    #   service endpoint for AWS Identity Access Management (IAM).
     #
     # @option options [String] :import_export_endpoint ('importexport.amazonaws.com')
     #   The service endpoint for AWS Import/Export.
@@ -314,7 +314,7 @@ module AWS
     #
     #   You can also create an instance of AWS::Core::LogFormatter
     #   with a custom log message pattern. See {Core::LogFormatter} for
-    #   a complete list of pattern substituions.
+    #   a complete list of pattern substitutions.
     #
     #     pattern = "[AWS :operation :duration] :error_message"
     #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern))
@@ -350,7 +350,7 @@ module AWS
     #   number of parts to split a file into when uploading in parts to S3.
     #
     # @option options [Integer] :s3_multipart_threshold (16777216) When
-    #   uploading data to S3, if the number of bytes to send exceedes
+    #   uploading data to S3, if the number of bytes to send exceeds
     #   +:s3_multipart_threshold+ then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
     #   is specified by +:s3_multipart_min_part_size+. Defaults to
@@ -383,7 +383,7 @@ module AWS
     #
     # @option options [Symbol] :s3_encryption_materials_location (:metadata)
     #   When set to +:instruction_file+, AWS::S3::S3Object will store
-    #   encryption materials in a seperate object, instead of the object
+    #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
     # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com')
@@ -424,7 +424,7 @@ module AWS
     #   risk.
     #
     # @option options [Boolean] :stub_requests (false) When +true+ requests
-    #   are not sent to AWS, instead empty reponses are generated and
+    #   are not sent to AWS, instead empty responses are generated and
     #   returned to each service request.
     #
     # @option options [String] :sns_endpoint ('sns.us-east-1.amazonaws.com') The
@@ -443,7 +443,7 @@ module AWS
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @option options [String] :user_agent_prefix (nil) A string prefix to
-    #   append to all requets against AWS services.  This should be set
+    #   append to all requests against AWS services.  This should be set
     #   for clients and applications built ontop of the aws-sdk gem.
     #
     # @return [Core::Configuration] Returns the new configuration.

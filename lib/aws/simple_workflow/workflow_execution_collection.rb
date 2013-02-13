@@ -270,7 +270,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that have start
       #   times that fall within the given range.
       #   
@@ -289,7 +289,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that started
       #   before the given time.
       #   
@@ -308,7 +308,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that started
       #   after the given time.
       #   
@@ -328,7 +328,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that closed
       #   between the given times.
       #   
@@ -347,7 +347,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that closed
       #   before the given time.
       #   
@@ -366,7 +366,7 @@ module AWS
       #   be one of the listed types.  Integers are treated as timestamps
       #   and strings are parsed by DateTime.
       #
-      # @return [WorkflowExecutionCollection] Returns a colleciton
+      # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that closed
       #   after the given time.
       #   
@@ -375,7 +375,7 @@ module AWS
       end
 
       # Returns a collection that enumerates workflow executions in reverse 
-      # chronological order.  By default exeuctions are enumerated in 
+      # chronological order.  By default executions are enumerated in
       # ascending order of their start or close time (ordered by 
       # close time when filtered by #closed_between).
       #
@@ -482,7 +482,7 @@ module AWS
       # @option (see #count)
       # @option (see Core::Collection#each)
       # @option options [Boolean] :reverse_order Enumerates the workflow 
-      #   execution in reverse chronoloical order if +true+.  The date
+      #   execution in reverse chronological order if +true+.  The date
       #   used will be the execution start time unless filtering by 
       #   closed before/after (then it will sort by the closed time).
       # @return (see Core::Collection#each)

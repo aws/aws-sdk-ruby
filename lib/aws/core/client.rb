@@ -65,7 +65,7 @@ module AWS
       # @return [Configuration] This clients configuration.
       attr_reader :config
 
-      # @return [CredentialProviders::Provider] Returns the credentail
+      # @return [CredentialProviders::Provider] Returns the credential
       #   provider for this client.
       # @private
       attr_reader :credential_provider
@@ -79,7 +79,7 @@ module AWS
       # @private
       attr_reader :port
 
-      # @return [Integer] The number of secords before requests made by
+      # @return [Integer] The number of seconds before requests made by
       #   this client should timeout if they have not received a response.
       attr_reader :http_read_timeout
 
@@ -147,9 +147,9 @@ module AWS
         @stubs[method_name] ||= new_stub_for(method_name)
       end
 
-      # Primarily used for testing, this method returns an empty psuedo
+      # Primarily used for testing, this method returns an empty pseudo
       # service response without making a request.  Its used primarily for
-      # testing the ligher level service interfaces.
+      # testing the lighter level service interfaces.
       # @private
       def new_stub_for method_name
         response = Response.new(Http::Request.new, Http::Response.new)

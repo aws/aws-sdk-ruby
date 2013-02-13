@@ -51,7 +51,7 @@ module AWS
   #   cw = AWS::CloudWatch.new
   #
   #   resp = cw.client.describe_alarms
-  #   resp[:metric_alarams].each do |alarm|
+  #   resp[:metric_alarms].each do |alarm|
   #     puts alarm[:alarm_name]
   #   end
   #

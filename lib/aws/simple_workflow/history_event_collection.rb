@@ -39,7 +39,7 @@ module AWS
         super
       end
 
-      # @return [WorkflowExectuion]
+      # @return [WorkflowExecution]
       attr_reader :workflow_execution
 
       # @return [WorkflowExecutionCollection] Returns a collection that

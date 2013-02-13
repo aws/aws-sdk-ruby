@@ -22,7 +22,7 @@ module AWS
     # == Configuring Credentials
     #
     # In order to do anything with AWS you will need to assign credentials.
-    # The simplest method is to assing your credentials into the default
+    # The simplest method is to assign your credentials into the default
     # configuration:
     #
     #   AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
@@ -81,7 +81,7 @@ module AWS
     # @attr_reader [Boolean] dynamo_db_big_decimals (true) When +true+,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
     #   from strings to BigDecimal objects.  If you set this to +false+,
-    #   they will be convereted from strings into floats (with a potential
+    #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
     # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
@@ -117,7 +117,7 @@ module AWS
     #
     # @attr_reader [Integer] http_open_timeout The number of seconds before
     #   the +http_handler+ should timeout while trying to open a new HTTP
-    #   sesssion.
+    #   session.
     #
     # @attr_reader [Integer] http_read_timeout The number of seconds before
     #   the +http_handler+ should timeout while waiting for a HTTP
@@ -128,7 +128,7 @@ module AWS
     #   configured, then wire traces will be sent to standard out.
     #
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
-    #   The service endpoint for AWS Idenity Access Management (IAM).
+    #   The service endpoint for AWS Identity Access Management (IAM).
     #
     # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
     #   The service endpoint for AWS Import/Export.
@@ -165,7 +165,7 @@ module AWS
     #   in parts to S3.
     #
     # @attr_reader [Integer] s3_multipart_threshold (16777216) When uploading
-    #   data to S3, if the number of bytes to send exceedes
+    #   data to S3, if the number of bytes to send exceeds
     #   +:s3_multipart_threshold+ then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
     #   is specified by +:s3_multipart_min_part_size+. Defaults to
@@ -203,7 +203,7 @@ module AWS
     #
     # @attr_reader [Symbol] s3_encryption_materials_location
     #   When set to +:instruction_file+, AWS::S3::S3Object will store
-    #   encryption materials in a seperate object, instead of the object
+    #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
     # @attr_reader [String] simple_db_endpoint ('sdb.amazonaws.com')
@@ -242,7 +242,7 @@ module AWS
     #   risk.
     #
     # @attr_reader [Boolean] stub_requests (false) When +true+ requests are not
-    #   sent to AWS, instead empty reponses are generated and returned to
+    #   sent to AWS, instead empty responses are generated and returned to
     #   each service request.
     #
     # @attr_reader [String] sns_endpoint ('sns.us-east-1.amazonaws.com')
@@ -261,8 +261,8 @@ module AWS
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @attr_reader [String] user_agent_prefix (nil) A string prefix to
-    #   append to all requets against AWS services.  This should be set
-    #   for clients and applications built ontop of the aws-sdk gem.
+    #   append to all requests against AWS services.  This should be set
+    #   for clients and applications built on top of the aws-sdk gem.
     #
     class Configuration
 
@@ -274,8 +274,8 @@ module AWS
         @created = options.delete(:__created__) || {}
 
         # :signer is now a deprecated option, this ensures it will still
-        # work, but its now prefered to set :credential_provider instead.
-        # Credentail providers don't have to provide a #sign method.
+        # work, but its now preferred to set :credential_provider instead.
+        # Credential providers don't have to provide a #sign method.
         if signer = options.delete(:signer)
           options[:credential_provider] = signer
         end
@@ -393,7 +393,7 @@ module AWS
         end
 
         # Configuration options that have dependencies are re-recreated
-        # anytime one of their dependendent configuration values are
+        # anytime one of their dependent configuration values are
         # changed.
         # @private
         def add_option_with_needs name, needs, &create_block

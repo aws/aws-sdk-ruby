@@ -230,7 +230,7 @@ module AWS
       #     notifications that will be published to the specified topic.
       #   * +:sns_topic+ - (String) The Amazon Resource Name (ARN) of the
       #     Amazon Simple Notification Service (Amazon SNS) topic. If the
-      #     parameter is ommited from the request or a null value is passed,
+      #     parameter is omitted from the request or a null value is passed,
       #     the topic is cleared and publishing is disabled.
       # @return [Core::Response]
 
