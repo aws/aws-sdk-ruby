@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # The primary interface for registerign, listing and deprecating
+    # The primary interface for registering, listing and deprecating
     # domains.
     #
     # == Creating a Domain
@@ -24,7 +24,7 @@ module AWS
     #   domain = simple_workflow.domains.create('my-domain', :none)
     #   #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
     #
-    # == Gettin a Domain
+    # == Getting a Domain
     #
     # Domains are indexed by their name.
     #
@@ -80,7 +80,7 @@ module AWS
       #   available in the results of visibility calls.
       #
       #   If you pass the symbol +:none+ then there is no expiration for
-      #   workflow execution history (effectively an infinite rention
+      #   workflow execution history (effectively an infinite retention
       #   period).
       # 
       # @param [Hash] options

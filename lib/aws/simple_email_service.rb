@@ -88,9 +88,9 @@ module AWS
   #
   # == Listing Identities
   # 
-  # You can enumerate all identies:
+  # You can enumerate all identities:
   #
-  #   ses.identites.map(&:identity)
+  #   ses.identities.map(&:identity)
   #   #=> ['email@foo.com', 'somedomain.com']
   #
   # You can filter the types of identities enumerated:
@@ -98,7 +98,7 @@ module AWS
   #   domains = ses.identities.domains.map(&:identity)
   #   email_addresses = ses.identities.email_addresses.map(&:identity)
   #
-  # You can get the verfication status and token from identities as well.
+  # You can get the verification status and token from identities as well.
   #
   #   # for an email address
   #   identity = ses.identities['youremail@yourdomain.com']

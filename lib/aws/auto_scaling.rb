@@ -35,7 +35,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # Or you can set them directly on the AWS::AutoSclaing interface:
+  # Or you can set them directly on the AWS::AutoScaling interface:
   #
   #   auto_scaling = AWS::AutoScaling.new(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
@@ -138,7 +138,7 @@ module AWS
       resp.auto_scaling_notification_types
     end
 
-    # @return [Array<String>] Returns the list of valid adjustmet types.
+    # @return [Array<String>] Returns the list of valid adjustment types.
     def adjustment_types
       client.describe_adjustment_types.adjustment_types.map(&:adjustment_type)
     end

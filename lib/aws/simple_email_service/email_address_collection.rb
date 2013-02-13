@@ -22,7 +22,7 @@ module AWS
       include Core::Model
       include Enumerable
 
-      # Requets for an email address to be verified.  An email will be
+      # Requests for an email address to be verified.  An email will be
       # sent to the given +email_address+ with a link to click.  Once
       # the link has been followed the +email_address+ will be verified.
       #

@@ -29,7 +29,7 @@ module AWS
   # credentials (e.g. requires a session token).
   #
   # @note If you make a request using AWS::DynamoDB with long-term credentials
-  #   a request is made to Amazon STS for temproary session credentials.
+  #   a request is made to Amazon STS for temporary session credentials.
   #   These will be cached in the process and re-used.
   #
   # = Tables
