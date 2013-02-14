@@ -687,7 +687,7 @@ module AWS
 
         def create_impl attributes = {}, create_method = :create, save_method = :save
           if attributes.is_a?(Array)
-            attributes.map {|attr| send(create_method, attributes) }
+            attributes.map {|attr| send(create_method, attr) }
           else
             obj = new(attributes)
             obj.send(save_method)
