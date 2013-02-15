@@ -175,3 +175,7 @@ def tempfile(contents)
     yield(f)
   end
 end
+
+def unique_name prefix
+  prefix == '' ? '' : "#{prefix}-#{Time.now.to_i}"
+end

@@ -34,6 +34,7 @@ require 'aws/core/autoloader'
 # * {AWS::EMR}
 # * {AWS::Glacier}
 # * {AWS::IAM}
+# * {AWS::Redshift}
 # * {AWS::RDS}
 # * {AWS::Route53}
 # * {AWS::S3}
@@ -332,6 +333,9 @@ module AWS
     #    URI string:
     #
     #       AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
+    #
+    # @option options [String] :redshift_endpoint ('redshift.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Redshift.
     #
     # @option options [String] :rds_endpoint ('rds.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Relational Database Service (RDS).

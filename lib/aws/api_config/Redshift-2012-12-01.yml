@@ -1,0 +1,1149 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:api_version: '2012-12-01'
+:operations:
+- :name: AuthorizeClusterSecurityGroupIngress
+  :method: :authorize_cluster_security_group_ingress
+  :inputs:
+    ClusterSecurityGroupName:
+    - :string
+    - :required
+    CIDRIP:
+    - :string
+    EC2SecurityGroupName:
+    - :string
+    EC2SecurityGroupOwnerId:
+    - :string
+  :outputs:
+    :children:
+      AuthorizeClusterSecurityGroupIngressResult:
+        :ignore: true
+        :children:
+          ClusterSecurityGroup:
+            :children:
+              EC2SecurityGroups:
+                :ignore: true
+                :children:
+                  EC2SecurityGroup:
+                    :rename: :ec2_security_groups
+                    :list: true
+              IPRanges:
+                :ignore: true
+                :children:
+                  IPRange:
+                    :rename: :ip_ranges
+                    :list: true
+            :ignore: true
+- :name: CopyClusterSnapshot
+  :method: :copy_cluster_snapshot
+  :inputs:
+    SourceSnapshotIdentifier:
+    - :string
+    - :required
+    TargetSnapshotIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CopyClusterSnapshotResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+            :ignore: true
+- :name: CreateCluster
+  :method: :create_cluster
+  :inputs:
+    DBName:
+    - :string
+    ClusterIdentifier:
+    - :string
+    - :required
+    ClusterType:
+    - :string
+    NodeType:
+    - :string
+    - :required
+    MasterUsername:
+    - :string
+    - :required
+    MasterUserPassword:
+    - :string
+    - :required
+    ClusterSecurityGroups:
+    - :membered_list:
+      - :string
+    VpcSecurityGroupIds:
+    - :membered_list:
+      - :string
+    ClusterSubnetGroupName:
+    - :string
+    AvailabilityZone:
+    - :string
+    PreferredMaintenanceWindow:
+    - :string
+    ClusterParameterGroupName:
+    - :string
+    AutomatedSnapshotRetentionPeriod:
+    - :integer
+    Port:
+    - :integer
+    ClusterVersion:
+    - :string
+    AllowVersionUpgrade:
+    - :boolean
+    NumberOfNodes:
+    - :integer
+    PubliclyAccessible:
+    - :boolean
+  :outputs:
+    :children:
+      CreateClusterResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+            :ignore: true
+- :name: CreateClusterParameterGroup
+  :method: :create_cluster_parameter_group
+  :inputs:
+    ParameterGroupName:
+    - :string
+    - :required
+    ParameterGroupFamily:
+    - :string
+    - :required
+    Description:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateClusterParameterGroupResult:
+        :ignore: true
+        :children:
+          ClusterParameterGroup:
+            :ignore: true
+- :name: CreateClusterSecurityGroup
+  :method: :create_cluster_security_group
+  :inputs:
+    ClusterSecurityGroupName:
+    - :string
+    - :required
+    Description:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateClusterSecurityGroupResult:
+        :ignore: true
+        :children:
+          ClusterSecurityGroup:
+            :children:
+              EC2SecurityGroups:
+                :ignore: true
+                :children:
+                  EC2SecurityGroup:
+                    :rename: :ec2_security_groups
+                    :list: true
+              IPRanges:
+                :ignore: true
+                :children:
+                  IPRange:
+                    :rename: :ip_ranges
+                    :list: true
+            :ignore: true
+- :name: CreateClusterSnapshot
+  :method: :create_cluster_snapshot
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateClusterSnapshotResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+            :ignore: true
+- :name: CreateClusterSubnetGroup
+  :method: :create_cluster_subnet_group
+  :inputs:
+    ClusterSubnetGroupName:
+    - :string
+    - :required
+    Description:
+    - :string
+    - :required
+    SubnetIds:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      CreateClusterSubnetGroupResult:
+        :ignore: true
+        :children:
+          ClusterSubnetGroup:
+            :children:
+              Subnets:
+                :ignore: true
+                :children:
+                  Subnet:
+                    :rename: :subnets
+                    :list: true
+            :ignore: true
+- :name: DeleteCluster
+  :method: :delete_cluster
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    SkipFinalClusterSnapshot:
+    - :boolean
+    FinalClusterSnapshotIdentifier:
+    - :string
+  :outputs:
+    :children:
+      DeleteClusterResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+            :ignore: true
+- :name: DeleteClusterParameterGroup
+  :method: :delete_cluster_parameter_group
+  :inputs:
+    ParameterGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteClusterParameterGroupResult:
+        :ignore: true
+- :name: DeleteClusterSecurityGroup
+  :method: :delete_cluster_security_group
+  :inputs:
+    ClusterSecurityGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteClusterSecurityGroupResult:
+        :ignore: true
+- :name: DeleteClusterSnapshot
+  :method: :delete_cluster_snapshot
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteClusterSnapshotResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+            :ignore: true
+- :name: DeleteClusterSubnetGroup
+  :method: :delete_cluster_subnet_group
+  :inputs:
+    ClusterSubnetGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteClusterSubnetGroupResult:
+        :ignore: true
+- :name: DescribeClusterParameterGroups
+  :method: :describe_cluster_parameter_groups
+  :inputs:
+    ParameterGroupName:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterParameterGroupsResult:
+        :ignore: true
+        :children:
+          ParameterGroups:
+            :ignore: true
+            :children:
+              ClusterParameterGroup:
+                :rename: :parameter_groups
+                :list: true
+- :name: DescribeClusterParameters
+  :method: :describe_cluster_parameters
+  :inputs:
+    ParameterGroupName:
+    - :string
+    - :required
+    Source:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterParametersResult:
+        :ignore: true
+        :children:
+          Parameters:
+            :ignore: true
+            :children:
+              Parameter:
+                :rename: :parameters
+                :list: true
+                :children:
+                  IsModifiable:
+                    :type: :boolean
+- :name: DescribeClusterSecurityGroups
+  :method: :describe_cluster_security_groups
+  :inputs:
+    ClusterSecurityGroupName:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterSecurityGroupsResult:
+        :ignore: true
+        :children:
+          ClusterSecurityGroups:
+            :ignore: true
+            :children:
+              ClusterSecurityGroup:
+                :rename: :cluster_security_groups
+                :list: true
+                :children:
+                  EC2SecurityGroups:
+                    :ignore: true
+                    :children:
+                      EC2SecurityGroup:
+                        :rename: :ec2_security_groups
+                        :list: true
+                  IPRanges:
+                    :ignore: true
+                    :children:
+                      IPRange:
+                        :rename: :ip_ranges
+                        :list: true
+- :name: DescribeClusterSnapshots
+  :method: :describe_cluster_snapshots
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    SnapshotIdentifier:
+    - :string
+    SnapshotType:
+    - :string
+    StartTime:
+    - :timestamp
+    EndTime:
+    - :timestamp
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterSnapshotsResult:
+        :ignore: true
+        :children:
+          Snapshots:
+            :ignore: true
+            :children:
+              Snapshot:
+                :rename: :snapshots
+                :list: true
+                :children:
+                  SnapshotCreateTime:
+                    :type: :time
+                  Port:
+                    :type: :integer
+                  ClusterCreateTime:
+                    :type: :time
+                  NumberOfNodes:
+                    :type: :integer
+- :name: DescribeClusterSubnetGroups
+  :method: :describe_cluster_subnet_groups
+  :inputs:
+    ClusterSubnetGroupName:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterSubnetGroupsResult:
+        :ignore: true
+        :children:
+          ClusterSubnetGroups:
+            :ignore: true
+            :children:
+              ClusterSubnetGroup:
+                :rename: :cluster_subnet_groups
+                :list: true
+                :children:
+                  Subnets:
+                    :ignore: true
+                    :children:
+                      Subnet:
+                        :rename: :subnets
+                        :list: true
+- :name: DescribeClusterVersions
+  :method: :describe_cluster_versions
+  :inputs:
+    ClusterVersion:
+    - :string
+    ClusterParameterGroupFamily:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClusterVersionsResult:
+        :ignore: true
+        :children:
+          ClusterVersions:
+            :ignore: true
+            :children:
+              ClusterVersion:
+                :rename: :cluster_versions
+                :list: true
+- :name: DescribeClusters
+  :method: :describe_clusters
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeClustersResult:
+        :ignore: true
+        :children:
+          Clusters:
+            :ignore: true
+            :children:
+              Cluster:
+                :rename: :clusters
+                :list: true
+                :children:
+                  Endpoint:
+                    :children:
+                      Port:
+                        :type: :integer
+                  ClusterCreateTime:
+                    :type: :time
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+                  ClusterSecurityGroups:
+                    :ignore: true
+                    :children:
+                      ClusterSecurityGroup:
+                        :rename: :cluster_security_groups
+                        :list: true
+                  VpcSecurityGroups:
+                    :ignore: true
+                    :children:
+                      VpcSecurityGroup:
+                        :rename: :vpc_security_groups
+                        :list: true
+                  ClusterParameterGroups:
+                    :ignore: true
+                    :children:
+                      ClusterParameterGroup:
+                        :rename: :cluster_parameter_groups
+                        :list: true
+                  PendingModifiedValues:
+                    :children:
+                      NumberOfNodes:
+                        :type: :integer
+                      AutomatedSnapshotRetentionPeriod:
+                        :type: :integer
+                  AllowVersionUpgrade:
+                    :type: :boolean
+                  NumberOfNodes:
+                    :type: :integer
+                  PubliclyAccessible:
+                    :type: :boolean
+- :name: DescribeDefaultClusterParameters
+  :method: :describe_default_cluster_parameters
+  :inputs:
+    ParameterGroupFamily:
+    - :string
+    - :required
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeDefaultClusterParametersResult:
+        :ignore: true
+        :children:
+          DefaultClusterParameters:
+            :children:
+              Parameters:
+                :ignore: true
+                :children:
+                  Parameter:
+                    :rename: :parameters
+                    :list: true
+                    :children:
+                      IsModifiable:
+                        :type: :boolean
+            :ignore: true
+- :name: DescribeEvents
+  :method: :describe_events
+  :inputs:
+    SourceIdentifier:
+    - :string
+    SourceType:
+    - :string
+    StartTime:
+    - :timestamp
+    EndTime:
+    - :timestamp
+    Duration:
+    - :integer
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeEventsResult:
+        :ignore: true
+        :children:
+          Events:
+            :ignore: true
+            :children:
+              Event:
+                :rename: :events
+                :list: true
+                :children:
+                  Date:
+                    :type: :time
+- :name: DescribeOrderableClusterOptions
+  :method: :describe_orderable_cluster_options
+  :inputs:
+    ClusterVersion:
+    - :string
+    NodeType:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeOrderableClusterOptionsResult:
+        :ignore: true
+        :children:
+          OrderableClusterOptions:
+            :ignore: true
+            :children:
+              OrderableClusterOption:
+                :rename: :orderable_cluster_options
+                :list: true
+                :children:
+                  AvailabilityZones:
+                    :ignore: true
+                    :children:
+                      AvailabilityZone:
+                        :rename: :availability_zones
+                        :list: true
+- :name: DescribeReservedNodeOfferings
+  :method: :describe_reserved_node_offerings
+  :inputs:
+    ReservedNodeOfferingId:
+    - :string
+    NodeType:
+    - :string
+    Duration:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeReservedNodeOfferingsResult:
+        :ignore: true
+        :children:
+          ReservedNodeOfferings:
+            :ignore: true
+            :children:
+              ReservedNodeOffering:
+                :rename: :reserved_node_offerings
+                :list: true
+                :children:
+                  Duration:
+                    :type: :integer
+                  FixedPrice:
+                    :type: :float
+                  UsagePrice:
+                    :type: :float
+                  RecurringCharges:
+                    :ignore: true
+                    :children:
+                      RecurringCharge:
+                        :rename: :recurring_charges
+                        :list: true
+                        :children:
+                          RecurringChargeAmount:
+                            :type: :float
+- :name: DescribeReservedNodes
+  :method: :describe_reserved_nodes
+  :inputs:
+    ReservedNodeId:
+    - :string
+    ReservedNodeOfferingId:
+    - :string
+    NodeType:
+    - :string
+    Duration:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeReservedNodesResult:
+        :ignore: true
+        :children:
+          ReservedNodes:
+            :ignore: true
+            :children:
+              ReservedNode:
+                :rename: :reserved_nodes
+                :list: true
+                :children:
+                  StartTime:
+                    :type: :time
+                  Duration:
+                    :type: :integer
+                  FixedPrice:
+                    :type: :float
+                  UsagePrice:
+                    :type: :float
+                  NodeCount:
+                    :type: :integer
+                  RecurringCharges:
+                    :ignore: true
+                    :children:
+                      RecurringCharge:
+                        :rename: :recurring_charges
+                        :list: true
+                        :children:
+                          RecurringChargeAmount:
+                            :type: :float
+- :name: DescribeResize
+  :method: :describe_resize
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DescribeResizeResult:
+        :ignore: true
+        :children:
+          TargetNumberOfNodes:
+            :type: :integer
+          ImportTablesCompleted:
+            :ignore: true
+            :children:
+              member:
+                :rename: :import_tables_completed
+                :list: true
+          ImportTablesInProgress:
+            :ignore: true
+            :children:
+              member:
+                :rename: :import_tables_in_progress
+                :list: true
+          ImportTablesNotStarted:
+            :ignore: true
+            :children:
+              member:
+                :rename: :import_tables_not_started
+                :list: true
+- :name: ModifyCluster
+  :method: :modify_cluster
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    ClusterType:
+    - :string
+    NodeType:
+    - :string
+    NumberOfNodes:
+    - :integer
+    ClusterSecurityGroups:
+    - :membered_list:
+      - :string
+    VpcSecurityGroupIds:
+    - :membered_list:
+      - :string
+    MasterUserPassword:
+    - :string
+    ClusterParameterGroupName:
+    - :string
+    AutomatedSnapshotRetentionPeriod:
+    - :integer
+    PreferredMaintenanceWindow:
+    - :string
+    ClusterVersion:
+    - :string
+    AllowVersionUpgrade:
+    - :boolean
+  :outputs:
+    :children:
+      ModifyClusterResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+            :ignore: true
+- :name: ModifyClusterParameterGroup
+  :method: :modify_cluster_parameter_group
+  :inputs:
+    ParameterGroupName:
+    - :string
+    - :required
+    Parameters:
+    - :membered_list:
+      - :structure:
+          ParameterName:
+          - :string
+          ParameterValue:
+          - :string
+          Description:
+          - :string
+          Source:
+          - :string
+          DataType:
+          - :string
+          AllowedValues:
+          - :string
+          IsModifiable:
+          - :boolean
+          MinimumEngineVersion:
+          - :string
+    - :required
+  :outputs:
+    :children:
+      ModifyClusterParameterGroupResult:
+        :ignore: true
+- :name: ModifyClusterSubnetGroup
+  :method: :modify_cluster_subnet_group
+  :inputs:
+    ClusterSubnetGroupName:
+    - :string
+    - :required
+    Description:
+    - :string
+    SubnetIds:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      ModifyClusterSubnetGroupResult:
+        :ignore: true
+        :children:
+          ClusterSubnetGroup:
+            :children:
+              Subnets:
+                :ignore: true
+                :children:
+                  Subnet:
+                    :rename: :subnets
+                    :list: true
+            :ignore: true
+- :name: PurchaseReservedNodeOffering
+  :method: :purchase_reserved_node_offering
+  :inputs:
+    ReservedNodeOfferingId:
+    - :string
+    - :required
+    ReservedNodeId:
+    - :string
+    NodeCount:
+    - :integer
+  :outputs:
+    :children:
+      PurchaseReservedNodeOfferingResult:
+        :ignore: true
+        :children:
+          ReservedNode:
+            :children:
+              StartTime:
+                :type: :time
+              Duration:
+                :type: :integer
+              FixedPrice:
+                :type: :float
+              UsagePrice:
+                :type: :float
+              NodeCount:
+                :type: :integer
+              RecurringCharges:
+                :ignore: true
+                :children:
+                  RecurringCharge:
+                    :rename: :recurring_charges
+                    :list: true
+                    :children:
+                      RecurringChargeAmount:
+                        :type: :float
+            :ignore: true
+- :name: RebootCluster
+  :method: :reboot_cluster
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RebootClusterResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+            :ignore: true
+- :name: ResetClusterParameterGroup
+  :method: :reset_cluster_parameter_group
+  :inputs:
+    ParameterGroupName:
+    - :string
+    - :required
+    ResetAllParameters:
+    - :boolean
+    Parameters:
+    - :membered_list:
+      - :structure:
+          ParameterName:
+          - :string
+          ParameterValue:
+          - :string
+          Description:
+          - :string
+          Source:
+          - :string
+          DataType:
+          - :string
+          AllowedValues:
+          - :string
+          IsModifiable:
+          - :boolean
+          MinimumEngineVersion:
+          - :string
+  :outputs:
+    :children:
+      ResetClusterParameterGroupResult:
+        :ignore: true
+- :name: RestoreFromClusterSnapshot
+  :method: :restore_from_cluster_snapshot
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    SnapshotIdentifier:
+    - :string
+    - :required
+    Port:
+    - :integer
+    AvailabilityZone:
+    - :string
+    AllowVersionUpgrade:
+    - :boolean
+    ClusterSubnetGroupName:
+    - :string
+    PubliclyAccessible:
+    - :boolean
+  :outputs:
+    :children:
+      RestoreFromClusterSnapshotResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+            :ignore: true
+- :name: RevokeClusterSecurityGroupIngress
+  :method: :revoke_cluster_security_group_ingress
+  :inputs:
+    ClusterSecurityGroupName:
+    - :string
+    - :required
+    CIDRIP:
+    - :string
+    EC2SecurityGroupName:
+    - :string
+    EC2SecurityGroupOwnerId:
+    - :string
+  :outputs:
+    :children:
+      RevokeClusterSecurityGroupIngressResult:
+        :ignore: true
+        :children:
+          ClusterSecurityGroup:
+            :children:
+              EC2SecurityGroups:
+                :ignore: true
+                :children:
+                  EC2SecurityGroup:
+                    :rename: :ec2_security_groups
+                    :list: true
+              IPRanges:
+                :ignore: true
+                :children:
+                  IPRange:
+                    :rename: :ip_ranges
+                    :list: true
+            :ignore: true

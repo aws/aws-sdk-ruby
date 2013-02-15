@@ -11,9 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-Before("@rds") do
+AWS::Core::Configuration.module_eval do
 
-  @rds = AWS::RDS.new
-  @client = @rds.client
+  add_service 'Redshift', 'redshift', 'redshift.us-east-1.amazonaws.com'
 
 end
