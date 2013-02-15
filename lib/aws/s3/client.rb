@@ -1482,7 +1482,7 @@ module AWS
         if restore = resp.http_response.headers['x-amz-restore']
           if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
             restoring = $1 == "true"
-            restore_date = DateTime.parse($2)
+            restore_date = $2 && DateTime.parse($2)
           elsif restore.first =~ /ongoing-request="(.+?)"/
             restoring = $1 == "true"
           end
