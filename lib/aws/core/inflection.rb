@@ -35,6 +35,8 @@ module AWS
         inflector['s3Key'] = 's3_key'
         inflector['Ec2KeyName'] = 'ec2_key_name'
         inflector['Ec2SubnetId'] = 'ec2_subnet_id'
+        inflector['Ec2VolumeId'] = 'ec2_volume_id'
+        inflector['Ec2InstanceId'] = 'ec2_instance_id'
         inflector['ElastiCache'] = 'elasticache'
         inflector['NotificationARNs'] = 'notification_arns'
 

@@ -12,5 +12,5 @@
 # language governing permissions and limitations under the License.
 
 When /^I call \#(\w+) on the client$/ do |operation|
-  @response = @rds.client.send(operation, {})
+  @response = @client.send(operation, {})
 end

@@ -11,9 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-Before("@rds") do
+module AWS
+  class Redshift
 
-  @rds = AWS::RDS.new
-  @client = @rds.client
+    # @private
+    class Request < Core::Http::Request
 
+      include Core::Signature::Version4
+
+      def service
+        'redshift'
+      end
+
+    end
+
+  end
 end

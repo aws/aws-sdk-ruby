@@ -52,6 +52,11 @@ module AWS::Core
         Inflection.ruby_name('EC2').should == 'ec2'
       end
 
+      it 'treats trailing numbers as part of the word' do
+        Inflection.ruby_name('Ec2').should eq('ec2')
+        Inflection.ruby_name('ABC123').should eq('abc123')
+      end
+
       it 'inflects SentLast24Hours to sent_last_24_hours' do
         Inflection.ruby_name('SentLast24Hours').should == 'sent_last_24_hours'
       end

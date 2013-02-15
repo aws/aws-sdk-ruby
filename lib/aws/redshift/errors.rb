@@ -11,9 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-Before("@rds") do
+module AWS
+  class Redshift
+    module Errors
 
-  @rds = AWS::RDS.new
-  @client = @rds.client
+      extend Core::LazyErrorClasses
 
+    end
+  end
 end
