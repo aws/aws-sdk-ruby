@@ -152,24 +152,15 @@ module AWS
       # @param [Hash] options Options for change batch.
       # @return [ResourceRecordSet] New resource record set with current value.
       def update options = {}
-        delete_options = {:name => name, :type => type}
-        delete_options[:set_identifier] = set_identifier if set_identifier
-        delete_options[:alias_target] = alias_target if alias_target
-        delete_options[:weight] = weight if weight
-        delete_options[:region] = region if region
-        delete_options[:ttl] = ttl if ttl
-        delete_options[:resource_records] = resource_records if resource_records
+        batch = new_change_batch(options)
+        batch << new_delete_request
+        batch << new_change_request
 
-        create_options = delete_options.merge(@create_options)
-        @create_options = {}
-        batch = ChangeBatch.new(hosted_zone_id, options.merge(:config => config))
-        batch << DeleteRequest.new(delete_options[:name], delete_options[:type], delete_options)
-        batch << CreateRequest.new(create_options[:name], create_options[:type], create_options)
-
-        @name = create_options[:name]
-        @type = create_options[:type]
-        @set_identifier = create_options[:set_identifier]
         @change_info = batch.call()
+        @name = @create_options[:name]
+        @type = @create_options[:type]
+        @set_identifier = @create_options[:set_identifier]
+        @create_options = {}
         self
       end
 
@@ -177,21 +168,38 @@ module AWS
       # @param [Hash] options Options for change batch.
       # @return [ChangeInfo]
       def delete options = {}
-        delete_options = {:name => name, :type => type}
-        delete_options[:set_identifier] = set_identifier if set_identifier
-        delete_options[:alias_target] = alias_target if alias_target
-        delete_options[:weight] = weight if weight
-        delete_options[:region] = region if region
-        delete_options[:ttl] = ttl if ttl
-        delete_options[:resource_records] = resource_records if resource_records
-
-        batch = ChangeBatch.new(hosted_zone_id, options.merge(:config => config))
-        batch << DeleteRequest.new(delete_options[:name], delete_options[:type], delete_options)
+        batch = new_change_batch(options)
+        batch << new_delete_request
 
         change_info = batch.call()
       end
 
+      # Return a new change batch for this hosted zone.
+      # @param [Hash] options Options for change batch.
+      # @return [ChangeBatch]
+      def new_change_batch options = {}
+        ChangeBatch.new(hosted_zone_id, options.merge(:config => config))
+      end
+
+      # Return the create request that #update would include in its change
+      # batch. Note that #update also includes a delete request.
+      # @return [CreateRequest]
+      def new_create_request
+        create_options = delete_options.merge(@create_options)
+        CreateRequest.new(create_options[:name], create_options[:type],
+                          create_options)
+      end
+
+      # Return a delete request that would delete this resource record set.
+      # @return [DeleteRequest]
+      def new_delete_request
+        options = delete_options
+        DeleteRequest.new(options[:name], options[:type], options)
+      end
+
+
       private
+
 
       def resource_identifiers
         [[:name, name], [:type, type], [:set_identifier, set_identifier]]
@@ -207,6 +215,19 @@ module AWS
         client.list_resource_record_sets(options)
       end
 
+      # Format a hash of options that can be used to initialize a change
+      # request.
+      # @return [Hash]
+      def delete_options
+        options = {:name => name, :type => type}
+        options[:set_identifier] = set_identifier if set_identifier
+        options[:alias_target] = alias_target if alias_target
+        options[:weight] = weight if weight
+        options[:region] = region if region
+        options[:ttl] = ttl if ttl
+        options[:resource_records] = resource_records if resource_records
+        options
+      end
     end
   end
 end
