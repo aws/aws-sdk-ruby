@@ -81,6 +81,17 @@ module AWS
           validate!(value.to_hash, rules[:members])
         end
 
+        def validate_map rules, value, opt_name, context = nil
+          unless value.respond_to?(:to_hash)
+            format_error('hash value', opt_name, context)
+          end
+          value.inject({}) do |values,(k,v)|
+            context = "member #{k.inspect} of :#{opt_name}"
+            values[k] = validate_value(rules[:members], v, opt_name, context)
+            values
+          end
+        end
+
         # Ensures the value is an array (or at least enumerable) and
         # that the yielded values are valid.
         def validate_array rules, value, opt_name, context = nil

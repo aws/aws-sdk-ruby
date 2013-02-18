@@ -199,6 +199,43 @@ module AWS
 
           end
 
+          context ':map' do
+
+            let(:rules) {{
+              :data => {
+                :type => :map,
+                :keys => { :name => 'key', :type => 'string' },
+                :members => {
+                  :type => :hash,
+                  :members => {
+                    :abc => { :type => :string },
+                    :xyz => { :type => :boolean },
+                  }
+                }
+              }
+            }}
+
+            it 'accepts variable keys' do
+              # valid map of hashes
+              options[:data] = {
+                'foo' => { :abc => 'abc1', :xyz => true },
+                'bar' => { :abc => 'abc2', :xyz => false },
+              }
+              validate!.should eq(:data => options[:data])
+            end
+
+            it 'validates each hash value (member)' do
+              lambda {
+                options[:data] = {
+                  'foo' => { :abc => 'abc1', :xyz => true },
+                  'bar' => { :abc => 'abc2', :xyz => 123 }, # expects boolean!
+                }
+                validate!.should eq(:data => options[:data])
+              }.should raise_error(ArgumentError, 'expected true or false for option :xyz')
+            end
+
+          end
+
           context ':array' do
 
             it 'accpets an arrays' do
