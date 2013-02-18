@@ -168,7 +168,7 @@ module AWS
     def batch_get &block
       batch = BatchGet.new(:config => config)
       yield(batch)
-      batch.enumerator
+      batch.to_enum(:each)
     end
 
     # Yields a batch for writing (put and delete) items across multiple
