@@ -35,6 +35,9 @@ module AWS
     #   e.g. "m1.small".  The instance must be in a stopped state to
     #   change the instance type.
     #
+    # @attr [Boolean] ebs_optimized The instance must be in a stopped state to
+    #   change the ebs_optimized state.
+    #
     # @attr [Boolean] api_termination_disabled True if the instance
     #   cannot be terminated using the {#terminate} method.  This
     #   attribute can be changed at any time.
@@ -285,6 +288,8 @@ module AWS
       attribute :status_code, :from => [:instance_state, :code]
 
       mutable_describe_call_attribute :instance_type
+
+      mutable_describe_call_attribute :ebs_optimized
 
       mutable_describe_call_attribute :kernel_id, :set_as => :kernel
 
