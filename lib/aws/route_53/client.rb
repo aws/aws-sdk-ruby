@@ -380,7 +380,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-02-29')
+      define_client_methods('2012-12-12')
 
     end
   end
