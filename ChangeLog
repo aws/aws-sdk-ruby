@@ -1,3 +1,51 @@
+2013-02-18 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/route_53/client_spec.rb: Updated AWS::Route53::Client specs to
+  use new api version.
+
+  * lib/aws/dynamo_db.rb, spec/aws/dynamo_db_spec.rb: Fixed a bug in
+  AWS::DynamoDB#batch_get
+
+  Added missing tests and corrected a bug.
+  Fixes #161
+
+  * lib/aws/route_53/client.rb: Updated Route 53 client to use the new
+  2012-12-12 API configuration.
+
+  * lib/aws/api_config/Route53-2012-12-12.yml, lib/aws/route_53/client.rb:
+  Added support for Route53 health check operations.
+
+  * lib/aws/ec2/instance.rb: Added a mutable #ebs_optimized attribute to
+  AWS::EC2::Instance.
+
+  * lib/aws/ec2/instance.rb, spec/aws/ec2/instance_spec.rb: Resolved an issue
+  with Instance#block_device_mappings and ephemeral volumes.
+
+  AWS::EC2::Instance#block_device_mappings was raising runtime errors if the
+  instance had any ephemeral volumes.  These are now filtered.  The method has
+  also be renamed to Instance#attachments (aliased to the old name).
+
+  Added Instance#block_devices which now returns all of the block devices
+  as a simple array of hashes.
+
+  * lib/aws/dynamo_db/attribute_collection.rb,
+  spec/aws/dynamo_db/attribute_collection_spec.rb: Renamed
+  AWS::DynamoDB::AttributeCollection#to_h to #to_hash.
+
+  Aliased to #to_h for backwards compatability.
+  Fixes #165
+
+  * lib/aws/core/options/validator.rb,
+  spec/aws/core/options/validator_spec.rb: Added support for validating maps
+  via AWS::Core::Options::Validator
+
+  Fixes #166
+
+  * lib/aws/record/model.rb: Corrected spelling error in AWS::Record::Model
+  documentation.
+
+  Fixes #167
+
 2013-02-12 Trevor Rowe <trevorrowe@gmail.com>
 
   * lib/aws/api_config/ElastiCache-2012-11-15.yml,
@@ -32,7 +80,24 @@
   lib/aws/simple_workflow/workflow_execution_collection.rb,
   lib/aws/simple_workflow/workflow_type.rb: fix typos and spellings
 
-2013-02-14 Andrew Hannon <ahannon@fiksu.com>
+2013-02-15 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.2
+
+  * spec/aws/core/inflection_spec.rb: Marked a test as pending for the
+  Core::Inflector -- hoping to remove edge cases.
+
+2013-02-14 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/rds/step_definitions/client.rb,
+  features/rds/step_definitions/rds.rb, features/redshift/client.feature,
+  features/redshift/step_definitions/client.rb,
+  features/redshift/step_definitions/redshift.rb, features/support/common.rb,
+  lib/aws-sdk.rb, lib/aws/api_config/Redshift-2012-12-01.yml, lib/aws/core.rb,
+  lib/aws/core/configuration.rb, lib/aws/core/inflection.rb,
+  lib/aws/redshift.rb, lib/aws/redshift/client.rb, lib/aws/redshift/config.rb,
+  lib/aws/redshift/errors.rb, lib/aws/redshift/request.rb,
+  spec/aws/core/inflection_spec.rb: Added support for Amazon Redshift.
 
   * lib/aws/record/abstract_base.rb: attributes => attr
 
