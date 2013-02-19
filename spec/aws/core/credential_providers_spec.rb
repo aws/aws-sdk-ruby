@@ -36,7 +36,10 @@ module AWS
           provider.providers[1].prefix.should == 'AWS'
           provider.providers[2].should be_a(ENVProvider)
           provider.providers[2].prefix.should == 'AMAZON'
-          provider.providers[3].should be_a(EC2Provider)
+          if RUBY_PLATFORM.downcase.include?("darwin")
+            provider.providers[3].should be_a(OSXKeychainProvider)
+          end
+          provider.providers[-1].should be_a(EC2Provider)
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -231,6 +234,25 @@ module AWS
             :secret_access_key => 'secret' }
         end
 
+      end
+
+      describe OSXKeychainProvider do
+
+        let(:provider) { OSXKeychainProvider.new :access_key_id => 'akid' }
+
+        it 'should return credentials if the keychain returns something' do
+          provider.stub(:secret_from_keychain => 'secret')
+          provider.credentials.should == {
+            :access_key_id => 'akid',
+            :secret_access_key => 'secret' }
+        end
+
+        it 'does not return any credentials if not in the keychain' do
+          provider.stub(:secret_from_keychain => nil)
+          lambda {
+            provider.credentials
+          }.should raise_error(Errors::MissingCredentialsError)
+        end
       end
 
       describe EC2Provider do
