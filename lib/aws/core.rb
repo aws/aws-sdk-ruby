@@ -404,7 +404,7 @@ module AWS
     # @option options [String] :simple_email_service_endpoint ('email.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Email Service.
     #
-    # @option options [String] :simple_workflow_service ('swf.us-east-1.amazonaws.com')
+    # @option options [String] :simple_workflow_endpoint ('swf.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Workflow Service.
     #
     # @option options [CredentialProviders::Provider] :credential_provider (AWS::Core::CredentialProviders::DefaultProvider.new)
