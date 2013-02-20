@@ -13,9 +13,7 @@
 
 source 'http://rubygems.org'
 
-gem 'uuidtools', '~> 2.1'
-gem 'nokogiri', '>= 1.4.4'
-gem 'json', '>= 1.4.6'
+gemspec
 
 group :development do
   gem 'yard'
