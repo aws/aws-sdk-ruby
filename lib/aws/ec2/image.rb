@@ -143,6 +143,7 @@ module AWS
 
       alias_method :launch_permissions, :permissions
 
+      # @note This method will not return data for ephemeral volumes.
       # @return [Hash] Returns a hash of block
       #   device mappings for the image.  In each entry, the key is
       #   the device name (e.g. +"/dev/sda1"+) and the value is an
@@ -156,11 +157,20 @@ module AWS
       #
       #   [:delete_on_termination] True if the Amazon EBS volume is
       #                           deleted on instance termination.
+      # @see {#block_devices}
       def block_device_mappings
-        (block_device_mapping || []).inject({}) do |h,mapping|
-          h[mapping.device_name] = mapping.ebs
+        (block_device_mapping || []).inject({}) do |h, mapping|
+          if ebs = mapping[:ebs]
+            h[mapping[:device_name]] = ebs
+          end
           h
         end
+      end
+
+      # @return [Array<Hash>] Returns a list of all block device mappings.
+      #   This list may contain ephemeral volumes.
+      def block_devices
+        block_device_mapping.to_a
       end
 
       # Deregisters this AMI. Once deregistered, the AMI cannot be

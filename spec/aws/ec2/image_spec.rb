@@ -455,7 +455,10 @@ module AWS
           :device_name => "/dev/sda1",
           :ebs => ebs_device,
         }}
-        let(:response_value) { [ebs_mapping] }
+        let(:response_value) {[
+          ebs_mapping,
+          { :device_name => "/dev/sdb", :virtual_name => "ephemeral0" },
+        ]}
         let(:translated_value) { { "/dev/sda1" => ebs_device } }
 
         let(:resp) { client.stub_for(:describe_images) }
@@ -482,6 +485,16 @@ module AWS
 
           it 'should return the translated attribute value' do
             image.send(attribute).should == translated_value
+          end
+
+          it 'filters ephemeral volues' do
+            image.block_device_mappings.should eq({
+              '/dev/sda1' => ebs_device,
+            })
+            image.block_devices.should eq([
+              { :device_name => "/dev/sda1", :ebs => ebs_device },
+              { :device_name => "/dev/sdb", :virtual_name=>"ephemeral0" },
+            ])
           end
 
         end
