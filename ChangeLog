@@ -1,4 +1,26 @@
-2013-02-18 Trevor Rowe <trevorrowe@gmail.com>
+2013-02-22 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/ec2/image.rb, spec/aws/ec2/image_spec.rb: Fixed a regression in
+  AWS::EC2::Image#block_device_mappings.
+
+  This method would raise when an image has ephemeral volumes.
+  Fixes #170
+
+2013-02-20 Loren Segal <lsegal@amazon.com>
+
+  * Gemfile: Grab dependency list from gemspec to avoid duplication
+
+  * lib/aws/core.rb: Corrected the documentation for specifying the endpoint
+  for AWS::SimpleWorkflow.
+
+2013-02-18 Loren Segal <lsegal@amazon.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.3
+
+  * features/opsworks/client.feature,
+  features/opsworks/step_definitions/client.rb,
+  features/opsworks/step_definitions/ops_works.rb: Added basic integrations
+  for AWS::OpsWorks.
 
   * spec/aws/route_53/client_spec.rb: Updated AWS::Route53::Client specs to
   use new api version.
@@ -47,6 +69,13 @@
   Fixes #167
 
 2013-02-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws-sdk.rb, lib/aws/api_config/OpsWorks-2013-02-18.yml,
+  lib/aws/core.rb, lib/aws/core/configuration.rb, lib/aws/ops_works.rb,
+  lib/aws/ops_works/client.rb, lib/aws/ops_works/config.rb,
+  lib/aws/ops_works/errors.rb, lib/aws/ops_works/request.rb,
+  lib/aws/s3/client.rb, lib/aws/s3/website_configuration.rb: Added support for
+  AWS OpsWorks.
 
   * lib/aws/api_config/ElastiCache-2012-11-15.yml,
   lib/aws/elasticache/client.rb: Updated ElastiCache client to the 2012-11-15
