@@ -123,7 +123,7 @@ module AWS::Core
           lambda {
             # last index is 1 in 2nd array, 2 is out of bounds
             data.nested.arrays[1]['key']
-          }.should raise_error(TypeError, /can't convert String into Integer/)
+          }.should raise_error(TypeError, /String into Integer/)
         end
 
         it 'lets you know when you treat an array like a hash via method missing' do
