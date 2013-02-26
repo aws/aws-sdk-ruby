@@ -20,7 +20,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec', '>= 2.12'
+  gem 'rspec', '= 2.12'
   gem 'cucumber'
   gem 'simplecov', :require => false
   gem 'rvm-tester'
