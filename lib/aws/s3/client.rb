@@ -1464,8 +1464,11 @@ module AWS
         {
           'x-amz-version-id' => :version_id,
           'content-type' => :content_type,
+          'content-encoding' => :content_encoding,
+          'cache-control' => :cache_control,
           'etag' => :etag,
           'x-amz-website-redirect-location' => :website_redirect_location,
+          'accept-ranges' => :accept_ranges,
         }.each_pair do |header,method|
           if value = resp.http_response.header(header)
             resp.data[method] = value
@@ -1483,6 +1486,7 @@ module AWS
         if sse = resp.http_response.header('x-amz-server-side-encryption')
           resp.data[:server_side_encryption] = sse.downcase.to_sym
         end
+
       end
 
       module Validators

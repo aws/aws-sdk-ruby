@@ -1319,6 +1319,22 @@ module AWS
 
         it_should_behave_like "a subresource request", 'acl'
 
+        it 'should read the headers on success' do
+          r = client.with_http_handler do |req, resp|
+            resp.headers['content-type'] = ['text/plain']
+            resp.headers['content-encoding'] = ['gzip']
+            resp.headers['cache-control'] = ['max-age=1296000']
+            resp.headers['accept-ranges'] = ['bytes']
+            resp.headers['x-amz-meta-Color'] = ['red']
+            resp.headers['x-amz-meta-foo'] = 'bar'
+          end.head_object(opts)
+          r[:content_type].should eq('text/plain')
+          r[:content_encoding].should eq('gzip')
+          r[:cache_control].should eq('max-age=1296000')
+          r[:accept_ranges].should eq('bytes')
+          r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
+        end
+
       end
 
       context '#put_object' do
@@ -1494,14 +1510,17 @@ module AWS
           it 'should read the headers on success' do
             r = client.with_http_handler do |req, resp|
               resp.headers['content-type'] = ['text/plain']
+              resp.headers['content-encoding'] = ['gzip']
+              resp.headers['cache-control'] = ['max-age=1296000']
+              resp.headers['accept-ranges'] = ['bytes']
               resp.headers['x-amz-meta-Color'] = ['red']
               resp.headers['x-amz-meta-foo'] = 'bar'
             end.head_object(opts)
-            r.meta.should == {
-              'foo' => 'bar',
-              'Color' => 'red',
-            }
-            r.content_type.should == 'text/plain'
+            r[:content_type].should eq('text/plain')
+            r[:content_encoding].should eq('gzip')
+            r[:cache_control].should eq('max-age=1296000')
+            r[:accept_ranges].should eq('bytes')
+            r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
           end
 
           it 'should return the content-type as a string' do
