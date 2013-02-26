@@ -154,7 +154,7 @@ module AWS
       def update options = {}
         batch = new_change_batch(options)
         batch << new_delete_request
-        batch << new_change_request
+        batch << new_create_request
 
         @change_info = batch.call()
         @name = @create_options[:name]
