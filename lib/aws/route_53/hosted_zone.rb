@@ -89,7 +89,7 @@ module AWS
         get_resource.data[:hosted_zone][:id] == path
       end
 
-      # Returns resource recoed sets.
+      # Returns resource record sets.
       # @return [ResourceRecordSetCollection]
       def resource_record_sets
         ResourceRecordSetCollection.new(id, :config => config)
