@@ -228,7 +228,7 @@ module AWS
           options[:weight] = weight if weight
           options[:region] = region if region
           options[:ttl] = ttl if ttl
-          options[:resource_records] = resource_records if resource_records
+          options[:resource_records] = resource_records if resource_records && !resource_records.empty?
         end
         options
       end
