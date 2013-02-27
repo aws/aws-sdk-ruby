@@ -40,12 +40,15 @@ module AWS
       def region
         # sigv4 requires the region name when signing, this should come from
         # the QueueUrl param whenever present
-        if param = params.find{|p| p.name == 'QueueUrl' }
-          if matches = URI.parse(param.value).host.match(/^sqs\.(.+?)\./)
-            return matches[1]
-          end
+        if
+          param = params.find{|p| p.name == 'QueueUrl' } and
+          host = URI.parse(param.value).host and
+          matches = host.match(/^sqs\.(.+?)\./)
+        then
+          return matches[1]
+        else
+          super
         end
-        super
       end
 
       private
