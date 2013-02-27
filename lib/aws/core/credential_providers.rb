@@ -109,6 +109,9 @@ module AWS
           @providers << StaticProvider.new(static_credentials)
           @providers << ENVProvider.new('AWS')
           @providers << ENVProvider.new('AMAZON')
+          if RUBY_PLATFORM.downcase.include?("darwin")
+            @providers << OSXKeychainProvider.new(static_credentials)
+          end
           @providers << EC2Provider.new
         end
 
@@ -199,6 +202,60 @@ module AWS
           credentials
         end
 
+      end
+
+      # Fetches secret access key from the OS X keychain. The access key id
+      # will be taken from either static credentials, or from
+      # {AMAZON,AWS}_ACCESS_KEY_ID in the environment.
+      #
+      # The secret access key must be stored in the keychain as a generic
+      # account with the access key id as the account name.
+      class OSXKeychainProvider
+
+        include Provider
+
+        # A simple keychain access helper that uses the 'security' command-
+        # line tool.
+        class KeychainAccess
+          def self.password_for_account account
+            args = [
+              "find-generic-password",
+              "-a",
+              account.gsub(/[^A-Za-z0-9]/, ''),
+              "-w"
+            ]
+            password = `/usr/bin/security #{args.join ' '}`.chomp
+
+            $?.success? ? password : nil
+          end
+        end
+
+        # @param [Hash] static_credentials
+        # @option static_credentials [String] :access_key_id
+        def initialize static_credentials = {}
+          @access_key_id = static_credentials[:access_key_id] ||
+            ENV["AWS_ACCESS_KEY_ID"] ||
+            ENV["AMAZON_ACCESS_KEY_ID"]
+        end
+
+        # (see Provider#get_credentials)
+        def get_credentials
+          credentials = {}
+
+          if @access_key_id
+            if secret = secret_from_keychain
+              credentials[:access_key_id] = @access_key_id
+              credentials[:secret_access_key] = secret
+            end
+          end
+
+          credentials
+        end
+
+        # private
+        def secret_from_keychain
+          KeychainAccess.password_for_account @access_key_id
+        end
       end
 
       # This credential provider tries to get credentials from the EC2
