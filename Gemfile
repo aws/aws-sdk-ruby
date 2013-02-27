@@ -17,6 +17,7 @@ gemspec
 
 group :development do
   gem 'yard'
+  gem 'rdoc', '= 3.9.4'
 end
 
 group :test do
