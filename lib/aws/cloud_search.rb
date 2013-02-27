@@ -57,6 +57,8 @@ module AWS
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level CloudSearch client object
   class CloudSearch
 
     AWS.register_autoloads(self, 'aws/cloud_search') do

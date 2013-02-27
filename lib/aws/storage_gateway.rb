@@ -57,6 +57,8 @@ module AWS
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level StorageGateway client object
   class StorageGateway
 
     AWS.register_autoloads(self, 'aws/storage_gateway') do

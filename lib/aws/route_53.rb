@@ -57,6 +57,8 @@ module AWS
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level Route53 client object
   class Route53
 
     AWS.register_autoloads(self, 'aws/route_53') do

@@ -65,6 +65,8 @@ module AWS
   #     :min_size => 1,
   #     :max_size => 4)
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level AutoScaling client object
   class AutoScaling
 
     AWS.register_autoloads(self, 'aws/auto_scaling') do

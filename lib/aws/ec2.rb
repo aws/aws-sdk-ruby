@@ -229,6 +229,8 @@ module AWS
   #  ec2.images.create(:image_location => "mybucket/manifest.xml",
   #                    :name => "my-image")
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level EC2 client object
   class EC2
 
     AWS.register_autoloads(self) do

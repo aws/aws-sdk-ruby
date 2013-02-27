@@ -57,6 +57,8 @@ module AWS
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level DataPipeline client object
   class DataPipeline
 
     AWS.register_autoloads(self, 'aws/data_pipeline') do

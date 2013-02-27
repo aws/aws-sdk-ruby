@@ -168,6 +168,8 @@ module AWS
   #     puts "Complaints: #{stats[:complaints]}"
   #   end
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SimpleEmailService client object
   class SimpleEmailService
 
     AWS.register_autoloads(self, 'aws/simple_email_service') do

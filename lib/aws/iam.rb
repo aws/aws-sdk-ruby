@@ -132,6 +132,8 @@ module AWS
   # * Signing Certificates ({SigningCertificateCollection}, {SigningCertificate})
   # * Multifactor Authentication Devices ({MFADeviceCollection}, {MFADevice})
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level IAM client object
   class IAM
 
     AWS.register_autoloads(self) do

@@ -136,6 +136,8 @@ module AWS
   #   # one request to delete the colors attribute
   #   colors.delete
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SimpleDB client object
   class SimpleDB
 
     AWS.register_autoloads(self, 'aws/simple_db') do

@@ -37,6 +37,8 @@ module AWS
   #   ec2 = AWS::EC2.new(session.credentials)
   #   ec2.instances.to_a
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level STS client object
   class STS
 
     AWS.register_autoloads(self) do

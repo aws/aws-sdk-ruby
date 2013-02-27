@@ -141,6 +141,8 @@ module AWS
   #     # ...
   #   end
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level CloudFormation client object
   class CloudFormation
 
     AWS.register_autoloads(self, 'aws/cloud_formation') do

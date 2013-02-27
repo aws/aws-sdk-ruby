@@ -33,6 +33,8 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level ElastiCache client object
   class ElastiCache
 
     AWS.register_autoloads(self) do

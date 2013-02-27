@@ -188,6 +188,8 @@ module AWS
   #
   # See {HistoryEvent} and {HistoryEvent::Attributes} for more information.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SimpleWorkflow client object
   class SimpleWorkflow
 
     AWS.register_autoloads(self, 'aws/simple_workflow') do

@@ -108,6 +108,8 @@ module AWS
   #   # delete an item and all of its attributes
   #   item.delete
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level DynamoDB client object
   class DynamoDB
 
     AWS.register_autoloads(self, 'aws/dynamo_db') do

@@ -53,6 +53,8 @@ module AWS
   # See the {Queue} class for more information on how to send and
   # receive messages.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SQS client object
   class SQS
 
     AWS.register_autoloads(self) do

@@ -59,6 +59,8 @@ module AWS
   # See {JobFlowCollection} and {JobFlow} for more information on working
   # with job flows.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level EMR client object
   class EMR
 
     AWS.register_autoloads(self) do
