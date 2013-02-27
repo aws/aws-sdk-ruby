@@ -167,3 +167,9 @@ end
 Then /^the message should have a string sender ID$/ do
   @message.sender_id.should be_a(String)
 end
+
+Then /^I should be able to send a message using a "(.*?)" client$/ do |region|
+  @sqs = AWS::SQS.new(:sqs_endpoint => "sqs.#{region}.amazonaws.com")
+  @sqs.queues[@queue.url].send_message('HELLO')
+end
+

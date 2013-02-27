@@ -298,7 +298,7 @@ module AWS
 
         protected
         def populate_id
-          @_id = UUIDTools::UUID.random_create.to_s
+          @_id = UUIDTools::UUID.random_create.to_s.downcase
         end
 
         protected

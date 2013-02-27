@@ -17,6 +17,11 @@ When /^I create a queue$/ do
   @created_queues << @queue
 end
 
+Given /^I create a queue in "(.*?)"$/ do |region|
+  @sqs = AWS::SQS.new(:sqs_endpoint => "sqs.#{region}.amazonaws.com")
+  step "I create a queue"
+end
+
 Then /^the result should be a queue object$/ do
   @result.should be_an(SQS::Queue)
 end

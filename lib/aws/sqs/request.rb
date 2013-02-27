@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'uri'
+
 module AWS
   class SQS
 
@@ -33,6 +35,17 @@ module AWS
 
       def uri
         path
+      end
+
+      def region
+        # sigv4 requires the region name when signing, this should come from
+        # the QueueUrl param whenever present
+        if param = params.find{|p| p.name == 'QueueUrl' }
+          if matches = URI.parse(param.value).host.match(/^sqs\.(.+?)\./)
+            return matches[1]
+          end
+        end
+        super
       end
 
       private
