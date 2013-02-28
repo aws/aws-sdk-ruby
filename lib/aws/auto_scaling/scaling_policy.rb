@@ -26,7 +26,7 @@ module AWS
     #
     # @attr_reader [Integer] cooldown
     #
-    # @attr_reader [Integer] min_adjustment_magnitude
+    # @attr_reader [Integer] min_adjustment_step
     #
     class ScalingPolicy < Core::Resource
 
@@ -63,7 +63,7 @@ module AWS
 
       attribute :cooldown
 
-      attribute :min_adjustment_magintude
+      attribute :min_adjustment_step
 
       populates_from(:describe_policies) do |resp|
         resp.scaling_policies.find do |p| 

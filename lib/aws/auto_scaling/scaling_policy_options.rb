@@ -40,7 +40,7 @@ module AWS
       #   after a scaling activity completes before any further 
       #   trigger-related scaling activities can start.
       #
-      # @option options [Integer] :min_adjustment_magnitude
+      # @option options [Integer] :min_adjustment_step
       #
       # @return [Hash]
       #
@@ -52,6 +52,7 @@ module AWS
           :cooldown,
           :adjustment_type,
           :scaling_adjustment,
+          :min_adjustment_step,
         ].each do |opt|
           opts[opt] = options[opt] if options.key?(opt)
         end
