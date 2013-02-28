@@ -256,7 +256,7 @@ module AWS
     # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
     #   The service endpoint for AWS Elastic Beanstalk.
     #
-    # @option options [String] :elastic_transcoder_endpoint ('elastictranscoderbeanstalk.us-east-1.amazonaws.com')
+    # @option options [String] :elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Transcoder.
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
