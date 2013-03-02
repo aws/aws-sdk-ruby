@@ -20,17 +20,7 @@ module AWS
   #
   #   dynamo_db = AWS::DynamoDB.new(
   #     :access_key_id => '...',
-  #     :secret_access_key => '...',
-  #     :session_token => '...')
-  #
-  # = Credentials
-  #
-  # Amazon DynamoDB requires that all requests are made with short-term
-  # credentials (e.g. requires a session token).
-  #
-  # @note If you make a request using AWS::DynamoDB with long-term credentials
-  #   a request is made to Amazon STS for temporary session credentials.
-  #   These will be cached in the process and re-used.
+  #     :secret_access_key => '...')
   #
   # = Tables
   #
