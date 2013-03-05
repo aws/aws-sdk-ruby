@@ -21,6 +21,19 @@ module AWS
       
       # client methods #
 
+      # @!method link_account(options = {})
+      # Calls the LinkAccount API operation.
+      # @param [Hash] options
+      #   * +:account_token+ - *required* - (String) The account token of the user
+      #   * +:kind+ - *required* - (String) The type of the linking can be either LOGIN or REGISTRATION
+      #   * +:addresses+ - *required* - (Array<Hash>) An array of address pairs
+      #     * +:address+ - (String) The Address value
+      #     * +:address_description+ - (String) The address description
+      #   * +:request_token+ - *required* - (String) The request token supplied by amazon
+      # @return [Core::Response]
+
+      # end client methods #
+
       define_client_methods('2013-02-11')
 
     end

@@ -33,6 +33,11 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
+  # To use the sandbox of GameConnect set the game_connect_endpoint value in the config
+  #
+  # AWS.config(
+  #   :game_connect_endpoing => 'gameconnect-sandbox.us-east-1.amazonaws.com')
+  #
   class GameConnect
     AWS.register_autoloads(self, 'aws/game_connect') do
       autoload :Client,                        'client'
