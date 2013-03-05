@@ -1438,7 +1438,7 @@ module AWS
         resp.data[:meta] = meta
 
         if expiry = resp.http_response.headers['x-amz-expiration']
-          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
+          expiry =~ /^expiry-date="(.+)", rule-id="(.+)"$/
           exp_date = DateTime.parse($1)
           exp_rule_id = $2
         else
