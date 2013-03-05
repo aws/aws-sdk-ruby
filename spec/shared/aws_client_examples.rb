@@ -15,7 +15,7 @@ require 'timeout'
 
 module AWS::Core
 
-  shared_examples_for "an aws client" do |sample_method|
+  shared_examples_for "an aws client" do |sample_method, params|
 
     context '#initialize' do
 
@@ -53,7 +53,7 @@ module AWS::Core
         client.with_http_handler { |req, resp|
           recorded_request = req
           recorded_response = resp
-        }.send(sample_method)
+        }.send(sample_method, params)
         recorded_request.should be_a_kind_of(Http::Request)
         recorded_response.should be_a(Http::Response)
       end
@@ -66,7 +66,7 @@ module AWS::Core
         }.with_http_handler { |req, resp|
           called_derived = true
           super(req, resp)
-        }.send(sample_method)
+        }.send(sample_method, params)
 
         called_super.should be_true
         called_derived.should be_true
@@ -76,7 +76,7 @@ module AWS::Core
         http_response = nil
         response = client.with_http_handler { |req, resp|
           http_response = resp
-        }.send(sample_method)
+        }.send(sample_method, params)
         response.http_response.should be(http_response)
       end
 
@@ -84,7 +84,7 @@ module AWS::Core
         http_request = nil
         response = client.with_http_handler { |req, resp|
           http_request = req
-        }.send(sample_method)
+        }.send(sample_method, params)
         response.http_request.should be(http_request)
       end
 
@@ -93,7 +93,7 @@ module AWS::Core
         begin
           client.with_http_handler { |req, resp|
             raise error
-          }.send(sample_method)
+          }.send(sample_method, params)
         rescue => e
           e.should be(error)
         else
