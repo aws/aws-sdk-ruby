@@ -153,8 +153,10 @@ module AWS
       # @return [ResourceRecordSet] New resource record set with current value.
       def update options = {}
         batch = new_change_batch(options)
-        batch << new_delete_request
-        batch << new_change_request
+        AWS.memoize do
+          batch << new_delete_request
+          batch << new_create_request
+        end
 
         @change_info = batch.call()
         @name = @create_options[:name]
@@ -220,12 +222,14 @@ module AWS
       # @return [Hash]
       def delete_options
         options = {:name => name, :type => type}
-        options[:set_identifier] = set_identifier if set_identifier
-        options[:alias_target] = alias_target if alias_target
-        options[:weight] = weight if weight
-        options[:region] = region if region
-        options[:ttl] = ttl if ttl
-        options[:resource_records] = resource_records if resource_records
+        AWS.memoize do
+          options[:set_identifier] = set_identifier if set_identifier
+          options[:alias_target] = alias_target if alias_target
+          options[:weight] = weight if weight
+          options[:region] = region if region
+          options[:ttl] = ttl if ttl
+          options[:resource_records] = resource_records if resource_records && !resource_records.empty?
+        end
         options
       end
     end
