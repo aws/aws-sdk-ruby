@@ -1193,6 +1193,13 @@ module AWS
       # @option options [String] :response_content_encoding Sets the
       #   Content-Encoding header of the response when performing an
       #   HTTP GET on the returned URL.
+      #
+      # @option options [String] :content_type Sets
+      #   the Content-Type header of the request.
+      #
+      # @option options [String] :storage_class Sets the
+      #   x-amz-storage-class header of the request.
+      #
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
 
