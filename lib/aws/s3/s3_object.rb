@@ -1202,6 +1202,8 @@ module AWS
 
         method = http_method(method)
         expires = expiration_timestamp(options[:expires])
+        req.content_type = options[:content_type] || ''
+        req.storage_class = options[:storage_class] if options.has_key?(:storage_class)
         req.add_param("AWSAccessKeyId",
                       config.credential_provider.access_key_id)
         req.add_param("versionId", options[:version_id]) if options[:version_id]
@@ -1339,10 +1341,13 @@ module AWS
         parts = []
         parts << method
         parts << ""
-        parts << ""
+        parts << request.content_type || ""
         parts << expires
         if token = config.credential_provider.session_token
           parts << "x-amz-security-token:#{token}"
+        end
+        if request.headers.has_key?('x-amz-storage-class')
+          parts << "x-amz-storage-class:#{request.headers['x-amz-storage-class']}"
         end
         parts << request.canonicalized_resource
 
