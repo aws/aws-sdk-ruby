@@ -14,6 +14,7 @@
 require 'json'
 require 'set'
 require 'yaml'
+require 'uri'
 
 module AWS
   module Core
@@ -273,6 +274,15 @@ module AWS
       def rebuild_http_request response
         credential_provider.refresh if expired_credentials?(response)
         response.rebuild_request
+        if redirected?(response)
+          loc = URI.parse(response.http_response.headers['location'].first)
+          AWS::Core::MetaUtils.extend_method(response.http_request, :host) do
+            loc.host
+          end
+          response.http_request.host = loc.host
+          response.http_request.port = loc.port
+          response.http_request.uri = loc.path
+        end
         response.retry_count += 1
       end
 
@@ -301,6 +311,7 @@ module AWS
         expired_credentials?(response) or
         response.network_error? or
         throttled?(response) or
+        redirected?(response) or
         response.error.kind_of?(Errors::ServerError)
       end
 
@@ -316,6 +327,10 @@ module AWS
         response.error and
         response.error.respond_to?(:code) and
         response.error.code.to_s.match(/Throttling/i)
+      end
+
+      def redirected? response
+        response.http_response.status == 307
       end
 
       def return_or_raise options, &block
