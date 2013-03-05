@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -56,11 +56,11 @@ When /^I ask if the DynamoDB item exists$/ do
 end
 
 Given /^I ask for the item with the hash key value "([^\"]*)"$/ do |hash|
-  @item = @table.items[hash]
+  @result = @item = @table.items[hash]
 end
 
 Given /^I ask for the item with the hash key value "([^\"]*)" and range key value (\d+)$/ do |hash, range|
-  @item = @table.items.at(hash, range.to_i)
+  @result = @item = @table.items.at(hash, range.to_i)
 end
 
 Given /^I create (\d+) DynamoDB items$/ do |n|
@@ -75,4 +75,17 @@ end
 
 When /^I list DynamoDB items with a limit of (\d+) and batch_size of (\d+)$/ do |limit, batch|
   @table.items.each(:limit => limit.to_i, :batch_size => batch.to_i) { |i| }
+end
+
+When /^I put an item with an image as a binary attribute$/ do
+  File.open(File.dirname(__FILE__) + '/img.jpg', 'rb') do |file|
+    data = AWS::DynamoDB::Binary.new(file.read)
+    @item = @table.items.put('id' => 'image', 'data' => data)
+  end
+end
+
+Then /^the item's binary attribute should match the image\.$/ do
+  File.open(File.dirname(__FILE__) + '/img.jpg', 'rb') do |file|
+    @item.attributes['data'].should eq(file.read)
+  end
 end

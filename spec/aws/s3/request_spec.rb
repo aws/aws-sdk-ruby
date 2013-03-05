@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -198,7 +198,7 @@ module AWS
         let(:body) { 'hello world' }
         let(:md5) { Digest::MD5.hexdigest(body) }
         let(:content_type) { 'text/plain' }
-        let(:date) { Time.now.rfc822 }
+        let(:date) { Time.now.httpdate }
 
         let(:request) { 
           req = Request.new
@@ -359,7 +359,7 @@ END
 
         it 'should add a Date header if not provided' do
           fake_date = 'Mon, 1 Jan 1234 12:34:56 +0000'
-          Time.stub_chain(:now, :rfc822).and_return(fake_date)
+          Time.stub_chain(:now, :httpdate).and_return(fake_date)
           request.string_to_sign
           request.headers['Date'].should == fake_date
         end

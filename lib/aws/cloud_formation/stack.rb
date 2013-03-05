@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,7 +25,7 @@ module AWS
     #
     # @attr_reader [String] stack_id Unique stack identifier.
     #
-    # @attr_reader [Symbol] status The status of the stack.
+    # @attr_reader [String] status The status of the stack.
     #
     # @attr_reader [String] status_reason Success/Failure message 
     #   associated with the +status+.
@@ -202,7 +202,6 @@ module AWS
       # @return [nil]
       #
       def update options = {}
-        
         client_opts = options.dup
 
         apply_stack_name(name, client_opts)

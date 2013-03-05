@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -617,7 +617,7 @@ module AWS
           end
 
           it 'should be an object version with the returned version ID' do
-            resp.stub(:version_id).and_return("abc123")
+            resp.data[:version_id] = 'abc123'
             return_value.should be_an(ObjectVersion)
             return_value.config.should be(config)
             return_value.object.should be(object)
@@ -693,8 +693,15 @@ module AWS
           object.read
         end
 
-        it 'should call get_object with the bucket name and key' do
+        it 'returns the object data from #get_object' do
           object.read.should == "HELLO"
+        end
+
+        it 'returns the #get_object response data if given a block' do
+          resp = object.read do |chunk|
+            # reading the data in chunks
+          end
+          resp.should be(response.data)
         end
 
       end
@@ -733,42 +740,42 @@ module AWS
 
       context '#etag' do
         it 'returns #etag from the head response' do
-          head = double('head-object-response', :etag => 'myetag')
+          head = { :etag => 'myetag' }
           client.stub(:head_object).and_return(head)
-          object.etag.should == 'myetag'
+          object.etag.should eq('myetag')
         end
       end
 
       context '#last_modified' do
         it 'returns #last_modified from the head response' do
-          head = double('head-object-response', :last_modified => Time.now)
+          now = Time.now
+          head = { :last_modified => now }
           client.stub(:head_object).and_return(head)
-          object.last_modified.should == head.last_modified
+          object.last_modified.should eq(now)
         end
       end
 
       context '#content_length' do
         it 'returns #content_length from the head response' do
-          head = double('head-object-response', :content_length => 123)
+          head = { :content_length => 123 }
           client.stub(:head_object).and_return(head)
-          object.content_length.should == 123
+          object.content_length.should eq(123)
         end
       end
 
       context '#content_type' do
         it 'returns #content_type from the head response' do
-          head = double('head-object-response', :content_type => 'text/plain')
+          head = { :content_type => 'text/plain' }
           client.stub(:head_object).and_return(head)
-          object.content_type.should == 'text/plain'
+          object.content_type.should eq('text/plain')
         end
       end
 
       context '#server_side_encryption' do
         it 'returns #server_side_encryption from the head response' do
-          head = double('head-object-response',
-                        :server_side_encryption => :aes256)
+          head = { :server_side_encryption => :aes256 }
           client.stub(:head_object).and_return(head)
-          object.server_side_encryption.should == :aes256
+          object.server_side_encryption.should eq(:aes256)
         end
       end
 
@@ -784,6 +791,37 @@ module AWS
           object.server_side_encryption?.should be_false
         end
 
+      end
+
+      context '#restore_in_progress?' do
+        it 'returns true if the object is being restored' do
+          head = { :restore_in_progress => true }
+          client.stub(:head_object).and_return(head)
+          object.restore_in_progress?.should be(true)
+        end
+
+        it 'returns false if the object is not an archive copy' do
+          head = { :restore_in_progress => false }
+          client.stub(:head_object).and_return(head)
+          object.restore_in_progress?.should be(false)
+        end
+      end
+
+      context '#restore_expiration_date' do
+        it 'returns the expiration date if it is an archive copy' do
+          time = Time.now
+          head = { :restore_expiration_date => time }
+          client.stub(:head_object).and_return(head)
+          object.restore_expiration_date.should eq(time)
+        end
+      end
+
+      context '#restored_object?' do
+        it 'returns false if the object is not an archive copy' do
+          head = { :restore_expiration_date => nil }
+          client.stub(:head_object).and_return(head)
+          object.restored_object?.should be(false)
+        end
       end
 
       context '#versions' do
@@ -914,6 +952,13 @@ module AWS
             should include("Expires=1306201144")
         end
 
+        it 'should accept an object that responds to #to_int' do
+          Time.stub(:now).and_return(10)
+          seconds = double('seconds', :to_int => 10)
+          object.url_for(:get, :expires => seconds).
+            query.split("&").should include("Expires=20")
+        end
+
         it 'should accept a Time object for :expires' do
           object.url_for(:get, :expires =>
                                Time.parse("2011-05-23 18:39:04 -0700")).
@@ -952,6 +997,50 @@ module AWS
           object.url_for(:get).query.should == "something=itsvalue"
         end
 
+        it 'should default to the general use_ssl parameter for urls' do
+          config.stub(:use_ssl?).and_return true
+          object.url_for(:get).scheme.should == "https"
+          config.stub(:use_ssl?).and_return false
+          object.url_for(:get).scheme.should == "http"
+        end
+
+        it 'should prefer :secure over the general use_ssl parameter for urls' do
+          config.stub(:use_ssl?).and_return true
+          object.url_for(:get, :secure => false).scheme.should == "http"
+          config.stub(:use_ssl?).and_return false
+          object.url_for(:get, :secure => true).scheme.should == "https"
+        end
+
+        it 'should default to the :s3_port value for urls' do
+          config.stub(:s3_port).and_return nil
+          object.url_for(:get).port.should == 443
+          config.stub(:s3_port).and_return 8080
+          object.url_for(:get).port.should == 8080
+        end
+
+        it 'should prefer :port over the general :s3_port parameter for urls' do
+          config.stub(:s3_port).and_return 8080
+          object.url_for(:get, :port => 80).port.should == 80
+        end
+
+        it 'should default to the general :s3_force_path_style value for urls' do
+          config.stub(:s3_force_path_style).and_return false
+          url = object.url_for(:get)
+          url.host.should == "foobucket.s3.amazonaws.com"
+          url.path.should_not =~ /^\/foobucket\//
+
+          config.stub(:s3_force_path_style).and_return true
+          url = object.url_for(:get)
+          url.host.should == "s3.amazonaws.com"
+          url.path.should =~ /^\/foobucket\//
+        end
+
+        it 'should prefer :force_path_style over the general :s3_force_path_style parameter for urls' do
+          config.stub(:s3_force_path_style).and_return true
+          url = object.url_for(:get, :force_path_style => false)
+          url.host.should == "foobucket.s3.amazonaws.com"
+          url.path.should_not =~ /^\/foobucket\//
+        end
       end
 
       context '#public_url' do

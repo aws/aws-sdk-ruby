@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,11 +16,11 @@ Given /^I wait (\d+) seconds for eventual consistency$/ do |seconds|
 end
 
 When /^(.*), ignoring errors$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 When /^(.*) again$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 Given /^I start a memoization block$/ do
@@ -267,4 +267,11 @@ end
 
 Then /^the result should be:$/ do |string|
   @result.should == eval(string)
+end
+
+Then /^I should receive an error with:$/ do |table|
+  code = table.hashes[0]['code']
+  message = table.hashes[0]['message']
+  @error.code.should eq(code)
+  @error.message.should eq(message)
 end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -34,6 +34,9 @@ module AWS
     # @attr [String] instance_type The instance type,
     #   e.g. "m1.small".  The instance must be in a stopped state to
     #   change the instance type.
+    #
+    # @attr [Boolean] ebs_optimized The instance must be in a stopped state to
+    #   change the ebs_optimized state.
     #
     # @attr [Boolean] api_termination_disabled True if the instance
     #   cannot be terminated using the {#terminate} method.  This
@@ -286,6 +289,8 @@ module AWS
 
       mutable_describe_call_attribute :instance_type
 
+      mutable_describe_call_attribute :ebs_optimized
+
       mutable_describe_call_attribute :kernel_id, :set_as => :kernel
 
       mutable_describe_call_attribute :ramdisk_id, :set_as => :ramdisk
@@ -431,20 +436,49 @@ module AWS
           SecurityGroup.new(g.group_id, :name => g.group_name, :config => config)
         end
       end
-
       alias_method :groups, :security_groups
 
-      # @return [Hash<String,Attachment>] Returns a hash of device mappings.
+      # @return [Hash<String,Attachment>] Returns a hash of attachments.
       #   The keys are device name strings (e.g. '/dev/sda') and the values
       #   are {Attachment} objects.
-      def block_device_mappings
+      # @note This method will not return data for ephemeral volumes.
+      # @see {#block_devices}
+      def attachments
         (block_device_mapping || []).inject({}) do |m, mapping|
-          device = mapping.device_name
-          volume = Volume.new(mapping.ebs.volume_id, :config => config)
-          attachment = Attachment.new(volume, self, device, :config => config)
-          m[device] = attachment
+          if mapping[:ebs]
+            device = mapping[:device_name]
+            volume = Volume.new(mapping[:ebs][:volume_id], :config => config)
+            attachment = Attachment.new(volume, self, device, :config => config)
+            m[device] = attachment
+          end
           m
         end
+      end
+      alias_method :block_device_mappings, :attachments
+
+      # Returns a list of block device mappings.
+      #
+      #   instance.block_devices
+      #   #=>
+      #   [
+      #     {
+      #       :device_name => "/dev/sda2",
+      #       :ebs => {
+      #         :volume_id => "vol-123",
+      #         :status => "attaching",
+      #         :attach_time => time,
+      #         :delete_on_termination => true
+      #       }
+      #     }, {
+      #       :device_name => "/dev/sdb",
+      #       :virtual_name => "ephemeral0",
+      #     }
+      #   ]
+      #
+      # @return [Array<Hash>] Returns a list of block device mappings.  This
+      #   list may contain ephemeral volumes.
+      def block_devices
+        block_device_mapping.to_a
       end
 
       # Enables monitoring for this instance.

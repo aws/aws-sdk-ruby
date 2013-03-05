@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -168,6 +168,12 @@ module AWS
           object.should_receive(:delete).
             with(hash_including(:version_id => 'vid'))
           version.delete
+        end
+
+        it 'should call delete on the object with mfa credentials if specified' do
+          object.should_receive(:delete).
+            with(hash_including(:mfa => '123456 7890'))
+          version.delete(:mfa => '123456 7890')
         end
 
       end

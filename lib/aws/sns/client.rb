@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,10 +20,10 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
+      # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
-      # @method add_permission(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
       #     access control policy you wish to modify.
@@ -38,8 +38,8 @@ module AWS
       #     SNS action name.
       # @return [Core::Response]
 
+      # @!method confirm_subscription(options = {})
       # Calls the ConfirmSubscription API operation.
-      # @method confirm_subscription(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic for which
       #     you wish to confirm a subscription.
@@ -55,8 +55,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:subscription_arn+ - (String)
 
+      # @!method create_topic(options = {})
       # Calls the CreateTopic API operation.
-      # @method create_topic(options = {})
       # @param [Hash] options
       #   * +:name+ - *required* - (String) The name of the topic you want to
       #     create. Constraints: Topic names must be made up of only uppercase
@@ -67,8 +67,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:topic_arn+ - (String)
 
+      # @!method delete_topic(options = {})
       # Calls the DeleteTopic API operation.
-      # @method delete_topic(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic you want
       #     to delete. http://sns.us-east-1.amazonaws.com/
@@ -84,8 +84,8 @@ module AWS
       #     </ResponseMetadata> </DeleteTopicResponse>
       # @return [Core::Response]
 
+      # @!method get_subscription_attributes(options = {})
       # Calls the GetSubscriptionAttributes API operation.
-      # @method get_subscription_attributes(options = {})
       # @param [Hash] options
       #   * +:subscription_arn+ - *required* - (String) The ARN of the
       #     subscription whose properties you want to get.
@@ -94,8 +94,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
 
+      # @!method get_topic_attributes(options = {})
       # Calls the GetTopicAttributes API operation.
-      # @method get_topic_attributes(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
       #     properties you want to get.
@@ -104,8 +104,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
 
+      # @!method list_subscriptions(options = {})
       # Calls the ListSubscriptions API operation.
-      # @method list_subscriptions(options = {})
       # @param [Hash] options
       #   * +:next_token+ - (String) Token returned by the previous
       #     ListSubscriptions request.
@@ -120,8 +120,8 @@ module AWS
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method list_subscriptions_by_topic(options = {})
       # Calls the ListSubscriptionsByTopic API operation.
-      # @method list_subscriptions_by_topic(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic for which
       #     you wish to find subscriptions.
@@ -138,8 +138,8 @@ module AWS
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method list_topics(options = {})
       # Calls the ListTopics API operation.
-      # @method list_topics(options = {})
       # @param [Hash] options
       #   * +:next_token+ - (String) Token returned by the previous ListTopics
       #     request.
@@ -150,8 +150,8 @@ module AWS
       #     * +:topic_arn+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method publish(options = {})
       # Calls the Publish API operation.
-      # @method publish(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The topic you want to publish
       #     to.
@@ -191,8 +191,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:message_id+ - (String)
 
+      # @!method remove_permission(options = {})
       # Calls the RemovePermission API operation.
-      # @method remove_permission(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
       #     access control policy you wish to modify.
@@ -200,8 +200,8 @@ module AWS
       #     you want to remove.
       # @return [Core::Response]
 
+      # @!method set_subscription_attributes(options = {})
       # Calls the SetSubscriptionAttributes API operation.
-      # @method set_subscription_attributes(options = {})
       # @param [Hash] options
       #   * +:subscription_arn+ - *required* - (String) The ARN of the
       #     subscription to modify.
@@ -212,8 +212,8 @@ module AWS
       #     attribute.
       # @return [Core::Response]
 
+      # @!method set_topic_attributes(options = {})
       # Calls the SetTopicAttributes API operation.
-      # @method set_topic_attributes(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of the topic to
       #     modify.
@@ -224,8 +224,8 @@ module AWS
       #     attribute.
       # @return [Core::Response]
 
+      # @!method subscribe(options = {})
       # Calls the Subscribe API operation.
-      # @method subscribe(options = {})
       # @param [Hash] options
       #   * +:topic_arn+ - *required* - (String) The ARN of topic you want to
       #     subscribe to.
@@ -250,14 +250,14 @@ module AWS
       #   a hash with the following structure:
       #   * +:subscription_arn+ - (String)
 
+      # @!method unsubscribe(options = {})
       # Calls the Unsubscribe API operation.
-      # @method unsubscribe(options = {})
       # @param [Hash] options
       #   * +:subscription_arn+ - *required* - (String) The ARN of the
       #     subscription to be deleted.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
 
       define_client_methods('2010-03-31')
 

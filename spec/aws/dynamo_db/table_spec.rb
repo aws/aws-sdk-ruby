@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -407,10 +407,23 @@ module AWS
           items = double('items')
 
           batch = double('batch').as_null_object
-          batch.should_receive(:table).with(table.name, attributes, items)
+          batch.should_receive(:table).with(table.name, attributes, items, {})
           BatchGet.stub(:new).and_return(batch)
 
           table.batch_get(attributes, items)
+
+        end
+
+        it 'passes along the :consistent_read option' do
+
+          attributes = double('attribute-list')
+          items = double('items')
+
+          batch = double('batch').as_null_object
+          batch.should_receive(:table).with(table.name, attributes, items, :consitent_read => true)
+          BatchGet.stub(:new).and_return(batch)
+
+          table.batch_get(attributes, items, :consitent_read => true)
 
         end
 

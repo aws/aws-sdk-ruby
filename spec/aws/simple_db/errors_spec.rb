@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -44,11 +44,6 @@ module AWS
 
         it "should be a kind of #{base}" do
           exception.should be_kind_of(base)
-        end
-
-        it "should expose box_usage as a float" do
-          pending
-          exception.box_usage.should == 1.234
         end
 
       end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -45,7 +45,7 @@ module AWS
       #
       # @example Running a single instance
       #   i = ec2.instances.create(:image_id => "ami-8c1fece5")
-      #   sleep 1 while i.status == :pending
+      #   sleep 10 while i.status == :pending
       #
       # @example Running multiple instances with the same parameters
       #
@@ -192,6 +192,16 @@ module AWS
       #   valid for instances launched outside a VPC (e.g. those
       #   launched without the :subnet option).
       #
+      # @option options [Boolean] :ebs_optimized (false) EBS-Optimized instances 
+      #   enable Amazon EC2 instances to fully utilize the IOPS provisioned on 
+      #   an EBS volume. EBS-optimized instances deliver dedicated throughput 
+      #   between Amazon EC2 and Amazon EBS, with options between 500 Mbps and
+      #   1000 Mbps depending on the instance type used. When attached to 
+      #   EBS-Optimized instances, Provisioned IOPS volumes are designed 
+      #   to deliver within 10% of their provisioned performance 99.9% of the time. 
+      #   *NOTE:* EBS Optimized instances incur an additional service charge. This
+      #   optional is only valid for certain instance types.
+      #
       # @return [Instance or Array] If a single instance is being created,
       #   this returns an {EC2::Instance} to represent the newly
       #   created instance.  Otherwise it returns an array of instance
@@ -268,9 +278,7 @@ module AWS
             options[:min_count] == 1
           self[resp.instances_set.first.instance_id]
         else
-          resp.instances_set.map do |i|
-            self[i.instance_id]
-          end
+          resp[:instances_set].map {|i| self[i[:instance_id]] }
         end
       end
 

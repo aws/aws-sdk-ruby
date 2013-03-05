@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -63,6 +63,7 @@ module AWS
 
         it 'returns a rule with the expiration days' do
           lifecycle.add_rule('prefix', 10).expiration_days.should == 10
+          lifecycle.add_rule('prefix', 10).expiration_time.should == 10
         end
 
         it 'returns a rule with a auto-generated uuid' do
@@ -85,6 +86,23 @@ module AWS
           rule.status.should == 'Disabled'
           rule.disabled?.should == true
           rule.enabled?.should == false
+        end
+
+        it 'accepts a date for expiration time' do
+          time = Time.now.utc
+          rule = lifecycle.add_rule('prefix', :expiration_time => time)
+          rule.expiration_time.should == Date.parse(time.to_s)
+        end
+
+        it 'accepts a date for Glacier transition time' do
+          time = Time.now.utc
+          rule = lifecycle.add_rule('prefix', :glacier_transition_time => time)
+          rule.glacier_transition_time.should == Date.parse(time.to_s)
+        end
+
+        it 'accepts days for Glacier transition time' do
+          rule = lifecycle.add_rule('prefix', :glacier_transition_time => 5)
+          rule.glacier_transition_time.should == 5
         end
 
       end
@@ -114,7 +132,7 @@ module AWS
       context '#update' do
 
         it 'persists the current rule set to s3' do
-            xml = <<-XML.strip
+            xml = <<-XML.xml_cleanup
 <LifecycleConfiguration>
   <Rule>
     <ID>#{uuid}</ID>
@@ -123,6 +141,32 @@ module AWS
     <Expiration>
       <Days>10</Days>
     </Expiration>
+  </Rule>
+  <Rule>
+    <ID>expire-date</ID>
+    <Prefix>foo/bar1</Prefix>
+    <Status>Enabled</Status>
+    <Expiration>
+      <Date>2013-01-03T00:00:00Z</Date>
+    </Expiration>
+  </Rule>
+  <Rule>
+    <ID>glacier-days</ID>
+    <Prefix>foo/bar2</Prefix>
+    <Status>Enabled</Status>
+    <Transition>
+      <StorageClass>GLACIER</StorageClass>
+      <Days>15</Days>
+    </Transition>
+  </Rule>
+  <Rule>
+    <ID>glacier-date</ID>
+    <Prefix>foo/bar3</Prefix>
+    <Status>Enabled</Status>
+    <Transition>
+      <StorageClass>GLACIER</StorageClass>
+      <Date>2013-01-03T00:00:00Z</Date>
+    </Transition>
   </Rule>
   <Rule>
     <ID>abc-xyz</ID>
@@ -135,18 +179,23 @@ module AWS
 </LifecycleConfiguration>
             XML
 
-          client.should_receive(:set_bucket_lifecycle_configuration).with(
-            :bucket_name => bucket.name,
-            :lifecycle_configuration => xml)
+          client.should_receive(:set_bucket_lifecycle_configuration) do |hash|
+            hash[:bucket_name].should eq(bucket.name)
+            hash[:lifecycle_configuration].xml_cleanup.should eq(xml)
+          end
 
+          time = DateTime.new(2013, 01, 03)
           lifecycle.add_rule 'foo/bar', 10
+          lifecycle.add_rule 'foo/bar1', :id => 'expire-date', :expiration_time => time
+          lifecycle.add_rule 'foo/bar2', :id => 'glacier-days', :glacier_transition_time => 15
+          lifecycle.add_rule 'foo/bar3', :id => 'glacier-date', :glacier_transition_time => time
           lifecycle.add_rule 'bar/foo', 11, :id => 'abc-xyz', :disabled => true
           lifecycle.update
 
         end
 
         it 'can be called in block form' do
-            xml = <<-XML.strip
+            xml = <<-XML.xml_cleanup
 <LifecycleConfiguration>
   <Rule>
     <ID>#{uuid}</ID>
@@ -167,9 +216,10 @@ module AWS
 </LifecycleConfiguration>
             XML
 
-          client.should_receive(:set_bucket_lifecycle_configuration).with(
-            :bucket_name => bucket.name,
-            :lifecycle_configuration => xml)
+          client.should_receive(:set_bucket_lifecycle_configuration) do |hash|
+            hash[:bucket_name].should eq(bucket.name)
+            hash[:lifecycle_configuration].xml_cleanup.should eq(xml)
+          end
 
           lifecycle.update do
             add_rule 'foo/bar', 10

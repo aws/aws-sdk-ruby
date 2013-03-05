@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -98,7 +98,7 @@ module AWS
   #   end
   #
   #   # enumerate at most 20 objects with the given prefix
-  #   bucket.objects.with_prefix('photos/').each(:limit => 20).each do |photo|
+  #   bucket.objects.with_prefix('photos/').each(:limit => 20) do |photo|
   #     puts photo.key
   #   end
   #
@@ -113,9 +113,12 @@ module AWS
       autoload :ACLOptions,                   'acl_options'
       autoload :Bucket,                       'bucket'
       autoload :BucketCollection,             'bucket_collection'
+      autoload :BucketTagCollection,          'bucket_tag_collection'
       autoload :BucketLifecycleConfiguration, 'bucket_lifecycle_configuration'
       autoload :BucketVersionCollection,      'bucket_version_collection'
       autoload :Client,                       'client'
+      autoload :CORSRule,                     'cors_rule'
+      autoload :CORSRuleCollection,           'cors_rule_collection'
       autoload :DataOptions,                  'data_options'
       autoload :EncryptionUtils,              'encryption_utils'
       autoload :CipherIO,                     'cipher_io'
@@ -137,6 +140,7 @@ module AWS
       autoload :Tree,                         'tree'
       autoload :UploadedPart,                 'uploaded_part'
       autoload :UploadedPartCollection,       'uploaded_part_collection'
+      autoload :WebsiteConfiguration,         'website_configuration'
     end
 
     include Core::ServiceInterface

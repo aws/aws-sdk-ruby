@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -71,12 +71,13 @@ Then /^the auto scaling group should have the options I created it with$/ do
     if key == :availability_zones
       got.sort_by(&:name).should == expected.sort_by(&:name)
     elsif key == :tags
-      got.should == expected.collect{|tag| 
+      got.should eq(expected.collect{|tag|
         tag[:resource_type] = 'auto-scaling-group'
         tag[:resource_id] = @group_name
         tag[:propagate_at_launch] == true unless tag.key?(:propagate_at_launch)
+        tag[:value] = nil unless tag[:value]
         tag
-      }
+      })
       got.each{|tag| tag.resource.should == @auto_scaling_group }
     else
       got.should == expected

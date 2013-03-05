@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -67,6 +67,33 @@ module AWS
     #
     # See {ObjectCollection} and {S3Object} for more information on working
     # with objects.
+    #
+    # = Website Configuration
+    #
+    # It is easy to enable website hosting for a bucket.
+    #
+    #   bucket.configure_website
+    #
+    # You can specify the index and error documents by passing a block.
+    # If your bucket is already configured as a website, the current
+    # configuration will be yielded.  If you bucket it not currently
+    # configured as a website, a new configuration will be yielded
+    # with default values.
+    #
+    #   bucket.configure_website do |cfg|
+    #     cfg.index_document_suffix = 'index.html'
+    #     cfg.error_document_key = 'error.html'
+    #   end
+    #
+    # You can disable website hosting two ways:
+    #
+    #   bucket.remove_website_configuration
+    #   bucket.website_configuration = nil
+    #
+    # You can use {#website_configuration=} to copy a website configuration
+    # from one bucket to another.
+    #
+    #   bucket.website_configuration = other_bucket.website_configuration
     #
     # = Bucket Policies and ACLs
     #
@@ -225,27 +252,189 @@ module AWS
         versions.first ? false : true
       end
 
-      # @return [String,nil] Returns the location constraint for a bucket 
+      # @return [String,nil] Returns the location constraint for a bucket
       #   (if it has one), nil otherwise.
       def location_constraint
         client.get_bucket_location(:bucket_name => name).location_constraint
       end
 
-      # Enables versioning on this bucket. 
-      # @return [nil]
-      def enable_versioning
-        client.set_bucket_versioning(
-          :bucket_name => @name,
-          :state => :enabled)
+      # Configure the current bucket as a website.
+      #
+      #   bucket.configure_website
+      #
+      # If you pass a block, the website configuration object
+      # will be yielded.  You can modify it before it is saved.
+      #
+      #   bucket.configure_website do |cfg|
+      #     cfg.index_document_suffix = 'index.html'
+      #     cfg.error_document_key = 'error.html'
+      #   end
+      #
+      # If the bucket already has a website configuration, it will be loaded
+      # and yielded.  This makes it possible to modify an existing
+      # configuration.
+      #
+      #   # only rename the error document
+      #   bucket.configure_website do |cfg|
+      #     cfg.error_document_key = 'oops.html'
+      #   end
+      #
+      # @yieldparam [WebsiteConfiguration] website_config
+      # @return [WebsiteConfiguration]
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      # @see #website?
+      def configure_website &block
+        website_config = self.website_configuration
+        website_config ||= WebsiteConfiguration.new
+        yield(website_config) if block_given?
+        self.website_configuration = website_config
+      end
+
+      # Returns the bucket website configuration. Returns +nil+ if the bucket
+      # is not configured as a website.
+      # @return [WebsiteConfiguration,nil]
+      # @see #configure_website
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      # @see #website?
+      def website_configuration
+        resp = client.get_bucket_website(:bucket_name => name)
+        WebsiteConfiguration.new(resp.data)
+      rescue Errors::NoSuchWebsiteConfiguration
         nil
       end
 
-      # Suspends versioning on this bucket. 
+      # Sets the website configuration.  Deletes the configuration if
+      # +nil+ is passed.
+      # @param [WebsiteConfiguration,nil] website_configuration
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #remove_website_configuration
+      # @see #website?
+      def website_configuration= website_configuration
+        if website_configuration
+          client_opts = website_configuration.to_hash
+          client_opts[:bucket_name] = name
+          client.put_bucket_website(client_opts)
+        else
+          remove_website_configuration
+        end
+      end
+
+      # @return [nil] Deletes the bucket website configuration.
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #website?
+      def remove_website_configuration
+        client.delete_bucket_website(:bucket_name => name)
+        @website_configuration = false
+        nil
+      end
+
+      # @return [Boolean] Returns +true+ if this bucket is configured as
+      #   a website.
+      # @see #configure_website
+      # @see #website_configuration
+      # @see #website_configuration=
+      # @see #remove_website_configuration
+      def website?
+        !!website_configuration
+      end
+
+      # Returns the tags for this bucket.
+      #
+      #   tags = bucket.tags
+      #   #=> <AWS::S3::BucketTagCollection>
+      #
+      #   # adds a tag to the bucket
+      #   tags['foo'] = 'abc'
+      #
+      #   # replaces all tags
+      #   tags.set('new' => 'tags')
+      #
+      #   # removes all tags from the bucket
+      #   tags.clear
+      #
+      #   # returns tags as a hash
+      #   tags.to_h
+      #
+      # @return [BucketTagCollection] Returns a collection that represents
+      #   the tags for this bucket.
+      #
+      def tags
+        BucketTagCollection.new(self)
+      end
+
+      # Sets the tags for this bucket.
+      #
+      #   bucket.tags = { 'contents' => 'photots' }
+      #
+      # You can remove all tags for the bucket by passing an empty
+      # hash or +nil+.
+      #
+      #   bucket.tags = nil # {} also deletes all tags
+      #   bucket.tags
+      #   #=> {}
+      #
+      # @param [Hash,nil] tags The tags to set on this bucket.
+      #
+      def tags= tags
+        self.tags.set(tags)
+      end
+
+      # @return [CORSRuleCollection] Returns a collection that can be
+      #   used to manage (add, edit and delete) CORS rules for this bucket.
+      def cors
+        CORSRuleCollection.new(self)
+      end
+
+      # Sets the bucket CORS rules.
+      # @param (see CORSRuleCollection#set)
+      # @see CORSRuleCollection#set
+      def cors= *rules
+        self.cors.set(*rules)
+      end
+
+      # Enables versioning on this bucket.
+      #
+      # @option opts [String] :mfa_delete Set to 'Enabled' or 'Disabled'
+      #   to control the state of MFA delete on the bucket versioning.
+      #   Setting this option requires the :mfa option to also be set.
+      #
+      # @option opts [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
       # @return [nil]
-      def suspend_versioning
+      def enable_versioning(opts = {})
         client.set_bucket_versioning(
           :bucket_name => @name,
-          :state => :suspended)
+          :state       => :enabled,
+          :mfa_delete  => opts[:mfa_delete],
+          :mfa         => opts[:mfa])
+        nil
+      end
+
+      # Suspends versioning on this bucket.
+      #
+      # @option opts [String] :mfa_delete Set to 'Enabled' or 'Disabled'
+      #   to control the state of MFA delete on the bucket versioning.
+      #   Setting this option requires the :mfa option to also be set.
+      #
+      # @option opts [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
+      # @return [nil]
+      def suspend_versioning(opts = {})
+        client.set_bucket_versioning(
+          :bucket_name => @name,
+          :state       => :suspended,
+          :mfa_delete  => opts[:mfa_delete],
+          :mfa         => opts[:mfa])
         nil
       end
 
@@ -316,7 +505,7 @@ module AWS
         begin
           versioned? # makes a get bucket request without listing contents
                      # raises a client error if the bucket doesn't exist or
-                     # if you don't have permission to get the bucket 
+                     # if you don't have permission to get the bucket
                      # versioning status.
           true
         rescue Errors::NoSuchBucket => e
@@ -326,7 +515,7 @@ module AWS
         end
       end
 
-      # @return [ObjectCollection] Represents all objects(keys) in 
+      # @return [ObjectCollection] Represents all objects(keys) in
       #   this bucket.
       def objects
         ObjectCollection.new(self)
@@ -482,11 +671,11 @@ module AWS
       #
       #   bucket.lifecycle_configuration = other_bucket.lifecycle_configuration
       #
-      # If you call this method, passing nil, the lifecycle configuration 
+      # If you call this method, passing nil, the lifecycle configuration
       # for this bucket will be deleted.
       #
-      # @param [String,Object] config You can pass an xml string or any 
-      #   other object that responds to #to_xml (e.g. 
+      # @param [String,Object] config You can pass an xml string or any
+      #   other object that responds to #to_xml (e.g.
       #   BucketLifecycleConfiguration).
       #
       # @return [nil]
@@ -502,7 +691,7 @@ module AWS
           @lifecycle_cfg = BucketLifecycleConfiguration.new(self, :empty => true)
 
         else
-        
+
           xml = config.is_a?(String) ? config : config.to_xml
 
           client_opts = {}

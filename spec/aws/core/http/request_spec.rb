@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -226,6 +226,23 @@ module AWS::Core
           r.body_stream = io
           r.body.should eq('abc')
           r.body.should eq('abc') # it rewinds the stream when needed
+
+        end
+
+        it 'populates content-length when you set the body' do
+          r = Request.new
+          r.body = 'abc'
+          r.headers['content-length'].should eq(3)
+        end
+
+        it 'sets the content length to the body bytesize' do
+
+          string = double('body-string')
+          string.should_receive(:bytesize).and_return(4)
+
+          r = Request.new
+          r.body = string
+          r.headers['content-length'].should eq(4)
 
         end
 

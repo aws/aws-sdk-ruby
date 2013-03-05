@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,7 +35,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # Or you can set them directly on the AWS::AutoSclaing interface:
+  # Or you can set them directly on the AWS::AutoScaling interface:
   #
   #   auto_scaling = AWS::AutoScaling.new(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
@@ -65,6 +65,8 @@ module AWS
   #     :min_size => 1,
   #     :max_size => 4)
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level AutoScaling client object
   class AutoScaling
 
     AWS.register_autoloads(self, 'aws/auto_scaling') do
@@ -138,7 +140,7 @@ module AWS
       resp.auto_scaling_notification_types
     end
 
-    # @return [Array<String>] Returns the list of valid adjustmet types.
+    # @return [Array<String>] Returns the list of valid adjustment types.
     def adjustment_types
       client.describe_adjustment_types.adjustment_types.map(&:adjustment_type)
     end

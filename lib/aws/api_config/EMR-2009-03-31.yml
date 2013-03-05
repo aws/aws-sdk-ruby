@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -205,6 +205,8 @@
                       member:
                         :rename: :supported_products
                         :list: true
+                  VisibleToAllUsers:
+                    :type: :boolean
 - :name: ModifyInstanceGroups
   :method: :modify_instance_groups
   :inputs:
@@ -319,6 +321,10 @@
     SupportedProducts:
     - :membered_list:
       - :string
+    VisibleToAllUsers:
+    - :boolean
+    JobFlowRole:
+    - :string
   :outputs:
     :children:
       RunJobFlowResult:
@@ -336,6 +342,20 @@
   :outputs:
     :children:
       SetTerminationProtectionResult:
+        :ignore: true
+- :name: SetVisibleToAllUsers
+  :method: :set_visible_to_all_users
+  :inputs:
+    JobFlowIds:
+    - :membered_list:
+      - :string
+    - :required
+    VisibleToAllUsers:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      SetVisibleToAllUsersResult:
         :ignore: true
 - :name: TerminateJobFlows
   :method: :terminate_job_flows

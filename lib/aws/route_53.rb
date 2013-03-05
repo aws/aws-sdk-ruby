@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -57,15 +57,31 @@ module AWS
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level Route53 client object
   class Route53
 
     AWS.register_autoloads(self, 'aws/route_53') do
-      autoload :Client,  'client'
-      autoload :Errors,  'errors'
+      autoload :ChangeRequest, 'change_batch'
+      autoload :ChangeBatch, 'change_batch'
+      autoload :ChangeInfo, 'change_info'
+      autoload :Client, 'client'
+      autoload :CreateRequest, 'change_batch'
+      autoload :DeleteRequest, 'change_batch'
+      autoload :Errors, 'errors'
+      autoload :HostedZone, 'hosted_zone'
+      autoload :HostedZoneCollection, 'hosted_zone_collection'
       autoload :Request, 'request'
+      autoload :ResourceRecordSet, 'resource_record_set'
+      autoload :ResourceRecordSetCollection, 'resource_record_set_collection'
     end
 
     include Core::ServiceInterface
+
+    # @return [HostedZoneCollection]
+    def hosted_zones
+      HostedZoneCollection.new(:config => config)
+    end
 
   end
 end

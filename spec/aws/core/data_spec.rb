@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -37,6 +37,26 @@ module AWS::Core
 
     let(:data) { Data.new(raw_data) }
 
+    context '#dup' do
+
+      it 'dup returns a new core data object with duped internals' do
+        hash = data.nested
+        copy = hash.dup
+        copy.delete(:string)
+        hash.count.should eq(5)
+        copy.count.should eq(4)
+      end
+
+      it 'dup returns a new core data list with duped internals' do
+        array = data.nested.simple_array
+        copy = array.dup
+        copy.shift
+        array.count.should eq(3)
+        copy.count.should eq(2)
+      end
+
+    end
+
     context '#kind_of?' do
 
       it 'returns true for Hash' do
@@ -69,7 +89,7 @@ module AWS::Core
       end
 
       it 'returns hashes inside arrays as response data objects' do
-        array = data[:nested][:complex_array]  
+        array = data[:nested][:complex_array]
         array[0].should be_a(Data)
         array[0][:key].should == 'value1'
         array[1][:key].should == 'value2'
@@ -103,7 +123,7 @@ module AWS::Core
           lambda {
             # last index is 1 in 2nd array, 2 is out of bounds
             data.nested.arrays[1]['key']
-          }.should raise_error(TypeError, /can't convert String into Integer/)
+          }.should raise_error(TypeError, /String into Integer/)
         end
 
         it 'lets you know when you treat an array like a hash via method missing' do
@@ -203,7 +223,7 @@ module AWS::Core
     end
 
     context '#inject' do
-      
+
       # this was broken in 1.9.2
       it 'works with inject on lists of hashes' do
         data = Data.new(:tags => [

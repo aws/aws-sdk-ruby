@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,7 +29,7 @@ module AWS
     #     item.attributes.values_at(:title, :description)
     #
     # @example Retrieving all attributes in hash form
-    #   item.attributes.to_h
+    #   item.attributes.to_hash
     #
     # @example Replacing the value of an attribute
     #   item.attributes[:title] = "Automobiles"
@@ -51,7 +51,7 @@ module AWS
     #   end
     #
     # @example Returning overwritten values
-    #   item.attributes.to_h      # => { "foo" => "bar",
+    #   item.attributes.to_hash      # => { "foo" => "bar",
     #                                    "name" => "fred" }
     #   item.attributes.set(
     #     { "foo" => "baz" },
@@ -84,11 +84,11 @@ module AWS
       #
       #   attributes.each { |name, value| puts "#{name} = #{value}" }
       #
-      # @param (see #to_h)
+      # @param (see #to_hash)
       #
-      # @option options (see #to_h)
+      # @option options (see #to_hash)
       def each(options = {}, &block)
-        to_h(options).each(&block)
+        to_hash(options).each(&block)
       end
 
       # @yieldparam [String] name Each attribute name.
@@ -422,9 +422,10 @@ module AWS
       # @option options [Boolean] :consistent_read If set to true,
       #   then a consistent read is issued, otherwise an eventually
       #   consistent read is used.
-      def to_h options = {}
+      def to_hash options = {}
         values_from_response_hash(get_item(options))
       end
+      alias_method :to_h, :to_hash
 
       private
       def item_key_options(options = {})

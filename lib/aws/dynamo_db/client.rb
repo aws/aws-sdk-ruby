@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -10,6 +10,8 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+
+require 'zlib'
 
 module AWS
   class DynamoDB
@@ -23,10 +25,10 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
 
-      ## client methods ##
+      # client methods #
 
+      # @!method batch_get_item(options = {})
       # Calls the BatchGetItem API operation.
-      # @method batch_get_item(options = {})
       # @param [Hash] options
       #   * +:request_items+ - *required* - (Hash<String,Hash>)
       #     * +:keys+ - *required* - (Array<Hash>)
@@ -64,6 +66,7 @@ module AWS
       #         * +:ns+ - (Array<String>) A set of numbers.
       #         * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:attributes_to_get+ - (Array<String>)
+      #     * +:consistent_read+ - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -93,9 +96,10 @@ module AWS
       #         * +NS+ - (Array<String>)
       #         * +BS+ - (Array<Blob>)
       #     * +AttributesToGet+ - (Array<String>)
+      #     * +ConsistentRead+ - (Boolean)
 
+      # @!method batch_write_item(options = {})
       # Calls the BatchWriteItem API operation.
-      # @method batch_write_item(options = {})
       # @param [Hash] options
       #   * +:request_items+ - *required* - (Hash<String,Array<Hash>>) A map of
       #     table name to list-of-write-requests. Used as input to the
@@ -181,8 +185,8 @@ module AWS
       #             * +NS+ - (Array<String>)
       #             * +BS+ - (Array<Blob>)
 
+      # @!method create_table(options = {})
       # Calls the CreateTable API operation.
-      # @method create_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to create. Allowed characters are a-z, A-Z, 0-9, _
@@ -237,8 +241,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method delete_item(options = {})
       # Calls the DeleteItem API operation.
-      # @method delete_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to delete an item. Allowed characters are a-z, A-Z,
@@ -307,8 +311,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method delete_table(options = {})
       # Calls the DeleteTable API operation.
-      # @method delete_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to delete. Allowed characters are a-z, A-Z, 0-9, _
@@ -335,8 +339,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method describe_table(options = {})
       # Calls the DescribeTable API operation.
-      # @method describe_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to describe. Allowed characters are a-z, A-Z, 0-9, _
@@ -363,8 +367,8 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
+      # @!method get_item(options = {})
       # Calls the GetItem API operation.
-      # @method get_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to get an item. Allowed characters are a-z, A-Z,
@@ -417,8 +421,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method list_tables(options = {})
       # Calls the ListTables API operation.
-      # @method list_tables(options = {})
       # @param [Hash] options
       #   * +:exclusive_start_table_name+ - (String) The name of the table that
       #     starts the list. If you already ran a ListTables operation and
@@ -431,8 +435,8 @@ module AWS
       #   * +TableNames+ - (Array<String>)
       #   * +LastEvaluatedTableName+ - (String)
 
+      # @!method put_item(options = {})
       # Calls the PutItem API operation.
-      # @method put_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to put an item. Allowed characters are a-z, A-Z,
@@ -480,8 +484,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method query(options = {})
       # Calls the Query API operation.
-      # @method query(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to query. Allowed characters are a-z, A-Z, 0-9, _
@@ -603,8 +607,8 @@ module AWS
       #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method scan(options = {})
       # Calls the Scan API operation.
-      # @method scan(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to scan. Allowed characters are a-z, A-Z, 0-9, _
@@ -707,8 +711,8 @@ module AWS
       #       * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method update_item(options = {})
       # Calls the UpdateItem API operation.
-      # @method update_item(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table in
       #     which you want to update an item. Allowed characters are a-z, A-Z,
@@ -792,8 +796,8 @@ module AWS
       #     * +BS+ - (Array<Blob>)
       #   * +ConsumedCapacityUnits+ - (Numeric)
 
+      # @!method update_table(options = {})
       # Calls the UpdateTable API operation.
-      # @method update_table(options = {})
       # @param [Hash] options
       #   * +:table_name+ - *required* - (String) The name of the table you
       #     want to update. Allowed characters are a-z, A-Z, 0-9, _
@@ -830,21 +834,28 @@ module AWS
       #     * +TableSizeBytes+ - (Integer)
       #     * +ItemCount+ - (Integer)
 
-      ## end client methods ##
+      # end client methods #
+
+      define_client_methods('2011-12-05')
 
       protected
 
       def extract_error_details response
         if response.http_response.status == 413
           ['RequestEntityTooLarge', 'Request entity too large']
+        elsif crc32_is_valid?(response) == false
+          ['CRC32CheckFailed', 'CRC32 integrity check failed']
         else
           super
         end
       end
 
       def retryable_error? response
-        if response.error.is_a?(Errors::ProvisionedThroughputExceededException)
+        case response.error
+        when Errors::ProvisionedThroughputExceededException
           config.dynamo_db_retry_throughput_errors?
+        when Errors::CRC32CheckFailed
+          true
         else
           super
         end
@@ -871,7 +882,22 @@ module AWS
 
       end
 
-      define_client_methods('2011-12-05')
+      private
+
+      # @return [Boolean] whether the CRC32 response header matches the body.
+      # @return [nil] if no CRC32 header is present or we are not verifying CRC32
+      def crc32_is_valid? response
+        return nil unless config.dynamo_db_crc32
+        if crcs = response.http_response.headers['x-amz-crc32']
+          crcs[0].to_i == calculate_crc32(response)
+        else
+          nil
+        end
+      end
+
+      def calculate_crc32 response
+        Zlib.crc32(response.http_response.body)
+      end
 
     end
   end

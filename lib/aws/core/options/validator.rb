@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -45,7 +45,7 @@ module AWS
           rules.each_pair do |opt_name, opt_rules|
             if opt_rules[:required]
               unless request_options.key?(opt_name)
-                raise ArgumentError, "missing required option :#{opt_name}"
+                raise ArgumentError, "missing required option #{opt_name.inspect}"
               end
             end
           end
@@ -79,6 +79,17 @@ module AWS
             format_error('hash value', opt_name, context)
           end
           validate!(value.to_hash, rules[:members])
+        end
+
+        def validate_map rules, value, opt_name, context = nil
+          unless value.respond_to?(:to_hash)
+            format_error('hash value', opt_name, context)
+          end
+          value.inject({}) do |values,(k,v)|
+            context = "member #{k.inspect} of :#{opt_name}"
+            values[k] = validate_value(rules[:members], v, opt_name, context)
+            values
+          end
         end
 
         # Ensures the value is an array (or at least enumerable) and
@@ -127,6 +138,10 @@ module AWS
         def validate_timestamp rules, value, opt_name, context = nil
           # TODO : add validation to timestamps values
           value.to_s
+        end
+
+        def validate_blob rules, value, opt_name, context = nil
+          value
         end
 
         def format_error description, opt_name, context

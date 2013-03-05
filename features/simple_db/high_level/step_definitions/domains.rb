@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -10,6 +10,14 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+#
+
+def create_domain_high_level name = nil
+  @domain_name = name || "ruby-integration-test-#{Time.now.to_i}"
+  @endpoint = @sdb.client.config.simple_db_endpoint
+  @domain = @sdb.domains.create(@domain_name)
+  @sdb_domains_created << [@domain_name, @endpoint]
+end
 
 When /^I create a domain named "([^"]*)"$/ do |domain_name|
   create_domain_high_level(domain_name)

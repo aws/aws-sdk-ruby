@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -77,6 +77,22 @@ module AWS
       let(:attribute) { :currency_code }
       let(:response_field) { attribute }
       let(:response_value) { "USD" }
+      let(:translated_value) { response_value }
+      it_should_behave_like "ec2 resource attribute accessor (describe call)"
+    end
+
+    context '#recurring_charges' do
+      let(:attribute) { :recurring_charges }
+      let(:response_field) { attribute }
+      let(:response_value) { "" }
+      let(:translated_value) { response_value }
+      it_should_behave_like "ec2 resource attribute accessor (describe call)"
+    end
+
+    context '#offering_type' do
+      let(:attribute) { :offering_type }
+      let(:response_field) { attribute }
+      let(:response_value) { "Light Utilization" }
       let(:translated_value) { response_value }
       it_should_behave_like "ec2 resource attribute accessor (describe call)"
     end

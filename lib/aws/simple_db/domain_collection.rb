@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -46,7 +46,7 @@ module AWS
       # @note Creating a domain in SimpleDB is an idempotent operation; 
       #   running it multiple times using the same domain name will not 
       #   result in an error.
-      # @note You can create up to 100 domains per account.
+      # @note You can create up to 250 domains per account.
       # @param [String] domain_name 
       # @return [Domain] Returns a new domain with the given name.
       def create(domain_name)

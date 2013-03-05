@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,6 +14,32 @@
 ---
 :api_version: '2011-06-15'
 :operations:
+- :name: AssumeRole
+  :method: :assume_role
+  :inputs:
+    RoleArn:
+    - :string
+    - :required
+    RoleSessionName:
+    - :string
+    - :required
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+    ExternalId:
+    - :string
+  :outputs:
+    :children:
+      AssumeRoleResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
 - :name: GetFederationToken
   :method: :get_federation_token
   :inputs:

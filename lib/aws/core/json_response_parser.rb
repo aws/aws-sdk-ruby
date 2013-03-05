@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -44,8 +44,7 @@ module AWS
       def translate values, rules = @rules
         rules.inject({}) do |data,(key,rule)|
           if values.key?(key)
-            #data.merge(rule[:symbol] => translate_value(values[key], rule))
-            data.merge(key => translate_value(values[key], rule))
+            data.merge(rule[:sym] || key => translate_value(values[key], rule))
           else
             data
           end
@@ -65,7 +64,6 @@ module AWS
       def translate_value value, rule
         case
         when value.is_a?(Array) then value.map{|v| translate_value(v, rule) }
-        #when rule[:list] then value.map{|v| translate_value(v, rule) }
         when rule[:type] == :hash then translate_hash(value, rule)
         when rule[:type] == :map then translate_map(value, rule)
         when rule[:type] == :blob then Base64.decode64(value)

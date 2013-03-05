@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -352,6 +352,22 @@ module AWS
             :job_flow_ids => [job_flow_id])
 
           job_flow.set_termination_protection(state)
+
+        end
+
+      end
+
+      context '#set_visible_to_all_users' do
+
+        it 'calls #set_visible_to_all_users on the client' do
+
+          state = double('state')
+
+          client.should_receive(:set_visible_to_all_users).with(
+              :visible_to_all_users => state,
+              :job_flow_ids => [job_flow_id])
+
+          job_flow.set_visible_to_all_users(state)
 
         end
 

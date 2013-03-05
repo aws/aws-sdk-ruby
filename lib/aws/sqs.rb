@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -53,6 +53,8 @@ module AWS
   # See the {Queue} class for more information on how to send and
   # receive messages.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SQS client object
   class SQS
 
     AWS.register_autoloads(self) do

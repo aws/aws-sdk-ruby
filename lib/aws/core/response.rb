@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -120,18 +120,6 @@ module AWS
       # @return [Boolean] Returns true if there is no response error.
       def successful?
         error.nil?
-      end
-
-      # @return [Boolean] Returns true if the http request was throttled
-      #   by AWS.
-      def throttled?
-        if !successful? and http_response.body
-          error = XML::Parser.new.parse(http_response.body)
-          error = error[:error] if error[:error]
-          error[:code] == "Throttling"
-        else
-          false
-        end
       end
 
       # @return [Boolean] Returns +true+ if the http request failed due to

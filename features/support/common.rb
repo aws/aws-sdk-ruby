@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,21 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'simplecov'
-SimpleCov.start
+begin
+  require 'simplecov'
+  SimpleCov.start
+rescue LoadError
+end if ENV['COVERAGE']
 
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
-require 'aws'
-
-require 'mocha'
-include Mocha::API
-require 'net/http'
-require 'uri'
+require 'aws-sdk'
 require 'yaml'
 
-
-# find a config file
+# try to find a config file
 dir = Dir.getwd
 while dir != "/" and
     !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
@@ -34,8 +31,9 @@ end
 test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
 test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
   File.exists?(test_config_file)
-raise "No config file" unless File.exists?(test_config_file)
-test_config = YAML.load(File.read(test_config_file))
+if File.exists?(test_config_file)
+  test_config = YAML.load(File.read(test_config_file))
+end
 
 if ENV['SLOW'] == 'true'
   puts "setup slow stuff"
@@ -145,40 +143,6 @@ Around do |scenario, block|
   end
 end
 
-## helpers for creating domains / buckets in a way that they will get cleaned up
-
-def create_bucket_low_level options = {}
-  options[:bucket_name] ||= "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
-  @bucket_name = options[:bucket_name]
-  @endpoint = options[:endpoint] || @s3_client.config.s3_endpoint
-  @result = @s3_client.create_bucket(options)
-  @buckets_created << [@bucket_name, @endpoint]
-  sleep 0.5 # Dumb insurance against eventual consistency
-end
-
-def create_bucket_high_level options = {}
-  @bucket_name = options.delete(:name) || "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
-  @endpoint = @s3.client.config.s3_endpoint
-  @bucket = @s3.buckets.create(@bucket_name, options)
-  @buckets_created << [@bucket_name, @endpoint]
-  @bucket
-end
-
-def create_domain_low_level options = {}
-  @domain_name = options[:domain_name]
-  @endpoint = options.delete(:endpoint) || @sdb_client.config.simple_db_endpoint
-  @response = @sdb_client.with_options(:simple_db_endpoint => @endpoint).
-    create_domain(options)
-  @sdb_domains_created << [@domain_name, @endpoint]
-end
-
-def create_domain_high_level name = nil
-  @domain_name = name || "ruby-integration-test-#{Time.now.to_i}"
-  @endpoint = @sdb.client.config.simple_db_endpoint
-  @domain = @sdb.domains.create(@domain_name)
-  @sdb_domains_created << [@domain_name, @endpoint]
-end
-
 def eventually(seconds = 60*5)
   sleeps = [1]
   while sleeps.inject(0) { |sum, i| sum + i } < seconds
@@ -210,4 +174,8 @@ def tempfile(contents)
     f.flush
     yield(f)
   end
+end
+
+def unique_name prefix
+  prefix == '' ? '' : "#{prefix}-#{Time.now.to_i}"
 end

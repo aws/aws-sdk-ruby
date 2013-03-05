@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -343,3 +343,42 @@ Then /^the object "([^"]*)" should have the data "([^"]*)" in the new bucket$/ d
   end
 end
 
+When /^I create a pre\-signed https "([^"]*)" uri$/ do |http_method|
+  @presigned_uri = @object.url_for(http_method) # defaults to https
+end
+
+When /^I make a https get request to the presigned uri$/ do
+  require 'net/http'
+  require 'net/https'
+  http = Net::HTTP.new(@presigned_uri.host, @presigned_uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  get = Net::HTTP::Get.new(@presigned_uri.request_uri)
+  @response = http.request(get).body
+end
+
+Then /^the returned value should "([^"]*)"$/ do |value|
+  @response.should eq(value)
+end
+
+When /^I create a pre\-signed http "([^"]*)" uri$/ do |http_method|
+  @presigned_uri = @object.url_for(http_method, :secure => false)
+end
+
+When /^I make a http get request to the presigned uri$/ do
+  require 'net/http'
+  @response = Net::HTTP.get(@presigned_uri)
+end
+
+When /^I create a pre\-signed "([^"]*)" uri using the session credentials$/ do |http_method|
+  s3 = AWS::S3.new(@session.credentials)
+  @presigned_uri = s3.buckets[@bucket.name].objects[@object.key].url_for(http_method)
+end
+
+Given /^I try to restore the object$/ do
+  begin
+    @object.restore
+  rescue => e
+    @exception = e
+  end
+end

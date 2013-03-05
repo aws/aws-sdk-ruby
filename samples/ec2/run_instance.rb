@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -59,7 +59,7 @@ begin
   # launch the instance
   instance = image.run_instance(:key_pair => key_pair,
                                 :security_groups => group)
-  sleep 1 until instance.status != :pending
+  sleep 10 while instance.status == :pending
   puts "Launched instance #{instance.id}, status: #{instance.status}"
 
   exit 1 unless instance.status == :running

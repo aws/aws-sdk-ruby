@@ -1,5 +1,5 @@
 --no-private
---files NOTICE.txt
---files LICENSE.txt
---exclude '~$'
 --title 'AWS SDK for Ruby'
+--template-path doc-src/templates
+-
+LICENSE.txt

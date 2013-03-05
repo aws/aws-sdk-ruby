@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,12 +33,12 @@ module AWS
       # You must specify an Auto Scaling group.  This can be implicit
       # or explicit:
       #
-      #   # given explicity
-      #   auto_scaling.secheduled_actions.create('action-name', :group => 'group-name')
+      #   # given explicitly
+      #   auto_scaling.scheduled_actions.create('action-name', :group => 'group-name')
       #
       #   # implied by the group
       #   group = auto_scaling.groups.first
-      #   group.secheduled_actions.create('action-name')
+      #   group.scheduled_actions.create('action-name')
       #
       # @param [String] name
       #
@@ -111,7 +111,7 @@ module AWS
       #    the results are limited to that group. If unknown scheduled 
       #    actions are requested, they are ignored with no error.
       #
-      # @option opitons [Time,String] :start_time The earliest scheduled 
+      # @option options [Time,String] :start_time The earliest scheduled
       #   start time to return. If +:scheduled_actions+ is provided, 
       #   this field will be ignored.  Should be a Time object or
       #   an iso8601 string.

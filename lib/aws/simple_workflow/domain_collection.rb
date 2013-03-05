@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # The primary interface for registerign, listing and deprecating
+    # The primary interface for registering, listing and deprecating
     # domains.
     #
     # == Creating a Domain
@@ -24,7 +24,7 @@ module AWS
     #   domain = simple_workflow.domains.create('my-domain', :none)
     #   #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
     #
-    # == Gettin a Domain
+    # == Getting a Domain
     #
     # Domains are indexed by their name.
     #
@@ -80,7 +80,7 @@ module AWS
       #   available in the results of visibility calls.
       #
       #   If you pass the symbol +:none+ then there is no expiration for
-      #   workflow execution history (effectively an infinite rention
+      #   workflow execution history (effectively an infinite retention
       #   period).
       # 
       # @param [Hash] options

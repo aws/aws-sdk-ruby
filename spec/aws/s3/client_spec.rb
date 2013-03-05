@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -87,6 +87,218 @@ module AWS
 
       end
 
+      context 'cors', :cors => true do
+
+        let(:xml) { <<-XML.strip.xml_cleanup }
+<CORSConfiguration>
+  <CORSRule>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedHeader>header-a</AllowedHeader>
+    <AllowedHeader>header-b</AllowedHeader>
+    <MaxAgeSeconds>123</MaxAgeSeconds>
+    <ExposeHeader>header-c</ExposeHeader>
+    <ExposeHeader>header-d</ExposeHeader>
+  </CORSRule>
+  <CORSRule>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedOrigin>http://example.com</AllowedOrigin>
+    <AllowedOrigin>http://foo.com</AllowedOrigin>
+  </CORSRule>
+</CORSConfiguration>
+        XML
+
+        let(:rules) {
+          [
+            {
+              :allowed_methods => %w(GET PUT),
+              :allowed_origins => %w(*),
+              :allowed_headers => %w(header-a header-b),
+              :max_age_seconds => 123,
+              :expose_headers => %w(header-c header-d),
+            },{
+              :allowed_methods => %w(POST),
+              :allowed_origins => %w(http://example.com http://foo.com),
+              :allowed_headers => [],
+              :expose_headers => [],
+            }
+          ]
+        }
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_cors' do
+
+          it 'make a put request to the cors subresource' do
+
+            request = get_request(:put_bucket_cors, {
+              :bucket_name => 'bucket-name',
+              :rules => rules,
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('cors')
+            request.headers['content-md5'].should eq(client.send(:md5, request.body))
+            request.body.xml_cleanup.should eq(xml)
+
+          end
+
+        end
+
+        context '#get_bucket_cors' do
+
+          it 'make a get request to the cors subresource' do
+            req = get_request(:get_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_cors,
+              {
+                :bucket_name => 'bucket',
+              }, {
+                :status => 200,
+                :headers => {},
+                :body => xml,
+              }
+            )
+            resp.data.should eq(:rules => rules)
+          end
+
+        end
+
+        context '#delete_bucket_cors' do
+
+          it 'make a delete request to the cors subresource' do
+            req = get_request(:delete_bucket_cors, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('cors')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
+      context 'tagging', :tagging => true do
+
+        let(:xml) { <<-XML.strip }
+<Tagging>
+  <TagSet>
+    <Tag>
+      <Key>foo</Key>
+      <Value>bar</Value>
+    </Tag>
+    <Tag>
+      <Key>abc</Key>
+      <Value>xyz</Value>
+    </Tag>
+  </TagSet>
+</Tagging>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_tagging' do
+
+          it 'make a put request to the tagging subresource' do
+
+            request = get_request(:put_bucket_tagging, {
+              :bucket_name => 'bucket-name',
+              :tags => { 'foo' => 'bar', :abc => 'xyz' }, # mixed key types
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('tagging')
+
+            # the array is differently sorted on Ruby 1.8
+            unless RUBY_VERSION =~ /^1.8/
+              request.headers['content-md5'].should eq(client.send(:md5, xml))
+              request.body.should eq(xml)
+            end
+
+          end
+
+        end
+
+        context '#get_bucket_tagging' do
+
+          it 'make a get request to the tagging subresource' do
+            req = get_request(:get_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_tagging,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :tags => { 'foo' => 'bar', 'abc' => 'xyz' }
+            })
+          end
+
+        end
+
+        context '#delete_bucket_tagging' do
+
+          it 'make a delete request to the tagging subresource' do
+            req = get_request(:delete_bucket_tagging, :bucket_name => 'bucket')
+            req.http_method.should eq('DELETE')
+            req.querystring.should eq('tagging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
       shared_examples_for "an s3 http request" do |verb|
 
         it_should_behave_like "an aws http request", verb
@@ -129,6 +341,27 @@ module AWS
 
       end
 
+      shared_examples_for "accepts mfa credentials" do
+
+        it 'adds no header when mfa is nil' do
+          req_headers = nil
+          opts.delete(:mfa)
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts)
+          req_headers['x-amz-mfa'].should == nil
+        end
+
+        it 'adds a header when mfa is passed' do
+          req_headers = nil
+          client.with_http_handler do |req, resp|
+            req_headers = req.headers
+          end.send(method, opts.merge(:mfa => '123456 7890'))
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
+
+      end
+
       shared_examples_for "accepts version id" do
 
         it 'adds no param wheren version_id is nil' do
@@ -154,14 +387,14 @@ module AWS
 
         it 'defaults version ids to nil' do
           resp = client.send(method, opts)
-          resp.version_id.should be_nil
+          resp[:version_id].should be(nil)
         end
 
         it 'populates the version when present' do
           resp = client.with_http_handler do |req, resp|
             resp.headers['x-amz-version-id'] = ['foo']
           end.send(method,opts)
-          resp.version_id.should == 'foo'
+          resp[:version_id].should eq('foo')
         end
 
       end
@@ -172,7 +405,7 @@ module AWS
           response = client.with_http_handler do |req, resp|
             resp.headers['ETag'] = ['abcxyz']
           end.send(method, opts)
-          response.etag.should == 'abcxyz'
+          response[:etag].should eq('abcxyz')
         end
 
       end
@@ -925,6 +1158,18 @@ module AWS
           req_body.should match(/<Status>Suspended<\/Status>/)
         end
 
+        it 'should include the x-amz-mfa header for MFA versioning requests' do
+          req_headers = req_body = nil
+          client.with_http_handler do |req, resp|
+            req_body = req.body
+            req_headers = req.headers
+          end.set_bucket_versioning(opts.merge(:state      => :enabled,
+                                               :mfa_delete => :enabled,
+                                               :mfa        => '123456 7890'
+                                              ))
+          req_body.should match(/<MfaDelete>Enabled<\/MfaDelete>/)
+          req_headers['x-amz-mfa'].should == '123456 7890'
+        end
       end
 
       context '#get_bucket_policy' do
@@ -1073,6 +1318,22 @@ module AWS
         it_should_behave_like "an s3 http request", 'GET'
 
         it_should_behave_like "a subresource request", 'acl'
+
+        it 'should read the headers on success' do
+          r = client.with_http_handler do |req, resp|
+            resp.headers['content-type'] = ['text/plain']
+            resp.headers['content-encoding'] = ['gzip']
+            resp.headers['cache-control'] = ['max-age=1296000']
+            resp.headers['accept-ranges'] = ['bytes']
+            resp.headers['x-amz-meta-Color'] = ['red']
+            resp.headers['x-amz-meta-foo'] = 'bar'
+          end.head_object(opts)
+          r[:content_type].should eq('text/plain')
+          r[:content_encoding].should eq('gzip')
+          r[:cache_control].should eq('max-age=1296000')
+          r[:accept_ranges].should eq('bytes')
+          r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
+        end
 
       end
 
@@ -1249,14 +1510,17 @@ module AWS
           it 'should read the headers on success' do
             r = client.with_http_handler do |req, resp|
               resp.headers['content-type'] = ['text/plain']
+              resp.headers['content-encoding'] = ['gzip']
+              resp.headers['cache-control'] = ['max-age=1296000']
+              resp.headers['accept-ranges'] = ['bytes']
               resp.headers['x-amz-meta-Color'] = ['red']
               resp.headers['x-amz-meta-foo'] = 'bar'
             end.head_object(opts)
-            r.meta.should == {
-              'foo' => 'bar',
-              'Color' => 'red',
-            }
-            r.content_type.should == 'text/plain'
+            r[:content_type].should eq('text/plain')
+            r[:content_encoding].should eq('gzip')
+            r[:cache_control].should eq('max-age=1296000')
+            r[:accept_ranges].should eq('bytes')
+            r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
           end
 
           it 'should return the content-type as a string' do
@@ -1277,8 +1541,8 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-expiration'] = nil
             end.head_object(opts)
-            r.expiration_date.should == nil
-            r.expiration_rule_id.should == nil
+            r[:expiration_date].should be(nil)
+            r[:expiration_rule_id].should be(nil)
           end
 
           it 'parses x-amz-expiration headers' do
@@ -1290,6 +1554,38 @@ module AWS
             r.expiration_date.to_s.should == "2012-01-27T00:00:00+00:00"
             r.expiration_rule_id.should be_a(String)
             r.expiration_rule_id.should == 'temp-rule'
+          end
+
+          it 'defaults restore_expiration_date and progress to nil' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] = nil
+            end.head_object(opts)
+            r[:restore_expiration_date].should be(nil)
+            r[:restore_in_progress].should be(false)
+          end
+
+          it 'parses x-amz-restore headers' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="false", expiry-date="Fri, 27 Jan 2012 00:00:00 GMT"']
+            end.head_object(opts)
+            r.restore_expiration_date.should be_a(DateTime)
+            r.restore_expiration_date.to_s.should == "2012-01-27T00:00:00+00:00"
+            r.restore_in_progress.should == false
+
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="true", expiry-date="Fri, 27 Jan 2012 00:00:00 GMT"']
+            end.head_object(opts)
+            r.restore_in_progress.should == true
+          end
+
+          it 'parses x-amz-restore headers while restore is in-progress' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="true"']
+            end.head_object(opts)
+            r.restore_in_progress.should == true
           end
 
         end
@@ -1312,6 +1608,7 @@ module AWS
 
         it_should_behave_like "accepts version id"
 
+        it_should_behave_like "accepts mfa credentials"
       end
 
       context '#delete_objects' do
@@ -1321,6 +1618,8 @@ module AWS
         let(:opts) { { :bucket_name => 'foo', :key => 'some/key' } }
 
         it_should_behave_like "requires bucket_name"
+
+        it_should_behave_like "accepts mfa credentials"
 
         #it_should_behave_like "an s3 http request", 'POST'
 

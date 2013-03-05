@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -229,6 +229,8 @@ module AWS
   #  ec2.images.create(:image_location => "mybucket/manifest.xml",
   #                    :name => "my-image")
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level EC2 client object
   class EC2
 
     AWS.register_autoloads(self) do

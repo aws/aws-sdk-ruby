@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,6 +35,7 @@ module AWS
             :policy_arn => 'arn',
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
+            :min_adjustment_step => 2,
             :alarms => [
               { :alarm_name => 'name1', :alarm_arn => 'arn1' },
               { :alarm_name => 'name2', :alarm_arn => 'arn2' },
@@ -77,6 +78,14 @@ module AWS
 
       end
 
+      context '#min_adjustment_step' do
+
+        it 'returns the min adjustment step' do
+          policy.min_adjustment_step.should == 2
+        end
+
+      end
+
       context '#cooldown' do
 
         it 'returns the described cooldown' do
@@ -106,11 +115,13 @@ module AWS
             :policy_name => policy.name,
             :adjustment_type => 'type2',
             :scaling_adjustment => 2,
+            :min_adjustment_step => 4,
             :cooldown => 3,
           }).and_return(resp)
           policy.update(
             :adjustment_type => 'type2',
             :scaling_adjustment => 2,
+            :min_adjustment_step => 4,
             :cooldown => 3)
         end
 

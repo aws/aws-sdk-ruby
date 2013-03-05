@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -390,14 +390,20 @@ module AWS
       #   * an array of hash and range key value pairs (nested arrays)
       #   * an array of {Item} objects
       #
+      # @param [Hash] options
+      #
+      # @option options [Boolean] :consistent_read (false) When +true+, items
+      #   are read from this table with consistent reads.  When +false+, reads
+      #   are eventually consistent.
+      #
       # @yield [Hash] Yields a hash of attributes for each item.
       #
       # @return [Enumerable] Returns an enumerable object that yields
       #   hashes of attributes.
       #
-      def batch_get attributes, items, &block
+      def batch_get attributes, items, options = {}, &block
         batch = BatchGet.new(:config => config)
-        batch.table(name, attributes, items)
+        batch.table(name, attributes, items, options)
         enum = batch.to_enum(:each_attributes)
         block_given? ? enum.each(&block) : enum
       end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -37,6 +37,8 @@ module AWS
   #   ec2 = AWS::EC2.new(session.credentials)
   #   ec2.instances.to_a
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level STS client object
   class STS
 
     AWS.register_autoloads(self) do
@@ -49,6 +51,11 @@ module AWS
     end
 
     include Core::ServiceInterface
+
+    # (see Client#assume_role)
+    def assume_role options = {}
+      client.assume_role(options).data
+    end
 
     # Returns a set of temporary credentials for an AWS account or IAM
     # User. The credentials consist of an Access Key ID, a Secret
@@ -67,7 +74,7 @@ module AWS
     #   account owners are restricted to a maximum of 3600s (one
     #   hour).
     #
-    # @option opts [String] :serial_nubmer The identification number of the
+    # @option opts [String] :serial_number The identification number of the
     #   Multi-Factor Authentication (MFA) device for the user.
     #
     # @option opts [String] :token_code The value provided by the MFA device.

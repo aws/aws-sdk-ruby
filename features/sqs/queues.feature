@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -57,6 +57,7 @@ Feature: SQS Queues
     | visibility_timeout       |
     | maximum_message_size     |
     | message_retention_period |
+    | wait_time_seconds        |
     And the following date/time fields should contain values within the last hour:
     | created_timestamp       |
     | last_modified_timestamp |
@@ -76,6 +77,11 @@ Feature: SQS Queues
     Given I create a queue
     When I set the queue's message retention period to 3600
     Then the queue's message retention period should eventually be 3600
+
+  Scenario: Set SQS wait time seconds
+    Given I create a queue
+    When I set wait time on the queue to 7
+    Then the queue wait time should eventually be 7
 
   Scenario: Getting a queue by its name
     Given I create a queue
@@ -127,4 +133,7 @@ Feature: SQS Queues
     Then a request should have been made like:
     | TYPE  | NAME   | VALUE              |
     | param | Action | DeleteMessageBatch |
-    
+
+  Scenario: Making a queue request across regions
+    When I create a queue in "us-west-1"
+    Then I should be able to send a message using a "us-east-1" client

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,7 +28,7 @@ module AWS
   #   # name the domain and specify the retention period (in days)
   #   domain = swf.domains.create('my-domain', 10)
   #
-  # You can reference existin domains as well.
+  # You can reference existing domains as well.
   #
   #   domain = swf.domains['my-domain']
   #
@@ -38,7 +38,7 @@ module AWS
   # activity types.  Both types (workflow and activity) are templates that
   # can be used to start workflow executions or schedule activity tasks.
   #
-  # Workflow and Acitivity types both have a number of default values
+  # Workflow and Activity types both have a number of default values
   # (e.g. default task list, timeouts, etc).  If you do not specify these
   # optional default values when creating the type, you *MUST* specify
   # the actual values when starting a workflow execution or scheduling
@@ -76,9 +76,9 @@ module AWS
   #
   # = Decision Tasks
   #
-  # Once a workflow execution has been started, it will start to generte
+  # Once a workflow execution has been started, it will start to generate
   # decision tasks.  You poll for decision tasks from a task list.
-  # Yielded decsion tasks provide access to the history of events 
+  # Yielded decision tasks provide access to the history of events
   # for the workflow execution.  You can also enumerate only new
   # events since the last decision.
   # 
@@ -104,7 +104,7 @@ module AWS
   #   # poll for decision tasks from 'my-task-list'
   #   domain.decision_tasks.poll('my-task-list') do |task|
   #
-  #     # invesitate new events and make decisions
+  #     # investigate new events and make decisions
   #     task.new_events.each do |event|
   #       case event.event_type
   #       when 'WorkflowExecutionStarted'
@@ -188,6 +188,8 @@ module AWS
   #
   # See {HistoryEvent} and {HistoryEvent::Attributes} for more information.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SimpleWorkflow client object
   class SimpleWorkflow
 
     AWS.register_autoloads(self, 'aws/simple_workflow') do

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,11 +33,14 @@ module AWS
         # @return [String,nil] Returns the HTTP response body.
         attr_accessor :body
 
-        # @return [Boolean] Returns +true+ if the request could not be made
-        #   because of a networking issue (including timeouts).
+        # @return [Exception,nil]
         attr_accessor :network_error
 
-        alias_method :network_error?, :network_error
+        # @return [Boolean] Returns +true+ if the request could not be made
+        #   because of a networking issue (including timeouts).
+        def network_error?
+          @network_error ? true : false
+        end
 
         # The #network_error attribute was previously #timeout, aliasing 
         # for backwards compatability

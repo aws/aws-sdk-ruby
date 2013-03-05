@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,7 +15,6 @@ require 'spec_helper'
 
 module AWS
   class S3
-
     describe Bucket do
 
       it_behaves_like 'an S3 model object', 'foo'
@@ -59,7 +58,7 @@ module AWS
       end
 
       context '#lifecycle_configuration' do
-        
+
         it 'returns a lifecycle configuration for this bucket' do
           cfg = bucket.lifecycle_configuration
           cfg.should be_a(BucketLifecycleConfiguration)
@@ -75,7 +74,7 @@ module AWS
 
       context '#lifecycle_configuration=' do
 
-        let(:xml) { <<-XML.strip } 
+        let(:xml) { <<-XML.strip }
 <LifecycleConfiguration>
   <Rule>
     <ID>id</ID>
@@ -108,13 +107,14 @@ module AWS
         end
 
         it 'updates the cached lifecycle configuration' do
-          
+
           client.should_not_receive(:get_bucket_lifecycle_configuration)
 
           bucket.lifecycle_configuration = xml
           cfg = bucket.lifecycle_configuration
           cfg.rules.should == [
-            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix', 5, 'Enabled')
+            BucketLifecycleConfiguration::Rule.new(cfg, 'id', 'prefix',
+              :expiration_time => 5, :status => 'Enabled')
           ]
 
         end
@@ -135,6 +135,86 @@ module AWS
 
       end
 
+      context '#tags' do
+
+        it 'calls #get_bucket_tagging with the bucket name' do
+
+          resp = double('resp', :data => { :tags => { 'foo' => 'bar' }})
+
+          client.should_receive(:get_bucket_tagging).
+            with(:bucket_name => bucket.name).
+            and_return(resp)
+
+          bucket.tags.should eq('foo' => 'bar')
+
+        end
+
+        it 'returns {} when there are no tags' do
+          err = AWS::S3::Errors::NoSuchTagSet.new
+          client.stub(:get_bucket_tagging).and_raise(err)
+          bucket.tags.should eq({})
+        end
+
+      end
+
+      context '#cors' do
+
+        it 'returns a cors rule collection' do
+          bucket.cors.should be_a(CORSRuleCollection)
+          bucket.cors.bucket.should eq(bucket)
+          bucket.cors.bucket.config.should eq(config)
+        end
+
+      end
+
+      context '#cors=' do
+
+        it 'calls set on the cors rule collection' do
+
+          rules = double('rules')
+          cors = double('cors-rule-collection')
+          cors.should_receive(:set).with(rules)
+          bucket.stub(:cors).and_return(cors)
+
+          bucket.cors = rules
+
+        end
+
+      end
+
+      context '#tags=' do
+
+        it 'calls #put_bucket_tagging' do
+
+          tags = { 'foo' => 'bar' }
+
+          client.should_receive(:put_bucket_tagging).
+            with(:bucket_name => bucket.name, :tags => tags)
+
+          bucket.tags = tags
+
+        end
+
+        it 'calls #delete_bucket_tagging when tags are empty' do
+
+          client.should_receive(:delete_bucket_tagging).
+            with(:bucket_name => bucket.name)
+
+          bucket.tags = {}
+
+        end
+
+        it 'calls #delete_bucket_tagging when tags are nil' do
+
+          client.should_receive(:delete_bucket_tagging).
+            with(:bucket_name => bucket.name)
+
+          bucket.tags = nil
+
+        end
+
+      end
+
       context '#delete' do
 
         it 'should call delete_bucket on the client with the bucket name' do
@@ -148,8 +228,8 @@ module AWS
       context '#clear!' do
 
         let(:response) { client.stub_for(:delete_objects) }
-        
-        it 'should delete the bucket objects in batches' do 
+
+        it 'should delete the bucket objects in batches' do
 
           key = { :key => 'key', :version_id => "null" }
 
@@ -164,22 +244,22 @@ module AWS
             and_yield(versions3)
 
           bucket.stub(:versions).and_return(versions)
-          
+
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions1).
             and_return(response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions2).
             and_return(response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => versions3).
             and_return(response)
-              
+
           bucket.clear!
 
         end
@@ -257,15 +337,15 @@ module AWS
         end
 
         context '#versions' do
-          
+
           it 'returns a bucket version collection' do
             bucket.versions.should be_a(BucketVersionCollection)
           end
-          
+
           it 'returns collection with the correct bucket' do
             bucket.versions.bucket.should == bucket
           end
-          
+
           it 'returns collection with the correct client' do
             bucket.versions.client.should == bucket.client
           end
@@ -276,8 +356,22 @@ module AWS
 
           it 'calls set_bucket_versioning with :enabled' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :enabled)
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.enable_versioning
+          end
+
+          it 'calls set_bucket_versioning with MFA credentials when MFA delete is being enabled' do
+            bucket.client.should_receive(:set_bucket_versioning).
+              with(:bucket_name => bucket.name,
+                   :state       => :enabled,
+                   :mfa_delete  => 'Enabled',
+                   :mfa         => '123456 7890'
+                  )
+            bucket.enable_versioning(:mfa_delete => 'Enabled', :mfa => '123456 7890')
           end
 
         end
@@ -286,7 +380,11 @@ module AWS
 
           it 'calls set_bucket_versioning with :suspended' do
             bucket.client.should_receive(:set_bucket_versioning).
-              with(:bucket_name => bucket.name, :state => :suspended)
+              with(:bucket_name => bucket.name,
+                   :state       => :suspended,
+                   :mfa_delete  => nil,
+                   :mfa         => nil
+                  )
             bucket.suspend_versioning
           end
 
@@ -299,7 +397,7 @@ module AWS
               with(:bucket_name => bucket.name)
             bucket.versioning_enabled?
           end
-          
+
           it 'returns true if bucket versioning is :enabled' do
             response.stub(:status).and_return(:enabled)
             bucket.versioning_enabled?.should == true
@@ -316,7 +414,7 @@ module AWS
           end
 
           it 'provides a #versioned? alias' do
-            bucket.method(:versioned?).should == 
+            bucket.method(:versioned?).should ==
               bucket.method(:versioning_enabled?)
           end
 
@@ -329,7 +427,7 @@ module AWS
               with(:bucket_name => bucket.name)
             bucket.versioning_state
           end
-          
+
           it 'returns the status from get_bucket_versioning' do
             response.stub(:status).and_return('fake status')
             bucket.versioning_state.should == 'fake status'
@@ -380,12 +478,12 @@ module AWS
       end
 
       context '#eql?' do
-        
+
         it 'should identify the same bucket correctly' do
           bucket = Bucket.new('a')
           bucket.eql?(bucket).should be_true
         end
-        
+
         it 'should identify buckets with the same name correctly' do
           bucket = Bucket.new('a')
           another_bucket_same_name = Bucket.new('a')
@@ -563,7 +661,146 @@ module AWS
 
       end
 
-    end
+      context 'website configuration' do
 
+        let(:default_opts) {{
+          :index_document => { :suffix => 'index.html' },
+          :error_document => { :key => 'error.html' },
+        }}
+
+        let(:response) {
+          resp = Core::Response.new
+          resp.data = default_opts
+          resp
+        }
+
+        context '#configure_website' do
+
+          before(:each) do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+          end
+
+          it 'calls #put_bucket_website on the client' do
+            client.should_receive(:put_bucket_website).
+              with(default_opts.merge(:bucket_name => bucket.name))
+            bucket.configure_website
+          end
+
+          it 'tries to load the current website configuration first' do
+            client.should_receive(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.configure_website
+          end
+
+          it 'yields a new website configuration when one is not found' do
+            yielded = false
+            bucket.configure_website do |cfg|
+              cfg.should be_a(WebsiteConfiguration)
+              cfg.index_document_suffix.should eq('index.html')
+              cfg.error_document_key.should eq('error.html')
+              yielded = true
+            end
+            yielded.should be(true)
+          end
+
+          it 'returns the configuration that is yielded' do
+            website_config = nil
+            bucket.configure_website do |cfg|
+              website_config = cfg
+            end.should be(website_config)
+          end
+
+          it 'calls #put_bucket_website using the yielded config' do
+            client.should_receive(:put_bucket_website).with({
+              :bucket_name => bucket.name,
+              :index_document => { :suffix => 'abc' },
+              :error_document => { :key => 'xyz' },
+            })
+            bucket.configure_website do |cfg|
+              cfg.index_document_suffix = 'abc'
+              cfg.error_document_key = 'xyz'
+            end
+          end
+
+          it 'yieldes the current configuration when found' do
+            response.data[:index_document][:suffix] = 'abc'
+            response.data[:error_document][:key] = 'xyz'
+            client.stub(:get_bucket_website).and_return(response)
+            bucket.configure_website do |cfg|
+              cfg.index_document_suffix.should eq('abc')
+              cfg.error_document_key.should eq('xyz')
+            end
+          end
+
+        end
+
+        context '#website_configuration' do
+
+          it 'returns a bucket website configuration when one exists' do
+            client.stub(:get_bucket_website).and_return(response)
+            cfg = bucket.website_configuration
+            cfg.should be_a(WebsiteConfiguration)
+            cfg.to_hash.should eq(default_opts)
+          end
+
+          it 'returns nil when one is not found' do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.website_configuration.should be(nil)
+          end
+
+        end
+
+        context '#website_configuration=' do
+
+          it 'puts the bucket website configuration' do
+            client.should_receive(:put_bucket_website).with({
+              :bucket_name => bucket.name,
+              :index_document => { :suffix => 'abc' },
+              :error_document => { :key => 'xyz' },
+            })
+            cfg = WebsiteConfiguration.new
+            cfg.index_document_suffix = 'abc'
+            cfg.error_document_key = 'xyz'
+            bucket.website_configuration = cfg
+          end
+
+          it 'deletes the bucket website configuration when passed nil' do
+            client.should_receive(:delete_bucket_website).
+              with(:bucket_name => bucket.name)
+            bucket.website_configuration = nil
+          end
+
+        end
+
+        context '#remove_website_configuration' do
+
+          it 'deletes the bucket website configuration when passed nil' do
+            client.should_receive(:delete_bucket_website).
+              with(:bucket_name => bucket.name)
+            bucket.website_configuration = nil
+          end
+
+        end
+
+        context '#website?' do
+
+          it 'returns true if the client returns a configuration' do
+            client.stub(:get_bucket_website).and_return(response)
+            bucket.website?.should be(true)
+          end
+
+          it 'returns false if the client raises an error' do
+            client.stub(:get_bucket_website).
+              and_raise(Errors::NoSuchWebsiteConfiguration)
+            bucket.website?.should be(false)
+          end
+
+        end
+
+      end
+
+    end
   end
 end

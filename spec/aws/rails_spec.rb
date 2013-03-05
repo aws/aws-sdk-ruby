@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -116,7 +116,10 @@ module AWS
           end
   
           after(:each) do
-            AWS.config(:stub_requests => false)
+            AWS.config(
+              :stub_requests => false,
+              :access_key_id => nil,
+              :secret_access_key => nil)
           end
   
           it 'defines a method for older versions of rails' do

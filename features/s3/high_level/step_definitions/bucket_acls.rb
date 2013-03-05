@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,7 +33,7 @@ END
 end
 
 Given /^I have set a bucket ACL$/ do
-  Given "I call create_bucket"
+  step "I call create_bucket"
   @bucket = @s3.buckets[@bucket_name]
   @bucket.acl = {
     :owner => { :id => @bucket.owner.id },

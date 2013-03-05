@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -63,6 +63,23 @@ Feature: SQS Messages
     Then I should have received all of the messages within 120 seconds
     And each message receipt handle should have been deleted
     And the forked process should have completed without errors
+
+  @long_polling @slow
+  Scenario: Long polling for SQS messages
+    Given I create a queue
+    When I poll for messages with an idle timeout of 5 seconds
+    Then I should have received all of the messages within 13-18 seconds
+    And exactly 1 request should have been made like:
+    | TYPE  | NAME   | VALUE          |
+    | param | Action | ReceiveMessage |
+
+  @long_polling
+  Scenario: Using default long poll value on a queue
+    Given I create a queue
+    And I set wait time on the queue to 3
+    And I poll for mesages with a wait time of "nil"
+    Then the queue wait time should eventually be 3
+    And I should have received all of the messages within 2-7 seconds
 
   Scenario: Change message visibility timeout
     Given I create a queue

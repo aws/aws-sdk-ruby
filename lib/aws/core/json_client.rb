@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ module AWS
       protected
 
       def self.request_builder_for api_config, operation
-        JSONRequestBuilder.new(api_config[:target_prefix], operation)
+        JSONRequestBuilder.new(api_config, operation)
       end
 
       def self.response_parser_for api_config, operation
@@ -30,14 +30,13 @@ module AWS
           response.http_response.status >= 300 and
           body = response.http_response.body and
           json = (::JSON.load(body) rescue nil) and
-          type = json["__type"] and
-          matches = type.match(/\#(.*)$/)
+          type = json["__type"]
         then
-          code = matches[1]
+          code = type.split('#').last
           if code == 'RequestEntityTooLarge'
             message = 'Request body must be less than 1 MB'
           else
-            message = json['message']
+            message = json['message'] || json['Message']
           end
           [code, message]
         end

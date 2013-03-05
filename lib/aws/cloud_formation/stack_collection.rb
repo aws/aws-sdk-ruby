@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,7 +15,7 @@ module AWS
   class CloudFormation
     class StackCollection
 
-      include Core::Collection::Simple
+      include Core::Collection::WithNextToken
       include StackOptions
 
       # @private
@@ -187,8 +187,10 @@ module AWS
 
       protected
 
-      def _each_item options = {}
-        client.describe_stacks(options).data[:stacks].each do |summary|
+      def _each_item next_token, options = {}
+        options[:next_token] = next_token if next_token
+        resp = client.describe_stacks(options)
+        resp[:stacks].each do |summary|
 
           stack = Stack.new_from(
             :describe_stacks,
@@ -199,6 +201,7 @@ module AWS
           yield(stack)
 
         end
+        resp[:next_token]
       end
 
     end

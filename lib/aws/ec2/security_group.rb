@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,9 +31,9 @@ module AWS
 
       AWS.register_autoloads(self, 'aws/ec2/security_group') do
         autoload :IpPermission,                  'ip_permission'
-        autoload :IpPermissionCollection,        'ingress_ip_permission_collection'
-        autoload :IngressIpPermissionCollection, 'ingress_ip_permission_collection'
-        autoload :EgressIpPermissionCollection,  'egress_ip_permission_collection'
+        autoload :IpPermissionCollection,        'ip_permission_collection'
+        autoload :IngressIpPermissionCollection, 'ip_permission_collection'
+        autoload :EgressIpPermissionCollection,  'ip_permission_collection'
       end
 
       include TaggedItem
@@ -63,7 +63,18 @@ module AWS
       attribute :ip_permissions_list_egress, :from => :ip_permissions_egress
 
       populates_from(:describe_security_groups) do |resp|
-        resp.security_group_index[id]
+        resp[:security_group_index][id]
+      end
+
+      # @return [InstanceCollection] Returns an instance collection that will
+      #   only enumerate instances in this security group.
+      def instances
+        instances = InstanceCollection.new(:config => config)
+        if vpc?
+          instances.filter('instance.group-id', [group_id])
+        else
+          instances.filter('group-id', [group_id])
+        end
       end
 
       # @return [Boolean] True if the security group exists.
@@ -347,9 +358,13 @@ module AWS
       def ingress_opts protocol, ports, sources
 
         opts = {}
-        opts[:ip_protocol] = protocol.to_s.downcase
-        opts[:from_port] = Array(ports).first.to_i
-        opts[:to_port] = Array(ports).last.to_i
+        opts[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s.downcase
+
+        unless ports.is_a?(Range)
+          ports = Array(ports)
+        end
+        opts[:from_port] = ports.first.to_i
+        opts[:to_port] = ports.last.to_i
 
         ips, groups = parse_sources(sources)
 
@@ -384,8 +399,14 @@ module AWS
             '-1' : options[:protocol].to_s.downcase
 
           if options[:ports]
-            opts[:from_port] = Array(options[:ports]).first.to_i
-            opts[:to_port] = Array(options[:ports]).last.to_i
+            if options[:ports].is_a?(Range)
+              ports = options[:ports]
+            else
+              ports = Array(options[:ports])
+            end
+
+            opts[:from_port] = ports.first.to_i
+            opts[:to_port] = ports.last.to_i
           end
 
           ips, groups = parse_sources(args)

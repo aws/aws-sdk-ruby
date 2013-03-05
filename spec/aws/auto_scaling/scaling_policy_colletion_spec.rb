@@ -1,5 +1,5 @@
 
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -54,11 +54,13 @@ module AWS
             :policy_name => 'name',
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
+            :min_adjustment_step => 2,
             :cooldown => 10)
 
           policies.create('name', 
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
+            :min_adjustment_step => 2,
             :cooldown => 10)
 
         end

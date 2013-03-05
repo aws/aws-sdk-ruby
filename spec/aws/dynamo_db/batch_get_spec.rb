@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ module AWS
 
       let(:batch) { BatchGet.new(:config => config) }
 
-      let(:response) { 
+      let(:response) {
         resp = client.stub_for(:batch_get_item)
         resp.data['Responses'] = {}
         resp.data['UnprocessedKeys'] = {}
@@ -43,6 +43,32 @@ module AWS
             }}).and_return(response)
 
             batch.table 'table1', :all, ['hk1']
+
+            batch.to_a
+
+          end
+
+          it 'accepts a :consistent_read option for each table' do
+
+            client.should_receive(:batch_get_item).with({
+              :request_items => {
+                "table1" => {
+                  :keys=>[{:hash_key_element=>{:s=>"hk1"}}],
+                  :consistent_read => true
+                },
+                "table2" => {
+                  :keys=>[{:hash_key_element=>{:s=>"hk1"}}],
+                  :consistent_read => false,
+                },
+                "table3" => {
+                  :keys=>[{:hash_key_element=>{:s=>"hk1"}}],
+                  # ommited consistent read
+                },
+            }}).and_return(response)
+
+            batch.table 'table1', :all, ['hk1'], :consistent_read => true
+            batch.table 'table2', :all, ['hk1'], :consistent_read => false
+            batch.table 'table3', :all, ['hk1']  # ommited consistent read
 
             batch.to_a
 
@@ -71,7 +97,7 @@ module AWS
       end
 
       context '#table' do
-        
+
         context 'specifing the table' do
 
           it 'accepts a string table name' do
@@ -118,7 +144,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    { :hash_key_element => { :s => "hk1" }}, 
+                    { :hash_key_element => { :s => "hk1" }},
                     { :hash_key_element => { :s => "hk2" }},
                   ]
                 }
@@ -141,7 +167,6 @@ module AWS
 
           end
 
-
         end
 
         context 'specifing items' do
@@ -152,7 +177,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    { :hash_key_element => { :s => "hk1" }}, 
+                    { :hash_key_element => { :s => "hk1" }},
                     { :hash_key_element => { :s => "hk2" }},
                   ]
                 }
@@ -171,7 +196,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}}, 
+                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}},
                     {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk2"}}
                   ]
                 }
@@ -190,7 +215,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}}, 
+                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}},
                     {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk2"}}
                   ]
                 }
@@ -211,7 +236,7 @@ module AWS
           end
 
         end
-        
+
       end
 
       context '#items' do
@@ -222,7 +247,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}}, 
+                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}},
                     {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk2"}}
                   ]
                 }
@@ -248,7 +273,7 @@ module AWS
               :request_items => {
                 "table1" => {
                   :keys => [
-                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}}, 
+                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}},
                     {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk2"}}
                   ]
                 }
@@ -275,7 +300,7 @@ module AWS
                 "table1" => { :keys => [{:hash_key_element=>{:s=>"hk1"}}] },
                 "table2" => {
                   :keys => [
-                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}}, 
+                    {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk1"}},
                     {:hash_key_element=>{:s=>"hk1"}, :range_key_element=>{:s=>"rk2"}}
                   ]
                 }
@@ -302,7 +327,7 @@ module AWS
       end
 
       context 'paged results' do
-        
+
         let(:resp1) {
           resp = double('resp1', :data => {}).as_null_object
           resp.data['Responses'] = {}
@@ -315,11 +340,11 @@ module AWS
             },
             'table2' => {
               'Keys' => [
-                { 
+                {
                   'HashKeyElement' => { 'S' => 'key2' },
                   'RangeKeyElement' => { 'N' => 1 },
                 },
-                { 
+                {
                   'HashKeyElement' => { 'S' => 'key2' },
                   'RangeKeyElement' => { 'N' => 2 },
                 },
@@ -336,7 +361,7 @@ module AWS
           resp.data['UnprocessedKeys'] = {
             'table2' => {
               'Keys' => [
-                { 
+                {
                   'HashKeyElement' => { 'S' => 'key2' },
                   'RangeKeyElement' => { 'N' => 2 },
                 },
@@ -360,7 +385,7 @@ module AWS
         end
 
         it 'it formats the unproccessed keys into request items' do
-          
+
           client.should_receive(:batch_get_item).ordered.
             with(:request_items=>{"table1"=>{:keys=>[{:hash_key_element=>{:s=>"hk1"}}]}}).
             and_return(resp1)
@@ -375,13 +400,13 @@ module AWS
               },
               'table2' => {
                 :keys => [
-                  { 
-                    :hash_key_element => { :s => "key2" }, 
-                    :range_key_element => { :n => 1 }, 
+                  {
+                    :hash_key_element => { :s => "key2" },
+                    :range_key_element => { :n => 1 },
                   },
-                  { 
-                    :hash_key_element => { :s => "key2" }, 
-                    :range_key_element => { :n => 2 }, 
+                  {
+                    :hash_key_element => { :s => "key2" },
+                    :range_key_element => { :n => 2 },
                   },
                 ]
               }
@@ -392,9 +417,9 @@ module AWS
             :request_items => {
               'table2' => {
                 :keys => [
-                  { 
-                    :hash_key_element => { :s => "key2" }, 
-                    :range_key_element => { :n => 2 }, 
+                  {
+                    :hash_key_element => { :s => "key2" },
+                    :range_key_element => { :n => 2 },
                   },
                 ]
               }
@@ -405,9 +430,9 @@ module AWS
           batch.each{|table,attributes|}
 
         end
-        
+
       end
-      
+
     end
 
   end

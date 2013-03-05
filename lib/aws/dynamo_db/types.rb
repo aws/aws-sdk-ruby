@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -68,7 +68,7 @@ module AWS
         cfg = self.respond_to?(:config) ? self.config :
           (options[:config] || AWS.config)
 
-        cfg.dynamo_db_big_decimals ? BigDecimal.new(number) : number.to_f
+        cfg.dynamo_db_big_decimals ?  BigDecimal.new(number.to_s) : number.to_f
 
       end
 

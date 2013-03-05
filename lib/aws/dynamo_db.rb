@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,17 +20,7 @@ module AWS
   #
   #   dynamo_db = AWS::DynamoDB.new(
   #     :access_key_id => '...',
-  #     :secret_access_key => '...',
-  #     :session_token => '...')
-  #
-  # = Credentials
-  #
-  # Amazon DynamoDB requires that all requests are made with short-term
-  # credentials (e.g. requires a session token).
-  #
-  # @note If you make a request using AWS::DynamoDB with long-term credentials
-  #   a request is made to Amazon STS for temproary session credentials.
-  #   These will be cached in the process and re-used.
+  #     :secret_access_key => '...')
   #
   # = Tables
   #
@@ -108,6 +98,8 @@ module AWS
   #   # delete an item and all of its attributes
   #   item.delete
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level DynamoDB client object
   class DynamoDB
 
     AWS.register_autoloads(self, 'aws/dynamo_db') do
@@ -168,7 +160,7 @@ module AWS
     def batch_get &block
       batch = BatchGet.new(:config => config)
       yield(batch)
-      batch.enumerator
+      batch.to_enum(:each)
     end
 
     # Yields a batch for writing (put and delete) items across multiple

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,12 +15,12 @@ begin
   require 'simplecov'
   SimpleCov.start
 rescue LoadError
-end
+end if ENV['COVERAGE']
 
 $: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
 
 require 'rspec'
-require 'aws'
+require 'aws-sdk'
 
 RSpec.configure do |c|
   c.filter_run_excluding :ruby => lambda {|version|
@@ -31,6 +31,12 @@ end
 # require all _examples.rb files in spec/shared/
 Dir.glob("#{File.dirname(__FILE__)}/shared/**/*_examples.rb").each do |file|
   require file
+end
+
+class String
+  def xml_cleanup
+    gsub(/^\s*|\s*|\n$/m, '')
+  end
 end
 
 AWS.eager_autoload!

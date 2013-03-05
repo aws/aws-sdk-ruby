@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -60,7 +60,7 @@ module AWS
         context 'template param' do
 
           it 'accepts the template as url string' do
-            
+
             url = 'http://s3.amazon.com/bucket_name/key'
 
             client.should_receive(:create_stack).with(
@@ -73,7 +73,7 @@ module AWS
           end
 
           it 'accepts the template as a http uri' do
-            
+
             uri = URI.parse('http://s3.amazon.com/bucket_name/key')
 
             client.should_receive(:create_stack).with(
@@ -86,7 +86,7 @@ module AWS
           end
 
           it 'accepts the template as a https uri' do
-            
+
             uri = URI.parse('https://s3.amazon.com/bucket_name/key')
 
             client.should_receive(:create_stack).with(
@@ -99,7 +99,7 @@ module AWS
           end
 
           it 'accepts the template as a s3 object' do
-            
+
             obj = S3.new(:config => config).buckets['bucket'].objects['key']
             obj.stub(:read).and_return('template')
 
@@ -291,7 +291,7 @@ module AWS
 
       end
 
-      it_behaves_like "a simple collection" do
+      it_behaves_like "a pageable collection" do
 
         let(:collection)      { stacks }
         let(:client_method)   { :describe_stacks }

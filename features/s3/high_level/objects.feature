@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -123,6 +123,12 @@ Feature: CRUD Objects (High Level)
     | TYPE   | NAME             | VALUE |
     | http   | verb             | PUT   |
     | header | x-amz-meta-color | blue  |
+
+  @put_object
+  Scenario: Write object metadata with trailing spaces
+    Given I ask for the object with key "foo"
+    When I write data passing metadata attribute "color" with value "blue "
+    Then the object should eventually have metadata "color" set to "blue"
 
   @delete_object
   Scenario: Delete an object
@@ -354,6 +360,28 @@ Feature: CRUD Objects (High Level)
     | http   | verb      | PUT         |
     | header | x-amz-acl | public-read |
 
+  @presigned
+  Scenario: Presigned HTTPS get
+    Given I write "world" to the key "hello"
+    When I create a pre-signed https "GET" uri
+    When I make a https get request to the presigned uri
+    Then the returned value should "world"
+
+  @presigned
+  Scenario: Presigned HTTP get
+    Given I write "world" to the key "hello"
+    When I create a pre-signed http "GET" uri
+    When I make a http get request to the presigned uri
+    Then the returned value should "world"
+
+  @sts @presigned
+  Scenario: Presigned get with session credentials
+    Given I write "world" to the key "hello"
+    And I ask for temporary security credentials
+    When I create a pre-signed "GET" uri using the session credentials
+    When I make a https get request to the presigned uri
+    Then the returned value should "world"
+
   @batch_delete
   Scenario: Multi-object delete with delete_if
     Given I have the following objects:
@@ -384,3 +412,14 @@ Feature: CRUD Objects (High Level)
     | http  | verb    | POST  |
     | param | delete  |       |
     And the bucket should be empty
+
+  @restore @tiered_storage
+  Scenario: Restoring an object that is not archived
+    Given I ask for the object with key "foo"
+    And I write the string "HELLO" to it
+    And the object should eventually have "HELLO" as its body
+    When I try to restore the object
+    Then I should get a "InvalidObjectState" client exception as follows:
+    | field   | value                                                            |
+    | code    | InvalidObjectState                                               |
+    | message | Restore is not allowed, as object's storage class is not GLACIER |

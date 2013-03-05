@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,6 +20,10 @@ module AWS
       before(:each) do
         AWS.config(:access_key_id => "id", :secret_access_key => "secret")
         klass.stub(:name).and_return("ExampleClass")
+      end
+
+      after(:each) do
+        AWS.config(:access_key_id => nil, :secret_access_key => nil)
       end
 
       let(:klass) { Class.new(AWS::Record::HashModel) }

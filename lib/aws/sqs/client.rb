@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,10 +20,10 @@ module AWS
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
+      # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
-      # @method add_permission(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -39,8 +39,8 @@ module AWS
       #     wants to allow for the specified principal.
       # @return [Core::Response]
 
+      # @!method change_message_visibility(options = {})
       # Calls the ChangeMessageVisibility API operation.
-      # @method change_message_visibility(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -51,8 +51,8 @@ module AWS
       #     seconds) for the message's visibility timeout.
       # @return [Core::Response]
 
+      # @!method change_message_visibility_batch(options = {})
       # Calls the ChangeMessageVisibilityBatch API operation.
-      # @method change_message_visibility_batch(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -75,8 +75,8 @@ module AWS
       #     * +:code+ - (String)
       #     * +:message+ - (String)
 
+      # @!method create_queue(options = {})
       # Calls the CreateQueue API operation.
-      # @method create_queue(options = {})
       # @param [Hash] options
       #   * +:queue_name+ - *required* - (String) The name for the queue to be
       #     created.
@@ -87,8 +87,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:queue_url+ - (String)
 
+      # @!method delete_message(options = {})
       # Calls the DeleteMessage API operation.
-      # @method delete_message(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -96,8 +96,8 @@ module AWS
       #     associated with the message to delete.
       # @return [Core::Response]
 
+      # @!method delete_message_batch(options = {})
       # Calls the DeleteMessageBatch API operation.
-      # @method delete_message_batch(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -118,15 +118,15 @@ module AWS
       #     * +:code+ - (String)
       #     * +:message+ - (String)
 
+      # @!method delete_queue(options = {})
       # Calls the DeleteQueue API operation.
-      # @method delete_queue(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
       # @return [Core::Response]
 
+      # @!method get_queue_attributes(options = {})
       # Calls the GetQueueAttributes API operation.
-      # @method get_queue_attributes(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -137,8 +137,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:attributes+ - (Hash<String,String>)
 
+      # @!method get_queue_url(options = {})
       # Calls the GetQueueUrl API operation.
-      # @method get_queue_url(options = {})
       # @param [Hash] options
       #   * +:queue_name+ - *required* - (String) The name of the queue whose
       #     URL must be fetched.
@@ -149,8 +149,8 @@ module AWS
       #   a hash with the following structure:
       #   * +:queue_url+ - (String)
 
+      # @!method list_queues(options = {})
       # Calls the ListQueues API operation.
-      # @method list_queues(options = {})
       # @param [Hash] options
       #   * +:queue_name_prefix+ - (String) A string to use for filtering the
       #     list results. Only those queues whose name begins with the
@@ -160,13 +160,15 @@ module AWS
       #   a hash with the following structure:
       #   * +:queue_urls+ - (Array<String>)
 
+      # @!method receive_message(options = {})
       # Calls the ReceiveMessage API operation.
-      # @method receive_message(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
-      #   * +:attribute_names+ - (Array<String>) A list of attributes to
-      #     retrieve information for.
+      #   * +:attribute_names+ - (Array<String>) A list of attributes that need
+      #     to be returned along with each message. The set of valid attributes
+      #     are [SenderId, ApproximateFirstReceiveTimestamp,
+      #     ApproximateReceiveCount, SentTimestamp].
       #   * +:max_number_of_messages+ - (Integer) The maximum number of
       #     messages to return. Amazon SQS never returns more messages than
       #     this value but may return fewer. All of the messages are not
@@ -174,6 +176,10 @@ module AWS
       #   * +:visibility_timeout+ - (Integer) The duration (in seconds) that
       #     the received messages are hidden from subsequent retrieve requests
       #     after being retrieved by a ReceiveMessage request.
+      #   * +:wait_time_seconds+ - (Integer) The duration (in seconds) for
+      #     which the call will wait for a message to arrive in the queue
+      #     before returning. If a message is available, the call will return
+      #     sooner than WaitTimeSeconds.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -184,8 +190,8 @@ module AWS
       #     * +:body+ - (String)
       #     * +:attributes+ - (Hash<String,String>)
 
+      # @!method remove_permission(options = {})
       # Calls the RemovePermission API operation.
-      # @method remove_permission(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -194,8 +200,8 @@ module AWS
       #     AddPermission operation.
       # @return [Core::Response]
 
+      # @!method send_message(options = {})
       # Calls the SendMessage API operation.
-      # @method send_message(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -208,8 +214,8 @@ module AWS
       #   * +:md5_of_message_body+ - (String)
       #   * +:message_id+ - (String)
 
+      # @!method send_message_batch(options = {})
       # Calls the SendMessageBatch API operation.
-      # @method send_message_batch(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -234,8 +240,8 @@ module AWS
       #     * +:code+ - (String)
       #     * +:message+ - (String)
 
+      # @!method set_queue_attributes(options = {})
       # Calls the SetQueueAttributes API operation.
-      # @method set_queue_attributes(options = {})
       # @param [Hash] options
       #   * +:queue_url+ - *required* - (String) The URL of the SQS queue to
       #     take action on.
@@ -243,9 +249,9 @@ module AWS
       #     attributes to set.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
 
-      define_client_methods('2011-10-01')
+      define_client_methods('2012-11-05')
 
     end
   end

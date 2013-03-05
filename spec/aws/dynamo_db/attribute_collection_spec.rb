@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -564,7 +564,7 @@ module AWS
 
       end
 
-      context '#to_h' do
+      context '#to_hash' do
 
         it 'calls get_item' do
           client.should_receive(:get_item).
@@ -573,7 +573,7 @@ module AWS
                    :hash_key_element => { :s => "foo" }
                  }).
             and_return(response)
-          attributes.to_h
+          attributes.to_hash
         end
 
         it 'accepts a :consistent_read option' do
@@ -584,16 +584,20 @@ module AWS
                  },
                  :consistent_read => true).
             and_return(response)
-          attributes.to_h(:consistent_read => true)
+          attributes.to_hash(:consistent_read => true)
         end
 
         it 'hasherishes each of the values' do
           client.stub(:get_item).and_return(response)
-          attributes.to_h.should == {
+          attributes.to_hash.should == {
             "attr1" => "one",
             "attr2" => BigDecimal("12"),
             "attr3" => Set[BigDecimal("12")]
           }
+        end
+
+        it 'is aliased to #to_h' do # for backwards compatability
+          attributes.to_h.should eq(attributes.to_hash)
         end
 
         context 'missing item' do
@@ -602,7 +606,7 @@ module AWS
           let(:response) { double('response', :data => {}) }
 
           it 'returns an empty hash' do
-            attributes.to_h.should == {}
+            attributes.to_hash.should == {}
           end
         end
 

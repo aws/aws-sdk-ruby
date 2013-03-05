@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,5 +18,7 @@ AWS::Core::Configuration.module_eval do
   add_option :dynamo_db_retry_throughput_errors, true, :boolean => true
 
   add_option :dynamo_db_big_decimals, true, :boolean => true
+
+  add_option :dynamo_db_crc32, true, :boolean => true
 
 end

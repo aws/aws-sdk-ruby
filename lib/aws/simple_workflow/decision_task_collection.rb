@@ -1,6 +1,6 @@
 require 'uuidtools'
 
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -48,7 +48,7 @@ module AWS
     #
     # == Polling for Tasks in a Loop
     #
-    # You can poll indefinetly for tasks in a loop with {#poll}:
+    # You can poll indefinitely for tasks in a loop with {#poll}:
     #
     #   domain.decision_tasks.poll('my-task-list') do |task|
     #     # yields once for every decision task found 
@@ -97,7 +97,7 @@ module AWS
       #
       # @return [Count] Returns a {Count} object that specifies the number
       #   of decision tasks for the given task list.  This count will
-      #   also indiciate if the count was truncated.
+      #   also indicate if the count was truncated.
       #
       def count task_list
         options = {}
@@ -186,11 +186,11 @@ module AWS
 
       end
 
-      # Polls indefinetly for decision tasks.  Each deicsion task found is
+      # Polls indefinitely for decision tasks.  Each decision task found is
       # yielded to the block.  At the end of the block the decision task
       # is auto-completed ({DecisionTask#complete!} is called).
       #
-      #   # yields once for each decision task found, indefinetly
+      #   # yields once for each decision task found, indefinitely
       #   domain.decision_tasks.poll do |decision_task|
       #     # make decisions here
       #   end

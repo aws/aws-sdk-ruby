@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -448,6 +448,36 @@ module AWS
             data.tree.leaf_a.should == 'leaf a'
             data.tree.branch.leaf_b.should == 'leaf b'
             data.tree.branch.leaf_c.should == 'leaf c'
+          end
+
+          context 'nested ignore rules' do
+
+            let(:grammar) {
+              Grammar.customize do
+                element "Base" do
+                  ignore
+                  element "Nested" do
+                    ignore
+                    element("Count") { integer } # not ignored
+                  end
+                end
+              end
+            }
+
+            let(:xml) { <<-XML.strip }
+              <XML>
+                <Base>
+                  <Nested>
+                    <Count>123</Count>
+                  </Nested>
+                </Base>
+              </XML>
+            XML
+
+            it 'should support nested ignores' do
+              data.count.should eq(123)
+            end
+
           end
 
         end

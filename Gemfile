@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,40 +13,18 @@
 
 source 'http://rubygems.org'
 
-gem 'uuidtools', '~> 2.1'
-gem 'httparty', '~> 0.7'
-gem 'nokogiri', '>= 1.4.4'
-gem 'json', '>= 1.4.6'
+gemspec
 
-group :debug do
-  gem 'ruby-debug', :platforms => :ruby_18
-  gem 'ruby-debug19', :platforms => :ruby_19
-  gem 'ruby-prof', :platforms => [:mri_18]
-end
-
-group :autotest do
-  gem 'ZenTest', '~> 4.4'
-  gem 'autotest-fsevent', '~> 0.2.4'
-  gem 'autotest-growl', '~> 0.2.9'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'rb-fsevent'
-  gem 'growl'
-end
-
-group :build do
+group :development do
   gem 'yard'
-  gem 'rspec', '2.5'
-  gem 'rspec', '2.5', :require => 'rspec/core/rake_task'
-  gem 'rcov', '0.9.9'
-  gem 'simplecov', :require => false
-  gem 'ci_reporter', '~> 1.6', :require => 'ci/reporter/rake/rspec'
+  gem 'rdoc', '= 3.9.4'
 end
 
-group :integration do
-  gem 'cucumber', '~> 0.10.2', :require => 'cucumber/rake/task'
-  gem 'bourne', '1.0'
-  gem 'mocha', '0.9.8'
+group :test do
+  gem 'rspec', '= 2.12'
+  gem 'cucumber'
+  gem 'simplecov', :require => false
+  gem 'rvm-tester'
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post', '~> 1.1.2'
   gem 'rotp', '~> 1.3.0'

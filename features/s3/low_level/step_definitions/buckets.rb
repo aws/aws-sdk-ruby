@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,6 +16,40 @@ include AWS
 def get_bucket
   Net::HTTP.get(URI.parse("http://#{@endpoint}/#{@bucket_name}/"))
 end
+
+def create_bucket_low_level options = {}
+  options[:bucket_name] ||= "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @bucket_name = options[:bucket_name]
+  @endpoint = options[:endpoint] || @s3_client.config.s3_endpoint
+  @result = @s3_client.create_bucket(options)
+  @buckets_created << [@bucket_name, @endpoint]
+  sleep 0.5 # Dumb insurance against eventual consistency
+end
+
+def create_bucket_high_level options = {}
+  @bucket_name = options.delete(:name) || "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
+  @endpoint = @s3.client.config.s3_endpoint
+  @bucket = @s3.buckets.create(@bucket_name, options)
+  @buckets_created << [@bucket_name, @endpoint]
+  @bucket
+end
+
+Given /^I create a bucket in "(.*?)"$/ do |location_constraint|
+  create_bucket_low_level(:location_constraint => location_constraint)
+end
+
+When /^I write to an object in the bucket$/ do
+  @response = @s3.client.put_object(
+    :bucket_name => @bucket_name,
+    :key => 'foo',
+    :data => 'bar')
+end
+
+Then /^I should follow redirects$/ do
+  @response.retry_count.should be > 0
+  @response.http_request.host.should eq("#{@bucket_name}.s3-external-3.amazonaws.com")
+end
+
 
 When /^I call create_bucket( asynchronously)?$/ do |async|
   create_bucket_low_level(:async => !async.to_s.strip.empty?)

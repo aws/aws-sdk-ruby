@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,7 +33,7 @@ module AWS
       let(:now) { Time.now }
 
       let(:namespace) {
-        'xmlns="https://route53.amazonaws.com/doc/2012-02-29/"'
+        'xmlns="https://route53.amazonaws.com/doc/2012-12-12/"'
       }
 
       context '#change_resource_record_sets' do
@@ -62,8 +62,8 @@ module AWS
         it 'makes a POST request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset/')
-            req.body.should eq(<<-XML.strip)
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id/rrset/')
+            req.body.xml_cleanup.should eq(<<-XML.xml_cleanup)
 <ChangeResourceRecordSetsRequest #{namespace}>
   <ChangeBatch>
     <Changes>
@@ -91,7 +91,7 @@ XML
         it 'strips the /hostedzone/ prefix from the :hosted_zone_id param' do
           options[:hosted_zone_id] = '/hostedzone/zone-id'
           handler.should_receive(:handle) do |req,resp|
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset/')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id/rrset/')
           end
           client.change_resource_record_sets(options)
         end
@@ -138,7 +138,7 @@ XML
         it 'makes a POST request with an XML body', :ruby => '1.9' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("POST")
-            req.uri.should eq('/2012-02-29/hostedzone')
+            req.uri.should eq('/2012-12-12/hostedzone')
             req.body.should eq(<<-XML.strip)
 <CreateHostedZoneRequest #{namespace}>
   <Name>ZONE-NAME</Name>
@@ -168,7 +168,7 @@ XML
         it 'parses the XML response and headers' do
           handler.should_receive(:handle) do |req,resp|
             resp.status = 201
-            resp.headers['Location'] = 'location-header-value'
+            resp.headers['location'] = 'location-header-value'
             resp.body = <<-XML.strip
               <?xml version="1.0"?>
               <CreateHostedZoneResponse #{namespace}>
@@ -231,7 +231,7 @@ XML
         it 'makes a DELETE request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("DELETE")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id')
             req.body.should eq(nil)
           end
           client.delete_hosted_zone(:id => 'zone-id')
@@ -240,7 +240,7 @@ XML
         it 'strips the /hosted/ prefix from the zone id' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("DELETE")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id')
             req.body.should eq(nil)
           end
           client.delete_hosted_zone(:id => '/hostedzone/zone-id')
@@ -278,7 +278,7 @@ XML
         it 'makes a GET request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/change/change-id')
+            req.uri.should eq('/2012-12-12/change/change-id')
             req.body.should eq(nil)
           end
           client.get_change(:id => 'change-id')
@@ -286,7 +286,7 @@ XML
 
         it 'strips the /change/ prefix from the zone id' do
           handler.should_receive(:handle) do |req,resp|
-            req.uri.should eq('/2012-02-29/change/change-id')
+            req.uri.should eq('/2012-12-12/change/change-id')
           end
           client.get_change(:id => '/change/change-id')
         end
@@ -325,7 +325,7 @@ XML
         it 'makes a GET request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id')
             req.body.should eq(nil)
           end
           client.get_hosted_zone(:id => 'zone-id')
@@ -334,7 +334,7 @@ XML
         it 'strips the /hostedzone/ prefix from the id' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id')
             req.body.should eq(nil)
           end
           client.get_hosted_zone(:id => '/hostedzone/zone-id')
@@ -347,7 +347,7 @@ XML
         it 'makes a GET request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone')
+            req.uri.should eq('/2012-12-12/hostedzone')
             req.body.should eq(nil)
           end
           client.list_hosted_zones
@@ -356,7 +356,7 @@ XML
         it 'accepts :marker' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone?marker=abc')
+            req.uri.should eq('/2012-12-12/hostedzone?marker=abc')
             req.body.should eq(nil)
           end
           client.list_hosted_zones :marker => 'abc'
@@ -365,7 +365,7 @@ XML
         it 'accepts :max_items' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone?maxitems=123')
+            req.uri.should eq('/2012-12-12/hostedzone?maxitems=123')
             req.body.should eq(nil)
           end
           client.list_hosted_zones :max_items => 123
@@ -374,7 +374,7 @@ XML
         it 'accepts :marker and :max_items' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone?marker=abc&maxitems=123')
+            req.uri.should eq('/2012-12-12/hostedzone?marker=abc&maxitems=123')
             req.body.should eq(nil)
           end
           client.list_hosted_zones :marker => 'abc', :max_items => 123
@@ -425,7 +425,7 @@ XML
         it 'makes a GET request' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id/rrset')
             req.body.should eq(nil)
           end
           client.list_resource_record_sets(options)
@@ -434,7 +434,7 @@ XML
         it 'removes the /hostedzone/ prefix' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id/rrset')
             req.body.should eq(nil)
           end
           options[:hosted_zone_id] = '/hostedzone/zone-id'
@@ -444,7 +444,7 @@ XML
         it 'accepts options' do
           handler.should_receive(:handle) do |req,resp|
             req.http_method.should eq("GET")
-            req.uri.should eq('/2012-02-29/hostedzone/zone-id/rrset?type=A&name=foo.com.&identifier=offset&maxitems=50')
+            req.uri.should eq('/2012-12-12/hostedzone/zone-id/rrset?type=A&name=foo.com.&identifier=offset&maxitems=50')
             req.body.should eq(nil)
           end
           options[:start_record_type] = 'A'

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -80,15 +80,6 @@ module AWS
               :min_size => 1,
               :max_size => 2)
           }.should raise_error(ArgumentError, /:launch_configuration/)
-        end
-
-        it 'raises an argument error if you omit :availability_zones' do
-          lambda {
-            groups.create('name', 
-              :launch_configuration => 'lc-name',
-              :min_size => 1,
-              :max_size => 2)
-          }.should raise_error(ArgumentError, /availability_zones/)
         end
 
         it 'raises an argument error if you omit :min_size' do

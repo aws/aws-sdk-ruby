@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -203,6 +203,50 @@ module AWS
             end
 
           end
+
+          context 'with a custom matdesc' do
+
+            it 'should pass along the matdesc' do
+
+              client.should_receive(:put_object).with(
+                hash_including(:metadata => hash_including(
+                    'x-amz-matdesc' => '{"custom":"matdesc"}'
+                  )
+                )
+              ).and_return(client.stub_for(:put_object))
+
+              opts = {
+                :encryption_key => "12345678901234567890123456789012",
+                :encryption_matdesc => '{"custom":"matdesc"}',
+              }
+
+              object.write("HELLO", opts)
+
+            end
+
+          end
+
+          context 'it defaults the to the configured matdesc' do
+
+            it 'should pass along the matdesc' do
+
+              client.config.stub(:s3_encryption_matdesc).
+                and_return('{"configured":"matdesc"}')
+
+              client.should_receive(:put_object).with(
+                hash_including(:metadata => hash_including(
+                    'x-amz-matdesc' => '{"configured":"matdesc"}'
+                  )
+                )
+              ).and_return(client.stub_for(:put_object))
+
+              opts = { :encryption_key => "12345678901234567890123456789012" }
+              object.write("HELLO", opts)
+
+            end
+
+          end
+
           context 'with a string using instruction' do
 
             it 'should call put_object with the bucket, key and data' do
@@ -472,6 +516,15 @@ module AWS
             object.read(:encryption_key => rsa_key)
           end
 
+          it 'should get materials from the correct object version' do
+            # gets the key via a head request
+            client.should_receive(:head_object).
+              with(hash_including(:version_id => 'abc')).
+              and_return(head_response)
+            client.should_receive(:get_object).and_return(response)
+            object.read(:encryption_key => rsa_key, :version_id => 'abc')
+          end
+
           it 'should call get_object with metadata material location' do
             client.should_receive(:head_object)
             client.should_receive(:get_object).
@@ -502,14 +555,13 @@ module AWS
           end
 
           it 'should raise error for wrong data key' do
-            msg = "bad decrypt"
             lambda do
               client.should_receive(:head_object)
               client.should_receive(:get_object).
                   with(:bucket_name => "foobucket", :key => "foo")
               object.read(:encryption_key => master_sym_key,
                           :encryption_materials_location => :metadata)
-            end.should raise_error(msg)
+            end.should raise_error(OpenSSL::Cipher::CipherError)
 
           end
 

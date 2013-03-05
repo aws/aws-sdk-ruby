@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,10 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'bundler/setup'
-
-Bundler.require(:default, :build, :integration)
-
 root = File.dirname(__FILE__)
 tasks_dir = File.join(root, "tasks")
 $:.unshift(tasks_dir)
@@ -25,3 +21,10 @@ require 'aws/core' # for the version number
 Dir[File.join(tasks_dir, "**", "*.rake")].each do |task_file|
   load task_file
 end
+
+# Vendor tasks
+Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
+  load vendor_rakefile
+end
+
+task :default => :spec

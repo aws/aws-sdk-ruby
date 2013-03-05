@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -64,11 +64,11 @@ module AWS
     #  * {#request_cancel_external_workflow_execution}
     #  * {#start_child_workflow_execution}
     #
-    # The deicision methods are grouped above by concern.
+    # The decision methods are grouped above by concern.
     #
     # == Completing the Decision Task
     #
-    # Once you have finished adding deicions to the task, you need to 
+    # Once you have finished adding decisions to the task, you need to
     # complete it.  If you called {DecisionTaskCollection#poll} or 
     # {DecisionTaskCollection#poll_for_single_task} with a block
     # argument then the decision will be completed automatically at the
@@ -542,9 +542,11 @@ module AWS
           workflow_execution.keys.length == 2
         then
           options.merge!(workflow_execution)
+        elsif workflow_execution.is_a?(String)
+          options[:workflow_id] = workflow_execution
         else
           msg = 'expected workflow_execution to be a WorkflowExecution ' +
-            'object or a hash with :workflow_id and :run_id'
+            'object or workflow id or a hash with :workflow_id and :run_id'
           raise ArgumentError, msg
         end
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,16 +25,16 @@ module AWS
         :list_metrics,
       ]
 
-      ## client methods ##
+      # client methods #
 
+      # @!method delete_alarms(options = {})
       # Calls the DeleteAlarms API operation.
-      # @method delete_alarms(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
 
+      # @!method describe_alarm_history(options = {})
       # Calls the DescribeAlarmHistory API operation.
-      # @method describe_alarm_history(options = {})
       # @param [Hash] options
       #   * +:alarm_name+ - (String)
       #   * +:history_item_type+ - (String)
@@ -53,8 +53,8 @@ module AWS
       #     * +:history_data+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_alarms(options = {})
       # Calls the DescribeAlarms API operation.
-      # @method describe_alarms(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - (Array<String>)
       #   * +:alarm_name_prefix+ - (String)
@@ -91,8 +91,8 @@ module AWS
       #     * +:comparison_operator+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method describe_alarms_for_metric(options = {})
       # Calls the DescribeAlarmsForMetric API operation.
-      # @method describe_alarms_for_metric(options = {})
       # @param [Hash] options
       #   * +:metric_name+ - *required* - (String)
       #   * +:namespace+ - *required* - (String)
@@ -130,20 +130,20 @@ module AWS
       #     * +:threshold+ - (Numeric)
       #     * +:comparison_operator+ - (String)
 
+      # @!method disable_alarm_actions(options = {})
       # Calls the DisableAlarmActions API operation.
-      # @method disable_alarm_actions(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
 
+      # @!method enable_alarm_actions(options = {})
       # Calls the EnableAlarmActions API operation.
-      # @method enable_alarm_actions(options = {})
       # @param [Hash] options
       #   * +:alarm_names+ - *required* - (Array<String>)
       # @return [Core::Response]
 
+      # @!method get_metric_statistics(options = {})
       # Calls the GetMetricStatistics API operation.
-      # @method get_metric_statistics(options = {})
       # @param [Hash] options
       #   * +:namespace+ - *required* - (String)
       #   * +:metric_name+ - *required* - (String)
@@ -168,8 +168,8 @@ module AWS
       #     * +:maximum+ - (Numeric)
       #     * +:unit+ - (String)
 
+      # @!method list_metrics(options = {})
       # Calls the ListMetrics API operation.
-      # @method list_metrics(options = {})
       # @param [Hash] options
       #   * +:namespace+ - (String)
       #   * +:metric_name+ - (String)
@@ -188,8 +188,8 @@ module AWS
       #       * +:value+ - (String)
       #   * +:next_token+ - (String)
 
+      # @!method put_metric_alarm(options = {})
       # Calls the PutMetricAlarm API operation.
-      # @method put_metric_alarm(options = {})
       # @param [Hash] options
       #   * +:alarm_name+ - *required* - (String)
       #   * +:alarm_description+ - (String)
@@ -210,8 +210,8 @@ module AWS
       #   * +:comparison_operator+ - *required* - (String)
       # @return [Core::Response]
 
+      # @!method put_metric_data(options = {})
       # Calls the PutMetricData API operation.
-      # @method put_metric_data(options = {})
       # @param [Hash] options
       #   * +:namespace+ - *required* - (String)
       #   * +:metric_data+ - *required* - (Array<Hash>)
@@ -229,8 +229,8 @@ module AWS
       #     * +:unit+ - (String)
       # @return [Core::Response]
 
+      # @!method set_alarm_state(options = {})
       # Calls the SetAlarmState API operation.
-      # @method set_alarm_state(options = {})
       # @param [Hash] options
       #   * +:alarm_name+ - *required* - (String)
       #   * +:state_value+ - *required* - (String)
@@ -238,7 +238,7 @@ module AWS
       #   * +:state_reason_data+ - (String)
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
 
       define_client_methods('2010-08-01')
 

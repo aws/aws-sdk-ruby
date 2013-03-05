@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -399,6 +399,18 @@ module AWS
 
         context '#signal_external_workflow_execution' do 
 
+          it 'accepts a workflow execution id' do
+            makes_decisions(task, {
+              :decision_type => 'SignalExternalWorkflowExecution',
+              :signal_external_workflow_execution_decision_attributes => { 
+                :workflow_id => 'wid',
+                :signal_name => 'signal-name',
+              },
+            })
+            task.signal_external_workflow_execution('wid', 'signal-name')
+            task.complete!
+          end
+
           it 'accepts a workflow execution object' do
             makes_decisions(task, {
               :decision_type => 'SignalExternalWorkflowExecution',
@@ -438,6 +450,17 @@ module AWS
         end
 
         context '#request_cancel_external_workflow_execution' do
+
+          it 'accepts a workflow execution id' do
+            makes_decisions(task, {
+              :decision_type => 'RequestCancelExternalWorkflowExecution',
+              :request_cancel_external_workflow_execution_decision_attributes => { 
+                :workflow_id => 'wid',
+              },
+            })
+            task.request_cancel_external_workflow_execution('wid')
+            task.complete!
+          end
 
           it 'accepts a workflow execution object' do
             makes_decisions(task, {

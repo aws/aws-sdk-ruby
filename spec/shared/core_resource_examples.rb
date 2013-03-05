@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,7 +28,7 @@ def resource_context &example_group_block
       end
 
       it 'can be specified in the constructor' do
-        config = double('configuraiton')
+        config = double('configuration')
         new_resource(:config => config).config.should eq(config)
       end
 

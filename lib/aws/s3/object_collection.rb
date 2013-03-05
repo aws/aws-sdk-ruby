@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,7 +23,7 @@ module AWS
     #   # this will not make any requests against S3
     #   object = bucket.objects['foo.jpg']
     #   object.key #=> 'foo.jpg'
-    # 
+    #
     # == Finding objects with a Prefix
     #
     # Given a bucket with the following keys:
@@ -38,7 +38,7 @@ module AWS
     #
     #   bucket.objects.with_prefix('videos').collect(&:key)
     #   #=> ['videos/comedy.mpg', 'videos/dancing.mpg']
-    #   
+    #
     # == Exploring Objects with a Tree Interface
     #
     # Given a bucket with the following keys:
@@ -88,7 +88,7 @@ module AWS
       # Returns an S3Object given its name.  For example:
       #
       # @example
-      #   
+      #
       #   object = bucket.objects['file.txt']
       #   object.class #=> S3Object
       #
@@ -116,20 +116,39 @@ module AWS
       #
       #   bucket.objects.delete(to_delete)
       #
-      # @param [Mixed] objects One or more objects to delete.  Each object
-      #   can be one of the following:
+      # @overload delete(objects)
+      #   @param [Mixed] objects One or more objects to delete.  Each object
+      #     can be one of the following:
       #
-      #   * An object key (string)
-      #   * A hash with :key and :version_id (for versioned objects)
-      #   * An {S3Object} instance
-      #   * An {ObjectVersion} instance
+      #     * An object key (string)
+      #     * A hash with :key and :version_id (for versioned objects)
+      #     * An {S3Object} instance
+      #     * An {ObjectVersion} instance
       #
-      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      # @overload delete(objects, options)
+      #   Deletes multiple objects, with additional options. The array can
+      #   contain any of the types of objects the first method invocation style
+      #   accepts.
+      #   @param [Array] objects One or more objects to delete.
+      #   @param [Hash] options Optional headers to pass on.
+      #
+      # @raise [BatchDeleteError] If any of the objects failed to delete,
       #   a BatchDeleteError will be raised with a summary of the errors.
       #
       # @return [nil]
       #
       def delete *objects
+
+        # Detect and retrieve options from the end of the splat.
+        if
+          objects.size == 2 and
+          objects[0].is_a?(Array) and
+          objects[1].is_a?(Hash)
+        then
+          client_opts = objects.pop
+        else
+          client_opts = {}
+        end
 
         objects = objects.flatten.collect do |obj|
           case obj
@@ -137,7 +156,7 @@ module AWS
           when Hash          then obj
           when S3Object      then { :key => obj.key }
           when ObjectVersion then { :key => obj.key, :version_id => obj.version_id }
-          else  
+          else
             msg = "objects must be keys (strings or hashes with :key and " +
                   ":version_id), S3Objects or ObjectVersions, got " +
                   object.class.name
@@ -146,7 +165,6 @@ module AWS
         end
 
         batch_helper = BatchHelper.new(1000) do |batch|
-          client_opts = {}
           client_opts[:bucket_name] = bucket.name
           client_opts[:quiet] = true
           client_opts[:objects] = batch
@@ -167,14 +185,14 @@ module AWS
 
         batch_helper.complete!
 
-        raise Errors::BatchDeleteError.new(error_counts) unless 
+        raise Errors::BatchDeleteError.new(error_counts) unless
           error_counts.empty?
 
         nil
 
       end
 
-      # Deletes each object in the collection that returns a true value 
+      # Deletes each object in the collection that returns a true value
       # from block passed to this method.  Deletes are batched for efficiency.
       #
       #   # delete text files in the 2009 "folder"
@@ -182,14 +200,14 @@ module AWS
       #
       # @yieldparam [S3Object] object
       #
-      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      # @raise [BatchDeleteError] If any of the objects failed to delete,
       #   a BatchDeleteError will be raised with a summary of the errors.
       #
       def delete_if &block
 
         error_counts = {}
 
-        batch_helper = BatchHelper.new(1000) do |objects| 
+        batch_helper = BatchHelper.new(1000) do |objects|
           begin
             delete(objects)
           rescue Errors::BatchDeleteError => error
@@ -206,7 +224,7 @@ module AWS
 
         batch_helper.complete!
 
-        raise Errors::BatchDeleteError.new(error_counts) unless 
+        raise Errors::BatchDeleteError.new(error_counts) unless
           error_counts.empty?
 
         nil
@@ -223,7 +241,7 @@ module AWS
       #
       #   bucket.objects.with_prefix('2009/').delete_all
       #
-      # @raise [BatchDeleteError] If any of the objects failed to delete, 
+      # @raise [BatchDeleteError] If any of the objects failed to delete,
       #   a BatchDeleteError will be raised with a summary of the errors.
       #
       # @return [Array] Returns an array of results
@@ -243,7 +261,7 @@ module AWS
           end
         end
 
-        raise Errors::BatchDeleteError.new(error_counts) unless 
+        raise Errors::BatchDeleteError.new(error_counts) unless
           error_counts.empty?
 
         nil
@@ -255,10 +273,10 @@ module AWS
       # Use break or raise an exception to terminate the enumeration.
       #
       # @param [Hash] options
-      # @option options [Integer] :limit (nil) The maximum number of 
+      # @option options [Integer] :limit (nil) The maximum number of
       #   objects to yield.
       # @option options [Integer] :batch_size (1000) The number of objects to
-      #   fetch each request to S3.  Maximum is 1000 keys at time. 
+      #   fetch each request to S3.  Maximum is 1000 keys at time.
       # @return [nil]
       def each options = {}, &block
         super
@@ -299,7 +317,7 @@ module AWS
       # processes items in batches of 1k items
       # @private
       class BatchHelper
-        
+
         def initialize batch_size, &block
           @batch_size = batch_size
           @block = block

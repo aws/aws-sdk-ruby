@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -34,9 +34,17 @@ module AWS
 
       let(:options) {{}}
 
-      let(:handler) { RESTRequestBuilder.new(namespace, operation) }
+      let(:handler) {
+        RESTRequestBuilder.new(operation,
+          :xmlnamespace => namespace,
+          :format => :xml)
+      }
 
-      let(:request) { handler.populate_request(Http::Request.new, options) }
+      let(:request) {
+        req = Http::Request.new
+        handler.populate_request(req, options)
+        req
+      }
 
       context '#populate_request' do
 
@@ -116,7 +124,7 @@ module AWS
             http[:uri] = '/Id/:id'
             # note the :required option is omitted
             inputs[:id] = { :type => :string }
-            msg = 'missing required uri argument :id'
+            msg = 'missing required option :id'
 
             lambda {
               request.uri
@@ -186,7 +194,7 @@ module AWS
             http[:request_headers] = { :foo_bar => 'x-amz-foo-bar' }
             inputs[:foo_bar] = { :type => :string }
             options[:foo_bar] = 'yuck'
-            request.headers.should == { 'x-amz-foo-bar' => 'yuck' }
+            request.headers['x-amz-foo-bar'].should eq('yuck')
           end
 
           it 'does nothing special if the header value is omitted' do
@@ -206,9 +214,11 @@ module AWS
           end
 
           it 'uses the :payload param for the body' do
+            message = StringIO.new('abcmnoxyz')
+            message.rewind
             http[:request_payload] = :message
-            inputs[:message] = { :type => :string, :required => true }
-            options[:message] = 'abcmnoxyz'
+            inputs[:message] = { :type => :blob, :required => true }
+            options[:message] = message
             request.body.should eq('abcmnoxyz')
           end
 

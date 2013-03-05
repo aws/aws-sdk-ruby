@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -120,7 +120,7 @@ module AWS
     # Amazon S3 provides server side encryption for an additional cost.
     # You can specify to use server side encryption when writing an object.
     #
-    #   obj.write('data', :server_size_encryption => :aes256)
+    #   obj.write('data', :server_side_encryption => :aes256)
     #
     # You can also make this the default behavior.
     #
@@ -303,19 +303,19 @@ module AWS
       #
       # @return [String] Returns the object's ETag
       def etag
-        head.etag
+        head[:etag]
       end
 
       # Returns the object's last modified time.
       #
       # @return [Time] Returns the object's last modified time.
       def last_modified
-        head.last_modified
+        head[:last_modified]
       end
 
       # @return [Integer] Size of the object in bytes.
       def content_length
-        head.content_length
+        head[:content_length]
       end
 
       # @note S3 does not compute content-type.  It reports the content-type
@@ -323,30 +323,55 @@ module AWS
       # @return [String] Returns the content type as reported by S3,
       #   defaults to an empty string when not provided during upload.
       def content_type
-        head.content_type
+        head[:content_type]
       end
 
       # @return [DateTime,nil]
       def expiration_date
-        head.expiration_date
+        head[:expiration_date]
       end
 
       # @return [String,nil]
       def expiration_rule_id
-        head.expiration_rule_id
+        head[:expiration_rule_id]
       end
 
       # @return [Symbol, nil] Returns the algorithm used to encrypt
       #   the object on the server side, or +nil+ if SSE was not used
       #   when storing the object.
       def server_side_encryption
-        head.server_side_encryption
+        head[:server_side_encryption]
       end
 
       # @return [true, false] Returns true if the object was stored
       #   using server side encryption.
       def server_side_encryption?
         !server_side_encryption.nil?
+      end
+
+      # @return [Boolean] whether a {#restore} operation on the
+      #   object is currently being performed on the object.
+      # @see #restore_expiration_date
+      # @since 1.7.2
+      def restore_in_progress?
+        head[:restore_in_progress]
+      end
+
+      # @return [DateTime] the time when the temporarily restored object
+      #   will be removed from S3. Note that the original object will remain
+      #   available in Glacier.
+      # @return [nil] if the object was not restored from an archived
+      #   copy
+      # @since 1.7.2
+      def restore_expiration_date
+        head[:restore_expiration_date]
+      end
+
+      # @return [Boolean] whether the object is a temporary copy of an
+      #   archived object in the Glacier storage class.
+      # @since 1.7.2
+      def restored_object?
+        !!head[:restore_expiration_date]
       end
 
       # Deletes the object from its S3 bucket.
@@ -361,9 +386,12 @@ module AWS
       #   if you use client-side encryption and the encryption materials
       #   were stored in a separate object in S3 (key.instruction).
       #
+      # @option [String] :mfa The serial number and current token code of
+      #   the Multi-Factor Authentication (MFA) device for the user. Format
+      #   is "SERIAL TOKEN" - with a space between the serial and token.
+      #
       # @return [nil]
       def delete options = {}
-
         client.delete_object(options.merge(
           :bucket_name => bucket.name,
           :key => key))
@@ -376,6 +404,27 @@ module AWS
 
         nil
 
+      end
+
+      # Restores a temporary copy of an archived object from the
+      # Glacier storage tier. After the specified +days+, Amazon
+      # S3 deletes the temporary copy. Note that the object
+      # remains archived; Amazon S3 deletes only the restored copy.
+      #
+      # Restoring an object does not occur immediately. Use
+      # {#restore_in_progress?} to check the status of the operation.
+      #
+      # @option [Integer] :days (1) the number of days to keep the object
+      # @return [Boolean] +true+ if a restore can be initiated.
+      # @since 1.7.2
+      def restore options = {}
+        options[:days] ||= 1
+
+        client.restore_object(
+          :bucket_name => bucket.name,
+          :key => key, :days => options[:days])
+
+        true
       end
 
       # @option [String] :version_id (nil) If present the metadata object
@@ -510,6 +559,9 @@ module AWS
       #     media-type referenced by the +Content-Type+ header field.
       #     See
       #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+      #
+      #   @option options [String] :content_md5
+      #     The base64 encoded content md5 of the data.
       #
       #   @option options :content_type A standard MIME type
       #     describing the format of the object data.
@@ -781,64 +833,54 @@ module AWS
       #   caching behavior.  See
       #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
       #
+      # @option options [String] :expires The date and time at which the
+      #   object is no longer cacheable.
+      #
       # @return [nil]
       def copy_from source, options = {}
 
-        copy_opts = { :bucket_name => bucket.name, :key => key }
+        options = options.dup
 
-        copy_opts[:copy_source] = case source
-        when S3Object
-          "#{source.bucket.name}/#{source.key}"
-        when ObjectVersion
-          copy_opts[:version_id] = source.version_id
-          "#{source.object.bucket.name}/#{source.object.key}"
-        else
-          case
-          when options[:bucket]      then "#{options[:bucket].name}/#{source}"
-          when options[:bucket_name] then "#{options[:bucket_name]}/#{source}"
-          else "#{self.bucket.name}/#{source}"
+        options[:copy_source] =
+          case source
+          when S3Object
+            "#{source.bucket.name}/#{source.key}"
+          when ObjectVersion
+            options[:version_id] = source.version_id
+            "#{source.object.bucket.name}/#{source.object.key}"
+          else
+            if options[:bucket]
+              "#{options.delete(:bucket).name}/#{source}"
+            elsif options[:bucket_name]
+              "#{options.delete(:bucket_name)}/#{source}"
+            else
+              "#{self.bucket.name}/#{source}"
+            end
           end
-        end
 
-        copy_opts[:metadata_directive] = 'COPY'
-
-        # Saves client-side encryption headers and copies the instruction file
-        copy_cse_materials(source, options) do |cse_materials|
-          if options[:metadata]
-            copy_opts[:metadata] = options[:metadata].merge(cse_materials)
-            copy_opts[:metadata_directive] = 'REPLACE'
-          end
-        end
-
-        if options[:content_disposition]
-          copy_opts[:content_disposition] = options[:content_disposition]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        if options[:content_type]
-          copy_opts[:content_type] = options[:content_type]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        if options[:cache_control]
-          copy_opts[:cache_control] = options[:cache_control]
-          copy_opts[:metadata_directive] = "REPLACE"
-        end
-
-        copy_opts[:acl] = options[:acl] if options[:acl]
-        copy_opts[:version_id] = options[:version_id] if options[:version_id]
-        copy_opts[:server_side_encryption] =
-          options[:server_side_encryption] if
-          options.key?(:server_side_encryption)
-        add_sse_options(copy_opts)
-
-        if options[:reduced_redundancy]
-          copy_opts[:storage_class] = 'REDUCED_REDUNDANCY'
+        if [:metadata, :content_disposition, :content_type, :cache_control,
+          ].any? {|opt| options.key?(opt) }
+        then
+          options[:metadata_directive] = 'REPLACE'
         else
-          copy_opts[:storage_class] = 'STANDARD'
+          options[:metadata_directive] ||= 'COPY'
         end
 
-        client.copy_object(copy_opts)
+        # copies client-side encryption materials (from the metadata or
+        # instruction file)
+        if options.delete(:client_side_encrypted)
+          copy_cse_materials(source, options)
+        end
+
+        add_sse_options(options)
+
+        options[:storage_class] = options.delete(:reduced_redundancy) ?
+          'REDUCED_REDUNDANCY' : 'STANDARD'
+
+        options[:bucket_name] = bucket.name
+        options[:key] = key
+
+        client.copy_object(options)
 
         nil
 
@@ -899,6 +941,9 @@ module AWS
       #   the client-side encryption materials will be copied. Without this
       #   option, the key and iv are not guaranteed to be transferred to
       #   the new object.
+      #
+      # @option options [String] :expires The date and time at which the
+      #   object is no longer cacheable.
       #
       # @return [S3Object] Returns the copy (target) object.
       #
@@ -1007,7 +1052,8 @@ module AWS
         if should_decrypt?(options)
           get_encrypted_object(options, &read_block)
         else
-          get_object(options, &read_block)
+          resp_data = get_object(options, &read_block)
+          block_given? ? resp_data : resp_data[:data]
         end
 
       end
@@ -1114,6 +1160,16 @@ module AWS
       # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
+      # @option options [String] :endpoint Sets the hostname of the
+      #   endpoint (overrides config.s3_endpoint).
+      #
+      # @option options [Integer] :port Sets the port of the
+      #   endpoint (overrides config.s3_port).
+      #
+      # @option options [Boolean] :force_path_style (false) Indicates
+      #   whether the generated URL should place the bucket name in
+      #   the path (true) or as a subdomain (false).
+      #
       # @option options [String] :response_content_type Sets the
       #   Content-Type header of the response when performing an
       #   HTTP GET on the returned URL.
@@ -1139,6 +1195,9 @@ module AWS
       #   HTTP GET on the returned URL.
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
+
+        options[:secure] = config.use_ssl? unless options.key?(:secure)
+
         req = request_for_signing(options)
 
         method = http_method(method)
@@ -1152,7 +1211,8 @@ module AWS
                       config.credential_provider.session_token) if
           config.credential_provider.session_token
 
-        build_uri(options[:secure] != false, req)
+        secure = options.fetch(:secure, config.use_ssl?)
+        build_uri(req, options)
       end
 
       # Generates a public (not authenticated) URL for the object.
@@ -1165,8 +1225,8 @@ module AWS
       # @return [URI::HTTP, URI::HTTPS]
       #
       def public_url(options = {})
-        req = request_for_signing(options)
-        build_uri(options[:secure] != false, req)
+        options[:secure] = config.use_ssl? unless options.key?(:secure)
+        build_uri(request_for_signing(options), options)
       end
 
       # Generates fields for a presigned POST to this object.  This
@@ -1197,28 +1257,29 @@ module AWS
         value
       end
 
-      protected
+      private
 
       # @return [Boolean]
       def should_decrypt? options
-        options[:encryption_key]
+        options[:encryption_key] or config.s3_encryption_key
       end
 
       # A small wrapper around client#get_object
       def get_object options, &read_block
-        client.get_object(options, &read_block).data[:data]
+        client.get_object(options, &read_block).data
       end
 
       # A wrapper around get_object that decrypts
       def get_encrypted_object options, &read_block
         decryption_cipher(options) do |cipher|
           if block_given?
-            get_object(options) do |chunk|
+            resp = get_object(options) do |chunk|
               yield(cipher.update(chunk))
             end
             yield(cipher.final)
+            resp
           else
-            cipher.update(get_object(options)) + cipher.final
+            cipher.update(get_object(options)[:data]) + cipher.final
           end
         end
       end
@@ -1265,9 +1326,10 @@ module AWS
         estimate
       end
 
-      def build_uri(secure, request)
-        uri_class = secure ? URI::HTTPS : URI::HTTP
+      def build_uri(request, options)
+        uri_class = options[:secure] ? URI::HTTPS : URI::HTTP
         uri_class.build(:host => request.host,
+                        :port => request.port,
                         :path => request.path,
                         :query => request.querystring)
       end
@@ -1279,9 +1341,8 @@ module AWS
         parts << ""
         parts << ""
         parts << expires
-        if config.credential_provider.session_token
-          parts << "x-amz-security-token:"
-          parts << "#{config.credential_provider.session_token}"
+        if token = config.credential_provider.session_token
+          parts << "x-amz-security-token:#{token}"
         end
         parts << request.canonicalized_resource
 
@@ -1293,17 +1354,13 @@ module AWS
       end
 
       def expiration_timestamp(input)
+        input = input.to_int if input.respond_to?(:to_int)
         case input
-        when Time
-          expires = input.to_i
-        when DateTime
-          expires = Time.parse(input.to_s).to_i
-        when Integer
-          expires = (Time.now + input).to_i
-        when String
-          expires = Time.parse(input).to_i
-        else
-          expires = (Time.now + 60*60).to_i
+        when Time then input.to_i
+        when DateTime then Time.parse(input.to_s).to_i
+        when Integer then (Time.now + input).to_i
+        when String then Time.parse(input).to_i
+        else (Time.now + 60*60).to_i
         end
       end
 
@@ -1318,11 +1375,18 @@ module AWS
       end
 
       def request_for_signing(options)
+
+        port = [443, 80].include?(config.s3_port) ? 
+          (options[:secure] ? 443 : 80) :
+          config.s3_port
+
         req = Request.new
 
         req.bucket = bucket.name
         req.key = key
-        req.host = config.s3_endpoint
+        req.host = options.fetch(:endpoint, config.s3_endpoint)
+        req.port = options.fetch(:port, port)
+        req.force_path_style = options.fetch(:force_path_style, config.s3_force_path_style)
 
         REQUEST_PARAMETERS.each do |param|
           req.add_param(param.to_s.tr("_","-"),
@@ -1333,11 +1397,11 @@ module AWS
       end
 
       def add_sse_options(options)
-        options[:server_side_encryption] =
-          config.s3_server_side_encryption unless
-          options.key?(:server_side_encryption)
+        unless options.key?(:server_side_encryption)
+          options[:server_side_encryption] = config.s3_server_side_encryption
+        end
         options.delete(:server_side_encryption) if
-          options[:server_side_encryption] == nil
+          options[:server_side_encryption].nil?
       end
 
       # Adds client-side encryption metadata headers and encrypts key
@@ -1384,9 +1448,11 @@ module AWS
         # Ensure metadata exists
         options[:metadata] = {} unless options[:metadata]
 
+        matdesc = options[:encryption_matdesc] || config.s3_encryption_matdesc
+
         encryption_materials = {'x-amz-key' => enc_envelope_key,
                                 'x-amz-iv'  => enc_envelope_iv,
-                                'x-amz-matdesc' => "{}"}
+                                'x-amz-matdesc' => matdesc}
         orig_headers = {}
 
         # Save the unencrypted content length
@@ -1449,9 +1515,9 @@ module AWS
             config.s3_encryption_materials_location
 
           cipher =
-          decryption_materials(location) do |envelope_key, envelope_iv|
+          decryption_materials(location, options) do |envelope_key, envelope_iv|
             envelope_key, envelope_iv =
-              decode_envelope_key(envelope_key, envelope_iv, options)
+              decode_envelope_key(envelope_key, envelope_iv, encryption_key)
             get_aes_cipher(:decrypt, :CBC, envelope_key, envelope_iv)
           end
 
@@ -1463,10 +1529,10 @@ module AWS
       end
 
       # Decodes the envelope key for decryption
-      def decode_envelope_key envelope_key, envelope_iv, options
+      def decode_envelope_key envelope_key, envelope_iv, encryption_key
         decrypted_key =
         begin
-          decrypt(decode64(envelope_key), options[:encryption_key])
+          decrypt(decode64(envelope_key), encryption_key)
         rescue RuntimeError
           msg = "Master key used to decrypt data key is not correct."
           raise AWS::S3::Errors::IncorrectClientSideEncryptionKey, msg
@@ -1478,10 +1544,10 @@ module AWS
 
       # @yield [String, String, String] Yields encryption materials for
       #   decryption
-      def decryption_materials location, &block
+      def decryption_materials location, options = {}, &block
 
         materials = case location
-          when :metadata then get_metadata_materials
+          when :metadata then get_metadata_materials(options)
           when :instruction_file then get_inst_file_materials
           else
             msg = "invalid :encryption_materials_location option, expected "
@@ -1501,8 +1567,10 @@ module AWS
 
       # @return [String, String, String] Returns the data key, envelope_iv, and the
       #   material description for decryption from the metadata.
-      def get_metadata_materials
-        metadata.to_h.values_at(*%w(x-amz-key x-amz-iv))
+      def get_metadata_materials(options)
+        opts = {}
+        opts[:version_id] = options[:version_id] if options[:version_id]
+        metadata(opts).to_h.values_at(*%w(x-amz-key x-amz-iv))
       end
 
       # @return [String, String, String] Returns the data key, envelope_iv, and the
@@ -1515,30 +1583,31 @@ module AWS
       # @yield [Hash] Yields the metadata to be saved for client-side encryption
       def copy_cse_materials source, options
         cse_materials = {}
-        if options[:client_side_encrypted]
-          meta = source.metadata.to_h
-          cse_materials['x-amz-key'] = meta['x-amz-key'] if meta['x-amz-key']
-          cse_materials['x-amz-iv'] = meta['x-amz-iv']   if meta['x-amz-iv']
-          cse_materials['x-amz-matdesc'] = meta['x-amz-matdesc'] if
-                                             meta['x-amz-matdesc']
-          cse_materials['x-amz-unencrypted-content-length'] =
-            meta['x-amz-unencrypted-content-length'] if
-              meta['x-amz-unencrypted-content-length']
-          cse_materials['x-amz-unencrypted-content-md5'] =
-            meta['x-amz-unencrypted-content-md5'] if
-              meta['x-amz-unencrypted-content-md5']
+        meta = source.metadata.to_h
+        cse_materials['x-amz-key'] = meta['x-amz-key'] if meta['x-amz-key']
+        cse_materials['x-amz-iv'] = meta['x-amz-iv']   if meta['x-amz-iv']
+        cse_materials['x-amz-matdesc'] = meta['x-amz-matdesc'] if
+                                           meta['x-amz-matdesc']
+        cse_materials['x-amz-unencrypted-content-length'] =
+          meta['x-amz-unencrypted-content-length'] if
+            meta['x-amz-unencrypted-content-length']
+        cse_materials['x-amz-unencrypted-content-md5'] =
+          meta['x-amz-unencrypted-content-md5'] if
+            meta['x-amz-unencrypted-content-md5']
 
+        if
+          cse_materials['x-amz-key'] and
+          cse_materials['x-amz-iv']  and
+          cse_materials['x-amz-matdesc']
+        then
+          options[:metadata] = (options[:metadata] || {}).merge(cse_materials)
+        else
           # Handling instruction file
-          unless cse_materials['x-amz-key'] and
-                 cse_materials['x-amz-iv']  and
-                 cse_materials['x-amz-matdesc']
-            source_inst = "#{source.key}.instruction"
-            dest_inst   = "#{key}.instruction"
-            self.bucket.objects[dest_inst].copy_from(
-              source.bucket.objects[source_inst])
-          end
+          source_inst = "#{source.key}.instruction"
+          dest_inst   = "#{key}.instruction"
+          self.bucket.objects[dest_inst].copy_from(
+            source.bucket.objects[source_inst])
         end
-        yield(cse_materials)
       end
 
       # Removes unwanted options that should not be passed to the client.

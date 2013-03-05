@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -120,7 +120,7 @@ module AWS
   # = Lazy Execution
   #
   # Requests are not made until necessary.  This means you can drill down
-  # all the way to an attribute, by name, without making any requets
+  # all the way to an attribute, by name, without making any requests
   # to SimpleDB.
   #
   #   # makes no request to SimpleDB
@@ -136,6 +136,8 @@ module AWS
   #   # one request to delete the colors attribute
   #   colors.delete
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SimpleDB client object
   class SimpleDB
 
     AWS.register_autoloads(self, 'aws/simple_db') do
@@ -176,7 +178,7 @@ module AWS
     #
     # === Other Modes
     #
-    # You can also use this same function to disable consistent reads insie
+    # You can also use this same function to disable consistent reads inside
     # a block.  This is useful if you have consistent reads enabled by 
     # default:
     #

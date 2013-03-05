@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,11 +22,19 @@ module AWS
 
         let(:rules) {{}}
 
+        let(:http) { nil }
+
+        let(:operation) {{ :inputs => rules }}
+
         let(:serializer) {
-          XMLSerializer.new('http://namespace.com/doc/', 'OperationName', rules)
+          XMLSerializer.new('http://namespace.com/doc/', 'OperationName', operation)
         }
 
         let(:xml) { serializer.serialize(options) }
+
+        before(:each) do
+          operation[:http] = http if http
+        end
 
         context '#rules' do
 
@@ -50,12 +58,27 @@ module AWS
 
         context '#serialize' do
 
+          context 'with request payload' do
+
+            let(:http) {{ :request_payload => :config }}
+
+            it 'uses the name of the request payload as the root xml element' do
+              rules[:config] = {
+                :name => 'Configuration',
+                :type => :hash,
+                :members => {},
+              }
+              xml.should eq("<Configuration xmlns=\"http://namespace.com/doc/\"/>")
+            end
+
+          end
+
           context 'strings' do
 
             it 'returns string as is' do
               rules[:name] = { :name => 'Name', :type => :string }
               options[:name] = 'name-value'
-              xml.should match("<Name>name-value</Name>")
+              xml.should include("<Name>name-value</Name>")
             end
 
           end
@@ -65,7 +88,7 @@ module AWS
             it 'returns integers as is' do
               rules[:count] = { :name => 'Count', :type => :integer }
               options[:count] = 123
-              xml.should match("<Count>123</Count>")
+              xml.should include("<Count>123</Count>")
             end
 
           end
@@ -75,13 +98,13 @@ module AWS
             it 'it encodes true as a string' do
               rules[:enabled] = { :name => 'Enabled', :type => :boolean }
               options[:enabled] = true
-              xml.should match("<Enabled>true</Enabled>")
+              xml.should include("<Enabled>true</Enabled>")
             end
 
             it 'it encodes false as a string' do
               rules[:enabled] = { :name => 'Enabled', :type => :boolean }
               options[:enabled] = false
-              xml.should match("<Enabled>false</Enabled>")
+              xml.should include("<Enabled>false</Enabled>")
             end
 
           end
@@ -91,14 +114,14 @@ module AWS
             it 'encodes numbers as strings' do
               rules[:date] = { :name => 'Date', :type => :timestamp }
               options[:date] = 123456789
-              xml.should match("<Date>123456789</Date>")
+              xml.should include("<Date>123456789</Date>")
             end
 
             it 'calls #to_s on other date-like objects' do
               now = Time.now
               rules[:date] = { :name => 'Date', :type => :timestamp }
               options[:date] = now
-              xml.should match("<Date>#{now.to_s}</Date>")
+              xml.should include("<Date>#{now.to_s}</Date>")
             end
 
           end
@@ -132,7 +155,7 @@ module AWS
                 :xyz => now,
                 :list => [1,2,3],
               }
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Configuration>
     <Abc>abc-value</Abc>
@@ -171,7 +194,7 @@ XML
                   :first => 'a',
                 }
 
-                xml.should == <<-XML.strip
+                xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <OrderedHash>
     <First>a</First>
@@ -195,7 +218,7 @@ XML
                 :members => { :type => :string, :name => 'Value' },
               }
               options[:list] = %w(abc mno xyz)
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <List>
     <Value>abc</Value>
@@ -213,7 +236,7 @@ XML
                 :members => { :type => :integer, :name => 'Year' },
               }
               options[:list] = [1990, 1995, 2000]
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Years>
     <Year>1990</Year>
@@ -231,7 +254,7 @@ XML
                 :members => { :type => :boolean, :name => 'state' },
               }
               options[:states] = [true, true, false]
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Statuses>
     <state>true</state>
@@ -250,7 +273,7 @@ XML
                 :members => { :type => :timestamp, :name => 'When' },
               }
               options[:times] = times
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Timestamps>
     <When>#{times[0]}</When>
@@ -277,7 +300,7 @@ XML
                 { :key => 'abc', :value => '1' },
                 { :key => 'mno', :value => '2' },
               ]
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Tags>
     <Tag>
@@ -296,7 +319,7 @@ XML
             it 'defaults list member names to "member"' do
               rules[:list] = { :type => :array, :members => { :type => :integer }}
               options[:list] = [1,2,3]
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <List>
     <member>1</member>
@@ -341,7 +364,7 @@ XML
                   ],
                 ]
               ]
-              xml.should == <<-XML.strip
+              xml.xml_cleanup.should == <<-XML.xml_cleanup
 <OperationNameRequest xmlns="http://namespace.com/doc/">
   <Buckets>
     <Bucket>

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -164,10 +164,64 @@ module AWS
         GetBucketLifecycleConfiguration = BaseGrammar.customize do
           element("Rule") do
             list
-            rename(:rules)  
+            rename(:rules)
             element("Expiration") do
               element("Days") { integer_value }
+              element("Date") { datetime_value }
             end
+            element("Transition") do
+              element("StorageClass") { }
+              element("Days") { integer_value }
+              element("Date") { datetime_value }
+            end
+          end
+        end
+
+        GetBucketCors = BaseGrammar.customize do
+          element "CORSRule" do
+            list
+            rename :rules
+            element "AllowedMethod" do
+              list
+              rename :allowed_methods
+            end
+            element "AllowedOrigin" do
+              list
+              rename :allowed_origins
+            end
+            element "AllowedHeader" do
+              list
+              rename :allowed_headers
+            end
+            element "MaxAgeSeconds" do
+              integer
+            end
+            element "ExposeHeader" do
+              list
+              rename :expose_headers
+            end
+          end
+        end
+
+        GetBucketTagging = BaseGrammar.customize do
+          element "TagSet" do
+            ignore
+            element "Tag" do
+              map_entry("Key", "Value")
+              rename :tags
+            end
+          end
+        end
+
+        GetBucketWebsite = BaseGrammar.customize do
+          element "IndexDocument" do
+            element "Suffix"
+          end
+          element "ErrorDocument" do
+            element "Key"
+          end
+          element "RoutingRules" do
+            list("RoutingRule")
           end
         end
 

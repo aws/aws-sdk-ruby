@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,6 +13,7 @@
 
 require 'spec_helper'
 require 'stringio'
+require 'timeout'
 
 module AWS::Core::Http
   describe NetHttpHandler do
@@ -236,15 +237,34 @@ module AWS::Core::Http
 
     end
 
-    context 'timeouts' do
+    context 'errors' do
 
-      it 'traps timeout errors and populates them on the response' do
-        http.stub(:request).and_raise(Timeout::Error)
-        handle!
-        response.network_error?.should == true
+      shared_examples_for(:traps_certain_errors_as_networking_errors) do |klass|
+
+        it "traps #{klass.name} errors" do
+          http.stub(:request).and_raise(klass)
+          handle!
+          response.network_error?.should == true
+        end
+
+        it "provides access to the error" do
+          http.stub(:request).and_raise(klass)
+          handle!
+          response.network_error.should be_a(klass)
+        end
+
       end
 
-    end
+      it_behaves_like(:traps_certain_errors_as_networking_errors, SocketError)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, EOFError)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, IOError)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ECONNABORTED)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ECONNRESET)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EPIPE)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EINVAL)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Timeout::Error)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ETIMEDOUT)
 
+    end
   end
 end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -106,7 +106,7 @@ module AWS
         if headers.detect{|k,v| k.to_s =~ /^x-amz-date$/i }
           ''
         else
-          headers['date'] ||= Time.now.rfc822
+          headers['date'] ||= Time.now.httpdate
         end
       end
 
@@ -152,7 +152,7 @@ module AWS
         x_amz = headers.select{|name, value| name.to_s =~ /^x-amz-/i }
         x_amz = x_amz.collect{|name, value| [name.downcase, value] }
         x_amz = x_amz.sort_by{|name, value| name }
-        x_amz = x_amz.collect{|name, value| "#{name}:#{value}" }.join("\n")
+        x_amz = x_amz.collect{|name, value| "#{name}:#{value.to_s.strip}" }.join("\n")
         x_amz == '' ? nil : x_amz
       end
 
@@ -180,7 +180,9 @@ module AWS
         def sub_resources
           %w(acl location logging notification partNumber policy
              requestPayment torrent uploadId uploads versionId
-             versioning versions delete lifecycle)
+             versioning versions restore delete lifecycle tagging cors
+             website
+            )
         end
 
         def query_parameters

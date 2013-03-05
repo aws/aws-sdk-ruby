@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,7 +25,7 @@ module AWS
     #
     # See {WorkflowTypeCollection#register} for a complete list of options.
     #
-    # == Deprecating a workflwo type
+    # == Deprecating a workflow type
     #
     # WorkflowType inherits from the generic {Type} base class.  Defined in 
     # {Type} are a few useful methods including:

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,41 +13,32 @@
 
 module AWS
   class IAM
-
-    # @private
     class Resource < Core::Resource
 
-      # @return [Boolean] True if the resource exists.
+      # @return [Boolean] Returns +true+ if the resource exists.
       def exists?
         get_resource
+        true
       rescue Errors::NoSuchEntity => e
         false
-      else
-        true
       end
 
-      # @private
-      protected
+      private
+
       def update_resource attr, value
         options = { :"#{self.class.update_prefix}#{attr.set_as}" => value }
         client_method = update_resource_client_method
         client.send(client_method, options.merge(resource_options))
       end
 
-      # @private
-      protected
       def get_resource attribute = nil
         client.send(get_resource_client_method, resource_options)
       end
 
-      # @private
-      protected
       def get_resource_client_method
         "get_#{ruby_name}"
       end
 
-      # @private
-      protected
       def update_resource_client_method
         "update_#{ruby_name}"
       end

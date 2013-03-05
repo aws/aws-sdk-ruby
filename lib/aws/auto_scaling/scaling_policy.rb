@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -26,7 +26,7 @@ module AWS
     #
     # @attr_reader [Integer] cooldown
     #
-    # @attr_reader [Integer] min_adjustment_magnitude
+    # @attr_reader [Integer] min_adjustment_step
     #
     class ScalingPolicy < Core::Resource
 
@@ -63,7 +63,7 @@ module AWS
 
       attribute :cooldown
 
-      attribute :min_adjustment_magintude
+      attribute :min_adjustment_step
 
       populates_from(:describe_policies) do |resp|
         resp.scaling_policies.find do |p| 

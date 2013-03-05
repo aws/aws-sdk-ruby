@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -265,6 +265,16 @@ module AWS
         options[:termination_protected] = state
         options[:job_flow_ids] = [job_flow_id]
         client.set_termination_protection(options)
+        nil
+      end
+
+      # @param [Boolean] state
+      # @return [nil]
+      def set_visible_to_all_users state
+        options = {}
+        options[:visible_to_all_users] = state
+        options[:job_flow_ids] = [job_flow_id]
+        client.set_visible_to_all_users(options)
         nil
       end
 

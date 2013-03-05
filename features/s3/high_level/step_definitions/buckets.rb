@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 Then /^I should receive a bucket$/ do
-  Then "I should receive a bucket named \"#{@bucket_name}\""
+  step "I should receive a bucket named \"#{@bucket_name}\""
 end
 
 Then /^I should receive a bucket named "([^\"]*)"$/ do |name|
@@ -63,4 +63,74 @@ end
 
 Then /^the bucket should have the location constraint of "([^"]*)"$/ do |constraint|
   @bucket.location_constraint.should == constraint
+end
+
+When /^I set the bucket tags to$/ do |table|
+  tags = {}
+  table.hashes.each do |tag|
+    tags[tag['TAG']] = tag['VALUE']
+  end
+  @bucket.tags = tags
+end
+
+Then /^the tags should be$/ do |table|
+  tags = {}
+  table.hashes.each do |tag|
+    tags[tag['TAG']] = tag['VALUE']
+  end
+  @bucket.tags.should eq(tags)
+end
+
+When /^I set the bucket tags to an empty hash$/ do
+  @bucket.tags = {}
+end
+
+Then /^the bucket tags should be empty$/ do
+  @bucket.tags.should eq({})
+end
+
+When /^I set the bucket rules$/ do
+  @rules = [
+    {
+      :allowed_methods => ['GET'],
+      :allowed_origins => ['*'],
+    },{
+      :allowed_methods => ['PUT'],
+      :allowed_origins => ['http://example.com'],
+    },
+  ]
+  @bucket.cors.set(@rules)
+end
+
+Then /^the bucket rules should match$/ do
+  @bucket.cors.map(&:to_h).should eq(@rules)
+end
+
+When /^I add a rule$/ do
+  rule = {
+    :allowed_methods => ['POST'],
+    :allowed_origins => ['http://foo.com'],
+  }
+  @rules << rule
+  @bucket.cors.add(rule)
+end
+
+When /^I clear the bucket rules$/ do
+  @bucket.cors.clear
+end
+
+Then /^the bucket should have no rules$/ do
+  @bucket.cors.count.should eq(0)
+end
+
+Then /^the bucket be a website$/ do
+  @bucket.website?.should be(true)
+end
+
+Then /^the bucket should not be a website$/ do
+  @bucket.website?.should be(false)
+end
+
+When /^I enable website hosting$/ do
+  @bucket.configure_website
 end

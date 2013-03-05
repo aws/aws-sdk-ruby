@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -26,11 +26,11 @@ When /^I create an IAM group named "([^\"]*)"(?: with the path "([^\"]*)")?$/ do
 end
 
 Given /^I create an IAM group( with the path "[^\"]*")?$/ do |path_phrase|
-  When %(I create an IAM group named "RubyTest-#{Time.now.to_f}"#{path_phrase})
+  step %(I create an IAM group named "RubyTest-#{Time.now.to_f}"#{path_phrase})
 end
 
 Given /^I create IAM group number (\d+)( with the path "[^\"]*")?$/ do |number, path_phrase|
-  When %(I create an IAM group#{path_phrase})
+  step %(I create an IAM group#{path_phrase})
   @numbered_groups[number] = @group
 end
 
@@ -60,7 +60,7 @@ end
 
 Given /^I create (\d+) IAM groups$/ do |n|
   n.to_i.times do
-    When %(I create an IAM group)
+    step %(I create an IAM group)
   end
 end
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,7 +22,7 @@ module AWS
     # == Configuring Credentials
     #
     # In order to do anything with AWS you will need to assign credentials.
-    # The simplest method is to assing your credentials into the default
+    # The simplest method is to assign your credentials into the default
     # configuration:
     #
     #   AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
@@ -69,13 +69,19 @@ module AWS
     # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @attr_reader [String] cloud_front_endpoint ('cloudfront.amazonaws.com')
+    #   The service endpoint for Amazon CloudFront.
+    #
+    # @attr_reader [String] cloud_search ('cloudsearch.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudSearch.
+    #
     # @attr_reader [String] cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
     #
     # @attr_reader [Boolean] dynamo_db_big_decimals (true) When +true+,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
     #   from strings to BigDecimal objects.  If you set this to +false+,
-    #   they will be convereted from strings into floats (with a potential
+    #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
     # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
@@ -88,8 +94,19 @@ module AWS
     # @attr_reader [String] ec2_endpoint ('ec2.amazonaws.com')
     #   The service endpoint for Amazon EC2.
     #
+    # @attr_reader [String] elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
+    #
+    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Elastic Beanstalk.
+    #
+    # @attr_reader [String] elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
+    #   The service endpoint for Elastic Transcoder.
+    #
     # @attr_reader [String] elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
+    #
+    # @attr_reader [String] glacier_endpoint ('glacier.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Glacier.
     #
     # @attr_reader [Object] http_handler The http handler that sends requests
     #   to AWS.  Defaults to an HTTP handler built on net/http.
@@ -100,7 +117,7 @@ module AWS
     #
     # @attr_reader [Integer] http_open_timeout The number of seconds before
     #   the +http_handler+ should timeout while trying to open a new HTTP
-    #   sesssion.
+    #   session.
     #
     # @attr_reader [Integer] http_read_timeout The number of seconds before
     #   the +http_handler+ should timeout while waiting for a HTTP
@@ -111,7 +128,10 @@ module AWS
     #   configured, then wire traces will be sent to standard out.
     #
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
-    #   The service endpoint for AWS Idenity Access Management (IAM).
+    #   The service endpoint for AWS Identity Access Management (IAM).
+    #
+    # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
     #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
@@ -130,6 +150,15 @@ module AWS
     # @attr_reader [URI,nil] route_53_endpoint ('route53.amazonaws.com')
     #   The service endpoint for Amazon Route 53.
     #
+    # @attr_reader [URI,nil] ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS OpsWorks.
+    #
+    # @attr_reader [URI,nil] redshift_endpoint ('redshift.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Redshift.
+    #
+    # @attr_reader [URI,nil] rds_endpoint ('rds.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Relational Database Service (RDS).
+    #
     # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
     #   The service endpoint for Amazon S3.
     #
@@ -142,7 +171,7 @@ module AWS
     #   in parts to S3.
     #
     # @attr_reader [Integer] s3_multipart_threshold (16777216) When uploading
-    #   data to S3, if the number of bytes to send exceedes
+    #   data to S3, if the number of bytes to send exceeds
     #   +:s3_multipart_threshold+ then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
     #   is specified by +:s3_multipart_min_part_size+. Defaults to
@@ -180,7 +209,7 @@ module AWS
     #
     # @attr_reader [Symbol] s3_encryption_materials_location
     #   When set to +:instruction_file+, AWS::S3::S3Object will store
-    #   encryption materials in a seperate object, instead of the object
+    #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
     # @attr_reader [String] simple_db_endpoint ('sdb.amazonaws.com')
@@ -219,7 +248,7 @@ module AWS
     #   risk.
     #
     # @attr_reader [Boolean] stub_requests (false) When +true+ requests are not
-    #   sent to AWS, instead empty reponses are generated and returned to
+    #   sent to AWS, instead empty responses are generated and returned to
     #   each service request.
     #
     # @attr_reader [String] sns_endpoint ('sns.us-east-1.amazonaws.com')
@@ -228,6 +257,9 @@ module AWS
     # @attr_reader [String] sqs_endpoint ('sqs.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon SQS.
     #
+    # @attr_reader [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
+    #
     # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
     #   The service endpoint for AWS Security Token Service.
     #
@@ -235,8 +267,8 @@ module AWS
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @attr_reader [String] user_agent_prefix (nil) A string prefix to
-    #   append to all requets against AWS services.  This should be set
-    #   for clients and applications built ontop of the aws-sdk gem.
+    #   append to all requests against AWS services.  This should be set
+    #   for clients and applications built on top of the aws-sdk gem.
     #
     class Configuration
 
@@ -248,8 +280,8 @@ module AWS
         @created = options.delete(:__created__) || {}
 
         # :signer is now a deprecated option, this ensures it will still
-        # work, but its now prefered to set :credential_provider instead.
-        # Credentail providers don't have to provide a #sign method.
+        # work, but its now preferred to set :credential_provider instead.
+        # Credential providers don't have to provide a #sign method.
         if signer = options.delete(:signer)
           options[:credential_provider] = signer
         end
@@ -367,7 +399,7 @@ module AWS
         end
 
         # Configuration options that have dependencies are re-recreated
-        # anytime one of their dependendent configuration values are
+        # anytime one of their dependent configuration values are
         # changed.
         # @private
         def add_option_with_needs name, needs, &create_block

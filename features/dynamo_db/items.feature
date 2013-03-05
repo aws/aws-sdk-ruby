@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -92,7 +92,7 @@ Feature: DynamoDB items
       "features" => ["tail", "night vision"],
       "ranks" => [12.3, BigDecimal("21.4179232578941663312")],
       "data" => [
-        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('a' * 200),
         AWS::DynamoDB::Binary.new('b'),
       ],
     }
@@ -108,13 +108,20 @@ Feature: DynamoDB items
         BigDecimal("21.4179232578941663312"),
       ]),
       "data" => Set.new([
-        AWS::DynamoDB::Binary.new('a'),
+        AWS::DynamoDB::Binary.new('a' * 200),
         AWS::DynamoDB::Binary.new('b'),
       ]),
     }
     """
 
-  @foo
+  Scenario: Uploading a small image as a binary attribute
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string } }
+    """
+    When I put an item with an image as a binary attribute
+    Then the item's binary attribute should match the image.
+
   Scenario: Disabling BigDecimal conversion for number attributes
     Given I configure dynamo DB to not convert numbers to big decimal
     And I have an empty DynamoDB table with options:

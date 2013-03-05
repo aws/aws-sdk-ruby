@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,6 +24,10 @@ module AWS
 
       let(:queue) do
         described_class.new("url", :config => config)
+      end
+
+      let(:default_wait_time) do
+        described_class.const_get(:DEFAULT_WAIT_TIME_SECONDS)
       end
 
       it_should_behave_like "an SQS model object", "url", {}
@@ -137,6 +141,28 @@ module AWS
                    :attribute_names => ["foo", "bar"]).
               and_return(resp)
             queue.receive_message(:attributes => ["foo", "bar"])
+          end
+
+          it 'should not pass :wait_time_seconds if not set' do
+            client.should_receive(:receive_message).
+              with(:queue_url => "url").
+              and_return(resp)
+            queue.receive_message
+          end
+
+          it 'should not pass :wait_time_seconds if nil' do
+            client.should_receive(:receive_message).
+              with(:queue_url => "url").
+              and_return(resp)
+            queue.receive_message(:wait_time_seconds => nil)
+          end
+
+          it 'should pass :wait_time_seconds if set' do
+            client.should_receive(:receive_message).
+              with(:queue_url => "url",
+                   :wait_time_seconds => 3).
+              and_return(resp)
+            queue.receive_message(:wait_time_seconds => 3)
           end
 
           context 'attribute names' do
@@ -280,7 +306,8 @@ module AWS
 
           it 'should call receive_message on the client' do
             client.should_receive(:receive_message).
-              with(:queue_url => "url").
+              with(:queue_url => "url",
+                   :wait_time_seconds => default_wait_time).
               and_return(resp)
             receive_one
           end
@@ -288,6 +315,7 @@ module AWS
           it 'should pass :visibility_timeout' do
             client.should_receive(:receive_message).
               with(:queue_url => "url",
+                   :wait_time_seconds => default_wait_time,
                    :visibility_timeout => 12).
               and_return(resp)
             receive_one(:visibility_timeout => 12)
@@ -296,9 +324,25 @@ module AWS
           it 'should pass :batch_size as :max_number_of_messages' do
             client.should_receive(:receive_message).
               with(:queue_url => "url",
+                   :wait_time_seconds => default_wait_time,
                    :max_number_of_messages => 10).
               and_return(resp)
             receive_one(:batch_size => 10)
+          end
+
+          it 'should default :wait_time_seconds to 15' do
+            client.should_receive(:receive_message).
+              with(:queue_url => "url",
+                   :wait_time_seconds => default_wait_time).
+              and_return(resp)
+            receive_one
+          end
+
+          it 'should not pass :wait_time_seconds if set to nil' do
+            client.should_receive(:receive_message).
+              with(:queue_url => "url").
+              and_return(resp)
+            receive_one(:wait_time_seconds => nil)
           end
 
           it 'yields each message' do
@@ -349,42 +393,6 @@ module AWS
               end
             end
             count.should == 3
-          end
-
-          context ':poll_interval' do
-
-            let(:response_lists) { [[], [response_message], [response_message]] }
-
-            before(:each) do
-              client.stub(:receive_message) do |opts|
-                resp.data[:messages] = response_lists.shift
-                resp
-              end
-            end
-
-            def do_poll(*args)
-              catch (:done) do
-                queue.poll(*args) do |msg|
-                  throw :done if response_lists.empty?
-                end
-              end
-            end
-
-            it 'sleeps after each empty response' do
-              Kernel.should_receive(:sleep).once
-              do_poll
-            end
-
-            it 'has sleep time configurable through :poll_interval' do
-              Kernel.should_receive(:sleep).with(5)
-              do_poll(:poll_interval => 5)
-            end
-
-            it 'does not sleep at all if :poll_interval is 0' do
-              Kernel.should_not_receive(:sleep)
-              do_poll(:poll_interval => 0)
-            end
-
           end
 
           context ':idle_timeout' do
@@ -713,6 +721,32 @@ module AWS
 
         it 'returns the period argument' do
           (queue.message_retention_period = 12).should == 12
+        end
+
+      end
+
+      context '#wait_time_seconds' do
+
+        it_should_behave_like "sqs queue attribute accessor" do
+          let(:attribute) { :wait_time_seconds }
+          let(:request_attribute) { "ReceiveMessageWaitTimeSeconds" }
+          let(:response_value) { "12" }
+          let(:translated_value) { 12 }
+        end
+
+      end
+
+      context '#wait_time_seconds=' do
+
+        it 'should call set_queue_attributes' do
+          client.should_receive(:set_queue_attributes).with(
+            :queue_url => "url",
+            :attributes => { "ReceiveMessageWaitTimeSeconds" => "12" })
+          queue.wait_time_seconds = 12
+        end
+
+        it 'returns the period argument' do
+          (queue.wait_time_seconds = 12).should == 12
         end
 
       end

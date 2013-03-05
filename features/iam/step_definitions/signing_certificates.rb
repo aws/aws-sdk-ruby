@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,13 +24,13 @@ Given /^I create an X\.509 cert$/ do
 end
 
 When /^I upload a signing certificate$/ do
-  Given "I create an X.509 cert" 
+  step "I create an X.509 cert" 
   @signing_certificate = @iam.signing_certificates.upload(@cert.to_pem)
   @uploaded_signing_certificates << @signing_certificate
 end
 
 When /^I upload a signing certificate for the user$/ do
-  Given "I create an X.509 cert" 
+  step "I create an X.509 cert" 
   @signing_certificate = @user.signing_certificates.upload(@cert.to_pem)
   @uploaded_signing_certificates << @signing_certificate
 end

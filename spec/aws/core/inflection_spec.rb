@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -52,6 +52,13 @@ module AWS::Core
         Inflection.ruby_name('EC2').should == 'ec2'
       end
 
+      it 'treats trailing numbers as part of the word' do
+        pending do
+          Inflection.ruby_name('Ec2').should eq('ec2')
+          Inflection.ruby_name('ABC123').should eq('abc123')
+        end
+      end
+
       it 'inflects SentLast24Hours to sent_last_24_hours' do
         Inflection.ruby_name('SentLast24Hours').should == 'sent_last_24_hours'
       end
@@ -77,6 +84,10 @@ module AWS::Core
 
       it 'inflects Ec2KeyName to ec2_key_name' do
         Inflection.ruby_name('Ec2KeyName').should == 'ec2_key_name'
+      end
+
+      it 'inflects NotificationARNs to notification_arns' do
+        Inflection.ruby_name('NotificationARNs').should == 'notification_arns'
       end
 
     end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -143,10 +143,10 @@ module AWS::Core
 
     context '#string_to_sign' do
 
-      it 'should return a rfc822 formatted time sting' do
+      it 'should return a httpdate formatted time sting' do
         now = Time.now
         Time.stub(:now).and_return(now)
-        request.string_to_sign.should == now.rfc822
+        request.string_to_sign.should == now.httpdate
       end
 
     end

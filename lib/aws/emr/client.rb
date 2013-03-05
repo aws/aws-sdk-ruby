@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,15 +13,17 @@
 
 module AWS
   class EMR
+
+    # Client class for Elastic MapReduce (EMR).
     class Client < Core::QueryClient
 
       # @private
       CACHEABLE_REQUESTS = Set[]
 
-      ## client methods ##
+      # client methods #
 
+      # @!method add_instance_groups(options = {})
       # Calls the AddInstanceGroups API operation.
-      # @method add_instance_groups(options = {})
       # @param [Hash] options
       #   * +:instance_groups+ - *required* - (Array<Hash>) Instance Groups to
       #     add.
@@ -45,8 +47,8 @@ module AWS
       #   * +:job_flow_id+ - (String)
       #   * +:instance_group_ids+ - (Array<String>)
 
+      # @!method add_job_flow_steps(options = {})
       # Calls the AddJobFlowSteps API operation.
-      # @method add_job_flow_steps(options = {})
       # @param [Hash] options
       #   * +:job_flow_id+ - *required* - (String) A string that uniquely
       #     identifies the job flow. This identifier is returned by RunJobFlow
@@ -72,8 +74,8 @@ module AWS
       #         passed to the JAR file's main function when executed.
       # @return [Core::Response]
 
+      # @!method describe_job_flows(options = {})
       # Calls the DescribeJobFlows API operation.
-      # @method describe_job_flows(options = {})
       # @param [Hash] options
       #   * +:created_after+ - (String<ISO8601 datetime>) Return only job flows
       #     created after this date and time.
@@ -151,9 +153,11 @@ module AWS
       #           * +:path+ - (String)
       #           * +:args+ - (Array<String>)
       #     * +:supported_products+ - (Array<String>)
+      #     * +:visible_to_all_users+ - (Boolean)
+      #     * +:job_flow_role+ - (String)
 
+      # @!method modify_instance_groups(options = {})
       # Calls the ModifyInstanceGroups API operation.
-      # @method modify_instance_groups(options = {})
       # @param [Hash] options
       #   * +:instance_groups+ - (Array<Hash>) Instance groups to change.
       #     * +:instance_group_id+ - *required* - (String) Unique ID of the
@@ -162,8 +166,8 @@ module AWS
       #       instance group.
       # @return [Core::Response]
 
+      # @!method run_job_flow(options = {})
       # Calls the RunJobFlow API operation.
-      # @method run_job_flow(options = {})
       # @param [Hash] options
       #   * +:name+ - *required* - (String) The name of the job flow.
       #   * +:log_uri+ - (String) Specifies the location in Amazon S3 to write
@@ -173,13 +177,12 @@ module AWS
       #     additional features.
       #   * +:ami_version+ - (String) The version of the Amazon Machine Image
       #     (AMI) to use when launching Amazon EC2 instances in the job flow.
-      #     The following values ane valid: "latest" (latest AMI version;
-      #     currently AMI 2.0, Hadoop 0.20.205) "2.0" (AMI 2.0, Hadoop
-      #     0.20.205) "1.0" (AMI 1.0, Hadoop 0.18) If this value is not
-      #     specified, the job flow uses the default of (AMI 1.0, Hadoop 0.18).
-      #     If the AMI supports multiple verisons of Hadoop (for example, AMI
-      #     1.0 supports both Hadoop 0.18 and 0.20) you can use the
-      #     JobFlowInstancesConfig HadoopVersion parameter to modify the
+      #     The following values are valid: "latest" (uses the latest AMI) The
+      #     version number of the AMI to use, for example, "2.0" If this value
+      #     is not specified, the job flow uses the default of (AMI 1.0, Hadoop
+      #     0.18). If the AMI supports multiple versions of Hadoop (for
+      #     example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use
+      #     the JobFlowInstancesConfig HadoopVersion parameter to modify the
       #     version of Hadoop from the defaults shown above. For details about
       #     the AMI versions currently supported by Amazon ElasticMapReduce, go
       #     to AMI Versions Supported in Elastic MapReduce in the Amazon
@@ -262,17 +265,30 @@ module AWS
       #         S3 or on a local file system.
       #       * +:args+ - (Array<String>) A list of command line arguments to
       #         pass to the bootstrap action script.
-      #   * +:supported_products+ - (Array<String>) A list of strings used by
-      #     third-party software to tag the job flow. Currently the only valid
-      #     value is "karmasphere-enterprise-utility", which tags the job flow
-      #     for management by Karmasphere.
+      #   * +:supported_products+ - (Array<String>) A list of strings that
+      #     indicates third-party software to use with the job flow. For more
+      #     information, go to Use Third Party Applications with Amazon EMR.
+      #     Currently supported values are: "karmasphere-enterprise-utility" -
+      #     tag the job flow for management by Karmasphere. "mapr-m3" - launch
+      #     the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow
+      #     using MapR M5 Edition.
+      #   * +:visible_to_all_users+ - (Boolean) Whether the job flow is visible
+      #     to all IAM users of the AWS account associated with the job flow.
+      #     If this value is set to +true+ , all IAM users of that AWS account
+      #     can view and (if they have the proper policy permissions set)
+      #     manage the job flow. If it is set to +false+ , only the IAM user
+      #     that created the job flow can view and manage it.
+      #   * +:job_flow_role+ - (String) An IAM role for the job flow. The EC2
+      #     instances of the job flow assume this role. The default role is
+      #     EMRJobflowDefault. In order to use the default role, you must have
+      #     already created it using the CLI.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:job_flow_id+ - (String)
 
+      # @!method set_termination_protection(options = {})
       # Calls the SetTerminationProtection API operation.
-      # @method set_termination_protection(options = {})
       # @param [Hash] options
       #   * +:job_flow_ids+ - *required* - (Array<String>) A list of strings
       #     that uniquely identify the job flows to protect. This identifier is
@@ -284,14 +300,28 @@ module AWS
       #     user intervention, or job-flow error.
       # @return [Core::Response]
 
+      # @!method set_visible_to_all_users(options = {})
+      # Calls the SetVisibleToAllUsers API operation.
+      # @param [Hash] options
+      #   * +:job_flow_ids+ - *required* - (Array<String>) Identifiers of the
+      #     job flows to receive the new visibility setting.
+      #   * +:visible_to_all_users+ - *required* - (Boolean) Whether the
+      #     specified job flows are visible to all IAM users of the AWS account
+      #     associated with the job flow. If this value is set to True, all IAM
+      #     users of that AWS account can view and, if they have the proper IAM
+      #     policy permissions set, manage the job flows. If it is set to
+      #     False, only the IAM user that created a job flow can view and
+      #     manage it.
+      # @return [Core::Response]
+
+      # @!method terminate_job_flows(options = {})
       # Calls the TerminateJobFlows API operation.
-      # @method terminate_job_flows(options = {})
       # @param [Hash] options
       #   * +:job_flow_ids+ - *required* - (Array<String>) A list of job flows
       #     to be shutdown.
       # @return [Core::Response]
 
-      ## end client methods ##
+      # end client methods #
 
       define_client_methods('2009-03-31')
 

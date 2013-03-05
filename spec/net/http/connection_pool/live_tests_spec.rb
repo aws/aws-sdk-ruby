@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ describe Net::HTTP::ConnectionPool do
 
   before(:all) do
     @host = '127.0.0.1'
-    @port = ENV['DUMMY_SERVER_PORT'] || 8000
+    @port = 20000 + rand(10000)
     @server = DummyServer.new(@port)
     @server.start
   end
@@ -45,15 +45,15 @@ describe Net::HTTP::ConnectionPool do
   it 'creates connections as needed' do
 
     threads = []
-    5.times do 
+    3.downto(1) do |n|
       threads << Thread.new do
         connection = pool.connection_for(@host, :port => @port, :ssl => false)
-        connection.request(Net::HTTP::Get.new('/sleep/0.1'))
+        connection.request(Net::HTTP::Get.new("/sleep/0.0#{n}"))
       end
     end
     threads.map(&:join)
 
-    pool.size.should == 5
+    pool.size.should > 1
 
   end
 
@@ -62,18 +62,17 @@ describe Net::HTTP::ConnectionPool do
     pool = described_class.new(:http_idle_timeout => 0.2)
 
     threads = []
-    4.times do 
+    2.downto(1) do |n|
       threads << Thread.new do
         connection = pool.connection_for(@host, :port => @port, :ssl => false)
-        connection.request(Net::HTTP::Get.new('/sleep/0.01'))
+        connection.request(Net::HTTP::Get.new("/sleep/0.0#{n}"))
       end
     end
     threads.map(&:join)
-    pool.size.should == 4
 
-    sleep(0.3)
+    sleep(0.1)
 
-    # reuse one of the original 4 connections, keeping it alive
+    # reuse one of the original connections, keeping it alive
     connection = pool.connection_for(@host, :port => @port, :ssl => false)
     connection.request(Net::HTTP::Get.new('/sleep/0.1'))
 

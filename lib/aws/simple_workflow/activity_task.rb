@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,7 +16,7 @@ module AWS
     class ActivityTask
 
       # Raised by {ActivityTask#record_heartbeat!} when this activity
-      # task has received a cancelation request.
+      # task has received a cancellation request.
       class CancelRequestedError < StandardError; end
 
       include Core::Model
@@ -68,8 +68,8 @@ module AWS
 
       # Reports to the service that the activity task is progressing.
       #
-      # You can optionally specifiy +:details+ that decibe the progress.
-      # This might be a percetnage completetion, step number, etc.
+      # You can optionally specify +:details+ that describe the progress.
+      # This might be a percentage competition, step number, etc.
       #
       #   activity_task.record_heartbeat! :details => '.75' # 75% complete
       #
@@ -86,10 +86,10 @@ module AWS
       #
       #     task.record_heartbeat! # raises CancelRequestedError
       #
-      #   end # traps the error and responds activity task cancled.
+      #   end # traps the error and responds activity task canceled.
       #
-      # If you need to cleanup or provide addtional details in the
-      # cancelation response, you can trap the error and 
+      # If you need to cleanup or provide additional details in the
+      # cancellation response, you can trap the error and
       # respond manually.
       #
       #   domain.activity_tasks.poll('task-list') do |task|

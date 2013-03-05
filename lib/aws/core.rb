@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'aws/version'
 require 'aws/core/autoloader'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
@@ -22,12 +23,20 @@ require 'aws/core/autoloader'
 #
 # * {AWS::AutoScaling}
 # * {AWS::CloudFormation}
+# * {AWS::CloudSearch}
 # * {AWS::CloudWatch}
 # * {AWS::DynamoDB}
 # * {AWS::EC2}
+# * {AWS::ElastiCache}
+# * {AWS::ElasticBeanstalk}
+# * {AWS::ElasticTranscoder}
 # * {AWS::ELB}
 # * {AWS::EMR}
+# * {AWS::Glacier}
+# * {AWS::OpsWorks}
 # * {AWS::IAM}
+# * {AWS::Redshift}
+# * {AWS::RDS}
 # * {AWS::Route53}
 # * {AWS::S3}
 # * {AWS::SNS}
@@ -56,7 +65,7 @@ require 'aws/core/autoloader'
 #
 # == Rails
 #
-# If you are loading AWS inside a Rails web application, it is recomended to
+# If you are loading AWS inside a Rails web application, it is recommended to
 # place your configuration inside:
 #
 #   config/initializers/aws-sdk.rb
@@ -67,9 +76,6 @@ require 'aws/core/autoloader'
 # each Rails environment).
 #
 module AWS
-
-  # Current version of the AWS SDK for Ruby
-  VERSION = "1.6.5"
 
   register_autoloads(self) do
     autoload :Errors, 'errors'
@@ -88,6 +94,7 @@ module AWS
       autoload :Data,                      'data'
       autoload :IndifferentHash,           'indifferent_hash'
       autoload :Inflection,                'inflection'
+      autoload :JSONParser,                'json_parser'
 
       autoload :JSONClient,                'json_client'
       autoload :JSONRequestBuilder,        'json_request_builder'
@@ -96,6 +103,7 @@ module AWS
       autoload :LazyErrorClasses,          'lazy_error_classes'
       autoload :LogFormatter,              'log_formatter'
       autoload :MetaUtils,                 'meta_utils'
+      autoload :ManagedFile,               'managed_file'
       autoload :Model,                     'model'
       autoload :Naming,                    'naming'
       autoload :OptionGrammar,             'option_grammar'
@@ -111,7 +119,9 @@ module AWS
       autoload :Response,                  'response'
       autoload :ResponseCache,             'response_cache'
 
-      autoload :RESTClient,                'rest_client'
+      autoload :RESTClient,                'rest_xml_client'
+      autoload :RESTJSONClient,            'rest_json_client'
+      autoload :RESTXMLClient,             'rest_xml_client'
       autoload :RESTRequestBuilder,        'rest_request_builder'
       autoload :RESTResponseParser,        'rest_response_parser'
 
@@ -123,6 +133,7 @@ module AWS
 
     module Options
       AWS.register_autoloads(self) do
+        autoload :JSONSerializer, 'json_serializer'
         autoload :XMLSerializer, 'xml_serializer'
         autoload :Validator, 'validator'
       end
@@ -160,7 +171,6 @@ module AWS
       AWS.register_autoloads(self) do
         autoload :Handler,         'handler'
         autoload :NetHttpHandler,  'net_http_handler'
-        autoload :HTTPartyHandler, 'httparty_handler' # non-standard inflection
         autoload :Request,         'request'
         autoload :Response,        'response'
       end
@@ -168,19 +178,12 @@ module AWS
 
   end
 
-  # the http party handler should still be accessible from its old namespace
-  module Http
-    AWS.register_autoloads(self, 'aws/core/http') do
-      autoload :HTTPartyHandler, 'httparty_handler'
-    end
-  end
-
   class << self
 
     # @private
     @@config = nil
 
-    # The global configuration for AWS.  Generally you set your prefered
+    # The global configuration for AWS.  Generally you set your preferred
     # configuration operations once after loading the aws-sdk gem.
     #
     #   AWS.config({
@@ -223,14 +226,20 @@ module AWS
     # @option options [String] :cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
     #   The service endpoint for AWS CloudFormation.
     #
+    # @option options [String] :cloud_front_endpoint ('cloudfront.amazonaws.com')
+    #   The service endpoint for Amazon CloudFront.
+    #
+    # @option options [String] :cloud_search ('cloudsearch.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon CloudSearch.
+    #
     # @option options [String] :cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
     #
     # @option options [Boolean] :dynamo_db_big_decimals (true) When +true+,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
     #   from strings to BigDecimal objects.  If you set this to +false+,
-    #   they will be convereted from strings into floats (with a potential
-    #              # backwards to test xml ordering   loss of precision).
+    #   they will be converted from strings into floats (with a potential
+    #   loss of precision).
     #
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
@@ -242,8 +251,19 @@ module AWS
     # @option options [String] :ec2_endpoint ('ec2.amazonaws.com') The
     #   service endpoint for Amazon EC2.
     #
+    # @option options [String] :elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
+    #
+    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Elastic Beanstalk.
+    #
+    # @option options [String] :elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
+    #   The service endpoint for Elastic Transcoder.
+    #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
     #   The service endpoint for Elastic Load Balancing.
+    #
+    # @option options [String] :glacier_endpoint ('glacier.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Glacier.
     #
     # @option options [Object] :http_handler (AWS::Core::Http::NetHttpHandler)
     #   The http handler that sends requests to AWS.
@@ -254,7 +274,7 @@ module AWS
     #
     # @option options [Integer] :http_open_timeout (15) The number of seconds
     #   before the +:http_handler+ should timeout while trying to open a new
-    #   HTTP sesssion.
+    #   HTTP session.
     #
     # @option options [Integer] :http_read_timeout (60) The number of seconds
     #   before the +:http_handler+ should timeout while waiting for a HTTP
@@ -266,7 +286,10 @@ module AWS
     #   standard out.
     #
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The
-    #   service endpoint for AWS Idenity Access Management (IAM).
+    #   service endpoint for AWS Identity Access Management (IAM).
+    #
+    # @option options [String] :import_export_endpoint ('importexport.amazonaws.com')
+    #   The service endpoint for AWS Import/Export.
     #
     # @option options [Logger,nil] :logger (nil) A logger to send
     #   log messages to.  Here is an example that logs to standard out.
@@ -293,7 +316,7 @@ module AWS
     #
     #   You can also create an instance of AWS::Core::LogFormatter
     #   with a custom log message pattern. See {Core::LogFormatter} for
-    #   a complete list of pattern substituions.
+    #   a complete list of pattern substitutions.
     #
     #     pattern = "[AWS :operation :duration] :error_message"
     #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern))
@@ -312,11 +335,20 @@ module AWS
     #
     #       AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
     #
-    # @option options [String] :s3_endpoint ('s3.amazonaws.com') The
-    #   service endpoint for Amazon S3.
+    # @option options [String] :ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS OpsWorks.
+    #
+    # @option options [String] :redshift_endpoint ('redshift.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Redshift.
+    #
+    # @option options [String] :rds_endpoint ('rds.us-east-1.amazonaws.com')
+    #   The service endpoint for Amazon Relational Database Service (RDS).
     #
     # @option options [String] :route_53_endpoint ('route53.amazonaws.com')
     #   The service endpoint for Amazon Route 53.
+    #
+    # @option options [String] :s3_endpoint ('s3.amazonaws.com') The
+    #   service endpoint for Amazon S3.
     #
     # @option options [Boolean] :s3_force_path_style (false) When
     #   +true+, requests will always use path style.  This can be useful
@@ -326,7 +358,7 @@ module AWS
     #   number of parts to split a file into when uploading in parts to S3.
     #
     # @option options [Integer] :s3_multipart_threshold (16777216) When
-    #   uploading data to S3, if the number of bytes to send exceedes
+    #   uploading data to S3, if the number of bytes to send exceeds
     #   +:s3_multipart_threshold+ then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
     #   is specified by +:s3_multipart_min_part_size+. Defaults to
@@ -359,7 +391,7 @@ module AWS
     #
     # @option options [Symbol] :s3_encryption_materials_location (:metadata)
     #   When set to +:instruction_file+, AWS::S3::S3Object will store
-    #   encryption materials in a seperate object, instead of the object
+    #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
     # @option options [String] :simple_db_endpoint ('sdb.amazonaws.com')
@@ -372,7 +404,7 @@ module AWS
     # @option options [String] :simple_email_service_endpoint ('email.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Email Service.
     #
-    # @option options [String] :simple_workflow_service ('swf.us-east-1.amazonaws.com')
+    # @option options [String] :simple_workflow_endpoint ('swf.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon Simple Workflow Service.
     #
     # @option options [CredentialProviders::Provider] :credential_provider (AWS::Core::CredentialProviders::DefaultProvider.new)
@@ -400,7 +432,7 @@ module AWS
     #   risk.
     #
     # @option options [Boolean] :stub_requests (false) When +true+ requests
-    #   are not sent to AWS, instead empty reponses are generated and
+    #   are not sent to AWS, instead empty responses are generated and
     #   returned to each service request.
     #
     # @option options [String] :sns_endpoint ('sns.us-east-1.amazonaws.com') The
@@ -409,6 +441,9 @@ module AWS
     # @option options [String] :sqs_endpoint ('sqs.us-east-1.amazonaws.com') The
     #   service endpoint for Amazon SQS.
     #
+    # @option options [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
+    #   The service endpoint for AWS Storage Gateway.
+    #
     # @option options [String] :sts_endpoint ('sts.amazonaws.com') The
     #   service endpoint for AWS Security Token Service.
     #
@@ -416,7 +451,7 @@ module AWS
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @option options [String] :user_agent_prefix (nil) A string prefix to
-    #   append to all requets against AWS services.  This should be set
+    #   append to all requests against AWS services.  This should be set
     #   for clients and applications built ontop of the aws-sdk gem.
     #
     # @return [Core::Configuration] Returns the new configuration.
