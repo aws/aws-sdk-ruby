@@ -19,6 +19,20 @@ module AWS
 
       it_should_behave_like "an authorize v4 request"
 
+      it "should return the proper service name in production" do
+      	request = AWS::GameConnect::Request.new
+      	request.host = "gameconnect.us-east-1.amazonaws.com"
+
+      	expect(request.service).to eq('gameconnect')
+      end
+
+      it "should return the proper service name in sandbox" do
+      	request = AWS::GameConnect::Request.new
+      	request.host = "gameconnect-sandbox.us-east-1.amazonaws.com"
+
+      	expect(request.service).to eq('gameconnect-sandbox')
+      end
+
     end
   end
 end
