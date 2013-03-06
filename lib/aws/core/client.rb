@@ -466,6 +466,7 @@ module AWS
                 cached_response.cached = true
                 cached_response
               else
+
                 # process the http request
                 options[:async] ?
                 make_async_request(response, &read_block) :
@@ -524,6 +525,18 @@ module AWS
         send("configure_#{name}_request", http_request, opts)
 
         http_request.headers["user-agent"] = user_agent_string
+
+        if
+          @config.http_continue_threshold and
+          http_request.headers['content-length'] and
+          http_request.headers['content-length'].to_i > @config.http_continue_threshold
+        then
+          http_request.headers["expect"] = "100-continue"
+          http_request.continue_timeout = @config.http_continue_timeout
+        else
+          http_request.continue_timeout = nil
+        end
+
         http_request.add_authorization!(credential_provider)
 
         http_request
