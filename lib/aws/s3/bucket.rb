@@ -188,7 +188,7 @@ module AWS
     #
     #   bucket.versioning_enabled? #=> false
     #   bucket.enable_versioning
-    #   # there is also a #disable_versioning method
+    #   # there is also a #suspend_versioning method
     #
     #   obj = bucket.objects['my-obj']
     #   obj.write('a')
