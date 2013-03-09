@@ -148,11 +148,7 @@ module AWS
         self.each do |rule|
           rules << rule unless yield(rule)
         end
-        if rules.any?
-          self.set(*rules)
-        else
-          self.clear
-        end
+        self.set(rules)
       end
 
       # Removes all CORS rules attached to this bucket.
