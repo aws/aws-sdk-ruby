@@ -1,4 +1,118 @@
+2013-03-10 Mike Ferrier <mferrier@gmail.com>
+
+  * lib/aws/s3/cors_rule_collection.rb: Better fix for the delete_if bug
+
+  Actually, this works better since #set checks for [[]].
+  * lib/aws/s3/cors_rule_collection.rb: CORSRuleCollection delete_if can
+  delete all rules
+
+  If CORSRuleCollection#delete_if matched all the rules, you'd get:
+
+    ArgumentError - expected one or more rules:
+      (gem) aws-sdk-1.8.3.1/lib/aws/s3/cors_rule_collection.rb:101:in `set'
+
+  So if all the rules are deleted, call #clear instead.
+2013-03-09 Mike Vastola <Mike@Vasto.la>
+
+  * lib/aws/s3/bucket.rb: Fixed typo in docs citing non-existent method..
+
+  Specifically, S3::Bucket#disable_versioning.
+  In reality, it's #suspend_versioning.
+
+2013-03-08 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/api_config/CloudFormation-2010-05-15.yml,
+  lib/aws/cloud_formation/client.rb: Added support for #cancel_stack_update to
+  AWS::CloudFormation::Client.
+
+2013-03-04 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/s3/low_level/redirects.feature,
+  features/s3/low_level/step_definitions/buckets.rb, lib/aws/core/client.rb:
+  Added support for following 307 temporary redirects.
+
+  Fixes #133
+  References #172
+
+  * ca-bundle.crt: Updated bundled ca-bundle.crt file.
+
+2013-03-02 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/dynamo_db.rb: Removed old and no longer valid documentation about
+  using session tokens with DynamoDB.
+
+2013-02-28 Carl Parker <carljparker@gmail.com>
+
+  * lib/aws/core.rb: fix endpoint in docs for elastictranscoder
+
+  * features/auto_scaling/step_definitions/groups.rb: Fixed broken auto
+  scaling feature.
+
+  * spec/aws/auto_scaling/scaling_policy_colletion_spec.rb,
+  spec/aws/auto_scaling/scaling_policy_spec.rb: Tests for the
+  :min_adjustment_step option
+
+  * lib/aws/auto_scaling/scaling_policy.rb,
+  lib/aws/auto_scaling/scaling_policy_options.rb: Add :min_adjustment_step
+  option for AutoScaling policies
+
+2013-02-27 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/sqs/request.rb: Updated SQS region logic to fail gracefully when
+  the QueueUrl is not valid.
+
+  * features/sqs/queues.feature, features/sqs/step_definitions/messages.rb,
+  features/sqs/step_definitions/queues.rb, lib/aws/record/abstract_base.rb,
+  lib/aws/sqs/request.rb: Now extracting the region from the QueueUrl param
+  when signing SQS requests.
+
+  Fixes #179
+
+  * .yardopts, Gemfile, doc-src/templates/default/layout/html/footer.erb: Add
+  analytics script tags for documentation
+
+  * lib/aws/auto_scaling.rb, lib/aws/cloud_formation.rb,
+  lib/aws/cloud_front.rb, lib/aws/cloud_search.rb, lib/aws/cloud_watch.rb,
+  lib/aws/data_pipeline.rb, lib/aws/dynamo_db.rb, lib/aws/ec2.rb,
+  lib/aws/elastic_beanstalk.rb, lib/aws/elasticache.rb, lib/aws/elb.rb,
+  lib/aws/emr.rb, lib/aws/glacier.rb, lib/aws/iam.rb,
+  lib/aws/import_export.rb, lib/aws/rds.rb, lib/aws/route_53.rb,
+  lib/aws/simple_db.rb, lib/aws/simple_email_service.rb,
+  lib/aws/simple_workflow.rb, lib/aws/sns.rb, lib/aws/sqs.rb,
+  lib/aws/storage_gateway.rb, lib/aws/sts.rb: Document client attributes on
+  service classes
+
+2013-02-26 Andy Brody <andy@stripe.com>
+
+  * lib/aws/route_53/resource_record_set.rb: Don't include resource_records if
+  it's empty.
+
+  This fixes a bug where attempting to delete an alias record set would
+  fail because resource records was passed as the empty list.
+
+  * lib/aws/route_53/hosted_zone.rb: s/recoed/record/
+
+  * lib/aws/route_53/resource_record_set.rb: Memoize list calls in resource
+  record set updates.
+
+  * lib/aws/route_53/resource_record_set.rb: Fix typo.
+
+  * Gemfile: Locked rspec dependency to 2.12 for now.
+
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Added 3 addition headers
+  returned by AWS::S3::Client#head_object and #get_object.
+
+  Fixes #86
+
+2013-02-25 Loren Segal <lsegal@amazon.com>
+
+  * .travis.yml: Add Ruby 2.0 to build matrix on Travis CI
+
+  * spec/aws/core/data_spec.rb: Fix test for Ruby 2.0 support
+
 2013-02-22 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.3.1
 
   * lib/aws/ec2/image.rb, spec/aws/ec2/image_spec.rb: Fixed a regression in
   AWS::EC2::Image#block_device_mappings.
