@@ -14,13 +14,9 @@
 require 'digest/md5'
 
 Before("@dynamo_db") do
-
-  session = AWS::STS.new.new_session
-
   @dynamo_db = AWS::DynamoDB.new
   @tables = []
   @created_tables = []
-
 end
 
 After("@dynamo_db") do |scenario|
