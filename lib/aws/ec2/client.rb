@@ -391,6 +391,19 @@ module AWS
       #   a hash with the following structure:
       #   * +:owner_id+ - (String)
 
+      # @!method copy_image(options = {})
+      # Calls the CopyImage API operation.
+      # @param [Hash] options
+      #   * +:source_region+ - *required* - (String)
+      #   * +:source_image_id+ - *required* - (String)
+      #   * +:name+ - *required* - (String)
+      #   * +:description+ - (String)
+      #   * +:client_token+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:image_id+ - (String)
+
       # @!method copy_snapshot(options = {})
       # Calls the CopySnapshot API operation.
       # @param [Hash] options
@@ -649,6 +662,7 @@ module AWS
       #       * +:value+ - (String)
       #     * +:private_ip_addresses_set+ - (Array<Hash>)
       #       * +:private_ip_address+ - (String)
+      #       * +:private_dns_name+ - (String)
       #       * +:primary+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
@@ -741,11 +755,6 @@ module AWS
       #       * +:value+ - (String)
       #     * +:propagating_vgw_set+ - (Array<Hash>)
       #       * +:gateway_id+ - (String)
-      #     * +:propagated_route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:status+ - (String)
-      #       * +:source_id+ - (String)
 
       # @!method create_security_group(options = {})
       # Calls the CreateSecurityGroup API operation.
@@ -819,6 +828,8 @@ module AWS
       #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
       #     * +:availability_zone+ - (String)
+      #     * +:default_for_az+ - (Boolean)
+      #     * +:map_public_ip_on_launch+ - (Boolean)
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
@@ -889,6 +900,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #     * +:instance_tenancy+ - (String)
+      #     * +:is_default+ - (Boolean)
 
       # @!method create_vpn_connection(options = {})
       # Calls the CreateVpnConnection API operation.
@@ -1122,6 +1134,18 @@ module AWS
       #   * +:image_id+ - *required* - (String) The ID of the AMI to
       #     deregister.
       # @return [Core::Response]
+
+      # @!method describe_account_attributes(options = {})
+      # Calls the DescribeAccountAttributes API operation.
+      # @param [Hash] options
+      #   * +:attribute_names+ - (Array<String>)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:account_attribute_set+ - (Array<Hash>)
+      #     * +:attribute_name+ - (String)
+      #     * +:attribute_value_set+ - (Array<Hash>)
+      #       * +:attribute_value+ - (String)
 
       # @!method describe_addresses(options = {})
       # Calls the DescribeAddresses API operation.
@@ -1599,7 +1623,16 @@ module AWS
       #           * +:delete_on_termination+ - (Boolean)
       #         * +:association+ - (Hash)
       #           * +:public_ip+ - (String)
+      #           * +:public_dns_name+ - (String)
       #           * +:ip_owner_id+ - (String)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:private_ip_address+ - (String)
+      #           * +:private_dns_name+ - (String)
+      #           * +:primary+ - (Boolean)
+      #           * +:association+ - (Hash)
+      #             * +:public_ip+ - (String)
+      #             * +:public_dns_name+ - (String)
+      #             * +:ip_owner_id+ - (String)
       #       * +:iam_instance_profile+ - (Hash)
       #         * +:arn+ - (String)
       #         * +:id+ - (String)
@@ -1786,6 +1819,7 @@ module AWS
       #       * +:value+ - (String)
       #     * +:private_ip_addresses_set+ - (Array<Hash>)
       #       * +:private_ip_address+ - (String)
+      #       * +:private_dns_name+ - (String)
       #       * +:primary+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
@@ -1981,11 +2015,6 @@ module AWS
       #       * +:value+ - (String)
       #     * +:propagating_vgw_set+ - (Array<Hash>)
       #       * +:gateway_id+ - (String)
-      #     * +:propagated_route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:status+ - (String)
-      #       * +:source_id+ - (String)
 
       # @!method describe_security_groups(options = {})
       # Calls the DescribeSecurityGroups API operation.
@@ -2233,6 +2262,8 @@ module AWS
       #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
       #     * +:availability_zone+ - (String)
+      #     * +:default_for_az+ - (Boolean)
+      #     * +:map_public_ip_on_launch+ - (Boolean)
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
@@ -2337,6 +2368,21 @@ module AWS
       #     * +:volume_type+ - (String)
       #     * +:iops+ - (Integer)
 
+      # @!method describe_vpc_attribute(options = {})
+      # Calls the DescribeVpcAttribute API operation.
+      # @param [Hash] options
+      #   * +:vpc_id+ - *required* - (String)
+      #   * +:enable_dns_support+ - (String)
+      #   * +:enable_dns_hostnames+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:vpc_id+ - (String)
+      #   * +:enable_dns_support+ - (Hash)
+      #     * +:value+ - (Boolean)
+      #   * +:enable_dns_hostnames+ - (Hash)
+      #     * +:value+ - (Boolean)
+
       # @!method describe_vpcs(options = {})
       # Calls the DescribeVpcs API operation.
       # @param [Hash] options
@@ -2360,6 +2406,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #     * +:instance_tenancy+ - (String)
+      #     * +:is_default+ - (Boolean)
 
       # @!method describe_vpn_connections(options = {})
       # Calls the DescribeVpnConnections API operation.
@@ -2838,6 +2885,16 @@ module AWS
       #   * +:auto_enable_io+ - (Boolean)
       # @return [Core::Response]
 
+      # @!method modify_vpc_attribute(options = {})
+      # Calls the ModifyVpcAttribute API operation.
+      # @param [Hash] options
+      #   * +:vpc_id+ - (String)
+      #   * +:enable_dns_support+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
+      #   * +:enable_dns_hostnames+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
+      # @return [Core::Response]
+
       # @!method monitor_instances(options = {})
       # Calls the MonitorInstances API operation.
       # @param [Hash] options
@@ -3298,7 +3355,6 @@ module AWS
       #   * +:security_group_ids+ - (Array<String>)
       #   * +:user_data+ - (String) Specifies additional information to make
       #     available to the instance(s).
-      #   * +:addressing_type+ - (String)
       #   * +:instance_type+ - (String) Specifies the instance type for the
       #     launched instances.
       #   * +:placement+ - (Hash) Specifies the placement constraints
@@ -3465,7 +3521,16 @@ module AWS
       #         * +:delete_on_termination+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
+      #         * +:public_dns_name+ - (String)
       #         * +:ip_owner_id+ - (String)
+      #       * +:private_ip_addresses_set+ - (Array<Hash>)
+      #         * +:private_ip_address+ - (String)
+      #         * +:private_dns_name+ - (String)
+      #         * +:primary+ - (Boolean)
+      #         * +:association+ - (Hash)
+      #           * +:public_ip+ - (String)
+      #           * +:public_dns_name+ - (String)
+      #           * +:ip_owner_id+ - (String)
       #     * +:iam_instance_profile+ - (Hash)
       #       * +:arn+ - (String)
       #       * +:id+ - (String)
