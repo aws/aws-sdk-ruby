@@ -249,7 +249,7 @@ module AWS
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
     #
-    # @option options [String] :dynamo_db_retry_throughput_errors (true) When
+    # @option options [Boolean] :dynamo_db_retry_throughput_errors (true) When
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
     #   errors will be retried.
     #
@@ -258,7 +258,7 @@ module AWS
     #
     # @option options [String] :elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
     #
-    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com') 
+    # @option options [String] :elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
     #   The service endpoint for AWS Elastic Beanstalk.
     #
     # @option options [String] :elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
