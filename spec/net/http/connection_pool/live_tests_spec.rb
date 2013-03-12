@@ -43,6 +43,7 @@ describe Net::HTTP::ConnectionPool do
   end
 
   it 'creates connections as needed' do
+    pending
 
     threads = []
     3.downto(1) do |n|
