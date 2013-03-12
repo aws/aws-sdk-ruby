@@ -244,7 +244,7 @@ module AWS
     # @option options [String] :dynamo_db_endpoint ('dynamodb.amazonaws.com')
     #   The service endpoint for Amazon DynamoDB.
     #
-    # @option options [String] :dynamo_db_retry_throughput_errors (true) When
+    # @option options [Boolean] :dynamo_db_retry_throughput_errors (true) When
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
     #   errors will be retried.
     #
