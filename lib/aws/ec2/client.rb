@@ -2372,8 +2372,7 @@ module AWS
       # Calls the DescribeVpcAttribute API operation.
       # @param [Hash] options
       #   * +:vpc_id+ - *required* - (String)
-      #   * +:enable_dns_support+ - (String)
-      #   * +:enable_dns_hostnames+ - (String)
+      #   * +:attribute+ - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2888,7 +2887,7 @@ module AWS
       # @!method modify_vpc_attribute(options = {})
       # Calls the ModifyVpcAttribute API operation.
       # @param [Hash] options
-      #   * +:vpc_id+ - (String)
+      #   * +:vpc_id+ - *required* - (String)
       #   * +:enable_dns_support+ - (Hash)
       #     * +:value+ - (Boolean) Boolean value
       #   * +:enable_dns_hostnames+ - (Hash)
