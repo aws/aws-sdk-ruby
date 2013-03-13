@@ -1,3 +1,39 @@
+2013-03-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/api_config/EC2-2013-02-01.yml, lib/aws/ec2/client.rb: Fixed an
+  issue with DescribeVpcAttribute.
+
+  * spec/net/http/connection_pool/live_tests_spec.rb: Marked a fragile test as
+  pending until it can be refactored.
+
+  * lib/aws/api_config/RDS-2013-02-12.yml, lib/aws/rds/client.rb: Updated RDS
+  client to the latest API version (2013-02-12).
+
+  * lib/aws/ec2/snapshot_collection.rb,
+  spec/aws/ec2/snapshot_collection_spec.rb: EC2::SnapshotCollection now
+  populates snapshots when enumerating.
+
+  * lib/aws/s3/s3_object.rb: Added missing documentation for the :expires
+  option to S3Object#write.
+
+2013-03-13 Mahito <earthdragon77@gmail.com>
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb: Changed String to Boolean
+  with type of:dynamo_db_retry_throughput_errors
+
+2013-03-11 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/dynamo_db/step_definitions/dynamo_db.rb: Removed and unecessary
+  service call from DynamoDB features.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.4
+
+  * lib/aws/ec2/client.rb: Bumped AWS::EC2::Client api version.
+
+  * lib/aws/api_config/EC2-2012-12-01.yml,
+  lib/aws/api_config/EC2-2013-02-01.yml, lib/aws/ec2/client.rb: Updated the
+  EC2 API configuration to the 2013-02-01 API version.
+
 2013-03-10 Mike Ferrier <mferrier@gmail.com>
 
   * lib/aws/s3/cors_rule_collection.rb: Better fix for the delete_if bug
