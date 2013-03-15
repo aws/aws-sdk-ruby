@@ -142,49 +142,51 @@ module AWS
         end
   
       end
-  
-      context ':on' do
+ 
+      unless test_opts[:accepts_on] == false
+        context ':on' do
 
-        it 'accepts :save' do
-          lambda {
-            klass.send(validation_macro, :value, opts.merge(:on => :save))
-          }.should_not raise_error
-        end
+          it 'accepts :save' do
+            lambda {
+              klass.send(validation_macro, :value, opts.merge(:on => :save))
+            }.should_not raise_error
+          end
 
-        it 'rejects values other than :save, :create, :update' do
-          lambda {
-            klass.send(validation_macro, :value, opts.merge(:on => :foo))
-          }.should raise_error(ArgumentError)
+          it 'rejects values other than :save, :create, :update' do
+            lambda {
+              klass.send(validation_macro, :value, opts.merge(:on => :foo))
+            }.should raise_error(ArgumentError)
+          end
+          
+          it 'validates on :create for new records' do
+            klass.send(validation_macro, :value, opts.merge(:on => :create))
+            obj = klass.new
+            obj.value = invalid_value
+            obj.valid?.should == false
+          end
+          
+          it 'skips validation on :create for existing records' do
+            klass.send(validation_macro, :value, opts.merge(:on => :create))
+            obj = klass['id']
+            obj.value = invalid_value
+            obj.valid?.should == true
+          end
+          
+          it 'skips validation on :update for new records' do
+            klass.send(validation_macro, :value, opts.merge(:on => :update))
+            obj = klass.new
+            obj.value = invalid_value
+            obj.valid?.should == true
+          end
+          
+          it 'validates on :update for existing records' do
+            klass.send(validation_macro, :value, opts.merge(:on => :update))
+            obj = klass['id']
+            obj.value = invalid_value
+            obj.valid?.should == false
+          end
+    
         end
-        
-        it 'validates on :create for new records' do
-          klass.send(validation_macro, :value, opts.merge(:on => :create))
-          obj = klass.new
-          obj.value = invalid_value
-          obj.valid?.should == false
-        end
-        
-        it 'skips validation on :create for existing records' do
-          klass.send(validation_macro, :value, opts.merge(:on => :create))
-          obj = klass['id']
-          obj.value = invalid_value
-          obj.valid?.should == true
-        end
-        
-        it 'skips validation on :update for new records' do
-          klass.send(validation_macro, :value, opts.merge(:on => :update))
-          obj = klass.new
-          obj.value = invalid_value
-          obj.valid?.should == true
-        end
-        
-        it 'validates on :update for existing records' do
-          klass.send(validation_macro, :value, opts.merge(:on => :update))
-          obj = klass['id']
-          obj.value = invalid_value
-          obj.valid?.should == false
-        end
-  
       end
 
       unless test_opts[:accepts_message] == false
