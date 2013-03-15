@@ -14,6 +14,16 @@
 ---
 :api_version: '2010-05-15'
 :operations:
+- :name: CancelUpdateStack
+  :method: :cancel_update_stack
+  :inputs:
+    StackName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CancelUpdateStackResult:
+        :ignore: true
 - :name: CreateStack
   :method: :create_stack
   :inputs:

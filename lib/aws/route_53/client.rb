@@ -40,13 +40,25 @@ module AWS
       #     contains one Change element for each resource record set that you
       #     want to create or delete.
       #     * +:action+ - *required* - (String) The action to perform. Valid
-      #       values: CREATE | DELETE
+      #       values: CREATE | DELETE Valid values include:
+      #       * +CREATE+
+      #       * +DELETE+
       #     * +:resource_record_set+ - *required* - (Hash) Information about
       #       the resource record set to create or delete.
       #       * +:name+ - *required* - (String) The domain name of the current
       #         resource record set.
       #       * +:type+ - *required* - (String) The type of the current
-      #         resource record set.
+      #         resource record set. Valid values include:
+      #         * +SOA+
+      #         * +A+
+      #         * +TXT+
+      #         * +NS+
+      #         * +CNAME+
+      #         * +MX+
+      #         * +PTR+
+      #         * +SRV+
+      #         * +SPF+
+      #         * +AAAA+
       #       * +:set_identifier+ - (String) Weighted resource record sets
       #         only: An identifier that differentiates among multiple resource
       #         record sets that have the same combination of DNS name and
@@ -59,7 +71,15 @@ module AWS
       #       * +:region+ - (String) Regional resource record sets only: Among
       #         resource record sets that have the same combination of DNS name
       #         and type, a value that specifies the AWS region for the current
-      #         resource record set.
+      #         resource record set. Valid values include:
+      #         * +us-east-1+
+      #         * +us-west-1+
+      #         * +us-west-2+
+      #         * +eu-west-1+
+      #         * +ap-southeast-1+
+      #         * +ap-southeast-2+
+      #         * +ap-northeast-1+
+      #         * +sa-east-1+
       #       * +:failover+ - (String) Failover resource record sets only:
       #         Among resource record sets that have the same combination of
       #         DNS name and type, a value that indicates whether the current
@@ -76,7 +96,10 @@ module AWS
       #         record set will be returned if: (1) the primary is failing a
       #         health check and either the secondary is passing a health check
       #         or has no associated health check, or (2) there is no primary
-      #         resource record set. Valid values: PRIMARY | SECONDARY
+      #         resource record set. Valid values: PRIMARY | SECONDARY Valid
+      #         values include:
+      #         * +PRIMARY+
+      #         * +SECONDARY+
       #       * +:ttl+ - (Integer) The cache time to live for the current
       #         resource record set.
       #       * +:resource_records+ - (Array<Hash>) A complex type that
@@ -145,7 +168,10 @@ module AWS
       #     instance to health check. For HTTP this defaults to 80 if the port
       #     is not specified.
       #   * +:type+ - *required* - (String) The type of health check to be
-      #     performed. Currently supported protocols are TCP and HTTP.
+      #     performed. Currently supported protocols are TCP and HTTP. Valid
+      #     values include:
+      #     * +HTTP+
+      #     * +TCP+
       #   * +:resource_path+ - (String) Path to ping on the instance to check
       #     the health. Required only for HTTP health checks, HTTP request is
       #     issued to the instance on the given port and path.
@@ -345,7 +371,17 @@ module AWS
       #   | NS | PTR | SOA | SPF | SRV | TXT Values for Weighted Resource
       #   Record Sets: A | AAAA | CNAME | TXT Values for Alias Resource Record
       #   Sets: A | AAAA Constraint: Specifying type without specifying name
-      #   returns an InvalidInput error.
+      #   returns an InvalidInput error. Valid values include:
+      #   * +SOA+
+      #   * +A+
+      #   * +TXT+
+      #   * +NS+
+      #   * +CNAME+
+      #   * +MX+
+      #   * +PTR+
+      #   * +SRV+
+      #   * +SPF+
+      #   * +AAAA+
       # * +:start_record_identifier+ - (String) Weighted resource record sets
       #   only: If results were truncated for a given DNS name and type,
       #   specify the value of

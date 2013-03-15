@@ -35,6 +35,13 @@ module AWS
 
       # client methods #
 
+      # @!method cancel_update_stack(options = {})
+      # Calls the CancelUpdateStack API operation.
+      # @param [Hash] options
+      #   * +:stack_name+ - *required* - (String) The name or the unique
+      #     identifier associated with the stack.
+      # @return [Core::Response]
+
       # @!method create_stack(options = {})
       # Calls the CreateStack API operation.
       # @param [Hash] options
@@ -48,10 +55,11 @@ module AWS
       #     Conditional: You must pass TemplateBody or TemplateURL. If both are
       #     passed, only TemplateBody is used.
       #   * +:template_url+ - (String) Location of file containing the template
-      #     body. The URL must point to a template located in an S3 bucket in
-      #     the same region as the stack. For more information, go to the AWS
-      #     CloudFormation User Guide. Conditional: You must pass TemplateURL
-      #     or TemplateBody. If both are passed, only TemplateBody is used.
+      #     body. The URL must point to a template (max size: 307,200 bytes)
+      #     located in an S3 bucket in the same region as the stack. For more
+      #     information, go to the AWS CloudFormation User Guide. Conditional:
+      #     You must pass TemplateURL or TemplateBody. If both are passed, only
+      #     TemplateBody is used.
       #   * +:parameters+ - (Array<Hash>) A list of Parameter structures that
       #     specify input parameters for the stack.
       #     * +:parameter_key+ - (String) The key associated with the
@@ -78,7 +86,10 @@ module AWS
       #   * +:on_failure+ - (String) Determines what action will be taken if
       #     stack creation fails. This must be one of: DO_NOTHING, ROLLBACK, or
       #     DELETE. You can specify either OnFailure or DisableRollback, but
-      #     not both. Default: ROLLBACK
+      #     not both. Default: ROLLBACK Valid values include:
+      #     * +DO_NOTHING+
+      #     * +ROLLBACK+
+      #     * +DELETE+
       #   * +:tags+ - (Array<Hash>) A set of user-defined Tags to associate
       #     with this stack, represented by key/value pairs. Tags defined for
       #     the stack are propogated to EC2 resources that are created as part
@@ -154,7 +165,9 @@ module AWS
       # Calls the DescribeStackResources API operation.
       # @param [Hash] options
       #   * +:stack_name+ - (String) The name or the unique identifier
-      #     associated with the stack. Default: There is no default value.
+      #     associated with the stack. Required: Conditional. If you do not
+      #     specify StackName, you must specify PhysicalResourceId. Default:
+      #     There is no default value.
       #   * +:logical_resource_id+ - (String) The logical name of the resource
       #     as specified in the template. Default: There is no default value.
       #   * +:physical_resource_id+ - (String) The name or unique identifier
@@ -163,8 +176,9 @@ module AWS
       #     Cloud (EC2) instance, PhysicalResourceId corresponds to the
       #     InstanceId. You can pass the EC2 InstanceId to
       #     DescribeStackResources to find which stack the instance belongs to
-      #     and what other resources are part of the stack. Default: There is
-      #     no default value.
+      #     and what other resources are part of the stack. Required:
+      #     Conditional. If you do not specify PhysicalResourceId, you must
+      #     specify StackName. Default: There is no default value.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -332,10 +346,11 @@ module AWS
       #     Conditional: You must pass TemplateURL or TemplateBody. If both are
       #     passed, only TemplateBody is used.
       #   * +:template_url+ - (String) Location of file containing the template
-      #     body. The URL must point to a template located in an S3 bucket in
-      #     the same region as the stack. For more information, go to the AWS
-      #     CloudFormation User Guide. Conditional: You must pass TemplateURL
-      #     or TemplateBody. If both are passed, only TemplateBody is used.
+      #     body. The URL must point to a template (max size: 307,200 bytes)
+      #     located in an S3 bucket in the same region as the stack. For more
+      #     information, go to the AWS CloudFormation User Guide. Conditional:
+      #     You must pass TemplateURL or TemplateBody. If both are passed, only
+      #     TemplateBody is used.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

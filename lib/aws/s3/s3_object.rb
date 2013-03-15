@@ -585,6 +585,9 @@ module AWS
       #     client-side encryption materials in a separate object in S3
       #     instead of in the object metadata.
       #
+      #   @option options [String] :expires The date and time at which the
+      #     object is no longer cacheable.
+      #
       # @return [S3Object, ObjectVersion] If the bucket has versioning
       #   enabled, this methods returns an {ObjectVersion}, otherwise
       #   this method returns +self+.

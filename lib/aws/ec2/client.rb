@@ -71,7 +71,9 @@ module AWS
       # Calls the AllocateAddress API operation.
       # @param [Hash] options
       #   * +:domain+ - (String) Set to vpc to allocate the address to your
-      #     VPC. By default, will allocate to EC2.
+      #     VPC. By default, will allocate to EC2. Valid values include:
+      #     * +vpc+
+      #     * +standard+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -391,6 +393,19 @@ module AWS
       #   a hash with the following structure:
       #   * +:owner_id+ - (String)
 
+      # @!method copy_image(options = {})
+      # Calls the CopyImage API operation.
+      # @param [Hash] options
+      #   * +:source_region+ - *required* - (String)
+      #   * +:source_image_id+ - *required* - (String)
+      #   * +:name+ - *required* - (String)
+      #   * +:description+ - (String)
+      #   * +:client_token+ - (String)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:image_id+ - (String)
+
       # @!method copy_snapshot(options = {})
       # Calls the CopySnapshot API operation.
       # @param [Hash] options
@@ -472,7 +487,9 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
-      #       * +:volume_type+ - (String)
+      #       * +:volume_type+ - (String) Valid values include:
+      #         * +standard+
+      #         * +io1+
       #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
@@ -486,10 +503,15 @@ module AWS
       # @param [Hash] options
       #   * +:description+ - (String)
       #   * +:instance_id+ - *required* - (String)
-      #   * +:target_environment+ - (String)
+      #   * +:target_environment+ - (String) Valid values include:
+      #     * +citrix+
+      #     * +vmware+
       #   * +:export_to_s3_task+ - (Hash)
-      #     * +:disk_image_format+ - (String)
-      #     * +:container_format+ - (String)
+      #     * +:disk_image_format+ - (String) Valid values include:
+      #       * +vmdk+
+      #       * +vhd+
+      #     * +:container_format+ - (String) Valid values include:
+      #       * +ova+
       #     * +:s3_bucket+ - (String)
       #     * +:s3_prefix+ - (String)
       # @return [Core::Response]
@@ -580,7 +602,9 @@ module AWS
       #   * +:protocol+ - *required* - (String) IP protocol the rule applies
       #     to. Valid Values: tcp, udp, icmp or an IP protocol number.
       #   * +:rule_action+ - *required* - (String) Whether to allow or deny
-      #     traffic that matches the rule.
+      #     traffic that matches the rule. Valid values include:
+      #     * +allow+
+      #     * +deny+
       #   * +:egress+ - *required* - (Boolean) Whether this rule applies to
       #     egress traffic from the subnet ( +true+ ) or ingress traffic to the
       #     subnet ( +false+ ).
@@ -649,6 +673,7 @@ module AWS
       #       * +:value+ - (String)
       #     * +:private_ip_addresses_set+ - (Array<Hash>)
       #       * +:private_ip_address+ - (String)
+      #       * +:private_dns_name+ - (String)
       #       * +:primary+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
@@ -662,6 +687,8 @@ module AWS
       #   * +:group_name+ - *required* - (String) The name of the
       #     PlacementGroup.
       #   * +:strategy+ - *required* - (String) The PlacementGroup strategy.
+      #     Valid values include:
+      #     * +cluster+
       # @return [Core::Response]
 
       # @!method create_reserved_instances_listing(options = {})
@@ -741,11 +768,6 @@ module AWS
       #       * +:value+ - (String)
       #     * +:propagating_vgw_set+ - (Array<Hash>)
       #       * +:gateway_id+ - (String)
-      #     * +:propagated_route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:status+ - (String)
-      #       * +:source_id+ - (String)
 
       # @!method create_security_group(options = {})
       # Calls the CreateSecurityGroup API operation.
@@ -819,6 +841,8 @@ module AWS
       #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
       #     * +:availability_zone+ - (String)
+      #     * +:default_for_az+ - (Boolean)
+      #     * +:map_public_ip_on_launch+ - (Boolean)
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
@@ -845,7 +869,9 @@ module AWS
       #     create the new volume.
       #   * +:availability_zone+ - *required* - (String) The Availability Zone
       #     in which to create the new volume.
-      #   * +:volume_type+ - (String)
+      #   * +:volume_type+ - (String) Valid values include:
+      #     * +standard+
+      #     * +io1+
       #   * +:iops+ - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -889,6 +915,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #     * +:instance_tenancy+ - (String)
+      #     * +:is_default+ - (Boolean)
 
       # @!method create_vpn_connection(options = {})
       # Calls the CreateVpnConnection API operation.
@@ -1122,6 +1149,18 @@ module AWS
       #   * +:image_id+ - *required* - (String) The ID of the AMI to
       #     deregister.
       # @return [Core::Response]
+
+      # @!method describe_account_attributes(options = {})
+      # Calls the DescribeAccountAttributes API operation.
+      # @param [Hash] options
+      #   * +:attribute_names+ - (Array<String>)
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:account_attribute_set+ - (Array<Hash>)
+      #     * +:attribute_name+ - (String)
+      #     * +:attribute_value_set+ - (Array<Hash>)
+      #       * +:attribute_value+ - (String)
 
       # @!method describe_addresses(options = {})
       # Calls the DescribeAddresses API operation.
@@ -1426,7 +1465,19 @@ module AWS
       #   * +:attribute+ - *required* - (String) The name of the attribute to
       #     describe. Available attribute names: instanceType, kernel, ramdisk,
       #     userData, disableApiTermination, instanceInitiatedShutdownBehavior,
-      #     rootDeviceName, blockDeviceMapping
+      #     rootDeviceName, blockDeviceMapping Valid values include:
+      #     * +instanceType+
+      #     * +kernel+
+      #     * +ramdisk+
+      #     * +userData+
+      #     * +disableApiTermination+
+      #     * +instanceInitiatedShutdownBehavior+
+      #     * +rootDeviceName+
+      #     * +blockDeviceMapping+
+      #     * +productCodes+
+      #     * +sourceDestCheck+
+      #     * +groupSet+
+      #     * +ebsOptimized+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1599,7 +1650,16 @@ module AWS
       #           * +:delete_on_termination+ - (Boolean)
       #         * +:association+ - (Hash)
       #           * +:public_ip+ - (String)
+      #           * +:public_dns_name+ - (String)
       #           * +:ip_owner_id+ - (String)
+      #         * +:private_ip_addresses_set+ - (Array<Hash>)
+      #           * +:private_ip_address+ - (String)
+      #           * +:private_dns_name+ - (String)
+      #           * +:primary+ - (Boolean)
+      #           * +:association+ - (Hash)
+      #             * +:public_ip+ - (String)
+      #             * +:public_dns_name+ - (String)
+      #             * +:ip_owner_id+ - (String)
       #       * +:iam_instance_profile+ - (Hash)
       #         * +:arn+ - (String)
       #         * +:id+ - (String)
@@ -1786,6 +1846,7 @@ module AWS
       #       * +:value+ - (String)
       #     * +:private_ip_addresses_set+ - (Array<Hash>)
       #       * +:private_ip_address+ - (String)
+      #       * +:private_dns_name+ - (String)
       #       * +:primary+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
@@ -1906,7 +1967,24 @@ module AWS
       #     list of the unique IDs of the Reserved Instance offerings to
       #     describe.
       #   * +:instance_type+ - (String) The instance type on which the Reserved
-      #     Instance can be used.
+      #     Instance can be used. Valid values include:
+      #     * +t1.micro+
+      #     * +m1.small+
+      #     * +m1.medium+
+      #     * +m1.large+
+      #     * +m1.xlarge+
+      #     * +m2.xlarge+
+      #     * +m2.2xlarge+
+      #     * +m2.4xlarge+
+      #     * +m3.xlarge+
+      #     * +m3.2xlarge+
+      #     * +c1.medium+
+      #     * +c1.xlarge+
+      #     * +hi1.4xlarge+
+      #     * +hs1.8xlarge+
+      #     * +cc1.4xlarge+
+      #     * +cc2.8xlarge+
+      #     * +cg1.4xlarge+
       #   * +:availability_zone+ - (String) The Availability Zone in which the
       #     Reserved Instance can be used.
       #   * +:product_description+ - (String) The Reserved Instance product
@@ -1981,11 +2059,6 @@ module AWS
       #       * +:value+ - (String)
       #     * +:propagating_vgw_set+ - (Array<Hash>)
       #       * +:gateway_id+ - (String)
-      #     * +:propagated_route_set+ - (Array<Hash>)
-      #       * +:destination_cidr_block+ - (String)
-      #       * +:gateway_id+ - (String)
-      #       * +:status+ - (String)
-      #       * +:source_id+ - (String)
 
       # @!method describe_security_groups(options = {})
       # Calls the DescribeSecurityGroups API operation.
@@ -2040,6 +2113,9 @@ module AWS
       #     whose attribute is being described.
       #   * +:attribute+ - *required* - (String) The name of the EBS attribute
       #     to describe. Available attribute names: createVolumePermission
+      #     Valid values include:
+      #     * +productCodes+
+      #     * +createVolumePermission+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2233,6 +2309,8 @@ module AWS
       #     * +:cidr_block+ - (String)
       #     * +:available_ip_address_count+ - (Integer)
       #     * +:availability_zone+ - (String)
+      #     * +:default_for_az+ - (Boolean)
+      #     * +:map_public_ip_on_launch+ - (Boolean)
       #     * +:tag_set+ - (Array<Hash>)
       #       * +:key+ - (String)
       #       * +:value+ - (String)
@@ -2258,7 +2336,9 @@ module AWS
       # Calls the DescribeVolumeAttribute API operation.
       # @param [Hash] options
       #   * +:volume_id+ - *required* - (String)
-      #   * +:attribute+ - (String)
+      #   * +:attribute+ - (String) Valid values include:
+      #     * +autoEnableIO+
+      #     * +productCodes+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2337,6 +2417,22 @@ module AWS
       #     * +:volume_type+ - (String)
       #     * +:iops+ - (Integer)
 
+      # @!method describe_vpc_attribute(options = {})
+      # Calls the DescribeVpcAttribute API operation.
+      # @param [Hash] options
+      #   * +:vpc_id+ - *required* - (String)
+      #   * +:attribute+ - (String) Valid values include:
+      #     * +enableDnsSupport+
+      #     * +enableDnsHostnames+
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:vpc_id+ - (String)
+      #   * +:enable_dns_support+ - (Hash)
+      #     * +:value+ - (Boolean)
+      #   * +:enable_dns_hostnames+ - (Hash)
+      #     * +:value+ - (Boolean)
+
       # @!method describe_vpcs(options = {})
       # Calls the DescribeVpcs API operation.
       # @param [Hash] options
@@ -2360,6 +2456,7 @@ module AWS
       #       * +:key+ - (String)
       #       * +:value+ - (String)
       #     * +:instance_tenancy+ - (String)
+      #     * +:is_default+ - (Boolean)
 
       # @!method describe_vpn_connections(options = {})
       # Calls the DescribeVpnConnections API operation.
@@ -2549,7 +2646,24 @@ module AWS
       #     * +:security_groups+ - (Array<String>)
       #     * +:additional_info+ - (String)
       #     * +:user_data+ - (String)
-      #     * +:instance_type+ - (String)
+      #     * +:instance_type+ - (String) Valid values include:
+      #       * +t1.micro+
+      #       * +m1.small+
+      #       * +m1.medium+
+      #       * +m1.large+
+      #       * +m1.xlarge+
+      #       * +m2.xlarge+
+      #       * +m2.2xlarge+
+      #       * +m2.4xlarge+
+      #       * +m3.xlarge+
+      #       * +m3.2xlarge+
+      #       * +c1.medium+
+      #       * +c1.xlarge+
+      #       * +hi1.4xlarge+
+      #       * +hs1.8xlarge+
+      #       * +cc1.4xlarge+
+      #       * +cc2.8xlarge+
+      #       * +cg1.4xlarge+
       #     * +:placement+ - (Hash)
       #       * +:availability_zone+ - (String) The availability zone in which
       #         an Amazon EC2 instance runs.
@@ -2575,7 +2689,9 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
-      #         * +:volume_type+ - (String)
+      #         * +:volume_type+ - (String) Valid values include:
+      #           * +standard+
+      #           * +io1+
       #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
@@ -2746,7 +2862,19 @@ module AWS
       #   * +:attribute+ - (String) The name of the attribute being modified.
       #     Available attribute names: instanceType, kernel, ramdisk, userData,
       #     disableApiTermination, instanceInitiatedShutdownBehavior,
-      #     rootDevice, blockDeviceMapping
+      #     rootDevice, blockDeviceMapping Valid values include:
+      #     * +instanceType+
+      #     * +kernel+
+      #     * +ramdisk+
+      #     * +userData+
+      #     * +disableApiTermination+
+      #     * +instanceInitiatedShutdownBehavior+
+      #     * +rootDeviceName+
+      #     * +blockDeviceMapping+
+      #     * +productCodes+
+      #     * +sourceDestCheck+
+      #     * +groupSet+
+      #     * +ebsOptimized+
       #   * +:value+ - (String) The new value of the instance attribute being
       #     modified. Only valid when kernel, ramdisk, userData,
       #     disableApiTermination or instanceInitiateShutdownBehavior is
@@ -2807,7 +2935,10 @@ module AWS
       #   * +:snapshot_id+ - *required* - (String) The ID of the EBS snapshot
       #     whose attributes are being modified.
       #   * +:attribute+ - (String) The name of the attribute being modified.
-      #     Available attribute names: createVolumePermission
+      #     Available attribute names: createVolumePermission Valid values
+      #     include:
+      #     * +productCodes+
+      #     * +createVolumePermission+
       #   * +:operation_type+ - (String) The operation to perform on the
       #     attribute. Available operation names: add, remove
       #   * +:user_ids+ - (Array<String>) The AWS user IDs to add to or remove
@@ -2836,6 +2967,16 @@ module AWS
       # @param [Hash] options
       #   * +:volume_id+ - *required* - (String)
       #   * +:auto_enable_io+ - (Boolean)
+      # @return [Core::Response]
+
+      # @!method modify_vpc_attribute(options = {})
+      # Calls the ModifyVpcAttribute API operation.
+      # @param [Hash] options
+      #   * +:vpc_id+ - *required* - (String)
+      #   * +:enable_dns_support+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
+      #   * +:enable_dns_hostnames+ - (Hash)
+      #     * +:value+ - (Boolean) Boolean value
       # @return [Core::Response]
 
       # @!method monitor_instances(options = {})
@@ -2907,7 +3048,9 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
-      #       * +:volume_type+ - (String)
+      #       * +:volume_type+ - (String) Valid values include:
+      #         * +standard+
+      #         * +io1+
       #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
@@ -2948,7 +3091,9 @@ module AWS
       #   * +:protocol+ - *required* - (String) IP protocol the rule applies
       #     to. Valid Values: tcp, udp, icmp or an IP protocol number.
       #   * +:rule_action+ - *required* - (String) Whether to allow or deny
-      #     traffic that matches the rule.
+      #     traffic that matches the rule. Valid values include:
+      #     * +allow+
+      #     * +deny+
       #   * +:egress+ - *required* - (Boolean) Whether this rule applies to
       #     egress traffic from the subnet ( +true+ ) or ingress traffic (
       #     +false+ ).
@@ -3014,7 +3159,10 @@ module AWS
       #     price for any Spot Instance launched to fulfill the request.
       #   * +:instance_count+ - (Integer) Specifies the maximum number of Spot
       #     Instances to launch.
-      #   * +:type+ - (String) Specifies the Spot Instance type.
+      #   * +:type+ - (String) Specifies the Spot Instance type. Valid values
+      #     include:
+      #     * +one-time+
+      #     * +persistent+
       #   * +:valid_from+ - (String<ISO8601 datetime>) Defines the start date
       #     of the request. If this is a one-time request, the request becomes
       #     active at this date and time and remains active until all instances
@@ -3042,7 +3190,25 @@ module AWS
       #       collectively comprise the launch request have access to this
       #       data. User data is never returned through API responses.
       #     * +:addressing_type+ - (String) Deprecated.
-      #     * +:instance_type+ - (String) Specifies the instance type.
+      #     * +:instance_type+ - (String) Specifies the instance type. Valid
+      #       values include:
+      #       * +t1.micro+
+      #       * +m1.small+
+      #       * +m1.medium+
+      #       * +m1.large+
+      #       * +m1.xlarge+
+      #       * +m2.xlarge+
+      #       * +m2.2xlarge+
+      #       * +m2.4xlarge+
+      #       * +m3.xlarge+
+      #       * +m3.2xlarge+
+      #       * +c1.medium+
+      #       * +c1.xlarge+
+      #       * +hi1.4xlarge+
+      #       * +hs1.8xlarge+
+      #       * +cc1.4xlarge+
+      #       * +cc2.8xlarge+
+      #       * +cg1.4xlarge+
       #     * +:placement+ - (Hash) Defines a placement item.
       #       * +:availability_zone+ - (String) The availability zone in which
       #         an Amazon EC2 instance runs.
@@ -3069,7 +3235,9 @@ module AWS
       #           gigabytes.
       #         * +:delete_on_termination+ - (Boolean) Specifies whether the
       #           Amazon EBS volume is deleted on instance termination.
-      #         * +:volume_type+ - (String)
+      #         * +:volume_type+ - (String) Valid values include:
+      #           * +standard+
+      #           * +io1+
       #         * +:iops+ - (Integer)
       #       * +:no_device+ - (String) Specifies the device name to suppress
       #         during instance launch.
@@ -3179,7 +3347,20 @@ module AWS
       #   * +:instance_id+ - *required* - (String) The ID of the Amazon EC2
       #     instance whose attribute is being reset.
       #   * +:attribute+ - *required* - (String) The name of the attribute
-      #     being reset. Available attribute names: kernel, ramdisk
+      #     being reset. Available attribute names: kernel, ramdisk Valid
+      #     values include:
+      #     * +instanceType+
+      #     * +kernel+
+      #     * +ramdisk+
+      #     * +userData+
+      #     * +disableApiTermination+
+      #     * +instanceInitiatedShutdownBehavior+
+      #     * +rootDeviceName+
+      #     * +blockDeviceMapping+
+      #     * +productCodes+
+      #     * +sourceDestCheck+
+      #     * +groupSet+
+      #     * +ebsOptimized+
       # @return [Core::Response]
 
       # @!method reset_network_interface_attribute(options = {})
@@ -3196,6 +3377,9 @@ module AWS
       #     attribute is being reset.
       #   * +:attribute+ - *required* - (String) The name of the attribute
       #     being reset. Available attribute names: createVolumePermission
+      #     Valid values include:
+      #     * +productCodes+
+      #     * +createVolumePermission+
       # @return [Core::Response]
 
       # @!method revoke_security_group_egress(options = {})
@@ -3298,9 +3482,25 @@ module AWS
       #   * +:security_group_ids+ - (Array<String>)
       #   * +:user_data+ - (String) Specifies additional information to make
       #     available to the instance(s).
-      #   * +:addressing_type+ - (String)
       #   * +:instance_type+ - (String) Specifies the instance type for the
-      #     launched instances.
+      #     launched instances. Valid values include:
+      #     * +t1.micro+
+      #     * +m1.small+
+      #     * +m1.medium+
+      #     * +m1.large+
+      #     * +m1.xlarge+
+      #     * +m2.xlarge+
+      #     * +m2.2xlarge+
+      #     * +m2.4xlarge+
+      #     * +m3.xlarge+
+      #     * +m3.2xlarge+
+      #     * +c1.medium+
+      #     * +c1.xlarge+
+      #     * +hi1.4xlarge+
+      #     * +hs1.8xlarge+
+      #     * +cc1.4xlarge+
+      #     * +cc2.8xlarge+
+      #     * +cg1.4xlarge+
       #   * +:placement+ - (Hash) Specifies the placement constraints
       #     (Availability Zones) for launching the instances.
       #     * +:availability_zone+ - (String) The availability zone in which an
@@ -3335,7 +3535,9 @@ module AWS
       #         gigabytes.
       #       * +:delete_on_termination+ - (Boolean) Specifies whether the
       #         Amazon EBS volume is deleted on instance termination.
-      #       * +:volume_type+ - (String)
+      #       * +:volume_type+ - (String) Valid values include:
+      #         * +standard+
+      #         * +io1+
       #       * +:iops+ - (Integer)
       #     * +:no_device+ - (String) Specifies the device name to suppress
       #       during instance launch.
@@ -3465,7 +3667,16 @@ module AWS
       #         * +:delete_on_termination+ - (Boolean)
       #       * +:association+ - (Hash)
       #         * +:public_ip+ - (String)
+      #         * +:public_dns_name+ - (String)
       #         * +:ip_owner_id+ - (String)
+      #       * +:private_ip_addresses_set+ - (Array<Hash>)
+      #         * +:private_ip_address+ - (String)
+      #         * +:private_dns_name+ - (String)
+      #         * +:primary+ - (Boolean)
+      #         * +:association+ - (Hash)
+      #           * +:public_ip+ - (String)
+      #           * +:public_dns_name+ - (String)
+      #           * +:ip_owner_id+ - (String)
       #     * +:iam_instance_profile+ - (Hash)
       #       * +:arn+ - (String)
       #       * +:id+ - (String)
@@ -3550,7 +3761,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-12-01')
+      define_client_methods('2013-02-01')
 
     end
   end

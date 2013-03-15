@@ -583,7 +583,7 @@
           :sym: :instance_id
           :type: :string
         Ec2InstanceId:
-          :sym: :ec_2_instance_id
+          :sym: :ec2_instance_id
           :type: :string
         Hostname:
           :sym: :hostname
@@ -1098,7 +1098,7 @@
           :sym: :volume_id
           :type: :string
         Ec2VolumeId:
-          :sym: :ec_2_volume_id
+          :sym: :ec2_volume_id
           :type: :string
         Name:
           :sym: :name

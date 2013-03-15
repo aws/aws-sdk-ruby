@@ -56,7 +56,13 @@ module AWS
       #   * +:tag_filter+ - (Hash)
       #     * +:tag+ - *required* - (String)
       #   * +:close_status_filter+ - (Hash)
-      #     * +:status+ - *required* - (String)
+      #     * +:status+ - *required* - (String) Valid values include:
+      #       * +COMPLETED+
+      #       * +FAILED+
+      #       * +CANCELED+
+      #       * +TERMINATED+
+      #       * +CONTINUED_AS_NEW+
+      #       * +TIMED_OUT+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -535,7 +541,10 @@ module AWS
       # @param [Hash] options
       #   * +:domain+ - *required* - (String)
       #   * +:name+ - (String)
-      #   * +:registration_status+ - *required* - (String)
+      #   * +:registration_status+ - *required* - (String) Valid values
+      #     include:
+      #     * +REGISTERED+
+      #     * +DEPRECATED+
       #   * +:next_page_token+ - (String)
       #   * +:maximum_page_size+ - (Integer)
       #   * +:reverse_order+ - (Boolean)
@@ -565,7 +574,13 @@ module AWS
       #   * +:execution_filter+ - (Hash)
       #     * +:workflow_id+ - *required* - (String)
       #   * +:close_status_filter+ - (Hash)
-      #     * +:status+ - *required* - (String)
+      #     * +:status+ - *required* - (String) Valid values include:
+      #       * +COMPLETED+
+      #       * +FAILED+
+      #       * +CANCELED+
+      #       * +TERMINATED+
+      #       * +CONTINUED_AS_NEW+
+      #       * +TIMED_OUT+
       #   * +:type_filter+ - (Hash)
       #     * +:name+ - *required* - (String)
       #     * +:version+ - (String)
@@ -599,7 +614,10 @@ module AWS
       # Calls the ListDomains API operation.
       # @param [Hash] options
       #   * +:next_page_token+ - (String)
-      #   * +:registration_status+ - *required* - (String)
+      #   * +:registration_status+ - *required* - (String) Valid values
+      #     include:
+      #     * +REGISTERED+
+      #     * +DEPRECATED+
       #   * +:maximum_page_size+ - (Integer)
       #   * +:reverse_order+ - (Boolean)
       # @return [Core::Response]
@@ -654,7 +672,10 @@ module AWS
       # @param [Hash] options
       #   * +:domain+ - *required* - (String)
       #   * +:name+ - (String)
-      #   * +:registration_status+ - *required* - (String)
+      #   * +:registration_status+ - *required* - (String) Valid values
+      #     include:
+      #     * +REGISTERED+
+      #     * +DEPRECATED+
       #   * +:next_page_token+ - (String)
       #   * +:maximum_page_size+ - (Integer)
       #   * +:reverse_order+ - (Boolean)
@@ -1039,7 +1060,10 @@ module AWS
       #   * +:default_execution_start_to_close_timeout+ - (String)
       #   * +:default_task_list+ - (Hash)
       #     * +:name+ - *required* - (String)
-      #   * +:default_child_policy+ - (String)
+      #   * +:default_child_policy+ - (String) Valid values include:
+      #     * +TERMINATE+
+      #     * +REQUEST_CANCEL+
+      #     * +ABANDON+
       # @return [Core::Response]
 
       # @!method request_cancel_workflow_execution(options = {})
@@ -1077,7 +1101,19 @@ module AWS
       # @param [Hash] options
       #   * +:task_token+ - *required* - (String)
       #   * +:decisions+ - (Array<Hash>)
-      #     * +:decision_type+ - *required* - (String)
+      #     * +:decision_type+ - *required* - (String) Valid values include:
+      #       * +ScheduleActivityTask+
+      #       * +RequestCancelActivityTask+
+      #       * +CompleteWorkflowExecution+
+      #       * +FailWorkflowExecution+
+      #       * +CancelWorkflowExecution+
+      #       * +ContinueAsNewWorkflowExecution+
+      #       * +RecordMarker+
+      #       * +StartTimer+
+      #       * +CancelTimer+
+      #       * +SignalExternalWorkflowExecution+
+      #       * +RequestCancelExternalWorkflowExecution+
+      #       * +StartChildWorkflowExecution+
       #     * +:schedule_activity_task_decision_attributes+ - (Hash)
       #       * +:activity_type+ - *required* - (Hash)
       #         * +:name+ - *required* - (String)
@@ -1106,7 +1142,10 @@ module AWS
       #       * +:task_list+ - (Hash)
       #         * +:name+ - *required* - (String)
       #       * +:task_start_to_close_timeout+ - (String)
-      #       * +:child_policy+ - (String)
+      #       * +:child_policy+ - (String) Valid values include:
+      #         * +TERMINATE+
+      #         * +REQUEST_CANCEL+
+      #         * +ABANDON+
       #       * +:tag_list+ - (Array<String>)
       #       * +:workflow_type_version+ - (String)
       #     * +:record_marker_decision_attributes+ - (Hash)
@@ -1139,7 +1178,10 @@ module AWS
       #       * +:task_list+ - (Hash)
       #         * +:name+ - *required* - (String)
       #       * +:task_start_to_close_timeout+ - (String)
-      #       * +:child_policy+ - (String)
+      #       * +:child_policy+ - (String) Valid values include:
+      #         * +TERMINATE+
+      #         * +REQUEST_CANCEL+
+      #         * +ABANDON+
       #       * +:tag_list+ - (Array<String>)
       #   * +:execution_context+ - (String)
       # @return [Core::Response]
@@ -1168,7 +1210,10 @@ module AWS
       #   * +:execution_start_to_close_timeout+ - (String)
       #   * +:tag_list+ - (Array<String>)
       #   * +:task_start_to_close_timeout+ - (String)
-      #   * +:child_policy+ - (String)
+      #   * +:child_policy+ - (String) Valid values include:
+      #     * +TERMINATE+
+      #     * +REQUEST_CANCEL+
+      #     * +ABANDON+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1182,7 +1227,10 @@ module AWS
       #   * +:run_id+ - (String)
       #   * +:reason+ - (String)
       #   * +:details+ - (String)
-      #   * +:child_policy+ - (String)
+      #   * +:child_policy+ - (String) Valid values include:
+      #     * +TERMINATE+
+      #     * +REQUEST_CANCEL+
+      #     * +ABANDON+
       # @return [Core::Response]
 
       # end client methods #

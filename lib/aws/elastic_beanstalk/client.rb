@@ -504,7 +504,13 @@ module AWS
       #     with this request ID.
       #   * +:severity+ - (String) If specified, limits the events returned
       #     from this call to include only those with the specified severity or
-      #     higher.
+      #     higher. Valid values include:
+      #     * +TRACE+
+      #     * +DEBUG+
+      #     * +INFO+
+      #     * +WARN+
+      #     * +ERROR+
+      #     * +FATAL+
       #   * +:start_time+ - (String<ISO8601 datetime>) If specified, AWS
       #     Elastic Beanstalk restricts the returned descriptions to those that
       #     occur on or after this time.
@@ -569,7 +575,8 @@ module AWS
       #     both. If you do not specify either, AWS Elastic Beanstalk returns
       #     MissingRequiredParameter error.
       #   * +:info_type+ - *required* - (String) The type of information to
-      #     request.
+      #     request. Valid values include:
+      #     * +tail+
       # @return [Core::Response]
 
       # @!method restart_app_server(options = {})
@@ -599,13 +606,14 @@ module AWS
       #     or both. If you do not specify either, AWS Elastic Beanstalk
       #     returns MissingRequiredParameter error.
       #   * +:info_type+ - *required* - (String) The type of information to
-      #     retrieve.
+      #     retrieve. Valid values include:
+      #     * +tail+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
       #   * +:environment_info+ - (Array<Hash>)
       #     * +:info_type+ - (String)
-      #     * +:ec_2_instance_id+ - (String)
+      #     * +:ec2_instance_id+ - (String)
       #     * +:sample_timestamp+ - (Time)
       #     * +:message+ - (String)
 

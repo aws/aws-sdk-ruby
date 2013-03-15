@@ -29,9 +29,14 @@ module AWS
       #     add.
       #     * +:name+ - (String) Friendly name given to the instance group.
       #     * +:market+ - (String) Market type of the Amazon EC2 instances used
-      #       to create a cluster node.
+      #       to create a cluster node. Valid values include:
+      #       * +ON_DEMAND+
+      #       * +SPOT+
       #     * +:instance_role+ - *required* - (String) The role of the instance
-      #       group in the cluster.
+      #       group in the cluster. Valid values include:
+      #       * +MASTER+
+      #       * +CORE+
+      #       * +TASK+
       #     * +:bid_price+ - (String) Bid price for each Amazon EC2 instance in
       #       the instance group when launching nodes as Spot Instances,
       #       expressed in USD.
@@ -57,7 +62,10 @@ module AWS
       #     executed by the job flow.
       #     * +:name+ - *required* - (String) The name of the job flow step.
       #     * +:action_on_failure+ - (String) Specifies the action to take if
-      #       the job flow step fails.
+      #       the job flow step fails. Valid values include:
+      #       * +TERMINATE_JOB_FLOW+
+      #       * +CANCEL_AND_WAIT+
+      #       * +CONTINUE+
       #     * +:hadoop_jar_step+ - *required* - (Hash) Specifies the JAR file
       #       used for the job flow step.
       #       * +:properties+ - (Array<Hash>) A list of Java properties that
@@ -199,9 +207,14 @@ module AWS
       #       flow's instance groups.
       #       * +:name+ - (String) Friendly name given to the instance group.
       #       * +:market+ - (String) Market type of the Amazon EC2 instances
-      #         used to create a cluster node.
+      #         used to create a cluster node. Valid values include:
+      #         * +ON_DEMAND+
+      #         * +SPOT+
       #       * +:instance_role+ - *required* - (String) The role of the
-      #         instance group in the cluster.
+      #         instance group in the cluster. Valid values include:
+      #         * +MASTER+
+      #         * +CORE+
+      #         * +TASK+
       #       * +:bid_price+ - (String) Bid price for each Amazon EC2 instance
       #         in the instance group when launching nodes as Spot Instances,
       #         expressed in USD.
@@ -240,7 +253,10 @@ module AWS
       #     flow.
       #     * +:name+ - *required* - (String) The name of the job flow step.
       #     * +:action_on_failure+ - (String) Specifies the action to take if
-      #       the job flow step fails.
+      #       the job flow step fails. Valid values include:
+      #       * +TERMINATE_JOB_FLOW+
+      #       * +CANCEL_AND_WAIT+
+      #       * +CONTINUE+
       #     * +:hadoop_jar_step+ - *required* - (Hash) Specifies the JAR file
       #       used for the job flow step.
       #       * +:properties+ - (Array<Hash>) A list of Java properties that

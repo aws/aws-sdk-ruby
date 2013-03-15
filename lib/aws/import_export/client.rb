@@ -34,7 +34,9 @@ module AWS
       # @!method create_job(options = {})
       # Calls the CreateJob API operation.
       # @param [Hash] options
-      #   * +:job_type+ - *required* - (String)
+      #   * +:job_type+ - *required* - (String) Valid values include:
+      #     * +Import+
+      #     * +Export+
       #   * +:manifest+ - *required* - (String)
       #   * +:manifest_addendum+ - (String)
       #   * +:validate_only+ - *required* - (Boolean)
@@ -92,7 +94,9 @@ module AWS
       # @param [Hash] options
       #   * +:job_id+ - *required* - (String)
       #   * +:manifest+ - *required* - (String)
-      #   * +:job_type+ - *required* - (String)
+      #   * +:job_type+ - *required* - (String) Valid values include:
+      #     * +Import+
+      #     * +Export+
       #   * +:validate_only+ - *required* - (Boolean)
       # @return [Core::Response]
       #   The #data method of the response object returns

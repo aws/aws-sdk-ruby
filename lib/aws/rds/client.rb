@@ -22,6 +22,35 @@ module AWS
 
       # client methods #
 
+      # @!method add_source_identifier_to_subscription(options = {})
+      # Calls the AddSourceIdentifierToSubscription API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - *required* - (String) The name of the RDS
+      #     event notification subscription you want to add a source identifier
+      #     to.
+      #   * +:source_identifier+ - *required* - (String) The identifier of the
+      #     event source to be added. An identifier must begin with a letter
+      #     and must contain only ASCII letters, digits, and hyphens; it cannot
+      #     end with a hyphen or contain two consecutive hyphens. Constraints:
+      #     If the source type is a DB instance, then a DBInstanceIdentifier
+      #     must be supplied. If the source type is a DB security group, a
+      #     DBSecurityGroupName must be supplied. If the source type is a DB
+      #     parameter group, a DBParameterGroupName must be supplied. If the
+      #     source type is a DB Snapshot, a DBSnapshotIdentifier must be
+      #     supplied.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:customer_aws_id+ - (String)
+      #   * +:cust_subscription_id+ - (String)
+      #   * +:sns_topic_arn+ - (String)
+      #   * +:status+ - (String)
+      #   * +:subscription_creation_time+ - (String)
+      #   * +:source_type+ - (String)
+      #   * +:source_ids_list+ - (Array<String>)
+      #   * +:event_categories_list+ - (Array<String>)
+      #   * +:enabled+ - (Boolean)
+
       # @!method add_tags_to_resource(options = {})
       # Calls the AddTagsToResource API operation.
       # @param [Hash] options
@@ -104,6 +133,7 @@ module AWS
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
       #   * +:iops+ - (Integer)
+      #   * +:option_group_name+ - (String)
 
       # @!method create_db_instance(options = {})
       # Calls the CreateDBInstance API operation.
@@ -125,6 +155,9 @@ module AWS
       #     the master DB Instance user.
       #   * +:db_security_groups+ - (Array<String>) A list of DB Security
       #     Groups to associate with this DB Instance.
+      #   * +:vpc_security_group_ids+ - (Array<String>) A list of Ec2 Vpc
+      #     Security Groups to associate with this DB Instance. Default: The
+      #     default Ec2 Vpc Security Group for the DB Subnet group's Vpc.
       #   * +:availability_zone+ - (String) The EC2 Availability Zone that the
       #     database instance will be created in.
       #   * +:db_subnet_group_name+ - (String) A DB Subnet Group to associate
@@ -164,6 +197,19 @@ module AWS
       #   * +:character_set_name+ - (String) For supported engines, indicates
       #     that the DB Instance should be associated with the specified
       #     CharacterSet.
+      #   * +:publicly_accessible+ - (Boolean) Specifies the accessibility
+      #     options for the DB Instance. A value of +true+ specifies an
+      #     Internet-facing instance with a publicly resolvable DNS name, which
+      #     resolves to a public IP address. A value of +false+ specifies an
+      #     internal instance with a DNS name that resolves to a private IP
+      #     address. Default: The default behavior varies depending on whether
+      #     a VPC has been requested or not. The following list shows the
+      #     default behavior in each case. Default VPC: +true+ VPC: +false+ If
+      #     no DB subnet group has been specified as part of the request and
+      #     the PubliclyAccessible value has not been set, the DB instance will
+      #     be publicly accessible. If a specific DB subnet group has been
+      #     specified as part of the request and the PubliclyAccessible value
+      #     has not been set, the DB instance will be private.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -182,6 +228,9 @@ module AWS
       #   * +:backup_retention_period+ - (Integer)
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
+      #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
       #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
@@ -208,6 +257,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -216,10 +266,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method create_db_instance_read_replica(options = {})
       # Calls the CreateDBInstanceReadReplica API operation.
@@ -251,7 +303,22 @@ module AWS
       #   * +:iops+ - (Integer) The amount of Provisioned IOPS (input/output
       #     operations per second) to be initially allocated for the DB
       #     Instance.
-      #   * +:option_group_name+ - (String)
+      #   * +:option_group_name+ - (String) The option group the DB instance
+      #     will be associated with. If omitted, the default Option Group for
+      #     the engine specified will be used.
+      #   * +:publicly_accessible+ - (Boolean) Specifies the accessibility
+      #     options for the DB Instance. A value of +true+ specifies an
+      #     Internet-facing instance with a publicly resolvable DNS name, which
+      #     resolves to a public IP address. A value of +false+ specifies an
+      #     internal instance with a DNS name that resolves to a private IP
+      #     address. Default: The default behavior varies depending on whether
+      #     a VPC has been requested or not. The following list shows the
+      #     default behavior in each case. Default VPC: +true+ VPC: +false+ If
+      #     no DB subnet group has been specified as part of the request and
+      #     the PubliclyAccessible value has not been set, the DB instance will
+      #     be publicly accessible. If a specific DB subnet group has been
+      #     specified as part of the request and the PubliclyAccessible value
+      #     has not been set, the DB instance will be private.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -270,6 +337,9 @@ module AWS
       #   * +:backup_retention_period+ - (Integer)
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
+      #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
       #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
@@ -296,6 +366,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -304,10 +375,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method create_db_parameter_group(options = {})
       # Calls the CreateDBParameterGroup API operation.
@@ -333,9 +406,6 @@ module AWS
       #     DB Security Group. This value is stored as a lowercase string.
       #   * +:db_security_group_description+ - *required* - (String) The
       #     description for the DB Security Group.
-      #   * +:ec2_vpc_id+ - (String) The Id of VPC. Indicates which VPC this DB
-      #     Security Group should belong to. Must be specified to create a DB
-      #     Security Group for a VPC; may not be specified otherwise.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -378,6 +448,7 @@ module AWS
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
       #   * +:iops+ - (Integer)
+      #   * +:option_group_name+ - (String)
 
       # @!method create_db_subnet_group(options = {})
       # Calls the CreateDBSubnetGroup API operation.
@@ -404,6 +475,54 @@ module AWS
       #       * +:provisioned_iops_capable+ - (Boolean)
       #     * +:subnet_status+ - (String)
 
+      # @!method create_event_subscription(options = {})
+      # Calls the CreateEventSubscription API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - *required* - (String) The name of the
+      #     subscription. Constraints: The name must be less than 255
+      #     characters.
+      #   * +:sns_topic_arn+ - *required* - (String) The Amazon Resource Name
+      #     (ARN) of the SNS topic created for event notification. The ARN is
+      #     created by Amazon SNS when you create a topic and subscribe to it.
+      #   * +:source_type+ - (String) The type of source that will be
+      #     generating the events. For example, if you want to be notified of
+      #     events generated by a DB instance, you would set this parameter to
+      #     db-instance. if this value is not specified, all events are
+      #     returned. Valid values: db-instance | db-parameter-group |
+      #     db-security-group | db-snapshot
+      #   * +:event_categories+ - (Array<String>) A list of event categories
+      #     for a SourceType that you want to subscribe to. You can see a list
+      #     of the categories for a given SourceType in the Events topic in the
+      #     Amazon RDS User Guide or by using the DescribeEventCategories
+      #     action.
+      #   * +:source_ids+ - (Array<String>) The list of identifiers of the
+      #     event sources for which events will be returned. If not specified,
+      #     then all sources are included in the response. An identifier must
+      #     begin with a letter and must contain only ASCII letters, digits,
+      #     and hyphens; it cannot end with a hyphen or contain two consecutive
+      #     hyphens. Constraints: If SourceIds are supplied, SourceType must
+      #     also be provided. If the source type is a DB instance, then a
+      #     DBInstanceIdentifier must be supplied. If the source type is a DB
+      #     security group, a DBSecurityGroupName must be supplied. If the
+      #     source type is a DB parameter group, a DBParameterGroupName must be
+      #     supplied. If the source type is a DB Snapshot, a
+      #     DBSnapshotIdentifier must be supplied.
+      #   * +:enabled+ - (Boolean) A Boolean value; set to +true+ to activate
+      #     the subscription, set to +false+ to create the subscription but not
+      #     active it.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:customer_aws_id+ - (String)
+      #   * +:cust_subscription_id+ - (String)
+      #   * +:sns_topic_arn+ - (String)
+      #   * +:status+ - (String)
+      #   * +:subscription_creation_time+ - (String)
+      #   * +:source_type+ - (String)
+      #   * +:source_ids_list+ - (Array<String>)
+      #   * +:event_categories_list+ - (Array<String>)
+      #   * +:enabled+ - (Boolean)
+
       # @!method create_option_group(options = {})
       # Calls the CreateOptionGroup API operation.
       # @param [Hash] options
@@ -429,9 +548,23 @@ module AWS
       #   * +:options+ - (Array<Hash>)
       #     * +:option_name+ - (String)
       #     * +:option_description+ - (String)
+      #     * +:persistent+ - (Boolean)
       #     * +:port+ - (Integer)
+      #     * +:option_settings+ - (Array<Hash>)
+      #       * +:name+ - (String)
+      #       * +:value+ - (String)
+      #       * +:default_value+ - (String)
+      #       * +:description+ - (String)
+      #       * +:apply_type+ - (String)
+      #       * +:data_type+ - (String)
+      #       * +:allowed_values+ - (String)
+      #       * +:is_modifiable+ - (Boolean)
+      #       * +:is_collection+ - (Boolean)
       #     * +:db_security_group_memberships+ - (Array<Hash>)
       #       * +:db_security_group_name+ - (String)
+      #       * +:status+ - (String)
+      #     * +:vpc_security_group_memberships+ - (Array<Hash>)
+      #       * +:vpc_security_group_id+ - (String)
       #       * +:status+ - (String)
       #   * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
       #   * +:vpc_id+ - (String)
@@ -466,6 +599,9 @@ module AWS
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
       #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
+      #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
@@ -491,6 +627,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -499,10 +636,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method delete_db_parameter_group(options = {})
       # Calls the DeleteDBParameterGroup API operation.
@@ -542,6 +681,7 @@ module AWS
       #   * +:license_model+ - (String)
       #   * +:snapshot_type+ - (String)
       #   * +:iops+ - (Integer)
+      #   * +:option_group_name+ - (String)
 
       # @!method delete_db_subnet_group(options = {})
       # Calls the DeleteDBSubnetGroup API operation.
@@ -552,6 +692,24 @@ module AWS
       #     First character must be a letter Cannot end with a hyphen or
       #     contain two consecutive hyphens
       # @return [Core::Response]
+
+      # @!method delete_event_subscription(options = {})
+      # Calls the DeleteEventSubscription API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - *required* - (String) The name of the RDS
+      #     event notification subscription you want to delete.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:customer_aws_id+ - (String)
+      #   * +:cust_subscription_id+ - (String)
+      #   * +:sns_topic_arn+ - (String)
+      #   * +:status+ - (String)
+      #   * +:subscription_creation_time+ - (String)
+      #   * +:source_type+ - (String)
+      #   * +:source_ids_list+ - (Array<String>)
+      #   * +:event_categories_list+ - (Array<String>)
+      #   * +:enabled+ - (Boolean)
 
       # @!method delete_option_group(options = {})
       # Calls the DeleteOptionGroup API operation.
@@ -637,6 +795,9 @@ module AWS
       #     * +:db_security_groups+ - (Array<Hash>)
       #       * +:db_security_group_name+ - (String)
       #       * +:status+ - (String)
+      #     * +:vpc_security_groups+ - (Array<Hash>)
+      #       * +:vpc_security_group_id+ - (String)
+      #       * +:status+ - (String)
       #     * +:db_parameter_groups+ - (Array<Hash>)
       #       * +:db_parameter_group_name+ - (String)
       #       * +:parameter_apply_status+ - (String)
@@ -662,6 +823,7 @@ module AWS
       #       * +:multi_az+ - (Boolean)
       #       * +:engine_version+ - (String)
       #       * +:iops+ - (Integer)
+      #       * +:db_instance_identifier+ - (String)
       #     * +:latest_restorable_time+ - (Time)
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
@@ -670,10 +832,42 @@ module AWS
       #     * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #     * +:license_model+ - (String)
       #     * +:iops+ - (Integer)
-      #     * +:option_group_membership+ - (Hash)
+      #     * +:option_group_memberships+ - (Array<Hash>)
       #       * +:option_group_name+ - (String)
       #       * +:status+ - (String)
       #     * +:character_set_name+ - (String)
+      #     * +:secondary_availability_zone+ - (String)
+      #     * +:publicly_accessible+ - (Boolean)
+
+      # @!method describe_db_log_files(options = {})
+      # Calls the DescribeDBLogFiles API operation.
+      # @param [Hash] options
+      #   * +:db_instance_identifier+ - (String) The customer-assigned name of
+      #     the DB Instance that contains the log files you want to list.
+      #     Constraints: Must contain from 1 to 63 alphanumeric characters or
+      #     hyphens First character must be a letter Cannot end with a hyphen
+      #     or contain two consecutive hyphens
+      #   * +:filename_contains+ - (String) Filters the available log files for
+      #     log file names that contain the specified string.
+      #   * +:file_last_written+ - (Integer) Filters the available log files
+      #     for files written since the specified date.
+      #   * +:file_size+ - (Integer) Filters the available log files for files
+      #     larger than the specified size.
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a pagination token called a marker is included in
+      #     the response so that the remaining results can be retrieved.
+      #   * +:marker+ - (String) The pagination token provided in the previous
+      #     request. If this parameter is specified the response includes only
+      #     records beyond the marker, up to MaxRecords.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:describe_db_log_files+ - (Array<Hash>)
+      #     * +:log_file_name+ - (String)
+      #     * +:last_written+ - (Integer)
+      #     * +:size+ - (Integer)
+      #   * +:marker+ - (String)
 
       # @!method describe_db_parameter_groups(options = {})
       # Calls the DescribeDBParameterGroups API operation.
@@ -796,6 +990,7 @@ module AWS
       #     * +:license_model+ - (String)
       #     * +:snapshot_type+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:option_group_name+ - (String)
 
       # @!method describe_db_subnet_groups(options = {})
       # Calls the DescribeDBSubnetGroups API operation.
@@ -857,6 +1052,48 @@ module AWS
       #     * +:minimum_engine_version+ - (String)
       #     * +:apply_method+ - (String)
 
+      # @!method describe_event_categories(options = {})
+      # Calls the DescribeEventCategories API operation.
+      # @param [Hash] options
+      #   * +:source_type+ - (String) The type of source that will be
+      #     generating the events. Valid values: db-instance |
+      #     db-parameter-group | db-security-group | db-snapshot
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:event_categories_map_list+ - (Array<Hash>)
+      #     * +:source_type+ - (String)
+      #     * +:event_categories+ - (Array<String>)
+
+      # @!method describe_event_subscriptions(options = {})
+      # Calls the DescribeEventSubscriptions API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - (String) The name of the RDS event
+      #     notification subscription you want to describe.
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a pagination token called a marker is included in
+      #     the response so that the remaining results can be retrieved.
+      #     Default: 100 Constraints: minimum 20, maximum 100
+      #   * +:marker+ - (String) An optional pagination token provided by a
+      #     previous DescribeOrderableDBInstanceOptions request. If this
+      #     parameter is specified, the response includes only records beyond
+      #     the marker, up to the value specified by MaxRecords .
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:marker+ - (String)
+      #   * +:event_subscriptions_list+ - (Array<Hash>)
+      #     * +:customer_aws_id+ - (String)
+      #     * +:cust_subscription_id+ - (String)
+      #     * +:sns_topic_arn+ - (String)
+      #     * +:status+ - (String)
+      #     * +:subscription_creation_time+ - (String)
+      #     * +:source_type+ - (String)
+      #     * +:source_ids_list+ - (Array<String>)
+      #     * +:event_categories_list+ - (Array<String>)
+      #     * +:enabled+ - (Boolean)
+
       # @!method describe_events(options = {})
       # Calls the DescribeEvents API operation.
       # @param [Hash] options
@@ -864,7 +1101,12 @@ module AWS
       #     for which events will be returned. If not specified, then all
       #     sources are included in the response.
       #   * +:source_type+ - (String) The event source to retrieve events for.
-      #     If no value is specified, all events are returned.
+      #     If no value is specified, all events are returned. Valid values
+      #     include:
+      #     * +db-instance+
+      #     * +db-parameter-group+
+      #     * +db-security-group+
+      #     * +db-snapshot+
       #   * +:start_time+ - (String<ISO8601 datetime>) The beginning of the
       #     time interval to retrieve events for, specified in ISO 8601 format.
       #   * +:end_time+ - (String<ISO8601 datetime>) The end of the time
@@ -872,6 +1114,8 @@ module AWS
       #     format.
       #   * +:duration+ - (Integer) The number of minutes to retrieve events
       #     for.
+      #   * +:event_categories+ - (Array<String>) A list of event categories
+      #     that trigger notifications for a event notification subscription.
       #   * +:max_records+ - (Integer) The maximum number of records to include
       #     in the response. If more records exist than the specified
       #     MaxRecords value, a marker is included in the response so that the
@@ -888,6 +1132,7 @@ module AWS
       #     * +:source_identifier+ - (String)
       #     * +:source_type+ - (String)
       #     * +:message+ - (String)
+      #     * +:event_categories+ - (Array<String>)
       #     * +:date+ - (Time)
 
       # @!method describe_option_group_options(options = {})
@@ -898,8 +1143,15 @@ module AWS
       #   * +:major_engine_version+ - (String) If specified, filters the
       #     results to include only options for the specified major engine
       #     version.
-      #   * +:max_records+ - (Integer)
-      #   * +:marker+ - (String)
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a pagination token called a marker is included in
+      #     the response so that the remaining results can be retrieved.
+      #     Default: 100 Constraints: minimum 20, maximum 100
+      #   * +:marker+ - (String) An optional pagination token provided by a
+      #     previous request. If this parameter is specified, the response
+      #     includes only records beyond the marker, up to the value specified
+      #     by MaxRecords.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -912,6 +1164,14 @@ module AWS
       #     * +:port_required+ - (Boolean)
       #     * +:default_port+ - (Integer)
       #     * +:options_depended_on+ - (Array<String>)
+      #     * +:persistent+ - (Boolean)
+      #     * +:option_group_option_settings+ - (Array<Hash>)
+      #       * +:setting_name+ - (String)
+      #       * +:setting_description+ - (String)
+      #       * +:default_value+ - (String)
+      #       * +:apply_type+ - (String)
+      #       * +:allowed_values+ - (String)
+      #       * +:is_modifiable+ - (Boolean)
       #   * +:marker+ - (String)
 
       # @!method describe_option_groups(options = {})
@@ -920,8 +1180,15 @@ module AWS
       #   * +:option_group_name+ - (String) The name of the option group to
       #     describe. Cannot be supplied together with EngineName or
       #     MajorEngineVersion.
-      #   * +:marker+ - (String)
-      #   * +:max_records+ - (Integer)
+      #   * +:marker+ - (String) An optional pagination token provided by a
+      #     previous DescribeOptionGroups request. If this parameter is
+      #     specified, the response includes only records beyond the marker, up
+      #     to the value specified by MaxRecords.
+      #   * +:max_records+ - (Integer) The maximum number of records to include
+      #     in the response. If more records exist than the specified
+      #     MaxRecords value, a pagination token called a marker is included in
+      #     the response so that the remaining results can be retrieved.
+      #     Default: 100 Constraints: minimum 20, maximum 100
       #   * +:engine_name+ - (String) Filters the list of option groups to only
       #     include groups associated with a specific database engine.
       #   * +:major_engine_version+ - (String) Filters the list of option
@@ -939,9 +1206,23 @@ module AWS
       #     * +:options+ - (Array<Hash>)
       #       * +:option_name+ - (String)
       #       * +:option_description+ - (String)
+      #       * +:persistent+ - (Boolean)
       #       * +:port+ - (Integer)
+      #       * +:option_settings+ - (Array<Hash>)
+      #         * +:name+ - (String)
+      #         * +:value+ - (String)
+      #         * +:default_value+ - (String)
+      #         * +:description+ - (String)
+      #         * +:apply_type+ - (String)
+      #         * +:data_type+ - (String)
+      #         * +:allowed_values+ - (String)
+      #         * +:is_modifiable+ - (Boolean)
+      #         * +:is_collection+ - (Boolean)
       #       * +:db_security_group_memberships+ - (Array<Hash>)
       #         * +:db_security_group_name+ - (String)
+      #         * +:status+ - (String)
+      #       * +:vpc_security_group_memberships+ - (Array<Hash>)
+      #         * +:vpc_security_group_id+ - (String)
       #         * +:status+ - (String)
       #     * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
       #     * +:vpc_id+ - (String)
@@ -1090,6 +1371,23 @@ module AWS
       #       * +:recurring_charge_amount+ - (Numeric)
       #       * +:recurring_charge_frequency+ - (String)
 
+      # @!method download_db_log_file_portion(options = {})
+      # Calls the DownloadDBLogFilePortion API operation.
+      # @param [Hash] options
+      #   * +:db_instance_identifier+ - (String)
+      #   * +:log_file_name+ - (String)
+      #   * +:marker+ - (String) The pagination token provided in the previous
+      #     request. If this parameter is specified the response includes only
+      #     records beyond the marker, up to MaxRecords.
+      #   * +:number_of_lines+ - (Integer) The number of lines remaining to be
+      #     downloaded.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:log_file_data+ - (String)
+      #   * +:marker+ - (String)
+      #   * +:additional_data_pending+ - (Boolean)
+
       # @!method list_tags_for_resource(options = {})
       # Calls the ListTagsForResource API operation.
       # @param [Hash] options
@@ -1119,6 +1417,11 @@ module AWS
       #   * +:db_security_groups+ - (Array<String>) A list of DB Security
       #     Groups to authorize on this DB Instance. This change is
       #     asynchronously applied as soon as possible.
+      #   * +:vpc_security_group_ids+ - (Array<String>) A list of Ec2 Vpc
+      #     Security Groups to authorize on this DB Instance. This change is
+      #     asynchronously applied as soon as possible. Constraints: Must be 1
+      #     to 255 alphanumeric characters First character must be a letter
+      #     Cannot end with a hyphen or contain two consecutive hyphens
       #   * +:apply_immediately+ - (Boolean) Specifies whether or not the
       #     modifications in this request and any pending modifications are
       #     asynchronously applied as soon as possible, regardless of the
@@ -1175,6 +1478,12 @@ module AWS
       #     they are 10% greater than the current value. Type: Integer
       #   * +:option_group_name+ - (String) Indicates that the DB Instance
       #     should be associated with the specified option group.
+      #   * +:new_db_instance_identifier+ - (String) The new DB Instance
+      #     identifier for the DB Instance when renaming a DB Instance. This
+      #     value is stored as a lowercase string. Constraints: Must contain
+      #     from 1 to 63 alphanumeric characters or hyphens First character
+      #     must be a letter Cannot end with a hyphen or contain two
+      #     consecutive hyphens
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1193,6 +1502,9 @@ module AWS
       #   * +:backup_retention_period+ - (Integer)
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
+      #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
       #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
@@ -1219,6 +1531,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -1227,10 +1540,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method modify_db_parameter_group(options = {})
       # Calls the ModifyDBParameterGroup API operation.
@@ -1261,7 +1576,9 @@ module AWS
       #     * +:minimum_engine_version+ - (String) The earliest engine version
       #       to which the parameter can apply.
       #     * +:apply_method+ - (String) Indicates when to apply parameter
-      #       updates.
+      #       updates. Valid values include:
+      #       * +immediate+
+      #       * +pending-reboot+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1292,6 +1609,40 @@ module AWS
       #       * +:provisioned_iops_capable+ - (Boolean)
       #     * +:subnet_status+ - (String)
 
+      # @!method modify_event_subscription(options = {})
+      # Calls the ModifyEventSubscription API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - *required* - (String) The name of the RDS
+      #     event notification subscription.
+      #   * +:sns_topic_arn+ - (String) The Amazon Resource Name (ARN) of the
+      #     SNS topic created for event notification. The ARN is created by
+      #     Amazon SNS when you create a topic and subscribe to it.
+      #   * +:source_type+ - (String) The type of source that will be
+      #     generating the events. For example, if you want to be notified of
+      #     events generated by a DB instance, you would set this parameter to
+      #     db-instance. if this value is not specified, all events are
+      #     returned. Valid values: db-instance | db-parameter-group |
+      #     db-security-group | db-snapshot
+      #   * +:event_categories+ - (Array<String>) A list of event categories
+      #     for a SourceType that you want to subscribe to. You can see a list
+      #     of the categories for a given SourceType in the Events topic in the
+      #     Amazon RDS User Guide or by using the DescribeEventCategories
+      #     action.
+      #   * +:enabled+ - (Boolean) A Boolean value; set to +true+ to activate
+      #     the subscription.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:customer_aws_id+ - (String)
+      #   * +:cust_subscription_id+ - (String)
+      #   * +:sns_topic_arn+ - (String)
+      #   * +:status+ - (String)
+      #   * +:subscription_creation_time+ - (String)
+      #   * +:source_type+ - (String)
+      #   * +:source_ids_list+ - (Array<String>)
+      #   * +:event_categories_list+ - (Array<String>)
+      #   * +:enabled+ - (Boolean)
+
       # @!method modify_option_group(options = {})
       # Calls the ModifyOptionGroup API operation.
       # @param [Hash] options
@@ -1300,9 +1651,29 @@ module AWS
       #   * +:options_to_include+ - (Array<Hash>) Options in this list are
       #     added to the Option Group or, if already present, the specified
       #     configuration is used to update the existing configuration.
-      #     * +:option_name+ - *required* - (String)
-      #     * +:port+ - (Integer)
-      #     * +:db_security_group_memberships+ - (Array<String>)
+      #     * +:option_name+ - *required* - (String) The configuration of
+      #       options to include in a group.
+      #     * +:port+ - (Integer) The optional port for the option.
+      #     * +:db_security_group_memberships+ - (Array<String>) A list of
+      #       DBSecurityGroupMemebrship name strings used for this option.
+      #     * +:vpc_security_group_memberships+ - (Array<String>) A list of
+      #       VpcSecurityGroupMemebrship name strings used for this option.
+      #     * +:option_settings+ - (Array<Hash>) A list of option settings
+      #       applied for this option.
+      #       * +:name+ - (String) The name of the setting.
+      #       * +:value+ - (String) The value of this setting.
+      #       * +:default_value+ - (String) Default value for this setting.
+      #       * +:description+ - (String) The description of the setting.
+      #       * +:apply_type+ - (String) Specifies the apply type for this
+      #         setting.
+      #       * +:data_type+ - (String) Specifies the valid data type of this
+      #         setting
+      #       * +:allowed_values+ - (String) Specifies a valid list/range of
+      #         values allowed for this setting.
+      #       * +:is_modifiable+ - (Boolean) Indicates if the setting is
+      #         modifiable or not.
+      #       * +:is_collection+ - (Boolean) Indicates if the value for the
+      #         setting can be a list of values or a single value.
       #   * +:options_to_remove+ - (Array<String>) Options in this list are
       #     removed from the Option Group.
       #   * +:apply_immediately+ - (Boolean) Indicates whether the changes
@@ -1318,9 +1689,23 @@ module AWS
       #   * +:options+ - (Array<Hash>)
       #     * +:option_name+ - (String)
       #     * +:option_description+ - (String)
+      #     * +:persistent+ - (Boolean)
       #     * +:port+ - (Integer)
+      #     * +:option_settings+ - (Array<Hash>)
+      #       * +:name+ - (String)
+      #       * +:value+ - (String)
+      #       * +:default_value+ - (String)
+      #       * +:description+ - (String)
+      #       * +:apply_type+ - (String)
+      #       * +:data_type+ - (String)
+      #       * +:allowed_values+ - (String)
+      #       * +:is_modifiable+ - (Boolean)
+      #       * +:is_collection+ - (Boolean)
       #     * +:db_security_group_memberships+ - (Array<Hash>)
       #       * +:db_security_group_name+ - (String)
+      #       * +:status+ - (String)
+      #     * +:vpc_security_group_memberships+ - (Array<Hash>)
+      #       * +:vpc_security_group_id+ - (String)
       #       * +:status+ - (String)
       #   * +:allows_vpc_and_non_vpc_instance_memberships+ - (Boolean)
       #   * +:vpc_id+ - (String)
@@ -1370,6 +1755,9 @@ module AWS
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
       #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
+      #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
@@ -1395,6 +1783,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -1403,10 +1792,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method purchase_reserved_db_instances_offering(options = {})
       # Calls the PurchaseReservedDBInstancesOffering API operation.
@@ -1465,6 +1856,9 @@ module AWS
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
       #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
+      #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
@@ -1490,6 +1884,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -1498,10 +1893,34 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
+
+      # @!method remove_source_identifier_from_subscription(options = {})
+      # Calls the RemoveSourceIdentifierFromSubscription API operation.
+      # @param [Hash] options
+      #   * +:subscription_name+ - *required* - (String) The name of the RDS
+      #     event notification subscription you want to remove a source
+      #     identifier from.
+      #   * +:source_identifier+ - *required* - (String) The source identifier
+      #     to be removed from the subscription, such as the DB instance
+      #     identifier for a DB instance or the name of a security group.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #   * +:customer_aws_id+ - (String)
+      #   * +:cust_subscription_id+ - (String)
+      #   * +:sns_topic_arn+ - (String)
+      #   * +:status+ - (String)
+      #   * +:subscription_creation_time+ - (String)
+      #   * +:source_type+ - (String)
+      #   * +:source_ids_list+ - (Array<String>)
+      #   * +:event_categories_list+ - (Array<String>)
+      #   * +:enabled+ - (Boolean)
 
       # @!method remove_tags_from_resource(options = {})
       # Calls the RemoveTagsFromResource API operation.
@@ -1544,7 +1963,9 @@ module AWS
       #     * +:minimum_engine_version+ - (String) The earliest engine version
       #       to which the parameter can apply.
       #     * +:apply_method+ - (String) Indicates when to apply parameter
-      #       updates.
+      #       updates. Valid values include:
+      #       * +immediate+
+      #       * +pending-reboot+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1569,6 +1990,19 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
+      #   * +:publicly_accessible+ - (Boolean) Specifies the accessibility
+      #     options for the DB Instance. A value of +true+ specifies an
+      #     Internet-facing instance with a publicly resolvable DNS name, which
+      #     resolves to a public IP address. A value of +false+ specifies an
+      #     internal instance with a DNS name that resolves to a private IP
+      #     address. Default: The default behavior varies depending on whether
+      #     a VPC has been requested or not. The following list shows the
+      #     default behavior in each case. Default VPC: +true+ VPC: +false+ If
+      #     no DB subnet group has been specified as part of the request and
+      #     the PubliclyAccessible value has not been set, the DB instance will
+      #     be publicly accessible. If a specific DB subnet group has been
+      #     specified as part of the request and the PubliclyAccessible value
+      #     has not been set, the DB instance will be private.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1603,6 +2037,9 @@ module AWS
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
       #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
+      #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
@@ -1628,6 +2065,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -1636,10 +2074,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method restore_db_instance_to_point_in_time(options = {})
       # Calls the RestoreDBInstanceToPointInTime API operation.
@@ -1664,6 +2104,19 @@ module AWS
       #   * +:multi_az+ - (Boolean) Specifies if the DB Instance is a Multi-AZ
       #     deployment. Constraint: You cannot specify the AvailabilityZone
       #     parameter if the MultiAZ parameter is set to +true+ .
+      #   * +:publicly_accessible+ - (Boolean) Specifies the accessibility
+      #     options for the DB Instance. A value of +true+ specifies an
+      #     Internet-facing instance with a publicly resolvable DNS name, which
+      #     resolves to a public IP address. A value of +false+ specifies an
+      #     internal instance with a DNS name that resolves to a private IP
+      #     address. Default: The default behavior varies depending on whether
+      #     a VPC has been requested or not. The following list shows the
+      #     default behavior in each case. Default VPC: +true+ VPC: +false+ If
+      #     no DB subnet group has been specified as part of the request and
+      #     the PubliclyAccessible value has not been set, the DB instance will
+      #     be publicly accessible. If a specific DB subnet group has been
+      #     specified as part of the request and the PubliclyAccessible value
+      #     has not been set, the DB instance will be private.
       #   * +:auto_minor_version_upgrade+ - (Boolean) Indicates that minor
       #     version upgrades will be applied automatically to the DB Instance
       #     during the maintenance window.
@@ -1698,6 +2151,9 @@ module AWS
       #   * +:db_security_groups+ - (Array<Hash>)
       #     * +:db_security_group_name+ - (String)
       #     * +:status+ - (String)
+      #   * +:vpc_security_groups+ - (Array<Hash>)
+      #     * +:vpc_security_group_id+ - (String)
+      #     * +:status+ - (String)
       #   * +:db_parameter_groups+ - (Array<Hash>)
       #     * +:db_parameter_group_name+ - (String)
       #     * +:parameter_apply_status+ - (String)
@@ -1723,6 +2179,7 @@ module AWS
       #     * +:multi_az+ - (Boolean)
       #     * +:engine_version+ - (String)
       #     * +:iops+ - (Integer)
+      #     * +:db_instance_identifier+ - (String)
       #   * +:latest_restorable_time+ - (Time)
       #   * +:multi_az+ - (Boolean)
       #   * +:engine_version+ - (String)
@@ -1731,10 +2188,12 @@ module AWS
       #   * +:read_replica_db_instance_identifiers+ - (Array<String>)
       #   * +:license_model+ - (String)
       #   * +:iops+ - (Integer)
-      #   * +:option_group_membership+ - (Hash)
+      #   * +:option_group_memberships+ - (Array<Hash>)
       #     * +:option_group_name+ - (String)
       #     * +:status+ - (String)
       #   * +:character_set_name+ - (String)
+      #   * +:secondary_availability_zone+ - (String)
+      #   * +:publicly_accessible+ - (Boolean)
 
       # @!method revoke_db_security_group_ingress(options = {})
       # Calls the RevokeDBSecurityGroupIngress API operation.
@@ -1771,7 +2230,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-09-17')
+      define_client_methods('2013-02-12')
 
     end
   end

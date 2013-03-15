@@ -871,7 +871,10 @@ module AWS
       #   * +:assignment_status+ - (String) The status (unassigned or assigned)
       #     of the devices to list. If you do not specify an AssignmentStatus,
       #     the action defaults to Any which lists both assigned and unassigned
-      #     virtual MFA devices.
+      #     virtual MFA devices. Valid values include:
+      #     * +Assigned+
+      #     * +Unassigned+
+      #     * +Any+
       #   * +:marker+ - (String) Use this parameter only when paginating
       #     results, and only in a subsequent request after you've received a
       #     response where the results are truncated. Set it to the value of
@@ -961,7 +964,10 @@ module AWS
       #     Secret Access Key you want to update.
       #   * +:status+ - *required* - (String) The status you want to assign to
       #     the Secret Access Key. Active means the key can be used for API
-      #     calls to AWS, while Inactive means the key cannot be used.
+      #     calls to AWS, while Inactive means the key cannot be used. Valid
+      #     values include:
+      #     * +Active+
+      #     * +Inactive+
       # @return [Core::Response]
 
       # @!method update_account_password_policy(options = {})
@@ -1026,6 +1032,9 @@ module AWS
       #   * +:status+ - *required* - (String) The status you want to assign to
       #     the certificate. Active means the certificate can be used for API
       #     calls to AWS, while Inactive means the certificate cannot be used.
+      #     Valid values include:
+      #     * +Active+
+      #     * +Inactive+
       # @return [Core::Response]
 
       # @!method update_user(options = {})

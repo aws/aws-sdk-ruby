@@ -533,7 +533,12 @@ module AWS
       #     for which events will be returned. If not specified, then all
       #     sources are included in the response.
       #   * +:source_type+ - (String) The event source to retrieve events for.
-      #     If no value is specified, all events are returned.
+      #     If no value is specified, all events are returned. Valid values
+      #     include:
+      #     * +cache-cluster+
+      #     * +cache-parameter-group+
+      #     * +cache-security-group+
+      #     * +cache-subnet-group+
       #   * +:start_time+ - (String<ISO8601 datetime>) The beginning of the
       #     time interval to retrieve events for, specified in ISO 8601 format.
       #   * +:end_time+ - (String<ISO8601 datetime>) The end of the time

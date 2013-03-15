@@ -50,8 +50,9 @@ module AWS
         opts[:restorable_by_user_ids] = @restorable_by.map { |id| id.to_s } unless
           @restorable_by.empty?
         resp = filtered_request(:describe_snapshots, opts)
-        resp.snapshot_set.each do |v|
-          snapshot = Snapshot.new(v.snapshot_id, :config => config)
+        resp[:snapshot_set].each do |details|
+          snapshot = Snapshot.new_from(:describe_snapshots, details,
+            details[:snapshot_id], :config => config)
           yield(snapshot)
         end
         nil
