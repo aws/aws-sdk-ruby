@@ -59,6 +59,8 @@ module AWS
     #
     # @attr_reader [String] character_set_name
     #
+    # @attr_reader [String,nil] vpc_id
+    #
     class DBInstance < Core::Resource
 
       # @param [String] db_instance_id
@@ -74,6 +76,8 @@ module AWS
       alias_method :id, :db_instance_identifier
 
       alias_method :db_instance_id, :db_instance_identifier
+
+      attribute :vpc_id, :from => [:db_subnet_group, :vpc_id], :static => true
 
       attribute :allocated_storage, :static => true, :alias => :size
 
@@ -134,6 +138,13 @@ module AWS
 
       populates_from(:describe_db_instances) do |resp|
         resp.data[:db_instances].find{|j| j[:db_instance_identifier] == id }
+      end
+
+      # @return [EC2::VPC,nil]
+      def vpc
+        if vpc_id
+          EC2::VPC.new(vpc_id, :config => config)
+        end
       end
 
       # Modifies the database instance.
