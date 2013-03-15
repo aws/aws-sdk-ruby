@@ -1101,7 +1101,12 @@ module AWS
       #     for which events will be returned. If not specified, then all
       #     sources are included in the response.
       #   * +:source_type+ - (String) The event source to retrieve events for.
-      #     If no value is specified, all events are returned.
+      #     If no value is specified, all events are returned. Valid values
+      #     include:
+      #     * +db-instance+
+      #     * +db-parameter-group+
+      #     * +db-security-group+
+      #     * +db-snapshot+
       #   * +:start_time+ - (String<ISO8601 datetime>) The beginning of the
       #     time interval to retrieve events for, specified in ISO 8601 format.
       #   * +:end_time+ - (String<ISO8601 datetime>) The end of the time
@@ -1571,7 +1576,9 @@ module AWS
       #     * +:minimum_engine_version+ - (String) The earliest engine version
       #       to which the parameter can apply.
       #     * +:apply_method+ - (String) Indicates when to apply parameter
-      #       updates.
+      #       updates. Valid values include:
+      #       * +immediate+
+      #       * +pending-reboot+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1956,7 +1963,9 @@ module AWS
       #     * +:minimum_engine_version+ - (String) The earliest engine version
       #       to which the parameter can apply.
       #     * +:apply_method+ - (String) Indicates when to apply parameter
-      #       updates.
+      #       updates. Valid values include:
+      #       * +immediate+
+      #       * +pending-reboot+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

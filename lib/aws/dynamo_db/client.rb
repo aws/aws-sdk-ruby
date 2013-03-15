@@ -199,7 +199,11 @@ module AWS
       #       * +:attribute_name+ - *required* - (String) The AttributeName of
       #         the KeySchemaElement.
       #       * +:attribute_type+ - *required* - (String) The AttributeType of
-      #         the KeySchemaElement which can be a String or a Number.
+      #         the KeySchemaElement which can be a String or a Number. Valid
+      #         values include:
+      #         * +S+
+      #         * +N+
+      #         * +B+
       #     * +:range_key_element+ - (Hash) A range key element is treated as a
       #       secondary key (used in conjunction with the primary key), and can
       #       be a string or a number, and is only used for hash-and-range
@@ -208,7 +212,11 @@ module AWS
       #       * +:attribute_name+ - *required* - (String) The AttributeName of
       #         the KeySchemaElement.
       #       * +:attribute_type+ - *required* - (String) The AttributeType of
-      #         the KeySchemaElement which can be a String or a Number.
+      #         the KeySchemaElement which can be a String or a Number. Valid
+      #         values include:
+      #         * +S+
+      #         * +N+
+      #         * +B+
       #   * +:provisioned_throughput+ - *required* - (Hash)
       #     * +:read_capacity_units+ - *required* - (Integer) ReadCapacityUnits
       #       are in terms of strictly consistent reads, assuming items of 1k.
@@ -298,7 +306,12 @@ module AWS
       #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
-      #   * +:return_values+ - (String)
+      #   * +:return_values+ - (String) Valid values include:
+      #     * +NONE+
+      #     * +ALL_OLD+
+      #     * +UPDATED_OLD+
+      #     * +ALL_NEW+
+      #     * +UPDATED_NEW+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -471,7 +484,12 @@ module AWS
       #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
-      #   * +:return_values+ - (String)
+      #   * +:return_values+ - (String) Valid values include:
+      #     * +NONE+
+      #     * +ALL_OLD+
+      #     * +UPDATED_OLD+
+      #     * +ALL_NEW+
+      #     * +UPDATED_NEW+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -534,7 +552,21 @@ module AWS
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
       #       * +:bs+ - (Array<String>) A set of binary attributes.
-      #     * +:comparison_operator+ - *required* - (String)
+      #     * +:comparison_operator+ - *required* - (String) Valid values
+      #       include:
+      #       * +EQ+
+      #       * +NE+
+      #       * +IN+
+      #       * +LE+
+      #       * +LT+
+      #       * +GE+
+      #       * +GT+
+      #       * +BETWEEN+
+      #       * +NOT_NULL+
+      #       * +NULL+
+      #       * +CONTAINS+
+      #       * +NOT_CONTAINS+
+      #       * +BEGINS_WITH+
       #   * +:scan_index_forward+ - (Boolean) Specifies forward or backward
       #     traversal of the index. Amazon DynamoDB returns results reflecting
       #     the requested order, determined by the range key. Default is +true+
@@ -642,7 +674,21 @@ module AWS
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
       #       * +:bs+ - (Array<String>) A set of binary attributes.
-      #     * +:comparison_operator+ - *required* - (String)
+      #     * +:comparison_operator+ - *required* - (String) Valid values
+      #       include:
+      #       * +EQ+
+      #       * +NE+
+      #       * +IN+
+      #       * +LE+
+      #       * +LT+
+      #       * +GE+
+      #       * +GT+
+      #       * +BETWEEN+
+      #       * +NOT_NULL+
+      #       * +NULL+
+      #       * +CONTAINS+
+      #       * +NOT_CONTAINS+
+      #       * +BEGINS_WITH+
       #   * +:exclusive_start_key+ - (Hash) Primary key of the item from which
       #     to continue an earlier scan. An earlier scan might provide this
       #     value if that scan operation was interrupted before scanning the
@@ -765,7 +811,10 @@ module AWS
       #       * +:ss+ - (Array<String>) A set of strings.
       #       * +:ns+ - (Array<String>) A set of numbers.
       #       * +:bs+ - (Array<String>) A set of binary attributes.
-      #     * +:action+ - (String)
+      #     * +:action+ - (String) Valid values include:
+      #       * +ADD+
+      #       * +PUT+
+      #       * +DELETE+
       #   * +:expected+ - (Hash<String,Hash>)
       #     * +:value+ - (Hash) Specify whether or not a value already exists
       #       and has a specific content for the attribute name-value pair.
@@ -783,7 +832,12 @@ module AWS
       #       * +:bs+ - (Array<String>) A set of binary attributes.
       #     * +:exists+ - (Boolean) Specify whether or not a value already
       #       exists for the attribute name-value pair.
-      #   * +:return_values+ - (String)
+      #   * +:return_values+ - (String) Valid values include:
+      #     * +NONE+
+      #     * +ALL_OLD+
+      #     * +UPDATED_OLD+
+      #     * +ALL_NEW+
+      #     * +UPDATED_NEW+
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

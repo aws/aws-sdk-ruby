@@ -103,7 +103,10 @@ module AWS
       # @param [Hash] options
       #   * +:identity_type+ - (String) The type of the identities to list.
       #     Possible values are "EmailAddress" and "Domain". If this parameter
-      #     is omitted, then all identities will be listed.
+      #     is omitted, then all identities will be listed. Valid values
+      #     include:
+      #     * +EmailAddress+
+      #     * +Domain+
       #   * +:next_token+ - (String) The token to use for pagination.
       #   * +:max_items+ - (Integer) The maximum number of identities per page.
       #     Possible values are 1-100 inclusive.
@@ -227,10 +230,13 @@ module AWS
       #   * +:identity+ - *required* - (String) The identity for which the
       #     topic will be set. Examples: user@example.com, example.com.
       #   * +:notification_type+ - *required* - (String) The type of feedback
-      #     notifications that will be published to the specified topic.
+      #     notifications that will be published to the specified topic. Valid
+      #     values include:
+      #     * +Bounce+
+      #     * +Complaint+
       #   * +:sns_topic+ - (String) The Amazon Resource Name (ARN) of the
       #     Amazon Simple Notification Service (Amazon SNS) topic. If the
-      #     parameter is omitted from the request or a null value is passed,
+      #     parameter is ommited from the request or a null value is passed,
       #     the topic is cleared and publishing is disabled.
       # @return [Core::Response]
 

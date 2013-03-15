@@ -132,9 +132,8 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:vault_notification_config+ - (Hash)
-      #     * +:sns_topic+ - (String)
-      #     * +:events+ - (Array<String>)
+      #   * +:sns_topic+ - (String)
+      #   * +:events+ - (Array<String>)
 
       # @!method initiate_job(options = {})
       # Calls the POST InitiateJob API operation.

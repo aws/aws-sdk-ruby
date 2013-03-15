@@ -86,7 +86,10 @@ module AWS
       #   * +:on_failure+ - (String) Determines what action will be taken if
       #     stack creation fails. This must be one of: DO_NOTHING, ROLLBACK, or
       #     DELETE. You can specify either OnFailure or DisableRollback, but
-      #     not both. Default: ROLLBACK
+      #     not both. Default: ROLLBACK Valid values include:
+      #     * +DO_NOTHING+
+      #     * +ROLLBACK+
+      #     * +DELETE+
       #   * +:tags+ - (Array<Hash>) A set of user-defined Tags to associate
       #     with this stack, represented by key/value pairs. Tags defined for
       #     the stack are propogated to EC2 resources that are created as part

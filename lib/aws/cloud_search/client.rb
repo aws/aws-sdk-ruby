@@ -60,7 +60,11 @@ module AWS
       #       cannot be specified as field or rank expression names.
       #     * +:index_field_type+ - *required* - (String) The type of field.
       #       Based on this type, exactly one of the UIntOptions,
-      #       LiteralOptions or TextOptions must be present.
+      #       LiteralOptions or TextOptions must be present. Valid values
+      #       include:
+      #       * +uint+
+      #       * +literal+
+      #       * +text+
       #     * +:u_int_options+ - (Hash) Options for an unsigned integer field.
       #       Present if IndexFieldType specifies the field is of type unsigned
       #       integer.
@@ -92,7 +96,10 @@ module AWS
       #       configure a maximum of 20 sources for an IndexField.
       #       * +:source_data_function+ - *required* - (String) Identifies the
       #         transformation to apply when copying data from a source
-      #         attribute.
+      #         attribute. Valid values include:
+      #         * +Copy+
+      #         * +TrimTitle+
+      #         * +Map+
       #       * +:source_data_copy+ - (Hash) Copies data from a source document
       #         attribute to an IndexField.
       #         * +:source_name+ - *required* - (String) The name of the
@@ -170,7 +177,7 @@ module AWS
       #       expressions and supports: Integer, floating point, hex and octal
       #       literals Shortcut evaluation of logical operators such that an
       #       expression a || b evaluates to the value a if a is +true+ without
-      #       evaluating b at all JavaScript order of precedence for operators
+      #       evaluting b at all JavaScript order of precendence for operators
       #       Arithmetic operators: + - * / % Boolean operators (including the
       #       ternary operator) Bitwise operators Comparison operators Common
       #       mathematic functions: abs ceil erf exp floor lgamma ln log2 log10

@@ -749,7 +749,11 @@ module AWS
       #     security group name. Specify cluster-parameter-group when
       #     SourceIdentifier is a cluster parameter group name. Specify
       #     cluster-snapshot when SourceIdentifier is a cluster snapshot
-      #     identifier.
+      #     identifier. Valid values include:
+      #     * +cluster+
+      #     * +cluster-parameter-group+
+      #     * +cluster-security-group+
+      #     * +cluster-snapshot+
       #   * +:start_time+ - (String<ISO8601 datetime>) The beginning of the
       #     time interval to retrieve events for, specified in ISO 8601 format.
       #     For more information about ISO 8601, go to the ISO8601 Wikipedia

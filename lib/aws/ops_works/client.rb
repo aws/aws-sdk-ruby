@@ -37,7 +37,11 @@ module AWS
       #   * +:custom_json+ - (String)
       #   * +:use_custom_cookbooks+ - (Boolean)
       #   * +:custom_cookbooks_source+ - (Hash)
-      #     * +:type+ - (String)
+      #     * +:type+ - (String) Valid values include:
+      #       * +git+
+      #       * +svn+
+      #       * +archive+
+      #       * +s3+
       #     * +:url+ - (String)
       #     * +:username+ - (String)
       #     * +:password+ - (String)
@@ -57,9 +61,18 @@ module AWS
       #   * +:stack_id+ - *required* - (String)
       #   * +:name+ - *required* - (String)
       #   * +:description+ - (String)
-      #   * +:type+ - *required* - (String)
+      #   * +:type+ - *required* - (String) Valid values include:
+      #     * +rails+
+      #     * +php+
+      #     * +nodejs+
+      #     * +static+
+      #     * +other+
       #   * +:app_source+ - (Hash)
-      #     * +:type+ - (String)
+      #     * +:type+ - (String) Valid values include:
+      #       * +git+
+      #       * +svn+
+      #       * +archive+
+      #       * +s3+
       #     * +:url+ - (String)
       #     * +:username+ - (String)
       #     * +:password+ - (String)
@@ -84,7 +97,17 @@ module AWS
       #   * +:app_id+ - (String)
       #   * +:instance_ids+ - (Array<String>)
       #   * +:command+ - *required* - (Hash)
-      #     * +:name+ - *required* - (String)
+      #     * +:name+ - *required* - (String) Valid values include:
+      #       * +install_dependencies+
+      #       * +update_dependencies+
+      #       * +update_custom_cookbooks+
+      #       * +execute_recipes+
+      #       * +deploy+
+      #       * +rollback+
+      #       * +start+
+      #       * +stop+
+      #       * +restart+
+      #       * +undeploy+
       #     * +:args+ - (Hash<String,Array<String>>)
       #   * +:comment+ - (String)
       #   * +:custom_json+ - (String)
@@ -99,7 +122,10 @@ module AWS
       #   * +:stack_id+ - *required* - (String)
       #   * +:layer_ids+ - *required* - (Array<String>)
       #   * +:instance_type+ - *required* - (String)
-      #   * +:auto_scaling_type+ - (String)
+      #   * +:auto_scaling_type+ - (String) Valid values include:
+      #     * +AlwaysRunning+
+      #     * +TimeBasedAutoScaling+
+      #     * +LoadBasedAutoScaling+
       #   * +:hostname+ - (String)
       #   * +:os+ - (String)
       #   * +:ssh_key_name+ - (String)
@@ -152,7 +178,11 @@ module AWS
       #   * +:custom_json+ - (String)
       #   * +:use_custom_cookbooks+ - (Boolean)
       #   * +:custom_cookbooks_source+ - (Hash)
-      #     * +:type+ - (String)
+      #     * +:type+ - (String) Valid values include:
+      #       * +git+
+      #       * +svn+
+      #       * +archive+
+      #       * +s3+
       #     * +:url+ - (String)
       #     * +:username+ - (String)
       #     * +:password+ - (String)
@@ -309,7 +339,7 @@ module AWS
       #   a hash with the following structure:
       #   * +:instances+ - (Array<Hash>)
       #     * +:instance_id+ - (String)
-      #     * +:ec_2_instance_id+ - (String)
+      #     * +:ec2_instance_id+ - (String)
       #     * +:hostname+ - (String)
       #     * +:stack_id+ - (String)
       #     * +:layer_ids+ - (Array<String>)
@@ -518,7 +548,7 @@ module AWS
       #   a hash with the following structure:
       #   * +:volumes+ - (Array<Hash>)
       #     * +:volume_id+ - (String)
-      #     * +:ec_2_volume_id+ - (String)
+      #     * +:ec2_volume_id+ - (String)
       #     * +:name+ - (String)
       #     * +:raid_array_id+ - (String)
       #     * +:instance_id+ - (String)
@@ -619,9 +649,18 @@ module AWS
       #   * +:app_id+ - *required* - (String)
       #   * +:name+ - (String)
       #   * +:description+ - (String)
-      #   * +:type+ - (String)
+      #   * +:type+ - (String) Valid values include:
+      #     * +rails+
+      #     * +php+
+      #     * +nodejs+
+      #     * +static+
+      #     * +other+
       #   * +:app_source+ - (Hash)
-      #     * +:type+ - (String)
+      #     * +:type+ - (String) Valid values include:
+      #       * +git+
+      #       * +svn+
+      #       * +archive+
+      #       * +s3+
       #     * +:url+ - (String)
       #     * +:username+ - (String)
       #     * +:password+ - (String)
@@ -642,7 +681,10 @@ module AWS
       #   * +:instance_id+ - *required* - (String)
       #   * +:layer_ids+ - (Array<String>)
       #   * +:instance_type+ - (String)
-      #   * +:auto_scaling_type+ - (String)
+      #   * +:auto_scaling_type+ - (String) Valid values include:
+      #     * +AlwaysRunning+
+      #     * +TimeBasedAutoScaling+
+      #     * +LoadBasedAutoScaling+
       #   * +:hostname+ - (String)
       #   * +:os+ - (String)
       #   * +:ssh_key_name+ - (String)
@@ -687,7 +729,11 @@ module AWS
       #   * +:custom_json+ - (String)
       #   * +:use_custom_cookbooks+ - (Boolean)
       #   * +:custom_cookbooks_source+ - (Hash)
-      #     * +:type+ - (String)
+      #     * +:type+ - (String) Valid values include:
+      #       * +git+
+      #       * +svn+
+      #       * +archive+
+      #       * +s3+
       #     * +:url+ - (String)
       #     * +:username+ - (String)
       #     * +:password+ - (String)

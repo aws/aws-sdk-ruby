@@ -128,7 +128,10 @@ module AWS
       #         * +:https_port+ - *required* - (Integer) The HTTPS port the
       #           custom origin listens on.
       #         * +:origin_protocol_policy+ - *required* - (String) The origin
-      #           protocol policy to apply to your origin.
+      #           protocol policy to apply to your origin. Valid values
+      #           include:
+      #           * +http-only+
+      #           * +match-viewer+
       #   * +:default_cache_behavior+ - *required* - (Hash) A complex type that
       #     describes the default cache behavior if you do not specify a
       #     CacheBehavior element or if files don't match any of the values of
@@ -173,7 +176,9 @@ module AWS
       #       matches the path pattern in PathPattern. If you want CloudFront
       #       to allow end users to use any available protocol, specify
       #       allow-all. If you want CloudFront to require HTTPS, specify
-      #       https.
+      #       https. Valid values include:
+      #       * +allow-all+
+      #       * +https-only+
       #     * +:min_ttl+ - *required* - (Integer) The minimum amount of time
       #       that you want objects to stay in CloudFront caches before
       #       CloudFront queries your origin to see whether the object has been
@@ -234,7 +239,9 @@ module AWS
       #         request matches the path pattern in PathPattern. If you want
       #         CloudFront to allow end users to use any available protocol,
       #         specify allow-all. If you want CloudFront to require HTTPS,
-      #         specify https.
+      #         specify https. Valid values include:
+      #         * +allow-all+
+      #         * +https-only+
       #       * +:min_ttl+ - *required* - (Integer) The minimum amount of time
       #         that you want objects to stay in CloudFront caches before
       #         CloudFront queries your origin to see whether the object has
@@ -984,7 +991,10 @@ module AWS
       #         * +:https_port+ - *required* - (Integer) The HTTPS port the
       #           custom origin listens on.
       #         * +:origin_protocol_policy+ - *required* - (String) The origin
-      #           protocol policy to apply to your origin.
+      #           protocol policy to apply to your origin. Valid values
+      #           include:
+      #           * +http-only+
+      #           * +match-viewer+
       #   * +:default_cache_behavior+ - *required* - (Hash) A complex type that
       #     describes the default cache behavior if you do not specify a
       #     CacheBehavior element or if files don't match any of the values of
@@ -1029,7 +1039,9 @@ module AWS
       #       matches the path pattern in PathPattern. If you want CloudFront
       #       to allow end users to use any available protocol, specify
       #       allow-all. If you want CloudFront to require HTTPS, specify
-      #       https.
+      #       https. Valid values include:
+      #       * +allow-all+
+      #       * +https-only+
       #     * +:min_ttl+ - *required* - (Integer) The minimum amount of time
       #       that you want objects to stay in CloudFront caches before
       #       CloudFront queries your origin to see whether the object has been
@@ -1090,7 +1102,9 @@ module AWS
       #         request matches the path pattern in PathPattern. If you want
       #         CloudFront to allow end users to use any available protocol,
       #         specify allow-all. If you want CloudFront to require HTTPS,
-      #         specify https.
+      #         specify https. Valid values include:
+      #         * +allow-all+
+      #         * +https-only+
       #       * +:min_ttl+ - *required* - (Integer) The minimum amount of time
       #         that you want objects to stay in CloudFront caches before
       #         CloudFront queries your origin to see whether the object has
