@@ -29,7 +29,7 @@ module AWS
       # with a single listener:
       #
       #   load_balancer = elb.load_balancers.create('my-load-balancer',
-      #     :availability_zones => %w(us-east-1a us-east-1b),
+      #     :availability_zones => %w(us-west-2a us-west-2b),
       #     :listeners => [{
       #       :port => 80,
       #       :protocol => :http,

@@ -18,7 +18,7 @@ module AWS
     #
     # @example Create an empty 15GiB volume and attach it to an instance
     #  volume = ec2.volumes.create(:size => 15,
-    #                              :availability_zone => "us-east-1a")
+    #                              :availability_zone => "us-west-2a")
     #  attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
     #  sleep 1 until attachment.status != :attaching
     #

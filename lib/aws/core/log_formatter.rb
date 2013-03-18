@@ -58,7 +58,7 @@ module AWS
     #   The AWS service name (e.g. 'S3', 'EC2', 'SimpleDB', etc)
     #
     # [+:region+]
-    #   The AWS region name (e.g. 'us-east-1', 'us-west-1', etc)
+    #   The AWS region name (e.g. 'us-west-1', 'us-west-2', etc)
     #
     # [+:operation+]
     #   The name of the client request method.  This maps to the name of

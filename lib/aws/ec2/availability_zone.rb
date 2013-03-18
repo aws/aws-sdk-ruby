@@ -39,7 +39,7 @@ module AWS
       end
 
       # @return [String] Returns the name of the availability zone,
-      #   e.g. "us-east-1a".
+      #   e.g. "us-west-2a".
       attr_reader :name
 
       alias_method :to_s, :name

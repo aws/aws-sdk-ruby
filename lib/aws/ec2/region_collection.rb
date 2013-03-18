@@ -34,7 +34,7 @@ module AWS
       end
 
       # @return [Region] The region identified by the given name
-      #   (e.g. "us-east-1").
+      #   (e.g. "us-west-2").
       def [](name)
         super
       end

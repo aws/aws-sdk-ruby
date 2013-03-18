@@ -22,10 +22,10 @@ module AWS
     #   zones = load_balancer.availability_zones
     #
     #   # adding zones
-    #   zones.enable('us-east-1b', 'us-east-1c')
+    #   zones.enable('us-west-2b', 'us-west-2c')
     #
     #   # removing zones
-    #   zones.disable('us-east-1b')
+    #   zones.disable('us-west-2b')
     #
     #   # enumerating enabled zones
     #   zones.each do |zone|
@@ -48,7 +48,7 @@ module AWS
 
       # Adds one or more EC2 Availability Zones to the load balancer.
       #
-      #   load_balancer.availability_zones.enable("us-east-1a", "us-east-1b")
+      #   load_balancer.availability_zones.enable("us-west-2a", "us-west-2b")
       #
       # You can also pass {EC2::AvailabilityZone} objects:
       #
@@ -83,7 +83,7 @@ module AWS
       # Removes the specified EC2 availability zones from the set of 
       # configured availability zones for the load balancer.
       #
-      #   load_balancer.availability_zones.disable("us-east-1a", "us-east-1b")
+      #   load_balancer.availability_zones.disable("us-west-2a", "us-west-2b")
       #
       # You can also pass {EC2::AvailabilityZone} objects:
       #

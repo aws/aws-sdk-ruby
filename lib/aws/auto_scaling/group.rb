@@ -163,7 +163,7 @@ module AWS
       # Auto Scaling group.  You can use this collection to further refine
       # the instances you are interested in:
       #
-      #   group.ec2_instances.filter('availability-zone', 'us-east-1a').each do |i|
+      #   group.ec2_instances.filter('availability-zone', 'us-west-2a').each do |i|
       #     puts instance.id
       #   end
       #

@@ -40,7 +40,7 @@ module AWS
         @config = @client.config
       end
 
-      # @return [String] The name of the region (e.g. "us-east-1").
+      # @return [String] The name of the region (e.g. "us-west-2").
       attr_reader :name
 
       # @return [String]

@@ -27,7 +27,7 @@ module AWS
     #   pp sqs.queues.with_prefix("production_").map(&:url)
     #
     # @example Accessing a queue by URL
-    #   url = "http://sqs.us-east-1.amazonaws.com/123456789012/myqueue"
+    #   url = "http://sqs.us-west-2.amazonaws.com/123456789012/myqueue"
     #   sqs.queues[url].send_message("HELLO")
     class QueueCollection
 

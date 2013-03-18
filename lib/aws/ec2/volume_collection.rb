@@ -19,7 +19,7 @@ module AWS
     #
     # @example Create an empty 15GiB volume
     #  ec2.volumes.create(:size => 15,
-    #                     :availability_zone => "us-east-1a")
+    #                     :availability_zone => "us-west-2a")
     #
     # @example Get a volume by ID
     #  volume = ec2.volumes["vol-123"]

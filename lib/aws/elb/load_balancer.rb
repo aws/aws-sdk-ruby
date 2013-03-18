@@ -115,11 +115,11 @@ module AWS
       #
       # @example enable an availability zone
       #
-      #   load_balancer.availability_zones.enable('us-east-1b')
+      #   load_balancer.availability_zones.enable('us-west-2b')
       #
       # @example disable an availability zone
       #
-      #   load_balancer.availability_zones.disable('us-east-1b')
+      #   load_balancer.availability_zones.disable('us-west-2b')
       #
       # @example list enabled availability zoens
       #

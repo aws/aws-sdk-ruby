@@ -23,7 +23,7 @@ module AWS
       #
       #   group = auto_scaling.groups.create('group-name', 
       #     :launch_configuration => 'launch-config-name',
-      #     :availability_zones => %(us-east-1a us-east-1b),
+      #     :availability_zones => %(us-west-2a us-west-2b),
       #     :min_size => 1,
       #     :max_size => 4)
       # 

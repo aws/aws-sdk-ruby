@@ -81,7 +81,7 @@ module AWS
       #
       #    # you must manage the queue policy yourself to allow the
       #    # the topic to send messages (policy action 'sqs:SendMessage')
-      #    topic.subscribe('arn:aws:sqs:us-east-1:123456789123:AQueue')
+      #    topic.subscribe('arn:aws:sqs:us-west-2:123456789123:AQueue')
       #
       # @example SQS Queue (by Queue object)
       #
