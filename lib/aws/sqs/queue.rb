@@ -160,7 +160,7 @@ module AWS
       #   See {#wait_time_seconds} to set the global long poll setting
       #   on the queue.
       #
-      # @option opts [Integer] :visibilitiy_timeout The duration (in
+      # @option opts [Integer] :visibility_timeout The duration (in
       #   seconds) that the received messages are hidden from
       #   subsequent retrieve requests.  Valid values: integer from
       #   0 to 43200 (maximum 12 hours)
@@ -246,7 +246,7 @@ module AWS
       #   messages are received one at a time.  Valid values:
       #   integers from 1 to 10.
       #
-      # @option opts [Integer] :visibilitiy_timeout The duration (in
+      # @option opts [Integer] :visibility_timeout The duration (in
       #   seconds) that the received messages are hidden from
       #   subsequent retrieve requests.  Valid values: integer from
       #   0 to 43200 (maximum 12 hours)
