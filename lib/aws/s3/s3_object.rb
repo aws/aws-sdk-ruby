@@ -269,7 +269,7 @@ module AWS
       # @return [Boolean] Returns +true+ if the object exists in S3.
       def exists?
         head
-      rescue Errors::NoSuchKey => e
+      rescue Errors::NoSuchKey, Errors::Forbidden
         false
       else
         true
