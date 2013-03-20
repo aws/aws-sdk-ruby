@@ -61,7 +61,7 @@ if ENV['LOGGING'] == 'true'
 end
 
 AfterConfiguration do
-  AWS.config(test_config)
+  AWS.config(test_config) if test_config
   handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp, read_block|
     (@requests_made ||= []) << req
     super(req, resp, &read_block)
