@@ -263,6 +263,7 @@ module AWS
     def estimate_template_cost template, parameters = {}
       client_opts = {}
       client_opts[:template] = template
+      client_opts[:parameters] = parameters
       apply_template(client_opts)  
       apply_parameters(client_opts)  
       client.estimate_template_cost(client_opts).url
