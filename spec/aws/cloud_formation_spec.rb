@@ -147,14 +147,14 @@ module AWS
       
       it 'calls #estimate_template_cost on the client' do
         client.should_receive(:estimate_template_cost).
-          with(:template_body => 'template').
+          with(:parameters => [], :template_body => 'template').
           and_return(resp)
         cloud_formation.estimate_template_cost('template')
       end
       
       it 'accepts urls' do
         client.should_receive(:estimate_template_cost).
-          with(:template_url => 'http://domain.com/template').
+          with(:parameters => [], :template_url => 'http://domain.com/template').
           and_return(resp)
         cloud_formation.estimate_template_cost('http://domain.com/template')
       end
