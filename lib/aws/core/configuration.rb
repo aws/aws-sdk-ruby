@@ -413,9 +413,10 @@ module AWS
             needed = needs.inject({}) {|h,need| h.merge(need => send(need)) }
 
             unless @created.key?(name) and @created[name][:needed] == needed
-              @created[name] = {}
-              @created[name][:object] = create_block.call(self,needed)
-              @created[name][:needed] = needed
+              created = {}
+              created[:object] = create_block.call(self,needed)
+              created[:needed] = needed
+              @created[name] = created
             end
 
             @created[name][:object]
