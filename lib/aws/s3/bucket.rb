@@ -510,7 +510,7 @@ module AWS
           true
         rescue Errors::NoSuchBucket => e
           false # bucket does not exist
-        rescue Errors::ClientError => e
+        rescue Errors::AccessDenied => e
           true # bucket exists
         end
       end
