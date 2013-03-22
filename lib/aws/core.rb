@@ -583,5 +583,19 @@ module AWS
       nil
     end
 
+    # Eagerly loads all AWS classes/modules registered with autoload.
+    # @return [nil]
+    def eager_autoload! klass_or_module = AWS
+      klass_or_module.constants.each do |const_name|
+        if path = klass_or_module.autoload?(const_name)
+          require(path)
+          if const = klass_or_module.const_get(const_name) and const.is_a?(Module)
+            eager_autoload!(const)
+          end
+        end
+      end
+      nil
+    end
+
   end
 end
