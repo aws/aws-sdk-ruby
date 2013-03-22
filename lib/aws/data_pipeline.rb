@@ -61,11 +61,9 @@ module AWS
   #   @return [Client] the low-level DataPipeline client object
   class DataPipeline
 
-    AWS.register_autoloads(self, 'aws/data_pipeline') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/data_pipeline/client'
+    autoload :Errors, 'aws/data_pipeline/errors'
+    autoload :Request, 'aws/data_pipeline/request'
 
     include Core::ServiceInterface
 

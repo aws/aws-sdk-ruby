@@ -77,13 +77,11 @@ module AWS
     # using.
     class Tree
 
-      AWS.register_autoloads(self) do
-        autoload :BranchNode, 'branch_node'
-        autoload :ChildCollection, 'child_collection'
-        autoload :LeafNode, 'leaf_node'
-        autoload :Node, 'node'
-        autoload :Parent, 'parent'
-      end
+      autoload :BranchNode, 'aws/s3/tree/branch_node'
+      autoload :ChildCollection, 'aws/s3/tree/child_collection'
+      autoload :LeafNode, 'aws/s3/tree/leaf_node'
+      autoload :Node, 'aws/s3/tree/node'
+      autoload :Parent, 'aws/s3/tree/parent'
 
       include Parent
 

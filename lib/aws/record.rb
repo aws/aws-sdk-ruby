@@ -18,15 +18,13 @@ module AWS
   # AWS::Record is an ORM built on top of AWS services.  
   module Record
 
-    AWS.register_autoloads(self) do
-      autoload :Base,         'model'
-      autoload :Model,        'model'
-      autoload :HashModel,    'hash_model'
-    end
+    autoload :Base, 'aws/record/model'
+    autoload :Model, 'aws/record/model'
+    autoload :HashModel, 'aws/record/hash_model'
 
     # @private
     class RecordNotFound < StandardError; end
-  
+
     # Sets a prefix to be applied to all SimpleDB domains associated with
     # AWS::Record::Base classes.
     #

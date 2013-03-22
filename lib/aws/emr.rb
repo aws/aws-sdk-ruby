@@ -63,15 +63,13 @@ module AWS
   #   @return [Client] the low-level EMR client object
   class EMR
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :InstanceGroup, 'instance_group'
-      autoload :InstanceGroupCollection, 'instance_group_collection'
-      autoload :JobFlow, 'job_flow'
-      autoload :JobFlowCollection, 'job_flow_collection'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/emr/client'
+    autoload :Errors, 'aws/emr/errors'
+    autoload :InstanceGroup, 'aws/emr/instance_group'
+    autoload :InstanceGroupCollection, 'aws/emr/instance_group_collection'
+    autoload :JobFlow, 'aws/emr/job_flow'
+    autoload :JobFlowCollection, 'aws/emr/job_flow_collection'
+    autoload :Request, 'aws/emr/request'
 
     include Core::ServiceInterface
 

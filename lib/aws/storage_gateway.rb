@@ -61,11 +61,9 @@ module AWS
   #   @return [Client] the low-level StorageGateway client object
   class StorageGateway
 
-    AWS.register_autoloads(self, 'aws/storage_gateway') do
-      autoload :Client,  'client'
-      autoload :Errors,  'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/storage_gateway/client'
+    autoload :Errors, 'aws/storage_gateway/errors'
+    autoload :Request, 'aws/storage_gateway/request'
 
     include Core::ServiceInterface
 

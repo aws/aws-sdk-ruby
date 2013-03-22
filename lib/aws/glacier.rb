@@ -47,17 +47,15 @@ module AWS
   #   @return [Client] the low-level Glacier client object
   class Glacier
 
-    AWS.register_autoloads(self, 'aws/glacier') do
-      autoload :Archive, 'archive'
-      autoload :ArchiveCollection, 'archive_collection'
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-      autoload :Resource, 'resource'
-      autoload :Vault, 'vault'
-      autoload :VaultCollection, 'vault_collection'
-      autoload :VaultNotificationConfiguration, 'vault_notification_configuration'
-    end
+    autoload :Archive, 'aws/glacier/archive'
+    autoload :ArchiveCollection, 'aws/glacier/archive_collection'
+    autoload :Client, 'aws/glacier/client'
+    autoload :Errors, 'aws/glacier/errors'
+    autoload :Request, 'aws/glacier/request'
+    autoload :Resource, 'aws/glacier/resource'
+    autoload :Vault, 'aws/glacier/vault'
+    autoload :VaultCollection, 'aws/glacier/vault_collection'
+    autoload :VaultNotificationConfiguration, 'aws/glacier/vault_notification_configuration'
 
     include Core::ServiceInterface
 

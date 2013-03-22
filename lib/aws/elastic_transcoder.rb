@@ -18,11 +18,9 @@ module AWS
 
   class ElasticTranscoder
 
-    AWS.register_autoloads(self, 'aws/elastic_transcoder') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/elastic_transcoder/client'
+    autoload :Errors, 'aws/elastic_transcoder/errors'
+    autoload :Request, 'aws/elastic_transcoder/request'
 
     include Core::ServiceInterface
 

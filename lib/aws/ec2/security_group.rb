@@ -29,12 +29,10 @@ module AWS
     #
     class SecurityGroup < Resource
 
-      AWS.register_autoloads(self, 'aws/ec2/security_group') do
-        autoload :IpPermission,                  'ip_permission'
-        autoload :IpPermissionCollection,        'ip_permission_collection'
-        autoload :IngressIpPermissionCollection, 'ip_permission_collection'
-        autoload :EgressIpPermissionCollection,  'ip_permission_collection'
-      end
+      autoload :IpPermission, 'aws/ec2/security_group/ip_permission'
+      autoload :IpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
+      autoload :IngressIpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
+      autoload :EgressIpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
 
       include TaggedItem
 

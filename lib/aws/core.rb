@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/version'
-require 'aws/core/autoloader'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
 # where you can configure you access to AWS.
@@ -77,103 +76,89 @@ require 'aws/core/autoloader'
 #
 module AWS
 
-  register_autoloads(self) do
-    autoload :Errors, 'errors'
-  end
+  autoload :Errors, 'aws/errors'
+
 
   module Core
 
-    AWS.register_autoloads(self) do
+    autoload :AsyncHandle, 'aws/core/async_handle'
+    autoload :Cacheable, 'aws/core/cacheable'
+    autoload :Client, 'aws/core/client'
+    autoload :Collection, 'aws/core/collection'
+    autoload :Configuration, 'aws/core/configuration'
+    autoload :CredentialProviders, 'aws/core/credential_providers'
+    autoload :Data, 'aws/core/data'
+    autoload :IndifferentHash, 'aws/core/indifferent_hash'
+    autoload :Inflection, 'aws/core/inflection'
+    autoload :JSONParser, 'aws/core/json_parser'
 
-      autoload :AsyncHandle,               'async_handle'
-      autoload :Cacheable,                 'cacheable'
-      autoload :Client,                    'client'
-      autoload :Collection,                'collection'
-      autoload :Configuration,             'configuration'
-      autoload :CredentialProviders,       'credential_providers'
-      autoload :Data,                      'data'
-      autoload :IndifferentHash,           'indifferent_hash'
-      autoload :Inflection,                'inflection'
-      autoload :JSONParser,                'json_parser'
+    autoload :JSONClient, 'aws/core/json_client'
+    autoload :JSONRequestBuilder, 'aws/core/json_request_builder'
+    autoload :JSONResponseParser, 'aws/core/json_response_parser'
 
-      autoload :JSONClient,                'json_client'
-      autoload :JSONRequestBuilder,        'json_request_builder'
-      autoload :JSONResponseParser,        'json_response_parser'
+    autoload :LazyErrorClasses, 'aws/core/lazy_error_classes'
+    autoload :LogFormatter, 'aws/core/log_formatter'
+    autoload :MetaUtils, 'aws/core/meta_utils'
+    autoload :ManagedFile, 'aws/core/managed_file'
+    autoload :Model, 'aws/core/model'
+    autoload :Naming, 'aws/core/naming'
+    autoload :OptionGrammar, 'aws/core/option_grammar'
+    autoload :PageResult, 'aws/core/page_result'
+    autoload :Policy, 'aws/core/policy'
 
-      autoload :LazyErrorClasses,          'lazy_error_classes'
-      autoload :LogFormatter,              'log_formatter'
-      autoload :MetaUtils,                 'meta_utils'
-      autoload :ManagedFile,               'managed_file'
-      autoload :Model,                     'model'
-      autoload :Naming,                    'naming'
-      autoload :OptionGrammar,             'option_grammar'
-      autoload :PageResult,                'page_result'
-      autoload :Policy,                    'policy'
+    autoload :QueryClient, 'aws/core/query_client'
+    autoload :QueryRequestBuilder, 'aws/core/query_request_builder'
+    autoload :QueryResponseParser, 'aws/core/query_response_parser'
 
-      autoload :QueryClient,               'query_client'
-      autoload :QueryRequestBuilder,       'query_request_builder'
-      autoload :QueryResponseParser,       'query_response_parser'
+    autoload :Resource, 'aws/core/resource'
+    autoload :ResourceCache, 'aws/core/resource_cache'
+    autoload :Response, 'aws/core/response'
+    autoload :ResponseCache, 'aws/core/response_cache'
 
-      autoload :Resource,                  'resource'
-      autoload :ResourceCache,             'resource_cache'
-      autoload :Response,                  'response'
-      autoload :ResponseCache,             'response_cache'
+    autoload :RESTClient, 'aws/core/rest_xml_client'
+    autoload :RESTJSONClient, 'aws/core/rest_json_client'
+    autoload :RESTXMLClient, 'aws/core/rest_xml_client'
+    autoload :RESTRequestBuilder, 'aws/core/rest_request_builder'
+    autoload :RESTResponseParser, 'aws/core/rest_response_parser'
 
-      autoload :RESTClient,                'rest_xml_client'
-      autoload :RESTJSONClient,            'rest_json_client'
-      autoload :RESTXMLClient,             'rest_xml_client'
-      autoload :RESTRequestBuilder,        'rest_request_builder'
-      autoload :RESTResponseParser,        'rest_response_parser'
-
-      autoload :ServiceInterface,          'service_interface'
-      autoload :Signer,                    'signer'
-      autoload :UriEscape,                 'uri_escape'
-
-    end
+    autoload :ServiceInterface, 'aws/core/service_interface'
+    autoload :Signer, 'aws/core/signer'
+    autoload :UriEscape, 'aws/core/uri_escape'
 
     module Options
-      AWS.register_autoloads(self) do
-        autoload :JSONSerializer, 'json_serializer'
-        autoload :XMLSerializer, 'xml_serializer'
-        autoload :Validator, 'validator'
-      end
+      autoload :JSONSerializer, 'aws/core/options/json_serializer'
+      autoload :XMLSerializer, 'aws/core/options/xml_serializer'
+      autoload :Validator, 'aws/core/options/validator'
     end
 
     module Signature
-      AWS.register_autoloads(self) do
-        autoload :Version2,      'version_2'
-        autoload :Version3,      'version_3'
-        autoload :Version3HTTPS, 'version_3_https'
-        autoload :Version4,      'version_4'
-      end
+      autoload :Version2, 'aws/core/signature/version_2'
+      autoload :Version3, 'aws/core/signature/version_3'
+      autoload :Version3HTTPS, 'aws/core/signature/version_3_https'
+      autoload :Version4, 'aws/core/signature/version_4'
     end
 
     module XML
-      AWS.register_autoloads(self) do
-        autoload :Parser,     'parser'
-        autoload :Grammar,    'grammar'
-        autoload :Stub,       'stub'
-        autoload :Frame,      'frame'
-        autoload :RootFrame,  'root_frame'
-        autoload :FrameStack, 'frame_stack'
-      end
+
+      autoload :Parser, 'aws/core/xml/parser'
+      autoload :Grammar, 'aws/core/xml/grammar'
+      autoload :Stub, 'aws/core/xml/stub'
+      autoload :Frame, 'aws/core/xml/frame'
+      autoload :RootFrame, 'aws/core/xml/root_frame'
+      autoload :FrameStack, 'aws/core/xml/frame_stack'
 
       module SaxHandlers
-        AWS.register_autoloads(self, 'aws/core/xml/sax_handlers') do
-          autoload :Nokogiri, 'nokogiri'
-          autoload :REXML,    'rexml'
-        end
+        autoload :Nokogiri, 'aws/core/xml/sax_handlers/nokogiri'
+        autoload :REXML, 'aws/core/xml/sax_handlers/rexml'
       end
 
     end
 
     module Http
-      AWS.register_autoloads(self) do
-        autoload :Handler,         'handler'
-        autoload :NetHttpHandler,  'net_http_handler'
-        autoload :Request,         'request'
-        autoload :Response,        'response'
-      end
+      autoload :Handler, 'aws/core/http/handler'
+      autoload :NetHttpHandler, 'aws/core/http/net_http_handler'
+      autoload :Request, 'aws/core/http/request'
+      autoload :Response, 'aws/core/http/response'
     end
 
   end

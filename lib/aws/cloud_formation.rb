@@ -145,21 +145,19 @@ module AWS
   #   @return [Client] the low-level CloudFormation client object
   class CloudFormation
 
-    AWS.register_autoloads(self, 'aws/cloud_formation') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-      autoload :Stack, 'stack'
-      autoload :StackCollection, 'stack_collection'
-      autoload :StackEvent, 'stack_event'
-      autoload :StackEventCollection, 'stack_event_collection'
-      autoload :StackOptions, 'stack_options'
-      autoload :StackOutput, 'stack_output'
-      autoload :StackSummaryCollection, 'stack_summary_collection'
-      autoload :StackResource, 'stack_resource'
-      autoload :StackResourceCollection, 'stack_resource_collection'
-      autoload :StackResourceSummaryCollection, 'stack_resource_summary_collection'
-    end
+    autoload :Client, 'aws/cloud_formation/client'
+    autoload :Errors, 'aws/cloud_formation/errors'
+    autoload :Request, 'aws/cloud_formation/request'
+    autoload :Stack, 'aws/cloud_formation/stack'
+    autoload :StackCollection, 'aws/cloud_formation/stack_collection'
+    autoload :StackEvent, 'aws/cloud_formation/stack_event'
+    autoload :StackEventCollection, 'aws/cloud_formation/stack_event_collection'
+    autoload :StackOptions, 'aws/cloud_formation/stack_options'
+    autoload :StackOutput, 'aws/cloud_formation/stack_output'
+    autoload :StackSummaryCollection, 'aws/cloud_formation/stack_summary_collection'
+    autoload :StackResource, 'aws/cloud_formation/stack_resource'
+    autoload :StackResourceCollection, 'aws/cloud_formation/stack_resource_collection'
+    autoload :StackResourceSummaryCollection, 'aws/cloud_formation/stack_resource_summary_collection'
 
     include Core::ServiceInterface
     include StackOptions
