@@ -1209,13 +1209,15 @@ module AWS
       def url_for(method, options = {})
         options[:secure] = config.use_ssl? unless options.key?(:secure)
 
-        req = request_for_signing(options)
+        # req = request_for_signing(options)
 
         # method = http_method(method)
         options[:http_method] = http_method(method)
         
         expires = expiration_timestamp(options[:expires])
         options[:expires] = expires
+
+        req = request_for_signing(options)
 
         req.add_param("AWSAccessKeyId",
                       config.credential_provider.access_key_id)
