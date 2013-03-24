@@ -156,8 +156,7 @@ module AWS
 
       end
 
-
-      context '#add_authorization!' do
+      context '#signature' do
 
         let(:credential_provider) { 
           Core::CredentialProviders::StaticProvider.new({
@@ -166,12 +165,13 @@ module AWS
             :session_token => 'TOKEN',
           })
         }
+        let(:signature) { "SIGNATURE" }
 
         context 'credentials does not provide a session token' do
 
           it 'should not add the x-amz-security-token header' do
             credential_provider.stub(:session_token).and_return(nil)
-            request.add_authorization!(credential_provider)
+            request.signature(credential_provider)
             request.headers.
               should_not include("x-amz-security-token")
           end
@@ -183,11 +183,37 @@ module AWS
           it 'should add the x-amz-security-token header prior to computing the signature' do
             Core::Signer.should_receive(:sign) do |*args|
               request.headers["x-amz-security-token"].should == "TOKEN"
-              "SIGNATURE"
+              signature
             end
-            request.add_authorization!(credential_provider)
+            request.signature(credential_provider).should == signature
           end
 
+        end
+
+      end
+
+      context '#add_authorization!' do
+
+        let(:credential_provider) { 
+          Core::CredentialProviders::StaticProvider.new({
+            :access_key_id => 'KEY',
+            :secret_access_key => 'SECRET',
+            :session_token => 'TOKEN',
+          })
+        }
+        let(:signature) { "SIGNATURE" }
+
+        before :each do
+          request.stub(:signature).and_return(signature)
+          request.add_authorization! credential_provider
+        end
+
+        it 'should add authorization header' do
+          request.headers.should include("authorization")
+        end
+
+        it '' do
+          request.headers["authorization"].should == "AWS KEY:SIGNATURE"
         end
 
       end

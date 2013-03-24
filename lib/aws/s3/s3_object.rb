@@ -1196,19 +1196,34 @@ module AWS
       # @option options [String] :response_content_encoding Sets the
       #   Content-Encoding header of the response when performing an
       #   HTTP GET on the returned URL.
+      # 
+      # @option options [String] :request_content_type Sets the
+      #   Content-Type header of the request when performing an
+      #   HTTP PUT on the returned URL.
+      # 
+      # @option options [String] :request_content_md5 Sets the
+      #   Content-Md5 header of the request when performing an
+      #   HTTP PUT on the returned URL.
+      #
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
-
         options[:secure] = config.use_ssl? unless options.key?(:secure)
 
         req = request_for_signing(options)
 
-        method = http_method(method)
+        # method = http_method(method)
+        options[:http_method] = http_method(method)
+        
         expires = expiration_timestamp(options[:expires])
+        options[:expires] = expires
+
         req.add_param("AWSAccessKeyId",
                       config.credential_provider.access_key_id)
         req.add_param("versionId", options[:version_id]) if options[:version_id]
-        req.add_param("Signature", signature(method, expires, req))
+
+        # req.add_param("Signature", signature(method, expires, req))
+        req.add_param("Signature", req.signature(config.credential_provider))
+
         req.add_param("Expires", expires)
         req.add_param("x-amz-security-token",
                       config.credential_provider.session_token) if
@@ -1337,23 +1352,32 @@ module AWS
                         :query => request.querystring)
       end
 
+      #
+      # TODO
+      # Be deprecated
+      #
       def signature(method, expires, request)
+        # 
+        # please use Request#signature
+        # 
+        # parts = []
+        # parts << method
+        # parts << ""
+        # parts << ""
+        # parts << expires
+        # if token = config.credential_provider.session_token
+        #   parts << "x-amz-security-token:#{token}"
+        # end
+        # parts << request.canonicalized_resource
 
-        parts = []
-        parts << method
-        parts << ""
-        parts << ""
-        parts << expires
-        if token = config.credential_provider.session_token
-          parts << "x-amz-security-token:#{token}"
-        end
-        parts << request.canonicalized_resource
+        # string_to_sign = parts.join("\n")
 
-        string_to_sign = parts.join("\n")
+        # secret = config.credential_provider.secret_access_key
+        # Core::Signer.sign(secret, string_to_sign, 'sha1')
 
-        secret = config.credential_provider.secret_access_key
-        Core::Signer.sign(secret, string_to_sign, 'sha1')
+        $stderr.puts "s3_object#signature will be deprecated"
 
+        request.signature(config.credential_provider)
       end
 
       def expiration_timestamp(input)
@@ -1396,6 +1420,12 @@ module AWS
                         options[param]) if options.key?(param)
         end
 
+        # build request signature use options
+        req.http_method = options[:http_method] if options.has_key?(:http_method)
+        req.headers['date'] = options[:expires] if options.has_key?(:expires)
+        req.headers['content-md5'] = options[:request_content_md5] if options.has_key?(:request_content_md5)
+        req.headers['content-type'] = options[:request_content_type] if options.has_key?(:request_content_type)
+        
         req
       end
 
