@@ -1466,6 +1466,7 @@ module AWS
           'content-type' => :content_type,
           'content-encoding' => :content_encoding,
           'cache-control' => :cache_control,
+          'expires' => :expires,
           'etag' => :etag,
           'x-amz-website-redirect-location' => :website_redirect_location,
           'accept-ranges' => :accept_ranges,
