@@ -1324,6 +1324,7 @@ module AWS
             resp.headers['content-type'] = ['text/plain']
             resp.headers['content-encoding'] = ['gzip']
             resp.headers['cache-control'] = ['max-age=1296000']
+            resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
             resp.headers['accept-ranges'] = ['bytes']
             resp.headers['x-amz-meta-Color'] = ['red']
             resp.headers['x-amz-meta-foo'] = 'bar'
@@ -1512,6 +1513,7 @@ module AWS
               resp.headers['content-type'] = ['text/plain']
               resp.headers['content-encoding'] = ['gzip']
               resp.headers['cache-control'] = ['max-age=1296000']
+              resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
               resp.headers['accept-ranges'] = ['bytes']
               resp.headers['x-amz-meta-Color'] = ['red']
               resp.headers['x-amz-meta-foo'] = 'bar'
@@ -1519,6 +1521,7 @@ module AWS
             r[:content_type].should eq('text/plain')
             r[:content_encoding].should eq('gzip')
             r[:cache_control].should eq('max-age=1296000')
+            r[:expires].should eq('Sat, 22 Mar 2014 14:14:21 GMT')
             r[:accept_ranges].should eq('bytes')
             r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
           end
