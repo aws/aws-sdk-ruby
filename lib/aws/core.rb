@@ -32,6 +32,7 @@ require 'aws/core/autoloader'
 # * {AWS::ElasticTranscoder}
 # * {AWS::ELB}
 # * {AWS::EMR}
+# * {AWS::GameConnect}
 # * {AWS::Glacier}
 # * {AWS::OpsWorks}
 # * {AWS::IAM}
