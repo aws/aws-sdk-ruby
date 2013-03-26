@@ -11,14 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/abstract_base'
-require 'aws/record/hash_model/scope'
-require 'aws/record/hash_model/attributes'
-require 'aws/record/hash_model/finder_methods'
-
 module AWS
   module Record
     class HashModel
+
+      require 'aws/record/hash_model/attributes'
+      require 'aws/record/hash_model/finder_methods'
+      require 'aws/record/hash_model/scope'
 
       extend AbstractBase
 

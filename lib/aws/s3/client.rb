@@ -29,9 +29,7 @@ module AWS
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
 
-      AWS.register_autoloads(self) do
-        autoload :XML, 'xml'
-      end
+      autoload :XML, 'aws/s3/client/xml'
 
       # @private
       EMPTY_BODY_ERRORS = {

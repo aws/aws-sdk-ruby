@@ -61,20 +61,18 @@ module AWS
   #   @return [Client] the low-level Route53 client object
   class Route53
 
-    AWS.register_autoloads(self, 'aws/route_53') do
-      autoload :ChangeRequest, 'change_batch'
-      autoload :ChangeBatch, 'change_batch'
-      autoload :ChangeInfo, 'change_info'
-      autoload :Client, 'client'
-      autoload :CreateRequest, 'change_batch'
-      autoload :DeleteRequest, 'change_batch'
-      autoload :Errors, 'errors'
-      autoload :HostedZone, 'hosted_zone'
-      autoload :HostedZoneCollection, 'hosted_zone_collection'
-      autoload :Request, 'request'
-      autoload :ResourceRecordSet, 'resource_record_set'
-      autoload :ResourceRecordSetCollection, 'resource_record_set_collection'
-    end
+    autoload :ChangeRequest, 'aws/route_53/change_batch'
+    autoload :ChangeBatch, 'aws/route_53/change_batch'
+    autoload :ChangeInfo, 'aws/route_53/change_info'
+    autoload :Client, 'aws/route_53/client'
+    autoload :CreateRequest, 'aws/route_53/change_batch'
+    autoload :DeleteRequest, 'aws/route_53/change_batch'
+    autoload :Errors, 'aws/route_53/errors'
+    autoload :HostedZone, 'aws/route_53/hosted_zone'
+    autoload :HostedZoneCollection, 'aws/route_53/hosted_zone_collection'
+    autoload :Request, 'aws/route_53/request'
+    autoload :ResourceRecordSet, 'aws/route_53/resource_record_set'
+    autoload :ResourceRecordSetCollection, 'aws/route_53/resource_record_set_collection'
 
     include Core::ServiceInterface
 

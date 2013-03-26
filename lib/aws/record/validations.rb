@@ -11,18 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validators/acceptance'
-require 'aws/record/validators/block'
-require 'aws/record/validators/confirmation'
-require 'aws/record/validators/count'
-require 'aws/record/validators/exclusion'
-require 'aws/record/validators/format'
-require 'aws/record/validators/inclusion'
-require 'aws/record/validators/length'
-require 'aws/record/validators/numericality'
-require 'aws/record/validators/presence'
-require 'aws/record/validators/method'
-
 module AWS
   module Record
 

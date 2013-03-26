@@ -57,16 +57,14 @@ module AWS
   #   @return [Client] the low-level SQS client object
   class SQS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,             'client'
-      autoload :Errors,             'errors'
-      autoload :Queue,              'queue'
-      autoload :QueueCollection,    'queue_collection'
-      autoload :Policy,             'policy'
-      autoload :ReceivedMessage,    'received_message'
-      autoload :ReceivedSNSMessage, 'received_sns_message'
-      autoload :Request,            'request'
-    end
+    autoload :Client, 'aws/sqs/client'
+    autoload :Errors, 'aws/sqs/errors'
+    autoload :Queue, 'aws/sqs/queue'
+    autoload :QueueCollection, 'aws/sqs/queue_collection'
+    autoload :Policy, 'aws/sqs/policy'
+    autoload :ReceivedMessage, 'aws/sqs/received_message'
+    autoload :ReceivedSNSMessage, 'aws/sqs/received_sns_message'
+    autoload :Request, 'aws/sqs/request'
 
     include Core::ServiceInterface
 

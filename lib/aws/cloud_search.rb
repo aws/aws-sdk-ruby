@@ -61,11 +61,9 @@ module AWS
   #   @return [Client] the low-level CloudSearch client object
   class CloudSearch
 
-    AWS.register_autoloads(self, 'aws/cloud_search') do
-      autoload :Client,                        'client'
-      autoload :Errors,                        'errors'
-      autoload :Request,                       'request'
-    end
+    autoload :Client, 'aws/cloud_search/client'
+    autoload :Errors, 'aws/cloud_search/errors'
+    autoload :Request, 'aws/cloud_search/request'
 
     include Core::ServiceInterface
 

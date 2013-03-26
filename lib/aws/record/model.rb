@@ -13,10 +13,6 @@
 
 # todo move these to included modules (like validations and naming)
 
-require 'aws/record/abstract_base'
-require 'aws/record/model/scope'
-require 'aws/record/model/attributes'
-require 'aws/record/model/finder_methods'
 
 module AWS
   module Record
@@ -270,6 +266,10 @@ module AWS
     #   end
     #
     class Model
+
+      require 'aws/record/model/attributes'
+      require 'aws/record/model/finder_methods'
+      require 'aws/record/model/scope'
 
       extend AbstractBase
 

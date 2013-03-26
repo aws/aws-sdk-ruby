@@ -40,11 +40,9 @@ module AWS
   #
   class Redshift
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/redshift/client'
+    autoload :Errors, 'aws/redshift/errors'
+    autoload :Request, 'aws/redshift/request'
 
     include Core::ServiceInterface
 

@@ -102,25 +102,23 @@ module AWS
   #   @return [Client] the low-level DynamoDB client object
   class DynamoDB
 
-    AWS.register_autoloads(self, 'aws/dynamo_db') do
-      autoload :AttributeCollection, 'attribute_collection'
-      autoload :BatchGet, 'batch_get'
-      autoload :BatchWrite, 'batch_write'
-      autoload :Binary, 'binary'
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Expectations, 'expectations'
-      autoload :Item, 'item'
-      autoload :ItemData, 'item_data'
-      autoload :ItemCollection, 'item_collection'
-      autoload :Keys, 'keys'
-      autoload :PrimaryKeyElement, 'primary_key_element'
-      autoload :Request, 'request'
-      autoload :Resource, 'resource'
-      autoload :Table, 'table'
-      autoload :TableCollection, 'table_collection'
-      autoload :Types, 'types'
-    end
+    autoload :AttributeCollection, 'aws/dynamo_db/attribute_collection'
+    autoload :BatchGet, 'aws/dynamo_db/batch_get'
+    autoload :BatchWrite, 'aws/dynamo_db/batch_write'
+    autoload :Binary, 'aws/dynamo_db/binary'
+    autoload :Client, 'aws/dynamo_db/client'
+    autoload :Errors, 'aws/dynamo_db/errors'
+    autoload :Expectations, 'aws/dynamo_db/expectations'
+    autoload :Item, 'aws/dynamo_db/item'
+    autoload :ItemData, 'aws/dynamo_db/item_data'
+    autoload :ItemCollection, 'aws/dynamo_db/item_collection'
+    autoload :Keys, 'aws/dynamo_db/keys'
+    autoload :PrimaryKeyElement, 'aws/dynamo_db/primary_key_element'
+    autoload :Request, 'aws/dynamo_db/request'
+    autoload :Resource, 'aws/dynamo_db/resource'
+    autoload :Table, 'aws/dynamo_db/table'
+    autoload :TableCollection, 'aws/dynamo_db/table_collection'
+    autoload :Types, 'aws/dynamo_db/types'
 
     include Core::ServiceInterface
 

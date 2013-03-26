@@ -43,15 +43,13 @@ module AWS
   #   @return [Client] the low-level RDS client object
   class RDS
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :DBInstance, 'db_instance'
-      autoload :DBInstanceCollection, 'db_instance_collection'
-      autoload :DBSnapshot, 'db_snapshot'
-      autoload :DBSnapshotCollection, 'db_snapshot_collection'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/rds/client'
+    autoload :Errors, 'aws/rds/errors'
+    autoload :DBInstance, 'aws/rds/db_instance'
+    autoload :DBInstanceCollection, 'aws/rds/db_instance_collection'
+    autoload :DBSnapshot, 'aws/rds/db_snapshot'
+    autoload :DBSnapshotCollection, 'aws/rds/db_snapshot_collection'
+    autoload :Request, 'aws/rds/request'
 
     include Core::ServiceInterface
 

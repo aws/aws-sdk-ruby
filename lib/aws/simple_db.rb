@@ -140,23 +140,21 @@ module AWS
   #   @return [Client] the low-level SimpleDB client object
   class SimpleDB
 
-    AWS.register_autoloads(self, 'aws/simple_db') do
-      autoload :Attribute,             'attribute'
-      autoload :AttributeCollection,   'attribute_collection'
-      autoload :Client,                'client'
-      autoload :ConsistentReadOption,  'consistent_read_option'
-      autoload :DeleteAttributes,      'delete_attributes'
-      autoload :Domain,                'domain'
-      autoload :DomainCollection,      'domain_collection'
-      autoload :DomainMetadata,        'domain_metadata'
-      autoload :Errors,                'errors' 
-      autoload :ExpectConditionOption, 'expect_condition_option'
-      autoload :Item,                  'item'
-      autoload :ItemCollection,        'item_collection'
-      autoload :ItemData,              'item_data'
-      autoload :PutAttributes,         'put_attributes'
-      autoload :Request,               'request'
-    end
+    autoload :Attribute, 'aws/simple_db/attribute'
+    autoload :AttributeCollection, 'aws/simple_db/attribute_collection'
+    autoload :Client, 'aws/simple_db/client'
+    autoload :ConsistentReadOption, 'aws/simple_db/consistent_read_option'
+    autoload :DeleteAttributes, 'aws/simple_db/delete_attributes'
+    autoload :Domain, 'aws/simple_db/domain'
+    autoload :DomainCollection, 'aws/simple_db/domain_collection'
+    autoload :DomainMetadata, 'aws/simple_db/domain_metadata'
+    autoload :Errors, 'aws/simple_db/errors' 
+    autoload :ExpectConditionOption, 'aws/simple_db/expect_condition_option'
+    autoload :Item, 'aws/simple_db/item'
+    autoload :ItemCollection, 'aws/simple_db/item_collection'
+    autoload :ItemData, 'aws/simple_db/item_data'
+    autoload :PutAttributes, 'aws/simple_db/put_attributes'
+    autoload :Request, 'aws/simple_db/request'
 
     include Core::ServiceInterface
 
