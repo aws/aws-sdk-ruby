@@ -19,7 +19,7 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a new VPN connection between an existing virtual private 
+      # Creates a new VPN connection between an existing virtual private
       # gateway and a VPN customer gateway.
       #
       # @param [Hash] options
@@ -30,13 +30,13 @@ module AWS
       # @option options [VPNGateway,String] :vpn_gateway
       #   The {VPNGateway} object or vpn gateway id string.
       #
-      # @option options [String] :vpn_type ('ipsec.1') 
+      # @option options [String] :vpn_type ('ipsec.1')
       #   The type of VPN connection.
       #
       # @return [VPNConnection]
       #
       def create options = {}
-        
+
         client_opts = {}
         client_opts[:customer_gateway_id] = customer_gateway_id(options)
         client_opts[:vpn_gateway_id] = vpn_gateway_id(options)
@@ -52,7 +52,7 @@ module AWS
       # Returns a reference to the VPN connection with the given id.
       #
       #   vpn_connection = ec2.vpn_connections['vpn-connection-id']
-      # 
+      #
       # @param [String] vpn_connection_id
       #
       # @return [VPNConnection]
@@ -67,7 +67,7 @@ module AWS
         response = filtered_request(:describe_vpn_connections, options, &block)
         response.vpn_connection_set.each do |c|
 
-          vpn_connection = VPNConnection.new_from(:describe_vpn_connections, 
+          vpn_connection = VPNConnection.new_from(:describe_vpn_connections,
             c, c.vpn_connection_id, :config => config)
 
           yield(vpn_connection)

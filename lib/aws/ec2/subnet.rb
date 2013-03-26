@@ -82,7 +82,7 @@ module AWS
         associations.first{|a| a.subnet == self }
       end
 
-      # @return [RouteTable] Returns the route table currently associated 
+      # @return [RouteTable] Returns the route table currently associated
       #   with this subnet.
       def route_table
         route_table_association.route_table
@@ -111,7 +111,7 @@ module AWS
         if assoc.main?
           client_opts[:subnet_id] = subnet_id
           response = client.associate_route_table(client_opts)
-          association_id = response.association_id 
+          association_id = response.association_id
         else
           client_opts[:association_id] = assoc.association_id
           resp = client.replace_route_table_association(client_opts)

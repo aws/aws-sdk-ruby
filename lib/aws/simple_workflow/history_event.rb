@@ -18,7 +18,7 @@ module AWS
 
     # == Getting History Events
     #
-    # History events belong to workflow executions.  You can get them 
+    # History events belong to workflow executions.  You can get them
     # from an execution two ways:
     #
     # 1) By enumerating events from the execution
@@ -42,7 +42,7 @@ module AWS
     # * {#event_id}
     # * {#created_at}
     # * {#attributes}
-    # 
+    #
     # For a complete list of event types and a complete list of attributes
     # returned with each event type, see the service API documentation.
     #
@@ -55,7 +55,7 @@ module AWS
     #
     # See {HistoryEvent::Attributes} for more information about working
     # with the returned attributes.
-    # 
+    #
     class HistoryEvent
 
       include Core::Model
@@ -63,7 +63,7 @@ module AWS
       # @param [WorkflowExecution] workflow_execution
       #
       # @param [Hash,String] details A hash or JSON string describing
-      #   the history event. 
+      #   the history event.
       #
       def initialize workflow_execution, details
 
@@ -131,7 +131,7 @@ module AWS
       #
       # == Indifferent Access
       #
-      # Here are a few examples showing the different ways to access an 
+      # Here are a few examples showing the different ways to access an
       # attribute:
       #
       #   event = workflow_executions.events.first
@@ -146,11 +146,11 @@ module AWS
       # snake_cased or camelCased (strings or symbols).
       #
       # == Special Attributes
-      # 
-      # The following list of attributes are treated specially.  Generally this
-      # means they return 
       #
-      # * timeout attributes (e.g. taskStartToCloseTimeout) are returned as 
+      # The following list of attributes are treated specially.  Generally this
+      # means they return
+      #
+      # * timeout attributes (e.g. taskStartToCloseTimeout) are returned as
       #   integers (number of seconds) or the special symbol :none, implying
       #   there is no timeout.
       #
@@ -165,7 +165,7 @@ module AWS
       # * taskList is returned as a string, not a hash.
       #
       class Attributes
-        
+
         # @private
         def initialize workflow_execution, data
           @workflow_execution = workflow_execution
@@ -184,7 +184,7 @@ module AWS
           end
         end
 
-        # @return [Array<Symbol>] Returns a list of valid keys for this 
+        # @return [Array<Symbol>] Returns a list of valid keys for this
         #   set of attributes.
         def keys
           @data.keys.collect{|key| _snake_case(key) }
@@ -204,7 +204,7 @@ module AWS
           self[method]
         end
 
-        # @return [Hash] Returns all of the attributes in a hash with 
+        # @return [Hash] Returns all of the attributes in a hash with
         #   snaked_cased and symbolized keys.
         def to_h
           @data.inject({}) do |h,(key,value)|

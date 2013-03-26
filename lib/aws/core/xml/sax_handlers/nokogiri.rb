@@ -18,7 +18,7 @@ module AWS
     module XML
       module SaxHandlers
         class Nokogiri
-          
+
           include FrameStack
 
           def sax_parse xml
@@ -32,11 +32,11 @@ module AWS
 
           def start_element_namespace element_name, attributes = [], *ignore
 
-            attributes = attributes.map.inject({}) do |hash,attr| 
+            attributes = attributes.map.inject({}) do |hash,attr|
               hash.merge(attr.localname => attr.value)
             end
 
-            start_element(element_name, attributes) 
+            start_element(element_name, attributes)
 
           end
 

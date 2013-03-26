@@ -137,8 +137,8 @@ def execute_post(form, opts = {})
     resp = http.request(req)
     @result = resp
 
-    unless 
-      resp.kind_of?(Net::HTTPSuccess) or 
+    unless
+      resp.kind_of?(Net::HTTPSuccess) or
       resp.kind_of?(Net::HTTPRedirection) or
       resp.kind_of?(Net::HTTPForbidden)
     then

@@ -54,24 +54,24 @@ module AWS
       # * +:attached+
       # * +:detaching+
       # * +:detached+
-      # @return [Symbol] Returns the attachment status.  
+      # @return [Symbol] Returns the attachment status.
       attribute :status, :to_sym => true
 
       # @overload attach_time
       # @return [Time] Returns the time at which this attachment was created.
       attribute :attach_time
 
-      # @overload delete_on_termination? 
-      # @return [Boolean] Returns +true+ if the volume will be deleted 
+      # @overload delete_on_termination?
+      # @return [Boolean] Returns +true+ if the volume will be deleted
       #   on instance termination.
       attribute :delete_on_termination, :boolean => true
-    
+
       populates_from(:describe_volumes) do |resp|
         find_attachment(resp)
       end
 
       populates_from(:attach_volume, :detach_volume) do |resp|
-        if 
+        if
           resp.volume_id == volume.id and
           resp.instance_id == instance.id and
           resp.device == device

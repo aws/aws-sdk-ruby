@@ -31,7 +31,7 @@ module AWS
     #   group.notification_configurations.each do |config|
     #     # ...
     #   end
-    # 
+    #
     # == Creating Notification Configurations
     #
     # You can create a notification configuration like so:
@@ -48,7 +48,7 @@ module AWS
     class NotificationConfigurationCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
+
       # @private
       def initialize options = {}
         @group = options[:group]
@@ -69,7 +69,7 @@ module AWS
       # configuration you need an {SNS::Topic} and an Auto Scaling {Group}.
       #
       #   auto_scaling.notification_configurations.create(
-      #     :group => 'auto-scaling-group-name', 
+      #     :group => 'auto-scaling-group-name',
       #     :topic => 'sns-topic-arn')
       #
       # You can also create notification configurations from an Auto Scaling
@@ -78,7 +78,7 @@ module AWS
       #   auto_scaling_group.notification_configurations.create(
       #     :topic => 'sns-topic-arn')
       #
-      # You may also pass a list of notification types to publish to the 
+      # You may also pass a list of notification types to publish to the
       # topic.  If you omit this option, then all notification types
       # will be configured.
       #
@@ -93,7 +93,7 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [required,SNS::Topic,String] :topic An {SNS::Topic} 
+      # @option options [required,SNS::Topic,String] :topic An {SNS::Topic}
       #   object or a topic arn string.  Notifications will be published
       #   to this topic.
       #
@@ -107,8 +107,8 @@ module AWS
       # @return [NotificationConfiguration]
       #
       def create options = {}
-        
-        topic_arn = options[:topic].is_a?(SNS::Topic) ? 
+
+        topic_arn = options[:topic].is_a?(SNS::Topic) ?
           options[:topic].arn : options[:topic]
 
         unless group = @group
@@ -130,7 +130,7 @@ module AWS
       end
       alias_method :put, :create
 
-      # @yield [notification_config] 
+      # @yield [notification_config]
       # @yieldparam [NotificationConfiguration] notification_config
       def each &block
 
@@ -143,7 +143,7 @@ module AWS
         # rest in the next page.
         #
         # So instead we will request and group them all before yielding.
-        # 
+        #
 
         next_token = nil
 
@@ -169,7 +169,7 @@ module AWS
 
         groups.each_pair do |group_name, topics|
           topics.each_pair do |topic_arn, types|
-            
+
             notification_config = NotificationConfiguration.new(
               Group.new(group_name, :config => config), topic_arn, types)
 

@@ -44,12 +44,12 @@ module AWS
           ],
           :health_check_grace_period => 100,
           :health_check_type => 'EC2',
-          :instances => [ 
+          :instances => [
             {
-              :instance_id => "i-4973362d", 
-              :health_status => "Healthy", 
-              :launch_configuration_name => "name", 
-              :availability_zone => "us-east-1a", 
+              :instance_id => "i-4973362d",
+              :health_status => "Healthy",
+              :launch_configuration_name => "name",
+              :availability_zone => "us-east-1a",
               :lifecycle_state => "InService",
             }
           ],
@@ -64,18 +64,18 @@ module AWS
           ],
           :tags => [
             {
-              :resource_type => "auto-scaling-group", 
+              :resource_type => "auto-scaling-group",
               :resource_id => group.name,
-              :key => "tag1", 
+              :key => "tag1",
               :propagate_at_launch => true
-            }, 
+            },
             {
-              :resource_type => "auto-scaling-group", 
+              :resource_type => "auto-scaling-group",
               :resource_id => group.name,
-              :key => "tag2", 
-              :value => "value2", 
+              :key => "tag2",
+              :value => "value2",
               :propagate_at_launch => false,
-            }, 
+            },
           ],
           :vpc_zone_identifier => 'subnet1-id,subnet2-id'
         }
@@ -130,22 +130,22 @@ module AWS
       end
 
       context '#tags' do
-        
+
         it 'returns array of tag objects' do
           group.tags.should == [
             {
-              :resource_type => "auto-scaling-group", 
+              :resource_type => "auto-scaling-group",
               :resource_id => group.name,
-              :key => "tag1", 
+              :key => "tag1",
               :propagate_at_launch => true
-            }, 
+            },
             {
-              :resource_type => "auto-scaling-group", 
+              :resource_type => "auto-scaling-group",
               :resource_id => group.name,
-              :key => "tag2", 
-              :value => "value2", 
+              :key => "tag2",
+              :value => "value2",
               :propagate_at_launch => false,
-            }, 
+            },
           ]
           group.tags.each{|t| t.resource.should == group }
         end
@@ -180,7 +180,7 @@ module AWS
             ]).and_return(inst_resp)
 
           group.ec2_instances.to_a
-          
+
         end
 
       end
@@ -228,7 +228,7 @@ module AWS
       end
 
       context '#load_balancers' do
-        
+
         it 'returns an array of load balancer objects' do
 
           lbs = group.load_balancers
@@ -272,10 +272,10 @@ module AWS
 
         it '#calls delete_tags on the client' do
           client.should_receive(:delete_tags).with(:tags => [
-            { 
+            {
               :resource_type => 'auto-scaling-group',
               :resource_id => group.name,
-              :key => 'abc', 
+              :key => 'abc',
               :propagate_at_launch => false,
             },
           ])
@@ -286,18 +286,18 @@ module AWS
 
         it 'accpets multiple tags' do
           client.should_receive(:delete_tags).with(:tags => [
-            { 
+            {
               :resource_type => 'auto-scaling-group',
               :resource_id => group.name,
-              :key => 'abc', 
-              :propagate_at_launch => false, 
+              :key => 'abc',
+              :propagate_at_launch => false,
             },
-            { 
+            {
               :resource_type => 'auto-scaling-group',
               :resource_id => group.name,
-              :key => 'mno', 
+              :key => 'mno',
               :value => 'xyz',
-              :propagate_at_launch => true, 
+              :propagate_at_launch => true,
             },
           ])
           group.delete_tags([
@@ -311,13 +311,13 @@ module AWS
           tags << Tag.new(
             :resource_type => 'auto-scaling-group',
             :resource_id => group.name,
-            :key => 'abc', 
+            :key => 'abc',
             :propagate_at_launch => false)
           tags << Tag.new(
             :resource_type => 'auto-scaling-group',
             :resource_id => group.name,
-            :key => 'mno', 
-            :value => 'xyz', 
+            :key => 'mno',
+            :value => 'xyz',
             :propagate_at_launch => true)
           client.should_receive(:delete_tags).with(:tags => tags.map(&:to_hash))
           group.delete_tags(*tags)
@@ -365,7 +365,7 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         let(:response) { client.stub_for(:describe_auto_scaling_groups) }
 
         before(:each) do
@@ -450,7 +450,7 @@ module AWS
             :scaling_processes => %w(abc xyz))
           group.suspend_processes ['abc', 'xyz']
         end
-        
+
       end
 
       context '#suspend_all_processes' do
@@ -486,7 +486,7 @@ module AWS
             :scaling_processes => %w(abc xyz))
           group.resume_processes ['abc', 'xyz']
         end
-        
+
       end
 
       context '#resume_all_processes' do

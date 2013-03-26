@@ -34,28 +34,28 @@ module AWS
           it 'accepts :default_execution_start_to_close_timeout as an integer' do
             client.should_receive(register_method).with(register_opts.merge(
               :default_execution_start_to_close_timeout => '123456'))
-            types.register('name', 'version', 
+            types.register('name', 'version',
               :default_execution_start_to_close_timeout => 123456)
           end
 
           it 'accepts :default_execution_start_to_close_timeout as :none' do
             client.should_receive(register_method).with(register_opts.merge(
               :default_execution_start_to_close_timeout => 'NONE'))
-            types.register('name', 'version', 
+            types.register('name', 'version',
               :default_execution_start_to_close_timeout => :none)
           end
 
           it 'accepts :default_task_start_to_close_timeout as an integer' do
             client.should_receive(register_method).with(register_opts.merge(
               :default_task_start_to_close_timeout => '123456'))
-            types.register('name', 'version', 
+            types.register('name', 'version',
               :default_task_start_to_close_timeout => 123456)
           end
 
           it 'accepts :default_task_start_to_close_timeout as :none' do
             client.should_receive(register_method).with(register_opts.merge(
               :default_task_start_to_close_timeout => 'NONE'))
-            types.register('name', 'version', 
+            types.register('name', 'version',
               :default_task_start_to_close_timeout => :none)
           end
 

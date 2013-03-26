@@ -15,7 +15,7 @@ module AWS
   class CloudWatch
 
     # = AlarmCollection
-    # 
+    #
     # Represents alarms for an AWS account.
     #
     # == Getting an alarm by name
@@ -59,14 +59,14 @@ module AWS
 
       # Creates an alarm and associates it with the specified metric.
       #
-      # @param [String] alarm_name The descriptive name for the alarm. 
+      # @param [String] alarm_name The descriptive name for the alarm.
       #   This name must be unique within the user's AWS account.
       # @param [Hash] options
-      # @option options [String,required] :namespace The namespace for the 
+      # @option options [String,required] :namespace The namespace for the
       #   alarm's associated metric.
-      # @option options [String,required] :metric_name The name for the 
+      # @option options [String,required] :metric_name The name for the
       #   alarm's associated metric.
-      # @option options [Array<Hash>] :dimensions The dimensions for the 
+      # @option options [Array<Hash>] :dimensions The dimensions for the
       #   alarm's associated metric.  Each dimension must specify a
       #   +:name+ and a +:value+.
       # @option (see Alarm#update)
@@ -136,7 +136,7 @@ module AWS
 
           alarm = Alarm.new_from(
             :describe_alarms,
-            details, 
+            details,
             details[:alarm_name],
             :config => config)
 

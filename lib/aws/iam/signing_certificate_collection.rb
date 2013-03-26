@@ -49,13 +49,13 @@ module AWS
         @user ? super(@user, options) : super(options)
       end
 
-      # @return [User,nil] Returns the user this collection belongs to.  
+      # @return [User,nil] Returns the user this collection belongs to.
       #   Returns +nil+ if the collection represents the root credentials
-      #   for the account.  If the configured credentials belong to an 
+      #   for the account.  If the configured credentials belong to an
       #   IAM user, then that user is the implied owner.
       attr_reader :user
 
-      # @param [String] certificate_body The contents of the signing 
+      # @param [String] certificate_body The contents of the signing
       #   certificate.
       # @return [SigningCertificate] Returns the newly created signing
       #   certificate.
@@ -67,7 +67,7 @@ module AWS
 
         resp = client.upload_signing_certificate(options)
 
-        SigningCertificate.new_from(:upload_signing_certificate, 
+        SigningCertificate.new_from(:upload_signing_certificate,
           resp.certificate, resp.certificate.certificate_id, new_options)
 
       end
@@ -97,9 +97,9 @@ module AWS
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of certificates
       #   to yield.
-      # @option options [Integer] :batch_size The maximum number of 
+      # @option options [Integer] :batch_size The maximum number of
       #   certificates received each service reqeust.
-      # @yieldparam [SigningCertificate] signing_certificate 
+      # @yieldparam [SigningCertificate] signing_certificate
       # @return [nil]
       def each options = {}, &block
         each_options = options.dup
@@ -112,7 +112,7 @@ module AWS
       def each_item response, &block
         response.certificates.each do |item|
 
-          cert = SigningCertificate.new_from(:list_signing_certificates, 
+          cert = SigningCertificate.new_from(:list_signing_certificates,
             item, item.certificate_id, new_options)
 
           yield(cert)

@@ -20,13 +20,13 @@ module AWS
       context 'shard_name' do
 
         it 'defaults to the name of the class' do
-          klass.shard_name.should == klass.name  
+          klass.shard_name.should == klass.name
         end
 
       end
 
       context 'set_shard_name' do
-  
+
         it 'changes the default shard name for the class' do
           klass.set_shard_name 'products-1'
           klass.shard_name.should == 'products-1'
@@ -45,7 +45,7 @@ module AWS
       end
 
       context 'constructing a record from a shard' do
-        
+
         it 'returns a new object with the correct shard name' do
           obj = klass.new
           obj.shard.should == klass.shard_name
@@ -66,7 +66,7 @@ module AWS
         end
 
       end
-  
+
     end
   end
 end

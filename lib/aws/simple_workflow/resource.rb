@@ -39,7 +39,7 @@ module AWS
 
         if options[:duration]
           super(name, options) do
-            translates_output do |v| 
+            translates_output do |v|
               v.to_s =~ /^\d+$/ ? v.to_i : v.downcase.to_sym
             end
           end

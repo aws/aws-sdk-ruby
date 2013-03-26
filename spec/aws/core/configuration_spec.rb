@@ -115,7 +115,7 @@ module AWS::Core
         c1.should == c3
 
         c1.object_id.should_not == c3.object_id
-        
+
       end
 
       context '#with' do
@@ -156,13 +156,13 @@ module AWS::Core
           c2.foo.should == 'newfoo'
           c2.bar.should == 'bar'
         end
-        
+
       end
 
     end
 
     context '#credentials' do
-      
+
       let(:config_class) do
         Class.new(Configuration) do
           add_option :access_key_id
@@ -170,7 +170,7 @@ module AWS::Core
           add_option :session_token
         end
       end
-      
+
       it 'returns the credentails' do
         config = config_class.new.with({
           :access_key_id => 'abc',
@@ -181,7 +181,7 @@ module AWS::Core
           :secret_access_key => 'xyz',
         }
       end
-      
+
       it 'includes the session token when provided' do
         config = config_class.new.with({
           :access_key_id => 'abc',
@@ -198,7 +198,7 @@ module AWS::Core
     end
 
     context 'options with needs' do
-    
+
       class DummyClass
         attr_reader :opts
         def initialize opts = {}
@@ -298,10 +298,10 @@ module AWS::Core
 
         c1 = config_class.new(:abc => 'abc', :mno => 'mno')
         c1.dummy3.opts.should == {
-          :dummy2 => c1.dummy2, 
+          :dummy2 => c1.dummy2,
           :xyz => nil,
         }
-        
+
       end
 
       it 'rebuilds only those affected by changes' do
@@ -320,7 +320,7 @@ module AWS::Core
         c1.dummy2.object_id.should == c2.dummy2.object_id
         c1.dummy3.object_id.should_not == c2.dummy3.object_id
         c1.xyz.should_not == c2.xyz
-        
+
       end
 
       it 'can return a hash of all configuration values' do

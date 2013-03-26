@@ -14,7 +14,7 @@
 module AWS
   class AutoScaling
 
-    # 
+    #
     # @attr_reader [String] arn
     #
     # @attr_reader [String] adjustment_type
@@ -66,7 +66,7 @@ module AWS
       attribute :min_adjustment_step
 
       populates_from(:describe_policies) do |resp|
-        resp.scaling_policies.find do |p| 
+        resp.scaling_policies.find do |p|
           p.policy_name == name and
           p.auto_scaling_group_name == group.name
         end
@@ -89,7 +89,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [Boolean] :honor_cooldown (false) Set to true if you
-      #   want Auto Scaling to reject this request when the Auto Scaling 
+      #   want Auto Scaling to reject this request when the Auto Scaling
       #   group is in cooldown.
       #
       # @raise [Errors::ScalingActivityInProgress]

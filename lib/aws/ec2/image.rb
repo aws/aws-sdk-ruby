@@ -35,7 +35,7 @@ module AWS
     # @attr_reader [String] owner_alias The AWS account alias (e.g.,
     #   +"amazon"+) or AWS account ID that owns the AMI.
     #
-    # @attr_reader [Symbol] architecture The architecture of the 
+    # @attr_reader [Symbol] architecture The architecture of the
     #   image (e.g. +:i386+).
     #
     # @attr_reader [Symbol] type The type of image.  Valid values are:
@@ -73,7 +73,7 @@ module AWS
     #   * +:paravirtual+
     #   * +:hvm+
     #
-    # @attr_reader [Symbol] hypervisor The image's hypervisor type.  
+    # @attr_reader [Symbol] hypervisor The image's hypervisor type.
     #   Possible values are:
     #   * +:ovm+
     #   * +:xen+
@@ -183,7 +183,7 @@ module AWS
 
       alias_method :delete, :deregister
 
-      # Runs a single instance of this image.  
+      # Runs a single instance of this image.
       #
       # @param [Hash] options
       # @option (see InstanceCollection#create)
@@ -238,10 +238,10 @@ module AWS
       #   image.add_product_codes 'ABCXYZ', 'MNOPQR'
       #
       # You can also pass an array of product codes:
-      # 
+      #
       #   image.add_product_codes ['ABCXYZ', 'MNOPQR']
       #
-      # @param [Array<String>] product_codes 
+      # @param [Array<String>] product_codes
       #
       # @return [nil]
       #

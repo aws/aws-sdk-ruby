@@ -30,12 +30,12 @@ module AWS
       # @return [String] The topic ARN.
       attr_reader :arn
 
-      # The topic name.  
+      # The topic name.
       #
-      # If you have not set a display name (see {#display_name=}) then 
-      # this is used as the "From" field for notifications to email and 
-      # email-json endpoints.  
-      # @return [String] Returns the toipc name.  
+      # If you have not set a display name (see {#display_name=}) then
+      # this is used as the "From" field for notifications to email and
+      # email-json endpoints.
+      # @return [String] Returns the toipc name.
       def name
         arn.split(/:/)[-1]
       end
@@ -62,7 +62,7 @@ module AWS
       #
       #    topic.subscribe('http://example.com/messages')
       #    topic.subscribe('https://example.com/messages')
-      # 
+      #
       # @example Using a uri object to set the endpoint (http and https)
       #
       #    topic.subscribe(URI.parse('http://example.com/messages'))
@@ -88,7 +88,7 @@ module AWS
       #    # the queue policy will be added/updated to allow the topic
       #    # to send it messages
       #    topic.subscribe(AWS::SQS.new.queues.first)
-      # 
+      #
       # @param [mixed] endpoint The endpoint that should receive
       #   messages that are published to this topic.  Valid values
       #   for +endpoint+ include:
@@ -134,7 +134,7 @@ module AWS
       #
       def confirm_subscription token, options = {}
 
-        options[:authenticate_on_unsubscribe] = 'true' if 
+        options[:authenticate_on_unsubscribe] = 'true' if
           options[:authenticate_on_unsubscribe]
 
         confirm_opts = options.merge(:token => token, :topic_arn => arn)
@@ -152,16 +152,16 @@ module AWS
         TopicSubscriptionCollection.new(self)
       end
 
-      # @return [String] Returns the human-readable name used in 
-      #   the "From" field for notifications to email and email-json 
+      # @return [String] Returns the human-readable name used in
+      #   the "From" field for notifications to email and email-json
       #   endpoints.  If you have not set the display name the topic
       #   {#name} will be used/returned instead.
       def display_name
         to_h[:display_name]
       end
 
-      # @param [String] display_name Sets the human-readable name used in 
-      #   the "From" field for notifications to email and email-json 
+      # @param [String] display_name Sets the human-readable name used in
+      #   the "From" field for notifications to email and email-json
       #   endpoints.
       # @return [String] Returns the display_name as passed.
       def display_name= display_name
@@ -194,9 +194,9 @@ module AWS
         to_h[:policy]
       end
 
-      # Sets the topic's policy.  
+      # Sets the topic's policy.
       # @param [String,Policy] policy A JSON policy string, a {Policy} object
-      #   or any other object that responds to #to_json with a valid 
+      #   or any other object that responds to #to_json with a valid
       #   policy.
       # @return [nil]
       def policy= policy
@@ -216,7 +216,7 @@ module AWS
         to_h[:effective_delivery_policy_json]
       end
 
-      # Publishes a message to this SNS topic. 
+      # Publishes a message to this SNS topic.
       #
       #   topic.publish('a short message')
       #
@@ -236,26 +236,26 @@ module AWS
       # The full list of acceptable protocols are listed below.  The default
       # message is sent to endpoints who's protocol was not listed.
       #
-      # @param [String] default_message The message you want to send to the 
-      #   topic.  Messages must be UTF-8 encoded strings at most 8 KB in size 
+      # @param [String] default_message The message you want to send to the
+      #   topic.  Messages must be UTF-8 encoded strings at most 8 KB in size
       #   (8192 bytes, not 8192 characters).
       # @param [Hash] options
-      # @option options [String] :subject Used as the "Subject" line when 
+      # @option options [String] :subject Used as the "Subject" line when
       #   the message is delivered to email endpoints. Will also  be
       #   included in the standard JSON messages delivered to other endpoints.
-      #   * must be ASCII text that begins with a letter, number or 
+      #   * must be ASCII text that begins with a letter, number or
       #     punctuation mark
       #   * must not include line breaks or control characters
       #   * and must be less than 100 characters long
-      # @option options [String] :http - Message to use when sending to an 
+      # @option options [String] :http - Message to use when sending to an
       #   HTTP endpoint.
-      # @option options [String] :https - Message to use when sending to an 
+      # @option options [String] :https - Message to use when sending to an
       #   HTTPS endpoint.
-      # @option options [String] :email - Message to use when sending to an 
+      # @option options [String] :email - Message to use when sending to an
       #   email endpoint.
-      # @option options [String] :email_json - Message to use when sending 
+      # @option options [String] :email_json - Message to use when sending
       #   to an email json endpoint.
-      # @option options [String] :sqs - Message to use when sending to an 
+      # @option options [String] :sqs - Message to use when sending to an
       #   SQS endpoint.
       # @return [String] Returns the ID of the message that was sent.
       def publish default_message, options = {}
@@ -273,7 +273,7 @@ module AWS
         publish_opts[:message_structure] = 'json'
         publish_opts[:subject] = options[:subject] if options[:subject]
         publish_opts[:topic_arn] = arn
-        
+
         response = client.publish(publish_opts)
 
         response[:message_id]
@@ -298,7 +298,7 @@ module AWS
       #   * +:num_subscriptions_confirmed+
       #   * +:num_subscriptions_pending+
       #   * +:num_subscriptions_deleted+
-      #   
+      #
       def to_h
         attributes = client.get_topic_attributes(:topic_arn => arn).attributes
         {
@@ -370,13 +370,13 @@ module AWS
           unless opts[:update_policy] == false
             policy = endpoint.policy || SQS::Policy.new
             policy.allow(
-              :principal => :any, 
-              :actions => [:send_message], 
+              :principal => :any,
+              :actions => [:send_message],
               :resources => [endpoint]
             ).where(:source_arn).is(arn)
             endpoint.policy = policy
           end
-          
+
           { :protocol => 'sqs', :endpoint => endpoint.arn }
 
         when endpoint =~ /^arn:/

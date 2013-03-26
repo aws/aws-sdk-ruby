@@ -43,7 +43,7 @@ module AWS
 
       end
 
-      # @return [String] The opaque string used as a handle on the task. 
+      # @return [String] The opaque string used as a handle on the task.
       attr_reader :task_token
 
       # @return [String] The unique identifier of this task.
@@ -52,11 +52,11 @@ module AWS
       # @return [Domain] The domain this task was scheduled in.
       attr_reader :domain
 
-      # @return [Integer] The id of the ActivityTaskStarted event recorded 
+      # @return [Integer] The id of the ActivityTaskStarted event recorded
       #   in the history.
       attr_reader :started_event_id
 
-      # @return [String,nil] The input provided when the activity task was 
+      # @return [String,nil] The input provided when the activity task was
       #   scheduled.
       attr_reader :input
 
@@ -79,7 +79,7 @@ module AWS
       #
       # If you are processing the activity task inside a block passed
       # to one of the polling methods in {ActivityTaskCollection}
-      # then untrapped CancelRequestedErrors are caught 
+      # then untrapped CancelRequestedErrors are caught
       # and responded to automatically.
       #
       #   domain.activity_tasks.poll('task-list') do |task|
@@ -103,7 +103,7 @@ module AWS
       #      task.respond_canceled! :details => '...'
       #
       #   end
-      #   
+      #
       # @param [Hash] options
       #
       # @option options [String] :details (nil)

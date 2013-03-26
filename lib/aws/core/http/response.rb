@@ -42,7 +42,7 @@ module AWS
           @network_error ? true : false
         end
 
-        # The #network_error attribute was previously #timeout, aliasing 
+        # The #network_error attribute was previously #timeout, aliasing
         # for backwards compatability
         alias_method :timeout=, :network_error=
 

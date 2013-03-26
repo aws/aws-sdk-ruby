@@ -574,8 +574,8 @@ module AWS
         it 'should not rescue other exceptions' do
           client.stub(:get_queue_attributes).
             and_raise(SQS::Errors::InvalidParameterValue)
-          lambda { 
-            queue.exists? 
+          lambda {
+            queue.exists?
           }.should raise_error(SQS::Errors::InvalidParameterValue)
         end
 
@@ -808,13 +808,13 @@ module AWS
           queue.policy = nil
 
         end
-        
+
       end
 
       context '#batch_delete' do
 
         let(:response) { client.stub_for(:delete_message_batch) }
-        
+
         before(:each) do
           client.stub(:delete_message_batch).and_return(response)
         end
@@ -859,7 +859,7 @@ module AWS
         end
 
         it 'raises an error if some of the messages in the batch fail' do
-          
+
           failed = []
           failed << {
             :code => 'error-code-1',
@@ -925,7 +925,7 @@ module AWS
           queue.batch_change_visibility(5, 'h1', 'h2')
 
         end
-        
+
         it 'accepts an array of values' do
 
           client.should_receive(:change_message_visibility_batch).with(
@@ -981,7 +981,7 @@ module AWS
         end
 
         it 'raises an error if any of the messages in the batch fail' do
-           
+
           failed = []
           failed << {
             :code => 'error-code-1',
@@ -1055,7 +1055,7 @@ module AWS
           end
 
           it 'returns an array of sent messages' do
-            
+
             sent = []
             sent << {
               :message_id => 'msg-1-id',
@@ -1079,7 +1079,7 @@ module AWS
           end
 
           it 'raises a BatchSendError if any of the messages failed' do
-            
+
             sent = []
             sent << {
               :message_id => 'msg-1-id',
@@ -1089,7 +1089,7 @@ module AWS
               :message_id => 'msg-2-id',
               :md5_of_message_body => 'msg-2-md5',
             }
-            
+
             failed = []
             failed << {
               :code => 'error-code-1',

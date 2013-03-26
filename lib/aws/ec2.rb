@@ -120,7 +120,7 @@ module AWS
   #   instance.ip_address                # 1.1.1.1
   #
   # When you are done with an elastic IP address you should release it.
-  # In the following example we release all elastic IP addresses that are 
+  # In the following example we release all elastic IP addresses that are
   # not currently associated with an instance:
   #
   #   ec2.select{|ip| !ip.associated? }.each(&:release)
@@ -368,7 +368,7 @@ module AWS
       SnapshotCollection.new(:config => config)
     end
 
-    # @return [VPCCollection] A collection representing 
+    # @return [VPCCollection] A collection representing
     #   all VPCs in your account.
     def vpcs
       VPCCollection.new(:config => config)

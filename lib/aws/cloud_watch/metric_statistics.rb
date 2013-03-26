@@ -33,7 +33,7 @@ module AWS
     #   end
     #
     # @see Core::Collection
-    # 
+    #
     class MetricStatistics
 
       include Core::Collection::Simple

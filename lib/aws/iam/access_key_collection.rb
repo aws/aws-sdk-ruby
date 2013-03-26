@@ -25,13 +25,13 @@ module AWS
     #
     #   # for an iam user
     #   user_access_keys = iam.users['johndoe'].access_keys.create
-    #  
+    #
     # == Secret
     #
     # Make sure after creating an access to retrieve the secret access key
     # and save it somewhere safe.
     #
-    #   access_keys = iam.access_keys.create   
+    #   access_keys = iam.access_keys.create
     #   secret = access_keys.secret
     #
     # If you try to access the secret on an access key that was not newly
@@ -54,8 +54,8 @@ module AWS
         @user ? super(@user, options) : super(options)
       end
 
-      # @return [User,nil] Returns the user these accesss keys belong to. 
-      #   If this returns +nil+ then these access keys belong to the 
+      # @return [User,nil] Returns the user these accesss keys belong to.
+      #   If this returns +nil+ then these access keys belong to the
       #   AWS account.
       attr_reader :user
 
@@ -68,7 +68,7 @@ module AWS
 
         AccessKey.new_from(:create_access_key, resp.access_key,
           resp.access_key.access_key_id, new_options)
-        
+
       end
 
       # @param [String] access_key_id The ID of the access key.
@@ -79,7 +79,7 @@ module AWS
       end
 
       # Deletes all of the access keys from this collection.
-      # 
+      #
       #   iam.users['someuser'].access_keys.clear
       #
       # @return [nil]
@@ -88,15 +88,15 @@ module AWS
         nil
       end
 
-      # Yields once for each access key.  You can limit the number of 
+      # Yields once for each access key.  You can limit the number of
       # access keys yielded using +:limit+.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of access keys
       #   to yield.
-      # @option options [Integer] :batch_size The maximum number of 
+      # @option options [Integer] :batch_size The maximum number of
       #   access keys received each service reqeust.
-      # @yieldparam [AccessKey] access_key 
+      # @yieldparam [AccessKey] access_key
       # @return [nil]
       def each options = {}, &block
         each_options = options.dup

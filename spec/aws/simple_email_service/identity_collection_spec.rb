@@ -27,7 +27,7 @@ module AWS
       context '#verify' do
 
         context 'email addresses' do
-          
+
           it 'calls #verify_email_identity on the client' do
             client.should_receive(:verify_email_identity).
               with(:email_address => 'email@domain.com').
@@ -53,7 +53,7 @@ module AWS
             resp.data[:verification_token] = 'TOKEN'
             client.stub(:verify_domain_identity).and_return(resp)
           end
-          
+
           it 'calls #verify_email_identity on the client' do
             client.should_receive(:verify_domain_identity).
               with(:domain => 'domain.com').
@@ -87,7 +87,7 @@ module AWS
           i = identities['abc']
           i.identity.should == 'abc'
         end
-        
+
         it 'returns an identity with the correct configuration' do
           identities['abc'].config.should == config
         end

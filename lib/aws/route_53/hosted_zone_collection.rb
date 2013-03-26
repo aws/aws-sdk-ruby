@@ -83,7 +83,7 @@ module AWS
         resp.data[:hosted_zones].each do |details|
           hosted_zone = HostedZone.new_from(
             :list_hosted_zones,
-            details, 
+            details,
             details[:id],
             :config => config)
 

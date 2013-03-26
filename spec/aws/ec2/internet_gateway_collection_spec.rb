@@ -66,7 +66,7 @@ module AWS
           let(:response) { client.stub_for(:create_network_acl) }
 
           before(:each) do
-            response.data[:internet_gateway] = { 
+            response.data[:internet_gateway] = {
               :internet_gateway_id => 'igw-123',
             }
             client.stub(:create_internet_gateway).and_return(response)

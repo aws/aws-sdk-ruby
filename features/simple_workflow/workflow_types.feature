@@ -19,7 +19,7 @@ Feature: Managing Workflow Types in Simple Workflow
   Scenario: Register a workflow type
     Given I register a simple workflow domain
     When I register a workflow type named "foo" with the version "bar" with:
-    | ATTR_NAME                                | VALUE     | 
+    | ATTR_NAME                                | VALUE     |
     | default_child_policy                     | terminate |
     | default_execution_start_to_close_timeout | 12345678  |
     | default_task_start_to_close_timeout      | none      |
@@ -27,7 +27,7 @@ Feature: Managing Workflow Types in Simple Workflow
     | description                              | desc      |
     And I get the workflow type by name and version
     Then the workflow type should have the following attributes
-    | ATTR_NAME                                | VALUE     | 
+    | ATTR_NAME                                | VALUE     |
     | default_child_policy                     | terminate |
     | default_execution_start_to_close_timeout | 12345678  |
     | default_task_start_to_close_timeout      | none      |

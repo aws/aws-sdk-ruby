@@ -128,7 +128,7 @@ Feature: SQS Queues
     | abc     |
     | mno     |
     | xyz     |
-    When I receive 3 messages 
+    When I receive 3 messages
     And I delete the messages
     Then a request should have been made like:
     | TYPE  | NAME   | VALUE              |

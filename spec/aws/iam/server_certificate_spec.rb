@@ -126,7 +126,7 @@ module AWS
 
           let(:response) { client.stub_for(:list_server_certificates) }
           before(:each) do
-            response.data[:server_certificate_metadata_list] = 
+            response.data[:server_certificate_metadata_list] =
               [certificate_metadata]
           end
 

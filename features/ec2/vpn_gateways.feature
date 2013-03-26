@@ -16,12 +16,12 @@
 Feature: EC2 VPC VPN Gateways
 
   Scenario: Create a vpn gateway
-    When I create a vpn gateway 
+    When I create a vpn gateway
     Then the vpn gateway should exist
     And the vpn gateway state should eventually be "available"
 
   Scenario: Delete a vpn gateway
-    Given I create a vpn gateway 
+    Given I create a vpn gateway
     When I delete the vpn gateway
     Then the vpn gateway state should eventually be "deleted"
 

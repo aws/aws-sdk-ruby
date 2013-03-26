@@ -18,7 +18,7 @@ module AWS
     module XML
       module SaxHandlers
         class LibXML
-          
+
           include FrameStack
           include ::LibXML::XML::SaxParser::Callbacks
 
@@ -29,7 +29,7 @@ module AWS
           end
 
           def on_start_element_ns element_name, attributes, *ignore
-            start_element(element_name, attributes) 
+            start_element(element_name, attributes)
           end
 
           def on_end_element_ns *ignore

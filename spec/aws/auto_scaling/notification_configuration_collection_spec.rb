@@ -23,8 +23,8 @@ module AWS
 
       let(:group) { Group.new('group-name', :config => config) }
 
-      let(:configurations) { 
-        NotificationConfigurationCollection.new(:group => group) 
+      let(:configurations) {
+        NotificationConfigurationCollection.new(:group => group)
       }
 
       context '#group' do
@@ -54,7 +54,7 @@ module AWS
             :notification_types => %w(type))
 
           configurations.create(
-            :topic => 'topic-arn', 
+            :topic => 'topic-arn',
             :types => ['type'])
 
         end

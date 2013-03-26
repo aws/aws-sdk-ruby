@@ -21,7 +21,7 @@ module AWS
     #   The name or unique identifier that corresponds to a physical instance
     #   ID of a resource supported by AWS CloudFormation.
     #
-    # @attr_reader [Symbol] resource_status 
+    # @attr_reader [Symbol] resource_status
     #   Current status of the resource.
     #
     # @attr_reader [String,nil] resource_status_reason
@@ -40,7 +40,7 @@ module AWS
     #   When the status was last updated.
     #
     # @attr_reader [String,nil] metadata
-    #   The JSON format content of the Metadata attribute declared for the 
+    #   The JSON format content of the Metadata attribute declared for the
     #   resource.
     #
     class StackResource < Core::Resource
@@ -55,7 +55,7 @@ module AWS
       # @return [Stack]
       attr_reader :stack
 
-      # @return [String] The logical name of the resource specified in 
+      # @return [String] The logical name of the resource specified in
       #   the template.
       attr_reader :logical_resource_id
 
@@ -85,12 +85,12 @@ module AWS
 
       # this operation returns all attributes
       populates_from(:describe_stack_resource) do |resp|
-        resp.stack_resource_detail if 
+        resp.stack_resource_detail if
           resp.stack_resource_detail.logical_resource_id == logical_resource_id
       end
 
       # This method provides ALL attributes except :metadata.  The
-      # :last_updated_timestamp attribute is also provided by 
+      # :last_updated_timestamp attribute is also provided by
       # a differnt name (:timestamp instead of :last_updated_timestamp).
       provider(:describe_stack_resources) do |provider|
         provider.find do |resp|
@@ -109,7 +109,7 @@ module AWS
       end
 
       def get_resource attribute = nil
-        client.describe_stack_resource(resource_options)  
+        client.describe_stack_resource(resource_options)
       end
 
     end

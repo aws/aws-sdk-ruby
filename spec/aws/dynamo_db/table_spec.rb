@@ -44,14 +44,14 @@ module AWS
 
       context 'description' do
 
-        let(:resp) { 
+        let(:resp) {
           double("response",
             :request_type => :describe_table,
             :data => { "Table" => response_table }
           )
         }
 
-        let(:response_table) {{ 
+        let(:response_table) {{
           "TableName" => "MyTable",
           "ProvisionedThroughput" => {},
           "KeySchema" => {},
@@ -456,7 +456,7 @@ module AWS
 
       context 'batch write methods' do
 
-        let(:resp) { 
+        let(:resp) {
           r = client.stub_for(:batch_write_item)
           r.data['UnprocessedItems'] = {}
           r

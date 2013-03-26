@@ -14,7 +14,7 @@
 module AWS
   class CloudFormation
     class StackOutput
-      
+
       # @param [Stack] stack
       # @param [String] key
       # @param [String] value

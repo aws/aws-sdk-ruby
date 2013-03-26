@@ -194,7 +194,7 @@ def requests_matching requests, table
 end
 
 def table_formatted_requests requests
-#   tables = requests.collect do |req| 
+#   tables = requests.collect do |req|
 #     table = []
 #     table << "|TYPE|NAME|VALUE|"
 #     table << "|http|verb|#{req.http_method}|"
@@ -214,7 +214,7 @@ def table_formatted_requests requests
 #     Cucumber::Ast::Table.parse(table.join("\n"), nil, nil)
 #   end
 #   tables.collect{|t| t.to_s(:color => false, :prefixes => Hash.new('')) }
-  tables = requests.collect do |req| 
+  tables = requests.collect do |req|
     table = []
     if req.headers["content-type"] and req.headers["content-type"].include?("json")
       table << %w(TYPE NAME VALUE)

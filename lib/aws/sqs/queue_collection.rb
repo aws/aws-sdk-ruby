@@ -59,18 +59,18 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [Integer] :visibility_timeout (30) The number of 
-      #   seconds a message received from a queue will be invisible to 
+      # @option options [Integer] :visibility_timeout (30) The number of
+      #   seconds a message received from a queue will be invisible to
       #   others when they ask to receive messages.
       #
       # @option options [Policy] :policy A policy object or policy desription
       #   (a json string).
       #
       # @option options [Integer] :maximum_message_size (65536) The maximum
-      #   number of bytes a message can contain before Amazon SQS rejects 
+      #   number of bytes a message can contain before Amazon SQS rejects
       #   it.
       #
-      # @option options [Integer] :delay_seconds The time in seconds that 
+      # @option options [Integer] :delay_seconds The time in seconds that
       #   the delivery of all messages in the queue will be delayed.
       #   This can be overriden when sending a message to the queue.
       #
@@ -86,7 +86,7 @@ module AWS
         # in the 2011-10-01 update -- this allows us to not break existing
         # customers.
         if options[:default_visibility_timeout]
-          options[:visibility_timeout] = 
+          options[:visibility_timeout] =
             options.delete(:default_visibility_timeout)
         end
 
@@ -135,8 +135,8 @@ module AWS
 
       # Returns the url for the given queue.
       #
-      #   sqs.queues.url_for('my-queue') 
-      #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue" 
+      #   sqs.queues.url_for('my-queue')
+      #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue"
       #
       # @param [String] queue_name The name of the queue you need a URL for.
       #

@@ -56,7 +56,7 @@ module AWS
     #
     #   # updating a group's tags
     #   group.update(:tags => tags)
-    # 
+    #
     class TagCollection
 
       include Core::Collection::WithLimitAndNextToken
@@ -66,12 +66,12 @@ module AWS
         @filters = options.delete(:filters) || []
         super
       end
-      
+
       # Filters the tags by the given filter name and value(s).
       #
       #   # return tags with the key "role" and the value "webserver"
       #   auto_scaling.tags.filter(:key, 'role').filer(:value, 'webserver')
-      # 
+      #
       # @param [Symbol] name Valid filter names include:
       #
       #   * :key

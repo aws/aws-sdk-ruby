@@ -101,7 +101,7 @@ module AWS
         dimensions += dimensions.flatten
         filter(:dimensions, dimensions)
       end
-      
+
       protected
 
       def _each_item next_token, options = {}, &block
@@ -113,7 +113,7 @@ module AWS
         resp.data[:metrics].each do |details|
 
           metric = Metric.new_from(
-            :list_metrics, details, 
+            :list_metrics, details,
             details[:namespace],
             details[:metric_name],
             details.merge(:config => config))

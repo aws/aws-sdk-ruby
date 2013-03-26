@@ -126,7 +126,7 @@ module AWS
 
           it 'accepts an availability zone name' do
             client.should_receive(:create_subnet).with(
-                :vpc_id => vpc.id, 
+                :vpc_id => vpc.id,
                 :cidr_block => 'cidr-block',
                 :availability_zone => 'abc'
               ).and_return(response)
@@ -136,7 +136,7 @@ module AWS
 
           it 'accepts an availability zone' do
             client.should_receive(:create_subnet).with(
-                :vpc_id => vpc.id, 
+                :vpc_id => vpc.id,
                 :cidr_block => 'cidr-block',
                 :availability_zone => 'az-name'
               ).and_return(response)

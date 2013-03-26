@@ -31,7 +31,7 @@ class Net::HTTP::ConnectionPool
   # == Making Requests
   #
   # Given a connection object, you call #request.  {Connection#request}
-  # yields Net::HTTPResponse objects (when given a block).  You should 
+  # yields Net::HTTPResponse objects (when given a block).  You should
   # read the response (via #body or #read_body) before the end of the
   # block.
   #
@@ -51,7 +51,7 @@ class Net::HTTP::ConnectionPool
 
       @port = options.key?(:port) ? options[:port] : (options[:ssl] ? 443 : 80)
 
-      @ssl = options.key?(:ssl) ? options[:ssl] : (port == 443) 
+      @ssl = options.key?(:ssl) ? options[:ssl] : (port == 443)
 
       @ssl_verify_peer = options.key?(:ssl_verify_peer) ?
         options[:ssl_verify_peer] : true
@@ -155,11 +155,11 @@ class Net::HTTP::ConnectionPool
     #   end
     #
     # If you omit the block when calling #request, you will not be able
-    # to read the response.  This method never returns the 
+    # to read the response.  This method never returns the
     # Net::HTTPResponse generated.
     #
     # This method passes *args to Net::HTTPSession#request.  See the
-    # Ruby standard lib documentation for more documentation about 
+    # Ruby standard lib documentation for more documentation about
     # accepted arguments.
     #
     # @note You should read the yielded response object before the end

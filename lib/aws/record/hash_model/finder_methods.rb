@@ -24,21 +24,21 @@ module AWS
         #   was no data found for the given id.
         # @return [Record::HashModel] Returns the record with the given id.
         def find_by_id id, options = {}
-  
+
           table = dynamo_db_table(options[:shard])
 
           data = table.items[id].attributes.to_h
-  
+
           raise RecordNotFound, "no data found for id: #{id}" if data.empty?
-  
+
           obj = self.new(:shard => table)
           obj.send(:hydrate, id, data)
           obj
-  
+
         end
         alias_method :[], :find_by_id
-  
-        # Finds records in Amazon DynamoDB and returns them as objects of 
+
+        # Finds records in Amazon DynamoDB and returns them as objects of
         # the current class.
         #
         # Finding +:all+ returns an enumerable scope object
@@ -70,13 +70,13 @@ module AWS
         #     and array is returned of records.  When finding +:first+ then
         #     +nil+ or a single record will be returned.
         #   @param [Hash] options
-        #   @option options [Integer] :shard The shard name of the Amazon 
+        #   @option options [Integer] :shard The shard name of the Amazon
         #     DynamoDB table to search.
         #   @option options [Integer] :limit The max number of records to fetch.
         def find *args
           new_scope.find(*args)
         end
-  
+
         # Returns a chainable scope object that restricts further scopes to a
         # particular table.
         #
@@ -90,7 +90,7 @@ module AWS
           new_scope.shard(shard_name)
         end
         alias_method :domain, :shard # backwards compat
-  
+
         # Returns an enumerable scope object represents all records.
         #
         #   Book.all.each do |book|
@@ -114,7 +114,7 @@ module AWS
         def each &block
           all.each(&block)
         end
-  
+
         # Counts records Amazon DynamoDB.
         #
         #   class Product < AWS::Record::HashModel
@@ -139,23 +139,23 @@ module AWS
         # @param [Hash] options
         #
         # @option [String] :shard Which shard to count records in.
-        # 
+        #
         # @return [Integer] The count of records in the table.
         #
         def count options = {}
           new_scope.count(options)
         end
         alias_method :size, :count
-  
+
         # @return [Object,nil] Returns the first record found.  If there were
         #   no records found, nil is returned.
         def first options = {}
           new_scope.first(options)
         end
-  
+
         # The maximum number of records to return.  By default, all records
         # matching the where conditions will be returned from a find.
-        # 
+        #
         #   People.limit(10).each {|person| ... }
         #
         # Limit can be chained with other scope modifiers:

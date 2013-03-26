@@ -59,7 +59,7 @@ module AWS
       alias_method :id, :network_interface_id
 
       attribute :vpc_id, :static => true
-    
+
       attribute :subnet_id, :static => true
 
       mutable_attribute :description
@@ -75,7 +75,7 @@ module AWS
       attribute :mac_address, :static => true
 
       attribute :availability_zone_name,
-        :from => :availability_zone, 
+        :from => :availability_zone,
         :static => true
 
       mutable_attribute :source_dest_check
@@ -86,7 +86,7 @@ module AWS
 
       alias_method :requester_managed?, :requester_managed
 
-      attribute :association do 
+      attribute :association do
         translates_output {|assoc| assoc.to_hash }
       end
 
@@ -172,7 +172,7 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [Integer] :device_index (1) The index of the device 
+      # @option options [Integer] :device_index (1) The index of the device
       #  for the network interface attachment on the instance.  Defaults to 1.
       #
       # @return [nil]

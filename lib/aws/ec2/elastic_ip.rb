@@ -14,23 +14,23 @@
 module AWS
   class EC2
 
-    # @attr_reader [String,nil] instance_id Returns the instance id if 
+    # @attr_reader [String,nil] instance_id Returns the instance id if
     #   assigned to an EC2 instance, nil otherwise.
     #
     # @attr_reader [String,nil] allocation_id
-    #   The ID representing the allocation of the address for use with Amazon 
+    #   The ID representing the allocation of the address for use with Amazon
     #   VPC.
     #
-    # @attr_reader [String] domain Indicates whether this elastic ip address 
+    # @attr_reader [String] domain Indicates whether this elastic ip address
     #   is for EC2 instances ('standard') or VPC instances ('vpc').
     #
-    # @attr_reader [String,nil] association_id The ID of the association 
+    # @attr_reader [String,nil] association_id The ID of the association
     #   between this elastic ip address and an EC2 VPC instance (VPC only).
     #
-    # @attr_reader [String,nil] network_interface_id The ID of the network 
+    # @attr_reader [String,nil] network_interface_id The ID of the network
     #   interface (VPC only).
     #
-    # @attr_reader [String,nil] network_interface_owner_id 
+    # @attr_reader [String,nil] network_interface_owner_id
     #   The ID of the AWS account that owns the network interface (VPC only).
     #
     class ElasticIp < Resource
@@ -95,7 +95,7 @@ module AWS
 
       # Releases the elastic IP address.
       #
-      # (For non-VPC elastic ips) Releasing an IP address automatically 
+      # (For non-VPC elastic ips) Releasing an IP address automatically
       # disassociates it from any instance it's associated with.
       #
       # @return [nil]
@@ -122,7 +122,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [String,Instance] :instance The id of an instance
-      #   or an {Instance} object.  
+      #   or an {Instance} object.
       #
       # @option options [String,NetworkInterface] :network_interface The id
       #   of a network interface or a {NetworkInterface} object.

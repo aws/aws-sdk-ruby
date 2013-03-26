@@ -32,12 +32,12 @@ module AWS
   # A 500 level error typically indicates the service is having an issue.
   #
   # Requests that generate service errors are automatically retried with
-  # an exponential backoff.  If the service still fails to respond with 
+  # an exponential backoff.  If the service still fails to respond with
   # a 200 after 3 retries the error is raised.
   #
   module Errors
 
-    # Base class for all errors returned by the service.  
+    # Base class for all errors returned by the service.
     class Base < StandardError
 
       # @overload new(error_message)
@@ -133,7 +133,7 @@ a few different ways:
 
 * Export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to ENV
 
-* On EC2 you can run instances with an IAM instance profile and credentials 
+* On EC2 you can run instances with an IAM instance profile and credentials
   will be auto loaded from the instance metadata service on those
   instances.
 
@@ -143,7 +143,7 @@ a few different ways:
 
 = Ruby on Rails
 
-In a Ruby on Rails application you may also specify your credentials in 
+In a Ruby on Rails application you may also specify your credentials in
 the following ways:
 
 * Via a config initializer script using any of the methods mentioned above

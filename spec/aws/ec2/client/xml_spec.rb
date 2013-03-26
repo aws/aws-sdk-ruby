@@ -217,7 +217,7 @@ module AWS
         end
 
         it 'should have a reservation_index' do
-          resp.reservation_index.keys.sort.should == 
+          resp.reservation_index.keys.sort.should ==
             ["i-123", "i-321", "i-456", "i-654"]
           resp.reservation_index.each do |id, reservation|
             reservation.instances_set.map { |i| i.instance_id }.

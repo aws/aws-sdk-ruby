@@ -13,7 +13,7 @@
 
 module AWS
   module Record
-    
+
     # @private
     class BlockValidator < Validator
 

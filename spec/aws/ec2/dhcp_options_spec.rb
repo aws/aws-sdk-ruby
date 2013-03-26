@@ -48,7 +48,7 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls #delete_dhcp_options on the client' do
           client.should_receive(:delete_dhcp_options).
             with(:dhcp_options_id => dhcp_options.id)
@@ -76,7 +76,7 @@ module AWS
       end
 
       context 'existing' do
-        
+
         let(:response) { client.stub_for(:describe_dhcp_options) }
 
         before(:each) do
@@ -84,22 +84,22 @@ module AWS
             {
               :dhcp_options_id => dhcp_options.id,
               :dhcp_configuration_set => [
-                { 
-                  :key => 'domain-name', 
-                  :value_set => [{ :value => 'a' }] 
-                }, { 
-                  :key => 'domain-name-servers', 
+                {
+                  :key => 'domain-name',
+                  :value_set => [{ :value => 'a' }]
+                }, {
+                  :key => 'domain-name-servers',
                   :value_set => [{ :value => 'b' }, { :value => 'c' }]
-                }, { 
+                }, {
                   :key => 'ntp-servers',
                   :value_set => [{ :value => 'd' }, { :value => 'e' }]
-                }, { 
+                }, {
                   :key => 'netbios-name-servers',
                   :value_set => [{ :value => 'f' }, { :value => 'g' }]
                 },
-                { 
-                  :key => 'netbios-node-type', 
-                  :value_set => [{ :value => '2' }] 
+                {
+                  :key => 'netbios-node-type',
+                  :value_set => [{ :value => '2' }]
                 },
               ]
             }

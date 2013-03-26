@@ -28,7 +28,7 @@ Given /^I put data for the metric$/ do
 end
 
 Then /^I should be able to get statistics for the metric$/ do
-  eventually do 
+  eventually do
     now = Time.now
     @statistics = @metric.statistics({
       :start_time => now - 3600,

@@ -33,11 +33,11 @@ module AWS
     # If you know the id of an activity you can get a reference to it:
     #
     #   activity = auto_scaling.activities['activity-id']
-    #   
+    #
     class ActivityCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
+
       # @private
       def initialize options = {}
         @group = options[:group]
@@ -53,7 +53,7 @@ module AWS
       def [] activity_id
         Activity.new(activity_id, :config => config)
       end
-      
+
       protected
 
       def _each_item next_token, limit, options = {}, &block
@@ -64,13 +64,13 @@ module AWS
 
         resp = client.describe_scaling_activities(options)
         resp.activities.each do |details|
-          
+
           activity = Activity.new_from(
-            :describe_scaling_activities, details, 
+            :describe_scaling_activities, details,
             details.activity_id, :config => config)
 
           yield(activity)
-          
+
         end
 
         resp.data[:next_token]

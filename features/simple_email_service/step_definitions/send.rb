@@ -18,7 +18,7 @@ When /^I send email to a verified email address$/ do
       :subject => 'A Sample Email',
       :from => 'noreply@example.com',
       :to => 'noreply@example.com',
-      :body_text => 'sample text') 
+      :body_text => 'sample text')
   rescue => e
     e.message.should match(/Email address is not verified/)
   end

@@ -72,7 +72,7 @@ module AWS
       # @private
       protected
       def wrong_number exactly, got
-        msg = options[:wrong_number] || 
+        msg = options[:wrong_number] ||
           "has the wrong number of values (should have %{exactly})"
         interpolate(msg, :exactly => exactly, :count => got)
       end
@@ -93,7 +93,7 @@ module AWS
 
       protected
       def interpolate message_with_placeholders, values
-        msg = message_with_placeholders.dup 
+        msg = message_with_placeholders.dup
         values.each_pair do |key,value|
           msg.gsub!(/%\{#{key}\}/, value.to_s)
         end

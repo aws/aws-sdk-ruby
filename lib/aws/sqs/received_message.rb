@@ -62,7 +62,7 @@ module AWS
       # An easy way to work with SNS messages is to call this method:
       #
       #   sns_msg = message.as_sns_message
-      # 
+      #
       #   sns_msg.topic
       #   #=> <AWS::SNS::Topic ...>
       #
@@ -98,7 +98,7 @@ module AWS
       # @return [nil]
       def delete
         client.delete_message(
-          :queue_url => queue.url, 
+          :queue_url => queue.url,
           :receipt_handle => handle)
         nil
       end

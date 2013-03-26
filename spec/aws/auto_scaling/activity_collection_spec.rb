@@ -24,7 +24,7 @@ module AWS
       let(:activities) { ActivityCollection.new(:config => config) }
 
       context '#[]' do
-        
+
         it 'returns an activity' do
           activity = activities['id']
           activity.should be_an(Activity)

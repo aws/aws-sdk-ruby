@@ -131,7 +131,7 @@ module AWS
           client.should_receive(:delete_scheduled_action).with(
             :scheduled_action_name => action.name,
             :auto_scaling_group_name => 'group')
-          action.delete 
+          action.delete
         end
 
       end

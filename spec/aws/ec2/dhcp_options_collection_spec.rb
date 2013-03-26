@@ -79,7 +79,7 @@ module AWS
               and_return(response)
             dhcp_options.create
           end
-          
+
           it 'accepts a domain name' do
             client.should_receive(:create_dhcp_options).with(
               :dhcp_configurations => [

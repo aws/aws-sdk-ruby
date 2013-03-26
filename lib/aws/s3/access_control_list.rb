@@ -137,7 +137,7 @@ module AWS
 
         # @private
         def type_for_attr(attr)
-          { 
+          {
             :amazon_customer_email => "AmazonCustomerByEmail",
             :canonical_user_id => "CanonicalUser",
             :group_uri => "Group",

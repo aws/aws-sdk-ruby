@@ -15,25 +15,25 @@
 module AWS
   class CloudFormation
 
-    # @attr_reader [String] template Returns the stack's template as a JSON 
+    # @attr_reader [String] template Returns the stack's template as a JSON
     #   string.
     #
     # @attr_reader [Time] creation_time The time the stack was created.
     #
-    # @attr_reader [Time,nil] last_updated_time The time the stack was 
+    # @attr_reader [Time,nil] last_updated_time The time the stack was
     #   last updated.
     #
     # @attr_reader [String] stack_id Unique stack identifier.
     #
     # @attr_reader [String] status The status of the stack.
     #
-    # @attr_reader [String] status_reason Success/Failure message 
+    # @attr_reader [String] status_reason Success/Failure message
     #   associated with the +status+.
     #
-    # @attr_reader [Array<String>] capabilities The capabilities 
+    # @attr_reader [Array<String>] capabilities The capabilities
     #   allowed in the stack.
     #
-    # @attr_reader [String] description User defined description 
+    # @attr_reader [String] description User defined description
     #   associated with the stack.
     #
     # @attr_reader [Boolean] disable_rollback Specifies if the stack
@@ -96,7 +96,7 @@ module AWS
 
       protected :output_details
 
-      describe_attribute :parameters do 
+      describe_attribute :parameters do
         translates_output do |params|
           params.inject({}) do |hash,param|
             hash.merge(param[:parameter_key] => param[:parameter_value])
@@ -139,7 +139,7 @@ module AWS
       end
 
       # Returns a stack resource collection that enumerates all resources
-      # for this stack.  
+      # for this stack.
       #
       #   stack.resources.each do |resource|
       #     puts "#{resource.resource_type}: #{resource.physical_resource_id}"
@@ -174,7 +174,7 @@ module AWS
 
       # @param [Hash] options
       #
-      # @option options [String,URI,S3::S3Object,Object] :template 
+      # @option options [String,URI,S3::S3Object,Object] :template
       #   A new stack template.  This may be provided in a number of formats
       #   including:
       #
@@ -188,10 +188,10 @@ module AWS
       #   input parameters of the new stack.
       #
       # @option options[Array<String>] :capabilities The list of capabilities
-      #   that you want to allow in the stack. If your stack contains IAM 
-      #   resources, you must specify the CAPABILITY_IAM value for this 
-      #   parameter; otherwise, this action returns an 
-      #   InsufficientCapabilities error. IAM resources are the following: 
+      #   that you want to allow in the stack. If your stack contains IAM
+      #   resources, you must specify the CAPABILITY_IAM value for this
+      #   parameter; otherwise, this action returns an
+      #   InsufficientCapabilities error. IAM resources are the following:
       #
       #   * AWS::IAM::AccessKey
       #   * AWS::IAM::Group
@@ -215,7 +215,7 @@ module AWS
 
       # @return (see CloudFormation#estimate_template_cost)
       def estimate_template_cost
-        cloud_formation = CloudFormation.new(:config => config)  
+        cloud_formation = CloudFormation.new(:config => config)
         cloud_formation.estimate_template_cost(template, parameters)
       end
 

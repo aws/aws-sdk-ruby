@@ -102,9 +102,9 @@ module AWS
 
       # @return [Boolean] Returns true if the domains are the same.
       def == other
-        other.is_a?(Domain) and 
+        other.is_a?(Domain) and
         other.name == name and
-        other.config.simple_db_endpoint == config.simple_db_endpoint 
+        other.config.simple_db_endpoint == config.simple_db_endpoint
       end
       alias_method :eql?, :==
 

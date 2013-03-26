@@ -32,7 +32,7 @@ module AWS
       #   network interface.
       #
       # @option options [Array<SecurityGroup>,Array<String>] :security_groups
-      #   A list of security groups (or security group id strings) that 
+      #   A list of security groups (or security group id strings) that
       #   should be used by this network interface.
       #
       # @return [NetworkInterface]
@@ -51,12 +51,12 @@ module AWS
 
         groups = groups_options(options)
         client_opts[:groups] = groups if groups
-        
+
         resp = client.create_network_interface(client_opts)
 
         NetworkInterface.new_from(:create_network_interface,
-          resp.network_interface, 
-          resp.network_interface.network_interface_id, 
+          resp.network_interface,
+          resp.network_interface.network_interface_id,
           :config => config)
 
       end
@@ -90,7 +90,7 @@ module AWS
         resp.network_interface_set.each do |n|
 
           network_interface = NetworkInterface.new_from(
-            :describe_network_interfaces, n, 
+            :describe_network_interfaces, n,
             n.network_interface_id, :config => config)
 
           yield(network_interface)

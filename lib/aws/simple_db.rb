@@ -18,7 +18,7 @@ module AWS
 
   # This class is the starting point for working with Amazon SimpleDB.
   #
-  # To use Amazon SimpleDB you must first 
+  # To use Amazon SimpleDB you must first
   # {sign up here}[http://aws.amazon.com/simpledb/].
   #
   # For more information about Amazon SimpleDB:
@@ -28,13 +28,13 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the SimpleDB interface:
   #
   #   sdb = AWS::SimpleDB.new(
@@ -49,12 +49,12 @@ module AWS
   #
   # These are modeled with the following classes:
   #
-  # * {DomainCollection} 
-  # * {Domain} 
-  # * {ItemCollection} 
-  # * {Item} 
-  # * {AttributeCollection} 
-  # * {Attribute} 
+  # * {DomainCollection}
+  # * {Domain}
+  # * {ItemCollection}
+  # * {Item}
+  # * {AttributeCollection}
+  # * {Attribute}
   #
   # The collection classes listed above make it easy to enumerate,
   # the objects they represent.  They also make it easy to perform
@@ -73,7 +73,7 @@ module AWS
   #
   # = Items & Attributes
   #
-  # Items exist in SimpleDB when they have attributes.  You can delete an 
+  # Items exist in SimpleDB when they have attributes.  You can delete an
   # item by removing all of its attributes.  You create an item by adding
   # an attribute to it.
   #
@@ -148,7 +148,7 @@ module AWS
     autoload :Domain, 'aws/simple_db/domain'
     autoload :DomainCollection, 'aws/simple_db/domain_collection'
     autoload :DomainMetadata, 'aws/simple_db/domain_metadata'
-    autoload :Errors, 'aws/simple_db/errors' 
+    autoload :Errors, 'aws/simple_db/errors'
     autoload :ExpectConditionOption, 'aws/simple_db/expect_condition_option'
     autoload :Item, 'aws/simple_db/item'
     autoload :ItemCollection, 'aws/simple_db/item_collection'
@@ -161,7 +161,7 @@ module AWS
     # Returns a collection object that represents the domains in your
     # account.
     #
-    # @return [DomainCollection] Returns a collection representing all your 
+    # @return [DomainCollection] Returns a collection representing all your
     #   domains.
     def domains
       DomainCollection.new(:config => config)
@@ -177,15 +177,15 @@ module AWS
     # === Other Modes
     #
     # You can also use this same function to disable consistent reads inside
-    # a block.  This is useful if you have consistent reads enabled by 
+    # a block.  This is useful if you have consistent reads enabled by
     # default:
     #
     #   AWS::SimpleDB.consistent_reads(false) do
     #     # ...
     #   end
-    # 
+    #
     # @param [Boolean] state (true) When true, all SimpleDB read operations
-    #   will be consistent reads inside the block.  When false, all 
+    #   will be consistent reads inside the block.  When false, all
     #   reads operations will not be consistent reads.  The previous state
     #   will be restored after the block executes.
     # @return Returns the final block value.

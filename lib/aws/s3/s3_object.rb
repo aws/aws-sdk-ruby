@@ -221,7 +221,7 @@ module AWS
     # encrypt and decrypt for you.  You can do this globally or for a
     # single S3 interface
     #
-    #   # all objects uploaded/downloaded with this s3 object will be 
+    #   # all objects uploaded/downloaded with this s3 object will be
     #   # encrypted/decrypted
     #   s3 = AWS::S3.new(:s3_encryption_key => "MY_KEY")
     #
@@ -1379,7 +1379,7 @@ module AWS
 
       def request_for_signing(options)
 
-        port = [443, 80].include?(config.s3_port) ? 
+        port = [443, 80].include?(config.s3_port) ?
           (options[:secure] ? 443 : 80) :
           config.s3_port
 

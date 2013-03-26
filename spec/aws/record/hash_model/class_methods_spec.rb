@@ -81,20 +81,20 @@ module AWS
       end
 
       context '[]' do
-  
+
         let(:data) {{
           'id' => 'item-name',
         }}
 
-        let(:table) { 
+        let(:table) {
           DynamoDB::Table.new('shard-name', :config => stub_config)
         }
-  
+
         before(:each) do
           klass.stub(:dynamo_db_table).and_return(table)
           table.stub_chain(:items, :[], :attributes, :to_h).and_return(data)
         end
-  
+
         it 'returns an existing record' do
           klass['item-name'].should be_a(klass)
         end
@@ -103,7 +103,7 @@ module AWS
           klass['item-name'].shard.should == table.name
         end
 
-        it 'removes the table prefix' do 
+        it 'removes the table prefix' do
           AWS::Record.stub(:table_prefix).and_return('prefixed-')
           table.stub(:name).and_return('prefixed-shard-name')
           klass['item-name'].shard.should == 'shard-name'

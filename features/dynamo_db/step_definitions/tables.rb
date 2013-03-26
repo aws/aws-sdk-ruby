@@ -91,7 +91,7 @@ end
 
 When /^I update the provisioning throughput to (\d+) rcu and (\d+) wcu$/ do |rcu, wcu|
   @table.provision_throughput(
-    :read_capacity_units => rcu.to_i, 
+    :read_capacity_units => rcu.to_i,
     :write_capacity_units => wcu.to_i)
 end
 

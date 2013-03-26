@@ -28,7 +28,7 @@ When /^I get the network interface by id$/ do
 end
 
 Then /^the network interface should have the security groups$/ do
-  @network_interface.security_groups.sort_by(&:name).should == 
+  @network_interface.security_groups.sort_by(&:name).should ==
     @security_groups.sort_by(&:name)
 end
 
@@ -65,7 +65,7 @@ When /^I assign the security groups to the network interface$/ do
 end
 
 Then /^the network interface should have the security groups assigned$/ do
-  @network_interface.security_groups.sort_by(&:id).should == 
+  @network_interface.security_groups.sort_by(&:id).should ==
     @security_groups.sort_by(&:id)
 end
 

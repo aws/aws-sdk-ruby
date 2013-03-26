@@ -13,7 +13,7 @@
 
 module AWS
   module Record
-  
+
     # Raised when trying to access an attribute that does not exist.
     # @private
     class UndefinedAttributeError < StandardError
@@ -21,7 +21,7 @@ module AWS
         super("undefined attribute `#{attribute_name}`")
       end
     end
-  
+
     # Raised when calling #save!, #create! or #update_attributes! on a record that
     # has validation errors.
     # @private

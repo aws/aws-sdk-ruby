@@ -16,7 +16,7 @@ require 'thread'
 module AWS
   module Core
 
-    # Provides lazy creation of error classes via {#const_missing}.  
+    # Provides lazy creation of error classes via {#const_missing}.
     #
     # Extend this module provides 3 benefits to another module:
     #
@@ -26,7 +26,7 @@ module AWS
     #
     # Here is an example of how it works:
     #
-    #  Class Foo 
+    #  Class Foo
     #    module Errors
     #      extend AWS::Core::LazyErrorClasses
     #    end
@@ -43,7 +43,7 @@ module AWS
     #
     module LazyErrorClasses
 
-      # This grammar parses the defualt AWS XML error format  
+      # This grammar parses the defualt AWS XML error format
       BASE_ERROR_GRAMMAR = XML::Grammar.customize do
         element("Error") do
           ignore
@@ -56,12 +56,12 @@ module AWS
         unless base.const_defined?(:GRAMMAR)
           base.const_set(:GRAMMAR, BASE_ERROR_GRAMMAR)
         end
-      
+
         mutex = Mutex.new
         MetaUtils.extend_method(base, :const_missing_mutex) { mutex }
 
       end
-  
+
       # Defines a new error class.
       # @param [String,Symbol] constant
       # @return [nil]
@@ -75,7 +75,7 @@ module AWS
       #
       #   AWS::EC2::Errors.error_class('Non.Existent.Error')
       #   #=> AWS::EC2::Errors::Non::Existent::Error
-      # 
+      #
       # @param [String] code An AWS error code.
       #
       # @return [Class] Returns the error class defiend by the error code.
@@ -83,7 +83,7 @@ module AWS
       def error_class code
         module_eval("#{self}::#{code.gsub('.Range','Range').gsub(".","::")}")
       end
-  
+
     end
 
   end

@@ -15,7 +15,7 @@ module AWS
   class SimpleEmailService
 
     # Helps you manage your verified SimpleEmailService email addresses.
-    # @note This class is deprecated. Please use 
+    # @note This class is deprecated. Please use
     #   {SimpleEmailService#identities} instead.
     class EmailAddressCollection
 

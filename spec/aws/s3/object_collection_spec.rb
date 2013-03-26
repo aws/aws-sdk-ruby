@@ -57,21 +57,21 @@ module AWS
       end
 
       context '#create' do
-        
+
         it 'creates a new s3 object and writes to it' do
           s3object = double('s3-object')
           s3object.should_receive(:write).with('HELLO', :foo => 'bar')
           S3Object.should_receive(:new).
             with(collection.bucket, 'key').
             and_return(s3object)
-          collection.create('key', 'HELLO', :foo => 'bar')  
+          collection.create('key', 'HELLO', :foo => 'bar')
         end
-        
+
         it 'creates a new s3 object and writes to it' do
           s3object = double('s3-object')
           s3object.should_receive(:write).with('HELLO', :foo => 'bar')
           S3Object.should_receive(:new).and_return(s3object)
-          collection.create('key', 'HELLO', :foo => 'bar')  
+          collection.create('key', 'HELLO', :foo => 'bar')
         end
 
       end
@@ -85,8 +85,8 @@ module AWS
 
         let(:response) { client.stub_for(:list_objects) }
 
-        let(:truncated_response) { 
-          response = client.new_stub_for(:list_objects) 
+        let(:truncated_response) {
+          response = client.new_stub_for(:list_objects)
           response.data[:contents] = contents
           response.data[:truncated] = true
           response
@@ -178,7 +178,7 @@ module AWS
             :bucket_name => bucket.name,
             :quiet => true,
             :objects => [
-              { :key => 'key1' }, 
+              { :key => 'key1' },
               { :key => 'key2' },
               { :key => 'key3' },
               { :key => 'key3', :version_id => 'vid' },
@@ -215,12 +215,12 @@ module AWS
           keys = (1..1500).map {|n| { :key => "key#{n}" } }
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => keys[0..999]).
             and_return(delete_response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => keys[1000..1499]).
             and_return(delete_response)
 
@@ -263,12 +263,12 @@ module AWS
           end
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => even_keys[0..999]).
             and_return(delete_response)
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => even_keys[1000..1499]).
             and_return(delete_response)
 
@@ -295,15 +295,15 @@ module AWS
             and_yield(objects[2000..2999])
 
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => keys[0..999]).
             and_return(delete_response)
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => keys[1000..1999]).
             and_return(delete_response)
           client.should_receive(:delete_objects).ordered.with(
-            :bucket_name => bucket.name, :quiet => true, 
+            :bucket_name => bucket.name, :quiet => true,
             :objects => keys[2000..2999]).
             and_return(delete_response)
 

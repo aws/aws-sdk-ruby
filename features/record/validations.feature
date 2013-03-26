@@ -162,7 +162,7 @@ Feature: Validations
     """
     string_attr :phone_numbers, :set => true
     string_attr :username
-    validates_count_of :phone_numbers, 
+    validates_count_of :phone_numbers,
       :within => 1..2,
       :too_many => "has too many numbers (maximum is 2)"
     """

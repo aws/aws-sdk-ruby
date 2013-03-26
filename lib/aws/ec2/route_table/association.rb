@@ -61,13 +61,13 @@ module AWS
       # delete an association, the subnet becomes associated with the
       # main route table.
       #
-      #   # delete all explicit route table associations -- as a result 
+      #   # delete all explicit route table associations -- as a result
       #   # all subnets will default to the main route table
       #   vpc.subnets.each do |subnet|
       #     assoc = subnet.route_table_association
       #     assoc.delete unless assoc.main?
       #   end
-      #   
+      #
       class Association
 
         # @private
@@ -83,7 +83,7 @@ module AWS
           end
         end
 
-        # @return [String] An identifier representing the association 
+        # @return [String] An identifier representing the association
         #   between the network ACL and subnet.
         attr_reader :association_id
 
@@ -93,7 +93,7 @@ module AWS
         attr_reader :route_table
 
         # @return [Subnet,nil] Returns the subnet this association belongs.
-        #   If this is the main (default) association, then this method 
+        #   If this is the main (default) association, then this method
         #   returns nil.
         attr_reader :subnet
 

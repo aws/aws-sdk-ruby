@@ -24,21 +24,21 @@ module AWS
         #   was no data found for the given id.
         # @return [Record::HashModel] Returns the record with the given id.
         def find_by_id id, options = {}
-  
+
           domain = sdb_domain(options[:shard] || options[:domain])
-  
+
           data = domain.items[id].data.attributes
-  
+
           raise RecordNotFound, "no data found for id: #{id}" if data.empty?
-  
+
           obj = self.new(:shard => domain)
           obj.send(:hydrate, id, data)
           obj
-  
+
         end
         alias_method :[], :find_by_id
-  
-        # Finds records in SimpleDB and returns them as objects of the 
+
+        # Finds records in SimpleDB and returns them as objects of the
         # current class.
         #
         # Finding +:all+ returns an enumerable scope object
@@ -79,13 +79,13 @@ module AWS
         #   @param [Hash] options
         #   @option options [Mixed] :where Conditions that determine what
         #     records are returned.
-        #   @option options [String,Array] :sort The order records should be 
+        #   @option options [String,Array] :sort The order records should be
         #     returned in.
         #   @option options [Integer] :limit The max number of records to fetch.
         def find *args
           new_scope.find(*args)
         end
-  
+
         # Returns a chainable scope object that restricts further scopes to a
         # particular domain.
         #
@@ -99,7 +99,7 @@ module AWS
           new_scope.shard(shard_name)
         end
         alias_method :domain, :shard
-  
+
         # Returns an enumerable scope object represents all records.
         #
         #   Book.all.each do |book|
@@ -107,7 +107,7 @@ module AWS
         #   end
         #
         # This method is equivalent to +find(:all)+, and therefore you can also
-        # pass aditional options.  See {.find} for more information on what 
+        # pass aditional options.  See {.find} for more information on what
         # options you can pass.
         #
         #   Book.all(:where => { :author' => 'me' }).each do |my_book|
@@ -123,7 +123,7 @@ module AWS
         def each &block
           all.each(&block)
         end
-  
+
         # Counts records in SimpleDB.
         #
         # With no arguments, counts all records:
@@ -150,19 +150,19 @@ module AWS
           new_scope.count(options)
         end
         alias_method :size, :count
-  
+
         # @return [Object,nil] Returns the first record found.  If there were
         #   no records found, nil is returned.
         def first options = {}
           new_scope.first(options)
         end
-  
+
         # Limits which records are retried from SimpleDB when performing a find.
-        #   
+        #
         # Simple string condition
         #
         #   Car.where('color = "red" or color = "blue"').each {|car| ... }
-        #   
+        #
         # String with placeholders for quoting params
         #
         #   Car.where('color = ?', 'red')
@@ -171,7 +171,7 @@ module AWS
         #
         #   # produces a condition using in, like: WHERE color IN ('red', 'blue')
         #   Car.where('color IN ?', ['red','blue'])
-        # 
+        #
         # Hash arguments
         #
         #   # WHERE age = '40' AND gender = 'male'
@@ -184,9 +184,9 @@ module AWS
         #
         #   # 10 most expensive red cars
         #   Car.where(:color => 'red').order(:price, :desc).limit(10)
-        #   
+        #
         # @overload where(conditions_hash)
-        #   @param [Hash] conditions_hash A hash of attributes to values.  Each 
+        #   @param [Hash] conditions_hash A hash of attributes to values.  Each
         #     key/value pair from the hash becomes a find condition.  All
         #     conditions are joined by AND.
         #
@@ -195,7 +195,7 @@ module AWS
         def where *args
           new_scope.where(*args)
         end
-  
+
         # Defines the order in which records are returned when performing a find.
         # SimpleDB only allows sorting by one attribute per request.
         #
@@ -212,10 +212,10 @@ module AWS
         def order *args
           new_scope.order(*args)
         end
-  
+
         # The maximum number of records to return.  By default, all records
         # matching the where conditions will be returned from a find.
-        # 
+        #
         #   People.limit(10).each {|person| ... }
         #
         # Limit can be chained with other scope modifiers:

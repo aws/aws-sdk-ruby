@@ -38,7 +38,7 @@ module AWS
         resp = filtered_request(:describe_volumes)
         resp.volume_set.each do |v|
 
-          volume = Volume.new_from(:describe_volumes, v, 
+          volume = Volume.new_from(:describe_volumes, v,
             v.volume_id, :config => config)
 
           yield(volume)

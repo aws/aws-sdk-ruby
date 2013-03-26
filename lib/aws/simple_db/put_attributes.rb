@@ -27,9 +27,9 @@ module AWS
         attribute_hashes = []
         attributes.each_pair do |attribute_name,values|
           [values].flatten.each do |value|
-            attribute_hashes << { 
-              :name => attribute_name.to_s, 
-              :value => value.to_s, 
+            attribute_hashes << {
+              :name => attribute_name.to_s,
+              :value => value.to_s,
               :replace => replace,
             } unless [:if, :unless].include?(attribute_name)
           end

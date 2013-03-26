@@ -51,7 +51,7 @@ module AWS
         nil
       end
 
-      # Appends values to this attribute.  Duplicate values are ignored 
+      # Appends values to this attribute.  Duplicate values are ignored
       # by SimpleDB.
       #
       # @example Adding a list of values
@@ -81,7 +81,7 @@ module AWS
       #   item.attributes['color'].delete('red', 'blue')
       #
       # @param values One ore more values to remove from this attribute.
-      #   If values is empty, then all attribute values are deleted 
+      #   If values is empty, then all attribute values are deleted
       #   (which deletes this attribute).
       # @return [nil]
       def delete *values
@@ -96,14 +96,14 @@ module AWS
         nil
       end
 
-      # Yields once for each value on this attribute. 
+      # Yields once for each value on this attribute.
       #
       # @yield [attribute_value] Yields once for each domain in the account.
       # @yieldparam [String] attribute_value
-      # @param [Hash] options 
+      # @param [Hash] options
       # @option options [Boolean] :consistent_read (false) A consistent read
       #   returns values that reflects all writes that received a successful
-      #   response prior to the read. 
+      #   response prior to the read.
       # @return [nil]
       def each options = {}, &block
 
@@ -127,10 +127,10 @@ module AWS
       #   item.attributes['ratings'].values
       #   #=> ['5', '3', '4']
       #
-      # @param [Hash] options 
+      # @param [Hash] options
       # @option options [Boolean] :consistent_read (false) A consistent read
       #   returns values that reflects all writes that received a successful
-      #   response prior to the read. 
+      #   response prior to the read.
       # @return [Array<String>] An array of attribute values
       def values options = {}
         values = []

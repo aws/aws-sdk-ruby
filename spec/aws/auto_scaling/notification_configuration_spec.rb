@@ -23,7 +23,7 @@ module AWS
 
       let(:group) { Group.new('group-name', :config => config) }
 
-      let(:notification_config) { 
+      let(:notification_config) {
         NotificationConfiguration.new(group, 'topic-arn', %w(t1 t2))
       }
 
@@ -36,7 +36,7 @@ module AWS
       end
 
       context '#topic_arn' do
-        
+
         it 'returns the topic arn string' do
           notification_config.topic_arn.should == 'topic-arn'
         end
@@ -44,7 +44,7 @@ module AWS
       end
 
       context '#topic' do
-        
+
         it 'returns the sns topic' do
           notification_config.topic.should be_a(SNS::Topic)
           notification_config.topic.arn.should == 'topic-arn'
@@ -54,7 +54,7 @@ module AWS
       end
 
       context '#notification_types' do
-        
+
         it 'returns the notification type string' do
           notification_config.notification_types.should == %w(t1 t2)
         end

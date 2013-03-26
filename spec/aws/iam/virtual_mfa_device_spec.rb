@@ -33,7 +33,7 @@ module AWS
       end
 
       context '#serial_number' do
-        
+
         it 'returns the device serial number' do
           device.serial_number.should == 'arn'
         end
@@ -140,7 +140,7 @@ module AWS
           end
 
           it 'returns the user when provided' do
-            device.user.should == 
+            device.user.should ==
               AWS::IAM::User.new('johndoe', :config => device.config)
           end
 
@@ -183,7 +183,7 @@ module AWS
         end
 
         context '#base_32_string_seed' do
-          
+
           it 'returns nil, only accessible on newly created devices' do
             device.base_32_string_seed.should == nil
           end
@@ -191,7 +191,7 @@ module AWS
         end
 
         context '#qr_code_png' do
-          
+
           it 'returns nil, only accessible on newly created devices' do
             device.qr_code_png.should == nil
           end

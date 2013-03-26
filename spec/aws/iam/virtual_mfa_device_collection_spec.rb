@@ -29,11 +29,11 @@ module AWS
         it 'returns a virtual mfa device' do
           devices['device-arn'].should be_a(VirtualMfaDevice)
         end
-        
+
         it 'returns a virtual mfa device with the correct arn' do
           devices['device-arn'].arn.should == 'device-arn'
         end
-        
+
         it 'returns a virtual mfa device with the correct config' do
           devices['device-arn'].config.should == devices.config
         end

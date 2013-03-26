@@ -18,7 +18,7 @@ module AWS
     class PresenceValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :allow_nil, :allow_blank, :on, :if, :unless]
-      
+
       def validate_attribute record, attribute_name, value
 
         blank = case

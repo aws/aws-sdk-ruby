@@ -224,7 +224,7 @@ module AWS
         end
 
         context '#associations' do
-          
+
           it 'returns an array of associations' do
             network_acl.associations[0].should be_a(NetworkACL::Association)
             network_acl.associations.size.should == 1

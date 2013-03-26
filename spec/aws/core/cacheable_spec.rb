@@ -36,11 +36,11 @@ module AWS::Core
 
       let(:resource) { AWS::SomeService::MyResource.new }
 
-      let(:credential_provider) { 
-        double("creds", :access_key_id => "ACCESS_KEY") 
+      let(:credential_provider) {
+        double("creds", :access_key_id => "ACCESS_KEY")
       }
 
-      let(:config) { 
+      let(:config) {
         double("config", {
           :credential_provider => credential_provider,
           :some_service_endpoint => "ENDPOINT",

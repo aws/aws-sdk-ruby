@@ -26,7 +26,7 @@ module AWS
       # @param [String] namespace The metric namespace.
       # @param [String] metric_name The metric name.
       # @param [Hash] options
-      # @option options [Array<Hash>] :dimensions An array of dimensions.  
+      # @option options [Array<Hash>] :dimensions An array of dimensions.
       #   Each hash must have a +:name+ and a +value+ key (with string values).
       def initialize namespace, metric_name, options = {}
         @namespace = namespace
@@ -56,7 +56,7 @@ module AWS
       #   must pass +:value+ (number) or +:statistic_values+ (hash).
       # @return [nil]
       def put_data *metric_data
-        
+
         metric_opts = {}
         metric_opts[:metric_name] = metric_name
         metric_opts[:dimensions] = dimensions unless dimensions.empty?

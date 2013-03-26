@@ -30,7 +30,7 @@ module AWS
     # @attr_reader [Integer] progress
     #
     # @attr_reader [nil,String] status_code
-    # 
+    #
     # @attr_reader [nil,String] status_message
     #
     class Activity < Core::Resource

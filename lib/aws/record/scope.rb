@@ -10,16 +10,16 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-  
+
 module AWS
   module Record
 
     # Base class for {AWS::Record::Model::Scope} and
     # {AWS::Record::HashModel::Scope}.
     class Scope
-  
+
       include Enumerable
-      
+
       # @param base_class A class that extends {AWS::Record::AbstractBase}.
       # @param [Hash] options
       # @option options :
@@ -34,7 +34,7 @@ module AWS
         @options[:shard] = @options.delete(:domain) if @options[:domain]
 
       end
-  
+
       # @return [Class] Returns the AWS::Record::Model extending class that
       #   this scope will find records for.
       attr_reader :base_class
@@ -61,13 +61,13 @@ module AWS
         _with(:shard => shard_name)
       end
       alias_method :domain, :shard
-  
+
       # @overload find(id)
       #   Finds and returns a single record by id.  If no record is found
       #   with the given +id+, then a RecordNotFound error will be raised.
       #   @param [String] id ID of the record to find.
       #   @return Returns the record.
-      #   
+      #
       # @overload find(:first, options = {})
       #   Returns the first record found.  If no records were matched then
       #   nil will be returned (raises no exceptions).
@@ -96,7 +96,7 @@ module AWS
         else
           base_class.find_by_id(id_or_mode, :shard => scope._shard)
         end
-  
+
       end
 
       # @return [Integer] Returns the number of records that match the
@@ -115,7 +115,7 @@ module AWS
       def first options = {}
         _handle_options(options).find(:first)
       end
-  
+
       # Limits the maximum number of total records to return when finding
       # or counting.  Returns a scope, does not make a request.
       #
@@ -126,7 +126,7 @@ module AWS
       def limit limit
         _with(:limit => limit)
       end
-  
+
       # Yields once for each record matching the request made by this scope.
       #
       #   books = Book.where(:author => 'me').order(:price, :asc).limit(10)
@@ -135,7 +135,7 @@ module AWS
       #     puts book.attributes.to_yaml
       #   end
       #
-      # @yieldparam [Object] record 
+      # @yieldparam [Object] record
       def each &block
         if block_given?
           _each_object(&block)
@@ -149,26 +149,26 @@ module AWS
         @options[:shard] || base_class.shard_name
       end
       alias_method :domain, :shard
-  
+
       # @private
       private
       def _each_object &block
         raise NotImplementedError
       end
-  
+
       # @private
       private
       def _with options
         self.class.new(base_class, @options.merge(options))
       end
-  
+
       # @private
       private
       def method_missing scope_name, *args
         # @todo only proxy named scope methods
         _merge_scope(base_class.send(scope_name, *args))
       end
-  
+
       # Merges the one scope with the current scope, returning a 3rd.
       # @param [Scope] scope
       # @return [Scope]

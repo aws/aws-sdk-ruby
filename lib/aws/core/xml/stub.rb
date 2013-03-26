@@ -37,9 +37,9 @@ module AWS
         attr_reader :rules
 
         # Returns a hash with stubbed values as if it had parsed
-        # an empty xml document.  
-        # @return [Hash] 
-        def simulate 
+        # an empty xml document.
+        # @return [Hash]
+        def simulate
           if rules[:children]
             data = stub_data_for(rules)
             apply_empty_indexes(rules, data)
@@ -50,9 +50,9 @@ module AWS
         end
 
         # Returns a hash with stubbed values as if it had parsed
-        # an empty xml document.  
+        # an empty xml document.
         # @param [Hash] rules An XML::Parser rule set.
-        # @return [Hash] 
+        # @return [Hash]
         def self.simulate rules
           stub = Stub.new(rules)
           stub.simulate
@@ -74,7 +74,7 @@ module AWS
               data = data[wrapper]
             end
 
-            ruby_name = child_rules[:rename] || 
+            ruby_name = child_rules[:rename] ||
               Inflection.ruby_name(name.to_s).to_sym
 
             if child_rules[:list]
@@ -85,7 +85,7 @@ module AWS
               data[ruby_name] = stub_data_for(child_rules)
             else
               data[ruby_name] = case child_rules[:type]
-                when :integer  then 0 
+                when :integer  then 0
                 when :float    then 0.0
                 when :time     then Time.now
                 when :datetime then Date.parse(Time.now.to_s)
@@ -105,9 +105,9 @@ module AWS
 
         protected
         def apply_empty_indexes rules, data
-          
+
           return unless rules[:children]
-          
+
           rules[:children].each_pair do |name,child_rules|
             if index = child_rules[:index]
               data[index[:name]] = {}

@@ -46,7 +46,7 @@ module AWS
       #   one or more availability zones.  Values may be availability zone
       #   name strings, or {AWS::EC2::AvailabilityZone} objects.
       #
-      # @option options [required,Array<Hash>] :listeners An array of load 
+      # @option options [required,Array<Hash>] :listeners An array of load
       #   balancer listener options.  Each value must be an array with the
       #   following keys:
       #   * +:port+
@@ -70,7 +70,7 @@ module AWS
       #   your load balancer within your VPC.  This can be an array of
       #   security group ids or {EC2::SecurityGroup} objects. VPC only.
       #
-      # @option options [String] :scheme ('internal' The type of a load 
+      # @option options [String] :scheme ('internal' The type of a load
       #   balancer.  Accepts 'internet-facing' or 'internal'. VPC only.
       #
       def create name, options = {}

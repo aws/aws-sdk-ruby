@@ -19,7 +19,7 @@ class DummyServer
   attr_reader :port
 
   attr_reader :address
-  
+
   def initialize port
     @address = '127.0.0.1'
     @port = port.to_i
@@ -57,8 +57,8 @@ class DummyServer
               respond(socket, 'ok') unless socket.closed?
 
             end
-          end  
-       end 
+          end
+       end
      end
 
     h = Net::HTTP.new(@address, @port)

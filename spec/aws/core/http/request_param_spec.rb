@@ -17,7 +17,7 @@ module AWS::Core
   module Http
     class Request
       describe Param do
-      
+
         let(:name) { 'Param Name' }
         let(:value) { 'Param Value with = Funny stuff & more' }
         let(:param) { Param.new(name, value) }
@@ -38,7 +38,7 @@ module AWS::Core
         end
 
         context '#initialize' do
-          
+
           it 'requires a name' do
             lambda { Param.new }.should raise_error(ArgumentError)
           end
@@ -50,7 +50,7 @@ module AWS::Core
         end
 
         context '#to_s' do
-          
+
           it 'should return the name and value joined by a =' do
             Param.new('name', 'value').to_s.should == 'name=value'
           end
@@ -63,11 +63,11 @@ module AWS::Core
             Param.new('name_only').to_s.should == 'name_only'
           end
 
-          
+
         end
 
         context '#encoded' do
-           
+
           it 'should return a url safe string name/value pair joined by =' do
             param.encoded.split('=').each do |part|
               part.should match(/^[a-z0-9\-_%]+$/i)

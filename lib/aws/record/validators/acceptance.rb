@@ -29,7 +29,7 @@ module AWS
         accepted = case value
         when '1'  then true
         when true then true
-        else 
+        else
           options.has_key?(:accept) ?
             value == options[:accept] :
             false

@@ -16,7 +16,7 @@ require 'aws/iam/config'
 
 module AWS
 
-  # This class is the starting point for working with 
+  # This class is the starting point for working with
   # AWS Identity and Access Management (IAM).
   #
   # For more information about IAM:
@@ -26,13 +26,13 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the IAM interface:
   #
   #   iam = AWS::IAM.new(
@@ -103,7 +103,7 @@ module AWS
   # = Users & Groups
   #
   # Each AWS account can have multiple users.  Users can be used to easily
-  # manage permissions.  Users can also be organized into groups.  
+  # manage permissions.  Users can also be organized into groups.
   #
   #   user = iam.users.create('JohnDoe')
   #   group = iam.groups.create('Developers')
@@ -178,7 +178,7 @@ module AWS
     #   iam.users.each do |user|
     #     puts user.name
     #   end
-    # 
+    #
     # @return [UserCollection] Returns a collection that represents all of
     #   the IAM users for this AWS account.
     def users
@@ -203,7 +203,7 @@ module AWS
       GroupCollection.new(:config => config)
     end
 
-    # Returns a collection that represents the access keys for this 
+    # Returns a collection that represents the access keys for this
     # AWS account.
     #
     #   iam = AWS::IAM.new
@@ -218,7 +218,7 @@ module AWS
     end
 
     # Returns a collection that represents the signing certificates
-    # for this AWS account.  
+    # for this AWS account.
     #
     #   iam = AWS::IAM.new
     #   iam.signing_certificates.each do |cert|
@@ -227,7 +227,7 @@ module AWS
     #
     # If you need to access the signing certificates of a specific user,
     # see {User#signing_certificates}.
-    # 
+    #
     # @return [SigningCertificateCollection] Returns a collection that
     #   represents signing certificates for this AWS account.
     def signing_certificates
@@ -286,7 +286,7 @@ module AWS
     end
 
     # Deletes the account alias (if one exists).
-    # @return [nil] 
+    # @return [nil]
     def remove_account_alias
       account_aliases.each do |account_alias|
         account_aliases.delete(account_alias)
@@ -347,7 +347,7 @@ module AWS
     # To change a user password, you must be using credentials from the
     # user you want to change:
     #
-    #   # pass in a key pair generated for the user you want to change 
+    #   # pass in a key pair generated for the user you want to change
     #   # the password for
     #   iam = AWS::IAM.new(:access_key_id => '...', :secret_access_key => '...)
     #   iam.change_password('old-password', 'new-password')
@@ -368,7 +368,7 @@ module AWS
 
     # Updates the account password policy for all IAM accounts.
     # @param [Hash] options
-    # @option options [Integer] :minimum_password_length 
+    # @option options [Integer] :minimum_password_length
     # @option options [Boolean] :require_symbols
     # @option options [Boolean] :require_numbers
     # @option options [Boolean] :require_uppercase_characters

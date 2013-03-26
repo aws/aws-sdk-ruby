@@ -20,7 +20,7 @@ module AWS
 
     let(:resp) { client.stub_for(describe_call) }
 
-    let(:response_resource) {{}} 
+    let(:response_resource) {{}}
 
     before(:each) do
       response_resource[response_id_field] = resource_id

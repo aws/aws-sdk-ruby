@@ -20,7 +20,7 @@ module AWS
     #   auto_scaling.instances.each do |instance|
     #     # ...
     #   end
-    # 
+    #
     # You can also get an Auto Scaling instance by its EC2 instance id.
     #
     #   auto_scaling_instance = auto_scaling.instances['i-12345678']
@@ -29,7 +29,7 @@ module AWS
     class InstanceCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
+
       # @param [String] instance_id An {EC2::Instance} id string.
       # @return [AutoScaling::Instance]
       def [] instance_id
@@ -45,7 +45,7 @@ module AWS
 
         resp = client.describe_auto_scaling_instances(options)
         resp.auto_scaling_instances.each do |details|
-          
+
           instance = Instance.new_from(
             :describe_auto_scaling_instances,
             details,
@@ -53,7 +53,7 @@ module AWS
             :config => config)
 
           yield(instance)
-          
+
         end
         resp.data[:next_token]
       end

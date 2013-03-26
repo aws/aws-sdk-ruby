@@ -15,7 +15,7 @@ require 'socket'
 
 module AWS
   class SimpleWorkflow
-    
+
     # @private
     module OptionFormatters
 
@@ -23,7 +23,7 @@ module AWS
       def identity_opt options
         options[:identity] || "#{Socket.gethostname}:#{Process.pid}"
       end
-      
+
       protected
       def upcase_opts options, *opt_names
         opt_names.each do |opt|
@@ -45,12 +45,12 @@ module AWS
         if workflow_type
 
           options[:workflow_id] ||= UUIDTools::UUID.random_create.to_s
-          
+
           if workflow_type.is_a?(WorkflowType)
             options[:workflow_type] = {}
             options[:workflow_type][:name] = workflow_type.name
             options[:workflow_type][:version] = workflow_type.version
-          elsif 
+          elsif
             workflow_type.is_a?(Hash) and
             workflow_type[:name].is_a?(String) and
             workflow_type[:version] .is_a?(String)and
@@ -67,7 +67,7 @@ module AWS
 
         upcase_opts(options, :child_policy)
 
-        duration_opts(options, 
+        duration_opts(options,
           :execution_start_to_close_timeout,
           :task_start_to_close_timeout)
 

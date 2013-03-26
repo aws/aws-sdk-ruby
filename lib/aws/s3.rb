@@ -18,7 +18,7 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon S3.
   #
-  # To use Amazon S3 you must first 
+  # To use Amazon S3 you must first
   # {sign up here}[http://aws.amazon.com/s3/].
   #
   # For more information about Amazon S3, see:
@@ -28,7 +28,7 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
@@ -58,7 +58,7 @@ module AWS
   #     puts bucket.name
   #   end
   #
-  # See {BucketCollection} and {Bucket} for more information on working 
+  # See {BucketCollection} and {Bucket} for more information on working
   # with buckets.
   #
   # = Objects
@@ -74,7 +74,7 @@ module AWS
   #
   # == Reading and Writing an Object
   #
-  # The example above returns an {S3Object}.  You call {S3Object#write} and 
+  # The example above returns an {S3Object}.  You call {S3Object#write} and
   # {S3Object#read} to upload to and download from S3 respectively.
   #
   #   # streaming upload a file to S3
@@ -91,7 +91,7 @@ module AWS
   #
   # You can enumerate objects in your buckets.
   #
-  #   # enumerate ALL objects in the bucket (even if the bucket contains 
+  #   # enumerate ALL objects in the bucket (even if the bucket contains
   #   # more than 1k objects)
   #   bucket.objects.each do |obj|
   #     puts obj.key
@@ -143,7 +143,7 @@ module AWS
 
     include Core::ServiceInterface
 
-    # @return [BucketCollection] Returns a collection that represents all 
+    # @return [BucketCollection] Returns a collection that represents all
     #  buckets in the account.
     def buckets
       BucketCollection.new(:config => @config)

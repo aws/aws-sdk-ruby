@@ -29,7 +29,7 @@ module AWS
       attr_reader :internet_gateway_id
 
       alias_method :id, :internet_gateway_id
-    
+
       attribute :vpc_id
 
       attribute :attachment_set
@@ -37,7 +37,7 @@ module AWS
       protected :attachment_set
 
       populates_from(:describe_internet_gateways) do |resp|
-        resp.internet_gateway_set.find do |gateway| 
+        resp.internet_gateway_set.find do |gateway|
           gateway.internet_gateway_id == internet_gateway_id
         end
       end
@@ -50,7 +50,7 @@ module AWS
       # @return [VPC,nil] Returns the currently attached VPC, or nil
       #   if this gateway has not been attached.
       def vpc
-        if attachment = attachments.first  
+        if attachment = attachments.first
           attachment.vpc
         end
       end
@@ -58,10 +58,10 @@ module AWS
       # Attaches this internet gateway to the given VPC.  If this
       # gateway is already attached to a different VPC, it will
       # be detached from that one first.  If you pass nil, then
-      # this internet gateway will 
+      # this internet gateway will
       #
       #   internet_gateway.vpc = 'vpc-123'
-      # 
+      #
       # @param [VPC,String] vpc A {VPC} object or a vpc id string.
       #
       def vpc= vpc

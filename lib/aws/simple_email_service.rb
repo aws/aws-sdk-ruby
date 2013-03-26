@@ -15,11 +15,11 @@ require 'aws/core'
 require 'aws/simple_email_service/config'
 
 module AWS
-  
-  # This class is the starting point for working with Amazon 
+
+  # This class is the starting point for working with Amazon
   # SimpleEmailService (SES).
   #
-  # To use Amazon SimpleEmailService you must first 
+  # To use Amazon SimpleEmailService you must first
   # {sign up here}[http://aws.amazon.com/ses/]
   #
   # For more information about Amazon SimpleEmailService:
@@ -29,13 +29,13 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the SimpleEmailService interface:
   #
   #   ses = AWS::SimpleEmailService.new(
@@ -60,7 +60,7 @@ module AWS
   # Before you can send emails, you need to verify one or more identities.
   # Identities are email addresses or domain names that you have control over.
   # Until you have {requested production access}[http://docs.amazonwebservices.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html]
-  # you will only be able to send emails to and from verified email addresses 
+  # you will only be able to send emails to and from verified email addresses
   # and domains.
   #
   # == Verifying Email Addresses
@@ -77,7 +77,7 @@ module AWS
   # == Verifying Domains
   #
   # You can also verify an entire domain for sending and receiving emails.
-  # 
+  #
   #   identity = ses.identities.verify('yourdomain.com')
   #   identity.verification_token
   #   #=> "216D+lZbhUL0zOoAkC83/0TAl5lJSzLmzsOjtXM7AeM="
@@ -87,7 +87,7 @@ module AWS
   # more details.
   #
   # == Listing Identities
-  # 
+  #
   # You can enumerate all identities:
   #
   #   ses.identities.map(&:identity)
@@ -118,7 +118,7 @@ module AWS
   #     :from => 'sender@domain.com',
   #     :to => 'receipient@domain.com',
   #     :body_text => 'Sample email text.',
-  #     :body_html => '<h1>Sample Email</h1>') 
+  #     :body_html => '<h1>Sample Email</h1>')
   #
   # If you need to send email with attachments or have other special needs
   # that send_email does not support you can use {#send_raw_email}.
@@ -147,7 +147,7 @@ module AWS
   # as follows:
   #
   # * +:max_send_rate+ - Maximum number of emails you can send per second.
-  # * +:max_24_hour_send+ - Maximum number of emails you can send in a 
+  # * +:max_24_hour_send+ - Maximum number of emails you can send in a
   #   24-hour period.
   #
   # To get your current quotas (and how many emails you have sent in the last
@@ -194,17 +194,17 @@ module AWS
       IdentityCollection.new(:config => config)
     end
 
-    # Sends an email.  
+    # Sends an email.
     #
     #   ses.send_email(
     #     :subject => 'A Sample Email',
-    #     :to => 'john@doe.com', 
+    #     :to => 'john@doe.com',
     #     :from => 'no@reply.com',
     #     :body_text => 'sample text ...',
     #     :body_html => '<p>sample text ...</p>')
     #
-    # You can also pass multiple email addresses for the +:to+, +:cc+, 
-    # +:bcc+ and +:reply_to+ options.  Email addresses can also be 
+    # You can also pass multiple email addresses for the +:to+, +:cc+,
+    # +:bcc+ and +:reply_to+ options.  Email addresses can also be
     # formatted with names.
     #
     #   ses.send_email(
@@ -224,9 +224,9 @@ module AWS
     # @option options [String,Array] :bcc The address(es) to bcc (blind
     #   carbon copy) the email to.
     # @option options [String,Array] :reply_to The reply-to email address(es)
-    #   for the message. If the recipient replies to the message, each 
+    #   for the message. If the recipient replies to the message, each
     #   reply-to address will receive the reply.
-    # @option options [String] :return_path The email address to which 
+    # @option options [String] :return_path The email address to which
     #   bounce notifications are to be forwarded. If the message cannot be
     #   delivered to the recipient, then an error message will be returned
     #   from the recipient's ISP; this message will then be forwarded to
@@ -235,17 +235,17 @@ module AWS
     #   You must provide +:body_text+, +:body_html+ or both.
     # @option options [String] :body_html The email html contents.
     #   You must provide +:body_text+, +:body_html+ or both.
-    # @option options [String] :subject_charset The character set of the 
+    # @option options [String] :subject_charset The character set of the
     #   +:subject+ string.  If the text must contain any other characters,
-    #   then you must also specify the character set. Examples include 
+    #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_text_charset The character set of the
     #   +:body_text+ string.  If the text must contain any other characters,
-    #   then you must also specify the character set. Examples include 
+    #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_html_charset The character set of the
     #   +:body_html+ string.  If the text must contain any other characters,
-    #   then you must also specify the character set. Examples include 
+    #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_html
     # @return [nil]
@@ -283,9 +283,9 @@ module AWS
 
     end
 
-    # Sends a raw email (email message, with header and content specified). 
+    # Sends a raw email (email message, with header and content specified).
     # Useful for sending multipart MIME emails.  The raw text of the message
-    # must comply with Internet email standards; otherwise, the message 
+    # must comply with Internet email standards; otherwise, the message
     # cannot be sent.
     #
     #   raw = <<-EMAIL
@@ -304,28 +304,28 @@ module AWS
     #
     #   ses.send_raw_email(raw)
     #
-    # Amazon SES has a limit on the total number of recipients per 
-    # message: The combined number of To:, CC: and BCC: email addresses 
-    # cannot exceed 50. If you need to send an email message to a larger 
-    # audience, you can divide your recipient list into groups of 50 or 
-    # fewer, and then call Amazon SES repeatedly to send the message to 
+    # Amazon SES has a limit on the total number of recipients per
+    # message: The combined number of To:, CC: and BCC: email addresses
+    # cannot exceed 50. If you need to send an email message to a larger
+    # audience, you can divide your recipient list into groups of 50 or
+    # fewer, and then call Amazon SES repeatedly to send the message to
     # each group.
     #
-    # @param [required, String] raw_message The raw text of the message. 
+    # @param [required, String] raw_message The raw text of the message.
     #   You can pass in any object whos #to_s returns a valid formatted
     #   email (e.g. ruby Mail gem).  The raw message should:
     #   * Contain a header and a body, separated by a blank line
     #   * Contain all required internet email headers
     #   * Each part of a multipart MIME message must be formatted properly
-    #   * MIME content types must be among those supported by Amazon SES. 
+    #   * MIME content types must be among those supported by Amazon SES.
     #     Refer to the Amazon SES Developer Guide for more details.
     #   * Use content that is base64-encoded, if MIME requires it
     # @option options [String,Array] :to One or more email addresses to
     #   send the email to.
-    # @option options [String] :from The sender's email address.  
-    #   If you specify the :from option, then bounce notifications and 
-    #   complaints will be sent to this email address. This takes 
-    #   precedence over any Return-Path header that you might include in 
+    # @option options [String] :from The sender's email address.
+    #   If you specify the :from option, then bounce notifications and
+    #   complaints will be sent to this email address. This takes
+    #   precedence over any Return-Path header that you might include in
     #   the +raw_message+.
     # @return [nil]
     def send_raw_email raw_message, options = {}
@@ -359,7 +359,7 @@ module AWS
       Quotas.new(:config => config).to_h
     end
 
-    # Returns an array of email statistics. Each object in this array is a 
+    # Returns an array of email statistics. Each object in this array is a
     # hash with the following keys:
     #
     # * +:delivery_attempts+
@@ -387,7 +387,7 @@ module AWS
     def require_one_of options, *keys
       unless keys.any?{|key| options[key] }
         parts = keys.collect{|key| ":#{key}" }.join(', ')
-        raise ArgumentError, "you must provide at least one of #{parts}" 
+        raise ArgumentError, "you must provide at least one of #{parts}"
       end
     end
 

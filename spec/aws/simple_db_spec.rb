@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   describe SimpleDB do
-    
+
     let(:client) { double('SimpleDB::Client') }
 
     let(:sdb) { SimpleDB.new(:simple_db_client => client) }
@@ -23,7 +23,7 @@ module AWS
     it_behaves_like 'a class that accepts configuration', :simple_db_client
 
     context '#domains' do
-      
+
       it 'returns a domain collection' do
         sdb.domains.should be_a(SimpleDB::DomainCollection)
       end

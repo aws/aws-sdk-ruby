@@ -27,7 +27,7 @@ Feature: Sending email with SES
     | param_match | Destination.ToAddresses.member.1 | noreply@example.com |
     | param_match | Source                           | noreply@example.com |
 
-  Scenario: Send a raw email 
+  Scenario: Send a raw email
     When I send a raw email like:
     """
     Subject: A Sample Email
@@ -43,7 +43,7 @@ Feature: Sending email with SES
     | TYPE        | NAME                 | VALUE               |
     | param       | Action               | SendRawEmail        |
 
-  Scenario: Send a raw email 
+  Scenario: Send a raw email
     When I send a raw email to "foo@bar.com" from "bar@foo.com" like:
     """
     Subject: A Sample Email

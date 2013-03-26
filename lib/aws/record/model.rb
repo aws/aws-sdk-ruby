@@ -37,7 +37,7 @@ module AWS
     # When extending AWS::Record::Model you should first consider what
     # attributes your class should have.  Unlike ActiveRecord, AWS::Record
     # models are not backed by a database table/schema.  You must choose what
-    # attributes (and what types) you need.  
+    # attributes (and what types) you need.
     #
     # * +string_attr+
     # * +boolean_attr+
@@ -46,7 +46,7 @@ module AWS
     # * +datetime_attr+
     # * +date_attr+
     #
-    # === Usage 
+    # === Usage
     #
     # Normally you just call these methods inside your model class definition:
     #
@@ -104,9 +104,9 @@ module AWS
     # * values are unordered
     # * duplicate values are automatically omitted
     #
-    # Please consider these limitations when you choose to use the +:set+ 
+    # Please consider these limitations when you choose to use the +:set+
     # option with the attribute macros.
-    # 
+    #
     # = Validations
     #
     # It's important to validate models before there are persisted to keep
@@ -127,7 +127,7 @@ module AWS
     #
     # For more information about the available validation methods see
     # {Validations}.
-    # 
+    #
     # = Finder Methods
     #
     # You can find records by their ID.  Each record gets a UUID when it
@@ -154,7 +154,7 @@ module AWS
     #   end
     #
     # Be careful when enumerating all.  Depending on the number of records
-    # and number of attributes each record has, this can take a while, 
+    # and number of attributes each record has, this can take a while,
     # causing quite a few requests.
     #
     # === First
@@ -173,7 +173,7 @@ module AWS
     #   book = Book.first(:where => { :has_been_read => false })
     #
     # You can pass as find options:
-    # 
+    #
     # * +:where+ - Conditions that must be met to be returned
     # * +:order+ - The order to sort matched records by
     # * +:limit+ - The maximum number of records to return
@@ -186,7 +186,7 @@ module AWS
     #   class Book < AWS::Record::Model
     #
     #     scope :mine, where(:owner => 'Me')
-    #   
+    #
     #     scope :unread, where(:has_been_read => false)
     #
     #     scope :by_popularity, order(:score, :desc)
@@ -197,7 +197,7 @@ module AWS
     #
     #   # The following expression returns 10 books that belong
     #   # to me, that are unread sorted by popularity.
-    #   next_good_reads = Book.mine.unread.top_10 
+    #   next_good_reads = Book.mine.unread.top_10
     #
     # There are 3 standard scope methods:
     #
@@ -209,7 +209,7 @@ module AWS
     #
     # Where accepts aruments in a number of forms:
     #
-    # 1. As an sql-like fragment. If you need to escape values this form is 
+    # 1. As an sql-like fragment. If you need to escape values this form is
     #    not suggested.
     #
     #      Book.where('title = "My Book"')
@@ -219,8 +219,8 @@ module AWS
     #
     #      Book.where('title = ?', 'My Book')
     #
-    # 3. A hash of key-value pairs. This is the simplest form, but also the 
-    #    least flexible.  You can not use this form if you need more complex 
+    # 3. A hash of key-value pairs. This is the simplest form, but also the
+    #    least flexible.  You can not use this form if you need more complex
     #    expressions that use or.
     #
     #      Book.where(:title => 'My Book')
@@ -230,10 +230,10 @@ module AWS
     # This orders the records as returned by AWS.  Default ordering is ascending.
     # Pass the value :desc as a second argument to sort in reverse ordering.
     #
-    #   Book.order(:title)        # alphabetical ordering 
-    #   Book.order(:title, :desc) # reverse alphabetical ordering 
+    #   Book.order(:title)        # alphabetical ordering
+    #   Book.order(:title, :desc) # reverse alphabetical ordering
     #
-    # You may only order by a single attribute. If you call order twice in the 
+    # You may only order by a single attribute. If you call order twice in the
     # chain, the last call gets presedence:
     #
     #   Book.order(:title).order(:price)
@@ -332,7 +332,7 @@ module AWS
 
       end
 
-      # @return [SimpleDB::Item] Returns a reference to the item as stored in 
+      # @return [SimpleDB::Item] Returns a reference to the item as stored in
       #   simple db.
       # @private
       private

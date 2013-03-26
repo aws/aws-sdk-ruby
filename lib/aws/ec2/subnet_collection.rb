@@ -41,7 +41,7 @@ module AWS
     #
     #   subnet = subnets['subnet-id-here']
     #
-    # You can filter subnets as well.  See the EC2 API documentation 
+    # You can filter subnets as well.  See the EC2 API documentation
     # (http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSubnets.html) for a complete list of accepted filters.
     #
     #   subnet = subnets.filter('state', 'available').first
@@ -53,7 +53,7 @@ module AWS
 
       # Creates a Subnet.  Subnets require a valid CIDR block and
       # are created inside a VPC.  If this collection does not
-      # have a 
+      # have a
       #
       # @param [String] cidr_block The CIDR block you want the subnet to
       #   cover (e.g., 10.0.0.0/24).
@@ -63,8 +63,8 @@ module AWS
       # @option options [VPC,String] :vpc The VPC (or VPC id string) to
       #   create the subnet in.
       #
-      # @option options [String,AvailabilityZone] :availability_zone 
-      #   The Availability Zone you want the subnet in. 
+      # @option options [String,AvailabilityZone] :availability_zone
+      #   The Availability Zone you want the subnet in.
       #   AWS selects a default zone for you (recommended).
       #
       # @return [Subnet]
@@ -74,12 +74,12 @@ module AWS
         client_opts = {}
         client_opts[:vpc_id] = vpc_id_option(options)
         client_opts[:cidr_block] = cidr_block
-        client_opts[:availability_zone] = az_option(options) if 
+        client_opts[:availability_zone] = az_option(options) if
           options[:availability_zone]
 
         resp = client.create_subnet(client_opts)
 
-        Subnet.new_from(:create_subnet, resp.subnet, 
+        Subnet.new_from(:create_subnet, resp.subnet,
           resp.subnet.subnet_id, :config => config)
 
       end
@@ -93,7 +93,7 @@ module AWS
       protected
       def az_option options
         options[:availability_zone].is_a?(AvailabilityZone) ?
-          options[:availability_zone].name : 
+          options[:availability_zone].name :
           options[:availability_zone]
       end
 
@@ -102,7 +102,7 @@ module AWS
         response = filtered_request(:describe_subnets, options, &block)
         response.subnet_set.each do |s|
 
-          subnet = Subnet.new_from(:describe_subnets, 
+          subnet = Subnet.new_from(:describe_subnets,
             s, s.subnet_id, :config => config)
 
           yield(subnet)

@@ -144,7 +144,7 @@ module AWS
       def exists?
         resp = client.describe_volumes(:filters => [
           { :name => 'volume-id', :values => [id] }
-        ]) 
+        ])
         resp.volume_index.key?(id)
       end
 

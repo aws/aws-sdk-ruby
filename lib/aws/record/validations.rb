@@ -28,7 +28,7 @@ module AWS
     #
     #     validates_presence_of :title, :author
     #
-    #     validates_length_of :summary, 
+    #     validates_length_of :summary,
     #       :max => 500,
     #       :allow_nil => true,
     #       :allow_blank => true
@@ -37,7 +37,7 @@ module AWS
     #
     # = Conditional Validations
     #
-    # Sometimes you only want to validate an attribute under certain 
+    # Sometimes you only want to validate an attribute under certain
     # conditions.  To make this simple, all validation methods accept the
     # following 3 options:
     #
@@ -55,7 +55,7 @@ module AWS
     #   validates_presence_of :created_at, :on => :create
     #
     #   validates_presence_of :updated_at, :on => :update
-    # 
+    #
     # === Validate :if or :unless
     #
     # Sometimes you have more complex requirements to determine if/when a
@@ -85,7 +85,7 @@ module AWS
     #     validates_presence_of :title
     #
     #   end
-    # 
+    #
     module Validations
 
       def self.extended base
@@ -123,7 +123,7 @@ module AWS
       #
       # @overload validate(*method_names, options = {})
       #   @param [Array<Symbol>] method_names A list of methods to call
-      #     during validation.  
+      #     during validation.
       #   @param [Hash] options
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
@@ -134,7 +134,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validate *args
@@ -217,7 +217,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_acceptance_of *args
@@ -238,17 +238,17 @@ module AWS
       #
       # === Confirmation Value Accessors
       #
-      # If your model does not have accessors for the confirmation value 
+      # If your model does not have accessors for the confirmation value
       # then they will be automatically added.  In the example above
-      # the user class would have an +attr_accessor+ for 
+      # the user class would have an +attr_accessor+ for
       # +:password_confirmation+.
       #
       # === Conditional Validation
       #
       # Mostly commonly you only need to validate confirmation of an
-      # attribute when it has changed.  It is therefore suggested to 
+      # attribute when it has changed.  It is therefore suggested to
       # pass an +:if+ condition reflecting this:
-      # 
+      #
       #   validates_confirmation_of :password, :if => :password_changed?
       #
       # === Multi-Valued Attributes
@@ -273,7 +273,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_confirmation_of *args
@@ -283,9 +283,9 @@ module AWS
       # Validates the number of values for a given attribute.
       #
       # === Length vs Count
-      # 
+      #
       # +validates_count_of+ validates the number of attribute values,
-      # whereas +validates_length_of: validates the length of each 
+      # whereas +validates_length_of: validates the length of each
       # attribute value instead.
       #
       # If you need to ensure each attribute value is a given length see
@@ -296,7 +296,7 @@ module AWS
       # You can validate there are a certain number of values:
       #
       #   validates_count_of :parents, :exactly => 2
-      # 
+      #
       # You can also specify a range:
       #
       #   validates_count_of :tags, :within => (2..10)
@@ -318,7 +318,7 @@ module AWS
       #
       # This validator is intended to for validating attributes that have
       # an array or set of values.  If used on an attribute that
-      # returns a scalar value (like +nil+ or a string), the count will 
+      # returns a scalar value (like +nil+ or a string), the count will
       # always be 0 (for +nil+) or 1 (for everything else).
       #
       # It is therefore recomended to use +:validates_presence_of+ in
@@ -328,10 +328,10 @@ module AWS
       # @overload validates_count_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
-      #   @option options [Integer] :exactly The exact number of values the 
-      #     attribute should have.  If this validation option fails the 
+      #   @option options [Integer] :exactly The exact number of values the
+      #     attribute should have.  If this validation option fails the
       #     error message specified by +:wrong_number+ will be added.
-      #   @option options [Range] :within An range of number of values to 
+      #   @option options [Range] :within An range of number of values to
       #     accept.  If the attribute has a number of values outside this range
       #     then the +:too_many+ or +:too_few+ error message will be added.
       #   @option options [Integer] :minimum The minimum number of values
@@ -359,7 +359,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_count_of *args
@@ -374,9 +374,9 @@ module AWS
       #
       #     validates_each(:name) do |record, attribute_name, value|
       #       if value == 'John Doe'
-      #         record.errors.add(attr_name, 'may not be an alias') 
+      #         record.errors.add(attr_name, 'may not be an alias')
       #       end
-      #     end 
+      #     end
       #
       #   end
       #
@@ -396,7 +396,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_each *attributes, &block
@@ -406,7 +406,7 @@ module AWS
         validators << BlockValidator.new(self, *attributes, &block)
       end
 
-      # Validates that the attribute value is not included in the given 
+      # Validates that the attribute value is not included in the given
       # enumerable.
       #
       #   validates_exlusion_of :username, :in => %w(admin administrator)
@@ -423,7 +423,7 @@ module AWS
       #     validates_exlusion_of :tags, :in => four_letter_words
       #
       #   end
-      # 
+      #
       # @overload validates_exclusion_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
@@ -444,7 +444,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_exclusion_of *args
@@ -452,7 +452,7 @@ module AWS
       end
 
       # Validates the attribute's value matches the given regular exression.
-      # 
+      #
       #   validates_format_of :year, :with => /^\d{4}$/
       #
       # You can also perform a not-match using +:without+ instead of +:with+.
@@ -471,13 +471,13 @@ module AWS
       #     validates_format_of :tags, :with => /^\w{2,10}$/
       #
       #   end
-      # 
+      #
       # @overload validates_format_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
-      #   @option options [Regexp] :with If the value matches the given 
+      #   @option options [Regexp] :with If the value matches the given
       #     regex, an error will not be added.
-      #   @option options [Regexp] :without If the value matches the given 
+      #   @option options [Regexp] :without If the value matches the given
       #     regex, an error will be added.
       #     must match, or an error is added.
       #   @option options [String] :message A custom error message.  The default
@@ -495,7 +495,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_format_of *args
@@ -513,7 +513,7 @@ module AWS
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes.
-      # 
+      #
       # @overload validates_inclusion_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
@@ -534,7 +534,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_inclusion_of *attributes
@@ -546,10 +546,10 @@ module AWS
       #   validates_lenth_of :username, :within => 3..25
       #
       # === Length vs Count
-      # 
+      #
       # +validates_length_of+ validates the length of individual attribute
       # values, whereas +validates_count_of: validates the number of
-      # attribute values. 
+      # attribute values.
       #
       # If you need to ensure there are certain number of values see
       # {#validates_count_of} instead.
@@ -560,11 +560,11 @@ module AWS
       #   @option options [Enumerable] :within An enumerable object to
       #     ensure the length of the value falls within.
       #   @option options [Integer] :exactly The exact length a value must be.
-      #     If this validation fails the error message specified by 
+      #     If this validation fails the error message specified by
       #     +:wrong_length+ will be added.
       #   @option options [Range] :within An enumerable object which must
       #     include the length of the attribute, or an error will be added.
-      #     If the attribute has a length outside the range then the 
+      #     If the attribute has a length outside the range then the
       #     +:too_long+ or +:too_short+ error message will be added.
       #   @option options [Integer] :minimum The minimum length an attribute
       #     value should be.  If it is shorter, the +:too_short+ error
@@ -597,7 +597,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_length_of *args
@@ -611,20 +611,20 @@ module AWS
       # === Multi-Valued Attributes
       #
       # You can validate multi-valued attributes using this the same way you
-      # validate single-valued attributes. Each value will be validated 
+      # validate single-valued attributes. Each value will be validated
       # individually.
       #
       # @overload validates_numericality_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
-      #   @option options [Boolean] :only_integer (false) Adds an error 
+      #   @option options [Boolean] :only_integer (false) Adds an error
       #     when valiating and the value is numeric, but it not a whole number.
       #   @option options [Integer] :equal_to When set the value must equal
       #     the given value exactly.  May not be used with the greater/less
       #     options.
       #   @option options [Numeric] :greater_than Ensures the attribute
       #     is greater than the given number.
-      #   @option options [Integer] :greater_than_or_equal_to Ensures the 
+      #   @option options [Integer] :greater_than_or_equal_to Ensures the
       #     attribute is greater than or equal to the given number.
       #   @option options [Numeric] :less_than Ensures the attribute is less
       #     than the given value.
@@ -649,21 +649,21 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_numericality_of *args
         validators << NumericalityValidator.new(self, *args)
       end
 
-      # Validates the named attributes are not blank. For validation 
+      # Validates the named attributes are not blank. For validation
       # purposes, blank values include:
       #
       # * +nil+
       # * empty string
       # * anything that responds to #empty? with true
       # * anything that responds to #blank? with true
-      # 
+      #
       # @overload validates_presence_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
@@ -682,7 +682,7 @@ module AWS
       #     to call.  The validation will only be run if the return value is
       #     of the method/proc is true (e.g. +:if => :name_changed?+ or
       #     +:if => lambda{|book| book.in_stock? }+).
-      #   @option options [Symbol,String,Proc] :unless Specifies a method or 
+      #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
       def validates_presence_of *args

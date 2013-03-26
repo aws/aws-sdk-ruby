@@ -94,7 +94,7 @@ module AWS
             :network_interface => network_interface)
 
         end
-        
+
       end
 
       context '#replace_route' do
@@ -139,7 +139,7 @@ module AWS
       context '#delete_route' do
 
         it 'calls #delete_route on the client' do
-          
+
           client.should_receive(:delete_route).with(
             :route_table_id => route_table.id,
             :destination_cidr_block => 'cidr-block')
@@ -188,9 +188,9 @@ module AWS
           end
 
         end
-        
+
         context '#main?' do
-          
+
           it 'returns true if it has an association without a subnet' do
             association_set << {
               :route_table_association_id => 'assoc-id',
@@ -237,7 +237,7 @@ module AWS
         end
 
         context '#routes' do
-          
+
           it 'returns an array of route objects' do
 
             route_set << {

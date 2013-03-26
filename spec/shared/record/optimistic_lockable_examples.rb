@@ -18,25 +18,25 @@ module AWS
     shared_examples_for("optimistic lockable") do
 
       context 'optimistic locking' do
-  
+
         it 'adds an integer_attribute with the given name' do
           klass.optimistic_locking :version_id
-          klass.attributes['version_id'].should 
+          klass.attributes['version_id'].should
             be_an(AWS::Record::Attributes::IntegerAttr)
         end
-  
+
         it 'defaults the attribute name to version_id' do
           klass.optimistic_locking
-          klass.attributes['version_id'].should 
+          klass.attributes['version_id'].should
             be_an(AWS::Record::Attributes::IntegerAttr)
         end
-  
+
         it 'provides a method to indicate if this class optimistically locks' do
           klass.optimistic_locking?.should == false
           klass.optimistic_locking # enable optimistic locking now
           klass.optimistic_locking?.should == true
         end
-  
+
       end
 
     end

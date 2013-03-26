@@ -157,13 +157,13 @@ module AWS
             groups = [sg2, sg3]
             egress = true
 
-            p1 = IpPermission.new(sg1, protocol, port_range, 
+            p1 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips,
               :groups => groups,
               :egress => egress,
               :config => config)
 
-            p2 = IpPermission.new(sg1, protocol, port_range, 
+            p2 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips.reverse,
               :groups => groups.reverse,
               :egress => egress,

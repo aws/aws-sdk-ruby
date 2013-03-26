@@ -30,7 +30,7 @@ module AWS
     #   be enabled for email sent from this identity.
     #
     # @attr_reader [Array<String>] dkim_tokens Returns a set of DNS records,
-    #   or tokens, that must be published in the domain name's DNS to 
+    #   or tokens, that must be published in the domain name's DNS to
     #   complete the DKIM verification process.  Call {#verify_dkim} if this
     #   returns an empty list.
     #

@@ -72,9 +72,9 @@ module AWS
           create_opts[:hash_key] = { :id => :string }
 
           dynamo_db.tables.create(
-            table_name, 
-            read_capacity_units, 
-            write_capacity_units, 
+            table_name,
+            read_capacity_units,
+            write_capacity_units,
             create_opts)
 
         end
@@ -99,7 +99,7 @@ module AWS
 
       end
 
-      # @return [DynamoDB::Item] Returns a reference to the item as stored in 
+      # @return [DynamoDB::Item] Returns a reference to the item as stored in
       #   simple db.
       # @private
       private

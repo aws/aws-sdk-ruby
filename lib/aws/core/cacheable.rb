@@ -13,23 +13,23 @@
 
 module AWS
   module Core
-  
+
     # @private
     module Cacheable
-  
+
       # @private
       class NoData < StandardError; end
-  
+
       def self.included base
         base.extend Naming unless base.respond_to?(:service_ruby_name)
       end
-  
+
       # @private
       protected
       def local_cache_key
         raise NotImplementedError
       end
-  
+
       # @private
       protected
       def cache_key
@@ -41,28 +41,28 @@ module AWS
             local_cache_key
         end
       end
-  
+
       # @private
       public
       def retrieve_attribute attr, &block
-  
+
         if cache = AWS.response_cache
-  
+
           if cache.resource_cache.cached?(cache_key, attr.name)
             return cache.resource_cache.get(cache_key, attr.name)
           end
-  
+
           cache.select(*attr.request_types).each do |response|
             if attributes = attributes_from_response(response)
               cache.resource_cache.store(cache_key, attributes)
               return attributes[attr.name] if attributes.key?(attr.name)
             end
           end
-  
+
         end
-  
+
         response = yield
-  
+
         if attributes = attributes_from_response(response)
           if cache = AWS.response_cache
             cache.resource_cache.store(cache_key, attributes)
@@ -72,7 +72,7 @@ module AWS
           raise NoData.new("no data in #{response.request_type} response")
         end
       end
-  
+
     end
   end
 end

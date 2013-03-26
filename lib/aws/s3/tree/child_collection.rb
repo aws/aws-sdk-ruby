@@ -23,9 +23,9 @@ module AWS
         # @private
         def initialize parent, collection, options = {}
 
-          options = { 
+          options = {
             :prefix => nil,
-            :delimiter => '/', 
+            :delimiter => '/',
             :append => true,
           }.merge(options)
 
@@ -58,7 +58,7 @@ module AWS
         attr_reader :delimiter
 
         # @return [Boolean] Returns true if the tree is set to auto-append
-        #   the delimiter to the prefix when the prefix does not end with 
+        #   the delimiter to the prefix when the prefix does not end with
         #   the delimiter.
         def append?
           @append

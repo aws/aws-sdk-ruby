@@ -126,7 +126,7 @@ module AWS
 
         it 'returns credentials with session tokens when provided' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
@@ -135,24 +135,24 @@ module AWS
 
         it 'ommits nil values from credentials' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => nil }
           provider = StaticProvider.new(creds)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
         end
 
         it 'protects static credetials from downstream changes' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
         end
@@ -227,7 +227,7 @@ module AWS
           provider = ENVProvider.new('AWS')
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
         end
 
@@ -307,7 +307,7 @@ module AWS
               :secret_access_key => "secret-3",
               :session_token => "token-3",
             }
-            
+
           end
 
         end
@@ -366,7 +366,7 @@ module AWS
       end
 
       describe SessionProvider do
-        
+
         let(:long_term_creds) {{
           :access_key_id => 'akid',
           :secret_access_key => 'secret',

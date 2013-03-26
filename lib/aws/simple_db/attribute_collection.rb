@@ -37,7 +37,7 @@ module AWS
       #
       # You can ask for any attribute by name.  The attribute may or may not
       # actually exist in SimpleDB.
-      # 
+      #
       # @example Get an attribute by symbol or string name
       #   colors = item.attributes[:colors]
       #   colors = item.attributes['colors']
@@ -64,12 +64,12 @@ module AWS
       #     puts "#{name}: #{value}"
       #   end
       #
-      # @yield [attribute_name, attribute_value] Yields once for every 
+      # @yield [attribute_name, attribute_value] Yields once for every
       #   attribute value on the item.
       # @yieldparam [String] attribute_name
       # @yieldparam [String] attribute_value
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to yield the most current attributes for this item.
       # @return [nil]
       def each_value options = {}, &block
@@ -101,13 +101,13 @@ module AWS
       #   on the item.  Yields each attribute only one time, even it
       #   has multiple values.
       # @yieldparam [Attribute] attribute
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to yield the most current attributes for this item.
       # @return [nil]
       def each options = {}, &block
         yielded = {}
-        each_value(options) do |attribute_name, attribute_value| 
+        each_value(options) do |attribute_name, attribute_value|
           unless yielded[attribute_name]
             attribute = self[attribute_name]
             yield(attribute)
@@ -119,7 +119,7 @@ module AWS
 
       # Replaces attributes for the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The 
+      # The +attributes_hash+ should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # Attributes not named in this hash are left alone.  Attributes named
@@ -128,7 +128,7 @@ module AWS
       # @example
       #
       #   item.attributes.set(
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance')
       #
       # @param [Hash] attributes
@@ -140,13 +140,13 @@ module AWS
 
       # Adds values to attributes on the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The 
+      # The +attributes_hash+ should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # @example
       #
       #   item.attributes.add(
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance')
       #
       # @param[Hash] attribute_hash
@@ -186,8 +186,8 @@ module AWS
       #   item.attributes.to_h
       #   #=> { 'colors' => ['red','blue'], 'size' => ['large'] }
       #
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to return the most current attributes values.
       # @return [Hash]
       def to_h options = {}

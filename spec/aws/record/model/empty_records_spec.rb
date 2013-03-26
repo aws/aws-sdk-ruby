@@ -19,7 +19,7 @@ module AWS
       it_behaves_like 'aws record' do
 
         context 'empty records' do
-          
+
           before(:each) do
             klass.string_attr :name
             klass.string_attr :alias
@@ -30,7 +30,7 @@ module AWS
           end
 
           context 'new record' do
-            
+
             it 'raises an error when trying to create an empty record' do
               obj = klass.new
               lambda { obj.save }.should raise_error(EmptyRecordError)
@@ -76,7 +76,7 @@ module AWS
               lambda { obj.save }.should raise_error(EmptyRecordError)
 
             end
-            
+
           end
 
         end

@@ -28,7 +28,7 @@ module AWS
       context '#network_interface_id' do
 
         it 'returns the route table id passed in' do
-          network_interface.network_interface_id.should == 'ni-id' 
+          network_interface.network_interface_id.should == 'ni-id'
         end
 
         it 'is aliased as #id' do
@@ -51,9 +51,9 @@ module AWS
       context '#subnet' do
 
         it 'returns the subnet' do
-          network_interface = NetworkInterface.new('ni-id', 
+          network_interface = NetworkInterface.new('ni-id',
             :vpc_id => 'vpc-id',
-            :subnet_id => 'subnet-id', 
+            :subnet_id => 'subnet-id',
             :config => config)
 
           network_interface.subnet.should be_a(Subnet)
@@ -105,12 +105,12 @@ module AWS
           :attach_time => now,
           :delete_on_termination => true,
         }}
-  
+
         let(:groups) {[
           { :group_id => 'sg-123', :group_name => 'sg-1-name' },
           { :group_id => 'sg-321', :group_name => 'sg-2-name' },
         ]}
-  
+
         let(:details) {{
           :network_interface_id => network_interface.id,
           :vpc_id => 'vpc-12345',
@@ -124,37 +124,37 @@ module AWS
           :attachment => attachment,
           :groups => groups,
         }}
-  
+
         let(:response) { client.stub_for(:describe_network_interfaces) }
-  
+
         before(:each) do
           response.data[:network_interface_set] = [details]
           response.stub(:describe_network_interfaces).and_return(response)
         end
-  
+
         context '#detach' do
-  
+
           it 'raises an error if there is no attachment' do
             details.delete(:attachment)
             lambda {
               network_interface.detach
             }.should raise_error(/unable to detach/)
           end
-  
+
           it 'calls #detach_network_interface on the client' do
             client.should_receive(:detach_network_interface).with(
               :attachment_id => attachment[:attachment_id],
               :force => false)
             network_interface.detach
           end
-  
+
           it 'accepts a force option' do
             client.should_receive(:detach_network_interface).with(
               :attachment_id => attachment[:attachment_id],
               :force => true)
             network_interface.detach :force => true
           end
-  
+
         end
 
         context '#security_groups' do
@@ -224,11 +224,11 @@ module AWS
         context "#association" do
 
           let(:assoc) {{
-            :public_ip => '1.2.3.4', 
-            :ip_owner_id => '12345', 
+            :public_ip => '1.2.3.4',
+            :ip_owner_id => '12345',
             :association_id => "eipassoc-12345",
           }}
-          
+
           it 'returns nil when not present' do
             network_interface.association.should == nil
             network_interface.elastic_ip.should == nil
@@ -264,7 +264,7 @@ module AWS
         end
 
         context '#instance' do
-          
+
           it 'returns the attachment instance' do
             instance = network_interface.instance
             instance.id.should == 'i-123'
@@ -273,15 +273,15 @@ module AWS
           end
 
         end
-  
+
         context '#delete' do
-  
+
           it 'calls delete_network_interface on the client' do
             client.should_receive(:delete_network_interface).with(
               :network_interface_id => network_interface.id)
             network_interface.delete
           end
-  
+
         end
 
       end

@@ -24,7 +24,7 @@ module AWS
     let(:config) { double("config", :ec2_client => ec2_client) }
 
     let(:instance) do
-      options = args.last.is_a?(Hash) ? args.pop : {} 
+      options = args.last.is_a?(Hash) ? args.pop : {}
       options[:config] = config
       args << options
       described_class.new(*args)

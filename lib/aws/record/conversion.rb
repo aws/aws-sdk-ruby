@@ -31,7 +31,7 @@ module AWS
       def to_param
         persisted? ? to_key.join('-') : nil
       end
-      
+
     end
 
   end

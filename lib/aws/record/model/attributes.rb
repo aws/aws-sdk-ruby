@@ -44,7 +44,7 @@ module AWS
               range.is_a?(Range) and range.first.is_a?(Integer)
             super(name, options)
           end
-          
+
           # Returns a serialized representation of the integer value suitable for
           # storing in SimpleDB.
           #
@@ -61,7 +61,7 @@ module AWS
           #
           # @param [Integer] integer The number to serialize.
           # @param [Hash] options
-          # @option options [required,Range] :range A range that represents the 
+          # @option options [required,Range] :range A range that represents the
           #   minimum and maximum values this integer can be.
           #   The returned value will have an offset applied (if min is
           #   less than 0) and will be zero padded.
@@ -115,7 +115,7 @@ module AWS
           end
 
           def self.serialize float, options = {}
-            expect(Float, float) do 
+            expect(Float, float) do
               left, right = float.to_s.split('.')
               left = SortableIntegerAttr.serialize(left.to_i, options)
               SortableIntegerAttr.check_range(float, options)
@@ -136,7 +136,7 @@ module AWS
       end
 
       class << self
-  
+
         # Adds a string attribute to this class.
         #
         # @example A standard string attribute
@@ -155,7 +155,7 @@ module AWS
         #   end
         #
         #   recipe = Recipe.new(:tags => %w(popular dessert))
-        #   recipe.tags #=> #<Set: {"popular", "desert"}> 
+        #   recipe.tags #=> #<Set: {"popular", "desert"}>
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -164,7 +164,7 @@ module AWS
         def string_attr name, options = {}
           add_attribute(Record::Attributes::StringAttr.new(name, options))
         end
-  
+
         # Adds an integer attribute to this class.
         #
         #   class Recipe < AWS::Record::Model
@@ -181,7 +181,7 @@ module AWS
         def integer_attr name, options = {}
           add_attribute(Attributes::IntegerAttr.new(name, options))
         end
-  
+
         # Adds a sortable integer attribute to this class.
         #
         #   class Person < AWS::Record::Model
@@ -192,7 +192,7 @@ module AWS
         #   person.age #=> 10
         #
         # === Validations
-        # 
+        #
         # It is recomended to apply a validates_numericality_of with
         # minimum and maximum value constraints.  If a value is assigned
         # to a sortable integer that falls outside of the +:range: it will
@@ -214,7 +214,7 @@ module AWS
         def sortable_integer_attr name, options = {}
           add_attribute(Attributes::SortableIntegerAttr.new(name, options))
         end
-  
+
         # Adds a float attribute to this class.
         #
         #   class Listing < AWS::Record::Model
@@ -231,11 +231,11 @@ module AWS
         def float_attr name, options = {}
           add_attribute(Attributes::FloatAttr.new(name, options))
         end
-  
+
         # Adds sortable float attribute to this class.
         #
         # Persisted values are stored (and sorted) as strings.  This makes it
-        # more difficult to sort numbers because they don't sort 
+        # more difficult to sort numbers because they don't sort
         # lexicographically unless they have been offset to be positive and
         # then zero padded.
         #
@@ -245,7 +245,7 @@ module AWS
         #
         #   sortable_float_attr :score, :range => (0..10)
         #
-        # This will cause values like 5.5 to persist as a string like '05.5' so 
+        # This will cause values like 5.5 to persist as a string like '05.5' so
         # that they can be sorted lexicographically.
         #
         # === Negative Floats
@@ -255,8 +255,8 @@ module AWS
         #
         #   sortable_float_attr :position, :range => (-10..10)
         #
-        # AWS::Record will add 10 to all values and zero pad them 
-        # (e.g. -10.0 will be represented as '00.0' and 10 will be represented as 
+        # AWS::Record will add 10 to all values and zero pad them
+        # (e.g. -10.0 will be represented as '00.0' and 10 will be represented as
         # '20.0').  This will allow the values to be compared lexicographically.
         #
         # @note If you change the +:range+ after some values have been persisted
@@ -274,7 +274,7 @@ module AWS
         def sortable_float_attr name, options = {}
           add_attribute(Attributes::SortableFloatAttr.new(name, options))
         end
-  
+
         # Adds a boolean attribute to this class.
         #
         # @example
@@ -293,16 +293,16 @@ module AWS
         #
         # @param [Symbol] name The name of the attribute.
         def boolean_attr name, options = {}
-  
+
           attr = add_attribute(Attributes::BooleanAttr.new(name, options))
-  
+
           # add the boolean question mark method
           define_method("#{attr.name}?") do
             !!__send__(attr.name)
           end
-  
+
         end
-  
+
         # Adds a datetime attribute to this class.
         #
         # @example A standard datetime attribute
@@ -327,7 +327,7 @@ module AWS
         def datetime_attr name, options = {}
           add_attribute(Record::Attributes::DateTimeAttr.new(name, options))
         end
-  
+
         # Adds a date attribute to this class.
         #
         # @example A standard date attribute
@@ -350,7 +350,7 @@ module AWS
         def date_attr name, options = {}
           add_attribute(Record::Attributes::DateAttr.new(name, options))
         end
-  
+
         # A convenience method for adding the standard two datetime attributes
         # +:created_at+ and +:updated_at+.
         #
@@ -364,13 +364,13 @@ module AWS
         #   recipe.save
         #   recipe.created_at #=> <DateTime ...>
         #   recipe.updated_at #=> <DateTime ...>
-        # 
+        #
         def timestamps
           c = datetime_attr :created_at
           u = datetime_attr :updated_at
           [c, u]
         end
-    
+
       end
     end
   end

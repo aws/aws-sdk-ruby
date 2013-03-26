@@ -35,8 +35,8 @@ module AWS
 
       end
 
-      context '#user' do 
-        
+      context '#user' do
+
         it 'returns the user passed to #new' do
           access_key.user.should == user
         end
@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#secret' do
-        
+
         it 'returns the secret passed to #new' do
           access_key = AccessKey.new('id', :secret_value => 'secret')
           access_key.secret.should == 'secret'
@@ -75,7 +75,7 @@ module AWS
 
           response.data[:access_key_metadata] = [
             {
-              :access_key_id => 'id', 
+              :access_key_id => 'id',
               :user_name => user.name,
               :status => 'Inactive',
             },
@@ -92,12 +92,12 @@ module AWS
       end
 
       context '#active?' do
-        
+
         it 'returns true if the status is :active' do
           access_key.stub(:status).and_return(:active)
           access_key.active?.should == true
         end
-        
+
         it 'returns false if the status is :inactive' do
           access_key.stub(:status).and_return(:inactive)
           access_key.active?.should == false
@@ -106,12 +106,12 @@ module AWS
       end
 
       context '#inactive?' do
-        
+
         it 'returns false if the status is :active' do
           access_key.stub(:status).and_return(:active)
           access_key.inactive?.should == false
         end
-        
+
         it 'returns true if the status is :inactive' do
           access_key.stub(:status).and_return(:inactive)
           access_key.inactive?.should == true
@@ -120,12 +120,12 @@ module AWS
       end
 
       context '#activate!' do
-        
+
         it 'calls update_access_key on the client' do
 
           client.should_receive(:update_access_key).with(
             :access_key_id => access_key.id,
-            :user_name => user.name, 
+            :user_name => user.name,
             :status => 'Active')
 
           access_key.activate!
@@ -135,11 +135,11 @@ module AWS
       end
 
       context '#deactivate!' do
-        
+
         it 'calls update_access_key on the client' do
           client.should_receive(:update_access_key).with(
             :access_key_id => access_key.id,
-            :user_name => user.name, 
+            :user_name => user.name,
             :status => 'Inactive')
           access_key.deactivate!
         end
@@ -147,11 +147,11 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls delete_access_key on the client' do
           client.should_receive(:delete_access_key).with(
             :access_key_id => access_key.id,
-            :user_name => user.name) 
+            :user_name => user.name)
           access_key.delete
         end
 

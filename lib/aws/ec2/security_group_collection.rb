@@ -19,15 +19,15 @@ module AWS
 
       include TaggedCollection
 
-      # Creates a new 
+      # Creates a new
       # @param [String] name The name of the security group to create.
       # @param [Hash] options
-      # @option options [String] :description An informal description 
+      # @option options [String] :description An informal description
       #   of this security group.  Accepts alphanumeric characters, spaces,
       #   dashes, and underscores. If left blank the description will be set
       #   to the name.
       #
-      # @option options [VPC,String] :vpc (nil) A VPC or VPC id string to 
+      # @option options [VPC,String] :vpc (nil) A VPC or VPC id string to
       #   create the security group in.  When specified a VPC security
       #   group is created.
       #
@@ -68,7 +68,7 @@ module AWS
       # A subsequent call to #each will limit the security groups returned
       # by the set of filters.
       #
-      # If you supply multiple values to #filter then these values are 
+      # If you supply multiple values to #filter then these values are
       # treated as an OR condition.  To return security groups named
       # 'test' or 'fake':
       #
@@ -83,7 +83,7 @@ module AWS
       #     filter('group-name', '*ruby*').each do |group|
       #     #...
       #   end
-      #  
+      #
       # Note that * matches one or more characters and ? matches any one
       # character.
       #
@@ -92,17 +92,17 @@ module AWS
       # * description - Description of the security group.
       # * group-id - ID of the security group.
       # * group-name - Name of the security group.
-      # * ip-permission.cidr - CIDR range that has been granted the 
+      # * ip-permission.cidr - CIDR range that has been granted the
       #   permission.
-      # * ip-permission.from-port - Start of port range for the TCP and UDP 
+      # * ip-permission.from-port - Start of port range for the TCP and UDP
       #    protocols, or an ICMP type number.
-      # * ip-permission.group-name - Name of security group that has been 
+      # * ip-permission.group-name - Name of security group that has been
       #   granted the permission.
-      # * ip-permission.protocol - IP protocol for the permission. Valid 
+      # * ip-permission.protocol - IP protocol for the permission. Valid
       #   values include 'tcp', 'udp', 'icmp' or a protocol number.
-      # * ip-permission.to-port - End of port range for the TCP and UDP 
+      # * ip-permission.to-port - End of port range for the TCP and UDP
       #   protocols, or an ICMP code.
-      # * ip-permission.user-id - ID of AWS account that has been granted 
+      # * ip-permission.user-id - ID of AWS account that has been granted
       #   the permission.
       # * owner-id - AWS account ID of the owner of the security group.
       # * tag-key - Key of a tag assigned to the security group.
@@ -111,7 +111,7 @@ module AWS
       # @return [SecurityGroupCollection] A new collection that represents
       #   a subset of the security groups associated with this account.
 
-      # Yields once for each security group in this account. 
+      # Yields once for each security group in this account.
       #
       # @yield [group]
       # @yieldparam [SecurityGroup] group
@@ -121,7 +121,7 @@ module AWS
         response = filtered_request(:describe_security_groups)
         response.security_group_info.each do |info|
 
-          group = SecurityGroup.new_from(:describe_security_groups, info, 
+          group = SecurityGroup.new_from(:describe_security_groups, info,
             info.group_id, :config => config)
 
           yield(group)

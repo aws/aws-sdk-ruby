@@ -14,7 +14,7 @@
 module AWS
   class IAM
 
-    
+
     # Represents an IAM User.  Each AWS account can have many users.  Users
     # can be organized (optionally) into groups.  Users (and groups) can be
     # given policies that affect that they can do.
@@ -24,7 +24,7 @@ module AWS
     #   iam = AWS::IAM.new
     #
     #   user = iam.users.create('johndoe')
-    # 
+    #
     #
     # == Renaming a User
     #
@@ -35,9 +35,9 @@ module AWS
     #   user.name = 'newname'
     #
     # == User Path
-    # 
+    #
     # When you create a user you can assign a path.  Paths must begin and
-    # end with a forward slash (/).  
+    # end with a forward slash (/).
     #
     #   user = iam.users.create('newuser', :path => '/developers/ruby/')
     #
@@ -91,8 +91,8 @@ module AWS
       # @attr_reader [String] The user's ARN (Amazon Resource Name).
       attribute :arn
 
-      # @attr [String] The path for this user.  Paths are used to 
-      #   identify which division or part of an organization the user 
+      # @attr [String] The path for this user.  Paths are used to
+      #   identify which division or part of an organization the user
       #   belongs to.
       mutable_attribute :path
 
@@ -136,7 +136,7 @@ module AWS
       # @return [PolicyCollection] Returns a collection that represents
       #   all policies for this user.
       def policies
-        UserPolicyCollection.new(self)  
+        UserPolicyCollection.new(self)
       end
 
       # Returns a collection that represents the signing certificates
@@ -148,14 +148,14 @@ module AWS
       #
       # If you need to access the signing certificates of this AWS account,
       # see {IAM#signing_certificates}.
-      # 
+      #
       # @return [SigningCertificateCollection] Returns a collection that
       #   represents signing certificates for this user.
       def signing_certificates
         SigningCertificateCollection.new(:user => self, :config => config)
       end
 
-      # @return [MFADeviceCollection] Returns a collection that represents 
+      # @return [MFADeviceCollection] Returns a collection that represents
       #   all MFA devices assigned to this user.
       def mfa_devices
         MFADeviceCollection.new(self)

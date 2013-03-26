@@ -86,7 +86,7 @@ module AWS
       context 'existing gateways' do
 
         let(:response) { client.stub_for(:describe_internet_gateways) }
-        
+
         before(:each) do
           response.data[:internet_gateway_set] = [
             {

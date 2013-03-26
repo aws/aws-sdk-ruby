@@ -494,14 +494,14 @@ module AWS
 
         conditions = self.conditions.inject([]) do |list, (field, field_conds)|
           list + field_conds
-        end 
-        
+        end
+
         conditions << { "bucket" => bucket.name }
         conditions += key_conditions
         conditions += optional_fields.map { |(n, v)| Hash[[[n, v]]] }
         conditions += range_conditions
         conditions += ignored_conditions
-        
+
         if token = config.credential_provider.session_token
           conditions << { "x-amz-security-token" => token }
         end

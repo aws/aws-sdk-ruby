@@ -27,7 +27,7 @@ module AWS
       def validate_attribute record, attribute_name, value_or_values
         each_value(value_or_values) do |value|
           included = value_included?(value)
-          record.errors.add(attribute_name, message) if included 
+          record.errors.add(attribute_name, message) if included
         end
       end
 

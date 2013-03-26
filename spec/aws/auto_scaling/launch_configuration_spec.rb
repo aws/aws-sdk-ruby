@@ -146,7 +146,7 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         it 'describes launch configurations with a name filter' do
           response.data[:launch_configurations] = [
             { :launch_configuration_name => 'name' },

@@ -16,7 +16,7 @@ require 'aws/sns/config'
 
 module AWS
 
-  # This class is the starting point for working with Amazon Simple 
+  # This class is the starting point for working with Amazon Simple
   # Notification Service (SNS).
   #
   # To use Amazon SNS you must first {sign up here}[http://aws.amazon.com/sns/].
@@ -28,13 +28,13 @@ module AWS
   #
   # = Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
   #   AWS.config(
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #
   # Or you can set them directly on the SNS interface:
   #
   #   sns = AWS::SNS.new(

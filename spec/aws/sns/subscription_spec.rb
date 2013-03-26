@@ -87,7 +87,7 @@ module AWS
       context '#exists?' do
 
         it 'calls #get_subscription_attributes on the client' do
-          
+
           client.should_receive(:get_subscription_attributes).
             with(:subscription_arn => subscription.arn).
             and_return(client.stub_for(:get_subscription_attributes))

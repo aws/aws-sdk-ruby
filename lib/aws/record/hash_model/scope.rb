@@ -10,7 +10,7 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-  
+
 module AWS
   module Record
     class HashModel
@@ -20,7 +20,7 @@ module AWS
       # == Getting a Scope Object
       #
       # You should normally never need to construct a Scope object directly.
-      # Scope objects are returned from the AWS::Record::HashModel finder 
+      # Scope objects are returned from the AWS::Record::HashModel finder
       # methods # (e.g. +shard+ and +limit+).
       #
       #   books = Book.limit(100)
@@ -63,20 +63,20 @@ module AWS
       #   Book.shard('books-1').first
       #
       class Scope < Record::Scope
-    
+
         private
         def _each_object &block
-  
+
           items = _item_collection
-  
+
           items.select(:limit => @options[:limit]).each do |item_data|
             obj = base_class.new(:shard => _shard)
             obj.send(:hydrate, item_data.attributes['id'], item_data.attributes)
             yield(obj)
           end
-  
+
         end
-    
+
         private
         def _merge_scope scope
           merged = self
@@ -87,7 +87,7 @@ module AWS
           end
           merged
         end
-  
+
         private
         def _handle_options options
           scope = self
@@ -96,12 +96,12 @@ module AWS
           end
           scope
         end
-  
+
         private
         def _item_collection
           base_class.dynamo_db_table(_shard).items
         end
-  
+
       end
     end
   end

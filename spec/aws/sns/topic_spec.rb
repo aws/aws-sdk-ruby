@@ -42,7 +42,7 @@ module AWS
       end
 
       context '#arn' do
-        
+
         it 'returns the arn from initialize' do
           topic.arn.should == arn
         end
@@ -50,12 +50,12 @@ module AWS
       end
 
       context '#name' do
-        
+
         it 'returns the trailing piece from the arn' do
           topic = Topic.new('arn:aws:sns:us-east-1:599169622985:MyTopic')
           topic.name.should == 'MyTopic'
         end
-        
+
         it 'it should not make any requests against client' do
           topic = Topic.new('arn', :sns_client => double('client'))
           topic.name
@@ -211,8 +211,8 @@ module AWS
 
               policy = SQS::Policy.new
               policy.allow(
-                :principal => :any, 
-                :actions => [:send_message], 
+                :principal => :any,
+                :actions => [:send_message],
                 :resources => [queue]
               ).where(:source_arn).is(arn)
 
@@ -234,8 +234,8 @@ module AWS
 
               policy = SQS::Policy.new
               policy.allow(
-                :principal => :any, 
-                :actions => [:send_message], 
+                :principal => :any,
+                :actions => [:send_message],
                 :resources => [queue]
               ).where(:source_arn).is(arn)
 
@@ -333,7 +333,7 @@ module AWS
         let(:policy) { Policy.from_json('{"Version":"2008-10-17","Id":"us-east-1/698519295917/test__default_policy_ID","Statement" : [{"Effect":"Allow","Sid":"us-east-1/698519295917/test__default_statement_ID","Principal" : {"AWS": "*"},"Action":["SNS:GetTopicAttributes","SNS:SetTopicAttributes","SNS:AddPermission","SNS:RemovePermission","SNS:DeleteTopic","SNS:Subscribe","SNS:ListSubscriptionsByTopic","SNS:Publish","SNS:Receive"],"Resource":"arn:aws:sns:us-east-1:698519295917:test","Condition" : {"StringLike" : {"AWS:SourceArn": "arn:aws:*:*:698519295917:*"}}}]}') }
 
         let(:response) { client.stub_for(:get_topic_attributes) }
-        
+
         before(:each) do
           response.data[:attributes] = {
             'DisplayName' => 'Display Name',
@@ -348,13 +348,13 @@ module AWS
         end
 
         context '#display_name' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.display_name
           end
-          
+
           it 'returns the display name as a string' do
             topic.display_name.should == 'Display Name'
           end
@@ -367,13 +367,13 @@ module AWS
         end
 
         context '#num_subscriptions_confirmed' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.num_subscriptions_confirmed
           end
-          
+
           it 'returns the num_subscriptions_confirmed as an integer' do
             topic.num_subscriptions_confirmed.should == 1
           end
@@ -381,13 +381,13 @@ module AWS
         end
 
         context '#num_subscriptions_pending' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.num_subscriptions_pending
           end
-          
+
           it 'returns the num_subscriptions_pending as an integer' do
             topic.num_subscriptions_pending.should == 2
           end
@@ -395,13 +395,13 @@ module AWS
         end
 
         context '#num_subscriptions_deleted' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.num_subscriptions_deleted
           end
-          
+
           it 'returns the num_subscriptions_deleted as an integer' do
             topic.num_subscriptions_deleted.should == 3
           end
@@ -409,13 +409,13 @@ module AWS
         end
 
         context '#owner' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.owner
           end
-          
+
           it 'returns the owner as a string' do
             topic.owner.should == '1234567890'
           end
@@ -423,13 +423,13 @@ module AWS
         end
 
         context '#policy' do
-          
+
           it 'calls get_topic_attributes' do
             client.should_receive(:get_topic_attributes).
               with(:topic_arn => topic.arn)
             topic.policy
           end
-          
+
           it 'returns the policy' do
             #puts topic.policy.send(:hash_without_ids).to_yaml
             #puts policy.send(:hash_without_ids).to_yaml
@@ -446,7 +446,7 @@ module AWS
           client.should_receive(:publish).with do |opts|
             opts[:topic_arn].should == topic.arn
             opts[:message_structure].should == 'json'
-            JSON.parse(opts[:message]).should == 
+            JSON.parse(opts[:message]).should ==
               JSON.parse(options.merge(:default => 'message').to_json)
           end.and_return(response)
         end
@@ -460,7 +460,7 @@ module AWS
 
         it 'calls publish on the client' do
           should_receive_publish_with
-          topic.publish('message')  
+          topic.publish('message')
         end
 
         it 'returns the message id from the response' do

@@ -220,9 +220,9 @@ module AWS::Core
     it_should_behave_like 'generic policy statement' do
 
       it 'raises an error for symbolized action names' do
-        lambda { 
+        lambda {
           statement.actions = [:foo_bar]
-          statement.to_h 
+          statement.to_h
         }.should raise_error(ArgumentError, /symbolized action names/)
       end
 

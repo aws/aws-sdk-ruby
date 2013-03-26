@@ -72,7 +72,7 @@ Feature: Basic Image Operations
     | param | Action  | DescribeImages |
     | param | Owner.1 | self           |
 
-  # ari-fe916297 is a public ami by IBM, if this ami is removed then 
+  # ari-fe916297 is a public ami by IBM, if this ami is removed then
   # the test will need to be updated
   Scenario: Getting product codes
     When I ask for the image "ari-fe916297" by ID

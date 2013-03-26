@@ -408,7 +408,7 @@ module AWS
 
         before(:each) do
           resp_image = {
-            :image_id => 'ami-123', 
+            :image_id => 'ami-123',
             :product_codes => [
               { :product_code => 'abc' },
               { :product_code => 'xyz' },
@@ -425,7 +425,7 @@ module AWS
       end
 
       context '#add_product_codes' do
-        
+
         it 'calls modify image attribute on the client' do
           client.should_receive(:modify_image_attribute).
             with(:image_id => image.id, :product_codes => ['ABC'])

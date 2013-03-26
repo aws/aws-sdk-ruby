@@ -51,20 +51,20 @@ module AWS
     # You can poll indefinitely for tasks in a loop with {#poll}:
     #
     #   domain.decision_tasks.poll('my-task-list') do |task|
-    #     # yields once for every decision task found 
+    #     # yields once for every decision task found
     #   end
     #
     # Just like the block form above, the decision task is auto completed at
-    # the end of the block.  Please note, if you call +break+ or +return+ 
+    # the end of the block.  Please note, if you call +break+ or +return+
     # from inside the block, you *MUST* call {DecisionTask#complete!} or
     # the task will timeout.
     #
     # == Events and Decisions
     #
     # Each decision task provides an enumerable collection of both
-    # new events ({DecisionTask#new_events}) and all events 
-    # ({DecisionTask#events}).  
-    # 
+    # new events ({DecisionTask#new_events}) and all events
+    # ({DecisionTask#events}).
+    #
     # Based on the events in the workflow execution history, you should
     # call methods on the decision task.  See {DecisionTask} for
     # a complete list of decision methods.
@@ -83,16 +83,16 @@ module AWS
       # @return [Domain]
       attr_reader :domain
 
-      # Returns the number of decision tasks in the specified +task_list+. 
+      # Returns the number of decision tasks in the specified +task_list+.
       #
       #   count = decision_tasks.count('task-list-name')
       #   count.truncated? #=> false
       #   count.to_i #=> 7
       #
-      # @note This operation is eventually consistent. The results are best 
+      # @note This operation is eventually consistent. The results are best
       #   effort and may not exactly reflect recent updates and changes.
       #
-      # @param [String] task_list Name of the task list to count 
+      # @param [String] task_list Name of the task list to count
       #   decision tasks for.
       #
       # @return [Count] Returns a {Count} object that specifies the number
@@ -108,7 +108,7 @@ module AWS
       end
 
       # Polls the service for a single decision task.  The service may
-      # hold the request for up to 60 seconds before responding.  
+      # hold the request for up to 60 seconds before responding.
       #
       #   # try to get a single task, may return nil when no tasks available
       #   task = domain.decision_tasks.poll_for_single_task('task-list')
@@ -125,27 +125,27 @@ module AWS
       #      # task.complete! is called for you at the end of the block
       #   end
       #
-      # With the block form you do not need to call #complete! on the 
+      # With the block form you do not need to call #complete! on the
       # decision task.  It will be called when the block exists.
       #
-      # @note If you are not using the block form you must call 
+      # @note If you are not using the block form you must call
       #   {DecisionTask#complete!} yourself or your decision task will
       #   timeout.
       #
-      # @param [String] task_list Specifies the task list to poll for 
+      # @param [String] task_list Specifies the task list to poll for
       #   decision tasks.
       #
       # @param [Hash] options
       #
-      # @option options [String] :identity The identity of the decider 
+      # @option options [String] :identity The identity of the decider
       #   requesting a decision task.  This will be recorded in the
-      #   DecisionTaskStarted event in the workflow history. 
-      #   If +:identity+ is not passed then the hostname and 
+      #   DecisionTaskStarted event in the workflow history.
+      #   If +:identity+ is not passed then the hostname and
       #   process id will be sent (e.g. "hostname:pid").
       #
-      # @option options [Boolean] :reverse_event_order (false)  When true, 
-      #   the history events on the decision task will enumerate in 
-      #   reverse chronological order (newest events first).  By default 
+      # @option options [Boolean] :reverse_event_order (false)  When true,
+      #   the history events on the decision task will enumerate in
+      #   reverse chronological order (newest events first).  By default
       #   the events are enumerated in chronological order (oldest first).
       #
       # @option options [Integer] :event_batch_size (1000) When enumerating
@@ -154,7 +154,7 @@ module AWS
       #   of events to request each time (must not be greater than 1000).
       #
       # @yieldparam [DecisionTask] decision_task
-      # 
+      #
       # @return [DecisionTask,nil] Returns a decision task or +nil+.  If
       #   a block was passed then +nil+ is always returned.  If a block
       #   is not passed, then +nil+ or a {DecisionTask} will be returned.
@@ -196,19 +196,19 @@ module AWS
       #   end
       #
       # @note If you to terminate the block (by calling +break+ or +return+)
-      #   then it is your responsibility to call #complete! on the decision 
+      #   then it is your responsibility to call #complete! on the decision
       #   task.
       #
       # @param (see #poll_for_single_task)
       #
       # @option (see #poll_for_single_task)
-      # 
+      #
       # @yieldparam [DecisionTask] decision_task
       #
       # @return [nil]
       #
       def poll task_list, options = {}, &block
-        loop do 
+        loop do
           begin
             poll_for_single_task(task_list, options) do |decision_task|
               yield(decision_task)

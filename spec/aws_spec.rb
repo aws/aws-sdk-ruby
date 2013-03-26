@@ -40,7 +40,7 @@ describe AWS do
       AWS.should_receive(:config).with(:stub_requests => true)
       AWS.stub!
     end
-    
+
   end
 
   context '#start_memoizing' do

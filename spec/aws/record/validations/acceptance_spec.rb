@@ -65,7 +65,7 @@ module AWS
               obj.confirmation.should == nil
               obj.valid?.should == true
             end
-            
+
           end
 
           context ':allow_blank' do

@@ -40,21 +40,21 @@ module AWS
       # @return [String] event_id The unique ID of this event.
       attr_reader :event_id
 
-      # @return [String] The logical name of the resource specified 
+      # @return [String] The logical name of the resource specified
       #   in the template.
       attr_reader :logical_resource_id
 
-      # @return [String] The name or unique identifier associated with the 
+      # @return [String] The name or unique identifier associated with the
       #   physical instance of the resource.
       attr_reader :physical_resource_id
 
       # @return [String] BLOB of the properties used to create the resource.
       attr_reader :resource_properties
 
-      # @return [Symbol] Current status of the resource.  
+      # @return [Symbol] Current status of the resource.
       attr_reader :resource_status
 
-      # @return [String,nil] Success/failure message associated with the 
+      # @return [String,nil] Success/failure message associated with the
       #   resource.
       attr_reader :resource_status_reason
 

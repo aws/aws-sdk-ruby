@@ -25,7 +25,7 @@ module AWS
         args.push(options)
         super(*args)
       end
-        
+
       # @return [String,nil] The prefix of this collection.
       attr_reader :prefix
 

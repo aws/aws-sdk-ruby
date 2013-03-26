@@ -105,7 +105,7 @@ module AWS
         let(:client_method)   { :describe_alarms_for_metric }
         let(:next_token_key)  { :next_token }
         let(:member_class)    { Alarm }
-        let(:request_options) {{ 
+        let(:request_options) {{
           :namespace => metric.namespace,
           :metric_name => metric.metric_name,
           :dimensions => metric.dimensions,

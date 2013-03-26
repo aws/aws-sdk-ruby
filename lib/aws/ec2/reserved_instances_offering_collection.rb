@@ -14,7 +14,7 @@
 module AWS
   class EC2
     class ReservedInstancesOfferingCollection < Collection
-      
+
       include TaggedCollection
 
       def member_class
@@ -26,7 +26,7 @@ module AWS
         response.reserved_instances_offerings_set.each do |item|
 
           reserved_instance_offering = ReservedInstancesOffering.new_from(
-            :describe_reserved_instances_offerings, item, 
+            :describe_reserved_instances_offerings, item,
             item.reserved_instances_offering_id, :config => config)
 
           yield(reserved_instance_offering)

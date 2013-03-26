@@ -16,7 +16,7 @@ require 'spec_helper'
 module AWS
   class SimpleDB
     describe Request do
-      
+
       it_should_behave_like "an authorize v2 request"
 
       it_should_behave_like "an aws query request"

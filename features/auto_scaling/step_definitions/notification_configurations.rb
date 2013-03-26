@@ -20,7 +20,7 @@ Then /^the group should have no notification configurations$/ do
 end
 
 Then /^the auto scaling group should have the notification configuration$/ do
-  @auto_scaling_group.notification_configurations.should 
+  @auto_scaling_group.notification_configurations.should
     include(@notification_configuration)
 end
 

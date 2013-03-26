@@ -40,7 +40,7 @@ module AWS
     end
 
     context '#inspect' do
-      
+
       it 'returns a simple string' do
         s3.inspect.should == "<AWS::S3>"
       end

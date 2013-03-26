@@ -22,7 +22,7 @@ module AWS
       #   Describes the redirect behavior for every request to this
       #   bucket's website endpoint. If this element is present, no
       #   other options are are allowed.
-      #   * +:host_name+ - (*required*, String) 
+      #   * +:host_name+ - (*required*, String)
       #     Name of the host where requests will be redirected.
       #   * +:protocol+ - (String)
       #     Protocol to use (http, https) when redirecting requests. The

@@ -15,18 +15,18 @@ require 'spec_helper'
 
 module AWS
   describe SimpleEmailService do
-    
+
     let(:config) { stub_config }
 
     let(:client) { config.simple_email_service_client }
 
     let(:ses) { SimpleEmailService.new(:config => config) }
 
-    it_behaves_like 'a class that accepts configuration', 
+    it_behaves_like 'a class that accepts configuration',
       :simple_email_service_client
 
     context '#email_addresses' do
-      
+
       it 'returns an email address collection' do
         ses.email_addresses.should be_a(SimpleEmailService::EmailAddressCollection)
       end
@@ -102,23 +102,23 @@ module AWS
     end
 
     context '#send_email' do
-      
+
       let(:send_opt_keys) {
         %w(
-           subject subject_charset 
-           from reply_to return_path 
-           to cc bcc 
-           body_text body_text_charset 
+           subject subject_charset
+           from reply_to return_path
+           to cc bcc
+           body_text body_text_charset
            body_html body_html_charset
         ).collect{|k| k.to_sym }
       }
-        
+
       let(:send_opts) { send_opt_keys.inject({}) {|h,k| h[k] = k.to_s; h }}
 
       it 'returns nil' do
         ses.send_email(send_opts).should == nil
       end
-      
+
       it 'calls send email on the client' do
 
         client.should_receive(:send_email).with({

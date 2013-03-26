@@ -251,7 +251,7 @@ module AWS
         set_termination_protection(true)
       end
 
-      # Removes a lock on this job flow so the Amazon EC2 instances in the 
+      # Removes a lock on this job flow so the Amazon EC2 instances in the
       # cluster may be terminated.
       # @return [nil]
       def disable_termination_protection

@@ -38,7 +38,7 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
         :caller_reference => '123',
         :aliases => {
           :quantity => 0,
-        }, 
+        },
         :default_root_object => '/',
         :origins => {
           :quantity => 0,

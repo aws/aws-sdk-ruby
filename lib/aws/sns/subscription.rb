@@ -61,7 +61,7 @@ module AWS
 
       # @return [Topic]
       def topic
-        Topic.new(topic_arn, :config => config)  
+        Topic.new(topic_arn, :config => config)
       end
 
       # Deletes this subscription.
@@ -71,7 +71,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns true if the subscription confirmation 
+      # @return [Boolean] Returns true if the subscription confirmation
       #   request was authenticated.
       def confirmation_authenticated?
 

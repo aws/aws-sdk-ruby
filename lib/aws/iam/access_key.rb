@@ -18,7 +18,7 @@ module AWS
     #   Status may be +:active+ or +:inactive+.
     #
     class AccessKey < Resource
-      
+
       # @param [String] access_key_id The id of this access key.
       # @param [Hash] options
       # @option [String] :user The IAM user this access key belongs to.
@@ -59,7 +59,7 @@ module AWS
 
       # Returns the secret access key.
       #
-      # You can only access the secret for newly created access 
+      # You can only access the secret for newly created access
       # keys.  Calling +secret+ on existing access keys raises an error.
       #
       # @example Getting the secret from a newly created access key
@@ -74,7 +74,7 @@ module AWS
       #   access_key.secret
       #   #=> raises a runtime error
       #
-      # @return [String] Returns the secret access key.  
+      # @return [String] Returns the secret access key.
       def secret
         secret_value or raise 'secret is only available for new access keys'
       end
@@ -131,7 +131,7 @@ module AWS
         nil
       end
 
-      # Returns a hash that should be saved somewhere safe.  
+      # Returns a hash that should be saved somewhere safe.
       #
       #   access_keys = iam.access_keys.create
       #   access_keys.credentials
@@ -143,7 +143,7 @@ module AWS
       #   s3.buckets.create('newbucket')
       #
       # @return [Hash] Returns a hash with the access key id and
-      #   secret access key. 
+      #   secret access key.
       def credentials
         { :access_key_id => id, :secret_access_key => secret }
       end
@@ -158,8 +158,8 @@ module AWS
       end
 
       # IAM does not provide a request for "get access keys".
-      # Also note, we do not page the response. This is because 
-      # restrictions on how many access keys an account / user may 
+      # Also note, we do not page the response. This is because
+      # restrictions on how many access keys an account / user may
       # have is fewer than one page of results.
       # @private
       protected

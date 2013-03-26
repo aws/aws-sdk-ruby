@@ -14,7 +14,7 @@
 module AWS
   class IAM
 
-    # A collection that provides access to IAM users belonging to this 
+    # A collection that provides access to IAM users belonging to this
     # account.
     #
     #   iam = AWS::IAM.new
@@ -58,8 +58,8 @@ module AWS
       include Collection::WithPrefix
 
       # @param [String] name Name of the user to create.
-      # @option options [String] :path ('/') The path for the user name. 
-      #   For more information about paths, see 
+      # @option options [String] :path ('/') The path for the user name.
+      #   For more information about paths, see
       #   {Identifiers for IAM Entities}[http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html]
       # @return [User] Returns the newly created user.
       def create name, options = {}
@@ -67,7 +67,7 @@ module AWS
         create_opts[:user_name] = name
         create_opts[:path] = options[:path] if options[:path]
         resp = client.create_user(create_opts)
-        User.new_from(:create_user, resp.user, 
+        User.new_from(:create_user, resp.user,
           resp.user.user_name, :config => config)
       end
 
@@ -120,7 +120,7 @@ module AWS
       def each_item response, &block
         response.users.each do |item|
 
-          user = User.new_from(:list_users, item, 
+          user = User.new_from(:list_users, item,
             item.user_name, :config => config)
 
           yield(user)

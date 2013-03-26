@@ -49,7 +49,7 @@ module AWS
         resp.route_table_set.find{|t| t.route_table_id == route_table_id }
       end
 
-      # @return [Boolean] Returns true if this is the main (default) 
+      # @return [Boolean] Returns true if this is the main (default)
       #   route table.
       def main?
         @main = !!associations.find{|a| a.main? } if @main.nil?
@@ -61,7 +61,7 @@ module AWS
         VPC.new(vpc_id, :config => config)
       end
 
-      # @return [Array<Subnet>] Returns an array of subnets ({Subnet}) 
+      # @return [Array<Subnet>] Returns an array of subnets ({Subnet})
       #   that currently associated to this route table.
       def subnets
 
@@ -69,7 +69,7 @@ module AWS
 
         # The default route table has a single association where #subnet
         # returns nil (the main association).  If this is not the main
-        # route table we can safely return the subnets.  
+        # route table we can safely return the subnets.
         return subnets unless subnets.include?(nil)
 
         subnets.compact!
@@ -82,13 +82,13 @@ module AWS
           all_subnets = vpc.subnets.to_a
 
           # subnets assigned directly to a route table
-          associated_subnets = vpc.route_tables.  
+          associated_subnets = vpc.route_tables.
             map(&:associations).flatten.
             map(&:subnet).flatten.
             compact
 
           # subnets NOT assigned to a route table, these default as
-          # belonging to the default route table through the "main" 
+          # belonging to the default route table through the "main"
           # association
           unassociated_subnets = all_subnets.inject([]) do |list,subnet|
             unless associated_subnets.include?(subnet)
@@ -103,17 +103,17 @@ module AWS
 
       end
 
-      # @return [Array<RouteTable::Association>] Returns an array of 
+      # @return [Array<RouteTable::Association>] Returns an array of
       #   {RouteTable::Association} objects (association to subnets).
       def associations
-        association_set.collect do |details| 
-          Association.new(self, 
-            details[:route_table_association_id], 
+        association_set.collect do |details|
+          Association.new(self,
+            details[:route_table_association_id],
             details[:subnet_id])
         end
       end
 
-      # @return [Array<Route>] Returns an array of routes ({Route} objects) 
+      # @return [Array<Route>] Returns an array of routes ({Route} objects)
       #   belonging to this route table.
       def routes
         route_set.map do |route_details|
@@ -124,8 +124,8 @@ module AWS
       # Creates a new route in this route route.  The route must be attached
       # to a gateway, instance or network interface.
       #
-      # @param [String] destination_cidr_block The CIDR address block 
-      #   used for the destination match. For example: 0.0.0.0/0. 
+      # @param [String] destination_cidr_block The CIDR address block
+      #   used for the destination match. For example: 0.0.0.0/0.
       #   Routing decisions are based on the most specific match.
       #
       # @param [Hash] options
@@ -165,7 +165,7 @@ module AWS
         nil
       end
 
-      # Deletes this route table.  The route table must not be 
+      # Deletes this route table.  The route table must not be
       # associated with a subnet. You can't delete the main route table.
       # @return [nil]
       def delete
@@ -174,7 +174,7 @@ module AWS
       end
 
       protected
-      
+
       def route_options destination_cidr_block, options = {}
 
         client_opts = {}

@@ -19,7 +19,7 @@ module AWS
     # @attr_reader [Array<String>] availability_zone_names
     #
     # @attr_reader [Time] created_time
-    # 
+    #
     # @attr_reader [Integer] default_cooldown
     #
     # @attr_reader [Integer] desired_capacity
@@ -41,7 +41,7 @@ module AWS
     #
     # @attr_reader [String,nil] placement_group
     #
-    # @attr_reader [Hash] suspended_processes A hash of suspended process 
+    # @attr_reader [Hash] suspended_processes A hash of suspended process
     #   names (keys) and reasons (values).
     #
     class Group < Core::Resource
@@ -70,7 +70,7 @@ module AWS
 
       attribute :enabled_metrics do
         translates_output do |metrics|
-          metrics.inject({}) do |hash,metric| 
+          metrics.inject({}) do |hash,metric|
             hash.merge(metric.metric => metric.granularity)
           end
         end
@@ -81,7 +81,7 @@ module AWS
       attribute :health_check_type, :to_sym => true
 
       attribute :instances
-      
+
       protected :instances
 
       attribute :launch_configuration_name
@@ -151,9 +151,9 @@ module AWS
       def auto_scaling_instances
         instances.collect do |details|
           Instance.new_from(
-            :describe_auto_scaling_groups, 
+            :describe_auto_scaling_groups,
             details,
-            details.instance_id, 
+            details.instance_id,
             :auto_scaling_group_name => name, # not provided by the response
             :config => config)
         end
@@ -167,8 +167,8 @@ module AWS
       #     puts instance.id
       #   end
       #
-      # @return [EC2::InstanceCollection] Returns an instance collection 
-      #   (without making a request) that represents the instances 
+      # @return [EC2::InstanceCollection] Returns an instance collection
+      #   (without making a request) that represents the instances
       #   belonging to this Auto Scaling group.
       #
       def ec2_instances
@@ -197,13 +197,13 @@ module AWS
         end
       end
 
-      # Adjusts the desired size of the Auto Scaling group by initiating 
-      # scaling activities. When reducing the size of the group, it is 
-      # not possible to define which Amazon EC2 instances will be 
-      # terminated. This applies to any Auto Scaling decisions that might 
+      # Adjusts the desired size of the Auto Scaling group by initiating
+      # scaling activities. When reducing the size of the group, it is
+      # not possible to define which Amazon EC2 instances will be
+      # terminated. This applies to any Auto Scaling decisions that might
       # result in terminating instances.
       #
-      # @param [Integer] capacity The new capacity setting for this Auto 
+      # @param [Integer] capacity The new capacity setting for this Auto
       #   Scaling group.
       #
       # @param [Hash] options
@@ -225,7 +225,7 @@ module AWS
       #
       #   # suspend two processes by name
       #   auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
-      # 
+      #
       # @param [Array<String>] processes A list of process to suspend.
       #
       # @return [nil]
@@ -248,7 +248,7 @@ module AWS
       #
       #   # resume two processes by name
       #   auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
-      # 
+      #
       # @param [Array<String>] processes A list of process to resume.
       #
       # @return [nil]
@@ -310,7 +310,7 @@ module AWS
       #
       def update options = {}
 
-        group_opts = group_options(options) 
+        group_opts = group_options(options)
 
         # tags must be updated using a separate request from the
         # other attributes, *sigh*
@@ -375,7 +375,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [Boolean] :force (false) When true, the Auto Scaling
-      #   group will be deleted along with all instances associated with 
+      #   group will be deleted along with all instances associated with
       #   the group, without waiting for all instances to be terminated.
       #
       # @return [nil]
@@ -388,8 +388,8 @@ module AWS
         nil
       end
 
-      # Deletes the Auto Scaling group along with all instances 
-      # associated with the group, without waiting for all instances 
+      # Deletes the Auto Scaling group along with all instances
+      # associated with the group, without waiting for all instances
       # to be terminated.
       # @return [nil]
       def delete!
@@ -401,7 +401,7 @@ module AWS
       def exists?
         client_opts = {}
         client_opts[:auto_scaling_group_names] = [name]
-        resp = client.describe_auto_scaling_groups(client_opts)  
+        resp = client.describe_auto_scaling_groups(client_opts)
         !resp.auto_scaling_groups.empty?
       end
 
@@ -412,7 +412,7 @@ module AWS
       end
 
       def get_resource attr_name = nil
-        client.describe_auto_scaling_groups(:auto_scaling_group_names => [name])  
+        client.describe_auto_scaling_groups(:auto_scaling_group_names => [name])
       end
 
     end

@@ -80,7 +80,7 @@ module AWS
         self[name]
       end
 
-      # @return [Hash] Returns the user-generated metadata stored with 
+      # @return [Hash] Returns the user-generated metadata stored with
       #   this S3 Object.
       def to_h
         options = {}

@@ -33,7 +33,7 @@ module AWS
     #   task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
     #
     # See {Instance#export_to_s3} for more options.
-    # 
+    #
     class ExportTaskCollection < Collection
 
       include Core::Collection::Simple
@@ -50,11 +50,11 @@ module AWS
       def _each_item options = {}, &block
         resp = filtered_request(:describe_export_tasks, options, &block)
         resp.data[:export_task_set].each do |details|
-          
+
           task = ExportTask.new_from(
-            :describe_export_tasks, 
+            :describe_export_tasks,
             details,
-            details[:export_task_id], 
+            details[:export_task_id],
             :config => config)
 
           yield(task)

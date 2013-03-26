@@ -15,7 +15,7 @@ require 'set'
 
 module AWS
 
-  # AWS::Record is an ORM built on top of AWS services.  
+  # AWS::Record is an ORM built on top of AWS services.
   module Record
 
     autoload :AbstractBase, 'aws/record/abstract_base'
@@ -66,7 +66,7 @@ module AWS
     #   p.shard #=> 'products'
     #   p.save # the product is persisted to the 'production-products' domain
     #
-    # @param [String] prefix A prefix to append to all domains.  This is useful 
+    # @param [String] prefix A prefix to append to all domains.  This is useful
     #   for grouping domains used by one application with a single prefix.
     #
     def self.domain_prefix= prefix
@@ -105,7 +105,7 @@ module AWS
       @table_prefix
     end
 
-    # A utility method for casting values into an array.  
+    # A utility method for casting values into an array.
     #
     # * nil is returned as an empty array, []
     # * Arrays are returned unmodified
@@ -123,7 +123,7 @@ module AWS
       end
     end
 
-    # A utility method for casting values into 
+    # A utility method for casting values into
     #
     # * Sets are returned unmodified
     # * everything else is passed through #{as_array} and then into a new Set

@@ -42,7 +42,7 @@ module AWS
         it 'accepts an optional tag value' do
           client.should_receive(:create_tags).
             with({:resources => [taggable.id],
-                  :tags => [{ :key => 'stage', :value => 'production' }] 
+                  :tags => [{ :key => 'stage', :value => 'production' }]
             })
 
           tag = taggable.add_tag('stage', :value => 'production')

@@ -34,7 +34,7 @@ module AWS
         :attribute_values_size_bytes => 6,
         :timestamp => 7,
       }}
-        
+
       let(:response) { double('response', attributes) }
 
       it_behaves_like 'a sdb model object', Object.new

@@ -15,7 +15,7 @@ module AWS
   module Record
 
     class Errors < Core::IndifferentHash
-      
+
       include Enumerable
 
       # Returns the errors for the atttibute in an array.
@@ -41,11 +41,11 @@ module AWS
       #   errors.on(:name)
       #   #=> ['may not be blank']
       #
-      # If you want to add a general error message, then pass +:base+ 
+      # If you want to add a general error message, then pass +:base+
       # for +attribute_name+, or call {#add_to_base}.
       # @param [String,Symbol] attribute_name The name of the attribute
       #   that you are adding an error to.
-      # @param [String] message ('is invalid') The error message (should 
+      # @param [String] message ('is invalid') The error message (should
       #   not contain the attribute name).
       # @return [String] Returns the message.
       def []= attribute_name, message = 'is invalid'
@@ -60,7 +60,7 @@ module AWS
 
       # Adds a general error message (not associated with any particular
       # attribute).
-      # @param [String] message ('is invalid') The error message (should 
+      # @param [String] message ('is invalid') The error message (should
       #   not contain the attribute name).
       # @return [String] Returns the message.
       def add_to_base message
@@ -73,9 +73,9 @@ module AWS
       end
       alias_method :size, :count
 
-      # Yields once for each error message added.  
+      # Yields once for each error message added.
       #
-      # An attribute_name may yield more than once if there are more than 
+      # An attribute_name may yield more than once if there are more than
       # one errors associated with that attirbute.
       #
       # @yield [attribute_name, error_message]
@@ -94,7 +94,7 @@ module AWS
       # name.
       #
       #   errors.add(:name, 'may not be blank')
-      #   errors.full_messages 
+      #   errors.full_messages
       #   #=> ['Name may not be blank']
       #
       # @return [Array of Strings] Returns an array of error messages.

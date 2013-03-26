@@ -25,7 +25,7 @@ Then /^the subnet route table should be the main route table$/ do
 end
 
 When /^I assign the route table to the subnet$/ do
-  @subnet.route_table = @route_table 
+  @subnet.route_table = @route_table
 end
 
 Then /^the route table should be associated with the subnet$/ do

@@ -29,7 +29,7 @@ module AWS
       # @return [Tag] The tag that was created.
       def add_tag key, options = {}
         client.create_tags({
-          :resources => [id], 
+          :resources => [id],
           :tags => [{ :key => key, :value => options[:value].to_s }],
         })
         Tag.new(self, key, options.merge(:config => config))

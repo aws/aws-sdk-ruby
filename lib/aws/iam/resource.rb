@@ -47,7 +47,7 @@ module AWS
 
         # @private
         def prefix_update_attributes prefix = 'new_'
-          @update_prefix = prefix 
+          @update_prefix = prefix
         end
 
         # @private

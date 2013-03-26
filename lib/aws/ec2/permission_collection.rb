@@ -75,7 +75,7 @@ module AWS
       #   otherwise the resource is made private.
       # @return [nil]
       def public= value
-        params = value ? 
+        params = value ?
           { :add => [{ :group => "all" }] } :
           { :remove => [{ :group => "all" }] }
         client.send(modify_call, modify_params(params))

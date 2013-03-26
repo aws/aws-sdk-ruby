@@ -43,7 +43,7 @@ module AWS
       # @param [Table,String] table A {Table} object or table name string.
       #
       # @param [Array<Hash>] items A list of item attributes to put.
-      #   The hash must contain the table hash key element and range key 
+      #   The hash must contain the table hash key element and range key
       #   element (if one is defined).
       #
       # @return [nil]
@@ -67,13 +67,13 @@ module AWS
       #
       # @param [Table,String] table A {Table} object or table name string.
       #
-      # @param [Array<String>,Array<Array>] items A list of item keys to 
+      # @param [Array<String>,Array<Array>] items A list of item keys to
       #   delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
       #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
       #
-      #   For tables with a range key, items should be an array of 
+      #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
       #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
@@ -108,14 +108,14 @@ module AWS
       #
       #      batch.write('table-name', :delete => ['hk1', 'hk2', 'hk3'])
       #
-      #   For tables with a range key, items should be an array of 
+      #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
       #      batch.write('table-name', :delete => [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       def write table, options = {}
 
-        items = table_items(table) 
+        items = table_items(table)
 
         if put = options[:put]
           put.each do |attributes|
@@ -198,7 +198,7 @@ module AWS
 
             item = request.values.first
 
-            request_items[table] << 
+            request_items[table] <<
               case request.keys.first
               when 'PutRequest'    then convert_put_item(item['Item'])
               when 'DeleteRequest' then convert_delete_item(item['Key'])
@@ -213,13 +213,13 @@ module AWS
       end
 
       def convert_put_item item
-        
+
         attributes = {}
         item.each_pair do |name,value|
           attributes[name] = str2sym(value)
         end
-        
-        { :put_request => { :item => attributes }} 
+
+        { :put_request => { :item => attributes }}
 
       end
 
@@ -227,7 +227,7 @@ module AWS
 
         key = {}
         key[:hash_key_element] = str2sym(item['HashKeyElement'])
-        key[:range_key_element] = str2sym(item['RangeKeyElement']) if 
+        key[:range_key_element] = str2sym(item['RangeKeyElement']) if
           item['RangeKeyElement']
 
         { :delete_request => { :key => key}}
@@ -242,7 +242,7 @@ module AWS
         when "N"  then { :n  => value }
         when "SS" then { :ss => value }
         when "NS" then { :ns => value }
-        else 
+        else
           raise "unhandled key type: #{type.inspect}"
         end
       end

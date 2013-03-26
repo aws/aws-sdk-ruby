@@ -29,11 +29,11 @@ module AWS
       attr_reader :user
 
       # Enables an MFA device for this user.
-      # @param [String] serial_number The serial number that uniquely 
+      # @param [String] serial_number The serial number that uniquely
       #   identifies the MFA device
-      # @param [String] authentication_code_1 An authentication code emitted 
+      # @param [String] authentication_code_1 An authentication code emitted
       #   by the device.
-      # @param [String] authentication_code_2 A subsequent authentication 
+      # @param [String] authentication_code_2 A subsequent authentication
       #   code emitted by the device.
       # @return [MFADevice] Returns the newly enabled MFA device.
       def enable serial_number, authentication_code_1, authentication_code_2
@@ -71,21 +71,21 @@ module AWS
       #
       # @return [nil]
       def clear
-        each do |device| 
+        each do |device|
           device.deactivate
         end
         nil
       end
 
-      # Yields once for each MFA device.  
+      # Yields once for each MFA device.
       #
       # You can limit the number of devices yielded using +:limit+.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of devices to yield.
-      # @option options [Integer] :batch_size The maximum number of devices 
+      # @option options [Integer] :batch_size The maximum number of devices
       #   receive each service reqeust.
-      # @yieldparam [User] user 
+      # @yieldparam [User] user
       # @return [nil]
       def each options = {}, &block
         super(options.merge(:user_name => user.name), &block)

@@ -192,13 +192,13 @@ module AWS
       #   valid for instances launched outside a VPC (e.g. those
       #   launched without the :subnet option).
       #
-      # @option options [Boolean] :ebs_optimized (false) EBS-Optimized instances 
-      #   enable Amazon EC2 instances to fully utilize the IOPS provisioned on 
-      #   an EBS volume. EBS-optimized instances deliver dedicated throughput 
+      # @option options [Boolean] :ebs_optimized (false) EBS-Optimized instances
+      #   enable Amazon EC2 instances to fully utilize the IOPS provisioned on
+      #   an EBS volume. EBS-optimized instances deliver dedicated throughput
       #   between Amazon EC2 and Amazon EBS, with options between 500 Mbps and
-      #   1000 Mbps depending on the instance type used. When attached to 
-      #   EBS-Optimized instances, Provisioned IOPS volumes are designed 
-      #   to deliver within 10% of their provisioned performance 99.9% of the time. 
+      #   1000 Mbps depending on the instance type used. When attached to
+      #   EBS-Optimized instances, Provisioned IOPS volumes are designed
+      #   to deliver within 10% of their provisioned performance 99.9% of the time.
       #   *NOTE:* EBS Optimized instances incur an additional service charge. This
       #   optional is only valid for certain instance types.
       #

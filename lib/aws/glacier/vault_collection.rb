@@ -59,7 +59,7 @@ module AWS
 
           vault = Vault.new_from(:list_vaults, v,
             v[:vault_name],
-            :config => config, 
+            :config => config,
             :account_id => account_id)
 
           yield(vault)

@@ -64,7 +64,7 @@ module AWS
           end
         end
 
-        # @return [ObjectVersion] Returns the object version this leaf 
+        # @return [ObjectVersion] Returns the object version this leaf
         #   node represents.
         def version
           if @member.kind_of?(ObjectVersion)
@@ -74,7 +74,7 @@ module AWS
           end
         end
 
-        # @return [MultipartUpload] Returns the object version this leaf 
+        # @return [MultipartUpload] Returns the object version this leaf
         #   node represents.
         def upload
           if @member.kind_of?(MultipartUpload)

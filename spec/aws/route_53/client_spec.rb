@@ -186,7 +186,7 @@ XML
                   <Status>PENDING</Status>
                   <SubmittedAt>#{now.iso8601}</SubmittedAt>
                 </ChangeInfo>
-                <DelegationSet> 
+                <DelegationSet>
                   <NameServers>
                     <NameServer>ns-1861.awsdns-40.co.uk</NameServer>
                     <NameServer>ns-143.awsdns-17.com</NameServer>
@@ -200,7 +200,7 @@ XML
 
           resp = client.create_hosted_zone(options)
           resp.data.should eq({
-            :hosted_zone => { 
+            :hosted_zone => {
               :id => "/hostedzone/ABCDEFGHIJKLMN",
               :name => "domain.com.",
               :caller_reference => "caller-ref",
@@ -209,14 +209,14 @@ XML
             },
             :change_info => {
               :id => "/change/C2YOKTS3TOHM1E",
-              :status => "PENDING", 
+              :status => "PENDING",
               :submitted_at => Time.parse(now.iso8601),
             },
             :delegation_set => {
               :name_servers => [
-                "ns-1861.awsdns-40.co.uk", 
-                "ns-143.awsdns-17.com", 
-                "ns-550.awsdns-04.net", 
+                "ns-1861.awsdns-40.co.uk",
+                "ns-143.awsdns-17.com",
+                "ns-550.awsdns-04.net",
                 "ns-1418.awsdns-49.org"
               ],
             },
@@ -310,7 +310,7 @@ XML
           resp = client.get_change :id => 'change-id'
           resp.data.should eq({
             :change_info => {
-              :id => "/change/C1LGM5V4D2F38O", 
+              :id => "/change/C1LGM5V4D2F38O",
               :status => "PENDING",
               :submitted_at => Time.parse(now.iso8601),
             },

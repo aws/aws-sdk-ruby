@@ -14,7 +14,7 @@
 module AWS
   class S3
 
-    # Represents a collection of buckets.  
+    # Represents a collection of buckets.
     #
     # You can use this to create a bucket:
     #
@@ -72,7 +72,7 @@ module AWS
       #     bucket = s3.buckets.create("my-us-west-bucket")
       #     bucket.location_constraint # => "us-west-1"
       #
-      # @option options [Symbol,String] :acl (:private) Sets the ACL of the 
+      # @option options [Symbol,String] :acl (:private) Sets the ACL of the
       #   bucket you are creating.  Valid Values include:
       #   * +:private+
       #   * +:public_read+
@@ -95,10 +95,10 @@ module AWS
           options[:acl] = acl.to_s.tr('_', '-')
         end
 
-        # auto set the location constraint for the user if it is not 
-        # passed in and the endpoint is not the us-standard region.  don't 
-        # override the location constraint though, even it is wrong, 
-        unless 
+        # auto set the location constraint for the user if it is not
+        # passed in and the endpoint is not the us-standard region.  don't
+        # override the location constraint though, even it is wrong,
+        unless
           config.s3_endpoint == 's3.amazonaws.com' or
           options[:location_constraint]
         then

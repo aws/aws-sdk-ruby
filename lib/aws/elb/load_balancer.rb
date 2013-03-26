@@ -38,7 +38,7 @@ module AWS
     #   This attribute it set only for LoadBalancers attached to an Amazon VPC.
     #   If the Scheme is 'internet-facing', the LoadBalancer has a publicly
     #   resolvable DNS name that resolves to public IP addresses.
-    #   If the Scheme is 'internal', the LoadBalancer has a publicly 
+    #   If the Scheme is 'internal', the LoadBalancer has a publicly
     #   resolvable DNS name that resolves to private IP addresses.
     #
     # @attr_reader [Array<String>] subnet_ids Provides a list of VPC subnet IDs

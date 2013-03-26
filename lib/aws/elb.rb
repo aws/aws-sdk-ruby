@@ -16,7 +16,7 @@ require 'aws/elb/config'
 
 module AWS
 
-  # Provides an expressive, object-oriented interface to Elastic Load 
+  # Provides an expressive, object-oriented interface to Elastic Load
   # Balancing (ELB).
   #
   # == Credentials

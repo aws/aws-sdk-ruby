@@ -14,7 +14,7 @@
 module AWS
   class EC2
 
-    # Most of the AWS::EC2 collections include TaggedCollection.  This 
+    # Most of the AWS::EC2 collections include TaggedCollection.  This
     # module provides methods for filtering the collection with
     # tags.
     #
@@ -23,7 +23,7 @@ module AWS
     module TaggedCollection
 
       # Filter the collection by one or more tag keys.  If you pass multiple
-      # tag keys they will be be treated as OR conditions.  If you want to 
+      # tag keys they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
       #
       # Filter the collection to items items tagged 'live' OR 'test'
@@ -39,7 +39,7 @@ module AWS
       end
 
       # Filter the collection by one or more tag values.  If you pass multiple
-      # tag values they will be be treated as OR conditions.  If you want to 
+      # tag values they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
       #
       #   collection.tagged('stage').tagged_values('production')

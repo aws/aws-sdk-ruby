@@ -13,12 +13,12 @@
 
 module AWS
   module Record
-    
+
     # @private
     class FormatValidator < Validator
 
       ACCEPTED_OPTIONS = [
-        :with, :without, 
+        :with, :without,
         :message, :allow_nil, :allow_blank, :on, :if, :unless,
       ]
 

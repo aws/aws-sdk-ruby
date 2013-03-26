@@ -141,7 +141,7 @@ module AWS
             element("DeleteMarker") { boolean_value }
             list
           end
-          element("Error") { list; rename(:errors) }  
+          element("Error") { list; rename(:errors) }
         end
 
         CompleteMultipartUpload = BaseGrammar.customize

@@ -28,7 +28,7 @@ module AWS
       module_function :escape
 
       # @param [String] value
-      # @return [String] Returns a URI-escaped path without escaping the 
+      # @return [String] Returns a URI-escaped path without escaping the
       #   separators.
       def escape_path value
         escaped = ""

@@ -82,7 +82,7 @@ module AWS
       #
       #   metric.alarms.filter('period', 3600)
       #
-      # @example Filtering by statistic 
+      # @example Filtering by statistic
       #
       #   my_metric = metrics.filter('statistic', 'maximum')
       #
@@ -143,7 +143,7 @@ module AWS
 
           alarm = Alarm.new_from(
             :describe_alarms_for_metric,
-            details, 
+            details,
             details[:alarm_name],
             :config => config)
 

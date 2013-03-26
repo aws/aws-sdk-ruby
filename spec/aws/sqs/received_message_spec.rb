@@ -63,7 +63,7 @@ module AWS
       end
 
       context '#as_sns_message' do
-        
+
         it 'returns a recieved sns message object' do
           msg = message.as_sns_message
           msg.should be_a(ReceivedSNSMessage)

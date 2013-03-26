@@ -29,6 +29,6 @@ end
 
 Then /^instance health should return hash$/ do
   health = @load_balancer.instances[@instance.id].elb_health
-  health.keys.collect(&:to_s).sort.should == 
+  health.keys.collect(&:to_s).sort.should ==
     [:description, :reason_code, :state].collect(&:to_s).sort
 end

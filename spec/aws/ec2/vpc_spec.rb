@@ -49,7 +49,7 @@ module AWS
         end
 
       end
-      
+
       context '#subnets' do
 
         it 'returns a subnet collection' do

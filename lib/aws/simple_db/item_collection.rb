@@ -56,16 +56,16 @@ module AWS
         super
       end
 
-      # Creates a new item in SimpleDB with the given attributes: 
+      # Creates a new item in SimpleDB with the given attributes:
       #
       #   domain.items.create('shirt', {
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance'})
       #
       # @overload create(item_name, attributes)
       #   @param [String] item_name The name of the item as you want it stored
       #     in SimpleDB.
-      #   @param [Hash] attributes A hash of attribute names and values 
+      #   @param [Hash] attributes A hash of attribute names and values
       #     you want to store in SimpleDB.
       #   @return [Item] Returns a reference to the object that was created.
       def create item_name, *args
@@ -99,7 +99,7 @@ module AWS
       # * AWS::SimpleDB::ItemData objects (some or all attributes populated)
       #
       # The default mode of an ItemCollection is to yield Item objects with
-      # no populated attributes.  
+      # no populated attributes.
       #
       #   # only receives item names from SimpleDB
       #   domain.items.each do |item|
@@ -151,14 +151,14 @@ module AWS
       #   will be yielded (see {#order}).
       #
       # @option options :limit [Integer] The maximum number of
-      #   items to fetch from SimpleDB.  
+      #   items to fetch from SimpleDB.
       #
       # @option options :batch_size Specifies a maximum number of records
       #   to fetch from SimpleDB in a single request.  SimpleDB may return
       #   fewer items than :batch_size per request, but never more.
       #   Generally you should not need to specify this option.
       #
-      # @return [String,nil] Returns a next token that can be used with 
+      # @return [String,nil] Returns a next token that can be used with
       #   the exact same SimpleDB select expression to get more results.
       #   A next token is returned ONLY if there was a limit on the
       #   expression, otherwise all items will be enumerated and
@@ -217,7 +217,7 @@ module AWS
 
           response = select_request(options, next_token)
 
-          if 
+          if
             domain_item = response.items.first and
             count_attribute = domain_item.attributes.first
           then
@@ -238,13 +238,13 @@ module AWS
 #       #   the selection mode (item names only or with attributes).
 #       #
 #       def page options = {}
-# 
+#
 #         handle_query_options(options) do |collection, opts|
 #           return collection.page(opts)
 #         end
-# 
+#
 #         super(options)
-# 
+#
 #       end
 
       # Specifies a list of attributes select from SimpleDB.
@@ -260,14 +260,14 @@ module AWS
       #   domain.items.select(:all).each {|item_data| ... }
       #
       # Calling #select causes #each to yield {ItemData} objects
-      # with #attribute hashes, instead of {Item} objects with 
+      # with #attribute hashes, instead of {Item} objects with
       # an item name.
       #
       # @param [Symbol, String, or Array] attributes The attributes to
       #   retrieve.  This can be:
-      #  
+      #
       #   * +:all+ or '*' to request all attributes for each item
-      #  
+      #
       #   * A list or array of attribute names as strings or symbols
       #
       #     Attribute names may contain any characters that are valid
@@ -451,14 +451,14 @@ module AWS
 
       # Applies standard scope options (e.g. :where => 'foo') and removes them from
       # the options hash by calling their method (e.g. by calling #where('foo')).
-      # Yields only if there were scope options to apply.  
+      # Yields only if there were scope options to apply.
       # @private
       protected
       def handle_query_options(*args)
 
         options = args.last.is_a?(Hash) ? args.pop : {}
 
-        if 
+        if
           query_options = options.keys & [:select, :where, :order, :limit] and
           !query_options.empty?
         then
@@ -486,7 +486,7 @@ module AWS
 
         response = select_request(options, next_token, max)
 
-        if output_list == 'itemName()'  
+        if output_list == 'itemName()'
           response.items.each do |item|
             yield(self[item.name])
           end
@@ -497,7 +497,7 @@ module AWS
         end
 
         response[:next_token]
-        
+
       end
 
       protected
@@ -559,7 +559,7 @@ module AWS
       # @private
       protected
       def collection_with options
-        ItemCollection.new(domain, { 
+        ItemCollection.new(domain, {
           :output_list => output_list,
           :conditions => conditions,
           :sort_instructions => sort_instructions,

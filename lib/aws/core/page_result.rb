@@ -29,7 +29,7 @@ module AWS
       #   token behaves as a pseudo offset.  If +next_token+ is +nil+ then
       #   there are no more results for the collection.
       attr_reader :next_token
-      
+
       # @param [Collection] collection The collection that was used to
       #   request this page of results.  The collection should respond to
       #   #page and accept a :next_token option.
@@ -42,7 +42,7 @@ module AWS
       #   then this is the last page of results.
       #
       # @param [String] next_token (nil) A token that can be passed to the
-      #   
+      #
       def initialize collection, items, per_page, next_token
         @collection = collection
         @per_page = per_page

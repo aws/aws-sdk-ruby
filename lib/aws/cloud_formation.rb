@@ -65,7 +65,7 @@ module AWS
   # with capabilities and parameters.
   #
   # == Getting a Stack
-  # 
+  #
   # Given a name, you can fetch a {Stack}.
   #
   #   stack = cfm.stacks['stack-name']
@@ -126,7 +126,7 @@ module AWS
   #   res = stack.resources['logical-resource-id']
   #   puts res.physical_resource_id
   #
-  # If you need a stack resource, but only have its physical resource 
+  # If you need a stack resource, but only have its physical resource
   # id, then you can call {CloudFormation#stack_resource}.
   #
   #   stack_resource = cfm.stack_resource('physical-resource-id')
@@ -173,7 +173,7 @@ module AWS
     end
 
     # Returns a stack resource with the given physical resource
-    # id.  
+    # id.
     #
     #   resource = cfm.stack_resource('i-123456789')
     #
@@ -230,18 +230,18 @@ module AWS
     #   * +:message+
     #
     # @return [Hash]
-    # 
+    #
     def validate_template template
       begin
 
         client_opts = {}
         client_opts[:template] = template
-        apply_template(client_opts)  
+        apply_template(client_opts)
         client.validate_template(client_opts).data
 
       rescue CloudFormation::Errors::ValidationError => e
 
-        results = {}  
+        results = {}
         results[:code] = e.code
         results[:message] = e.message
         results
@@ -251,19 +251,19 @@ module AWS
 
     # @param (see Stack#template=)
     #
-    # @param [Hash] parameters A hash that specifies the input 
+    # @param [Hash] parameters A hash that specifies the input
     #   parameters for the template.
     #
-    # @return [String] Returns a URL to the AWS Simple Monthly Calculator 
-    #   with a query string that describes the resources required to run 
+    # @return [String] Returns a URL to the AWS Simple Monthly Calculator
+    #   with a query string that describes the resources required to run
     #   the template.
     #
     def estimate_template_cost template, parameters = {}
       client_opts = {}
       client_opts[:template] = template
       client_opts[:parameters] = parameters
-      apply_template(client_opts)  
-      apply_parameters(client_opts)  
+      apply_template(client_opts)
+      apply_parameters(client_opts)
       client.estimate_template_cost(client_opts).url
     end
 

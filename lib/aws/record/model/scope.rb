@@ -10,7 +10,7 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-  
+
 module AWS
   module Record
     class Model
@@ -59,13 +59,13 @@ module AWS
       #   Book.where('author' => 'John Doe').first
       #
       class Scope < Record::Scope
-        
+
         # @private
         def initialize base_class, options = {}
           super
           @options[:where] ||= []
         end
-  
+
         def new attributes = {}
 
           attributes = attributes.dup
@@ -75,11 +75,11 @@ module AWS
               attributes.merge!(conditions.first)
             end
           end
-  
+
           super(attributes)
-  
+
         end
-  
+
         # Applies conditions to the scope that limit which records are returned.
         # Only those matching all given conditions will be returned.
         #
@@ -111,8 +111,8 @@ module AWS
           end
           _with(:where => @options[:where] + [conditions])
         end
-    
-        # Specifies how to sort records returned.  
+
+        # Specifies how to sort records returned.
         #
         #   # enumerate books, starting with the most recently published ones
         #   Book.order(:published_at, :desc).each do |book|
@@ -122,7 +122,7 @@ module AWS
         # Only one order may be applied.  If order is specified more than
         # once the last one in the chain takes precedence:
         #
-        #    
+        #
         #   # books returned by this scope will be ordered by :published_at
         #   # and not :author.
         #   Book.where(:read => false).order(:author).order(:published_at)
@@ -132,25 +132,25 @@ module AWS
         def order attribute_name, order = :asc
           _with(:order => [attribute_name, order])
         end
-    
+
         # @private
         private
         def _each_object &block
-  
+
           items = _item_collection
-  
+
           items.select.each do |item_data|
             obj = base_class.new(:shard => _shard)
             obj.send(:hydrate, item_data.name, item_data.attributes)
             yield(obj)
           end
-  
+
         end
-    
+
         # Merges another scope with this scope.  Conditions are added together
         # and the limit and order parts replace those in this scope (if set).
         # @param [Scope] scope A scope to merge with this one.
-        # @return [Scope] Returns a new scope with merged conditions and 
+        # @return [Scope] Returns a new scope with merged conditions and
         #   overriden order and limit.
         # @private
         private
@@ -159,8 +159,8 @@ module AWS
           scope.instance_variable_get('@options').each_pair do |opt_name,opt_value|
             unless [nil, []].include?(opt_value)
               if opt_name == :where
-                opt_value.each do |condition| 
-                  merged = merged.where(*condition) 
+                opt_value.each do |condition|
+                  merged = merged.where(*condition)
                 end
               else
                 merged = merged.send(opt_name, *opt_value)
@@ -169,14 +169,14 @@ module AWS
           end
           merged
         end
-  
+
         # Consumes a hash of options (e.g. +:where+, +:order+ and +:limit+) and
         # builds them onto the current scope, returning a new one.
         # @param [Hash] options
         # @option options :where
         # @option options :order
         # @option options [Integer] :limit
-        # @return [Scope] Returns a new scope with the hash of scope 
+        # @return [Scope] Returns a new scope with the hash of scope
         #   options applied.
         # @private
         private
@@ -192,7 +192,7 @@ module AWS
           end
           scope
         end
-  
+
         # Converts this scope object into an AWS::SimpleDB::ItemCollection
         # @return [SimpleDB::ItemCollection]
         # @private
@@ -206,7 +206,7 @@ module AWS
           end
           items
         end
-  
+
       end
     end
   end

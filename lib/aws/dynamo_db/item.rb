@@ -18,16 +18,16 @@ module AWS
     # complex primary key (according to the table schema) and consists
     # of a collection of attributes.  Attributes are name/value pairs
     # where the value may be a string, number, string set, or number
-    # set.  
+    # set.
     #
     # Getting an item by hash key value:
     #
-    #   item = table.items['hash-key-value'] 
+    #   item = table.items['hash-key-value']
     #
     # Getting an item from a table with both hash and range keys:
     #
     #   item = table.items['hash-key','range-key']
-    # 
+    #
     class Item < Core::Resource
 
       extend Types

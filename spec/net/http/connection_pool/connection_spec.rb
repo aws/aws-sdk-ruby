@@ -16,7 +16,7 @@ require 'spec_helper'
 class Net::HTTP::ConnectionPool
 
   describe Connection do
-    
+
     let(:pool) { Net::HTTP::ConnectionPool.new }
 
     context '#pool' do
@@ -27,7 +27,7 @@ class Net::HTTP::ConnectionPool
 
     end
 
-    context '#host' do 
+    context '#host' do
 
       it 'returns the host' do
         Connection.new(pool, 'host').host.should == 'host'
@@ -36,7 +36,7 @@ class Net::HTTP::ConnectionPool
     end
 
     context '#port' do
-      
+
       it 'defaults to port 80' do
         Connection.new(pool, 'host').port.should == 80
       end
@@ -65,7 +65,7 @@ class Net::HTTP::ConnectionPool
     end
 
     context '#ssl?' do
-      
+
       it 'returns the same value as #ssl' do
         c = Connection.new(pool, 'host', :ssl => false)
         c.ssl.should == false
@@ -227,14 +227,14 @@ class Net::HTTP::ConnectionPool
         c = Connection.new(pool, 'host.com', :port => 80, :ssl => true)
         c.key.should == "host.com:80:true:true::::::"
       end
-      
+
       it 'accepts both port as 80 and ssl true' do
         c = Connection.new(pool, 'host.com', :port => 443, :ssl => false)
         c.key.should == "host.com:443:false:true::::::"
       end
 
       it 'encodes ssl options' do
-        c = Connection.new(pool, 'host.com', 
+        c = Connection.new(pool, 'host.com',
           :ssl_verify_peer => false,
           :ssl_ca_file => 'file',
           :ssl_ca_path => 'path')

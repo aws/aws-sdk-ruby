@@ -23,7 +23,7 @@ module AWS
 
       protected
 
-      # @param [Symbol,String,Hash,AccessControlList] acl Accepts an ACL 
+      # @param [Symbol,String,Hash,AccessControlList] acl Accepts an ACL
       #   description in one of the following formats:
       #
       #   ==== Canned ACL
@@ -40,7 +40,7 @@ module AWS
       #   * +:log_delivery_write+ (bucket-only)
       #
       #   Here is an example of providing a canned ACL to a bucket:
-      # 
+      #
       #     s3.buckets['bucket-name'].acl = :public_read
       #
       #   ==== ACL Grant Hash
@@ -54,7 +54,7 @@ module AWS
       #   * +:grant_write_acp+
       #   * +:grant_full_control+
       #
-      #   Grantee strings (values) should be formatted like some of the 
+      #   Grantee strings (values) should be formatted like some of the
       #   following examples:
       #
       #     id="8a6925ce4adf588a4532142d3f74dd8c71fa124b1ddee97f21c32aa379004fef"
@@ -74,7 +74,7 @@ module AWS
       #
       #   ==== AcessControlList Object
       #
-      #   You can build an ACL using the {AccessControlList} class and 
+      #   You can build an ACL using the {AccessControlList} class and
       #   pass this object.
       #
       #     acl = AWS::S3::AccessControlList.new
@@ -100,7 +100,7 @@ module AWS
       #             <Permission>FULL_CONTROL</Permission>
       #           </Grant>
       #         </AccessControlList>
-      #       </AccessControlPolicy> 
+      #       </AccessControlPolicy>
       #     XML
       #
       # @return [Hash] Returns a hash of options suitable for

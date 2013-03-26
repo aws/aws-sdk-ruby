@@ -101,7 +101,7 @@ module AWS
         resp = client.upload_server_certificate(client_opts)
 
         ServerCertificate.new(
-          resp[:server_certificate_metadata][:server_certificate_name], 
+          resp[:server_certificate_metadata][:server_certificate_name],
           :config => config)
 
       end

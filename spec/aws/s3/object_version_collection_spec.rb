@@ -65,7 +65,7 @@ module AWS
             double('version', :key => '/bar'),
             double('version', :key => '/barbar'),
           ]
-          bucket.stub_chain(:versions, :with_prefix).and_return(list) 
+          bucket.stub_chain(:versions, :with_prefix).and_return(list)
           collection.latest.should == list[1]
         end
       end
@@ -86,10 +86,10 @@ module AWS
             double('version', :key => '/bar'),
             double('version', :key => '/barbar'),
           ]
-          bucket.stub_chain(:versions, :with_prefix).and_return(list) 
+          bucket.stub_chain(:versions, :with_prefix).and_return(list)
           collection.collect{|v| v }.should == [list[0], list[2]]
         end
-        
+
       end
 
     end

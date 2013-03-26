@@ -116,8 +116,8 @@ describe Net::HTTP::ConnectionPool do
 
       it 'returns a connection with the correct options' do
 
-        c = pool.connection_for('host', 
-          :port => 88, 
+        c = pool.connection_for('host',
+          :port => 88,
           :ssl => true,
           :read_timeout => 55,
           :proxy_uri => 'http://u:p@proxy.com:89')
@@ -158,7 +158,7 @@ describe Net::HTTP::ConnectionPool do
       end
 
       context 'cleaning up old sessions' do
-        
+
         let(:long_ago) { Time.now - pool.idle_timeout - 10 }
 
         def get_session pool
@@ -168,7 +168,7 @@ describe Net::HTTP::ConnectionPool do
           end
           a_session
         end
-        
+
         it 'cleans up sessions that have sat idle longer than allowed' do
 
           pool.request(connection, request)

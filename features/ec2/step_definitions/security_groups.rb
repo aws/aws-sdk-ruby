@@ -102,7 +102,7 @@ def security_groups_from_table table, owner_id
 end
 
 When /^I authorize "([^\"]*)" over port (\d+) for:$/ do |protocol, port, table|
-  ip_ranges = ip_ranges_from_table(table) 
+  ip_ranges = ip_ranges_from_table(table)
   groups = security_groups_from_table(table, @security_group.owner_id)
   @security_group.authorize_ingress(protocol, port, *(ip_ranges + groups))
 end
@@ -110,7 +110,7 @@ end
 Then /^The security group should allow "([^\"]*)" over port (\d+) for:$/ do |protocol, port, table|
 
   permissions = @security_group.ip_permissions
-  ip_ranges = ip_ranges_from_table(table) 
+  ip_ranges = ip_ranges_from_table(table)
   groups = security_groups_from_table(table, @security_group.owner_id)
   permissions.any? do |p|
     p.protocol.to_s == protocol and

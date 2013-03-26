@@ -20,8 +20,8 @@ module AWS
   #
   # = Domains
   #
-  # To get started, you need to first create a domain.  Domains are used to 
-  # organize related tasks and activities.  
+  # To get started, you need to first create a domain.  Domains are used to
+  # organize related tasks and activities.
   #
   #   swf = AWS::SimpleWorkflow.new
   #
@@ -52,9 +52,9 @@ module AWS
   #     :default_child_policy => :request_cancel,
   #     :default_task_start_to_close_timeout => 3600,
   #     :default_execution_start_to_close_timeout => 24 * 3600)
-  # 
+  #
   #   # register an activity type, with the version id '1'
-  #   activity_type = domain.activity_types.create('do-something', '1', 
+  #   activity_type = domain.activity_types.create('do-something', '1',
   #     :default_task_list => 'my-task-list',
   #     :default_task_heartbeat_timeout => 900,
   #     :default_task_schedule_to_start_timeout => 60,
@@ -66,7 +66,7 @@ module AWS
   # Once you have a domain and at least one workflow type you can
   # start a workflow execution.  You may provide a workflow id, or a
   # random one will be generated.  You may also provide optional
-  # input and override any of the defaults registered with the 
+  # input and override any of the defaults registered with the
   # workflow type.
   #
   #   workflow_execution = workflow_type.start_execution :input => '...'
@@ -81,7 +81,7 @@ module AWS
   # Yielded decision tasks provide access to the history of events
   # for the workflow execution.  You can also enumerate only new
   # events since the last decision.
-  # 
+  #
   # To make decisions you call methods from the list below.  You can call
   # any number of decision methods any number of times.
   #
@@ -130,22 +130,22 @@ module AWS
   #   domain.activity_tasks.poll('my-task-list') do |activity_task|
   #
   #     case activity_task.activity_type.name
-  #     when 'do-something' 
+  #     when 'do-something'
   #       # ...
   #     else
   #       activity_task.fail! :reason => 'unknown activity task type'
   #     end
-  #     
+  #
   #   end
   #
   # == Activity Task Heartbeats
   #
   # When you receive an activity task, you need to update the service
   # with status messages.  This is called recording a heartbeat.#
-  # To record a heartbeat, just call {ActivityTask#record_heartbeat!}.  
-  # When you call +record_heartbeat+ you should rescue 
+  # To record a heartbeat, just call {ActivityTask#record_heartbeat!}.
+  # When you call +record_heartbeat+ you should rescue
   # {ActivityTask::CancelRequestedError}.  These are thrown when a task
-  # should be canceled.  You can cleanup the task and then call 
+  # should be canceled.  You can cleanup the task and then call
   # +cancel!+ when you are finished.
   #
   #   # poll 'my-task-list' for activities
@@ -171,8 +171,8 @@ module AWS
   #       activity_task.cancel!
   #     end
   #   end
-  #   
-  # Like decision tasks, activity tasks are auto-completed at the 
+  #
+  # Like decision tasks, activity tasks are auto-completed at the
   # end of a poll block.
   #
   # = History Events

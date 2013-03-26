@@ -93,14 +93,14 @@ After do |scenario|
         })
         list.versions.each do |version|
           @s3_client.delete_object({
-            :bucket_name => bucket_name, 
+            :bucket_name => bucket_name,
             :key => version.key,
             :version_id => version.version_id,
             :endpoint => endpoint,
           })
         end
       end while list.truncated?
-    rescue 
+    rescue
       # ignore
     end
     @s3_client.delete_bucket(:bucket_name => bucket_name, :endpoint => endpoint) rescue nil
