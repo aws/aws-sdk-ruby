@@ -67,16 +67,7 @@ module AWS
       attribute :delete_on_termination, :boolean => true
     
       populates_from(:describe_volumes) do |resp|
-        if volume = resp.volume_index[self.volume.id] and
-            attachments = volume.attachment_set and
-            attachment = attachments.find do |att|
-            att.instance_id == self.instance.id &&
-              att.volume_id == self.volume.id &&
-              att.device == self.device
-          end
-        then
-          attachment
-        end
+        find_attachment(resp)
       end
 
       populates_from(:attach_volume, :detach_volume) do |resp|
@@ -124,14 +115,17 @@ module AWS
 
       private
       def describe_attachment
-        (resp = describe_call and
-         volume = resp.volume_index[self.volume.id] and
-         attachments = volume.attachment_set and
-         attachment = attachments.find do |att|
-           att.instance_id == self.instance.id &&
-             att.volume_id == self.volume.id &&
-             att.device == self.device
-         end) or nil
+        find_attachment(describe_call)
+      end
+
+      def find_attachment(resp)
+        vol = resp.volume_index[volume.id] and
+        attachments = vol.attachment_set and
+        attachments.find do |att|
+          att.instance_id == instance.id &&
+            att.volume_id == volume.id &&
+            att.device == device
+        end
       end
 
     end
