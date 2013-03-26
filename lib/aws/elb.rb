@@ -38,21 +38,19 @@ module AWS
   #   @return [Client] the low-level ELB client object
   class ELB
 
-    AWS.register_autoloads(self) do
-      autoload :AvailabilityZoneCollection,    'availability_zone_collection'
-      autoload :BackendServerPolicyCollection, 'backend_server_policy_collection'
-      autoload :Client,                        'client'
-      autoload :Errors,                        'errors'
-      autoload :InstanceCollection,            'instance_collection'
-      autoload :ListenerOpts,                  'listener_opts'
-      autoload :Listener,                      'listener'
-      autoload :ListenerCollection,            'listener_collection'
-      autoload :LoadBalancer,                  'load_balancer'
-      autoload :LoadBalancerCollection,        'load_balancer_collection'
-      autoload :LoadBalancerPolicy,            'load_balancer_policy'
-      autoload :LoadBalancerPolicyCollection,  'load_balancer_policy_collection'
-      autoload :Request,                       'request'
-    end
+    autoload :AvailabilityZoneCollection, 'aws/elb/availability_zone_collection'
+    autoload :BackendServerPolicyCollection, 'aws/elb/backend_server_policy_collection'
+    autoload :Client, 'aws/elb/client'
+    autoload :Errors, 'aws/elb/errors'
+    autoload :InstanceCollection, 'aws/elb/instance_collection'
+    autoload :ListenerOpts, 'aws/elb/listener_opts'
+    autoload :Listener, 'aws/elb/listener'
+    autoload :ListenerCollection, 'aws/elb/listener_collection'
+    autoload :LoadBalancer, 'aws/elb/load_balancer'
+    autoload :LoadBalancerCollection, 'aws/elb/load_balancer_collection'
+    autoload :LoadBalancerPolicy, 'aws/elb/load_balancer_policy'
+    autoload :LoadBalancerPolicyCollection, 'aws/elb/load_balancer_policy_collection'
+    autoload :Request, 'aws/elb/request'
 
     include Core::ServiceInterface
 

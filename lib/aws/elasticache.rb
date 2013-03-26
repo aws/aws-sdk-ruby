@@ -37,11 +37,9 @@ module AWS
   #   @return [Client] the low-level ElastiCache client object
   class ElastiCache
 
-    AWS.register_autoloads(self) do
-      autoload :Client,                        'client'
-      autoload :Errors,                        'errors'
-      autoload :Request,                       'request'
-    end
+    autoload :Client, 'aws/elasticache/client'
+    autoload :Errors, 'aws/elasticache/errors'
+    autoload :Request, 'aws/elasticache/request'
 
     include Core::ServiceInterface
 

@@ -18,15 +18,41 @@ module AWS
   # AWS::Record is an ORM built on top of AWS services.  
   module Record
 
-    AWS.register_autoloads(self) do
-      autoload :Base,         'model'
-      autoload :Model,        'model'
-      autoload :HashModel,    'hash_model'
-    end
+    autoload :AbstractBase, 'aws/record/abstract_base'
+    autoload :Attributes, 'aws/record/attributes'
+    autoload :Base, 'aws/record/model'
+    autoload :Conversion, 'aws/record/conversion'
+    autoload :DirtyTracking, 'aws/record/dirty_tracking'
+    autoload :Errors, 'aws/record/errors'
+    autoload :Exceptions, 'aws/record/exceptions'
+    autoload :HashModel, 'aws/record/hash_model'
+    autoload :Model, 'aws/record/model'
+    autoload :Naming, 'aws/record/naming'
+    autoload :Scope, 'aws/record/scope'
+    autoload :Validations, 'aws/record/validations'
+
+    # errors
+    autoload :InvalidRecordError, 'aws/record/exceptions'
+    autoload :EmptyRecordError, 'aws/record/exceptions'
+    autoload :UndefinedAttributeError, 'aws/record/exceptions'
+
+    # validators
+    autoload :AcceptanceValidator, 'aws/record/validators/acceptance'
+    autoload :BlockValidator, 'aws/record/validators/block'
+    autoload :ConfirmationValidator, 'aws/record/validators/confirmation'
+    autoload :CountValidator, 'aws/record/validators/count'
+    autoload :ExclusionValidator, 'aws/record/validators/exclusion'
+    autoload :FormatValidator, 'aws/record/validators/format'
+    autoload :InclusionValidator, 'aws/record/validators/inclusion'
+    autoload :LengthValidator, 'aws/record/validators/length'
+    autoload :MethodValidator, 'aws/record/validators/method'
+    autoload :NumericalityValidator, 'aws/record/validators/numericality'
+    autoload :PresenceValidator, 'aws/record/validators/presence'
+    autoload :Validator, 'aws/record/validator'
 
     # @private
     class RecordNotFound < StandardError; end
-  
+
     # Sets a prefix to be applied to all SimpleDB domains associated with
     # AWS::Record::Base classes.
     #

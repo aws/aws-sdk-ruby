@@ -45,18 +45,16 @@ module AWS
   #   @return [Client] the low-level SNS client object
   class SNS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,                      'client'
-      autoload :Errors,                      'errors'
-      autoload :Policy,                      'policy'
-      autoload :HasDeliveryPolicy,           'has_delivery_policy'
-      autoload :Request,                     'request'
-      autoload :Subscription,                'subscription'
-      autoload :SubscriptionCollection,      'subscription_collection'
-      autoload :Topic,                       'topic'
-      autoload :TopicCollection,             'topic_collection'
-      autoload :TopicSubscriptionCollection, 'topic_subscription_collection'
-    end
+    autoload :Client, 'aws/sns/client'
+    autoload :Errors, 'aws/sns/errors'
+    autoload :Policy, 'aws/sns/policy'
+    autoload :HasDeliveryPolicy, 'aws/sns/has_delivery_policy'
+    autoload :Request, 'aws/sns/request'
+    autoload :Subscription, 'aws/sns/subscription'
+    autoload :SubscriptionCollection, 'aws/sns/subscription_collection'
+    autoload :Topic, 'aws/sns/topic'
+    autoload :TopicCollection, 'aws/sns/topic_collection'
+    autoload :TopicSubscriptionCollection, 'aws/sns/topic_subscription_collection'
 
     include Core::ServiceInterface
 

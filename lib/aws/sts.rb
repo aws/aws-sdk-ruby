@@ -41,14 +41,12 @@ module AWS
   #   @return [Client] the low-level STS client object
   class STS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,           'client'
-      autoload :Errors,           'errors'
-      autoload :FederatedSession, 'federated_session'
-      autoload :Policy,           'policy'
-      autoload :Request,          'request'
-      autoload :Session,          'session'
-    end
+    autoload :Client, 'aws/sts/client'
+    autoload :Errors, 'aws/sts/errors'
+    autoload :FederatedSession, 'aws/sts/federated_session'
+    autoload :Policy, 'aws/sts/policy'
+    autoload :Request, 'aws/sts/request'
+    autoload :Session, 'aws/sts/session'
 
     include Core::ServiceInterface
 

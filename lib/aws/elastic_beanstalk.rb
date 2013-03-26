@@ -37,11 +37,9 @@ module AWS
   #   @return [Client] the low-level ElasticBeanstalk client object
   class ElasticBeanstalk
 
-    AWS.register_autoloads(self, 'aws/elastic_beanstalk') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/elastic_beanstalk/client'
+    autoload :Errors, 'aws/elastic_beanstalk/errors'
+    autoload :Request, 'aws/elastic_beanstalk/request'
 
     include Core::ServiceInterface
 

@@ -172,15 +172,13 @@ module AWS
   #   @return [Client] the low-level SimpleEmailService client object
   class SimpleEmailService
 
-    AWS.register_autoloads(self, 'aws/simple_email_service') do
-      autoload :Client,                 'client'
-      autoload :Errors,                 'errors'
-      autoload :EmailAddressCollection, 'email_address_collection'
-      autoload :Identity,               'identity'
-      autoload :IdentityCollection,     'identity_collection'
-      autoload :Quotas,                 'quotas'
-      autoload :Request,                'request'
-    end
+    autoload :Client, 'aws/simple_email_service/client'
+    autoload :Errors, 'aws/simple_email_service/errors'
+    autoload :EmailAddressCollection, 'aws/simple_email_service/email_address_collection'
+    autoload :Identity, 'aws/simple_email_service/identity'
+    autoload :IdentityCollection, 'aws/simple_email_service/identity_collection'
+    autoload :Quotas, 'aws/simple_email_service/quotas'
+    autoload :Request, 'aws/simple_email_service/request'
 
     include Core::ServiceInterface
 

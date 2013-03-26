@@ -61,11 +61,9 @@ module AWS
   #   @return [Client] the low-level CloudFront client object
   class CloudFront
 
-    AWS.register_autoloads(self, 'aws/cloud_front') do
-      autoload :Client,  'client'
-      autoload :Errors,  'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client,  'aws/cloud_front/client'
+    autoload :Errors,  'aws/cloud_front/errors'
+    autoload :Request, 'aws/cloud_front/request'
 
     include Core::ServiceInterface
 

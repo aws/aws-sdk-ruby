@@ -61,19 +61,17 @@ module AWS
   #   @return [Client] the low-level CloudWatch client object
   class CloudWatch
 
-    AWS.register_autoloads(self, 'aws/cloud_watch') do
-      autoload :Alarm, 'alarm'
-      autoload :AlarmCollection, 'alarm_collection'
-      autoload :AlarmHistoryItem, 'alarm_history_item'
-      autoload :AlarmHistoryItemCollection, 'alarm_history_item_collection'
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Metric, 'metric'
-      autoload :MetricCollection, 'metric_collection'
-      autoload :MetricAlarmCollection, 'metric_alarm_collection'
-      autoload :MetricStatistics, 'metric_statistics'
-      autoload :Request, 'request'
-    end
+    autoload :Alarm, 'aws/cloud_watch/alarm'
+    autoload :AlarmCollection, 'aws/cloud_watch/alarm_collection'
+    autoload :AlarmHistoryItem, 'aws/cloud_watch/alarm_history_item'
+    autoload :AlarmHistoryItemCollection, 'aws/cloud_watch/alarm_history_item_collection'
+    autoload :Client, 'aws/cloud_watch/client'
+    autoload :Errors, 'aws/cloud_watch/errors'
+    autoload :Metric, 'aws/cloud_watch/metric'
+    autoload :MetricCollection, 'aws/cloud_watch/metric_collection'
+    autoload :MetricAlarmCollection, 'aws/cloud_watch/metric_alarm_collection'
+    autoload :MetricStatistics, 'aws/cloud_watch/metric_statistics'
+    autoload :Request, 'aws/cloud_watch/request'
 
     include Core::ServiceInterface
 

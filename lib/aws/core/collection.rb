@@ -16,11 +16,9 @@ module AWS
     # Provides useful methods for enumerating items in a collection.
     module Collection
 
-      AWS.register_autoloads(self) do
-        autoload :Simple, 'simple'
-        autoload :WithNextToken, 'with_next_token'
-        autoload :WithLimitAndNextToken, 'with_limit_and_next_token'
-      end
+      autoload :Simple, 'aws/core/collection/simple'
+      autoload :WithNextToken, 'aws/core/collection/with_next_token'
+      autoload :WithLimitAndNextToken, 'aws/core/collection/with_limit_and_next_token'
 
       include Enumerable
 
