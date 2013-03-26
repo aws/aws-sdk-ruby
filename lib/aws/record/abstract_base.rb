@@ -14,14 +14,6 @@
 require 'uuidtools'
 require 'set'
 
-require 'aws/record/scope'
-require 'aws/record/naming'
-require 'aws/record/validations'
-require 'aws/record/dirty_tracking'
-require 'aws/record/conversion'
-require 'aws/record/errors'
-require 'aws/record/exceptions'
-
 module AWS
   module Record
     module AbstractBase
