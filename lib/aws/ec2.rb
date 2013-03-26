@@ -172,9 +172,9 @@ module AWS
   # separate Regions, you can design your application to be closer
   # to specific customers or to meet legal or other
   # requirements. Prices for Amazon EC2 usage vary by Region (for
-  # more information about pricing by Region, go to the {Amazon EC2
-  # Pricing page}[http://aws.amazon.com/ec2/pricing]).  You can use
-  # the Ruby SDK to see which regions are available for your
+  # more information about pricing by Region, go to the
+  # {Amazon EC2 Pricing page}[http://aws.amazon.com/ec2/pricing]).
+  # You can use the Ruby SDK to see which regions are available for your
   # account:
   #
   #  ec2.regions.map(&:name)            # => ["us-east-1", ...]

@@ -87,8 +87,7 @@ module AWS
       # Amazon S3. You can use snapshots for backups, to make
       # identical copies of instance devices, and to save data
       # before shutting down an instance. For more information about
-      # Amazon EBS, go to the {Amazon Elastic Compute Cloud User
-      # Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # Amazon EBS, go to the {Amazon Elastic Compute Cloud User Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
       #
       # @return [Snapshot] An object representing the new snapshot.
       #

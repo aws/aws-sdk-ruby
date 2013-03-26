@@ -49,9 +49,7 @@ module AWS
 
       # Creates a new Amazon EBS volume that any Amazon EC2 instance
       # in the same Availability Zone can attach to. For more
-      # information about Amazon EBS, go to the {Amazon Elastic
-      # Compute Cloud User
-      # Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # information about Amazon EBS, go to the {Amazon Elastic Compute Cloud User Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
       #
       # @return [Volume] An object representing the new volume.
       #
