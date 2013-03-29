@@ -60,7 +60,7 @@ module AWS
       #
       # @option options [String,IAM::ServerCertificate] :server_certificate (nil)
       #   The ARN string of an IAM::ServerCertifcate or an
-      #   IAM::ServerCertificate object.  Reqruied for HTTPs listeners.
+      #   IAM::ServerCertificate object.  Required for HTTPs listeners.
       #
       # @option options [Array] :subnets An list of VPC subets to attach the
       #   load balancer to.  This can be an array of subnet ids (strings) or
