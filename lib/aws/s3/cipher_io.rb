@@ -44,12 +44,13 @@ module AWS
 
       # @return [String] Returns the requested number of bytes.  If no byte
       #   amount is given, it will return the entire body of encrypted data
-      def read bytes = nil
-        if bytes
+      def read bytes = nil, output_buffer = nil
+        data = if bytes
           (@eof) ? nil : read_chunk(bytes)
         else
-          (@eof) ? ""  : read_all()
+          (@eof) ? ""  : read_all
         end
+        output_buffer ? output_buffer.replace(data || '') : data
       end
 
       # @return [Boolean] Returns +true+ when the entire stream has been read.
