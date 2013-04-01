@@ -134,6 +134,7 @@ def execute_post(form, opts = {})
     fields = fields.to_a + [["file", file]]
 
     req = Net::HTTP::Post::Multipart.new(form.url.path, fields)
+    req.delete('Accept-Encoding')
     resp = http.request(req)
     @result = resp
 

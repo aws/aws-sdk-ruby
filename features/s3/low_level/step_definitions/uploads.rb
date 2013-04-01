@@ -45,13 +45,14 @@ When /^I ask the client to upload a (\d+)(mb|kb) part for "([^\"]*)" containing 
 end
 
 When /^I ask the client to complete the upload for "([^\"]*)"$/ do |key|
+  parts = []
+  @etags.keys.sort.each do |part_number|
+    parts << { :part_number => part_number, :etag => @etags[part_number] }
+  end
   @result = @s3_client.complete_multipart_upload(:bucket_name => @bucket_name,
                                               :key => key,
                                               :upload_id => @upload_id,
-                                              :parts => @etags.map do |(part, etag)|
-                                                { :part_number => part,
-                                                  :etag => etag }
-                                              end)
+                                              :parts => parts)
 end
 
 Then /^the object "([^\"]*)" should eventually have a body including the following strings:$/ do |key, table|

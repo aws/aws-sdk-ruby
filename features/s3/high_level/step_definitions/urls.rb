@@ -17,7 +17,10 @@ end
 
 When /^I use a regular HTTP client to GET the URL$/ do
   require 'net/http'
-  @result = Net::HTTP.get_response(@url)
+  http = Net::HTTP.new(@url.host, @url.port)
+  http.start do
+    @result = http.request(Net::HTTP::Get.new(@url.request_uri))
+  end
 end
 
 Then /^the response body should be "([^\"]*)"$/ do |body|
