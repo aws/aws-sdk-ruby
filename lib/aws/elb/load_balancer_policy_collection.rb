@@ -31,7 +31,7 @@ module AWS
       # the front-end listener, or the back-end application server,
       # depending on your policy type.
       #
-      # == Applying Policies
+      # ## Applying Policies
       #
       # To apply a policy to a front-end listener:
       #

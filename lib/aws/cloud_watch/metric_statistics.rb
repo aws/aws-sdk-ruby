@@ -18,7 +18,7 @@ module AWS
     #
     # This class is an enumerable collection of data points.
     #
-    # == Enumerating Statistics
+    # ## Enumerating Statistics
     #
     #   metric = CloudWatch::Metric.new('my/namepace', 'metric-name')
     #

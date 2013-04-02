@@ -125,7 +125,7 @@ module AWS
       # @yield [item] Yields once for every item in the {#domain}.
       #
       # @yieldparam [Item,ItemData] item If the item collection has been
-      #   scoped by chaining +#select+ or by passing the +:select+ option
+      #   scoped by chaining `#select` or by passing the `:select` option
       #   then {ItemData} objects (that contain a hash of attributes) are
       #   yielded.  If no list of attributes has been provided, then#
       #   {Item} objects (with no populated data) are yielded.
@@ -137,9 +137,9 @@ module AWS
       #
       # @option options [Mixed] :select If select is provided, then each
       #   will yield {ItemData} objects instead of empty {Item}.
-      #   The +:select+ option may be:
+      #   The `:select` option may be:
       #
-      #   * +:all+ - Specifies that all attributes should requested.
+      #   * `:all` - Specifies that all attributes should requested.
       #
       #   * A single or array of attribute names (as strings or symbols).
       #     This causes the named attribute(s) to be requested.
@@ -192,7 +192,7 @@ module AWS
       # @param [Hash] options Options for counting items.
       #
       # @option options [Boolean] :consistent_read (false) Causes this
-      #   method to yield the most current data in the domain when +true+.
+      #   method to yield the most current data in the domain when `true`.
       #
       # @option options :where Restricts the item collection using
       #   {#where} before querying.
@@ -253,7 +253,7 @@ module AWS
       #     puts item_data.attributes # => { 'size' => ..., :color => ... }
       #   end
       #
-      # You can select all attributes by passing +:all+ or '*':
+      # You can select all attributes by passing `:all` or '*':
       #
       #   domain.items.select('*').each {|item_data| ... }
       #
@@ -266,7 +266,7 @@ module AWS
       # @param [Symbol, String, or Array] attributes The attributes to
       #   retrieve.  This can be:
       #
-      #   * +:all+ or '*' to request all attributes for each item
+      #   * `:all` or '*' to request all attributes for each item
       #
       #   * A list or array of attribute names as strings or symbols
       #
@@ -326,9 +326,9 @@ module AWS
       #  #      WHERE color = "blue" AND engine_type is not null
       #  items.each { |i| ... }
       #
-      # == Hash Conditions
+      # ## Hash Conditions
       #
-      # When +conditions+ is a hash, each entry produces a condition
+      # When `conditions` is a hash, each entry produces a condition
       # on the attribute named in the hash key.  For example:
       #
       #  # produces "WHERE `foo` = 'bar'"
@@ -348,10 +348,10 @@ module AWS
       #  # produces "WHERE (`foo` >= 'bar' AND `foo` < 'baz')"
       #  domain.items.where(:foo => 'bar'...'baz')
       #
-      # == Placeholders
+      # ## Placeholders
       #
-      # If +conditions+ is a string and "?" appears outside of any
-      # quoted part of the expression, +placeholers+ is expected to
+      # If `conditions` is a string and "?" appears outside of any
+      # quoted part of the expression, `placeholers` is expected to
       # contain a value for each of the "?" characters in the
       # expression.  For example:
       #
@@ -417,8 +417,8 @@ module AWS
       # @param attribute [String or Symbol] The attribute name to
       #   order by.
       # @param order [String or Symbol] The desired order, which may be:
-      #   * +asc+ or +ascending+ (the default)
-      #   * +desc+ or +descending+
+      #   * `asc` or `ascending` (the default)
+      #   * `desc` or `descending`
       # @return [ItemCollection] Returns a new item collection with the
       #   given ordering logic.
       def order(attribute, order = nil)

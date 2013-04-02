@@ -87,7 +87,7 @@ module AWS
       # Note that * matches one or more characters and ? matches any one
       # character.
       #
-      # === Valid Filters
+      # ### Valid Filters
       #
       # * description - Description of the security group.
       # * group-id - ID of the security group.

@@ -21,7 +21,7 @@ module AWS
     # Amazon S3 stores objects. The rules apply to objects whose keys match
     # the rule's prefix.
     #
-    # == Rules
+    # ## Rules
     #
     # A rule is comprised primarily of an id, prefix and set of
     # configuration options. Configuration options on the rules can specify:
@@ -33,7 +33,7 @@ module AWS
     # See {Rule} for more information on all of the attributes and methods
     # available for rules.
     #
-    # == Expiring Objects
+    # ## Expiring Objects
     #
     # You can add a rule to a bucket lifecycle configuration using {#add_rule}
     # inside of an {#update} block that will expire an object after a given
@@ -52,7 +52,7 @@ module AWS
     #     add_rule('backups/', :expiration_time => date)
     #   end
     #
-    # == Transitioning Objects to Glacier
+    # ## Transitioning Objects to Glacier
     #
     # You can add a rule to a bucket lifecycle configuration using {#add_rule}
     # inside of an {#update} block that will transition objects to Glacier
@@ -71,10 +71,10 @@ module AWS
     #     add_rule('backups/', :glacier_transition_time => date)
     #   end
     #
-    # == Replacing Rules
+    # ## Replacing Rules
     #
     # If you prefer to completely replace a lifecycle configuration, call
-    # {#add_rule} inside a {#replace} block instead of an +#update+ block:
+    # {#add_rule} inside a {#replace} block instead of an `#update` block:
     #
     #   # replace all existing rules with the following
     #   bucket.lifecycle_configuration.replace do
@@ -82,7 +82,7 @@ module AWS
     #     add_rule('temp/', :expiration_time => 30)
     #   end
     #
-    # == Removing Rules
+    # ## Removing Rules
     #
     # You can delete specific rules with {#remove_rule}.
     #
@@ -98,7 +98,7 @@ module AWS
     #   # remove all rules from this lifecycle configuration
     #   bucket.lifecycle_configuration.clear
     #
-    # == Editing Existing Rules
+    # ## Editing Existing Rules
     #
     # You can also make changes to existing rules.
     #
@@ -110,7 +110,7 @@ module AWS
     #   end
     #
     # Please be aware, if you add, remove or edit rules outside of an
-    # {#update} or {#replace} block, then you must call +#update+ yourself
+    # {#update} or {#replace} block, then you must call `#update` yourself
     # or the changes will not be persisted.
     #
     class BucketLifecycleConfiguration
@@ -148,7 +148,7 @@ module AWS
       #
       #   @option options [Boolean] :disabled (false) By default, all rules
       #     will have the status of enabled.  You can override this default
-      #     by passing +:disabled+ => true.
+      #     by passing `:disabled` => true.
       #
       #   @option options [Date, Integer] :expiration_time (nil) Indicates
       #     the lifetime for objects matching the given prefix.

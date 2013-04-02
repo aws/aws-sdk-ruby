@@ -41,18 +41,18 @@ module AWS
         # Finds records in SimpleDB and returns them as objects of the
         # current class.
         #
-        # Finding +:all+ returns an enumerable scope object
+        # Finding `:all` returns an enumerable scope object
         #
         #  People.find(:all, :order => [:age, :desc], :limit => 10).each do |person|
         #    puts person.name
         #  end
         #
-        # Finding +:first+ returns a single record (or nil)
+        # Finding `:first` returns a single record (or nil)
         #
         #  boss = People.find(:first, :where => { :boss => true })
         #
-        # Find accepts a hash of find modifiers (+:where+, +:order+ and
-        # +:limit+).  You can also choose to omit these modifiers and
+        # Find accepts a hash of find modifiers (`:where`, `:order` and
+        # `:limit`).  You can also choose to omit these modifiers and
         # chain them on the scope object returned.  In the following
         # example only one request is made to SimpleDB (when #each is
         # called)
@@ -73,9 +73,9 @@ module AWS
         #     not found.
         #
         # @overload find(mode, options = {})
-        #   @param [:all,:first] mode (:all) When finding +:all+ matching records
-        #     and array is returned of records.  When finding +:first+ then
-        #     +nil+ or a single record will be returned.
+        #   @param [:all,:first] mode (:all) When finding `:all` matching records
+        #     and array is returned of records.  When finding `:first` then
+        #     `nil` or a single record will be returned.
         #   @param [Hash] options
         #   @option options [Mixed] :where Conditions that determine what
         #     records are returned.
@@ -106,7 +106,7 @@ module AWS
         #     # ...
         #   end
         #
-        # This method is equivalent to +find(:all)+, and therefore you can also
+        # This method is equivalent to `find(:all)`, and therefore you can also
         # pass aditional options.  See {.find} for more information on what
         # options you can pass.
         #

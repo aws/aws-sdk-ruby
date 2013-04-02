@@ -21,14 +21,14 @@ module AWS
     # Provides an interface to count, and receive decision tasks
     # ({DecisionTask} objects) from the service.
     #
-    # == Counting
+    # ## Counting
     #
     # To get a count of decision tasks needing attention, call {#count}
     # with a task list name:
     #
     #   domain.decision_tasks.count('my-task-list').to_i #=> 7
     #
-    # == Getting a single decision task
+    # ## Getting a single decision task
     #
     # To process a single task use {#poll_for_single_task}:
     #
@@ -38,7 +38,7 @@ module AWS
     #   end
     #
     # At the end of the block, the decision task is auto-completed.
-    # If you prefer you can omit the block and +nil+ or a {DecisionTask}
+    # If you prefer you can omit the block and `nil` or a {DecisionTask}
     # will be returned.
     #
     #   if task = domain.decision_tasks.poll_for_single_task('my-task-list')
@@ -46,7 +46,7 @@ module AWS
     #     task.complete!
     #   end
     #
-    # == Polling for Tasks in a Loop
+    # ## Polling for Tasks in a Loop
     #
     # You can poll indefinitely for tasks in a loop with {#poll}:
     #
@@ -55,11 +55,11 @@ module AWS
     #   end
     #
     # Just like the block form above, the decision task is auto completed at
-    # the end of the block.  Please note, if you call +break+ or +return+
+    # the end of the block.  Please note, if you call `break` or `return`
     # from inside the block, you *MUST* call {DecisionTask#complete!} or
     # the task will timeout.
     #
-    # == Events and Decisions
+    # ## Events and Decisions
     #
     # Each decision task provides an enumerable collection of both
     # new events ({DecisionTask#new_events}) and all events
@@ -83,7 +83,7 @@ module AWS
       # @return [Domain]
       attr_reader :domain
 
-      # Returns the number of decision tasks in the specified +task_list+.
+      # Returns the number of decision tasks in the specified `task_list`.
       #
       #   count = decision_tasks.count('task-list-name')
       #   count.truncated? #=> false
@@ -140,7 +140,7 @@ module AWS
       # @option options [String] :identity The identity of the decider
       #   requesting a decision task.  This will be recorded in the
       #   DecisionTaskStarted event in the workflow history.
-      #   If +:identity+ is not passed then the hostname and
+      #   If `:identity` is not passed then the hostname and
       #   process id will be sent (e.g. "hostname:pid").
       #
       # @option options [Boolean] :reverse_event_order (false)  When true,
@@ -155,9 +155,9 @@ module AWS
       #
       # @yieldparam [DecisionTask] decision_task
       #
-      # @return [DecisionTask,nil] Returns a decision task or +nil+.  If
-      #   a block was passed then +nil+ is always returned.  If a block
-      #   is not passed, then +nil+ or a {DecisionTask} will be returned.
+      # @return [DecisionTask,nil] Returns a decision task or `nil`.  If
+      #   a block was passed then `nil` is always returned.  If a block
+      #   is not passed, then `nil` or a {DecisionTask} will be returned.
       #
       def poll_for_single_task task_list, options = {}, &block
 
@@ -195,7 +195,7 @@ module AWS
       #     # make decisions here
       #   end
       #
-      # @note If you to terminate the block (by calling +break+ or +return+)
+      # @note If you to terminate the block (by calling `break` or `return`)
       #   then it is your responsibility to call #complete! on the decision
       #   task.
       #

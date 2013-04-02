@@ -57,14 +57,14 @@ module AWS
       nil
     end
 
-    # Loads AWS configuration options from +RAILS_ROOT/config/aws.yml+.
+    # Loads AWS configuration options from `RAILS_ROOT/config/aws.yml`.
     #
     # This configuration file is optional.  You can omit this file and instead
     # use ruby to configure AWS inside a configuration initialization script
     # (e.g. RAILS_ROOT/config/intializers/aws.rb).
     #
     # If you have a yaml configuration file it should be formatted like the
-    # standard +database.yml+ file in a Rails application.  This means there
+    # standard `database.yml` file in a Rails application.  This means there
     # should be one section for Rails environment:
     #
     #   development:
@@ -123,13 +123,13 @@ module AWS
     #
     #   config.action_mailer.delivery_method = :amazon_ses
     #
-    # === Defaults
+    # ### Defaults
     #
     # Normally you don't need to call this method.  By default a delivery method
-    # named +:amazon_ses+ is added to ActionMailer::Base.  This delivery method
+    # named `:amazon_ses` is added to ActionMailer::Base.  This delivery method
     # uses your default configuration (#{AWS.config}).
     #
-    # === Custom SES Options
+    # ### Custom SES Options
     #
     # If you need to supply configuration values for SES that are different than
     # those in {AWS.config} then you can pass those options:
@@ -139,7 +139,7 @@ module AWS
     # @param [Symbol] name (:amazon_ses) The name of the delivery
     #   method.  The name used here should be the same as you set in
     #   your environment config.  If you name the delivery method
-    #   +:amazon_ses+ then you could do something like this in your
+    #   `:amazon_ses` then you could do something like this in your
     #   config/environments/ENV.rb file:
     #
     #     config.action_mailer.delivery_method = :amazon_ses

@@ -21,7 +21,7 @@ module AWS
     #      puts "#{tag.key}:#{tag.value}"
     #   end
     #
-    # == Filters
+    # ## Filters
     #
     # You can filter the tags returned using {#filter}:
     #
@@ -37,14 +37,14 @@ module AWS
     #   # returns all tags that propagate at launch
     #   auto_scaling.filter(:propagate_at_launch, true).to_a
     #
-    # == Creating Tags
+    # ## Creating Tags
     #
     # You can create Auto Scaling tags when you:
     #
     # * [create]{GroupCollection#create} an Auto Scaling group
     # * [update]{Group#update} an Auto Scaling group
     #
-    # Both of these methods accept a +:tags+ option.
+    # Both of these methods accept a `:tags` option.
     #
     #   tags = [
     #     { :key => 'auto-scaling-instance' },       # tag name only

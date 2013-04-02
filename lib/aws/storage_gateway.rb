@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with AWS Storage Gateway.
   #
   # To use AWS Storage Gateway you must first
-  # {sign up here}[http://aws.amazon.com/storagegateway/].
+  # [sign up here](http://aws.amazon.com/storagegateway/).
   #
   # For more information about AWS Storage Gateway:
   #
-  # * {AWS Storage Gateway}[http://aws.amazon.com/storagegateway/]
-  # * {AWS Storage Gateway Documentation}[http://aws.amazon.com/documentation/storagegateway/]
+  # * [AWS Storage Gateway](http://aws.amazon.com/storagegateway/)
+  # * [AWS Storage Gateway Documentation](http://aws.amazon.com/documentation/storagegateway/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::StorageGateway does not provide higher level abstractions for Route 53 at
   # this time.  You can still access all of the API methods using

@@ -14,7 +14,7 @@
 module AWS
   class CloudFormation
 
-    # = Stack Event
+    # # Stack Event
     #
     # You can get stack events from a {Stack} object.
     #

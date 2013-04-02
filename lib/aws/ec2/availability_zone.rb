@@ -22,7 +22,7 @@ module AWS
     #   of the availability zone.
     #
     # @attr_reader [Symbol] state Returns the state of the availability
-    #   zone, e.g. +:available+.
+    #   zone, e.g. `:available`.
     #
     # @attr_reader [Array<String>] messages Returns a list of messages about the
     #   Availability Zone.

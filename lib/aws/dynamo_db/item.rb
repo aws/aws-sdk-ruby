@@ -41,7 +41,7 @@ module AWS
       attr_reader :hash_value
 
       # @return [String, Numeric, nil] The range key value of the
-      #   item, or +nil+ if the table has a simple primary key.
+      #   item, or `nil` if the table has a simple primary key.
       attr_reader :range_value
 
       # @private
@@ -67,7 +67,7 @@ module AWS
       # @option options [String, Symbol, Array] :unless_exists A name
       #   or collection of attribute names; if the item has a value
       #   for any of these attributes, this method will raise
-      #   +DynamoDB::Errors::ConditionalCheckFailedException+.  For
+      #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For
       #   example:
       #
       #     item.delete(:unless_exists => "version")

@@ -58,11 +58,11 @@ module AWS
     # non-leaf nodes are common prefixes to multiple keys
     # (directories) and leaf nodes are object keys.
     #
-    # You can continue crawling the tree using the +children+
+    # You can continue crawling the tree using the `children`
     # collection on each branch node, which will contain the branch
     # nodes and leaf nodes below it.
     #
-    # You can construct a Tree object using the +as_tree+ method of
+    # You can construct a Tree object using the `as_tree` method of
     # any of the following classes:
     #
     # * {Bucket} or {ObjectCollection} (for {S3Object} leaf nodes)
@@ -93,7 +93,7 @@ module AWS
       #   tree.
       #
       # @option options [String] :prefix (nil) Set prefix to choose
-      #   where the top of the tree will be.  A value of +nil+ means
+      #   where the top of the tree will be.  A value of `nil` means
       #   that the tree will include all objects in the collection.
       #
       # @option options [String] :delimiter ('/') The string that

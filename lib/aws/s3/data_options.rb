@@ -126,8 +126,8 @@ module AWS
 
       end
 
-      # @return [Boolean] Returns +true+ if the object responds to
-      #   +#read+ and +#eof?+.
+      # @return [Boolean] Returns `true` if the object responds to
+      #   `#read` and `#eof?`.
       def io_like? io
         io.respond_to?(:read) and io.respond_to?(:eof?)
       end

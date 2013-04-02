@@ -18,7 +18,7 @@ class Net::HTTP::ConnectionPool
   # Represents a HTTP connection.  Call {#request} on a connection like
   # you would with a Net::HTTPSession object.
   #
-  # == Getting a Connection object
+  # ## Getting a Connection object
   #
   # To get a connection object, you start with a connection pool:
   #
@@ -28,7 +28,7 @@ class Net::HTTP::ConnectionPool
   # {ConnectionPool#connection_for} accepts a number of options to control
   # the connection settings (SSL, proxy, timeouts, etc).
   #
-  # == Making Requests
+  # ## Making Requests
   #
   # Given a connection object, you call #request.  {Connection#request}
   # yields Net::HTTPResponse objects (when given a block).  You should
@@ -113,18 +113,18 @@ class Net::HTTP::ConnectionPool
     # @return [Numeric,nil]
     attr_accessor :read_timeout
 
-    # @return [Boolean] Returns +true+ if this connection requires SSL.
+    # @return [Boolean] Returns `true` if this connection requires SSL.
     def ssl?
       @ssl
     end
 
-    # @return [Boolean] Returns +true+ if ssl connections should verify the
+    # @return [Boolean] Returns `true` if ssl connections should verify the
     #   peer certificate.
     def ssl_verify_peer?
       @ssl_verify_peer
     end
 
-    # @return [Boolean] Returns +true+ if this connection proxies requests.
+    # @return [Boolean] Returns `true` if this connection proxies requests.
     def proxy?
       !!proxy_address
     end

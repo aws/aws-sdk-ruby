@@ -16,7 +16,7 @@ module AWS
 
     # A small wrapper around an {EC2::Instance}.
     #
-    # == Getting Auto Scaling Instances
+    # ## Getting Auto Scaling Instances
     #
     # If you know the EC2 instance id, you can use {InstanceCollection#[]}
     # to get the Auto Scaling instance.
@@ -25,7 +25,7 @@ module AWS
     #   instance.health_statue #=> :healthy
     #   instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
     #
-    # == Enumerating Auto Scaling Instances
+    # ## Enumerating Auto Scaling Instances
     #
     # You can enumerate *ALL* instances like so:
     #

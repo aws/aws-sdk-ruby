@@ -109,14 +109,14 @@ module AWS
       # extend the timeout of a message in an existing queue to more
       # than a total visibility timeout of 12 hours. (For more
       # information visibility timeout, see
-      # {Visibility Timeout}[http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT]
+      # [Visibility Timeout](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT)
       # in the Amazon SQS Developer Guide.)
       #
       # For example, let's say the timeout for the queue is 30
       # seconds, and you receive a message. Once you're 20 seconds
       # into the timeout for that message (i.e., you have 10 seconds
       # left), you extend it by 60 seconds by calling this method
-      # with +timeout+ set to 60 seconds. You have then changed the
+      # with `timeout` set to 60 seconds. You have then changed the
       # remaining visibility timeout from 10 seconds to 60 seconds.
       #
       # @note If you attempt to set the timeout to an amount more

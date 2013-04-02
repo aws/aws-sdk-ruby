@@ -50,10 +50,10 @@ module AWS
 
       # @overload status
       # Returns the attachment status.  Possible values are:
-      # * +:attaching+
-      # * +:attached+
-      # * +:detaching+
-      # * +:detached+
+      # * `:attaching`
+      # * `:attached`
+      # * `:detaching`
+      # * `:detached`
       # @return [Symbol] Returns the attachment status.
       attribute :status, :to_sym => true
 
@@ -62,7 +62,7 @@ module AWS
       attribute :attach_time
 
       # @overload delete_on_termination?
-      # @return [Boolean] Returns +true+ if the volume will be deleted
+      # @return [Boolean] Returns `true` if the volume will be deleted
       #   on instance termination.
       attribute :delete_on_termination, :boolean => true
 

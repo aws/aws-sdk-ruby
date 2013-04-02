@@ -53,7 +53,7 @@ module AWS
         output_buffer ? output_buffer.replace(data || '') : data
       end
 
-      # @return [Boolean] Returns +true+ when the entire stream has been read.
+      # @return [Boolean] Returns `true` when the entire stream has been read.
       def eof?
         @eof
       end

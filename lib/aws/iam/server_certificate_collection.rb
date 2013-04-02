@@ -20,7 +20,7 @@ module AWS
     #   iam = AWS::IAM.new
     #   certificates = iam.server_certificates
     #
-    # == Uploading A Server Certificate
+    # ## Uploading A Server Certificate
     #
     # You can upload any valid, signed certificate using {#upload}.
     #
@@ -34,13 +34,13 @@ module AWS
     # Creating and Uploading Server Certificates} in <i>Using AWS
     # Identity and Access Management</i>.
     #
-    # == Getting a Server Certificate by Name
+    # ## Getting a Server Certificate by Name
     #
     # You can get a reference to a server certificate using array notation:
     #
     #   certificate = certificates['MyCert']
     #
-    # == Enumerating Server Certificates
+    # ## Enumerating Server Certificates
     #
     # Server certificate collections can also be used to enumerate
     # certificates:
@@ -49,7 +49,7 @@ module AWS
     #     puts cert.name
     #   end
     #
-    # You can limit the certificates returned by passing a +:prefix+
+    # You can limit the certificates returned by passing a `:prefix`
     # option to any of the enumerator methods.  When you pass a
     # prefix, only the certificates whose paths start with the given
     # string will be returned.
@@ -63,7 +63,7 @@ module AWS
       # all be PEM-encoded.
       #
       # @param [Hash] options Options for uploading the certificate.
-      #   +:name+, +:certificate_body+, and +:private_key+ are
+      #   `:name`, `:certificate_body`, and `:private_key` are
       #   required.
       #
       # @option options [String] :certificate_body The contents of the

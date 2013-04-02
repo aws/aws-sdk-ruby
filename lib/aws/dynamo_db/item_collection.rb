@@ -22,7 +22,7 @@ module AWS
     # * Get an {Item}
     # * Enumerate {Item} or {ItemData} objects
     #
-    # == Creating an Item
+    # ## Creating an Item
     #
     # To create an item, just call {#create} with a hash of attributes.
     #
@@ -36,7 +36,7 @@ module AWS
     # the hash key name/value for the item and the value must be of the
     # correct type (e.g. string or number).
     #
-    # == Getting an Item
+    # ## Getting an Item
     #
     # To get an item, you provide the hash key
     #
@@ -46,7 +46,7 @@ module AWS
     # You call methods against the item returned to get, add, update or delete
     # attributes.  See {Item} for more information.
     #
-    # == Enumerating Items
+    # ## Enumerating Items
     #
     # You can enumerate items 2 ways:
     #
@@ -147,22 +147,22 @@ module AWS
       #   or collection of attribute names; if the item already exists
       #   and has a value for any of these attributes, this method
       #   will raise
-      #   +DynamoDB::Errors::ConditionalCheckFailedException+.  For example:
+      #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For example:
       #
       #     items.put({ :id => "abc123" }, :unless_exists => "id")
       #
-      # @option options [Symbol] :return If set to +:all_old+, this
+      # @option options [Symbol] :return If set to `:all_old`, this
       #   method will return a hash containing the previous values of
       #   all attributes for the item that was overwritten.  If this
-      #   option is set to +:none+, or if it is set to +:all_old+ and
+      #   option is set to `:none`, or if it is set to `:all_old` and
       #   no item currently exists with the same primary key values,
-      #   the method will return +nil+.
+      #   the method will return `nil`.
       #
       # @return [Item] An object representing the item that was
       #   stored.  Note that the SDK retains only the item's primary
       #   key values in memory; if you access the attributes of the
       #   item using the returned object, the SDK will contact the
-      #   service to retrieve those attributes.  The +:return+ option
+      #   service to retrieve those attributes.  The `:return` option
       #   may be used to change the return value of this method.
       def create attributes, options = {}
         table.assert_schema!
@@ -635,15 +635,15 @@ module AWS
       # @note This method is only valid for tables with a composite
       #   primary key.
       #
-      # @param [Hash] options Options for the query.  +:hash_value+ is
+      # @param [Hash] options Options for the query.  `:hash_value` is
       #   required.  Only one of the following options may be set:
       #
-      #   * +:range_value+
-      #   * +:range_greater_than+
-      #   * +:range_less_than+
-      #   * +:range_gte+
-      #   * +:range_lte+
-      #   * +:range_begins_with+
+      #   * `:range_value`
+      #   * `:range_greater_than`
+      #   * `:range_less_than`
+      #   * `:range_gte`
+      #   * `:range_lte`
+      #   * `:range_begins_with`
       #
       # @option [Boolean] :scan_index_forward (true) Specifies which
       #   order records will be returned.  Defaults to returning them
@@ -655,7 +655,7 @@ module AWS
       #
       #      :select => [:id, :category, :size]
       #
-      #   If you want to select ALL attributes, pass the symbol +:all+
+      #   If you want to select ALL attributes, pass the symbol `:all`
       #
       #      :select => :all
       #
@@ -665,7 +665,7 @@ module AWS
       # @option options [Array<String, Symbol>, String, Symbol] :select
       #   Attribute name or names to retrieve.  When this option is
       #   set, the returned or yielded items will be instances of
-      #   {ItemData} instead of {Item}.  The special value +:all+
+      #   {ItemData} instead of {Item}.  The special value `:all`
       #   indicates that all attributes should be retrieved and
       #   returned in ItemData instances.
       #

@@ -112,7 +112,7 @@ module AWS
       #    actions are requested, they are ignored with no error.
       #
       # @option options [Time,String] :start_time The earliest scheduled
-      #   start time to return. If +:scheduled_actions+ is provided,
+      #   start time to return. If `:scheduled_actions` is provided,
       #   this field will be ignored.  Should be a Time object or
       #   an iso8601 string.
       #

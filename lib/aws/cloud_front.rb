@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon CloudFront.
   #
   # To use Amazon CloudFront you must first
-  # {sign up here}[http://aws.amazon.com/cloudfront/].
+  # [sign up here](http://aws.amazon.com/cloudfront/).
   #
   # For more information about Amazon CloudFront:
   #
-  # * {Amazon CloudFront}[http://aws.amazon.com/cloudfront/]
-  # * {Amazon CloudFront Documentation}[http://aws.amazon.com/documentation/cloudfront/]
+  # * [Amazon CloudFront](http://aws.amazon.com/cloudfront/)
+  # * [Amazon CloudFront Documentation](http://aws.amazon.com/documentation/cloudfront/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::CloudFront does not provide higher level abstractions for CloudFront at
   # this time.  You can still access all of the API methods using

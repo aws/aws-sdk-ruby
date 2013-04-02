@@ -54,7 +54,7 @@ module AWS
       # * '*' matches one or more characters and '?' matches any one
       #   character.
       #
-      # === Valid Filters
+      # ### Valid Filters
       #
       # * domain - Whether the address is a EC2 address, or a VPC address.
       #   Valid values include 'standard' and 'vpc'

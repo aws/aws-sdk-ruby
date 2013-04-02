@@ -17,18 +17,18 @@ module AWS
 
       # The primary interface for finding records with {AWS::Record::Model}.
       #
-      # == Getting a Scope Object
+      # ## Getting a Scope Object
       #
       # You should normally never need to construct a Scope object directly.
       # Scope objects are returned from the AWS::Record::Model finder methods
-      # (e.g. +shard+, +where+, +order+, +limit+, etc).
+      # (e.g. `shard`, `where`, `order`, `limit`, etc).
       #
       #   books = Book.where(:author => 'John Doe')
       #   books.class #=> AWS::Record::Scope, not Array
       #
-      # Scopes are also returned from methods defined with the +scope+ method.
+      # Scopes are also returned from methods defined with the `scope` method.
       #
-      # == Chaining Scopes
+      # ## Chaining Scopes
       #
       # Scope objects represent a request, but do not actualy make a request
       # until required.  This allows you to chain requests
@@ -48,7 +48,7 @@ module AWS
       # * {#order}
       # * {#limit}
       #
-      # == Terminating Scopes
+      # ## Terminating Scopes
       #
       # To terminate a scope you can enumerate it or call #first.
       #
@@ -170,7 +170,7 @@ module AWS
           merged
         end
 
-        # Consumes a hash of options (e.g. +:where+, +:order+ and +:limit+) and
+        # Consumes a hash of options (e.g. `:where`, `:order` and `:limit`) and
         # builds them onto the current scope, returning a new one.
         # @param [Hash] options
         # @option options :where

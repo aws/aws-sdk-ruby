@@ -14,13 +14,13 @@
 module AWS
   class CloudFormation
 
-    # = StackResourceCollection
+    # # StackResourceCollection
     #
     # This collection represents the resources for a single {Stack}.
     # You can enumerate resources, or request a specific resource
     # by its logical resource id.
     #
-    # = Other Ways to Get Resource Details
+    # # Other Ways to Get Resource Details
     #
     # If you want to get a {StackResource} by its physical resource
     # id, then you should use {CloudFormation#stack_resource}.
@@ -32,7 +32,7 @@ module AWS
     #
     #   # enumerating all resources for a stack
     #   stack.resources.each do |resource|
-    #     puts resource.resource_type + " " + resource.physical_resource_id
+    #     puts resource.resource_type ` " " ` resource.physical_resource_id
     #   end
     #
     # @example Getting a stack resource by its logical resource id

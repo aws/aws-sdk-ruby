@@ -322,22 +322,22 @@ module AWS
         # The following list shows which operators are accepted as
         # symbols and how they are represented in the JSON policy:
         #
-        # * +:is+ (StringEquals, NumericEquals, DateEquals, or Bool)
-        # * +:like+ (StringLike)
-        # * +:not_like+ (StringNotLike)
-        # * +:not+ (StringNotEquals, NumericNotEquals, or DateNotEquals)
-        # * +:greater_than+, +:gt+ (NumericGreaterThan or DateGreaterThan)
-        # * +:greater_than_equals+, +:gte+
+        # * `:is` (StringEquals, NumericEquals, DateEquals, or Bool)
+        # * `:like` (StringLike)
+        # * `:not_like` (StringNotLike)
+        # * `:not` (StringNotEquals, NumericNotEquals, or DateNotEquals)
+        # * `:greater_than`, `:gt` (NumericGreaterThan or DateGreaterThan)
+        # * `:greater_than_equals`, `:gte`
         #   (NumericGreaterThanEquals or DateGreaterThanEquals)
-        # * +:less_than+, +:lt+ (NumericLessThan or DateLessThan)
-        # * +:less_than_equals+, +:lte+
+        # * `:less_than`, `:lt` (NumericLessThan or DateLessThan)
+        # * `:less_than_equals`, `:lte`
         #   (NumericLessThanEquals or DateLessThanEquals)
-        # * +:is_ip_address+ (IpAddress)
-        # * +:not_ip_address+ (NotIpAddress)
-        # * +:is_arn+ (ArnEquals)
-        # * +:not_arn+ (ArnNotEquals)
-        # * +:is_arn_like+ (ArnLike)
-        # * +:not_arn_like+ (ArnNotLike)
+        # * `:is_ip_address` (IpAddress)
+        # * `:not_ip_address` (NotIpAddress)
+        # * `:is_arn` (ArnEquals)
+        # * `:not_arn` (ArnNotEquals)
+        # * `:is_arn_like` (ArnLike)
+        # * `:not_arn_like` (ArnNotLike)
         #
         # @param [Symbol or String] operator The operator used to
         #   compare the key with the value.  See above for valid
@@ -348,8 +348,8 @@ module AWS
         #   default, the key is assumed to be in the "aws"
         #   namespace, but if you prefix the symbol name with "s3_"
         #   it will be sent in the "s3" namespace.  For example,
-        #   +:s3_prefix+ is sent as "s3:prefix" while
-        #   +:secure_transport+ is sent as "aws:SecureTransport".
+        #   `:s3_prefix` is sent as "s3:prefix" while
+        #   `:secure_transport` is sent as "aws:SecureTransport".
         #   See
         #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingResOpsConditions.html
         #   for a list of the available keys for each action in S3.
@@ -731,12 +731,12 @@ module AWS
         #   Symbols are expected to match methods of S3::Client.
         # @option opts :excluded_actions Action or actions which are
         #   explicitly not affected by this statement.  As with
-        #   +:actions+, these may be symbols or strings.
+        #   `:actions`, these may be symbols or strings.
         # @option opts [String or array of strings] :resources The
         #   resource(s) affected by the statement.  These can be
-        #   expressed as ARNs (e.g. +arn:aws:s3:::mybucket/mykey+)
-        #   or you may omit the +arn:aws:s3:::+ prefix and just give
-        #   the path as +bucket_name/key+.  You may use the wildcard
+        #   expressed as ARNs (e.g. `arn:aws:s3:::mybucket/mykey`)
+        #   or you may omit the `arn:aws:s3:::` prefix and just give
+        #   the path as `bucket_name/key`.  You may use the wildcard
         #   character "*" to match zero or more characters in the
         #   resource name.
         # @option opts [ConditionBlock or Hash] :conditions

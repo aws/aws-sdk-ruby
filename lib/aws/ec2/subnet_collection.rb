@@ -25,7 +25,7 @@ module AWS
     #   # represents subnets within the named vpc
     #   subnets = ec2.vpcs['vpc-12345'].subnets
     #
-    # == Creating a Subnet
+    # ## Creating a Subnet
     #
     # To create a subnet, call {#create} on a subnet collection, passing in
     # a suitable CIDR block.
@@ -35,7 +35,7 @@ module AWS
     # You can optionally pass the availability zone you want the subnet
     # created in.
     #
-    # == Getting a Subnet
+    # ## Getting a Subnet
     #
     # If you know the subnet id, you can get a subnet using {#[]}.
     #

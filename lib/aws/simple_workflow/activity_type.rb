@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # == Registering an ActivityType
+    # ## Registering an ActivityType
     #
     # To register an activity type you should use the #activity_types method
     # on the domain:
@@ -23,7 +23,7 @@ module AWS
     #
     # See {ActivityTypeCollection#register} for a complete list of options.
     #
-    # == Deprecating an activity type
+    # ## Deprecating an activity type
     #
     # ActivityType inherits from the generic {Type} base class.  Defined in
     # {Type} are a few useful methods including:
@@ -44,7 +44,7 @@ module AWS
     #   type, or nil if was not set when it was registered.
     #
     # @attr_reader [Symbol] status The status of this workflow type.  The
-    #   status will either be +:registered+ or +:deprecated+.
+    #   status will either be `:registered` or `:deprecated`.
     #
     # @attr_reader [Integer,:none,nil] default_task_heartbeat_timeout
     #   The default maximum time specified when registering the activity
@@ -54,7 +54,7 @@ module AWS
     #   to record a heartbeat or return a result, it will be ignored.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     # @attr_reader [String,nil] default_task_list
     #   The default task list specified for this activity type at
@@ -67,7 +67,7 @@ module AWS
     #   this default when scheduling a task.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     # @attr_reader [Integer,:none,nil] default_task_schedule_to_start_timeout
     #   The optional default maximum duration specified when registering
@@ -75,13 +75,13 @@ module AWS
     #   before being assigned to a worker.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     # @attr_reader [Integer,:none,nil] default_task_start_to_close_timeout
     #   The default maximum duration for activity tasks of this type.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     class ActivityType < Type
 

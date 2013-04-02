@@ -38,10 +38,10 @@ module AWS
         #   contains information about one message that failed to delete.
         #   Hash keys include:
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code`
+        #   * `:error_message`
+        #   * `:sender_fault`
+        #   * `:receipt_handle`
         #
         attr_reader :failures
 
@@ -63,10 +63,10 @@ module AWS
         #   contains information about one message that failed to change
         #   visibility. Hash keys include:
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code`
+        #   * `:error_message`
+        #   * `:sender_fault`
+        #   * `:receipt_handle`
         #
         attr_reader :failures
 
@@ -88,10 +88,10 @@ module AWS
         #   contains information about one message that failed to change
         #   visibility. Hash keys include:
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code`
+        #   * `:error_message`
+        #   * `:sender_fault`
+        #   * `:receipt_handle`
         #
         attr_reader :failures
 

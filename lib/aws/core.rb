@@ -16,7 +16,7 @@ require 'aws/version'
 # AWS is the root module for all of the Amazon Web Services.  It is also
 # where you can configure you access to AWS.
 #
-# = Supported Services
+# # Supported Services
 #
 # The currently supported services are:
 #
@@ -45,12 +45,12 @@ require 'aws/version'
 # * {AWS::SimpleEmailService}
 # * {AWS::SimpleWorkflow}
 #
-# = AWS::Record
+# # AWS::Record
 #
 # In addition to the above services, bundled is an ORM based on AWS services
 # See {AWS::Record} for more information.
 #
-# = Configuration
+# # Configuration
 #
 # You call {AWS.config} with a hash of options to configure your
 # access to the Amazon Web Services.
@@ -62,7 +62,7 @@ require 'aws/version'
 #      :access_key_id => 'ACCESS_KEY_ID',
 #      :secret_access_key => 'SECRET_ACCESS_KEY')
 #
-# == Rails
+# ## Rails
 #
 # If you are loading AWS inside a Rails web application, it is recommended to
 # place your configuration inside:
@@ -220,9 +220,9 @@ module AWS
     # @option options [String] :cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
     #
-    # @option options [Boolean] :dynamo_db_big_decimals (true) When +true+,
+    # @option options [Boolean] :dynamo_db_big_decimals (true) When `true`,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
-    #   from strings to BigDecimal objects.  If you set this to +false+,
+    #   from strings to BigDecimal objects.  If you set this to `false`,
     #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
@@ -258,16 +258,16 @@ module AWS
     #   longer be used.
     #
     # @option options [Integer] :http_open_timeout (15) The number of seconds
-    #   before the +:http_handler+ should timeout while trying to open a new
+    #   before the `:http_handler` should timeout while trying to open a new
     #   HTTP session.
     #
     # @option options [Integer] :http_read_timeout (60) The number of seconds
-    #   before the +:http_handler+ should timeout while waiting for a HTTP
+    #   before the `:http_handler` should timeout while waiting for a HTTP
     #   response.
     #
-    # @option options [Boolean] :http_wire_trace (false) When +true+, the
-    #   http handler will log all wire traces to the +:logger+.  If a
-    #   +:logger+ is not configured, then wire traces will be sent to
+    # @option options [Boolean] :http_wire_trace (false) When `true`, the
+    #   http handler will log all wire traces to the `:logger`.  If a
+    #   `:logger` is not configured, then wire traces will be sent to
     #   standard out.
     #
     # @option options [String] :iam_endpoint ('iam.amazonaws.com') The
@@ -283,8 +283,8 @@ module AWS
     #     AWS.config(:logger => Logger.new($stdout))
     #
     # @option options [Symbol] :log_level (:info) The level log messages are
-    #   sent to the logger with (e.g. +:notice+, +:info+, +:warn+,
-    #   +:debug+, etc).
+    #   sent to the logger with (e.g. `:notice`, `:info`, `:warn`,
+    #   `:debug`, etc).
     #
     # @option options [Object] :log_formatter The log formatter is responsible
     #   for building log messages from responses. You can quickly change
@@ -294,10 +294,10 @@ module AWS
     #
     #   Here is a list of pre-configured log formatters:
     #
-    #   * +AWS::Core::LogFormatter.default+
-    #   * +AWS::Core::LogFormatter.short+
-    #   * +AWS::Core::LogFormatter.debug+
-    #   * +AWS::Core::LogFormatter.colored+
+    #   * `AWS::Core::LogFormatter.default`
+    #   * `AWS::Core::LogFormatter.short`
+    #   * `AWS::Core::LogFormatter.debug`
+    #   * `AWS::Core::LogFormatter.colored`
     #
     #   You can also create an instance of AWS::Core::LogFormatter
     #   with a custom log message pattern. See {Core::LogFormatter} for
@@ -306,7 +306,7 @@ module AWS
     #     pattern = "[AWS :operation :duration] :error_message"
     #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern))
     #
-    #   Lastly you can pass any object that responds to +#format+ accepting
+    #   Lastly you can pass any object that responds to `#format` accepting
     #   and instance of {Core::Response} and returns a string.
     #
     # @option options [Integer] :max_retries (3) The maximum number of times
@@ -336,7 +336,7 @@ module AWS
     #   service endpoint for Amazon S3.
     #
     # @option options [Boolean] :s3_force_path_style (false) When
-    #   +true+, requests will always use path style.  This can be useful
+    #   `true`, requests will always use path style.  This can be useful
     #   for testing environments.
     #
     # @option options [Integer] :s3_multipart_max_parts (10000) The maximum
@@ -344,9 +344,9 @@ module AWS
     #
     # @option options [Integer] :s3_multipart_threshold (16777216) When
     #   uploading data to S3, if the number of bytes to send exceeds
-    #   +:s3_multipart_threshold+ then a multi part session is automatically
+    #   `:s3_multipart_threshold` then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
-    #   is specified by +:s3_multipart_min_part_size+. Defaults to
+    #   is specified by `:s3_multipart_min_part_size`. Defaults to
     #   16777216 (16MB).
     #
     # @option options [Integer] :s3_multipart_min_part_size (5242880) The
@@ -355,9 +355,9 @@ module AWS
     #
     # @option options [Symbol] :s3_server_side_encryption (nil) The
     #   algorithm to use when encrypting object data on the server
-    #   side.  The only valid value is +:aes256+, which specifies that
+    #   side.  The only valid value is `:aes256`, which specifies that
     #   the object should be stored using the AES encryption algorithm
-    #   with 256 bit keys.  Defaults to +nil+, meaning server side
+    #   with 256 bit keys.  Defaults to `nil`, meaning server side
     #   encryption is not used unless specified on each individual
     #   call to upload an object.  This option controls the default
     #   behavior for the following methods:
@@ -375,7 +375,7 @@ module AWS
     #   means that client-side encryption will not be used.
     #
     # @option options [Symbol] :s3_encryption_materials_location (:metadata)
-    #   When set to +:instruction_file+, AWS::S3::S3Object will store
+    #   When set to `:instruction_file`, AWS::S3::S3Object will store
     #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
@@ -400,7 +400,7 @@ module AWS
     # @option options [String] :ssl_ca_file The path to a CA cert bundle in
     #   PEM format.
     #
-    #   If +:ssl_verify_peer+ is +true+ (the default) this bundle will be
+    #   If `:ssl_verify_peer` is `true` (the default) this bundle will be
     #   used to validate the server certificate in each HTTPS request.
     #   The AWS SDK for Ruby ships with a CA cert bundle, which is the
     #   default value for this option.
@@ -408,15 +408,15 @@ module AWS
     # @option options [String] :ssl_ca_path (nil)
     #   The path the a CA cert directory.
     #
-    # @option options [Boolean] :ssl_verify_peer (true) When +true+
+    # @option options [Boolean] :ssl_verify_peer (true) When `true`
     #   the HTTP handler validate server certificates for HTTPS requests.
     #
     #   This option should only be disabled for diagnostic purposes;
-    #   leaving this option set to +false+ exposes your application to
+    #   leaving this option set to `false` exposes your application to
     #   man-in-the-middle attacks and can pose a serious security
     #   risk.
     #
-    # @option options [Boolean] :stub_requests (false) When +true+ requests
+    # @option options [Boolean] :stub_requests (false) When `true` requests
     #   are not sent to AWS, instead empty responses are generated and
     #   returned to each service request.
     #
@@ -432,7 +432,7 @@ module AWS
     # @option options [String] :sts_endpoint ('sts.amazonaws.com') The
     #   service endpoint for AWS Security Token Service.
     #
-    # @option options [Boolean] :use_ssl (true) When +true+, all requests
+    # @option options [Boolean] :use_ssl (true) When `true`, all requests
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @option options [String] :user_agent_prefix (nil) A string prefix to
@@ -499,7 +499,7 @@ module AWS
     #
     # The above code would make N+1 requests (where N is the number of
     # instances in the account); iterating the collection of instances
-    # is one request, and +Enumerable#sort_by+ calls
+    # is one request, and `Enumerable#sort_by` calls
     # {AWS::EC2::Instance#launch_time} for each instance, causing
     # another request per instance.  We can rewrite the code as
     # follows to make only one request:

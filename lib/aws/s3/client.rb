@@ -219,10 +219,10 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @return [Core::Response]
-      #     * +:index_document+ - (Hash)
-      #       * +:suffix+ - (String)
-      #     * +:error_document+ - (Hash)
-      #       * +:key+ - (String)
+      #     * `:index_document` - (Hash)
+      #       * `:suffix` - (String)
+      #     * `:error_document` - (Hash)
+      #       * `:key` - (String)
       bucket_method(:get_bucket_website, :get, 'website', XML::GetBucketWebsite)
 
       # @overload delete_bucket_website(options = {})
@@ -290,16 +290,16 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,Array<Hash>] :rules An array of rule hashes.
-      #     * +:id+ - (String) A unique identifier for the rule. The ID
+      #     * `:id` - (String) A unique identifier for the rule. The ID
       #       value can be up to 255 characters long. The IDs help you find
       #       a rule in the configuration.
-      #     * +:allowed_methods+ - (required,Array<String>) A list of HTTP
+      #     * `:allowed_methods` - (required,Array<String>) A list of HTTP
       #       methods that you want to allow the origin to execute.
       #       Each rule must identify at least one method.
-      #     * +:allowed_origins+ - (required,Array<String>) A list of origins
+      #     * `:allowed_origins` - (required,Array<String>) A list of origins
       #       you want to allow cross-domain requests from. This can
       #       contain at most one * wild character.
-      #     * +:allowed_headers+ - (Array<String>) A list of headers allowed
+      #     * `:allowed_headers` - (Array<String>) A list of headers allowed
       #       in a pre-flight OPTIONS request via the
       #       Access-Control-Request-Headers header. Each header name
       #       specified in the Access-Control-Request-Headers header must
@@ -307,10 +307,10 @@ module AWS
       #       Amazon S3 will send only the allowed headers in a response
       #       that were requested. This can contain at most one * wild
       #       character.
-      #     * +:max_age_seconds+ - (Integer) The time in seconds that your
+      #     * `:max_age_seconds` - (Integer) The time in seconds that your
       #       browser is to cache the preflight response for the specified
       #       resource.
-      #     * +:expose_headers+ - (Array<String>) One or more headers in
+      #     * `:expose_headers` - (Array<String>) One or more headers in
       #       the response that you want customers to be able to access
       #       from their applications (for example, from a JavaScript
       #       XMLHttpRequest object).
@@ -470,7 +470,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :policy This can be a String
-      #     or any object that responds to +#to_json+.
+      #     or any object that responds to `#to_json`.
       #   @return [Core::Response]
       bucket_method(:set_bucket_policy, :put, 'policy') do
 
@@ -584,9 +584,9 @@ module AWS
       # Sets the access control list for a bucket.  You must specify an ACL
       # via one of the following methods:
       #
-      # * as a canned ACL (via +:acl+)
-      # * as a list of grants (via the +:grant_*+ options)
-      # * as an access control policy document (via +:access_control_policy+)
+      # * as a canned ACL (via `:acl`)
+      # * as a list of grants (via the `:grant_*` options)
+      # * as an access control policy document (via `:access_control_policy`)
       #
       # @example Using a canned acl
       #   s3_client.put_bucket_acl(
@@ -673,9 +673,9 @@ module AWS
       # Sets the access control list for an object.  You must specify an ACL
       # via one of the following methods:
       #
-      # * as a canned ACL (via +:acl+)
-      # * as a list of grants (via the +:grant_*+ options)
-      # * as an access control policy document (via +:access_control_policy+)
+      # * as a canned ACL (via `:acl`)
+      # * as a list of grants (via the `:grant_*` options)
+      # * as an access control policy document (via `:access_control_policy`)
       #
       # @example Using a canned acl
       #   s3_client.put_object_acl(
@@ -772,7 +772,7 @@ module AWS
       #     :data => 'This is the readme for ...',
       #   })
       #
-      # == Block Form
+      # ## Block Form
       #
       # In block form, this method yields a stream to the block that
       # accepts data chunks.  For example:
@@ -806,24 +806,24 @@ module AWS
       #   @option options [required,String,Pathname,File,IO] :data
       #     The data to upload.  This can be provided as a string,
       #     a Pathname object, or any object that responds to
-      #     +#read+ and +#eof?+ (e.g. IO, File, Tempfile, StringIO, etc).
+      #     `#read` and `#eof?` (e.g. IO, File, Tempfile, StringIO, etc).
       #   @option options [Integer] :content_length
       #     Required if you are using block form to write data or if it is
-      #     not possible to determine the size of +:data+.  A best effort
+      #     not possible to determine the size of `:data`.  A best effort
       #     is made to determine the content length of strings, files,
       #     tempfiles, io objects, and any object that responds
-      #     to +#length+ or +#size+.
+      #     to `#length` or `#size`.
       #   @option options [String] :website_redirect_location If the bucket is
       #     configured as a website, redirects requests for this object to
       #     another object in the same bucket or to an external URL.
       #   @option options [Hash] :metadata
       #     A hash of metadata to be included with the
       #     object.  These will be sent to S3 as headers prefixed with
-      #     +x-amz-meta+.
+      #     `x-amz-meta`.
       #   @option options [Symbol] :acl (:private) A canned access
       #     control policy.  Accepted values include:
-      #     * +:private+
-      #     * +:public_read+
+      #     * `:private`
+      #     * `:public_read`
       #     * ...
       #   @option options [String] :storage_class+ ('STANDARD')
       #     Controls whether Reduced Redundancy Storage is enabled for
@@ -832,7 +832,7 @@ module AWS
       #   @option options [Symbol,String] :server_side_encryption (nil) The
       #     algorithm used to encrypt the object on the server side
       #     (e.g. :aes256).
-      #   object on the server side, e.g. +:aes256+)
+      #   object on the server side, e.g. `:aes256`)
       #   @option options [String] :cache_control
       #     Can be used to specify caching behavior.
       #   @option options [String] :content_disposition
@@ -840,7 +840,7 @@ module AWS
       #   @option options [String] :content_encoding
       #     Specifies the content encoding.
       #   @option options [String] :content_md5
-      #     The base64 encoded content md5 of the +:data+.
+      #     The base64 encoded content md5 of the `:data`.
       #   @option options [String] :content_type
       #     Specifies the content type.
       #   @option options [String] :expires The date and time at which the
@@ -901,25 +901,25 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [Time] :if_modified_since If specified, the
-      #     response will contain an additional +:modified+ value that
+      #     response will contain an additional `:modified` value that
       #     returns true if the object was modified after the given
-      #     time.  If +:modified+ is false, then the response
-      #     +:data+ value will be +nil+.
+      #     time.  If `:modified` is false, then the response
+      #     `:data` value will be `nil`.
       #   @option options [Time] :if_unmodified_since If specified, the
-      #     response will contain an additional +:unmodified+ value
+      #     response will contain an additional `:unmodified` value
       #     that is true if the object was not modified after the
-      #     given time.  If +:unmodified+ returns false, the +:data+
-      #     value will be +nil+.
+      #     given time.  If `:unmodified` returns false, the `:data`
+      #     value will be `nil`.
       #   @option options [String] :if_match If specified, the response
-      #     will contain an additional +:matches+ value that is true
+      #     will contain an additional `:matches` value that is true
       #     if the object ETag matches the value for this option.  If
-      #     +:matches+ is false, the +:data+ value of the
-      #     response will be +nil+.
+      #     `:matches` is false, the `:data` value of the
+      #     response will be `nil`.
       #   @option options [String] :if_none_match If specified, the
-      #     response will contain an additional +:matches+ value that
+      #     response will contain an additional `:matches` value that
       #     is true if and only if the object ETag matches the value for
-      #     this option.  If +:matches+ is true, the +:data+ value
-      #     of the response will be +nil+.
+      #     this option.  If `:matches` is true, the `:data` value
+      #     of the response will be `nil`.
       #   @option options [Range<Integer>] :range A byte range of data to request.
       #   @return [Core::Response]
       #
@@ -1186,7 +1186,7 @@ module AWS
       #   @option options [required,String,Pathname,File,IO] :data
       #     The data to upload.  This can be provided as a string,
       #     a Pathname object, or any object that responds to
-      #     +#read+ and +#eof?+ (e.g. IO, File, Tempfile, StringIO, etc).
+      #     `#read` and `#eof?` (e.g. IO, File, Tempfile, StringIO, etc).
       #   @return [Core::Response]
       object_method(:upload_part, :put,
                     :header_options => {
@@ -1411,7 +1411,7 @@ module AWS
       end
 
       # @param [String] possible_xml
-      # @return [Boolean] Returns +true+ if the given string is a valid xml
+      # @return [Boolean] Returns `true` if the given string is a valid xml
       #   document.
       def is_xml? possible_xml
         begin
@@ -1495,7 +1495,7 @@ module AWS
           validate_bucket_name!(bucket_name) rescue false
         end
 
-        # Returns true if the given +bucket_name+ is DNS compatible.
+        # Returns true if the given `bucket_name` is DNS compatible.
         #
         # DNS compatible bucket names may be accessed like:
         #

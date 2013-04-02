@@ -22,13 +22,13 @@ module AWS
       #   Describes the redirect behavior for every request to this
       #   bucket's website endpoint. If this element is present, no
       #   other options are are allowed.
-      #   * +:host_name+ - (*required*, String)
+      #   * `:host_name` - (*required*, String)
       #     Name of the host where requests will be redirected.
-      #   * +:protocol+ - (String)
+      #   * `:protocol` - (String)
       #     Protocol to use (http, https) when redirecting requests. The
       #     default is the protocol that is used in the original request.
       # @option options [Hash] :index_document
-      #   * +:suffix+ - (*required*, String) - A suffix that is appended to
+      #   * `:suffix` - (*required*, String) - A suffix that is appended to
       #     a request that is for a directory on the website endpoint
       #     (e.g. if the suffix is index.html and you make a request to
       #     samplebucket/images/ the data that is returned will be for
@@ -36,18 +36,18 @@ module AWS
       #     The suffix must not be empty and must not include a
       #     slash character.
       # @option options [Hash] :error_document
-      #   * +:key+ - (*required*, String) - The object key name to use
+      #   * `:key` - (*required*, String) - The object key name to use
       #     when a 4XX class error occurs.
       # @option options [Array<Hash>] :routing_rules
-      #   * +:redirect+ - (*required*, Hash)
-      #     * +:host_name+ - (String)
-      #     * +:protocol+ - (String)
-      #     * +:replace_key_prefix_with+ - (String)
-      #     * +:replace_key_with+ - (String)
-      #     * +:http_redirect_code+ - (String)
-      #   * +:condition+ - (Hash)
-      #     * +:key_prefix_equals+ - (String)
-      #     * +:http_error_code_returned_equals+ - (String)
+      #   * `:redirect` - (*required*, Hash)
+      #     * `:host_name` - (String)
+      #     * `:protocol` - (String)
+      #     * `:replace_key_prefix_with` - (String)
+      #     * `:replace_key_with` - (String)
+      #     * `:http_redirect_code` - (String)
+      #   * `:condition` - (Hash)
+      #     * `:key_prefix_equals` - (String)
+      #     * `:http_error_code_returned_equals` - (String)
       def initialize options = {}
         @options = deep_copy(options)
         if @options.empty?

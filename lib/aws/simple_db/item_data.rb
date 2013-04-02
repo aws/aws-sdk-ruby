@@ -25,7 +25,7 @@ module AWS
     #    map { |data| data.item }
     #
     # The {ItemCollection#select} call yields instances of ItemData,
-    # and the +map+ call in the example above gets the list of
+    # and the `map` call in the example above gets the list of
     # corresponding {Item} instances.
     class ItemData
 

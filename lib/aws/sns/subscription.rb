@@ -42,11 +42,11 @@ module AWS
 
       # @return [String] The protocol.  Possible values:
       #
-      #  * +:http+
-      #  * +:https+
-      #  * +:email+
-      #  * +:email_json+
-      #  * +:sqs+
+      #  * `:http`
+      #  * `:https`
+      #  * `:email`
+      #  * `:email_json`
+      #  * `:sqs`
       attr_reader :protocol
 
       # @return [String] The AWS account ID of the subscription owner.

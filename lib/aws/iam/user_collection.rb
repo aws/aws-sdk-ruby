@@ -20,24 +20,24 @@ module AWS
     #   iam = AWS::IAM.new
     #   users = iam.users
     #
-    # == Creating A User
+    # ## Creating A User
     #
     # To create an IAM user you need only provide a user name.
     #
     #   user = users.create('username')
     #
-    # You can also provide an optional +:path+ that can be used to organize
+    # You can also provide an optional `:path` that can be used to organize
     # users.
     #
     #   user = users.create('johndoe', :path => '/staff/customer_support/')
     #
-    # == Getting a User by Name
+    # ## Getting a User by Name
     #
     # You can get a referene to a user by using array notation:
     #
     #   user = users['username']
     #
-    # == Enumerating Users
+    # ## Enumerating Users
     #
     # A user collection can also be used to enumerate users:
     #
@@ -45,7 +45,7 @@ module AWS
     #     puts user.name
     #   end
     #
-    # == Path Prefixes
+    # ## Path Prefixes
     #
     # You can also find/enumerate users who's path begins with a given prefix:
     #
@@ -60,7 +60,7 @@ module AWS
       # @param [String] name Name of the user to create.
       # @option options [String] :path ('/') The path for the user name.
       #   For more information about paths, see
-      #   {Identifiers for IAM Entities}[http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html]
+      #   [Identifiers for IAM Entities](http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
       # @return [User] Returns the newly created user.
       def create name, options = {}
         create_opts = {}
@@ -83,8 +83,8 @@ module AWS
 
       # Yields once for each user.
       #
-      # You can limit the number of users yielded using +:limit+ and
-      # +:path_prefix+.
+      # You can limit the number of users yielded using `:limit` and
+      # `:path_prefix`.
       #
       # @param [Hash] options
       #
@@ -104,7 +104,7 @@ module AWS
 
       # Returns an enumerable object for this collection.  This can be
       # useful if you want to call an enumerable method that does
-      # not accept options (e.g. +collect+, +first+, etc).
+      # not accept options (e.g. `collect`, `first`, etc).
       #
       #   users.enumerator(:path_prefix => '/admin').collect(&:name)
       #

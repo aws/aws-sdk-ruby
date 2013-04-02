@@ -17,7 +17,7 @@ module AWS
 
       # Represents the attachment between an internet gateway and a VPC.
       #
-      # == Creating Attachments
+      # ## Creating Attachments
       #
       # To create an attachment, just assign an internet gateway to a VPC
       # or visa versa.
@@ -28,7 +28,7 @@ module AWS
       #   # this can also be done in reverse
       #   vpc.internet_gateway = internet_gateway
       #
-      # == Enumerating Attachments
+      # ## Enumerating Attachments
       #
       # You can enumerate the attachments for an {InternetGateway} like so:
       #
@@ -36,7 +36,7 @@ module AWS
       #      puts "#{attachment.internet_gateway.id} => #{attachment.vpc.id}"
       #   end
       #
-      # == Deleting Attachments
+      # ## Deleting Attachments
       #
       # You can delete an attachment from the Attachment object:
       #

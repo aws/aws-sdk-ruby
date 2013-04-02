@@ -16,7 +16,7 @@ module AWS
 
     # Represents a DynamoDB table.
     #
-    # == Working with Tables
+    # ## Working with Tables
     #
     # Dynamo DB allows you to organize data into tables.  Tables have a
     # unique name and a key schema.  A key schema is comprised of a
@@ -27,7 +27,7 @@ module AWS
     # by the scale of a single box. You can reserve the required throughput
     # by specifying a number of reads and writes per second to support.
     #
-    # == Creating a Table
+    # ## Creating a Table
     #
     # To get started you can create a table by supplying a name
     # and the read/write capacity.  A default schema with a hash_key
@@ -43,7 +43,7 @@ module AWS
     #     :range_key => { :comment_id => :number }
     #   )
     #
-    # == Provisioning Throughput
+    # ## Provisioning Throughput
     #
     # You must specify the desired read and write capacity when
     # creating a table.  After a table is created you can see what has
@@ -59,7 +59,7 @@ module AWS
     # Please note that provisioned throughput can be decreased only once
     # within a 24 hour period.
     #
-    # == Table Status
+    # ## Table Status
     #
     # When you create or update a table the changes can take some time to
     # apply.  You can query the status of your table at any time:
@@ -156,7 +156,7 @@ module AWS
       # @option options [Integer] :write_capacity_units
       #
       # @return [Hash] Returns a hash with the current throughput
-      #   provisioning (+:read_capacity_units+ and +:write_capacity_units+).
+      #   provisioning (`:read_capacity_units` and `:write_capacity_units`).
       #
       def provision_throughput options = {}
 
@@ -247,7 +247,7 @@ module AWS
       # @param description A description of the hash key element.  If
       #   this is a hash, it may contain a single mapping; the key is
       #   the name of the hash key attribute and the value is the type
-      #   (+:string+, +:number+ or +:binary+).  If it is an array, the first
+      #   (`:string`, `:number` or `:binary`).  If it is an array, the first
       #   element is the name and the second element is the type.
       #
       def hash_key= description
@@ -269,7 +269,7 @@ module AWS
       # @param description A description of the range key element.  If
       #   this is a hash, it may contain a single mapping; the key is
       #   the name of the hash key attribute and the value is the type
-      #   (+:string+, +:number+ or +:binary+).  If it is an array, the first
+      #   (`:string`, `:number` or `:binary`).  If it is an array, the first
       #   element is the name and the second element is the type.
       #
       def range_key= description
@@ -282,7 +282,7 @@ module AWS
       end
 
       # Deletes a table and all of its items.  The table must be in an
-      # +:active+ state (see {#status}).
+      # `:active` state (see {#status}).
       #
       # @return [nil]
       #
@@ -298,7 +298,7 @@ module AWS
       end
 
       # @return [Boolean] Returns true if the table exists.  Note that a table
-      #   exists even when it is in a +:deleting+ state; this method
+      #   exists even when it is in a `:deleting` state; this method
       #   only returns false when DynamoDB no longer returns any
       #   information about the table.
       def exists?
@@ -329,11 +329,11 @@ module AWS
       #
       # @note This method does not require the table schema to be loaded.
       #
-      # == Attributes
+      # ## Attributes
       #
       # You can specify the list of attributes to request in 3 ways:
       #
-      # * The symbol +:all+ (to recieve all attributes)
+      # * The symbol `:all` (to recieve all attributes)
       # * A single attribute name (e.g. 'size')
       # * An array of attribute names (e.g. ['size', 'color'])
       #
@@ -348,10 +348,10 @@ module AWS
       #   # get 'color' and 'size' attributes
       #   table.batch_get(['color', size'], items)
       #
-      # == Items
+      # ## Items
       #
       # You must specify an array of items to fetch attributes for.
-      # The +items+ param should always be an array with:
+      # The `items` param should always be an array with:
       #
       # * String hash key values
       # * Arrays of string hash key and range key values
@@ -377,14 +377,14 @@ module AWS
       # that include a range key in the schema.
       #
       # @param [:all, String, Array<String>] attributes The list of
-      #   attributes you want to fetch for each item.  +attributes+ may be:
+      #   attributes you want to fetch for each item.  `attributes` may be:
       #
-      #   * the symbol +:all+
+      #   * the symbol `:all`
       #   * a single attribute name string
       #   * an array of attribute name strings
       #
       # @param [Mixed] items A list of 2 or more items to fetch attributes
-      #   for.  You may provide +items+ as:
+      #   for.  You may provide `items` as:
       #
       #   * an array of hash key value strings
       #   * an array of hash and range key value pairs (nested arrays)
@@ -392,8 +392,8 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [Boolean] :consistent_read (false) When +true+, items
-      #   are read from this table with consistent reads.  When +false+, reads
+      # @option options [Boolean] :consistent_read (false) When `true`, items
+      #   are read from this table with consistent reads.  When `false`, reads
       #   are eventually consistent.
       #
       # @yield [Hash] Yields a hash of attributes for each item.

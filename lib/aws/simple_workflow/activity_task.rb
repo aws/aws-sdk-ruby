@@ -68,7 +68,7 @@ module AWS
 
       # Reports to the service that the activity task is progressing.
       #
-      # You can optionally specify +:details+ that describe the progress.
+      # You can optionally specify `:details` that describe the progress.
       # This might be a percentage competition, step number, etc.
       #
       #   activity_task.record_heartbeat! :details => '.75' # 75% complete

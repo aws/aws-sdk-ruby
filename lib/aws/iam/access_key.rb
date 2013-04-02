@@ -15,14 +15,14 @@ module AWS
   class IAM
 
     # @attr_reader [Symbol] status The status of this access key.
-    #   Status may be +:active+ or +:inactive+.
+    #   Status may be `:active` or `:inactive`.
     #
     class AccessKey < Resource
 
       # @param [String] access_key_id The id of this access key.
       # @param [Hash] options
       # @option [String] :user The IAM user this access key belongs to.
-      #   If +:user+ is omitted then this access key belongs to the
+      #   If `:user` is omitted then this access key belongs to the
       #   AWS account.
       def initialize access_key_id, options = {}
         @id = access_key_id
@@ -32,7 +32,7 @@ module AWS
       end
 
       # @return [User,nil] Returns the user this access key belongs to.
-      #   Returns +nil+ if this access key belongs to the AWS account and not
+      #   Returns `nil` if this access key belongs to the AWS account and not
       #   a specific user.
       attr_reader :user
 
@@ -60,7 +60,7 @@ module AWS
       # Returns the secret access key.
       #
       # You can only access the secret for newly created access
-      # keys.  Calling +secret+ on existing access keys raises an error.
+      # keys.  Calling `secret` on existing access keys raises an error.
       #
       # @example Getting the secret from a newly created access key
       #
@@ -82,7 +82,7 @@ module AWS
       alias_method :secret_access_key, :secret
 
       # @return [String,nil] Returns the name of the user this access key
-      #   belogns to.  If the access key belongs to the account, +nil+ is
+      #   belogns to.  If the access key belongs to the account, `nil` is
       #   returned.
       def user_name
         @user ? @user.name : nil

@@ -16,12 +16,12 @@ require 'time'
 module AWS
   class Route53
 
-    # = Create new hosted zone
+    # # Create new hosted zone
     #
     #   r53 = AWS::Route53.new
     #   hosted_zone = r53.hosted_zones.create('example.com.')
     #
-    # = Find existing hosted zone
+    # # Find existing hosted zone
     #
     #   r53 = AWS::Route53.new
     #   hosted_zone = r53.hosted_zones['example.com.']

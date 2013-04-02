@@ -38,7 +38,7 @@ module AWS
       #
       # @param [Symbol, String, Array<String>] attributes The list of attributes
       #   to fetch.  If you want to load *ALL* attributes for the named items,
-      #   then pass the symbol +:all+.
+      #   then pass the symbol `:all`.
       #
       #     # get all attributes
       #     batch_get.table('mytable', :all, items)
@@ -63,8 +63,8 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [Boolean] :consistent_read (false) When +true+, items
-      #   are read from this table with consistent reads.  When +false+, reads
+      # @option options [Boolean] :consistent_read (false) When `true`, items
+      #   are read from this table with consistent reads.  When `false`, reads
       #   are eventually consistent.
       #
       # @return [nil]
@@ -88,8 +88,8 @@ module AWS
           end
         end
 
-        ## ensure we don't receive 2 different lists of attributes for
-        ## the same table
+        # ensure we don't receive 2 different lists of attributes for
+        # the same table
 
         if
           @request_items.has_key?(table) and
@@ -101,7 +101,7 @@ module AWS
           raise ArgumentError, msg
         end
 
-        ## merge attributes and items with the request items
+        # merge attributes and items with the request items
 
         @request_items[table] ||= { :keys => [] }
         @request_items[table][:attributes_to_get] = attributes if attributes
@@ -118,7 +118,7 @@ module AWS
       #
       # @param [Symbol, String, Array<String>] attributes The list of attributes
       #   to fetch.  If you want to load *ALL* attributes for the named items,
-      #   then pass the symbol +:all+.
+      #   then pass the symbol `:all`.
       #
       #     # get all attributes
       #     batch_get.table('mytable', :all, items)

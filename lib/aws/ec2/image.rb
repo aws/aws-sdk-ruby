@@ -24,24 +24,24 @@ module AWS
     # @attr_reader [String] location The location of the AMI.
     #
     # @attr_reader [Symbol] state Current state of the AMI. If the
-    #   state is +:available+, the image is successfully registered
+    #   state is `:available`, the image is successfully registered
     #   and available for launching.  Valid values:
-    #   * +:available+
-    #   * +:pending+
-    #   * +:failed+
+    #   * `:available`
+    #   * `:pending`
+    #   * `:failed`
     #
     # @attr_reader [String] owner_id The AWS account ID of the image owner.
     #
     # @attr_reader [String] owner_alias The AWS account alias (e.g.,
-    #   +"amazon"+) or AWS account ID that owns the AMI.
+    #   `"amazon"`) or AWS account ID that owns the AMI.
     #
     # @attr_reader [Symbol] architecture The architecture of the
-    #   image (e.g. +:i386+).
+    #   image (e.g. `:i386`).
     #
     # @attr_reader [Symbol] type The type of image.  Valid values are:
-    #   * +:machine+
-    #   * +:kernel+
-    #   * +:ramdisk+
+    #   * `:machine`
+    #   * `:kernel`
+    #   * `:ramdisk`
     #
     # @attr_reader [String] kernel_id The kernel ID associated with
     #   the image, if any. Only applicable for machine images.
@@ -49,7 +49,7 @@ module AWS
     # @attr_reader [String] ramdisk_id The RAM disk ID associated
     #   with the image, if any. Only applicable for machine images.
     #
-    # @attr_reader [String] platform Value is +windows+ for Windows
+    # @attr_reader [String] platform Value is `windows` for Windows
     #   AMIs; otherwise blank.
     #
     # @attr_reader [Object] state_reason The reason for the image's
@@ -62,21 +62,21 @@ module AWS
     #
     # @attr_reader [Symbol] root_device_type The root device type
     #   used by the AMI. Possible values:
-    #   * +:ebs+
-    #   * +:instance_store+
+    #   * `:ebs`
+    #   * `:instance_store`
     #
     # @attr_reader [String] root_device_name The root device name
-    #   (e.g., +"/dev/sda1"+, or +"xvda"+).
+    #   (e.g., `"/dev/sda1"`, or `"xvda"`).
     #
     # @attr_reader [Symbol] virtualization_type The type of
     #   virtualization of the AMI.  Possible values:
-    #   * +:paravirtual+
-    #   * +:hvm+
+    #   * `:paravirtual`
+    #   * `:hvm`
     #
     # @attr_reader [Symbol] hypervisor The image's hypervisor type.
     #   Possible values are:
-    #   * +:ovm+
-    #   * +:xen+
+    #   * `:ovm`
+    #   * `:xen`
     #
     # @attr_reader [Array<String>] product_codes Returns an array of
     #   product codes attached to this instance.
@@ -146,7 +146,7 @@ module AWS
       # @note This method will not return data for ephemeral volumes.
       # @return [Hash] Returns a hash of block
       #   device mappings for the image.  In each entry, the key is
-      #   the device name (e.g. +"/dev/sda1"+) and the value is an
+      #   the device name (e.g. `"/dev/sda1"`) and the value is an
       #   hash with the following keys that return information
       #   about the block device:
       #
@@ -208,7 +208,7 @@ module AWS
         run_instance(options.merge(:count => count))
       end
 
-      # @return [Boolean] Returns +true+ if the AMI exists (is returned by
+      # @return [Boolean] Returns `true` if the AMI exists (is returned by
       #   the DescribeImages action).
       def exists?
         resp = client.describe_images(:filters => [

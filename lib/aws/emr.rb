@@ -21,14 +21,14 @@ module AWS
   # MapReduce.
   #
   # To use Amazon Elastic MapReduce you must first
-  # {sign up here}[http://aws.amazon.com/elasticmapreduce/]
+  # [sign up here](http://aws.amazon.com/elasticmapreduce/)
   #
   # For more information about Amazon Elastic MapReduce, see:
   #
-  # * {Amazon Elastic MapReduce}[http://aws.amazon.com/elasticmapreduce/]
-  # * {Amazon Elastic MapReduce Documentation}[http://aws.amazon.com/documentation/elasticmapreduce/]
+  # * [Amazon Elastic MapReduce](http://aws.amazon.com/elasticmapreduce/)
+  # * [Amazon Elastic MapReduce Documentation](http://aws.amazon.com/documentation/elasticmapreduce/)
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -43,7 +43,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Job Flows
+  # # Job Flows
   #
   # The {#job_flows} method returns a collection you use to interact
   # with your job flows.

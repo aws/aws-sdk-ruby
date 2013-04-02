@@ -18,7 +18,7 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon ElastiCache.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:

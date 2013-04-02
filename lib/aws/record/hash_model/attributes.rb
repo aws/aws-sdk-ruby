@@ -27,7 +27,7 @@ module AWS
         #   recipe = Recipe.new(:name => "Buttermilk Pancakes")
         #   recipe.name #=> 'Buttermilk Pancakes'
         #
-        # @example A string attribute with +:set+ set to true
+        # @example A string attribute with `:set` set to true
         #
         #   class Recipe < AWS::Record::HashModel
         #     string_attr :tags, :set => true
@@ -117,7 +117,7 @@ module AWS
         #   recipe = Recipe.new(:invented => Time.now)
         #   recipe.invented #=> <DateTime ...>
         #
-        # If you add a datetime_attr for +:created_at+ and/or +:updated_at+ those
+        # If you add a datetime_attr for `:created_at` and/or `:updated_at` those
         # will be automanaged.
         #
         # @param [Symbol] name The name of the attribute.
@@ -170,7 +170,7 @@ module AWS
         end
 
         # A convenience method for adding the standard two datetime attributes
-        # +:created_at+ and +:updated_at+.
+        # `:created_at` and `:updated_at`.
         #
         # @example
         #

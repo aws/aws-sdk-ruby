@@ -70,17 +70,17 @@ module AWS
         true
       end
 
-      # @return The upload initiator.  This object will have +:id+
-      #   and +:display_name+ methods; if the initiator is an IAM
-      #   user, the +:id+ method will return the ARN of the user, and
+      # @return The upload initiator.  This object will have `:id`
+      #   and `:display_name` methods; if the initiator is an IAM
+      #   user, the `:id` method will return the ARN of the user, and
       #   if the initiator is an AWS account, this method will return
       #   the same data as {#owner}.
       def initiator
         client.list_parts(base_opts).initiator
       end
 
-      # @return The upload owner.  This object will have +:id+
-      #   and +:display_name+ methods.
+      # @return The upload owner.  This object will have `:id`
+      #   and `:display_name` methods.
       def owner
         client.list_parts(base_opts).owner
       end
@@ -88,8 +88,8 @@ module AWS
       # @return [Symbol] The class of storage used to store the
       #   uploaded object.  Possible values:
       #
-      #   * +:standard+
-      #   * +:reduced_redundancy?+
+      #   * `:standard`
+      #   * `:reduced_redundancy?`
       def storage_class
         client.list_parts(base_opts).storage_class.downcase.to_sym
       end
@@ -135,26 +135,26 @@ module AWS
       #
       #     * A Pathname object
       #
-      #     * Any object responding to +read+ and +eof?+; the object
+      #     * Any object responding to `read` and `eof?`; the object
       #       must support the following access methods:
       #
       #        read                     # all at once
       #        read(length) until eof?  # in chunks
       #
       #       If you specify data this way, you must also include
-      #       the +:content_length+ option.
+      #       the `:content_length` option.
       #
       #   @param [Hash] options Additional options for the upload.
       #
       #   @option options [Integer] :content_length If provided,
       #     this option must match the total number of bytes written
       #     to S3 during the operation.  This option is required if
-      #     +:data+ is an IO-like object without a +size+ method.
+      #     `:data` is an IO-like object without a `size` method.
       #
       # @overload add_part(options)
       #
       #   @param [Hash] options Options for the upload.  Either
-      #     +:data+ or +:file+ is required.
+      #     `:data` or `:file` is required.
       #
       #   @option options :data The data to upload.  Valid values
       #     include:
@@ -163,23 +163,23 @@ module AWS
       #
       #     * A Pathname object
       #
-      #     * Any object responding to +read+ and +eof?+; the object
+      #     * Any object responding to `read` and `eof?`; the object
       #       must support the following access methods:
       #
       #        read                     # all at once
       #        read(length) until eof?  # in chunks
       #
       #       If you specify data this way, you must also include
-      #       the +:content_length+ option.
+      #       the `:content_length` option.
       #
       #   @option options [String] :file Can be specified instead of
-      #     +:data+; its value specifies the path of a file to
+      #     `:data`; its value specifies the path of a file to
       #     upload.
       #
       #   @option options [Integer] :content_length If provided,
       #     this option must match the total number of bytes written
       #     to S3 during the operation.  This option is required if
-      #     +:data+ is an IO-like object without a +size+ method.
+      #     `:data` is an IO-like object without a `size` method.
       #
       #   @option options [Integer] :part_number The part number.
       def add_part(data_or_options, options = {})
@@ -257,7 +257,7 @@ module AWS
       #   enabled, returns the {ObjectVersion} representing the
       #   version that was uploaded.  If versioning is disabled,
       #   returns the object.  If no upload was attempted (e.g. if it
-      #   was aborted or if no parts were uploaded), returns +nil+.
+      #   was aborted or if no parts were uploaded), returns `nil`.
       def close
         if aborted?
           nil

@@ -68,8 +68,8 @@ module AWS
     # @attr_reader [Symbol] root_device_type The root device type
     #   used by the AMI. The AMI can use an Amazon EBS or instance
     #   store root device.  Valid values:
-    #   * +:ebs+
-    #   * +:instance_store+
+    #   * `:ebs`
+    #   * `:instance_store`
     #
     # @attr_reader [String] root_device_name The name of the root
     #   device.
@@ -91,12 +91,12 @@ module AWS
     #   instance.
     #
     # @attr_reader [Symbol] status The instance status.  Valid values are:
-    #   * +:pending+
-    #   * +:running+
-    #   * +:shutting_down+
-    #   * +:terminated+
-    #   * +:stopping+
-    #   * +:stopped+
+    #   * `:pending`
+    #   * `:running`
+    #   * `:shutting_down`
+    #   * `:terminated`
+    #   * `:stopping`
+    #   * `:stopped`
     #
     # @attr_reader [Integer] status_code The numeric instance status code.
     #
@@ -105,8 +105,8 @@ module AWS
     #
     # @attr_reader [Symbol] virtualization_type The instance's
     #   virtualization type.  Valid values:
-    #   * +:paravirtual+
-    #   * +:hvm+
+    #   * `:paravirtual`
+    #   * `:hvm`
     #
     # @attr_reader [String] reservation_id The ID of the reservation
     #   in which this instance was launched.
@@ -120,9 +120,9 @@ module AWS
     #
     # @attr_reader [Symbol] monitoring The status of CloudWatch
     #   monitoring for the instance.  Valid values:
-    #   * +:enabled+
-    #   * +:disabled+
-    #   * +:pending+
+    #   * `:enabled`
+    #   * `:disabled`
+    #   * `:pending`
     #
     # @attr_reader [String] state_transition_reason A string
     #   describing the reason for the last state transition.
@@ -135,8 +135,8 @@ module AWS
     #
     # @attr_reader [Symbol] hypervisor The instance's hypervisor
     #   type.  Valid values:
-    #   * +:ovm+
-    #   * +:xen+
+    #   * `:ovm`
+    #   * `:xen`
     #
     # @attr_reader [String] client_token Idempotency token you
     #   provided when you launched the instance.
@@ -502,7 +502,7 @@ module AWS
         state ? enable_monitoring : disable_monitoring
       end
 
-      # @return [Booelan] Returns +true+ if CloudWatch monitoring is
+      # @return [Booelan] Returns `true` if CloudWatch monitoring is
       #   enabled for this instance.
       def monitoring_enabled?
         monitoring == :enabled
@@ -557,10 +557,10 @@ module AWS
       #   new image.
       #
       # @option options [Boolean] :no_reboot By default this
-      #   option is set to +false+, which means Amazon EC2
+      #   option is set to `false`, which means Amazon EC2
       #   attempts to cleanly shut down the instance before image
       #   creation and reboots the instance afterwards. When the
-      #   option is set to +true+, Amazon EC2 does not shut down
+      #   option is set to `true`, Amazon EC2 does not shut down
       #   the instance before creating the image. When this option
       #   is used, file system integrity on the created image cannot
       #   be guaranteed.
@@ -685,7 +685,7 @@ module AWS
       # virtualization environment and then writes the image to a
       # S3 bucket.
       #
-      # == Granting EC2 write access to your bucket
+      # ## Granting EC2 write access to your bucket
       #
       # Before you can export an image to an S3 bucket, you must modify
       # the bucket ACL.  You only need to do this once per bucket.
@@ -695,14 +695,14 @@ module AWS
       #     acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
       #   end
       #
-      # == Performing the export
+      # ## Performing the export
       #
       # Simply call #export_to_s3 on your instance.   Only instances
       # derived from your own ImportInstance tasks may be exported.
       #
       #    task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
       #
-      # == Downloading the results
+      # ## Downloading the results
       #
       # Given a completed export task you can download the final image:
       #
@@ -720,13 +720,13 @@ module AWS
       #   and 'microsoft'.
       #
       # @option options [String] :disk_image_format The format for the exported
-      #    image.  Defaults to 'vmdk' if +:target_environemnt+ is 'vmware',
+      #    image.  Defaults to 'vmdk' if `:target_environemnt` is 'vmware',
       #    otherwise, 'vhd'.
       #
       # @option options [String] :container_format The container format used to
       #   combine disk images with metadata (such as OVF). If absent, only
       #   the disk image will be exported.  Defaults to 'ova' if
-      #   +:target_environment+ is 'vmware', otherwise ommited.
+      #   `:target_environment` is 'vmware', otherwise ommited.
       #
       # @option options [String] :description Description of the conversion
       #   task or the resource being exported.

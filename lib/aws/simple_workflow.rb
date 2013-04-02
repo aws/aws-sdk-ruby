@@ -18,7 +18,7 @@ module AWS
 
   # This is the starting point for working with Amazon Simple Workflow Service.
   #
-  # = Domains
+  # # Domains
   #
   # To get started, you need to first create a domain.  Domains are used to
   # organize related tasks and activities.
@@ -32,7 +32,7 @@ module AWS
   #
   #   domain = swf.domains['my-domain']
   #
-  # = Workflow and Activity Types
+  # # Workflow and Activity Types
   #
   # Once you have a domain you can create a workflow and
   # activity types.  Both types (workflow and activity) are templates that
@@ -44,7 +44,7 @@ module AWS
   # the actual values when starting a workflow execution or scheduling
   # an activity task.
   #
-  # == Sample Workflow type and activity type
+  # ## Sample Workflow type and activity type
   #
   #   # register an workflow type with the version id '1'
   #   workflow_type = domain.workflow_types.create('my-long-processes', '1',
@@ -61,7 +61,7 @@ module AWS
   #     :default_task_schedule_to_close_timeout => 3660,
   #     :default_task_start_to_close_timeout => 3600)
   #
-  # = Starting a Workflow Execution
+  # # Starting a Workflow Execution
   #
   # Once you have a domain and at least one workflow type you can
   # start a workflow execution.  You may provide a workflow id, or a
@@ -74,7 +74,7 @@ module AWS
   #   workflow_execution.workflow_id #=> "5abbdd75-70c7-4af3-a324-742cd29267c2"
   #   workflow_execution.run_id #=> "325a8c34-d133-479e-9ecf-5a61286d165f"
   #
-  # = Decision Tasks
+  # # Decision Tasks
   #
   # Once a workflow execution has been started, it will start to generate
   # decision tasks.  You poll for decision tasks from a task list.
@@ -118,11 +118,11 @@ module AWS
   #
   # When you are done calling decision methods, you need to complete the
   # decision task.  This is done by default if you pass a block to
-  # +poll+ or +poll_for_single_task+.
+  # `poll` or `poll_for_single_task`.
   #
-  # = Activity Tasks
+  # # Activity Tasks
   #
-  # The only way to spawn activity tasks is to call +schedule_activity_task+
+  # The only way to spawn activity tasks is to call `schedule_activity_task`
   # on a decision task.  Scheduled activity tasks are returned when you
   # poll for activity tasks.
   #
@@ -138,15 +138,15 @@ module AWS
   #
   #   end
   #
-  # == Activity Task Heartbeats
+  # ## Activity Task Heartbeats
   #
   # When you receive an activity task, you need to update the service
   # with status messages.  This is called recording a heartbeat.#
   # To record a heartbeat, just call {ActivityTask#record_heartbeat!}.
-  # When you call +record_heartbeat+ you should rescue
+  # When you call `record_heartbeat` you should rescue
   # {ActivityTask::CancelRequestedError}.  These are thrown when a task
   # should be canceled.  You can cleanup the task and then call
-  # +cancel!+ when you are finished.
+  # `cancel!` when you are finished.
   #
   #   # poll 'my-task-list' for activities
   #   domain.activity_tasks.poll('my-task-list') do |activity_task|
@@ -175,7 +175,7 @@ module AWS
   # Like decision tasks, activity tasks are auto-completed at the
   # end of a poll block.
   #
-  # = History Events
+  # # History Events
   #
   # You might want to view the event history for a running workflow
   # execution.  You can get a workflow execution by its workflow

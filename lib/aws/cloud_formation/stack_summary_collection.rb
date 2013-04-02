@@ -14,14 +14,14 @@
 module AWS
   class CloudFormation
 
-    # = Stack Summaries
+    # # Stack Summaries
     #
     # Stack summaries contain information about CloudFormation
     # stacks.  You can filter the stacks you want summary information
     # for by one or more statuses.  You can even get information
     # about deleted stacks for up to 90 days.
     #
-    # == Enumerating Stack Summaries
+    # ## Enumerating Stack Summaries
     #
     # You can enumerate all available summaries using enumerable
     # methods.  Yielded summaries are simple hashes.
@@ -31,7 +31,7 @@ module AWS
     #     puts summary.to_yaml
     #   end
     #
-    # == Filtering Stack Summaries
+    # ## Filtering Stack Summaries
     #
     # You can optionally provide one or more stack stasus values
     # to filter the results by.  Only stacks with the given status(es)
@@ -75,22 +75,22 @@ module AWS
       #
       # @param [Symbol,String] status_filters One or more statuses to filter
       #   stacks with. Valid values include:
-      #   * +:create_in_progress+
-      #   * +:create_failed+
-      #   * +:create_complete+
-      #   * +:rollback_in_progress+
-      #   * +:rollback_failed+
-      #   * +:rollback_complete+
-      #   * +:delete_in_progress+
-      #   * +:delete_failed+
-      #   * +:delete_complete+
-      #   * +:update_in_progress+
-      #   * +:update_complete_cleanup_in_progress+
-      #   * +:update_complete+
-      #   * +:update_rollback_in_progress+
-      #   * +:update_rollback_failed+
-      #   * +:update_rollback_complete_cleanup_in_progress+
-      #   * +:update_rollback_complete+
+      #   * `:create_in_progress`
+      #   * `:create_failed`
+      #   * `:create_complete`
+      #   * `:rollback_in_progress`
+      #   * `:rollback_failed`
+      #   * `:rollback_complete`
+      #   * `:delete_in_progress`
+      #   * `:delete_failed`
+      #   * `:delete_complete`
+      #   * `:update_in_progress`
+      #   * `:update_complete_cleanup_in_progress`
+      #   * `:update_complete`
+      #   * `:update_rollback_in_progress`
+      #   * `:update_rollback_failed`
+      #   * `:update_rollback_complete_cleanup_in_progress`
+      #   * `:update_rollback_complete`
       #
       # @return [StackSummaryCollection] Returns a new stack summary
       #   collection that restricts what stack summariess will be

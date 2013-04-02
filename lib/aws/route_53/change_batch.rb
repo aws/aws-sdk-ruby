@@ -14,7 +14,7 @@
 module AWS
   class Route53
 
-    # = Modify resource record sets with ChangeBatch
+    # # Modify resource record sets with ChangeBatch
     #
     #   batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
     #   batch << AWS::Route53::CreateRequest.new('foo.example.com.', 'A', :resource_records => [{:value => '192.168.0.1'}])

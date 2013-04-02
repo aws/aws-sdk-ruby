@@ -14,7 +14,7 @@
 module AWS
   class CloudFormation
 
-    # = Stack Resource Summaries
+    # # Stack Resource Summaries
     #
     # Stack summaries contain information about CloudFormation
     # stack resources.  You can enumerate these from a stack.
@@ -26,12 +26,12 @@ module AWS
     #
     # Each summary yielded is a hash with the following keys:
     #
-    # * +:logical_resource_id+
-    # * +:physical_resource_id+
-    # * +:resource_type+
-    # * +:resource_status+
-    # * +:resource_status_reason+
-    # * +:last_updated_timestamp+
+    # * `:logical_resource_id`
+    # * `:physical_resource_id`
+    # * `:resource_type`
+    # * `:resource_status`
+    # * `:resource_status_reason`
+    # * `:last_updated_timestamp`
     #
     class StackResourceSummaryCollection
 

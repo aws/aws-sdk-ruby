@@ -95,7 +95,7 @@ module AWS
 
       attribute :supported_products, :static => true
 
-      ## attributes from :execution_status_detail
+      # attributes from :execution_status_detail
 
       attribute :state,
         :from => [:execution_status_detail, :state]
@@ -120,7 +120,7 @@ module AWS
       attribute :last_state_change_reason,
         :from => [:execution_status_detail, :last_state_change_reason]
 
-      ## attributes from :instances
+      # attributes from :instances
 
       attribute :master_instance_type,
         :from => [:instances, :master_instance_type]
@@ -210,22 +210,22 @@ module AWS
       #
       # @param [Array<Hash>] steps A list of one or more steps to add.
       #   Each step should be a hash with the following structure:
-      #   * +:name+ - *required* - (String) The name of the job flow step.
-      #   * +:action_on_failure+ - (String) Specifies the action to take if the
+      #   * `:name` - *required* - (String) The name of the job flow step.
+      #   * `:action_on_failure` - (String) Specifies the action to take if the
       #     job flow step fails.
-      #   * +:hadoop_jar_step+ - *required* - (Hash) Specifies the JAR file
+      #   * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file
       #     used for the job flow step.
-      #     * +:properties+ - (Array<Hash>) A list of Java properties that are
+      #     * `:properties` - (Array<Hash>) A list of Java properties that are
       #       set when the step runs. You can use these properties to pass key
       #       value pairs to your main function.
-      #       * +:key+ - (String) The unique identifier of a key value pair.
-      #       * +:value+ - (String) The value part of the identified key.
-      #     * +:jar+ - *required* - (String) A path to a JAR file run during
+      #       * `:key` - (String) The unique identifier of a key value pair.
+      #       * `:value` - (String) The value part of the identified key.
+      #     * `:jar` - *required* - (String) A path to a JAR file run during
       #       the step.
-      #     * +:main_class+ - (String) The name of the main class in the
+      #     * `:main_class` - (String) The name of the main class in the
       #       specified Java file. If not specified, the JAR file should
       #       specify a Main-Class in its manifest file.
-      #     * +:args+ - (Array<String>) A list of command line arguments passed
+      #     * `:args` - (Array<String>) A list of command line arguments passed
       #       to the JAR file's main function when executed.
       #
       # @return [nil]
@@ -286,7 +286,7 @@ module AWS
       end
       alias_method :delete, :terminate
 
-      # @return [Boolean] Returns +true+ if the job flow exists.
+      # @return [Boolean] Returns `true` if the job flow exists.
       def exists?
         !get_resource.data[:job_flows].empty?
       end

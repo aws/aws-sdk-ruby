@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon Glacier.
   #
   # To use Amazon Glacier you must first
-  # {sign up here}[http://aws.amazon.com/glacier/].
+  # [sign up here](http://aws.amazon.com/glacier/).
   #
   # For more information about AWS Data Pipeline:
   #
-  # * {AWS Data Pipeline}[http://aws.amazon.com/glacier/]
-  # * {AWS Data Pipeline Documentation}[http://aws.amazon.com/documentation/glacier/]
+  # * [AWS Data Pipeline](http://aws.amazon.com/glacier/)
+  # * [AWS Data Pipeline Documentation](http://aws.amazon.com/documentation/glacier/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:

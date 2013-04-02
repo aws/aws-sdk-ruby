@@ -30,7 +30,7 @@ module AWS
       # @return [Domain]
       attr_reader :domain
 
-      # Returns the number of tasks in the specified +task_list+.
+      # Returns the number of tasks in the specified `task_list`.
       #
       #   count = activity_tasks.count('task-list-name')
       #   count.truncated? #=> false
@@ -42,7 +42,7 @@ module AWS
       # @param [String] task_list The name of the task list.
       #
       # @return [Count] Returns a possibly truncated count of
-      #   pending activity tasks for the given +task_list+.
+      #   pending activity tasks for the given `task_list`.
       #
       def count task_list
         options = {}
@@ -67,8 +67,8 @@ module AWS
       #   available within 60 seconds.
       #
       # @return [ActivityTask,nil] Returns an activity task when one is
-      #    available, +nil+ otherwise.  If you call this function with
-      #    a block, +nil+ is always returned.
+      #    available, `nil` otherwise.  If you call this function with
+      #    a block, `nil` is always returned.
       #
       def poll_for_single_task task_list, options = {}, &block
 

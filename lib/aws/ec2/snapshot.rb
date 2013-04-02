@@ -31,9 +31,9 @@ module AWS
     # @attr_reader [Symbol] status The status of the snapshot.
     #   Possible values:
     #
-    #   * +:pending+
-    #   * +:completed+
-    #   * +:error+
+    #   * `:pending`
+    #   * `:completed`
+    #   * `:error`
     #
     # @attr_reader [Time] start_time The time at which the snapshot
     #   was initiated.

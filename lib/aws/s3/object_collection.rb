@@ -16,7 +16,7 @@ module AWS
 
     # Represents a collection of S3 objects.
     #
-    # == Getting an S3Object by Key
+    # ## Getting an S3Object by Key
     #
     # If you know the key of the object you want, you can reference it this way:
     #
@@ -24,7 +24,7 @@ module AWS
     #   object = bucket.objects['foo.jpg']
     #   object.key #=> 'foo.jpg'
     #
-    # == Finding objects with a Prefix
+    # ## Finding objects with a Prefix
     #
     # Given a bucket with the following keys:
     #
@@ -39,7 +39,7 @@ module AWS
     #   bucket.objects.with_prefix('videos').collect(&:key)
     #   #=> ['videos/comedy.mpg', 'videos/dancing.mpg']
     #
-    # == Exploring Objects with a Tree Interface
+    # ## Exploring Objects with a Tree Interface
     #
     # Given a bucket with the following keys:
     #

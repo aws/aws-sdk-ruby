@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon Simple
   # Notification Service (SNS).
   #
-  # To use Amazon SNS you must first {sign up here}[http://aws.amazon.com/sns/].
+  # To use Amazon SNS you must first [sign up here](http://aws.amazon.com/sns/).
   #
   # For more information about Amazon SNS:
   #
-  # * {Amazon SNS}[http://aws.amazon.com/sns/]
-  # * {Amazon SNS Documentation}[http://aws.amazon.com/documentation/sns/]
+  # * [Amazon SNS](http://aws.amazon.com/sns/)
+  # * [Amazon SNS Documentation](http://aws.amazon.com/documentation/sns/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:

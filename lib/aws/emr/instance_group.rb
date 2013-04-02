@@ -104,7 +104,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if the instance group exists.
+      # @return [Boolean] Returns `true` if the instance group exists.
       def exists?
         !!find_in_response(get_resource)
       end

@@ -35,7 +35,7 @@ module AWS
       #   scheduling an activity task.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :default_task_list (nil) The default task
       #   list to use for scheduling tasks of this activity type.
@@ -44,7 +44,7 @@ module AWS
       #
       # @option options [Integer,:none] :default_task_schedule_to_close_timeout (nil)
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [Integer,:none] :default_task_schedule_to_start_timeout (nil)
       #   The default maximum duration that a task of this activity type
@@ -52,7 +52,7 @@ module AWS
       #   overridden when scheduling an activity task.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [Integer,:none] :default_task_start_to_close_timeout (nil)
       #   The default maximum duration that a worker can take to process
@@ -60,7 +60,7 @@ module AWS
       #   can be overridden when scheduling an activity task.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :description (nil) A textual description
       #   of the activity type.

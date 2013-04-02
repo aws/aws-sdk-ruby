@@ -16,7 +16,7 @@ module AWS
 
     # Helps manage policies assigned to backend server instnace ports.
     #
-    # == Creating a Backend Server Policy
+    # ## Creating a Backend Server Policy
     #
     # Creating a backend server policy can be a bit tricky.  A
     # BackendServerAuthenticationPolicyType policy only has one

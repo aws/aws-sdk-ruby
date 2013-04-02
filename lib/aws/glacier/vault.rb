@@ -59,7 +59,7 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns +true+ if the vault exists.
+      # @return [Boolean] Returns `true` if the vault exists.
       def exists?
         client.describe_vault(:vault_name => name, :account_id => account_id)
         true
@@ -105,7 +105,7 @@ module AWS
       end
 
       # Sets the notification configuration for this vault.  If you pass
-      # a +nil+ value, the notification configuration will be deleted
+      # a `nil` value, the notification configuration will be deleted
       # @param [VaultNotificationConfiguration] cfg
       def notification_configuration= cfg
         if cfg

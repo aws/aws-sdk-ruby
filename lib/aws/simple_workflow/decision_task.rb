@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # == Getting Decision Tasks
+    # ## Getting Decision Tasks
     #
     # You can use #poll or #poll_for_single_task on {DecisionTaskCollection}
     # to grab a decision task:
@@ -28,7 +28,7 @@ module AWS
     # See {DecisionTaskCollection} for more information on getting and
     # counting decision tasks.
     #
-    # == Exploring Event History
+    # ## Exploring Event History
     #
     # Once you have a decision task you can examine the event history.
     # This can give you the information you need to make decisions.
@@ -42,7 +42,7 @@ module AWS
     # Check out {HistoryEvent} for more information on working with
     # events.
     #
-    # == Making Decisions
+    # ## Making Decisions
     #
     # Based on the history of events, you should make decisions by calling
     # methods listed below.  You can call each method as many times as
@@ -66,7 +66,7 @@ module AWS
     #
     # The decision methods are grouped above by concern.
     #
-    # == Completing the Decision Task
+    # ## Completing the Decision Task
     #
     # Once you have finished adding decisions to the task, you need to
     # complete it.  If you called {DecisionTaskCollection#poll} or
@@ -195,8 +195,8 @@ module AWS
       #   call {#complete!}.
       #
       # @param [ActivityType,Hash] activity_type The type of activity
-      #   to schedule.  +activity_type+ must be an {ActivityType} object
-      #   or a hash with +:name+ and +:version+.
+      #   to schedule.  `activity_type` must be an {ActivityType} object
+      #   or a hash with `:name` and `:version`.
       #
       # @param [Hash] options
       #
@@ -213,7 +213,7 @@ module AWS
       #   scheduling an activity task.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :input (nil) Input provided to the
       #   activity task.
@@ -228,7 +228,7 @@ module AWS
       #   specified at registration time then a fault will be returned.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [Integer,:none] :schedule_to_start_timeout (nil)
       #   The maximum duration that a task of this activity type
@@ -236,7 +236,7 @@ module AWS
       #   default timeout specified when registering the activity type.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [Integer,:none] :start_to_close_timeout (nil)
       #   The maximum duration that a worker can take to process
@@ -244,7 +244,7 @@ module AWS
       #   timeout specified when registering the activity type.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :task_list (nil)
       #   If set, specifies the name of the task list in which to schedule
@@ -375,14 +375,14 @@ module AWS
       #   specified when registering the workflow type.  The supported child
       #   policies are:
       #
-      #   * +:terminate+ - the child executions will be terminated.
+      #   * `:terminate` - the child executions will be terminated.
       #
-      #   * +:request_cancel+ - a request to cancel will be attempted for each
+      #   * `:request_cancel` - a request to cancel will be attempted for each
       #     child execution by recording a WorkflowExecutionCancelRequested
       #     event in its history. It is up to the decider to take appropriate
       #     actions when it receives an execution history with this event.
       #
-      #   * +:abandon+ - no action will be taken. The child executions will
+      #   * `:abandon` - no action will be taken. The child executions will
       #     continue to run.
       #
       # @option options [Integer,:none] :execution_start_to_close_timeout (nil)
@@ -390,7 +390,7 @@ module AWS
       #   the default specified when registering the workflow type.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :task_list (nil)
       #   The task list to use for the decision tasks generated for this
@@ -403,7 +403,7 @@ module AWS
       #   specified when the workflow type was registered.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @return [nil]
       #
@@ -511,7 +511,7 @@ module AWS
       #
       # @param [WorkflowType,Hash] workflow_type (nil) The type of
       #   workflow execution to start.  This should be a {WorkflowType} object
-      #   or a hash with the keys +:name+ and +:version+.
+      #   or a hash with the keys `:name` and `:version`.
       #
       # @param [Hash] options
       #

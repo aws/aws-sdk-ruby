@@ -21,10 +21,10 @@ module AWS
   #
   # For more information about IAM:
   #
-  # * {AWS Identity and Access Management}[http://aws.amazon.com/iam/]
-  # * {AWS Identity and Access Management Documentation}[http://aws.amazon.com/documentation/iam/]
+  # * [AWS Identity and Access Management](http://aws.amazon.com/iam/)
+  # * [AWS Identity and Access Management Documentation](http://aws.amazon.com/documentation/iam/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -39,7 +39,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Account Summary
+  # # Account Summary
   #
   # You can get account level information about entity usage and IAM quotas
   # directly from an IAM interface object.
@@ -51,7 +51,7 @@ module AWS
   #
   # For a complete list of summary attributes see the {#account_summary} method.
   #
-  # = Account Aliases
+  # # Account Aliases
   #
   # Currently IAM only supports a single account alias for each AWS account.
   # You can set the account alias on the IAM interface.
@@ -66,7 +66,7 @@ module AWS
   #   iam.account_alias
   #   #=> nil
   #
-  # = Access Keys
+  # # Access Keys
   #
   # You can create up to 2 access for your account and 2 for each user.
   # This makes it easy to rotate keys if you need to.  You can also
@@ -100,7 +100,7 @@ module AWS
   # See {AccessKeyCollection} and {AccessKey} for more information about
   # working with access keys.
   #
-  # = Users & Groups
+  # # Users & Groups
   #
   # Each AWS account can have multiple users.  Users can be used to easily
   # manage permissions.  Users can also be organized into groups.
@@ -123,7 +123,7 @@ module AWS
   # See {User}, {UserCollection}, {Group} and {GroupCollection} for more
   # information on how to work with users and groups.
   #
-  # = Other Interfaces
+  # # Other Interfaces
   #
   # Other useful IAM interfaces:
   # * User Login Profiles ({LoginProfile})
@@ -280,7 +280,7 @@ module AWS
     end
 
     # @return [String,nil] Returns the account alias.  If this account has
-    #   no alias, then +nil+ is returned.
+    #   no alias, then `nil` is returned.
     def account_alias
       account_aliases.first
     end
@@ -302,34 +302,34 @@ module AWS
     # Retrieves account level information about account entity usage
     # and IAM quotas.  The returned hash contains the following keys:
     #
-    # [+:users+] Number of users for the AWS account
+    # [`:users`] Number of users for the AWS account
     #
-    # [+:users_quota+] Maximum users allowed for the AWS account
+    # [`:users_quota`] Maximum users allowed for the AWS account
     #
-    # [+:groups+] Number of Groups for the AWS account
+    # [`:groups`] Number of Groups for the AWS account
     #
-    # [+:groups_quota+] Maximum Groups allowed for the AWS account
+    # [`:groups_quota`] Maximum Groups allowed for the AWS account
     #
-    # [+:server_certificates+] Number of Server Certificates for the
+    # [`:server_certificates`] Number of Server Certificates for the
     #                          AWS account
     #
-    # [+:server_certificates_quota+] Maximum Server Certificates
+    # [`:server_certificates_quota`] Maximum Server Certificates
     #                                allowed for the AWS account
     #
-    # [+:user_policy_size_quota+] Maximum allowed size for user policy
+    # [`:user_policy_size_quota`] Maximum allowed size for user policy
     #                             documents (in kilobytes)
     #
-    # [+:group_policy_size_quota+] Maximum allowed size for Group
+    # [`:group_policy_size_quota`] Maximum allowed size for Group
     #                              policy documents (in kilobyes)
     #
-    # [+:groups_per_user_quota+] Maximum number of groups a user can
+    # [`:groups_per_user_quota`] Maximum number of groups a user can
     #                            belong to
     #
-    # [+:signing_certificates_per_user_quota+] Maximum number of X509
+    # [`:signing_certificates_per_user_quota`] Maximum number of X509
     #                                          certificates allowed
     #                                          for a user
     #
-    # [+:access_keys_per_user_quota+] Maximum number of access keys
+    # [`:access_keys_per_user_quota`] Maximum number of access keys
     #                                 that can be created per user
     #
     # @return [Hash]

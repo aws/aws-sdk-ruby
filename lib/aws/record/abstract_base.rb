@@ -38,7 +38,7 @@ module AWS
         #
         # @param [Hash] attributes Attributes that should be bulk assigned
         #   to this record.  You can also specify the shard (i.e. domain
-        #   or table) this record should persist to via +:shard+).
+        #   or table) this record should persist to via `:shard`).
         #
         # @option attributes [String] :shard The domain/table this record
         #   should persist to.  If this is omitted, it will persist to the
@@ -243,7 +243,7 @@ module AWS
         #   book['title'] #=> 'My Book'
         #   book.title    #=> 'My Book'
         #
-        # === Intended Use
+        # ### Intended Use
         #
         # This method's primary use is for getting/setting the value for
         # an attribute inside a custom method:
@@ -649,7 +649,7 @@ module AWS
             @_data[attr_name]
           end
 
-          ## dirty tracking methods
+          # dirty tracking methods
 
           define_method("#{attr_name}_changed?") do
             attribute_changed?(attr_name)

@@ -19,7 +19,7 @@ module AWS
 
     # A configuration object for AWS interfaces and clients.
     #
-    # == Configuring Credentials
+    # ## Configuring Credentials
     #
     # In order to do anything with AWS you will need to assign credentials.
     # The simplest method is to assign your credentials into the default
@@ -39,7 +39,7 @@ module AWS
     #   export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
     #   export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
-    # == Modifying a Configuration
+    # ## Modifying a Configuration
     #
     # Configuration objects are read-only.  If you need a different set of
     # configuration values, call {#with}, passing in the updates
@@ -51,7 +51,7 @@ module AWS
     #   config.max_retries #=> 3
     #   new_config.max_retries #=> 2
     #
-    # == Global Configuration
+    # ## Global Configuration
     #
     # The global default configuration can be found at {AWS.config}
     #
@@ -78,9 +78,9 @@ module AWS
     # @attr_reader [String] cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
     #   The service endpoint for Amazon CloudWatch.
     #
-    # @attr_reader [Boolean] dynamo_db_big_decimals (true) When +true+,
+    # @attr_reader [Boolean] dynamo_db_big_decimals (true) When `true`,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
-    #   from strings to BigDecimal objects.  If you set this to +false+,
+    #   from strings to BigDecimal objects.  If you set this to `false`,
     #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
@@ -116,15 +116,15 @@ module AWS
     #   longer be used.
     #
     # @attr_reader [Integer] http_open_timeout The number of seconds before
-    #   the +http_handler+ should timeout while trying to open a new HTTP
+    #   the `http_handler` should timeout while trying to open a new HTTP
     #   session.
     #
     # @attr_reader [Integer] http_read_timeout The number of seconds before
-    #   the +http_handler+ should timeout while waiting for a HTTP
+    #   the `http_handler` should timeout while waiting for a HTTP
     #   response.
     #
-    # @attr_reader [Boolean] http_wire_trace When +true+, the http handler
-    #   will log all wire traces to the +:logger+.  If a +:logger+ is not
+    # @attr_reader [Boolean] http_wire_trace When `true`, the http handler
+    #   will log all wire traces to the `:logger`.  If a `:logger` is not
     #   configured, then wire traces will be sent to standard out.
     #
     # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
@@ -163,7 +163,7 @@ module AWS
     #   The service endpoint for Amazon S3.
     #
     # @attr_reader [Boolean] s3_force_path_style (false) When
-    #   +true+, requests will always use path style.  This can be useful
+    #   `true`, requests will always use path style.  This can be useful
     #   for testing environments.
     #
     # @attr_reader [Integer] s3_multipart_max_parts (10000)
@@ -172,9 +172,9 @@ module AWS
     #
     # @attr_reader [Integer] s3_multipart_threshold (16777216) When uploading
     #   data to S3, if the number of bytes to send exceeds
-    #   +:s3_multipart_threshold+ then a multi part session is automatically
+    #   `:s3_multipart_threshold` then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
-    #   is specified by +:s3_multipart_min_part_size+. Defaults to
+    #   is specified by `:s3_multipart_min_part_size`. Defaults to
     #   16777216 (16MB).
     #
     # @attr_reader [Integer] s3_multipart_min_part_size (5242880)
@@ -183,9 +183,9 @@ module AWS
     #
     # @attr_reader [Symbol] s3_server_side_encryption The algorithm to
     #   use when encrypting object data on the server side.  The only
-    #   valid value is +:aes256+, which specifies that the object
+    #   valid value is `:aes256`, which specifies that the object
     #   should be stored using the AES encryption algorithm with 256
-    #   bit keys.  Defaults to +nil+, meaning server side encryption
+    #   bit keys.  Defaults to `nil`, meaning server side encryption
     #   is not used unless specified on each individual call to upload
     #   an object.  This option controls the default behavior for the
     #   following method:
@@ -208,7 +208,7 @@ module AWS
     #   means that client-side encryption will not be used.
     #
     # @attr_reader [Symbol] s3_encryption_materials_location
-    #   When set to +:instruction_file+, AWS::S3::S3Object will store
+    #   When set to `:instruction_file`, AWS::S3::S3Object will store
     #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
@@ -231,7 +231,7 @@ module AWS
     # @attr_reader [String] ssl_ca_file The path to a CA cert bundle in
     #   PEM format.
     #
-    #   If +ssl_verify_peer+ is true (the default) this bundle will be
+    #   If `ssl_verify_peer` is true (the default) this bundle will be
     #   used to validate the server certificate in each HTTPS request.
     #   The AWS SDK for Ruby ships with a CA cert bundle, which is the
     #   default value for this option.
@@ -239,15 +239,15 @@ module AWS
     # @attr_reader [String] ssl_ca_path (nil)
     #   The path the a CA cert directory.
     #
-    # @attr_reader [Boolean] ssl_verify_peer (true) When +true+
+    # @attr_reader [Boolean] ssl_verify_peer (true) When `true`
     #   the HTTP handler validate server certificates for HTTPS requests.
     #
     #   This option should only be disabled for diagnostic purposes;
-    #   leaving this option set to +false+ exposes your application to
+    #   leaving this option set to `false` exposes your application to
     #   man-in-the-middle attacks and can pose a serious security
     #   risk.
     #
-    # @attr_reader [Boolean] stub_requests (false) When +true+ requests are not
+    # @attr_reader [Boolean] stub_requests (false) When `true` requests are not
     #   sent to AWS, instead empty responses are generated and returned to
     #   each service request.
     #
@@ -263,7 +263,7 @@ module AWS
     # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
     #   The service endpoint for AWS Security Token Service.
     #
-    # @attr_reader [Boolean] use_ssl (true) When +true+, all requests
+    # @attr_reader [Boolean] use_ssl (true) When `true`, all requests
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @attr_reader [String] user_agent_prefix (nil) A string prefix to
@@ -325,7 +325,7 @@ module AWS
       # @param options (see AWS.config)
       # @option options (see AWS.config)
       # @return [Configuration] Copies the current configuration and returns
-      #   a new one with modifications as provided in +:options+.
+      #   a new one with modifications as provided in `:options`.
       def with options = {}
 
         # symbolize option keys

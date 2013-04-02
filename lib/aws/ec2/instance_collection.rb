@@ -17,7 +17,6 @@ require 'uuidtools'
 module AWS
   class EC2
 
-    ##
     # Represents a collection of EC2 instances.  Typically you
     # should get an instance of this class by calling
     # {EC2#instances}.
@@ -73,7 +72,7 @@ module AWS
       #     :image_id => "ami-8c1fece5",
       #     :subnet => "subnet-abc123ef")
       #
-      # @param [Hash] options Options for new instance.  +:image_id+ is
+      # @param [Hash] options Options for new instance.  `:image_id` is
       #   the only required option.
       #
       # @option options [Integer] :count How many instances to request.  By
@@ -98,7 +97,7 @@ module AWS
       #     mapping for a device so that it is not mapped to anything.
       #
       #   * A hash with any of the following options.  One of
-      #     +:snapshot+, +:snapshot_id+ or +:volume_size+ is
+      #     `:snapshot`, `:snapshot_id` or `:volume_size` is
       #     required.
       #
       #     [:snapshot] A snapshot to use when creating the block
@@ -114,7 +113,7 @@ module AWS
       #                              instance is terminated.
       #
       # @option options [Boolean] :monitoring_enabled Setting this to
-      #   +true+ enables CloudWatch monitoring on the instances once they
+      #   `true` enables CloudWatch monitoring on the instances once they
       #   are started.
       #
       # @option options [String] :availability_zone Specifies the
@@ -133,12 +132,12 @@ module AWS
       #
       # @option options [Array] :security_groups Security groups are used
       #   to determine network access rules for the instances.
-      #   +:security_groups+ can be a single value or an array of values.
+      #   `:security_groups` can be a single value or an array of values.
       #   Values should be group name strings or {SecurityGroup} objects.
       #
       # @option options [Array<String>] :security_group_ids Security groups
       #   are used to determine network access rules for the instances.
-      #   +:security_group_ids+ accepts a single ID or an array of security
+      #   `:security_group_ids` accepts a single ID or an array of security
       #   group IDs.
       #
       # @option options [String] :user_data Arbitrary user data.  You

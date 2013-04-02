@@ -20,7 +20,7 @@ module AWS
     # Represents an object in S3.  Objects live in a bucket and have
     # unique keys.
     #
-    # = Getting Objects
+    # # Getting Objects
     #
     # You can get an object by its key.
     #
@@ -35,7 +35,7 @@ module AWS
     #
     # See {ObjectCollection} for more information on finding objects.
     #
-    # = Creating Objects
+    # # Creating Objects
     #
     # You create an object by writing to it.  The following two
     # expressions are equivalent.
@@ -43,7 +43,7 @@ module AWS
     #   obj = bucket.objects.create('key', 'data')
     #   obj = bucket.objects['key'].write('data')
     #
-    # = Writing Objects
+    # # Writing Objects
     #
     # To upload data to S3, you simply need to call {#write} on an object.
     #
@@ -51,7 +51,7 @@ module AWS
     #    obj.read
     #    #=> 'Hello World!'
     #
-    # == Uploading Files
+    # ## Uploading Files
     #
     # You can upload a file to S3 in a variety of ways.  Given a path
     # to a file (as a string) you can do any of the following:
@@ -70,7 +70,7 @@ module AWS
     # will be streamed to S3 in chunks.  It will not be loaded
     # entirely into memory.
     #
-    # == Streaming Uploads
+    # ## Streaming Uploads
     #
     # When you call {#write} with any IO-like object (must respond to
     # #read and #eof?), it will be streamed to S3 in chunks.
@@ -78,7 +78,7 @@ module AWS
     # While it is possible to determine the size of many IO objects, you may
     # have to specify the :content_length of your IO object.
     # If the exact size can not be known, you may provide an
-    # +:estimated_content_length+.  Depending on the size (actual or
+    # `:estimated_content_length`.  Depending on the size (actual or
     # estimated) of your data, it will be uploaded in a single request or
     # in multiple requests via {#multipart_upload}.
     #
@@ -89,7 +89,7 @@ module AWS
     #     # will cause write to stop yielding to the block
     #   end
     #
-    # = Reading Objects
+    # # Reading Objects
     #
     # You can read an object directly using {#read}.  Be warned, this will
     # load the entire object into memory and is not recommended for large
@@ -99,7 +99,7 @@ module AWS
     #   puts obj.read
     #   #=> abc
     #
-    # == Streaming Downloads
+    # ## Streaming Downloads
     #
     # If you want to stream an object from S3, you can pass a block
     # to {#read}.
@@ -110,12 +110,12 @@ module AWS
     #     end
     #   end
     #
-    # = Encryption
+    # # Encryption
     #
     # Amazon S3 can encrypt objects for you service-side.  You can also
     # use client-side encryption.
     #
-    # == Server Side Encryption
+    # ## Server Side Encryption
     #
     # Amazon S3 provides server side encryption for an additional cost.
     # You can specify to use server side encryption when writing an object.
@@ -129,13 +129,13 @@ module AWS
     #   s3 = AWS::S3.new
     #   s3.buckets['name'].objects['key'].write('abc') # will be encrypted
     #
-    # == Client Side Encryption
+    # ## Client Side Encryption
     #
     # Client side encryption utilizes envelope encryption, so that your keys are
     # never sent to S3.  You can use a symetric key or an asymmetric
     # key pair.
     #
-    # === Symmetric Key Encryption
+    # ### Symmetric Key Encryption
     #
     # An AES key is used for symmetric encryption.  The key can be 128, 192,
     # and 256 bit sizes. Start by generating key or read a previously
@@ -164,7 +164,7 @@ module AWS
     #   obj.read(:encryption_key => my_key)
     #   #=> "MY TEXT"
     #
-    # === Asymmetric Key Pair
+    # ### Asymmetric Key Pair
     #
     # A RSA key pair is used for asymmetric encryption.  The public key is used
     # for encryption and the private key is used for decryption.  Start
@@ -185,7 +185,7 @@ module AWS
     #   obj.read(:encryption_key => my_key)
     #   #=> "MY TEXT"
     #
-    # === Configuring storage locations
+    # ### Configuring storage locations
     #
     # By default, encryption materials are stored in the object metadata.
     # If you prefer, you can store the encryption materials in a separate
@@ -215,7 +215,7 @@ module AWS
     #   obj.read(:encryption_key => MY_KEY,
     #     :encryption_materials_location => :instruction_file)
     #
-    # === Configuring default behaviors
+    # ### Configuring default behaviors
     #
     # You can configure the default key such that it will automatically
     # encrypt and decrypt for you.  You can do this globally or for a
@@ -266,7 +266,7 @@ module AWS
       end
       alias_method :eql?, :==
 
-      # @return [Boolean] Returns +true+ if the object exists in S3.
+      # @return [Boolean] Returns `true` if the object exists in S3.
       def exists?
         head
       rescue Errors::NoSuchKey => e
@@ -283,7 +283,7 @@ module AWS
       # * content_type (as sent to S3 when uploading the object)
       # * etag (typically the object's MD5)
       # * server_side_encryption (the algorithm used to encrypt the
-      #   object on the server side, e.g. +:aes256+)
+      #   object on the server side, e.g. `:aes256`)
       #
       # @param [Hash] options
       # @option options [String] :version_id Which version of this object
@@ -337,7 +337,7 @@ module AWS
       end
 
       # @return [Symbol, nil] Returns the algorithm used to encrypt
-      #   the object on the server side, or +nil+ if SSE was not used
+      #   the object on the server side, or `nil` if SSE was not used
       #   when storing the object.
       def server_side_encryption
         head[:server_side_encryption]
@@ -382,7 +382,7 @@ module AWS
       #   of this object will be deleted.  Only works for buckets that have
       #   had versioning enabled.
       #
-      # @option [Boolean] :delete_instruction_file (false) Set this to +true+
+      # @option [Boolean] :delete_instruction_file (false) Set this to `true`
       #   if you use client-side encryption and the encryption materials
       #   were stored in a separate object in S3 (key.instruction).
       #
@@ -407,7 +407,7 @@ module AWS
       end
 
       # Restores a temporary copy of an archived object from the
-      # Glacier storage tier. After the specified +days+, Amazon
+      # Glacier storage tier. After the specified `days`, Amazon
       # S3 deletes the temporary copy. Note that the object
       # remains archived; Amazon S3 deletes only the restored copy.
       #
@@ -415,7 +415,7 @@ module AWS
       # {#restore_in_progress?} to check the status of the operation.
       #
       # @option [Integer] :days (1) the number of days to keep the object
-      # @return [Boolean] +true+ if a restore can be initiated.
+      # @return [Boolean] `true` if a restore can be initiated.
       # @since 1.7.2
       def restore options = {}
         options[:days] ||= 1
@@ -463,7 +463,7 @@ module AWS
       #   # IO objects (must respond to #read and #eof?)
       #   obj.write(io)
       #
-      # === Multipart Uploads vs Single Uploads
+      # ### Multipart Uploads vs Single Uploads
       #
       # This method will intelligently choose between uploading the
       # file in a signal request and using {#multipart_upload}.
@@ -484,25 +484,25 @@ module AWS
       #     * Pathname
       #     * File
       #     * IO
-      #     * Any object that responds to +#read+ and +#eof?+.
+      #     * Any object that responds to `#read` and `#eof?`.
       #
       #   @param options [Hash] Additional upload options.
       #
       #   @option options [Integer] :content_length If provided, this
       #     option must match the total number of bytes written to S3.
       #     This options is *required* when it is not possible to
-      #     automatically determine the size of +data+.
+      #     automatically determine the size of `data`.
       #
       #   @option options [Integer] :estimated_content_length When uploading
       #     data of unknown content length, you may specify this option to
       #     hint what mode of upload should take place.  When
-      #     +:estimated_content_length+ exceeds the +:multipart_threshold+,
+      #     `:estimated_content_length` exceeds the `:multipart_threshold`,
       #     then the data will be uploaded in parts, otherwise it will
       #     be read into memory and uploaded via {Client#put_object}.
       #
-      #   @option options [Boolean] :single_request (false) When +true+,
+      #   @option options [Boolean] :single_request (false) When `true`,
       #     this method will always upload the data in a single request
-      #     (via {Client#put_object}).  When +false+, this method will
+      #     (via {Client#put_object}).  When `false`, this method will
       #     choose between {Client#put_object} and {#multipart_upload}.
       #
       #   @option options [Integer] :multipart_threshold (16777216) Specifies
@@ -519,18 +519,18 @@ module AWS
       #
       #   @option options [Hash] :metadata A hash of metadata to be
       #     included with the object.  These will be sent to S3 as
-      #     headers prefixed with +x-amz-meta+.  Each name, value pair
+      #     headers prefixed with `x-amz-meta`.  Each name, value pair
       #     must conform to US-ASCII.
       #
       #   @option options [Symbol,String] :acl (:private) A canned access
       #     control policy.  Valid values are:
       #
-      #     * +:private+
-      #     * +:public_read+
-      #     * +:public_read_write+
-      #     * +:authenticated_read+
-      #     * +:bucket_owner_read+
-      #     * +:bucket_owner_full_control+
+      #     * `:private`
+      #     * `:public_read`
+      #     * `:public_read_write`
+      #     * `:authenticated_read`
+      #     * `:bucket_owner_read`
+      #     * `:bucket_owner_full_control`
       #
       #   @option options [String] :grant_read
       #
@@ -542,7 +542,7 @@ module AWS
       #
       #   @option options [String] :grant_full_control
       #
-      #   @option options [Boolean] :reduced_redundancy (false) When +true+,
+      #   @option options [Boolean] :reduced_redundancy (false) When `true`,
       #     this object will be stored with Reduced Redundancy Storage.
       #
       #   @option options :cache_control [String] Can be used to specify
@@ -556,7 +556,7 @@ module AWS
       #   @option options :content_encoding [String] Specifies what
       #     content encodings have been applied to the object and thus
       #     what decoding mechanisms must be applied to obtain the
-      #     media-type referenced by the +Content-Type+ header field.
+      #     media-type referenced by the `Content-Type` header field.
       #     See
       #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
       #
@@ -568,10 +568,10 @@ module AWS
       #
       #   @option options [Symbol] :server_side_encryption (nil) If this
       #     option is set, the object will be stored using server side
-      #     encryption.  The only valid value is +:aes256+, which
+      #     encryption.  The only valid value is `:aes256`, which
       #     specifies that the object should be stored using the AES
       #     encryption algorithm with 256 bit keys.  By default, this
-      #     option uses the value of the +:s3_server_side_encryption+
+      #     option uses the value of the `:s3_server_side_encryption`
       #     option in the current configuration; for more information,
       #     see {AWS.config}.
       #
@@ -581,7 +581,7 @@ module AWS
       #     or a symmetric key string (16, 24 or 32 bytes in length).
       #
       #   @option options [Symbol] :encryption_materials_location (:metadata)
-      #     Set this to +:instruction_file+ if you prefer to store the
+      #     Set this to `:instruction_file` if you prefer to store the
       #     client-side encryption materials in a separate object in S3
       #     instead of in the object metadata.
       #
@@ -590,7 +590,7 @@ module AWS
       #
       # @return [S3Object, ObjectVersion] If the bucket has versioning
       #   enabled, this methods returns an {ObjectVersion}, otherwise
-      #   this method returns +self+.
+      #   this method returns `self`.
       #
       def write *args, &block
 
@@ -643,7 +643,7 @@ module AWS
       #   upload.complete(:remote_parts)
       #
       # @yieldparam [MultipartUpload] upload A handle to the upload.
-      #   {MultipartUpload#close} is called in an +ensure+ clause so
+      #   {MultipartUpload#close} is called in an `ensure` clause so
       #   that the upload will always be either completed or
       #   aborted.
       #
@@ -651,18 +651,18 @@ module AWS
       #
       # @option options [Hash] :metadata A hash of metadata to be
       #   included with the object.  These will be sent to S3 as
-      #   headers prefixed with +x-amz-meta+.  Each name, value pair
+      #   headers prefixed with `x-amz-meta`.  Each name, value pair
       #   must conform to US-ASCII.
       #
       # @option options [Symbol] :acl (private) A canned access
       #   control policy.  Valid values are:
       #
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:bucket_owner_read+
-      #   * +:bucket_owner_full_control+
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:bucket_owner_read`
+      #   * `:bucket_owner_full_control`
       #
       # @option options [Boolean] :reduced_redundancy (false) If true,
       #   Reduced Redundancy Storage will be enabled for the uploaded
@@ -679,7 +679,7 @@ module AWS
       # @option options :content_encoding [String] Specifies what
       #   content encodings have been applied to the object and thus
       #   what decoding mechanisms must be applied to obtain the
-      #   media-type referenced by the +Content-Type+ header field.
+      #   media-type referenced by the `Content-Type` header field.
       #   See
       #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
       #
@@ -688,10 +688,10 @@ module AWS
       #
       # @option options [Symbol] :server_side_encryption (nil) If this
       #   option is set, the object will be stored using server side
-      #   encryption.  The only valid value is +:aes256+, which
+      #   encryption.  The only valid value is `:aes256`, which
       #   specifies that the object should be stored using the AES
       #   encryption algorithm with 256 bit keys.  By default, this
-      #   option uses the value of the +:s3_server_side_encryption+
+      #   option uses the value of the `:s3_server_side_encryption`
       #   option in the current configuration; for more information,
       #   see {AWS.config}.
       #
@@ -749,7 +749,7 @@ module AWS
       #   new_obj.exists? #=> true
       #
       # If you need to move an object to a different bucket, pass
-      # +:bucket+ or +:bucket_name+.
+      # `:bucket` or `:bucket_name`.
       #
       #   obj = s3.buckets['old-bucket'].objects['old-key']
       #   obj.move_to('new-key', :bucket_name => 'new_bucket')
@@ -812,19 +812,19 @@ module AWS
       # @option options [Symbol] :acl (private) A canned access
       #   control policy.  Valid values are:
       #
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:bucket_owner_read+
-      #   * +:bucket_owner_full_control+
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:bucket_owner_read`
+      #   * `:bucket_owner_full_control`
       #
       # @option options [Symbol] :server_side_encryption (nil) If this
       #   option is set, the object will be stored using server side
-      #   encryption.  The only valid value is +:aes256+, which
+      #   encryption.  The only valid value is `:aes256`, which
       #   specifies that the object should be stored using the AES
       #   encryption algorithm with 256 bit keys.  By default, this
-      #   option uses the value of the +:s3_server_side_encryption+
+      #   option uses the value of the `:s3_server_side_encryption`
       #   option in the current configuration; for more information,
       #   see {AWS.config}.
       #
@@ -924,23 +924,23 @@ module AWS
       # @option options [Symbol] :acl (private) A canned access
       #   control policy.  Valid values are:
       #
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:bucket_owner_read+
-      #   * +:bucket_owner_full_control+
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:bucket_owner_read`
+      #   * `:bucket_owner_full_control`
       #
       # @option options [Symbol] :server_side_encryption (nil) If this
       #   option is set, the object will be stored using server side
-      #   encryption.  The only valid value is +:aes256+, which
+      #   encryption.  The only valid value is `:aes256`, which
       #   specifies that the object should be stored using the AES
       #   encryption algorithm with 256 bit keys.  By default, this
-      #   option uses the value of the +:s3_server_side_encryption+
+      #   option uses the value of the `:s3_server_side_encryption`
       #   option in the current configuration; for more information,
       #   see {AWS.config}.
       #
-      # @option options [Boolean] :client_side_encrypted (false) When +true+,
+      # @option options [Boolean] :client_side_encrypted (false) When `true`,
       #   the client-side encryption materials will be copied. Without this
       #   option, the key and iv are not guaranteed to be transferred to
       #   the new object.
@@ -977,7 +977,7 @@ module AWS
       # method, the data will be yielded to the block in chunks as it
       # is read off the HTTP response.
       #
-      # === Read an object from S3 in chunks
+      # ### Read an object from S3 in chunks
       #
       # When downloading large objects it is recommended to pass a block
       # to #read.  Data will be yielded to the block as it is read off
@@ -990,7 +990,7 @@ module AWS
       #     end
       #   end
       #
-      # === Reading an object without a block
+      # ### Reading an object without a block
       #
       # When you omit the block argument to #read, then the entire
       # HTTP response and read and the object data is loaded into
@@ -1006,19 +1006,19 @@ module AWS
       #
       # @option options [Time] :if_unmodified_since If specified, the
       #   method will raise
-      #   <tt>AWS::S3::Errors::PreconditionFailed</tt> unless the
+      #   `AWS::S3::Errors::PreconditionFailed` unless the
       #   object has not been modified since the given time.
       #
       # @option options [Time] :if_modified_since If specified, the
-      #   method will raise <tt>AWS::S3::Errors::NotModified</tt> if
+      #   method will raise `AWS::S3::Errors::NotModified` if
       #   the object has not been modified since the given time.
       #
       # @option options [String] :if_match If specified, the method
-      #   will raise <tt>AWS::S3::Errors::PreconditionFailed</tt>
+      #   will raise `AWS::S3::Errors::PreconditionFailed`
       #   unless the object ETag matches the provided value.
       #
       # @option options [String] :if_none_match If specified, the
-      #   method will raise <tt>AWS::S3::Errors::NotModified</tt> if
+      #   method will raise `AWS::S3::Errors::NotModified` if
       #   the object ETag matches the provided value.
       #
       # @option options [Range] :range A byte range to read data from
@@ -1026,9 +1026,9 @@ module AWS
       # @option options [OpenSSL::PKey::RSA, String] :encryption_key
       #   (nil) If this option is set, the object will be decrypted using
       #   envelope encryption. The valid values are OpenSSL asymmetric keys
-      #   +OpenSSL::Pkey::RSA+ or strings representing symmetric keys
-      #   of an AES-128/192/256-ECB cipher as a +String+.
-      #   This value defaults to the value in +s3_encryption_key+;
+      #   `OpenSSL::Pkey::RSA` or strings representing symmetric keys
+      #   of an AES-128/192/256-ECB cipher as a `String`.
+      #   This value defaults to the value in `s3_encryption_key`;
       #   for more information, see {AWS.config}.
       #
       #   Symmetric Keys:
@@ -1040,10 +1040,10 @@ module AWS
       #   key = OpenSSL::PKey::RSA.new(KEY_SIZE)
       #
       # @option options [Symbol] :encryption_materials_location (:metadata)
-      #   Set this to +:instruction_file+ if the encryption materials
+      #   Set this to `:instruction_file` if the encryption materials
       #   are not stored in the object metadata
       #
-      # @note +:range+ option cannot be used with client-side encryption
+      # @note `:range` option cannot be used with client-side encryption
       #
       # @note All decryption reads incur at least an extra HEAD operation.
       #
@@ -1074,7 +1074,7 @@ module AWS
       end
 
       # Returns the object's access control list.  This will be an
-      # instance of AccessControlList, plus an additional +change+
+      # instance of AccessControlList, plus an additional `change`
       # method:
       #
       #  object.acl.change do |acl|
@@ -1147,9 +1147,9 @@ module AWS
       #   method for which the returned URL will be valid.  Valid
       #   values:
       #
-      #   * +:get+ or +:read+
-      #   * +:put+ or +:write+
-      #   * +:delete+
+      #   * `:get` or `:read`
+      #   * `:put` or `:write`
+      #   * `:delete`
       #
       # @param [Hash] options Additional options for generating the URL.
       #
@@ -1254,7 +1254,7 @@ module AWS
       #   lower cost.  Otherwise, the object will be copied and stored
       #   with the standard storage class.
       #
-      # @return [true,false] The +value+ parameter.
+      # @return [true,false] The `value` parameter.
       def reduced_redundancy= value
         copy_from(key, :reduced_redundancy => value)
         value
@@ -1287,7 +1287,7 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns +true+ if the :data option is large or
+      # @return [Boolean] Returns `true` if the :data option is large or
       #   guessed to be larger than a configured threshold.
       def use_multipart? options
         estimated_content_length(options) > multipart_threshold(options) and
@@ -1674,13 +1674,13 @@ module AWS
         end
       end
 
-      # @return [String] Encodes a +String+ in base 64 regardless of version of
+      # @return [String] Encodes a `String` in base 64 regardless of version of
       #   Ruby for http headers (removes newlines).
       def encode64 input
         Base64.encode64(input).split("\n") * ""
       end
 
-      # @return [String] Decodes a +String+ in base 64.
+      # @return [String] Decodes a `String` in base 64.
       def decode64 input
         Base64.decode64(input)
       end

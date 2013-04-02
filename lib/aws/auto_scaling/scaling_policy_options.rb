@@ -30,7 +30,7 @@ module AWS
       #   * 'PercentChangeInCapacity'
       #
       # @option options [required,Integer] :scaling_adjustment The number of
-      #   instances by which to scale. +:adjustment_type+ determines the
+      #   instances by which to scale. `:adjustment_type` determines the
       #   interpretation of this umber (e.g., as an absolute number or as a
       #   percentage of the existing Auto Scaling group size). A positive
       #   increment adds to the current capacity and a negative value

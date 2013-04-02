@@ -49,17 +49,17 @@ module AWS
 
       # Creates a new Amazon EBS volume that any Amazon EC2 instance
       # in the same Availability Zone can attach to. For more
-      # information about Amazon EBS, go to the {Amazon Elastic Compute Cloud User Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # information about Amazon EBS, go to the [Amazon Elastic Compute Cloud User Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html).
       #
       # @return [Volume] An object representing the new volume.
       #
       # @param [Hash] options Options for creating the volume.
-      #   +:availability_zone+ and one of +:size+, +:snapshot+, or
-      #   +:snapshot_id+ is required.
+      #   `:availability_zone` and one of `:size`, `:snapshot`, or
+      #   `:snapshot_id` is required.
       #
       # @option options [Integer] :size The size of the volume, in
-      #   GiBs.  Valid values: 1 - 1024.  If +:snapshot+ or
-      #   +:snapshot_id+ is specified, this defaults to the size of
+      #   GiBs.  Valid values: 1 - 1024.  If `:snapshot` or
+      #   `:snapshot_id` is specified, this defaults to the size of
       #   the specified snapshot.
       #
       # @option options [Snapshot] :snapshot The snapshot from which to

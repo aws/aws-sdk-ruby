@@ -79,7 +79,7 @@ module AWS
 
       # Yields once for each MFA device.
       #
-      # You can limit the number of devices yielded using +:limit+.
+      # You can limit the number of devices yielded using `:limit`.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of devices to yield.
@@ -93,7 +93,7 @@ module AWS
 
       # Returns an enumerable object for this collection.  This can be
       # useful if you want to call an enumerable method that does
-      # not accept options (e.g. +collect+, +first+, etc).
+      # not accept options (e.g. `collect`, `first`, etc).
       #
       #   mfa_devices.enumerator(:limit => 10).collect(&:serial_number)
       #

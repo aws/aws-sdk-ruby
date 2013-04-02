@@ -18,7 +18,7 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon SQS.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -33,7 +33,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # == Queues and Messages
+  # ## Queues and Messages
   #
   # Amazon SQS is a distributed queue system that enables web
   # service applications to quickly and reliably queue messages that

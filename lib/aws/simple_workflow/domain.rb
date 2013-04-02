@@ -21,11 +21,11 @@ module AWS
     #
     # @attr_reader [Integer,Symbol] retention_period Returns the retention
     #   period for this domain. The return value may be an integer (number
-    #   of days history is kept around) or the symbol +:none+, implying
+    #   of days history is kept around) or the symbol `:none`, implying
     #   no expiry of closed workflow executions.
     #
     # @attr_reader [Symbol] status Returns the domain's status.  Status will
-    #   be either +:registered+ or +:deprecated+.
+    #   be either `:registered` or `:deprecated`.
     #
     class Domain < Resource
 

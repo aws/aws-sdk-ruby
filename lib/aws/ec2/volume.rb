@@ -32,12 +32,12 @@ module AWS
     # @attr_reader [Symbol] status The status of the volume.
     #   Possible values:
     #
-    #   * +:creating+
-    #   * +:available+
-    #   * +:in_use+
-    #   * +:deleting+
-    #   * +:deleted+
-    #   * +:error+
+    #   * `:creating`
+    #   * `:available`
+    #   * `:in_use`
+    #   * `:deleting`
+    #   * `:deleted`
+    #   * `:error`
     #
     # @attr_reader [Integer] size The size of the volume in
     #   gigabytes.

@@ -17,7 +17,7 @@ module AWS
     # Data is a light wrapper around a Ruby hash that provides
     # method missing access to the hash contents.
     #
-    # == Method Missing Access
+    # ## Method Missing Access
     #
     # You can access hash content with methods if their keys
     # are symbols.
@@ -28,14 +28,14 @@ module AWS
     #   data.c #=> true
     #   data.d #=> raises NoMethodError
     #
-    # == Boolean Methods
+    # ## Boolean Methods
     #
     # Given the structure above you can also use question-mark methods.
     #
     #   data.c? #=> true
     #   data.d? #=> raises NoMethodError
     #
-    # == Nested Hashes
+    # ## Nested Hashes
     #
     # If the data contains nested hashes you can chain methods into
     # the structure.
@@ -43,7 +43,7 @@ module AWS
     #   data = AWS::Core::Data.new(:a => { :b => { :c => 'abc' }})
     #   data.a.b.c #=> 'abc'
     #
-    # == Nested Arrays
+    # ## Nested Arrays
     #
     # Arrays are wrapped in {Data::List} objects.  They ensure any
     # data returned is correctly wrapped so you can continue using

@@ -33,21 +33,21 @@ module AWS
       #   overridden when starting a workflow execution. The supported child
       #   policies are:
       #
-      #   * +:terminate+ - the child executions will be terminated.
+      #   * `:terminate` - the child executions will be terminated.
       #
-      #   * +:request_cancel+ - a request to cancel will be attempted for each
+      #   * `:request_cancel` - a request to cancel will be attempted for each
       #     child execution by recording a WorkflowExecutionCancelRequested
       #     event in its history. It is up to the decider to take appropriate
       #     actions when it receives an execution history with this event.
       #
-      #   * +:abandon+ - no action will be taken. The child executions will
+      #   * `:abandon` - no action will be taken. The child executions will
       #     continue to run.
       #
       # @option options [Integer,:none] :default_execution_start_to_close_timeout (nil)
       #   The default maximum duration for executions of this workflow type.
       #   You can override this default when starting an execution.
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :default_task_list (nil) Specifies
       #   the default task list to use for scheduling decision tasks for
@@ -58,7 +58,7 @@ module AWS
       #   The default maximum duration of decision tasks for this workflow type.
       #
       #   The value should be a number of seconds (integer) or the symbol
-      #   +:none+ (implying no timeout).
+      #   `:none` (implying no timeout).
       #
       # @option options [String] :description (nil) Textual description of
       #   the workflow type.

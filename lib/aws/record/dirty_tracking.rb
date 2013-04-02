@@ -57,7 +57,7 @@ module AWS
     #   my_book.reset_title!
     #   my_book.title #=> 'My Book'
     #
-    # == In-Place Editing
+    # ## In-Place Editing
     #
     # Dirty tracking works by comparing incoming attribute values upon
     # assignment against the value that was there previously.  If you
@@ -69,7 +69,7 @@ module AWS
     #   my_book.title.gsub!(/My/, 'Your')
     #   my_book.title_change #=> ['My Book', 'Your Book']
     #
-    # == Partial Updates
+    # ## Partial Updates
     #
     # Dirty tracking makes it possible to only persist those attributes
     # that have changed since they were loaded.  This speeds up requests

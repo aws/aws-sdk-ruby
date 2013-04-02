@@ -41,17 +41,17 @@ module AWS
         # Finds records in Amazon DynamoDB and returns them as objects of
         # the current class.
         #
-        # Finding +:all+ returns an enumerable scope object
+        # Finding `:all` returns an enumerable scope object
         #
         #  People.find(:all, :limit => 10).each do |person|
         #    puts person.name
         #  end
         #
-        # Finding +:first+ returns a single record (or nil)
+        # Finding `:first` returns a single record (or nil)
         #
         #  boss = People.find(:first)
         #
-        # Find accepts a hash of find modifiers (+:shard+ and +:limit+).
+        # Find accepts a hash of find modifiers (`:shard` and `:limit`).
         # You can also choose to omit these modifiers and
         # chain them on the scope object returned.  In the following
         # example only one request is made to SimpleDB (when #each is
@@ -66,9 +66,9 @@ module AWS
         #     not found.
         #
         # @overload find(mode, options = {})
-        #   @param [:all,:first] mode (:all) When finding +:all+ matching records
-        #     and array is returned of records.  When finding +:first+ then
-        #     +nil+ or a single record will be returned.
+        #   @param [:all,:first] mode (:all) When finding `:all` matching records
+        #     and array is returned of records.  When finding `:first` then
+        #     `nil` or a single record will be returned.
         #   @param [Hash] options
         #   @option options [Integer] :shard The shard name of the Amazon
         #     DynamoDB table to search.
@@ -97,7 +97,7 @@ module AWS
         #     # ...
         #   end
         #
-        # This method is equivalent to +find(:all)+, and therefore you can also
+        # This method is equivalent to `find(:all)`, and therefore you can also
         # pass aditional options.
         #
         #   Book.all(:where => { :author' => 'me' }).each do |my_book|

@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon Route 53.
   #
   # To use Amazon Route 53 you must first
-  # {sign up here}[http://aws.amazon.com/route53/].
+  # [sign up here](http://aws.amazon.com/route53/).
   #
   # For more information about Amazon Route 53:
   #
-  # * {Amazon Route 53}[http://aws.amazon.com/route53/]
-  # * {Amazon Route 53 Documentation}[http://aws.amazon.com/documentation/route53/]
+  # * [Amazon Route 53](http://aws.amazon.com/route53/)
+  # * [Amazon Route 53 Documentation](http://aws.amazon.com/documentation/route53/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::Route53 does not provide higher level abstractions for Route 53 at
   # this time.  You can still access all of the API methods using

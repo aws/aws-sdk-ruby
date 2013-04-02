@@ -16,7 +16,7 @@ module AWS
 
     # Represents a bucket in S3.
     #
-    # = Creating Buckets
+    # # Creating Buckets
     #
     # You create a bucket by name.  Bucket names must be globally unique
     # and must be DNS compatible.
@@ -24,14 +24,14 @@ module AWS
     #   s3 = AWS::S3.new
     #   bucket = s3.buckets.create('dns-compat-bucket-name')
     #
-    # = Getting a Bucket
+    # # Getting a Bucket
     #
     # You can create a reference to a bucket, given its name.
     #
     #   bucket = s3.buckets['bucket-name'] # makes no request
     #   bucket.exists? #=> returns true/false
     #
-    # = Enumerating Buckets
+    # # Enumerating Buckets
     #
     # The {BucketCollection} class is enumerable.
     #
@@ -39,7 +39,7 @@ module AWS
     #     puts bucket.name
     #   end
     #
-    # = Deleting a Bucket
+    # # Deleting a Bucket
     #
     # You can delete an empty bucket you own.
     #
@@ -54,7 +54,7 @@ module AWS
     #
     #   bucket.delete!
     #
-    # = Objects
+    # # Objects
     #
     # Given a bucket you can access its objects, either by key or by
     # enumeration.
@@ -68,7 +68,7 @@ module AWS
     # See {ObjectCollection} and {S3Object} for more information on working
     # with objects.
     #
-    # = Website Configuration
+    # # Website Configuration
     #
     # It is easy to enable website hosting for a bucket.
     #
@@ -95,28 +95,28 @@ module AWS
     #
     #   bucket.website_configuration = other_bucket.website_configuration
     #
-    # = Bucket Policies and ACLs
+    # # Bucket Policies and ACLs
     #
     # You can control access to your bucket and its contents a number
     # of ways.  You can specify a bucket ACL (access control list)
     # or a bucket policy.
     #
-    # == ACLs
+    # ## ACLs
     #
     # ACLs control access to your bucket and its contents via a list of
     # grants and grantees.
     #
-    # === Canned ACLs
+    # ### Canned ACLs
     #
     # The simplest way to specify an ACL is to use one of Amazon's "canned"
     # ACLs.  Amazon accepts the following canned ACLs:
     #
-    # * +:private+
-    # * +:public_read+
-    # * +:public_read_write+
-    # * +:authenticated_read+
-    # * +:bucket_owner_read+
-    # * +:bucket_owner_full_control+
+    # * `:private`
+    # * `:public_read`
+    # * `:public_read_write`
+    # * `:authenticated_read`
+    # * `:bucket_owner_read`
+    # * `:bucket_owner_full_control`
     #
     # You can specify a the ACL at bucket creation or later update a bucket.
     #
@@ -126,17 +126,17 @@ module AWS
     #   # replacing an existing bucket ACL
     #   bucket.acl = :private
     #
-    # === Grants
+    # ### Grants
     #
     # Alternatively you can specify a hash of grants.  Each entry in the
-    # +:grant+ hash has a grant (key) and a list of grantees (values).
+    # `:grant` hash has a grant (key) and a list of grantees (values).
     # Valid grant keys are:
     #
-    # * +:grant_read+
-    # * +:grant_write+
-    # * +:grant_read_acp+
-    # * +:grant_write_acp+
-    # * +:grant_full_control+
+    # * `:grant_read`
+    # * `:grant_write`
+    # * `:grant_read_acp`
+    # * `:grant_write_acp`
+    # * `:grant_full_control`
     #
     # Each grantee can be a String, Hash or array of strings or hashes.
     # The following example uses grants to provide public read
@@ -153,7 +153,7 @@ module AWS
     #     ]
     #   })
     #
-    # === ACL Object
+    # ### ACL Object
     #
     # Lastly, you can build an ACL object and use a Ruby DSL to specify grants
     # and grantees.  See {ACLObject} for more information.
@@ -165,7 +165,7 @@ module AWS
     #     end
     #   end
     #
-    # == Policies
+    # ## Policies
     #
     # You can also work with bucket policies.
     #
@@ -180,7 +180,7 @@ module AWS
     # See {Core::Policy} and {S3::Policy} for more information on build
     # policy objects.
     #
-    # = Versioned Buckets
+    # # Versioned Buckets
     #
     # You can enable versioning on a bucket you control.  When versioning
     # is enabled, S3 will keep track of each version of each object you
@@ -208,7 +208,7 @@ module AWS
     # bucket.
     #
     #   bucket.versions.each do |obj_version|
-    #     puts obj_version.key + " : " + obj_version.version_id
+    #     puts obj_version.key ` " : " ` obj_version.version_id
     #   end
     #
     # See {BucketVersionCollection}, {ObjectVersionCollection} and
@@ -292,7 +292,7 @@ module AWS
         self.website_configuration = website_config
       end
 
-      # Returns the bucket website configuration. Returns +nil+ if the bucket
+      # Returns the bucket website configuration. Returns `nil` if the bucket
       # is not configured as a website.
       # @return [WebsiteConfiguration,nil]
       # @see #configure_website
@@ -307,7 +307,7 @@ module AWS
       end
 
       # Sets the website configuration.  Deletes the configuration if
-      # +nil+ is passed.
+      # `nil` is passed.
       # @param [WebsiteConfiguration,nil] website_configuration
       # @see #configure_website
       # @see #website_configuration
@@ -334,7 +334,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if this bucket is configured as
+      # @return [Boolean] Returns `true` if this bucket is configured as
       #   a website.
       # @see #configure_website
       # @see #website_configuration
@@ -373,7 +373,7 @@ module AWS
       #   bucket.tags = { 'contents' => 'photots' }
       #
       # You can remove all tags for the bucket by passing an empty
-      # hash or +nil+.
+      # hash or `nil`.
       #
       #   bucket.tags = nil # {} also deletes all tags
       #   bucket.tags
@@ -438,7 +438,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] returns +true+ if version is enabled on this bucket.
+      # @return [Boolean] returns `true` if version is enabled on this bucket.
       def versioning_enabled?
         versioning_state == :enabled
       end
@@ -446,9 +446,9 @@ module AWS
 
       # Returns the versioning status for this bucket.  States include:
       #
-      # * +:enabled+ - currently enabled
-      # * +:suspended+ - currently suspended
-      # * +:unversioned+ - versioning has never been enabled
+      # * `:enabled` - currently enabled
+      # * `:suspended` - currently suspended
+      # * `:unversioned` - versioning has never been enabled
       #
       # @return [Symbol] the versioning state
       def versioning_state
@@ -546,7 +546,7 @@ module AWS
       end
 
       # Returns the bucket's access control list.  This will be an
-      # instance of AccessControlList, plus an additional +change+
+      # instance of AccessControlList, plus an additional `change`
       # method:
       #
       #   bucket.acl.change do |acl|
@@ -614,7 +614,7 @@ module AWS
       # method.
       #
       # @return [Policy,nil] Returns the bucket policy (if it has one),
-      #   or it returns +nil+ otherwise.
+      #   or it returns `nil` otherwise.
       def policy
         resp = client.get_bucket_policy(:bucket_name => name)
         policy = Policy.from_json(resp.data[:policy])
@@ -629,7 +629,7 @@ module AWS
       #
       # @param policy The new policy.  This can be a string (which
       #   is assumed to contain a valid policy expressed in JSON), a
-      #   Policy object or any object that responds to +to_json+.
+      #   Policy object or any object that responds to `to_json`.
       # @see Policy
       # @return [nil]
       def policy=(policy)
@@ -713,7 +713,7 @@ module AWS
       # @see Tree
       # @param [Hash] options
       # @option options [String] :prefix (nil) Set prefix to choose where
-      #   the top of the tree will be.  A value of +nil+ means
+      #   the top of the tree will be.  A value of `nil` means
       #   that the tree will include all objects in the collection.
       #
       # @option options [String] :delimiter ('/') The string that separates

@@ -34,7 +34,7 @@ module AWS
       # and give EC2 just the public key. The private key is never
       # transferred between you and EC2.
       #
-      # === Supported formats:
+      # ### Supported formats:
       #
       # * OpenSSH public key format (e.g., the format in
       #   ~/.ssh/authorized_keys)

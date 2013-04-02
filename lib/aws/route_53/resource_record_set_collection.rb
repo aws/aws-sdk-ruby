@@ -16,12 +16,12 @@ require 'time'
 module AWS
   class Route53
 
-    # = Create new resource record set
+    # # Create new resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
     #   rrset = rrsets.create('foo.example.com.', 'A', :ttl => 300, :resource_records => [{:value => '127.0.0.1'}])
     #
-    # = Find existing resource record set
+    # # Find existing resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
     #   rrset = rrsets['foo.example.com.', 'A']

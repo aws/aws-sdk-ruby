@@ -119,7 +119,7 @@ module AWS
 
       # Replaces attributes for the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The
+      # The `attributes_hash` should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # Attributes not named in this hash are left alone.  Attributes named
@@ -140,7 +140,7 @@ module AWS
 
       # Adds values to attributes on the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The
+      # The `attributes_hash` should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # @example

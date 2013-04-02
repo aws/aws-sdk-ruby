@@ -20,10 +20,10 @@ module AWS
   #
   # For more information about Redshift:
   #
-  # * {Amazon Redshift}[http://aws.amazon.com/redshift/]
-  # * {Amazon Redshift Documentation}[http://aws.amazon.com/documentation/redshift/]
+  # * [Amazon Redshift](http://aws.amazon.com/redshift/)
+  # * [Amazon Redshift Documentation](http://aws.amazon.com/documentation/redshift/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:

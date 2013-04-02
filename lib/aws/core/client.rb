@@ -105,7 +105,7 @@ module AWS
       #   end
       #
       # The block executes in the context of an HttpHandler
-      # instance, and +super+ delegates to the HTTP handler used by
+      # instance, and `super` delegates to the HTTP handler used by
       # this client.  This provides an easy way to spy on requests
       # and responses.  See HttpHandler, HttpRequest, and
       # HttpResponse for more details on how to implement a fully
@@ -315,7 +315,7 @@ module AWS
         response.error.kind_of?(Errors::ServerError)
       end
 
-      # @return [Boolean] Returns +true+ if the response contains an
+      # @return [Boolean] Returns `true` if the response contains an
       #   error message that indicates credentials have expired.
       def expired_credentials? response
         response.error and
@@ -405,7 +405,7 @@ module AWS
       # in sub-classes (e.g. QueryClient, RESTClient, etc).
       # @param [Response] response
       # @return [Array<Code,Message>,nil] Should return an array with an
-      #   error code and message, or +nil+.
+      #   error code and message, or `nil`.
       def extract_error_details response
         raise NotImplementedError
       end

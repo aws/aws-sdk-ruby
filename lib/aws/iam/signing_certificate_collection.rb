@@ -39,9 +39,9 @@ module AWS
       include Collection
 
       # @param [Hash] options
-      # @option options [User] :user (nil) When +:user+ is provided the
+      # @option options [User] :user (nil) When `:user` is provided the
       #   collection will represents the signing certificates belonging only
-      #   to that user.  When +:user+ is omitted the collection will manage
+      #   to that user.  When `:user` is omitted the collection will manage
       #   root credentials on the AWS account (instead those belonging to a
       #   particular user).
       def initialize options = {}
@@ -50,7 +50,7 @@ module AWS
       end
 
       # @return [User,nil] Returns the user this collection belongs to.
-      #   Returns +nil+ if the collection represents the root credentials
+      #   Returns `nil` if the collection represents the root credentials
       #   for the account.  If the configured credentials belong to an
       #   IAM user, then that user is the implied owner.
       attr_reader :user
@@ -92,7 +92,7 @@ module AWS
 
       # Yields once for each signing certificate.
       #
-      # You can limit the number of certificates yielded using +:limit+.
+      # You can limit the number of certificates yielded using `:limit`.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of certificates

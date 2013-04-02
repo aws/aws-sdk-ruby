@@ -18,7 +18,7 @@ module AWS
     # You can create new keys so that you can rotate out your old keys.
     # You can create, delete, activate and deactivate access keys.
     #
-    # == Create New Access Keys
+    # ## Create New Access Keys
     #
     #   # for the aws account
     #   access_keys = iam.access_keys.create
@@ -26,7 +26,7 @@ module AWS
     #   # for an iam user
     #   user_access_keys = iam.users['johndoe'].access_keys.create
     #
-    # == Secret
+    # ## Secret
     #
     # Make sure after creating an access to retrieve the secret access key
     # and save it somewhere safe.
@@ -55,7 +55,7 @@ module AWS
       end
 
       # @return [User,nil] Returns the user these accesss keys belong to.
-      #   If this returns +nil+ then these access keys belong to the
+      #   If this returns `nil` then these access keys belong to the
       #   AWS account.
       attr_reader :user
 
@@ -73,7 +73,7 @@ module AWS
 
       # @param [String] access_key_id The ID of the access key.
       # @return [AccessKey] Returns a reference to the access key with
-      #   the given +access_key_id+.
+      #   the given `access_key_id`.
       def [] access_key_id
         AccessKey.new(access_key_id, new_options)
       end
@@ -89,7 +89,7 @@ module AWS
       end
 
       # Yields once for each access key.  You can limit the number of
-      # access keys yielded using +:limit+.
+      # access keys yielded using `:limit`.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of access keys

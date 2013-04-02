@@ -28,8 +28,8 @@ module AWS
     #
     # Each exception has:
     #
-    # * +code+: returns the error code as a string.
-    # * +box_usage+: returns the box usage for the operation.
+    # * `code`: returns the error code as a string.
+    # * `box_usage`: returns the box usage for the operation.
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.

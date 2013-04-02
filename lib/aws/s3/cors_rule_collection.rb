@@ -16,7 +16,7 @@ module AWS
 
     # Manages the CORS rules for a single bucket.
     #
-    # == Getting Rules
+    # ## Getting Rules
     #
     # To get the CORS rules for a bucket, use the {Bucket#cors} method.  This
     # returns a CORSRuleCollection for the bucket.  The collection is
@@ -27,7 +27,7 @@ module AWS
     #     # rule is a CORSRule object
     #   end
     #
-    # == Setting Rules
+    # ## Setting Rules
     #
     # You can set the rules for a bucket (replacing all existing rules) using
     # the {#set} method.
@@ -45,7 +45,7 @@ module AWS
     # Each rule can be a Hash, a {CORSRule} or another {CORSRuleCollection}.
     # See {Client#put_bucket_cors} for a list of keys for a rule hash.
     #
-    # == Adding Rules
+    # ## Adding Rules
     #
     # Adding rules is the same as setting rules.  Rules you add will be
     # appended to the end of the existing list of rules.
@@ -53,7 +53,7 @@ module AWS
     #   # add one or more rules
     #   bucket.rules.add(rules)
     #
-    # == Deleting Rules
+    # ## Deleting Rules
     #
     # To remove a rule, use the {#delete_if} method.
     #
@@ -134,14 +134,14 @@ module AWS
       end
       alias_method :create, :add
 
-      # Deletes every rule for which the block evaluates to +true+.
+      # Deletes every rule for which the block evaluates to `true`.
       #
       #   # remove all rules that are open to the 'world'
       #   bucket.cors.delete_if{|rule| rule.allowed_origins.include?('*') }
       #
       # @yield [rule]
       # @yieldparam [CORSRule] rule
-      # @yieldreturn [Boolean] Return +true+ for each rule you want to delete.
+      # @yieldreturn [Boolean] Return `true` for each rule you want to delete.
       # @return (see #set)
       def delete_if &block
         rules = []

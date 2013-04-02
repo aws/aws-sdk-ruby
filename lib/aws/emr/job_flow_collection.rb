@@ -17,7 +17,7 @@ require 'time'
 module AWS
   class EMR
 
-    # = Creating a Job Flow
+    # # Creating a Job Flow
     #
     # Call {#create} to run a new job flow.
     #
@@ -31,14 +31,14 @@ module AWS
     #     }
     #   )
     #
-    # = Getting a Job Flow
+    # # Getting a Job Flow
     #
     # You can get a job flow by its ID.
     #
     #   job_flow = emr.job_flows['j-123456678'] # makes no request
     #   job_flow.exists? #=> true/false
     #
-    # = Enumerating Job Flows
+    # # Enumerating Job Flows
     #
     # You can enumerate all job flows, or filter them.
     #

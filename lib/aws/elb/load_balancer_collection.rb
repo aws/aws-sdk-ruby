@@ -49,10 +49,10 @@ module AWS
       # @option options [required,Array<Hash>] :listeners An array of load
       #   balancer listener options.  Each value must be an array with the
       #   following keys:
-      #   * +:port+
-      #   * +:protocol+
-      #   * +:instance_port+
-      #   * +:instance_protocol+
+      #   * `:port`
+      #   * `:protocol`
+      #   * `:instance_port`
+      #   * `:instance_protocol`
       #
       #   Port values should be integers, and protocols should be symbols or
       #   strings (e.g. :http, or 'HTTP').  See {ListenerCollection#create}

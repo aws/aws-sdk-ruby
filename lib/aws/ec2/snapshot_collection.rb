@@ -60,7 +60,7 @@ module AWS
 
       # @return [SnapshotCollection] A new collection that only
       #   includes snapshots owned by one or more of the specified AWS
-      #   accounts.  The IDs +:amazon+ and +:self+ can be used to
+      #   accounts.  The IDs `:amazon` and `:self` can be used to
       #   include snapshots owned by Amazon or AMIs owned by you,
       #   respectively.
       #
@@ -72,9 +72,9 @@ module AWS
 
       # @return [ImageCollection] A new collection that only includes
       #   images for which the specified user ID has explicit launch
-      #   permissions. The user ID can be an AWS account ID, +:self+
+      #   permissions. The user ID can be an AWS account ID, `:self`
       #   to return AMIs for which the sender of the request has
-      #   explicit launch permissions, or +:all+ to return AMIs with
+      #   explicit launch permissions, or `:all` to return AMIs with
       #   public launch permissions.
       #
       # @param [Array of Strings] users The AWS account IDs by which
@@ -87,12 +87,12 @@ module AWS
       # Amazon S3. You can use snapshots for backups, to make
       # identical copies of instance devices, and to save data
       # before shutting down an instance. For more information about
-      # Amazon EBS, go to the {Amazon Elastic Compute Cloud User Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # Amazon EBS, go to the [Amazon Elastic Compute Cloud User Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html).
       #
       # @return [Snapshot] An object representing the new snapshot.
       #
       # @param [Hash] opts Options for creating the snapshot.
-      #   Either +:volume+ or +:volume_id+ is required.
+      #   Either `:volume` or `:volume_id` is required.
       #
       # @option opts [Volume] :volume The Amazon EBS volume of which
       #   to take a snapshot.

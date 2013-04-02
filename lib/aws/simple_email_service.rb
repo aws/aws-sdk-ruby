@@ -20,14 +20,14 @@ module AWS
   # SimpleEmailService (SES).
   #
   # To use Amazon SimpleEmailService you must first
-  # {sign up here}[http://aws.amazon.com/ses/]
+  # [sign up here](http://aws.amazon.com/ses/)
   #
   # For more information about Amazon SimpleEmailService:
   #
-  # * {Amazon SimpleEmailService}[http://aws.amazon.com/ses/]
-  # * {Amazon SimpleEmailService Documentation}[http://aws.amazon.com/documentation/ses/]
+  # * [Amazon SimpleEmailService](http://aws.amazon.com/ses/)
+  # * [Amazon SimpleEmailService Documentation](http://aws.amazon.com/documentation/ses/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -42,7 +42,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Rails
+  # # Rails
   #
   # If you want to use Amazon SimpleEmailService to send email from your
   # Rails application you just need to do 2 things:
@@ -55,15 +55,15 @@ module AWS
   # This has only been tested with Rails 2.3 and Rails 3.0.
   #
   #
-  # = Identities
+  # # Identities
   #
   # Before you can send emails, you need to verify one or more identities.
   # Identities are email addresses or domain names that you have control over.
-  # Until you have {requested production access}[http://docs.amazonwebservices.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html]
+  # Until you have [requested production access](http://docs.amazonwebservices.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html)
   # you will only be able to send emails to and from verified email addresses
   # and domains.
   #
-  # == Verifying Email Addresses
+  # ## Verifying Email Addresses
   #
   # You can verify an email address for sending/receiving emails using
   # the identities collection.
@@ -74,7 +74,7 @@ module AWS
   # You will be sent an email address with a link.  Follow the link to
   # verify the email address.
   #
-  # == Verifying Domains
+  # ## Verifying Domains
   #
   # You can also verify an entire domain for sending and receiving emails.
   #
@@ -86,7 +86,7 @@ module AWS
   # the given verification token.  See the service documentation for
   # more details.
   #
-  # == Listing Identities
+  # ## Listing Identities
   #
   # You can enumerate all identities:
   #
@@ -109,7 +109,7 @@ module AWS
   #   identity.verified? #=> true/false
   #   identity.verification_token #=> '...'
   #
-  # = Sending Email
+  # # Sending Email
   #
   # To send a basic email you can use {#send_email}.
   #
@@ -140,14 +140,14 @@ module AWS
   #   Sample email text.
   #   EMAIL
   #
-  # = Quotas
+  # # Quotas
   #
   # Based on several factors, Amazon SES determines how much email you can
   # send and how quickly you can send it. These sending limits are defined
   # as follows:
   #
-  # * +:max_send_rate+ - Maximum number of emails you can send per second.
-  # * +:max_24_hour_send+ - Maximum number of emails you can send in a
+  # * `:max_send_rate` - Maximum number of emails you can send per second.
+  # * `:max_24_hour_send` - Maximum number of emails you can send in a
   #   24-hour period.
   #
   # To get your current quotas (and how many emails you have sent in the last
@@ -156,7 +156,7 @@ module AWS
   #   ses.quotas
   #   # => {:max_24_hour_send=>200, :max_send_rate=>1.0, :sent_last_24_hours=>22}
   #
-  # = Statistics
+  # # Statistics
   #
   # You can get statistics about individual emails:
   #
@@ -203,8 +203,8 @@ module AWS
     #     :body_text => 'sample text ...',
     #     :body_html => '<p>sample text ...</p>')
     #
-    # You can also pass multiple email addresses for the +:to+, +:cc+,
-    # +:bcc+ and +:reply_to+ options.  Email addresses can also be
+    # You can also pass multiple email addresses for the `:to`, `:cc`,
+    # `:bcc` and `:reply_to` options.  Email addresses can also be
     # formatted with names.
     #
     #   ses.send_email(
@@ -230,21 +230,21 @@ module AWS
     #   bounce notifications are to be forwarded. If the message cannot be
     #   delivered to the recipient, then an error message will be returned
     #   from the recipient's ISP; this message will then be forwarded to
-    #   the email address specified by the +:return_path+ option.
+    #   the email address specified by the `:return_path` option.
     # @option options [String] :body_text The email text contents.
-    #   You must provide +:body_text+, +:body_html+ or both.
+    #   You must provide `:body_text`, `:body_html` or both.
     # @option options [String] :body_html The email html contents.
-    #   You must provide +:body_text+, +:body_html+ or both.
+    #   You must provide `:body_text`, `:body_html` or both.
     # @option options [String] :subject_charset The character set of the
-    #   +:subject+ string.  If the text must contain any other characters,
+    #   `:subject` string.  If the text must contain any other characters,
     #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_text_charset The character set of the
-    #   +:body_text+ string.  If the text must contain any other characters,
+    #   `:body_text` string.  If the text must contain any other characters,
     #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_html_charset The character set of the
-    #   +:body_html+ string.  If the text must contain any other characters,
+    #   `:body_html` string.  If the text must contain any other characters,
     #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_html
@@ -326,7 +326,7 @@ module AWS
     #   If you specify the :from option, then bounce notifications and
     #   complaints will be sent to this email address. This takes
     #   precedence over any Return-Path header that you might include in
-    #   the +raw_message+.
+    #   the `raw_message`.
     # @return [nil]
     def send_raw_email raw_message, options = {}
 
@@ -362,11 +362,11 @@ module AWS
     # Returns an array of email statistics. Each object in this array is a
     # hash with the following keys:
     #
-    # * +:delivery_attempts+
-    # * +:rejects+
-    # * +:bounces+
-    # * +:complaints+
-    # * +:timestamp+
+    # * `:delivery_attempts`
+    # * `:rejects`
+    # * `:bounces`
+    # * `:complaints`
+    # * `:timestamp`
     #
     # @return [Array of Hashes] An array of email statistic hashes.
     def statistics

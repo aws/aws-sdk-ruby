@@ -28,7 +28,7 @@ module AWS
     # @attr_reader [String] status The status of the stack.
     #
     # @attr_reader [String] status_reason Success/Failure message
-    #   associated with the +status+.
+    #   associated with the `status`.
     #
     # @attr_reader [Array<String>] capabilities The capabilities
     #   allowed in the stack.
@@ -64,13 +64,13 @@ module AWS
 
       define_attribute_type :describe
 
-      ## returned by GetTemplate
+      # returned by GetTemplate
 
       template_attribute :template, :from => :template_body
 
       alias_method :template_body, :template
 
-      ## returned by DescribeStacks
+      # returned by DescribeStacks
 
       describe_attribute :creation_time, :static => true
 
@@ -108,7 +108,7 @@ module AWS
 
       alias_method :timeout_in_minutes, :timeout
 
-      ## attribute providers
+      # attribute providers
 
       provider(:describe_stacks) do |provider|
         provider.find do |resp|
@@ -159,12 +159,12 @@ module AWS
       # Returns a stack resource summary collection, that when enumerated
       # yields summary hashes.  Each hash has the following keys:
       #
-      # * +:last_updated_timestamp+
-      # * +:logical_resource_id+
-      # * +:physical_resource_id+
-      # * +:resource_status+
-      # * +:resource_status_reason+
-      # * +:resource_type+
+      # * `:last_updated_timestamp`
+      # * `:logical_resource_id`
+      # * `:physical_resource_id`
+      # * `:resource_status`
+      # * `:resource_status_reason`
+      # * `:resource_type`
       #
       # @return [StackResourceSummaryCollection]
       #

@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon SimpleDB.
   #
   # To use Amazon SimpleDB you must first
-  # {sign up here}[http://aws.amazon.com/simpledb/].
+  # [sign up here](http://aws.amazon.com/simpledb/).
   #
   # For more information about Amazon SimpleDB:
   #
-  # * {Amazon SimpleDB}[http://aws.amazon.com/simpledb/]
-  # * {Amazon SimpleDB Documentation}[http://aws.amazon.com/documentation/simpledb/]
+  # * [Amazon SimpleDB](http://aws.amazon.com/simpledb/)
+  # * [Amazon SimpleDB Documentation](http://aws.amazon.com/documentation/simpledb/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Understanding the SimpleDB Interface
+  # # Understanding the SimpleDB Interface
   #
   # SimpleDB stores data in a hierarchy of:
   #
@@ -60,7 +60,7 @@ module AWS
   # the objects they represent.  They also make it easy to perform
   # bulk operations on all objects in that collection.
   #
-  # = Domains
+  # # Domains
   #
   # Domains are like database tables.  A domain must exist before you can
   # write to it.  To create a domain:
@@ -71,7 +71,7 @@ module AWS
   # For more information about working with domains see {DomainCollection}
   # and {Domain}.
   #
-  # = Items & Attributes
+  # # Items & Attributes
   #
   # Items exist in SimpleDB when they have attributes.  You can delete an
   # item by removing all of its attributes.  You create an item by adding
@@ -117,7 +117,7 @@ module AWS
   # * {AttributeCollection}
   # * {Attribute}
   #
-  # = Lazy Execution
+  # # Lazy Execution
   #
   # Requests are not made until necessary.  This means you can drill down
   # all the way to an attribute, by name, without making any requests
@@ -174,7 +174,7 @@ module AWS
     #     # ...
     #   end
     #
-    # === Other Modes
+    # ### Other Modes
     #
     # You can also use this same function to disable consistent reads inside
     # a block.  This is useful if you have consistent reads enabled by

@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with AWS Data Pipeline.
   #
   # To use AWS Data Pipeline you must first
-  # {sign up here}[http://aws.amazon.com/datapipeline/].
+  # [sign up here](http://aws.amazon.com/datapipeline/).
   #
   # For more information about AWS Data Pipeline:
   #
-  # * {AWS Data Pipeline}[http://aws.amazon.com/datapipeline/]
-  # * {AWS Data Pipeline Documentation}[http://aws.amazon.com/documentation/datapipeline/]
+  # * [AWS Data Pipeline](http://aws.amazon.com/datapipeline/)
+  # * [AWS Data Pipeline Documentation](http://aws.amazon.com/documentation/datapipeline/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::DataPipeline does not provide higher level abstractions for AWS Data Pipeline
   # this time.  You can still access all of the API methods using

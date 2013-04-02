@@ -19,14 +19,14 @@ module AWS
     # can be organized (optionally) into groups.  Users (and groups) can be
     # given policies that affect that they can do.
     #
-    # == Creating A User
+    # ## Creating A User
     #
     #   iam = AWS::IAM.new
     #
     #   user = iam.users.create('johndoe')
     #
     #
-    # == Renaming a User
+    # ## Renaming a User
     #
     # You can only edit a user's name and path (both of which will modify
     # the user's ARN).
@@ -34,7 +34,7 @@ module AWS
     #   user = iam.users['johndoe']
     #   user.name = 'newname'
     #
-    # == User Path
+    # ## User Path
     #
     # When you create a user you can assign a path.  Paths must begin and
     # end with a forward slash (/).
@@ -48,12 +48,12 @@ module AWS
     #     puts developer.name
     #   end
     #
-    # == Login Profile
+    # ## Login Profile
     #
     # A login profile is required for an IAM user to use the AWS Management
     # console (web interface).  See {LoginProfile} for more information.
     #
-    # == Deleting Users
+    # ## Deleting Users
     #
     # In order to delete a user you must first remove it from all of its
     # groups and delete all of its signing certificates.  Once this is done:

@@ -14,7 +14,7 @@
 module AWS
   class EC2
 
-    # = Getting Export Tasks
+    # # Getting Export Tasks
     #
     # Allows you to enumerate export tasks.
     #
@@ -26,7 +26,7 @@ module AWS
     #
     #   task = ec2.export_tasks['export-task-id']
     #
-    # = Creating Export Tasks
+    # # Creating Export Tasks
     #
     # To create an export task you start with the {Instance}:
     #

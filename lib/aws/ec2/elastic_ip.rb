@@ -47,7 +47,7 @@ module AWS
 
       attribute :instance_id
 
-      ## vpc related attributes
+      # vpc related attributes
 
       attribute :allocation_id, :static => true
 
@@ -85,7 +85,7 @@ module AWS
       end
 
       # @return [NetworkInterface,nil] Returns the network interface this
-      #   elastic ip is associated with.  Returns +nil+ if this is not
+      #   elastic ip is associated with.  Returns `nil` if this is not
       #   associated with an elastic ip address.
       def network_interface
         if nid = network_interface_id
@@ -110,7 +110,7 @@ module AWS
       alias_method :release, :delete
 
       # Associates this elastic IP address with an instance or a network
-      # interface.  You may provide +:instance+ or +:network_interface+
+      # interface.  You may provide `:instance` or `:network_interface`
       # but not both options.
       #
       #   # associate with an instance

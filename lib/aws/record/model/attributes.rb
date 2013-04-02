@@ -148,7 +148,7 @@ module AWS
         #   recipe = Recipe.new(:name => "Buttermilk Pancakes")
         #   recipe.name #=> 'Buttermilk Pancakes'
         #
-        # @example A string attribute with +:set+ set to true
+        # @example A string attribute with `:set` set to true
         #
         #   class Recipe < AWS::Record::Model
         #     string_attr :tags, :set => true
@@ -191,14 +191,14 @@ module AWS
         #   person = Person.new(:age => 10)
         #   person.age #=> 10
         #
-        # === Validations
+        # ### Validations
         #
         # It is recomended to apply a validates_numericality_of with
         # minimum and maximum value constraints.  If a value is assigned
         # to a sortable integer that falls outside of the +:range: it will
         # raise a runtime error when the record is saved.
         #
-        # === Difference Between Sortable an Regular Integer Attributes
+        # ### Difference Between Sortable an Regular Integer Attributes
         #
         # Because SimpleDB does not support numeric types, all values must
         # be converted to strings.  This complicates sorting by numeric values.
@@ -239,7 +239,7 @@ module AWS
         # lexicographically unless they have been offset to be positive and
         # then zero padded.
         #
-        # === Postive Floats
+        # ### Postive Floats
         #
         # To store floats in a sort-friendly manor:
         #
@@ -248,9 +248,9 @@ module AWS
         # This will cause values like 5.5 to persist as a string like '05.5' so
         # that they can be sorted lexicographically.
         #
-        # === Negative Floats
+        # ### Negative Floats
         #
-        # If you need to store negative sortable floats, increase your +:range+
+        # If you need to store negative sortable floats, increase your `:range`
         # to include a negative value.
         #
         #   sortable_float_attr :position, :range => (-10..10)
@@ -259,7 +259,7 @@ module AWS
         # (e.g. -10.0 will be represented as '00.0' and 10 will be represented as
         # '20.0').  This will allow the values to be compared lexicographically.
         #
-        # @note If you change the +:range+ after some values have been persisted
+        # @note If you change the `:range` after some values have been persisted
         #   you must also manually migrate all of the old values to have the
         #   correct padding & offset or they will be interpreted differently.
         #
@@ -314,7 +314,7 @@ module AWS
         #   recipe = Recipe.new(:invented => Time.now)
         #   recipe.invented #=> <DateTime ...>
         #
-        # If you add a datetime_attr for +:created_at+ and/or +:updated_at+ those
+        # If you add a datetime_attr for `:created_at` and/or `:updated_at` those
         # will be automanaged.
         #
         # @param [Symbol] name The name of the attribute.
@@ -352,7 +352,7 @@ module AWS
         end
 
         # A convenience method for adding the standard two datetime attributes
-        # +:created_at+ and +:updated_at+.
+        # `:created_at` and `:updated_at`.
         #
         # @example
         #

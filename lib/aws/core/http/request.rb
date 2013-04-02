@@ -83,13 +83,13 @@ module AWS
         #   60 seconds.
         attr_accessor :read_timeout
 
-        # @return [Boolean] Returns +true+ if this request should be made
+        # @return [Boolean] Returns `true` if this request should be made
         #   with SSL enabled.
         attr_accessor :use_ssl
 
         alias_method :use_ssl?, :use_ssl
 
-        # @return [Boolean] Returns +true+ if the client should verify
+        # @return [Boolean] Returns `true` if the client should verify
         #   the peer certificate.
         attr_accessor :ssl_verify_peer
 

@@ -13,21 +13,21 @@
 
 module AWS
 
-  # = Errors
+  # # Errors
   #
   # There are two basic types of errors:
   #
   # * {ClientError}
   # * {ServerError}
   #
-  # == Client Errors
+  # ## Client Errors
   #
   # Errors in the three and four hundreds are client errors ({ClientError}).
   # A client error should not be resent without changes.  The body of the
   # http response (the error #message) should give more information about
   # the nature of the problem.
   #
-  # == Server Errors
+  # ## Server Errors
   #
   # A 500 level error typically indicates the service is having an issue.
   #

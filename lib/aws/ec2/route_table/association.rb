@@ -22,7 +22,7 @@ module AWS
       # * enumerating associations from a route table
       # * Asking a subnet for its route table association
       #
-      # == Enumerating Associations
+      # ## Enumerating Associations
       #
       # Given a route table:
       #
@@ -34,7 +34,7 @@ module AWS
       #     end
       #   end
       #
-      # == Getting a Subnet Route Table Association
+      # ## Getting a Subnet Route Table Association
       #
       # All subnets are associated with a route table.  If the association
       # was never explicitly created, then they are associated by default
@@ -44,7 +44,7 @@ module AWS
       #
       #   subnet.route_table_association.main? #=> true/false
       #
-      # == Creating and Replacing a Route Table Association
+      # ## Creating and Replacing a Route Table Association
       #
       # To replace a route table association start at the subnet end:
       #
@@ -55,7 +55,7 @@ module AWS
       # If it was previously associated directly to a different route table
       # then that association will be repalced.
       #
-      # == Deleting an Association
+      # ## Deleting an Association
       #
       # You can delete all but the main route table association.  When you
       # delete an association, the subnet becomes associated with the

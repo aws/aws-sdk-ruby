@@ -32,7 +32,7 @@ module AWS
       # Returns a new interface object for this service.  You can override
       # any of the global configuration parameters by passing them in as
       # hash options.  They are merged with AWS.config or merged
-      # with the provided +:config+ object.
+      # with the provided `:config` object.
       #
       #   @ec2 = AWS::EC2.new(:max_retries => 2)
       #

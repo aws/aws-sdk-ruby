@@ -15,7 +15,7 @@ module AWS
   module Core
     module Collection
 
-      # = Collection::WithNextToken
+      # # Collection::WithNextToken
       #
       # When making a request to list elements from one of these
       # collections, the response may return a next token.  This indicates

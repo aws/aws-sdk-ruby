@@ -14,18 +14,18 @@
 module AWS
   class CloudWatch
 
-    # = MetricAlarmCollection
+    # # MetricAlarmCollection
     #
     # Represents all alarms for a single metric.
     #
-    # == Getting an alarm by name
+    # ## Getting an alarm by name
     #
     # If you know the name of the alarm, you can get a reference using
     # the {#[]} method.
     #
     #   metric.alarms['alarm-name']
     #
-    # == Enumerating Alarms
+    # ## Enumerating Alarms
     #
     # You can enumerate all alarms for a metric using each (or any of the
     # methods defined in {Core::Collection}).
@@ -34,7 +34,7 @@ module AWS
     #     puts alarm.name
     #   end
     #
-    # == Filtering Alarms
+    # ## Filtering Alarms
     #
     # Use one of the filtering methods to reduce the number of alarms
     # returned.

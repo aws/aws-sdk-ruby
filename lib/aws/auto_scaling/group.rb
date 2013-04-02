@@ -343,9 +343,9 @@ module AWS
       #   tag hashes to remove. If you pass hashes they should have
       #   the following keys:
       #
-      #   * +:key+
-      #   * +:value+
-      #   * +:propagate_at_launch+
+      #   * `:key`
+      #   * `:value`
+      #   * `:propagate_at_launch`
       #
       # @return [nil]
       #
@@ -366,7 +366,7 @@ module AWS
         nil
       end
 
-      # Deletes the Auto Scaling group.  If you pass +:force+ as true
+      # Deletes the Auto Scaling group.  If you pass `:force` as true
       # then all the instances associated with this group will also
       # be terminated.
       #

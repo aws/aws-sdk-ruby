@@ -31,13 +31,13 @@ module AWS
       #   S3 supports a number of canned ACLs for buckets and
       #   objects.  These include:
       #
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:bucket_owner_read+ (object-only)
-      #   * +:bucket_owner_full_control+ (object-only)
-      #   * +:log_delivery_write+ (bucket-only)
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:bucket_owner_read` (object-only)
+      #   * `:bucket_owner_full_control` (object-only)
+      #   * `:log_delivery_write` (bucket-only)
       #
       #   Here is an example of providing a canned ACL to a bucket:
       #
@@ -48,11 +48,11 @@ module AWS
       #   You can provide a hash of grants.  The hash is composed of grants (keys)
       #   and grantees (values).  Accepted grant keys are:
       #
-      #   * +:grant_read+
-      #   * +:grant_write+
-      #   * +:grant_read_acp+
-      #   * +:grant_write_acp+
-      #   * +:grant_full_control+
+      #   * `:grant_read`
+      #   * `:grant_write`
+      #   * `:grant_read_acp`
+      #   * `:grant_write_acp`
+      #   * `:grant_full_control`
       #
       #   Grantee strings (values) should be formatted like some of the
       #   following examples:
@@ -134,7 +134,7 @@ module AWS
       end
 
       # @param [Hash] acl_hash
-      # @return [Boolean] Retursn +true+ if this hash is a hash of grants.
+      # @return [Boolean] Retursn `true` if this hash is a hash of grants.
       def grant_hash? acl_hash
         grant_keys = [
           :grant_read,
@@ -147,7 +147,7 @@ module AWS
       end
 
       # @param [String] acl_string
-      # @return [Boolean] Returns +true+ if this string is an xml document.
+      # @return [Boolean] Returns `true` if this string is an xml document.
       def xml? acl_string
         begin
           REXML::Document.new(acl_string).has_elements?

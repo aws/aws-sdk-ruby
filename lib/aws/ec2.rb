@@ -18,7 +18,7 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon EC2.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -33,7 +33,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # == Instances
+  # ## Instances
   #
   # EC2 uses instances to run your software.
   #
@@ -51,7 +51,7 @@ module AWS
   #   ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
   #   # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
   #
-  # == Security Groups
+  # ## Security Groups
   #
   # A security group is a named collection of access rules. These access
   # rules specify which ingress (i.e., incoming) network traffic should be
@@ -100,9 +100,9 @@ module AWS
   # You can also use the same parameters from the examples above to
   # {SecurityGroup#revoke_ingress} and {SecurityGroup#disallow_ping}.
   #
-  # You can specify other protocols than +:tcp+, like :udp and :icmp.
+  # You can specify other protocols than `:tcp`, like :udp and :icmp.
   #
-  # == Elastic IPs
+  # ## Elastic IPs
   #
   # You can allocate up to 5 elastic IP addresses for each account.
   # You can associate those elastic IP addresses with EC2 instances:
@@ -125,7 +125,7 @@ module AWS
   #
   #   ec2.select{|ip| !ip.associated? }.each(&:release)
   #
-  # == Key Pairs
+  # ## Key Pairs
   #
   # Public Amazon Machine Image (AMI) instances have no password, and you need a
   # public/private key pair to log in to them. The public key half
@@ -146,7 +146,7 @@ module AWS
   #     f.write(key_pair.private_key)
   #   end
   #
-  # == Filtering and Tagging
+  # ## Filtering and Tagging
   #
   # Any of the collections in the interface may be filtered by a
   # number of different parameters.  For example, to get all the
@@ -164,7 +164,7 @@ module AWS
   #   ec2.images["ami-123"].tags << "myapp"
   #   ec2.images.tagged("myapp")             # will include ami-123
   #
-  # == Regions
+  # ## Regions
   #
   # Amazon has data centers in different areas of the world (e.g.,
   # North America, Europe, Asia, etc.). Correspondingly, EC2 is
@@ -173,13 +173,13 @@ module AWS
   # to specific customers or to meet legal or other
   # requirements. Prices for Amazon EC2 usage vary by Region (for
   # more information about pricing by Region, go to the
-  # {Amazon EC2 Pricing page}[http://aws.amazon.com/ec2/pricing]).
+  # [Amazon EC2 Pricing page](http://aws.amazon.com/ec2/pricing)).
   # You can use the Ruby SDK to see which regions are available for your
   # account:
   #
   #  ec2.regions.map(&:name)            # => ["us-east-1", ...]
   #
-  # The default region is +us-east-1+; you can access other regions
+  # The default region is `us-east-1`; you can access other regions
   # like this:
   #
   #  ec2_us_west = ec2.regions["us-west-1"]
@@ -194,7 +194,7 @@ module AWS
   #  ec2 = AWS::EC2.new(:ec2_endpoint =>
   #                             "ec2.us-west-1.amazonaws.com")
   #
-  # == Availability Zones
+  # ## Availability Zones
   #
   # Each Region contains multiple distinct locations called
   # Availability Zones. Each Availability Zone is engineered to be
@@ -210,7 +210,7 @@ module AWS
   #
   #  ec2.availability_zones.map(&:name)   # => ["us-east-1a", ...]
   #
-  # == Images
+  # ## Images
   #
   # An Amazon Machine Image (AMI) contains all information necessary
   # to boot instances of your software. For example, an AMI might

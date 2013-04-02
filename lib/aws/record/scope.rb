@@ -64,7 +64,7 @@ module AWS
 
       # @overload find(id)
       #   Finds and returns a single record by id.  If no record is found
-      #   with the given +id+, then a RecordNotFound error will be raised.
+      #   with the given `id`, then a RecordNotFound error will be raised.
       #   @param [String] id ID of the record to find.
       #   @return Returns the record.
       #
@@ -178,7 +178,7 @@ module AWS
         raise NotImplementedError
       end
 
-      # Consumes a hash of options (e.g. +:shard+, +:limit) and returns
+      # Consumes a hash of options (e.g. `:shard`, +:limit) and returns
       # a new scope with those applied.
       # @return [Scope]
       # @private

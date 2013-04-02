@@ -25,13 +25,13 @@ module AWS
 
       # Returns an {EC2::Instance} object with 3 extra methods added:
       #
-      # * +#load_balancer+
+      # * `#load_balancer`
       #
-      # * +#remove_from_load_balancer+
+      # * `#remove_from_load_balancer`
       #
-      # * +#elb_health+
+      # * `#elb_health`
       #
-      # See {#health} for more information about what +#elb_health+ returns.
+      # See {#health} for more information about what `#elb_health` returns.
       #
       # @return [EC2::Instance] Return an EC2::Instance object with additional
       #   methods added.
@@ -63,13 +63,13 @@ module AWS
       # Returns an array of instance health descriptions.  Each description
       # is a hash with the following entries:
       #
-      #   * +:instance+ - The {EC2::Instance} being described.
+      #   * `:instance` - The {EC2::Instance} being described.
       #
-      #   * +:description+ - Provides a description of the instance.
+      #   * `:description` - Provides a description of the instance.
       #
-      #   * +:state+ - Specifies the current state of the instance.
+      #   * `:state` - Specifies the current state of the instance.
       #
-      #   * +:reason_code+ - Provides information about the cause of
+      #   * `:reason_code` - Provides information about the cause of
       #     OutOfService instances. Specifically, it indicates whether the
       #     cause is Elastic Load Balancing or the instance behind the
       #     load balancer.
@@ -91,7 +91,7 @@ module AWS
       #   # get the health for a few specific instances
       #   load_balancer.instances.health('i-12345', 'i-67890').each{|h| ... }
       #
-      # == Health for a Single Instance
+      # ## Health for a Single Instance
       #
       # If you want the health of a single instance you can use the {#[]}
       # instead:

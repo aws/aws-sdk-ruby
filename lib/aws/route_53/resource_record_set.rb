@@ -14,14 +14,14 @@
 module AWS
   class Route53
 
-    # = Modify resource record set
+    # # Modify resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
     #   rrset = rrsets['foo.example.com.', 'A']
     #   rrset.ttl = 3600
     #   rrset.update
     #
-    # = Delete existing resource record set
+    # # Delete existing resource record set
     #
     #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
     #   rrset = rrsets['foo.example.com.', 'A']
@@ -137,7 +137,7 @@ module AWS
         }
       end
 
-      # @return [Boolean] Returns +true+ if this rrset exists.
+      # @return [Boolean] Returns `true` if this rrset exists.
       def exists?
         !get_resource.data[:resource_record_sets].find { |details|
           if set_identifier

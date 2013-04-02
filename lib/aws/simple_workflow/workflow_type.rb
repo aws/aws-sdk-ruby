@@ -16,7 +16,7 @@ require 'uuidtools'
 module AWS
   class SimpleWorkflow
 
-    # == Registering a WorkflowType
+    # ## Registering a WorkflowType
     #
     # To register a workflow type you should use the #workflow_types method
     # on the domain:
@@ -25,7 +25,7 @@ module AWS
     #
     # See {WorkflowTypeCollection#register} for a complete list of options.
     #
-    # == Deprecating a workflow type
+    # ## Deprecating a workflow type
     #
     # WorkflowType inherits from the generic {Type} base class.  Defined in
     # {Type} are a few useful methods including:
@@ -46,28 +46,28 @@ module AWS
     #   type, or nil if was not set when it was registered.
     #
     # @attr_reader [Symbol] status The status of this workflow type.  The
-    #   status will either be +:registered+ or +:deprecated+.
+    #   status will either be `:registered` or `:deprecated`.
     #
     # @attr_reader [Symbol,nil] default_child_policy Specifies the default
     #   policy to use for the child workflow executions when a workflow
     #   execution of this type is terminated.  Values may be one of the
     #   following (or nil):
     #
-    #   * +:terminate+ - the child executions will be terminated.
+    #   * `:terminate` - the child executions will be terminated.
     #
-    #   * +:request_cancel+ - a request to cancel will be attempted for each
+    #   * `:request_cancel` - a request to cancel will be attempted for each
     #     child execution by recording a WorkflowExecutionCancelRequested
     #     event in its history. It is up to the decider to take appropriate
     #     actions when it receives an execution history with this event.
     #
-    #   * +:abandon+ - no action will be taken. The child executions will
+    #   * `:abandon` - no action will be taken. The child executions will
     #     continue to run.
     #
     # @attr_reader [Integer,:none,nil] default_execution_start_to_close_timeout
     #   The default maximum duration for executions of this workflow type.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     # @attr_reader [String,nil] default_task_list Specifies
     #   the default task list to use for scheduling decision tasks for
@@ -77,7 +77,7 @@ module AWS
     #   The default maximum duration of decision tasks for this workflow type.
     #
     #   The return value may be an integer (number of seconds), the
-    #   symbol +:none+ (implying no timeout) or +nil+ (not specified).
+    #   symbol `:none` (implying no timeout) or `nil` (not specified).
     #
     class WorkflowType < Type
 
@@ -115,7 +115,7 @@ module AWS
       #   You cannot have two open workflow executions with the same
       #   :workflow_id at the same time.
       #
-      #   If you do not provide +:workflow_id+ a random UUID will be generated.
+      #   If you do not provide `:workflow_id` a random UUID will be generated.
       #
       # @return [WorkflowExecution] Returns the new workflow execution.
       #

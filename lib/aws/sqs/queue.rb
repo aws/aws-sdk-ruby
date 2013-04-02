@@ -33,7 +33,7 @@ module AWS
       DEFAULT_POLL_INTERVAL = 1
 
       # The default number of seconds to pass in as the SQS long polling
-      # value (+:wait_time_seconds+) in {#receive_message}.
+      # value (`:wait_time_seconds`) in {#receive_message}.
       #
       # @since 1.8.0
       DEFAULT_WAIT_TIME_SECONDS = 15
@@ -168,11 +168,11 @@ module AWS
       # @option opts [Array<Symbol, String>] :attributes The
       #   attributes to populate in each received message.  Valid values:
       #
-      #   * +:all+ (to populate all attributes)
-      #   * +:sender_id+
-      #   * +:sent_at+
-      #   * +:receive_count+
-      #   * +:first_received_at+
+      #   * `:all` (to populate all attributes)
+      #   * `:sender_id`
+      #   * `:sent_at`
+      #   * `:receive_count`
+      #   * `:first_received_at`
       #
       #   See {ReceivedMessage} for documentation on each
       #   attribute's meaning.
@@ -224,7 +224,7 @@ module AWS
       #
       # @option opts [Integer] :wait_time_seconds The number of seconds
       #   the service should wait for a response when requesting a new message.
-      #   Defaults to {DEFAULT_WAIT_TIME_SECONDS}. Use +nil+ to
+      #   Defaults to {DEFAULT_WAIT_TIME_SECONDS}. Use `nil` to
       #   use the queue's global long polling wait time setting.
       #   See {#wait_time_seconds} to set the global long poll setting
       #   on the queue.
@@ -237,8 +237,8 @@ module AWS
       # @option opts [Integer] :initial_timeout The maximum number
       #   of seconds to spend polling before the first message is
       #   received.  This option defaults to the value of
-      #   +:idle_timeout+.  You can specify +false+ to poll
-      #   indefinitely for the first message when +:idle_timeout+ is
+      #   `:idle_timeout`.  You can specify `false` to poll
+      #   indefinitely for the first message when `:idle_timeout` is
       #   set.
       #
       # @option opts [Integer] :batch_size The maximum number of
@@ -254,18 +254,18 @@ module AWS
       # @option opts [Array<Symbol, String>] :attributes The
       #   attributes to populate in each received message.  Valid values:
       #
-      #   * +:all+ (to populate all attributes)
-      #   * +:sender_id+
-      #   * +:sent_at+
-      #   * +:receive_count+
-      #   * +:first_received_at+
+      #   * `:all` (to populate all attributes)
+      #   * `:sender_id`
+      #   * `:sent_at`
+      #   * `:receive_count`
+      #   * `:first_received_at`
       #
       #   See {ReceivedMessage} for documentation on each
       #   attribute's meaning.
       #
       # @option opts [Float, Integer] :poll_interval As of
       #   v1.7.2, this option is no longer used. See the
-      #   +:wait_time_seconds+ option for long polling instead.
+      #   `:wait_time_seconds` option for long polling instead.
       #
       # @return [nil]
       def poll(opts = {}, &block)
@@ -293,7 +293,7 @@ module AWS
 
       # @return [Integer] The approximate number of visible messages
       #   in a queue.  For more information, see
-      #   {Resources Required to Process Messages}[http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber]
+      #   [Resources Required to Process Messages](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
       #   in the Amazon SQS Developer Guide.
       def approximate_number_of_messages
         get_attribute("ApproximateNumberOfMessages").to_i
@@ -302,7 +302,7 @@ module AWS
 
       # @return [Integer] The approximate number of messages that
       #   are not timed-out and not deleted.  For more information,
-      #   see {Resources Required to Process Messages}[http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber]
+      #   see [Resources Required to Process Messages](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
       #   in the Amazon SQS Developer Guide.
       def approximate_number_of_messages_not_visible
         get_attribute("ApproximateNumberOfMessagesNotVisible").to_i
@@ -311,7 +311,7 @@ module AWS
 
       # @return [Integer] Returns the visibility timeout for the
       #   queue. For more information about visibility timeout, see
-      #   {Visibility Timeout}[http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT]
+      #   [Visibility Timeout](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT)
       #   in the Amazon SQS Developer Guide.
       def visibility_timeout
         get_attribute("VisibilityTimeout").to_i
@@ -445,7 +445,7 @@ module AWS
       end
 
       # @return [Policy] Returns the current queue policy if there is one.
-      #   Returns +nil+ otherwise.
+      #   Returns `nil` otherwise.
       def policy
         if policy_json = get_attribute('Policy')
           policy = SQS::Policy.from_json(policy_json)
@@ -497,8 +497,8 @@ module AWS
       #   queue.batch_send(messages)
       #
       # @param [String,Hash] messages A list of messages.  Each message
-      #   should be a string, or a hash with a +:message_body+,
-      #   and optionally +:delay_seconds+.
+      #   should be a string, or a hash with a `:message_body`,
+      #   and optionally `:delay_seconds`.
       #
       # @raise [Errors::BatchSendError] Raises this error when one or more
       #   of the messages failed to send, but others did.  On the raised
@@ -575,7 +575,7 @@ module AWS
 
       # @overload batch_change_visibility(visibility_timeout, *messages)
       #
-      #   Accepts a single +:visibility_timeout+ value and a list of
+      #   Accepts a single `:visibility_timeout` value and a list of
       #   messages ({ReceivedMessage} objects or receipt handle strings).
       #   This form of the method is useful when you want to set the same
       #   timeout value for each message.
@@ -607,8 +607,8 @@ module AWS
       #
       #     queue.batch_change_visibility(*messages)
       #
-      #   @param [Hash] message A list hashes, each with a +:visibility_timeout+
-      #     and a +:message+.
+      #   @param [Hash] message A list hashes, each with a `:visibility_timeout`
+      #     and a `:message`.
       #
       #   @raise [BatchChangeVisibilityError] Raises this error when one
       #     or more of the messages failed the visibility update.

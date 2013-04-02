@@ -38,8 +38,8 @@ class Net::HTTP::ConnectionPool
   # @option options [Numeric] :http_open_timeout (15) The number of seconds to
   #   wait when opening a http session before raising a timeout exception.
   #
-  # @option options [Boolean] :http_wire_trace (false) When +true+, HTTP
-  #   debug output will be sent to the +:logger+.
+  # @option options [Boolean] :http_wire_trace (false) When `true`, HTTP
+  #   debug output will be sent to the `:logger`.
   #
   # @option options [Logger] :logger (Logger.new($stdout)) Where debug out
   #   is sent (wire traces).
@@ -63,7 +63,7 @@ class Net::HTTP::ConnectionPool
   # @return [Integer]
   attr_accessor :open_timeout
 
-  # @return [Boolean] Returns +true+ when HTTP debug output (wire traces)
+  # @return [Boolean] Returns `true` when HTTP debug output (wire traces)
   #   will be logged.
   attr_reader :http_wire_trace
 
@@ -95,11 +95,11 @@ class Net::HTTP::ConnectionPool
   # @param [Hash] options
   #
   # @option options [Integer] :port Which port the connection should use.
-  #   Defaults to 80, unless +:ssl+ is +true+, then it defaults to 443.
+  #   Defaults to 80, unless `:ssl` is `true`, then it defaults to 443.
   #
   # @option options [Boolean] :ssl If the connection should be made over
-  #   SSL.  Defaults to +false+, unless +:port+ is 443, then it defaults
-  #   to +true+.
+  #   SSL.  Defaults to `false`, unless `:port` is 443, then it defaults
+  #   to `true`.
   #
   # @option options [Boolean] :ssl_verify_peer (true) If true, ssl
   #   connections should verify peer certificates.  This should only ever be
@@ -107,17 +107,17 @@ class Net::HTTP::ConnectionPool
   #
   # @option options [String] :ssl_ca_file Full path to the SSL certificate
   #   authority bundle file that should be used when verifying peer
-  #   certificates.  If you do not pass +:ssl_ca_file+ or +:ssl_ca_path+
+  #   certificates.  If you do not pass `:ssl_ca_file` or `:ssl_ca_path`
   #   the the system default will be used if available.
   #
   # @option options [String] :ssl_ca_path Full path of the directory that
   #   contains the unbundled SSL certificate authority files for verifying
-  #   peer certificates.  If you do not pass +:ssl_ca_file+ or +:ssl_ca_path+
+  #   peer certificates.  If you do not pass `:ssl_ca_file` or `:ssl_ca_path`
   #   the the system default will be used if available.
   #
   # @option options [URI::HTTP,String] :proxy_uri (nil) A URI string or
   #   URI::HTTP object to use as a proxy.  You should not provide
-  #   +:proxy_uri+ with any other proxy options.
+  #   `:proxy_uri` with any other proxy options.
   #
   #     :proxy_uri => 'http://user:pass@host.com:80'
   #

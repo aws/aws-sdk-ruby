@@ -22,7 +22,7 @@ module AWS
   #     :access_key_id => '...',
   #     :secret_access_key => '...')
   #
-  # = Tables
+  # # Tables
   #
   # Tables contain items, and organize information into discrete
   # areas. All items in the table have the same primary key
@@ -41,7 +41,7 @@ module AWS
   # See {Table} and {TableCollection} for more information on creating
   # and managing tables.
   #
-  # = Items and Attributes
+  # # Items and Attributes
   #
   # An item is a collection of one or more attributes, where each
   # attribute has a string name and a string, number, string set or
@@ -61,7 +61,7 @@ module AWS
   # and managing items.  For more information on managing attributes,
   # see {AttributeCollection}.
   #
-  # = Examples
+  # # Examples
   #
   #   # create a table (10 read and 5 write capacity units) with the
   #   # default schema (id string hash key)
@@ -141,7 +141,7 @@ module AWS
     # the table name (as a string) and a hash of attributes.  The
     # enumerable yields once per item received in the batch get.
     #
-    # == Configuring the batch
+    # ## Configuring the batch
     #
     # You can call two methods on the yielded batch object:
     #

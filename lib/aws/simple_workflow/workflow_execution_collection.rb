@@ -22,7 +22,7 @@ module AWS
     #     # ...
     #   end
     #
-    # == Filtering Executions
+    # ## Filtering Executions
     #
     # By default, all open workflow executions are enumerated.
     #
@@ -62,8 +62,8 @@ module AWS
       # @return [Domain] Returns the domain this execution was started in.
       attr_reader :domain
 
-      # Returns the workflow execution with the given +workflow_id+ and
-      # +run_id+.
+      # Returns the workflow execution with the given `workflow_id` and
+      # `run_id`.
       #
       #   # get a reference to a single workflow execution
       #   domain.workflow_executions['workflow-id', 'run-id']
@@ -99,7 +99,7 @@ module AWS
       # @option options [String] :run_id (nil) The run id of the workflow
       #   execution to signal.
       #
-      #   If +:run_id+ is not specified, then the WorkflowExecutionSignaled
+      #   If `:run_id` is not specified, then the WorkflowExecutionSignaled
       #   event is recorded in the history of the current open workflow
       #   with the matching workflow_id in the domain.
       #
@@ -119,10 +119,10 @@ module AWS
       # It is up to the decider to take appropriate actions when it receives
       # an execution history with this event.
       #
-      # @note If the +:run_id+ is not specified, the
+      # @note If the `:run_id` is not specified, the
       #   WorkflowExecutionCancelRequested event is recorded in the history
       #   of the current open workflow execution with the specified
-      #   +workflow_id+ in the domain.
+      #   `workflow_id` in the domain.
       #
       # @note Because this action allows the workflow to properly clean up
       #   and gracefully close, it should be used instead of {#terminate}
@@ -153,7 +153,7 @@ module AWS
       # @note If the workflow execution was in progress, it is terminated
       #   immediately.
       #
-      # @note If a +:run_id+ is not specified, then the
+      # @note If a `:run_id` is not specified, then the
       #   WorkflowExecutionTerminated event is recorded in the history of
       #   the current open workflow with the matching workflowId in the
       #   domain.
@@ -171,14 +171,14 @@ module AWS
       #   executions of the workflow execution being terminated. This
       #   policy overrides the default child policy.  Valid policies include:
       #
-      #   * +:terminate+ - the child executions will be terminated.
+      #   * `:terminate` - the child executions will be terminated.
       #
-      #   * +:request_cancel+ - a request to cancel will be attempted for each
+      #   * `:request_cancel` - a request to cancel will be attempted for each
       #     child execution by recording a WorkflowExecutionCancelRequested
       #     event in its history. It is up to the decider to take appropriate
       #     actions when it receives an execution history with this event.
       #
-      #   * +:abandon+ - no action will be taken. The child executions will
+      #   * `:abandon` - no action will be taken. The child executions will
       #     continue to run.
       #
       # @option options [String] :details Optional details for
@@ -188,7 +188,7 @@ module AWS
       #   reason for terminating the workflow execution.
       #
       # @option options [String] :run_id The run id of the workflow
-      #   execution to terminate. If a +:run_id+ is not provided, then a
+      #   execution to terminate. If a `:run_id` is not provided, then a
       #   WorkflowExecutionTerminated event is recorded in the history of
       #   the current open workflow with the matching workflow id in the
       #   domain.
@@ -206,18 +206,18 @@ module AWS
       # @param [Symbol] status Causes the returned collection to filter
       #   executions by the given status. Accepted statuses include:
       #
-      #   * +:open+
-      #   * +:closed+
-      #   * +:completed+
-      #   * +:failed+
-      #   * +:canceled+
-      #   * +:terminated+
-      #   * +:continued+
-      #   * +:timed_out+
+      #   * `:open`
+      #   * `:closed`
+      #   * `:completed`
+      #   * `:failed`
+      #   * `:canceled`
+      #   * `:terminated`
+      #   * `:continued`
+      #   * `:timed_out`
       #
-      #   If +:status+ is anything besides +:open+ or +:closed+ then
-      #   it may not be used in combination with +workflow_id+,
-      #   +workflow_type+ or +tagged+.
+      #   If `:status` is anything besides `:open` or `:closed` then
+      #   it may not be used in combination with `workflow_id`,
+      #   `workflow_type` or `tagged`.
       #
       # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions of the given
@@ -231,18 +231,18 @@ module AWS
       #
       # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that have
-      #   the given +workflow_id+.
+      #   the given `workflow_id`.
       #
       def with_workflow_id workflow_id
         collection_with(:workflow_id => workflow_id)
       end
 
       # @param [WorkflowType,Hash] workflow_type Should be a {WorkflowType}
-      #   object or a hash with +:name+ and +:version+ keys.
+      #   object or a hash with `:name` and `:version` keys.
       #
       # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that have
-      #   the given +workflow_type+.
+      #   the given `workflow_type`.
       #
       def with_workflow_type workflow_type
         collection_with(:workflow_type => workflow_type)
@@ -252,7 +252,7 @@ module AWS
       #
       # @return [WorkflowExecutionCollection] Returns a collection
       #   that will only enumerate or count executions that have
-      #   the given +tag+.
+      #   the given `tag`.
       #
       def tagged tag
         collection_with(:tagged => tag)
@@ -397,8 +397,8 @@ module AWS
       #   puts(count.truncated? ? "#{count.to_i}+" : count.to_i)
       #
       # @note You may only pass one of the following options:
-      #   +:workflow_id+, +:workflow_type+, +:tagged+ or
-      #   +:status+ with a "closed" value (+:status+ with +:open+ is okay).
+      #   `:workflow_id`, `:workflow_type`, `:tagged` or
+      #   `:status` with a "closed" value (`:status` with `:open` is okay).
       #
       # @note This operation is eventually consistent. The results are best
       #   effort and may not exactly reflect recent updates and changes.
@@ -407,49 +407,49 @@ module AWS
       #
       # @option options [Symbol] :status Filters workflow executions by the
       #   given status.  If status is not provided then it defaults to
-      #   +:open+ unless you pass +:closed_between+ (then it defaults to
-      #   +:closed+).
+      #   `:open` unless you pass `:closed_between` (then it defaults to
+      #   `:closed`).
       #
-      #   If +:status+ is anything besides +:open+ or +:closed+ then
-      #   it may not be passed with +:workflow_id+, +:workflow_type+ or
-      #   +:tagged+.
+      #   If `:status` is anything besides `:open` or `:closed` then
+      #   it may not be passed with `:workflow_id`, `:workflow_type` or
+      #   `:tagged`.
       #
-      #   Accepted values for +:status+ include:
+      #   Accepted values for `:status` include:
       #
-      #   * +:open+
-      #   * +:closed+
-      #   * +:completed+
-      #   * +:failed+
-      #   * +:canceled+
-      #   * +:terminated+
-      #   * +:continued+
-      #   * +:timed_out+
+      #   * `:open`
+      #   * `:closed`
+      #   * `:completed`
+      #   * `:failed`
+      #   * `:canceled`
+      #   * `:terminated`
+      #   * `:continued`
+      #   * `:timed_out`
       #
       # @option options [Time] :started_after Filters workflow executions
       #   down to those started after the given time.
       #
-      #   You may pass +:started_after+ with +:started_before+, but not with
-      #   +:closed_after+ or +:closed_before+.
+      #   You may pass `:started_after` with `:started_before`, but not with
+      #   `:closed_after` or `:closed_before`.
       #
       # @option options [Time] :started_before Filters workflow executions
       #   down to those started before the given time.
       #
-      #   You may pass +:started_after+ with +:started_before+, but not with
-      #   +:closed_after+ or +:closed_before+.
+      #   You may pass `:started_after` with `:started_before`, but not with
+      #   `:closed_after` or `:closed_before`.
       #
       # @option options [Time] :closed_after Filters workflow executions
       #   to those closed after the given time.
       #
-      #   * You may pass +:closed_after+ with +:closed_before+, but not with
-      #     +:started_after+ or +:started_before+.
+      #   * You may pass `:closed_after` with `:closed_before`, but not with
+      #     `:started_after` or `:started_before`.
       #
       #   * This option is invalid when counting or listing open executions.
       #
       # @option options [Time] :closed_before Filters workflow executions
       #   to those closed before the given time.
       #
-      #   * You may pass +:closed_after+ with +:closed_before+, but not with
-      #     +:started_after+ or +:started_before+.
+      #   * You may pass `:closed_after` with `:closed_before`, but not with
+      #     `:started_after` or `:started_before`.
       #
       #   * This option is invalid when counting or listing open executions.
       #
@@ -461,8 +461,8 @@ module AWS
       #
       # @option options [WorkflowType,Hash] :workflow_type (nil)
       #   Filters workflow executions with the given workflow type.
-      #   +:workflow_type+ can be a {WorkflowType} object or a hash with
-      #   a workflow type +:name+ and +:version+.
+      #   `:workflow_type` can be a {WorkflowType} object or a hash with
+      #   a workflow type `:name` and `:version`.
       #
       # @return [Count] Returns a possibly truncated count of
       #   workflow executions.
@@ -482,7 +482,7 @@ module AWS
       # @option (see #count)
       # @option (see Core::Collection#each)
       # @option options [Boolean] :reverse_order Enumerates the workflow
-      #   execution in reverse chronological order if +true+.  The date
+      #   execution in reverse chronological order if `true`.  The date
       #   used will be the execution start time unless filtering by
       #   closed before/after (then it will sort by the closed time).
       # @return (see Core::Collection#each)

@@ -127,7 +127,7 @@ module AWS
       #
       # @option options [Integer] :timeout The number of minutes
       #   that may pass before the stack creation fails.  If
-      #   +:disable_rollback+ is false, the stack will be rolled back.
+      #   `:disable_rollback` is false, the stack will be rolled back.
       #
       # @return [Stack]
       #
@@ -161,22 +161,22 @@ module AWS
       #
       # @param [Symbol,String] status_filter A status to filter stacks with.
       #   Valid values include:
-      #   * +:create_in_progress+
-      #   * +:create_failed+
-      #   * +:create_complete+
-      #   * +:rollback_in_progress+
-      #   * +:rollback_failed+
-      #   * +:rollback_complete+
-      #   * +:delete_in_progress+
-      #   * +:delete_failed+
-      #   * +:delete_complete+
-      #   * +:update_in_progress+
-      #   * +:update_complete_cleanup_in_progress+
-      #   * +:update_complete+
-      #   * +:update_rollback_in_progress+
-      #   * +:update_rollback_failed+
-      #   * +:update_rollback_complete_cleanup_in_progress+
-      #   * +:update_rollback_complete+
+      #   * `:create_in_progress`
+      #   * `:create_failed`
+      #   * `:create_complete`
+      #   * `:rollback_in_progress`
+      #   * `:rollback_failed`
+      #   * `:rollback_complete`
+      #   * `:delete_in_progress`
+      #   * `:delete_failed`
+      #   * `:delete_complete`
+      #   * `:update_in_progress`
+      #   * `:update_complete_cleanup_in_progress`
+      #   * `:update_complete`
+      #   * `:update_rollback_in_progress`
+      #   * `:update_rollback_failed`
+      #   * `:update_rollback_complete_cleanup_in_progress`
+      #   * `:update_rollback_complete`
       #
       # @return [StackCollection] Returns a new stack collection that
       #   filters the stacks returned by the given status.

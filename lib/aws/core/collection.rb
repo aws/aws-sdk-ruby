@@ -27,7 +27,7 @@ module AWS
       #   collection.each {|item| ... }
       #
       # @note If you want fewer than all items, it is generally better
-      #   to call {#page} than {#each} with a +:limit+.
+      #   to call {#page} than {#each} with a `:limit`.
       #
       # @param [Hash] options
       #
@@ -35,13 +35,13 @@ module AWS
       #   items to enumerate from this collection.
       #
       # @option options [next_token] :next_token (nil)
-      #   Acts as an offset.  +:next_token+ may be returned by {#each} and
-      #   {#each_batch} when a +:limit+ is provided.
+      #   Acts as an offset.  `:next_token` may be returned by {#each} and
+      #   {#each_batch} when a `:limit` is provided.
       #
       # @return [nil_or_next_token] Returns nil if all items were enumerated.
-      #   If some items were excluded because of a +:limit+ option then
-      #   a +next_token+ is returned.  Calling an enumerable method on
-      #   the same collection with the +next_token+ acts like an offset.
+      #   If some items were excluded because of a `:limit` option then
+      #   a `next_token` is returned.  Calling an enumerable method on
+      #   the same collection with the `next_token` acts like an offset.
       #
       def each options = {}, &block
         each_batch(options) do |batch|
@@ -57,7 +57,7 @@ module AWS
       #     end
       #   end
       #
-      # == Variable Batch Sizes
+      # ## Variable Batch Sizes
       #
       # Each AWS service has its own rules on how it returns results.
       # Because of this batch size may very based on:
@@ -158,7 +158,7 @@ module AWS
       #
       # If you need to display a "next page" link in a web view you can
       # use the #more? method.  Just make sure the generated link
-      # contains the +next_token+.
+      # contains the `next_token`.
       #
       #   <% if items.more? %>
       #     <%= link_to('Next Page', params.merge(:next_token => items.next_token) %>
@@ -172,7 +172,7 @@ module AWS
       #
       #   more_items = items.next_page
       #
-      # @note This method does not accept a +:page+ option, which means you
+      # @note This method does not accept a `:page` option, which means you
       #   can only start at the begining of the collection and request
       #   the next page of results.  You can not choose an offset
       #   or know how many pages of results there will be.
@@ -251,7 +251,7 @@ module AWS
       # The collection class including this module should define _limit
       # and return the cached limit value (of 10 from this example).
       # This value may still be overridden by a locally passed
-      # +:limit+ option:
+      # `:limit` option:
       #
       #   # limit 5 wins out
       #   collection.limit(10).each(:limit => 5) {|item| ... }

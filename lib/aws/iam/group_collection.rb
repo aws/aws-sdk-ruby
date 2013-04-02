@@ -20,19 +20,19 @@ module AWS
     #   iam = AWS::IAM.new
     #   groups = iam.groups
     #
-    # == Creating a Group
+    # ## Creating a Group
     #
     # You can create a group using the {#create} method:
     #
     #   group = iam.groups.create("Developers")
     #
-    # == Getting a Group by Name
+    # ## Getting a Group by Name
     #
     # You can get a reference to a server certificate using array notation:
     #
     #   group = iam.groups["Developers"]
     #
-    # == Enumerating Groups
+    # ## Enumerating Groups
     #
     # Group collections can also be used to enumerate groups:
     #
@@ -40,7 +40,7 @@ module AWS
     #     puts group.name
     #   end
     #
-    # You can limit the groups returned by passing a +:prefix+ option
+    # You can limit the groups returned by passing a `:prefix` option
     # to any of the enumerator methods.  When you pass a prefix, only
     # the certificates whose paths start with the given string will be
     # returned.
@@ -69,8 +69,8 @@ module AWS
 
       # Yields once for each group.
       #
-      # You can limit the number of groups yielded using +:limit+ and
-      # +:path_prefix+.
+      # You can limit the number of groups yielded using `:limit` and
+      # `:path_prefix`.
       #
       # @param [Hash] options
       #
@@ -91,7 +91,7 @@ module AWS
 
       # Returns an enumerable object for this collection.  This can be
       # useful if you want to call an enumerable method that does
-      # not accept options (e.g. +collect+, +first+, etc).
+      # not accept options (e.g. `collect`, `first`, etc).
       #
       #   groups.enumerator(:path_prefix => '/admin').collect(&:name)
       #

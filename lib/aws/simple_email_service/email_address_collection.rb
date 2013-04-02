@@ -23,8 +23,8 @@ module AWS
       include Enumerable
 
       # Requests for an email address to be verified.  An email will be
-      # sent to the given +email_address+ with a link to click.  Once
-      # the link has been followed the +email_address+ will be verified.
+      # sent to the given `email_address` with a link to click.  Once
+      # the link has been followed the `email_address` will be verified.
       #
       # @param [String] email_address The email address to verify.
       # @return [nil]

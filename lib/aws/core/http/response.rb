@@ -36,7 +36,7 @@ module AWS
         # @return [Exception,nil]
         attr_accessor :network_error
 
-        # @return [Boolean] Returns +true+ if the request could not be made
+        # @return [Boolean] Returns `true` if the request could not be made
         #   because of a networking issue (including timeouts).
         def network_error?
           @network_error ? true : false

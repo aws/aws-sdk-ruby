@@ -50,11 +50,11 @@ module AWS
       # @param [String] prefix The prefix condition that limits what objects
       #   are returned by this collection.
       # @param [Symbol] mode (:replace) If you chain calls to #with_prefix
-      #   the +mode+ affects if the prefix prepends, appends, or replaces.
+      #   the `mode` affects if the prefix prepends, appends, or replaces.
       #   Valid modes are:
-      #   * +:replace+
-      #   * +:append+
-      #   * +:prepend+
+      #   * `:replace`
+      #   * `:append`
+      #   * `:prepend`
       # @return [Collection] Returns a new collection with a modified prefix.
       def with_prefix prefix, mode = :replace
         new_prefix = case mode

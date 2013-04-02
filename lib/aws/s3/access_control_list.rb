@@ -80,9 +80,9 @@ module AWS
       # When constructing a grantee, you must provide a value for
       # exactly one of the following attributes:
       #
-      # * +amazon_customer_email+
-      # * +canonical_user_id+
-      # * +group_uri+
+      # * `amazon_customer_email`
+      # * `canonical_user_id`
+      # * `group_uri`
       #
       # @attr [String] amazon_customer_email The e-mail address of
       #   an AWS customer.
@@ -156,7 +156,7 @@ module AWS
 
         # The permission expressed as a symbol following Ruby
         # conventions.  For example, S3's FULL_CONTROL permission
-        # will be returned as +:full_control+.
+        # will be returned as `:full_control`.
         attr_reader :name
 
         # @private
@@ -172,8 +172,8 @@ module AWS
 
       end
 
-      # Represents a single grant in an ACL.  Both +grantee+ and
-      # +permission+ are required for each grant when setting an
+      # Represents a single grant in an ACL.  Both `grantee` and
+      # `permission` are required for each grant when setting an
       # ACL.
       #
       # See
@@ -188,11 +188,11 @@ module AWS
       #
       # @attr [Permission or Symbol] permission The type of
       #   permission that is granted by this grant.  Valid values are:
-      #   * +:read+
-      #   * +:write+
-      #   * +:read_acp+
-      #   * +:write_acp+
-      #   * +:full_control+
+      #   * `:read`
+      #   * `:write`
+      #   * `:read_acp`
+      #   * `:write_acp`
+      #   * `:full_control`
       class Grant
 
         include ACLObject

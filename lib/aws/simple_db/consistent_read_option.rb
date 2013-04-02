@@ -21,7 +21,7 @@ module AWS
       #
       # Precedence is given to:
       #
-      # * +:consistent_read+ option
+      # * `:consistent_read` option
       # * SimpleDB.consistent_reads block value
       # * AWS.config.simple_db_consistent_reads?
       #

@@ -15,7 +15,7 @@ module AWS
   module Core
     module Collection
 
-      # = Collection::WithLimitAndNextToken
+      # # Collection::WithLimitAndNextToken
       #
       # This module is used by collections where the service may truncate
       # responses but that also accept a upper limit of results to

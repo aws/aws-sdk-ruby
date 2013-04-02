@@ -340,36 +340,36 @@ module AWS
       #   or collection of attribute names; if the item already exists
       #   and has a value for any of these attributes, this method
       #   will raise
-      #   +DynamoDB::Errors::ConditionalCheckFailedException+.  For example:
+      #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For example:
       #
       #     item.attributes.update(:unless_exists => :color) do |u|
       #       # ...
       #     end
       #
-      # @option options [Symbol] :return (+:none+) Changes the return
+      # @option options [Symbol] :return (`:none`) Changes the return
       #   value of the method.  Valid values:
       #
-      #   [+:none+] Return +nil+
+      #   [`:none`] Return `nil`
       #
-      #   [+:all_old+] Returns a hash containing all of the original
+      #   [`:all_old`] Returns a hash containing all of the original
       #                values of the attributes before the update, or
-      #                +nil+ if the item did not exist at the time of
+      #                `nil` if the item did not exist at the time of
       #                the update.
       #
-      #   [+:updated_old+] Returns a hash containing the original
+      #   [`:updated_old`] Returns a hash containing the original
       #                    values of the attributes that were modified
       #                    as part of this operation.  This includes
       #                    attributes that were deleted, and
       #                    set-valued attributes whose member values
       #                    were deleted.
       #
-      #   [+:updated_new+] Returns a hash containing the new values of
+      #   [`:updated_new`] Returns a hash containing the new values of
       #                    the attributes that were modified as part
       #                    of this operation.  This includes
       #                    set-valued attributes whose member values
       #                    were deleted.
       #
-      #   [+:all_new+] Returns a hash containing the new values of all
+      #   [`:all_new`] Returns a hash containing the new values of all
       #                of the attributes.
       #
       # @yieldparam [UpdateBuilder] builder A handle for describing
@@ -379,7 +379,7 @@ module AWS
       #   single operation.  This method will raise an ArgumentError
       #   if multiple updates are described for a single attribute.
       #
-      # @return [nil] See the documentation for the +:return+ option
+      # @return [nil] See the documentation for the `:return` option
       #   above.
       def update(options = {})
         builder = UpdateBuilder.new
@@ -393,7 +393,7 @@ module AWS
       # @param [Array<String, Symbol>] attributes The names of the
       #   attributes to retrieve.  The last argument may be a hash of
       #   options for retrieving attributes from the item.  Currently
-      #   the only supported option is +:consistent_read+; If set to
+      #   the only supported option is `:consistent_read`; If set to
       #   true, then a consistent read is issued, otherwise an
       #   eventually consistent read is used.
       #
@@ -401,7 +401,7 @@ module AWS
       #   value of the attribute at that index in the argument list.
       #   Values may be Strings, BigDecimals, Sets of Strings or Sets
       #   or BigDecimals.  If a requested attribute does not exist,
-      #   the corresponding member of the output array will be +nil+.
+      #   the corresponding member of the output array will be `nil`.
       def values_at(*attributes)
         options = {}
         options = attributes.pop if attributes.last.kind_of?(Hash)

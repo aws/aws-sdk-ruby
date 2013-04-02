@@ -28,7 +28,7 @@ module AWS
       # @param [String,Symbol] attribute_name The name of the attribute to retnr
       #   errors for.  You can pass the string or symbol version.
       # @return [Array<String>] Returns the error messages for the given
-      #   +attribute_name+.  If there are no errors on the attribute then
+      #   `attribute_name`.  If there are no errors on the attribute then
       #   an empty array is returned.
       def [] attribute_name
         super(attribute_name) || []
@@ -41,8 +41,8 @@ module AWS
       #   errors.on(:name)
       #   #=> ['may not be blank']
       #
-      # If you want to add a general error message, then pass +:base+
-      # for +attribute_name+, or call {#add_to_base}.
+      # If you want to add a general error message, then pass `:base`
+      # for `attribute_name`, or call {#add_to_base}.
       # @param [String,Symbol] attribute_name The name of the attribute
       #   that you are adding an error to.
       # @param [String] message ('is invalid') The error message (should

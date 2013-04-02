@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Auto Scaling.
   #
   # To use Auto Scaling you must first
-  # {sign up here}[http://aws.amazon.com/autoscaling/].
+  # [sign up here](http://aws.amazon.com/autoscaling/).
   #
   # For more information about Auto Scaling:
   #
-  # * {Auto Scaling}[http://aws.amazon.com/autoscaling/]
-  # * {Auto Scaling Documentation}[http://aws.amazon.com/documentation/autoscaling/]
+  # * [Auto Scaling](http://aws.amazon.com/autoscaling/)
+  # * [Auto Scaling Documentation](http://aws.amazon.com/documentation/autoscaling/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Launch Configurations
+  # # Launch Configurations
   #
   # You need to create a launch configuration before you can create
   # an Auto Scaling Group.
@@ -55,7 +55,7 @@ module AWS
   #
   #   launch_config = auto_scaling.launch_configurations['launch-config-name']
   #
-  # = Auto Scaling Groups
+  # # Auto Scaling Groups
   #
   # Given a launch configuration, you can now create an Auto Scaling {Group}.
   #

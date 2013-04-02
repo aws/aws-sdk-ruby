@@ -54,19 +54,19 @@ module AWS
       # @option options [Symbol] :health_check_type
       #   The service you want the health status from,
       #   Amazon EC2 or Elastic Load Balancer. Valid values are
-      #   +:ec2+ or +:elb+.
+      #   `:ec2` or `:elb`.
       #
       # @option options [String] :placement_group
       #   Physical location of your cluster placement group created in
       #   Amazon EC2. For more information about cluster placement group, see
-      #   {Using Cluster Instances}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html].
+      #   [Using Cluster Instances](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html).
       #
       # @option options [Array<Hash>] :tags A list of tags to apply launched
       #   instances.  Each tag hash may have the following keys:
       #
-      #   * +:key+ - (required,String) The tag name.
-      #   * +:value+ - (String) The optional tag value.
-      #   * +:propagate_at_launch+ - (Boolean) Whether or not to propagate
+      #   * `:key` - (required,String) The tag name.
+      #   * `:value` - (String) The optional tag value.
+      #   * `:propagate_at_launch` - (Boolean) Whether or not to propagate
       #     to instances, defaults to true.
       #
       # @option options [Array<EC2::Subnet>,Array<String>] :subnets

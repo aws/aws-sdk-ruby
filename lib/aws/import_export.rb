@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with AWS Import/Export.
   #
   # To use AWS Import/Export you must first
-  # {sign up here}[http://aws.amazon.com/importexport/].
+  # [sign up here](http://aws.amazon.com/importexport/).
   #
   # For more information about AWS Import/Export:
   #
-  # * {AWS Import/Export}[http://aws.amazon.com/importexport/]
-  # * {AWS Import/Export Documentation}[http://aws.amazon.com/documentation/importexport/]
+  # * [AWS Import/Export](http://aws.amazon.com/importexport/)
+  # * [AWS Import/Export Documentation](http://aws.amazon.com/documentation/importexport/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::ImportExport does not provide higher level abstractions for Import/Export at
   # this time.  You can still access all of the API methods using

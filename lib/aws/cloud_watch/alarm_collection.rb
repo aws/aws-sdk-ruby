@@ -14,11 +14,11 @@
 module AWS
   class CloudWatch
 
-    # = AlarmCollection
+    # # AlarmCollection
     #
     # Represents alarms for an AWS account.
     #
-    # == Getting an alarm by name
+    # ## Getting an alarm by name
     #
     # If you know the name of the alarm, you can get a reference using
     # the {#[]} method.
@@ -26,7 +26,7 @@ module AWS
     #   cw = AWS::CloudWatch.new
     #   alarm = cw.alarms['alarm-name']
     #
-    # == Enumerating Alarms
+    # ## Enumerating Alarms
     #
     # You can enumerate all alarms using each (or any of the
     # methods defined in {Core::Collection}).
@@ -35,7 +35,7 @@ module AWS
     #     puts alarm.name
     #   end
     #
-    # == Filtering Alarms
+    # ## Filtering Alarms
     #
     # Use one of the filtering methods to reduce the number of alarms
     # returned.
@@ -68,7 +68,7 @@ module AWS
       #   alarm's associated metric.
       # @option options [Array<Hash>] :dimensions The dimensions for the
       #   alarm's associated metric.  Each dimension must specify a
-      #   +:name+ and a +:value+.
+      #   `:name` and a `:value`.
       # @option (see Alarm#update)
       # @return [Alarm]
       def create alarm_name, options = {}

@@ -19,14 +19,14 @@ module AWS
   # Provides an expressive, object-oriented interface to Amazon S3.
   #
   # To use Amazon S3 you must first
-  # {sign up here}[http://aws.amazon.com/s3/].
+  # [sign up here](http://aws.amazon.com/s3/).
   #
   # For more information about Amazon S3, see:
   #
-  # * {Amazon S3}[http://aws.amazon.com/s3/]
-  # * {Amazon S3 Documentation}[http://aws.amazon.com/documentation/s3/]
+  # * [Amazon S3](http://aws.amazon.com/s3/)
+  # * [Amazon S3 Documentation](http://aws.amazon.com/documentation/s3/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Buckets
+  # # Buckets
   #
   # Before you can upload files to S3, you need to create a bucket.
   #
@@ -61,18 +61,18 @@ module AWS
   # See {BucketCollection} and {Bucket} for more information on working
   # with buckets.
   #
-  # = Objects
+  # # Objects
   #
   # Buckets contain objects.  Each object in a bucket has a unique key.
   #
-  # == Getting an Object
+  # ## Getting an Object
   #
   # If the object already exists, you can get a reference to the object.
   #
   #   # makes no request, returns an AWS::S3::S3Object
   #   obj = bucket.objects['key']
   #
-  # == Reading and Writing an Object
+  # ## Reading and Writing an Object
   #
   # The example above returns an {S3Object}.  You call {S3Object#write} and
   # {S3Object#read} to upload to and download from S3 respectively.
@@ -87,7 +87,7 @@ module AWS
   #     end
   #   end
   #
-  # == Enumerating Objects
+  # ## Enumerating Objects
   #
   # You can enumerate objects in your buckets.
   #

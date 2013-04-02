@@ -17,7 +17,7 @@ require 'time'
 module AWS
   class CloudWatch
 
-    # = Metric
+    # # Metric
     #
     # Represents a single metric.
     #
@@ -27,7 +27,7 @@ module AWS
       # @param [String] metric_name The metric name.
       # @param [Hash] options
       # @option options [Array<Hash>] :dimensions An array of dimensions.
-      #   Each hash must have a +:name+ and a +value+ key (with string values).
+      #   Each hash must have a `:name` and a `value` key (with string values).
       def initialize namespace, metric_name, options = {}
         @namespace = namespace
         @metric_name = metric_name
@@ -53,7 +53,7 @@ module AWS
 
       # Publishes metric data points to Amazon CloudWatch.
       # @param [Array<Hash>] metric_data An array of hashes.  Each hash
-      #   must pass +:value+ (number) or +:statistic_values+ (hash).
+      #   must pass `:value` (number) or `:statistic_values` (hash).
       # @return [nil]
       def put_data *metric_data
 
@@ -111,7 +111,7 @@ module AWS
 
       end
 
-      # @return [Boolean] Returns +true+ if this metric exists.
+      # @return [Boolean] Returns `true` if this metric exists.
       def exists?
         !get_resource.data[:metrics].empty?
       end

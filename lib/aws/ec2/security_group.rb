@@ -160,7 +160,7 @@ module AWS
       #   # ftp
       #   security_group.authorize_ingress(:tcp, 20..21)
       #
-      # == Sources
+      # ## Sources
       #
       # Security groups accept ingress trafic from:
       #
@@ -168,7 +168,7 @@ module AWS
       # * security groups
       # * load balancers
       #
-      # === Ip Addresses
+      # ### Ip Addresses
       #
       # In the following example allow incoming SSH from a list of
       # IP address ranges.
@@ -176,7 +176,7 @@ module AWS
       #   security_group.authorize_ingress(:tcp, 22,
       #     '111.111.111.111/0', '222.222.222.222/0')
       #
-      # === Security Groups
+      # ### Security Groups
       #
       # To autohrize ingress traffic from all EC2 instance in another
       # security group, just pass the security group:
@@ -200,12 +200,12 @@ module AWS
       #   not_my_sg = SecurityGroup.new('sg-1234567', :owner_id => 'abcxyz123')
       #   my_sg.authorize_ingress(:tcp, 80, not_my_sg)
       #
-      # You can do the same with a hash as well (with either +:group_id+
-      # or +:group_name+):
+      # You can do the same with a hash as well (with either `:group_id`
+      # or `:group_name`):
       #
       #   sg.authorize_ingress(:tcp, 21..22, { :group_id => 'sg-id', :user_id => 'abcxyz123' })
       #
-      # === Load Balancers
+      # ### Load Balancers
       #
       # If you use ELB to manage load balancers, then you need to add
       # ingress permissions to the security groups they route traffic into.
@@ -216,7 +216,7 @@ module AWS
       #
       #   sg.authorize_ingress(:tcp, 80, load_balancer)
       #
-      # === Multiple Sources
+      # ### Multiple Sources
       #
       # You can provide multiple sources each time you call authorize
       # ingress, and you can mix and match the source types:
@@ -234,10 +234,10 @@ module AWS
       #   security groups, or load balancers.  Security groups
       #   can be specified as hashes.
       #
-      #   A security group hash must provide either +:group_id+ or
-      #   +:group_name+ for the security group.  If the security group
+      #   A security group hash must provide either `:group_id` or
+      #   `:group_name` for the security group.  If the security group
       #   does not belong to you aws account then you must also
-      #   provide +:user_id+ (which can be an AWS account ID or alias).
+      #   provide `:user_id` (which can be an AWS account ID or alias).
       #
       # @return [nil]
       #
@@ -286,7 +286,7 @@ module AWS
       #
       #   @option options [Symbol] :protocol (:any) The protocol name or number
       #     to authorize egress traffic for.  For a complete list of protocols
-      #     see: {http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml}
+      #     see: [protocol-numbers.xml](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml)
       #
       #   @option options [Range<Integer>,Integer] :ports (nil) An optional
       #     port or range of ports.  This option is required depending on

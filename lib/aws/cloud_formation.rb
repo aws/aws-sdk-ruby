@@ -16,11 +16,11 @@ require 'aws/cloud_formation/config'
 
 module AWS
 
-  # = AWS::CloudFormation
+  # # AWS::CloudFormation
   #
   # Provides an expressive, object-oriented interface to AWS CloudFormation.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -35,11 +35,11 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Stacks
+  # # Stacks
   #
   # This is the starting point for working with CloudFormation.
   #
-  # == Creating a Stack
+  # ## Creating a Stack
   #
   # You can create a CloudFormation stack with a name and a template.
   #
@@ -64,13 +64,13 @@ module AWS
   # See {StackCollection#create} for more information on creating templates
   # with capabilities and parameters.
   #
-  # == Getting a Stack
+  # ## Getting a Stack
   #
   # Given a name, you can fetch a {Stack}.
   #
   #   stack = cfm.stacks['stack-name']
   #
-  # == Enumerating Stacks
+  # ## Enumerating Stacks
   #
   # You can enumerate stacks in two ways.  You can enumerate {Stack}
   # objects or stack summaries (simple hashes).  You can filter the stack
@@ -91,7 +91,7 @@ module AWS
   #     puts summary.to_yaml
   #   end
   #
-  # == Template
+  # ## Template
   #
   # You can fetch the template body for a stack as a JSON string.
   #
@@ -102,7 +102,7 @@ module AWS
   #
   #   cfm.stacks['stack-name'].update(:template => new_template)
   #
-  # == Stack Events
+  # ## Stack Events
   #
   # You can enumerate events for a stack.
   #
@@ -112,7 +112,7 @@ module AWS
   #
   # See {StackEvent} for a complete list of event attributes.
   #
-  # == Stack Resources
+  # ## Stack Resources
   #
   # You can enumerate stack resources or request a stack resource by its
   # logical resource id.
@@ -131,7 +131,7 @@ module AWS
   #
   #   stack_resource = cfm.stack_resource('physical-resource-id')
   #
-  # == Stack Resource Summaries
+  # ## Stack Resource Summaries
   #
   # As an alternative to stack resources, you can enumerate stack
   # resource summaries (hashes).
@@ -218,16 +218,16 @@ module AWS
     # the returned hash may/will contain the following keys (actual
     # key list depends on the template).
     #
-    #   * +:description+
-    #   * +:capabilities+
-    #   * +:capabilities_reason+
-    #   * +:parameters+
+    #   * `:description`
+    #   * `:capabilities`
+    #   * `:capabilities_reason`
+    #   * `:parameters`
     #
     # If the template is not parseable, then a hash will the following
     # keys will be returned:
     #
-    #   * +:code+
-    #   * +:message+
+    #   * `:code`
+    #   * `:message`
     #
     # @return [Hash]
     #

@@ -46,7 +46,7 @@ module AWS
         attr_reader :collection
 
         # A tree may have a prefix of where in the bucket to be based
-        # from.  A value of +nil+ means that the tree will include all
+        # from.  A value of `nil` means that the tree will include all
         # objects in the collection.
         #
         # @return [String,nil]

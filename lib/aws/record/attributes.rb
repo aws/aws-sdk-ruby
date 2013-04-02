@@ -85,7 +85,7 @@ module AWS
         end
 
         # @return [Boolean] Returns true if this attribute type can be used
-        #   with the +:set => true+ option.  Certain attirbutes can not
+        #   with the `:set => true` option.  Certain attirbutes can not
         #   be represented with multiple values (like BooleanAttr).
         def self.allow_set?
           raise NotImplementedError

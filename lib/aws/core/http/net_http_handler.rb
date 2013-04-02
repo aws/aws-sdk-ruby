@@ -17,7 +17,7 @@ module AWS
   module Core
     module Http
 
-      # = NetHttpHandler
+      # # NetHttpHandler
       #
       # This is the default HTTP handler for the aws-sdk gem.  It uses
       # Ruby's Net::HTTP to make requests.  It uses persistent connections

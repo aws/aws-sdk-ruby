@@ -21,10 +21,10 @@ module AWS
   #
   # For more information about RDS:
   #
-  # * {Amazon RDS}[http://aws.amazon.com/rds/]
-  # * {Amazon RDS Documentation}[http://aws.amazon.com/documentation/rds/]
+  # * [Amazon RDS](http://aws.amazon.com/rds/)
+  # * [Amazon RDS Documentation](http://aws.amazon.com/documentation/rds/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:

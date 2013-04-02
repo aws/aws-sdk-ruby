@@ -24,7 +24,7 @@ module AWS
     #   certificate.active?
     #   #=> false
     #
-    # == Contents
+    # ## Contents
     #
     # You can access the certificate contents you uploaded:
     #
@@ -36,10 +36,10 @@ module AWS
     #   F9TbdXSWdgMl7E0=
     #   -----END CERTIFICATE-----
     #
-    # == User
+    # ## User
     #
     # A certificate can also return the user it belongs to.  If the certificate
-    # belongs to the AWS account, then {#user} will return +nil+.
+    # belongs to the AWS account, then {#user} will return `nil`.
     #
     #   user = iam.users['someuser'].signing_certificates.first
     #   user.name
@@ -49,7 +49,7 @@ module AWS
     #   signing certificate.
     #
     # @attr_reader [Symbol] status The status of this signing
-    #   certificate.  Status may be +:active+ or +:inactive+.
+    #   certificate.  Status may be `:active` or `:inactive`.
     #
     class SigningCertificate < Resource
 
@@ -66,7 +66,7 @@ module AWS
       attr_reader :id
 
       # @return [User,nil] Returns the user this cerficiate belongs to.
-      #   Returns +nil+ if the cerficiate is a root credential for the
+      #   Returns `nil` if the cerficiate is a root credential for the
       #   account.  If the configured credentials belong to an IAM user,
       #   then that user is the implied owner.
       attr_reader :user
@@ -89,7 +89,7 @@ module AWS
       end
 
       # @return [String,nil] Returns the name of the user this certificate
-      #   belogns to.  If the certificate belongs to the account, +nil+ is
+      #   belogns to.  If the certificate belongs to the account, `nil` is
       #   returned.
       def user_name
         @user ? @user.name : nil

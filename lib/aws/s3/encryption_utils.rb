@@ -31,7 +31,7 @@ module AWS
       # @return [String] Returns the data encrypted with the key given.
       def encrypt data, key
         rsa = OpenSSL::PKey::RSA
-        ## Encrypting data key
+        # Encrypting data key
         case key
         when rsa # Asymmetric encryption
           key.public_encrypt(data)
@@ -97,7 +97,7 @@ module AWS
       #
       # @param [String] iv IV for the cipher.
       #
-      # @return [OpenSSL::Cipher] Will return a configured +OpenSSL::Cipher+.
+      # @return [OpenSSL::Cipher] Will return a configured `OpenSSL::Cipher`.
       def get_aes_cipher mode, block_mode, key = nil, iv = nil
 
         # If no key given, default to 256 bit

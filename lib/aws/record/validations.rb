@@ -16,7 +16,7 @@ module AWS
 
     # Validation methods to be used with subclasses of AWS::Record::Model.
     #
-    # = General Usage
+    # # General Usage
     #
     # All standard validation methods follow the same basic usage.
     # Call the validation method followed by one more attribute names
@@ -35,19 +35,19 @@ module AWS
     #
     #   end
     #
-    # = Conditional Validations
+    # # Conditional Validations
     #
     # Sometimes you only want to validate an attribute under certain
     # conditions.  To make this simple, all validation methods accept the
     # following 3 options:
     #
-    # * +:on+
-    # * +:if+
-    # * +:unless+
+    # * `:on`
+    # * `:if`
+    # * `:unless`
     #
     # You may mix and match all 3 of the above options.
     #
-    # === Validate on :create or :update
+    # ### Validate on :create or :update
     #
     # By default validations are run on create and update, but you can
     # specify them to run for only create (initial save) or updates.
@@ -56,10 +56,10 @@ module AWS
     #
     #   validates_presence_of :updated_at, :on => :update
     #
-    # === Validate :if or :unless
+    # ### Validate :if or :unless
     #
     # Sometimes you have more complex requirements to determine if/when a
-    # validation should run.  +:if+ and +:unless+: both accept either
+    # validation should run.  `:if` and `:unless`: both accept either
     # a method name or proc.
     #
     #   class Person
@@ -73,7 +73,7 @@ module AWS
     #
     #   end
     #
-    # = Validating Virtual (Non-persisted) Attributes
+    # # Validating Virtual (Non-persisted) Attributes
     #
     # All of the validators can be used with configured attributes, but they
     # can also be used with any attribute that has a setter and a getter.
@@ -127,13 +127,13 @@ module AWS
       #   @param [Hash] options
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -150,7 +150,7 @@ module AWS
       #     validates_acceptance_of :terms_of_service
       #   end
       #
-      # === Virtual Attributes
+      # ### Virtual Attributes
       #
       # If you choose to validate the acceptance of a non-existant attribute
       # then a setter and a getter will be added automtically for you.
@@ -163,13 +163,13 @@ module AWS
       #   user.respond_to?(:terms_of_service)  #=> true
       #   user.respond_to?(:terms_of_service=) #=> true
       #
-      # === Accepted Values
+      # ### Accepted Values
       #
-      # The default behavior for +validates_acceptance_of+ is to add
-      # an error when the value is '1' or +true+.  Also note, this validation
-      # method defaults +:allow_nil+ to true.
+      # The default behavior for `validates_acceptance_of` is to add
+      # an error when the value is '1' or `true`.  Also note, this validation
+      # method defaults `:allow_nil` to true.
       #
-      # * +nil+ implies the field was omitted from the form and therefore
+      # * `nil` implies the field was omitted from the form and therefore
       #   should not be validated
       #
       #     class User < AWS::Record::Model
@@ -183,10 +183,10 @@ module AWS
       # * '1' is the default value for most checkbox form helpers, and #
       #   therefore indicates an accepted value.
       #
-      # * +true+ is how boolean attributes typecast '1'. This is helpful
-      #   when you have your checkbox post its value to a +:boolean_attr+.
+      # * `true` is how boolean attributes typecast '1'. This is helpful
+      #   when you have your checkbox post its value to a `:boolean_attr`.
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # This validator works only with single-valued attributes.  If you need
       # to validate that all of the values in a set are true, then use
@@ -203,20 +203,20 @@ module AWS
       #       validates_acceptance_of :agree, :accept => 'yes'
       #
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "must be accepted".
+      #     `:message` is "must be accepted".
       #   @option options [Boolean] :allow_nil (true) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (true) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -236,43 +236,43 @@ module AWS
       #     <%= password_field "user", "password" %>
       #     <%= password_field "user", "password_confirmation" %>
       #
-      # === Confirmation Value Accessors
+      # ### Confirmation Value Accessors
       #
       # If your model does not have accessors for the confirmation value
       # then they will be automatically added.  In the example above
-      # the user class would have an +attr_accessor+ for
-      # +:password_confirmation+.
+      # the user class would have an `attr_accessor` for
+      # `:password_confirmation`.
       #
-      # === Conditional Validation
+      # ### Conditional Validation
       #
       # Mostly commonly you only need to validate confirmation of an
       # attribute when it has changed.  It is therefore suggested to
-      # pass an +:if+ condition reflecting this:
+      # pass an `:if` condition reflecting this:
       #
       #   validates_confirmation_of :password, :if => :password_changed?
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # This validator works only with single-valued attributes.
       # It should not be used on attributes that have array or set values.
       #
-      # @note This validation method does not accept the +:allow_nil+ or the
-      # +:allow_blank+ options.
+      # @note This validation method does not accept the `:allow_nil` or the
+      # `:allow_blank` options.
       #
       # @overload validates_confirmation_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "doesn't match confirmation".
+      #     `:message` is "doesn't match confirmation".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -282,16 +282,16 @@ module AWS
 
       # Validates the number of values for a given attribute.
       #
-      # === Length vs Count
+      # ### Length vs Count
       #
-      # +validates_count_of+ validates the number of attribute values,
+      # `validates_count_of` validates the number of attribute values,
       # whereas +validates_length_of: validates the length of each
       # attribute value instead.
       #
       # If you need to ensure each attribute value is a given length see
       # {#validates_length_of} instead.
       #
-      # === Examples
+      # ### Examples
       #
       # You can validate there are a certain number of values:
       #
@@ -305,24 +305,24 @@ module AWS
       #
       #   validates_count_of :tags, :minimum => 2, :maximum => 10
       #
-      # === +nil+ Values
+      # ### `nil` Values
       #
-      # If you are validating an array or set that contains +nil+ values,
-      # the +nil+ values are counted normally as 1 each.
+      # If you are validating an array or set that contains `nil` values,
+      # the `nil` values are counted normally as 1 each.
       #
       # If you are validating a non-enuemrable attribute that only
       # contains a single nil or other scalar value, then nil is
       # counted as 0.
       #
-      # === Singular Attributes
+      # ### Singular Attributes
       #
       # This validator is intended to for validating attributes that have
       # an array or set of values.  If used on an attribute that
-      # returns a scalar value (like +nil+ or a string), the count will
-      # always be 0 (for +nil+) or 1 (for everything else).
+      # returns a scalar value (like `nil` or a string), the count will
+      # always be 0 (for `nil`) or 1 (for everything else).
       #
-      # It is therefore recomended to use +:validates_presence_of+ in
-      # place of +:validates_count_of+ when working with single-valued
+      # It is therefore recomended to use `:validates_presence_of` in
+      # place of `:validates_count_of` when working with single-valued
       # attributes.
       #
       # @overload validates_count_of(*attributes, options = {}, &block)
@@ -330,15 +330,15 @@ module AWS
       #   @param [Hash] options
       #   @option options [Integer] :exactly The exact number of values the
       #     attribute should have.  If this validation option fails the
-      #     error message specified by +:wrong_number+ will be added.
+      #     error message specified by `:wrong_number` will be added.
       #   @option options [Range] :within An range of number of values to
       #     accept.  If the attribute has a number of values outside this range
-      #     then the +:too_many+ or +:too_few+ error message will be added.
+      #     then the `:too_many` or `:too_few` error message will be added.
       #   @option options [Integer] :minimum The minimum number of values
-      #     the attribute should have.  If it has fewer, the +:too_few+ error
+      #     the attribute should have.  If it has fewer, the `:too_few` error
       #     message will be added.
       #   @option options [Integer] :maximum The maximum number of values
-      #     the attribute should have.  If it has more, the +:too_many+ error
+      #     the attribute should have.  If it has more, the `:too_many` error
       #     message will be added.
       #   @option options [String] :too_many An error message added
       #     when the attribute has too many values.  Defaults to
@@ -348,17 +348,17 @@ module AWS
       #     <code>"has too few values (minimum is %{minimum})"</code>
       #   @option options [String] :wrong_number An error message
       #     added when the number of attribute values does not match
-      #     the +:exactly+ option.  Defaults to <code>"has the wrong
+      #     the `:exactly` option.  Defaults to <code>"has the wrong
       #     number of values (should have exactly %{exactly}"</code>
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -384,18 +384,18 @@ module AWS
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -411,7 +411,7 @@ module AWS
       #
       #   validates_exlusion_of :username, :in => %w(admin administrator)
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes:
@@ -430,20 +430,20 @@ module AWS
       #   @option options [required, Enumerable] :in An enumerable object to
       #     ensure the value is not in.
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "is reserved".
+      #     `:message` is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -455,11 +455,11 @@ module AWS
       #
       #   validates_format_of :year, :with => /^\d{4}$/
       #
-      # You can also perform a not-match using +:without+ instead of +:with+.
+      # You can also perform a not-match using `:without` instead of `:with`.
       #
       #   validates_format_of :username, :without => /\d/
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes:
@@ -481,20 +481,20 @@ module AWS
       #     regex, an error will be added.
       #     must match, or an error is added.
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "is reserved".
+      #     `:message` is "is reserved".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -509,7 +509,7 @@ module AWS
       #     validates_inclusion_of :letter, :in => %w(a b c d e)
       #   end
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes.
@@ -520,20 +520,20 @@ module AWS
       #   @option options [required, Enumerable] :in An enumerable object to
       #     check for the value in.
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "is not included in the list".
+      #     `:message` is "is not included in the list".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -545,9 +545,9 @@ module AWS
       #
       #   validates_lenth_of :username, :within => 3..25
       #
-      # === Length vs Count
+      # ### Length vs Count
       #
-      # +validates_length_of+ validates the length of individual attribute
+      # `validates_length_of` validates the length of individual attribute
       # values, whereas +validates_count_of: validates the number of
       # attribute values.
       #
@@ -561,16 +561,16 @@ module AWS
       #     ensure the length of the value falls within.
       #   @option options [Integer] :exactly The exact length a value must be.
       #     If this validation fails the error message specified by
-      #     +:wrong_length+ will be added.
+      #     `:wrong_length` will be added.
       #   @option options [Range] :within An enumerable object which must
       #     include the length of the attribute, or an error will be added.
       #     If the attribute has a length outside the range then the
-      #     +:too_long+ or +:too_short+ error message will be added.
+      #     `:too_long` or `:too_short` error message will be added.
       #   @option options [Integer] :minimum The minimum length an attribute
-      #     value should be.  If it is shorter, the +:too_short+ error
+      #     value should be.  If it is shorter, the `:too_short` error
       #     message will be added.
       #   @option options [Integer] :maximum The maximum length an attribute
-      #     value should be.  If it is longer, the +:too_long+ error
+      #     value should be.  If it is longer, the `:too_long` error
       #     message will be added.
       #   @option options [String] :too_long An error message added
       #     when the attribute value is too long. Defaults to
@@ -582,21 +582,21 @@ module AWS
       #     characters)"</code>
       #   @option options [String] :wrong_length An error message
       #     added when the attribute has the incorrect length (as
-      #     specified by +:exactly+).  Defaults to <code>"is the wrong
+      #     specified by `:exactly`).  Defaults to <code>"is the wrong
       #     length (should be %{exactly} characters"</code>
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -608,7 +608,7 @@ module AWS
       #
       #   validates_numericality_of :age, :only_integer => true
       #
-      # === Multi-Valued Attributes
+      # ### Multi-Valued Attributes
       #
       # You can validate multi-valued attributes using this the same way you
       # validate single-valued attributes. Each value will be validated
@@ -631,24 +631,24 @@ module AWS
       #   @option options [Integer] :less_than_or_equal_to Ensures the value is
       #     less than or equal to the given number.
       #   @option options [Numeric] :even If true, the value may only be
-      #     an even integer.  This forces the +:only_integer+ to +true+.
+      #     an even integer.  This forces the `:only_integer` to `true`.
       #   @option options [Numeric] :odd If true, the value may only be
-      #     an odd integer.  This forces the +:only_integer+ to +true+.
+      #     an odd integer.  This forces the `:only_integer` to `true`.
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "is not a number".
+      #     `:message` is "is not a number".
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.
@@ -659,7 +659,7 @@ module AWS
       # Validates the named attributes are not blank. For validation
       # purposes, blank values include:
       #
-      # * +nil+
+      # * `nil`
       # * empty string
       # * anything that responds to #empty? with true
       # * anything that responds to #blank? with true
@@ -668,20 +668,20 @@ module AWS
       #   @param attributes A list of attribute names to validate.
       #   @param [Hash] options
       #   @option options [String] :message A custom error message.  The default
-      #     +:message+ is "may not be blank".
+      #     `:message` is "may not be blank".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
-      #     * +:save+
-      #     * +:create+
-      #     * +:update+
+      #     * `:save`
+      #     * `:create`
+      #     * `:update`
       #   @option options [Boolean] :allow_nil (false) Skip validation if the
-      #     attribute value is +nil+.
+      #     attribute value is `nil`.
       #   @option options [Boolean] :allow_blank (false) Skip validation if the
-      #     attribute value is +blank+.
+      #     attribute value is `blank`.
       #   @option options [Symbol,String,Proc] :if Specifies a method or proc
       #     to call.  The validation will only be run if the return value is
-      #     of the method/proc is true (e.g. +:if => :name_changed?+ or
-      #     +:if => lambda{|book| book.in_stock? }+).
+      #     of the method/proc is true (e.g. `:if => :name_changed?` or
+      #     `:if => lambda{|book| book.in_stock? }`).
       #   @option options [Symbol,String,Proc] :unless Specifies a method or
       #     proc to call.  The validation will *not* be run if the return value
       #     is of the method/proc is false.

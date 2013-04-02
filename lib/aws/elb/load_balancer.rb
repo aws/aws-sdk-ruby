@@ -21,18 +21,18 @@ module AWS
     #
     # @attr_reader [String] canonical_hosted_zone_name Provides the name of
     #   the Amazon Route 53 hosted zone that is associated with the load
-    #   balancer.  For more information: {http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html}.
+    #   balancer.  For more information: [using-domain-names-with-elb.html](http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
     #
     # @attr_reader [String] canonical_hosted_zone_name_id Provides the ID of
     #   the Amazon Route 53 hosted zone name that is associated with the
-    #   load balancer.  For more information: {http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html}.
+    #   load balancer.  For more information: [using-domain-names-with-elb.html](http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
     #
     # @attr_reader [String] dns_name Specifies the external DNS name
     #   associated with this load balancer.
     #
     # @attr_reader [Hash] policy_descriptions Returns a hash of
-    #   +:app_cookie_stickiness_policies+, +:lb_cookie_stickiness_policies+
-    #   and +:other_policies+.  See also {#policies}.
+    #   `:app_cookie_stickiness_policies`, `:lb_cookie_stickiness_policies`
+    #   and `:other_policies`.  See also {#policies}.
     #
     # @attr_reader [String,nil] scheme Specifies the type of LoadBalancer.
     #   This attribute it set only for LoadBalancers attached to an Amazon VPC.
@@ -47,11 +47,11 @@ module AWS
     # @attr_reader [Hash] health_check
     #   Returns a hash of the various health probes conducted on the
     #   load balancer instances.  The following entries are returned:
-    #   * +:healthy_threshold+
-    #   * +:unhealthy_threshold+
-    #   * +:interval+
-    #   * +:target+
-    #   * +:timeout+
+    #   * `:healthy_threshold`
+    #   * `:unhealthy_threshold`
+    #   * `:interval`
+    #   * `:target`
+    #   * `:timeout`
     #   See {#configure_health_check} for more details on what each of the
     #   configuration values mean.
     #
@@ -176,7 +176,7 @@ module AWS
       #
       # @option options [Integer] :timeout Specifies the amount of time, in
       #   seconds, during which no response means a failed health probe.
-      #   This value must be less than the +:interval+ value.
+      #   This value must be less than the `:interval` value.
       #
       # @option options [String] :target Specifies the instance being checked.
       #

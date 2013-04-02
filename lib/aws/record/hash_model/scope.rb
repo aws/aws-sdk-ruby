@@ -17,16 +17,16 @@ module AWS
 
       # The primary interface for finding records with {AWS::Record::HashModel}.
       #
-      # == Getting a Scope Object
+      # ## Getting a Scope Object
       #
       # You should normally never need to construct a Scope object directly.
       # Scope objects are returned from the AWS::Record::HashModel finder
-      # methods # (e.g. +shard+ and +limit+).
+      # methods # (e.g. `shard` and `limit`).
       #
       #   books = Book.limit(100)
       #   books.class #=> AWS::Record::HashModel::Scope
       #
-      # Scopes are also returned from methods defined with the +scope+ method.
+      # Scopes are also returned from methods defined with the `scope` method.
       #
       #   class Book < AWS::Record::HashModel
       #      scope :sampling, limit(10)
@@ -34,7 +34,7 @@ module AWS
       #
       #   Book.sampling #=> returns a scope that limits to 10
       #
-      # == Chaining Scopes
+      # ## Chaining Scopes
       #
       # Scope objects represent a request, but do not actualy make a request
       # until required.  This allows you to chain requests
@@ -52,7 +52,7 @@ module AWS
       # * {#shard}
       # * {#limit}
       #
-      # == Terminating Scopes
+      # ## Terminating Scopes
       #
       # To terminate a scope you can enumerate it or call #first.
       #

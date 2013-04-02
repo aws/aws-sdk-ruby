@@ -40,10 +40,10 @@ module AWS
         arn.split(/:/)[-1]
       end
 
-      # Causes the given +endpoint+ to receive messages published to this
+      # Causes the given `endpoint` to receive messages published to this
       # topic.
       #
-      # == Subscribing to SQS Queues
+      # ## Subscribing to SQS Queues
       #
       # If you subscribe to an SQS queue (with a {SQS::Queue} object}
       # then a policy will be added/updated to the queue that will
@@ -52,7 +52,7 @@ module AWS
       # * If you subscribe with a queue by ARN then you must change the
       #   policy yourself.
       #
-      # * If you do not want the policy modified then pass +:update_policy+
+      # * If you do not want the policy modified then pass `:update_policy`
       #   as false or just pass the queue's arn
       #
       #     topic.subscribe(queue.arn)
@@ -91,7 +91,7 @@ module AWS
       #
       # @param [mixed] endpoint The endpoint that should receive
       #   messages that are published to this topic.  Valid values
-      #   for +endpoint+ include:
+      #   for `endpoint` include:
       #
       #   * URI object
       #   * http and https URI strings
@@ -103,7 +103,7 @@ module AWS
       # @param [Hash] options
       # @option options [Boolean] :json (false)
       # @return [Subscription,nil] Returns a subscription when possible.
-      #   If the subscription requires confirmation first, then +nil+ is
+      #   If the subscription requires confirmation first, then `nil` is
       #   returned instead.
       def subscribe endpoint, options = {}
         subscribe_opts = endpoint_opts(endpoint, options).merge(:topic_arn => arn)
@@ -290,14 +290,14 @@ module AWS
       # @return [Hash] Returns a hash of attributes about this topic,
       #   including:
       #
-      #   * +:arn+
-      #   * +:name+
-      #   * +:owner+
-      #   * +:display_name+
-      #   * +:policy+
-      #   * +:num_subscriptions_confirmed+
-      #   * +:num_subscriptions_pending+
-      #   * +:num_subscriptions_deleted+
+      #   * `:arn`
+      #   * `:name`
+      #   * `:owner`
+      #   * `:display_name`
+      #   * `:policy`
+      #   * `:num_subscriptions_confirmed`
+      #   * `:num_subscriptions_pending`
+      #   * `:num_subscriptions_deleted`
       #
       def to_h
         attributes = client.get_topic_attributes(:topic_arn => arn).attributes

@@ -94,7 +94,7 @@ module AWS
       #
       # Multiple calls to #with_dimensions will add to previous dimensions.
       # @param [Array<Hash>] dimensions An array of dimensions.  Each dimension
-      #   should be a Hash with a +:name+ and +:value+.
+      #   should be a Hash with a `:name` and `:value`.
       # @return [MetricCollection]
       def with_dimensions *dimensions
         dimensions = @filters[:dimensions] || []

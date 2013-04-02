@@ -74,11 +74,11 @@ module AWS
       #
       # @option options [Symbol,String] :acl (:private) Sets the ACL of the
       #   bucket you are creating.  Valid Values include:
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:log_delivery_write+
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:log_delivery_write`
       #
       # @option options [String] :grant_read
       # @option options [String] :grant_write

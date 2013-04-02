@@ -32,21 +32,21 @@ module AWS
     #   b = Book.new(:title => 'My Book', :author => 'Me', :pages => 1)
     #   b.save
     #
-    # = Attribute Macros
+    # # Attribute Macros
     #
     # When extending AWS::Record::Model you should first consider what
     # attributes your class should have.  Unlike ActiveRecord, AWS::Record
     # models are not backed by a database table/schema.  You must choose what
     # attributes (and what types) you need.
     #
-    # * +string_attr+
-    # * +boolean_attr+
-    # * +integer_attr+
-    # * +float_attr+
-    # * +datetime_attr+
-    # * +date_attr+
+    # * `string_attr`
+    # * `boolean_attr`
+    # * `integer_attr`
+    # * `float_attr`
+    # * `datetime_attr`
+    # * `date_attr`
     #
-    # === Usage
+    # ### Usage
     #
     # Normally you just call these methods inside your model class definition:
     #
@@ -73,9 +73,9 @@ module AWS
     #   b.attributes
     #   #=> { 'title' => 'My Book', 'has_been_read' => true, ... }
     #
-    # === Default Values
+    # ### Default Values
     #
-    # All attribute macros accept the +:default_value+ option.  This sets
+    # All attribute macros accept the `:default_value` option.  This sets
     # a value that is populated onto all new instnaces of the class.
     #
     #   class Book < AWS::Record::Model
@@ -84,7 +84,7 @@ module AWS
     #
     #   Book.new.author #=> 'Me'
     #
-    # === Multi-Valued (Set) Attributes
+    # ### Multi-Valued (Set) Attributes
     #
     # AWS::Record permits storing multiple values with a single attribute.
     #
@@ -104,10 +104,10 @@ module AWS
     # * values are unordered
     # * duplicate values are automatically omitted
     #
-    # Please consider these limitations when you choose to use the +:set+
+    # Please consider these limitations when you choose to use the `:set`
     # option with the attribute macros.
     #
-    # = Validations
+    # # Validations
     #
     # It's important to validate models before there are persisted to keep
     # your data clean.  AWS::Record supports most of the ActiveRecord style
@@ -128,7 +128,7 @@ module AWS
     # For more information about the available validation methods see
     # {Validations}.
     #
-    # = Finder Methods
+    # # Finder Methods
     #
     # You can find records by their ID.  Each record gets a UUID when it
     # is saved for the first time.  You can use this ID to fetch the record
@@ -141,9 +141,9 @@ module AWS
     # If you try to find a record by ID that has no data an error will
     # be raised.
     #
-    # === All
+    # ### All
     #
-    # You can enumerate all of your records using +all+.
+    # You can enumerate all of your records using `all`.
     #
     #   Book.all.each do |book|
     #     puts book.id
@@ -157,16 +157,16 @@ module AWS
     # and number of attributes each record has, this can take a while,
     # causing quite a few requests.
     #
-    # === First
+    # ### First
     #
-    # If you only want a single record, you should use +first+.
+    # If you only want a single record, you should use `first`.
     #
     #   b = Book.first
     #
-    # === Modifiers
+    # ### Modifiers
     #
     # Frequently you do not want ALL records or the very first record.  You
-    # can pass options to +find+, +all+ and +first+.
+    # can pass options to `find`, `all` and `first`.
     #
     #   my_books = Book.find(:all, :where => 'owner = "Me"')
     #
@@ -174,11 +174,11 @@ module AWS
     #
     # You can pass as find options:
     #
-    # * +:where+ - Conditions that must be met to be returned
-    # * +:order+ - The order to sort matched records by
-    # * +:limit+ - The maximum number of records to return
+    # * `:where` - Conditions that must be met to be returned
+    # * `:order` - The order to sort matched records by
+    # * `:limit` - The maximum number of records to return
     #
-    # = Scopes
+    # # Scopes
     #
     # More useful than writing query fragments all over the place is to
     # name your most common conditions for reuse.
@@ -201,11 +201,11 @@ module AWS
     #
     # There are 3 standard scope methods:
     #
-    # * +where+
-    # * +order+
-    # * +limit+
+    # * `where`
+    # * `order`
+    # * `limit`
     #
-    # === Conditions (where)
+    # ### Conditions (where)
     #
     # Where accepts aruments in a number of forms:
     #
@@ -225,7 +225,7 @@ module AWS
     #
     #      Book.where(:title => 'My Book')
     #
-    # === Order
+    # ### Order
     #
     # This orders the records as returned by AWS.  Default ordering is ascending.
     # Pass the value :desc as a second argument to sort in reverse ordering.
@@ -241,16 +241,16 @@ module AWS
     # In this example the books will be ordered by :price and the order(:title)
     # is lost.
     #
-    # === Limit
+    # ### Limit
     #
-    # Just call +limit+ with an integer argument.  This sets the maximum
+    # Just call `limit` with an integer argument.  This sets the maximum
     # number of records to retrieve:
     #
     #   Book.limit(2)
     #
-    # === Delayed Execution
+    # ### Delayed Execution
     #
-    # It should be noted that all finds are lazy (except +first+).  This
+    # It should be noted that all finds are lazy (except `first`).  This
     # means the value returned is not an array of records, rather a handle
     # to a {Scope} object that will return records when you enumerate over them.
     #

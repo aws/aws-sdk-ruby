@@ -16,7 +16,7 @@ require 'json'
 module AWS
   class SimpleWorkflow
 
-    # == Getting History Events
+    # ## Getting History Events
     #
     # History events belong to workflow executions.  You can get them
     # from an execution two ways:
@@ -34,7 +34,7 @@ module AWS
     #        end
     #      end
     #
-    # == History Event Attributes
+    # ## History Event Attributes
     #
     # All history events respond to the following 4 methods:
     #
@@ -129,7 +129,7 @@ module AWS
       # the service API documentation that lists all history event types
       # along with their returned attributes.
       #
-      # == Indifferent Access
+      # ## Indifferent Access
       #
       # Here are a few examples showing the different ways to access an
       # attribute:
@@ -145,7 +145,7 @@ module AWS
       # As shown in the example above keys and method names can be
       # snake_cased or camelCased (strings or symbols).
       #
-      # == Special Attributes
+      # ## Special Attributes
       #
       # The following list of attributes are treated specially.  Generally this
       # means they return

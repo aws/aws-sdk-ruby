@@ -19,14 +19,14 @@ module AWS
   # This class is the starting point for working with Amazon CloudWatch.
   #
   # To use Amazon CloudWatch you must first
-  # {sign up here}[http://aws.amazon.com/cloudwatch/].
+  # [sign up here](http://aws.amazon.com/cloudwatch/).
   #
   # For more information about Amazon CloudWatch:
   #
-  # * {Amazon CloudWatch}[http://aws.amazon.com/cloudwatch/]
-  # * {Amazon CloudWatch Documentation}[http://aws.amazon.com/documentation/cloudwatch/]
+  # * [Amazon CloudWatch](http://aws.amazon.com/cloudwatch/)
+  # * [Amazon CloudWatch Documentation](http://aws.amazon.com/documentation/cloudwatch/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
@@ -41,7 +41,7 @@ module AWS
   #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::CloudWatch does not provide higher level abstractions for CloudWatch at
   # this time.  You can still access all of the API methods using

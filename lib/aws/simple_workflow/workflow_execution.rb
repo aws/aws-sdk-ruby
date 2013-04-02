@@ -18,14 +18,14 @@ module AWS
     #   workflow executions if this workflow execution is terminated.
     #   The return value will be one of the following values:
     #
-    #   * +:terminate+ - the child executions will be terminated.
+    #   * `:terminate` - the child executions will be terminated.
     #
-    #   * +:request_cancel+ - a request to cancel will be attempted for each
+    #   * `:request_cancel` - a request to cancel will be attempted for each
     #     child execution by recording a WorkflowExecutionCancelRequested
     #     event in its history. It is up to the decider to take appropriate
     #     actions when it receives an execution history with this event.
     #
-    #   * +:abandon+ - no action will be taken. The child executions will
+    #   * `:abandon` - no action will be taken. The child executions will
     #     continue to run.
     #
     # @attr_reader [String] start_to_close_timeout The total allowed
@@ -60,8 +60,8 @@ module AWS
     #   closing a decision task.
     #
     # @attr_reader [Hash] open_counts Returns a hash of counts, including:
-    #   +:open_timers+, +:open_child_workflow_executions+, +:open_decision_tasks+,
-    #   and +:open_activity_tasks+.
+    #   `:open_timers`, `:open_child_workflow_executions`, `:open_decision_tasks`,
+    #   and `:open_activity_tasks`.
     #
     class WorkflowExecution < Resource
 
@@ -160,18 +160,18 @@ module AWS
       # @return [Symbol] Returns the status of this execution. Possible
       #   return values are:
       #
-      #   * +:open+ - The execution is still running.
-      #   * +:completed+ - The execution was successfully completed.
-      #   * +:canceled+ - The execution was canceled, cancellation allows
+      #   * `:open` - The execution is still running.
+      #   * `:completed` - The execution was successfully completed.
+      #   * `:canceled` - The execution was canceled, cancellation allows
       #      the implementation to gracefully clean up before the execution
       #      is closed.
-      #   * +:failed+ - The execution failed to complete.
+      #   * `:failed` - The execution failed to complete.
       #     and was automatically timed out.
-      #   * +:continued_as_new+ - The execution is logically continued. This
+      #   * `:continued_as_new` - The execution is logically continued. This
       #     means the current execution was completed and a new execution
       #     was started to carry on the workflow.
-      #   * +:terminated+ - The execution was force terminated.
-      #   * +:timed_out+ - The execution did not complete in the allotted
+      #   * `:terminated` - The execution was force terminated.
+      #   * `:timed_out` - The execution did not complete in the allotted
       #     time and was automatically timed out.
       #
       def status
@@ -303,14 +303,14 @@ module AWS
       #   executions of the workflow execution being terminated. This
       #   policy overrides the default child policy.  Valid policies include:
       #
-      #   * +:terminate+ - the child executions will be terminated.
+      #   * `:terminate` - the child executions will be terminated.
       #
-      #   * +:request_cancel+ - a request to cancel will be attempted for each
+      #   * `:request_cancel` - a request to cancel will be attempted for each
       #     child execution by recording a WorkflowExecutionCancelRequested
       #     event in its history. It is up to the decider to take appropriate
       #     actions when it receives an execution history with this event.
       #
-      #   * +:abandon+ - no action will be taken. The child executions will
+      #   * `:abandon` - no action will be taken. The child executions will
       #     continue to run.
       #
       # @option options [String] :details (nil) Optional details for
@@ -339,8 +339,8 @@ module AWS
       #   status of the workflow executions to count. Defaults to
       #   open workflows.
       #
-      #   * +:open+
-      #   * +:closed+
+      #   * `:open`
+      #   * `:closed`
       #
       # @option options [Array<Time>] :started_between A start and end time
       #   to filter workflow execution start times by.  You may pass an
@@ -348,7 +348,7 @@ module AWS
       #   timestamps (integers), Time, Date, DateTime or parseable time
       #   strings.
       #
-      #   You may not pass both +:started_between+ and +:closed_between+.
+      #   You may not pass both `:started_between` and `:closed_between`.
       #
       # @option options [Array<Time>] :closed_between A start and end time
       #   to filter workflow execution closed times by.  You may pass an
@@ -356,9 +356,9 @@ module AWS
       #   timestamps (integers), Time, Date, DateTime or parseable time
       #   strings.
       #
-      #   You may not pass both +:started_between+ and +:closed_between+.
-      #   You may also not pass +:closed_between+ if the +:status+ is
-      #   +:open+.
+      #   You may not pass both `:started_between` and `:closed_between`.
+      #   You may also not pass `:closed_between` if the `:status` is
+      #   `:open`.
       #
       # @return [Integer] Returns the count of executions that share
       #   workflow id with the current execution.

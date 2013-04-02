@@ -16,7 +16,7 @@ module AWS
 
     # Allows you to enumerate and create notification configurations.#
     #
-    # == Enumerating Notification Configurations
+    # ## Enumerating Notification Configurations
     #
     # You can enumerated *ALL* configurations from the AWS::AutoScaling class.
     #
@@ -32,7 +32,7 @@ module AWS
     #     # ...
     #   end
     #
-    # == Creating Notification Configurations
+    # ## Creating Notification Configurations
     #
     # You can create a notification configuration like so:
     #
@@ -73,7 +73,7 @@ module AWS
       #     :topic => 'sns-topic-arn')
       #
       # You can also create notification configurations from an Auto Scaling
-      # group and omit the +:group+ option.
+      # group and omit the `:group` option.
       #
       #   auto_scaling_group.notification_configurations.create(
       #     :topic => 'sns-topic-arn')

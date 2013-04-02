@@ -15,7 +15,7 @@ module AWS
   class IAM
     class Resource < Core::Resource
 
-      # @return [Boolean] Returns +true+ if the resource exists.
+      # @return [Boolean] Returns `true` if the resource exists.
       def exists?
         get_resource
         true

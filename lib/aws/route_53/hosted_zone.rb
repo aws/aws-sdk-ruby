@@ -14,7 +14,7 @@
 module AWS
   class Route53
 
-    # = Delete existing hosted zone
+    # # Delete existing hosted zone
     #
     #   hosted_zone = AWS::Route53::HostedZone.new(hosted_zone_id)
     #   hosted_zone.delete
@@ -84,7 +84,7 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns +true+ if this hosted zone exists.
+      # @return [Boolean] Returns `true` if this hosted zone exists.
       def exists?
         get_resource.data[:hosted_zone][:id] == path
       end

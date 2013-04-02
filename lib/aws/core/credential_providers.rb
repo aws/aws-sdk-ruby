@@ -30,11 +30,11 @@ module AWS
         KEYS = Set[:access_key_id, :secret_access_key, :session_token]
 
         # @return [Hash] Returns a hash of credentials containg at least
-        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
-        #   also contain a +:session_token+.
+        #   the `:access_key_id` and `:secret_access_key`.  The hash may
+        #   also contain a `:session_token`.
         #
         # @raise [Errors::MissingCredentialsError] Raised when the
-        #   +:access_key_id+ or the +:secret_access_key+ can not be found.
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
           @cached_credentials ||= begin
@@ -133,8 +133,8 @@ module AWS
       end
 
       # Static credentials are provided directly to config via
-      # +:access_key_id+ and +:secret_access_key+ (and optionally
-      # +:session_token+).
+      # `:access_key_id` and `:secret_access_key` (and optionally
+      # `:session_token`).
       # @private
       class StaticProvider
 
@@ -261,11 +261,11 @@ module AWS
 
         # Refresh provider if existing credentials will be expired in 5 min
         # @return [Hash] Returns a hash of credentials containg at least
-        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
-        #   also contain a +:session_token+.
+        #   the `:access_key_id` and `:secret_access_key`.  The hash may
+        #   also contain a `:session_token`.
         #
         # @raise [Errors::MissingCredentialsError] Raised when the
-        #   +:access_key_id+ or the +:secret_access_key+ can not be found.
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
           if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc - 5 * 60
@@ -328,10 +328,10 @@ module AWS
 
       end
 
-      # = Session Credential Provider
+      # # Session Credential Provider
       #
-      # The session provider consumes long term credentials (+:access_key_id+
-      # and +:secret_access_key+) and requests a session from STS.
+      # The session provider consumes long term credentials (`:access_key_id`
+      # and `:secret_access_key`) and requests a session from STS.
       # It then returns the short term credential set from STS.
       #
       # Calling {#refresh} causes the session provider to request a new
@@ -348,8 +348,8 @@ module AWS
         class << self
 
           # @param [Hash] long_term_credentials A hash of credentials with
-          #   +:access_key_id+ and +:secret_access_key+ (but not
-          #   +:session_token+).
+          #   `:access_key_id` and `:secret_access_key` (but not
+          #   `:session_token`).
           def for long_term_credentials
             @create_mutex.synchronize do
               @session_providers ||= {}
@@ -365,8 +365,8 @@ module AWS
         end
 
         # @param [Hash] long_term_credentials A hash of credentials with
-        #   +:access_key_id+ and +:secret_access_key+ (but not
-        #   +:session_token+).
+        #   `:access_key_id` and `:secret_access_key` (but not
+        #   `:session_token`).
         def initialize long_term_credentials
           @static = StaticProvider.new(long_term_credentials)
           if @static.session_token
@@ -424,7 +424,7 @@ module AWS
       class FakeProvider < StaticProvider
 
         # @param [Hash] options
-        # @option options [Boolean] :with_session_token (false) When +true+ a
+        # @option options [Boolean] :with_session_token (false) When `true` a
         #   fake session token will also be provided.
         def initialize options = {}
           options[:access_key_id] ||= fake_access_key_id
