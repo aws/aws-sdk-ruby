@@ -883,7 +883,15 @@ module AWS
         options[:bucket_name] = bucket.name
         options[:key] = key
 
-        client.copy_object(options)
+        
+        source_length = copy_source_length(options[:copy_source], options[:version_id])
+
+        if use_multipart_copy?(source_length, options)
+          options[:content_length] = source_length
+          multipart_copy(options)
+        else
+          resp = client.copy_object(options)
+        end
 
         nil
 
@@ -1261,6 +1269,41 @@ module AWS
       end
 
       private
+
+
+      # Get the length of the source to see if we need to do a multi-part copy
+      def copy_source_length source, version_id
+        source_bucket_name, source_key = source.split("/", 2)
+        source_bucket = Bucket.new(source_bucket_name, :config => config)
+        source_obj = S3Object.new(source_bucket, source_key)
+        
+        source_obj.head({:version_id => version_id})[:content_length]
+      end
+
+      # Used to determine if the data needs to be copied in parts
+      def use_multipart_copy? source_length, options
+        source_length >= multipart_copy_threshold(options)
+      end
+
+      def multipart_copy_threshold options
+        threshold = options[:multipart_copy_threshold] ? [options[:multipart_copy_threshold], config.s3_multipart_copy_min_size].min : config.s3_multipart_copy_min_size
+      end
+
+      def multipart_copy options
+        part_size = compute_part_size(options)
+        clean_up_options(options)
+        source_length = options.delete(:content_length)
+
+        multipart_upload(options) do |upload|
+          pos = 0
+          # We copy in part_size chunks until we read the 
+          until pos >= source_length
+            last_byte = (pos + part_size >= source_length) ? source_length - 1 : pos + part_size - 1
+            upload.copy_part(options[:copy_source], options.merge({:first_byte => pos, :last_byte => last_byte})) 
+            pos += part_size
+          end
+        end
+      end
 
       # @return [Boolean]
       def should_decrypt? options
