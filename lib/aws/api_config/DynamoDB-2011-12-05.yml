@@ -349,6 +349,8 @@
               :type: :time
             LastDecreaseDateTime:
               :type: :time
+            NumberOfDecreasesToday:
+              :type: :integer
             ReadCapacityUnits:
               :type: :integer
             WriteCapacityUnits:
@@ -488,6 +490,8 @@
               :type: :time
             LastDecreaseDateTime:
               :type: :time
+            NumberOfDecreasesToday:
+              :type: :integer
             ReadCapacityUnits:
               :type: :integer
             WriteCapacityUnits:
@@ -536,6 +540,8 @@
               :type: :time
             LastDecreaseDateTime:
               :type: :time
+            NumberOfDecreasesToday:
+              :type: :integer
             ReadCapacityUnits:
               :type: :integer
             WriteCapacityUnits:
@@ -1150,6 +1156,8 @@
               :type: :time
             LastDecreaseDateTime:
               :type: :time
+            NumberOfDecreasesToday:
+              :type: :integer
             ReadCapacityUnits:
               :type: :integer
             WriteCapacityUnits:
