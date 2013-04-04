@@ -18,13 +18,13 @@ module AWS
 
     # # Create new hosted zone
     #
-    #   r53 = AWS::Route53.new
-    #   hosted_zone = r53.hosted_zones.create('example.com.')
+    #     r53 = AWS::Route53.new
+    #     hosted_zone = r53.hosted_zones.create('example.com.')
     #
     # # Find existing hosted zone
     #
-    #   r53 = AWS::Route53.new
-    #   hosted_zone = r53.hosted_zones['example.com.']
+    #     r53 = AWS::Route53.new
+    #     hosted_zone = r53.hosted_zones['example.com.']
     #
     class HostedZoneCollection
 

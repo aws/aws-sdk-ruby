@@ -113,11 +113,11 @@ module AWS
       # interface.  You may provide `:instance` or `:network_interface`
       # but not both options.
       #
-      #   # associate with an instance
-      #   eip.associate :instance => 'i-12345678'
+      #     # associate with an instance
+      #     eip.associate :instance => 'i-12345678'
       #
-      #   # associate with a network interface
-      #   eip.associate :network_interface => 'ni-12345678'
+      #     # associate with a network interface
+      #     eip.associate :network_interface => 'ni-12345678'
       #
       # @param [Hash] options
       #

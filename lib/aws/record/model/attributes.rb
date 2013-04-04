@@ -48,16 +48,16 @@ module AWS
           # Returns a serialized representation of the integer value suitable for
           # storing in SimpleDB.
           #
-          #   attribute.serialize(123)
-          #   #=> '123'
+          #     attribute.serialize(123)
+          #     #=> '123'
           #
-          #   # padded to the correct number of digits
-          #   attribute.serialize('123', :range => (0..10_000)
-          #   #=> '00123'
+          #     # padded to the correct number of digits
+          #     attribute.serialize('123', :range => (0..10_000)
+          #     #=> '00123'
           #
-          #   # offset applied to make all values positive
-          #   attribute.serialize('-55', :range => (-100..10_000)
-          #   #=> '00045'
+          #     # offset applied to make all values positive
+          #     attribute.serialize('-55', :range => (-100..10_000)
+          #     #=> '00045'
           #
           # @param [Integer] integer The number to serialize.
           # @param [Hash] options
@@ -167,12 +167,12 @@ module AWS
 
         # Adds an integer attribute to this class.
         #
-        #   class Recipe < AWS::Record::Model
-        #     integer_attr :servings
-        #   end
+        #     class Recipe < AWS::Record::Model
+        #       integer_attr :servings
+        #     end
         #
-        #   recipe = Recipe.new(:servings => '10')
-        #   recipe.servings #=> 10
+        #     recipe = Recipe.new(:servings => '10')
+        #     recipe.servings #=> 10
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -184,12 +184,12 @@ module AWS
 
         # Adds a sortable integer attribute to this class.
         #
-        #   class Person < AWS::Record::Model
-        #     sortable_integer_attr :age, :range => 0..150
-        #   end
+        #     class Person < AWS::Record::Model
+        #       sortable_integer_attr :age, :range => 0..150
+        #     end
         #
-        #   person = Person.new(:age => 10)
-        #   person.age #=> 10
+        #     person = Person.new(:age => 10)
+        #     person.age #=> 10
         #
         # ### Validations
         #
@@ -217,12 +217,12 @@ module AWS
 
         # Adds a float attribute to this class.
         #
-        #   class Listing < AWS::Record::Model
-        #     float_attr :score
-        #   end
+        #     class Listing < AWS::Record::Model
+        #       float_attr :score
+        #     end
         #
-        #   listing = Listing.new(:score => '123.456')
-        #   listing.score # => 123.456
+        #     listing = Listing.new(:score => '123.456')
+        #     listing.score # => 123.456
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -243,7 +243,7 @@ module AWS
         #
         # To store floats in a sort-friendly manor:
         #
-        #   sortable_float_attr :score, :range => (0..10)
+        #     sortable_float_attr :score, :range => (0..10)
         #
         # This will cause values like 5.5 to persist as a string like '05.5' so
         # that they can be sorted lexicographically.
@@ -253,7 +253,7 @@ module AWS
         # If you need to store negative sortable floats, increase your `:range`
         # to include a negative value.
         #
-        #   sortable_float_attr :position, :range => (-10..10)
+        #     sortable_float_attr :position, :range => (-10..10)
         #
         # AWS::Record will add 10 to all values and zero pad them
         # (e.g. -10.0 will be represented as '00.0' and 10 will be represented as

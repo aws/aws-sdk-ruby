@@ -21,49 +21,49 @@ module AWS
     # You create a bucket by name.  Bucket names must be globally unique
     # and must be DNS compatible.
     #
-    #   s3 = AWS::S3.new
-    #   bucket = s3.buckets.create('dns-compat-bucket-name')
+    #     s3 = AWS::S3.new
+    #     bucket = s3.buckets.create('dns-compat-bucket-name')
     #
     # # Getting a Bucket
     #
     # You can create a reference to a bucket, given its name.
     #
-    #   bucket = s3.buckets['bucket-name'] # makes no request
-    #   bucket.exists? #=> returns true/false
+    #     bucket = s3.buckets['bucket-name'] # makes no request
+    #     bucket.exists? #=> returns true/false
     #
     # # Enumerating Buckets
     #
     # The {BucketCollection} class is enumerable.
     #
-    #   s3.buckets.each do |bucket|
-    #     puts bucket.name
-    #   end
+    #     s3.buckets.each do |bucket|
+    #       puts bucket.name
+    #     end
     #
     # # Deleting a Bucket
     #
     # You can delete an empty bucket you own.
     #
-    #   bucket = s3.buckets.create('my-temp-bucket')
-    #   bucket.objects['abc'].write('xyz')
+    #     bucket = s3.buckets.create('my-temp-bucket')
+    #     bucket.objects['abc'].write('xyz')
     #
-    #   bucket.clear! # deletes all object versions in batches
-    #   bucket.delete
+    #     bucket.clear! # deletes all object versions in batches
+    #     bucket.delete
     #
     # You can alternatively call {#delete!} which will clear
     # the bucket for your first.
     #
-    #   bucket.delete!
+    #     bucket.delete!
     #
     # # Objects
     #
     # Given a bucket you can access its objects, either by key or by
     # enumeration.
     #
-    #   bucket.objects['key'] #=> makes no request, returns an S3Object
+    #     bucket.objects['key'] #=> makes no request, returns an S3Object
     #
-    #   bucket.objects.each do |obj|
-    #     puts obj.key
-    #   end
+    #     bucket.objects.each do |obj|
+    #       puts obj.key
+    #     end
     #
     # See {ObjectCollection} and {S3Object} for more information on working
     # with objects.
@@ -72,7 +72,7 @@ module AWS
     #
     # It is easy to enable website hosting for a bucket.
     #
-    #   bucket.configure_website
+    #     bucket.configure_website
     #
     # You can specify the index and error documents by passing a block.
     # If your bucket is already configured as a website, the current
@@ -80,20 +80,20 @@ module AWS
     # configured as a website, a new configuration will be yielded
     # with default values.
     #
-    #   bucket.configure_website do |cfg|
-    #     cfg.index_document_suffix = 'index.html'
-    #     cfg.error_document_key = 'error.html'
-    #   end
+    #     bucket.configure_website do |cfg|
+    #       cfg.index_document_suffix = 'index.html'
+    #       cfg.error_document_key = 'error.html'
+    #     end
     #
     # You can disable website hosting two ways:
     #
-    #   bucket.remove_website_configuration
-    #   bucket.website_configuration = nil
+    #     bucket.remove_website_configuration
+    #     bucket.website_configuration = nil
     #
     # You can use {#website_configuration=} to copy a website configuration
     # from one bucket to another.
     #
-    #   bucket.website_configuration = other_bucket.website_configuration
+    #     bucket.website_configuration = other_bucket.website_configuration
     #
     # # Bucket Policies and ACLs
     #
@@ -120,11 +120,11 @@ module AWS
     #
     # You can specify a the ACL at bucket creation or later update a bucket.
     #
-    #   # at create time, defaults to :private when not specified
-    #   bucket = s3.buckets.create('name', :acl => :public_read)
+    #     # at create time, defaults to :private when not specified
+    #     bucket = s3.buckets.create('name', :acl => :public_read)
     #
-    #   # replacing an existing bucket ACL
-    #   bucket.acl = :private
+    #     # replacing an existing bucket ACL
+    #     bucket.acl = :private
     #
     # ### Grants
     #
@@ -143,39 +143,39 @@ module AWS
     # to everyone while providing full control to a user by email address
     # and to another by their account id (cannonical user id).
     #
-    #   bucket = s3.buckets.create('name', :grants => {
-    #     :grant_read => [
-    #       { :uri => "http://acs.amazonaws.com/groups/global/AllUsers" },
-    #     ],
-    #     :grant_full_control => [
-    #       { :id => 'abc...mno' }               # cannonical user id
-    #       { :email_address => 'foo@bar.com' }, # email address
-    #     ]
-    #   })
+    #     bucket = s3.buckets.create('name', :grants => {
+    #       :grant_read => [
+    #         { :uri => "http://acs.amazonaws.com/groups/global/AllUsers" },
+    #       ],
+    #       :grant_full_control => [
+    #         { :id => 'abc...mno' }               # cannonical user id
+    #         { :email_address => 'foo@bar.com' }, # email address
+    #       ]
+    #     })
     #
     # ### ACL Object
     #
     # Lastly, you can build an ACL object and use a Ruby DSL to specify grants
     # and grantees.  See {ACLObject} for more information.
     #
-    #   # updating an existing bucket acl using ACLObject
-    #   bucket.acl.change do |acl|
-    #     acl.grants.reject! do |g|
-    #       g.grantee.canonical_user_id != bucket.owner.id
+    #     # updating an existing bucket acl using ACLObject
+    #     bucket.acl.change do |acl|
+    #       acl.grants.reject! do |g|
+    #         g.grantee.canonical_user_id != bucket.owner.id
+    #       end
     #     end
-    #   end
     #
     # ## Policies
     #
     # You can also work with bucket policies.
     #
-    #   policy = AWS::S3::Policy.new
-    #   policy.allow(
-    #     :actions => [:put_object, :get_object]
-    #     :resources => [bucket]
-    #     :principals => :any)
+    #     policy = AWS::S3::Policy.new
+    #     policy.allow(
+    #       :actions => [:put_object, :get_object]
+    #       :resources => [bucket]
+    #       :principals => :any)
     #
-    #   bucket.policy = policy
+    #     bucket.policy = policy
     #
     # See {Core::Policy} and {S3::Policy} for more information on build
     # policy objects.
@@ -186,30 +186,30 @@ module AWS
     # is enabled, S3 will keep track of each version of each object you
     # write to the bucket (even deletions).
     #
-    #   bucket.versioning_enabled? #=> false
-    #   bucket.enable_versioning
-    #   # there is also a #suspend_versioning method
+    #     bucket.versioning_enabled? #=> false
+    #     bucket.enable_versioning
+    #     # there is also a #suspend_versioning method
     #
-    #   obj = bucket.objects['my-obj']
-    #   obj.write('a')
-    #   obj.write('b')
-    #   obj.delete
-    #   obj.write('c')
+    #     obj = bucket.objects['my-obj']
+    #     obj.write('a')
+    #     obj.write('b')
+    #     obj.delete
+    #     obj.write('c')
     #
-    #   obj.versions.each do |obj_version|
-    #     if obj_version.delete_marker?
-    #       puts obj_version.read
-    #     else
-    #       puts "- DELETE MARKER"
+    #     obj.versions.each do |obj_version|
+    #         if obj_version.delete_marker?
+    #         puts obj_version.read
+    #       else
+    #         puts "- DELETE MARKER"
+    #       end
     #     end
-    #   end
     #
     # Alternatively you can enumerate all versions of all objects in your
     # bucket.
     #
-    #   bucket.versions.each do |obj_version|
-    #     puts obj_version.key ` " : " ` obj_version.version_id
-    #   end
+    #     bucket.versions.each do |obj_version|
+    #       puts obj_version.key ` " : " ` obj_version.version_id
+    #     end
     #
     # See {BucketVersionCollection}, {ObjectVersionCollection} and
     # {ObjectVersion} for more information on working with objects in
@@ -260,24 +260,24 @@ module AWS
 
       # Configure the current bucket as a website.
       #
-      #   bucket.configure_website
+      #     bucket.configure_website
       #
       # If you pass a block, the website configuration object
       # will be yielded.  You can modify it before it is saved.
       #
-      #   bucket.configure_website do |cfg|
-      #     cfg.index_document_suffix = 'index.html'
-      #     cfg.error_document_key = 'error.html'
-      #   end
+      #     bucket.configure_website do |cfg|
+      #       cfg.index_document_suffix = 'index.html'
+      #       cfg.error_document_key = 'error.html'
+      #     end
       #
       # If the bucket already has a website configuration, it will be loaded
       # and yielded.  This makes it possible to modify an existing
       # configuration.
       #
-      #   # only rename the error document
-      #   bucket.configure_website do |cfg|
-      #     cfg.error_document_key = 'oops.html'
-      #   end
+      #     # only rename the error document
+      #     bucket.configure_website do |cfg|
+      #       cfg.error_document_key = 'oops.html'
+      #     end
       #
       # @yieldparam [WebsiteConfiguration] website_config
       # @return [WebsiteConfiguration]
@@ -346,20 +346,20 @@ module AWS
 
       # Returns the tags for this bucket.
       #
-      #   tags = bucket.tags
-      #   #=> <AWS::S3::BucketTagCollection>
+      #     tags = bucket.tags
+      #     #=> <AWS::S3::BucketTagCollection>
       #
-      #   # adds a tag to the bucket
-      #   tags['foo'] = 'abc'
+      #     # adds a tag to the bucket
+      #     tags['foo'] = 'abc'
       #
-      #   # replaces all tags
-      #   tags.set('new' => 'tags')
+      #     # replaces all tags
+      #     tags.set('new' => 'tags')
       #
-      #   # removes all tags from the bucket
-      #   tags.clear
+      #     # removes all tags from the bucket
+      #     tags.clear
       #
-      #   # returns tags as a hash
-      #   tags.to_h
+      #     # returns tags as a hash
+      #     tags.to_h
       #
       # @return [BucketTagCollection] Returns a collection that represents
       #   the tags for this bucket.
@@ -370,14 +370,14 @@ module AWS
 
       # Sets the tags for this bucket.
       #
-      #   bucket.tags = { 'contents' => 'photots' }
+      #     bucket.tags = { 'contents' => 'photots' }
       #
       # You can remove all tags for the bucket by passing an empty
       # hash or `nil`.
       #
-      #   bucket.tags = nil # {} also deletes all tags
-      #   bucket.tags
-      #   #=> {}
+      #     bucket.tags = nil # {} also deletes all tags
+      #     bucket.tags
+      #     #=> {}
       #
       # @param [Hash,nil] tags The tags to set on this bucket.
       #
@@ -549,11 +549,11 @@ module AWS
       # instance of AccessControlList, plus an additional `change`
       # method:
       #
-      #   bucket.acl.change do |acl|
-      #     acl.grants.reject! do |g|
-      #       g.grantee.canonical_user_id != bucket.owner.id
+      #     bucket.acl.change do |acl|
+      #       acl.grants.reject! do |g|
+      #         g.grantee.canonical_user_id != bucket.owner.id
+      #       end
       #     end
-      #   end
       #
       # @return [AccessControlList]
       def acl
@@ -597,15 +597,15 @@ module AWS
       # PolicyProxy mixed in, so you can use it to change the
       # current policy or delete it, for example:
       #
-      #  if policy = bucket.policy
-      #    # add a statement
-      #    policy.change do |p|
-      #      p.allow(...)
-      #    end
+      #     if policy = bucket.policy
+      #       # add a statement
+      #       policy.change do |p|
+      #         p.allow(...)
+      #       end
       #
-      #    # delete the policy
-      #    policy.delete
-      #  end
+      #       # delete the policy
+      #       policy.delete
+      #     end
       #
       # Note that changing the policy is not an atomic operation; it
       # fetches the current policy, yields it to the block, and then
@@ -660,16 +660,16 @@ module AWS
       # You can call this method if you prefer to build your own
       # lifecycle configuration.
       #
-      #   bucket.lifecycle_configuration = <<-XML
-      #     <LifecycleConfiguration>
-      #       ...
-      #     </LifecycleConfiguration>
-      #   XML
+      #     bucket.lifecycle_configuration = <<-XML
+      #       <LifecycleConfiguration>
+      #         ...
+      #       </LifecycleConfiguration>
+      #     XML
       #
       # You can also use this method to copy a lifecycle configuration
       # from another bucket.
       #
-      #   bucket.lifecycle_configuration = other_bucket.lifecycle_configuration
+      #     bucket.lifecycle_configuration = other_bucket.lifecycle_configuration
       #
       # If you call this method, passing nil, the lifecycle configuration
       # for this bucket will be deleted.

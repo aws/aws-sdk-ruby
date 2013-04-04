@@ -1499,12 +1499,12 @@ module AWS
         #
         # DNS compatible bucket names may be accessed like:
         #
-        #   http://dns.compat.bucket.name.s3.amazonaws.com/
+        #     http://dns.compat.bucket.name.s3.amazonaws.com/
         #
         # Whereas non-dns compatible bucket names must place the bucket
         # name in the url path, like:
         #
-        #   http://s3.amazonaws.com/dns_incompat_bucket_name/
+        #     http://s3.amazonaws.com/dns_incompat_bucket_name/
         #
         # @return [Boolean] Returns true if the given bucket name may be
         #   is dns compatible.

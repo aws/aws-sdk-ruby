@@ -18,9 +18,9 @@ module AWS
 
   # Provides a high-level interface for using DynamoDB.
   #
-  #   dynamo_db = AWS::DynamoDB.new(
-  #     :access_key_id => '...',
-  #     :secret_access_key => '...')
+  #     dynamo_db = AWS::DynamoDB.new(
+  #       :access_key_id => '...',
+  #       :secret_access_key => '...')
   #
   # # Tables
   #
@@ -32,11 +32,11 @@ module AWS
   # step in writing data to DynamoDB is to create a table and
   # designate a table name with a primary key.
   #
-  #   table = dynamo_db.tables.create(
-  #     "MyTable",
-  #     :hash_key => { :id => :string }
-  #   )
-  #   sleep 1 while table.status == :creating
+  #     table = dynamo_db.tables.create(
+  #       "MyTable",
+  #       :hash_key => { :id => :string }
+  #     )
+  #     sleep 1 while table.status == :creating
   #
   # See {Table} and {TableCollection} for more information on creating
   # and managing tables.
@@ -50,12 +50,12 @@ module AWS
   # The identity of an item consists of its hash key value and -- if
   # the table's schema includes a range key -- its range key value.
   #
-  #   item = table.items.put(:id => "abc123")
-  #   item.hash_value # => "abc123"
-  #   item.attributes.set(
-  #     :colors => ["red", "blue"],
-  #     :numbers => [12, 24]
-  #   )
+  #     item = table.items.put(:id => "abc123")
+  #     item.hash_value # => "abc123"
+  #     item.attributes.set(
+  #       :colors => ["red", "blue"],
+  #       :numbers => [12, 24]
+  #     )
   #
   # See {Item} and {ItemCollection} for more information on creating
   # and managing items.  For more information on managing attributes,
@@ -63,40 +63,40 @@ module AWS
   #
   # # Examples
   #
-  #   # create a table (10 read and 5 write capacity units) with the
-  #   # default schema (id string hash key)
-  #   dynamo_db = AWS::DynamoDB.new
-  #   table = dynamo_db.tables.create('my-table', 10, 5)
+  #     # create a table (10 read and 5 write capacity units) with the
+  #     # default schema (id string hash key)
+  #     dynamo_db = AWS::DynamoDB.new
+  #     table = dynamo_db.tables.create('my-table', 10, 5)
   #
-  #   sleep 1 while table.status == :creating
-  #   table.status #=> :active
+  #     sleep 1 while table.status == :creating
+  #     table.status #=> :active
   #
-  #   # get an existing table by name and specify its hash key
-  #   table = dynamo_db.tables['another-table']
-  #   table.hash_key = [:id, :number]
+  #     # get an existing table by name and specify its hash key
+  #     table = dynamo_db.tables['another-table']
+  #     table.hash_key = [:id, :number]
   #
-  #   # add an item
-  #   item = table.items.create('id' => 12345, 'foo' => 'bar')
+  #     # add an item
+  #     item = table.items.create('id' => 12345, 'foo' => 'bar')
   #
-  #   # add attributes to an item
-  #   item.attributes.add 'category' => %w(demo), 'tags' => %w(sample item)
+  #     # add attributes to an item
+  #     item.attributes.add 'category' => %w(demo), 'tags' => %w(sample item)
   #
-  #   # update an item with mixed add, delete, update
-  #   item.attributes.update do |u|
-  #     u.add 'colors' => %w(red)
-  #     u.set 'category' => 'demo-category'
-  #     u.delete 'foo'
-  #   end
+  #     # update an item with mixed add, delete, update
+  #     item.attributes.update do |u|
+  #       u.add 'colors' => %w(red)
+  #       u.set 'category' => 'demo-category'
+  #       u.delete 'foo'
+  #     end
   #
-  #   # delete attributes
-  #   item.attributes.delete 'colors', 'category'
+  #     # delete attributes
+  #     item.attributes.delete 'colors', 'category'
   #
-  #   # get attributes
-  #   item.attributes.to_h
-  #   #=> {"id"=>#<BigDecimal:10155f5d0,'0.12345E5',9(18)>, "tags"=>#<Set: {"item", "sample"}>}
+  #     # get attributes
+  #     item.attributes.to_h
+  #     #=> {"id"=>#<BigDecimal:10155f5d0,'0.12345E5',9(18)>, "tags"=>#<Set: {"item", "sample"}>}
   #
-  #   # delete an item and all of its attributes
-  #   item.delete
+  #     # delete an item and all of its attributes
+  #     item.delete
   #
   # @!attribute [r] client
   #   @return [Client] the low-level DynamoDB client object
@@ -132,10 +132,10 @@ module AWS
     # Request attributes for items spanning multiple tables.  You configure
     # you batch get request using a block:
     #
-    #   attributes = dynamo_db.batch_get do |batch|
-    #     # call methods on batch specify tables, attributes and items
-    #     # ...
-    #   end
+    #     attributes = dynamo_db.batch_get do |batch|
+    #       # call methods on batch specify tables, attributes and items
+    #       # ...
+    #     end
     #
     # The value returned by #batch_get is an enumerable object that yields
     # the table name (as a string) and a hash of attributes.  The
@@ -145,8 +145,8 @@ module AWS
     #
     # You can call two methods on the yielded batch object:
     #
-    # * #table
-    # * #items
+    #   * {#table}
+    #   * {#items}
     #
     # For more information on these methods, see {BatchGet}.
     #

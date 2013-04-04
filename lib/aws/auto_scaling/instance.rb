@@ -21,25 +21,25 @@ module AWS
     # If you know the EC2 instance id, you can use {InstanceCollection#[]}
     # to get the Auto Scaling instance.
     #
-    #   instance = auto_scaling.instances['i-1234578']
-    #   instance.health_statue #=> :healthy
-    #   instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
+    #     instance = auto_scaling.instances['i-1234578']
+    #     instance.health_statue #=> :healthy
+    #     instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
     #
     # ## Enumerating Auto Scaling Instances
     #
     # You can enumerate *ALL* instances like so:
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.instances.each do |auto_scaling_instance|
-    #     # ...
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.instances.each do |auto_scaling_instance|
+    #       # ...
+    #     end
     #
     # If you want the instances for a single auto scaling group:
     #
-    #   group = auto_scaling.groups['group-name']
-    #   group.auto_scaling_instances.each do |instance|
-    #     # ...
-    #   end
+    #     group = auto_scaling.groups['group-name']
+    #     group.auto_scaling_instances.each do |instance|
+    #       # ...
+    #     end
     #
     # If you prefer {EC2::Instance} objects you should use
     # {Group#ec2_instances} instead.

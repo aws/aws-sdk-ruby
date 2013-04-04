@@ -20,10 +20,10 @@ module AWS
 
       # Returns the errors for the atttibute in an array.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.add(:name, 'must be less than 30 characters')
-      #   errors[:name]
-      #   #=> ['may not be blank', 'must be less than 30 characters']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.add(:name, 'must be less than 30 characters')
+      #     errors[:name]
+      #     #=> ['may not be blank', 'must be less than 30 characters']
       #
       # @param [String,Symbol] attribute_name The name of the attribute to retnr
       #   errors for.  You can pass the string or symbol version.
@@ -37,9 +37,9 @@ module AWS
 
       # Adds an error message to the named attribute.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.on(:name)
-      #   #=> ['may not be blank']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.on(:name)
+      #     #=> ['may not be blank']
       #
       # If you want to add a general error message, then pass `:base`
       # for `attribute_name`, or call {#add_to_base}.
@@ -93,9 +93,9 @@ module AWS
       # Returns the errors prefixed by a humanized version of the attribute
       # name.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.full_messages
-      #   #=> ['Name may not be blank']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.full_messages
+      #     #=> ['Name may not be blank']
       #
       # @return [Array of Strings] Returns an array of error messages.
       def full_messages
@@ -113,9 +113,9 @@ module AWS
       # Returns a hash of of errors messages.  Keys are attribute names
       # and values are arrays of error messages.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.to_hash
-      #   #=> { 'name' => ['may not be blank'] }
+      #     errors.add(:name, 'may not be blank')
+      #     errors.to_hash
+      #     #=> { 'name' => ['may not be blank'] }
       #
       # Please note that the hash values are always arrays, even if there
       # is only one error message for the attribute.

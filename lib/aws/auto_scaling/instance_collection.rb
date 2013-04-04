@@ -16,15 +16,15 @@ module AWS
 
     # Allows you to enumerate Auto Scaling instances.
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.instances.each do |instance|
-    #     # ...
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.instances.each do |instance|
+    #       # ...
+    #     end
     #
     # You can also get an Auto Scaling instance by its EC2 instance id.
     #
-    #   auto_scaling_instance = auto_scaling.instances['i-12345678']
-    #   auto_scaling_instance.class #=> AWS::AutoScaling::Instance
+    #     auto_scaling_instance = auto_scaling.instances['i-12345678']
+    #     auto_scaling_instance.class #=> AWS::AutoScaling::Instance
     #
     class InstanceCollection
 

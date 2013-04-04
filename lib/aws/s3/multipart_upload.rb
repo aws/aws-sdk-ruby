@@ -129,20 +129,19 @@ module AWS
       #
       # @overload add_part(data, options = {})
       #
-      #   @param data The data to upload.  Valid values include:
+      #   @param data The data to upload.
+      #     Valid values include:
       #
-      #     * A string
+      #       * A string
+      #       * A Pathname object
+      #       * Any object responding to `read` and `eof?`; the object
+      #         must support the following access methods:
       #
-      #     * A Pathname object
+      #             read                     # all at once
+      #             read(length) until eof?  # in chunks
       #
-      #     * Any object responding to `read` and `eof?`; the object
-      #       must support the following access methods:
-      #
-      #        read                     # all at once
-      #        read(length) until eof?  # in chunks
-      #
-      #       If you specify data this way, you must also include
-      #       the `:content_length` option.
+      #         If you specify data this way, you must also include
+      #         the `:content_length` option.
       #
       #   @param [Hash] options Additional options for the upload.
       #
@@ -159,18 +158,16 @@ module AWS
       #   @option options :data The data to upload.  Valid values
       #     include:
       #
-      #     * A string
+      #       * A string
+      #       * A Pathname object
+      #       * Any object responding to `read` and `eof?`; the object
+      #         must support the following access methods:
       #
-      #     * A Pathname object
+      #              read                     # all at once
+      #              read(length) until eof?  # in chunks
       #
-      #     * Any object responding to `read` and `eof?`; the object
-      #       must support the following access methods:
-      #
-      #        read                     # all at once
-      #        read(length) until eof?  # in chunks
-      #
-      #       If you specify data this way, you must also include
-      #       the `:content_length` option.
+      #         If you specify data this way, you must also include
+      #         the `:content_length` option.
       #
       #   @option options [String] :file Can be specified instead of
       #     `:data`; its value specifies the path of a file to

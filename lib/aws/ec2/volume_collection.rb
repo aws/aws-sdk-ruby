@@ -18,12 +18,11 @@ module AWS
     # should get an instance of this class by calling {EC2#volumes}.
     #
     # @example Create an empty 15GiB volume
-    #  ec2.volumes.create(:size => 15,
-    #                     :availability_zone => "us-west-2a")
+    #   ec2.volumes.create(:size => 15, :availability_zone => "us-west-2a")
     #
     # @example Get a volume by ID
-    #  volume = ec2.volumes["vol-123"]
-    #  volume.exists?
+    #   volume = ec2.volumes["vol-123"]
+    #   volume.exists?
     #
     # @example Get a map of volume IDs to volume status
     #   ec2.volumes.inject({}) { |m, v| m[v.id] = v.status; m }

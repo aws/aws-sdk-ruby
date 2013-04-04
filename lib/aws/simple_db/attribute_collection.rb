@@ -39,8 +39,10 @@ module AWS
       # actually exist in SimpleDB.
       #
       # @example Get an attribute by symbol or string name
+      #
       #   colors = item.attributes[:colors]
       #   colors = item.attributes['colors']
+      #
       # @param [String, Symbol] attribute_name name of the attribute to get.
       # @return [Item] An item with the given name.
       def [] attribute_name
@@ -50,7 +52,9 @@ module AWS
       # Sets the values for a given attribute.
       #
       # @example Replace all of the values for the named attribute.
+      #
       #   item.attributes[:color] = 'red', 'blue'
+      #
       # @return This method returns the values passed to it.
       def []= attribute_name, *values
         self[attribute_name].set(*values)
@@ -157,6 +161,8 @@ module AWS
 
       # Perform a mixed update of added and replace attributes.
       #
+      # @example
+      #
       #   item.attributes.put(
       #     :add => { 'colors' => %w(green blue), 'tags' => 'cool' }
       #     :replace => { 'quantity' => 5 }
@@ -183,6 +189,7 @@ module AWS
       # arrays of strings.
       #
       # @example
+      #
       #   item.attributes.to_h
       #   #=> { 'colors' => ['red','blue'], 'size' => ['large'] }
       #
@@ -202,10 +209,12 @@ module AWS
       # Delete one or more attributes from {#item}.
       #
       # @example Delete a list of attributes by name (accepts a list or array)
+      #
       #   item.attributes.delete 'size', 'color'
       #   item.attributes.delete %w(size color)
       #
       # @example Delete a specific list of attribute values
+      #
       #   item.attributes.delete(:color => 'red', :tags => %w(special limited))
       #
       # @overload delete(attributes)

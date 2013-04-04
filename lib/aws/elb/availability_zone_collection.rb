@@ -17,20 +17,20 @@ module AWS
     # A collection that help maanage the availability zones for
     # a load balancer.
     #
-    #   load_balancer = AWS::ELB.new.load_balancers['my-load-balancer']
+    #     load_balancer = AWS::ELB.new.load_balancers['my-load-balancer']
     #
-    #   zones = load_balancer.availability_zones
+    #     zones = load_balancer.availability_zones
     #
-    #   # adding zones
-    #   zones.enable('us-west-2b', 'us-west-2c')
+    #     # adding zones
+    #     zones.enable('us-west-2b', 'us-west-2c')
     #
-    #   # removing zones
-    #   zones.disable('us-west-2b')
+    #     # removing zones
+    #     zones.disable('us-west-2b')
     #
-    #   # enumerating enabled zones
-    #   zones.each do |zone|
-    #     puts zone.name
-    #   end
+    #     # enumerating enabled zones
+    #     zones.each do |zone|
+    #       puts zone.name
+    #     end
     #
     class AvailabilityZoneCollection
 
@@ -48,13 +48,13 @@ module AWS
 
       # Adds one or more EC2 Availability Zones to the load balancer.
       #
-      #   load_balancer.availability_zones.enable("us-west-2a", "us-west-2b")
+      #     load_balancer.availability_zones.enable("us-west-2a", "us-west-2b")
       #
       # You can also pass {EC2::AvailabilityZone} objects:
       #
-      #   # enable all availabilty zones for this region
-      #   zones = AWS::EC2.new.availability_zones.to_a
-      #   load_balancer.availability_zones.enable(zones)
+      #     # enable all availabilty zones for this region
+      #     zones = AWS::EC2.new.availability_zones.to_a
+      #     load_balancer.availability_zones.enable(zones)
       #
       # The load balancer evenly distributes requests across all its
       # registered availability zones that contain instances. As a result,
@@ -83,13 +83,13 @@ module AWS
       # Removes the specified EC2 availability zones from the set of
       # configured availability zones for the load balancer.
       #
-      #   load_balancer.availability_zones.disable("us-west-2a", "us-west-2b")
+      #     load_balancer.availability_zones.disable("us-west-2a", "us-west-2b")
       #
       # You can also pass {EC2::AvailabilityZone} objects:
       #
-      #   # disable all availabilty zones
-      #   zones = AWS::EC2.new.availability_zones.to_a
-      #   load_balancer.availability_zones.disable(zones)
+      #     # disable all availabilty zones
+      #     zones = AWS::EC2.new.availability_zones.to_a
+      #     load_balancer.availability_zones.disable(zones)
       #
       # There must be at least one availability zone registered with a
       # load balancer at all times. A client cannot remove all the availability

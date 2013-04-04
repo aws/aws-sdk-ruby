@@ -21,18 +21,18 @@ module AWS
     # History events belong to workflow executions.  You can get them
     # from an execution two ways:
     #
-    # 1) By enumerating events from the execution
+    # * By enumerating events from the execution
     #
-    #      workflow_execution.events.each do |event|
-    #        # ...
-    #      end
+    #       workflow_execution.events.each do |event|
+    #         # ...
+    #       end
     #
-    # 2) By enumerating events from the context of a {DecisionTask}:
+    # * By enumerating events from the context of a {DecisionTask}:
     #
-    #      workflow_execution.decision_tasks.poll do |decision_task|
-    #        decision_task.events.each do |event|
-    #        end
-    #      end
+    #       workflow_execution.decision_tasks.poll do |decision_task|
+    #         decision_task.events.each do |event|
+    #         end
+    #       end
     #
     # ## History Event Attributes
     #
@@ -50,8 +50,8 @@ module AWS
     # structure returned by {#attributes} allows you to access attributes
     # by their snake_case name or their camelCase name:
     #
-    #   event.attributes.workflow_type
-    #   event.attributes['workflowType']
+    #     event.attributes.workflow_type
+    #     event.attributes['workflowType']
     #
     # See {HistoryEvent::Attributes} for more information about working
     # with the returned attributes.
@@ -134,13 +134,13 @@ module AWS
       # Here are a few examples showing the different ways to access an
       # attribute:
       #
-      #   event = workflow_executions.events.first
+      #     event = workflow_executions.events.first
       #
-      #   # equivalent
-      #   event.attributes.task_list
-      #   event.attributes[:task_list]
-      #   event.attributes['task_list']
-      #   event.attributes['taskList']
+      #     # equivalent
+      #     event.attributes.task_list
+      #     event.attributes[:task_list]
+      #     event.attributes['task_list']
+      #     event.attributes['taskList']
       #
       # As shown in the example above keys and method names can be
       # snake_cased or camelCased (strings or symbols).

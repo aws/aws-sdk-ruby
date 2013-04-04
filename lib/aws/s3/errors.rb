@@ -18,13 +18,13 @@ module AWS
     # types that S3 can return.  You can use these classes to rescue
     # specific errors, for example:
     #
-    #  begin
-    #    S3.new.buckets.mybucket.
-    #      objects.myobj.write("HELLO")
-    #  rescue S3::Errors::NoSuchBucket => e
-    #    S3.new.buckets.create("mybucket")
-    #    retry
-    #  end
+    #     begin
+    #       S3.new.buckets.mybucket.
+    #         objects.myobj.write("HELLO")
+    #     rescue S3::Errors::NoSuchBucket => e
+    #       S3.new.buckets.create("mybucket")
+    #       retry
+    #     end
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.

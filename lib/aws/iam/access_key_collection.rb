@@ -20,27 +20,27 @@ module AWS
     #
     # ## Create New Access Keys
     #
-    #   # for the aws account
-    #   access_keys = iam.access_keys.create
+    #     # for the aws account
+    #     access_keys = iam.access_keys.create
     #
-    #   # for an iam user
-    #   user_access_keys = iam.users['johndoe'].access_keys.create
+    #     # for an iam user
+    #     user_access_keys = iam.users['johndoe'].access_keys.create
     #
     # ## Secret
     #
     # Make sure after creating an access to retrieve the secret access key
     # and save it somewhere safe.
     #
-    #   access_keys = iam.access_keys.create
-    #   secret = access_keys.secret
+    #     access_keys = iam.access_keys.create
+    #     secret = access_keys.secret
     #
     # If you try to access the secret on an access key that was not newly
     # created an error will be raised.  AWS will only give the secret for
     # a newly created access key:
     #
-    #   access_keys = iam.access_keys.first
-    #   access_keys.secret
-    #   #=> oops, raises a runtime error
+    #     access_keys = iam.access_keys.first
+    #     access_keys.secret
+    #     #=> oops, raises a runtime error
     #
     class AccessKeyCollection
 
@@ -80,7 +80,7 @@ module AWS
 
       # Deletes all of the access keys from this collection.
       #
-      #   iam.users['someuser'].access_keys.clear
+      #     iam.users['someuser'].access_keys.clear
       #
       # @return [nil]
       def clear

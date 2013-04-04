@@ -23,6 +23,7 @@ module AWS
   # IAM users.
   #
   # @example Getting temporary credentials and using them to make an EC2 request
+  #
   #   sts = AWS::STS.new(:access_key_id => "LONG_TERM_KEY",
   #                      :secret_access_key => "LONG_TERM_SECRET")
   #   session = sts.new_session(:duration => 60*60)
@@ -30,6 +31,7 @@ module AWS
   #   ec2.instances.to_a
   #
   # @example Getting temporary credentials with restricted permissions
+  #
   #   policy = AWS::STS::Policy.new
   #   policy.allow(:actions => ["s3:*", "ec2:*"],
   #                :resources => :any)

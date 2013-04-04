@@ -17,10 +17,12 @@ module AWS
     # Represents an Amazon SQS Queue.
     #
     # @example Sending a message
+    #
     #   msg = queue.send_message("HELLO")
     #   puts "Sent message: #{msg.id}"
     #
     # @example Polling for messages indefinitely
+    #
     #   queue.poll do |msg|
     #     puts "Got message: #{msg.body}"
     #   end
@@ -205,14 +207,14 @@ module AWS
       # Polls continually for messages.  For example, you can use
       # this to poll indefinitely:
       #
-      #  queue.poll { |msg| puts msg.body }
+      #     queue.poll { |msg| puts msg.body }
       #
       # Or, to poll indefinitely for the first message and then
       # continue polling until no message is received for a period
       # of at least ten seconds:
       #
-      #  queue.poll(:initial_timeout => false,
-      #             :idle_timeout => 10) { |msg| puts msg.body }
+      #     queue.poll(:initial_timeout => false,
+      #                :idle_timeout => 10) { |msg| puts msg.body }
       #
       # As with the block form of {#receive_message}, this method
       # automatically deletes the message then the block exits
@@ -480,21 +482,21 @@ module AWS
 
       # Sends a batch of up to 10 messages in a single request.
       #
-      #   queue.send_messages('message-1', 'message-2')
+      #     queue.send_messages('message-1', 'message-2')
       #
       # You can also set an optional delay for all of the messages:
       #
-      #   # delay all messages 1 hour
-      #   queue.batch_send(msg1, msg2, :delay_seconds => 3600)
+      #     # delay all messages 1 hour
+      #     queue.batch_send(msg1, msg2, :delay_seconds => 3600)
       #
       # If you need to set a custom delay for each message you can pass
       # hashes:
       #
-      #   messages = []
-      #   messages << { :message_body => 'msg1', :delay_seconds => 60 }
-      #   messages << { :message_body => 'msg2', :delay_seconds => 30 }
+      #     messages = []
+      #     messages << { :message_body => 'msg1', :delay_seconds => 60 }
+      #     messages << { :message_body => 'msg2', :delay_seconds => 30 }
       #
-      #   queue.batch_send(messages)
+      #     queue.batch_send(messages)
       #
       # @param [String,Hash] messages A list of messages.  Each message
       #   should be a string, or a hash with a `:message_body`,
@@ -580,7 +582,7 @@ module AWS
       #   This form of the method is useful when you want to set the same
       #   timeout value for each message.
       #
-      #     queue.batch_change_visibility(10, messages)
+      #       queue.batch_change_visibility(10, messages)
       #
       #   @param [Integer] visibility_timeout The new value for the message's
       #     visibility timeout (in seconds).
@@ -601,11 +603,11 @@ module AWS
       #
       #   Use this form when each message needs a different visiblity timeout.
       #
-      #     messages = []
-      #     messages << { :message => 'handle1', :visibility_timeout => 5 }
-      #     messages << { :message => 'handle2', :visibility_timeout => 10 }
+      #       messages = []
+      #       messages << { :message => 'handle1', :visibility_timeout => 5 }
+      #       messages << { :message => 'handle2', :visibility_timeout => 10 }
       #
-      #     queue.batch_change_visibility(*messages)
+      #       queue.batch_change_visibility(*messages)
       #
       #   @param [Hash] message A list hashes, each with a `:visibility_timeout`
       #     and a `:message`.

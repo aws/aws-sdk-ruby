@@ -194,19 +194,20 @@ module AWS
 
       # Adds one (or more) steps to the current job flow.
       #
-      #   emr.job_flows['job-flow-id'].add_steps([{
-      #     :name => 'step-name',
-      #     :action_on_failure => 'TERMINATE_JOB_FLOW',
-      #     :hadoop_jar_step => {
-      #       :jar => 'path/to/a/jar/file',
-      #       :main_class => 'MainClassName',
-      #       :args => %w(arg1 arg2 arg3)],
-      #       :properties => [
-      #         { :key => 'property-1-name', :value => 'property-1-value' }
-      #         { :key => 'property-2-name', :value => 'property-2-value' }
-      #       ],
-      #     }
-      #   }])
+      #     emr.job_flows['job-flow-id'].add_steps([{
+      #       :name => 'step-name',
+      #       :action_on_failure => 'TERMINATE_JOB_FLOW',
+      #       :hadoop_jar_step => {
+      #         :jar => 'path/to/a/jar/file',
+      #         :main_class => 'MainClassName',
+      #         :args => %w(arg1 arg2 arg3)],
+      #         :properties => [
+      #           { :key => 'property-1-name', :value => 'property-1-value' }
+      #           { :key => 'property-2-name', :value => 'property-2-value' }
+      #         ],
+      #       }
+      #     }])
+      #     emr.job_flows['job-flow-id'].add_steps([{
       #
       # @param [Array<Hash>] steps A list of one or more steps to add.
       #   Each step should be a hash with the following structure:

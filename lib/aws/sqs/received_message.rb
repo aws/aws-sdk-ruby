@@ -59,7 +59,8 @@ module AWS
 
       # When SNS publishes messages to SQS queues the message body is
       # formatted as a json message and then base 64 encoded.
-      # An easy way to work with SNS messages is to call this method:
+      #
+      # @example
       #
       #   sns_msg = message.as_sns_message
       #

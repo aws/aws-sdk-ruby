@@ -58,6 +58,8 @@ module AWS
 
       # Creates a new item in SimpleDB with the given attributes:
       #
+      # @example
+      #
       #   domain.items.create('shirt', {
       #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance'})
@@ -101,26 +103,26 @@ module AWS
       # The default mode of an ItemCollection is to yield Item objects with
       # no populated attributes.
       #
-      #   # only receives item names from SimpleDB
-      #   domain.items.each do |item|
-      #     puts item.name
-      #     puts item.class.name # => AWS::SimpleDB::Item
-      #   end
+      #     # only receives item names from SimpleDB
+      #     domain.items.each do |item|
+      #       puts item.name
+      #       puts item.class.name # => AWS::SimpleDB::Item
+      #     end
       #
       # You can switch a collection into yielded {ItemData} objects by
       # specifying what attributes to request:
       #
-      #   domain.items.select(:all).each do |item_data|
-      #     puts item_data.class.name # => AWS::SimpleDB::ItemData
-      #     puts item_data.attributes # => { 'attr-name' => 'attr-value', ... }
-      #   end
+      #     domain.items.select(:all).each do |item_data|
+      #       puts item_data.class.name # => AWS::SimpleDB::ItemData
+      #       puts item_data.attributes # => { 'attr-name' => 'attr-value', ... }
+      #     end
       #
       # You can also pass the standard scope options to #each as well:
       #
-      #   # output the item names of the 10 most expensive items
-      #   domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
-      #     puts item.name
-      #   end
+      #     # output the item names of the 10 most expensive items
+      #     domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
+      #       puts item.name
+      #     end
       #
       # @yield [item] Yields once for every item in the {#domain}.
       #
@@ -178,16 +180,16 @@ module AWS
 
       # Counts the items in the collection.
       #
-      #   domain.items.count
+      #     domain.items.count
       #
       # You can specify what items to count with {#where}:
       #
-      #   domain.items.where(:color => "red").count
+      #     domain.items.where(:color => "red").count
       #
       # You can also limit the number of items to count:
       #
-      #   # count up to 500 items and then stop
-      #   domain.items.limit(500).count
+      #     # count up to 500 items and then stop
+      #     domain.items.limit(500).count
       #
       # @param [Hash] options Options for counting items.
       #
@@ -249,15 +251,15 @@ module AWS
 
       # Specifies a list of attributes select from SimpleDB.
       #
-      #   domain.items.select('size', 'color').each do |item_data|
-      #     puts item_data.attributes # => { 'size' => ..., :color => ... }
-      #   end
+      #     domain.items.select('size', 'color').each do |item_data|
+      #       puts item_data.attributes # => { 'size' => ..., :color => ... }
+      #     end
       #
       # You can select all attributes by passing `:all` or '*':
       #
-      #   domain.items.select('*').each {|item_data| ... }
+      #     domain.items.select('*').each {|item_data| ... }
       #
-      #   domain.items.select(:all).each {|item_data| ... }
+      #     domain.items.select(:all).each {|item_data| ... }
       #
       # Calling #select causes #each to yield {ItemData} objects
       # with #attribute hashes, instead of {Item} objects with
@@ -319,34 +321,34 @@ module AWS
       # in addition to any conditions defined on this collection.
       # For example:
       #
-      #  items = domain.items.where(:color => 'blue').
-      #    where('engine_type is not null')
+      #     items = domain.items.where(:color => 'blue').
+      #       where('engine_type is not null')
       #
-      #  # does SELECT itemName() FROM `mydomain`
-      #  #      WHERE color = "blue" AND engine_type is not null
-      #  items.each { |i| ... }
+      #     # does SELECT itemName() FROM `mydomain`
+      #     #      WHERE color = "blue" AND engine_type is not null
+      #     items.each { |i| ... }
       #
       # ## Hash Conditions
       #
       # When `conditions` is a hash, each entry produces a condition
       # on the attribute named in the hash key.  For example:
       #
-      #  # produces "WHERE `foo` = 'bar'"
-      #  domain.items.where(:foo => 'bar')
+      #     # produces "WHERE `foo` = 'bar'"
+      #     domain.items.where(:foo => 'bar')
       #
       # You can pass an array value to use an "IN" operator instead
       # of "=":
       #
-      #  # produces "WHERE `foo` IN ('bar', 'baz')"
-      #  domain.items.where(:foo => ['bar', 'baz'])
+      #     # produces "WHERE `foo` IN ('bar', 'baz')"
+      #     domain.items.where(:foo => ['bar', 'baz'])
       #
       # You can also pass a range value to use a "BETWEEN" operator:
       #
-      #  # produces "WHERE `foo` BETWEEN 'bar' AND 'baz'
-      #  domain.items.where(:foo => 'bar'..'baz')
+      #     # produces "WHERE `foo` BETWEEN 'bar' AND 'baz'
+      #     domain.items.where(:foo => 'bar'..'baz')
       #
-      #  # produces "WHERE (`foo` >= 'bar' AND `foo` < 'baz')"
-      #  domain.items.where(:foo => 'bar'...'baz')
+      #     # produces "WHERE (`foo` >= 'bar' AND `foo` < 'baz')"
+      #     domain.items.where(:foo => 'bar'...'baz')
       #
       # ## Placeholders
       #
@@ -355,28 +357,28 @@ module AWS
       # contain a value for each of the "?" characters in the
       # expression.  For example:
       #
-      #  # produces "WHERE foo like 'fred''s % value'"
-      #  domain.items.where("foo like ?", "fred's % value")
+      #     # produces "WHERE foo like 'fred''s % value'"
+      #     domain.items.where("foo like ?", "fred's % value")
       #
       # Array values are surrounded with parentheses when they are
       # substituted for a placeholder:
       #
-      #  # produces "WHERE foo in ('1', '2')"
-      #  domain.items.where("foo in ?", [1, 2])
+      #     # produces "WHERE foo in ('1', '2')"
+      #     domain.items.where("foo in ?", [1, 2])
       #
       # Note that no substitutions are made within a quoted region
       # of the query:
       #
-      #  # produces "WHERE `foo?` = 'red'"
-      #  domain.items.where("`foo?` = ?", "red")
+      #     # produces "WHERE `foo?` = 'red'"
+      #     domain.items.where("`foo?` = ?", "red")
       #
-      #  # produces "WHERE foo = 'fuzz?' AND bar = 'zap'"
-      #  domain.items.where("foo = 'fuzz?' AND bar = ?", "zap")
+      #     # produces "WHERE foo = 'fuzz?' AND bar = 'zap'"
+      #     domain.items.where("foo = 'fuzz?' AND bar = ?", "zap")
       #
       # Also note that no attempt is made to correct for syntax:
       #
-      #  # produces "WHERE 'foo' = 'bar'", which is invalid
-      #  domain.items.where("? = 'bar'", "foo")
+      #     # produces "WHERE 'foo' = 'bar'", which is invalid
+      #     domain.items.where("? = 'bar'", "foo")
       #
       # @return [ItemCollection] Returns a new item collection with the
       #   additional conditions.
@@ -412,7 +414,7 @@ module AWS
       # For example, to get item names in descending order of
       # popularity, you can do:
       #
-      #  domain.items.order(:popularity, :desc).map(&:name)
+      #     domain.items.order(:popularity, :desc).map(&:name)
       #
       # @param attribute [String or Symbol] The attribute name to
       #   order by.
@@ -432,10 +434,10 @@ module AWS
       # Limits the number of items that are returned or yielded.
       # For example, to get the 100 most popular item names:
       #
-      #  domain.items.
-      #    order(:popularity, :desc).
-      #    limit(100).
-      #    map(&:name)
+      #     domain.items.
+      #       order(:popularity, :desc).
+      #       limit(100).
+      #       map(&:name)
       #
       # @overload limit
       #   @return [Integer] Returns the current limit for the collection.

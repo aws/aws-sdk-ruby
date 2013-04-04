@@ -25,9 +25,10 @@ module AWS
       # @option options [required,String] :adjustment_type Specifies whether
       #   the adjustment is an absolute number or a percentage of the current
       #   capacity.  Valid values are:
-      #   * 'ChangeInCapacity'
-      #   * 'ExactCapacity'
-      #   * 'PercentChangeInCapacity'
+      #
+      #     * 'ChangeInCapacity'
+      #     * 'ExactCapacity'
+      #     * 'PercentChangeInCapacity'
       #
       # @option options [required,Integer] :scaling_adjustment The number of
       #   instances by which to scale. `:adjustment_type` determines the

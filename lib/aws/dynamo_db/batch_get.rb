@@ -40,26 +40,26 @@ module AWS
       #   to fetch.  If you want to load *ALL* attributes for the named items,
       #   then pass the symbol `:all`.
       #
-      #     # get all attributes
-      #     batch_get.table('mytable', :all, items)
+      #       # get all attributes
+      #       batch_get.table('mytable', :all, items)
       #
-      #     # get one attribute for each item
-      #     batch_get.table('mytable', ['name'], items)
+      #       # get one attribute for each item
+      #       batch_get.table('mytable', ['name'], items)
       #
-      #     # get a list of attributes for each item
-      #     batch_get.table('mytable', ['name', 'size'], items)
+      #       # get a list of attributes for each item
+      #       batch_get.table('mytable', ['name', 'size'], items)
       #
       # @param [Array<Item,Array>] items One or more items to fetch attributes
       #   for.  Each attribute should be one of the following:
       #
-      #   * an {Item} object
-      #   * a hash key value
-      #   * a hash key value and a range key value
+      #     * an {Item} object
+      #     * a hash key value
+      #     * a hash key value and a range key value
       #
       #   You must provide both the hash key and range key values if the table
       #   schema has both.
       #
-      #     batch_get.table('mytable', :all, [%w(hk1 rk1), %w(hk1 rk2), ...])
+      #       batch_get.table('mytable', :all, [%w(hk1 rk1), %w(hk1 rk2), ...])
       #
       # @param [Hash] options
       #
@@ -120,14 +120,14 @@ module AWS
       #   to fetch.  If you want to load *ALL* attributes for the named items,
       #   then pass the symbol `:all`.
       #
-      #     # get all attributes
-      #     batch_get.table('mytable', :all, items)
+      #       # get all attributes
+      #       batch_get.table('mytable', :all, items)
       #
-      #     # get one attribute for each item
-      #     batch_get.table('mytable', ['name'], items)
+      #       # get one attribute for each item
+      #       batch_get.table('mytable', ['name'], items)
       #
-      #     # get a list of attributes for each item
-      #     batch_get.table('mytable', ['name', 'size'], items)
+      #       # get a list of attributes for each item
+      #       batch_get.table('mytable', ['name', 'size'], items)
       #
       # @param [Item] items One or more {Item} objects to fetch attributes
       #   for.  These items may come from any number of different tables.

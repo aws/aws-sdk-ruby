@@ -26,10 +26,10 @@ module AWS
     # You can enumerate all available summaries using enumerable
     # methods.  Yielded summaries are simple hashes.
     #
-    #   cfm = AWS::CloudFormation.new
-    #   cfm.stack_summaries.each do |summary|
-    #     puts summary.to_yaml
-    #   end
+    #     cfm = AWS::CloudFormation.new
+    #     cfm.stack_summaries.each do |summary|
+    #       puts summary.to_yaml
+    #     end
     #
     # ## Filtering Stack Summaries
     #
@@ -37,16 +37,15 @@ module AWS
     # to filter the results by.  Only stacks with the given status(es)
     # will be enumerated.
     #
-    #   cfm.stack_summaries.with_status(:create_failed).each do |summary|
-    #     # ...
-    #   end
+    #     cfm.stack_summaries.with_status(:create_failed).each do |summary|
+    #       # ...
+    #     end
     #
-    #   # enumerate stacks with various delete statuses
-    #   statuses = %w(delete_in_progress delete_failed delete_complete)
-    #   cf.stack_summaries.with_status(statuses).each do |summary|
-    #     # ...
-    #   end
-    #
+    #     # enumerate stacks with various delete statuses
+    #     statuses = %w(delete_in_progress delete_failed delete_complete)
+    #     cf.stack_summaries.with_status(statuses).each do |summary|
+    #       # ...
+    #     end
     class StackSummaryCollection
 
       include Core::Collection::WithNextToken
@@ -59,38 +58,39 @@ module AWS
 
       # Limits the stacks summaries that are enumerated.
       #
-      #   cfm.stack_summaries.with_status(:create_complete).each do |summary|
-      #     puts summary[:stack_name]
-      #   end
+      #     cfm.stack_summaries.with_status(:create_complete).each do |summary|
+      #       puts summary[:stack_name]
+      #     end
       #
       # You can provide multiple statuses:
       #
-      #   statuses = [:create_failed, :rollback_failed]
-      #   cfm.stack_summaries.with_status(statuses).each do |summary|
-      #     puts summary[:stack_name]
-      #   end
+      #     statuses = [:create_failed, :rollback_failed]
+      #     cfm.stack_summaries.with_status(statuses).each do |summary|
+      #       puts summary[:stack_name]
+      #     end
       #
       # Status names may be symbolized (snake-cased) or upper-cased strings
       # (e.g. :create_in_progress, 'CREATE_IN_PROGRESS').
       #
       # @param [Symbol,String] status_filters One or more statuses to filter
       #   stacks with. Valid values include:
-      #   * `:create_in_progress`
-      #   * `:create_failed`
-      #   * `:create_complete`
-      #   * `:rollback_in_progress`
-      #   * `:rollback_failed`
-      #   * `:rollback_complete`
-      #   * `:delete_in_progress`
-      #   * `:delete_failed`
-      #   * `:delete_complete`
-      #   * `:update_in_progress`
-      #   * `:update_complete_cleanup_in_progress`
-      #   * `:update_complete`
-      #   * `:update_rollback_in_progress`
-      #   * `:update_rollback_failed`
-      #   * `:update_rollback_complete_cleanup_in_progress`
-      #   * `:update_rollback_complete`
+      #
+      #     * `:create_in_progress`
+      #     * `:create_failed`
+      #     * `:create_complete`
+      #     * `:rollback_in_progress`
+      #     * `:rollback_failed`
+      #     * `:rollback_complete`
+      #     * `:delete_in_progress`
+      #     * `:delete_failed`
+      #     * `:delete_complete`
+      #     * `:update_in_progress`
+      #     * `:update_complete_cleanup_in_progress`
+      #     * `:update_complete`
+      #     * `:update_rollback_in_progress`
+      #     * `:update_rollback_failed`
+      #     * `:update_rollback_complete_cleanup_in_progress`
+      #     * `:update_rollback_complete`
       #
       # @return [StackSummaryCollection] Returns a new stack summary
       #   collection that restricts what stack summariess will be

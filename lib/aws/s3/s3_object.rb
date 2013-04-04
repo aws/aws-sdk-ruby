@@ -24,14 +24,14 @@ module AWS
     #
     # You can get an object by its key.
     #
-    #   s3 = AWS::S3.new
-    #   obj = s3.buckets['my-bucket'].objects['key'] # no request made
+    #     s3 = AWS::S3.new
+    #     obj = s3.buckets['my-bucket'].objects['key'] # no request made
     #
     # You can also get objects by enumerating a objects in a bucket.
     #
-    #   bucket.objects.each do |obj|
-    #     puts obj.key
-    #   end
+    #     bucket.objects.each do |obj|
+    #       puts obj.key
+    #     end
     #
     # See {ObjectCollection} for more information on finding objects.
     #
@@ -40,31 +40,31 @@ module AWS
     # You create an object by writing to it.  The following two
     # expressions are equivalent.
     #
-    #   obj = bucket.objects.create('key', 'data')
-    #   obj = bucket.objects['key'].write('data')
+    #     obj = bucket.objects.create('key', 'data')
+    #     obj = bucket.objects['key'].write('data')
     #
     # # Writing Objects
     #
     # To upload data to S3, you simply need to call {#write} on an object.
     #
-    #    obj.write('Hello World!')
-    #    obj.read
-    #    #=> 'Hello World!'
+    #     obj.write('Hello World!')
+    #     obj.read
+    #     #=> 'Hello World!'
     #
     # ## Uploading Files
     #
     # You can upload a file to S3 in a variety of ways.  Given a path
     # to a file (as a string) you can do any of the following:
     #
-    #   # specify the data as a path to a file
-    #   obj.write(Pathname.new(path_to_file))
+    #     # specify the data as a path to a file
+    #     obj.write(Pathname.new(path_to_file))
     #
-    #   # also works this way
-    #   obj.write(:file => path_to_file)
+    #     # also works this way
+    #     obj.write(:file => path_to_file)
     #
-    #   # Also accepts an open file object
-    #   file = File.open(path_to_file, 'r')
-    #   obj.write(file)
+    #     # Also accepts an open file object
+    #     file = File.open(path_to_file, 'r')
+    #     obj.write(file)
     #
     # All three examples above produce the same result.  The file
     # will be streamed to S3 in chunks.  It will not be loaded
@@ -84,10 +84,10 @@ module AWS
     #
     # You may also stream uploads to S3 using a block:
     #
-    #   obj.write do |buffer, bytes|
-    #     # writing fewer than the requested number of bytes to the buffer
-    #     # will cause write to stop yielding to the block
-    #   end
+    #     obj.write do |buffer, bytes|
+    #       # writing fewer than the requested number of bytes to the buffer
+    #       # will cause write to stop yielding to the block
+    #     end
     #
     # # Reading Objects
     #
@@ -95,20 +95,20 @@ module AWS
     # load the entire object into memory and is not recommended for large
     # objects.
     #
-    #   obj.write('abc')
-    #   puts obj.read
-    #   #=> abc
+    #     obj.write('abc')
+    #     puts obj.read
+    #     #=> abc
     #
     # ## Streaming Downloads
     #
     # If you want to stream an object from S3, you can pass a block
     # to {#read}.
     #
-    #   File.open('output', 'w') do |file|
-    #     large_object.read do |chunk|
-    #       file.write(chunk)
+    #     File.open('output', 'w') do |file|
+    #       large_object.read do |chunk|
+    #         file.write(chunk)
+    #       end
     #     end
-    #   end
     #
     # # Encryption
     #
@@ -120,14 +120,14 @@ module AWS
     # Amazon S3 provides server side encryption for an additional cost.
     # You can specify to use server side encryption when writing an object.
     #
-    #   obj.write('data', :server_side_encryption => :aes256)
+    #     obj.write('data', :server_side_encryption => :aes256)
     #
     # You can also make this the default behavior.
     #
-    #   AWS.config(:s3_server_side_encryption => :aes256)
+    #     AWS.config(:s3_server_side_encryption => :aes256)
     #
-    #   s3 = AWS::S3.new
-    #   s3.buckets['name'].objects['key'].write('abc') # will be encrypted
+    #     s3 = AWS::S3.new
+    #     s3.buckets['name'].objects['key'].write('abc') # will be encrypted
     #
     # ## Client Side Encryption
     #
@@ -141,28 +141,28 @@ module AWS
     # and 256 bit sizes. Start by generating key or read a previously
     # generated key.
     #
-    #   # generate a new random key
-    #   my_key = OpenSSL::Cipher.new("AES-256-ECB").random_key
+    #     # generate a new random key
+    #     my_key = OpenSSL::Cipher.new("AES-256-ECB").random_key
     #
-    #   # read an existing key from disk
-    #   my_key = File.read("my_key.der")
+    #     # read an existing key from disk
+    #     my_key = File.read("my_key.der")
     #
     # Now you can encrypt locally and upload the encrypted data to S3.
     # To do this, you need to provide your key.
     #
-    #   obj = bucket.objects["my-text-object"]
+    #     obj = bucket.objects["my-text-object"]
     #
-    #   # encrypt then upload data
-    #   obj.write("MY TEXT", :encryption_key => my_key)
+    #     # encrypt then upload data
+    #     obj.write("MY TEXT", :encryption_key => my_key)
     #
-    #   # try read the object without decrypting, oops
-    #   obj.read
-    #   #=> '.....'
+    #     # try read the object without decrypting, oops
+    #     obj.read
+    #     #=> '.....'
     #
     # Lastly, you can download and decrypt by providing the same key.
     #
-    #   obj.read(:encryption_key => my_key)
-    #   #=> "MY TEXT"
+    #     obj.read(:encryption_key => my_key)
+    #     #=> "MY TEXT"
     #
     # ### Asymmetric Key Pair
     #
@@ -170,20 +170,20 @@ module AWS
     # for encryption and the private key is used for decryption.  Start
     # by generating a key.
     #
-    #   my_key = OpenSSL::PKey::RSA.new(1024)
+    #     my_key = OpenSSL::PKey::RSA.new(1024)
     #
     # Provide your key to #write and the data will be encrypted before it
     # is uploaded. Pass the same key to #read to decrypt the data
     # when you download it.
     #
-    #   obj = bucket.objects["my-text-object"]
+    #     obj = bucket.objects["my-text-object"]
     #
-    #   # encrypt and upload the data
-    #   obj.write("MY TEXT", :encryption_key => my_key)
+    #     # encrypt and upload the data
+    #     obj.write("MY TEXT", :encryption_key => my_key)
     #
-    #   # download and decrypt the data
-    #   obj.read(:encryption_key => my_key)
-    #   #=> "MY TEXT"
+    #     # download and decrypt the data
+    #     obj.read(:encryption_key => my_key)
+    #     #=> "MY TEXT"
     #
     # ### Configuring storage locations
     #
@@ -191,29 +191,29 @@ module AWS
     # If you prefer, you can store the encryption materials in a separate
     # object in S3.  This object will have the same key + '.instruction'.
     #
-    #   # new object, does not exist yet
-    #   obj = bucket.objects["my-text-object"]
+    #     # new object, does not exist yet
+    #     obj = bucket.objects["my-text-object"]
     #
-    #   # no instruction file present
-    #   bucket.objects['my-text-object.instruction'].exists?
-    #   #=> false
+    #     # no instruction file present
+    #     bucket.objects['my-text-object.instruction'].exists?
+    #     #=> false
     #
-    #   # store the encryption materials in the instruction file
-    #   # instead of obj#metadata
-    #   obj.write("MY TEXT",
-    #     :encryption_key => MY_KEY,
-    #     :encryption_materials_location => :instruction_file)
+    #     # store the encryption materials in the instruction file
+    #     # instead of obj#metadata
+    #     obj.write("MY TEXT",
+    #       :encryption_key => MY_KEY,
+    #       :encryption_materials_location => :instruction_file)
     #
-    #   bucket.objects['my-text-object.instruction'].exists?
-    #   #=> true
+    #     bucket.objects['my-text-object.instruction'].exists?
+    #     #=> true
     #
     # If you store the encryption materials in an instruction file, you
     # must tell #read this or it will fail to find your encryption materials.
     #
-    #   # reading an encrypted file whos materials are stored in an
-    #   # instruction file, and not metadata
-    #   obj.read(:encryption_key => MY_KEY,
-    #     :encryption_materials_location => :instruction_file)
+    #     # reading an encrypted file whos materials are stored in an
+    #     # instruction file, and not metadata
+    #     obj.read(:encryption_key => MY_KEY,
+    #       :encryption_materials_location => :instruction_file)
     #
     # ### Configuring default behaviors
     #
@@ -221,17 +221,17 @@ module AWS
     # encrypt and decrypt for you.  You can do this globally or for a
     # single S3 interface
     #
-    #   # all objects uploaded/downloaded with this s3 object will be
-    #   # encrypted/decrypted
-    #   s3 = AWS::S3.new(:s3_encryption_key => "MY_KEY")
+    #     # all objects uploaded/downloaded with this s3 object will be
+    #     # encrypted/decrypted
+    #     s3 = AWS::S3.new(:s3_encryption_key => "MY_KEY")
     #
-    #   # set the key to always encrypt/decrypt
-    #   AWS.config(:s3_encryption_key => "MY_KEY")
+    #     # set the key to always encrypt/decrypt
+    #     AWS.config(:s3_encryption_key => "MY_KEY")
     #
     # You can also configure the default storage location for the encryption
     # materials.
     #
-    #   AWS.config(:s3_encryption_materials_location => :instruction_file)
+    #     AWS.config(:s3_encryption_materials_location => :instruction_file)
     #
     class S3Object
 
@@ -439,6 +439,8 @@ module AWS
       # Returns a collection representing all the object versions
       # for this object.
       #
+      # @example
+      #
       #   bucket.versioning_enabled? # => true
       #   version = bucket.objects["mykey"].versions.latest
       #
@@ -449,19 +451,19 @@ module AWS
 
       # Uploads data to the object in S3.
       #
-      #   obj = s3.buckets['bucket-name'].objects['key']
+      #     obj = s3.buckets['bucket-name'].objects['key']
       #
-      #   # strings
-      #   obj.write("HELLO")
+      #     # strings
+      #     obj.write("HELLO")
       #
-      #   # files (by path)
-      #   obj.write(Pathname.new('path/to/file.txt'))
+      #     # files (by path)
+      #     obj.write(Pathname.new('path/to/file.txt'))
       #
-      #   # file objects
-      #   obj.write(File.open('path/to/file.txt', 'r'))
+      #     # file objects
+      #     obj.write(File.open('path/to/file.txt', 'r'))
       #
-      #   # IO objects (must respond to #read and #eof?)
-      #   obj.write(io)
+      #     # IO objects (must respond to #read and #eof?)
+      #     obj.write(io)
       #
       # ### Multipart Uploads vs Single Uploads
       #
@@ -470,11 +472,11 @@ module AWS
       # You can control this behavior by configuring the thresholds
       # and you can disable the multipart feature as well.
       #
-      #   # always send the file in a single request
-      #   obj.write(file, :single_request => true)
+      #     # always send the file in a single request
+      #     obj.write(file, :single_request => true)
       #
-      #   # upload the file in parts if the total file size exceeds 100MB
-      #   obj.write(file, :multipart_threshold => 100 * 1024 * 1024)
+      #     # upload the file in parts if the total file size exceeds 100MB
+      #     obj.write(file, :multipart_threshold => 100 * 1024 * 1024)
       #
       # @overload write(data, options = {})
       #
@@ -615,24 +617,28 @@ module AWS
       # to use.
       #
       # @example Uploading an object in two parts
+      #
       #   bucket.objects.myobject.multipart_upload do |upload|
       #     upload.add_part("a" * 5242880)
       #     upload.add_part("b" * 2097152)
       #   end
       #
       # @example Uploading parts out of order
+      #
       #   bucket.objects.myobject.multipart_upload do |upload|
       #     upload.add_part("b" * 2097152, :part_number => 2)
       #     upload.add_part("a" * 5242880, :part_number => 1)
       #   end
       #
       # @example Aborting an upload after parts have been added
+      #
       #   bucket.objects.myobject.multipart_upload do |upload|
       #     upload.add_part("b" * 2097152, :part_number => 2)
       #     upload.abort
       #   end
       #
       # @example Starting an upload and completing it later by ID
+      #
       #   upload = bucket.objects.myobject.multipart_upload
       #   upload.add_part("a" * 5242880)
       #   upload.add_part("b" * 2097152)
@@ -736,23 +742,23 @@ module AWS
       # deleting the old object.  This function returns the
       # new object once this is done.
       #
-      #   bucket = s3.buckets['old-bucket']
-      #   old_obj = bucket.objects['old-key']
+      #     bucket = s3.buckets['old-bucket']
+      #     old_obj = bucket.objects['old-key']
       #
-      #   # renaming an object returns a new object
-      #   new_obj = old_obj.move_to('new-key')
+      #     # renaming an object returns a new object
+      #     new_obj = old_obj.move_to('new-key')
       #
-      #   old_obj.key     #=> 'old-key'
-      #   old_obj.exists? #=> false
+      #     old_obj.key     #=> 'old-key'
+      #     old_obj.exists? #=> false
       #
-      #   new_obj.key     #=> 'new-key'
-      #   new_obj.exists? #=> true
+      #     new_obj.key     #=> 'new-key'
+      #     new_obj.exists? #=> true
       #
       # If you need to move an object to a different bucket, pass
       # `:bucket` or `:bucket_name`.
       #
-      #   obj = s3.buckets['old-bucket'].objects['old-key']
-      #   obj.move_to('new-key', :bucket_name => 'new_bucket')
+      #     obj = s3.buckets['old-bucket'].objects['old-key']
+      #     obj.move_to('new-key', :bucket_name => 'new_bucket')
       #
       # If the copy succeeds, but the then the delete fails, an error
       # will be raised.
@@ -983,12 +989,12 @@ module AWS
       # to #read.  Data will be yielded to the block as it is read off
       # the HTTP response.
       #
-      #   # read an object from S3 to a file
-      #   File.open('output.txt', 'w') do |file|
-      #     bucket.objects['key'].read do |chunk|
-      #       file.write(chunk)
+      #     # read an object from S3 to a file
+      #     File.open('output.txt', 'w') do |file|
+      #       bucket.objects['key'].read do |chunk|
+      #         file.write(chunk)
+      #       end
       #     end
-      #   end
       #
       # ### Reading an object without a block
       #
@@ -996,8 +1002,8 @@ module AWS
       # HTTP response and read and the object data is loaded into
       # memory.
       #
-      #   bucket.objects['key'].read
-      #   #=> 'object-contents-here'
+      #     bucket.objects['key'].read
+      #     #=> 'object-contents-here'
       #
       # @param [Hash] options
       #
@@ -1077,13 +1083,13 @@ module AWS
       # instance of AccessControlList, plus an additional `change`
       # method:
       #
-      #  object.acl.change do |acl|
-      #    # remove any grants to someone other than the bucket owner
-      #    owner_id = object.bucket.owner.id
-      #    acl.grants.reject! do |g|
-      #      g.grantee.canonical_user_id != owner_id
-      #    end
-      #  end
+      #     object.acl.change do |acl|
+      #       # remove any grants to someone other than the bucket owner
+      #       owner_id = object.bucket.owner.id
+      #       acl.grants.reject! do |g|
+      #         g.grantee.canonical_user_id != owner_id
+      #       end
+      #     end
       #
       # Note that changing the ACL is not an atomic operation; it
       # fetches the current ACL, yields it to the block, and then
@@ -1130,17 +1136,21 @@ module AWS
       # the permissions of the object.
       #
       # @example Generate a url to read an object
+      #
       #   bucket.objects.myobject.url_for(:read)
       #
       # @example Generate a url to delete an object
+      #
       #   bucket.objects.myobject.url_for(:delete)
       #
       # @example Override response headers for reading an object
+      #
       #   object = bucket.objects.myobject
       #   url = object.url_for(:read,
       #                        :response_content_type => "application/json")
       #
       # @example Generate a url that expires in 10 minutes
+      #
       #   bucket.objects.myobject.url_for(:read, :expires => 10*60)
       #
       # @param [Symbol, String] method The HTTP verb or object

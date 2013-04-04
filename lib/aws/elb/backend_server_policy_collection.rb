@@ -25,44 +25,44 @@ module AWS
     # Before you can assign a policy to a backend server instance port you
     # must create on of the appropriate type:
     #
-    #   # step 1, create one (or more) PublicKeyPolicyType policies
+    #     # step 1, create one (or more) PublicKeyPolicyType policies
     #
-    #   public_key1 = <<-KEY
-    #   -----BEGIN CERTIFICATE-----
-    #   MIICaTCCAdICCQDuvCF4erLGSjANBgkqhkiG9w0BAQUFADB5MQswCQYDVQQGEwJa
-    #   ....
-    #   o50MymfqtoVcebZcXbiDVAXW1cPEHKLBXecX6/LZ+GOzEsUOxgt7Xs9uabqp
-    #   -----END CERTIFICATE-----
-    #   KEY
+    #     public_key1 = <<-KEY
+    #     -----BEGIN CERTIFICATE-----
+    #     MIICaTCCAdICCQDuvCF4erLGSjANBgkqhkiG9w0BAQUFADB5MQswCQYDVQQGEwJa
+    #     ....
+    #     o50MymfqtoVcebZcXbiDVAXW1cPEHKLBXecX6/LZ+GOzEsUOxgt7Xs9uabqp
+    #     -----END CERTIFICATE-----
+    #     KEY
     #
-    #   public_key_policy = load_balancer.policies.create("pkp",
-    #     'PublicKeyPolicyType', 'PublicKey' => public_key.strip)
+    #     public_key_policy = load_balancer.policies.create("pkp",
+    #       'PublicKeyPolicyType', 'PublicKey' => public_key.strip)
     #
-    #   # step 2, create the backend server policy, passing the public key policy
+    #     # step 2, create the backend server policy, passing the public key policy
     #
-    #   name = 'backend-policy'
-    #   type = 'BackendServerAuthenticationPolicyType'
-    #   attributes = {
-    #     # note: you can pass more than one public key policy here
-    #     'PublicKeyPolicyName' => [public_key_policy]
-    #   }
+    #     name = 'backend-policy'
+    #     type = 'BackendServerAuthenticationPolicyType'
+    #     attributes = {
+    #       # note: you can pass more than one public key policy here
+    #       'PublicKeyPolicyName' => [public_key_policy]
+    #     }
     #
-    #   backend_policy = @load_balancer.policies.create(name, type, attributes)
-    #     'BackendServerAuthenticationPolicyType', attributes)
+    #     backend_policy = @load_balancer.policies.create(name, type, attributes)
+    #       'BackendServerAuthenticationPolicyType', attributes)
     #
     # Once you have created a backend server authentication policy, you
     # can assign it to a backend instance port:
     #
-    #   load_balancer.backend_server_policies[80] = backend_policy
+    #     load_balancer.backend_server_policies[80] = backend_policy
     #
     # If you want to remove the policy you can pass nil instead.
     #
-    #   # removes the policy from instance port 80
-    #   load_balancer.backend_server_policies[80] = nil
+    #     # removes the policy from instance port 80
+    #     load_balancer.backend_server_policies[80] = nil
     #
     # You can also get the current policy:
     #
-    #   load_balancer.backend_server_policies[80] # returns a policy or nil
+    #     load_balancer.backend_server_policies[80] # returns a policy or nil
     #
     class BackendServerPolicyCollection
 

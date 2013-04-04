@@ -22,8 +22,8 @@ class Net::HTTP::ConnectionPool
   #
   # To get a connection object, you start with a connection pool:
   #
-  #   pool = Net::HTTP::ConnectionPool.new
-  #   connection = pool.connection_for('domain.com')
+  #     pool = Net::HTTP::ConnectionPool.new
+  #     connection = pool.connection_for('domain.com')
   #
   # {ConnectionPool#connection_for} accepts a number of options to control
   # the connection settings (SSL, proxy, timeouts, etc).
@@ -35,9 +35,9 @@ class Net::HTTP::ConnectionPool
   # read the response (via #body or #read_body) before the end of the
   # block.
   #
-  #   connection.request(Net::HTTP::Get.new('/')) do |resp|
-  #     puts resp.body
-  #   end
+  #     connection.request(Net::HTTP::Get.new('/')) do |resp|
+  #       puts resp.body
+  #     end
   #
   class Connection
 
@@ -132,27 +132,27 @@ class Net::HTTP::ConnectionPool
     # Makes a single HTTP request.  The Net::HTTPResponse is yielded to the
     # given block.
     #
-    #   pool = Net::HTTP::ConnectionPool.new
-    #   connection = pool.connection_for('www.google.com')
+    #     pool = Net::HTTP::ConnectionPool.new
+    #     connection = pool.connection_for('www.google.com')
     #
-    #   connection.request(Net::HTTP::Get.new('/')) do |response|
-    #     # yeilds a Net::HTTPResponse object
-    #     puts "STATUS CODE: #{response.code}"
-    #     puts "HEADERS: #{response.to_hash.inspect}"
-    #     puts "BODY:\n#{response.body}"
-    #   end
+    #     connection.request(Net::HTTP::Get.new('/')) do |response|
+    #       # yeilds a Net::HTTPResponse object
+    #       puts "STATUS CODE: #{response.code}"
+    #       puts "HEADERS: #{response.to_hash.inspect}"
+    #       puts "BODY:\n#{response.body}"
+    #     end
     #
     # If you want to read the HTTP response body in chunks (useful for
     # large responses you do not want to load into memory), you should
     # pass a block to the #read_body method of the yielded response.
     #
-    #   File.open('output.txt', 'w') do |file|
-    #     connection.request(Net::HTTP::Get.new('/')) do |response|
-    #       response.read_body do |chunk|
-    #         file.write(chunk)
+    #     File.open('output.txt', 'w') do |file|
+    #       connection.request(Net::HTTP::Get.new('/')) do |response|
+    #         response.read_body do |chunk|
+    #           file.write(chunk)
+    #         end
     #       end
     #     end
-    #   end
     #
     # If you omit the block when calling #request, you will not be able
     # to read the response.  This method never returns the

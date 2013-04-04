@@ -32,18 +32,22 @@ module AWS
       # Returns a new collection with a different prefix
       #
       # @example
+      #
       #   objects = collection.with_prefix('photos')
       #   objects.prefix #=> 'photos'
       #
       # @example Chaining with_prefix replaces previous prefix
+      #
       #   objects = collection.with_prefix('photos').with_prefix('videos')
       #   objects.prefix #=> 'videos'
       #
       # @example Chaining with_prefix with :append
+      #
       #   objects = collection.with_prefix('a/').with_prefix('b/', :append)
       #   objects.prefix #=> 'a/b/'
       #
       # @example Chaining with_prefix with :prepend
+      #
       #   objects = collection.with_prefix('a/').with_prefix('b/', :prepend)
       #   objects.prefix #=> 'b/a/'
       #

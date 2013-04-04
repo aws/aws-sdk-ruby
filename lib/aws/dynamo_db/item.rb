@@ -22,11 +22,11 @@ module AWS
     #
     # Getting an item by hash key value:
     #
-    #   item = table.items['hash-key-value']
+    #     item = table.items['hash-key-value']
     #
     # Getting an item from a table with both hash and range keys:
     #
-    #   item = table.items['hash-key','range-key']
+    #     item = table.items['hash-key','range-key']
     #
     class Item < Core::Resource
 
@@ -60,9 +60,9 @@ module AWS
       #   The operation will fail unless the item exists and has the
       #   attributes in the value for this option.  For example:
       #
-      #     # throws DynamoDB::Errors::ConditionalCheckFailedException
-      #     # unless the item has "color" set to "red"
-      #     item.delete(:if => { :color => "red" })
+      #       # throws DynamoDB::Errors::ConditionalCheckFailedException
+      #       # unless the item has "color" set to "red"
+      #       item.delete(:if => { :color => "red" })
       #
       # @option options [String, Symbol, Array] :unless_exists A name
       #   or collection of attribute names; if the item has a value
@@ -70,7 +70,7 @@ module AWS
       #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For
       #   example:
       #
-      #     item.delete(:unless_exists => "version")
+      #       item.delete(:unless_exists => "version")
       def delete(options = {})
         client_opts = item_key_options(self)
 

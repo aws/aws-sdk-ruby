@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::DataPipeline interface:
   #
-  #   datapipeline = AWS::DataPipeline.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     datapipeline = AWS::DataPipeline.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
@@ -48,12 +48,12 @@ module AWS
   # {AWS::DataPipeline::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   data_pipeline = AWS::DataPipeline.new
+  #     data_pipeline = AWS::DataPipeline.new
   #
-  #   resp = data_pipeline.client.describe_pipelines
-  #   resp[:pipeline_description_list].each do |pipeline|
-  #     puts pipeline[:pipeline_id]
-  #   end
+  #     resp = data_pipeline.client.describe_pipelines
+  #     resp[:pipeline_description_list].each do |pipeline|
+  #       puts pipeline[:pipeline_id]
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #

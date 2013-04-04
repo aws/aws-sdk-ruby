@@ -34,7 +34,7 @@ module AWS
       # hash options.  They are merged with AWS.config or merged
       # with the provided `:config` object.
       #
-      #   @ec2 = AWS::EC2.new(:max_retries => 2)
+      #     @ec2 = AWS::EC2.new(:max_retries => 2)
       #
       # @see AWS::Cofiguration
       #

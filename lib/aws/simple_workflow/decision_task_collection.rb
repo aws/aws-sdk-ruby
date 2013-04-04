@@ -26,33 +26,33 @@ module AWS
     # To get a count of decision tasks needing attention, call {#count}
     # with a task list name:
     #
-    #   domain.decision_tasks.count('my-task-list').to_i #=> 7
+    #     domain.decision_tasks.count('my-task-list').to_i #=> 7
     #
     # ## Getting a single decision task
     #
     # To process a single task use {#poll_for_single_task}:
     #
-    #   domain.decision_tasks.poll_for_single_task('my-task-list') do |task|
-    #     # this block is yielded to only if a task is found
-    #     # within 60 seconds.
-    #   end
+    #     domain.decision_tasks.poll_for_single_task('my-task-list') do |task|
+    #       # this block is yielded to only if a task is found
+    #       # within 60 seconds.
+    #     end
     #
     # At the end of the block, the decision task is auto-completed.
     # If you prefer you can omit the block and `nil` or a {DecisionTask}
     # will be returned.
     #
-    #   if task = domain.decision_tasks.poll_for_single_task('my-task-list')
-    #     # you need to call complete! or the decision task will time out
-    #     task.complete!
-    #   end
+    #     if task = domain.decision_tasks.poll_for_single_task('my-task-list')
+    #       # you need to call complete! or the decision task will time out
+    #       task.complete!
+    #     end
     #
     # ## Polling for Tasks in a Loop
     #
     # You can poll indefinitely for tasks in a loop with {#poll}:
     #
-    #   domain.decision_tasks.poll('my-task-list') do |task|
-    #     # yields once for every decision task found
-    #   end
+    #     domain.decision_tasks.poll('my-task-list') do |task|
+    #       # yields once for every decision task found
+    #     end
     #
     # Just like the block form above, the decision task is auto completed at
     # the end of the block.  Please note, if you call `break` or `return`
@@ -85,9 +85,9 @@ module AWS
 
       # Returns the number of decision tasks in the specified `task_list`.
       #
-      #   count = decision_tasks.count('task-list-name')
-      #   count.truncated? #=> false
-      #   count.to_i #=> 7
+      #     count = decision_tasks.count('task-list-name')
+      #     count.truncated? #=> false
+      #     count.to_i #=> 7
       #
       # @note This operation is eventually consistent. The results are best
       #   effort and may not exactly reflect recent updates and changes.
@@ -110,20 +110,20 @@ module AWS
       # Polls the service for a single decision task.  The service may
       # hold the request for up to 60 seconds before responding.
       #
-      #   # try to get a single task, may return nil when no tasks available
-      #   task = domain.decision_tasks.poll_for_single_task('task-list')
-      #   if task
-      #     # make decisions ...
-      #     task.complete!
-      #   end
+      #     # try to get a single task, may return nil when no tasks available
+      #     task = domain.decision_tasks.poll_for_single_task('task-list')
+      #     if task
+      #       # make decisions ...
+      #       task.complete!
+      #     end
       #
       # You can optionally pass a block and that will only be yielded
       # to when a decision task is available within the 60 seconds.
       #
-      #   domain.decision_tasks.poll_for_single_task('task-list') do |task|
-      #      # make decisions
-      #      # task.complete! is called for you at the end of the block
-      #   end
+      #     domain.decision_tasks.poll_for_single_task('task-list') do |task|
+      #        # make decisions
+      #        # task.complete! is called for you at the end of the block
+      #     end
       #
       # With the block form you do not need to call #complete! on the
       # decision task.  It will be called when the block exists.
@@ -190,10 +190,10 @@ module AWS
       # yielded to the block.  At the end of the block the decision task
       # is auto-completed ({DecisionTask#complete!} is called).
       #
-      #   # yields once for each decision task found, indefinitely
-      #   domain.decision_tasks.poll do |decision_task|
-      #     # make decisions here
-      #   end
+      #     # yields once for each decision task found, indefinitely
+      #     domain.decision_tasks.poll do |decision_task|
+      #       # make decisions here
+      #     end
       #
       # @note If you to terminate the block (by calling `break` or `return`)
       #   then it is your responsibility to call #complete! on the decision

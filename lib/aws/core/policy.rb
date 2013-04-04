@@ -20,14 +20,14 @@ module AWS
 
     # Represents an access policy for AWS operations and resources.  For example:
     #
-    #   policy = Policy.new do |policy|
-    #     policy.allow(:actions => ['s3:PutObject'],
-    #                  :resources => "arn:aws:s3:::mybucket/mykey/*",
-    #                  :principals => :any
+    #     policy = Policy.new
+    #     policy.allow(
+    #       :actions => ['s3:PutObject'],
+    #       :resources => "arn:aws:s3:::mybucket/mykey/*",
+    #       :principals => :any
     #     ).where(:acl).is("public-read")
-    #   end
     #
-    #   policy.to_json               # => '{ "Version":"2008-10-17", ...'
+    #     policy.to_json # => '{ "Version":"2008-10-17", ...'
     #
     # @see #initialize More ways to construct a policy.
     # @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
@@ -52,7 +52,8 @@ module AWS
       # * With hash arguments:
       #
       #     Policy.new(:statements => [
-      #       { :effect => :allow,
+      #       {
+      #         :effect => :allow,
       #         :actions => :all,
       #         :principals => ["abc123"],
       #         :resources => "mybucket/mykey"
@@ -66,13 +67,11 @@ module AWS
       # * With a block:
       #
       #     Policy.new do |policy|
-      #
       #       policy.allow(
       #         :actions => ['s3:PutObject'],
       #         :resources => "arn:aws:s3:::mybucket/mykey/*",
       #         :principals => :any
       #       ).where(:acl).is("public-read")
-      #
       #     end
       #
       def initialize(opts = {})
@@ -123,8 +122,8 @@ module AWS
       # Returns a hash representation of the policy. The following
       # statements are equivalent:
       #
-      #   policy.to_h.to_json
-      #   policy.to_json
+      #     policy.to_h.to_json
+      #     policy.to_json
       #
       # @return [Hash]
       def to_h
@@ -151,15 +150,15 @@ module AWS
       # Convenient syntax for expressing operators in statement
       # condition blocks.  For example, the following:
       #
-      #   policy.allow.where(:s3_prefix).not("forbidden").
-      #     where(:current_time).lte(Date.today+1)
+      #     policy.allow.where(:s3_prefix).not("forbidden").
+      #       where(:current_time).lte(Date.today+1)
       #
       # is equivalent to:
       #
-      #   conditions = Policy::ConditionBlock.new
-      #   conditions.add(:not, :s3_prefix, "forbidden")
-      #   conditions.add(:lte, :current_time, Date.today+1)
-      #   policy.allow(:conditions => conditions)
+      #     conditions = Policy::ConditionBlock.new
+      #     conditions.add(:not, :s3_prefix, "forbidden")
+      #     conditions.add(:lte, :current_time, Date.today+1)
+      #     policy.allow(:conditions => conditions)
       #
       # @see ConditionBlock#add
       class OperatorBuilder
@@ -192,7 +191,7 @@ module AWS
 
         # Adds a condition for the given key.  For example:
         #
-        #   policy.allow(...).where(:current_time).lte(Date.today + 1)
+        #     policy.allow(...).where(:current_time).lte(Date.today + 1)
         #
         # @return [OperatorBuilder]
         def where(key, operator = nil, *values)
@@ -209,10 +208,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Allow" effect and adding it to the policy.  For example:
       #
-      #     policy.allow(:actions => [:put_object],
-      #                  :principals => :any,
-      #                  :resources => "mybucket/mykey/*").
-      #       where(:acl).is("public-read")
+      #     policy.allow(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*").
+      #     where(:acl).is("public-read")
       #
       # @option (see Statement#initialize)
       # @see Statement#initialize
@@ -226,11 +226,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Deny" effect and adding it to the policy.  For example:
       #
-      #   policy.deny(
-      #     :actions => [:put_object],
-      #     :principals => :any,
-      #     :resources => "mybucket/mykey/*"
-      #   ).where(:acl).is("public-read")
+      #     policy.deny(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*"
+      #     ).where(:acl).is("public-read")
       #
       # @param (see Statement#initialize)
       # @see Statement#initialize
@@ -244,12 +244,12 @@ module AWS
       # Represents the condition block of a policy.  In JSON,
       # condition blocks look like this:
       #
-      #   { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
+      #     { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
       #
       # ConditionBlock lets you specify conditions like the above
       # example using the add method, for example:
       #
-      #   conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
+      #     conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
       #
       # See the add method documentation for more details about how
       # to specify keys and operators.

@@ -155,47 +155,60 @@ module AWS
       #   operation to use when comparing the specified Statistic and
       #   Threshold. The specified Statistic value is used as the first
       #   operand.  Valid values include:
-      #   * 'GreaterThanOrEqualToThreshold'
-      #   * 'GreaterThanThreshold'
-      #   * 'LessThanThreshold'
-      #   * 'LessThanOrEqualToThreshold'
+      #
+      #     * 'GreaterThanOrEqualToThreshold'
+      #     * 'GreaterThanThreshold'
+      #     * 'LessThanThreshold'
+      #     * 'LessThanOrEqualToThreshold'
+      #
       # @option options [Integer,required] :evaluation_periods The number
       #   of periods over which data is compared to the specified threshold.
+      #
       # @option options [Integer,required] :period The period in seconds
       #   over which the specified statistic is applied.
+      #
       # @option options [String,required] :statistic The statistic to apply
       #   to the alarm's associated metric. Valid values include:
-      #   * 'SampleCount'
-      #   * 'Average'
-      #   * 'Sum'
-      #   * 'Minimum'
-      #   * 'Maximum'
+      #
+      #     * 'SampleCount'
+      #     * 'Average'
+      #     * 'Sum'
+      #     * 'Minimum'
+      #     * 'Maximum'
+      #
       # @option options [Number,required] :threshold The value against which
       #   the specified statistic is compared.
+      #
       # @option options [Array<String>] :insufficient_data_actions
       #   The list of actions to execute when this alarm transitions into an
       #   INSUFFICIENT_DATA state from any other state. Each action is
       #   specified as an Amazon Resource Number (ARN). Currently the only
       #   action supported is publishing to an Amazon SNS topic or an
       #   Amazon Auto Scaling policy.
+      #
       # @option options [Array<String>] :ok_actions The list of actions to
       #   execute when this alarm transitions into an OK state from any
       #   other state. Each action is specified as an Amazon Resource
       #   Number (ARN). Currently the only action supported is publishing to
       #   an Amazon SNS topic or an Amazon Auto Scaling policy.
+      #
       # @option options [Boolean] :actions_enabled Indicates whether or not
       #   actions should be executed during any changes to the alarm's
       #   state.
+      #
       # @option options [Array<String>] :alarm_actions The list of actions
       #   to execute when this alarm transitions into an ALARM state from
       #   any other state. Each action is specified as an Amazon Resource
       #   Number (ARN). Currently the only action supported is publishing
       #   to an Amazon SNS topic or an Amazon Auto Scaling policy.
       #   Maximum of 5 alarm actions.
+      #
       # @option options [String] :alarm_description The description for
       #   the alarm.
+      #
       # @option options [String] :unit The unit for the alarm's associated
       #   metric.
+      #
       # @return [nil]
       def update options = {}
         options[:alarm_name] = alarm_name
@@ -240,14 +253,19 @@ module AWS
       # Temporarily sets the state of current alarm.
       # @param [String] reason The reason that this alarm is set to this
       #   specific state (in human-readable text format).
+      #
       # @param [String] value Valid values include:
+      #
       #   * 'OK'
       #   * 'ALARM'
       #   * 'INSUFFICIENT_DATA'
+      #
       # @param [Hash] options
       # @option options [String] :state_reason_data The reason that this
+      #
       #   alarm is set to this specific state (in machine-readable JSON
       #   format)
+      #
       # @return [nil]
       def set_state reason, value, options = {}
         options[:alarm_name] = alarm_name

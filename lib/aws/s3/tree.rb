@@ -22,33 +22,33 @@ module AWS
     #
     # Given you have a bucket with the following keys:
     #
-    #  README.txt
-    #  videos/wedding.mpg
-    #  videos/family_reunion.mpg
-    #  photos/2010/house.jpg
-    #  photos/2011/fall/leaves.jpg
-    #  photos/2011/summer/vacation.jpg
-    #  photos/2011/summer/family.jpg
+    #     README.txt
+    #     videos/wedding.mpg
+    #     videos/family_reunion.mpg
+    #     photos/2010/house.jpg
+    #     photos/2011/fall/leaves.jpg
+    #     photos/2011/summer/vacation.jpg
+    #     photos/2011/summer/family.jpg
     #
     # You might like to explore the contents of this bucket as a tree:
     #
-    #   tree = bucket.as_tree
+    #     tree = bucket.as_tree
     #
-    #   directories = tree.children.select(&:branch?).collect(&:prefix)
-    #   #=> ['photos', 'videos']
+    #     directories = tree.children.select(&:branch?).collect(&:prefix)
+    #     #=> ['photos', 'videos']
     #
-    #   files = tree.children.select(&:leaf?).collect(&:key)
-    #   #=> ['README.txt']
+    #     files = tree.children.select(&:leaf?).collect(&:key)
+    #     #=> ['README.txt']
     #
     # If you want to start further down, pass a prefix to {Bucket#as_tree}:
     #
-    #   tree = bucket.as_tree(:prefix => 'photos/2011')
+    #     tree = bucket.as_tree(:prefix => 'photos/2011')
     #
-    #   directories = tree.children.select(&:branch?).collect(&:prefix)
-    #   #=> ['photos/20011/fall', 'photos/20011/summer']
+    #     directories = tree.children.select(&:branch?).collect(&:prefix)
+    #     #=> ['photos/20011/fall', 'photos/20011/summer']
     #
-    #   files = tree.children.select(&:leaf?).collect(&:key)
-    #   #=> []
+    #     files = tree.children.select(&:leaf?).collect(&:key)
+    #     #=> []
     #
     # All non-leaf nodes ({Tree} and {Tree::BranchNode} instances)
     # have a {Tree::Parent#children} method that provides access to

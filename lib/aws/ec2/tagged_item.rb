@@ -17,11 +17,11 @@ module AWS
 
       # Adds a single tag with an optional tag value.
       #
-      #   # adds a tag with the key production
-      #   resource.tag('production')
+      #     # adds a tag with the key production
+      #     resource.tag('production')
       #
-      #   # adds a tag with the optional value set to production
-      #   resource.tag('role', :value => 'webserver')
+      #     # adds a tag with the optional value set to production
+      #     resource.tag('role', :value => 'webserver')
       #
       # @param [String] key The name of the tag to add.
       # @param [Hash] options
@@ -47,11 +47,11 @@ module AWS
       # this resource.
       #
       # @example Manipulating the tags of an EC2 instance
-      #  i = ec2.instances["i-123"]
-      #  i.tags.to_h                  # => { "foo" => "bar", ... }
-      #  i.tags.clear
-      #  i.tags.stage = "production"
-      #  i.tags.stage                 # => "production"
+      #   i = ec2.instances["i-123"]
+      #   i.tags.to_h                  # => { "foo" => "bar", ... }
+      #   i.tags.clear
+      #   i.tags.stage = "production"
+      #   i.tags.stage                 # => "production"
       #
       # @return [ResourceTagCollection] A collection of tags that
       #   belong to this resource.

@@ -179,11 +179,11 @@ module AWS
       # you need to know its rule number and if it is an egress or ingress
       # rule.
       #
-      #   # delete ingress rule 10
-      #   network_acl.delete_entry :egress, 10
+      #     # delete ingress rule 10
+      #     network_acl.delete_entry :egress, 10
       #
-      #   # delete egress rules 5
-      #   network_acl.delete_entry :ingress, 5
+      #     # delete egress rules 5
+      #     network_acl.delete_entry :ingress, 5
       #
       # @param [:ingress,:egress] egress_or_ingress Specifies if you want to
       #   delete an ingress or an egress rule.

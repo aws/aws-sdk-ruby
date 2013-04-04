@@ -74,6 +74,8 @@ module AWS
 
       # Removes all tags from the bucket.
       #
+      # @example
+      #
       #   bucket.tags.clear
       #   bucket.tags.to_h #=> {}
       #

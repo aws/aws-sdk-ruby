@@ -17,16 +17,16 @@ module AWS
     # Represents an EC2 region.  You can use this to find the
     # endpoint for a given region:
     #
-    #  ec2.regions["us-west-1"].endpoint
+    #     ec2.regions["us-west-1"].endpoint
     #
     # Region also responds to all of the methods of {EC2} except
     # {EC2#regions}; for example, to list instance IDs by region,
     # you can do:
     #
-    #  ec2.regions.inject({}) do |h,region|
-    #    h[region.name] = region.instances.map(&:id)
-    #    h
-    #  end
+    #     ec2.regions.inject({}) do |h,region|
+    #       h[region.name] = region.instances.map(&:id)
+    #       h
+    #     end
     #
     # @attr_reader [String] endpoint The endpoint to use for this region
     #   (e.g. "ec2.eu-west-1.amazonaws.com").

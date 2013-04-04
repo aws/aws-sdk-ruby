@@ -28,14 +28,14 @@ module AWS
       # An example that creates a load balancer in two availability zones
       # with a single listener:
       #
-      #   load_balancer = elb.load_balancers.create('my-load-balancer',
-      #     :availability_zones => %w(us-west-2a us-west-2b),
-      #     :listeners => [{
-      #       :port => 80,
-      #       :protocol => :http,
-      #       :instance_port => 80,
-      #       :instance_protocol => :http,
-      #     }])
+      #     load_balancer = elb.load_balancers.create('my-load-balancer',
+      #       :availability_zones => %w(us-west-2a us-west-2b),
+      #       :listeners => [{
+      #         :port => 80,
+      #         :protocol => :http,
+      #         :instance_port => 80,
+      #         :instance_protocol => :http,
+      #       }])
       #
       # @param [String] name The name of your load balancer.  The name must
       #   be unique within your set of load balancers.

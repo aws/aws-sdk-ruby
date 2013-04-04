@@ -79,9 +79,9 @@ module AWS
       #   Returns an enumerable Scope object that represents all matching
       #   records.  No request is made to AWS until the scope is enumerated.
       #
-      #     Book.find(:all, :limit => 100).each do |book|
-      #       # ...
-      #     end
+      #       Book.find(:all, :limit => 100).each do |book|
+      #         # ...
+      #       end
       #
       #   @param [Symbol] mode (:all)
       #   @return [Scope] Returns an enumerable scope object.
@@ -119,6 +119,8 @@ module AWS
       # Limits the maximum number of total records to return when finding
       # or counting.  Returns a scope, does not make a request.
       #
+      # @example
+      #
       #   books = Book.limit(100)
       #
       # @param [Integer] limit The maximum number of records to return.
@@ -128,6 +130,8 @@ module AWS
       end
 
       # Yields once for each record matching the request made by this scope.
+      #
+      # @example
       #
       #   books = Book.where(:author => 'me').order(:price, :asc).limit(10)
       #

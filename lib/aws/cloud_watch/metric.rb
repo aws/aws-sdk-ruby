@@ -74,17 +74,17 @@ module AWS
 
       # Gets statistics for this metric.
       #
-      #   metric = CloudWatch::Metric.new('my/namepace', 'metric-name')
+      #     metric = CloudWatch::Metric.new('my/namepace', 'metric-name')
       #
-      #   stats = metric.statistics(
-      #     :start_time => Time.now - 3600,
-      #     :end_time => Time.now,
-      #     :statistics => ['Average'])
+      #     stats = metric.statistics(
+      #       :start_time => Time.now - 3600,
+      #       :end_time => Time.now,
+      #       :statistics => ['Average'])
       #
-      #   stats.label #=> 'some-label'
-      #   stats.each do |datapoint|
-      #     # datapoint is a hash
-      #   end
+      #     stats.label #=> 'some-label'
+      #     stats.each do |datapoint|
+      #       # datapoint is a hash
+      #     end
       #
       # @param [Hash] options
       # @option options [Time,required] :start_time

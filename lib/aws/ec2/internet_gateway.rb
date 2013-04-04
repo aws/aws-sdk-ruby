@@ -60,7 +60,7 @@ module AWS
       # be detached from that one first.  If you pass nil, then
       # this internet gateway will
       #
-      #   internet_gateway.vpc = 'vpc-123'
+      #     internet_gateway.vpc = 'vpc-123'
       #
       # @param [VPC,String] vpc A {VPC} object or a vpc id string.
       #

@@ -22,26 +22,26 @@ module AWS
     # You can access hash content with methods if their keys
     # are symbols.
     #
-    #   data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
-    #   data.a #=> 1
-    #   data.b #=> 2
-    #   data.c #=> true
-    #   data.d #=> raises NoMethodError
+    #     data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
+    #     data.a #=> 1
+    #     data.b #=> 2
+    #     data.c #=> true
+    #     data.d #=> raises NoMethodError
     #
     # ## Boolean Methods
     #
     # Given the structure above you can also use question-mark methods.
     #
-    #   data.c? #=> true
-    #   data.d? #=> raises NoMethodError
+    #     data.c? #=> true
+    #     data.d? #=> raises NoMethodError
     #
     # ## Nested Hashes
     #
     # If the data contains nested hashes you can chain methods into
     # the structure.
     #
-    #   data = AWS::Core::Data.new(:a => { :b => { :c => 'abc' }})
-    #   data.a.b.c #=> 'abc'
+    #     data = AWS::Core::Data.new(:a => { :b => { :c => 'abc' }})
+    #     data.a.b.c #=> 'abc'
     #
     # ## Nested Arrays
     #
@@ -49,16 +49,16 @@ module AWS
     # data returned is correctly wrapped so you can continue using
     # method-missing access.
     #
-    #   data = AWS::Core::Data.new(
-    #    :people => [
-    #      {:name => 'john'},
-    #      {:name => 'jane'},
-    #   ]})
+    #     data = AWS::Core::Data.new(
+    #      :people => [
+    #        {:name => 'john'},
+    #        {:name => 'jane'},
+    #     ]})
     #
-    #   data.people[0].name #=> 'john'
-    #   data.people[1].name #=> 'jane'
+    #     data.people[0].name #=> 'john'
+    #     data.people[1].name #=> 'jane'
     #
-    #   data.people.map(&:name) #=> ['john','jane']
+    #     data.people.map(&:name) #=> ['john','jane']
     #
     class Data
 
@@ -149,8 +149,8 @@ module AWS
 
       # Returns an inspection string from the wrapped data.
       #
-      #   data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
-      #   data.inspect #=> '{:a=>1, :b=>2, :c=>true}'
+      #     data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
+      #     data.inspect #=> '{:a=>1, :b=>2, :c=>true}'
       #
       # @return [String]
       #

@@ -43,9 +43,11 @@ module AWS
     #   END
     #
     # @example Restricting the size of the uploaded object
+    #
     #   bucket.presigned_post(:content_length => 1..(10*1024))
     #
     # @example Restricting the key prefix
+    #
     #   bucket.presigned_post.where(:key).starts_with("photos/")
     #
     class PresignedPost

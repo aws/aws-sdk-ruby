@@ -19,11 +19,11 @@ module AWS
     # You can use #poll or #poll_for_single_task on {DecisionTaskCollection}
     # to grab a decision task:
     #
-    #   # get a single task
-    #   if task = domain.decision_tasks.poll_for_single_task('task-list')
-    #     # make decisions
-    #     task.complete!
-    #   end
+    #     # get a single task
+    #     if task = domain.decision_tasks.poll_for_single_task('task-list')
+    #       # make decisions
+    #       task.complete!
+    #     end
     #
     # See {DecisionTaskCollection} for more information on getting and
     # counting decision tasks.
@@ -35,9 +35,9 @@ module AWS
     # The {#events} and {#new_events} methods enumerate through
     # all events or events since the last decision.
     #
-    #   decision_task.new_events.each do |event|
-    #     # inspect the #event_type and #attributes
-    #   end
+    #     decision_task.new_events.each do |event|
+    #       # inspect the #event_type and #attributes
+    #     end
     #
     # Check out {HistoryEvent} for more information on working with
     # events.
@@ -74,9 +74,9 @@ module AWS
     # argument then the decision will be completed automatically at the
     # end of the block.
     #
-    #   domain.decision_tasks.poll do |decision_task|
-    #     # ...
-    #   end #=> the decision task is closed here
+    #     domain.decision_tasks.poll do |decision_task|
+    #       # ...
+    #     end #=> the decision task is closed here
     #
     # If you get a task from {DecisionTaskCollection#poll_for_single_task}
     # without a block, then it is your responsibility to call {#complete!}

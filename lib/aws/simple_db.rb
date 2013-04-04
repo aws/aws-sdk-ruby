@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the SimpleDB interface:
   #
-  #   sdb = AWS::SimpleDB.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     sdb = AWS::SimpleDB.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Understanding the SimpleDB Interface
   #
@@ -65,8 +65,8 @@ module AWS
   # Domains are like database tables.  A domain must exist before you can
   # write to it.  To create a domain:
   #
-  #   sdb = SimpleDB.new
-  #   domain = sdb.domains.create('mydomain')
+  #     sdb = SimpleDB.new
+  #     domain = sdb.domains.create('mydomain')
   #
   # For more information about working with domains see {DomainCollection}
   # and {Domain}.
@@ -80,35 +80,35 @@ module AWS
   # The following example illustrates how you can reference an item that
   # does not exist yet:
   #
-  #   sdb = SimpleDB.new
+  #     sdb = SimpleDB.new
   #
-  #   # this domain is empty, it has no items
-  #   domain = sdb.domains.create('newdomain')
-  #   domain.items.collect(&:name)
-  #   #=> []
+  #     # this domain is empty, it has no items
+  #     domain = sdb.domains.create('newdomain')
+  #     domain.items.collect(&:name)
+  #     #=> []
   #
-  #   # this item doesn't exist yet, so it has no attributes
-  #   item = domain.items['newitem']
-  #   item.attributes.collect(&:name)
-  #   #=> []
+  #     # this item doesn't exist yet, so it has no attributes
+  #     item = domain.items['newitem']
+  #     item.attributes.collect(&:name)
+  #     #=> []
   #
-  #   # the item has no attributes
-  #   tags = item.attributes['tags']
-  #   tags.values
-  #   #=> []
+  #     # the item has no attributes
+  #     tags = item.attributes['tags']
+  #     tags.values
+  #     #=> []
   #
   # To create the item in SimpleDB you just need to add an attribute.
   #
-  #   tags.add %w(first new)
+  #     tags.add %w(first new)
   #
-  #   domain.items.collect(&:name)
-  #   #=> ['newitem']
+  #     domain.items.collect(&:name)
+  #     #=> ['newitem']
   #
-  #   item.attributes.collect(&:name)
-  #   #=> ['tags']
+  #     item.attributes.collect(&:name)
+  #     #=> ['tags']
   #
-  #   tags.values
-  #   #=> ['first', 'new']
+  #     tags.values
+  #     #=> ['first', 'new']
   #
   # For more information about working with items and attributes, see:
   #
@@ -123,18 +123,18 @@ module AWS
   # all the way to an attribute, by name, without making any requests
   # to SimpleDB.
   #
-  #   # makes no request to SimpleDB
-  #   sdb = SimpleDB.new
-  #   colors = sdb.domains['mydomain'].items['car'].attributes['colors']
+  #     # makes no request to SimpleDB
+  #     sdb = SimpleDB.new
+  #     colors = sdb.domains['mydomain'].items['car'].attributes['colors']
   #
-  #   # one request to get the values for 'colors'
-  #   puts colors.values
+  #     # one request to get the values for 'colors'
+  #     puts colors.values
   #
-  #   # one request to add blue and green
-  #   colors.add 'blue', 'green'
+  #     # one request to add blue and green
+  #     colors.add 'blue', 'green'
   #
-  #   # one request to delete the colors attribute
-  #   colors.delete
+  #     # one request to delete the colors attribute
+  #     colors.delete
   #
   # @!attribute [r] client
   #   @return [Client] the low-level SimpleDB client object
@@ -170,9 +170,9 @@ module AWS
     # Call this method with a block.  Code executed inside the block
     # make consistent reads until the block ends.
     #
-    #   AWS::SimpleDB.consistent_reads do
-    #     # ...
-    #   end
+    #     AWS::SimpleDB.consistent_reads do
+    #       # ...
+    #     end
     #
     # ### Other Modes
     #
@@ -180,9 +180,9 @@ module AWS
     # a block.  This is useful if you have consistent reads enabled by
     # default:
     #
-    #   AWS::SimpleDB.consistent_reads(false) do
-    #     # ...
-    #   end
+    #     AWS::SimpleDB.consistent_reads(false) do
+    #       # ...
+    #     end
     #
     # @param [Boolean] state (true) When true, all SimpleDB read operations
     #   will be consistent reads inside the block.  When false, all

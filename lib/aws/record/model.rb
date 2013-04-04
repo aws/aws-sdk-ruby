@@ -19,18 +19,18 @@ module AWS
 
     # An ActiveRecord-like interface built ontop of Amazon SimpleDB.
     #
-    #   class Book < AWS::Record::Model
+    #     class Book < AWS::Record::Model
     #
-    #     string_attr :title
-    #     string_attr :author
-    #     integer_attr :number_of_pages
+    #       string_attr :title
+    #       string_attr :author
+    #       integer_attr :number_of_pages
     #
-    #     timestamps # adds a :created_at and :updated_at pair of timestamps
+    #       timestamps # adds a :created_at and :updated_at pair of timestamps
     #
-    #   end
+    #     end
     #
-    #   b = Book.new(:title => 'My Book', :author => 'Me', :pages => 1)
-    #   b.save
+    #     b = Book.new(:title => 'My Book', :author => 'Me', :pages => 1)
+    #     b.save
     #
     # # Attribute Macros
     #
@@ -50,53 +50,53 @@ module AWS
     #
     # Normally you just call these methods inside your model class definition:
     #
-    #   class Book < AWS::Record::Model
-    #     string_attr :title
-    #     boolean_attr :has_been_read
-    #     integer_attr :number_of_pages
-    #     float_attr :weight_in_pounds
-    #     datetime_attr :published_at
-    #   end
+    #     class Book < AWS::Record::Model
+    #       string_attr :title
+    #       boolean_attr :has_been_read
+    #       integer_attr :number_of_pages
+    #       float_attr :weight_in_pounds
+    #       datetime_attr :published_at
+    #     end
     #
     # For each attribute macro a pair of setter/getter methods are added #
     # to your class (and a few other useful methods).
     #
-    #   b = Book.new
-    #   b.title = "My Book"
-    #   b.has_been_read = true
-    #   b.number_of_pages = 1000
-    #   b.weight_in_pounds = 1.1
-    #   b.published_at = Time.now
-    #   b.save
+    #     b = Book.new
+    #     b.title = "My Book"
+    #     b.has_been_read = true
+    #     b.number_of_pages = 1000
+    #     b.weight_in_pounds = 1.1
+    #     b.published_at = Time.now
+    #     b.save
     #
-    #   b.id #=> "0aa894ca-8223-4d34-831e-e5134b2bb71c"
-    #   b.attributes
-    #   #=> { 'title' => 'My Book', 'has_been_read' => true, ... }
+    #     b.id #=> "0aa894ca-8223-4d34-831e-e5134b2bb71c"
+    #     b.attributes
+    #     #=> { 'title' => 'My Book', 'has_been_read' => true, ... }
     #
     # ### Default Values
     #
     # All attribute macros accept the `:default_value` option.  This sets
     # a value that is populated onto all new instnaces of the class.
     #
-    #   class Book < AWS::Record::Model
-    #     string_attr :author, :default_value => 'Me'
-    #   end
+    #     class Book < AWS::Record::Model
+    #       string_attr :author, :default_value => 'Me'
+    #     end
     #
-    #   Book.new.author #=> 'Me'
+    #     Book.new.author #=> 'Me'
     #
     # ### Multi-Valued (Set) Attributes
     #
     # AWS::Record permits storing multiple values with a single attribute.
     #
-    #   class Book < AWS::Record::Model
-    #     string_attr :tags, :set => true
-    #   end
+    #     class Book < AWS::Record::Model
+    #       string_attr :tags, :set => true
+    #     end
     #
-    #   b = Book.new
-    #   b.tags #=> #<Set: {}>
+    #     b = Book.new
+    #     b.tags #=> #<Set: {}>
     #
-    #   b.tags = ['fiction', 'fantasy']
-    #   b.tags #=> #<Set: {'fiction', 'fantasy'}>
+    #     b.tags = ['fiction', 'fantasy']
+    #     b.tags #=> #<Set: {'fiction', 'fantasy'}>
     #
     # These multi-valued attributes are treated as sets, not arrays.  This
     # means:
@@ -113,14 +113,14 @@ module AWS
     # your data clean.  AWS::Record supports most of the ActiveRecord style
     # validators.
     #
-    #   class Book < AWS::Record::Model
-    #     string_attr :title
-    #     validates_presence_of :title
-    #   end
+    #     class Book < AWS::Record::Model
+    #       string_attr :title
+    #       validates_presence_of :title
+    #     end
     #
-    #   b = Book.new
-    #   b.valid? #=> false
-    #   b.errors.full_messages #=> ['Title may not be blank']
+    #     b = Book.new
+    #     b.valid? #=> false
+    #     b.errors.full_messages #=> ['Title may not be blank']
     #
     # Validations are checked before saving a record.  If any of the validators
     # adds an error, the the save will fail.
@@ -134,9 +134,9 @@ module AWS
     # is saved for the first time.  You can use this ID to fetch the record
     # at a latter time:
     #
-    #   b = Book["0aa894ca-8223-4d34-831e-e5134b2bb71c"]
+    #     b = Book["0aa894ca-8223-4d34-831e-e5134b2bb71c"]
     #
-    #   b = Book.find("0aa894ca-8223-4d34-831e-e5134b2bb71c")
+    #     b = Book.find("0aa894ca-8223-4d34-831e-e5134b2bb71c")
     #
     # If you try to find a record by ID that has no data an error will
     # be raised.
@@ -145,13 +145,13 @@ module AWS
     #
     # You can enumerate all of your records using `all`.
     #
-    #   Book.all.each do |book|
-    #     puts book.id
-    #   end
+    #     Book.all.each do |book|
+    #       puts book.id
+    #     end
     #
-    #   Book.find(:all) do |book|
-    #     puts book.id
-    #   end
+    #     Book.find(:all) do |book|
+    #       puts book.id
+    #     end
     #
     # Be careful when enumerating all.  Depending on the number of records
     # and number of attributes each record has, this can take a while,
@@ -161,16 +161,16 @@ module AWS
     #
     # If you only want a single record, you should use `first`.
     #
-    #   b = Book.first
+    #     b = Book.first
     #
     # ### Modifiers
     #
     # Frequently you do not want ALL records or the very first record.  You
     # can pass options to `find`, `all` and `first`.
     #
-    #   my_books = Book.find(:all, :where => 'owner = "Me"')
+    #     my_books = Book.find(:all, :where => 'owner = "Me"')
     #
-    #   book = Book.first(:where => { :has_been_read => false })
+    #     book = Book.first(:where => { :has_been_read => false })
     #
     # You can pass as find options:
     #
@@ -183,21 +183,21 @@ module AWS
     # More useful than writing query fragments all over the place is to
     # name your most common conditions for reuse.
     #
-    #   class Book < AWS::Record::Model
+    #     class Book < AWS::Record::Model
     #
-    #     scope :mine, where(:owner => 'Me')
+    #       scope :mine, where(:owner => 'Me')
     #
-    #     scope :unread, where(:has_been_read => false)
+    #       scope :unread, where(:has_been_read => false)
     #
-    #     scope :by_popularity, order(:score, :desc)
+    #       scope :by_popularity, order(:score, :desc)
     #
-    #     scope :top_10, by_popularity.limit(10)
+    #       scope :top_10, by_popularity.limit(10)
     #
-    #   end
+    #     end
     #
-    #   # The following expression returns 10 books that belong
-    #   # to me, that are unread sorted by popularity.
-    #   next_good_reads = Book.mine.unread.top_10
+    #     # The following expression returns 10 books that belong
+    #     # to me, that are unread sorted by popularity.
+    #     next_good_reads = Book.mine.unread.top_10
     #
     # There are 3 standard scope methods:
     #
@@ -212,31 +212,31 @@ module AWS
     # 1. As an sql-like fragment. If you need to escape values this form is
     #    not suggested.
     #
-    #      Book.where('title = "My Book"')
+    #        Book.where('title = "My Book"')
     #
     # 2. An sql-like fragment, with placeholders.  This escapes quoted
     #    arguments properly to avoid injection.
     #
-    #      Book.where('title = ?', 'My Book')
+    #        Book.where('title = ?', 'My Book')
     #
     # 3. A hash of key-value pairs. This is the simplest form, but also the
     #    least flexible.  You can not use this form if you need more complex
     #    expressions that use or.
     #
-    #      Book.where(:title => 'My Book')
+    #        Book.where(:title => 'My Book')
     #
     # ### Order
     #
     # This orders the records as returned by AWS.  Default ordering is ascending.
     # Pass the value :desc as a second argument to sort in reverse ordering.
     #
-    #   Book.order(:title)        # alphabetical ordering
-    #   Book.order(:title, :desc) # reverse alphabetical ordering
+    #     Book.order(:title)        # alphabetical ordering
+    #     Book.order(:title, :desc) # reverse alphabetical ordering
     #
     # You may only order by a single attribute. If you call order twice in the
     # chain, the last call gets presedence:
     #
-    #   Book.order(:title).order(:price)
+    #     Book.order(:title).order(:price)
     #
     # In this example the books will be ordered by :price and the order(:title)
     # is lost.
@@ -246,7 +246,7 @@ module AWS
     # Just call `limit` with an integer argument.  This sets the maximum
     # number of records to retrieve:
     #
-    #   Book.limit(2)
+    #     Book.limit(2)
     #
     # ### Delayed Execution
     #
@@ -258,12 +258,12 @@ module AWS
     # In the following example no request is made until the call to
     # each_with_index.
     #
-    #   all_books = Books.all
-    #   ten_books = all_books.limit(10)
+    #     all_books = Books.all
+    #     ten_books = all_books.limit(10)
     #
-    #   ten_books.each_with_index do |book,n|
-    #     puts "#{n + 1} : #{book.title}"
-    #   end
+    #     ten_books.each_with_index do |book,n|
+    #       puts "#{n + 1} : #{book.title}"
+    #     end
     #
     class Model
 
@@ -277,34 +277,34 @@ module AWS
 
         # Creates the SimpleDB domain that is configured for this class.
         #
-        #   class Product < AWS::Record::Model
-        #   end
+        #     class Product < AWS::Record::Model
+        #     end
         #
-        #   Product.create_table #=> 'Product'
+        #     Product.create_table #=> 'Product'
         #
         # If you share a single AWS account with multiple applications, you
         # can provide a domain prefix for your model classes.
         #
-        #   AWS::Record.domain_prefix = 'myapp-'
+        #     AWS::Record.domain_prefix = 'myapp-'
         #
-        #   Product.create_table #=> 'myapp-Product'
+        #     Product.create_table #=> 'myapp-Product'
         #
         # If you have set a model shard name, this is used in place of the
         # class name.
         #
-        #   AWS::Record.domain_prefix = 'prod-'
-        #   class Product < AWS::Record::Model
-        #     set_shard_name 'products'
-        #   end
+        #     AWS::Record.domain_prefix = 'prod-'
+        #     class Product < AWS::Record::Model
+        #       set_shard_name 'products'
+        #     end
         #
-        #   Product.create_table #=> 'prod-products'
+        #     Product.create_table #=> 'prod-products'
         #
         # If you shard you data across multiple domains, you can specify the
         # shard name:
         #
-        #   # create two domains, with the given names
-        #   Product.create_domain 'products-1'
-        #   Product.create_domain 'products-2'
+        #     # create two domains, with the given names
+        #     Product.create_domain 'products-1'
+        #     Product.create_domain 'products-2'
         #
         # @param [optional,String] shard_name Defaults to the class name.
         #

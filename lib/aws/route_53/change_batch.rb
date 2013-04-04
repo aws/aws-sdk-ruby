@@ -16,13 +16,13 @@ module AWS
 
     # # Modify resource record sets with ChangeBatch
     #
-    #   batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
-    #   batch << AWS::Route53::CreateRequest.new('foo.example.com.', 'A', :resource_records => [{:value => '192.168.0.1'}])
-    #   batch << AWS::Route53::DeleteRequest.new('bar.example.com.', 'CNAME')
-    #   batch << AWS::Route53::DeleteRequest.new('baz.example.com.', 'AAAA')
-    #   batch << AWS::Route53::CreateRequest.new('baz.example.com.', 'AAAA', :resource_records => [{:value => '192.168.0.3'}])
+    #     batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
+    #     batch << AWS::Route53::CreateRequest.new('foo.example.com.', 'A', :resource_records => [{:value => '192.168.0.1'}])
+    #     batch << AWS::Route53::DeleteRequest.new('bar.example.com.', 'CNAME')
+    #     batch << AWS::Route53::DeleteRequest.new('baz.example.com.', 'AAAA')
+    #     batch << AWS::Route53::CreateRequest.new('baz.example.com.', 'AAAA', :resource_records => [{:value => '192.168.0.3'}])
     #
-    #   batch.call
+    #     batch.call
     #
     class ChangeBatch
 

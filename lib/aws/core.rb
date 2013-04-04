@@ -171,25 +171,25 @@ module AWS
     # The global configuration for AWS.  Generally you set your preferred
     # configuration operations once after loading the aws-sdk gem.
     #
-    #   AWS.config({
-    #     :access_key_id => 'ACCESS_KEY_ID',
-    #     :secret_access_key => 'SECRET_ACCESS_KEY',
-    #     :simple_db_endpoint => 'sdb.us-west-1.amazonaws.com',
-    #     :max_retries => 2,
-    #   })
+    #     AWS.config({
+    #       :access_key_id => 'ACCESS_KEY_ID',
+    #       :secret_access_key => 'SECRET_ACCESS_KEY',
+    #       :simple_db_endpoint => 'sdb.us-west-1.amazonaws.com',
+    #       :max_retries => 2,
+    #     })
     #
     # When using AWS classes they will always default to use configuration
     # values defined in {AWS.config}.
     #
-    #   AWS.config(:max_retries => 2)
+    #     AWS.config(:max_retries => 2)
     #
-    #   sqs = AWS::SQS.new
-    #   sqs.config.max_retries #=> 2
+    #     sqs = AWS::SQS.new
+    #     sqs.config.max_retries #=> 2
     #
     # If you want to change a configuration value for a single instance you
     # pass the new configuration value to that object's initializer:
     #
-    #   AWS::SQS.new(:max_retries => 0)
+    #     AWS::SQS.new(:max_retries => 0)
     #
     # @note Changing the global configuration does not affect objects
     #   that have already been constructed.
@@ -279,8 +279,8 @@ module AWS
     # @option options [Logger,nil] :logger (nil) A logger to send
     #   log messages to.  Here is an example that logs to standard out.
     #
-    #     require 'logger'
-    #     AWS.config(:logger => Logger.new($stdout))
+    #       require 'logger'
+    #       AWS.config(:logger => Logger.new($stdout))
     #
     # @option options [Symbol] :log_level (:info) The level log messages are
     #   sent to the logger with (e.g. `:notice`, `:info`, `:warn`,
@@ -290,21 +290,21 @@ module AWS
     #   for building log messages from responses. You can quickly change
     #   log formats by providing a pre-configured log formatter.
     #
-    #     AWS.config(:log_formatter => AWS::Core::LogFormatter.colored)
+    #       AWS.config(:log_formatter => AWS::Core::LogFormatter.colored)
     #
     #   Here is a list of pre-configured log formatters:
     #
-    #   * `AWS::Core::LogFormatter.default`
-    #   * `AWS::Core::LogFormatter.short`
-    #   * `AWS::Core::LogFormatter.debug`
-    #   * `AWS::Core::LogFormatter.colored`
+    #     * `AWS::Core::LogFormatter.default`
+    #     * `AWS::Core::LogFormatter.short`
+    #     * `AWS::Core::LogFormatter.debug`
+    #     * `AWS::Core::LogFormatter.colored`
     #
     #   You can also create an instance of AWS::Core::LogFormatter
     #   with a custom log message pattern. See {Core::LogFormatter} for
     #   a complete list of pattern substitutions.
     #
-    #     pattern = "[AWS :operation :duration] :error_message"
-    #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern))
+    #       pattern = "[AWS :operation :duration] :error_message"
+    #       AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern))
     #
     #   Lastly you can pass any object that responds to `#format` accepting
     #   and instance of {Core::Response} and returns a string.
@@ -318,7 +318,7 @@ module AWS
     #    to send service requests through.  You can pass a URI object or a
     #    URI string:
     #
-    #       AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
+    #        AWS.config(:proxy_uri => 'https://user:password@my.proxy:443/path?query')
     #
     # @option options [String] :ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
     #   The service endpoint for AWS OpsWorks.
@@ -362,11 +362,11 @@ module AWS
     #   call to upload an object.  This option controls the default
     #   behavior for the following methods:
     #
-    #   * {S3::S3Object#write}
-    #   * {S3::S3Object#multipart_upload}
-    #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
-    #   * {S3::S3Object#presigned_post}
-    #   * {S3::Bucket#presigned_post}
+    #     * {S3::S3Object#write}
+    #     * {S3::S3Object#multipart_upload}
+    #     * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
+    #     * {S3::S3Object#presigned_post}
+    #     * {S3::Bucket#presigned_post}
     #
     # @option options [OpenSSL::PKey::RSA, String] :s3_encryption_key (nil)
     #   If this is set, AWS::S3::S3Object #read and #write methods will always
@@ -495,7 +495,7 @@ module AWS
     # For example, consider the following code to get the most
     # recently launched EC2 instance:
     #
-    #  latest = ec2.instances.sort_by(&:launch_time).last
+    #     latest = ec2.instances.sort_by(&:launch_time).last
     #
     # The above code would make N+1 requests (where N is the number of
     # instances in the account); iterating the collection of instances
@@ -504,9 +504,9 @@ module AWS
     # another request per instance.  We can rewrite the code as
     # follows to make only one request:
     #
-    #  latest = AWS.memoize do
-    #    ec2.instances.sort_by(&:launch_time).last
-    #  end
+    #     latest = AWS.memoize do
+    #       ec2.instances.sort_by(&:launch_time).last
+    #     end
     #
     # Iterating the collection still causes a request, but each
     # subsequent call to {AWS::EC2::Instance#launch_time} uses the
@@ -519,17 +519,17 @@ module AWS
     # relatively small numbers of requests.  The cached responses are
     # used in two ways while memoization is enabled:
     #
-    # 1. Before making a request, the SDK checks the cache for a
-    #    response to a request with the same signature (credentials,
-    #    service endpoint, operation name, and parameters).  If such a
-    #    response is found, it is used instead of making a new
-    #    request.
+    #   * Before making a request, the SDK checks the cache for a
+    #     response to a request with the same signature (credentials,
+    #     service endpoint, operation name, and parameters).  If such a
+    #     response is found, it is used instead of making a new
+    #     request.
     #
-    # 2. Before retrieving data for an attribute of a resource
-    #    (e.g. {AWS::EC2::Instance#launch_time}), the SDK attempts to
-    #    find a cached response that contains the requested data.  If
-    #    such a response is found, the cached data is returned instead
-    #    of making a new request.
+    #   * Before retrieving data for an attribute of a resource
+    #     (e.g. {AWS::EC2::Instance#launch_time}), the SDK attempts to
+    #     find a cached response that contains the requested data.  If
+    #     such a response is found, the cached data is returned instead
+    #     of making a new request.
     #
     # When memoization is disabled, all previously cached responses
     # are discarded.

@@ -41,7 +41,7 @@ module AWS
       #
       #   Here is an example of providing a canned ACL to a bucket:
       #
-      #     s3.buckets['bucket-name'].acl = :public_read
+      #       s3.buckets['bucket-name'].acl = :public_read
       #
       #   ==== ACL Grant Hash
       #
@@ -57,17 +57,15 @@ module AWS
       #   Grantee strings (values) should be formatted like some of the
       #   following examples:
       #
-      #     id="8a6925ce4adf588a4532142d3f74dd8c71fa124b1ddee97f21c32aa379004fef"
-      #     uri="http://acs.amazonaws.com/groups/global/AllUsers"
-      #     emailAddress="xyz@amazon.com"
+      #       id="8a6925ce4adf588a4532142d3f74dd8c71fa124b1ddee97f21c32aa379004fef"
+      #       uri="http://acs.amazonaws.com/groups/global/AllUsers"
+      #       emailAddress="xyz@amazon.com"
       #
       #   You can provide a comma delimited list of multiple grantees in a single
       #   string.  Please note the use of quotes inside the grantee string.
       #   Here is a simple example:
       #
-      #     {
-      #       :grant_full_control => "emailAddress=\"foo@bar.com\", id=\"abc..mno\""
-      #     }
+      #       { :grant_full_control => "emailAddress=\"foo@bar.com\", id=\"abc..mno\"" }
       #
       #   See the S3 API documentation for more information on formatting
       #   grants.
@@ -77,31 +75,31 @@ module AWS
       #   You can build an ACL using the {AccessControlList} class and
       #   pass this object.
       #
-      #     acl = AWS::S3::AccessControlList.new
-      #     acl.grant(:full_control).to(:canonical_user_id => "8a6...fef")
-      #     acl #=> this is acceptible
+      #       acl = AWS::S3::AccessControlList.new
+      #       acl.grant(:full_control).to(:canonical_user_id => "8a6...fef")
+      #       acl #=> this is acceptible
       #
       #   ==== ACL XML String
       #
       #   Lastly you can build your own ACL XML document and pass it as a string.
       #
-      #     <<-XML
-      #       <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-      #         <Owner>
-      #           <ID>8a6...fef</ID>
-      #           <DisplayName>owner-display-name</DisplayName>
-      #         </Owner>
-      #         <AccessControlList>
-      #           <Grant>
-      #             <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Canonical User">
-      #               <ID>8a6...fef</ID>
-      #               <DisplayName>owner-display-name</DisplayName>
-      #             </Grantee>
-      #             <Permission>FULL_CONTROL</Permission>
-      #           </Grant>
-      #         </AccessControlList>
-      #       </AccessControlPolicy>
-      #     XML
+      #       <<-XML
+      #         <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      #           <Owner>
+      #             <ID>8a6...fef</ID>
+      #             <DisplayName>owner-display-name</DisplayName>
+      #           </Owner>
+      #           <AccessControlList>
+      #             <Grant>
+      #               <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Canonical User">
+      #                 <ID>8a6...fef</ID>
+      #                 <DisplayName>owner-display-name</DisplayName>
+      #               </Grantee>
+      #               <Permission>FULL_CONTROL</Permission>
+      #             </Grant>
+      #           </AccessControlList>
+      #         </AccessControlPolicy>
+      #       XML
       #
       # @return [Hash] Returns a hash of options suitable for
       #   passing to {Client#put_bucket_acl} and {Client#put_object_acl}
@@ -179,14 +177,16 @@ module AWS
           end
 
           # A granee hash looks like:
-          #   { :id => 'abc...fec' }
-          #   { :uri => 'http://abc.com/foo' }
-          #   { :email_address => 'xyz@amazon.com }
+          #
+          #     { :id => 'abc...fec' }
+          #     { :uri => 'http://abc.com/foo' }
+          #     { :email_address => 'xyz@amazon.com }
           #
           # It needs to look like
-          #   'id="abc...fec"'
-          #   'uri="http://abc.com/foo"'
-          #   'emailAddress="xyz@amazon.com"'
+          #
+          #     'id="abc...fec"'
+          #     'uri="http://abc.com/foo"'
+          #     'emailAddress="xyz@amazon.com"'
           type, token = grantee.to_a.flatten
           type = type.to_s.split('_').map{|part| ucfirst(part) }.join
           "#{type[0,1].downcase}#{type[1..-1]}=\"#{token}\""

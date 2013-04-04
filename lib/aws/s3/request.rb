@@ -83,12 +83,12 @@ module AWS
 
       # From the S3 developer guide:
       #
-      # StringToSign =
-      #   HTTP-Verb ` "\n" `
-      #   content-md5 ` "\n" `
-      #   content-type ` "\n" `
-      #   date ` "\n" `
-      #   CanonicalizedAmzHeaders + CanonicalizedResource;
+      #     StringToSign =
+      #       HTTP-Verb ` "\n" `
+      #       content-md5 ` "\n" `
+      #       content-type ` "\n" `
+      #       date ` "\n" `
+      #       CanonicalizedAmzHeaders + CanonicalizedResource;
       #
       def string_to_sign
         [
@@ -112,11 +112,11 @@ module AWS
 
       # From the S3 developer guide
       #
-      #   CanonicalizedResource =
-      #     [ "/" ` Bucket ] `
-      #     <HTTP-Request-URI, from the protocol name up to the querystring> +
-      #     [ sub-resource, if present. e.g. "?acl", "?location",
-      #     "?logging", or "?torrent"];
+      #     CanonicalizedResource =
+      #       [ "/" ` Bucket ] `
+      #       <HTTP-Request-URI, from the protocol name up to the querystring> +
+      #       [ sub-resource, if present. e.g. "?acl", "?location",
+      #       "?logging", or "?torrent"];
       #
       def canonicalized_resource
 

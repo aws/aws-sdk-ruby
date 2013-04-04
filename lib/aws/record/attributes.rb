@@ -107,14 +107,14 @@ module AWS
         # Returns the value cast to a string.  Empty strings are returned as
         # nil by default.  Type casting is done by calling #to_s on the value.
         #
-        #   string_attr.type_cast(123)
-        #   # => '123'
+        #     string_attr.type_cast(123)
+        #     # => '123'
         #
-        #   string_attr.type_cast('')
-        #   # => nil
+        #     string_attr.type_cast('')
+        #     # => nil
         #
-        #   string_attr.type_cast('', :preserve_empty_strings => true)
-        #   # => ''
+        #     string_attr.type_cast('', :preserve_empty_strings => true)
+        #     # => ''
         #
         # @param [Mixed] raw_value
         # @param [Hash] options
@@ -183,11 +183,11 @@ module AWS
         # Returns value cast to an integer.  Empty strings are cast to
         # nil by default.  Type casting is done by calling #to_i on the value.
         #
-        #   int_attribute.type_cast('123')
-        #   #=> 123
+        #     int_attribute.type_cast('123')
+        #     #=> 123
         #
-        #   int_attribute.type_cast('')
-        #   #=> nil
+        #     int_attribute.type_cast('')
+        #     #=> nil
         #
         # @param [Mixed] raw_value The value to type cast to an integer.
         # @return [Integer,nil] Returns the type casted integer or nil
@@ -206,8 +206,8 @@ module AWS
         # Returns a serialized representation of the integer value suitable for
         # storing in SimpleDB.
         #
-        #   attribute.serialize(123)
-        #   #=> '123'
+        #     attribute.serialize(123)
+        #     #=> '123'
         #
         # @param [Integer] integer The number to serialize.
         # @param [Hash] options
@@ -254,17 +254,17 @@ module AWS
         # nil.  Values are cast first to strings and then passed to
         # Date.parse.  Integers are treated as timestamps.
         #
-        #   date_attribute.type_cast('2000-01-02T10:11:12Z')
-        #   #=> #<Date: 4903091/2,0,2299161>
+        #     date_attribute.type_cast('2000-01-02T10:11:12Z')
+        #     #=> #<Date: 4903091/2,0,2299161>
         #
-        #   date_attribute.type_cast(1306170146)
-        #   #<Date: 4911409/2,0,2299161>
+        #     date_attribute.type_cast(1306170146)
+        #     #<Date: 4911409/2,0,2299161>
         #
-        #   date_attribute.type_cast('')
-        #   #=> nil
+        #     date_attribute.type_cast('')
+        #     #=> nil
         #
-        #   date_attribute.type_cast(nil)
-        #   #=> nil
+        #     date_attribute.type_cast(nil)
+        #     #=> nil
         #
         # @param [Mixed] raw_value The value to cast to a Date object.
         # @param [Hash] options
@@ -291,8 +291,8 @@ module AWS
 
         # Returns a Date object encoded as a string (suitable for sorting).
         #
-        #   attribute.serialize(DateTime.parse('2001-01-01'))
-        #   #=> '2001-01-01'
+        #     attribute.serialize(DateTime.parse('2001-01-01'))
+        #     #=> '2001-01-01'
         #
         # @param [Date] date The date to serialize.
         #
@@ -321,17 +321,17 @@ module AWS
         # nil.  Values are cast first to strings and then passed to
         # DateTime.parse.  Integers are treated as timestamps.
         #
-        #   datetime_attribute.type_cast('2000-01-02')
-        #   #=> #<DateTime: 4903091/2,0,2299161>
+        #     datetime_attribute.type_cast('2000-01-02')
+        #     #=> #<DateTime: 4903091/2,0,2299161>
         #
-        #   datetime_attribute.type_cast(1306170146)
-        #   #<DateTime: 106086465073/43200,-7/24,2299161>
+        #     datetime_attribute.type_cast(1306170146)
+        #     #<DateTime: 106086465073/43200,-7/24,2299161>
         #
-        #   datetime_attribute.type_cast('')
-        #   #=> nil
+        #     datetime_attribute.type_cast('')
+        #     #=> nil
         #
-        #   datetime_attribute.type_cast(nil)
-        #   #=> nil
+        #     datetime_attribute.type_cast(nil)
+        #     #=> nil
         #
         # @param [Mixed] raw_value The value to cast to a DateTime object.
         # @param [Hash] options
@@ -358,8 +358,8 @@ module AWS
 
         # Returns a DateTime object encoded as a string (suitable for sorting).
         #
-        #   attribute.serialize(DateTime.parse('2001-01-01'))
-        #   #=> '2001-01-01T00:00:00:Z)
+        #     attribute.serialize(DateTime.parse('2001-01-01'))
+        #     #=> '2001-01-01T00:00:00:Z)
         #
         # @param [DateTime] datetime The datetime object to serialize.
         # @param [Hash] options

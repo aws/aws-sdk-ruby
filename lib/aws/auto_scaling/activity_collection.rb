@@ -18,22 +18,21 @@ module AWS
     #
     # Enumerating ALL activities:
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.activities.each do |activity|
-    #     # ...
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.activities.each do |activity|
+    #       # ...
+    #     end
     #
     # Enumerating activities for a single Auto Scaling group:
     #
-    #   group = auto_scaling.groups['group-name']
-    #   group.activities.each do |activity|
-    #     # ...
-    #   end
+    #     group = auto_scaling.groups['group-name']
+    #     group.activities.each do |activity|
+    #       # ...
+    #     end
     #
     # If you know the id of an activity you can get a reference to it:
     #
-    #   activity = auto_scaling.activities['activity-id']
-    #
+    #     activity = auto_scaling.activities['activity-id']
     class ActivityCollection
 
       include Core::Collection::WithLimitAndNextToken

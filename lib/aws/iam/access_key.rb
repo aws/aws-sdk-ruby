@@ -133,14 +133,14 @@ module AWS
 
       # Returns a hash that should be saved somewhere safe.
       #
-      #   access_keys = iam.access_keys.create
-      #   access_keys.credentials
-      #   #=> { :access_key_id => '...', :secret_access_key => '...' }
+      #     access_keys = iam.access_keys.create
+      #     access_keys.credentials
+      #     #=> { :access_key_id => '...', :secret_access_key => '...' }
       #
       # You can also use these credentials to make requests:
       #
-      #   s3 = AWS::S3.new(access_keys.credentials)
-      #   s3.buckets.create('newbucket')
+      #     s3 = AWS::S3.new(access_keys.credentials)
+      #     s3.buckets.create('newbucket')
       #
       # @return [Hash] Returns a hash with the access key id and
       #   secret access key.

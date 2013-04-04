@@ -19,18 +19,18 @@ module AWS
     # all your VPCs).  You can also get a subnet collection that represents
     # subnets within a single vpc.
     #
-    #   # represents all subnets
-    #   subnets = ec2.subnets
+    #     # represents all subnets
+    #     subnets = ec2.subnets
     #
-    #   # represents subnets within the named vpc
-    #   subnets = ec2.vpcs['vpc-12345'].subnets
+    #     # represents subnets within the named vpc
+    #     subnets = ec2.vpcs['vpc-12345'].subnets
     #
     # ## Creating a Subnet
     #
     # To create a subnet, call {#create} on a subnet collection, passing in
     # a suitable CIDR block.
     #
-    #   subnet = subnets.create('10.0.0.0/20')
+    #     subnet = subnets.create('10.0.0.0/20')
     #
     # You can optionally pass the availability zone you want the subnet
     # created in.
@@ -39,12 +39,12 @@ module AWS
     #
     # If you know the subnet id, you can get a subnet using {#[]}.
     #
-    #   subnet = subnets['subnet-id-here']
+    #     subnet = subnets['subnet-id-here']
     #
     # You can filter subnets as well.  See the EC2 API documentation
     # (http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSubnets.html) for a complete list of accepted filters.
     #
-    #   subnet = subnets.filter('state', 'available').first
+    #     subnet = subnets.filter('state', 'available').first
     #
     class SubnetCollection < Collection
 

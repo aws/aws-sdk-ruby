@@ -31,7 +31,7 @@ module AWS
       # Registers a callback to be called on successful completion of
       # the task.
       #
-      #  handle.on_success { puts "It worked!" }
+      #     handle.on_success { puts "It worked!" }
       #
       # If this is called when the task has already completed
       # successfully, it will call the callback immediately.
@@ -45,7 +45,7 @@ module AWS
 
       # Registers a callback to be called when the task fails.
       #
-      #  handle.on_failure { puts "It didn't work!" }
+      #     handle.on_failure { puts "It didn't work!" }
       #
       # If this is called when the task has already failed, it will
       # call the callback immediately.
@@ -60,9 +60,9 @@ module AWS
       # Registers a callback to be called when the task is complete,
       # regardless of its status.  Yields the status to the block.
       #
-      #  handle.on_complete do |status|
-      #    puts "It #{status == :success ? 'did' : 'did not'} work!"
-      #  end
+      #     handle.on_complete do |status|
+      #       puts "It #{status == :success ? 'did' : 'did not'} work!"
+      #     end
       #
       # If this is called when the task has already completed, it will
       # call the callback immediately.

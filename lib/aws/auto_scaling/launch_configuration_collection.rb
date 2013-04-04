@@ -21,7 +21,7 @@ module AWS
 
       # Creates an Auto Scaling launch configuration.
       #
-      #   auto_scaling.launch_configurations.create('name', 'ami-12345', 'm1.small')
+      #     auto_scaling.launch_configurations.create('name', 'ami-12345', 'm1.small')
       #
       # @param [String] name The name of the launch configuration to create.
       #

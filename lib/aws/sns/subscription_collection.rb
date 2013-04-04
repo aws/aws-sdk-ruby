@@ -17,11 +17,11 @@ module AWS
     # Represents the collection of all subscriptions for the AWS
     # account.  For example:
     #
-    #  # get the ARNs of all SQS queues with subscriptions to topics
-    #  # owned by this account
-    #  topic.subscriptions.
-    #    select { |s| s.protocol == :sqs }.
-    #    collect(&:endpoint)
+    #     # get the ARNs of all SQS queues with subscriptions to topics
+    #     # owned by this account
+    #     topic.subscriptions.
+    #       select { |s| s.protocol == :sqs }.
+    #       collect(&:endpoint)
     #
     class SubscriptionCollection
 

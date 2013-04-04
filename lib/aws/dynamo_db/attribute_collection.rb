@@ -80,9 +80,9 @@ module AWS
       # Behaves like Hash#each; yields each attribute as a name/value
       # pair.
       #
-      #   attributes.each { |(name, value)| puts "#{name} = #{value}" }
+      #     attributes.each { |(name, value)| puts "#{name} = #{value}" }
       #
-      #   attributes.each { |name, value| puts "#{name} = #{value}" }
+      #     attributes.each { |name, value| puts "#{name} = #{value}" }
       #
       # @param (see #to_hash)
       #
@@ -164,17 +164,16 @@ module AWS
       # attribute is a number, the original value is incremented by
       # the numeric value provided to this method.  For example:
       #
-      #   item = table.items.put(
-      #     :id => "abc123",
-      #     :colors => ["red", "white"],
-      #     :age => 3
-      #   )
-      #   item.attributes.add(
-      #     { :colors => ["muave"],
-      #       :age => 1 },
-      #     :return => :updated_new
-      #   ) # => { "colors" => Set["red", "white", "mauve"],
-      #     #      "age" => 4 }
+      #     item = table.items.put(
+      #       :id => "abc123",
+      #       :colors => ["red", "white"],
+      #       :age => 3
+      #     )
+      #     item.attributes.add(
+      #       { :colors => ["muave"],
+      #         :age => 1 },
+      #       :return => :updated_new
+      #     ) # => { "colors" => Set["red", "white", "mauve"], "age" => 4 }
       #
       # @param [Hash] attributes The attribute values to add.  The
       #   keys of the hash may be strings or symbols.  The values may
@@ -309,20 +308,20 @@ module AWS
       # sequence, and it also allows you to group different kinds of
       # updates into an atomic operation.
       #
-      #   item.attributes.update do |u|
+      #     item.attributes.update do |u|
       #
-      #     # add 12 to the (numeric) value of "views"
-      #     u.add(:views => 12)
+      #       # add 12 to the (numeric) value of "views"
+      #       u.add(:views => 12)
       #
-      #     # delete attributes
-      #     u.delete(:foo, :bar)
+      #       # delete attributes
+      #       u.delete(:foo, :bar)
       #
-      #     # delete values out of a set attribute
-      #     u.delete(:colors => ["red", "blue"])
+      #       # delete values out of a set attribute
+      #       u.delete(:colors => ["red", "blue"])
       #
-      #     # replace values
-      #     u.set(:title => "More Automobiles")
-      #   end
+      #       # replace values
+      #       u.set(:title => "More Automobiles")
+      #     end
       #
       # @param [Hash] options Options for updating the item.
       #
@@ -330,11 +329,11 @@ module AWS
       #   The operation will fail unless the item exists and has the
       #   attributes in the value for this option.  For example:
       #
-      #     # throws DynamoDB::Errors::ConditionalCheckFailedException
-      #     # unless the item has "color" set to "red"
-      #     item.attributes.update(:if => { :color => "red" }) do |u|
-      #       # ...
-      #     end
+      #       # throws DynamoDB::Errors::ConditionalCheckFailedException
+      #       # unless the item has "color" set to "red"
+      #       item.attributes.update(:if => { :color => "red" }) do |u|
+      #         # ...
+      #       end
       #
       # @option options [String, Symbol, Array] :unless_exists A name
       #   or collection of attribute names; if the item already exists
@@ -342,35 +341,31 @@ module AWS
       #   will raise
       #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For example:
       #
-      #     item.attributes.update(:unless_exists => :color) do |u|
-      #       # ...
-      #     end
+      #       item.attributes.update(:unless_exists => :color) do |u|
+      #         # ...
+      #       end
       #
       # @option options [Symbol] :return (`:none`) Changes the return
       #   value of the method.  Valid values:
       #
-      #   [`:none`] Return `nil`
-      #
-      #   [`:all_old`] Returns a hash containing all of the original
-      #                values of the attributes before the update, or
-      #                `nil` if the item did not exist at the time of
-      #                the update.
-      #
-      #   [`:updated_old`] Returns a hash containing the original
-      #                    values of the attributes that were modified
-      #                    as part of this operation.  This includes
-      #                    attributes that were deleted, and
-      #                    set-valued attributes whose member values
-      #                    were deleted.
-      #
-      #   [`:updated_new`] Returns a hash containing the new values of
-      #                    the attributes that were modified as part
-      #                    of this operation.  This includes
-      #                    set-valued attributes whose member values
-      #                    were deleted.
-      #
-      #   [`:all_new`] Returns a hash containing the new values of all
-      #                of the attributes.
+      #     * `:none` - Return `nil`
+      #     * `:all_old` - Returns a hash containing all of the original
+      #       values of the attributes before the update, or
+      #       `nil` if the item did not exist at the time of
+      #       the update.
+      #     * `:updated_old` - Returns a hash containing the original
+      #       values of the attributes that were modified
+      #       as part of this operation.  This includes
+      #       attributes that were deleted, and
+      #       set-valued attributes whose member values
+      #       were deleted.
+      #     * `:updated_new` - Returns a hash containing the new values of
+      #       the attributes that were modified as part
+      #       of this operation.  This includes
+      #       set-valued attributes whose member values
+      #       were deleted.
+      #     * `:all_new` - Returns a hash containing the new values of all
+      #       of the attributes.
       #
       # @yieldparam [UpdateBuilder] builder A handle for describing
       #   the update.

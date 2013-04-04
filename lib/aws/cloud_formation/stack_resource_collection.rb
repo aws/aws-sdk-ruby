@@ -30,15 +30,14 @@ module AWS
     #
     # @example Enumerating stack resources
     #
-    #   # enumerating all resources for a stack
-    #   stack.resources.each do |resource|
-    #     puts resource.resource_type ` " " ` resource.physical_resource_id
-    #   end
+    #     # enumerating all resources for a stack
+    #     stack.resources.each do |resource|
+    #       puts resource.resource_type ` " " ` resource.physical_resource_id
+    #     end
     #
     # @example Getting a stack resource by its logical resource id
     #
-    #   resource = stack.resources['web']
-    #
+    #     resource = stack.resources['web']
     class StackResourceCollection
 
       include Core::Collection::Simple

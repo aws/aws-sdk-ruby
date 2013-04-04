@@ -25,20 +25,20 @@ module AWS
 
       # Adds one or more items to the batch write operation.
       #
-      #   # adding one item at a time to the batch
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.put('table-name', :id => 'id1', :color => 'red')
-      #   batch.put('table-name', :id => 'id2', :color => 'blue')
-      #   batch.process!
+      #     # adding one item at a time to the batch
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.put('table-name', :id => 'id1', :color => 'red')
+      #     batch.put('table-name', :id => 'id2', :color => 'blue')
+      #     batch.process!
       #
-      #   # adding multiple items to a batch
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.put('table-name', [
-      #     { :id => 'id1', :color => 'red' },
-      #     { :id => 'id2', :color => 'blue' },
-      #     { :id => 'id3', :color => 'green' },
-      #   ])
-      #   batch.process!
+      #     # adding multiple items to a batch
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.put('table-name', [
+      #       { :id => 'id1', :color => 'red' },
+      #       { :id => 'id2', :color => 'blue' },
+      #       { :id => 'id3', :color => 'green' },
+      #     ])
+      #     batch.process!
       #
       # @param [Table,String] table A {Table} object or table name string.
       #
@@ -55,15 +55,15 @@ module AWS
 
       # Adds one or more items to the batch to delete.
       #
-      #   # for a table w/out a range key
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.delete('table-name', %w(hk1 hk2))
-      #   batch.process!
+      #     # for a table w/out a range key
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.delete('table-name', %w(hk1 hk2))
+      #     batch.process!
       #
-      #   # for a table with a range key
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.delete('table-name', [['hk1', 'rk2'], ['hk1', 'rk2']]])
-      #   batch.process!
+      #     # for a table with a range key
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.delete('table-name', [['hk1', 'rk2'], ['hk1', 'rk2']]])
+      #     batch.process!
       #
       # @param [Table,String] table A {Table} object or table name string.
       #
@@ -71,12 +71,12 @@ module AWS
       #   delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
-      #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
+      #       batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
       #
       #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
-      #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #       batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       # @return [nil]
       #
@@ -95,23 +95,23 @@ module AWS
       # @option options [Array<Hash>] :put An array of items to put.  Each item
       #   should be an array of attribute hashes.
       #
-      #     # add 3 items to the batch
-      #     batch.write(table, :put => [
-      #       { :id => 'abc', :color => 'red', :count => 2 },
-      #       { :id => 'mno', :color => 'blue', :count => 3 },
-      #       { :id => 'xyz', :color => 'green', :count => 5 },
-      #     ])
+      #       # add 3 items to the batch
+      #       batch.write(table, :put => [
+      #         { :id => 'abc', :color => 'red', :count => 2 },
+      #         { :id => 'mno', :color => 'blue', :count => 3 },
+      #         { :id => 'xyz', :color => 'green', :count => 5 },
+      #       ])
       #
       # @option options [Array<String>,Array<Array>] :delete A list of item keys
       #   to delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
-      #      batch.write('table-name', :delete => ['hk1', 'hk2', 'hk3'])
+      #       batch.write('table-name', :delete => ['hk1', 'hk2', 'hk3'])
       #
       #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
-      #      batch.write('table-name', :delete => [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #       batch.write('table-name', :delete => [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       def write table, options = {}
 

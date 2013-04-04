@@ -18,16 +18,16 @@ module AWS
     # to store as a binary attribute.  This can reduce the size
     # of larger attributes to save on storage costs.
     #
-    #   table = AWS::DynamoDB.new.tables['data-table']
-    #   table.hash_key = { 'id' => :string }
-    #   table.range_key = { 'position' => :number }
+    #     table = AWS::DynamoDB.new.tables['data-table']
+    #     table.hash_key = { 'id' => :string }
+    #     table.range_key = { 'position' => :number }
     #
-    #   # put an item with a binary data attribute
-    #   table.items.create(
-    #     'id' => 'abc',
-    #     'position' => 5,
-    #     'data' => AWS::DynamoDB::Binary.new('abc')
-    #   )
+    #     # put an item with a binary data attribute
+    #     table.items.create(
+    #       'id' => 'abc',
+    #       'position' => 5,
+    #       'data' => AWS::DynamoDB::Binary.new('abc')
+    #     )
     #
     class Binary < String; end
 

@@ -17,9 +17,9 @@ module AWS
     # A collection that provides access to IAM users belonging to a
     # particular group.
     #
-    #   group = AWS::IAM.new.groups.first
-    #   users = group.users
-    #   users.each { |u| puts u.name }
+    #     group = AWS::IAM.new.groups.first
+    #     users = group.users
+    #     users.each { |u| puts u.name }
     #
     class GroupUserCollection
 

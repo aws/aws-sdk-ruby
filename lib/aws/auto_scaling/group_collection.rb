@@ -21,11 +21,11 @@ module AWS
 
       # Creates an Auto Scaling Group.
       #
-      #   group = auto_scaling.groups.create('group-name',
-      #     :launch_configuration => 'launch-config-name',
-      #     :availability_zones => %(us-west-2a us-west-2b),
-      #     :min_size => 1,
-      #     :max_size => 4)
+      #     group = auto_scaling.groups.create('group-name',
+      #       :launch_configuration => 'launch-config-name',
+      #       :availability_zones => %(us-west-2a us-west-2b),
+      #       :min_size => 1,
+      #       :max_size => 4)
       #
       # @param [String] name The name of the Auto Scaling group.
       #   Must be unique within the scope of your AWS account.

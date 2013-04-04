@@ -18,13 +18,13 @@ module AWS
     # types that SimpleDB can return.  You can use these classes to
     # rescue specific errors, for example:
     #
-    #  begin
-    #    SimpleDB.new.domains.mydomain.
-    #      items["foo"].attributes.set(:color => "red")
-    #  rescue SimpleDB::Errors::NoSuchDomain => e
-    #    SimpleDB.new.domians.create("mydomain")
-    #    retry
-    #  end
+    #     begin
+    #       SimpleDB.new.domains.mydomain.
+    #         items["foo"].attributes.set(:color => "red")
+    #     rescue SimpleDB::Errors::NoSuchDomain => e
+    #       SimpleDB.new.domians.create("mydomain")
+    #       retry
+    #     end
     #
     # Each exception has:
     #

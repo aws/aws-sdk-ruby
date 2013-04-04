@@ -19,12 +19,10 @@ module AWS
     #   The return value will be one of the following values:
     #
     #   * `:terminate` - the child executions will be terminated.
-    #
     #   * `:request_cancel` - a request to cancel will be attempted for each
     #     child execution by recording a WorkflowExecutionCancelRequested
     #     event in its history. It is up to the decider to take appropriate
     #     actions when it receives an execution history with this event.
-    #
     #   * `:abandon` - no action will be taken. The child executions will
     #     continue to run.
     #
@@ -249,7 +247,7 @@ module AWS
       # Records a WorkflowExecutionSignaled event in the workflow execution
       # history and creates a decision task for the workflow execution.
       #
-      #   workflow_execution.signal('signal_name', :input => '...')
+      #     workflow_execution.signal('signal_name', :input => '...')
       #
       # @param [String] signal_name The name of the signal. This name must be
       #   meaningful to the target workflow.

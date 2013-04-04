@@ -43,11 +43,11 @@ module AWS
     #
     # Rails 3+ (RAILS_ROOT/Gemfile)
     #
-    #   gem 'aws-sdk'
+    #     gem 'aws-sdk'
     #
     # Rails 2.1 - 2.3 (RAILS_ROOT/config/environment.rb)
     #
-    #   config.gem 'aws-sdk'
+    #     config.gem 'aws-sdk'
     #
     # @return [nil]
     def self.setup
@@ -67,38 +67,38 @@ module AWS
     # standard `database.yml` file in a Rails application.  This means there
     # should be one section for Rails environment:
     #
-    #   development:
-    #     access_key_id: YOUR_ACCESS_KEY_ID
-    #     secret_access_key: YOUR_SECRET_ACCESS_KEY
-    #     simple_db_consistent_reads: false
+    #     development:
+    #       access_key_id: YOUR_ACCESS_KEY_ID
+    #       secret_access_key: YOUR_SECRET_ACCESS_KEY
+    #       simple_db_consistent_reads: false
     #
-    #   production:
-    #     access_key_id: YOUR_ACCESS_KEY_ID
-    #     secret_access_key: YOUR_SECRET_ACCESS_KEY
-    #     simple_db_consistent_reads: true
+    #     production:
+    #       access_key_id: YOUR_ACCESS_KEY_ID
+    #       secret_access_key: YOUR_SECRET_ACCESS_KEY
+    #       simple_db_consistent_reads: true
     #
     # You should also consider DRYing up your configuration file using
     # YAML references:
     #
-    #   development:
-    #     access_key_id: YOUR_ACCESS_KEY_ID
-    #     secret_access_key: YOUR_SECRET_ACCESS_KEY
-    #     simple_db_consistent_reads: false
+    #     development:
+    #       access_key_id: YOUR_ACCESS_KEY_ID
+    #       secret_access_key: YOUR_SECRET_ACCESS_KEY
+    #       simple_db_consistent_reads: false
     #
-    #   production:
-    #     <<: *development
-    #     simple_db_consistent_reads: true
+    #     production:
+    #       <<: *development
+    #       simple_db_consistent_reads: true
     #
     # The yaml file will also be ERB parsed so you can use ruby inside of it:
     #
-    #   development:
-    #     access_key_id: YOUR_ACCESS_KEY_ID
-    #     secret_access_key: <%= read_secret_from_a_secure_location %>
-    #     simple_db_consistent_reads: false
+    #     development:
+    #       access_key_id: YOUR_ACCESS_KEY_ID
+    #       secret_access_key: <%= read_secret_from_a_secure_location %>
+    #       simple_db_consistent_reads: false
     #
-    #   production:
-    #     <<: *development
-    #     simple_db_consistent_reads: true
+    #     production:
+    #       <<: *development
+    #       simple_db_consistent_reads: true
     #
     def self.load_yaml_config
 
@@ -121,7 +121,7 @@ module AWS
     # use this for ActionMailer in your environment configuration
     # (e.g.  RAILS_ROOT/config/environments/production.rb)
     #
-    #   config.action_mailer.delivery_method = :amazon_ses
+    #     config.action_mailer.delivery_method = :amazon_ses
     #
     # ### Defaults
     #
@@ -134,7 +134,7 @@ module AWS
     # If you need to supply configuration values for SES that are different than
     # those in {AWS.config} then you can pass those options:
     #
-    #   AWS.add_action_mailer_delivery_method(:ses, custom_options)
+    #     AWS.add_action_mailer_delivery_method(:ses, custom_options)
     #
     # @param [Symbol] name (:amazon_ses) The name of the delivery
     #   method.  The name used here should be the same as you set in
@@ -142,7 +142,7 @@ module AWS
     #   `:amazon_ses` then you could do something like this in your
     #   config/environments/ENV.rb file:
     #
-    #     config.action_mailer.delivery_method = :amazon_ses
+    #       config.action_mailer.delivery_method = :amazon_ses
     #
     # @param [Hash] options A hash of options that are passes to
     #   {AWS::SimpleEmailService#new} before delivering email.

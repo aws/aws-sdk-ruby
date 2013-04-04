@@ -16,20 +16,20 @@ module AWS
 
     # Represents an access control list for S3 objects and buckets.  For example:
     #
-    #   acl = AccessControlList.new
-    #   acl.grant(:full_control).
-    #     to(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
-    #   acl.to_xml                   # => '<AccessControlPolicy>...'
+    #     acl = AccessControlList.new
+    #     acl.grant(:full_control).
+    #       to(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
+    #     acl.to_xml                   # => '<AccessControlPolicy>...'
     #
     # You can also construct an AccessControlList from a hash:
     #
-    #   AccessControlList.new(
-    #     :owner => { :id => "8a6925ce4adf588a4f21c32aa379004fef" },
-    #     :grants => [{ :grantee => {
-    #                     :canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef",
-    #                   },
-    #                   :permission => :full_control }]
-    #   )
+    #     AccessControlList.new(
+    #       :owner => { :id => "8a6925ce4adf588a4f21c32aa379004fef" },
+    #       :grants => [{
+    #         :grantee => { :canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef" },
+    #         :permission => :full_control,
+    #       }]
+    #     )
     #
     # @see ACLObject
     #
@@ -40,9 +40,11 @@ module AWS
     #
     # @attr [list of AccessControlList::Grant] grants The list of
     #   grants.  You can set this as a list of hashes, for example:
-    #    acl.grants = [{ :grantee => { :canonical_user_id =>
-    #                                  "8a6925ce4adf588a4f21c32aa379004fef" },
-    #                    :permission => :full_control }]
+    #
+    #       acl.grants = [{
+    #         :grantee => { :canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef" },
+    #         :permission => :full_control,
+    #       }]
     class AccessControlList
 
       # Represents an ACL owner.  In the default ACL, this is the
@@ -67,13 +69,16 @@ module AWS
       #   you read an ACL from S3, all grantees will be identified
       #   this way, and the display_name attribute will also be provided.
       #
-      #    Grantee.new(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
+      #       Grantee.new(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
       #
       # * You can specify the e-mail address of an AWS customer, for example:
-      #    Grantee.new(:amazon_customer_email => 'foo@example.com')
+      #
+      #       Grantee.new(:amazon_customer_email => 'foo@example.com')
       #
       # * You can specify a group URI, for example:
-      #    Grantee.new(:group_uri => 'http://acs.amazonaws.com/groups/global/AllUsers')
+      #
+      #        Grantee.new(:group_uri => 'http://acs.amazonaws.com/groups/global/AllUsers')
+      #
       #   For more details about group URIs, see:
       #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html
       #
@@ -184,7 +189,8 @@ module AWS
       # @attr [Grantee] grantee The user or users who are granted
       #   access according to this grant.  You can specify this as a
       #   hash:
-      #     grant.grantee = { :amazon_customer_email => "foo@example.com" }
+      #
+      #       grant.grantee = { :amazon_customer_email => "foo@example.com" }
       #
       # @attr [Permission or Symbol] permission The type of
       #   permission that is granted by this grant.  Valid values are:
@@ -226,7 +232,8 @@ module AWS
         #
         # @param [Grantee or Hash] grantee A Grantee object or hash;
         #   for example:
-        #    acl.grant(:full_control).to(:amazon_customer_email => "foo@example.com")
+        #
+        #       acl.grant(:full_control).to(:amazon_customer_email => "foo@example.com")
         def to(grantee)
           @grant.grantee = grantee
           @acl.grants << @grant
@@ -235,12 +242,13 @@ module AWS
       end
 
       # Convenience method for constructing a new grant and adding
-      # it to the ACL.  Example usage:
+      # it to the ACL.
       #
-      #   acl.grants.size               # => 0
-      #   acl.grant(:full_control).
-      #     to(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
-      #   acl.grants.size               # => 1
+      # @example
+      #
+      #   acl.grants.size # => 0
+      #   acl.grant(:full_control).to(:canonical_user_id => "8a6925ce4adf588a4f21c32aa379004fef")
+      #   acl.grants.size # => 1
       #
       # @return [GrantBuilder]
       def grant(permission)

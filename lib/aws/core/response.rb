@@ -29,15 +29,15 @@ module AWS
     # method or the {#[]} method.  Response data is a hash and {#[]} is
     # a shortcut for accessing this hash.
     #
-    #   # make a request to describe one instance
-    #   ec2 = AWS::EC2.new
-    #   response = ec2.client.describe_instances(:instance_ids => ['i-12345678'])
+    #     # make a request to describe one instance
+    #     ec2 = AWS::EC2.new
+    #     response = ec2.client.describe_instances(:instance_ids => ['i-12345678'])
     #
-    #   # find the instance in the response data (2 ways to get the data)
-    #   instance = response[:reservation_set].first[:instance_set].first
-    #   instance = response.data[:reservation_set].first[:instance_set].first
+    #     # find the instance in the response data (2 ways to get the data)
+    #     instance = response[:reservation_set].first[:instance_set].first
+    #     instance = response.data[:reservation_set].first[:instance_set].first
     #
-    #   instance[:status] #=> 'running'
+    #     instance[:status] #=> 'running'
     #
     # ## Response Metadata
     #
@@ -51,10 +51,10 @@ module AWS
     #
     # Given the example and response object from above:
     #
-    #   response.request_type #=> :describe_instances
-    #   response.request_options #=> { :instance_ids => ['i-12345678'] }
-    #   response.http_request #=> #<AWS::Core::Http::Request>
-    #   response.http_response #=> #<AWS::Core::Http::Response>
+    #     response.request_type #=> :describe_instances
+    #     response.request_options #=> { :instance_ids => ['i-12345678'] }
+    #     response.http_request #=> #<AWS::Core::Http::Request>
+    #     response.http_response #=> #<AWS::Core::Http::Response>
     #
     class Response
 

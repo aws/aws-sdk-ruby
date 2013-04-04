@@ -23,15 +23,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the EC2 interface:
   #
-  #   ec2 = AWS::EC2.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     ec2 = AWS::EC2.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # ## Instances
   #
@@ -39,17 +39,17 @@ module AWS
   #
   # To run an instance:
   #
-  #   ec2.instances.create(:image_id => "ami-8c1fece5")
+  #     ec2.instances.create(:image_id => "ami-8c1fece5")
   #
   # To get an instance by ID:
   #
-  #   i = ec2.instances["i-12345678"]
-  #   i.exists?
+  #     i = ec2.instances["i-12345678"]
+  #     i.exists?
   #
   # To get a list of instances:
   #
-  #   ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
-  #   # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
+  #     ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+  #     # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
   #
   # ## Security Groups
   #
@@ -59,40 +59,40 @@ module AWS
   #
   # To create a security group:
   #
-  #   websvr = ec2.security_groups.create('webservers')
+  #     websvr = ec2.security_groups.create('webservers')
   #
   # Then you can add ingress authorizations.  In the following example
   # we add a rule that allows web traffic from the entire internet.
   #
-  #   # web traffic
-  #   websvr.authorize_ingress(:tcp, 80)
+  #     # web traffic
+  #     websvr.authorize_ingress(:tcp, 80)
   #
   # You can also specify a port range.  Here we are opening FTP traffic:
   #
-  #   # ftp traffic
-  #   websvr.authorize_ingress(:tcp, 20..21)
+  #     # ftp traffic
+  #     websvr.authorize_ingress(:tcp, 20..21)
   #
   # If you want to limit an authorization to a particular CIDR IP address or
   # list of address, just add them to the #authorize_ingress call.
   #
-  #   # ssh access
-  #   websrvr.authorize_ingress(:tcp, 22, '1.1.1.1/0', '2.2.2.2/0')
+  #     # ssh access
+  #     websrvr.authorize_ingress(:tcp, 22, '1.1.1.1/0', '2.2.2.2/0')
   #
   # You can also provide another security group instead of CIDR IP addresses.
   # This allows incoming traffic from EC2 instances in the given security
   # group(s).
   #
-  #   # get two existing security groups
-  #   dbsvrs = ec2.security_groups.filter('group-name', 'db-servers').first
-  #   websvrs = ec2.security_groups.filter('group-name', 'web-servers').first
+  #     # get two existing security groups
+  #     dbsvrs = ec2.security_groups.filter('group-name', 'db-servers').first
+  #     websvrs = ec2.security_groups.filter('group-name', 'web-servers').first
   #
-  #   # allow instances in the 'web-servers' security group to connect
-  #   # to instances in the 'db-servers' security group over tcp port 3306
-  #   dbsvrs.authorize_ingress(:tcp, 3306, websvrs)
+  #     # allow instances in the 'web-servers' security group to connect
+  #     # to instances in the 'db-servers' security group over tcp port 3306
+  #     dbsvrs.authorize_ingress(:tcp, 3306, websvrs)
   #
   # There are a few handy shortcuts for allowing pings:
   #
-  #   wbsvrs.allow_ping
+  #     wbsvrs.allow_ping
   #
   # Just like with authorize_ingress you can pass a security group or a list
   # of CIDR IP addresses to allow ping to limit where you can ping from.
@@ -107,23 +107,23 @@ module AWS
   # You can allocate up to 5 elastic IP addresses for each account.
   # You can associate those elastic IP addresses with EC2 instances:
   #
-  #   instance = ec2.instances['i-12345678']
-  #   ip = ec2.elastic_ips.allocate
+  #     instance = ec2.instances['i-12345678']
+  #     ip = ec2.elastic_ips.allocate
   #
-  #   instance.ip_address                # 1.1.1.1
-  #   ip.ip_address                      # 2.2.2.2
+  #     instance.ip_address                # 1.1.1.1
+  #     ip.ip_address                      # 2.2.2.2
   #
-  #   instance.associate_elastic_ip(ip)
-  #   instance.ip_address                # 2.2.2.2
+  #     instance.associate_elastic_ip(ip)
+  #     instance.ip_address                # 2.2.2.2
   #
-  #   instance.disassociate_elastic_ip
-  #   instance.ip_address                # 1.1.1.1
+  #     instance.disassociate_elastic_ip
+  #     instance.ip_address                # 1.1.1.1
   #
   # When you are done with an elastic IP address you should release it.
   # In the following example we release all elastic IP addresses that are
   # not currently associated with an instance:
   #
-  #   ec2.select{|ip| !ip.associated? }.each(&:release)
+  #     ec2.select{|ip| !ip.associated? }.each(&:release)
   #
   # ## Key Pairs
   #
@@ -135,16 +135,15 @@ module AWS
   # You can generate a key pair yourself and then send the public
   # part to EC2 using {KeyPairCollection#import}.  For example:
   #
-  #   key_pair =
-  #     ec2.key_pairs.import("mykey", File.read("~/.ssh/identity.pub"))
+  #     key_pair = ec2.key_pairs.import("mykey", File.read("~/.ssh/identity.pub"))
   #
   # You can also ask EC2 to generate a key pair for you.  For
   # example:
   #
-  #   key_pair = ec2.key_pairs.create("mykey")
-  #   File.open("~/.ssh/ec2", "w") do |f|
-  #     f.write(key_pair.private_key)
-  #   end
+  #     key_pair = ec2.key_pairs.create("mykey")
+  #     File.open("~/.ssh/ec2", "w") do |f|
+  #       f.write(key_pair.private_key)
+  #     end
   #
   # ## Filtering and Tagging
   #
@@ -153,16 +152,16 @@ module AWS
   # windows images owned by amazon where the description includes
   # the string "linux", you can do this:
   #
-  #   ec2.images.with_owner("amazon").
-  #     filter("platform", "windows").
-  #     filter("description", "*linux*")
+  #     ec2.images.with_owner("amazon").
+  #       filter("platform", "windows").
+  #       filter("description", "*linux*")
   #
   # Similarly, you can tag images, instances, security groups,
   # snapshots, and volumes with free-form key-value metadata and
   # filter on that metadata.  For example:
   #
-  #   ec2.images["ami-123"].tags << "myapp"
-  #   ec2.images.tagged("myapp")             # will include ami-123
+  #     ec2.images["ami-123"].tags << "myapp"
+  #     ec2.images.tagged("myapp")             # will include ami-123
   #
   # ## Regions
   #
@@ -177,22 +176,21 @@ module AWS
   # You can use the Ruby SDK to see which regions are available for your
   # account:
   #
-  #  ec2.regions.map(&:name)            # => ["us-east-1", ...]
+  #     ec2.regions.map(&:name)            # => ["us-east-1", ...]
   #
   # The default region is `us-east-1`; you can access other regions
   # like this:
   #
-  #  ec2_us_west = ec2.regions["us-west-1"]
-  #  # starts an instance in eu-west-1
-  #  ec2_us_west.instances.create(:image_id => 'ami-3bc9997e')
+  #     ec2_us_west = ec2.regions["us-west-1"]
+  #     # starts an instance in eu-west-1
+  #     ec2_us_west.instances.create(:image_id => 'ami-3bc9997e')
   #
   # This makes a call to EC2's DescribeRegions API to find the
   # endpoint for "us-west-1" -- if you just want to configure a
   # different endpoint without making a call to EC2, you can do it
   # like this:
   #
-  #  ec2 = AWS::EC2.new(:ec2_endpoint =>
-  #                             "ec2.us-west-1.amazonaws.com")
+  #      ec2 = AWS::EC2.new(:ec2_endpoint => "ec2.us-west-1.amazonaws.com")
   #
   # ## Availability Zones
   #
@@ -208,7 +206,7 @@ module AWS
   # about the available zones available to your account.  For
   # example:
   #
-  #  ec2.availability_zones.map(&:name)   # => ["us-east-1a", ...]
+  #     ec2.availability_zones.map(&:name)   # => ["us-east-1a", ...]
   #
   # ## Images
   #
@@ -222,12 +220,13 @@ module AWS
   # You can use the {#images} collection to get information about
   # the images available to your account.  For example:
   #
-  #  ec2.images.with_owner("amazon").map(&:name)
+  #     ec2.images.with_owner("amazon").map(&:name)
   #
   # You can also use the images collection to create new images:
   #
-  #  ec2.images.create(:image_location => "mybucket/manifest.xml",
-  #                    :name => "my-image")
+  #     ec2.images.create(
+  #      :image_location => "mybucket/manifest.xml",
+  #      :name => "my-image")
   #
   # @!attribute [r] client
   #   @return [Client] the low-level EC2 client object

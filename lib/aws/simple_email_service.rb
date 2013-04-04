@@ -32,15 +32,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the SimpleEmailService interface:
   #
-  #   ses = AWS::SimpleEmailService.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     ses = AWS::SimpleEmailService.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Rails
   #
@@ -50,7 +50,7 @@ module AWS
   # 1. Configure your AWS credentials with {AWS.config}
   # 2. Set SES as the delivery method:
   #
-  #   config.action_mailer.delivery_method = :amazon_ses
+  #     config.action_mailer.delivery_method = :amazon_ses
   #
   # This has only been tested with Rails 2.3 and Rails 3.0.
   #
@@ -68,8 +68,8 @@ module AWS
   # You can verify an email address for sending/receiving emails using
   # the identities collection.
   #
-  #   identity = ses.identities.verify('email@yourdomain.com')
-  #   identity.verified? #=> false
+  #     identity = ses.identities.verify('email@yourdomain.com')
+  #     identity.verified? #=> false
   #
   # You will be sent an email address with a link.  Follow the link to
   # verify the email address.
@@ -78,9 +78,9 @@ module AWS
   #
   # You can also verify an entire domain for sending and receiving emails.
   #
-  #   identity = ses.identities.verify('yourdomain.com')
-  #   identity.verification_token
-  #   #=> "216D+lZbhUL0zOoAkC83/0TAl5lJSzLmzsOjtXM7AeM="
+  #     identity = ses.identities.verify('yourdomain.com')
+  #     identity.verification_token
+  #     #=> "216D+lZbhUL0zOoAkC83/0TAl5lJSzLmzsOjtXM7AeM="
   #
   # You will be expected to update the DNS records for your domain with
   # the given verification token.  See the service documentation for
@@ -90,55 +90,55 @@ module AWS
   #
   # You can enumerate all identities:
   #
-  #   ses.identities.map(&:identity)
-  #   #=> ['email@foo.com', 'somedomain.com']
+  #     ses.identities.map(&:identity)
+  #     #=> ['email@foo.com', 'somedomain.com']
   #
   # You can filter the types of identities enumerated:
   #
-  #   domains = ses.identities.domains.map(&:identity)
-  #   email_addresses = ses.identities.email_addresses.map(&:identity)
+  #     domains = ses.identities.domains.map(&:identity)
+  #     email_addresses = ses.identities.email_addresses.map(&:identity)
   #
   # You can get the verification status and token from identities as well.
   #
-  #   # for an email address
-  #   identity = ses.identities['youremail@yourdomain.com']
-  #   identity.verified? #=> true/false
+  #     # for an email address
+  #     identity = ses.identities['youremail@yourdomain.com']
+  #     identity.verified? #=> true/false
   #
-  #   # for a domain
-  #   identity = ses.identities['yourdomain.com']
-  #   identity.verified? #=> true/false
-  #   identity.verification_token #=> '...'
+  #     # for a domain
+  #     identity = ses.identities['yourdomain.com']
+  #     identity.verified? #=> true/false
+  #     identity.verification_token #=> '...'
   #
   # # Sending Email
   #
   # To send a basic email you can use {#send_email}.
   #
-  #   ses.send_email(
-  #     :subject => 'A Sample Email',
-  #     :from => 'sender@domain.com',
-  #     :to => 'receipient@domain.com',
-  #     :body_text => 'Sample email text.',
-  #     :body_html => '<h1>Sample Email</h1>')
+  #     ses.send_email(
+  #       :subject => 'A Sample Email',
+  #       :from => 'sender@domain.com',
+  #       :to => 'receipient@domain.com',
+  #       :body_text => 'Sample email text.',
+  #       :body_html => '<h1>Sample Email</h1>')
   #
   # If you need to send email with attachments or have other special needs
   # that send_email does not support you can use {#send_raw_email}.
   #
-  #   ses.send_raw_email(<<EMAIL)
-  #   Subject: A Sample Email
-  #   From: sender@domain.com
-  #   To: receipient@domain.com
+  #     ses.send_raw_email(<<EMAIL)
+  #     Subject: A Sample Email
+  #     From: sender@domain.com
+  #     To: receipient@domain.com
   #
-  #   Sample email text.
-  #   EMAIL
+  #     Sample email text.
+  #     EMAIL
   #
   # If you prefer, you can also set the sender and recipient in ruby
   # when sending raw emails:
   #
-  #   ses.send_raw_email(<<EMAIL, :to => 'to@foo.com', :from => 'from@foo.com')
-  #   Subject: A Sample Email
+  #     ses.send_raw_email(<<EMAIL, :to => 'to@foo.com', :from => 'from@foo.com')
+  #     Subject: A Sample Email
   #
-  #   Sample email text.
-  #   EMAIL
+  #     Sample email text.
+  #     EMAIL
   #
   # # Quotas
   #
@@ -153,20 +153,20 @@ module AWS
   # To get your current quotas (and how many emails you have sent in the last
   # 24 hours):
   #
-  #   ses.quotas
-  #   # => {:max_24_hour_send=>200, :max_send_rate=>1.0, :sent_last_24_hours=>22}
+  #     ses.quotas
+  #     # => {:max_24_hour_send=>200, :max_send_rate=>1.0, :sent_last_24_hours=>22}
   #
   # # Statistics
   #
   # You can get statistics about individual emails:
   #
-  #   ses.statistics.each do |stats|
-  #     puts "Sent: #{stats[:sent]}"
-  #     puts "Delivery Attempts: #{stats[:delivery_attempts]}"
-  #     puts "Rejects: #{stats[:rejects]}"
-  #     puts "Bounces: #{stats[:bounces]}"
-  #     puts "Complaints: #{stats[:complaints]}"
-  #   end
+  #     ses.statistics.each do |stats|
+  #       puts "Sent: #{stats[:sent]}"
+  #       puts "Delivery Attempts: #{stats[:delivery_attempts]}"
+  #       puts "Rejects: #{stats[:rejects]}"
+  #       puts "Bounces: #{stats[:bounces]}"
+  #       puts "Complaints: #{stats[:complaints]}"
+  #     end
   #
   # @!attribute [r] client
   #   @return [Client] the low-level SimpleEmailService client object
@@ -196,22 +196,22 @@ module AWS
 
     # Sends an email.
     #
-    #   ses.send_email(
-    #     :subject => 'A Sample Email',
-    #     :to => 'john@doe.com',
-    #     :from => 'no@reply.com',
-    #     :body_text => 'sample text ...',
-    #     :body_html => '<p>sample text ...</p>')
+    #     ses.send_email(
+    #       :subject => 'A Sample Email',
+    #       :to => 'john@doe.com',
+    #       :from => 'no@reply.com',
+    #       :body_text => 'sample text ...',
+    #       :body_html => '<p>sample text ...</p>')
     #
     # You can also pass multiple email addresses for the `:to`, `:cc`,
     # `:bcc` and `:reply_to` options.  Email addresses can also be
     # formatted with names.
     #
-    #   ses.send_email(
-    #     :subject => 'A Sample Email',
-    #     :to => ['"John Doe" <john@doe.com>', '"Jane Doe" <jane@doe.com>'],
-    #     :from => 'no@reply.com',
-    #     :body_text => 'sample text ...')
+    #     ses.send_email(
+    #       :subject => 'A Sample Email',
+    #       :to => ['"John Doe" <john@doe.com>', '"Jane Doe" <jane@doe.com>'],
+    #       :from => 'no@reply.com',
+    #       :body_text => 'sample text ...')
     #
     # @param [Hash] options
     # @option options [required,String] :subject The subject of the message.
@@ -288,21 +288,21 @@ module AWS
     # must comply with Internet email standards; otherwise, the message
     # cannot be sent.
     #
-    #   raw = <<-EMAIL
-    #   Date: Wed, 1 Jun 2011 09:13:07 -0700
-    #   Subject: A Sample Email
-    #   From: "John Doe" <johndoe@domain.com>
-    #   To: "Jane Doe" <janedoe@domain.com>
-    #   Accept-Language: en-US
-    #   Content-Language: en-US
-    #   Content-Type: text/plain; charset="utf-8"
-    #   Content-Transfer-Encoding: base64
-    #   MIME-Version: 1.0
+    #     raw = <<-EMAIL
+    #     Date: Wed, 1 Jun 2011 09:13:07 -0700
+    #     Subject: A Sample Email
+    #     From: "John Doe" <johndoe@domain.com>
+    #     To: "Jane Doe" <janedoe@domain.com>
+    #     Accept-Language: en-US
+    #     Content-Language: en-US
+    #     Content-Type: text/plain; charset="utf-8"
+    #     Content-Transfer-Encoding: base64
+    #     MIME-Version: 1.0
     #
-    #   c2FtcGxlIHRleHQNCg==
-    #   EMAIL
+    #     c2FtcGxlIHRleHQNCg==
+    #     EMAIL
     #
-    #   ses.send_raw_email(raw)
+    #     ses.send_raw_email(raw)
     #
     # Amazon SES has a limit on the total number of recipients per
     # message: The combined number of To:, CC: and BCC: email addresses

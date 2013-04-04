@@ -23,24 +23,24 @@ module AWS
     # If you know the name of the alarm, you can get a reference using
     # the {#[]} method.
     #
-    #   cw = AWS::CloudWatch.new
-    #   alarm = cw.alarms['alarm-name']
+    #     cw = AWS::CloudWatch.new
+    #     alarm = cw.alarms['alarm-name']
     #
     # ## Enumerating Alarms
     #
     # You can enumerate all alarms using each (or any of the
     # methods defined in {Core::Collection}).
     #
-    #   cw.alarms.each do |alarm|
-    #     puts alarm.name
-    #   end
+    #     cw.alarms.each do |alarm|
+    #       puts alarm.name
+    #     end
     #
     # ## Filtering Alarms
     #
     # Use one of the filtering methods to reduce the number of alarms
     # returned.
     #
-    #   cw.alarms.with_name_prefix('some-prefix-').each {|alarm| ... }
+    #     cw.alarms.with_name_prefix('some-prefix-').each {|alarm| ... }
     #
     class AlarmCollection
 
@@ -79,7 +79,7 @@ module AWS
 
       # Delete one or more alarms by name.
       #
-      #   cloud_watch.alarms.delete('alarm1', 'alarm2')
+      #     cloud_watch.alarms.delete('alarm1', 'alarm2')
       #
       # @param [String,Array<String>] alarm_names
       # @return [nil]

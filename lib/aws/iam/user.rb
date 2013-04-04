@@ -21,32 +21,30 @@ module AWS
     #
     # ## Creating A User
     #
-    #   iam = AWS::IAM.new
-    #
-    #   user = iam.users.create('johndoe')
-    #
+    #     iam = AWS::IAM.new
+    #     user = iam.users.create('johndoe')
     #
     # ## Renaming a User
     #
     # You can only edit a user's name and path (both of which will modify
     # the user's ARN).
     #
-    #   user = iam.users['johndoe']
-    #   user.name = 'newname'
+    #     user = iam.users['johndoe']
+    #     user.name = 'newname'
     #
     # ## User Path
     #
     # When you create a user you can assign a path.  Paths must begin and
     # end with a forward slash (/).
     #
-    #   user = iam.users.create('newuser', :path => '/developers/ruby/')
+    #     user = iam.users.create('newuser', :path => '/developers/ruby/')
     #
     # Paths are a useful tool for organizing/tagging users.  You can later
     # enumerate users by their path prefixes:
     #
-    #   iam.users.each(:path_prefix => '/developers').each do |developer|
-    #     puts developer.name
-    #   end
+    #     iam.users.each(:path_prefix => '/developers').each do |developer|
+    #       puts developer.name
+    #     end
     #
     # ## Login Profile
     #
@@ -129,9 +127,9 @@ module AWS
 
       # Returns a collection that represents all policies for this user.
       #
-      #   user.policies.each do |policy|
-      #     puts policy.name
-      #   end
+      #     user.policies.each do |policy|
+      #       puts policy.name
+      #     end
       #
       # @return [PolicyCollection] Returns a collection that represents
       #   all policies for this user.
@@ -142,9 +140,9 @@ module AWS
       # Returns a collection that represents the signing certificates
       # belonging to this user.
       #
-      #   user.signing_certificates.each do |cert|
-      #     # ...
-      #   end
+      #     user.signing_certificates.each do |cert|
+      #       # ...
+      #     end
       #
       # If you need to access the signing certificates of this AWS account,
       # see {IAM#signing_certificates}.
@@ -166,19 +164,18 @@ module AWS
       # Management Console}.  The object returned by this method
       # allows you to set or delete the password.  For example:
       #
-      #   user.login_profile.password = "TheNewPassword"
+      #     user.login_profile.password = "TheNewPassword"
       #
-      # @return [LoginProfile] Returns the login profile for this
-      #   user.
+      # @return [LoginProfile] Returns the login profile for this user.
       def login_profile
         LoginProfile.new(self)
       end
 
       # Returns a collection that represents the access keys for this user.
       #
-      #   user.access_keys.each do |access_key|
-      #     puts access_key.id
-      #   end
+      #     user.access_keys.each do |access_key|
+      #       puts access_key.id
+      #     end
       #
       # @return [AccessKeyCollection] Returns a collection that represents all
       #   access keys for this user.
@@ -186,9 +183,7 @@ module AWS
         AccessKeyCollection.new(:user => self)
       end
 
-      # Returns a collection that includes all of the groups the user
-      # is in.
-      #
+      # Returns a collection that includes all of the groups the user is in.
       # @return [UserGroupCollection]
       def groups
         UserGroupCollection.new(self)

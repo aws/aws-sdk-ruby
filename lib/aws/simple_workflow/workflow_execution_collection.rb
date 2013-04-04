@@ -18,9 +18,9 @@ module AWS
 
     # A collection that enumerates workflow executions.
     #
-    #   domain.workflow_executions.each do |execution|
-    #     # ...
-    #   end
+    #     domain.workflow_executions.each do |execution|
+    #       # ...
+    #     end
     #
     # ## Filtering Executions
     #
@@ -65,9 +65,9 @@ module AWS
       # Returns the workflow execution with the given `workflow_id` and
       # `run_id`.
       #
-      #   # get a reference to a single workflow execution
-      #   domain.workflow_executions['workflow-id', 'run-id']
-      #   domain.workflow_executions.at('workflow-id', 'run-id')
+      #     # get a reference to a single workflow execution
+      #     domain.workflow_executions['workflow-id', 'run-id']
+      #     domain.workflow_executions.at('workflow-id', 'run-id')
       #
       # @param [String] workflow_id The workflow execution id.
       #
@@ -83,7 +83,7 @@ module AWS
       # Records a WorkflowExecutionSignaled event in the workflow execution
       # history and creates a decision task for the workflow execution.
       #
-      #   domain.signal_workflow_execution('workflowid', 'newdata', :input => '...')
+      #     domain.signal_workflow_execution('workflowid', 'newdata', :input => '...')
       #
       # @param [String] workflow_id The id of the workflow execution to signal.
       #
@@ -280,8 +280,8 @@ module AWS
 
       # Filters workflow executions by their start date.
       #
-      #   # executions that started at least an hour ago
-      #   domain.workflow_executions.started_before(Time.now - 3600)
+      #     # executions that started at least an hour ago
+      #     domain.workflow_executions.started_before(Time.now - 3600)
       #
       # @note It is not possible to filter by both start time and close time.
       #
@@ -299,8 +299,8 @@ module AWS
 
       # Filters workflow executions by their start date.
       #
-      #   # executions that started within the last hour
-      #   domain.workflow_executions.started_after(Time.now - 3600)
+      #     # executions that started within the last hour
+      #     domain.workflow_executions.started_after(Time.now - 3600)
       #
       # @note It is not possible to filter by both start time and close time.
       #
@@ -338,8 +338,8 @@ module AWS
 
       # Filters workflow executions by their close date.
       #
-      #   # executions that closed more than an hour ago
-      #   domain.workflow_executions.closed_before(Time.now - 3600)
+      #     # executions that closed more than an hour ago
+      #     domain.workflow_executions.closed_before(Time.now - 3600)
       #
       # @note It is not possible to filter by both start time and close time.
       #
@@ -357,8 +357,8 @@ module AWS
 
       # Filters workflow executions by their close date.
       #
-      #   # executions that closed within the last hour
-      #   domain.workflow_executions.closed_after(Time.now - 3600)
+      #     # executions that closed within the last hour
+      #     domain.workflow_executions.closed_after(Time.now - 3600)
       #
       # @note It is not possible to filter by both start time and close time.
       #
@@ -379,8 +379,8 @@ module AWS
       # ascending order of their start or close time (ordered by
       # close time when filtered by #closed_between).
       #
-      #   # get the latest execution
-      #   execution = domain.workflow_executions.reverse_order.first
+      #     # get the latest execution
+      #     execution = domain.workflow_executions.reverse_order.first
       #
       # @return [WorkflowExecutionCollection] Returns a collection
       #   that enumerates workflow executions in reverse order.
@@ -393,8 +393,8 @@ module AWS
       # meet the specified filtering criteria.  Counts can be truncated
       # so you should check the return value.
       #
-      #   count = domain.workflow_executions.count
-      #   puts(count.truncated? ? "#{count.to_i}+" : count.to_i)
+      #     count = domain.workflow_executions.count
+      #     puts(count.truncated? ? "#{count.to_i}+" : count.to_i)
       #
       # @note You may only pass one of the following options:
       #   `:workflow_id`, `:workflow_type`, `:tagged` or

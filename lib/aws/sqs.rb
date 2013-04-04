@@ -23,15 +23,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the SQS interface:
   #
-  #   sqs = AWS::SQS.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     sqs = AWS::SQS.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # ## Queues and Messages
   #
@@ -44,11 +44,11 @@ module AWS
   # You can access your queues using the {#queues} collection.  For
   # example, to create a queue, use {QueueCollection#create}:
   #
-  #   queue = sqs.queues.create("myqueue")
+  #     queue = sqs.queues.create("myqueue")
   #
   # Or to find out what queues you have in your account:
   #
-  #   pp sqs.queues.collect(&:url)
+  #     pp sqs.queues.collect(&:url)
   #
   # See the {Queue} class for more information on how to send and
   # receive messages.

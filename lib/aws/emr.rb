@@ -33,28 +33,30 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the EMR interface:
   #
-  #   emr = AWS::EMR.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     emr = AWS::EMR.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Job Flows
   #
   # The {#job_flows} method returns a collection you use to interact
   # with your job flows.
   #
-  #   # creating a job flow
-  #   job_flow = emr.job_flows.create(...)
+  #     emr = AWS::EMR.new
   #
-  #   # enumerating job flows
-  #   emr.job_flows.each do |job_flow|
-  #     puts job_flow.id
-  #   end
+  #     # creating a job flow
+  #     job_flow = emr.job_flows.create(...)
+  #
+  #     # enumerating job flows
+  #     emr.job_flows.each do |job_flow|
+  #       puts job_flow.id
+  #     end
   #
   # See {JobFlowCollection} and {JobFlow} for more information on working
   # with job flows.

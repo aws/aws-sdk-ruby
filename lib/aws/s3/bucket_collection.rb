@@ -18,18 +18,18 @@ module AWS
     #
     # You can use this to create a bucket:
     #
-    #   s3.buckets.create(:name => "mybucket")
+    #     s3.buckets.create(:name => "mybucket")
     #
     # You can get a handle for a specific bucket with indifferent
     # access:
     #
-    #   bucket = s3.buckets[:mybucket]
-    #   bucket = s3.buckets['mybucket']
+    #     bucket = s3.buckets[:mybucket]
+    #     bucket = s3.buckets['mybucket']
     #
     # You can also use it to find out which buckets are in your account:
     #
-    #   s3.buckets.collect(&:name)
-    #   #=> ['bucket1', 'bucket2', ...]
+    #     s3.buckets.collect(&:name)
+    #     #=> ['bucket1', 'bucket2', ...]
     #
     class BucketCollection
 
@@ -43,8 +43,8 @@ module AWS
       #   against the bucket using the S3 endpoint specific to the
       #   region in which your bucket resides. For example:
       #
-      #     s3 = AWS::S3.new(:s3_endpoint => "s3-eu-west-1.amazonaws.com")
-      #     bucket = s3.buckets.create("my.eu.bucket")
+      #       s3 = AWS::S3.new(:s3_endpoint => "s3-eu-west-1.amazonaws.com")
+      #       bucket = s3.buckets.create("my.eu.bucket")
       #
       #   For a full list of endpoints and regions, see
       #   {http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html
@@ -68,9 +68,9 @@ module AWS
       #   appropriate location constraint for the endpoint.  For
       #   example:
       #
-      #     s3 = AWS::S3.new(:s3_endpoint => "s3-us-west-1.amazonaws.com")
-      #     bucket = s3.buckets.create("my-us-west-bucket")
-      #     bucket.location_constraint # => "us-west-1"
+      #       s3 = AWS::S3.new(:s3_endpoint => "s3-us-west-1.amazonaws.com")
+      #       bucket = s3.buckets.create("my-us-west-bucket")
+      #       bucket.location_constraint # => "us-west-1"
       #
       # @option options [Symbol,String] :acl (:private) Sets the ACL of the
       #   bucket you are creating.  Valid Values include:

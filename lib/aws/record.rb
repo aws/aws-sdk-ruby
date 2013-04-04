@@ -56,15 +56,15 @@ module AWS
     # Sets a prefix to be applied to all SimpleDB domains associated with
     # AWS::Record::Base classes.
     #
-    #   AWS::Record.domain_prefix = 'production_'
+    #     AWS::Record.domain_prefix = 'production_'
     #
-    #   class Product < AWS::Record::Base
-    #     set_shard_name 'products'
-    #   end
+    #     class Product < AWS::Record::Base
+    #       set_shard_name 'products'
+    #     end
     #
-    #   p = Product.new
-    #   p.shard #=> 'products'
-    #   p.save # the product is persisted to the 'production-products' domain
+    #     p = Product.new
+    #     p.shard #=> 'products'
+    #     p.save # the product is persisted to the 'production-products' domain
     #
     # @param [String] prefix A prefix to append to all domains.  This is useful
     #   for grouping domains used by one application with a single prefix.
@@ -82,15 +82,15 @@ module AWS
     # with {AWS::Record::HashModel} and {AWS::Record::ListModel}
     # classes.
     #
-    #   AWS::Record.table_prefix = 'production_'
+    #     AWS::Record.table_prefix = 'production_'
     #
-    #   class Product < AWS::Record::HashModel
-    #     set_shard_name 'products'
-    #   end
+    #     class Product < AWS::Record::HashModel
+    #       set_shard_name 'products'
+    #     end
     #
-    #   p = Product.new
-    #   p.shard #=> 'products'
-    #   p.save # the product is persisted to the 'production-products' table
+    #     p = Product.new
+    #     p.shard #=> 'products'
+    #     p.save # the product is persisted to the 'production-products' table
     #
     # @param [String] prefix A prefix to append to all tables.  This is
     #   useful for grouping tables used by one application with a

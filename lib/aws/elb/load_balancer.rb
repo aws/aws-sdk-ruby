@@ -234,9 +234,8 @@ module AWS
       # just pass the load balancer as a source to the various
       # authorize and revoke methods of {EC2::SecurityGroup}:
       #
-      #   security_group.authorize_ingress(load_balancer)
-      #
-      #   security_group.revoke_ingress(load_balancer)
+      #     security_group.authorize_ingress(load_balancer)
+      #     security_group.revoke_ingress(load_balancer)
       #
       # @return [Hash] Returns a hash that can be passed to the following
       #   {EC2::SecurityGroup} methods as a source:

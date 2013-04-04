@@ -23,17 +23,17 @@ module AWS
     #
     # To run an instance:
     #
-    #   ec2.instances.create(:image_id => "ami-1b814f72")
+    #     ec2.instances.create(:image_id => "ami-1b814f72")
     #
     # To get an instance by ID:
     #
-    #   i = ec2.instances["i-12345678"]
-    #   i.exists?
+    #     i = ec2.instances["i-12345678"]
+    #     i.exists?
     #
     # To get a map of instance IDs to instance status:
     #
-    #   ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
-    #   # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
+    #      ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+    #     # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
     #
     class InstanceCollection < Collection
 
@@ -52,7 +52,7 @@ module AWS
       #     :image_id => "ami-8c1fece5",
       #     :count => 10)
       #
-      #  sleep 1 while instances.any? {|i| i.status == :pending }
+      #   sleep 1 while instances.any? {|i| i.status == :pending }
       #
       # @example Specifying block device mappings
       #
@@ -92,25 +92,18 @@ module AWS
       #   values include:
       #
       #   * A string, which is interpreted as a virtual device name.
-      #
       #   * The symbol :no_device, which overrides the default
       #     mapping for a device so that it is not mapped to anything.
-      #
       #   * A hash with any of the following options.  One of
       #     `:snapshot`, `:snapshot_id` or `:volume_size` is
       #     required.
       #
-      #     [:snapshot] A snapshot to use when creating the block
-      #                 device.
-      #
-      #     [:snapshot_id] The ID of a snapshot to use when creating
-      #                    the block device.
-      #
-      #     [:volume_size] The size of volume to create, in gigabytes.
-      #
-      #     [:delete_on_termination] Setting this to true causes EC2
-      #                              to delete the volume when the
-      #                              instance is terminated.
+      #     * `:snapshot` - A snapshot to use when creating the block device.
+      #     * `:snapshot_id` - The ID of a snapshot to use when creating
+      #       the block device.
+      #     * `:volume_size] The size of volume to create, in gigabytes.
+      #     * `:delete_on_termination` - Setting this to true causes EC2
+      #       to delete the volume when the instance is terminated.
       #
       # @option options [Boolean] :monitoring_enabled Setting this to
       #   `true` enables CloudWatch monitoring on the instances once they
@@ -164,12 +157,12 @@ module AWS
       #   you later want to terminate the instance, you must first
       #   enable API termination.  For example:
       #
-      #     i = ec2.instances.create(:image_id => "ami-8c1fece5",
-      #                              :disable_api_termination => true)
-      #     i.api_termination_disabled?        # => true
-      #     i.terminate                        # raises an exception
-      #     i.api_termination_disabled = false
-      #     i.terminate                        # terminates the instance
+      #       i = ec2.instances.create(:image_id => "ami-8c1fece5",
+      #                                :disable_api_termination => true)
+      #       i.api_termination_disabled?        # => true
+      #       i.terminate                        # raises an exception
+      #       i.api_termination_disabled = false
+      #       i.terminate                        # terminates the instance
       #
       # @option options [String] :instance_initiated_shutdown_behavior
       #   Determines whether the instance stops or terminates on

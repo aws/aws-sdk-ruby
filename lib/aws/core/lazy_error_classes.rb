@@ -26,17 +26,17 @@ module AWS
     #
     # Here is an example of how it works:
     #
-    #  Class Foo
-    #    module Errors
-    #      extend AWS::Core::LazyErrorClasses
-    #    end
-    #  end
+    #     Class Foo
+    #       module Errors
+    #         extend AWS::Core::LazyErrorClasses
+    #       end
+    #     end
     #
-    #  Foo::Errors.error_class('NoSuchKey')
-    #  #=> Foo::Errors::NoSuckKey
+    #     Foo::Errors.error_class('NoSuchKey')
+    #     #=> Foo::Errors::NoSuckKey
     #
-    #  Foo::Errors.error_class('Nested.Error.Klasses')
-    #  #=> Foo::Errors::Nested::Error::Klasses
+    #     Foo::Errors.error_class('Nested.Error.Klasses')
+    #     #=> Foo::Errors::Nested::Error::Klasses
     #
     # The errors returned from {#error_class} are subclasses
     # of {AWS::Errors::Base}.
@@ -73,8 +73,8 @@ module AWS
 
       # Converts the error code into an error class constant.
       #
-      #   AWS::EC2::Errors.error_class('Non.Existent.Error')
-      #   #=> AWS::EC2::Errors::Non::Existent::Error
+      #     AWS::EC2::Errors.error_class('Non.Existent.Error')
+      #     #=> AWS::EC2::Errors::Non::Existent::Error
       #
       # @param [String] code An AWS error code.
       #

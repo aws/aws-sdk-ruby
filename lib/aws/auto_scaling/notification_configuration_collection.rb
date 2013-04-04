@@ -20,31 +20,30 @@ module AWS
     #
     # You can enumerated *ALL* configurations from the AWS::AutoScaling class.
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.notification_configurations.each do |config|
-    #     # ...
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.notification_configurations.each do |config|
+    #       # ...
+    #     end
     #
     # You can also limit them to a single Auto Scaling group:
     #
-    #   group = auto_scaling.groups['group-name']
-    #   group.notification_configurations.each do |config|
-    #     # ...
-    #   end
+    #     group = auto_scaling.groups['group-name']
+    #     group.notification_configurations.each do |config|
+    #       # ...
+    #     end
     #
     # ## Creating Notification Configurations
     #
     # You can create a notification configuration like so:
     #
-    #   auto_scaling.notification_configurations.create(
-    #     :group => 'auto-scaling-group-name',
-    #     :topic => 'sns-topic-arn')
+    #     auto_scaling.notification_configurations.create(
+    #       :group => 'auto-scaling-group-name',
+    #       :topic => 'sns-topic-arn')
     #
     # Just like with enumeration, you can create them from the Auto
     # Scaling group:
     #
-    #   group.notification_configurations.create(:topic => 'sns-topic-arn')
-    #
+    #     group.notification_configurations.create(:topic => 'sns-topic-arn')
     class NotificationConfigurationCollection
 
       include Core::Collection::WithLimitAndNextToken
@@ -68,28 +67,28 @@ module AWS
       # Creates a new notification configuration. To create a notification
       # configuration you need an {SNS::Topic} and an Auto Scaling {Group}.
       #
-      #   auto_scaling.notification_configurations.create(
-      #     :group => 'auto-scaling-group-name',
-      #     :topic => 'sns-topic-arn')
+      #     auto_scaling.notification_configurations.create(
+      #       :group => 'auto-scaling-group-name',
+      #       :topic => 'sns-topic-arn')
       #
       # You can also create notification configurations from an Auto Scaling
       # group and omit the `:group` option.
       #
-      #   auto_scaling_group.notification_configurations.create(
-      #     :topic => 'sns-topic-arn')
+      #     auto_scaling_group.notification_configurations.create(
+      #       :topic => 'sns-topic-arn')
       #
       # You may also pass a list of notification types to publish to the
       # topic.  If you omit this option, then all notification types
       # will be configured.
       #
-      #   # publish only these two specific notification types
-      #   auto_scaling_group.notification_configurations.create(
-      #     :topic => 'sns-topic-arn',
-      #     :types => [
-      #       'autoscaling:EC2_INSTANCE_LAUNCH',
-      #       'autoscaling:EC2_INSTANCE_TERMINATE',
-      #     ]
-      #   )
+      #     # publish only these two specific notification types
+      #     auto_scaling_group.notification_configurations.create(
+      #       :topic => 'sns-topic-arn',
+      #       :types => [
+      #         'autoscaling:EC2_INSTANCE_LAUNCH',
+      #         'autoscaling:EC2_INSTANCE_TERMINATE',
+      #       ]
+      #     )
       #
       # @param [Hash] options
       #

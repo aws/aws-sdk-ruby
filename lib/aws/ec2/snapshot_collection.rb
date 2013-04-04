@@ -19,14 +19,14 @@ module AWS
     # {EC2#snapshots}.
     #
     # @example Create a snapshot from a volume
-    #  ec2.snapshots.create(:volume => ec2.volumes["vol-123"],
-    #                       :description => "my snapshot")
-    #  # or:
-    #  ec2.volumes["vol-123"].create_snapshot("my snapshot")
+    #   ec2.snapshots.create(:volume => ec2.volumes["vol-123"],
+    #                        :description => "my snapshot")
+    #   # or:
+    #   ec2.volumes["vol-123"].create_snapshot("my snapshot")
     #
     # @example Get a snapshot by ID
-    #  snapshot = ec2.snapshots["vol-123"]
-    #  snapshot.exists?
+    #   snapshot = ec2.snapshots["vol-123"]
+    #   snapshot.exists?
     #
     # @example Get a map of snapshot IDs to snapshot status
     #   ec2.snapshots.inject({}) { |m, s| m[i.id] = s.status; m }

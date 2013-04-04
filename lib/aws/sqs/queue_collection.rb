@@ -21,14 +21,18 @@ module AWS
     # by URL.
     #
     # @example Printing the URLs of all queues
+    #
     #   pp sqs.queues.map(&:url)
     #
     # @example Filtering queues by queue name prefix
+    #
     #   pp sqs.queues.with_prefix("production_").map(&:url)
     #
     # @example Accessing a queue by URL
+    #
     #   url = "http://sqs.us-west-2.amazonaws.com/123456789012/myqueue"
     #   sqs.queues[url].send_message("HELLO")
+    #
     class QueueCollection
 
       include Core::Collection::Simple
@@ -124,6 +128,8 @@ module AWS
       # a request to SQS to get the queue url.  If you know the url,
       # you should use {#[]} instead.
       #
+      # @example
+      #
       #   queue = AWS::SQS.new.queues.named('my-queue')
       #
       # @param (see #url_for)
@@ -134,6 +140,8 @@ module AWS
       end
 
       # Returns the url for the given queue.
+      #
+      # @example
       #
       #   sqs.queues.url_for('my-queue')
       #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue"

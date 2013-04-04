@@ -25,19 +25,19 @@ module AWS
     # The simplest method is to assign your credentials into the default
     # configuration:
     #
-    #   AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
+    #     AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
     #
     # You can also export them into your environment and they will be picked up
     # automatically:
     #
-    #   export AWS_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
-    #   export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
+    #     export AWS_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
     # For compatability with other AWS gems, the credentials can also be
     # exported like:
     #
-    #   export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
-    #   export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
+    #     export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
     # ## Modifying a Configuration
     #
@@ -45,11 +45,11 @@ module AWS
     # configuration values, call {#with}, passing in the updates
     # and a new configuration object will be returned.
     #
-    #   config = Configuration.new(:max_retires => 3)
-    #   new_config = config.with(:max_retries => 2)
+    #     config = Configuration.new(:max_retires => 3)
+    #     new_config = config.with(:max_retries => 2)
     #
-    #   config.max_retries #=> 3
-    #   new_config.max_retries #=> 2
+    #     config.max_retries #=> 3
+    #     new_config.max_retries #=> 2
     #
     # ## Global Configuration
     #
@@ -190,16 +190,16 @@ module AWS
     #   an object.  This option controls the default behavior for the
     #   following method:
     #
-    #   * {S3::S3Object#write}
-    #   * {S3::S3Object#multipart_upload}
-    #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
-    #   * {S3::S3Object#presigned_post}
-    #   * {S3::Bucket#presigned_post}
+    #     * {S3::S3Object#write}
+    #     * {S3::S3Object#multipart_upload}
+    #     * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
+    #     * {S3::S3Object#presigned_post}
+    #     * {S3::Bucket#presigned_post}
     #
     #   You can construct an interface to Amazon S3 which always
     #   stores data using server side encryption as follows:
     #
-    #     s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
+    #       s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
     #
     # @attr_reader [OpenSSL::PKey::RSA, String] s3_encryption_key
     #   If this is set, AWS::S3::S3Object #read and #write methods will always
@@ -309,18 +309,18 @@ module AWS
       # Used to create a new Configuration object with the given modifications.
       # The current configuration object is not modified.
       #
-      #   AWS.config(:max_retries => 2)
+      #     AWS.config(:max_retries => 2)
       #
-      #   no_retries_config = AWS.config.with(:max_retries => 0)
+      #     no_retries_config = AWS.config.with(:max_retries => 0)
       #
-      #   AWS.config.max_retries        #=> 2
-      #   no_retries_config.max_retries #=> 0
+      #     AWS.config.max_retries        #=> 2
+      #     no_retries_config.max_retries #=> 0
       #
       # You can use these configuration objects returned by #with to create
       # AWS objects:
       #
-      #   AWS::S3.new(:config => no_retries_config)
-      #   AWS::SQS.new(:config => no_retries_config)
+      #     AWS::S3.new(:config => no_retries_config)
+      #     AWS::SQS.new(:config => no_retries_config)
       #
       # @param options (see AWS.config)
       # @option options (see AWS.config)

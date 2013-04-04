@@ -64,7 +64,7 @@ module AWS
 
         # Allows you to toggle the delete on termination state.
         #
-        #   network_interface.attachment.delete_on_termination = false
+        #     network_interface.attachment.delete_on_termination = false
         #
         # @param [Boolean] state
         #

@@ -26,13 +26,13 @@ module AWS
       #
       # Given a route table:
       #
-      #   route_table.associations.each do |assoc|
-      #     if assoc.main? # main association does not have a subnet
-      #       puts "#{assoc.id} : main association"
-      #     else
-      #       puts "#{assoc.id} : #{assoc.subnet.id}"
+      #     route_table.associations.each do |assoc|
+      #       if assoc.main? # main association does not have a subnet
+      #         puts "#{assoc.id} : main association"
+      #       else
+      #         puts "#{assoc.id} : #{assoc.subnet.id}"
+      #       end
       #     end
-      #   end
       #
       # ## Getting a Subnet Route Table Association
       #
@@ -40,15 +40,15 @@ module AWS
       # was never explicitly created, then they are associated by default
       # with the main route table.
       #
-      #   subnet.route_table_association #=> AWS::EC2::RouteTable::Association
+      #     subnet.route_table_association #=> AWS::EC2::RouteTable::Association
       #
-      #   subnet.route_table_association.main? #=> true/false
+      #     subnet.route_table_association.main? #=> true/false
       #
       # ## Creating and Replacing a Route Table Association
       #
       # To replace a route table association start at the subnet end:
       #
-      #   subnet.route_table = some_other_route_table
+      #     subnet.route_table = some_other_route_table
       #
       # If this route table is associated (by default) to the main route
       # table via the main (default) association a new association is created.
@@ -61,12 +61,12 @@ module AWS
       # delete an association, the subnet becomes associated with the
       # main route table.
       #
-      #   # delete all explicit route table associations -- as a result
-      #   # all subnets will default to the main route table
-      #   vpc.subnets.each do |subnet|
-      #     assoc = subnet.route_table_association
-      #     assoc.delete unless assoc.main?
-      #   end
+      #     # delete all explicit route table associations -- as a result
+      #     # all subnets will default to the main route table
+      #     vpc.subnets.each do |subnet|
+      #       assoc = subnet.route_table_association
+      #       assoc.delete unless assoc.main?
+      #     end
       #
       class Association
 

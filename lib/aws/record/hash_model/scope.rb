@@ -23,29 +23,29 @@ module AWS
       # Scope objects are returned from the AWS::Record::HashModel finder
       # methods # (e.g. `shard` and `limit`).
       #
-      #   books = Book.limit(100)
-      #   books.class #=> AWS::Record::HashModel::Scope
+      #     books = Book.limit(100)
+      #     books.class #=> AWS::Record::HashModel::Scope
       #
       # Scopes are also returned from methods defined with the `scope` method.
       #
-      #   class Book < AWS::Record::HashModel
-      #      scope :sampling, limit(10)
-      #   end
+      #     class Book < AWS::Record::HashModel
+      #        scope :sampling, limit(10)
+      #     end
       #
-      #   Book.sampling #=> returns a scope that limits to 10
+      #     Book.sampling #=> returns a scope that limits to 10
       #
       # ## Chaining Scopes
       #
       # Scope objects represent a request, but do not actualy make a request
       # until required.  This allows you to chain requests
       #
-      #   # no request made by the following 2 statements
-      #   books = Book.shard('books-1') # what table to search
-      #   books = books.limit(10) # how many records to fetch
+      #     # no request made by the following 2 statements
+      #     books = Book.shard('books-1') # what table to search
+      #     books = books.limit(10) # how many records to fetch
       #
-      #   books.each do |book|
-      #     # yields up to 10 books from the table 'books-1'
-      #   end
+      #     books.each do |book|
+      #       # yields up to 10 books from the table 'books-1'
+      #     end
       #
       # The following methods returns a scope that can be chained.
       #
@@ -56,11 +56,11 @@ module AWS
       #
       # To terminate a scope you can enumerate it or call #first.
       #
-      #   # terminate a scope by enumerating
-      #   Book.limit(10).each {|book| ... }
+      #     # terminate a scope by enumerating
+      #     Book.limit(10).each {|book| ... }
       #
-      #   # terminate a scope by getting the first record
-      #   Book.shard('books-1').first
+      #     # terminate a scope by getting the first record
+      #     Book.shard('books-1').first
       #
       class Scope < Record::Scope
 

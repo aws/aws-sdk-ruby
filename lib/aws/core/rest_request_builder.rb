@@ -42,10 +42,10 @@ module AWS
 
       # Populates a Http::Request with the following:
       #
-      # * HTTP method
-      # * URI
-      # * headers
-      # * body
+      #   * HTTP method
+      #   * URI
+      #   * headers
+      #   * body
       #
       # @param [Http::Request] request
       #

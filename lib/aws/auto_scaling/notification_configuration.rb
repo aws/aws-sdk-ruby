@@ -40,8 +40,8 @@ module AWS
 
       # Updates the notification configuration with a new list of types:
       #
-      #   config = auto_scaling_group.notification_configurations.first
-      #   config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
+      #     config = auto_scaling_group.notification_configurations.first
+      #     config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
       #
       # @return [nil]
       #

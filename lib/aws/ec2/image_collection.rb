@@ -18,17 +18,16 @@ module AWS
     # find out which images exist with the characteristics you are
     # interested in:
     #
-    #  ec2 = EC2.new
-    #  all_images = ec2.images
-    #  amazon_owned_images = all_images.with_owner('amazon')
-    #  my_images = all_images.with_owner('self')
-    #  tagged_amis = all_images.tagged('mytag')
-    #  tagged_amis.map(&:id)   # => ["ami-123", ...]
+    #     ec2 = EC2.new
+    #     all_images = ec2.images
+    #     amazon_owned_images = all_images.with_owner('amazon')
+    #     my_images = all_images.with_owner('self')
+    #     tagged_amis = all_images.tagged('mytag')
+    #     tagged_amis.map(&:id)   # => ["ami-123", ...]
     #
     # You can also use it to create new images.  For example:
     #
-    #  ec2.images.create(:instance_id => "i-123",
-    #                    :name => "my-image")
+    #     ec2.images.create(:instance_id => "i-123", :name => "my-image")
     #
     class ImageCollection < Collection
 
@@ -94,9 +93,9 @@ module AWS
       #   `:name` is required, and you must also specify one of the
       #   following options:
       #
-      #   * `:instance_id`
-      #   * `:image_location`
-      #   * `:root_device_name`
+      #     * `:instance_id`
+      #     * `:image_location`
+      #     * `:root_device_name`
       #
       # @option options [String] :instance_id The ID of a running
       #   instance.  This instance will be rebooted unless
@@ -124,8 +123,8 @@ module AWS
       # @option options [String] :architecture The architecture of
       #   the image.  Valid values:
       #
-      #   * `:i386`
-      #   * `:x86_64`
+      #     * `:i386`
+      #     * `:x86_64`
       #
       #   *Note*: This option is only valid with `:image_location`
       #   or `:root_device_name`
@@ -168,23 +167,17 @@ module AWS
       #   each entry determines how that device is mapped.  Valid
       #   values include:
       #
-      #   * A string, which is interpreted as a virtual device name.
+      #     * A string, which is interpreted as a virtual device name.
+      #     * A hash with any of the following options.  One of
+      #       `:snapshot`, `:snapshot_id` or `:volume_size` is
+      #       required.
       #
-      #   * A hash with any of the following options.  One of
-      #     `:snapshot`, `:snapshot_id` or `:volume_size` is
-      #     required.
-      #
-      #     [:snapshot] A snapshot to use when creating the block
-      #                 device.
-      #
-      #     [:snapshot_id] The ID of a snapshot to use when creating
-      #                    the block device.
-      #
-      #     [:volume_size] The size of volume to create, in gigabytes.
-      #
-      #     [:delete_on_termination] Setting this to true causes EC2
-      #                              to delete the volume when the
-      #                              instance is terminated.
+      #         * `:snapshot` - A snapshot to use when creating the block device.
+      #         * `:snapshot_id` - The ID of a snapshot to use when creating
+      #           the block device.
+      #         * `:volume_size` -] The size of volume to create, in gigabytes.
+      #         * `:delete_on_termination` - Setting this to true causes EC2
+      #           to delete the volume when the instance is terminated.
       # @return [Image]
       def create options = {}
         resp = case

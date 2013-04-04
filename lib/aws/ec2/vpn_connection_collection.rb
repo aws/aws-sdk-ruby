@@ -51,7 +51,7 @@ module AWS
 
       # Returns a reference to the VPN connection with the given id.
       #
-      #   vpn_connection = ec2.vpn_connections['vpn-connection-id']
+      #     vpn_connection = ec2.vpn_connections['vpn-connection-id']
       #
       # @param [String] vpn_connection_id
       #

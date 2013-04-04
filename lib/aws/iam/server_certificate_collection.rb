@@ -17,16 +17,16 @@ module AWS
     # A collection that provides access to IAM server certificates
     # belonging to this account.
     #
-    #   iam = AWS::IAM.new
-    #   certificates = iam.server_certificates
+    #     iam = AWS::IAM.new
+    #     certificates = iam.server_certificates
     #
     # ## Uploading A Server Certificate
     #
     # You can upload any valid, signed certificate using {#upload}.
     #
-    #   certificates.upload(:name => "MyCert",
-    #                       :certificate_body => my_certificate_body,
-    #                       :private_key => my_private_key)
+    #     certificates.upload(:name => "MyCert",
+    #                         :certificate_body => my_certificate_body,
+    #                         :private_key => my_private_key)
     #
     # For information about generating a server certificate for use
     # with IAM, see
@@ -38,16 +38,16 @@ module AWS
     #
     # You can get a reference to a server certificate using array notation:
     #
-    #   certificate = certificates['MyCert']
+    #     certificate = certificates['MyCert']
     #
     # ## Enumerating Server Certificates
     #
     # Server certificate collections can also be used to enumerate
     # certificates:
     #
-    #   certificates.each do |cert|
-    #     puts cert.name
-    #   end
+    #     certificates.each do |cert|
+    #       puts cert.name
+    #     end
     #
     # You can limit the certificates returned by passing a `:prefix`
     # option to any of the enumerator methods.  When you pass a

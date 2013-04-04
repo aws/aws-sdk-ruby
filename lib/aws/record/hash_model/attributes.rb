@@ -46,12 +46,12 @@ module AWS
 
         # Adds an integer attribute to this class.
         #
-        #   class Recipe < AWS::Record::HashModel
-        #     integer_attr :servings
-        #   end
+        #     class Recipe < AWS::Record::HashModel
+        #       integer_attr :servings
+        #     end
         #
-        #   recipe = Recipe.new(:servings => '10')
-        #   recipe.servings #=> 10
+        #     recipe = Recipe.new(:servings => '10')
+        #     recipe.servings #=> 10
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -63,12 +63,12 @@ module AWS
 
         # Adds a float attribute to this class.
         #
-        #   class Listing < AWS::Record::HashModel
-        #     float_attr :score
-        #   end
+        #     class Listing < AWS::Record::HashModel
+        #       float_attr :score
+        #     end
         #
-        #   listing = Listing.new(:score => '123.456')
-        #   listing.score # => 123.456
+        #     listing = Listing.new(:score => '123.456')
+        #     listing.score # => 123.456
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options

@@ -45,14 +45,12 @@ module AWS
       # A subsequent call to #each will limit the resutls returned
       # by provided filters.
       #
-      # * Chain multiple calls of #filter together to AND multiple conditions
-      #   together.
-      #
-      # * Supply multiple values to a singler #filter call to OR those
-      #   value conditions together.
-      #
-      # * '*' matches one or more characters and '?' matches any one
-      #   character.
+      #   * Chain multiple calls of #filter together to AND multiple conditions
+      #     together.
+      #   * Supply multiple values to a singler #filter call to OR those
+      #     value conditions together.
+      #   * '*' matches one or more characters and '?' matches any one
+      #     character.
       #
       # ### Valid Filters
       #
@@ -67,8 +65,6 @@ module AWS
       #
       # @return [ElasticIpCollection] A new collection that represents
       #   a subset of the elastic IP addresses associated with this account.
-
-      # Yields once for each elastic IP address.
       #
       # @yield [elastic_ip]
       # @yieldparam [ElasticIp] elastic_ip

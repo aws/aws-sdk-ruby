@@ -63,17 +63,17 @@ module AWS
 
       # Returns a collection filtered by the given dimension:
       #
-      #   metric = metrics.with_dimension('name', 'value').first
+      #     metric = metrics.with_dimension('name', 'value').first
       #
       # You can chain calls to #with_dimension.  Additional dimensions are
       # added.
       #
-      #   metrics = metrics.
-      #     with_dimension('d1', 'v1').
-      #     with_dimension('d2', 'v2').
-      #     with_dimension('d3', 'v3')
+      #     metrics = metrics.
+      #       with_dimension('d1', 'v1').
+      #       with_dimension('d2', 'v2').
+      #       with_dimension('d3', 'v3')
       #
-      #   metrics.each{|metric|} # filtered by all three dimensions
+      #     metrics.each{|metric|} # filtered by all three dimensions
       #
       # @param [String] name
       # @param [String] value
@@ -84,13 +84,13 @@ module AWS
 
       # Returns a collection filtered by the given dimensions.
       #
-      #   metrics.with_dimensions([
-      #     { :name => 'd1', :value => 'v1' },
-      #     { :name => 'd2', :value => 'v2' },
-      #     { :name => 'd3', :value => 'v3' },
-      #   ]).each do |metric|
-      #     # ...
-      #   end
+      #     metrics.with_dimensions([
+      #       { :name => 'd1', :value => 'v1' },
+      #       { :name => 'd2', :value => 'v2' },
+      #       { :name => 'd3', :value => 'v3' },
+      #     ]).each do |metric|
+      #       # ...
+      #     end
       #
       # Multiple calls to #with_dimensions will add to previous dimensions.
       # @param [Array<Hash>] dimensions An array of dimensions.  Each dimension

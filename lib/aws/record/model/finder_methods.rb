@@ -43,13 +43,13 @@ module AWS
         #
         # Finding `:all` returns an enumerable scope object
         #
-        #  People.find(:all, :order => [:age, :desc], :limit => 10).each do |person|
-        #    puts person.name
-        #  end
+        #     People.find(:all, :order => [:age, :desc], :limit => 10).each do |person|
+        #       puts person.name
+        #     end
         #
         # Finding `:first` returns a single record (or nil)
         #
-        #  boss = People.find(:first, :where => { :boss => true })
+        #     boss = People.find(:first, :where => { :boss => true })
         #
         # Find accepts a hash of find modifiers (`:where`, `:order` and
         # `:limit`).  You can also choose to omit these modifiers and
@@ -57,13 +57,13 @@ module AWS
         # example only one request is made to SimpleDB (when #each is
         # called)
         #
-        #   people = People.find(:all)
+        #     people = People.find(:all)
         #
-        #   johns = people.where(:name => 'John Doe')
+        #     johns = people.where(:name => 'John Doe')
         #
-        #   johns.order(:age, :desc).limit(10).each do |suspects|
-        #     # ...
-        #   end
+        #     johns.order(:age, :desc).limit(10).each do |suspects|
+        #       # ...
+        #     end
         #
         # See also {where}, {order} and {limit} for more
         # information and options.
@@ -89,9 +89,9 @@ module AWS
         # Returns a chainable scope object that restricts further scopes to a
         # particular domain.
         #
-        #  Book.domain('books-2').each do |book|
-        #    # ...
-        #  end
+        #     Book.domain('books-2').each do |book|
+        #       # ...
+        #     end
         #
         # @param [String] shard_name
         # @return [Scope] Returns a scope for restricting the domain of subsequent
@@ -102,17 +102,17 @@ module AWS
 
         # Returns an enumerable scope object represents all records.
         #
-        #   Book.all.each do |book|
-        #     # ...
-        #   end
+        #     Book.all.each do |book|
+        #       # ...
+        #     end
         #
         # This method is equivalent to `find(:all)`, and therefore you can also
         # pass aditional options.  See {.find} for more information on what
         # options you can pass.
         #
-        #   Book.all(:where => { :author' => 'me' }).each do |my_book|
-        #     # ...
-        #   end
+        #     Book.all(:where => { :author' => 'me' }).each do |my_book|
+        #       # ...
+        #     end
         #
         # @return [Scope] Returns an enumerable scope object.
         def all options = {}
@@ -128,15 +128,15 @@ module AWS
         #
         # With no arguments, counts all records:
         #
-        #   People.count
+        #     People.count
         #
         # Accepts query options to count a subset of records:
         #
-        #   People.count(:where => { :boss => true })
+        #     People.count(:where => { :boss => true })
         #
         # You can also count records on a scope object:
         #
-        #   People.find(:all).where(:boss => true).count
+        #     People.find(:all).where(:boss => true).count
         #
         # See {find} and {Scope#count} for more details.
         #
@@ -161,29 +161,29 @@ module AWS
         #
         # Simple string condition
         #
-        #   Car.where('color = "red" or color = "blue"').each {|car| ... }
+        #     Car.where('color = "red" or color = "blue"').each {|car| ... }
         #
         # String with placeholders for quoting params
         #
-        #   Car.where('color = ?', 'red')
+        #     Car.where('color = ?', 'red')
         #
-        #   Car.where('color = ? OR style = ?', 'red', 'compact')
+        #     Car.where('color = ? OR style = ?', 'red', 'compact')
         #
-        #   # produces a condition using in, like: WHERE color IN ('red', 'blue')
-        #   Car.where('color IN ?', ['red','blue'])
+        #     # produces a condition using in, like: WHERE color IN ('red', 'blue')
+        #     Car.where('color IN ?', ['red','blue'])
         #
         # Hash arguments
         #
-        #   # WHERE age = '40' AND gender = 'male'
-        #   People.where(:age => 40, :gender => 'male').each {|person| ... }
+        #     # WHERE age = '40' AND gender = 'male'
+        #     People.where(:age => 40, :gender => 'male').each {|person| ... }
         #
-        #   # WHERE name IN ('John', 'Jane')
-        #   People.where(:name => ['John', 'Jane']).each{|person| ... }
+        #     # WHERE name IN ('John', 'Jane')
+        #     People.where(:name => ['John', 'Jane']).each{|person| ... }
         #
         # Chaining where with other scope modifiers
         #
-        #   # 10 most expensive red cars
-        #   Car.where(:color => 'red').order(:price, :desc).limit(10)
+        #     # 10 most expensive red cars
+        #     Car.where(:color => 'red').order(:price, :desc).limit(10)
         #
         # @overload where(conditions_hash)
         #   @param [Hash] conditions_hash A hash of attributes to values.  Each
@@ -199,12 +199,12 @@ module AWS
         # Defines the order in which records are returned when performing a find.
         # SimpleDB only allows sorting by one attribute per request.
         #
-        #   # oldest to youngest
-        #   People.order(:age, :desc).each {|person| ... }
+        #     # oldest to youngest
+        #     People.order(:age, :desc).each {|person| ... }
         #
         # You can chain order with the other scope modifiers:
         #
-        #   Pepole.order(:age, :desc).limit(10).each {|person| ... }
+        #     Pepole.order(:age, :desc).limit(10).each {|person| ... }
         #
         # @overload order(attribute, direction = :asc)
         #   @param [String,Symbol] attribute The attribute to sort by.
@@ -216,11 +216,11 @@ module AWS
         # The maximum number of records to return.  By default, all records
         # matching the where conditions will be returned from a find.
         #
-        #   People.limit(10).each {|person| ... }
+        #     People.limit(10).each {|person| ... }
         #
         # Limit can be chained with other scope modifiers:
         #
-        #   People.where(:age => 40).limit(10).each {|person| ... }
+        #     People.where(:age => 40).limit(10).each {|person| ... }
         #
         def limit limit
           new_scope.limit(limit)

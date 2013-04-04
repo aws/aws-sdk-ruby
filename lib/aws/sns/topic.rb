@@ -218,20 +218,20 @@ module AWS
 
       # Publishes a message to this SNS topic.
       #
-      #   topic.publish('a short message')
+      #     topic.publish('a short message')
       #
       # You can pass a subject that is used when sending the message to
       # email endpoints:
       #
-      #   topic.publish('message', :subject => 'SNS message subject')
+      #     topic.publish('message', :subject => 'SNS message subject')
       #
       # If you would like to pass a different message to various protocols
       # (endpoint types) you can pass those as options:
       #
-      #   topic.publish('default message',
-      #     :http => "message sent to http endpoints",
-      #     :https => "message sent to https endpoints",
-      #     :email => "message sent to email endpoints")
+      #     topic.publish('default message',
+      #       :http => "message sent to http endpoints",
+      #       :https => "message sent to https endpoints",
+      #       :email => "message sent to email endpoints")
       #
       # The full list of acceptable protocols are listed below.  The default
       # message is sent to endpoints who's protocol was not listed.

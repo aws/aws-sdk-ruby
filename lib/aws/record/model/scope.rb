@@ -23,8 +23,8 @@ module AWS
       # Scope objects are returned from the AWS::Record::Model finder methods
       # (e.g. `shard`, `where`, `order`, `limit`, etc).
       #
-      #   books = Book.where(:author => 'John Doe')
-      #   books.class #=> AWS::Record::Scope, not Array
+      #     books = Book.where(:author => 'John Doe')
+      #     books.class #=> AWS::Record::Scope, not Array
       #
       # Scopes are also returned from methods defined with the `scope` method.
       #
@@ -33,13 +33,13 @@ module AWS
       # Scope objects represent a request, but do not actualy make a request
       # until required.  This allows you to chain requests
       #
-      #   # no request made by the following 2 statements
-      #   books = Book.where(:author => 'John Doe')
-      #   books = books.limit(10)
+      #     # no request made by the following 2 statements
+      #     books = Book.where(:author => 'John Doe')
+      #     books = books.limit(10)
       #
-      #   books.each do |book|
-      #     # yields up to 10 books
-      #   end
+      #     books.each do |book|
+      #       # yields up to 10 books
+      #     end
       #
       # Each of the following methods returns a scope that can be chained.
       #
@@ -52,11 +52,11 @@ module AWS
       #
       # To terminate a scope you can enumerate it or call #first.
       #
-      #   # terminate a scope by enumerating
-      #   Book.limit(10).each {|book| ... }
+      #     # terminate a scope by enumerating
+      #     Book.limit(10).each {|book| ... }
       #
-      #   # terminate a scope by getting the first value
-      #   Book.where('author' => 'John Doe').first
+      #     # terminate a scope by getting the first value
+      #     Book.where('author' => 'John Doe').first
       #
       class Scope < Record::Scope
 
@@ -87,8 +87,8 @@ module AWS
         #   Specify a hash of conditions to query with.  Multiple conditions
         #   are joined together with AND.
         #
-        #     Book.where(:author => 'John Doe', :softcover => true)
-        #     # where `author` = `John Doe` AND `softcover` = `1`
+        #       Book.where(:author => 'John Doe', :softcover => true)
+        #       # where `author` = `John Doe` AND `softcover` = `1`
         #
         #   @param [Hash] conditions
         #
@@ -96,7 +96,7 @@ module AWS
         #   A sql-like query fragment with optional placeholders and values.
         #   Placeholders are replaced with properly quoted values.
         #
-        #     Book.where('author = ?', 'John Doe')
+        #       Book.where('author = ?', 'John Doe')
         #
         #   @param [String] conditions_string A sql-like where string with
         #     question mark placeholders.  For each placeholder there should
@@ -114,18 +114,17 @@ module AWS
 
         # Specifies how to sort records returned.
         #
-        #   # enumerate books, starting with the most recently published ones
-        #   Book.order(:published_at, :desc).each do |book|
-        #     # ...
-        #   end
+        #     # enumerate books, starting with the most recently published ones
+        #     Book.order(:published_at, :desc).each do |book|
+        #       # ...
+        #     end
         #
         # Only one order may be applied.  If order is specified more than
         # once the last one in the chain takes precedence:
         #
-        #
-        #   # books returned by this scope will be ordered by :published_at
-        #   # and not :author.
-        #   Book.where(:read => false).order(:author).order(:published_at)
+        #     # books returned by this scope will be ordered by :published_at
+        #     # and not :author.
+        #     Book.where(:read => false).order(:author).order(:published_at)
         #
         # @param [String,Symbol] attribute_name The attribute to sort by.
         # @param [:asc, :desc] order (:asc) The direct to sort.

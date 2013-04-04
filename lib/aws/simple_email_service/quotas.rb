@@ -39,7 +39,9 @@ module AWS
 
       # Returns a hash of the SES quotas.
       #
-      #   @ses.quotas.to_hash
+      # @example
+      #
+      #   ses.quotas.to_hash
       #   # {:max_24_hour_send=>200, :max_send_rate=>1.0, :sent_last_24_hours=>22}
       #
       # @return [Hash]

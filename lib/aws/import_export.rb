@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::ImportExport interface:
   #
-  #   ie = AWS::ImportExport.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     ie = AWS::ImportExport.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
@@ -48,12 +48,20 @@ module AWS
   # {AWS::ImportExport::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   ie = AWS::ImportExport.new
+  # # Using the Client
   #
-  #   resp = ie.client.list_hosted_zones
-  #   resp[:hosted_zones].each do |zone|
-  #     # ...
-  #   end
+  # AWS::ImportExport does not provide higher level abstractions for Import/Export at
+  # this time.  You can still access all of the API methods using
+  # {AWS::ImportExport::Client}.  Here is how you access the client and make
+  # a simple request:
+  #
+  #
+  #     ie = AWS::ImportExport.new
+  #
+  #     resp = ie.client.list_hosted_zones
+  #     resp[:hosted_zones].each do |zone|
+  #       # ...
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #

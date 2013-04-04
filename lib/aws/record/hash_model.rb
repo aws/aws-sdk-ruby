@@ -25,30 +25,30 @@ module AWS
 
         # Creates the DynamoDB table that is configured for this class.
         #
-        #   class Product < AWS::Record::HashModel
-        #   end
+        #     class Product < AWS::Record::HashModel
+        #     end
         #
-        #   # create the table 'Product' with 10 read/write capacity units
-        #   Product.create_table 10, 10
+        #     # create the table 'Product' with 10 read/write capacity units
+        #     Product.create_table 10, 10
         #
         # If you shard you data across multiple tables, you can specify the
         # shard name:
         #
-        #   # create two tables, with the given names
-        #   Product.create_table 500, 10, :shard_name => 'products-1'
-        #   Product.create_table 500, 10, :shard_name => 'products-2'
+        #     # create two tables, with the given names
+        #     Product.create_table 500, 10, :shard_name => 'products-1'
+        #     Product.create_table 500, 10, :shard_name => 'products-2'
         #
         # If you share a single AWS account with multiple applications, you
         # can provide a table prefix to group tables and to avoid name
         # collisions:
         #
-        #   AWS::Record.table_prefix = 'myapp-'
+        #     AWS::Record.table_prefix = 'myapp-'
         #
-        #   # creates the table 'myapp-Product'
-        #   Product.create_table 250, 50
+        #     # creates the table 'myapp-Product'
+        #     Product.create_table 250, 50
         #
-        #   # creates the table 'myapp-products-1'
-        #   Product.create_table 250, 50, :shard_name => 'products-1'
+        #     # creates the table 'myapp-products-1'
+        #     Product.create_table 250, 50, :shard_name => 'products-1'
         #
         # @param [Integer] read_capacity_units
         #   See {DynamoDB::TableCollection#create} for more information.

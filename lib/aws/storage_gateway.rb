@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::StorageGateway interface:
   #
-  #   sg = AWS::StorageGateway.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     sg = AWS::StorageGateway.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
@@ -48,12 +48,12 @@ module AWS
   # {AWS::StorageGateway::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   sg = AWS::StorageGateway.new
+  #     sg = AWS::StorageGateway.new
   #
-  #   resp = sg.client.list_gateways
-  #   resp[:gateways].each do |gateway|
-  #     puts gateway[:gateway_arn]
-  #   end
+  #     resp = sg.client.list_gateways
+  #     resp[:gateways].each do |gateway|
+  #       puts gateway[:gateway_arn]
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #

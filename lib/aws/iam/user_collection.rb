@@ -17,41 +17,41 @@ module AWS
     # A collection that provides access to IAM users belonging to this
     # account.
     #
-    #   iam = AWS::IAM.new
-    #   users = iam.users
+    #     iam = AWS::IAM.new
+    #     users = iam.users
     #
     # ## Creating A User
     #
     # To create an IAM user you need only provide a user name.
     #
-    #   user = users.create('username')
+    #     user = users.create('username')
     #
     # You can also provide an optional `:path` that can be used to organize
     # users.
     #
-    #   user = users.create('johndoe', :path => '/staff/customer_support/')
+    #     user = users.create('johndoe', :path => '/staff/customer_support/')
     #
     # ## Getting a User by Name
     #
     # You can get a referene to a user by using array notation:
     #
-    #   user = users['username']
+    #     user = users['username']
     #
     # ## Enumerating Users
     #
     # A user collection can also be used to enumerate users:
     #
-    #   users.each do |user|
-    #     puts user.name
-    #   end
+    #     users.each do |user|
+    #       puts user.name
+    #     end
     #
     # ## Path Prefixes
     #
     # You can also find/enumerate users who's path begins with a given prefix:
     #
-    #   users.each(:path_prefix => '/staff/developers/ruby').each do |ruby_dev|
-    #     puts "#{ruby_dev.name} is awesome!"
-    #   end
+    #     users.each(:path_prefix => '/staff/developers/ruby').each do |ruby_dev|
+    #       puts "#{ruby_dev.name} is awesome!"
+    #     end
     #
     class UserCollection
 
@@ -73,7 +73,7 @@ module AWS
 
       # Returns a reference to the user with the given name:
       #
-      #   user = iam.users['username']
+      #     user = iam.users['username']
       #
       # @param [String] name Name of the user to return a reference for.
       # @return [User] Returns a reference to the named user.
@@ -106,7 +106,7 @@ module AWS
       # useful if you want to call an enumerable method that does
       # not accept options (e.g. `collect`, `first`, etc).
       #
-      #   users.enumerator(:path_prefix => '/admin').collect(&:name)
+      #     users.enumerator(:path_prefix => '/admin').collect(&:name)
       #
       # @param (see #each)
       # @option (see #each)

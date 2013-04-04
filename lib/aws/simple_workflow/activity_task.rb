@@ -71,7 +71,7 @@ module AWS
       # You can optionally specify `:details` that describe the progress.
       # This might be a percentage competition, step number, etc.
       #
-      #   activity_task.record_heartbeat! :details => '.75' # 75% complete
+      #     activity_task.record_heartbeat! :details => '.75' # 75% complete
       #
       # If the activity task has been canceled since it was received or
       # since the last recorded heartbeat, this method will raise
@@ -82,27 +82,20 @@ module AWS
       # then untrapped CancelRequestedErrors are caught
       # and responded to automatically.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
-      #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   end # traps the error and responds activity task canceled.
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     end # traps the error and responds activity task canceled.
       #
       # If you need to cleanup or provide additional details in the
       # cancellation response, you can trap the error and
       # respond manually.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
-      #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   rescue CancelRequestedError => e
-      #
-      #      # cleanup
-      #
-      #      task.respond_canceled! :details => '...'
-      #
-      #   end
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     rescue CancelRequestedError => e
+      #        # cleanup
+      #        task.respond_canceled! :details => '...'
+      #     end
       #
       # @param [Hash] options
       #

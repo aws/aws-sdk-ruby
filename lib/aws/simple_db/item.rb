@@ -19,7 +19,7 @@ module AWS
     # use it to access the {AttributeCollection} for the item in
     # order to add, remove, or read the item's attributes.
     #
-    #   item = AWS::SimpleDB.new.domains['mydomain'].items['item-id']
+    #     item = AWS::SimpleDB.new.domains['mydomain'].items['item-id']
     #
     class Item
 

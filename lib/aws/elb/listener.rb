@@ -140,9 +140,9 @@ module AWS
 
       # Returns true if this listener exists.
       #
-      #   load_balancer = ELB.new.load_balancers['my-load-balancer']
-      #   listener = load_balancer.listeners[80] # port 80
-      #   listener.exists?
+      #     load_balancer = ELB.new.load_balancers['my-load-balancer']
+      #     listener = load_balancer.listeners[80] # port 80
+      #     listener.exists?
       #
       # @return [Boolean] Returns true if the load balancer has a listener
       #   on this port.

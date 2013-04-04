@@ -35,8 +35,8 @@ module AWS
       # Returns the value for the given name stored in the S3Object's
       # metadata:
       #
-      #   bucket.objects['myobject'].metadata['purpose']
-      #   # returns nil if the given metadata key has not been set
+      #     bucket.objects['myobject'].metadata['purpose']
+      #     # returns nil if the given metadata key has not been set
       #
       # @param [String,Symbol] name The name of the metadata field to
       #   get.
@@ -49,9 +49,9 @@ module AWS
       # Changes the value of the given name stored in the S3Object's
       # metadata:
       #
-      #   object = bucket.object['myobject']
-      #   object.metadata['purpose'] = 'research'
-      #   object.metadata['purpose']               # => 'research'
+      #     object = bucket.object['myobject']
+      #     object.metadata['purpose'] = 'research'
+      #     object.metadata['purpose']               # => 'research'
       #
       # @note The name and value of each metadata field must conform
       #   to US-ASCII.

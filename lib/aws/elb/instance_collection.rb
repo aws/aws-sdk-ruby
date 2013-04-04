@@ -26,9 +26,7 @@ module AWS
       # Returns an {EC2::Instance} object with 3 extra methods added:
       #
       # * `#load_balancer`
-      #
       # * `#remove_from_load_balancer`
-      #
       # * `#elb_health`
       #
       # See {#health} for more information about what `#elb_health` returns.
@@ -64,11 +62,8 @@ module AWS
       # is a hash with the following entries:
       #
       #   * `:instance` - The {EC2::Instance} being described.
-      #
       #   * `:description` - Provides a description of the instance.
-      #
       #   * `:state` - Specifies the current state of the instance.
-      #
       #   * `:reason_code` - Provides information about the cause of
       #     OutOfService instances. Specifically, it indicates whether the
       #     cause is Elastic Load Balancing or the instance behind the
@@ -77,27 +72,27 @@ module AWS
       # You can get the health of all instances for this load balancer
       # by passing no arguments to this method:
       #
-      #   # get the health of all instances in the collection
-      #   load_balancer.instances.health.each do |instance_health|
-      #      puts "Instance: "    + instance_health[:instance].id
-      #      puts "description: " + instance_health[:description]
-      #      puts "state: "       + instance_health[:state]
-      #      puts "reason code: " + instance_health[:reason_code]
-      #   end
+      #     # get the health of all instances in the collection
+      #     load_balancer.instances.health.each do |instance_health|
+      #        puts "Instance: "    + instance_health[:instance].id
+      #        puts "description: " + instance_health[:description]
+      #        puts "state: "       + instance_health[:state]
+      #        puts "reason code: " + instance_health[:reason_code]
+      #     end
       #
       # If you want the health of a specific list of instances, pass
       # instance ids or instance objects to this method:
       #
-      #   # get the health for a few specific instances
-      #   load_balancer.instances.health('i-12345', 'i-67890').each{|h| ... }
+      #     # get the health for a few specific instances
+      #     load_balancer.instances.health('i-12345', 'i-67890').each{|h| ... }
       #
       # ## Health for a Single Instance
       #
       # If you want the health of a single instance you can use the {#[]}
       # instead:
       #
-      #   load_balancer.instances['i-123456'].elb_health
-      #   # => { :state => ..., :reason_code => ..., :description => ... }
+      #     load_balancer.instances['i-123456'].elb_health
+      #     # => { :state => ..., :reason_code => ..., :description => ... }
       #
       # @param [String,EC2::Instance] instances A list of instances to
       #   receive health information for.

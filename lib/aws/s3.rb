@@ -31,32 +31,32 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the S3 interface:
   #
-  #   s3 = AWS::S3.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     s3 = AWS::S3.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Buckets
   #
   # Before you can upload files to S3, you need to create a bucket.
   #
-  #   s3 = AWS::S3.new
-  #   bucket = s3.buckets.create('my-bucket')
+  #     s3 = AWS::S3.new
+  #     bucket = s3.buckets.create('my-bucket')
   #
   # If a bucket already exists, you can get a reference to the bucket.
   #
-  #   bucket = s3.buckets['my-bucket'] # no request made
+  #     bucket = s3.buckets['my-bucket'] # no request made
   #
   # You can also enumerate all buckets in your account.
   #
-  #   s3.buckets.each do |bucket|
-  #     puts bucket.name
-  #   end
+  #     s3.buckets.each do |bucket|
+  #       puts bucket.name
+  #     end
   #
   # See {BucketCollection} and {Bucket} for more information on working
   # with buckets.
@@ -69,38 +69,38 @@ module AWS
   #
   # If the object already exists, you can get a reference to the object.
   #
-  #   # makes no request, returns an AWS::S3::S3Object
-  #   obj = bucket.objects['key']
+  #     # makes no request, returns an AWS::S3::S3Object
+  #     obj = bucket.objects['key']
   #
   # ## Reading and Writing an Object
   #
   # The example above returns an {S3Object}.  You call {S3Object#write} and
   # {S3Object#read} to upload to and download from S3 respectively.
   #
-  #   # streaming upload a file to S3
-  #   obj.write(Pathname.new('/path/to/file.txt'))
+  #     # streaming upload a file to S3
+  #     obj.write(Pathname.new('/path/to/file.txt'))
   #
-  #   # streaming download from S3 to a file on disk
-  #   File.open('file.txt', 'w') do |file|
-  #     obj.read do |chunk|
-  #        file.write(chunk)
+  #     # streaming download from S3 to a file on disk
+  #     File.open('file.txt', 'w') do |file|
+  #       obj.read do |chunk|
+  #          file.write(chunk)
+  #       end
   #     end
-  #   end
   #
   # ## Enumerating Objects
   #
   # You can enumerate objects in your buckets.
   #
-  #   # enumerate ALL objects in the bucket (even if the bucket contains
-  #   # more than 1k objects)
-  #   bucket.objects.each do |obj|
-  #     puts obj.key
-  #   end
+  #     # enumerate ALL objects in the bucket (even if the bucket contains
+  #     # more than 1k objects)
+  #     bucket.objects.each do |obj|
+  #       puts obj.key
+  #     end
   #
-  #   # enumerate at most 20 objects with the given prefix
-  #   bucket.objects.with_prefix('photos/').each(:limit => 20) do |photo|
-  #     puts photo.key
-  #   end
+  #     # enumerate at most 20 objects with the given prefix
+  #     bucket.objects.with_prefix('photos/').each(:limit => 20) do |photo|
+  #       puts photo.key
+  #     end
   #
   # See {ObjectCollection} and {S3Object} for more information on working
   # with objects.

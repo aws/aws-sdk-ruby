@@ -25,11 +25,11 @@ module AWS
     #   The instance must be in a stopped state to change user data;
     #   for example:
     #
-    #     i.user_data             # => "HELLO"
-    #     i.status                # => :running
-    #     i.user_data = "GOODBYE" # raises an exception
-    #     i.stop; sleep 1 until i.status == :stopped
-    #     i.user_data = "GOODBYE" # => "GOODBYE"
+    #       i.user_data             # => "HELLO"
+    #       i.status                # => :running
+    #       i.user_data = "GOODBYE" # raises an exception
+    #       i.stop; sleep 1 until i.status == :stopped
+    #       i.user_data = "GOODBYE" # => "GOODBYE"
     #
     # @attr [String] instance_type The instance type,
     #   e.g. "m1.small".  The instance must be in a stopped state to
@@ -45,11 +45,10 @@ module AWS
     # @attr [String] instance_initiated_shutdown_behavior Valid
     #   values are:
     #
-    #   ["stop"] When the instance shuts down, it will go into a
-    #            "stopped" state.
-    #
-    #   ["terminate"] When the instance shuts down, it will be
-    #                 terminated.
+    #     * "stop"] When the instance shuts down, it will go into a
+    #       "stopped" state.
+    #     * "terminate"] When the instance shuts down, it will be
+    #       terminated.
     #
     # @attr_reader [String] image_id Image ID of the AMI used to
     #   launch the instance.
@@ -68,8 +67,9 @@ module AWS
     # @attr_reader [Symbol] root_device_type The root device type
     #   used by the AMI. The AMI can use an Amazon EBS or instance
     #   store root device.  Valid values:
-    #   * `:ebs`
-    #   * `:instance_store`
+    #
+    #     * `:ebs`
+    #     * `:instance_store`
     #
     # @attr_reader [String] root_device_name The name of the root
     #   device.
@@ -90,23 +90,25 @@ module AWS
     # @attr_reader [String] ip_address The IP address of the
     #   instance.
     #
-    # @attr_reader [Symbol] status The instance status.  Valid values are:
-    #   * `:pending`
-    #   * `:running`
-    #   * `:shutting_down`
-    #   * `:terminated`
-    #   * `:stopping`
-    #   * `:stopped`
+    # @attr_reader [Symbol] status The instance status.
+    #   Valid values are:
+    #
+    #     * `:pending`
+    #     * `:running`
+    #     * `:shutting_down`
+    #     * `:terminated`
+    #     * `:stopping`
+    #     * `:stopped`
     #
     # @attr_reader [Integer] status_code The numeric instance status code.
     #
-    # @attr_reader [Symbol] architecture The architecture of the
-    #   image.
+    # @attr_reader [Symbol] architecture The architecture of the image.
     #
     # @attr_reader [Symbol] virtualization_type The instance's
     #   virtualization type.  Valid values:
-    #   * `:paravirtual`
-    #   * `:hvm`
+    #
+    #     * `:paravirtual`
+    #     * `:hvm`
     #
     # @attr_reader [String] reservation_id The ID of the reservation
     #   in which this instance was launched.
@@ -120,9 +122,10 @@ module AWS
     #
     # @attr_reader [Symbol] monitoring The status of CloudWatch
     #   monitoring for the instance.  Valid values:
-    #   * `:enabled`
-    #   * `:disabled`
-    #   * `:pending`
+    #
+    #     * `:enabled`
+    #     * `:disabled`
+    #     * `:pending`
     #
     # @attr_reader [String] state_transition_reason A string
     #   describing the reason for the last state transition.
@@ -135,8 +138,9 @@ module AWS
     #
     # @attr_reader [Symbol] hypervisor The instance's hypervisor
     #   type.  Valid values:
-    #   * `:ovm`
-    #   * `:xen`
+    #
+    #     * `:ovm`
+    #     * `:xen`
     #
     # @attr_reader [String] client_token Idempotency token you
     #   provided when you launched the instance.
@@ -458,22 +462,22 @@ module AWS
 
       # Returns a list of block device mappings.
       #
-      #   instance.block_devices
-      #   #=>
-      #   [
-      #     {
-      #       :device_name => "/dev/sda2",
-      #       :ebs => {
-      #         :volume_id => "vol-123",
-      #         :status => "attaching",
-      #         :attach_time => time,
-      #         :delete_on_termination => true
+      #     instance.block_devices
+      #     #=>
+      #     [
+      #       {
+      #         :device_name => "/dev/sda2",
+      #         :ebs => {
+      #           :volume_id => "vol-123",
+      #           :status => "attaching",
+      #           :attach_time => time,
+      #           :delete_on_termination => true
+      #         }
+      #       }, {
+      #         :device_name => "/dev/sdb",
+      #         :virtual_name => "ephemeral0",
       #       }
-      #     }, {
-      #       :device_name => "/dev/sdb",
-      #       :virtual_name => "ephemeral0",
-      #     }
-      #   ]
+      #     ]
       #
       # @return [Array<Hash>] Returns a list of block device mappings.  This
       #   list may contain ephemeral volumes.
@@ -550,11 +554,9 @@ module AWS
       #   parenthesis (()), commas (,), slashes (/), dashes (-), or
       #   underscores(_)
       #
-      # @param [Hash] options Additional options for creating the
-      #   image.
+      # @param [Hash] options Additional options for creating the image.
       #
-      # @option options [String] :description A description of the
-      #   new image.
+      # @option options [String] :description A description of the new image.
       #
       # @option options [Boolean] :no_reboot By default this
       #   option is set to `false`, which means Amazon EC2
@@ -690,23 +692,23 @@ module AWS
       # Before you can export an image to an S3 bucket, you must modify
       # the bucket ACL.  You only need to do this once per bucket.
       #
-      #   s3.buckets['bucket-name'].acl.change do |acl|
-      #     acl.grant(:read_acp).to(:amazon_customer_email => 'vm-import-export@amazon.com')
-      #     acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
-      #   end
+      #     s3.buckets['bucket-name'].acl.change do |acl|
+      #       acl.grant(:read_acp).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #       acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #     end
       #
       # ## Performing the export
       #
       # Simply call #export_to_s3 on your instance.   Only instances
       # derived from your own ImportInstance tasks may be exported.
       #
-      #    task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
+      #      task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
       #
       # ## Downloading the results
       #
       # Given a completed export task you can download the final image:
       #
-      #   File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
+      #     File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
       #
       # @param [S3::Bucket,String] bucket The destination bucket.  May
       #   be the name of the bucket (string) or a {S3::Bucket} object. The
@@ -734,7 +736,7 @@ module AWS
       # @option options [String] :prefix (nil) The image is written to a
       #   single object in the bucket at the key:
       #
-      #     "#{prefix}#{export_task_id}.#{disk_image_format}"
+      #       "#{prefix}#{export_task_id}.#{disk_image_format}"
       #
       # @return [ExportTask]
       #

@@ -21,28 +21,28 @@ module AWS
     #
     # To create a domain you need to pass a unique name to #create.
     #
-    #   domain = simple_workflow.domains.create('my-domain', :none)
-    #   #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
+    #     domain = simple_workflow.domains.create('my-domain', :none)
+    #     #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
     #
     # ## Getting a Domain
     #
     # Domains are indexed by their name.
     #
-    #   domain = simple_workflow.domains['my-domain']
+    #     domain = simple_workflow.domains['my-domain']
     #
     # ## Enumerating Domains
     #
     # You can call Enumerable methods on a domain collection to iterate
     # the domains controlled by your account.
     #
-    #   simple_workflow.domains.each {|domain| ... }
+    #     simple_workflow.domains.each {|domain| ... }
     #
     # By default only registered domains are enumerated.  If you would like
     # to enumerate deprecated (deleted) domains you need to pass the
     # `:deprecated` option.
     #
-    #   # returns an array of names for all deprecated domains
-    #   simple_workflow.domains.deprecated.map(&:name)
+    #     # returns an array of names for all deprecated domains
+    #     simple_workflow.domains.deprecated.map(&:name)
     #
     # See {AWS::Core::Collection} to see other useful methods you can
     # call against a domain collection (e.g. #enum, #page, #each_batch).
@@ -66,9 +66,9 @@ module AWS
 
       # Registers a new domain.
       #
-      #   # register a domain named 'domain' that has no expiry on workflow
-      #   # execution history
-      #   domain = AWS::SimpleWorkflow.new.domains.register('domain', :none)
+      #     # register a domain named 'domain' that has no expiry on workflow
+      #     # execution history
+      #     domain = AWS::SimpleWorkflow.new.domains.register('domain', :none)
       #
       # @param [String] name Name of the domain to register. The name must
       #   be unique.

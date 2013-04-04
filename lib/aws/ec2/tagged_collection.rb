@@ -18,7 +18,7 @@ module AWS
     # module provides methods for filtering the collection with
     # tags.
     #
-    #   collecion.tagged('prod').each do {|obj| ... }
+    #     collecion.tagged('prod').each do {|obj| ... }
     #
     module TaggedCollection
 
@@ -28,11 +28,11 @@ module AWS
       #
       # Filter the collection to items items tagged 'live' OR 'test'
       #
-      #   collection.tagged('live', 'test')
+      #     collection.tagged('live', 'test')
       #
       # Filter the collection to items tagged 'live' AND 'webserver'
       #
-      #   collection.tagged('live').tagged('webserver')
+      #     collection.tagged('live').tagged('webserver')
       #
       def tagged *keys
         filter('tag-key', *keys)
@@ -42,7 +42,7 @@ module AWS
       # tag values they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
       #
-      #   collection.tagged('stage').tagged_values('production')
+      #     collection.tagged('stage').tagged_values('production')
       #
       def tagged_values *values
         filter('tag-value', *values)

@@ -16,34 +16,34 @@ module AWS
     # Signing certificates can be activated and deactivated.
     # By default, newly-uploaded certifictes are active.
     #
-    #   certificate = iam.signing_certificates.upload(cert_body)
-    #   certificate.status
-    #   #=> :active
+    #     certificate = iam.signing_certificates.upload(cert_body)
+    #     certificate.status
+    #     #=> :active
     #
-    #   certificate.deactivate!
-    #   certificate.active?
-    #   #=> false
+    #     certificate.deactivate!
+    #     certificate.active?
+    #     #=> false
     #
     # ## Contents
     #
     # You can access the certificate contents you uploaded:
     #
-    #   > puts certificate.contents
-    #   -----BEGIN CERTIFICATE-----
-    #   MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
-    #   ......
-    #   Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
-    #   F9TbdXSWdgMl7E0=
-    #   -----END CERTIFICATE-----
+    #     > puts certificate.contents
+    #     -----BEGIN CERTIFICATE-----
+    #     MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
+    #     ......
+    #     Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
+    #     F9TbdXSWdgMl7E0=
+    #     -----END CERTIFICATE-----
     #
     # ## User
     #
     # A certificate can also return the user it belongs to.  If the certificate
     # belongs to the AWS account, then {#user} will return `nil`.
     #
-    #   user = iam.users['someuser'].signing_certificates.first
-    #   user.name
-    #   #=> 'someuser'
+    #     user = iam.users['someuser'].signing_certificates.first
+    #     user.name
+    #     #=> 'someuser'
     #
     # @attr_reader [String] contents Returns the contents of this
     #   signing certificate.

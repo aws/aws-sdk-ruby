@@ -22,18 +22,18 @@ module AWS
     # Call the validation method followed by one more attribute names
     # and then an optional hash of modifiers.
     #
-    #   class Book < AWS::Record::Model
+    #       class Book < AWS::Record::Model
     #
-    #     # ...
+    #       # ...
     #
-    #     validates_presence_of :title, :author
+    #       validates_presence_of :title, :author
     #
-    #     validates_length_of :summary,
-    #       :max => 500,
-    #       :allow_nil => true,
-    #       :allow_blank => true
+    #       validates_length_of :summary,
+    #         :max => 500,
+    #         :allow_nil => true,
+    #         :allow_blank => true
     #
-    #   end
+    #     end
     #
     # # Conditional Validations
     #
@@ -52,9 +52,9 @@ module AWS
     # By default validations are run on create and update, but you can
     # specify them to run for only create (initial save) or updates.
     #
-    #   validates_presence_of :created_at, :on => :create
+    #     validates_presence_of :created_at, :on => :create
     #
-    #   validates_presence_of :updated_at, :on => :update
+    #     validates_presence_of :updated_at, :on => :update
     #
     # ### Validate :if or :unless
     #
@@ -62,29 +62,26 @@ module AWS
     # validation should run.  `:if` and `:unless`: both accept either
     # a method name or proc.
     #
-    #   class Person
+    #     class Person
     #
-    #     # ...
+    #       # ...
     #
-    #     validates_presence_of :job_title, :if => :employee?
+    #       validates_presence_of :job_title, :if => :employee?
     #
-    #     validates_presence_of :nickname, :if => lambda {|person|
-    #       person.is_family? or person.is_friend? }
+    #       validates_presence_of :nickname, :if => lambda {|person|
+    #         person.is_family? or person.is_friend? }
     #
-    #   end
+    #     end
     #
     # # Validating Virtual (Non-persisted) Attributes
     #
     # All of the validators can be used with configured attributes, but they
     # can also be used with any attribute that has a setter and a getter.
     #
-    #   Class Book < AWS::Record::Model
-    #
-    #     attr_accessor :title
-    #
-    #     validates_presence_of :title
-    #
-    #   end
+    #     Class Book < AWS::Record::Model
+    #       attr_accessor :title
+    #       validates_presence_of :title
+    #     end
     #
     module Validations
 
@@ -103,23 +100,23 @@ module AWS
 
       # Registers a validation method.
       #
-      #   validate :ensure_age_is_greater_than_shoe_size
+      #     validate :ensure_age_is_greater_than_shoe_size
       #
-      #   def ensure_age_is_greater_than_shoe_size
-      #     unless age > shoe_size
-      #       errors.add(:age, 'should be greater than your shoe size')
+      #     def ensure_age_is_greater_than_shoe_size
+      #       unless age > shoe_size
+      #         errors.add(:age, 'should be greater than your shoe size')
+      #       end
       #     end
-      #   end
       #
       # You can also pass a list of method names that should be called during
       # validation.
       #
-      #   validate :some_complex_validation, :some_other_validation
+      #     validate :some_complex_validation, :some_other_validation
       #
       # As with most other validation methods you can also pass a hash of
       # options that affect when the named validation methods get called.
       #
-      #   validate :my_custom_validation, :unless => :new_record?
+      #     validate :my_custom_validation, :unless => :new_record?
       #
       # @overload validate(*method_names, options = {})
       #   @param [Array<Symbol>] method_names A list of methods to call
@@ -127,6 +124,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
+      #
       #     * `:save`
       #     * `:create`
       #     * `:update`
@@ -145,23 +143,23 @@ module AWS
       # checkbox (like an EULA agreement or terms of service acknowledgement)
       # is checked.
       #
-      #   class User < AWS::Record::Model
-      #     boolean_attr :terms_of_service
-      #     validates_acceptance_of :terms_of_service
-      #   end
+      #     class User < AWS::Record::Model
+      #       boolean_attr :terms_of_service
+      #       validates_acceptance_of :terms_of_service
+      #     end
       #
       # ### Virtual Attributes
       #
       # If you choose to validate the acceptance of a non-existant attribute
       # then a setter and a getter will be added automtically for you.
       #
-      #   class User < AWS::Record::Model
-      #     validates_acceptance_of :terms_of_service
-      #   end
+      #     class User < AWS::Record::Model
+      #       validates_acceptance_of :terms_of_service
+      #     end
       #
-      #   user = User.new
-      #   user.respond_to?(:terms_of_service)  #=> true
-      #   user.respond_to?(:terms_of_service=) #=> true
+      #     user = User.new
+      #     user.respond_to?(:terms_of_service)  #=> true
+      #     user.respond_to?(:terms_of_service=) #=> true
       #
       # ### Accepted Values
       #
@@ -172,13 +170,13 @@ module AWS
       # * `nil` implies the field was omitted from the form and therefore
       #   should not be validated
       #
-      #     class User < AWS::Record::Model
-      #       validates_acceptance_of :terms_of_service
-      #     end
+      #       class User < AWS::Record::Model
+      #         validates_acceptance_of :terms_of_service
+      #       end
       #
-      #     u = User.new
-      #     u.terms_of_service #=> nil
-      #     u.valid?           #=> true
+      #       u = User.new
+      #       u.terms_of_service #=> nil
+      #       u.valid?           #=> true
       #
       # * '1' is the default value for most checkbox form helpers, and #
       #   therefore indicates an accepted value.
@@ -200,7 +198,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [mixed] :accpet Specify an additional accepted value.
       #
-      #       validates_acceptance_of :agree, :accept => 'yes'
+      #         validates_acceptance_of :agree, :accept => 'yes'
       #
       #   @option options [String] :message A custom error message.  The default
       #     `:message` is "must be accepted".
@@ -210,6 +208,7 @@ module AWS
       #     attribute value is `blank`.
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
+      #
       #     * `:save`
       #     * `:create`
       #     * `:update`
@@ -227,14 +226,14 @@ module AWS
       # Intended primarily for validating a form field was entered correctly
       # by requiring it twice:
       #
-      #   Model:
-      #     class User < AWS::Record::Model
-      #       validates_confirmation_of :password, :if => :password_changed?
-      #     end
+      #     Model:
+      #       class User < AWS::Record::Model
+      #         validates_confirmation_of :password, :if => :password_changed?
+      #       end
       #
-      #   View:
-      #     <%= password_field "user", "password" %>
-      #     <%= password_field "user", "password_confirmation" %>
+      #     View:
+      #       <%= password_field "user", "password" %>
+      #       <%= password_field "user", "password_confirmation" %>
       #
       # ### Confirmation Value Accessors
       #
@@ -249,7 +248,7 @@ module AWS
       # attribute when it has changed.  It is therefore suggested to
       # pass an `:if` condition reflecting this:
       #
-      #   validates_confirmation_of :password, :if => :password_changed?
+      #     validates_confirmation_of :password, :if => :password_changed?
       #
       # ### Multi-Valued Attributes
       #
@@ -266,6 +265,7 @@ module AWS
       #     `:message` is "doesn't match confirmation".
       #   @option options [Symbol] :on (:save) When this validation is run.
       #     Valid values include:
+      #
       #     * `:save`
       #     * `:create`
       #     * `:update`
@@ -295,15 +295,15 @@ module AWS
       #
       # You can validate there are a certain number of values:
       #
-      #   validates_count_of :parents, :exactly => 2
+      #     validates_count_of :parents, :exactly => 2
       #
       # You can also specify a range:
       #
-      #   validates_count_of :tags, :within => (2..10)
+      #     validates_count_of :tags, :within => (2..10)
       #
       # You can also specify min and max value seperately:
       #
-      #   validates_count_of :tags, :minimum => 2, :maximum => 10
+      #     validates_count_of :tags, :minimum => 2, :maximum => 10
       #
       # ### `nil` Values
       #
@@ -368,17 +368,17 @@ module AWS
 
       # Adds a block validator that is called during record validation.
       #
-      #   class ExampleClass < AWS::Record::Model
+      #     class ExampleClass < AWS::Record::Model
       #
-      #     string_attr :name
+      #       string_attr :name
       #
-      #     validates_each(:name) do |record, attribute_name, value|
-      #       if value == 'John Doe'
-      #         record.errors.add(attr_name, 'may not be an alias')
+      #       validates_each(:name) do |record, attribute_name, value|
+      #         if value == 'John Doe'
+      #           record.errors.add(attr_name, 'may not be an alias')
+      #         end
       #       end
-      #     end
       #
-      #   end
+      #     end
       #
       # @overload validates_each(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
@@ -409,20 +409,17 @@ module AWS
       # Validates that the attribute value is not included in the given
       # enumerable.
       #
-      #   validates_exlusion_of :username, :in => %w(admin administrator)
+      #     validates_exlusion_of :username, :in => %w(admin administrator)
       #
       # ### Multi-Valued Attributes
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes:
       #
-      #   class Product < AWS::Record::Model
-      #
-      #     string_attr :tags, :set => true
-      #
-      #     validates_exlusion_of :tags, :in => four_letter_words
-      #
-      #   end
+      #     class Product < AWS::Record::Model
+      #       string_attr :tags, :set => true
+      #       validates_exlusion_of :tags, :in => four_letter_words
+      #     end
       #
       # @overload validates_exclusion_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
@@ -453,24 +450,21 @@ module AWS
 
       # Validates the attribute's value matches the given regular exression.
       #
-      #   validates_format_of :year, :with => /^\d{4}$/
+      #     validates_format_of :year, :with => /^\d{4}$/
       #
       # You can also perform a not-match using `:without` instead of `:with`.
       #
-      #   validates_format_of :username, :without => /\d/
+      #     validates_format_of :username, :without => /\d/
       #
       # ### Multi-Valued Attributes
       #
       # You may use this with multi-valued attributes the same way you use it
       # with single-valued attributes:
       #
-      #   class Product < AWS::Record::Model
-      #
-      #     string_attr :tags, :set => true
-      #
-      #     validates_format_of :tags, :with => /^\w{2,10}$/
-      #
-      #   end
+      #     class Product < AWS::Record::Model
+      #       string_attr :tags, :set => true
+      #       validates_format_of :tags, :with => /^\w{2,10}$/
+      #     end
       #
       # @overload validates_format_of(*attributes, options = {}, &block)
       #   @param attributes A list of attribute names to validate.
@@ -505,9 +499,9 @@ module AWS
       # Validates that the attribute value is included in the given enumerable
       # object.
       #
-      #   class MultipleChoiceAnswer < AWS::Record::Model
-      #     validates_inclusion_of :letter, :in => %w(a b c d e)
-      #   end
+      #     class MultipleChoiceAnswer < AWS::Record::Model
+      #       validates_inclusion_of :letter, :in => %w(a b c d e)
+      #     end
       #
       # ### Multi-Valued Attributes
       #
@@ -543,7 +537,7 @@ module AWS
 
       # Validates the attribute values are of a specified length.
       #
-      #   validates_lenth_of :username, :within => 3..25
+      #     validates_lenth_of :username, :within => 3..25
       #
       # ### Length vs Count
       #
@@ -606,7 +600,7 @@ module AWS
 
       # Validates the attribute has a numeric value.
       #
-      #   validates_numericality_of :age, :only_integer => true
+      #     validates_numericality_of :age, :only_integer => true
       #
       # ### Multi-Valued Attributes
       #

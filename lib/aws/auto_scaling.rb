@@ -31,39 +31,39 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::AutoScaling interface:
   #
-  #   auto_scaling = AWS::AutoScaling.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     auto_scaling = AWS::AutoScaling.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Launch Configurations
   #
   # You need to create a launch configuration before you can create
   # an Auto Scaling Group.
   #
-  #   # needs a name, image id, and instance type
-  #   launch_config = auto_scaling.launch_configurations.create(
-  #     'launch-config-name', 'ami-12345', 'm1.small')
+  #     # needs a name, image id, and instance type
+  #     launch_config = auto_scaling.launch_configurations.create(
+  #       'launch-config-name', 'ami-12345', 'm1.small')
   #
   # If you have previously created a launch configuration you can
   # reference using the {LaunchConfigurationCollection}.
   #
-  #   launch_config = auto_scaling.launch_configurations['launch-config-name']
+  #     launch_config = auto_scaling.launch_configurations['launch-config-name']
   #
   # # Auto Scaling Groups
   #
   # Given a launch configuration, you can now create an Auto Scaling {Group}.
   #
-  #   group = auto_scaling.groups.create('group-name',
-  #     :launch_configuration => launch_config,
-  #     :availability_zones => %w(us-west-2a us-west-2b),
-  #     :min_size => 1,
-  #     :max_size => 4)
+  #     group = auto_scaling.groups.create('group-name',
+  #       :launch_configuration => launch_config,
+  #       :availability_zones => %w(us-west-2a us-west-2b),
+  #       :min_size => 1,
+  #       :max_size => 4)
   #
   # @!attribute [r] client
   #   @return [Client] the low-level AutoScaling client object

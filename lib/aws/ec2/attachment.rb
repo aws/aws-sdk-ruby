@@ -17,17 +17,17 @@ module AWS
     # Represents an attachment of an Amazon EBS volume to an instance.
     #
     # @example Create an empty 15GiB volume and attach it to an instance
-    #  volume = ec2.volumes.create(:size => 15,
-    #                              :availability_zone => "us-west-2a")
-    #  attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
-    #  sleep 1 until attachment.status != :attaching
+    #   volume = ec2.volumes.create(:size => 15,
+    #                               :availability_zone => "us-west-2a")
+    #   attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
+    #   sleep 1 until attachment.status != :attaching
     #
     # @example Remove all attachments from a volume and then delete it
-    #  volume.attachments.each do |attachment|
-    #    attachment.delete(:force => true)
-    #  end
-    #  sleep 1 until volume.status == :available
-    #  volume.delete
+    #   volume.attachments.each do |attachment|
+    #     attachment.delete(:force => true)
+    #   end
+    #   sleep 1 until volume.status == :available
+    #   volume.delete
     class Attachment < Resource
 
       # @private
@@ -50,10 +50,11 @@ module AWS
 
       # @overload status
       # Returns the attachment status.  Possible values are:
-      # * `:attaching`
-      # * `:attached`
-      # * `:detaching`
-      # * `:detached`
+      #
+      #   * `:attaching`
+      #   * `:attached`
+      #   * `:detaching`
+      #   * `:detached`
       # @return [Symbol] Returns the attachment status.
       attribute :status, :to_sym => true
 

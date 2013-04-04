@@ -37,7 +37,7 @@ module AWS
 
       # Creates an AWS account alias.
       #
-      #   iam.account_aliases.create('myaccountalias')
+      #     iam.account_aliases.create('myaccountalias')
       #
       # For information about account alias restrictions and usage,
       # see http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
@@ -51,7 +51,7 @@ module AWS
 
       # Delete an AWS account alias.
       #
-      #   iam.account_aliases.delete('myaccountalias')
+      #     iam.account_aliases.delete('myaccountalias')
       #
       # @param [String] account_alias The account alias to delete.
       # @return [nil]

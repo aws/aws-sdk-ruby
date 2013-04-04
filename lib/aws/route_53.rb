@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::Route53 interface:
   #
-  #   r53 = AWS::Route53.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     r53 = AWS::Route53.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
@@ -48,12 +48,12 @@ module AWS
   # {AWS::Route53::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   r53 = AWS::Route53.new
+  #       r53 = AWS::Route53.new
   #
-  #   resp = r53.client.list_hosted_zones
-  #   resp[:hosted_zones].each do |zone|
-  #     # ...
-  #   end
+  #     resp = r53.client.list_hosted_zones
+  #     resp[:hosted_zones].each do |zone|
+  #       # ...
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #

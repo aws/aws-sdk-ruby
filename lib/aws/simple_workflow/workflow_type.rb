@@ -21,7 +21,7 @@ module AWS
     # To register a workflow type you should use the #workflow_types method
     # on the domain:
     #
-    #   domain.workflow_types.register('name', 'version', { ... })
+    #     domain.workflow_types.register('name', 'version', { ... })
     #
     # See {WorkflowTypeCollection#register} for a complete list of options.
     #
@@ -35,7 +35,7 @@ module AWS
     #
     # You can use these to deprecate a workflow type:
     #
-    #   domain.workflow_types['name','version'].deprecate
+    #     domain.workflow_types['name','version'].deprecate
     #
     # @attr_reader [Time] creation_date When the workflow type was registered.
     #
@@ -133,6 +133,8 @@ module AWS
       end
 
       # Returns a count of workflow executions of this workflow type.
+      #
+      # @example
       #
       #   domain.workflow_types['name','version'].count
       #

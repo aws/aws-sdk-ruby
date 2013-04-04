@@ -16,16 +16,16 @@ module AWS
 
     # # Modify resource record set
     #
-    #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
-    #   rrset = rrsets['foo.example.com.', 'A']
-    #   rrset.ttl = 3600
-    #   rrset.update
+    #     rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
+    #     rrset = rrsets['foo.example.com.', 'A']
+    #     rrset.ttl = 3600
+    #     rrset.update
     #
     # # Delete existing resource record set
     #
-    #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
-    #   rrset = rrsets['foo.example.com.', 'A']
-    #   rrset.delete
+    #     rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
+    #     rrset = rrsets['foo.example.com.', 'A']
+    #     rrset.delete
     #
     # @attr_reader [Hash] alias_target
     #

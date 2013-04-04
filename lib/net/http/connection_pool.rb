@@ -19,12 +19,14 @@ require 'logger'
 # A wrapper around Net::HTTP that provides a manged pool of persistant HTTP
 # connections.
 #
-#   pool = Net::HTTP::ConnectionPool.new
-#   connection = pool.connection_for('domain.com')
-#   connection.request(Net::HTTP::Get.new('/')) do |resp|
-#     # Connection#request yields Net::HTTPResponse objects
-#     puts resp.body
-#   end
+# ```
+# pool = Net::HTTP::ConnectionPool.new
+# connection = pool.connection_for('domain.com')
+# connection.request(Net::HTTP::Get.new('/')) do |resp|
+#   # Connection#request yields Net::HTTPResponse objects
+#   puts resp.body
+# end
+# ```
 #
 # @private
 class Net::HTTP::ConnectionPool
@@ -76,15 +78,15 @@ class Net::HTTP::ConnectionPool
 
   # Requests a connection object from the connection pool.
   #
-  #   connection = pool.connection_for('domain.com')
-  #   connection.request(Net::HTTP::Get.new('/index.html')) {|resp|}
-  #   connection.request(Net::HTTP::Get.new('/about.html')) {|resp|}
-  #
-  #   # same thing in block form
-  #   pool.connection_for('domain.com') do |connection|
+  #     connection = pool.connection_for('domain.com')
   #     connection.request(Net::HTTP::Get.new('/index.html')) {|resp|}
   #     connection.request(Net::HTTP::Get.new('/about.html')) {|resp|}
-  #   end
+  #
+  #     # same thing in block form
+  #     pool.connection_for('domain.com') do |connection|
+  #       connection.request(Net::HTTP::Get.new('/index.html')) {|resp|}
+  #       connection.request(Net::HTTP::Get.new('/about.html')) {|resp|}
+  #     end
   #
   # Because the pool manages HTTP sessions you do not have to
   # worry about closing a connection or returning a connection

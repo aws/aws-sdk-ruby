@@ -33,12 +33,12 @@ module AWS
       # You must specify an Auto Scaling group.  This can be implicit
       # or explicit:
       #
-      #   # given explicitly
-      #   auto_scaling.scheduled_actions.create('action-name', :group => 'group-name')
+      #     # given explicitly
+      #     auto_scaling.scheduled_actions.create('action-name', :group => 'group-name')
       #
-      #   # implied by the group
-      #   group = auto_scaling.groups.first
-      #   group.scheduled_actions.create('action-name')
+      #     # implied by the group
+      #     group = auto_scaling.groups.first
+      #     group.scheduled_actions.create('action-name')
       #
       # @param [String] name
       #
@@ -86,18 +86,18 @@ module AWS
       # Returns a new {ScheduledActionCollection} filtered
       # by the given options.
       #
-      #   auto_scaling.scheduled_actions.filter(:end_time => Time.now).each do |a|
-      #      # ...
-      #   end
+      #     auto_scaling.scheduled_actions.filter(:end_time => Time.now).each do |a|
+      #        # ...
+      #     end
       #
       # You can chain filter calls:
       #
-      #   actions = auto_scaling.scheduled_actions.
-      #      filter(:group => 'auto-scaling-group-name').
-      #      filter(:start_time => Time.now - 3600).
-      #      filter(:end_time => Time.now)
+      #     actions = auto_scaling.scheduled_actions.
+      #        filter(:group => 'auto-scaling-group-name').
+      #        filter(:start_time => Time.now - 3600).
+      #        filter(:end_time => Time.now)
       #
-      #   actions.each {|scheduled_action| ... }
+      #     actions.each {|scheduled_action| ... }
       #
       # @param [Hash] filters
       #

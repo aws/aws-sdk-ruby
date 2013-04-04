@@ -19,7 +19,7 @@ module AWS
     # To register an activity type you should use the #activity_types method
     # on the domain:
     #
-    #   domain.activity_types.register('name', 'version', { ... })
+    #     domain.activity_types.register('name', 'version', { ... })
     #
     # See {ActivityTypeCollection#register} for a complete list of options.
     #
@@ -33,7 +33,7 @@ module AWS
     #
     # You can use these to deprecate an activity type:
     #
-    #   domain.activity_types['name','version'].deprecate
+    #     domain.activity_types['name','version'].deprecate
     #
     # @attr_reader [Time] creation_date When the workflow type was registered.
     #

@@ -18,12 +18,10 @@ module AWS
     #
     # You can get stack events from a {Stack} object.
     #
-    #   stack = cfm.stacks['stack-name']
-    #   stack.events.each do |event|
-    #     puts "#{event.timestamp}: #{event.resource_status}"
-    #   end
-    #
-    #
+    #     stack = cfm.stacks['stack-name']
+    #     stack.events.each do |event|
+    #       puts "#{event.timestamp}: #{event.resource_status}"
+    #     end
     class StackEvent
 
       # @private

@@ -82,11 +82,11 @@ module AWS
       # Overide this method is subclasses of Resource.  This method should
       # return an array of identifying key/value pairs.
       #
-      #   # @private
-      #   protected
-      #   def resource_identifiers
-      #     [[:user_name, name]]
-      #   end
+      #     # @private
+      #     protected
+      #     def resource_identifiers
+      #       [[:user_name, name]]
+      #     end
       #
       # @private
       protected

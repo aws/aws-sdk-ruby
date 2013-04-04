@@ -163,9 +163,9 @@ module AWS
       # Auto Scaling group.  You can use this collection to further refine
       # the instances you are interested in:
       #
-      #   group.ec2_instances.filter('availability-zone', 'us-west-2a').each do |i|
-      #     puts instance.id
-      #   end
+      #     group.ec2_instances.filter('availability-zone', 'us-west-2a').each do |i|
+      #       puts instance.id
+      #     end
       #
       # @return [EC2::InstanceCollection] Returns an instance collection
       #   (without making a request) that represents the instances
@@ -223,8 +223,8 @@ module AWS
 
       # Suspends processes for this Auto Scaling group.
       #
-      #   # suspend two processes by name
-      #   auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
+      #     # suspend two processes by name
+      #     auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
       #
       # @param [Array<String>] processes A list of process to suspend.
       #
@@ -246,8 +246,8 @@ module AWS
 
       # Resumes processes for this Auto Scaling group.
       #
-      #   # resume two processes by name
-      #   auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
+      #     # resume two processes by name
+      #     auto_scaling_group.suspend_processes 'Launch', 'AZRebalance'
       #
       # @param [Array<String>] processes A list of process to resume.
       #
@@ -333,19 +333,18 @@ module AWS
 
       # Deletes specific tags from this Auto Scaling group.
       #
-      #   group.delete_tags([
-      #     { :key => 'role', :value => 'webserver' },
-      #   ])
+      #     group.delete_tags([
+      #       { :key => 'role', :value => 'webserver' },
+      #     ])
       #
       # You may also pass {Tag} objects.
       #
       # @param [Array<Tag,Hash>] tags An array of {Tag} objects or
       #   tag hashes to remove. If you pass hashes they should have
       #   the following keys:
-      #
-      #   * `:key`
-      #   * `:value`
-      #   * `:propagate_at_launch`
+      #     * `:key`
+      #     * `:value`
+      #     * `:propagate_at_launch`
       #
       # @return [nil]
       #

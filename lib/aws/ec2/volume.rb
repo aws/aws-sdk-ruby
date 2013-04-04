@@ -17,27 +17,27 @@ module AWS
     # Represents an Amazon EBS volume.
     #
     # @example Create an empty 15GiB volume and attach it to an instance
-    #  volume = ec2.volumes.create(:size => 15,
-    #                              :availability_zone => "us-west-2a")
-    #  attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
-    #  sleep 1 until attachment.status != :attaching
+    #   volume = ec2.volumes.create(:size => 15,
+    #                               :availability_zone => "us-west-2a")
+    #   attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
+    #   sleep 1 until attachment.status != :attaching
     #
     # @example Remove all attachments from a volume and then delete it
-    #  volume.attachments.each do |attachment|
-    #    attachment.delete(:force => true)
-    #  end
-    #  sleep 1 until volume.status == :available
-    #  volume.delete
+    #   volume.attachments.each do |attachment|
+    #     attachment.delete(:force => true)
+    #   end
+    #   sleep 1 until volume.status == :available
+    #   volume.delete
     #
     # @attr_reader [Symbol] status The status of the volume.
     #   Possible values:
     #
-    #   * `:creating`
-    #   * `:available`
-    #   * `:in_use`
-    #   * `:deleting`
-    #   * `:deleted`
-    #   * `:error`
+    #     * `:creating`
+    #     * `:available`
+    #     * `:in_use`
+    #     * `:deleting`
+    #     * `:deleted`
+    #     * `:error`
     #
     # @attr_reader [Integer] size The size of the volume in
     #   gigabytes.

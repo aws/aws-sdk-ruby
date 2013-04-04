@@ -31,15 +31,15 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::Route53 interface:
   #
-  #   cw = AWS::CloudWatch.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     cw = AWS::CloudWatch.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
@@ -48,12 +48,12 @@ module AWS
   # {AWS::CloudWatch::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   cw = AWS::CloudWatch.new
+  #     cw = AWS::CloudWatch.new
   #
-  #   resp = cw.client.describe_alarms
-  #   resp[:metric_alarms].each do |alarm|
-  #     puts alarm[:alarm_name]
-  #   end
+  #     resp = cw.client.describe_alarms
+  #     resp[:metric_alarms].each do |alarm|
+  #       puts alarm[:alarm_name]
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #
@@ -78,16 +78,16 @@ module AWS
     # Puts data for a metric.  The metric is created if it does not already
     # exist.
     #
-    #   cw.put_metric_data(
-    #     :namespace => 'test/cli',
-    #     :metric_data => [
-    #       { :metric_name => 'sample', :value => 1 },
-    #       { :metric_name => 'sample', :value => 2 },
-    #       { :metric_name => 'sample', :value => 3 },
-    #       { :metric_name => 'sample', :value => 4 },
-    #       { :metric_name => 'sample', :value => 5 },
-    #     ]
-    #   )
+    #     cw.put_metric_data(
+    #       :namespace => 'test/cli',
+    #       :metric_data => [
+    #         { :metric_name => 'sample', :value => 1 },
+    #         { :metric_name => 'sample', :value => 2 },
+    #         { :metric_name => 'sample', :value => 3 },
+    #         { :metric_name => 'sample', :value => 4 },
+    #         { :metric_name => 'sample', :value => 5 },
+    #       ]
+    #     )
     #
     # @param [Hash] options
     # @see Client#put_metric_data

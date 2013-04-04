@@ -43,13 +43,13 @@ module AWS
         #
         # Finding `:all` returns an enumerable scope object
         #
-        #  People.find(:all, :limit => 10).each do |person|
-        #    puts person.name
-        #  end
+        #     People.find(:all, :limit => 10).each do |person|
+        #       puts person.name
+        #     end
         #
         # Finding `:first` returns a single record (or nil)
         #
-        #  boss = People.find(:first)
+        #     boss = People.find(:first)
         #
         # Find accepts a hash of find modifiers (`:shard` and `:limit`).
         # You can also choose to omit these modifiers and
@@ -57,9 +57,9 @@ module AWS
         # example only one request is made to SimpleDB (when #each is
         # called)
         #
-        #   people = People.find(:all, :limit => 10)
+        #     people = People.find(:all, :limit => 10)
         #
-        #   people = people.limit(10).find(:all)
+        #     people = people.limit(10).find(:all)
         #
         # @overload find(id)
         #   @param id The record to find, raises an exception if the record is
@@ -80,9 +80,9 @@ module AWS
         # Returns a chainable scope object that restricts further scopes to a
         # particular table.
         #
-        #  Book.shard('books-2').each do |book|
-        #    # ...
-        #  end
+        #     Book.shard('books-2').each do |book|
+        #       # ...
+        #     end
         #
         # @param [String] shard_name
         # @return [Scope] Returns a scope for restricting the table searched.
@@ -93,16 +93,16 @@ module AWS
 
         # Returns an enumerable scope object represents all records.
         #
-        #   Book.all.each do |book|
-        #     # ...
-        #   end
+        #     Book.all.each do |book|
+        #       # ...
+        #     end
         #
         # This method is equivalent to `find(:all)`, and therefore you can also
         # pass aditional options.
         #
-        #   Book.all(:where => { :author' => 'me' }).each do |my_book|
-        #     # ...
-        #   end
+        #     Book.all(:where => { :author' => 'me' }).each do |my_book|
+        #       # ...
+        #     end
         #
         # @return [Scope] Returns an enumerable scope object.
         #
@@ -117,24 +117,24 @@ module AWS
 
         # Counts records Amazon DynamoDB.
         #
-        #   class Product < AWS::Record::HashModel
-        #   end
+        #     class Product < AWS::Record::HashModel
+        #     end
         #
-        #   # returns the count of records in the 'Product' table
-        #   Product.count
+        #     # returns the count of records in the 'Product' table
+        #     Product.count
         #
         # You can specify the table via #shard
         #
-        #   # returns the count of records in the 'products-1' table
-        #   Product.shard('products-1').count
+        #     # returns the count of records in the 'products-1' table
+        #     Product.shard('products-1').count
         #
         # You can also specify the shard as an option to #count.
         #
-        #   Product.count(:shard => 'table-name')
+        #     Product.count(:shard => 'table-name')
         #
         # Chaining #count with #limit has no effect on the count.
         #
-        #   Product.limit(10).count # same as Product.count, limit ignored
+        #     Product.limit(10).count # same as Product.count, limit ignored
         #
         # @param [Hash] options
         #
@@ -156,11 +156,11 @@ module AWS
         # The maximum number of records to return.  By default, all records
         # matching the where conditions will be returned from a find.
         #
-        #   People.limit(10).each {|person| ... }
+        #     People.limit(10).each {|person| ... }
         #
         # Limit can be chained with other scope modifiers:
         #
-        #   People.where(:age => 40).limit(10).each {|person| ... }
+        #     People.where(:age => 40).limit(10).each {|person| ... }
         #
         def limit limit
           new_scope.limit(limit)

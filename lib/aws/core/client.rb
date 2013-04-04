@@ -412,8 +412,8 @@ module AWS
 
       # Given an error code string, this method will return an error class.
       #
-      #   AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
-      #   #=> AWS::EC2::Errors::InvalidInstanceId
+      #     AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
+      #     #=> AWS::EC2::Errors::InvalidInstanceId
       #
       # @param [String] error_code The error code string as returned by
       #   the service.  If this class contains periods, they will be
@@ -427,8 +427,8 @@ module AWS
 
       # Returns the ::Errors module for the current client.
       #
-      #   AWS::S3::Client.new.errors_module
-      #   #=> AWS::S3::Errors
+      #     AWS::S3::Client.new.errors_module
+      #     #=> AWS::S3::Errors
       #
       # @return [Module]
       #

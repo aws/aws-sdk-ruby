@@ -44,13 +44,13 @@ module AWS
 
       # Returns the type with the given name and version.
       #
-      #   # get a workflow type
-      #   domain.workflow_types['name','version']
-      #   domain.workflow_types.at('name','version')
+      #     # get a workflow type
+      #     domain.workflow_types['name','version']
+      #     domain.workflow_types.at('name','version')
       #
-      #   # get an activity type
-      #   domain.activity_types['name','version']
-      #   domain.activity_types.at('name','version')
+      #     # get an activity type
+      #     domain.activity_types['name','version']
+      #     domain.activity_types.at('name','version')
       #
       # @param [String] name Name of the type.
       #

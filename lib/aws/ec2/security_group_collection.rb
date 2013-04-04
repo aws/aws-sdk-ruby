@@ -72,17 +72,17 @@ module AWS
       # treated as an OR condition.  To return security groups named
       # 'test' or 'fake':
       #
-      #   security_groups.filter('group-name', 'test', 'fake')
+      #     security_groups.filter('group-name', 'test', 'fake')
       #
       # If you want to and conditions together you need to chain calls to
       # filter.  To limit security groups to those with a name like
       # 'test' and like 'ruby':
       #
-      #   security_groups.
-      #     filter('group-name', '*test*').
-      #     filter('group-name', '*ruby*').each do |group|
-      #     #...
-      #   end
+      #     security_groups.
+      #       filter('group-name', '*test*').
+      #       filter('group-name', '*ruby*').each do |group|
+      #       #...
+      #     end
       #
       # Note that * matches one or more characters and ? matches any one
       # character.
@@ -110,8 +110,6 @@ module AWS
       #
       # @return [SecurityGroupCollection] A new collection that represents
       #   a subset of the security groups associated with this account.
-
-      # Yields once for each security group in this account.
       #
       # @yield [group]
       # @yieldparam [SecurityGroup] group

@@ -16,29 +16,31 @@ module AWS
 
     # Provides a way to track changes in your records.
     #
-    #   my_book = Book['bookid']
+    #     my_book = Book['bookid']
     #
-    #   my_book.changed? #=> false
-    #   my_book.title #=> "My Book"
-    #   my_book.title = "My Awesome Book"
-    #   my_book.changed? #=> true
+    #     my_book.changed? #=> false
+    #     my_book.title #=> "My Book"
+    #     my_book.title = "My Awesome Book"
+    #     my_book.changed? #=> true
+    #
+    #     my_book = Book['bookid']
     #
     # You can inspect further and get a list of changed attributes
     #
-    #   my_book.changed #=> ['title']
+    #     my_book.changed #=> ['title']
     #
     # Or you can get a more detailed description of the changes.  {#changes}
     # returns a hash of changed attributes (keys) with their old and new
     # values.
     #
-    #   my_book.changes
-    #   #=> { 'title' => ['My Book', 'My Awesome Book']
+    #     my_book.changes
+    #     #=> { 'title' => ['My Book', 'My Awesome Book']
     #
     # For every configured attribute you also get a handful of methods
     # for inspecting changes on that attribute.  Given the following
     # attribute:
     #
-    #   string_attr :title
+    #     string_attr :title
     #
     # You can now call any of the following methods:
     #
@@ -50,12 +52,12 @@ module AWS
     #
     # Given the title change from above:
     #
-    #   my_book.title_changed? #=> true
-    #   my_book.title_change #=> ['My Book', 'My Awesome Book']
-    #   my_book.title_was #=> ['My Book']
+    #     my_book.title_changed? #=> true
+    #     my_book.title_change #=> ['My Book', 'My Awesome Book']
+    #     my_book.title_was #=> ['My Book']
     #
-    #   my_book.reset_title!
-    #   my_book.title #=> 'My Book'
+    #     my_book.reset_title!
+    #     my_book.title #=> 'My Book'
     #
     # ## In-Place Editing
     #
@@ -64,10 +66,10 @@ module AWS
     # use functions against the value that modify it (like gsub!)
     # you must notify your record about the coming change.
     #
-    #   my_book.title #=> 'My Book'
-    #   my_book.title_will_change!
-    #   my_book.title.gsub!(/My/, 'Your')
-    #   my_book.title_change #=> ['My Book', 'Your Book']
+    #     my_book.title #=> 'My Book'
+    #     my_book.title_will_change!
+    #     my_book.title.gsub!(/My/, 'Your')
+    #     my_book.title_change #=> ['My Book', 'Your Book']
     #
     # ## Partial Updates
     #
@@ -79,17 +81,17 @@ module AWS
 
       # Returns true if this model has unsaved changes.
       #
-      #   b = Book.new(:title => 'My Book')
-      #   b.changed?
-      #   #=> true
+      #     b = Book.new(:title => 'My Book')
+      #     b.changed?
+      #     #=> true
       #
       # New objects and objects freshly loaded should not have any changes:
       #
-      #   b = Book.new
-      #   b.changed?      #=> false
+      #     b = Book.new
+      #     b.changed?      #=> false
       #
-      #   b = Book.first
-      #   b.changed?      #=> false
+      #     b = Book.first
+      #     b.changed?      #=> false
       #
       # @return [Boolean] Returns true if any of the attributes have
       #   unsaved changes.
@@ -99,9 +101,9 @@ module AWS
 
       # Returns an array of attribute names that have changes.
       #
-      #   book.changed #=> []
-      #   person.title = 'New Title'
-      #   book.changed #=> ['title']
+      #     book.changed #=> []
+      #     person.title = 'New Title'
+      #     book.changed #=> ['title']
       #
       # @return [Array] Returns an array of attribute names that have
       #   unsaved changes.
@@ -113,9 +115,9 @@ module AWS
       # values are two value arrays.  The first value is the previous
       # attribute value, the second is the current attribute value.
       #
-      #   book.title = 'New Title'
-      #   book.changes
-      #   #=> { 'title' => ['Old Title', 'New Title'] }
+      #     book.title = 'New Title'
+      #     book.changes
+      #     #=> { 'title' => ['Old Title', 'New Title'] }
       #
       # @return [Hash] Returns a hash of attribute changes.
       def changes
@@ -130,8 +132,8 @@ module AWS
       # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_changed?
-      #   book.attribute_changed?(:title)
+      #     book.title_changed?
+      #     book.attribute_changed?(:title)
       #
       # @param [String] attribute_name Name of the attribute to check
       #   for changes.
@@ -150,8 +152,8 @@ module AWS
       # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_change
-      #   book.attribute_change(:title)
+      #     book.title_change
+      #     book.attribute_change(:title)
       #
       # @example Asking for changes on an unchanged attribute
       #
@@ -191,8 +193,8 @@ module AWS
       # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_was
-      #   book.attribute_was(:title)
+      #      book.title_was
+      #      book.attribute_was(:title)
       #
       # @example Returns the previous value for changed attributes:
       #

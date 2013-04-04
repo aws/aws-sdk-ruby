@@ -16,23 +16,23 @@ module AWS
     # This is the primary interface for uploading X.509 signing certificates
     # to an AWS account or an IAM user.
     #
-    #   iam = AWS::IAM.new
+    #     iam = AWS::IAM.new
     #
-    #   # upload a certificate for the AWS account:
-    #   iam.signing_certificates.upload(<<-CERT)
-    #   -----BEGIN CERTIFICATE-----
-    #   MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
-    #   ......
-    #   Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
-    #   F9TbdXSWdgMl7E0=
-    #   -----END CERTIFICATE-----
-    #   CERT
+    #     # upload a certificate for the AWS account:
+    #     iam.signing_certificates.upload(<<-CERT)
+    #     -----BEGIN CERTIFICATE-----
+    #     MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
+    #     ......
+    #     Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
+    #     F9TbdXSWdgMl7E0=
+    #     -----END CERTIFICATE-----
+    #     CERT
     #
     # If you want to work with an IAM user's certificates just use the
     # signing certificate interface on a user:
     #
-    #   user = iam.users['someuser']
-    #   user.signing_certificates.upload(cert_body)
+    #     user = iam.users['someuser']
+    #     user.signing_certificates.upload(cert_body)
     #
     class SigningCertificateCollection
 

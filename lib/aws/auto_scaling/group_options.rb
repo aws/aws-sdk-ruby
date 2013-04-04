@@ -64,10 +64,10 @@ module AWS
       # @option options [Array<Hash>] :tags A list of tags to apply launched
       #   instances.  Each tag hash may have the following keys:
       #
-      #   * `:key` - (required,String) The tag name.
-      #   * `:value` - (String) The optional tag value.
-      #   * `:propagate_at_launch` - (Boolean) Whether or not to propagate
-      #     to instances, defaults to true.
+      #     * `:key` - (required,String) The tag name.
+      #     * `:value` - (String) The optional tag value.
+      #     * `:propagate_at_launch` - (Boolean) Whether or not to propagate
+      #       to instances, defaults to true.
       #
       # @option options [Array<EC2::Subnet>,Array<String>] :subnets
       #   A list of subnet identifiers of Amazon Virtual Private Clouds

@@ -141,14 +141,14 @@ module AWS
       # Returns a stack resource collection that enumerates all resources
       # for this stack.
       #
-      #   stack.resources.each do |resource|
-      #     puts "#{resource.resource_type}: #{resource.physical_resource_id}"
-      #   end
+      #     stack.resources.each do |resource|
+      #       puts "#{resource.resource_type}: #{resource.physical_resource_id}"
+      #     end
       #
       # If you want a specific resource and you know its logical resource
       # id, you can use this collection to return a reference to it.
       #
-      #   resource = stack.resources['logical-resource-id']
+      #     resource = stack.resources['logical-resource-id']
       #
       # @return [StackResourceCollection]
       #
@@ -178,11 +178,11 @@ module AWS
       #   A new stack template.  This may be provided in a number of formats
       #   including:
       #
-      #   * a String, containing the template as a JSON document.
-      #   * a URL String pointing to the document in S3.
-      #   * a URI object pointing to the document in S3.
-      #   * an {S3::S3Object} which contains the template.
-      #   * an Object which responds to #to_json and returns the template.
+      #     * a String, containing the template as a JSON document.
+      #     * a URL String pointing to the document in S3.
+      #     * a URI object pointing to the document in S3.
+      #     * an {S3::S3Object} which contains the template.
+      #     * an Object which responds to #to_json and returns the template.
       #
       # @option options [Hash] :parameters A hash that specifies the
       #   input parameters of the new stack.
@@ -193,11 +193,11 @@ module AWS
       #   parameter; otherwise, this action returns an
       #   InsufficientCapabilities error. IAM resources are the following:
       #
-      #   * AWS::IAM::AccessKey
-      #   * AWS::IAM::Group
-      #   * AWS::IAM::Policy
-      #   * AWS::IAM::User
-      #   * AWS::IAM::UserToGroupAddition
+      #     * AWS::IAM::AccessKey
+      #     * AWS::IAM::Group
+      #     * AWS::IAM::Policy
+      #     * AWS::IAM::User
+      #     * AWS::IAM::UserToGroupAddition
       #
       # @return [nil]
       #

@@ -29,25 +29,25 @@ module AWS
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the IAM interface:
   #
-  #   iam = AWS::IAM.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     iam = AWS::IAM.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Account Summary
   #
   # You can get account level information about entity usage and IAM quotas
   # directly from an IAM interface object.
   #
-  #   summary = iam.account_summary
+  #     summary = iam.account_summary
   #
-  #   puts "Num users: #{summary[:users]}"
-  #   puts "Num user quota: #{summary[:users_quota]}"
+  #     puts "Num users: #{summary[:users]}"
+  #     puts "Num user quota: #{summary[:users_quota]}"
   #
   # For a complete list of summary attributes see the {#account_summary} method.
   #
@@ -56,15 +56,15 @@ module AWS
   # Currently IAM only supports a single account alias for each AWS account.
   # You can set the account alias on the IAM interface.
   #
-  #   iam.account_alias = 'myaccountalias'
-  #   iam.account_alias
-  #   #=> 'myaccountalias'
+  #     iam.account_alias = 'myaccountalias'
+  #     iam.account_alias
+  #     #=> 'myaccountalias'
   #
   # You can also remove your account alias:
   #
-  #   iam.remove_account_alias
-  #   iam.account_alias
-  #   #=> nil
+  #     iam.remove_account_alias
+  #     iam.account_alias
+  #     #=> nil
   #
   # # Access Keys
   #
@@ -72,30 +72,30 @@ module AWS
   # This makes it easy to rotate keys if you need to.  You can also
   # deactivate/activate access keys.
   #
-  #   # get your current access key
-  #   old_access_key = iam.access_keys.first
+  #     # get your current access key
+  #     old_access_key = iam.access_keys.first
   #
-  #   # create a new access key
-  #   new_access_key = iam.access_keys.create
-  #   new_access_key.credentials
-  #   #=> { :access_key_id => 'ID', :secret_access_key => 'SECRET' }
+  #     # create a new access key
+  #     new_access_key = iam.access_keys.create
+  #     new_access_key.credentials
+  #     #=> { :access_key_id => 'ID', :secret_access_key => 'SECRET' }
   #
-  #   # go rotate your keys/credentials ...
+  #     # go rotate your keys/credentials ...
   #
-  #   # now disable the old access key
-  #   old_access_key.deactivate!
+  #     # now disable the old access key
+  #     old_access_key.deactivate!
   #
-  #   # go make sure everything still works ...
+  #     # go make sure everything still works ...
   #
-  #   # all done, lets clean up
-  #   old_access_key.delete
+  #     # all done, lets clean up
+  #     old_access_key.delete
   #
   # Users can also have access keys:
   #
-  #   u = iam.users['someuser']
-  #   access_key = u.access_keys.create
-  #   access_key.credentials
-  #   #=> { :access_key_id => 'ID', :secret_access_key => 'SECRET' }
+  #     u = iam.users['someuser']
+  #     access_key = u.access_keys.create
+  #     access_key.credentials
+  #     #=> { :access_key_id => 'ID', :secret_access_key => 'SECRET' }
   #
   # See {AccessKeyCollection} and {AccessKey} for more information about
   # working with access keys.
@@ -105,20 +105,20 @@ module AWS
   # Each AWS account can have multiple users.  Users can be used to easily
   # manage permissions.  Users can also be organized into groups.
   #
-  #   user = iam.users.create('JohnDoe')
-  #   group = iam.groups.create('Developers')
+  #     user = iam.users.create('JohnDoe')
+  #     group = iam.groups.create('Developers')
   #
-  #   # add a user to a group
-  #   user.groups.add(group)
+  #     # add a user to a group
+  #     user.groups.add(group)
   #
-  #   # remove a user from a group
-  #   user.groups.remove(group)
+  #     # remove a user from a group
+  #     user.groups.remove(group)
   #
-  #   # add a user to a group
-  #   group.users.add(user)
+  #     # add a user to a group
+  #     group.users.add(user)
   #
-  #   # remove a user from a group
-  #   group.users.remove(user)
+  #     # remove a user from a group
+  #     group.users.remove(user)
   #
   # See {User}, {UserCollection}, {Group} and {GroupCollection} for more
   # information on how to work with users and groups.
@@ -206,10 +206,10 @@ module AWS
     # Returns a collection that represents the access keys for this
     # AWS account.
     #
-    #   iam = AWS::IAM.new
-    #   iam.access_keys.each do |access_key|
-    #     puts access_key.id
-    #   end
+    #     iam = AWS::IAM.new
+    #     iam.access_keys.each do |access_key|
+    #       puts access_key.id
+    #     end
     #
     # @return [AccessKeyCollection] Returns a collection that represents all
     #   access keys for this AWS account.
@@ -220,10 +220,10 @@ module AWS
     # Returns a collection that represents the signing certificates
     # for this AWS account.
     #
-    #   iam = AWS::IAM.new
-    #   iam.signing_certificates.each do |cert|
-    #     # ...
-    #   end
+    #     iam = AWS::IAM.new
+    #     iam.signing_certificates.each do |cert|
+    #       # ...
+    #     end
     #
     # If you need to access the signing certificates of a specific user,
     # see {User#signing_certificates}.
@@ -244,10 +244,10 @@ module AWS
     # Returns a collection that represents the server certificates
     # for this AWS account.
     #
-    #   iam = AWS::IAM.new
-    #   iam.server_certificates.each do |cert|
-    #     # ...
-    #   end
+    #     iam = AWS::IAM.new
+    #     iam.server_certificates.each do |cert|
+    #       # ...
+    #     end
     #
     # @return [ServerCertificateCollection] Returns a collection that
     #   represents server certificates for this AWS account.
@@ -258,10 +258,10 @@ module AWS
     # Returns a collection that represents the virtual MFA devices
     # that are not assigned to an IAM user.
     #
-    #   iam = AWS::IAM.new
-    #   iam.virtual_mfa_devices.each do |cert|
-    #     # ...
-    #   end
+    #     iam = AWS::IAM.new
+    #     iam.virtual_mfa_devices.each do |cert|
+    #       # ...
+    #     end
     #
     # @return [VirtualMfaDeviceCollection] Returns a collection that
     #   represents the virtual MFA devices that are not assigned to an
@@ -302,36 +302,25 @@ module AWS
     # Retrieves account level information about account entity usage
     # and IAM quotas.  The returned hash contains the following keys:
     #
-    # [`:users`] Number of users for the AWS account
-    #
-    # [`:users_quota`] Maximum users allowed for the AWS account
-    #
-    # [`:groups`] Number of Groups for the AWS account
-    #
-    # [`:groups_quota`] Maximum Groups allowed for the AWS account
-    #
-    # [`:server_certificates`] Number of Server Certificates for the
-    #                          AWS account
-    #
-    # [`:server_certificates_quota`] Maximum Server Certificates
-    #                                allowed for the AWS account
-    #
-    # [`:user_policy_size_quota`] Maximum allowed size for user policy
-    #                             documents (in kilobytes)
-    #
-    # [`:group_policy_size_quota`] Maximum allowed size for Group
-    #                              policy documents (in kilobyes)
-    #
-    # [`:groups_per_user_quota`] Maximum number of groups a user can
-    #                            belong to
-    #
-    # [`:signing_certificates_per_user_quota`] Maximum number of X509
-    #                                          certificates allowed
-    #                                          for a user
-    #
-    # [`:access_keys_per_user_quota`] Maximum number of access keys
-    #                                 that can be created per user
-    #
+    # * `:users` - Number of users for the AWS account
+    # * `:users_quota` - Maximum users allowed for the AWS account
+    # * `:groups` - Number of Groups for the AWS account
+    # * `:groups_quota` - Maximum Groups allowed for the AWS account
+    # * `:server_certificates` - Number of Server Certificates for the
+    #   AWS account
+    # * `:server_certificates_quota` - Maximum Server Certificates
+    #   allowed for the AWS account
+    # * `:user_policy_size_quota` - Maximum allowed size for user policy
+    #   documents (in kilobytes)
+    # * `:group_policy_size_quota` - Maximum allowed size for Group
+    #   policy documents (in kilobyes)
+    # * `:groups_per_user_quota` - Maximum number of groups a user can
+    #   belong to
+    # * `:signing_certificates_per_user_quota` - Maximum number of X509
+    #   certificates allowed
+    #   for a user
+    # * `:access_keys_per_user_quota` - Maximum number of access keys
+    #   that can be created per user
     # @return [Hash]
     def account_summary
       client.get_account_summary.data[:summary_map].inject({}) do |h,(k,v)|
@@ -347,10 +336,10 @@ module AWS
     # To change a user password, you must be using credentials from the
     # user you want to change:
     #
-    #   # pass in a key pair generated for the user you want to change
-    #   # the password for
-    #   iam = AWS::IAM.new(:access_key_id => '...', :secret_access_key => '...)
-    #   iam.change_password('old-password', 'new-password')
+    #     # pass in a key pair generated for the user you want to change
+    #     # the password for
+    #     iam = AWS::IAM.new(:access_key_id => '...', :secret_access_key => '...)
+    #     iam.change_password('old-password', 'new-password')
     #
     # @param [String] old_password
     #
@@ -389,11 +378,11 @@ module AWS
     # Returns the account password policy details as a hash.  This method
     # returns nil if no password policy has been set for this account.
     #
-    #   # set the policy
-    #   iam.update_account_password_policy :minimum_password_length => 8
+    #     # set the policy
+    #     iam.update_account_password_policy :minimum_password_length => 8
     #
-    #   iam.account_password_policy
-    #   #=> {:require_symbols=>false, :require_numbers=>false, :require_uppercase_characters=>false, :require_lowercase_characters=>false, :minimum_password_length=>8}
+    #     iam.account_password_policy
+    #     #=> {:require_symbols=>false, :require_numbers=>false, :require_uppercase_characters=>false, :require_lowercase_characters=>false, :minimum_password_length=>8}
     #
     # @return [Hash,nil]
     def account_password_policy

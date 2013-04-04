@@ -66,7 +66,7 @@ module AWS
 
       # Useful for determining if a policy with the given name exists:
       #
-      #   load_balancer.policies['my-policy-name'].exists?  # => true/false
+      #     load_balancer.policies['my-policy-name'].exists?  # => true/false
       #
       # @return [Boolean] Returns true this policy's load balancer has a
       #   policy with this name.

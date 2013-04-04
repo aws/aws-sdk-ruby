@@ -18,19 +18,19 @@ module AWS
     #
     # Allows you to enumerate export tasks.
     #
-    #   ec2.export_tasks.each do |task|
-    #     # yield ExportTask objects
-    #   end
+    #     ec2.export_tasks.each do |task|
+    #       # yield ExportTask objects
+    #     end
     #
     # You can also get an export task by id
     #
-    #   task = ec2.export_tasks['export-task-id']
+    #     task = ec2.export_tasks['export-task-id']
     #
     # # Creating Export Tasks
     #
     # To create an export task you start with the {Instance}:
     #
-    #   task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
+    #     task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
     #
     # See {Instance#export_to_s3} for more options.
     #

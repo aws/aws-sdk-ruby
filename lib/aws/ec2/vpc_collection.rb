@@ -23,7 +23,7 @@ module AWS
       # can create uses a /28 netmask (16 IP addresses), and the largest
       # uses a /16 netmask (65,536 IP addresses).
       #
-      #   vpc = ec2.vpcs.create('10.0.0.0/16')
+      #     vpc = ec2.vpcs.create('10.0.0.0/16')
       #
       # @param [String] cidr_block The CIDR block you want the VPC to
       #   cover (e.g., 10.0.0.0/16).

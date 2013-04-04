@@ -25,14 +25,12 @@ module AWS
       # A subsequent call to #each will limit the results returned
       # by provided filters.
       #
-      # * Chain multiple calls of #filter together to AND multiple conditions
-      #   together.
-      #
-      # * Supply multiple values to a singler #filter call to OR those
-      #   value conditions together.
-      #
-      # * '*' matches one or more characters and '?' matches any one
-      #   character.
+      #   * Chain multiple calls of #filter together to AND multiple conditions
+      #     together.
+      #   * Supply multiple values to a singler #filter call to OR those
+      #     value conditions together.
+      #   * '*' matches one or more characters and '?' matches any one
+      #     character.
       #
       def filter filter_name, *values
         filters = @filters.dup

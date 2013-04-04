@@ -16,6 +16,8 @@ module AWS
 
     # Represents a single CORS rule for an S3 {Bucket}.
     #
+    # @example
+    #
     #   rule = bucket.cors.first
     #   rule.allowed_methods #=> ['GET', 'HEAD']
     #   rule.allowed_origins #=> ['*']

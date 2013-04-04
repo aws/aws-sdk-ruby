@@ -39,9 +39,11 @@ module AWS
       # Sets all values for this attribute, replacing current values.
       #
       # @example Setting a list of values
+      #
       #   attributes['colors'].set 'red', 'blue', 'green'
       #
       # @example Setting an array of values
+      #
       #   attributes['colors'].set ['red', 'blue']
       #
       # @param [String] values A list of attribute values to set.

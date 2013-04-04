@@ -19,9 +19,11 @@ module AWS
     # Domains, like database tables, must exist before you can write to one.
     #
     # @example Creating a domain
+    #
     #   domain = SimpleDB.new.domains.create('mydomain')
     #
     # @example Getting a domain
+    #
     #   domain = SimpleDB.new.domains['mydomain']
     #
     # @see DomainCollection
