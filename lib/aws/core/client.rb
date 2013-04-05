@@ -177,7 +177,7 @@ module AWS
       protected
 
       def new_request
-        eval(self.class.name.sub(/::Client$/, ''))::Request.new
+        eval(self.class.name.sub(/::Client.*$/, ''))::Request.new
       end
 
       def new_response(*args, &block)
