@@ -22,9 +22,11 @@ require 'aws/version'
 #
 # * {AWS::AutoScaling}
 # * {AWS::CloudFormation}
+# * {AWS::CloudFront}
 # * {AWS::CloudSearch}
 # * {AWS::CloudWatch}
 # * {AWS::DynamoDB}
+# * {AWS::DataPipeline}
 # * {AWS::EC2}
 # * {AWS::ElastiCache}
 # * {AWS::ElasticBeanstalk}
@@ -32,18 +34,20 @@ require 'aws/version'
 # * {AWS::ELB}
 # * {AWS::EMR}
 # * {AWS::Glacier}
-# * {AWS::OpsWorks}
 # * {AWS::IAM}
-# * {AWS::Redshift}
+# * {AWS::ImportExport}
+# * {AWS::OpsWorks}
 # * {AWS::RDS}
+# * {AWS::Redshift}
 # * {AWS::Route53}
 # * {AWS::S3}
-# * {AWS::SNS}
-# * {AWS::SQS}
-# * {AWS::STS}
 # * {AWS::SimpleDB}
 # * {AWS::SimpleEmailService}
 # * {AWS::SimpleWorkflow}
+# * {AWS::SNS}
+# * {AWS::SQS}
+# * {AWS::StorageGateway}
+# * {AWS::STS}
 #
 # # AWS::Record
 #
