@@ -3,6 +3,7 @@
 /doc
 /.yardoc
 /coverage
+/bin
 /pkg
 /vendor
 /samples/config.yml
