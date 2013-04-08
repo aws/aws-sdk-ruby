@@ -34,9 +34,8 @@ module AWS
       protected
       def cache_key
         @cache_key ||= begin
-          endpoint_method = self.class.service_ruby_name + "_endpoint"
           config.credential_provider.access_key_id + ":" +
-            config.send(endpoint_method) + ":" +
+            config.region + ":" +
             self.class.name + ":" +
             local_cache_key
         end

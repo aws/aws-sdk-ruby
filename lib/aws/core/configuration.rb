@@ -63,20 +63,7 @@ module AWS
     #
     # @attr_reader [String,nil] session_token (nil) AWS secret token credential.
     #
-    # @attr_reader [String] auto_scaling_endpoint ('autoscaling.us-east-1.amazonaws.com')
-    #   The service endpoint for Auto Scaling.
-    #
-    # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS CloudFormation.
-    #
-    # @attr_reader [String] cloud_front_endpoint ('cloudfront.amazonaws.com')
-    #   The service endpoint for Amazon CloudFront.
-    #
-    # @attr_reader [String] cloud_search ('cloudsearch.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon CloudSearch.
-    #
-    # @attr_reader [String] cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon CloudWatch.
+    # @attr_reader [String] :region ('us-east-1') The default AWS region.
     #
     # @attr_reader [Boolean] dynamo_db_big_decimals (true) When `true`,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
@@ -84,29 +71,9 @@ module AWS
     #   they will be converted from strings into floats (with a potential
     #   loss of precision).
     #
-    # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon DynamoDB.
-    #
     # @attr_reader [Boolean] dynamo_db_retry_throughput_errors (true) When
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
     #   errors will be retried.
-    #
-    # @attr_reader [String] ec2_endpoint ('ec2.amazonaws.com')
-    #   The service endpoint for Amazon EC2.
-    #
-    # @attr_reader [String] elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
-    #
-    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS Elastic Beanstalk.
-    #
-    # @attr_reader [String] elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
-    #   The service endpoint for Elastic Transcoder.
-    #
-    # @attr_reader [String] elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
-    #   The service endpoint for Elastic Load Balancing.
-    #
-    # @attr_reader [String] glacier_endpoint ('glacier.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Glacier.
     #
     # @attr_reader [Object] http_handler The http handler that sends requests
     #   to AWS.  Defaults to an HTTP handler built on net/http.
@@ -127,12 +94,6 @@ module AWS
     #   will log all wire traces to the `:logger`.  If a `:logger` is not
     #   configured, then wire traces will be sent to standard out.
     #
-    # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
-    #   The service endpoint for AWS Identity Access Management (IAM).
-    #
-    # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
-    #   The service endpoint for AWS Import/Export.
-    #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
     # @attr_reader [Symbol] log_level (:info) The log level.
@@ -146,21 +107,6 @@ module AWS
     #
     # @attr_reader [URI,nil] proxy_uri (nil) The URI of the proxy
     #    to send service requests through.
-    #
-    # @attr_reader [URI,nil] route_53_endpoint ('route53.amazonaws.com')
-    #   The service endpoint for Amazon Route 53.
-    #
-    # @attr_reader [URI,nil] ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS OpsWorks.
-    #
-    # @attr_reader [URI,nil] redshift_endpoint ('redshift.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Redshift.
-    #
-    # @attr_reader [URI,nil] rds_endpoint ('rds.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Relational Database Service (RDS).
-    #
-    # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
-    #   The service endpoint for Amazon S3.
     #
     # @attr_reader [Boolean] s3_force_path_style (false) When
     #   `true`, requests will always use path style.  This can be useful
@@ -212,18 +158,9 @@ module AWS
     #   encryption materials in a separate object, instead of the object
     #   metadata.
     #
-    # @attr_reader [String] simple_db_endpoint ('sdb.amazonaws.com')
-    #   The service endpoint for Amazon SimpleDB.
-    #
     # @attr_reader [Boolean] simple_db_consistent_reads (false) Determines
     #   if all SimpleDB read requests should be done consistently.
     #   Consistent reads are slower, but reflect all changes to SDB.
-    #
-    # @attr_reader [String] simple_email_service_endpoint ('email.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Simple Email Service.
-    #
-    # @attr_reader [String] simple_workflow_endpoint ('swf.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Simple Workflow Service.
     #
     # @attr_reader [CredentialProvider::Provider] credential_provider
     #   Returns the object that is responsible for loading credentials.
@@ -251,18 +188,6 @@ module AWS
     #   sent to AWS, instead empty responses are generated and returned to
     #   each service request.
     #
-    # @attr_reader [String] sns_endpoint ('sns.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon SNS.
-    #
-    # @attr_reader [String] sqs_endpoint ('sqs.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon SQS.
-    #
-    # @attr_reader [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS Storage Gateway.
-    #
-    # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
-    #   The service endpoint for AWS Security Token Service.
-    #
     # @attr_reader [Boolean] use_ssl (true) When `true`, all requests
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
@@ -289,6 +214,11 @@ module AWS
         options.each_pair do |opt_name, value|
           opt_name = opt_name.to_sym
           if self.class.accepted_options.include?(opt_name)
+            #if opt_name.to_s =~ /_endpoint$/
+            #  warning = ":#{opt_name} is a deprecated AWS configuration option, "
+            #  warning << "use :region instead"
+            #  warn(warning)
+            #end
             supplied[opt_name] = value
           end
         end
@@ -425,9 +355,17 @@ module AWS
 
         end
 
-        def add_service name, ruby_name, default_endpoint
+        def add_service name, ruby_name, endpoint_pattern = nil, &endpoint_builder
 
-          add_option :"#{ruby_name}_endpoint", default_endpoint
+          add_option :"#{ruby_name}_endpoint" do |config,value|
+            if value
+              value
+            elsif endpoint_pattern
+              endpoint_pattern % config.region
+            else
+              endpoint_builder.call(config.region)
+            end
+          end
 
           add_option(:"#{ruby_name}_port") do |config,value|
             value || (config.use_ssl? ? 443 : 80)
@@ -447,7 +385,7 @@ module AWS
               elsif matches = endpoint.match(/^.+\.(.+)\.amazonaws.com$/)
                 matches[1]
               else
-                'us-east-1'
+                config.region
               end
             end
           end
@@ -487,6 +425,8 @@ module AWS
       add_option :secret_access_key
 
       add_option :session_token
+
+      add_option :region, 'us-east-1'
 
       add_option_with_needs :credential_provider,
         [:access_key_id, :secret_access_key, :session_token] do |cfg,static_creds|
