@@ -1514,14 +1514,15 @@ module AWS
           return false if
             !valid_bucket_name?(bucket_name) or
 
-            # Bucket names should not contain underscores (_)
-            bucket_name["_"] or
-
             # Bucket names should be between 3 and 63 characters long
             bucket_name.size > 63 or
 
-            # Bucket names should not end with a dash
-            bucket_name[-1,1] == '-' or
+            # Bucket names must only contain lowercase letters, numbers, dots, and dashes
+            # and must start and end with a lowercase letter or a number
+            bucket_name !~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ or
+
+            # Bucket names should not be formatted like an IP address (e.g., 192.168.5.4)
+            bucket_name =~ /(\d+\.){3}\d+/ or
 
             # Bucket names cannot contain two, adjacent periods
             bucket_name['..'] or
@@ -1584,15 +1585,11 @@ module AWS
             case
             when bucket_name.nil? || bucket_name == ''
               'may not be blank'
-            when bucket_name !~ /^[a-z0-9._\-]+$/
-              'may only contain lowercase letters, numbers, periods (.), ' +
+            when bucket_name !~ /^[A-Za-z0-9._\-]+$/
+              'may only contain uppercase letters, lowercase letters, numbers, periods (.), ' +
               'underscores (_), and dashes (-)'
-            when bucket_name !~ /^[a-z0-9]/
-              'must start with a letter or a number'
             when !(3..255).include?(bucket_name.size)
               'must be between 3 and 255 characters long'
-            when bucket_name =~ /(\d+\.){3}\d+/
-              'must not be formatted like an IP address (e.g., 192.168.5.4)'
             when bucket_name =~ /\n/
               'must not contain a newline character'
             end
