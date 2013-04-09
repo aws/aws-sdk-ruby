@@ -357,6 +357,10 @@ module AWS
 
         def add_service name, ruby_name, endpoint_pattern = nil, &endpoint_builder
 
+          Region.send(:define_method, ruby_name) do
+            AWS.const_get(name).new(:config => config)
+          end
+
           add_option :"#{ruby_name}_endpoint" do |config,value|
             if value
               value

@@ -81,8 +81,42 @@ require 'aws/version'
 #
 module AWS
 
-  autoload :Errors, 'aws/errors'
+  # @private
+  SERVICES = {
+    'AutoScaling' => 'auto_scaling',
+    'CloudFormation' => 'cloud_formation',
+    'CloudFront' => 'cloud_front',
+    'CloudSearch' => 'cloud_search',
+    'CloudWatch' => 'cloud_watch',
+    'DynamoDB' => 'dynamo_db',
+    'DataPipeline' => 'data_pipeline',
+    'EC2' => 'ec2',
+    'ElastiCache' => 'elasticache',
+    'ElasticBeanstalk' => 'elastic_beanstalk',
+    'ElasticTranscoder' => 'elastic_transcoder',
+    'ELB' => 'elb',
+    'EMR' => 'emr',
+    'Glacier' => 'glacier',
+    'IAM' => 'iam',
+    'ImportExport' => 'import_export',
+    'OpsWorks' => 'ops_works',
+    'RDS' => 'rds',
+    'Redshift' => 'redshift',
+    'Route53' => 'route_53',
+    'S3' => 's3',
+    'SimpleDB' => 'simple_db',
+    'SimpleEmailService' => 'simple_email_service',
+    'SimpleWorkflow' => 'simple_workflow',
+    'SNS' => 'sns',
+    'SQS' => 'sqs',
+    'StorageGateway' => 'storage_gateway',
+    'STS' => 'sts',
+  }
 
+  # @private
+  ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+
+  autoload :Errors, 'aws/errors'
 
   module Core
 
@@ -114,6 +148,9 @@ module AWS
     autoload :QueryClient, 'aws/core/query_client'
     autoload :QueryRequestBuilder, 'aws/core/query_request_builder'
     autoload :QueryResponseParser, 'aws/core/query_response_parser'
+
+    autoload :Region, 'aws/core/region'
+    autoload :RegionCollection, 'aws/core/region_collection'
 
     autoload :Resource, 'aws/core/resource'
     autoload :ResourceCache, 'aws/core/resource_cache'
@@ -374,6 +411,31 @@ module AWS
       @@config ||= Core::Configuration.new
       @@config = @@config.with(options) unless options.empty?
       @@config
+    end
+
+    # Returns a collection that represents public (non-gov-cloud) AWS
+    # regions.  You can use this collection to get a specific region by name
+    # or to enumerate all regions.
+    #
+    # When enumerating regions, a single HTTP request is made to get a current
+    # list of regions (this is cached).  When getting a region by name
+    # no requests are made.
+    #
+    # @example Getting a region by name
+    #
+    #   region = AWS.regions['us-west-1']
+    #   region.dynamo_db.tables.map(&:name)
+    #
+    # @example Enumerating all regions
+    #
+    #   AWS.regions.each do |region|
+    #     puts "EC2 Instances in #{region.name}:"
+    #     puts region.ec2.instances.map(&:id)
+    #   end
+    #
+    # @return [Core::RegionCollection]
+    def regions
+      Core::RegionCollection.new
     end
 
     # @note Memoization is currently only supported for the EC2 APIs;
