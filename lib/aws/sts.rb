@@ -52,6 +52,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'sts', :global => true
+
     # (see Client#assume_role)
     def assume_role options = {}
       client.assume_role(options).data

@@ -217,6 +217,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'swf'
+
     # @return [DomainCollection]
     def domains
       DomainCollection.new(:config => config)

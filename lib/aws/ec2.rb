@@ -289,6 +289,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'ec2'
+
     # @return [InstanceCollection] A collection representing all instances
     def instances
       InstanceCollection.new(:config => config)

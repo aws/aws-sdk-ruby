@@ -76,6 +76,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'route53', :global => true
+
     # @return [HostedZoneCollection]
     def hosted_zones
       HostedZoneCollection.new(:config => config)

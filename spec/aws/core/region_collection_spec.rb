@@ -60,7 +60,7 @@ module AWS
           regions.map(&:name)
         end
 
-        it 'enumerates regions from the endpoints.json file' do
+        it 'enumerates public regions from the endpoints.json file' do
           regions.map(&:name).should eq(%w(
             us-east-1 us-west-1 us-west-2 eu-west-1 ap-northeast-1
             ap-southeast-1 ap-southeast-2 sa-east-1
@@ -71,6 +71,16 @@ module AWS
           Net::HTTP.should_receive(:get).exactly(1).times.and_return(json)
           regions.map(&:name)
           regions.map(&:name)
+        end
+
+        context 'with service' do
+
+          it 'provides access to services with a global endpoint via any region' do
+            AWS::IAM.global_endpoint?.should be(true)
+            AWS::IAM.regions.map(&:name).should eq(['us-east-1'])
+            AWS.regions['fake-region'].iam.client.config.iam_region.should eq('us-east-1')
+          end
+
         end
 
       end

@@ -67,6 +67,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'cloudsearch'
+
   end
 
 end

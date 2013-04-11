@@ -46,7 +46,7 @@ module AWS
 
         context "##{getter}" do
 
-          it "returns an AWS::#{klass} object" do
+          it "returns an instance of AWS::#{klass}" do
             region.send(getter).should be_a(AWS.const_get(klass))
           end
 

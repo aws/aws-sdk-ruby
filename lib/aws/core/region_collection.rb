@@ -39,8 +39,11 @@ module AWS
       include Enumerable
 
       # @option options [Configuration] :config (AWS.config)
+      # @option options [ServiceInterface] :service (nil)
+      # @private
       def initialize options = {}
         @config = options[:config] || AWS.config
+        @service = options[:service]
       end
 
       # @return [Configuration]
@@ -55,7 +58,7 @@ module AWS
       # Enumerates public regions (non US Gov regions).
       # @yieldparam [region] Region
       def each &block
-        non_gov_cloud.each do |region_name|
+        public_regions.each do |region_name|
           yield(self[region_name])
         end
       end
@@ -63,8 +66,13 @@ module AWS
       private
 
       # @return [Array<String>] Returns an array of non-gov-cloud region names.
-      def non_gov_cloud
-        self.class.data['regions'].keys.reject{|r| r =~ /us-gov/ }
+      def public_regions
+        return ['us-east-1'] if @service and @service.global_endpoint?
+        data = self.class.data
+        regions = @service ?
+          data['services'][@service.endpoint_prefix] :
+          data['regions'].keys
+        regions.reject{|r| r =~ /us-gov/ }
       end
 
       class << self
@@ -85,6 +93,7 @@ module AWS
 
         # @return [Hash]
         def load_data
+          #return JSON.parse(File.read(File.join(AWS::ROOT, 'endpoints.json')))
           host = 'aws-sdk-configurations.amazonwebservices.com'
           path = '/endpoints.json'
           JSON.parse(Net::HTTP.get(host, path))

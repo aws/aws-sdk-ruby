@@ -46,5 +46,7 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'redshift'
+
   end
 end

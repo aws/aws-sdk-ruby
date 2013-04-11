@@ -389,7 +389,7 @@ module AWS
               elsif matches = endpoint.match(/^.+\.(.+)\.amazonaws.com$/)
                 matches[1]
               else
-                config.region
+                AWS.const_get(name).global_endpoint? ? 'us-east-1' : config.region
               end
             end
           end

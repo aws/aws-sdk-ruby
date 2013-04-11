@@ -11,7 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
 module AWS
   # Current version of the AWS SDK for Ruby
   VERSION = '1.8.5'
