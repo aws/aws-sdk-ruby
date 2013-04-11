@@ -159,7 +159,6 @@ module AWS
       bucket_method(:put_bucket_website, :put, 'website') do
 
         configure_request do |req, options|
-          validate_bucket_name!(options[:bucket_name])
           req.body = Nokogiri::XML::Builder.new do |xml|
             xml.WebsiteConfiguration(:xmlns => XMLNS) do
 
