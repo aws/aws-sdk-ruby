@@ -91,14 +91,16 @@ module AWS
       include TaggedItem
       include HasPermissions
 
-      # @private
-      def initialize id, options = {}
-        @id = id
+      # @param [String] image_id
+      def initialize image_id, options = {}
+        @image_id = image_id
         super
       end
 
       # @return [String] The ID of the AMI.
-      attr_reader :id
+      attr_reader :image_id
+
+      alias_method :id, :image_id
 
       attribute :name, :static => true
 

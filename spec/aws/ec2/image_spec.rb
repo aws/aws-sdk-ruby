@@ -43,6 +43,16 @@ module AWS
 
       end
 
+      context '#image_id' do
+
+        it 'aliases image_id to id' do
+          image = Image.new('ami-123')
+          image.id.should eq('ami-123')
+          image.image_id.should eq(image.id)
+        end
+
+      end
+
       context '#deregister' do
 
         it 'should call deregister_image' do
