@@ -47,20 +47,32 @@ module AWS
       #   name strings, or {AWS::EC2::AvailabilityZone} objects.
       #
       # @option options [required,Array<Hash>] :listeners An array of load
-      #   balancer listener options.  Each value must be an array with the
-      #   following keys:
-      #   * `:port`
-      #   * `:protocol`
-      #   * `:instance_port`
-      #   * `:instance_protocol`
-      #
-      #   Port values should be integers, and protocols should be symbols or
-      #   strings (e.g. :http, or 'HTTP').  See {ListenerCollection#create}
-      #   for more detailed description of each option.
-      #
-      # @option options [String,IAM::ServerCertificate] :server_certificate (nil)
-      #   The ARN string of an IAM::ServerCertifcate or an
-      #   IAM::ServerCertificate object.  Required for HTTPs listeners.
+      #   balancer listener options:
+      #     * `:protocol` - *required* - (String) Specifies the LoadBalancer
+      #       transport protocol to use for routing - HTTP, HTTPS, TCP or SSL.
+      #       This property cannot be modified for the life of the
+      #       LoadBalancer.
+      #     * `:load_balancer_port` - *required* - (Integer) Specifies the
+      #       external LoadBalancer port number. This property cannot be
+      #       modified for the life of the LoadBalancer.
+      #     * `:instance_protocol` - (String) Specifies the protocol to use for
+      #       routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL.
+      #       This property cannot be modified for the life of the
+      #       LoadBalancer. If the front-end protocol is HTTP or HTTPS,
+      #       InstanceProtocol has to be at the same protocol layer, i.e., HTTP
+      #       or HTTPS. Likewise, if the front-end protocol is TCP or SSL,
+      #       InstanceProtocol has to be TCP or SSL. If there is another
+      #       listener with the same InstancePort whose InstanceProtocol is
+      #       secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has
+      #       to be secure, i.e., HTTPS or SSL. If there is another listener
+      #       with the same InstancePort whose InstanceProtocol is HTTP or TCP,
+      #       the listener's InstanceProtocol must be either HTTP or TCP.
+      #     * `:instance_port` - *required* - (Integer) Specifies the TCP port
+      #       on which the instance server is listening. This property cannot
+      #       be modified for the life of the LoadBalancer.
+      #     * `:ssl_certificate_id` - (String) The ARN string of the server
+      #       certificate. To get the ARN of the server certificate, call the
+      #       AWS Identity and Access Management UploadServerCertificate API.
       #
       # @option options [Array] :subnets An list of VPC subets to attach the
       #   load balancer to.  This can be an array of subnet ids (strings) or
