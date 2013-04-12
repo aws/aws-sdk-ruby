@@ -1967,7 +1967,7 @@ module AWS
 
         context 'accepts letters and' do
           it('should accept lowercasename'){ should_pass('lowercasename') }
-          it('should reject MixedCaseName'){ should_fail('MixedCaseName') }
+          it('should accept MixedCaseName'){ should_pass('MixedCaseName') }
         end
 
         context 'accepts numbers and' do
@@ -1981,31 +1981,31 @@ module AWS
           it('should reject a 256 char long name'){ should_fail('n'*256) }
         end
 
-        context 'accepts dots after the first character and' do
+        context 'accepts names with dots and' do
           it('should accept sample.name'){ should_pass('sample.name') }
           it('should accept sample.'){ should_pass('sample.') }
-          it('should reject .sample'){ should_fail('.sample') }
+          it('should accept .sample'){ should_pass('.sample') }
         end
 
-        context 'accepts underscores after first character and' do
+        context 'accepts names with underscores and' do
           it('should accept sample_name'){ should_pass('sample_name') }
           it('should accept sample_'){ should_pass('sample_') }
-          it('should reject _sample'){ should_fail('_sample') }
+          it('should accept _sample'){ should_pass('_sample') }
         end
 
-        context 'accepts dashes after first character and' do
+        context 'accepts names with dashes and' do
           it('should accept sample-name'){ should_pass('sample-name') }
           it('should accept sample-'){ should_pass('sample-') }
-          it('should reject -sample'){ should_fail('-sample') }
+          it('should accept -sample'){ should_pass('-sample') }
         end
 
-        context 'rejects names that look like ip addresses and' do
+        context 'accepts names that look like ip addresses and' do
           it('should accept 1.a.3.4'){ should_pass('1.a.3.4') }
-          it('should reject 1.2.3.4'){ should_fail('1.2.3.4') }
+          it('should accept 1.2.3.4'){ should_pass('1.2.3.4') }
         end
 
-        it 'only accepts a-z 0-9 . _ - characters' do
-          valid = ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
+        it 'only accepts A-Z a-z 0-9 . _ - characters' do
+          valid = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
           invalid = (1..255).collect{|n| n.chr } - valid
           invalid.each{|bad_char| should_fail("abc#{bad_char}") }
         end
@@ -2013,15 +2013,15 @@ module AWS
         let (:valid_names) { ["foo",
                               "1234",
                               "a1.b2-c3_d4",
-                              "r"*255] }
+                              "r"*255,
+                              ".bla",
+                              "-bla",
+                              "_bla",
+                              "1.2.3.4"] }
 
         let (:invalid_names) { ["it",
                                 "r"*256,
-                                "it!",
-                                ".bla",
-                                "-bla",
-                                "_bla",
-                                "1.2.3.4"] }
+                                "it!"] }
 
         it 'should return true for valid names' do
           valid_names.each do |name|
@@ -2056,16 +2056,24 @@ module AWS
         it('should reject a 64 char long name') { should_fail('n'*64) }
         it('should reject names with _') { should_fail('abc_xyz') }
         it('should reject names ending with -') { should_fail('abc-') }
+        it('should reject names ending with .') { should_fail('abc.') }
         it('should reject names containing ..') { should_fail('abc..xyz') }
         it('should reject names containing .-') { should_fail('abc.-xyz') }
         it('should reject names containing -.') { should_fail('abc-.xyz') }
+        it('should reject names containing upper case') { should_fail('abC')}
 
-        let (:compatible_names) { ["foo",
+        let (:compatible_names) { ["myawsbucket",
+                                   "my.aws.bucket",
+                                   "myawsbucket.1",
+                                   "foo",
                                    "1234",
                                    "a1.b2-c3.d4",
                                    "r"*63] }
 
-        let (:incompatible_names) { ["it",
+        let (:incompatible_names) { [".myawsbucket",
+                                     "myawsbucket.",
+                                     "my..awsbucket",
+                                     "it",
                                      "r"*64,
                                      "it!",
                                      ".bla",
