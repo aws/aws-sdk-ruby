@@ -75,6 +75,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'monitoring'
+
     # Puts data for a metric.  The metric is created if it does not already
     # exist.
     #

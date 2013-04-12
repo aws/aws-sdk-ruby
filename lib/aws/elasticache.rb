@@ -43,6 +43,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'elasticache'
+
   end
 
 end

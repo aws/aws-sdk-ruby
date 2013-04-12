@@ -75,5 +75,7 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'importexport', :global => true
+
   end
 end

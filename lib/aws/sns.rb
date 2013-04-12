@@ -58,6 +58,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'sns'
+
     # @return [TopicCollection] Returns a topic collection for managing
     #   SNS topics.
     def topics

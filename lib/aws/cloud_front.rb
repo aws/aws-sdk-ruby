@@ -67,5 +67,7 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'cloudfront', :global => true
+
   end
 end

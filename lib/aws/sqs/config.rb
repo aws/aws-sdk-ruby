@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SQS', 'sqs', 'sqs.us-east-1.amazonaws.com'
+  add_service 'SQS', 'sqs', 'sqs.%s.amazonaws.com'
 
 end

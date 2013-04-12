@@ -1174,7 +1174,7 @@ module AWS
       #   secure (HTTPS) URL or a plain HTTP url.
       #
       # @option options [String] :endpoint Sets the hostname of the
-      #   endpoint (overrides config.s3_endpoint).
+      #   endpoint.
       #
       # @option options [Integer] :port Sets the port of the
       #   endpoint (overrides config.s3_port).

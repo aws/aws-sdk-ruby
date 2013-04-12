@@ -43,7 +43,7 @@ module AWS::Core
       let(:config) {
         double("config", {
           :credential_provider => credential_provider,
-          :some_service_endpoint => "ENDPOINT",
+          :region => "ENDPOINT",
         })
       }
 

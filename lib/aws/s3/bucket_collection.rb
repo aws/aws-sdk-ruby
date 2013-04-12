@@ -43,7 +43,7 @@ module AWS
       #   against the bucket using the S3 endpoint specific to the
       #   region in which your bucket resides. For example:
       #
-      #       s3 = AWS::S3.new(:s3_endpoint => "s3-eu-west-1.amazonaws.com")
+      #       s3 = AWS::S3.new(:region => "eu-west-1")
       #       bucket = s3.buckets.create("my.eu.bucket")
       #
       #   For a full list of endpoints and regions, see
@@ -68,7 +68,7 @@ module AWS
       #   appropriate location constraint for the endpoint.  For
       #   example:
       #
-      #       s3 = AWS::S3.new(:s3_endpoint => "s3-us-west-1.amazonaws.com")
+      #       s3 = AWS::S3.new(:region => "us-west-1")
       #       bucket = s3.buckets.create("my-us-west-bucket")
       #       bucket.location_constraint # => "us-west-1"
       #

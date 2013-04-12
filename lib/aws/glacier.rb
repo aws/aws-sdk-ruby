@@ -59,6 +59,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'glacier'
+
     # @option options[String] :account_id ('-')
     def intialize options = {}
       @account_id = options[:account_id] || '-'

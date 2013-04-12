@@ -24,7 +24,9 @@ module AWS
         module ::AWS
           class Dummy
 
-            extend ServiceInterface
+            include ServiceInterface
+
+            endpoint_prefix 'dummy', :global => true
 
             class Request < Core::Http::Request
               include Signature::Version2

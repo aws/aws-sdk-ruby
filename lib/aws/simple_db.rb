@@ -158,6 +158,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'sdb'
+
     # Returns a collection object that represents the domains in your
     # account.
     #

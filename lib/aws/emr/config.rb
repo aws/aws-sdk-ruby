@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'EMR', 'emr', 'us-east-1.elasticmapreduce.amazonaws.com'
+  add_service 'EMR', 'emr', 'elasticmapreduce.%s.amazonaws.com'
 
 end

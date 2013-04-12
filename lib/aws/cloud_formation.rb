@@ -162,6 +162,8 @@ module AWS
     include Core::ServiceInterface
     include StackOptions
 
+    endpoint_prefix 'cloudformation'
+
     # @return [StackCollection]
     def stacks
       StackCollection.new(:config => config)

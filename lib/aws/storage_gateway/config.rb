@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'StorageGateway', 'storage_gateway', 'storagegateway.us-east-1.amazonaws.com'
+  add_service 'StorageGateway', 'storage_gateway', 'storagegateway.%s.amazonaws.com'
 
 end

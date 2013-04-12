@@ -75,6 +75,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'elasticmapreduce'
+
     # @return [JobFlowCollection] Returns a collection that represents all
     #   job flows.
     def job_flows

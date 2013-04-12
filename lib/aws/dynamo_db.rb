@@ -122,6 +122,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'dynamodb'
+
     # Returns a collection representing all the tables in your account.
     #
     # @return [TableCollection]
