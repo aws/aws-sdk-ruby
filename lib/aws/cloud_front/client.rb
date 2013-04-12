@@ -140,7 +140,8 @@ module AWS
       #     * `:target_origin_id` - *required* - (String) The value of ID for
       #       the origin that you want CloudFront to route requests to when a
       #       request matches the path pattern either for a cache behavior or
-      #       for the default cache behavior.
+      #       for the default cache behavior. This value must match an id
+      #       specified in an origin item.
       #     * `:forwarded_values` - *required* - (Hash) A complex type that
       #       specifies how CloudFront handles query strings.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
@@ -203,7 +204,8 @@ module AWS
       #       * `:target_origin_id` - *required* - (String) The value of ID for
       #         the origin that you want CloudFront to route requests to when a
       #         request matches the path pattern either for a cache behavior or
-      #         for the default cache behavior.
+      #         for the default cache behavior.  This value must match an id
+      #         specified in an origin item.
       #       * `:forwarded_values` - *required* - (Hash) A complex type that
       #         specifies how CloudFront handles query strings.
       #         * `:query_string` - *required* - (Boolean) Indicates whether
@@ -1003,7 +1005,8 @@ module AWS
       #     * `:target_origin_id` - *required* - (String) The value of ID for
       #       the origin that you want CloudFront to route requests to when a
       #       request matches the path pattern either for a cache behavior or
-      #       for the default cache behavior.
+      #       for the default cache behavior.  This value must match an id
+      #       specified in an origin item.
       #     * `:forwarded_values` - *required* - (Hash) A complex type that
       #       specifies how CloudFront handles query strings.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
@@ -1066,7 +1069,8 @@ module AWS
       #       * `:target_origin_id` - *required* - (String) The value of ID for
       #         the origin that you want CloudFront to route requests to when a
       #         request matches the path pattern either for a cache behavior or
-      #         for the default cache behavior.
+      #         for the default cache behavior.  This value must match an id
+      #         specified in an origin item.
       #       * `:forwarded_values` - *required* - (Hash) A complex type that
       #         specifies how CloudFront handles query strings.
       #         * `:query_string` - *required* - (Boolean) Indicates whether
