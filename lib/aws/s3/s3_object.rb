@@ -1273,7 +1273,6 @@ module AWS
 
       def multipart_copy options
 
-        puts "Running multi-part copy"
         unless options[:content_length]
           msg = "unknown content length, must set :content_length " +
               "to use multi-part copy"
