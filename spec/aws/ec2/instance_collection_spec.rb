@@ -537,11 +537,11 @@ module AWS
 
             context 'badly formatted input' do
 
-              it 'should reject an array' do
+              it 'should accepts an array' do
                 lambda do
                   collection.create(:image_id => "ami-123",
                                     :block_device_mappings => [])
-                end.should raise_error(ArgumentError, "block_device_mappings must be a hash")
+                end.should_not raise_error
               end
 
               it 'should reject non-string keys' do

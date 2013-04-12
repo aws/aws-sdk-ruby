@@ -86,24 +86,28 @@ module AWS
       #   ARN of an IAM instance profile.  This provides credentials
       #   to the EC2 instance(s) via the instance metadata service.
       #
-      # @option options [Hash] :block_device_mappings This must be a
-      #   hash; the keys are device names to map, and the value for
-      #   each entry determines how that device is mapped.  Valid
-      #   values include:
       #
-      #   * A string, which is interpreted as a virtual device name.
-      #   * The symbol :no_device, which overrides the default
-      #     mapping for a device so that it is not mapped to anything.
-      #   * A hash with any of the following options.  One of
-      #     `:snapshot`, `:snapshot_id` or `:volume_size` is
-      #     required.
+      # @option options [Array<Hash>] :block_device_mappings Specifies how block
+      #   devices are exposed to the instance. Each mapping is made up of a
+      #   virtualName and a deviceName.
       #
-      #     * `:snapshot` - A snapshot to use when creating the block device.
-      #     * `:snapshot_id` - The ID of a snapshot to use when creating
-      #       the block device.
-      #     * `:volume_size] The size of volume to create, in gigabytes.
-      #     * `:delete_on_termination` - Setting this to true causes EC2
-      #       to delete the volume when the instance is terminated.
+      #     * `:virtual_name` - (String) Specifies the virtual device name.
+      #     * `:device_name` - (String) Specifies the device name (e.g.,
+      #       /dev/sdh).
+      #     * `:ebs` - (Hash) Specifies parameters used to automatically setup
+      #       Amazon EBS volumes when the instance is launched.
+      #       * `:snapshot_id` - (String) The ID of the snapshot from which the
+      #         volume will be created.
+      #       * `:volume_size` - (Integer) The size of the volume, in
+      #         gigabytes.
+      #       * `:delete_on_termination` - (Boolean) Specifies whether the
+      #         Amazon EBS volume is deleted on instance termination.
+      #       * `:volume_type` - (String) Valid values include:
+      #         * `standard`
+      #         * `io1`
+      #       * `:iops` - (Integer)
+      #     * `:no_device` - (String) Specifies the device name to suppress
+      #       during instance launch.
       #
       # @option options [Boolean] :monitoring_enabled Setting this to
       #   `true` enables CloudWatch monitoring on the instances once they
@@ -234,9 +238,10 @@ module AWS
         options[:user_data] = Base64.encode64(options[:user_data]).strip if
           options[:user_data]
 
-        options[:block_device_mappings] =
-          translate_block_device_mappings(options[:block_device_mappings]) if
-          options[:block_device_mappings]
+        if options[:block_device_mappings].is_a?(Hash)
+          options[:block_device_mappings] =
+            translate_block_device_mappings(options[:block_device_mappings])
+        end
 
         options[:monitoring] = { :enabled => true } if
           options[:monitoring_enabled]
