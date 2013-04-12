@@ -142,24 +142,44 @@ module AWS
       #       request matches the path pattern either for a cache behavior or
       #       for the default cache behavior.
       #     * `:forwarded_values` - *required* - (Hash) A complex type that
-      #       specifies how CloudFront handles query strings.
+      #       specifies how CloudFront handles query strings and cookies.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
       #         want CloudFront to forward query strings to the origin that is
-      #         associated with this cache behavior. If so, specify `true` ; if
-      #         not, specify `false` .
+      #         associated with this cache behavior. If so, specify +true+ ; if
+      #         not, specify +false+ .
+      #       * `:cookies` - *required* - (Hash) A complex type that specifies
+      #         how CloudFront handles cookies.
+      #         * `:forward` - *required* - (String) Use this element to
+      #           specify whether you want CloudFront to forward cookies to the
+      #           origin that is associated with this cache behavior. You can
+      #           specify all, none or whitelist. If you choose All, CloudFront
+      #           forwards all cookies regardless of how many your application
+      #           uses. Valid values include:
+      #           * `none`
+      #           * `whitelist`
+      #           * `all`
+      #         * `:whitelisted_names` - (Hash) A complex type that specifies
+      #           the whitelisted cookies, if any, that you want CloudFront to
+      #           forward to your origin that is associated with this cache
+      #           behavior.
+      #           * `:quantity` - *required* - (Integer) The number of
+      #             whitelisted cookies for this cache behavior.
+      #           * `:items` - (Array<String>) Optional: A complex type that
+      #             contains whitelisted cookies for this cache behavior. If
+      #             Quantity is 0, you can omit Items.
       #     * `:trusted_signers` - *required* - (Hash) A complex type that
       #       specifies the AWS accounts, if any, that you want to allow to
       #       create signed URLs for private content. If you want to require
       #       signed URLs in requests for objects in the target origin that
-      #       match the PathPattern for this cache behavior, specify `true` for
+      #       match the PathPattern for this cache behavior, specify +true+ for
       #       Enabled, and specify the applicable values for Quantity and
       #       Items. For more information, go to Using a Signed URL to Serve
       #       Private Content in the Amazon CloudFront Developer Guide. If you
       #       don't want to require signed URLs in requests for objects that
-      #       match PathPattern, specify `false` for Enabled and 0 for
+      #       match PathPattern, specify +false+ for Enabled and 0 for
       #       Quantity. Omit Items. To add, change, or remove one or more
-      #       trusted signers, change Enabled to `true` (if it's currently
-      #       `false` ), change Quantity as applicable, and specify all of the
+      #       trusted signers, change Enabled to +true+ (if it's currently
+      #       +false+ ), change Quantity as applicable, and specify all of the
       #       trusted signers that you want to include in the updated
       #       distribution.
       #       * `:enabled` - *required* - (Boolean) Specifies whether you want
@@ -205,24 +225,44 @@ module AWS
       #         request matches the path pattern either for a cache behavior or
       #         for the default cache behavior.
       #       * `:forwarded_values` - *required* - (Hash) A complex type that
-      #         specifies how CloudFront handles query strings.
+      #         specifies how CloudFront handles query strings and cookies.
       #         * `:query_string` - *required* - (Boolean) Indicates whether
       #           you want CloudFront to forward query strings to the origin
       #           that is associated with this cache behavior. If so, specify
-      #           `true` ; if not, specify `false` .
+      #           +true+ ; if not, specify +false+ .
+      #         * `:cookies` - *required* - (Hash) A complex type that
+      #           specifies how CloudFront handles cookies.
+      #           * `:forward` - *required* - (String) Use this element to
+      #             specify whether you want CloudFront to forward cookies to
+      #             the origin that is associated with this cache behavior. You
+      #             can specify all, none or whitelist. If you choose All,
+      #             CloudFront forwards all cookies regardless of how many your
+      #             application uses. Valid values include:
+      #             * `none`
+      #             * `whitelist`
+      #             * `all`
+      #           * `:whitelisted_names` - (Hash) A complex type that specifies
+      #             the whitelisted cookies, if any, that you want CloudFront
+      #             to forward to your origin that is associated with this
+      #             cache behavior.
+      #             * `:quantity` - *required* - (Integer) The number of
+      #               whitelisted cookies for this cache behavior.
+      #             * `:items` - (Array<String>) Optional: A complex type that
+      #               contains whitelisted cookies for this cache behavior. If
+      #               Quantity is 0, you can omit Items.
       #       * `:trusted_signers` - *required* - (Hash) A complex type that
       #         specifies the AWS accounts, if any, that you want to allow to
       #         create signed URLs for private content. If you want to require
       #         signed URLs in requests for objects in the target origin that
-      #         match the PathPattern for this cache behavior, specify `true`
+      #         match the PathPattern for this cache behavior, specify +true+
       #         for Enabled, and specify the applicable values for Quantity and
       #         Items. For more information, go to Using a Signed URL to Serve
       #         Private Content in the Amazon CloudFront Developer Guide. If
       #         you don't want to require signed URLs in requests for objects
-      #         that match PathPattern, specify `false` for Enabled and 0 for
+      #         that match PathPattern, specify +false+ for Enabled and 0 for
       #         Quantity. Omit Items. To add, change, or remove one or more
-      #         trusted signers, change Enabled to `true` (if it's currently
-      #         `false` ), change Quantity as applicable, and specify all of
+      #         trusted signers, change Enabled to +true+ (if it's currently
+      #         +false+ ), change Quantity as applicable, and specify all of
       #         the trusted signers that you want to include in the updated
       #         distribution.
       #         * `:enabled` - *required* - (Boolean) Specifies whether you
@@ -255,10 +295,18 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a distribution or if
       #       you want to disable logging for an existing distribution, specify
-      #       `false` for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify `false` for Enabled but you specify
-      #       values for Bucket and Prefix, the values are automatically
-      #       deleted.
+      #       +false+ for Enabled, and specify empty Bucket and Prefix
+      #       elements. If you specify +false+ for Enabled but you specify
+      #       values for Bucket, prefix and IncludeCookies, the values are
+      #       automatically deleted.
+      #     * `:include_cookies` - *required* - (Boolean) Specifies whether you
+      #       want CloudFront to include cookies in access logs, specify +true+
+      #       for IncludeCookies. If you choose to include cookies in logs,
+      #       CloudFront logs all cookies regardless of how you configure the
+      #       cache behaviors for this distribution. If you do not want to
+      #       include cookies when you create a distribution or if you want to
+      #       disable include cookies for an existing distribution, specify
+      #       +false+ for IncludeCookies.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
@@ -266,6 +314,12 @@ module AWS
       #       distribution, for example, myprefix/. If you want to enable
       #       logging, but you do not want to specify a prefix, you still must
       #       include an empty Prefix element in the Logging element.
+      #   * `:price_class` - *required* - (String) A complex type that contains
+      #     information about price class for this distribution. Valid values
+      #     include:
+      #     * `PriceClass_100`
+      #     * `PriceClass_200`
+      #     * `PriceClass_All`
       #   * `:enabled` - *required* - (Boolean) Whether the distribution is
       #     enabled to accept end user requests for content.
       # @return [Core::Response]
@@ -305,6 +359,11 @@ module AWS
       #       * `:target_origin_id` - (String)
       #       * `:forwarded_values` - (Hash)
       #         * `:query_string` - (Boolean)
+      #         * `:cookies` - (Hash)
+      #           * `:forward` - (String)
+      #           * `:whitelisted_names` - (Hash)
+      #             * `:quantity` - (Integer)
+      #             * `:items` - (Array<String>)
       #       * `:trusted_signers` - (Hash)
       #         * `:enabled` - (Boolean)
       #         * `:quantity` - (Integer)
@@ -318,6 +377,11 @@ module AWS
       #         * `:target_origin_id` - (String)
       #         * `:forwarded_values` - (Hash)
       #           * `:query_string` - (Boolean)
+      #           * `:cookies` - (Hash)
+      #             * `:forward` - (String)
+      #             * `:whitelisted_names` - (Hash)
+      #               * `:quantity` - (Integer)
+      #               * `:items` - (Array<String>)
       #         * `:trusted_signers` - (Hash)
       #           * `:enabled` - (Boolean)
       #           * `:quantity` - (Integer)
@@ -327,8 +391,10 @@ module AWS
       #     * `:comment` - (String)
       #     * `:logging` - (Hash)
       #       * `:enabled` - (Boolean)
+      #       * `:include_cookies` - (Boolean)
       #       * `:bucket` - (String)
       #       * `:prefix` - (String)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method create_invalidation(options = {})
@@ -411,31 +477,32 @@ module AWS
       #     whether access logs are written for the streaming distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
-      #       not want to enable logging when you create a distribution or if
-      #       you want to disable logging for an existing distribution, specify
-      #       `false` for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify `false` for Enabled but you specify
-      #       values for Bucket and Prefix, the values are automatically
-      #       deleted.
+      #       not want to enable logging when you create a streaming
+      #       distribution or if you want to disable logging for an existing
+      #       streaming distribution, specify +false+ for Enabled, and specify
+      #       empty Bucket and Prefix elements. If you specify +false+ for
+      #       Enabled but you specify values for Bucket and Prefix, the values
+      #       are automatically deleted.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
       #       want CloudFront to prefix to the access log filenames for this
-      #       distribution, for example, myprefix/. If you want to enable
-      #       logging, but you do not want to specify a prefix, you still must
-      #       include an empty Prefix element in the Logging element.
+      #       streaming distribution, for example, myprefix/. If you want to
+      #       enable logging, but you do not want to specify a prefix, you
+      #       still must include an empty Prefix element in the Logging
+      #       element.
       #   * `:trusted_signers` - *required* - (Hash) A complex type that
       #     specifies the AWS accounts, if any, that you want to allow to
       #     create signed URLs for private content. If you want to require
       #     signed URLs in requests for objects in the target origin that match
-      #     the PathPattern for this cache behavior, specify `true` for
+      #     the PathPattern for this cache behavior, specify +true+ for
       #     Enabled, and specify the applicable values for Quantity and Items.
       #     For more information, go to Using a Signed URL to Serve Private
       #     Content in the Amazon CloudFront Developer Guide. If you don't want
       #     to require signed URLs in requests for objects that match
-      #     PathPattern, specify `false` for Enabled and 0 for Quantity. Omit
+      #     PathPattern, specify +false+ for Enabled and 0 for Quantity. Omit
       #     Items. To add, change, or remove one or more trusted signers,
-      #     change Enabled to `true` (if it's currently `false` ), change
+      #     change Enabled to +true+ (if it's currently +false+ ), change
       #     Quantity as applicable, and specify all of the trusted signers that
       #     you want to include in the updated distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want to
@@ -446,6 +513,12 @@ module AWS
       #     * `:items` - (Array<String>) Optional: A complex type that contains
       #       trusted signers for this cache behavior. If Quantity is 0, you
       #       can omit Items.
+      #   * `:price_class` - *required* - (String) A complex type that contains
+      #     information about price class for this streaming distribution.
+      #     Valid values include:
+      #     * `PriceClass_100`
+      #     * `PriceClass_200`
+      #     * `PriceClass_All`
       #   * `:enabled` - *required* - (Boolean) Whether the streaming
       #     distribution is enabled to accept end user requests for content.
       # @return [Core::Response]
@@ -480,6 +553,7 @@ module AWS
       #       * `:enabled` - (Boolean)
       #       * `:quantity` - (Integer)
       #       * `:items` - (Array<String>)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method delete_cloud_front_origin_access_identity(options = {})
@@ -570,6 +644,11 @@ module AWS
       #       * `:target_origin_id` - (String)
       #       * `:forwarded_values` - (Hash)
       #         * `:query_string` - (Boolean)
+      #         * `:cookies` - (Hash)
+      #           * `:forward` - (String)
+      #           * `:whitelisted_names` - (Hash)
+      #             * `:quantity` - (Integer)
+      #             * `:items` - (Array<String>)
       #       * `:trusted_signers` - (Hash)
       #         * `:enabled` - (Boolean)
       #         * `:quantity` - (Integer)
@@ -583,6 +662,11 @@ module AWS
       #         * `:target_origin_id` - (String)
       #         * `:forwarded_values` - (Hash)
       #           * `:query_string` - (Boolean)
+      #           * `:cookies` - (Hash)
+      #             * `:forward` - (String)
+      #             * `:whitelisted_names` - (Hash)
+      #               * `:quantity` - (Integer)
+      #               * `:items` - (Array<String>)
       #         * `:trusted_signers` - (Hash)
       #           * `:enabled` - (Boolean)
       #           * `:quantity` - (Integer)
@@ -592,8 +676,10 @@ module AWS
       #     * `:comment` - (String)
       #     * `:logging` - (Hash)
       #       * `:enabled` - (Boolean)
+      #       * `:include_cookies` - (Boolean)
       #       * `:bucket` - (String)
       #       * `:prefix` - (String)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method get_distribution_config(options = {})
@@ -623,6 +709,11 @@ module AWS
       #     * `:target_origin_id` - (String)
       #     * `:forwarded_values` - (Hash)
       #       * `:query_string` - (Boolean)
+      #       * `:cookies` - (Hash)
+      #         * `:forward` - (String)
+      #         * `:whitelisted_names` - (Hash)
+      #           * `:quantity` - (Integer)
+      #           * `:items` - (Array<String>)
       #     * `:trusted_signers` - (Hash)
       #       * `:enabled` - (Boolean)
       #       * `:quantity` - (Integer)
@@ -636,6 +727,11 @@ module AWS
       #       * `:target_origin_id` - (String)
       #       * `:forwarded_values` - (Hash)
       #         * `:query_string` - (Boolean)
+      #         * `:cookies` - (Hash)
+      #           * `:forward` - (String)
+      #           * `:whitelisted_names` - (Hash)
+      #             * `:quantity` - (Integer)
+      #             * `:items` - (Array<String>)
       #       * `:trusted_signers` - (Hash)
       #         * `:enabled` - (Boolean)
       #         * `:quantity` - (Integer)
@@ -645,8 +741,10 @@ module AWS
       #   * `:comment` - (String)
       #   * `:logging` - (Hash)
       #     * `:enabled` - (Boolean)
+      #     * `:include_cookies` - (Boolean)
       #     * `:bucket` - (String)
       #     * `:prefix` - (String)
+      #   * `:price_class` - (String)
       #   * `:enabled` - (Boolean)
 
       # @!method get_invalidation(options = {})
@@ -702,6 +800,7 @@ module AWS
       #       * `:enabled` - (Boolean)
       #       * `:quantity` - (Integer)
       #       * `:items` - (Array<String>)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method get_streaming_distribution_config(options = {})
@@ -727,6 +826,7 @@ module AWS
       #     * `:enabled` - (Boolean)
       #     * `:quantity` - (Integer)
       #     * `:items` - (Array<String>)
+      #   * `:price_class` - (String)
       #   * `:enabled` - (Boolean)
 
       # @!method list_cloud_front_origin_access_identities(options = {})
@@ -795,6 +895,11 @@ module AWS
       #       * `:target_origin_id` - (String)
       #       * `:forwarded_values` - (Hash)
       #         * `:query_string` - (Boolean)
+      #         * `:cookies` - (Hash)
+      #           * `:forward` - (String)
+      #           * `:whitelisted_names` - (Hash)
+      #             * `:quantity` - (Integer)
+      #             * `:items` - (Array<String>)
       #       * `:trusted_signers` - (Hash)
       #         * `:enabled` - (Boolean)
       #         * `:quantity` - (Integer)
@@ -808,6 +913,11 @@ module AWS
       #         * `:target_origin_id` - (String)
       #         * `:forwarded_values` - (Hash)
       #           * `:query_string` - (Boolean)
+      #           * `:cookies` - (Hash)
+      #             * `:forward` - (String)
+      #             * `:whitelisted_names` - (Hash)
+      #               * `:quantity` - (Integer)
+      #               * `:items` - (Array<String>)
       #         * `:trusted_signers` - (Hash)
       #           * `:enabled` - (Boolean)
       #           * `:quantity` - (Integer)
@@ -815,6 +925,7 @@ module AWS
       #         * `:viewer_protocol_policy` - (String)
       #         * `:min_ttl` - (Integer)
       #     * `:comment` - (String)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method list_invalidations(options = {})
@@ -841,6 +952,7 @@ module AWS
       #   * `:quantity` - (Integer)
       #   * `:items` - (Array<Hash>)
       #     * `:id` - (String)
+      #     * `:create_time` - (Time)
       #     * `:status` - (String)
 
       # @!method list_streaming_distributions(options = {})
@@ -878,6 +990,7 @@ module AWS
       #       * `:quantity` - (Integer)
       #       * `:items` - (Array<String>)
       #     * `:comment` - (String)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method update_cloud_front_origin_access_identity(options = {})
@@ -1005,24 +1118,44 @@ module AWS
       #       request matches the path pattern either for a cache behavior or
       #       for the default cache behavior.
       #     * `:forwarded_values` - *required* - (Hash) A complex type that
-      #       specifies how CloudFront handles query strings.
+      #       specifies how CloudFront handles query strings and cookies.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
       #         want CloudFront to forward query strings to the origin that is
-      #         associated with this cache behavior. If so, specify `true` ; if
-      #         not, specify `false` .
+      #         associated with this cache behavior. If so, specify +true+ ; if
+      #         not, specify +false+ .
+      #       * `:cookies` - *required* - (Hash) A complex type that specifies
+      #         how CloudFront handles cookies.
+      #         * `:forward` - *required* - (String) Use this element to
+      #           specify whether you want CloudFront to forward cookies to the
+      #           origin that is associated with this cache behavior. You can
+      #           specify all, none or whitelist. If you choose All, CloudFront
+      #           forwards all cookies regardless of how many your application
+      #           uses. Valid values include:
+      #           * `none`
+      #           * `whitelist`
+      #           * `all`
+      #         * `:whitelisted_names` - (Hash) A complex type that specifies
+      #           the whitelisted cookies, if any, that you want CloudFront to
+      #           forward to your origin that is associated with this cache
+      #           behavior.
+      #           * `:quantity` - *required* - (Integer) The number of
+      #             whitelisted cookies for this cache behavior.
+      #           * `:items` - (Array<String>) Optional: A complex type that
+      #             contains whitelisted cookies for this cache behavior. If
+      #             Quantity is 0, you can omit Items.
       #     * `:trusted_signers` - *required* - (Hash) A complex type that
       #       specifies the AWS accounts, if any, that you want to allow to
       #       create signed URLs for private content. If you want to require
       #       signed URLs in requests for objects in the target origin that
-      #       match the PathPattern for this cache behavior, specify `true` for
+      #       match the PathPattern for this cache behavior, specify +true+ for
       #       Enabled, and specify the applicable values for Quantity and
       #       Items. For more information, go to Using a Signed URL to Serve
       #       Private Content in the Amazon CloudFront Developer Guide. If you
       #       don't want to require signed URLs in requests for objects that
-      #       match PathPattern, specify `false` for Enabled and 0 for
+      #       match PathPattern, specify +false+ for Enabled and 0 for
       #       Quantity. Omit Items. To add, change, or remove one or more
-      #       trusted signers, change Enabled to `true` (if it's currently
-      #       `false` ), change Quantity as applicable, and specify all of the
+      #       trusted signers, change Enabled to +true+ (if it's currently
+      #       +false+ ), change Quantity as applicable, and specify all of the
       #       trusted signers that you want to include in the updated
       #       distribution.
       #       * `:enabled` - *required* - (Boolean) Specifies whether you want
@@ -1068,24 +1201,44 @@ module AWS
       #         request matches the path pattern either for a cache behavior or
       #         for the default cache behavior.
       #       * `:forwarded_values` - *required* - (Hash) A complex type that
-      #         specifies how CloudFront handles query strings.
+      #         specifies how CloudFront handles query strings and cookies.
       #         * `:query_string` - *required* - (Boolean) Indicates whether
       #           you want CloudFront to forward query strings to the origin
       #           that is associated with this cache behavior. If so, specify
-      #           `true` ; if not, specify `false` .
+      #           +true+ ; if not, specify +false+ .
+      #         * `:cookies` - *required* - (Hash) A complex type that
+      #           specifies how CloudFront handles cookies.
+      #           * `:forward` - *required* - (String) Use this element to
+      #             specify whether you want CloudFront to forward cookies to
+      #             the origin that is associated with this cache behavior. You
+      #             can specify all, none or whitelist. If you choose All,
+      #             CloudFront forwards all cookies regardless of how many your
+      #             application uses. Valid values include:
+      #             * `none`
+      #             * `whitelist`
+      #             * `all`
+      #           * `:whitelisted_names` - (Hash) A complex type that specifies
+      #             the whitelisted cookies, if any, that you want CloudFront
+      #             to forward to your origin that is associated with this
+      #             cache behavior.
+      #             * `:quantity` - *required* - (Integer) The number of
+      #               whitelisted cookies for this cache behavior.
+      #             * `:items` - (Array<String>) Optional: A complex type that
+      #               contains whitelisted cookies for this cache behavior. If
+      #               Quantity is 0, you can omit Items.
       #       * `:trusted_signers` - *required* - (Hash) A complex type that
       #         specifies the AWS accounts, if any, that you want to allow to
       #         create signed URLs for private content. If you want to require
       #         signed URLs in requests for objects in the target origin that
-      #         match the PathPattern for this cache behavior, specify `true`
+      #         match the PathPattern for this cache behavior, specify +true+
       #         for Enabled, and specify the applicable values for Quantity and
       #         Items. For more information, go to Using a Signed URL to Serve
       #         Private Content in the Amazon CloudFront Developer Guide. If
       #         you don't want to require signed URLs in requests for objects
-      #         that match PathPattern, specify `false` for Enabled and 0 for
+      #         that match PathPattern, specify +false+ for Enabled and 0 for
       #         Quantity. Omit Items. To add, change, or remove one or more
-      #         trusted signers, change Enabled to `true` (if it's currently
-      #         `false` ), change Quantity as applicable, and specify all of
+      #         trusted signers, change Enabled to +true+ (if it's currently
+      #         +false+ ), change Quantity as applicable, and specify all of
       #         the trusted signers that you want to include in the updated
       #         distribution.
       #         * `:enabled` - *required* - (Boolean) Specifies whether you
@@ -1118,10 +1271,18 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a distribution or if
       #       you want to disable logging for an existing distribution, specify
-      #       `false` for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify `false` for Enabled but you specify
-      #       values for Bucket and Prefix, the values are automatically
-      #       deleted.
+      #       +false+ for Enabled, and specify empty Bucket and Prefix
+      #       elements. If you specify +false+ for Enabled but you specify
+      #       values for Bucket, prefix and IncludeCookies, the values are
+      #       automatically deleted.
+      #     * `:include_cookies` - *required* - (Boolean) Specifies whether you
+      #       want CloudFront to include cookies in access logs, specify +true+
+      #       for IncludeCookies. If you choose to include cookies in logs,
+      #       CloudFront logs all cookies regardless of how you configure the
+      #       cache behaviors for this distribution. If you do not want to
+      #       include cookies when you create a distribution or if you want to
+      #       disable include cookies for an existing distribution, specify
+      #       +false+ for IncludeCookies.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
@@ -1129,6 +1290,12 @@ module AWS
       #       distribution, for example, myprefix/. If you want to enable
       #       logging, but you do not want to specify a prefix, you still must
       #       include an empty Prefix element in the Logging element.
+      #   * `:price_class` - *required* - (String) A complex type that contains
+      #     information about price class for this distribution. Valid values
+      #     include:
+      #     * `PriceClass_100`
+      #     * `PriceClass_200`
+      #     * `PriceClass_All`
       #   * `:enabled` - *required* - (Boolean) Whether the distribution is
       #     enabled to accept end user requests for content.
       # * `:id` - *required* - (String) The distribution's id.
@@ -1172,6 +1339,11 @@ module AWS
       #       * `:target_origin_id` - (String)
       #       * `:forwarded_values` - (Hash)
       #         * `:query_string` - (Boolean)
+      #         * `:cookies` - (Hash)
+      #           * `:forward` - (String)
+      #           * `:whitelisted_names` - (Hash)
+      #             * `:quantity` - (Integer)
+      #             * `:items` - (Array<String>)
       #       * `:trusted_signers` - (Hash)
       #         * `:enabled` - (Boolean)
       #         * `:quantity` - (Integer)
@@ -1185,6 +1357,11 @@ module AWS
       #         * `:target_origin_id` - (String)
       #         * `:forwarded_values` - (Hash)
       #           * `:query_string` - (Boolean)
+      #           * `:cookies` - (Hash)
+      #             * `:forward` - (String)
+      #             * `:whitelisted_names` - (Hash)
+      #               * `:quantity` - (Integer)
+      #               * `:items` - (Array<String>)
       #         * `:trusted_signers` - (Hash)
       #           * `:enabled` - (Boolean)
       #           * `:quantity` - (Integer)
@@ -1194,8 +1371,10 @@ module AWS
       #     * `:comment` - (String)
       #     * `:logging` - (Hash)
       #       * `:enabled` - (Boolean)
+      #       * `:include_cookies` - (Boolean)
       #       * `:bucket` - (String)
       #       * `:prefix` - (String)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # @!method update_streaming_distribution(options = {})
@@ -1237,31 +1416,32 @@ module AWS
       #     whether access logs are written for the streaming distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
-      #       not want to enable logging when you create a distribution or if
-      #       you want to disable logging for an existing distribution, specify
-      #       `false` for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify `false` for Enabled but you specify
-      #       values for Bucket and Prefix, the values are automatically
-      #       deleted.
+      #       not want to enable logging when you create a streaming
+      #       distribution or if you want to disable logging for an existing
+      #       streaming distribution, specify +false+ for Enabled, and specify
+      #       empty Bucket and Prefix elements. If you specify +false+ for
+      #       Enabled but you specify values for Bucket and Prefix, the values
+      #       are automatically deleted.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
       #       want CloudFront to prefix to the access log filenames for this
-      #       distribution, for example, myprefix/. If you want to enable
-      #       logging, but you do not want to specify a prefix, you still must
-      #       include an empty Prefix element in the Logging element.
+      #       streaming distribution, for example, myprefix/. If you want to
+      #       enable logging, but you do not want to specify a prefix, you
+      #       still must include an empty Prefix element in the Logging
+      #       element.
       #   * `:trusted_signers` - *required* - (Hash) A complex type that
       #     specifies the AWS accounts, if any, that you want to allow to
       #     create signed URLs for private content. If you want to require
       #     signed URLs in requests for objects in the target origin that match
-      #     the PathPattern for this cache behavior, specify `true` for
+      #     the PathPattern for this cache behavior, specify +true+ for
       #     Enabled, and specify the applicable values for Quantity and Items.
       #     For more information, go to Using a Signed URL to Serve Private
       #     Content in the Amazon CloudFront Developer Guide. If you don't want
       #     to require signed URLs in requests for objects that match
-      #     PathPattern, specify `false` for Enabled and 0 for Quantity. Omit
+      #     PathPattern, specify +false+ for Enabled and 0 for Quantity. Omit
       #     Items. To add, change, or remove one or more trusted signers,
-      #     change Enabled to `true` (if it's currently `false` ), change
+      #     change Enabled to +true+ (if it's currently +false+ ), change
       #     Quantity as applicable, and specify all of the trusted signers that
       #     you want to include in the updated distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want to
@@ -1272,6 +1452,12 @@ module AWS
       #     * `:items` - (Array<String>) Optional: A complex type that contains
       #       trusted signers for this cache behavior. If Quantity is 0, you
       #       can omit Items.
+      #   * `:price_class` - *required* - (String) A complex type that contains
+      #     information about price class for this streaming distribution.
+      #     Valid values include:
+      #     * `PriceClass_100`
+      #     * `PriceClass_200`
+      #     * `PriceClass_All`
       #   * `:enabled` - *required* - (Boolean) Whether the streaming
       #     distribution is enabled to accept end user requests for content.
       # * `:id` - *required* - (String) The streaming distribution's id.
@@ -1310,11 +1496,12 @@ module AWS
       #       * `:enabled` - (Boolean)
       #       * `:quantity` - (Integer)
       #       * `:items` - (Array<String>)
+      #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
 
       # end client methods #
 
-      define_client_methods('2012-05-05')
+      define_client_methods('2012-07-01')
 
     end
   end
