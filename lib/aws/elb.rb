@@ -54,6 +54,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'elasticloadbalancing'
+
     # @return [LoadBalancerCollection] Returns a collection that represents
     #   all of your load balancers.
     def load_balancers

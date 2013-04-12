@@ -13,7 +13,13 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'S3', 's3', 's3.amazonaws.com'
+  add_service 'S3', 's3' do |region|
+    if region == 'us-east-1'
+      's3.amazonaws.com'
+    else
+      's3-%s.amazonaws.com' % region
+    end
+  end
 
   add_option :s3_force_path_style, false, :boolean => true
 

@@ -167,6 +167,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'iam', :global => true
+
     # Returns a collection that represents all AWS users for this account:
     #
     # @example Getting a user by name

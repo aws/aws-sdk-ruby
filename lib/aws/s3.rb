@@ -143,6 +143,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 's3'
+
     # @return [BucketCollection] Returns a collection that represents all
     #  buckets in the account.
     def buckets

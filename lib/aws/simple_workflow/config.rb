@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SimpleWorkflow', 'simple_workflow', 'swf.us-east-1.amazonaws.com'
+  add_service 'SimpleWorkflow', 'simple_workflow', 'swf.%s.amazonaws.com'
 
 end

@@ -182,6 +182,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'email'
+
     # @note This method is deprecated.  Use {#identities} instead.
     # @return [EmailAddressCollection] Returns a collection that represents
     #   all of the verified email addresses for your account.

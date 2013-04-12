@@ -181,16 +181,8 @@ module AWS
   # The default region is `us-east-1`; you can access other regions
   # like this:
   #
-  #     ec2_us_west = ec2.regions["us-west-1"]
-  #     # starts an instance in eu-west-1
-  #     ec2_us_west.instances.create(:image_id => 'ami-3bc9997e')
-  #
-  # This makes a call to EC2's DescribeRegions API to find the
-  # endpoint for "us-west-1" -- if you just want to configure a
-  # different endpoint without making a call to EC2, you can do it
-  # like this:
-  #
-  #      ec2 = AWS::EC2.new(:ec2_endpoint => "ec2.us-west-1.amazonaws.com")
+  #     ec2 = AWS::EC2.new(:region => "us-west-1")
+  #     ec2.instances.create(:image_id => 'ami-3bc9997e')
   #
   # ## Availability Zones
   #
@@ -296,6 +288,8 @@ module AWS
     autoload :VPNGatewayCollection, 'aws/ec2/vpn_gateway_collection'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'ec2'
 
     # @return [InstanceCollection] A collection representing all instances
     def instances

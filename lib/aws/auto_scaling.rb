@@ -93,6 +93,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'autoscaling'
+
     # @return [LaunchConfigurationCollection]
     def launch_configurations
       LaunchConfigurationCollection.new(:config => config)

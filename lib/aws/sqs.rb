@@ -68,6 +68,8 @@ module AWS
 
     include Core::ServiceInterface
 
+    endpoint_prefix 'sqs'
+
     # @return [QueueCollection] The collection of all {Queue}
     #   objects in your account.
     def queues
