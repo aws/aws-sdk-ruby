@@ -23,6 +23,9 @@ module AWS
 
         self.access_key_id = credentials.access_key_id
 
+        headers['x-amz-security-token'] = credentials.session_token if
+          credentials.session_token
+
         auth = "AWS #{access_key_id}:#{signature(credentials)}"
         headers['authorization'] = auth
 
