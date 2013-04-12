@@ -215,9 +215,7 @@ module AWS
       #
       #   @option options [Integer] :part_number The part number.
       #
-      #   @option options [Integer] :first_byte The first byte of the range of bytes of the copy_source to copy
-      #
-      #   @option options [Integer] :last_byte The last byte of the range of bytes of the copy_source to copy
+      #   @option options [Integer] :copy_source_range Range of bytes to copy, ie bytes=0-45687
       def copy_part(copy_source, options = {})
         part_options = base_opts.merge(options)
         part_options.merge!(:copy_source => copy_source)

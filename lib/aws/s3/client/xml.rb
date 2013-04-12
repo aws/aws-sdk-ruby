@@ -225,6 +225,16 @@ module AWS
           end
         end
 
+        CopyPart = BaseGrammar.customize do
+          element "ETag" do
+            rename :etag
+          end
+          element "LastModified" do
+            datetime_value
+            rename :last_modified
+          end
+        end
+
       end
     end
   end

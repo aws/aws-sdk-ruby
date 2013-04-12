@@ -22,8 +22,6 @@ AWS::Core::Configuration.module_eval do
   add_option :s3_multipart_min_part_size, 5 * 1024 * 1024
 
   add_option :s3_multipart_max_parts, 10000
-  
-  add_option :s3_multipart_copy_min_size, 5 * 1024 * 1024 * 1024
 
   add_option :s3_server_side_encryption, nil
 

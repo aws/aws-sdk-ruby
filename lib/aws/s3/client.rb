@@ -1355,7 +1355,7 @@ module AWS
 
       end
 
-      object_method(:copy_part, :put, :header_options => {
+      object_method(:copy_part, :put, XML::CopyPart, :header_options => {
         :copy_source => 'x-amz-copy-source',
         :copy_source_range => 'x-amz-copy-source-range',
       }) do
@@ -1366,10 +1366,11 @@ module AWS
             "may not be blank" if options[:copy_source].to_s.empty?
           end
 
-          validate_byte_range!(options[:first_byte], options[:last_byte])
+          validate!(:copy_source_range, options[:copy_source_range]) do
+            "must start with bytes=" if options[:copy_source_range] && !options[:copy_source_range].start_with?("bytes=")
+          end
 
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
-          options.merge!(:copy_source_range => "bytes=#{options[:first_byte]}-#{options[:last_byte]}") unless options[:first_byte].nil?
 
           require_upload_id!(options[:upload_id])
           request.add_param('uploadId', options[:upload_id])
@@ -1383,10 +1384,6 @@ module AWS
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
           end
 
-        end
-
-        process_response do |resp|
-          parse_copy_part_response(resp)
         end
 
       end
@@ -1695,25 +1692,6 @@ module AWS
         def require_part_number! part_number
           validate!("part_number", part_number) do
             "must not be blank" if part_number.to_s.empty?
-          end
-        end
-
-        def validate_byte_range!(first_byte, last_byte)
-
-          validate!("byte-range", nil) do
-            "both first_byte and last_byte must be provided" if (first_byte.nil? && !last_byte.nil?) || (!first_byte.nil? && last_byte.nil?)
-          end
-
-          if (!first_byte.nil?)
-            validate!("first_byte", first_byte) do
-              "must be non-negative integer" if !first_byte.is_a?(Integer) || first_byte < 0
-            end
-            validate!("last_byte", last_byte) do
-              "must be non-negative integer" if !last_byte.is_a?(Integer) || last_byte < 0
-            end
-            validate!("byte_range", last_byte - first_byte) do
-              "must be non-negative integer" if last_byte - first_byte < 0
-            end
           end
         end
 

@@ -883,11 +883,7 @@ module AWS
         options[:bucket_name] = bucket.name
         options[:key] = key
 
-        
-        source_length = copy_source_length(options[:copy_source], options[:version_id])
-
-        if use_multipart_copy?(source_length, options)
-          options[:content_length] = source_length
+        if use_multipart_copy?(options)
           multipart_copy(options)
         else
           resp = client.copy_object(options)
@@ -1270,26 +1266,20 @@ module AWS
 
       private
 
-
-      # Get the length of the source to see if we need to do a multi-part copy
-      def copy_source_length source, version_id
-        source_bucket_name, source_key = source.split("/", 2)
-        source_bucket = Bucket.new(source_bucket_name, :config => config)
-        source_obj = S3Object.new(source_bucket, source_key)
-        
-        source_obj.head({:version_id => version_id})[:content_length]
-      end
-
       # Used to determine if the data needs to be copied in parts
-      def use_multipart_copy? source_length, options
-        source_length >= multipart_copy_threshold(options)
-      end
-
-      def multipart_copy_threshold options
-        threshold = options[:multipart_copy_threshold] ? [options[:multipart_copy_threshold], config.s3_multipart_copy_min_size].min : config.s3_multipart_copy_min_size
+      def use_multipart_copy? options
+        options[:use_multipart_copy]
       end
 
       def multipart_copy options
+
+        puts "Running multi-part copy"
+        unless options[:content_length]
+          msg = "unknown content length, must set :content_length " +
+              "to use multi-part copy"
+          raise ArgumentError, msg
+        end
+
         part_size = compute_part_size(options)
         clean_up_options(options)
         source_length = options.delete(:content_length)
@@ -1299,7 +1289,7 @@ module AWS
           # We copy in part_size chunks until we read the 
           until pos >= source_length
             last_byte = (pos + part_size >= source_length) ? source_length - 1 : pos + part_size - 1
-            upload.copy_part(options[:copy_source], options.merge({:first_byte => pos, :last_byte => last_byte})) 
+            upload.copy_part(options[:copy_source], options.merge({:copy_source_range => "bytes=#{pos}-#{last_byte}"})) 
             pos += part_size
           end
         end
