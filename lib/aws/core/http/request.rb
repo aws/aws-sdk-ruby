@@ -105,6 +105,11 @@ module AWS
         #   requests if {#ssl_verify_peer?} is true.
         attr_accessor :ssl_ca_path
 
+        # @return [Float] timeout The number of seconds to wait for a
+        #   100-continue response before sending the HTTP request body.
+        # @private
+        attr_accessor :continue_timeout
+
         # @return [Integer] Returns the port the request will be made over.
         #   Defaults to 443 for SSL requests and 80 for non-SSL requests.
         def port
