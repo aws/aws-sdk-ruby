@@ -1147,31 +1147,34 @@ module AWS
       # @overload delete_objects(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
-      #   @option options [required,Array<String>] :keys
+      #   @option options [required,Array<Hash>] :objects Each entry should be
+      #     a hash with the following keys:
+      #     * `:key` - *required*
+      #     * `:version_id`
       #   @option options [Boolean] :quiet (true)
       #   @option options [String] :mfa
       #   @return [Core::Response]
-      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects, :header_options => { :mfa => "x-amz-mfa" }) do
+      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects,
+        :header_options => { :mfa => "x-amz-mfa" }
+      ) do
+
         configure_request do |req, options|
 
           super(req, options)
 
-          quiet = options.key?(:quiet) ? options[:quiet] : true
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.Delete do
+              xml.Quiet(options.key?(:quiet) ? options[:quiet] : true)
+              (options[:objects] || options[:keys]).each do |obj|
+                xml.Object do
+                  xml.Key(obj[:key])
+                  xml.VersionId(obj[:version_id]) if obj[:version_id]
+                end
+              end
+            end
+          end.doc.root.to_xml
 
-          # previously named this option :objects, since renamed
-          keys = options[:objects] || options[:keys]
-
-          objects = keys.inject('') do |xml,o|
-            xml << "<Object><Key>#{REXML::Text.normalize(o[:key])}</Key>"
-            xml << "<VersionId>#{o[:version_id]}</VersionId>" if o[:version_id]
-            xml << "</Object>"
-          end
-
-          xml = '<?xml version="1.0" encoding="UTF-8"?>'
-          xml << "<Delete><Quiet>#{quiet}</Quiet>#{objects}</Delete>"
-
-          req.body = xml
-          req.headers['content-md5'] = md5(xml)
+          req.headers['content-md5'] = md5(req.body)
 
         end
       end
@@ -1220,7 +1223,10 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [required,String] :upload_id
-      #   @option options [required,Array<String>] :parts
+      #   @option options [required,Array<Hash>] :parts An array of hashes
+      #     with the following keys:
+      #     * `:part_number` [Integer] - *required*
+      #     * `:etag` [String] - *required*
       #   @return [Core::Response]
       object_method(:complete_multipart_upload, :post,
                     XML::CompleteMultipartUpload) do
@@ -1229,14 +1235,18 @@ module AWS
           validate_parts!(options[:parts])
           super(req, options)
           req.add_param('uploadId', options[:upload_id])
-          parts_xml = options[:parts].map do |part|
-            "<Part>"+
-              "<PartNumber>#{part[:part_number].to_i}</PartNumber>"+
-              "<ETag>#{REXML::Text.normalize(part[:etag].to_s)}</ETag>"+
-              "</Part>"
-          end.join
-          req.body =
-            "<CompleteMultipartUpload>#{parts_xml}</CompleteMultipartUpload>"
+
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.CompleteMultipartUpload do
+              options[:parts].each do |part|
+                xml.Part do
+                  xml.PartNumber(part[:part_number])
+                  xml.ETag(part[:etag])
+                end
+              end
+            end
+          end.doc.root.to_xml
+
         end
 
         process_response do |resp|
