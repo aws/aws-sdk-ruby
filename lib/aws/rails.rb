@@ -151,7 +151,7 @@ module AWS
     #
     def self.add_action_mailer_delivery_method name = :amazon_ses, options = {}
 
-      if ::Rails.version.to_s.to_f >= 3
+      if ::Rails.version.to_s >= '3.0'
         ActiveSupport.on_load(:action_mailer) do
           self.add_delivery_method(name, AWS::SimpleEmailService, options)
         end
