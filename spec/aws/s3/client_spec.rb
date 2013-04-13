@@ -1871,7 +1871,7 @@ module AWS
 
         it 'sends :parts as an XML request body' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "<Part><PartNumber>2</PartNumber><ETag>bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
@@ -1885,18 +1885,18 @@ module AWS
 
         it 'converts the part number to an integer' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
-          my_opts = opts.merge(:parts => [{ :part_number => "1.2",
+          my_opts = opts.merge(:parts => [{ :part_number => "1",
                                             :etag => 'foo' }])
           client.complete_multipart_upload(my_opts)
         end
 
         it 'escapes XML characters in the etag' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo&amp;bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
