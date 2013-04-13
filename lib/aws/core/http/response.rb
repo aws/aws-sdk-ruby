@@ -68,7 +68,7 @@ module AWS
         # @return [String,nil] The value of the given header
         def header name
           headers.each_pair do |header_name, header_value|
-            if header_name.downcase == name.to_s.downcase
+            if header_name && header_name.downcase == name.to_s.downcase
               return header_value.is_a?(Array) ? header_value.first : header_value
             end
           end

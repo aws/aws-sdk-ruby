@@ -1206,6 +1206,13 @@ module AWS
       # @option options [String] :response_content_encoding Sets the
       #   Content-Encoding header of the response when performing an
       #   HTTP GET on the returned URL.
+      #
+      # @option options [String] :content_type Sets
+      #   the Content-Type header of the request.
+      #
+      # @option options [String] :storage_class Sets the
+      #   x-amz-storage-class header of the request.
+      #
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
 
@@ -1215,6 +1222,8 @@ module AWS
 
         method = http_method(method)
         expires = expiration_timestamp(options[:expires])
+        req.content_type = options[:content_type] || ''
+        req.storage_class = options[:storage_class] if options.has_key?(:storage_class)
         req.add_param("AWSAccessKeyId",
                       config.credential_provider.access_key_id)
         req.add_param("versionId", options[:version_id]) if options[:version_id]
@@ -1352,10 +1361,13 @@ module AWS
         parts = []
         parts << method
         parts << ""
-        parts << ""
+        parts << request.content_type || ""
         parts << expires
         if token = config.credential_provider.session_token
           parts << "x-amz-security-token:#{token}"
+        end
+        if request.headers.has_key?('x-amz-storage-class')
+          parts << "x-amz-storage-class:#{request.headers['x-amz-storage-class']}"
         end
         parts << request.canonicalized_resource
 

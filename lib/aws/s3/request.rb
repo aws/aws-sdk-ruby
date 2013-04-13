@@ -29,6 +29,9 @@ module AWS
       attr_accessor :key
 
       # @private
+      attr_accessor :content_type
+
+      # @private
       attr_accessor :force_path_style
 
       def metadata= metadata
