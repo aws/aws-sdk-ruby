@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -93,9 +93,9 @@ Then /^the instance\'s (kernel|ramdisk) ID should eventually be "([^\"]*)"$/ do 
 end
 
 Given /^I put the instance into a stopped state$/ do
-  Given %(I wait for the instance status to be "running")
-  Given %(I stop the instance)
-  Given %(I wait for the instance status to be "stopped")
+  step %(I wait for the instance status to be "running")
+  step %(I stop the instance)
+  step %(I wait for the instance status to be "stopped")
 end
 
 When /^I get the instance\'s root device name$/ do

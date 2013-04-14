@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -51,7 +51,7 @@ module AWS
         end
 
       end
-      
+
       context 'subnet attributes' do
 
         let(:response) { client.stub_for(:describe_subnets) }
@@ -132,17 +132,17 @@ module AWS
 
           it 'is returned as a string' do
             subnet.availability_zone_name.should == 'us-east-1d'
-            subnet.availability_zone.should == 
+            subnet.availability_zone.should ==
               AvailabilityZone.new('us-east-1d', :config => config)
           end
 
         end
 
-        context 'route table' do 
+        context 'route table' do
 
           let(:response) { client.stub_for(:describe_route_tables) }
 
-          before(:each) do 
+          before(:each) do
             response.data[:route_table_set] = [
               {
                 :route_table_id => 'route-table-id-1',
@@ -170,18 +170,18 @@ module AWS
           context 'getting the route table' do
 
             it 'describes route tables and finds itself' do
-              subnet = Subnet.new('subnet-1', 
+              subnet = Subnet.new('subnet-1',
                 :vpc_id => 'vpc-id',
                 :config => config)
-              subnet.route_table.should == 
+              subnet.route_table.should ==
                 RouteTable.new('route-table-id-1', :config => config)
             end
 
             it 'returns the default route table if there is no association' do
-              subnet = Subnet.new('subnet-3', 
+              subnet = Subnet.new('subnet-3',
                 :vpc_id => 'vpc-id',
                 :config => config)
-              subnet.route_table.should == 
+              subnet.route_table.should ==
                 RouteTable.new('route-table-id-2', :config => config)
             end
 
@@ -189,10 +189,10 @@ module AWS
 
           context 'setting the route table' do
 
-            let(:route_table) { 
-              RouteTable.new('other-route-table', :config => config) 
+            let(:route_table) {
+              RouteTable.new('other-route-table', :config => config)
             }
-            
+
             context 'a subnet without a route table association' do
 
               it 'calls #associate_route_table on the client' do
@@ -204,7 +204,7 @@ module AWS
                   :route_table_id => route_table.id,
                   :subnet_id => 'subnet-3').and_return(resp)
 
-                subnet = Subnet.new('subnet-3', 
+                subnet = Subnet.new('subnet-3',
                   :vpc_id => 'vpc-id',
                   :config => config)
 
@@ -230,7 +230,7 @@ module AWS
                   :association_id => 'rta-321',
                   :route_table_id => route_table.id).and_return(resp)
 
-                subnet = Subnet.new('subnet-2', 
+                subnet = Subnet.new('subnet-2',
                   :vpc_id => 'vpc-id',
                   :config => config)
 

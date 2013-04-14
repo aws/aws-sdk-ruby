@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,7 +19,7 @@ Feature: Managing Activity Types in Simple Workflow
   Scenario: Register a activity type
     Given I register a simple workflow domain
     When I register a activity type named "foo" with the version "bar" with:
-    | ATTR_NAME                              | VALUE     | 
+    | ATTR_NAME                              | VALUE     |
     | default_task_heartbeat_timeout         | 3000      |
     | default_task_list                      | task-list |
     | description                            | desc      |
@@ -28,7 +28,7 @@ Feature: Managing Activity Types in Simple Workflow
     | default_task_start_to_close_timeout    | 4000      |
     And I get the activity type by name and version
     Then the activity type should have the following attributes
-    | ATTR_NAME                              | VALUE     | 
+    | ATTR_NAME                              | VALUE     |
     | default_task_heartbeat_timeout         | 3000      |
     | default_task_list                      | task-list |
     | description                            | desc      |

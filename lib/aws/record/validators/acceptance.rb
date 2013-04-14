@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,15 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
 
     # @private
     class AcceptanceValidator < Validator
 
-      ACCEPTED_OPTIONS = [:accept, :message, :allow_nil, :on, :if, :unless]
+      ACCEPTED_OPTIONS = [:accept, :message, :allow_nil, :allow_blank, :on, :if, :unless]
 
       def setup record_class
         set_default(:allow_nil, true)
@@ -31,7 +29,7 @@ module AWS
         accepted = case value
         when '1'  then true
         when true then true
-        else 
+        else
           options.has_key?(:accept) ?
             value == options[:accept] :
             false

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,7 +19,7 @@ end
 
 Then /^there should eventually be (\d+) workflow execution of the workflow type$/ do |count|
   eventually do
-    @workflow_type.count_executions.should == 
+    @workflow_type.count_executions.should ==
       AWS::SimpleWorkflow::Count.new(count.to_i, false)
   end
 end
@@ -29,11 +29,11 @@ When /^I signal the execution "([^"]*)" with the input "([^"]*)"$/ do |signal_na
 end
 
 Then /^the execution history should have a "([^"]*)" signal with "([^"]*)"$/ do |signal_name, input|
-  signal_event_found = false 
+  signal_event_found = false
   @workflow_execution.history_events.each do |event|
-    if 
+    if
       event.event_type == 'WorkflowExecutionSignaled' and
-      event.attributes.signal_name == signal_name and 
+      event.attributes.signal_name == signal_name and
       event.attributes.input == input
     then
       signal_event_found = true
@@ -53,7 +53,7 @@ Then /^the workflow executions should eventually include the execution$/ do
 end
 
 Then /^the workflow type should have (\d+) workflow executions$/ do |count|
-  @domain.workflow_executions.count.should == 
+  @domain.workflow_executions.count.should ==
     AWS::SimpleWorkflow::Count.new(count.to_i, false)
 end
 

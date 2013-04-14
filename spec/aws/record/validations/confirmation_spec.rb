@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,7 +19,7 @@ module AWS
 
       context 'validates_confirmation_of' do
 
-        it_behaves_like("validation", :accepts_allow_nil => false) do
+        it_behaves_like("validation", :accepts_allow_nil => false, :accepts_allow_blank => false) do
 
           let(:validation_macro) { :validates_confirmation_of }
 
@@ -67,7 +67,7 @@ module AWS
 
             sdb_data.stub(:attributes).and_return('password' => %w(abc))
             klass.string_attr :password
-            klass.validates_confirmation_of :password, 
+            klass.validates_confirmation_of :password,
               :if => :password_changed?
 
             obj = klass['item-id']

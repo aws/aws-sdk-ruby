@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -30,7 +30,7 @@ module AWS::Core
         it 'should default body to nil' do
           Response.new.body.should == nil
         end
-        
+
       end
 
       context '#initialize' do
@@ -71,7 +71,7 @@ module AWS::Core
       end
 
       context '#header' do
-        
+
         it 'returns nil when the response does not have the header' do
           Response.new(:headers => {}).header('foo').should == nil
         end

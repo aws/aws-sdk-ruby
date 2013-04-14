@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,18 +14,18 @@
 module AWS
   class SimpleWorkflow
 
-    # Domains are used to organize workflows types and activities for 
+    # Domains are used to organize workflows types and activities for
     # an account.
     #
-    # @attr_reader [String,nil] description Returns 
+    # @attr_reader [String,nil] description Returns
     #
     # @attr_reader [Integer,Symbol] retention_period Returns the retention
     #   period for this domain. The return value may be an integer (number
-    #   of days history is kept around) or the symbol +:none+, implying
+    #   of days history is kept around) or the symbol `:none`, implying
     #   no expiry of closed workflow executions.
     #
     # @attr_reader [Symbol] status Returns the domain's status.  Status will
-    #   be either +:registered+ or +:deprecated+.
+    #   be either `:registered` or `:deprecated`.
     #
     class Domain < Resource
 
@@ -44,7 +44,7 @@ module AWS
 
       info_attribute :status, :to_sym => true
 
-      config_attribute :retention_period, 
+      config_attribute :retention_period,
         :from => 'workflowExecutionRetentionPeriodInDays',
         :duration => true,
         :static => true
@@ -79,15 +79,15 @@ module AWS
         self.status == :deprecated
       end
 
-      # Deprecates the domain. After a domain has been deprecated it cannot 
-      # be used to create new workflow executions or register new types. 
-      # However, you can still use visibility actions on this domain. 
+      # Deprecates the domain. After a domain has been deprecated it cannot
+      # be used to create new workflow executions or register new types.
+      # However, you can still use visibility actions on this domain.
       #
-      # Deprecating a domain also deprecates all activity and workflow 
-      # types registered in the domain. Executions that were started 
+      # Deprecating a domain also deprecates all activity and workflow
+      # types registered in the domain. Executions that were started
       # before the domain was deprecated will continue to run.
       #
-      # @return [nil] 
+      # @return [nil]
       #
       def deprecate
         client.deprecate_domain(:name => name)

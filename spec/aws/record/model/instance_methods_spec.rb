@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -56,7 +56,7 @@ module AWS
               domain = SimpleDB::Domain.new('abc')
               klass.new(:domain => domain).domain.should == 'abc'
             end
-    
+
           end
 
           context '#id' do
@@ -96,16 +96,16 @@ module AWS
 
             it 'can not be set after construction' do
               obj = klass.new # domain is determined here
-              lambda { 
+              lambda {
                 obj.attributes = { :domain => 'abc' }
               }.should raise_error(NoMethodError, /domain=/)
             end
 
             it 'can not be updated' do
               klass.string_attr :foo
-              obj = klass.new :foo => 'bar' # default domain 
+              obj = klass.new :foo => 'bar' # default domain
               obj.save
-              lambda { 
+              lambda {
                 obj.update_attributes :domain => 'abc'
               }.should raise_error(NoMethodError, /domain=/)
             end
@@ -117,19 +117,19 @@ module AWS
             before(:each) do
               klass.string_attr :name
             end
-    
+
             it 'accepts string keys' do
               obj = klass.new
               obj.should_receive(:name=).with('new name')
               obj.attributes = {'name' => 'new name'}
             end
-    
+
             it 'accepts symbol keys' do
               obj = klass.new
               obj.should_receive(:name=).with('new name')
               obj.attributes = {:name => 'new name'}
             end
-    
+
             it 'raises exception for non-existant attributes' do
               obj = klass.new
               lambda {
@@ -143,10 +143,10 @@ module AWS
               obj.should_receive(:abc=).with('xyz')
               obj.attributes = { :foo => 'bar', 'abc' => 'xyz' }
             end
-    
+
 
           end
-    
+
           context '#attributes' do
 
             it 'returns a hash of attribute names and values' do
@@ -483,6 +483,28 @@ module AWS
                 obj.persisted?.should == true
               end
 
+            end
+
+            context ':validate' do
+              before(:each) do
+                klass.string_attr :category
+                @obj = klass.new(:category => "test")
+              end
+              it '=> false should skip validations and just save' do
+                @obj.should_not_receive(:run_validations)
+                @obj.should_receive(:create)
+                @obj.save(:validate => false)
+              end
+              it '=> true should run validations not save' do
+                @obj.should_receive(:run_validations)
+                @obj.should_receive(:create)
+                @obj.save(:validate => true)
+              end
+              it 'should default to running validataions' do
+                @obj.should_receive(:run_validations)
+                @obj.should_receive(:create)
+                @obj.save()
+              end
             end
 
           end

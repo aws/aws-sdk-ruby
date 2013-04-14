@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -34,7 +34,7 @@ module AWS
         :attribute_values_size_bytes => 6,
         :timestamp => 7,
       }}
-        
+
       let(:response) { double('response', attributes) }
 
       it_behaves_like 'a sdb model object', Object.new

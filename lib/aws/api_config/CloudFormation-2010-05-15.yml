@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,6 +14,16 @@
 ---
 :api_version: '2010-05-15'
 :operations:
+- :name: CancelUpdateStack
+  :method: :cancel_update_stack
+  :inputs:
+    StackName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CancelUpdateStackResult:
+        :ignore: true
 - :name: CreateStack
   :method: :create_stack
   :inputs:
@@ -43,16 +53,16 @@
       - :string
     OnFailure:
     - :string
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateStackResult:
-        :ignore: true
-- :name: CreateUploadBucket
-  :method: :create_upload_bucket
-  :inputs: {}
-  :outputs:
-    :children:
-      CreateUploadBucketResult:
         :ignore: true
 - :name: DeleteStack
   :method: :delete_stack
@@ -131,6 +141,8 @@
   :inputs:
     StackName:
     - :string
+    NextToken:
+    - :string
   :outputs:
     :children:
       DescribeStacksResult:
@@ -174,6 +186,12 @@
                     :children:
                       member:
                         :rename: :outputs
+                        :list: true
+                  Tags:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :tags
                         :list: true
 - :name: EstimateTemplateCost
   :method: :estimate_template_cost

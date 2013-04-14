@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -514,6 +514,15 @@ module AWS
             client.should_receive(:head_object).and_return(head_response)
             client.should_receive(:get_object).and_return(response)
             object.read(:encryption_key => rsa_key)
+          end
+
+          it 'should get materials from the correct object version' do
+            # gets the key via a head request
+            client.should_receive(:head_object).
+              with(hash_including(:version_id => 'abc')).
+              and_return(head_response)
+            client.should_receive(:get_object).and_return(response)
+            object.read(:encryption_key => rsa_key, :version_id => 'abc')
           end
 
           it 'should call get_object with metadata material location' do

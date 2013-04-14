@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -125,13 +125,13 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         let(:resp) { client.stub_for(:describe_auto_scaling_instances) }
 
         before(:each) do
           client.stub(:describe_auto_scaling_instances).and_return(resp)
         end
-      
+
         it 'returns true when it can be described' do
           resp.data[:auto_scaling_instances] = [{}] # not empty
           instance.exists?.should == true

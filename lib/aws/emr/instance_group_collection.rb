@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -42,7 +42,7 @@ module AWS
       # @option options [String] :market Market type of the Amazon EC2
       #   instances used to create a cluster node.
       # @option opitons [Float,String] :bid_price Bid price for each Amazon
-      #   EC2 instance in the instance group when launching nodes as 
+      #   EC2 instance in the instance group when launching nodes as
       #   spot instances, expressed in USD.
       # @return [InstanceGroup]
       def create role, instance_type, instance_count, options = {}

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,25 +25,25 @@ module AWS
 
       # Adds one or more items to the batch write operation.
       #
-      #   # adding one item at a time to the batch
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.put('table-name', :id => 'id1', :color => 'red')
-      #   batch.put('table-name', :id => 'id2', :color => 'blue')
-      #   batch.process!
+      #     # adding one item at a time to the batch
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.put('table-name', :id => 'id1', :color => 'red')
+      #     batch.put('table-name', :id => 'id2', :color => 'blue')
+      #     batch.process!
       #
-      #   # adding multiple items to a batch
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.put('table-name', [
-      #     { :id => 'id1', :color => 'red' },
-      #     { :id => 'id2', :color => 'blue' },
-      #     { :id => 'id3', :color => 'green' },
-      #   ])
-      #   batch.process!
+      #     # adding multiple items to a batch
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.put('table-name', [
+      #       { :id => 'id1', :color => 'red' },
+      #       { :id => 'id2', :color => 'blue' },
+      #       { :id => 'id3', :color => 'green' },
+      #     ])
+      #     batch.process!
       #
       # @param [Table,String] table A {Table} object or table name string.
       #
       # @param [Array<Hash>] items A list of item attributes to put.
-      #   The hash must contain the table hash key element and range key 
+      #   The hash must contain the table hash key element and range key
       #   element (if one is defined).
       #
       # @return [nil]
@@ -55,28 +55,28 @@ module AWS
 
       # Adds one or more items to the batch to delete.
       #
-      #   # for a table w/out a range key
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.delete('table-name', %w(hk1 hk2))
-      #   batch.process!
+      #     # for a table w/out a range key
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.delete('table-name', %w(hk1 hk2))
+      #     batch.process!
       #
-      #   # for a table with a range key
-      #   batch = AWS::DynamoDB::BatchWrite.new
-      #   batch.delete('table-name', [['hk1', 'rk2'], ['hk1', 'rk2']]])
-      #   batch.process!
+      #     # for a table with a range key
+      #     batch = AWS::DynamoDB::BatchWrite.new
+      #     batch.delete('table-name', [['hk1', 'rk2'], ['hk1', 'rk2']]])
+      #     batch.process!
       #
       # @param [Table,String] table A {Table} object or table name string.
       #
-      # @param [Array<String>,Array<Array>] items A list of item keys to 
+      # @param [Array<String>,Array<Array>] items A list of item keys to
       #   delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
-      #      batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
+      #       batch.delete('table-name', ['hk1', 'hk2', 'hk3'])
       #
-      #   For tables with a range key, items should be an array of 
+      #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
-      #      batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #       batch.delete('table-name', [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       # @return [nil]
       #
@@ -95,27 +95,27 @@ module AWS
       # @option options [Array<Hash>] :put An array of items to put.  Each item
       #   should be an array of attribute hashes.
       #
-      #     # add 3 items to the batch
-      #     batch.write(table, :put => [
-      #       { :id => 'abc', :color => 'red', :count => 2 },
-      #       { :id => 'mno', :color => 'blue', :count => 3 },
-      #       { :id => 'xyz', :color => 'green', :count => 5 },
-      #     ])
+      #       # add 3 items to the batch
+      #       batch.write(table, :put => [
+      #         { :id => 'abc', :color => 'red', :count => 2 },
+      #         { :id => 'mno', :color => 'blue', :count => 3 },
+      #         { :id => 'xyz', :color => 'green', :count => 5 },
+      #       ])
       #
       # @option options [Array<String>,Array<Array>] :delete A list of item keys
       #   to delete.  For tables without a range key, items should be an array
       #   of hash key strings.
       #
-      #      batch.write('table-name', :delete => ['hk1', 'hk2', 'hk3'])
+      #       batch.write('table-name', :delete => ['hk1', 'hk2', 'hk3'])
       #
-      #   For tables with a range key, items should be an array of 
+      #   For tables with a range key, items should be an array of
       #   hash key and range key pairs.
       #
-      #      batch.write('table-name', :delete => [['hk1', 'rk1'], ['hk1', 'rk2']])
+      #       batch.write('table-name', :delete => [['hk1', 'rk1'], ['hk1', 'rk2']])
       #
       def write table, options = {}
 
-        items = table_items(table) 
+        items = table_items(table)
 
         if put = options[:put]
           put.each do |attributes|
@@ -198,7 +198,7 @@ module AWS
 
             item = request.values.first
 
-            request_items[table] << 
+            request_items[table] <<
               case request.keys.first
               when 'PutRequest'    then convert_put_item(item['Item'])
               when 'DeleteRequest' then convert_delete_item(item['Key'])
@@ -213,13 +213,13 @@ module AWS
       end
 
       def convert_put_item item
-        
+
         attributes = {}
         item.each_pair do |name,value|
           attributes[name] = str2sym(value)
         end
-        
-        { :put_request => { :item => attributes }} 
+
+        { :put_request => { :item => attributes }}
 
       end
 
@@ -227,7 +227,7 @@ module AWS
 
         key = {}
         key[:hash_key_element] = str2sym(item['HashKeyElement'])
-        key[:range_key_element] = str2sym(item['RangeKeyElement']) if 
+        key[:range_key_element] = str2sym(item['RangeKeyElement']) if
           item['RangeKeyElement']
 
         { :delete_request => { :key => key}}
@@ -242,7 +242,7 @@ module AWS
         when "N"  then { :n  => value }
         when "SS" then { :ss => value }
         when "NS" then { :ns => value }
-        else 
+        else
           raise "unhandled key type: #{type.inspect}"
         end
       end

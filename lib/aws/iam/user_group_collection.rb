@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,9 +17,9 @@ module AWS
     # A collection that provides access to IAM groups to which a
     # particular user belongs.
     #
-    #   user = AWS::IAM.new.users.first
-    #   groups = user.groups
-    #   groups.each { |g| puts g.name }
+    #     user = AWS::IAM.new.users.first
+    #     groups = user.groups
+    #     groups.each { |g| puts g.name }
     #
     class UserGroupCollection
 

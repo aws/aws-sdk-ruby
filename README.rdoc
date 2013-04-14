@@ -1,3 +1,11 @@
+= Links of Interest
+
+* {API Documentation}[http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html]
+* {Issues}[http://github.com/aws/aws-sdk-ruby/issues]
+* {Release Notes}[http://aws.amazon.com/releasenotes/Ruby]
+* {Forums}[https://forums.aws.amazon.com/forum.jspa?forumID=125]
+* {License}[http://aws.amazon.com/apache2.0/]
+
 = Getting Started with the AWS SDK for Ruby {<img src="https://secure.travis-ci.org/aws/aws-sdk-ruby.png?branch=master" alt="Build Status" />}[http://travis-ci.org/aws/aws-sdk-ruby]
 
 The AWS SDK for Ruby helps you to get started building applications

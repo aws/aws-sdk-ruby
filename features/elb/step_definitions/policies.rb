@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,7 +20,7 @@ Given /^I create a "([^"]*)" policy named "([^"]*)" with:$/ do |policy_type, pol
     attributes[name] << hash['VALUE']
   end
 
-  @load_balancer_policy = @load_balancer.policies.create(policy_name, 
+  @load_balancer_policy = @load_balancer.policies.create(policy_name,
     policy_type, attributes)
 
 end

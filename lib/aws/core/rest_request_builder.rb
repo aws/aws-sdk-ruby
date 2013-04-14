@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -41,15 +41,15 @@ module AWS
       end
 
       # Populates a Http::Request with the following:
-      # 
-      # * HTTP method
-      # * URI
-      # * headers
-      # * body
+      #
+      #   * HTTP method
+      #   * URI
+      #   * headers
+      #   * body
       #
       # @param [Http::Request] request
       #
-      # @param [Hash] request_options The hash of request options provided 
+      # @param [Hash] params The hash of request options provided
       #   to the client request method.  This will be used to populate
       #   the headers, uri and body.
       #
@@ -64,7 +64,7 @@ module AWS
         populate_body(request, params)
       end
 
-      protected
+      private
 
       def populate_method request
         request.http_method = @http[:verb]

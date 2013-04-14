@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ module AWS
 
       let(:configuration) {{}}
 
-      let(:type_key) { 
+      let(:type_key) {
         key = described_class.name.split(/::/).last
         key[0] = key[0,1].downcase
         key
@@ -78,7 +78,7 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         it 'returns true when the domain can be described' do
           type.exists?.should == true
         end
@@ -202,7 +202,7 @@ module AWS
 
       end
 
-      context 'configuration attributes' do 
+      context 'configuration attributes' do
         config_attributes.each do |cfg_attr|
 
           let(:request_opts) {{

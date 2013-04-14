@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -69,28 +69,26 @@ Then /^the resource tag collection should include "([^\"]*)" with value "([^\"]*
 end
 
 Then /^the resource should be taggable$/ do
-  eventually { @resource.exists?.should be_true }
-  When 'I tag the resource "ruby-test-1"'
-  Then 'I should find the resource by its tag'
-
-  When 'I tag the resource "ruby-test-2-key" with the value "ruby-test-2-value"'
-  Then 'the resource tag "ruby-test-2-key" should eventually have value "ruby-test-2-value"'
-  Then 'I should find the resource by "ruby-test-2-key" and "ruby-test-2-value"'
-  Then 'I should find the resource through the tags collection by "ruby-test-2-key" and "ruby-test-2-value"'
-
-  When 'I delete the resource tag "ruby-test-2-key"'
-  Then 'the resource tag "ruby-test-2-key" should eventually have no value'
-  When 'I clear the resource tags'
-  Then 'the resource should eventually have no tags'
+  eventually { @resource.exists?.should be(true) }
+  step 'I tag the resource "ruby-test-1"'
+  step 'I should find the resource by its tag'
+  step 'I tag the resource "ruby-test-2-key" with the value "ruby-test-2-value"'
+  step 'the resource tag "ruby-test-2-key" should eventually have value "ruby-test-2-value"'
+  step 'I should find the resource by "ruby-test-2-key" and "ruby-test-2-value"'
+  step 'I should find the resource through the tags collection by "ruby-test-2-key" and "ruby-test-2-value"'
+  step 'I delete the resource tag "ruby-test-2-key"'
+  step 'the resource tag "ruby-test-2-key" should eventually have no value'
+  step 'I clear the resource tags'
+  step 'the resource should eventually have no tags'
 end
 
 Then /^the resource should memoize tags properly$/ do
   eventually { @resource.exists?.should be_true }
-  When 'I tag the resource "ruby-test-1-key" with the value "ruby-test-1-value"'
-  And 'the resource tag "ruby-test-1-key" should eventually have value "ruby-test-1-value"'
-  And 'I start a memoization block'
-  And 'I find the resource by "ruby-test-1-key" and "ruby-test-1-value"'
-  Then 'the resource tag collection should include "ruby-test-1-key" with value "ruby-test-1-value"'
+  step 'I tag the resource "ruby-test-1-key" with the value "ruby-test-1-value"'
+  step 'the resource tag "ruby-test-1-key" should eventually have value "ruby-test-1-value"'
+  step 'I start a memoization block'
+  step 'I find the resource by "ruby-test-1-key" and "ruby-test-1-value"'
+  step 'the resource tag collection should include "ruby-test-1-key" with value "ruby-test-1-value"'
   And('no requests should have been made like:',
       table([%w(TYPE  NAME   VALUE),
              %w(param Action DescribeTags)]))

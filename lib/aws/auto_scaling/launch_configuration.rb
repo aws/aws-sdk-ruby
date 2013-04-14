@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -37,7 +37,7 @@ module AWS
     # @attr_reader [String,nil] user_data
     #
     # @attr_reader [Array<Hash>] block_device_mappings
-    # 
+    #
     # @attr_reader [String] iam_instance_profile
     #
     # @attr_reader [String] spot_price
@@ -88,8 +88,8 @@ module AWS
         translates_output{|mappings| mappings.map(&:to_hash) }
       end
 
-      attribute :security_group_details, 
-        :from => :security_groups, 
+      attribute :security_group_details,
+        :from => :security_groups,
         :static => true
 
       protected :security_group_details

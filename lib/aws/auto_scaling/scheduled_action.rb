@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -71,7 +71,7 @@ module AWS
       end
 
       # Updates the scheduled action.  If you omit an option,
-      # the corresponding value remains unchanged in the Auto 
+      # the corresponding value remains unchanged in the Auto
       # Scaling group.
       #
       # @param [Hash] options
@@ -96,7 +96,7 @@ module AWS
         client_opts[:scheduled_action_name] = name
         client_opts[:auto_scaling_group_name] = auto_scaling_group_name
 
-        # convert these options to timestamps 
+        # convert these options to timestamps
         [:start_time, :end_time].each do |opt|
           if client_opts[opt].is_a?(Time)
             client_opts[opt] = client_opts[opt].iso8601
@@ -112,7 +112,7 @@ module AWS
 
       # @return [Boolean]
       def exists?
-        client_opts = {}  
+        client_opts = {}
         client_opts[:scheduled_action_names] = [name]
         resp = client.describe_scheduled_actions(client_opts)
         !resp.scheduled_update_group_actions.empty?

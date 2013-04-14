@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,15 +19,15 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # @param [Integer] bgp_asn The customer gateway's Border Gateway 
+      # @param [Integer] bgp_asn The customer gateway's Border Gateway
       #   Protocol (BGP) Autonomous System Number (ASN).
       #
-      # @param [String] ip_address The Internet-routable IP address for the 
+      # @param [String] ip_address The Internet-routable IP address for the
       #   customer gateway's outside interface. The address must be static.
       #
       # @param [Hash] options
-      # 
-      # @option options [String] :vpn_type ('ipsec.1') The type of VPN 
+      #
+      # @option options [String] :vpn_type ('ipsec.1') The type of VPN
       #   connection this customer gateway supports.
       #
       # @return [CustomerGateway]
@@ -41,7 +41,7 @@ module AWS
 
         resp = client.create_customer_gateway(client_opts)
 
-        CustomerGateway.new_from(:create_customer_gateway, 
+        CustomerGateway.new_from(:create_customer_gateway,
           resp.customer_gateway,
           resp.customer_gateway.customer_gateway_id,
           :config => config)
@@ -60,7 +60,7 @@ module AWS
         response = filtered_request(:describe_customer_gateways, options, &block)
         response.customer_gateway_set.each do |g|
 
-          gateway = CustomerGateway.new_from(:describe_customer_gateways, g, 
+          gateway = CustomerGateway.new_from(:describe_customer_gateways, g,
             g.customer_gateway_id, :config => config)
 
           yield(gateway)

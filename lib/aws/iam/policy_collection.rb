@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,7 +29,7 @@ module AWS
       # @param [String] name The name of the policy to retrieve.
       #
       # @return [Policy] The policy with the given name.  If no such
-      #   policy exists, this method returns +nil+.
+      #   policy exists, this method returns `nil`.
       def [] name
         resp = get_policy(:policy_name => name)
         Policy.from_json(URI.unescape(resp.policy_document))
@@ -42,7 +42,7 @@ module AWS
       # @param [String] name The name of the policy document.
       #
       # @param [Policy,String] document The policy document.  This can
-      #   be a JSON string, or any object that responds to +to_json+.
+      #   be a JSON string, or any object that responds to `to_json`.
       #   The {Policy} class provides a convenient way to construct
       #   policy documents that you can use with AWS IAM.
       def []= name, document
@@ -71,7 +71,7 @@ module AWS
       # @return [Array<Policy>] An array containing the requested
       #   policy documents, in the same order as the argument list.
       #   If a requested policy does not exist, the array member
-      #   corresponding to that argument will be +nil+.
+      #   corresponding to that argument will be `nil`.
       def values_at(*names)
         names.map { |n| self[n] }
       end
@@ -110,7 +110,7 @@ module AWS
       alias_method :member?, :has_key?
 
       # @yield [name, policy] The name and document for each policy
-      #   that is associated with the resource.  Like +Hash#each+,
+      #   that is associated with the resource.  Like `Hash#each`,
       #   this method is sensitive to the arity of the provided block;
       #   if the block takes two arguments, they will be the name and
       #   document.  If it accepts only one argument, it will be an

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -105,7 +105,7 @@ module AWS
         let(:client_method)   { :describe_alarms_for_metric }
         let(:next_token_key)  { :next_token }
         let(:member_class)    { Alarm }
-        let(:request_options) {{ 
+        let(:request_options) {{
           :namespace => metric.namespace,
           :metric_name => metric.metric_name,
           :dimensions => metric.dimensions,

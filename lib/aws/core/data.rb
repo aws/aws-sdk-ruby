@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,48 +17,48 @@ module AWS
     # Data is a light wrapper around a Ruby hash that provides
     # method missing access to the hash contents.
     #
-    # == Method Missing Access
+    # ## Method Missing Access
     #
     # You can access hash content with methods if their keys
     # are symbols.
     #
-    #   data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
-    #   data.a #=> 1
-    #   data.b #=> 2
-    #   data.c #=> true
-    #   data.d #=> raises NoMethodError
+    #     data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
+    #     data.a #=> 1
+    #     data.b #=> 2
+    #     data.c #=> true
+    #     data.d #=> raises NoMethodError
     #
-    # == Boolean Methods
+    # ## Boolean Methods
     #
     # Given the structure above you can also use question-mark methods.
     #
-    #   data.c? #=> true
-    #   data.d? #=> raises NoMethodError
+    #     data.c? #=> true
+    #     data.d? #=> raises NoMethodError
     #
-    # == Nested Hashes
+    # ## Nested Hashes
     #
     # If the data contains nested hashes you can chain methods into
     # the structure.
     #
-    #   data = AWS::Core::Data.new(:a => { :b => { :c => 'abc' }})
-    #   data.a.b.c #=> 'abc'
+    #     data = AWS::Core::Data.new(:a => { :b => { :c => 'abc' }})
+    #     data.a.b.c #=> 'abc'
     #
-    # == Nested Arrays
+    # ## Nested Arrays
     #
     # Arrays are wrapped in {Data::List} objects.  They ensure any
     # data returned is correctly wrapped so you can continue using
     # method-missing access.
     #
-    #   data = AWS::Core::Data.new(
-    #    :people => [
-    #      {:name => 'john'},
-    #      {:name => 'jane'},
-    #   ]})
+    #     data = AWS::Core::Data.new(
+    #      :people => [
+    #        {:name => 'john'},
+    #        {:name => 'jane'},
+    #     ]})
     #
-    #   data.people[0].name #=> 'john'
-    #   data.people[1].name #=> 'jane'
+    #     data.people[0].name #=> 'john'
+    #     data.people[1].name #=> 'jane'
     #
-    #   data.people.map(&:name) #=> ['john','jane']
+    #     data.people.map(&:name) #=> ['john','jane']
     #
     class Data
 
@@ -149,8 +149,8 @@ module AWS
 
       # Returns an inspection string from the wrapped data.
       #
-      #   data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
-      #   data.inspect #=> '{:a=>1, :b=>2, :c=>true}'
+      #     data = AWS::Core::Data.new({ :a => 1, :b => 2, :c => true })
+      #     data.inspect #=> '{:a=>1, :b=>2, :c=>true}'
       #
       # @return [String]
       #

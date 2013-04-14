@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -27,7 +27,7 @@ module AWS
       #
       # @example Filtering by a namespace
       #
-      #   trafic_metrics = metrics.filter('namespace', 'traffic')
+      #   traffic_metrics = metrics.filter('namespace', 'traffic')
       #
       # @example Filtering by a metric name
       #
@@ -63,17 +63,17 @@ module AWS
 
       # Returns a collection filtered by the given dimension:
       #
-      #   metric = metrics.with_dimension('name', 'value').first
+      #     metric = metrics.with_dimension('name', 'value').first
       #
       # You can chain calls to #with_dimension.  Additional dimensions are
       # added.
       #
-      #   metrics = metrics.
-      #     with_dimension('d1', 'v1').
-      #     with_dimension('d2', 'v2').
-      #     with_dimension('d3', 'v3')
+      #     metrics = metrics.
+      #       with_dimension('d1', 'v1').
+      #       with_dimension('d2', 'v2').
+      #       with_dimension('d3', 'v3')
       #
-      #   metrics.each{|metric|} # filtered by all three dimensions
+      #     metrics.each{|metric|} # filtered by all three dimensions
       #
       # @param [String] name
       # @param [String] value
@@ -84,24 +84,24 @@ module AWS
 
       # Returns a collection filtered by the given dimensions.
       #
-      #   metrics.with_dimensions([
-      #     { :name => 'd1', :value => 'v1' },
-      #     { :name => 'd2', :value => 'v2' },
-      #     { :name => 'd3', :value => 'v3' },
-      #   ]).each do |metric|
-      #     # ...
-      #   end
+      #     metrics.with_dimensions([
+      #       { :name => 'd1', :value => 'v1' },
+      #       { :name => 'd2', :value => 'v2' },
+      #       { :name => 'd3', :value => 'v3' },
+      #     ]).each do |metric|
+      #       # ...
+      #     end
       #
       # Multiple calls to #with_dimensions will add to previous dimensions.
       # @param [Array<Hash>] dimensions An array of dimensions.  Each dimension
-      #   should be a Hash with a +:name+ and +:value+.
+      #   should be a Hash with a `:name` and `:value`.
       # @return [MetricCollection]
       def with_dimensions *dimensions
         dimensions = @filters[:dimensions] || []
         dimensions += dimensions.flatten
         filter(:dimensions, dimensions)
       end
-      
+
       protected
 
       def _each_item next_token, options = {}, &block
@@ -113,7 +113,7 @@ module AWS
         resp.data[:metrics].each do |details|
 
           metric = Metric.new_from(
-            :list_metrics, details, 
+            :list_metrics, details,
             details[:namespace],
             details[:metric_name],
             details.merge(:config => config))

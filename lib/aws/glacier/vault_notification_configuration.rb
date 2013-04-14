@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,6 +17,8 @@ module AWS
 
       # @return [SNS::Topic] The SNS topic Glacier will publish events to.
       attr_accessor :sns_topic
+
+      alias_method :topic, :sns_topic
 
       # @return [Array<String>] events An array of one or more events for
       #   which Amazon Glacier will send notifications.

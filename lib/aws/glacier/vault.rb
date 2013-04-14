@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -59,6 +59,14 @@ module AWS
         end
       end
 
+      # @return [Boolean] Returns `true` if the vault exists.
+      def exists?
+        client.describe_vault(:vault_name => name, :account_id => account_id)
+        true
+      rescue Errors::ResourceNotFoundException
+        false
+      end
+
       # @return [ArchiveCollection]
       def archives
         ArchiveCollection.new(self)
@@ -97,7 +105,7 @@ module AWS
       end
 
       # Sets the notification configuration for this vault.  If you pass
-      # a +nil+ value, the notification configuraiton will be deleted
+      # a `nil` value, the notification configuration will be deleted
       # @param [VaultNotificationConfiguration] cfg
       def notification_configuration= cfg
         if cfg

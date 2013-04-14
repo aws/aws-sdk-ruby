@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -30,7 +30,7 @@ module AWS
         reject_unknown_options
 
         ensure_type([Symbol, Proc], :if, :unless)
-        ensure_is([:save, :create, :update], :on) 
+        ensure_is([:save, :create, :update], :on)
 
         setup(record_class)
 
@@ -44,7 +44,7 @@ module AWS
       attr_reader :options
 
       def validate record
-        if 
+        if
           passes_on_condition?(record) and
           passes_if_condition?(record) and
           passes_unless_condition?(record)
@@ -84,7 +84,7 @@ module AWS
           end
 
           unless methods.include?(setter)
-            klass.send(:attr_writer, attr) 
+            klass.send(:attr_writer, attr)
             klass.send(:public, setter)
           end
 
@@ -97,8 +97,17 @@ module AWS
       def validate_attributes record
         attribute_names.each do |attribute_name|
           value = read_attribute_for_validation(record, attribute_name)
-          next if value.nil? and options[:allow_nil]
+          next if (value.nil? && options[:allow_nil]) || (blank?(value) && options[:allow_blank])
           validate_attribute(record, attribute_name, value)
+        end
+      end
+
+      def blank? value
+        case value
+        when nil        then true
+        when String     then value !~ /\S/
+        else
+          !value
         end
       end
 

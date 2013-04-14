@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -39,6 +39,16 @@ module AWS
 
         it 'should set the id' do
           Image.new("ami-123").id.should == "ami-123"
+        end
+
+      end
+
+      context '#image_id' do
+
+        it 'aliases image_id to id' do
+          image = Image.new('ami-123')
+          image.id.should eq('ami-123')
+          image.image_id.should eq(image.id)
         end
 
       end
@@ -408,7 +418,7 @@ module AWS
 
         before(:each) do
           resp_image = {
-            :image_id => 'ami-123', 
+            :image_id => 'ami-123',
             :product_codes => [
               { :product_code => 'abc' },
               { :product_code => 'xyz' },
@@ -425,7 +435,7 @@ module AWS
       end
 
       context '#add_product_codes' do
-        
+
         it 'calls modify image attribute on the client' do
           client.should_receive(:modify_image_attribute).
             with(:image_id => image.id, :product_codes => ['ABC'])
@@ -455,7 +465,10 @@ module AWS
           :device_name => "/dev/sda1",
           :ebs => ebs_device,
         }}
-        let(:response_value) { [ebs_mapping] }
+        let(:response_value) {[
+          ebs_mapping,
+          { :device_name => "/dev/sdb", :virtual_name => "ephemeral0" },
+        ]}
         let(:translated_value) { { "/dev/sda1" => ebs_device } }
 
         let(:resp) { client.stub_for(:describe_images) }
@@ -482,6 +495,16 @@ module AWS
 
           it 'should return the translated attribute value' do
             image.send(attribute).should == translated_value
+          end
+
+          it 'filters ephemeral volues' do
+            image.block_device_mappings.should eq({
+              '/dev/sda1' => ebs_device,
+            })
+            image.block_devices.should eq([
+              { :device_name => "/dev/sda1", :ebs => ebs_device },
+              { :device_name => "/dev/sdb", :virtual_name=>"ephemeral0" },
+            ])
           end
 
         end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,6 +14,7 @@
 require 'json'
 require 'set'
 require 'yaml'
+require 'uri'
 
 module AWS
   module Core
@@ -65,7 +66,7 @@ module AWS
       # @return [Configuration] This clients configuration.
       attr_reader :config
 
-      # @return [CredentialProviders::Provider] Returns the credentail
+      # @return [CredentialProviders::Provider] Returns the credential
       #   provider for this client.
       # @private
       attr_reader :credential_provider
@@ -79,7 +80,7 @@ module AWS
       # @private
       attr_reader :port
 
-      # @return [Integer] The number of secords before requests made by
+      # @return [Integer] The number of seconds before requests made by
       #   this client should timeout if they have not received a response.
       attr_reader :http_read_timeout
 
@@ -104,7 +105,7 @@ module AWS
       #   end
       #
       # The block executes in the context of an HttpHandler
-      # instance, and +super+ delegates to the HTTP handler used by
+      # instance, and `super` delegates to the HTTP handler used by
       # this client.  This provides an easy way to spy on requests
       # and responses.  See HttpHandler, HttpRequest, and
       # HttpResponse for more details on how to implement a fully
@@ -147,9 +148,9 @@ module AWS
         @stubs[method_name] ||= new_stub_for(method_name)
       end
 
-      # Primarily used for testing, this method returns an empty psuedo
+      # Primarily used for testing, this method returns an empty pseudo
       # service response without making a request.  Its used primarily for
-      # testing the ligher level service interfaces.
+      # testing the lighter level service interfaces.
       # @private
       def new_stub_for method_name
         response = Response.new(Http::Request.new, Http::Response.new)
@@ -273,6 +274,15 @@ module AWS
       def rebuild_http_request response
         credential_provider.refresh if expired_credentials?(response)
         response.rebuild_request
+        if redirected?(response)
+          loc = URI.parse(response.http_response.headers['location'].first)
+          AWS::Core::MetaUtils.extend_method(response.http_request, :host) do
+            loc.host
+          end
+          response.http_request.host = loc.host
+          response.http_request.port = loc.port
+          response.http_request.uri = loc.path
+        end
         response.retry_count += 1
       end
 
@@ -286,7 +296,7 @@ module AWS
       end
 
       def scaling_factor response
-        response.throttled? ? (0.5 + Kernel.rand * 0.1) : 0.3
+        throttled?(response) ? (0.5 + Kernel.rand * 0.1) : 0.3
       end
 
       def should_retry? response
@@ -300,16 +310,27 @@ module AWS
       def retryable_error? response
         expired_credentials?(response) or
         response.network_error? or
-        response.throttled? or
+        throttled?(response) or
+        redirected?(response) or
         response.error.kind_of?(Errors::ServerError)
       end
 
-      # @return [Boolean] Returns +true+ if the response contains an
+      # @return [Boolean] Returns `true` if the response contains an
       #   error message that indicates credentials have expired.
       def expired_credentials? response
         response.error and
         response.error.respond_to?(:code) and
-        response.error.code == 'ExpiredTokenException'
+        (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
+      end
+
+      def throttled? response
+        response.error and
+        response.error.respond_to?(:code) and
+        response.error.code.to_s.match(/Throttling/i)
+      end
+
+      def redirected? response
+        response.http_response.status == 307
       end
 
       def return_or_raise options, &block
@@ -370,7 +391,7 @@ module AWS
 
         response.error =
           case
-          when response.network_error? then NetworkError.new
+          when response.network_error? then response.http_response.network_error
           when error_code then error_class(error_code).new(*error_args)
           when status >= 500 then Errors::ServerError.new(*error_args)
           when status >= 300 then Errors::ClientError.new(*error_args)
@@ -384,15 +405,15 @@ module AWS
       # in sub-classes (e.g. QueryClient, RESTClient, etc).
       # @param [Response] response
       # @return [Array<Code,Message>,nil] Should return an array with an
-      #   error code and message, or +nil+.
+      #   error code and message, or `nil`.
       def extract_error_details response
         raise NotImplementedError
       end
 
       # Given an error code string, this method will return an error class.
       #
-      #   AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
-      #   #=> AWS::EC2::Errors::InvalidInstanceId
+      #     AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
+      #     #=> AWS::EC2::Errors::InvalidInstanceId
       #
       # @param [String] error_code The error code string as returned by
       #   the service.  If this class contains periods, they will be
@@ -406,8 +427,8 @@ module AWS
 
       # Returns the ::Errors module for the current client.
       #
-      #   AWS::S3::Client.new.errors_module
-      #   #=> AWS::S3::Errors
+      #     AWS::S3::Client.new.errors_module
+      #     #=> AWS::S3::Errors
       #
       # @return [Module]
       #

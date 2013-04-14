@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,4 +31,4 @@ Feature: Auto Scaling Launch Configurations
     And I create a launch configuration with options
     When I get the launch configuraiton by name
     Then the launch configuraiton should have the same attributes
-    
+

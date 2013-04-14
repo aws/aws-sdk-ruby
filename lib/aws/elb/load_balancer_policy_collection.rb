@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,17 +31,17 @@ module AWS
       # the front-end listener, or the back-end application server,
       # depending on your policy type.
       #
-      # == Applying Policies
+      # ## Applying Policies
       #
       # To apply a policy to a front-end listener:
       #
-      #   # each listener may only have a single policy
-      #   load_balancer.listener[80].policy = listener_policy
+      #     # each listener may only have a single policy
+      #     load_balancer.listener[80].policy = listener_policy
       #
       # To apply a policy to backend instance port
       #
-      #   # back end servers can have multiple policies per instance port
-      #   load_balancer.backend_server_policies.add(80, back_end_policy)
+      #     # back end servers can have multiple policies per instance port
+      #     load_balancer.backend_server_policies.add(80, back_end_policy)
       #
       # @param [String] name The name of the policy being created.  The name
       #   must be unique within the set of policies for this load balancer.

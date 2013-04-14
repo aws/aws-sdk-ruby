@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,7 +20,7 @@ Then /^the group should have no notification configurations$/ do
 end
 
 Then /^the auto scaling group should have the notification configuration$/ do
-  @auto_scaling_group.notification_configurations.should 
+  @auto_scaling_group.notification_configurations.should
     include(@notification_configuration)
 end
 

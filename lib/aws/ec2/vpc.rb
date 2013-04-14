@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -68,7 +68,7 @@ module AWS
         SecurityGroupCollection.new(:config => config).filter('vpc-id', vpc_id)
       end
 
-      # @return [SubnetCollection] Returns a filtered collection of 
+      # @return [SubnetCollection] Returns a filtered collection of
       #   subnets that are in this VPC.
       def subnets
         SubnetCollection.new(:config => config).filter('vpc-id', vpc_id)
@@ -120,12 +120,12 @@ module AWS
 
         if internet_gateway
           unless internet_gateway.is_a?(InternetGateway)
-            internet_gateway = InternetGateway.new(internet_gateway, 
+            internet_gateway = InternetGateway.new(internet_gateway,
               :config => config)
           end
           internet_gateway.attach(self)
         end
-        
+
       end
 
       # @return [VPNGateway,nil] Returns the vpn gateway attached to
@@ -136,7 +136,7 @@ module AWS
         gateways.filter('attachment.vpc-id', vpc_id).first
       end
 
-      # @return [DHCPOptions] Returns the dhcp options associated with 
+      # @return [DHCPOptions] Returns the dhcp options associated with
       #   this VPC.
       def dhcp_options
         DHCPOptions.new(dhcp_options_id, :config => config)
@@ -153,9 +153,9 @@ module AWS
       #
       # @param [DHCPOptions,String] dhcp_options A {DHCPOptions} object
       #   or a dhcp options id string.
-      # 
+      #
       def dhcp_options= dhcp_options
-        unless dhcp_options.is_a?(DHCPOptions) 
+        unless dhcp_options.is_a?(DHCPOptions)
           dhcp_options = DHCPOptions.new(dhcp_options, :config => config)
         end
         dhcp_options.associate(self)

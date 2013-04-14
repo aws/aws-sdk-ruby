@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -54,11 +54,11 @@ module AWS
           hash['key'] = 1
           hash[:key].should == 1
         end
-        
+
       end
 
       context '#merge!' do
-        
+
         it 'modifies the hash in place' do
           hash.merge!(:a => 1)
           hash.should == { 'a' => 1 }
@@ -67,7 +67,7 @@ module AWS
       end
 
       context '#update' do
-        
+
         it 'should be an alias of #merge!' do
           hash.method(:update).should == hash.method(:merge!)
         end
@@ -75,7 +75,7 @@ module AWS
       end
 
       context '#merge' do
-        
+
         it 'modifies the hash in place' do
           hash.merge!(:a => 1)
           hash.should == { 'a' => 1 }
@@ -119,7 +119,7 @@ module AWS
           hash.delete(:b)
           hash.should == { 'a' => 1 }
         end
-        
+
       end
 
     end

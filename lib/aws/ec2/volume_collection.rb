@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,12 +18,11 @@ module AWS
     # should get an instance of this class by calling {EC2#volumes}.
     #
     # @example Create an empty 15GiB volume
-    #  ec2.volumes.create(:size => 15,
-    #                     :availability_zone => "us-east-1a")
+    #   ec2.volumes.create(:size => 15, :availability_zone => "us-west-2a")
     #
     # @example Get a volume by ID
-    #  volume = ec2.volumes["vol-123"]
-    #  volume.exists?
+    #   volume = ec2.volumes["vol-123"]
+    #   volume.exists?
     #
     # @example Get a map of volume IDs to volume status
     #   ec2.volumes.inject({}) { |m, v| m[v.id] = v.status; m }
@@ -38,7 +37,7 @@ module AWS
         resp = filtered_request(:describe_volumes)
         resp.volume_set.each do |v|
 
-          volume = Volume.new_from(:describe_volumes, v, 
+          volume = Volume.new_from(:describe_volumes, v,
             v.volume_id, :config => config)
 
           yield(volume)
@@ -49,19 +48,17 @@ module AWS
 
       # Creates a new Amazon EBS volume that any Amazon EC2 instance
       # in the same Availability Zone can attach to. For more
-      # information about Amazon EBS, go to the {Amazon Elastic
-      # Compute Cloud User
-      # Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # information about Amazon EBS, go to the [Amazon Elastic Compute Cloud User Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html).
       #
       # @return [Volume] An object representing the new volume.
       #
       # @param [Hash] options Options for creating the volume.
-      #   +:availability_zone+ and one of +:size+, +:snapshot+, or
-      #   +:snapshot_id+ is required.
+      #   `:availability_zone` and one of `:size`, `:snapshot`, or
+      #   `:snapshot_id` is required.
       #
       # @option options [Integer] :size The size of the volume, in
-      #   GiBs.  Valid values: 1 - 1024.  If +:snapshot+ or
-      #   +:snapshot_id+ is specified, this defaults to the size of
+      #   GiBs.  Valid values: 1 - 1024.  If `:snapshot` or
+      #   `:snapshot_id` is specified, this defaults to the size of
       #   the specified snapshot.
       #
       # @option options [Snapshot] :snapshot The snapshot from which to

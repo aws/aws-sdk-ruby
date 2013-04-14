@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -65,7 +65,27 @@ module AWS
               obj.confirmation.should == nil
               obj.valid?.should == true
             end
-            
+
+          end
+
+          context ':allow_blank' do
+
+            it 'defaults to false' do
+              klass.string_attr :confirmation
+              klass.validates_acceptance_of :confirmation
+              obj = klass.new :confirmation => " "
+              obj.confirmation.should == " "
+              obj.valid?.should == false
+            end
+
+            it 'skips the validation when set to true and the value is blank' do
+              klass.string_attr :confirmation
+              klass.validates_acceptance_of :confirmation, :allow_blank => true
+              obj = klass.new :confirmation => " "
+              obj.confirmation.should == " "
+              obj.valid?.should == true
+            end
+
           end
 
           context ':accept' do

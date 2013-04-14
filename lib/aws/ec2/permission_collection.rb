@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -75,7 +75,7 @@ module AWS
       #   otherwise the resource is made private.
       # @return [nil]
       def public= value
-        params = value ? 
+        params = value ?
           { :add => [{ :group => "all" }] } :
           { :remove => [{ :group => "all" }] }
         client.send(modify_call, modify_params(params))

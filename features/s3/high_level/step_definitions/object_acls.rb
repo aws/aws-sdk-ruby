@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,8 +33,8 @@ END
 end
 
 Given /^I have set an object ACL$/ do
-  Given "my account has an object in it"
-  Given "I set the object ACL to a string"
+  step "my account has an object in it"
+  step "I set the object ACL to a string"
 end
 
 When /^I ask for the object ACL$/ do

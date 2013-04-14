@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -36,7 +36,7 @@ module AWS
         it 'requires an item' do
           lambda { AttributeCollection.new }.should raise_error(ArgumentError)
         end
-        
+
         it 'accepts an item' do
           lambda { AttributeCollection.new(item) }.should_not raise_error
         end
@@ -44,7 +44,7 @@ module AWS
       end
 
       context '#item' do
-        
+
         it 'returns the item passed to #initialize' do
           attributes.item.should == item
         end
@@ -60,7 +60,7 @@ module AWS
             double('attr1', :name => 'bar', :value => '123'),
           ])
         }
-        
+
         it 'hasherishes each of the values' do
           client.should_receive(:get_attributes).and_return(response)
           attributes.to_h.should == { 'foo' => %w(abc xyz), 'bar' => %w(123) }
@@ -75,7 +75,7 @@ module AWS
       end
 
       context '#[]' do
-        
+
         it 'returns an attribute' do
           attributes['color'].should be_an(Attribute)
         end
@@ -99,7 +99,7 @@ module AWS
       end
 
       context '#[]=' do
-        
+
         it 'calls set on the attribute named' do
           client.should_receive(:put_attributes).
             with(hash_including(
@@ -117,7 +117,7 @@ module AWS
       context "#each_value" do
 
         let(:response) { double('response', :attributes => []) }
-        
+
         it 'calls get_attributes' do
           client.should_receive(:get_attributes).
             with(hash_including(
@@ -126,7 +126,7 @@ module AWS
             and_return(response)
           attributes.each_value{|attr_name, attr_value|}
         end
-        
+
         it 'yields once for each attribute value' do
           response.stub(:attributes).and_return([
             double('attr1', :name => 'foo', :value => 'bar1'),
@@ -159,7 +159,7 @@ module AWS
           let(:method) { :each }
           let(:client_method) { :get_attributes }
         end
-        
+
         it 'calls get_attributes' do
           client.should_receive(:get_attributes).
             with(hash_including(
@@ -168,7 +168,7 @@ module AWS
             and_return(response)
           attributes.each{|attribute|}
         end
-        
+
         it 'yields attribute objects' do
 
           response.stub(:attributes).and_return([

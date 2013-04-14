@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,15 +22,15 @@ module AWS
     #
     # @attr [String] complaint_topic_arn
     #
-    # @attr [Boolean] forwarding_enabled When +false+, complaint and bounce
+    # @attr [Boolean] forwarding_enabled When `false`, complaint and bounce
     #   notifications will not be forwarded via email.  Can only be set to
-    #   +false+ when there is both a +bounce_topic+ and +complaint_topic+.
+    #   `false` when there is both a `bounce_topic` and `complaint_topic`.
     #
-    # @attr [Boolean] dkim_enabled When set to +true+, Easy DKIM signing will
+    # @attr [Boolean] dkim_enabled When set to `true`, Easy DKIM signing will
     #   be enabled for email sent from this identity.
     #
     # @attr_reader [Array<String>] dkim_tokens Returns a set of DNS records,
-    #   or tokens, that must be published in the domain name's DNS to 
+    #   or tokens, that must be published in the domain name's DNS to
     #   complete the DKIM verification process.  Call {#verify_dkim} if this
     #   returns an empty list.
     #
@@ -124,25 +124,25 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns +true+ if this {Identity} represents an
+      # @return [Boolean] Returns `true` if this {Identity} represents an
       #   email address.
       def email_address?
         identity.match(/@/) ? true : false
       end
 
-      # @return [Boolean] Returns +true+ if this {Identity} represents a
+      # @return [Boolean] Returns `true` if this {Identity} represents a
       #   domain.
       def domain?
         !email_address?
       end
 
-      # @return [Boolean] Returns +true+ if this email address/domain has
+      # @return [Boolean] Returns `true` if this email address/domain has
       #   been verified.
       def verified?
         verification_status == 'Success'
       end
 
-      # @return [Boolean] Returns +true+ if verification for this email
+      # @return [Boolean] Returns `true` if verification for this email
       #   address/domain is still pending.
       def pending?
         verification_status == 'Pending'

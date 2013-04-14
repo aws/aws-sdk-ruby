@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,7 +17,7 @@ module AWS
 
       # @param [Hash] options
       #
-      # @option options [Boolean] :vpc (false) When true, the elastic ip 
+      # @option options [Boolean] :vpc (false) When true, the elastic ip
       #   address will be allocated to your VPC.
       #
       # @return [ElasticIp]
@@ -44,31 +44,27 @@ module AWS
       # Specify one or more criteria to filter elastic IP addresses by.
       # A subsequent call to #each will limit the resutls returned
       # by provided filters.
-      # 
-      # * Chain multiple calls of #filter together to AND multiple conditions
-      #   together.
       #
-      # * Supply multiple values to a singler #filter call to OR those 
-      #   value conditions together.
+      #   * Chain multiple calls of #filter together to AND multiple conditions
+      #     together.
+      #   * Supply multiple values to a singler #filter call to OR those
+      #     value conditions together.
+      #   * '*' matches one or more characters and '?' matches any one
+      #     character.
       #
-      # * '*' matches one or more characters and '?' matches any one
-      #   character.
+      # ### Valid Filters
       #
-      # === Valid Filters
-      #
-      # * domain - Whether the address is a EC2 address, or a VPC address. 
+      # * domain - Whether the address is a EC2 address, or a VPC address.
       #   Valid values include 'standard' and 'vpc'
       # * instance-id - Instance the address is associated with (if any).
       # * public-ip - The Elastic IP address.
-      # * allocation-id - Allocation ID for the address. For VPC addresses 
+      # * allocation-id - Allocation ID for the address. For VPC addresses
       #   only.
-      # * association-id - Association ID for the address. For VPC addresses 
+      # * association-id - Association ID for the address. For VPC addresses
       #   only.
       #
       # @return [ElasticIpCollection] A new collection that represents
       #   a subset of the elastic IP addresses associated with this account.
-      
-      # Yields once for each elastic IP address.
       #
       # @yield [elastic_ip]
       # @yieldparam [ElasticIp] elastic_ip

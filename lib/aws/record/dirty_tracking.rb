@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,30 +16,32 @@ module AWS
 
     # Provides a way to track changes in your records.
     #
-    #   my_book = Book['bookid']
+    #     my_book = Book['bookid']
     #
-    #   my_book.changed? #=> false
-    #   my_book.title #=> "My Book"
-    #   my_book.title = "My Awesome Book"
-    #   my_book.changed? #=> true
+    #     my_book.changed? #=> false
+    #     my_book.title #=> "My Book"
+    #     my_book.title = "My Awesome Book"
+    #     my_book.changed? #=> true
+    #
+    #     my_book = Book['bookid']
     #
     # You can inspect further and get a list of changed attributes
     #
-    #   my_book.changed #=> ['title']
+    #     my_book.changed #=> ['title']
     #
     # Or you can get a more detailed description of the changes.  {#changes}
-    # returns a hash of changed attributes (keys) with their old and new 
+    # returns a hash of changed attributes (keys) with their old and new
     # values.
-    #   
-    #   my_book.changes
-    #   #=> { 'title' => ['My Book', 'My Awesome Book']
+    #
+    #     my_book.changes
+    #     #=> { 'title' => ['My Book', 'My Awesome Book']
     #
     # For every configured attribute you also get a handful of methods
     # for inspecting changes on that attribute.  Given the following
     # attribute:
     #
-    #   string_attr :title
-    # 
+    #     string_attr :title
+    #
     # You can now call any of the following methods:
     #
     #   * title_changed?
@@ -49,73 +51,73 @@ module AWS
     #   * title_will_change!
     #
     # Given the title change from above:
-    # 
-    #   my_book.title_changed? #=> true
-    #   my_book.title_change #=> ['My Book', 'My Awesome Book']
-    #   my_book.title_was #=> ['My Book']
     #
-    #   my_book.reset_title!
-    #   my_book.title #=> 'My Book'
+    #     my_book.title_changed? #=> true
+    #     my_book.title_change #=> ['My Book', 'My Awesome Book']
+    #     my_book.title_was #=> ['My Book']
     #
-    # == In-Place Editing
+    #     my_book.reset_title!
+    #     my_book.title #=> 'My Book'
     #
-    # Dirty tracking works by comparing incoming attribute values upon 
+    # ## In-Place Editing
+    #
+    # Dirty tracking works by comparing incoming attribute values upon
     # assignment against the value that was there previously.  If you
     # use functions against the value that modify it (like gsub!)
     # you must notify your record about the coming change.
     #
-    #   my_book.title #=> 'My Book'
-    #   my_book.title_will_change!
-    #   my_book.title.gsub!(/My/, 'Your')
-    #   my_book.title_change #=> ['My Book', 'Your Book']
+    #     my_book.title #=> 'My Book'
+    #     my_book.title_will_change!
+    #     my_book.title.gsub!(/My/, 'Your')
+    #     my_book.title_change #=> ['My Book', 'Your Book']
     #
-    # == Partial Updates
+    # ## Partial Updates
     #
     # Dirty tracking makes it possible to only persist those attributes
-    # that have changed since they were loaded.  This speeds up requests 
+    # that have changed since they were loaded.  This speeds up requests
     # against AWS when saving data.
     #
     module DirtyTracking
-  
+
       # Returns true if this model has unsaved changes.
       #
-      #   b = Book.new(:title => 'My Book')
-      #   b.changed?
-      #   #=> true
+      #     b = Book.new(:title => 'My Book')
+      #     b.changed?
+      #     #=> true
       #
       # New objects and objects freshly loaded should not have any changes:
       #
-      #   b = Book.new
-      #   b.changed?      #=> false
+      #     b = Book.new
+      #     b.changed?      #=> false
       #
-      #   b = Book.first
-      #   b.changed?      #=> false
+      #     b = Book.first
+      #     b.changed?      #=> false
       #
       # @return [Boolean] Returns true if any of the attributes have
       #   unsaved changes.
       def changed?
         !orig_values.empty?
       end
-  
-      # Returns an array of attribute names that have changes. 
+
+      # Returns an array of attribute names that have changes.
       #
-      #   book.changed #=> []
-      #   person.title = 'New Title'
-      #   book.changed #=> ['title']
+      #     book.changed #=> []
+      #     person.title = 'New Title'
+      #     book.changed #=> ['title']
       #
-      # @return [Array] Returns an array of attribute names that have 
+      # @return [Array] Returns an array of attribute names that have
       #   unsaved changes.
       def changed
         orig_values.keys
       end
-  
+
       # Returns the changed attributes in a hash.  Keys are attribute names,
       # values are two value arrays.  The first value is the previous
       # attribute value, the second is the current attribute value.
       #
-      #   book.title = 'New Title'
-      #   book.changes
-      #   #=> { 'title' => ['Old Title', 'New Title'] }
+      #     book.title = 'New Title'
+      #     book.changes
+      #     #=> { 'title' => ['Old Title', 'New Title'] }
       #
       # @return [Hash] Returns a hash of attribute changes.
       def changes
@@ -124,16 +126,16 @@ module AWS
           changes
         end
       end
-  
+
       # Returns true if the named attribute has unsaved changes.
       #
-      # This is an attribute method.  The following two expressions 
+      # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_changed?
-      #   book.attribute_changed?(:title)
+      #     book.title_changed?
+      #     book.attribute_changed?(:title)
       #
-      # @param [String] attribute_name Name of the attribute to check 
+      # @param [String] attribute_name Name of the attribute to check
       #   for changes.
       #
       # @return [Boolean] Returns true if the named attribute
@@ -143,15 +145,15 @@ module AWS
       def attribute_changed? attribute_name
         orig_values.keys.include?(attribute_name)
       end
-  
-      # Returns an array of the old value and the new value for 
+
+      # Returns an array of the old value and the new value for
       # attributes that have unsaved changes, returns nil otherwise.
       #
-      # This is an attribute method.  The following two expressions 
+      # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_change
-      #   book.attribute_change(:title)
+      #     book.title_change
+      #     book.attribute_change(:title)
       #
       # @example Asking for changes on an unchanged attribute
       #
@@ -168,7 +170,7 @@ module AWS
       #   book = Book.first
       #   book.title = 'New Title'
       #   book.title_change #=> ['Old Title', 'New Title']
-      # 
+      #
       # @param [String] attribute_name Name of the attribute to fetch
       #   a change for.
       # @return [Boolean] Returns true if the named attribute
@@ -184,15 +186,15 @@ module AWS
           end
         end
       end
-  
+
       # Returns the previous value for changed attributes, or the current
       # value for unchanged attributes.
       #
-      # This is an attribute method.  The following two expressions 
+      # This is an attribute method.  The following two expressions
       # are equivilent:
       #
-      #   book.title_was
-      #   book.attribute_was(:title)
+      #      book.title_was
+      #      book.attribute_was(:title)
       #
       # @example Returns the previous value for changed attributes:
       #
@@ -215,7 +217,7 @@ module AWS
           orig_values.has_key?(name) ? orig_values[name] : __send__(name)
         end
       end
-  
+
       # Reverts any changes to the attribute, restoring its original value.
       # @param [String] attribute_name Name of the attribute to reset.
       # @return [nil]
@@ -225,7 +227,7 @@ module AWS
         __send__("#{attribute_name}=", attribute_was(attribute_name))
         nil
       end
-  
+
       # Indicate to the record that you are about to edit an attribute
       # in place.
       # @param [String] attribute_name Name of the attribute that will
@@ -240,7 +242,7 @@ module AWS
             was = __send__(name)
             begin
               # booleans, nil, etc all #respond_to?(:clone), but they raise
-              # a TypeError when you attempt to dup them.  
+              # a TypeError when you attempt to dup them.
               orig_values[name] = was.clone
             rescue TypeError
               orig_values[name] = was
@@ -254,12 +256,12 @@ module AWS
       def orig_values
         @_orig_values ||= {}
       end
-  
+
       private
       def clear_change! attribute_name
         orig_values.delete(attribute_name)
       end
-  
+
       private
       def ignore_changes &block
         begin
@@ -269,17 +271,17 @@ module AWS
           @_ignore_changes = false
         end
       end
-  
+
       private
       def if_tracking_changes &block
         yield unless @_ignore_changes
       end
-  
+
       private
       def clear_changes!
         orig_values.clear
       end
-      
+
     end
   end
 end

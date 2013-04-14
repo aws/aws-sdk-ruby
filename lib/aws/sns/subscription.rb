@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -42,11 +42,11 @@ module AWS
 
       # @return [String] The protocol.  Possible values:
       #
-      #  * +:http+
-      #  * +:https+
-      #  * +:email+
-      #  * +:email_json+
-      #  * +:sqs+
+      #  * `:http`
+      #  * `:https`
+      #  * `:email`
+      #  * `:email_json`
+      #  * `:sqs`
       attr_reader :protocol
 
       # @return [String] The AWS account ID of the subscription owner.
@@ -61,7 +61,7 @@ module AWS
 
       # @return [Topic]
       def topic
-        Topic.new(topic_arn, :config => config)  
+        Topic.new(topic_arn, :config => config)
       end
 
       # Deletes this subscription.
@@ -71,7 +71,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns true if the subscription confirmation 
+      # @return [Boolean] Returns true if the subscription confirmation
       #   request was authenticated.
       def confirmation_authenticated?
 

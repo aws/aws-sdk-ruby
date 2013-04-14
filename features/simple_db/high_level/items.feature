@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -102,7 +102,7 @@ Feature: SimpleDB Items
     When I set the "colors" attribute of "car" to "blue":
     Then the "colors" attribute of "car" item should eventually be:
     | value |
-    | blue  | 
+    | blue  |
     And a request should have been made like:
     | TYPE  | NAME                | VALUE         |
     | param | Action              | PutAttributes |
@@ -201,8 +201,8 @@ Feature: SimpleDB Items
     And I add the value "100" to the "price" attribute of "car"
     Then the "car" item should eventually have attributes named:
     | name   |
-    | colors | 
-    | price  | 
+    | colors |
+    | price  |
 
   Scenario: Deleting an item
     Given I add the following values to the "colors" attribute of "car"

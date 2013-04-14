@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ When /^I send email to a verified email address$/ do
       :subject => 'A Sample Email',
       :from => 'noreply@example.com',
       :to => 'noreply@example.com',
-      :body_text => 'sample text') 
+      :body_text => 'sample text')
   rescue => e
     e.message.should match(/Email address is not verified/)
   end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,24 +14,24 @@
 module AWS
   class CloudFormation
 
-    # = Stack Resource Summaries
+    # # Stack Resource Summaries
     #
     # Stack summaries contain information about CloudFormation
     # stack resources.  You can enumerate these from a stack.
     #
-    #   stack = cfm.stacks['stack-name']
-    #   stack.resource_summaries.each do |summary|
-    #     puts "#{summary[:physical_resource_id]}: #{summary[:resource_status]}"
-    #   end
+    #     stack = cfm.stacks['stack-name']
+    #     stack.resource_summaries.each do |summary|
+    #       puts "#{summary[:physical_resource_id]}: #{summary[:resource_status]}"
+    #     end
     #
     # Each summary yielded is a hash with the following keys:
     #
-    # * +:logical_resource_id+
-    # * +:physical_resource_id+
-    # * +:resource_type+
-    # * +:resource_status+
-    # * +:resource_status_reason+
-    # * +:last_updated_timestamp+
+    #   * `:logical_resource_id`
+    #   * `:physical_resource_id`
+    #   * `:resource_type`
+    #   * `:resource_status`
+    #   * `:resource_status_reason`
+    #   * `:last_updated_timestamp`
     #
     class StackResourceSummaryCollection
 

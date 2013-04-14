@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -41,7 +41,7 @@ module AWS
       it 'sets the content type form-urlencoded by default' do
         request.headers['content-type'].should eq(nil)
         request.add_authorization!(credentials)
-        request.headers['content-type'].should 
+        request.headers['content-type'].should
           eq('application/x-www-form-urlencoded')
       end
 
@@ -54,7 +54,7 @@ module AWS
       it 'populates the date header' do
         request.headers['x-amz-date'].should eq(nil)
         request.add_authorization!(credentials)
-        request.headers['x-amz-date'].should 
+        request.headers['x-amz-date'].should
           eq(now.utc.strftime("%Y%m%dT%H%M%SZ"))
       end
 

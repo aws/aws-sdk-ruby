@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -43,7 +43,7 @@ module AWS
             bucket = Bucket.new('mybucket')
             s3object = S3Object.new(bucket, 'object/key')
             statement.resources = [s3object]
-            statement.to_h["Resource"].should == 
+            statement.to_h["Resource"].should ==
               ["arn:aws:s3:::mybucket/object/key"]
           end
 
@@ -51,7 +51,7 @@ module AWS
             bucket = Bucket.new('mybucket')
             collection = bucket.objects.with_prefix('foo/bar')
             statement.resources = [collection]
-            statement.to_h["Resource"].should == 
+            statement.to_h["Resource"].should ==
               ["arn:aws:s3:::mybucket/foo/bar*"]
           end
 

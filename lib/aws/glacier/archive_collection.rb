@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -37,7 +37,7 @@ module AWS
 
       # Creates an archive by uploading a file to a vault.
       # @param [File,Pathname,IO,String] data The data to upload.
-      #   If +data+ is a string, this is treated as a path to a file
+      #   If `data` is a string, this is treated as a path to a file
       #   on disk.
       # @param [Hash] options
       # @option options [String] description
@@ -48,16 +48,16 @@ module AWS
 
         hash, tree_hash = compute_checksums(data)
 
-        options = {}
-        options[:vault_name] = vault.name
-        options[:account_id] = account_id
-        options[:body] = data
-        options[:checksum] = tree_hash
-        options[:content_sha256] = hash
-        options[:archive_description] = options[:description] if
+        upload_options = {}
+        upload_options[:vault_name] = vault.name
+        upload_options[:account_id] = account_id
+        upload_options[:body] = data
+        upload_options[:checksum] = tree_hash
+        upload_options[:content_sha256] = hash
+        upload_options[:archive_description] = options[:description] if
           options[:description]
 
-        resp = client.upload_archive(options)
+        resp = client.upload_archive(upload_options)
 
         self[resp[:archive_id]]
 
@@ -81,7 +81,7 @@ module AWS
         raise ArgumentError, msg
       end
 
-      # @return [Boolean] Returns +tue+ if data acts like a file.
+      # @return [Boolean] Returns `tue` if data acts like a file.
       def io_like? data
         data.respond_to?(:read) and
         data.respond_to?(:eof?) and
@@ -108,7 +108,7 @@ module AWS
         until data.eof?
 
           chunk = data.read(1024 * 1024) # read 1MB
-          tree_parts << tree_digest.update(chunk).to_s
+          tree_parts << tree_digest.update(chunk).digest
           tree_digest.reset
 
           digest.update(chunk)
@@ -127,13 +127,18 @@ module AWS
 
         until hashes.count == 1
           hashes = hashes.each_slice(2).map do |h1,h2|
-            h2 ? digest.update(h1 + h2).to_s : h1
+            digest.reset
+            if h2
+              digest.update(h1)
+              digest.update(h2)
+              digest.digest
+            else
+              h1
+            end
           end
-          digest.reset
         end
 
-        hashes.first
-
+        hashes.first.bytes.map{|x| x.to_i.to_s(16).rjust(2,'0')}.join('')
       end
 
     end

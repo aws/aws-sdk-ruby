@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -73,7 +73,7 @@ Then /^the stack status should eventually be "([^"]*)"$/ do |status|
 end
 
 Then /^I should be able to locate the stack in the summarized stacks$/ do
-  @cloud_formation.stack_summaries.map{|s| s[:stack_name] }.should 
+  @cloud_formation.stack_summaries.map{|s| s[:stack_name] }.should
     include(@stack.name)
 end
 
@@ -119,7 +119,7 @@ When /^I create a stack with parameters$/ do
     'SecurityGroup' => @security_group.name,
     'InstanceType' => 'm1.large',
   }
-  @stack = @cloud_formation.stacks.create(@stack_name, @template, 
+  @stack = @cloud_formation.stacks.create(@stack_name, @template,
     :parameters => @stack_params)
   @created_stacks << @stack
 end

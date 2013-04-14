@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -194,8 +194,8 @@ module AWS
               "<Message>BAR</Message>"+
               "</Error></Errors></Response>"
           end
-          lambda { 
-            client.describe_instances 
+          lambda {
+            client.describe_instances
           }.should raise_error(EC2::Errors::Foo, "BAR")
         end
 

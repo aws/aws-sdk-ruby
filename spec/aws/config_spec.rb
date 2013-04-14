@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -61,14 +61,14 @@ describe AWS do
       context ':credential_provider' do
 
         it 'defaults to an AWS::Core::CredentialProviders::DefaultProvider' do
-          config.credential_provider.should 
+          config.credential_provider.should
             be_a(AWS::Core::CredentialProviders::DefaultProvider)
         end
 
         it 'is constructed with the static credentials from config' do
 
           provider = config({
-            :access_key_id => 'a', 
+            :access_key_id => 'a',
             :secret_access_key => 'b',
             :session_token => 'c',
           }).credential_provider
@@ -104,7 +104,7 @@ describe AWS do
         end
 
       end
-      
+
       context ':http_open_timeout' do
 
         it 'defaults to 15' do
@@ -158,7 +158,7 @@ describe AWS do
           logger = double('logger')
 
           cfg = config(
-            :http_open_timeout => 12, 
+            :http_open_timeout => 12,
             :http_idle_timeout => 34,
             :http_wire_trace => true,
             :logger => logger)
@@ -213,7 +213,7 @@ describe AWS do
         end
 
         it 'is aliased with a question mark' do
-          config.method(:http_wire_trace).should 
+          config.method(:http_wire_trace).should
             eq(config.method(:http_wire_trace?))
         end
 
@@ -272,7 +272,7 @@ describe AWS do
       context ':proxy_uri' do
 
         it 'defaults to nil' do
-          config.proxy_uri.should eq(nil) 
+          config.proxy_uri.should eq(nil)
         end
 
         it 'can be changed' do
@@ -282,7 +282,7 @@ describe AWS do
 
         it 'parses strings as uris can be changed' do
           proxy = 'http://foo.bar:1234'
-          config(:proxy_uri => proxy).proxy_uri.should 
+          config(:proxy_uri => proxy).proxy_uri.should
             eq(URI.parse(proxy))
         end
 
@@ -299,14 +299,14 @@ describe AWS do
         end
 
         it 'is aliases with a question mark' do
-          config.method(:ssl_verify_peer).should 
+          config.method(:ssl_verify_peer).should
             eq(config.method(:ssl_verify_peer?))
         end
 
       end
 
       context ':ssl_ca_file' do
-        
+
         it 'defaults to the bundled ca cert bundle' do
           config.ssl_ca_file.should
             eq(File.expand_path(File.dirname(__FILE__) + "/../../ca-bundle.crt"))
@@ -319,7 +319,7 @@ describe AWS do
       end
 
       context ':ssl_ca_path' do
-        
+
         it 'defaults to nil' do
           config.ssl_ca_path.should eq(nil)
         end

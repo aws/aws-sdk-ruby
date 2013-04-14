@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 module AWS
   class AutoScaling
 
-    # 
+    #
     # @attr_reader [String] arn
     #
     # @attr_reader [String] adjustment_type
@@ -26,7 +26,7 @@ module AWS
     #
     # @attr_reader [Integer] cooldown
     #
-    # @attr_reader [Integer] min_adjustment_magnitude
+    # @attr_reader [Integer] min_adjustment_step
     #
     class ScalingPolicy < Core::Resource
 
@@ -63,10 +63,10 @@ module AWS
 
       attribute :cooldown
 
-      attribute :min_adjustment_magintude
+      attribute :min_adjustment_step
 
       populates_from(:describe_policies) do |resp|
-        resp.scaling_policies.find do |p| 
+        resp.scaling_policies.find do |p|
           p.policy_name == name and
           p.auto_scaling_group_name == group.name
         end
@@ -89,7 +89,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [Boolean] :honor_cooldown (false) Set to true if you
-      #   want Auto Scaling to reject this request when the Auto Scaling 
+      #   want Auto Scaling to reject this request when the Auto Scaling
       #   group is in cooldown.
       #
       # @raise [Errors::ScalingActivityInProgress]

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -88,18 +88,18 @@ module AWS
         it 'returns the state as a symbol' do
           vpn_connection.state.should == :state
         end
-        
+
         it 'returns the vpn_type as a string' do
           vpn_connection.vpn_type.should == 'ipsec.1'
         end
 
         it 'returns the gateway' do
-          vpn_connection.vpn_gateway.should == 
+          vpn_connection.vpn_gateway.should ==
             VPNGateway.new('vpngid', :config => config)
         end
 
         it 'returns the customer gateway' do
-          vpn_connection.customer_gateway.should == 
+          vpn_connection.customer_gateway.should ==
             CustomerGateway.new('cgid', :config => config)
         end
 
@@ -119,7 +119,7 @@ module AWS
             t[0].status_message.should == 'status message'
             t[0].accepted_route_count.should == 2
           end
-          
+
         end
 
       end

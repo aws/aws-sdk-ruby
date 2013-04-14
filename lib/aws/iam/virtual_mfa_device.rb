@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,14 +16,14 @@ require 'base64'
 module AWS
   class IAM
 
-    # @attr_reader [String] base_32_string_seed The Base32 seed defined as 
-    #   specified in RFC3548.  Only accessible on newly created 
+    # @attr_reader [String] base_32_string_seed The Base32 seed defined as
+    #   specified in RFC3548.  Only accessible on newly created
     #   devices. This value is Base64-encoded.
-    # 
-    # @attr_reader [Blob] qr_code_png A QR code PNG image that encodes 
-    #   otpauth://totp/$virtualMFADeviceName@$AccountName? secret=$Base32String 
-    #   where $virtualMFADeviceName is one of the create call arguments, 
-    #   AccountName is the user name if set (accountId otherwise), and 
+    #
+    # @attr_reader [Blob] qr_code_png A QR code PNG image that encodes
+    #   otpauth://totp/$virtualMFADeviceName@$AccountName? secret=$Base32String
+    #   where $virtualMFADeviceName is one of the create call arguments,
+    #   AccountName is the user name if set (accountId otherwise), and
     #   Base32String is the seed in Base32 format.  Only accessible on newly
     #   created devices. This value is Base64-encoded.
     #
@@ -61,13 +61,13 @@ module AWS
         end
       end
 
-      # Enables the MFA device and associates it with the specified user. 
-      # When enabled, the MFA device is required for every subsequent login 
+      # Enables the MFA device and associates it with the specified user.
+      # When enabled, the MFA device is required for every subsequent login
       # by the user name associated with the device.
       # @param [User,String] user The user (or user name string) you want
       #   to enable this device for.
       # @param [String] code1 An authentication code emitted by the device.
-      # @param [String] code2 A subsequent authentication code emitted by 
+      # @param [String] code2 A subsequent authentication code emitted by
       #   the device.
       def enable user, code1, code2
 
@@ -89,7 +89,7 @@ module AWS
         !!enable_date
       end
 
-      # Deactivates the MFA device and removes it from association with 
+      # Deactivates the MFA device and removes it from association with
       # the user for which it was originally enabled.
       # @return [nil]
       def deactivate
@@ -110,7 +110,7 @@ module AWS
 
       populates_from :create_virtual_mfa_device do |resp|
         if resp.virtual_mfa_device.serial_number == serial_number
-          resp.virtual_mfa_device 
+          resp.virtual_mfa_device
         end
       end
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -140,9 +140,9 @@ module AWS
 
       # Returns true if this listener exists.
       #
-      #   load_balancer = ELB.new.load_balancers['my-load-balancer']
-      #   listener = load_balancer.listeners[80] # port 80
-      #   listener.exists?
+      #     load_balancer = ELB.new.load_balancers['my-load-balancer']
+      #     listener = load_balancer.listeners[80] # port 80
+      #     listener.exists?
       #
       # @return [Boolean] Returns true if the load balancer has a listener
       #   on this port.

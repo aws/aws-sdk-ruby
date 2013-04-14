@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ module AWS
           @subnet = subnet
         end
 
-        # @return [String] An identifier representing the association 
+        # @return [String] An identifier representing the association
         #   between the network ACL and subnet.
         attr_reader :association_id
 
@@ -34,7 +34,7 @@ module AWS
         # @return [Subnet]
         attr_reader :subnet
 
-        # Replaces the network acl in the current association with a 
+        # Replaces the network acl in the current association with a
         # different one (a new network acl is assigned to the subnet).
         #
         # @param [NetworkACL,String] network_acl A {NetworkACL} object or

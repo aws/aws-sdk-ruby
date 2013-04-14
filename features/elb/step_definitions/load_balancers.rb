@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 When /^I create a load balancer$/ do
 
   name = "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
- 
+
   @load_balancer = @elb.load_balancers.create(name,
     :availability_zones => %w(us-east-1a us-east-1b),
     :listeners => {
@@ -36,7 +36,7 @@ Given /^I create a load balancer with the following availability zones:$/ do |ta
   table.hashes.each do |hash|
     zones << hash["AZ_NAME"]
   end
- 
+
   @load_balancer = @elb.load_balancers.create(name,
     :availability_zones => zones,
     :listeners => {

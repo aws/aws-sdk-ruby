@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -129,7 +129,7 @@ module AWS
           allow_methods = %w(
             rename attribute_name boolean integer long float list force string
             ignore collect_values symbol_value timestamp map_entry map blob
-            position
+            enum position
           )
           unless allow_methods.include?(method.to_s)
             raise "#{method} cannot be used in configuration"
@@ -151,9 +151,7 @@ module AWS
           Inflection.ruby_name(value.to_s).to_sym
         end
 
-        ##
-        ## customization methods
-        ##
+        # customization methods
 
         def element element_name, &block
 
@@ -286,6 +284,7 @@ module AWS
         end
         alias_method :==, :eql?
 
+        def enum *args; end
         def position *args; end
         def http_trait *args; end
         alias_method :http_header, :http_trait

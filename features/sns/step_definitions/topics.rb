@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,7 +23,7 @@ end
 
 Then /^the topic should have the correct display name$/ do
   @topic.name.should == @topic_name
-end 
+end
 
 When /^I delete the topic$/ do
   @topic.delete

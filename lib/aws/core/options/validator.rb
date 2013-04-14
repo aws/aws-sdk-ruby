@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,10 +18,10 @@ module AWS
       # Given a hash of validation rules, a validator validate request
       # options.  Validations support:
       #
-      # * rejecting unknown options
-      # * ensuring presence of required options
-      # * validating expected option types (e.g. hash, array, string,
-      #   integer, etc).
+      #   * rejecting unknown options
+      #   * ensuring presence of required options
+      #   * validating expected option types (e.g. hash, array, string,
+      #     integer, etc).
       #
       # After validating, a hash of request options is returned with
       # with normalized values (with converted types).
@@ -79,6 +79,17 @@ module AWS
             format_error('hash value', opt_name, context)
           end
           validate!(value.to_hash, rules[:members])
+        end
+
+        def validate_map rules, value, opt_name, context = nil
+          unless value.respond_to?(:to_hash)
+            format_error('hash value', opt_name, context)
+          end
+          value.inject({}) do |values,(k,v)|
+            context = "member #{k.inspect} of :#{opt_name}"
+            values[k] = validate_value(rules[:members], v, opt_name, context)
+            values
+          end
         end
 
         # Ensures the value is an array (or at least enumerable) and

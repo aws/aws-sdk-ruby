@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,23 +19,23 @@ module AWS
     module XML
       module SaxHandlers
         class REXML
-  
+
           include FrameStack
           include ::REXML::StreamListener
-  
+
           def sax_parse xml
             source = ::REXML::Source.new(xml)
             ::REXML::Parsers::StreamParser.new(source, self).parse
           end
-  
+
           def tag_start name, attrs
             start_element(name, attrs)
           end
-    
+
           def tag_end name
             end_element
           end
-  
+
         end
       end
     end

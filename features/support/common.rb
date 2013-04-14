@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,27 +20,18 @@ end if ENV['COVERAGE']
 $: << File.join(File.dirname(File.dirname(File.dirname(__FILE__))), "lib")
 
 require 'aws-sdk'
-
-require 'mocha'
-include Mocha::API
-require 'net/http'
-require 'uri'
 require 'yaml'
 
-
-# find a config file
-if ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID']
-  test_config = {}
-else
-  dir = Dir.getwd
-  while dir != "/" and
-      !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
-    dir = File.dirname(dir)
-  end
-  test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
-  test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
-    File.exists?(test_config_file)
-  raise "No config file" unless File.exists?(test_config_file)
+# try to find a config file
+dir = Dir.getwd
+while dir != "/" and
+    !File.exists?(File.join(dir, ".ruby_sdk_test_config.yml"))
+  dir = File.dirname(dir)
+end
+test_config_file = File.join(dir, ".ruby_sdk_test_config.yml")
+test_config_file = File.join(ENV["HOME"], ".ruby_sdk_test_config.yml") unless
+  File.exists?(test_config_file)
+if File.exists?(test_config_file)
   test_config = YAML.load(File.read(test_config_file))
 end
 
@@ -70,7 +61,7 @@ if ENV['LOGGING'] == 'true'
 end
 
 AfterConfiguration do
-  AWS.config(test_config)
+  AWS.config(test_config) if test_config
   handler = AWS::Core::Http::Handler.new(AWS.config.http_handler) do |req, resp, read_block|
     (@requests_made ||= []) << req
     super(req, resp, &read_block)
@@ -102,14 +93,14 @@ After do |scenario|
         })
         list.versions.each do |version|
           @s3_client.delete_object({
-            :bucket_name => bucket_name, 
+            :bucket_name => bucket_name,
             :key => version.key,
             :version_id => version.version_id,
             :endpoint => endpoint,
           })
         end
       end while list.truncated?
-    rescue 
+    rescue
       # ignore
     end
     @s3_client.delete_bucket(:bucket_name => bucket_name, :endpoint => endpoint) rescue nil
@@ -183,4 +174,8 @@ def tempfile(contents)
     f.flush
     yield(f)
   end
+end
+
+def unique_name prefix
+  prefix == '' ? '' : "#{prefix}-#{Time.now.to_i}"
 end

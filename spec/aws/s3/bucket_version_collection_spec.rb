@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -82,7 +82,7 @@ module AWS
       end
 
       context '#[]' do
-        
+
         it 'does not respond to #[]' do
           lambda {
             collection['foo']
@@ -133,7 +133,7 @@ module AWS
 
         it 'yields once for each version' do
           yielded = []
-          collection.each do |version| 
+          collection.each do |version|
             yielded << version
           end
           yielded.length.should == versions.length
@@ -141,7 +141,7 @@ module AWS
 
         it 'yields object versions' do
           yielded = []
-          collection.each do |version| 
+          collection.each do |version|
             yielded << version
           end
           yielded.all?{|version| version.should be_a(ObjectVersion) }
@@ -149,7 +149,7 @@ module AWS
 
         it 'correctly populates delete marker states' do
           states = []
-          collection.each do |version| 
+          collection.each do |version|
             states << version.delete_marker?
           end
           states.should == [true, false, false]

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -37,7 +37,7 @@ module AWS
 
       # Creates an AWS account alias.
       #
-      #   iam.account_aliases.create('myaccountalias')
+      #     iam.account_aliases.create('myaccountalias')
       #
       # For information about account alias restrictions and usage,
       # see http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
@@ -51,7 +51,7 @@ module AWS
 
       # Delete an AWS account alias.
       #
-      #   iam.account_aliases.delete('myaccountalias')
+      #     iam.account_aliases.delete('myaccountalias')
       #
       # @param [String] account_alias The account alias to delete.
       # @return [nil]

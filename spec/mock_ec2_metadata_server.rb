@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,7 +20,7 @@ require 'time'
 # on ec2 instances.  It is used to test consuming aws credentials
 # from an iam instance profile.
 class MockEC2MetadataServer
-  
+
   def initialize options = {}
     @ip_address = options[:ip_address] || '127.0.0.1'
     @port = options[:port] || 8765
@@ -84,8 +84,8 @@ class MockEC2MetadataServer
 
             end
           end
-        end  
-      end 
+        end
+      end
     end
 
   end

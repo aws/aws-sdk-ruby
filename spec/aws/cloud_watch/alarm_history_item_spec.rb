@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -21,13 +21,13 @@ module AWS
 
       let(:client) { config.cloud_watch_client }
 
-      let(:alarm_history_item) { 
+      let(:alarm_history_item) {
         AlarmHistoryItem.new(
-          :alarm_name => 'alarm_name', 
+          :alarm_name => 'alarm_name',
           :history_data => 'history_data',
           :history_item_type => 'history_item_type',
           :history_summary => 'history_summary',
-          :timestamp => now, :config => config) 
+          :timestamp => now, :config => config)
       }
 
       shared_examples_for 'alarm history item attribute' do |attr_name,aka|

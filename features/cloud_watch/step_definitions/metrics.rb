@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,7 +28,7 @@ Given /^I put data for the metric$/ do
 end
 
 Then /^I should be able to get statistics for the metric$/ do
-  eventually do 
+  eventually do
     now = Time.now
     @statistics = @metric.statistics({
       :start_time => now - 3600,

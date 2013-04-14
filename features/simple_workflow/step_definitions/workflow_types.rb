@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -61,7 +61,7 @@ When /^I deprecate the workflow type$/ do
 end
 
 Then /^deprecated workflow types should include the workflow type$/ do
-  eventually do 
+  eventually do
     @domain.workflow_types.deprecated.should include(@workflow_type)
   end
 end

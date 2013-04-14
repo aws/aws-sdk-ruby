@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,7 +17,7 @@ module AWS
   class EC2
     class NetworkInterface < Resource
       class Attachment
-        
+
         def initialize network_interface, details
           @network_interface = network_interface
           @attachment_id = details[:attachment_id]
@@ -47,7 +47,7 @@ module AWS
         # @return [String] Returns the instance owner id.
         attr_reader :instance_owner_id
 
-        # @return [Integer] The index of the device for the network 
+        # @return [Integer] The index of the device for the network
         #   interface attachment on the instance.
         attr_reader :device_index
 
@@ -64,7 +64,7 @@ module AWS
 
         # Allows you to toggle the delete on termination state.
         #
-        #   network_interface.attachment.delete_on_termination = false
+        #     network_interface.attachment.delete_on_termination = false
         #
         # @param [Boolean] state
         #

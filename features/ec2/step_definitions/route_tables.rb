@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,7 +25,7 @@ Then /^the subnet route table should be the main route table$/ do
 end
 
 When /^I assign the route table to the subnet$/ do
-  @subnet.route_table = @route_table 
+  @subnet.route_table = @route_table
 end
 
 Then /^the route table should be associated with the subnet$/ do

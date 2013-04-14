@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -254,16 +254,12 @@
       :type: :string
       :required: true
   :outputs:
-    vaultNotificationConfig:
-      :sym: :vault_notification_config
-      :type: :hash
-      :members:
-        SNSTopic:
-          :sym: :sns_topic
-          :type: :string
-        Events:
-          :sym: :events
-          :type: :string
+    SNSTopic:
+      :sym: :sns_topic
+      :type: :string
+    Events:
+      :sym: :events
+      :type: :string
 - :name: InitiateJob
   :method: :initiate_job
   :http:

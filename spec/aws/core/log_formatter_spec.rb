@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ module AWS
       let(:response) { Response.new(http_request, http_response) }
 
       context '#pattern' do
-        
+
         it 'it set in the constructor' do
           LogFormatter.new('pattern').pattern.should == 'pattern'
         end
@@ -32,7 +32,7 @@ module AWS
       end
 
       context '#max_string_size' do
-        
+
         it 'defaults to 1000' do
           LogFormatter.new('pattern').max_string_size.should == 1000
         end
@@ -55,7 +55,7 @@ module AWS
         end
 
         context 'substitutions' do
-          
+
           it 'returns unknown substitutions unmodified' do
             message_for(':fake_placeholder').should == ':fake_placeholder'
           end
@@ -114,7 +114,7 @@ module AWS
             it 'returns the class name when an error is present' do
               error = AWS::S3::Errors::NoSuchKeyError.new('msg')
               response.error = error
-              message_for(':error_class').should == 
+              message_for(':error_class').should ==
                 'AWS::S3::Errors::NoSuchKeyError'
             end
 
@@ -142,7 +142,7 @@ module AWS
               message_for(':http_request_method').should == 'GET'
             end
 
-            it 'accepts alternative methods' do 
+            it 'accepts alternative methods' do
               http_request.http_method = 'PUT'
               message_for(':http_request_method').should == 'PUT'
             end

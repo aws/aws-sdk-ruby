@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,6 +33,23 @@ def create_bucket_high_level options = {}
   @buckets_created << [@bucket_name, @endpoint]
   @bucket
 end
+
+Given /^I create a bucket in "(.*?)"$/ do |location_constraint|
+  create_bucket_low_level(:location_constraint => location_constraint)
+end
+
+When /^I write to an object in the bucket$/ do
+  @response = @s3.client.put_object(
+    :bucket_name => @bucket_name,
+    :key => 'foo',
+    :data => 'bar')
+end
+
+Then /^I should follow redirects$/ do
+  @response.retry_count.should be > 0
+  @response.http_request.host.should eq("#{@bucket_name}.s3-external-3.amazonaws.com")
+end
+
 
 When /^I call create_bucket( asynchronously)?$/ do |async|
   create_bucket_low_level(:async => !async.to_s.strip.empty?)

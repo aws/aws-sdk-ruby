@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,7 +20,7 @@ module AWS
 
         context 'blanking out attributes on existing records' do
 
-          before(:each) do 
+          before(:each) do
 
             klass.string_attr :name
             klass.string_attr :alias
@@ -54,7 +54,7 @@ module AWS
             obj.save
 
           end
-    
+
           it 'follows the update up with a delete to remove deletion markers' do
 
             sdb_attributes.should_receive(:replace).
@@ -85,7 +85,7 @@ module AWS
             obj.alias.should == nil
 
           end
-          
+
         end
 
       end

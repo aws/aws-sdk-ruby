@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -50,7 +50,7 @@ module AWS
 
       # @param [String] key
       # @return [String,nil] Returns the tag for the given key.  If there
-      #    Returns +nil+ if the key does not exist.
+      #    Returns `nil` if the key does not exist.
       def [] key
         self.to_h[key]
       end
@@ -74,6 +74,8 @@ module AWS
 
       # Removes all tags from the bucket.
       #
+      # @example
+      #
       #   bucket.tags.clear
       #   bucket.tags.to_h #=> {}
       #
@@ -92,7 +94,7 @@ module AWS
       alias_method :to_hash, :to_h
 
       # @param [Hash] other
-      # @return [Boolean] Returns +true+ if the tags for this bucket match
+      # @return [Boolean] Returns `true` if the tags for this bucket match
       #   the passed hash.
       def eql? other
         self.to_h == other

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,17 +17,17 @@ module AWS
     # Represents an attachment of an Amazon EBS volume to an instance.
     #
     # @example Create an empty 15GiB volume and attach it to an instance
-    #  volume = ec2.volumes.create(:size => 15,
-    #                              :availability_zone => "us-east-1a")
-    #  attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
-    #  sleep 1 until attachment.status != :attaching
+    #   volume = ec2.volumes.create(:size => 15,
+    #                               :availability_zone => "us-west-2a")
+    #   attachment = volume.attach_to(ec2.instances["i-123"], "/dev/sdf")
+    #   sleep 1 until attachment.status != :attaching
     #
     # @example Remove all attachments from a volume and then delete it
-    #  volume.attachments.each do |attachment|
-    #    attachment.delete(:force => true)
-    #  end
-    #  sleep 1 until volume.status == :available
-    #  volume.delete
+    #   volume.attachments.each do |attachment|
+    #     attachment.delete(:force => true)
+    #   end
+    #   sleep 1 until volume.status == :available
+    #   volume.delete
     class Attachment < Resource
 
       # @private
@@ -50,37 +50,29 @@ module AWS
 
       # @overload status
       # Returns the attachment status.  Possible values are:
-      # * +:attaching+
-      # * +:attached+
-      # * +:detaching+
-      # * +:detached+
-      # @return [Symbol] Returns the attachment status.  
+      #
+      #   * `:attaching`
+      #   * `:attached`
+      #   * `:detaching`
+      #   * `:detached`
+      # @return [Symbol] Returns the attachment status.
       attribute :status, :to_sym => true
 
       # @overload attach_time
       # @return [Time] Returns the time at which this attachment was created.
       attribute :attach_time
 
-      # @overload delete_on_termination? 
-      # @return [Boolean] Returns +true+ if the volume will be deleted 
+      # @overload delete_on_termination?
+      # @return [Boolean] Returns `true` if the volume will be deleted
       #   on instance termination.
       attribute :delete_on_termination, :boolean => true
-    
+
       populates_from(:describe_volumes) do |resp|
-        if volume = resp.volume_index[self.volume.id] and
-            attachments = volume.attachment_set and
-            attachment = attachments.find do |att|
-            att.instance_id == self.instance.id &&
-              att.volume_id == self.volume.id &&
-              att.device == self.device
-          end
-        then
-          attachment
-        end
+        find_attachment(resp)
       end
 
       populates_from(:attach_volume, :detach_volume) do |resp|
-        if 
+        if
           resp.volume_id == volume.id and
           resp.instance_id == instance.id and
           resp.device == device
@@ -124,14 +116,17 @@ module AWS
 
       private
       def describe_attachment
-        (resp = describe_call and
-         volume = resp.volume_index[self.volume.id] and
-         attachments = volume.attachment_set and
-         attachment = attachments.find do |att|
-           att.instance_id == self.instance.id &&
-             att.volume_id == self.volume.id &&
-             att.device == self.device
-         end) or nil
+        find_attachment(describe_call)
+      end
+
+      def find_attachment(resp)
+        vol = resp.volume_index[volume.id] and
+        attachments = vol.attachment_set and
+        attachments.find do |att|
+          att.instance_id == instance.id &&
+            att.volume_id == volume.id &&
+            att.device == device
+        end
       end
 
     end

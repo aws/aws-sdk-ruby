@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -141,7 +141,7 @@ module AWS
             element("DeleteMarker") { boolean_value }
             list
           end
-          element("Error") { list; rename(:errors) }  
+          element("Error") { list; rename(:errors) }
         end
 
         CompleteMultipartUpload = BaseGrammar.customize
@@ -210,6 +210,18 @@ module AWS
               map_entry("Key", "Value")
               rename :tags
             end
+          end
+        end
+
+        GetBucketWebsite = BaseGrammar.customize do
+          element "IndexDocument" do
+            element "Suffix"
+          end
+          element "ErrorDocument" do
+            element "Key"
+          end
+          element "RoutingRules" do
+            list("RoutingRule")
           end
         end
 

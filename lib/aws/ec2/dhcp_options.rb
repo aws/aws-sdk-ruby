@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -32,13 +32,13 @@ module AWS
       attribute :dhcp_configuration_set, :static => true
 
       protected :dhcp_configuration_set
-    
+
       populates_from(:create_dhcp_options) do |resp|
         resp.dhcp_options if resp.dhcp_options.dhcp_options_id == id
       end
 
       populates_from(:describe_dhcp_options) do |resp|
-        resp.dhcp_options_set.find do |dhcp_options| 
+        resp.dhcp_options_set.find do |dhcp_options|
           dhcp_options.dhcp_options_id == dhcp_options_id
         end
       end
@@ -78,7 +78,7 @@ module AWS
         client.delete_dhcp_options(client_opts)
         nil
       end
-      
+
       # @return [VPCCollection] Returns a collection that represents
       #   all VPCs currently using this dhcp options.
       def vpcs

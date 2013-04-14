@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -36,15 +36,15 @@ module AWS
       # @return [String] Returns the version of this type.
       attr_reader :version
 
-      # Deprecates the type. 
+      # Deprecates the type.
       #
-      # After a type has been deprecated, you cannot create new 
-      # executions of that type. Executions that were started before the 
+      # After a type has been deprecated, you cannot create new
+      # executions of that type. Executions that were started before the
       # type was deprecated will continue to run.
       #
-      # @note This operation is eventually consistent. The results are best 
+      # @note This operation is eventually consistent. The results are best
       #   effort and may not exactly reflect recent updates and changes.
-      # 
+      #
       # @return [nil]
       #
       def deprecate
@@ -66,10 +66,10 @@ module AWS
       protected
       def resource_options
         {
-          :domain => domain.name, 
-          :"#{self.class.ruby_name}" => { 
+          :domain => domain.name,
+          :"#{self.class.ruby_name}" => {
             :name => name,
-            :version => version 
+            :version => version
           }
         }
       end

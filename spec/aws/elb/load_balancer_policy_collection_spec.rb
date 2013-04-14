@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,7 +29,7 @@ module AWS
       context '#create' do
 
         it 'calls #create_load_balancer_policy' do
-          
+
           client.should_receive(:create_load_balancer_policy).with do |opts|
             opts[:load_balancer_name].should ==  load_balancer.name
             opts[:policy_name].should == 'policy-name'
@@ -121,7 +121,7 @@ module AWS
           ).and_return(response)
 
           policies.each(:policy_type_names => ['abc-policy', 'xyz-policy']) {|p|}
-          
+
         end
 
         it 'yield load balancer policies' do

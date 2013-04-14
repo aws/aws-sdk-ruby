@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,14 +19,14 @@ module AWS
     # {EC2#snapshots}.
     #
     # @example Create a snapshot from a volume
-    #  ec2.snapshots.create(:volume => ec2.volumes["vol-123"],
-    #                       :description => "my snapshot")
-    #  # or:
-    #  ec2.volumes["vol-123"].create_snapshot("my snapshot")
+    #   ec2.snapshots.create(:volume => ec2.volumes["vol-123"],
+    #                        :description => "my snapshot")
+    #   # or:
+    #   ec2.volumes["vol-123"].create_snapshot("my snapshot")
     #
     # @example Get a snapshot by ID
-    #  snapshot = ec2.snapshots["vol-123"]
-    #  snapshot.exists?
+    #   snapshot = ec2.snapshots["vol-123"]
+    #   snapshot.exists?
     #
     # @example Get a map of snapshot IDs to snapshot status
     #   ec2.snapshots.inject({}) { |m, s| m[i.id] = s.status; m }
@@ -50,8 +50,9 @@ module AWS
         opts[:restorable_by_user_ids] = @restorable_by.map { |id| id.to_s } unless
           @restorable_by.empty?
         resp = filtered_request(:describe_snapshots, opts)
-        resp.snapshot_set.each do |v|
-          snapshot = Snapshot.new(v.snapshot_id, :config => config)
+        resp[:snapshot_set].each do |details|
+          snapshot = Snapshot.new_from(:describe_snapshots, details,
+            details[:snapshot_id], :config => config)
           yield(snapshot)
         end
         nil
@@ -59,7 +60,7 @@ module AWS
 
       # @return [SnapshotCollection] A new collection that only
       #   includes snapshots owned by one or more of the specified AWS
-      #   accounts.  The IDs +:amazon+ and +:self+ can be used to
+      #   accounts.  The IDs `:amazon` and `:self` can be used to
       #   include snapshots owned by Amazon or AMIs owned by you,
       #   respectively.
       #
@@ -71,9 +72,9 @@ module AWS
 
       # @return [ImageCollection] A new collection that only includes
       #   images for which the specified user ID has explicit launch
-      #   permissions. The user ID can be an AWS account ID, +:self+
+      #   permissions. The user ID can be an AWS account ID, `:self`
       #   to return AMIs for which the sender of the request has
-      #   explicit launch permissions, or +:all+ to return AMIs with
+      #   explicit launch permissions, or `:all` to return AMIs with
       #   public launch permissions.
       #
       # @param [Array of Strings] users The AWS account IDs by which
@@ -86,13 +87,12 @@ module AWS
       # Amazon S3. You can use snapshots for backups, to make
       # identical copies of instance devices, and to save data
       # before shutting down an instance. For more information about
-      # Amazon EBS, go to the {Amazon Elastic Compute Cloud User
-      # Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html].
+      # Amazon EBS, go to the [Amazon Elastic Compute Cloud User Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-ebs.html).
       #
       # @return [Snapshot] An object representing the new snapshot.
       #
       # @param [Hash] opts Options for creating the snapshot.
-      #   Either +:volume+ or +:volume_id+ is required.
+      #   Either `:volume` or `:volume_id` is required.
       #
       # @option opts [Volume] :volume The Amazon EBS volume of which
       #   to take a snapshot.

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,8 +28,8 @@ module AWS
       # @param [String] topic_arn An AWS SNS Topic ARN.  It should be
       #   formatted something like:
       #
-      #     arn:aws:sns:us-east-1:123456789012:TopicName
-      # 
+      #       arn:aws:sns:us-west-2:123456789012:TopicName
+      #
       # @return [Topic] Returns a topic with the given Topic ARN.
       def [] topic_arn
         unless topic_arn =~ /^arn:aws:sns:/

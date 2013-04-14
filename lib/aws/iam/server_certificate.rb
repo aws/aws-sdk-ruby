@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,7 +16,7 @@ module AWS
 
     # Respresents a server certificate.
     #
-    #   certificate = iam.server_certificates["MyCert"]
+    #     certificate = iam.server_certificates["MyCert"]
     #
     # You can use this class to get information about a certificate
     # and to delete it.

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,7 +16,7 @@ module AWS
     class ActivityTask
 
       # Raised by {ActivityTask#record_heartbeat!} when this activity
-      # task has received a cancelation request.
+      # task has received a cancellation request.
       class CancelRequestedError < StandardError; end
 
       include Core::Model
@@ -43,7 +43,7 @@ module AWS
 
       end
 
-      # @return [String] The opaque string used as a handle on the task. 
+      # @return [String] The opaque string used as a handle on the task.
       attr_reader :task_token
 
       # @return [String] The unique identifier of this task.
@@ -52,11 +52,11 @@ module AWS
       # @return [Domain] The domain this task was scheduled in.
       attr_reader :domain
 
-      # @return [Integer] The id of the ActivityTaskStarted event recorded 
+      # @return [Integer] The id of the ActivityTaskStarted event recorded
       #   in the history.
       attr_reader :started_event_id
 
-      # @return [String,nil] The input provided when the activity task was 
+      # @return [String,nil] The input provided when the activity task was
       #   scheduled.
       attr_reader :input
 
@@ -68,10 +68,10 @@ module AWS
 
       # Reports to the service that the activity task is progressing.
       #
-      # You can optionally specifiy +:details+ that decibe the progress.
-      # This might be a percetnage completetion, step number, etc.
+      # You can optionally specify `:details` that describe the progress.
+      # This might be a percentage competition, step number, etc.
       #
-      #   activity_task.record_heartbeat! :details => '.75' # 75% complete
+      #     activity_task.record_heartbeat! :details => '.75' # 75% complete
       #
       # If the activity task has been canceled since it was received or
       # since the last recorded heartbeat, this method will raise
@@ -79,31 +79,24 @@ module AWS
       #
       # If you are processing the activity task inside a block passed
       # to one of the polling methods in {ActivityTaskCollection}
-      # then untrapped CancelRequestedErrors are caught 
+      # then untrapped CancelRequestedErrors are caught
       # and responded to automatically.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     end # traps the error and responds activity task canceled.
       #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   end # traps the error and responds activity task cancled.
-      #
-      # If you need to cleanup or provide addtional details in the
-      # cancelation response, you can trap the error and 
+      # If you need to cleanup or provide additional details in the
+      # cancellation response, you can trap the error and
       # respond manually.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     rescue CancelRequestedError => e
+      #        # cleanup
+      #        task.respond_canceled! :details => '...'
+      #     end
       #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   rescue CancelRequestedError => e
-      #
-      #      # cleanup
-      #
-      #      task.respond_canceled! :details => '...'
-      #
-      #   end
-      #   
       # @param [Hash] options
       #
       # @option options [String] :details (nil)

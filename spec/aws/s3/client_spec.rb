@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -387,14 +387,14 @@ module AWS
 
         it 'defaults version ids to nil' do
           resp = client.send(method, opts)
-          resp.version_id.should be_nil
+          resp[:version_id].should be(nil)
         end
 
         it 'populates the version when present' do
           resp = client.with_http_handler do |req, resp|
             resp.headers['x-amz-version-id'] = ['foo']
           end.send(method,opts)
-          resp.version_id.should == 'foo'
+          resp[:version_id].should eq('foo')
         end
 
       end
@@ -405,7 +405,7 @@ module AWS
           response = client.with_http_handler do |req, resp|
             resp.headers['ETag'] = ['abcxyz']
           end.send(method, opts)
-          response.etag.should == 'abcxyz'
+          response[:etag].should eq('abcxyz')
         end
 
       end
@@ -1319,6 +1319,23 @@ module AWS
 
         it_should_behave_like "a subresource request", 'acl'
 
+        it 'should read the headers on success' do
+          r = client.with_http_handler do |req, resp|
+            resp.headers['content-type'] = ['text/plain']
+            resp.headers['content-encoding'] = ['gzip']
+            resp.headers['cache-control'] = ['max-age=1296000']
+            resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
+            resp.headers['accept-ranges'] = ['bytes']
+            resp.headers['x-amz-meta-Color'] = ['red']
+            resp.headers['x-amz-meta-foo'] = 'bar'
+          end.head_object(opts)
+          r[:content_type].should eq('text/plain')
+          r[:content_encoding].should eq('gzip')
+          r[:cache_control].should eq('max-age=1296000')
+          r[:accept_ranges].should eq('bytes')
+          r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
+        end
+
       end
 
       context '#put_object' do
@@ -1494,14 +1511,19 @@ module AWS
           it 'should read the headers on success' do
             r = client.with_http_handler do |req, resp|
               resp.headers['content-type'] = ['text/plain']
+              resp.headers['content-encoding'] = ['gzip']
+              resp.headers['cache-control'] = ['max-age=1296000']
+              resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
+              resp.headers['accept-ranges'] = ['bytes']
               resp.headers['x-amz-meta-Color'] = ['red']
               resp.headers['x-amz-meta-foo'] = 'bar'
             end.head_object(opts)
-            r.meta.should == {
-              'foo' => 'bar',
-              'Color' => 'red',
-            }
-            r.content_type.should == 'text/plain'
+            r[:content_type].should eq('text/plain')
+            r[:content_encoding].should eq('gzip')
+            r[:cache_control].should eq('max-age=1296000')
+            r[:expires].should eq('Sat, 22 Mar 2014 14:14:21 GMT')
+            r[:accept_ranges].should eq('bytes')
+            r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
           end
 
           it 'should return the content-type as a string' do
@@ -1522,8 +1544,8 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-expiration'] = nil
             end.head_object(opts)
-            r.expiration_date.should == nil
-            r.expiration_rule_id.should == nil
+            r[:expiration_date].should be(nil)
+            r[:expiration_rule_id].should be(nil)
           end
 
           it 'parses x-amz-expiration headers' do
@@ -1541,8 +1563,8 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-restore'] = nil
             end.head_object(opts)
-            r.restore_expiration_date.should == nil
-            r.restore_in_progress.should == false
+            r[:restore_expiration_date].should be(nil)
+            r[:restore_in_progress].should be(false)
           end
 
           it 'parses x-amz-restore headers' do
@@ -1557,6 +1579,14 @@ module AWS
             r = client.with_http_handler do |req, resp|
               resp.headers['x-amz-restore'] =
                 ['x-amz-restore: ongoing-request="true", expiry-date="Fri, 27 Jan 2012 00:00:00 GMT"']
+            end.head_object(opts)
+            r.restore_in_progress.should == true
+          end
+
+          it 'parses x-amz-restore headers while restore is in-progress' do
+            r = client.with_http_handler do |req, resp|
+              resp.headers['x-amz-restore'] =
+                ['x-amz-restore: ongoing-request="true"']
             end.head_object(opts)
             r.restore_in_progress.should == true
           end
@@ -1841,7 +1871,7 @@ module AWS
 
         it 'sends :parts as an XML request body' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "<Part><PartNumber>2</PartNumber><ETag>bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
@@ -1855,18 +1885,18 @@ module AWS
 
         it 'converts the part number to an integer' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
-          my_opts = opts.merge(:parts => [{ :part_number => "1.2",
+          my_opts = opts.merge(:parts => [{ :part_number => "1",
                                             :etag => 'foo' }])
           client.complete_multipart_upload(my_opts)
         end
 
         it 'escapes XML characters in the etag' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo&amp;bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
@@ -1937,7 +1967,7 @@ module AWS
 
         context 'accepts letters and' do
           it('should accept lowercasename'){ should_pass('lowercasename') }
-          it('should reject MixedCaseName'){ should_fail('MixedCaseName') }
+          it('should accept MixedCaseName'){ should_pass('MixedCaseName') }
         end
 
         context 'accepts numbers and' do
@@ -1951,31 +1981,31 @@ module AWS
           it('should reject a 256 char long name'){ should_fail('n'*256) }
         end
 
-        context 'accepts dots after the first character and' do
+        context 'accepts names with dots and' do
           it('should accept sample.name'){ should_pass('sample.name') }
           it('should accept sample.'){ should_pass('sample.') }
-          it('should reject .sample'){ should_fail('.sample') }
+          it('should accept .sample'){ should_pass('.sample') }
         end
 
-        context 'accepts underscores after first character and' do
+        context 'accepts names with underscores and' do
           it('should accept sample_name'){ should_pass('sample_name') }
           it('should accept sample_'){ should_pass('sample_') }
-          it('should reject _sample'){ should_fail('_sample') }
+          it('should accept _sample'){ should_pass('_sample') }
         end
 
-        context 'accepts dashes after first character and' do
+        context 'accepts names with dashes and' do
           it('should accept sample-name'){ should_pass('sample-name') }
           it('should accept sample-'){ should_pass('sample-') }
-          it('should reject -sample'){ should_fail('-sample') }
+          it('should accept -sample'){ should_pass('-sample') }
         end
 
-        context 'rejects names that look like ip addresses and' do
+        context 'accepts names that look like ip addresses and' do
           it('should accept 1.a.3.4'){ should_pass('1.a.3.4') }
-          it('should reject 1.2.3.4'){ should_fail('1.2.3.4') }
+          it('should accept 1.2.3.4'){ should_pass('1.2.3.4') }
         end
 
-        it 'only accepts a-z 0-9 . _ - characters' do
-          valid = ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
+        it 'only accepts A-Z a-z 0-9 . _ - characters' do
+          valid = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
           invalid = (1..255).collect{|n| n.chr } - valid
           invalid.each{|bad_char| should_fail("abc#{bad_char}") }
         end
@@ -1983,15 +2013,15 @@ module AWS
         let (:valid_names) { ["foo",
                               "1234",
                               "a1.b2-c3_d4",
-                              "r"*255] }
+                              "r"*255,
+                              ".bla",
+                              "-bla",
+                              "_bla",
+                              "1.2.3.4"] }
 
         let (:invalid_names) { ["it",
                                 "r"*256,
-                                "it!",
-                                ".bla",
-                                "-bla",
-                                "_bla",
-                                "1.2.3.4"] }
+                                "it!"] }
 
         it 'should return true for valid names' do
           valid_names.each do |name|
@@ -2026,16 +2056,24 @@ module AWS
         it('should reject a 64 char long name') { should_fail('n'*64) }
         it('should reject names with _') { should_fail('abc_xyz') }
         it('should reject names ending with -') { should_fail('abc-') }
+        it('should reject names ending with .') { should_fail('abc.') }
         it('should reject names containing ..') { should_fail('abc..xyz') }
         it('should reject names containing .-') { should_fail('abc.-xyz') }
         it('should reject names containing -.') { should_fail('abc-.xyz') }
+        it('should reject names containing upper case') { should_fail('abC')}
 
-        let (:compatible_names) { ["foo",
+        let (:compatible_names) { ["myawsbucket",
+                                   "my.aws.bucket",
+                                   "myawsbucket.1",
+                                   "foo",
                                    "1234",
                                    "a1.b2-c3.d4",
                                    "r"*63] }
 
-        let (:incompatible_names) { ["it",
+        let (:incompatible_names) { [".myawsbucket",
+                                     "myawsbucket.",
+                                     "my..awsbucket",
+                                     "it",
                                      "r"*64,
                                      "it!",
                                      ".bla",

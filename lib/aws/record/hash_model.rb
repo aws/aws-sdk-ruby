@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,14 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/abstract_base'
-require 'aws/record/hash_model/scope'
-require 'aws/record/hash_model/attributes'
-require 'aws/record/hash_model/finder_methods'
-
 module AWS
   module Record
     class HashModel
+
+      require 'aws/record/hash_model/attributes'
+      require 'aws/record/hash_model/finder_methods'
+      require 'aws/record/hash_model/scope'
 
       extend AbstractBase
 
@@ -26,30 +25,30 @@ module AWS
 
         # Creates the DynamoDB table that is configured for this class.
         #
-        #   class Product < AWS::Record::HashModel
-        #   end
+        #     class Product < AWS::Record::HashModel
+        #     end
         #
-        #   # create the table 'Product' with 10 read/write capacity units
-        #   Product.create_table 10, 10
+        #     # create the table 'Product' with 10 read/write capacity units
+        #     Product.create_table 10, 10
         #
         # If you shard you data across multiple tables, you can specify the
         # shard name:
         #
-        #   # create two tables, with the given names
-        #   Product.create_table 500, 10, :shard_name => 'products-1'
-        #   Product.create_table 500, 10, :shard_name => 'products-2'
+        #     # create two tables, with the given names
+        #     Product.create_table 500, 10, :shard_name => 'products-1'
+        #     Product.create_table 500, 10, :shard_name => 'products-2'
         #
         # If you share a single AWS account with multiple applications, you
         # can provide a table prefix to group tables and to avoid name
         # collisions:
         #
-        #   AWS::Record.table_prefix = 'myapp-'
+        #     AWS::Record.table_prefix = 'myapp-'
         #
-        #   # creates the table 'myapp-Product'
-        #   Product.create_table 250, 50
+        #     # creates the table 'myapp-Product'
+        #     Product.create_table 250, 50
         #
-        #   # creates the table 'myapp-products-1'
-        #   Product.create_table 250, 50, :shard_name => 'products-1'
+        #     # creates the table 'myapp-products-1'
+        #     Product.create_table 250, 50, :shard_name => 'products-1'
         #
         # @param [Integer] read_capacity_units
         #   See {DynamoDB::TableCollection#create} for more information.
@@ -73,9 +72,9 @@ module AWS
           create_opts[:hash_key] = { :id => :string }
 
           dynamo_db.tables.create(
-            table_name, 
-            read_capacity_units, 
-            write_capacity_units, 
+            table_name,
+            read_capacity_units,
+            write_capacity_units,
             create_opts)
 
         end
@@ -100,7 +99,7 @@ module AWS
 
       end
 
-      # @return [DynamoDB::Item] Returns a reference to the item as stored in 
+      # @return [DynamoDB::Item] Returns a reference to the item as stored in
       #   simple db.
       # @private
       private

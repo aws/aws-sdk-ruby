@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,11 +16,11 @@ Given /^I wait (\d+) seconds for eventual consistency$/ do |seconds|
 end
 
 When /^(.*), ignoring errors$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 When /^(.*) again$/ do |step|
-  When step rescue nil
+  step step rescue nil
 end
 
 Given /^I start a memoization block$/ do
@@ -194,7 +194,7 @@ def requests_matching requests, table
 end
 
 def table_formatted_requests requests
-#   tables = requests.collect do |req| 
+#   tables = requests.collect do |req|
 #     table = []
 #     table << "|TYPE|NAME|VALUE|"
 #     table << "|http|verb|#{req.http_method}|"
@@ -214,7 +214,7 @@ def table_formatted_requests requests
 #     Cucumber::Ast::Table.parse(table.join("\n"), nil, nil)
 #   end
 #   tables.collect{|t| t.to_s(:color => false, :prefixes => Hash.new('')) }
-  tables = requests.collect do |req| 
+  tables = requests.collect do |req|
     table = []
     if req.headers["content-type"] and req.headers["content-type"].include?("json")
       table << %w(TYPE NAME VALUE)

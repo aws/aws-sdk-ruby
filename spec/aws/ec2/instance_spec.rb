@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -963,14 +963,16 @@ module AWS
 
       end
 
-      context '#block_device_mappings' do
+      context '#attachments' do
 
         let(:resp) { client.new_stub_for(:describe_instance_attribute) }
+
+        let(:time) { Time.parse("Thu Apr 21 16:19:57 -0700 2011") }
 
         let(:ebs_mapping) {{
           :volume_id => "vol-123",
           :status => "attaching",
-          :attach_time => Time.parse("Thu Apr 21 16:19:57 -0700 2011"),
+          :attach_time => time,
           :delete_on_termination => true,
         }}
 
@@ -1018,20 +1020,44 @@ module AWS
 
           let(:mappings) do
             client.stub(:describe_instances).and_return(resp)
-            instance.block_device_mappings
+            instance.attachments
           end
 
           before(:each) do
             stub_response_instance(resp, "i-123", {
               :instance_id => "i-123",
-              :block_device_mapping => [{
-                :device_name => "/dev/sda2",
-                :ebs => ebs_mapping,
-              }]
+              :block_device_mapping => [
+                {
+                  :device_name => "/dev/sda2",
+                  :ebs => ebs_mapping,
+                },
+                {
+                  :device_name => "/dev/sdb",
+                  :virtual_name => "ephemeral0",
+                },
+              ]
             })
           end
 
           it_should_behave_like "ec2 instance block device mapping value"
+
+          it 'provides access to all block devices via #block_devices' do
+            client.stub(:describe_instances).and_return(resp)
+            instance.block_devices.should eq([
+              {
+                :device_name => "/dev/sda2",
+                :ebs => {
+                  :volume_id => "vol-123",
+                  :status => "attaching",
+                  :attach_time => time,
+                  :delete_on_termination => true
+                }
+              }, {
+                :device_name => "/dev/sdb",
+                :virtual_name => "ephemeral0",
+              },
+            ])
+          end
 
         end
 

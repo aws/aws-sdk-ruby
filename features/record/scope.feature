@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,7 +16,7 @@
 Feature: Scoped Finds
 
   As an ORM user
-  I want to use an expressive interface 
+  I want to use an expressive interface
   So that I can find records.
 
   @where
@@ -60,7 +60,7 @@ Feature: Scoped Finds
     | condition | name = 'joe' |
 
   @where @wip
-  Scenario: Using named integer attributes in where condition hashes should 
+  Scenario: Using named integer attributes in where condition hashes should
     properly pad the numeric value.
     Given I configure the example class with:
     """

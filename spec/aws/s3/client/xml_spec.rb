@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -134,15 +134,15 @@ module AWS
               :grants => [
                 {
                   :grantee=>{
-                    :type=>"CanonicalUser", 
-                    :canonical_user_id=>"8a6925ce4adf57f21c32aa379004fef", 
+                    :type=>"CanonicalUser",
+                    :canonical_user_id=>"8a6925ce4adf57f21c32aa379004fef",
                     :display_name=>"CustomersName@amazon.com"
-                  }, 
+                  },
                   :permission=>:full_control
                 }
-              ], 
+              ],
               :owner=>{
-                :id=>"8a6925ce4adee97f21c32aa379004fef", 
+                :id=>"8a6925ce4adee97f21c32aa379004fef",
                 :display_name=>"CustomersName@amazon.com"
               }
             }
@@ -191,7 +191,7 @@ module AWS
       describe XML::ListObjects do
 
         context 'one contents' do
-        
+
           let(:response) { described_class.parse(<<-XML) }
             <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <Name>trowe-bucket</Name>
@@ -257,7 +257,7 @@ module AWS
           it 'should expose Contents as an array' do
             response.contents.should be_an(Array)
           end
-          
+
           it 'should have 2 contents entries' do
             response.contents.length.should == 2
           end
@@ -272,7 +272,7 @@ module AWS
           end
 
           it 'should expose Contents\ETag as etag' do
-            response.contents.first.etag.should == 
+            response.contents.first.etag.should ==
               "\"5ceaa7ed396ccb8e959c02753cb4bd18\""
           end
 
@@ -298,7 +298,7 @@ module AWS
             <Status>Enabled</Status>
           </VersioningConfiguration>
         XML
-      
+
         let(:suspended) { <<-XML }
           <VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
             <Status>Suspended</Status>
@@ -353,7 +353,7 @@ module AWS
               <Owner>
                 <ID>8a6925ce4adf7f21c32aa379004fef</ID>
                 <DisplayName>mtd@amazon.com</DisplayName>
-              </Owner>    
+              </Owner>
             </DeleteMarker>
             <Version>
               <Key>my-second-image.jpg</Key>
@@ -376,8 +376,8 @@ module AWS
               <Owner>
                 <ID>8a6925ce4adf532aa379004fef</ID>
                 <DisplayName>mtd@amazon.com</DisplayName>
-              </Owner>    
-            </DeleteMarker>   
+              </Owner>
+            </DeleteMarker>
             <Version>
               <Key>my-third-image.jpg</Key>
               <VersionId>UIORUnfndfhnw89493jJFJ</VersionId>
@@ -415,7 +415,7 @@ module AWS
         end
 
         context 'Delete markers' do
-          
+
           let(:delete_marker) { described_class.parse(xml).versions[1] }
 
           it 'should respond to #delete_marker? with true' do
@@ -449,7 +449,7 @@ module AWS
         end
 
         context 'Versions' do
-          
+
           let(:version) { described_class.parse(xml).versions[0] }
 
           it 'should respond to #delete_marker? with false' do

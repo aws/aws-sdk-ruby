@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,16 +15,16 @@ module AWS
   class SimpleEmailService
 
     # Helps you manage your verified SimpleEmailService email addresses.
-    # @note This class is deprecated. Please use 
+    # @note This class is deprecated. Please use
     #   {SimpleEmailService#identities} instead.
     class EmailAddressCollection
 
       include Core::Model
       include Enumerable
 
-      # Requets for an email address to be verified.  An email will be
-      # sent to the given +email_address+ with a link to click.  Once
-      # the link has been followed the +email_address+ will be verified.
+      # Requests for an email address to be verified.  An email will be
+      # sent to the given `email_address` with a link to click.  Once
+      # the link has been followed the `email_address` will be verified.
       #
       # @param [String] email_address The email address to verify.
       # @return [nil]

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,12 +16,12 @@
 Feature: EC2 VPC VPN Gateways
 
   Scenario: Create a vpn gateway
-    When I create a vpn gateway 
+    When I create a vpn gateway
     Then the vpn gateway should exist
     And the vpn gateway state should eventually be "available"
 
   Scenario: Delete a vpn gateway
-    Given I create a vpn gateway 
+    Given I create a vpn gateway
     When I delete the vpn gateway
     Then the vpn gateway state should eventually be "deleted"
 

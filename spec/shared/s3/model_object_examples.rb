@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -26,7 +26,7 @@ module AWS
                           :s3_server_side_encryption => nil) }
 
     let(:instance) do
-      options = args.last.is_a?(Hash) ? args.pop : {} 
+      options = args.last.is_a?(Hash) ? args.pop : {}
       options[:config] = config
       args << options
       described_class.new(*args)
@@ -50,7 +50,7 @@ module AWS
     end
 
     context '#inspect' do
-      
+
       it 'should have a short inspect method' do
         instance.inspect.length.should < 100
       end

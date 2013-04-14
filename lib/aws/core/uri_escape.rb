@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,7 +28,7 @@ module AWS
       module_function :escape
 
       # @param [String] value
-      # @return [String] Returns a URI-escaped path without escaping the 
+      # @return [String] Returns a URI-escaped path without escaping the
       #   separators.
       def escape_path value
         escaped = ""

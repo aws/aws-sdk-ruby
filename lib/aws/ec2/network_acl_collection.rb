@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -32,7 +32,7 @@ module AWS
 
         client_opts = {}
         client_opts[:vpc_id] = vpc_id_option(options)
-        
+
         resp = client.create_network_acl(client_opts)
 
         NetworkACL.new_from(:create_network_acl, resp.network_acl,
@@ -51,7 +51,7 @@ module AWS
         response = filtered_request(:describe_network_acls, options, &block)
         response.network_acl_set.each do |a|
 
-          network_acl = NetworkACL.new_from(:describe_network_acls, a, 
+          network_acl = NetworkACL.new_from(:describe_network_acls, a,
             a.network_acl_id, :config => config)
 
           yield(network_acl)

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -224,7 +224,7 @@ module AWS
         end
 
         context '#associations' do
-          
+
           it 'returns an array of associations' do
             network_acl.associations[0].should be_a(NetworkACL::Association)
             network_acl.associations.size.should == 1

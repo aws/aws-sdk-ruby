@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,7 +19,7 @@ module AWS
     module Options
 
       # Given a hash of serialization rules, a JSONSerializer can convert
-      # a hash of request options into a JSON document.  The request options 
+      # a hash of request options into a JSON document.  The request options
       # are validated before returning JSON.
       class JSONSerializer
 

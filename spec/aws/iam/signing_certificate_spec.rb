@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,8 +35,8 @@ module AWS
 
       end
 
-      context '#user' do 
-        
+      context '#user' do
+
         it 'returns the user passed to #new' do
           certificate.user.should == user
         end
@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#contents' do
-        
+
         it 'returns the contents passed to #new' do
           certificate = SigningCertificate.new('id', :contents => 'body')
           certificate.contents.should == 'body'
@@ -65,7 +65,7 @@ module AWS
           response.data[:certificates] = [
             {
               :user_name => user.name,
-              :certificate_id => 'id', 
+              :certificate_id => 'id',
               :certificate_body => 'body',
               :status => 'Active',
             }
@@ -90,7 +90,7 @@ module AWS
           response.data[:certificates] = [
             {
               :user_name => user.name,
-              :certificate_id => 'id', 
+              :certificate_id => 'id',
               :certificate_body => 'body',
               :status => 'Inactive',
             }
@@ -107,12 +107,12 @@ module AWS
       end
 
       context '#active?' do
-        
+
         it 'returns true if the status is :active' do
           certificate.stub(:status).and_return(:active)
           certificate.active?.should == true
         end
-        
+
         it 'returns false if the status is :inactive' do
           certificate.stub(:status).and_return(:inactive)
           certificate.active?.should == false
@@ -121,12 +121,12 @@ module AWS
       end
 
       context '#inactive?' do
-        
+
         it 'returns false if the status is :active' do
           certificate.stub(:status).and_return(:active)
           certificate.inactive?.should == false
         end
-        
+
         it 'returns true if the status is :inactive' do
           certificate.stub(:status).and_return(:inactive)
           certificate.inactive?.should == true
@@ -135,11 +135,11 @@ module AWS
       end
 
       context '#activate!' do
-        
+
         it 'calls update_signing_certificate on the client' do
           client.should_receive(:update_signing_certificate).with(
             :certificate_id => certificate.id,
-            :user_name => user.name, 
+            :user_name => user.name,
             :status => 'Active')
           certificate.activate!
         end
@@ -147,11 +147,11 @@ module AWS
       end
 
       context '#deactivate!' do
-        
+
         it 'calls update_signing_certificate on the client' do
           client.should_receive(:update_signing_certificate).with(
             :certificate_id => certificate.id,
-            :user_name => user.name, 
+            :user_name => user.name,
             :status => 'Inactive')
           certificate.deactivate!
         end
@@ -159,11 +159,11 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls delete_signing_certificate on the client' do
           client.should_receive(:delete_signing_certificate).with(
             :certificate_id => certificate.id,
-            :user_name => user.name) 
+            :user_name => user.name)
           certificate.delete
         end
 

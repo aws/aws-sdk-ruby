@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,14 +17,16 @@ module AWS
     # Represents the uploads in progress for a bucket.
     #
     # @example Finding uploads by prefix
-    #  bucket.multipart_uploads.with_prefix("photos/").
-    #    map { |upload| upload.object.key }
-    #  # => ["photos/1.jpg", "photos/2.jpg", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos/").
+    #     map { |upload| upload.object.key }
+    #   # => ["photos/1.jpg", "photos/2.jpg", ...]
     #
     # @example Browsing with a tree interface
-    #  bucket.multipart_uploads.with_prefix("photos").as_tree.
-    #    children.select(&:branch?).map(&:prefix)
-    #  # => ["photos/2010", "photos/2011", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos").as_tree.
+    #     children.select(&:branch?).map(&:prefix)
+    #   # => ["photos/2010", "photos/2011", ...]
     #
     # @see Tree
     class MultipartUploadCollection

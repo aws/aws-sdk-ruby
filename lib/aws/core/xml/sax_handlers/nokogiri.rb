@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ module AWS
     module XML
       module SaxHandlers
         class Nokogiri
-          
+
           include FrameStack
 
           def sax_parse xml
@@ -32,11 +32,11 @@ module AWS
 
           def start_element_namespace element_name, attributes = [], *ignore
 
-            attributes = attributes.map.inject({}) do |hash,attr| 
+            attributes = attributes.map.inject({}) do |hash,attr|
               hash.merge(attr.localname => attr.value)
             end
 
-            start_element(element_name, attributes) 
+            start_element(element_name, attributes)
 
           end
 

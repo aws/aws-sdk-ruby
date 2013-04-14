@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -28,7 +28,7 @@ module AWS
       let(:user_policy) { UserPolicy.new(user, 'policy-name') }
 
       context '#user' do
-        
+
         it 'returns the user' do
           user_policy.user.should == user
         end
@@ -36,7 +36,7 @@ module AWS
       end
 
       context '#name' do
-        
+
         it 'returns the name of the user policy' do
           user_policy.name.should == 'policy-name'
         end
@@ -47,7 +47,7 @@ module AWS
 
         let(:response) { client.stub_for(:get_user_policy) }
 
-        let(:response_policy) { 
+        let(:response_policy) {
           policy = AWS::IAM::Policy.new
           policy.allow(:resources => :any, :actions => :any)
           policy
@@ -61,7 +61,7 @@ module AWS
             and_return(URI.encode(response_policy.to_json))
 
           client.stub(:get_user_policy).and_return(response)
-          
+
         end
 
         it 'calls get_user_policy on the client to fetch the policy' do
@@ -104,7 +104,7 @@ module AWS
       context '#policy=' do
 
         it 'calls put_user_policy on the client to add/update the policy' do
-          
+
           policy = AWS::IAM::Policy.new
           policy.allow(:resources => :any, :actions => :any)
           policy

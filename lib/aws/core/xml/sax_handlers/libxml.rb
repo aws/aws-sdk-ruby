@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ module AWS
     module XML
       module SaxHandlers
         class LibXML
-          
+
           include FrameStack
           include ::LibXML::XML::SaxParser::Callbacks
 
@@ -29,7 +29,7 @@ module AWS
           end
 
           def on_start_element_ns element_name, attributes, *ignore
-            start_element(element_name, attributes) 
+            start_element(element_name, attributes)
           end
 
           def on_end_element_ns *ignore

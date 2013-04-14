@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -87,13 +87,13 @@ module AWS
         let(:response) { client.stub_for(action) }
 
         before(:each) do
-          response.data = { 
+          response.data = {
             :volume_id => "vol-123",
             :instance_id => "i-123",
             :device => "/dev/sdf"
           }
         end
-        
+
         let(:attributes) { attachment.attributes_from_response(response) }
 
         it 'should return nil if the volume ID does not match' do
@@ -139,7 +139,7 @@ module AWS
         let(:resp) { client.new_stub_for(:describe_volumes) }
 
         let(:response_volume) do
-          { 
+          {
             :attachment_set => [
               response_attachment,
               {

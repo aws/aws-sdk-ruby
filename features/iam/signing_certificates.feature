@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,7 +31,7 @@ Feature: IAM Signing Certificates
     When I get a reference to the signing certificate
     Then the signing certificate contents should match
     And the signing certificate status should be "active"
-    And the signing certificate user be nil 
+    And the signing certificate user be nil
     And 2 requests should have been made like:
     | TYPE  | NAME   | VALUE                   |
     | param | Action | ListSigningCertificates |
@@ -43,7 +43,7 @@ Feature: IAM Signing Certificates
     When I get a reference to the signing certificate
     Then the signing certificate contents should match
     And the signing certificate status should be "active"
-    And the signing certificate user be nil 
+    And the signing certificate user be nil
     And 0 request should have been made like:
     | TYPE  | NAME   | VALUE                   |
     | param | Action | ListSigningCertificates |

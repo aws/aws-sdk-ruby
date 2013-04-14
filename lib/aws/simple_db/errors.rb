@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,18 +18,18 @@ module AWS
     # types that SimpleDB can return.  You can use these classes to
     # rescue specific errors, for example:
     #
-    #  begin
-    #    SimpleDB.new.domains.mydomain.
-    #      items["foo"].attributes.set(:color => "red")
-    #  rescue SimpleDB::Errors::NoSuchDomain => e
-    #    SimpleDB.new.domians.create("mydomain")
-    #    retry
-    #  end
+    #     begin
+    #       SimpleDB.new.domains.mydomain.
+    #         items["foo"].attributes.set(:color => "red")
+    #     rescue SimpleDB::Errors::NoSuchDomain => e
+    #       SimpleDB.new.domians.create("mydomain")
+    #       retry
+    #     end
     #
     # Each exception has:
     #
-    # * +code+: returns the error code as a string.
-    # * +box_usage+: returns the box usage for the operation.
+    # * `code`: returns the error code as a string.
+    # * `box_usage`: returns the box usage for the operation.
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.

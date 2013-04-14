@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -86,7 +86,7 @@ module AWS
           before(:each) do
             data[:instance_export] = { :instance_id => 'i-12345' }
           end
-          
+
           it 'returns an instance object' do
             task.instance.should be_an(Instance)
           end
@@ -106,7 +106,7 @@ module AWS
           before(:each) do
             data[:export_to_s3] = { :s3_bucket => 'bucket-name' }
           end
-          
+
           it 'returns a bucket object' do
             task.s3_bucket.should be_an(S3::Bucket)
           end
@@ -126,7 +126,7 @@ module AWS
           before(:each) do
             data[:export_to_s3] = { :s3_bucket => 'bucket-name', :s3_key => 'key' }
           end
-          
+
           it 'returns an s3 object' do
             task.s3_object.should be_an(S3::S3Object)
           end

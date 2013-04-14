@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -72,11 +72,11 @@ module AWS
 
       # Provides access to the users in the group.  For example:
       #
-      #   # get the names of all the users in the group
-      #   group.users.map(&:name)
+      #     # get the names of all the users in the group
+      #     group.users.map(&:name)
       #
-      #   # remove all users from the group
-      #   group.users.clear
+      #     # remove all users from the group
+      #     group.users.clear
       #
       # @return [GroupUserCollection] An object representing all the
       #   users in the group.
@@ -87,11 +87,11 @@ module AWS
       # Provides access to the policies associated with the group.
       # For example:
       #
-      #   # get the policy named "ReadOnly"
-      #   group.policies["ReadOnly"]
+      #     # get the policy named "ReadOnly"
+      #     group.policies["ReadOnly"]
       #
-      #   # remove all policies associated with the group
-      #   group.policies.clear
+      #     # remove all policies associated with the group
+      #     group.policies.clear
       #
       # @return [GroupPolicyCollection] An object representing all the
       #   policies associated with the group.

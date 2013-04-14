@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -54,7 +54,7 @@ module AWS
         it 'returns a workflow exeuction with the proper config' do
           executions['wid','rid'].config.should == config
         end
-        
+
         it 'is an alias of #at' do
           executions.method(:at).should == executions.method(:[])
         end
@@ -227,7 +227,7 @@ module AWS
           now = Time.now
           client.should_receive(open_method).
             with(request_options.merge(
-              :start_time_filter => { 
+              :start_time_filter => {
                 :oldest_date => now.to_i
               }
             )).and_return(response)
@@ -238,7 +238,7 @@ module AWS
           now = Time.now
           client.should_receive(open_method).
             with(request_options.merge(
-              :start_time_filter => { 
+              :start_time_filter => {
                 :oldest_date => early_2010,
                 :latest_date => now.to_i
               }
@@ -251,7 +251,7 @@ module AWS
           now = Time.now
           client.should_receive(closed_method).
             with(request_options.merge(
-              :close_time_filter => { 
+              :close_time_filter => {
                 :oldest_date => now.to_i
               }
             )).and_return(response)
@@ -263,7 +263,7 @@ module AWS
           b = Time.now
           client.should_receive(open_method).
             with(request_options.merge(
-              :start_time_filter => { 
+              :start_time_filter => {
                 :oldest_date => a.to_i,
                 :latest_date => b.to_i
               }
@@ -333,7 +333,7 @@ module AWS
             request_options.delete(:start_time_filter)
             client.should_receive(closed_method).
               with(request_options.merge(
-                :close_time_filter => { 
+                :close_time_filter => {
                   :oldest_date => a.to_i,
                   :latest_date => b.to_i,
                 }
@@ -364,7 +364,7 @@ module AWS
           end
 
           it 'counts closed executions when filtering by a closed date' do
-            
+
             time = Time.now - 3600
 
             request_options.delete(:start_time_filter)
@@ -386,9 +386,9 @@ module AWS
 
             client.should_receive(closed_method).
               with(request_options.merge(
-                :close_time_filter => { 
+                :close_time_filter => {
                   :oldest_date => early_2010,
-                  :latest_date => now.to_i 
+                  :latest_date => now.to_i
                 }
               )).and_return(response)
 
@@ -461,8 +461,8 @@ module AWS
         let(:request_options) {{
           :start_time_filter => {
             :oldest_date => Time.parse('2010-01-01').to_i,
-          }, 
-          :reverse_order => false, 
+          },
+          :reverse_order => false,
           :domain => domain.name
         }}
 
@@ -518,7 +518,7 @@ module AWS
           parent = domain.workflow_executions['abc', 'xyz']
 
           stub_n_members(response,2)
-        
+
           client.should_not_receive(:describe_workflow_execution)
 
           list = executions.to_a

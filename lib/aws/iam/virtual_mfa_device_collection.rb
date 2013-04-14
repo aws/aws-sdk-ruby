@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,10 +18,10 @@ module AWS
 
       include Collection
 
-      # Creates a new virtual MFA device for the AWS account. 
+      # Creates a new virtual MFA device for the AWS account.
       # After creating the virtual MFA, you can enable the device to an
       # IAM user.
-      # 
+      #
       # @param [String] name The name of the virtual MFA device. Name and path
       #   together uniquely identify a virtual MFA device.
       # @param [Hash] options
@@ -35,14 +35,14 @@ module AWS
 
         VirtualMfaDevice.new_from(
           :create_virtual_mfa_device,
-          resp.virtual_mfa_device, 
+          resp.virtual_mfa_device,
           resp.virtual_mfa_device.serial_number,
           :config => config)
 
       end
 
       # Returns a virtual MFA device with the given serial number.
-      # @param [String] serial_number The serial number (ARN) of a virtual 
+      # @param [String] serial_number The serial number (ARN) of a virtual
       #   MFA device.
       # @return [VirtualMfaDevice]
       def [] serial_number

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,13 +14,9 @@
 require 'digest/md5'
 
 Before("@dynamo_db") do
-
-  session = AWS::STS.new.new_session
-
   @dynamo_db = AWS::DynamoDB.new
   @tables = []
   @created_tables = []
-
 end
 
 After("@dynamo_db") do |scenario|

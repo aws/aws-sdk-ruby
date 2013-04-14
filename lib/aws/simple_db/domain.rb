@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,9 +19,11 @@ module AWS
     # Domains, like database tables, must exist before you can write to one.
     #
     # @example Creating a domain
+    #
     #   domain = SimpleDB.new.domains.create('mydomain')
     #
     # @example Getting a domain
+    #
     #   domain = SimpleDB.new.domains['mydomain']
     #
     # @see DomainCollection
@@ -102,9 +104,9 @@ module AWS
 
       # @return [Boolean] Returns true if the domains are the same.
       def == other
-        other.is_a?(Domain) and 
+        other.is_a?(Domain) and
         other.name == name and
-        other.config.simple_db_endpoint == config.simple_db_endpoint 
+        other.config.simple_db_endpoint == config.simple_db_endpoint
       end
       alias_method :eql?, :==
 

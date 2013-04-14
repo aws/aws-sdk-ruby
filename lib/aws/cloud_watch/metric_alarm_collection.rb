@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,32 +14,32 @@
 module AWS
   class CloudWatch
 
-    # = MetricAlarmCollection
+    # # MetricAlarmCollection
     #
     # Represents all alarms for a single metric.
     #
-    # == Getting an alarm by name
+    # ## Getting an alarm by name
     #
     # If you know the name of the alarm, you can get a reference using
     # the {#[]} method.
     #
-    #   metric.alarms['alarm-name']
+    #     metric.alarms['alarm-name']
     #
-    # == Enumerating Alarms
+    # ## Enumerating Alarms
     #
     # You can enumerate all alarms for a metric using each (or any of the
     # methods defined in {Core::Collection}).
     #
-    #   metric.alarms.each do |alarm|
-    #     puts alarm.name
-    #   end
+    #     metric.alarms.each do |alarm|
+    #       puts alarm.name
+    #     end
     #
-    # == Filtering Alarms
+    # ## Filtering Alarms
     #
     # Use one of the filtering methods to reduce the number of alarms
     # returned.
     #
-    #   metric.alarms.with_unit('Seconds').each {|alarm| ... }
+    #     metric.alarms.with_unit('Seconds').each {|alarm| ... }
     #
     class MetricAlarmCollection < AlarmCollection
 
@@ -80,15 +80,15 @@ module AWS
       #
       # @example Filtering by a 1 hour period
       #
-      #   metric.alarms.filter('period', 3600)
+      #     metric.alarms.filter('period', 3600)
       #
-      # @example Filtering by statistic 
+      # @example Filtering by statistic
       #
-      #   my_metric = metrics.filter('statistic', 'maximum')
+      #     my_metric = metrics.filter('statistic', 'maximum')
       #
       # @example Filtering by a unit
       #
-      #   metrics = metrics.filter('unit', 'Megabits')
+      #     metrics = metrics.filter('unit', 'Megabits')
       #
       # @param [String,Symbol] name
       # @param [String,Integer] value
@@ -100,7 +100,7 @@ module AWS
 
       # Returns a new collection that filters alarms by a period.
       #
-      #   metric.alarms.with_period(3600).each {|alarm| ... }
+      #     metric.alarms.with_period(3600).each {|alarm| ... }
       #
       # @param [Integer] period
       # @return [MetricAlarmCollection]
@@ -110,7 +110,7 @@ module AWS
 
       # Returns a new collection that filters alarms by a statistic.
       #
-      #   metric.alarms.with_statistic('Average').each {|alarm| ... }
+      #     metric.alarms.with_statistic('Average').each {|alarm| ... }
       #
       # @param [String] statistic
       # @return [MetricAlarmCollection]
@@ -120,7 +120,7 @@ module AWS
 
       # Returns a new collection that filters alarms by a unit.
       #
-      #   metric.alarms.with_unit('Percent').each {|alarm| ... }
+      #     metric.alarms.with_unit('Percent').each {|alarm| ... }
       #
       # @param [String] unit
       # @return [MetricAlarmCollection]
@@ -143,7 +143,7 @@ module AWS
 
           alarm = Alarm.new_from(
             :describe_alarms_for_metric,
-            details, 
+            details,
             details[:alarm_name],
             :config => config)
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -45,6 +45,8 @@ module AWS
     #
     # @attr_reader [Boolean] multi_az
     #
+    # @attr_reader [Integer] iops
+    #
     # @attr_reader [String] engine_version
     #
     # @attr_reader [Boolean] auto_minor_version_upgrade
@@ -56,6 +58,8 @@ module AWS
     # @attr_reader [String] license_model
     #
     # @attr_reader [String] character_set_name
+    #
+    # @attr_reader [String,nil] vpc_id
     #
     class DBInstance < Core::Resource
 
@@ -72,6 +76,8 @@ module AWS
       alias_method :id, :db_instance_identifier
 
       alias_method :db_instance_id, :db_instance_identifier
+
+      attribute :vpc_id, :from => [:db_subnet_group, :vpc_id], :static => true
 
       attribute :allocated_storage, :static => true, :alias => :size
 
@@ -116,6 +122,8 @@ module AWS
 
       attribute :multi_az, :static => true, :alias => :multi_az?
 
+      attribute :iops, :static => true
+
       attribute :preferred_backup_window, :static => true
 
       attribute :preferred_maintenance_window, :static => true
@@ -132,8 +140,15 @@ module AWS
         resp.data[:db_instances].find{|j| j[:db_instance_identifier] == id }
       end
 
+      # @return [EC2::VPC,nil]
+      def vpc
+        if vpc_id
+          EC2::VPC.new(vpc_id, :config => config)
+        end
+      end
+
       # Modifies the database instance.
-      # @note You do not need to set +:db_instance_identifier+.
+      # @note You do not need to set `:db_instance_identifier`.
       # @see Client#modify_db_instance
       # @param (see Client#modify_db_instance)
       def modify options = {}
@@ -160,9 +175,9 @@ module AWS
 
       # Reboots this databse instance.
       # @param [Hash] options
-      # @option options [Boolean] :force_failover When +true+, the reboot will be
+      # @option options [Boolean] :force_failover When `true`, the reboot will be
       #   conducted through a MultiAZ failover. Constraint: You cannot
-      #   specify +true+ if the instance is not configured for MultiAZ.
+      #   specify `true` if the instance is not configured for MultiAZ.
       # @return [nil]
       def reboot options = {}
         client.reboot_db_instance(options.merge(:db_instance_identifier => id))
@@ -176,7 +191,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if the db instance exists.
+      # @return [Boolean] Returns `true` if the db instance exists.
       def exists?
         begin
           get_resource

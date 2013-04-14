@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,11 +17,11 @@ module AWS
     # Represents the collection of all subscriptions for the AWS
     # account.  For example:
     #
-    #  # get the ARNs of all SQS queues with subscriptions to topics
-    #  # owned by this account
-    #  topic.subscriptions.
-    #    select { |s| s.protocol == :sqs }.
-    #    collect(&:endpoint)
+    #     # get the ARNs of all SQS queues with subscriptions to topics
+    #     # owned by this account
+    #     topic.subscriptions.
+    #       select { |s| s.protocol == :sqs }.
+    #       collect(&:endpoint)
     #
     class SubscriptionCollection
 

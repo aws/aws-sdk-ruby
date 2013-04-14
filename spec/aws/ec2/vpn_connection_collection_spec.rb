@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -80,7 +80,7 @@ module AWS
           it 'calls #create_vpn_connection on the client' do
 
             client.should_receive(:create_vpn_connection).with(
-              :customer_gateway_id => 'cgwid', 
+              :customer_gateway_id => 'cgwid',
               :vpn_gateway_id => 'gid',
               :type => 'ipsec.1'
             ).and_return(response)
@@ -92,7 +92,7 @@ module AWS
 
           it 'accepts gateway objects' do
             client.should_receive(:create_vpn_connection).with(
-              :customer_gateway_id => 'cgwid', 
+              :customer_gateway_id => 'cgwid',
               :vpn_gateway_id => 'gid',
               :type => 'ipsec.1'
             ).and_return(response)
@@ -103,7 +103,7 @@ module AWS
 
           it 'accepts the customer gateway from a collection' do
             client.should_receive(:create_vpn_connection).with(
-              :customer_gateway_id => 'cgwid', 
+              :customer_gateway_id => 'cgwid',
               :vpn_gateway_id => 'gid',
               :type => 'ipsec.1'
             ).and_return(response)
@@ -114,7 +114,7 @@ module AWS
 
           it 'accepts the vpn gateway from a collection' do
             client.should_receive(:create_vpn_connection).with(
-              :customer_gateway_id => 'cgwid', 
+              :customer_gateway_id => 'cgwid',
               :vpn_gateway_id => 'gid',
               :type => 'ipsec.1'
             ).and_return(response)

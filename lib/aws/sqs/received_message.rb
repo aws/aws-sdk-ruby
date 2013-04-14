@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -59,10 +59,11 @@ module AWS
 
       # When SNS publishes messages to SQS queues the message body is
       # formatted as a json message and then base 64 encoded.
-      # An easy way to work with SNS messages is to call this method:
+      #
+      # @example
       #
       #   sns_msg = message.as_sns_message
-      # 
+      #
       #   sns_msg.topic
       #   #=> <AWS::SNS::Topic ...>
       #
@@ -98,7 +99,7 @@ module AWS
       # @return [nil]
       def delete
         client.delete_message(
-          :queue_url => queue.url, 
+          :queue_url => queue.url,
           :receipt_handle => handle)
         nil
       end
@@ -108,15 +109,15 @@ module AWS
       # can set the value to is 12 hours. This means you can't
       # extend the timeout of a message in an existing queue to more
       # than a total visibility timeout of 12 hours. (For more
-      # information visibility timeout, see {Visibility
-      # Timeout}[http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT]
+      # information visibility timeout, see
+      # [Visibility Timeout](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT)
       # in the Amazon SQS Developer Guide.)
       #
       # For example, let's say the timeout for the queue is 30
       # seconds, and you receive a message. Once you're 20 seconds
       # into the timeout for that message (i.e., you have 10 seconds
       # left), you extend it by 60 seconds by calling this method
-      # with +timeout+ set to 60 seconds. You have then changed the
+      # with `timeout` set to 60 seconds. You have then changed the
       # remaining visibility timeout from 10 seconds to 60 seconds.
       #
       # @note If you attempt to set the timeout to an amount more

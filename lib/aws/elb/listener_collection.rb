@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -51,17 +51,17 @@ module AWS
       #
       #   This property cannot be modified for the life of the load balacner.
       #
-      #   NOTE: If the front-end protocol is HTTP or HTTPS, +:instance_protocol+
+      #   NOTE: If the front-end protocol is HTTP or HTTPS, `:instance_protocol`
       #   has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise,
-      #   if the front-end protocol is TCP or SSL, +:instance_protocol+ has
+      #   if the front-end protocol is TCP or SSL, `:instance_protocol` has
       #   to be TCP or SSL.
       #
-      #   NOTE: If there is another listener with the same +:instance_port+
-      #   whose +:instance_protocol+ is secure, i.e., HTTPS or SSL, the
-      #   listener's +:instance_protocol+ has to be secure, i.e., HTTPS
-      #   or SSL. If there is another listener with the same +:instance_port+
-      #   whose +:instance_protocol+ is HTTP or TCP, the listener's
-      #   +:instance_protocol+ must be either HTTP or TCP.
+      #   NOTE: If there is another listener with the same `:instance_port`
+      #   whose `:instance_protocol` is secure, i.e., HTTPS or SSL, the
+      #   listener's `:instance_protocol` has to be secure, i.e., HTTPS
+      #   or SSL. If there is another listener with the same `:instance_port`
+      #   whose `:instance_protocol` is HTTP or TCP, the listener's
+      #   `:instance_protocol` must be either HTTP or TCP.
       #
       #   * :tcp, 'TCP'
       #   * :http, 'HTTP'

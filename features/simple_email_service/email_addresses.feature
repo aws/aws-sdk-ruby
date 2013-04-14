@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,19 +18,19 @@ Feature: Managing SES email addresses
   I want to be able to create, list and delete verified email addresses.
 
   Scenario: Verify a new email address
-    When I ask to verify the email address "foo@bar.com" 
+    When I ask to verify the email address "foo@bar.com"
     Then a request should have been made like:
     | TYPE  | NAME         | VALUE              |
     | param | Action       | VerifyEmailAddress |
     | param | EmailAddress | foo@bar.com        |
-    
+
   Scenario: Delete a verified email address
-    When I ask to delete the email address "foo@bar.com" 
+    When I ask to delete the email address "foo@bar.com"
     Then a request should have been made like:
     | TYPE  | NAME         | VALUE                      |
     | param | Action       | DeleteVerifiedEmailAddress |
     | param | EmailAddress | foo@bar.com                |
-    
+
   Scenario: List verified email addresses
     When I enumerate verified email addresses
     Then a request should have been made like:

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,8 +25,8 @@ module AWS
     # @attr_reader [String] customer_gateway_id
     #
     # @attr_reader [String] customer_gateway_configuration
-    #   Configuration XML for the VPN connection's customer gateway This 
-    #   attribute is always present after creating a vpn connection while 
+    #   Configuration XML for the VPN connection's customer gateway This
+    #   attribute is always present after creating a vpn connection while
     #   the connection state is :pending or :available.
     #
     class VPNConnection < Resource
@@ -57,13 +57,13 @@ module AWS
       attribute :vgw_telemetry_details, :from => :vgw_telemetry
 
       protected :vgw_telemetry_details
-    
+
       populates_from(:create_vpn_connection) do |resp|
         resp.vpn_connection if resp.vpn_connection.vpn_connection_id == id
       end
 
       populates_from(:describe_vpn_connections) do |resp|
-        resp.vpn_connection_set.find do |vpn_connection| 
+        resp.vpn_connection_set.find do |vpn_connection|
           vpn_connection.vpn_connection_id == vpn_connection_id
         end
       end

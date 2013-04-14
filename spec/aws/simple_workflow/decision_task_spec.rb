@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -34,38 +34,38 @@ module AWS
       }}
 
       let(:data) {{
-        "taskToken"=>"tasktoken", 
+        "taskToken"=>"tasktoken",
         "startedEventId"=>3,
-        "previousStartedEventId"=>1, 
-        "workflowType"=>{"name"=>"name", "version"=>"version"}, 
-        "workflowExecution"=> {"workflowId"=>"wid", "runId"=>"rid"}, 
+        "previousStartedEventId"=>1,
+        "workflowType"=>{"name"=>"name", "version"=>"version"},
+        "workflowExecution"=> {"workflowId"=>"wid", "runId"=>"rid"},
         "events"=>[
           {
             "workflowExecutionStartedEventAttributes"=>{
-              "parentInitiatedEventId"=>0, 
-              "taskStartToCloseTimeout"=>"3600", 
-              "taskList"=>{"name"=>"task-list"}, 
-              "workflowType"=>{"name"=>"name", "version"=>"version"}, 
-              "executionStartToCloseTimeout"=>"3600", 
+              "parentInitiatedEventId"=>0,
+              "taskStartToCloseTimeout"=>"3600",
+              "taskList"=>{"name"=>"task-list"},
+              "workflowType"=>{"name"=>"name", "version"=>"version"},
+              "executionStartToCloseTimeout"=>"3600",
               "childPolicy"=>"TERMINATE"
-            }, 
-            "eventType"=>"WorkflowExecutionStarted", 
-            "eventId"=>1, 
+            },
+            "eventType"=>"WorkflowExecutionStarted",
+            "eventId"=>1,
             "eventTimestamp"=>1320428958.56
-          }, 
+          },
           {
-            "eventType"=>"DecisionTaskScheduled", 
-            "eventId"=>2, 
+            "eventType"=>"DecisionTaskScheduled",
+            "eventId"=>2,
             "decisionTaskScheduledEventAttributes"=>{
-              "taskList"=>{"name"=>"task-list"}, 
+              "taskList"=>{"name"=>"task-list"},
               "startToCloseTimeout"=>"P0Y0M0DT0H0M3600S"
-            }, 
+            },
             "eventTimestamp"=>1320428958.56
-          }, 
+          },
           {
-            "eventType"=>"DecisionTaskStarted", 
-            "eventId"=>3, 
-            "eventTimestamp"=>1320428959.24, 
+            "eventType"=>"DecisionTaskStarted",
+            "eventId"=>3,
+            "eventTimestamp"=>1320428959.24,
             "decisionTaskStartedEventAttributes"=>{
               "scheduledEventId"=>2
             }
@@ -348,13 +348,13 @@ module AWS
 
         end
 
-        context '#start_timer' do 
+        context '#start_timer' do
 
           it 'can be called without options' do
             makes_decisions(task, {
               :decision_type => 'StartTimer',
               :start_timer_decision_attributes => {
-                :timer_id => 'uuid', 
+                :timer_id => 'uuid',
                 :start_to_fire_timeout => '60',
               },
             })
@@ -394,15 +394,27 @@ module AWS
             task.cancel_timer('timer-id')
             task.complete!
           end
-          
+
         end
 
-        context '#signal_external_workflow_execution' do 
+        context '#signal_external_workflow_execution' do
+
+          it 'accepts a workflow execution id' do
+            makes_decisions(task, {
+              :decision_type => 'SignalExternalWorkflowExecution',
+              :signal_external_workflow_execution_decision_attributes => {
+                :workflow_id => 'wid',
+                :signal_name => 'signal-name',
+              },
+            })
+            task.signal_external_workflow_execution('wid', 'signal-name')
+            task.complete!
+          end
 
           it 'accepts a workflow execution object' do
             makes_decisions(task, {
               :decision_type => 'SignalExternalWorkflowExecution',
-              :signal_external_workflow_execution_decision_attributes => { 
+              :signal_external_workflow_execution_decision_attributes => {
                 :workflow_id => 'wid',
                 :run_id => 'rid',
                 :signal_name => 'signal-name',
@@ -416,7 +428,7 @@ module AWS
           it 'accepts a workflow execution hash' do
             makes_decisions(task, {
               :decision_type => 'SignalExternalWorkflowExecution',
-              :signal_external_workflow_execution_decision_attributes => { 
+              :signal_external_workflow_execution_decision_attributes => {
                 :workflow_id => 'wid',
                 :run_id => 'rid',
                 :signal_name => 'signal-name',
@@ -439,10 +451,21 @@ module AWS
 
         context '#request_cancel_external_workflow_execution' do
 
+          it 'accepts a workflow execution id' do
+            makes_decisions(task, {
+              :decision_type => 'RequestCancelExternalWorkflowExecution',
+              :request_cancel_external_workflow_execution_decision_attributes => {
+                :workflow_id => 'wid',
+              },
+            })
+            task.request_cancel_external_workflow_execution('wid')
+            task.complete!
+          end
+
           it 'accepts a workflow execution object' do
             makes_decisions(task, {
               :decision_type => 'RequestCancelExternalWorkflowExecution',
-              :request_cancel_external_workflow_execution_decision_attributes => { 
+              :request_cancel_external_workflow_execution_decision_attributes => {
                 :workflow_id => 'wid',
                 :run_id => 'rid',
               },
@@ -455,7 +478,7 @@ module AWS
           it 'accepts a workflow execution hash' do
             makes_decisions(task, {
               :decision_type => 'RequestCancelExternalWorkflowExecution',
-              :request_cancel_external_workflow_execution_decision_attributes => { 
+              :request_cancel_external_workflow_execution_decision_attributes => {
                 :workflow_id => 'wid',
                 :run_id => 'rid',
               },

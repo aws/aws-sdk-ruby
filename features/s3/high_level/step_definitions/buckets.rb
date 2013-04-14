@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 Then /^I should receive a bucket$/ do
-  Then "I should receive a bucket named \"#{@bucket_name}\""
+  step "I should receive a bucket named \"#{@bucket_name}\""
 end
 
 Then /^I should receive a bucket named "([^\"]*)"$/ do |name|
@@ -123,3 +123,14 @@ Then /^the bucket should have no rules$/ do
   @bucket.cors.count.should eq(0)
 end
 
+Then /^the bucket be a website$/ do
+  @bucket.website?.should be(true)
+end
+
+Then /^the bucket should not be a website$/ do
+  @bucket.website?.should be(false)
+end
+
+When /^I enable website hosting$/ do
+  @bucket.configure_website
+end

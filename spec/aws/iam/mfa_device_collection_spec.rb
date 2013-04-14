@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,8 +35,8 @@ module AWS
       end
 
       context '#enable' do
-        
-        it 'call enable_mfa_device create_user on the client' do 
+
+        it 'call enable_mfa_device create_user on the client' do
           client.should_receive(:enable_mfa_device).with(
             :user_name => 'username',
             :serial_number => 'ABCXYZ123',

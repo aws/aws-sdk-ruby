@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,7 +16,7 @@ require 'spec_helper'
 module AWS
   module Record
     module Attributes
-  
+
       shared_examples_for "aws record attribute" do
 
         def type_casts raw_value, type_casted_value, options = {}
@@ -32,45 +32,45 @@ module AWS
         let(:opts) { {} }
 
         let(:attribute) { described_class.new(:attr_name, opts) }
-  
+
         context '#name' do
-  
+
           it 'returns the attribute name' do
             described_class.new('foo', opts).name.should == 'foo'
           end
-  
+
           it 'stringifies the name' do
             described_class.new(:foo, opts).name.should == 'foo'
           end
-  
+
         end
-  
+
         context '#options' do
-          
+
           it 'returns the options the object was constructed with' do
             attribute = described_class.new(:foo, opts.merge(:required => true))
             attribute.options.should == opts.merge(:required => true)
           end
-  
+
           it 'dups the options internally' do
             options = opts.merge(:required => true)
             attribute = described_class.new(:foo, options)
             options[:required] = false
             attribute.options.should == opts.merge(:required => true)
           end
-  
+
         end
-  
+
         context '#type_cast' do
-  
+
           it 'returns nil as nil' do
             attribute.type_cast(nil).should == nil
           end
-  
+
           it 'returns empty string as nil' do
             attribute.type_cast('').should == nil
           end
-  
+
         end
 
         context '#serialize' do
@@ -80,11 +80,11 @@ module AWS
               attribute.serialize(nil)
             }.should raise_error(ArgumentError, /^expected a.+, got/)
           end
-          
+
         end
-  
+
       end
-  
+
       describe StringAttr do
 
         it_behaves_like "aws record attribute" do
@@ -132,7 +132,7 @@ module AWS
                 attribute.serialize(value)
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'returns strings unmodified' do
               serializes('abc', 'abc')
             end
@@ -158,7 +158,7 @@ module AWS
             it 'returns integers unmodified' do
               type_casts(1, 1)
             end
-             
+
             it 'deals with negative numbers' do
               type_casts(-1, -1)
               type_casts('-1', -1)
@@ -187,7 +187,7 @@ module AWS
                 attribute.serialize(value)
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'returns integers as integers' do
               serializes(1, 1)
             end
@@ -219,7 +219,7 @@ module AWS
             it 'returns integers unmodified' do
               type_casts(1, 1, :range => 0..10)
             end
-             
+
             it 'deals with negative numbers' do
               type_casts(-1, -1, :range => -10..10)
               type_casts('-1', -1, :range => -10..10)
@@ -254,7 +254,7 @@ module AWS
                 serializes(11, '', :range => 0..10)
               }.should raise_error(/outside the range/)
             end
-            
+
             it 'returns integers as strings' do
               serializes(1, '1', :range => 0..9)
             end
@@ -319,11 +319,11 @@ module AWS
                 attribute.serialize(value)
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'returns floats as floats' do
               serializes(12.34, 12.34)
             end
-            
+
             it 'returns negative floats as floats' do
               serializes(-12.34, -12.34)
             end
@@ -387,15 +387,15 @@ module AWS
 
             it 'handles arbitrary decimal percision' do
               serializes(
-                12.1234567890123, 
-                '12.1234567890123', 
+                12.1234567890123,
+                '12.1234567890123',
                 :range => 0..20)
             end
 
             it 'ignores trailing float zeros' do
               serializes(12.340000, '012.34', :range => 0..100)
             end
-            
+
             it 'zero pads and offsets float values (especially negatives)' do
               serializes(-500.0, '0000.0', :range => (-500..500))
               serializes(-100.0, '0400.0', :range => (-500..500))
@@ -457,12 +457,12 @@ module AWS
                 attribute.serialize(value)
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'returns dates as strings' do
               date = Date.parse(Time.now.to_s)
               serializes(date, date.strftime('%Y-%m-%d'))
             end
-            
+
           end
 
         end
@@ -517,12 +517,12 @@ module AWS
                 attribute.serialize(value)
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'returns datetimes as strings' do
               datetime = DateTime.parse(Time.now.to_s)
               serializes(datetime, datetime.strftime('%Y-%m-%dT%H:%M:%S%Z'))
             end
-            
+
           end
 
         end
@@ -567,11 +567,11 @@ module AWS
                 attribute.serialize('true')
               }.should raise_error(ArgumentError)
             end
-            
+
             it 'serializes true to the integer 1' do
               serializes(true, 1)
             end
-            
+
             it 'serializes false to the integer 0' do
               serializes(false, 0)
             end

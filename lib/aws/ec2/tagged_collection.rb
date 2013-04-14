@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,35 +14,35 @@
 module AWS
   class EC2
 
-    # Most of the AWS::EC2 collections include TaggedCollection.  This 
+    # Most of the AWS::EC2 collections include TaggedCollection.  This
     # module provides methods for filtering the collection with
     # tags.
     #
-    #   collecion.tagged('prod').each do {|obj| ... }
+    #     collecion.tagged('prod').each do {|obj| ... }
     #
     module TaggedCollection
 
       # Filter the collection by one or more tag keys.  If you pass multiple
-      # tag keys they will be be treated as OR conditions.  If you want to 
+      # tag keys they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
       #
       # Filter the collection to items items tagged 'live' OR 'test'
       #
-      #   collection.tagged('live', 'test')
+      #     collection.tagged('live', 'test')
       #
       # Filter the collection to items tagged 'live' AND 'webserver'
       #
-      #   collection.tagged('live').tagged('webserver')
+      #     collection.tagged('live').tagged('webserver')
       #
       def tagged *keys
         filter('tag-key', *keys)
       end
 
       # Filter the collection by one or more tag values.  If you pass multiple
-      # tag values they will be be treated as OR conditions.  If you want to 
+      # tag values they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
       #
-      #   collection.tagged('stage').tagged_values('production')
+      #     collection.tagged('stage').tagged_values('production')
       #
       def tagged_values *values
         filter('tag-value', *values)

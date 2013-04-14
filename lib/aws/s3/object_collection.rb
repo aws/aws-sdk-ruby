@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,45 +16,45 @@ module AWS
 
     # Represents a collection of S3 objects.
     #
-    # == Getting an S3Object by Key
+    # ## Getting an S3Object by Key
     #
     # If you know the key of the object you want, you can reference it this way:
     #
-    #   # this will not make any requests against S3
-    #   object = bucket.objects['foo.jpg']
-    #   object.key #=> 'foo.jpg'
+    #     # this will not make any requests against S3
+    #     object = bucket.objects['foo.jpg']
+    #     object.key #=> 'foo.jpg'
     #
-    # == Finding objects with a Prefix
+    # ## Finding objects with a Prefix
     #
     # Given a bucket with the following keys:
     #
-    #   photos/sunset.jpg
-    #   photos/sunrise.jpg
-    #   photos/winter.jpg
-    #   videos/comedy.mpg
-    #   videos/dancing.mpg
+    #     photos/sunset.jpg
+    #     photos/sunrise.jpg
+    #     photos/winter.jpg
+    #     videos/comedy.mpg
+    #     videos/dancing.mpg
     #
     # You can list objects that share a prefix:
     #
-    #   bucket.objects.with_prefix('videos').collect(&:key)
-    #   #=> ['videos/comedy.mpg', 'videos/dancing.mpg']
+    #     bucket.objects.with_prefix('videos').collect(&:key)
+    #     #=> ['videos/comedy.mpg', 'videos/dancing.mpg']
     #
-    # == Exploring Objects with a Tree Interface
+    # ## Exploring Objects with a Tree Interface
     #
     # Given a bucket with the following keys:
     #
-    #   README.txt
-    #   videos/wedding.mpg
-    #   videos/family_reunion.mpg
-    #   photos/2010/house.jpg
-    #   photos/2011/fall/leaves.jpg
-    #   photos/2011/summer/vacation.jpg
-    #   photos/2011/summer/family.jpg
+    #     README.txt
+    #     videos/wedding.mpg
+    #     videos/family_reunion.mpg
+    #     photos/2010/house.jpg
+    #     photos/2011/fall/leaves.jpg
+    #     photos/2011/summer/vacation.jpg
+    #     photos/2011/summer/family.jpg
     #
-    #   tree = bucket.objects.with_prefix('photos').as_tree
+    #     tree = bucket.objects.with_prefix('photos').as_tree
     #
-    #   directories = tree.children.select(&:branch?).collect(&:prefix)
-    #   #=> ['photos/2010', 'photos/2011']
+    #     directories = tree.children.select(&:branch?).collect(&:prefix)
+    #     #=> ['photos/2010', 'photos/2011']
     #
     class ObjectCollection
 
@@ -105,25 +105,25 @@ module AWS
 
       # Deletes the objects provided in as few requests as possible.
       #
-      #   # delete 2 objects (by key) in a single request
-      #   bucket.objects.delete('abc', 'xyz')
+      #     # delete 2 objects (by key) in a single request
+      #     bucket.objects.delete('abc', 'xyz')
       #
       # You can delete objects also by passing their S3Object representation:
       #
-      #   to_delete = []
-      #   to_delete << buckets.objects['foo']
-      #   to_delete << buckets.objects['bar']
+      #     to_delete = []
+      #     to_delete << buckets.objects['foo']
+      #     to_delete << buckets.objects['bar']
       #
-      #   bucket.objects.delete(to_delete)
+      #     bucket.objects.delete(to_delete)
       #
       # @overload delete(objects)
       #   @param [Mixed] objects One or more objects to delete.  Each object
       #     can be one of the following:
       #
-      #     * An object key (string)
-      #     * A hash with :key and :version_id (for versioned objects)
-      #     * An {S3Object} instance
-      #     * An {ObjectVersion} instance
+      #       * An object key (string)
+      #       * A hash with :key and :version_id (for versioned objects)
+      #       * An {S3Object} instance
+      #       * An {ObjectVersion} instance
       #
       # @overload delete(objects, options)
       #   Deletes multiple objects, with additional options. The array can
@@ -195,8 +195,8 @@ module AWS
       # Deletes each object in the collection that returns a true value
       # from block passed to this method.  Deletes are batched for efficiency.
       #
-      #   # delete text files in the 2009 "folder"
-      #   bucket.objects.with_prefix('2009/').delete_if {|o| o.key =~ /\.txt$/ }
+      #     # delete text files in the 2009 "folder"
+      #     bucket.objects.with_prefix('2009/').delete_if {|o| o.key =~ /\.txt$/ }
       #
       # @yieldparam [S3Object] object
       #

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,7 +18,7 @@ require 'json'
 module AWS
   class SQS
     describe ReceivedSNSMessage do
-      
+
       let(:json) { '{ "Message": "test message", "Signature": "abcdefg", "TopicArn": "arn:aws:sns:us-east-1:123456789012:sample", "SignatureVersion": "1", "Timestamp": "2011-06-21T18:45:44.942Z", "MessageId": "5f5bc831-1877-4ed8-bdcf-da7bc64f3b11", "SigningCertURL": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem", "UnsubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:123456789012:sample:84a744a5-1de8-4133-8dc3-872acf0b29ad", "Type": "Notification" }' }
 
       let(:config) { stub_config }
@@ -89,7 +89,7 @@ module AWS
       context '#signing_cert_url' do
 
         it 'it decodes and returns the signing cert url' do
-          message.signing_cert_url.should == "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem" 
+          message.signing_cert_url.should == "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem"
         end
 
       end
@@ -101,7 +101,7 @@ module AWS
         end
 
       end
-      
+
     end
   end
 end

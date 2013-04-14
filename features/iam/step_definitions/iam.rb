@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,9 +29,18 @@ Before("@iam") do
 
   @created_mfa_devices = []
 
+  @created_role_names = []
+
 end
 
 After("@iam") do
+
+  @created_role_names.each do |role_name|
+    begin
+      @iam_client.delete_role(:role_name => role_name)
+    rescue AWS::IAM::Errors::NoSuchEntity
+    end
+  end
 
   if @set_account_password_policy
     @iam.delete_account_password_policy
@@ -61,7 +70,7 @@ After("@iam") do
       # some tests delete the aliases they create
     end
   end
-  
+
   @created_user_policies.each do |user_policy|
     user_policy.delete
   end

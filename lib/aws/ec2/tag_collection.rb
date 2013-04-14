@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -55,7 +55,7 @@ module AWS
       # @param [Object] resource The item to tag.  This should be a taggable
       #   EC2 resource, like an instance, security group, etc.
       # @param [String] key The tag key (or name).
-      # @param [Hash] options 
+      # @param [Hash] options
       # @option optins [String] :value ('') The optional tag value.  When
       #   left blank its assigned the empty string.
       # @return [Tag]

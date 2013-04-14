@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,32 +16,32 @@ require 'pathname'
 module AWS
   module Core
 
-    # = Log Formatters
+    # # Log Formatters
     #
     # Log formatters receive a {AWS::Core::Response} object and return
     # a log message.  When you construct a {LogFormatter}, you provide
     # a pattern string with substitutions.
     #
-    #   pattern = '[REQUEST :http_status_code] :service :operation :duration'
-    #   formatter = AWS::Core::LogFormatter.new(pattern)
-    #   formatter.format(response)
-    #   #=> '[AWS 200] EC2 get_bucket 0.0352'
+    #     pattern = '[REQUEST :http_status_code] :service :operation :duration'
+    #     formatter = AWS::Core::LogFormatter.new(pattern)
+    #     formatter.format(response)
+    #     #=> '[AWS 200] EC2 get_bucket 0.0352'
     #
-    # = AWS Configuration
+    # # AWS Configuration
     #
     # AWS.config provides a {LogFormatter.default} log formatter.  You can
     # repace this formatter by building your own and then passing it
     # to {AWS.config}.
     #
-    #   pattern = '[REQUEST :http_status_code] :service :operation :duration'
-    #   AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern)
+    #     pattern = '[REQUEST :http_status_code] :service :operation :duration'
+    #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern)
     #
-    # == Canned Formatters
+    # ## Canned Formatters
     #
     # Instead of providing your own pattern, you can choose a canned log
     # formatter.
     #
-    #   AWS.config(:log_formatter => AWS::Core::LogFormatter.colored)
+    #     AWS.config(:log_formatter => AWS::Core::LogFormatter.colored)
     #
     # Here is the list of canned formatters.
     #
@@ -50,105 +50,71 @@ module AWS
     # * {LogFormatter.debug}
     # * {LogFormatter.colored}
     #
-    # = Pattern Substitutions
+    # # Pattern Substitutions
     #
     # You can put any of these placeholders into you pattern.
     #
-    # [+:service+]
-    #   The AWS service name (e.g. 'S3', 'EC2', 'SimpleDB', etc)
-    #
-    # [+:region+]
-    #   The AWS region name (e.g. 'us-east-1', 'us-west-1', etc)
-    #
-    # [+:operation+]
-    #   The name of the client request method.  This maps to the name of
-    #   the serivce API operation (e.g. :describe_instances).
-    #
-    # [+:options+]
-    #   The hash of options passed to the client request method.
-    #   Long strings are truncated/summarized if they excede the log
-    #   formatters {#max_string_size}.  Other objects are inspected.
-    #
-    # [+:retry_count+]
-    #   The number of times a client request was retried.
-    #   Throttlings and service errors trigger the automatic retry logic.
-    #   This value indicates how many extra attempts were made before
-    #   getting a successful response or giving up.
-    #
-    # [+:duration+]
-    #   The time it took to generate a response, expressed
-    #   in decimal seconds.  This time includes everything from
-    #   calling the client request method, until that method returns
-    #   a value (event retries and retry delays).
-    #
-    # [+:error_class+]
-    #   The class name of the error returned by the
-    #   service.  If no error was returned, this will be replcaed by
-    #   an empty string.
-    #
-    # [+:error_message+]
-    #   The message of the error returned.  If
-    #   no error was returned by the service, this will be an empty
-    #   string.
-    #
-    # [+:http_request_method+]
-    #   The HTTP request verb (e.g. 'POST', 'PUT', 'GET', etc).
-    #
-    # [+:http_request_protocol+]
-    #   This is replaced by 'http' or 'https'.
-    #
-    # [+:http_request_host+]
-    #   The host name of the http request endpoint (e.g. 's3.amazon.com').
-    #
-    # [+:http_request_port+]
-    #   The port number (e.g. '443' or '80').
-    #
-    # [+:http_request_uri+]
-    #   The http request uri folling the host (e.g.
-    #   '/bucket_name/objects/key?versions').
-    #
-    # [+:http_request_body+]
-    #   The http request payload.
-    #
-    # [+:http_request_headers+]
-    #   The http request headers, inspected.
-    #
-    # [+:http_request_proxy_uri+]
-    #   The proxy uri used, or an empty string.
-    #
-    # [+:http_response_status+]
-    #   The http response status code (e.g. '200', '404', '500', etc).
-    #
-    # [+:http_response_headers+]
-    #   The http response headers, inspected.
-    #
-    # [+:http_response_body+]
-    #   The http response body contents.
+    #   * `:service` - The AWS service name (e.g. 'S3', 'EC2', 'SimpleDB', etc)
+    #   * `:region` - The AWS region name (e.g. 'us-west-1', 'us-west-2', etc)
+    #   * `:operation` - The name of the client request method.  This maps to
+    #     the name of the serivce API operation (e.g. :describe_instances).
+    #   * `:options` - The hash of options passed to the client request method.
+    #     Long strings are truncated/summarized if they excede the log
+    #     formatters {#max_string_size}.  Other objects are inspected.
+    #   * `:retry_count` - The number of times a client request was retried.
+    #     Throttlings and service errors trigger the automatic retry logic.
+    #     This value indicates how many extra attempts were made before
+    #     getting a successful response or giving up.
+    #   * `:duration` - The time it took to generate a response, expressed
+    #     in decimal seconds.  This time includes everything from
+    #     calling the client request method, until that method returns
+    #     a value (event retries and retry delays).
+    #   * `:error_class` - The class name of the error returned by the
+    #     service.  If no error was returned, this will be replcaed by
+    #     an empty string.
+    #   * `:error_message` - The message of the error returned.  If
+    #     no error was returned by the service, this will be an empty
+    #     string.
+    #   * `:http_request_method` - The HTTP request verb (e.g. 'POST',
+    #     'PUT', 'GET', etc).
+    #   * `:http_request_protocol` - This is replaced by 'http' or 'https'.
+    #   * `:http_request_host` - The host name of the http request
+    #     endpoint (e.g. 's3.amazon.com').
+    #   * `:http_request_port` - The port number (e.g. '443' or '80').
+    #   * `:http_request_uri` - The http request uri folling the host (e.g.
+    #     '/bucket_name/objects/key?versions').
+    #   * `:http_request_body` - The http request payload.
+    #   * `:http_request_headers` - The http request headers, inspected.
+    #   * `:http_request_proxy_uri` - The proxy uri used, or an empty string.
+    #   * `:http_response_status` - The http response status
+    #     code (e.g. '200', '404', '500', etc).
+    #   * `:http_response_headers` - The http response headers, inspected.
+    #   * `:http_response_body` - The http response body contents.
     #
     class LogFormatter
 
       # @param [String] pattern The log format pattern should be a string
       #   and may contain any of the following placeholders:
       #
-      #   * +:service+
-      #   * +:region+
-      #   * +:operation+
-      #   * +:options+
-      #   * +:retry_count
-      #   * +:duration+
-      #   * +:error_class+
-      #   * +:error_message+
-      #   * +:http_request_method+
-      #   * +:http_request_protocol+
-      #   * +:http_request_host+
-      #   * +:http_request_port+
-      #   * +:http_request_uri+
-      #   * +:http_request_body+
-      #   * +:http_request_headers+
-      #   * +:http_request_proxy_uri+
-      #   * +:http_response_status+
-      #   * +:http_response_headers+
-      #   * +:http_response_body+
+      #     * `:service`
+      #     * `:region`
+      #     * `:operation`
+      #     * `:options`
+      #     * `:retry_count`
+      #     * `:duration`
+      #     * `:error_class`
+      #     * `:error_message`
+      #     * `:http_request_method`
+      #     * `:http_request_protocol`
+      #     * `:http_request_host`
+      #     * `:http_request_port`
+      #     * `:http_request_uri`
+      #     * `:http_request_body`
+      #     * `:http_request_headers`
+      #     * `:http_request_proxy_uri`
+      #     * `:http_response_status`
+      #     * `:http_response_headers`
+      #     * `:http_response_body`
       #
       # @param [Hash] options
       #
@@ -320,7 +286,7 @@ module AWS
         #
         # @example A sample of the default format.
         #
-        #   [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
+        #     [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
         #
         # @return [LogFormatter]
         #
@@ -345,7 +311,7 @@ module AWS
         #
         # @example A sample of the short format
         #
-        #   [AWS SimpleEmailService 200 0.494532] list_verified_email_addresses
+        #     [AWS SimpleEmailService 200 0.494532] list_verified_email_addresses
         #
         # @return [LogFormatter]
         #
@@ -431,7 +397,7 @@ module AWS
         #
         # @example A sample of the colored format (sans the ansi colors).
         #
-        #   [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
+        #     [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
         #
         # @return [LogFormatter]
         #

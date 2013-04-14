@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,15 +20,15 @@ module AWS
     # @attr_reader [Symbol] state State of the conversion task.
     #   Valid values :active, :cancelling, :cancelled and :completed.
     #
-    # @attr_reader [String] status_message Status message related to the 
+    # @attr_reader [String] status_message Status message related to the
     #   export task.
     #
     # @attr_reader [String] instance_id ID of instance being exported.
     #
-    # @attr_reader [String] target_environment The target virtualization 
+    # @attr_reader [String] target_environment The target virtualization
     #   environment.
     #
-    # @attr_reader [String] disk_image_format The format for the exported 
+    # @attr_reader [String] disk_image_format The format for the exported
     #   image.
     #
     # @attr_reader [String] container_format The container format used to
@@ -59,7 +59,7 @@ module AWS
 
       attribute :status_message
 
-      attribute :instance_id, 
+      attribute :instance_id,
         :from => [:instance_export, :instance_id],
         :static => true
 

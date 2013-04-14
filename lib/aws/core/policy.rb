@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -20,14 +20,14 @@ module AWS
 
     # Represents an access policy for AWS operations and resources.  For example:
     #
-    #   policy = Policy.new do |policy|
-    #     policy.allow(:actions => ['s3:PutObject'],
-    #                  :resources => "arn:aws:s3:::mybucket/mykey/*",
-    #                  :principals => :any
+    #     policy = Policy.new
+    #     policy.allow(
+    #       :actions => ['s3:PutObject'],
+    #       :resources => "arn:aws:s3:::mybucket/mykey/*",
+    #       :principals => :any
     #     ).where(:acl).is("public-read")
-    #   end
     #
-    #   policy.to_json               # => '{ "Version":"2008-10-17", ...'
+    #     policy.to_json # => '{ "Version":"2008-10-17", ...'
     #
     # @see #initialize More ways to construct a policy.
     # @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
@@ -52,7 +52,8 @@ module AWS
       # * With hash arguments:
       #
       #     Policy.new(:statements => [
-      #       { :effect => :allow,
+      #       {
+      #         :effect => :allow,
       #         :actions => :all,
       #         :principals => ["abc123"],
       #         :resources => "mybucket/mykey"
@@ -66,13 +67,11 @@ module AWS
       # * With a block:
       #
       #     Policy.new do |policy|
-      #
       #       policy.allow(
       #         :actions => ['s3:PutObject'],
       #         :resources => "arn:aws:s3:::mybucket/mykey/*",
       #         :principals => :any
       #       ).where(:acl).is("public-read")
-      #
       #     end
       #
       def initialize(opts = {})
@@ -123,8 +122,8 @@ module AWS
       # Returns a hash representation of the policy. The following
       # statements are equivalent:
       #
-      #   policy.to_h.to_json
-      #   policy.to_json
+      #     policy.to_h.to_json
+      #     policy.to_json
       #
       # @return [Hash]
       def to_h
@@ -151,15 +150,15 @@ module AWS
       # Convenient syntax for expressing operators in statement
       # condition blocks.  For example, the following:
       #
-      #   policy.allow.where(:s3_prefix).not("forbidden").
-      #     where(:current_time).lte(Date.today+1)
+      #     policy.allow.where(:s3_prefix).not("forbidden").
+      #       where(:current_time).lte(Date.today+1)
       #
       # is equivalent to:
       #
-      #   conditions = Policy::ConditionBlock.new
-      #   conditions.add(:not, :s3_prefix, "forbidden")
-      #   conditions.add(:lte, :current_time, Date.today+1)
-      #   policy.allow(:conditions => conditions)
+      #     conditions = Policy::ConditionBlock.new
+      #     conditions.add(:not, :s3_prefix, "forbidden")
+      #     conditions.add(:lte, :current_time, Date.today+1)
+      #     policy.allow(:conditions => conditions)
       #
       # @see ConditionBlock#add
       class OperatorBuilder
@@ -192,7 +191,7 @@ module AWS
 
         # Adds a condition for the given key.  For example:
         #
-        #   policy.allow(...).where(:current_time).lte(Date.today + 1)
+        #     policy.allow(...).where(:current_time).lte(Date.today + 1)
         #
         # @return [OperatorBuilder]
         def where(key, operator = nil, *values)
@@ -209,10 +208,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Allow" effect and adding it to the policy.  For example:
       #
-      #     policy.allow(:actions => [:put_object],
-      #                  :principals => :any,
-      #                  :resources => "mybucket/mykey/*").
-      #       where(:acl).is("public-read")
+      #     policy.allow(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*").
+      #     where(:acl).is("public-read")
       #
       # @option (see Statement#initialize)
       # @see Statement#initialize
@@ -226,11 +226,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Deny" effect and adding it to the policy.  For example:
       #
-      #   policy.deny(
-      #     :actions => [:put_object],
-      #     :principals => :any,
-      #     :resources => "mybucket/mykey/*"
-      #   ).where(:acl).is("public-read")
+      #     policy.deny(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*"
+      #     ).where(:acl).is("public-read")
       #
       # @param (see Statement#initialize)
       # @see Statement#initialize
@@ -244,12 +244,12 @@ module AWS
       # Represents the condition block of a policy.  In JSON,
       # condition blocks look like this:
       #
-      #   { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
+      #     { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
       #
       # ConditionBlock lets you specify conditions like the above
       # example using the add method, for example:
       #
-      #   conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
+      #     conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
       #
       # See the add method documentation for more details about how
       # to specify keys and operators.
@@ -322,22 +322,22 @@ module AWS
         # The following list shows which operators are accepted as
         # symbols and how they are represented in the JSON policy:
         #
-        # * +:is+ (StringEquals, NumericEquals, DateEquals, or Bool)
-        # * +:like+ (StringLike)
-        # * +:not_like+ (StringNotLike)
-        # * +:not+ (StringNotEquals, NumericNotEquals, or DateNotEquals)
-        # * +:greater_than+, +:gt+ (NumericGreaterThan or DateGreaterThan)
-        # * +:greater_than_equals+, +:gte+
+        # * `:is` (StringEquals, NumericEquals, DateEquals, or Bool)
+        # * `:like` (StringLike)
+        # * `:not_like` (StringNotLike)
+        # * `:not` (StringNotEquals, NumericNotEquals, or DateNotEquals)
+        # * `:greater_than`, `:gt` (NumericGreaterThan or DateGreaterThan)
+        # * `:greater_than_equals`, `:gte`
         #   (NumericGreaterThanEquals or DateGreaterThanEquals)
-        # * +:less_than+, +:lt+ (NumericLessThan or DateLessThan)
-        # * +:less_than_equals+, +:lte+
+        # * `:less_than`, `:lt` (NumericLessThan or DateLessThan)
+        # * `:less_than_equals`, `:lte`
         #   (NumericLessThanEquals or DateLessThanEquals)
-        # * +:is_ip_address+ (IpAddress)
-        # * +:not_ip_address+ (NotIpAddress)
-        # * +:is_arn+ (ArnEquals)
-        # * +:not_arn+ (ArnNotEquals)
-        # * +:is_arn_like+ (ArnLike)
-        # * +:not_arn_like+ (ArnNotLike)
+        # * `:is_ip_address` (IpAddress)
+        # * `:not_ip_address` (NotIpAddress)
+        # * `:is_arn` (ArnEquals)
+        # * `:not_arn` (ArnNotEquals)
+        # * `:is_arn_like` (ArnLike)
+        # * `:not_arn_like` (ArnNotLike)
         #
         # @param [Symbol or String] operator The operator used to
         #   compare the key with the value.  See above for valid
@@ -348,8 +348,8 @@ module AWS
         #   default, the key is assumed to be in the "aws"
         #   namespace, but if you prefix the symbol name with "s3_"
         #   it will be sent in the "s3" namespace.  For example,
-        #   +:s3_prefix+ is sent as "s3:prefix" while
-        #   +:secure_transport+ is sent as "aws:SecureTransport".
+        #   `:s3_prefix` is sent as "s3:prefix" while
+        #   `:secure_transport` is sent as "aws:SecureTransport".
         #   See
         #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingResOpsConditions.html
         #   for a list of the available keys for each action in S3.
@@ -733,12 +733,12 @@ module AWS
         #   Symbols are expected to match methods of S3::Client.
         # @option opts :excluded_actions Action or actions which are
         #   explicitly not affected by this statement.  As with
-        #   +:actions+, these may be symbols or strings.
+        #   `:actions`, these may be symbols or strings.
         # @option opts [String or array of strings] :resources The
         #   resource(s) affected by the statement.  These can be
-        #   expressed as ARNs (e.g. +arn:aws:s3:::mybucket/mykey+)
-        #   or you may omit the +arn:aws:s3:::+ prefix and just give
-        #   the path as +bucket_name/key+.  You may use the wildcard
+        #   expressed as ARNs (e.g. `arn:aws:s3:::mybucket/mykey`)
+        #   or you may omit the `arn:aws:s3:::` prefix and just give
+        #   the path as `bucket_name/key`.  You may use the wildcard
         #   character "*" to match zero or more characters in the
         #   resource name.
         # @option opts [ConditionBlock or Hash] :conditions

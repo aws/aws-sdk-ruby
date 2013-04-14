@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,12 +19,12 @@ module AWS
 
       context 'validates_confirmation_of' do
 
-        it_behaves_like("validation", :accepts_allow_nil => false) do 
+        it_behaves_like("validation", :accepts_allow_nil => false, :accepts_allow_blank => false) do
 
           let(:validation_macro) { :validates_count_of }
 
           let(:opts) { { :minimum => 1 } }
-          
+
           let(:message_opt) { :too_few }
 
           context 'single-valued attributes' do
@@ -238,7 +238,7 @@ module AWS
 
             it 'can be changed' do
               klass.string_attr :tags, :set => true
-              klass.validates_count_of :tags, :minimum => 2, 
+              klass.validates_count_of :tags, :minimum => 2,
                 :too_few => 'needs at least %{minimum} got %{count}'
               obj.tags = []
               obj.valid?
@@ -247,7 +247,7 @@ module AWS
 
             it 'works with ranges' do
               klass.string_attr :tags, :set => true
-              klass.validates_count_of :tags, :within => (2..5), 
+              klass.validates_count_of :tags, :within => (2..5),
                 :too_few => 'needs at least %{minimum} got %{count}'
               obj.tags = []
               obj.valid?
@@ -268,7 +268,7 @@ module AWS
 
             it 'can be changed' do
               klass.string_attr :tags, :set => true
-              klass.validates_count_of :tags, :maximum => 2, 
+              klass.validates_count_of :tags, :maximum => 2,
                 :too_many => 'needs at most %{maximum} got %{count}'
               obj.tags = %w(a b c)
               obj.valid?
@@ -277,7 +277,7 @@ module AWS
 
             it 'works with ranges' do
               klass.string_attr :tags, :set => true
-              klass.validates_count_of :tags, :within => (2..5), 
+              klass.validates_count_of :tags, :within => (2..5),
                 :too_many => 'needs at most %{maximum} got %{count}'
               obj.tags = %w(a b c d e f)
               obj.valid?

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,7 @@
 
 module AWS
   module Record
-  
+
     # Raised when trying to access an attribute that does not exist.
     # @private
     class UndefinedAttributeError < StandardError
@@ -21,8 +21,8 @@ module AWS
         super("undefined attribute `#{attribute_name}`")
       end
     end
-  
-    # Raised when calling #save! or #update_attributes! on a record that
+
+    # Raised when calling #save!, #create! or #update_attributes! on a record that
     # has validation errors.
     # @private
     class InvalidRecordError < StandardError

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,11 +17,11 @@ module AWS
     # Represents the collection of all subscriptions for a particular
     # topic.  For example:
     #
-    #  # get the e-mail addressess that receive plain-text
-    #  # messages sent to the topic
-    #  topic.subscriptions.
-    #    select { |s| s.protocol == :email }.
-    #    map(&:endpoint)
+    #     # get the e-mail addressess that receive plain-text
+    #     # messages sent to the topic
+    #     topic.subscriptions.
+    #       select { |s| s.protocol == :email }.
+    #       map(&:endpoint)
     #
     class TopicSubscriptionCollection < SubscriptionCollection
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,154 +15,70 @@ require 'spec_helper'
 
 module AWS
   class EC2
-
     describe Region do
 
-      let(:config) { stub_config }
+      let(:region) { Region.new('name') }
 
-      let(:client) { config.ec2_client }
+      context '#name' do
 
-      let(:region) { Region.new("region", :config => config) }
-
-      let(:describe_call) { :describe_regions }
-
-      let(:describe_opts) { { :region_names => ["region"] } }
-
-      let(:response_id_field) { :region_name }
-
-      let(:resource_id) { "region" }
-
-      let(:instance) { region }
-
-      def stub_member(resp, member)
-        resp.data[:region_info] = [member]
-      end
-
-      it_should_behave_like "an ec2 resource object"
-
-      context '#initialize' do
-
-        it 'should set the name' do
-          Region.new("region").name.should == "region"
-        end
-
-        context 'with :endpoint' do
-
-          it 'should set the endpoint' do
-            described_class.new("region", :endpoint => "foo.amazonaws.com").
-              endpoint.should == "foo.amazonaws.com"
-          end
-
+        it 'is set by the constructor' do
+          Region.new('region-name').name.should eq('region-name')
         end
 
       end
 
       context '#endpoint' do
 
-        let(:attribute) { :endpoint }
-        let(:response_field) { :region_endpoint }
-        let(:response_value) { "foo.amazonaws.com" }
-        let(:translated_value) { response_value }
-        it_should_behave_like "ec2 resource attribute accessor (describe call)"
+        it 'defaults to the standard ec2 pattern' do
+          Region.new('name').endpoint.should eq('ec2.name.amazonaws.com')
+        end
+
+        it 'can be overriden in the constructor' do
+          region = Region.new('name', :endpoint => 'endpoint')
+          region.endpoint.should eq('endpoint')
+        end
+
+      end
+
+      context '#client' do
+
+        it 'returns a client with the proper ec2 endpoint' do
+          region.client.should be_a(EC2::Client)
+          region.client.config.ec2_endpoint.should eq(region.endpoint)
+        end
+
+      end
+
+      context '#config' do
+
+        it 'returns a configuration with the proper ec2 endpoint' do
+          region.config.ec2_endpoint.should eq(region.endpoint)
+        end
 
       end
 
       context '#exists?' do
 
-        it 'should call describe_regions with a filter' do
-          client.should_receive(:describe_regions).
-            with(:filters => [{ :name => "region-name",
-                                :values => ["region"] }]).
-            and_return(client.stub_for(:describe_regions))
-          region.exists?
+        it 'describes regions and returns true when no error is raised' do
+          region.client.should_receive(:describe_regions).
+            with(:region_names => [region.name])
+          region.exists?.should eq(true)
         end
 
-        context 'when it exists' do
-
-          let(:resp) { client.new_stub_for(:describe_regions) }
-
-          before(:each) do
-            resp.stub(:region_info).
-              and_return([double("region",
-                                 :region_endpoint => "foo.amazonaws.com")])
-            client.stub(:describe_regions).and_return(resp)
-          end
-
-          it 'should return true' do
-            region.exists?.should be_true
-          end
-
-        end
-
-        context 'when it does not exist' do
-
-          it 'should return false' do
-            region.exists?.should be_false
-          end
-
+        it 'returns false if describe_regions raises an error' do
+          err = AWS::EC2::Errors::InvalidParameterValue.new('err')
+          region.client.should_receive(:describe_regions).and_raise(err)
+          region.exists?.should eq(false)
         end
 
       end
 
-      shared_examples_for 'ec2 regional top-level collection' do
-
-        let(:resp) { client.new_stub_for(:describe_regions) }
-
-        before(:each) do
-          resp.data[:region_info] = [
-            {
-               :region_name => "region",
-               :region_endpoint => "foo.amazonaws.com",
-            }
-          ]
-          client.stub(:describe_regions).and_return(resp)
-        end
-
-        it 'should configure the regional endpoint' do
-          region.send(method).config.ec2_endpoint.
-            should == "foo.amazonaws.com"
-        end
-
-      end
-
-      # sanity check that we don't forget something
       it 'should respond to all the methods of EC2 except #regions' do
         (EC2.instance_methods.map { |m| m.to_sym } - [:regions]).each do |m|
           region.should respond_to(m)
         end
       end
 
-      context '#instances' do
-        let(:method) { :instances }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
-      context '#security_groups' do
-        let(:method) { :security_groups }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
-      context '#key_pairs' do
-        let(:method) { :key_pairs }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
-      context '#elastic_ips' do
-        let(:method) { :elastic_ips }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
-      context '#tags' do
-        let(:method) { :tags }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
-      context '#availability_zones' do
-        let(:method) { :availability_zones }
-        it_should_behave_like 'ec2 regional top-level collection'
-      end
-
     end
-
   end
 end

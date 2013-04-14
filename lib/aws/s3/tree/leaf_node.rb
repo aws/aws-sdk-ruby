@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -64,7 +64,7 @@ module AWS
           end
         end
 
-        # @return [ObjectVersion] Returns the object version this leaf 
+        # @return [ObjectVersion] Returns the object version this leaf
         #   node represents.
         def version
           if @member.kind_of?(ObjectVersion)
@@ -74,7 +74,7 @@ module AWS
           end
         end
 
-        # @return [MultipartUpload] Returns the object version this leaf 
+        # @return [MultipartUpload] Returns the object version this leaf
         #   node represents.
         def upload
           if @member.kind_of?(MultipartUpload)

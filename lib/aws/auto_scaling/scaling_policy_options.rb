@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 module AWS
   class AutoScaling
 
-    # Provides a hepler method for parsing scaling policy options.
+    # Provides a helper method for parsing scaling policy options.
     # @private
     module ScalingPolicyOptions
 
@@ -25,22 +25,23 @@ module AWS
       # @option options [required,String] :adjustment_type Specifies whether
       #   the adjustment is an absolute number or a percentage of the current
       #   capacity.  Valid values are:
-      #   * 'ChangeInCapacity'
-      #   * 'ExactCapacity'
-      #   * 'PercentChangeInCapacity'
+      #
+      #     * 'ChangeInCapacity'
+      #     * 'ExactCapacity'
+      #     * 'PercentChangeInCapacity'
       #
       # @option options [required,Integer] :scaling_adjustment The number of
-      #   instances by which to scale. +:adjustment_type+ determines the 
+      #   instances by which to scale. `:adjustment_type` determines the
       #   interpretation of this umber (e.g., as an absolute number or as a
-      #   percentage of the existing Auto Scaling group size). A positive 
-      #   increment adds to the current capacity and a negative value 
+      #   percentage of the existing Auto Scaling group size). A positive
+      #   increment adds to the current capacity and a negative value
       #   removes from the current capacity.
       #
       # @option options [Integer] :cooldown The amount of time, in seconds,
-      #   after a scaling activity completes before any further 
+      #   after a scaling activity completes before any further
       #   trigger-related scaling activities can start.
       #
-      # @option options [Integer] :min_adjustment_magnitude
+      # @option options [Integer] :min_adjustment_step
       #
       # @return [Hash]
       #
@@ -52,6 +53,7 @@ module AWS
           :cooldown,
           :adjustment_type,
           :scaling_adjustment,
+          :min_adjustment_step,
         ].each do |opt|
           opts[opt] = options[opt] if options.key?(opt)
         end

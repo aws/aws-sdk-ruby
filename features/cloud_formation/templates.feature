@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -33,7 +33,7 @@ Feature: CloudFormations templates
     """
     Then I should get a response like:
     """
-    {:capabilities=>[], :description=>"A simple template", :parameters=>[]} 
+    {:capabilities=>[], :description=>"A simple template", :parameters=>[]}
     """
 
   Scenario: Validating an invalid template
@@ -49,7 +49,7 @@ Feature: CloudFormations templates
             "Type" : "String"
           }
         },
-        
+
         "Resources": {
           "web": {
             "Type": "AWS::EC2::Instance",
@@ -70,5 +70,5 @@ Feature: CloudFormations templates
     """
     Then I should get a response like:
     """
-    {:code=>"ValidationError", :message=>"Invalid template resource property 'ConfigurationTemplates'"} 
+    {:code=>"ValidationError", :message=>"Invalid template resource property 'ConfigurationTemplates'"}
     """

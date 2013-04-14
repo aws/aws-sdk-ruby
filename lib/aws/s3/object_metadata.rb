@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,8 +35,8 @@ module AWS
       # Returns the value for the given name stored in the S3Object's
       # metadata:
       #
-      #   bucket.objects['myobject'].metadata['purpose']
-      #   # returns nil if the given metadata key has not been set
+      #     bucket.objects['myobject'].metadata['purpose']
+      #     # returns nil if the given metadata key has not been set
       #
       # @param [String,Symbol] name The name of the metadata field to
       #   get.
@@ -49,9 +49,9 @@ module AWS
       # Changes the value of the given name stored in the S3Object's
       # metadata:
       #
-      #   object = bucket.object['myobject']
-      #   object.metadata['purpose'] = 'research'
-      #   object.metadata['purpose']               # => 'research'
+      #     object = bucket.object['myobject']
+      #     object.metadata['purpose'] = 'research'
+      #     object.metadata['purpose']               # => 'research'
       #
       # @note The name and value of each metadata field must conform
       #   to US-ASCII.
@@ -80,7 +80,7 @@ module AWS
         self[name]
       end
 
-      # @return [Hash] Returns the user-generated metadata stored with 
+      # @return [Hash] Returns the user-generated metadata stored with
       #   this S3 Object.
       def to_h
         options = {}

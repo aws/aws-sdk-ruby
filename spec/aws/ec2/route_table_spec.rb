@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -94,7 +94,7 @@ module AWS
             :network_interface => network_interface)
 
         end
-        
+
       end
 
       context '#replace_route' do
@@ -139,7 +139,7 @@ module AWS
       context '#delete_route' do
 
         it 'calls #delete_route on the client' do
-          
+
           client.should_receive(:delete_route).with(
             :route_table_id => route_table.id,
             :destination_cidr_block => 'cidr-block')
@@ -188,9 +188,9 @@ module AWS
           end
 
         end
-        
+
         context '#main?' do
-          
+
           it 'returns true if it has an association without a subnet' do
             association_set << {
               :route_table_association_id => 'assoc-id',
@@ -237,12 +237,13 @@ module AWS
         end
 
         context '#routes' do
-          
+
           it 'returns an array of route objects' do
 
             route_set << {
               :destination_cidr_block => 'cidr-block-1',
               :gateway_id => 'igw-123',
+              :origin => 'CreateRoute',
               :state => 'active',
             }
 
@@ -250,12 +251,14 @@ module AWS
               :destination_cidr_block => 'cidr-block-2',
               :instance_id => 'i-123',
               :instance_owner_id => 'owner-id',
+              :origin => 'CreateRouteTable',
               :state => 'pending',
             }
 
             route_set << {
               :destination_cidr_block => 'cidr-block-3',
               :network_interface_id => 'ni-123',
+              :origin => 'EnableVgwRoutePropagation',
               :state => 'foo',
             }
 
@@ -263,17 +266,20 @@ module AWS
 
             routes[0].destination_cidr_block.should == 'cidr-block-1'
             routes[0].target.should == InternetGateway.new('igw-123', :config => config)
+            routes[0].origin.should == :create_route
             routes[0].state.should == :active
             routes[0].target.should == routes[0].internet_gateway
 
             routes[1].destination_cidr_block.should == 'cidr-block-2'
             routes[1].target.should == Instance.new('i-123', :config => config)
+            routes[1].origin.should == :create_route_table
             routes[1].state.should == :pending
             routes[1].target.should == routes[1].instance
             routes[1].instance.owner_id.should == 'owner-id'
 
             routes[2].destination_cidr_block.should == 'cidr-block-3'
             routes[2].target.should == NetworkInterface.new('ni-123', :config => config)
+            routes[2].origin.should == :enable_vgw_route_propagation
             routes[2].state.should == :foo
             routes[2].target.should == routes[2].network_interface
 

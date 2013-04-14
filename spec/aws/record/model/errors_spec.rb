@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,7 +31,7 @@ module AWS
           errors2 = obj.errors
           errors1.should == errors2
         end
-        
+
       end
     end
 
@@ -55,7 +55,7 @@ module AWS
           errors.add(:name, 'may only contains letters and spaces')
           errors.count.should == 2
         end
-        
+
         it 'returns all of the errors messages for this attr' do
           errors.add(:name, 'msg1').should == ['msg1']
           errors.add(:name, 'msg2').should == ['msg1', 'msg2']
@@ -77,7 +77,7 @@ module AWS
       end
 
       context '#on' do
-        
+
         it 'returns errors added to an attribute' do
           errors.add(:name, 'msg1')
           errors.add(:name, 'msg2')
@@ -94,7 +94,7 @@ module AWS
       end
 
       context '#[]=' do
-        
+
         it 'is the same as #add' do
           errors.methods(:[]=).should == errors.methods(:add)
         end
@@ -110,7 +110,7 @@ module AWS
       end
 
       context '#empty?' do
-        
+
         it 'returns true when there are no errors' do
           errors.empty?.should == true
         end

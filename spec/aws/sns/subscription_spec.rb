@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -87,7 +87,7 @@ module AWS
       context '#exists?' do
 
         it 'calls #get_subscription_attributes on the client' do
-          
+
           client.should_receive(:get_subscription_attributes).
             with(:subscription_arn => subscription.arn).
             and_return(client.stub_for(:get_subscription_attributes))

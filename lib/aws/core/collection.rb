@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
 # the License is located at
@@ -16,20 +16,18 @@ module AWS
     # Provides useful methods for enumerating items in a collection.
     module Collection
 
-      AWS.register_autoloads(self) do
-        autoload :Simple, 'simple'
-        autoload :WithNextToken, 'with_next_token'
-        autoload :WithLimitAndNextToken, 'with_limit_and_next_token'
-      end
+      autoload :Simple, 'aws/core/collection/simple'
+      autoload :WithNextToken, 'aws/core/collection/with_next_token'
+      autoload :WithLimitAndNextToken, 'aws/core/collection/with_limit_and_next_token'
 
       include Enumerable
 
       # Yields once for every item in this collection.
       #
-      #   collection.each {|item| ... }
+      #     collection.each {|item| ... }
       #
       # @note If you want fewer than all items, it is generally better
-      #   to call {#page} than {#each} with a +:limit+.
+      #   to call {#page} than {#each} with a `:limit`.
       #
       # @param [Hash] options
       #
@@ -37,13 +35,13 @@ module AWS
       #   items to enumerate from this collection.
       #
       # @option options [next_token] :next_token (nil)
-      #   Acts as an offset.  +:next_token+ may be returned by {#each} and
-      #   {#each_batch} when a +:limit+ is provided.
+      #   Acts as an offset.  `:next_token` may be returned by {#each} and
+      #   {#each_batch} when a `:limit` is provided.
       #
       # @return [nil_or_next_token] Returns nil if all items were enumerated.
-      #   If some items were excluded because of a +:limit+ option then
-      #   a +next_token+ is returned.  Calling an enumerable method on
-      #   the same collection with the +next_token+ acts like an offset.
+      #   If some items were excluded because of a `:limit` option then
+      #   a `next_token` is returned.  Calling an enumerable method on
+      #   the same collection with the `next_token` acts like an offset.
       #
       def each options = {}, &block
         each_batch(options) do |batch|
@@ -53,13 +51,13 @@ module AWS
 
       # Yields items from this collection in batches.
       #
-      #   collection.each_batch do |batch|
-      #     batch.each do |item|
-      #       # ...
+      #     collection.each_batch do |batch|
+      #       batch.each do |item|
+      #         # ...
+      #       end
       #     end
-      #   end
       #
-      # == Variable Batch Sizes
+      # ## Variable Batch Sizes
       #
       # Each AWS service has its own rules on how it returns results.
       # Because of this batch size may very based on:
@@ -85,16 +83,14 @@ module AWS
       # Use this method when you want to call a method provided by
       # Enumerable, but you need to pass options:
       #
-      #   # raises an error because collect does not accept arguments
-      #   collection.collect(:limit => 10) {|i| i.name }
+      #     # raises an error because collect does not accept arguments
+      #     collection.collect(:limit => 10) {|i| i.name }
       #
-      #   # not an issue with the enum method
-      #   collection.enum(:limit => 10).collect(&:name)
+      #     # not an issue with the enum method
+      #     collection.enum(:limit => 10).collect(&:name)
       #
       # @param (see #each)
-      #
       # @option (see #each)
-      #
       # @return [Enumerable::Enumerator] Returns an enumerator for this
       #   collection.
       #
@@ -115,15 +111,15 @@ module AWS
       # Yields items from this collection in groups of an exact
       # size (except for perhaps the last group).
       #
-      #   collection.in_groups_of (10, :limit => 30) do |group|
+      #     collection.in_groups_of (10, :limit => 30) do |group|
       #
-      #     # each group should be exactly 10 items unless
-      #     # fewer than 30 items are returned by the service
-      #     group.each do |item|
-      #       #...
+      #       # each group should be exactly 10 items unless
+      #       # fewer than 30 items are returned by the service
+      #       group.each do |item|
+      #         #...
+      #       end
+      #
       #     end
-      #
-      #   end
       #
       # @param [Integer] size Size each each group of objects
       #   should be yielded in.
@@ -152,29 +148,29 @@ module AWS
 
       # Returns a single page of results in a kind-of array ({PageResult}).
       #
-      #   items = collection.page(:per_page => 10) # defaults to 10 items
-      #   items.is_a?(Array) # => true
-      #   items.size         # => 8
-      #   items.per_page     # => 10
-      #   items.last_page?   # => true
+      #     items = collection.page(:per_page => 10) # defaults to 10 items
+      #     items.is_a?(Array) # => true
+      #     items.size         # => 8
+      #     items.per_page     # => 10
+      #     items.last_page?   # => true
       #
       # If you need to display a "next page" link in a web view you can
       # use the #more? method.  Just make sure the generated link
-      # contains the +next_token+.
+      # contains the `next_token`.
       #
-      #   <% if items.more? %>
-      #     <%= link_to('Next Page', params.merge(:next_token => items.next_token) %>
-      #   <% end %>
+      #     <% if items.more? %>
+      #       <%= link_to('Next Page', params.merge(:next_token => items.next_token) %>
+      #     <% end %>
       #
       # Then in your controller you can find the next page of results:
       #
-      #   items = collection.page(:next_token => params[:next_token])
+      #     items = collection.page(:next_token => params[:next_token])
       #
       # Given a {PageResult} you can also get more results directly:
       #
-      #   more_items = items.next_page
+      #     more_items = items.next_page
       #
-      # @note This method does not accept a +:page+ option, which means you
+      # @note This method does not accept a `:page` option, which means you
       #   can only start at the begining of the collection and request
       #   the next page of results.  You can not choose an offset
       #   or know how many pages of results there will be.
@@ -248,15 +244,15 @@ module AWS
       #
       # An example of when this would be useful:
       #
-      #   collection.limit(10).each {|item| ... }
+      #     collection.limit(10).each {|item| ... }
       #
       # The collection class including this module should define _limit
       # and return the cached limit value (of 10 from this example).
       # This value may still be overridden by a locally passed
-      # +:limit+ option:
+      # `:limit` option:
       #
-      #   # limit 5 wins out
-      #   collection.limit(10).each(:limit => 5) {|item| ... }
+      #     # limit 5 wins out
+      #     collection.limit(10).each(:limit => 5) {|item| ... }
       #
       def _limit
         nil

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -66,7 +66,7 @@ module AWS
       end
 
       context '#domain' do
-        
+
         it 'is the same as is passed to init' do
           execution.domain.should == domain
         end
@@ -81,7 +81,7 @@ module AWS
 
       end
 
-      context '#run_id' do 
+      context '#run_id' do
 
         it 'is the same as is passed to init' do
           execution.workflow_id.should == 'wid'
@@ -95,11 +95,11 @@ module AWS
         let(:value) { options[:value] }
         let(:raw)   { options[:raw] || value }
         let(:key)   { options[:as] || name }
-        
+
         it 'describes the execution when not present' do
           client.should_receive(:describe_workflow_execution).with(
             :domain => domain.name,
-            :execution => { 
+            :execution => {
               :workflow_id => execution.workflow_id,
               :run_id => execution.run_id,
             }
@@ -124,11 +124,11 @@ module AWS
               ex.send(name).should == value
             end
           end
-        
+
           it 'is static' do
             client.should_receive(:describe_workflow_execution).with(
               :domain => domain.name,
-              :execution => { 
+              :execution => {
                 :workflow_id => execution.workflow_id,
                 :run_id => execution.run_id,
               }
@@ -142,18 +142,18 @@ module AWS
       end
 
       context '#child_policy' do
-        
-        it_behaves_like "an attribute", 
-          :name => :child_policy, 
+
+        it_behaves_like "an attribute",
+          :name => :child_policy,
           :value => :terminate,
           :static => true
 
       end
 
       context '#execution_start_to_close_timeout' do
-        
-        it_behaves_like "an attribute", 
-          :name => :execution_start_to_close_timeout, 
+
+        it_behaves_like "an attribute",
+          :name => :execution_start_to_close_timeout,
           :value => 123456789,
           :static => true
 
@@ -161,8 +161,8 @@ module AWS
 
       context '#task_list' do
 
-        it_behaves_like "an attribute", 
-          :name => :task_list, 
+        it_behaves_like "an attribute",
+          :name => :task_list,
           :value => 'task-list',
           :static => true
 
@@ -170,25 +170,25 @@ module AWS
 
       context '#task_start_to_close_timeout' do
 
-        it_behaves_like "an attribute", 
-          :name => :task_start_to_close_timeout, 
+        it_behaves_like "an attribute",
+          :name => :task_start_to_close_timeout,
           :value => 123456,
           :static => true
 
       end
 
       context '#cancel_requested' do
-        
-        it_behaves_like "an attribute", 
-          :name => :cancel_requested, 
+
+        it_behaves_like "an attribute",
+          :name => :cancel_requested,
           :value => false
 
       end
 
       context '#closed_at' do
-        
-        it_behaves_like "an attribute", 
-          :name => :closed_at, 
+
+        it_behaves_like "an attribute",
+          :name => :closed_at,
           :value => Time.at(123456789)
 
       end
@@ -224,7 +224,7 @@ module AWS
       context '#parent' do
 
         domain = Domain.new('domain-name')
-        
+
         it_behaves_like("an attribute",
           :name => :parent,
           :as => :parent_details,
@@ -236,7 +236,7 @@ module AWS
           response.data['executionInfo'].delete('parent')
           execution.parent.should == nil
         end
-        
+
         it 'protects #parent_details' do
           lambda { execution.parent_details }.should raise_error(NoMethodError)
         end
@@ -244,7 +244,7 @@ module AWS
       end
 
       context '#started_at' do
-        
+
         it_behaves_like "an attribute",
           :name => :started_at,
           :value => Time.at(123456789),
@@ -334,7 +334,7 @@ module AWS
         it 'returns the value from open counts' do
           execution.open_timer_count.should == 1
         end
-        
+
       end
 
       context '#open_decision_task_count' do
@@ -378,7 +378,7 @@ module AWS
       end
 
       context '#signal' do
-        
+
         it 'calls #signal on the collection with a run id' do
           client.should_receive(:signal_workflow_execution).with(
             :domain => domain.name,

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -36,7 +36,7 @@ module AWS
         it 'requires a item and name' do
           lambda { Attribute.new }.should raise_error(ArgumentError)
         end
-        
+
         it 'accepts a item and name' do
           lambda { Attribute.new(item, 'colors') }.should_not raise_error
         end
@@ -44,14 +44,14 @@ module AWS
       end
 
       context '#item' do
-        
+
         it 'returns the item passed to #initialize' do
           attribute.item.should == item
         end
       end
 
       context '#name' do
-        
+
         it 'returns the proper name' do
           attribute.name.should == 'colors'
         end
@@ -70,7 +70,7 @@ module AWS
         it_behaves_like('accepts :consistent_read option', lambda{}) do
           let(:object) { attribute }
           let(:method) { :values }
-          let(:client_method) { :get_attributes } 
+          let(:client_method) { :get_attributes }
         end
 
         it 'returns all attribute values as an array' do
@@ -81,12 +81,12 @@ module AWS
       end
 
       context '#each' do
-        
+
         let(:attributes) {[
           double('attr1', :name => 'colors', :value => 'green'),
           double('attr1', :name => 'colors', :value => 'red'),
         ]}
-        
+
         let(:response) { double('response', :attributes => attributes) }
 
         it_behaves_like('accepts :consistent_read option', lambda{|value|}) do
@@ -111,7 +111,7 @@ module AWS
           attribute.each{|value| yielded_values << value }
           yielded_values.should == ['green', 'red']
         end
-        
+
       end
 
       context '#add' do

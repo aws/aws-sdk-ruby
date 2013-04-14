@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -27,11 +27,10 @@ module AWS
         let(:client_method) { :describe_snapshots }
 
         def stub_two_members(resp)
-          resp.stub(:snapshot_set).
-            and_return([double("snapshot 1",
-                               :snapshot_id => "snap-123"),
-                        double("snapshot 2",
-                               :snapshot_id => "snap-321")])
+          resp.data[:snapshot_set] = [
+            { :snapshot_id => 'snap-123' },
+            { :snapshot_id => 'snap-321' },
+          ]
         end
 
         it_should_behave_like "a tagged ec2 collection"

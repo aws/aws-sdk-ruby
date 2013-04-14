@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -128,8 +128,12 @@ Feature: SQS Queues
     | abc     |
     | mno     |
     | xyz     |
-    When I receive 3 messages 
+    When I receive 3 messages
     And I delete the messages
     Then a request should have been made like:
     | TYPE  | NAME   | VALUE              |
     | param | Action | DeleteMessageBatch |
+
+  Scenario: Making a queue request across regions
+    When I create a queue in "us-west-1"
+    Then I should be able to send a message using a "us-east-1" client

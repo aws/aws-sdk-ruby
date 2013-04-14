@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -36,14 +36,14 @@ module AWS::Core
 
       let(:resource) { AWS::SomeService::MyResource.new }
 
-      let(:credential_provider) { 
-        double("creds", :access_key_id => "ACCESS_KEY") 
+      let(:credential_provider) {
+        double("creds", :access_key_id => "ACCESS_KEY")
       }
 
-      let(:config) { 
+      let(:config) {
         double("config", {
           :credential_provider => credential_provider,
-          :some_service_endpoint => "ENDPOINT",
+          :region => "ENDPOINT",
         })
       }
 

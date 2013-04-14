@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -62,7 +62,7 @@ module AWS
       context '#[]=' do
 
         it 'calls #set_load_balancer_policies_for_backend_server' do
-          
+
           client.should_receive(:set_load_balancer_policies_for_backend_server).
             with(
               :load_balancer_name => load_balancer.name,
@@ -74,7 +74,7 @@ module AWS
         end
 
         it 'accepts policy objects' do
-          
+
           client.should_receive(:set_load_balancer_policies_for_backend_server).
             with(
               :load_balancer_name => load_balancer.name,
@@ -86,7 +86,7 @@ module AWS
         end
 
         it 'accepts nil to remove a policy' do
-          
+
           client.should_receive(:set_load_balancer_policies_for_backend_server).
             with(
               :load_balancer_name => load_balancer.name,

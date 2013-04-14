@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -126,8 +126,8 @@ module AWS
 
       end
 
-      # @return [Boolean] Returns +true+ if the object responds to
-      #   +#read+ and +#eof?+.
+      # @return [Boolean] Returns `true` if the object responds to
+      #   `#read` and `#eof?`.
       def io_like? io
         io.respond_to?(:read) and io.respond_to?(:eof?)
       end
@@ -153,16 +153,13 @@ module AWS
           @eof = false
         end
 
-        def read bytes = nil
-          if bytes
-            buffer = StringIO.new
-            @write_block.call(buffer, bytes)
-            buffer.rewind
-            @eof = true if buffer.size < bytes
-            buffer.size == 0 ? nil : buffer.read
+        def read bytes = nil, output_buffer = nil
+          data = if bytes
+            (@eof) ? nil : read_chunk(bytes)
           else
-            read_all
+            (@eof) ? ""  : read_all
           end
+          output_buffer ? output_buffer.replace(data || '') : data
         end
 
         def eof?
@@ -171,9 +168,17 @@ module AWS
 
         protected
 
+        def read_chunk bytes
+          buffer = StringIO.new
+          @write_block.call(buffer, bytes)
+          buffer.rewind
+          @eof = true if buffer.size < bytes
+          buffer.read
+        end
+
         def read_all
           buffer = StringIO.new
-          buffer << read(1024 * 1024 * 5) until eof?
+          buffer << read_chunk(1024 * 1024 * 5) until @eof
           buffer.rewind
           buffer.read
         end

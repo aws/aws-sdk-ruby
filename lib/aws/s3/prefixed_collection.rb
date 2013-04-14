@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,36 +25,40 @@ module AWS
         args.push(options)
         super(*args)
       end
-        
+
       # @return [String,nil] The prefix of this collection.
       attr_reader :prefix
 
       # Returns a new collection with a different prefix
       #
       # @example
+      #
       #   objects = collection.with_prefix('photos')
       #   objects.prefix #=> 'photos'
       #
       # @example Chaining with_prefix replaces previous prefix
+      #
       #   objects = collection.with_prefix('photos').with_prefix('videos')
       #   objects.prefix #=> 'videos'
       #
       # @example Chaining with_prefix with :append
+      #
       #   objects = collection.with_prefix('a/').with_prefix('b/', :append)
       #   objects.prefix #=> 'a/b/'
       #
       # @example Chaining with_prefix with :prepend
+      #
       #   objects = collection.with_prefix('a/').with_prefix('b/', :prepend)
       #   objects.prefix #=> 'b/a/'
       #
       # @param [String] prefix The prefix condition that limits what objects
       #   are returned by this collection.
       # @param [Symbol] mode (:replace) If you chain calls to #with_prefix
-      #   the +mode+ affects if the prefix prepends, appends, or replaces.
+      #   the `mode` affects if the prefix prepends, appends, or replaces.
       #   Valid modes are:
-      #   * +:replace+
-      #   * +:append+
-      #   * +:prepend+
+      #   * `:replace`
+      #   * `:append`
+      #   * `:prepend`
       # @return [Collection] Returns a new collection with a modified prefix.
       def with_prefix prefix, mode = :replace
         new_prefix = case mode

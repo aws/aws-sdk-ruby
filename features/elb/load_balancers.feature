@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -32,7 +32,7 @@ Feature: ELB Load Balancers
     | param       | Listeners.member.1.InstancePort     | 80                 |
     | param       | Listeners.member.1.InstanceProtocol | HTTP               |
     | param       | Listeners.member.1.LoadBalancerPort | 80                 |
-    
+
   @delete
   Scenario: Delete a load balancer
     Given I create a load balancer
@@ -57,11 +57,11 @@ Feature: ELB Load Balancers
     Given I create a load balancer
     When I update the health check configuration with:
     | OPT_NAME | OPT_VALUE |
-    | interval | 12        |   
+    | interval | 12        |
     | timeout  | 11        |
     Then the health check configuration should have the following values:
     | OPT_NAME | OPT_VALUE |
-    | interval | 12        |   
+    | interval | 12        |
     | timeout  | 11        |
 
   @ec2 @security_groups
@@ -77,4 +77,4 @@ Feature: ELB Load Balancers
     | param  | IpPermissions.1.Groups.1.UserId    | amazon-elb                    |
     | param  | IpPermissions.1.Groups.1.GroupName | amazon-elb-sg                 |
     | param  | IpPermissions.1.IpProtocol         | tcp                           |
-    
+

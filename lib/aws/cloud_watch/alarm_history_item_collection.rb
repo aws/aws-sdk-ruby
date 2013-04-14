@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -63,14 +63,14 @@ module AWS
       protected
 
       def _each_item next_token, limit, options = {}, &block
-        
+
         options = @filters.merge(options)
         options[:max_records] = limit if limit
         options[:next_token] = next_token if next_token
 
         resp = client.describe_alarm_history(options)
         resp.data[:alarm_history_items].each do |details|
-          
+
           yield(AlarmHistoryItem.new(details))
 
         end

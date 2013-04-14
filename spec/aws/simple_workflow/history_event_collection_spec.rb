@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -38,10 +38,10 @@ module AWS
         let(:client_method)   { :get_workflow_execution_history }
         let(:next_token_key)  { :next_page_token }
         let(:limit_key)       { :maximum_page_size }
-        let(:request_options) {{ 
+        let(:request_options) {{
           :domain => "domain-name",
           :reverse_order => false,
-          :execution => { 
+          :execution => {
             :workflow_id => execution.workflow_id,
             :run_id => execution.run_id,
           },

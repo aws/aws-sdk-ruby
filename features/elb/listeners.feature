@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -36,7 +36,7 @@ Feature: ELB Listeners
     | param       | Listeners.member.1.InstanceProtocol | HTTP         |
     | param_match | LoadBalancerName                    | ruby-test-.* |
 
-  Scenario: Get a listener 
+  Scenario: Get a listener
     Given I create a load balancer
     And I create a load balancer listener with the following options:
     | OPT_NAME          | VALUE | CAST   |
@@ -51,7 +51,7 @@ Feature: ELB Listeners
     And the listener should have the instance protocol :http
     When I delete the listener
     Then the listener should not exist
-    
+
 
   Scenario: Find a listener
     Given I create a load balancer
@@ -83,4 +83,4 @@ Feature: ELB Listeners
     When I upload an IAM server certificate
     And I set the server certificate on the load balancer listener
     Then the load balancer listener should have the new certificate
-    
+

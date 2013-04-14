@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
 # the License is located at
@@ -23,7 +23,7 @@ module AWS
         :default_task_start_to_close_timeout,
       ]
 
-      it_should_behave_like("a simple workflow type", config_attributes) do 
+      it_should_behave_like("a simple workflow type", config_attributes) do
 
         let(:config) { stub_config }
         let(:client) { config.simple_workflow_client }

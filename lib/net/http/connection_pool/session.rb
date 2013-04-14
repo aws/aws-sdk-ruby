@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -52,10 +52,10 @@ class Net::HTTP::ConnectionPool
     # Makes a HTTP request.  See Net::HTTPSession#request documentation
     # from the Ruby standard library for information about argments.
     #
-    #   connection.request(Net::HTTP::Get.new('/')) do |response|
-    #     # Parse the response (status, headers and body) here.
-    #     # You should be done with the response by the end of the block.
-    #   end
+    #     connection.request(Net::HTTP::Get.new('/')) do |response|
+    #       # Parse the response (status, headers and body) here.
+    #       # You should be done with the response by the end of the block.
+    #     end
     #
     # @yield [response]
     # @yieldparam [Net::HTTPResponse] response

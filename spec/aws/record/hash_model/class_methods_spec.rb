@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -81,20 +81,20 @@ module AWS
       end
 
       context '[]' do
-  
+
         let(:data) {{
           'id' => 'item-name',
         }}
 
-        let(:table) { 
+        let(:table) {
           DynamoDB::Table.new('shard-name', :config => stub_config)
         }
-  
+
         before(:each) do
           klass.stub(:dynamo_db_table).and_return(table)
           table.stub_chain(:items, :[], :attributes, :to_h).and_return(data)
         end
-  
+
         it 'returns an existing record' do
           klass['item-name'].should be_a(klass)
         end
@@ -103,7 +103,7 @@ module AWS
           klass['item-name'].shard.should == table.name
         end
 
-        it 'removes the table prefix' do 
+        it 'removes the table prefix' do
           AWS::Record.stub(:table_prefix).and_return('prefixed-')
           table.stub(:name).and_return('prefixed-shard-name')
           klass['item-name'].shard.should == 'shard-name'

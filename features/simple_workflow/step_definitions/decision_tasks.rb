@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,8 +16,8 @@ Then /^the decision task should be nil$/ do
 end
 
 Then /^the count of decision tasks for "([^"]*)" should be (\d+)$/ do |task_list,count|
-  eventually do 
-    @domain.decision_tasks.count(task_list).should == 
+  eventually do
+    @domain.decision_tasks.count(task_list).should ==
       AWS::SimpleWorkflow::Count.new(count.to_i, false)
   end
 end

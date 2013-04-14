@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -54,7 +54,7 @@ module AWS
         end
 
         it 'returns a domain with the record class shard name' do
-          klass.sdb_domain.name.should == klass.shard_name  
+          klass.sdb_domain.name.should == klass.shard_name
         end
 
         it 'returns a domain with a prefixed shard name when configured' do
@@ -65,34 +65,34 @@ module AWS
       end
 
       it_should_behave_like("record class", AWS::Record::Model) do
-  
+
         # specific to AWS::Record::Model
         context 'sortable_integer_attr' do
-  
+
           it_behaves_like("attribute macro", true) do
             let(:macro) { :sortable_integer_attr }
             let(:opts) { { :range => -10..10 } }
             let(:default_value) { 0 }
           end
-  
+
           it 'requires :range' do
             lambda {
               klass.sortable_integer_attr :foo
             }.should raise_error(ArgumentError, /:range/)
           end
-  
+
           it 'requires :range to be an integer range' do
             lambda {
               klass.sortable_integer_attr :foo, :range => (1.1..2.1)
             }.should raise_error(ArgumentError, /integer range/)
           end
-  
+
           it 'returns integers unmodified' do
             klass.sortable_integer_attr :age, :range => 0..150
             obj.age = 123
             obj.age.should == 123
           end
-  
+
           it 'calls to_i on everything else' do
             value = double('value')
             value.should_receive(:to_i).twice.and_return(123)
@@ -100,7 +100,7 @@ module AWS
             obj.age = value
             obj.age.should == 123
           end
-  
+
           it 'raises runtime error when value falls outside range' do
             klass.sortable_integer_attr :age, :range => 0..150
             obj.age = -10
@@ -108,36 +108,36 @@ module AWS
               obj.save
             }.should raise_error(/unable to serialize/)
           end
-  
+
         end
-  
+
         # specific to AWS::Record::Model
         context 'sortable_float_attr' do
-  
+
           it_behaves_like("attribute macro", true) do
             let(:macro) { :sortable_float_attr }
             let(:opts) { { :range => -10..10 } }
             let(:default_value) { 0.0 }
           end
-  
+
           it 'requires :range' do
             lambda {
               klass.sortable_float_attr :foo
             }.should raise_error(ArgumentError, /:range/)
           end
-  
+
           it 'requires :range to be an integer range' do
             lambda {
               klass.sortable_float_attr :foo, :range => 1.1..2.2
             }.should raise_error(ArgumentError, /integer range/)
           end
-  
+
           it 'returns floats unmodified' do
             klass.sortable_float_attr :score, :range => 0..150
             obj.score = 9.5
             obj.score.should == 9.5
           end
-  
+
           it 'calls to_i on everything else' do
             value = double('value')
             value.should_receive(:to_f).twice.and_return(1.2)
@@ -145,7 +145,7 @@ module AWS
             obj.score = value
             obj.score.should == 1.2
           end
-  
+
           it 'raises runtime error when value falls outside range' do
             klass.sortable_float_attr :volume, :range => 0..10
             obj.volume = 11
@@ -153,35 +153,35 @@ module AWS
               obj.save
             }.should raise_error(/unable to serialize/)
           end
-  
+
         end
 
         context '[]' do
-    
+
           let(:data) { double('item-data', :attributes => {
             'name' => %w(abc),
             'age' => %w(40),
             'colors' => %w(blue green),
           })}
-    
+
           let(:now) { Time.now }
 
-          let(:domain) { 
+          let(:domain) {
             SimpleDB::Domain.new('shard-name', :config => stub_config)
           }
-    
+
           before(:each) do
-    
+
             klass.string_attr :name
             klass.integer_attr :age, :default_value => 40
             klass.string_attr :colors, :set => true
             klass.datetime_attr :tested_at, :default_value => now
-    
+
             klass.stub(:sdb_domain).and_return(domain)
             domain.stub_chain(:items, :[], :data).and_return(data)
 
           end
-    
+
           it 'returns an existing record' do
             klass['item-name'].should be_a(klass)
           end
@@ -190,29 +190,29 @@ module AWS
             klass['item-name'].shard.should == domain.name
           end
 
-          it 'removes the domain prefix' do 
+          it 'removes the domain prefix' do
             AWS::Record.stub(:domain_prefix).and_return('prefixed-')
             domain.stub(:name).and_return('prefixed-shard-name')
             klass['item-name'].shard.should == 'shard-name'
           end
-    
+
           it 'returns an object with the correct id' do
             klass['item-name'].id.should == 'item-name'
           end
-    
+
           it 'returns an object that is already persisted' do
             klass['item-name'].persisted?.should == true
           end
-    
+
           it 'raises an exception if the item is not found in sdb' do
             data.stub(:attributes).and_return({})
             lambda { klass['foo'] }.should raise_error(RecordNotFound)
           end
-    
+
           it 'it blanks out default values during hydration' do
             klass['item-name'].tested_at.should be_nil
           end
-    
+
           it 'returns an object with the correct attributes' do
             klass['item-id'].attributes.should == {
               'id' => 'item-id',
@@ -222,16 +222,16 @@ module AWS
               'tested_at' => nil,
             }
           end
-    
+
           it 'ignores attributes not configured' do
-    
+
             data.stub(:attributes).and_return({
                 'name' => %w(abc),
                 'ignore' => %w(xyz),
               })
-    
+
             lambda {
-              klass['item-id'].attributes.should == { 
+              klass['item-id'].attributes.should == {
                 'id' => 'item-id',
                 'name' => 'abc',
                 'age' => nil,
@@ -240,11 +240,11 @@ module AWS
               }
             }.should_not raise_error
           end
-    
+
         end
 
         context 'all' do
-  
+
           it 'returns a scope for all records' do
 
             scope = double('scope')
@@ -297,7 +297,7 @@ module AWS
 
             it 'should pass find options to the scope' do
               scope = double('scope')
-              opts = double('some-opts').as_null_object 
+              opts = double('some-opts').as_null_object
               Model::Scope.should_receive(:new).with(klass).and_return(scope)
               scope.should_receive(:find).with(:all, opts)
               klass.find(:all, opts)

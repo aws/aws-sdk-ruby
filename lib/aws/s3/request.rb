@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -83,12 +83,12 @@ module AWS
 
       # From the S3 developer guide:
       #
-      # StringToSign =
-      #   HTTP-Verb + "\n" +
-      #   content-md5 + "\n" +
-      #   content-type + "\n" +
-      #   date + "\n" +
-      #   CanonicalizedAmzHeaders + CanonicalizedResource;
+      #     StringToSign =
+      #       HTTP-Verb ` "\n" `
+      #       content-md5 ` "\n" `
+      #       content-type ` "\n" `
+      #       date ` "\n" `
+      #       CanonicalizedAmzHeaders + CanonicalizedResource;
       #
       def string_to_sign
         [
@@ -106,17 +106,17 @@ module AWS
         if headers.detect{|k,v| k.to_s =~ /^x-amz-date$/i }
           ''
         else
-          headers['date'] ||= Time.now.rfc822
+          headers['date'] ||= Time.now.httpdate
         end
       end
 
       # From the S3 developer guide
       #
-      #   CanonicalizedResource =
-      #     [ "/" + Bucket ] +
-      #     <HTTP-Request-URI, from the protocol name up to the querystring> +
-      #     [ sub-resource, if present. e.g. "?acl", "?location",
-      #     "?logging", or "?torrent"];
+      #     CanonicalizedResource =
+      #       [ "/" ` Bucket ] `
+      #       <HTTP-Request-URI, from the protocol name up to the querystring> +
+      #       [ sub-resource, if present. e.g. "?acl", "?location",
+      #       "?logging", or "?torrent"];
       #
       def canonicalized_resource
 
@@ -180,7 +180,9 @@ module AWS
         def sub_resources
           %w(acl location logging notification partNumber policy
              requestPayment torrent uploadId uploads versionId
-             versioning versions restore delete lifecycle tagging cors)
+             versioning versions restore delete lifecycle tagging cors
+             website
+            )
         end
 
         def query_parameters

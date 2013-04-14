@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,22 +18,22 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon SQS.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the SQS interface:
   #
-  #   sqs = AWS::SQS.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     sqs = AWS::SQS.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # == Queues and Messages
+  # ## Queues and Messages
   #
   # Amazon SQS is a distributed queue system that enables web
   # service applications to quickly and reliably queue messages that
@@ -44,29 +44,31 @@ module AWS
   # You can access your queues using the {#queues} collection.  For
   # example, to create a queue, use {QueueCollection#create}:
   #
-  #   queue = sqs.queues.create("myqueue")
+  #     queue = sqs.queues.create("myqueue")
   #
   # Or to find out what queues you have in your account:
   #
-  #   pp sqs.queues.collect(&:url)
+  #     pp sqs.queues.collect(&:url)
   #
   # See the {Queue} class for more information on how to send and
   # receive messages.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level SQS client object
   class SQS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,             'client'
-      autoload :Errors,             'errors'
-      autoload :Queue,              'queue'
-      autoload :QueueCollection,    'queue_collection'
-      autoload :Policy,             'policy'
-      autoload :ReceivedMessage,    'received_message'
-      autoload :ReceivedSNSMessage, 'received_sns_message'
-      autoload :Request,            'request'
-    end
+    autoload :Client, 'aws/sqs/client'
+    autoload :Errors, 'aws/sqs/errors'
+    autoload :Queue, 'aws/sqs/queue'
+    autoload :QueueCollection, 'aws/sqs/queue_collection'
+    autoload :Policy, 'aws/sqs/policy'
+    autoload :ReceivedMessage, 'aws/sqs/received_message'
+    autoload :ReceivedSNSMessage, 'aws/sqs/received_sns_message'
+    autoload :Request, 'aws/sqs/request'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'sqs'
 
     # @return [QueueCollection] The collection of all {Queue}
     #   objects in your account.

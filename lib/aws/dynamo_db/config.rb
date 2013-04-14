@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,7 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'DynamoDB', 'dynamo_db', 'dynamodb.us-east-1.amazonaws.com'
+  add_service 'DynamoDB', 'dynamo_db', 'dynamodb.%s.amazonaws.com'
 
   add_option :dynamo_db_retry_throughput_errors, true, :boolean => true
 

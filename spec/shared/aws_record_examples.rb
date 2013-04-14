@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,7 +29,7 @@ module AWS
       before(:each) do
 
         klass.stub(:name).and_return('ExampleModel')
-      
+
         klass.stub_chain(:sdb_domain, :items, :[]).and_return(sdb_item)
 
         sdb_item.stub(:data).and_return(sdb_data)
@@ -43,7 +43,7 @@ module AWS
         attributes = Core::IndifferentHash.new(attributes)
 
         item_id = attributes.delete('id') || 'item-id'
-        
+
         sdb_data_hash = {}
 
         attributes.each_pair do |attr_name, attr_value|

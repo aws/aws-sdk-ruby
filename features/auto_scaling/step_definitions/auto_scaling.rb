@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,7 +35,7 @@ After("@auto_scaling") do
     begin
       launch_config.delete
     rescue AWS::AutoScaling::Errors::ValidationError
-      # throws a name validation error when it cant find a launch 
+      # throws a name validation error when it cant find a launch
       # configuration with the given name -- already deleted
     end
   end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,9 +23,9 @@ module AWS
         # @private
         def initialize parent, collection, options = {}
 
-          options = { 
+          options = {
             :prefix => nil,
-            :delimiter => '/', 
+            :delimiter => '/',
             :append => true,
           }.merge(options)
 
@@ -58,7 +58,7 @@ module AWS
         attr_reader :delimiter
 
         # @return [Boolean] Returns true if the tree is set to auto-append
-        #   the delimiter to the prefix when the prefix does not end with 
+        #   the delimiter to the prefix when the prefix does not end with
         #   the delimiter.
         def append?
           @append

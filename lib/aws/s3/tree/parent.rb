@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -46,7 +46,7 @@ module AWS
         attr_reader :collection
 
         # A tree may have a prefix of where in the bucket to be based
-        # from.  A value of +nil+ means that the tree will include all
+        # from.  A value of `nil` means that the tree will include all
         # objects in the collection.
         #
         # @return [String,nil]

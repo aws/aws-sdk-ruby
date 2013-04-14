@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,27 +19,27 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a VPC with the CIDR block you specify. The smallest VPC you 
-      # can create uses a /28 netmask (16 IP addresses), and the largest 
-      # uses a /16 netmask (65,536 IP addresses). 
+      # Creates a VPC with the CIDR block you specify. The smallest VPC you
+      # can create uses a /28 netmask (16 IP addresses), and the largest
+      # uses a /16 netmask (65,536 IP addresses).
       #
-      #   vpc = ec2.vpcs.create('10.0.0.0/16')
+      #     vpc = ec2.vpcs.create('10.0.0.0/16')
       #
-      # @param [String] cidr_block The CIDR block you want the VPC to 
+      # @param [String] cidr_block The CIDR block you want the VPC to
       #   cover (e.g., 10.0.0.0/16).
       #
       # @param [Hash] options
       #
-      # @option options [Boolean] :instance_tenancy (:default) 
-      #   The allowed tenancy of instances launched into the VPC. A value of 
-      #   +:default+ means instances can be launched with any tenancy; a value 
-      #   of +:dedicated+ means all instances launched into the VPC will be launched with 
+      # @option options [Boolean] :instance_tenancy (:default)
+      #   The allowed tenancy of instances launched into the VPC. A value of
+      #   `:default` means instances can be launched with any tenancy; a value
+      #   of `:dedicated` means all instances launched into the VPC will be launched with
       #   dedicated tenancy regardless of the tenancy assigned to the instance at launch.
       #
       # @return [VPC]
       #
       def create cidr_block, options = {}
-        
+
         tenancy = options.key?(:instance_tenancy) ?
           options[:instance_tenancy].to_s : 'default'
 

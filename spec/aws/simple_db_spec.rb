@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   describe SimpleDB do
-    
+
     let(:client) { double('SimpleDB::Client') }
 
     let(:sdb) { SimpleDB.new(:simple_db_client => client) }
@@ -23,7 +23,7 @@ module AWS
     it_behaves_like 'a class that accepts configuration', :simple_db_client
 
     context '#domains' do
-      
+
       it 'returns a domain collection' do
         sdb.domains.should be_a(SimpleDB::DomainCollection)
       end

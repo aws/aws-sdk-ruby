@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -38,33 +38,33 @@ module AWS
       #
       # @param [Symbol, String, Array<String>] attributes The list of attributes
       #   to fetch.  If you want to load *ALL* attributes for the named items,
-      #   then pass the symbol +:all+.
+      #   then pass the symbol `:all`.
       #
-      #     # get all attributes
-      #     batch_get.table('mytable', :all, items)
+      #       # get all attributes
+      #       batch_get.table('mytable', :all, items)
       #
-      #     # get one attribute for each item
-      #     batch_get.table('mytable', ['name'], items)
+      #       # get one attribute for each item
+      #       batch_get.table('mytable', ['name'], items)
       #
-      #     # get a list of attributes for each item
-      #     batch_get.table('mytable', ['name', 'size'], items)
+      #       # get a list of attributes for each item
+      #       batch_get.table('mytable', ['name', 'size'], items)
       #
       # @param [Array<Item,Array>] items One or more items to fetch attributes
       #   for.  Each attribute should be one of the following:
       #
-      #   * an {Item} object
-      #   * a hash key value
-      #   * a hash key value and a range key value
+      #     * an {Item} object
+      #     * a hash key value
+      #     * a hash key value and a range key value
       #
       #   You must provide both the hash key and range key values if the table
       #   schema has both.
       #
-      #     batch_get.table('mytable', :all, [%w(hk1 rk1), %w(hk1 rk2), ...])
+      #       batch_get.table('mytable', :all, [%w(hk1 rk1), %w(hk1 rk2), ...])
       #
       # @param [Hash] options
       #
-      # @option options [Boolean] :consistent_read (false) When +true+, items
-      #   are read from this table with consistent reads.  When +false+, reads
+      # @option options [Boolean] :consistent_read (false) When `true`, items
+      #   are read from this table with consistent reads.  When `false`, reads
       #   are eventually consistent.
       #
       # @return [nil]
@@ -88,8 +88,8 @@ module AWS
           end
         end
 
-        ## ensure we don't receive 2 different lists of attributes for
-        ## the same table
+        # ensure we don't receive 2 different lists of attributes for
+        # the same table
 
         if
           @request_items.has_key?(table) and
@@ -101,7 +101,7 @@ module AWS
           raise ArgumentError, msg
         end
 
-        ## merge attributes and items with the request items
+        # merge attributes and items with the request items
 
         @request_items[table] ||= { :keys => [] }
         @request_items[table][:attributes_to_get] = attributes if attributes
@@ -118,16 +118,16 @@ module AWS
       #
       # @param [Symbol, String, Array<String>] attributes The list of attributes
       #   to fetch.  If you want to load *ALL* attributes for the named items,
-      #   then pass the symbol +:all+.
+      #   then pass the symbol `:all`.
       #
-      #     # get all attributes
-      #     batch_get.table('mytable', :all, items)
+      #       # get all attributes
+      #       batch_get.table('mytable', :all, items)
       #
-      #     # get one attribute for each item
-      #     batch_get.table('mytable', ['name'], items)
+      #       # get one attribute for each item
+      #       batch_get.table('mytable', ['name'], items)
       #
-      #     # get a list of attributes for each item
-      #     batch_get.table('mytable', ['name', 'size'], items)
+      #       # get a list of attributes for each item
+      #       batch_get.table('mytable', ['name', 'size'], items)
       #
       # @param [Item] items One or more {Item} objects to fetch attributes
       #   for.  These items may come from any number of different tables.

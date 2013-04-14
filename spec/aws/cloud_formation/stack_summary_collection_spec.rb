@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -26,7 +26,7 @@ module AWS
       context '#with_status' do
 
         it 'returns a stack collection' do
-          summaries.with_status(:create_in_progress).should 
+          summaries.with_status(:create_in_progress).should
             be_a(StackSummaryCollection)
         end
 
@@ -55,7 +55,7 @@ module AWS
         end
 
         it 'accepts statuses in an array' do
-        
+
           client.should_receive(:list_stacks).
             with(:stack_status_filter => %w(ABC_XYZ MNO)).
             and_return(client.stub_for(:list_stacks))
@@ -65,7 +65,7 @@ module AWS
         end
 
         it 'accepts statuses as a list' do
-        
+
           client.should_receive(:list_stacks).
             with(:stack_status_filter => %w(ABC MNO XYZ)).
             and_return(client.stub_for(:list_stacks))

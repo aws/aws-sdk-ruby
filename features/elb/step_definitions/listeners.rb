@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -43,7 +43,7 @@ end
 
 Given /^I create a load balancer listener with the server certificate$/ do
   sleep(10)
-  # eventual consistency, it takes a while before 
+  # eventual consistency, it takes a while before
   # elb acknowledges the iam server cert
   @listener = @load_balancer.listeners.create(
     :port => 443,
@@ -54,8 +54,8 @@ Given /^I create a load balancer listener with the server certificate$/ do
 end
 
 When /^I set the server certificate on the load balancer listener$/ do
-  sleep(10) 
-  # eventual consistency, it takes a while before 
+  sleep(10)
+  # eventual consistency, it takes a while before
   # elb acknowledges the iam server cert
   @listener.server_certificate = @server_cert.arn
 end
@@ -80,7 +80,7 @@ end
 Then /^the listener on port (\d+) should have no policy$/ do |port|
   @load_balancer.listeners[port].policy.should == nil
 end
-  
+
 Then /^the listener should exist$/ do
   @listener.exists?.should == true
 end

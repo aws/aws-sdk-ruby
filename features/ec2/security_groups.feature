@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ Feature: EC2 Security Groups
     Then The security group should be in the list
 
   Scenario: Delete a security group
-    Given I create a security group 
+    Given I create a security group
     When I delete the security group
     Then The security group should not be in the list
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -53,12 +53,12 @@ After("@ec2") do
   end
 
   @created_vpn_gateways.each do |gateway|
-    gateway.delete  
+    gateway.delete
   end
 
   @created_customer_gateways.each do |gateway|
     begin
-      gateway.delete  
+      gateway.delete
     rescue AWS::EC2::Errors::InvalidCustomerGatewayID::NotFound
       # already deleted
     end
@@ -154,7 +154,7 @@ After("@ec2") do
       sleep(1) until @started_instances.all?{|i| i.status == :terminated }
       # even after all isntances indicate they are terminated,
       # it can take some time before the subnet may be deleted
-      sleep(10) 
+      sleep(10)
     end
 
     @created_subnets.each do |subnet|

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # = Response
+    # # Response
     #
     # Each Service has a Client class.  There is one method per service
     # operation defined on the client.  These methods all return a {Response}
@@ -23,23 +23,23 @@ module AWS
     # In addition to the response data, these responses provide metadata
     # about the HTTP request made and the HTTP response received.
     #
-    # == Response Data
+    # ## Response Data
     #
     # You can access the response data for a client request using the {#data}
     # method or the {#[]} method.  Response data is a hash and {#[]} is
     # a shortcut for accessing this hash.
     #
-    #   # make a request to describe one instance
-    #   ec2 = AWS::EC2.new
-    #   response = ec2.client.describe_instances(:instance_ids => ['i-12345678'])
+    #     # make a request to describe one instance
+    #     ec2 = AWS::EC2.new
+    #     response = ec2.client.describe_instances(:instance_ids => ['i-12345678'])
     #
-    #   # find the instance in the response data (2 ways to get the data)
-    #   instance = response[:reservation_set].first[:instance_set].first
-    #   instance = response.data[:reservation_set].first[:instance_set].first
+    #     # find the instance in the response data (2 ways to get the data)
+    #     instance = response[:reservation_set].first[:instance_set].first
+    #     instance = response.data[:reservation_set].first[:instance_set].first
     #
-    #   instance[:status] #=> 'running'
+    #     instance[:status] #=> 'running'
     #
-    # == Response Metadata
+    # ## Response Metadata
     #
     # In addition to the response data, there is additional information
     # available with the response, including:
@@ -51,10 +51,10 @@ module AWS
     #
     # Given the example and response object from above:
     #
-    #   response.request_type #=> :describe_instances
-    #   response.request_options #=> { :instance_ids => ['i-12345678'] }
-    #   response.http_request #=> #<AWS::Core::Http::Request>
-    #   response.http_response #=> #<AWS::Core::Http::Response>
+    #     response.request_type #=> :describe_instances
+    #     response.request_options #=> { :instance_ids => ['i-12345678'] }
+    #     response.http_request #=> #<AWS::Core::Http::Request>
+    #     response.http_response #=> #<AWS::Core::Http::Response>
     #
     class Response
 
@@ -109,7 +109,7 @@ module AWS
       end
 
       # Provides access to the response data.  This is a short-cut
-      # for calling +response.data[key]+.
+      # for calling `response.data[key]`.
       #
       # @param [Symbol,String] key
       # @return [Hash,nil]
@@ -122,19 +122,7 @@ module AWS
         error.nil?
       end
 
-      # @return [Boolean] Returns true if the http request was throttled
-      #   by AWS.
-      def throttled?
-        if !successful? and http_response.body
-          error = XML::Parser.new.parse(http_response.body)
-          error = error[:error] if error[:error]
-          error[:code] == "Throttling"
-        else
-          false
-        end
-      end
-
-      # @return [Boolean] Returns +true+ if the http request failed due to
+      # @return [Boolean] Returns `true` if the http request failed due to
       #   a networking issue.
       def network_error?
         http_response.network_error?
@@ -166,7 +154,7 @@ module AWS
         @http_request.body_stream.rewind if @http_request.body_stream
       end
 
-      # @return [Boolean] Returns +false+ if it is not safe to retry a
+      # @return [Boolean] Returns `false` if it is not safe to retry a
       #   request.  This happens when the http request body is an IO
       #   object that can not be rewound and re-streamed.
       def safe_to_retry?

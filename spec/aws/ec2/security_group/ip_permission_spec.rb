@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -157,13 +157,13 @@ module AWS
             groups = [sg2, sg3]
             egress = true
 
-            p1 = IpPermission.new(sg1, protocol, port_range, 
+            p1 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips,
               :groups => groups,
               :egress => egress,
               :config => config)
 
-            p2 = IpPermission.new(sg1, protocol, port_range, 
+            p2 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips.reverse,
               :groups => groups.reverse,
               :egress => egress,

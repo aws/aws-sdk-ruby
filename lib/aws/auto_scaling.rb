@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,79 +19,81 @@ module AWS
   # This class is the starting point for working with Auto Scaling.
   #
   # To use Auto Scaling you must first
-  # {sign up here}[http://aws.amazon.com/autoscaling/].
+  # [sign up here](http://aws.amazon.com/autoscaling/).
   #
   # For more information about Auto Scaling:
   #
-  # * {Auto Scaling}[http://aws.amazon.com/autoscaling/]
-  # * {Auto Scaling Documentation}[http://aws.amazon.com/documentation/autoscaling/]
+  # * [Auto Scaling](http://aws.amazon.com/autoscaling/)
+  # * [Auto Scaling Documentation](http://aws.amazon.com/documentation/autoscaling/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # Or you can set them directly on the AWS::AutoSclaing interface:
+  # Or you can set them directly on the AWS::AutoScaling interface:
   #
-  #   auto_scaling = AWS::AutoScaling.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     auto_scaling = AWS::AutoScaling.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Launch Configurations
+  # # Launch Configurations
   #
   # You need to create a launch configuration before you can create
   # an Auto Scaling Group.
   #
-  #   # needs a name, image id, and instance type
-  #   launch_config = auto_scaling.launch_configurations.create(
-  #     'launch-config-name', 'ami-12345', 'm1.small')
+  #     # needs a name, image id, and instance type
+  #     launch_config = auto_scaling.launch_configurations.create(
+  #       'launch-config-name', 'ami-12345', 'm1.small')
   #
   # If you have previously created a launch configuration you can
   # reference using the {LaunchConfigurationCollection}.
   #
-  #   launch_config = auto_scaling.launch_configurations['launch-config-name']
+  #     launch_config = auto_scaling.launch_configurations['launch-config-name']
   #
-  # = Auto Scaling Groups
+  # # Auto Scaling Groups
   #
   # Given a launch configuration, you can now create an Auto Scaling {Group}.
   #
-  #   group = auto_scaling.groups.create('group-name',
-  #     :launch_configuration => launch_config,
-  #     :availability_zones => %w(us-east-1a us-east-1b),
-  #     :min_size => 1,
-  #     :max_size => 4)
+  #     group = auto_scaling.groups.create('group-name',
+  #       :launch_configuration => launch_config,
+  #       :availability_zones => %w(us-west-2a us-west-2b),
+  #       :min_size => 1,
+  #       :max_size => 4)
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level AutoScaling client object
   class AutoScaling
 
-    AWS.register_autoloads(self, 'aws/auto_scaling') do
-      autoload :Activity, 'activity'
-      autoload :ActivityCollection, 'activity_collection'
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Group, 'group'
-      autoload :GroupCollection, 'group_collection'
-      autoload :GroupOptions, 'group_options'
-      autoload :Instance, 'instance'
-      autoload :InstanceCollection, 'instance_collection'
-      autoload :LaunchConfiguration, 'launch_configuration'
-      autoload :LaunchConfigurationCollection, 'launch_configuration_collection'
-      autoload :NotificationConfiguration, 'notification_configuration'
-      autoload :NotificationConfigurationCollection, 'notification_configuration_collection'
-      autoload :Request, 'request'
-      autoload :ScalingPolicy, 'scaling_policy'
-      autoload :ScalingPolicyCollection, 'scaling_policy_collection'
-      autoload :ScalingPolicyOptions, 'scaling_policy_options'
-      autoload :ScheduledAction, 'scheduled_action'
-      autoload :ScheduledActionCollection, 'scheduled_action_collection'
-      autoload :Tag, 'tag'
-      autoload :TagCollection, 'tag_collection'
-    end
+    autoload :Activity, 'aws/auto_scaling/activity'
+    autoload :ActivityCollection, 'aws/auto_scaling/activity_collection'
+    autoload :Client, 'aws/auto_scaling/client'
+    autoload :Errors, 'aws/auto_scaling/errors'
+    autoload :Group, 'aws/auto_scaling/group'
+    autoload :GroupCollection, 'aws/auto_scaling/group_collection'
+    autoload :GroupOptions, 'aws/auto_scaling/group_options'
+    autoload :Instance, 'aws/auto_scaling/instance'
+    autoload :InstanceCollection, 'aws/auto_scaling/instance_collection'
+    autoload :LaunchConfiguration, 'aws/auto_scaling/launch_configuration'
+    autoload :LaunchConfigurationCollection, 'aws/auto_scaling/launch_configuration_collection'
+    autoload :NotificationConfiguration, 'aws/auto_scaling/notification_configuration'
+    autoload :NotificationConfigurationCollection, 'aws/auto_scaling/notification_configuration_collection'
+    autoload :Request, 'aws/auto_scaling/request'
+    autoload :ScalingPolicy, 'aws/auto_scaling/scaling_policy'
+    autoload :ScalingPolicyCollection, 'aws/auto_scaling/scaling_policy_collection'
+    autoload :ScalingPolicyOptions, 'aws/auto_scaling/scaling_policy_options'
+    autoload :ScheduledAction, 'aws/auto_scaling/scheduled_action'
+    autoload :ScheduledActionCollection, 'aws/auto_scaling/scheduled_action_collection'
+    autoload :Tag, 'aws/auto_scaling/tag'
+    autoload :TagCollection, 'aws/auto_scaling/tag_collection'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'autoscaling'
 
     # @return [LaunchConfigurationCollection]
     def launch_configurations
@@ -138,7 +140,7 @@ module AWS
       resp.auto_scaling_notification_types
     end
 
-    # @return [Array<String>] Returns the list of valid adjustmet types.
+    # @return [Array<String>] Returns the list of valid adjustment types.
     def adjustment_types
       client.describe_adjustment_types.adjustment_types.map(&:adjustment_type)
     end

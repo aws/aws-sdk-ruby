@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,7 +14,7 @@
 module AWS
   class EC2
     class ReservedInstancesOfferingCollection < Collection
-      
+
       include TaggedCollection
 
       def member_class
@@ -26,7 +26,7 @@ module AWS
         response.reserved_instances_offerings_set.each do |item|
 
           reserved_instance_offering = ReservedInstancesOffering.new_from(
-            :describe_reserved_instances_offerings, item, 
+            :describe_reserved_instances_offerings, item,
             item.reserved_instances_offering_id, :config => config)
 
           yield(reserved_instance_offering)

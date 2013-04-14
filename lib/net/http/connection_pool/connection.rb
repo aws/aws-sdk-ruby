@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,26 +18,26 @@ class Net::HTTP::ConnectionPool
   # Represents a HTTP connection.  Call {#request} on a connection like
   # you would with a Net::HTTPSession object.
   #
-  # == Getting a Connection object
+  # ## Getting a Connection object
   #
   # To get a connection object, you start with a connection pool:
   #
-  #   pool = Net::HTTP::ConnectionPool.new
-  #   connection = pool.connection_for('domain.com')
+  #     pool = Net::HTTP::ConnectionPool.new
+  #     connection = pool.connection_for('domain.com')
   #
   # {ConnectionPool#connection_for} accepts a number of options to control
   # the connection settings (SSL, proxy, timeouts, etc).
   #
-  # == Making Requests
+  # ## Making Requests
   #
   # Given a connection object, you call #request.  {Connection#request}
-  # yields Net::HTTPResponse objects (when given a block).  You should 
+  # yields Net::HTTPResponse objects (when given a block).  You should
   # read the response (via #body or #read_body) before the end of the
   # block.
   #
-  #   connection.request(Net::HTTP::Get.new('/')) do |resp|
-  #     puts resp.body
-  #   end
+  #     connection.request(Net::HTTP::Get.new('/')) do |resp|
+  #       puts resp.body
+  #     end
   #
   class Connection
 
@@ -51,7 +51,7 @@ class Net::HTTP::ConnectionPool
 
       @port = options.key?(:port) ? options[:port] : (options[:ssl] ? 443 : 80)
 
-      @ssl = options.key?(:ssl) ? options[:ssl] : (port == 443) 
+      @ssl = options.key?(:ssl) ? options[:ssl] : (port == 443)
 
       @ssl_verify_peer = options.key?(:ssl_verify_peer) ?
         options[:ssl_verify_peer] : true
@@ -113,18 +113,18 @@ class Net::HTTP::ConnectionPool
     # @return [Numeric,nil]
     attr_accessor :read_timeout
 
-    # @return [Boolean] Returns +true+ if this connection requires SSL.
+    # @return [Boolean] Returns `true` if this connection requires SSL.
     def ssl?
       @ssl
     end
 
-    # @return [Boolean] Returns +true+ if ssl connections should verify the
+    # @return [Boolean] Returns `true` if ssl connections should verify the
     #   peer certificate.
     def ssl_verify_peer?
       @ssl_verify_peer
     end
 
-    # @return [Boolean] Returns +true+ if this connection proxies requests.
+    # @return [Boolean] Returns `true` if this connection proxies requests.
     def proxy?
       !!proxy_address
     end
@@ -132,34 +132,34 @@ class Net::HTTP::ConnectionPool
     # Makes a single HTTP request.  The Net::HTTPResponse is yielded to the
     # given block.
     #
-    #   pool = Net::HTTP::ConnectionPool.new
-    #   connection = pool.connection_for('www.google.com')
+    #     pool = Net::HTTP::ConnectionPool.new
+    #     connection = pool.connection_for('www.google.com')
     #
-    #   connection.request(Net::HTTP::Get.new('/')) do |response|
-    #     # yeilds a Net::HTTPResponse object
-    #     puts "STATUS CODE: #{response.code}"
-    #     puts "HEADERS: #{response.to_hash.inspect}"
-    #     puts "BODY:\n#{response.body}"
-    #   end
+    #     connection.request(Net::HTTP::Get.new('/')) do |response|
+    #       # yeilds a Net::HTTPResponse object
+    #       puts "STATUS CODE: #{response.code}"
+    #       puts "HEADERS: #{response.to_hash.inspect}"
+    #       puts "BODY:\n#{response.body}"
+    #     end
     #
     # If you want to read the HTTP response body in chunks (useful for
     # large responses you do not want to load into memory), you should
     # pass a block to the #read_body method of the yielded response.
     #
-    #   File.open('output.txt', 'w') do |file|
-    #     connection.request(Net::HTTP::Get.new('/')) do |response|
-    #       response.read_body do |chunk|
-    #         file.write(chunk)
+    #     File.open('output.txt', 'w') do |file|
+    #       connection.request(Net::HTTP::Get.new('/')) do |response|
+    #         response.read_body do |chunk|
+    #           file.write(chunk)
+    #         end
     #       end
     #     end
-    #   end
     #
     # If you omit the block when calling #request, you will not be able
-    # to read the response.  This method never returns the 
+    # to read the response.  This method never returns the
     # Net::HTTPResponse generated.
     #
     # This method passes *args to Net::HTTPSession#request.  See the
-    # Ruby standard lib documentation for more documentation about 
+    # Ruby standard lib documentation for more documentation about
     # accepted arguments.
     #
     # @note You should read the yielded response object before the end

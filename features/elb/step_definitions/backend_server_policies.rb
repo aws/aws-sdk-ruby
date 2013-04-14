@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -49,10 +49,10 @@ o50MymfqtoVcebZcXbiDVAXW1cPEHKLBXecX6/LZ+GOzEsUOxgt7Xs9uabqp
   KEY
 
   public_key_policy = @load_balancer.policies.create("pkp-for-#{name}",
-    'PublicKeyPolicyType', 'PublicKey' => public_key.strip)  
+    'PublicKeyPolicyType', 'PublicKey' => public_key.strip)
 
-  @backend_policy = @load_balancer.policies.create(name, 
-    'BackendServerAuthenticationPolicyType', 
+  @backend_policy = @load_balancer.policies.create(name,
+    'BackendServerAuthenticationPolicyType',
     'PublicKeyPolicyName' => public_key_policy.name)
 
 end
@@ -70,7 +70,7 @@ When /^I add the following backend server policies to port (\d+):$/ do |port, ta
 end
 
 Then /^the load balancer should have the following backend server policies on port (\d+):$/ do |arg1, table|
-  
+
   policy_names = []
   table.hashes.each do |hash|
     policy_names << hash["NAME"]

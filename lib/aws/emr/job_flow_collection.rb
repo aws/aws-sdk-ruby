@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,36 +17,36 @@ require 'time'
 module AWS
   class EMR
 
-    # = Creating a Job Flow
+    # # Creating a Job Flow
     #
     # Call {#create} to run a new job flow.
     #
-    #   emr = AWS::EMR.new
+    #     emr = AWS::EMR.new
     #
-    #   job_flow = emr.job_flows.create('name',
-    #     :instances => {
-    #       :instance_count => 2,
-    #       :master_instance_type => 'm1.small',
-    #       :slave_instance_type => 'm1.small',
-    #     }
-    #   )
+    #     job_flow = emr.job_flows.create('name',
+    #       :instances => {
+    #         :instance_count => 2,
+    #         :master_instance_type => 'm1.small',
+    #         :slave_instance_type => 'm1.small',
+    #       }
+    #     )
     #
-    # = Getting a Job Flow
+    # # Getting a Job Flow
     #
     # You can get a job flow by its ID.
     #
-    #   job_flow = emr.job_flows['j-123456678'] # makes no request
-    #   job_flow.exists? #=> true/false
+    #     job_flow = emr.job_flows['j-123456678'] # makes no request
+    #     job_flow.exists? #=> true/false
     #
-    # = Enumerating Job Flows
+    # # Enumerating Job Flows
     #
     # You can enumerate all job flows, or filter them.
     #
-    #   # all job flows
-    #   job_flows.each {|job_flow| ... }
+    #     # all job flows
+    #     job_flows.each {|job_flow| ... }
     #
-    #   # only job flows with a particular state
-    #   job_flows.with_state('ENDED').each {|job_flow| ... }
+    #     # only job flows with a particular state
+    #     job_flows.with_state('ENDED').each {|job_flow| ... }
     #
     # The filtering methods include:
     #
@@ -73,13 +73,13 @@ module AWS
 
       # Runs a job flow.
       #
-      #   job_flow = emr.job_flows.create('name',
-      #     :instances => {
-      #       :instance_count => 2,
-      #       :master_instance_type => 'm1.small',
-      #       :slave_instance_type => 'm1.small',
-      #     }
-      #   )
+      #     job_flow = emr.job_flows.create('name',
+      #       :instances => {
+      #         :instance_count => 2,
+      #         :master_instance_type => 'm1.small',
+      #         :slave_instance_type => 'm1.small',
+      #       }
+      #     )
       #
       # See {Client#run_job_flow} for documentation on the complete
       # list of accepted options.
@@ -103,9 +103,9 @@ module AWS
       # Returns a new collection that will only enumerate job flows that have
       # one of the given ids.
       #
-      #   emr.job_flows.with_id('id1', 'id2', 'id3').each do |job_flow|
-      #     # ...
-      #   end
+      #     emr.job_flows.with_id('id1', 'id2', 'id3').each do |job_flow|
+      #       # ...
+      #     end
       #
       # @param [String] ids One or more job flow ids to use as a filter.
       # @return [JobFlowCollection]
@@ -116,9 +116,9 @@ module AWS
       # Returns a new collection that will only enumerate job flows that have
       # one of the given job flow states.
       #
-      #   emr.job_flows.with_state('SHUTTING_DOWN', 'TERMINATED').each do |job|
-      #     # ...
-      #   end
+      #     emr.job_flows.with_state('SHUTTING_DOWN', 'TERMINATED').each do |job|
+      #       # ...
+      #     end
       #
       # @param [String] states One or more job flow states to use as a filter.
       # @return [JobFlowCollection]
@@ -129,8 +129,8 @@ module AWS
       # Returns a new collection that will only enumerate job flows that
       # were created before the given time.
       #
-      #   # enumerate jobs that are more than an hour old
-      #   emr.job_flows.created_before(Time.now - 3600).each{|job| ... }
+      #     # enumerate jobs that are more than an hour old
+      #     emr.job_flows.created_before(Time.now - 3600).each{|job| ... }
       #
       # @param [Time,DateTime,Date] time
       # @return [JobFlowCollection]
@@ -142,8 +142,8 @@ module AWS
       # Returns a new collection that will only enumerate job flows that
       # were created after the given time.
       #
-      #   # enumerate jobs that are at most 1 hour old
-      #   emr.job_flows.created_after(Time.now - 3600).each{|job| ... }
+      #     # enumerate jobs that are at most 1 hour old
+      #     emr.job_flows.created_after(Time.now - 3600).each{|job| ... }
       #
       # @param [Time,DateTime,Date] time
       # @return [JobFlowCollection]

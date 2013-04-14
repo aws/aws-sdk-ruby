@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -102,7 +102,7 @@ module AWS::Core
           r.port = 4000
           r.port.should == 4000
         end
-        
+
       end
 
       context '#uri' do
@@ -120,18 +120,18 @@ module AWS::Core
       end
 
       context '#path' do
-        
+
         it 'defaults to /' do
           Request.new.path.should == '/'
         end
-        
+
         it 'is a read-only attribute' do
           r = Request.new
           lambda {
             r.path = '/abc'
           }.should raise_error(NoMethodError)
         end
-        
+
         it 'is mutable via #url=' do
           r = Request.new
           r.uri = '/abc?mno=xyz'
@@ -141,18 +141,18 @@ module AWS::Core
       end
 
       context '#querystring' do
-        
+
         it 'defaults to nil' do
           Request.new.querystring.should == nil
         end
-        
+
         it 'is a read-only attribute' do
           r = Request.new
           lambda {
             r.querystring = 'foo=bar'
           }.should raise_error(NoMethodError)
         end
-        
+
         it 'is mutable via #url=' do
           r = Request.new
           r.uri = '/abc?mno=xyz&123=456'

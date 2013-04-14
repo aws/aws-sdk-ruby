@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,7 @@
 
 When /^I create an auto scaling policy$/ do
   @policy_name = "ruby-integration-test-#{Time.now.to_i}"
-  @scaling_policy = @auto_scaling_group.scaling_policies.create(@policy_name, 
+  @scaling_policy = @auto_scaling_group.scaling_policies.create(@policy_name,
     :adjustment_type => 'ExactCapacity',
     :scaling_adjustment => 1)
 end
@@ -46,7 +46,7 @@ Given /^I create a scaling policy with the following options:$/ do |table|
     options[hash['OPT'].to_sym] = value
   end
   @policy_name = "ruby-integration-test-#{Time.now.to_i}"
-  @scaling_policy = @auto_scaling_group.scaling_policies.create(@policy_name, 
+  @scaling_policy = @auto_scaling_group.scaling_policies.create(@policy_name,
     options)
 end
 

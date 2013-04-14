@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -26,6 +26,11 @@ Feature: CloudFront Client
     | code               | message                                    |
     | NoSuchDistribution | The specified distribution does not exist. |
 
+  @sts
+  Scenario: Working with session credentials
+    When I ask for temporary security credentials
+    Then I should be able to list distributions with session credentials
+
   # This test ensures the request payload is properly serialized.  If it is
   # not, then we do not get the NoSuchOrigin error.
   Scenario: Making a request for an operation with a request payload
@@ -33,4 +38,3 @@ Feature: CloudFront Client
     Then I should receive an error with:
     | code         | message                                   |
     | NoSuchOrigin | One or more of your origins do not exist. |
-

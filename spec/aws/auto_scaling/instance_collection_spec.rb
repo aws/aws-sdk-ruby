@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,8 +22,8 @@ module AWS
 
       let(:client) { config.auto_scaling_client }
 
-      let(:launch_configurations) { 
-        LaunchConfigurationCollection.new(:config => config) 
+      let(:launch_configurations) {
+        LaunchConfigurationCollection.new(:config => config)
       }
 
       context '#create' do
@@ -61,7 +61,7 @@ module AWS
               },
               {
                 :device_name => '/dev/sda1',
-                :ebs => { 
+                :ebs => {
                   :snapshot_id => 'snap-id',
                   :volume_size => 10,
                 },
@@ -83,7 +83,7 @@ module AWS
               },
               {
                 :device_name => '/dev/sda1',
-                :ebs => { 
+                :ebs => {
                   :snapshot_id => 'snap-id',
                   :volume_size => 10,
                 },
@@ -108,7 +108,7 @@ module AWS
           client.should_receive(:create_launch_configuration).
             with(hash_including(:security_groups => groups.map(&:id)))
 
-          launch_configurations.create('name', 'image', 'type', 
+          launch_configurations.create('name', 'image', 'type',
             :security_groups => groups)
 
         end
@@ -120,7 +120,7 @@ module AWS
           client.should_receive(:create_launch_configuration).
             with(hash_including(:key_name => key_pair.name))
 
-          launch_configurations.create('name', 'image', 'type', 
+          launch_configurations.create('name', 'image', 'type',
             :key_pair => key_pair)
 
         end

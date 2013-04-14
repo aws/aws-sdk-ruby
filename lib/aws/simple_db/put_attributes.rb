@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -27,9 +27,9 @@ module AWS
         attribute_hashes = []
         attributes.each_pair do |attribute_name,values|
           [values].flatten.each do |value|
-            attribute_hashes << { 
-              :name => attribute_name.to_s, 
-              :value => value.to_s, 
+            attribute_hashes << {
+              :name => attribute_name.to_s,
+              :value => value.to_s,
               :replace => replace,
             } unless [:if, :unless].include?(attribute_name)
           end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -41,6 +41,16 @@ Feature: Working with Buckets
     | http  | verb      | PUT                        |
     | http  | host      | s3.amazonaws.com           |
     | http  | uri_match | /ruby_integration_test_\d+ |
+
+  @create_bucket
+  Scenario: Mixed case bucket name
+    When I ask the client to create a bucket named "miXedCase"
+    Then the bucket should exist
+    Then a request should have been made like:
+    | TYPE  | NAME      | VALUE                      |
+    | http  | verb      | PUT                        |
+    | http  | host      | s3.amazonaws.com           |
+    | http  | uri_match | /miXedCase |
 
   @create_bucket @endpoint
   Scenario: Create a bucket in a different region

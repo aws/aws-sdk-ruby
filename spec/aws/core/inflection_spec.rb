@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -50,6 +50,13 @@ module AWS::Core
 
       it 'inflects acroynms with numbers' do
         Inflection.ruby_name('EC2').should == 'ec2'
+      end
+
+      it 'treats trailing numbers as part of the word' do
+        pending do
+          Inflection.ruby_name('Ec2').should eq('ec2')
+          Inflection.ruby_name('ABC123').should eq('abc123')
+        end
       end
 
       it 'inflects SentLast24Hours to sent_last_24_hours' do

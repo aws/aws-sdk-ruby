@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,20 +19,20 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a new virtual private gateway. A virtual private gateway is 
-      # the VPC-side endpoint for your VPN connection. You can create a 
+      # Creates a new virtual private gateway. A virtual private gateway is
+      # the VPC-side endpoint for your VPN connection. You can create a
       # virtual private gateway before creating the VPC itself.
       #
       # @param [Hash] options
       #
-      # @option options [String] :vpn_type ('ipsec.1') The type of VPN 
+      # @option options [String] :vpn_type ('ipsec.1') The type of VPN
       #   connection this virtual private gateway supports.
       #
       # @option options [AvailabilityZone,String] :availability_zone
       #   The Availability Zone where you want the virtual private gateway.
       #   AWS can select a default zone for you.  This can be an
       #   {AvailabilityZone} object or availability zone name string.
-      #   
+      #
       # @return [VPNGateway]
       #
       def create options = {}
@@ -64,7 +64,7 @@ module AWS
         response = filtered_request(:describe_vpn_gateways, options, &block)
         response.vpn_gateway_set.each do |g|
 
-          gateway = VPNGateway.new_from(:describe_vpn_gateways, g, 
+          gateway = VPNGateway.new_from(:describe_vpn_gateways, g,
             g.vpn_gateway_id, :config => config)
 
           yield(gateway)

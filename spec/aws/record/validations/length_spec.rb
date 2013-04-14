@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,8 +23,8 @@ module AWS
 
           let(:validation_macro) { :validates_length_of }
 
-          let(:opts) { { :minimum => 1 } }
-          
+          let(:opts) { { :minimum => 2 } }
+
           let(:message_opt) { :too_short }
 
           it 'calls length on the value if it responds to length' do
@@ -81,12 +81,12 @@ module AWS
               klass.validates_length_of :value, :exactly => 3
               obj.value = 'ab'
               obj.valid?
-              obj.errors[:value].should == 
+              obj.errors[:value].should ==
                 ['is the wrong length (should be 3 characters)']
             end
 
             it 'raises an error when :exactly is not an integer' do
-              lambda { 
+              lambda {
                 klass.validates_length_of :value, :exactly => 'abc'
               }.should raise_error(ArgumentError)
             end
@@ -114,7 +114,7 @@ module AWS
               klass.validates_length_of :value, :within => 2..4
               obj.value = 'a'
               obj.valid?
-              obj.errors[:value].should == 
+              obj.errors[:value].should ==
                 ['is too short (minimum is 2 characters)']
             end
 
@@ -123,12 +123,12 @@ module AWS
               klass.validates_length_of :value, :within => 2..4
               obj.value = 'abcde'
               obj.valid?
-              obj.errors[:value].should == 
+              obj.errors[:value].should ==
                 ['is too long (maximum is 4 characters)']
             end
 
             it 'raises an error when :within is not a range' do
-              lambda { 
+              lambda {
                 klass.validates_length_of :value, :within => 4
               }.should raise_error(ArgumentError)
             end
@@ -163,12 +163,12 @@ module AWS
               klass.validates_length_of :value, :minimum => 2
               obj.value = 'a'
               obj.valid?
-              obj.errors[:value].should == 
+              obj.errors[:value].should ==
                 ['is too short (minimum is 2 characters)']
             end
 
             it 'raises an error when :minimum is not an integer' do
-              lambda { 
+              lambda {
                 klass.validates_length_of :value, :minimum => 'abc'
               }.should raise_error(ArgumentError)
             end
@@ -203,12 +203,12 @@ module AWS
               klass.validates_length_of :value, :maximum => 3
               obj.value = 'abcd'
               obj.valid?
-              obj.errors[:value].should == 
+              obj.errors[:value].should ==
                 ['is too long (maximum is 3 characters)']
             end
 
             it 'raises an error when :maximum is not an integer' do
-              lambda { 
+              lambda {
                 klass.validates_length_of :value, :maximum => 'abc'
               }.should raise_error(ArgumentError)
             end
@@ -238,7 +238,7 @@ module AWS
               obj.valid?
               obj.errors[:value].should == ['is too short, min is 2, got 1']
             end
-            
+
           end
 
           context ':wrong_length' do
@@ -255,7 +255,7 @@ module AWS
           end
 
           context 'multi-valued attributes' do
-            
+
             it 'validates all values' do
               klass.string_attr :tags, :set => true
               klass.validates_length_of :tags, :maximum => 5

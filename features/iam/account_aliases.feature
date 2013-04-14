@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -53,7 +53,7 @@ Feature: IAM Account Aliases
     | TYPE        | NAME         | VALUE                  |
     | param       | Action       | CreateAccountAlias     |
     | param_match | AccountAlias | rubyintegrationtest\d+ |
-    
+
 
   @collection @delete
   Scenario: Delete an account alias
@@ -65,7 +65,7 @@ Feature: IAM Account Aliases
     | param_match | AccountAlias | rubyintegrationtest\d+ |
 
   @collection @list
-  Scenario: Paging account aliases 
+  Scenario: Paging account aliases
     Given I create 4 account aliases
     When I list account aliases with a limit of 4 and batch_size of 2
     Then 1 request should have been made like:

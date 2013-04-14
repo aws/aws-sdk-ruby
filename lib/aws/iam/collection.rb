@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
 # the License is located at
@@ -46,7 +46,7 @@ module AWS
 
         protected
         def _each_item marker, max_items, options = {}, &block
-            
+
           prefix = options.delete(:prefix) || self.prefix
 
           options[:path_prefix] = "/#{prefix}".sub(%r{^//}, "/") if prefix

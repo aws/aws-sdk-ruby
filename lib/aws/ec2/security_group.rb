@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,12 +29,10 @@ module AWS
     #
     class SecurityGroup < Resource
 
-      AWS.register_autoloads(self, 'aws/ec2/security_group') do
-        autoload :IpPermission,                  'ip_permission'
-        autoload :IpPermissionCollection,        'ip_permission_collection'
-        autoload :IngressIpPermissionCollection, 'ip_permission_collection'
-        autoload :EgressIpPermissionCollection,  'ip_permission_collection'
-      end
+      autoload :IpPermission, 'aws/ec2/security_group/ip_permission'
+      autoload :IpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
+      autoload :IngressIpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
+      autoload :EgressIpPermissionCollection, 'aws/ec2/security_group/ip_permission_collection'
 
       include TaggedItem
 
@@ -64,6 +62,17 @@ module AWS
 
       populates_from(:describe_security_groups) do |resp|
         resp[:security_group_index][id]
+      end
+
+      # @return [InstanceCollection] Returns an instance collection that will
+      #   only enumerate instances in this security group.
+      def instances
+        instances = InstanceCollection.new(:config => config)
+        if vpc?
+          instances.filter('instance.group-id', [group_id])
+        else
+          instances.filter('group-id', [group_id])
+        end
       end
 
       # @return [Boolean] True if the security group exists.
@@ -144,14 +153,14 @@ module AWS
       # This example grants the whole internet (0.0.0.0/0) access to port 80
       # over TCP (HTTP web traffic).
       #
-      #   security_group.authorize_ingress(:tcp, 80)
+      #     security_group.authorize_ingress(:tcp, 80)
       #
       # You can specify port ranges as well:
       #
-      #   # ftp
-      #   security_group.authorize_ingress(:tcp, 20..21)
+      #     # ftp
+      #     security_group.authorize_ingress(:tcp, 20..21)
       #
-      # == Sources
+      # ## Sources
       #
       # Security groups accept ingress trafic from:
       #
@@ -159,60 +168,60 @@ module AWS
       # * security groups
       # * load balancers
       #
-      # === Ip Addresses
+      # ### Ip Addresses
       #
       # In the following example allow incoming SSH from a list of
       # IP address ranges.
       #
-      #   security_group.authorize_ingress(:tcp, 22,
-      #     '111.111.111.111/0', '222.222.222.222/0')
+      #     security_group.authorize_ingress(:tcp, 22,
+      #       '111.111.111.111/0', '222.222.222.222/0')
       #
-      # === Security Groups
+      # ### Security Groups
       #
       # To autohrize ingress traffic from all EC2 instance in another
       # security group, just pass the security group:
       #
-      #   web = security_groups.create('webservers')
-      #   db = security_groups.create('database')
-      #   db.authorize_ingress(:tcp, 3306, web)
+      #     web = security_groups.create('webservers')
+      #     db = security_groups.create('database')
+      #     db.authorize_ingress(:tcp, 3306, web)
       #
       # You can also pass a hash of security group details instead of
       # a {SecurityGroup} object.
       #
-      #   # by security group name
-      #   sg.authorize_ingress(:tcp, 80, { :group_name => 'other-group' })
+      #     # by security group name
+      #     sg.authorize_ingress(:tcp, 80, { :group_name => 'other-group' })
       #
-      #   # by security group id
-      #   sg.authorize_ingress(:tcp, 80, { :group_id => 'sg-1234567' })
+      #     # by security group id
+      #     sg.authorize_ingress(:tcp, 80, { :group_id => 'sg-1234567' })
       #
       # If the security group belongs to a different account, just make
       # sure it has the correct owner ID populated:
       #
-      #   not_my_sg = SecurityGroup.new('sg-1234567', :owner_id => 'abcxyz123')
-      #   my_sg.authorize_ingress(:tcp, 80, not_my_sg)
+      #     not_my_sg = SecurityGroup.new('sg-1234567', :owner_id => 'abcxyz123')
+      #     my_sg.authorize_ingress(:tcp, 80, not_my_sg)
       #
-      # You can do the same with a hash as well (with either +:group_id+
-      # or +:group_name+):
+      # You can do the same with a hash as well (with either `:group_id`
+      # or `:group_name`):
       #
-      #   sg.authorize_ingress(:tcp, 21..22, { :group_id => 'sg-id', :user_id => 'abcxyz123' })
+      #     sg.authorize_ingress(:tcp, 21..22, { :group_id => 'sg-id', :user_id => 'abcxyz123' })
       #
-      # === Load Balancers
+      # ### Load Balancers
       #
       # If you use ELB to manage load balancers, then you need to add
       # ingress permissions to the security groups they route traffic into.
       # You can do this by passing the {ELB::LoadBalancer} into
       # authorize_ingress:
       #
-      #   load_balancer = AWS::ELB.new.load_balancers['web-load-balancer']
+      #     load_balancer = AWS::ELB.new.load_balancers['web-load-balancer']
       #
-      #   sg.authorize_ingress(:tcp, 80, load_balancer)
+      #     sg.authorize_ingress(:tcp, 80, load_balancer)
       #
-      # === Multiple Sources
+      # ### Multiple Sources
       #
       # You can provide multiple sources each time you call authorize
       # ingress, and you can mix and match the source types:
       #
-      #   sg.authorize_ingress(:tcp, 80, other_sg, '1.2.3.4/0', load_balancer)
+      #     sg.authorize_ingress(:tcp, 80, other_sg, '1.2.3.4/0', load_balancer)
       #
       # @param [String, Symbol] protocol Should be :tcp, :udp or :icmp
       #   or the string equivalent.
@@ -225,10 +234,10 @@ module AWS
       #   security groups, or load balancers.  Security groups
       #   can be specified as hashes.
       #
-      #   A security group hash must provide either +:group_id+ or
-      #   +:group_name+ for the security group.  If the security group
+      #   A security group hash must provide either `:group_id` or
+      #   `:group_name` for the security group.  If the security group
       #   does not belong to you aws account then you must also
-      #   provide +:user_id+ (which can be an AWS account ID or alias).
+      #   provide `:user_id` (which can be an AWS account ID or alias).
       #
       # @return [nil]
       #
@@ -258,12 +267,12 @@ module AWS
 
       # Authorize egress (outbound) traffic for a VPC security group.
       #
-      #   # allow traffic for all protocols/ports from the given sources
-      #   security_group.authorize_egress('10.0.0.0/16', '10.0.0.1/16')
+      #     # allow traffic for all protocols/ports from the given sources
+      #     security_group.authorize_egress('10.0.0.0/16', '10.0.0.1/16')
       #
-      #   # allow tcp traffic outband via port 80
-      #   security_group.authorize_egress('10.0.0.0/16',
-      #     :protocol => :tcp, :ports => 80..80)
+      #     # allow tcp traffic outband via port 80
+      #     security_group.authorize_egress('10.0.0.0/16',
+      #       :protocol => :tcp, :ports => 80..80)
       #
       # @note Calling this method on a non-VPC security group raises an error.
       #
@@ -277,7 +286,7 @@ module AWS
       #
       #   @option options [Symbol] :protocol (:any) The protocol name or number
       #     to authorize egress traffic for.  For a complete list of protocols
-      #     see: {http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml}
+      #     see: [protocol-numbers.xml](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml)
       #
       #   @option options [Range<Integer>,Integer] :ports (nil) An optional
       #     port or range of ports.  This option is required depending on
@@ -348,8 +357,12 @@ module AWS
 
         opts = {}
         opts[:ip_protocol] = protocol == :any ? '-1' : protocol.to_s.downcase
-        opts[:from_port] = Array(ports).first.to_i
-        opts[:to_port] = Array(ports).last.to_i
+
+        unless ports.is_a?(Range)
+          ports = Array(ports)
+        end
+        opts[:from_port] = ports.first.to_i
+        opts[:to_port] = ports.last.to_i
 
         ips, groups = parse_sources(sources)
 
@@ -371,7 +384,7 @@ module AWS
             # hashes at the end of egress methods could be a hash intedned
             # to be a source, like:
             #
-            #   { :group_id => ..., :user_id => ... }
+            #     { :group_id => ..., :user_id => ... }
             #
             options = args.pop
           else
@@ -384,8 +397,14 @@ module AWS
             '-1' : options[:protocol].to_s.downcase
 
           if options[:ports]
-            opts[:from_port] = Array(options[:ports]).first.to_i
-            opts[:to_port] = Array(options[:ports]).last.to_i
+            if options[:ports].is_a?(Range)
+              ports = options[:ports]
+            else
+              ports = Array(options[:ports])
+            end
+
+            opts[:from_port] = ports.first.to_i
+            opts[:to_port] = ports.last.to_i
           end
 
           ips, groups = parse_sources(args)

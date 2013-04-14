@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -27,7 +27,7 @@ Feature: Bucket as tree
     | photos/2009/friends.jpg |
     | photos/2010/family.jpg  |
     | README                  |
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then I should receive leaf nodes with the following keys:
     | key     |
     | README  |
@@ -47,7 +47,7 @@ Feature: Bucket as tree
     | photos-2010-family.jpg  |
     | README                  |
     And I use "-" as the delimiter
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then I should receive leaf nodes with the following keys:
     | key     |
     | README  |
@@ -67,7 +67,7 @@ Feature: Bucket as tree
     | photos/2010/family.jpg  |
     | README                  |
     And I use "photos/" as the prefix
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then I should receive branch nodes with the following prefixes:
     | prefix       |
     | photos/2009/ |
@@ -84,7 +84,7 @@ Feature: Bucket as tree
     | photos/2010/family.jpg  |
     | README                  |
     And I use "photos" as the prefix
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then I should receive branch nodes with the following prefixes:
     | prefix       |
     | photos/2009/ |
@@ -98,7 +98,7 @@ Feature: Bucket as tree
     | abc/xyz |
     And I use "abc" as the prefix
     And I choose to not append the delimiter
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then I should receive branch nodes with the following prefixes:
     | prefix  |
     | abc/    |
@@ -114,7 +114,7 @@ Feature: Bucket as tree
     | photos/2010/family.jpg  |
     | README                  |
     And I use "photos/" as the prefix
-    When I access the bucket as a tree 
+    When I access the bucket as a tree
     Then the branch prefixed "photos/2009/" should have leaves with keys:
     | key                     |
     | photos/2009/family.jpg  |

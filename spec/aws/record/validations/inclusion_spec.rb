@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -118,7 +118,7 @@ module AWS
           end
 
           context 'multi-valued attributes' do
-            
+
             it 'validates all values' do
               klass.string_attr :tags, :set => true
               klass.validates_inclusion_of :tags, :in => %w(abc xyz)

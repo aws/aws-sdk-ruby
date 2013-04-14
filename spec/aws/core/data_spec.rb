@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -123,7 +123,7 @@ module AWS::Core
           lambda {
             # last index is 1 in 2nd array, 2 is out of bounds
             data.nested.arrays[1]['key']
-          }.should raise_error(TypeError, /can't convert String into Integer/)
+          }.should raise_error(TypeError, /String into Integer/)
         end
 
         it 'lets you know when you treat an array like a hash via method missing' do

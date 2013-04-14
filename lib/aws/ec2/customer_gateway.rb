@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,16 +14,16 @@
 module AWS
   class EC2
 
-    # @attr_reader [Symbol] state Returns the gateway state (e.g. 
+    # @attr_reader [Symbol] state Returns the gateway state (e.g.
     #   :pending, :available, :deleting, :deleted)
     #
-    # @attr_reader [String] type The type of VPN connection the customer 
+    # @attr_reader [String] type The type of VPN connection the customer
     #   gateway supports (e.g. 'ipsec.1').
     #
-    # @attr_reader [String] ip_address The Internet-routable IP address of 
+    # @attr_reader [String] ip_address The Internet-routable IP address of
     #   the customer gateway's outside interface.
     #
-    # @attr_reader [Integer] bgp_asn The customer gateway's Border Gateway 
+    # @attr_reader [Integer] bgp_asn The customer gateway's Border Gateway
     #   Protocol (BGP) Autonomous System Number (ASN).
     #
     class CustomerGateway < Resource
@@ -40,7 +40,7 @@ module AWS
       attr_reader :customer_gateway_id
 
       alias_method :id, :customer_gateway_id
-    
+
       attribute :state, :to_sym => true
 
       attribute :vpn_type, :static => true
@@ -54,7 +54,7 @@ module AWS
       end
 
       populates_from(:describe_customer_gateways) do |resp|
-        resp.customer_gateway_set.find do |gateway| 
+        resp.customer_gateway_set.find do |gateway|
           gateway.customer_gateway_id == customer_gateway_id
         end
       end

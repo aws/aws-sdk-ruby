@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -21,57 +21,61 @@ module AWS
   # MapReduce.
   #
   # To use Amazon Elastic MapReduce you must first
-  # {sign up here}[http://aws.amazon.com/elasticmapreduce/]
+  # [sign up here](http://aws.amazon.com/elasticmapreduce/)
   #
   # For more information about Amazon Elastic MapReduce, see:
   #
-  # * {Amazon Elastic MapReduce}[http://aws.amazon.com/elasticmapreduce/]
-  # * {Amazon Elastic MapReduce Documentation}[http://aws.amazon.com/documentation/elasticmapreduce/]
+  # * [Amazon Elastic MapReduce](http://aws.amazon.com/elasticmapreduce/)
+  # * [Amazon Elastic MapReduce Documentation](http://aws.amazon.com/documentation/elasticmapreduce/)
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the EMR interface:
   #
-  #   emr = AWS::EMR.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     emr = AWS::EMR.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Job Flows
+  # # Job Flows
   #
   # The {#job_flows} method returns a collection you use to interact
   # with your job flows.
   #
-  #   # creating a job flow
-  #   job_flow = emr.job_flows.create(...)
+  #     emr = AWS::EMR.new
   #
-  #   # enumerating job flows
-  #   emr.job_flows.each do |job_flow|
-  #     puts job_flow.id
-  #   end
+  #     # creating a job flow
+  #     job_flow = emr.job_flows.create(...)
+  #
+  #     # enumerating job flows
+  #     emr.job_flows.each do |job_flow|
+  #       puts job_flow.id
+  #     end
   #
   # See {JobFlowCollection} and {JobFlow} for more information on working
   # with job flows.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level EMR client object
   class EMR
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :InstanceGroup, 'instance_group'
-      autoload :InstanceGroupCollection, 'instance_group_collection'
-      autoload :JobFlow, 'job_flow'
-      autoload :JobFlowCollection, 'job_flow_collection'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/emr/client'
+    autoload :Errors, 'aws/emr/errors'
+    autoload :InstanceGroup, 'aws/emr/instance_group'
+    autoload :InstanceGroupCollection, 'aws/emr/instance_group_collection'
+    autoload :JobFlow, 'aws/emr/job_flow'
+    autoload :JobFlowCollection, 'aws/emr/job_flow_collection'
+    autoload :Request, 'aws/emr/request'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'elasticmapreduce'
 
     # @return [JobFlowCollection] Returns a collection that represents all
     #   job flows.

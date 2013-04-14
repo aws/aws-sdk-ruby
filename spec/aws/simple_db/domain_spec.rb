@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -46,12 +46,12 @@ module AWS
       end
 
       context '#empty' do
-        
+
         it 'returns true if there are no items in the domain' do
           domain.stub_chain(:metadata, :item_count).and_return(0)
           domain.empty?.should == true
         end
-        
+
         it 'returns false if there are more than 1 items in the domain' do
           domain.stub_chain(:metadata, :item_count).and_return(1)
           domain.empty?.should == false
@@ -113,17 +113,17 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         it 'should call domain_metadata to check' do
           client.should_receive(:domain_metadata)
           domain.exists?
         end
-        
+
         it 'should return true if no response is raised by domain_metadata' do
           client.stub(:domain_metadata)
           domain.exists?.should == true
         end
-        
+
         it 'should return false if domain_metadata raises a client error' do
           resp = double('http-resposne',
                         :body => 'error',
@@ -131,7 +131,7 @@ module AWS
           client.stub(:domain_metadata).and_raise(Errors::NoSuchDomain.new('a', resp))
           domain.exists?.should == false
         end
-        
+
         it 'should not trap standard errors' do
           client.stub(:domain_metadata).and_raise(StandardError.new('foo'))
           lambda { domain.exists?  }.should raise_error(StandardError, /foo/)
@@ -139,12 +139,12 @@ module AWS
 
       end
 
-      context '#metadata' do 
-        
+      context '#metadata' do
+
         it 'should return a metadata object' do
           domain.metadata.should be_a(DomainMetadata)
         end
-        
+
         it 'should return a metadata object with the correct domain' do
           domain.metadata.domain == domain
         end

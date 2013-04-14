@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -12,13 +12,13 @@
 # language governing permissions and limitations under the License.
 
 Given /^ my account has a versioned bucket in it$/ do
-  Given "I call create_bucket"  
-  And "I enable versioning for the bucket"
+  step "I call create_bucket"
+  step "I enable versioning for the bucket"
 end
 
 When /^I call set_bucket_versioning with "([^\"]*)"$/ do |state|
   @s3_client.set_bucket_versioning(
-    :bucket_name => @bucket_name, 
+    :bucket_name => @bucket_name,
     :state => state.to_sym)
 end
 

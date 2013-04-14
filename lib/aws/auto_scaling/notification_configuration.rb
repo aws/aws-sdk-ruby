@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -40,8 +40,8 @@ module AWS
 
       # Updates the notification configuration with a new list of types:
       #
-      #   config = auto_scaling_group.notification_configurations.first
-      #   config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
+      #     config = auto_scaling_group.notification_configurations.first
+      #     config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
       #
       # @return [nil]
       #

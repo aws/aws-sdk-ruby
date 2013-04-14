@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -27,11 +27,11 @@ module AWS
       before(:each) do
         resp.body = 'http response body'
       end
-      
+
       it 'should be a standard error' do
         error.should be_a_kind_of(StandardError)
       end
-      
+
       it 'should be an aws service error' do
         error.should be_a_kind_of(Errors::Base)
       end
@@ -51,19 +51,19 @@ module AWS
     end
 
     describe Base do
-      
+
       it_should_behave_like "an aws error"
 
     end
 
     describe ServerError do
-      
+
       it_should_behave_like "an aws error"
 
     end
 
     describe ClientError do
-      
+
       it_should_behave_like "an aws error"
 
     end

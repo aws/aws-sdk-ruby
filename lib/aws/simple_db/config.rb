@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,13 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SimpleDB', 'simple_db', 'sdb.amazonaws.com'
+  add_service 'SimpleDB', 'simple_db' do |region|
+    if region == 'us-east-1'
+      'sdb.amazonaws.com'
+    else
+      'sdb.%s.amazonaws.com' % region
+    end
+  end
 
   add_option :simple_db_consistent_reads, false, :boolean => true
 

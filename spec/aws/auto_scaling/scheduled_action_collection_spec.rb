@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -57,7 +57,7 @@ module AWS
           action = actions.create('name', :group => group)
           action.group.should == group
         end
-        
+
         it 'accepts a group option via the filters' do
           client.should_receive(:put_scheduled_update_group_action).with(
             hash_including(:auto_scaling_group_name => 'group'))
@@ -101,7 +101,7 @@ module AWS
 
         it 'applies filter options to the colleciton when enumerating' do
           client.should_receive(method).with(
-            :auto_scaling_group_name => 'abc'  
+            :auto_scaling_group_name => 'abc'
           ).and_return(resp)
           actions.filter(:group => 'abc').to_a
         end
@@ -114,7 +114,7 @@ module AWS
             :end_time => now.iso8601
           ).and_return(resp)
           actions.filter(
-            :group => 'abc', 
+            :group => 'abc',
             :scheduled_actions => %w(1 2 3),
             :start_time => now,
             :end_time => now

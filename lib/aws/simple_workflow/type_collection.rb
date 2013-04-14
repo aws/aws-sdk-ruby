@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,9 +19,9 @@ module AWS
     class TypeCollection
 
       include OptionFormatters
-      include Core::Collection::WithLimitAndNextToken 
+      include Core::Collection::WithLimitAndNextToken
 
-      # @param [Domain] domain The domain the (workflow or activity types 
+      # @param [Domain] domain The domain the (workflow or activity types
       #   belong to.
       def initialize domain, options = {}
 
@@ -29,7 +29,7 @@ module AWS
 
         @named = options[:named]
 
-        @registration_status = options[:registration_status] ? 
+        @registration_status = options[:registration_status] ?
           options[:registration_status].to_s.upcase : 'REGISTERED'
 
         @reverse_order = options.key?(:reverse_order) ?
@@ -44,13 +44,13 @@ module AWS
 
       # Returns the type with the given name and version.
       #
-      #   # get a workflow type
-      #   domain.workflow_types['name','version']
-      #   domain.workflow_types.at('name','version')
+      #     # get a workflow type
+      #     domain.workflow_types['name','version']
+      #     domain.workflow_types.at('name','version')
       #
-      #   # get an activity type
-      #   domain.activity_types['name','version']
-      #   domain.activity_types.at('name','version')
+      #     # get an activity type
+      #     domain.activity_types['name','version']
+      #     domain.activity_types.at('name','version')
       #
       # @param [String] name Name of the type.
       #
@@ -81,7 +81,7 @@ module AWS
         collection_with(:reverse_order => true)
       end
 
-      # @return [TypeCollection] Returns a collection that 
+      # @return [TypeCollection] Returns a collection that
       #   enumerates types with the given name.  Each instance
       #   will have a different version.
       def named name
@@ -112,7 +112,7 @@ module AWS
         options[:maximum_page_size] = limit if limit
         options[:registration_status] ||= @registration_status
         options[:name] ||= @named if @named # may be nil
-        options[:reverse_order] = @reverse_order unless 
+        options[:reverse_order] = @reverse_order unless
           options.has_key?(:reverse_order)
 
 
@@ -123,12 +123,12 @@ module AWS
         response = client.send(client_method, options)
         response.data['typeInfos'].each do |desc|
 
-          type = member_class.new_from(client_method, desc, domain, 
-            desc[type_key]['name'], 
-            desc[type_key]['version']) 
+          type = member_class.new_from(client_method, desc, domain,
+            desc[type_key]['name'],
+            desc[type_key]['version'])
 
           yield(type)
-          
+
         end
 
         response.data['nextPageToken']

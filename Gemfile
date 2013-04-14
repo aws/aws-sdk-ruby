@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,25 +13,20 @@
 
 source 'http://rubygems.org'
 
-gem 'uuidtools', '~> 2.1'
-gem 'httparty', '~> 0.7'
-gem 'nokogiri', '>= 1.4.4'
-gem 'json', '>= 1.4.6'
+gemspec
 
 group :development do
   gem 'yard'
+  gem 'rdoc', '= 3.9.4'
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '= 2.12'
+  gem 'cucumber'
   gem 'simplecov', :require => false
   gem 'rvm-tester'
-  gem 'cucumber', '~> 0.10.2', :require => 'cucumber/rake/task'
-  gem 'bourne', '1.0'
-  gem 'mocha', '0.9.8'
   gem 'net-ssh', '~> 2.1'
-  gem 'multipart-post', '~> 1.1.2'
+  gem 'multipart-post'
   gem 'rotp', '~> 1.3.0'
-  gem 'jruby-openssl', :platforms => :jruby
 end
 

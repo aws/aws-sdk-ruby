@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,7 +35,7 @@ Feature: IAM Users
     | TYPE        | NAME     | VALUE                      |
     | param       | Action   | DeleteUser                 |
     | param_match | UserName | ruby-integreation-test-\d+ |
-  
+
   @get
   Scenario: Getting user details
     Given I create an IAM user

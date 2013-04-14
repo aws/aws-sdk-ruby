@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#url_for' do
-        
+
         it 'calls #url_for on the object with a version id' do
           object.should_receive(:url_for).with(:read, :version_id => version.version_id)
           version.url_for(:read)
@@ -103,7 +103,7 @@ module AWS
       end
 
       context '#delete_marker' do
-        
+
         it 'returns true if set as such' do
           v = ObjectVersion.new(object, 'version_id', :delete_marker => true)
           v.delete_marker?.should == true

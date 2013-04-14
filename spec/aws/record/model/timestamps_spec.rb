@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -21,7 +21,7 @@ module AWS
         context 'timestamps' do
 
           before(:each) { klass.timestamps }
-          
+
           context 'new record' do
 
             it 'auto populates created_at and updated_at' do
@@ -50,8 +50,8 @@ module AWS
 
           context 'existing record' do
 
-            let(:yesterday) { 
-              (Time.now - (60 * 60 * 24)).strftime('%Y-%m-%dT%H:%M:%SZ') 
+            let(:yesterday) {
+              (Time.now - (60 * 60 * 24)).strftime('%Y-%m-%dT%H:%M:%SZ')
             }
 
             before(:each) do
@@ -88,7 +88,7 @@ module AWS
             end
 
           end
-          
+
         end
 
       end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -110,28 +110,6 @@ module AWS::Core
       it 'returns true if error is nil' do
         response.error = nil
         response.successful?.should == true
-      end
-
-    end
-
-    context '#throttled?' do
-
-      it 'returns true if the request was throttled' do
-      end
-
-      it 'returns false for successful requests' do
-        response.stub(:successful?).and_return(true)
-        response.throttled?.should == false
-      end
-
-      it 'returns true for failed requests with a Throttling code' do
-        http_response.stub(:body).and_return(<<-XML.strip)
-          <xml>
-            <Code>Throttling</Code>
-          </xml>
-        XML
-        response.stub(:successful?).and_return(false)
-        response.throttled?.should == true
       end
 
     end

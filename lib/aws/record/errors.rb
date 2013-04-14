@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,20 +15,20 @@ module AWS
   module Record
 
     class Errors < Core::IndifferentHash
-      
+
       include Enumerable
 
       # Returns the errors for the atttibute in an array.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.add(:name, 'must be less than 30 characters')
-      #   errors[:name]
-      #   #=> ['may not be blank', 'must be less than 30 characters']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.add(:name, 'must be less than 30 characters')
+      #     errors[:name]
+      #     #=> ['may not be blank', 'must be less than 30 characters']
       #
       # @param [String,Symbol] attribute_name The name of the attribute to retnr
       #   errors for.  You can pass the string or symbol version.
       # @return [Array<String>] Returns the error messages for the given
-      #   +attribute_name+.  If there are no errors on the attribute then
+      #   `attribute_name`.  If there are no errors on the attribute then
       #   an empty array is returned.
       def [] attribute_name
         super(attribute_name) || []
@@ -37,15 +37,15 @@ module AWS
 
       # Adds an error message to the named attribute.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.on(:name)
-      #   #=> ['may not be blank']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.on(:name)
+      #     #=> ['may not be blank']
       #
-      # If you want to add a general error message, then pass +:base+ 
-      # for +attribute_name+, or call {#add_to_base}.
+      # If you want to add a general error message, then pass `:base`
+      # for `attribute_name`, or call {#add_to_base}.
       # @param [String,Symbol] attribute_name The name of the attribute
       #   that you are adding an error to.
-      # @param [String] message ('is invalid') The error message (should 
+      # @param [String] message ('is invalid') The error message (should
       #   not contain the attribute name).
       # @return [String] Returns the message.
       def []= attribute_name, message = 'is invalid'
@@ -60,7 +60,7 @@ module AWS
 
       # Adds a general error message (not associated with any particular
       # attribute).
-      # @param [String] message ('is invalid') The error message (should 
+      # @param [String] message ('is invalid') The error message (should
       #   not contain the attribute name).
       # @return [String] Returns the message.
       def add_to_base message
@@ -73,9 +73,9 @@ module AWS
       end
       alias_method :size, :count
 
-      # Yields once for each error message added.  
+      # Yields once for each error message added.
       #
-      # An attribute_name may yield more than once if there are more than 
+      # An attribute_name may yield more than once if there are more than
       # one errors associated with that attirbute.
       #
       # @yield [attribute_name, error_message]
@@ -93,9 +93,9 @@ module AWS
       # Returns the errors prefixed by a humanized version of the attribute
       # name.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.full_messages 
-      #   #=> ['Name may not be blank']
+      #     errors.add(:name, 'may not be blank')
+      #     errors.full_messages
+      #     #=> ['Name may not be blank']
       #
       # @return [Array of Strings] Returns an array of error messages.
       def full_messages
@@ -113,9 +113,9 @@ module AWS
       # Returns a hash of of errors messages.  Keys are attribute names
       # and values are arrays of error messages.
       #
-      #   errors.add(:name, 'may not be blank')
-      #   errors.to_hash
-      #   #=> { 'name' => ['may not be blank'] }
+      #     errors.add(:name, 'may not be blank')
+      #     errors.to_hash
+      #     #=> { 'name' => ['may not be blank'] }
       #
       # Please note that the hash values are always arrays, even if there
       # is only one error message for the attribute.

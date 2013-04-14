@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,7 +15,7 @@ module AWS
   class EC2
 
     # Represents an EC2 key pair.
-    # @attr_reader [String] fingerprint A SHA-1 digest of the DER encoded 
+    # @attr_reader [String] fingerprint A SHA-1 digest of the DER encoded
     #   private key
     class KeyPair < Resource
 
@@ -48,7 +48,7 @@ module AWS
 
       # Returns the private key.  Raises an exception if called
       # against an existing key.  You can only get the private key
-      # at the time of creation. 
+      # at the time of creation.
       #
       # @see KeyPairCollection#import
       # @note Only call this method on newly created keys.
@@ -63,7 +63,7 @@ module AWS
       # Deletes this key pair from EC2.
       # @return [true]
       def delete
-        client.delete_key_pair(:key_name => name)  
+        client.delete_key_pair(:key_name => name)
         true
       end
 

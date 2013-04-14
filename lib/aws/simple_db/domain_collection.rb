@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -43,11 +43,11 @@ module AWS
       # Creates a domain in SimpleDB and returns a domain object.
       #
       # @note This operation might take 10 or more seconds to complete.
-      # @note Creating a domain in SimpleDB is an idempotent operation; 
-      #   running it multiple times using the same domain name will not 
+      # @note Creating a domain in SimpleDB is an idempotent operation;
+      #   running it multiple times using the same domain name will not
       #   result in an error.
-      # @note You can create up to 100 domains per account.
-      # @param [String] domain_name 
+      # @note You can create up to 250 domains per account.
+      # @param [String] domain_name
       # @return [Domain] Returns a new domain with the given name.
       def create(domain_name)
         client.create_domain(:domain_name => domain_name)
@@ -56,7 +56,7 @@ module AWS
 
       # Returns a domain object with the given name.
       #
-      # @note This does not attempt to create the domain if it does not 
+      # @note This does not attempt to create the domain if it does not
       #   already exist in SimpleDB.  Use {#create} to add a domain to SDB.
       #
       # @param [String] domain_name The name of the domain to return.

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,12 +19,12 @@ module AWS
     # string keys and values that are instances of {Policy}.  For
     # example:
     #
-    #  # add or replace a policy named "ReadOnly"
-    #  policy = AWS::IAM::Policy.new do |p|
-    #    # ...
-    #  end
-    #  group.policies["ReadOnly"] = policy
-    #  group.policies.has_key?("ReadOnly")  # => true
+    #     # add or replace a policy named "ReadOnly"
+    #     policy = AWS::IAM::Policy.new do |p|
+    #       # ...
+    #     end
+    #     group.policies["ReadOnly"] = policy
+    #     group.policies.has_key?("ReadOnly")  # => true
     #
     # All of the methods for this class are defined in the
     # {PolicyCollection} module.

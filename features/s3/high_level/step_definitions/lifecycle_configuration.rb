@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -34,7 +34,7 @@ Then /^the lifecycle configuration should have the following rules:$/ do |table|
     :exp => (Integer(h['EXP']) rescue Date.parse(h['EXP']) rescue nil) || 0,
     :glacier => (Integer(h['GLACIER']) rescue Date.parse(h['GLACIER']) rescue nil) || 0
   }}
-  
+
   rules = @bucket.lifecycle_configuration.rules.map {|r| {
     :id => r.id, :prefix => r.prefix, :status => r.status,
     :exp => r.expiration_time || 0, :glacier => r.glacier_transition_time || 0

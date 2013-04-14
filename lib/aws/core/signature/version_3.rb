@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,10 +25,10 @@ module AWS
 
         def add_authorization! credentials
 
-          headers["x-amz-date"] ||= (headers["date"] ||= Time.now.rfc822)
+          headers["x-amz-date"] ||= (headers["date"] ||= Time.now.httpdate)
           headers["host"] ||= host
 
-          headers["x-amz-security-token"] = credentials.session_token if 
+          headers["x-amz-security-token"] = credentials.session_token if
             credentials.session_token
 
           # compute the authorization
@@ -43,7 +43,7 @@ module AWS
         protected
 
         def signature credentials
-          Signer.sign(credentials.secret_access_key, string_to_sign)  
+          Signer.sign(credentials.secret_access_key, string_to_sign)
         end
 
         def string_to_sign

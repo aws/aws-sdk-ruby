@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -42,7 +42,7 @@ module AWS
       it_should_behave_like "a tagged ec2 item" do
         let(:taggable) { offering }
         def stub_tags(resp, tags)
-          stub_member(resp, 
+          stub_member(resp,
             :reserved_instances_offering_id => "id",
             :tag_set => tags)
         end

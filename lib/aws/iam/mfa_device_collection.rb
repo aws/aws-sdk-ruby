@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
 # the License is located at
@@ -29,11 +29,11 @@ module AWS
       attr_reader :user
 
       # Enables an MFA device for this user.
-      # @param [String] serial_number The serial number that uniquely 
+      # @param [String] serial_number The serial number that uniquely
       #   identifies the MFA device
-      # @param [String] authentication_code_1 An authentication code emitted 
+      # @param [String] authentication_code_1 An authentication code emitted
       #   by the device.
-      # @param [String] authentication_code_2 A subsequent authentication 
+      # @param [String] authentication_code_2 A subsequent authentication
       #   code emitted by the device.
       # @return [MFADevice] Returns the newly enabled MFA device.
       def enable serial_number, authentication_code_1, authentication_code_2
@@ -71,21 +71,21 @@ module AWS
       #
       # @return [nil]
       def clear
-        each do |device| 
+        each do |device|
           device.deactivate
         end
         nil
       end
 
-      # Yields once for each MFA device.  
+      # Yields once for each MFA device.
       #
-      # You can limit the number of devices yielded using +:limit+.
+      # You can limit the number of devices yielded using `:limit`.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of devices to yield.
-      # @option options [Integer] :batch_size The maximum number of devices 
+      # @option options [Integer] :batch_size The maximum number of devices
       #   receive each service reqeust.
-      # @yieldparam [User] user 
+      # @yieldparam [User] user
       # @return [nil]
       def each options = {}, &block
         super(options.merge(:user_name => user.name), &block)
@@ -93,7 +93,7 @@ module AWS
 
       # Returns an enumerable object for this collection.  This can be
       # useful if you want to call an enumerable method that does
-      # not accept options (e.g. +collect+, +first+, etc).
+      # not accept options (e.g. `collect`, `first`, etc).
       #
       #   mfa_devices.enumerator(:limit => 10).collect(&:serial_number)
       #

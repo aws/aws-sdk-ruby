@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -150,11 +150,11 @@ module AWS
         context '#name=' do
 
           it 'updates the user name' do
-            
+
             response_user[:user_name] = 'newname'
 
             client.should_receive(:update_user).with(
-              :user_name => 'username', 
+              :user_name => 'username',
               :new_user_name => 'newname')
 
             user.name = 'newname'
@@ -166,7 +166,7 @@ module AWS
             user.name = 'newname'
             user.name.should == 'newname'
           end
-          
+
         end
 
         context '#id' do
@@ -262,7 +262,7 @@ module AWS
         end
 
       end
-      
+
       context '#mfa_devices' do
 
         it 'returns a mfa device collection' do
@@ -276,7 +276,7 @@ module AWS
 
       context '#signing_certificates' do
 
-        it 'returns a signing certificate collection' do 
+        it 'returns a signing certificate collection' do
           signing_certs = user.signing_certificates
           signing_certs.should be_a(SigningCertificateCollection)
           signing_certs.user.should == user
@@ -304,7 +304,7 @@ module AWS
           access_keys.user.should == user
           access_keys.config.should == user.config
         end
-      
+
       end
 
       context '#groups' do

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,14 +16,14 @@
 Feature: EC2 VPC Internet Gateways
 
   Scenario: Create an internet gateway
-    When I create an internet gateway 
+    When I create an internet gateway
     Then the internet gateway should exist
     And a request should have been made like:
     | TYPE  | NAME   | VALUE                 |
     | param | Action | CreateInternetGateway |
 
   Scenario: Delete an internet gateway
-    Given I create an internet gateway 
+    Given I create an internet gateway
     When I delete the internet gateway
     Then the internet gateway should not exist
     And a request should have been made like:

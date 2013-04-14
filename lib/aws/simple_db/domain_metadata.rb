@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -32,7 +32,7 @@ module AWS
     #    :item_names_size_bytes => 3,
     #    :attribute_name_count => 3
     #  }
-    # 
+    #
     class DomainMetadata
 
       include Core::Model
@@ -69,19 +69,19 @@ module AWS
         self.to_h[:item_names_size_bytes]
       end
 
-      # @return [Integer] The number of unique attribute names in the 
+      # @return [Integer] The number of unique attribute names in the
       #   {#domain}.
       def attribute_name_count
         self.to_h[:attribute_name_count]
       end
 
-      # @return [Integer] The total size of all unique attribute names, 
+      # @return [Integer] The total size of all unique attribute names,
       #   in bytes.
       def attribute_names_size_bytes
         self.to_h[:attribute_names_size_bytes]
       end
 
-      # @return [Integer] The number of all attribute name/value pairs in 
+      # @return [Integer] The number of all attribute name/value pairs in
       #   the {#domain}.
       def attribute_value_count
         self.to_h[:attribute_value_count]
@@ -98,7 +98,7 @@ module AWS
         self.to_h[:timestamp]
       end
 
-      # @return [Hash] A hash of all of the metadata attributes for 
+      # @return [Hash] A hash of all of the metadata attributes for
       #   this {#domain}.
       def to_h
         meta = client.domain_metadata(:domain_name => domain.name)

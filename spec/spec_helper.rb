@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -13,7 +13,15 @@
 
 begin
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter 'spec/'
+    add_filter 'vendor/'
+
+    lib_directories = Dir.glob('lib/aws/*/').map{|dir_name| dir_name[0..-2]}
+    lib_directories.each do |dir|
+      add_group dir.split('/').last, dir
+    end
+  end
 rescue LoadError
 end if ENV['COVERAGE']
 

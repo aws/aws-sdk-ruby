@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,7 +23,7 @@ module AWS
       let(:client) { config.iam_client }
 
       context '#create' do
-        
+
         it 'is an alias of #upload' do
           certificates = SigningCertificateCollection.new
           certificates.method(:create).should == certificates.method(:upload)
@@ -37,8 +37,8 @@ module AWS
 
         let(:certificates) { SigningCertificateCollection.new(:user => user) }
 
-        context '#user' do 
-          
+        context '#user' do
+
           it 'returns the user passed to #new' do
             certificates.user.should == user
           end
@@ -56,7 +56,7 @@ module AWS
         context '#upload' do
 
           let(:response) { client.stub_for(:upload_signing_certificate) }
-          
+
           before(:each) do
             response.data[:certificate] = {
               :certificate_id => 'cert-id',
@@ -64,9 +64,9 @@ module AWS
               :status => 'Active',
             }
           end
-          
+
           it 'calls upload_signing_certificate on the client' do
-            
+
             client.should_receive(:upload_signing_certificate).with({
               :user_name => user.name,
               :certificate_body => 'body',
@@ -77,7 +77,7 @@ module AWS
           end
 
           it 'returns a signing cerificate' do
-            
+
             certificate = certificates.upload('body')
             certificate.id.should == 'cert-id'
             certificate.contents.should == 'cert-body'
@@ -96,7 +96,7 @@ module AWS
             certificate.user.should == user
             certificate.config.should == user.config
           end
-          
+
         end
 
         it_behaves_like "a pageable collection with limits" do
@@ -158,7 +158,7 @@ module AWS
         context '#upload' do
 
           let(:response) { client.stub_for(:upload_signing_certificate) }
-          
+
           before(:each) do
             response.data[:certificate] = {
               :certificate_id => 'cert-id',
@@ -166,9 +166,9 @@ module AWS
               :status => 'Active',
             }
           end
-          
+
           it 'calls upload_signing_certificate on the client' do
-            
+
             client.should_receive(:upload_signing_certificate).with({
               :certificate_body => 'body'
             }).and_return(response)
@@ -178,7 +178,7 @@ module AWS
           end
 
           it 'returns a signing cerificate' do
-            
+
             certificate = certificates.upload('body')
             certificate.id.should == 'cert-id'
             certificate.contents.should == 'cert-body'
@@ -197,7 +197,7 @@ module AWS
             certificate.user.should == nil
             certificate.config.should == certificates.config
           end
-          
+
         end
 
       end

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,22 +18,22 @@ module AWS
     #
     # This class is an enumerable collection of data points.
     #
-    # == Enumerating Statistics
+    # ## Enumerating Statistics
     #
-    #   metric = CloudWatch::Metric.new('my/namepace', 'metric-name')
+    #     metric = CloudWatch::Metric.new('my/namepace', 'metric-name')
     #
-    #   stats = metric.statistics(
-    #     :start_time => Time.now - 3600,
-    #     :end_time => Time.now,
-    #     :statistics => ['Average'])
+    #     stats = metric.statistics(
+    #       :start_time => Time.now - 3600,
+    #       :end_time => Time.now,
+    #       :statistics => ['Average'])
     #
-    #   stats.label #=> 'some-label'
-    #   stats.each do |datapoint|
-    #     # datapoint is a hash
-    #   end
+    #     stats.label #=> 'some-label'
+    #     stats.each do |datapoint|
+    #       # datapoint is a hash
+    #     end
     #
     # @see Core::Collection
-    # 
+    #
     class MetricStatistics
 
       include Core::Collection::Simple

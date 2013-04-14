@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,20 +16,20 @@ module AWS
 
     # Allows you to enumerate Auto Scaling instances.
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.instances.each do |instance|
-    #     # ...
-    #   end
-    # 
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.instances.each do |instance|
+    #       # ...
+    #     end
+    #
     # You can also get an Auto Scaling instance by its EC2 instance id.
     #
-    #   auto_scaling_instance = auto_scaling.instances['i-12345678']
-    #   auto_scaling_instance.class #=> AWS::AutoScaling::Instance
+    #     auto_scaling_instance = auto_scaling.instances['i-12345678']
+    #     auto_scaling_instance.class #=> AWS::AutoScaling::Instance
     #
     class InstanceCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
+
       # @param [String] instance_id An {EC2::Instance} id string.
       # @return [AutoScaling::Instance]
       def [] instance_id
@@ -45,7 +45,7 @@ module AWS
 
         resp = client.describe_auto_scaling_instances(options)
         resp.auto_scaling_instances.each do |details|
-          
+
           instance = Instance.new_from(
             :describe_auto_scaling_instances,
             details,
@@ -53,7 +53,7 @@ module AWS
             :config => config)
 
           yield(instance)
-          
+
         end
         resp.data[:next_token]
       end

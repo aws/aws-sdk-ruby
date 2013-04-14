@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -25,15 +25,15 @@ module AWS
       # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic whose
       #     access control policy you wish to modify.
-      #   * +:label+ - *required* - (String) A unique identifier for the new
+      #   * `:label` - *required* - (String) A unique identifier for the new
       #     policy statement.
-      #   * +:aws_account_id+ - *required* - (Array<String>) The AWS account
+      #   * `:aws_account_id` - *required* - (Array<String>) The AWS account
       #     IDs of the users (principals) who will be given access to the
       #     specified actions. The users must have AWS accounts, but do not
       #     need to be signed up for this service.
-      #   * +:action_name+ - *required* - (Array<String>) The action you want
+      #   * `:action_name` - *required* - (Array<String>) The action you want
       #     to allow for the specified principal(s). Valid values: any Amazon
       #     SNS action name.
       # @return [Core::Response]
@@ -41,36 +41,36 @@ module AWS
       # @!method confirm_subscription(options = {})
       # Calls the ConfirmSubscription API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic for which
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic for which
       #     you wish to confirm a subscription.
-      #   * +:token+ - *required* - (String) Short-lived token sent to an
+      #   * `:token` - *required* - (String) Short-lived token sent to an
       #     endpoint during the Subscribe action.
-      #   * +:authenticate_on_unsubscribe+ - (String) Disallows unauthenticated
+      #   * `:authenticate_on_unsubscribe` - (String) Disallows unauthenticated
       #     unsubscribes of the subscription. If the value of this parameter is
-      #     +true+ and the request has an AWS signature, then only the topic
+      #     `true` and the request has an AWS signature, then only the topic
       #     owner and the subscription owner can unsubscribe the endpoint. The
       #     unsubscribe action will require AWS authentication.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subscription_arn+ - (String)
+      #   * `:subscription_arn` - (String)
 
       # @!method create_topic(options = {})
       # Calls the CreateTopic API operation.
       # @param [Hash] options
-      #   * +:name+ - *required* - (String) The name of the topic you want to
+      #   * `:name` - *required* - (String) The name of the topic you want to
       #     create. Constraints: Topic names must be made up of only uppercase
       #     and lowercase ASCII letters, numbers, and hyphens, and must be
       #     between 1 and 256 characters long.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:topic_arn+ - (String)
+      #   * `:topic_arn` - (String)
 
       # @!method delete_topic(options = {})
       # Calls the DeleteTopic API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic you want
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic you want
       #     to delete. http://sns.us-east-1.amazonaws.com/
       #     ?TopicArn=arn%3Aaws%3Asns%3Aus-east-1%3A123456789012%3AMy-Topic
       #     &Action=DeleteTopic &SignatureVersion=2 &SignatureMethod=HmacSHA256
@@ -87,85 +87,85 @@ module AWS
       # @!method get_subscription_attributes(options = {})
       # Calls the GetSubscriptionAttributes API operation.
       # @param [Hash] options
-      #   * +:subscription_arn+ - *required* - (String) The ARN of the
+      #   * `:subscription_arn` - *required* - (String) The ARN of the
       #     subscription whose properties you want to get.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:attributes+ - (Hash<String,String>)
+      #   * `:attributes` - (Hash<String,String>)
 
       # @!method get_topic_attributes(options = {})
       # Calls the GetTopicAttributes API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic whose
       #     properties you want to get.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:attributes+ - (Hash<String,String>)
+      #   * `:attributes` - (Hash<String,String>)
 
       # @!method list_subscriptions(options = {})
       # Calls the ListSubscriptions API operation.
       # @param [Hash] options
-      #   * +:next_token+ - (String) Token returned by the previous
+      #   * `:next_token` - (String) Token returned by the previous
       #     ListSubscriptions request.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subscriptions+ - (Array<Hash>)
-      #     * +:subscription_arn+ - (String)
-      #     * +:owner+ - (String)
-      #     * +:protocol+ - (String)
-      #     * +:endpoint+ - (String)
-      #     * +:topic_arn+ - (String)
-      #   * +:next_token+ - (String)
+      #   * `:subscriptions` - (Array<Hash>)
+      #     * `:subscription_arn` - (String)
+      #     * `:owner` - (String)
+      #     * `:protocol` - (String)
+      #     * `:endpoint` - (String)
+      #     * `:topic_arn` - (String)
+      #   * `:next_token` - (String)
 
       # @!method list_subscriptions_by_topic(options = {})
       # Calls the ListSubscriptionsByTopic API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic for which
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic for which
       #     you wish to find subscriptions.
-      #   * +:next_token+ - (String) Token returned by the previous
+      #   * `:next_token` - (String) Token returned by the previous
       #     ListSubscriptionsByTopic request.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subscriptions+ - (Array<Hash>)
-      #     * +:subscription_arn+ - (String)
-      #     * +:owner+ - (String)
-      #     * +:protocol+ - (String)
-      #     * +:endpoint+ - (String)
-      #     * +:topic_arn+ - (String)
-      #   * +:next_token+ - (String)
+      #   * `:subscriptions` - (Array<Hash>)
+      #     * `:subscription_arn` - (String)
+      #     * `:owner` - (String)
+      #     * `:protocol` - (String)
+      #     * `:endpoint` - (String)
+      #     * `:topic_arn` - (String)
+      #   * `:next_token` - (String)
 
       # @!method list_topics(options = {})
       # Calls the ListTopics API operation.
       # @param [Hash] options
-      #   * +:next_token+ - (String) Token returned by the previous ListTopics
+      #   * `:next_token` - (String) Token returned by the previous ListTopics
       #     request.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:topics+ - (Array<Hash>)
-      #     * +:topic_arn+ - (String)
-      #   * +:next_token+ - (String)
+      #   * `:topics` - (Array<Hash>)
+      #     * `:topic_arn` - (String)
+      #   * `:next_token` - (String)
 
       # @!method publish(options = {})
       # Calls the Publish API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The topic you want to publish
+      #   * `:topic_arn` - *required* - (String) The topic you want to publish
       #     to.
-      #   * +:message+ - *required* - (String) The message you want to send to
+      #   * `:message` - *required* - (String) The message you want to send to
       #     the topic. Constraints: Messages must be UTF-8 encoded strings at
       #     most 8 KB in size (8192 bytes, not 8192 characters).
-      #   * +:subject+ - (String) Optional parameter to be used as the
+      #   * `:subject` - (String) Optional parameter to be used as the
       #     "Subject" line of when the message is delivered to e-mail
       #     endpoints. This field will also be included, if present, in the
       #     standard JSON messages delivered to other endpoints. Constraints:
       #     Subjects must be ASCII text that begins with a letter, number or
       #     punctuation mark; must not include line breaks or control
       #     characters; and must be less than 100 characters long.
-      #   * +:message_structure+ - (String) Optional parameter. It will have
+      #   * `:message_structure` - (String) Optional parameter. It will have
       #     one valid value: "json". If this option, Message is present and set
       #     to "json", the value of Message must: be a syntactically valid JSON
       #     object. It must contain at least a top level JSON key of "default"
@@ -189,54 +189,54 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:message_id+ - (String)
+      #   * `:message_id` - (String)
 
       # @!method remove_permission(options = {})
       # Calls the RemovePermission API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic whose
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic whose
       #     access control policy you wish to modify.
-      #   * +:label+ - *required* - (String) The unique label of the statement
+      #   * `:label` - *required* - (String) The unique label of the statement
       #     you want to remove.
       # @return [Core::Response]
 
       # @!method set_subscription_attributes(options = {})
       # Calls the SetSubscriptionAttributes API operation.
       # @param [Hash] options
-      #   * +:subscription_arn+ - *required* - (String) The ARN of the
+      #   * `:subscription_arn` - *required* - (String) The ARN of the
       #     subscription to modify.
-      #   * +:attribute_name+ - *required* - (String) The name of the attribute
+      #   * `:attribute_name` - *required* - (String) The name of the attribute
       #     you want to set. Only a subset of the subscriptions attributes are
       #     mutable. Valid values: DeliveryPolicy
-      #   * +:attribute_value+ - *required* - (String) The new value for the
+      #   * `:attribute_value` - *required* - (String) The new value for the
       #     attribute.
       # @return [Core::Response]
 
       # @!method set_topic_attributes(options = {})
       # Calls the SetTopicAttributes API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of the topic to
+      #   * `:topic_arn` - *required* - (String) The ARN of the topic to
       #     modify.
-      #   * +:attribute_name+ - *required* - (String) The name of the attribute
+      #   * `:attribute_name` - *required* - (String) The name of the attribute
       #     you want to set. Only a subset of the topic's attributes are
       #     mutable. Valid values: Policy | DisplayName
-      #   * +:attribute_value+ - *required* - (String) The new value for the
+      #   * `:attribute_value` - *required* - (String) The new value for the
       #     attribute.
       # @return [Core::Response]
 
       # @!method subscribe(options = {})
       # Calls the Subscribe API operation.
       # @param [Hash] options
-      #   * +:topic_arn+ - *required* - (String) The ARN of topic you want to
+      #   * `:topic_arn` - *required* - (String) The ARN of topic you want to
       #     subscribe to.
-      #   * +:protocol+ - *required* - (String) The protocol you want to use.
+      #   * `:protocol` - *required* - (String) The protocol you want to use.
       #     Supported protocols include: http -- delivery of JSON-encoded
       #     message via HTTP POST https -- delivery of JSON-encoded message via
       #     HTTPS POST email -- delivery of message via SMTP email-json --
       #     delivery of JSON-encoded message via SMTP sms -- delivery of
       #     message via SMS sqs -- delivery of JSON-encoded message to an
       #     Amazon SQS queue
-      #   * +:endpoint+ - *required* - (String) The endpoint that you want to
+      #   * `:endpoint` - *required* - (String) The endpoint that you want to
       #     receive notifications. Endpoints vary by protocol: For the http
       #     protocol, the endpoint is an URL beginning with "http://" For the
       #     https protocol, the endpoint is a URL beginning with "https://" For
@@ -248,12 +248,12 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
-      #   * +:subscription_arn+ - (String)
+      #   * `:subscription_arn` - (String)
 
       # @!method unsubscribe(options = {})
       # Calls the Unsubscribe API operation.
       # @param [Hash] options
-      #   * +:subscription_arn+ - *required* - (String) The ARN of the
+      #   * `:subscription_arn` - *required* - (String) The ARN of the
       #     subscription to be deleted.
       # @return [Core::Response]
 

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -31,7 +31,7 @@ module AWS
       # @return [String] Returns the data encrypted with the key given.
       def encrypt data, key
         rsa = OpenSSL::PKey::RSA
-        ## Encrypting data key
+        # Encrypting data key
         case key
         when rsa # Asymmetric encryption
           key.public_encrypt(data)
@@ -97,7 +97,7 @@ module AWS
       #
       # @param [String] iv IV for the cipher.
       #
-      # @return [OpenSSL::Cipher] Will return a configured +OpenSSL::Cipher+.
+      # @return [OpenSSL::Cipher] Will return a configured `OpenSSL::Cipher`.
       def get_aes_cipher mode, block_mode, key = nil, iv = nil
 
         # If no key given, default to 256 bit

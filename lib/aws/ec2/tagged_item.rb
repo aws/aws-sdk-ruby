@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,11 +17,11 @@ module AWS
 
       # Adds a single tag with an optional tag value.
       #
-      #   # adds a tag with the key production
-      #   resource.tag('production')
+      #     # adds a tag with the key production
+      #     resource.tag('production')
       #
-      #   # adds a tag with the optional value set to production
-      #   resource.tag('role', :value => 'webserver')
+      #     # adds a tag with the optional value set to production
+      #     resource.tag('role', :value => 'webserver')
       #
       # @param [String] key The name of the tag to add.
       # @param [Hash] options
@@ -29,7 +29,7 @@ module AWS
       # @return [Tag] The tag that was created.
       def add_tag key, options = {}
         client.create_tags({
-          :resources => [id], 
+          :resources => [id],
           :tags => [{ :key => key, :value => options[:value].to_s }],
         })
         Tag.new(self, key, options.merge(:config => config))
@@ -47,11 +47,11 @@ module AWS
       # this resource.
       #
       # @example Manipulating the tags of an EC2 instance
-      #  i = ec2.instances["i-123"]
-      #  i.tags.to_h                  # => { "foo" => "bar", ... }
-      #  i.tags.clear
-      #  i.tags.stage = "production"
-      #  i.tags.stage                 # => "production"
+      #   i = ec2.instances["i-123"]
+      #   i.tags.to_h                  # => { "foo" => "bar", ... }
+      #   i.tags.clear
+      #   i.tags.stage = "production"
+      #   i.tags.stage                 # => "production"
       #
       # @return [ResourceTagCollection] A collection of tags that
       #   belong to this resource.

@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,7 +17,10 @@ end
 
 When /^I use a regular HTTP client to GET the URL$/ do
   require 'net/http'
-  @result = Net::HTTP.get_response(@url)
+  http = Net::HTTP.new(@url.host, @url.port)
+  http.start do
+    @result = http.request(Net::HTTP::Get.new(@url.request_uri))
+  end
 end
 
 Then /^the response body should be "([^\"]*)"$/ do |body|

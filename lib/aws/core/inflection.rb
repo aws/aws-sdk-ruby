@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -35,6 +35,8 @@ module AWS
         inflector['s3Key'] = 's3_key'
         inflector['Ec2KeyName'] = 'ec2_key_name'
         inflector['Ec2SubnetId'] = 'ec2_subnet_id'
+        inflector['Ec2VolumeId'] = 'ec2_volume_id'
+        inflector['Ec2InstanceId'] = 'ec2_instance_id'
         inflector['ElastiCache'] = 'elasticache'
         inflector['NotificationARNs'] = 'notification_arns'
 

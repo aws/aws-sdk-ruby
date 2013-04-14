@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -23,7 +23,7 @@ module AWS
         it 'filters by tag name' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-key', :values => %w(foo)}, 
+              { :name => 'tag-key', :values => %w(foo)},
             ])
           collection.tagged('foo').each{|obj|}
         end
@@ -31,8 +31,8 @@ module AWS
         it 'can be chained' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-key', :values => %w(foo)}, 
-              { :name => 'tag-key', :values => %w(bar)}, 
+              { :name => 'tag-key', :values => %w(foo)},
+              { :name => 'tag-key', :values => %w(bar)},
             ])
           collection.tagged('foo').tagged('bar').each{|obj|}
         end
@@ -40,8 +40,8 @@ module AWS
         it 'accepts values' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-key', :values => %w(foo)}, 
-              { :name => 'tag-key', :values => %w(bar)}, 
+              { :name => 'tag-key', :values => %w(foo)},
+              { :name => 'tag-key', :values => %w(bar)},
             ])
           collection.tagged('foo').tagged('bar').each{|obj|}
         end
@@ -49,11 +49,11 @@ module AWS
         it 'also accepts multiple tag names' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-key', :values => %w(foo bar)}, 
+              { :name => 'tag-key', :values => %w(foo bar)},
             ])
           collection.tagged('foo', 'bar').each{|obj|}
         end
-        
+
       end
 
       context '#tagged_values' do
@@ -61,7 +61,7 @@ module AWS
         it 'filters by tag name' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-value', :values => %w(foo)}, 
+              { :name => 'tag-value', :values => %w(foo)},
             ])
           collection.tagged_values('foo').each{|obj|}
         end
@@ -69,8 +69,8 @@ module AWS
         it 'can be chained' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-value', :values => %w(foo)}, 
-              { :name => 'tag-value', :values => %w(bar)}, 
+              { :name => 'tag-value', :values => %w(foo)},
+              { :name => 'tag-value', :values => %w(bar)},
             ])
           collection.tagged_values('foo').tagged_values('bar').each{|obj|}
         end
@@ -78,8 +78,8 @@ module AWS
         it 'accepts values' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-value', :values => %w(foo)}, 
-              { :name => 'tag-value', :values => %w(bar)}, 
+              { :name => 'tag-value', :values => %w(foo)},
+              { :name => 'tag-value', :values => %w(bar)},
             ])
           collection.tagged_values('foo').tagged_values('bar').each{|obj|}
         end
@@ -87,11 +87,11 @@ module AWS
         it 'also accepts multiple tag names' do
           client.should_receive(client_method).
             with(:filters => [
-              { :name => 'tag-value', :values => %w(foo bar)}, 
+              { :name => 'tag-value', :values => %w(foo bar)},
             ])
           collection.tagged_values('foo', 'bar').each{|obj|}
         end
-        
+
       end
     end
   end

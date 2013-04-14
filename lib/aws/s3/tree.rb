@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -22,33 +22,33 @@ module AWS
     #
     # Given you have a bucket with the following keys:
     #
-    #  README.txt
-    #  videos/wedding.mpg
-    #  videos/family_reunion.mpg
-    #  photos/2010/house.jpg
-    #  photos/2011/fall/leaves.jpg
-    #  photos/2011/summer/vacation.jpg
-    #  photos/2011/summer/family.jpg
+    #     README.txt
+    #     videos/wedding.mpg
+    #     videos/family_reunion.mpg
+    #     photos/2010/house.jpg
+    #     photos/2011/fall/leaves.jpg
+    #     photos/2011/summer/vacation.jpg
+    #     photos/2011/summer/family.jpg
     #
     # You might like to explore the contents of this bucket as a tree:
     #
-    #   tree = bucket.as_tree
+    #     tree = bucket.as_tree
     #
-    #   directories = tree.children.select(&:branch?).collect(&:prefix)
-    #   #=> ['photos', 'videos']
+    #     directories = tree.children.select(&:branch?).collect(&:prefix)
+    #     #=> ['photos', 'videos']
     #
-    #   files = tree.children.select(&:leaf?).collect(&:key)
-    #   #=> ['README.txt']
+    #     files = tree.children.select(&:leaf?).collect(&:key)
+    #     #=> ['README.txt']
     #
     # If you want to start further down, pass a prefix to {Bucket#as_tree}:
     #
-    #   tree = bucket.as_tree(:prefix => 'photos/2011')
+    #     tree = bucket.as_tree(:prefix => 'photos/2011')
     #
-    #   directories = tree.children.select(&:branch?).collect(&:prefix)
-    #   #=> ['photos/20011/fall', 'photos/20011/summer']
+    #     directories = tree.children.select(&:branch?).collect(&:prefix)
+    #     #=> ['photos/20011/fall', 'photos/20011/summer']
     #
-    #   files = tree.children.select(&:leaf?).collect(&:key)
-    #   #=> []
+    #     files = tree.children.select(&:leaf?).collect(&:key)
+    #     #=> []
     #
     # All non-leaf nodes ({Tree} and {Tree::BranchNode} instances)
     # have a {Tree::Parent#children} method that provides access to
@@ -58,11 +58,11 @@ module AWS
     # non-leaf nodes are common prefixes to multiple keys
     # (directories) and leaf nodes are object keys.
     #
-    # You can continue crawling the tree using the +children+
+    # You can continue crawling the tree using the `children`
     # collection on each branch node, which will contain the branch
     # nodes and leaf nodes below it.
     #
-    # You can construct a Tree object using the +as_tree+ method of
+    # You can construct a Tree object using the `as_tree` method of
     # any of the following classes:
     #
     # * {Bucket} or {ObjectCollection} (for {S3Object} leaf nodes)
@@ -77,13 +77,11 @@ module AWS
     # using.
     class Tree
 
-      AWS.register_autoloads(self) do
-        autoload :BranchNode, 'branch_node'
-        autoload :ChildCollection, 'child_collection'
-        autoload :LeafNode, 'leaf_node'
-        autoload :Node, 'node'
-        autoload :Parent, 'parent'
-      end
+      autoload :BranchNode, 'aws/s3/tree/branch_node'
+      autoload :ChildCollection, 'aws/s3/tree/child_collection'
+      autoload :LeafNode, 'aws/s3/tree/leaf_node'
+      autoload :Node, 'aws/s3/tree/node'
+      autoload :Parent, 'aws/s3/tree/parent'
 
       include Parent
 
@@ -95,7 +93,7 @@ module AWS
       #   tree.
       #
       # @option options [String] :prefix (nil) Set prefix to choose
-      #   where the top of the tree will be.  A value of +nil+ means
+      #   where the top of the tree will be.  A value of `nil` means
       #   that the tree will include all objects in the collection.
       #
       # @option options [String] :delimiter ('/') The string that

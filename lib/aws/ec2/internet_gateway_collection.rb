@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,14 +19,14 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a new Internet gateway in your AWS account. After creating 
+      # Creates a new Internet gateway in your AWS account. After creating
       # the gateway you can attach it to a VPC.
       #
       # @return [InternetGateway]
       #
       def create
         response = client.create_internet_gateway
-        self[response.internet_gateway.internet_gateway_id] 
+        self[response.internet_gateway.internet_gateway_id]
       end
 
       # @param [String] internet_gateway_id
@@ -41,7 +41,7 @@ module AWS
         response = filtered_request(:describe_internet_gateways, options, &block)
         response.internet_gateway_set.each do |g|
 
-          gateway = InternetGateway.new_from(:describe_internet_gateways, g, 
+          gateway = InternetGateway.new_from(:describe_internet_gateways, g,
             g.internet_gateway_id, :config => config)
 
           yield(gateway)

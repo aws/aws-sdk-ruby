@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -123,7 +123,7 @@ end
 
 When /^I enumerate items with a limit of (\d+) and batch size of (\d+)$/ do |limit, batch_size|
   @domain.items.each(
-    :limit => limit, 
+    :limit => limit,
     :batch_size => batch_size,
     :consistent_read => true
   ) {|i|}
@@ -131,7 +131,7 @@ end
 
 When /^I select item data with a limit of (\d+) and batch size of (\d+)$/ do |limit, batch_size|
   @domain.items.select(:all,
-    :limit => limit, 
+    :limit => limit,
     :batch_size => batch_size,
     :consistent_read => true
   ) {|i|}

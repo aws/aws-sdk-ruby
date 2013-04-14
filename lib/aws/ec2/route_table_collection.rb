@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -24,7 +24,7 @@ module AWS
       # @param [Hash] options
       #
       # @option options [VPC,String] :vpc The vpc or vpc id of where you want
-      #   to create the route table. 
+      #   to create the route table.
       #
       # @return [RouteTable]
       #
@@ -32,7 +32,7 @@ module AWS
 
         client_opts = {}
         client_opts[:vpc_id] = vpc_id_option(options)
-        
+
         resp = client.create_route_table(client_opts)
 
         RouteTable.new_from(:create_route_table, resp.route_table,
@@ -59,7 +59,7 @@ module AWS
         response = filtered_request(:describe_route_tables, options, &block)
         response.route_table_set.each do |t|
 
-          route_table = RouteTable.new_from(:describe_route_tables, t, 
+          route_table = RouteTable.new_from(:describe_route_tables, t,
             t.route_table_id, :config => config)
 
           yield(route_table)
