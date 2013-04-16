@@ -30,6 +30,11 @@ module AWS
     #
     # @attr_reader [String] private_ip_address
     #
+    # @attr_reader [Array<Hash>] private_ip_addresses Returns an array
+    #   of private ip addresses with the following keys:
+    #   * `:private_ip_address` (String)
+    #   * `:primary` (boolean)
+    #
     # @attr_reader [String] private_dns_name
     #
     # @attr_reader [String] availability_zone_name
@@ -69,6 +74,10 @@ module AWS
       attribute :status, :to_sym => true
 
       attribute :private_ip_address, :static => true
+
+      attribute :private_ip_addresses,
+        :from => :private_ip_addresses_set,
+        :static => true
 
       attribute :private_dns_name, :static => true
 
