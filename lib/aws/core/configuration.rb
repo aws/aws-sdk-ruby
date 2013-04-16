@@ -472,16 +472,10 @@ module AWS
 
       add_option :http_wire_trace, false, :boolean => true
 
-      add_option_with_needs :http_handler,
-        [
-          :http_open_timeout,
-          :http_idle_timeout,
-          :http_wire_trace,
-          :logger,
-        ] do |config,handler_options|
-
-        Http::NetHttpHandler.new(handler_options)
-
+      add_option_with_needs(:http_handler,
+        AWS::Core::Http::ConnectionPool::OPTIONS
+      ) do |config,options|
+        AWS::Core::Http::NetHttpHandler.new(options)
       end
 
       add_option :logger

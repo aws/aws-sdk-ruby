@@ -198,6 +198,7 @@ module AWS
     end
 
     module Http
+      autoload :ConnectionPool, 'aws/core/http/connection_pool'
       autoload :Handler, 'aws/core/http/handler'
       autoload :NetHttpHandler, 'aws/core/http/net_http_handler'
       autoload :Request, 'aws/core/http/request'
@@ -595,8 +596,8 @@ module AWS
     # Patches Net::HTTP, fixing a bug in how it handles non 100-continue
     # responses while waiting for a 100-continue.
     def patch_net_http_100_continue!
-      require 'net/http/connection_pool'
-      Net::HTTP.patch_net_http_100_continue!
+      require 'aws/core/http/patch'
+      AWS::Core::Http.patch_net_http_100_continue!
       nil
     end
 

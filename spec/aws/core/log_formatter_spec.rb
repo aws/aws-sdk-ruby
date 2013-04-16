@@ -21,7 +21,11 @@ module AWS
 
       let(:http_response) { Http::Response.new }
 
-      let(:response) { Response.new(http_request, http_response) }
+      let(:response) {
+        resp = Response.new(http_request, http_response)
+        resp.config = double('config', :proxy_uri => nil)
+        resp
+      }
 
       context '#pattern' do
 
@@ -191,9 +195,9 @@ module AWS
           end
 
           it 'replaces :http_request_proxy_uri with the http request proxy uri' do
-            uri = URI.parse('http://proxy.com')
-            http_request.proxy_uri = uri
-            message_for(':http_request_proxy_uri').should == uri.to_s
+            proxy = URI.parse('http://proxy.com')
+            response.config.stub(:proxy_uri).and_return(proxy)
+            message_for(':http_request_proxy_uri').should == proxy.to_s
           end
 
           it 'replaces :http_response_status with the http response status code' do

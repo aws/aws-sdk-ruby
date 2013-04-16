@@ -149,8 +149,8 @@ describe AWS do
         it 'defaults to a NetHttpHandler' do
           handler = config.http_handler
           handler.should be_a(AWS::Core::Http::NetHttpHandler)
-          handler.pool.open_timeout.should eq(config.http_open_timeout)
-          handler.pool.idle_timeout.should eq(config.http_idle_timeout)
+          handler.pool.http_open_timeout.should eq(config.http_open_timeout)
+          handler.pool.http_idle_timeout.should eq(config.http_idle_timeout)
         end
 
         it 'uses the configured timeouts, logger and wire logging' do
@@ -164,8 +164,8 @@ describe AWS do
             :logger => logger)
 
           handler = cfg.http_handler
-          handler.pool.open_timeout.should eq(12)
-          handler.pool.idle_timeout.should eq(34)
+          handler.pool.http_open_timeout.should eq(12)
+          handler.pool.http_idle_timeout.should eq(34)
           handler.pool.logger.should eq(logger)
 
         end

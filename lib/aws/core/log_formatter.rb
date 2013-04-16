@@ -214,7 +214,7 @@ module AWS
       end
 
       def _http_request_proxy_uri response
-        response.http_request.proxy_uri
+        response.config.proxy_uri
       end
 
       def _http_response_status response

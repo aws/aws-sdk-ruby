@@ -63,6 +63,9 @@ module AWS
       # @return [Hash] Returns the response data as a hash.
       attr_accessor :data
 
+      # @private
+      attr_accessor :config
+
       # @return [Symbol] The name of the client request method that
       #   returned this response.
       attr_accessor :request_type

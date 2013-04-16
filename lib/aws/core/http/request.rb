@@ -74,10 +74,6 @@ module AWS
         #   simple_email_service and ses do not match).
         attr_accessor :service_ruby_name
 
-        # @return [nil, URI] The URI to the proxy server requests are
-        #   sent through if configured.  Returns nil if there is no proxy.
-        attr_accessor :proxy_uri
-
         # @return [Integer] The number of seconds the service has to respond
         #   before a timeout error is raised on the request.  Defaults to
         #   60 seconds.
@@ -89,26 +85,19 @@ module AWS
 
         alias_method :use_ssl?, :use_ssl
 
-        # @return [Boolean] Returns `true` if the client should verify
-        #   the peer certificate.
-        attr_accessor :ssl_verify_peer
-
-        alias_method :ssl_verify_peer?, :ssl_verify_peer
-
-        # @return [String] Returns the path to a bundle of CA certs in PEM
-        #   format; the HTTP handler should use this to verify all HTTPS
-        #   requests if {#ssl_verify_peer?} is true.
-        attr_accessor :ssl_ca_file
-
-        # @return [String] Returns the path to a directory of CA certs.
-        #   The HTTP handler should use these to verify all HTTPS
-        #   requests if {#ssl_verify_peer?} is true.
-        attr_accessor :ssl_ca_path
-
         # @return [Float] timeout The number of seconds to wait for a
         #   100-continue response before sending the HTTP request body.
         # @private
         attr_accessor :continue_timeout
+
+        def endpoint
+          scheme = use_ssl ? 'https' : 'http'
+          port = case scheme
+          when 'https' then self.port == 443 ? '' : ":#{self.port}"
+          when 'http' then self.port == 80 ? '' : ":#{self.port}"
+          end
+          "#{scheme}://#{host}#{port}"
+        end
 
         # @return [Integer] Returns the port the request will be made over.
         #   Defaults to 443 for SSL requests and 80 for non-SSL requests.

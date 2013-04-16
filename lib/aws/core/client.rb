@@ -181,7 +181,9 @@ module AWS
       end
 
       def new_response(*args, &block)
-        Response.new(*args, &block)
+        resp = Response.new(*args, &block)
+        resp.config = config
+        resp
       end
 
       def make_async_request response
@@ -530,11 +532,7 @@ module AWS
         http_request.host = endpoint
         http_request.port = port
         http_request.region = config.send(:"#{service_ruby_name}_region")
-        http_request.proxy_uri = config.proxy_uri
         http_request.use_ssl = config.use_ssl?
-        http_request.ssl_verify_peer = config.ssl_verify_peer?
-        http_request.ssl_ca_file = config.ssl_ca_file if config.ssl_ca_file
-        http_request.ssl_ca_path = config.ssl_ca_path if config.ssl_ca_path
 
         send("configure_#{name}_request", http_request, opts)
 
