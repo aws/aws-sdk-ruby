@@ -131,6 +131,8 @@ class Net::HTTP::ConnectionPool
   #
   # @option options [String] :proxy_password
   #
+  # @option options [Float] :continue_timeout (0)
+  #
   # @yield [connection]
   #
   # @yieldparam [optional,Connection] connection
@@ -172,6 +174,7 @@ class Net::HTTP::ConnectionPool
   def request connection, *args, &block
     session_for(connection) do |session|
       session.read_timeout = connection.read_timeout
+      session.continue_timeout = connection.continue_timeout
       session.request(*args, &block)
     end
   end
@@ -225,4 +228,87 @@ class Net::HTTP::ConnectionPool
     end
   end
 
+end
+
+module Net
+  class HTTP < Protocol
+
+    def self.patch_net_http_100_continue!
+      if RUBY_VERSION >= '2.0'
+        include(Expect100Continue20)
+      elsif RUBY_VERSION >= '1.9.3'
+        include(Expect100Continue19)
+      else
+        msg = "Expect 100-continue not supported in Ruby < 1.9.3"
+        raise NotImplementedError, msg
+      end
+      alias_method :old_transport_request, :transport_request
+      alias_method :transport_request, :patched_transport_request
+    end
+
+    # @private
+    module Expect100Continue19
+      def patched_transport_request(req)
+        begin_transport req
+        res = catch(:response) {
+          req.exec @socket, @curr_http_version, edit_path(req.path)
+          begin
+            res = HTTPResponse.read_new(@socket)
+          end while res.kind_of?(HTTPContinue)
+          res
+        }
+        res.reading_body(@socket, req.response_body_permitted?) {
+          yield res if block_given?
+        }
+        end_transport req, res
+        res
+      rescue => exception
+        D "Conn close because of error #{exception}"
+        @socket.close if @socket and not @socket.closed?
+        raise exception
+      end
+    end
+
+    # @private
+    module Expect100Continue20
+      def patched_transport_request(req)
+        count = 0
+        begin
+          begin_transport req
+          res = catch(:response) {
+            req.exec @socket, @curr_http_version, edit_path(req.path)
+            begin
+              res = HTTPResponse.read_new(@socket)
+              res.decode_content = req.decode_content
+            end while res.kind_of?(HTTPContinue)
+
+            res.uri = req.uri
+
+            res
+          }
+          res.reading_body(@socket, req.response_body_permitted?) {
+            yield res if block_given?
+          }
+        rescue Net::OpenTimeout
+          raise
+        rescue Net::ReadTimeout, IOError, EOFError,
+               Errno::ECONNRESET, Errno::ECONNABORTED, Errno::EPIPE,
+               # avoid a dependency on OpenSSL
+               defined?(OpenSSL::SSL) ? OpenSSL::SSL::SSLError : IOError,
+               Timeout::Error => exception
+          if count == 0 && IDEMPOTENT_METHODS_.include?(req.method)
+            count += 1
+            @socket.close if @socket and not @socket.closed?
+            D "Conn close because of error #{exception}, and retry"
+            retry
+          end
+          D "Conn close because of error #{exception}"
+          @socket.close if @socket and not @socket.closed?
+          raise
+        end
+
+      end
+    end
+
+  end
 end

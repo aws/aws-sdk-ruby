@@ -62,6 +62,7 @@ module AWS
 
             connection = pool.connection_for(request.host, options)
             connection.read_timeout = request.read_timeout
+            connection.continue_timeout = request.continue_timeout
 
             connection.request(build_net_http_request(request)) do |http_resp|
               response.status = http_resp.code.to_i

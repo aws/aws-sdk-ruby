@@ -33,6 +33,7 @@ module AWS::Core::Http
         :ssl_ca_file => '/ssl/ca',
         :ssl_ca_path => nil,
         :read_timeout => 60,
+        :continue_timeout => 1,
         :headers => { 'foo' => 'bar' })
     }
 

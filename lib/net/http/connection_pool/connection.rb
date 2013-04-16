@@ -74,6 +74,7 @@ class Net::HTTP::ConnectionPool
       end
 
       @read_timeout = options[:read_timeout] || 60
+      @continue_timeout = options[:continue_timeout] || 0
 
     end
 
@@ -112,6 +113,9 @@ class Net::HTTP::ConnectionPool
 
     # @return [Numeric,nil]
     attr_accessor :read_timeout
+
+    # @return [Numeric,nil]
+    attr_accessor :continue_timeout
 
     # @return [Boolean] Returns `true` if this connection requires SSL.
     def ssl?

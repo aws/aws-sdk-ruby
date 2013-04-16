@@ -49,6 +49,17 @@ class Net::HTTP::ConnectionPool
       http_session.read_timeout = timeout
     end
 
+    # @param [Float,nil] timeout When set to a positive number of seconds,
+    #   and the 'expect' header contains '100-continue' then Net::HTTP
+    #   will wait +timeout+ number of seconds before sending the request
+    #   payload.  If the server returns a '100-continue' response before
+    #   +timeout+ seconds have passed, then it will send the payload sooner.
+    def continue_timeout= timeout
+      if http_session.respond_to?(:continue_timeout=)
+        http_session.continue_timeout = timeout
+      end
+    end
+
     # Makes a HTTP request.  See Net::HTTPSession#request documentation
     # from the Ruby standard library for information about argments.
     #
