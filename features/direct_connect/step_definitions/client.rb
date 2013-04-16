@@ -1,4 +1,3 @@
-
 # Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -12,12 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-# language: en
-@s3 @100continue @objects
-Feature: Expect and 100-continue
 
-  Scenario: Put an Object using 100-continue
-    Given I monkey-patch Net::HTTP to work with 100-continue
-    And I configure S3 with a 1MB http_continue_threshold and 5 second continue timeout
-    When I put an object that is 2MB large
-    Then the request headers should have "Expect" set to "100-continue"
+When(/^I use the client to describe connections$/) do
+  @response = @direct_connect.client.describe_connections
+end
+
+Then(/^the result should have an array of connections$/) do
+  @response.data[:connections].should be_an(Array)
+end
+
+When(/^I use the client to describe a non\-existent connection$/) do
+  begin
+    @direct_connect.client.describe_connection_detail(:connection_id => 'abc')
+  rescue => error
+    @error = error
+  end
+end

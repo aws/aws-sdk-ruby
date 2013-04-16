@@ -1,4 +1,3 @@
-
 # Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -13,11 +12,15 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@s3 @100continue @objects
-Feature: Expect and 100-continue
+@direct_connect @client @foo
+Feature: AWS Direct Connect Client
 
-  Scenario: Put an Object using 100-continue
-    Given I monkey-patch Net::HTTP to work with 100-continue
-    And I configure S3 with a 1MB http_continue_threshold and 5 second continue timeout
-    When I put an object that is 2MB large
-    Then the request headers should have "Expect" set to "100-continue"
+  Scenario: Describe Connections
+    When I use the client to describe connections
+    Then the result should have an array of connections
+
+  Scenario: Errors
+    When I use the client to describe a non-existent connection
+    Then I should receive an error with:
+    | code                         | message                                  |
+    | DirectConnectClientException | Connection ID abc has an invalid format. |

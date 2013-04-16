@@ -12,19 +12,19 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/core'
-require 'aws/import_export/config'
+require 'aws/direct_connect/config'
 
 module AWS
 
   # This class is the starting point for working with AWS Import/Export.
   #
-  # To use AWS Import/Export you must first
-  # [sign up here](http://aws.amazon.com/importexport/).
+  # To use AWS Direct Connect you must first
+  # [sign up here](http://aws.amazon.com/directconnect/).
   #
-  # For more information about AWS Import/Export:
+  # For more information about AWS AWS Direct Connect:
   #
-  # * [AWS Import/Export](http://aws.amazon.com/importexport/)
-  # * [AWS Import/Export Documentation](http://aws.amazon.com/documentation/importexport/)
+  # * [AWS Direct Connect](http://aws.amazon.com/directconnect/)
+  # * [AWS Direct Connect Documentation](http://aws.amazon.com/documentation/directconnect/)
   #
   # # Credentials
   #
@@ -35,40 +35,40 @@ module AWS
   #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # Or you can set them directly on the AWS::ImportExport interface:
+  # Or you can set them directly on the AWS::DirectConnect interface:
   #
-  #     ie = AWS::ImportExport.new(
+  #     dc = AWS::DirectConnect.new(
   #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
   #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # # Using the Client
   #
-  # AWS::ImportExport does not provide higher level abstractions for Import/Export at
+  # AWS::DirectConnect does not provide higher level abstractions for at
   # this time.  You can still access all of the API methods using
-  # {AWS::ImportExport::Client}.  Here is how you access the client and make
+  # {AWS::DirectConnect::Client}.  Here is how you access the client and make
   # a simple request:
   #
+  #     dc = AWS::DirectConnect.new
   #
-  #     ie = AWS::ImportExport.new
-  #
-  #     resp = ie.client.list_hosted_zones
-  #     resp[:hosted_zones].each do |zone|
+  #     resp = dc.client.describe_connections
+  #     resp[:connections].each do |connection|
   #       # ...
   #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #
   # @!attribute [r] client
-  #   @return [Client] the low-level ImportExport client object
-  class ImportExport
+  #   @return [Client] the low-level DirectConnect client object
+  #
+  class DirectConnect
 
-    autoload :Client, 'aws/import_export/client'
-    autoload :Errors, 'aws/import_export/errors'
-    autoload :Request, 'aws/import_export/request'
+    autoload :Client, 'aws/direct_connect/client'
+    autoload :Errors, 'aws/direct_connect/errors'
+    autoload :Request, 'aws/direct_connect/request'
 
     include Core::ServiceInterface
 
-    endpoint_prefix 'importexport', :global => true
+    endpoint_prefix 'directconnect'
 
   end
 end

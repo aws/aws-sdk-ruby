@@ -25,8 +25,9 @@ require 'aws/version'
 # * {AWS::CloudFront}
 # * {AWS::CloudSearch}
 # * {AWS::CloudWatch}
-# * {AWS::DynamoDB}
 # * {AWS::DataPipeline}
+# * {AWS::DirectConnect}
+# * {AWS::DynamoDB}
 # * {AWS::EC2}
 # * {AWS::ElastiCache}
 # * {AWS::ElasticBeanstalk}
