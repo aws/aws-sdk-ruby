@@ -40,8 +40,8 @@ module AWS
           res = catch(:response) {
             req.exec @socket, @curr_http_version, edit_path(req.path)
             begin
-              res = HTTPResponse.read_new(@socket)
-            end while res.kind_of?(HTTPContinue)
+              res = Net::HTTPResponse.read_new(@socket)
+            end while res.kind_of?(Net::HTTPContinue)
             res
           }
           res.reading_body(@socket, req.response_body_permitted?) {
@@ -65,9 +65,9 @@ module AWS
             res = catch(:response) {
               req.exec @socket, @curr_http_version, edit_path(req.path)
               begin
-                res = HTTPResponse.read_new(@socket)
+                res = Net::HTTPResponse.read_new(@socket)
                 res.decode_content = req.decode_content
-              end while res.kind_of?(HTTPContinue)
+              end while res.kind_of?(Net::HTTPContinue)
 
               res.uri = req.uri
 
