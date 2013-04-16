@@ -71,10 +71,8 @@ module AWS
       #   * `:object_ids` - *required* - (Array<String>) Identifiers of the
       #     pipeline objects that contain the definitions to be described. You
       #     can pass as many as 25 identifiers in a single call to
-      #     DescribeObjects.
-      #   * `:evaluate_expressions` - (Boolean) Indicates whether any
-      #     expressions in the object should be evaluated when the object
-      #     descriptions are returned.
+      #     DescribeObjects
+      #   * `:evaluate_expressions` - (Boolean)
       #   * `:marker` - (String) The starting point for the results to be
       #     returned. The first time you call DescribeObjects, this value
       #     should be empty. As long as the action returns HasMoreResults as
@@ -130,10 +128,7 @@ module AWS
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline.
       #   * `:version` - (String) The version of the pipeline definition to
-      #     retrieve. This parameter accepts the values latest and active.
-      #     Where latest indicates the last definition saved to the pipeline
-      #     and active indicates the last definition of the pipeline that was
-      #     activated.
+      #     retrieve.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
