@@ -320,13 +320,27 @@ module AWS
       def expired_credentials? response
         response.error and
         response.error.respond_to?(:code) and
-        (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
+        (
+          response.error.code.to_s.match(/ExpiredToken/) or # session credentials
+          response.error.code == 'InvalidClientTokenId' or # query services
+          response.error.code == 'UnrecognizedClientException' or # json services
+          response.error.code == 'InvalidAccessKeyId' or # s3
+          response.error.code == 'AuthFailure' # ec2
+        )
       end
 
       def throttled? response
         response.error and
         response.error.respond_to?(:code) and
-        response.error.code.to_s.match(/Throttling/i)
+        (
+          response.error.code.to_s.match(/throttl/i) or
+          #response.error.code == 'Throttling' or # most query services
+          #response.error.code == 'ThrottlingException' or # json services
+          #response.error.code == 'RequestThrottled' or # sqs
+          response.error.code == 'ProvisionedThroughputExceededException' or # ddb
+          response.error.code == 'RequestLimitExceeded' or # ec2
+          response.error.code == 'BandwidthLimitExceeded' # cloud search
+        )
       end
 
       def redirected? response
