@@ -323,7 +323,7 @@ module AWS
         response.error and
         response.error.respond_to?(:code) and
         (
-          response.error.code.to_s.match(/ExpiredToken/) or # session credentials
+          response.error.code.to_s.match(/expired/i) or # session credentials
           response.error.code == 'InvalidClientTokenId' or # query services
           response.error.code == 'UnrecognizedClientException' or # json services
           response.error.code == 'InvalidAccessKeyId' or # s3
