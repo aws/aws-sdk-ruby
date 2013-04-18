@@ -124,7 +124,8 @@ module AWS
           begin
             session ||= start_session(endpoint)
             session.read_timeout = http_read_timeout
-            session.continue_timeout = http_continue_timeout
+            session.continue_timeout = http_continue_timeout if
+              session.respond_to?(:continue_timeout=)
             yield(session)
           rescue Exception => error
             session.finish if session

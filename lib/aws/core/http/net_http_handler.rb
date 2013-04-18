@@ -52,7 +52,8 @@ module AWS
             @pool.session_for(request.endpoint) do |http|
 
               http.read_timeout = request.read_timeout
-              http.continue_timeout = request.continue_timeout
+              http.continue_timeout = request.continue_timeout if
+                http.respond_to?(:continue_timeout=)
 
               http.request(build_net_http_request(request)) do |net_http_resp|
                 response.status = net_http_resp.code.to_i
