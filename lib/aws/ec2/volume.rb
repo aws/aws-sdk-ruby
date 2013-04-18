@@ -54,7 +54,7 @@ module AWS
 
       include TaggedItem
 
-      # @private
+      # @api private
       def initialize(id, opts = {})
         @id = id
         super(opts)

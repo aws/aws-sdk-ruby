@@ -49,7 +49,7 @@ module AWS
       #
       class Attachment
 
-        # @private
+        # @api private
         def initialize internet_gateway, details
           @internet_gateway = internet_gateway
           @vpc = VPC.new(details.vpc_id, :config => internet_gateway.config)

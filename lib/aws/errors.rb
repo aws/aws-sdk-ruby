@@ -89,7 +89,7 @@ module AWS
 
     # Provides the ability to instantiate instances of {ServerError} and
     # {ClientError}.
-    # @private
+    # @api private
     module ExceptionMixinClassMethods
       def new(*args)
         e = Base.new(*args)

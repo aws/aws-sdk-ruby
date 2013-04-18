@@ -16,7 +16,7 @@ require 'uri'
 module AWS
   class SQS
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
       include Core::Signature::Version4

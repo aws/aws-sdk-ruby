@@ -16,7 +16,7 @@ module AWS
 
     class Client < Core::RESTJSONClient
 
-      # @private
+      # @api private
       def extract_error_details response
         if
           response.http_response.status >= 300 and
@@ -30,7 +30,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

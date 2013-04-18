@@ -21,7 +21,7 @@ module AWS
       # the regions before and after each quoted region, for example:
       #  "? ? `foo?``bar?` ? 'foo?' ?".scan(OUTSIDE_QUOTES_REGEX)
       #  # => [["? ? ", "`foo?``bar?`", " ? "], ["", "'foo?'", " ?"]]
-      # @private
+      # @api private
       OUTSIDE_QUOTES_REGEX = Regexp.compile(
         '([^\'"`]*)(`(?:[^`]*(?:``))*[^`]*`|' +
         '\'(?:[^\']*(?:\'\'))*[^\']*\'|'      +
@@ -35,13 +35,13 @@ module AWS
       # @return [Domain] The domain the items belong to.
       attr_reader :domain
 
-      # @private
+      # @api private
       attr_reader :output_list
 
-      # @private
+      # @api private
       attr_reader :conditions
 
-      # @private
+      # @api private
       attr_reader :sort_instructions
 
       # @param [Domain] domain The domain that you want an item collection for.
@@ -170,7 +170,7 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       def each_batch options = {}, &block
         handle_query_options(options) do |collection, opts|
           return collection.each_batch(opts, &block)
@@ -454,7 +454,7 @@ module AWS
       # Applies standard scope options (e.g. :where => 'foo') and removes them from
       # the options hash by calling their method (e.g. by calling #where('foo')).
       # Yields only if there were scope options to apply.
-      # @private
+      # @api private
       protected
       def handle_query_options(*args)
 
@@ -520,7 +520,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def select_expression options = {}
         expression = []
@@ -532,7 +532,7 @@ module AWS
         expression.compact.join(' ')
       end
 
-      # @private
+      # @api private
       protected
       def where_clause
 
@@ -546,19 +546,19 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def order_by_clause
         sort_instructions ? "ORDER BY #{sort_instructions}" : nil
       end
 
-      # @private
+      # @api private
       protected
       def limit_clause
         limit ? "LIMIT #{limit}" : nil
       end
 
-      # @private
+      # @api private
       protected
       def collection_with options
         ItemCollection.new(domain, {
@@ -570,7 +570,7 @@ module AWS
         }.merge(options))
       end
 
-      # @private
+      # @api private
       protected
       def replace_placeholders(str, *substitutions)
         named = {}
@@ -597,7 +597,7 @@ module AWS
         str
       end
 
-      # @private
+      # @api private
       protected
       def replace_placeholders_outside_quotes(str, count, substitutions, named = {})
         str, count = replace_positional_placeders(str, count, substitutions)
@@ -605,7 +605,7 @@ module AWS
         [str, count]
       end
 
-      # @private
+      # @api private
       protected
       def replace_positional_placeders(str, count, substitutions)
         str = str.gsub("?") do |placeholder|
@@ -617,7 +617,7 @@ module AWS
         [str, count]
       end
 
-      # @private
+      # @api private
       protected
       def replace_named_placeholders(str, named)
         named.each do |name, value|
@@ -629,7 +629,7 @@ module AWS
         str
       end
 
-      # @private
+      # @api private
       protected
       def coerce_substitution(subst)
         if subst.kind_of?(Array)
@@ -640,7 +640,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def coerce_attribute(name)
         '`' + name.to_s.gsub('`', '``') + '`'

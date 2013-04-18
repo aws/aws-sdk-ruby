@@ -18,7 +18,7 @@ module AWS
       include Core::Collection::Simple
 
       # @param [JobFlow] job_flow
-      # @private
+      # @api private
       def initialize job_flow, options = {}
         @job_flow = job_flow
         super

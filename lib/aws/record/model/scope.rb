@@ -60,7 +60,7 @@ module AWS
       #
       class Scope < Record::Scope
 
-        # @private
+        # @api private
         def initialize base_class, options = {}
           super
           @options[:where] ||= []
@@ -132,7 +132,7 @@ module AWS
           _with(:order => [attribute_name, order])
         end
 
-        # @private
+        # @api private
         private
         def _each_object &block
 
@@ -151,7 +151,7 @@ module AWS
         # @param [Scope] scope A scope to merge with this one.
         # @return [Scope] Returns a new scope with merged conditions and
         #   overriden order and limit.
-        # @private
+        # @api private
         private
         def _merge_scope scope
           merged = self
@@ -177,7 +177,7 @@ module AWS
         # @option options [Integer] :limit
         # @return [Scope] Returns a new scope with the hash of scope
         #   options applied.
-        # @private
+        # @api private
         private
         def _handle_options options
           scope = self
@@ -194,7 +194,7 @@ module AWS
 
         # Converts this scope object into an AWS::SimpleDB::ItemCollection
         # @return [SimpleDB::ItemCollection]
-        # @private
+        # @api private
         private
         def _item_collection
           items = base_class.sdb_domain(_shard).items

@@ -115,7 +115,7 @@ module AWS
         super(options)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.users.each do |item|

@@ -89,7 +89,7 @@ module AWS
       include Core::Model
       include OptionFormatters
 
-      # @private
+      # @api private
       def initialize domain, request_options, data
 
         @domain = domain

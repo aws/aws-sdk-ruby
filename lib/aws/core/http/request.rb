@@ -59,14 +59,14 @@ module AWS
 
         # @return [String] Returns the AWS access key ID used to authorize the
         #   request.
-        # @private
+        # @api private
         attr_accessor :access_key_id
 
         # @return [Array<Param>] Returns an array of request params.  Requests
         #   that use signature version 2 add params to the request and then
         #   sign those before building the {#body}.  Normally the {#body}
         #   should be set directly with the HTTP payload.
-        # @private
+        # @api private
         attr_accessor :params
 
         # @return [String] The name of the service for Signature v4 signing.
@@ -87,7 +87,7 @@ module AWS
 
         # @return [Float] timeout The number of seconds to wait for a
         #   100-continue response before sending the HTTP request body.
-        # @private
+        # @api private
         attr_accessor :continue_timeout
 
         def endpoint
@@ -108,7 +108,7 @@ module AWS
         # Some subclasses override this method to obseve requirements
         # set by the services (e.q. SimpleWorlfow and SQS have special
         # long-pulling requirements and require special read timeouts).
-        # @private
+        # @api private
         def read_timeout
           default_read_timeout
         end
@@ -134,7 +134,7 @@ module AWS
         #   Add a param (object)
         #   @param [Param] param_obj
         #
-        # @private
+        # @api private
         def add_param name_or_param, value = nil
           if name_or_param.kind_of?(Param)
             @params << name_or_param
@@ -143,7 +143,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         # @return [String,nil] Returns the url encoded request params.  If there
         #   are no params, then nil is returned.
         def url_encoded_params
@@ -197,7 +197,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         class CaseInsensitiveHash < Hash
 
           def []= key, value
@@ -221,7 +221,7 @@ module AWS
         # in a form encoded body string, others as query parameters.
         # It is up to each service's Request class to determine how to
         # consume these params.
-        # @private
+        # @api private
         class Param
 
           include UriEscape

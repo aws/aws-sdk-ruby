@@ -71,7 +71,7 @@ module AWS
       # @return [Item] The item to which these attributes belong.
       attr_reader :item
 
-      # @private
+      # @api private
       def initialize(item, opts = {})
         @item = item
         super
@@ -228,12 +228,12 @@ module AWS
       # {AttributeCollection#update} for more information.
       class UpdateBuilder
 
-        # @private
+        # @api private
         attr_reader :updates
 
         include Types
 
-        # @private
+        # @api private
         def initialize
           @updates = {}
         end

@@ -18,7 +18,7 @@ module AWS
 
       include PaginatedCollection
 
-      # @private
+      # @api private
       def initialize *args
         options = args.last.is_a?(Hash) ? args.pop : {}
         @prefix = options[:prefix]
@@ -72,7 +72,7 @@ module AWS
         self.class.new(bucket, :prefix => new_prefix)
       end
 
-      # @private
+      # @api private
       protected
       def list_options(options)
         opts = super

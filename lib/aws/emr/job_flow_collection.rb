@@ -59,7 +59,7 @@ module AWS
 
       include Core::Collection::Simple
 
-      # @private
+      # @api private
       def initialize options = {}
         @filters = options[:filters] || {}
         super

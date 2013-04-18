@@ -15,7 +15,7 @@ module AWS
   module Core
     module Http
 
-      # @private
+      # @api private
       class Handler
 
         attr_reader :base

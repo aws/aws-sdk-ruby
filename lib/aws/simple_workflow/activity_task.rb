@@ -21,7 +21,7 @@ module AWS
 
       include Core::Model
 
-      # @private
+      # @api private
       def initialize domain, data, options = {}
 
         @domain = domain

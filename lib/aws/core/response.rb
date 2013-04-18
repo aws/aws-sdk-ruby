@@ -63,7 +63,7 @@ module AWS
       # @return [Hash] Returns the response data as a hash.
       attr_accessor :data
 
-      # @private
+      # @api private
       attr_accessor :config
 
       # @return [Symbol] The name of the client request method that
@@ -132,13 +132,13 @@ module AWS
       end
 
       # @return [String]
-      # @private
+      # @api private
       def inspect
         data.inspect
       end
 
       # @return [String]
-      # @private
+      # @api private
       def cache_key
         [
           http_request.access_key_id,
@@ -151,7 +151,7 @@ module AWS
       # Rebuilds the HTTP request using the block passed to the initializer.
       # This is primarily used by the client when a request must be retried
       # (throttling, server errors, socket errors, etc).
-      # @private
+      # @api private
       def rebuild_request
         build_request
         @http_request.body_stream.rewind if @http_request.body_stream

@@ -14,23 +14,23 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module Cacheable
 
-      # @private
+      # @api private
       class NoData < StandardError; end
 
       def self.included base
         base.extend Naming unless base.respond_to?(:service_ruby_name)
       end
 
-      # @private
+      # @api private
       protected
       def local_cache_key
         raise NotImplementedError
       end
 
-      # @private
+      # @api private
       protected
       def cache_key
         @cache_key ||= begin
@@ -41,7 +41,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       public
       def retrieve_attribute attr, &block
 

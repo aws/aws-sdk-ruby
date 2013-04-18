@@ -51,7 +51,7 @@ module AWS
 
       include StackOptions
 
-      # @private
+      # @api private
       def initialize name, options = {}
         @name = name
         super

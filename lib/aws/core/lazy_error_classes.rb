@@ -50,7 +50,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def self.extended base
 
         unless base.const_defined?(:GRAMMAR)

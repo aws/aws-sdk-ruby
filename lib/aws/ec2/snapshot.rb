@@ -54,7 +54,7 @@ module AWS
       include TaggedItem
       include HasPermissions
 
-      # @private
+      # @api private
       def initialize id, options = {}
         @id = id
         super(options)
@@ -132,7 +132,7 @@ module AWS
         Volume.new(volume_id, :config => config) if volume_id
       end
 
-      # @private
+      # @api private
       def __permissions_attribute__
         "createVolumePermission"
       end

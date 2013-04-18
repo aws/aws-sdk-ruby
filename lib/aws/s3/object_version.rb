@@ -138,7 +138,7 @@ module AWS
 
       alias_method :eql?, :==
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{object.bucket.name}:#{object.key}:#{version_id}>"
       end

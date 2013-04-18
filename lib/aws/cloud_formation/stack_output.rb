@@ -38,7 +38,7 @@ module AWS
       # @return [String]
       attr_reader :description
 
-      # @private
+      # @api private
       def eql? other
         other.is_a?(StackOutput) and
         other.stack == stack and

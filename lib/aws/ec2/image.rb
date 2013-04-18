@@ -259,7 +259,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       def __permissions_attribute__
         "launchPermission"
       end

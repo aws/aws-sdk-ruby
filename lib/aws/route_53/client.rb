@@ -17,7 +17,7 @@ module AWS
     # Client class for Route53.
     class Client < Core::RESTXMLClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

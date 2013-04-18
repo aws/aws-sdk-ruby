@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Simple Workflow Service (SWF).
     class Client < Core::JSONClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :count_pending_activity_tasks,
         :count_pending_decision_tasks,

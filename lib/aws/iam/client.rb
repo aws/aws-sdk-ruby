@@ -17,7 +17,7 @@ module AWS
     # Client class for AWS Identity and Access Management (IAM).
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :get_group,
         :get_group_policy,

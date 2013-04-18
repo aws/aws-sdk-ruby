@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class LengthValidator < Validator
 
       ACCEPTED_OPTIONS = [
@@ -66,7 +66,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def wrong_length exactly, got
         msg = options[:wrong_length] ||
@@ -74,7 +74,7 @@ module AWS
         interpolate(msg, :exactly => exactly, :length => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_short min, got
         msg = options[:too_short] ||
@@ -82,7 +82,7 @@ module AWS
         interpolate(msg, :minimum => min, :length => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_long max, got
         msg = options[:too_long] ||

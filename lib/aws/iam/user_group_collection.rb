@@ -28,7 +28,7 @@ module AWS
       # @attr_reader [User] The user.
       attr_reader :user
 
-      # @private
+      # @api private
       def initialize(user, opts = {})
         @user = user
         super
@@ -77,13 +77,13 @@ module AWS
         super(options.merge(:user_name => user.name), &block)
       end
 
-      # @private
+      # @api private
       protected
       def request_method
         :list_groups_for_user
       end
 
-      # @private
+      # @api private
       protected
       def each_item response
         response.groups.each do |g|

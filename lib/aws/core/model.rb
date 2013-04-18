@@ -14,10 +14,10 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module Model
 
-      # @private
+      # @api private
       def initialize(*args)
         options = args.last.kind_of?(Hash) ? args.last : {}
         @config = case

@@ -17,7 +17,7 @@ module AWS
     # Client class for AWS Elastic Beanstalk.
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

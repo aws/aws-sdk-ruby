@@ -50,7 +50,7 @@ module AWS
 
       include Core::Collection::WithNextToken
 
-      # @private
+      # @api private
       def initialize options = {}
         @filters = options[:filters]
         super

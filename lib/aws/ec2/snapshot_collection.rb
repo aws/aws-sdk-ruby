@@ -35,7 +35,7 @@ module AWS
 
       include TaggedCollection
 
-      # @private
+      # @api private
       def initialize(options = {})
         @owners = options[:owners] || []
         @restorable_by = options[:restorable_by] || []
@@ -113,13 +113,13 @@ module AWS
         Snapshot.new(resp.snapshot_id, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Snapshot
       end
 
-      # @private
+      # @api private
       protected
       def preserved_options
         super.merge(:owners => @owners, :restorable_by => @restorable_by)

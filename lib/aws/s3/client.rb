@@ -31,7 +31,7 @@ module AWS
 
       autoload :XML, 'aws/s3/client/xml'
 
-      # @private
+      # @api private
       EMPTY_BODY_ERRORS = {
         304 => Errors::NotModified,
         403 => Errors::Forbidden,
@@ -39,7 +39,7 @@ module AWS
         404 => Errors::NoSuchKey,
       }
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       include DataOptions

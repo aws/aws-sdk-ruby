@@ -111,7 +111,7 @@ module AWS
         Table.new(name, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def _each_item next_token, limit, options = {}, &block
 

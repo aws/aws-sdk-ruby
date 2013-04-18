@@ -29,7 +29,7 @@ module AWS
       include Enumerable
       include Core::Model
 
-      # @private
+      # @api private
       def initialize hosted_zone_id, options = {}
         super(options)
         @hosted_zone_id = hosted_zone_id
@@ -97,7 +97,7 @@ module AWS
 
     class ChangeRequest
 
-      # @private
+      # @api private
       def initialize(action, name, type, options={})
         @action = action
         @name = name

@@ -254,7 +254,7 @@ module AWS
       # @return [Bucket] The bucket this object is in.
       attr_reader :bucket
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{bucket.name}/#{key}>"
       end
@@ -1067,7 +1067,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       module ACLProxy
 
         attr_accessor :object
@@ -1125,7 +1125,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       REQUEST_PARAMETERS = Request.query_parameters.map do |p|
         p.tr("-","_").to_sym
       end

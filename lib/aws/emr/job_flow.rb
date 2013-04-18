@@ -76,7 +76,7 @@ module AWS
 
       # @param [String] job_flow_id
       # @param [Hash] options
-      # @private
+      # @api private
       def initialize job_flow_id, options = {}
         @job_flow_id = job_flow_id
         super

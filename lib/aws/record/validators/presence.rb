@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class PresenceValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :allow_nil, :allow_blank, :on, :if, :unless]

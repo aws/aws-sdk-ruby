@@ -29,7 +29,7 @@ module AWS
       # @return [MultipartUpload] The upload to which the parts belong.
       attr_reader :upload
 
-      # @private
+      # @api private
       def initialize(upload, opts = {})
         @upload = upload
         super
@@ -43,7 +43,7 @@ module AWS
         UploadedPart.new(upload, number)
       end
 
-      # @private
+      # @api private
       protected
       def each_member_in_page(page, &block)
         page.parts.each do |part_info|
@@ -52,7 +52,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def list_options(options)
         opts = super
@@ -62,17 +62,17 @@ module AWS
         opts
       end
 
-      # @private
+      # @api private
       protected
       def limit_param; :max_parts; end
 
-      # @private
+      # @api private
       protected
       def list_request(options)
         client.list_parts(options)
       end
 
-      # @private
+      # @api private
       protected
       def pagination_markers
         [:part_number_marker]

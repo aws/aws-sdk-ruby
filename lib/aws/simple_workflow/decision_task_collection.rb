@@ -74,7 +74,7 @@ module AWS
       include Core::Model
       include OptionFormatters
 
-      # @private
+      # @api private
       def initialize domain, options = {}
         @domain = domain
         super

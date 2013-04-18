@@ -24,7 +24,7 @@ module AWS
 
       prefix_update_attributes
 
-      # @private
+      # @api private
       def initialize(name, opts={})
         opts[:name] = name
         super(opts)
@@ -117,7 +117,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:server_certificate_name, name]]

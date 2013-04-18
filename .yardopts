@@ -1,6 +1,6 @@
---no-private
 --title 'AWS SDK for Ruby'
 --template-path doc-src/templates
 --markup markdown
--
+--no-api private
+lib/**/*.rb
 LICENSE.txt

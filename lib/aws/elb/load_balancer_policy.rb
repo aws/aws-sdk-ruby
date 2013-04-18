@@ -15,7 +15,7 @@ module AWS
   class ELB
     class LoadBalancerPolicy < Core::Resource
 
-      # @private
+      # @api private
       def initialize load_balancer, name, options = {}
         @load_balancer = load_balancer
         super(load_balancer, options.merge(:name => name.to_s))

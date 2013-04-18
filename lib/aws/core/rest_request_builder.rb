@@ -18,7 +18,7 @@ module AWS
     # populate a Core::Http::Request object.
     class RESTRequestBuilder
 
-      # @private
+      # @api private
       def initialize operation, options = {}
 
         @http = operation[:http]

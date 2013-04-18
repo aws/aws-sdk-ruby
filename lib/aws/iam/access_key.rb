@@ -148,7 +148,7 @@ module AWS
         { :access_key_id => id, :secret_access_key => secret }
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         identifiers = []
@@ -161,14 +161,14 @@ module AWS
       # Also note, we do not page the response. This is because
       # restrictions on how many access keys an account / user may
       # have is fewer than one page of results.
-      # @private
+      # @api private
       protected
       def get_resource attribute
         options = user ? { :user_name => user.name } : {}
         client.list_access_keys(options)
       end
 
-      # @private
+      # @api private
       protected
       def matches_response_object? obj
         user_name = obj.respond_to?(:user_name) ? obj.user_name : nil

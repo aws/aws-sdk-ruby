@@ -30,7 +30,7 @@ module AWS
     # service are instances of either {ClientError} or {ServerError}.
     module Errors
 
-      # @private
+      # @api private
       GRAMMAR = Core::XML::Grammar.customize
 
       extend Core::LazyErrorClasses

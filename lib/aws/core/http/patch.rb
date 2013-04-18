@@ -33,7 +33,7 @@ module AWS
         Net::HTTP.send(:alias_method, :transport_request, :new_transport_request)
       end
 
-      # @private
+      # @api private
       module Expect100Continue19
         def new_transport_request(req)
           begin_transport req
@@ -56,7 +56,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       module Expect100Continue20
         def new_transport_request(req)
           count = 0

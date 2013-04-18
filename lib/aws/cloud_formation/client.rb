@@ -17,7 +17,7 @@ module AWS
     # Client class for AWS CloudFormation.
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
         :describe_auto_scaling_groups,

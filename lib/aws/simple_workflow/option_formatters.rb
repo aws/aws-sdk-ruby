@@ -16,7 +16,7 @@ require 'socket'
 module AWS
   class SimpleWorkflow
 
-    # @private
+    # @api private
     module OptionFormatters
 
       protected

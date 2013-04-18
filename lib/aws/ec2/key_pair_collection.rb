@@ -70,13 +70,13 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         KeyPair
       end
 
-      # @private
+      # @api private
       private
       def create_or_import client_method, options
 

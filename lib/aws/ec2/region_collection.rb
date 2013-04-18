@@ -39,7 +39,7 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Region

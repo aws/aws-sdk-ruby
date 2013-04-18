@@ -45,12 +45,12 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         def prefix_update_attributes prefix = 'new_'
           @update_prefix = prefix
         end
 
-        # @private
+        # @api private
         def update_prefix
           @update_prefix
         end

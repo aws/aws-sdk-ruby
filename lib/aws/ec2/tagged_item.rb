@@ -60,7 +60,7 @@ module AWS
         ResourceTagCollection.new(self, :config => config)
       end
 
-      # @private
+      # @api private
       def cached_tags
         if cache = AWS.response_cache
           cache.select(describe_call_name.to_sym).each do |resp|
@@ -75,7 +75,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       def tagging_resource_type
         Core::Inflection.ruby_name(self.class.to_s).tr("_","-")
       end

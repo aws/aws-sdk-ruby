@@ -148,7 +148,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       private
       def bucket_named name, owner = nil
         S3::Bucket.new(name.to_s, :owner => owner, :config => config)

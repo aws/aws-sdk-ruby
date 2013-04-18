@@ -19,7 +19,7 @@ module AWS
 
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

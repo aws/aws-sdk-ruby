@@ -448,7 +448,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def hydrate id, data
 
@@ -592,7 +592,7 @@ module AWS
           create_impl(attributes, :create!, :save!)
         end
 
-        # @private
+        # @api private
         def new_scope
           self::Scope.new(self)
         end
@@ -619,7 +619,7 @@ module AWS
           @attributes ||= {}
         end
 
-        # @private
+        # @api private
         def attribute_for attribute_name, &block
           unless attribute = attributes[attribute_name.to_s]
             raise UndefinedAttributeError.new(attribute_name.to_s)
@@ -627,7 +627,7 @@ module AWS
           block_given? ? yield(attribute) : attribute
         end
 
-        # @private
+        # @api private
         def add_attribute attribute
 
           attr_name = attribute.name

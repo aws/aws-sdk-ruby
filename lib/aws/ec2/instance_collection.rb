@@ -297,13 +297,13 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Instance
       end
 
-      # @private
+      # @api private
       private
       def count_options options
         min = max = 1
@@ -318,7 +318,7 @@ module AWS
         { :min_count => min, :max_count => max }
       end
 
-      # @private
+      # @api private
       private
       def security_group_opts options
 

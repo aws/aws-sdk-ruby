@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
         :describe_availability_zones,

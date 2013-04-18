@@ -14,10 +14,10 @@
 module AWS
   class EC2
 
-    # @private
+    # @api private
     class Resource < Core::Resource
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[resource_id_method, send(resource_id_method)]]
@@ -147,7 +147,7 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         protected
         def describe_call_attribute(name, opts = {}, &blk)
           attribute(name, opts, &blk)

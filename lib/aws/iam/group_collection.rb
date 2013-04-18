@@ -112,7 +112,7 @@ module AWS
         Group.new(name, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.groups.each do |item|

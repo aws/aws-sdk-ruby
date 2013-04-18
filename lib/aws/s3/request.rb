@@ -17,7 +17,7 @@ require 'time'
 module AWS
   class S3
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
       include Core::UriEscape
@@ -28,7 +28,7 @@ module AWS
       # @return [String] S3 object key
       attr_accessor :key
 
-      # @private
+      # @api private
       attr_accessor :force_path_style
 
       def metadata= metadata

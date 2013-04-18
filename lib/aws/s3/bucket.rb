@@ -483,7 +483,7 @@ module AWS
         @owner || client.list_buckets.owner
       end
 
-      # @private
+      # @api private
       def inspect
         "#<AWS::S3::Bucket:#{name}>"
       end
@@ -533,7 +533,7 @@ module AWS
         MultipartUploadCollection.new(self)
       end
 
-      # @private
+      # @api private
       module ACLProxy
 
         attr_accessor :bucket
@@ -576,7 +576,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       module PolicyProxy
 
         attr_accessor :bucket

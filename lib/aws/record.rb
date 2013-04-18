@@ -50,7 +50,7 @@ module AWS
     autoload :PresenceValidator, 'aws/record/validators/presence'
     autoload :Validator, 'aws/record/validator'
 
-    # @private
+    # @api private
     class RecordNotFound < StandardError; end
 
     # Sets a prefix to be applied to all SimpleDB domains associated with
@@ -113,7 +113,7 @@ module AWS
     #
     # @param [Object] value
     # @return [Array] The value cast into an array
-    # @private
+    # @api private
     def self.as_array value
       case value
       when nil   then []
@@ -130,7 +130,7 @@ module AWS
     #
     # @param [Object] value
     # @return [Set] The value cast into a Set.
-    # @private
+    # @api private
     def self.as_set value
       case value
       when Set then value

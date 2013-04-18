@@ -25,7 +25,7 @@ module AWS
 
       include Core::Collection::Simple
 
-      # @private
+      # @api private
       def initialize group, options = {}
         @group = group
         super
@@ -68,7 +68,7 @@ module AWS
         each {|user| remove(user) }
       end
 
-      # @private
+      # @api private
       protected
       def _each_item options = {}, &block
         response = client.get_group(:group_name => group.name)

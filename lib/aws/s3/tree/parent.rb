@@ -22,7 +22,7 @@ module AWS
 
         include Core::Model
 
-        # @private
+        # @api private
         def initialize collection, options = {}
 
           options = {

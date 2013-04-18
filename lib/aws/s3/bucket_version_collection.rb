@@ -47,7 +47,7 @@ module AWS
       #
       def each options = {}, &block; super; end
 
-      # @private
+      # @api private
       protected
       def each_member_in_page(page, &block)
         super
@@ -58,17 +58,17 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def list_request(options)
         client.list_object_versions(options)
       end
 
-      # @private
+      # @api private
       protected
       def limit_param; :max_keys; end
 
-      # @private
+      # @api private
       protected
       def pagination_markers; super + [:version_id_marker]; end
 

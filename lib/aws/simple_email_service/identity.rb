@@ -38,7 +38,7 @@ module AWS
     #
     class Identity < Core::Resource
 
-      # @private
+      # @api private
       def initialize email_address_or_domain, options = {}
         @identity = email_address_or_domain
         super

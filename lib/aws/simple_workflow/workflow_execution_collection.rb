@@ -28,7 +28,7 @@ module AWS
     #
     class WorkflowExecutionCollection
 
-      # @private
+      # @api private
       FILTERS = [
         :status,
         :workflow_type,
@@ -43,7 +43,7 @@ module AWS
       include Core::Collection::WithLimitAndNextToken
       include OptionFormatters
 
-      # @private
+      # @api private
       def initialize domain, options = {}
 
         @domain = domain

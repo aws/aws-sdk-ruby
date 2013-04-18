@@ -26,7 +26,7 @@ module AWS
         #   filtered.
         attr_reader :prefix
 
-        # @private
+        # @api private
         def initialize options = {}
           @prefix = options[:prefix]
           super

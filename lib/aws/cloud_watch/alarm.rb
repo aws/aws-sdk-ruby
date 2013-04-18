@@ -69,7 +69,7 @@ module AWS
     #
     class Alarm < Core::Resource
 
-      # @private
+      # @api private
       def initialize alarm_name, options = {}
         @alarm_name = alarm_name
         super

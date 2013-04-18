@@ -19,7 +19,7 @@ module AWS
 
       REGION_US_E1 = 'sts.amazonaws.com'
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       def initialize *args

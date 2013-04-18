@@ -282,7 +282,7 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       protected
       def each_member_in_page(page, &block)
         super
@@ -291,19 +291,19 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def list_request options
         client.list_objects(options)
       end
 
-      # @private
+      # @api private
       protected
       def limit_param
         :max_keys
       end
 
-      # @private
+      # @api private
       protected
       def next_markers page
         marker = (last = page.contents.last and last.key)
@@ -315,7 +315,7 @@ module AWS
       end
 
       # processes items in batches of 1k items
-      # @private
+      # @api private
       class BatchHelper
 
         def initialize batch_size, &block

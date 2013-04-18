@@ -17,7 +17,7 @@ module AWS
     # Client class for Elastic Load Balancing (ELB).
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

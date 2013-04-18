@@ -15,8 +15,9 @@ source 'http://rubygems.org'
 
 gemspec
 
-group :development do
+group :documentation do
   gem 'yard'
+  gem 'redcarpet'
   gem 'rdoc', '= 3.9.4'
 end
 

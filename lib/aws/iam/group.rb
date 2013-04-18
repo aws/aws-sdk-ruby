@@ -30,7 +30,7 @@ module AWS
 
       prefix_update_attributes
 
-      # @private
+      # @api private
       def initialize(name, options = {})
         options[:name] = name
         super
@@ -99,7 +99,7 @@ module AWS
         GroupPolicyCollection.new(self)
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:group_name, name]]

@@ -18,7 +18,7 @@ module AWS
   module Core
     module Http
 
-      # @private
+      # @api private
       class CurbHandler
 
         def initialize

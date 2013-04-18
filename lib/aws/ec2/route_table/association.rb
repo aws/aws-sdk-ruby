@@ -70,7 +70,7 @@ module AWS
       #
       class Association
 
-        # @private
+        # @api private
         def initialize route_table, association_id, subnet_id
           @route_table = route_table
           @association_id = association_id

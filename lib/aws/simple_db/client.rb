@@ -17,19 +17,19 @@ module AWS
     # Client class for Amazon SimpleDB.
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       REGION_US_E1 = 'sdb.amazonaws.com'
 
-      # @private
+      # @api private
       REGION_US_W1 = 'sdb.us-west-1.amazonaws.com'
 
-      # @private
+      # @api private
       REGION_EU_W1 = 'sdb.eu-west-1.amazonaws.com'
 
-      # @private
+      # @api private
       REGION_APAC_SE1 = 'sdb.ap-southeast-1.amazonaws.com'
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :domain_metadata,
         :get_attributes,
@@ -40,7 +40,7 @@ module AWS
       # @param [String] name
       # @return [Boolean] Returns true if the given name is a valid
       #   Amazon SimpleDB domain name.
-      # @private
+      # @api private
       def valid_domain_name? name
         self.class.valid_domain_name?(name)
       end

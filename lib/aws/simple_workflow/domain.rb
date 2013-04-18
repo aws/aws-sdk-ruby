@@ -31,7 +31,7 @@ module AWS
 
       include OptionFormatters
 
-      # @private
+      # @api private
       def initialize name, options = {}
         @name = name.to_s
         super(options)

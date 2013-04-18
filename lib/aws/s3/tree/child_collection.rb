@@ -20,7 +20,7 @@ module AWS
         include Core::Model
         include Enumerable
 
-        # @private
+        # @api private
         def initialize parent, collection, options = {}
 
           options = {

@@ -23,7 +23,7 @@ module AWS
       # @param base_class A class that extends {AWS::Record::AbstractBase}.
       # @param [Hash] options
       # @option options :
-      # @private
+      # @api private
       def initialize base_class, options = {}
 
         @base_class = base_class
@@ -154,19 +154,19 @@ module AWS
       end
       alias_method :domain, :shard
 
-      # @private
+      # @api private
       private
       def _each_object &block
         raise NotImplementedError
       end
 
-      # @private
+      # @api private
       private
       def _with options
         self.class.new(base_class, @options.merge(options))
       end
 
-      # @private
+      # @api private
       private
       def method_missing scope_name, *args
         # @todo only proxy named scope methods
@@ -176,7 +176,7 @@ module AWS
       # Merges the one scope with the current scope, returning a 3rd.
       # @param [Scope] scope
       # @return [Scope]
-      # @private
+      # @api private
       private
       def _merge_scope scope
         raise NotImplementedError
@@ -185,13 +185,13 @@ module AWS
       # Consumes a hash of options (e.g. `:shard`, +:limit) and returns
       # a new scope with those applied.
       # @return [Scope]
-      # @private
+      # @api private
       private
       def _handle_options options
         raise NotImplementedError
       end
 
-      # @private
+      # @api private
       private
       def _item_collection
         raise NotImplementedError

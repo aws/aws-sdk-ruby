@@ -56,7 +56,7 @@ module AWS
       end
       alias_method :to_h, :to_hash
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class} #{to_hash.inspect}>"
       end

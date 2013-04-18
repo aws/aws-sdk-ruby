@@ -25,7 +25,7 @@ module AWS
 
       attr_reader :volume
 
-      # @private
+      # @api private
       def initialize volume, options = {}
         @volume = volume
         super

@@ -120,7 +120,7 @@ module AWS
         ServerCertificate.new(name, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.server_certificate_metadata_list.each do |sc|

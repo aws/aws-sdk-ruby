@@ -23,7 +23,7 @@ module AWS
       include Core::Model
       include HasDeliveryPolicy
 
-      # @private
+      # @api private
       def initialize(arn, opts = {})
         @arn = arn
         @topic_arn = opts[:topic_arn]
@@ -112,7 +112,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class} arn:#{arn}>"
       end

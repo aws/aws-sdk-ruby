@@ -30,7 +30,7 @@ module AWS
 
       include TaggedItem
 
-      # @private
+      # @api private
       def initialize customer_gateway_id, options = {}
         @customer_gateway_id = customer_gateway_id
         super

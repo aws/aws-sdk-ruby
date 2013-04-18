@@ -29,7 +29,7 @@ module AWS
       # @return [Integer] The part number.
       attr_reader :part_number
 
-      # @private
+      # @api private
       def initialize(upload, part_number, opts = {})
         @upload = upload
         @part_number = part_number
@@ -60,7 +60,7 @@ module AWS
         get_attribute(:etag)
       end
 
-      # @private
+      # @api private
       private
       def get_attribute(name)
         (resp = client.list_parts(:bucket_name => upload.object.bucket.name,

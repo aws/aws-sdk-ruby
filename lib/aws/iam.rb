@@ -296,7 +296,7 @@ module AWS
       nil
     end
 
-    # @private
+    # @api private
     def account_aliases
       AccountAliasCollection.new(:config => config)
     end

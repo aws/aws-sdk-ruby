@@ -74,7 +74,7 @@ module AWS
       #   upload.  By default any size object may be uploaded.
       attr_reader :content_length
 
-      # @private
+      # @api private
       SPECIAL_FIELDS = [:cache_control,
                         :content_type,
                         :content_disposition,
@@ -86,7 +86,7 @@ module AWS
                         :success_action_status,
                         :filename]
 
-      # @private
+      # @api private
       attr_reader :conditions
 
       # @return [Array<String>] Additional fields which may be sent
@@ -238,7 +238,7 @@ module AWS
       # {PresignedPost#where} for usage examples.
       class ConditionBuilder
 
-        # @private
+        # @api private
         def initialize(post, field)
           @post = post
           @field = field
@@ -362,20 +362,20 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def with_equality_condition(option_name, value)
         field_name = field_name(option_name)
         with_condition(option_name, Hash[[[field_name, value]]])
       end
 
-      # @private
+      # @api private
       def with_prefix_condition(option_name, prefix)
         field_name = field_name(option_name)
         with_condition(option_name,
                        ["starts-with", "$#{field_name}", prefix])
       end
 
-      # @private
+      # @api private
       def refine(opts)
         self.class.new(bucket, {
                          :conditions => conditions,
@@ -389,7 +389,7 @@ module AWS
                        merge(opts))
       end
 
-      # @private
+      # @api private
       private
       def with_condition(field, condition)
         conditions = self.conditions.dup
@@ -397,7 +397,7 @@ module AWS
         refine(:conditions => conditions)
       end
 
-      # @private
+      # @api private
       private
       def format_expiration
         time = expires || Time.now.utc + 60*60
@@ -415,7 +415,7 @@ module AWS
         time.utc.iso8601
       end
 
-      # @private
+      # @api private
       private
       def range_value(range)
         case range
@@ -426,7 +426,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       private
       def split_range(range)
         range = range_value(range)
@@ -436,7 +436,7 @@ module AWS
           range.end)]
       end
 
-      # @private
+      # @api private
       private
       def optional_fields
         fields = (SPECIAL_FIELDS &
@@ -453,7 +453,7 @@ module AWS
         fields
       end
 
-      # @private
+      # @api private
       private
       def field_name(option_name)
         case option_name
@@ -472,7 +472,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       private
       def field_value(option_name)
         case option_name
@@ -490,7 +490,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       private
       def generate_conditions
 
@@ -512,7 +512,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       private
       def ignored_conditions
         ignored_fields.map do |field|
@@ -520,7 +520,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       private
       def range_conditions
         if content_length
@@ -530,7 +530,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       private
       def key_conditions
         [if key && key.include?("${filename}")
@@ -542,7 +542,7 @@ module AWS
          end]
       end
 
-      # @private
+      # @api private
       private
       def build_uri(request)
         uri_class = secure? ? URI::HTTPS : URI::HTTP

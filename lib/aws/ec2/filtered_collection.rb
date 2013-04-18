@@ -38,7 +38,7 @@ module AWS
         collection_with(:filters => filters)
       end
 
-      # @private
+      # @api private
       def filtered_request client_method, options = {}, &block
         options[:filters] = @filters unless @filters.empty?
         client.send(client_method, options)
@@ -70,13 +70,13 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def preserved_options
         { :config => config, :filters => @filters }
       end
 
-      # @private
+      # @api private
       protected
       def collection_with(options = {})
         self.class.new(preserved_options.merge(options))

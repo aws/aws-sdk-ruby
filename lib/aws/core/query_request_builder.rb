@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     class QueryRequestBuilder
 
       def initialize api_version, operation

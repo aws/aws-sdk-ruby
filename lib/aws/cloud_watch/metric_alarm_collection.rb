@@ -45,7 +45,7 @@ module AWS
 
       include Core::Collection::Simple
 
-      # @private
+      # @api private
       def initialize metric, options = {}
         @metric = metric
         super(options.merge(:config => metric.config))

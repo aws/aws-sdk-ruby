@@ -45,7 +45,7 @@ module AWS
     #
     class StackResource < Core::Resource
 
-      # @private
+      # @api private
       def initialize stack, logical_resource_id, options = {}
         @stack = stack
         @logical_resource_id = logical_resource_id

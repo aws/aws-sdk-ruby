@@ -17,7 +17,7 @@ module AWS
     # Client class for Cloud Watch
     class Client < Core::QueryClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_alarm_history,
         :describe_alarms,

@@ -16,7 +16,7 @@ module AWS
     class VPNGateway < Resource
       class Attachment
 
-        # @private
+        # @api private
         def initialize vpn_gateway, details
           @vpn_gateway = vpn_gateway
           @vpc = VPC.new(details.vpc_id, :config => vpn_gateway.config)

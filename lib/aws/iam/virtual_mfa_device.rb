@@ -32,7 +32,7 @@ module AWS
     #
     class VirtualMfaDevice < Resource
 
-      # @private
+      # @api private
       def initialize serial_number, options = {}
         @serial_number = serial_number
         super

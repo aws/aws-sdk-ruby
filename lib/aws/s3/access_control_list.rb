@@ -125,7 +125,7 @@ module AWS
             attr != :canonical_user_id and display_name
         end
 
-        # @private
+        # @api private
         def stag
           if attr = signal_attribute
             super + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
@@ -135,12 +135,12 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         def signal_attribute
           SIGNAL_ATTRIBUTES.find { |att| send(att) }
         end
 
-        # @private
+        # @api private
         def type_for_attr(attr)
           {
             :amazon_customer_email => "AmazonCustomerByEmail",
@@ -164,7 +164,7 @@ module AWS
         # will be returned as `:full_control`.
         attr_reader :name
 
-        # @private
+        # @api private
         def initialize(name)
           raise "expected string or symbol" unless
             name.respond_to?(:to_str) or name.respond_to?(:to_sym)
@@ -210,19 +210,19 @@ module AWS
 
       include ACLObject
 
-      # @private
+      # @api private
       def stag
         super()+" xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\""
       end
 
-      # @private
+      # @api private
       def element_name
         "AccessControlPolicy"
       end
 
       class GrantBuilder
 
-        # @private
+        # @api private
         def initialize(acl, grant)
           @acl = acl
           @grant = grant

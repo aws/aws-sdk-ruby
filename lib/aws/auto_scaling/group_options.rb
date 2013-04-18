@@ -16,7 +16,7 @@ module AWS
 
     # This mixin provides a method for parsing Auto Scaling group options
     # (for create and update methods).
-    # @private
+    # @api private
     module GroupOptions
 
       protected

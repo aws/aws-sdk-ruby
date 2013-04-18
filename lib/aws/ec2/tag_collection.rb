@@ -28,12 +28,12 @@ module AWS
 
       include TaggedItem
 
-      # @private
+      # @api private
       def tagging_resource_type
         @resource_type
       end
 
-      # @private
+      # @api private
       # We don't know how to make a describe call for this object yet
       def cached_tags; nil; end
 
@@ -96,7 +96,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Tag

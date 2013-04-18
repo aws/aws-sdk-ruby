@@ -37,7 +37,7 @@ module AWS
       # @return [Time]
       attr_reader :expires_at
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @credentials = opts[:credentials]
         @expires_at = opts[:expires_at]

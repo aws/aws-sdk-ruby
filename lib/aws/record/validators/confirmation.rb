@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class ConfirmationValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :on, :if, :unless]

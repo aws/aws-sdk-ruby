@@ -24,7 +24,7 @@ module AWS
     #     end
     class StackEvent
 
-      # @private
+      # @api private
       def initialize stack, details
         @stack = stack
         details.each_pair do |attr_name,attr_value|

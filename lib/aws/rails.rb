@@ -17,7 +17,7 @@ module AWS
 
   if Object.const_defined?(:Rails) and Rails.const_defined?(:Railtie)
 
-    # @private
+    # @api private
     class Railtie < Rails::Railtie
 
       # configure our plugin on boot. other extension points such
@@ -173,19 +173,19 @@ module AWS
       nil
     end
 
-    # @private
+    # @api private
     protected
     def self.rails_env
       ::Rails.respond_to?(:env) ? ::Rails.env : RAILS_ENV
     end
 
-    # @private
+    # @api private
     protected
     def self.rails_root
       ::Rails.respond_to?(:root) ? ::Rails.root.to_s : RAILS_ROOT
     end
 
-    # @private
+    # @api private
     protected
     def self.rails_logger
       ::Rails.respond_to?(:logger) ? ::Rails.logger : ::RAILS_DEFAULT_LOGGER

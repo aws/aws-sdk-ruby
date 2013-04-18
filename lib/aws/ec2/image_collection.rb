@@ -34,7 +34,7 @@ module AWS
       include TaggedCollection
       include BlockDeviceMappings
 
-      # @private
+      # @api private
       def initialize(options = {})
         @owners = options[:owners] || []
         @executable_users = options[:executable_users] || []
@@ -202,13 +202,13 @@ module AWS
         Image.new(resp.image_id, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Image
       end
 
-      # @private
+      # @api private
       protected
       def preserved_options
         super.merge(:owners => @owners, :executable_users => @executable_users)

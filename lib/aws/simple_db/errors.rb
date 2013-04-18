@@ -33,10 +33,10 @@ module AWS
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.
-    # @private
+    # @api private
     module Errors
 
-      # @private
+      # @api private
       GRAMMAR = Core::XML::Grammar.customize do
         element("Errors") do
           ignore

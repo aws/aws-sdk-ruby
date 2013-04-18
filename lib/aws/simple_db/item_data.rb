@@ -29,7 +29,7 @@ module AWS
     # corresponding {Item} instances.
     class ItemData
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @name = opts[:name]
         @attributes = opts[:attributes]

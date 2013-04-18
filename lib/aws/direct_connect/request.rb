@@ -13,7 +13,7 @@
 
 module AWS
   class DirectConnect
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
       include Core::Signature::Version4

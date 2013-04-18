@@ -15,7 +15,7 @@ module AWS
   class AutoScaling
     class NotificationConfiguration
 
-      # @private
+      # @api private
       def initialize auto_scaling_group, topic_arn, notification_types = []
         @group = auto_scaling_group
         @topic_arn = topic_arn
@@ -74,7 +74,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def eql? other
         other.is_a?(NotificationConfiguration) and
         other.group == group and

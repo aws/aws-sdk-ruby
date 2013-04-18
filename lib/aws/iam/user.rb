@@ -189,7 +189,7 @@ module AWS
         UserGroupCollection.new(self)
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:user_name, name]]

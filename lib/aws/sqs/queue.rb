@@ -45,7 +45,7 @@ module AWS
       # @return [String] The queue URL.
       attr_reader :url
 
-      # @private
+      # @api private
       def initialize(url, opts = {})
         @url = url
         super
@@ -430,7 +430,7 @@ module AWS
         true
       end
 
-      # @private
+      # @api private
       module PolicyProxy
 
         attr_accessor :queue
@@ -657,7 +657,7 @@ module AWS
       end
       alias_method :eql?, :==
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{url}>"
       end
@@ -683,7 +683,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def hit_timeout?(got_first, last_message_at, opts)
         initial_timeout = opts[:initial_timeout]
@@ -700,7 +700,7 @@ module AWS
           Time.now - last_message_at > timeout
       end
 
-      # @private
+      # @api private
       protected
       def receive_opts(opts)
         receive_opts = { :queue_url => url }
@@ -722,7 +722,7 @@ module AWS
         receive_opts
       end
 
-      # @private
+      # @api private
       protected
       def call_message_block(messages, block)
         result = nil
@@ -738,7 +738,7 @@ module AWS
         result
       end
 
-      # @private
+      # @api private
       protected
       def get_attribute(name)
         resp = client.get_queue_attributes(:queue_url => url,
@@ -748,7 +748,7 @@ module AWS
         resp.attributes[name]
       end
 
-      # @private
+      # @api private
       protected
       def set_attribute(name, value)
         client.set_queue_attributes({

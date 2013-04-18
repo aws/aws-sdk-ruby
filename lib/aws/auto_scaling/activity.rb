@@ -35,7 +35,7 @@ module AWS
     #
     class Activity < Core::Resource
 
-      # @private
+      # @api private
       def initialize activity_id, options = {}
         @activity_id = activity_id
         super

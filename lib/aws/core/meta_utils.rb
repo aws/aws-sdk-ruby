@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module MetaUtils
 
       def extend_method(object, name, &block)

@@ -15,7 +15,7 @@ module AWS
   module Record
 
     # Uses the base validator class to call user-defined validation methods.
-    # @private
+    # @api private
     class MethodValidator < Validator
 
       ACCEPTED_OPTIONS = [:on, :if, :unless]

@@ -23,7 +23,7 @@ module AWS
 
       include Core::Model
 
-      # @private
+      # @api private
       def initialize(object, id, options = {})
         @id = id
         @object = object
@@ -271,18 +271,18 @@ module AWS
         UploadedPartCollection.new(self)
       end
 
-      # @private
+      # @api private
       def completed_parts
         @completed_parts.values.
           sort { |a, b| a[:part_number] <=> b[:part_number] }
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{object.bucket.name}/#{object.key}:#{id}>"
       end
 
-      # @private
+      # @api private
       private
       def get_complete_opts(part_numbers = nil)
         parts_resp = client.list_parts(base_opts)
@@ -300,7 +300,7 @@ module AWS
         complete_opts
       end
 
-      # @private
+      # @api private
       private
       def base_opts
         opts = {

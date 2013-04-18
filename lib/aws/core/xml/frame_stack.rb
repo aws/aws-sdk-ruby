@@ -15,7 +15,7 @@ module AWS
   module Core
     module XML
 
-      # @private
+      # @api private
       module FrameStack
 
         # @param [Hash] rules A hash of parser rules.  These

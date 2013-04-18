@@ -20,7 +20,7 @@ module AWS
     # are definitive.
     class Count
 
-      # @private
+      # @api private
       def initialize count, truncated
         @count = count
         @truncated = truncated

@@ -37,7 +37,7 @@ module AWS
 
       include Core::Model
 
-      # @private
+      # @api private
       ATTRIBUTES = [
         :item_count,
         :item_names_size_bytes,

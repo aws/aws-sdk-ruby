@@ -39,7 +39,7 @@ module AWS
       #   place.
       attr_reader :bucket
 
-      # @private
+      # @api private
       def initialize(bucket, opts = {})
         @bucket = bucket
         super

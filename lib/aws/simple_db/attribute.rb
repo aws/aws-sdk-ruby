@@ -23,7 +23,7 @@ module AWS
       include PutAttributes
       include DeleteAttributes
 
-      # @private
+      # @api private
       def initialize item, name, options = {}
         @item = item
         @name = name
@@ -142,7 +142,7 @@ module AWS
         values
       end
 
-      # @private
+      # @api private
       protected
       def put values, replace
         expect_opts = values.pop if values.last.kind_of?(Hash)

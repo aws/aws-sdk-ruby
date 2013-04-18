@@ -37,7 +37,7 @@ module AWS
 
       include Core::Collection::WithLimitAndNextToken
 
-      # @private
+      # @api private
       def initialize options = {}
         @group = options[:group]
         if @group

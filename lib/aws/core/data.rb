@@ -64,7 +64,7 @@ module AWS
 
       module MethodMissingProxy
 
-        # @private
+        # @api private
         def id
           self[:id] || self.id
         end
@@ -158,7 +158,7 @@ module AWS
         @data.inspect
       end
 
-      # @private
+      # @api private
       def kind_of? klass
         if klass == Hash
           true
@@ -224,14 +224,14 @@ module AWS
 
         # #inject works on Core::Data::List in in 1.8.7 and 1.9.3, but not
         # in 1.9.2 unless we define it like so.
-        # @private
+        # @api private
         def inject *args, &block
           @data.inject(*args) do |obj,value|
             yield(Data.cast(obj),Data.cast(value))
           end
         end
 
-        # @private
+        # @api private
         def kind_of? klass
           if klass == Array
             true

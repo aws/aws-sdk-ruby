@@ -33,7 +33,7 @@ module AWS
 
       include TaggedItem
 
-      # @private
+      # @api private
       def initialize vpn_connection_id, options = {}
         @vpn_connection_id = vpn_connection_id
         super

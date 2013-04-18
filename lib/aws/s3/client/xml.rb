@@ -15,7 +15,7 @@ module AWS
   class S3
     class Client < Core::Client
 
-      # @private
+      # @api private
       module XML
 
         BaseGrammar = Core::XML::Grammar.new({}, :inflect_rename => true)

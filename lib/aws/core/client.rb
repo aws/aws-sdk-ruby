@@ -29,7 +29,7 @@ module AWS
 
       extend Naming
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # Creates a new low-level client.
@@ -68,16 +68,16 @@ module AWS
 
       # @return [CredentialProviders::Provider] Returns the credential
       #   provider for this client.
-      # @private
+      # @api private
       attr_reader :credential_provider
 
       # @return [String] The snake-cased ruby name for the service
       #   (e.g. 's3', 'iam', 'dynamo_db', etc).
-      # @private
+      # @api private
       attr_reader :service_ruby_name
 
       # @return [Integer] What port this client makes requests via.
-      # @private
+      # @api private
       attr_reader :port
 
       # @return [Integer] The number of seconds before requests made by
@@ -86,7 +86,7 @@ module AWS
 
       # @return [String] Returns the service endpoint (hostname) this client
       #   makes requests against.
-      # @private
+      # @api private
       attr_reader :endpoint
 
       # @return (see Client.operations)
@@ -135,14 +135,14 @@ module AWS
       # @param [Configuration] config The configuration object to use.
       # @return [Core::Client] Returns a new client object with the given
       #   configuration.
-      # @private
+      # @api private
       def with_config config
         self.class.new(:config => config)
       end
 
       # The stub returned is memoized.
       # @see new_stub_for
-      # @private
+      # @api private
       def stub_for method_name
         @stubs ||= {}
         @stubs[method_name] ||= new_stub_for(method_name)
@@ -151,7 +151,7 @@ module AWS
       # Primarily used for testing, this method returns an empty pseudo
       # service response without making a request.  Its used primarily for
       # testing the lighter level service interfaces.
-      # @private
+      # @api private
       def new_stub_for method_name
         response = Response.new(Http::Request.new, Http::Response.new)
         response.request_type = method_name
@@ -574,12 +574,12 @@ module AWS
           @operations ||= []
         end
 
-        # @private
+        # @api private
         def request_builders
           @request_builders ||= {}
         end
 
-        # @private
+        # @api private
         def response_parsers
           @response_parsers ||= {}
         end
@@ -673,7 +673,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       class ClientRequestMethodBuilder
 
         def initialize client_class, method_name, &block

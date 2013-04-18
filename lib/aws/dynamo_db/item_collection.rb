@@ -92,7 +92,7 @@ module AWS
       include Types
       include Expectations
 
-      # @private
+      # @api private
       def initialize(table, opts = {})
         @table = table
         @scan_filters = opts[:scan_filters] || {}
@@ -103,7 +103,7 @@ module AWS
       #   belong.
       attr_reader :table
 
-      # @private
+      # @api private
       attr_reader :scan_filters
 
       # Creates a new item, or replaces an old item with a new item
@@ -259,7 +259,7 @@ module AWS
 
         attr_reader :attribute
 
-        # @private
+        # @api private
         def initialize(items, attribute)
           @items = items
           @attribute = attribute
@@ -744,7 +744,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def with_filter attribute, op, *values
 
         values = values.map {|value| format_attribute_value(value) }
@@ -762,7 +762,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def refine(opts)
         opts = {
           :scan_filters => scan_filters

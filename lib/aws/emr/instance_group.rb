@@ -40,7 +40,7 @@ module AWS
     #
     class InstanceGroup < Core::Resource
 
-      # @private
+      # @api private
       def initialize job_flow, instance_group_id, options = {}
         @job_flow = job_flow
         @instance_group_id = instance_group_id

@@ -14,7 +14,7 @@
 module AWS
   class SimpleDB
 
-    # @private
+    # @api private
     module ConsistentReadOption
 
       # Determines if SimpleDB should be read consistently or not.

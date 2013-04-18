@@ -91,7 +91,7 @@ module AWS
           raise NotImplementedError
         end
 
-        # @private
+        # @api private
         protected
         def self.expect klass, value, &block
           unless value.is_a?(klass)
@@ -143,7 +143,7 @@ module AWS
           string
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           true
         end
@@ -171,7 +171,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           false
         end
@@ -216,7 +216,7 @@ module AWS
           expect(Integer, integer) { integer }
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           true
         end
@@ -241,7 +241,7 @@ module AWS
           expect(Float, float) { float }
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           true
         end
@@ -308,7 +308,7 @@ module AWS
           date.strftime('%Y-%m-%d')
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           true
         end
@@ -373,7 +373,7 @@ module AWS
           datetime.strftime('%Y-%m-%dT%H:%M:%S%Z')
         end
 
-        # @private
+        # @api private
         def self.allow_set?
           true
         end

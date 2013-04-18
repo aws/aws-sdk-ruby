@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class NumericalityValidator < Validator
 
       ACCEPTED_OPTIONS = [

@@ -164,12 +164,12 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def inspect
         "#{self.class.name} port:#{port}>"
       end
 
-      # @private
+      # @api private
       def eql? other
         other.is_a?(Listener) and
         other.load_balancer == load_balancer and

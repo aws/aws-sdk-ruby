@@ -57,7 +57,7 @@ module AWS
     #
     class Instance < Core::Resource
 
-      # @private
+      # @api private
       def initialize instance_id, options = {}
         @instance_id = instance_id
         super

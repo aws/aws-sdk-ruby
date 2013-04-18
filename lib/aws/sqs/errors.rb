@@ -17,7 +17,7 @@ module AWS
 
       extend Core::LazyErrorClasses
 
-      # @private
+      # @api private
       def self.error_class(code)
         super(code.sub(/^AWS\.SimpleQueueService\./, ''))
       end

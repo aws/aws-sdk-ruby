@@ -80,7 +80,7 @@ module AWS
         end
 
         # @return [DynamoDB::Table]
-        # @private
+        # @api private
         def dynamo_db_table shard_name = nil
           table = dynamo_db.tables[dynamo_db_table_name(shard_name)]
           table.hash_key = [:id, :string]
@@ -101,7 +101,7 @@ module AWS
 
       # @return [DynamoDB::Item] Returns a reference to the item as stored in
       #   simple db.
-      # @private
+      # @api private
       private
       def dynamo_db_item
         dynamo_db_table.items[id]

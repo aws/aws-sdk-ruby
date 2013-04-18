@@ -108,7 +108,7 @@ module AWS
       # Removes the ids from the policy and its statements for the purpose
       # of comparing two policies for equivilence.
       # @return [Hash] Returns the policy as a hash with no ids
-      # @private
+      # @api private
       def hash_without_ids
         hash = self.to_h
         hash.delete('Id')
@@ -163,7 +163,7 @@ module AWS
       # @see ConditionBlock#add
       class OperatorBuilder
 
-        # @private
+        # @api private
         def initialize(condition_builder, key)
           @condition_builder = condition_builder
           @key = key
@@ -184,7 +184,7 @@ module AWS
         # @return [Array] Returns an array of policy conditions.
         attr_reader :conditions
 
-        # @private
+        # @api private
         def initialize(conditions)
           @conditions = conditions
         end
@@ -295,7 +295,7 @@ module AWS
       #
       class ConditionBlock
 
-        # @private
+        # @api private
         def initialize(conditions = {})
           # filter makes a copy
           @conditions = filter_conditions(conditions)
@@ -375,7 +375,7 @@ module AWS
           op[translate_key(key)] = converted_values
         end
 
-        # @private
+        # @api private
         def to_h
           @conditions
         end
@@ -447,7 +447,7 @@ module AWS
           end.compact.flatten
         end
 
-        # @private
+        # @api private
         protected
         def match_triple(filter, type, op, key, value)
           value = [value].flatten.first
@@ -468,7 +468,7 @@ module AWS
           [match, type]
         end
 
-        # @private
+        # @api private
         protected
         def match_operator(filter, op, value)
           # dates are the only values that don't come back as native types in JSON
@@ -477,13 +477,13 @@ module AWS
           translate_operator(filter, value) == op
         end
 
-        # @private
+        # @api private
         protected
         def match_key(filter, key, value = nil)
           translate_key(filter) == key
         end
 
-        # @private
+        # @api private
         protected
         def filter_conditions(conditions = @conditions)
           conditions.inject({}) do |m, (op, keys)|
@@ -496,7 +496,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def translate_key(key)
           if key.kind_of?(Symbol)
@@ -517,13 +517,13 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         MODIFIERS = {
           /_ignoring_case$/ => "IgnoreCase",
           /_equals$/ => "Equals"
         }
 
-        # @private
+        # @api private
         protected
         def valid_operator?(operator)
           translate_operator(operator, "")
@@ -532,7 +532,7 @@ module AWS
           false
         end
 
-        # @private
+        # @api private
         protected
         def translate_operator(operator, example_value)
           return operator if operator.kind_of?(String)
@@ -545,100 +545,100 @@ module AWS
           send("translate_#{operator}", example_value, opts)
         end
 
-        # @private
+        # @api private
         protected
         def translate_is(example, opts)
           return "Bool" if type_notation(example) == "Bool"
           base_translate(example, "Equals", opts[:ignore_case])
         end
 
-        # @private
+        # @api private
         protected
         def translate_not(example, opts)
           base_translate(example, "NotEquals", opts[:ignore_case])
         end
 
-        # @private
+        # @api private
         protected
         def translate_like(example, opts)
           base_translate(example, "Like")
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_like(example, opts)
           base_translate(example, "NotLike")
         end
 
-        # @private
+        # @api private
         protected
         def translate_less_than(example, opts)
           base_translate(example, "LessThan", opts[:equals])
         end
         alias_method :translate_lt, :translate_less_than
 
-        # @private
+        # @api private
         protected
         def translate_lte(example, opts)
           translate_less_than(example, { :equals => "Equals" })
         end
 
-        # @private
+        # @api private
         protected
         def translate_greater_than(example, opts)
           base_translate(example, "GreaterThan", opts[:equals])
         end
         alias_method :translate_gt, :translate_greater_than
 
-        # @private
+        # @api private
         protected
         def translate_gte(example, opts)
           translate_greater_than(example, { :equals => "Equals" })
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_ip_address(example, opts)
           "IpAddress"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_ip_address(example, opts)
           "NotIpAddress"
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_arn(example, opts)
           "ArnEquals"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_arn(example, opts)
           "ArnNotEquals"
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_arn_like(example, opts)
           "ArnLike"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_arn_like(example, opts)
           "ArnNotLike"
         end
 
-        # @private
+        # @api private
         protected
         def base_translate(example, base_operator, *modifiers)
           "#{type_notation(example)}#{base_operator}#{modifiers.join}"
         end
 
-        # @private
+        # @api private
         protected
         def type_notation(example)
           case example
@@ -653,7 +653,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def convert_value(value)
           case value
@@ -666,7 +666,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def strip_modifiers(operator)
           opts = {}
@@ -770,7 +770,7 @@ module AWS
         end
         alias_method :exclude_action, :exclude_actions
 
-        # @private
+        # @api private
         def to_h
           stmt = {
             "Sid" => sid,

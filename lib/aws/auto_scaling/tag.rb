@@ -21,7 +21,7 @@ module AWS
     #
     class Tag < Hash
 
-      # @private
+      # @api private
       def initialize options = {}
 
         super()

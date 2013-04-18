@@ -27,7 +27,7 @@ module AWS
       include Core::Model
       include Enumerable
 
-      # @private
+      # @api private
       def initialize(resource, opts = {})
         @resource = resource
         super(opts)

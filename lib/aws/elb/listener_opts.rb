@@ -14,7 +14,7 @@
 module AWS
   class ELB
 
-    # @private
+    # @api private
     module ListenerOpts
 
       # convert protocols from symbols to strings (e.g. :http to 'HTTP')

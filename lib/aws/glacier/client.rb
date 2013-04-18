@@ -23,7 +23,7 @@ module AWS
     #
     class Client < Core::RESTJSONClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

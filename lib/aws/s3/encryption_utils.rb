@@ -15,7 +15,7 @@ require 'openssl'
 
 module AWS
   class S3
-    # @private
+    # @api private
     module EncryptionUtils
 
       protected

@@ -24,7 +24,7 @@ module AWS
       include Core::Model
       include Enumerable
 
-      # @private
+      # @api private
       def initialize(resource, opts = {})
         @resource = resource
         super(opts)
@@ -105,25 +105,25 @@ module AWS
         client.send(reset_call, reset_params)
       end
 
-      # @private
+      # @api private
       private
       def describe_call
         "describe_#{resource_name}_attribute"
       end
 
-      # @private
+      # @api private
       private
       def modify_call
         "modify_#{resource_name}_attribute"
       end
 
-      # @private
+      # @api private
       private
       def reset_call
         "reset_#{resource_name}_attribute"
       end
 
-      # @private
+      # @api private
       private
       def describe_params
         Hash[[["#{resource_name}_id".to_sym, @resource.send(:__resource_id__)],
@@ -131,25 +131,25 @@ module AWS
       end
       alias_method :reset_params, :describe_params
 
-      # @private
+      # @api private
       private
       def inflected_permissions_attribute
         Core::Inflection.ruby_name(permissions_attribute).to_sym
       end
 
-      # @private
+      # @api private
       private
       def permissions_attribute
         @resource.__permissions_attribute__
       end
 
-      # @private
+      # @api private
       private
       def resource_name
         @resource.send(:inflected_name)
       end
 
-      # @private
+      # @api private
       private
       def modify(action, *users)
         return if users.empty?
@@ -161,7 +161,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       private
       def modify_params(modifications)
         Hash[[["#{resource_name}_id".to_sym, @resource.send(:__resource_id__)],

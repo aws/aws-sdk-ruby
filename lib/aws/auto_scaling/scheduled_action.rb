@@ -34,7 +34,7 @@ module AWS
     #
     class ScheduledAction < Core::Resource
 
-      # @private
+      # @api private
       def initialize name, options = {}
         @name = name
         super

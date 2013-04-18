@@ -30,7 +30,7 @@ module AWS
 
       include Core::Collection::WithLimitAndNextToken
 
-      # @private
+      # @api private
       def initialize hosted_zone_id, options = {}
         @hosted_zone_id = hosted_zone_id
         @filters = options[:filters] || {}

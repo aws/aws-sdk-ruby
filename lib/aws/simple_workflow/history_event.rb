@@ -116,7 +116,7 @@ module AWS
         @details.to_json
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class.name} #{to_h.inspect}>"
       end
@@ -166,7 +166,7 @@ module AWS
       #
       class Attributes
 
-        # @private
+        # @api private
         def initialize workflow_execution, data
           @workflow_execution = workflow_execution
           @data = data
@@ -217,7 +217,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         def inspect
           "<Attributes #{to_h.inspect}>"
         end

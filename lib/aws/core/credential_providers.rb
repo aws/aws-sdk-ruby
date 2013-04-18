@@ -135,7 +135,7 @@ module AWS
       # Static credentials are provided directly to config via
       # `:access_key_id` and `:secret_access_key` (and optionally
       # `:session_token`).
-      # @private
+      # @api private
       class StaticProvider
 
         include Provider
@@ -207,14 +207,14 @@ module AWS
 
         # Raised when an http response is recieved with a non 200
         # http status code.
-        # @private
+        # @api private
         class FailedRequestError < StandardError; end
 
         # These are the errors we trap when attempting to talk to the
         # instance metadata service.  Any of these imply the service
         # is not present, no responding or some other non-recoverable
         # error.
-        # @private
+        # @api private
         FAILURES = [
           FailedRequestError,
           Errno::EHOSTUNREACH,

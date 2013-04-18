@@ -18,7 +18,7 @@ module AWS
       include Core::Collection::WithNextToken
       include StackOptions
 
-      # @private
+      # @api private
       def initialize options = {}
         @status_filter = options[:status_filter]
         super

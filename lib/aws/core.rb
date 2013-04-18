@@ -82,7 +82,7 @@ require 'aws/version'
 #
 module AWS
 
-  # @private
+  # @api private
   SERVICES = {
     'AutoScaling' => 'auto_scaling',
     'CloudFormation' => 'cloud_formation',
@@ -114,7 +114,7 @@ module AWS
     'STS' => 'sts',
   }
 
-  # @private
+  # @api private
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
   autoload :Errors, 'aws/errors'
@@ -209,7 +209,7 @@ module AWS
 
   class << self
 
-    # @private
+    # @api private
     @@config = nil
 
     # The global configuration for AWS.  Generally you set your preferred
@@ -555,7 +555,7 @@ module AWS
       end
     end
 
-    # @private
+    # @api private
     def resource_cache
       if memoizing?
         Thread.current[:aws_memoization][:resource_cache] ||=
@@ -563,7 +563,7 @@ module AWS
       end
     end
 
-    # @private
+    # @api private
     def response_cache
       if memoizing?
         Thread.current[:aws_memoization][:response_cache] ||=

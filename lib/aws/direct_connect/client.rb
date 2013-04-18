@@ -17,7 +17,7 @@ module AWS
     # Client class for AWS Direct Connect.
     class Client < Core::JSONClient
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # client methods #

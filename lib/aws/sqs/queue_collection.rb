@@ -37,7 +37,7 @@ module AWS
 
       include Core::Collection::Simple
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @prefix = opts[:prefix]
         super

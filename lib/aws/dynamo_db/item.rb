@@ -44,7 +44,7 @@ module AWS
       #   item, or `nil` if the table has a simple primary key.
       attr_reader :range_value
 
-      # @private
+      # @api private
       def initialize(table, *args)
         opts = args.pop if args.last.kind_of?(Hash)
         (@hash_value, @range_value) = args
@@ -100,7 +100,7 @@ module AWS
         AttributeCollection.new(self)
       end
 
-      # @private
+      # @api private
       def self.new_from(op, response_object, table, *args)
 
         config = args.last.is_a?(Hash) ? args.last : AWS.config

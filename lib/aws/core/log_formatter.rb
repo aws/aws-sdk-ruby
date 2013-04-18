@@ -137,7 +137,7 @@ module AWS
         pattern.gsub(/:(\w+)/) {|sym| send("_#{sym[1..-1]}", response) }
       end
 
-      # @private
+      # @api private
       def eql? other
         other.is_a?(self.class) and other.pattern == self.pattern
       end

@@ -29,7 +29,7 @@ module AWS
 
         AWS::Core::MetaUtils.extend(base) do
 
-          # @private
+          # @api private
           def endpoint_prefix prefix = nil, options = {}
             if prefix
               @endpoint_prefix = prefix
@@ -38,7 +38,7 @@ module AWS
             @endpoint_prefix
           end
 
-          # @private
+          # @api private
           def global_endpoint?
             @global_endpoint
           end

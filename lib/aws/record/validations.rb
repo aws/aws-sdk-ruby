@@ -683,7 +683,7 @@ module AWS
         validators << PresenceValidator.new(self, *args)
       end
 
-      # @private
+      # @api private
       private
       def validators
         @validators ||= []

@@ -30,7 +30,7 @@ module AWS
     #   volume.delete
     class Attachment < Resource
 
-      # @private
+      # @api private
       def initialize volume, instance, device, options = {}
         @volume = volume
         @instance = instance

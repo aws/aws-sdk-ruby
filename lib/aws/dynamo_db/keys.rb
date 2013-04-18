@@ -14,7 +14,7 @@
 module AWS
   class DynamoDB
 
-    # @private
+    # @api private
     module Keys
 
       include Types

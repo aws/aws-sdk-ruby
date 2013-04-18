@@ -39,7 +39,7 @@ module AWS
     #
     class ResourceRecordSet < Core::Resource
 
-      # @private
+      # @api private
       def initialize name, type, options = {}
         @name = name
         @type = type

@@ -35,7 +35,7 @@ module AWS
       # @attr_reader [Group] The group.
       attr_reader :group
 
-      # @private
+      # @api private
       def initialize group, opts = {}
         @group = group
         super

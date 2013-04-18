@@ -42,7 +42,7 @@ module AWS
     #
     class ExportTask < Resource
 
-      # @private
+      # @api private
       def initialize export_task_id, options = {}
         @export_task_id = export_task_id
         super

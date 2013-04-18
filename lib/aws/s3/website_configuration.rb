@@ -63,13 +63,13 @@ module AWS
 
       # This method exists for backwards compatability.
       # @return [String,nil]
-      # @private
+      # @api private
       def index_document_suffix
         (@options[:index_document] || {})[:suffix]
       end
 
       # This method exists for backwards compatability.
-      # @private
+      # @api private
       def index_document_suffix= suffix
         @options.delete(:redirect_all_requests_to)
         @options[:index_document] ||= {}
@@ -78,13 +78,13 @@ module AWS
 
       # This method exists for backwards compatability.
       # @return [String,nil]
-      # @private
+      # @api private
       def error_document_key
         (@options[:error_document] || {})[:key]
       end
 
       # This method exists for backwards compatability.
-      # @private
+      # @api private
       def error_document_key= key
         @options.delete(:redirect_all_requests_to)
         @options[:error_document] ||= {}

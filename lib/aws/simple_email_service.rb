@@ -384,7 +384,7 @@ module AWS
       end
     end
 
-    # @private
+    # @api private
     protected
     def require_one_of options, *keys
       unless keys.any?{|key| options[key] }
@@ -393,7 +393,7 @@ module AWS
       end
     end
 
-    # @private
+    # @api private
     protected
     def require_each options, *keys
       keys.each do |key|
@@ -403,7 +403,7 @@ module AWS
       end
     end
 
-    # @private
+    # @api private
     protected
     def nest_options options, accepted_options
 

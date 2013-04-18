@@ -330,28 +330,28 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       def <=> other
         self.id <=> other.id
       end
 
-      # @private
+      # @api private
       def resource_type
         'security-group'
       end
 
-      # @private
+      # @api private
       def inflected_name
         "group"
       end
 
-      # @private
+      # @api private
       def self.describe_call_name
         :describe_security_groups
       end
       def describe_call_name; self.class.describe_call_name; end
 
-      # @private
+      # @api private
       protected
       def ingress_opts protocol, ports, sources
 
@@ -373,7 +373,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def egress_opts args
         ensure_vpc do
@@ -417,7 +417,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def parse_sources sources
 
@@ -464,14 +464,14 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def ensure_vpc &block
         raise 'operation permitted for VPC security groups only' unless vpc?
         yield
       end
 
-      # @private
+      # @api private
       protected
       def find_in_response(resp)
         resp.security_group_index[id]

@@ -115,7 +115,7 @@ module AWS
     #
     class BucketLifecycleConfiguration
 
-      # @private
+      # @api private
       def initialize bucket, options = {}
         @bucket = bucket
         @rules = parse_xml(options[:xml]) if options[:xml]
@@ -334,7 +334,7 @@ module AWS
       #
       class Rule
 
-        # @private
+        # @api private
         def initialize configuration, id, prefix, expiration_time = nil, status = nil
           @configuration = configuration
           @id = id
@@ -404,7 +404,7 @@ module AWS
           self.status = 'Disabled'
         end
 
-        # @private
+        # @api private
         def eql? other
           other.is_a?(Rule) and
           other.configuration.bucket == configuration.bucket and

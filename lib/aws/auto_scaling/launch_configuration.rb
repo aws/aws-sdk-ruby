@@ -44,7 +44,7 @@ module AWS
     #
     class LaunchConfiguration < Core::Resource
 
-      # @private
+      # @api private
       def initialize name, options = {}
         super(options.merge(:name => name))
       end

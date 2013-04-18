@@ -18,7 +18,7 @@ module AWS
 
     # Provides a method to {Bucket} and {S3Object} that parses a wide
     # range of ACL options.
-    # @private
+    # @api private
     module ACLOptions
 
       protected

@@ -15,7 +15,7 @@ module AWS
   class CloudWatch
     class AlarmHistoryItem
 
-      # @private
+      # @api private
       def initialize options
         @alarm_name = options[:alarm_name]
         @history_data = options[:history_data]

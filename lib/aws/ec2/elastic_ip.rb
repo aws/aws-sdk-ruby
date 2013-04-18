@@ -179,25 +179,25 @@ module AWS
         public_ip.to_s
       end
 
-      # @private
+      # @api private
       protected
       def resource_id_method
         :public_ip
       end
 
-      # @private
+      # @api private
       protected
       def response_id_method
         :public_ip
       end
 
-      # @private
+      # @api private
       protected
       def describe_call_name
         :describe_addresses
       end
 
-      # @private
+      # @api private
       protected
       def self.describe_call_name
         :describe_addresses

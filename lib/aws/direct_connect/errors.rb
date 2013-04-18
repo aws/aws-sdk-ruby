@@ -14,7 +14,7 @@
 
 module AWS
   class DirectConnect
-    # @private
+    # @api private
     module Errors
       extend Core::LazyErrorClasses
     end

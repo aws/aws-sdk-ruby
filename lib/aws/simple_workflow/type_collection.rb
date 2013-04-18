@@ -15,7 +15,7 @@ module AWS
   class SimpleWorkflow
 
     # The base class for {WorkflowTypeCollection} and {ActivityTypeCollection}.
-    # @private
+    # @api private
     class TypeCollection
 
       include OptionFormatters

@@ -14,7 +14,7 @@
 module AWS
   class CloudSearch
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
       include Core::Signature::Version2
     end

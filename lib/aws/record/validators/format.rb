@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class FormatValidator < Validator
 
       ACCEPTED_OPTIONS = [

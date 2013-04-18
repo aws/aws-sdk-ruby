@@ -30,7 +30,7 @@ module AWS
     #
     class HostedZone < Core::Resource
 
-      # @private
+      # @api private
       def initialize id, options = {}
         @id = id.sub(%r!^/hostedzone/!, '')
         @change_info = options[:change_info]

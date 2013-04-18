@@ -14,7 +14,7 @@
 module AWS
   class S3
 
-    # @private
+    # @api private
     class CipherIO
 
       def initialize cipher, stream, stream_size = nil

@@ -101,7 +101,7 @@ module AWS
       end
       alias_method :==, :eql?
 
-      # @private
+      # @api private
       def inspect
         self.to_h.inspect
       end

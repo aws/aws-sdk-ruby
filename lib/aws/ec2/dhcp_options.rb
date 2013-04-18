@@ -18,7 +18,7 @@ module AWS
 
       include TaggedItem
 
-      # @private
+      # @api private
       def initialize dhcp_options_id, options = {}
         @dhcp_options_id = dhcp_options_id
         super

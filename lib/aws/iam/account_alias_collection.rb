@@ -14,7 +14,7 @@
 module AWS
   class IAM
 
-    # @private
+    # @api private
     #
     # Currently IAM exposes the account alias in a collection, as if you
     # could create/manage multiple aliases for a single account.  However,
@@ -60,13 +60,13 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def request_method
         :list_account_aliases
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.data[:account_aliases].each do |account_alias|

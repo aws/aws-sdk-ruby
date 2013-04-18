@@ -172,40 +172,40 @@ module AWS
       attr_reader :id
       alias_method :instance_id, :id
 
-      # @private
+      # @api private
       def self.reservation_attributes
         @reservation_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.reservation_attribute name, options = {}, &block
         attr = attribute(name, options, &block)
         reservation_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.describe_call_attributes
         @describe_call_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_attributes
         @mutable_describe_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.describe_call_attribute name, options = {}, &block
         attr = attribute(name, options, &block)
         describe_call_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_call_attribute name, options = {}, &block
         attr = mutable_attribute(name, options, &block)
         describe_call_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_attribute name, options = {}, &block
         attr = mutable_attribute(name, options, &block)
         mutable_describe_attributes[attr.name] = attr

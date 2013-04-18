@@ -315,7 +315,7 @@ module AWS
         end
 
         # @return [AWS::SimpleDB::Domain]
-        # @private
+        # @api private
         def sdb_domain shard_name = nil
           sdb.domains[sdb_domain_name(shard_name)]
         end
@@ -334,7 +334,7 @@ module AWS
 
       # @return [SimpleDB::Item] Returns a reference to the item as stored in
       #   simple db.
-      # @private
+      # @api private
       private
       def sdb_item
         sdb_domain.items[id]
@@ -350,7 +350,7 @@ module AWS
       # This function accepts a hash of item data (as returned from
       # AttributeCollection#to_h or ItemData#attributes) and returns only
       # the key/value pairs that are configured attribues for this class.
-      # @private
+      # @api private
       private
       def deserialize_item_data item_data
 
@@ -374,14 +374,14 @@ module AWS
         data
       end
 
-      # @private
+      # @api private
       protected
       def create_storage
         to_add = serialize_attributes
         sdb_item.attributes.add(to_add.merge(opt_lock_conditions))
       end
 
-      # @private
+      # @api private
       private
       def update_storage
 
@@ -411,7 +411,7 @@ module AWS
       end
 
       # @return [true]
-      # @private
+      # @api private
       private
       def delete_storage
         sdb_item.delete(opt_lock_conditions)

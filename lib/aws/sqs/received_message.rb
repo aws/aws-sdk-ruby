@@ -36,17 +36,17 @@ module AWS
       # @return [String] An MD5 digest of the message body.
       attr_reader :md5
 
-      # @private
+      # @api private
       attr_reader :attributes
 
-      # @private
+      # @api private
       ATTRIBUTE_ALIASES = {
         :sent_at => :sent_timestamp,
         :receive_count => :approximate_receive_count,
         :first_received_at => :approximate_first_receive_timestamp
       }
 
-      # @private
+      # @api private
       def initialize(queue, id, handle, opts = {})
         @queue = queue
         @id = id

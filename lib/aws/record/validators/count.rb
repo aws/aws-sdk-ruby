@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class CountValidator < Validator
 
       ACCEPTED_OPTIONS = [
@@ -69,7 +69,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def wrong_number exactly, got
         msg = options[:wrong_number] ||
@@ -77,14 +77,14 @@ module AWS
         interpolate(msg, :exactly => exactly, :count => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_few min, got
         msg = options[:too_few] || "has too few values (minimum is %{minimum})"
         interpolate(msg, :minimum => min, :count => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_many max, got
         msg = options[:too_many] || "has too many values (maximum is %{maximum})"

@@ -32,7 +32,7 @@ module AWS
 
       include ScalingPolicyOptions
 
-      # @private
+      # @api private
       def initialize auto_scaling_group, policy_name, options = {}
         @group = auto_scaling_group
         @name = policy_name

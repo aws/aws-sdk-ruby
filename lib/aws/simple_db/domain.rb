@@ -30,7 +30,7 @@ module AWS
     #
     class Domain
 
-      # @private
+      # @api private
       class NonEmptyDeleteError < StandardError; end
 
       include Core::Model
@@ -113,7 +113,7 @@ module AWS
       # An irb-friendly string representation of this object.
       #
       # @return [String]
-      # @private
+      # @api private
       def inspect
         "#<#{self.class}:#{name}>"
       end

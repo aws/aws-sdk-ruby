@@ -15,7 +15,7 @@ module AWS
   module Record
 
     # Raised when trying to access an attribute that does not exist.
-    # @private
+    # @api private
     class UndefinedAttributeError < StandardError
       def initalize attribute_name
         super("undefined attribute `#{attribute_name}`")
@@ -24,7 +24,7 @@ module AWS
 
     # Raised when calling #save!, #create! or #update_attributes! on a record that
     # has validation errors.
-    # @private
+    # @api private
     class InvalidRecordError < StandardError
       def initialize record
         @record = record
@@ -35,7 +35,7 @@ module AWS
 
     # Raised when trying to persist a record that has no attribute values
     # to persist.
-    # @private
+    # @api private
     class EmptyRecordError < StandardError
       def initialize record
         @record = record

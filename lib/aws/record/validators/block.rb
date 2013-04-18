@@ -14,7 +14,7 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     class BlockValidator < Validator
 
       ACCEPTED_OPTIONS = [:allow_nil, :allow_blank, :on, :if, :unless]

@@ -23,7 +23,7 @@ module AWS
       #
       class NetHttpHandler
 
-        # @private
+        # @api private
         PASS_THROUGH_ERRORS = [
           NoMethodError, FloatDomainError, TypeError, NotImplementedError,
           SystemExit, Interrupt, SyntaxError, RangeError, NoMemoryError,

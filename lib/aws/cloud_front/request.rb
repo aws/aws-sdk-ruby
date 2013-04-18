@@ -16,7 +16,7 @@ require 'time'
 module AWS
   class CloudFront
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
       def add_authorization! credentials

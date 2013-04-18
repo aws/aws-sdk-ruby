@@ -40,7 +40,7 @@ module AWS
 
       # @option options [Configuration] :config (AWS.config)
       # @option options [ServiceInterface] :service (nil)
-      # @private
+      # @api private
       def initialize options = {}
         @config = options[:config] || AWS.config
         @service = options[:service]
@@ -78,13 +78,13 @@ module AWS
       class << self
 
         # @return [nil]
-        # @private
+        # @api private
         def clear!
           @data = nil
         end
 
         # @return [Hash] Returns a hash of region metadata.
-        # @private
+        # @api private
         def data
           @data ||= load_data
         end

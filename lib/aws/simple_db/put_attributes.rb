@@ -14,14 +14,14 @@
 module AWS
   class SimpleDB
 
-    # @private
+    # @api private
     module PutAttributes
 
       include ExpectConditionOption
 
       # Given a single hash of attribute names to values, returns a list
       # of hashes suitable for the put_attributes :attributes option.
-      # @private
+      # @api private
       protected
       def attribute_hashes attributes, replace
         attribute_hashes = []
@@ -37,7 +37,7 @@ module AWS
         attribute_hashes
       end
 
-      # @private
+      # @api private
       protected
       def do_put attribute_hashes, expect_opts = {}
         return nil if attribute_hashes.empty?

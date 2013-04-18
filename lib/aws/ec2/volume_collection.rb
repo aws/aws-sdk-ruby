@@ -86,7 +86,7 @@ module AWS
         Volume.new_from(:create_volume, resp, resp.volume_id, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Volume

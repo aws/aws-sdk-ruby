@@ -140,7 +140,7 @@ module AWS
       #
       # @return [Boolean] Returns true if the named attribute
       #   has unsaved changes.
-      # @private
+      # @api private
       private
       def attribute_changed? attribute_name
         orig_values.keys.include?(attribute_name)
@@ -175,7 +175,7 @@ module AWS
       #   a change for.
       # @return [Boolean] Returns true if the named attribute
       #   has unsaved changes.
-      # @private
+      # @api private
       private
       def attribute_change attribute_name
         self.class.attribute_for(attribute_name) do |attribute|
@@ -209,7 +209,7 @@ module AWS
       #
       # @return Returns the previous value for changed attributes
       #   or the current value for unchanged attributes.
-      # @private
+      # @api private
       private
       def attribute_was attribute_name
         self.class.attribute_for(attribute_name) do |attribute|
@@ -221,7 +221,7 @@ module AWS
       # Reverts any changes to the attribute, restoring its original value.
       # @param [String] attribute_name Name of the attribute to reset.
       # @return [nil]
-      # @private
+      # @api private
       private
       def reset_attribute! attribute_name
         __send__("#{attribute_name}=", attribute_was(attribute_name))
@@ -233,7 +233,7 @@ module AWS
       # @param [String] attribute_name Name of the attribute that will
       #   be changed.
       # @return [nil]
-      # @private
+      # @api private
       private
       def attribute_will_change! attribute_name
         self.class.attribute_for(attribute_name) do |attribute|

@@ -18,7 +18,7 @@ module AWS
 
     # Used by S3#S3Object and S3::Client to accept options with
     # data that should be uploaded (streamed).
-    # @private
+    # @api private
     module DataOptions
 
       protected
@@ -140,7 +140,7 @@ module AWS
 
       # A utility class that turns a block (with 2 args) into an
       # IO object that responds to #read and #eof.
-      # @private
+      # @api private
       class IOProxy
 
         def initialize write_block

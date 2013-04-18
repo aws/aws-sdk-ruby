@@ -107,7 +107,7 @@ module AWS
         super(each_options, &block)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.certificates.each do |item|
@@ -120,7 +120,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def new_options
         user ? { :user => user } : { :config => config }

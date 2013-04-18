@@ -305,7 +305,7 @@ module AWS
       end
       alias_method :==, :eql?
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class.name}>"
       end
@@ -318,12 +318,12 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         def accepted_options
           @options ||= Set.new
         end
 
-        # @private
+        # @api private
         def add_option name, default_value = nil, options = {}, &transform
 
           accepted_options << name
@@ -350,7 +350,7 @@ module AWS
         # Configuration options that have dependencies are re-recreated
         # anytime one of their dependent configuration values are
         # changed.
-        # @private
+        # @api private
         def add_option_with_needs name, needs, &create_block
 
           accepted_options << name

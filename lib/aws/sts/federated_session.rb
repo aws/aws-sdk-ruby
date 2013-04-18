@@ -42,7 +42,7 @@ module AWS
       # @return [Integer]
       attr_reader :packed_policy_size
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @user_id = opts[:user_id]
         @user_arn = opts[:user_arn]

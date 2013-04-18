@@ -24,7 +24,7 @@ module AWS
       # @note Generally you do not need to create leaf nodes
       class LeafNode < Node
 
-        # @private
+        # @api private
         def initialize parent, member
           @parent = parent
           @member = member

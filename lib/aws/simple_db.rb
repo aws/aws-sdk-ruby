@@ -203,14 +203,14 @@ module AWS
 
     # @return [Boolean] Returns true if we are inside an AWS::SimpleDB
     #   #consistent_reads method block.
-    # @private
+    # @api private
     def self.in_consistent_reads_block?
       !Thread.current['_simple_db_consistent_reads_'].nil?
     end
 
     # @return [Boolean] Returns true if the consistent_reads block has
     #   a true state, false otherwise.
-    # @private
+    # @api private
     def self.consistent_reads_state
       Thread.current['_simple_db_consistent_reads_']
     end

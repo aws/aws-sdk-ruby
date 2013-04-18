@@ -30,13 +30,13 @@ module AWS
       # @attr_reader [Boolean] ssl_verify_peer
       # @attr_reader [String,nil] ssl_ca_file
       # @attr_reader [String,nil] ssl_ca_path
-      # @private
+      # @api private
       class ConnectionPool
 
         @pools_mutex = Mutex.new
         @pools = {}
 
-        # @private
+        # @api private
         OPTIONS = [
           :proxy_uri,
           :http_continue_timeout,
@@ -58,7 +58,7 @@ module AWS
 
         alias_method :ssl_verify_peer?, :ssl_verify_peer
 
-        # @private
+        # @api private
         def initialize options = {}
           # user supplied options are filtered by the class .for method
           options.each_pair do |opt_name, opt_value|
@@ -320,7 +320,7 @@ module AWS
 
         # Helper methods extended onto Net::HTTPSession objects opend by the
         # connection pool.
-        # @private
+        # @api private
         module SessionExtensions
 
           # Sends the request and tracks that this session has been used.

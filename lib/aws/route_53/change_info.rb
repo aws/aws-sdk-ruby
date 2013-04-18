@@ -24,7 +24,7 @@ module AWS
     #
     class ChangeInfo < Core::Resource
 
-      # @private
+      # @api private
       def initialize id, options = {}
         @id = id
         super

@@ -339,7 +339,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def set_attribute name, value
         client.send(:set_topic_attributes, {
@@ -349,7 +349,7 @@ module AWS
         })
       end
 
-      # @private
+      # @api private
       module PolicyProxy
         attr_accessor :topic
         def change
@@ -358,7 +358,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def endpoint_opts(endpoint, opts = {})
 

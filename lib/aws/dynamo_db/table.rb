@@ -90,7 +90,7 @@ module AWS
     #
     class Table < Resource
 
-      # @private
+      # @api private
       def initialize name, options = {}
         @name = name
         super
