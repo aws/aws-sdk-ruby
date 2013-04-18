@@ -29,6 +29,7 @@ module AWS
     # @attr_reader [CloudWatch] cloud_watch
     # @attr_reader [DynamoDB] dynamo_db
     # @attr_reader [DataPipeline] data_pipeline
+    # @attr_reader [DirectConnect] direct_connect
     # @attr_reader [EC2] ec2
     # @attr_reader [ElastiCache] elasticache
     # @attr_reader [ElasticBeanstalk] elastic_beanstalk
@@ -66,6 +67,12 @@ module AWS
 
       # @return [Configuration]
       attr_reader :config
+
+      AWS::SERVICES.each_pair do |name,service|
+        define_method(service[:ruby_name]) do
+          AWS.const_get(name).new(:config => config)
+        end
+      end
 
     end
   end

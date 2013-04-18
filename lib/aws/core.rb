@@ -84,40 +84,104 @@ module AWS
 
   # @api private
   SERVICES = {
-    'AutoScaling' => 'auto_scaling',
-    'CloudFormation' => 'cloud_formation',
-    'CloudFront' => 'cloud_front',
-    'CloudSearch' => 'cloud_search',
-    'CloudWatch' => 'cloud_watch',
-    'DynamoDB' => 'dynamo_db',
-    'DataPipeline' => 'data_pipeline',
-    'EC2' => 'ec2',
-    'ElastiCache' => 'elasticache',
-    'ElasticBeanstalk' => 'elastic_beanstalk',
-    'ElasticTranscoder' => 'elastic_transcoder',
-    'ELB' => 'elb',
-    'EMR' => 'emr',
-    'Glacier' => 'glacier',
-    'IAM' => 'iam',
-    'ImportExport' => 'import_export',
-    'OpsWorks' => 'ops_works',
-    'RDS' => 'rds',
-    'Redshift' => 'redshift',
-    'Route53' => 'route_53',
-    'S3' => 's3',
-    'SimpleDB' => 'simple_db',
-    'SimpleEmailService' => 'simple_email_service',
-    'SimpleWorkflow' => 'simple_workflow',
-    'SNS' => 'sns',
-    'SQS' => 'sqs',
-    'StorageGateway' => 'storage_gateway',
-    'STS' => 'sts',
+    "CloudFront" => {
+      :full_name => "Amazon CloudFront",
+      :ruby_name => :cloud_front },
+    "CloudSearch" => {
+      :full_name => "Amazon CloudSearch",
+      :ruby_name => :cloud_search },
+    "CloudWatch" => {
+      :full_name => "Amazon CloudWatch",
+      :ruby_name => :cloud_watch },
+    "DynamoDB" => {
+      :full_name => "Amazon DynamoDB",
+      :ruby_name => :dynamo_db },
+    "EC2" => {
+      :full_name => "Amazon Elastic Compute Cloud",
+      :ruby_name => :ec2 },
+    "EMR" => {
+      :full_name => "Amazon Elastic MapReduce",
+      :ruby_name => :emr },
+    "ElastiCache" => {
+      :full_name => "Amazon ElastiCache",
+      :ruby_name => :elasticache },
+    "Glacier" => {
+      :full_name => "Amazon Glacier",
+      :ruby_name => :glacier },
+    "RDS" => {
+      :full_name => "Amazon Relational Database Service (Beta)",
+      :ruby_name => :rds },
+    "Route53" => {
+      :full_name => "Amazon Route 53",
+      :ruby_name => :route_53 },
+    "SimpleEmailService" => {
+      :full_name => "Amazon Simple E-mail Service",
+      :ruby_name => :simple_email_service },
+    "SNS" => {
+      :full_name => "Amazon Simple Notifications Service",
+      :ruby_name => :sns },
+    "SQS" => {
+      :full_name => "Amazon Simple Queue Service",
+      :ruby_name => :sqs },
+    "SimpleWorkflow" => {
+      :full_name => "Amazon Simple Workflow Service",
+      :ruby_name => :simple_workflow },
+    "SimpleDB" => {
+      :full_name => "Amazon SimpleDB",
+      :ruby_name => :simple_db },
+    "AutoScaling" => {
+      :full_name => "Auto Scaling",
+      :ruby_name => :auto_scaling },
+    "CloudFormation" => {
+      :full_name => "AWS CloudFormation",
+      :ruby_name => :cloud_formation },
+    "DataPipeline" => {
+      :full_name => "AWS Data Pipeline",
+      :ruby_name => :data_pipeline },
+    "DirectConnect" => {
+      :full_name => "AWS Direct Connect",
+      :ruby_name => :direct_connect },
+    "ElasticBeanstalk" => {
+      :full_name => "AWS Elastic Beanstalk",
+      :ruby_name => :elastic_beanstalk },
+    "IAM" => {
+      :full_name => "AWS Identity and Access Management",
+      :ruby_name => :iam },
+    "ImportExport" => {
+      :full_name => "AWS Import/Export",
+      :ruby_name => :import_export },
+    "OpsWorks" => {
+      :full_name => "AWS OpsWorks",
+      :ruby_name => :ops_works },
+    "STS" => {
+      :full_name => "AWS Security Token Service",
+      :ruby_name => :sts },
+    "StorageGateway" => {
+      :full_name => "AWS Storage Gateway",
+      :ruby_name => :storage_gateway },
+    "ELB" => {
+      :full_name => "Elastic Load Balancing",
+      :ruby_name => :elb },
+    "ElasticTranscoder" => {
+      :full_name => "Amazon Elastic Transcoder",
+      :ruby_name => :elastic_transcoder },
+    "Redshift" => {
+      :full_name => "Amazon Redshift",
+      :ruby_name => :redshift },
+    "S3" => {
+      :full_name => "Amazon Simple Storage Service",
+      :ruby_name => :s3 }
   }
 
   # @api private
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
+  SERVICES.each_pair do |klass,service|
+    autoload(klass, "aws/#{service[:ruby_name]}")
+  end
+
   autoload :Errors, 'aws/errors'
+  autoload :Record, 'aws/record'
 
   module Core
 
