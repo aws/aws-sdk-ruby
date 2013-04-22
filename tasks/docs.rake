@@ -93,14 +93,17 @@ namespace :docs do
 
     require 'aws/core'
 
-    svcs = AWS::SERVICES.keys.sort_by(&:downcase).map{|svc| "# * {AWS::#{svc}}" }
+    svcs = []
+    AWS::SERVICES.each_pair do |name,svc|
+      svcs << "# * {AWS.#{svc[:ruby_name]}}"
+    end
 
     start = '# # Supported Services'
     stop = '# # Configuration'
 
     update_file(
       'lib/aws/core.rb',
-      "#{start}\n#\n#{svcs.join("\n")}\n#\n#{stop}\n",
+      "#{start}\n#\n#{svcs.sort.join("\n")}\n#\n#{stop}\n",
       /^#{start}/,
       /^#{stop}/
     )

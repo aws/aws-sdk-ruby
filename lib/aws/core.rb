@@ -16,41 +16,9 @@ require 'aws/version'
 # AWS is the root module for all of the Amazon Web Services.  It is also
 # where you can configure you access to AWS.
 #
-# # Supported Services
-#
-# * {AWS::AutoScaling}
-# * {AWS::CloudFormation}
-# * {AWS::CloudFront}
-# * {AWS::CloudSearch}
-# * {AWS::CloudWatch}
-# * {AWS::DataPipeline}
-# * {AWS::DirectConnect}
-# * {AWS::DynamoDB}
-# * {AWS::EC2}
-# * {AWS::ElastiCache}
-# * {AWS::ElasticBeanstalk}
-# * {AWS::ElasticTranscoder}
-# * {AWS::ELB}
-# * {AWS::EMR}
-# * {AWS::Glacier}
-# * {AWS::IAM}
-# * {AWS::ImportExport}
-# * {AWS::OpsWorks}
-# * {AWS::RDS}
-# * {AWS::Redshift}
-# * {AWS::Route53}
-# * {AWS::S3}
-# * {AWS::SimpleDB}
-# * {AWS::SimpleEmailService}
-# * {AWS::SimpleWorkflow}
-# * {AWS::SNS}
-# * {AWS::SQS}
-# * {AWS::StorageGateway}
-# * {AWS::STS}
-#
 # # Configuration
 #
-# You call {AWS.config} with a hash of options to configure your
+# Call {AWS.config} with a hash of options to configure your
 # access to the Amazon Web Services.
 #
 # At a minimum you need to set your access credentials. See {AWS.config}
@@ -253,6 +221,99 @@ module AWS
   end
 
   class << self
+
+    # @!method cloud_front
+    # @return [CloudFront]
+
+    # @!method cloud_search
+    # @return [CloudSearch]
+
+    # @!method cloud_watch
+    # @return [CloudWatch]
+
+    # @!method dynamo_db
+    # @return [DynamoDB]
+
+    # @!method ec2
+    # @return [EC2]
+
+    # @!method emr
+    # @return [EMR]
+
+    # @!method elasticache
+    # @return [ElastiCache]
+
+    # @!method glacier
+    # @return [Glacier]
+
+    # @!method rds
+    # @return [RDS]
+
+    # @!method route_53
+    # @return [Route53]
+
+    # @!method simple_email_service
+    # @return [SimpleEmailService]
+
+    # @!method sns
+    # @return [SNS]
+
+    # @!method sqs
+    # @return [SQS]
+
+    # @!method simple_workflow
+    # @return [SimpleWorkflow]
+
+    # @!method simple_db
+    # @return [SimpleDB]
+
+    # @!method auto_scaling
+    # @return [AutoScaling]
+
+    # @!method cloud_formation
+    # @return [CloudFormation]
+
+    # @!method data_pipeline
+    # @return [DataPipeline]
+
+    # @!method direct_connect
+    # @return [DirectConnect]
+
+    # @!method elastic_beanstalk
+    # @return [ElasticBeanstalk]
+
+    # @!method iam
+    # @return [IAM]
+
+    # @!method import_export
+    # @return [ImportExport]
+
+    # @!method ops_works
+    # @return [OpsWorks]
+
+    # @!method sts
+    # @return [STS]
+
+    # @!method storage_gateway
+    # @return [StorageGateway]
+
+    # @!method elb
+    # @return [ELB]
+
+    # @!method elastic_transcoder
+    # @return [ElasticTranscoder]
+
+    # @!method redshift
+    # @return [Redshift]
+
+    # @!method s3
+    # @return [S3]
+
+    SERVICES.each_pair do |klass,svc|
+      define_method(svc[:ruby_name]) do |*args|
+        AWS.const_get(klass).new(args.first || {})
+      end
+    end
 
     # @api private
     @@config = nil
