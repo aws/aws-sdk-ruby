@@ -18,8 +18,6 @@ require 'aws/version'
 #
 # # Supported Services
 #
-# The currently supported services are:
-#
 # * {AWS::AutoScaling}
 # * {AWS::CloudFormation}
 # * {AWS::CloudFront}
@@ -50,11 +48,6 @@ require 'aws/version'
 # * {AWS::StorageGateway}
 # * {AWS::STS}
 #
-# # AWS::Record
-#
-# In addition to the above services, bundled is an ORM based on AWS services
-# See {AWS::Record} for more information.
-#
 # # Configuration
 #
 # You call {AWS.config} with a hash of options to configure your
@@ -67,18 +60,6 @@ require 'aws/version'
 #      :access_key_id => 'ACCESS_KEY_ID',
 #      :secret_access_key => 'SECRET_ACCESS_KEY',
 #      :region => 'us-west-2')
-#
-# ## Rails
-#
-# If you are loading AWS inside a Rails web application, it is recommended to
-# place your configuration inside:
-#
-#   config/initializers/aws-sdk.rb
-#
-# Optionally you can create a Yaml configuration file at
-# RAILS_ROOT/config/aws.yml; This should be formatted in the same manor
-# as the default RAILS_ROOT/config/database.yml file (one section for
-# each Rails environment).
 #
 module AWS
 
