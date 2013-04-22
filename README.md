@@ -8,7 +8,6 @@ You can install the AWS SDK for Ruby with rubygems:
 
     gem install aws-sdk
 
-
 If you are using Bundler, we recommend that you express a major version
 dependency (aws-sdk follows [semantic versioning](http://semver.org/)):
 
@@ -30,36 +29,33 @@ You can also specify these values via `ENV`:
 
 ## Basic Usage
 
-Every supported service has a client class (e.g. `AWS::EC2::Client`).  Many services also have a higher level interface build on the client (e.g. `AWS::EC2`).
+Each service provides a service interface and a client.
 
-### Clients
+```
+ec2 = AWS.ec2 #=> AWS::EC2
+ec2.client #=> AWS::EC2::Client
+```
 
-Service client classes provide a 1-to-1 mapping to API operations.  Each
-operation method accepts a hash of input params and returns a response with
-a hash of data.  The example below uses the `AWS::EC2::Client` to get a list
-of tags for a single instance.
+The client provides one method for each API operation.  The client methods
+accept a hash of request params and return a response with a hash of
+response data. The service interfaces provide a higher level abstration built using the client.
+
+**Example: list instance tags using a client**
 
 ```ruby
-ec2 = AWS::EC2.new
-
-# get the tags for an ec2 instance
-resp = ec2.client.describe_tags(filters: [
-  { name: "resource-id", values: ["i-9d6fd0ff"] },
-])
+resp = ec2.client.describe_tags(filters: [{ name: "resource-id", values: ["i-12345678"] }])
 resp[:tag_set].first
-#=> {:resource_id=>"i-9d6fd0ff", :resource_type=>"instance", :key=>"aws:autoscaling:groupName", :value=>"aws-sdk-test-1362005310942"}
+#=> {:resource_id=>"i-12345678", :resource_type=>"instance", :key=>"role", :value=>"web"}
 ```
 
-### Higher Level Interfaces
-
-The `AWS::EC2` service interface provides a simpler method to do the same thing:
+**Example: list instance tags using the AWS::EC2 higher level interface**
 
 ```ruby
-ec2.instances['i-9d6fd0ff'].tags.to_h
-#=> {"aws:autoscaling:groupName"=>"aws-sdk-test-1362005310942"}
+ec2.instances['i-12345678'].tags.to_h
+#=> {"role"=>"web"}
 ```
 
-The [API Documentation](http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html) gives more examples.
+See the [API Documentation](http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html) for more examples.
 
 ## Links of Interest
 
