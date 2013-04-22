@@ -42,16 +42,16 @@ module AWS
         Region.new('region-name').config.region.should eq('region-name')
       end
 
-      AWS::SERVICES.each_pair do |klass, getter|
+      AWS::SERVICES.each_pair do |klass, svc|
 
-        context "##{getter}" do
+        context "##{svc[:ruby_name]}" do
 
           it "returns an instance of AWS::#{klass}" do
-            region.send(getter).should be_a(AWS.const_get(klass))
+            region.send(svc[:ruby_name]).should be_a(AWS.const_get(klass))
           end
 
           it "returns an AWS::#{klass} instance with the proper config" do
-            region.send(getter).config.region.should eq(region.name)
+            region.send(svc[:ruby_name]).config.region.should eq(region.name)
           end
 
         end

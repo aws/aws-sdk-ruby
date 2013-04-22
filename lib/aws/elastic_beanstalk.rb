@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/core'
-require 'aws/elb/config'
+require 'aws/elastic_beanstalk/config'
 
 module AWS
 

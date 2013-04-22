@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/core'
-require 'aws/glacier/config'
+require 'aws/elastic_transcoder/config'
 
 module AWS
 
