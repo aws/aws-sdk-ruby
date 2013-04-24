@@ -141,6 +141,7 @@ module AWS
     autoload :Configuration, 'aws/core/configuration'
     autoload :CredentialProviders, 'aws/core/credential_providers'
     autoload :Data, 'aws/core/data'
+    autoload :Deprecations, 'aws/core/deprecations'
     autoload :IndifferentHash, 'aws/core/indifferent_hash'
     autoload :Inflection, 'aws/core/inflection'
     autoload :JSONParser, 'aws/core/json_parser'
