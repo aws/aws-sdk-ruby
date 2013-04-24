@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'ca-bundle.crt',
     'rails/init.rb',    # for compatability with older versions of rails
     '.yardopts',
-    'README.rdoc',
+    'README.md',
     'LICENSE.txt',
   ]
   s.files += Dir['lib/**/*.rb']
