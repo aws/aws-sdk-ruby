@@ -79,7 +79,7 @@ module AWS
       #   this subnet and its network ACL.
       def network_acl_association
         associations = AWS.memoize { vpc.network_acls.map(&:associations) }.flatten
-        associations.first{|a| a.subnet == self }
+        associations.find{|a| a.subnet == self }
       end
 
       # @return [RouteTable] Returns the route table currently associated
