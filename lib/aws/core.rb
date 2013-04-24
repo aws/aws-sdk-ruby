@@ -708,5 +708,30 @@ module AWS
       nil
     end
 
+    # @api private
+    # @return [Hash]
+    def api_versions
+      @versions ||= begin
+        # get a list of support services/apis from disk
+        versions = {}
+        pattern = File.join(File.dirname(__FILE__), 'api_config', '*.yml')
+        Dir.glob(pattern).each do |path|
+          matches = path.match(/(\w+)-(\d{4}-\d{2}-\d{2})/)
+          svc = SERVICES[$1][:full_name]
+          versions[svc] ||= []
+          versions[svc] << $2
+        end
+
+        # s3 does not have an API configuration, so we have to add it manually
+        versions[SERVICES['S3'][:full_name]] = ['2006-03-01']
+
+        # sort the services alphabetically
+        versions.keys.sort_by(&:downcase).inject({}) do |hash,svc|
+          hash[svc] = versions[svc]
+          hash
+        end
+      end
+    end
+
   end
 end
