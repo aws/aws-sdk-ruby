@@ -1,4 +1,81 @@
+2013-04-24 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/deprecations.rb: Deprecated methods now only issue a single
+  warning instead of one per call.
+
+  * lib/aws/ec2/subnet.rb: Fixed an issue with
+  AWS::EC2::Subnet#network_acl_association
+
+  The #network_acl_association had a bug that caused it to always
+  return the first association from the vpc the subnet belongs to.
+
+2013-04-23 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/client.rb: Deprecated AWS::Core::Client#http_read_timeout.
+
+  The #http_read_timeout is a property of the configuration
+  and is not consumed by the client.  It should instead
+  be retrieved from the client configuration is needed.
+  Example:
+
+      # given
+      ec2 = AWS::EC2::Client.new
+
+      # deprecated
+      ec2.http_read_timeout
+
+      # prefered
+      ec2.config.http_read_timeout
+
+  * lib/aws/core.rb, lib/aws/core/deprecations.rb: Added a module for marking
+  methods as deprecated.
+
+2013-04-22 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/elastic_beanstalk.rb, lib/aws/elastic_transcoder.rb,
+  spec/aws/core/region_spec.rb: Fixed a few test issues with the new service
+  shortcuts.
+
+  * lib/aws/core.rb, tasks/docs.rake: Added service shortcuts from AWS.
+
+  You can now create service interfaces directly from AWS like so:
+
+      ec2 = AWS.ec2
+
+  You can pass configuration options to this instance as well:
+
+      ec2 = AWS.ec2(:region => 'us-west-2')
+
+  Updated docs rake task to document these magic methods.
+
+  * README.md: Updated README examples.
+
+  * lib/aws/core.rb, tasks/docs.rake: Added additional rake tasks for updating
+  docs.
+
+  The API documentation contains lists of supported
+  services and service classes.  A pair of rake tasks
+  have been added that will update these lists when
+  docs are built to ensure they do not get stale.
+
+  * README.md, README.rdoc: Translated README from rdoc to markdown,
+  restructured content.
+
 2013-04-18 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws-sdk.rb, lib/aws/core.rb, lib/aws/core/configuration.rb,
+  lib/aws/core/region.rb: DRY'd code that had to be done for each service.
+
+  * Registering autoloads for service interfaces
+  * Adding service helper methods to Region
+
+  * lib/aws/api_config/CloudFront-2012-05-05.yml,
+  lib/aws/api_config/ElastiCache-2012-03-09.yml,
+  lib/aws/api_config/RDS-2012-09-17.yml,
+  lib/aws/api_config/Route53-2012-02-29.yml: Removed some older/unused API
+  versions for four different services.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.9.1
 
   * lib/aws/core/http/connection_pool.rb,
   lib/aws/core/http/net_http_handler.rb: Fixed a bug introduced in 1.9.0
