@@ -58,6 +58,7 @@ module AWS
       #   method that should be used.
       #
       def deprecated method, options = {}
+
         deprecation_msg = options[:message] || begin
           msg = "DEPRECATION WARNING: called deprecated method `#{method}' "
           msg << "of #{self.name}"
@@ -67,8 +68,13 @@ module AWS
 
         alias_method(:"deprecated_#{method}", method)
 
+        warned = false # we only want to issue this warning once
+
         define_method(method) do |*args,&block|
-          warn(deprecation_msg)
+          unless warned
+            warn(deprecation_msg)
+            warned = true
+          end
           send("deprecated_#{method}", *args, &block)
         end
       end
