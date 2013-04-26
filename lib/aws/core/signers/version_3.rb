@@ -16,7 +16,7 @@ require 'time'
 
 module AWS
   module Core
-    module Signature
+    module Signers
       module Version3
 
         def self.included base

@@ -15,7 +15,7 @@ module AWS
   class EC2
     # @api private
     class Request < Core::Http::Request
-      include Core::Signature::Version2
+      include Core::Signers::Version2
     end
   end
 end

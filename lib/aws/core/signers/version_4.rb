@@ -17,12 +17,8 @@ require 'digest'
 
 module AWS
   module Core
-    module Signature
+    module Signers
       module Version4
-
-        def self.included base
-          base.send(:include, Signer)
-        end
 
         def add_authorization! credentials
           datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")

@@ -11,30 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'time'
-
 module AWS
   module Core
-    module Signature
-      module Version3HTTPS
-
-        def self.included base
-          base.send(:include, Signer)
-        end
+    module Signers
+      module Version2
 
         def add_authorization! credentials
-
-          self.access_key_id = credentials.access_key_id
-
-          parts = []
-          parts << "AWS3-HTTPS AWSAccessKeyId=#{access_key_id}"
-          parts << "Algorithm=HmacSHA256"
-          parts << "Signature=#{signature(credentials)}"
-          headers['x-amzn-authorization'] = parts.join(',')
-
-          headers['x-amz-security-token'] = credentials.session_token if
-            credentials.session_token
-
+          add_param('AWSAccessKeyId', credentials.access_key_id)
+          if token = credentials.session_token
+            add_param("SecurityToken", token)
+          end
+          add_param('SignatureVersion', '2')
+          add_param('SignatureMethod', 'HmacSHA256')
+          add_param('Signature', signature(credentials))
+          self.body = url_encoded_params
         end
 
         protected
@@ -44,11 +34,23 @@ module AWS
         end
 
         def string_to_sign
-          headers['date'] ||= Time.now.httpdate
+
+          host =
+            case port
+            when 80, 443 then self.host
+            else "#{self.host}:#{port}"
+            end
+
+          [
+            http_method,
+            host.to_s.downcase,
+            path,
+            params.sort.collect { |p| p.encoded }.join('&'),
+          ].join("\n")
+
         end
 
       end
     end
   end
 end
-

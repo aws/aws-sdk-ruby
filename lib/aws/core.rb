@@ -202,11 +202,11 @@ module AWS
       autoload :Validator, 'aws/core/options/validator'
     end
 
-    module Signature
-      autoload :Version2, 'aws/core/signature/version_2'
-      autoload :Version3, 'aws/core/signature/version_3'
-      autoload :Version3HTTPS, 'aws/core/signature/version_3_https'
-      autoload :Version4, 'aws/core/signature/version_4'
+    module Signers
+      autoload :Version2, 'aws/core/signers/version_2'
+      autoload :Version3, 'aws/core/signers/version_3'
+      autoload :Version3HTTPS, 'aws/core/signers/version_3_https'
+      autoload :Version4, 'aws/core/signers/version_4'
     end
 
     module XML

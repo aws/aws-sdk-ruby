@@ -16,7 +16,7 @@ module AWS
 
     # @api private
     class Request < Core::Http::Request
-      include Core::Signature::Version3HTTPS
+      include Core::Signers::Version3HTTPS
     end
 
   end

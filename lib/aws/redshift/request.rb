@@ -17,7 +17,7 @@ module AWS
     # @api private
     class Request < Core::Http::Request
 
-      include Core::Signature::Version4
+      include Core::Signers::Version4
 
       def service
         'redshift'
