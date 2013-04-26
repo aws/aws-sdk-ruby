@@ -19,11 +19,6 @@ module AWS
 
       include Core::Signature::Version4
 
-      def initialize
-        super
-        self.headers['x-amz-glacier-version'] = Glacier::Client::API_VERSION
-      end
-
       def service
         'glacier'
       end

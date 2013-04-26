@@ -280,6 +280,14 @@ module AWS
 
       define_client_methods('2012-06-01')
 
+      private
+
+      def build_request *args
+        request = super(*args)
+        request.headers['x-amz-glacier-version'] = API_VERSION
+        request
+      end
+
     end
   end
 end
