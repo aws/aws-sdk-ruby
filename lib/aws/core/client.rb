@@ -473,7 +473,9 @@ module AWS
               client = self
 
               response = new_response do
-                client.send(:build_request, name, options)
+                req = client.send(:build_request, name, options)
+                req.add_authorization!(credential_provider)
+                req
               end
 
               response.request_type = name
@@ -552,8 +554,6 @@ module AWS
         else
           http_request.continue_timeout = nil
         end
-
-        http_request.add_authorization!(credential_provider)
 
         http_request
 

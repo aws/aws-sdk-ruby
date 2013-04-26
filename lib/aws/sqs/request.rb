@@ -25,42 +25,6 @@ module AWS
         'sqs'
       end
 
-      def path
-        full_url.path
-      end
-
-      def host
-        full_url.host
-      end
-
-      def uri
-        path
-      end
-
-      def region
-        # sigv4 requires the region name when signing, this should come from
-        # the QueueUrl param whenever present
-        if
-          param = params.find{|p| p.name == 'QueueUrl' } and
-          host = URI.parse(param.value).host and
-          matches = host.match(/^sqs\.(.+?)\./)
-        then
-          return matches[1]
-        else
-          super
-        end
-      end
-
-      private
-
-      def full_url
-        if url_param = params.find { |p| p.name == "QueueUrl" }
-          URI.parse(url_param.value)
-        else
-          URI::HTTP.build(:host => @host, :path => '/')
-        end
-      end
-
     end
 
   end

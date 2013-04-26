@@ -253,6 +253,21 @@ module AWS
 
       define_client_methods('2012-11-05')
 
+      private
+
+      def build_request *args
+        request = super(*args)
+        if url_param = request.params.find { |p| p.name == "QueueUrl" }
+          url = URI.parse(url_param.value)
+          request.host = url.host
+          request.uri = url.request_uri
+          if matches = request.host.match(/^sqs\.(.+?)\./)
+            request.region = matches[1]
+          end
+        end
+        request
+      end
+
     end
   end
 end
