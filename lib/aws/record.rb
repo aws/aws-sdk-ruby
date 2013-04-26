@@ -24,7 +24,6 @@ module AWS
     autoload :Conversion, 'aws/record/conversion'
     autoload :DirtyTracking, 'aws/record/dirty_tracking'
     autoload :Errors, 'aws/record/errors'
-    autoload :Exceptions, 'aws/record/exceptions'
     autoload :HashModel, 'aws/record/hash_model'
     autoload :Model, 'aws/record/model'
     autoload :Naming, 'aws/record/naming'
@@ -32,6 +31,7 @@ module AWS
     autoload :Validations, 'aws/record/validations'
 
     # errors
+    autoload :RecordNotFound, 'aws/record/exceptions'
     autoload :InvalidRecordError, 'aws/record/exceptions'
     autoload :EmptyRecordError, 'aws/record/exceptions'
     autoload :UndefinedAttributeError, 'aws/record/exceptions'
@@ -49,9 +49,6 @@ module AWS
     autoload :NumericalityValidator, 'aws/record/validators/numericality'
     autoload :PresenceValidator, 'aws/record/validators/presence'
     autoload :Validator, 'aws/record/validator'
-
-    # @api private
-    class RecordNotFound < StandardError; end
 
     # Sets a prefix to be applied to all SimpleDB domains associated with
     # AWS::Record::Base classes.

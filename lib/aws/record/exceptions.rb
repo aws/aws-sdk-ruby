@@ -14,6 +14,9 @@
 module AWS
   module Record
 
+    # @api private
+    class RecordNotFound < StandardError; end
+
     # Raised when trying to access an attribute that does not exist.
     # @api private
     class UndefinedAttributeError < StandardError
