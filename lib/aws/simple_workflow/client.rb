@@ -1247,6 +1247,14 @@ module AWS
         end
       end
 
+      def build_request *args
+        request = super(*args)
+        if request.headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
+          request.read_timeout = 90
+        end
+        request
+      end
+
     end
   end
 end

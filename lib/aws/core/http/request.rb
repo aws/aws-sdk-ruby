@@ -21,20 +21,17 @@ module AWS
       # and parses the actual response.
       class Request
 
+        extend Deprecations
+
         # Returns a new empty http request object.
         def initialize
-          @default_read_timeout = 60
           @http_method = 'POST'
           @use_ssl = true
           @headers = CaseInsensitiveHash.new
           @uri = '/'
           @params = []
+          @read_timeout = 60
         end
-
-        # @return [Integer] The number of seconds the service has to respond
-        #   before a timeout error is raised on the request.  Defaults to
-        #   60 seconds.
-        attr_accessor :default_read_timeout
 
         # @return [String] hostname of the request
         attr_accessor :host
@@ -75,9 +72,11 @@ module AWS
         attr_accessor :service_ruby_name
 
         # @return [Integer] The number of seconds the service has to respond
-        #   before a timeout error is raised on the request.  Defaults to
-        #   60 seconds.
+        #   before a timeout error is raised on the request.
         attr_accessor :read_timeout
+
+        alias_method :default_read_timeout, :read_timeout
+        deprecated :default_read_timeout, :use => :read_timeout
 
         # @return [Boolean] Returns `true` if this request should be made
         #   with SSL enabled.
@@ -103,14 +102,6 @@ module AWS
         #   Defaults to 443 for SSL requests and 80 for non-SSL requests.
         def port
           @port || (use_ssl? ? 443 : 80)
-        end
-
-        # Some subclasses override this method to obseve requirements
-        # set by the services (e.q. SimpleWorlfow and SQS have special
-        # long-pulling requirements and require special read timeouts).
-        # @api private
-        def read_timeout
-          default_read_timeout
         end
 
         # @return [String] Returns the HTTP request path.
