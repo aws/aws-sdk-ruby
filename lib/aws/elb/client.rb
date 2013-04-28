@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2012-06-01'
 
+      signature_version :Version4, 'elasticloadbalancing'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
 

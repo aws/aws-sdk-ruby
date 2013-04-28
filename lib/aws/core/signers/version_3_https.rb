@@ -16,35 +16,40 @@ require 'time'
 module AWS
   module Core
     module Signers
-      module Version3HTTPS
+      # @api private
+      class Version3Https
 
-        def self.included base
-          base.send(:include, Signer)
+        # @param [CredentialProviders::Provider] credentials
+        def initialize credentials
+          @credentials = credentials
         end
 
-        def add_authorization! credentials
+        # @return [CredentialProviders::Provider]
+        attr_reader :credentials
 
-          self.access_key_id = credentials.access_key_id
-
+        # @param [Http::Request] req
+        # @return [Http::Request]
+        def sign req
           parts = []
-          parts << "AWS3-HTTPS AWSAccessKeyId=#{access_key_id}"
+          parts << "AWS3-HTTPS AWSAccessKeyId=#{credentials.access_key_id}"
           parts << "Algorithm=HmacSHA256"
-          parts << "Signature=#{signature(credentials)}"
-          headers['x-amzn-authorization'] = parts.join(',')
-
-          headers['x-amz-security-token'] = credentials.session_token if
+          parts << "Signature=#{signature(req)}"
+          req.headers['x-amzn-authorization'] = parts.join(',')
+          req.headers['x-amz-security-token'] = credentials.session_token if
             credentials.session_token
-
+          req
         end
 
-        protected
+        private
 
-        def signature credentials
-          Signer.sign(credentials.secret_access_key, string_to_sign)
+        # @param [Http::Request] req
+        def signature req
+          Signer.sign(credentials.secret_access_key, string_to_sign(req))
         end
 
-        def string_to_sign
-          headers['date'] ||= Time.now.httpdate
+        # @param [Http::Request] req
+        def string_to_sign req
+          req.headers['date'] ||= Time.now.httpdate
         end
 
       end

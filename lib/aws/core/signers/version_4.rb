@@ -18,92 +18,122 @@ require 'digest'
 module AWS
   module Core
     module Signers
-      module Version4
+      # @api private
+      class Version4
 
-        def add_authorization! credentials
-          datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
-          headers['content-type'] ||= 'application/x-www-form-urlencoded'
-          headers['host'] = host
-          headers['x-amz-date'] = datetime
-          headers['x-amz-security-token'] = credentials.session_token if
-            credentials.session_token
-          headers['x-amz-content-sha256'] ||= hexdigest(body || '')
-          headers['authorization'] = authorization(credentials, datetime)
+        # @param [CredentialProviders::Provider] credentials
+        # @param [String] service_name
+        # @param [String] region
+        def initialize credentials, service_name, region
+          @credentials = credentials
+          @service_name = service_name
+          @region = region
         end
 
-        protected
+        # @return [CredentialProviders::Provider]
+        attr_reader :credentials
 
-        def authorization credentials, datetime
+        # @return [String]
+        attr_reader :service_name
+
+        # @return [String]
+        attr_reader :region
+
+        # @param [Http::Request] req
+        # @return [Http::Request]
+        def sign req
+          datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+          req.headers['content-type'] ||= 'application/x-www-form-urlencoded'
+          req.headers['host'] = req.host
+          req.headers['x-amz-date'] = datetime
+          req.headers['x-amz-security-token'] = credentials.session_token if
+            credentials.session_token
+          req.headers['x-amz-content-sha256'] ||= hexdigest(req.body || '')
+          req.headers['authorization'] = authorization(req, datetime)
+          req
+        end
+
+        private
+
+        # @param [Http::Request] req
+        # @param [String] datetime
+        def authorization req, datetime
           parts = []
           parts << "AWS4-HMAC-SHA256 Credential=#{credentials.access_key_id}/#{credential_string(datetime)}"
-          parts << "SignedHeaders=#{signed_headers}"
-          parts << "Signature=#{signature(credentials, datetime)}"
+          parts << "SignedHeaders=#{signed_headers(req)}"
+          parts << "Signature=#{signature(req, datetime)}"
           parts.join(', ')
         end
 
-        def signature credentials, datetime
+        # @param [Http::Request] req
+        # @param [String] datetime
+        def signature req, datetime
           k_secret = credentials.secret_access_key
           k_date = hmac("AWS4" + k_secret, datetime[0,8])
           k_region = hmac(k_date, region)
-          k_service = hmac(k_region, service)
+          k_service = hmac(k_region, service_name)
           k_credentials = hmac(k_service, 'aws4_request')
-          hexhmac(k_credentials, string_to_sign(datetime))
+          hexhmac(k_credentials, string_to_sign(req, datetime))
         end
 
-        def string_to_sign datetime
+        # @param [Http::Request] req
+        # @param [String] datetime
+        def string_to_sign req, datetime
           parts = []
           parts << 'AWS4-HMAC-SHA256'
           parts << datetime
           parts << credential_string(datetime)
-          parts << hexdigest(canonical_request)
+          parts << hexdigest(canonical_request(req))
           parts.join("\n")
         end
 
+        # @param [String] datetime
         def credential_string datetime
           parts = []
           parts << datetime[0,8]
           parts << region
-          parts << service
+          parts << service_name
           parts << 'aws4_request'
           parts.join("/")
         end
 
-        def canonical_request
+        # @param [Http::Request] req
+        def canonical_request req
           parts = []
-          parts << http_method
-          parts << path
-          parts << querystring
-          parts << canonical_headers + "\n"
-          parts << signed_headers
-          parts << headers['x-amz-content-sha256']
+          parts << req.http_method
+          parts << req.path
+          parts << req.querystring
+          parts << canonical_headers(req) + "\n"
+          parts << signed_headers(req)
+          parts << req.headers['x-amz-content-sha256']
           parts.join("\n")
         end
 
-        def service
-          # this method is implemented in the request class for each service
-          raise NotImplementedError
-        end
-
-        def signed_headers
-          to_sign = headers.keys.map{|k| k.to_s.downcase }
+        # @param [Http::Request] req
+        def signed_headers req
+          to_sign = req.headers.keys.map{|k| k.to_s.downcase }
           to_sign.delete('authorization')
           to_sign.sort.join(";")
         end
 
-        def canonical_headers
+        # @param [Http::Request] req
+        def canonical_headers req
           headers = []
-          self.headers.each_pair do |k,v|
+          req.headers.each_pair do |k,v|
             headers << [k,v] unless k == 'authorization'
           end
           headers = headers.sort_by(&:first)
           headers.map{|k,v| "#{k}:#{canonical_header_values(v)}" }.join("\n")
         end
 
+        # @param [String,Array<String>] values
         def canonical_header_values values
           values = [values] unless values.is_a?(Array)
           values.map(&:to_s).join(',').gsub(/\s+/, ' ').strip
         end
 
+        # @param [String] value
+        # @return [String]
         def hexdigest value
           digest = Digest::SHA256.new
           if value.respond_to?(:read)
@@ -117,10 +147,16 @@ module AWS
           digest.hexdigest
         end
 
+        # @param [String] key
+        # @param [String] value
+        # @return [String]
         def hmac key, value
           OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'), key, value)
         end
 
+        # @param [String] key
+        # @param [String] value
+        # @return [String]
         def hexhmac key, value
           OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), key, value)
         end

@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2012-01-25'
 
+      signature_version :Version4, 'swf'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :count_pending_activity_tasks,

@@ -203,9 +203,11 @@ module AWS
     end
 
     module Signers
+      autoload :CloudFront, 'aws/core/signers/cloud_front'
+      autoload :S3, 'aws/core/signers/s3'
       autoload :Version2, 'aws/core/signers/version_2'
       autoload :Version3, 'aws/core/signers/version_3'
-      autoload :Version3HTTPS, 'aws/core/signers/version_3_https'
+      autoload :Version3Https, 'aws/core/signers/version_3_https'
       autoload :Version4, 'aws/core/signers/version_4'
     end
 

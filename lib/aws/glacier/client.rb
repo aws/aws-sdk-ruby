@@ -25,6 +25,8 @@ module AWS
 
       API_VERSION = '2012-06-01'
 
+      signature_version :Version4, 'glacier'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
 

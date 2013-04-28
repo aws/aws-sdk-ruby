@@ -17,7 +17,10 @@ module AWS
     # Client class for AWS Elastic Beanstalk.
     class Client < Core::QueryClient
 
+
       API_VERSION = '2010-12-01'
+
+      signature_version :Version4, 'elasticbeanstalk'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]

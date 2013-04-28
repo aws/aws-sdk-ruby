@@ -17,54 +17,61 @@ require 'time'
 module AWS
   module Core
     module Signers
-      module Version3
+      # @api private
+      class Version3
 
-        def self.included base
-          base.send(:include, Signer)
+        # @param [CredentialProviders::Provider] credentials
+        def initialize credentials
+          @credentials = credentials
         end
 
-        def add_authorization! credentials
+        # @return [CredentialProviders::Provider]
+        attr_reader :credentials
 
-          headers["x-amz-date"] ||= (headers["date"] ||= Time.now.httpdate)
-          headers["host"] ||= host
-
-          headers["x-amz-security-token"] = credentials.session_token if
+        # @param [Http::Request] req
+        # @return [Http::Request]
+        def sign req
+          req.headers["x-amz-date"] ||= (req.headers["date"] ||= Time.now.httpdate)
+          req.headers["host"] ||= req.host
+          req.headers["x-amz-security-token"] = credentials.session_token if
             credentials.session_token
-
-          # compute the authorization
-          headers["x-amzn-authorization"] =
+          req.headers["x-amzn-authorization"] =
             "AWS3 "+
             "AWSAccessKeyId=#{credentials.access_key_id},"+
             "Algorithm=HmacSHA256,"+
-            "SignedHeaders=#{headers_to_sign.join(';')},"+
-            "Signature=#{signature(credentials)}"
+            "SignedHeaders=#{headers_to_sign(req).join(';')},"+
+            "Signature=#{signature(req)}"
         end
 
-        protected
+        private
 
-        def signature credentials
-          Signer.sign(credentials.secret_access_key, string_to_sign)
+        # @param [Http::Request] req
+        def signature req, service_signing_name = nil
+          Signer.sign(credentials.secret_access_key, string_to_sign(req))
         end
 
-        def string_to_sign
+        # @param [Http::Request] req
+        def string_to_sign req
           OpenSSL::Digest::SHA256.digest([
-            http_method,
+            req.http_method,
             "/",
             "",
-            canonical_headers,
-            body
+            canonical_headers(req),
+            req.body
           ].join("\n"))
         end
 
-        def canonical_headers
-          headers_to_sign.map do |name|
-            value = headers[name]
+        # @param [Http::Request] req
+        def canonical_headers req
+          headers_to_sign(req).map do |name|
+            value = req.headers[name]
             "#{name.downcase.strip}:#{value.strip}\n"
           end.sort.join
         end
 
-        def headers_to_sign
-          headers.keys.select do |header|
+        # @param [Http::Request] req
+        def headers_to_sign req
+          req.headers.keys.select do |header|
               header == "host" ||
               header == "content-encoding" ||
               header =~ /^x-amz/

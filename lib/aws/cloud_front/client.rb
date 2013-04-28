@@ -18,6 +18,8 @@ module AWS
 
       API_VERSION = '2013-05-12'
 
+      signature_version :CloudFront
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
 

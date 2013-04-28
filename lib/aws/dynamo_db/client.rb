@@ -55,6 +55,8 @@ module AWS
 
       API_VERSION = '2011-12-05'
 
+      signature_version :Version4, 'dynamodb'
+
       # @private
       REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
 

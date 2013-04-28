@@ -25,6 +25,8 @@ module AWS
     # Client class for Amazon Simple Storage Service (S3).
     class Client < Core::Client
 
+      signature_version :S3
+
       API_VERSION = '2006-03-01'
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"

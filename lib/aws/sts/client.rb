@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2011-06-15'
 
+      signature_version :Version4, 'sts'
+
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @api private

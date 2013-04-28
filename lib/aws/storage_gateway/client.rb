@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2012-06-30'
 
+      signature_version :Version4, 'storagegateway'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
 

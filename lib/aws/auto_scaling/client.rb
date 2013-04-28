@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION= '2011-01-01'
 
+      signature_version :Version4, 'autoscaling'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,

@@ -14,38 +14,52 @@
 module AWS
   module Core
     module Signers
-      module Version2
+      # @api private
+      class Version2
 
-        def add_authorization! credentials
-          add_param('AWSAccessKeyId', credentials.access_key_id)
+        # @param [CredentialProviders::Provider] credentials
+        def initialize credentials
+          @credentials = credentials
+        end
+
+        # @return [CredentialProviders::Provider]
+        attr_reader :credentials
+
+        # @param [Http::Request] req
+        # @return [Http::Request]
+        def sign req
+          req.add_param('AWSAccessKeyId', credentials.access_key_id)
           if token = credentials.session_token
-            add_param("SecurityToken", token)
+            req.add_param("SecurityToken", token)
           end
-          add_param('SignatureVersion', '2')
-          add_param('SignatureMethod', 'HmacSHA256')
-          add_param('Signature', signature(credentials))
-          self.body = url_encoded_params
+          req.add_param('SignatureVersion', '2')
+          req.add_param('SignatureMethod', 'HmacSHA256')
+          req.add_param('Signature', signature(req))
+          req.body = req.url_encoded_params
+          req
         end
 
-        protected
+        private
 
-        def signature credentials
-          Signer.sign(credentials.secret_access_key, string_to_sign)
+        # @param [Http::Request] req
+        def signature req
+          Signer.sign(credentials.secret_access_key, string_to_sign(req))
         end
 
-        def string_to_sign
+        # @param [Http::Request] req
+        def string_to_sign req
 
           host =
-            case port
-            when 80, 443 then self.host
-            else "#{self.host}:#{port}"
+            case req.port
+            when 80, 443 then req.host
+            else "#{req.host}:#{req.port}"
             end
 
           [
-            http_method,
+            req.http_method,
             host.to_s.downcase,
-            path,
-            params.sort.collect { |p| p.encoded }.join('&'),
+            req.path,
+            req.url_encoded_params,
           ].join("\n")
 
         end
