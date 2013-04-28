@@ -54,7 +54,7 @@ module AWS
         end
         if options[:comment]
           options[:hosted_zone_config] ||= {}
-          options[:hosted_zone_config][:comment] = options[:comment]
+          options[:hosted_zone_config][:comment] = options.delete(:comment)
         end
 
         resp = client.create_hosted_zone(options)

@@ -27,7 +27,9 @@ module AWS
       let(:create_opts) {{
         :name => 'example.com.',
         :caller_reference => "CreateHostedZone, example.com., #{now.httpdate}",
-        :comment => 'An example.',
+        :hosted_zone_config => {
+          :comment => 'An example.',
+        },
       }}
 
       let(:now) {
@@ -62,7 +64,7 @@ module AWS
 
         it 'calls #create_hosted_zone on the client' do
           client.should_receive(:create_hosted_zone).with(create_opts)
-          hosted_zones.create(create_opts[:name], create_opts)
+          hosted_zones.create('example.com.', :comment => 'An example.')
         end
 
         it 'returns a hosted zone' do
