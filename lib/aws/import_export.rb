@@ -64,7 +64,6 @@ module AWS
 
     autoload :Client, 'aws/import_export/client'
     autoload :Errors, 'aws/import_export/errors'
-    autoload :Request, 'aws/import_export/request'
 
     include Core::ServiceInterface
 

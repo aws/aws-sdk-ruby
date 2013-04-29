@@ -71,7 +71,6 @@ module AWS
     autoload :MetricCollection, 'aws/cloud_watch/metric_collection'
     autoload :MetricAlarmCollection, 'aws/cloud_watch/metric_alarm_collection'
     autoload :MetricStatistics, 'aws/cloud_watch/metric_statistics'
-    autoload :Request, 'aws/cloud_watch/request'
 
     include Core::ServiceInterface
 

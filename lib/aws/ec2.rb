@@ -258,7 +258,6 @@ module AWS
     autoload :PermissionCollection, 'aws/ec2/permission_collection'
     autoload :Region, 'aws/ec2/region'
     autoload :RegionCollection, 'aws/ec2/region_collection'
-    autoload :Request, 'aws/ec2/request'
     autoload :ReservedInstances, 'aws/ec2/reserved_instances'
     autoload :ReservedInstancesCollection, 'aws/ec2/reserved_instances_collection'
     autoload :ReservedInstancesOffering, 'aws/ec2/reserved_instances_offering'

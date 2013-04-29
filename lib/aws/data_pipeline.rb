@@ -63,7 +63,6 @@ module AWS
 
     autoload :Client, 'aws/data_pipeline/client'
     autoload :Errors, 'aws/data_pipeline/errors'
-    autoload :Request, 'aws/data_pipeline/request'
 
     include Core::ServiceInterface
 

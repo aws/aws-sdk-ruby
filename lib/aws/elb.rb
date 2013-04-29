@@ -50,7 +50,6 @@ module AWS
     autoload :LoadBalancerCollection, 'aws/elb/load_balancer_collection'
     autoload :LoadBalancerPolicy, 'aws/elb/load_balancer_policy'
     autoload :LoadBalancerPolicyCollection, 'aws/elb/load_balancer_policy_collection'
-    autoload :Request, 'aws/elb/request'
 
     include Core::ServiceInterface
 

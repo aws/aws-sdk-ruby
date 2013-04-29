@@ -20,7 +20,6 @@ module AWS
 
     autoload :Client, 'aws/ops_works/client'
     autoload :Errors, 'aws/ops_works/errors'
-    autoload :Request, 'aws/ops_works/request'
 
     include Core::ServiceInterface
 

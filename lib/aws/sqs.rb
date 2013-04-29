@@ -64,7 +64,6 @@ module AWS
     autoload :Policy, 'aws/sqs/policy'
     autoload :ReceivedMessage, 'aws/sqs/received_message'
     autoload :ReceivedSNSMessage, 'aws/sqs/received_sns_message'
-    autoload :Request, 'aws/sqs/request'
 
     include Core::ServiceInterface
 

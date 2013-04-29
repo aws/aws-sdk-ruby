@@ -63,7 +63,6 @@ module AWS
 
     autoload :Client, 'aws/cloud_search/client'
     autoload :Errors, 'aws/cloud_search/errors'
-    autoload :Request, 'aws/cloud_search/request'
 
     include Core::ServiceInterface
 

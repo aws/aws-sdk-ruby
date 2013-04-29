@@ -82,7 +82,6 @@ module AWS
     autoload :LaunchConfigurationCollection, 'aws/auto_scaling/launch_configuration_collection'
     autoload :NotificationConfiguration, 'aws/auto_scaling/notification_configuration'
     autoload :NotificationConfigurationCollection, 'aws/auto_scaling/notification_configuration_collection'
-    autoload :Request, 'aws/auto_scaling/request'
     autoload :ScalingPolicy, 'aws/auto_scaling/scaling_policy'
     autoload :ScalingPolicyCollection, 'aws/auto_scaling/scaling_policy_collection'
     autoload :ScalingPolicyOptions, 'aws/auto_scaling/scaling_policy_options'

@@ -115,7 +115,6 @@ module AWS
     autoload :ItemCollection, 'aws/dynamo_db/item_collection'
     autoload :Keys, 'aws/dynamo_db/keys'
     autoload :PrimaryKeyElement, 'aws/dynamo_db/primary_key_element'
-    autoload :Request, 'aws/dynamo_db/request'
     autoload :Resource, 'aws/dynamo_db/resource'
     autoload :Table, 'aws/dynamo_db/table'
     autoload :TableCollection, 'aws/dynamo_db/table_collection'

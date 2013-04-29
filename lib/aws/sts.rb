@@ -47,7 +47,6 @@ module AWS
     autoload :Errors, 'aws/sts/errors'
     autoload :FederatedSession, 'aws/sts/federated_session'
     autoload :Policy, 'aws/sts/policy'
-    autoload :Request, 'aws/sts/request'
     autoload :Session, 'aws/sts/session'
 
     include Core::ServiceInterface

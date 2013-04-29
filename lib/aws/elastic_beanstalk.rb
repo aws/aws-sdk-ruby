@@ -39,7 +39,6 @@ module AWS
 
     autoload :Client, 'aws/elastic_beanstalk/client'
     autoload :Errors, 'aws/elastic_beanstalk/errors'
-    autoload :Request, 'aws/elastic_beanstalk/request'
 
     include Core::ServiceInterface
 

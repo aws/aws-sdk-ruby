@@ -51,7 +51,6 @@ module AWS
     autoload :ArchiveCollection, 'aws/glacier/archive_collection'
     autoload :Client, 'aws/glacier/client'
     autoload :Errors, 'aws/glacier/errors'
-    autoload :Request, 'aws/glacier/request'
     autoload :Resource, 'aws/glacier/resource'
     autoload :Vault, 'aws/glacier/vault'
     autoload :VaultCollection, 'aws/glacier/vault_collection'

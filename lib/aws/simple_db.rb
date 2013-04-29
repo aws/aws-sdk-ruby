@@ -154,7 +154,6 @@ module AWS
     autoload :ItemCollection, 'aws/simple_db/item_collection'
     autoload :ItemData, 'aws/simple_db/item_data'
     autoload :PutAttributes, 'aws/simple_db/put_attributes'
-    autoload :Request, 'aws/simple_db/request'
 
     include Core::ServiceInterface
 

@@ -151,7 +151,6 @@ module AWS
     autoload :MFADeviceCollection, 'aws/iam/mfa_device_collection'
     autoload :Policy, 'aws/iam/policy'
     autoload :PolicyCollection, 'aws/iam/policy_collection'
-    autoload :Request, 'aws/iam/request'
     autoload :Resource, 'aws/iam/resource'
     autoload :ServerCertificate, 'aws/iam/server_certificate'
     autoload :ServerCertificateCollection, 'aws/iam/server_certificate_collection'

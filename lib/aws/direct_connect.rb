@@ -64,7 +64,6 @@ module AWS
 
     autoload :Client, 'aws/direct_connect/client'
     autoload :Errors, 'aws/direct_connect/errors'
-    autoload :Request, 'aws/direct_connect/request'
 
     include Core::ServiceInterface
 
