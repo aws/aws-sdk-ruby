@@ -1,4 +1,53 @@
+2013-04-28 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/route_53/hosted_zone_collection.rb,
+  spec/aws/route_53/hosted_zone_collection_spec.rb: Resolved an issue with
+  AWS::Route53::HostedZoneCollection#create.
+
+  The comment option was getting duplicated before getting
+  passed to the client create method.
+
+  Fixes #240
+
+2013-04-26 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/record.rb, lib/aws/record/exceptions.rb: Resolved an
+  eager_autoload! bug.
+
+  Fixes #237
+
+  * lib/aws/glacier/client.rb, lib/aws/glacier/request.rb: Removed
+  customizations from AWS::Glacier::Request.
+
+  * lib/aws/core/client.rb, lib/aws/sqs/client.rb, lib/aws/sqs/request.rb,
+  spec/aws/sqs/queue_spec.rb, spec/aws/sqs/received_message_spec.rb,
+  spec/aws/sqs/request_spec.rb: Removed customizations from AWS::SQS::Request.
+
+  This is the next step in removing service specific
+  hooks from the http request classes.
+
+2013-04-25 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/client.rb, lib/aws/core/http/request.rb,
+  lib/aws/simple_workflow/client.rb, lib/aws/simple_workflow/request.rb:
+  Simplified how http read timeouts are handled.
+
+  Deprecated #default_read_timeout on AWS::Core::Http::Request.
+  SWF is the only service that (currently) needs to modify
+  the read timeout (for long polling operations).  Now using
+  the #read_timeout attribute exclusively to deal with this.
+
+  * lib/aws/cloud_watch.rb: fix interface name in documentation
+
 2013-04-24 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core.rb, tasks/apis.rake: Added a rake task that lists the
+  supported API versions.
+
+  * aws-sdk.gemspec: Fixed the gemspec (was referencing README.rdoc which is
+  now README.md).
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.9.2
 
   * lib/aws/core/deprecations.rb: Deprecated methods now only issue a single
   warning instead of one per call.
