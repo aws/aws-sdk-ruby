@@ -545,6 +545,7 @@ module AWS
         http_request.service_ruby_name = service_ruby_name
         http_request.host = endpoint
         http_request.port = port
+        http_request.region = @region
         http_request.use_ssl = config.use_ssl?
 
         send("configure_#{name}_request", http_request, opts)
