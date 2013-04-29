@@ -41,7 +41,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
           req.headers['content-type'] ||= 'application/x-www-form-urlencoded'
           req.headers['host'] = req.host
@@ -151,14 +151,18 @@ module AWS
         # @param [String] value
         # @return [String]
         def hmac key, value
-          OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'), key, value)
+          OpenSSL::HMAC.digest(sha256_digest, key, value)
         end
 
         # @param [String] key
         # @param [String] value
         # @return [String]
         def hexhmac key, value
-          OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), key, value)
+          OpenSSL::HMAC.hexdigest(sha256_digest, key, value)
+        end
+
+        def sha256_digest
+          OpenSSL::Digest::Digest.new('sha256')
         end
 
       end

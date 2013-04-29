@@ -20,6 +20,7 @@ module AWS
     # @api private
     class Request < Core::Http::Request
 
+      include Core::Signers::Base
       include Core::UriEscape
 
       # @return [bucket] S3 bucket name
@@ -168,10 +169,8 @@ module AWS
         if token = credentials.session_token
           headers["x-amz-security-token"] = token
         end
-
         secret = credentials.secret_access_key
-        signature = Core::Signer.sign(secret, string_to_sign, 'sha1')
-        signature = URI.escape(signature)
+        signature = URI.escape(sign(secret, string_to_sign, 'sha1'))
         headers["authorization"] = "AWS #{credentials.access_key_id}:#{signature}"
       end
 

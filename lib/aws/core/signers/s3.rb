@@ -27,7 +27,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           req.add_authorization!(credentials)
           req
         end

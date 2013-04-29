@@ -18,6 +18,8 @@ module AWS
     module Signers
       class CloudFront
 
+        include Base
+
         # @param [CredentialProviders::Provider] credentials
         def initialize credentials
           @credentials = credentials
@@ -28,7 +30,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           req.headers['x-amz-security-token'] = credentials.session_token if
             credentials.session_token
           req.headers['authorization'] =
@@ -40,10 +42,7 @@ module AWS
 
         # @param [Http::Request] req
         def signature req
-          Core::Signer.sign(
-            credentials.secret_access_key,
-            string_to_sign(req),
-            'sha1')
+          sign(credentials.secret_access_key, string_to_sign(req), 'sha1')
         end
 
         # @param [Http::Request] req

@@ -19,6 +19,8 @@ module AWS
       # @api private
       class Version3Https
 
+        include Base
+
         # @param [CredentialProviders::Provider] credentials
         def initialize credentials
           @credentials = credentials
@@ -29,7 +31,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           parts = []
           parts << "AWS3-HTTPS AWSAccessKeyId=#{credentials.access_key_id}"
           parts << "Algorithm=HmacSHA256"
@@ -44,7 +46,7 @@ module AWS
 
         # @param [Http::Request] req
         def signature req
-          Signer.sign(credentials.secret_access_key, string_to_sign(req))
+          sign(credentials.secret_access_key, string_to_sign(req))
         end
 
         # @param [Http::Request] req

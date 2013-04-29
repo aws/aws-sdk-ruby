@@ -20,6 +20,8 @@ module AWS
       # @api private
       class Version3
 
+        include Base
+
         # @param [CredentialProviders::Provider] credentials
         def initialize credentials
           @credentials = credentials
@@ -30,7 +32,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           req.headers["x-amz-date"] ||= (req.headers["date"] ||= Time.now.httpdate)
           req.headers["host"] ||= req.host
           req.headers["x-amz-security-token"] = credentials.session_token if
@@ -47,7 +49,7 @@ module AWS
 
         # @param [Http::Request] req
         def signature req, service_signing_name = nil
-          Signer.sign(credentials.secret_access_key, string_to_sign(req))
+          sign(credentials.secret_access_key, string_to_sign(req))
         end
 
         # @param [Http::Request] req

@@ -17,6 +17,8 @@ module AWS
       # @api private
       class Version2
 
+        include Base
+
         # @param [CredentialProviders::Provider] credentials
         def initialize credentials
           @credentials = credentials
@@ -27,7 +29,7 @@ module AWS
 
         # @param [Http::Request] req
         # @return [Http::Request]
-        def sign req
+        def sign_request req
           req.add_param('AWSAccessKeyId', credentials.access_key_id)
           if token = credentials.session_token
             req.add_param("SecurityToken", token)
@@ -43,7 +45,7 @@ module AWS
 
         # @param [Http::Request] req
         def signature req
-          Signer.sign(credentials.secret_access_key, string_to_sign(req))
+          sign(credentials.secret_access_key, string_to_sign(req))
         end
 
         # @param [Http::Request] req

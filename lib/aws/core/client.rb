@@ -695,7 +695,7 @@ module AWS
                 [credential_provider]
               signer_class.new(*signer_args)
             end
-            @signer.sign(req)
+            @signer.sign_request(req)
             req
           end
         end

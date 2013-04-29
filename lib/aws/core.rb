@@ -193,7 +193,6 @@ module AWS
     autoload :RESTResponseParser, 'aws/core/rest_response_parser'
 
     autoload :ServiceInterface, 'aws/core/service_interface'
-    autoload :Signer, 'aws/core/signer'
     autoload :UriEscape, 'aws/core/uri_escape'
 
     module Options
@@ -203,6 +202,7 @@ module AWS
     end
 
     module Signers
+      autoload :Base, 'aws/core/signers/base'
       autoload :CloudFront, 'aws/core/signers/cloud_front'
       autoload :S3, 'aws/core/signers/s3'
       autoload :Version2, 'aws/core/signers/version_2'
