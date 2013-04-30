@@ -18,7 +18,7 @@ dependency (aws-sdk follows [semantic versioning](http://semver.org/)):
 You need to provide your AWS security credentials and choose a default region.
 
 ```ruby
-AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2)
+AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2')
 ```
 
 You can also specify these values via `ENV`:
