@@ -1,3 +1,24 @@
+2013-05-01 Loren Segal <lsegal@amazon.com>
+
+  * lib/aws/support/client.rb: Fix documentation formatting
+
+  * README.md, endpoints.json, features/extra/common.rb,
+  features/support/client.feature, features/support/common.rb,
+  features/support/step_definitions/client.rb,
+  features/support/step_definitions/support.rb,
+  lib/aws/api_config/Support-2013-04-15.yml, lib/aws/core.rb,
+  lib/aws/support.rb, lib/aws/support/client.rb, lib/aws/support/config.rb,
+  lib/aws/support/errors.rb, lib/aws/support/request.rb: Add support for AWS
+  Support (AWS::Support)
+
+2013-04-30 Manuel Meurer <manuel.meurer@gmail.com>
+
+  * README.md: Add missing apostrophe
+
+2013-04-29 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.9.3
+
 2013-04-28 Trevor Rowe <trevorrowe@gmail.com>
 
   * lib/aws/route_53/hosted_zone_collection.rb,
