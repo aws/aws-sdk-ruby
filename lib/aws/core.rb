@@ -108,6 +108,9 @@ module AWS
     "StorageGateway" => {
       :full_name => "AWS Storage Gateway",
       :ruby_name => :storage_gateway },
+    "Support" => {
+      :full_name => "AWS Support",
+      :ruby_name => :support },
     "ELB" => {
       :full_name => "Elastic Load Balancing",
       :ruby_name => :elb },
@@ -297,6 +300,9 @@ module AWS
 
     # @!method storage_gateway
     # @return [StorageGateway]
+
+    # @!method support
+    # @return [Support]
 
     # @!method elb
     # @return [ELB]

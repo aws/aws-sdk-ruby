@@ -145,6 +145,11 @@
         "http": false,
         "https": true,
         "hostname": "elastictranscoder.us-east-1.amazonaws.com"
+      },
+      "support": {
+        "http": false,
+        "https": true,
+        "hostname": "support.us-east-1.amazonaws.com"
       }
     },
     "us-west-1": {

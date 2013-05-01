@@ -224,6 +224,11 @@ The SDK currently supports the following services:
       <td>2011-06-15</td>
       <td>AWS Security Token Service</td>
     </tr>
+    <tr>
+      <td>AWS::Support</td>
+      <td>2013-04-15</td>
+      <td>AWS Support</td>
+    </tr>
     </tbody>
   </table>
 
