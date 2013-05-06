@@ -72,8 +72,8 @@ module AWS
     #
     # ## Streaming Uploads
     #
-    # When you call {#write} with any IO-like object (must respond to
-    # #read and #eof?), it will be streamed to S3 in chunks.
+    # When you call {#write} with an IO-like object, it will be streamed 
+    # to S3 in chunks.
     #
     # While it is possible to determine the size of many IO objects, you may
     # have to specify the :content_length of your IO object.
