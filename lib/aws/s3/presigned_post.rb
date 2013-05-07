@@ -342,7 +342,7 @@ module AWS
       def fields
 
         secret = config.credential_provider.secret_access_key
-        signature = Core::Signer.sign(secret, policy, 'sha1')
+        signature = Core::Signers::Base.sign(secret, policy, 'sha1')
 
         fields = {
           "AWSAccessKeyId" => config.credential_provider.access_key_id,

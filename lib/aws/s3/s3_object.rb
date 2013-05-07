@@ -1399,7 +1399,7 @@ module AWS
         string_to_sign = parts.join("\n")
 
         secret = config.credential_provider.secret_access_key
-        Core::Signer.sign(secret, string_to_sign, 'sha1')
+        Core::Signers::Base.sign(secret, string_to_sign, 'sha1')
       end
 
       def expiration_timestamp(input)
