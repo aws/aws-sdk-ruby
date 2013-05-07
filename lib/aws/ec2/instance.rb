@@ -50,6 +50,8 @@ module AWS
     #     * "terminate"] When the instance shuts down, it will be
     #       terminated.
     #
+    # @attr [Boolean] source_dest_check
+    #
     # @attr_reader [String] image_id Image ID of the AMI used to
     #   launch the instance.
     #
