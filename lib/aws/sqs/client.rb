@@ -67,6 +67,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:successful` - (Array<Hash>)
       #     * `:id` - (String)
       #   * `:failed` - (Array<Hash>)
@@ -85,6 +86,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:queue_url` - (String)
 
       # @!method delete_message(options = {})
@@ -110,6 +112,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:successful` - (Array<Hash>)
       #     * `:id` - (String)
       #   * `:failed` - (Array<Hash>)
@@ -135,6 +138,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,String>)
 
       # @!method get_queue_url(options = {})
@@ -147,6 +151,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:queue_url` - (String)
 
       # @!method list_queues(options = {})
@@ -158,6 +163,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:queue_urls` - (Array<String>)
 
       # @!method receive_message(options = {})
@@ -183,6 +189,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:messages` - (Array<Hash>)
       #     * `:message_id` - (String)
       #     * `:receipt_handle` - (String)
@@ -211,6 +218,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:md5_of_message_body` - (String)
       #   * `:message_id` - (String)
 
@@ -230,6 +238,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:successful` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:message_id` - (String)

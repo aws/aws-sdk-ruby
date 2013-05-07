@@ -66,6 +66,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:access_key` - (Hash)
       #     * `:user_name` - (String)
       #     * `:access_key_id` - (String)
@@ -92,6 +93,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:group` - (Hash)
       #     * `:path` - (String)
       #     * `:group_name` - (String)
@@ -111,6 +113,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_profile` - (Hash)
       #     * `:path` - (String)
       #     * `:instance_profile_name` - (String)
@@ -135,6 +138,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:login_profile` - (Hash)
       #     * `:user_name` - (String)
       #     * `:create_date` - (Time)
@@ -152,6 +156,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:role` - (Hash)
       #     * `:path` - (String)
       #     * `:role_name` - (String)
@@ -171,6 +176,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:user` - (Hash)
       #     * `:path` - (String)
       #     * `:user_name` - (String)
@@ -191,6 +197,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_mfa_device` - (Hash)
       #     * `:serial_number` - (String)
       #     * `:base_32_string_seed` - (String)
@@ -337,6 +344,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:password_policy` - (Hash)
       #     * `:minimum_password_length` - (Integer)
       #     * `:require_symbols` - (Boolean)
@@ -351,6 +359,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:summary_map` - (Hash<String,Integer>)
 
       # @!method get_group(options = {})
@@ -368,6 +377,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:group` - (Hash)
       #     * `:path` - (String)
       #     * `:group_name` - (String)
@@ -393,6 +403,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:group_name` - (String)
       #   * `:policy_name` - (String)
       #   * `:policy_document` - (String)
@@ -405,6 +416,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_profile` - (Hash)
       #     * `:path` - (String)
       #     * `:instance_profile_name` - (String)
@@ -427,6 +439,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:login_profile` - (Hash)
       #     * `:user_name` - (String)
       #     * `:create_date` - (Time)
@@ -439,6 +452,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:role` - (Hash)
       #     * `:path` - (String)
       #     * `:role_name` - (String)
@@ -457,6 +471,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:role_name` - (String)
       #   * `:policy_name` - (String)
       #   * `:policy_document` - (String)
@@ -469,6 +484,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:server_certificate` - (Hash)
       #     * `:server_certificate_metadata` - (Hash)
       #       * `:path` - (String)
@@ -488,6 +504,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:user` - (Hash)
       #     * `:path` - (String)
       #     * `:user_name` - (String)
@@ -505,6 +522,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:user_name` - (String)
       #   * `:policy_name` - (String)
       #   * `:policy_document` - (String)
@@ -524,6 +542,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:access_key_metadata` - (Array<Hash>)
       #     * `:user_name` - (String)
       #     * `:access_key_id` - (String)
@@ -546,6 +565,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:account_aliases` - (Array<String>)
       #   * `:is_truncated` - (Boolean)
       #   * `:marker` - (String)
@@ -566,6 +586,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_names` - (Array<String>)
       #   * `:is_truncated` - (Boolean)
       #   * `:marker` - (String)
@@ -589,6 +610,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:groups` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:group_name` - (String)
@@ -614,6 +636,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:groups` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:group_name` - (String)
@@ -643,6 +666,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_profiles` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:instance_profile_name` - (String)
@@ -675,6 +699,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_profiles` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:instance_profile_name` - (String)
@@ -707,6 +732,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:mfa_devices` - (Array<Hash>)
       #     * `:user_name` - (String)
       #     * `:serial_number` - (String)
@@ -730,6 +756,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_names` - (Array<String>)
       #   * `:is_truncated` - (Boolean)
       #   * `:marker` - (String)
@@ -753,6 +780,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:roles` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:role_name` - (String)
@@ -783,6 +811,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:server_certificate_metadata_list` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:server_certificate_name` - (String)
@@ -807,6 +836,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:certificates` - (Array<Hash>)
       #     * `:user_name` - (String)
       #     * `:certificate_id` - (String)
@@ -832,6 +862,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_names` - (Array<String>)
       #   * `:is_truncated` - (Boolean)
       #   * `:marker` - (String)
@@ -856,6 +887,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:users` - (Array<Hash>)
       #     * `:path` - (String)
       #     * `:user_name` - (String)
@@ -886,6 +918,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_mfa_devices` - (Array<Hash>)
       #     * `:serial_number` - (String)
       #     * `:base_32_string_seed` - (String)
@@ -1068,6 +1101,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:server_certificate_metadata` - (Hash)
       #     * `:path` - (String)
       #     * `:server_certificate_name` - (String)
@@ -1085,6 +1119,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:certificate` - (Hash)
       #     * `:user_name` - (String)
       #     * `:certificate_id` - (String)

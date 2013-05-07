@@ -41,6 +41,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_aws_id` - (String)
       #   * `:cust_subscription_id` - (String)
       #   * `:sns_topic_arn` - (String)
@@ -90,6 +91,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:db_security_group_name` - (String)
       #   * `:db_security_group_description` - (String)
@@ -118,6 +120,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_snapshot_identifier` - (String)
       #   * `:db_instance_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -213,6 +216,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -322,6 +326,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -395,6 +400,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_parameter_group_name` - (String)
       #   * `:db_parameter_group_family` - (String)
       #   * `:description` - (String)
@@ -409,6 +415,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:db_security_group_name` - (String)
       #   * `:db_security_group_description` - (String)
@@ -433,6 +440,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_snapshot_identifier` - (String)
       #   * `:db_instance_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -464,6 +472,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_subnet_group_name` - (String)
       #   * `:db_subnet_group_description` - (String)
       #   * `:vpc_id` - (String)
@@ -513,6 +522,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_aws_id` - (String)
       #   * `:cust_subscription_id` - (String)
       #   * `:sns_topic_arn` - (String)
@@ -541,6 +551,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:option_group_name` - (String)
       #   * `:option_group_description` - (String)
       #   * `:engine_name` - (String)
@@ -583,6 +594,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -666,6 +678,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_snapshot_identifier` - (String)
       #   * `:db_instance_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -701,6 +714,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_aws_id` - (String)
       #   * `:cust_subscription_id` - (String)
       #   * `:sns_topic_arn` - (String)
@@ -745,6 +759,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_engine_versions` - (Array<Hash>)
       #     * `:engine` - (String)
@@ -777,6 +792,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_instances` - (Array<Hash>)
       #     * `:db_instance_identifier` - (String)
@@ -863,6 +879,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:describe_db_log_files` - (Array<Hash>)
       #     * `:log_file_name` - (String)
       #     * `:last_written` - (Integer)
@@ -885,6 +902,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_parameter_groups` - (Array<Hash>)
       #     * `:db_parameter_group_name` - (String)
@@ -908,6 +926,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameters` - (Array<Hash>)
       #     * `:parameter_name` - (String)
       #     * `:parameter_value` - (String)
@@ -937,6 +956,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_security_groups` - (Array<Hash>)
       #     * `:owner_id` - (String)
@@ -973,6 +993,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_snapshots` - (Array<Hash>)
       #     * `:db_snapshot_identifier` - (String)
@@ -1009,6 +1030,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:db_subnet_groups` - (Array<Hash>)
       #     * `:db_subnet_group_name` - (String)
@@ -1038,6 +1060,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_parameter_group_family` - (String)
       #   * `:marker` - (String)
       #   * `:parameters` - (Array<Hash>)
@@ -1061,6 +1084,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:event_categories_map_list` - (Array<Hash>)
       #     * `:source_type` - (String)
       #     * `:event_categories` - (Array<String>)
@@ -1082,6 +1106,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:event_subscriptions_list` - (Array<Hash>)
       #     * `:customer_aws_id` - (String)
@@ -1127,6 +1152,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:events` - (Array<Hash>)
       #     * `:source_identifier` - (String)
@@ -1155,6 +1181,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:option_group_options` - (Array<Hash>)
       #     * `:name` - (String)
       #     * `:description` - (String)
@@ -1198,6 +1225,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:option_groups_list` - (Array<Hash>)
       #     * `:option_group_name` - (String)
       #     * `:option_group_description` - (String)
@@ -1256,6 +1284,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:orderable_db_instance_options` - (Array<Hash>)
       #     * `:engine` - (String)
       #     * `:engine_version` - (String)
@@ -1304,6 +1333,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_db_instances` - (Array<Hash>)
       #     * `:reserved_db_instance_id` - (String)
@@ -1356,6 +1386,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_db_instances_offerings` - (Array<Hash>)
       #     * `:reserved_db_instances_offering_id` - (String)
@@ -1384,6 +1415,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:log_file_data` - (String)
       #   * `:marker` - (String)
       #   * `:additional_data_pending` - (Boolean)
@@ -1396,6 +1428,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:tag_list` - (Array<Hash>)
       #     * `:key` - (String)
       #     * `:value` - (String)
@@ -1487,6 +1520,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -1582,6 +1616,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_parameter_group_name` - (String)
 
       # @!method modify_db_subnet_group(options = {})
@@ -1598,6 +1633,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_subnet_group_name` - (String)
       #   * `:db_subnet_group_description` - (String)
       #   * `:vpc_id` - (String)
@@ -1633,6 +1669,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_aws_id` - (String)
       #   * `:cust_subscription_id` - (String)
       #   * `:sns_topic_arn` - (String)
@@ -1682,6 +1719,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:option_group_name` - (String)
       #   * `:option_group_description` - (String)
       #   * `:engine_name` - (String)
@@ -1739,6 +1777,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -1812,6 +1851,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_db_instance_id` - (String)
       #   * `:reserved_db_instances_offering_id` - (String)
       #   * `:db_instance_class` - (String)
@@ -1840,6 +1880,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -1912,6 +1953,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_aws_id` - (String)
       #   * `:cust_subscription_id` - (String)
       #   * `:sns_topic_arn` - (String)
@@ -1969,6 +2011,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_parameter_group_name` - (String)
 
       # @!method restore_db_instance_from_db_snapshot(options = {})
@@ -2021,6 +2064,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -2135,6 +2179,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:db_instance_class` - (String)
       #   * `:engine` - (String)
@@ -2215,6 +2260,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:db_security_group_name` - (String)
       #   * `:db_security_group_description` - (String)

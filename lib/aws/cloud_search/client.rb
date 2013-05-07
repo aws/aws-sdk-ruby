@@ -29,6 +29,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:domain_status` - (Hash)
       #     * `:domain_id` - (String)
       #     * `:domain_name` - (String)
@@ -125,6 +126,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:index_field` - (Hash)
       #     * `:options` - (Hash)
       #       * `:index_field_name` - (String)
@@ -204,6 +206,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:rank_expression` - (Hash)
       #     * `:options` - (Hash)
       #       * `:rank_name` - (String)
@@ -221,6 +224,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:domain_status` - (Hash)
       #     * `:domain_id` - (String)
       #     * `:domain_name` - (String)
@@ -247,6 +251,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:index_field` - (Hash)
       #     * `:options` - (Hash)
       #       * `:index_field_name` - (String)
@@ -291,6 +296,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:rank_expression` - (Hash)
       #     * `:options` - (Hash)
       #       * `:rank_name` - (String)
@@ -308,6 +314,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:default_search_field` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -324,6 +331,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:domain_status_list` - (Array<Hash>)
       #     * `:domain_id` - (String)
       #     * `:domain_name` - (String)
@@ -351,6 +359,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:index_fields` - (Array<Hash>)
       #     * `:options` - (Hash)
       #       * `:index_field_name` - (String)
@@ -395,6 +404,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:rank_expressions` - (Array<Hash>)
       #     * `:options` - (Hash)
       #       * `:rank_name` - (String)
@@ -412,6 +422,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:access_policies` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -427,6 +438,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stems` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -442,6 +454,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stopwords` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -457,6 +470,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:synonyms` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -472,6 +486,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:field_names` - (Array<String>)
 
       # @!method update_default_search_field(options = {})
@@ -484,6 +499,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:default_search_field` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -500,6 +516,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:access_policies` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -516,6 +533,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stems` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -532,6 +550,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stopwords` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)
@@ -548,6 +567,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:synonyms` - (Hash)
       #     * `:options` - (String)
       #     * `:status` - (Hash)

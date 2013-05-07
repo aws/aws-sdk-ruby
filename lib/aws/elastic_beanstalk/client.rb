@@ -30,6 +30,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:available` - (Boolean)
       #   * `:fully_qualified_cname` - (String)
 
@@ -44,6 +45,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:application` - (Hash)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -90,6 +92,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:application_version` - (Hash)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -153,6 +156,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:solution_stack_name` - (String)
       #   * `:application_name` - (String)
       #   * `:template_name` - (String)
@@ -227,6 +231,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environment_name` - (String)
       #   * `:environment_id` - (String)
       #   * `:application_name` - (String)
@@ -254,6 +259,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:s3_bucket` - (String)
 
       # @!method delete_application(options = {})
@@ -308,6 +314,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:application_versions` - (Array<Hash>)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -327,6 +334,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:applications` - (Array<Hash>)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -356,6 +364,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:solution_stack_name` - (String)
       #   * `:options` - (Array<Hash>)
       #     * `:namespace` - (String)
@@ -392,6 +401,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:configuration_settings` - (Array<Hash>)
       #     * `:solution_stack_name` - (String)
       #     * `:application_name` - (String)
@@ -421,6 +431,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environment_resources` - (Hash)
       #     * `:environment_name` - (String)
       #     * `:auto_scaling_groups` - (Array<Hash>)
@@ -459,6 +470,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environments` - (Array<Hash>)
       #     * `:environment_name` - (String)
       #     * `:environment_id` - (String)
@@ -524,6 +536,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:events` - (Array<Hash>)
       #     * `:event_date` - (Time)
       #     * `:message` - (String)
@@ -541,6 +554,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:solution_stacks` - (Array<String>)
       #   * `:solution_stack_details` - (Array<Hash>)
       #     * `:solution_stack_name` - (String)
@@ -611,6 +625,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environment_info` - (Array<Hash>)
       #     * `:info_type` - (String)
       #     * `:ec2_instance_id` - (String)
@@ -668,6 +683,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environment_name` - (String)
       #   * `:environment_id` - (String)
       #   * `:application_name` - (String)
@@ -701,6 +717,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:application` - (Hash)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -723,6 +740,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:application_version` - (Hash)
       #     * `:application_name` - (String)
       #     * `:description` - (String)
@@ -761,6 +779,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:solution_stack_name` - (String)
       #   * `:application_name` - (String)
       #   * `:template_name` - (String)
@@ -817,6 +836,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:environment_name` - (String)
       #   * `:environment_id` - (String)
       #   * `:application_name` - (String)
@@ -860,6 +880,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:messages` - (Array<Hash>)
       #     * `:message` - (String)
       #     * `:severity` - (String)

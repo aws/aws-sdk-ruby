@@ -62,6 +62,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Responses` - (Hash<String,Hash>)
       #     * `member` - (Hash<String,Hash>)
       #       * `S` - (String)
@@ -148,6 +149,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Responses` - (Hash<String,Hash>)
       #     * `ConsumedCapacityUnits` - (Numeric)
       #   * `UnprocessedItems` - (Hash<String,Hash>)
@@ -222,6 +224,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `TableDescription` - (Hash)
       #     * `TableName` - (String)
       #     * `KeySchema` - (Hash)
@@ -236,6 +239,7 @@ module AWS
       #     * `ProvisionedThroughput` - (Hash)
       #       * `LastIncreaseDateTime` - (Time)
       #       * `LastDecreaseDateTime` - (Time)
+      #       * `NumberOfDecreasesToday` - (Integer)
       #       * `ReadCapacityUnits` - (Integer)
       #       * `WriteCapacityUnits` - (Integer)
       #     * `TableSizeBytes` - (Integer)
@@ -307,6 +311,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Attributes` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -325,6 +330,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `TableDescription` - (Hash)
       #     * `TableName` - (String)
       #     * `KeySchema` - (Hash)
@@ -339,6 +345,7 @@ module AWS
       #     * `ProvisionedThroughput` - (Hash)
       #       * `LastIncreaseDateTime` - (Time)
       #       * `LastDecreaseDateTime` - (Time)
+      #       * `NumberOfDecreasesToday` - (Integer)
       #       * `ReadCapacityUnits` - (Integer)
       #       * `WriteCapacityUnits` - (Integer)
       #     * `TableSizeBytes` - (Integer)
@@ -353,6 +360,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Table` - (Hash)
       #     * `TableName` - (String)
       #     * `KeySchema` - (Hash)
@@ -367,6 +375,7 @@ module AWS
       #     * `ProvisionedThroughput` - (Hash)
       #       * `LastIncreaseDateTime` - (Time)
       #       * `LastDecreaseDateTime` - (Time)
+      #       * `NumberOfDecreasesToday` - (Integer)
       #       * `ReadCapacityUnits` - (Integer)
       #       * `WriteCapacityUnits` - (Integer)
       #     * `TableSizeBytes` - (Integer)
@@ -417,6 +426,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Item` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -437,6 +447,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `TableNames` - (Array<String>)
       #   * `LastEvaluatedTableName` - (String)
 
@@ -485,6 +496,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Attributes` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -606,6 +618,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `member` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -723,6 +736,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `member` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -833,6 +847,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `Attributes` - (Hash<String,Hash>)
       #     * `S` - (String)
       #     * `N` - (String)
@@ -861,6 +876,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `TableDescription` - (Hash)
       #     * `TableName` - (String)
       #     * `KeySchema` - (Hash)
@@ -875,6 +891,7 @@ module AWS
       #     * `ProvisionedThroughput` - (Hash)
       #       * `LastIncreaseDateTime` - (Time)
       #       * `LastDecreaseDateTime` - (Time)
+      #       * `NumberOfDecreasesToday` - (Integer)
       #       * `ReadCapacityUnits` - (Integer)
       #       * `WriteCapacityUnits` - (Integer)
       #     * `TableSizeBytes` - (Integer)

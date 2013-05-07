@@ -104,6 +104,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_id` - (String)
 
       # @!method delete_stack(options = {})
@@ -124,6 +125,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_events` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:event_id` - (String)
@@ -149,6 +151,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_resource_detail` - (Hash)
       #     * `:stack_name` - (String)
       #     * `:stack_id` - (String)
@@ -182,6 +185,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_resources` - (Array<Hash>)
       #     * `:stack_name` - (String)
       #     * `:stack_id` - (String)
@@ -202,6 +206,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stacks` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:stack_name` - (String)
@@ -247,6 +252,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:url` - (String)
 
       # @!method get_template(options = {})
@@ -257,6 +263,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:template_body` - (String)
 
       # @!method list_stack_resources(options = {})
@@ -271,6 +278,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_resource_summaries` - (Array<Hash>)
       #     * `:logical_resource_id` - (String)
       #     * `:physical_resource_id` - (String)
@@ -293,6 +301,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_summaries` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:stack_name` - (String)
@@ -336,6 +345,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_id` - (String)
 
       # @!method validate_template(options = {})
@@ -354,6 +364,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameters` - (Array<Hash>)
       #     * `:parameter_key` - (String)
       #     * `:default_value` - (String)

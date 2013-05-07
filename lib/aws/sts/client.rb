@@ -66,6 +66,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:credentials` - (Hash)
       #     * `:access_key_id` - (String)
       #     * `:secret_access_key` - (String)
@@ -98,6 +99,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:credentials` - (Hash)
       #     * `:access_key_id` - (String)
       #     * `:secret_access_key` - (String)
@@ -142,6 +144,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:credentials` - (Hash)
       #     * `:access_key_id` - (String)
       #     * `:secret_access_key` - (String)

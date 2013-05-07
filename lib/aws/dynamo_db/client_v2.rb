@@ -15,7 +15,7 @@ module AWS
   class DynamoDB
 
     # Client class for Amazon DynamoDB.
-    class ClientV2 < ClientBase
+    class Client < ClientBase
 
       # client methods #
 
@@ -44,6 +44,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:responses` - (Hash<String,Hash>)
       #     * `:member` - (Hash<String,Hash>)
       #       * `:s` - (String)
@@ -110,6 +111,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:unprocessed_items` - (Hash<String,Hash>)
       #     * `:value` - (Array<Hash>)
       #       * `:put_request` - (Hash)
@@ -187,6 +189,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:table_description` - (Hash)
       #     * `:attribute_definitions` - (Array<Hash>)
       #       * `:attribute_name` - (String)
@@ -267,6 +270,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -296,6 +300,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:table_description` - (Hash)
       #     * `:attribute_definitions` - (Array<Hash>)
       #       * `:attribute_name` - (String)
@@ -334,6 +339,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:table` - (Hash)
       #     * `:attribute_definitions` - (Array<Hash>)
       #       * `:attribute_name` - (String)
@@ -390,6 +396,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:item` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -412,6 +419,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:table_names` - (Array<String>)
       #   * `:last_evaluated_table_name` - (String)
 
@@ -466,6 +474,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -539,7 +548,7 @@ module AWS
       #       * `BEGINS_WITH`
       #   * `:scan_index_forward` - (Boolean) Specifies forward or backward
       #     traversal of the index. Amazon DynamoDB returns results reflecting
-      #     the requested order, determined by the range key. Default is +true+
+      #     the requested order, determined by the range key. Default is `true`
       #     (forward).
       #   * `:exclusive_start_key` - (Hash<String,Hash>) Primary key of the
       #     item from which to continue an earlier query. An earlier query
@@ -566,6 +575,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:member` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -659,6 +669,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:member` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -748,6 +759,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,Hash>)
       #     * `:s` - (String)
       #     * `:n` - (String)
@@ -787,6 +799,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:table_description` - (Hash)
       #     * `:attribute_definitions` - (Array<Hash>)
       #       * `:attribute_name` - (String)
@@ -818,7 +831,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2012-08-10')
+      define_client_methods('2011-12-05')
 
     end
   end

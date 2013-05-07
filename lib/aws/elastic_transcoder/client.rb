@@ -136,6 +136,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job` - (Hash)
       #     * `:id` - (String)
       #     * `:pipeline_id` - (String)
@@ -190,6 +191,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -339,6 +341,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:preset` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -394,6 +397,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:jobs` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:pipeline_id` - (String)
@@ -429,6 +433,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:jobs` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:pipeline_id` - (String)
@@ -454,6 +459,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipelines` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -473,6 +479,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:presets` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -507,6 +514,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job` - (Hash)
       #     * `:id` - (String)
       #     * `:pipeline_id` - (String)
@@ -532,6 +540,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -553,6 +562,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:preset` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -595,6 +605,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:success` - (String)
       #   * `:messages` - (Array<String>)
 
@@ -626,6 +637,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -650,6 +662,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)

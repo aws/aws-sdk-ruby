@@ -77,6 +77,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:public_ip` - (String)
       #   * `:domain` - (String)
       #   * `:allocation_id` - (String)
@@ -105,6 +106,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:association_id` - (String)
 
       # @!method associate_dhcp_options(options = {})
@@ -126,6 +128,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:association_id` - (String)
 
       # @!method attach_internet_gateway(options = {})
@@ -145,6 +148,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attachment_id` - (String)
 
       # @!method attach_volume(options = {})
@@ -161,6 +165,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_id` - (String)
       #   * `:instance_id` - (String)
       #   * `:device` - (String)
@@ -178,6 +183,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attachment` - (Hash)
       #     * `:vpc_id` - (String)
       #     * `:state` - (String)
@@ -285,6 +291,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:bundle_instance_task` - (Hash)
       #     * `:instance_id` - (String)
       #     * `:bundle_id` - (String)
@@ -311,6 +318,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:bundle_instance_task` - (Hash)
       #     * `:instance_id` - (String)
       #     * `:bundle_id` - (String)
@@ -349,6 +357,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_listings_set` - (Array<Hash>)
       #     * `:reserved_instances_listing_id` - (String)
       #     * `:reserved_instances_id` - (String)
@@ -377,6 +386,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_instance_request_set` - (Array<Hash>)
       #     * `:spot_instance_request_id` - (String)
       #     * `:state` - (String)
@@ -391,6 +401,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
 
       # @!method copy_image(options = {})
@@ -404,6 +415,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:image_id` - (String)
 
       # @!method copy_snapshot(options = {})
@@ -415,6 +427,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_id` - (String)
 
       # @!method create_customer_gateway(options = {})
@@ -430,6 +443,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_gateway` - (Hash)
       #     * `:customer_gateway_id` - (String)
       #     * `:state` - (String)
@@ -451,6 +465,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:dhcp_options` - (Hash)
       #     * `:dhcp_options_id` - (String)
       #     * `:dhcp_configuration_set` - (Array<Hash>)
@@ -496,6 +511,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:image_id` - (String)
 
       # @!method create_instance_export_task(options = {})
@@ -517,6 +533,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:export_task` - (Hash)
       #     * `:export_task_id` - (String)
       #     * `:description` - (String)
@@ -537,6 +554,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:internet_gateway` - (Hash)
       #     * `:internet_gateway_id` - (String)
       #     * `:attachment_set` - (Array<Hash>)
@@ -554,6 +572,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:key_pair` - (Hash)
       #     * `:key_name` - (String)
       #     * `:key_fingerprint` - (String)
@@ -567,6 +586,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:network_acl` - (Hash)
       #     * `:network_acl_id` - (String)
       #     * `:vpc_id` - (String)
@@ -638,6 +658,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:network_interface` - (Hash)
       #     * `:network_interface_id` - (String)
       #     * `:subnet_id` - (String)
@@ -704,6 +725,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_listings_set` - (Array<Hash>)
       #     * `:reserved_instances_listing_id` - (String)
       #     * `:reserved_instances_id` - (String)
@@ -748,6 +770,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:route_table` - (Hash)
       #     * `:route_table_id` - (String)
       #     * `:vpc_id` - (String)
@@ -779,6 +802,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:group_id` - (String)
 
       # @!method create_snapshot(options = {})
@@ -790,6 +814,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_id` - (String)
       #   * `:volume_id` - (String)
       #   * `:status` - (String)
@@ -813,6 +838,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_datafeed_subscription` - (Hash)
       #     * `:owner_id` - (String)
       #     * `:bucket` - (String)
@@ -834,6 +860,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subnet` - (Hash)
       #     * `:subnet_id` - (String)
       #     * `:state` - (String)
@@ -876,6 +903,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_id` - (String)
       #   * `:size` - (Integer)
       #   * `:snapshot_id` - (String)
@@ -906,6 +934,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpc` - (Hash)
       #     * `:vpc_id` - (String)
       #     * `:state` - (String)
@@ -930,6 +959,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpn_connection` - (Hash)
       #     * `:vpn_connection_id` - (String)
       #     * `:state` - (String)
@@ -970,6 +1000,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpn_gateway` - (Hash)
       #     * `:vpn_gateway_id` - (String)
       #     * `:state` - (String)
@@ -1157,6 +1188,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:account_attribute_set` - (Array<Hash>)
       #     * `:attribute_name` - (String)
       #     * `:attribute_value_set` - (Array<Hash>)
@@ -1177,6 +1209,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:addresses_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:public_ip` - (String)
@@ -1202,6 +1235,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:availability_zone_info` - (Array<Hash>)
       #     * `:zone_name` - (String)
       #     * `:zone_state` - (String)
@@ -1224,6 +1258,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:bundle_instance_tasks_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:bundle_id` - (String)
@@ -1253,6 +1288,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:conversion_tasks` - (Array<Hash>)
       #     * `:conversion_task_id` - (String)
       #     * `:expiration_time` - (String)
@@ -1307,6 +1343,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:customer_gateway_set` - (Array<Hash>)
       #     * `:customer_gateway_id` - (String)
       #     * `:state` - (String)
@@ -1331,6 +1368,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:dhcp_options_set` - (Array<Hash>)
       #     * `:dhcp_options_id` - (String)
       #     * `:dhcp_configuration_set` - (Array<Hash>)
@@ -1347,6 +1385,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:export_task_set` - (Array<Hash>)
       #     * `:export_task_id` - (String)
       #     * `:description` - (String)
@@ -1372,6 +1411,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:image_id` - (String)
       #   * `:launch_permission` - (Array<Hash>)
       #     * `:user_id` - (String)
@@ -1419,6 +1459,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:images_set` - (Array<Hash>)
       #     * `:image_id` - (String)
       #     * `:image_location` - (String)
@@ -1481,6 +1522,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_id` - (String)
       #   * `:instance_type` - (Hash)
       #     * `:value` - (String)
@@ -1527,6 +1569,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_status_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:availability_zone` - (String)
@@ -1566,6 +1609,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reservation_set` - (Array<Hash>)
       #     * `:reservation_id` - (String)
       #     * `:owner_id` - (String)
@@ -1680,6 +1724,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:internet_gateway_set` - (Array<Hash>)
       #     * `:internet_gateway_id` - (String)
       #     * `:attachment_set` - (Array<Hash>)
@@ -1703,6 +1748,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:key_set` - (Array<Hash>)
       #     * `:key_name` - (String)
       #     * `:key_fingerprint` - (String)
@@ -1721,6 +1767,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:license_set` - (Array<Hash>)
       #     * `:license_id` - (String)
       #     * `:type` - (String)
@@ -1748,6 +1795,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:network_acl_set` - (Array<Hash>)
       #     * `:network_acl_id` - (String)
       #     * `:vpc_id` - (String)
@@ -1783,6 +1831,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:network_interface_id` - (String)
       #   * `:description` - (Hash)
       #     * `:value` - (String)
@@ -1811,6 +1860,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:network_interface_set` - (Array<Hash>)
       #     * `:network_interface_id` - (String)
       #     * `:subnet_id` - (String)
@@ -1868,6 +1918,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:placement_group_set` - (Array<Hash>)
       #     * `:group_name` - (String)
       #     * `:strategy` - (String)
@@ -1887,6 +1938,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:region_info` - (Array<Hash>)
       #     * `:region_name` - (String)
       #     * `:region_endpoint` - (String)
@@ -1907,6 +1959,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_set` - (Array<Hash>)
       #     * `:reserved_instances_id` - (String)
       #     * `:instance_type` - (String)
@@ -1940,6 +1993,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_listings_set` - (Array<Hash>)
       #     * `:reserved_instances_listing_id` - (String)
       #     * `:reserved_instances_id` - (String)
@@ -2005,6 +2059,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_offerings_set` - (Array<Hash>)
       #     * `:reserved_instances_offering_id` - (String)
       #     * `:instance_type` - (String)
@@ -2039,6 +2094,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:route_table_set` - (Array<Hash>)
       #     * `:route_table_id` - (String)
       #     * `:vpc_id` - (String)
@@ -2076,6 +2132,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:security_group_info` - (Array<Hash>)
       #     * `:owner_id` - (String)
       #     * `:group_name` - (String)
@@ -2119,6 +2176,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_id` - (String)
       #   * `:create_volume_permission` - (Array<Hash>)
       #     * `:user_id` - (String)
@@ -2146,6 +2204,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_set` - (Array<Hash>)
       #     * `:snapshot_id` - (String)
       #     * `:volume_id` - (String)
@@ -2166,6 +2225,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_datafeed_subscription` - (Hash)
       #     * `:owner_id` - (String)
       #     * `:bucket` - (String)
@@ -2190,6 +2250,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_instance_request_set` - (Array<Hash>)
       #     * `:spot_instance_request_id` - (String)
       #     * `:spot_price` - (String)
@@ -2281,6 +2342,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_price_history_set` - (Array<Hash>)
       #     * `:instance_type` - (String)
       #     * `:product_description` - (String)
@@ -2302,6 +2364,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subnet_set` - (Array<Hash>)
       #     * `:subnet_id` - (String)
       #     * `:state` - (String)
@@ -2326,6 +2389,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:tag_set` - (Array<Hash>)
       #     * `:resource_id` - (String)
       #     * `:resource_type` - (String)
@@ -2342,6 +2406,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_id` - (String)
       #   * `:auto_enable_io` - (Hash)
       #     * `:value` - (Boolean)
@@ -2362,6 +2427,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_status_set` - (Array<Hash>)
       #     * `:volume_id` - (String)
       #     * `:availability_zone` - (String)
@@ -2397,6 +2463,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_set` - (Array<Hash>)
       #     * `:volume_id` - (String)
       #     * `:size` - (Integer)
@@ -2427,6 +2494,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpc_id` - (String)
       #   * `:enable_dns_support` - (Hash)
       #     * `:value` - (Boolean)
@@ -2447,6 +2515,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpc_set` - (Array<Hash>)
       #     * `:vpc_id` - (String)
       #     * `:state` - (String)
@@ -2473,6 +2542,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpn_connection_set` - (Array<Hash>)
       #     * `:vpn_connection_id` - (String)
       #     * `:state` - (String)
@@ -2513,6 +2583,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vpn_gateway_set` - (Array<Hash>)
       #     * `:vpn_gateway_id` - (String)
       #     * `:state` - (String)
@@ -2560,6 +2631,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_id` - (String)
       #   * `:instance_id` - (String)
       #   * `:device` - (String)
@@ -2621,6 +2693,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_id` - (String)
       #   * `:timestamp` - (Time)
       #   * `:output` - (String)
@@ -2633,6 +2706,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_id` - (String)
       #   * `:timestamp` - (Time)
       #   * `:password_data` - (String)
@@ -2712,6 +2786,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:conversion_task` - (Hash)
       #     * `:conversion_task_id` - (String)
       #     * `:expiration_time` - (String)
@@ -2761,6 +2836,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:key_name` - (String)
       #   * `:key_fingerprint` - (String)
 
@@ -2778,6 +2854,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:conversion_task` - (Hash)
       #     * `:conversion_task_id` - (String)
       #     * `:expiration_time` - (String)
@@ -2987,6 +3064,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:monitoring` - (Hash)
@@ -3005,6 +3083,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_instances_id` - (String)
 
       # @!method reboot_instances(options = {})
@@ -3057,6 +3136,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:image_id` - (String)
 
       # @!method release_address(options = {})
@@ -3079,6 +3159,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:new_association_id` - (String)
 
       # @!method replace_network_acl_entry(options = {})
@@ -3139,6 +3220,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:new_association_id` - (String)
 
       # @!method report_instance_status(options = {})
@@ -3266,6 +3348,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:spot_instance_request_set` - (Array<Hash>)
       #     * `:spot_instance_request_id` - (String)
       #     * `:spot_price` - (String)
@@ -3584,6 +3667,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reservation_id` - (String)
       #   * `:owner_id` - (String)
       #   * `:requester_id` - (String)
@@ -3691,6 +3775,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:current_state` - (Hash)
@@ -3713,6 +3798,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:current_state` - (Hash)
@@ -3730,6 +3816,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:current_state` - (Hash)
@@ -3754,6 +3841,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances_set` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:monitoring` - (Hash)

@@ -30,6 +30,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:connection_id` - (String)
       #   * `:connection_name` - (String)
       #   * `:connection_state` - (String)
@@ -52,6 +53,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_interface_id` - (String)
       #   * `:location` - (String)
       #   * `:connection_id` - (String)
@@ -87,6 +89,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_interface_id` - (String)
       #   * `:location` - (String)
       #   * `:connection_id` - (String)
@@ -110,6 +113,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:connection_id` - (String)
       #   * `:connection_name` - (String)
       #   * `:connection_state` - (String)
@@ -123,6 +127,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_interface_state` - (String)
 
       # @!method describe_connection_detail(options = {})
@@ -132,6 +137,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:connection_id` - (String)
       #   * `:connection_name` - (String)
       #   * `:connection_state` - (String)
@@ -158,6 +164,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:connections` - (Array<Hash>)
       #     * `:connection_id` - (String)
       #     * `:connection_name` - (String)
@@ -172,6 +179,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:offering_id` - (String)
       #   * `:region` - (String)
       #   * `:location` - (String)
@@ -196,6 +204,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:offerings` - (Array<Hash>)
       #     * `:offering_id` - (String)
       #     * `:region` - (String)
@@ -215,6 +224,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_gateways` - (Array<Hash>)
       #     * `:virtual_gateway_id` - (String)
       #     * `:virtual_gateway_state` - (String)
@@ -227,6 +237,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:virtual_interfaces` - (Array<Hash>)
       #     * `:virtual_interface_id` - (String)
       #     * `:location` - (String)

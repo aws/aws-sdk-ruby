@@ -54,6 +54,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline_id` - (String)
 
       # @!method delete_pipeline(options = {})
@@ -81,6 +82,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline_objects` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -101,6 +103,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline_description_list` - (Array<Hash>)
       #     * `:pipeline_id` - (String)
       #     * `:name` - (String)
@@ -120,6 +123,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:evaluated_expression` - (String)
 
       # @!method get_pipeline_definition(options = {})
@@ -132,6 +136,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline_objects` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -151,6 +156,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:pipeline_id_list` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -187,6 +193,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:task_object` - (Hash)
       #     * `:task_id` - (String)
       #     * `:pipeline_id` - (String)
@@ -219,6 +226,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:validation_errors` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:errors` - (Array<String>)
@@ -283,6 +291,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:ids` - (Array<String>)
       #   * `:marker` - (String)
       #   * `:has_more_results` - (Boolean)
@@ -296,6 +305,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:canceled` - (Boolean)
 
       # @!method report_task_runner_heartbeat(options = {})
@@ -319,6 +329,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:terminate` - (Boolean)
 
       # @!method set_status(options = {})
@@ -381,6 +392,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:validation_errors` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:errors` - (Array<String>)

@@ -68,6 +68,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -92,6 +93,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -105,6 +107,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -139,6 +142,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -151,6 +155,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -163,6 +168,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:item_count` - (Integer)
       #   * `:item_names_size_bytes` - (Integer)
       #   * `:attribute_name_count` - (Integer)
@@ -189,6 +195,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Array<Hash>)
       #     * `:name` - (String)
       #     * `:alternate_name_encoding` - (String)
@@ -209,6 +216,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:domain_names` - (Array<String>)
       #   * `:next_token` - (String)
       #   * `:response_metadata` - (Hash)
@@ -246,6 +254,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:response_metadata` - (Hash)
       #     * `:box_usage` - (Numeric)
       #     * `:response_id` - (String)
@@ -265,6 +274,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:items` - (Array<Hash>)
       #     * `:name` - (String)
       #     * `:alternate_name_encoding` - (String)

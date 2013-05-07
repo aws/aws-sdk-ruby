@@ -46,6 +46,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:dkim_attributes` - (Hash<String,Hash>)
       #     * `:dkim_enabled` - (Boolean)
       #     * `:dkim_verification_status` - (String)
@@ -59,6 +60,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:notification_attributes` - (Hash<String,Hash>)
       #     * `:bounce_topic` - (String)
       #     * `:complaint_topic` - (String)
@@ -71,6 +73,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:verification_attributes` - (Hash<String,Hash>)
       #     * `:verification_status` - (String)
       #     * `:verification_token` - (String)
@@ -81,6 +84,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:max_24_hour_send` - (Numeric)
       #   * `:max_send_rate` - (Numeric)
       #   * `:sent_last_24_hours` - (Numeric)
@@ -91,6 +95,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:send_data_points` - (Array<Hash>)
       #     * `:timestamp` - (Time)
       #     * `:delivery_attempts` - (Integer)
@@ -113,6 +118,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:identities` - (Array<String>)
       #   * `:next_token` - (String)
 
@@ -122,6 +128,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:verified_email_addresses` - (Array<String>)
 
       # @!method send_email(options = {})
@@ -168,6 +175,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:message_id` - (String)
 
       # @!method send_raw_email(options = {})
@@ -196,6 +204,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:message_id` - (String)
 
       # @!method set_identity_dkim_enabled(options = {})
@@ -248,6 +257,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:dkim_tokens` - (Array<String>)
 
       # @!method verify_domain_identity(options = {})
@@ -257,6 +267,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:verification_token` - (String)
 
       # @!method verify_email_address(options = {})

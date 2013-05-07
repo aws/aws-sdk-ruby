@@ -29,6 +29,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:success` - (Boolean)
 
       # @!method create_job(options = {})
@@ -43,6 +44,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_id` - (String)
       #   * `:job_type` - (String)
       #   * `:aws_shipping_address` - (String)
@@ -57,6 +59,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_id` - (String)
       #   * `:job_type` - (String)
       #   * `:aws_shipping_address` - (String)
@@ -82,6 +85,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:jobs` - (Array<Hash>)
       #     * `:job_id` - (String)
       #     * `:creation_date` - (Time)
@@ -101,6 +105,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:success` - (Boolean)
       #   * `:warning_message` - (String)
 

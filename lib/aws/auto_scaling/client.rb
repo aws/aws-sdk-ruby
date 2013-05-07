@@ -145,6 +145,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:adjustment_types` - (Array<Hash>)
       #     * `:adjustment_type` - (String)
 
@@ -157,6 +158,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:auto_scaling_groups` - (Array<Hash>)
       #     * `:auto_scaling_group_name` - (String)
       #     * `:auto_scaling_group_arn` - (String)
@@ -203,6 +205,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:auto_scaling_instances` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:auto_scaling_group_name` - (String)
@@ -218,6 +221,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:auto_scaling_notification_types` - (Array<String>)
 
       # @!method describe_launch_configurations(options = {})
@@ -229,6 +233,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:launch_configurations` - (Array<Hash>)
       #     * `:launch_configuration_name` - (String)
       #     * `:launch_configuration_arn` - (String)
@@ -259,6 +264,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:metrics` - (Array<Hash>)
       #     * `:metric` - (String)
       #   * `:granularities` - (Array<Hash>)
@@ -273,6 +279,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:notification_configurations` - (Array<Hash>)
       #     * `:auto_scaling_group_name` - (String)
       #     * `:topic_arn` - (String)
@@ -289,6 +296,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:scaling_policies` - (Array<Hash>)
       #     * `:auto_scaling_group_name` - (String)
       #     * `:policy_name` - (String)
@@ -312,6 +320,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:activities` - (Array<Hash>)
       #     * `:activity_id` - (String)
       #     * `:auto_scaling_group_name` - (String)
@@ -331,6 +340,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:processes` - (Array<Hash>)
       #     * `:process_name` - (String)
 
@@ -346,6 +356,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:scheduled_update_group_actions` - (Array<Hash>)
       #     * `:auto_scaling_group_name` - (String)
       #     * `:scheduled_action_name` - (String)
@@ -370,6 +381,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:tags` - (Array<Hash>)
       #     * `:resource_id` - (String)
       #     * `:resource_type` - (String)
@@ -384,6 +396,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:termination_policy_types` - (Array<String>)
 
       # @!method disable_metrics_collection(options = {})
@@ -429,6 +442,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_arn` - (String)
 
       # @!method put_scheduled_update_group_action(options = {})
@@ -483,6 +497,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:activity` - (Hash)
       #     * `:activity_id` - (String)
       #     * `:auto_scaling_group_name` - (String)

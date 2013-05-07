@@ -42,23 +42,23 @@ module AWS
       #     * `GMT-2:00`
       #     * `GMT-1:00`
       #     * `GMT`
-      #     * `GMT`1:00+
-      #     * `GMT`2:00+
-      #     * `GMT`3:00+
-      #     * `GMT`3:30+
-      #     * `GMT`4:00+
-      #     * `GMT`4:30+
-      #     * `GMT`5:00+
-      #     * `GMT`5:30+
-      #     * `GMT`5:45+
-      #     * `GMT`6:00+
-      #     * `GMT`7:00+
-      #     * `GMT`8:00+
-      #     * `GMT`9:00+
-      #     * `GMT`9:30+
-      #     * `GMT`10:00+
-      #     * `GMT`11:00+
-      #     * `GMT`12:00+
+      #     * `GMT+1:00`
+      #     * `GMT+2:00`
+      #     * `GMT+3:00`
+      #     * `GMT+3:30`
+      #     * `GMT+4:00`
+      #     * `GMT+4:30`
+      #     * `GMT+5:00`
+      #     * `GMT+5:30`
+      #     * `GMT+5:45`
+      #     * `GMT+6:00`
+      #     * `GMT+7:00`
+      #     * `GMT+8:00`
+      #     * `GMT+9:00`
+      #     * `GMT+9:30`
+      #     * `GMT+10:00`
+      #     * `GMT+11:00`
+      #     * `GMT+12:00`
       #   * `:gateway_region` - *required* - (String)
       #   * `:gateway_type` - (String) Valid values include:
       #     * `STORED`
@@ -66,6 +66,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method add_cache(options = {})
@@ -76,6 +77,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method add_upload_buffer(options = {})
@@ -86,6 +88,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method add_working_storage(options = {})
@@ -96,6 +99,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method create_cachedi_scsi_volume(options = {})
@@ -110,6 +114,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
       #   * `:target_arn` - (String)
 
@@ -121,6 +126,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
       #   * `:snapshot_id` - (String)
 
@@ -132,6 +138,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_id` - (String)
       #   * `:volume_arn` - (String)
       #   * `:volume_recovery_point_time` - (String)
@@ -148,6 +155,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
       #   * `:volume_size_in_bytes` - (Integer)
       #   * `:target_arn` - (String)
@@ -163,6 +171,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method delete_chap_credentials(options = {})
@@ -173,6 +182,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:target_arn` - (String)
       #   * `:initiator_name` - (String)
 
@@ -183,6 +193,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method delete_snapshot_schedule(options = {})
@@ -192,6 +203,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
 
       # @!method delete_volume(options = {})
@@ -201,6 +213,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
 
       # @!method describe_bandwidth_rate_limit(options = {})
@@ -210,6 +223,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:average_upload_rate_limit_in_bits_per_sec` - (Integer)
       #   * `:average_download_rate_limit_in_bits_per_sec` - (Integer)
@@ -221,6 +235,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:disk_ids` - (Array<String>)
       #   * `:cache_allocated_in_bytes` - (Integer)
@@ -236,6 +251,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cachedi_scsi_volumes` - (Array<Hash>)
       #     * `:volume_arn` - (String)
       #     * `:volume_id` - (String)
@@ -258,6 +274,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:chap_credentials` - (Array<Hash>)
       #     * `:target_arn` - (String)
       #     * `:secret_to_authenticate_initiator` - (String)
@@ -271,6 +288,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:gateway_id` - (String)
       #   * `:gateway_timezone` - (String)
@@ -289,6 +307,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:hour_of_day` - (Integer)
       #   * `:minute_of_hour` - (Integer)
@@ -302,6 +321,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
       #   * `:start_at` - (Integer)
       #   * `:recurrence_in_hours` - (Integer)
@@ -315,6 +335,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:storedi_scsi_volumes` - (Array<Hash>)
       #     * `:volume_arn` - (String)
       #     * `:volume_id` - (String)
@@ -339,6 +360,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:disk_ids` - (Array<String>)
       #   * `:upload_buffer_used_in_bytes` - (Integer)
@@ -351,6 +373,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:disk_ids` - (Array<String>)
       #   * `:working_storage_used_in_bytes` - (Integer)
@@ -364,6 +387,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateways` - (Array<Hash>)
       #     * `:gateway_arn` - (String)
       #   * `:marker` - (String)
@@ -375,6 +399,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:disks` - (Array<Hash>)
       #     * `:disk_id` - (String)
@@ -391,6 +416,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:volume_recovery_point_infos` - (Array<Hash>)
       #     * `:volume_arn` - (String)
@@ -407,6 +433,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
       #   * `:marker` - (String)
       #   * `:volume_infos` - (Array<Hash>)
@@ -420,6 +447,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method start_gateway(options = {})
@@ -429,6 +457,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method update_bandwidth_rate_limit(options = {})
@@ -440,6 +469,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method update_chap_credentials(options = {})
@@ -452,6 +482,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:target_arn` - (String)
       #   * `:initiator_name` - (String)
 
@@ -475,26 +506,27 @@ module AWS
       #     * `GMT-2:00`
       #     * `GMT-1:00`
       #     * `GMT`
-      #     * `GMT`1:00+
-      #     * `GMT`2:00+
-      #     * `GMT`3:00+
-      #     * `GMT`3:30+
-      #     * `GMT`4:00+
-      #     * `GMT`4:30+
-      #     * `GMT`5:00+
-      #     * `GMT`5:30+
-      #     * `GMT`5:45+
-      #     * `GMT`6:00+
-      #     * `GMT`7:00+
-      #     * `GMT`8:00+
-      #     * `GMT`9:00+
-      #     * `GMT`9:30+
-      #     * `GMT`10:00+
-      #     * `GMT`11:00+
-      #     * `GMT`12:00+
+      #     * `GMT+1:00`
+      #     * `GMT+2:00`
+      #     * `GMT+3:00`
+      #     * `GMT+3:30`
+      #     * `GMT+4:00`
+      #     * `GMT+4:30`
+      #     * `GMT+5:00`
+      #     * `GMT+5:30`
+      #     * `GMT+5:45`
+      #     * `GMT+6:00`
+      #     * `GMT+7:00`
+      #     * `GMT+8:00`
+      #     * `GMT+9:00`
+      #     * `GMT+9:30`
+      #     * `GMT+10:00`
+      #     * `GMT+11:00`
+      #     * `GMT+12:00`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method update_gateway_software_now(options = {})
@@ -504,6 +536,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method update_maintenance_start_time(options = {})
@@ -516,6 +549,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:gateway_arn` - (String)
 
       # @!method update_snapshot_schedule(options = {})
@@ -528,6 +562,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volume_arn` - (String)
 
       # end client methods #

@@ -66,6 +66,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `count` - (Integer)
       #   * `truncated` - (Boolean)
 
@@ -86,6 +87,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `count` - (Integer)
       #   * `truncated` - (Boolean)
 
@@ -98,6 +100,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `count` - (Integer)
       #   * `truncated` - (Boolean)
 
@@ -110,6 +113,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `count` - (Integer)
       #   * `truncated` - (Boolean)
 
@@ -147,6 +151,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `typeInfo` - (Hash)
       #     * `activityType` - (Hash)
       #       * `name` - (String)
@@ -170,6 +175,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `domainInfo` - (Hash)
       #     * `name` - (String)
       #     * `status` - (String)
@@ -187,6 +193,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `executionInfo` - (Hash)
       #     * `execution` - (Hash)
       #       * `workflowId` - (String)
@@ -227,6 +234,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `typeInfo` - (Hash)
       #     * `workflowType` - (Hash)
       #       * `name` - (String)
@@ -255,6 +263,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `events` - (Array<Hash>)
       #     * `eventTimestamp` - (Time)
       #     * `eventType` - (String)
@@ -551,6 +560,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `typeInfos` - (Array<Hash>)
       #     * `activityType` - (Hash)
       #       * `name` - (String)
@@ -592,6 +602,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `executionInfos` - (Array<Hash>)
       #     * `execution` - (Hash)
       #       * `workflowId` - (String)
@@ -623,6 +634,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `domainInfos` - (Array<Hash>)
       #     * `name` - (String)
       #     * `status` - (String)
@@ -649,6 +661,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `executionInfos` - (Array<Hash>)
       #     * `execution` - (Hash)
       #       * `workflowId` - (String)
@@ -682,6 +695,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `typeInfos` - (Array<Hash>)
       #     * `workflowType` - (Hash)
       #       * `name` - (String)
@@ -702,6 +716,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `taskToken` - (String)
       #   * `activityId` - (String)
       #   * `startedEventId` - (Integer)
@@ -726,6 +741,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `taskToken` - (String)
       #   * `startedEventId` - (Integer)
       #   * `workflowExecution` - (Hash)
@@ -1024,6 +1040,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `cancelRequested` - (Boolean)
 
       # @!method register_activity_type(options = {})
@@ -1217,6 +1234,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `runId` - (String)
 
       # @!method terminate_workflow_execution(options = {})

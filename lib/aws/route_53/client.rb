@@ -142,6 +142,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:change_info` - (Hash)
       #     * `:id` - (String)
       #     * `:status` - (String)
@@ -180,6 +181,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:health_check` - (Hash)
       #     * `:id` - (String)
       #     * `:caller_reference` - (String)
@@ -219,6 +221,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:hosted_zone` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -250,6 +253,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:change_info` - (Hash)
       #     * `:id` - (String)
       #     * `:status` - (String)
@@ -266,6 +270,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:change_info` - (Hash)
       #     * `:id` - (String)
       #     * `:status` - (String)
@@ -280,6 +285,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:health_check` - (Hash)
       #     * `:id` - (String)
       #     * `:caller_reference` - (String)
@@ -298,6 +304,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:hosted_zone` - (Hash)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -320,6 +327,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:health_checks` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:caller_reference` - (String)
@@ -346,6 +354,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:hosted_zones` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -393,6 +402,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:resource_record_sets` - (Array<Hash>)
       #     * `:name` - (String)
       #     * `:type` - (String)

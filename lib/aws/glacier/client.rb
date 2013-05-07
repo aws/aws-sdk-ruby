@@ -85,6 +85,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_id` - (String)
       #   * `:job_description` - (String)
       #   * `:action` - (String)
@@ -108,6 +109,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vault_arn` - (String)
       #   * `:vault_name` - (String)
       #   * `:creation_date` - (String)
@@ -132,6 +134,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:sns_topic` - (String)
       #   * `:events` - (Array<String>)
 
@@ -169,6 +172,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_list` - (Array<Hash>)
       #     * `:job_id` - (String)
       #     * `:job_description` - (String)
@@ -196,6 +200,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:uploads_list` - (Array<Hash>)
       #     * `:multipart_upload_id` - (String)
       #     * `:vault_arn` - (String)
@@ -215,6 +220,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:multipart_upload_id` - (String)
       #   * `:vault_arn` - (String)
       #   * `:archive_description` - (String)
@@ -234,6 +240,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:vault_list` - (Array<Hash>)
       #     * `:vault_arn` - (String)
       #     * `:vault_name` - (String)

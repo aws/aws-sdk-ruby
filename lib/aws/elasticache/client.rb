@@ -36,6 +36,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:cache_security_group_name` - (String)
       #   * `:description` - (String)
@@ -98,6 +99,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_cluster_id` - (String)
       #   * `:configuration_endpoint` - (Hash)
       #     * `:address` - (String)
@@ -153,6 +155,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_parameter_group_name` - (String)
       #   * `:cache_parameter_group_family` - (String)
       #   * `:description` - (String)
@@ -169,6 +172,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:cache_security_group_name` - (String)
       #   * `:description` - (String)
@@ -191,6 +195,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_subnet_group_name` - (String)
       #   * `:cache_subnet_group_description` - (String)
       #   * `:vpc_id` - (String)
@@ -208,6 +213,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_cluster_id` - (String)
       #   * `:configuration_endpoint` - (Hash)
       #     * `:address` - (String)
@@ -295,6 +301,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cache_clusters` - (Array<Hash>)
       #     * `:cache_cluster_id` - (String)
@@ -362,6 +369,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cache_engine_versions` - (Array<Hash>)
       #     * `:engine` - (String)
@@ -386,6 +394,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cache_parameter_groups` - (Array<Hash>)
       #     * `:cache_parameter_group_name` - (String)
@@ -410,6 +419,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:parameters` - (Array<Hash>)
       #     * `:parameter_name` - (String)
@@ -449,6 +459,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cache_security_groups` - (Array<Hash>)
       #     * `:owner_id` - (String)
@@ -476,6 +487,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cache_subnet_groups` - (Array<Hash>)
       #     * `:cache_subnet_group_name` - (String)
@@ -503,6 +515,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_parameter_group_family` - (String)
       #   * `:marker` - (String)
       #   * `:parameters` - (Array<Hash>)
@@ -557,6 +570,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:events` - (Array<Hash>)
       #     * `:source_identifier` - (String)
@@ -596,6 +610,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_cache_nodes` - (Array<Hash>)
       #     * `:reserved_cache_node_id` - (String)
@@ -643,6 +658,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_cache_nodes_offerings` - (Array<Hash>)
       #     * `:reserved_cache_nodes_offering_id` - (String)
@@ -714,6 +730,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_cluster_id` - (String)
       #   * `:configuration_endpoint` - (Hash)
       #     * `:address` - (String)
@@ -771,6 +788,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_parameter_group_name` - (String)
 
       # @!method modify_cache_subnet_group(options = {})
@@ -787,6 +805,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_subnet_group_name` - (String)
       #   * `:cache_subnet_group_description` - (String)
       #   * `:vpc_id` - (String)
@@ -808,6 +827,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_cache_node_id` - (String)
       #   * `:reserved_cache_nodes_offering_id` - (String)
       #   * `:cache_node_type` - (String)
@@ -834,6 +854,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_cluster_id` - (String)
       #   * `:configuration_endpoint` - (Hash)
       #     * `:address` - (String)
@@ -892,6 +913,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cache_parameter_group_name` - (String)
 
       # @!method revoke_cache_security_group_ingress(options = {})
@@ -908,6 +930,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:owner_id` - (String)
       #   * `:cache_security_group_name` - (String)
       #   * `:description` - (String)

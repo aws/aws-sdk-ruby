@@ -38,6 +38,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_security_group_name` - (String)
       #   * `:description` - (String)
       #   * `:ec_2_security_groups` - (Array<Hash>)
@@ -64,6 +65,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_identifier` - (String)
       #   * `:cluster_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -195,6 +197,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_identifier` - (String)
       #   * `:node_type` - (String)
       #   * `:cluster_status` - (String)
@@ -255,6 +258,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameter_group_name` - (String)
       #   * `:parameter_group_family` - (String)
       #   * `:description` - (String)
@@ -273,6 +277,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_security_group_name` - (String)
       #   * `:description` - (String)
       #   * `:ec_2_security_groups` - (Array<Hash>)
@@ -298,6 +303,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_identifier` - (String)
       #   * `:cluster_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -329,6 +335,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_subnet_group_name` - (String)
       #   * `:description` - (String)
       #   * `:vpc_id` - (String)
@@ -363,6 +370,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_identifier` - (String)
       #   * `:node_type` - (String)
       #   * `:cluster_status` - (String)
@@ -424,6 +432,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:snapshot_identifier` - (String)
       #   * `:cluster_identifier` - (String)
       #   * `:snapshot_create_time` - (Time)
@@ -464,6 +473,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:parameter_groups` - (Array<Hash>)
       #     * `:parameter_group_name` - (String)
@@ -492,6 +502,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameters` - (Array<Hash>)
       #     * `:parameter_name` - (String)
       #     * `:parameter_value` - (String)
@@ -524,6 +535,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cluster_security_groups` - (Array<Hash>)
       #     * `:cluster_security_group_name` - (String)
@@ -568,6 +580,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:snapshots` - (Array<Hash>)
       #     * `:snapshot_identifier` - (String)
@@ -603,6 +616,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cluster_subnet_groups` - (Array<Hash>)
       #     * `:cluster_subnet_group_name` - (String)
@@ -635,6 +649,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:cluster_versions` - (Array<Hash>)
       #     * `:cluster_version` - (String)
@@ -662,6 +677,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:clusters` - (Array<Hash>)
       #     * `:cluster_identifier` - (String)
@@ -717,6 +733,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameter_group_family` - (String)
       #   * `:marker` - (String)
       #   * `:parameters` - (Array<Hash>)
@@ -779,6 +796,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:events` - (Array<Hash>)
       #     * `:source_identifier` - (String)
@@ -808,6 +826,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:orderable_cluster_options` - (Array<Hash>)
       #     * `:cluster_version` - (String)
       #     * `:cluster_type` - (String)
@@ -839,6 +858,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_node_offerings` - (Array<Hash>)
       #     * `:reserved_node_offering_id` - (String)
@@ -873,6 +893,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:reserved_nodes` - (Array<Hash>)
       #     * `:reserved_node_id` - (String)
@@ -900,6 +921,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:target_node_type` - (String)
       #   * `:target_number_of_nodes` - (Integer)
       #   * `:target_cluster_type` - (String)
@@ -999,6 +1021,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_identifier` - (String)
       #   * `:node_type` - (String)
       #   * `:cluster_status` - (String)
@@ -1061,6 +1084,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameter_group_name` - (String)
       #   * `:parameter_group_status` - (String)
 
@@ -1076,6 +1100,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_subnet_group_name` - (String)
       #   * `:description` - (String)
       #   * `:vpc_id` - (String)
@@ -1097,6 +1122,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:reserved_node_id` - (String)
       #   * `:reserved_node_offering_id` - (String)
       #   * `:node_type` - (String)
@@ -1120,6 +1146,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_identifier` - (String)
       #   * `:node_type` - (String)
       #   * `:cluster_status` - (String)
@@ -1184,6 +1211,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:parameter_group_name` - (String)
       #   * `:parameter_group_status` - (String)
 
@@ -1218,6 +1246,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_identifier` - (String)
       #   * `:node_type` - (String)
       #   * `:cluster_status` - (String)
@@ -1276,6 +1305,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cluster_security_group_name` - (String)
       #   * `:description` - (String)
       #   * `:ec_2_security_groups` - (Array<Hash>)

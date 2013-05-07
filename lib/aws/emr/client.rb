@@ -49,6 +49,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_flow_id` - (String)
       #   * `:instance_group_ids` - (Array<String>)
 
@@ -96,6 +97,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_flows` - (Array<Hash>)
       #     * `:job_flow_id` - (String)
       #     * `:name` - (String)
@@ -301,6 +303,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:job_flow_id` - (String)
 
       # @!method set_termination_protection(options = {})

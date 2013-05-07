@@ -44,6 +44,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:s3_canonical_user_id` - (String)
       #   * `:cloud_front_origin_access_identity_config` - (Hash)
@@ -145,8 +146,8 @@ module AWS
       #       specifies how CloudFront handles query strings and cookies.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
       #         want CloudFront to forward query strings to the origin that is
-      #         associated with this cache behavior. If so, specify +true+ ; if
-      #         not, specify +false+ .
+      #         associated with this cache behavior. If so, specify `true` ; if
+      #         not, specify `false` .
       #       * `:cookies` - *required* - (Hash) A complex type that specifies
       #         how CloudFront handles cookies.
       #         * `:forward` - *required* - (String) Use this element to
@@ -171,15 +172,15 @@ module AWS
       #       specifies the AWS accounts, if any, that you want to allow to
       #       create signed URLs for private content. If you want to require
       #       signed URLs in requests for objects in the target origin that
-      #       match the PathPattern for this cache behavior, specify +true+ for
+      #       match the PathPattern for this cache behavior, specify `true` for
       #       Enabled, and specify the applicable values for Quantity and
       #       Items. For more information, go to Using a Signed URL to Serve
       #       Private Content in the Amazon CloudFront Developer Guide. If you
       #       don't want to require signed URLs in requests for objects that
-      #       match PathPattern, specify +false+ for Enabled and 0 for
+      #       match PathPattern, specify `false` for Enabled and 0 for
       #       Quantity. Omit Items. To add, change, or remove one or more
-      #       trusted signers, change Enabled to +true+ (if it's currently
-      #       +false+ ), change Quantity as applicable, and specify all of the
+      #       trusted signers, change Enabled to `true` (if it's currently
+      #       `false` ), change Quantity as applicable, and specify all of the
       #       trusted signers that you want to include in the updated
       #       distribution.
       #       * `:enabled` - *required* - (Boolean) Specifies whether you want
@@ -229,7 +230,7 @@ module AWS
       #         * `:query_string` - *required* - (Boolean) Indicates whether
       #           you want CloudFront to forward query strings to the origin
       #           that is associated with this cache behavior. If so, specify
-      #           +true+ ; if not, specify +false+ .
+      #           `true` ; if not, specify `false` .
       #         * `:cookies` - *required* - (Hash) A complex type that
       #           specifies how CloudFront handles cookies.
       #           * `:forward` - *required* - (String) Use this element to
@@ -254,15 +255,15 @@ module AWS
       #         specifies the AWS accounts, if any, that you want to allow to
       #         create signed URLs for private content. If you want to require
       #         signed URLs in requests for objects in the target origin that
-      #         match the PathPattern for this cache behavior, specify +true+
+      #         match the PathPattern for this cache behavior, specify `true`
       #         for Enabled, and specify the applicable values for Quantity and
       #         Items. For more information, go to Using a Signed URL to Serve
       #         Private Content in the Amazon CloudFront Developer Guide. If
       #         you don't want to require signed URLs in requests for objects
-      #         that match PathPattern, specify +false+ for Enabled and 0 for
+      #         that match PathPattern, specify `false` for Enabled and 0 for
       #         Quantity. Omit Items. To add, change, or remove one or more
-      #         trusted signers, change Enabled to +true+ (if it's currently
-      #         +false+ ), change Quantity as applicable, and specify all of
+      #         trusted signers, change Enabled to `true` (if it's currently
+      #         `false` ), change Quantity as applicable, and specify all of
       #         the trusted signers that you want to include in the updated
       #         distribution.
       #         * `:enabled` - *required* - (Boolean) Specifies whether you
@@ -295,18 +296,18 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a distribution or if
       #       you want to disable logging for an existing distribution, specify
-      #       +false+ for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify +false+ for Enabled but you specify
+      #       `false` for Enabled, and specify empty Bucket and Prefix
+      #       elements. If you specify `false` for Enabled but you specify
       #       values for Bucket, prefix and IncludeCookies, the values are
       #       automatically deleted.
       #     * `:include_cookies` - *required* - (Boolean) Specifies whether you
-      #       want CloudFront to include cookies in access logs, specify +true+
+      #       want CloudFront to include cookies in access logs, specify `true`
       #       for IncludeCookies. If you choose to include cookies in logs,
       #       CloudFront logs all cookies regardless of how you configure the
       #       cache behaviors for this distribution. If you do not want to
       #       include cookies when you create a distribution or if you want to
       #       disable include cookies for an existing distribution, specify
-      #       +false+ for IncludeCookies.
+      #       `false` for IncludeCookies.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
@@ -325,6 +326,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)
@@ -429,6 +431,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:create_time` - (Time)
@@ -479,8 +482,8 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a streaming
       #       distribution or if you want to disable logging for an existing
-      #       streaming distribution, specify +false+ for Enabled, and specify
-      #       empty Bucket and Prefix elements. If you specify +false+ for
+      #       streaming distribution, specify `false` for Enabled, and specify
+      #       empty Bucket and Prefix elements. If you specify `false` for
       #       Enabled but you specify values for Bucket and Prefix, the values
       #       are automatically deleted.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
@@ -495,14 +498,14 @@ module AWS
       #     specifies the AWS accounts, if any, that you want to allow to
       #     create signed URLs for private content. If you want to require
       #     signed URLs in requests for objects in the target origin that match
-      #     the PathPattern for this cache behavior, specify +true+ for
+      #     the PathPattern for this cache behavior, specify `true` for
       #     Enabled, and specify the applicable values for Quantity and Items.
       #     For more information, go to Using a Signed URL to Serve Private
       #     Content in the Amazon CloudFront Developer Guide. If you don't want
       #     to require signed URLs in requests for objects that match
-      #     PathPattern, specify +false+ for Enabled and 0 for Quantity. Omit
+      #     PathPattern, specify `false` for Enabled and 0 for Quantity. Omit
       #     Items. To add, change, or remove one or more trusted signers,
-      #     change Enabled to +true+ (if it's currently +false+ ), change
+      #     change Enabled to `true` (if it's currently `false` ), change
       #     Quantity as applicable, and specify all of the trusted signers that
       #     you want to include in the updated distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want to
@@ -524,6 +527,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)
@@ -587,6 +591,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:s3_canonical_user_id` - (String)
       #   * `:cloud_front_origin_access_identity_config` - (Hash)
@@ -600,6 +605,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:caller_reference` - (String)
       #   * `:comment` - (String)
 
@@ -610,6 +616,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)
@@ -689,6 +696,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:caller_reference` - (String)
       #   * `:aliases` - (Hash)
       #     * `:quantity` - (Integer)
@@ -755,6 +763,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:create_time` - (Time)
@@ -771,6 +780,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)
@@ -810,6 +820,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:caller_reference` - (String)
       #   * `:s3_origin` - (Hash)
       #     * `:domain_name` - (String)
@@ -843,6 +854,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:next_marker` - (String)
       #   * `:max_items` - (Integer)
@@ -867,6 +879,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:next_marker` - (String)
       #   * `:max_items` - (Integer)
@@ -945,6 +958,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:next_marker` - (String)
       #   * `:max_items` - (Integer)
@@ -969,6 +983,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:marker` - (String)
       #   * `:next_marker` - (String)
       #   * `:max_items` - (Integer)
@@ -1020,6 +1035,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:s3_canonical_user_id` - (String)
       #   * `:cloud_front_origin_access_identity_config` - (Hash)
@@ -1121,8 +1137,8 @@ module AWS
       #       specifies how CloudFront handles query strings and cookies.
       #       * `:query_string` - *required* - (Boolean) Indicates whether you
       #         want CloudFront to forward query strings to the origin that is
-      #         associated with this cache behavior. If so, specify +true+ ; if
-      #         not, specify +false+ .
+      #         associated with this cache behavior. If so, specify `true` ; if
+      #         not, specify `false` .
       #       * `:cookies` - *required* - (Hash) A complex type that specifies
       #         how CloudFront handles cookies.
       #         * `:forward` - *required* - (String) Use this element to
@@ -1147,15 +1163,15 @@ module AWS
       #       specifies the AWS accounts, if any, that you want to allow to
       #       create signed URLs for private content. If you want to require
       #       signed URLs in requests for objects in the target origin that
-      #       match the PathPattern for this cache behavior, specify +true+ for
+      #       match the PathPattern for this cache behavior, specify `true` for
       #       Enabled, and specify the applicable values for Quantity and
       #       Items. For more information, go to Using a Signed URL to Serve
       #       Private Content in the Amazon CloudFront Developer Guide. If you
       #       don't want to require signed URLs in requests for objects that
-      #       match PathPattern, specify +false+ for Enabled and 0 for
+      #       match PathPattern, specify `false` for Enabled and 0 for
       #       Quantity. Omit Items. To add, change, or remove one or more
-      #       trusted signers, change Enabled to +true+ (if it's currently
-      #       +false+ ), change Quantity as applicable, and specify all of the
+      #       trusted signers, change Enabled to `true` (if it's currently
+      #       `false` ), change Quantity as applicable, and specify all of the
       #       trusted signers that you want to include in the updated
       #       distribution.
       #       * `:enabled` - *required* - (Boolean) Specifies whether you want
@@ -1205,7 +1221,7 @@ module AWS
       #         * `:query_string` - *required* - (Boolean) Indicates whether
       #           you want CloudFront to forward query strings to the origin
       #           that is associated with this cache behavior. If so, specify
-      #           +true+ ; if not, specify +false+ .
+      #           `true` ; if not, specify `false` .
       #         * `:cookies` - *required* - (Hash) A complex type that
       #           specifies how CloudFront handles cookies.
       #           * `:forward` - *required* - (String) Use this element to
@@ -1230,15 +1246,15 @@ module AWS
       #         specifies the AWS accounts, if any, that you want to allow to
       #         create signed URLs for private content. If you want to require
       #         signed URLs in requests for objects in the target origin that
-      #         match the PathPattern for this cache behavior, specify +true+
+      #         match the PathPattern for this cache behavior, specify `true`
       #         for Enabled, and specify the applicable values for Quantity and
       #         Items. For more information, go to Using a Signed URL to Serve
       #         Private Content in the Amazon CloudFront Developer Guide. If
       #         you don't want to require signed URLs in requests for objects
-      #         that match PathPattern, specify +false+ for Enabled and 0 for
+      #         that match PathPattern, specify `false` for Enabled and 0 for
       #         Quantity. Omit Items. To add, change, or remove one or more
-      #         trusted signers, change Enabled to +true+ (if it's currently
-      #         +false+ ), change Quantity as applicable, and specify all of
+      #         trusted signers, change Enabled to `true` (if it's currently
+      #         `false` ), change Quantity as applicable, and specify all of
       #         the trusted signers that you want to include in the updated
       #         distribution.
       #         * `:enabled` - *required* - (Boolean) Specifies whether you
@@ -1271,18 +1287,18 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a distribution or if
       #       you want to disable logging for an existing distribution, specify
-      #       +false+ for Enabled, and specify empty Bucket and Prefix
-      #       elements. If you specify +false+ for Enabled but you specify
+      #       `false` for Enabled, and specify empty Bucket and Prefix
+      #       elements. If you specify `false` for Enabled but you specify
       #       values for Bucket, prefix and IncludeCookies, the values are
       #       automatically deleted.
       #     * `:include_cookies` - *required* - (Boolean) Specifies whether you
-      #       want CloudFront to include cookies in access logs, specify +true+
+      #       want CloudFront to include cookies in access logs, specify `true`
       #       for IncludeCookies. If you choose to include cookies in logs,
       #       CloudFront logs all cookies regardless of how you configure the
       #       cache behaviors for this distribution. If you do not want to
       #       include cookies when you create a distribution or if you want to
       #       disable include cookies for an existing distribution, specify
-      #       +false+ for IncludeCookies.
+      #       `false` for IncludeCookies.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
       #       the access logs in, for example, myawslogbucket.s3.amazonaws.com.
       #     * `:prefix` - *required* - (String) An optional string that you
@@ -1305,6 +1321,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)
@@ -1418,8 +1435,8 @@ module AWS
       #       CloudFront to save access logs to an Amazon S3 bucket. If you do
       #       not want to enable logging when you create a streaming
       #       distribution or if you want to disable logging for an existing
-      #       streaming distribution, specify +false+ for Enabled, and specify
-      #       empty Bucket and Prefix elements. If you specify +false+ for
+      #       streaming distribution, specify `false` for Enabled, and specify
+      #       empty Bucket and Prefix elements. If you specify `false` for
       #       Enabled but you specify values for Bucket and Prefix, the values
       #       are automatically deleted.
       #     * `:bucket` - *required* - (String) The Amazon S3 bucket to store
@@ -1434,14 +1451,14 @@ module AWS
       #     specifies the AWS accounts, if any, that you want to allow to
       #     create signed URLs for private content. If you want to require
       #     signed URLs in requests for objects in the target origin that match
-      #     the PathPattern for this cache behavior, specify +true+ for
+      #     the PathPattern for this cache behavior, specify `true` for
       #     Enabled, and specify the applicable values for Quantity and Items.
       #     For more information, go to Using a Signed URL to Serve Private
       #     Content in the Amazon CloudFront Developer Guide. If you don't want
       #     to require signed URLs in requests for objects that match
-      #     PathPattern, specify +false+ for Enabled and 0 for Quantity. Omit
+      #     PathPattern, specify `false` for Enabled and 0 for Quantity. Omit
       #     Items. To add, change, or remove one or more trusted signers,
-      #     change Enabled to +true+ (if it's currently +false+ ), change
+      #     change Enabled to `true` (if it's currently `false` ), change
       #     Quantity as applicable, and specify all of the trusted signers that
       #     you want to include in the updated distribution.
       #     * `:enabled` - *required* - (Boolean) Specifies whether you want to
@@ -1467,6 +1484,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:id` - (String)
       #   * `:status` - (String)
       #   * `:last_modified_time` - (Time)

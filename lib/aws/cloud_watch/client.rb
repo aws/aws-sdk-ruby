@@ -54,6 +54,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:alarm_history_items` - (Array<Hash>)
       #     * `:alarm_name` - (String)
       #     * `:timestamp` - (Time)
@@ -82,6 +83,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:metric_alarms` - (Array<Hash>)
       #     * `:alarm_name` - (String)
       #     * `:alarm_arn` - (String)
@@ -158,6 +160,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:metric_alarms` - (Array<Hash>)
       #     * `:alarm_name` - (String)
       #     * `:alarm_arn` - (String)
@@ -255,6 +258,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:label` - (String)
       #   * `:datapoints` - (Array<Hash>)
       #     * `:timestamp` - (Time)
@@ -281,6 +285,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:metrics` - (Array<Hash>)
       #     * `:namespace` - (String)
       #     * `:metric_name` - (String)

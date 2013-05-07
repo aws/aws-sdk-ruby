@@ -53,6 +53,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subscription_arn` - (String)
 
       # @!method create_topic(options = {})
@@ -65,6 +66,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:topic_arn` - (String)
 
       # @!method delete_topic(options = {})
@@ -92,6 +94,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,String>)
 
       # @!method get_topic_attributes(options = {})
@@ -102,6 +105,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:attributes` - (Hash<String,String>)
 
       # @!method list_subscriptions(options = {})
@@ -112,6 +116,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subscriptions` - (Array<Hash>)
       #     * `:subscription_arn` - (String)
       #     * `:owner` - (String)
@@ -130,6 +135,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subscriptions` - (Array<Hash>)
       #     * `:subscription_arn` - (String)
       #     * `:owner` - (String)
@@ -146,6 +152,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:topics` - (Array<Hash>)
       #     * `:topic_arn` - (String)
       #   * `:next_token` - (String)
@@ -189,6 +196,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:message_id` - (String)
 
       # @!method remove_permission(options = {})
@@ -248,6 +256,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subscription_arn` - (String)
 
       # @!method unsubscribe(options = {})

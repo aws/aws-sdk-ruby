@@ -35,6 +35,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:security_groups` - (Array<String>)
 
       # @!method attach_load_balancer_to_subnets(options = {})
@@ -48,6 +49,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subnets` - (Array<String>)
 
       # @!method configure_health_check(options = {})
@@ -89,6 +91,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:health_check` - (Hash)
       #     * `:target` - (String)
       #     * `:interval` - (Integer)
@@ -176,6 +179,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:dns_name` - (String)
 
       # @!method create_load_balancer_listeners(options = {})
@@ -272,6 +276,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances` - (Array<Hash>)
       #     * `:instance_id` - (String)
 
@@ -287,6 +292,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_states` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:state` - (String)
@@ -306,6 +312,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_descriptions` - (Array<Hash>)
       #     * `:policy_name` - (String)
       #     * `:policy_type_name` - (String)
@@ -322,6 +329,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:policy_type_descriptions` - (Array<Hash>)
       #     * `:policy_type_name` - (String)
       #     * `:description` - (String)
@@ -341,6 +349,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:load_balancer_descriptions` - (Array<Hash>)
       #     * `:load_balancer_name` - (String)
       #     * `:dns_name` - (String)
@@ -395,6 +404,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:subnets` - (Array<String>)
 
       # @!method disable_availability_zones_for_load_balancer(options = {})
@@ -412,6 +422,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:availability_zones` - (Array<String>)
 
       # @!method enable_availability_zones_for_load_balancer(options = {})
@@ -426,6 +437,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:availability_zones` - (Array<String>)
 
       # @!method register_instances_with_load_balancer(options = {})
@@ -448,6 +460,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances` - (Array<Hash>)
       #     * `:instance_id` - (String)
 

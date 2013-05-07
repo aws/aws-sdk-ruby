@@ -53,6 +53,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_id` - (String)
 
       # @!method create_app(options = {})
@@ -88,6 +89,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:app_id` - (String)
 
       # @!method create_deployment(options = {})
@@ -114,6 +116,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:deployment_id` - (String)
 
       # @!method create_instance(options = {})
@@ -133,6 +136,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instance_id` - (String)
 
       # @!method create_layer(options = {})
@@ -162,6 +166,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:layer_id` - (String)
 
       # @!method create_stack(options = {})
@@ -192,6 +197,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stack_id` - (String)
 
       # @!method create_user_profile(options = {})
@@ -203,6 +209,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:iam_user_arn` - (String)
 
       # @!method delete_app(options = {})
@@ -245,6 +252,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:apps` - (Array<Hash>)
       #     * `:app_id` - (String)
       #     * `:stack_id` - (String)
@@ -276,6 +284,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:commands` - (Array<Hash>)
       #     * `:command_id` - (String)
       #     * `:instance_id` - (String)
@@ -297,6 +306,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:deployments` - (Array<Hash>)
       #     * `:deployment_id` - (String)
       #     * `:stack_id` - (String)
@@ -322,6 +332,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:elastic_ips` - (Array<Hash>)
       #     * `:ip` - (String)
       #     * `:name` - (String)
@@ -337,6 +348,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:instances` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:ec2_instance_id` - (String)
@@ -369,6 +381,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:layers` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:layer_id` - (String)
@@ -408,6 +421,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:load_based_auto_scaling_configurations` - (Array<Hash>)
       #     * `:layer_id` - (String)
       #     * `:enable` - (Boolean)
@@ -434,6 +448,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:permissions` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:iam_user_arn` - (String)
@@ -448,6 +463,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:raid_arrays` - (Array<Hash>)
       #     * `:raid_array_id` - (String)
       #     * `:instance_id` - (String)
@@ -469,6 +485,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:service_errors` - (Array<Hash>)
       #     * `:service_error_id` - (String)
       #     * `:stack_id` - (String)
@@ -484,6 +501,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:stacks` - (Array<Hash>)
       #     * `:stack_id` - (String)
       #     * `:name` - (String)
@@ -513,6 +531,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:time_based_auto_scaling_configurations` - (Array<Hash>)
       #     * `:instance_id` - (String)
       #     * `:auto_scaling_schedule` - (Hash)
@@ -531,6 +550,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:user_profiles` - (Array<Hash>)
       #     * `:iam_user_arn` - (String)
       #     * `:name` - (String)
@@ -546,6 +566,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:volumes` - (Array<Hash>)
       #     * `:volume_id` - (String)
       #     * `:ec2_volume_id` - (String)
@@ -566,6 +587,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:layer_id` - (String)
       #   * `:hostname` - (String)
 
