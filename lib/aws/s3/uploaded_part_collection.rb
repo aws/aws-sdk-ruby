@@ -47,7 +47,7 @@ module AWS
       protected
       def each_member_in_page(page, &block)
         page.parts.each do |part_info|
-          part = UploadedPart.new(upload, part_info.part_number)
+          part = UploadedPart.new(upload, part_info.part_number, :etag => part_info.etag)
           yield(part)
         end
       end

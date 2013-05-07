@@ -33,6 +33,7 @@ module AWS
       def initialize(upload, part_number, opts = {})
         @upload = upload
         @part_number = part_number
+        @etag = opts[:etag]
         super
       end
 
@@ -57,7 +58,8 @@ module AWS
 
       # @return [String] The ETag of the part.
       def etag
-        get_attribute(:etag)
+        @etag ||= get_attribute(:etag)
+        @etag
       end
 
       # @api private
