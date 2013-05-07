@@ -15,7 +15,7 @@ module AWS
   class DynamoDB
 
     # Client class for Amazon DynamoDB.
-    class Client < ClientBase
+    class ClientV2 < ClientBase
 
       # client methods #
 
@@ -831,7 +831,7 @@ module AWS
 
       # end client methods #
 
-      define_client_methods('2011-12-05')
+      define_client_methods('2012-08-10')
 
     end
   end
