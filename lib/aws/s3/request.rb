@@ -32,28 +32,6 @@ module AWS
       # @api private
       attr_accessor :force_path_style
 
-      def metadata= metadata
-        Array(metadata).each do |name, value|
-          headers["x-amz-meta-#{name}"] = value
-        end
-      end
-
-      def storage_class= storage_class
-        if storage_class.kind_of?(Symbol)
-          headers["x-amz-storage-class"] = storage_class.to_s.upcase
-        elsif storage_class
-          headers["x-amz-storage-class"] = storage_class
-        end
-      end
-
-      def server_side_encryption= sse
-        if sse.is_a?(Symbol)
-          headers['x-amz-server-side-encryption'] = sse.to_s.upcase
-        elsif sse
-          headers['x-amz-server-side-encryption'] = sse
-        end
-      end
-
       def host
         path_style? ? @host : "#{bucket}.#{@host}"
       end

@@ -103,6 +103,32 @@ module AWS
 
       protected
 
+      def set_metadata request, options
+        if metadata = options[:metadata]
+          Array(metadata).each do |name, value|
+            request.headers["x-amz-meta-#{name}"] = value
+          end
+        end
+      end
+
+      def set_storage_class request, options
+        storage_class = options[:storage_class]
+        if storage_class.kind_of?(Symbol)
+          request.headers["x-amz-storage-class"] = storage_class.to_s.upcase
+        elsif storage_class
+          request.headers["x-amz-storage-class"] = storage_class
+        end
+      end
+
+      def set_server_side_encryption request, options
+        sse = options[:server_side_encryption]
+        if sse.is_a?(Symbol)
+          request.headers['x-amz-server-side-encryption'] = sse.to_s.upcase
+        elsif sse
+          request.headers['x-amz-server-side-encryption'] = sse
+        end
+      end
+
       def extract_error_details response
         if
           (response.http_response.status >= 300 ||
@@ -1291,9 +1317,9 @@ module AWS
           options = compute_write_options(options)
           set_body_stream_and_content_length(request, options)
 
-          request.metadata = options[:metadata]
-          request.storage_class = options[:storage_class]
-          request.server_side_encryption = options[:server_side_encryption]
+          set_metadata(request, options)
+          set_storage_class(request, options)
+          set_server_side_encryption(request, options)
 
           super(request, options)
 
@@ -1526,9 +1552,9 @@ module AWS
                     }) do
 
         configure_request do |req, options|
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
           super(req, options)
         end
 
@@ -1768,9 +1794,9 @@ module AWS
 
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
           super(req, options)
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
 
           if options[:version_id]
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
