@@ -28,7 +28,9 @@ When /^I ask the client to list the multipart uploads in the bucket$/ do
 end
 
 Then /^the result should include the upload ID I initiated$/ do
-  @result.uploads.map { |upload| upload.upload_id }.should include(@upload_id)
+  eventually(10) do
+    @result.uploads.map { |upload| upload.upload_id }.should include(@upload_id)
+  end
 end
 
 When /^I ask the client to upload a (\d+)(mb|kb) part for "([^\"]*)" containing "([^\"]*)" as part number (\d+)$/ do |size, unit, key, contents, number|
