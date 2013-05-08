@@ -1134,7 +1134,7 @@ module AWS
       end
 
       # @api private
-      REQUEST_PARAMETERS = Request.query_parameters.map do |p|
+      REQUEST_PARAMETERS = Core::Signers::S3::QUERY_PARAMS.map do |p|
         p.tr("-","_").to_sym
       end
 
@@ -1394,7 +1394,7 @@ module AWS
         if token = config.credential_provider.session_token
           parts << "x-amz-security-token:#{token}"
         end
-        parts << request.canonicalized_resource
+        parts << Core::Signers::S3.canonicalized_resource(request)
 
         string_to_sign = parts.join("\n")
 
