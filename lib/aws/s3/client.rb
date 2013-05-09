@@ -771,33 +771,6 @@ module AWS
       #     :data => 'This is the readme for ...',
       #   })
       #
-      # ## Block Form
-      #
-      # In block form, this method yields a stream to the block that
-      # accepts data chunks.  For example:
-      #
-      #   s3_client.put_object(
-      #     :bucket_name => 'mybucket',
-      #     :key => 'some/key'
-      #     :content_length => File.size('myfile')
-      #   ) do |buffer|
-      #
-      #     File.open('myfile') do |io|
-      #       buffer.write(io.read(length)) until io.eof?
-      #     end
-      #
-      #   end
-      #
-      # This form is useful if you need finer control over how
-      # potentially large amounts of data are read from another
-      # source before being sent to S3; for example, if you are
-      # using a non-blocking IO model and reading from a large file
-      # on disk or from another network stream.  Some HTTP handlers
-      # do not support streaming request bodies, so if you plan to
-      # upload large objects using this interface you should make
-      # sure the HTTP handler you configure for the client meets
-      # your needs.
-      #
       # @overload put_object(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
