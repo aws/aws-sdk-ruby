@@ -339,5 +339,39 @@ module AWS::Core
 
     end
 
+    context '#region' do
+
+      before(:each) do
+        ENV.delete('AWS_REGION')
+        ENV.delete('AMAZON_REGION')
+      end
+
+      after(:each) do
+        ENV.delete('AWS_REGION')
+        ENV.delete('AMAZON_REGION')
+      end
+
+      it 'defaults to us-east-1' do
+        Configuration.new.region.should eq('us-east-1')
+      end
+
+      it 'picks up ENV["AWS_REGION"]' do
+        ENV['AWS_REGION'] = 'region1'
+        Configuration.new.region.should eq('region1')
+      end
+
+      it 'picks up ENV["AMAZON_REGION"]' do
+        ENV['AMAZON_REGION'] = 'region2'
+        Configuration.new.region.should eq('region2')
+      end
+
+      it 'prefers up ENV["AWS_REGION"] over ENV["AMAZON_REGION"]' do
+        ENV['AWS_REGION'] = 'region1'
+        ENV['AMAZON_REGION'] = 'region2'
+        Configuration.new.region.should eq('region1')
+      end
+
+    end
+
   end
 end
