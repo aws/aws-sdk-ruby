@@ -141,7 +141,7 @@ module AWS
   # example:
   #
   #     key_pair = ec2.key_pairs.create("mykey")
-  #     File.open("~/.ssh/ec2", "w") do |f|
+  #     File.open("~/.ssh/ec2", "wb") do |f|
   #       f.write(key_pair.private_key)
   #     end
   #

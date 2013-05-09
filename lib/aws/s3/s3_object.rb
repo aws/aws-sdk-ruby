@@ -63,7 +63,7 @@ module AWS
     #     obj.write(:file => path_to_file)
     #
     #     # Also accepts an open file object
-    #     file = File.open(path_to_file, 'r')
+    #     file = File.open(path_to_file, 'rb')
     #     obj.write(file)
     #
     # All three examples above produce the same result.  The file
@@ -104,7 +104,7 @@ module AWS
     # If you want to stream an object from S3, you can pass a block
     # to {#read}.
     #
-    #     File.open('output', 'w') do |file|
+    #     File.open('output', 'wb') do |file|
     #       large_object.read do |chunk|
     #         file.write(chunk)
     #       end
@@ -460,7 +460,7 @@ module AWS
       #     obj.write(Pathname.new('path/to/file.txt'))
       #
       #     # file objects
-      #     obj.write(File.open('path/to/file.txt', 'r'))
+      #     obj.write(File.open('path/to/file.txt', 'rb'))
       #
       #     # IO objects (must respond to #read and #eof?)
       #     obj.write(io)
@@ -990,7 +990,7 @@ module AWS
       # the HTTP response.
       #
       #     # read an object from S3 to a file
-      #     File.open('output.txt', 'w') do |file|
+      #     File.open('output.txt', 'wb') do |file|
       #       bucket.objects['key'].read do |chunk|
       #         file.write(chunk)
       #       end

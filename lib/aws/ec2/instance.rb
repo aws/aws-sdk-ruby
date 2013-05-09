@@ -710,7 +710,7 @@ module AWS
       #
       # Given a completed export task you can download the final image:
       #
-      #     File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
+      #     File.open('image.ova', 'wb') {|f| f.write(task.s3_object.read) }
       #
       # @param [S3::Bucket,String] bucket The destination bucket.  May
       #   be the name of the bucket (string) or a {S3::Bucket} object. The

@@ -81,7 +81,7 @@ module AWS
   #     obj.write(Pathname.new('/path/to/file.txt'))
   #
   #     # streaming download from S3 to a file on disk
-  #     File.open('file.txt', 'w') do |file|
+  #     File.open('file.txt', 'wb') do |file|
   #       obj.read do |chunk|
   #          file.write(chunk)
   #       end
