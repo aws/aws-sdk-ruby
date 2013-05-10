@@ -21,6 +21,10 @@ module AWS
       # @api private
       class Version4
 
+        # @api private
+        # SHA256 hex digest of the empty string
+        EMPTY_DIGEST = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+
         # @param [CredentialProviders::Provider] credentials
         # @param [String] service_name
         # @param [String] region
@@ -43,12 +47,11 @@ module AWS
         # @return [Http::Request]
         def sign_request req
           datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
-          req.headers['content-type'] ||= 'application/x-www-form-urlencoded'
           req.headers['host'] = req.host
           req.headers['x-amz-date'] = datetime
           req.headers['x-amz-security-token'] = credentials.session_token if
             credentials.session_token
-          req.headers['x-amz-content-sha256'] ||= hexdigest(req.body || '')
+          req.headers['x-amz-content-sha256'] ||= body_digest(req)
           req.headers['authorization'] = authorization(req, datetime)
           req
         end
@@ -130,6 +133,16 @@ module AWS
         def canonical_header_values values
           values = [values] unless values.is_a?(Array)
           values.map(&:to_s).join(',').gsub(/\s+/, ' ').strip
+        end
+
+        # @param [Http::Request] req
+        # @return [String]
+        def body_digest req
+          if ['', nil].include?(req.body)
+            EMPTY_DIGEST
+          else
+            hexdigest(req.body)
+          end
         end
 
         # @param [String] value

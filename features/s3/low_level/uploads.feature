@@ -29,9 +29,9 @@ Feature: Multi-part Uploads
     | FIRST  |
     | SECOND |
     And a request should have been made like:
-    | TYPE | NAME | VALUE        |
-    | http | verb | POST         |
-    | http | uri  | /foo?uploads |
+    | TYPE | NAME | VALUE         |
+    | http | verb | POST          |
+    | http | uri  | /foo?uploads= |
     And a request should have been made like:
     | TYPE        | NAME       | VALUE |
     | http        | verb       | PUT   |
@@ -56,9 +56,9 @@ Feature: Multi-part Uploads
     Then the result should be a successful response
     And the result should include the upload ID I initiated
     And a request should have been made like:
-    | TYPE | NAME | VALUE     |
-    | http | verb | GET       |
-    | http | uri  | /?uploads |
+    | TYPE | NAME | VALUE      |
+    | http | verb | GET        |
+    | http | uri  | /?uploads= |
 
   Scenario: Abort an upload
     Given I ask the client to initiate a multipart upload to "foo"

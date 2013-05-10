@@ -51,10 +51,18 @@ When /^I ask the client to complete the upload for "([^\"]*)"$/ do |key|
   @etags.keys.sort.each do |part_number|
     parts << { :part_number => part_number, :etag => @etags[part_number] }
   end
+
+  begin
   @result = @s3_client.complete_multipart_upload(:bucket_name => @bucket_name,
                                               :key => key,
                                               :upload_id => @upload_id,
                                               :parts => parts)
+  rescue => error
+    puts error.http_response.body
+    File.open('err.txt', 'w') {|f| f.write(error.http_response.body) }
+    raise error
+  end
+
 end
 
 Then /^the object "([^\"]*)" should eventually have a body including the following strings:$/ do |key, table|

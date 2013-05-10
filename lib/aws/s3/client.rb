@@ -47,7 +47,38 @@ module AWS
       include DataOptions
       include Core::UriEscape
 
+      # @param [Core::Http::Request] request
+      # @api private
+      def sign_request request
+        signer_for(request).sign_request(request)
+        creds = credential_provider
+      end
+
       protected
+
+      def signer_for request
+        if
+          @region == 'us-east-1' and # classic region
+          request.bucket and
+          dns_compatible_bucket_name?(request.bucket)
+        then
+          v3_signer
+        else
+          v4_signer
+        end
+      end
+
+      # @return [Core::Signers::S3]
+      def v3_signer
+        @v3_signer ||= Core::Signers::S3.new(credential_provider)
+      end
+
+      # @return [Core::Signers::Version4]
+      def v4_signer
+        @v4_signer ||= begin
+          Core::Signers::Version4.new(credential_provider, 's3', @region)
+        end
+      end
 
       def self.bucket_method(method_name, verb, *args, &block)
 

@@ -238,7 +238,7 @@ module AWS
           end
 
           def encoded
-            value ? "#{escape(name)}=#{escape(value)}" : escape(name)
+            value ? "#{escape(name)}=#{escape(value)}" : "#{escape(name)}="
           end
 
         end

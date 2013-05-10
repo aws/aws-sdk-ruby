@@ -64,7 +64,7 @@ Then /^the client should have made a "([^\"]*)" request to the object ACL$/ do |
   r = @http_handler.requests_made.last
   r.http_method.should == method
   r.host.should == "#@bucket_name.s3.amazonaws.com"
-  r.uri.should == "/#@object_key?acl"
+  r.uri.should == "/#@object_key?acl="
 end
 
 Then /^the object ACL should resemble the one that was set$/ do

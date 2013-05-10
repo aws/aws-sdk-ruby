@@ -26,9 +26,9 @@ Feature: Uploads
     When I write the file to the object "foo"
     Then the contents of object "foo" should eventually match the file
     And a request should have been made like:
-    | TYPE | NAME | VALUE        |
-    | http | verb | POST         |
-    | http | uri  | /foo?uploads |
+    | TYPE | NAME | VALUE         |
+    | http | verb | POST          |
+    | http | uri  | /foo?uploads= |
     And a request should have been made like:
     | TYPE        | NAME           | VALUE   |
     | http        | verb           | PUT     |
@@ -60,20 +60,20 @@ Feature: Uploads
     | color | red    |
     | shape | circle |
     And a request should have been made like:
-    | TYPE   | NAME             | VALUE        |
-    | http   | verb             | POST         |
-    | http   | uri              | /foo?uploads |
-    | header | x-amz-meta-color | red          |
-    | header | x-amz-meta-shape | circle       |
+    | TYPE   | NAME             | VALUE         |
+    | http   | verb             | POST          |
+    | http   | uri              | /foo?uploads= |
+    | header | x-amz-meta-color | red           |
+    | header | x-amz-meta-shape | circle        |
 
   Scenario: Start a multipart upload
     When I start an upload to object "foo"
     Then the result should be an upload object
     And the list of uploads for the bucket should include the upload
     And a request should have been made like:
-    | TYPE | NAME | VALUE        |
-    | http | verb | POST         |
-    | http | uri  | /foo?uploads |
+    | TYPE | NAME | VALUE         |
+    | http | verb | POST          |
+    | http | uri  | /foo?uploads= |
 
   Scenario: Upload a part
     Given I start an upload to object "foo"
@@ -126,9 +126,9 @@ Feature: Uploads
     When I ask for the list of uploads for the bucket
     Then the result should eventually include the upload I started
     And a request should have been made like:
-    | TYPE | NAME      | VALUE         |
-    | http | verb      | GET           |
-    | http | uri_match | /?.*&?uploads |
+    | TYPE | NAME      | VALUE          |
+    | http | verb      | GET            |
+    | http | uri_match | /?.*&?uploads= |
 
   Scenario: List uploads for an object
     Given I start an upload to object "foo"
