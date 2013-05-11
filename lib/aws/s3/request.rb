@@ -164,15 +164,20 @@ module AWS
         params.select { |p| self.class.query_parameters.include?(p.name) }
       end
 
-      def add_authorization! credentials
+      def signature credentials
         if token = credentials.session_token
           headers["x-amz-security-token"] = token
         end
 
         secret = credentials.secret_access_key
-        signature = Core::Signer.sign(secret, string_to_sign, 'sha1')
-        signature = URI.escape(signature)
-        headers["authorization"] = "AWS #{credentials.access_key_id}:#{signature}"
+        _signature = Core::Signer.sign(secret, string_to_sign, 'sha1')
+        _signature = URI.escape(_signature)
+        _signature
+      end
+
+      def add_authorization! credentials
+        _signature = signature credentials
+        headers["authorization"] = "AWS #{credentials.access_key_id}:#{_signature}"
       end
 
       class << self

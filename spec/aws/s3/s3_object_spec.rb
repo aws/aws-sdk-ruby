@@ -13,6 +13,7 @@
 
 require 'spec_helper'
 require 'tempfile'
+require 'digest/md5'
 
 module AWS
   class S3
@@ -1131,6 +1132,98 @@ module AWS
         end
 
       end
+
+      context "S3Object::REQUEST_PARAMETERS" do
+        it "should include response_content_type" do
+          S3Object::REQUEST_PARAMETERS.should include(:response_content_type)
+        end
+
+        it "should not include response_test" do
+          S3Object::REQUEST_PARAMETERS.should_not include(:response_test)
+        end
+      end
+
+      # private methods
+      context "#request_for_signing" do
+        let(:verb) { 'PUT' }
+        let(:date) { Time.now.httpdate }
+        let(:content_type) { 'text/plain' }
+        let(:content_md5) { Digest::MD5.hexdigest('hello world') }
+
+        before :each do
+          object.stub(:config).and_return(config)
+          Request.any_instance.stub(:path_style?).and_return(true)
+        end
+
+        def run(options)
+          object.send(:request_for_signing, options)
+        end
+        
+        it "should return a request" do
+          run({}).should be_a(Request)
+        end
+        
+        it "request.bucket should eq bucket.name" do
+          object.stub_chain('bucket.name').and_return('BUCKET')
+          run({}).bucket.should == 'BUCKET'
+        end
+        
+        it "require.key should eq key" do
+          object.stub(:key).and_return('KEY')
+          run({}).key.should == 'KEY'
+        end
+
+        it "if has endpoint option require.host should eq the value" do
+          run({:endpoint => 'ENDPOINT'}).host.should == 'ENDPOINT'
+        end
+
+        it "request.host default eq config.s3_endpoint" do
+          run({}).host.should == config.s3_endpoint
+        end
+
+        it "if has force_path_style option request.force_path_style should eq the value" do
+          req = run({:force_path_style => true}).force_path_style == true
+        end
+
+        it "request.force_path_style default eq config.force_path_style" do
+          run({}).force_path_style.should == config.s3_force_path_style
+        end
+
+        it "if has response_content_type option, request.params should not empty" do
+          req = run({:response_content_type => "application/json"})
+          req.params.should_not == []
+        end
+
+        it "if has other response_ option, request.params should empty" do
+          req = run({:response_test => "application/json"})
+          req.params.should == []
+        end
+
+        it "if has http_method option, request.http_method should eq the value" do
+          Request.any_instance.stub(:http_method).and_return('POST')
+          req = run({:http_method => verb})
+          req.instance_variable_get(:@http_method).should == verb
+        end
+
+        it "if has expires option, request.headers should include date" do
+          req = run({:expires => date})
+          req.headers.should include('date')
+          req.headers['date'].should == date
+        end
+
+        it "if has request_content_md5 options, request.headers should include content-md5" do
+          req = run({:request_content_md5 => content_md5})
+          req.headers.should include('content-md5')
+          req.headers['content-md5'].should == content_md5
+        end
+
+        it "if has request_content_type options, request.headers should include content-type" do
+          req = run({:request_content_type => content_type})
+          req.headers.should include('content-type')
+          req.headers['content-type'].should == content_type
+        end
+
+       end
 
     end
 
