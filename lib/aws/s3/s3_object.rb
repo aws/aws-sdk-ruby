@@ -1173,6 +1173,8 @@ module AWS
       # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
+      # @option options [String] :content_type
+      # @option options [String] :content_md5
       # @option options [String] :endpoint Sets the hostname of the
       #   endpoint.
       #
@@ -1208,23 +1210,23 @@ module AWS
       #   HTTP GET on the returned URL.
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
-
+        options = options.dup
         options[:secure] = config.use_ssl? unless options.key?(:secure)
+        options[:expires] = expiration_timestamp(options[:expires])
 
         req = request_for_signing(options)
-
-        method = http_method(method)
-        expires = expiration_timestamp(options[:expires])
-        req.add_param("AWSAccessKeyId",
-                      config.credential_provider.access_key_id)
+        req.http_method = http_method(method)
+        req.add_param("AWSAccessKeyId", config.credential_provider.access_key_id)
         req.add_param("versionId", options[:version_id]) if options[:version_id]
-        req.add_param("Signature", signature(method, expires, req))
-        req.add_param("Expires", expires)
-        req.add_param("x-amz-security-token",
-                      config.credential_provider.session_token) if
-          config.credential_provider.session_token
+        req.add_param("Signature", signature(req, options))
+        req.add_param("Expires", options[:expires])
+        if config.credential_provider.session_token
+          req.add_param(
+            "x-amz-security-token",
+            config.credential_provider.session_token
+          )
+        end
 
-        secure = options.fetch(:secure, config.use_ssl?)
         build_uri(req, options)
       end
 
@@ -1347,13 +1349,12 @@ module AWS
                         :query => request.querystring)
       end
 
-      def signature(method, expires, request)
-
+      def signature request, options
         parts = []
-        parts << method
-        parts << ""
-        parts << ""
-        parts << expires
+        parts << request.http_method
+        parts << options[:content_md5].to_s
+        parts << options[:content_type].to_s
+        parts << options[:expires]
         if token = config.credential_provider.session_token
           parts << "x-amz-security-token:#{token}"
         end
@@ -1363,7 +1364,6 @@ module AWS
 
         secret = config.credential_provider.secret_access_key
         Core::Signer.sign(secret, string_to_sign, 'sha1')
-
       end
 
       def expiration_timestamp(input)
