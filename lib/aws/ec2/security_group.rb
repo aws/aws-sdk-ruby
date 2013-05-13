@@ -148,7 +148,7 @@ module AWS
 
       # Add an ingress rules to this security group.
       # Ingress rules permit inbound traffic over a given protocol for
-      # a given port range from one or more souce ip addresses.
+      # a given port range from one or more source ip addresses.
       #
       # This example grants the whole internet (0.0.0.0/0) access to port 80
       # over TCP (HTTP web traffic).
