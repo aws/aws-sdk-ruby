@@ -15,10 +15,10 @@
 @s3 @high_level @objects @multipart_copy
 Feature: Multipart Copy Object
 
-  @slow @bar
+  @slow
   Scenario: Set bucket policy
     Given I upload a 7MB file to the key "foo"
-    When I copy the object from "foo" to "bar"
+    When I copy the object from "foo" to "bar" with multipart
     # initiate multipart upload
     Then a request should have been made like:
     | TYPE   | NAME                | VALUE        |

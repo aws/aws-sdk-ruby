@@ -18,7 +18,7 @@ Given(/^I upload a (\d+)MB file to the key "(.*?)"$/) do |mb, key|
   @bucket.objects[key].write(data)
 end
 
-When(/^I copy the object from "(.*?)" to "(.*?)"$/) do |source, target|
+When(/^I copy the object from "(.*?)" to "(.*?)" with multipart$/) do |source, target|
   @bucket.objects[source].copy_to(target,
     :use_multipart_copy => true,
     :content_length => @file_size)
