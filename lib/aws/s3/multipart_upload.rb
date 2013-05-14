@@ -204,6 +204,36 @@ module AWS
         UploadedPart.new(self, part_number)
       end
 
+      # Copies a part.
+      #
+      #   @param [string] copy_source Full S3 name of source, ie bucket/key
+      #
+      #   @param [Hash] options Additional options for the copy.
+      #
+      #   @option options [Integer] :part_number The part number.
+      #
+      #   @option options [Integer] :copy_source_range Range of bytes to copy, ie bytes=0-45687
+      def copy_part(copy_source, options = {})
+        part_options = base_opts.merge(options)
+        part_options.merge!(:copy_source => copy_source)
+
+        unless part_options[:part_number]
+          @increment_mutex.synchronize do
+            part_options[:part_number] = (@last_part += 1)
+          end
+        end
+        part_number = part_options[:part_number]
+
+        resp = client.copy_part(part_options)
+        @completed_mutex.synchronize do
+          @completed_parts[part_number] = {
+            :part_number => part_number,
+            :etag => resp[:etag]
+          }
+        end
+        UploadedPart.new(self, part_number)
+      end
+
       # Completes the upload by assembling previously uploaded
       # parts.
       #
