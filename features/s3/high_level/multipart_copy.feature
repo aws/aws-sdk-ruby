@@ -26,18 +26,18 @@ Feature: Multipart Copy Object
     | http   | uri                 | /bar?uploads |
     # copy first part
     And a request should have been made like:
-    | TYPE   | NAME                    | VALUE                                                                                                               |
-    | http   | verb                    | PUT                                                                                                                 |
-    | http   | path                    | /bar                                                                                                                |
-    | param  | partNumber              | 1                                                                                                                   |
-    | header | x-amz-copy-source-range | bytes=0-5242879                                                                                                     |
+    | TYPE   | NAME                    | VALUE           |
+    | http   | verb                    | PUT             |
+    | http   | path                    | /bar            |
+    | param  | partNumber              | 1               |
+    | header | x-amz-copy-source-range | bytes=0-5242879 |
     # copy second part
     And a request should have been made like:
-    | TYPE   | NAME                    | VALUE                                                                                                               |
-    | http   | verb                    | PUT                                                                                                                 |
-    | http   | path                    | /bar                                                                                                                |
-    | param  | partNumber              | 2                                                                                                                   |
-    | header | x-amz-copy-source-range | bytes=5242880-7340031                                                                                               |
+    | TYPE   | NAME                    | VALUE                 |
+    | http   | verb                    | PUT                   |
+    | http   | path                    | /bar                  |
+    | param  | partNumber              | 2                     |
+    | header | x-amz-copy-source-range | bytes=5242880-7340031 |
     # complete multipart upload
     And a request should have been made like:
     | TYPE   | NAME           | VALUE |
