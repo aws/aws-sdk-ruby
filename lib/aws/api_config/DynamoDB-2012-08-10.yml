@@ -1188,6 +1188,10 @@
               - :blob
     ReturnConsumedCapacity:
     - :string
+    TotalSegments:
+    - :integer
+    Segment:
+    - :integer
   :outputs:
     Items:
       :sym: :member
