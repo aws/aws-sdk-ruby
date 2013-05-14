@@ -889,7 +889,11 @@ module AWS
         options[:bucket_name] = bucket.name
         options[:key] = key
 
-        client.copy_object(options)
+        if use_multipart_copy?(options)
+          multipart_copy(options)
+        else
+          resp = client.copy_object(options)
+        end
 
         nil
 
@@ -1273,6 +1277,34 @@ module AWS
       end
 
       private
+
+      # Used to determine if the data needs to be copied in parts
+      def use_multipart_copy? options
+        options[:use_multipart_copy]
+      end
+
+      def multipart_copy options
+
+        unless options[:content_length]
+          msg = "unknown content length, must set :content_length " +
+              "to use multi-part copy"
+          raise ArgumentError, msg
+        end
+
+        part_size = compute_part_size(options)
+        clean_up_options(options)
+        source_length = options.delete(:content_length)
+
+        multipart_upload(options) do |upload|
+          pos = 0
+          # We copy in part_size chunks until we read the 
+          until pos >= source_length
+            last_byte = (pos + part_size >= source_length) ? source_length - 1 : pos + part_size - 1
+            upload.copy_part(options[:copy_source], options.merge({:copy_source_range => "bytes=#{pos}-#{last_byte}"})) 
+            pos += part_size
+          end
+        end
+      end
 
       # @return [Boolean]
       def should_decrypt? options
