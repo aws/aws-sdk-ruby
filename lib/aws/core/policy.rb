@@ -714,6 +714,8 @@ module AWS
         # @return [Array] Returns an array of conditions for this policy.
         attr_accessor :conditions
 
+        attr_accessor :excluded_resources
+
         # Constructs a new statement.
         #
         # @option opts [String] :sid The statement ID.  This is optional; if
@@ -776,11 +778,14 @@ module AWS
             "Sid" => sid,
             "Effect" => Inflection.class_name(effect.to_s),
             "Principal" => principals_hash,
-            "Resource" => resource_arns,
+            "Resource" => (resource_arns if resource_arns),
+            "NotResource" => (excluded_resource_arns if excluded_resource_arns),
             "Condition" => (conditions.to_h if conditions)
           }
           stmt.delete("Condition") if !conditions || conditions.to_h.empty?
           stmt.delete("Principal") unless principals_hash
+          stmt.delete("Resource") unless resource_arns
+          stmt.delete("NotResource") unless excluded_resource_arns
           if !translated_actions || translated_actions.empty?
             stmt["NotAction"] = translated_excluded_actions
           else
@@ -833,6 +838,11 @@ module AWS
         def parse_resource_option(value)
           coerce_array_option(:resources, value)
         end
+
+        def parse_not_resource_option(value)
+          coerce_array_option(:excluded_resources, value)
+        end
+        alias_method :parse_excluded_resource_option, :parse_not_resource_option
 
         protected
         def parse_condition_option(value)
@@ -907,6 +917,22 @@ module AWS
         protected
         def resource_arn resource
           resource.to_s
+        end
+
+        protected
+        def excluded_resource_arns
+          return nil unless excluded_resources
+          excluded_resources.map do |excluded_resource|
+            case excluded_resource
+            when :any    then "*"
+            else excluded_resource_arn(excluded_resource)
+            end
+          end
+        end
+
+        protected
+        def excluded_resource_arn excluded_resource
+          excluded_resource.to_s
         end
 
       end
