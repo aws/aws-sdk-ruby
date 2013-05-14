@@ -838,6 +838,9 @@ module AWS
       #   when the object being copied was client-side encrypted.  This
       #   is important so the encryption metadata will be copied.
       #
+      # @option options [Boolean] :use_multipart_copy (false) Set this to
+      #   `true` if you need to copy an object that is larger than 5GB.
+      #
       # @option options :cache_control [String] Can be used to specify
       #   caching behavior.  See
       #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
