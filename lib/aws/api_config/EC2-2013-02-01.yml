@@ -3777,7 +3777,7 @@
         - :boolean
         SubnetId:
         - :string
-        NetworkInterfaceSet:
+        NetworkInterface:
         - :list:
           - :structure:
               NetworkInterfaceId:
