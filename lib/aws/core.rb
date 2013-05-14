@@ -128,10 +128,6 @@ module AWS
   # @api private
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
-  SERVICES.each_pair do |klass,service|
-    autoload(klass, "aws/#{service[:ruby_name]}")
-  end
-
   autoload :Errors, 'aws/errors'
   autoload :Record, 'aws/record'
 
@@ -738,6 +734,11 @@ module AWS
         end
       end
     end
-
   end
+
+  SERVICES.each_pair do |klass,service|
+    autoload(klass, "aws/#{service[:ruby_name]}")
+    require "aws/#{service[:ruby_name]}/config"
+  end
+
 end
