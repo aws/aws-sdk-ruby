@@ -16,6 +16,16 @@
 :target_prefix: OpsWorks_20130218.
 :api_version: '2013-02-18'
 :operations:
+- :name: AttachElasticLoadBalancer
+  :method: :attach_elastic_load_balancer
+  :inputs:
+    ElasticLoadBalancerName:
+    - :string
+    - :required
+    LayerId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: CloneStack
   :method: :clone_stack
   :inputs:
@@ -68,6 +78,8 @@
     CloneAppIds:
     - :list:
       - :string
+    DefaultRootDeviceType:
+    - :string
   :outputs:
     StackId:
       :sym: :stack_id
@@ -78,6 +90,8 @@
     StackId:
     - :string
     - :required
+    Shortname:
+    - :string
     Name:
     - :string
     - :required
@@ -179,6 +193,10 @@
     SshKeyName:
     - :string
     AvailabilityZone:
+    - :string
+    Architecture:
+    - :string
+    RootDeviceType:
     - :string
   :outputs:
     InstanceId:
@@ -299,6 +317,8 @@
         - :string
     DefaultSshKeyName:
     - :string
+    DefaultRootDeviceType:
+    - :string
   :outputs:
     StackId:
       :sym: :stack_id
@@ -374,6 +394,9 @@
           :type: :string
         StackId:
           :sym: :stack_id
+          :type: :string
+        Shortname:
+          :sym: :shortname
           :type: :string
         Name:
           :sym: :name
@@ -562,14 +585,46 @@
         Region:
           :sym: :region
           :type: :string
+- :name: DescribeElasticLoadBalancers
+  :method: :describe_elastic_load_balancers
+  :inputs:
+    StackId:
+    - :string
+    LayerIds:
+    - :list:
+      - :string
+  :outputs:
+    ElasticLoadBalancers:
+      :sym: :elastic_load_balancers
+      :type: :hash
+      :members:
+        ElasticLoadBalancerName:
+          :sym: :elastic_load_balancer_name
+          :type: :string
+        Region:
+          :sym: :region
+          :type: :string
+        DnsName:
+          :sym: :dns_name
+          :type: :string
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        LayerId:
+          :sym: :layer_id
+          :type: :string
+        AvailabilityZones:
+          :sym: :availability_zones
+          :type: :string
+        Ec2InstanceIds:
+          :sym: :ec_2_instance_ids
+          :type: :string
 - :name: DescribeInstances
   :method: :describe_instances
   :inputs:
     StackId:
     - :string
     LayerId:
-    - :string
-    AppId:
     - :string
     InstanceIds:
     - :list:
@@ -644,6 +699,15 @@
           :type: :string
         LastServiceErrorId:
           :sym: :last_service_error_id
+          :type: :string
+        Architecture:
+          :sym: :architecture
+          :type: :string
+        RootDeviceType:
+          :sym: :root_device_type
+          :type: :string
+        RootDeviceVolumeId:
+          :sym: :root_device_volume_id
           :type: :string
 - :name: DescribeLayers
   :method: :describe_layers
@@ -994,6 +1058,9 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        DefaultRootDeviceType:
+          :sym: :default_root_device_type
+          :type: :string
 - :name: DescribeTimeBasedAutoScaling
   :method: :describe_time_based_auto_scaling
   :inputs:
@@ -1127,6 +1194,16 @@
         AvailabilityZone:
           :sym: :availability_zone
           :type: :string
+- :name: DetachElasticLoadBalancer
+  :method: :detach_elastic_load_balancer
+  :inputs:
+    ElasticLoadBalancerName:
+    - :string
+    - :required
+    LayerId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: GetHostnameSuggestion
   :method: :get_hostname_suggestion
   :inputs:
@@ -1344,6 +1421,8 @@
     - :string
     SshKeyName:
     - :string
+    Architecture:
+    - :string
   :outputs: {}
 - :name: UpdateLayer
   :method: :update_layer
@@ -1448,6 +1527,8 @@
         Revision:
         - :string
     DefaultSshKeyName:
+    - :string
+    DefaultRootDeviceType:
     - :string
   :outputs: {}
 - :name: UpdateUserProfile
