@@ -1,4 +1,120 @@
+2013-05-14 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/s3/high_level/multipart_copy.feature: Reformatted whitespace in
+  test scenario.
+
+  * features/s3/high_level/multipart_copy.feature,
+  features/s3/high_level/step_definitions/multipart_copy.rb: Renamed a test
+  step definition for clarity.
+
+  * features/s3/high_level/multipart_copy.feature,
+  features/s3/high_level/step_definitions/multipart_copy.rb,
+  lib/aws/s3/s3_object.rb: Added integration tests for multipart copy.
+
+  References #187
+
+  * lib/aws/api_config/EC2-2013-02-01.yml: Fixed an issue in
+  RequestSpotInstances
+
+  Fixes #248
+
+2013-05-13 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core.rb: Fixed an issue with service-specific configuration
+  options.
+
+  Resolved an issue where service-specific configuration options
+  where not getting defined until the service class was autoloaded.
+  For example:
+
+      require 'aws-sdk'
+      AWS.config(:dynamo_db_crc_32_check => false) # oops, wont apply
+
+      AWS::DynamoDB # autoload dynamo db service interface
+
+      AWS.config(:dynamo_db_crc_32_check => false) # now it works
+
+  All service configurations are loaded up front now.
+
+  References #243
+
+  * features/s3/high_level/step_definitions/urls.rb,
+  features/s3/high_level/urls.feature, lib/aws/s3/s3_object.rb: Added support
+  for :content_type and :content_md5 to AWS:S3::S3Object#url_for.
+
+  The S3 signature requries the content-md5 and content-type headers to be
+  signed.  The #url_for helper method previously did not accept these two
+  values and therefore was only good for requests where these values
+  were not specified.
+
+  You can now specify them like so:
+
+      s3.buckets['bucket-name'].objects['key'].url_for(:write, {
+        # both of these are optional
+        :content_type => 'text/plain',
+        :content_md5 => '...',
+      })
+
+  Fixes #207
+
+  * lib/aws/ec2/security_group.rb: Fixed documentation typo.
+2013-05-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/configuration.rb, spec/aws/core/configuration_spec.rb,
+  spec/spec_helper.rb: Added support for configuring region via
+  ENV['AWS_REGION'].
+
+  * lib/aws/s3/client.rb: Removed documentation for deprecated interface for
+  AWS::S3::Client#put_object.
+
+  * lib/aws/ec2.rb, lib/aws/ec2/instance.rb, lib/aws/s3.rb,
+  lib/aws/s3/s3_object.rb: Updated documentation examples to open files in
+  binary mode.
+
+2013-05-07 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/multipart_upload.rb, lib/aws/s3/uploaded_part.rb,
+  lib/aws/s3/uploaded_part_collection.rb,
+  spec/aws/s3/multipart_upload_spec.rb,
+  spec/aws/s3/uploaded_part_collection_spec.rb: Fixed an issue multipart
+  uploads to S3 > 5GB.
+
+  Resolved an issue where `AWS::S3::MultipartUpload#complete` would only
+  send the first 1k parts in the request to complete the upload.  This
+  only happened when the `:remote_parts` flag was set.
+
+  * lib/aws/dynamo_db/client_v2.rb: Reverted changed to DynamoDBV2 client.
+
+  * lib/aws/ec2/instance.rb: Added documentation for
+  AWS::EC2::Instance#source_dest_check.
+
+  * lib/aws/auto_scaling/client.rb, lib/aws/cloud_formation/client.rb,
+  lib/aws/cloud_front/client.rb, lib/aws/cloud_search/client.rb,
+  lib/aws/cloud_watch/client.rb, lib/aws/data_pipeline/client.rb,
+  lib/aws/direct_connect/client.rb, lib/aws/dynamo_db/client.rb,
+  lib/aws/dynamo_db/client_v2.rb, lib/aws/ec2/client.rb,
+  lib/aws/elastic_beanstalk/client.rb, lib/aws/elastic_transcoder/client.rb,
+  lib/aws/elasticache/client.rb, lib/aws/elb/client.rb, lib/aws/emr/client.rb,
+  lib/aws/glacier/client.rb, lib/aws/iam/client.rb,
+  lib/aws/import_export/client.rb, lib/aws/ops_works/client.rb,
+  lib/aws/rds/client.rb, lib/aws/redshift/client.rb,
+  lib/aws/route_53/client.rb, lib/aws/simple_db/client.rb,
+  lib/aws/simple_email_service/client.rb, lib/aws/simple_workflow/client.rb,
+  lib/aws/sns/client.rb, lib/aws/sqs/client.rb,
+  lib/aws/storage_gateway/client.rb, lib/aws/sts/client.rb: Corrected an issue
+  with markdown structure in docs.
+
+  The client response method were not getting formatted
+  because the bulleted list was not spaced or indented.
+  Added a blank line to each client method to correct this.
+
+2013-05-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/s3_object.rb: Fixed formatting for S3Object class-level docs.
+
 2013-05-01 Loren Segal <lsegal@amazon.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.9.5
 
   * lib/aws/support/client.rb: Fix documentation formatting
 
@@ -488,7 +604,13 @@
 
   References #172
 
-2013-04-11 Trevor Rowe <trevorrowe@gmail.com>
+2013-04-11 LeeGraber <lee@highspot.com>
+
+  * lib/aws/s3/s3_object.rb: forgot to remove debug statement
+
+  * lib/aws/s3/client.rb, lib/aws/s3/client/xml.rb, lib/aws/s3/config.rb,
+  lib/aws/s3/multipart_upload.rb, lib/aws/s3/s3_object.rb: Adjustments as per
+  feedback from AWS developer
 
   * lib/aws/s3/client.rb: Removed a bucket name validation from
   AWS::S3::Client#put_bucket_website.
@@ -873,6 +995,18 @@
 
   Fixes #215
   Fixes #192
+
+2013-04-03 LeeGraber <lee@highspot.com>
+
+  * lib/aws/s3/client.rb, lib/aws/s3/config.rb,
+  lib/aws/s3/multipart_upload.rb, lib/aws/s3/s3_object.rb: Added support for
+  copy on multipart_upload
+
+  as per
+  http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.ht
+  ml, this adds an explicit api on the multipart_upload object
+  (copy_part) as well as auto-detection and handling of file > 5GB for
+  copy method on an s3_object
 
 2013-03-26 Trevor Rowe <trevorrowe@gmail.com>
 
@@ -3036,6 +3170,18 @@
   * lib/aws/s3.rb: Fix S3 doc example
 
   There was a duplicate each in L101 that caused this code example to break.
+2012-12-29 Alessandro Diaferia <alediaferia@gmail.com>
+
+  * lib/aws/core/policy.rb: fix typo
+
+  * lib/aws/core/policy.rb: fix json generation
+
+  * lib/aws/core/policy.rb: fix alias
+
+  * lib/aws/core/policy.rb: fix NotResource case
+
+  * lib/aws/core/policy.rb: add support for excluded resources
+
 2012-12-21 Trevor Rowe <trevrowe@amazon.com>
 
   * lib/aws/data_pipeline/client.rb: Updated data pipeline documentation to
