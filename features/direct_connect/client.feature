@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@direct_connect @client @foo
+@direct_connect @client
 Feature: AWS Direct Connect Client
 
   Scenario: Describe Connections
