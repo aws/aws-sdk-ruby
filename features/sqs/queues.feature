@@ -63,6 +63,16 @@ Feature: SQS Queues
     | last_modified_timestamp |
     And the queue ARN should end with the queue name
 
+  Scenario: Set queue attributes should use a flattened map
+    Given I create a queue
+    And I set the "delay_seconds" attribute to 10
+    # notice the flattened map (no .entry.)
+    Then a request should have been made like:
+    | TYPE   | NAME              | VALUE              |
+    | param  | Action            | SetQueueAttributes |
+    | param  | Attribute.1.Name  | DelaySeconds       |
+    | param  | Attribute.1.Value | 10                 |
+
   Scenario: Set SQS message visibility timeout
     Given I create a queue
     When I set the queue's visibility timeout to 42
