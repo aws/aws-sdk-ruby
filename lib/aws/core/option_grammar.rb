@@ -393,8 +393,8 @@ module AWS
             key_option.param_name = members[:key_param] if members[:key_param]
             value_option.param_name = members[:value_param] if members[:value_param]
 
-            seperator = members[:flattened] ? '.' : '.entry.'
-            MetaUtils.extend_method(option, :seperator) { seperator }
+            separator = members[:flattened] ? '.' : '.entry.'
+            MetaUtils.extend_method(option, :separator) { separator }
 
           end
 
@@ -416,7 +416,7 @@ module AWS
             values.inject([]) do |params, (key,value)|
 
               index = params.size / 2 + 1
-              common_prefix = "#{prefixed_name(prefix)}#{seperator}#{index}."
+              common_prefix = "#{prefixed_name(prefix)}#{separator}#{index}."
 
               key_name = common_prefix + key_option.param_name
               value_name = common_prefix + value_option.param_name
