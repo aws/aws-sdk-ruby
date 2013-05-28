@@ -1,4 +1,42 @@
+2013-05-28 Alex Slynko <alex.slynko@wonga.com>
+
+  * lib/aws/ec2/instance_collection.rb: Fix example for instance collection to
+  correspond documentation
+
+2013-05-24 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/option_grammar.rb: Fixed a spelling error.
+
+2013-05-23 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/cloud_search/client.feature,
+  features/cloud_search/step_definitions/client.rb,
+  features/cloud_search/step_definitions/cloud_search.rb,
+  features/sqs/queues.feature, features/sqs/step_definitions/queues.rb,
+  lib/aws/api_config/SQS-2012-11-05.yml, lib/aws/core/option_grammar.rb: Added
+  support for non-flattened maps for query requests.
+
+  * features/direct_connect/client.feature: Removed a superfluous tag.
+
+2013-05-16 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/rds/request.rb: Moved AWS::RDS to signature version 4.
+
+2013-05-15 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.10.0
+
+  * lib/aws/api_config/ElasticTranscoder-2012-09-25.yml,
+  lib/aws/elastic_transcoder/client.rb: AWS Elastic Transcoder update.
+
 2013-05-14 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/api_config/OpsWorks-2013-02-18.yml, lib/aws/ops_works/client.rb:
+  Added support for ELBs to AWS::OpsWorks::Client
+
+  * lib/aws/api_config/DynamoDB-2012-08-10.yml,
+  lib/aws/dynamo_db/client_v2.rb: Added parallel scan to
+  AWS::DynamoDB::Client#scan
 
   * features/s3/high_level/multipart_copy.feature: Reformatted whitespace in
   test scenario.
