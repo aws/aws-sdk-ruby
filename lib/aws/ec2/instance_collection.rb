@@ -58,12 +58,13 @@ module AWS
       #
       #   ec2.instances.create({
       #     :image_id => "ami-8c1fece5",
-      #     :block_device_mappings => {
-      #       "/dev/sda2" => {
+      #     :block_device_mappings => [{
+      #       :device_name => "/dev/sda2",
+      #       :ebs => {
       #         :volume_size => 15, # 15 GiB
       #         :delete_on_termination => true
       #       }
-      #     }
+      #     }]
       #   })
       #
       # @example Launching in an Amazon VPC subnet
