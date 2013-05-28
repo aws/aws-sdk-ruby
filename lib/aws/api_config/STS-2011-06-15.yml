@@ -40,6 +40,35 @@
                 :type: :time
           PackedPolicySize:
             :type: :integer
+- :name: AssumeRoleWithWebIdentity
+  :method: :assume_role_with_web_identity
+  :inputs:
+    RoleArn:
+    - :string
+    - :required
+    RoleSessionName:
+    - :string
+    - :required
+    WebIdentityToken:
+    - :string
+    - :required
+    ProviderId:
+    - :string
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      AssumeRoleWithWebIdentityResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
 - :name: GetFederationToken
   :method: :get_federation_token
   :inputs:

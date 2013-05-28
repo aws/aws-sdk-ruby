@@ -41,15 +41,12 @@ module AWS
       #   * `:role_session_name` - *required* - (String) An identifier for the
       #     assumed role session. The session name is included as part of the
       #     AssumedRoleUser.
-      #   * `:policy` - (String) A supplemental policy that can be associated
-      #     with the temporary security credentials. The caller can restrict
-      #     the permissions that are available on the role's temporary security
-      #     credentials to maintain the least amount of privileges. When a
-      #     service call is made with the temporary security credentials, both
-      #     the role's permission policy and supplemental policy are checked.
-      #     For more information about how permissions work in the context of
-      #     temporary credentials, see Controlling Permissions in Temporary
-      #     Credentials.
+      #   * `:policy` - (String) A supplemental policy that is associated with
+      #     the temporary security credentials from the AssumeRole call. The
+      #     resulting permissions of the temporary security credentials are an
+      #     intersection of this policy and the policy that is associated with
+      #     the role. Use this policy to further restrict the permissions of
+      #     the temporary security credentials.
       #   * `:duration_seconds` - (Integer) The duration, in seconds, of the
       #     role session. The value can range from 900 seconds (15 minutes) to
       #     3600 seconds (1 hour). By default, the value is set to 3600 seconds
@@ -77,18 +74,71 @@ module AWS
       #     * `:arn` - (String)
       #   * `:packed_policy_size` - (Integer)
 
+      # @!method assume_role_with_web_identity(options = {})
+      # Calls the AssumeRoleWithWebIdentity API operation.
+      # @param [Hash] options
+      #   * `:role_arn` - *required* - (String) The Amazon Resource Name (ARN)
+      #     of the role that the caller is assuming.
+      #   * `:role_session_name` - *required* - (String) An identifier for the
+      #     assumed role session. Typically, you pass the name or identifier
+      #     that is associated with the user who is using your application.
+      #     That way, the temporary security credentials that your application
+      #     will use are associated with that user. This session name is
+      #     included as part of the ARN and assumed role ID in the
+      #     AssumedRoleUser response element.
+      #   * `:web_identity_token` - *required* - (String) The OAuth 2.0 access
+      #     token or OpenID Connect id token that is provided by the identity
+      #     provider. Your application must get this token by authenticating
+      #     the user who is using your application with a web identity provider
+      #     before the application makes an AssumeRoleWithWebIdentity call.
+      #   * `:provider_id` - (String) The fully-qualified host component of the
+      #     domain name of the identity provider. Do not include URL schemes
+      #     and port numbers. Specify this value only for OAuth access tokens.
+      #     Currently, www.amazon.com and graph.facebook.com are supported. Do
+      #     not specify this value for OpenID Connect id tokens, such as
+      #     accounts.google.com.
+      #   * `:policy` - (String) A supplemental policy that is associated with
+      #     the temporary security credentials from the
+      #     AssumeRoleWithWebIdentity call. The resulting permissions of the
+      #     temporary security credentials are an intersection of this policy
+      #     and the policy that is associated with the role. Use this policy to
+      #     further restrict the permissions of the temporary security
+      #     credentials.
+      #   * `:duration_seconds` - (Integer) The duration, in seconds, of the
+      #     role session. The value can range from 900 seconds (15 minutes) to
+      #     3600 seconds (1 hour). By default, the value is set to 3600 seconds
+      #     (1 hour).
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #
+      #   * `:credentials` - (Hash)
+      #     * `:access_key_id` - (String)
+      #     * `:secret_access_key` - (String)
+      #     * `:session_token` - (String)
+      #     * `:expiration` - (Time)
+      #   * `:subject_from_web_identity_token` - (String)
+      #   * `:assumed_role_user` - (Hash)
+      #     * `:assumed_role_id` - (String)
+      #     * `:arn` - (String)
+      #   * `:packed_policy_size` - (Integer)
+
       # @!method get_federation_token(options = {})
       # Calls the GetFederationToken API operation.
       # @param [Hash] options
-      #   * `:name` - *required* - (String) The name of the federated user
-      #     associated with the credentials. For information about limitations
-      #     on user names, go to Limitations on IAM Entities in Using IAM.
-      #   * `:policy` - (String) A policy specifying the permissions to
-      #     associate with the credentials. The caller can delegate their own
-      #     permissions by specifying a policy, and both policies will be
-      #     checked when a service call is made. For more information about how
-      #     permissions work in the context of temporary credentials, see
-      #     Controlling Permissions in Temporary Credentials in Using IAM.
+      #   * `:name` - *required* - (String) The name of the federated user. The
+      #     name is used as an identifier for the temporary security
+      #     credentials (such as Bob). For example, you can reference the
+      #     federated user name in a resource-based policy, such as in an
+      #     Amazon S3 bucket policy.
+      #   * `:policy` - (String) A policy that specifies the permissions that
+      #     are granted to the federated user. By default, federated users have
+      #     no permissions; they do not inherit any from the IAM user. When you
+      #     specify a policy, the federated user's permissions are intersection
+      #     of the specified policy and the IAM user's policy. If you don't
+      #     specify a policy, federated users can only access AWS resources
+      #     that explicitly allow those federated users in a resource policy,
+      #     such as in an Amazon S3 bucket policy.
       #   * `:duration_seconds` - (Integer) The duration, in seconds, that the
       #     session should last. Acceptable durations for federation sessions
       #     range from 900s (15 minutes) to 129600s (36 hours), with 43200s (12
@@ -121,26 +171,20 @@ module AWS
       #     longer than one hour, the session for AWS account owners defaults
       #     to one hour.
       #   * `:serial_number` - (String) The identification number of the MFA
-      #     device for the user. If the IAM user has a policy requiring MFA
-      #     authentication (or is in a group requiring MFA authentication) to
-      #     access resources, provide the device value here.The value is in the
-      #     Security Credentials tab of the user's details pane in the IAM
-      #     console. If the IAM user has an active MFA device, the details pane
-      #     displays a Multi-Factor Authentication Device value. The value is
-      #     either for a virtual device, such as
-      #     arn:aws:iam::123456789012:mfa/user, or it is the device serial
-      #     number for a hardware device (usually the number from the back of
-      #     the device), such as GAHT12345678. For more information, see Using
-      #     Multi-Factor Authentication (MFA) Devices with AWS in Using IAM.
+      #     device that is associated with the IAM user who is making the
+      #     GetSessionToken call. Specify this value if the IAM user has a
+      #     policy that requires MFA authentication. The value is either the
+      #     serial number for a hardware device (such as GAHT12345678) or an
+      #     Amazon Resource Name (ARN) for a virtual device (such as
+      #     arn:aws:iam::123456789012:mfa/user). You can find the device for an
+      #     IAM user by going to the AWS Management Console and viewing the
+      #     user's security credentials.
       #   * `:token_code` - (String) The value provided by the MFA device. If
-      #     the user has an access policy requiring an MFA code (or is in a
-      #     group requiring an MFA code), provide the value here to get
-      #     permission to resources as specified in the access policy. If MFA
-      #     authentication is required, and the user does not provide a code
-      #     when requesting a set of temporary security credentials, the user
-      #     will receive an "access denied" response when requesting resources
-      #     that require MFA authentication. For more information, see Using
-      #     Multi-Factor Authentication (MFA) Devices with AWS in Using IAM.
+      #     any policy requires the IAM user to submit an MFA code, specify
+      #     this value. If MFA authentication is required, and the user does
+      #     not provide a code when requesting a set of temporary security
+      #     credentials, the user will receive an "access denied" response when
+      #     requesting resources that require MFA authentication.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
