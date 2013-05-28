@@ -134,6 +134,10 @@ module AWS
       #   An {InternetGateway} object or an internet gateway id string to
       #   attach the route to.
       #
+      # @option options [VPNGateway,String] :vpn_gateway
+      #   An {VPNGateway} object or an virtual private gateway id string to
+      #   attach the route to.
+      #
       # @option options [Instance,String] :instance An {Instance} object
       #   or instance id string to attach the route to.
       #
@@ -183,6 +187,9 @@ module AWS
 
         if gateway = options[:internet_gateway]
           gateway = gateway.id if gateway.is_a?(InternetGateway)
+          client_opts[:gateway_id] = gateway
+        else gateway = options[:vpn_gateway]
+          gateway = gateway.id if gateway.is_a?(VPNGateway)
           client_opts[:gateway_id] = gateway
         end
 
