@@ -52,8 +52,8 @@ module AWS
       # @return [Domain] The domain this task was scheduled in.
       attr_reader :domain
 
-      # @return [Integer] The id of the ActivityTaskStarted event recorded
-      #   in the history.
+      # @return [Integer]
+      #   The id of the {ActivityTaskStarted} event recorded in the history.
       attr_reader :started_event_id
 
       # @return [String,nil] The input provided when the activity task was
@@ -152,6 +152,18 @@ module AWS
         !!@responded
       end
 
+      # Responds to one of the `respond_activity_task_` methods with a set of options. This method is called when any
+      # of the {#complete!}, {#cancel!}, or {#fail!} methods is invoked.
+      #
+      # @note Only one response can be logged per `ActivityTask` instance; If this task has already logged a response,
+      #   `respond` will raise an exception.
+      #
+      # @param [String] status
+      #   The status of the response: "canceled", "completed", or "failed".
+      #
+      # @param [Hash] options
+      #   Options to provide to the respond_activity_task function that will be called.
+      #
       protected
       def respond status, options
         raise "already responded" if responded?
