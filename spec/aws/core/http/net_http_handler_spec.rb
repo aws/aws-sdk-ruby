@@ -137,7 +137,7 @@ module AWS::Core::Http
         http_request = double('http-request')
 
         Net::HTTP::Get.should_receive(:new).
-          with(request.uri, request.headers.merge('content-type' => '')).
+          with(request.uri, request.headers.merge('content-type' => '', 'accept-encoding' => '')).
           and_return(http_request)
 
         http_request.should_receive(:body_stream=).with(request.body_stream)
