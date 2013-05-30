@@ -63,7 +63,8 @@ module AWS
     #
     # @attr_reader [String,nil] session_token (nil) AWS secret token credential.
     #
-    # @attr_reader [String] :region ('us-east-1') The default AWS region.
+    # @attr_reader [String] region
+    #   The AWS region used for requests. The default is `us-east-1`.
     #
     # @attr_reader [Boolean] dynamo_db_big_decimals (true) When `true`,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
