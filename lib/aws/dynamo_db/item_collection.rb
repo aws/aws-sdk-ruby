@@ -730,11 +730,9 @@ module AWS
           :comparison_operator => range_op
         } if range_op
 
-        if select = options.delete(:select)
+        if select = options.delete(:select) || options.delete(:attributes_to_get)
           options[:item_data] = true
-          options[:attributes_to_get] = select.map do |att|
-            att.to_s
-          end unless select == :all
+          options[:attributes_to_get] = select.map(&:to_s) unless select == :all
         end
 
         if block
