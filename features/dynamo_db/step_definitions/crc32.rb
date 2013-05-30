@@ -64,7 +64,7 @@ Then /^the request should fail with a CRC checking error$/ do
 end
 
 Given /^I have a large item "(.*?)" in the table$/ do |item|
-  @item = @table.items.put({:id => item, :data => "DATA" * 4000})
+  @item = @table.items.put({:id => item, :data => "DATA" * 10000})
 end
 
 And /^I get the attribute "(.*?)" from the key "(.*?)"$/ do |attribute, item|

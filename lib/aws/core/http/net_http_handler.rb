@@ -88,10 +88,15 @@ module AWS
         # @return [Net::HTTPRequest]
         def build_net_http_request request
 
-          # Net::HTTP adds a content-type header automatically unless its set
-          # and this messes with request signature signing.  Also, it expects
-          # all header values to be strings (it call strip on them).
-          headers = { 'content-type' => '' }
+          # Net::HTTP adds a content-type (1.8.7+) and accept-encoding (2.0.0+)
+          # to the request if these headers are not set.  Setting a default
+          # empty value defeats this.
+          #
+          # Removing these are necessary for most services to no break request
+          # signatures as well as dynamodb crc32 checks (these fail if the
+          # response is gzipped).
+          headers = { 'content-type' => '', 'accept-encoding' => '' }
+
           request.headers.each_pair do |key,value|
             headers[key] = value.to_s
           end
