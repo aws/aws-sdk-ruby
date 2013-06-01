@@ -130,6 +130,21 @@ module AWS
             end
           end
 
+          # The enveloped encryption uses a 256bit key, using a 128bit key to
+          # encrypt the 256bit key could lead to halving the strength of the
+          # 256bit key (due to properties of ECB).
+          context 'with a key shorter than 256 bits' do
+
+            it 'should warn that the encryption will be unsafe' do
+              object.should_receive(:warn).
+                  with("Unsafe encryption, data is longer than key length")
+
+              object.write("HELLO",
+                           :encryption_key => "YELLOW SUBMARINE") # 128bit key
+            end
+            
+          end
+
           context 'with incorrect arguments' do
 
             it 'should call put_object with  an invalid length symmetric key' do
