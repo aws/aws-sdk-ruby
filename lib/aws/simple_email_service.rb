@@ -342,7 +342,8 @@ module AWS
       end
       send_opts[:destinations] = [options[:to]].flatten if options[:to]
 
-      client.send_raw_email(send_opts)
+      response = client.send_raw_email(send_opts)
+      raw_message.message_id = response.data[:message_id]
       nil
 
     end
