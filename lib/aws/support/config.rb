@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'Support', 'support', 'support.%s.amazonaws.com'
+  add_service 'Support', 'support', 'support.us-east-1.amazonaws.com'
 
 end
