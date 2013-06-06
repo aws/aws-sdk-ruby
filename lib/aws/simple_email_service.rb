@@ -353,6 +353,7 @@ module AWS
     # for compatability with ActionMailer
     alias_method :deliver, :send_raw_email
     alias_method :deliver!, :send_raw_email
+    def settings; {}; end
 
     # @example
     #
