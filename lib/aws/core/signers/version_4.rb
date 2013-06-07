@@ -21,9 +21,14 @@ module AWS
       # @api private
       class Version4
 
+        autoload :ChunkSignedStream, 'aws/core/signers/version_4/chunk_signed_stream'
+
         # @api private
         # SHA256 hex digest of the empty string
         EMPTY_DIGEST = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+
+        # @api private
+        STREAMING_CHECKSUM = "STREAMING-AWS4-HMAC-SHA256-PAYLOAD"
 
         # @param [CredentialProviders::Provider] credentials
         # @param [String] service_name
@@ -44,39 +49,80 @@ module AWS
         attr_reader :region
 
         # @param [Http::Request] req
+        # @option options [Boolean] :chunk_signing (false) When +true+, the
+        #   request body will be signed in chunk.
+        # @option options [DateTime String<YYYYMMDDTHHMMSSZ>] :datetime
         # @return [Http::Request]
-        def sign_request req
-          datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+        def sign_request req, options = {}
+          datetime = options[:datetime] || Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+          key = derive_key(datetime)
+          token = credentials.session_token
+          chunk_signing = !!options[:chunk_signing]
+
           req.headers['host'] = req.host
           req.headers['x-amz-date'] = datetime
-          req.headers['x-amz-security-token'] = credentials.session_token if
-            credentials.session_token
-          req.headers['x-amz-content-sha256'] ||= body_digest(req)
-          req.headers['authorization'] = authorization(req, datetime)
+          req.headers['x-amz-security-token'] = token if token
+          req.headers['x-amz-content-sha256'] ||= body_digest(req, chunk_signing)
+
+          if chunk_signing
+            orig_size = req.headers['content-length'].to_i
+            signed_size = ChunkSignedStream.signed_size(orig_size.to_i)
+            req.headers['content-length'] = signed_size.to_s
+            req.headers['x-amz-decoded-content-length'] = orig_size.to_s
+          end
+
+          req.headers['authorization'] = authorization(req, key)
+          req.body_stream = chunk_signed_stream(req, key) if chunk_signing
           req
         end
 
         private
 
+        # Wraps the req body stream with another stream.  The wrapper signs
+        # the original body as it is read, injecting signatures of indiviaul
+        # chunks into the resultant stream.
         # @param [Http::Request] req
+        # @param [String] key
         # @param [String] datetime
-        def authorization req, datetime
-          parts = []
-          parts << "AWS4-HMAC-SHA256 Credential=#{credentials.access_key_id}/#{credential_string(datetime)}"
-          parts << "SignedHeaders=#{signed_headers(req)}"
-          parts << "Signature=#{signature(req, datetime)}"
-          parts.join(', ')
+        def chunk_signed_stream req, key
+          args = []
+          args << req.body_stream
+          args << req.headers['x-amz-decoded-content-length'].to_i
+          args << key
+          args << key_path(req.headers['x-amz-date'])
+          args << req.headers['x-amz-date']
+          args << req.headers['authorization'].split('Signature=')[1]
+          ChunkSignedStream.new(*args)
         end
 
         # @param [Http::Request] req
         # @param [String] datetime
-        def signature req, datetime
+        # @param [String] key
+        def authorization req, key
+          datetime = req.headers['x-amz-date']
+          akid = credentials.access_key_id
+          parts = []
+          parts << "AWS4-HMAC-SHA256 Credential=#{akid}/#{key_path(datetime)}"
+          parts << "SignedHeaders=#{signed_headers(req)}"
+          parts << "Signature=#{signature(req, key, datetime)}"
+          parts.join(', ')
+        end
+
+        # @param [String] datetime The year month day digits of the request time.
+        # @return [String]
+        def derive_key datetime
           k_secret = credentials.secret_access_key
           k_date = hmac("AWS4" + k_secret, datetime[0,8])
           k_region = hmac(k_date, region)
           k_service = hmac(k_region, service_name)
           k_credentials = hmac(k_service, 'aws4_request')
-          hexhmac(k_credentials, string_to_sign(req, datetime))
+        end
+
+        # @param [Http::Request] req
+        # @param [String] key
+        # @param [String] datetime
+        def signature req, key, datetime
+          hexhmac(key, string_to_sign(req, datetime))
         end
 
         # @param [Http::Request] req
@@ -85,13 +131,14 @@ module AWS
           parts = []
           parts << 'AWS4-HMAC-SHA256'
           parts << datetime
-          parts << credential_string(datetime)
+          parts << key_path(datetime)
           parts << hexdigest(canonical_request(req))
           parts.join("\n")
         end
 
         # @param [String] datetime
-        def credential_string datetime
+        # @return [String] the signature scope.
+        def key_path datetime
           parts = []
           parts << datetime[0,8]
           parts << region
@@ -136,12 +183,13 @@ module AWS
         end
 
         # @param [Http::Request] req
+        # @param [Boolean] chunk_signing
         # @return [String]
-        def body_digest req
-          if ['', nil].include?(req.body)
-            EMPTY_DIGEST
-          else
-            hexdigest(req.body)
+        def body_digest req, chunk_signing
+          case
+          when chunk_signing then STREAMING_CHECKSUM
+          when ['', nil].include?(req.body) then EMPTY_DIGEST
+          else hexdigest(req.body)
           end
         end
 

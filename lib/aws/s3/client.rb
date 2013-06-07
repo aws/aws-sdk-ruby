@@ -50,23 +50,18 @@ module AWS
       # @param [Core::Http::Request] request
       # @api private
       def sign_request request
-        signer_for(request).sign_request(request)
-        creds = credential_provider
+        # When using the "classic" region ('s3.amazonaws.com') it is not possible
+        # to know what region the bucket may be in.  Since the region is
+        # required to generate a version 4 signature, we will fall back to
+        # the older v3 signer.
+        if @region == 'us-east-1'
+          v3_signer.sign_request(request)
+        else
+          v4_signer.sign_request(request, :chunk_signing => chunk_sign?(request))
+        end
       end
 
       protected
-
-      def signer_for request
-        if
-          @region == 'us-east-1' and # classic region
-          request.bucket and
-          dns_compatible_bucket_name?(request.bucket)
-        then
-          v3_signer
-        else
-          v4_signer
-        end
-      end
 
       # @return [Core::Signers::S3]
       def v3_signer
@@ -78,6 +73,13 @@ module AWS
         @v4_signer ||= begin
           Core::Signers::Version4.new(credential_provider, 's3', @region)
         end
+      end
+
+      # @param [Http::Request] req
+      # @return [Boolean]
+      def chunk_sign? req
+        req.http_method == 'PUT' &&
+        req.headers['content-length'].to_i > 2 * 1024 * 1024 # 2MB
       end
 
       def self.bucket_method(method_name, verb, *args, &block)
