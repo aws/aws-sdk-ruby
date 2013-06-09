@@ -3,6 +3,8 @@
   * aws-sdk.gemspec: Updated nokogiri dependency (< 1.6) so we can continue to
   support Ruby 1.8.7
 
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.11.1
+
 2013-06-04 James Smith <james@loopj.com>
 
   * lib/aws/simple_email_service.rb: Add compatibility with deliver!
