@@ -486,8 +486,8 @@ module AWS
       #
       # You can also set an optional delay for all of the messages:
       #
-      #     # delay all messages 1 hour
-      #     queue.batch_send(msg1, msg2, :delay_seconds => 3600)
+      #     # delay all messages 15 minutes
+      #     queue.batch_send(msg1, msg2, :delay_seconds => 900)
       #
       # If you need to set a custom delay for each message you can pass
       # hashes:
