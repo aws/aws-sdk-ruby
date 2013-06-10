@@ -30,6 +30,7 @@ module AWS
       # @!method delete_alarms(options = {})
       # Calls the DeleteAlarms API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_names` - *required* - (Array<String>) A list of alarms to
       #     be deleted.
       # @return [Core::Response]
@@ -37,6 +38,7 @@ module AWS
       # @!method describe_alarm_history(options = {})
       # Calls the DescribeAlarmHistory API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_name` - (String) The name of the alarm.
       #   * `:history_item_type` - (String) The type of alarm histories to
       #     retrieve. Valid values include:
@@ -66,6 +68,7 @@ module AWS
       # @!method describe_alarms(options = {})
       # Calls the DescribeAlarms API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_names` - (Array<String>) A list of alarm names to retrieve
       #     information for.
       #   * `:alarm_name_prefix` - (String) The alarm name prefix. AlarmNames
@@ -113,6 +116,7 @@ module AWS
       # @!method describe_alarms_for_metric(options = {})
       # Calls the DescribeAlarmsForMetric API operation.
       # @param [Hash] options
+      #
       #   * `:metric_name` - *required* - (String) The name of the metric.
       #   * `:namespace` - *required* - (String) The namespace of the metric.
       #   * `:statistic` - (String) The statistic for the metric. Valid values
@@ -189,6 +193,7 @@ module AWS
       # @!method disable_alarm_actions(options = {})
       # Calls the DisableAlarmActions API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_names` - *required* - (Array<String>) The names of the
       #     alarms to disable actions for.
       # @return [Core::Response]
@@ -196,6 +201,7 @@ module AWS
       # @!method enable_alarm_actions(options = {})
       # Calls the EnableAlarmActions API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_names` - *required* - (Array<String>) The names of the
       #     alarms to enable actions for.
       # @return [Core::Response]
@@ -203,6 +209,7 @@ module AWS
       # @!method get_metric_statistics(options = {})
       # Calls the GetMetricStatistics API operation.
       # @param [Hash] options
+      #
       #   * `:namespace` - *required* - (String) The namespace of the metric.
       #   * `:metric_name` - *required* - (String) The name of the metric.
       #   * `:dimensions` - (Array<Hash>) A list of dimensions describing
@@ -272,6 +279,7 @@ module AWS
       # @!method list_metrics(options = {})
       # Calls the ListMetrics API operation.
       # @param [Hash] options
+      #
       #   * `:namespace` - (String) The namespace to filter against.
       #   * `:metric_name` - (String) The name of the metric to filter against.
       #   * `:dimensions` - (Array<Hash>) A list of dimensions to filter
@@ -297,6 +305,7 @@ module AWS
       # @!method put_metric_alarm(options = {})
       # Calls the PutMetricAlarm API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_name` - *required* - (String) The descriptive name for the
       #     alarm. This name must be unique within the user's AWS account
       #   * `:alarm_description` - (String) The description for the alarm.
@@ -381,6 +390,7 @@ module AWS
       # @!method put_metric_data(options = {})
       # Calls the PutMetricData API operation.
       # @param [Hash] options
+      #
       #   * `:namespace` - *required* - (String) The namespace for the metric
       #     data.
       #   * `:metric_data` - *required* - (Array<Hash>) A list of data
@@ -443,6 +453,7 @@ module AWS
       # @!method set_alarm_state(options = {})
       # Calls the SetAlarmState API operation.
       # @param [Hash] options
+      #
       #   * `:alarm_name` - *required* - (String) The descriptive name for the
       #     alarm. This name must be unique within the user's AWS account. The
       #     maximum length is 255 characters.

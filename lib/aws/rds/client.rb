@@ -25,6 +25,7 @@ module AWS
       # @!method add_source_identifier_to_subscription(options = {})
       # Calls the AddSourceIdentifierToSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - *required* - (String) The name of the RDS
       #     event notification subscription you want to add a source identifier
       #     to.
@@ -55,6 +56,7 @@ module AWS
       # @!method add_tags_to_resource(options = {})
       # Calls the AddTagsToResource API operation.
       # @param [Hash] options
+      #
       #   * `:resource_name` - *required* - (String) The DB Instance the tags
       #     will be added to.
       #   * `:tags` - *required* - (Array<Hash>) The tags to be assigned to the
@@ -76,6 +78,7 @@ module AWS
       # @!method authorize_db_security_group_ingress(options = {})
       # Calls the AuthorizeDBSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:db_security_group_name` - *required* - (String) The name of the
       #     DB Security Group to authorize.
       #   * `:cidrip` - (String) The IP range to authorize.
@@ -108,6 +111,7 @@ module AWS
       # @!method copy_db_snapshot(options = {})
       # Calls the CopyDBSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:source_db_snapshot_identifier` - *required* - (String) The
       #     identifier for the source DB snapshot. Constraints: Must be the
       #     identifier for a valid automated snapshot in the "available" state.
@@ -141,6 +145,7 @@ module AWS
       # @!method create_db_instance(options = {})
       # Calls the CreateDBInstance API operation.
       # @param [Hash] options
+      #
       #   * `:db_name` - (String) The name of the database to create when the
       #     DB Instance is created. If this parameter is not specified, no
       #     database is created in the DB Instance.
@@ -280,6 +285,7 @@ module AWS
       # @!method create_db_instance_read_replica(options = {})
       # Calls the CreateDBInstanceReadReplica API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
       #     identifier of the Read Replica. This is the unique key that
       #     identifies a DB Instance. This parameter is stored as a lowercase
@@ -390,6 +396,7 @@ module AWS
       # @!method create_db_parameter_group(options = {})
       # Calls the CreateDBParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - *required* - (String) The name of the
       #     DB Parameter Group.
       #   * `:db_parameter_group_family` - *required* - (String) The name of
@@ -408,6 +415,7 @@ module AWS
       # @!method create_db_security_group(options = {})
       # Calls the CreateDBSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_security_group_name` - *required* - (String) The name for the
       #     DB Security Group. This value is stored as a lowercase string.
       #   * `:db_security_group_description` - *required* - (String) The
@@ -432,6 +440,7 @@ module AWS
       # @!method create_db_snapshot(options = {})
       # Calls the CreateDBSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:db_snapshot_identifier` - *required* - (String) The identifier
       #     for the DB Snapshot.
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
@@ -461,6 +470,7 @@ module AWS
       # @!method create_db_subnet_group(options = {})
       # Calls the CreateDBSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_subnet_group_name` - *required* - (String) The name for the DB
       #     Subnet Group. This value is stored as a lowercase string.
       #     Constraints: Must contain no more than 255 alphanumeric characters
@@ -487,6 +497,7 @@ module AWS
       # @!method create_event_subscription(options = {})
       # Calls the CreateEventSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - *required* - (String) The name of the
       #     subscription. Constraints: The name must be less than 255
       #     characters.
@@ -536,6 +547,7 @@ module AWS
       # @!method create_option_group(options = {})
       # Calls the CreateOptionGroup API operation.
       # @param [Hash] options
+      #
       #   * `:option_group_name` - *required* - (String) Specifies the name of
       #     the option group to be created. Constraints: Must be 1 to 255
       #     alphanumeric characters or hyphens First character must be a letter
@@ -583,6 +595,7 @@ module AWS
       # @!method delete_db_instance(options = {})
       # Calls the DeleteDBInstance API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
       #     identifier for the DB Instance to be deleted. This parameter isn't
       #     case sensitive.
@@ -658,6 +671,7 @@ module AWS
       # @!method delete_db_parameter_group(options = {})
       # Calls the DeleteDBParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - *required* - (String) The name of the
       #     DB Parameter Group. The specified database security group must not
       #     be associated with any DB instances.
@@ -666,6 +680,7 @@ module AWS
       # @!method delete_db_security_group(options = {})
       # Calls the DeleteDBSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_security_group_name` - *required* - (String) The name of the
       #     database security group to delete.
       # @return [Core::Response]
@@ -673,6 +688,7 @@ module AWS
       # @!method delete_db_snapshot(options = {})
       # Calls the DeleteDBSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:db_snapshot_identifier` - *required* - (String) The DBSnapshot
       #     identifier.
       # @return [Core::Response]
@@ -699,6 +715,7 @@ module AWS
       # @!method delete_db_subnet_group(options = {})
       # Calls the DeleteDBSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_subnet_group_name` - *required* - (String) The name of the
       #     database subnet group to delete. You cannot delete the default
       #     subnet group. Constraints: Must be 1 to 255 alphanumeric characters
@@ -709,6 +726,7 @@ module AWS
       # @!method delete_event_subscription(options = {})
       # Calls the DeleteEventSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - *required* - (String) The name of the RDS
       #     event notification subscription you want to delete.
       # @return [Core::Response]
@@ -728,6 +746,7 @@ module AWS
       # @!method delete_option_group(options = {})
       # Calls the DeleteOptionGroup API operation.
       # @param [Hash] options
+      #
       #   * `:option_group_name` - *required* - (String) The name of the option
       #     group to be deleted. You cannot delete default Option Groups.
       # @return [Core::Response]
@@ -735,6 +754,7 @@ module AWS
       # @!method describe_db_engine_versions(options = {})
       # Calls the DescribeDBEngineVersions API operation.
       # @param [Hash] options
+      #
       #   * `:engine` - (String) The database engine to return.
       #   * `:engine_version` - (String) The database engine version to return.
       #   * `:db_parameter_group_family` - (String) The name of a specific
@@ -777,6 +797,7 @@ module AWS
       # @!method describe_db_instances(options = {})
       # Calls the DescribeDBInstances API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - (String) The user-supplied instance
       #     identifier. If this parameter is specified, information from only
       #     the specific DB Instance is returned. This parameter isn't case
@@ -858,6 +879,7 @@ module AWS
       # @!method describe_db_log_files(options = {})
       # Calls the DescribeDBLogFiles API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - (String) The customer-assigned name of
       #     the DB Instance that contains the log files you want to list.
       #     Constraints: Must contain from 1 to 63 alphanumeric characters or
@@ -889,6 +911,7 @@ module AWS
       # @!method describe_db_parameter_groups(options = {})
       # Calls the DescribeDBParameterGroups API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - (String) The name of a specific
       #     database parameter group to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -912,6 +935,7 @@ module AWS
       # @!method describe_db_parameters(options = {})
       # Calls the DescribeDBParameters API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - *required* - (String) The name of a
       #     specific database parameter group to return details for.
       #   * `:source` - (String) The parameter types to return.
@@ -943,6 +967,7 @@ module AWS
       # @!method describe_db_security_groups(options = {})
       # Calls the DescribeDBSecurityGroups API operation.
       # @param [Hash] options
+      #
       #   * `:db_security_group_name` - (String) The name of the DB Security
       #     Group to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -975,6 +1000,7 @@ module AWS
       # @!method describe_db_snapshots(options = {})
       # Calls the DescribeDBSnapshots API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - (String) The unique identifier for the
       #     Amazon RDS DB snapshot. This value is stored as a lowercase string.
       #   * `:db_snapshot_identifier` - (String) The DB Instance identifier.
@@ -1016,6 +1042,7 @@ module AWS
       # @!method describe_db_subnet_groups(options = {})
       # Calls the DescribeDBSubnetGroups API operation.
       # @param [Hash] options
+      #
       #   * `:db_subnet_group_name` - (String) The name of the DB Subnet Group
       #     to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -1047,6 +1074,7 @@ module AWS
       # @!method describe_engine_default_parameters(options = {})
       # Calls the DescribeEngineDefaultParameters API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_family` - *required* - (String) The name of
       #     the DB Parameter Group Family.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -1078,6 +1106,7 @@ module AWS
       # @!method describe_event_categories(options = {})
       # Calls the DescribeEventCategories API operation.
       # @param [Hash] options
+      #
       #   * `:source_type` - (String) The type of source that will be
       #     generating the events. Valid values: db-instance |
       #     db-parameter-group | db-security-group | db-snapshot
@@ -1092,6 +1121,7 @@ module AWS
       # @!method describe_event_subscriptions(options = {})
       # Calls the DescribeEventSubscriptions API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - (String) The name of the RDS event
       #     notification subscription you want to describe.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -1122,6 +1152,7 @@ module AWS
       # @!method describe_events(options = {})
       # Calls the DescribeEvents API operation.
       # @param [Hash] options
+      #
       #   * `:source_identifier` - (String) The identifier of the event source
       #     for which events will be returned. If not specified, then all
       #     sources are included in the response.
@@ -1164,6 +1195,7 @@ module AWS
       # @!method describe_option_group_options(options = {})
       # Calls the DescribeOptionGroupOptions API operation.
       # @param [Hash] options
+      #
       #   * `:engine_name` - *required* - (String) A required parameter.
       #     Options available for the given Engine name will be described.
       #   * `:major_engine_version` - (String) If specified, filters the
@@ -1204,6 +1236,7 @@ module AWS
       # @!method describe_option_groups(options = {})
       # Calls the DescribeOptionGroups API operation.
       # @param [Hash] options
+      #
       #   * `:option_group_name` - (String) The name of the option group to
       #     describe. Cannot be supplied together with EngineName or
       #     MajorEngineVersion.
@@ -1259,6 +1292,7 @@ module AWS
       # @!method describe_orderable_db_instance_options(options = {})
       # Calls the DescribeOrderableDBInstanceOptions API operation.
       # @param [Hash] options
+      #
       #   * `:engine` - *required* - (String) The name of the engine to
       #     retrieve DB Instance options for.
       #   * `:engine_version` - (String) The engine version filter value.
@@ -1301,6 +1335,7 @@ module AWS
       # @!method describe_reserved_db_instances(options = {})
       # Calls the DescribeReservedDBInstances API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_db_instance_id` - (String) The reserved DB Instance
       #     identifier filter value. Specify this parameter to show only the
       #     reservation that matches the specified reservation ID.
@@ -1356,6 +1391,7 @@ module AWS
       # @!method describe_reserved_db_instances_offerings(options = {})
       # Calls the DescribeReservedDBInstancesOfferings API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_db_instances_offering_id` - (String) The offering
       #     identifier filter value. Specify this parameter to show only the
       #     available offering that matches the specified reservation
@@ -1405,6 +1441,7 @@ module AWS
       # @!method download_db_log_file_portion(options = {})
       # Calls the DownloadDBLogFilePortion API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - (String)
       #   * `:log_file_name` - (String)
       #   * `:marker` - (String) The pagination token provided in the previous
@@ -1423,6 +1460,7 @@ module AWS
       # @!method list_tags_for_resource(options = {})
       # Calls the ListTagsForResource API operation.
       # @param [Hash] options
+      #
       #   * `:resource_name` - *required* - (String) The DB Instance with tags
       #     to be listed.
       # @return [Core::Response]
@@ -1436,6 +1474,7 @@ module AWS
       # @!method modify_db_instance(options = {})
       # Calls the ModifyDBInstance API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
       #     identifier. This value is stored as a lowercase string.
       #   * `:allocated_storage` - (Integer) The new storage capacity of the
@@ -1584,6 +1623,7 @@ module AWS
       # @!method modify_db_parameter_group(options = {})
       # Calls the ModifyDBParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - *required* - (String) The name of the
       #     database parameter group.
       #   * `:parameters` - *required* - (Array<Hash>) An array of parameter
@@ -1622,6 +1662,7 @@ module AWS
       # @!method modify_db_subnet_group(options = {})
       # Calls the ModifyDBSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_subnet_group_name` - *required* - (String) The name for the DB
       #     Subnet Group. This value is stored as a lowercase string.
       #     Constraints: Must contain no more than 255 alphanumeric characters
@@ -1648,6 +1689,7 @@ module AWS
       # @!method modify_event_subscription(options = {})
       # Calls the ModifyEventSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - *required* - (String) The name of the RDS
       #     event notification subscription.
       #   * `:sns_topic_arn` - (String) The Amazon Resource Name (ARN) of the
@@ -1683,6 +1725,7 @@ module AWS
       # @!method modify_option_group(options = {})
       # Calls the ModifyOptionGroup API operation.
       # @param [Hash] options
+      #
       #   * `:option_group_name` - *required* - (String) The name of the option
       #     group to be modified.
       #   * `:options_to_include` - (Array<Hash>) Options in this list are
@@ -1751,6 +1794,7 @@ module AWS
       # @!method promote_read_replica(options = {})
       # Calls the PromoteReadReplica API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
       #     identifier. This value is stored as a lowercase string.
       #     Constraints: Must be the identifier for an existing Read Replica DB
@@ -1841,6 +1885,7 @@ module AWS
       # @!method purchase_reserved_db_instances_offering(options = {})
       # Calls the PurchaseReservedDBInstancesOffering API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_db_instances_offering_id` - *required* - (String) The ID
       #     of the Reserved DB Instance offering to purchase. Example:
       #     438012d3-4052-4cc7-b2e3-8d3372e0e706
@@ -1872,6 +1917,7 @@ module AWS
       # @!method reboot_db_instance(options = {})
       # Calls the RebootDBInstance API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The DB Instance
       #     identifier. This parameter is stored as a lowercase string.
       #   * `:force_failover` - (Boolean) When `true` , the reboot will be
@@ -1944,6 +1990,7 @@ module AWS
       # @!method remove_source_identifier_from_subscription(options = {})
       # Calls the RemoveSourceIdentifierFromSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:subscription_name` - *required* - (String) The name of the RDS
       #     event notification subscription you want to remove a source
       #     identifier from.
@@ -1967,6 +2014,7 @@ module AWS
       # @!method remove_tags_from_resource(options = {})
       # Calls the RemoveTagsFromResource API operation.
       # @param [Hash] options
+      #
       #   * `:resource_name` - *required* - (String) The DB Instance the tags
       #     will be removed from.
       #   * `:tag_keys` - *required* - (Array<String>) The tag key (name) of
@@ -1976,6 +2024,7 @@ module AWS
       # @!method reset_db_parameter_group(options = {})
       # Calls the ResetDBParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:db_parameter_group_name` - *required* - (String) The name of the
       #     DB Parameter Group.
       #   * `:reset_all_parameters` - (Boolean) Specifies whether ( `true` ) or
@@ -2017,6 +2066,7 @@ module AWS
       # @!method restore_db_instance_from_db_snapshot(options = {})
       # Calls the RestoreDBInstanceFromDBSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:db_instance_identifier` - *required* - (String) The identifier
       #     for the DB Snapshot to restore from.
       #   * `:db_snapshot_identifier` - *required* - (String) Name of the DB
@@ -2128,6 +2178,7 @@ module AWS
       # @!method restore_db_instance_to_point_in_time(options = {})
       # Calls the RestoreDBInstanceToPointInTime API operation.
       # @param [Hash] options
+      #
       #   * `:source_db_instance_identifier` - *required* - (String) The
       #     identifier of the source DB Instance from which to restore.
       #   * `:target_db_instance_identifier` - *required* - (String) The name
@@ -2243,6 +2294,7 @@ module AWS
       # @!method revoke_db_security_group_ingress(options = {})
       # Calls the RevokeDBSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:db_security_group_name` - *required* - (String) The name of the
       #     DB Security Group to revoke ingress from.
       #   * `:cidrip` - (String) The IP range to revoke access from.

@@ -25,6 +25,7 @@ module AWS
       # @!method add_permission(options = {})
       # Calls the AddPermission API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:label` - *required* - (String) The unique identification of the
@@ -42,6 +43,7 @@ module AWS
       # @!method change_message_visibility(options = {})
       # Calls the ChangeMessageVisibility API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:receipt_handle` - *required* - (String) The receipt handle
@@ -54,6 +56,7 @@ module AWS
       # @!method change_message_visibility_batch(options = {})
       # Calls the ChangeMessageVisibilityBatch API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:entries` - *required* - (Array<Hash>) A list of receipt handles
@@ -79,6 +82,7 @@ module AWS
       # @!method create_queue(options = {})
       # Calls the CreateQueue API operation.
       # @param [Hash] options
+      #
       #   * `:queue_name` - *required* - (String) The name for the queue to be
       #     created.
       #   * `:attributes` - (Hash<String,String>) A map of attributes with
@@ -92,6 +96,7 @@ module AWS
       # @!method delete_message(options = {})
       # Calls the DeleteMessage API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:receipt_handle` - *required* - (String) The receipt handle
@@ -101,6 +106,7 @@ module AWS
       # @!method delete_message_batch(options = {})
       # Calls the DeleteMessageBatch API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:entries` - *required* - (Array<Hash>) A list of receipt handles
@@ -124,6 +130,7 @@ module AWS
       # @!method delete_queue(options = {})
       # Calls the DeleteQueue API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       # @return [Core::Response]
@@ -131,6 +138,7 @@ module AWS
       # @!method get_queue_attributes(options = {})
       # Calls the GetQueueAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:attribute_names` - (Array<String>) A list of attributes to
@@ -144,6 +152,7 @@ module AWS
       # @!method get_queue_url(options = {})
       # Calls the GetQueueUrl API operation.
       # @param [Hash] options
+      #
       #   * `:queue_name` - *required* - (String) The name of the queue whose
       #     URL must be fetched.
       #   * `:queue_owner_aws_account_id` - (String) The AWS account number of
@@ -157,6 +166,7 @@ module AWS
       # @!method list_queues(options = {})
       # Calls the ListQueues API operation.
       # @param [Hash] options
+      #
       #   * `:queue_name_prefix` - (String) A string to use for filtering the
       #     list results. Only those queues whose name begins with the
       #     specified string are returned.
@@ -169,6 +179,7 @@ module AWS
       # @!method receive_message(options = {})
       # Calls the ReceiveMessage API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:attribute_names` - (Array<String>) A list of attributes that need
@@ -200,6 +211,7 @@ module AWS
       # @!method remove_permission(options = {})
       # Calls the RemovePermission API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:label` - *required* - (String) The identification of the
@@ -210,6 +222,7 @@ module AWS
       # @!method send_message(options = {})
       # Calls the SendMessage API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:message_body` - *required* - (String) The message to send.
@@ -225,6 +238,7 @@ module AWS
       # @!method send_message_batch(options = {})
       # Calls the SendMessageBatch API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:entries` - *required* - (Array<Hash>) A list of
@@ -252,6 +266,7 @@ module AWS
       # @!method set_queue_attributes(options = {})
       # Calls the SetQueueAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:queue_url` - *required* - (String) The URL of the SQS queue to
       #     take action on.
       #   * `:attributes` - *required* - (Hash<String,String>) A map of

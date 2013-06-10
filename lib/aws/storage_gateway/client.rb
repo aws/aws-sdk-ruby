@@ -25,6 +25,7 @@ module AWS
       # @!method activate_gateway(options = {})
       # Calls the ActivateGateway API operation.
       # @param [Hash] options
+      #
       #   * `:activation_key` - *required* - (String)
       #   * `:gateway_name` - *required* - (String)
       #   * `:gateway_timezone` - *required* - (String) Valid values include:
@@ -72,6 +73,7 @@ module AWS
       # @!method add_cache(options = {})
       # Calls the AddCache API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:disk_ids` - *required* - (Array<String>)
       # @return [Core::Response]
@@ -83,6 +85,7 @@ module AWS
       # @!method add_upload_buffer(options = {})
       # Calls the AddUploadBuffer API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:disk_ids` - *required* - (Array<String>)
       # @return [Core::Response]
@@ -94,6 +97,7 @@ module AWS
       # @!method add_working_storage(options = {})
       # Calls the AddWorkingStorage API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:disk_ids` - *required* - (Array<String>)
       # @return [Core::Response]
@@ -105,6 +109,7 @@ module AWS
       # @!method create_cachedi_scsi_volume(options = {})
       # Calls the CreateCachediSCSIVolume API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:volume_size_in_bytes` - *required* - (Integer)
       #   * `:snapshot_id` - (String)
@@ -121,6 +126,7 @@ module AWS
       # @!method create_snapshot(options = {})
       # Calls the CreateSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       #   * `:snapshot_description` - *required* - (String)
       # @return [Core::Response]
@@ -133,6 +139,7 @@ module AWS
       # @!method create_snapshot_from_volume_recovery_point(options = {})
       # Calls the CreateSnapshotFromVolumeRecoveryPoint API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       #   * `:snapshot_description` - *required* - (String)
       # @return [Core::Response]
@@ -146,6 +153,7 @@ module AWS
       # @!method create_storedi_scsi_volume(options = {})
       # Calls the CreateStorediSCSIVolume API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:disk_id` - *required* - (String)
       #   * `:snapshot_id` - (String)
@@ -163,6 +171,7 @@ module AWS
       # @!method delete_bandwidth_rate_limit(options = {})
       # Calls the DeleteBandwidthRateLimit API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:bandwidth_type` - *required* - (String) Valid values include:
       #     * `UPLOAD`
@@ -177,6 +186,7 @@ module AWS
       # @!method delete_chap_credentials(options = {})
       # Calls the DeleteChapCredentials API operation.
       # @param [Hash] options
+      #
       #   * `:target_arn` - *required* - (String)
       #   * `:initiator_name` - *required* - (String)
       # @return [Core::Response]
@@ -189,6 +199,7 @@ module AWS
       # @!method delete_gateway(options = {})
       # Calls the DeleteGateway API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -199,6 +210,7 @@ module AWS
       # @!method delete_snapshot_schedule(options = {})
       # Calls the DeleteSnapshotSchedule API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -209,6 +221,7 @@ module AWS
       # @!method delete_volume(options = {})
       # Calls the DeleteVolume API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -219,6 +232,7 @@ module AWS
       # @!method describe_bandwidth_rate_limit(options = {})
       # Calls the DescribeBandwidthRateLimit API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -231,6 +245,7 @@ module AWS
       # @!method describe_cache(options = {})
       # Calls the DescribeCache API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -247,6 +262,7 @@ module AWS
       # @!method describe_cachedi_scsi_volumes(options = {})
       # Calls the DescribeCachediSCSIVolumes API operation.
       # @param [Hash] options
+      #
       #   * `:volume_ar_ns` - *required* - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -270,6 +286,7 @@ module AWS
       # @!method describe_chap_credentials(options = {})
       # Calls the DescribeChapCredentials API operation.
       # @param [Hash] options
+      #
       #   * `:target_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -284,6 +301,7 @@ module AWS
       # @!method describe_gateway_information(options = {})
       # Calls the DescribeGatewayInformation API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -303,6 +321,7 @@ module AWS
       # @!method describe_maintenance_start_time(options = {})
       # Calls the DescribeMaintenanceStartTime API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -317,6 +336,7 @@ module AWS
       # @!method describe_snapshot_schedule(options = {})
       # Calls the DescribeSnapshotSchedule API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -331,6 +351,7 @@ module AWS
       # @!method describe_storedi_scsi_volumes(options = {})
       # Calls the DescribeStorediSCSIVolumes API operation.
       # @param [Hash] options
+      #
       #   * `:volume_ar_ns` - *required* - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -356,6 +377,7 @@ module AWS
       # @!method describe_upload_buffer(options = {})
       # Calls the DescribeUploadBuffer API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -369,6 +391,7 @@ module AWS
       # @!method describe_working_storage(options = {})
       # Calls the DescribeWorkingStorage API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -382,6 +405,7 @@ module AWS
       # @!method list_gateways(options = {})
       # Calls the ListGateways API operation.
       # @param [Hash] options
+      #
       #   * `:marker` - (String)
       #   * `:limit` - (Integer)
       # @return [Core::Response]
@@ -395,6 +419,7 @@ module AWS
       # @!method list_local_disks(options = {})
       # Calls the ListLocalDisks API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -412,6 +437,7 @@ module AWS
       # @!method list_volume_recovery_points(options = {})
       # Calls the ListVolumeRecoveryPoints API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -427,6 +453,7 @@ module AWS
       # @!method list_volumes(options = {})
       # Calls the ListVolumes API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:marker` - (String)
       #   * `:limit` - (Integer)
@@ -443,6 +470,7 @@ module AWS
       # @!method shutdown_gateway(options = {})
       # Calls the ShutdownGateway API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -453,6 +481,7 @@ module AWS
       # @!method start_gateway(options = {})
       # Calls the StartGateway API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -463,6 +492,7 @@ module AWS
       # @!method update_bandwidth_rate_limit(options = {})
       # Calls the UpdateBandwidthRateLimit API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:average_upload_rate_limit_in_bits_per_sec` - (Integer)
       #   * `:average_download_rate_limit_in_bits_per_sec` - (Integer)
@@ -475,6 +505,7 @@ module AWS
       # @!method update_chap_credentials(options = {})
       # Calls the UpdateChapCredentials API operation.
       # @param [Hash] options
+      #
       #   * `:target_arn` - *required* - (String)
       #   * `:secret_to_authenticate_initiator` - *required* - (String)
       #   * `:initiator_name` - *required* - (String)
@@ -489,6 +520,7 @@ module AWS
       # @!method update_gateway_information(options = {})
       # Calls the UpdateGatewayInformation API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:gateway_name` - (String)
       #   * `:gateway_timezone` - (String) Valid values include:
@@ -532,6 +564,7 @@ module AWS
       # @!method update_gateway_software_now(options = {})
       # Calls the UpdateGatewaySoftwareNow API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -542,6 +575,7 @@ module AWS
       # @!method update_maintenance_start_time(options = {})
       # Calls the UpdateMaintenanceStartTime API operation.
       # @param [Hash] options
+      #
       #   * `:gateway_arn` - *required* - (String)
       #   * `:hour_of_day` - *required* - (Integer)
       #   * `:minute_of_hour` - *required* - (Integer)
@@ -555,6 +589,7 @@ module AWS
       # @!method update_snapshot_schedule(options = {})
       # Calls the UpdateSnapshotSchedule API operation.
       # @param [Hash] options
+      #
       #   * `:volume_arn` - *required* - (String)
       #   * `:start_at` - *required* - (Integer)
       #   * `:recurrence_in_hours` - *required* - (Integer)

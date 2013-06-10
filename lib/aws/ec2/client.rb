@@ -61,6 +61,7 @@ module AWS
       # @!method activate_license(options = {})
       # Calls the ActivateLicense API operation.
       # @param [Hash] options
+      #
       #   * `:license_id` - *required* - (String) Specifies the ID for the
       #     specific license to activate against.
       #   * `:capacity` - *required* - (Integer) Specifies the additional
@@ -70,6 +71,7 @@ module AWS
       # @!method allocate_address(options = {})
       # Calls the AllocateAddress API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - (String) Set to vpc to allocate the address to your
       #     VPC. By default, will allocate to EC2. Valid values include:
       #     * `vpc`
@@ -85,6 +87,7 @@ module AWS
       # @!method assign_private_ip_addresses(options = {})
       # Calls the AssignPrivateIpAddresses API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:private_ip_addresses` - (Array<String>)
       #   * `:secondary_private_ip_address_count` - (Integer)
@@ -94,6 +97,7 @@ module AWS
       # @!method associate_address(options = {})
       # Calls the AssociateAddress API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - (String) The instance to associate with the IP
       #     address.
       #   * `:public_ip` - (String) IP address that you are assigning to the
@@ -112,6 +116,7 @@ module AWS
       # @!method associate_dhcp_options(options = {})
       # Calls the AssociateDhcpOptions API operation.
       # @param [Hash] options
+      #
       #   * `:dhcp_options_id` - *required* - (String) The ID of the DHCP
       #     options to associate with the VPC. Specify "default" to associate
       #     the default DHCP options with the VPC.
@@ -122,6 +127,7 @@ module AWS
       # @!method associate_route_table(options = {})
       # Calls the AssociateRouteTable API operation.
       # @param [Hash] options
+      #
       #   * `:subnet_id` - *required* - (String) The ID of the subnet.
       #   * `:route_table_id` - *required* - (String) The ID of the route
       #     table.
@@ -134,6 +140,7 @@ module AWS
       # @!method attach_internet_gateway(options = {})
       # Calls the AttachInternetGateway API operation.
       # @param [Hash] options
+      #
       #   * `:internet_gateway_id` - *required* - (String) The ID of the
       #     Internet gateway to attach.
       #   * `:vpc_id` - *required* - (String) The ID of the VPC.
@@ -142,6 +149,7 @@ module AWS
       # @!method attach_network_interface(options = {})
       # Calls the AttachNetworkInterface API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:instance_id` - *required* - (String)
       #   * `:device_index` - *required* - (Integer)
@@ -154,6 +162,7 @@ module AWS
       # @!method attach_volume(options = {})
       # Calls the AttachVolume API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String) The ID of the Amazon EBS
       #     volume. The volume and instance must be within the same
       #     Availability Zone and the instance must be running.
@@ -176,6 +185,7 @@ module AWS
       # @!method attach_vpn_gateway(options = {})
       # Calls the AttachVpnGateway API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_gateway_id` - *required* - (String) The ID of the VPN gateway
       #     to attach to the VPC.
       #   * `:vpc_id` - *required* - (String) The ID of the VPC to attach to
@@ -191,6 +201,7 @@ module AWS
       # @!method authorize_security_group_egress(options = {})
       # Calls the AuthorizeSecurityGroupEgress API operation.
       # @param [Hash] options
+      #
       #   * `:group_id` - *required* - (String) ID of the VPC security group to
       #     modify.
       #   * `:source_security_group_name` - (String) Deprecated.
@@ -228,6 +239,7 @@ module AWS
       # @!method authorize_security_group_ingress(options = {})
       # Calls the AuthorizeSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - (String) Name of the standard (EC2) security group
       #     to modify. The group must belong to your account. Can be used
       #     instead of GroupID for standard (EC2) security groups.
@@ -270,6 +282,7 @@ module AWS
       # @!method bundle_instance(options = {})
       # Calls the BundleInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance to
       #     bundle.
       #   * `:storage` - *required* - (Hash)
@@ -313,6 +326,7 @@ module AWS
       # @!method cancel_bundle_task(options = {})
       # Calls the CancelBundleTask API operation.
       # @param [Hash] options
+      #
       #   * `:bundle_id` - *required* - (String) The ID of the bundle task to
       #     cancel.
       # @return [Core::Response]
@@ -340,6 +354,7 @@ module AWS
       # @!method cancel_conversion_task(options = {})
       # Calls the CancelConversionTask API operation.
       # @param [Hash] options
+      #
       #   * `:conversion_task_id` - *required* - (String)
       #   * `:reason_message` - (String)
       # @return [Core::Response]
@@ -347,12 +362,14 @@ module AWS
       # @!method cancel_export_task(options = {})
       # Calls the CancelExportTask API operation.
       # @param [Hash] options
+      #
       #   * `:export_task_id` - *required* - (String)
       # @return [Core::Response]
 
       # @!method cancel_reserved_instances_listing(options = {})
       # Calls the CancelReservedInstancesListing API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_listing_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -381,6 +398,7 @@ module AWS
       # @!method cancel_spot_instance_requests(options = {})
       # Calls the CancelSpotInstanceRequests API operation.
       # @param [Hash] options
+      #
       #   * `:spot_instance_request_ids` - *required* - (Array<String>)
       #     Specifies the ID of the Spot Instance request.
       # @return [Core::Response]
@@ -394,6 +412,7 @@ module AWS
       # @!method confirm_product_instance(options = {})
       # Calls the ConfirmProductInstance API operation.
       # @param [Hash] options
+      #
       #   * `:product_code` - *required* - (String) The product code to
       #     confirm.
       #   * `:instance_id` - *required* - (String) The ID of the instance to
@@ -407,6 +426,7 @@ module AWS
       # @!method copy_image(options = {})
       # Calls the CopyImage API operation.
       # @param [Hash] options
+      #
       #   * `:source_region` - *required* - (String)
       #   * `:source_image_id` - *required* - (String)
       #   * `:name` - *required* - (String)
@@ -421,6 +441,7 @@ module AWS
       # @!method copy_snapshot(options = {})
       # Calls the CopySnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:source_region` - *required* - (String)
       #   * `:source_snapshot_id` - *required* - (String)
       #   * `:description` - (String)
@@ -433,6 +454,7 @@ module AWS
       # @!method create_customer_gateway(options = {})
       # Calls the CreateCustomerGateway API operation.
       # @param [Hash] options
+      #
       #   * `:type` - *required* - (String) The type of VPN connection this
       #     customer gateway supports.
       #   * `:public_ip` - *required* - (String) The Internet-routable IP
@@ -457,6 +479,7 @@ module AWS
       # @!method create_dhcp_options(options = {})
       # Calls the CreateDhcpOptions API operation.
       # @param [Hash] options
+      #
       #   * `:dhcp_configurations` - *required* - (Array<Hash>) A set of one or
       #     more DHCP configurations.
       #     * `:key` - (String) Contains the name of a DHCP option.
@@ -478,6 +501,7 @@ module AWS
       # @!method create_image(options = {})
       # Calls the CreateImage API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance from
       #     which to create the new image.
       #   * `:name` - *required* - (String) The name for the new AMI being
@@ -517,6 +541,7 @@ module AWS
       # @!method create_instance_export_task(options = {})
       # Calls the CreateInstanceExportTask API operation.
       # @param [Hash] options
+      #
       #   * `:description` - (String)
       #   * `:instance_id` - *required* - (String)
       #   * `:target_environment` - (String) Valid values include:
@@ -551,6 +576,7 @@ module AWS
       # @!method create_internet_gateway(options = {})
       # Calls the CreateInternetGateway API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -567,6 +593,7 @@ module AWS
       # @!method create_key_pair(options = {})
       # Calls the CreateKeyPair API operation.
       # @param [Hash] options
+      #
       #   * `:key_name` - *required* - (String) The unique name for the new key
       #     pair.
       # @return [Core::Response]
@@ -581,6 +608,7 @@ module AWS
       # @!method create_network_acl(options = {})
       # Calls the CreateNetworkAcl API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String) The ID of the VPC where the
       #     network ACL will be created.
       # @return [Core::Response]
@@ -614,6 +642,7 @@ module AWS
       # @!method create_network_acl_entry(options = {})
       # Calls the CreateNetworkAclEntry API operation.
       # @param [Hash] options
+      #
       #   * `:network_acl_id` - *required* - (String) ID of the ACL where the
       #     entry will be created.
       #   * `:rule_number` - *required* - (Integer) Rule number to assign to
@@ -647,6 +676,7 @@ module AWS
       # @!method create_network_interface(options = {})
       # Calls the CreateNetworkInterface API operation.
       # @param [Hash] options
+      #
       #   * `:subnet_id` - *required* - (String)
       #   * `:description` - (String)
       #   * `:private_ip_address` - (String)
@@ -705,6 +735,7 @@ module AWS
       # @!method create_placement_group(options = {})
       # Calls the CreatePlacementGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) The name of the
       #     PlacementGroup.
       #   * `:strategy` - *required* - (String) The PlacementGroup strategy.
@@ -715,6 +746,7 @@ module AWS
       # @!method create_reserved_instances_listing(options = {})
       # Calls the CreateReservedInstancesListing API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_id` - *required* - (String)
       #   * `:instance_count` - *required* - (Integer)
       #   * `:price_schedules` - *required* - (Array<Hash>)
@@ -749,6 +781,7 @@ module AWS
       # @!method create_route(options = {})
       # Calls the CreateRoute API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String) The ID of the route table
       #     where the route will be added.
       #   * `:destination_cidr_block` - *required* - (String) The CIDR address
@@ -765,6 +798,7 @@ module AWS
       # @!method create_route_table(options = {})
       # Calls the CreateRouteTable API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String) The ID of the VPC where the route
       #     table will be created.
       # @return [Core::Response]
@@ -795,6 +829,7 @@ module AWS
       # @!method create_security_group(options = {})
       # Calls the CreateSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the security group.
       #   * `:description` - *required* - (String) Description of the group.
       #     This is informational only.
@@ -808,6 +843,7 @@ module AWS
       # @!method create_snapshot(options = {})
       # Calls the CreateSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String) The ID of the volume from
       #     which to create the snapshot.
       #   * `:description` - (String) The description for the new snapshot.
@@ -831,6 +867,7 @@ module AWS
       # @!method create_spot_datafeed_subscription(options = {})
       # Calls the CreateSpotDatafeedSubscription API operation.
       # @param [Hash] options
+      #
       #   * `:bucket` - *required* - (String) The Amazon S3 bucket in which to
       #     store the Spot Instance datafeed.
       #   * `:prefix` - (String) The prefix that is prepended to datafeed
@@ -851,6 +888,7 @@ module AWS
       # @!method create_subnet(options = {})
       # Calls the CreateSubnet API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String) The ID of the VPC to create the
       #     subnet in.
       #   * `:cidr_block` - *required* - (String) The CIDR block the subnet is
@@ -877,6 +915,7 @@ module AWS
       # @!method create_tags(options = {})
       # Calls the CreateTags API operation.
       # @param [Hash] options
+      #
       #   * `:resources` - *required* - (Array<String>) One or more IDs of
       #     resources to tag. This could be the ID of an AMI, an instance, an
       #     EBS volume, or snapshot, etc.
@@ -890,6 +929,7 @@ module AWS
       # @!method create_volume(options = {})
       # Calls the CreateVolume API operation.
       # @param [Hash] options
+      #
       #   * `:size` - (Integer) The size of the volume, in gigabytes. Required
       #     if you are not creating a volume from a snapshot.
       #   * `:snapshot_id` - (String) The ID of the snapshot from which to
@@ -926,6 +966,7 @@ module AWS
       # @!method create_vpc(options = {})
       # Calls the CreateVpc API operation.
       # @param [Hash] options
+      #
       #   * `:cidr_block` - *required* - (String) A valid CIDR block.
       #   * `:instance_tenancy` - (String) The allowed tenancy of instances
       #     launched into the VPC. A value of default means instances can be
@@ -949,6 +990,7 @@ module AWS
       # @!method create_vpn_connection(options = {})
       # Calls the CreateVpnConnection API operation.
       # @param [Hash] options
+      #
       #   * `:type` - *required* - (String) The type of VPN connection.
       #   * `:customer_gateway_id` - *required* - (String) The ID of the
       #     customer gateway.
@@ -986,6 +1028,7 @@ module AWS
       # @!method create_vpn_connection_route(options = {})
       # Calls the CreateVpnConnectionRoute API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_connection_id` - *required* - (String)
       #   * `:destination_cidr_block` - *required* - (String)
       # @return [Core::Response]
@@ -993,6 +1036,7 @@ module AWS
       # @!method create_vpn_gateway(options = {})
       # Calls the CreateVpnGateway API operation.
       # @param [Hash] options
+      #
       #   * `:type` - *required* - (String) The type of VPN connection this VPN
       #     gateway supports.
       #   * `:availability_zone` - (String) The Availability Zone in which to
@@ -1016,6 +1060,7 @@ module AWS
       # @!method deactivate_license(options = {})
       # Calls the DeactivateLicense API operation.
       # @param [Hash] options
+      #
       #   * `:license_id` - *required* - (String) Specifies the ID for the
       #     specific license to deactivate against.
       #   * `:capacity` - *required* - (Integer) Specifies the amount of
@@ -1025,6 +1070,7 @@ module AWS
       # @!method delete_customer_gateway(options = {})
       # Calls the DeleteCustomerGateway API operation.
       # @param [Hash] options
+      #
       #   * `:customer_gateway_id` - *required* - (String) The ID of the
       #     customer gateway to delete.
       # @return [Core::Response]
@@ -1032,6 +1078,7 @@ module AWS
       # @!method delete_dhcp_options(options = {})
       # Calls the DeleteDhcpOptions API operation.
       # @param [Hash] options
+      #
       #   * `:dhcp_options_id` - *required* - (String) The ID of the DHCP
       #     options set to delete.
       # @return [Core::Response]
@@ -1039,6 +1086,7 @@ module AWS
       # @!method delete_internet_gateway(options = {})
       # Calls the DeleteInternetGateway API operation.
       # @param [Hash] options
+      #
       #   * `:internet_gateway_id` - *required* - (String) The ID of the
       #     Internet gateway to be deleted.
       # @return [Core::Response]
@@ -1046,6 +1094,7 @@ module AWS
       # @!method delete_key_pair(options = {})
       # Calls the DeleteKeyPair API operation.
       # @param [Hash] options
+      #
       #   * `:key_name` - *required* - (String) The name of the Amazon EC2 key
       #     pair to delete.
       # @return [Core::Response]
@@ -1053,6 +1102,7 @@ module AWS
       # @!method delete_network_acl(options = {})
       # Calls the DeleteNetworkAcl API operation.
       # @param [Hash] options
+      #
       #   * `:network_acl_id` - *required* - (String) The ID of the network ACL
       #     to be deleted.
       # @return [Core::Response]
@@ -1060,6 +1110,7 @@ module AWS
       # @!method delete_network_acl_entry(options = {})
       # Calls the DeleteNetworkAclEntry API operation.
       # @param [Hash] options
+      #
       #   * `:network_acl_id` - *required* - (String) ID of the network ACL.
       #   * `:rule_number` - *required* - (Integer) Rule number for the entry
       #     to delete.
@@ -1070,12 +1121,14 @@ module AWS
       # @!method delete_network_interface(options = {})
       # Calls the DeleteNetworkInterface API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       # @return [Core::Response]
 
       # @!method delete_placement_group(options = {})
       # Calls the DeletePlacementGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) The name of the
       #     PlacementGroup to delete.
       # @return [Core::Response]
@@ -1083,6 +1136,7 @@ module AWS
       # @!method delete_route(options = {})
       # Calls the DeleteRoute API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String) The ID of the route table
       #     where the route will be deleted.
       #   * `:destination_cidr_block` - *required* - (String) The CIDR range
@@ -1093,6 +1147,7 @@ module AWS
       # @!method delete_route_table(options = {})
       # Calls the DeleteRouteTable API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String) The ID of the route table
       #     to be deleted.
       # @return [Core::Response]
@@ -1100,6 +1155,7 @@ module AWS
       # @!method delete_security_group(options = {})
       # Calls the DeleteSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - (String) The name of the Amazon EC2 security group
       #     to delete.
       #   * `:group_id` - (String) The ID of the Amazon EC2 security group to
@@ -1109,6 +1165,7 @@ module AWS
       # @!method delete_snapshot(options = {})
       # Calls the DeleteSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_id` - *required* - (String) The ID of the snapshot to
       #     delete.
       # @return [Core::Response]
@@ -1116,11 +1173,13 @@ module AWS
       # @!method delete_spot_datafeed_subscription(options = {})
       # Calls the DeleteSpotDatafeedSubscription API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
 
       # @!method delete_subnet(options = {})
       # Calls the DeleteSubnet API operation.
       # @param [Hash] options
+      #
       #   * `:subnet_id` - *required* - (String) The ID of the subnet you want
       #     to delete.
       # @return [Core::Response]
@@ -1128,6 +1187,7 @@ module AWS
       # @!method delete_tags(options = {})
       # Calls the DeleteTags API operation.
       # @param [Hash] options
+      #
       #   * `:resources` - *required* - (Array<String>) A list of one or more
       #     resource IDs. This could be the ID of an AMI, an instance, an EBS
       #     volume, or snapshot, etc.
@@ -1142,6 +1202,7 @@ module AWS
       # @!method delete_volume(options = {})
       # Calls the DeleteVolume API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String) The ID of the EBS volume to
       #     delete.
       # @return [Core::Response]
@@ -1149,6 +1210,7 @@ module AWS
       # @!method delete_vpc(options = {})
       # Calls the DeleteVpc API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String) The ID of the VPC you want to
       #     delete.
       # @return [Core::Response]
@@ -1156,6 +1218,7 @@ module AWS
       # @!method delete_vpn_connection(options = {})
       # Calls the DeleteVpnConnection API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_connection_id` - *required* - (String) The ID of the VPN
       #     connection to delete
       # @return [Core::Response]
@@ -1163,6 +1226,7 @@ module AWS
       # @!method delete_vpn_connection_route(options = {})
       # Calls the DeleteVpnConnectionRoute API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_connection_id` - *required* - (String)
       #   * `:destination_cidr_block` - *required* - (String)
       # @return [Core::Response]
@@ -1170,6 +1234,7 @@ module AWS
       # @!method delete_vpn_gateway(options = {})
       # Calls the DeleteVpnGateway API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_gateway_id` - *required* - (String) The ID of the VPN gateway
       #     to delete.
       # @return [Core::Response]
@@ -1177,6 +1242,7 @@ module AWS
       # @!method deregister_image(options = {})
       # Calls the DeregisterImage API operation.
       # @param [Hash] options
+      #
       #   * `:image_id` - *required* - (String) The ID of the AMI to
       #     deregister.
       # @return [Core::Response]
@@ -1184,6 +1250,7 @@ module AWS
       # @!method describe_account_attributes(options = {})
       # Calls the DescribeAccountAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:attribute_names` - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -1197,6 +1264,7 @@ module AWS
       # @!method describe_addresses(options = {})
       # Calls the DescribeAddresses API operation.
       # @param [Hash] options
+      #
       #   * `:public_ips` - (Array<String>) The optional list of Elastic IP
       #     addresses to describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1223,6 +1291,7 @@ module AWS
       # @!method describe_availability_zones(options = {})
       # Calls the DescribeAvailabilityZones API operation.
       # @param [Hash] options
+      #
       #   * `:zone_names` - (Array<String>) A list of the availability zone
       #     names to describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1246,6 +1315,7 @@ module AWS
       # @!method describe_bundle_tasks(options = {})
       # Calls the DescribeBundleTasks API operation.
       # @param [Hash] options
+      #
       #   * `:bundle_ids` - (Array<String>) The list of bundle task IDs to
       #     describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1280,6 +1350,7 @@ module AWS
       # @!method describe_conversion_tasks(options = {})
       # Calls the DescribeConversionTasks API operation.
       # @param [Hash] options
+      #
       #   * `:filters` - (Array<Hash>)
       #     * `:name` - (String) Specifies the name of the filter.
       #     * `:values` - (Array<String>) Contains one or more values for the
@@ -1331,6 +1402,7 @@ module AWS
       # @!method describe_customer_gateways(options = {})
       # Calls the DescribeCustomerGateways API operation.
       # @param [Hash] options
+      #
       #   * `:customer_gateway_ids` - (Array<String>) A set of one or more
       #     customer gateway IDs.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1357,6 +1429,7 @@ module AWS
       # @!method describe_dhcp_options(options = {})
       # Calls the DescribeDhcpOptions API operation.
       # @param [Hash] options
+      #
       #   * `:dhcp_options_ids` - (Array<String>)
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for DhcpOptions. For a complete reference to the
@@ -1381,6 +1454,7 @@ module AWS
       # @!method describe_export_tasks(options = {})
       # Calls the DescribeExportTasks API operation.
       # @param [Hash] options
+      #
       #   * `:export_task_ids` - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -1403,6 +1477,7 @@ module AWS
       # @!method describe_image_attribute(options = {})
       # Calls the DescribeImageAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:image_id` - *required* - (String) The ID of the AMI whose
       #     attribute is to be described.
       #   * `:attribute` - *required* - (String) The name of the attribute to
@@ -1439,6 +1514,7 @@ module AWS
       # @!method describe_images(options = {})
       # Calls the DescribeImages API operation.
       # @param [Hash] options
+      #
       #   * `:image_ids` - (Array<String>) An optional list of the AMI IDs to
       #     describe. If not specified, all AMIs will be described.
       #   * `:owners` - (Array<String>) The optional list of owners for the
@@ -1501,6 +1577,7 @@ module AWS
       # @!method describe_instance_attribute(options = {})
       # Calls the DescribeInstanceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance whose
       #     instance attribute is being described.
       #   * `:attribute` - *required* - (String) The name of the attribute to
@@ -1554,6 +1631,7 @@ module AWS
       # @!method describe_instance_status(options = {})
       # Calls the DescribeInstanceStatus API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - (Array<String>) The list of instance IDs. If not
       #     specified, all instances are described.
       #   * `:filters` - (Array<Hash>) The list of filters to limit returned
@@ -1598,6 +1676,7 @@ module AWS
       # @!method describe_instances(options = {})
       # Calls the DescribeInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - (Array<String>) An optional list of the instances
       #     to describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1712,6 +1791,7 @@ module AWS
       # @!method describe_internet_gateways(options = {})
       # Calls the DescribeInternetGateways API operation.
       # @param [Hash] options
+      #
       #   * `:internet_gateway_ids` - (Array<String>) One or more Internet
       #     gateway IDs.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1737,6 +1817,7 @@ module AWS
       # @!method describe_key_pairs(options = {})
       # Calls the DescribeKeyPairs API operation.
       # @param [Hash] options
+      #
       #   * `:key_names` - (Array<String>) The optional list of key pair names
       #     to describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1756,6 +1837,7 @@ module AWS
       # @!method describe_licenses(options = {})
       # Calls the DescribeLicenses API operation.
       # @param [Hash] options
+      #
       #   * `:license_ids` - (Array<String>) Specifies the license registration
       #     for which details are to be returned.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1784,6 +1866,7 @@ module AWS
       # @!method describe_network_acls(options = {})
       # Calls the DescribeNetworkAcls API operation.
       # @param [Hash] options
+      #
       #   * `:network_acl_ids` - (Array<String>) One or more network ACL IDs.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for Network ACLs. For a complete reference to the
@@ -1823,6 +1906,7 @@ module AWS
       # @!method describe_network_interface_attribute(options = {})
       # Calls the DescribeNetworkInterfaceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:description` - (String)
       #   * `:source_dest_check` - (String)
@@ -1852,6 +1936,7 @@ module AWS
       # @!method describe_network_interfaces(options = {})
       # Calls the DescribeNetworkInterfaces API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_ids` - (Array<String>)
       #   * `:filters` - (Array<Hash>)
       #     * `:name` - (String) Specifies the name of the filter.
@@ -1907,6 +1992,7 @@ module AWS
       # @!method describe_placement_groups(options = {})
       # Calls the DescribePlacementGroups API operation.
       # @param [Hash] options
+      #
       #   * `:group_names` - (Array<String>) The name of the PlacementGroup.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for Placement Groups. For a complete reference to the
@@ -1927,6 +2013,7 @@ module AWS
       # @!method describe_regions(options = {})
       # Calls the DescribeRegions API operation.
       # @param [Hash] options
+      #
       #   * `:region_names` - (Array<String>) The optional list of regions to
       #     describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1946,6 +2033,7 @@ module AWS
       # @!method describe_reserved_instances(options = {})
       # Calls the DescribeReservedInstances API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_ids` - (Array<String>) The optional list of
       #     Reserved Instance IDs to describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -1984,6 +2072,7 @@ module AWS
       # @!method describe_reserved_instances_listings(options = {})
       # Calls the DescribeReservedInstancesListings API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_id` - (String)
       #   * `:reserved_instances_listing_id` - (String)
       #   * `:filters` - (Array<Hash>)
@@ -2017,6 +2106,7 @@ module AWS
       # @!method describe_reserved_instances_offerings(options = {})
       # Calls the DescribeReservedInstancesOfferings API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_offering_ids` - (Array<String>) An optional
       #     list of the unique IDs of the Reserved Instance offerings to
       #     describe.
@@ -2083,6 +2173,7 @@ module AWS
       # @!method describe_route_tables(options = {})
       # Calls the DescribeRouteTables API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_ids` - (Array<String>) One or more route table IDs.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for Route Tables. For a complete reference to the
@@ -2119,6 +2210,7 @@ module AWS
       # @!method describe_security_groups(options = {})
       # Calls the DescribeSecurityGroups API operation.
       # @param [Hash] options
+      #
       #   * `:group_names` - (Array<String>) The optional list of Amazon EC2
       #     security groups to describe.
       #   * `:group_ids` - (Array<String>)
@@ -2166,6 +2258,7 @@ module AWS
       # @!method describe_snapshot_attribute(options = {})
       # Calls the DescribeSnapshotAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_id` - *required* - (String) The ID of the EBS snapshot
       #     whose attribute is being described.
       #   * `:attribute` - *required* - (String) The name of the EBS attribute
@@ -2188,6 +2281,7 @@ module AWS
       # @!method describe_snapshots(options = {})
       # Calls the DescribeSnapshots API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_ids` - (Array<String>) The optional list of EBS snapshot
       #     IDs to describe.
       #   * `:owner_ids` - (Array<String>) The optional list of EBS snapshot
@@ -2222,6 +2316,7 @@ module AWS
       # @!method describe_spot_datafeed_subscription(options = {})
       # Calls the DescribeSpotDatafeedSubscription API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2238,6 +2333,7 @@ module AWS
       # @!method describe_spot_instance_requests(options = {})
       # Calls the DescribeSpotInstanceRequests API operation.
       # @param [Hash] options
+      #
       #   * `:spot_instance_request_ids` - (Array<String>) The ID of the
       #     request.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -2320,6 +2416,7 @@ module AWS
       # @!method describe_spot_price_history(options = {})
       # Calls the DescribeSpotPriceHistory API operation.
       # @param [Hash] options
+      #
       #   * `:start_time` - (String<ISO8601 datetime>) The start date and time
       #     of the Spot Instance price history data.
       #   * `:end_time` - (String<ISO8601 datetime>) The end date and time of
@@ -2354,6 +2451,7 @@ module AWS
       # @!method describe_subnets(options = {})
       # Calls the DescribeSubnets API operation.
       # @param [Hash] options
+      #
       #   * `:subnet_ids` - (Array<String>) A set of one or more subnet IDs.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for Subnets. For a complete reference to the available
@@ -2381,6 +2479,7 @@ module AWS
       # @!method describe_tags(options = {})
       # Calls the DescribeTags API operation.
       # @param [Hash] options
+      #
       #   * `:filters` - (Array<Hash>) A list of filters used to match
       #     properties for tags.
       #     * `:name` - (String) Specifies the name of the filter.
@@ -2399,6 +2498,7 @@ module AWS
       # @!method describe_volume_attribute(options = {})
       # Calls the DescribeVolumeAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String)
       #   * `:attribute` - (String) Valid values include:
       #     * `autoEnableIO`
@@ -2417,6 +2517,7 @@ module AWS
       # @!method describe_volume_status(options = {})
       # Calls the DescribeVolumeStatus API operation.
       # @param [Hash] options
+      #
       #   * `:volume_ids` - (Array<String>)
       #   * `:filters` - (Array<Hash>)
       #     * `:name` - (String) Specifies the name of the filter.
@@ -2452,6 +2553,7 @@ module AWS
       # @!method describe_volumes(options = {})
       # Calls the DescribeVolumes API operation.
       # @param [Hash] options
+      #
       #   * `:volume_ids` - (Array<String>) The optional list of EBS volumes to
       #     describe.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -2487,6 +2589,7 @@ module AWS
       # @!method describe_vpc_attribute(options = {})
       # Calls the DescribeVpcAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String)
       #   * `:attribute` - (String) Valid values include:
       #     * `enableDnsSupport`
@@ -2504,6 +2607,7 @@ module AWS
       # @!method describe_vpcs(options = {})
       # Calls the DescribeVpcs API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_ids` - (Array<String>) The ID of a VPC you want information
       #     about.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -2530,6 +2634,7 @@ module AWS
       # @!method describe_vpn_connections(options = {})
       # Calls the DescribeVpnConnections API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_connection_ids` - (Array<String>) A VPN connection ID. More
       #     than one may be specified per request.
       #   * `:filters` - (Array<Hash>) A list of filters used to match
@@ -2569,6 +2674,7 @@ module AWS
       # @!method describe_vpn_gateways(options = {})
       # Calls the DescribeVpnGateways API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_gateway_ids` - (Array<String>) A list of filters used to
       #     match properties for VPN Gateways. For a complete reference to the
       #     available filter keys for this operation, see the Amazon EC2 API
@@ -2599,6 +2705,7 @@ module AWS
       # @!method detach_internet_gateway(options = {})
       # Calls the DetachInternetGateway API operation.
       # @param [Hash] options
+      #
       #   * `:internet_gateway_id` - *required* - (String) The ID of the
       #     Internet gateway to detach.
       #   * `:vpc_id` - *required* - (String) The ID of the VPC.
@@ -2607,6 +2714,7 @@ module AWS
       # @!method detach_network_interface(options = {})
       # Calls the DetachNetworkInterface API operation.
       # @param [Hash] options
+      #
       #   * `:attachment_id` - *required* - (String)
       #   * `:force` - (Boolean)
       # @return [Core::Response]
@@ -2614,6 +2722,7 @@ module AWS
       # @!method detach_volume(options = {})
       # Calls the DetachVolume API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String) The ID of the volume to
       #     detach.
       #   * `:instance_id` - (String) The ID of the instance from which to
@@ -2642,6 +2751,7 @@ module AWS
       # @!method detach_vpn_gateway(options = {})
       # Calls the DetachVpnGateway API operation.
       # @param [Hash] options
+      #
       #   * `:vpn_gateway_id` - *required* - (String) The ID of the VPN gateway
       #     to detach from the VPC.
       #   * `:vpc_id` - *required* - (String) The ID of the VPC to detach the
@@ -2651,6 +2761,7 @@ module AWS
       # @!method disable_vgw_route_propagation(options = {})
       # Calls the DisableVgwRoutePropagation API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String)
       #   * `:gateway_id` - *required* - (String)
       # @return [Core::Response]
@@ -2658,6 +2769,7 @@ module AWS
       # @!method disassociate_address(options = {})
       # Calls the DisassociateAddress API operation.
       # @param [Hash] options
+      #
       #   * `:public_ip` - (String) The elastic IP address that you are
       #     disassociating from the instance.
       #   * `:association_id` - (String) Association ID corresponding to the
@@ -2667,6 +2779,7 @@ module AWS
       # @!method disassociate_route_table(options = {})
       # Calls the DisassociateRouteTable API operation.
       # @param [Hash] options
+      #
       #   * `:association_id` - *required* - (String) The association ID
       #     representing the current association between the route table and
       #     subnet.
@@ -2675,6 +2788,7 @@ module AWS
       # @!method enable_vgw_route_propagation(options = {})
       # Calls the EnableVgwRoutePropagation API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String)
       #   * `:gateway_id` - *required* - (String)
       # @return [Core::Response]
@@ -2682,12 +2796,14 @@ module AWS
       # @!method enable_volume_io(options = {})
       # Calls the EnableVolumeIO API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String)
       # @return [Core::Response]
 
       # @!method get_console_output(options = {})
       # Calls the GetConsoleOutput API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance for
       #     which you want console output.
       # @return [Core::Response]
@@ -2701,6 +2817,7 @@ module AWS
       # @!method get_password_data(options = {})
       # Calls the GetPasswordData API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance for
       #     which you want the Windows administrator password.
       # @return [Core::Response]
@@ -2714,6 +2831,7 @@ module AWS
       # @!method import_instance(options = {})
       # Calls the ImportInstance API operation.
       # @param [Hash] options
+      #
       #   * `:description` - (String)
       #   * `:launch_specification` - (Hash)
       #     * `:architecture` - (String)
@@ -2829,6 +2947,7 @@ module AWS
       # @!method import_key_pair(options = {})
       # Calls the ImportKeyPair API operation.
       # @param [Hash] options
+      #
       #   * `:key_name` - *required* - (String) The unique name for the key
       #     pair.
       #   * `:public_key_material` - *required* - (String) The public key
@@ -2843,6 +2962,7 @@ module AWS
       # @!method import_volume(options = {})
       # Calls the ImportVolume API operation.
       # @param [Hash] options
+      #
       #   * `:availability_zone` - (String)
       #   * `:image` - (Hash)
       #     * `:format` - *required* - (String)
@@ -2897,6 +3017,7 @@ module AWS
       # @!method modify_image_attribute(options = {})
       # Calls the ModifyImageAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:image_id` - *required* - (String) The ID of the AMI whose
       #     attribute you want to modify.
       #   * `:attribute` - (String) The name of the AMI attribute you want to
@@ -2934,6 +3055,7 @@ module AWS
       # @!method modify_instance_attribute(options = {})
       # Calls the ModifyInstanceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the instance whose
       #     attribute is being modified.
       #   * `:attribute` - (String) The name of the attribute being modified.
@@ -2995,6 +3117,7 @@ module AWS
       # @!method modify_network_interface_attribute(options = {})
       # Calls the ModifyNetworkInterfaceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:description` - (Hash)
       #     * `:value` - (String) String value
@@ -3009,6 +3132,7 @@ module AWS
       # @!method modify_snapshot_attribute(options = {})
       # Calls the ModifySnapshotAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_id` - *required* - (String) The ID of the EBS snapshot
       #     whose attributes are being modified.
       #   * `:attribute` - (String) The name of the attribute being modified.
@@ -3042,6 +3166,7 @@ module AWS
       # @!method modify_volume_attribute(options = {})
       # Calls the ModifyVolumeAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:volume_id` - *required* - (String)
       #   * `:auto_enable_io` - (Boolean)
       # @return [Core::Response]
@@ -3049,6 +3174,7 @@ module AWS
       # @!method modify_vpc_attribute(options = {})
       # Calls the ModifyVpcAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:vpc_id` - *required* - (String)
       #   * `:enable_dns_support` - (Hash)
       #     * `:value` - (Boolean) Boolean value
@@ -3059,6 +3185,7 @@ module AWS
       # @!method monitor_instances(options = {})
       # Calls the MonitorInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of Amazon
       #     EC2 instances on which to enable monitoring.
       # @return [Core::Response]
@@ -3073,6 +3200,7 @@ module AWS
       # @!method purchase_reserved_instances_offering(options = {})
       # Calls the PurchaseReservedInstancesOffering API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_instances_offering_id` - *required* - (String) The
       #     unique ID of the Reserved Instances offering being purchased.
       #   * `:instance_count` - *required* - (Integer) The number of Reserved
@@ -3089,6 +3217,7 @@ module AWS
       # @!method reboot_instances(options = {})
       # Calls the RebootInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of
       #     instances to terminate.
       # @return [Core::Response]
@@ -3096,6 +3225,7 @@ module AWS
       # @!method register_image(options = {})
       # Calls the RegisterImage API operation.
       # @param [Hash] options
+      #
       #   * `:image_location` - (String) The full path to your AMI manifest in
       #     Amazon S3 storage.
       #   * `:name` - (String) The name to give the new Amazon Machine Image.
@@ -3142,6 +3272,7 @@ module AWS
       # @!method release_address(options = {})
       # Calls the ReleaseAddress API operation.
       # @param [Hash] options
+      #
       #   * `:public_ip` - (String) The elastic IP address that you are
       #     releasing from your account.
       #   * `:allocation_id` - (String) The allocation ID that AWS provided
@@ -3151,6 +3282,7 @@ module AWS
       # @!method replace_network_acl_association(options = {})
       # Calls the ReplaceNetworkAclAssociation API operation.
       # @param [Hash] options
+      #
       #   * `:association_id` - *required* - (String) The ID representing the
       #     current association between the original network ACL and the
       #     subnet.
@@ -3165,6 +3297,7 @@ module AWS
       # @!method replace_network_acl_entry(options = {})
       # Calls the ReplaceNetworkAclEntry API operation.
       # @param [Hash] options
+      #
       #   * `:network_acl_id` - *required* - (String) ID of the ACL where the
       #     entry will be replaced.
       #   * `:rule_number` - *required* - (Integer) Rule number of the entry to
@@ -3197,6 +3330,7 @@ module AWS
       # @!method replace_route(options = {})
       # Calls the ReplaceRoute API operation.
       # @param [Hash] options
+      #
       #   * `:route_table_id` - *required* - (String) The ID of the route table
       #     where the route will be replaced.
       #   * `:destination_cidr_block` - *required* - (String) The CIDR address
@@ -3212,6 +3346,7 @@ module AWS
       # @!method replace_route_table_association(options = {})
       # Calls the ReplaceRouteTableAssociation API operation.
       # @param [Hash] options
+      #
       #   * `:association_id` - *required* - (String) The ID representing the
       #     current association between the original route table and the
       #     subnet.
@@ -3226,6 +3361,7 @@ module AWS
       # @!method report_instance_status(options = {})
       # Calls the ReportInstanceStatus API operation.
       # @param [Hash] options
+      #
       #   * `:instances` - (Array<String>)
       #   * `:status` - (String)
       #   * `:start_time` - (String<ISO8601 datetime>)
@@ -3237,6 +3373,7 @@ module AWS
       # @!method request_spot_instances(options = {})
       # Calls the RequestSpotInstances API operation.
       # @param [Hash] options
+      #
       #   * `:spot_price` - *required* - (String) Specifies the maximum hourly
       #     price for any Spot Instance launched to fulfill the request.
       #   * `:instance_count` - (Integer) Specifies the maximum number of Spot
@@ -3418,6 +3555,7 @@ module AWS
       # @!method reset_image_attribute(options = {})
       # Calls the ResetImageAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:image_id` - *required* - (String) The ID of the AMI whose
       #     attribute is being reset.
       #   * `:attribute` - *required* - (String) The name of the attribute
@@ -3427,6 +3565,7 @@ module AWS
       # @!method reset_instance_attribute(options = {})
       # Calls the ResetInstanceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The ID of the Amazon EC2
       #     instance whose attribute is being reset.
       #   * `:attribute` - *required* - (String) The name of the attribute
@@ -3449,6 +3588,7 @@ module AWS
       # @!method reset_network_interface_attribute(options = {})
       # Calls the ResetNetworkInterfaceAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:source_dest_check` - (String)
       # @return [Core::Response]
@@ -3456,6 +3596,7 @@ module AWS
       # @!method reset_snapshot_attribute(options = {})
       # Calls the ResetSnapshotAttribute API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_id` - *required* - (String) The ID of the snapshot whose
       #     attribute is being reset.
       #   * `:attribute` - *required* - (String) The name of the attribute
@@ -3468,6 +3609,7 @@ module AWS
       # @!method revoke_security_group_egress(options = {})
       # Calls the RevokeSecurityGroupEgress API operation.
       # @param [Hash] options
+      #
       #   * `:group_id` - *required* - (String) ID of the VPC security group to
       #     modify.
       #   * `:source_security_group_name` - (String) Deprecated.
@@ -3505,6 +3647,7 @@ module AWS
       # @!method revoke_security_group_ingress(options = {})
       # Calls the RevokeSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - (String) Name of the standard (EC2) security group
       #     to modify. The group must belong to your account. Can be used
       #     instead of GroupID for standard (EC2) security groups.
@@ -3549,6 +3692,7 @@ module AWS
       # @!method run_instances(options = {})
       # Calls the RunInstances API operation.
       # @param [Hash] options
+      #
       #   * `:image_id` - *required* - (String) Unique ID of a machine image,
       #     returned by a call to DescribeImages.
       #   * `:min_count` - *required* - (Integer) Minimum number of instances
@@ -3769,6 +3913,7 @@ module AWS
       # @!method start_instances(options = {})
       # Calls the StartInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of Amazon
       #     EC2 instances to start.
       #   * `:additional_info` - (String)
@@ -3788,6 +3933,7 @@ module AWS
       # @!method stop_instances(options = {})
       # Calls the StopInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of Amazon
       #     EC2 instances to stop.
       #   * `:force` - (Boolean) Forces the instance to stop. The instance will
@@ -3811,6 +3957,7 @@ module AWS
       # @!method terminate_instances(options = {})
       # Calls the TerminateInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of
       #     instances to terminate.
       # @return [Core::Response]
@@ -3829,6 +3976,7 @@ module AWS
       # @!method unassign_private_ip_addresses(options = {})
       # Calls the UnassignPrivateIpAddresses API operation.
       # @param [Hash] options
+      #
       #   * `:network_interface_id` - *required* - (String)
       #   * `:private_ip_addresses` - *required* - (Array<String>)
       # @return [Core::Response]
@@ -3836,6 +3984,7 @@ module AWS
       # @!method unmonitor_instances(options = {})
       # Calls the UnmonitorInstances API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) The list of Amazon
       #     EC2 instances on which to disable monitoring.
       # @return [Core::Response]

@@ -25,6 +25,7 @@ module AWS
       # @!method cancel_job(options = {})
       # Calls the CancelJob API operation.
       # @param [Hash] options
+      #
       #   * `:job_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -35,6 +36,7 @@ module AWS
       # @!method create_job(options = {})
       # Calls the CreateJob API operation.
       # @param [Hash] options
+      #
       #   * `:job_type` - *required* - (String) Valid values include:
       #     * `Import`
       #     * `Export`
@@ -55,6 +57,7 @@ module AWS
       # @!method get_status(options = {})
       # Calls the GetStatus API operation.
       # @param [Hash] options
+      #
       #   * `:job_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -80,6 +83,7 @@ module AWS
       # @!method list_jobs(options = {})
       # Calls the ListJobs API operation.
       # @param [Hash] options
+      #
       #   * `:max_jobs` - (Integer)
       #   * `:marker` - (String)
       # @return [Core::Response]
@@ -96,6 +100,7 @@ module AWS
       # @!method update_job(options = {})
       # Calls the UpdateJob API operation.
       # @param [Hash] options
+      #
       #   * `:job_id` - *required* - (String)
       #   * `:manifest` - *required* - (String)
       #   * `:job_type` - *required* - (String) Valid values include:

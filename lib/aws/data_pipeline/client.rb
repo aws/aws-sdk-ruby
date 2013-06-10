@@ -25,6 +25,7 @@ module AWS
       # @!method activate_pipeline(options = {})
       # Calls the ActivatePipeline API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline to activate.
       # @return [Core::Response]
@@ -32,6 +33,7 @@ module AWS
       # @!method create_pipeline(options = {})
       # Calls the CreatePipeline API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String) The name of the new pipeline. You
       #     can use the same name for multiple pipelines associated with your
       #     AWS account, because AWS Data Pipeline assigns each new pipeline a
@@ -60,6 +62,7 @@ module AWS
       # @!method delete_pipeline(options = {})
       # Calls the DeletePipeline API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline to be deleted.
       # @return [Core::Response]
@@ -67,6 +70,7 @@ module AWS
       # @!method describe_objects(options = {})
       # Calls the DescribeObjects API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) Identifier of the pipeline
       #     that contains the object definitions.
       #   * `:object_ids` - *required* - (Array<String>) Identifiers of the
@@ -96,6 +100,7 @@ module AWS
       # @!method describe_pipelines(options = {})
       # Calls the DescribePipelines API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_ids` - *required* - (Array<String>) Identifiers of the
       #     pipelines to describe. You can pass as many as 25 identifiers in a
       #     single call to DescribePipelines. You can obtain pipeline
@@ -116,6 +121,7 @@ module AWS
       # @!method evaluate_expression(options = {})
       # Calls the EvaluateExpression API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline.
       #   * `:object_id` - *required* - (String) The identifier of the object.
@@ -129,6 +135,7 @@ module AWS
       # @!method get_pipeline_definition(options = {})
       # Calls the GetPipelineDefinition API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline.
       #   * `:version` - (String) The version of the pipeline definition to
@@ -148,6 +155,7 @@ module AWS
       # @!method list_pipelines(options = {})
       # Calls the ListPipelines API operation.
       # @param [Hash] options
+      #
       #   * `:marker` - (String) The starting point for the results to be
       #     returned. The first time you call ListPipelines, this value should
       #     be empty. As long as the action returns HasMoreResults as True, you
@@ -166,6 +174,7 @@ module AWS
       # @!method poll_for_task(options = {})
       # Calls the PollForTask API operation.
       # @param [Hash] options
+      #
       #   * `:worker_group` - *required* - (String) Indicates the type of task
       #     the task runner is configured to accept and process. The worker
       #     group is set as a field on objects in the pipeline when they are
@@ -209,6 +218,7 @@ module AWS
       # @!method put_pipeline_definition(options = {})
       # Calls the PutPipelineDefinition API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) The identifier of the
       #     pipeline to be configured.
       #   * `:pipeline_objects` - *required* - (Array<Hash>) The objects that
@@ -235,6 +245,7 @@ module AWS
       # @!method query_objects(options = {})
       # Calls the QueryObjects API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) Identifier of the pipeline
       #     to be queried for object names.
       #   * `:query` - (Hash) Query that defines the objects to be returned.
@@ -299,6 +310,7 @@ module AWS
       # @!method report_task_progress(options = {})
       # Calls the ReportTaskProgress API operation.
       # @param [Hash] options
+      #
       #   * `:task_id` - *required* - (String) Identifier of the task assigned
       #     to the task runner. This value is provided in the TaskObject that
       #     the service returns with the response for the PollForTask action.
@@ -311,6 +323,7 @@ module AWS
       # @!method report_task_runner_heartbeat(options = {})
       # Calls the ReportTaskRunnerHeartbeat API operation.
       # @param [Hash] options
+      #
       #   * `:taskrunner_id` - *required* - (String) The identifier of the task
       #     runner. This value should be unique across your AWS account. In the
       #     case of AWS Data Pipeline Task Runner launched on a resource
@@ -335,6 +348,7 @@ module AWS
       # @!method set_status(options = {})
       # Calls the SetStatus API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) Identifies the pipeline that
       #     contains the objects.
       #   * `:object_ids` - *required* - (Array<String>) Identifies an array of
@@ -349,6 +363,7 @@ module AWS
       # @!method set_task_status(options = {})
       # Calls the SetTaskStatus API operation.
       # @param [Hash] options
+      #
       #   * `:task_id` - *required* - (String) Identifies the task assigned to
       #     the task runner. This value is set in the TaskObject that is
       #     returned by the PollForTask action.
@@ -376,6 +391,7 @@ module AWS
       # @!method validate_pipeline_definition(options = {})
       # Calls the ValidatePipelineDefinition API operation.
       # @param [Hash] options
+      #
       #   * `:pipeline_id` - *required* - (String) Identifies the pipeline
       #     whose definition is to be validated.
       #   * `:pipeline_objects` - *required* - (Array<Hash>) A list of objects
