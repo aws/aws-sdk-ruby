@@ -1384,12 +1384,16 @@ module AWS
         end
       end
 
+      def empty_response_body? response_body
+        response_body.nil? or response_body == ''
+      end
+
       # There are a few of s3 requests that can generate empty bodies and
       # yet still be errors.  These return empty bodies to comply with the
       # HTTP spec.  We have to detect these errors specially.
       def populate_error resp
         code = resp.http_response.status
-        if EMPTY_BODY_ERRORS.include?(code) and resp.http_response.body.nil?
+        if EMPTY_BODY_ERRORS.include?(code) and empty_response_body?(resp.http_response.body)
           error_class = EMPTY_BODY_ERRORS[code]
           resp.error = error_class.new(resp.http_request, resp.http_response)
         else

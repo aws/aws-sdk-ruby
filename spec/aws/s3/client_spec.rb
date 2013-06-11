@@ -67,29 +67,37 @@ module AWS
         klass = params[:klass]
         kind = params[:kind]
 
-        before(:each) do
-          Kernel.stub(:sleep)
-          http_handler.stub(:handle) do |req, resp|
-            resp.status = status
-            resp.body = nil
+        [nil, ''].each do |body|
+
+          context "when the body is #{body.inspect}" do
+
+            before(:each) do
+              Kernel.stub(:sleep)
+              http_handler.stub(:handle) do |req, resp|
+                 resp.status = status
+                 resp.body = body
+              end
+            end
+
+            it "should raise an instance of #{klass}" do
+              lambda { client.send(method, opts) }.
+                should raise_error(klass)
+            end
+  
+            it "should raise an instance of #{kind}" do
+              lambda { client.send(method, opts) }.
+                should raise_error(kind)
+            end
+  
           end
-        end
-
-        it "should raise an instance of #{klass}" do
-          lambda { client.send(method, opts) }.
-            should raise_error(klass)
-        end
-
-        it "should raise an instance of #{kind}" do
-          lambda { client.send(method, opts) }.
-            should raise_error(kind)
+  
         end
 
       end
 
       context 'cors', :cors => true do
-
-        let(:xml) { <<-XML.strip.xml_cleanup }
+  
+      let(:xml) { <<-XML.strip.xml_cleanup }
 <CORSConfiguration>
   <CORSRule>
     <AllowedMethod>GET</AllowedMethod>
@@ -330,6 +338,11 @@ module AWS
           it_should_behave_like("an s3 error response with no body",
                                 :status => 304,
                                 :klass => Errors::NotModified,
+                                :kind => Errors::ClientError)
+
+          it_should_behave_like("an s3 error response with no body",
+                                :status => 400,
+                                :klass => Errors::BadRequest,
                                 :kind => Errors::ClientError)
 
           it_should_behave_like("an s3 error response with no body",
