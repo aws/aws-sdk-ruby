@@ -97,7 +97,7 @@ module AWS
 
       context 'cors', :cors => true do
   
-      let(:xml) { <<-XML.strip.xml_cleanup }
+        let(:xml) { <<-XML.strip.xml_cleanup }
 <CORSConfiguration>
   <CORSRule>
     <AllowedMethod>GET</AllowedMethod>
