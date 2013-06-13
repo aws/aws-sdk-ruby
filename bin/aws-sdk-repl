@@ -39,7 +39,7 @@ options = {
 
 OptionParser.new do |opts|
 
-  opts.banner = "Usage: aws-console [options]"
+  opts.banner = "Usage: aws-sdk-repl [options]"
 
   opts.on("--repl REPL", "specify the repl environment, pry or irb") do |values|
     options[:repl] += values
