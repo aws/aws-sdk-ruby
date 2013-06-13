@@ -15,6 +15,10 @@ source 'http://rubygems.org'
 
 gemspec
 
+group :repl do
+  gem 'pry'
+end
+
 group :documentation do
   gem 'yard'
   gem 'redcarpet'
