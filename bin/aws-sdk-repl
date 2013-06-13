@@ -83,7 +83,7 @@ OptionParser.new do |opts|
 
 end.parse!
 
-# ammend the $LOAD_PATH
+# amend the $LOAD_PATH
 options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
