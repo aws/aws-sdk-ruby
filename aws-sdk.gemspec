@@ -26,5 +26,5 @@ Gem::Specification.new do |s|
   s.files += Dir['lib/**/*.yml']
 
   s.bindir = 'bin'
-  s.executables << 'aws-sdk-repl'
+  s.executables << 'aws-rb'
 end

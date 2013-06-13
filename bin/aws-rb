@@ -29,20 +29,20 @@ end
 
 # setup default options, check ENV for most
 options = {
-  :repl => env_bool('AWS_SDK_REPL', nil),
-  :log => env_bool('AWS_SDK_REPL_LOG', true),
-  :color => env_bool('AWS_SDK_REPL_COLOR', true),
-  :debug => env_bool('AWS_SDK_REPL_DEBUG', false),
+  :repl => env_bool('AWSRB', nil),
+  :log => env_bool('AWSRB_LOG', true),
+  :color => env_bool('AWSRB_COLOR', true),
+  :debug => env_bool('AWSRB_DEBUG', false),
   :load_paths => [],
   :require => [],
 }
 
 OptionParser.new do |opts|
 
-  opts.banner = "Usage: aws-sdk-repl [options]"
+  opts.banner = "Usage: aws-rb [options]"
 
-  opts.on("--repl REPL", "specify the repl environment, pry or irb") do |values|
-    options[:repl] += values
+  opts.on("--repl REPL", "specify the repl environment, pry or irb") do |value|
+    options[:repl] = value
   end
 
   opts.on("-l", "--[no-]log", "log client requets, on by default") do |value|
