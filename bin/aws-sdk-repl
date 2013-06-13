@@ -16,7 +16,6 @@
 $:.unshift(File.join(File.dirname(File.dirname(__FILE__)), 'lib'))
 
 require 'rubygems'
-require 'aws-sdk'
 require 'optparse'
 require 'logger'
 
@@ -58,7 +57,7 @@ OptionParser.new do |opts|
     options[:debug] = value
   end
 
-  opts.on("-Idirectory", Array, "specify $LOAD_PATH directory (may be used more than once)") do |value|
+  opts.on("-Idirectory", Array, "specify $LOAD_PATH directory (may be used more than once)") do |values|
     options[:load_paths] += values
   end
 
@@ -109,6 +108,10 @@ if options[:debug]
 end
 
 AWS.config(cfg)
+
+options[:require].each do |library|
+  require(library)
+end
 
 unless options[:repl] == 'irb'
   # these dependencies are normally autoloaded by the aws-sdk, however
