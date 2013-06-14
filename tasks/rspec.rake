@@ -32,4 +32,11 @@ task :loading_tests do
   execute_cmd("ruby spec/require_test_1.rb")
   execute_cmd("ruby spec/require_test_2.rb")
 end
+
+task :spec_isolate do
+  # execute rspec tests, one file at a time
+  spec_files = FileList["spec/**/*_spec.rb"]
+  spec_files.each do |spec_file|
+    execute_cmd("bundle exec rspec #{spec_file}")
+  end
 end
