@@ -11,25 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-def execute_cmd cmd
-  puts cmd if Rake.application.options.trace
-  system(cmd)
-  raise "Command failed with status (#{$?.to_i}): #{cmd}" if $?.to_i != 0
-end
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-desc 'Run RSpec code examples'
-task :spec => [:loading_tests] do
-  opts = ['rspec', '-c']
-  if ENV['DEBUG']
-    $DEBUG = true
-    opts += ['-d']
-  end
-  opts += FileList["spec/**/*_spec.rb"].sort
-  execute_cmd(opts.join(' '))
-end
+# Running these tests as separate process to isolate code loading order issues
 
-task :loading_tests do
-  execute_cmd("ruby spec/require_test_1.rb")
-  execute_cmd("ruby spec/require_test_2.rb")
-end
-end
+require 'aws/ec2'
+
+print "Service specific config options available from aws/svc: "
+AWS.config(:ec2_region => 'us-west-2')
+AWS.config.ec2_region
+puts "ok"
+exit 0
