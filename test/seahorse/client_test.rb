@@ -15,5 +15,45 @@ require 'test_helper'
 
 module Seahorse
   describe Client do
+
+    def api
+      { 'endpoint' => 'http://abc.com:123' }
+    end
+
+    describe '#endpoint' do
+
+      it 'is built from the :endpoint constructor option' do
+        client_class = Client.define({})
+        client = client_class.new(:endpoint => 'foo.com')
+        client.endpoint.must_equal('https://foo.com')
+      end
+
+      it 'comes from the client class API when not passed to the constructor' do
+        client_class = Client.define('endpoint' => 'http://foo.com')
+        client = client_class.new
+        client.endpoint.must_equal('http://foo.com')
+      end
+
+    end
+
+    describe '.define' do
+
+      it 'creates a new client class' do
+        client_class = Client.define({})
+        client_class.ancestors.must_include(Client)
+      end
+
+    end
+
+    describe '.api' do
+
+      it 'returns the API passed to .define' do
+        api = {}
+        client_class = Client.define(api)
+        client_class.api.must_be_same_as(api)
+      end
+
+    end
+
   end
 end
