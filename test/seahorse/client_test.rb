@@ -22,6 +22,10 @@ module Seahorse
 
     describe '#endpoint' do
 
+      it 'is an Endpoint object' do
+        client_class.new.endpoint.must_be_kind_of(Client::Endpoint)
+      end
+
       it 'is built from the :endpoint constructor option' do
         client_class = Client.define({})
         client = client_class.new(:endpoint => 'foo.com')
