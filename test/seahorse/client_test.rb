@@ -20,6 +20,19 @@ module Seahorse
       { 'endpoint' => 'http://abc.com:123' }
     end
 
+    def client_class
+      Client.define(api)
+    end
+
+    describe '#config' do
+
+      it 'returns a configuration object' do
+        client = client_class.new
+        client.config.must_be_kind_of(Client::Configuration)
+      end
+
+    end
+
     describe '#endpoint' do
 
       it 'is an Endpoint object' do

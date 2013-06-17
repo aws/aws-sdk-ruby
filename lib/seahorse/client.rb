@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
 
 module Seahorse
@@ -18,11 +19,15 @@ module Seahorse
 
     # @option options [Endpoint, URI::HTTP, URI::HTTPS, String] :endpoint
     def initialize(options = {})
+      @config = Configuration.new(options)
       @endpoint = build_endpoint(options)
     end
 
     # @return [Endpoint]
     attr_reader :endpoint
+
+    # @return [Configuration]
+    attr_reader :config
 
     private
 
