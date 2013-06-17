@@ -35,7 +35,8 @@ module Seahorse
     #
     class Endpoint < String
 
-      def initialize endpoint, options = {}
+      # @option (see #to_uri)
+      def initialize(endpoint, options = {})
         uri = to_uri(endpoint, options)
         @scheme = uri.scheme
         @host = uri.host
@@ -54,7 +55,9 @@ module Seahorse
 
       private
 
-      def to_uri endpoint, options
+      # @param [Endpoint] endpoint
+      # @option options [Boolean] :secure
+      def to_uri(endpoint, options = {})
         case endpoint
         when Endpoint, URI::HTTP, URI::HTTPS
           endpoint
@@ -70,7 +73,7 @@ module Seahorse
         end
       end
 
-      # @return [String]
+      # @return [String] Returns the endpoint formatted as a string.
       def format
         if
           (scheme == 'https' and port == 443) or

@@ -11,12 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require_relative 'client/endpoint'
+require 'seahorse/client/endpoint'
 
 module Seahorse
   class Client
 
-    def initialize options = {}
+    # @option options [Endpoint, URI::HTTP, URI::HTTPS, String] :endpoint
+    def initialize(options = {})
       @endpoint = build_endpoint(options)
     end
 
@@ -25,8 +26,10 @@ module Seahorse
 
     private
 
+    # @option options [:endpoint] The preferred endpoint.  When not set,
+    #   the endpoint will default to the value set in the API.
     # @return [Endpoint]
-    def build_endpoint options
+    def build_endpoint(options = {})
       Endpoint.new(options[:endpoint] || api['endpoint'])
     end
 
