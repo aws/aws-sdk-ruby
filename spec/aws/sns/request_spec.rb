@@ -17,10 +17,6 @@ module AWS
   class SNS
     describe Request do
 
-      it_should_behave_like "an authorize v2 request"
-
-      it_should_behave_like "an authorize v2 request with a session token"
-
       it_should_behave_like "an aws query request"
 
     end
