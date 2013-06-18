@@ -16,7 +16,13 @@ module AWS
 
     # @api private
     class Request < Core::Http::Request
-      include Core::Signature::Version2
+
+      include Core::Signature::Version4
+
+      def service
+        'sns'
+      end
+
     end
 
   end
