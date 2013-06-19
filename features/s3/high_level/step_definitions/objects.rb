@@ -119,6 +119,7 @@ When /^I ask for all objects (\d+) at a time$/ do |batch_size|
     @objects << obj
   end
 end
+
 Then /^the result should include the object with key "([^\"]*)"$/ do |key|
   @result.should have(1).item
   @result.first.should be_an S3::S3Object
@@ -380,5 +381,23 @@ Given /^I try to restore the object$/ do
     @object.restore
   rescue => e
     @exception = e
+  end
+end
+
+When(/^I ask for all objects using the delimiter "(.*?)", (\d+) at a time$/) do |delimiter, batch_size|
+  @objects = []
+  @bucket.objects.each(:batch_size => batch_size.to_i, :delimiter => delimiter) do |obj|
+    @objects << obj
+  end
+end
+
+Then(/^I should get objects with the following prefixes:$/) do |table|
+  prefixes = []
+  @objects.each do |obj|
+    prefixes << obj.prefix
+  end
+
+  table.hashes.each do |hash|
+    prefixes.should include(hash['prefix'])
   end
 end
