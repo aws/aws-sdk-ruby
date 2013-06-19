@@ -306,12 +306,15 @@ module AWS
       # @api private
       protected
       def next_markers page
-        marker = (last = page.contents.last and last.key)
-        if marker.nil?
-          raise 'Unable to find marker in S3 list objects response'
+        if page[:next_marker]
+          marker = page[:next_marker]
+        elsif page[:contents].size > 0
+          marker = page[:contents].last[:key]
         else
-          { :marker => marker }
+          raise 'Unable to find marker in S3 list objects response'
         end
+
+        { :marker => marker }
       end
 
       # processes items in batches of 1k items
