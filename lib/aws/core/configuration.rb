@@ -467,7 +467,7 @@ module AWS
 
       add_option :http_continue_threshold, false
 
-      add_option :http_idle_timeout, 60
+      add_option :http_idle_timeout, 5
 
       add_option :http_wire_trace, false, :boolean => true
 
