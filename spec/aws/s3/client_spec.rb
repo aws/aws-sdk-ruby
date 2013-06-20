@@ -2112,6 +2112,14 @@ module AWS
 
       end
 
+      it 'retries request timeout errors' do
+        resp = Core::Response.new
+        resp.http_response = Core::Http::Response.new
+        resp.http_response.status = 400
+        resp.error = AWS::S3::Errors::RequestTimeout.new
+        Client.new.send(:retryable_error?, resp).should be(true)
+      end
+
     end
 
   end

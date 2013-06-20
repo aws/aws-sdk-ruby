@@ -133,8 +133,8 @@ describe AWS do
 
       context ':http_idle_timeout' do
 
-        it 'defaults to 15' do
-          config.http_idle_timeout.should == 60
+        it 'defaults to 5' do
+          config.http_idle_timeout.should == 5
         end
 
         it 'can be changed' do
