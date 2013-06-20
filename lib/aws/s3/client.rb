@@ -1403,11 +1403,16 @@ module AWS
 
       def retryable_error? response
         super or
-          (response.request_type == :complete_multipart_upload &&
-          extract_error_details(response))
-          # complete multipart upload can return an error inside a
-          # 200 level response -- this forces us to parse the
-          # response for errors every time
+        failed_multipart_upload?(response) or
+        response.error.is_a?(Errors::RequestTimeout)
+      end
+
+      # S3 may return a 200 response code in response to complete_multipart_upload
+      # and then start streaming whitespace until it knows the final result.
+      # At that time it sends an XML message with success or failure.
+      def failed_multipart_upload? response
+        response.request_type == :complete_multipart_upload &&
+        extract_error_details(response)
       end
 
       def new_request
