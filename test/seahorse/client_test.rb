@@ -39,19 +39,29 @@ module Seahorse
 
     describe '#endpoint' do
 
-      it 'is an Endpoint object' do
+      it 'returns an Endpoint object' do
         client_class.new.endpoint.must_be_kind_of(Client::Endpoint)
       end
 
       it 'is built from the :endpoint constructor option' do
         client_class = Client.define({})
-        client = client_class.new(:endpoint => 'foo.com')
-        client.endpoint.must_equal('https://foo.com')
+        client = client_class.new(:endpoint => 'http://foo.com')
+        client.endpoint.must_equal('http://foo.com')
       end
 
       it 'comes from the client class API when not passed to the constructor' do
         client_class = Client.define('endpoint' => 'http://foo.com')
         client = client_class.new
+        client.endpoint.must_equal('http://foo.com')
+      end
+
+      it 'defaults to https when scheme not given' do
+        client = client_class.new(:endpoint => 'foo.com')
+        client.endpoint.must_equal('https://foo.com')
+      end
+
+      it 'defaults to http when :ssl is false' do
+        client = client_class.new(:endpoint => 'foo.com', :use_ssl => false)
         client.endpoint.must_equal('http://foo.com')
       end
 
