@@ -13,7 +13,7 @@
 
 source 'http://rubygems.org'
 
-gem 'seahorse-client'
+gem 'seahorse-client', :path => '../seahorse-client'
 
 group :development do
   gem 'minitest'
