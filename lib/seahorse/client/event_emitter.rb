@@ -20,9 +20,11 @@ module Seahorse
         @listeners = Hash.new
       end
 
-      # @param [Symbol] event_name
+      # @param [Symbol, String] event_name The name of an event you wish
+      #   to register a listener for.
       def on event_name, &block
-        @listeners[event_name] = block
+        @listeners[event_name.to_sym] = block
+        nil
       end
 
       # @param [Symbol] event_name

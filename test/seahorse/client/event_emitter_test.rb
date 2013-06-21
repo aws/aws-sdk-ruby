@@ -17,7 +17,26 @@ module Seahorse
   class Client
     describe EventEmitter do
 
+      def event_emitter
+        @event_emitter ||= EventEmitter.new
+      end
+
       describe '#on' do
+
+        it 'accepts symbolized event names' do
+          called = false
+          event_emitter.on(:evt) { called = true }
+          event_emitter.emit(:evt)
+          called.must_equal(true)
+        end
+
+        it 'accepts string event names' do
+          called = false
+          event_emitter.on('evt') { called = true }
+          event_emitter.emit(:evt)
+          called.must_equal(true)
+        end
+
       end
 
       describe '#emit' do
