@@ -23,6 +23,7 @@ module Seahorse
       def initialize(operation_name, params = {})
         @operation_name = operation_name
         @params = params
+        @listeners = {}
       end
 
       # @return [String]
@@ -37,7 +38,25 @@ module Seahorse
       # @return [Response]
       def send
         resp = Response.new
+        emit(:validate)
+        emit(:build)
+        emit(:sign)
+        emit(:send)
+        emit(:parse)
+        emit(:success)
+        emit(:complete)
         resp
+      end
+
+      # @param [Symbol,String] event_name
+      def on(event_name, &block)
+        @listeners[event_name] = block
+      end
+
+      private
+
+      def emit event_name
+        @listeners[event_name].call if @listeners[event_name]
       end
 
     end

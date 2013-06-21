@@ -18,7 +18,7 @@ module Seahorse
     describe Request do
 
       def request params = {}
-        @req = Request.new('operation_name', params)
+        @req ||= Request.new('operation_name', params)
       end
 
       describe '#operation_name' do
@@ -67,9 +67,13 @@ module Seahorse
 
       describe 'lifecycle' do
 
+        # standard lifecycle events emitted for a successful request
+        def events
+          [:validate, :build, :sign, :send, :parse, :success, :complete]
+        end
+
         it 'emits a sequence of standard events as a result of #send' do
           emitted = []
-          events = [:validate, :build, :sign, :send, :parse, :success, :complete]
           events.each do |event_name|
             request.on(event_name) { |*args| emitted << event_name }
           end
