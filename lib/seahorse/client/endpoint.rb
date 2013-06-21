@@ -41,7 +41,7 @@ module Seahorse
         @scheme = uri.scheme
         @host = uri.host
         @port = uri.port
-        super(format)
+        super(uri.to_s)
       end
 
       # @return [String] Returns the endpoint scheme ('https' or 'http').
@@ -64,33 +64,19 @@ module Seahorse
       private
 
       # @param [Endpoint] endpoint
-      # @option options [Boolean] :secure
+      # @option options [Boolean] :secure (true)
+      # @return [URI::HTTP, URI::HTTPS]
       def to_uri(endpoint, options = {})
-        case endpoint
-        when Endpoint, URI::HTTP, URI::HTTPS
-          endpoint
-        when String
-          unless endpoint.match(/^http/)
-            secure = options.fetch(:secure, true)
-            endpoint = secure ? "https://#{endpoint}" : "http://#{endpoint}"
-          end
-          URI.parse(endpoint)
-        else
-          msg = "expected an Endpoint, URI::HTTP, URI::HTTPS or String"
-          raise ArgumentError, msg
-        end
+        endpoint = endpoint.to_s
+        endpoint = apply_scheme(endpoint, options) unless endpoint =~ /^http/
+        URI.parse(endpoint)
       end
 
-      # @return [String] Returns the endpoint formatted as a string.
-      def format
-        if
-          (scheme == 'https' and port == 443) or
-          (scheme == 'http' and port == 80)
-        then
-          "#{scheme}://#{host}"
-        else
-          "#{scheme}://#{host}:#{port}"
-        end
+      # @param [String] endpoint
+      # @option options [Boolean] :secure (true)
+      # @return [String]
+      def apply_scheme endpoint, options
+        (options.fetch(:secure, true) ? 'https://' : 'http://') + endpoint
       end
 
     end

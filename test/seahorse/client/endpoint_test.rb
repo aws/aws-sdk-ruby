@@ -21,6 +21,36 @@ module Seahorse
         Endpoint.new('foo.com').must_be_kind_of(String)
       end
 
+      describe 'constructor' do
+
+        it 'can be constructed from a string' do
+          Endpoint.new('abc.com').must_be_kind_of(Endpoint)
+        end
+
+        it 'can be constructed from a URI::HTTP' do
+          uri = 'http://foo.com'
+          Endpoint.new(URI.parse(uri)).must_equal(uri)
+        end
+
+        it 'can be constructed from a URI::HTTPS' do
+          uri = 'https://foo.com'
+          Endpoint.new(URI.parse(uri)).must_equal(uri)
+        end
+
+        it 'can be constructed from an Endpoint' do
+          endpoint1 = Endpoint.new('abc.com')
+          endpoint2 = Endpoint.new(endpoint1) # copy constructor
+          endpoint1.must_equal(endpoint2)
+        end
+
+        it 'raises an error if you pass non valid enpoint' do
+          assert_raises(URI::InvalidURIError) do
+            Endpoint.new(Class.new)
+          end
+        end
+
+      end
+
       describe '#scheme' do
 
         it 'can be specified in the constructor' do
