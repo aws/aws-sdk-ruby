@@ -1,3 +1,2 @@
-Gemfile.local
-Gemfile*lock
+Gemfile.lock
 coverage
