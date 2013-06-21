@@ -14,3 +14,7 @@
 source 'http://rubygems.org'
 
 gem 'seahorse-client'
+
+group :development do
+  gem 'minitest'
+end
