@@ -31,8 +31,13 @@ module Seahorse
       # @return [Hash] params
       attr_reader :params
 
+      # Sends this request, returning a response or raising an error
+      # if the request fails for any reason.  Calling this method
+      # multiple times will send multiple requests.
+      # @return [Response]
       def send
-        Response.new
+        resp = Response.new
+        resp
       end
 
     end
