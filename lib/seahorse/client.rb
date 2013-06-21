@@ -19,6 +19,15 @@ module Seahorse
   class Client
 
     # @option options [Endpoint, URI::HTTP, URI::HTTPS, String] :endpoint
+    #   The web service endpoint.  At a minimum, this must specify the
+    #   hostname.  Endpoints default to https on port 443.
+    #
+    #       # defaults to https://domain.com on port 443
+    #       :hostname => https://domain.com
+    #
+    #       # specify the complete endpoint
+    #       :hostname => http://domain.com:123
+    #
     def initialize(options = {})
       @config = Configuration.new(options)
       @endpoint = build_endpoint(options)
