@@ -49,7 +49,14 @@ module Seahorse
         resp
       end
 
-      # @param [Symbol,String] event_name
+      # @overload on(event_name, &event_listener)
+      #   @param [Symbol,String] event_name The name of an event.
+      #   @yield [*args] Yields to the given block when when the named event fires.
+      #
+      # @overload on(event_name, listener)
+      #   @param [Symbol,String] event_name The name of an event.
+      #   @param [#call] listener Any object that responds to `#call`.  The
+      #     `#call` method will be invoked when the named event fires.
       def on(*args, &block)
         @events.on(*args, &block)
       end
