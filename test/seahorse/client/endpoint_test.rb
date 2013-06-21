@@ -38,6 +38,30 @@ module Seahorse
 
       end
 
+      describe '#http?' do
+
+        it 'returns true if the scheme is http' do
+          Endpoint.new('http://foo.com').http?.must_equal(true)
+        end
+
+        it 'returns false if the scheme is not http' do
+          Endpoint.new('https://foo.com').http?.must_equal(false)
+        end
+
+      end
+
+      describe '#https?' do
+
+        it 'returns true if the scheme is https' do
+          Endpoint.new('https://foo.com').https?.must_equal(true)
+        end
+
+        it 'returns false if the scheme is not https' do
+          Endpoint.new('http://foo.com').https?.must_equal(false)
+        end
+
+      end
+
       describe '#host' do
 
         it 'is passed into the constructor' do
