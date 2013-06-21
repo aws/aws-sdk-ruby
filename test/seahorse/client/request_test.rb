@@ -68,6 +68,13 @@ module Seahorse
           resp1.wont_be_same_as(resp2)
         end
 
+        it 'does not fiddle with params, they are left alone' do
+          # if sending the request attempts to mutate the params
+          # hash, then a RuntimeError is raises, failing this spec
+          params = {}.freeze
+          request(params).send
+        end
+
       end
 
     end
