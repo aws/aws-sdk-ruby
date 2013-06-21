@@ -11,8 +11,13 @@ Gem::Specification.new do |s|
   s.author = 'Amazon Web Services'
   s.email = 'trevorrowe@gmail.com'
   s.homepage = 'http://github.com/aws/aws-core-rb'
+
   s.files = [
     'LICENSE.txt',
   ]
   s.files += Dir['lib/**/*.rb']
+
+  s.add_dependency('seahorse-client')
+  s.add_development_dependency('minitest')
+
 end
