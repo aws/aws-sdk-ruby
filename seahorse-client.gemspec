@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'seahorse/client/version'
 
-Gem::Specification.new do |s|
+Gem::Specification.new do |spec|
   spec.name          = 'seahorse-client'
   spec.version       = Seahorse::Client::VERSION
   spec.authors       = ['Amazon Web Services', 'Trevor Rowe']
