@@ -1,0 +1,6 @@
+--title 'Seahorse Client'
+--markup markdown
+--no-api private
+lib/**/*.rb
+-
+LICENSE.txt
