@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.files += Dir['lib/**/*.rb']
 
   s.add_dependency('seahorse-client')
+  s.add_development_dependency('rake')
   s.add_development_dependency('minitest')
   s.add_development_dependency('simplecov')
 
