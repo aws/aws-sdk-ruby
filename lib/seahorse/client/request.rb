@@ -18,7 +18,7 @@ module Seahorse
       # @param [Client] client
       # @param [String] operation_name
       # @param [Hash] params
-      def initialize client, operation_name, params = {}
+      def initialize(client, operation_name, params = {})
         @client = client
         @operation_name = operation_name
         @params = params

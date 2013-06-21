@@ -23,7 +23,7 @@ module Seahorse
       class << self
 
         # @param [Symbol] name
-        def add_option name, default = nil
+        def add_option(name, default = nil)
 
           define_method(name) do
             @options.fetch(name, default)

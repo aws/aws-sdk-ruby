@@ -75,7 +75,7 @@ module Seahorse
       # @param [String] endpoint
       # @option options [Boolean] :use_ssl (true)
       # @return [String]
-      def apply_scheme endpoint, options
+      def apply_scheme(endpoint, options)
         (options.fetch(:use_ssl, true) ? 'https://' : 'http://') + endpoint
       end
 
