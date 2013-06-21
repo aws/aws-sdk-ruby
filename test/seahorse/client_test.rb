@@ -17,7 +17,7 @@ module Seahorse
   describe Client do
 
     def api
-      { 'endpoint' => 'http://abc.com:123' }
+      { 'endpoint' => 'http://endpoint:123' }
     end
 
     def client_class
