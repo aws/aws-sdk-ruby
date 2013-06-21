@@ -12,4 +12,10 @@
 # language governing permissions and limitations under the License.
 
 require 'minitest/autorun'
+
+if ENV['COVERAGE']
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require 'aws-core'

@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('seahorse-client')
   s.add_development_dependency('minitest')
+  s.add_development_dependency('simplecov')
 
 end
