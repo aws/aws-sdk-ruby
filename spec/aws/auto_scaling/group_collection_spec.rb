@@ -168,6 +168,20 @@ module AWS
             :placement_group => 'abc'))
         end
 
+        it 'accepts termination policies' do
+          client.should_receive(:create_auto_scaling_group).with(hash_including(
+            :termination_policies => [
+              "Default",
+              "OldestInstance",
+            ]))
+          groups.create('name', create_opts.merge(
+            :termination_policies => [
+              "Default",
+              "OldestInstance",
+            ]))
+ 
+        end
+
         it 'accepts tags' do
 
           client.should_receive(:create_auto_scaling_group).with(hash_including(
