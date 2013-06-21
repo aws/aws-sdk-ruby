@@ -28,9 +28,9 @@ module Seahorse
     #     puts Endpoint.new('foo.com')
     #     #=> 'https://foo.com'
     #
-    # You can default to a HTTP endpoint by passing `:secure => false`
+    # You can default to a HTTP endpoint by passing `:use_ssl => false`
     #
-    #     puts Endpoint.new('foo.com', :secure => false)
+    #     puts Endpoint.new('foo.com', :use_ssl => false)
     #     #=> 'http://foo.com'
     #
     class Endpoint < String
@@ -64,7 +64,7 @@ module Seahorse
       private
 
       # @param [Endpoint] endpoint
-      # @option options [Boolean] :secure (true)
+      # @option options [Boolean] :use_ssl (true)
       # @return [URI::HTTP, URI::HTTPS]
       def to_uri(endpoint, options = {})
         endpoint = endpoint.to_s
@@ -73,10 +73,10 @@ module Seahorse
       end
 
       # @param [String] endpoint
-      # @option options [Boolean] :secure (true)
+      # @option options [Boolean] :use_ssl (true)
       # @return [String]
       def apply_scheme endpoint, options
-        (options.fetch(:secure, true) ? 'https://' : 'http://') + endpoint
+        (options.fetch(:use_ssl, true) ? 'https://' : 'http://') + endpoint
       end
 
     end

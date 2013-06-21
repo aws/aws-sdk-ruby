@@ -62,8 +62,8 @@ module Seahorse
           Endpoint.new('foo.com').scheme.must_equal('https')
         end
 
-        it 'looks for the :secure options when picking the default scheme' do
-          Endpoint.new('foo.com', :secure => false).scheme.must_equal('http')
+        it 'looks for the :use_ssl options when picking the default scheme' do
+          Endpoint.new('foo.com', :use_ssl => false).scheme.must_equal('http')
         end
 
       end
