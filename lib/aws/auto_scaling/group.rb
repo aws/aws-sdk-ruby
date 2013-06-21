@@ -94,6 +94,8 @@ module AWS
 
       attribute :placement_group
 
+      attribute :termination_policies
+
       attribute :suspended_processes do
         translates_output do |processes|
           processes.inject({}) do |hash,process|
