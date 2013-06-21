@@ -23,7 +23,7 @@ Feature: Availability Zones
     When I ask for the list of EC2 availability zones
     Then the result should contain the following zone information:
     | name       | region    |
-    | us-east-1a | us-east-1 |
+    | us-east-1b | us-east-1 |
 
   @memoized
   Scenario: List availability zones with memoization

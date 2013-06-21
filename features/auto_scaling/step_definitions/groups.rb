@@ -18,7 +18,6 @@ When /^I create an auto scaling group$/ do
   @group_options = {
     :launch_configuration => @launch_configuration,
     :availability_zones => [
-      EC2::AvailabilityZone.new('us-east-1a'),
       EC2::AvailabilityZone.new('us-east-1b'),
       EC2::AvailabilityZone.new('us-east-1c'),
     ],

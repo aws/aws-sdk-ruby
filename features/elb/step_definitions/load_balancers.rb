@@ -16,7 +16,7 @@ When /^I create a load balancer$/ do
   name = "ruby-test-#{Time.now.to_i}-#{rand(1000)}"
 
   @load_balancer = @elb.load_balancers.create(name,
-    :availability_zones => %w(us-east-1a us-east-1b),
+    :availability_zones => %w(us-east-1b us-east-1c),
     :listeners => {
       :instance_port => 80,
       :instance_protocol => :http,
