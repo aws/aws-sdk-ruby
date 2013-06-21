@@ -41,6 +41,20 @@ module Seahorse
           called.must_equal(true)
         end
 
+        it 'accepts listeners as objects that respond to #call' do
+          klass = Class.new {
+            def call *args
+              @called = true
+            end
+            attr_reader :called
+          }
+          listener = klass.new
+          event_emitter.on(:evt, listener)
+          event_emitter.emit(:evt)
+          listener.called.must_equal(true)
+
+        end
+
       end
 
       describe '#emit' do
