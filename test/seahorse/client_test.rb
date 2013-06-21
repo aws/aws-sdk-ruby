@@ -24,6 +24,10 @@ module Seahorse
       Client.define(api)
     end
 
+    it 'defines a semver compatible version' do
+      Client::VERSION.must_match(/\d+\.\d+\.\d+/)
+    end
+
     describe '#config' do
 
       it 'returns a configuration object' do
