@@ -52,6 +52,14 @@ module Seahorse
 
       end
 
+      describe '#send' do
+
+        it 'returns a Response object' do
+          Request.new(client, 'operation_name').send.must_be_kind_of(Response)
+        end
+
+      end
+
     end
   end
 end
