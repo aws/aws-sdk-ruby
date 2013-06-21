@@ -61,6 +61,14 @@ module AWS
       #   Amazon EC2. For more information about cluster placement group, see
       #   [Using Cluster Instances](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html).
       #
+      # @option options [Array<String>] :termination_policies
+      #   A standalone termination policy or a list of termination policies used
+      #   to select the instance to terminate. The policies are executed in the
+      #   order they are listed. For more information on creating a termination
+      #   policy for your Auto Scaling group, go to
+      #   [Instance Termination Policy for Your Auto Scaling Group](http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html)
+      #   in the Auto Scaling Developer Guide.
+      #
       # @option options [Array<Hash>] :tags A list of tags to apply launched
       #   instances.  Each tag hash may have the following keys:
       #
@@ -102,6 +110,7 @@ module AWS
           :desired_capacity,
           :health_check_grace_period,
           :placement_group,
+          :termination_policies,
         ].each do |opt|
           group_opts[opt] = options[opt] if options.key?(opt)
         end
