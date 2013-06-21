@@ -11,9 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-task :docs do
-  rm_rf ".yardoc"
-  rm_rf "doc"
+namespace :docs do
+  task :clobber do
+    rm_rf ".yardoc"
+    rm_rf "doc"
+  end
 end
 
-YARD::Rake::YardocTask.new(:docs)
+YARD::Rake::YardocTask.new('docs')
+
+task :docs => 'docs:clobber'
