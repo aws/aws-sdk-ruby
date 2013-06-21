@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse/client/response'
+require 'seahorse/client/event_emitter'
 
 module Seahorse
   class Client
@@ -23,7 +24,7 @@ module Seahorse
       def initialize(operation_name, params = {})
         @operation_name = operation_name
         @params = params
-        @listeners = {}
+        @events = EventEmitter.new
       end
 
       # @return [String]
@@ -49,14 +50,14 @@ module Seahorse
       end
 
       # @param [Symbol,String] event_name
-      def on(event_name, &block)
-        @listeners[event_name] = block
+      def on(*args, &block)
+        @events.on(*args, &block)
       end
 
       private
 
-      def emit event_name
-        @listeners[event_name].call if @listeners[event_name]
+      def emit(*args, &block)
+        @events.emit(*args, &block)
       end
 
     end
