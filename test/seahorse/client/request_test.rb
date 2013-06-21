@@ -17,6 +17,10 @@ module Seahorse
   class Client
     describe Request do
 
+      def request params = {}
+        @req = Request.new('operation_name', params)
+      end
+
       describe '#operation_name' do
 
         it 'is set in the constructor' do
@@ -42,10 +46,6 @@ module Seahorse
 
       describe '#send' do
 
-        def request params = {}
-          @req = Request.new('operation_name', params)
-        end
-
         it 'returns a Response object' do
           request.send.must_be_kind_of(Response)
         end
@@ -61,6 +61,20 @@ module Seahorse
           # hash, then a RuntimeError is raises, failing this spec
           params = {}.freeze
           request(params).send
+        end
+
+      end
+
+      describe 'lifecycle' do
+
+        it 'emits a sequence of standard events as a result of #send' do
+          emitted = []
+          events = [:validate, :build, :sign, :send, :parse, :success, :complete]
+          events.each do |event_name|
+            request.on(event_name) { |*args| emitted << event_name }
+          end
+          request.send
+          emitted.must_equal(events)
         end
 
       end
