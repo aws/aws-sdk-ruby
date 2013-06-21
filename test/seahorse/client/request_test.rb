@@ -54,8 +54,18 @@ module Seahorse
 
       describe '#send' do
 
+        def request params = {}
+          @req = Request.new(client, 'operation_name', params)
+        end
+
         it 'returns a Response object' do
-          Request.new(client, 'operation_name').send.must_be_kind_of(Response)
+          request.send.must_be_kind_of(Response)
+        end
+
+        it 'returns a new response everytime #send is called' do
+          resp1 = request.send
+          resp2 = request.send
+          resp1.wont_be_same_as(resp2)
         end
 
       end
