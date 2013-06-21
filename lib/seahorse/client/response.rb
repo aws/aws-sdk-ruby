@@ -11,34 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse/client/response'
-
 module Seahorse
   class Client
-    class Request
-
-      # @param [Client] client
-      # @param [String] operation_name
-      # @param [Hash] params
-      def initialize(client, operation_name, params = {})
-        @client = client
-        @operation_name = operation_name
-        @params = params
-      end
-
-      # @return [Client]
-      attr_reader :client
-
-      # @return [String]
-      attr_reader :operation_name
-
-      # @return [Hash] params
-      attr_reader :params
-
-      def send
-        Response.new
-      end
-
+    class Response
     end
   end
 end
