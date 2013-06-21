@@ -14,6 +14,7 @@
 require 'seahorse/client/version'
 require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
+require 'seahorse/client/request'
 
 module Seahorse
   class Client
