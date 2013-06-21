@@ -17,6 +17,16 @@ module Seahorse
   class Client
     describe Configuration do
 
+      # this throw-away helper class extends Configuration.  This allows tests
+      # to add_options without leaking state to the next test case.
+      def config_class
+        @klass ||= Class.new(Configuration)
+      end
+
+      def config options = {}
+        config_class.new(options)
+      end
+
       it 'can be constructed without any arguments' do
         Configuration.new.must_be_kind_of(Configuration)
       end
@@ -24,12 +34,27 @@ module Seahorse
       describe '.add_option' do
 
         it 'defines a getter' do
-          config = Configuration.new
+          config = config_class.new
           config.wont_respond_to(:new_getter)
-          Configuration.add_option(:new_getter)
+          config_class.add_option(:new_getter)
           config.must_respond_to(:new_getter)
         end
 
+        describe 'default values' do
+
+          it 'accepts a default options' do
+            config_class.add_option :attr, 'default'
+            config_class.new.attr.must_equal('default')
+          end
+
+          it 'allows users to override defaults' do
+            config_class.add_option :attr, 'default'
+            config_class.new(:attr => 'value').attr.must_equal('value')
+          end
+
+        end
+
+      end
       end
 
     end
