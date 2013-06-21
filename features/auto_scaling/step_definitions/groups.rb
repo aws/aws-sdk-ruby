@@ -29,6 +29,9 @@ When /^I create an auto scaling group$/ do
     :desired_capacity => 1,
     :health_check_grace_period => 10,
     :health_check_type => :ec2,
+    :termination_policies => [
+      "Default",
+    ],
     :tags => [
       { :key => 'k1' },
       { :key => 'k2', :value => 'v2' },
