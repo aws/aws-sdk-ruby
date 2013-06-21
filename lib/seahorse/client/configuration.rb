@@ -15,7 +15,7 @@ module Seahorse
   class Client
     class Configuration
 
-      # @param [Hash] options
+      # @option options [Boolean] :use_ssl (true)
       def initialize(options = {})
         @options = options
       end
@@ -32,6 +32,8 @@ module Seahorse
         end
 
       end
+
+      add_option :use_ssl, true
 
     end
   end
