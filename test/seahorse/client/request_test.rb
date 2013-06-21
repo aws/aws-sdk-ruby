@@ -17,22 +17,10 @@ module Seahorse
   class Client
     describe Request do
 
-      def client
-        @client ||= Object.new
-      end
-
-      describe '#client' do
-
-        it 'is set in the constructor' do
-          Request.new(client, 'operation_name').client.must_be_same_as(client)
-        end
-
-      end
-
       describe '#operation_name' do
 
         it 'is set in the constructor' do
-          req = Request.new(client, 'operation_name')
+          req = Request.new('operation_name')
           req.operation_name.must_equal('operation_name')
         end
 
@@ -41,12 +29,12 @@ module Seahorse
       describe '#params' do
 
         it 'defaults to an empty hash' do
-          Request.new(client, 'operation_name').params.must_equal({})
+          Request.new('operation_name').params.must_equal({})
         end
 
         it 'can be set in the constructor' do
           params = {}
-          req = Request.new(client, 'operation_name', params)
+          req = Request.new('operation_name', params)
           req.params.must_be_same_as(params)
         end
 
@@ -55,7 +43,7 @@ module Seahorse
       describe '#send' do
 
         def request params = {}
-          @req = Request.new(client, 'operation_name', params)
+          @req = Request.new('operation_name', params)
         end
 
         it 'returns a Response object' do
