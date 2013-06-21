@@ -32,6 +32,10 @@ module Seahorse
     #       # defaults are ignored, as scheme and port are present
     #       :hostname => http://domain.com:123
     #
+    # @option options [Boolean] :use_ssl (true) Specifies the default
+    #   scheme for the #endpoint when not specified.  Defaults to `true`
+    #   which creates https endpoints.
+    #
     def initialize(options = {})
       @config = Configuration.new(options)
       @endpoint = build_endpoint(options)
