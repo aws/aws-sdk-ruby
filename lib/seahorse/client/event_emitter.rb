@@ -34,9 +34,7 @@ module Seahorse
 
       # @param [Symbol] event_name
       def emit event_name
-        if @listeners.key?(event_name)
-          @listeners[event_name].each(&:call)
-        end
+        @listeners.fetch(event_name, []).each(&:call)
         nil
       end
 
