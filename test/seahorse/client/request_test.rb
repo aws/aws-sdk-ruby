@@ -104,6 +104,17 @@ module Seahorse
 
         describe ':build' do
 
+          it 'emits a http request and the request params' do
+            yielded = []
+            request.on(:build) do |http_request, params|
+              yielded << http_request
+              yielded << params
+            end
+            request.send
+            yielded[0].must_be_kind_of(Http::Request)
+            yielded[1].must_be_same_as(request.params)
+          end
+
           it 'stops emitting and raises if a listener raises' do
             request.on(:build) { |*args| raise 'error' }
             assert_raises(RuntimeError) { request.send }

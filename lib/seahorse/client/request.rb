@@ -83,7 +83,7 @@ module Seahorse
       def send
         resp = Response.new
         @events.emit(:validate, params)
-        @events.emit(:build)
+        @events.emit(:build, Http::Request.new, params)
         @events.emit(:sign)
         @events.emit(:send)
         @events.emit(:parse)
