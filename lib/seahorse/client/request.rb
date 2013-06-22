@@ -63,8 +63,8 @@ module Seahorse
 
       private
 
-      def emit(*args, &block)
-        @events.emit(*args, &block)
+      def emit(*args)
+        @events.emit(*args)
       end
 
     end
