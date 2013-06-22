@@ -132,6 +132,15 @@ module Seahorse
             yielded.must_be_kind_of(Http::Request)
           end
 
+          it 'emits the same http request to :sign as it does to :build' do
+            yielded_by_build = nil
+            yielded_by_sign = nil
+            request.on(:build) { |req, params| yielded_by_build = req }
+            request.on(:sign) { |req| yielded_by_sign = req }
+            request.send
+            yielded_by_sign.must_be_same_as(yielded_by_build)
+          end
+
           it 'stops emitting and raises if a listener raises' do
             request.on(:sign) { |*args| raise 'error' }
             assert_raises(RuntimeError) { request.send }

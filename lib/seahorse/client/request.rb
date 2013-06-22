@@ -81,10 +81,13 @@ module Seahorse
       # multiple times will send multiple requests.
       # @return [Response]
       def send
+
+        http_request = Http::Request.new
+
         resp = Response.new
         @events.emit(:validate, params)
-        @events.emit(:build, Http::Request.new, params)
-        @events.emit(:sign, Http::Request.new)
+        @events.emit(:build, http_request, params)
+        @events.emit(:sign, http_request)
         @events.emit(:send)
         @events.emit(:parse)
         @events.emit(:success)
