@@ -61,17 +61,12 @@ module Seahorse
     class Request
 
       # @param [Client] client
-      # @param [String] operation_name
       # @param [Hash] params
       # @api private
-      def initialize(operation_name, params = {})
-        @operation_name = operation_name
+      def initialize(params = {})
         @params = params
         @events = EventEmitter.new
       end
-
-      # @return [String]
-      attr_reader :operation_name
 
       # @return [Hash]
       attr_reader :params

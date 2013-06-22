@@ -18,27 +18,18 @@ module Seahorse
     describe Request do
 
       def request params = {}
-        @req ||= Request.new('operation_name', params)
-      end
-
-      describe '#operation_name' do
-
-        it 'is set in the constructor' do
-          req = Request.new('operation_name')
-          req.operation_name.must_equal('operation_name')
-        end
-
+        @req ||= Request.new(params)
       end
 
       describe '#params' do
 
         it 'defaults to an empty hash' do
-          Request.new('operation_name').params.must_equal({})
+          Request.new.params.must_equal({})
         end
 
         it 'can be set in the constructor' do
           params = {}
-          req = Request.new('operation_name', params)
+          req = Request.new(params)
           req.params.must_be_same_as(params)
         end
 
