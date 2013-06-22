@@ -44,11 +44,8 @@ module Seahorse
       private
 
       def callable obj
-        if obj.respond_to?(:call)
-          obj
-        else
-          raise ArgumentError, EXPECTED_CALLABLE
-        end
+        raise ArgumentError, EXPECTED_CALLABLE unless obj.respond_to?(:call)
+        obj
       end
 
     end
