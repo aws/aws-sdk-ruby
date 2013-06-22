@@ -21,7 +21,11 @@ module Seahorse
     end
 
     def client_class
-      Client.define(api)
+      @client_class ||= Client.define(api)
+    end
+
+    def client
+      @client ||= client_class.new
     end
 
     it 'defines a semver compatible version' do
@@ -82,6 +86,24 @@ module Seahorse
         api = {}
         client_class = Client.define(api)
         client_class.api.must_be_same_as(api)
+      end
+
+    end
+
+    describe '#build_request' do
+
+      it 'returns a Request object' do
+        client.build_request(:operation_name).must_be_kind_of(Client::Request)
+      end
+
+      it 'defaults the request params to {}' do
+        client.build_request(:operation_name).params.must_equal({})
+      end
+
+      it 'passes along params' do
+        params = {}
+        req = client.build_request(:operation_name, params)
+        req.params.must_be_same_as(params)
       end
 
     end

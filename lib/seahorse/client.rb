@@ -49,6 +49,14 @@ module Seahorse
     # @return [Configuration]
     attr_reader :config
 
+    # Builds and returns a {Request} for the named operation.  The request
+    # will not have been sent.
+    # @param [Symbol, String] operation_name
+    # @return [Request]
+    def build_request(operation_name, params = {})
+      Request.new(params)
+    end
+
     private
 
     # @option options [:endpoint] The preferred endpoint.  When not set,
