@@ -22,8 +22,9 @@ module Seahorse
 
       # @param [Symbol, String] event_name The name of an event you wish
       #   to register a listener for.
-      def on event_name, &block
-        @listeners[event_name.to_sym] = block
+      def on event_name, listener = nil, &block
+        listener ||= block
+        @listeners[event_name.to_sym] = listener
         nil
       end
 

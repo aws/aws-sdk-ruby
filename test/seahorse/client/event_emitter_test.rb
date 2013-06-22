@@ -42,17 +42,11 @@ module Seahorse
         end
 
         it 'accepts listeners as objects that respond to #call' do
-          klass = Class.new {
-            def call *args
-              @called = true
-            end
-            attr_reader :called
-          }
-          listener = klass.new
+          listener = MiniTest::Mock.new
+          listener.expect(:call, nil)
           event_emitter.on(:evt, listener)
           event_emitter.emit(:evt)
-          listener.called.must_equal(true)
-
+          listener.verify
         end
 
       end
