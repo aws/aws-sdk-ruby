@@ -35,6 +35,14 @@ module Seahorse
 
       end
 
+      describe '#events' do
+
+        it 'returns the event emitter for the request' do
+          request.events.must_be_kind_of(EventEmitter)
+        end
+
+      end
+
       describe '#send' do
 
         it 'returns a Response object' do

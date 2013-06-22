@@ -70,6 +70,9 @@ module Seahorse
       # @return [Hash]
       attr_reader :params
 
+      # @return [EventEmitter]
+      attr_reader :events
+
       # Sends this request, returning a response or raising an error
       # if the request fails for any reason.  Calling this method
       # multiple times will send multiple requests.
@@ -79,13 +82,13 @@ module Seahorse
         http_request = Http::Request.new
 
         resp = Response.new
-        @events.emit(:validate, params)
-        @events.emit(:build, http_request, params)
-        @events.emit(:sign, http_request)
-        @events.emit(:send)
-        @events.emit(:parse)
-        @events.emit(:success)
-        @events.emit(:complete)
+        events.emit(:validate, params)
+        events.emit(:build, http_request, params)
+        events.emit(:sign, http_request)
+        events.emit(:send)
+        events.emit(:parse)
+        events.emit(:success)
+        events.emit(:complete)
         resp
       end
 
@@ -94,7 +97,7 @@ module Seahorse
       # @return (see EventEmitter#on)
       # @see EventEmitter#on
       def on(event_name, listener = nil, &block)
-        @events.on(event_name, listener, &block)
+        events.on(event_name, listener, &block)
       end
 
     end
