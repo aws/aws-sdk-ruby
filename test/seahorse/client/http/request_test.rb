@@ -11,13 +11,27 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'test_helper'
+
 module Seahorse
   class Client
     module Http
-      class Request
+      describe Request do
 
-        # @return [Endpoint, nil]
-        attr_accessor :endpoint
+        describe '#endpoint' do
+
+          it 'defaults to nil' do
+            Request.new.endpoint.must_equal(nil)
+          end
+
+          it 'can be set' do
+            endpoint = Endpoint.new('domain.com')
+            req = Request.new
+            req.endpoint = endpoint
+            req.endpoint.must_be_same_as(endpoint)
+          end
+
+        end
 
       end
     end
