@@ -25,8 +25,34 @@ module Seahorse
         end
       end
 
-      # @param [Symbol, String] event_name The name of an event you wish
-      #   to register a listener for.
+      # Registers a listener for the given event.  When {#emit} is called,
+      # the listener will be called.  Any additional arguments passed
+      # to {#emit} will be passed along to the listener's #call method.
+      #
+      # A listener is any object that responds to #call.  You can also
+      # register a listener using the block form of this method.
+      #
+      # @example Register a listener with a block
+      #
+      #    event_emitter.on(:event_name) do |arg1, arg2|
+      #      # arg1 will be 'abc' and arg2 will be 'xyz'
+      #    end
+      #    event_emitter.emit(:event_name, 'abc', 'xyz')
+      #
+      # @example Register a listener with an object that responds to #call
+      #
+      #    class Listener
+      #      def call *args
+      #        puts "Called with #{args.inspect}"
+      #      end
+      #    end
+      #
+      #    event_emitter.on(:event_name, Listener.new)
+      #    event_emitter.emit(:event_name, 'abc', 'xyz')
+      #
+      # @param [Symbol, String] event_name The name of an event.
+      # @param [#call] listener
+      # @return [nil]
       def on event_name, listener = nil, &block
         @listeners[event_name.to_sym] << callable(listener || block)
         nil
