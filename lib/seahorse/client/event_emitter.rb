@@ -37,6 +37,7 @@ module Seahorse
         if @listeners.key?(event_name)
           @listeners[event_name].each(&:call)
         end
+        nil
       end
 
       private
