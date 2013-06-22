@@ -82,7 +82,7 @@ module Seahorse
       # @return [Response]
       def send
         resp = Response.new
-        emit(:validate)
+        emit(:validate, params)
         emit(:build)
         emit(:sign)
         emit(:send)

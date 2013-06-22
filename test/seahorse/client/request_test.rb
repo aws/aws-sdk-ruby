@@ -87,6 +87,13 @@ module Seahorse
 
         describe ':validate' do
 
+          it 'emits the request parameters' do
+            yielded = nil
+            request.on(:validate) { |params| yielded = params }
+            request.send
+            yielded.must_be_same_as(request.params)
+          end
+
           it 'stops emitting and raises if a listener raises' do
             request.on(:validate) { |*args| raise 'error' }
             assert_raises(RuntimeError) { request.send }
