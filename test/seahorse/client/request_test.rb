@@ -65,7 +65,7 @@ module Seahorse
 
       end
 
-      describe 'lifecycle' do
+      describe 'lifecycle events' do
 
         # standard lifecycle events emitted for a successful request
         def events
@@ -85,22 +85,34 @@ module Seahorse
           @emitted.must_equal(events)
         end
 
-        it 'stops emitting and raises if a :validate listener raises' do
-          request.on(:validate) { |*args| raise 'error' }
-          assert_raises(RuntimeError) { request.send }
-          @emitted.must_equal([:validate])
+        describe ':validate' do
+
+          it 'stops emitting and raises if a listener raises' do
+            request.on(:validate) { |*args| raise 'error' }
+            assert_raises(RuntimeError) { request.send }
+            @emitted.must_equal([:validate])
+          end
+
         end
 
-        it 'stops emitting and raises if a :build listener raises' do
-          request.on(:build) { |*args| raise 'error' }
-          assert_raises(RuntimeError) { request.send }
-          @emitted.must_equal([:validate, :build])
+        describe ':build' do
+
+          it 'stops emitting and raises if a listener raises' do
+            request.on(:build) { |*args| raise 'error' }
+            assert_raises(RuntimeError) { request.send }
+            @emitted.must_equal([:validate, :build])
+          end
+
         end
 
-        it 'stops emitting and raises if a :sign listener raises' do
-          request.on(:sign) { |*args| raise 'error' }
-          assert_raises(RuntimeError) { request.send }
-          @emitted.must_equal([:validate, :build, :sign])
+        describe ':sign' do
+
+          it 'stops emitting and raises if a listener raises' do
+            request.on(:sign) { |*args| raise 'error' }
+            assert_raises(RuntimeError) { request.send }
+            @emitted.must_equal([:validate, :build, :sign])
+          end
+
         end
 
       end
