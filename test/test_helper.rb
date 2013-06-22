@@ -13,6 +13,11 @@
 
 require 'minitest/autorun'
 
+if ENV['VERBOSE']
+  require 'minitest/reporters'
+  MiniTest::Reporters.use! MiniTest::Reporters::SpecReporter.new
+end
+
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start
