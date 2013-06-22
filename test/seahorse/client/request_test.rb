@@ -72,13 +72,35 @@ module Seahorse
           [:validate, :build, :sign, :send, :parse, :success, :complete]
         end
 
-        it 'emits a sequence of standard events as a result of #send' do
-          emitted = []
+        def setup
+          # keep track of emitted events
+          @emitted = []
           events.each do |event_name|
-            request.on(event_name) { |*args| emitted << event_name }
+            request.on(event_name) { |*args| @emitted << event_name }
           end
+        end
+
+        it 'emits a sequence of standard events as a result of #send' do
           request.send
-          emitted.must_equal(events)
+          @emitted.must_equal(events)
+        end
+
+        it 'stops emitting and raises if a :validate listener raises' do
+          request.on(:validate) { |*args| raise 'error' }
+          assert_raises(RuntimeError) { request.send }
+          @emitted.must_equal([:validate])
+        end
+
+        it 'stops emitting and raises if a :build listener raises' do
+          request.on(:build) { |*args| raise 'error' }
+          assert_raises(RuntimeError) { request.send }
+          @emitted.must_equal([:validate, :build])
+        end
+
+        it 'stops emitting and raises if a :sign listener raises' do
+          request.on(:sign) { |*args| raise 'error' }
+          assert_raises(RuntimeError) { request.send }
+          @emitted.must_equal([:validate, :build, :sign])
         end
 
       end
