@@ -16,18 +16,40 @@ module Seahorse
     module Http
       class HeaderHash
 
+        include Enumerable
+
         # @api private
         def initialize
           @data = {}
         end
 
+        # @param [String] key
+        # @return [String]
         def [] key
           @data[key.to_s]
         end
 
+        # @param [String] key
+        # @param [String] value
         def []= key, value
           @data[key.to_s] = value
         end
+
+        # @yield [key, value]
+        # @yieldparam [String] key
+        # @yieldparam [String] value
+        # @return [nil]
+        def each &block
+          if block_given?
+            @data.each_pair do |key, value|
+              yield(key, value)
+            end
+            nil
+          else
+            @data.enum_for(:each)
+          end
+        end
+        alias_method :each_pair, :each
 
         # @return [Hash]
         def to_hash

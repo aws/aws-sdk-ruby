@@ -48,6 +48,49 @@ module Seahorse
 
         end
 
+        describe '#each' do
+
+          it 'is enumerable' do
+            hash.must_be_kind_of(Enumerable)
+          end
+
+          it 'returns nil if a block is given' do
+            ret = hash.each {}
+            ret.must_equal(nil)
+          end
+
+          it 'returns an Enumerator if a block is not given' do
+            hash.each.must_be_kind_of(Enumerator)
+          end
+
+          it 'yields hash keys and values' do
+            hash['key1'] = 'value1'
+            hash['key2'] = 'value2'
+            yielded = []
+            hash.each do |key, value|
+              yielded << [key, value]
+            end
+            yielded.sort_by(&:first).must_equal([
+              ['key1', 'value1'],
+              ['key2', 'value2'],
+            ])
+          end
+
+          it 'is aliased as #each_pair' do
+            hash['key1'] = 'value1'
+            hash['key2'] = 'value2'
+            yielded = []
+            hash.each_pair do |key, value|
+              yielded << [key, value]
+            end
+            yielded.sort_by(&:first).must_equal([
+              ['key1', 'value1'],
+              ['key2', 'value2'],
+            ])
+          end
+
+        end
+
 
       end
     end
