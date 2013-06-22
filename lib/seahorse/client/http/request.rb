@@ -11,13 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'seahorse/client/http/header_hash'
+
 module Seahorse
   class Client
     module Http
       class Request
 
+        def initialize
+          @headers = HeaderHash.new
+        end
+
         # @return [Endpoint, nil]
         attr_accessor :endpoint
+
+        # @return [HeaderHash]
+        attr_accessor :headers
 
       end
     end

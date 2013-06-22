@@ -33,6 +33,14 @@ module Seahorse
 
         end
 
+        describe '#headers' do
+
+          it 'defaults to an empty header hash' do
+            Request.new.headers.must_be_kind_of(HeaderHash)
+          end
+
+        end
+
       end
     end
   end
