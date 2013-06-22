@@ -17,7 +17,9 @@ module Seahorse
 
       # @api private
       def initialize
-        @listeners = Hash.new
+        @listeners = Hash.new do |hash,event_name|
+          hash[event_name] = []
+        end
       end
 
       # @param [Symbol, String] event_name The name of an event you wish
@@ -28,13 +30,15 @@ module Seahorse
           msg = 'expected a block or a listener that responds to #call'
           raise ArgumentError, msg
         end
-        @listeners[event_name.to_sym] = listener
+        @listeners[event_name.to_sym] << listener
         nil
       end
 
       # @param [Symbol] event_name
       def emit event_name
-        @listeners[event_name].call if @listeners[event_name]
+        if @listeners.key?(event_name)
+          @listeners[event_name].each(&:call)
+        end
       end
 
     end
