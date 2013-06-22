@@ -32,7 +32,7 @@ module Seahorse
         # @param [String] key
         # @param [String] value
         def []= key, value
-          @data[key.to_s] = value
+          @data[key.to_s] = value.to_s
         end
 
         # @yield [key, value]

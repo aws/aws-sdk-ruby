@@ -34,6 +34,11 @@ module Seahorse
           hash[:key].must_equal('value')
         end
 
+        it 'stringifies values' do
+          hash['key'] = 123
+          hash['key'].must_equal('123')
+        end
+
         describe '#to_hash' do
 
           it 'returns a regular hash' do
