@@ -49,6 +49,12 @@ module Seahorse
           listener.verify
         end
 
+        it 'raises an argument error if no listener (or block) is passed' do
+          assert_raises(ArgumentError) do
+            event_emitter.on(:evt)
+          end
+        end
+
       end
 
       describe '#emit' do

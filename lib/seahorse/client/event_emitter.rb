@@ -24,6 +24,10 @@ module Seahorse
       #   to register a listener for.
       def on event_name, listener = nil, &block
         listener ||= block
+        unless listener.respond_to?(:call)
+          msg = 'expected a block or a listener that responds to #call'
+          raise ArgumentError, msg
+        end
         @listeners[event_name.to_sym] = listener
         nil
       end
