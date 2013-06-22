@@ -51,6 +51,12 @@ module Seahorse
             hash.to_h.must_equal({ 'abc' => 'xyz' })
           end
 
+          it 'returns a new hash that protects internal state' do
+            hash['abc'] = 'xyz'
+            hash.to_hash['abc'] = 'mno'
+            hash['abc'].must_equal('xyz')
+          end
+
         end
 
         describe '#each' do
