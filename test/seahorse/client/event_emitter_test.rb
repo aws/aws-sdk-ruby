@@ -55,6 +55,12 @@ module Seahorse
           end
         end
 
+        it 'raises an argument error if the listener does not respond to call' do
+          assert_raises(ArgumentError) do
+            event_emitter.on(:evt, Object.new)
+          end
+        end
+
       end
 
       describe '#emit' do
