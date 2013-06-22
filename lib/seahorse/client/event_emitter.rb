@@ -16,6 +16,9 @@ module Seahorse
     class EventEmitter
 
       # @api private
+      EXPECTED_CALLABLE = 'expected listener or block that responds to #call'
+
+      # @api private
       def initialize
         @listeners = Hash.new do |hash,event_name|
           hash[event_name] = []
@@ -25,12 +28,7 @@ module Seahorse
       # @param [Symbol, String] event_name The name of an event you wish
       #   to register a listener for.
       def on event_name, listener = nil, &block
-        listener ||= block
-        unless listener.respond_to?(:call)
-          msg = 'expected a block or a listener that responds to #call'
-          raise ArgumentError, msg
-        end
-        @listeners[event_name.to_sym] << listener
+        @listeners[event_name.to_sym] << callable(listener || block)
         nil
       end
 
@@ -38,6 +36,16 @@ module Seahorse
       def emit event_name
         if @listeners.key?(event_name)
           @listeners[event_name].each(&:call)
+        end
+      end
+
+      private
+
+      def callable obj
+        if obj.respond_to?(:call)
+          obj
+        else
+          raise ArgumentError, EXPECTED_CALLABLE
         end
       end
 
