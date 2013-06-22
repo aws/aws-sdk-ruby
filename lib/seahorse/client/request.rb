@@ -60,7 +60,6 @@ module Seahorse
     #
     class Request
 
-      # @param [Client] client
       # @param [Hash] params
       # @api private
       def initialize(params = {})
