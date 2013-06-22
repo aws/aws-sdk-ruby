@@ -64,6 +64,15 @@ module Seahorse
       end
 
       describe '#emit' do
+
+        it 'calls all listeners registered to an event' do
+          called = []
+          event_emitter.on(:evt) { called << :listener_a }
+          event_emitter.on(:evt) { called << :listener_b }
+          event_emitter.emit(:evt)
+          called.must_equal([:listener_a, :listener_b])
+        end
+
       end
 
     end
