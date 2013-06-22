@@ -13,7 +13,7 @@
 
 require 'bundler/setup'
 
-Bundler.require(:default, :development)
+Bundler.require(:development)
 
 Dir[File.join('tasks', '**', '*.rake')].each do |task_file|
   load task_file
