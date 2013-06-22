@@ -58,8 +58,11 @@ module Seahorse
         nil
       end
 
-      # Calls each of the event listeners with *args.
+      # Invokes the #call method for each listener of the given event.
+      # Additional arguments passed as `*args` will be passed along to
+      # each listener.
       # @param [Symbol, String] event_name
+      # @return [nil]
       def emit event_name, *args
         @listeners.fetch(event_name.to_sym, []).each do |listener|
           listener.call(*args)
