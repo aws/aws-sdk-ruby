@@ -20,7 +20,9 @@ end
 
 if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter ('/test')
+  end
 end
 
 require 'seahorse-client'
