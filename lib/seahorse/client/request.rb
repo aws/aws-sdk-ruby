@@ -84,7 +84,7 @@ module Seahorse
         resp = Response.new
         @events.emit(:validate, params)
         @events.emit(:build, Http::Request.new, params)
-        @events.emit(:sign)
+        @events.emit(:sign, Http::Request.new)
         @events.emit(:send)
         @events.emit(:parse)
         @events.emit(:success)

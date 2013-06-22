@@ -125,6 +125,13 @@ module Seahorse
 
         describe ':sign' do
 
+          it 'emits a http request' do
+            yielded = nil
+            request.on(:sign) { |http_request| yielded = http_request }
+            request.send
+            yielded.must_be_kind_of(Http::Request)
+          end
+
           it 'stops emitting and raises if a listener raises' do
             request.on(:sign) { |*args| raise 'error' }
             assert_raises(RuntimeError) { request.send }
