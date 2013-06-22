@@ -82,13 +82,13 @@ module Seahorse
       # @return [Response]
       def send
         resp = Response.new
-        emit(:validate, params)
-        emit(:build)
-        emit(:sign)
-        emit(:send)
-        emit(:parse)
-        emit(:success)
-        emit(:complete)
+        @events.emit(:validate, params)
+        @events.emit(:build)
+        @events.emit(:sign)
+        @events.emit(:send)
+        @events.emit(:parse)
+        @events.emit(:success)
+        @events.emit(:complete)
         resp
       end
 
@@ -102,12 +102,6 @@ module Seahorse
       #     `#call` method will be invoked when the named event fires.
       def on(*args, &block)
         @events.on(*args, &block)
-      end
-
-      private
-
-      def emit(*args)
-        @events.emit(*args)
       end
 
     end
