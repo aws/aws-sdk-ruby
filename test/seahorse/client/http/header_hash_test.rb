@@ -34,9 +34,20 @@ module Seahorse
           hash[:key].must_equal('value')
         end
 
-        it 'can be converted to a regular hash' do
-          hash.to_hash.must_equal({})
+        describe '#to_hash' do
+
+          it 'returns a regular hash' do
+            hash[:abc] = 'xyz'
+            hash.to_hash.must_equal({ 'abc' => 'xyz' })
+          end
+
+          it 'is aliased as #to_h' do
+            hash[:abc] = 'xyz'
+            hash.to_h.must_equal({ 'abc' => 'xyz' })
+          end
+
         end
+
 
       end
     end
