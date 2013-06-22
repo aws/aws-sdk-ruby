@@ -73,6 +73,13 @@ module Seahorse
           called.must_equal([:listener_a, :listener_b])
         end
 
+        it 'accepts strings for event names' do
+          called = false
+          event_emitter.on(:evt) { called = true }
+          event_emitter.emit('evt')
+          called.must_equal(true)
+        end
+
         it 'returns nil' do
           event_emitter.on(:evt) {}
           event_emitter.emit(:evt).must_equal(nil)

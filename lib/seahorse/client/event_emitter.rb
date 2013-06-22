@@ -32,9 +32,9 @@ module Seahorse
         nil
       end
 
-      # @param [Symbol] event_name
+      # @param [Symbol, String] event_name
       def emit event_name
-        @listeners.fetch(event_name, []).each(&:call)
+        @listeners.fetch(event_name.to_sym, []).each(&:call)
         nil
       end
 
