@@ -16,11 +16,54 @@ require 'seahorse/client/event_emitter'
 
 module Seahorse
   class Client
+
+    # Represents a single web service request.
+    #
+    # # Building a Request
+    #
+    # You should not need to construct a Request object directly.  They
+    # are generally constructed by a {Client}.  Normally the client will
+    # build and send a {Request}, returning only the resultant {Response}.
+    #
+    # You can ask a client to build (and not send a request) by calling
+    # {Client#build_request}.  This can be useful if you need to send the
+    # same request multiple times or if you need to add additional
+    # event listeners to the request.
+    #
+    #     req = client.build_request(:request_name, request_params)
+    #     req.send
+    #     #=> #<Seahorse::Client::Response...>
+    #
+    # # Request Lifecycle
+    #
+    # When you {#send} a request, it will emit a sequence of events.
+    # The {#send} method will either return a successful response or will
+    # raise an error.  Between the call to {#send} and the final result,
+    # a sequence of events will be emitted.  A successful request will
+    # emit the following events:
+    #
+    # * `:validate`
+    # * `:build`
+    # * `:sign`
+    # * `:send`
+    # * `:http_headers`
+    # * `:http_data`
+    # * `:http_done`
+    # * `:parse`
+    # * `:success`
+    # * `:complete`
+    #
+    # # Registering Event Listeners
+    #
+    # You can register callbacks for events via the {#on} method.  Specify
+    # the name of the event, and pass a callable object or block.
+    #
     class Request
 
       # @param [Client] client
       # @param [String] operation_name
       # @param [Hash] params
+      # @api private
       def initialize(operation_name, params = {})
         @operation_name = operation_name
         @params = params
@@ -30,7 +73,7 @@ module Seahorse
       # @return [String]
       attr_reader :operation_name
 
-      # @return [Hash] params
+      # @return [Hash]
       attr_reader :params
 
       # Sends this request, returning a response or raising an error
