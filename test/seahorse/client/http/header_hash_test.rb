@@ -34,6 +34,10 @@ module Seahorse
           hash[:key].must_equal('value')
         end
 
+        it 'can be converted to a regular hash' do
+          hash.to_hash.must_equal({})
+        end
+
       end
     end
   end

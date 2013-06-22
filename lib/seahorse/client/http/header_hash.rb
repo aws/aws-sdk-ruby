@@ -16,6 +16,7 @@ module Seahorse
     module Http
       class HeaderHash
 
+        # @api private
         def initialize
           @data = {}
         end
@@ -27,6 +28,12 @@ module Seahorse
         def []= key, value
           @data[key.to_s] = value
         end
+
+        # @return [Hash]
+        def to_hash
+          @data.dup
+        end
+        alias_method :to_h, :to_hash
 
       end
     end
