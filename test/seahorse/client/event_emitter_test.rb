@@ -85,6 +85,14 @@ module Seahorse
           event_emitter.emit(:evt).must_equal(nil)
         end
 
+        it 'passes along additional args to the listeners' do
+          arg_list = ['abc', 123]
+          yielded = nil
+          event_emitter.on(:evt) {|*args| yielded = args }
+          event_emitter.emit(:evt, *arg_list)
+          yielded.must_equal(arg_list)
+        end
+
       end
 
     end

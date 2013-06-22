@@ -32,9 +32,12 @@ module Seahorse
         nil
       end
 
+      # Calls each of the event listeners with *args.
       # @param [Symbol, String] event_name
-      def emit event_name
-        @listeners.fetch(event_name.to_sym, []).each(&:call)
+      def emit event_name, *args
+        @listeners.fetch(event_name.to_sym, []).each do |listener|
+          listener.call(*args)
+        end
         nil
       end
 
