@@ -11,12 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'seahorse/client/http/header_hash'
+
 module Seahorse
   class Client
     module Http
       class Response
 
         INVALID_CODE = 'must be a numeric HTTP status code from 100..599'
+
+        def initialize
+          @headers = HeaderHash.new
+        end
 
         # @return [Integer, nil]
         def code
@@ -29,6 +35,9 @@ module Seahorse
           raise ArgumentError, INVALID_CODE unless code > 99 && code < 600
           @code = code.to_i
         end
+
+        # @return [HashHash]
+        attr_accessor :headers
 
       end
     end

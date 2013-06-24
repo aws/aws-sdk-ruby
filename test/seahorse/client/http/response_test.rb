@@ -44,6 +44,18 @@ module Seahorse
 
         end
 
+        describe '#headers' do
+
+          it 'returns a header hash' do
+            Response.new.headers.must_be_kind_of(HeaderHash)
+          end
+
+          it 'defaults to an empty hash' do
+            Response.new.headers.to_h.must_equal({})
+          end
+
+        end
+
       end
     end
   end
