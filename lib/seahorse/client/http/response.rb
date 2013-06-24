@@ -31,7 +31,7 @@ module Seahorse
         attr_reader :code
 
         # @return [HashHash]
-        attr_accessor :headers
+        attr_reader :headers
 
         private
 
