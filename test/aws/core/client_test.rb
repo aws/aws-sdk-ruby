@@ -25,6 +25,10 @@ module Aws
           end
         end
 
+        it 'can be specified as a constructor argument' do
+          Client.new(:region => 'us-west-1').region.must_equal('us-west-1')
+        end
+
       end
 
     end

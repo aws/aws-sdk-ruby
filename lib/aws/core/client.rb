@@ -18,9 +18,12 @@ module Aws
       # @api private
       MISSING_REGION = 'a region must be specified'
 
-      def initialize
-        raise ArgumentError, MISSING_REGION
+      def initialize options = {}
+        @region = options[:region] || raise(ArgumentError, MISSING_REGION)
       end
+
+      # @return [String]
+      attr_reader :region
 
     end
   end
