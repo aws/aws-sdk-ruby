@@ -55,6 +55,10 @@ module Seahorse
             Request.new.body.read.must_equal('')
           end
 
+        end
+
+        describe '#body=' do
+
           it 'can be set to a string value' do
             req = Request.new
             req.body = 'abc'
