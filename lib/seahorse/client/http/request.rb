@@ -12,14 +12,19 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse/client/http/header_hash'
+require 'stringio'
 
 module Seahorse
   class Client
     module Http
       class Request
 
+        # @api private
+        BODY_ERROR = 'must be a String or to respond to #read and #rewind'
+
         def initialize
           @headers = HeaderHash.new
+          @body = StringIO.new
         end
 
         # @return [Endpoint, nil]
@@ -27,6 +32,32 @@ module Seahorse
 
         # @return [HeaderHash]
         attr_accessor :headers
+
+        # @return [IO]
+        def body
+          @body
+        end
+
+        # @param [IO, String] body An IO like object that responds to #read,
+        #   or a string.
+        def body= body
+          if body.is_a?(String)
+            @body = StringIO.new(body)
+          elsif io_like?(body)
+            @body = body
+          else
+            raise ArgumentError, BODY_ERROR
+          end
+        end
+
+        private
+
+        # @param [Object] obj
+        # @return [Boolean] Returns +true+ if the given object is IO-like.
+        #   It must respond to both #read and #rewind.
+        def io_like? obj
+          obj.respond_to?(:read) && obj.respond_to?(:rewind)
+        end
 
       end
     end

@@ -41,6 +41,36 @@ module Seahorse
 
         end
 
+        describe '#body' do
+
+          it 'returns an IO-like object that responds to read' do
+            Request.new.body.must_respond_to(:read)
+          end
+
+          it 'returns an IO-like object that responds to rewind' do
+            Request.new.body.must_respond_to(:rewind)
+          end
+
+          it 'defaults to an empty IO object' do
+            Request.new.body.read.must_equal('')
+          end
+
+          it 'can be set to a string value' do
+            req = Request.new
+            req.body = 'abc'
+            req.body.must_be_kind_of(StringIO) # wraps string as IO objects
+            req.body.read.must_equal('abc')
+          end
+
+          it 'raises an error if a non-string-or-IO like object is given' do
+            req = Request.new
+            assert_raises(ArgumentError) do
+              req.body = Time.now
+            end
+          end
+
+        end
+
       end
     end
   end
