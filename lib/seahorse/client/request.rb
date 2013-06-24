@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse/client/http/request'
+require 'seahorse/client/http/response'
 require 'seahorse/client/response'
 require 'seahorse/client/event_emitter'
 
@@ -81,6 +82,7 @@ module Seahorse
       def send
 
         http_request = Http::Request.new
+        http_response = Http::Response.new
 
         resp = Response.new
         events.emit(:validate, params)
