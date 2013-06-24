@@ -35,7 +35,7 @@ module Seahorse
         attr_reader :headers
 
         # @return [String]
-        attr_reader :body
+        attr_accessor :body
 
         private
 

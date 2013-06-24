@@ -64,6 +64,12 @@ module Seahorse
             Response.new(200).body.must_equal('')
           end
 
+          it 'can be set' do
+            resp = Response.new(200)
+            resp.body = 'abc'
+            resp.body.must_equal('abc')
+          end
+
         end
 
       end
