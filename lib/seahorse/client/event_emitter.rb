@@ -53,7 +53,7 @@ module Seahorse
       # @param [Symbol, String] event_name The name of an event.
       # @param [#call] listener
       # @return [nil]
-      def on event_name, listener = nil, &block
+      def on(event_name, listener = nil, &block)
         @listeners[event_name.to_sym] << callable(listener || block)
         nil
       end
@@ -63,7 +63,7 @@ module Seahorse
       # each listener.
       # @param [Symbol, String] event_name
       # @return [nil]
-      def emit event_name, *args
+      def emit(event_name, *args)
         @listeners.fetch(event_name.to_sym, []).each do |listener|
           listener.call(*args)
         end
@@ -72,7 +72,7 @@ module Seahorse
 
       private
 
-      def callable obj
+      def callable(obj)
         raise ArgumentError, EXPECTED_CALLABLE unless obj.respond_to?(:call)
         obj
       end

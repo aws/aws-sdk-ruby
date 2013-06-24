@@ -19,7 +19,7 @@ module Seahorse
         include Enumerable
 
         # @api private
-        def initialize headers = {}
+        def initialize(headers = {})
           @data = {}
           headers.each_pair do |key, value|
             self[key] = value
@@ -28,13 +28,13 @@ module Seahorse
 
         # @param [String] key
         # @return [String]
-        def [] key
+        def [](key)
           @data[key.to_s]
         end
 
         # @param [String] key
         # @param [String] value
-        def []= key, value
+        def []=(key, value)
           @data[key.to_s] = value.to_s
         end
 
@@ -42,7 +42,7 @@ module Seahorse
         # @yieldparam [String] key
         # @yieldparam [String] value
         # @return [nil]
-        def each &block
+        def each(&block)
           if block_given?
             @data.each_pair do |key, value|
               yield(key, value)

@@ -40,7 +40,7 @@ module Seahorse
 
         # @param [IO, String] body An IO like object that responds to #read,
         #   or a string.
-        def body= body
+        def body=(body)
           if body.is_a?(String)
             @body = StringIO.new(body)
           elsif io_like?(body)
@@ -55,7 +55,7 @@ module Seahorse
         # @param [Object] obj
         # @return [Boolean] Returns +true+ if the given object is IO-like.
         #   It must respond to both #read and #rewind.
-        def io_like? obj
+        def io_like?(obj)
           obj.respond_to?(:read) && obj.respond_to?(:rewind)
         end
 

@@ -23,7 +23,7 @@ module Seahorse
 
         # @param [Integer] code
         # @param [Hash] headers ({})
-        def initialize code, headers = {}
+        def initialize(code, headers = {})
           set_code(code)
           @headers = HeaderHash.new(headers)
           @body = ''
@@ -40,7 +40,7 @@ module Seahorse
 
         private
 
-        def set_code code
+        def set_code(code)
           code = code.to_i
           raise ArgumentError, INVALID_CODE unless code > 99 && code < 600
           @code = code
