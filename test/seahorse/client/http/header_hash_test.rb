@@ -39,6 +39,12 @@ module Seahorse
           hash['key'].must_equal('123')
         end
 
+        it 'can seeded by the constructor' do
+          headers = { 'abc' => '123' }
+          hash = HeaderHash.new(headers)
+          hash.to_hash.must_equal(headers)
+        end
+
         describe '#to_hash' do
 
           it 'returns a regular hash' do

@@ -19,8 +19,11 @@ module Seahorse
         include Enumerable
 
         # @api private
-        def initialize
+        def initialize headers = {}
           @data = {}
+          headers.each_pair do |key, value|
+            self[key] = value
+          end
         end
 
         # @param [String] key

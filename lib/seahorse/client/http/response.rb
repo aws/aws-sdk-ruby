@@ -24,10 +24,7 @@ module Seahorse
         # @param [Hash] headers ({})
         def initialize code, headers = {}
           self.code = code
-          @headers = HeaderHash.new
-          headers.each do |key, value|
-            @headers[key] = value
-          end
+          @headers = HeaderHash.new(headers)
         end
 
         # @return [Integer, nil]
