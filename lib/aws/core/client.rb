@@ -13,17 +13,28 @@
 
 module Aws
   module Core
-    class Client
+    class Client < Seahorse::Client
 
       # @api private
       MISSING_REGION = 'a region must be specified'
 
+      # @option options [required, String] :region
       def initialize options = {}
-        @region = options[:region] || raise(ArgumentError, MISSING_REGION)
+        @region = determine_region(options)
       end
 
       # @return [String]
       attr_reader :region
+
+      private
+
+      def determine_region options
+        region = options[:region]
+        region ||= ENV['AWS_REGION']
+        region ||= ENV['AMAZON_REGION']
+        raise ArgumentError, MISSING_REGION unless region
+        region
+      end
 
     end
   end

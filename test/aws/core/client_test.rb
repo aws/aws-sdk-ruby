@@ -17,7 +17,20 @@ module Aws
   module Core
     describe Client do
 
+      def client
+        Client.new(:region => 'region')
+      end
+
+      it 'is a Seahorse::Client' do
+        client.must_be_kind_of(Seahorse::Client)
+      end
+
       describe '#region' do
+
+        def setup
+          ENV.delete('AWS_REGION')
+          ENV.delete('AMAZON_REGION')
+        end
 
         it 'is required' do
           assert_raises(ArgumentError) do
@@ -27,6 +40,22 @@ module Aws
 
         it 'can be specified as a constructor argument' do
           Client.new(:region => 'us-west-1').region.must_equal('us-west-1')
+        end
+
+        it 'can be specified by ENV["AWS_REGION"]' do
+          ENV['AWS_REGION'] = 'aws-region'
+          Client.new.region.must_equal('aws-region')
+        end
+
+        it 'can be specified by ENV["AMAZON_REGION"]' do
+          ENV['AWS_REGION'] = 'amazon-region'
+          Client.new.region.must_equal('amazon-region')
+        end
+
+        it 'AWS_REGION has higher precedence than AMAZON_REGION' do
+          ENV['AWS_REGION'] = 'aws-region'
+          ENV['AMAZON_REGION'] = 'amazon-region'
+          Client.new.region.must_equal('aws-region')
         end
 
       end
