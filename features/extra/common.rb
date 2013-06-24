@@ -78,7 +78,12 @@ Before do
   @buckets_created = []
   @sdb_domains_created = []
   @http_handler = AWS.config.http_handler
-  @test_config = test_config
+  @test_config = Hash.new do |cfg, key|
+    pending("please configure #{key.inspect} in .ruby_sdk_test_config.yml")
+  end
+  (test_config || {}).each_pair do |key, value|
+    @test_config[key] = value
+  end
 end
 
 After do |scenario|
