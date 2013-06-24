@@ -59,6 +59,13 @@ module Seahorse
 
         describe '#body=' do
 
+          it 'can be set to an obj that responds to #read and #rewind' do
+            body = Struct.new(:read, :rewind).new
+            req = Request.new
+            req.body = body
+            req.body.must_be_same_as(body)
+          end
+
           it 'can be set to a string value' do
             req = Request.new
             req.body = 'abc'
