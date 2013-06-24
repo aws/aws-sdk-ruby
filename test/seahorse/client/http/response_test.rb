@@ -36,6 +36,12 @@ module Seahorse
             resp.code.must_equal(200)
           end
 
+          it 'raises an ArgumentError if the code is not a valid number' do
+            [-1,0,600].each do |code|
+              assert_raises(ArgumentError) { Response.new.code = code }
+            end
+          end
+
         end
 
       end

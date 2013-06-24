@@ -16,8 +16,19 @@ module Seahorse
     module Http
       class Response
 
-        # @return [Integer,nil]
-        attr_accessor :code
+        INVALID_CODE = 'must be a numeric HTTP status code from 100..599'
+
+        # @return [Integer, nil]
+        def code
+          @code
+        end
+
+        # @param [Integer, number] code Must be a valid HTTP status code.
+        def code= code
+          code = code.to_i
+          raise ArgumentError, INVALID_CODE unless code > 99 && code < 600
+          @code = code.to_i
+        end
 
       end
     end
