@@ -20,8 +20,14 @@ module Seahorse
 
         INVALID_CODE = 'must be a numeric HTTP status code from 100..599'
 
-        def initialize
+        # @param [Integer] code
+        # @param [Hash] headers ({})
+        def initialize code, headers = {}
+          self.code = code
           @headers = HeaderHash.new
+          headers.each do |key, value|
+            @headers[key] = value
+          end
         end
 
         # @return [Integer, nil]

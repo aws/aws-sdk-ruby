@@ -82,7 +82,6 @@ module Seahorse
       def send
 
         http_request = Http::Request.new
-        http_response = Http::Response.new
 
         resp = Response.new
         events.emit(:validate, params)

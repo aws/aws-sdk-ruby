@@ -20,25 +20,22 @@ module Seahorse
 
         describe '#code' do
 
-          it 'defaults to nil' do
-            Response.new.code.must_equal(nil)
+          it 'is set in the constructor' do
+            Response.new(200).code.must_equal(200)
           end
 
-          it 'can be set to a number' do
-            resp = Response.new
-            resp.code = 200
-            resp.code.must_equal(200)
+          it 'is required' do
+            assert_raises(ArgumentError) { Response.new }
           end
 
           it 'can be set as a string' do
-            resp = Response.new
-            resp.code = '200'
+            resp = Response.new('200')
             resp.code.must_equal(200)
           end
 
           it 'raises an ArgumentError if the code is not a valid number' do
             [-1,0,600].each do |code|
-              assert_raises(ArgumentError) { Response.new.code = code }
+              assert_raises(ArgumentError) { Response.new(code) }
             end
           end
 
@@ -47,11 +44,16 @@ module Seahorse
         describe '#headers' do
 
           it 'returns a header hash' do
-            Response.new.headers.must_be_kind_of(HeaderHash)
+            Response.new(200).headers.must_be_kind_of(HeaderHash)
           end
 
           it 'defaults to an empty hash' do
-            Response.new.headers.to_h.must_equal({})
+            Response.new(200).headers.to_h.must_equal({})
+          end
+
+          it 'can be seeded in the constructor' do
+            resp = Response.new(200, :abc => '123')
+            resp.headers.to_hash.must_equal('abc' => '123')
           end
 
         end
