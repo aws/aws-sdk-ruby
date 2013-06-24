@@ -16,3 +16,11 @@ source 'http://rubygems.org'
 gemspec
 
 gem 'seahorse-client', :path => '../seahorse-client'
+
+group :development do
+  gem 'rake', :require => false
+  gem 'minitest'
+  gem 'simplecov', :require => false
+  gem 'yard'
+  gem 'redcarpet'
+end
