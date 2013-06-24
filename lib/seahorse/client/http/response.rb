@@ -18,6 +18,7 @@ module Seahorse
     module Http
       class Response
 
+        # @api private
         INVALID_CODE = 'must be a numeric HTTP status code from 100..599'
 
         # @param [Integer] code
