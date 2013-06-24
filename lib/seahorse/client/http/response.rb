@@ -25,6 +25,7 @@ module Seahorse
         def initialize code, headers = {}
           set_code(code)
           @headers = HeaderHash.new(headers)
+          @body = ''
         end
 
         # @return [Integer]
@@ -32,6 +33,9 @@ module Seahorse
 
         # @return [HeaderHash]
         attr_reader :headers
+
+        # @return [String]
+        attr_reader :body
 
         private
 

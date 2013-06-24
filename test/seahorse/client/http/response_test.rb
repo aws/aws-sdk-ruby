@@ -58,6 +58,14 @@ module Seahorse
 
         end
 
+        describe '#body' do
+
+          it 'defaults to an empty string' do
+            Response.new(200).body.must_equal('')
+          end
+
+        end
+
       end
     end
   end
