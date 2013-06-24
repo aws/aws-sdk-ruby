@@ -18,4 +18,8 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
+%w(AWS AMAZON).each do |prefix|
+  ENV.delete("#{prefix}_REGION")
+end
+
 require 'aws-core'
