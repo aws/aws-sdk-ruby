@@ -11,10 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/core/client'
-require 'aws/core/version'
+require 'test_helper'
 
 module Aws
   module Core
+    describe Client do
+
+      describe '#region' do
+
+        it 'is required' do
+          assert_raises(ArgumentError) do
+            Client.new
+          end
+        end
+
+      end
+
+    end
   end
 end

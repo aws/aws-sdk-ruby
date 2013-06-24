@@ -11,10 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/core/client'
-require 'aws/core/version'
-
 module Aws
   module Core
+    class Client
+
+      # @api private
+      MISSING_REGION = 'a region must be specified'
+
+      def initialize
+        raise ArgumentError, MISSING_REGION
+      end
+
+    end
   end
 end
