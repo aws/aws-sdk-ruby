@@ -23,24 +23,23 @@ module Seahorse
         # @param [Integer] code
         # @param [Hash] headers ({})
         def initialize code, headers = {}
-          self.code = code
+          set_code(code)
           @headers = HeaderHash.new(headers)
         end
 
-        # @return [Integer, nil]
-        def code
-          @code
-        end
-
-        # @param [Integer, number] code Must be a valid HTTP status code.
-        def code= code
-          code = code.to_i
-          raise ArgumentError, INVALID_CODE unless code > 99 && code < 600
-          @code = code.to_i
-        end
+        # @return [Integer]
+        attr_reader :code
 
         # @return [HashHash]
         attr_accessor :headers
+
+        private
+
+        def set_code code
+          code = code.to_i
+          raise ArgumentError, INVALID_CODE unless code > 99 && code < 600
+          @code = code
+        end
 
       end
     end
