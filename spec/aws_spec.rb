@@ -219,4 +219,23 @@ describe AWS do
 
   end
 
+  context '#eager_autoload!' do
+
+    it 'returns a list of loaded modules' do
+      path = File.join(File.dirname(__FILE__), 'fixtures', 'autoload_target')
+      mod = Module.new
+      mod.send(:autoload, :AutoloadTarget, path)
+      AWS.eager_autoload!(mod).should include(AutoloadTarget)
+    end
+
+    it 'eager autoloads passed defined modules' do
+      path = File.join(File.dirname(__FILE__), 'fixtures', 'nested_autoload_target')
+      mod = Module.new
+      mod::Nested = Module.new
+      mod::Nested.send(:autoload, :NestedAutoloadTarget, path)
+      AWS.eager_autoload!(mod).should include(NestedAutoloadTarget)
+    end
+
+  end
+
 end

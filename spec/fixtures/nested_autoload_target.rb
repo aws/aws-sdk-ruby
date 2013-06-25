@@ -11,13 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-# Running a test of the eager_autoload!
-
-require 'aws-sdk'
-
-autoloaded = AWS.eager_autoload!
-autoloaded = autoloaded.map(&:name)
-exit 1 unless autoloaded.include?('AWS::Core::Client')
-exit 0
+module NestedAutoloadTarget
+end

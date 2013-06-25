@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/version'
+require 'set'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
 # where you can configure you access to AWS.
@@ -689,30 +690,21 @@ module AWS
       nil
     end
 
-    # @api private
-    def modules_to_autoload
-      [
-        AWS::Core,
-        AWS::Core::Options,
-        AWS::Core::Signature,
-        AWS::Core::XML,
-        AWS::Core::XML::SaxHandlers,
-        AWS::Core::Http,
-        AWS
-      ]
-    end
-
     # Eagerly loads all AWS classes/modules registered with autoload.
     # @return [Array] Returns an array of module and classes that were autoloaded.
-    def eager_autoload! modules = modules_to_autoload
-      autoloaded = Array(modules)
-      Array(modules).each do |klass_or_module|
-        klass_or_module.constants.each do |const_name|
-          if path = klass_or_module.autoload?(const_name)
-            require(path)
-            if const = klass_or_module.const_get(const_name) and const.is_a?(Module)
-              autoloaded += eager_autoload!(const)
-            end
+    def eager_autoload! klass_or_module = AWS, visited = Set.new
+      autoloaded = []
+      klass_or_module.constants(false).each do |const_name|
+        path = klass_or_module.autoload?(const_name)
+        require(path) if path
+
+        const = klass_or_module.const_get(const_name)
+        autoloaded << const if path
+
+        if const.is_a?(Module)
+          unless visited.include?(const)
+            visited << const
+            autoloaded += eager_autoload!(const, visited)
           end
         end
       end
