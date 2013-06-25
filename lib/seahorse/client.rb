@@ -63,7 +63,12 @@ module Seahorse
     #   the endpoint will default to the value set in the API.
     # @return [Endpoint]
     def build_endpoint
-      Endpoint.new(@config[:endpoint] || api['endpoint'], @config)
+      Endpoint.new(@config[:endpoint] || default_endpoint, @config)
+    end
+
+    # @return [String] Returns the default endpoint for the client.
+    def default_endpoint
+      api['endpoint']
     end
 
     # @return [Hash]
