@@ -1,5 +1,7 @@
 $:.unshift(File.dirname(__FILE__) + '/lib')
+
 require 'aws/core'
+
 Gem::Specification.new do |s|
   s.name = 'aws-sdk'
   s.version = AWS::VERSION
@@ -22,4 +24,7 @@ Gem::Specification.new do |s|
   ]
   s.files += Dir['lib/**/*.rb']
   s.files += Dir['lib/**/*.yml']
+
+  s.bindir = 'bin'
+  s.executables << 'aws-rb'
 end
