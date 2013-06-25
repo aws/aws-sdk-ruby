@@ -79,6 +79,13 @@ module Seahorse
         client_class.api.must_be_same_as(api)
       end
 
+      it 'can be set' do
+        api = {}
+        client_class = Class.new(Client)
+        client_class.set_api(api)
+        client_class.api.must_be_same_as(api)
+      end
+
     end
 
     describe '#build_request' do

@@ -82,7 +82,7 @@ module Seahorse
       # @return [Class]
       def define(api)
         client_class = Class.new(Client)
-        client_class.send(:set_api, api)
+        client_class.set_api(api)
         client_class
       end
 
@@ -90,8 +90,6 @@ module Seahorse
       def api
         @api
       end
-
-      private
 
       # @param [Hash] api
       def set_api(api)
