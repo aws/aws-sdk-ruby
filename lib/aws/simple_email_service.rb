@@ -342,9 +342,12 @@ module AWS
       end
       send_opts[:destinations] = [options[:to]].flatten if options[:to]
 
-      client.send_raw_email(send_opts)
-      nil
+      response = client.send_raw_email(send_opts)
+      if raw_message.respond_to?(:message_id)
+        raw_message.message_id = "#{response.data[:message_id]}@email.amazonses.com"
+      end
 
+      nil
     end
 
     # for compatability with ActionMailer
