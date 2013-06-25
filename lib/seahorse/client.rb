@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse/client/version'
-require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
 require 'seahorse/client/request'
 
@@ -38,8 +37,8 @@ module Seahorse
     #   which creates https endpoints.
     #
     def initialize(options = {})
-      @config = Configuration.new(options)
-      @endpoint = build_endpoint(options)
+      @config = options
+      @endpoint = build_endpoint
     end
 
     # @return [Endpoint]
@@ -63,8 +62,8 @@ module Seahorse
     # @option options [:endpoint] The preferred endpoint.  When not set,
     #   the endpoint will default to the value set in the API.
     # @return [Endpoint]
-    def build_endpoint(options = {})
-      Endpoint.new(options[:endpoint] || api['endpoint'], options)
+    def build_endpoint
+      Endpoint.new(@config[:endpoint] || api['endpoint'], @config)
     end
 
     # @return [Hash]

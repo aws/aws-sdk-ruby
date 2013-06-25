@@ -32,15 +32,6 @@ module Seahorse
       Client::VERSION.must_match(/\d+\.\d+\.\d+/)
     end
 
-    describe '#config' do
-
-      it 'returns a configuration object' do
-        client = client_class.new
-        client.config.must_be_kind_of(Client::Configuration)
-      end
-
-    end
-
     describe '#endpoint' do
 
       it 'returns an Endpoint object' do
