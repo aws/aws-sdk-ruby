@@ -689,17 +689,34 @@ module AWS
       nil
     end
 
+    # @api private
+    def modules_to_autoload
+      [
+        AWS::Core,
+        AWS::Core::Options,
+        AWS::Core::Signature,
+        AWS::Core::XML,
+        AWS::Core::XML::SaxHandlers,
+        AWS::Core::Http,
+        AWS
+      ]
+    end
+
     # Eagerly loads all AWS classes/modules registered with autoload.
-    # @return [nil]
-    def eager_autoload! klass_or_module = AWS
-      klass_or_module.constants.each do |const_name|
-        if path = klass_or_module.autoload?(const_name)
-          require(path)
-          if const = klass_or_module.const_get(const_name) and const.is_a?(Module)
-            eager_autoload!(const)
+    # @return [Array] Returns an array of module and classes that were autoloaded.
+    def eager_autoload! modules = modules_to_autoload
+      autoloaded = Array(modules)
+      Array(modules).each do |klass_or_module|
+        klass_or_module.constants.each do |const_name|
+          if path = klass_or_module.autoload?(const_name)
+            require(path)
+            if const = klass_or_module.const_get(const_name) and const.is_a?(Module)
+              autoloaded += eager_autoload!(const)
+            end
           end
         end
       end
+      autoloaded
     end
 
     # Patches Net::HTTP, fixing a bug in how it handles non 100-continue
