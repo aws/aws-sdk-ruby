@@ -19,8 +19,8 @@ module Aws
       MISSING_REGION = 'a region must be specified'
 
       # @option options [required, String] :region
-      def initialize options = {}
-        super
+      def initialize(options = {})
+        super(options)
         @region = determine_region
       end
 
