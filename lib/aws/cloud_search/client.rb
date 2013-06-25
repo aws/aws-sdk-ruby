@@ -25,6 +25,7 @@ module AWS
       # @!method create_domain(options = {})
       # Calls the CreateDomain API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -51,6 +52,7 @@ module AWS
       # @!method define_index_field(options = {})
       # Calls the DefineIndexField API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:index_field` - *required* - (Hash)
       #     * `:index_field_name` - *required* - (String) The name of a field
@@ -165,6 +167,7 @@ module AWS
       # @!method define_rank_expression(options = {})
       # Calls the DefineRankExpression API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:rank_expression` - *required* - (Hash)
       #     * `:rank_name` - *required* - (String) The name of a rank
@@ -220,6 +223,7 @@ module AWS
       # @!method delete_domain(options = {})
       # Calls the DeleteDomain API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -246,6 +250,7 @@ module AWS
       # @!method delete_index_field(options = {})
       # Calls the DeleteIndexField API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:index_field_name` - *required* - (String)
       # @return [Core::Response]
@@ -290,6 +295,7 @@ module AWS
       # @!method delete_rank_expression(options = {})
       # Calls the DeleteRankExpression API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:rank_name` - *required* - (String) The name of the RankExpression
       #     to delete.
@@ -310,6 +316,7 @@ module AWS
       # @!method describe_default_search_field(options = {})
       # Calls the DescribeDefaultSearchField API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -326,6 +333,7 @@ module AWS
       # @!method describe_domains(options = {})
       # Calls the DescribeDomains API operation.
       # @param [Hash] options
+      #
       #   * `:domain_names` - (Array<String>) Limits the DescribeDomains
       #     response to the specified search domains.
       # @return [Core::Response]
@@ -353,6 +361,7 @@ module AWS
       # @!method describe_index_fields(options = {})
       # Calls the DescribeIndexFields API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:field_names` - (Array<String>) Limits the DescribeIndexFields
       #     response to the specified fields.
@@ -398,6 +407,7 @@ module AWS
       # @!method describe_rank_expressions(options = {})
       # Calls the DescribeRankExpressions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:rank_names` - (Array<String>) Limits the DescribeRankExpressions
       #     response to the specified fields.
@@ -418,6 +428,7 @@ module AWS
       # @!method describe_service_access_policies(options = {})
       # Calls the DescribeServiceAccessPolicies API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -434,6 +445,7 @@ module AWS
       # @!method describe_stemming_options(options = {})
       # Calls the DescribeStemmingOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -450,6 +462,7 @@ module AWS
       # @!method describe_stopword_options(options = {})
       # Calls the DescribeStopwordOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -466,6 +479,7 @@ module AWS
       # @!method describe_synonym_options(options = {})
       # Calls the DescribeSynonymOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -482,6 +496,7 @@ module AWS
       # @!method index_documents(options = {})
       # Calls the IndexDocuments API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -492,6 +507,7 @@ module AWS
       # @!method update_default_search_field(options = {})
       # Calls the UpdateDefaultSearchField API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:default_search_field` - *required* - (String) The IndexField to
       #     use for search requests issued with the q parameter. The default is
@@ -511,6 +527,7 @@ module AWS
       # @!method update_service_access_policies(options = {})
       # Calls the UpdateServiceAccessPolicies API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:access_policies` - *required* - (String)
       # @return [Core::Response]
@@ -528,6 +545,7 @@ module AWS
       # @!method update_stemming_options(options = {})
       # Calls the UpdateStemmingOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:stems` - *required* - (String)
       # @return [Core::Response]
@@ -545,6 +563,7 @@ module AWS
       # @!method update_stopword_options(options = {})
       # Calls the UpdateStopwordOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:stopwords` - *required* - (String)
       # @return [Core::Response]
@@ -562,6 +581,7 @@ module AWS
       # @!method update_synonym_options(options = {})
       # Calls the UpdateSynonymOptions API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String)
       #   * `:synonyms` - *required* - (String)
       # @return [Core::Response]

@@ -25,18 +25,14 @@ module AWS
       # @!method add_instance_groups(options = {})
       # Calls the AddInstanceGroups API operation.
       # @param [Hash] options
+      #
       #   * `:instance_groups` - *required* - (Array<Hash>) Instance Groups to
       #     add.
       #     * `:name` - (String) Friendly name given to the instance group.
       #     * `:market` - (String) Market type of the Amazon EC2 instances used
-      #       to create a cluster node. Valid values include:
-      #       * `ON_DEMAND`
-      #       * `SPOT`
+      #       to create a cluster node.
       #     * `:instance_role` - *required* - (String) The role of the instance
-      #       group in the cluster. Valid values include:
-      #       * `MASTER`
-      #       * `CORE`
-      #       * `TASK`
+      #       group in the cluster.
       #     * `:bid_price` - (String) Bid price for each Amazon EC2 instance in
       #       the instance group when launching nodes as Spot Instances,
       #       expressed in USD.
@@ -56,6 +52,7 @@ module AWS
       # @!method add_job_flow_steps(options = {})
       # Calls the AddJobFlowSteps API operation.
       # @param [Hash] options
+      #
       #   * `:job_flow_id` - *required* - (String) A string that uniquely
       #     identifies the job flow. This identifier is returned by RunJobFlow
       #     and can also be obtained from DescribeJobFlows.
@@ -63,10 +60,7 @@ module AWS
       #     executed by the job flow.
       #     * `:name` - *required* - (String) The name of the job flow step.
       #     * `:action_on_failure` - (String) Specifies the action to take if
-      #       the job flow step fails. Valid values include:
-      #       * `TERMINATE_JOB_FLOW`
-      #       * `CANCEL_AND_WAIT`
-      #       * `CONTINUE`
+      #       the job flow step fails.
       #     * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file
       #       used for the job flow step.
       #       * `:properties` - (Array<Hash>) A list of Java properties that
@@ -86,6 +80,7 @@ module AWS
       # @!method describe_job_flows(options = {})
       # Calls the DescribeJobFlows API operation.
       # @param [Hash] options
+      #
       #   * `:created_after` - (String<ISO8601 datetime>) Return only job flows
       #     created after this date and time.
       #   * `:created_before` - (String<ISO8601 datetime>) Return only job
@@ -169,6 +164,7 @@ module AWS
       # @!method modify_instance_groups(options = {})
       # Calls the ModifyInstanceGroups API operation.
       # @param [Hash] options
+      #
       #   * `:instance_groups` - (Array<Hash>) Instance groups to change.
       #     * `:instance_group_id` - *required* - (String) Unique ID of the
       #       instance group to expand or shrink.
@@ -179,6 +175,7 @@ module AWS
       # @!method run_job_flow(options = {})
       # Calls the RunJobFlow API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String) The name of the job flow.
       #   * `:log_uri` - (String) Specifies the location in Amazon S3 to write
       #     the log files of the job flow. If a value is not provided, logs are
@@ -209,14 +206,9 @@ module AWS
       #       flow's instance groups.
       #       * `:name` - (String) Friendly name given to the instance group.
       #       * `:market` - (String) Market type of the Amazon EC2 instances
-      #         used to create a cluster node. Valid values include:
-      #         * `ON_DEMAND`
-      #         * `SPOT`
+      #         used to create a cluster node.
       #       * `:instance_role` - *required* - (String) The role of the
-      #         instance group in the cluster. Valid values include:
-      #         * `MASTER`
-      #         * `CORE`
-      #         * `TASK`
+      #         instance group in the cluster.
       #       * `:bid_price` - (String) Bid price for each Amazon EC2 instance
       #         in the instance group when launching nodes as Spot Instances,
       #         expressed in USD.
@@ -255,10 +247,7 @@ module AWS
       #     flow.
       #     * `:name` - *required* - (String) The name of the job flow step.
       #     * `:action_on_failure` - (String) Specifies the action to take if
-      #       the job flow step fails. Valid values include:
-      #       * `TERMINATE_JOB_FLOW`
-      #       * `CANCEL_AND_WAIT`
-      #       * `CONTINUE`
+      #       the job flow step fails.
       #     * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file
       #       used for the job flow step.
       #       * `:properties` - (Array<Hash>) A list of Java properties that
@@ -309,6 +298,7 @@ module AWS
       # @!method set_termination_protection(options = {})
       # Calls the SetTerminationProtection API operation.
       # @param [Hash] options
+      #
       #   * `:job_flow_ids` - *required* - (Array<String>) A list of strings
       #     that uniquely identify the job flows to protect. This identifier is
       #     returned by RunJobFlow and can also be obtained from
@@ -322,6 +312,7 @@ module AWS
       # @!method set_visible_to_all_users(options = {})
       # Calls the SetVisibleToAllUsers API operation.
       # @param [Hash] options
+      #
       #   * `:job_flow_ids` - *required* - (Array<String>) Identifiers of the
       #     job flows to receive the new visibility setting.
       #   * `:visible_to_all_users` - *required* - (Boolean) Whether the
@@ -336,6 +327,7 @@ module AWS
       # @!method terminate_job_flows(options = {})
       # Calls the TerminateJobFlows API operation.
       # @param [Hash] options
+      #
       #   * `:job_flow_ids` - *required* - (Array<String>) A list of job flows
       #     to be shutdown.
       # @return [Core::Response]

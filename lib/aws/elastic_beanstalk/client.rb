@@ -25,6 +25,7 @@ module AWS
       # @!method check_dns_availability(options = {})
       # Calls the CheckDNSAvailability API operation.
       # @param [Hash] options
+      #
       #   * `:cname_prefix` - *required* - (String) The prefix used when this
       #     CNAME is reserved.
       # @return [Core::Response]
@@ -37,6 +38,7 @@ module AWS
       # @!method create_application(options = {})
       # Calls the CreateApplication API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application. Constraint: This name must be unique within your
       #     account. If the specified name already exists, the action returns
@@ -57,6 +59,7 @@ module AWS
       # @!method create_application_version(options = {})
       # Calls the CreateApplicationVersion API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application. If no application is found with this name, and
       #     AutoCreateApplication is `false` , returns an InvalidParameterValue
@@ -106,6 +109,7 @@ module AWS
       # @!method create_configuration_template(options = {})
       # Calls the CreateConfigurationTemplate API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application to associate with this configuration template. If no
       #     application is found with this name, AWS Elastic Beanstalk returns
@@ -173,6 +177,7 @@ module AWS
       # @!method create_environment(options = {})
       # Calls the CreateEnvironment API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application that contains the version to be deployed. If no
       #     application is found with this name, CreateEnvironment returns an
@@ -256,6 +261,7 @@ module AWS
       # @!method create_storage_location(options = {})
       # Calls the CreateStorageLocation API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -265,6 +271,7 @@ module AWS
       # @!method delete_application(options = {})
       # Calls the DeleteApplication API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application to delete.
       # @return [Core::Response]
@@ -272,6 +279,7 @@ module AWS
       # @!method delete_application_version(options = {})
       # Calls the DeleteApplicationVersion API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application to delete releases from.
       #   * `:version_label` - *required* - (String) The label of the version
@@ -287,6 +295,7 @@ module AWS
       # @!method delete_configuration_template(options = {})
       # Calls the DeleteConfigurationTemplate API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application to delete the configuration template from.
       #   * `:template_name` - *required* - (String) The name of the
@@ -296,6 +305,7 @@ module AWS
       # @!method delete_environment_configuration(options = {})
       # Calls the DeleteEnvironmentConfiguration API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application the environment is associated with.
       #   * `:environment_name` - *required* - (String) The name of the
@@ -305,6 +315,7 @@ module AWS
       # @!method describe_application_versions(options = {})
       # Calls the DescribeApplicationVersions API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - (String) If specified, AWS Elastic Beanstalk
       #     restricts the returned descriptions to only include ones that are
       #     associated with the specified application.
@@ -328,6 +339,7 @@ module AWS
       # @!method describe_applications(options = {})
       # Calls the DescribeApplications API operation.
       # @param [Hash] options
+      #
       #   * `:application_names` - (Array<String>) If specified, AWS Elastic
       #     Beanstalk restricts the returned descriptions to only include those
       #     with the specified names.
@@ -346,6 +358,7 @@ module AWS
       # @!method describe_configuration_options(options = {})
       # Calls the DescribeConfigurationOptions API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - (String) The name of the application
       #     associated with the configuration template or environment. Only
       #     needed if you want to describe the configuration options associated
@@ -384,6 +397,7 @@ module AWS
       # @!method describe_configuration_settings(options = {})
       # Calls the DescribeConfigurationSettings API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The application for the
       #     environment or configuration template.
       #   * `:template_name` - (String) The name of the configuration template
@@ -419,6 +433,7 @@ module AWS
       # @!method describe_environment_resources(options = {})
       # Calls the DescribeEnvironmentResources API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment to retrieve
       #     AWS resource usage data. Condition: You must specify either this or
       #     an EnvironmentName, or both. If you do not specify either, AWS
@@ -448,6 +463,7 @@ module AWS
       # @!method describe_environments(options = {})
       # Calls the DescribeEnvironments API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - (String) If specified, AWS Elastic Beanstalk
       #     restricts the returned descriptions to include only those that are
       #     associated with this application.
@@ -496,6 +512,7 @@ module AWS
       # @!method describe_events(options = {})
       # Calls the DescribeEvents API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - (String) If specified, AWS Elastic Beanstalk
       #     restricts the returned descriptions to include only those
       #     associated with this application.
@@ -551,6 +568,7 @@ module AWS
       # @!method list_available_solution_stacks(options = {})
       # Calls the ListAvailableSolutionStacks API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -563,6 +581,7 @@ module AWS
       # @!method rebuild_environment(options = {})
       # Calls the RebuildEnvironment API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment to rebuild.
       #     Condition: You must specify either this or an EnvironmentName, or
       #     both. If you do not specify either, AWS Elastic Beanstalk returns
@@ -576,6 +595,7 @@ module AWS
       # @!method request_environment_info(options = {})
       # Calls the RequestEnvironmentInfo API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment of the
       #     requested data. If no such environment is found,
       #     RequestEnvironmentInfo returns an InvalidParameterValue error.
@@ -596,6 +616,7 @@ module AWS
       # @!method restart_app_server(options = {})
       # Calls the RestartAppServer API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment to restart
       #     the server for. Condition: You must specify either this or an
       #     EnvironmentName, or both. If you do not specify either, AWS Elastic
@@ -609,6 +630,7 @@ module AWS
       # @!method retrieve_environment_info(options = {})
       # Calls the RetrieveEnvironmentInfo API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the data's environment. If
       #     no such environment is found, returns an InvalidParameterValue
       #     error. Condition: You must specify either this or an
@@ -635,6 +657,7 @@ module AWS
       # @!method swap_environment_cnam_es(options = {})
       # Calls the SwapEnvironmentCNAMEs API operation.
       # @param [Hash] options
+      #
       #   * `:source_environment_id` - (String) The ID of the source
       #     environment. Condition: You must specify at least the
       #     SourceEnvironmentID or the SourceEnvironmentName. You may also
@@ -660,6 +683,7 @@ module AWS
       # @!method terminate_environment(options = {})
       # Calls the TerminateEnvironment API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment to
       #     terminate. Condition: You must specify either this or an
       #     EnvironmentName, or both. If you do not specify either, AWS Elastic
@@ -708,6 +732,7 @@ module AWS
       # @!method update_application(options = {})
       # Calls the UpdateApplication API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application to update. If no such application is found,
       #     UpdateApplication returns an InvalidParameterValue error.
@@ -729,6 +754,7 @@ module AWS
       # @!method update_application_version(options = {})
       # Calls the UpdateApplicationVersion API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application associated with this version. If no application is
       #     found with this name, UpdateApplication returns an
@@ -754,6 +780,7 @@ module AWS
       # @!method update_configuration_template(options = {})
       # Calls the UpdateConfigurationTemplate API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application associated with the configuration template to update.
       #     If no application is found with this name,
@@ -796,6 +823,7 @@ module AWS
       # @!method update_environment(options = {})
       # Calls the UpdateEnvironment API operation.
       # @param [Hash] options
+      #
       #   * `:environment_id` - (String) The ID of the environment to update.
       #     If no environment with this ID exists, AWS Elastic Beanstalk
       #     returns an InvalidParameterValue error. Condition: You must specify
@@ -861,6 +889,7 @@ module AWS
       # @!method validate_configuration_settings(options = {})
       # Calls the ValidateConfigurationSettings API operation.
       # @param [Hash] options
+      #
       #   * `:application_name` - *required* - (String) The name of the
       #     application that the configuration template or environment belongs
       #     to.

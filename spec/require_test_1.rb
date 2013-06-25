@@ -11,27 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-source 'http://rubygems.org'
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-gemspec
+# Running these tests as separate process to isolate code loading order issues
 
-group :repl do
-  gem 'pry'
-end
+require 'aws-sdk'
 
-group :documentation do
-  gem 'yard'
-  gem 'redcarpet'
-  gem 'rdoc', '= 3.9.4'
-end
-
-group :test do
-  gem 'rspec', '= 2.12'
-  gem 'cucumber'
-  gem 'simplecov', :require => false
-  gem 'rvm-tester'
-  gem 'net-ssh', '~> 2.1'
-  gem 'multipart-post'
-  gem 'rotp', '~> 1.3.0'
-end
-
+print "Service specific config options available before service autoloaded: "
+AWS.config(:ec2_region => 'us-west-2')
+AWS.config.ec2_region
+puts "ok"
+exit 0

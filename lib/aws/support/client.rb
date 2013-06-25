@@ -25,17 +25,20 @@ module AWS
       # @!method add_communication_to_case(options = {})
       # Calls the AddCommunicationToCase API operation.
       # @param [Hash] options
+      #
       #   * `:case_id` - (String)
       #   * `:communication_body` - *required* - (String)
       #   * `:cc_email_addresses` - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:result` - (Boolean)
 
       # @!method create_case(options = {})
       # Calls the CreateCase API operation.
       # @param [Hash] options
+      #
       #   * `:subject` - *required* - (String)
       #   * `:service_code` - *required* - (String)
       #   * `:severity_code` - (String)
@@ -47,11 +50,13 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:case_id` - (String)
 
       # @!method describe_cases(options = {})
       # Calls the DescribeCases API operation.
       # @param [Hash] options
+      #
       #   * `:case_id_list` - (Array<String>)
       #   * `:display_id` - (String)
       #   * `:after_time` - (String)
@@ -63,6 +68,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:cases` - (Array<Hash>)
       #     * `:case_id` - (String)
       #     * `:display_id` - (String)
@@ -87,6 +93,7 @@ module AWS
       # @!method describe_communications(options = {})
       # Calls the DescribeCommunications API operation.
       # @param [Hash] options
+      #
       #   * `:case_id` - *required* - (String)
       #   * `:before_time` - (String)
       #   * `:after_time` - (String)
@@ -95,6 +102,7 @@ module AWS
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:communications` - (Array<Hash>)
       #     * `:case_id` - (String)
       #     * `:body` - (String)
@@ -105,11 +113,13 @@ module AWS
       # @!method describe_services(options = {})
       # Calls the DescribeServices API operation.
       # @param [Hash] options
+      #
       #   * `:service_code_list` - (Array<String>)
       #   * `:language` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:services` - (Array<Hash>)
       #     * `:code` - (String)
       #     * `:name` - (String)
@@ -120,10 +130,12 @@ module AWS
       # @!method describe_severity_levels(options = {})
       # Calls the DescribeSeverityLevels API operation.
       # @param [Hash] options
+      #
       #   * `:language` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:severity_levels` - (Array<Hash>)
       #     * `:code` - (String)
       #     * `:name` - (String)
@@ -131,10 +143,12 @@ module AWS
       # @!method describe_trusted_advisor_check_refresh_statuses(options = {})
       # Calls the DescribeTrustedAdvisorCheckRefreshStatuses API operation.
       # @param [Hash] options
+      #
       #   * `:check_ids` - *required* - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:statuses` - (Array<Hash>)
       #     * `:check_id` - (String)
       #     * `:status` - (String)
@@ -143,11 +157,13 @@ module AWS
       # @!method describe_trusted_advisor_check_result(options = {})
       # Calls the DescribeTrustedAdvisorCheckResult API operation.
       # @param [Hash] options
+      #
       #   * `:check_id` - *required* - (String)
       #   * `:language` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:result` - (Hash)
       #     * `:check_id` - (String)
       #     * `:timestamp` - (String)
@@ -171,10 +187,12 @@ module AWS
       # @!method describe_trusted_advisor_check_summaries(options = {})
       # Calls the DescribeTrustedAdvisorCheckSummaries API operation.
       # @param [Hash] options
+      #
       #   * `:check_ids` - *required* - (Array<String>)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:summaries` - (Array<Hash>)
       #     * `:check_id` - (String)
       #     * `:timestamp` - (String)
@@ -193,10 +211,12 @@ module AWS
       # @!method describe_trusted_advisor_checks(options = {})
       # Calls the DescribeTrustedAdvisorChecks API operation.
       # @param [Hash] options
+      #
       #   * `:language` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:checks` - (Array<Hash>)
       #     * `:id` - (String)
       #     * `:name` - (String)
@@ -207,10 +227,12 @@ module AWS
       # @!method refresh_trusted_advisor_check(options = {})
       # Calls the RefreshTrustedAdvisorCheck API operation.
       # @param [Hash] options
+      #
       #   * `:check_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:status` - (Hash)
       #     * `:check_id` - (String)
       #     * `:status` - (String)
@@ -219,10 +241,12 @@ module AWS
       # @!method resolve_case(options = {})
       # Calls the ResolveCase API operation.
       # @param [Hash] options
+      #
       #   * `:case_id` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
+      #
       #   * `:initial_case_status` - (String)
       #   * `:final_case_status` - (String)
 

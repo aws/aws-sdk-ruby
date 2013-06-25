@@ -57,6 +57,7 @@ module AWS
       # @!method batch_delete_attributes(options = {})
       # Calls the BatchDeleteAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain in
       #     which the attributes are being deleted.
       #   * `:items` - *required* - (Array<Hash>) A list of items on which to
@@ -76,6 +77,7 @@ module AWS
       # @!method batch_put_attributes(options = {})
       # Calls the BatchPutAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain in
       #     which the attributes are being stored.
       #   * `:items` - *required* - (Array<Hash>) A list of items on which to
@@ -101,6 +103,7 @@ module AWS
       # @!method create_domain(options = {})
       # Calls the CreateDomain API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain to
       #     create. The name can range between 3 and 255 characters and can
       #     contain the following characters: a-z, A-Z, 0-9, '_', '-', and '.'.
@@ -115,6 +118,7 @@ module AWS
       # @!method delete_attributes(options = {})
       # Calls the DeleteAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain in
       #     which to perform the operation.
       #   * `:item_name` - *required* - (String) The name of the item. Similar
@@ -150,6 +154,7 @@ module AWS
       # @!method delete_domain(options = {})
       # Calls the DeleteDomain API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain to
       #     delete.
       # @return [Core::Response]
@@ -163,6 +168,7 @@ module AWS
       # @!method domain_metadata(options = {})
       # Calls the DomainMetadata API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain for
       #     which to display the metadata of.
       # @return [Core::Response]
@@ -183,6 +189,7 @@ module AWS
       # @!method get_attributes(options = {})
       # Calls the GetAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain in
       #     which to perform the operation.
       #   * `:item_name` - *required* - (String) The name of the item.
@@ -208,6 +215,7 @@ module AWS
       # @!method list_domains(options = {})
       # Calls the ListDomains API operation.
       # @param [Hash] options
+      #
       #   * `:max_number_of_domains` - (Integer) The maximum number of domain
       #     names you want returned. The range is 1 to 100. The default setting
       #     is 100.
@@ -226,6 +234,7 @@ module AWS
       # @!method put_attributes(options = {})
       # Calls the PutAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:domain_name` - *required* - (String) The name of the domain in
       #     which to perform the operation.
       #   * `:item_name` - *required* - (String) The name of the item.
@@ -262,6 +271,7 @@ module AWS
       # @!method select(options = {})
       # Calls the Select API operation.
       # @param [Hash] options
+      #
       #   * `:select_expression` - *required* - (String) The expression used to
       #     query the domain.
       #   * `:next_token` - (String) A string informing Amazon SimpleDB where

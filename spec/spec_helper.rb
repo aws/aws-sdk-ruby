@@ -52,5 +52,3 @@ class String
     gsub(/^\s*|\s*|\n$/m, '')
   end
 end
-
-AWS.eager_autoload!

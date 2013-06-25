@@ -45,7 +45,7 @@ module AWS
     # configuration values, call {#with}, passing in the updates
     # and a new configuration object will be returned.
     #
-    #     config = Configuration.new(:max_retires => 3)
+    #     config = Configuration.new(:max_retries => 3)
     #     new_config = config.with(:max_retries => 2)
     #
     #     config.max_retries #=> 3
@@ -467,7 +467,7 @@ module AWS
 
       add_option :http_continue_threshold, false
 
-      add_option :http_idle_timeout, 60
+      add_option :http_idle_timeout, 5
 
       add_option :http_wire_trace, false, :boolean => true
 

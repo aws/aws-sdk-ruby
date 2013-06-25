@@ -26,8 +26,8 @@ Feature: ELB Load Balancers
     | TYPE        | NAME                                | VALUE              |
     | param       | Action                              | CreateLoadBalancer |
     | param_match | LoadBalancerName                    | ruby-test-.*       |
-    | param       | AvailabilityZones.member.1          | us-east-1a         |
-    | param       | AvailabilityZones.member.2          | us-east-1b         |
+    | param       | AvailabilityZones.member.1          | us-east-1b         |
+    | param       | AvailabilityZones.member.2          | us-east-1c         |
     | param       | Listeners.member.1.Protocol         | HTTP               |
     | param       | Listeners.member.1.InstancePort     | 80                 |
     | param       | Listeners.member.1.InstanceProtocol | HTTP               |

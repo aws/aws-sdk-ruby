@@ -36,6 +36,7 @@ module AWS
       # @!method assume_role(options = {})
       # Calls the AssumeRole API operation.
       # @param [Hash] options
+      #
       #   * `:role_arn` - *required* - (String) The Amazon Resource Name (ARN)
       #     of the role that the caller is assuming.
       #   * `:role_session_name` - *required* - (String) An identifier for the
@@ -77,6 +78,7 @@ module AWS
       # @!method assume_role_with_web_identity(options = {})
       # Calls the AssumeRoleWithWebIdentity API operation.
       # @param [Hash] options
+      #
       #   * `:role_arn` - *required* - (String) The Amazon Resource Name (ARN)
       #     of the role that the caller is assuming.
       #   * `:role_session_name` - *required* - (String) An identifier for the
@@ -126,6 +128,7 @@ module AWS
       # @!method get_federation_token(options = {})
       # Calls the GetFederationToken API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String) The name of the federated user. The
       #     name is used as an identifier for the temporary security
       #     credentials (such as Bob). For example, you can reference the
@@ -163,6 +166,7 @@ module AWS
       # @!method get_session_token(options = {})
       # Calls the GetSessionToken API operation.
       # @param [Hash] options
+      #
       #   * `:duration_seconds` - (Integer) The duration, in seconds, that the
       #     credentials should remain valid. Acceptable durations for IAM user
       #     sessions range from 900s (15 minutes) to 129600s (36 hours), with

@@ -1384,12 +1384,16 @@ module AWS
         end
       end
 
+      def empty_response_body? response_body
+        response_body.nil? or response_body == ''
+      end
+
       # There are a few of s3 requests that can generate empty bodies and
       # yet still be errors.  These return empty bodies to comply with the
       # HTTP spec.  We have to detect these errors specially.
       def populate_error resp
         code = resp.http_response.status
-        if EMPTY_BODY_ERRORS.include?(code) and resp.http_response.body.nil?
+        if EMPTY_BODY_ERRORS.include?(code) and empty_response_body?(resp.http_response.body)
           error_class = EMPTY_BODY_ERRORS[code]
           resp.error = error_class.new(resp.http_request, resp.http_response)
         else
@@ -1399,11 +1403,16 @@ module AWS
 
       def retryable_error? response
         super or
-          (response.request_type == :complete_multipart_upload &&
-          extract_error_details(response))
-          # complete multipart upload can return an error inside a
-          # 200 level response -- this forces us to parse the
-          # response for errors every time
+        failed_multipart_upload?(response) or
+        response.error.is_a?(Errors::RequestTimeout)
+      end
+
+      # S3 may return a 200 response code in response to complete_multipart_upload
+      # and then start streaming whitespace until it knows the final result.
+      # At that time it sends an XML message with success or failure.
+      def failed_multipart_upload? response
+        response.request_type == :complete_multipart_upload &&
+        extract_error_details(response)
       end
 
       def new_request

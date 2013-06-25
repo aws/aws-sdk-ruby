@@ -423,3 +423,18 @@ Feature: CRUD Objects (High Level)
     | field   | value                                                            |
     | code    | InvalidObjectState                                               |
     | message | Restore is not allowed, as object's storage class is not GLACIER |
+
+  @list_objects @paginate @delimiter
+  Scenario: Properly paginate when using a delimiter
+    Given I have a bucket with the following keys:
+    | key                     |
+    | videos/wedding.mkv      |
+    | videos/vacation.mkv     |
+    | photos/2009/family.jpg  |
+    | photos/2009/friends.jpg |
+    | photos/2010/family.jpg  |
+    When I ask for all objects using the delimiter "/", 1 at a time
+    Then I should get objects with the following prefixes:
+    | prefix  |
+    | videos/ |
+    | photos/ |

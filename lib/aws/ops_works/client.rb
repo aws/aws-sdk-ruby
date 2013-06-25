@@ -25,6 +25,7 @@ module AWS
       # @!method attach_elastic_load_balancer(options = {})
       # Calls the AttachElasticLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:elastic_load_balancer_name` - *required* - (String) The Elastic
       #     Load Balancing instance's name.
       #   * `:layer_id` - *required* - (String) The ID of the layer that the
@@ -34,6 +35,7 @@ module AWS
       # @!method clone_stack(options = {})
       # Calls the CloneStack API operation.
       # @param [Hash] options
+      #
       #   * `:source_stack_id` - *required* - (String) The source stack ID.
       #   * `:name` - (String) The cloned stack name.
       #   * `:region` - (String) The cloned stack AWS region, such as
@@ -123,6 +125,7 @@ module AWS
       # @!method create_app(options = {})
       # Calls the CreateApp API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:shortname` - (String) The app's short name.
       #   * `:name` - *required* - (String) The app name.
@@ -182,6 +185,7 @@ module AWS
       # @!method create_deployment(options = {})
       # Calls the CreateDeployment API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:app_id` - (String) The app ID. This parameter is required for app
       #     deployments, but not for other deployment commands.
@@ -234,6 +238,7 @@ module AWS
       # @!method create_instance(options = {})
       # Calls the CreateInstance API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:layer_ids` - *required* - (Array<String>) An array that contains
       #     the instance layer IDs.
@@ -281,6 +286,7 @@ module AWS
       # @!method create_layer(options = {})
       # Calls the CreateLayer API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The layer stack ID.
       #   * `:type` - *required* - (String) The layer type. A stack cannot have
       #     more than one layer of the same type. This parameter must be set to
@@ -347,6 +353,7 @@ module AWS
       # @!method create_stack(options = {})
       # Calls the CreateStack API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String) The stack name.
       #   * `:region` - *required* - (String) The stack AWS region, such as
       #     "us-east-1". For more information about Amazon regions, see Regions
@@ -425,6 +432,7 @@ module AWS
       # @!method create_user_profile(options = {})
       # Calls the CreateUserProfile API operation.
       # @param [Hash] options
+      #
       #   * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
       #   * `:ssh_username` - (String) The user's SSH user name.
       #   * `:ssh_public_key` - (String) The user's public SSH key.
@@ -437,12 +445,14 @@ module AWS
       # @!method delete_app(options = {})
       # Calls the DeleteApp API operation.
       # @param [Hash] options
+      #
       #   * `:app_id` - *required* - (String) The app ID.
       # @return [Core::Response]
 
       # @!method delete_instance(options = {})
       # Calls the DeleteInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       #   * `:delete_elastic_ip` - (Boolean) Whether to delete the instance
       #     Elastic IP address.
@@ -453,24 +463,28 @@ module AWS
       # @!method delete_layer(options = {})
       # Calls the DeleteLayer API operation.
       # @param [Hash] options
+      #
       #   * `:layer_id` - *required* - (String) The layer ID.
       # @return [Core::Response]
 
       # @!method delete_stack(options = {})
       # Calls the DeleteStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       # @return [Core::Response]
 
       # @!method delete_user_profile(options = {})
       # Calls the DeleteUserProfile API operation.
       # @param [Hash] options
+      #
       #   * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
       # @return [Core::Response]
 
       # @!method describe_apps(options = {})
       # Calls the DescribeApps API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - (String) The app stack ID. If you use this parameter,
       #     DescribeApps returns a description of the apps in the specified
       #     stack.
@@ -508,6 +522,7 @@ module AWS
       # @!method describe_commands(options = {})
       # Calls the DescribeCommands API operation.
       # @param [Hash] options
+      #
       #   * `:deployment_id` - (String) The deployment ID. If you include this
       #     parameter, DescribeCommands returns a description of the commands
       #     associated with the specified deployment.
@@ -537,6 +552,7 @@ module AWS
       # @!method describe_deployments(options = {})
       # Calls the DescribeDeployments API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - (String) The stack ID. If you include this parameter,
       #     DescribeDeployments returns a description of the commands
       #     associated with the specified stack.
@@ -571,6 +587,7 @@ module AWS
       # @!method describe_elastic_ips(options = {})
       # Calls the DescribeElasticIps API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - (String) The instance ID. If you include this
       #     parameter, DescribeElasticIps returns a description of the Elastic
       #     IP addresses associated with the specified instance.
@@ -590,6 +607,7 @@ module AWS
       # @!method describe_elastic_load_balancers(options = {})
       # Calls the DescribeElasticLoadBalancers API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - (String) A stack ID. The action describes the Elastic
       #     Load Balancing instances for the stack.
       #   * `:layer_ids` - (Array<String>) A list of layer IDs. The action
@@ -611,6 +629,7 @@ module AWS
       # @!method describe_instances(options = {})
       # Calls the DescribeInstances API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - (String) A stack ID. If you use this parameter,
       #     DescribeInstances returns descriptions of the instances associated
       #     with the specified stack.
@@ -655,6 +674,7 @@ module AWS
       # @!method describe_layers(options = {})
       # Calls the DescribeLayers API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:layer_ids` - (Array<String>) An array of layer IDs that specify
       #     the layers to be described. If you omit this parameter,
@@ -699,6 +719,7 @@ module AWS
       # @!method describe_load_based_auto_scaling(options = {})
       # Calls the DescribeLoadBasedAutoScaling API operation.
       # @param [Hash] options
+      #
       #   * `:layer_ids` - *required* - (Array<String>) An array of layer IDs.
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -725,6 +746,7 @@ module AWS
       # @!method describe_permissions(options = {})
       # Calls the DescribePermissions API operation.
       # @param [Hash] options
+      #
       #   * `:iam_user_arn` - *required* - (String) The user's IAM ARN. For
       #     more information about IAM ARNs, see Using Identifiers.
       #   * `:stack_id` - *required* - (String) The stack ID.
@@ -741,6 +763,7 @@ module AWS
       # @!method describe_raid_arrays(options = {})
       # Calls the DescribeRaidArrays API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - (String) The instance ID. If you use this
       #     parameter, DescribeRaidArrays returns descriptions of the RAID
       #     arrays associated with the specified instance.
@@ -767,6 +790,7 @@ module AWS
       # @!method describe_service_errors(options = {})
       # Calls the DescribeServiceErrors API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - (String) The stack ID. If you use this parameter,
       #     DescribeServiceErrors returns descriptions of the errors associated
       #     with the specified stack.
@@ -792,6 +816,7 @@ module AWS
       # @!method describe_stacks(options = {})
       # Calls the DescribeStacks API operation.
       # @param [Hash] options
+      #
       #   * `:stack_ids` - (Array<String>) An array of stack IDs that specify
       #     the stacks to be described. If you omit this parameter,
       #     DescribeStacks returns a description of every stack.
@@ -825,6 +850,7 @@ module AWS
       # @!method describe_time_based_auto_scaling(options = {})
       # Calls the DescribeTimeBasedAutoScaling API operation.
       # @param [Hash] options
+      #
       #   * `:instance_ids` - *required* - (Array<String>) An array of instance
       #     IDs.
       # @return [Core::Response]
@@ -845,6 +871,7 @@ module AWS
       # @!method describe_user_profiles(options = {})
       # Calls the DescribeUserProfiles API operation.
       # @param [Hash] options
+      #
       #   * `:iam_user_arns` - *required* - (Array<String>) An array of IAM
       #     user ARNs that identify the users to be described.
       # @return [Core::Response]
@@ -860,6 +887,7 @@ module AWS
       # @!method describe_volumes(options = {})
       # Calls the DescribeVolumes API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - (String) The instance ID. If you use this
       #     parameter, DescribeVolumes returns descriptions of the volumes
       #     associated with the specified instance.
@@ -890,6 +918,7 @@ module AWS
       # @!method detach_elastic_load_balancer(options = {})
       # Calls the DetachElasticLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:elastic_load_balancer_name` - *required* - (String) The Elastic
       #     Load Balancing instance's name.
       #   * `:layer_id` - *required* - (String) The ID of the layer that the
@@ -899,6 +928,7 @@ module AWS
       # @!method get_hostname_suggestion(options = {})
       # Calls the GetHostnameSuggestion API operation.
       # @param [Hash] options
+      #
       #   * `:layer_id` - *required* - (String) The layer ID.
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -910,12 +940,14 @@ module AWS
       # @!method reboot_instance(options = {})
       # Calls the RebootInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       # @return [Core::Response]
 
       # @!method set_load_based_auto_scaling(options = {})
       # Calls the SetLoadBasedAutoScaling API operation.
       # @param [Hash] options
+      #
       #   * `:layer_id` - *required* - (String) The layer ID.
       #   * `:enable` - (Boolean) Enables load-based auto scaling for the
       #     layer.
@@ -974,6 +1006,7 @@ module AWS
       # @!method set_permission(options = {})
       # Calls the SetPermission API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
       #   * `:allow_ssh` - (Boolean) The user is allowed to use SSH to
@@ -985,6 +1018,7 @@ module AWS
       # @!method set_time_based_auto_scaling(options = {})
       # Calls the SetTimeBasedAutoScaling API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       #   * `:auto_scaling_schedule` - (Hash) An AutoScalingSchedule with the
       #     instance schedule.
@@ -1000,30 +1034,35 @@ module AWS
       # @!method start_instance(options = {})
       # Calls the StartInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       # @return [Core::Response]
 
       # @!method start_stack(options = {})
       # Calls the StartStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       # @return [Core::Response]
 
       # @!method stop_instance(options = {})
       # Calls the StopInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       # @return [Core::Response]
 
       # @!method stop_stack(options = {})
       # Calls the StopStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       # @return [Core::Response]
 
       # @!method update_app(options = {})
       # Calls the UpdateApp API operation.
       # @param [Hash] options
+      #
       #   * `:app_id` - *required* - (String) The app ID.
       #   * `:name` - (String) The app name.
       #   * `:description` - (String) A description of the app.
@@ -1074,6 +1113,7 @@ module AWS
       # @!method update_instance(options = {})
       # Calls the UpdateInstance API operation.
       # @param [Hash] options
+      #
       #   * `:instance_id` - *required* - (String) The instance ID.
       #   * `:layer_ids` - (Array<String>) The instance's layer IDs.
       #   * `:instance_type` - (String) The instance type. OpsWorks supports
@@ -1105,6 +1145,7 @@ module AWS
       # @!method update_layer(options = {})
       # Calls the UpdateLayer API operation.
       # @param [Hash] options
+      #
       #   * `:layer_id` - *required* - (String) The layer ID.
       #   * `:name` - (String) The layer name, which is used by the console.
       #   * `:shortname` - (String) The layer short name, which is used
@@ -1150,6 +1191,7 @@ module AWS
       # @!method update_stack(options = {})
       # Calls the UpdateStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_id` - *required* - (String) The stack ID.
       #   * `:name` - (String) The stack's new name.
       #   * `:attributes` - (Hash<String,String>) One or more user-defined
@@ -1225,6 +1267,7 @@ module AWS
       # @!method update_user_profile(options = {})
       # Calls the UpdateUserProfile API operation.
       # @param [Hash] options
+      #
       #   * `:iam_user_arn` - *required* - (String) The user IAM ARN.
       #   * `:ssh_username` - (String) The user's new SSH user name.
       #   * `:ssh_public_key` - (String) The user's new SSH public key.

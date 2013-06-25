@@ -27,6 +27,7 @@ module AWS
       # @!method delete_identity(options = {})
       # Calls the DeleteIdentity API operation.
       # @param [Hash] options
+      #
       #   * `:identity` - *required* - (String) The identity to be removed from
       #     the list of identities for the AWS Account.
       # @return [Core::Response]
@@ -34,6 +35,7 @@ module AWS
       # @!method delete_verified_email_address(options = {})
       # Calls the DeleteVerifiedEmailAddress API operation.
       # @param [Hash] options
+      #
       #   * `:email_address` - *required* - (String) An email address to be
       #     removed from the list of verified addresses.
       # @return [Core::Response]
@@ -41,6 +43,7 @@ module AWS
       # @!method get_identity_dkim_attributes(options = {})
       # Calls the GetIdentityDkimAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:identities` - *required* - (Array<String>) A list of one or more
       #     verified identities - email addresses, domains, or both.
       # @return [Core::Response]
@@ -55,6 +58,7 @@ module AWS
       # @!method get_identity_notification_attributes(options = {})
       # Calls the GetIdentityNotificationAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:identities` - *required* - (Array<String>) A list of one or more
       #     identities.
       # @return [Core::Response]
@@ -69,6 +73,7 @@ module AWS
       # @!method get_identity_verification_attributes(options = {})
       # Calls the GetIdentityVerificationAttributes API operation.
       # @param [Hash] options
+      #
       #   * `:identities` - *required* - (Array<String>) A list of identities.
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -81,6 +86,7 @@ module AWS
       # @!method get_send_quota(options = {})
       # Calls the GetSendQuota API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -92,6 +98,7 @@ module AWS
       # @!method get_send_statistics(options = {})
       # Calls the GetSendStatistics API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -106,6 +113,7 @@ module AWS
       # @!method list_identities(options = {})
       # Calls the ListIdentities API operation.
       # @param [Hash] options
+      #
       #   * `:identity_type` - (String) The type of the identities to list.
       #     Possible values are "EmailAddress" and "Domain". If this parameter
       #     is omitted, then all identities will be listed. Valid values
@@ -125,6 +133,7 @@ module AWS
       # @!method list_verified_email_addresses(options = {})
       # Calls the ListVerifiedEmailAddresses API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -134,6 +143,7 @@ module AWS
       # @!method send_email(options = {})
       # Calls the SendEmail API operation.
       # @param [Hash] options
+      #
       #   * `:source` - *required* - (String) The identity's email address.
       #   * `:destination` - *required* - (Hash) The destination for this
       #     email, composed of To:, CC:, and BCC: fields.
@@ -181,6 +191,7 @@ module AWS
       # @!method send_raw_email(options = {})
       # Calls the SendRawEmail API operation.
       # @param [Hash] options
+      #
       #   * `:source` - (String) The identity's email address. If you specify
       #     the Source parameter, then bounce notifications and complaints will
       #     be sent to this email address. This takes precedence over any
@@ -210,6 +221,7 @@ module AWS
       # @!method set_identity_dkim_enabled(options = {})
       # Calls the SetIdentityDkimEnabled API operation.
       # @param [Hash] options
+      #
       #   * `:identity` - *required* - (String) The identity for which DKIM
       #     signing should be enabled or disabled.
       #   * `:dkim_enabled` - *required* - (Boolean) Sets whether DKIM signing
@@ -220,6 +232,7 @@ module AWS
       # @!method set_identity_feedback_forwarding_enabled(options = {})
       # Calls the SetIdentityFeedbackForwardingEnabled API operation.
       # @param [Hash] options
+      #
       #   * `:identity` - *required* - (String) The identity for which to set
       #     feedback notification forwarding. Examples: user@example.com,
       #     example.com.
@@ -236,6 +249,7 @@ module AWS
       # @!method set_identity_notification_topic(options = {})
       # Calls the SetIdentityNotificationTopic API operation.
       # @param [Hash] options
+      #
       #   * `:identity` - *required* - (String) The identity for which the
       #     topic will be set. Examples: user@example.com, example.com.
       #   * `:notification_type` - *required* - (String) The type of feedback
@@ -252,6 +266,7 @@ module AWS
       # @!method verify_domain_dkim(options = {})
       # Calls the VerifyDomainDkim API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String) The name of the domain to be
       #     verified for Easy DKIM signing.
       # @return [Core::Response]
@@ -263,6 +278,7 @@ module AWS
       # @!method verify_domain_identity(options = {})
       # Calls the VerifyDomainIdentity API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String) The domain to be verified.
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -273,6 +289,7 @@ module AWS
       # @!method verify_email_address(options = {})
       # Calls the VerifyEmailAddress API operation.
       # @param [Hash] options
+      #
       #   * `:email_address` - *required* - (String) The email address to be
       #     verified.
       # @return [Core::Response]
@@ -280,6 +297,7 @@ module AWS
       # @!method verify_email_identity(options = {})
       # Calls the VerifyEmailIdentity API operation.
       # @param [Hash] options
+      #
       #   * `:email_address` - *required* - (String) The email address to be
       #     verified.
       # @return [Core::Response]

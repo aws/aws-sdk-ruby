@@ -25,6 +25,7 @@ module AWS
       # @!method create_connection(options = {})
       # Calls the CreateConnection API operation.
       # @param [Hash] options
+      #
       #   * `:offering_id` - *required* - (String)
       #   * `:connection_name` - *required* - (String)
       # @return [Core::Response]
@@ -40,6 +41,7 @@ module AWS
       # @!method create_private_virtual_interface(options = {})
       # Calls the CreatePrivateVirtualInterface API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - (String)
       #   * `:new_private_virtual_interface` - (Hash) Detailed information of
       #     the private virtual interface to be created. Default: None
@@ -73,6 +75,7 @@ module AWS
       # @!method create_public_virtual_interface(options = {})
       # Calls the CreatePublicVirtualInterface API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - (String)
       #   * `:new_public_virtual_interface` - (Hash) Detailed information of
       #     the public virtual interface to be created. Default: None
@@ -109,6 +112,7 @@ module AWS
       # @!method delete_connection(options = {})
       # Calls the DeleteConnection API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -123,6 +127,7 @@ module AWS
       # @!method delete_virtual_interface(options = {})
       # Calls the DeleteVirtualInterface API operation.
       # @param [Hash] options
+      #
       #   * `:virtual_interface_id` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -133,6 +138,7 @@ module AWS
       # @!method describe_connection_detail(options = {})
       # Calls the DescribeConnectionDetail API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -160,6 +166,7 @@ module AWS
       # @!method describe_connections(options = {})
       # Calls the DescribeConnections API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -175,6 +182,7 @@ module AWS
       # @!method describe_offering_detail(options = {})
       # Calls the DescribeOfferingDetail API operation.
       # @param [Hash] options
+      #
       #   * `:offering_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -201,6 +209,7 @@ module AWS
       # @!method describe_offerings(options = {})
       # Calls the DescribeOfferings API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -221,6 +230,7 @@ module AWS
       # @!method describe_virtual_gateways(options = {})
       # Calls the DescribeVirtualGateways API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -232,6 +242,7 @@ module AWS
       # @!method describe_virtual_interfaces(options = {})
       # Calls the DescribeVirtualInterfaces API operation.
       # @param [Hash] options
+      #
       #   * `:connection_id` - (String)
       #   * `:virtual_interface_id` - (String)
       # @return [Core::Response]

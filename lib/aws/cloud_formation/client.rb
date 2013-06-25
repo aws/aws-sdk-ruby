@@ -38,6 +38,7 @@ module AWS
       # @!method cancel_update_stack(options = {})
       # Calls the CancelUpdateStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or the unique
       #     identifier associated with the stack.
       # @return [Core::Response]
@@ -45,6 +46,7 @@ module AWS
       # @!method create_stack(options = {})
       # Calls the CreateStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name associated with the
       #     stack. The name must be unique within your AWS account. Must
       #     contain only alphanumeric characters (case sensitive) and start
@@ -110,6 +112,7 @@ module AWS
       # @!method delete_stack(options = {})
       # Calls the DeleteStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or the unique
       #     identifier associated with the stack.
       # @return [Core::Response]
@@ -117,6 +120,7 @@ module AWS
       # @!method describe_stack_events(options = {})
       # Calls the DescribeStackEvents API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - (String) The name or the unique identifier
       #     associated with the stack. Default: There is no default value.
       #   * `:next_token` - (String) String that identifies the start of the
@@ -142,6 +146,7 @@ module AWS
       # @!method describe_stack_resource(options = {})
       # Calls the DescribeStackResource API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or the unique
       #     identifier associated with the stack. Default: There is no default
       #     value.
@@ -167,6 +172,7 @@ module AWS
       # @!method describe_stack_resources(options = {})
       # Calls the DescribeStackResources API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - (String) The name or the unique identifier
       #     associated with the stack. Required: Conditional. If you do not
       #     specify StackName, you must specify PhysicalResourceId. Default:
@@ -200,6 +206,7 @@ module AWS
       # @!method describe_stacks(options = {})
       # Calls the DescribeStacks API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - (String) The name or the unique identifier
       #     associated with the stack. Default: There is no default value.
       #   * `:next_token` - (String)
@@ -234,6 +241,7 @@ module AWS
       # @!method estimate_template_cost(options = {})
       # Calls the EstimateTemplateCost API operation.
       # @param [Hash] options
+      #
       #   * `:template_body` - (String) Structure containing the template body.
       #     (For more information, go to the AWS CloudFormation User Guide.)
       #     Conditional: You must pass TemplateBody or TemplateURL. If both are
@@ -258,6 +266,7 @@ module AWS
       # @!method get_template(options = {})
       # Calls the GetTemplate API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or the unique
       #     identifier associated with the stack.
       # @return [Core::Response]
@@ -269,6 +278,7 @@ module AWS
       # @!method list_stack_resources(options = {})
       # Calls the ListStackResources API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or the unique
       #     identifier associated with the stack. Default: There is no default
       #     value.
@@ -291,6 +301,7 @@ module AWS
       # @!method list_stacks(options = {})
       # Calls the ListStacks API operation.
       # @param [Hash] options
+      #
       #   * `:next_token` - (String) String that identifies the start of the
       #     next list of stacks, if there is one. Default: There is no default
       #     value.
@@ -316,6 +327,7 @@ module AWS
       # @!method update_stack(options = {})
       # Calls the UpdateStack API operation.
       # @param [Hash] options
+      #
       #   * `:stack_name` - *required* - (String) The name or stack ID of the
       #     stack to update. Must contain only alphanumeric characters (case
       #     sensitive) and start with an alpha character. Maximum length of the
@@ -351,6 +363,7 @@ module AWS
       # @!method validate_template(options = {})
       # Calls the ValidateTemplate API operation.
       # @param [Hash] options
+      #
       #   * `:template_body` - (String) String containing the template body.
       #     (For more information, go to the AWS CloudFormation User Guide.)
       #     Conditional: You must pass TemplateURL or TemplateBody. If both are

@@ -1,4 +1,109 @@
-2013-05-28 Alex Slynko <alex.slynko@wonga.com>
+2013-06-14 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/s3/access_control_list_spec.rb,
+  spec/aws/s3/presigned_post_spec.rb, spec/spec_helper.rb, tasks/rspec.rake:
+  Added a task to run each spec file in its own process.
+
+  Updated a few specs that were failing when run directly.
+
+  * spec/require_test_1.rb, spec/require_test_2.rb, tasks/rspec.rake: Added
+  addition tests around loading the SDK.
+
+  Because the SDK uses autoload, it is necessary to run these
+  tests in separate processes.
+
+  * lib/aws/ec2/instance.rb, spec/aws/ec2/instance_spec.rb: Resolved an issue
+  with AWS::EC2::Instance#console_output
+
+  When the output xml element is missing from the response to
+  GetConsoleOutput then this method was raising an error.  This
+  now returns +nil+ indicating the output is not available.
+
+  Fixes #272
+
+2013-06-10 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/auto_scaling/client.rb, lib/aws/cloud_formation/client.rb,
+  lib/aws/cloud_front/client.rb, lib/aws/cloud_search/client.rb,
+  lib/aws/cloud_watch/client.rb, lib/aws/data_pipeline/client.rb,
+  lib/aws/direct_connect/client.rb, lib/aws/ec2/client.rb,
+  lib/aws/elastic_beanstalk/client.rb, lib/aws/elastic_transcoder/client.rb,
+  lib/aws/elasticache/client.rb, lib/aws/elb/client.rb, lib/aws/emr/client.rb,
+  lib/aws/glacier/client.rb, lib/aws/iam/client.rb,
+  lib/aws/import_export/client.rb, lib/aws/ops_works/client.rb,
+  lib/aws/rds/client.rb, lib/aws/redshift/client.rb,
+  lib/aws/route_53/client.rb, lib/aws/simple_db/client.rb,
+  lib/aws/simple_email_service/client.rb, lib/aws/simple_workflow/client.rb,
+  lib/aws/sns/client.rb, lib/aws/sqs/client.rb,
+  lib/aws/storage_gateway/client.rb, lib/aws/sts/client.rb,
+  lib/aws/support/client.rb: Reformatted client API documentation to fix
+  rendered html for nested params.
+
+2013-06-11 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/s3_object.rb: Removed incorrect documentation about SSE and
+  Amazon S3.
+
+  Fixes #269
+  * spec/aws/s3/client_spec.rb: Fix indentation.
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Resolved an issue with
+  errors with empty response bodies.
+
+  When the response body was the empty string, instead of nil, we would not
+  properly map to helpful error types. This change fixes the empty string
+  case.
+
+  Fixes #260
+
+2013-06-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.11.2
+
+2013-06-08 Trevor Rowe <trevorrowe@gmail.com>
+
+  * aws-sdk.gemspec: Updated nokogiri dependency (< 1.6) so we can continue to
+  support Ruby 1.8.7
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.11.1
+
+2013-06-07 Lane LaRue <llarue@ssx-dev-llarue-01.sea14.amazon.com>
+
+  * lib/aws/sqs/queue.rb: update dcos on max message delay
+
+2013-06-04 James Smith <james@loopj.com>
+
+  * lib/aws/simple_email_service.rb: Add compatibility with deliver!
+
+2013-05-30 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/core/http/net_http_handler_spec.rb: Fixed unit test for the net
+  http handler.
+
+  * features/dynamo_db/step_definitions/crc32.rb,
+  lib/aws/core/http/net_http_handler.rb: Resolved issue with crc32 checks and
+  Ruby 2.0.0
+
+  Fixes #243
+
+  * lib/aws/core/configuration.rb: The ":region" attribute is a bit out of
+  place, as
+  none of the other attributes are referred to by
+  symbol. I've corrected this.
+
+  * lib/aws/dynamo_db/item_collection.rb,
+  spec/aws/dynamo_db/item_collection_spec.rb:
+  AWS::DynamoDB::ItemCollection#query now accepts :attributes_to_get.
+
+  Fixes #252
+
+2013-05-29 Eron Hennessey <eronh@amazon.com>
+
+  * lib/aws/simple_workflow/activity_task.rb: Added documentation for
+  ActivityTask#respond
+
+2013-05-28 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.11.0
 
   * lib/aws/ec2/instance_collection.rb: Fix example for instance collection to
   correspond documentation
@@ -33,6 +138,9 @@
 
   * lib/aws/api_config/OpsWorks-2013-02-18.yml, lib/aws/ops_works/client.rb:
   Added support for ELBs to AWS::OpsWorks::Client
+
+  * lib/aws/api_config/STS-2011-06-15.yml, lib/aws/sts/client.rb: Add
+  AWS::STS::Client#assume_role_with_web_identity
 
   * lib/aws/api_config/DynamoDB-2012-08-10.yml,
   lib/aws/dynamo_db/client_v2.rb: Added parallel scan to

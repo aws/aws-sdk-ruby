@@ -25,6 +25,7 @@ module AWS
       # @!method authorize_cluster_security_group_ingress(options = {})
       # Calls the AuthorizeClusterSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_security_group_name` - *required* - (String) The name of
       #     the security group to which the ingress rule is added.
       #   * `:cidrip` - (String) The IP range to be added the Amazon Redshift
@@ -52,6 +53,7 @@ module AWS
       # @!method copy_cluster_snapshot(options = {})
       # Calls the CopyClusterSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:source_snapshot_identifier` - *required* - (String) The
       #     identifier for the source snapshot. Constraints: Must be the
       #     identifier for a valid automated snapshot whose state is
@@ -84,6 +86,7 @@ module AWS
       # @!method create_cluster(options = {})
       # Calls the CreateCluster API operation.
       # @param [Hash] options
+      #
       #   * `:db_name` - (String) The name of the first database to be created
       #     when the cluster is created. To create additional databases after
       #     the cluster is created, connect to the cluster with a SQL client
@@ -237,6 +240,7 @@ module AWS
       # @!method create_cluster_parameter_group(options = {})
       # Calls the CreateClusterParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - *required* - (String) The name of the
       #     cluster parameter group. Constraints: Must be 1 to 255 alphanumeric
       #     characters or hyphens First character must be a letter. Cannot end
@@ -266,6 +270,7 @@ module AWS
       # @!method create_cluster_security_group(options = {})
       # Calls the CreateClusterSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_security_group_name` - *required* - (String) The name for
       #     the security group. Amazon Redshift stores the value as a lowercase
       #     string. Constraints: Must contain no more than 255 alphanumeric
@@ -291,6 +296,7 @@ module AWS
       # @!method create_cluster_snapshot(options = {})
       # Calls the CreateClusterSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_identifier` - *required* - (String) A unique identifier
       #     for the snapshot that you are requesting. This identifier must be
       #     unique for all snapshots within the AWS account. Constraints:
@@ -322,6 +328,7 @@ module AWS
       # @!method create_cluster_subnet_group(options = {})
       # Calls the CreateClusterSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_subnet_group_name` - *required* - (String) The name for
       #     the subnet group. Amazon Redshift stores the value as a lowercase
       #     string. Constraints: Must contain no more than 255 alphanumeric
@@ -349,6 +356,7 @@ module AWS
       # @!method delete_cluster(options = {})
       # Calls the DeleteCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - *required* - (String) The identifier of the
       #     cluster to be deleted. Constraints: Must contain lowercase
       #     characters. Must contain from 1 to 63 alphanumeric characters or
@@ -410,6 +418,7 @@ module AWS
       # @!method delete_cluster_parameter_group(options = {})
       # Calls the DeleteClusterParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - *required* - (String) The name of the
       #     parameter group to be deleted. Constraints: Must be the name of an
       #     existing cluster parameter group. Cannot delete a default cluster
@@ -419,6 +428,7 @@ module AWS
       # @!method delete_cluster_security_group(options = {})
       # Calls the DeleteClusterSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_security_group_name` - *required* - (String) The name of
       #     the cluster security group to be deleted.
       # @return [Core::Response]
@@ -426,6 +436,7 @@ module AWS
       # @!method delete_cluster_snapshot(options = {})
       # Calls the DeleteClusterSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:snapshot_identifier` - *required* - (String) The unique
       #     identifier of the manual snapshot to be deleted. Constraints: Must
       #     be the name of an existing snapshot that is in the available state.
@@ -451,6 +462,7 @@ module AWS
       # @!method delete_cluster_subnet_group(options = {})
       # Calls the DeleteClusterSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_subnet_group_name` - *required* - (String) The name of
       #     the cluster subnet group name to be deleted.
       # @return [Core::Response]
@@ -458,6 +470,7 @@ module AWS
       # @!method describe_cluster_parameter_groups(options = {})
       # Calls the DescribeClusterParameterGroups API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - (String) The name of a specific parameter
       #     group for which to return details. By default, details about all
       #     parameter groups and the default parameter group are returned.
@@ -483,6 +496,7 @@ module AWS
       # @!method describe_cluster_parameters(options = {})
       # Calls the DescribeClusterParameters API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - *required* - (String) The name of a
       #     cluster parameter group for which to return details.
       #   * `:source` - (String) The parameter types to return. Specify user to
@@ -517,6 +531,7 @@ module AWS
       # @!method describe_cluster_security_groups(options = {})
       # Calls the DescribeClusterSecurityGroups API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_security_group_name` - (String) The name of a cluster
       #     security group for which you are requesting details. You can
       #     specify either the Marker parameter or a ClusterSecurityGroupName
@@ -551,6 +566,7 @@ module AWS
       # @!method describe_cluster_snapshots(options = {})
       # Calls the DescribeClusterSnapshots API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - (String) The identifier of the cluster for
       #     which information about snapshots is requested.
       #   * `:snapshot_identifier` - (String) The snapshot identifier of the
@@ -601,6 +617,7 @@ module AWS
       # @!method describe_cluster_subnet_groups(options = {})
       # Calls the DescribeClusterSubnetGroups API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_subnet_group_name` - (String) The name of the cluster
       #     subnet group for which information is requested.
       #   * `:max_records` - (Integer) The maximum number of cluster subnet
@@ -632,6 +649,7 @@ module AWS
       # @!method describe_cluster_versions(options = {})
       # Calls the DescribeClusterVersions API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_version` - (String) The specific cluster version to
       #     return. Example: 1.0
       #   * `:cluster_parameter_group_family` - (String) The name of a specific
@@ -659,6 +677,7 @@ module AWS
       # @!method describe_clusters(options = {})
       # Calls the DescribeClusters API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - (String) The unique identifier of a cluster
       #     whose properties you are requesting. This parameter isn't case
       #     sensitive. The default is that all clusters defined for an account
@@ -719,6 +738,7 @@ module AWS
       # @!method describe_default_cluster_parameters(options = {})
       # Calls the DescribeDefaultClusterParameters API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_family` - *required* - (String) The name of the
       #     cluster parameter group family.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -749,6 +769,7 @@ module AWS
       # @!method describe_events(options = {})
       # Calls the DescribeEvents API operation.
       # @param [Hash] options
+      #
       #   * `:source_identifier` - (String) The identifier of the event source
       #     for which events will be returned. If this parameter is not
       #     specified, then all sources are included in the response.
@@ -807,6 +828,7 @@ module AWS
       # @!method describe_orderable_cluster_options(options = {})
       # Calls the DescribeOrderableClusterOptions API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_version` - (String) The version filter value. Specify
       #     this parameter to show only the available offerings matching the
       #     specified version. Default: All versions. Constraints: Must be one
@@ -838,6 +860,7 @@ module AWS
       # @!method describe_reserved_node_offerings(options = {})
       # Calls the DescribeReservedNodeOfferings API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_node_offering_id` - (String) The unique identifier for
       #     the offering.
       #   * `:node_type` - (String) The node type you can purchase. For more
@@ -875,6 +898,7 @@ module AWS
       # @!method describe_reserved_nodes(options = {})
       # Calls the DescribeReservedNodes API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_node_id` - (String) Customer specified identifier for
       #     the node reservation.
       #   * `:reserved_node_offering_id` - (String) The reserved node offering
@@ -914,6 +938,7 @@ module AWS
       # @!method describe_resize(options = {})
       # Calls the DescribeResize API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - *required* - (String) The unique identifier
       #     of a cluster whose resize progress you are requesting. This
       #     parameter isn't case sensitive. The default is that all clusters
@@ -933,6 +958,7 @@ module AWS
       # @!method modify_cluster(options = {})
       # Calls the ModifyCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - *required* - (String) The unique identifier
       #     of the cluster to be modified. Example: examplecluster
       #   * `:cluster_type` - (String) The new cluster type. When you submit
@@ -1061,6 +1087,7 @@ module AWS
       # @!method modify_cluster_parameter_group(options = {})
       # Calls the ModifyClusterParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - *required* - (String) The name of the
       #     parameter group to be modified.
       #   * `:parameters` - *required* - (Array<Hash>) An array of parameters
@@ -1091,6 +1118,7 @@ module AWS
       # @!method modify_cluster_subnet_group(options = {})
       # Calls the ModifyClusterSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_subnet_group_name` - *required* - (String) The name of
       #     the parameter group to be modified.
       #   * `:description` - (String) The name of the parameter group to be
@@ -1114,6 +1142,7 @@ module AWS
       # @!method purchase_reserved_node_offering(options = {})
       # Calls the PurchaseReservedNodeOffering API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_node_offering_id` - *required* - (String) The unique
       #     identifier of the reserved node offering you want to purchase.
       #   * `:reserved_node_id` - (String)
@@ -1141,6 +1170,7 @@ module AWS
       # @!method reboot_cluster(options = {})
       # Calls the RebootCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - *required* - (String) The cluster
       #     identifier.
       # @return [Core::Response]
@@ -1186,6 +1216,7 @@ module AWS
       # @!method reset_cluster_parameter_group(options = {})
       # Calls the ResetClusterParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:parameter_group_name` - *required* - (String) The name of the
       #     cluster parameter group to be reset.
       #   * `:reset_all_parameters` - (Boolean) If `true` , all parameters in
@@ -1218,6 +1249,7 @@ module AWS
       # @!method restore_from_cluster_snapshot(options = {})
       # Calls the RestoreFromClusterSnapshot API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_identifier` - *required* - (String) The identifier of the
       #     cluster that will be created from restoring the snapshot.
       #     Constraints: Must contain from 1 to 63 alphanumeric characters or
@@ -1286,6 +1318,7 @@ module AWS
       # @!method revoke_cluster_security_group_ingress(options = {})
       # Calls the RevokeClusterSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:cluster_security_group_name` - *required* - (String) The name of
       #     the security Group from which to revoke the ingress rule.
       #   * `:cidrip` - (String) The IP range for which to revoke access. This

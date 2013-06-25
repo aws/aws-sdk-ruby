@@ -89,6 +89,23 @@ module AWS
           response = client.new_stub_for(:list_objects)
           response.data[:contents] = contents
           response.data[:truncated] = true
+          response.data[:next_marker] = 'foo'
+          response
+        }
+
+        let(:truncated_response_without_next_marker) {
+          response = client.new_stub_for(:list_objects)
+          response.data[:contents] = contents
+          response.data[:truncated] = true
+          response.data[:next_marker] = nil
+          response
+        }
+
+        let(:truncated_response_with_conflicting_marker) {
+          response = client.new_stub_for(:list_objects)
+          response.data[:contents] = contents
+          response.data[:truncated] = true
+          response.data[:next_marker] = 'precedence'
           response
         }
 
@@ -97,8 +114,9 @@ module AWS
           resp.data[:contents] = contents
         end
 
-        it 'raises a runtime error if the response says its but there are no keys' do
+        it 'raises a runtime error if the response says its truncated but there are no keys or next_marker' do
           response.data[:truncated] = true
+          response.data[:next_marker] = nil
           response.data[:contents] = []
           lambda {
             collection.each{|o|}
@@ -138,6 +156,34 @@ module AWS
 
           client.should_receive(:list_objects).ordered.
             with(hash_including(:bucket_name => "bu", :marker => "foo")).
+            and_return(response)
+
+          collection.each { |o| }
+
+        end
+
+        it 'should fall back to the last collection key if next_marker is missing' do
+
+          client.should_receive(:list_objects).ordered.
+            with(hash_not_including(:marker)).
+            and_return(truncated_response_without_next_marker)
+
+          client.should_receive(:list_objects).ordered.
+            with(hash_including(:bucket_name => "bu", :marker => "foo")).
+            and_return(response)
+
+          collection.each { |o| }
+
+        end
+
+        it 'should use the next_marker before collection values' do
+
+          client.should_receive(:list_objects).ordered.
+            with(hash_not_including(:marker)).
+            and_return(truncated_response_with_conflicting_marker)
+
+          client.should_receive(:list_objects).ordered.
+            with(hash_including(:bucket_name => "bu", :marker => "precedence")).
             and_return(response)
 
           collection.each { |o| }

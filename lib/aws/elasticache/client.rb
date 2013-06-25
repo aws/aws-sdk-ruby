@@ -25,6 +25,7 @@ module AWS
       # @!method authorize_cache_security_group_ingress(options = {})
       # Calls the AuthorizeCacheSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:cache_security_group_name` - *required* - (String) The name of
       #     the Cache Security Group to authorize.
       #   * `:ec2_security_group_name` - *required* - (String) Name of the EC2
@@ -48,6 +49,7 @@ module AWS
       # @!method create_cache_cluster(options = {})
       # Calls the CreateCacheCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cache_cluster_id` - *required* - (String) The Cache Cluster
       #     identifier. This parameter is stored as a lowercase string.
       #     Constraints: Must contain from 1 to 20 alphanumeric characters or
@@ -144,6 +146,7 @@ module AWS
       # @!method create_cache_parameter_group(options = {})
       # Calls the CreateCacheParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - *required* - (String) The name of
       #     the Cache Parameter Group.
       #   * `:cache_parameter_group_family` - *required* - (String) The name of
@@ -163,6 +166,7 @@ module AWS
       # @!method create_cache_security_group(options = {})
       # Calls the CreateCacheSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_security_group_name` - *required* - (String) The name for
       #     the Cache Security Group. This value is stored as a lowercase
       #     string. Constraints: Must contain no more than 255 alphanumeric
@@ -184,6 +188,7 @@ module AWS
       # @!method create_cache_subnet_group(options = {})
       # Calls the CreateCacheSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_subnet_group_name` - *required* - (String) The name for the
       #     Cache Subnet Group. This value is stored as a lowercase string.
       #     Constraints: Must contain no more than 255 alphanumeric characters
@@ -207,6 +212,7 @@ module AWS
       # @!method delete_cache_cluster(options = {})
       # Calls the DeleteCacheCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cache_cluster_id` - *required* - (String) The Cache Cluster
       #     identifier for the Cache Cluster to be deleted. This parameter
       #     isn't case sensitive.
@@ -258,6 +264,7 @@ module AWS
       # @!method delete_cache_parameter_group(options = {})
       # Calls the DeleteCacheParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - *required* - (String) The name of
       #     the Cache Parameter Group to delete. The specified cache security
       #     group must not be associated with any Cache clusters.
@@ -266,6 +273,7 @@ module AWS
       # @!method delete_cache_security_group(options = {})
       # Calls the DeleteCacheSecurityGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_security_group_name` - *required* - (String) The name of
       #     the Cache Security Group to delete. You cannot delete the default
       #     security group.
@@ -274,6 +282,7 @@ module AWS
       # @!method delete_cache_subnet_group(options = {})
       # Calls the DeleteCacheSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_subnet_group_name` - *required* - (String) The name of the
       #     Cache Subnet Group to delete. Constraints: Must contain no more
       #     than 255 alphanumeric characters or hyphens.
@@ -282,6 +291,7 @@ module AWS
       # @!method describe_cache_clusters(options = {})
       # Calls the DescribeCacheClusters API operation.
       # @param [Hash] options
+      #
       #   * `:cache_cluster_id` - (String) The user-supplied cluster
       #     identifier. If this parameter is specified, only information about
       #     that specific Cache Cluster is returned. This parameter isn't case
@@ -348,6 +358,7 @@ module AWS
       # @!method describe_cache_engine_versions(options = {})
       # Calls the DescribeCacheEngineVersions API operation.
       # @param [Hash] options
+      #
       #   * `:engine` - (String) The cache engine to return.
       #   * `:engine_version` - (String) The cache engine version to return.
       #     Example: 1.4.14
@@ -381,6 +392,7 @@ module AWS
       # @!method describe_cache_parameter_groups(options = {})
       # Calls the DescribeCacheParameterGroups API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - (String) The name of a specific
       #     cache parameter group to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -404,6 +416,7 @@ module AWS
       # @!method describe_cache_parameters(options = {})
       # Calls the DescribeCacheParameters API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - *required* - (String) The name of a
       #     specific cache parameter group to return details for.
       #   * `:source` - (String) The parameter types to return. Valid values:
@@ -445,6 +458,7 @@ module AWS
       # @!method describe_cache_security_groups(options = {})
       # Calls the DescribeCacheSecurityGroups API operation.
       # @param [Hash] options
+      #
       #   * `:cache_security_group_name` - (String) The name of the Cache
       #     Security Group to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -473,6 +487,7 @@ module AWS
       # @!method describe_cache_subnet_groups(options = {})
       # Calls the DescribeCacheSubnetGroups API operation.
       # @param [Hash] options
+      #
       #   * `:cache_subnet_group_name` - (String) The name of the Cache Subnet
       #     Group to return details for.
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -501,6 +516,7 @@ module AWS
       # @!method describe_engine_default_parameters(options = {})
       # Calls the DescribeEngineDefaultParameters API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_family` - *required* - (String) The name of
       #     the Cache Parameter Group Family. Currently, memcached1.4 is the
       #     only cache parameter group family supported by the service.
@@ -542,6 +558,7 @@ module AWS
       # @!method describe_events(options = {})
       # Calls the DescribeEvents API operation.
       # @param [Hash] options
+      #
       #   * `:source_identifier` - (String) The identifier of the event source
       #     for which events will be returned. If not specified, then all
       #     sources are included in the response.
@@ -581,6 +598,7 @@ module AWS
       # @!method describe_reserved_cache_nodes(options = {})
       # Calls the DescribeReservedCacheNodes API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_cache_node_id` - (String) The reserved Cache Node
       #     identifier filter value. Specify this parameter to show only the
       #     reservation that matches the specified reservation ID.
@@ -631,6 +649,7 @@ module AWS
       # @!method describe_reserved_cache_nodes_offerings(options = {})
       # Calls the DescribeReservedCacheNodesOfferings API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_cache_nodes_offering_id` - (String) The offering
       #     identifier filter value. Specify this parameter to show only the
       #     available offering that matches the specified reservation
@@ -675,6 +694,7 @@ module AWS
       # @!method modify_cache_cluster(options = {})
       # Calls the ModifyCacheCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cache_cluster_id` - *required* - (String) The Cache Cluster
       #     identifier. This value is stored as a lowercase string.
       #   * `:num_cache_nodes` - (Integer) The number of Cache Nodes the Cache
@@ -775,6 +795,7 @@ module AWS
       # @!method modify_cache_parameter_group(options = {})
       # Calls the ModifyCacheParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - *required* - (String) The name of
       #     the cache parameter group to modify.
       #   * `:parameter_name_values` - *required* - (Array<Hash>) An array of
@@ -794,6 +815,7 @@ module AWS
       # @!method modify_cache_subnet_group(options = {})
       # Calls the ModifyCacheSubnetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_subnet_group_name` - *required* - (String) The name for the
       #     Cache Subnet Group. This value is stored as a lowercase string.
       #     Constraints: Must contain no more than 255 alphanumeric characters
@@ -817,6 +839,7 @@ module AWS
       # @!method purchase_reserved_cache_nodes_offering(options = {})
       # Calls the PurchaseReservedCacheNodesOffering API operation.
       # @param [Hash] options
+      #
       #   * `:reserved_cache_nodes_offering_id` - *required* - (String) The ID
       #     of the Reserved Cache Node offering to purchase. Example:
       #     438012d3-4052-4cc7-b2e3-8d3372e0e706
@@ -846,6 +869,7 @@ module AWS
       # @!method reboot_cache_cluster(options = {})
       # Calls the RebootCacheCluster API operation.
       # @param [Hash] options
+      #
       #   * `:cache_cluster_id` - *required* - (String) The Cache Cluster
       #     identifier. This parameter is stored as a lowercase string.
       #   * `:cache_node_ids_to_reboot` - *required* - (Array<String>) A list
@@ -899,6 +923,7 @@ module AWS
       # @!method reset_cache_parameter_group(options = {})
       # Calls the ResetCacheParameterGroup API operation.
       # @param [Hash] options
+      #
       #   * `:cache_parameter_group_name` - *required* - (String) The name of
       #     the Cache Parameter Group.
       #   * `:reset_all_parameters` - (Boolean) Specifies whether ( `true` ) or
@@ -919,6 +944,7 @@ module AWS
       # @!method revoke_cache_security_group_ingress(options = {})
       # Calls the RevokeCacheSecurityGroupIngress API operation.
       # @param [Hash] options
+      #
       #   * `:cache_security_group_name` - *required* - (String) The name of
       #     the Cache Security Group to revoke ingress from.
       #   * `:ec2_security_group_name` - *required* - (String) The name of the

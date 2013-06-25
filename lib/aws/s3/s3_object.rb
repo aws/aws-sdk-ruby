@@ -117,7 +117,6 @@ module AWS
     #
     # ## Server Side Encryption
     #
-    # Amazon S3 provides server side encryption for an additional cost.
     # You can specify to use server side encryption when writing an object.
     #
     #     obj.write('data', :server_side_encryption => :aes256)

@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'base64'
+
 module AWS
   class EC2
 
@@ -575,11 +577,12 @@ module AWS
         images.create(options.merge(:instance_id => id, :name => name))
       end
 
-      # Retrieves the console output for the instance.
-      #
-      # @return [String] the console output.
+      # Retrieves the console output for the instance, returning +nil+ if it
+      # is not available yet.
+      # @return [String] the console output
+      # @return [nil] if no output is available
       def console_output
-        output = client.get_console_output(:instance_id => self.id).output
+        output = client.get_console_output(:instance_id => self.id)[:output]
         Base64.decode64(output) if output
       end
 

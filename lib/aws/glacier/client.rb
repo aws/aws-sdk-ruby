@@ -31,57 +31,64 @@ module AWS
       # @!method abort_multipart_upload(options = {})
       # Calls the DELETE AbortMultipartUpload API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:upload_id` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:upload_id` - *required* - (String)
       # @return [Core::Response]
 
       # @!method complete_multipart_upload(options = {})
       # Calls the POST CompleteMultipartUpload API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:upload_id` - *required* - (String)
-      # * `:archive_size` - (Integer)
-      # * `:checksum` - *required* - (String)
-      # * `:content_sha256` - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:upload_id` - *required* - (String)
+      #   * `:archive_size` - (Integer)
+      #   * `:checksum` - *required* - (String)
+      #   * `:content_sha256` - (String)
       # @return [Core::Response]
 
       # @!method create_vault(options = {})
       # Calls the PUT CreateVault API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
       # @return [Core::Response]
 
       # @!method delete_archive(options = {})
       # Calls the DELETE DeleteArchive API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:archive_id` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:archive_id` - *required* - (String)
       # @return [Core::Response]
 
       # @!method delete_vault(options = {})
       # Calls the DELETE DeleteVault API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
       # @return [Core::Response]
 
       # @!method delete_vault_notifications(options = {})
       # Calls the DELETE DeleteVaultNotifications API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
       # @return [Core::Response]
 
       # @!method describe_job(options = {})
       # Calls the GET DescribeJob API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:job_id` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:job_id` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -104,8 +111,9 @@ module AWS
       # @!method describe_vault(options = {})
       # Calls the GET DescribeVault API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -120,17 +128,19 @@ module AWS
       # @!method get_job_output(options = {})
       # Calls the GET GetJobOutput API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:job_id` - *required* - (String)
-      # * `:range` - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:job_id` - *required* - (String)
+      #   * `:range` - (String)
       # @return [Core::Response]
 
       # @!method get_vault_notifications(options = {})
       # Calls the GET GetVaultNotifications API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -141,34 +151,37 @@ module AWS
       # @!method initiate_job(options = {})
       # Calls the POST InitiateJob API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:job_parameters` - *required* - (Hash)
-      #   * `:format` - (String)
-      #   * `:type` - (String)
-      #   * `:archive_id` - (String)
-      #   * `:description` - (String)
-      #   * `:sns_topic` - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:job_parameters` - *required* - (Hash)
+      #     * `:format` - (String)
+      #     * `:type` - (String)
+      #     * `:archive_id` - (String)
+      #     * `:description` - (String)
+      #     * `:sns_topic` - (String)
       # @return [Core::Response]
 
       # @!method initiate_multipart_upload(options = {})
       # Calls the POST InitiateMultipartUpload API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:archive_description` - (String)
-      # * `:part_size` - (Integer)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:archive_description` - (String)
+      #   * `:part_size` - (Integer)
       # @return [Core::Response]
 
       # @!method list_jobs(options = {})
       # Calls the GET ListJobs API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:limit` - (Integer)
-      # * `:marker` - (String)
-      # * `:statuscode` - (String)
-      # * `:completed` - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:limit` - (Integer)
+      #   * `:marker` - (String)
+      #   * `:statuscode` - (String)
+      #   * `:completed` - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -193,10 +206,11 @@ module AWS
       # @!method list_multipart_uploads(options = {})
       # Calls the GET ListMultipartUploads API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:upload_id_marker` - (String)
-      # * `:limit` - (Integer)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:upload_id_marker` - (String)
+      #   * `:limit` - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -212,11 +226,12 @@ module AWS
       # @!method list_parts(options = {})
       # Calls the GET ListParts API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:upload_id` - *required* - (String)
-      # * `:marker` - (String)
-      # * `:limit` - (Integer)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:upload_id` - *required* - (String)
+      #   * `:marker` - (String)
+      #   * `:limit` - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -234,9 +249,10 @@ module AWS
       # @!method list_vaults(options = {})
       # Calls the GET ListVaults API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:marker` - (String)
-      # * `:limit` - (Integer)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:marker` - (String)
+      #   * `:limit` - (Integer)
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -253,34 +269,37 @@ module AWS
       # @!method set_vault_notifications(options = {})
       # Calls the PUT SetVaultNotifications API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:vault_notification_config` - *required* - (Hash)
-      #   * `:sns_topic` - (String)
-      #   * `:events` - (Array<String>)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:vault_notification_config` - *required* - (Hash)
+      #     * `:sns_topic` - (String)
+      #     * `:events` - (Array<String>)
       # @return [Core::Response]
 
       # @!method upload_archive(options = {})
       # Calls the POST UploadArchive API operation.
       # @param [Hash] options
-      # * `:vault_name` - *required* - (String)
-      # * `:account_id` - *required* - (String)
-      # * `:archive_description` - (String)
-      # * `:checksum` - *required* - (String)
-      # * `:body` - *required* - (IO)
-      # * `:content_sha256` - (String)
+      #
+      #   * `:vault_name` - *required* - (String)
+      #   * `:account_id` - *required* - (String)
+      #   * `:archive_description` - (String)
+      #   * `:checksum` - *required* - (String)
+      #   * `:body` - *required* - (IO)
+      #   * `:content_sha256` - (String)
       # @return [Core::Response]
 
       # @!method upload_multipart_part(options = {})
       # Calls the PUT UploadMultipartPart API operation.
       # @param [Hash] options
-      # * `:account_id` - *required* - (String)
-      # * `:vault_name` - *required* - (String)
-      # * `:upload_id` - *required* - (String)
-      # * `:checksum` - *required* - (String)
-      # * `:range` - (String)
-      # * `:body` - *required* - (IO)
-      # * `:content_sha256` - (String)
+      #
+      #   * `:account_id` - *required* - (String)
+      #   * `:vault_name` - *required* - (String)
+      #   * `:upload_id` - *required* - (String)
+      #   * `:checksum` - *required* - (String)
+      #   * `:range` - (String)
+      #   * `:body` - *required* - (IO)
+      #   * `:content_sha256` - (String)
       # @return [Core::Response]
 
       # end client methods #

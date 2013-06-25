@@ -41,6 +41,7 @@ module AWS
       # @!method count_closed_workflow_executions(options = {})
       # Calls the CountClosedWorkflowExecutions API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:start_time_filter` - (Hash)
       #     * `:oldest_date` - *required* - (Integer<unix timestamp>)
@@ -73,6 +74,7 @@ module AWS
       # @!method count_open_workflow_executions(options = {})
       # Calls the CountOpenWorkflowExecutions API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:start_time_filter` - *required* - (Hash)
       #     * `:oldest_date` - *required* - (Integer<unix timestamp>)
@@ -94,6 +96,7 @@ module AWS
       # @!method count_pending_activity_tasks(options = {})
       # Calls the CountPendingActivityTasks API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:task_list` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -107,6 +110,7 @@ module AWS
       # @!method count_pending_decision_tasks(options = {})
       # Calls the CountPendingDecisionTasks API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:task_list` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -120,6 +124,7 @@ module AWS
       # @!method deprecate_activity_type(options = {})
       # Calls the DeprecateActivityType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:activity_type` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -129,12 +134,14 @@ module AWS
       # @!method deprecate_domain(options = {})
       # Calls the DeprecateDomain API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String)
       # @return [Core::Response]
 
       # @!method deprecate_workflow_type(options = {})
       # Calls the DeprecateWorkflowType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_type` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -144,6 +151,7 @@ module AWS
       # @!method describe_activity_type(options = {})
       # Calls the DescribeActivityType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:activity_type` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -171,6 +179,7 @@ module AWS
       # @!method describe_domain(options = {})
       # Calls the DescribeDomain API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String)
       # @return [Core::Response]
       #   The #data method of the response object returns
@@ -186,6 +195,7 @@ module AWS
       # @!method describe_workflow_execution(options = {})
       # Calls the DescribeWorkflowExecution API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:execution` - *required* - (Hash)
       #     * `:workflow_id` - *required* - (String)
@@ -227,6 +237,7 @@ module AWS
       # @!method describe_workflow_type(options = {})
       # Calls the DescribeWorkflowType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_type` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -253,6 +264,7 @@ module AWS
       # @!method get_workflow_execution_history(options = {})
       # Calls the GetWorkflowExecutionHistory API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:execution` - *required* - (Hash)
       #     * `:workflow_id` - *required* - (String)
@@ -548,6 +560,7 @@ module AWS
       # @!method list_activity_types(options = {})
       # Calls the ListActivityTypes API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:name` - (String)
       #   * `:registration_status` - *required* - (String) Valid values
@@ -574,6 +587,7 @@ module AWS
       # @!method list_closed_workflow_executions(options = {})
       # Calls the ListClosedWorkflowExecutions API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:start_time_filter` - (Hash)
       #     * `:oldest_date` - *required* - (Integer<unix timestamp>)
@@ -624,6 +638,7 @@ module AWS
       # @!method list_domains(options = {})
       # Calls the ListDomains API operation.
       # @param [Hash] options
+      #
       #   * `:next_page_token` - (String)
       #   * `:registration_status` - *required* - (String) Valid values
       #     include:
@@ -644,6 +659,7 @@ module AWS
       # @!method list_open_workflow_executions(options = {})
       # Calls the ListOpenWorkflowExecutions API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:start_time_filter` - *required* - (Hash)
       #     * `:oldest_date` - *required* - (Integer<unix timestamp>)
@@ -683,6 +699,7 @@ module AWS
       # @!method list_workflow_types(options = {})
       # Calls the ListWorkflowTypes API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:name` - (String)
       #   * `:registration_status` - *required* - (String) Valid values
@@ -709,6 +726,7 @@ module AWS
       # @!method poll_for_activity_task(options = {})
       # Calls the PollForActivityTask API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:task_list` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -731,6 +749,7 @@ module AWS
       # @!method poll_for_decision_task(options = {})
       # Calls the PollForDecisionTask API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:task_list` - *required* - (Hash)
       #     * `:name` - *required* - (String)
@@ -1035,6 +1054,7 @@ module AWS
       # @!method record_activity_task_heartbeat(options = {})
       # Calls the RecordActivityTaskHeartbeat API operation.
       # @param [Hash] options
+      #
       #   * `:task_token` - *required* - (String)
       #   * `:details` - (String)
       # @return [Core::Response]
@@ -1046,6 +1066,7 @@ module AWS
       # @!method register_activity_type(options = {})
       # Calls the RegisterActivityType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:name` - *required* - (String)
       #   * `:version` - *required* - (String)
@@ -1061,6 +1082,7 @@ module AWS
       # @!method register_domain(options = {})
       # Calls the RegisterDomain API operation.
       # @param [Hash] options
+      #
       #   * `:name` - *required* - (String)
       #   * `:description` - (String)
       #   * `:workflow_execution_retention_period_in_days` - *required* - (String)
@@ -1069,6 +1091,7 @@ module AWS
       # @!method register_workflow_type(options = {})
       # Calls the RegisterWorkflowType API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:name` - *required* - (String)
       #   * `:version` - *required* - (String)
@@ -1086,6 +1109,7 @@ module AWS
       # @!method request_cancel_workflow_execution(options = {})
       # Calls the RequestCancelWorkflowExecution API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_id` - *required* - (String)
       #   * `:run_id` - (String)
@@ -1094,6 +1118,7 @@ module AWS
       # @!method respond_activity_task_canceled(options = {})
       # Calls the RespondActivityTaskCanceled API operation.
       # @param [Hash] options
+      #
       #   * `:task_token` - *required* - (String)
       #   * `:details` - (String)
       # @return [Core::Response]
@@ -1101,6 +1126,7 @@ module AWS
       # @!method respond_activity_task_completed(options = {})
       # Calls the RespondActivityTaskCompleted API operation.
       # @param [Hash] options
+      #
       #   * `:task_token` - *required* - (String)
       #   * `:result` - (String)
       # @return [Core::Response]
@@ -1108,6 +1134,7 @@ module AWS
       # @!method respond_activity_task_failed(options = {})
       # Calls the RespondActivityTaskFailed API operation.
       # @param [Hash] options
+      #
       #   * `:task_token` - *required* - (String)
       #   * `:reason` - (String)
       #   * `:details` - (String)
@@ -1116,6 +1143,7 @@ module AWS
       # @!method respond_decision_task_completed(options = {})
       # Calls the RespondDecisionTaskCompleted API operation.
       # @param [Hash] options
+      #
       #   * `:task_token` - *required* - (String)
       #   * `:decisions` - (Array<Hash>)
       #     * `:decision_type` - *required* - (String) Valid values include:
@@ -1206,6 +1234,7 @@ module AWS
       # @!method signal_workflow_execution(options = {})
       # Calls the SignalWorkflowExecution API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_id` - *required* - (String)
       #   * `:run_id` - (String)
@@ -1216,6 +1245,7 @@ module AWS
       # @!method start_workflow_execution(options = {})
       # Calls the StartWorkflowExecution API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_id` - *required* - (String)
       #   * `:workflow_type` - *required* - (Hash)
@@ -1240,6 +1270,7 @@ module AWS
       # @!method terminate_workflow_execution(options = {})
       # Calls the TerminateWorkflowExecution API operation.
       # @param [Hash] options
+      #
       #   * `:domain` - *required* - (String)
       #   * `:workflow_id` - *required* - (String)
       #   * `:run_id` - (String)

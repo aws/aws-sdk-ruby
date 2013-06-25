@@ -25,6 +25,7 @@ module AWS
       # @!method apply_security_groups_to_load_balancer(options = {})
       # Calls the ApplySecurityGroupsToLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -41,6 +42,7 @@ module AWS
       # @!method attach_load_balancer_to_subnets(options = {})
       # Calls the AttachLoadBalancerToSubnets API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -55,6 +57,7 @@ module AWS
       # @!method configure_health_check(options = {})
       # Calls the ConfigureHealthCheck API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The mnemonic name
       #     associated with the LoadBalancer. This name must be unique within
       #     the client AWS account.
@@ -102,6 +105,7 @@ module AWS
       # @!method create_app_cookie_stickiness_policy(options = {})
       # Calls the CreateAppCookieStickinessPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -115,6 +119,7 @@ module AWS
       # @!method create_lb_cookie_stickiness_policy(options = {})
       # Calls the CreateLBCookieStickinessPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -130,6 +135,7 @@ module AWS
       # @!method create_load_balancer(options = {})
       # Calls the CreateLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within your set of
       #     LoadBalancers.
@@ -185,6 +191,7 @@ module AWS
       # @!method create_load_balancer_listeners(options = {})
       # Calls the CreateLoadBalancerListeners API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name of the new
       #     LoadBalancer. The name must be unique within your AWS account.
       #   * `:listeners` - *required* - (Array<Hash>) A list of
@@ -220,6 +227,7 @@ module AWS
       # @!method create_load_balancer_policy(options = {})
       # Calls the CreateLoadBalancerPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer for which the policy is being created. This
       #     name must be unique within the client AWS account.
@@ -240,6 +248,7 @@ module AWS
       # @!method delete_load_balancer(options = {})
       # Calls the DeleteLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -248,6 +257,7 @@ module AWS
       # @!method delete_load_balancer_listeners(options = {})
       # Calls the DeleteLoadBalancerListeners API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The mnemonic name
       #     associated with the LoadBalancer.
       #   * `:load_balancer_ports` - *required* - (Array<Integer>) The client
@@ -257,6 +267,7 @@ module AWS
       # @!method delete_load_balancer_policy(options = {})
       # Calls the DeleteLoadBalancerPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The mnemonic name
       #     associated with the LoadBalancer. The name must be unique within
       #     your AWS account.
@@ -267,6 +278,7 @@ module AWS
       # @!method deregister_instances_from_load_balancer(options = {})
       # Calls the DeregisterInstancesFromLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -283,6 +295,7 @@ module AWS
       # @!method describe_instance_health(options = {})
       # Calls the DescribeInstanceHealth API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -302,6 +315,7 @@ module AWS
       # @!method describe_load_balancer_policies(options = {})
       # Calls the DescribeLoadBalancerPolicies API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - (String) The mnemonic name associated with
       #     the LoadBalancer. If no name is specified, the operation returns
       #     the attributes of either all the sample policies pre-defined by
@@ -323,6 +337,7 @@ module AWS
       # @!method describe_load_balancer_policy_types(options = {})
       # Calls the DescribeLoadBalancerPolicyTypes API operation.
       # @param [Hash] options
+      #
       #   * `:policy_type_names` - (Array<String>) Specifies the name of the
       #     policy types. If no names are specified, returns the description of
       #     all the policy types defined by Elastic Load Balancing service.
@@ -343,6 +358,7 @@ module AWS
       # @!method describe_load_balancers(options = {})
       # Calls the DescribeLoadBalancers API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_names` - (Array<String>) A list of names associated
       #     with the LoadBalancers at creation time.
       #   * `:marker` - (String) An optional parameter reserved for future use.
@@ -396,6 +412,7 @@ module AWS
       # @!method detach_load_balancer_from_subnets(options = {})
       # Calls the DetachLoadBalancerFromSubnets API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer to be detached. The name must be unique
       #     within the client AWS account.
@@ -410,6 +427,7 @@ module AWS
       # @!method disable_availability_zones_for_load_balancer(options = {})
       # Calls the DisableAvailabilityZonesForLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -428,6 +446,7 @@ module AWS
       # @!method enable_availability_zones_for_load_balancer(options = {})
       # Calls the EnableAvailabilityZonesForLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -443,6 +462,7 @@ module AWS
       # @!method register_instances_with_load_balancer(options = {})
       # Calls the RegisterInstancesWithLoadBalancer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.
@@ -467,6 +487,7 @@ module AWS
       # @!method set_load_balancer_listener_ssl_certificate(options = {})
       # Calls the SetLoadBalancerListenerSSLCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name of the the
       #     LoadBalancer.
       #   * `:load_balancer_port` - *required* - (Integer) The port that uses
@@ -480,6 +501,7 @@ module AWS
       # @!method set_load_balancer_policies_for_backend_server(options = {})
       # Calls the SetLoadBalancerPoliciesForBackendServer API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The mnemonic name
       #     associated with the LoadBalancer. This name must be unique within
       #     the client AWS account.
@@ -493,6 +515,7 @@ module AWS
       # @!method set_load_balancer_policies_of_listener(options = {})
       # Calls the SetLoadBalancerPoliciesOfListener API operation.
       # @param [Hash] options
+      #
       #   * `:load_balancer_name` - *required* - (String) The name associated
       #     with the LoadBalancer. The name must be unique within the client
       #     AWS account.

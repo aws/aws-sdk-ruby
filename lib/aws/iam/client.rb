@@ -39,6 +39,7 @@ module AWS
       # @!method add_role_to_instance_profile(options = {})
       # Calls the AddRoleToInstanceProfile API operation.
       # @param [Hash] options
+      #
       #   * `:instance_profile_name` - *required* - (String) Name of the
       #     instance profile to update.
       #   * `:role_name` - *required* - (String) Name of the role to add.
@@ -47,6 +48,7 @@ module AWS
       # @!method add_user_to_group(options = {})
       # Calls the AddUserToGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group to update.
       #   * `:user_name` - *required* - (String) Name of the user to add.
       # @return [Core::Response]
@@ -54,6 +56,7 @@ module AWS
       # @!method change_password(options = {})
       # Calls the ChangePassword API operation.
       # @param [Hash] options
+      #
       #   * `:old_password` - *required* - (String)
       #   * `:new_password` - *required* - (String)
       # @return [Core::Response]
@@ -61,6 +64,7 @@ module AWS
       # @!method create_access_key(options = {})
       # Calls the CreateAccessKey API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) The user name that the new key will belong
       #     to.
       # @return [Core::Response]
@@ -77,6 +81,7 @@ module AWS
       # @!method create_account_alias(options = {})
       # Calls the CreateAccountAlias API operation.
       # @param [Hash] options
+      #
       #   * `:account_alias` - *required* - (String) Name of the account alias
       #     to create.
       # @return [Core::Response]
@@ -84,6 +89,7 @@ module AWS
       # @!method create_group(options = {})
       # Calls the CreateGroup API operation.
       # @param [Hash] options
+      #
       #   * `:path` - (String) The path to the group. For more information
       #     about paths, see Identifiers for IAM Entities in Using AWS Identity
       #     and Access Management. This parameter is optional. If it is not
@@ -104,6 +110,7 @@ module AWS
       # @!method create_instance_profile(options = {})
       # Calls the CreateInstanceProfile API operation.
       # @param [Hash] options
+      #
       #   * `:instance_profile_name` - *required* - (String) Name of the
       #     instance profile to create.
       #   * `:path` - (String) The path to the instance profile. For more
@@ -131,6 +138,7 @@ module AWS
       # @!method create_login_profile(options = {})
       # Calls the CreateLoginProfile API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user to create a
       #     password for.
       #   * `:password` - *required* - (String) The new password for the user
@@ -146,6 +154,7 @@ module AWS
       # @!method create_role(options = {})
       # Calls the CreateRole API operation.
       # @param [Hash] options
+      #
       #   * `:path` - (String) The path to the role. For more information about
       #     paths, see Identifiers for IAM Entities in Using AWS Identity and
       #     Access Management. This parameter is optional. If it is not
@@ -168,6 +177,7 @@ module AWS
       # @!method create_user(options = {})
       # Calls the CreateUser API operation.
       # @param [Hash] options
+      #
       #   * `:path` - (String) The path for the user name. For more information
       #     about paths, see Identifiers for IAM Entities in Using AWS Identity
       #     and Access Management. This parameter is optional. If it is not
@@ -187,6 +197,7 @@ module AWS
       # @!method create_virtual_mfa_device(options = {})
       # Calls the CreateVirtualMFADevice API operation.
       # @param [Hash] options
+      #
       #   * `:path` - (String) The path for the virtual MFA device. For more
       #     information about paths, see Identifiers for IAM Entities in Using
       #     AWS Identity and Access Management. This parameter is optional. If
@@ -213,6 +224,7 @@ module AWS
       # @!method deactivate_mfa_device(options = {})
       # Calls the DeactivateMFADevice API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user whose MFA
       #     device you want to deactivate.
       #   * `:serial_number` - *required* - (String) The serial number that
@@ -223,6 +235,7 @@ module AWS
       # @!method delete_access_key(options = {})
       # Calls the DeleteAccessKey API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user whose key you want to
       #     delete.
       #   * `:access_key_id` - *required* - (String) The Access Key ID for the
@@ -232,6 +245,7 @@ module AWS
       # @!method delete_account_alias(options = {})
       # Calls the DeleteAccountAlias API operation.
       # @param [Hash] options
+      #
       #   * `:account_alias` - *required* - (String) Name of the account alias
       #     to delete.
       # @return [Core::Response]
@@ -239,17 +253,20 @@ module AWS
       # @!method delete_account_password_policy(options = {})
       # Calls the DeleteAccountPasswordPolicy API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
 
       # @!method delete_group(options = {})
       # Calls the DeleteGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group to delete.
       # @return [Core::Response]
 
       # @!method delete_group_policy(options = {})
       # Calls the DeleteGroupPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group the policy
       #     is associated with.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -259,6 +276,7 @@ module AWS
       # @!method delete_instance_profile(options = {})
       # Calls the DeleteInstanceProfile API operation.
       # @param [Hash] options
+      #
       #   * `:instance_profile_name` - *required* - (String) Name of the
       #     instance profile to delete.
       # @return [Core::Response]
@@ -266,6 +284,7 @@ module AWS
       # @!method delete_login_profile(options = {})
       # Calls the DeleteLoginProfile API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user whose
       #     password you want to delete.
       # @return [Core::Response]
@@ -273,12 +292,14 @@ module AWS
       # @!method delete_role(options = {})
       # Calls the DeleteRole API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role to delete.
       # @return [Core::Response]
 
       # @!method delete_role_policy(options = {})
       # Calls the DeleteRolePolicy API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role the
       #     associated with the policy.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -288,6 +309,7 @@ module AWS
       # @!method delete_server_certificate(options = {})
       # Calls the DeleteServerCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:server_certificate_name` - *required* - (String) The name of the
       #     server certificate you want to delete.
       # @return [Core::Response]
@@ -295,6 +317,7 @@ module AWS
       # @!method delete_signing_certificate(options = {})
       # Calls the DeleteSigningCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user the signing certificate
       #     belongs to.
       #   * `:certificate_id` - *required* - (String) ID of the signing
@@ -304,12 +327,14 @@ module AWS
       # @!method delete_user(options = {})
       # Calls the DeleteUser API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user to delete.
       # @return [Core::Response]
 
       # @!method delete_user_policy(options = {})
       # Calls the DeleteUserPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user the policy is
       #     associated with.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -319,6 +344,7 @@ module AWS
       # @!method delete_virtual_mfa_device(options = {})
       # Calls the DeleteVirtualMFADevice API operation.
       # @param [Hash] options
+      #
       #   * `:serial_number` - *required* - (String) The serial number that
       #     uniquely identifies the MFA device. For virtual MFA devices, the
       #     serial number is the same as the ARN.
@@ -327,6 +353,7 @@ module AWS
       # @!method enable_mfa_device(options = {})
       # Calls the EnableMFADevice API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user for whom you
       #     want to enable the MFA device.
       #   * `:serial_number` - *required* - (String) The serial number that
@@ -341,6 +368,7 @@ module AWS
       # @!method get_account_password_policy(options = {})
       # Calls the GetAccountPasswordPolicy API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -356,6 +384,7 @@ module AWS
       # @!method get_account_summary(options = {})
       # Calls the GetAccountSummary API operation.
       # @param [Hash] options
+      #
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -365,6 +394,7 @@ module AWS
       # @!method get_group(options = {})
       # Calls the GetGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group.
       #   * `:marker` - (String) Use this only when paginating results, and
       #     only in a subsequent request after you've received a response where
@@ -396,6 +426,7 @@ module AWS
       # @!method get_group_policy(options = {})
       # Calls the GetGroupPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group the policy
       #     is associated with.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -411,6 +442,7 @@ module AWS
       # @!method get_instance_profile(options = {})
       # Calls the GetInstanceProfile API operation.
       # @param [Hash] options
+      #
       #   * `:instance_profile_name` - *required* - (String) Name of the
       #     instance profile to get information about.
       # @return [Core::Response]
@@ -434,6 +466,7 @@ module AWS
       # @!method get_login_profile(options = {})
       # Calls the GetLoginProfile API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user whose login
       #     profile you want to retrieve.
       # @return [Core::Response]
@@ -447,6 +480,7 @@ module AWS
       # @!method get_role(options = {})
       # Calls the GetRole API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role to get
       #     information about.
       # @return [Core::Response]
@@ -464,6 +498,7 @@ module AWS
       # @!method get_role_policy(options = {})
       # Calls the GetRolePolicy API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role associated
       #     with the policy.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -479,6 +514,7 @@ module AWS
       # @!method get_server_certificate(options = {})
       # Calls the GetServerCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:server_certificate_name` - *required* - (String) The name of the
       #     server certificate you want to retrieve information about.
       # @return [Core::Response]
@@ -498,6 +534,7 @@ module AWS
       # @!method get_user(options = {})
       # Calls the GetUser API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user to get information about.
       #     This parameter is optional. If it is not included, it defaults to
       #     the user making the request.
@@ -515,6 +552,7 @@ module AWS
       # @!method get_user_policy(options = {})
       # Calls the GetUserPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user who the
       #     policy is associated with.
       #   * `:policy_name` - *required* - (String) Name of the policy document
@@ -530,6 +568,7 @@ module AWS
       # @!method list_access_keys(options = {})
       # Calls the ListAccessKeys API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user.
       #   * `:marker` - (String) Use this parameter only when paginating
       #     results, and only in a subsequent request after you've received a
@@ -554,6 +593,7 @@ module AWS
       # @!method list_account_aliases(options = {})
       # Calls the ListAccountAliases API operation.
       # @param [Hash] options
+      #
       #   * `:marker` - (String) Use this only when paginating results, and
       #     only in a subsequent request after you've received a response where
       #     the results are truncated. Set it to the value of the Marker
@@ -573,6 +613,7 @@ module AWS
       # @!method list_group_policies(options = {})
       # Calls the ListGroupPolicies API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) The name of the group to list
       #     policies for.
       #   * `:marker` - (String) Use this only when paginating results, and
@@ -594,6 +635,7 @@ module AWS
       # @!method list_groups(options = {})
       # Calls the ListGroups API operation.
       # @param [Hash] options
+      #
       #   * `:path_prefix` - (String) The path prefix for filtering the
       #     results. For example: /division_abc/subdivision_xyz/, which would
       #     get all groups whose path starts with
@@ -623,6 +665,7 @@ module AWS
       # @!method list_groups_for_user(options = {})
       # Calls the ListGroupsForUser API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) The name of the user to list
       #     groups for.
       #   * `:marker` - (String) Use this only when paginating results, and
@@ -649,6 +692,7 @@ module AWS
       # @!method list_instance_profiles(options = {})
       # Calls the ListInstanceProfiles API operation.
       # @param [Hash] options
+      #
       #   * `:path_prefix` - (String) The path prefix for filtering the
       #     results. For example: /application_abc/component_xyz/, which would
       #     get all instance profiles whose path starts with
@@ -686,6 +730,7 @@ module AWS
       # @!method list_instance_profiles_for_role(options = {})
       # Calls the ListInstanceProfilesForRole API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) The name of the role to list
       #     instance profiles for.
       #   * `:marker` - (String) Use this parameter only when paginating
@@ -719,6 +764,7 @@ module AWS
       # @!method list_mfa_devices(options = {})
       # Calls the ListMFADevices API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user whose MFA devices you want
       #     to list.
       #   * `:marker` - (String) Use this only when paginating results, and
@@ -743,6 +789,7 @@ module AWS
       # @!method list_role_policies(options = {})
       # Calls the ListRolePolicies API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) The name of the role to list
       #     policies for.
       #   * `:marker` - (String) Use this parameter only when paginating
@@ -764,6 +811,7 @@ module AWS
       # @!method list_roles(options = {})
       # Calls the ListRoles API operation.
       # @param [Hash] options
+      #
       #   * `:path_prefix` - (String) The path prefix for filtering the
       #     results. For example: /application_abc/component_xyz/, which would
       #     get all roles whose path starts with
@@ -794,6 +842,7 @@ module AWS
       # @!method list_server_certificates(options = {})
       # Calls the ListServerCertificates API operation.
       # @param [Hash] options
+      #
       #   * `:path_prefix` - (String) The path prefix for filtering the
       #     results. For example: /company/servercerts would get all server
       #     certificates for which the path starts with /company/servercerts.
@@ -824,6 +873,7 @@ module AWS
       # @!method list_signing_certificates(options = {})
       # Calls the ListSigningCertificates API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) The name of the user.
       #   * `:marker` - (String) Use this only when paginating results, and
       #     only in a subsequent request after you've received a response where
@@ -849,6 +899,7 @@ module AWS
       # @!method list_user_policies(options = {})
       # Calls the ListUserPolicies API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) The name of the user to list
       #     policies for.
       #   * `:marker` - (String) Use this only when paginating results, and
@@ -870,6 +921,7 @@ module AWS
       # @!method list_users(options = {})
       # Calls the ListUsers API operation.
       # @param [Hash] options
+      #
       #   * `:path_prefix` - (String) The path prefix for filtering the
       #     results. For example: /division_abc/subdivision_xyz/, which would
       #     get all user names whose path starts with
@@ -900,13 +952,11 @@ module AWS
       # @!method list_virtual_mfa_devices(options = {})
       # Calls the ListVirtualMFADevices API operation.
       # @param [Hash] options
+      #
       #   * `:assignment_status` - (String) The status (unassigned or assigned)
       #     of the devices to list. If you do not specify an AssignmentStatus,
       #     the action defaults to Any which lists both assigned and unassigned
-      #     virtual MFA devices. Valid values include:
-      #     * `Assigned`
-      #     * `Unassigned`
-      #     * `Any`
+      #     virtual MFA devices.
       #   * `:marker` - (String) Use this parameter only when paginating
       #     results, and only in a subsequent request after you've received a
       #     response where the results are truncated. Set it to the value of
@@ -936,6 +986,7 @@ module AWS
       # @!method put_group_policy(options = {})
       # Calls the PutGroupPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group to
       #     associate the policy with.
       #   * `:policy_name` - *required* - (String) Name of the policy document.
@@ -945,6 +996,7 @@ module AWS
       # @!method put_role_policy(options = {})
       # Calls the PutRolePolicy API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role to associate
       #     the policy with.
       #   * `:policy_name` - *required* - (String) Name of the policy document.
@@ -954,6 +1006,7 @@ module AWS
       # @!method put_user_policy(options = {})
       # Calls the PutUserPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user to associate
       #     the policy with.
       #   * `:policy_name` - *required* - (String) Name of the policy document.
@@ -963,6 +1016,7 @@ module AWS
       # @!method remove_role_from_instance_profile(options = {})
       # Calls the RemoveRoleFromInstanceProfile API operation.
       # @param [Hash] options
+      #
       #   * `:instance_profile_name` - *required* - (String) Name of the
       #     instance profile to update.
       #   * `:role_name` - *required* - (String) Name of the role to remove.
@@ -971,6 +1025,7 @@ module AWS
       # @!method remove_user_from_group(options = {})
       # Calls the RemoveUserFromGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group to update.
       #   * `:user_name` - *required* - (String) Name of the user to remove.
       # @return [Core::Response]
@@ -978,6 +1033,7 @@ module AWS
       # @!method resync_mfa_device(options = {})
       # Calls the ResyncMFADevice API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user whose MFA
       #     device you want to resynchronize.
       #   * `:serial_number` - *required* - (String) Serial number that
@@ -991,21 +1047,20 @@ module AWS
       # @!method update_access_key(options = {})
       # Calls the UpdateAccessKey API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user whose key you want to
       #     update.
       #   * `:access_key_id` - *required* - (String) The Access Key ID of the
       #     Secret Access Key you want to update.
       #   * `:status` - *required* - (String) The status you want to assign to
       #     the Secret Access Key. Active means the key can be used for API
-      #     calls to AWS, while Inactive means the key cannot be used. Valid
-      #     values include:
-      #     * `Active`
-      #     * `Inactive`
+      #     calls to AWS, while Inactive means the key cannot be used.
       # @return [Core::Response]
 
       # @!method update_account_password_policy(options = {})
       # Calls the UpdateAccountPasswordPolicy API operation.
       # @param [Hash] options
+      #
       #   * `:minimum_password_length` - (Integer)
       #   * `:require_symbols` - (Boolean)
       #   * `:require_numbers` - (Boolean)
@@ -1017,6 +1072,7 @@ module AWS
       # @!method update_assume_role_policy(options = {})
       # Calls the UpdateAssumeRolePolicy API operation.
       # @param [Hash] options
+      #
       #   * `:role_name` - *required* - (String) Name of the role to update.
       #   * `:policy_document` - *required* - (String) The policy that grants
       #     an entity permission to assume the role.
@@ -1025,6 +1081,7 @@ module AWS
       # @!method update_group(options = {})
       # Calls the UpdateGroup API operation.
       # @param [Hash] options
+      #
       #   * `:group_name` - *required* - (String) Name of the group to update.
       #     If you're changing the name of the group, this is the original
       #     name.
@@ -1037,6 +1094,7 @@ module AWS
       # @!method update_login_profile(options = {})
       # Calls the UpdateLoginProfile API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user whose
       #     password you want to update.
       #   * `:password` - (String) The new password for the user name.
@@ -1045,6 +1103,7 @@ module AWS
       # @!method update_server_certificate(options = {})
       # Calls the UpdateServerCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:server_certificate_name` - *required* - (String) The name of the
       #     server certificate that you want to update.
       #   * `:new_path` - (String) The new path for the server certificate.
@@ -1058,6 +1117,7 @@ module AWS
       # @!method update_signing_certificate(options = {})
       # Calls the UpdateSigningCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user the signing certificate
       #     belongs to.
       #   * `:certificate_id` - *required* - (String) The ID of the signing
@@ -1065,14 +1125,12 @@ module AWS
       #   * `:status` - *required* - (String) The status you want to assign to
       #     the certificate. Active means the certificate can be used for API
       #     calls to AWS, while Inactive means the certificate cannot be used.
-      #     Valid values include:
-      #     * `Active`
-      #     * `Inactive`
       # @return [Core::Response]
 
       # @!method update_user(options = {})
       # Calls the UpdateUser API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - *required* - (String) Name of the user to update. If
       #     you're changing the name of the user, this is the original user
       #     name.
@@ -1085,6 +1143,7 @@ module AWS
       # @!method upload_server_certificate(options = {})
       # Calls the UploadServerCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:path` - (String) The path for the server certificate. For more
       #     information about paths, see Identifiers for IAM Entities in Using
       #     AWS Identity and Access Management. This parameter is optional. If
@@ -1112,6 +1171,7 @@ module AWS
       # @!method upload_signing_certificate(options = {})
       # Calls the UploadSigningCertificate API operation.
       # @param [Hash] options
+      #
       #   * `:user_name` - (String) Name of the user the signing certificate is
       #     for.
       #   * `:certificate_body` - *required* - (String) The contents of the
