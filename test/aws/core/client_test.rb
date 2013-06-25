@@ -17,12 +17,26 @@ module Aws
   module Core
     describe Client do
 
-      def client
-        Client.new(:region => 'region')
+      def client_class
+        @client_class ||= begin
+          klass = Class.new(Client)
+          klass.set_api({})
+          klass
+        end
       end
 
       it 'is a Seahorse::Client' do
-        client.must_be_kind_of(Seahorse::Client)
+        client_class.new(:region => 'region').must_be_kind_of(Seahorse::Client)
+      end
+
+      describe '#endpoint' do
+
+        it 'combines region and endpoint_prefix for the default endpoint' do
+          client_class.api['endpoint_prefix'] = 'SVC'
+          client = client_class.new(:region => 'REGION')
+          client.endpoint.must_equal('https://SVC.REGION.amazonaws.com')
+        end
+
       end
 
       describe '#region' do
@@ -34,28 +48,28 @@ module Aws
 
         it 'is required' do
           assert_raises(ArgumentError) do
-            Client.new
+            client_class.new
           end
         end
 
         it 'can be specified as a constructor argument' do
-          Client.new(:region => 'us-west-1').region.must_equal('us-west-1')
+          client_class.new(:region => 'region').region.must_equal('region')
         end
 
         it 'can be specified by ENV["AWS_REGION"]' do
           ENV['AWS_REGION'] = 'aws-region'
-          Client.new.region.must_equal('aws-region')
+          client_class.new.region.must_equal('aws-region')
         end
 
         it 'can be specified by ENV["AMAZON_REGION"]' do
           ENV['AWS_REGION'] = 'amazon-region'
-          Client.new.region.must_equal('amazon-region')
+          client_class.new.region.must_equal('amazon-region')
         end
 
         it 'AWS_REGION has higher precedence than AMAZON_REGION' do
           ENV['AWS_REGION'] = 'aws-region'
           ENV['AMAZON_REGION'] = 'amazon-region'
-          Client.new.region.must_equal('aws-region')
+          client_class.new.region.must_equal('aws-region')
         end
 
       end

@@ -20,8 +20,8 @@ module Aws
 
       # @option options [required, String] :region
       def initialize(options = {})
+        @region = determine_region(options)
         super(options)
-        @region = determine_region
       end
 
       # @return [String]
@@ -29,10 +29,24 @@ module Aws
 
       private
 
-      def determine_region
-        @config[:region] || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] ||
+      # @option options [String] :region
+      # @return [String]
+      # @raise [ArgumentError] Raised when the region can not be determined.
+      def determine_region(options = {})
+        options[:region] || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] ||
           raise(ArgumentError, MISSING_REGION)
       end
+
+      def default_endpoint
+        "#{api['endpoint_prefix']}.#{region}.#{domain}"
+      end
+
+      def domain
+        'amazonaws.com'
+      end
+
+      def endpoint_prefix
+        api['endpoint_prefix']
       end
 
     end
