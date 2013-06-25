@@ -28,7 +28,7 @@ module Aws
 
       private
 
-      def determine_region options
+      def determine_region(options)
         region = options[:region]
         region ||= ENV['AWS_REGION']
         region ||= ENV['AMAZON_REGION']
