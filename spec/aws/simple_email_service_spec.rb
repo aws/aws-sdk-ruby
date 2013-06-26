@@ -178,6 +178,19 @@ module AWS
 
     context '#send_raw_email' do
 
+      let(:resp) { client.stub_for(:send_raw_email) }
+
+      before(:each) {
+        client.stub(:send_raw_email).and_return(resp)
+      }
+
+      it 'sets a message_id attribute on the raw message' do
+        resp.data[:message_id] = 'MSG-ID'
+        raw = double('raw-message')
+        raw.should_receive(:message_id=).with('MSG-ID@email.amazonses.com')
+        ses.send_raw_email(raw)
+      end
+
       it 'returns nil' do
         ses.send_raw_email('raw').should == nil
       end

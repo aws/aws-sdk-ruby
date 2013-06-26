@@ -343,7 +343,7 @@ module AWS
       send_opts[:destinations] = [options[:to]].flatten if options[:to]
 
       response = client.send_raw_email(send_opts)
-      if raw_message.respond_to?(:message_id)
+      if raw_message.respond_to?(:message_id=)
         raw_message.message_id = "#{response.data[:message_id]}@email.amazonses.com"
       end
 
