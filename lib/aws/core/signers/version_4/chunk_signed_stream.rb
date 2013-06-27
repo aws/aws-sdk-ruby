@@ -19,7 +19,11 @@ module AWS
       class Version4
         class ChunkSignedStream
 
-          DEFAULT_CHUNK_SIZE = 1024 * 1024 # 1MB
+          # @api private
+          DEFAULT_CHUNK_SIZE = 128 * 1024
+
+          # @api private
+          MAX_BUFFER_SIZE = 256 * 1024
 
           # @api private
           CHUNK_SIGNATURE_HEADER = ";chunk-signature="
@@ -84,7 +88,11 @@ module AWS
           #   has been exhausted.
           def read_bytes num_bytes
             fill_buffer(num_bytes)
-            @buffer.read(num_bytes)
+            bytes = @buffer.read(num_bytes)
+            if @buffer.size > MAX_BUFFER_SIZE
+              @buffer = StringIO.new(@buffer.read)
+            end
+            bytes
           end
 
           # Fills the internal buffer at least +num_bytes+ of data.
@@ -96,9 +104,6 @@ module AWS
               @buffer.write(next_chunk)
             end
             @buffer.pos = pos
-            if pos > DEFAULT_CHUNK_SIZE * 2
-              @buffer = StringIO.new(@buffer.read)
-            end
           end
 
           def more_chunks?
@@ -119,14 +124,14 @@ module AWS
           # @param [String] chunk
           # @return [String]
           def sign_chunk chunk
-            signed_chunk = StringIO.new
-            signed_chunk.write(chunk.bytesize.to_s(16))
-            signed_chunk.write(CHUNK_SIGNATURE_HEADER)
-            signed_chunk.write(next_chunk_signature(chunk))
-            signed_chunk.write(CLRF)
-            signed_chunk.write(chunk)
-            signed_chunk.write(CLRF)
-            signed_chunk.string
+            [
+              chunk.bytesize.to_s(16),
+              CHUNK_SIGNATURE_HEADER,
+              next_chunk_signature(chunk),
+              CLRF,
+              chunk,
+              CLRF,
+            ].join
           end
 
           # @param [String] chunk
