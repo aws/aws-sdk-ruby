@@ -25,6 +25,35 @@ module Aws
         config.must_be_kind_of(Seahorse::Client::Configuration)
       end
 
+      describe '#region' do
+
+        def setup
+          ENV.delete('AWS_REGION')
+          ENV.delete('AMAZON_REGION')
+        end
+
+        it 'defaults to nil' do
+          config.region.must_equal(nil)
+        end
+
+        it "can be specified via ENV['AWS_REGION']" do
+          ENV['AWS_REGION'] = 'aws-region'
+          config.region.must_equal('aws-region')
+        end
+
+        it "can be specified via ENV['AMAZON_REGION']" do
+          ENV['AMAZON_REGION'] = 'amazon-region'
+          config.region.must_equal('amazon-region')
+        end
+
+        it 'prefers AWS_REGION to AMAZON_REGION' do
+          ENV['AWS_REGION'] = 'aws-region'
+          ENV['AMAZON_REGION'] = 'amazon-region'
+          config.region.must_equal('aws-region')
+        end
+
+      end
+
     end
   end
 end
