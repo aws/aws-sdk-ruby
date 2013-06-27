@@ -38,8 +38,8 @@ module Seahorse
     #   which creates https endpoints.
     #
     def initialize(options = {})
-      @config = Configuration.new(options)
-      @endpoint = build_endpoint(options[:endpoint])
+      @config = build_config(options)
+      @endpoint = build_endpoint(options)
     end
 
     # @return [Endpoint]
@@ -60,11 +60,16 @@ module Seahorse
 
     private
 
+    # @param [Hash] options
+    def build_config(options)
+      Configuration.new(options)
+    end
+
     # @option options [:endpoint] The preferred endpoint.  When not set,
     #   the endpoint will default to the value set in the API.
     # @return [Endpoint]
-    def build_endpoint endpoint
-      endpoint ||= default_endpoint
+    def build_endpoint(options)
+      endpoint = options[:endpoint] || default_endpoint
       Endpoint.new(endpoint, :ssl_default => config.ssl_default)
     end
 
