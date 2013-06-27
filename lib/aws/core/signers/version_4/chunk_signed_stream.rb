@@ -79,31 +79,25 @@ module AWS
           private
 
           def reset
-            @buffer = StringIO.new('')
+            @buffer = ''
             @more_chunks = true
           end
 
           # @param [Integer] num_bytes The maximum number of bytes to return.
-          # @return [String,nil] Returns `nil` if called after the source stream
-          #   has been exhausted.
+          # @return [String,nil] `nil` once the complete stream has been read
           def read_bytes num_bytes
             fill_buffer(num_bytes)
-            bytes = @buffer.read(num_bytes)
-            if @buffer.size > MAX_BUFFER_SIZE
-              @buffer = StringIO.new(@buffer.read)
-            end
-            bytes
+            bytes = @buffer[0,num_bytes]
+            @buffer = @buffer[num_bytes..-1] || '' # flatten the buffer
+            bytes == '' ? nil : bytes
           end
 
           # Fills the internal buffer at least +num_bytes+ of data.
           # @param [Integer] num_bytes
           def fill_buffer num_bytes
-            pos = @buffer.pos
-            @buffer.pos = @buffer.size
-            while @buffer.size - pos < num_bytes && more_chunks?
-              @buffer.write(next_chunk)
+            while @buffer.bytesize < num_bytes && more_chunks?
+              @buffer << next_chunk
             end
-            @buffer.pos = pos
           end
 
           def more_chunks?
