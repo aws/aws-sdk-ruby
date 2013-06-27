@@ -26,7 +26,7 @@ module Seahorse
 
         def add_option(name, options = {})
           define_method(name) do
-            @options[name]
+            @options.key?(name) ? @options[name] : options[:default]
           end
         end
 
