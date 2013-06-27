@@ -32,7 +32,7 @@ module Seahorse
 
       end
 
-      add_option :use_ssl, :default => true
+      add_option :ssl_default, :default => true
 
     end
   end

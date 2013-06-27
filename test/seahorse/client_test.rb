@@ -55,8 +55,8 @@ module Seahorse
         client.endpoint.must_equal('https://foo.com')
       end
 
-      it 'defaults to http when :ssl is false' do
-        client = client_class.new(:endpoint => 'foo.com', :use_ssl => false)
+      it 'defaults to http when :ssl_default is false' do
+        client = client_class.new(:endpoint => 'foo.com', :ssl_default => false)
         client.endpoint.must_equal('http://foo.com')
       end
 

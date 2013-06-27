@@ -55,14 +55,14 @@ module Seahorse
 
       end
 
-      describe '#use_ssl' do
+      describe '#ssl_default' do
 
         it 'defaults to true' do
-          config_class.new.use_ssl.must_equal(true)
+          config_class.new.ssl_default.must_equal(true)
         end
 
         it 'can be set to false' do
-          config_class.new(:use_ssl => false).use_ssl.must_equal(false)
+          config_class.new(:ssl_default => false).ssl_default.must_equal(false)
         end
 
       end

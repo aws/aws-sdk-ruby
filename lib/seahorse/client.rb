@@ -28,18 +28,18 @@ module Seahorse
     #       :hostname => 'domain.com'
     #
     #       # defaults to http on port 80
-    #       :hostname => 'domain.com', :use_ssl => false
+    #       :hostname => 'domain.com', :ssl_default => false
     #
     #       # defaults are ignored, as scheme and port are present
     #       :hostname => http://domain.com:123
     #
-    # @option options [Boolean] :use_ssl (true) Specifies the default
+    # @option options [Boolean] :ssl_default (true) Specifies the default
     #   scheme for the #endpoint when not specified.  Defaults to `true`
     #   which creates https endpoints.
     #
     def initialize(options = {})
-      @config = options
-      @endpoint = build_endpoint
+      @config = Configuration.new(options)
+      @endpoint = build_endpoint(options[:endpoint])
     end
 
     # @return [Endpoint]
@@ -63,8 +63,9 @@ module Seahorse
     # @option options [:endpoint] The preferred endpoint.  When not set,
     #   the endpoint will default to the value set in the API.
     # @return [Endpoint]
-    def build_endpoint
-      Endpoint.new(@config[:endpoint] || default_endpoint, @config)
+    def build_endpoint endpoint
+      endpoint ||= default_endpoint
+      Endpoint.new(endpoint, :ssl_default => config.ssl_default)
     end
 
     # @return [String] Returns the default endpoint for the client.
