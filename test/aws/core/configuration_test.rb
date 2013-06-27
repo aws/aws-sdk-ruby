@@ -39,7 +39,7 @@ module Aws
 
       describe '#region' do
 
-        def setup
+        def teardown
           ENV.delete('AWS_REGION')
           ENV.delete('AMAZON_REGION')
         end

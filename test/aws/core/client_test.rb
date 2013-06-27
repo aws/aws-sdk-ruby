@@ -84,6 +84,13 @@ module Aws
           client_class.new.region.must_equal('aws-region')
         end
 
+        it 'constructor option take highest precedence' do
+          ENV['AWS_REGION'] = 'aws-region'
+          ENV['AMAZON_REGION'] = 'amazon-region'
+          client = client_class.new(:region => 'cfg-region')
+          client.region.must_equal('cfg-region')
+        end
+
       end
 
     end
