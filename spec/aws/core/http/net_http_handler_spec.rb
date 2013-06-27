@@ -271,6 +271,23 @@ module AWS::Core::Http
         handle!
         response.headers.should == http_response.to_hash
       end
+
+      it 'should not capture errors from within the block' do
+        pending do
+          stream_result.stub(:<<).and_raise(IOError)
+          expect { handle! }.to raise_error(IOError)
+        end
+      end
+
+      it 'should not capture errors after first chunk has been processed' do
+        pending do
+          http_response.stub(:read_body) do |&block|
+            block.call http_response.body[0,1]
+            raise IOError, 'simulated'
+          end
+          expect { handle! }.to raise_error(IOError)
+        end
+      end
     end
 
     context 'errors' do
