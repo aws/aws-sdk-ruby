@@ -49,6 +49,11 @@ module Seahorse
           config_class.new.size.must_equal('large')
         end
 
+        it 'accpets a default via a block' do
+          config_class.add_option(:dynamic) { 'value' }
+          config_class.new.dynamic.must_equal('value')
+        end
+
       end
 
       describe '#ssl_default' do
