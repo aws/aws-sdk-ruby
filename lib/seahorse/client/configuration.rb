@@ -24,15 +24,15 @@ module Seahorse
 
       class << self
 
-        def add_option(name, options = {})
+        def add_option(name, default = nil)
           define_method(name) do
-            @options.key?(name) ? @options[name] : options[:default]
+            @options.key?(name) ? @options[name] : default
           end
         end
 
       end
 
-      add_option :ssl_default, :default => true
+      add_option :ssl_default, true
 
     end
   end

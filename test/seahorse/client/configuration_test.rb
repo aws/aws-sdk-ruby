@@ -44,13 +44,9 @@ module Seahorse
           config_class.new.color.must_equal(nil)
         end
 
-        describe ':default' do
-
-          it 'causes the getter to return an alternative default value' do
-            config_class.add_option(:size, :default => 'large')
-            config_class.new.size.must_equal('large')
-          end
-
+        it 'accepts a default value' do
+          config_class.add_option(:size, 'large')
+          config_class.new.size.must_equal('large')
         end
 
       end
