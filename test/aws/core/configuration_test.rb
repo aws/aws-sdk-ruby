@@ -17,12 +17,24 @@ module Aws
   module Core
     describe Configuration do
 
-      def config
-        @cfg ||= Aws::Core::Configuration.new
+      def config(options = {})
+        @cfg ||= Aws::Core::Configuration.new(options)
       end
 
       it 'extends Seahorse::Client::Configuration' do
         config.must_be_kind_of(Seahorse::Client::Configuration)
+      end
+
+      describe '#ssl_default' do
+
+        it 'defaults to true' do
+          config.ssl_default.must_equal(true)
+        end
+
+        it 'can be set to false' do
+          config(:ssl_default => false).ssl_default.must_equal(false)
+        end
+
       end
 
       describe '#region' do
