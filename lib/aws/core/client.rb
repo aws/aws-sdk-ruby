@@ -36,7 +36,7 @@ module Aws
       end
 
       def default_endpoint
-        "#{api['endpoint_prefix']}.#{config.region}.#{domain}"
+        "#{endpoint_prefix}.#{config.region}.#{domain}"
       end
 
       def domain
