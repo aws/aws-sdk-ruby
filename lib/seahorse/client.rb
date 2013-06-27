@@ -19,7 +19,7 @@ require 'seahorse/client/request'
 module Seahorse
   class Client
 
-    # @option options [Endpoint, URI::HTTP, URI::HTTPS, String] :endpoint
+    # @option options [String, URI::HTTP, URI::HTTPS, Endpoint] :endpoint
     #   Endpoints specify the http scheme, hostname and port to connect
     #   to.  You must specify at a minimum the hostname.  Endpoints without
     #   a uri scheme will default to https on port 443.
