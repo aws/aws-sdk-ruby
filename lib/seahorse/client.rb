@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse/client/version'
+require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
 require 'seahorse/client/request'
 
