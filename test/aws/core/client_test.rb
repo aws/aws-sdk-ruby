@@ -25,8 +25,21 @@ module Aws
         end
       end
 
+      def client
+        client_class.new(:region => 'REGION')
+      end
+
       it 'is a Seahorse::Client' do
-        client_class.new(:region => 'region').must_be_kind_of(Seahorse::Client)
+        client.must_be_kind_of(Seahorse::Client)
+      end
+
+      describe '#config' do
+
+        it 'returns an Aws::Core::Configuration' do
+          skip
+          client.config.must_be_kind_of(Aws::Core::Configuration)
+        end
+
       end
 
       describe '#endpoint' do
