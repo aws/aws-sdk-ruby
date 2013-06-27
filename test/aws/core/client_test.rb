@@ -36,7 +36,6 @@ module Aws
       describe '#config' do
 
         it 'returns an Aws::Core::Configuration' do
-          skip
           client.config.must_be_kind_of(Aws::Core::Configuration)
         end
 

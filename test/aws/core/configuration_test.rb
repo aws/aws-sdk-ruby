@@ -11,11 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/core/configuration'
-require 'aws/core/client'
-require 'aws/core/version'
+require 'test_helper'
 
 module Aws
   module Core
+    describe Configuration do
+
+      def config
+        @cfg ||= Aws::Core::Configuration.new
+      end
+
+      it 'extends Seahorse::Client::Configuration' do
+        config.must_be_kind_of(Seahorse::Client::Configuration)
+      end
+
+    end
   end
 end

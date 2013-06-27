@@ -29,6 +29,12 @@ module Aws
 
       private
 
+      # @param [Hash] options
+      # @return [Configuration]
+      def build_config(options)
+        Configuration.new(options)
+      end
+
       # @option options [String] :region
       # @return [String]
       # @raise [ArgumentError] Raised when the region can not be determined.
