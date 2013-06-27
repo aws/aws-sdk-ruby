@@ -18,8 +18,8 @@ module Seahorse
   class Client
     class Configuration
 
-      def initialize
-        @options = {}
+      def initialize options = {}
+        @options = options
       end
 
       class << self

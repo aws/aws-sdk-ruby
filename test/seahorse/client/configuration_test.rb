@@ -17,15 +17,22 @@ module Seahorse
   class Client
     describe Configuration do
 
+      def config_class
+        @klass ||= Class.new(Configuration)
+      end
+
       it 'can be constructed without any arguments' do
-        Configuration.new.must_be_kind_of(Configuration)
+        config_class.new.must_be_kind_of(Configuration)
+      end
+
+      it 'keeps all options passed to the constructor' do
+        config = config_class.new(:opt_name => 'opt-value')
+        config.wont_respond_to(:opt_name)
+        config_class.add_option(:opt_name)
+        config.opt_name.must_equal('opt-value')
       end
 
       describe '.add_option' do
-
-        def config_class
-          @klass ||= Class.new(Configuration)
-        end
 
         it 'defines a getter method' do
           config_class.add_option(:name)
