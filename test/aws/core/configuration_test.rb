@@ -64,6 +64,10 @@ module Aws
           config.region.must_equal('aws-region')
         end
 
+        it 'can be specified' do
+          config(:region => 'REGION').region.must_equal('REGION')
+        end
+
       end
 
     end
