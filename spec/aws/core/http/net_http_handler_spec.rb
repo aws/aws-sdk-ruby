@@ -39,16 +39,21 @@ module AWS::Core::Http
 
     let(:response) { Response.new }
 
-    let(:handle!) { handler.handle(request, response) }
+    let(:read_block) { }
+
+    let(:handle!) { handler.handle(request, response, &read_block) }
 
     let(:http) { double('http-session').as_null_object }
 
     let(:http_response) {
-      double('http-response',
+      double = double('http-response',
         :code => '200',
         :body => 'resp-body',
-        :read_body => 'resp-body',
         :to_hash => { 'header-name' => ['header-value'] })
+      double.stub(:read_body) do |&block|
+        block ? block.call('resp-body') : 'resp-body'
+      end
+      double
     }
 
     before(:each) do
@@ -233,6 +238,39 @@ module AWS::Core::Http
         response.headers.should == http_response.to_hash
       end
 
+    end
+
+    context 'streaming response' do
+      let(:stream_result) { "" }
+      let(:read_block) { proc { |chunk| stream_result << chunk } }
+
+      it 'receives the whole body' do
+        handle!
+        stream_result.should == http_response.body
+      end
+
+      it 'receives the whole body for chunked reads' do
+        http_response.stub(:read_body) do |&block|
+          http_response.body.split(//).each(&block)
+        end
+        handle!
+        stream_result.should == http_response.body
+      end
+
+      it 'does not populate the response body' do
+        handle!
+        response.body.should be_nil
+      end
+
+      it 'populates the response status from the http response code' do
+        handle!
+        response.status.should == http_response.code.to_i
+      end
+
+      it 'populates the response headers from the http response headers' do
+        handle!
+        response.headers.should == http_response.to_hash
+      end
     end
 
     context 'errors' do
