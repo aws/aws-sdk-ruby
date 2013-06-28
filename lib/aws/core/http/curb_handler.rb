@@ -96,11 +96,6 @@ module AWS
           # curl.verbose = true
           request.headers.each {|k, v| curl.headers[k] = v}
 
-          if proxy = request.proxy_uri
-            curl.proxy_url = proxy.to_s
-            curl.proxy_port = proxy.port
-          end
-
           curl.on_header {|header_data|
             if header_data =~ /:\s+/
               name, value = header_data.strip.split(/:\s+/, 2)
