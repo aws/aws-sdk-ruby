@@ -26,6 +26,11 @@ module Seahorse
           yielded.must_equal('request')
         end
 
+        it 'returns the reponse returned by the next plugin in the stack' do
+          plugin = Plugin.new(lambda { |request| 'response' })
+          plugin.call('request').must_equal('response')
+        end
+
       end
 
     end
