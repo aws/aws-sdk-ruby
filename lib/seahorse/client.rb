@@ -13,7 +13,6 @@
 
 require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
-require 'seahorse/client/plugin'
 require 'seahorse/client/request'
 require 'seahorse/client/version'
 
