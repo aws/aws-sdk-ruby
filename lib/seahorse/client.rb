@@ -85,6 +85,18 @@ module Seahorse
 
     class << self
 
+      def add_plugin(plugin)
+        plugins << plugin
+      end
+
+      def remove_plugin(plugin)
+        plugins.delete(plugin)
+      end
+
+      def plugins
+        @plugins ||= []
+      end
+
       # @param [Hash] api
       # @return [Class]
       def define(api)
