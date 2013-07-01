@@ -97,9 +97,7 @@ module AWS
       #   should be a Hash with a `:name` and `:value`.
       # @return [MetricCollection]
       def with_dimensions *dimensions
-        dimensions = @filters[:dimensions] || []
-        dimensions += dimensions.flatten
-        filter(:dimensions, dimensions)
+        filter(:dimensions, (@filters[:dimensions] || []) + dimensions.flatten )
       end
 
       protected
