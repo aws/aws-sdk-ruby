@@ -90,7 +90,10 @@ module Seahorse
 
       it 'returns a list of plugins applied to the client' do
         client_class.plugins.must_be_kind_of(Array)
+      end
 
+      it 'returns a frozen list of plugins' do
+        client_class.plugins.frozen?.must_equal(true)
       end
 
     end
