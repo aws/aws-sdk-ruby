@@ -262,6 +262,7 @@ module AWS::Core::Http
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EINVAL)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Timeout::Error)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ETIMEDOUT)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, OpenSSL::SSL::SSLError)
 
     end
   end
