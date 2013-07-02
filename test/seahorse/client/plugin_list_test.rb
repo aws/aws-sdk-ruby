@@ -50,8 +50,8 @@ module Seahorse
 
         it 'accepts a plugin with require prefix' do
           list = PluginList.new
-          plugin = list.add('fixtures/plugin.FixturePlugin')
-          plugin.must_be_same_as(FixturePlugin)
+          plugin = list.add('fixtures/plugin.Fixtures::Plugin')
+          plugin.must_be_same_as(Fixtures::Plugin)
         end
 
       end
