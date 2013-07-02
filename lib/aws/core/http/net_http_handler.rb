@@ -27,7 +27,7 @@ module AWS
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
           Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
-          Errno::EINVAL, Errno::ETIMEDOUT,
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
         ]
 
         # (see ConnectionPool.new)
