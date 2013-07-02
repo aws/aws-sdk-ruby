@@ -13,10 +13,7 @@
 
 require 'minitest/autorun'
 
-if ENV['VERBOSE']
-  require 'minitest/reporters'
-  MiniTest::Reporters.use! MiniTest::Reporters::SpecReporter.new
-end
+require 'minitest'
 
 if ENV['COVERAGE']
   require 'simplecov'
@@ -26,3 +23,5 @@ if ENV['COVERAGE']
 end
 
 require 'seahorse-client'
+
+Minitest.run ARGV

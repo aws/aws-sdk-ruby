@@ -19,7 +19,6 @@ group :development do
   gem 'rake', :require => false
   gem 'simplecov', :require => false
   gem 'minitest'
-  gem 'minitest-reporters'
   gem 'yard'
   gem 'redcarpet'
 end
