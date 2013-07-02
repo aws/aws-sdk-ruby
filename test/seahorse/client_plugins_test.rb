@@ -15,18 +15,20 @@ require 'test_helper'
 
 class TestSeahoreClientPlugins < MiniTest::Unit::TestCase
 
-  # creates a dummy plugin
-  def new_plugin(plugin_name = nil)
-    plugin_name ||= begin
-      @plugin_n ||= 0
-      @plugin_n += 1
-      "Plugin#{@plugin_n}"
+  def new_plugin
+    @plugin_n ||= 0
+    @plugin_n += 1
+    plugin_name = "Plugin#{@plugin_n}"
+    plugin_class = Class.new
+    plugin_class.class.send(:define_method, :inspect) do
+      plugin_name
     end
-    self.class.const_set(plugin_name, Class.new)
+    plugin_class
   end
 
   def client_class
     @client_class ||= Class.new(Seahorse::Client)
+    @client_class
   end
 
   def test_adding_plugins
@@ -44,7 +46,7 @@ class TestSeahoreClientPlugins < MiniTest::Unit::TestCase
     assert_equal([plugin1, plugin3], client_class.plugins)
   end
 
-  def test_sub_classes_inherit_plugins
+  def test_client_inherit_plugins_from_parent_class
     plugin1, plugin2 = [new_plugin, new_plugin]
 
     klass = Class.new(Seahorse::Client)

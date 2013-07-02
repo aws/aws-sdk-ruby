@@ -115,6 +115,12 @@ module Seahorse
         @api = api
       end
 
+      private
+
+      def inherited(subclass)
+        subclass.instance_variable_set('@plugins', self.plugins + [])
+      end
+
     end
 
   end
