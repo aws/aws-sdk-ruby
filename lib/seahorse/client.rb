@@ -148,7 +148,7 @@ module Seahorse
       private
 
       def inherited(subclass)
-        subclass.instance_variable_set('@plugins', PluginList.new(plugins))
+        subclass.instance_variable_set('@plugins', PluginList.new(@plugins))
       end
 
     end

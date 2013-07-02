@@ -16,9 +16,10 @@ require 'thread'
 
 module Seahorse
   class Client
-
     # @api private
     class PluginList
+
+      include Enumerable
 
       # @param [Array, Set] plugins
       def initialize(plugins = [])
@@ -42,14 +43,13 @@ module Seahorse
         nil
       end
 
-      # @return [Array]
-      def to_a
+      # @return [Enumerator]
+      def each(&block)
         @mutex.synchronize do
-          @plugins.to_a
+          @plugins.dup.each(&block)
         end
       end
 
     end
-
   end
 end
