@@ -87,6 +87,14 @@ module AWS
           device.enable(User.new("username"), 12345, 654321)
         end
 
+        it 'accepts input like "099999"' do
+          client.should_receive(:enable_mfa_device).with(hash_including(
+            :authentication_code_1 => '099999',
+            :authentication_code_2 => '098765'
+          ))
+          device.enable('username', '099999', '098765')
+        end
+
         it 'should use the user name directly if passed as a string' do
           client.should_receive(:enable_mfa_device).
             with(hash_including(:user_name => "username"))

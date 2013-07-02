@@ -120,7 +120,7 @@ module AWS
 
       protected
       def format_auth_code(code)
-        sprintf("%06d", code)
+        code.is_a?(Integer) ? sprintf("%06d", code) : code
       end
 
       protected
