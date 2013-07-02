@@ -72,6 +72,13 @@ module Seahorse
           list.remove(Plugin1).must_equal(Plugin1)
         end
 
+        it 'can remove a plugin added by name' do
+          list = PluginList.new
+          list.add(:String)
+          list.remove(String)
+          list.to_a.must_equal([])
+        end
+
       end
 
       describe '#each' do
