@@ -48,6 +48,10 @@ module Seahorse
         subclass.plugins.must_equal([plugin])
       end
 
+      it 'returns nil' do
+        client_class.add_plugin(new_plugin).must_equal(nil)
+      end
+
     end
 
     describe '.remove_plugin' do
@@ -72,6 +76,12 @@ module Seahorse
 
         client_class.plugins.must_equal([plugin1, plugin2])
         subclass.plugins.must_equal([plugin1])
+      end
+
+      it 'returns nil' do
+        plugin = new_plugin
+        client_class.add_plugin(plugin)
+        client_class.remove_plugin(plugin).must_equal(nil)
       end
 
     end
