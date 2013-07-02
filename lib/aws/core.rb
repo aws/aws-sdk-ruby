@@ -691,24 +691,19 @@ module AWS
     end
 
     # Eagerly loads all AWS classes/modules registered with autoload.
-    # @return [Array] Returns an array of module and classes that were autoloaded.
+    # @return [nil]
     def eager_autoload! klass_or_module = AWS, visited = Set.new
-      autoloaded = []
-      klass_or_module.constants(false).each do |const_name|
+      klass_or_module.constants.each do |const_name|
         path = klass_or_module.autoload?(const_name)
         require(path) if path
-
         const = klass_or_module.const_get(const_name)
-        autoloaded << const if path
-
         if const.is_a?(Module)
           unless visited.include?(const)
             visited << const
-            autoloaded += eager_autoload!(const, visited)
+            eager_autoload!(const, visited)
           end
         end
       end
-      autoloaded
     end
 
     # Patches Net::HTTP, fixing a bug in how it handles non 100-continue

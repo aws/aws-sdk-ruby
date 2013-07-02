@@ -17,7 +17,8 @@ $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'aws-sdk'
 
-autoloaded = AWS.eager_autoload!
-autoloaded = autoloaded.map(&:name)
-exit 1 unless autoloaded.include?('AWS::Core::Client')
+print "Autoloads under non-autoload modules get picked up: "
+AWS.eager_autoload!
+exit 1 unless AWS::Core.autoload?(:Client) === nil
+puts "ok"
 exit 0
