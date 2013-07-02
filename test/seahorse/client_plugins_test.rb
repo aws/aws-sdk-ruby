@@ -16,41 +16,29 @@ require 'test_helper'
 module Seahorse
   describe Client do
 
-    def new_plugin
-      @plugin_n ||= 0
-      @plugin_n += 1
-      plugin_name = "Plugin#{@plugin_n}"
-      plugin_class = Class.new
-      plugin_class.class.send(:define_method, :inspect) do
-        plugin_name
-      end
-      plugin_class
-    end
+    Plugin1 = Class.new
+    Plugin2 = Class.new
 
     def client_class
       @client_class ||= Class.new(Seahorse::Client)
-      @client_class
     end
 
     describe '.add_plugin' do
 
       it 'adds plugins to the client' do
-        plugin = new_plugin
-        client_class.add_plugin(plugin)
-        assert_equal([plugin], client_class.plugins)
+        client_class.add_plugin(Plugin1)
+        assert_equal([Plugin1], client_class.plugins)
       end
 
       it 'does not add plugins to the base class' do
-        plugin = new_plugin
         subclass = Class.new(client_class)
-        subclass.add_plugin(plugin)
+        subclass.add_plugin(Plugin1)
         client_class.plugins.must_equal([])
-        subclass.plugins.must_equal([plugin])
+        subclass.plugins.must_equal([Plugin1])
       end
 
       it 'returns the plugin' do
-        plugin = new_plugin
-        client_class.add_plugin(plugin).must_equal(plugin)
+        client_class.add_plugin(Plugin1).must_be_same_as(Plugin1)
       end
 
     end
@@ -58,31 +46,24 @@ module Seahorse
     describe '.remove_plugin' do
 
       it 'removes a plugin from the client class' do
-        plugin1, plugin2, plugin3 = (1..3).map { new_plugin }
-        client_class.add_plugin(plugin1)
-        client_class.add_plugin(plugin2)
-        client_class.add_plugin(plugin3)
-        client_class.remove_plugin(plugin2)
-        client_class.plugins.must_equal([plugin1, plugin3])
+        client_class.add_plugin(Plugin1)
+        client_class.add_plugin(Plugin2)
+        client_class.remove_plugin(Plugin1)
+        client_class.plugins.must_equal([Plugin2])
       end
 
       it 'does not remove plugins from parent class' do
-        plugin1, plugin2 = [new_plugin, new_plugin]
-
-        client_class.add_plugin(plugin1)
-        client_class.add_plugin(plugin2)
-
+        client_class.add_plugin(Plugin1)
+        client_class.add_plugin(Plugin2)
         subclass = Class.new(client_class)
-        subclass.remove_plugin(plugin2)
-
-        client_class.plugins.must_equal([plugin1, plugin2])
-        subclass.plugins.must_equal([plugin1])
+        subclass.remove_plugin(Plugin2)
+        client_class.plugins.must_equal([Plugin1, Plugin2])
+        subclass.plugins.must_equal([Plugin1])
       end
 
       it 'returns the plugin' do
-        plugin = new_plugin
-        client_class.add_plugin(plugin)
-        client_class.remove_plugin(plugin).must_equal(plugin)
+        client_class.add_plugin(Plugin1)
+        client_class.remove_plugin(Plugin1).must_equal(Plugin1)
       end
 
     end
