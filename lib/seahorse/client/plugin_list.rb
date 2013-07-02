@@ -27,20 +27,20 @@ module Seahorse
         @plugins = Set.new(plugins)
       end
 
-      # @return [nil]
       def add(plugin)
+        plugin = resolve(plugin)
         @mutex.synchronize do
           @plugins << plugin
         end
-        nil
+        plugin
       end
 
-      # @return [nil]
       def remove(plugin)
+        plugin = resolve(plugin)
         @mutex.synchronize do
           @plugins.delete(plugin)
         end
-        nil
+        plugin
       end
 
       # @return [Enumerator]
@@ -48,6 +48,24 @@ module Seahorse
         @mutex.synchronize do
           @plugins.dup.each(&block)
         end
+      end
+
+      private
+
+      def resolve(plugin)
+        if plugin.is_a?(Symbol) || plugin.is_a?(String)
+          load_plugin(plugin.to_s)
+        else
+          plugin
+        end
+      end
+
+      def load_plugin(plugin_name)
+        if plugin_name.include?('.')
+          require_path, plugin_name = plugin_name.split('.')
+          require(require_path)
+        end
+        Kernel.const_get(plugin_name)
       end
 
     end

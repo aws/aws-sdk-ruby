@@ -124,7 +124,7 @@ module Seahorse
       # @see .remove_plugin
       # @return [Array]
       def plugins
-        @plugins.to_a.freeze
+        Array(@plugins).freeze
       end
 
       # @param [Hash] api
