@@ -13,14 +13,14 @@
 
 require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
+require 'seahorse/client/plugin_list'
 require 'seahorse/client/request'
 require 'seahorse/client/version'
-require 'set'
 
 module Seahorse
   class Client
 
-    @plugin_list = Set.new
+    @plugins = PluginList.new
 
     # @option options [String, URI::HTTP, URI::HTTPS, Endpoint] :endpoint
     #   Endpoints specify the http scheme, hostname and port to connect
@@ -108,16 +108,14 @@ module Seahorse
       # @see .plugins
       # @return [nil]
       def add_plugin(plugin)
-        plugin_list << plugin
-        nil
+        @plugins.add(plugin)
       end
 
       # @see .add_plugin
       # @see .plugins
       # @return [nil]
       def remove_plugin(plugin)
-        plugin_list.delete(plugin)
-        nil
+        @plugins.remove(plugin)
       end
 
       # Returns the list of registered plugins for this Client.  Plugins are
@@ -126,7 +124,7 @@ module Seahorse
       # @see .remove_plugin
       # @return [Array]
       def plugins
-        plugin_list.to_a.freeze
+        @plugins.to_a.freeze
       end
 
       # @param [Hash] api
@@ -149,12 +147,8 @@ module Seahorse
 
       private
 
-      def plugin_list
-        @plugin_list
-      end
-
       def inherited(subclass)
-        subclass.instance_variable_set('@plugin_list', Set.new(plugin_list))
+        subclass.instance_variable_set('@plugins', PluginList.new(plugins))
       end
 
     end
