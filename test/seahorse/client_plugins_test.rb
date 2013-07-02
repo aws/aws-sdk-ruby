@@ -15,64 +15,72 @@ require 'test_helper'
 
 module Seahorse
   describe Client do
-    describe 'plugins' do
 
-      def new_plugin
-        @plugin_n ||= 0
-        @plugin_n += 1
-        plugin_name = "Plugin#{@plugin_n}"
-        plugin_class = Class.new
-        plugin_class.class.send(:define_method, :inspect) do
-          plugin_name
-        end
-        plugin_class
+    def new_plugin
+      @plugin_n ||= 0
+      @plugin_n += 1
+      plugin_name = "Plugin#{@plugin_n}"
+      plugin_class = Class.new
+      plugin_class.class.send(:define_method, :inspect) do
+        plugin_name
       end
+      plugin_class
+    end
 
-      def client_class
-        @client_class ||= Class.new(Seahorse::Client)
-        @client_class
-      end
+    def client_class
+      @client_class ||= Class.new(Seahorse::Client)
+      @client_class
+    end
 
-      def test_adding_plugins
+    describe '.add_plugin' do
+
+      it 'adds plugins to the client' do
         plugin = new_plugin
         client_class.add_plugin(plugin)
         assert_equal([plugin], client_class.plugins)
       end
 
-      def test_removing_plugins
+      it 'does not add plugins to the base class' do
+        plugin = new_plugin
+        subclass = Class.new(client_class)
+        subclass.add_plugin(plugin)
+        client_class.plugins.must_equal([])
+        subclass.plugins.must_equal([plugin])
+      end
+
+    end
+
+    describe '.remove_plugin' do
+
+      it 'removes a plugin from the client class' do
         plugin1, plugin2, plugin3 = (1..3).map { new_plugin }
         client_class.add_plugin(plugin1)
         client_class.add_plugin(plugin2)
         client_class.add_plugin(plugin3)
         client_class.remove_plugin(plugin2)
-        assert_equal([plugin1, plugin3], client_class.plugins)
+        client_class.plugins.must_equal([plugin1, plugin3])
       end
 
-      def test_client_inherit_plugins_from_parent_class
+      it 'does not remove plugins from parent class' do
         plugin1, plugin2 = [new_plugin, new_plugin]
 
-        klass = Class.new(Seahorse::Client)
-        klass.add_plugin(plugin1)
+        client_class.add_plugin(plugin1)
+        client_class.add_plugin(plugin2)
 
-        subklass = Class.new(klass)
-        subklass.add_plugin(plugin2)
+        subclass = Class.new(client_class)
+        subclass.remove_plugin(plugin2)
 
-        klass.plugins.must_equal([plugin1])
-        subklass.plugins.must_equal([plugin1, plugin2])
+        client_class.plugins.must_equal([plugin1, plugin2])
+        subclass.plugins.must_equal([plugin1])
       end
 
-      def test_removing_plugin_does_not_affect_parent_class
-        plugin1, plugin2 = [new_plugin, new_plugin]
+    end
 
-        klass = Class.new(Seahorse::Client)
-        klass.add_plugin(plugin1)
-        klass.add_plugin(plugin2)
+    describe '.plugins' do
 
-        subklass = Class.new(klass)
-        subklass.remove_plugin(plugin1)
+      it 'returns a list of plugins applied to the client' do
+        client_class.plugins.must_be_kind_of(Array)
 
-        klass.plugins.must_equal([plugin1, plugin2])
-        subklass.plugins.must_equal([plugin2])
       end
 
     end
