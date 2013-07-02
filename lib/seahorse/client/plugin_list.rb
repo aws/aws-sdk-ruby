@@ -22,8 +22,8 @@ module Seahorse
       include Enumerable
 
       # @param [Array, Set] plugins
-      def initialize(plugins = [])
-        @mutex = Mutex.new
+      def initialize(plugins = [], options = {})
+        @mutex = options[:mutex] || Mutex.new
         @plugins = Set.new(plugins)
       end
 

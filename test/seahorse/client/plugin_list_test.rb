@@ -96,6 +96,47 @@ module Seahorse
 
       end
 
+      describe 'thread safety' do
+
+        class DummyMutex
+          def initialize
+            @was_locked = false
+          end
+          attr_reader :was_locked
+          def synchronize(&block)
+            @was_locked = true
+            yield
+          end
+        end
+
+        def mutex
+          @mutex ||= DummyMutex.new
+        end
+
+        def list
+          @list ||= PluginList.new([Plugin1], :mutex => mutex)
+        end
+
+        it 'locks the mutex when adding a plugin' do
+          mutex.was_locked.must_equal(false)
+          list.add(Plugin1)
+          mutex.was_locked.must_equal(true)
+        end
+
+        it 'locks the mutex when removing a plugin' do
+          mutex.was_locked.must_equal(false)
+          list.remove(Plugin1)
+          mutex.was_locked.must_equal(true)
+        end
+
+        it 'locks the mutex when enumerating plugins' do
+          mutex.was_locked.must_equal(false)
+          list.each { |plugin| }
+          mutex.was_locked.must_equal(true)
+        end
+
+      end
+
     end
   end
 end
