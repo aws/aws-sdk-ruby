@@ -85,14 +85,43 @@ module Seahorse
 
     class << self
 
+      # Registers a plugin with this client.
+      #
+      # @example Register a plugin
+      #
+      #   ClientClass.add_plugin(PluginClass)
+      #
+      # @example Register a plugin by name
+      #
+      #   ClientClass.add_plugin('gem-name.PluginClass')
+      #
+      # @example Register a plugin with an object
+      #
+      #   plugin = MyPluginClass.new(options)
+      #   ClientClass.add_plugin(plugin)
+      #
+      # @param [Class, Symbol, String, Object]
+      # @see .remove_plugin
+      # @see .plugins
+      # @return [nil]
       def add_plugin(plugin)
         plugins << plugin
+        nil
       end
 
+      # @see .add_plugin
+      # @see .plugins
+      # @return [nil]
       def remove_plugin(plugin)
         plugins.delete(plugin)
+        nil
       end
 
+      # Returns the list of registered plugins for this Client.  Plugins are
+      # inherited from the client super class when the client is defined.
+      # @see .add_plugin
+      # @see .remove_plugin
+      # @return [Array]
       def plugins
         @plugins ||= []
       end
