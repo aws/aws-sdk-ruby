@@ -24,12 +24,10 @@ module AWS
       class NetHttpHandler
 
         # @api private
-        PASS_THROUGH_ERRORS = [
-          NoMethodError, FloatDomainError, TypeError, NotImplementedError,
-          SystemExit, Interrupt, SyntaxError, RangeError, NoMemoryError,
-          ArgumentError, ZeroDivisionError, LoadError, NameError,
-          LocalJumpError, SignalException, ScriptError,
-          SystemStackError, RegexpError, IndexError,
+        NETWORK_ERRORS = [
+          SocketError, EOFError, IOError, Timeout::Error,
+          Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
         ]
 
         # (see ConnectionPool.new)
@@ -67,14 +65,7 @@ module AWS
 
             end
 
-          # The first rescue clause is required because Timeout::Error is
-          # a SignalException (in Ruby 1.8, not 1.9).  Generally, SingalExceptions
-          # should not be retried, except for timeout errors.
-          rescue Timeout::Error => error
-            response.network_error = error
-          rescue *PASS_THROUGH_ERRORS => error
-            raise error
-          rescue Exception => error
+          rescue *NETWORK_ERRORS => error
             response.network_error = error
           end
           nil
