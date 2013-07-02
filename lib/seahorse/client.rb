@@ -106,14 +106,14 @@ module Seahorse
       # @param [Class, Symbol, String, Object]
       # @see .remove_plugin
       # @see .plugins
-      # @return [nil]
+      # @return [Class, Object] Returns the loaded plugin.
       def add_plugin(plugin)
         @plugins.add(plugin)
       end
 
       # @see .add_plugin
       # @see .plugins
-      # @return [nil]
+      # @return [Class, Object] Returns the removed plugin.
       def remove_plugin(plugin)
         @plugins.remove(plugin)
       end
