@@ -225,7 +225,8 @@ describe AWS do
       path = File.join(File.dirname(__FILE__), 'fixtures', 'autoload_target')
       mod = Module.new
       mod.send(:autoload, :AutoloadTarget, path)
-      AWS.eager_autoload!(mod).should include(AutoloadTarget)
+      AWS.eager_autoload!(mod)
+      mod.autoload?(:AutoloadTarget).should be(nil)
     end
 
     it 'eager autoloads passed defined modules' do
@@ -233,7 +234,8 @@ describe AWS do
       mod = Module.new
       mod::Nested = Module.new
       mod::Nested.send(:autoload, :NestedAutoloadTarget, path)
-      AWS.eager_autoload!(mod).should include(NestedAutoloadTarget)
+      AWS.eager_autoload!(mod)
+      mod::Nested.autoload?(:NestedAutoloadTarget).should be(nil)
     end
 
   end
