@@ -114,7 +114,7 @@ module AWS
       # @return [String]
       attr_reader :type
 
-      # Build query fro change request.
+      # Build query for change request.
       # @return [Hash]
       def to_hash
         q = {}
@@ -128,6 +128,8 @@ module AWS
         q[:resource_record_set][:ttl] = @change_options[:ttl] if @change_options[:ttl]
         q[:resource_record_set][:resource_records] = @change_options[:resource_records] if @change_options[:resource_records]
         q[:resource_record_set][:alias_target] = @change_options[:alias_target] if @change_options[:alias_target]
+        q[:resource_record_set][:failover] = @change_options[:failover] if @change_options[:failover]
+        q[:resource_record_set][:health_check_id] = @change_options[:health_check_id] if @change_options[:health_check_id]
         q
       end
     end
