@@ -159,9 +159,9 @@ module AWS
         end
 
         @change_info = batch.call()
-        @name = @create_options[:name]
-        @type = @create_options[:type]
-        @set_identifier = @create_options[:set_identifier]
+        @name = @create_options[:name] || @name
+        @type = @create_options[:type] || @type
+        @set_identifier = @create_options[:set_identifier] || @set_identifier
         @create_options = {}
         self
       end
