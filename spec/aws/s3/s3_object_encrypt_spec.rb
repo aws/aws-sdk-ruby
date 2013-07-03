@@ -130,6 +130,28 @@ module AWS
             end
           end
 
+          # The enveloped encryption uses a 256bit key, using a 128bit key to
+          # encrypt the 256bit key could lead to halving the strength of the
+          # 256bit key (due to properties of ECB).
+          context 'with a key shorter than 256 bits' do
+
+            it 'should warn that the encryption will be unsafe' do
+              object.should_receive(:warn).
+                  with("Unsafe encryption, data is longer than key length")
+
+              begin
+                # Temporarily silence stderr
+                real_stderr, $stderr = $stderr, StringIO.new
+                object.write("HELLO",
+                            :encryption_key => "YELLOW SUBMARINE") # 128bit key
+
+              ensure
+                $stderr = real_stderr
+              end
+            end
+            
+          end
+
           context 'with incorrect arguments' do
 
             it 'should call put_object with  an invalid length symmetric key' do
@@ -268,7 +290,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
 
               object.write("HELLO",
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file)
             end
 
@@ -282,7 +304,7 @@ module AWS
               msg << ":estimated_content_length"
               lambda do
                 object.write(IO_proxy.new("HELLO"),
-                             :encryption_key  => "0123456789012345",
+                             :encryption_key  => "01234567890123456789012345678901",
                              :encryption_materials_location => :instruction_file)
               end.should raise_error(msg)
             end
@@ -308,7 +330,7 @@ module AWS
 
               object.write(IO_proxy.new("HELLO"),
                            :estimated_content_length => 10,
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file)
             end
 
@@ -330,7 +352,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
               eof = false
               object.write(:estimated_content_length => 10,
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file) do |buffer, bytes|
                              unless eof
                                buffer << "HELLO"
@@ -367,7 +389,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
 
               object.write("HELLO",
-                           :encryption_key  => "123456789012345678901234",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file,
                            :content_md5 => "I wish I were an md5")
             end

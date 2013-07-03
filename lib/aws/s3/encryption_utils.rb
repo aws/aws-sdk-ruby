@@ -27,15 +27,23 @@ module AWS
       #
       # @note Use check_encryption_materials before this method to check
       #   formatting of keys
+      #   This should not be used for data longer than the key length as
+      #   it will not be cryptographically safe
       #
       # @return [String] Returns the data encrypted with the key given.
       def encrypt data, key
         rsa = OpenSSL::PKey::RSA
+        unsafe_msg = "Unsafe encryption, data is longer than key length"
+
         # Encrypting data key
         case key
         when rsa # Asymmetric encryption
+          warn unsafe_msg if key.public_key.n.num_bits < get_cipher_size(data.length)
+
           key.public_encrypt(data)
         when String             # Symmetric encryption
+          warn unsafe_msg if get_cipher_size(key.length) < get_cipher_size(data.length)
+
           cipher = get_aes_cipher(:encrypt, :ECB, key)
           cipher.update(data) + cipher.final
         end
