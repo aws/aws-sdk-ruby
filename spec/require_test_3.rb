@@ -19,6 +19,6 @@ require 'aws-sdk'
 
 print "Autoloads under non-autoload modules get picked up: "
 AWS.eager_autoload!
-exit 1 unless AWS::Core.autoload?(:Client) === nil
+exit 1 unless AWS::Core.autoload?(:Client) == nil
 puts "ok"
 exit 0
