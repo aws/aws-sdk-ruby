@@ -119,6 +119,18 @@ module AWS
         @create_options[:ttl] = new_ttl
       end
 
+      attribute :failover
+
+      def failover= new_failover
+        @create_options[:failover] = new_failover
+      end
+
+      attribute :health_check_id
+
+      def health_check_id= new_health_check_id
+        @create_options[:health_check_id] = new_health_check_id
+      end
+
       attribute :resource_records
 
       # @param [Array<Hash>] new_rrs
@@ -229,6 +241,8 @@ module AWS
           options[:region] = region if region
           options[:ttl] = ttl if ttl
           options[:resource_records] = resource_records if resource_records && !resource_records.empty?
+          options[:failover] = failover if failover
+          options[:health_check_id] = health_check_id if health_check_id
         end
         options
       end
