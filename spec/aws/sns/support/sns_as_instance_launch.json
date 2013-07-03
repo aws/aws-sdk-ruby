@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "efb849eb-ae0c-43c1-a666-96b564d0be1f",
+  "TopicArn" : "arn:aws:sns:eu-west-1:382739154790:pete-AutoScalingSnsT-6064W6KCK0H3",
+  "Subject" : "AWS Notification - autoscaling:EC2_INSTANCE_LAUNCH",
+  "Message" : "{\"StatusCode\":\"InProgress\",\"Service\":\"AWS Auto Scaling\",\"AutoScalingGroupName\":\"pete-ReverseProxyAsG-AX2MGMM4X8IM\",\"Description\":\"Launching a new EC2 instance: i-65ee122d\",\"ActivityId\":\"cb02e1c8-ea7a-4b95-84f7-bc7458015b1a\",\"Event\":\"autoscaling:EC2_INSTANCE_LAUNCH\",\"Details\":{},\"AutoScalingGroupARN\":\"arn:aws:autoscaling:eu-west-1:382739154790:autoScalingGroup:7c23f8cd-65dc-4f6a-a1a0-342ca2cf9228:autoScalingGroupName/pete-ReverseProxyAsG-AX2MGMM4X8IM\",\"Progress\":0,\"Time\":\"2012-04-30T10:55:54.149Z\",\"AccountId\":\"382739154790\",\"RequestId\":\"cb02e1c8-ea7a-4b95-84f7-bc7458015b1a\",\"StatusMessage\":\"\",\"EndTime\":\"2012-04-30T10:55:54.149Z\",\"EC2InstanceId\":\"i-65ee122d\",\"StartTime\":\"2012-04-30T10:54:45.747Z\",\"Cause\":\"At 2012-04-30T10:54:45Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.\"}",
+  "Timestamp" : "2012-04-30T10:55:54.191Z",
+  "SignatureVersion" : "1",
+  "Signature" : "lYzQGyBFleX37C+hcV/Tt8p7/HaWrpyoTJxCPLnGkiHGAkCFNxXWdy7+rUfnM9Q/shMDgmW4jiTSEL/HZs7UAypFxAqtiLdi6zFB3gFErQ/bjvEMAwivHXx4BKATsao2YNyZkxLcbS14r2K/OFfi5larBfbHNzQRUwK5ODSt0e0=",
+  "SigningCertURL" : "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem",
+  "UnsubscribeURL" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:382739154790:pete-AutoScalingSnsT-6064W6KCK0H3:cf5d7737-18c9-4c34-befb-3ca939cb6cf2"
+}
