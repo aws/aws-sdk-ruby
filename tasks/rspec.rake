@@ -31,6 +31,7 @@ end
 task :loading_tests do
   execute_cmd("ruby spec/require_test_1.rb")
   execute_cmd("ruby spec/require_test_2.rb")
+  execute_cmd("ruby spec/require_test_3.rb")
 end
 
 task :spec_isolate do
