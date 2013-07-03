@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/version'
+require 'set'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
 # where you can configure you access to AWS.
@@ -690,13 +691,16 @@ module AWS
     end
 
     # Eagerly loads all AWS classes/modules registered with autoload.
-    # @return [nil]
-    def eager_autoload! klass_or_module = AWS
+    # @return [void]
+    def eager_autoload! klass_or_module = AWS, visited = Set.new
       klass_or_module.constants.each do |const_name|
-        if path = klass_or_module.autoload?(const_name)
-          require(path)
-          if const = klass_or_module.const_get(const_name) and const.is_a?(Module)
-            eager_autoload!(const)
+        path = klass_or_module.autoload?(const_name)
+        require(path) if path
+        const = klass_or_module.const_get(const_name)
+        if const.is_a?(Module)
+          unless visited.include?(const)
+            visited << const
+            eager_autoload!(const, visited)
           end
         end
       end
