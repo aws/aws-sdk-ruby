@@ -13,6 +13,8 @@
 
 require 'base64'
 require 'json'
+require 'net/http'
+require 'net/https'
 require 'openssl'
 Dir.glob("#{File.dirname __FILE__}/originators/*.rb").each { |rb| require rb }
 
@@ -148,14 +150,26 @@ module AWS
         raise MessageWasNotAuthenticError, "cert is not hosted at AWS URL (https): #{url}" unless url =~ /^https.*amazonaws\.com\/.*$/i
         tries = 0
         begin
-          response = HTTParty.get url
-          response.body
+          resp = https_get(url)
+          resp.body
         rescue => msg
           tries += 1
-          retry if tries <= 3
+          retry if tries < 3
           raise StandardError, "SNS signing cert could not be retrieved after #{tries} tries.\n#{msg}"
         end
       end
+
+      def https_get(url)
+        uri = URI.parse(url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+        http.start
+        resp = http.request(Net::HTTP::Get.new(uri))
+        http.finish
+        resp
+      end
+
     end
   end
 end
