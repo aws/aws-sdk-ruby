@@ -273,20 +273,16 @@ module AWS::Core::Http
       end
 
       it 'should not capture errors from within the block' do
-        pending do
-          stream_result.stub(:<<).and_raise(IOError)
-          expect { handle! }.to raise_error(IOError)
-        end
+        stream_result.stub(:<<).and_raise(IOError)
+        expect { handle! }.to raise_error(IOError)
       end
 
       it 'should not capture errors after first chunk has been processed' do
-        pending do
-          http_response.stub(:read_body) do |&block|
-            block.call http_response.body[0,1]
-            raise IOError, 'simulated'
-          end
-          expect { handle! }.to raise_error(IOError)
+        http_response.stub(:read_body) do |&block|
+          block.call http_response.body[0,1]
+          raise IOError, 'simulated'
         end
+        expect { handle! }.to raise_error(IOError)
       end
     end
 
