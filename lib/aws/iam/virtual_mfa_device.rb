@@ -120,7 +120,7 @@ module AWS
 
       protected
       def format_auth_code(code)
-        sprintf("%06d", code)
+        sprintf("%06d", Integer(code, 10))
       end
 
       protected
