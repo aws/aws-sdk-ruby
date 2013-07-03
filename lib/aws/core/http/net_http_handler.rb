@@ -45,6 +45,8 @@ module AWS
         # @param [Response] response
         # @return [nil]
         def handle request, response, &read_block
+          retry_possible = true
+
           begin
 
             @pool.session_for(request.endpoint) do |http|
@@ -57,7 +59,13 @@ module AWS
                 response.status = net_http_resp.code.to_i
                 response.headers = net_http_resp.to_hash
                 if block_given? and response.status < 300
-                  net_http_resp.read_body(&read_block)
+                  net_http_resp.read_body do |data|
+                    begin
+                      yield data
+                    ensure
+                      retry_possible = false
+                    end
+                  end
                 else
                   response.body = net_http_resp.read_body
                 end
@@ -66,6 +74,7 @@ module AWS
             end
 
           rescue *NETWORK_ERRORS => error
+            raise error unless retry_possible
             response.network_error = error
           end
           nil
