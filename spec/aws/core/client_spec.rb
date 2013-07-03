@@ -64,6 +64,25 @@ module AWS
 
       let(:client) { client_class.new(:config => config) }
 
+      context 'config' do
+
+        it 'merges service specific :endpopint option' do
+          AWS.config(:dummy => { :endpoint => 'abc.xyz.com' })
+          AWS::Dummy::Client.new.config.dummy_endpoint.should eq('abc.xyz.com')
+        end
+
+        it 'merges service specific :port option' do
+          AWS.config(:dummy => { :port => 123 })
+          AWS::Dummy::Client.new.config.dummy_port.should eq(123)
+        end
+
+        it 'merges service specific :region option' do
+          AWS.config(:dummy => { :region => 'REGION' })
+          AWS::Dummy::Client.new.config.dummy_region.should eq('REGION')
+        end
+
+      end
+
       context 'logging' do
 
         let(:logger) { double('logger') }

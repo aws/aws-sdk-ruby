@@ -382,6 +382,8 @@ module AWS
           add_option :"#{ruby_name}_endpoint" do |config,value|
             if value
               value
+            elsif endpoint = config.send(ruby_name)[:endpoint]
+              endpoint
             elsif endpoint_pattern
               endpoint_pattern % config.region
             else
@@ -390,13 +392,23 @@ module AWS
           end
 
           add_option(:"#{ruby_name}_port") do |config,value|
-            value || (config.use_ssl? ? 443 : 80)
+            if value
+              value
+            elsif port = config.send(ruby_name)[:port]
+              port
+            else
+              config.use_ssl? ? 443 : 80
+            end
           end
 
           # users only need to specify service regions when they use
           # a test endpoint with a sigv4 service
           add_option(:"#{ruby_name}_region") do |config,value|
-            value || begin
+            if value
+              value
+            elsif region = config.send(ruby_name)[:region]
+              region
+            else
               endpoint = config.send("#{ruby_name}_endpoint")
               if endpoint =~ /us-gov/
                 if matches = endpoint.match(/(us-gov-west-\d+)/)
