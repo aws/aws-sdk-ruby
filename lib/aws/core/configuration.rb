@@ -377,12 +377,16 @@ module AWS
 
         def add_service name, ruby_name, endpoint_pattern = nil, &endpoint_builder
 
-          add_option(ruby_name.to_sym, {})
+          svc = SERVICES[name]
+          svc_opt = svc.method_name
+          ruby_name = svc.old_name
+
+          add_option(svc_opt, {})
 
           add_option :"#{ruby_name}_endpoint" do |config,value|
             if value
               value
-            elsif endpoint = config.send(ruby_name)[:endpoint]
+            elsif endpoint = config.send(svc_opt)[:endpoint]
               endpoint
             elsif endpoint_pattern
               endpoint_pattern % config.region
@@ -394,7 +398,7 @@ module AWS
           add_option(:"#{ruby_name}_port") do |config,value|
             if value
               value
-            elsif port = config.send(ruby_name)[:port]
+            elsif port = config.send(svc_opt)[:port]
               port
             else
               config.use_ssl? ? 443 : 80
@@ -406,7 +410,7 @@ module AWS
           add_option(:"#{ruby_name}_region") do |config,value|
             if value
               value
-            elsif region = config.send(ruby_name)[:region]
+            elsif region = config.send(svc_opt)[:region]
               region
             else
               endpoint = config.send("#{ruby_name}_endpoint")

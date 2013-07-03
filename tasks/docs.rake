@@ -35,29 +35,24 @@ namespace :docs do
 
   task :update_readme do
 
-    def name svc
-      AWS::SERVICES[svc][:full_name]
-    end
-
     require 'aws/core'
 
     supported = {}
 
-    AWS::SERVICES.keys.each do |svc|
-      apis = Dir.glob("./lib/aws/api_config/#{svc}*.yml")
+    AWS::SERVICES.values.each do |svc|
+      apis = Dir.glob("./lib/aws/api_config/#{svc.class_name}*.yml")
       apis = apis.map{|api| api.match(/\d{4}-\d{2}-\d{2}/)[0] }
-      name = AWS::SERVICES[svc][:full_name]
-      supported[svc] = apis
+      supported[svc.class_name] = apis
     end
     supported['S3'] = ['2006-03-01']
 
     rows = []
-    supported.sort_by{|svc,api| svc.downcase }.each do |(svc,apis)|
+    supported.sort_by{|svc,api| svc.downcase }.each do |(class_name,apis)|
       rowspan = apis.length > 1 ? " rowspan=\"#{apis.length}\"" : ''
       rows << "    <tr>"
-      rows << "      <td#{rowspan}>AWS::#{svc}</td>"
+      rows << "      <td#{rowspan}>AWS::#{class_name}</td>"
       rows << "      <td>#{apis.first}</td>"
-      rows << "      <td#{rowspan}>#{name(svc)}</td>"
+      rows << "      <td#{rowspan}>#{AWS::SERVICES[class_name].full_name}</td>"
       rows << "    </tr>"
       apis[1..-1].each do |api|
         rows << "    <tr>"
@@ -94,8 +89,8 @@ namespace :docs do
     require 'aws/core'
 
     svcs = []
-    AWS::SERVICES.each_pair do |name,svc|
-      svcs << "# * {AWS.#{svc[:ruby_name]}}"
+    AWS::SERVICES.values.each do |svc|
+      svcs << "# * {AWS.#{svc.method_name}}"
     end
 
     start = '# # Supported Services'

@@ -33,98 +33,112 @@ require 'set'
 module AWS
 
   # @api private
-  SERVICES = {
-    "CloudFront" => {
+  class SvcDetails
+    def initialize class_name, options
+      @class_name = class_name
+      @full_name = options[:full_name]
+      @method_name = options[:method_name]
+      @method_alias = options[:method_alias]
+      @old_name = @method_alias || @method_name
+    end
+    attr_reader :class_name, :full_name, :method_name, :method_alias, :old_name
+  end
+
+  # @api private
+  SERVICES = [
+    SvcDetails.new("CloudFront",
       :full_name => "Amazon CloudFront",
-      :ruby_name => :cloud_front },
-    "CloudSearch" => {
+      :method_name => :cloud_front),
+    SvcDetails.new("CloudSearch",
       :full_name => "Amazon CloudSearch",
-      :ruby_name => :cloud_search },
-    "CloudWatch" => {
+      :method_name => :cloud_search),
+    SvcDetails.new("CloudWatch",
       :full_name => "Amazon CloudWatch",
-      :ruby_name => :cloud_watch },
-    "DynamoDB" => {
+      :method_name => :cloud_watch),
+    SvcDetails.new("DynamoDB",
       :full_name => "Amazon DynamoDB",
-      :ruby_name => :dynamo_db },
-    "EC2" => {
+      :method_name => :dynamo_db),
+    SvcDetails.new("EC2",
       :full_name => "Amazon Elastic Compute Cloud",
-      :ruby_name => :ec2 },
-    "EMR" => {
+      :method_name => :ec2),
+    SvcDetails.new("EMR",
       :full_name => "Amazon Elastic MapReduce",
-      :ruby_name => :emr },
-    "ElastiCache" => {
+      :method_name => :emr),
+    SvcDetails.new("ElastiCache",
       :full_name => "Amazon ElastiCache",
-      :ruby_name => :elasticache },
-    "Glacier" => {
+      :method_name => :elasticache),
+    SvcDetails.new("Glacier",
       :full_name => "Amazon Glacier",
-      :ruby_name => :glacier },
-    "RDS" => {
+      :method_name => :glacier),
+    SvcDetails.new("RDS",
       :full_name => "Amazon Relational Database Service (Beta)",
-      :ruby_name => :rds },
-    "Route53" => {
+      :method_name => :rds),
+    SvcDetails.new("Route53",
       :full_name => "Amazon Route 53",
-      :ruby_name => :route_53 },
-    "SimpleEmailService" => {
+      :method_name => :route_53),
+    SvcDetails.new("SimpleEmailService",
       :full_name => "Amazon Simple E-mail Service",
-      :ruby_name => :simple_email_service },
-    "SNS" => {
+      :method_name => :ses,
+      :method_alias => :simple_email_service),
+    SvcDetails.new("SNS",
       :full_name => "Amazon Simple Notifications Service",
-      :ruby_name => :sns },
-    "SQS" => {
+      :method_name => :sns),
+    SvcDetails.new("SQS",
       :full_name => "Amazon Simple Queue Service",
-      :ruby_name => :sqs },
-    "SimpleWorkflow" => {
+      :method_name => :sqs),
+    SvcDetails.new("SimpleWorkflow",
       :full_name => "Amazon Simple Workflow Service",
-      :ruby_name => :simple_workflow },
-    "SimpleDB" => {
+      :method_name => :swf,
+      :method_alias => :simple_workflow),
+    SvcDetails.new("SimpleDB",
       :full_name => "Amazon SimpleDB",
-      :ruby_name => :simple_db },
-    "AutoScaling" => {
+      :method_name => :simple_db),
+    SvcDetails.new("AutoScaling",
       :full_name => "Auto Scaling",
-      :ruby_name => :auto_scaling },
-    "CloudFormation" => {
+      :method_name => :auto_scaling),
+    SvcDetails.new("CloudFormation",
       :full_name => "AWS CloudFormation",
-      :ruby_name => :cloud_formation },
-    "DataPipeline" => {
+      :method_name => :cloud_formation),
+    SvcDetails.new("DataPipeline",
       :full_name => "AWS Data Pipeline",
-      :ruby_name => :data_pipeline },
-    "DirectConnect" => {
+      :method_name => :data_pipeline),
+    SvcDetails.new("DirectConnect",
       :full_name => "AWS Direct Connect",
-      :ruby_name => :direct_connect },
-    "ElasticBeanstalk" => {
+      :method_name => :direct_connect),
+    SvcDetails.new("ElasticBeanstalk",
       :full_name => "AWS Elastic Beanstalk",
-      :ruby_name => :elastic_beanstalk },
-    "IAM" => {
+      :method_name => :elastic_beanstalk),
+    SvcDetails.new("IAM",
       :full_name => "AWS Identity and Access Management",
-      :ruby_name => :iam },
-    "ImportExport" => {
+      :method_name => :iam),
+    SvcDetails.new("ImportExport",
       :full_name => "AWS Import/Export",
-      :ruby_name => :import_export },
-    "OpsWorks" => {
+      :method_name => :import_export),
+    SvcDetails.new("OpsWorks",
       :full_name => "AWS OpsWorks",
-      :ruby_name => :ops_works },
-    "STS" => {
+      :method_name => :ops_works),
+    SvcDetails.new("STS",
       :full_name => "AWS Security Token Service",
-      :ruby_name => :sts },
-    "StorageGateway" => {
+      :method_name => :sts),
+    SvcDetails.new("StorageGateway",
       :full_name => "AWS Storage Gateway",
-      :ruby_name => :storage_gateway },
-    "Support" => {
+      :method_name => :storage_gateway),
+    SvcDetails.new("Support",
       :full_name => "AWS Support",
-      :ruby_name => :support },
-    "ELB" => {
+      :method_name => :support),
+    SvcDetails.new("ELB",
       :full_name => "Elastic Load Balancing",
-      :ruby_name => :elb },
-    "ElasticTranscoder" => {
+      :method_name => :elb),
+    SvcDetails.new("ElasticTranscoder",
       :full_name => "Amazon Elastic Transcoder",
-      :ruby_name => :elastic_transcoder },
-    "Redshift" => {
+      :method_name => :elastic_transcoder),
+    SvcDetails.new("Redshift",
       :full_name => "Amazon Redshift",
-      :ruby_name => :redshift },
-    "S3" => {
+      :method_name => :redshift),
+    SvcDetails.new("S3",
       :full_name => "Amazon Simple Storage Service",
-      :ruby_name => :s3 }
-  }
+      :method_name => :s3)
+  ].inject({}) { |h,svc| h[svc.class_name] = svc; h }
 
   # @api private
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
@@ -313,10 +327,11 @@ module AWS
     # @!method s3
     # @return [S3]
 
-    SERVICES.each_pair do |klass,svc|
-      define_method(svc[:ruby_name]) do |*args|
-        AWS.const_get(klass).new(args.first || {})
+    SERVICES.values.each do |svc|
+      define_method(svc.method_name) do |*args|
+        AWS.const_get(svc.class_name).new(args.first || {})
       end
+      alias_method(svc.method_alias, svc.method_name) if svc.method_alias
     end
 
     # @api private
@@ -735,13 +750,13 @@ module AWS
         pattern = File.join(File.dirname(__FILE__), 'api_config', '*.yml')
         Dir.glob(pattern).each do |path|
           matches = path.match(/(\w+)-(\d{4}-\d{2}-\d{2})/)
-          svc = SERVICES[$1][:full_name]
+          svc = SERVICES[$1].full_name
           versions[svc] ||= []
           versions[svc] << $2
         end
 
         # s3 does not have an API configuration, so we have to add it manually
-        versions[SERVICES['S3'][:full_name]] = ['2006-03-01']
+        versions[SERVICES['S3'].full_name] = ['2006-03-01']
 
         # sort the services alphabetically
         versions.keys.sort_by(&:downcase).inject({}) do |hash,svc|
@@ -752,9 +767,9 @@ module AWS
     end
   end
 
-  SERVICES.each_pair do |klass,service|
-    autoload(klass, "aws/#{service[:ruby_name]}")
-    require "aws/#{service[:ruby_name]}/config"
+  SERVICES.values.each do |svc|
+    autoload(svc.class_name, "aws/#{svc.old_name}")
+    require "aws/#{svc.old_name}/config"
   end
 
 end

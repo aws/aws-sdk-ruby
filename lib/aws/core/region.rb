@@ -68,10 +68,11 @@ module AWS
       # @return [Configuration]
       attr_reader :config
 
-      AWS::SERVICES.each_pair do |name,service|
-        define_method(service[:ruby_name]) do
-          AWS.const_get(name).new(:config => config)
+      AWS::SERVICES.values.each do |svc|
+        define_method(svc.method_name) do
+          AWS.const_get(svc.class_name).new(:config => config)
         end
+        alias_method(svc.method_alias, svc.method_name) if svc.method_alias
       end
 
     end
