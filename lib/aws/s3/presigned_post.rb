@@ -88,7 +88,14 @@ module AWS
       attr_reader :expires
 
       # @api private
-      SPECIAL_FIELDS = [:key, :policy, :signature]
+      SPECIAL_FIELDS = [:key,
+                        :policy,
+                        :signature,
+                        :expires,
+                        :metadata,
+                        :content_length,
+                        :conditions,
+                        :ignore]
       
       # Creates a new presigned post object.
       #
@@ -367,7 +374,7 @@ module AWS
       # @api private
       def refine(opts)
         self.class.new(bucket, {
-                         :conditions => conditions,
+                         field_name(:conditions) => conditions,
                          :key => key,
                          :metadata => metadata,
                          :secure => secure?,
