@@ -691,7 +691,7 @@ module AWS
     end
 
     # Eagerly loads all AWS classes/modules registered with autoload.
-    # @return [nil]
+    # @return [void]
     def eager_autoload! klass_or_module = AWS, visited = Set.new
       klass_or_module.constants.each do |const_name|
         path = klass_or_module.autoload?(const_name)
