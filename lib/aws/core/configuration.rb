@@ -377,6 +377,8 @@ module AWS
 
         def add_service name, ruby_name, endpoint_pattern = nil, &endpoint_builder
 
+          add_option(ruby_name.to_sym, {})
+
           add_option :"#{ruby_name}_endpoint" do |config,value|
             if value
               value
