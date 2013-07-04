@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -94,10 +94,10 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
     end
 
     it "should raises if the Signing cert cannot be downloaded after 3 tries" do
-       http.should_receive(:request).exactly(3).times.and_raise('http-error')
+       http.should_receive(:request).exactly(3).times.and_raise('error')
        lambda {
          AWS::SNS::Message.new(raw).authentic?
-       }.should raise_error(/SNS signing cert could not be retrieved after 3 tries/)
+       }.should raise_error('error')
     end
 
     it "should return false when the message cannot be verified against the signing-cert" do

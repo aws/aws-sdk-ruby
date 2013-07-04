@@ -152,10 +152,10 @@ module AWS
         begin
           resp = https_get(url)
           resp.body
-        rescue => msg
+        rescue => error
           tries += 1
           retry if tries < 3
-          raise StandardError, "SNS signing cert could not be retrieved after #{tries} tries.\n#{msg}"
+          raise error
         end
       end
 
