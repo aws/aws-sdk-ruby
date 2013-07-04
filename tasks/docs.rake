@@ -15,7 +15,7 @@ require 'yard'
 
 namespace :docs do
 
-  task :yard => [:update_readme, :update_core] do
+  task :yard => [:update_readme, :update_region] do
     sh "yard"
   end
 
@@ -83,22 +83,21 @@ namespace :docs do
     )
   end
 
-  # updates the list of supported services in lib/aws/core.rb
-  task :update_core do
+  task :update_region do
 
     require 'aws/core'
 
     svcs = []
-    AWS::SERVICES.values.each do |svc|
-      svcs << "# * {AWS.#{svc.method_name}}"
+    AWS::SERVICES.values.sort_by(&:method_name).each do |svc|
+      svcs << "    # @attr_reader [#{svc.class_name}] #{svc.method_name}"
     end
 
-    start = '# # Supported Services'
-    stop = '# # Configuration'
+    start = '    # Regions provide helper methods for each service.'
+    stop = '    class Region'
 
     update_file(
-      'lib/aws/core.rb',
-      "#{start}\n#\n#{svcs.sort.join("\n")}\n#\n#{stop}\n",
+      'lib/aws/core/region.rb',
+      "#{start}\n    #\n#{svcs.join("\n")}\n    #\n#{stop}\n",
       /^#{start}/,
       /^#{stop}/
     )
