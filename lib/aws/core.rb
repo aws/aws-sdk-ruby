@@ -574,6 +574,18 @@ module AWS
     #   protect your code from future changes in memoization support,
     #   you should not enable memoization while calling non-EC2 APIs.
     #
+    # Resets memoizing service requests made in the current thread.
+    # See {memoize} for a full discussion of the memoization feature.
+    # This has no effect if memoization is already enabled.
+    def reset_memoization
+      Thread.current[:aws_memoization] = {}
+    end
+
+    # @note Memoization is currently only supported for the EC2 APIs;
+    #   other APIs are unaffected by the status of memoization.  To
+    #   protect your code from future changes in memoization support,
+    #   you should not enable memoization while calling non-EC2 APIs.
+    #
     # Starts memoizing service requests made in the current thread.
     # See {memoize} for a full discussion of the memoization feature.
     # This has no effect if memoization is already enabled.
