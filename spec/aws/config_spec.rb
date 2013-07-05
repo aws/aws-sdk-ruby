@@ -22,7 +22,7 @@ describe AWS do
 
     context 'options' do
 
-      AWS::SERVICES.values.map{|opts| opts[:ruby_name] }.each do |option|
+      AWS::SERVICES.values.map(&:method_name).each do |option|
 
         context(option.inspect) do
 

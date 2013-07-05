@@ -21,6 +21,10 @@ module AWS
 
       before(:each) do
 
+        AWS::SERVICES['Dummy'] = AWS::SvcDetails.new('Dummy',
+          :full_name => 'Amazon Dummy', # like a crash test dummy
+          :method_name => :dummy)
+
         module ::AWS
           class Dummy
 
