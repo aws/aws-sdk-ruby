@@ -25,8 +25,9 @@ module AWS
       # client methods #
       # end client methods #
 
+      # @api private
       def inspect
-        self.class.name
+        "#<#{self.class.name}>"
       end
 
       class << self
