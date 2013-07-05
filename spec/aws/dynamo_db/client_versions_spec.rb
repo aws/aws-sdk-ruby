@@ -36,6 +36,11 @@ module AWS
         client.should be_a(Client::V20120810)
       end
 
+      it 'can be constructed from the subclass clients' do
+        Client::V20111205.new.should be_a(Client::V20111205)
+        Client::V20120810.new.should be_a(Client::V20120810)
+      end
+
     end
   end
 end

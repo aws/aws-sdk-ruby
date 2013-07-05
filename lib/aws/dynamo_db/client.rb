@@ -44,7 +44,7 @@ module AWS
       autoload :V20111205, 'aws/dynamo_db/client/v20111205'
       autoload :V20120810, 'aws/dynamo_db/client/v20120810'
 
-      DEFAULT_API_VERSION = '2011-12-05'
+      API_VERSION = '2011-12-05'
 
       # client methods #
       # end client methods #
@@ -66,7 +66,7 @@ module AWS
         private
 
         def client_class(options)
-          api_version = options[:api_version] || const_get(:DEFAULT_API_VERSION)
+          api_version = options[:api_version] || const_get(:API_VERSION)
           const_get("V#{api_version.gsub(/-/, '')}")
         end
 
