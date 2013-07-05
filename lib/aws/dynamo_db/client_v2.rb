@@ -22,6 +22,7 @@ module AWS
       # @!method batch_get_item(options = {})
       # Calls the BatchGetItem API operation.
       # @param [Hash] options
+      #
       #   * `:request_items` - *required* - (Hash<String,Hash>) A map of one or
       #     more table names and, for each table, the corresponding primary
       #     keys for the items to retrieve. Each table name can be invoked only
@@ -50,7 +51,9 @@ module AWS
       #     * `:consistent_read` - (Boolean) Represents the consistency of a
       #       read operation. If set to `true` , then a strongly consistent
       #       read is used; otherwise, an eventually consistent read is used.
-      #   * `:return_consumed_capacity` - (String)
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -80,6 +83,7 @@ module AWS
       # @!method batch_write_item(options = {})
       # Calls the BatchWriteItem API operation.
       # @param [Hash] options
+      #
       #   * `:request_items` - *required* - (Hash<String,Array<Hash>>) A map of
       #     one or more table names and, for each table, a list of operations
       #     to be performed (DeleteRequest or PutRequest). Each element in the
@@ -126,8 +130,12 @@ module AWS
       #         * `:ss` - (Array<String>) Represents a String set data type
       #         * `:ns` - (Array<String>) Represents a Number set data type
       #         * `:bs` - (Array<String>) Represents a Binary set data type
-      #   * `:return_consumed_capacity` - (String)
-      #   * `:return_item_collection_metrics` - (String)
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
+      #   * `:return_item_collection_metrics` - (String) Valid values include:
+      #     * `SIZE`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -167,12 +175,16 @@ module AWS
       # @!method create_table(options = {})
       # Calls the CreateTable API operation.
       # @param [Hash] options
+      #
       #   * `:attribute_definitions` - *required* - (Array<Hash>) An array of
       #     attributes that describe the key schema for the table and indexes.
       #     * `:attribute_name` - *required* - (String) A name for the
       #       attribute.
       #     * `:attribute_type` - *required* - (String) The data type for the
-      #       attribute.
+      #       attribute. Valid values include:
+      #       * `S`
+      #       * `N`
+      #       * `B`
       #   * `:table_name` - *required* - (String) The name of the table to
       #     create.
       #   * `:key_schema` - *required* - (Array<Hash>) Specifies the attributes
@@ -191,6 +203,9 @@ module AWS
       #       a key attribute.
       #     * `:key_type` - *required* - (String) Represents the attribute
       #       data, consisting of the data type and the attribute value itself.
+      #       Valid values include:
+      #       * `HASH`
+      #       * `RANGE`
       #   * `:local_secondary_indexes` - (Array<Hash>) One or more secondary
       #     indexes (the maximum is five) to be created on the table. Each
       #     index is scoped to a given hash key value. There is a 10 gigabyte
@@ -210,14 +225,20 @@ module AWS
       #         of a key attribute.
       #       * `:key_type` - *required* - (String) Represents the attribute
       #         data, consisting of the data type and the attribute value
-      #         itself.
+      #         itself. Valid values include:
+      #         * `HASH`
+      #         * `RANGE`
       #     * `:projection` - *required* - (Hash)
       #       * `:projection_type` - (String) Represents the set of attributes
       #         that are projected into the index: KEYS_ONLY - Only the index
       #         and primary keys are projected into the index. INCLUDE - Only
       #         the specified table attributes are projected into the index.
       #         The list of projected attributes are in NonKeyAttributes. ALL -
-      #         All of the table attributes are projected into the index.
+      #         All of the table attributes are projected into the index. Valid
+      #         values include:
+      #         * `ALL`
+      #         * `KEYS_ONLY`
+      #         * `INCLUDE`
       #       * `:non_key_attributes` - (Array<String>) Represents the non-key
       #         attribute names which will be projected into the index. The
       #         total count of attributes specified in NonKeyAttributes, summed
@@ -270,6 +291,7 @@ module AWS
       # @!method delete_item(options = {})
       # Calls the DeleteItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table from
       #     which to delete the item.
       #   * `:key` - *required* - (Hash<String,Hash>) A map of attribute names
@@ -318,9 +340,18 @@ module AWS
       #     DeleteItem, the valid values are: NONE - If ReturnValues is not
       #     specified, or if its value is NONE, then nothing is returned. (This
       #     is the default for ReturnValues.) ALL_OLD - The content of the old
-      #     item is returned.
-      #   * `:return_consumed_capacity` - (String)
-      #   * `:return_item_collection_metrics` - (String)
+      #     item is returned. Valid values include:
+      #     * `NONE`
+      #     * `ALL_OLD`
+      #     * `UPDATED_OLD`
+      #     * `ALL_NEW`
+      #     * `UPDATED_NEW`
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
+      #   * `:return_item_collection_metrics` - (String) Valid values include:
+      #     * `SIZE`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -348,6 +379,7 @@ module AWS
       # @!method delete_table(options = {})
       # Calls the DeleteTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table to
       #     delete.
       # @return [Core::Response]
@@ -386,6 +418,7 @@ module AWS
       # @!method describe_table(options = {})
       # Calls the DescribeTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table to
       #     describe.
       # @return [Core::Response]
@@ -424,6 +457,7 @@ module AWS
       # @!method get_item(options = {})
       # Calls the GetItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table
       #     containing the requested item.
       #   * `:key` - *required* - (Hash<String,Hash>) A map of attribute names
@@ -437,7 +471,9 @@ module AWS
       #     * `:bs` - (Array<String>) Represents a Binary set data type
       #   * `:attributes_to_get` - (Array<String>)
       #   * `:consistent_read` - (Boolean)
-      #   * `:return_consumed_capacity` - (String)
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -456,6 +492,7 @@ module AWS
       # @!method list_tables(options = {})
       # Calls the ListTables API operation.
       # @param [Hash] options
+      #
       #   * `:exclusive_start_table_name` - (String) The name of the table that
       #     starts the list. If you already ran a ListTables operation and
       #     received a LastEvaluatedTableName value in the response, use that
@@ -471,6 +508,7 @@ module AWS
       # @!method put_item(options = {})
       # Calls the PutItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table to
       #     contain the item.
       #   * `:item` - *required* - (Hash<String,Hash>) A map of attribute
@@ -525,9 +563,18 @@ module AWS
       #     ReturnValues is not specified, or if its value is NONE, then
       #     nothing is returned. (This is the default for ReturnValues.)
       #     ALL_OLD - If PutItem overwrote an attribute name-value pair, then
-      #     the content of the old item is returned.
-      #   * `:return_consumed_capacity` - (String)
-      #   * `:return_item_collection_metrics` - (String)
+      #     the content of the old item is returned. Valid values include:
+      #     * `NONE`
+      #     * `ALL_OLD`
+      #     * `UPDATED_OLD`
+      #     * `ALL_NEW`
+      #     * `UPDATED_NEW`
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
+      #   * `:return_item_collection_metrics` - (String) Valid values include:
+      #     * `SIZE`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -555,6 +602,7 @@ module AWS
       # @!method query(options = {})
       # Calls the Query API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table
       #     containing the requested items.
       #   * `:index_name` - (String) The name of an index on the table to
@@ -581,7 +629,12 @@ module AWS
       #     when accessing an index. You cannot use both Select and
       #     AttributesToGet together in a single request, unless the value for
       #     Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to
-      #     specifying AttributesToGet without any value for Select.)
+      #     specifying AttributesToGet without any value for Select.) Valid
+      #     values include:
+      #     * `ALL_ATTRIBUTES`
+      #     * `ALL_PROJECTED_ATTRIBUTES`
+      #     * `SPECIFIC_ATTRIBUTES`
+      #     * `COUNT`
       #   * `:attributes_to_get` - (Array<String>) You cannot use both
       #     AttributesToGet and Select together in a Query request, unless the
       #     value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent
@@ -748,7 +801,20 @@ module AWS
       #       different type than the one specified in the request, the value
       #       does not match. For example, {"S":"6"} does not compare to
       #       {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
-      #       "1"]}
+      #       "1"]} Valid values include:
+      #       * `EQ`
+      #       * `NE`
+      #       * `IN`
+      #       * `LE`
+      #       * `LT`
+      #       * `GE`
+      #       * `GT`
+      #       * `BETWEEN`
+      #       * `NOT_NULL`
+      #       * `NULL`
+      #       * `CONTAINS`
+      #       * `NOT_CONTAINS`
+      #       * `BEGINS_WITH`
       #   * `:scan_index_forward` - (Boolean) Specifies ascending ( `true` ) or
       #     descending ( `false` ) traversal of the index. returns results
       #     reflecting the requested order determined by the range key. If the
@@ -765,7 +831,9 @@ module AWS
       #     * `:ss` - (Array<String>) Represents a String set data type
       #     * `:ns` - (Array<String>) Represents a Number set data type
       #     * `:bs` - (Array<String>) Represents a Binary set data type
-      #   * `:return_consumed_capacity` - (String)
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -792,6 +860,7 @@ module AWS
       # @!method scan(options = {})
       # Calls the Scan API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table
       #     containing the requested items.
       #   * `:attributes_to_get` - (Array<String>)
@@ -818,7 +887,11 @@ module AWS
       #     index. You cannot use both Select and AttributesToGet together in a
       #     single request, unless the value for Select is SPECIFIC_ATTRIBUTES.
       #     (This usage is equivalent to specifying AttributesToGet without any
-      #     value for Select.)
+      #     value for Select.) Valid values include:
+      #     * `ALL_ATTRIBUTES`
+      #     * `ALL_PROJECTED_ATTRIBUTES`
+      #     * `SPECIFIC_ATTRIBUTES`
+      #     * `COUNT`
       #   * `:scan_filter` - (Hash<String,Hash>) Evaluates the scan results and
       #     returns only the desired values. Multiple conditions are treated as
       #     "AND" operations: all conditions must be met to be included in the
@@ -1000,7 +1073,20 @@ module AWS
       #       different type than the one specified in the request, the value
       #       does not match. For example, {"S":"6"} does not compare to
       #       {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
-      #       "1"]}
+      #       "1"]} Valid values include:
+      #       * `EQ`
+      #       * `NE`
+      #       * `IN`
+      #       * `LE`
+      #       * `LT`
+      #       * `GE`
+      #       * `GT`
+      #       * `BETWEEN`
+      #       * `NOT_NULL`
+      #       * `NULL`
+      #       * `CONTAINS`
+      #       * `NOT_CONTAINS`
+      #       * `BEGINS_WITH`
       #   * `:exclusive_start_key` - (Hash<String,Hash>) In a parallel scan, a
       #     Scan request that includes ExclusiveStartKey must specify the same
       #     segment whose previous Scan returned the corresponding value of
@@ -1011,7 +1097,9 @@ module AWS
       #     * `:ss` - (Array<String>) Represents a String set data type
       #     * `:ns` - (Array<String>) Represents a Number set data type
       #     * `:bs` - (Array<String>) Represents a Binary set data type
-      #   * `:return_consumed_capacity` - (String)
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
       #   * `:total_segments` - (Integer) For a parallel Scan request,
       #     TotalSegments represents the total number of segments into which
       #     the Scan operation will be divided. The value of TotalSegments
@@ -1060,6 +1148,7 @@ module AWS
       # @!method update_item(options = {})
       # Calls the UpdateItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table
       #     containing the item to update.
       #   * `:key` - *required* - (Hash<String,Hash>) The primary key that
@@ -1187,7 +1276,10 @@ module AWS
       #       delete. ADD - creates an item with the supplied primary key and
       #       number (or set of numbers) for the attribute value. The only data
       #       types allowed are number and number set; no other data types can
-      #       be specified.
+      #       be specified. Valid values include:
+      #       * `ADD`
+      #       * `PUT`
+      #       * `DELETE`
       #   * `:expected` - (Hash<String,Hash>) A map of attribute/condition
       #     pairs. This is the conditional block for the UpdateItem operation.
       #     All the conditions must be met for the operation to succeed.
@@ -1230,9 +1322,18 @@ module AWS
       #     versions of only the updated attributes are returned. ALL_NEW - All
       #     of the attributes of the new version of the item are returned.
       #     UPDATED_NEW - The new versions of only the updated attributes are
-      #     returned.
-      #   * `:return_consumed_capacity` - (String)
-      #   * `:return_item_collection_metrics` - (String)
+      #     returned. Valid values include:
+      #     * `NONE`
+      #     * `ALL_OLD`
+      #     * `UPDATED_OLD`
+      #     * `ALL_NEW`
+      #     * `UPDATED_NEW`
+      #   * `:return_consumed_capacity` - (String) Valid values include:
+      #     * `TOTAL`
+      #     * `NONE`
+      #   * `:return_item_collection_metrics` - (String) Valid values include:
+      #     * `SIZE`
+      #     * `NONE`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1260,6 +1361,7 @@ module AWS
       # @!method update_table(options = {})
       # Calls the UpdateTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table to be
       #     updated.
       #   * `:provisioned_throughput` - *required* - (Hash)
