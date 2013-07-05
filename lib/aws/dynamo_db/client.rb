@@ -22,6 +22,7 @@ module AWS
       # @!method batch_get_item(options = {})
       # Calls the BatchGetItem API operation.
       # @param [Hash] options
+      #
       #   * `:request_items` - *required* - (Hash<String,Hash>)
       #     * `:keys` - *required* - (Array<Hash>)
       #       * `:hash_key_element` - *required* - (Hash) A hash key element is
@@ -94,6 +95,7 @@ module AWS
       # @!method batch_write_item(options = {})
       # Calls the BatchWriteItem API operation.
       # @param [Hash] options
+      #
       #   * `:request_items` - *required* - (Hash<String,Array<Hash>>) A map of
       #     table name to list-of-write-requests. Used as input to the
       #     BatchWriteItem API call
@@ -182,6 +184,7 @@ module AWS
       # @!method create_table(options = {})
       # Calls the CreateTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table you
       #     want to create. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
@@ -248,6 +251,7 @@ module AWS
       # @!method delete_item(options = {})
       # Calls the DeleteItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to delete an item. Allowed characters are a-z, A-Z,
       #     0-9, _ (underscore), - (hyphen) and . (period).
@@ -324,6 +328,7 @@ module AWS
       # @!method delete_table(options = {})
       # Calls the DeleteTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table you
       #     want to delete. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
@@ -354,6 +359,7 @@ module AWS
       # @!method describe_table(options = {})
       # Calls the DescribeTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table you
       #     want to describe. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
@@ -384,6 +390,7 @@ module AWS
       # @!method get_item(options = {})
       # Calls the GetItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to get an item. Allowed characters are a-z, A-Z,
       #     0-9, _ (underscore), - (hyphen) and . (period).
@@ -439,6 +446,7 @@ module AWS
       # @!method list_tables(options = {})
       # Calls the ListTables API operation.
       # @param [Hash] options
+      #
       #   * `:exclusive_start_table_name` - (String) The name of the table that
       #     starts the list. If you already ran a ListTables operation and
       #     recieved a LastEvaluatedTableName value in the response, use that
@@ -454,6 +462,7 @@ module AWS
       # @!method put_item(options = {})
       # Calls the PutItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to put an item. Allowed characters are a-z, A-Z,
       #     0-9, _ (underscore), - (hyphen) and . (period).
@@ -509,6 +518,7 @@ module AWS
       # @!method query(options = {})
       # Calls the Query API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to query. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
@@ -647,6 +657,7 @@ module AWS
       # @!method scan(options = {})
       # Calls the Scan API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to scan. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
@@ -766,6 +777,7 @@ module AWS
       # @!method update_item(options = {})
       # Calls the UpdateItem API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table in
       #     which you want to update an item. Allowed characters are a-z, A-Z,
       #     0-9, _ (underscore), - (hyphen) and . (period).
@@ -860,6 +872,7 @@ module AWS
       # @!method update_table(options = {})
       # Calls the UpdateTable API operation.
       # @param [Hash] options
+      #
       #   * `:table_name` - *required* - (String) The name of the table you
       #     want to update. Allowed characters are a-z, A-Z, 0-9, _
       #     (underscore), - (hyphen) and . (period).
