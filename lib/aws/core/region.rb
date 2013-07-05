@@ -22,18 +22,20 @@ module AWS
     #   aws.dynamo_db.tables.map(&:name)
     #   aws.ec2.instances.map(&:id)
     #
+    # Regions provide helper methods for each service.
+    #
     # @attr_reader [AutoScaling] auto_scaling
     # @attr_reader [CloudFormation] cloud_formation
     # @attr_reader [CloudFront] cloud_front
     # @attr_reader [CloudSearch] cloud_search
     # @attr_reader [CloudWatch] cloud_watch
-    # @attr_reader [DynamoDB] dynamo_db
     # @attr_reader [DataPipeline] data_pipeline
     # @attr_reader [DirectConnect] direct_connect
+    # @attr_reader [DynamoDB] dynamo_db
     # @attr_reader [EC2] ec2
-    # @attr_reader [ElastiCache] elasticache
     # @attr_reader [ElasticBeanstalk] elastic_beanstalk
     # @attr_reader [ElasticTranscoder] elastic_transcoder
+    # @attr_reader [ElastiCache] elasticache
     # @attr_reader [ELB] elb
     # @attr_reader [EMR] emr
     # @attr_reader [Glacier] glacier
@@ -44,13 +46,14 @@ module AWS
     # @attr_reader [Redshift] redshift
     # @attr_reader [Route53] route_53
     # @attr_reader [S3] s3
+    # @attr_reader [SimpleEmailService] ses
     # @attr_reader [SimpleDB] simple_db
-    # @attr_reader [SimpleEmailService] simple_email_service
-    # @attr_reader [SimpleWorkflow] simple_workflow
     # @attr_reader [SNS] sns
     # @attr_reader [SQS] sqs
     # @attr_reader [StorageGateway] storage_gateway
     # @attr_reader [STS] sts
+    # @attr_reader [Support] support
+    # @attr_reader [SimpleWorkflow] swf
     #
     class Region
 
@@ -68,10 +71,11 @@ module AWS
       # @return [Configuration]
       attr_reader :config
 
-      AWS::SERVICES.each_pair do |name,service|
-        define_method(service[:ruby_name]) do
-          AWS.const_get(name).new(:config => config)
+      AWS::SERVICES.values.each do |svc|
+        define_method(svc.method_name) do
+          AWS.const_get(svc.class_name).new(:config => config)
         end
+        alias_method(svc.method_alias, svc.method_name) if svc.method_alias
       end
 
     end

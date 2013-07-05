@@ -21,6 +21,10 @@ module AWS
 
       before(:each) do
 
+        AWS::SERVICES['Dummy'] = AWS::SvcDetails.new('Dummy',
+          :full_name => 'Amazon Dummy', # like a crash test dummy
+          :method_name => :dummy)
+
         module ::AWS
           class Dummy
 
@@ -63,6 +67,25 @@ module AWS
       let(:config) { stub_config.with(config_options) }
 
       let(:client) { client_class.new(:config => config) }
+
+      context 'config' do
+
+        it 'merges service specific :endpopint option' do
+          AWS.config(:dummy => { :endpoint => 'abc.xyz.com' })
+          AWS::Dummy::Client.new.config.dummy_endpoint.should eq('abc.xyz.com')
+        end
+
+        it 'merges service specific :port option' do
+          AWS.config(:dummy => { :port => 123 })
+          AWS::Dummy::Client.new.config.dummy_port.should eq(123)
+        end
+
+        it 'merges service specific :region option' do
+          AWS.config(:dummy => { :region => 'REGION' })
+          AWS::Dummy::Client.new.config.dummy_region.should eq('REGION')
+        end
+
+      end
 
       context 'logging' do
 
