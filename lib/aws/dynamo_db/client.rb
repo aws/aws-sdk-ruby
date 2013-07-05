@@ -36,6 +36,13 @@ module AWS
     #     ddb = AWS::DynamoDB::Client.new(:api_version => '2011-12-05')
     #     ddb = AWS::DynamoDB::Client.new(:api_version => '2012-08-10')
     #
+    # You can specify a global default API version using AWS.config:
+    #
+    #     AWS.config(:dynamo_db => { :api_version => '2012-08-10' })
+    #
+    #     AWS::DynamoDB::Client.new
+    #     #=> AWS::DynamoDB::Client::V20120810
+    #
     # @see V20111205
     # @see V20120810
     #
@@ -45,9 +52,6 @@ module AWS
       autoload :V20120810, 'aws/dynamo_db/client/v20120810'
 
       API_VERSION = '2011-12-05'
-
-      # client methods #
-      # end client methods #
 
       # @api private
       def inspect
@@ -66,8 +70,22 @@ module AWS
         private
 
         def client_class(options)
-          api_version = options[:api_version] || const_get(:API_VERSION)
-          const_get("V#{api_version.gsub(/-/, '')}")
+          if name =~ /Client::V\d+$/
+            self
+          else
+            const_get("V#{client_api_version(options).gsub(/-/, '')}")
+          end
+        end
+
+        def client_api_version(options)
+          api_version = options[:api_version]
+          api_version ||= configured_version
+          api_version || API_VERSION
+        end
+
+        def configured_version
+          svc_opt = AWS::SERVICES[name.split('::')[1]].method_name
+          AWS.config.send(svc_opt)[:api_version]
         end
 
       end
