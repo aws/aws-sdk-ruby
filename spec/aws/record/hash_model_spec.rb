@@ -22,6 +22,7 @@ module AWS
       it "should contain an assignable hash key" do
         model = Class.new(AWS::Record::HashModel)
         model.string_attr :hashname, :hash_key => true
+        model.string_attr :foo
         model.hash_key.should == "hashname"
 
         

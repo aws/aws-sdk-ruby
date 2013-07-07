@@ -84,9 +84,9 @@ module AWS
 
         # @return [DynamoDB::Table]
         # @api private
-        def dynamo_db_table shard_name = nil, options = {}
+        def dynamo_db_table shard_name = nil
           hash_key = :id
-          hash_key = options[:hash_key] unless options[:hash_key].nil?
+          hash_key = self.hash_key unless self.hash_key.nil?
           table = dynamo_db.tables[dynamo_db_table_name(shard_name)]
           table.hash_key = [hash_key, :string]
           table
@@ -110,7 +110,7 @@ module AWS
       end
       
       def self.hash_key= key
-        @hash_key = key
+        @hash_key = key unless !@hash_key.nil? and @hash_key != :id
       end
       
       def self.add_attribute attribute
@@ -130,7 +130,7 @@ module AWS
       #   persisted to or will be persisted to.
       private
       def dynamo_db_table
-        self.class.dynamo_db_table(shard, self.hash_key)
+        self.class.dynamo_db_table(shard)
       end
 
       private
