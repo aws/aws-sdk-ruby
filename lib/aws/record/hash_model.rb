@@ -20,8 +20,11 @@ module AWS
       require 'aws/record/hash_model/scope'
 
       extend AbstractBase
+      
+      
 
       class << self
+        
 
         # Creates the DynamoDB table that is configured for this class.
         #
@@ -69,7 +72,7 @@ module AWS
           table_name = dynamo_db_table_name(options[:shard_name])
 
           create_opts = {}
-          create_opts[:hash_key] = { :id => :string }
+          create_opts[:hash_key] = {:id => :string }
 
           dynamo_db.tables.create(
             table_name,
@@ -81,9 +84,11 @@ module AWS
 
         # @return [DynamoDB::Table]
         # @api private
-        def dynamo_db_table shard_name = nil
+        def dynamo_db_table shard_name = nil, options = {}
+          hash_key = :id
+          hash_key = options[:hash_key] unless options[:hash_key].nil?
           table = dynamo_db.tables[dynamo_db_table_name(shard_name)]
-          table.hash_key = [:id, :string]
+          table.hash_key = [hash_key, :string]
           table
         end
 
@@ -98,6 +103,20 @@ module AWS
         end
 
       end
+      
+      def self.hash_key
+        return @hash_key unless @hash_key.nil?
+        :id
+      end
+      
+      def self.hash_key= key
+        @hash_key = key
+      end
+      
+      def self.add_attribute attribute
+        self.hash_key = attribute.options[:hash_key] ? attribute.name : :id
+        super attribute
+      end
 
       # @return [DynamoDB::Item] Returns a reference to the item as stored in
       #   simple db.
@@ -111,7 +130,7 @@ module AWS
       #   persisted to or will be persisted to.
       private
       def dynamo_db_table
-        self.class.dynamo_db_table(shard)
+        self.class.dynamo_db_table(shard, self.hash_key)
       end
 
       private
