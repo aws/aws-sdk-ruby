@@ -18,6 +18,14 @@ module AWS
     describe Model do
 
       it_should_behave_like("an aws record base class", AWS::Record::HashModel)
+      
+      it "should contain an assignable hash key" do
+        model = Class.new(AWS::Record::HashModel)
+        model.string_attr :hashname, :hash_key => true
+        model.hash_key.should == "hashname"
+
+        
+      end
 
     end
   end
