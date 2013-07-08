@@ -374,7 +374,7 @@ module AWS
       # @api private
       def refine(opts)
         self.class.new(bucket, {
-                         field_name(:conditions) => conditions,
+                         :conditions => conditions,
                          :key => key,
                          :metadata => metadata,
                          :secure => secure?,
