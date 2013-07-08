@@ -22,6 +22,23 @@ describe AWS do
 
     context 'options' do
 
+      AWS::SERVICES.values.map(&:method_name).each do |option|
+
+        context(option.inspect) do
+
+          it 'defaults to an empty hash' do
+            config.send(option).should eq({})
+          end
+
+          it 'can be changed' do
+            cfg = config.with(option => { 'abc' => 'xyz' })
+            cfg.send(option).should eq({'abc' => 'xyz'})
+          end
+
+        end
+
+      end
+
       context ':access_key_id' do
 
         it 'defaults to nil' do
