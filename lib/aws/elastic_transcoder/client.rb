@@ -40,7 +40,7 @@ module AWS
       # @param [Hash] options
       #
       #   * `:id` - *required* - (String) The identifier of the job that you
-      #     want to delete. To get a list of the jobs (including their jobId)
+      #     want to cancel. To get a list of the jobs (including their jobId)
       #     that have a status of Submitted, use the ListJobsByStatus API
       #     action.
       # @return [Core::Response]
@@ -136,6 +136,25 @@ module AWS
       #       PresetId for which the value of Container is ts (MPEG-TS),
       #       SegmentDuration is the duration of each .ts file in seconds. The
       #       range of valid values is 1 to 60 seconds.
+      #     * `:watermarks` - (Array<Hash>) Information about the watermarks
+      #       that you want Elastic Transcoder to add to the video during
+      #       transcoding. You can specify up to four watermarks for each
+      #       output. Settings for each watermark must be defined in the preset
+      #       for the current output.
+      #       * `:preset_watermark_id` - (String) The ID of the watermark
+      #         settings that Elastic Transcoder uses to add watermarks to the
+      #         video during transcoding. The settings are in the preset
+      #         specified by Preset for the current output. In that preset, the
+      #         value of Watermarks Id tells Elastic Transcoder which settings
+      #         to use.
+      #       * `:input_key` - (String) The name of the .png or .jpg file that
+      #         you want to use for the watermark. To determine which Amazon S3
+      #         bucket contains the specified file, Elastic Transcoder checks
+      #         the pipeline specified by Pipeline; the Input Bucket object in
+      #         that pipeline identifies the bucket. If the file name includes
+      #         a prefix, for example, logos/128x64.png, include the prefix in
+      #         the key. If the file isn't in the specified bucket, Elastic
+      #         Transcoder returns an error.
       #   * `:outputs` - (Array<Hash>) A section of the request body that
       #     provides information about the transcoded (target) files. We
       #     recommend that you use the Outputs syntax instead of the Output
@@ -182,6 +201,25 @@ module AWS
       #       PresetId for which the value of Container is ts (MPEG-TS),
       #       SegmentDuration is the duration of each .ts file in seconds. The
       #       range of valid values is 1 to 60 seconds.
+      #     * `:watermarks` - (Array<Hash>) Information about the watermarks
+      #       that you want Elastic Transcoder to add to the video during
+      #       transcoding. You can specify up to four watermarks for each
+      #       output. Settings for each watermark must be defined in the preset
+      #       for the current output.
+      #       * `:preset_watermark_id` - (String) The ID of the watermark
+      #         settings that Elastic Transcoder uses to add watermarks to the
+      #         video during transcoding. The settings are in the preset
+      #         specified by Preset for the current output. In that preset, the
+      #         value of Watermarks Id tells Elastic Transcoder which settings
+      #         to use.
+      #       * `:input_key` - (String) The name of the .png or .jpg file that
+      #         you want to use for the watermark. To determine which Amazon S3
+      #         bucket contains the specified file, Elastic Transcoder checks
+      #         the pipeline specified by Pipeline; the Input Bucket object in
+      #         that pipeline identifies the bucket. If the file name includes
+      #         a prefix, for example, logos/128x64.png, include the prefix in
+      #         the key. If the file isn't in the specified bucket, Elastic
+      #         Transcoder returns an error.
       #   * `:output_key_prefix` - (String) The value, if any, that you want
       #     Elastic Transcoder to prepend to the names of all files that this
       #     job creates, including output files, thumbnails, and playlists.
@@ -230,6 +268,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:outputs` - (Array<Hash>)
       #       * `:id` - (String)
       #       * `:key` - (String)
@@ -242,6 +283,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:output_key_prefix` - (String)
       #     * `:playlists` - (Array<Hash>)
       #       * `:name` - (String)
@@ -356,12 +400,62 @@ module AWS
       #     Amazon S3 storage class, Standard or ReducedRedundancy, that you
       #     want Elastic Transcoder to assign to the video files and playlists
       #     that it stores in your Amazon S3 bucket.
-      #     * `:bucket` - (String)
-      #     * `:storage_class` - (String)
-      #     * `:permissions` - (Array<Hash>)
-      #       * `:grantee_type` - (String)
-      #       * `:grantee` - (String)
-      #       * `:access` - (Array<String>)
+      #     * `:bucket` - (String) The Amazon S3 bucket in which you want
+      #       Elastic Transcoder to save the transcoded files. Specify this
+      #       value when all of the following are `true` : You want to save
+      #       transcoded files, thumbnails (if any), and playlists (if any)
+      #       together in one bucket. You do not want to specify the users or
+      #       groups who have access to the transcoded files, thumbnails, and
+      #       playlists. You do not want to specify the permissions that
+      #       Elastic Transcoder grants to the files. You want to associate the
+      #       transcoded files and thumbnails with the Amazon S3 Standard
+      #       storage class. If you want to save transcoded files and playlists
+      #       in one bucket and thumbnails in another bucket, specify which
+      #       users can access the transcoded files or the permissions the
+      #       users have, or change the Amazon S3 storage class, omit
+      #       OutputBucket and specify values for ContentConfig and
+      #       ThumbnailConfig instead.
+      #     * `:storage_class` - (String) The Amazon S3 storage class, Standard
+      #       or ReducedRedundancy, that you want Elastic Transcoder to assign
+      #       to the video files and playlists that it stores in your Amazon S3
+      #       bucket.
+      #     * `:permissions` - (Array<Hash>) Optional. The Permissions object
+      #       specifies which users and/or predefined Amazon S3 groups you want
+      #       to have access to transcoded files and playlists, and the type of
+      #       access you want them to have. You can grant permissions to a
+      #       maximum of 30 users and/or predefined Amazon S3 groups. If you
+      #       include Permissions, Elastic Transcoder grants only the
+      #       permissions that you specify. It does not grant full permissions
+      #       to the owner of the role specified by Role. If you want that user
+      #       to have full control, you must explicitly grant full control to
+      #       the user. If you omit Permissions, Elastic Transcoder grants full
+      #       control over the transcoded files and playlists to the owner of
+      #       the role specified by Role, and grants no other permissions to
+      #       any other user or group.
+      #       * `:grantee_type` - (String) The type of value that appears in
+      #         the Grantee object: Canonical: Either the canonical user ID for
+      #         an AWS account or an origin access identity for an Amazon
+      #         CloudFront distribution. A canonical user ID is not the same as
+      #         an AWS account number. Email: The registered email address of
+      #         an AWS account. Group: One of the following predefined Amazon
+      #         S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+      #       * `:grantee` - (String) The AWS user or group that you want to
+      #         have access to transcoded files and playlists. To identify the
+      #         user or group, you can specify the canonical user ID for an AWS
+      #         account, an origin access identity for a CloudFront
+      #         distribution, the registered email address of an AWS account,
+      #         or a predefined Amazon S3 group.
+      #       * `:access` - (Array<String>) The permission that you want to
+      #         give to the AWS user that is listed in Grantee. Valid values
+      #         include: READ: The grantee can read the thumbnails and metadata
+      #         for thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. READ_ACP: The grantee can read the object ACL for
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. WRITE_ACP: The grantee can write the ACL for the
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and
+      #         WRITE_ACP permissions for the thumbnails that Elastic
+      #         Transcoder adds to the Amazon S3 bucket.
       #   * `:thumbnail_config` - (Hash) The ThumbnailConfig object specifies
       #     several values, including the Amazon S3 bucket in which you want
       #     Elastic Transcoder to save thumbnail files, which users you want to
@@ -403,12 +497,62 @@ module AWS
       #     StorageClass: The Amazon S3 storage class, Standard or
       #     ReducedRedundancy, that you want Elastic Transcoder to assign to
       #     the thumbnails that it stores in your Amazon S3 bucket.
-      #     * `:bucket` - (String)
-      #     * `:storage_class` - (String)
-      #     * `:permissions` - (Array<Hash>)
-      #       * `:grantee_type` - (String)
-      #       * `:grantee` - (String)
-      #       * `:access` - (Array<String>)
+      #     * `:bucket` - (String) The Amazon S3 bucket in which you want
+      #       Elastic Transcoder to save the transcoded files. Specify this
+      #       value when all of the following are `true` : You want to save
+      #       transcoded files, thumbnails (if any), and playlists (if any)
+      #       together in one bucket. You do not want to specify the users or
+      #       groups who have access to the transcoded files, thumbnails, and
+      #       playlists. You do not want to specify the permissions that
+      #       Elastic Transcoder grants to the files. You want to associate the
+      #       transcoded files and thumbnails with the Amazon S3 Standard
+      #       storage class. If you want to save transcoded files and playlists
+      #       in one bucket and thumbnails in another bucket, specify which
+      #       users can access the transcoded files or the permissions the
+      #       users have, or change the Amazon S3 storage class, omit
+      #       OutputBucket and specify values for ContentConfig and
+      #       ThumbnailConfig instead.
+      #     * `:storage_class` - (String) The Amazon S3 storage class, Standard
+      #       or ReducedRedundancy, that you want Elastic Transcoder to assign
+      #       to the video files and playlists that it stores in your Amazon S3
+      #       bucket.
+      #     * `:permissions` - (Array<Hash>) Optional. The Permissions object
+      #       specifies which users and/or predefined Amazon S3 groups you want
+      #       to have access to transcoded files and playlists, and the type of
+      #       access you want them to have. You can grant permissions to a
+      #       maximum of 30 users and/or predefined Amazon S3 groups. If you
+      #       include Permissions, Elastic Transcoder grants only the
+      #       permissions that you specify. It does not grant full permissions
+      #       to the owner of the role specified by Role. If you want that user
+      #       to have full control, you must explicitly grant full control to
+      #       the user. If you omit Permissions, Elastic Transcoder grants full
+      #       control over the transcoded files and playlists to the owner of
+      #       the role specified by Role, and grants no other permissions to
+      #       any other user or group.
+      #       * `:grantee_type` - (String) The type of value that appears in
+      #         the Grantee object: Canonical: Either the canonical user ID for
+      #         an AWS account or an origin access identity for an Amazon
+      #         CloudFront distribution. A canonical user ID is not the same as
+      #         an AWS account number. Email: The registered email address of
+      #         an AWS account. Group: One of the following predefined Amazon
+      #         S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+      #       * `:grantee` - (String) The AWS user or group that you want to
+      #         have access to transcoded files and playlists. To identify the
+      #         user or group, you can specify the canonical user ID for an AWS
+      #         account, an origin access identity for a CloudFront
+      #         distribution, the registered email address of an AWS account,
+      #         or a predefined Amazon S3 group.
+      #       * `:access` - (Array<String>) The permission that you want to
+      #         give to the AWS user that is listed in Grantee. Valid values
+      #         include: READ: The grantee can read the thumbnails and metadata
+      #         for thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. READ_ACP: The grantee can read the object ACL for
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. WRITE_ACP: The grantee can write the ACL for the
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and
+      #         WRITE_ACP permissions for the thumbnails that Elastic
+      #         Transcoder adds to the Amazon S3 bucket.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -462,33 +606,40 @@ module AWS
       #       videoconferencing and for mobile applications. main: The profile
       #       used for standard-definition digital TV broadcasts. high: The
       #       profile used for high-definition digital TV broadcasts and for
-      #       Blu-ray discs. Level The H.264 level that you want to use for the
-      #       output file. Elastic Transcoder supports the following levels: 1,
-      #       1b, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1
-      #       MaxReferenceFrames The maximum number of previously decoded
-      #       frames to use as a reference for decoding future frames. Valid
-      #       values are integers 0 through 16, but we recommend that you not
-      #       use a value greater than the following: Min(Floor(Maximum decoded
-      #       picture buffer in macroblocks * 256 / (Width in pixels * Height
-      #       in pixels)), 16) where Width in pixels and Height in pixels
-      #       represent the resolution of the output video and Maximum decoded
-      #       picture buffer in macroblocks depends on the value of the Level
-      #       object. (A macroblock is a block of pixels measuring 16x16.) Note
-      #       that the calculation for maximum decoded picture buffer, which is
-      #       similar to the calculation for maximum reference frames, uses
-      #       macroblocks instead of pixels for the width and height of the
-      #       video. To determine the value of maximum decoded picture buffer
-      #       in macroblocks, see the following list (Level - Maximum decoded
-      #       picture buffer): 1 - 396 1b - 396 1.1 - 900 1.2 - 2376 1.3 - 2376
-      #       2 - 2376 2.1 - 4752 2.2 - 8100 3 - 8100 3.1 - 18000 3.2 - 20480 4
-      #       - 32768 4.1 - 32768
+      #       Blu-ray discs. Level (H.264 Only) The H.264 level that you want
+      #       to use for the output file. Elastic Transcoder supports the
+      #       following levels: 1, 1b, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2,
+      #       4, 4.1 MaxReferenceFrames (H.264 Only) Applicable only when the
+      #       value of Video:Codec is H.264. The maximum number of previously
+      #       decoded frames to use as a reference for decoding future frames.
+      #       Valid values are integers 0 through 16, but we recommend that you
+      #       not use a value greater than the following: Min(Floor(Maximum
+      #       decoded picture buffer in macroblocks * 256 / (Width in pixels *
+      #       Height in pixels)), 16) where Width in pixels and Height in
+      #       pixels represent either MaxWidth and MaxHeight, or Resolution.
+      #       Maximum decoded picture buffer in macroblocks depends on the
+      #       value of the Level object. See the list below. (A macroblock is a
+      #       block of pixels measuring 16x16.) 1 - 396 1b - 396 1.1 - 900 1.2
+      #       - 2376 1.3 - 2376 2 - 2376 2.1 - 4752 2.2 - 8100 3 - 8100 3.1 -
+      #       18000 3.2 - 20480 4 - 32768 4.1 - 32768 MaxBitRate The maximum
+      #       number of bits per second in a video buffer; the size of the
+      #       buffer is specified by BufferSize. Specify a value between 16 and
+      #       62,500. You can reduce the bandwidth required to stream a video
+      #       by reducing the maximum bit rate, but this also reduces the
+      #       quality of the video. BufferSize The maximum number of bits in
+      #       any x seconds of the output video. This window is commonly 10
+      #       seconds, the standard segment duration when you’re using MPEG-TS
+      #       for the container type of the output video. Specify an integer
+      #       greater than 0. If you specify MaxBitRate and omit BufferSize,
+      #       Elastic Transcoder sets BufferSize to 10 times the value of
+      #       MaxBitRate.
       #     * `:keyframes_max_dist` - (String) The maximum number of frames
       #       between key frames. Key frames are fully encoded frames; the
       #       frames between key frames are encoded based, in part, on the
       #       content of the key frames. The value is an integer formatted as a
-      #       string; valid values are between 1 and 100000, inclusive. A
-      #       higher value results in higher compression but may also
-      #       discernibly decrease video quality.
+      #       string; valid values are between 1 (every frame is a key frame)
+      #       and 100000, inclusive. A higher value results in higher
+      #       compression but may also discernibly decrease video quality.
       #     * `:fixed_gop` - (String) Whether to use a fixed value for
       #       FixedGOP. Valid values are `true` and `false` : `true` : Elastic
       #       Transcoder uses the value of KeyframesMaxDist for the distance
@@ -523,6 +674,13 @@ module AWS
       #       1.2 - 1536000 1.3 - 3041280 2 - 3041280 2.1 - 5068800 2.2 -
       #       5184000 3 - 10368000 3.1 - 27648000 3.2 - 55296000 4 - 62914560
       #       4.1 - 62914560
+      #     * `:max_frame_rate` - (String) If you specify auto for FrameRate,
+      #       Elastic Transcoder uses the frame rate of the input video for the
+      #       frame rate of the output video. Specify the maximum frame rate
+      #       that you want Elastic Transcoder to use when the frame rate of
+      #       the input video is greater than the desired maximum frame rate of
+      #       the output video. Valid values include: 10, 15, 23.97, 24, 25,
+      #       29.97, 30, 60.
       #     * `:resolution` - (String) To better control resolution and aspect
       #       ratio of output videos, we recommend that you use the values
       #       MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy, and
@@ -600,6 +758,125 @@ module AWS
       #       and/or left and right sides of the output video to make the total
       #       size of the output video match the values that you specified for
       #       MaxWidth and MaxHeight.
+      #     * `:watermarks` - (Array<Hash>) Settings for the size, location,
+      #       and opacity of graphics that you want Elastic Transcoder to
+      #       overlay over videos that are transcoded using this preset. You
+      #       can specify settings for up to four watermarks. Watermarks appear
+      #       in the specified size and location, and with the specified
+      #       opacity for the duration of the transcoded video. Watermarks can
+      #       be in .png or .jpg format. If you want to display a watermark
+      #       that is not rectangular, use the .png format, which supports
+      #       transparency. When you create a job that uses this preset, you
+      #       specify the .png or .jpg graphics that you want Elastic
+      #       Transcoder to include in the transcoded videos. You can specify
+      #       fewer graphics in the job than you specify watermark settings in
+      #       the preset, which allows you to use the same preset for up to
+      #       four watermarks that have different dimensions.
+      #       * `:id` - (String) A unique identifier for the settings for one
+      #         watermark. The value of Id can be up to 40 characters long.
+      #       * `:max_width` - (String) The maximum width of the watermark in
+      #         one of the following formats: number of pixels (px): The
+      #         minimum value is 16 pixels, and the maximum value is the value
+      #         of MaxWidth. integer percentage (%): The range of valid values
+      #         is 0 to 100. Use the value of Target to specify whether you
+      #         want Elastic Transcoder to include the black bars that are
+      #         added by Elastic Transcoder, if any, in the calculation. If you
+      #         specify the value in pixels, it must be less than or equal to
+      #         the value of MaxWidth.
+      #       * `:max_height` - (String) The maximum height of the watermark in
+      #         one of the following formats: number of pixels (px): The
+      #         minimum value is 16 pixels, and the maximum value is the value
+      #         of MaxHeight. integer percentage (%): The range of valid values
+      #         is 0 to 100. Use the value of Target to specify whether you
+      #         want Elastic Transcoder to include the black bars that are
+      #         added by Elastic Transcoder, if any, in the calculation. If you
+      #         specify the value in pixels, it must be less than or equal to
+      #         the value of MaxHeight.
+      #       * `:sizing_policy` - (String) A value that controls scaling of
+      #         the watermark: Fit: Elastic Transcoder scales the watermark so
+      #         it matches the value that you specified in either MaxWidth or
+      #         MaxHeight without exceeding the other value. Stretch: Elastic
+      #         Transcoder stretches the watermark to match the values that you
+      #         specified for MaxWidth and MaxHeight. If the relative
+      #         proportions of the watermark and the values of MaxWidth and
+      #         MaxHeight are different, the watermark will be distorted.
+      #         ShrinkToFit: Elastic Transcoder scales the watermark down so
+      #         that its dimensions match the values that you specified for at
+      #         least one of MaxWidth and MaxHeight without exceeding either
+      #         value. If you specify this option, Elastic Transcoder does not
+      #         scale the watermark up.
+      #       * `:horizontal_align` - (String) The horizontal position of the
+      #         watermark unless you specify a non-zero value for
+      #         HorizontalOffset: Left: The left edge of the watermark is
+      #         aligned with the left border of the video. Right: The right
+      #         edge of the watermark is aligned with the right border of the
+      #         video. Center: The watermark is centered between the left and
+      #         right borders.
+      #       * `:horizontal_offset` - (String) The amount by which you want
+      #         the horizontal position of the watermark to be offset from the
+      #         position specified by HorizontalAlign: number of pixels (px):
+      #         The minimum value is 0 pixels, and the maximum value is the
+      #         value of MaxWidth. integer percentage (%): The range of valid
+      #         values is 0 to 100. For example, if you specify Left for
+      #         HorizontalAlign and 5px for HorizontalOffset, the left side of
+      #         the watermark appears 5 pixels from the left border of the
+      #         output video. HorizontalOffset is only valid when the value of
+      #         HorizontalAlign is Left or Right. If you specify an offset that
+      #         causes the watermark to extend beyond the left or right border
+      #         and Elastic Transcoder has not added black bars, the watermark
+      #         is cropped. If Elastic Transcoder has added black bars, the
+      #         watermark extends into the black bars. If the watermark extends
+      #         beyond the black bars, it is cropped. Use the value of Target
+      #         to specify whether you want to include the black bars that are
+      #         added by Elastic Transcoder, if any, in the offset calculation.
+      #       * `:vertical_align` - (String) The vertical position of the
+      #         watermark unless you specify a non-zero value for
+      #         VerticalOffset: Top: The top edge of the watermark is aligned
+      #         with the top border of the video. Bottom: The bottom edge of
+      #         the watermark is aligned with the bottom border of the video.
+      #         Center: The watermark is centered between the top and bottom
+      #         borders.
+      #       * `:vertical_offset` - (String) VerticalOffset The amount by
+      #         which you want the vertical position of the watermark to be
+      #         offset from the position specified by VerticalAlign: number of
+      #         pixels (px): The minimum value is 0 pixels, and the maximum
+      #         value is the value of MaxHeight. integer percentage (%): The
+      #         range of valid values is 0 to 100. For example, if you specify
+      #         Top for VerticalAlign and 5px for VerticalOffset, the top of
+      #         the watermark appears 5 pixels from the top border of the
+      #         output video. VerticalOffset is only valid when the value of
+      #         VerticalAlign is Top or Bottom. If you specify an offset that
+      #         causes the watermark to extend beyond the top or bottom border
+      #         and Elastic Transcoder has not added black bars, the watermark
+      #         is cropped. If Elastic Transcoder has added black bars, the
+      #         watermark extends into the black bars. If the watermark extends
+      #         beyond the black bars, it is cropped. Use the value of Target
+      #         to specify whether you want Elastic Transcoder to include the
+      #         black bars that are added by Elastic Transcoder, if any, in the
+      #         offset calculation.
+      #       * `:opacity` - (String) A percentage that indicates how much you
+      #         want a watermark to obscure the video in the location where it
+      #         appears. Valid values are 0 (the watermark is invisible) to 100
+      #         (the watermark completely obscures the video in the specified
+      #         location). The datatype of Opacity is float. Elastic Transcoder
+      #         supports transparent .png graphics. If you use a transparent
+      #         .png, the transparent portion of the video appears as if you
+      #         had specified a value of 0 for Opacity. The .jpg file format
+      #         doesn't support transparency.
+      #       * `:target` - (String) A value that determines how Elastic
+      #         Transcoder interprets values that you specified for
+      #         HorizontalOffset, VerticalOffset, MaxWidth, and MaxHeight:
+      #         Content: HorizontalOffset and VerticalOffset values are
+      #         calculated based on the borders of the video excluding black
+      #         bars added by Elastic Transcoder, if any. In addition, MaxWidth
+      #         and MaxHeight, if specified as a percentage, are calculated
+      #         based on the borders of the video excluding black bars added by
+      #         Elastic Transcoder, if any. Frame: HorizontalOffset and
+      #         VerticalOffset values are calculated based on the borders of
+      #         the video including black bars added by Elastic Transcoder, if
+      #         any. In addition, MaxWidth and MaxHeight, if specified as a
+      #         percentage, are calculated based on the borders of the video
+      #         including black bars added by Elastic Transcoder, if any.
       #   * `:audio` - (Hash) A section of the request body that specifies the
       #     audio parameters.
       #     * `:codec` - (String) The audio codec for the output file. This
@@ -699,6 +976,7 @@ module AWS
       #       * `:fixed_gop` - (String)
       #       * `:bit_rate` - (String)
       #       * `:frame_rate` - (String)
+      #       * `:max_frame_rate` - (String)
       #       * `:resolution` - (String)
       #       * `:aspect_ratio` - (String)
       #       * `:max_width` - (String)
@@ -706,6 +984,17 @@ module AWS
       #       * `:display_aspect_ratio` - (String)
       #       * `:sizing_policy` - (String)
       #       * `:padding_policy` - (String)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:id` - (String)
+      #         * `:max_width` - (String)
+      #         * `:max_height` - (String)
+      #         * `:sizing_policy` - (String)
+      #         * `:horizontal_align` - (String)
+      #         * `:horizontal_offset` - (String)
+      #         * `:vertical_align` - (String)
+      #         * `:vertical_offset` - (String)
+      #         * `:opacity` - (String)
+      #         * `:target` - (String)
       #     * `:thumbnails` - (Hash)
       #       * `:format` - (String)
       #       * `:interval` - (String)
@@ -772,6 +1061,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:outputs` - (Array<Hash>)
       #       * `:id` - (String)
       #       * `:key` - (String)
@@ -784,6 +1076,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:output_key_prefix` - (String)
       #     * `:playlists` - (Array<Hash>)
       #       * `:name` - (String)
@@ -834,6 +1129,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:outputs` - (Array<Hash>)
       #       * `:id` - (String)
       #       * `:key` - (String)
@@ -846,6 +1144,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:output_key_prefix` - (String)
       #     * `:playlists` - (Array<Hash>)
       #       * `:name` - (String)
@@ -917,6 +1218,7 @@ module AWS
       #       * `:fixed_gop` - (String)
       #       * `:bit_rate` - (String)
       #       * `:frame_rate` - (String)
+      #       * `:max_frame_rate` - (String)
       #       * `:resolution` - (String)
       #       * `:aspect_ratio` - (String)
       #       * `:max_width` - (String)
@@ -924,6 +1226,17 @@ module AWS
       #       * `:display_aspect_ratio` - (String)
       #       * `:sizing_policy` - (String)
       #       * `:padding_policy` - (String)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:id` - (String)
+      #         * `:max_width` - (String)
+      #         * `:max_height` - (String)
+      #         * `:sizing_policy` - (String)
+      #         * `:horizontal_align` - (String)
+      #         * `:horizontal_offset` - (String)
+      #         * `:vertical_align` - (String)
+      #         * `:vertical_offset` - (String)
+      #         * `:opacity` - (String)
+      #         * `:target` - (String)
       #     * `:thumbnails` - (Hash)
       #       * `:format` - (String)
       #       * `:interval` - (String)
@@ -967,6 +1280,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:outputs` - (Array<Hash>)
       #       * `:id` - (String)
       #       * `:key` - (String)
@@ -979,6 +1295,9 @@ module AWS
       #       * `:duration` - (Integer)
       #       * `:width` - (Integer)
       #       * `:height` - (Integer)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:preset_watermark_id` - (String)
+      #         * `:input_key` - (String)
       #     * `:output_key_prefix` - (String)
       #     * `:playlists` - (Array<Hash>)
       #       * `:name` - (String)
@@ -1053,6 +1372,7 @@ module AWS
       #       * `:fixed_gop` - (String)
       #       * `:bit_rate` - (String)
       #       * `:frame_rate` - (String)
+      #       * `:max_frame_rate` - (String)
       #       * `:resolution` - (String)
       #       * `:aspect_ratio` - (String)
       #       * `:max_width` - (String)
@@ -1060,6 +1380,17 @@ module AWS
       #       * `:display_aspect_ratio` - (String)
       #       * `:sizing_policy` - (String)
       #       * `:padding_policy` - (String)
+      #       * `:watermarks` - (Array<Hash>)
+      #         * `:id` - (String)
+      #         * `:max_width` - (String)
+      #         * `:max_height` - (String)
+      #         * `:sizing_policy` - (String)
+      #         * `:horizontal_align` - (String)
+      #         * `:horizontal_offset` - (String)
+      #         * `:vertical_align` - (String)
+      #         * `:vertical_offset` - (String)
+      #         * `:opacity` - (String)
+      #         * `:target` - (String)
       #     * `:thumbnails` - (Hash)
       #       * `:format` - (String)
       #       * `:interval` - (String)
@@ -1097,10 +1428,17 @@ module AWS
       # Calls the PUT UpdatePipeline API operation.
       # @param [Hash] options
       #
-      #   * `:id` - *required* - (String)
-      #   * `:name` - (String)
-      #   * `:input_bucket` - (String)
-      #   * `:role` - (String)
+      #   * `:id` - *required* - (String) The ID of the pipeline that you want
+      #     to update.
+      #   * `:name` - (String) The name of the pipeline. We recommend that the
+      #     name be unique within the AWS account, but uniqueness is not
+      #     enforced. Constraints: Maximum 40 characters
+      #   * `:input_bucket` - (String) The Amazon S3 bucket in which you saved
+      #     the media files that you want to transcode and the graphics that
+      #     you want to use as watermarks.
+      #   * `:role` - (String) The IAM Amazon Resource Name (ARN) for the role
+      #     that you want Elastic Transcoder to use to transcode jobs for this
+      #     pipeline.
       #   * `:notifications` - (Hash)
       #     * `:progressing` - (String) The Amazon Simple Notification Service
       #       (Amazon SNS) topic that you want to notify when Elastic
@@ -1111,20 +1449,206 @@ module AWS
       #       notify when Elastic Transcoder encounters a warning condition.
       #     * `:error` - (String) The Amazon SNS topic that you want to notify
       #       when Elastic Transcoder encounters an error condition.
-      #   * `:content_config` - (Hash)
-      #     * `:bucket` - (String)
-      #     * `:storage_class` - (String)
-      #     * `:permissions` - (Array<Hash>)
-      #       * `:grantee_type` - (String)
-      #       * `:grantee` - (String)
-      #       * `:access` - (Array<String>)
-      #   * `:thumbnail_config` - (Hash)
-      #     * `:bucket` - (String)
-      #     * `:storage_class` - (String)
-      #     * `:permissions` - (Array<Hash>)
-      #       * `:grantee_type` - (String)
-      #       * `:grantee` - (String)
-      #       * `:access` - (Array<String>)
+      #   * `:content_config` - (Hash) The optional ContentConfig object
+      #     specifies information about the Amazon S3 bucket in which you want
+      #     Elastic Transcoder to save transcoded files and playlists: which
+      #     bucket to use, which users you want to have access to the files,
+      #     the type of access you want users to have, and the storage class
+      #     that you want to assign to the files. If you specify values for
+      #     ContentConfig, you must also specify values for ThumbnailConfig. If
+      #     you specify values for ContentConfig and ThumbnailConfig, omit the
+      #     OutputBucket object. Bucket: The Amazon S3 bucket in which you want
+      #     Elastic Transcoder to save transcoded files and playlists.
+      #     Permissions (Optional): The Permissions object specifies which
+      #     users you want to have access to transcoded files and the type of
+      #     access you want them to have. You can grant permissions to a
+      #     maximum of 30 users and/or predefined Amazon S3 groups. Grantee
+      #     Type: Specify the type of value that appears in the Grantee object:
+      #     Canonical: The value in the Grantee object is either the canonical
+      #     user ID for an AWS account or an origin access identity for an
+      #     Amazon CloudFront distribution. For more information about
+      #     canonical user IDs, see Access Control List (ACL) Overview in the
+      #     Amazon Simple Storage Service Developer Guide. For more information
+      #     about using CloudFront origin access identities to require that
+      #     users use CloudFront URLs instead of Amazon S3 URLs, see Using an
+      #     Origin Access Identity to Restrict Access to Your Amazon S3
+      #     Content. A canonical user ID is not the same as an AWS account
+      #     number. Email: The value in the Grantee object is the registered
+      #     email address of an AWS account. Group: The value in the Grantee
+      #     object is one of the following predefined Amazon S3 groups:
+      #     AllUsers, AuthenticatedUsers, or LogDelivery. Grantee: The AWS user
+      #     or group that you want to have access to transcoded files and
+      #     playlists. To identify the user or group, you can specify the
+      #     canonical user ID for an AWS account, an origin access identity for
+      #     a CloudFront distribution, the registered email address of an AWS
+      #     account, or a predefined Amazon S3 group Access: The permission
+      #     that you want to give to the AWS user that you specified in
+      #     Grantee. Permissions are granted on the files that Elastic
+      #     Transcoder adds to the bucket, including playlists and video files.
+      #     Valid values include: READ: The grantee can read the objects and
+      #     metadata for objects that Elastic Transcoder adds to the Amazon S3
+      #     bucket. READ_ACP: The grantee can read the object ACL for objects
+      #     that Elastic Transcoder adds to the Amazon S3 bucket. WRITE_ACP:
+      #     The grantee can write the ACL for the objects that Elastic
+      #     Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
+      #     has READ, READ_ACP, and WRITE_ACP permissions for the objects that
+      #     Elastic Transcoder adds to the Amazon S3 bucket. StorageClass: The
+      #     Amazon S3 storage class, Standard or ReducedRedundancy, that you
+      #     want Elastic Transcoder to assign to the video files and playlists
+      #     that it stores in your Amazon S3 bucket.
+      #     * `:bucket` - (String) The Amazon S3 bucket in which you want
+      #       Elastic Transcoder to save the transcoded files. Specify this
+      #       value when all of the following are `true` : You want to save
+      #       transcoded files, thumbnails (if any), and playlists (if any)
+      #       together in one bucket. You do not want to specify the users or
+      #       groups who have access to the transcoded files, thumbnails, and
+      #       playlists. You do not want to specify the permissions that
+      #       Elastic Transcoder grants to the files. You want to associate the
+      #       transcoded files and thumbnails with the Amazon S3 Standard
+      #       storage class. If you want to save transcoded files and playlists
+      #       in one bucket and thumbnails in another bucket, specify which
+      #       users can access the transcoded files or the permissions the
+      #       users have, or change the Amazon S3 storage class, omit
+      #       OutputBucket and specify values for ContentConfig and
+      #       ThumbnailConfig instead.
+      #     * `:storage_class` - (String) The Amazon S3 storage class, Standard
+      #       or ReducedRedundancy, that you want Elastic Transcoder to assign
+      #       to the video files and playlists that it stores in your Amazon S3
+      #       bucket.
+      #     * `:permissions` - (Array<Hash>) Optional. The Permissions object
+      #       specifies which users and/or predefined Amazon S3 groups you want
+      #       to have access to transcoded files and playlists, and the type of
+      #       access you want them to have. You can grant permissions to a
+      #       maximum of 30 users and/or predefined Amazon S3 groups. If you
+      #       include Permissions, Elastic Transcoder grants only the
+      #       permissions that you specify. It does not grant full permissions
+      #       to the owner of the role specified by Role. If you want that user
+      #       to have full control, you must explicitly grant full control to
+      #       the user. If you omit Permissions, Elastic Transcoder grants full
+      #       control over the transcoded files and playlists to the owner of
+      #       the role specified by Role, and grants no other permissions to
+      #       any other user or group.
+      #       * `:grantee_type` - (String) The type of value that appears in
+      #         the Grantee object: Canonical: Either the canonical user ID for
+      #         an AWS account or an origin access identity for an Amazon
+      #         CloudFront distribution. A canonical user ID is not the same as
+      #         an AWS account number. Email: The registered email address of
+      #         an AWS account. Group: One of the following predefined Amazon
+      #         S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+      #       * `:grantee` - (String) The AWS user or group that you want to
+      #         have access to transcoded files and playlists. To identify the
+      #         user or group, you can specify the canonical user ID for an AWS
+      #         account, an origin access identity for a CloudFront
+      #         distribution, the registered email address of an AWS account,
+      #         or a predefined Amazon S3 group.
+      #       * `:access` - (Array<String>) The permission that you want to
+      #         give to the AWS user that is listed in Grantee. Valid values
+      #         include: READ: The grantee can read the thumbnails and metadata
+      #         for thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. READ_ACP: The grantee can read the object ACL for
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. WRITE_ACP: The grantee can write the ACL for the
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and
+      #         WRITE_ACP permissions for the thumbnails that Elastic
+      #         Transcoder adds to the Amazon S3 bucket.
+      #   * `:thumbnail_config` - (Hash) The ThumbnailConfig object specifies
+      #     several values, including the Amazon S3 bucket in which you want
+      #     Elastic Transcoder to save thumbnail files, which users you want to
+      #     have access to the files, the type of access you want users to
+      #     have, and the storage class that you want to assign to the files.
+      #     If you specify values for ContentConfig, you must also specify
+      #     values for ThumbnailConfig even if you don't want to create
+      #     thumbnails. If you specify values for ContentConfig and
+      #     ThumbnailConfig, omit the OutputBucket object. Bucket: The Amazon
+      #     S3 bucket in which you want Elastic Transcoder to save thumbnail
+      #     files. Permissions (Optional): The Permissions object specifies
+      #     which users and/or predefined Amazon S3 groups you want to have
+      #     access to thumbnail files, and the type of access you want them to
+      #     have. You can grant permissions to a maximum of 30 users and/or
+      #     predefined Amazon S3 groups. GranteeType: Specify the type of value
+      #     that appears in the Grantee object: Canonical: The value in the
+      #     Grantee object is either the canonical user ID for an AWS account
+      #     or an origin access identity for an Amazon CloudFront distribution.
+      #     A canonical user ID is not the same as an AWS account number.
+      #     Email: The value in the Grantee object is the registered email
+      #     address of an AWS account. Group: The value in the Grantee object
+      #     is one of the following predefined Amazon S3 groups: AllUsers,
+      #     AuthenticatedUsers, or LogDelivery. Grantee: The AWS user or group
+      #     that you want to have access to thumbnail files. To identify the
+      #     user or group, you can specify the canonical user ID for an AWS
+      #     account, an origin access identity for a CloudFront distribution,
+      #     the registered email address of an AWS account, or a predefined
+      #     Amazon S3 group. Access: The permission that you want to give to
+      #     the AWS user that you specified in Grantee. Permissions are granted
+      #     on the thumbnail files that Elastic Transcoder adds to the bucket.
+      #     Valid values include: READ: The grantee can read the thumbnails and
+      #     metadata for objects that Elastic Transcoder adds to the Amazon S3
+      #     bucket. READ_ACP: The grantee can read the object ACL for
+      #     thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+      #     WRITE_ACP: The grantee can write the ACL for the thumbnails that
+      #     Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The
+      #     grantee has READ, READ_ACP, and WRITE_ACP permissions for the
+      #     thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+      #     StorageClass: The Amazon S3 storage class, Standard or
+      #     ReducedRedundancy, that you want Elastic Transcoder to assign to
+      #     the thumbnails that it stores in your Amazon S3 bucket.
+      #     * `:bucket` - (String) The Amazon S3 bucket in which you want
+      #       Elastic Transcoder to save the transcoded files. Specify this
+      #       value when all of the following are `true` : You want to save
+      #       transcoded files, thumbnails (if any), and playlists (if any)
+      #       together in one bucket. You do not want to specify the users or
+      #       groups who have access to the transcoded files, thumbnails, and
+      #       playlists. You do not want to specify the permissions that
+      #       Elastic Transcoder grants to the files. You want to associate the
+      #       transcoded files and thumbnails with the Amazon S3 Standard
+      #       storage class. If you want to save transcoded files and playlists
+      #       in one bucket and thumbnails in another bucket, specify which
+      #       users can access the transcoded files or the permissions the
+      #       users have, or change the Amazon S3 storage class, omit
+      #       OutputBucket and specify values for ContentConfig and
+      #       ThumbnailConfig instead.
+      #     * `:storage_class` - (String) The Amazon S3 storage class, Standard
+      #       or ReducedRedundancy, that you want Elastic Transcoder to assign
+      #       to the video files and playlists that it stores in your Amazon S3
+      #       bucket.
+      #     * `:permissions` - (Array<Hash>) Optional. The Permissions object
+      #       specifies which users and/or predefined Amazon S3 groups you want
+      #       to have access to transcoded files and playlists, and the type of
+      #       access you want them to have. You can grant permissions to a
+      #       maximum of 30 users and/or predefined Amazon S3 groups. If you
+      #       include Permissions, Elastic Transcoder grants only the
+      #       permissions that you specify. It does not grant full permissions
+      #       to the owner of the role specified by Role. If you want that user
+      #       to have full control, you must explicitly grant full control to
+      #       the user. If you omit Permissions, Elastic Transcoder grants full
+      #       control over the transcoded files and playlists to the owner of
+      #       the role specified by Role, and grants no other permissions to
+      #       any other user or group.
+      #       * `:grantee_type` - (String) The type of value that appears in
+      #         the Grantee object: Canonical: Either the canonical user ID for
+      #         an AWS account or an origin access identity for an Amazon
+      #         CloudFront distribution. A canonical user ID is not the same as
+      #         an AWS account number. Email: The registered email address of
+      #         an AWS account. Group: One of the following predefined Amazon
+      #         S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+      #       * `:grantee` - (String) The AWS user or group that you want to
+      #         have access to transcoded files and playlists. To identify the
+      #         user or group, you can specify the canonical user ID for an AWS
+      #         account, an origin access identity for a CloudFront
+      #         distribution, the registered email address of an AWS account,
+      #         or a predefined Amazon S3 group.
+      #       * `:access` - (Array<String>) The permission that you want to
+      #         give to the AWS user that is listed in Grantee. Valid values
+      #         include: READ: The grantee can read the thumbnails and metadata
+      #         for thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. READ_ACP: The grantee can read the object ACL for
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. WRITE_ACP: The grantee can write the ACL for the
+      #         thumbnails that Elastic Transcoder adds to the Amazon S3
+      #         bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and
+      #         WRITE_ACP permissions for the thumbnails that Elastic
+      #         Transcoder adds to the Amazon S3 bucket.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:

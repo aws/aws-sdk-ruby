@@ -76,6 +76,19 @@
         :segment_duration:
           :name: SegmentDuration
           :type: :string
+        :watermarks:
+          :name: Watermarks
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :preset_watermark_id:
+                :name: PresetWatermarkId
+                :type: :string
+              :input_key:
+                :name: InputKey
+                :type: :string
     :outputs:
       :name: Outputs
       :type: :array
@@ -98,6 +111,19 @@
           :segment_duration:
             :name: SegmentDuration
             :type: :string
+          :watermarks:
+            :name: Watermarks
+            :type: :array
+            :members:
+              :name: member
+              :type: :hash
+              :members:
+                :preset_watermark_id:
+                  :name: PresetWatermarkId
+                  :type: :string
+                :input_key:
+                  :name: InputKey
+                  :type: :string
     :output_key_prefix:
       :name: OutputKeyPrefix
       :type: :string
@@ -190,6 +216,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -227,6 +263,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -477,6 +523,9 @@
         :frame_rate:
           :name: FrameRate
           :type: :string
+        :max_frame_rate:
+          :name: MaxFrameRate
+          :type: :string
         :resolution:
           :name: Resolution
           :type: :string
@@ -498,6 +547,43 @@
         :padding_policy:
           :name: PaddingPolicy
           :type: :string
+        :watermarks:
+          :name: Watermarks
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :id:
+                :name: Id
+                :type: :string
+              :max_width:
+                :name: MaxWidth
+                :type: :string
+              :max_height:
+                :name: MaxHeight
+                :type: :string
+              :sizing_policy:
+                :name: SizingPolicy
+                :type: :string
+              :horizontal_align:
+                :name: HorizontalAlign
+                :type: :string
+              :horizontal_offset:
+                :name: HorizontalOffset
+                :type: :string
+              :vertical_align:
+                :name: VerticalAlign
+                :type: :string
+              :vertical_offset:
+                :name: VerticalOffset
+                :type: :string
+              :opacity:
+                :name: Opacity
+                :type: :string
+              :target:
+                :name: Target
+                :type: :string
     :audio:
       :name: Audio
       :type: :hash
@@ -600,6 +686,9 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
@@ -621,6 +710,40 @@
             PaddingPolicy:
               :sym: :padding_policy
               :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
@@ -760,6 +883,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -797,6 +930,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -908,6 +1051,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -945,6 +1098,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -1131,6 +1294,9 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
@@ -1152,6 +1318,40 @@
             PaddingPolicy:
               :sym: :padding_policy
               :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
@@ -1262,6 +1462,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -1299,6 +1509,16 @@
             Height:
               :sym: :height
               :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -1488,6 +1708,9 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
@@ -1509,6 +1732,40 @@
             PaddingPolicy:
               :sym: :padding_policy
               :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
