@@ -1,3 +1,301 @@
+2013-07-05 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/config_spec.rb, spec/aws/core/client_spec.rb,
+  spec/aws/core/region_spec.rb: Updated specs to use the new AWS::SERVICES
+  format.
+
+  * lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/client_v2.rb: Updated
+  client API documentation for both Amazon DynamoDB clients.
+
+  * lib/aws/dynamo_db/client.rb: Added whitespace in client documentation to
+  ensure nested lists render correctly.
+
+2013-07-03 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core.rb, lib/aws/core/region.rb, tasks/docs.rake: Updated
+  documentation for service helpers.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb, lib/aws/core/region.rb,
+  tasks/docs.rake: Renamed helper methods for AWS::SimpleEmailService and
+  AWS::SimpleWorkflow.
+
+  To be consistent with other services that use the official service
+  abbreviation,
+  the helper methods on `AWS` and `AWS::Core::Region` now use the short names
+  for
+  `AWS::SimpleEmailService` and `AWS::SimpleWorkflow`.
+
+      # new methods
+      AWS.ses
+      AWS.swf
+      AWS.regions['us-west-2'].ses
+      AWS.regions['us-west-2'].swf
+
+      # deprecated methods
+      AWS.simple_email_service
+      AWS.simple_workflow
+      AWS.regions['us-west-2'].simple_email_service
+      AWS.regions['us-west-2'].simple_workflow
+
+  Additionally global configuration options use the short name.
+
+      AWS.config(:ses => {...})
+      AWS.config(:swf => {...})
+
+  * lib/aws/core/configuration.rb, spec/aws/core/client_spec.rb: You can now
+  specify endpoint, region and port per service via AWS.config(:svc => { ...
+  })
+
+  You can specify global options per service now using the new configuration
+  options.
+  Example:
+
+      AWS.config(:s3 => { :region => 'us-west-2' })
+
+      AWS::S3.new.config.s3_region
+      #=> 'us-west-2'
+
+  * lib/aws/core/configuration.rb, spec/aws/config_spec.rb: Each service now
+  hash a top-level configuration entry.
+
+  Each service now has a config option, for example:
+
+      AWS.config.s3
+      #=> {}
+
+  You can specify the value like any other configuration option:
+
+      AWS.config(:s3 => { 'abc' => 'xyz' })
+
+  These values are not yet used anywhere.  They will eventually
+  be merged with the root level configuration options when building
+  a client.
+
+  * lib/aws/route_53/resource_record_set.rb: Don't nuke attributes on
+  ResourceRecordSet update
+
+  Previously, if you were not changing the name, type, or set identifier, they
+  would be destructively removed from the ResourceRecordSet on update.
+
+  * lib/aws/route_53/resource_record_set.rb: Add failover and health check
+  attributes
+
+  * features/sns/message.feature, features/sqs/step_definitions/messages.rb:
+  Added integration tests for AWS::SNS::Message#authentic?
+
+  References #61
+
+  * spec/aws/sns/message_spec.rb: Made the pending test for
+  AWS::SNS::Message#authentic? pass.
+
+  References #61
+
+  * lib/aws/sns/message.rb: AWS::SNS::Message now uses Net::HTTP instead of
+  HTTParty.
+
+  HTTParty is no longer a dependency of the SDK.
+
+  References #61
+
+  * lib/aws/s3/encryption_utils.rb: Minor changes to address feedback in #259.
+
+  * lib/aws/core/http/net_http_handler.rb,
+  spec/aws/core/http/net_http_handler_spec.rb: Disable retries as soon as any
+  data has been yielded
+  * spec/require_test_3.rb: Replaced usage of === with == when checking for
+  nil.
+
+  * lib/aws/core.rb: Updated the documentation for eager_autoload! to a void
+  return.
+
+2013-07-04 Tung Nguyen <tongueroo@gmail.com>
+
+  * lib/aws/core.rb: add AWS.reset_memoization method
+
+  * lib/aws/sns/message.rb, spec/aws/sns/message_spec.rb:
+  AWS::SNS::Message#authentic? no longer flattens errors.
+
+  Errors raised when trying to validate the SNS message were
+  getting replaced with a generic message and a StandardError.
+  If it fails 3 times, the original error will now raise through.
+
+  * lib/aws/sns/message.rb: Resolved an issue with AWS::SNS::Mesage and Ruby
+  versions < 2.0.
+
+2013-06-27 Gustav Munkby <grddev@gmail.com>
+
+  * spec/aws/core/http/net_http_handler_spec.rb: Pending specs for more
+  reasonable streaming behaviour
+
+  Previously, errors in subsequent chunks were caught and then the whole
+  request was retried, yielding (possibly) repeated chunks to the
+  read_block, without any indication (in the block) of this being done.
+
+  The outer client method would also not report any errors for a consumer
+  to check.
+
+  * spec/aws/core/http/net_http_handler_spec.rb: Add specs for streaming http
+  responses
+
+2013-07-02 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws_spec.rb: Updated unit tests to not rely on return value from
+  `eager_autoload!`.
+
+  * Gemfile: Use HTTPS when talking to rubygems.org.
+
+  * lib/aws/route_53/change_batch.rb: Expose failover + health check id in
+  ChangeRequest
+
+  * lib/aws/core.rb, spec/require_test_3.rb: Reverted the return value from
+  AWS.eager_autoload!
+
+  * lib/aws/iam/virtual_mfa_device.rb,
+  spec/aws/iam/virtual_mfa_device_spec.rb: Resolved an issue with
+  AWS::IAM::VirtualMFADevice#enable.
+
+  Passing in string values for a code like '099999' were raising
+  runtime errors from sprintf.  This change prevents string values
+  from getting passed through sprintf.  Added a test to cover this
+  behavior.
+
+  Fixes #288
+
+  * lib/aws/core/http/net_http_handler.rb,
+  spec/aws/core/http/net_http_handler_spec.rb: Capture OpenSSL errors, to
+  allow retry for those as well
+2013-07-01 Katie Zhu <kzhu91@gmail.com>
+
+  * samples/sqs/get_queue_list.rb: Adds simple example to list SQS queues.
+
+  * samples/sqs/add_queue_message.rb: Fixes LoadError. Properly load AWS
+  config.
+
+  * lib/aws/cloud_watch/metric_collection.rb,
+  spec/aws/cloud_watch/metric_collection_spec.rb: Fixed issue with
+  AWS::CloudWatch::MetricCollection#with_dimensions.
+
+  Dimensions were getting lost before being passed to #filter.
+  Added specs for this feature as well.
+
+  Fixes #286.
+
+2013-06-28 Bob Potter <bobby.potter@gmail.com>
+
+  * lib/aws/core/http/curb_handler.rb: Curb Performance: Use an array of
+  strings instead of a StringIO object.
+
+  * lib/aws/core/http/curb_handler.rb: Remove Request#proxy_uri references
+  from CurbHandler. #proxy_uri is no longer defined on Request
+
+2013-06-26 Gustav Munkby <grddev@gmail.com>
+
+  * lib/aws/core/http/net_http_handler.rb: Change HTTP handler to whitelist
+  network errors
+
+  Instead of (dangerously) whitelisting errors to reraise, this changes
+  the HTTP handler to explicitly list the raised exceptions for which the
+  exceptions should be swallowed.
+
+  Fundamentally, this changes handling of unknown errors (such as any Java
+  error in JRuby) to not be swallowed.
+
+  * lib/aws/simple_email_service.rb, spec/aws/simple_email_service_spec.rb:
+  Added test for setting message id on raw messages.
+
+  When calling `AWS::SimpleEmailService#send_raw_message` with an
+  object that responds to `#message_id=`, then the message ID
+  from the SES response will be set on the raw message.
+
+  Added a missing test and corrected the `#responds_to?` check.
+
+  Fixes #261
+
+2013-06-25 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core.rb, spec/aws_spec.rb, spec/fixtures/autoload_target.rb,
+  spec/fixtures/nested_autoload_target.rb, spec/require_test_3.rb: Removed the
+  need to specify modules by crawling all constants when eager autoloading.
+
+  * lib/aws/core.rb, spec/require_test_3.rb, tasks/rspec.rake:
+  AWS.eager_autoload! now autolaods all of AWS::Core.
+
+  Fixes #279
+
+2013-06-24 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/extra/common.rb: Running integration tests without a config now
+  marks affected tests as pending.
+
+  Previously these would fail with an unhelpful message.  They now are skipped
+  as pending with a message about what test configuration option needs to
+  be set.
+
+  * lib/aws/core/configuration.rb: doc typo
+2013-06-21 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/auto_scaling/group.rb: Fix missing attribute for
+  termination_options
+
+  * features/auto_scaling/step_definitions/groups.rb,
+  features/ec2/snapshots.feature, features/ec2/volume_attributes.feature,
+  features/ec2/volumes.feature, features/ec2/zones.feature,
+  features/elb/availability_zones.feature,
+  features/elb/load_balancers.feature,
+  features/elb/step_definitions/load_balancers.rb: Make Cucumber tests work
+  for users unable to use us-east-1a
+
+  Some AWS users cannot access the AZ us-east-1a, making them
+  unable to run our full Cucumber test suite. This change
+  removes us-east-1a from the Cucumber integration tests, replacing
+  with us-east-1b or other AZs as appropriate.
+
+  * features/auto_scaling/step_definitions/groups.rb,
+  lib/aws/auto_scaling/group_options.rb,
+  spec/aws/auto_scaling/group_collection_spec.rb: Add termination_options to
+  Auto Scaling group creation.
+
+  Adds the optional parameter :termination_options to
+  AWS::AutoScaling::GroupCollection "create" method.
+  Includes documentation of the parameter, integration
+  tests, and a spec test.
+
+  Fixes #275
+
+2013-06-19 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: AWS::S3::Client now
+  retries 400 RequestTimeout errors.
+
+  * lib/aws/core/configuration.rb, spec/aws/config_spec.rb: Reduced
+  :http_idle_timeout default from 60 to 5 seconds.
+
+  * features/s3/high_level/objects.feature,
+  features/s3/high_level/step_definitions/objects.rb,
+  lib/aws/s3/object_collection.rb, spec/aws/s3/object_collection_spec.rb,
+  spec/shared/s3/paginated_collection_examples.rb: Fixed issue with pagination
+  in S3.
+
+  The next_markers method in object_collection.rb for S3 did not reference the
+  "next_marker" property, causing issues when the contents.last value was
+  missing.
+
+  Added Cucumber/RSpec tests to cover this case, added a check for next_marker
+  to object_collection.rb, and refactored the marker selection logic to be
+  more
+  readable.
+
+  Fixes #247
+
+2013-06-18 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.11.3
+
+  * spec/aws/sns/request_spec.rb: Removed v2 specs from SNS client, now using
+  v4 signer.
+
+  * lib/aws/sns/request.rb: Moved the SNS client from sigv2 to sigv4.
+
 2013-06-14 Trevor Rowe <trevorrowe@gmail.com>
 
   * spec/aws/s3/access_control_list_spec.rb,
@@ -20,6 +318,49 @@
   now returns +nil+ indicating the output is not available.
 
   Fixes #272
+
+2013-06-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * aws-sdk.gemspec, bin/aws-rb, bin/aws-sdk-repl: Renamed the aws-sdk-repl to
+  aws-rb.
+
+  * Renamed the script
+  * Updated the gem specification executables
+  * Renamed the ENV prefix from AWS_SDK_REPL to AWSRB
+
+  * bin/aws-sdk-repl: Changed the usage banner to match the (current)
+  executable name.
+
+  * bin/aws-sdk-repl: Modified the repl include and require options.
+
+  * Now requiring the aws-sdk gem after the $LOAD_PATH
+    has been amended.  This allows the user to point
+    the repl to a different version of the SDK.
+
+  * Now requiring any files specified via -r. This happens
+    after the SDK has been loaded and configured.  This
+    alows the required library to make use of the SDK.
+
+  * bin/aws-sdk-repl: Corrected spelling error in comment.
+
+  * .gitignore, Gemfile, aws-sdk.gemspec, bin/aws-sdk-repl: Added a basic repl
+  executable as aws-sdk-repl.
+
+  This repl will default to pry when available, but will
+  fall back to irb when not available.  It accepts a number
+  of runtime configuration options and defaults can be exported
+  to ENV.
+
+  By default client requests are logged (in color).  A quick
+  example:
+
+      aws-sdk-repl
+      AWS> s3.buckets['aws-sdk'].objects['key'].content_length
+      [AWS S3 200 0.875184 0 retries]
+  head_object(:bucket_name=>"aws-sdk",:key=>"key")
+      => 5242881
+
+  You can use all methods of the AWS module directly when using Pry.
 
 2013-06-10 Trevor Rowe <trevorrowe@gmail.com>
 
@@ -70,9 +411,28 @@
 
   * lib/aws/sqs/queue.rb: update dcos on max message delay
 
+2013-06-06 James Smith <james@loopj.com>
+
+  * lib/aws/simple_email_service.rb: Make sure raw_message responds to
+  message_id before setting it
+
 2013-06-04 James Smith <james@loopj.com>
 
   * lib/aws/simple_email_service.rb: Add compatibility with deliver!
+
+  * lib/aws/simple_email_service.rb: Add suffix to message_id
+
+  * lib/aws/simple_email_service.rb: Add the AWS-generated message_id to the
+  ruby message object
+
+2013-06-01 Kevin Butler <haqkrs@gmail.com>
+
+  * spec/aws/s3/s3_object_encrypt_spec.rb: Cleaned up encryption keys in the
+  tests so there are no warning when running tests
+
+  * lib/aws/s3/encryption_utils.rb, spec/aws/s3/s3_object_encrypt_spec.rb:
+  Added warning when calling EncryptionUtils.encrypt with data longer than
+  keylength
 
 2013-05-30 Trevor Rowe <trevorrowe@gmail.com>
 
@@ -3708,6 +4068,11 @@
   * lib/aws/s3/cors_rule_collection.rb: Fix doc for incorrectly named param
   tag
 
+  * spec/aws/sns/originators/from_auto_scaling_spec.rb: revert to ruby 1.8.x
+  hash-syntax
+
+  (CI runs tests using ree-1.8.7)
+
 2012-11-15 Loren Segal <lsegal@amazon.com>
 
   * README.rdoc: Update getting started with samples command
@@ -4134,6 +4499,45 @@
   spec/aws/route_53/resource_record_set_collection_spec.rb,
   spec/aws/route_53/resource_record_set_spec.rb, spec/aws/route_53_spec.rb:
   added higher-level abstractions for Route53
+
+2012-07-26 Peter Mounce <pete@neverrunwithscissors.com>
+
+  * lib/aws/sns/message.rb, lib/aws/sns/originators/from_auto_scaling.rb,
+  spec/aws/sns/originators/from_auto_scaling_spec.rb,
+  spec/aws/sns/support/sns_as_instance_launch.json,
+  spec/aws/sns/support/sns_as_instance_terminate.json: Add support for Message
+  finding out its own origin.
+
+  Introduce the concept of a message's origin, and introduce a partial
+  implementation of
+  an AutoScaling originator (partial, in that there's not coverage for all of
+  the data that
+  auto-scaling will include in the SNS' body).
+
+  The origin-selection currently works simply; there's only one originator at
+  present, so
+  it's checked in-line in Message's initializer, rather than that iterating
+  through the
+  available originator modules.
+
+  * lib/aws/sns.rb, lib/aws/sns/message.rb, spec/aws/sns/message_spec.rb,
+  spec/aws/sns/support/sns_manually_sent.json: Add AWS::SNS::Message and
+  build-in authenticity-checking.
+
+  AWS::SNS::Message#authentic? will return true if the message is
+  cryptographically authenticated
+  (see
+  http://docs.amazonwebservices.com/sns/latest/gsg/SendMessageToHttp.verify.si
+  gnature.html).
+  To-do:
+  * support subscription-confirmation and unsubscribe messages; this just
+  supports
+  notifications.  Should just mean changes to canonical_string method.
+  * decide whether it's really OK to return false in the event of the check
+  throwing an error (for
+  example, if the cert-download fails too often or times out).  Might be best
+  to leave that up to
+  the caller?
 
 2011-11-10 Anthony Scotti <anthony.m.scotti@gmail.com>
 
