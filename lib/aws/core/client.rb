@@ -574,6 +574,7 @@ module AWS
 
         # @return [Array<Symbol>] Returns a list of service operations as
         #   method names supported by this client.
+        # @api private
         def operations
           @operations ||= []
         end
