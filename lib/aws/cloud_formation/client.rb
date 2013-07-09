@@ -17,6 +17,8 @@ module AWS
     # Client class for AWS CloudFormation.
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-05-15'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -32,6 +34,10 @@ module AWS
         :describe_scheduled_actions,
         :describe_tags,
       ]
+
+    end
+
+    class Client::V20100515 < Client
 
       # client methods #
 

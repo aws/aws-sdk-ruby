@@ -17,8 +17,14 @@ module AWS
     # Client class for AWS Data Pipeline.
     class Client < Core::JSONClient
 
+      API_VERSION = '2012-10-29'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20121029 < Client
 
       # client methods #
 

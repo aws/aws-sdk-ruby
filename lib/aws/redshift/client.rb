@@ -17,8 +17,14 @@ module AWS
     # Client class for Amazon Redshift.
     class Client < Core::QueryClient
 
+      API_VERSION = '2012-12-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20121201 < Client
 
       # client methods #
 

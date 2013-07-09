@@ -17,6 +17,8 @@ module AWS
     # Client class for Amazon SimpleDB.
     class Client < Core::QueryClient
 
+      API_VERSION = '2009-04-15'
+
       # @api private
       REGION_US_E1 = 'sdb.amazonaws.com'
 
@@ -36,6 +38,10 @@ module AWS
         :list_domains,
         :select,
       ]
+
+    end
+
+    class Client::V20090415 < Client
 
       # @param [String] name
       # @return [Boolean] Returns true if the given name is a valid

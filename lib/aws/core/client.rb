@@ -186,6 +186,7 @@ module AWS
 
       protected
 
+      # @api private
       def new_request
         eval(self.class.name.sub(/::Client.*$/, ''))::Request.new
       end
@@ -594,6 +595,7 @@ module AWS
           @response_parsers ||= {}
         end
 
+        # @api private
         def new(*args, &block)
           options = args.last.is_a?(Hash) ? args.last : {}
           client = client_class(options).allocate
