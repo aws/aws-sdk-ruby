@@ -35,6 +35,7 @@ options = {
   :debug => env_bool('AWSRB_DEBUG', false),
   :load_paths => [],
   :require => [],
+  :execute => [],
 }
 
 OptionParser.new do |opts|
@@ -43,6 +44,10 @@ OptionParser.new do |opts|
 
   opts.on("--repl REPL", "specify the repl environment, pry or irb") do |value|
     options[:repl] = value
+  end
+
+  opts.on("-e 'command'", "one line of script. Several -e's allowed.") do |value|
+    options[:execute] << value
   end
 
   opts.on("-l", "--[no-]log", "log client requets, on by default") do |value|
@@ -111,6 +116,11 @@ AWS.config(cfg)
 
 options[:require].each do |library|
   require(library)
+end
+
+unless options[:execute].empty?
+  options[:execute].each {|expression| eval(expression) }
+  exit
 end
 
 unless options[:repl] == 'irb'
