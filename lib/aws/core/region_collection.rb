@@ -96,7 +96,10 @@ module AWS
           #return JSON.parse(File.read(File.join(AWS::ROOT, 'endpoints.json')))
           host = 'aws-sdk-configurations.amazonwebservices.com'
           path = '/endpoints.json'
-          JSON.parse(Net::HTTP.get(host, path))
+          http = Net::HTTP
+          proxy_uri = AWS.config.proxy_uri
+          http = Net::HTTP::Proxy(proxy_uri, 8080) unless proxy_uri.nil?
+          JSON.parse(http.get(host, path))
         end
 
       end
