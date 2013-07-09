@@ -180,6 +180,9 @@ module AWS
 
         include Provider
 
+        # Map of AWS credential file key names to accepted provider key names
+        CREDENTIAL_FILE_KEY_MAP = { "AWSAccessKeyId" => :access_key_id, "AWSSecretKey" => :secret_access_key }
+
         # @param [String] prefix The prefix to apply to the ENV variable.
         def initialize prefix
           @prefix = prefix
@@ -187,6 +190,38 @@ module AWS
 
         # @return [String]
         attr_reader :prefix
+
+        # @return [String]
+        #  Return the credential file defined in the
+        #  {@prefix}_CREDENTIAL_FILE ENV variable -
+        #  only if it exists and is readable - or nil.
+        def credential_file
+          credential_file = ENV["#{@prefix}_CREDENTIAL_FILE"]
+          if credential_file && File.exist?(credential_file) && File.readable?(credential_file)
+            return credential_file
+          else
+            return nil
+          end
+        end
+
+        # @return [Hash]
+        #   Hash of credentials from #{PREFIX}_CREDENTIAL_FILE
+        #   mapped by CREDENTIAL_FILE_KEY_MAP
+        def credential_file_credentials
+          out = {}
+          if credential_file
+            File.open(credential_file, 'r') do |fh|
+              fh.each_line do |line|
+                key, val = line.strip.split(%r(\s*=\s*))
+                if key && val && CREDENTIAL_FILE_KEY_MAP[key] && KEYS.include?(CREDENTIAL_FILE_KEY_MAP[key])
+                  out[CREDENTIAL_FILE_KEY_MAP[key]] = val
+                end
+              end
+              fh.close
+            end
+          end
+          out
+        end
 
         # (see Provider#get_credentials)
         def get_credentials
@@ -196,7 +231,8 @@ module AWS
               credentials[key] = value
             end
           end
-          credentials
+          # Return credentials and merge in credential_file_credentials
+          credentials.merge!(credential_file_credentials)
         end
 
       end

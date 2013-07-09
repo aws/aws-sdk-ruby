@@ -172,6 +172,8 @@ module AWS
           'AWS_SECRET_ACCESS_KEY' => 'secret',
         }}
 
+        let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
+
         before(:each) do
           ENV.stub(:[]).and_return{|key| env_variables[key] }
         end
@@ -208,6 +210,24 @@ module AWS
           ENVProvider.new('AWS').credentials.should == {
             :access_key_id => 'akid',
             :secret_access_key => 'secret',
+          }
+        end
+
+        it 'reads credentials from {PREFIX}_CREDENTIAL_FILE environment variable' do
+          env_variables['AMAZON_CREDENTIAL_FILE'] = mock_credential_file
+          ENVProvider.new('AMAZON').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+          }
+        end
+
+        it 'preferences {PREFIX}_CREDENTIAL_FILE environment data when merging it in' do
+          env_variables['AWS_CREDENTIAL_FILE'] = mock_credential_file
+          env_variables['AWS_SESSION_TOKEN'] = 'token'
+          ENVProvider.new('AWS').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+            :session_token => 'token',
           }
         end
 
