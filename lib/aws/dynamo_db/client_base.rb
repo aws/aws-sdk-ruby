@@ -17,6 +17,7 @@ module AWS
   class DynamoDB
 
     # Client class for Amazon DynamoDB.
+    # @api private
     class ClientBase < Core::JSONClient
 
       # @private
