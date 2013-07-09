@@ -48,10 +48,13 @@ OptionParser.new do |opts|
 
   opts.on("-e 'command'", "one line of script. Several -e's allowed.") do |value|
     options[:execute] << value
+    options[:log] = false unless options[:log_set]
+    options[:debug] = false unless options[:debug_set]
   end
 
   opts.on("-l", "--[no-]log", "log client requets, on by default") do |value|
     options[:log] = value
+    options[:log_set] = true
   end
 
   opts.on("-c", "--[no-]color", "colorize request logging, on by default") do |value|
@@ -60,6 +63,7 @@ OptionParser.new do |opts|
 
   opts.on("-d", "--[no-]debug", "log HTTP wire traces, off by default") do |value|
     options[:debug] = value
+    options[:debug_set] = true
   end
 
   opts.on("-Idirectory", Array, "specify $LOAD_PATH directory (may be used more than once)") do |values|
@@ -72,12 +76,16 @@ OptionParser.new do |opts|
 
   opts.on("-v", "--verbose", "enable client logging and HTTP wire tracing") do |value|
     options[:log] = true
+    options[:log_set] = true
     options[:debug] = true
+    options[:debug_set] = true
   end
 
   opts.on("-q", "--quiet", "disable client logging and HTTP wire tracing") do |value|
     options[:log] = false
+    options[:log_set] = true
     options[:debug] = false
+    options[:debug_set] = true
   end
 
   opts.on("-h", "--help") do
