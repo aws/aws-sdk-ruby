@@ -27,7 +27,7 @@ module AWS
     # By default, the oldest API version is used.  This ensures customers
     # who started using DynamoDB early would not get broken by API updates.
     # You can construct a client of a specific version by passing the
-    # `:api_version` option to the {new} method.
+    # `:api_version` option to the {#initialize constructor}.
     #
     #     # defaults to the 2011-12-05 API version
     #     ddb = AWS::DynamoDB::Client.new
@@ -60,6 +60,7 @@ module AWS
 
       class << self
 
+        # @api private
         def new(*args, &block)
           options = args.last.is_a?(Hash) ? args.last : {}
           client = client_class(options).allocate
