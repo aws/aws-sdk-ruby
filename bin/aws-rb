@@ -127,7 +127,7 @@ options[:require].each do |library|
 end
 
 unless options[:execute].empty?
-  options[:execute].each {|expression| eval(expression) }
+  eval(options[:execute].join("\n"))
   exit
 end
 
