@@ -179,6 +179,11 @@ module AWS
         nil
       end
 
+      # @api private
+      def inspect
+        "#<#{self.class.name}>"
+      end
+
       protected
 
       def new_request
@@ -587,6 +592,34 @@ module AWS
         # @api private
         def response_parsers
           @response_parsers ||= {}
+        end
+
+        def new(*args, &block)
+          options = args.last.is_a?(Hash) ? args.last : {}
+          client = client_class(options).allocate
+          client.send(:initialize, *args, &block)
+          client
+        end
+
+        private
+
+        def client_class(options)
+          if name =~ /Client::V\d+$/
+            self
+          else
+            const_get("V#{client_api_version(options).gsub(/-/, '')}")
+          end
+        end
+
+        def client_api_version(options)
+          api_version = options[:api_version]
+          api_version ||= configured_version
+          api_version || const_get(:API_VERSION)
+        end
+
+        def configured_version
+          svc_opt = AWS::SERVICES[name.split('::')[1]].method_name
+          AWS.config.send(svc_opt)[:api_version]
         end
 
         protected
