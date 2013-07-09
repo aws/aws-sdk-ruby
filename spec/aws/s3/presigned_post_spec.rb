@@ -117,10 +117,8 @@ module AWS
           lambda { post.where("x-amz-meta-foo") }.should_not raise_error
         end
 
-        it 'should not accept arbitrary, non-metadata names' do
-          lambda { post.where(:foobla) }.
-            should raise_error(ArgumentError,
-                               "unrecognized field name foobla")
+        it 'should accept arbitrary fields' do
+          lambda { post.where("not-actually-anything") }.should_not raise_error
         end
 
         shared_examples_for "POST policy condition preserves fields" do |*args|
@@ -169,11 +167,16 @@ module AWS
             :key => "foobar",
             :acl => :public_read,
             :server_side_encryption => :aes256,
-            :ignore => ["foo", "bar"]
+            :ignore => ["foo", "bar"],
+            "arbitrary-param" => "~"
           } }
 
         let(:original_post) { described_class.new(bucket, original_options) }
 
+        it 'should include arbitrary fields and capitalize them' do
+          original_post.fields.should include("Arbitrary-Param")
+        end
+        
         context 'equality condition' do
 
           let(:post) { original_post.where(:expires_header).is("foobar") }
@@ -214,6 +217,12 @@ module AWS
             credential_provider.stub(:session_token).and_return('abc')
             policy_conditions(original_post).
               should include({ "x-amz-security-token" => "abc" })
+          end
+
+          it 'should also include arbitrary conditions as well' do
+            arbitrary_post = post.where(:arbitrary).starts_with("a")
+            arbitrary_cond = policy_conditions(arbitrary_post)
+            arbitrary_cond.should include(["starts-with", "$Arbitrary", "a"])
           end
 
           it_should_behave_like "POST policy condition preserves fields"

@@ -75,18 +75,6 @@ module AWS
       attr_reader :content_length
 
       # @api private
-      SPECIAL_FIELDS = [:cache_control,
-                        :content_type,
-                        :content_disposition,
-                        :content_encoding,
-                        :expires_header,
-                        :acl,
-                        :server_side_encryption,
-                        :success_action_redirect,
-                        :success_action_status,
-                        :filename]
-
-      # @api private
       attr_reader :conditions
 
       # @return [Array<String>] Additional fields which may be sent
@@ -99,6 +87,16 @@ module AWS
       #   the signature will expire an hour after it is generated.
       attr_reader :expires
 
+      # @api private
+      SPECIAL_FIELDS = [:key,
+                        :policy,
+                        :signature,
+                        :expires,
+                        :metadata,
+                        :content_length,
+                        :conditions,
+                        :ignore]
+      
       # Creates a new presigned post object.
       #
       # @param [Bucket] bucket The bucket to which data can be uploaded
@@ -200,8 +198,9 @@ module AWS
         @key = opts[:key]
         @secure = (opts[:secure] != false)
         @fields = {}
-        SPECIAL_FIELDS.each do |name|
-          @fields[name] = opts[name] if opts.key?(name)
+        # TODO normalize all values to @fields
+        opts.each do |opt_key, opt_val|
+          @fields[opt_key] = opt_val unless SPECIAL_FIELDS.include? opt_key
         end
         @metadata = opts[:metadata] || {}
         @content_length = range_value(opts[:content_length])
@@ -290,7 +289,8 @@ module AWS
       #  presigned_post.where(:acl).starts_with("bucket-owner")
       #
       # @param [Symbol] field The field for which a condition should
-      #  be added.  Valid values:
+      #  be added. In addition to any arbitrary values you have set,
+      #  the following values are also permitted:
       #
       #  * `:key`
       #  * `:content_length`
@@ -306,9 +306,6 @@ module AWS
       # @return [ConditionBuilder] An object that allows you to
       #   specify a condition on the field.
       def where(field)
-        raise ArgumentError.new("unrecognized field name #{field}") unless
-          [:key, :content_length, *SPECIAL_FIELDS].include?(field) or
-          field =~ /^x-amz-meta-/
         ConditionBuilder.new(self, field)
       end
 
@@ -359,7 +356,6 @@ module AWS
         end
 
         fields.merge(optional_fields)
-
       end
 
       # @api private
@@ -439,8 +435,7 @@ module AWS
       # @api private
       private
       def optional_fields
-        fields = (SPECIAL_FIELDS &
-                  @fields.keys).inject({}) do |fields, option_name|
+        fields = @fields.keys.inject({}) do |fields, option_name|
           fields[field_name(option_name)] =
             field_value(option_name)
           fields
@@ -461,6 +456,8 @@ module AWS
           "Expires"
         when :server_side_encryption
           "x-amz-server-side-encryption"
+        when :key, "Key", :policy, "Policy"
+          option_name.to_s.downcase
         when :acl, :success_action_redirect, :success_action_status
           option_name.to_s
         else
