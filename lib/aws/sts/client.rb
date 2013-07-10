@@ -17,6 +17,8 @@ module AWS
     # Client class for AWS Security Token Service (STS).
     class Client < Core::QueryClient
 
+      API_VERSION = '2011-06-15'
+
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @api private
@@ -30,6 +32,10 @@ module AWS
           raise ArgumentError, msg
         end
       end
+
+    end
+
+    class Client::V20110615 < Client
 
       # client methods #
 

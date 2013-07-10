@@ -17,8 +17,14 @@ module AWS
     # Client class for AWS Storage Gateway.
     class Client < Core::JSONClient
 
+      API_VERSION = '2012-06-30'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20120630 < Client
 
       # client methods #
 

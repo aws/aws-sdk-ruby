@@ -17,6 +17,8 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
+      API_VERSION = '2013-02-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
@@ -55,6 +57,10 @@ module AWS
         :describe_network_interfaces,
         :describe_network_interface_attribute,
       ]
+
+    end
+
+    class Client::V20130201 < Client
 
       # client methods #
 

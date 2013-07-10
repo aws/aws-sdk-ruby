@@ -17,8 +17,14 @@ module AWS
     # Client class for Amazon Relational Database Service (RDS).
     class Client < Core::QueryClient
 
+      API_VERSION = '2013-02-12'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20130212 < Client
 
       # client methods #
 

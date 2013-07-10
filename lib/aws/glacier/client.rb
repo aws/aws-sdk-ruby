@@ -23,8 +23,22 @@ module AWS
     #
     class Client < Core::RESTJSONClient
 
+      API_VERSION = '2012-06-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+      private
+
+      def build_request *args
+        request = super(*args)
+        request.headers['x-amz-glacier-version'] = self.class.const_get(:API_VERSION)
+        request
+      end
+
+    end
+
+    class Client::V20120601 < Client
 
       # client methods #
 
@@ -305,14 +319,6 @@ module AWS
       # end client methods #
 
       define_client_methods('2012-06-01')
-
-      private
-
-      def build_request *args
-        request = super(*args)
-        request.headers['x-amz-glacier-version'] = API_VERSION
-        request
-      end
 
     end
   end

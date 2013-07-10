@@ -17,8 +17,29 @@ module AWS
     # Client class for Amazon Simple Queue Service (SQS).
     class Client < Core::QueryClient
 
+      API_VERSION = '2012-11-05'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+      private
+
+      def build_request *args
+        request = super(*args)
+        if url_param = request.params.find { |p| p.name == "QueueUrl" }
+          url = URI.parse(url_param.value)
+          request.host = url.host
+          request.uri = url.request_uri
+          if matches = request.host.match(/^sqs\.(.+?)\./)
+            request.region = matches[1]
+          end
+        end
+        request
+      end
+
+    end
+
+    class Client::V20121105 < Client
 
       # client methods #
 
@@ -276,21 +297,6 @@ module AWS
       # end client methods #
 
       define_client_methods('2012-11-05')
-
-      private
-
-      def build_request *args
-        request = super(*args)
-        if url_param = request.params.find { |p| p.name == "QueueUrl" }
-          url = URI.parse(url_param.value)
-          request.host = url.host
-          request.uri = url.request_uri
-          if matches = request.host.match(/^sqs\.(.+?)\./)
-            request.region = matches[1]
-          end
-        end
-        request
-      end
 
     end
   end

@@ -17,10 +17,16 @@ module AWS
     # Client class for Amazon Simple E-mail Service (SES).
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-12-01'
+
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20101201 < Client
 
       # client methods #
 

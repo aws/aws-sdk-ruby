@@ -17,6 +17,8 @@ module AWS
     # Client class for Cloud Watch
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-08-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_alarm_history,
@@ -24,6 +26,10 @@ module AWS
         :describe_alarms_for_metric,
         :list_metrics,
       ]
+
+    end
+
+    class Client::V20100801 < Client
 
       # client methods #
 

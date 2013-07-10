@@ -17,8 +17,14 @@ module AWS
     # Client class for Route53.
     class Client < Core::RESTXMLClient
 
+      API_VERSION = '2012-12-12'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20121212 < Client
 
       # client methods #
 

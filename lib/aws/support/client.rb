@@ -17,8 +17,14 @@ module AWS
     # Client class for AWS Support.
     class Client < Core::JSONClient
 
+      API_VERSION = '2013-04-15'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20130415 < Client
 
       # client methods #
 

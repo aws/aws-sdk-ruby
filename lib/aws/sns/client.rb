@@ -17,8 +17,14 @@ module AWS
     # Client class for Amazon Simple Notifications Service (SNS).
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-03-31'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20100331 < Client
 
       # client methods #
 

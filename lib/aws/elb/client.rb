@@ -17,8 +17,14 @@ module AWS
     # Client class for Elastic Load Balancing (ELB).
     class Client < Core::QueryClient
 
+      API_VERSION = '2012-06-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20120601 < Client
 
       # client methods #
 
