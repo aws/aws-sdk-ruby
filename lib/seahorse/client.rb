@@ -66,8 +66,7 @@ module Seahorse
     # @param [Symbol, String] operation_name
     # @return [Request]
     def build_request(operation_name, params = {})
-      req = Request.new(params)
-      req.on(:build) {|http_request, params| http_request.endpoint = endpoint }
+      req = Request.new
       req
     end
 

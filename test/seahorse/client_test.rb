@@ -98,22 +98,6 @@ module Seahorse
         client.build_request(:operation_name).must_be_kind_of(Client::Request)
       end
 
-      it 'defaults the request params to {}' do
-        client.build_request(:operation_name).params.must_equal({})
-      end
-
-      it 'passes along params' do
-        params = {}
-        req = client.build_request(:operation_name, params)
-        req.params.must_be_same_as(params)
-      end
-
-      it 'adds a :build listener that sets the http request endpoint' do
-        http_request = Client::Http::Request.new
-        request.events.emit(:build, http_request, {})
-        http_request.endpoint.must_equal(client.endpoint)
-      end
-
     end
 
   end

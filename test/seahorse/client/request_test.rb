@@ -17,139 +17,23 @@ module Seahorse
   class Client
     describe Request do
 
-      def request params = {}
-        @req ||= Request.new(params)
-      end
-
-      describe '#params' do
-
-        it 'defaults to an empty hash' do
-          Request.new.params.must_equal({})
-        end
-
-        it 'can be set in the constructor' do
-          params = {}
-          req = Request.new(params)
-          req.params.must_be_same_as(params)
-        end
-
-      end
-
-      describe '#events' do
-
-        it 'returns the event emitter for the request' do
-          request.events.must_be_kind_of(EventEmitter)
-        end
-
+      def request
+        @request ||= Request.new
       end
 
       describe '#send' do
 
-        it 'returns a Response object' do
+        it 'returns a Response' do
           request.send.must_be_kind_of(Response)
         end
 
-        it 'returns a new response everytime #send is called' do
+        it 'returns a different Response object everytime #send is called' do
           resp1 = request.send
           resp2 = request.send
           resp1.wont_be_same_as(resp2)
         end
 
-        it 'does not fiddle with params, they are left alone' do
-          # if sending the request attempts to mutate the params
-          # hash, then a RuntimeError is raises, failing this spec
-          params = {}.freeze
-          request(params).send
-        end
-
       end
-
-      describe 'lifecycle events' do
-
-        # standard lifecycle events emitted for a successful request
-        def events
-          [:validate, :build, :sign, :send, :parse, :success, :complete]
-        end
-
-        def setup
-          # keep track of emitted events
-          @emitted = []
-          events.each do |event_name|
-            request.on(event_name) { |*args| @emitted << event_name }
-          end
-        end
-
-        it 'emits a sequence of standard events as a result of #send' do
-          request.send
-          @emitted.must_equal(events)
-        end
-
-        describe ':validate' do
-
-          it 'emits the request parameters' do
-            yielded = nil
-            request.on(:validate) { |params| yielded = params }
-            request.send
-            yielded.must_be_same_as(request.params)
-          end
-
-          it 'stops emitting and raises if a listener raises' do
-            request.on(:validate) { |*args| raise 'error' }
-            assert_raises(RuntimeError) { request.send }
-            @emitted.must_equal([:validate])
-          end
-
-        end
-
-        describe ':build' do
-
-          it 'emits a http request and the request params' do
-            yielded = []
-            request.on(:build) do |http_request, params|
-              yielded << http_request
-              yielded << params
-            end
-            request.send
-            yielded[0].must_be_kind_of(Http::Request)
-            yielded[1].must_be_same_as(request.params)
-          end
-
-          it 'stops emitting and raises if a listener raises' do
-            request.on(:build) { |*args| raise 'error' }
-            assert_raises(RuntimeError) { request.send }
-            @emitted.must_equal([:validate, :build])
-          end
-
-        end
-
-        describe ':sign' do
-
-          it 'emits a http request' do
-            yielded = nil
-            request.on(:sign) { |http_request| yielded = http_request }
-            request.send
-            yielded.must_be_kind_of(Http::Request)
-          end
-
-          it 'emits the same http request to :sign as it does to :build' do
-            yielded_by_build = nil
-            yielded_by_sign = nil
-            request.on(:build) { |req, params| yielded_by_build = req }
-            request.on(:sign) { |req| yielded_by_sign = req }
-            request.send
-            yielded_by_sign.must_be_same_as(yielded_by_build)
-          end
-
-          it 'stops emitting and raises if a listener raises' do
-            request.on(:sign) { |*args| raise 'error' }
-            assert_raises(RuntimeError) { request.send }
-            @emitted.must_equal([:validate, :build, :sign])
-          end
-
-        end
-
-      end
-
     end
   end
 end
