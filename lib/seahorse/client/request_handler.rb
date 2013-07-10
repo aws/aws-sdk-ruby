@@ -25,10 +25,10 @@ module Seahorse
       # @return [Configuration]
       attr_reader :config
 
-      # @param [Request] request
+      # @param [RequestContext] context
       # @return [Response]
-      def call(request)
-        @handler.call(request)
+      def call(context)
+        @handler.call(context)
       end
 
     end

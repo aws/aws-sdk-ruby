@@ -17,6 +17,14 @@ module Seahorse
   class Client
     describe RequestHandler do
 
+      def context
+        @context ||= RequestContext.new
+      end
+
+      def response
+        @response ||= Response.new
+      end
+
       def config
         @config ||= Configuration.new
       end
@@ -35,17 +43,17 @@ module Seahorse
 
       it 'chains #call to the nested handler' do
         handler = Minitest::Mock.new
-        handler.expect(:call, 'response', ['request'])
-        RequestHandler.new(config, handler).call('request')
+        handler.expect(:call, response, [context])
+        RequestHandler.new(config, handler).call(context)
         assert handler.verify
       end
 
       it 'returns the response from the nested handler' do
         handler = Minitest::Mock.new
-        handler.expect(:call, 'special-response', ['request'])
+        handler.expect(:call, response, [context])
         RequestHandler.new(config, handler)
-          .call('request')
-          .must_equal('special-response')
+          .call(context)
+          .must_be_same_as(response)
       end
 
     end
