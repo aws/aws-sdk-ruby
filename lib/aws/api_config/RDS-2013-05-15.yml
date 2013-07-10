@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2013-02-12'
+:api_version: '2013-05-15'
 :operations:
 - :name: AddSourceIdentifierToSubscription
   :method: :add_source_identifier_to_subscription
@@ -265,6 +265,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: CreateDBInstanceReadReplica
   :method: :create_db_instance_read_replica
@@ -371,6 +380,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: CreateDBParameterGroup
   :method: :create_db_parameter_group
@@ -551,6 +569,8 @@
                     :children:
                       Persistent:
                         :type: :boolean
+                      Permanent:
+                        :type: :boolean
                       Port:
                         :type: :integer
                       OptionSettings:
@@ -671,6 +691,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: DeleteDBParameterGroup
   :method: :delete_db_parameter_group
@@ -895,6 +924,15 @@
                         :list: true
                   PubliclyAccessible:
                     :type: :boolean
+                  StatusInfos:
+                    :ignore: true
+                    :children:
+                      DBInstanceStatusInfo:
+                        :rename: :status_infos
+                        :list: true
+                        :children:
+                          Normal:
+                            :type: :boolean
 - :name: DescribeDBLogFiles
   :method: :describe_db_log_files
   :inputs:
@@ -1233,6 +1271,8 @@
                         :list: true
                   Persistent:
                     :type: :boolean
+                  Permanent:
+                    :type: :boolean
                   OptionGroupOptionSettings:
                     :ignore: true
                     :children:
@@ -1275,6 +1315,8 @@
                         :list: true
                         :children:
                           Persistent:
+                            :type: :boolean
+                          Permanent:
                             :type: :boolean
                           Port:
                             :type: :integer
@@ -1453,10 +1495,8 @@
 - :name: DownloadDBLogFilePortion
   :method: :download_db_log_file_portion
   :inputs:
-    DBInstanceIdentifier:
-    - :string
-    LogFileName:
-    - :string
+    DBInstanceIdentifier: []
+    LogFileName: []
     Marker:
     - :string
     NumberOfLines:
@@ -1609,6 +1649,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: ModifyDBParameterGroup
   :method: :modify_db_parameter_group
@@ -1774,6 +1823,8 @@
                     :children:
                       Persistent:
                         :type: :boolean
+                      Permanent:
+                        :type: :boolean
                       Port:
                         :type: :integer
                       OptionSettings:
@@ -1894,6 +1945,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: PurchaseReservedDBInstancesOffering
   :method: :purchase_reserved_db_instances_offering
@@ -2024,6 +2084,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: RemoveSourceIdentifierFromSubscription
   :method: :remove_source_identifier_from_subscription
@@ -2220,6 +2289,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: RestoreDBInstanceToPointInTime
   :method: :restore_db_instance_to_point_in_time
@@ -2340,6 +2418,15 @@
                     :list: true
               PubliclyAccessible:
                 :type: :boolean
+              StatusInfos:
+                :ignore: true
+                :children:
+                  DBInstanceStatusInfo:
+                    :rename: :status_infos
+                    :list: true
+                    :children:
+                      Normal:
+                        :type: :boolean
             :ignore: true
 - :name: RevokeDBSecurityGroupIngress
   :method: :revoke_db_security_group_ingress
