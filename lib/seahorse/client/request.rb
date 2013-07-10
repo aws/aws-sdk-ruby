@@ -26,6 +26,9 @@ module Seahorse
         @context = context
       end
 
+      # @return [RequestContext]
+      attr_reader :context
+
       # @return [Response]
       def send
         @handler.call(@context)

@@ -17,6 +17,15 @@ module Seahorse
   class Client
     describe Request do
 
+      describe '#context' do
+
+        it 'returns the request context given the constructor' do
+          context = Object.new
+          Request.new('handler', context).context.must_be_same_as(context)
+        end
+
+      end
+
       describe '#send' do
 
         it 'passes the request context to the handler' do
