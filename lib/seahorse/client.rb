@@ -19,6 +19,7 @@ module Seahorse
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
+    autoload :RequestContext, 'seahorse/client/request_context'
     autoload :RequestHandler, 'seahorse/client/request_handler'
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
@@ -66,7 +67,7 @@ module Seahorse
     # @param [Symbol, String] operation_name
     # @return [Request]
     def build_request(operation_name, params = {})
-      req = Request.new
+      req = Request.new(nil, nil)
       req
     end
 
