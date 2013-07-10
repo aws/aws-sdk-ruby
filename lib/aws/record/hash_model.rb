@@ -31,7 +31,6 @@ module AWS
       def hash_key
         self[self.class.hash_key]
       end
-      alias_method :id, :hash_key
 
       class << self
 

@@ -281,6 +281,14 @@ module AWS
         @_id
       end
 
+      # @return [Hash] A hash with attribute names as hash keys (strings) and
+      #   attribute values (of mixed types) as hash values.
+      def attributes
+        attributes = super
+        attributes['id'] = id if persisted?
+        attributes
+      end
+
       class << self
 
         # Creates the SimpleDB domain that is configured for this class.

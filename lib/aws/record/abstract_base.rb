@@ -76,7 +76,6 @@ module AWS
         #   attribute values (of mixed types) as hash values.
         def attributes
           attributes = Core::IndifferentHash.new
-          attributes['id'] = id
           self.class.attributes.keys.inject(attributes) do |hash,attr_name|
             hash.merge(attr_name => __send__(attr_name))
           end
