@@ -21,6 +21,18 @@ module AWS
 
       extend AbstractBase
 
+      def self.inherited(sub_class)
+        sub_class.string_attr :id,
+          :hash_key => true,
+          :default_hash_key_attribute => true
+      end
+
+      # @return [String,nil]
+      def hash_key
+        self[self.class.hash_key]
+      end
+      alias_method :id, :hash_key
+
       class << self
 
         # Creates the DynamoDB table that is configured for this class.
@@ -82,14 +94,32 @@ module AWS
         # @return [DynamoDB::Table]
         # @api private
         def dynamo_db_table shard_name = nil
-          hash_key = :id
-          hash_key = self.hash_key unless self.hash_key.nil?
           table = dynamo_db.tables[dynamo_db_table_name(shard_name)]
           table.hash_key = [hash_key, :string]
           table
         end
 
+        # @api private
+        def hash_key
+          hash_key_attribute.name
+        end
+
+        # @api private
+        def hash_key_attribute
+          @hash_key_attribute
+        end
+
         private
+
+        def set_hash_key_attribute(attribute)
+          if
+            hash_key_attribute and
+            hash_key_attribute.options[:default_hash_key_attribute]
+          then
+            remove_attribute(hash_key_attribute)
+          end
+          @hash_key_attribute = attribute
+        end
 
         def dynamo_db_table_name shard_name = nil
           "#{Record.table_prefix}#{self.shard_name(shard_name)}"
@@ -99,20 +129,20 @@ module AWS
           AWS::DynamoDB.new
         end
 
+        def add_attribute(attribute)
+          set_hash_key_attribute(attribute) if attribute.options[:hash_key]
+          super(attribute)
+        end
+
       end
 
-      def self.hash_key
-        return @hash_key unless @hash_key.nil?
-        :id
-      end
+      private
 
-      def self.hash_key= key
-        @hash_key = key unless !@hash_key.nil? and @hash_key != :id
-      end
-
-      def self.add_attribute attribute
-        self.hash_key = attribute.options[:hash_key] ? attribute.name : :id
-        super attribute
+      def populate_id
+        hash_key = self.class.hash_key_attribute
+        if hash_key.options[:default_hash_key_attribute]
+          self[hash_key.name] = UUIDTools::UUID.random_create.to_s.downcase
+        end
       end
 
       # @return [DynamoDB::Item] Returns a reference to the item as stored in
@@ -132,8 +162,7 @@ module AWS
 
       private
       def create_storage
-        attributes = serialize_attributes.merge('id' => @_id)
-        dynamo_db_table.items.create(attributes, opt_lock_conditions)
+        dynamo_db_table.items.create(serialize_attributes, opt_lock_conditions)
       end
 
       private

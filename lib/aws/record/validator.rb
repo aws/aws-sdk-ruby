@@ -25,7 +25,7 @@ module AWS
 
         @options = attribute_names.last.is_a?(Hash) ? attribute_names.pop : {}
 
-        @attribute_names = attribute_names
+        @attribute_names = attribute_names.map(&:to_s)
 
         reject_unknown_options
 

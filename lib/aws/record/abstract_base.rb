@@ -656,6 +656,22 @@ module AWS
 
         end
 
+        # @api private
+        def remove_attribute(attribute)
+          send(:remove_method, attribute.name)
+          send(:remove_method, "#{attribute.name}=")
+          send(:remove_method, "#{attribute.name}_before_type_cast")
+          send(:remove_method, "#{attribute.name}_changed?")
+          send(:remove_method, "#{attribute.name}_change")
+          send(:remove_method, "#{attribute.name}_was")
+          send(:remove_method, "#{attribute.name}_will_change!")
+          send(:remove_method, "reset_#{attribute.name}!")
+          validators.each do |validator|
+            validator.attribute_names.delete(attribute.name)
+          end
+          attributes.delete(attribute.name)
+        end
+
         private
 
         def create_impl attributes = {}, create_method = :create, save_method = :save

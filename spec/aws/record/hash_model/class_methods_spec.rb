@@ -38,20 +38,20 @@ module AWS
 
         it 'calls create on the table collection' do
           tables.should_receive(:create).with(
-            klass.name, 11, 12, :hash_key => { :id => :string })
+            klass.name, 11, 12, :hash_key => { 'id' => :string })
           klass.create_table 11, 12
         end
 
         it 'accepts an optional :shard_name' do
           tables.should_receive(:create).with(
-            'products-2', 100, 200, :hash_key => { :id => :string })
+            'products-2', 100, 200, :hash_key => { 'id' => :string })
           klass.create_table 100, 200, :shard_name => 'products-2'
         end
 
         it 'prefixes the shard name with AWS::Record.table_prefix' do
           AWS::Record.stub(:table_prefix).and_return('prefix-')
           tables.should_receive(:create).with(
-            "prefix-#{klass.name}", 100, 200, :hash_key => { :id => :string })
+            "prefix-#{klass.name}", 100, 200, :hash_key => { 'id' => :string })
           klass.create_table 100, 200
         end
 
