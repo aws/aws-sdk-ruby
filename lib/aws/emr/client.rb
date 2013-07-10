@@ -17,8 +17,14 @@ module AWS
     # Client class for Elastic MapReduce (EMR).
     class Client < Core::QueryClient
 
+      API_VERSION = '2009-03-31'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20090331 < Client
 
       # client methods #
 

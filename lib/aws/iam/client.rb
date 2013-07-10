@@ -17,6 +17,8 @@ module AWS
     # Client class for AWS Identity and Access Management (IAM).
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-05-08'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :get_group,
@@ -33,6 +35,10 @@ module AWS
         :list_server_certificates,
         :list_virtual_mfa_devices,
       ]
+
+    end
+
+    class Client::V20100508 < Client
 
       # client methods #
 

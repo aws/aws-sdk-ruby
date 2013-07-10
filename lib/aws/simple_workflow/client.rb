@@ -17,6 +17,8 @@ module AWS
     # Client class for Amazon Simple Workflow Service (SWF).
     class Client < Core::JSONClient
 
+      API_VERSION = '2012-01-25'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :count_pending_activity_tasks,
@@ -35,6 +37,28 @@ module AWS
         :list_open_workfow_executions,
         :list_workfow_types,
       ]
+
+      protected
+
+      def cacheable_request? name, options
+        if name == :poll_for_decision_task
+          options.keys.include?(:next_page_token)
+        else
+          self.class::CACHEABLE_REQUESTS.include?(name)
+        end
+      end
+
+      def build_request *args
+        request = super(*args)
+        if request.headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
+          request.read_timeout = 90
+        end
+        request
+      end
+
+    end
+
+    class Client::V20120125 < Client
 
       # client methods #
 
@@ -1285,24 +1309,6 @@ module AWS
       # end client methods #
 
       define_client_methods('2012-01-25')
-
-      protected
-
-      def cacheable_request? name, options
-        if name == :poll_for_decision_task
-          options.keys.include?(:next_page_token)
-        else
-          self.class::CACHEABLE_REQUESTS.include?(name)
-        end
-      end
-
-      def build_request *args
-        request = super(*args)
-        if request.headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
-          request.read_timeout = 90
-        end
-        request
-      end
 
     end
   end

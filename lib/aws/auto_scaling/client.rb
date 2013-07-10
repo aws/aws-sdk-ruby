@@ -17,6 +17,8 @@ module AWS
     # Client class for Auto Scaling.
     class Client < Core::QueryClient
 
+      API_VERSION= '2011-01-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,
@@ -32,6 +34,10 @@ module AWS
         :describe_scheduled_actions,
         :describe_tags,
       ]
+
+    end
+
+    class Client::V20110101 < Client
 
       # client methods #
 

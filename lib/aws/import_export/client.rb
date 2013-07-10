@@ -17,8 +17,14 @@ module AWS
     # Client class for AWS Import/Export.
     class Client < Core::QueryClient
 
+      API_VERSION = '2010-06-01'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20100601 < Client
 
       # client methods #
 

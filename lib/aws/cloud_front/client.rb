@@ -13,10 +13,17 @@
 
 module AWS
   class CloudFront
+
     class Client < Core::RESTXMLClient
+
+      API_VERSION = '2012-07-01'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20120701 < Client
 
       # client methods #
 

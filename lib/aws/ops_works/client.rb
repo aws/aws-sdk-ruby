@@ -17,8 +17,14 @@ module AWS
     # Client class for AWS OpsWorks.
     class Client < Core::JSONClient
 
+      API_VERSION = '2013-02-18'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20130218 < Client
 
       # client methods #
 

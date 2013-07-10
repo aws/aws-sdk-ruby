@@ -1724,5 +1724,7 @@ module AWS
 
     end
 
+    class Client::V20060301 < Client; end
+
   end
 end

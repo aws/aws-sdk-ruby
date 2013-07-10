@@ -37,13 +37,12 @@ module AWS
             end
 
             class Client < Core::Client
+              API_VERSION = '2000-01-02'
+            end
 
-              API_VERSION = Time.now.strftime('%Y-%m-%d')
-
+            class Client::V20000102 < Client
               add_client_request_method(:sample_method) do
-                # ...
               end
-
             end
 
           end

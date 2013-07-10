@@ -16,6 +16,8 @@ module AWS
 
     class Client < Core::RESTJSONClient
 
+      API_VERSION = '2012-09-25'
+
       # @api private
       def extract_error_details response
         if
@@ -32,6 +34,10 @@ module AWS
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20120925 < Client
 
       # client methods #
 
