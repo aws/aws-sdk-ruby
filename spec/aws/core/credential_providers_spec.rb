@@ -259,7 +259,7 @@ module AWS
 
         it 'raises an error when no credentials are present' do
           lambda {
-            CredentialFileProvider.new(nil).credentials
+            CredentialFileProvider.new('/no/file/here').credentials
           }.should raise_error(Errors::MissingCredentialsError)
         end
 
