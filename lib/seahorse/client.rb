@@ -14,7 +14,6 @@
 require 'seahorse/client/configuration'
 require 'seahorse/client/endpoint'
 require 'seahorse/client/plugin_list'
-require 'seahorse/client/plugin_stack'
 require 'seahorse/client/request'
 require 'seahorse/client/version'
 
