@@ -11,16 +11,21 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'rake/testtask'
+module Seahorse
+  class Client
+    class Handler
 
-Rake::TestTask.new do |t|
-  t.libs.push 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
+      # @param [Handler] handler
+      def initialize(handler)
+        @handler = handler
+      end
 
-desc 'Generates a coverage report'
-task :coverage do
-  ENV['COVERAGE'] = 'true'
-  Rake::Task['test'].execute
+      # @param [Request] request
+      # @return [Response]
+      def call(request)
+        @handler.call(request)
+      end
+
+    end
+  end
 end

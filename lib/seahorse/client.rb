@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -17,6 +17,7 @@ module Seahorse
     autoload :Configuration, 'seahorse/client/configuration'
     autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
+    autoload :Handler, 'seahorse/client/handler'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
