@@ -50,7 +50,11 @@ module AWS
 
         # @return Returns the default value for this attribute.
         def default_value
-          options[:default_value]
+          if options[:default_value].is_a?(Proc)
+            options[:default_value].call
+          else
+            options[:default_value]
+          end
         end
 
         # @return [String] Returns the name this attribute will use

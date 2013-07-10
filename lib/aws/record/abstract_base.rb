@@ -76,7 +76,7 @@ module AWS
         #   attribute values (of mixed types) as hash values.
         def attributes
           attributes = Core::IndifferentHash.new
-          attributes['id'] = id if persisted?
+          attributes['id'] = id
           self.class.attributes.keys.inject(attributes) do |hash,attr_name|
             hash.merge(attr_name => __send__(attr_name))
           end
@@ -330,12 +330,13 @@ module AWS
           # populate default attribute values
           ignore_changes do
             self.class.attributes.values.each do |attribute|
+              default = attribute.default_value
               begin
                 # copy default values down so methods like #gsub! don't
                 # modify the default values for other objects
-                @_data[attribute.name] = attribute.default_value.clone
+                @_data[attribute.name] = default.clone
               rescue TypeError
-                @_data[attribute.name] = attribute.default_value
+                @_data[attribute.name] = default
               end
             end
           end

@@ -153,7 +153,8 @@ module AWS
               klass.string_attr :foo
               klass.integer_attr :bar
               obj = klass.new(:foo => 'abc', :bar => '123')
-              obj.attributes.should == { 'foo' => 'abc', 'bar' => 123 }
+              obj.attributes['foo'].should eq('abc')
+              obj.attributes['bar'].should eq(123)
             end
 
             it 'it uses value override methods' do
@@ -164,7 +165,7 @@ module AWS
                 end
               end
               obj = klass.new(:foo => 'bar')
-              obj.attributes.should == { 'foo' => 'barbar' }
+              obj.attributes[:foo].should eq('barbar')
             end
 
             it 'includes the id for saved records' do
