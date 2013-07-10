@@ -14,7 +14,7 @@
 module Seahorse
   class Client
     module Http
-      class Handler < RequestHandler
+      class Handler < Client::Handler
 
         # @param [RequestContext] context
         # @return [Response]

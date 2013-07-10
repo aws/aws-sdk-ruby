@@ -13,10 +13,10 @@
 
 module Seahorse
   class Client
-    class RequestHandler
+    class Handler
 
       # @param [Configuration] config
-      # @param [RequestHandler] handler (nil)
+      # @param [Handler] handler (nil)
       def initialize(config, handler = nil)
         @config = config
         @handler = handler

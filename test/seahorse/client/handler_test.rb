@@ -15,7 +15,7 @@ require 'test_helper'
 
 module Seahorse
   class Client
-    describe RequestHandler do
+    describe Handler do
 
       def context
         @context ||= RequestContext.new
@@ -30,28 +30,28 @@ module Seahorse
       end
 
       it 'is constructed with a configuration object' do
-        RequestHandler.new(config).config.must_be_same_as(config)
+        Handler.new(config).config.must_be_same_as(config)
       end
 
       it 'can be constructed with another handler' do
-        RequestHandler.new(config, RequestHandler.new(config))
+        Handler.new(config, Handler.new(config))
       end
 
       it 'responds to #call' do
-        RequestHandler.new(config).must_respond_to(:call)
+        Handler.new(config).must_respond_to(:call)
       end
 
       it 'chains #call to the nested handler' do
         handler = Minitest::Mock.new
         handler.expect(:call, response, [context])
-        RequestHandler.new(config, handler).call(context)
+        Handler.new(config, handler).call(context)
         assert handler.verify
       end
 
       it 'returns the response from the nested handler' do
         handler = Minitest::Mock.new
         handler.expect(:call, response, [context])
-        RequestHandler.new(config, handler)
+        Handler.new(config, handler)
           .call(context)
           .must_be_same_as(response)
       end

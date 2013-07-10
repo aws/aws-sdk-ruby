@@ -19,7 +19,7 @@ module Seahorse
     # {Response}.
     class Request
 
-      # @param [RequestHandler] handler
+      # @param [Handler] handler
       # @param [RequestContext] context
       def initialize(handler, context)
         @handler = handler

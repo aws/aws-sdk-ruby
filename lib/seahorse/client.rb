@@ -17,10 +17,10 @@ module Seahorse
     autoload :Configuration, 'seahorse/client/configuration'
     autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
+    autoload :Handler, 'seahorse/client/handler'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :RequestContext, 'seahorse/client/request_context'
-    autoload :RequestHandler, 'seahorse/client/request_handler'
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
 
