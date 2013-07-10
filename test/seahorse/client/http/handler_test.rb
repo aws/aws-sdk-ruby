@@ -22,8 +22,8 @@ module Seahorse
           @config ||= Configuration.new
         end
 
-        it 'is a Handler' do
-          Handler.new(config).must_be_kind_of(Client::Handler)
+        it 'is a RequestHandler' do
+          Handler.new(config).must_be_kind_of(RequestHandler)
         end
 
       end

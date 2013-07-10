@@ -14,7 +14,7 @@
 module Seahorse
   class Client
     module Http
-      class Handler < Client::Handler
+      class Handler < RequestHandler
       end
     end
   end
