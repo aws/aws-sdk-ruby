@@ -273,6 +273,14 @@ module AWS
 
       extend AbstractBase
 
+      # The id for each record is auto-generated.  The default strategy
+      # generates uuid strings.
+      # @return [String] Returns the id string (uuid) for this record.  Retuns
+      #   nil if this is a new record that has not been persisted yet.
+      def id
+        @_id
+      end
+
       class << self
 
         # Creates the SimpleDB domain that is configured for this class.
@@ -372,6 +380,16 @@ module AWS
 
         end
         data
+      end
+
+      def hydrate(id, data)
+        @_id = id
+        super
+      end
+
+      # @api private
+      def populate_id
+        @_id = UUIDTools::UUID.random_create.to_s.downcase
       end
 
       # @api private

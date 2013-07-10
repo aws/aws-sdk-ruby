@@ -72,14 +72,6 @@ module AWS
         end
         alias_method :domain, :shard # for backwards compatability
 
-        # The id for each record is auto-generated.  The default strategy
-        # generates uuid strings.
-        # @return [String] Returns the id string (uuid) for this record.  Retuns
-        #   nil if this is a new record that has not been persisted yet.
-        def id
-          @_id
-        end
-
         # @return [Hash] A hash with attribute names as hash keys (strings) and
         #   attribute values (of mixed types) as hash values.
         def attributes
@@ -289,11 +281,6 @@ module AWS
         end
 
         protected
-        def populate_id
-          @_id = UUIDTools::UUID.random_create.to_s.downcase
-        end
-
-        protected
         def touch_timestamps *attributes
           now = Time.now
           attributes.each do |attr_name|
@@ -451,11 +438,6 @@ module AWS
         # @api private
         protected
         def hydrate id, data
-
-          # @todo need to do something about partial hyrdation of attributes
-
-          @_id = id
-
           # New objects are populated with default values, but we don't
           # want these values to hang around when hydrating persisted values
           # (those values may have been blanked out before save).
@@ -468,7 +450,6 @@ module AWS
           end
 
           @_persisted = true
-
         end
 
         protected
