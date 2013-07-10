@@ -33,7 +33,7 @@ module AWS
       let(:now) { Time.now }
 
       let(:namespace) {
-        'http://rds.amazonaws.com/doc/2012-09-17/'
+        'http://rds.amazonaws.com/doc/2013-05-15/'
       }
 
       context '#create_db_snapshot' do
