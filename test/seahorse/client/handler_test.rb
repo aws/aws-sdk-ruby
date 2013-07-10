@@ -17,25 +17,33 @@ module Seahorse
   class Client
     describe Handler do
 
+      def config
+        @config ||= Configuration.new
+      end
+
+      it 'is constructed with a configuration object' do
+        Handler.new(config).config.must_be_same_as(config)
+      end
+
       it 'can be constructed with another handler' do
-        Handler.new(Handler.new)
+        Handler.new(config, Handler.new(config))
       end
 
       it 'responds to #call' do
-        Handler.new.must_respond_to(:call)
+        Handler.new(config).must_respond_to(:call)
       end
 
       it 'chains #call to the nested handler' do
         handler = Minitest::Mock.new
         handler.expect(:call, 'response', ['request'])
-        Handler.new(handler).call('request')
+        Handler.new(config, handler).call('request')
         assert handler.verify
       end
 
       it 'returns the response from the nested handler' do
         handler = Minitest::Mock.new
         handler.expect(:call, 'special-response', ['request'])
-        Handler.new(handler).call('request').must_equal('special-response')
+        Handler.new(config, handler).call('request').must_equal('special-response')
       end
 
     end
