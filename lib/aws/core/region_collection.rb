@@ -97,8 +97,8 @@ module AWS
           host = 'aws-sdk-configurations.amazonwebservices.com'
           path = '/endpoints.json'
           http = Net::HTTP
-          proxy_uri = AWS.config.proxy_uri
-          http = Net::HTTP::Proxy(proxy_uri, 8080) unless proxy_uri.nil?
+          proxy = AWS.config.proxy_uri
+          http = Net::HTTP::Proxy(proxy.host, proxy.port) unless proxy.nil?
           JSON.parse(http.get(host, path))
         end
 
