@@ -1,4 +1,3 @@
-
 # Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -65,10 +64,9 @@ module AWS
           path = '/endpoints.json'
           stub_proxy_uri = URI.parse('http://127.0.0.1:8080')
           http = double "http"
-          AWS.config.stub(:proxy_uri).and_return(stub_proxy_uri)
-          Net::HTTP.should_receive(:Proxy).with('127.0.0.1', 8080)
-            .and_return(http)
-          http.should_receive(:get).with(host, path).and_return(json)
+          AWS.config.stub(:proxy_uri) { stub_proxy_uri }
+          Net::HTTP.should_receive(:Proxy).with('127.0.0.1', 8080) { http }
+          http.should_receive(:get).with(host, path) { json }
           regions.map(&:name)
         end
 
