@@ -12,13 +12,13 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-07-01'
+:api_version: '2013-05-12'
 :operations:
 - :name: CreateCloudFrontOriginAccessIdentity
   :method: :create_cloud_front_origin_access_identity
   :http:
     :verb: POST
-    :uri: /2012-07-01/origin-access-identity/cloudfront
+    :uri: /2013-05-12/origin-access-identity/cloudfront
     :request_payload: :cloud_front_origin_access_identity_config
     :response_code: 201
     :response_headers:
@@ -54,7 +54,7 @@
   :method: :create_distribution
   :http:
     :verb: POST
-    :uri: /2012-07-01/distribution
+    :uri: /2013-05-12/distribution
     :request_payload: :distribution_config
     :response_code: 201
     :response_headers:
@@ -321,6 +321,16 @@
           :name: Enabled
           :type: :boolean
           :required: true
+        :viewer_certificate:
+          :name: ViewerCertificate
+          :type: :hash
+          :members:
+            :iam_certificate_id:
+              :name: IAMCertificateId
+              :type: :string
+            :cloud_front_default_certificate:
+              :name: CloudFrontDefaultCertificate
+              :type: :boolean
   :outputs:
     :children:
       Id:
@@ -510,11 +520,17 @@
             :type: :string
           Enabled:
             :type: :boolean
+          ViewerCertificate:
+            :children:
+              IAMCertificateId:
+                :type: :string
+              CloudFrontDefaultCertificate:
+                :type: :boolean
 - :name: CreateInvalidation
   :method: :create_invalidation
   :http:
     :verb: POST
-    :uri: /2012-07-01/distribution/:distribution_id/invalidation
+    :uri: /2013-05-12/distribution/:distribution_id/invalidation
     :request_payload: :invalidation_batch
     :response_code: 201
     :response_headers:
@@ -574,7 +590,7 @@
   :method: :create_streaming_distribution
   :http:
     :verb: POST
-    :uri: /2012-07-01/streaming-distribution
+    :uri: /2013-05-12/streaming-distribution
     :request_payload: :streaming_distribution_config
     :response_code: 201
     :response_headers:
@@ -754,7 +770,7 @@
   :method: :delete_cloud_front_origin_access_identity
   :http:
     :verb: DELETE
-    :uri: /2012-07-01/origin-access-identity/cloudfront/:id
+    :uri: /2013-05-12/origin-access-identity/cloudfront/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -769,7 +785,7 @@
   :method: :delete_distribution
   :http:
     :verb: DELETE
-    :uri: /2012-07-01/distribution/:id
+    :uri: /2013-05-12/distribution/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -784,7 +800,7 @@
   :method: :delete_streaming_distribution
   :http:
     :verb: DELETE
-    :uri: /2012-07-01/streaming-distribution/:id
+    :uri: /2013-05-12/streaming-distribution/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -799,7 +815,7 @@
   :method: :get_cloud_front_origin_access_identity
   :http:
     :verb: GET
-    :uri: /2012-07-01/origin-access-identity/cloudfront/:id
+    :uri: /2013-05-12/origin-access-identity/cloudfront/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -822,7 +838,7 @@
   :method: :get_cloud_front_origin_access_identity_config
   :http:
     :verb: GET
-    :uri: /2012-07-01/origin-access-identity/cloudfront/:id/config
+    :uri: /2013-05-12/origin-access-identity/cloudfront/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -839,7 +855,7 @@
   :method: :get_distribution
   :http:
     :verb: GET
-    :uri: /2012-07-01/distribution/:id
+    :uri: /2013-05-12/distribution/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1035,11 +1051,17 @@
             :type: :string
           Enabled:
             :type: :boolean
+          ViewerCertificate:
+            :children:
+              IAMCertificateId:
+                :type: :string
+              CloudFrontDefaultCertificate:
+                :type: :boolean
 - :name: GetDistributionConfig
   :method: :get_distribution_config
   :http:
     :verb: GET
-    :uri: /2012-07-01/distribution/:id/config
+    :uri: /2013-05-12/distribution/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1197,11 +1219,17 @@
         :type: :string
       Enabled:
         :type: :boolean
+      ViewerCertificate:
+        :children:
+          IAMCertificateId:
+            :type: :string
+          CloudFrontDefaultCertificate:
+            :type: :boolean
 - :name: GetInvalidation
   :method: :get_invalidation
   :http:
     :verb: GET
-    :uri: /2012-07-01/distribution/:distribution_id/invalidation/:id
+    :uri: /2013-05-12/distribution/:distribution_id/invalidation/:id
   :inputs:
     :distribution_id:
       :type: :string
@@ -1236,7 +1264,7 @@
   :method: :get_streaming_distribution
   :http:
     :verb: GET
-    :uri: /2012-07-01/streaming-distribution/:id
+    :uri: /2013-05-12/streaming-distribution/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1331,7 +1359,7 @@
   :method: :get_streaming_distribution_config
   :http:
     :verb: GET
-    :uri: /2012-07-01/streaming-distribution/:id/config
+    :uri: /2013-05-12/streaming-distribution/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1390,7 +1418,7 @@
   :method: :list_cloud_front_origin_access_identities
   :http:
     :verb: GET
-    :uri: /2012-07-01/origin-access-identity/cloudfront?Marker=:marker&MaxItems=:max_items
+    :uri: /2013-05-12/origin-access-identity/cloudfront?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -1425,7 +1453,7 @@
   :method: :list_distributions
   :http:
     :verb: GET
-    :uri: /2012-07-01/distribution?Marker=:marker&MaxItems=:max_items
+    :uri: /2013-05-12/distribution?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -1593,11 +1621,17 @@
                 :type: :string
               Enabled:
                 :type: :boolean
+              ViewerCertificate:
+                :children:
+                  IAMCertificateId:
+                    :type: :string
+                  CloudFrontDefaultCertificate:
+                    :type: :boolean
 - :name: ListInvalidations
   :method: :list_invalidations
   :http:
     :verb: GET
-    :uri: /2012-07-01/distribution/:distribution_id/invalidation?Marker=:marker&MaxItems=:max_items
+    :uri: /2013-05-12/distribution/:distribution_id/invalidation?Marker=:marker&MaxItems=:max_items
   :inputs:
     :distribution_id:
       :type: :string
@@ -1635,7 +1669,7 @@
   :method: :list_streaming_distributions
   :http:
     :verb: GET
-    :uri: /2012-07-01/streaming-distribution?Marker=:marker&MaxItems=:max_items
+    :uri: /2013-05-12/streaming-distribution?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -1708,7 +1742,7 @@
   :method: :update_cloud_front_origin_access_identity
   :http:
     :verb: PUT
-    :uri: /2012-07-01/origin-access-identity/cloudfront/:id/config
+    :uri: /2013-05-12/origin-access-identity/cloudfront/:id/config
     :request_payload: :cloud_front_origin_access_identity_config
     :request_headers:
       :if_match: If-Match
@@ -1749,7 +1783,7 @@
   :method: :update_distribution
   :http:
     :verb: PUT
-    :uri: /2012-07-01/distribution/:id/config
+    :uri: /2013-05-12/distribution/:id/config
     :request_payload: :distribution_config
     :request_headers:
       :if_match: If-Match
@@ -2016,6 +2050,16 @@
           :name: Enabled
           :type: :boolean
           :required: true
+        :viewer_certificate:
+          :name: ViewerCertificate
+          :type: :hash
+          :members:
+            :iam_certificate_id:
+              :name: IAMCertificateId
+              :type: :string
+            :cloud_front_default_certificate:
+              :name: CloudFrontDefaultCertificate
+              :type: :boolean
     :id:
       :type: :string
       :required: true
@@ -2210,11 +2254,17 @@
             :type: :string
           Enabled:
             :type: :boolean
+          ViewerCertificate:
+            :children:
+              IAMCertificateId:
+                :type: :string
+              CloudFrontDefaultCertificate:
+                :type: :boolean
 - :name: UpdateStreamingDistribution
   :method: :update_streaming_distribution
   :http:
     :verb: PUT
-    :uri: /2012-07-01/streaming-distribution/:id/config
+    :uri: /2013-05-12/streaming-distribution/:id/config
     :request_payload: :streaming_distribution_config
     :request_headers:
       :if_match: If-Match
@@ -2395,4 +2445,4 @@
             :type: :string
           Enabled:
             :type: :boolean
-:namespace: http://cloudfront.amazonaws.com/doc/2012-07-01/
+:namespace: http://cloudfront.amazonaws.com/doc/2013-05-12/

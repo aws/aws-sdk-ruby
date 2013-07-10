@@ -336,6 +336,13 @@ module AWS
       #       * `PriceClass_All`
       #     * `:enabled` - *required* - (Boolean) Whether the distribution is
       #       enabled to accept end user requests for content.
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String) The IAM certificate identifier
+      #         of the custom viewer certificate for this distribution.
+      #       * `:cloud_front_default_certificate` - (Boolean) Set to `true` if
+      #         you want to use the default *.cloudfront.net viewer certificate
+      #         for this distribution. Omit this value if you are setting an
+      #         IAMCertificateId.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -411,6 +418,9 @@ module AWS
       #       * `:prefix` - (String)
       #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String)
+      #       * `:cloud_front_default_certificate` - (Boolean)
 
       # @!method create_invalidation(options = {})
       # Calls the POST CreateInvalidation API operation.
@@ -714,6 +724,9 @@ module AWS
       #       * `:prefix` - (String)
       #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String)
+      #       * `:cloud_front_default_certificate` - (Boolean)
 
       # @!method get_distribution_config(options = {})
       # Calls the GET GetDistributionConfig API operation.
@@ -781,6 +794,9 @@ module AWS
       #     * `:prefix` - (String)
       #   * `:price_class` - (String)
       #   * `:enabled` - (Boolean)
+      #   * `:viewer_certificate` - (Hash)
+      #     * `:iam_certificate_id` - (String)
+      #     * `:cloud_front_default_certificate` - (Boolean)
 
       # @!method get_invalidation(options = {})
       # Calls the GET GetInvalidation API operation.
@@ -972,6 +988,9 @@ module AWS
       #     * `:comment` - (String)
       #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String)
+      #       * `:cloud_front_default_certificate` - (Boolean)
 
       # @!method list_invalidations(options = {})
       # Calls the GET ListInvalidations API operation.
@@ -1355,6 +1374,13 @@ module AWS
       #       * `PriceClass_All`
       #     * `:enabled` - *required* - (Boolean) Whether the distribution is
       #       enabled to accept end user requests for content.
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String) The IAM certificate identifier
+      #         of the custom viewer certificate for this distribution.
+      #       * `:cloud_front_default_certificate` - (Boolean) Set to `true` if
+      #         you want to use the default *.cloudfront.net viewer certificate
+      #         for this distribution. Omit this value if you are setting an
+      #         IAMCertificateId.
       #   * `:id` - *required* - (String) The distribution's id.
       #   * `:if_match` - (String) The value of the ETag header you received
       #     when retrieving the distribution's configuration. For example:
@@ -1434,6 +1460,9 @@ module AWS
       #       * `:prefix` - (String)
       #     * `:price_class` - (String)
       #     * `:enabled` - (Boolean)
+      #     * `:viewer_certificate` - (Hash)
+      #       * `:iam_certificate_id` - (String)
+      #       * `:cloud_front_default_certificate` - (Boolean)
 
       # @!method update_streaming_distribution(options = {})
       # Calls the PUT UpdateStreamingDistribution API operation.
