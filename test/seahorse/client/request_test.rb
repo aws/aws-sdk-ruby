@@ -17,20 +17,20 @@ module Seahorse
   class Client
     describe Request do
 
-      def request
-        @request ||= Request.new
-      end
-
       describe '#send' do
 
-        it 'returns a Response' do
-          request.send.must_be_kind_of(Response)
+        it 'passes the request context to the handler' do
+          handler = Minitest::Mock.new
+          handler.expect(:call, nil, ['context'])
+          Request.new(handler, 'context').send
+          assert handler.verify
         end
 
-        it 'returns a different Response object everytime #send is called' do
-          resp1 = request.send
-          resp2 = request.send
-          resp1.wont_be_same_as(resp2)
+        it 'returns the response from the handler stack' do
+          response = Object.new
+          handler = Minitest::Mock.new
+          handler.expect(:call, response, ['context'])
+          Request.new(handler, 'context').send.must_be_same_as(response)
         end
 
       end

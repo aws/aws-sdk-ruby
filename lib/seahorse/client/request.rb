@@ -19,8 +19,16 @@ module Seahorse
     # {Response}.
     class Request
 
+      # @param [RequestHandler] handler
+      # @param [RequestContext] context
+      def initialize(handler, context)
+        @handler = handler
+        @context = context
+      end
+
+      # @return [Response]
       def send
-        Response.new
+        @handler.call(@context)
       end
 
     end
