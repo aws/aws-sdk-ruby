@@ -14,6 +14,42 @@
 module Seahorse
   class Client
     class RequestContext
+
+      # @option options [Hash] :params ({})
+      # @option options [String] :operation_name
+      # @option options [Endpoint] :endpoint
+      # @option options [String] :uri ('/')
+      # @option options [HeaderHash] :headers ({})
+      # @option options [IO] :body (StringIO.new) Must respond to #read
+      #   and #rewind.
+      def initialize(options = {})
+        @params = options[:params] || {}
+        @operation_name = options[:operation_name]
+        @endpoint = options[:endpoint]
+        @uri = options[:uri] || '/'
+        @headers = options[:headers] || Http::HeaderHash.new
+        @body = options[:body] || StringIO.new
+      end
+
+      # @return [Hash] The hash of request parameters.
+      attr_accessor :params
+
+      # @return [String] Name of the API operation called.
+      attr_accessor :operation_name
+
+      # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
+      attr_accessor :endpoint
+
+      # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
+      attr_accessor :uri
+
+      # @return [HeaderHash] The HTTP request headers.
+      attr_accessor :headers
+
+      # @return [IO] The HTTP request payload.  Must respond to #read
+      #   and #rewind.
+      attr_accessor :body
+
     end
   end
 end
