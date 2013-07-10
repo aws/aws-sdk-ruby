@@ -18,7 +18,7 @@ module Seahorse
     describe Handler do
 
       def context
-        @context ||= RequestContext.new
+        @context ||= Context.new
       end
 
       def response

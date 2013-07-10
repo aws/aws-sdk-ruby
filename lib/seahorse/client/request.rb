@@ -20,13 +20,13 @@ module Seahorse
     class Request
 
       # @param [Handler] handler
-      # @param [RequestContext] context
+      # @param [Context] context
       def initialize(handler, context)
         @handler = handler
         @context = context
       end
 
-      # @return [RequestContext]
+      # @return [Context]
       attr_reader :context
 
       # @return [Response]

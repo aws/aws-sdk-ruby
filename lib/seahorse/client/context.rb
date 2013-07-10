@@ -13,7 +13,7 @@
 
 module Seahorse
   class Client
-    class RequestContext
+    class Context
 
       # @option options [Hash] :params ({})
       # @option options [String] :operation_name
