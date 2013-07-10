@@ -40,7 +40,6 @@ Feature: HashModel Basic Functionality
     Then a request should have been made like:
     | TYPE         | NAME                        | VALUE        |
     | header_match | x-amz-target                | .+PutItem    |
-    | json         | ["TableName"]               | ExampleClass |
     | json_match   | ["Item"]["id"]              | .+           |
     | json         | ["Item"]["first_name"]["S"] | fred         |
     | json         | ["Item"]["age"]["N"]        | 40           |
