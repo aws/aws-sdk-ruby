@@ -40,7 +40,7 @@ module Seahorse
 
       it 'is built from the :endpoint constructor option' do
         client_class = Client.define({})
-        client = client_class.new(:endpoint => 'http://foo.com')
+        client = client_class.new(endpoint: 'http://foo.com')
         client.endpoint.must_equal('http://foo.com')
       end
 
@@ -51,12 +51,12 @@ module Seahorse
       end
 
       it 'defaults to https when scheme not given' do
-        client = client_class.new(:endpoint => 'foo.com')
+        client = client_class.new(endpoint: 'foo.com')
         client.endpoint.must_equal('https://foo.com')
       end
 
       it 'defaults to http when :ssl_default is false' do
-        client = client_class.new(:endpoint => 'foo.com', :ssl_default => false)
+        client = client_class.new(endpoint: 'foo.com', ssl_default: false)
         client.endpoint.must_equal('http://foo.com')
       end
 

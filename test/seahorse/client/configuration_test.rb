@@ -63,7 +63,7 @@ module Seahorse
         end
 
         it 'can be set to false' do
-          config_class.new(:ssl_default => false).ssl_default.must_equal(false)
+          config_class.new(ssl_default: false).ssl_default.must_equal(false)
         end
 
       end

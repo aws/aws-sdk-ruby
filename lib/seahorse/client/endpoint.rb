@@ -28,9 +28,9 @@ module Seahorse
     #     puts Endpoint.new('foo.com')
     #     #=> 'https://foo.com'
     #
-    # You can default to a HTTP endpoint by passing `:ssl_default => false`
+    # You can default to a HTTP endpoint by passing `:ssl_default` as `false`:
     #
-    #     puts Endpoint.new('foo.com', :ssl_default => false)
+    #     puts Endpoint.new('foo.com', ssl_default: false)
     #     #=> 'http://foo.com'
     #
     class Endpoint < String

@@ -36,13 +36,13 @@ module Seahorse
     #   a uri scheme will default to https on port 443.
     #
     #       # defaults to https on port 443
-    #       :hostname => 'domain.com'
+    #       hostname: 'domain.com'
     #
     #       # defaults to http on port 80
-    #       :hostname => 'domain.com', :ssl_default => false
+    #       hostname: 'domain.com', ssl_default: false
     #
     #       # defaults are ignored, as scheme and port are present
-    #       :hostname => http://domain.com:123
+    #       hostname: 'http://domain.com:123'
     #
     # @option options [Boolean] :ssl_default (true) Specifies the default
     #   scheme for the #endpoint when not specified.  Defaults to `true`
@@ -81,7 +81,7 @@ module Seahorse
     # @return [Endpoint]
     def build_endpoint(options)
       endpoint = options[:endpoint] || default_endpoint
-      Endpoint.new(endpoint, :ssl_default => config.ssl_default)
+      Endpoint.new(endpoint, ssl_default: config.ssl_default)
     end
 
     # @return [String] Returns the default endpoint for the client.

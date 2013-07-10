@@ -114,7 +114,7 @@ module Seahorse
         end
 
         def list
-          @list ||= PluginList.new([Plugin1], :mutex => mutex)
+          @list ||= PluginList.new([Plugin1], mutex: mutex)
         end
 
         it 'locks the mutex when adding a plugin' do

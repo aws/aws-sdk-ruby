@@ -52,7 +52,7 @@ module Seahorse
           end
 
           it 'can be seeded in the constructor' do
-            resp = Response.new(200, :abc => '123')
+            resp = Response.new(200, abc: '123')
             resp.headers.to_hash.must_equal('abc' => '123')
           end
 
