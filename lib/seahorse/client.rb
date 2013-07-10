@@ -24,6 +24,7 @@ module Seahorse
     autoload :VERSION, 'seahorse/client/version'
 
     module Http
+      autoload :Handler, 'seahorse/client/http/handler'
       autoload :HeaderHash, 'seahorse/client/http/header_hash'
       autoload :Request, 'seahorse/client/http/request'
       autoload :Response, 'seahorse/client/http/response'
