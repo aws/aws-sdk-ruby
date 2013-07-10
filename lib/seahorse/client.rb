@@ -111,7 +111,7 @@ module Seahorse
       #   plugin = MyPluginClass.new(options)
       #   ClientClass.add_plugin(plugin)
       #
-      # @param [Class, Symbol, String, Object]
+      # @param [Class, Symbol, String, Object] plugin
       # @see .remove_plugin
       # @see .plugins
       # @return [Class, Object] Returns the loaded plugin.
