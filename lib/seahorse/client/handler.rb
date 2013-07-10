@@ -16,7 +16,7 @@ module Seahorse
     class Handler
 
       # @param [Handler] handler
-      def initialize(handler)
+      def initialize(handler = nil)
         @handler = handler
       end
 
