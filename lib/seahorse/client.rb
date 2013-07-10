@@ -11,14 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse/client/configuration'
-require 'seahorse/client/endpoint'
-require 'seahorse/client/plugin_list'
-require 'seahorse/client/request'
-require 'seahorse/client/version'
-
 module Seahorse
   class Client
+
+    autoload :Configuration, 'seahorse/client/configuration'
+    autoload :Endpoint, 'seahorse/client/endpoint'
+    autoload :EventEmitter, 'seahorse/client/event_emitter'
+    autoload :PluginList, 'seahorse/client/plugin_list'
+    autoload :Request, 'seahorse/client/request'
+    autoload :Response, 'seahorse/client/response'
+    autoload :VERSION, 'seahorse/client/version'
+
+    module Http
+      autoload :HeaderHash, 'seahorse/client/http/header_hash'
+      autoload :Request, 'seahorse/client/http/request'
+      autoload :Response, 'seahorse/client/http/response'
+    end
 
     @plugins = PluginList.new
 
