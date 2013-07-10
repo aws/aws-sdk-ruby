@@ -17,14 +17,14 @@ module AWS
     # Client class for Amazon Relational Database Service (RDS).
     class Client < Core::QueryClient
 
-      API_VERSION = '2013-02-12'
+      API_VERSION = '2013-05-15'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
 
     end
 
-    class Client::V20130212 < Client
+    class Client::V20130515 < Client
 
       # client methods #
 
@@ -287,6 +287,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method create_db_instance_read_replica(options = {})
       # Calls the CreateDBInstanceReadReplica API operation.
@@ -398,6 +403,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method create_db_parameter_group(options = {})
       # Calls the CreateDBParameterGroup API operation.
@@ -578,6 +588,7 @@ module AWS
       #     * `:option_name` - (String)
       #     * `:option_description` - (String)
       #     * `:persistent` - (Boolean)
+      #     * `:permanent` - (Boolean)
       #     * `:port` - (Integer)
       #     * `:option_settings` - (Array<Hash>)
       #       * `:name` - (String)
@@ -673,6 +684,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method delete_db_parameter_group(options = {})
       # Calls the DeleteDBParameterGroup API operation.
@@ -881,6 +897,11 @@ module AWS
       #     * `:character_set_name` - (String)
       #     * `:secondary_availability_zone` - (String)
       #     * `:publicly_accessible` - (Boolean)
+      #     * `:status_infos` - (Array<Hash>)
+      #       * `:status_type` - (String)
+      #       * `:normal` - (Boolean)
+      #       * `:status` - (String)
+      #       * `:message` - (String)
 
       # @!method describe_db_log_files(options = {})
       # Calls the DescribeDBLogFiles API operation.
@@ -1230,6 +1251,7 @@ module AWS
       #     * `:default_port` - (Integer)
       #     * `:options_depended_on` - (Array<String>)
       #     * `:persistent` - (Boolean)
+      #     * `:permanent` - (Boolean)
       #     * `:option_group_option_settings` - (Array<Hash>)
       #       * `:setting_name` - (String)
       #       * `:setting_description` - (String)
@@ -1274,6 +1296,7 @@ module AWS
       #       * `:option_name` - (String)
       #       * `:option_description` - (String)
       #       * `:persistent` - (Boolean)
+      #       * `:permanent` - (Boolean)
       #       * `:port` - (Integer)
       #       * `:option_settings` - (Array<Hash>)
       #         * `:name` - (String)
@@ -1625,6 +1648,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method modify_db_parameter_group(options = {})
       # Calls the ModifyDBParameterGroup API operation.
@@ -1744,22 +1772,24 @@ module AWS
       #       DBSecurityGroupMemebrship name strings used for this option.
       #     * `:vpc_security_group_memberships` - (Array<String>) A list of
       #       VpcSecurityGroupMemebrship name strings used for this option.
-      #     * `:option_settings` - (Array<Hash>) A list of option settings
-      #       applied for this option.
-      #       * `:name` - (String) The name of the setting.
-      #       * `:value` - (String) The value of this setting.
-      #       * `:default_value` - (String) Default value for this setting.
-      #       * `:description` - (String) The description of the setting.
-      #       * `:apply_type` - (String) Specifies the apply type for this
+      #     * `:option_settings` - (Array<Hash>) The option settings to include
+      #       in an option group.
+      #       * `:name` - (String) The name of the option that has settings
+      #         that you can set.
+      #       * `:value` - (String) The current value of the option setting.
+      #       * `:default_value` - (String) The default value of the option
       #         setting.
-      #       * `:data_type` - (String) Specifies the valid data type of this
-      #         setting
-      #       * `:allowed_values` - (String) Specifies a valid list/range of
-      #         values allowed for this setting.
-      #       * `:is_modifiable` - (Boolean) Indicates if the setting is
-      #         modifiable or not.
-      #       * `:is_collection` - (Boolean) Indicates if the value for the
-      #         setting can be a list of values or a single value.
+      #       * `:description` - (String) The description of the option
+      #         setting.
+      #       * `:apply_type` - (String) The DB engine specific parameter type.
+      #       * `:data_type` - (String) The data type of the option setting.
+      #       * `:allowed_values` - (String) The allowed values of the option
+      #         setting.
+      #       * `:is_modifiable` - (Boolean) A Boolean value that, when `true`
+      #         , indicates the option setting can be modified from the
+      #         default.
+      #       * `:is_collection` - (Boolean) Indicates if the option setting is
+      #         part of a collection.
       #   * `:options_to_remove` - (Array<String>) Options in this list are
       #     removed from the Option Group.
       #   * `:apply_immediately` - (Boolean) Indicates whether the changes
@@ -1777,6 +1807,7 @@ module AWS
       #     * `:option_name` - (String)
       #     * `:option_description` - (String)
       #     * `:persistent` - (Boolean)
+      #     * `:permanent` - (Boolean)
       #     * `:port` - (Integer)
       #     * `:option_settings` - (Array<Hash>)
       #       * `:name` - (String)
@@ -1887,6 +1918,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method purchase_reserved_db_instances_offering(options = {})
       # Calls the PurchaseReservedDBInstancesOffering API operation.
@@ -1992,6 +2028,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method remove_source_identifier_from_subscription(options = {})
       # Calls the RemoveSourceIdentifierFromSubscription API operation.
@@ -2116,7 +2157,11 @@ module AWS
       #   * `:iops` - (Integer) The amount of Provisioned IOPS (input/output
       #     operations per second) to be initially allocated for the DB
       #     Instance. Constraints: Must be an integer greater than 1000.
-      #   * `:option_group_name` - (String)
+      #   * `:option_group_name` - (String) The name of the option group to be
+      #     used for the restored DB instance. Permanent options, such as the
+      #     TDE option for Oracle Advanced Security TDE, cannot be removed from
+      #     an option group, and that option group cannot be removed from a DB
+      #     instance once it is associated with a DB instance
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2180,6 +2225,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method restore_db_instance_to_point_in_time(options = {})
       # Calls the RestoreDBInstanceToPointInTime API operation.
@@ -2232,7 +2282,11 @@ module AWS
       #   * `:iops` - (Integer) The amount of Provisioned IOPS (input/output
       #     operations per second) to be initially allocated for the DB
       #     Instance. Constraints: Must be an integer greater than 1000.
-      #   * `:option_group_name` - (String)
+      #   * `:option_group_name` - (String) The name of the option group to be
+      #     used for the restored DB instance. Permanent options, such as the
+      #     TDE option for Oracle Advanced Security TDE, cannot be removed from
+      #     an option group, and that option group cannot be removed from a DB
+      #     instance once it is associated with a DB instance
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -2296,6 +2350,11 @@ module AWS
       #   * `:character_set_name` - (String)
       #   * `:secondary_availability_zone` - (String)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:status_infos` - (Array<Hash>)
+      #     * `:status_type` - (String)
+      #     * `:normal` - (Boolean)
+      #     * `:status` - (String)
+      #     * `:message` - (String)
 
       # @!method revoke_db_security_group_ingress(options = {})
       # Calls the RevokeDBSecurityGroupIngress API operation.
