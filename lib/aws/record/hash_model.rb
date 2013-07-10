@@ -69,7 +69,7 @@ module AWS
           table_name = dynamo_db_table_name(options[:shard_name])
 
           create_opts = {}
-          create_opts[:hash_key] = {:id => :string }
+          create_opts[:hash_key] = { hash_key => :string }
 
           dynamo_db.tables.create(
             table_name,
@@ -89,12 +89,12 @@ module AWS
           table
         end
 
-        protected
+        private
+
         def dynamo_db_table_name shard_name = nil
           "#{Record.table_prefix}#{self.shard_name(shard_name)}"
         end
 
-        protected
         def dynamo_db
           AWS::DynamoDB.new
         end

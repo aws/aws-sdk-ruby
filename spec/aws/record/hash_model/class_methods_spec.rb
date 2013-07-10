@@ -55,6 +55,13 @@ module AWS
           klass.create_table 100, 200
         end
 
+        it 'accepts an assignable hash key' do
+          klass.string_attr :isbn, :hash_key => true
+          tables.should_receive(:create).with(
+            klass.name, 10, 5, :hash_key => { 'isbn' => :string })
+          klass.create_table(10, 5)
+        end
+
       end
 
       context 'dynamo_db_table' do
