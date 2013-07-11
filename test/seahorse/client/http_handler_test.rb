@@ -11,18 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'test_helper'
+
 module Seahorse
   class Client
-    module Http
-      class Handler < Client::Handler
+    describe HttpHandler do
 
-        # @param [Context] context
-        # @return [Response]
-        def call(context)
-          Response.new
-        end
-
+      def config
+        @config ||= Configuration.new
       end
+
+      it 'is a Handler' do
+        HttpHandler.new(config).must_be_kind_of(Handler)
+      end
+
     end
   end
 end

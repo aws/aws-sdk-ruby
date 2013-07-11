@@ -20,16 +20,11 @@ module Seahorse
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
     autoload :HeaderHash, 'seahorse/client/header_hash'
+    autoload :HttpHandler, 'seahorse/client/http_handler'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
-
-    module Http
-      autoload :Handler, 'seahorse/client/http/handler'
-      autoload :Request, 'seahorse/client/http/request'
-      autoload :Response, 'seahorse/client/http/response'
-    end
 
     @plugins = PluginList.new
 
