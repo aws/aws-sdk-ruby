@@ -114,6 +114,11 @@ module Seahorse
         request.context.operation_name.must_equal(operation_name)
       end
 
+      it 'stringifies the operation name' do
+        request = client.build_request(:operation, params)
+        request.context.operation_name.must_equal('operation')
+      end
+
     end
 
   end

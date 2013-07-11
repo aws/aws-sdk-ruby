@@ -67,8 +67,11 @@ module Seahorse
 
     private
 
+    # @return [Context]
     def context_for(operation_name, params)
-      Context.new(operation_name: operation_name, params: params)
+      Context.new(
+        operation_name: operation_name.to_s,
+        params: params)
     end
 
     # @param [Hash] options
