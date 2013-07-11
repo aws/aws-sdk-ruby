@@ -18,20 +18,20 @@ module Seahorse
       # @option options [Hash] :params ({})
       # @option options [String] :operation_name
       # @option options [Configuration] :config
-      # @option options [Endpoint] :endpoint
-      # @option options [String] :uri ('/')
-      # @option options [HeaderHash] :headers ({})
-      # @option options [IO] :body (StringIO.new) Must respond to #read
+      # @option options [Endpoint] :http_endpoint
+      # @option options [String] :http_uri ('/')
+      # @option options [HeaderHash] :http_headers ({})
+      # @option options [IO] :http_body (StringIO.new) Must respond to #read
       #   and #rewind.
       def initialize(options = {})
         @params = options[:params] || {}
         @operation_name = options[:operation_name]
         @config = options[:config]
         @http_method = options[:http_method] || 'GET'
-        @endpoint = options[:endpoint]
-        @uri = options[:uri] || '/'
-        @headers = options[:headers] || HeaderHash.new
-        @body = options[:body] || StringIO.new
+        @http_endpoint = options[:http_endpoint]
+        @http_uri = options[:http_uri] || '/'
+        @http_headers = options[:http_headers] || HeaderHash.new
+        @http_body = options[:http_body] || StringIO.new
       end
 
       # @return [Hash] The hash of request parameters.
@@ -47,17 +47,17 @@ module Seahorse
       attr_accessor :http_method
 
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
-      attr_accessor :endpoint
+      attr_accessor :http_endpoint
 
       # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
-      attr_accessor :uri
+      attr_accessor :http_uri
 
       # @return [HeaderHash] The HTTP request headers.
-      attr_accessor :headers
+      attr_accessor :http_headers
 
       # @return [IO] The HTTP request payload.  Must respond to #read
       #   and #rewind.
-      attr_accessor :body
+      attr_accessor :http_body
 
     end
   end

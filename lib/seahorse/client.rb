@@ -76,7 +76,7 @@ module Seahorse
         operation_name: operation_name.to_s,
         params: params,
         config: config,
-        endpoint: endpoint)
+        http_endpoint: endpoint)
     end
 
     # @param [Hash] options

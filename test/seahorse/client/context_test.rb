@@ -74,64 +74,90 @@ module Seahorse
 
       end
 
-      describe '#endpoint' do
+      describe '#http_endpoint' do
 
         it 'defaults to nil' do
-          Context.new.endpoint.must_equal(nil)
+          Context.new.http_endpoint.must_equal(nil)
         end
 
         it 'can be set in the constructor' do
           endpoint = Object.new
-          context = Context.new(:endpoint => endpoint)
-          context.endpoint.must_be_same_as(endpoint)
+          context = Context.new(:http_endpoint => endpoint)
+          context.http_endpoint.must_be_same_as(endpoint)
+        end
+
+        it 'can be set' do
+          context = Context.new
+          context.http_endpoint = 'endpoint'
+          context.http_endpoint.must_equal('endpoint')
         end
 
       end
 
-      describe '#uri' do
+      describe '#http_uri' do
 
         it 'defaults to /' do
-          Context.new.uri.must_equal('/')
+          Context.new.http_uri.must_equal('/')
         end
 
         it 'can be set in the constructor' do
-          Context.new(:uri => '/uri').uri.must_equal('/uri')
+          Context.new(:http_uri => '/uri').http_uri.must_equal('/uri')
+        end
+
+        it 'can be set' do
+          context = Context.new
+          context.http_uri = '/uri'
+          context.http_uri.must_equal('/uri')
         end
 
       end
 
-      describe '#headers' do
+      describe '#http_headers' do
 
         it 'is a HeaderHash' do
-          Context.new.headers.must_be_kind_of(HeaderHash)
+          Context.new.http_headers.must_be_kind_of(HeaderHash)
         end
 
         it 'defaults to a empty hash' do
-          Context.new.headers.to_h.must_equal({})
+          Context.new.http_headers.to_h.must_equal({})
         end
 
         it 'can be set in the constructor' do
           headers = Object.new
-          context = Context.new(:headers => headers)
-          context.headers.must_be_same_as(headers)
+          context = Context.new(:http_headers => headers)
+          context.http_headers.must_be_same_as(headers)
+        end
+
+        it 'can be set' do
+          headers = Object.new
+          context = Context.new
+          context.http_headers = headers
+          context.http_headers.must_be_same_as(headers)
         end
 
       end
 
-      describe '#body' do
+      describe '#http_body' do
 
         it 'responds to #read and #rewind' do
-          Context.new.body.must_respond_to(:read)
-          Context.new.body.must_respond_to(:rewind)
+          Context.new.http_body.must_respond_to(:read)
+          Context.new.http_body.must_respond_to(:rewind)
         end
 
         it 'defaults to a empty object' do
-          Context.new.body.read.must_equal('')
+          Context.new.http_body.read.must_equal('')
         end
 
         it 'can be set in the constructor' do
           body = Object.new
-          Context.new(:body => body).body.must_be_same_as(body)
+          Context.new(:http_body => body).http_body.must_be_same_as(body)
+        end
+
+        it 'can be set' do
+          body = Object.new
+          context = Context.new
+          context.http_body = body
+          context.http_body.must_be_same_as(body)
         end
 
       end
