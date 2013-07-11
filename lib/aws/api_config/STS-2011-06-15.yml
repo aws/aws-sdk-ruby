@@ -69,6 +69,16 @@
                 :type: :time
           PackedPolicySize:
             :type: :integer
+- :name: DecodeAuthorizationMessage
+  :method: :decode_authorization_message
+  :inputs:
+    EncodedMessage:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DecodeAuthorizationMessageResult:
+        :ignore: true
 - :name: GetFederationToken
   :method: :get_federation_token
   :inputs:
