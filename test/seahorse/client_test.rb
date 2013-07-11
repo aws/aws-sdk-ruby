@@ -62,6 +62,19 @@ module Seahorse
 
     end
 
+    describe '#config' do
+
+      it 'returns a Configuration object' do
+        client.config.must_be_kind_of(Client::Configuration)
+      end
+
+      it 'passes constructor options to the configuration constructor' do
+        client = client_class.new(ssl_default: false)
+        client.config.ssl_default.must_equal(false)
+      end
+
+    end
+
     describe '.define' do
 
       it 'creates a new client class' do
