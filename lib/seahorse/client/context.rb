@@ -17,6 +17,7 @@ module Seahorse
 
       # @option options [Hash] :params ({})
       # @option options [String] :operation_name
+      # @option options [Configuration] :config
       # @option options [Endpoint] :endpoint
       # @option options [String] :uri ('/')
       # @option options [HeaderHash] :headers ({})
@@ -25,6 +26,7 @@ module Seahorse
       def initialize(options = {})
         @params = options[:params] || {}
         @operation_name = options[:operation_name]
+        @config = options[:config]
         @endpoint = options[:endpoint]
         @uri = options[:uri] || '/'
         @headers = options[:headers] || HeaderHash.new
@@ -36,6 +38,9 @@ module Seahorse
 
       # @return [String] Name of the API operation called.
       attr_accessor :operation_name
+
+      # @return [Configuration] The client configuration.
+      attr_accessor :config
 
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :endpoint

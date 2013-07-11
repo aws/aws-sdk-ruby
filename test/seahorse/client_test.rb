@@ -123,6 +123,10 @@ module Seahorse
         request.context.endpoint.must_be_same_as(client.endpoint)
       end
 
+      it 'populates the context with the configuration' do
+        request.context.config.must_be_same_as(client.config)
+      end
+
     end
 
   end

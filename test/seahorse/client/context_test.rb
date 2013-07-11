@@ -30,6 +30,19 @@ module Seahorse
 
       end
 
+      describe '#config' do
+
+        it 'defaults to nil' do
+          Context.new.config.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          config = Object.new
+          Context.new(:config => config).config.must_be_same_as(config)
+        end
+
+      end
+
       describe '#operation_name' do
 
         it 'defaults to nil' do

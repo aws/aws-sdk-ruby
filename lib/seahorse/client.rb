@@ -72,6 +72,7 @@ module Seahorse
       Context.new(
         operation_name: operation_name.to_s,
         params: params,
+        config: config,
         endpoint: endpoint)
     end
 
