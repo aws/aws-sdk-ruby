@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'yard'
-
 namespace :docs do
 
   task :yard => [:update_readme, :update_region] do
