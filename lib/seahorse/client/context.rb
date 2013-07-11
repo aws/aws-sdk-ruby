@@ -27,6 +27,7 @@ module Seahorse
         @params = options[:params] || {}
         @operation_name = options[:operation_name]
         @config = options[:config]
+        @http_method = options[:http_method] || 'GET'
         @endpoint = options[:endpoint]
         @uri = options[:uri] || '/'
         @headers = options[:headers] || HeaderHash.new
@@ -41,6 +42,9 @@ module Seahorse
 
       # @return [Configuration] The client configuration.
       attr_accessor :config
+
+      # @return [String] The HTTP verb (e.g. 'GET', 'PUT', 'POST', etc)
+      attr_accessor :http_method
 
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :endpoint

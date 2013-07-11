@@ -56,6 +56,24 @@ module Seahorse
 
       end
 
+      describe '#http_method' do
+
+        it 'defaults to GET' do
+          Context.new.http_method.must_equal('GET')
+        end
+
+        it 'can be set in the constructor' do
+          Context.new(:http_method => 'POST').http_method.must_equal('POST')
+        end
+
+        it 'can be set' do
+          context = Context.new
+          context.http_method = 'PUT'
+          context.http_method.must_equal('PUT')
+        end
+
+      end
+
       describe '#endpoint' do
 
         it 'defaults to nil' do
