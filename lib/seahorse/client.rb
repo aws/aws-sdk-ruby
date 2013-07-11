@@ -62,11 +62,14 @@ module Seahorse
     # @param [Symbol, String] operation_name
     # @return [Request]
     def build_request(operation_name, params = {})
-      req = Request.new(nil, nil)
-      req
+      Request.new(nil, context_for(operation_name, params))
     end
 
     private
+
+    def context_for(operation_name, params)
+      Context.new(operation_name: operation_name, params: params)
+    end
 
     # @param [Hash] options
     def build_config(options)

@@ -90,12 +90,28 @@ module Seahorse
 
     describe '#build_request' do
 
-      def request params = {}
-        @req ||= client.build_request(:operation_name, params)
+      def params
+        @params ||= {}
+      end
+
+      def operation_name
+        @operation_name ||= 'operation_name'
+      end
+
+      def request
+        @request ||= client.build_request(operation_name, params)
       end
 
       it 'returns a Request object' do
-        client.build_request(:operation_name).must_be_kind_of(Client::Request)
+        client.build_request(operation_name).must_be_kind_of(Client::Request)
+      end
+
+      it 'populates the context with the params' do
+        request.context.params.must_be_same_as(params)
+      end
+
+      it 'populates the context with the operation name' do
+        request.context.operation_name.must_equal(operation_name)
       end
 
     end
