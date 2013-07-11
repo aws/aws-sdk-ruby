@@ -28,6 +28,7 @@ module Seahorse
         @operation_name = options[:operation_name]
         @params = options[:params] || {}
         @config = options[:config]
+        @event_emitter = options[:event_emitter] || EventEmitter.new
         @http_endpoint = options[:http_endpoint]
         @http_method = options[:http_method] || 'GET'
         @http_uri = options[:http_uri] || '/'
@@ -43,6 +44,9 @@ module Seahorse
 
       # @return [Configuration] The client configuration.
       attr_accessor :config
+
+      # @return [EventEmitter]
+      attr_accessor :event_emitter
 
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :http_endpoint
