@@ -103,40 +103,41 @@ module Seahorse
 
     describe '#build_request' do
 
-      def params
-        @params ||= {}
-      end
-
-      def operation_name
-        @operation_name ||= 'operation_name'
-      end
-
       def request
-        @request ||= client.build_request(operation_name, params)
+        @request ||= client.build_request('operation')
       end
 
       it 'returns a Request object' do
-        client.build_request(operation_name).must_be_kind_of(Client::Request)
+        client.build_request('operation').must_be_kind_of(Client::Request)
       end
 
-      it 'populates the context with the params' do
+      it 'defaults params to an empty hash' do
+        client.build_request('operation').context.params.must_equal({})
+      end
+
+      it 'accepts params' do
+        params = {}
+        request = client.build_request('operation', params)
         request.context.params.must_be_same_as(params)
       end
 
       it 'populates the context with the operation name' do
-        request.context.operation_name.must_equal(operation_name)
+        request = client.build_request('operation')
+        request.context.operation_name.must_equal('operation')
       end
 
       it 'stringifies the operation name' do
-        request = client.build_request(:operation, params)
+        request = client.build_request(:operation)
         request.context.operation_name.must_equal('operation')
       end
 
       it 'populates the context with the endpoint' do
+        request = client.build_request('operation')
         request.context.endpoint.must_be_same_as(client.endpoint)
       end
 
       it 'populates the context with the configuration' do
+        request = client.build_request('operation')
         request.context.config.must_be_same_as(client.config)
       end
 
