@@ -39,8 +39,8 @@ module AWS
 
             it 'calls #get_identity_notification_attributes on the client' do
               client.should_receive(:get_identity_notification_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
               identity.bounce_topic_arn
             end
 
@@ -75,8 +75,8 @@ module AWS
 
             it 'calls #get_identity_notification_attributes on the client' do
               client.should_receive(:get_identity_notification_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
               identity.complaint_topic_arn
             end
 
@@ -111,8 +111,8 @@ module AWS
 
             it 'calls #get_identity_notification_attributes on the client' do
               client.should_receive(:get_identity_notification_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
               identity.forwarding_enabled
             end
 
@@ -123,7 +123,7 @@ module AWS
 
             it 'is aliased with a question mark' do
               identity.method(:forwarding_enabled?).should
-                eq(identity.method(:forwarding_enabled))
+              eq(identity.method(:forwarding_enabled))
             end
 
             it 'is mutable' do
@@ -247,8 +247,8 @@ module AWS
             it 'calls #get_identity_dkim_attributes on the client' do
 
               client.should_receive(:get_identity_dkim_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
 
               identity.dkim_enabled
 
@@ -256,7 +256,7 @@ module AWS
 
             it 'is aliased as #dkim_enabled?' do
               identity.method(:dkim_enabled).should
-                eq(identity.method(:dkim_enabled?))
+              eq(identity.method(:dkim_enabled?))
             end
 
             it 'returns the dkim enabled state' do
@@ -288,8 +288,8 @@ module AWS
             it 'calls #get_identity_dkim_attributes on the client' do
 
               client.should_receive(:get_identity_dkim_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
 
               identity.dkim_tokens
 
@@ -308,8 +308,8 @@ module AWS
             it 'calls #get_identity_dkim_attributes on the client' do
 
               client.should_receive(:get_identity_dkim_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
 
               identity.dkim_verification_status
 
@@ -342,8 +342,8 @@ module AWS
             it 'calls :get_identity_verificiation_attributes on the client' do
 
               client.should_receive(:get_identity_verification_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
 
               identity.verification_status
 
@@ -361,8 +361,8 @@ module AWS
             it 'calls :get_identity_verificiation_attributes on the client' do
 
               client.should_receive(:get_identity_verification_attributes).
-                with(:identities => [identity.identity]).
-                and_return(resp)
+              with(:identities => [identity.identity]).
+              and_return(resp)
 
               identity.verification_token
 
@@ -420,7 +420,7 @@ module AWS
 
           it 'calls #delete_identity on the client' do
             client.should_receive(:delete_identity).
-              with(:identity => identity.identity)
+            with(:identity => identity.identity)
             identity.delete
           end
 
@@ -442,24 +442,53 @@ module AWS
           identity.domain?.should == false
         end
 
-      end
-
-      context 'domains' do
-
-        let(:identity) { Identity.new('domain.com', :config => config) }
-
-        it_should_behave_like "an ses identity"
-
-        it 'returns false from #email_address?' do
-          identity.email_address?.should == false
+        context '#verify_dkim' do
+          it 'raises a RuntimeError' do
+            expect { identity.verify_dkim }.to raise_exception(RuntimeError)
+          end
         end
-
-        it 'returns true from #domain?' do
-          identity.domain?.should == true
-        end
-
-      end
 
     end
+
+    context 'domains' do
+
+      let(:identity) { Identity.new('domain.com', :config => config) }
+
+      it_should_behave_like "an ses identity"
+
+      it 'returns false from #email_address?' do
+        identity.email_address?.should == false
+      end
+
+      it 'returns true from #domain?' do
+        identity.domain?.should == true
+      end
+
+      context '#verify_dkim' do
+          let(:resp) { client.stub_for(:verify_domain_dkim) }
+
+          let(:attributes) {['TOKEN1', 'TOKEN2']}
+
+          before(:each) do
+            resp.data[:dkim_tokens] = attributes
+            client.stub(:verify_domain_dkim).and_return(resp)
+          end
+
+
+          it 'calls #verify_domain_dkim on the client' do
+
+            client.should_receive(:verify_domain_dkim).with(:domain => identity.identity).and_return(resp)
+            identity.verify_dkim
+
+          end
+
+          it 'returns the dkim tokens' do
+            identity.verify_dkim.should eq(attributes)
+          end
+        end
+
+    end
+
   end
+end
 end
