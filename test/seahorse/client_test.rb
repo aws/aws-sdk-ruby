@@ -119,6 +119,10 @@ module Seahorse
         request.context.operation_name.must_equal('operation')
       end
 
+      it 'populates the context with the endpoint' do
+        request.context.endpoint.must_be_same_as(client.endpoint)
+      end
+
     end
 
   end
