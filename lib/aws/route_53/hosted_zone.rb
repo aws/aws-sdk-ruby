@@ -96,7 +96,7 @@ module AWS
       end
       alias_method :rrsets, :resource_record_sets
 
-      private
+      protected
 
       def resource_identifiers
         [[:id, id], [:name, name], [:caller_reference, caller_reference]]
