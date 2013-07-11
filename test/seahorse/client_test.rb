@@ -111,37 +111,39 @@ module Seahorse
         client.build_request('operation').must_be_kind_of(Client::Request)
       end
 
-      it 'defaults params to an empty hash' do
-        client.build_request('operation').context.params.must_equal({})
-      end
+      describe 'request context' do
 
-      it 'accepts params' do
-        params = {}
-        request = client.build_request('operation', params)
-        request.context.params.must_be_same_as(params)
-      end
+        it 'defaults params to an empty hash' do
+          client.build_request('operation').context.params.must_equal({})
+        end
 
-      it 'populates the context with the operation name' do
-        request = client.build_request('operation')
-        request.context.operation_name.must_equal('operation')
-      end
+        it 'accepts params' do
+          params = {}
+          request = client.build_request('operation', params)
+          request.context.params.must_be_same_as(params)
+        end
 
-      it 'stringifies the operation name' do
-        request = client.build_request(:operation)
-        request.context.operation_name.must_equal('operation')
-      end
+        it 'populates the context with the operation name' do
+          request = client.build_request('operation')
+          request.context.operation_name.must_equal('operation')
+        end
 
-      it 'populates the context with the endpoint' do
-        request = client.build_request('operation')
-        request.context.endpoint.must_be_same_as(client.endpoint)
-      end
+        it 'stringifies the operation name' do
+          request = client.build_request(:operation)
+          request.context.operation_name.must_equal('operation')
+        end
 
-      it 'populates the context with the configuration' do
-        request = client.build_request('operation')
-        request.context.config.must_be_same_as(client.config)
-      end
+        it 'populates the context with the endpoint' do
+          request = client.build_request('operation')
+          request.context.endpoint.must_be_same_as(client.endpoint)
+        end
 
+        it 'populates the context with the configuration' do
+          request = client.build_request('operation')
+          request.context.config.must_be_same_as(client.config)
+        end
+
+      end
     end
-
   end
 end
