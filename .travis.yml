@@ -9,6 +9,7 @@ rvm:
 
 script: "bundle exec rake"
 env: "CI=1 SUITE=1 "
+bundler_args: "--without repl documentation"
 
 branches:
   only:
