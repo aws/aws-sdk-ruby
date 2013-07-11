@@ -19,6 +19,7 @@ module Seahorse
     autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
+    autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
@@ -26,7 +27,6 @@ module Seahorse
 
     module Http
       autoload :Handler, 'seahorse/client/http/handler'
-      autoload :HeaderHash, 'seahorse/client/http/header_hash'
       autoload :Request, 'seahorse/client/http/request'
       autoload :Response, 'seahorse/client/http/response'
     end

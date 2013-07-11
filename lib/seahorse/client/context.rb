@@ -27,7 +27,7 @@ module Seahorse
         @operation_name = options[:operation_name]
         @endpoint = options[:endpoint]
         @uri = options[:uri] || '/'
-        @headers = options[:headers] || Http::HeaderHash.new
+        @headers = options[:headers] || HeaderHash.new
         @body = options[:body] || StringIO.new
       end
 

@@ -71,8 +71,8 @@ module Seahorse
 
       describe '#headers' do
 
-        it 'is a Http::HeaderHash' do
-          Context.new.headers.must_be_kind_of(Http::HeaderHash)
+        it 'is a HeaderHash' do
+          Context.new.headers.must_be_kind_of(HeaderHash)
         end
 
         it 'defaults to a empty hash' do
