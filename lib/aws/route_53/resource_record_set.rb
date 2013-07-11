@@ -211,9 +211,7 @@ module AWS
         DeleteRequest.new(options[:name], options[:type], options)
       end
 
-
-      private
-
+      protected
 
       def resource_identifiers
         [[:name, name], [:type, type], [:set_identifier, set_identifier]]
@@ -228,6 +226,8 @@ module AWS
 
         client.list_resource_record_sets(options)
       end
+
+      private
 
       # Format a hash of options that can be used to initialize a change
       # request.
