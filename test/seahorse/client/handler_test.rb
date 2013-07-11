@@ -34,7 +34,8 @@ module Seahorse
       end
 
       it 'can be constructed with another handler' do
-        Handler.new(config, Handler.new(config))
+        handler = Handler.new(config)
+        Handler.new(config, handler).handler.must_be_same_as(handler)
       end
 
       it 'responds to #call' do

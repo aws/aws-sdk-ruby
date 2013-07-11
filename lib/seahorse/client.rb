@@ -46,9 +46,12 @@ module Seahorse
     #   scheme for the #endpoint when not specified.  Defaults to `true`
     #   which creates https endpoints.
     #
+    # @option options [Handler] :http_handler (HttpHandler.new)
+    #
     def initialize(options = {})
       @config = build_config(options)
       @endpoint = build_endpoint(options)
+      @handler = options[:http_handler] || HttpHandler.new(@config)
     end
 
     # @return [Endpoint]
