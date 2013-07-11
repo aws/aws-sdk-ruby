@@ -17,6 +17,19 @@ module Seahorse
   class Client
     describe Context do
 
+      describe '#operation_name' do
+
+        it 'defaults to nil' do
+          Context.new.operation_name.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          context = Context.new(:operation_name => 'operation_name')
+          context.operation_name.must_equal('operation_name')
+        end
+
+      end
+
       describe '#params' do
 
         it 'defaults to a empty hash' do
@@ -43,15 +56,22 @@ module Seahorse
 
       end
 
-      describe '#operation_name' do
+      describe '#http_endpoint' do
 
         it 'defaults to nil' do
-          Context.new.operation_name.must_equal(nil)
+          Context.new.http_endpoint.must_equal(nil)
         end
 
         it 'can be set in the constructor' do
-          context = Context.new(:operation_name => 'operation_name')
-          context.operation_name.must_equal('operation_name')
+          endpoint = Object.new
+          context = Context.new(:http_endpoint => endpoint)
+          context.http_endpoint.must_be_same_as(endpoint)
+        end
+
+        it 'can be set' do
+          context = Context.new
+          context.http_endpoint = 'endpoint'
+          context.http_endpoint.must_equal('endpoint')
         end
 
       end
@@ -70,26 +90,6 @@ module Seahorse
           context = Context.new
           context.http_method = 'PUT'
           context.http_method.must_equal('PUT')
-        end
-
-      end
-
-      describe '#http_endpoint' do
-
-        it 'defaults to nil' do
-          Context.new.http_endpoint.must_equal(nil)
-        end
-
-        it 'can be set in the constructor' do
-          endpoint = Object.new
-          context = Context.new(:http_endpoint => endpoint)
-          context.http_endpoint.must_be_same_as(endpoint)
-        end
-
-        it 'can be set' do
-          context = Context.new
-          context.http_endpoint = 'endpoint'
-          context.http_endpoint.must_equal('endpoint')
         end
 
       end
@@ -161,7 +161,6 @@ module Seahorse
         end
 
       end
-
     end
   end
 end
