@@ -90,7 +90,7 @@ module AWS
       def verify_dkim
         if domain?
           resp = client.verify_domain_dkim(:domain => identity)
-          reps[:dkim_tokens]
+          resp[:dkim_tokens]
         else
           raise "unable to verify dkim for an email address"
         end
