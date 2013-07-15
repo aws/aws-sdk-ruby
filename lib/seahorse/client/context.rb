@@ -15,11 +15,13 @@ module Seahorse
   class Client
     class Context
 
-      # @option options [String] :operation_name
+      # @option options [String] :operation_name (nil)
       # @option options [Hash] :params ({})
-      # @option options [Configuration] :config
-      # @option options [Endpoint] :http_endpoint
-      # @option options [Endpoint] :http_method
+      # @option options [Configuration] :config (nil)
+      # @option options [EventEmitter] :event_emitter (EventEmitter.new)
+      # @option options [Endpoint] :http_endpoint (nil)
+      # @option options [String] :http_method ('GET') The HTTP method, e.g.
+      #   `GET`, `PUT`, `POST`, `HEAD`, `DELETE`, etc.
       # @option options [String] :http_uri ('/')
       # @option options [HeaderHash] :http_headers ({})
       # @option options [IO] :http_body (StringIO.new) Must respond to #read
@@ -51,7 +53,7 @@ module Seahorse
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :http_endpoint
 
-      # @return [String] The HTTP verb (e.g. 'GET', 'PUT', 'POST', etc)
+      # @return [String] The HTTP verb (e.g. `GET`, `PUT`, `POST`, etc)
       attr_accessor :http_method
 
       # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
