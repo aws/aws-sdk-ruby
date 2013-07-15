@@ -82,6 +82,12 @@ module Seahorse
         client_class.ancestors.must_include(Client)
       end
 
+      it 'sets the api on the client class' do
+        api = {}
+        client_class = Client.define(api)
+        client_class.api.must_be_same_as(api)
+      end
+
     end
 
     describe '.api' do
