@@ -110,7 +110,7 @@ module AWS::Core
   # http_verb - expected http method, PUT, GET, POST or DELETE
   shared_examples_for "an aws http request" do |http_verb|
 
-    it_should_behave_like "supports async option"
+    #it_should_behave_like "supports async option"
 
     before(:each) do
       Kernel.stub!(:sleep)
