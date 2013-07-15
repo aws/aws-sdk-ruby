@@ -95,6 +95,33 @@ module AWS
 
       end
 
+      context '#put_bucket_website' do
+
+        let(:xml) { <<-XML.strip.xml_cleanup }
+<WebsiteConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+  <IndexDocument>
+    <Suffix>index.html</Suffix>
+  </IndexDocument>
+  <ErrorDocument>
+    <Key>error.html</Key>
+  </ErrorDocument>
+</WebsiteConfiguration>
+        XML
+
+        it 'does not serialize empty routing rules' do
+          body = nil
+          client.with_http_handler do |req, resp|
+            body = req.body.xml_cleanup
+          end.put_bucket_website(
+            :bucket_name => 'bucket',
+            :index_document => { :suffix => 'index.html' },
+            :error_document => { :key => 'error.html' },
+            :routing_rules => []
+          )
+          body.should eq(xml)
+        end
+      end
+
       context 'cors', :cors => true do
   
         let(:xml) { <<-XML.strip.xml_cleanup }

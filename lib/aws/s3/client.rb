@@ -181,7 +181,8 @@ module AWS
                 end
               end
 
-              if rules = options[:routing_rules]
+              rules = options[:routing_rules]
+              if rules.is_a?(Array) && !rules.empty?
                 xml.RoutingRules do
                   rules.each do |rule|
                     xml.RoutingRule do
