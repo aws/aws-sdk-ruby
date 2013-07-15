@@ -88,7 +88,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS::CloudFront</td>
-      <td>2012-07-01</td>
+      <td>2013-05-12</td>
       <td>Amazon CloudFront</td>
     </tr>
     <tr>
@@ -171,7 +171,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS::RDS</td>
-      <td>2013-02-12</td>
+      <td>2013-05-15</td>
       <td>Amazon Relational Database Service (Beta)</td>
     </tr>
     <tr>
