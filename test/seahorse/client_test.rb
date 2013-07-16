@@ -32,6 +32,27 @@ module Seahorse
       Client::VERSION.must_match(/\d+\.\d+\.\d+/)
     end
 
+    describe '#config' do
+
+      it 'has a #ssl_default option that defaults to true' do
+        client.config.ssl_default.must_equal(true)
+      end
+
+      it 'has a #endpoint option that defaults to the API endpoint' do
+        client.config.endpoint.must_equal(api['endpoint'])
+      end
+
+      it 'returns a Configuration object' do
+        client.config.must_be_kind_of(Client::Configuration)
+      end
+
+      it 'passes constructor options to the configuration constructor' do
+        client = client_class.new(ssl_default: false)
+        client.config.ssl_default.must_equal(false)
+      end
+
+    end
+
     describe '#endpoint' do
 
       it 'returns an Endpoint object' do
@@ -58,27 +79,6 @@ module Seahorse
       it 'defaults to http when :ssl_default is false' do
         client = client_class.new(endpoint: 'foo.com', ssl_default: false)
         client.endpoint.must_equal('http://foo.com')
-      end
-
-    end
-
-    describe '#config' do
-
-      it 'has a #ssl_default option that defaults to true' do
-        client.config.ssl_default.must_equal(true)
-      end
-
-      it 'has a #endpoint option that defaults to the API endpoint' do
-        client.config.endpoint.must_equal(api['endpoint'])
-      end
-
-      it 'returns a Configuration object' do
-        client.config.must_be_kind_of(Client::Configuration)
-      end
-
-      it 'passes constructor options to the configuration constructor' do
-        client = client_class.new(ssl_default: false)
-        client.config.ssl_default.must_equal(false)
       end
 
     end
