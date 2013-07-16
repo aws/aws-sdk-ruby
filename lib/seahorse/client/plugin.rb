@@ -15,7 +15,9 @@ module Seahorse
   class Client
 
     # Plugin is a simple base class that can be extended by any class
-    # wishing to be a {Seahorse::Client} plugin.
+    # wishing to be a {Seahorse::Client} plugin.  A plugin does not need
+    # to extend from this class.  This class provides a helpful starting
+    # point as well as a location to document the plugin system.
     class Plugin
     end
   end
