@@ -83,38 +83,6 @@ module Seahorse
 
     end
 
-    describe '.define' do
-
-      it 'creates a new client class' do
-        client_class = Client.define({})
-        client_class.ancestors.must_include(Client)
-      end
-
-      it 'sets the api on the client class' do
-        api = {}
-        client_class = Client.define(api)
-        client_class.api.must_be_same_as(api)
-      end
-
-    end
-
-    describe '.api' do
-
-      it 'returns the API passed to .define' do
-        api = {}
-        client_class = Client.define(api)
-        client_class.api.must_be_same_as(api)
-      end
-
-      it 'can be set' do
-        api = {}
-        client_class = Class.new(Client)
-        client_class.set_api(api)
-        client_class.api.must_be_same_as(api)
-      end
-
-    end
-
     describe '#build_request' do
 
       def request
@@ -158,6 +126,38 @@ module Seahorse
         end
 
       end
+    end
+
+    describe '.define' do
+
+      it 'creates a new client class' do
+        client_class = Client.define({})
+        client_class.ancestors.must_include(Client)
+      end
+
+      it 'sets the api on the client class' do
+        api = {}
+        client_class = Client.define(api)
+        client_class.api.must_be_same_as(api)
+      end
+
+    end
+
+    describe '.api' do
+
+      it 'returns the API passed to .define' do
+        api = {}
+        client_class = Client.define(api)
+        client_class.api.must_be_same_as(api)
+      end
+
+      it 'can be set' do
+        api = {}
+        client_class = Class.new(Client)
+        client_class.set_api(api)
+        client_class.api.must_be_same_as(api)
+      end
+
     end
   end
 end
