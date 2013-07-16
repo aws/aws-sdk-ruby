@@ -19,7 +19,7 @@ module Seahorse
 
     # Configuration objects are immutable objects that are constructed with a
     # hash of user supplied data.  You can register configuration options 
-    # via {#add_option) which defines a getter with a default value.
+    # via {#add_option} which defines a getter with a default value.
     #
     # ## Adding Options
     #
