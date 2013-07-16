@@ -17,41 +17,45 @@ module Seahorse
   class Client
     describe Configuration do
 
-      def config_class
-        @klass ||= Class.new(Configuration)
+      def config
+        @config ||= Configuration.new
       end
 
-      it 'can be constructed without any arguments' do
-        config_class.new.must_be_kind_of(Configuration)
+      describe '#initialize' do
+
+        it 'can be constructed without any arguments' do
+          Configuration.new.must_be_kind_of(Configuration)
+        end
+
+        it 'keeps all options passed to the constructor' do
+          config = Configuration.new(:opt_name => 'opt-value')
+          config.wont_respond_to(:opt_name)
+          config.add_option(:opt_name)
+          config.opt_name.must_equal('opt-value')
+        end
+
       end
 
-      it 'keeps all options passed to the constructor' do
-        config = config_class.new(:opt_name => 'opt-value')
-        config.wont_respond_to(:opt_name)
-        config_class.add_option(:opt_name)
-        config.opt_name.must_equal('opt-value')
-      end
-
-      describe '.add_option' do
+      describe '#add_option' do
 
         it 'defines a getter method' do
-          config_class.add_option(:name)
-          config_class.new.must_respond_to(:name)
+          config.add_option(:name)
+          config.must_respond_to(:name)
         end
 
         it 'returns nil from getters by default' do
-          config_class.add_option(:color)
-          config_class.new.color.must_equal(nil)
+          config.add_option(:color)
+          config.color.must_equal(nil)
         end
 
         it 'accepts a default value' do
-          config_class.add_option(:size, 'large')
-          config_class.new.size.must_equal('large')
+          config.add_option(:size, 'large')
+          config.size.must_equal('large')
         end
 
         it 'accpets a default via a block' do
-          config_class.add_option(:dynamic) { 'value' }
-          config_class.new.dynamic.must_equal('value')
+          config.add_option(:dynamic) { 'value' }
+          config.dynamic.must_equal('value')
         end
 
       end
@@ -59,11 +63,11 @@ module Seahorse
       describe '#ssl_default' do
 
         it 'defaults to true' do
-          config_class.new.ssl_default.must_equal(true)
+          Configuration.new.ssl_default.must_equal(true)
         end
 
         it 'can be set to false' do
-          config_class.new(ssl_default: false).ssl_default.must_equal(false)
+          Configuration.new(ssl_default: false).ssl_default.must_equal(false)
         end
 
       end

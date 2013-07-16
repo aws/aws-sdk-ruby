@@ -22,21 +22,15 @@ module Seahorse
         @options = options
       end
 
-      class << self
-
-        def add_option(name, default = nil, &block)
-          define_method(name) do
-            case
-            when @options.key?(name) then @options[name]
-            when block then block.call
-            else default
-            end
+      def add_option(name, default = nil, &block)
+        define_singleton_method(name) do
+          case
+          when @options.key?(name) then @options[name]
+          when block then block.call
+          else default
           end
         end
-
       end
-
-      add_option :ssl_default, true
 
     end
   end
