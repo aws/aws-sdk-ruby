@@ -66,13 +66,13 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          headers = Object.new
+          headers = HeaderHash.new
           response = Response.new(headers: headers)
           response.headers.must_be_same_as(headers)
         end
 
         it 'can be set' do
-          headers = Object.new
+          headers = HeaderHash.new
           response = Response.new
           response.headers = headers
           response.headers.must_be_same_as(headers)

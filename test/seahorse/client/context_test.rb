@@ -24,7 +24,7 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          context = Context.new(:operation_name => 'operation_name')
+          context = Context.new(operation_name: 'operation_name')
           context.operation_name.must_equal('operation_name')
         end
 
@@ -38,7 +38,7 @@ module Seahorse
 
         it 'can be set in the constructor' do
           params = Object.new
-          Context.new(:params => params).params.must_be_same_as(params)
+          Context.new(params: params).params.must_be_same_as(params)
         end
 
       end
@@ -51,7 +51,7 @@ module Seahorse
 
         it 'can be set in the constructor' do
           config = Object.new
-          Context.new(:config => config).config.must_be_same_as(config)
+          Context.new(config: config).config.must_be_same_as(config)
         end
 
       end
@@ -67,7 +67,7 @@ module Seahorse
 
         it 'can be set in the constructor' do
           events = Object.new
-          context = Context.new(:event_emitter => events)
+          context = Context.new(event_emitter: events)
           context.event_emitter.must_be_same_as(events)
         end
 
@@ -88,7 +88,7 @@ module Seahorse
 
         it 'can be set in the constructor' do
           endpoint = Object.new
-          context = Context.new(:http_endpoint => endpoint)
+          context = Context.new(http_endpoint: endpoint)
           context.http_endpoint.must_be_same_as(endpoint)
         end
 
@@ -107,7 +107,7 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          Context.new(:http_method => 'POST').http_method.must_equal('POST')
+          Context.new(http_method: 'POST').http_method.must_equal('POST')
         end
 
         it 'can be set' do
@@ -125,7 +125,7 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          Context.new(:http_uri => '/uri').http_uri.must_equal('/uri')
+          Context.new(http_uri: '/uri').http_uri.must_equal('/uri')
         end
 
         it 'can be set' do
@@ -147,13 +147,13 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          headers = Object.new
-          context = Context.new(:http_headers => headers)
+          headers = HeaderHash.new
+          context = Context.new(http_headers: headers)
           context.http_headers.must_be_same_as(headers)
         end
 
         it 'can be set' do
-          headers = Object.new
+          headers = HeaderHash.new
           context = Context.new
           context.http_headers = headers
           context.http_headers.must_be_same_as(headers)
@@ -174,7 +174,7 @@ module Seahorse
 
         it 'can be set in the constructor' do
           body = Object.new
-          Context.new(:http_body => body).http_body.must_be_same_as(body)
+          Context.new(http_body: body).http_body.must_be_same_as(body)
         end
 
         it 'can be set' do
