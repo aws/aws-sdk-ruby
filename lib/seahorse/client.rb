@@ -136,7 +136,7 @@ module Seahorse
       # @param [Hash] api
       # @return [Class]
       def define(api)
-        client_class = Class.new(Client)
+        client_class = Class.new(self)
         client_class.set_api(api)
         client_class
       end

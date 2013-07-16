@@ -137,6 +137,13 @@ module Seahorse
         client_class.api.must_be_same_as(api)
       end
 
+      it 'extends from subclasses of client' do
+        klass1 = Client.define({})
+        klass2 = klass1.define({})
+        klass2.ancestors.must_include(klass1)
+        klass2.ancestors.must_include(Client)
+      end
+
     end
 
     describe '.api' do
