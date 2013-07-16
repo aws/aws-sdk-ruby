@@ -16,6 +16,9 @@ module Seahorse
     class Response
 
       # @option options [Context] :context (nil)
+      # @option options [Integer] :status_code (nil)
+      # @option options [HashHeader] :headers (HeaderHash.new)
+      # @option options [String] :body (nil)
       def initialize(options = {})
         @context = options[:context]
         @status_code = options[:status_code]
