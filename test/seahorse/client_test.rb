@@ -85,10 +85,6 @@ module Seahorse
 
     describe '#build_request' do
 
-      def request
-        @request ||= client.build_request('operation')
-      end
-
       it 'returns a Request object' do
         client.build_request('operation').must_be_kind_of(Client::Request)
       end
