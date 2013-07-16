@@ -55,6 +55,31 @@ module Seahorse
 
       end
 
+      describe '#headers' do
+
+        it 'is a HeaderHash' do
+          Response.new.headers.must_be_kind_of(HeaderHash)
+        end
+
+        it 'defaults to a empty hash' do
+          Response.new.headers.to_h.must_equal({})
+        end
+
+        it 'can be set in the constructor' do
+          headers = Object.new
+          context = Response.new(:headers => headers)
+          context.headers.must_be_same_as(headers)
+        end
+
+        it 'can be set' do
+          headers = Object.new
+          context = Response.new
+          context.headers = headers
+          context.headers.must_be_same_as(headers)
+        end
+
+      end
+
     end
   end
 end

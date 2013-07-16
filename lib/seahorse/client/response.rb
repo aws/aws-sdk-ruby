@@ -19,6 +19,7 @@ module Seahorse
       def initialize(options = {})
         @context = options[:context]
         @status_code = options[:status_code]
+        @headers = options[:headers] || HeaderHash.new
       end
 
       # @return [Context, nil]
@@ -26,6 +27,9 @@ module Seahorse
 
       # @return [Integer, nil]
       attr_accessor :status_code
+
+      # @return [HeaderHash]
+      attr_accessor :headers
 
     end
   end
