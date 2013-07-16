@@ -82,7 +82,6 @@ module Seahorse
       # @api private
       def initialize(options = {})
         @options = options
-        add_option(:ssl_default, true)
       end
 
       # Adds a getter method that returns the named option or a default
