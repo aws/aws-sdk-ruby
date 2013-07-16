@@ -49,7 +49,7 @@ module Seahorse
     # @option options [Handler] :http_handler (HttpHandler.new)
     #
     def initialize(options = {})
-      @config = build_config(options)
+      @config = Configuration.new(options)
       @endpoint = build_endpoint(options)
       @handler = options[:http_handler] || HttpHandler.new(@config)
     end
