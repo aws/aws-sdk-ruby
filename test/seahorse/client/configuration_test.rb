@@ -88,6 +88,10 @@ module Seahorse
           cfg2.option.must_equal('new-value')
         end
 
+        it 'can be called without options' do
+          Configuration.new.with_options.must_be_kind_of(Configuration)
+        end
+
       end
 
       describe '#inspect' do

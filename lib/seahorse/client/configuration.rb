@@ -108,8 +108,11 @@ module Seahorse
         nil
       end
 
-      # @param [Hash] options
-      def with_options(options)
+      # Returns a new configuration that is merged with the given `options`.
+      # Returns `self` if `options` are empty.
+      # @param [Hash] options ({})
+      # @return [Configuration]
+      def with_options(options = {})
         if options.empty?
           self
         else
