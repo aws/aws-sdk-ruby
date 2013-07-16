@@ -15,10 +15,14 @@ source 'http://rubygems.org'
 
 gemspec
 
-group :development do
-  gem 'rake', :require => false
+gem 'rake', :require => false
+
+group :test do
   gem 'simplecov', :require => false
   gem 'minitest'
+end
+
+group :docs do
   gem 'yard'
   gem 'redcarpet'
 end
