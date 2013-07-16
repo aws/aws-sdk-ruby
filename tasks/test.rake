@@ -13,11 +13,18 @@
 
 require 'rake/testtask'
 
-Rake::TestTask.new do |t|
-  t.libs.push 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.warning = true
-  t.verbose = true
+def execute_cmd cmd
+  puts cmd if Rake.application.options.trace
+  system(cmd)
+  raise "Command failed with status (#{$?.to_i}): #{cmd}" if $?.to_i != 0
+end
+
+desc "Runs unit tests"
+task :test do
+  loader = `gem which rake/rake_test_loader`.strip
+  opts = ['bundle exec ruby', '-Itest:lib', loader]
+  opts += FileList["test/**/*_test.rb"].sort
+  execute_cmd(opts.join(' '))
 end
 
 desc 'Generates a coverage report'
