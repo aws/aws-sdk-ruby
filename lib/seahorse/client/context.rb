@@ -18,7 +18,7 @@ module Seahorse
       # @option options [String] :operation_name (nil)
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
-      # @option options [EventEmitter] :event_emitter (EventEmitter.new)
+      # @option options [EventEmitter] :events (EventEmitter.new)
       # @option options [Endpoint] :http_endpoint (nil)
       # @option options [String] :http_method ('GET') The HTTP method, e.g.
       #   `GET`, `PUT`, `POST`, `HEAD`, `DELETE`, etc.
@@ -30,7 +30,7 @@ module Seahorse
         @operation_name = options[:operation_name]
         @params = options[:params] || {}
         @config = options[:config]
-        @event_emitter = options[:event_emitter] || EventEmitter.new
+        @events = options[:events] || EventEmitter.new
         @http_endpoint = options[:http_endpoint]
         @http_method = options[:http_method] || 'GET'
         @http_uri = options[:http_uri] || '/'
@@ -48,7 +48,7 @@ module Seahorse
       attr_accessor :config
 
       # @return [EventEmitter]
-      attr_accessor :event_emitter
+      attr_accessor :events
 
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :http_endpoint

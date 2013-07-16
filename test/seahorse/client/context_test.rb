@@ -61,21 +61,21 @@ module Seahorse
         it 'defaults to a new EventEmitter' do
           events = Object.new
           EventEmitter.stub(:new, events) do
-            Context.new.event_emitter.must_be_same_as(events)
+            Context.new.events.must_be_same_as(events)
           end
         end
 
         it 'can be set in the constructor' do
           events = Object.new
-          context = Context.new(event_emitter: events)
-          context.event_emitter.must_be_same_as(events)
+          context = Context.new(events: events)
+          context.events.must_be_same_as(events)
         end
 
         it 'can be set' do
           events = Object.new
           context = Context.new
-          context.event_emitter = events
-          context.event_emitter.must_be_same_as(events)
+          context.events = events
+          context.events.must_be_same_as(events)
         end
 
       end
