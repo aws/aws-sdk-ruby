@@ -60,6 +60,36 @@ module Seahorse
 
       end
 
+      describe '#with_option' do
+
+        it 'returns a new configuration object' do
+          cfg = Configuration.new(:abc => 'xyz')
+          cfg2 = cfg.with_options(:abc => 'mno')
+          cfg2.must_be_kind_of(Configuration)
+          cfg2.wont_be_same_as(cfg)
+        end
+
+        it 'returns self when given options are empty' do
+          cfg = Configuration.new(:abc => 'xyz')
+          cfg.with_options({}).must_be_same_as(cfg)
+        end
+
+        it 'protects self from modification' do
+          cfg = Configuration.new(option: 'old-value')
+          cfg.add_option(:option)
+          cfg.with_options(option: 'new-value')
+          cfg.option.must_equal('old-value')
+        end
+
+        it 'merges options onto the returned object' do
+          cfg = Configuration.new(option: 'old-value')
+          cfg.add_option(:option)
+          cfg2 = cfg.with_options(option: 'new-value')
+          cfg2.option.must_equal('new-value')
+        end
+
+      end
+
       describe '#ssl_default' do
 
         it 'defaults to true' do

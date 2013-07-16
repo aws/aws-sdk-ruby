@@ -17,10 +17,11 @@ require 'uri'
 module Seahorse
   class Client
 
-    # Every {Client} object has a {Configuration} object that is created during
-    # initialization.  This is accessible via {Client#config Client#config}.
-    # Generally, the configuration options for a {Client} are added by the
-    # client plugins.
+    # Configuration objects are immutable objects that are constructed with a
+    # hash of user supplied data.
+    #
+    # You can register configuration options via {#add_option) which defines
+    # a getter and optional default value.
     #
     # ## Adding Options
     #
@@ -66,6 +67,18 @@ module Seahorse
     #     config.current_time
     #     #=> returns a different value every time #current_time is called.
     #
+    # ## Duplicating Configuration Options
+    #
+    # If you want a copy of a configuration option merged with a new
+    # set of data, you can call {#with_options}.  This returns a new
+    # object.
+    #
+    #     config = Seahorse::Client::Configuration.new(:api_key => 'abc')
+    #     new_config = config.with_options(:api_key => 'xyz')
+    #
+    #     config.api_key #=> 'abc'
+    #     new_config.api_key #=> 'xyz'
+    #
     class Configuration
 
       # @api private
@@ -87,15 +100,37 @@ module Seahorse
       #
       # @return [void]
       def add_option(name, default = nil, &block)
-        define_singleton_method(name) do
+        self.class.send(:define_method, name) do
           case
           when @options.key?(name) then @options[name]
           when block then block.call
           else default
           end
         end
+        nil
       end
 
+      # @param [Hash] options
+      def with_options(options)
+        if options.empty?
+          self
+        else
+          cfg = self.class.allocate
+          cfg.send(:initialize, @options.merge(options))
+          cfg
+        end
+      end
+
+      class << self
+
+        # @api private
+        def new(options = {})
+          config = Class.new(self).allocate
+          config.send(:initialize, options)
+          config
+        end
+
+      end
     end
   end
 end
