@@ -11,17 +11,31 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'test_helper'
+
 module Seahorse
   class Client
-    class Response
+    describe Response do
 
-      # @option options [Context] :context (nil)
-      def initialize(options = {})
-        @context = options[:context]
+      describe '#context' do
+
+        it 'defaults to nil' do
+          Response.new.context.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          context = Object.new
+          Response.new(context: context).context.must_be_same_as(context)
+        end
+
+        it 'is mustable' do
+          context = Object.new
+          resp = Response.new
+          resp.context = context
+          resp.context.must_be_same_as(context)
+        end
+
       end
-
-      # @return [Context]
-      attr_accessor :context
 
     end
   end
