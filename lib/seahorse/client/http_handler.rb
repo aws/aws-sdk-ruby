@@ -14,13 +14,6 @@
 module Seahorse
   class Client
     class HttpHandler < Client::Handler
-
-      # @param [Context] context
-      # @return [Response]
-      def call(context)
-        Response.new
-      end
-
     end
   end
 end
