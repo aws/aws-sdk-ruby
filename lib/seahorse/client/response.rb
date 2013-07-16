@@ -20,6 +20,7 @@ module Seahorse
         @context = options[:context]
         @status_code = options[:status_code]
         @headers = options[:headers] || HeaderHash.new
+        @body = options[:body] || nil
       end
 
       # @return [Context, nil]
@@ -30,6 +31,9 @@ module Seahorse
 
       # @return [HeaderHash]
       attr_accessor :headers
+
+      # @return [String, nil]
+      attr_accessor :body
 
     end
   end

@@ -67,15 +67,33 @@ module Seahorse
 
         it 'can be set in the constructor' do
           headers = Object.new
-          context = Response.new(:headers => headers)
-          context.headers.must_be_same_as(headers)
+          response = Response.new(headers: headers)
+          response.headers.must_be_same_as(headers)
         end
 
         it 'can be set' do
           headers = Object.new
-          context = Response.new
-          context.headers = headers
-          context.headers.must_be_same_as(headers)
+          response = Response.new
+          response.headers = headers
+          response.headers.must_be_same_as(headers)
+        end
+
+      end
+
+      describe '#body' do
+
+        it 'defaults to nil' do
+          Response.new.body.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          Response.new(body: 'body').body.must_equal('body')
+        end
+
+        it 'can be set' do
+          response = Response.new
+          response.body = 'body'
+          response.body.must_equal('body')
         end
 
       end
