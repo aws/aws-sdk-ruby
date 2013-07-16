@@ -104,18 +104,6 @@ module Seahorse
 
       end
 
-      describe '#ssl_default' do
-
-        it 'defaults to true' do
-          Configuration.new.ssl_default.must_equal(true)
-        end
-
-        it 'can be set to false' do
-          Configuration.new(ssl_default: false).ssl_default.must_equal(false)
-        end
-
-      end
-
     end
   end
 end

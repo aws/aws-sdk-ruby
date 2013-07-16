@@ -64,6 +64,14 @@ module Seahorse
 
     describe '#config' do
 
+      it 'has a #ssl_default option that defaults to true' do
+        client.config.ssl_default.must_equal(true)
+      end
+
+      it 'has a #endpoint option that defaults to the API endpoint' do
+        client.config.endpoint.must_equal(api['endpoint'])
+      end
+
       it 'returns a Configuration object' do
         client.config.must_be_kind_of(Client::Configuration)
       end
