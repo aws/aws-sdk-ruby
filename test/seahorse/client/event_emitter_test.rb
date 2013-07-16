@@ -24,7 +24,7 @@ module Seahorse
       describe '#on' do
 
         it 'returns nil' do
-          ret = event_emitter.on(:event_name) { true }.must_equal(nil)
+          event_emitter.on(:event_name) { true }.must_equal(nil)
         end
 
         it 'accepts symbolized event names' do
