@@ -21,6 +21,7 @@ module Seahorse
     autoload :Handler, 'seahorse/client/handler'
     autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :HttpHandler, 'seahorse/client/http_handler'
+    autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
@@ -79,8 +80,6 @@ module Seahorse
         params: params,
         config: config,
         http_endpoint: endpoint)
-    end
-
     end
 
     # @return [String] Returns the default endpoint for the client.
