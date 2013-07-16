@@ -18,6 +18,7 @@ namespace :docs do
   end
 end
 
-YARD::Rake::YardocTask.new('docs')
-
-task :docs => 'docs:clobber'
+desc "Generate the API documentation."
+task :docs do
+  sh "bundle exec yard"
+end
