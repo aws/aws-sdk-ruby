@@ -22,11 +22,15 @@ module Seahorse
       include Enumerable
 
       # @param [Array, Set] plugins
+      # @option options [Mutex] :mutex
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
         @plugins = Set.new(plugins)
       end
 
+      # Adds and returns the `plugin`.
+      # @param [Plugin] plugin
+      # @return [Plugin]
       def add(plugin)
         plugin = resolve(plugin)
         @mutex.synchronize do
@@ -35,6 +39,9 @@ module Seahorse
         plugin
       end
 
+      # Removes and returns the `plugin`.
+      # @param [Plugin] plugin
+      # @return [Plugin]
       def remove(plugin)
         plugin = resolve(plugin)
         @mutex.synchronize do
@@ -43,6 +50,7 @@ module Seahorse
         plugin
       end
 
+      # Enumerates the plugins.
       # @return [Enumerator]
       def each(&block)
         @mutex.synchronize do
@@ -52,6 +60,10 @@ module Seahorse
 
       private
 
+      # Loads and returns the `plugin`.  If `plugin` is a `Symbol` or `String`,
+      # then it is loaded via `require`.
+      # @param [Plugin] plugin
+      # @return [Plugin]
       def resolve(plugin)
         if plugin.is_a?(Symbol) || plugin.is_a?(String)
           load_plugin(plugin.to_s)
@@ -60,6 +72,8 @@ module Seahorse
         end
       end
 
+      # Requires the `plugin`.  If `plugin_name` is prefixed with (containing
+      # a dot) then the prefix is treated as a gem name and is required.
       def load_plugin(plugin_name)
         if plugin_name.include?('.')
           require_path, plugin_name = plugin_name.split('.')
