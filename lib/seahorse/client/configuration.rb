@@ -121,6 +121,12 @@ module Seahorse
         end
       end
 
+      # @return [String]
+      # @api private
+      def inspect
+        "#<Seahorse::Client::Configuration @options=#{@options.inspect}>"
+      end
+
       class << self
 
         # @api private

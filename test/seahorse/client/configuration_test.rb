@@ -90,6 +90,16 @@ module Seahorse
 
       end
 
+      describe '#inspect' do
+
+        it 'provides a helpful inspect method' do
+          opts = { :abc => 'xyz' }
+          cfg = Configuration.new(opts)
+          cfg.inspect.must_include(opts.inspect)
+        end
+
+      end
+
       describe '#ssl_default' do
 
         it 'defaults to true' do
