@@ -37,6 +37,24 @@ module Seahorse
 
       end
 
+      describe '#status_code' do
+
+        it 'defaults to nil' do
+          Response.new.status_code.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          Response.new(status_code: 200).status_code.must_equal(200)
+        end
+
+        it 'is mustable' do
+          resp = Response.new
+          resp.status_code = 500
+          resp.status_code.must_equal(500)
+        end
+
+      end
+
     end
   end
 end

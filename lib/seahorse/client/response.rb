@@ -18,10 +18,14 @@ module Seahorse
       # @option options [Context] :context (nil)
       def initialize(options = {})
         @context = options[:context]
+        @status_code = options[:status_code]
       end
 
-      # @return [Context]
+      # @return [Context, nil]
       attr_accessor :context
+
+      # @return [Integer, nil]
+      attr_accessor :status_code
 
     end
   end
