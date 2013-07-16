@@ -21,8 +21,28 @@ module Seahorse
         @config ||= Configuration.new
       end
 
+      def handler
+        @handler ||= HttpHandler.new(config)
+      end
+
       it 'is a Handler' do
         HttpHandler.new(config).must_be_kind_of(Handler)
+      end
+
+      describe '#call' do
+
+        def context
+          @context ||= Context.new
+        end
+
+        it 'returns a response object' do
+          handler.call(context).must_be_kind_of(Response)
+        end
+
+        it 'returns a response with the given context' do
+          handler.call(context).context.must_be_same_as(context)
+        end
+
       end
 
     end
