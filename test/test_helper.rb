@@ -11,12 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'minitest'
-
 if ENV['COVERAGE']
   require 'simplecov'
 end
 
+require 'minitest/autorun'
 require 'seahorse-client'
-
-Minitest.run ARGV
