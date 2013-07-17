@@ -30,7 +30,7 @@ module Seahorse
         assert_equal([Plugin1], client_class.plugins)
       end
 
-      it 'does not add plugins to the base class' do
+      it 'does not add plugins to the client parent class' do
         subclass = Class.new(client_class)
         subclass.add_plugin(Plugin1)
         client_class.plugins.must_equal([])
@@ -41,14 +41,14 @@ module Seahorse
 
     describe '.remove_plugin' do
 
-      it 'removes a plugin from the client class' do
+      it 'removes a plugin from the client' do
         client_class.add_plugin(Plugin1)
         client_class.add_plugin(Plugin2)
         client_class.remove_plugin(Plugin1)
         client_class.plugins.must_equal([Plugin2])
       end
 
-      it 'does not remove plugins from parent class' do
+      it 'does not remove plugins from the client parent class' do
         client_class.add_plugin(Plugin1)
         client_class.add_plugin(Plugin2)
         subclass = Class.new(client_class)
