@@ -14,7 +14,10 @@
 def execute_cmd cmd
   puts cmd if Rake.application.options.trace
   system(cmd)
-  raise "Command failed with status (#{$?.to_i}): #{cmd}" if $?.to_i != 0
+  unless $?.to_i == 0
+    $stderr.puts "Command failed (#{$?}): #{cmd}"
+    exit($? >> 8)
+  end
 end
 
 desc "Runs unit tests"
