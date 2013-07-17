@@ -19,18 +19,18 @@ module Seahorse
 
       # @api private
       def initialize
-        @list = []
+        @handlers = []
       end
 
-      # @param [Class] handler_class
+      # @param [Class] handler
       # @option options [Symbol] priority (:
-      def add(handler_class)
-        @list << handler_class
+      def add(handler)
+        @handlers << handler
       end
 
       # Yields the handlers.
       def each(&block)
-        @list.each(&block)
+        @handlers.each(&block)
       end
 
     end
