@@ -50,10 +50,8 @@ module Seahorse
     # @option options [Handler] :http_handler (HttpHandler.new)
     #
     def initialize(options = {})
-      @config = Configuration.new(options)
-      @config.add_option(:ssl_default, true)
-      @config.add_option(:endpoint, default_endpoint)
-      @endpoint = Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+      @config = build_config(options)
+      @endpoint = build_endpoint
       @handler = options[:http_handler] || HttpHandler.new(@config)
     end
 
@@ -72,6 +70,20 @@ module Seahorse
     end
 
     private
+
+    # @param [Hash] options
+    # @return [Configuration]
+    def build_config(options)
+      config = Configuration.new(options)
+      config.add_option(:ssl_default, true)
+      config.add_option(:endpoint, default_endpoint)
+      config
+    end
+
+    # @return [Endpoint]
+    def build_endpoint
+      Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+    end
 
     # @return [Context]
     def context_for(operation_name, params)
