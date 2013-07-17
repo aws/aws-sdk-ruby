@@ -75,10 +75,10 @@ module Seahorse
         end
 
         it 'does not require plugins when added' do
-          plugins.add('Seahorse::Client::LazyPlugin::Abc')
-          LazyPlugin.const_defined?(:Abc).must_equal(false)
-          plugins.to_a.must_equal([LazyPlugin::Abc])
-          LazyPlugin.const_defined?(:Abc).must_equal(true)
+          plugins.add('Seahorse::Client::LazyPlugin::Add')
+          LazyPlugin.const_defined?(:Add).must_equal(false)
+          plugins.to_a.must_equal([LazyPlugin::Add])
+          LazyPlugin.const_defined?(:Add).must_equal(true)
         end
 
         it 'accepts a plugin with require prefix' do
