@@ -22,7 +22,7 @@ module Seahorse
       end
 
       it 'responds to add_handlers, doing nothing' do
-        Plugin.new.add_handlers('handler-list')
+        Plugin.new.add_handlers('handler-list', 'config')
       end
 
     end

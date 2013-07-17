@@ -26,8 +26,9 @@ module Seahorse
       end
 
       # @param [HandlerList] handlers
+      # @param [Configuration] config
       # @return [void]
-      def add_handlers(config)
+      def add_handlers(handler_list, config)
       end
 
     end

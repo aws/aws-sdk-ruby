@@ -104,11 +104,14 @@ module Seahorse
       stack
     end
 
+    # This method provides each plugin the opportunity to register handlers.
+    # Plugins that respond to {Plugin#add_handlers} will be called with
+    # the configuration and a {HandlerList}.
     # @param [Array<Plugin>] plugins
     # @return [HandlerList]
     def handler_list(plugins)
       plugins.inject(HandlerList.new) do |list, plugin|
-        plugin.add_handlers(list) if plugin.respond_to?(:add_handlers)
+        plugin.add_handlers(list, @config) if plugin.respond_to?(:add_handlers)
         list
       end
     end

@@ -62,7 +62,8 @@ module Seahorse
         plugin = Minitest::Mock.new
         plugin.expect(:is_a?, false, [Class])
         plugin.expect(:is_a?, false, [Class])
-        plugin.expect(:add_handlers, nil, [Client::HandlerList])
+        plugin.expect(:add_handlers, nil,
+          [Client::HandlerList, Client::Configuration])
         client_class.add_plugin(plugin)
         client_class.new
         plugin.verify
