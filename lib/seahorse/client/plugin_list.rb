@@ -25,16 +25,15 @@ module Seahorse
       # @option options [Mutex] :mutex
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
-        @plugins = Set.new(plugins)
+        @plugins = Set.new(plugins.map{|p| canonical_name(p) })
       end
 
       # Adds and returns the `plugin`.
       # @param [Plugin] plugin
       # @return [void]
       def add(plugin)
-        plugin = resolve(plugin)
         @mutex.synchronize do
-          @plugins << plugin
+          @plugins << canonical_name(plugin)
         end
         nil
       end
@@ -43,9 +42,8 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def remove(plugin)
-        plugin = resolve(plugin)
         @mutex.synchronize do
-          @plugins.delete(plugin)
+          @plugins.delete(canonical_name(plugin))
         end
         nil
       end
@@ -54,27 +52,29 @@ module Seahorse
       # @return [Enumerator]
       def each(&block)
         @mutex.synchronize do
-          @plugins.each(&block)
+          @plugins.each do |plugin|
+            yield(resolve(plugin))
+          end
         end
       end
 
       private
 
-      # Loads and returns the `plugin`.  If `plugin` is a `Symbol` or `String`,
-      # then it is loaded via `require`.
-      # @param [Plugin] plugin
-      # @return [Plugin]
-      def resolve(plugin)
-        if plugin.is_a?(Symbol) || plugin.is_a?(String)
-          load_plugin(plugin.to_s)
+      # @param [Plugin, String, Symbol] params
+      # @return [String]
+      def canonical_name(plugin)
+        if plugin.is_a?(Class)
+          plugin.name
         else
-          plugin
+          plugin_name, gem_name = plugin.to_s.split('.').reverse
+          require(gem_name) if gem_name
+          plugin_name
         end
       end
 
-      # Requires the `plugin`.  If `plugin_name` is prefixed with (containing
-      # a dot) then the prefix is treated as a gem name and is required.
-      def load_plugin(plugin_name)
+      # @param [String] plugin_name
+      # @return [Plugin]
+      def resolve(plugin_name)
         if plugin_name.include?('.')
           require_path, plugin_name = plugin_name.split('.')
           require(require_path)
