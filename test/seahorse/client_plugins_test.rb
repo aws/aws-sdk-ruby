@@ -37,10 +37,6 @@ module Seahorse
         subclass.plugins.must_equal([Plugin1])
       end
 
-      it 'returns the plugin' do
-        client_class.add_plugin(Plugin1).must_be_same_as(Plugin1)
-      end
-
     end
 
     describe '.remove_plugin' do
@@ -59,11 +55,6 @@ module Seahorse
         subclass.remove_plugin(Plugin2)
         client_class.plugins.must_equal([Plugin1, Plugin2])
         subclass.plugins.must_equal([Plugin1])
-      end
-
-      it 'returns the plugin' do
-        client_class.add_plugin(Plugin1)
-        client_class.remove_plugin(Plugin1).must_equal(Plugin1)
       end
 
     end

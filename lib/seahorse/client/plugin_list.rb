@@ -30,24 +30,24 @@ module Seahorse
 
       # Adds and returns the `plugin`.
       # @param [Plugin] plugin
-      # @return [Plugin]
+      # @return [void]
       def add(plugin)
         plugin = resolve(plugin)
         @mutex.synchronize do
           @plugins << plugin
         end
-        plugin
+        nil
       end
 
       # Removes and returns the `plugin`.
       # @param [Plugin] plugin
-      # @return [Plugin]
+      # @return [void]
       def remove(plugin)
         plugin = resolve(plugin)
         @mutex.synchronize do
           @plugins.delete(plugin)
         end
-        plugin
+        nil
       end
 
       # Enumerates the plugins.

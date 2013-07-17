@@ -41,21 +41,19 @@ module Seahorse
           plugins.to_a.must_equal([Plugin1])
         end
 
-        it 'returns the plugin' do
-          plugins.add(Plugin1).must_equal(Plugin1)
-        end
-
         it 'accepts a plugin by name (String)' do
-          plugins.add('String').must_be_same_as(String)
+          plugins.add('String')
+          plugins.to_a.must_equal([String])
         end
 
         it 'accepts a plugin by name (Symbol)' do
-          plugins.add(:String).must_be_same_as(String)
+          plugins.add(:String)
+          plugins.to_a.must_equal([String])
         end
 
         it 'accepts a plugin with require prefix' do
-          plugin = plugins.add('fixtures/plugin.Fixtures::Plugin')
-          plugin.must_be_same_as(Fixtures::Plugin)
+          plugins.add('fixtures/plugin.Fixtures::Plugin')
+          plugins.to_a.must_equal([Fixtures::Plugin])
         end
 
       end
@@ -67,11 +65,6 @@ module Seahorse
           plugins.add(Plugin2)
           plugins.remove(Plugin1)
           plugins.to_a.must_equal([Plugin2])
-        end
-
-        it 'returns the removed plugin' do
-          plugins.add(Plugin1)
-          plugins.remove(Plugin1).must_equal(Plugin1)
         end
 
         it 'can remove a plugin added by name' do
