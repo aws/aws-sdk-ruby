@@ -37,7 +37,7 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def add(plugin)
-        plugin = PluginDetails.new(plugin)
+        plugin = PluginWrapper.new(plugin)
         @mutex.synchronize do
           @plugins[plugin.canonical_name] = plugin
         end
@@ -48,7 +48,7 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def remove(plugin)
-        plugin = PluginDetails.new(plugin)
+        plugin = PluginWrapper.new(plugin)
         @mutex.synchronize do
           @plugins.delete(plugin.canonical_name)
         end
@@ -76,7 +76,7 @@ module Seahorse
       # and defers requiring the plugin until the plugin class is
       # required.
       # @api private
-      class PluginDetails
+      class PluginWrapper
 
         # @param [String, Symbol, Class] plugin
         def initialize(plugin)
@@ -97,7 +97,7 @@ module Seahorse
           @klass ||= require_plugin
         end
 
-        # Returns the given plugin if it is already a PluginDetails object.
+        # Returns the given plugin if it is already a PluginWrapper.
         def self.new(plugin)
           if plugin.is_a?(self)
             plugin
