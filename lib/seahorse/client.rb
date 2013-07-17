@@ -51,6 +51,10 @@ module Seahorse
     #
     def initialize(options = {})
       @config = build_config(options)
+      plugins = build_plugins
+      plugins.each do |plugin|
+        plugin.add_configuration(@config)
+      end
       @endpoint = build_endpoint
       @handler = options[:http_handler] || HttpHandler.new(@config)
     end
@@ -78,6 +82,13 @@ module Seahorse
       config.add_option(:ssl_default, true)
       config.add_option(:endpoint, default_endpoint)
       config
+    end
+
+    # @return [Array<Plugin>]
+    def build_plugins
+      self.class.plugins.map do |plugin|
+        plugin.is_a?(Class) ? plugin.new : plugin
+      end
     end
 
     # @return [Endpoint]

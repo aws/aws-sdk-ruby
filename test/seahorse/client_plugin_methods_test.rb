@@ -19,8 +19,44 @@ module Seahorse
     Plugin1 = Class.new
     Plugin2 = Class.new
 
+    def api
+      @api ||= { 'endpoint' => 'http://endpoint:123' }
+    end
+
     def client_class
-      @client_class ||= Class.new(Seahorse::Client)
+      @client_class ||= Seahorse::Client.define(api)
+    end
+
+    describe 'adding configuration' do
+
+      def plugin_class
+        @plugin_class ||= begin
+          Class.new(Client::Plugin) do
+
+            def add_configuration(config)
+              @config = config
+            end
+
+            attr_reader :config
+
+            def self.new
+              @instance ||= super
+            end
+
+          end
+        end
+      end
+
+      def plugin
+        @plugin ||= plugin_class.new
+      end
+
+      it 'tells the plugin to add configuration' do
+        client_class.add_plugin(plugin_class)
+        client = client_class.new
+        plugin.config.must_be_same_as(client.config)
+      end
+
     end
 
     describe '.add_plugin' do
