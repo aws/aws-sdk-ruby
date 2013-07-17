@@ -81,9 +81,10 @@ module Seahorse
           LazyPlugin.const_defined?(:Add).must_equal(true)
         end
 
-        it 'accepts a plugin with require prefix' do
-          plugins.add('fixtures/plugin.Fixtures::Plugin')
-          plugins.to_a.must_equal([Fixtures::Plugin])
+        it 'requires prefixes from plugin names when loading' do
+          Kernel.const_defined?(:SeahorseFixtures).must_equal(false)
+          plugins.add('fixtures/plugin.SeahorseFixtures::Plugin')
+          plugins.to_a.must_equal([SeahorseFixtures::Plugin])
         end
 
       end
