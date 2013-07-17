@@ -19,6 +19,12 @@ module Seahorse
     Plugin1 = Class.new
     Plugin2 = Class.new
 
+    SingletonPlugin = Class.new(Client::Plugin) do
+      def self.new
+        @instance ||= super
+      end
+    end
+
     def api
       @api ||= { 'endpoint' => 'http://endpoint:123' }
     end
@@ -30,19 +36,9 @@ module Seahorse
     describe 'adding configuration' do
 
       def plugin_class
-        @plugin_class ||= begin
-          Class.new(Client::Plugin) do
-
-            def add_configuration(config)
-              @config = config
-            end
-
-            attr_reader :config
-
-            def self.new
-              @instance ||= super
-            end
-
+        @plugin_class ||= Class.new(SingletonPlugin) do
+          def add_configuration(config)
+            config.add_option(:plugin_option)
           end
         end
       end
@@ -53,12 +49,11 @@ module Seahorse
 
       it 'tells the plugin to add configuration' do
         client_class.add_plugin(plugin_class)
-        client = client_class.new
-        plugin.config.must_be_same_as(client.config)
+        client_class.new.config.must_respond_to(:plugin_option)
       end
 
-      it 'calls #add_configuration only if the plugin responds' do
-        plugin = Object.new # does not respond to #add_configuration
+      it 'calls plugin#add_configuration only if the plugin responds' do
+        plugin = Object.new
         client_class.add_plugin(plugin)
         client_class.new
       end
