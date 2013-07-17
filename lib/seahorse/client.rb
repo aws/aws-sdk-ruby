@@ -19,6 +19,7 @@ module Seahorse
     autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
+    autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :HttpHandler, 'seahorse/client/http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
@@ -96,7 +97,20 @@ module Seahorse
     # @param [Array<Plugin>] plugins
     # @return [Handler]
     def build_handler_stack(options, plugins)
-      options[:http_handler] || HttpHandler.new(@config)
+      stack = options[:http_handler] || HttpHandler.new(@config)
+      handler_list(plugins).each do |handler|
+        stack = handler.new(@config, stack)
+      end
+      stack
+    end
+
+    # @param [Array<Plugin>] plugins
+    # @return [HandlerList]
+    def handler_list(plugins)
+      plugins.inject(HandlerList.new) do |list, plugin|
+        plugin.add_handlers(list) if plugin.respond_to?(:add_handlers)
+        list
+      end
     end
 
     # @return [Endpoint]

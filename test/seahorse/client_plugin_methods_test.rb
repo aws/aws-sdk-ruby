@@ -33,13 +33,17 @@ module Seahorse
       @client_class ||= Seahorse::Client.define(api)
     end
 
-    describe 'adding configuration' do
+    describe 'client construction' do
 
       def plugin_class
         @plugin_class ||= Class.new(SingletonPlugin) do
           def add_configuration(config)
             config.add_option(:plugin_option)
           end
+          def add_handlers(list)
+            @list = list
+          end
+          attr_reader :list
         end
       end
 
@@ -47,12 +51,28 @@ module Seahorse
         @plugin ||= plugin_class.new
       end
 
-      it 'tells the plugin to add configuration' do
+      it 'instructs plugins to #add_configuration' do
         client_class.add_plugin(plugin_class)
         client_class.new.config.must_respond_to(:plugin_option)
       end
 
       it 'calls plugin#add_configuration only if the plugin responds' do
+        plugin = Object.new
+        client_class.add_plugin(plugin)
+        client_class.new
+      end
+
+      it 'instructs plugins to #add_handlers' do
+        plugin = Minitest::Mock.new
+        plugin.expect(:is_a?, false, [Class])
+        plugin.expect(:is_a?, false, [Class])
+        plugin.expect(:add_handlers, nil, [Client::HandlerList])
+        client_class.add_plugin(plugin)
+        client_class.new
+        plugin.verify
+      end
+
+      it 'calls plugin#add_handlers only if the plugin responds' do
         plugin = Object.new
         client_class.add_plugin(plugin)
         client_class.new
