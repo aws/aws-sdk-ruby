@@ -57,6 +57,12 @@ module Seahorse
         plugin.config.must_be_same_as(client.config)
       end
 
+      it 'calls #add_configuration only if the plugin responds' do
+        plugin = Object.new # does not respond to #add_configuration
+        client_class.add_plugin(plugin)
+        client_class.new
+      end
+
     end
 
     describe '.add_plugin' do

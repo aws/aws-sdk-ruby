@@ -52,8 +52,8 @@ module Seahorse
     def initialize(options = {})
       @config = build_config(options)
       plugins = build_plugins
-      plugins.each do |plugin|
-        plugin.add_configuration(@config)
+      plugins.each do |p|
+        p.add_configuration(@config) if p.respond_to?(:add_configuration)
       end
       @endpoint = build_endpoint
       @handler = options[:http_handler] || HttpHandler.new(@config)
