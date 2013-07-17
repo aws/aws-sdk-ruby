@@ -20,37 +20,41 @@ module Seahorse
       Plugin1 = Class.new
       Plugin2 = Class.new
 
+      def plugins
+        @plugins ||= PluginList.new
+      end
+
+      it 'can be constructed with a list of plugins' do
+        PluginList.new([Plugin1, Plugin2]).to_a.must_equal([Plugin1, Plugin2])
+      end
+
       it 'can be seeded from another plugin list' do
-        list1 = PluginList.new
-        list1.add(Plugin1)
-        list1.add(Plugin2)
-        list2 = PluginList.new(list1)
-        list2.to_a.must_equal(list1.to_a)
+        plugins.add(Plugin1)
+        plugins.add(Plugin2)
+        PluginList.new(plugins).to_a.must_equal([Plugin1, Plugin2])
       end
 
       describe '#add' do
 
         it 'adds a new plugin' do
-          list = PluginList.new
-          list.add(Plugin1)
-          list.to_a.must_equal([Plugin1])
+          plugins.add(Plugin1)
+          plugins.to_a.must_equal([Plugin1])
         end
 
         it 'returns the plugin' do
-          PluginList.new.add(Plugin1).must_equal(Plugin1)
+          plugins.add(Plugin1).must_equal(Plugin1)
         end
 
         it 'accepts a plugin by name (String)' do
-          PluginList.new.add('String').must_be_same_as(String)
+          plugins.add('String').must_be_same_as(String)
         end
 
         it 'accepts a plugin by name (Symbol)' do
-          PluginList.new.add(:String).must_be_same_as(String)
+          plugins.add(:String).must_be_same_as(String)
         end
 
         it 'accepts a plugin with require prefix' do
-          list = PluginList.new
-          plugin = list.add('fixtures/plugin.Fixtures::Plugin')
+          plugin = plugins.add('fixtures/plugin.Fixtures::Plugin')
           plugin.must_be_same_as(Fixtures::Plugin)
         end
 
@@ -59,24 +63,21 @@ module Seahorse
       describe '#remove' do
 
         it 'removes the plugin' do
-          list = PluginList.new
-          list.add(Plugin1)
-          list.add(Plugin2)
-          list.remove(Plugin1)
-          list.to_a.must_equal([Plugin2])
+          plugins.add(Plugin1)
+          plugins.add(Plugin2)
+          plugins.remove(Plugin1)
+          plugins.to_a.must_equal([Plugin2])
         end
 
         it 'returns the removed plugin' do
-          list = PluginList.new
-          list.add(Plugin1)
-          list.remove(Plugin1).must_equal(Plugin1)
+          plugins.add(Plugin1)
+          plugins.remove(Plugin1).must_equal(Plugin1)
         end
 
         it 'can remove a plugin added by name' do
-          list = PluginList.new
-          list.add(:String)
-          list.remove(String)
-          list.to_a.must_equal([])
+          plugins.add(:String)
+          plugins.remove(String)
+          plugins.to_a.must_equal([])
         end
 
       end
@@ -84,14 +85,7 @@ module Seahorse
       describe '#each' do
 
         it 'is enumerable' do
-          plugins = [Plugin1, Plugin2]
-          list = PluginList.new(plugins)
-          list.must_be_kind_of(Enumerable)
-          yielded = []
-          list.each do |plugin|
-            yielded << plugin
-          end
-          yielded.must_equal(plugins)
+          plugins.must_be_kind_of(Enumerable)
         end
 
       end
@@ -113,30 +107,29 @@ module Seahorse
           @mutex ||= DummyMutex.new
         end
 
-        def list
-          @list ||= PluginList.new([Plugin1], mutex: mutex)
+        def plugins
+          @plugins ||= PluginList.new([Plugin1], mutex: mutex)
         end
 
         it 'locks the mutex when adding a plugin' do
           mutex.was_locked.must_equal(false)
-          list.add(Plugin1)
+          plugins.add(Plugin1)
           mutex.was_locked.must_equal(true)
         end
 
         it 'locks the mutex when removing a plugin' do
           mutex.was_locked.must_equal(false)
-          list.remove(Plugin1)
+          plugins.remove(Plugin1)
           mutex.was_locked.must_equal(true)
         end
 
         it 'locks the mutex when enumerating plugins' do
           mutex.was_locked.must_equal(false)
-          list.each { |plugin| }
+          plugins.each { |plugin| }
           mutex.was_locked.must_equal(true)
         end
 
       end
-
     end
   end
 end
