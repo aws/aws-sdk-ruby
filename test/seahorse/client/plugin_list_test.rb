@@ -19,6 +19,13 @@ module Seahorse
 
       Plugin1 = Class.new
       Plugin2 = Class.new
+      LazyPlugin = Class.new do
+        def self.const_missing name
+          const = Object.new
+          const_set(name, const)
+          const
+        end
+      end
 
       def plugins
         @plugins ||= PluginList.new
@@ -49,6 +56,13 @@ module Seahorse
         it 'accepts a plugin by name (Symbol)' do
           plugins.add(:String)
           plugins.to_a.must_equal([String])
+        end
+
+        it 'does not require plugins when added' do
+          plugins.add('Seahorse::Client::LazyPlugin::Abc')
+          LazyPlugin.const_defined?(:Abc).must_equal(false)
+          plugins.to_a.must_equal([LazyPlugin::Abc])
+          LazyPlugin.const_defined?(:Abc).must_equal(true)
         end
 
         it 'accepts a plugin with require prefix' do

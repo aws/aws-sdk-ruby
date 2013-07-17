@@ -25,7 +25,7 @@ module Seahorse
       # @option options [Mutex] :mutex
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
-        @plugins = Set.new
+        @plugins = {}
         plugins.each { |plugin| add(plugin) }
       end
 
@@ -33,8 +33,9 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def add(plugin)
+        plugin = PluginDetails.new(plugin)
         @mutex.synchronize do
-          @plugins << canonical_name(plugin)
+          @plugins[plugin.canonical_name] = plugin
         end
         nil
       end
@@ -43,8 +44,9 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def remove(plugin)
+        plugin = PluginDetails.new(plugin)
         @mutex.synchronize do
-          @plugins.delete(canonical_name(plugin))
+          @plugins.delete(plugin.canonical_name)
         end
         nil
       end
@@ -53,36 +55,52 @@ module Seahorse
       # @return [Enumerator]
       def each(&block)
         @mutex.synchronize do
-          @plugins.each do |plugin|
-            yield(resolve(plugin))
+          @plugins.values.each do |plugin|
+            yield(plugin.klass)
           end
         end
       end
 
       private
 
-      # @param [Plugin, String, Symbol] params
-      # @return [String]
-      def canonical_name(plugin)
-        if plugin.is_a?(Class)
-          plugin.name
-        else
-          plugin_name, gem_name = plugin.to_s.split('.').reverse
-          require(gem_name) if gem_name
-          plugin_name
-        end
-      end
+      # A utility class that computes the canonical name for a plugin
+      # and defers requiring the plugin until the plugin class is
+      # required.
+      # @api private
+      class PluginDetails
 
-      # @param [String] plugin_name
-      # @return [Plugin]
-      def resolve(plugin_name)
-        if plugin_name.include?('.')
-          require_path, plugin_name = plugin_name.split('.')
-          require(require_path)
+        # @param [String, Symbol, Class] plugin
+        def initialize(plugin)
+          if plugin.is_a?(Class)
+            @canonical_name = plugin.name
+            @klass = plugin
+          else
+            @canonical_name, @gem_name = plugin.to_s.split('.').reverse
+            @klass = nil
+          end
         end
-        Kernel.const_get(plugin_name)
-      end
 
+        # @return [String]
+        attr_reader :canonical_name
+
+        # @return [Class]
+        def klass
+          @klass ||= require_plugin
+        end
+
+        private
+
+        # @return [Class]
+        def require_plugin
+          require(@gem_name) if @gem_name
+          plugin_class = Kernel
+          @canonical_name.split('::').each do |const_name|
+            plugin_class = plugin_class.const_get(const_name)
+          end
+          plugin_class
+        end
+
+      end
     end
   end
 end
