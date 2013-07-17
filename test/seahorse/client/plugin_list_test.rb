@@ -41,6 +41,17 @@ module Seahorse
         PluginList.new(plugins).to_a.must_equal([Plugin1, Plugin2])
       end
 
+      describe 'copy constructor' do
+
+        it 'can be constructed from another plugin list' do
+          plugins.add(Plugin1)
+          PluginList.new(plugins).to_a.must_equal([Plugin1])
+        end
+
+        it 'does not load plugins when constructing from another plugin list'
+
+      end
+
       describe '#add' do
 
         it 'adds a new plugin' do
