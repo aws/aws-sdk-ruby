@@ -16,6 +16,15 @@ require 'test_helper'
 module Seahorse
   class Client
     describe HandlerList do
+
+      def handlers
+        @handlers ||= HandlerList.new
+      end
+
+      it 'is enumerable' do
+        handlers.must_be_kind_of(Enumerable)
+      end
+
     end
   end
 end

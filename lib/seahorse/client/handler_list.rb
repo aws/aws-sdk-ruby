@@ -13,7 +13,10 @@
 
 module Seahorse
   class Client
-    class HandlerList < Array
+    class HandlerList
+
+      include Enumerable
+
     end
   end
 end
