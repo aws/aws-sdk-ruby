@@ -25,6 +25,16 @@ module Seahorse
         handlers.must_be_kind_of(Enumerable)
       end
 
+      describe '#add' do
+
+        it 'adds a handler' do
+          handler = Class.new
+          handlers.add(handler)
+          handlers.to_a.must_equal([handler])
+        end
+
+      end
+
     end
   end
 end

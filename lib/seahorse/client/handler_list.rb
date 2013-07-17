@@ -17,6 +17,22 @@ module Seahorse
 
       include Enumerable
 
+      # @api private
+      def initialize
+        @list = []
+      end
+
+      # @param [Class] handler_class
+      # @option options [Symbol] priority (:
+      def add(handler_class)
+        @list << handler_class
+      end
+
+      # Yields the handlers.
+      def each(&block)
+        @list.each(&block)
+      end
+
     end
   end
 end
