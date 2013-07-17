@@ -25,7 +25,7 @@ module Seahorse
       # @option options [Mutex] :mutex
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
-        @plugins = {}
+        @plugins = Set.new
         if plugins.is_a?(PluginList)
           plugins.send(:each_plugin) { |plugin| add(plugin) }
         else
@@ -37,9 +37,8 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def add(plugin)
-        plugin = PluginWrapper.new(plugin)
         @mutex.synchronize do
-          @plugins[plugin.canonical_name] = plugin
+          @plugins << PluginWrapper.new(plugin)
         end
         nil
       end
@@ -48,9 +47,8 @@ module Seahorse
       # @param [Plugin] plugin
       # @return [void]
       def remove(plugin)
-        plugin = PluginWrapper.new(plugin)
         @mutex.synchronize do
-          @plugins.delete(plugin.canonical_name)
+          @plugins.delete(PluginWrapper.new(plugin))
         end
         nil
       end
@@ -68,7 +66,7 @@ module Seahorse
       # Yield each PluginDetail behind the mutex
       def each_plugin(&block)
         @mutex.synchronize do
-          @plugins.values.each(&block)
+          @plugins.each(&block)
         end
       end
 
@@ -104,6 +102,16 @@ module Seahorse
           else
             super
           end
+        end
+
+        # @return [Boolean]
+        def eql? other
+          canonical_name == other.canonical_name
+        end
+
+        # @return [String]
+        def hash
+          canonical_name.hash
         end
 
         private
