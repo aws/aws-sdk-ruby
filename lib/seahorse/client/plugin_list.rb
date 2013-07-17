@@ -25,7 +25,8 @@ module Seahorse
       # @option options [Mutex] :mutex
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
-        @plugins = Set.new(plugins.map{|p| canonical_name(p) })
+        @plugins = Set.new
+        plugins.each { |plugin| add(plugin) }
       end
 
       # Adds and returns the `plugin`.
