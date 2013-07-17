@@ -26,7 +26,11 @@ module Seahorse
       def initialize(plugins = [], options = {})
         @mutex = options[:mutex] || Mutex.new
         @plugins = {}
-        plugins.each { |plugin| add(plugin) }
+        if plugins.is_a?(PluginList)
+          plugins.send(:each_plugin) { |plugin| add(plugin) }
+        else
+          plugins.each { |plugin| add(plugin) }
+        end
       end
 
       # Adds and returns the `plugin`.
@@ -54,14 +58,19 @@ module Seahorse
       # Enumerates the plugins.
       # @return [Enumerator]
       def each(&block)
-        @mutex.synchronize do
-          @plugins.values.each do |plugin|
-            yield(plugin.klass)
-          end
+        each_plugin do |plugin|
+          yield(plugin.klass)
         end
       end
 
       private
+
+      # Yield each PluginDetail behind the mutex
+      def each_plugin(&block)
+        @mutex.synchronize do
+          @plugins.values.each(&block)
+        end
+      end
 
       # A utility class that computes the canonical name for a plugin
       # and defers requiring the plugin until the plugin class is
@@ -86,6 +95,15 @@ module Seahorse
         # @return [Class]
         def klass
           @klass ||= require_plugin
+        end
+
+        # Returns the given plugin if it is already a PluginDetails object.
+        def self.new(plugin)
+          if plugin.is_a?(self)
+            plugin
+          else
+            super
+          end
         end
 
         private

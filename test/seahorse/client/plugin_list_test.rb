@@ -48,7 +48,12 @@ module Seahorse
           PluginList.new(plugins).to_a.must_equal([Plugin1])
         end
 
-        it 'does not load plugins when constructing from another plugin list'
+        it 'does not load plugins when constructing from another plugin list' do
+          plugins.add('Seahorse::Client::LazyPlugin::CopyConstructor')
+          LazyPlugin.const_defined?(:CopyConstructor).must_equal(false)
+          PluginList.new(plugins)
+          LazyPlugin.const_defined?(:CopyConstructor).must_equal(false)
+        end
 
       end
 
