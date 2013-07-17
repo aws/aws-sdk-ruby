@@ -50,13 +50,10 @@ module Seahorse
     # @option options [Handler] :http_handler (HttpHandler.new)
     #
     def initialize(options = {})
-      @config = build_config(options)
       plugins = build_plugins
-      plugins.each do |p|
-        p.add_configuration(@config) if p.respond_to?(:add_configuration)
-      end
+      @config = build_config(options, plugins)
+      @handler = build_handler_stack(options, plugins)
       @endpoint = build_endpoint
-      @handler = options[:http_handler] || HttpHandler.new(@config)
     end
 
     # @return [Endpoint]
@@ -75,20 +72,31 @@ module Seahorse
 
     private
 
-    # @param [Hash] options
-    # @return [Configuration]
-    def build_config(options)
-      config = Configuration.new(options)
-      config.add_option(:ssl_default, true)
-      config.add_option(:endpoint, default_endpoint)
-      config
-    end
-
     # @return [Array<Plugin>]
     def build_plugins
       self.class.plugins.map do |plugin|
         plugin.is_a?(Class) ? plugin.new : plugin
       end
+    end
+
+    # @param [Hash] options
+    # @param [Array<Plugin>] plugins
+    # @return [Configuration]
+    def build_config(options, plugins)
+      config = Configuration.new(options)
+      config.add_option(:ssl_default, true)
+      config.add_option(:endpoint, default_endpoint)
+      plugins.each do |p|
+        p.add_configuration(config) if p.respond_to?(:add_configuration)
+      end
+      config
+    end
+
+    # @param [Hash] options
+    # @param [Array<Plugin>] plugins
+    # @return [Handler]
+    def build_handler_stack(options, plugins)
+      options[:http_handler] || HttpHandler.new(@config)
     end
 
     # @return [Endpoint]
