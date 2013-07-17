@@ -16,6 +16,15 @@ require 'test_helper'
 module Seahorse
   class Client
     describe Plugin do
+
+      it 'responds to add_configuration, doing nothing' do
+        Plugin.new.add_configuration('configuration-object')
+      end
+
+      it 'responds to add_handlers, doing nothing' do
+        Plugin.new.add_handlers('handler-list')
+      end
+
     end
   end
 end

@@ -19,6 +19,17 @@ module Seahorse
     # to extend from this class.  This class provides a helpful starting
     # point as well as a location to document the plugin system.
     class Plugin
+
+      # @param [Configuration] config
+      # @return [void]
+      def add_configuration(config)
+      end
+
+      # @param [HandlerList] handlers
+      # @return [void]
+      def add_handlers(config)
+      end
+
     end
   end
 end
