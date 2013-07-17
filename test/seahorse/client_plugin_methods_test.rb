@@ -40,10 +40,6 @@ module Seahorse
           def add_configuration(config)
             config.add_option(:plugin_option)
           end
-          def add_handlers(list)
-            @list = list
-          end
-          attr_reader :list
         end
       end
 
