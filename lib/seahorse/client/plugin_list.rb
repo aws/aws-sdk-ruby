@@ -56,8 +56,8 @@ module Seahorse
       # Enumerates the plugins.
       # @return [Enumerator]
       def each(&block)
-        each_plugin do |plugin|
-          yield(plugin.klass)
+        each_plugin do |plugin_wrapper|
+          yield(plugin_wrapper.plugin)
         end
       end
 
@@ -78,12 +78,16 @@ module Seahorse
 
         # @param [String, Symbol, Class] plugin
         def initialize(plugin)
-          if plugin.is_a?(Class)
+          case plugin
+          when Module
             @canonical_name = plugin.name
-            @klass = plugin
-          else
+            @plugin = plugin
+          when Symbol, String
             @canonical_name, @gem_name = plugin.to_s.split('.').reverse
-            @klass = nil
+            @plugin = nil
+          else
+            @canonical_name = plugin.object_id
+            @plugin = plugin
           end
         end
 
@@ -91,8 +95,8 @@ module Seahorse
         attr_reader :canonical_name
 
         # @return [Class]
-        def klass
-          @klass ||= require_plugin
+        def plugin
+          @plugin ||= require_plugin
         end
 
         # Returns the given plugin if it is already a PluginWrapper.

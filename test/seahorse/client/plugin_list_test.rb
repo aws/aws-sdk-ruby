@@ -74,6 +74,19 @@ module Seahorse
           plugins.to_a.must_equal([String])
         end
 
+        it 'accepts a plugin object' do
+          plugin = Object.new
+          plugins.add(plugin)
+          plugins.to_a.must_equal([plugin])
+        end
+
+        it 'only accpets one copy of each plugin' do
+          plugin = Object.new
+          plugins.add(plugin)
+          plugins.add(plugin)
+          plugins.to_a.must_equal([plugin])
+        end
+
         it 'does not require plugins when added' do
           plugins.add('Seahorse::Client::LazyPlugin::Add')
           LazyPlugin.const_defined?(:Add).must_equal(false)
