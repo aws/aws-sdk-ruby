@@ -54,7 +54,7 @@ module Seahorse
       # @return [Enumerator]
       def each(&block)
         @mutex.synchronize do
-          @plugins.dup.each(&block)
+          @plugins.each(&block)
         end
       end
 
