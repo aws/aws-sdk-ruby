@@ -71,66 +71,66 @@ module AWS
       #       Based on this type, exactly one of the UIntOptions,
       #       LiteralOptions or TextOptions must be present. Valid values
       #       include:
-      #       * `uint`
-      #       * `literal`
-      #       * `text`
+      #         * `uint`
+      #         * `literal`
+      #         * `text`
       #     * `:u_int_options` - (Hash) Options for an unsigned integer field.
       #       Present if IndexFieldType specifies the field is of type unsigned
       #       integer.
-      #       * `:default_value` - (Integer) The default value for an unsigned
-      #         integer field.
+      #         * `:default_value` - (Integer) The default value for an unsigned
+      #           integer field.
       #     * `:literal_options` - (Hash) Options for literal field. Present if
       #       IndexFieldType specifies the field is of type literal.
-      #       * `:default_value` - (String) The default value for a literal
-      #         field.
-      #       * `:search_enabled` - (Boolean) Specifies whether search is
-      #         enabled for this field.
-      #       * `:facet_enabled` - (Boolean) Specifies whether facets are
-      #         enabled for this field.
-      #       * `:result_enabled` - (Boolean) Specifies whether values of this
-      #         field can be returned in search results and used for ranking.
+      #         * `:default_value` - (String) The default value for a literal
+      #           field.
+      #         * `:search_enabled` - (Boolean) Specifies whether search is
+      #           enabled for this field.
+      #         * `:facet_enabled` - (Boolean) Specifies whether facets are
+      #           enabled for this field.
+      #         * `:result_enabled` - (Boolean) Specifies whether values of this
+      #           field can be returned in search results and used for ranking.
       #     * `:text_options` - (Hash) Options for text field. Present if
       #       IndexFieldType specifies the field is of type text.
-      #       * `:default_value` - (String) The default value for a text field.
-      #       * `:facet_enabled` - (Boolean) Specifies whether facets are
-      #         enabled for this field.
-      #       * `:result_enabled` - (Boolean) Specifies whether values of this
-      #         field can be returned in search results and used for ranking.
-      #     * `:source_attributes` - (Array<Hash>) An optional list of source
+      #         * `:default_value` - (String) The default value for a text field.
+      #         * `:facet_enabled` - (Boolean) Specifies whether facets are
+      #           enabled for this field.
+      #         * `:result_enabled` - (Boolean) Specifies whether values of this
+      #           field can be returned in search results and used for ranking.
+      #     * `:source_attributes` - (Array\<Hash\>) An optional list of source
       #       attributes that provide data for this index field. If not
       #       specified, the data is pulled from a source attribute with the
       #       same name as this IndexField. When one or more source attributes
       #       are specified, an optional data transformation can be applied to
       #       the source data when populating the index field. You can
       #       configure a maximum of 20 sources for an IndexField.
-      #       * `:source_data_function` - *required* - (String) Identifies the
-      #         transformation to apply when copying data from a source
-      #         attribute. Valid values include:
-      #         * `Copy`
-      #         * `TrimTitle`
-      #         * `Map`
-      #       * `:source_data_copy` - (Hash) Copies data from a source document
-      #         attribute to an IndexField.
-      #         * `:source_name` - *required* - (String) The name of the
-      #           document source field to add to this IndexField.
-      #         * `:default_value` - (String)
-      #       * `:source_data_trim_title` - (Hash) Trims common title words
-      #         from a source document attribute when populating an IndexField.
-      #         This can be used to create an IndexField you can use for
-      #         sorting.
-      #         * `:source_name` - *required* - (String) The name of the
-      #           document source field to add to this IndexField.
-      #         * `:default_value` - (String)
-      #         * `:separator` - (String) The separator that follows the text
-      #           to trim.
-      #         * `:language` - (String)
-      #       * `:source_data_map` - (Hash) Maps source document attribute
-      #         values to new values when populating the IndexField.
-      #         * `:source_name` - *required* - (String) The name of the
-      #           document source field to add to this IndexField.
-      #         * `:default_value` - (String)
-      #         * `:cases` - (Hash<String,String>) A map that translates source
-      #           field values to custom values.
+      #         * `:source_data_function` - *required* - (String) Identifies the
+      #           transformation to apply when copying data from a source
+      #           attribute. Valid values include:
+      #             * `Copy`
+      #             * `TrimTitle`
+      #             * `Map`
+      #         * `:source_data_copy` - (Hash) Copies data from a source document
+      #           attribute to an IndexField.
+      #             * `:source_name` - *required* - (String) The name of the
+      #               document source field to add to this IndexField.
+      #             * `:default_value` - (String)
+      #         * `:source_data_trim_title` - (Hash) Trims common title words
+      #           from a source document attribute when populating an IndexField.
+      #           This can be used to create an IndexField you can use for
+      #           sorting.
+      #             * `:source_name` - *required* - (String) The name of the
+      #               document source field to add to this IndexField.
+      #             * `:default_value` - (String)
+      #             * `:separator` - (String) The separator that follows the text
+      #               to trim.
+      #             * `:language` - (String)
+      #         * `:source_data_map` - (Hash) Maps source document attribute
+      #           values to new values when populating the IndexField.
+      #             * `:source_name` - *required* - (String) The name of the
+      #               document source field to add to this IndexField.
+      #             * `:default_value` - (String)
+      #             * `:cases` - (Hash<String,String>) A map that translates source
+      #               field values to custom values.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
