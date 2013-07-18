@@ -71,31 +71,31 @@ module AWS
       #       Based on this type, exactly one of the UIntOptions,
       #       LiteralOptions or TextOptions must be present. Valid values
       #       include:
-      #       * `uint`
-      #       * `literal`
-      #       * `text`
+      #         * `uint`
+      #         * `literal`
+      #         * `text`
       #     * `:u_int_options` - (Hash) Options for an unsigned integer field.
       #       Present if IndexFieldType specifies the field is of type unsigned
       #       integer.
-      #       * `:default_value` - (Integer) The default value for an unsigned
-      #         integer field.
+      #         * `:default_value` - (Integer) The default value for an unsigned
+      #           integer field.
       #     * `:literal_options` - (Hash) Options for literal field. Present if
       #       IndexFieldType specifies the field is of type literal.
-      #       * `:default_value` - (String) The default value for a literal
-      #         field.
-      #       * `:search_enabled` - (Boolean) Specifies whether search is
-      #         enabled for this field.
-      #       * `:facet_enabled` - (Boolean) Specifies whether facets are
-      #         enabled for this field.
-      #       * `:result_enabled` - (Boolean) Specifies whether values of this
-      #         field can be returned in search results and used for ranking.
+      #         * `:default_value` - (String) The default value for a literal
+      #           field.
+      #         * `:search_enabled` - (Boolean) Specifies whether search is
+      #           enabled for this field.
+      #         * `:facet_enabled` - (Boolean) Specifies whether facets are
+      #           enabled for this field.
+      #         * `:result_enabled` - (Boolean) Specifies whether values of this
+      #           field can be returned in search results and used for ranking.
       #     * `:text_options` - (Hash) Options for text field. Present if
       #       IndexFieldType specifies the field is of type text.
-      #       * `:default_value` - (String) The default value for a text field.
-      #       * `:facet_enabled` - (Boolean) Specifies whether facets are
-      #         enabled for this field.
-      #       * `:result_enabled` - (Boolean) Specifies whether values of this
-      #         field can be returned in search results and used for ranking.
+      #         * `:default_value` - (String) The default value for a text field.
+      #         * `:facet_enabled` - (Boolean) Specifies whether facets are
+      #           enabled for this field.
+      #         * `:result_enabled` - (Boolean) Specifies whether values of this
+      #           field can be returned in search results and used for ranking.
       #     * `:source_attributes` - (Array<Hash>) An optional list of source
       #       attributes that provide data for this index field. If not
       #       specified, the data is pulled from a source attribute with the
