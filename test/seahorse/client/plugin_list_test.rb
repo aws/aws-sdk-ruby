@@ -119,6 +119,16 @@ module Seahorse
 
       end
 
+      describe '#set' do
+
+        it 'replaces the existing list of plugins' do
+          plugins.add(Plugin1)
+          plugins.set([Plugin2])
+          plugins.to_a.must_equal([Plugin2])
+        end
+
+      end
+
       describe '#each' do
 
         it 'is enumerable' do

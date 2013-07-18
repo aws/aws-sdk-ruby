@@ -162,22 +162,34 @@ module Seahorse
       #   ClientClass.add_plugin(plugin)
       #
       # @param [Class, Symbol, String, Object] plugin
+      # @see .set_plugins
       # @see .remove_plugin
       # @see .plugins
-      # @return [Class, Object] Returns the loaded plugin.
+      # @return [void]
       def add_plugin(plugin)
         @plugins.add(plugin)
       end
 
+      # @see .set_plugins
       # @see .add_plugin
       # @see .plugins
-      # @return [Class, Object] Returns the removed plugin.
+      # @return [void]
       def remove_plugin(plugin)
         @plugins.remove(plugin)
       end
 
+      # @param [Array<Plugin>]
+      # @see .add_plugin
+      # @see .remove_plugin
+      # @see .plugins
+      # @return [void]
+      def set_plugins(plugins)
+        @plugins.set(plugins)
+      end
+
       # Returns the list of registered plugins for this Client.  Plugins are
       # inherited from the client super class when the client is defined.
+      # @see .set_plugins
       # @see .add_plugin
       # @see .remove_plugin
       # @return [Array]

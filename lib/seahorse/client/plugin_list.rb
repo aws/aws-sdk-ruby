@@ -53,6 +53,19 @@ module Seahorse
         nil
       end
 
+      # Replaces the existing list of plugins.
+      # @param [Array<Plugin>] plugins
+      # @return [void]
+      def set(plugins)
+        @mutex.synchronize do
+          @plugins.clear
+          plugins.each do |plugin|
+            @plugins << PluginWrapper.new(plugin)
+          end
+        end
+        nil
+      end
+
       # Enumerates the plugins.
       # @return [Enumerator]
       def each(&block)
