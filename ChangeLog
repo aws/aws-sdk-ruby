@@ -1,16 +1,212 @@
-2013-07-05 Trevor Rowe <trevorrowe@gmail.com>
+2013-07-15 Trevor Rowe <trevorrowe@gmail.com>
 
-  * spec/aws/config_spec.rb, spec/aws/core/client_spec.rb,
-  spec/aws/core/region_spec.rb: Updated specs to use the new AWS::SERVICES
-  format.
+  * spec/shared/aws_client_examples.rb: Disabed aync test.
 
-  * lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/client_v2.rb: Updated
-  client API documentation for both Amazon DynamoDB clients.
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb:
+  AWS::S3::Client#put_bucket_website now omits empty routing rules.
 
-  * lib/aws/dynamo_db/client.rb: Added whitespace in client documentation to
-  ensure nested lists render correctly.
+  This resolves an issue where passing `:routing_rules => []` to the
+  client would result in an error returned from Amazon S3.  S3 does
+  not accept `<RoutingRules/>`.
 
-2013-07-03 Trevor Rowe <trevorrowe@gmail.com>
+  Fixes #308
+
+  * lib/aws/core.rb: Update documentation for AWS.memoize.
+
+  AWS.memoize documentation incorrectly stated that memoize was
+  only supported for EC2, when in fact it is supported for classes
+  which inherit from Resource.
+
+  * README.md: Updated list of supported API versions in the README.
+
+2013-07-11 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/api_config/STS-2011-06-15.yml, lib/aws/sts/client.rb: Added
+  AWS::STS::Client#decode_authorization_message
+
+2013-07-10 Loren Segal <lsegal@soen.ca>
+
+  * tasks/docs.rake: Update docs.rake
+  * .travis.yml: Ignore some Gemfile groups in Travis tests.
+  * lib/aws/simple_email_service/identity.rb: Fix typo in
+  SimpleEmailService::Identity
+
+  * lib/aws/route_53/hosted_zone.rb, lib/aws/route_53/resource_record_set.rb:
+  resource_identifiers should be protected
+
+  * lib/aws/cloud_front/client.rb: Bumped CloudFront API client.
+
+  * spec/aws/rds/client_spec.rb: Updated RDS client spec for the new api
+  version.
+
+  * lib/aws/rds/client.rb: Bumped EC2 API version in the client class.
+
+  * lib/aws/api_config/RDS-2013-02-12.yml,
+  lib/aws/api_config/RDS-2013-05-15.yml, lib/aws/rds/client.rb: Updated
+  AWS::RDS::Client to the latest API version.
+
+  * lib/aws/api_config/CloudFront-2012-07-01.yml,
+  lib/aws/api_config/CloudFront-2013-05-12.yml, lib/aws/cloud_front/client.rb:
+  Updated to the 2013-05-12 API version for AWS::CloudFront::Client.
+
+  * lib/aws/dynamo_db/client.rb: Removed duplicate code from DynamoDB::Client.
+
+  * features/record/hash_model.feature: Fixed an integration test for
+  AWS::Record::HashModel.
+
+  * lib/aws/record/abstract_base.rb, lib/aws/record/hash_model.rb,
+  lib/aws/record/model.rb: Moved one other reference for id out of record
+  abstract base.
+
+  * lib/aws/record/abstract_base.rb, lib/aws/record/attributes.rb,
+  spec/aws/record/model/instance_methods_spec.rb,
+  spec/shared/record/instance_examples.rb: AWS::Record now accepts default
+  values set via a proc.
+
+  By using a Proc, you can ensure every record has a different default value.
+  For example:
+
+      class Book < AWS::Record::HashModel
+        string_attr :isbn, :default_value => lambda {
+  UUIDTools::UUID.random_create }
+      end
+
+  * lib/aws/record/abstract_base.rb, lib/aws/record/hash_model.rb,
+  lib/aws/record/validator.rb,
+  spec/aws/record/hash_model/class_methods_spec.rb: AWS::Record::HashModel now
+  accepts mutable hash keys.
+
+  The default behavior for a class extending `AWS::Record::HashModel` is to
+  have a managed `#id` attribute.  This attribute is auto-generated before
+  creation.  It is set to a random UUID.
+
+  You can now override this behavior with the `:hash_key` option.  When you do
+  this,
+  the HashModel's hash key will no longer be managed (no default values).
+
+  * lib/aws/record/abstract_base.rb, lib/aws/record/model.rb: Moved the static
+  #id attribute logic from AWS::Record::AbstractBase into Model.
+
+  In order to allow a dynamic hash key, we don't want the extra baggage of
+  a fixed attribute name.
+
+2013-07-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/auto_scaling/client.rb, lib/aws/cloud_formation/client.rb,
+  lib/aws/cloud_front/client.rb, lib/aws/cloud_search/client.rb,
+  lib/aws/cloud_watch/client.rb, lib/aws/core/client.rb,
+  lib/aws/data_pipeline/client.rb, lib/aws/direct_connect/client.rb,
+  lib/aws/ec2/client.rb, lib/aws/elastic_beanstalk/client.rb,
+  lib/aws/elastic_transcoder/client.rb, lib/aws/elasticache/client.rb,
+  lib/aws/elb/client.rb, lib/aws/emr/client.rb, lib/aws/glacier/client.rb,
+  lib/aws/iam/client.rb, lib/aws/import_export/client.rb,
+  lib/aws/ops_works/client.rb, lib/aws/rds/client.rb,
+  lib/aws/redshift/client.rb, lib/aws/route_53/client.rb,
+  lib/aws/s3/client.rb, lib/aws/simple_db/client.rb,
+  lib/aws/simple_email_service/client.rb, lib/aws/simple_workflow/client.rb,
+  lib/aws/sns/client.rb, lib/aws/sqs/client.rb,
+  lib/aws/storage_gateway/client.rb, lib/aws/sts/client.rb,
+  lib/aws/support/client.rb, spec/aws/core/client_spec.rb,
+  spec/aws/ec2/client/xml_spec.rb: Minimal refactor so services support
+  versioned clients.
+
+  * lib/aws/core/client.rb: Moved logic for versioned clients from
+  AWS::DynamoDB::Client to AWS::Core::Client.
+
+  * lib/aws/record/hash_model.rb,
+  spec/aws/record/hash_model/class_methods_spec.rb:
+  AWS::Record::HashModel.create_table now observes the assignable hash key.
+
+  This was previously hard-coded to 'id', it now uses the specified
+  hash key:
+
+      class Book < AWS::Record::HashModel
+        string_attr :isbn, :hash_key => true
+      end
+
+      Book.create_table(10, 5) # table hash key becomes 'isbn'
+
+  * spec/aws/core/credential_providers_spec.rb: Fix bug in
+  CredentialFileProvider test.
+
+  * lib/aws/core/credential_providers.rb,
+  spec/aws/core/credential_providers_spec.rb: Implements
+  AWS::Core::CredentialProviders::CredentialFileProvider
+
+  * spec/aws/core/region_collection_spec.rb: Fix tests for 1.8.7 syntax
+  * lib/aws/core/region_collection.rb,
+  spec/aws/core/region_collection_spec.rb: Refinements to proxies in region
+  collection.
+
+  Additionally, fixed the URI usage within load_data to
+  support ports.
+
+  Fixes #300
+
+  * lib/aws/core/region_collection.rb: Add proxy support to AWS regions
+  enumeration.
+
+  region_collection.rb did not attempt to use proxies even when
+  specified in the AWS config. This change adds a proxy check,
+  and uses a proxy when available.
+
+  * lib/aws/dynamo_db/client.rb: Udpated documentation reference to the
+  DynamoDB constructor.
+
+  * bin/aws-rb: Now joining execute options for aws-rb
+
+  * bin/aws-rb: Passing the -e flag to aws-rb now defaults quiet mode.
+
+  * lib/aws/core/credential_providers.rb,
+  spec/aws/core/credential_providers_spec.rb, spec/mock-credential-file.txt:
+  Read credentials from AWS_CREDENTIAL_FILE environment variable.
+
+  * bin/aws-rb: Added a -e option to aws-rb.
+
+  You can now execute commands using aws-rb.  Passing commands
+  with the -e option will prevent the REPL from launching and will
+  exit instead.  You can pass multiple -e options.
+
+      aws-rb -q -e "puts AWS.s3.buckets.map(&:name)"
+
+  The script above would put the name of each bucket to STDOUT and
+  then exit.  The -q flag (quiet) disables logging.
+
+2013-07-08 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/s3/presigned_post.rb: Remove unnecessary field name
+  transformation.
+
+  In my previous change, forgot the removal of one field name
+  function call. This was inconsistent but didn't break tests.
+  Cleaning that up with this change.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.12.0
+
+  * lib/aws/sns/originators/from_auto_scaling.rb,
+  spec/aws/sns/originators/from_auto_scaling_spec.rb: Fixed the copyright
+  dates in two files.
+
+  * lib/aws/api_config/ElasticTranscoder-2012-09-25.yml,
+  lib/aws/elastic_transcoder/client.rb: Added support for watermarks to
+  AWS::ElasticTranscoder::Client.
+
+2013-07-03 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/s3/presigned_post.rb: Minor adjustment to previous presigned post
+  change.
+
+  Had integration test regressions regarding some option types.
+  This change addresses that regression.
+
+  * lib/aws/s3/presigned_post.rb, spec/aws/s3/presigned_post_spec.rb: Allow
+  arbitrary options for presigned post.
+
+  Presigned Posts to S3 previously hard coded a set of allowable
+  parameters, this change permits users to send arbitrary params
+  which are then passed on to S3.
+
+  Resolves #250
 
   * lib/aws/core.rb, lib/aws/core/region.rb, tasks/docs.rake: Updated
   documentation for service helpers.
@@ -107,6 +303,80 @@
 
   * lib/aws/core.rb: Updated the documentation for eager_autoload! to a void
   return.
+
+2013-07-05 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/dynamo_db/client.rb, spec/aws/dynamo_db/client_versions_spec.rb:
+  You can now configure a global default API version.
+
+  If you want to specify the default API version, you can do so
+  using AWS.config:
+
+      # normally defaults to 2011-12-05
+      AWS::DynamoDB::Client.new
+      #=> AWS::DyanmoDB::Client::V20111205
+
+      AWS.config(:dynamo_db => { :api_version => '2012-08-10')
+
+      # now defaults to 2012-08-10
+      AWS::DynamoDB::Client.new
+      #=> AWS::DyanmoDB::Client::V20120810
+
+  * lib/aws/dynamo_db/client.rb, spec/aws/dynamo_db/client_versions_spec.rb:
+  Fixed an issue constructing clients from their versioned class.
+
+  * lib/aws/dynamo_db/client.rb: Documented the DynamoDB client with
+  instructions on using the :api_version option.
+
+  * lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/client/v20111205.rb,
+  lib/aws/dynamo_db/client/v20120810.rb: Added documentation to the versioned
+  DynamoDB::Clients.
+
+  * lib/aws/core/client.rb, lib/aws/dynamo_db/client.rb,
+  lib/aws/dynamo_db/client/v20111205.rb,
+  lib/aws/dynamo_db/client/v20120810.rb, lib/aws/dynamo_db/client_base.rb,
+  lib/aws/dynamo_db/client_v2.rb, spec/aws/dynamo_db/client_versions_spec.rb:
+  AWS::DynamoDB::Client now supports both Amazon DynamoDB API versions.
+
+  `AWS::DynamoDB::ClientV2` is now deprecated.  Instead of using this class,
+  you can
+  construct a client of a specific version like so:
+
+      ddb = AWS::DynamoDB::Client.new(:api_version => '2012-08-10')
+
+  Constructing a client without an API version returns a client of the oldest
+  version.  This ensures existing users of AWS::DynamoDB::Client will not
+  experience
+  runtime errors from the differences.
+
+  This works by turning AWS::DynamoDB::Client.new into a factory method.  It
+  returns
+  an instance of Client::V20111005 or Client::V20120810 based on the
+  :api_version
+  option.
+
+  * spec/aws/config_spec.rb, spec/aws/core/client_spec.rb,
+  spec/aws/core/region_spec.rb: Updated specs to use the new AWS::SERVICES
+  format.
+
+  * lib/aws/dynamo_db/client.rb, lib/aws/dynamo_db/client_v2.rb: Updated
+  client API documentation for both Amazon DynamoDB clients.
+
+  * lib/aws/dynamo_db/client.rb: Added whitespace in client documentation to
+  ensure nested lists render correctly.
+
+2013-07-06 Vann-Campbell <vanncamp@040cced84d10.ant.amazon.com>
+
+  * lib/aws/record/hash_model.rb, spec/aws/record/hash_model_spec.rb: Fix bug
+  with hash_key
+
+  * lib/aws/record/hash_model.rb: Allow setting hash_key
+
+  When creating the dynamo_db_table instance the hash_key defaults to id.
+  This patch allows assigning a string attribute as the id.
+
+  * spec/aws/record/hash_model_spec.rb: Allow setting hash_key to values other
+  than id
 
 2013-07-04 Tung Nguyen <tongueroo@gmail.com>
 
