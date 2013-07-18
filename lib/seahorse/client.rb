@@ -98,7 +98,7 @@ module Seahorse
     # @return [Handler]
     def build_handler_stack(options, plugins)
       stack = options[:http_handler] || HttpHandler.new(@config)
-      handler_list(plugins).each do |handler|
+      handlers_for(plugins).each do |handler|
         stack = handler.new(@config, stack)
       end
       stack
@@ -109,7 +109,7 @@ module Seahorse
     # the configuration and a {HandlerList}.
     # @param [Array<Plugin>] plugins
     # @return [HandlerList]
-    def handler_list(plugins)
+    def handlers_for(plugins)
       plugins.inject(HandlerList.new) do |list, plugin|
         plugin.add_handlers(list, @config) if plugin.respond_to?(:add_handlers)
         list
