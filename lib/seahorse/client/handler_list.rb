@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'set'
-
 module Seahorse
   class Client
     class HandlerList
@@ -20,23 +18,20 @@ module Seahorse
       include Enumerable
 
       # @api private
-      PRIORITIES = Set.new([
+      PRIORITIES = [
         :after_send,
         :send,
         :before_send,
-
         :after_sign,
         :sign,
         :before_sign,
-
         :after_build,
         :build,
         :before_build,
-
         :after_validate,
         :validate,
         :before_validate,
-      ])
+      ]
 
       # @api private
       def initialize
