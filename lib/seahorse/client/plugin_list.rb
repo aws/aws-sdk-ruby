@@ -27,9 +27,9 @@ module Seahorse
         @mutex = options[:mutex] || Mutex.new
         @plugins = Set.new
         if plugins.is_a?(PluginList)
-          plugins.send(:each_plugin) { |plugin| add(plugin) }
+          plugins.send(:each_plugin) { |plugin| _add(plugin) }
         else
-          plugins.each { |plugin| add(plugin) }
+          plugins.each { |plugin| _add(plugin) }
         end
       end
 
@@ -38,7 +38,7 @@ module Seahorse
       # @return [void]
       def add(plugin)
         @mutex.synchronize do
-          @plugins << PluginWrapper.new(plugin)
+          _add(plugin)
         end
         nil
       end
@@ -60,7 +60,7 @@ module Seahorse
         @mutex.synchronize do
           @plugins.clear
           plugins.each do |plugin|
-            @plugins << PluginWrapper.new(plugin)
+            _add(plugin)
           end
         end
         nil
@@ -75,6 +75,11 @@ module Seahorse
       end
 
       private
+
+      # Not safe to call outside the mutex.
+      def _add(plugin)
+        @plugins << PluginWrapper.new(plugin)
+      end
 
       # Yield each PluginDetail behind the mutex
       def each_plugin(&block)
