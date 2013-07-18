@@ -56,6 +56,44 @@ module AWS
       #     * `:status` - (String)
       #     * `:cidrip` - (String)
 
+      # @!method authorize_snapshot_access(options = {})
+      # Calls the AuthorizeSnapshotAccess API operation.
+      # @param [Hash] options
+      #
+      #   * `:snapshot_identifier` - *required* - (String) The identifier of
+      #     the snapshot the account is authorized to restore.
+      #   * `:account_with_restore_access` - *required* - (String) The
+      #     identifier of the AWS customer account authorized to restore the
+      #     specified snapshot.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #
+      #   * `:snapshot_identifier` - (String)
+      #   * `:cluster_identifier` - (String)
+      #   * `:snapshot_create_time` - (Time)
+      #   * `:status` - (String)
+      #   * `:port` - (Integer)
+      #   * `:availability_zone` - (String)
+      #   * `:cluster_create_time` - (Time)
+      #   * `:master_username` - (String)
+      #   * `:cluster_version` - (String)
+      #   * `:snapshot_type` - (String)
+      #   * `:node_type` - (String)
+      #   * `:number_of_nodes` - (Integer)
+      #   * `:db_name` - (String)
+      #   * `:vpc_id` - (String)
+      #   * `:encrypted` - (Boolean)
+      #   * `:accounts_with_restore_access` - (Array<Hash>)
+      #     * `:account_id` - (String)
+      #   * `:owner_account` - (String)
+      #   * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:backup_progress_in_mega_bytes` - (Numeric)
+      #   * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #   * `:estimated_seconds_to_completion` - (Integer)
+      #   * `:elapsed_time_in_seconds` - (Integer)
+
       # @!method copy_cluster_snapshot(options = {})
       # Calls the CopyClusterSnapshot API operation.
       # @param [Hash] options
@@ -88,6 +126,16 @@ module AWS
       #   * `:number_of_nodes` - (Integer)
       #   * `:db_name` - (String)
       #   * `:vpc_id` - (String)
+      #   * `:encrypted` - (Boolean)
+      #   * `:accounts_with_restore_access` - (Array<Hash>)
+      #     * `:account_id` - (String)
+      #   * `:owner_account` - (String)
+      #   * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:backup_progress_in_mega_bytes` - (Numeric)
+      #   * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #   * `:estimated_seconds_to_completion` - (Integer)
+      #   * `:elapsed_time_in_seconds` - (Integer)
 
       # @!method create_cluster(options = {})
       # Calls the CreateCluster API operation.
@@ -128,19 +176,21 @@ module AWS
       #   * `:master_user_password` - *required* - (String) The password
       #     associated with the master user account for the cluster that is
       #     being created. Constraints: Must be between 8 and 64 characters in
-      #     length. Must contain at least one uppercase letter. Must contain
-      #     one lowercase letter. Must contain one number.
+      #     length. Must contain at least one uppercase letter. Must contain at
+      #     least one lowercase letter. Must contain one number. Can be any
+      #     printable ASCII character (ASCII code 33 to 126) except ' (single
+      #     quote), " (double quote), \, /, @, or space.
       #   * `:cluster_security_groups` - (Array<String>) A list of security
       #     groups to be associated with this cluster. Default: The default
       #     cluster security group for Amazon Redshift.
       #   * `:vpc_security_group_ids` - (Array<String>) A list of Virtual
-      #     Private Cloud (VPC) security groups to associate with the cluster.
-      #     Default: The default VPC security group is associated. Type: String
-      #     list
-      #   * `:cluster_subnet_group_name` - (String) A cluster subnet group to
-      #     be associated with this cluster. If this parameter is not provided
-      #     the resulting cluster will be deployed outside virtual private
-      #     cloud (VPC).
+      #     Private Cloud (VPC) security groups to be associated with the
+      #     cluster. Default: The default VPC security group is associated with
+      #     the cluster.
+      #   * `:cluster_subnet_group_name` - (String) The name of a cluster
+      #     subnet group to be associated with this cluster. If this parameter
+      #     is not provided the resulting cluster will be deployed outside
+      #     virtual private cloud (VPC).
       #   * `:availability_zone` - (String) The EC2 Availability Zone (AZ) in
       #     which you want Amazon Redshift to provision the cluster. For
       #     example, if you have several EC2 instances running in a specific
@@ -157,11 +207,9 @@ module AWS
       #     occurring on a random day of the week. The following list shows the
       #     time blocks for each region from which the default maintenance
       #     windows are assigned. US-East (Northern Virginia) Region:
-      #     03:00-11:00 UTC US-West (Northern California) Region: 06:00-14:00
-      #     UTC EU (Ireland) Region: 22:00-06:00 UTC Asia Pacific (Singapore)
-      #     Region: 14:00-22:00 UTC Asia Pacific (Tokyo) Region: 17:00-03:00
-      #     UTC Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
-      #     Constraints: Minimum 30-minute window.
+      #     03:00-11:00 UTC US-West (Oregon) Region 06:00-14:00 UTC Valid Days:
+      #     Mon | Tue | Wed | Thu | Fri | Sat | Sun Constraints: Minimum
+      #     30-minute window.
       #   * `:cluster_parameter_group_name` - (String) The name of the
       #     parameter group to be associated with this cluster. Default: The
       #     default Amazon Redshift cluster parameter group. For information
@@ -180,7 +228,7 @@ module AWS
       #     incoming connections. The cluster is accessible only via the JDBC
       #     and ODBC connection strings. Part of the connection string requires
       #     the port on which the cluster will listen for incoming connections.
-      #     Default: 5439 Valid Values: 1150-65535 ???
+      #     Default: 5439 Valid Values: 1150-65535
       #   * `:cluster_version` - (String) The version of the Amazon Redshift
       #     engine software that you want to deploy on the cluster. The version
       #     selected runs on all the nodes in the cluster. Constraints: Only
@@ -203,6 +251,8 @@ module AWS
       #     100.
       #   * `:publicly_accessible` - (Boolean) If `true` , the cluster can be
       #     accessed from a public network.
+      #   * `:encrypted` - (Boolean) If `true` , the data in cluster is
+      #     encrypted at rest. Default: `false`
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -242,6 +292,7 @@ module AWS
       #   * `:allow_version_upgrade` - (Boolean)
       #   * `:number_of_nodes` - (Integer)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:encrypted` - (Boolean)
 
       # @!method create_cluster_parameter_group(options = {})
       # Calls the CreateClusterParameterGroup API operation.
@@ -330,6 +381,16 @@ module AWS
       #   * `:number_of_nodes` - (Integer)
       #   * `:db_name` - (String)
       #   * `:vpc_id` - (String)
+      #   * `:encrypted` - (Boolean)
+      #   * `:accounts_with_restore_access` - (Array<Hash>)
+      #     * `:account_id` - (String)
+      #   * `:owner_account` - (String)
+      #   * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:backup_progress_in_mega_bytes` - (Numeric)
+      #   * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #   * `:estimated_seconds_to_completion` - (Integer)
+      #   * `:elapsed_time_in_seconds` - (Integer)
 
       # @!method create_cluster_subnet_group(options = {})
       # Calls the CreateClusterSubnetGroup API operation.
@@ -420,6 +481,7 @@ module AWS
       #   * `:allow_version_upgrade` - (Boolean)
       #   * `:number_of_nodes` - (Integer)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:encrypted` - (Boolean)
 
       # @!method delete_cluster_parameter_group(options = {})
       # Calls the DeleteClusterParameterGroup API operation.
@@ -464,6 +526,16 @@ module AWS
       #   * `:number_of_nodes` - (Integer)
       #   * `:db_name` - (String)
       #   * `:vpc_id` - (String)
+      #   * `:encrypted` - (Boolean)
+      #   * `:accounts_with_restore_access` - (Array<Hash>)
+      #     * `:account_id` - (String)
+      #   * `:owner_account` - (String)
+      #   * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:backup_progress_in_mega_bytes` - (Numeric)
+      #   * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #   * `:estimated_seconds_to_completion` - (Integer)
+      #   * `:elapsed_time_in_seconds` - (Integer)
 
       # @!method delete_cluster_subnet_group(options = {})
       # Calls the DeleteClusterSubnetGroup API operation.
@@ -599,6 +671,11 @@ module AWS
       #   * `:marker` - (String) An optional marker returned by a previous
       #     DescribeClusterSnapshots request to indicate the first snapshot
       #     that the request will return.
+      #   * `:owner_account` - (String) The AWS customer account used to create
+      #     or copy the snapshot. Use this field to filter the results to
+      #     snapshots owned by a particular account. To describe snapshots you
+      #     own, either specify your AWS customer account, or do not specify
+      #     the parameter.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -619,6 +696,16 @@ module AWS
       #     * `:number_of_nodes` - (Integer)
       #     * `:db_name` - (String)
       #     * `:vpc_id` - (String)
+      #     * `:encrypted` - (Boolean)
+      #     * `:accounts_with_restore_access` - (Array<Hash>)
+      #       * `:account_id` - (String)
+      #     * `:owner_account` - (String)
+      #     * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #     * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #     * `:backup_progress_in_mega_bytes` - (Numeric)
+      #     * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #     * `:estimated_seconds_to_completion` - (Integer)
+      #     * `:elapsed_time_in_seconds` - (Integer)
 
       # @!method describe_cluster_subnet_groups(options = {})
       # Calls the DescribeClusterSubnetGroups API operation.
@@ -635,7 +722,7 @@ module AWS
       #     than 100.
       #   * `:marker` - (String) An optional marker returned by a previous
       #     DescribeClusterSubnetGroups request to indicate the first cluster
-      #     subnet group that the request will return.
+      #     subnet group that the current request will return.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -740,6 +827,7 @@ module AWS
       #     * `:allow_version_upgrade` - (Boolean)
       #     * `:number_of_nodes` - (Integer)
       #     * `:publicly_accessible` - (Boolean)
+      #     * `:encrypted` - (Boolean)
 
       # @!method describe_default_cluster_parameters(options = {})
       # Calls the DescribeDefaultClusterParameters API operation.
@@ -808,7 +896,7 @@ module AWS
       #     Wikipedia page. Example: 2009-07-08T18:00Z
       #   * `:duration` - (Integer) The number of minutes prior to the time of
       #     the request for which to retrieve events. For example, if the
-      #     request is sent at 18:00 and you specify a druration of 60, then
+      #     request is sent at 18:00 and you specify a duration of 60, then
       #     only events which have occurred after 17:00 will be returned.
       #     Default: 60
       #   * `:max_records` - (Integer) The maximum number of records to include
@@ -869,11 +957,6 @@ module AWS
       #
       #   * `:reserved_node_offering_id` - (String) The unique identifier for
       #     the offering.
-      #   * `:node_type` - (String) The node type you can purchase. For more
-      #     information about managing parameter groups, go to Working with
-      #     Clusters in the Amazon Redshift Management Guide.
-      #   * `:duration` - (String) The duration, in seconds, for which the
-      #     offering will reserve the node.
       #   * `:max_records` - (Integer) The maximum number of records to include
       #     in the response. If more records exist than the specified
       #     MaxRecords value, a marker is included in the response so that the
@@ -905,13 +988,7 @@ module AWS
       # Calls the DescribeReservedNodes API operation.
       # @param [Hash] options
       #
-      #   * `:reserved_node_id` - (String) Customer specified identifier for
-      #     the node reservation.
-      #   * `:reserved_node_offering_id` - (String) The reserved node offering
-      #     identifier.
-      #   * `:node_type` - (String) The node type reserved.
-      #   * `:duration` - (String) Duration, in seconds, for which the node is
-      #     reserved.
+      #   * `:reserved_node_id` - (String) Identifier for the node reservation.
       #   * `:max_records` - (Integer) The maximum number of records to include
       #     in the response. If more records exist than the specified
       #     MaxRecords value, a marker is included in the response so that the
@@ -947,8 +1024,8 @@ module AWS
       #
       #   * `:cluster_identifier` - *required* - (String) The unique identifier
       #     of a cluster whose resize progress you are requesting. This
-      #     parameter isn't case sensitive. The default is that all clusters
-      #     defined for an account are returned.
+      #     parameter isn't case-sensitive. By default, resize operations for
+      #     all clusters defined for an AWS account are returned.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -976,23 +1053,27 @@ module AWS
       #     the progress of the resize request. Valid Values: multi-node |
       #     single-node
       #   * `:node_type` - (String) The new node type of the cluster. If you
-      #     specify a new node type you must also specify the number of nodes
-      #     parameter also. When you submit your cluster resize request, your
-      #     existing cluster goes into a read-only mode. After Amazon Redshift
-      #     provisions a new cluster based on your resize requirements, there
-      #     will be outage for a period while the old cluster is deleted and
-      #     your connection is switched to the new cluster. You can use
+      #     specify a new node type, you must also specify the number of nodes
+      #     parameter also. When you submit your request to resize a cluster,
+      #     Amazon Redshift sets access permissions for the cluster to
+      #     read-only. After Amazon Redshift provisions a new cluster according
+      #     to your resize requirements, there will be a temporary outage while
+      #     the old cluster is deleted and your connection is switched to the
+      #     new cluster. When the new connection is complete, the original
+      #     access permissions for the cluster are restored. You can use the
       #     DescribeResize to track the progress of the resize request. Valid
       #     Values: dw.hs1.xlarge | dw.hs1.8xlarge
       #   * `:number_of_nodes` - (Integer) The new number of nodes of the
       #     cluster. If you specify a new number of nodes, you must also
-      #     specify the node type parameter also. When you submit your cluster
-      #     resize request, your existing cluster goes into a read-only mode.
-      #     After Amazon Redshift provisions a new cluster based on your resize
-      #     requirements, there will be outage for a period while the old
-      #     cluster is deleted and your connection is switched to the new
-      #     cluster. You can use DescribeResize to track the progress of the
-      #     resize request. Valid Values: Integer greater than 0
+      #     specify the node type parameter also. When you submit your request
+      #     to resize a cluster, Amazon Redshift sets access permissions for
+      #     the cluster to read-only. After Amazon Redshift provisions a new
+      #     cluster according to your resize requirements, there will be a
+      #     temporary outage while the old cluster is deleted and your
+      #     connection is switched to the new cluster. When the new connection
+      #     is complete, the original access permissions for the cluster are
+      #     restored. You can use DescribeResize to track the progress of the
+      #     resize request. Valid Values: Integer greater than 0.
       #   * `:cluster_security_groups` - (Array<String>) A list of cluster
       #     security groups to be authorized on this cluster. This change is
       #     asynchronously applied as soon as possible. Security groups
@@ -1001,7 +1082,8 @@ module AWS
       #     to 255 alphanumeric characters or hyphens First character must be a
       #     letter Cannot end with a hyphen or contain two consecutive hyphens
       #   * `:vpc_security_group_ids` - (Array<String>) A list of Virtual
-      #     Private Cloud (VPC) security groups to associate with the cluster.
+      #     Private Cloud (VPC) security groups to be associated with the
+      #     cluster.
       #   * `:master_user_password` - (String) The new password for the cluster
       #     master user. This change is asynchronously applied as soon as
       #     possible. Between the time of the request and the completion of the
@@ -1011,8 +1093,10 @@ module AWS
       #     regain access to the master user account for a cluster if the
       #     password is lost. Default: Uses existing setting. Constraints: Must
       #     be between 8 and 64 characters in length. Must contain at least one
-      #     uppercase letter. Must contain one lowercase letter. Must contain
-      #     one number.
+      #     uppercase letter. Must contain at least one lowercase letter. Must
+      #     contain one number. Can be any printable ASCII character (ASCII
+      #     code 33 to 126) except ' (single quote), " (double quote), \, /, @,
+      #     or space.
       #   * `:cluster_parameter_group_name` - (String) The name of the cluster
       #     parameter group to apply to this cluster. This change is applied
       #     only after the cluster is rebooted. To reboot a cluster use
@@ -1044,8 +1128,8 @@ module AWS
       #     cluster parameter group in the cluster parameter group family for
       #     the new version must be specified. The new cluster parameter group
       #     can be the default for that cluster parameter group family. For
-      #     more information about managing parameter groups, go to Working
-      #     with Parameter Groups in the Amazon Redshift Management Guide.
+      #     more information about managing parameter groups, go to Amazon
+      #     Redshift Parameter Groups in the Amazon Redshift Management Guide.
       #     Example: 1.0
       #   * `:allow_version_upgrade` - (Boolean) If `true` , upgrades will be
       #     applied automatically to the cluster during the maintenance window.
@@ -1089,6 +1173,7 @@ module AWS
       #   * `:allow_version_upgrade` - (Boolean)
       #   * `:number_of_nodes` - (Integer)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:encrypted` - (Boolean)
 
       # @!method modify_cluster_parameter_group(options = {})
       # Calls the ModifyClusterParameterGroup API operation.
@@ -1126,9 +1211,9 @@ module AWS
       # @param [Hash] options
       #
       #   * `:cluster_subnet_group_name` - *required* - (String) The name of
-      #     the parameter group to be modified.
-      #   * `:description` - (String) The name of the parameter group to be
-      #     modified.
+      #     the subnet group to be modified.
+      #   * `:description` - (String) A text description of the subnet group to
+      #     be modified.
       #   * `:subnet_ids` - *required* - (Array<String>) An array of VPC subnet
       #     IDs. A maximum of 20 subnets can be modified in a single request.
       # @return [Core::Response]
@@ -1151,7 +1236,6 @@ module AWS
       #
       #   * `:reserved_node_offering_id` - *required* - (String) The unique
       #     identifier of the reserved node offering you want to purchase.
-      #   * `:reserved_node_id` - (String)
       #   * `:node_count` - (Integer) The number of reserved nodes you want to
       #     purchase. Default: 1
       # @return [Core::Response]
@@ -1218,6 +1302,7 @@ module AWS
       #   * `:allow_version_upgrade` - (Boolean)
       #   * `:number_of_nodes` - (Integer)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:encrypted` - (Boolean)
 
       # @!method reset_cluster_parameter_group(options = {})
       # Calls the ResetClusterParameterGroup API operation.
@@ -1281,6 +1366,9 @@ module AWS
       #     group name where you want the cluster restored.
       #   * `:publicly_accessible` - (Boolean) If `true` , the cluster can be
       #     accessed from a public network.
+      #   * `:owner_account` - (String) The AWS customer account used to create
+      #     or copy the snapshot. Required if you are restoring a snapshot you
+      #     do not own, optional if you own the snapshot.
       # @return [Core::Response]
       #   The #data method of the response object returns
       #   a hash with the following structure:
@@ -1320,6 +1408,7 @@ module AWS
       #   * `:allow_version_upgrade` - (Boolean)
       #   * `:number_of_nodes` - (Integer)
       #   * `:publicly_accessible` - (Boolean)
+      #   * `:encrypted` - (Boolean)
 
       # @!method revoke_cluster_security_group_ingress(options = {})
       # Calls the RevokeClusterSecurityGroupIngress API operation.
@@ -1354,6 +1443,44 @@ module AWS
       #   * `:ip_ranges` - (Array<Hash>)
       #     * `:status` - (String)
       #     * `:cidrip` - (String)
+
+      # @!method revoke_snapshot_access(options = {})
+      # Calls the RevokeSnapshotAccess API operation.
+      # @param [Hash] options
+      #
+      #   * `:snapshot_identifier` - *required* - (String) The identifier of
+      #     the snapshot that the account can no longer access.
+      #   * `:account_with_restore_access` - *required* - (String) The
+      #     identifier of the AWS customer account that can no longer restore
+      #     the specified snapshot.
+      # @return [Core::Response]
+      #   The #data method of the response object returns
+      #   a hash with the following structure:
+      #
+      #   * `:snapshot_identifier` - (String)
+      #   * `:cluster_identifier` - (String)
+      #   * `:snapshot_create_time` - (Time)
+      #   * `:status` - (String)
+      #   * `:port` - (Integer)
+      #   * `:availability_zone` - (String)
+      #   * `:cluster_create_time` - (Time)
+      #   * `:master_username` - (String)
+      #   * `:cluster_version` - (String)
+      #   * `:snapshot_type` - (String)
+      #   * `:node_type` - (String)
+      #   * `:number_of_nodes` - (Integer)
+      #   * `:db_name` - (String)
+      #   * `:vpc_id` - (String)
+      #   * `:encrypted` - (Boolean)
+      #   * `:accounts_with_restore_access` - (Array<Hash>)
+      #     * `:account_id` - (String)
+      #   * `:owner_account` - (String)
+      #   * `:total_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+      #   * `:backup_progress_in_mega_bytes` - (Numeric)
+      #   * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+      #   * `:estimated_seconds_to_completion` - (Integer)
+      #   * `:elapsed_time_in_seconds` - (Integer)
 
       # end client methods #
 

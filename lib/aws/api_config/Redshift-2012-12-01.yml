@@ -46,6 +46,51 @@
                     :rename: :ip_ranges
                     :list: true
             :ignore: true
+- :name: AuthorizeSnapshotAccess
+  :method: :authorize_snapshot_access
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+    AccountWithRestoreAccess:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AuthorizeSnapshotAccessResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
+            :ignore: true
 - :name: CopyClusterSnapshot
   :method: :copy_cluster_snapshot
   :inputs:
@@ -69,6 +114,26 @@
               ClusterCreateTime:
                 :type: :time
               NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
                 :type: :integer
             :ignore: true
 - :name: CreateCluster
@@ -116,6 +181,8 @@
     - :integer
     PubliclyAccessible:
     - :boolean
+    Encrypted:
+    - :boolean
   :outputs:
     :children:
       CreateClusterResult:
@@ -160,6 +227,8 @@
               NumberOfNodes:
                 :type: :integer
               PubliclyAccessible:
+                :type: :boolean
+              Encrypted:
                 :type: :boolean
             :ignore: true
 - :name: CreateClusterParameterGroup
@@ -233,6 +302,26 @@
               ClusterCreateTime:
                 :type: :time
               NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
                 :type: :integer
             :ignore: true
 - :name: CreateClusterSubnetGroup
@@ -317,6 +406,8 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
             :ignore: true
 - :name: DeleteClusterParameterGroup
   :method: :delete_cluster_parameter_group
@@ -358,6 +449,26 @@
               ClusterCreateTime:
                 :type: :time
               NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
                 :type: :integer
             :ignore: true
 - :name: DeleteClusterSubnetGroup
@@ -466,6 +577,8 @@
     - :integer
     Marker:
     - :string
+    OwnerAccount:
+    - :string
   :outputs:
     :children:
       DescribeClusterSnapshotsResult:
@@ -485,6 +598,26 @@
                   ClusterCreateTime:
                     :type: :time
                   NumberOfNodes:
+                    :type: :integer
+                  Encrypted:
+                    :type: :boolean
+                  AccountsWithRestoreAccess:
+                    :ignore: true
+                    :children:
+                      AccountWithRestoreAccess:
+                        :rename: :accounts_with_restore_access
+                        :list: true
+                  TotalBackupSizeInMegaBytes:
+                    :type: :float
+                  ActualIncrementalBackupSizeInMegaBytes:
+                    :type: :float
+                  BackupProgressInMegaBytes:
+                    :type: :float
+                  CurrentBackupRateInMegaBytesPerSecond:
+                    :type: :float
+                  EstimatedSecondsToCompletion:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
                     :type: :integer
 - :name: DescribeClusterSubnetGroups
   :method: :describe_cluster_subnet_groups
@@ -594,6 +727,8 @@
                     :type: :integer
                   PubliclyAccessible:
                     :type: :boolean
+                  Encrypted:
+                    :type: :boolean
 - :name: DescribeDefaultClusterParameters
   :method: :describe_default_cluster_parameters
   :inputs:
@@ -686,10 +821,6 @@
   :inputs:
     ReservedNodeOfferingId:
     - :string
-    NodeType:
-    - :string
-    Duration:
-    - :string
     MaxRecords:
     - :integer
     Marker:
@@ -725,12 +856,6 @@
   :method: :describe_reserved_nodes
   :inputs:
     ReservedNodeId:
-    - :string
-    ReservedNodeOfferingId:
-    - :string
-    NodeType:
-    - :string
-    Duration:
     - :string
     MaxRecords:
     - :integer
@@ -873,6 +998,8 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
             :ignore: true
 - :name: ModifyClusterParameterGroup
   :method: :modify_cluster_parameter_group
@@ -936,8 +1063,6 @@
     ReservedNodeOfferingId:
     - :string
     - :required
-    ReservedNodeId:
-    - :string
     NodeCount:
     - :integer
   :outputs:
@@ -1018,6 +1143,8 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
             :ignore: true
 - :name: ResetClusterParameterGroup
   :method: :reset_cluster_parameter_group
@@ -1069,6 +1196,8 @@
     - :string
     PubliclyAccessible:
     - :boolean
+    OwnerAccount:
+    - :string
   :outputs:
     :children:
       RestoreFromClusterSnapshotResult:
@@ -1114,6 +1243,8 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
             :ignore: true
 - :name: RevokeClusterSecurityGroupIngress
   :method: :revoke_cluster_security_group_ingress
@@ -1146,4 +1277,49 @@
                   IPRange:
                     :rename: :ip_ranges
                     :list: true
+            :ignore: true
+- :name: RevokeSnapshotAccess
+  :method: :revoke_snapshot_access
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+    AccountWithRestoreAccess:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RevokeSnapshotAccessResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
             :ignore: true
