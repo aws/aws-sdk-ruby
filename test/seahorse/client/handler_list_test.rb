@@ -49,6 +49,21 @@ module Seahorse
           handlers.to_a.must_equal(%w(send sign build validate))
         end
 
+        %i(validate build sign send).each do |priority|
+
+          describe(priority.inspect) do
+
+            it "has a :before_priority" do
+              handlers.add('before', priority: :"before_#{priority}")
+              handlers.add('on', priority: priority)
+              handlers.add('after', priority: :"after_#{priority}")
+              handlers.to_a.must_equal(['after', 'on', 'before'])
+            end
+
+          end
+
+        end
+
       end
 
     end
