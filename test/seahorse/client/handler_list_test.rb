@@ -49,7 +49,7 @@ module Seahorse
           handlers.to_a.must_equal(%w(send sign build validate))
         end
 
-        %w(validate build sign send).each do |priority|
+        %w(validate build sign).each do |priority|
 
           describe(priority) do
 
@@ -60,6 +60,23 @@ module Seahorse
               handlers.to_a.must_equal(['after', 'on', 'before'])
             end
 
+          end
+
+        end
+
+        describe 'send' do
+
+          it 'has a before level for send' do
+            handlers.add('before', priority: :before_send)
+            handlers.add('on', priority: :send)
+            handlers.to_a.must_equal(['on', 'before'])
+          end
+
+
+          it 'does not support after send' do
+            assert_raises(ArgumentError) do
+              handlers.add('handler', priority: :after_send)
+            end
           end
 
         end

@@ -19,20 +19,20 @@ module Seahorse
 
       # @api private
       def initialize
-        @handlers = {
-          after_send: [],
-          send: [],
-          before_send: [],
-          after_sign: [],
-          sign: [],
-          before_sign: [],
-          after_build: [],
-          build: [],
-          before_build: [],
-          after_validate: [],
-          validate: [],
-          before_validate: [],
-        }
+        @handlers = Hash.new do |hash, key|
+          raise ArgumentError, "invalid priority #{key.inspect}"
+        end
+        @handlers[:send] = []
+        @handlers[:before_send] = []
+        @handlers[:after_sign] = []
+        @handlers[:sign] = []
+        @handlers[:before_sign] = []
+        @handlers[:after_build] = []
+        @handlers[:build] = []
+        @handlers[:before_build] = []
+        @handlers[:after_validate] = []
+        @handlers[:validate] = []
+        @handlers[:before_validate] = []
       end
 
       # @param [Class] handler
