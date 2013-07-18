@@ -123,6 +123,10 @@ module Seahorse
     # @return [Endpoint]
     def build_endpoint
       Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+    rescue URI::InvalidURIError
+      msg = 'unable to build #endpoint, must be specified in the client API '
+      msg << 'or be set via the :endpoint option'
+      raise ArgumentError, msg
     end
 
     # @return [Context]

@@ -55,6 +55,15 @@ module Seahorse
 
     describe '#endpoint' do
 
+      it 'raises a runtime error if the endpoint can not be built' do
+        client_class = Class.new(Client)
+        client_class.set_api({}) # endpoint not specified in API
+        err = assert_raises(ArgumentError) do
+          client_class.new # endpoint not specified via :endpoint option
+        end
+        err.message.must_match(/endpoint/)
+      end
+
       it 'returns an Endpoint object' do
         client_class.new.endpoint.must_be_kind_of(Client::Endpoint)
       end
