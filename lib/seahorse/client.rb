@@ -32,7 +32,7 @@ module Seahorse
       autoload :NetHttpPlugin, 'seahorse/client/plugins/net_http_plugin'
     end
 
-    @plugins = PluginList.new
+    @plugins = PluginList.new([Plugins::NetHttpPlugin])
 
     # @option options [String, URI::HTTP, URI::HTTPS, Endpoint] :endpoint
     #   Endpoints specify the http scheme, hostname and port to connect
@@ -52,7 +52,7 @@ module Seahorse
     #   scheme for the #endpoint when not specified.  Defaults to `true`
     #   which creates https endpoints.
     #
-    # @option options [Handler] :http_handler (NetHttpHandler.new)
+    # @option options [Handler] :http_handler
     #
     def initialize(options = {})
       plugins = build_plugins
@@ -101,7 +101,7 @@ module Seahorse
     # @param [Array<Plugin>] plugins
     # @return [Handler]
     def build_handler_stack(options, plugins)
-      stack = options[:http_handler] || NetHttpHandler.new(@config)
+      stack = options[:http_handler]
       handlers_for(plugins).each do |handler|
         stack = handler.new(@config, stack)
       end
@@ -211,12 +211,13 @@ module Seahorse
 
       # @return [Hash]
       def api
-        @api
+        @api || {}
       end
 
       # @param [Hash] api
       def set_api(api)
         @api = api
+        set_plugins(api['plugins']) if api['plugins']
       end
 
       private

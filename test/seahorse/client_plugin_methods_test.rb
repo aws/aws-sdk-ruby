@@ -26,7 +26,7 @@ module Seahorse
     end
 
     def api
-      @api ||= { 'endpoint' => 'http://endpoint:123' }
+      @api ||= { 'endpoint' => 'http://endpoint:123', 'plugins' => [] }
     end
 
     def client_class
@@ -121,6 +121,18 @@ module Seahorse
 
       it 'returns a frozen list of plugins' do
         client_class.plugins.frozen?.must_equal(true)
+      end
+
+      it 'defaults to NetHttpPlugin' do
+        client_class = Class.new(Client)
+        client_class.plugins.to_a.must_equal([Client::Plugins::NetHttpPlugin])
+      end
+
+      it 'replaces default plugins with the list specified in the API' do
+        api = { 'plugins' => ['Seahorse::Plugin1'] }
+        client_class = Class.new(Client)
+        client_class.set_api(api)
+        client_class.plugins.to_a.must_equal([Plugin1])
       end
 
     end
