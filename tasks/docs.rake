@@ -19,6 +19,6 @@ namespace :docs do
 end
 
 desc "Generate the API documentation."
-task :docs do
+task :docs => 'docs:clobber' do
   sh "bundle exec yard"
 end
