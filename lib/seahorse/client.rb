@@ -21,7 +21,7 @@ module Seahorse
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HeaderHash, 'seahorse/client/header_hash'
-    autoload :HttpHandler, 'seahorse/client/http_handler'
+    autoload :NetHttpHandler, 'seahorse/client/net_http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
@@ -48,7 +48,7 @@ module Seahorse
     #   scheme for the #endpoint when not specified.  Defaults to `true`
     #   which creates https endpoints.
     #
-    # @option options [Handler] :http_handler (HttpHandler.new)
+    # @option options [Handler] :http_handler (NetHttpHandler.new)
     #
     def initialize(options = {})
       plugins = build_plugins
@@ -97,7 +97,7 @@ module Seahorse
     # @param [Array<Plugin>] plugins
     # @return [Handler]
     def build_handler_stack(options, plugins)
-      stack = options[:http_handler] || HttpHandler.new(@config)
+      stack = options[:http_handler] || NetHttpHandler.new(@config)
       handlers_for(plugins).each do |handler|
         stack = handler.new(@config, stack)
       end

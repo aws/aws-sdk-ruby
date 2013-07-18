@@ -15,18 +15,18 @@ require 'test_helper'
 
 module Seahorse
   class Client
-    describe HttpHandler do
+    describe NetHttpHandler do
 
       def config
         @config ||= Configuration.new
       end
 
       def handler
-        @handler ||= HttpHandler.new(config)
+        @handler ||= NetHttpHandler.new(config)
       end
 
       it 'is a Handler' do
-        HttpHandler.new(config).must_be_kind_of(Handler)
+        NetHttpHandler.new(config).must_be_kind_of(Handler)
       end
 
       describe '#call' do

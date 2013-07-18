@@ -13,7 +13,7 @@
 
 module Seahorse
   class Client
-    class HttpHandler < Client::Handler
+    class NetHttpHandler < Handler
 
       # @param [Context] context
       # @return [Response]
