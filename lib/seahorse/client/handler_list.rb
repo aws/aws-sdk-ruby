@@ -49,11 +49,17 @@ module Seahorse
         end
       end
 
-      # There can only be a single send handler.
+      # There can only be a single send handler.  This provides the same
+      # interface plus a helpful warning message.
       # @api private
       class SendHandlers
 
         def <<(handler)
+          if @handler
+            msg = "multiple :send handlers registered, only one allowed: "
+            msg << "#{@handler} will be replaced by #{handler}"
+            $stderr.puts(msg)
+          end
           @handler = handler
         end
 
