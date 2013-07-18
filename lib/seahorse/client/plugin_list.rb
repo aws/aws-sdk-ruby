@@ -76,7 +76,7 @@ module Seahorse
       # @api private
       class PluginWrapper
 
-        # @param [String, Symbol, Class] plugin
+        # @param [String, Symbol, Module, Class] plugin
         def initialize(plugin)
           case plugin
           when Module
@@ -94,7 +94,7 @@ module Seahorse
         # @return [String]
         attr_reader :canonical_name
 
-        # @return [Class]
+        # @return [Plugin]
         def plugin
           @plugin ||= require_plugin
         end
@@ -109,18 +109,20 @@ module Seahorse
         end
 
         # @return [Boolean]
+        # @api private
         def eql? other
           canonical_name == other.canonical_name
         end
 
         # @return [String]
+        # @api private
         def hash
           canonical_name.hash
         end
 
         private
 
-        # @return [Class]
+        # @return [Module, Class]
         def require_plugin
           require(@gem_name) if @gem_name
           plugin_class = Kernel
