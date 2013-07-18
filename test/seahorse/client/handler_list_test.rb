@@ -64,6 +64,13 @@ module Seahorse
 
         end
 
+        it 'defaults priority to :build' do
+          handlers.add('before', priority: :before_build)
+          handlers.add('on')
+          handlers.add('after', priority: :after_build)
+          handlers.to_a.must_equal(['after', 'on', 'before'])
+        end
+
       end
     end
   end
