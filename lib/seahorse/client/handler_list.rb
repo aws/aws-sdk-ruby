@@ -18,27 +18,21 @@ module Seahorse
       include Enumerable
 
       # @api private
-      PRIORITIES = [
-        :after_send,
-        :send,
-        :before_send,
-        :after_sign,
-        :sign,
-        :before_sign,
-        :after_build,
-        :build,
-        :before_build,
-        :after_validate,
-        :validate,
-        :before_validate,
-      ]
-
-      # @api private
       def initialize
-        @handlers = PRIORITIES.inject({}) do |hash, level|
-          hash[level] = []
-          hash
-        end
+        @handlers = {
+          after_send: [],
+          send: [],
+          before_send: [],
+          after_sign: [],
+          sign: [],
+          before_sign: [],
+          after_build: [],
+          build: [],
+          before_build: [],
+          after_validate: [],
+          validate: [],
+          before_validate: [],
+        }
       end
 
       # @param [Class] handler

@@ -55,7 +55,7 @@ module Seahorse
 
             it "has a before and after level for #{priority}" do
               handlers.add('before', priority: :"before_#{priority}")
-              handlers.add('on', priority: priority)
+              handlers.add('on', priority: priority.to_sym)
               handlers.add('after', priority: :"after_#{priority}")
               handlers.to_a.must_equal(['after', 'on', 'before'])
             end
