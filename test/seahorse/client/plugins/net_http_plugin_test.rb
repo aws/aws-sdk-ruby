@@ -18,13 +18,13 @@ module Seahorse
     module Plugins
       describe NetHttpPlugin do
 
-        describe '#add_configuration' do
-
-          def config
-            Configuration.new.tap do |config|
-              NetHttpPlugin.add_configuration(config)
-            end
+        def config
+          Configuration.new.tap do |config|
+            NetHttpPlugin.add_configuration(config)
           end
+        end
+
+        describe '#add_configuration' do
 
           it 'adds a :http_open_timeout option with default' do
             config.http_open_timeout.must_equal(15)
@@ -64,7 +64,7 @@ module Seahorse
 
           it 'sets the :send hander to the NetHttpHandler' do
             handlers = HandlerList.new
-            NetHttpPlugin.add_handlers(handlers)
+            NetHttpPlugin.add_handlers(handlers, config)
             handlers.to_a.must_equal([NetHttpHandler])
           end
 

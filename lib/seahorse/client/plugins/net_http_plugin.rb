@@ -35,7 +35,7 @@ module Seahorse
         # @param [HandlerList] handlers
         # @param [Configuration] config
         # @return [void]
-        def self.add_handlers(handlers)
+        def self.add_handlers(handlers, config)
           handlers.add(NetHttpHandler, priority: :send)
         end
 
