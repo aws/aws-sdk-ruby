@@ -13,6 +13,7 @@
 
 module Seahorse
   class Client
+    # @api private
     class HandlerList
 
       include Enumerable
@@ -22,7 +23,7 @@ module Seahorse
         @handlers = Hash.new do |hash, key|
           raise ArgumentError, "invalid priority #{key.inspect}"
         end
-        @handlers[:send] = []
+        @handlers[:send] = SendHandlers.new
         @handlers[:before_send] = []
         @handlers[:after_sign] = []
         @handlers[:sign] = []
@@ -48,6 +49,19 @@ module Seahorse
         end
       end
 
+      # There can only be a single send handler.
+      # @api private
+      class SendHandlers
+
+        def <<(handler)
+          @handler = handler
+        end
+
+        def each(&block)
+          yield(@handler) if @handler
+        end
+
+      end
     end
   end
 end
