@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'set'
+
 module Seahorse
   class Client
     class HandlerList
@@ -18,19 +20,43 @@ module Seahorse
       include Enumerable
 
       # @api private
+      PRIORITIES = Set.new([
+        :after_send,
+        :send,
+        :before_send,
+
+        :after_sign,
+        :sign,
+        :before_sign,
+
+        :after_build,
+        :build,
+        :before_build,
+
+        :after_validate,
+        :validate,
+        :before_validate,
+      ])
+
+      # @api private
       def initialize
-        @handlers = []
+        @handlers = PRIORITIES.inject({}) do |hash, level|
+          hash[level] = []
+          hash
+        end
       end
 
       # @param [Class] handler
-      # @option options [Symbol] priority (:
-      def add(handler)
-        @handlers << handler
+      # @option options [Symbol] priority (:build)
+      def add(handler, options = {})
+        @handlers[options[:priority] || :build] << handler
       end
 
       # Yields the handlers.
       def each(&block)
-        @handlers.each(&block)
+        @handlers.values.each do |handlers|
+          handlers.each(&block)
+        end
       end
 
     end

@@ -41,6 +41,14 @@ module Seahorse
           handlers.to_a.must_equal([handler1, handler2])
         end
 
+        it 'sorts handlers by reverse (stack) priority' do
+          handlers.add('validate', priority: :validate)
+          handlers.add('build', priority: :build)
+          handlers.add('sign', priority: :sign)
+          handlers.add('send', priority: :send)
+          handlers.to_a.must_equal(%w(send sign build validate))
+        end
+
       end
 
     end
