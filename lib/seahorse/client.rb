@@ -28,6 +28,10 @@ module Seahorse
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
 
+    module Plugins
+      autoload :NetHttpPlugin, 'seahorse/client/plugins/net_http_plugin'
+    end
+
     @plugins = PluginList.new
 
     # @option options [String, URI::HTTP, URI::HTTPS, Endpoint] :endpoint
