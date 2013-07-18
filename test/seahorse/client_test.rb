@@ -148,12 +148,6 @@ module Seahorse
 
     describe '.api' do
 
-      it 'returns the API passed to .define' do
-        api = {}
-        client_class = Client.define(api)
-        client_class.api.must_be_same_as(api)
-      end
-
       it 'can be set' do
         api = {}
         client_class = Class.new(Client)
