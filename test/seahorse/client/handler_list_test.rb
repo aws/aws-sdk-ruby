@@ -33,6 +33,14 @@ module Seahorse
           handlers.to_a.must_equal([handler])
         end
 
+        it 'preserves insertion order' do
+          handler1 = Class.new
+          handler2 = Class.new
+          handlers.add(handler1)
+          handlers.add(handler2)
+          handlers.to_a.must_equal([handler1, handler2])
+        end
+
       end
 
     end
