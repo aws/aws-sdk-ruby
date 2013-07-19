@@ -94,20 +94,10 @@ module Seahorse
           end
 
           it 'only keeps the latest send handler' do
-            capture_io do
-              handlers.add('handler1', priority: :send)
-              handlers.add('handler2', priority: :send)
-              handlers.add('handler3', priority: :send)
-            end
+            handlers.add('handler1', priority: :send)
+            handlers.add('handler2', priority: :send)
+            handlers.add('handler3', priority: :send)
             handlers.to_a.must_equal(['handler3'])
-          end
-
-          it 'emits a warning message for multiple send handlers' do
-            out, err = capture_io do
-              handlers.add('handler1', priority: :send)
-              handlers.add('handler2', priority: :send)
-            end
-            err.must_match(/multiple :send handlers/)
           end
 
         end

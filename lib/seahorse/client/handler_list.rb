@@ -55,11 +55,6 @@ module Seahorse
       class SendHandlers
 
         def <<(handler)
-          if @handler
-            msg = "multiple :send handlers registered, only one allowed: "
-            msg << "#{@handler} will be replaced by #{handler}"
-            $stderr.puts(msg)
-          end
           @handler = handler
         end
 
