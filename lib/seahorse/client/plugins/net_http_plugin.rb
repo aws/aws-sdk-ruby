@@ -16,20 +16,23 @@ module Seahorse
     module Plugins
       module NetHttpPlugin
 
+        OPTIONS = {
+          http_open_timeout: 15,
+          http_read_timeout: 60,
+          http_idle_timeout: 5,
+          http_wire_trace: false,
+          http_proxy: nil,
+          ssl_verify_peer: true,
+          ssl_ca_bundle: nil,
+          ssl_ca_directory: nil,
+        }
+
         # @param [Configuration] config
         # @return [void]
         def self.add_configuration(config)
-          config.add_option(:http_open_timeout, 15)
-          config.add_option(:http_read_timeout, 60)
-          # TODO : add support for expect continue header and timeouts
-          #config.add_option(:http_continue_timeout, 1)
-          #config.add_option(:http_continue_threshold, false)
-          config.add_option(:http_idle_timeout, 5)
-          config.add_option(:http_wire_trace, false)
-          config.add_option(:http_proxy, nil)
-          config.add_option(:ssl_verify_peer, true)
-          config.add_option(:ssl_ca_bundle, nil)
-          config.add_option(:ssl_ca_directory, nil)
+          OPTIONS.each do |opt_name, default_value|
+            config.add_option(opt_name, default_value)
+          end
         end
 
         # @param [HandlerList] handlers
