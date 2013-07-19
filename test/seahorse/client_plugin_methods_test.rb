@@ -43,10 +43,6 @@ module Seahorse
         end
       end
 
-      def plugin
-        @plugin ||= plugin_class.new
-      end
-
       it 'instructs plugins to #add_configuration' do
         client_class.add_plugin(plugin_class)
         client_class.new.config.must_respond_to(:plugin_option)
