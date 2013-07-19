@@ -98,6 +98,25 @@ module Seahorse
         client.build_request('operation').must_be_kind_of(Client::Request)
       end
 
+      describe 'handler' do
+
+        def request
+          @request ||= client.build_request('operation')
+        end
+
+        it 'defaults to a NetHttpHandler' do
+          request.handler.must_be_kind_of(Client::NetHttpHandler)
+        end
+
+        it 'accepts the handler as a client option' do
+          handler = Class.new(Client::Handler)
+          client = client_class.new(:http_handler => handler)
+          req = client.build_request('operation')
+          req.handler.must_be_kind_of(handler)
+        end
+
+      end
+
       describe 'request context' do
 
         it 'defaults params to an empty hash' do

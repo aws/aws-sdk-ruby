@@ -101,19 +101,25 @@ module Seahorse
     # @param [Array<Plugin>] plugins
     # @return [Handler]
     def build_handler_stack(options, plugins)
-      stack = options[:http_handler]
-      handlers_for(plugins).each do |handler|
-        stack = handler.new(@config, stack)
+      handler_list(plugins, options).inject(nil) do |stack, handler|
+        handler.new(stack)
       end
-      stack
     end
 
-    # This method provides each plugin the opportunity to register handlers.
-    # Plugins that respond to {Plugin#add_handlers} will be called with
-    # the configuration and a {HandlerList}.
+    # @param [Array<Plugin>] plugins
+    # @option options [HttpHandler] :http_handler (nil)
+    # @return [HandlerList]
+    def handler_list(plugins, options)
+      list = plugin_handlers(plugins)
+      if options[:http_handler]
+        list.add(options[:http_handler], priority: :send)
+      end
+      list
+    end
+
     # @param [Array<Plugin>] plugins
     # @return [HandlerList]
-    def handlers_for(plugins)
+    def plugin_handlers(plugins)
       plugins.inject(HandlerList.new) do |list, plugin|
         plugin.add_handlers(list, @config) if plugin.respond_to?(:add_handlers)
         list

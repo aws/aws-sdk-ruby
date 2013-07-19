@@ -31,6 +31,14 @@ module Seahorse
 
       describe '#context' do
 
+        it 'returns the request handler' do
+          assert_same(request.handler, handler)
+        end
+
+      end
+
+      describe '#context' do
+
         it 'returns the request context given the constructor' do
           request.context.must_be_same_as(context)
         end

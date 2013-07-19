@@ -26,6 +26,9 @@ module Seahorse
         @context = context
       end
 
+      # @return [Handler]
+      attr_reader :handler
+
       # @return [Context]
       attr_reader :context
 
