@@ -146,12 +146,7 @@ module Seahorse
 
     # @return [String] Returns the default endpoint for the client.
     def default_endpoint
-      api['endpoint']
-    end
-
-    # @return [Hash]
-    def api
-      self.class.api
+      self.class.api['endpoint']
     end
 
     class << self
