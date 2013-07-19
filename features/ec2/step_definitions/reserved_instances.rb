@@ -49,3 +49,8 @@ end
 When /^I count the reservations I have purchased$/ do
   @ec2.reserved_instances.inject(0) { |count, ri| count + 1 }
 end
+
+When(/^I enumerate reserved instance offerings with a limit of (\d+) and batch size of (\d+)$/) do |limit, batch_size|
+  offerings = @ec2.reserved_instances_offerings
+  offerings.enumerator(:limit => limit.to_i, :batch_size => batch_size.to_i).to_a
+end
