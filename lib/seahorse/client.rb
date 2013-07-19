@@ -188,7 +188,7 @@ module Seahorse
         @plugins.remove(plugin)
       end
 
-      # @param [Array<Plugin>]
+      # @param [Array<Plugin>] plugins
       # @see .add_plugin
       # @see .remove_plugin
       # @see .plugins
