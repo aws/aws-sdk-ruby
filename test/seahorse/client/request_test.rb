@@ -17,11 +17,22 @@ module Seahorse
   class Client
     describe Request do
 
+      def handler
+        @handler ||= lambda { |context| }
+      end
+
+      def context
+        @context ||= Context.new
+      end
+
+      def request
+        @request ||= Request.new(handler, context)
+      end
+
       describe '#context' do
 
         it 'returns the request context given the constructor' do
-          context = Object.new
-          Request.new('handler', context).context.must_be_same_as(context)
+          request.context.must_be_same_as(context)
         end
 
       end
@@ -30,16 +41,15 @@ module Seahorse
 
         it 'passes the request context to the handler' do
           handler = Minitest::Mock.new
-          handler.expect(:call, nil, ['context'])
-          Request.new(handler, 'context').send
-          assert handler.verify
+          handler.expect(:call, nil, [context])
+          Request.new(handler, context).send
+          handler.verify
         end
 
         it 'returns the response from the handler stack' do
-          response = Object.new
-          handler = Minitest::Mock.new
-          handler.expect(:call, response, ['context'])
-          Request.new(handler, 'context').send.must_be_same_as(response)
+          resp = Object.new
+          handler = lambda { |context| resp }
+          Request.new(handler, context).send.must_be_same_as(resp)
         end
 
       end
