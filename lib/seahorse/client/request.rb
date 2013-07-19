@@ -29,6 +29,10 @@ module Seahorse
       # @return [Context]
       attr_reader :context
 
+      def on(event_name, &callback)
+        @context.events.on(event_name, &callback)
+      end
+
       # @return [Response]
       def send
         @handler.call(@context)

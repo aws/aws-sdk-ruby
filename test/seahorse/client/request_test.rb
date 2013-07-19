@@ -37,6 +37,17 @@ module Seahorse
 
       end
 
+      describe '#on' do
+
+        it 'registers an event listener on the request context' do
+          emitted = nil
+          request.on(:event_name) { |value| emitted = value }
+          request.context.events.emit(:event_name, 'abc')
+          emitted.must_equal('abc')
+        end
+
+      end
+
       describe '#send' do
 
         it 'passes the request context to the handler' do
