@@ -24,7 +24,7 @@ desc "Runs unit tests"
 task :test do
   loader = `gem which rake/rake_test_loader`.strip
   opts = ['bundle exec ruby', '-Itest:lib', loader]
-  opts += FileList["test/**/*_test.rb"].sort
+  opts += FileList[ENV['FILES'] || 'test/**/*_test.rb'].sort
   execute_cmd(opts.join(' '))
 end
 
