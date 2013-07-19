@@ -57,7 +57,7 @@ module Seahorse
     def initialize(options = {})
       plugins = build_plugins
       @config = build_config(options, plugins)
-      @handler = build_handler_stack(options, plugins)
+      @handler = build_handler(options, plugins)
       @endpoint = build_endpoint
     end
 
@@ -100,7 +100,7 @@ module Seahorse
     # @param [Hash] options
     # @param [Array<Plugin>] plugins
     # @return [Handler]
-    def build_handler_stack(options, plugins)
+    def build_handler(options, plugins)
       handler_list(plugins, options).inject(nil) do |stack, handler|
         handler.new(stack)
       end
