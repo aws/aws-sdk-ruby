@@ -216,9 +216,10 @@ module Seahorse
       end
 
       # @param [Hash] api
+      # @return [void]
       def set_api(api)
-        @api = api
         set_plugins(api['plugins']) if api['plugins']
+        @api = api
       end
 
       private
