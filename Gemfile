@@ -21,7 +21,7 @@ end
 
 group :documentation do
   gem 'yard'
-  gem 'redcarpet'
+  gem 'rdiscount'
   gem 'rdoc', '= 3.9.4'
 end
 
