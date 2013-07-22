@@ -18,7 +18,7 @@ module Seahorse
       # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
       # @option options [HashHeader] :headers (HeaderHash.new)
-      # @option options [String] :body (nil)
+      # @option options [String] :body ('')
       def initialize(options = {})
         @context = options[:context]
         @status_code = options[:status_code]
@@ -35,7 +35,7 @@ module Seahorse
       # @return [HeaderHash]
       attr_accessor :headers
 
-      # @return [String, nil]
+      # @return [String]
       attr_accessor :body
 
     end
