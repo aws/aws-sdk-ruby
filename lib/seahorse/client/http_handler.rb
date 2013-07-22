@@ -20,21 +20,21 @@ module Seahorse
       def call(context)
         response = Response.new(context: context)
         add_http_event_listeners(response, context)
-        transmit(context)
+        transmit(context.http_request)
         response
       end
 
       # Handlers extending {HttpHandler} should define a `#transmit` method
-      # that receives a {RequestContext} and emits the following three
+      # that receives a {HttpRequest} and emits the following three
       # events:
       #
       # * `:http_headers`
       # * `:http_data`
       # * `:http_done`
       #
-      # @param [RequestContext] context
+      # @param [HttpRequest] context
       # @return [void]
-      def transmit(context)
+      def transmit(request)
         raise NotImplementedError, 'must be defined in subclass'
       end
 
