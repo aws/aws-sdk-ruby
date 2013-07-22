@@ -37,6 +37,15 @@ module Seahorse
         @data[key.to_s] = value.to_s
       end
 
+      # @param [Hash] headers
+      # @return [HeaderHash]
+      def update(headers)
+        headers.each_pair do |k, v|
+          self[k] = v
+        end
+        self
+      end
+
       # @yield [key, value]
       # @yieldparam [String] key
       # @yieldparam [String] value

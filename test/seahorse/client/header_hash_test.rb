@@ -64,6 +64,16 @@ module Seahorse
 
       end
 
+      describe '#update' do
+
+        it 'accepts a hash, updating self' do
+          hash.update(:abc => 123, 'xyz' => '234')
+          hash['abc'].must_equal('123')
+          hash['xyz'].must_equal('234')
+        end
+
+      end
+
       describe '#each' do
 
         it 'is enumerable' do
