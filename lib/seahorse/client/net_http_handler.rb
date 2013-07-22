@@ -13,12 +13,11 @@
 
 module Seahorse
   class Client
-    class NetHttpHandler < Handler
+    class NetHttpHandler < HttpHandler
 
       # @param [RequestContext] context
-      # @return [Response]
-      def call(context)
-        Response.new(context: context)
+      # @return [void]
+      def transmit(context)
       end
 
     end
