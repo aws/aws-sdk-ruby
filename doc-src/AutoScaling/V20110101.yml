@@ -1,0 +1,233 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:create_auto_scaling_group: "Calls the CreateAutoScalingGroup API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:launch_configuration_name`
+  - *required* - (String) \n  * `:min_size` - *required* - (Integer) \n  * `:max_size`
+  - *required* - (Integer) \n  * `:desired_capacity` - (Integer) \n  * `:default_cooldown`
+  - (Integer) \n  * `:availability_zones` - (Array<String>) \n  * `:load_balancer_names`
+  - (Array<String>) \n  * `:health_check_type` - (String) \n  * `:health_check_grace_period`
+  - (Integer) \n  * `:placement_group` - (String) \n  * `:vpc_zone_identifier` - (String)
+  \n  * `:termination_policies` - (Array<String>) \n  * `:tags` - (Array<Hash>) \n
+  \   * `:resource_id` - (String) \n    * `:resource_type` - (String) \n    * `:key`
+  - *required* - (String) \n    * `:value` - (String) \n    * `:propagate_at_launch`
+  - (Boolean) \n@return [Core::Response]"
+:create_launch_configuration: "Calls the CreateLaunchConfiguration API operation.\n@param
+  [Hash] options\n  * `:launch_configuration_name` - *required* - (String) \n  * `:image_id`
+  - *required* - (String) \n  * `:key_name` - (String) \n  * `:security_groups` -
+  (Array<String>) \n  * `:user_data` - (String) \n  * `:instance_type` - *required*
+  - (String) \n  * `:kernel_id` - (String) \n  * `:ramdisk_id` - (String) \n  * `:block_device_mappings`
+  - (Array<Hash>) \n    * `:virtual_name` - (String) \n    * `:device_name` - *required*
+  - (String) \n    * `:ebs` - (Hash) \n      * `:snapshot_id` - (String) \n      *
+  `:volume_size` - (Integer) \n  * `:instance_monitoring` - (Hash) \n    * `:enabled`
+  - (Boolean) \n  * `:spot_price` - (String) \n  * `:iam_instance_profile` - (String)
+  \n  * `:ebs_optimized` - (Boolean) \n@return [Core::Response]"
+:create_or_update_tags: "Calls the CreateOrUpdateTags API operation.\n@param [Hash]
+  options\n  * `:tags` - *required* - (Array<Hash>) \n    * `:resource_id` - (String)
+  \n    * `:resource_type` - (String) \n    * `:key` - *required* - (String) \n    *
+  `:value` - (String) \n    * `:propagate_at_launch` - (Boolean) \n@return [Core::Response]"
+:delete_auto_scaling_group: "Calls the DeleteAutoScalingGroup API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:force_delete`
+  - (Boolean) \n@return [Core::Response]"
+:delete_launch_configuration: "Calls the DeleteLaunchConfiguration API operation.\n@param
+  [Hash] options\n  * `:launch_configuration_name` - *required* - (String) \n@return
+  [Core::Response]"
+:delete_notification_configuration: "Calls the DeleteNotificationConfiguration API
+  operation.\n@param [Hash] options\n  * `:auto_scaling_group_name` - *required* -
+  (String) \n  * `:topic_arn` - *required* - (String) \n@return [Core::Response]"
+:delete_policy: "Calls the DeletePolicy API operation.\n@param [Hash] options\n  *
+  `:auto_scaling_group_name` - (String) \n  * `:policy_name` - *required* - (String)
+  \n@return [Core::Response]"
+:delete_scheduled_action: "Calls the DeleteScheduledAction API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - (String) \n  * `:scheduled_action_name`
+  - *required* - (String) \n@return [Core::Response]"
+:delete_tags: "Calls the DeleteTags API operation.\n@param [Hash] options\n  * `:tags`
+  - *required* - (Array<Hash>) \n    * `:resource_id` - (String) \n    * `:resource_type`
+  - (String) \n    * `:key` - *required* - (String) \n    * `:value` - (String) \n
+  \   * `:propagate_at_launch` - (Boolean) \n@return [Core::Response]"
+:describe_adjustment_types: |-
+  Calls the DescribeAdjustmentTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:adjustment_types` - (Array<Hash>)
+      * `:adjustment_type` - (String)
+:describe_auto_scaling_groups: "Calls the DescribeAutoScalingGroups API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_names` - (Array<String>) \n  * `:next_token`
+  - (String) \n  * `:max_records` - (Integer) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:auto_scaling_groups` - (Array<Hash>)\n    * `:auto_scaling_group_name` - (String)\n
+  \   * `:auto_scaling_group_arn` - (String)\n    * `:launch_configuration_name` -
+  (String)\n    * `:min_size` - (Integer)\n    * `:max_size` - (Integer)\n    * `:desired_capacity`
+  - (Integer)\n    * `:default_cooldown` - (Integer)\n    * `:availability_zones`
+  - (Array<String>)\n    * `:load_balancer_names` - (Array<String>)\n    * `:health_check_type`
+  - (String)\n    * `:health_check_grace_period` - (Integer)\n    * `:instances` -
+  (Array<Hash>)\n      * `:instance_id` - (String)\n      * `:availability_zone` -
+  (String)\n      * `:lifecycle_state` - (String)\n      * `:health_status` - (String)\n
+  \     * `:launch_configuration_name` - (String)\n    * `:created_time` - (Time)\n
+  \   * `:suspended_processes` - (Array<Hash>)\n      * `:process_name` - (String)\n
+  \     * `:suspension_reason` - (String)\n    * `:placement_group` - (String)\n    *
+  `:vpc_zone_identifier` - (String)\n    * `:enabled_metrics` - (Array<Hash>)\n      *
+  `:metric` - (String)\n      * `:granularity` - (String)\n    * `:status` - (String)\n
+  \   * `:tags` - (Array<Hash>)\n      * `:resource_id` - (String)\n      * `:resource_type`
+  - (String)\n      * `:key` - (String)\n      * `:value` - (String)\n      * `:propagate_at_launch`
+  - (Boolean)\n    * `:termination_policies` - (Array<String>)\n  * `:next_token`
+  - (String)"
+:describe_auto_scaling_instances: "Calls the DescribeAutoScalingInstances API operation.\n@param
+  [Hash] options\n  * `:instance_ids` - (Array<String>) \n  * `:max_records` - (Integer)
+  \n  * `:next_token` - (String) \n@return [Core::Response] The `#data` method of
+  the response object returns a hash with the following structure:\n\n  * `:auto_scaling_instances`
+  - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:auto_scaling_group_name`
+  - (String)\n    * `:availability_zone` - (String)\n    * `:lifecycle_state` - (String)\n
+  \   * `:health_status` - (String)\n    * `:launch_configuration_name` - (String)\n
+  \ * `:next_token` - (String)"
+:describe_auto_scaling_notification_types: |-
+  Calls the DescribeAutoScalingNotificationTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:auto_scaling_notification_types` - (Array<String>)
+:describe_launch_configurations: "Calls the DescribeLaunchConfigurations API operation.\n@param
+  [Hash] options\n  * `:launch_configuration_names` - (Array<String>) \n  * `:next_token`
+  - (String) \n  * `:max_records` - (Integer) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:launch_configurations` - (Array<Hash>)\n    * `:launch_configuration_name` - (String)\n
+  \   * `:launch_configuration_arn` - (String)\n    * `:image_id` - (String)\n    *
+  `:key_name` - (String)\n    * `:security_groups` - (Array<String>)\n    * `:user_data`
+  - (String)\n    * `:instance_type` - (String)\n    * `:kernel_id` - (String)\n    *
+  `:ramdisk_id` - (String)\n    * `:block_device_mappings` - (Array<Hash>)\n      *
+  `:virtual_name` - (String)\n      * `:device_name` - (String)\n      * `:ebs` -
+  (Hash)\n        * `:snapshot_id` - (String)\n        * `:volume_size` - (Integer)\n
+  \   * `:instance_monitoring` - (Hash)\n      * `:enabled` - (Boolean)\n    * `:spot_price`
+  - (String)\n    * `:iam_instance_profile` - (String)\n    * `:created_time` - (Time)\n
+  \   * `:ebs_optimized` - (Boolean)\n  * `:next_token` - (String)"
+:describe_metric_collection_types: |-
+  Calls the DescribeMetricCollectionTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:metrics` - (Array<Hash>)
+      * `:metric` - (String)
+    * `:granularities` - (Array<Hash>)
+      * `:granularity` - (String)
+:describe_notification_configurations: "Calls the DescribeNotificationConfigurations
+  API operation.\n@param [Hash] options\n  * `:auto_scaling_group_names` - (Array<String>)
+  \n  * `:next_token` - (String) \n  * `:max_records` - (Integer) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:notification_configurations` - (Array<Hash>)\n    * `:auto_scaling_group_name`
+  - (String)\n    * `:topic_arn` - (String)\n    * `:notification_type` - (String)\n
+  \ * `:next_token` - (String)"
+:describe_policies: "Calls the DescribePolicies API operation.\n@param [Hash] options\n
+  \ * `:auto_scaling_group_name` - (String) \n  * `:policy_names` - (Array<String>)
+  \n  * `:next_token` - (String) \n  * `:max_records` - (Integer) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:scaling_policies` - (Array<Hash>)\n    * `:auto_scaling_group_name` - (String)\n
+  \   * `:policy_name` - (String)\n    * `:scaling_adjustment` - (Integer)\n    *
+  `:adjustment_type` - (String)\n    * `:cooldown` - (Integer)\n    * `:policy_arn`
+  - (String)\n    * `:alarms` - (Array<Hash>)\n      * `:alarm_name` - (String)\n
+  \     * `:alarm_arn` - (String)\n    * `:min_adjustment_step` - (Integer)\n  * `:next_token`
+  - (String)"
+:describe_scaling_activities: "Calls the DescribeScalingActivities API operation.\n@param
+  [Hash] options\n  * `:activity_ids` - (Array<String>) \n  * `:auto_scaling_group_name`
+  - (String) \n  * `:max_records` - (Integer) \n  * `:next_token` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:activities` - (Array<Hash>)\n    * `:activity_id`
+  - (String)\n    * `:auto_scaling_group_name` - (String)\n    * `:description` -
+  (String)\n    * `:cause` - (String)\n    * `:start_time` - (Time)\n    * `:end_time`
+  - (Time)\n    * `:status_code` - (String)\n    * `:status_message` - (String)\n
+  \   * `:progress` - (Integer)\n    * `:details` - (String)\n  * `:next_token` -
+  (String)"
+:describe_scaling_process_types: |-
+  Calls the DescribeScalingProcessTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:processes` - (Array<Hash>)
+      * `:process_name` - (String)
+:describe_scheduled_actions: "Calls the DescribeScheduledActions API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - (String) \n  * `:scheduled_action_names`
+  - (Array<String>) \n  * `:start_time` - (String<ISO8601 datetime>) \n  * `:end_time`
+  - (String<ISO8601 datetime>) \n  * `:next_token` - (String) \n  * `:max_records`
+  - (Integer) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:scheduled_update_group_actions`
+  - (Array<Hash>)\n    * `:auto_scaling_group_name` - (String)\n    * `:scheduled_action_name`
+  - (String)\n    * `:scheduled_action_arn` - (String)\n    * `:time` - (Time)\n    *
+  `:start_time` - (Time)\n    * `:end_time` - (Time)\n    * `:recurrence` - (String)\n
+  \   * `:min_size` - (Integer)\n    * `:max_size` - (Integer)\n    * `:desired_capacity`
+  - (Integer)\n  * `:next_token` - (String)"
+:describe_tags: "Calls the DescribeTags API operation.\n@param [Hash] options\n  *
+  `:filters` - (Array<Hash>) \n    * `:name` - (String) \n    * `:values` - (Array<String>)
+  \n  * `:next_token` - (String) \n  * `:max_records` - (Integer) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:tags` - (Array<Hash>)\n    * `:resource_id` - (String)\n    * `:resource_type`
+  - (String)\n    * `:key` - (String)\n    * `:value` - (String)\n    * `:propagate_at_launch`
+  - (Boolean)\n  * `:next_token` - (String)"
+:describe_termination_policy_types: |-
+  Calls the DescribeTerminationPolicyTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:termination_policy_types` - (Array<String>)
+:disable_metrics_collection: "Calls the DisableMetricsCollection API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:metrics`
+  - (Array<String>) \n@return [Core::Response]"
+:enable_metrics_collection: "Calls the EnableMetricsCollection API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:metrics`
+  - (Array<String>) \n  * `:granularity` - *required* - (String) \n@return [Core::Response]"
+:execute_policy: "Calls the ExecutePolicy API operation.\n@param [Hash] options\n
+  \ * `:auto_scaling_group_name` - (String) \n  * `:policy_name` - *required* - (String)
+  \n  * `:honor_cooldown` - (Boolean) \n@return [Core::Response]"
+:put_notification_configuration: "Calls the PutNotificationConfiguration API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:topic_arn`
+  - *required* - (String) \n  * `:notification_types` - *required* - (Array<String>)
+  \n@return [Core::Response]"
+:put_scaling_policy: "Calls the PutScalingPolicy API operation.\n@param [Hash] options\n
+  \ * `:auto_scaling_group_name` - *required* - (String) \n  * `:policy_name` - *required*
+  - (String) \n  * `:scaling_adjustment` - *required* - (Integer) \n  * `:adjustment_type`
+  - *required* - (String) \n  * `:cooldown` - (Integer) \n  * `:min_adjustment_step`
+  - (Integer) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:policy_arn` - (String)"
+:put_scheduled_update_group_action: "Calls the PutScheduledUpdateGroupAction API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:scheduled_action_name`
+  - *required* - (String) \n  * `:time` - (String<ISO8601 datetime>) \n  * `:start_time`
+  - (String<ISO8601 datetime>) \n  * `:end_time` - (String<ISO8601 datetime>) \n  *
+  `:recurrence` - (String) \n  * `:min_size` - (Integer) \n  * `:max_size` - (Integer)
+  \n  * `:desired_capacity` - (Integer) \n@return [Core::Response]"
+:resume_processes: "Calls the ResumeProcesses API operation.\n@param [Hash] options\n
+  \ * `:auto_scaling_group_name` - *required* - (String) \n  * `:scaling_processes`
+  - (Array<String>) \n@return [Core::Response]"
+:set_desired_capacity: "Calls the SetDesiredCapacity API operation.\n@param [Hash]
+  options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:desired_capacity`
+  - *required* - (Integer) \n  * `:honor_cooldown` - (Boolean) \n@return [Core::Response]"
+:set_instance_health: "Calls the SetInstanceHealth API operation.\n@param [Hash] options\n
+  \ * `:instance_id` - *required* - (String) \n  * `:health_status` - *required* -
+  (String) \n  * `:should_respect_grace_period` - (Boolean) \n@return [Core::Response]"
+:suspend_processes: "Calls the SuspendProcesses API operation.\n@param [Hash] options\n
+  \ * `:auto_scaling_group_name` - *required* - (String) \n  * `:scaling_processes`
+  - (Array<String>) \n@return [Core::Response]"
+:terminate_instance_in_auto_scaling_group: "Calls the TerminateInstanceInAutoScalingGroup
+  API operation.\n@param [Hash] options\n  * `:instance_id` - *required* - (String)
+  \n  * `:should_decrement_desired_capacity` - *required* - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:activity` - (Hash)\n    * `:activity_id` - (String)\n    * `:auto_scaling_group_name`
+  - (String)\n    * `:description` - (String)\n    * `:cause` - (String)\n    * `:start_time`
+  - (Time)\n    * `:end_time` - (Time)\n    * `:status_code` - (String)\n    * `:status_message`
+  - (String)\n    * `:progress` - (Integer)\n    * `:details` - (String)"
+:update_auto_scaling_group: "Calls the UpdateAutoScalingGroup API operation.\n@param
+  [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:launch_configuration_name`
+  - (String) \n  * `:min_size` - (Integer) \n  * `:max_size` - (Integer) \n  * `:desired_capacity`
+  - (Integer) \n  * `:default_cooldown` - (Integer) \n  * `:availability_zones` -
+  (Array<String>) \n  * `:health_check_type` - (String) \n  * `:health_check_grace_period`
+  - (Integer) \n  * `:placement_group` - (String) \n  * `:vpc_zone_identifier` - (String)
+  \n  * `:termination_policies` - (Array<String>) \n@return [Core::Response]"

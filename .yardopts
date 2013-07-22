@@ -3,4 +3,5 @@
 --markup markdown
 --markup-provider rdiscount
 --no-api private
+-e doc-src/api_docs_plugin.rb
 lib/**/*.rb
