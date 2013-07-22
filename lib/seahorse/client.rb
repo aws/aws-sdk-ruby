@@ -22,6 +22,7 @@ module Seahorse
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :HttpHandler, 'seahorse/client/http_handler'
+    autoload :HttpRequest, 'seahorse/client/http_request'
     autoload :NetHttpHandler, 'seahorse/client/net_http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'

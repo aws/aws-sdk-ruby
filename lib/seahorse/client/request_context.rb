@@ -68,6 +68,12 @@ module Seahorse
       #   and #rewind.
       attr_accessor :http_body
 
+      # @return [HttpRequest]
+      def http_request
+        args = [http_endpoint, http_method, http_uri, http_headers, http_body]
+        HttpRequest.new(*args)
+      end
+
     end
   end
 end

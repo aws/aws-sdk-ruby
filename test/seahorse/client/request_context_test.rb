@@ -185,6 +185,39 @@ module Seahorse
         end
 
       end
+
+      describe '#http_request' do
+
+        def context
+          @context ||= RequestContext.new(:http_endpoint => 'endpoint')
+        end
+
+        it 'returns a HttpRequest object' do
+          context.http_request.must_be_kind_of(HttpRequest)
+        end
+
+        it 'populates the #endpoint' do
+          context.http_request.endpoint.must_be_same_as(context.http_endpoint)
+        end
+
+        it 'populates the #http_method' do
+          context.http_request.http_method.must_be_same_as(context.http_method)
+        end
+
+        it 'populates the #path' do
+          context.http_request.path.must_be_same_as(context.http_uri)
+        end
+
+        it 'populates the #headers' do
+          context.http_request.headers.must_be_same_as(context.http_headers)
+        end
+
+        it 'populates the #body' do
+          context.http_request.body.must_be_same_as(context.http_body)
+        end
+
+
+      end
     end
   end
 end
