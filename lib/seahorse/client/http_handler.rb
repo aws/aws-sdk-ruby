@@ -19,7 +19,6 @@ module Seahorse
       # @return [Response]
       def call(context)
         response = Response.new(context: context)
-        add_http_event_listeners(response, context)
         transmit(context.http_request)
         response
       end
@@ -32,20 +31,10 @@ module Seahorse
       # * `:http_data`
       # * `:http_done`
       #
-      # @param [HttpRequest] context
+      # @param [HttpRequest] request
       # @return [void]
       def transmit(request)
         raise NotImplementedError, 'must be defined in subclass'
-      end
-
-      protected
-
-      def add_http_event_listeners(response, context)
-        context.events.on(:http_headers) do |status_code, headers|
-          response.status_code = status_code.to_i
-          response.headers.update(headers)
-        end
-        context.events.on(:http_data) { |chunk| response.body << chunk }
       end
 
     end
