@@ -49,7 +49,7 @@ module AWS
         self.extend FromAutoScaling if FromAutoScaling.applicable? @raw
       end
 
-      # @param [String] indexer into raw SNS JSON message
+      # @param [String] key Indexer into raw SNS JSON message.
       # @return [String] the value of the SNS' field
       def [] key
         @raw[key]
