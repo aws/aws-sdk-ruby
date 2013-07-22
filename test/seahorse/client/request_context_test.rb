@@ -118,20 +118,20 @@ module Seahorse
 
       end
 
-      describe '#http_uri' do
+      describe '#http_path' do
 
         it 'defaults to /' do
-          RequestContext.new.http_uri.must_equal('/')
+          RequestContext.new.http_path.must_equal('/')
         end
 
         it 'can be set in the constructor' do
-          RequestContext.new(http_uri: '/uri').http_uri.must_equal('/uri')
+          RequestContext.new(http_path: '/path').http_path.must_equal('/path')
         end
 
         it 'can be set' do
           context = RequestContext.new
-          context.http_uri = '/uri'
-          context.http_uri.must_equal('/uri')
+          context.http_path = '/path'
+          context.http_path.must_equal('/path')
         end
 
       end
@@ -205,7 +205,7 @@ module Seahorse
         end
 
         it 'populates the #path' do
-          context.http_request.path.must_be_same_as(context.http_uri)
+          context.http_request.path.must_be_same_as(context.http_path)
         end
 
         it 'populates the #headers' do

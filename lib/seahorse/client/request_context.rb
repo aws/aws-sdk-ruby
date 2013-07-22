@@ -24,7 +24,8 @@ module Seahorse
       # @option options [Endpoint] :http_endpoint (nil)
       # @option options [String] :http_method ('GET') The HTTP method, e.g.
       #   `GET`, `PUT`, `POST`, `HEAD`, `DELETE`, etc.
-      # @option options [String] :http_uri ('/')
+      # @option options [String] :http_path ('/') The HTTP request uri path
+      #   including the query string, e.g. `/abc?mno=xyz'
       # @option options [HeaderHash] :http_headers ({})
       # @option options [IO] :http_body (StringIO.new) Must respond to #read
       #   and #rewind.
@@ -35,7 +36,7 @@ module Seahorse
         @events = options[:events] || EventEmitter.new
         @http_endpoint = options[:http_endpoint]
         @http_method = options[:http_method] || 'GET'
-        @http_uri = options[:http_uri] || '/'
+        @http_path = options[:http_path] || '/'
         @http_headers = options[:http_headers] || HeaderHash.new
         @http_body = options[:http_body] || StringIO.new
       end
@@ -59,7 +60,7 @@ module Seahorse
       attr_accessor :http_method
 
       # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
-      attr_accessor :http_uri
+      attr_accessor :http_path
 
       # @return [HeaderHash] The HTTP request headers.
       attr_accessor :http_headers
@@ -70,7 +71,7 @@ module Seahorse
 
       # @return [HttpRequest]
       def http_request
-        args = [http_endpoint, http_method, http_uri, http_headers, http_body]
+        args = [http_endpoint, http_method, http_path, http_headers, http_body]
         HttpRequest.new(*args)
       end
 
