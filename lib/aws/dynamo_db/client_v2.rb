@@ -24,7 +24,7 @@ module AWS
     #    AWS::DynamoDB::Client.new
     #    #=> #<AWS::DynamoDB::Client::V20111205>
     #
-    # @api private
+    # @deprecated
     class ClientV2
 
       DEPRECATION_MSG = "DEPRECATION WARNING: AWS::DynamoDB::ClientV2 is deprecated, use AWS::DynamoDB::Client.new(:api_version => '2012-08-10')"
