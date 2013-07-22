@@ -55,7 +55,7 @@ module Seahorse
       # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
       attr_accessor :http_endpoint
 
-      # @return [String] The HTTP verb (e.g. `GET`, `PUT`, `POST`, etc)
+      # @return [String] The HTTP request verb (e.g. `GET`, `PUT`, `POST`, etc)
       attr_accessor :http_method
 
       # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
