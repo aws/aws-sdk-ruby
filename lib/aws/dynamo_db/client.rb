@@ -46,12 +46,79 @@ module AWS
     # @see V20111205
     # @see V20120810
     #
-    class Client < ClientBase
+    class Client < Core::JSONClient
 
       autoload :V20111205, 'aws/dynamo_db/client/v20111205'
       autoload :V20120810, 'aws/dynamo_db/client/v20120810'
 
       API_VERSION = '2011-12-05'
+
+      # @private
+      REGION_US_E1 = 'dynamodb.us-east-1.amazonaws.com'
+
+      # @private
+      CACHEABLE_REQUESTS = Set[:list_tables, :describe_table]
+
+      protected
+
+      def extract_error_details response
+        if response.http_response.status == 413
+          ['RequestEntityTooLarge', 'Request entity too large']
+        elsif crc32_is_valid?(response) == false
+          ['CRC32CheckFailed', 'CRC32 integrity check failed']
+        else
+          super
+        end
+      end
+
+      def retryable_error? response
+        case response.error
+        when Errors::ProvisionedThroughputExceededException
+          config.dynamo_db_retry_throughput_errors?
+        when Errors::CRC32CheckFailed
+          true
+        else
+          super
+        end
+      end
+
+      def sleep_durations response
+
+        retry_count =
+          if expired_credentials?(response)
+            config.max_retries == 0 ? 0 : 1
+          else
+            config.max_retries { 10 }
+          end
+
+        # given a retry_count of 10, the sleep durations will look like:
+        # 0, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 (milliseconds)
+        (0...retry_count).map do |n|
+          if n == 0
+            0
+          else
+            50 * (2 ** (n - 1)) / 1000.0
+          end
+        end
+
+      end
+
+      private
+
+      # @return [Boolean] whether the CRC32 response header matches the body.
+      # @return [nil] if no CRC32 header is present or we are not verifying CRC32
+      def crc32_is_valid? response
+        return nil unless config.dynamo_db_crc32
+        if crcs = response.http_response.headers['x-amz-crc32']
+          crcs[0].to_i == calculate_crc32(response)
+        else
+          nil
+        end
+      end
+
+      def calculate_crc32 response
+        Zlib.crc32(response.http_response.body)
+      end
 
     end
   end

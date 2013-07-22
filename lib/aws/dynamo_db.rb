@@ -106,7 +106,6 @@ module AWS
     autoload :BatchGet, 'aws/dynamo_db/batch_get'
     autoload :BatchWrite, 'aws/dynamo_db/batch_write'
     autoload :Binary, 'aws/dynamo_db/binary'
-    autoload :ClientBase, 'aws/dynamo_db/client_base'
     autoload :Client, 'aws/dynamo_db/client'
     autoload :ClientV2, 'aws/dynamo_db/client_v2'
     autoload :Errors, 'aws/dynamo_db/errors'
