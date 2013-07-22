@@ -25,7 +25,7 @@
 :get_identity_dkim_attributes: |-
   Calls the GetIdentityDkimAttributes API operation.
   @param [Hash] options
-    * `:identities` - *required* - (Array<String>) A list of one or more verified identities - email addresses, domains, or both.
+    * `:identities` - *required* - (Array&lt;<String>) A list of one or more verified identities - email addresses, domains, or both.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:dkim_attributes` - (Hash<String,Hash>)
@@ -35,7 +35,7 @@
 :get_identity_notification_attributes: |-
   Calls the GetIdentityNotificationAttributes API operation.
   @param [Hash] options
-    * `:identities` - *required* - (Array<String>) A list of one or more identities.
+    * `:identities` - *required* - (Array&lt;<String>) A list of one or more identities.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:notification_attributes` - (Hash<String,Hash>)
@@ -45,7 +45,7 @@
 :get_identity_verification_attributes: |-
   Calls the GetIdentityVerificationAttributes API operation.
   @param [Hash] options
-    * `:identities` - *required* - (Array<String>) A list of identities.
+    * `:identities` - *required* - (Array&lt;<String>) A list of identities.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:verification_attributes` - (Hash<String,Hash>)
@@ -93,9 +93,9 @@
   @param [Hash] options
     * `:source` - *required* - (String) The identity's email address.
     * `:destination` - *required* - (Hash) The destination for this email, composed of To:, CC:, and BCC: fields.
-      * `:to_addresses` - (Array<String>) The To: field(s) of the message.
-      * `:cc_addresses` - (Array<String>) The CC: field(s) of the message.
-      * `:bcc_addresses` - (Array<String>) The BCC: field(s) of the message.
+      * `:to_addresses` - (Array&lt;<String>) The To: field(s) of the message.
+      * `:cc_addresses` - (Array&lt;<String>) The CC: field(s) of the message.
+      * `:bcc_addresses` - (Array&lt;<String>) The BCC: field(s) of the message.
     * `:message` - *required* - (Hash) The message to be sent.
       * `:subject` - *required* - (Hash) The subject of the message: A short summary of the content, which will appear in the recipient's inbox.
         * `:data` - *required* - (String) The textual data of the content.
@@ -107,7 +107,7 @@
         * `:html` - (Hash) The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message.
           * `:data` - *required* - (String) The textual data of the content.
           * `:charset` - (String) The character set of the content.
-    * `:reply_to_addresses` - (Array<String>) The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
+    * `:reply_to_addresses` - (Array&lt;<String>) The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
     * `:return_path` - (String) The email address to which bounce notifications are to be forwarded. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the ReturnPath parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -116,7 +116,7 @@
   Calls the SendRawEmail API operation.
   @param [Hash] options
     * `:source` - (String) The identity's email address. If you specify the Source parameter, then bounce notifications and complaints will be sent to this email address. This takes precedence over any Return-Path header that you might include in the raw text of the message.
-    * `:destinations` - (Array<String>) A list of destinations for the message.
+    * `:destinations` - (Array&lt;<String>) A list of destinations for the message.
     * `:raw_message` - *required* - (Hash) The raw text of the message. The client is responsible for ensuring the following: Message must contain a header and a body, separated by a blank line. All required header fields must be present. Each part of a multipart MIME message must be formatted properly. MIME content types must be among those supported by Amazon SES. Refer to the Amazon SES Developer Guide for more details. Content must be base64-encoded, if MIME requires it.
       * `:data` - *required* - (String) The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). For more information, go to theAmazon SES Developer Guide.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:

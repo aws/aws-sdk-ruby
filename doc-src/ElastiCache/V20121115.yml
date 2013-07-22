@@ -44,9 +44,9 @@
   is omitted, the default CacheParameterGroup for the specified engine will be used.\n
   \ * `:cache_subnet_group_name` - (String) The name of the Cache Subnet Group to
   be used for the Cache Cluster. Use this parameter only when you are creating a cluster
-  in an Amazon Virtual Private Cloud (VPC).\n  * `:cache_security_group_names` - (Array<String>)
+  in an Amazon Virtual Private Cloud (VPC).\n  * `:cache_security_group_names` - (Array&lt;<String>)
   A list of Cache Security Group Names to associate with this Cache Cluster.\n  *
-  `:security_group_ids` - (Array<String>) Specifies the VPC Security Groups associated
+  `:security_group_ids` - (Array&lt;<String>) Specifies the VPC Security Groups associated
   with the Cache Cluster. Use this parameter only when you are creating a cluster
   in an Amazon Virtual Private Cloud (VPC).\n  * `:preferred_availability_zone` -
   (String) The EC2 Availability Zone that the Cache Cluster will be created in. In
@@ -111,7 +111,7 @@
   @param [Hash] options
     * `:cache_subnet_group_name` - *required* - (String) The name for the Cache Subnet Group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: mysubnetgroup
     * `:cache_subnet_group_description` - *required* - (String) The description for the Cache Subnet Group.
-    * `:subnet_ids` - *required* - (Array<String>) The EC2 Subnet IDs for the Cache Subnet Group.
+    * `:subnet_ids` - *required* - (Array&lt;<String>) The EC2 Subnet IDs for the Cache Subnet Group.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cache_subnet_group_name` - (String)
@@ -367,8 +367,8 @@
       * `cache-parameter-group`
       * `cache-security-group`
       * `cache-subnet-group`
-    * `:start_time` - (String<ISO8601 datetime>) The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-    * `:end_time` - (String<ISO8601 datetime>) The end of the time interval for which to retrieve events, specified in ISO 8601 format.
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The end of the time interval for which to retrieve events, specified in ISO 8601 format.
     * `:duration` - (Integer) The number of minutes to retrieve events for.
     * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved.
     * `:marker` - (String) An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -441,14 +441,14 @@
   is less than the existing number of Cache Nodes, Cache Nodes will be removed. When
   removing Cache Nodes, the Ids of the specific Cache Nodes to be removed must be
   supplied using the CacheNodeIdsToRemove parameter.\n  * `:cache_node_ids_to_remove`
-  - (Array<String>) The list of Cache Node IDs to be removed. This parameter is only
-  valid when NumCacheNodes is less than the existing number of Cache Nodes. The number
-  of Cache Node Ids supplied in this parameter must match the difference between the
-  existing number of Cache Nodes in the cluster and the new NumCacheNodes requested.\n
-  \ * `:cache_security_group_names` - (Array<String>) A list of Cache Security Group
-  Names to authorize on this Cache Cluster. This change is asynchronously applied
+  - (Array&lt;<String>) The list of Cache Node IDs to be removed. This parameter is
+  only valid when NumCacheNodes is less than the existing number of Cache Nodes. The
+  number of Cache Node Ids supplied in this parameter must match the difference between
+  the existing number of Cache Nodes in the cluster and the new NumCacheNodes requested.\n
+  \ * `:cache_security_group_names` - (Array&lt;<String>) A list of Cache Security
+  Group Names to authorize on this Cache Cluster. This change is asynchronously applied
   as soon as possible. Constraints: Must contain no more than 255 alphanumeric characters.
-  Must not be \"Default\".\n  * `:security_group_ids` - (Array<String>) Specifies
+  Must not be \"Default\".\n  * `:security_group_ids` - (Array&lt;<String>) Specifies
   the VPC Security Groups associated with the Cache Cluster. This parameter can be
   used only with clusters that are created in an Amazon Virtual Private Cloud (VPC).\n
   \ * `:preferred_maintenance_window` - (String) The weekly time range (in UTC) during
@@ -494,7 +494,7 @@
   Calls the ModifyCacheParameterGroup API operation.
   @param [Hash] options
     * `:cache_parameter_group_name` - *required* - (String) The name of the cache parameter group to modify.
-    * `:parameter_name_values` - *required* - (Array<Hash>) An array of parameter names and values for the parameter update. At least one parameter name and value must be supplied; subsequent arguments are optional. A maximum of 20 parameters may be modified in a single request.
+    * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter names and values for the parameter update. At least one parameter name and value must be supplied; subsequent arguments are optional. A maximum of 20 parameters may be modified in a single request.
       * `:parameter_name` - (String) Specifies the name of the parameter.
       * `:parameter_value` - (String) Specifies the value of the parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -505,7 +505,7 @@
   @param [Hash] options
     * `:cache_subnet_group_name` - *required* - (String) The name for the Cache Subnet Group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: mysubnetgroup
     * `:cache_subnet_group_description` - (String) The description for the Cache Subnet Group.
-    * `:subnet_ids` - (Array<String>) The EC2 Subnet IDs for the Cache Subnet Group.
+    * `:subnet_ids` - (Array&lt;<String>) The EC2 Subnet IDs for the Cache Subnet Group.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cache_subnet_group_name` - (String)
@@ -541,7 +541,7 @@
   Calls the RebootCacheCluster API operation.
   @param [Hash] options
     * `:cache_cluster_id` - *required* - (String) The Cache Cluster identifier. This parameter is stored as a lowercase string.
-    * `:cache_node_ids_to_reboot` - *required* - (Array<String>) A list of Cache Cluster Node Ids to reboot.  To reboot an entire cache cluster, specify all cache cluster node Ids.
+    * `:cache_node_ids_to_reboot` - *required* - (Array&lt;<String>) A list of Cache Cluster Node Ids to reboot.  To reboot an entire cache cluster, specify all cache cluster node Ids.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cache_cluster_id` - (String)
@@ -589,7 +589,7 @@
   @param [Hash] options
     * `:cache_parameter_group_name` - *required* - (String) The name of the Cache Parameter Group.
     * `:reset_all_parameters` - (Boolean) Specifies whether ( `true` ) or not ( `false` ) to reset all parameters in the Cache Parameter Group to default values.
-    * `:parameter_name_values` - *required* - (Array<Hash>) An array of parameter names which should be reset.  If not resetting the entire CacheParameterGroup, at least one parameter name must be supplied.
+    * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter names which should be reset.  If not resetting the entire CacheParameterGroup, at least one parameter name must be supplied.
       * `:parameter_name` - (String) Specifies the name of the parameter.
       * `:parameter_value` - (String) Specifies the value of the parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:

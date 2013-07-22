@@ -31,8 +31,8 @@
     * `:allocation_id` - (String)
 :assign_private_ip_addresses: "Calls the AssignPrivateIpAddresses API operation.\n@param
   [Hash] options\n  * `:network_interface_id` - *required* - (String) \n  * `:private_ip_addresses`
-  - (Array<String>) \n  * `:secondary_private_ip_address_count` - (Integer) \n  *
-  `:allow_reassignment` - (Boolean) \n@return [Core::Response]"
+  - (Array&lt;<String>) \n  * `:secondary_private_ip_address_count` - (Integer) \n
+  \ * `:allow_reassignment` - (Boolean) \n@return [Core::Response]"
 :associate_address: "Calls the AssociateAddress API operation.\n@param [Hash] options\n
   \ * `:instance_id` - (String) The instance to associate with the IP address.\n  *
   `:public_ip` - (String) IP address that you are assigning to the instance.\n  *
@@ -100,15 +100,15 @@
     * `:from_port` - (Integer) Deprecated.
     * `:to_port` - (Integer) Deprecated.
     * `:cidr_ip` - (String) Deprecated.
-    * `:ip_permissions` - (Array<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
-      * `:user_id_group_pairs` - (Array<Hash>) The list of AWS user IDs and groups included in this permission.
+      * `:user_id_group_pairs` - (Array&lt;<Hash>) The list of AWS user IDs and groups included in this permission.
         * `:user_id` - (String) The AWS user ID of an account.
         * `:group_name` - (String) Name of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
         * `:group_id` - (String) ID of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
-      * `:ip_ranges` - (Array<Hash>) The list of CIDR IP ranges included in this permission.
+      * `:ip_ranges` - (Array&lt;<Hash>) The list of CIDR IP ranges included in this permission.
         * `:cidr_ip` - (String) The list of CIDR IP ranges.
   @return [Core::Response]
 :authorize_security_group_ingress: |-
@@ -122,15 +122,15 @@
     * `:from_port` - (Integer) Deprecated
     * `:to_port` - (Integer) Deprecated
     * `:cidr_ip` - (String) Deprecated
-    * `:ip_permissions` - (Array<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
-      * `:user_id_group_pairs` - (Array<Hash>) The list of AWS user IDs and groups included in this permission.
+      * `:user_id_group_pairs` - (Array&lt;<Hash>) The list of AWS user IDs and groups included in this permission.
         * `:user_id` - (String) The AWS user ID of an account.
         * `:group_name` - (String) Name of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
         * `:group_id` - (String) ID of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
-      * `:ip_ranges` - (Array<Hash>) The list of CIDR IP ranges included in this permission.
+      * `:ip_ranges` - (Array&lt;<Hash>) The list of CIDR IP ranges included in this permission.
         * `:cidr_ip` - (String) The list of CIDR IP ranges.
   @return [Core::Response]
 :bundle_instance: "Calls the BundleInstance API operation.\n@param [Hash] options\n
@@ -196,7 +196,7 @@
 :cancel_spot_instance_requests: |-
   Calls the CancelSpotInstanceRequests API operation.
   @param [Hash] options
-    * `:spot_instance_request_ids` - *required* - (Array<String>) Specifies the ID of the Spot Instance request.
+    * `:spot_instance_request_ids` - *required* - (Array&lt;<String>) Specifies the ID of the Spot Instance request.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:spot_instance_request_set` - (Array<Hash>)
@@ -240,9 +240,9 @@
 :create_dhcp_options: |-
   Calls the CreateDhcpOptions API operation.
   @param [Hash] options
-    * `:dhcp_configurations` - *required* - (Array<Hash>) A set of one or more DHCP configurations.
+    * `:dhcp_configurations` - *required* - (Array&lt;<Hash>) A set of one or more DHCP configurations.
       * `:key` - (String) Contains the name of a DHCP option.
-      * `:values` - (Array<String>) Contains a set of values for a DHCP option.
+      * `:values` - (Array&lt;<String>) Contains a set of values for a DHCP option.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:dhcp_options` - (Hash)
@@ -261,7 +261,7 @@
   attempts to cleanly shut down the instance before image creation and reboots the
   instance afterwards. When set to  `true` , Amazon EC2 will not shut down the instance
   before creating the image. When this option is used, file system integrity on the
-  created image cannot be guaranteed.\n  * `:block_device_mappings` - (Array<Hash>)
+  created image cannot be guaranteed.\n  * `:block_device_mappings` - (Array&lt;<Hash>)
   \n    * `:virtual_name` - (String) Specifies the virtual device name.\n    * `:device_name`
   - (String) Specifies the device name (e.g., /dev/sdh).\n    * `:ebs` - (Hash) Specifies
   parameters used to automatically setup Amazon EBS volumes when the instance is launched.\n
@@ -359,9 +359,9 @@
   @return [Core::Response]
 :create_network_interface: "Calls the CreateNetworkInterface API operation.\n@param
   [Hash] options\n  * `:subnet_id` - *required* - (String) \n  * `:description` -
-  (String) \n  * `:private_ip_address` - (String) \n  * `:groups` - (Array<String>)
-  \n  * `:private_ip_addresses` - (Array<Hash>) \n    * `:private_ip_address` - *required*
-  - (String) \n    * `:primary` - (Boolean) \n  * `:secondary_private_ip_address_count`
+  (String) \n  * `:private_ip_address` - (String) \n  * `:groups` - (Array&lt;<String>)
+  \n  * `:private_ip_addresses` - (Array&lt;<Hash>) \n    * `:private_ip_address`
+  - *required* - (String) \n    * `:primary` - (Boolean) \n  * `:secondary_private_ip_address_count`
   - (Integer) \n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `:network_interface` - (Hash)\n
   \   * `:network_interface_id` - (String)\n    * `:subnet_id` - (String)\n    * `:vpc_id`
@@ -391,17 +391,18 @@
 :create_reserved_instances_listing: "Calls the CreateReservedInstancesListing API
   operation.\n@param [Hash] options\n  * `:reserved_instances_id` - *required* - (String)
   \n  * `:instance_count` - *required* - (Integer) \n  * `:price_schedules` - *required*
-  - (Array<Hash>) \n    * `:term` - (Integer) \n    * `:price` - (Float) \n    * `:currency_code`
-  - (String) \n  * `:client_token` - *required* - (String) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:reserved_instances_listings_set` - (Array<Hash>)\n    * `:reserved_instances_listing_id`
-  - (String)\n    * `:reserved_instances_id` - (String)\n    * `:create_date` - (Time)\n
-  \   * `:update_date` - (Time)\n    * `:status` - (String)\n    * `:status_message`
-  - (String)\n    * `:instance_counts` - (Array<Hash>)\n      * `:state` - (String)\n
-  \     * `:instance_count` - (Integer)\n    * `:price_schedules` - (Array<Hash>)\n
-  \     * `:term` - (Integer)\n      * `:price` - (Numeric)\n      * `:currency_code`
-  - (String)\n      * `:active` - (Boolean)\n    * `:tag_set` - (Array<Hash>)\n      *
-  `:key` - (String)\n      * `:value` - (String)\n    * `:client_token` - (String)"
+  - (Array&lt;<Hash>) \n    * `:term` - (Integer) \n    * `:price` - (Float) \n    *
+  `:currency_code` - (String) \n  * `:client_token` - *required* - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:reserved_instances_listings_set` - (Array<Hash>)\n
+  \   * `:reserved_instances_listing_id` - (String)\n    * `:reserved_instances_id`
+  - (String)\n    * `:create_date` - (Time)\n    * `:update_date` - (Time)\n    *
+  `:status` - (String)\n    * `:status_message` - (String)\n    * `:instance_counts`
+  - (Array<Hash>)\n      * `:state` - (String)\n      * `:instance_count` - (Integer)\n
+  \   * `:price_schedules` - (Array<Hash>)\n      * `:term` - (Integer)\n      * `:price`
+  - (Numeric)\n      * `:currency_code` - (String)\n      * `:active` - (Boolean)\n
+  \   * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` -
+  (String)\n    * `:client_token` - (String)"
 :create_route: "Calls the CreateRoute API operation.\n@param [Hash] options\n  * `:route_table_id`
   - *required* - (String) The ID of the route table where the route will be added.\n
   \ * `:destination_cidr_block` - *required* - (String) The CIDR address block used
@@ -503,8 +504,8 @@
 :create_tags: |-
   Calls the CreateTags API operation.
   @param [Hash] options
-    * `:resources` - *required* - (Array<String>) One or more IDs of resources to tag.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
-    * `:tags` - *required* - (Array<Hash>) The tags to add or overwrite for the specified resources. Each tag item consists of a key-value pair.
+    * `:resources` - *required* - (Array&lt;<String>) One or more IDs of resources to tag.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
+    * `:tags` - *required* - (Array&lt;<Hash>) The tags to add or overwrite for the specified resources. Each tag item consists of a key-value pair.
       * `:key` - (String) The tag's key.
       * `:value` - (String) The tag's value.
   @return [Core::Response]
@@ -654,8 +655,8 @@
 :delete_tags: |-
   Calls the DeleteTags API operation.
   @param [Hash] options
-    * `:resources` - *required* - (Array<String>) A list of one or more resource IDs.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
-    * `:tags` - (Array<Hash>) The tags to delete from the specified resources. Each tag item consists of a key-value pair. If a tag is specified without a value, the tag and all of its values are deleted.
+    * `:resources` - *required* - (Array&lt;<String>) A list of one or more resource IDs.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
+    * `:tags` - (Array&lt;<Hash>) The tags to delete from the specified resources. Each tag item consists of a key-value pair. If a tag is specified without a value, the tag and all of its values are deleted.
       * `:key` - (String) The tag's key.
       * `:value` - (String) The tag's value.
   @return [Core::Response]
@@ -688,29 +689,30 @@
     * `:image_id` - *required* - (String) The ID of the AMI to deregister.
   @return [Core::Response]
 :describe_account_attributes: "Calls the DescribeAccountAttributes API operation.\n@param
-  [Hash] options\n  * `:attribute_names` - (Array<String>) \n@return [Core::Response]
+  [Hash] options\n  * `:attribute_names` - (Array&lt;<String>) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:account_attribute_set` - (Array<Hash>)\n    * `:attribute_name` - (String)\n
   \   * `:attribute_value_set` - (Array<Hash>)\n      * `:attribute_value` - (String)"
 :describe_addresses: "Calls the DescribeAddresses API operation.\n@param [Hash] options\n
-  \ * `:public_ips` - (Array<String>) The optional list of Elastic IP addresses to
-  describe.\n  * `:filters` - (Array<Hash>) A list of filters used to match properties
-  for Addresses. For a complete reference to the available filter keys for this operation,
-  see the Amazon EC2 API reference.\n    * `:name` - (String) Specifies the name of
-  the filter.\n    * `:values` - (Array<String>) Contains one or more values for the
-  filter.\n  * `:allocation_ids` - (Array<String>) \n@return [Core::Response] The
-  `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:addresses_set` - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:public_ip`
-  - (String)\n    * `:allocation_id` - (String)\n    * `:association_id` - (String)\n
-  \   * `:domain` - (String)\n    * `:network_interface_id` - (String)\n    * `:network_interface_owner_id`
-  - (String)\n    * `:private_ip_address` - (String)"
+  \ * `:public_ips` - (Array&lt;<String>) The optional list of Elastic IP addresses
+  to describe.\n  * `:filters` - (Array&lt;<Hash>) A list of filters used to match
+  properties for Addresses. For a complete reference to the available filter keys
+  for this operation, see the Amazon EC2 API reference.\n    * `:name` - (String)
+  Specifies the name of the filter.\n    * `:values` - (Array&lt;<String>) Contains
+  one or more values for the filter.\n  * `:allocation_ids` - (Array&lt;<String>)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:addresses_set` - (Array<Hash>)\n    * `:instance_id`
+  - (String)\n    * `:public_ip` - (String)\n    * `:allocation_id` - (String)\n    *
+  `:association_id` - (String)\n    * `:domain` - (String)\n    * `:network_interface_id`
+  - (String)\n    * `:network_interface_owner_id` - (String)\n    * `:private_ip_address`
+  - (String)"
 :describe_availability_zones: |-
   Calls the DescribeAvailabilityZones API operation.
   @param [Hash] options
-    * `:zone_names` - (Array<String>) A list of the availability zone names to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for AvailabilityZones. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:zone_names` - (Array&lt;<String>) A list of the availability zone names to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for AvailabilityZones. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:availability_zone_info` - (Array<Hash>)
@@ -722,10 +724,10 @@
 :describe_bundle_tasks: |-
   Calls the DescribeBundleTasks API operation.
   @param [Hash] options
-    * `:bundle_ids` - (Array<String>) The list of bundle task IDs to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for BundleTasks. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:bundle_ids` - (Array&lt;<String>) The list of bundle task IDs to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for BundleTasks. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:bundle_instance_tasks_set` - (Array<Hash>)
@@ -746,13 +748,13 @@
         * `:code` - (String)
         * `:message` - (String)
 :describe_conversion_tasks: "Calls the DescribeConversionTasks API operation.\n@param
-  [Hash] options\n  * `:filters` - (Array<Hash>) \n    * `:name` - (String) Specifies
-  the name of the filter.\n    * `:values` - (Array<String>) Contains one or more
-  values for the filter.\n  * `:conversion_task_ids` - (Array<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:conversion_tasks` - (Array<Hash>)\n    * `:conversion_task_id` - (String)\n
-  \   * `:expiration_time` - (String)\n    * `:import_instance` - (Hash)\n      *
-  `:volumes` - (Array<Hash>)\n        * `:bytes_converted` - (Integer)\n        *
+  [Hash] options\n  * `:filters` - (Array&lt;<Hash>) \n    * `:name` - (String) Specifies
+  the name of the filter.\n    * `:values` - (Array&lt;<String>) Contains one or more
+  values for the filter.\n  * `:conversion_task_ids` - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:conversion_tasks` - (Array<Hash>)\n    * `:conversion_task_id`
+  - (String)\n    * `:expiration_time` - (String)\n    * `:import_instance` - (Hash)\n
+  \     * `:volumes` - (Array<Hash>)\n        * `:bytes_converted` - (Integer)\n        *
   `:availability_zone` - (String)\n        * `:image` - (Hash)\n          * `:format`
   - (String)\n          * `:size` - (Integer)\n          * `:import_manifest_url`
   - (String)\n          * `:checksum` - (String)\n        * `:volume` - (Hash)\n          *
@@ -769,10 +771,10 @@
 :describe_customer_gateways: |-
   Calls the DescribeCustomerGateways API operation.
   @param [Hash] options
-    * `:customer_gateway_ids` - (Array<String>) A set of one or more customer gateway IDs.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Customer Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:customer_gateway_ids` - (Array&lt;<String>) A set of one or more customer gateway IDs.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Customer Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:customer_gateway_set` - (Array<Hash>)
@@ -785,10 +787,10 @@
         * `:key` - (String)
         * `:value` - (String)
 :describe_dhcp_options: "Calls the DescribeDhcpOptions API operation.\n@param [Hash]
-  options\n  * `:dhcp_options_ids` - (Array<String>) \n  * `:filters` - (Array<Hash>)
+  options\n  * `:dhcp_options_ids` - (Array&lt;<String>) \n  * `:filters` - (Array&lt;<Hash>)
   A list of filters used to match properties for DhcpOptions. For a complete reference
   to the available filter keys for this operation, see the Amazon EC2 API reference.\n
-  \   * `:name` - (String) Specifies the name of the filter.\n    * `:values` - (Array<String>)
+  \   * `:name` - (String) Specifies the name of the filter.\n    * `:values` - (Array&lt;<String>)
   Contains one or more values for the filter.\n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
   `:dhcp_options_set` - (Array<Hash>)\n    * `:dhcp_options_id` - (String)\n    *
@@ -796,8 +798,8 @@
   - (Array<String>)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n
   \     * `:value` - (String)"
 :describe_export_tasks: "Calls the DescribeExportTasks API operation.\n@param [Hash]
-  options\n  * `:export_task_ids` - (Array<String>) \n@return [Core::Response] The
-  `#data` method of the response object returns a hash with the following structure:\n\n
+  options\n  * `:export_task_ids` - (Array&lt;<String>) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:export_task_set` - (Array<Hash>)\n    * `:export_task_id` - (String)\n    *
   `:description` - (String)\n    * `:state` - (String)\n    * `:status_message` -
   (String)\n    * `:instance_export` - (Hash)\n      * `:instance_id` - (String)\n
@@ -837,12 +839,12 @@
 :describe_images: |-
   Calls the DescribeImages API operation.
   @param [Hash] options
-    * `:image_ids` - (Array<String>) An optional list of the AMI IDs to describe. If not specified, all AMIs will be described.
-    * `:owners` - (Array<String>) The optional list of owners for the described AMIs. The IDs amazon, self, and explicit can be used to include AMIs owned by Amazon, AMIs owned by the user, and AMIs for which the user has explicit launch permissions, respectively.
-    * `:executable_users` - (Array<String>) The optional list of users with explicit launch permissions for the described AMIs. The user ID can be a user's account ID, 'self' to return AMIs for which the sender of the request has explicit launch permissions, or 'all' to return AMIs with public launch permissions.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Images. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:image_ids` - (Array&lt;<String>) An optional list of the AMI IDs to describe. If not specified, all AMIs will be described.
+    * `:owners` - (Array&lt;<String>) The optional list of owners for the described AMIs. The IDs amazon, self, and explicit can be used to include AMIs owned by Amazon, AMIs owned by the user, and AMIs for which the user has explicit launch permissions, respectively.
+    * `:executable_users` - (Array&lt;<String>) The optional list of users with explicit launch permissions for the described AMIs. The user ID can be a user's account ID, 'self' to return AMIs for which the sender of the request has explicit launch permissions, or 'all' to return AMIs with public launch permissions.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Images. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:images_set` - (Array<Hash>)
@@ -929,16 +931,16 @@
     * `:ebs_optimized` - (Hash)
       * `:value` - (Boolean)
 :describe_instance_status: "Calls the DescribeInstanceStatus API operation.\n@param
-  [Hash] options\n  * `:instance_ids` - (Array<String>) The list of instance IDs.
-  If not specified, all instances are described.\n  * `:filters` - (Array<Hash>) The
-  list of filters to limit returned results.\n    * `:name` - (String) Specifies the
-  name of the filter.\n    * `:values` - (Array<String>) Contains one or more values
-  for the filter.\n  * `:next_token` - (String) A string specifying the next paginated
-  set of results to return.\n  * `:max_results` - (Integer) The maximum number of
-  paginated instance items per response.\n  * `:include_all_instances` - (Boolean)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:instance_status_set` - (Array<Hash>)\n    *
-  `:instance_id` - (String)\n    * `:availability_zone` - (String)\n    * `:events_set`
+  [Hash] options\n  * `:instance_ids` - (Array&lt;<String>) The list of instance IDs.
+  If not specified, all instances are described.\n  * `:filters` - (Array&lt;<Hash>)
+  The list of filters to limit returned results.\n    * `:name` - (String) Specifies
+  the name of the filter.\n    * `:values` - (Array&lt;<String>) Contains one or more
+  values for the filter.\n  * `:next_token` - (String) A string specifying the next
+  paginated set of results to return.\n  * `:max_results` - (Integer) The maximum
+  number of paginated instance items per response.\n  * `:include_all_instances` -
+  (Boolean) \n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:instance_status_set` - (Array<Hash>)\n
+  \   * `:instance_id` - (String)\n    * `:availability_zone` - (String)\n    * `:events_set`
   - (Array<Hash>)\n      * `:code` - (String)\n      * `:description` - (String)\n
   \     * `:not_before` - (Time)\n      * `:not_after` - (Time)\n    * `:instance_state`
   - (Hash)\n      * `:code` - (Integer)\n      * `:name` - (String)\n    * `:system_status`
@@ -950,10 +952,10 @@
 :describe_instances: |-
   Calls the DescribeInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - (Array<String>) An optional list of the instances to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Instances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:instance_ids` - (Array&lt;<String>) An optional list of the instances to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Instances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:reservation_set` - (Array<Hash>)
@@ -1057,10 +1059,10 @@
 :describe_internet_gateways: |-
   Calls the DescribeInternetGateways API operation.
   @param [Hash] options
-    * `:internet_gateway_ids` - (Array<String>) One or more Internet gateway IDs.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Internet Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:internet_gateway_ids` - (Array&lt;<String>) One or more Internet gateway IDs.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Internet Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:internet_gateway_set` - (Array<Hash>)
@@ -1074,10 +1076,10 @@
 :describe_key_pairs: |-
   Calls the DescribeKeyPairs API operation.
   @param [Hash] options
-    * `:key_names` - (Array<String>) The optional list of key pair names to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for KeyPairs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:key_names` - (Array&lt;<String>) The optional list of key pair names to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for KeyPairs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:key_set` - (Array<Hash>)
@@ -1086,10 +1088,10 @@
 :describe_licenses: |-
   Calls the DescribeLicenses API operation.
   @param [Hash] options
-    * `:license_ids` - (Array<String>) Specifies the license registration for which details are to be returned.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Licenses. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:license_ids` - (Array&lt;<String>) Specifies the license registration for which details are to be returned.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Licenses. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:license_set` - (Array<Hash>)
@@ -1107,10 +1109,10 @@
 :describe_network_acls: |-
   Calls the DescribeNetworkAcls API operation.
   @param [Hash] options
-    * `:network_acl_ids` - (Array<String>) One or more network ACL IDs.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Network ACLs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:network_acl_ids` - (Array&lt;<String>) One or more network ACL IDs.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Network ACLs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:network_acl_set` - (Array<Hash>)
@@ -1149,9 +1151,9 @@
   \   * `:status` - (String)\n    * `:attach_time` - (Time)\n    * `:delete_on_termination`
   - (Boolean)"
 :describe_network_interfaces: "Calls the DescribeNetworkInterfaces API operation.\n@param
-  [Hash] options\n  * `:network_interface_ids` - (Array<String>) \n  * `:filters`
-  - (Array<Hash>) \n    * `:name` - (String) Specifies the name of the filter.\n    *
-  `:values` - (Array<String>) Contains one or more values for the filter.\n@return
+  [Hash] options\n  * `:network_interface_ids` - (Array&lt;<String>) \n  * `:filters`
+  - (Array&lt;<Hash>) \n    * `:name` - (String) Specifies the name of the filter.\n
+  \   * `:values` - (Array&lt;<String>) Contains one or more values for the filter.\n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:network_interface_set` - (Array<Hash>)\n    * `:network_interface_id`
   - (String)\n    * `:subnet_id` - (String)\n    * `:vpc_id` - (String)\n    * `:availability_zone`
@@ -1174,10 +1176,10 @@
 :describe_placement_groups: |-
   Calls the DescribePlacementGroups API operation.
   @param [Hash] options
-    * `:group_names` - (Array<String>) The name of the PlacementGroup.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Placement Groups. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:group_names` - (Array&lt;<String>) The name of the PlacementGroup.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Placement Groups. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:placement_group_set` - (Array<Hash>)
@@ -1187,10 +1189,10 @@
 :describe_regions: |-
   Calls the DescribeRegions API operation.
   @param [Hash] options
-    * `:region_names` - (Array<String>) The optional list of regions to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Regions. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:region_names` - (Array&lt;<String>) The optional list of regions to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Regions. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:region_info` - (Array<Hash>)
@@ -1199,10 +1201,10 @@
 :describe_reserved_instances: |-
   Calls the DescribeReservedInstances API operation.
   @param [Hash] options
-    * `:reserved_instances_ids` - (Array<String>) The optional list of Reserved Instance IDs to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for ReservedInstances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:reserved_instances_ids` - (Array&lt;<String>) The optional list of Reserved Instance IDs to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for ReservedInstances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
     * `:offering_type` - (String) The Reserved Instance offering type.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -1228,9 +1230,9 @@
         * `:amount` - (Numeric)
 :describe_reserved_instances_listings: "Calls the DescribeReservedInstancesListings
   API operation.\n@param [Hash] options\n  * `:reserved_instances_id` - (String) \n
-  \ * `:reserved_instances_listing_id` - (String) \n  * `:filters` - (Array<Hash>)
+  \ * `:reserved_instances_listing_id` - (String) \n  * `:filters` - (Array&lt;<Hash>)
   \n    * `:name` - (String) Specifies the name of the filter.\n    * `:values` -
-  (Array<String>) Contains one or more values for the filter.\n@return [Core::Response]
+  (Array&lt;<String>) Contains one or more values for the filter.\n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:reserved_instances_listings_set` - (Array<Hash>)\n    * `:reserved_instances_listing_id`
   - (String)\n    * `:reserved_instances_id` - (String)\n    * `:create_date` - (Time)\n
@@ -1242,19 +1244,19 @@
   `:key` - (String)\n      * `:value` - (String)\n    * `:client_token` - (String)"
 :describe_reserved_instances_offerings: "Calls the DescribeReservedInstancesOfferings
   API operation.\n@param [Hash] options\n  * `:reserved_instances_offering_ids` -
-  (Array<String>) An optional list of the unique IDs of the Reserved Instance offerings
-  to describe.\n  * `:instance_type` - (String) The instance type on which the Reserved
-  Instance can be used.  Valid values include:\n    * `t1.micro`\n    * `m1.small`\n
-  \   * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    * `m2.xlarge`\n    *
-  `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n    * `c1.medium`\n
-  \   * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `cc1.4xlarge`\n
-  \   * `cc2.8xlarge`\n    * `cg1.4xlarge`\n  * `:availability_zone` - (String) The
-  Availability Zone in which the Reserved Instance can be used.\n  * `:product_description`
-  - (String) The Reserved Instance product description.\n  * `:filters` - (Array<Hash>)
-  A list of filters used to match properties for ReservedInstancesOfferings. For a
-  complete reference to the available filter keys for this operation, see the Amazon
-  EC2 API reference.\n    * `:name` - (String) Specifies the name of the filter.\n
-  \   * `:values` - (Array<String>) Contains one or more values for the filter.\n
+  (Array&lt;<String>) An optional list of the unique IDs of the Reserved Instance
+  offerings to describe.\n  * `:instance_type` - (String) The instance type on which
+  the Reserved Instance can be used.  Valid values include:\n    * `t1.micro`\n    *
+  `m1.small`\n    * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    * `m2.xlarge`\n
+  \   * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n
+  \   * `c1.medium`\n    * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n
+  \   * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `cg1.4xlarge`\n  * `:availability_zone`
+  - (String) The Availability Zone in which the Reserved Instance can be used.\n  *
+  `:product_description` - (String) The Reserved Instance product description.\n  *
+  `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for ReservedInstancesOfferings.
+  For a complete reference to the available filter keys for this operation, see the
+  Amazon EC2 API reference.\n    * `:name` - (String) Specifies the name of the filter.\n
+  \   * `:values` - (Array&lt;<String>) Contains one or more values for the filter.\n
   \ * `:instance_tenancy` - (String) The tenancy of the Reserved Instance offering.
   A Reserved Instance with tenancy of dedicated will run on single-tenant hardware
   and can only be launched within a VPC.\n  * `:offering_type` - (String) The Reserved
@@ -1272,10 +1274,10 @@
 :describe_route_tables: |-
   Calls the DescribeRouteTables API operation.
   @param [Hash] options
-    * `:route_table_ids` - (Array<String>) One or more route table IDs.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Route Tables. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:route_table_ids` - (Array&lt;<String>) One or more route table IDs.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Route Tables. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:route_table_set` - (Array<Hash>)
@@ -1299,12 +1301,12 @@
       * `:propagating_vgw_set` - (Array<Hash>)
         * `:gateway_id` - (String)
 :describe_security_groups: "Calls the DescribeSecurityGroups API operation.\n@param
-  [Hash] options\n  * `:group_names` - (Array<String>) The optional list of Amazon
-  EC2 security groups to describe.\n  * `:group_ids` - (Array<String>) \n  * `:filters`
-  - (Array<Hash>) A list of filters used to match properties for SecurityGroups. For
-  a complete reference to the available filter keys for this operation, see the Amazon
-  EC2 API reference.\n    * `:name` - (String) Specifies the name of the filter.\n
-  \   * `:values` - (Array<String>) Contains one or more values for the filter.\n@return
+  [Hash] options\n  * `:group_names` - (Array&lt;<String>) The optional list of Amazon
+  EC2 security groups to describe.\n  * `:group_ids` - (Array&lt;<String>) \n  * `:filters`
+  - (Array&lt;<Hash>) A list of filters used to match properties for SecurityGroups.
+  For a complete reference to the available filter keys for this operation, see the
+  Amazon EC2 API reference.\n    * `:name` - (String) Specifies the name of the filter.\n
+  \   * `:values` - (Array&lt;<String>) Contains one or more values for the filter.\n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:security_group_info` - (Array<Hash>)\n    * `:owner_id`
   - (String)\n    * `:group_name` - (String)\n    * `:group_id` - (String)\n    *
@@ -1338,12 +1340,12 @@
 :describe_snapshots: |-
   Calls the DescribeSnapshots API operation.
   @param [Hash] options
-    * `:snapshot_ids` - (Array<String>) The optional list of EBS snapshot IDs to describe.
-    * `:owner_ids` - (Array<String>) The optional list of EBS snapshot owners.
-    * `:restorable_by_user_ids` - (Array<String>) The optional list of users who have permission to create volumes from the described EBS snapshots.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Snapshots. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:snapshot_ids` - (Array&lt;<String>) The optional list of EBS snapshot IDs to describe.
+    * `:owner_ids` - (Array&lt;<String>) The optional list of EBS snapshot owners.
+    * `:restorable_by_user_ids` - (Array&lt;<String>) The optional list of users who have permission to create volumes from the described EBS snapshots.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Snapshots. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:snapshot_set` - (Array<Hash>)
@@ -1375,10 +1377,10 @@
 :describe_spot_instance_requests: |-
   Calls the DescribeSpotInstanceRequests API operation.
   @param [Hash] options
-    * `:spot_instance_request_ids` - (Array<String>) The ID of the request.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for SpotInstances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:spot_instance_request_ids` - (Array&lt;<String>) The ID of the request.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for SpotInstances. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:spot_instance_request_set` - (Array<Hash>)
@@ -1449,13 +1451,13 @@
 :describe_spot_price_history: |-
   Calls the DescribeSpotPriceHistory API operation.
   @param [Hash] options
-    * `:start_time` - (String<ISO8601 datetime>) The start date and time of the Spot Instance price history data.
-    * `:end_time` - (String<ISO8601 datetime>) The end date and time of the Spot Instance price history data.
-    * `:instance_types` - (Array<String>) Specifies the instance type to return.
-    * `:product_descriptions` - (Array<String>) The description of the AMI.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for SpotPriceHistory. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The start date and time of the Spot Instance price history data.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The end date and time of the Spot Instance price history data.
+    * `:instance_types` - (Array&lt;<String>) Specifies the instance type to return.
+    * `:product_descriptions` - (Array&lt;<String>) The description of the AMI.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for SpotPriceHistory. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
     * `:availability_zone` - (String) Filters the results by availability zone (ex: 'us-east-1a').
     * `:max_results` - (Integer) Specifies the number of rows to return.
     * `:next_token` - (String) Specifies the next set of rows to return.
@@ -1471,10 +1473,10 @@
 :describe_subnets: |-
   Calls the DescribeSubnets API operation.
   @param [Hash] options
-    * `:subnet_ids` - (Array<String>) A set of one or more subnet IDs.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Subnets. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:subnet_ids` - (Array&lt;<String>) A set of one or more subnet IDs.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Subnets. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:subnet_set` - (Array<Hash>)
@@ -1492,9 +1494,9 @@
 :describe_tags: |-
   Calls the DescribeTags API operation.
   @param [Hash] options
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for tags.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for tags.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:tag_set` - (Array<Hash>)
@@ -1510,26 +1512,26 @@
   \ * `:product_codes` - (Array<Hash>)\n    * `:product_code` - (String)\n    * `:type`
   - (String)"
 :describe_volume_status: "Calls the DescribeVolumeStatus API operation.\n@param [Hash]
-  options\n  * `:volume_ids` - (Array<String>) \n  * `:filters` - (Array<Hash>) \n
-  \   * `:name` - (String) Specifies the name of the filter.\n    * `:values` - (Array<String>)
-  Contains one or more values for the filter.\n  * `:next_token` - (String) \n  *
-  `:max_results` - (Integer) \n@return [Core::Response] The `#data` method of the
-  response object returns a hash with the following structure:\n\n  * `:volume_status_set`
-  - (Array<Hash>)\n    * `:volume_id` - (String)\n    * `:availability_zone` - (String)\n
-  \   * `:volume_status` - (Hash)\n      * `:status` - (String)\n      * `:details`
-  - (Array<Hash>)\n        * `:name` - (String)\n        * `:status` - (String)\n
-  \   * `:events_set` - (Array<Hash>)\n      * `:event_type` - (String)\n      * `:description`
-  - (String)\n      * `:not_before` - (Time)\n      * `:not_after` - (Time)\n      *
-  `:event_id` - (String)\n    * `:actions_set` - (Array<Hash>)\n      * `:code` -
-  (String)\n      * `:description` - (String)\n      * `:event_type` - (String)\n
-  \     * `:event_id` - (String)\n  * `:next_token` - (String)"
+  options\n  * `:volume_ids` - (Array&lt;<String>) \n  * `:filters` - (Array&lt;<Hash>)
+  \n    * `:name` - (String) Specifies the name of the filter.\n    * `:values` -
+  (Array&lt;<String>) Contains one or more values for the filter.\n  * `:next_token`
+  - (String) \n  * `:max_results` - (Integer) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:volume_status_set` - (Array<Hash>)\n    * `:volume_id` - (String)\n    * `:availability_zone`
+  - (String)\n    * `:volume_status` - (Hash)\n      * `:status` - (String)\n      *
+  `:details` - (Array<Hash>)\n        * `:name` - (String)\n        * `:status` -
+  (String)\n    * `:events_set` - (Array<Hash>)\n      * `:event_type` - (String)\n
+  \     * `:description` - (String)\n      * `:not_before` - (Time)\n      * `:not_after`
+  - (Time)\n      * `:event_id` - (String)\n    * `:actions_set` - (Array<Hash>)\n
+  \     * `:code` - (String)\n      * `:description` - (String)\n      * `:event_type`
+  - (String)\n      * `:event_id` - (String)\n  * `:next_token` - (String)"
 :describe_volumes: |-
   Calls the DescribeVolumes API operation.
   @param [Hash] options
-    * `:volume_ids` - (Array<String>) The optional list of EBS volumes to describe.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for Volumes. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:volume_ids` - (Array&lt;<String>) The optional list of EBS volumes to describe.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for Volumes. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:volume_set` - (Array<Hash>)
@@ -1560,10 +1562,10 @@
 :describe_vpcs: |-
   Calls the DescribeVpcs API operation.
   @param [Hash] options
-    * `:vpc_ids` - (Array<String>) The ID of a VPC you want information about.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for VPCs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:vpc_ids` - (Array&lt;<String>) The ID of a VPC you want information about.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for VPCs. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:vpc_set` - (Array<Hash>)
@@ -1579,10 +1581,10 @@
 :describe_vpn_connections: |-
   Calls the DescribeVpnConnections API operation.
   @param [Hash] options
-    * `:vpn_connection_ids` - (Array<String>) A VPN connection ID. More than one may be specified per request.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for VPN Connections. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:vpn_connection_ids` - (Array&lt;<String>) A VPN connection ID. More than one may be specified per request.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for VPN Connections. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:vpn_connection_set` - (Array<Hash>)
@@ -1610,10 +1612,10 @@
 :describe_vpn_gateways: |-
   Calls the DescribeVpnGateways API operation.
   @param [Hash] options
-    * `:vpn_gateway_ids` - (Array<String>) A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
-    * `:filters` - (Array<Hash>) A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:vpn_gateway_ids` - (Array&lt;<String>) A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
+    * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the Amazon EC2 API reference.
       * `:name` - (String) Specifies the name of the filter.
-      * `:values` - (Array<String>) Contains one or more values for the filter.
+      * `:values` - (Array&lt;<String>) Contains one or more values for the filter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:vpn_gateway_set` - (Array<Hash>)
@@ -1696,7 +1698,7 @@
     * `:password_data` - (String)
 :import_instance: "Calls the ImportInstance API operation.\n@param [Hash] options\n
   \ * `:description` - (String) \n  * `:launch_specification` - (Hash) \n    * `:architecture`
-  - (String) \n    * `:security_groups` - (Array<String>) \n    * `:additional_info`
+  - (String) \n    * `:security_groups` - (Array&lt;<String>) \n    * `:additional_info`
   - (String) \n    * `:user_data` - (String) \n    * `:instance_type` - (String) Valid
   values include:\n      * `t1.micro`\n      * `m1.small`\n      * `m1.medium`\n      *
   `m1.large`\n      * `m1.xlarge`\n      * `m2.xlarge`\n      * `m2.2xlarge`\n      *
@@ -1711,7 +1713,7 @@
   into the VPC. A value of default means instances can be launched with any tenancy;
   a value of dedicated means all instances launched into the VPC will be launched
   as dedicated tenancy regardless of the tenancy assigned to the instance at launch.\n
-  \   * `:block_device_mappings` - (Array<Hash>) \n      * `:virtual_name` - (String)
+  \   * `:block_device_mappings` - (Array&lt;<Hash>) \n      * `:virtual_name` - (String)
   Specifies the virtual device name.\n      * `:device_name` - (String) Specifies
   the device name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters
   used to automatically setup Amazon EBS volumes when the instance is launched.\n
@@ -1723,7 +1725,7 @@
   `:iops` - (Integer) \n      * `:no_device` - (String) Specifies the device name
   to suppress during instance launch.\n    * `:monitoring` - (Boolean) \n    * `:subnet_id`
   - (String) \n    * `:disable_api_termination` - (Boolean) \n    * `:instance_initiated_shutdown_behavior`
-  - (String) \n    * `:private_ip_address` - (String) \n  * `:disk_images` - (Array<Hash>)
+  - (String) \n    * `:private_ip_address` - (String) \n  * `:disk_images` - (Array&lt;<Hash>)
   \n    * `:image` - (Hash) \n      * `:format` - *required* - (String) \n      *
   `:bytes` - *required* - (Integer) \n      * `:import_manifest_url` - *required*
   - (String) \n    * `:description` - (String) \n    * `:volume` - (Hash) \n      *
@@ -1781,23 +1783,23 @@
   you want to modify.\n  * `:attribute` - (String) The name of the AMI attribute you
   want to modify. Available attributes: launchPermission, productCodes\n  * `:operation_type`
   - (String) The type of operation being requested. Available operation types: add,
-  remove\n  * `:user_ids` - (Array<String>) The AWS user ID being added to or removed
-  from the list of users with launch permissions for this AMI. Only valid when the
-  launchPermission attribute is being modified.\n  * `:user_groups` - (Array<String>)
+  remove\n  * `:user_ids` - (Array&lt;<String>) The AWS user ID being added to or
+  removed from the list of users with launch permissions for this AMI. Only valid
+  when the launchPermission attribute is being modified.\n  * `:user_groups` - (Array&lt;<String>)
   The user group being added to or removed from the list of user groups with launch
   permissions for this AMI. Only valid when the launchPermission attribute is being
-  modified. Available user groups: all\n  * `:product_codes` - (Array<String>) The
-  list of product codes being added to or removed from the specified AMI. Only valid
-  when the productCodes attribute is being modified.\n  * `:value` - (String) The
-  value of the attribute being modified. Only valid when the description attribute
-  is being modified.\n  * `:launch_permission` - (Hash) \n    * `:add` - (Array<Hash>)
+  modified. Available user groups: all\n  * `:product_codes` - (Array&lt;<String>)
+  The list of product codes being added to or removed from the specified AMI. Only
+  valid when the productCodes attribute is being modified.\n  * `:value` - (String)
+  The value of the attribute being modified. Only valid when the description attribute
+  is being modified.\n  * `:launch_permission` - (Hash) \n    * `:add` - (Array&lt;<Hash>)
   \n      * `:user_id` - (String) The AWS user ID of the user involved in this launch
   permission.\n      * `:group` - (String) The AWS group of the user involved in this
-  launch permission. Available groups: all\n    * `:remove` - (Array<Hash>) \n      *
-  `:user_id` - (String) The AWS user ID of the user involved in this launch permission.\n
-  \     * `:group` - (String) The AWS group of the user involved in this launch permission.
-  Available groups: all\n  * `:description` - (Hash) \n    * `:value` - (String) String
-  value\n@return [Core::Response]"
+  launch permission. Available groups: all\n    * `:remove` - (Array&lt;<Hash>) \n
+  \     * `:user_id` - (String) The AWS user ID of the user involved in this launch
+  permission.\n      * `:group` - (String) The AWS group of the user involved in this
+  launch permission. Available groups: all\n  * `:description` - (Hash) \n    * `:value`
+  - (String) String value\n@return [Core::Response]"
 :modify_instance_attribute: "Calls the ModifyInstanceAttribute API operation.\n@param
   [Hash] options\n  * `:instance_id` - *required* - (String) The ID of the instance
   whose attribute is being modified.\n  * `:attribute` - (String) The name of the
@@ -1809,7 +1811,7 @@
   `sourceDestCheck`\n    * `groupSet`\n    * `ebsOptimized`\n  * `:value` - (String)
   The new value of the instance attribute being modified. Only valid when kernel,
   ramdisk, userData, disableApiTermination or instanceInitiateShutdownBehavior is
-  specified as the attribute being modified.\n  * `:block_device_mappings` - (Array<Hash>)
+  specified as the attribute being modified.\n  * `:block_device_mappings` - (Array&lt;<Hash>)
   The new block device mappings for the instance whose attributes are being modified.
   Only valid when blockDeviceMapping is specified as the attribute being modified.\n
   \   * `:device_name` - (String) The device name (e.g., /dev/sdh) at which the block
@@ -1826,13 +1828,13 @@
   - (String) String value\n  * `:kernel` - (Hash) \n    * `:value` - (String) String
   value\n  * `:ramdisk` - (Hash) \n    * `:value` - (String) String value\n  * `:user_data`
   - (Hash) \n    * `:value` - (String) String value\n  * `:instance_initiated_shutdown_behavior`
-  - (Hash) \n    * `:value` - (String) String value\n  * `:groups` - (Array<String>)
+  - (Hash) \n    * `:value` - (String) String value\n  * `:groups` - (Array&lt;<String>)
   \n  * `:ebs_optimized` - (Hash) \n    * `:value` - (Boolean) Boolean value\n@return
   [Core::Response]"
 :modify_network_interface_attribute: "Calls the ModifyNetworkInterfaceAttribute API
   operation.\n@param [Hash] options\n  * `:network_interface_id` - *required* - (String)
   \n  * `:description` - (Hash) \n    * `:value` - (String) String value\n  * `:source_dest_check`
-  - (Hash) \n    * `:value` - (Boolean) Boolean value\n  * `:groups` - (Array<String>)
+  - (Hash) \n    * `:value` - (Boolean) Boolean value\n  * `:groups` - (Array&lt;<String>)
   \n  * `:attachment` - (Hash) \n    * `:attachment_id` - (String) \n    * `:delete_on_termination`
   - (Boolean) \n@return [Core::Response]"
 :modify_snapshot_attribute: "Calls the ModifySnapshotAttribute API operation.\n@param
@@ -1841,20 +1843,20 @@
   attribute being modified. Available attribute names: createVolumePermission  Valid
   values include:\n    * `productCodes`\n    * `createVolumePermission`\n  * `:operation_type`
   - (String) The operation to perform on the attribute. Available operation names:
-  add, remove\n  * `:user_ids` - (Array<String>) The AWS user IDs to add to or remove
-  from the list of users that have permission to create EBS volumes from the specified
-  snapshot. Currently supports \"all\". Only valid when the createVolumePermission
-  attribute is being modified.\n  * `:group_names` - (Array<String>) The AWS group
+  add, remove\n  * `:user_ids` - (Array&lt;<String>) The AWS user IDs to add to or
+  remove from the list of users that have permission to create EBS volumes from the
+  specified snapshot. Currently supports \"all\". Only valid when the createVolumePermission
+  attribute is being modified.\n  * `:group_names` - (Array&lt;<String>) The AWS group
   names to add to or remove from the list of groups that have permission to create
   EBS volumes from the specified snapshot. Currently supports \"all\". Only valid
   when the createVolumePermission attribute is being modified.\n  * `:create_volume_permission`
-  - (Hash) \n    * `:add` - (Array<Hash>) \n      * `:user_id` - (String) The user
-  ID of the user that can create volumes from the snapshot.\n      * `:group` - (String)
-  The group that is allowed to create volumes from the snapshot (currently supports
-  \"all\").\n    * `:remove` - (Array<Hash>) \n      * `:user_id` - (String) The user
-  ID of the user that can create volumes from the snapshot.\n      * `:group` - (String)
-  The group that is allowed to create volumes from the snapshot (currently supports
-  \"all\").\n@return [Core::Response]"
+  - (Hash) \n    * `:add` - (Array&lt;<Hash>) \n      * `:user_id` - (String) The
+  user ID of the user that can create volumes from the snapshot.\n      * `:group`
+  - (String) The group that is allowed to create volumes from the snapshot (currently
+  supports \"all\").\n    * `:remove` - (Array&lt;<Hash>) \n      * `:user_id` - (String)
+  The user ID of the user that can create volumes from the snapshot.\n      * `:group`
+  - (String) The group that is allowed to create volumes from the snapshot (currently
+  supports \"all\").\n@return [Core::Response]"
 :modify_volume_attribute: "Calls the ModifyVolumeAttribute API operation.\n@param
   [Hash] options\n  * `:volume_id` - *required* - (String) \n  * `:auto_enable_io`
   - (Boolean) \n@return [Core::Response]"
@@ -1865,7 +1867,7 @@
 :monitor_instances: |-
   Calls the MonitorInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - *required* - (Array<String>) The list of Amazon EC2 instances on which to enable monitoring.
+    * `:instance_ids` - *required* - (Array&lt;<String>) The list of Amazon EC2 instances on which to enable monitoring.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:instances_set` - (Array<Hash>)
@@ -1882,7 +1884,7 @@
 :reboot_instances: |-
   Calls the RebootInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - *required* - (Array<String>) The list of instances to terminate.
+    * `:instance_ids` - *required* - (Array&lt;<String>) The list of instances to terminate.
   @return [Core::Response]
 :register_image: "Calls the RegisterImage API operation.\n@param [Hash] options\n
   \ * `:image_location` - (String) The full path to your AMI manifest in Amazon S3
@@ -1895,7 +1897,7 @@
   optional ID of a specific ramdisk to register with the new AMI. Some kernels require
   additional drivers at launch. Check the kernel requirements for information on whether
   you need to specify a RAM disk.\n  * `:root_device_name` - (String) The root device
-  name (e.g., /dev/sda1).\n  * `:block_device_mappings` - (Array<Hash>) The block
+  name (e.g., /dev/sda1).\n  * `:block_device_mappings` - (Array&lt;<Hash>) The block
   device mappings for the new AMI, which specify how different block devices (ex:
   EBS volumes and ephemeral drives) will be exposed on instances launched from the
   new image.\n    * `:virtual_name` - (String) Specifies the virtual device name.\n
@@ -1959,98 +1961,101 @@
 
     * `:new_association_id` - (String)
 :report_instance_status: "Calls the ReportInstanceStatus API operation.\n@param [Hash]
-  options\n  * `:instances` - (Array<String>) \n  * `:status` - (String) \n  * `:start_time`
-  - (String<ISO8601 datetime>) \n  * `:end_time` - (String<ISO8601 datetime>) \n  *
-  `:reason_codes` - (Array<String>) \n  * `:description` - (String) \n@return [Core::Response]"
+  options\n  * `:instances` - (Array&lt;<String>) \n  * `:status` - (String) \n  *
+  `:start_time` - (String&lt;<ISO8601 datetime>) \n  * `:end_time` - (String&lt;<ISO8601
+  datetime>) \n  * `:reason_codes` - (Array&lt;<String>) \n  * `:description` - (String)
+  \n@return [Core::Response]"
 :request_spot_instances: "Calls the RequestSpotInstances API operation.\n@param [Hash]
   options\n  * `:spot_price` - *required* - (String) Specifies the maximum hourly
   price for any Spot Instance launched to fulfill the request.\n  * `:instance_count`
   - (Integer) Specifies the maximum number of Spot Instances to launch.\n  * `:type`
   - (String) Specifies the Spot Instance type.  Valid values include:\n    * `one-time`\n
-  \   * `persistent`\n  * `:valid_from` - (String<ISO8601 datetime>) Defines the start
-  date of the request. If this is a one-time request, the request becomes active at
-  this date and time and remains active until all instances launch, the request expires,
-  or the request is canceled. If the request is persistent, the request becomes active
-  at this date and time and remains active until it expires or is canceled.\n  * `:valid_until`
-  - (String<ISO8601 datetime>) End date of the request. If this is a one-time request,
-  the request remains active until all instances launch, the request is canceled,
-  or this date is reached. If the request is persistent, it remains active until it
-  is canceled or this date and time is reached.\n  * `:launch_group` - (String) Specifies
-  the instance launch group. Launch groups are Spot Instances that launch and terminate
-  together.\n  * `:availability_zone_group` - (String) Specifies the Availability
-  Zone group. When specifying the same Availability Zone group for all Spot Instance
-  requests, all Spot Instances are launched in the same Availability Zone.\n  * `:launch_specification`
-  - (Hash) Specifies additional launch instance information.\n    * `:image_id` -
-  (String) The AMI ID.\n    * `:key_name` - (String) The name of the key pair.\n    *
-  `:user_data` - (String) Optional data, specific to a user's application, to provide
-  in the launch request. All instances that collectively comprise the launch request
-  have access to this data. User data is never returned through API responses.\n    *
-  `:addressing_type` - (String) Deprecated.\n    * `:instance_type` - (String) Specifies
-  the instance type.  Valid values include:\n      * `t1.micro`\n      * `m1.small`\n
-  \     * `m1.medium`\n      * `m1.large`\n      * `m1.xlarge`\n      * `m2.xlarge`\n
-  \     * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n
-  \     * `c1.medium`\n      * `c1.xlarge`\n      * `hi1.4xlarge`\n      * `hs1.8xlarge`\n
-  \     * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `cg1.4xlarge`\n    * `:placement`
-  - (Hash) Defines a placement item.\n      * `:availability_zone` - (String) The
-  availability zone in which an Amazon EC2 instance runs.\n      * `:group_name` -
-  (String) The name of the PlacementGroup in which an Amazon EC2 instance runs.  Placement
-  groups are primarily used for launching High Performance Computing instances in
-  the same group to ensure fast connection speeds.\n    * `:kernel_id` - (String)
-  Specifies the ID of the kernel to select.\n    * `:ramdisk_id` - (String) Specifies
-  the ID of the RAM disk to select. Some kernels require additional drivers at launch.
-  Check the kernel requirements for information on whether or not you need to specify
-  a RAM disk and search for the kernel ID.\n    * `:block_device_mappings` - (Array<Hash>)
-  Specifies how block devices are exposed to the instance. Each mapping is made up
-  of a virtualName and a deviceName.\n      * `:virtual_name` - (String) Specifies
-  the virtual device name.\n      * `:device_name` - (String) Specifies the device
-  name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters used to automatically
-  setup Amazon EBS volumes when the instance is launched.\n        * `:snapshot_id`
-  - (String) The ID of the snapshot from which the volume will be created.\n        *
-  `:volume_size` - (Integer) The size of the volume, in gigabytes.\n        * `:delete_on_termination`
-  - (Boolean) Specifies whether the Amazon EBS volume is deleted on instance termination.\n
-  \       * `:volume_type` - (String) Valid values include:\n          * `standard`\n
-  \         * `io1`\n        * `:iops` - (Integer) \n      * `:no_device` - (String)
-  Specifies the device name to suppress during instance launch.\n    * `:monitoring_enabled`
-  - (Boolean) Enables monitoring for the instance.\n    * `:subnet_id` - (String)
-  Specifies the Amazon VPC subnet ID within which to launch the instance(s) for Amazon
-  Virtual Private Cloud.\n    * `:network_interfaces` - (Array<Hash>) \n      * `:network_interface_id`
+  \   * `persistent`\n  * `:valid_from` - (String&lt;<ISO8601 datetime>) Defines the
+  start date of the request. If this is a one-time request, the request becomes active
+  at this date and time and remains active until all instances launch, the request
+  expires, or the request is canceled. If the request is persistent, the request becomes
+  active at this date and time and remains active until it expires or is canceled.\n
+  \ * `:valid_until` - (String&lt;<ISO8601 datetime>) End date of the request. If
+  this is a one-time request, the request remains active until all instances launch,
+  the request is canceled, or this date is reached. If the request is persistent,
+  it remains active until it is canceled or this date and time is reached.\n  * `:launch_group`
+  - (String) Specifies the instance launch group. Launch groups are Spot Instances
+  that launch and terminate together.\n  * `:availability_zone_group` - (String) Specifies
+  the Availability Zone group. When specifying the same Availability Zone group for
+  all Spot Instance requests, all Spot Instances are launched in the same Availability
+  Zone.\n  * `:launch_specification` - (Hash) Specifies additional launch instance
+  information.\n    * `:image_id` - (String) The AMI ID.\n    * `:key_name` - (String)
+  The name of the key pair.\n    * `:user_data` - (String) Optional data, specific
+  to a user's application, to provide in the launch request. All instances that collectively
+  comprise the launch request have access to this data. User data is never returned
+  through API responses.\n    * `:addressing_type` - (String) Deprecated.\n    * `:instance_type`
+  - (String) Specifies the instance type.  Valid values include:\n      * `t1.micro`\n
+  \     * `m1.small`\n      * `m1.medium`\n      * `m1.large`\n      * `m1.xlarge`\n
+  \     * `m2.xlarge`\n      * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `m3.xlarge`\n
+  \     * `m3.2xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n      * `hi1.4xlarge`\n
+  \     * `hs1.8xlarge`\n      * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `cg1.4xlarge`\n
+  \   * `:placement` - (Hash) Defines a placement item.\n      * `:availability_zone`
+  - (String) The availability zone in which an Amazon EC2 instance runs.\n      *
+  `:group_name` - (String) The name of the PlacementGroup in which an Amazon EC2 instance
+  runs.  Placement groups are primarily used for launching High Performance Computing
+  instances in the same group to ensure fast connection speeds.\n    * `:kernel_id`
+  - (String) Specifies the ID of the kernel to select.\n    * `:ramdisk_id` - (String)
+  Specifies the ID of the RAM disk to select. Some kernels require additional drivers
+  at launch. Check the kernel requirements for information on whether or not you need
+  to specify a RAM disk and search for the kernel ID.\n    * `:block_device_mappings`
+  - (Array&lt;<Hash>) Specifies how block devices are exposed to the instance. Each
+  mapping is made up of a virtualName and a deviceName.\n      * `:virtual_name` -
+  (String) Specifies the virtual device name.\n      * `:device_name` - (String) Specifies
+  the device name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters
+  used to automatically setup Amazon EBS volumes when the instance is launched.\n
+  \       * `:snapshot_id` - (String) The ID of the snapshot from which the volume
+  will be created.\n        * `:volume_size` - (Integer) The size of the volume, in
+  gigabytes.\n        * `:delete_on_termination` - (Boolean) Specifies whether the
+  Amazon EBS volume is deleted on instance termination.\n        * `:volume_type`
+  - (String) Valid values include:\n          * `standard`\n          * `io1`\n        *
+  `:iops` - (Integer) \n      * `:no_device` - (String) Specifies the device name
+  to suppress during instance launch.\n    * `:monitoring_enabled` - (Boolean) Enables
+  monitoring for the instance.\n    * `:subnet_id` - (String) Specifies the Amazon
+  VPC subnet ID within which to launch the instance(s) for Amazon Virtual Private
+  Cloud.\n    * `:network_interfaces` - (Array&lt;<Hash>) \n      * `:network_interface_id`
   - (String) \n      * `:device_index` - (Integer) \n      * `:subnet_id` - (String)
   \n      * `:description` - (String) \n      * `:private_ip_address` - (String) \n
-  \     * `:groups` - (Array<String>) \n      * `:delete_on_termination` - (Boolean)
-  \n      * `:private_ip_addresses` - (Array<Hash>) \n        * `:private_ip_address`
+  \     * `:groups` - (Array&lt;<String>) \n      * `:delete_on_termination` - (Boolean)
+  \n      * `:private_ip_addresses` - (Array&lt;<Hash>) \n        * `:private_ip_address`
   - *required* - (String) \n        * `:primary` - (Boolean) \n      * `:secondary_private_ip_address_count`
   - (Integer) \n    * `:iam_instance_profile` - (Hash) \n      * `:arn` - (String)
   \n      * `:name` - (String) \n    * `:ebs_optimized` - (Boolean) \n    * `:security_groups`
-  - (Array<String>) \n    * `:security_group_ids` - (Array<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:spot_instance_request_set` - (Array<Hash>)\n    * `:spot_instance_request_id`
-  - (String)\n    * `:spot_price` - (String)\n    * `:type` - (String)\n    * `:state`
-  - (String)\n    * `:fault` - (Hash)\n      * `:code` - (String)\n      * `:message`
-  - (String)\n    * `:status` - (Hash)\n      * `:code` - (String)\n      * `:update_time`
-  - (Time)\n      * `:message` - (String)\n    * `:valid_from` - (Time)\n    * `:valid_until`
-  - (Time)\n    * `:launch_group` - (String)\n    * `:availability_zone_group` - (String)\n
-  \   * `:launch_specification` - (Hash)\n      * `:image_id` - (String)\n      *
-  `:key_name` - (String)\n      * `:group_set` - (Array<Hash>)\n        * `:group_name`
-  - (String)\n        * `:group_id` - (String)\n      * `:user_data` - (String)\n
-  \     * `:addressing_type` - (String)\n      * `:instance_type` - (String)\n      *
-  `:placement` - (Hash)\n        * `:availability_zone` - (String)\n        * `:group_name`
-  - (String)\n      * `:kernel_id` - (String)\n      * `:ramdisk_id` - (String)\n
-  \     * `:block_device_mapping` - (Array<Hash>)\n        * `:virtual_name` - (String)\n
-  \       * `:device_name` - (String)\n        * `:ebs` - (Hash)\n          * `:snapshot_id`
-  - (String)\n          * `:volume_size` - (Integer)\n          * `:delete_on_termination`
-  - (Boolean)\n          * `:volume_type` - (String)\n          * `:iops` - (Integer)\n
-  \       * `:no_device` - (String)\n      * `:monitoring_enabled` - (Boolean)\n      *
-  `:subnet_id` - (String)\n      * `:network_interface_set` - (Array<Hash>)\n        *
-  `:network_interface_id` - (String)\n        * `:device_index` - (Integer)\n        *
-  `:subnet_id` - (String)\n        * `:description` - (String)\n        * `:private_ip_address`
-  - (String)\n        * `:security_group_id` - (Array<String>)\n        * `:delete_on_termination`
-  - (Boolean)\n        * `:private_ip_addresses_set` - (Array<Hash>)\n          *
-  `:private_ip_address` - (String)\n          * `:primary` - (Boolean)\n        *
-  `:secondary_private_ip_address_count` - (Integer)\n      * `:iam_instance_profile`
-  - (Hash)\n        * `:arn` - (String)\n        * `:name` - (String)\n      * `:ebs_optimized`
-  - (Boolean)\n    * `:instance_id` - (String)\n    * `:create_time` - (Time)\n    *
-  `:product_description` - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key`
-  - (String)\n      * `:value` - (String)\n    * `:launched_availability_zone` - (String)"
+  - (Array&lt;<String>) \n    * `:security_group_ids` - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:spot_instance_request_set` - (Array<Hash>)\n    *
+  `:spot_instance_request_id` - (String)\n    * `:spot_price` - (String)\n    * `:type`
+  - (String)\n    * `:state` - (String)\n    * `:fault` - (Hash)\n      * `:code`
+  - (String)\n      * `:message` - (String)\n    * `:status` - (Hash)\n      * `:code`
+  - (String)\n      * `:update_time` - (Time)\n      * `:message` - (String)\n    *
+  `:valid_from` - (Time)\n    * `:valid_until` - (Time)\n    * `:launch_group` - (String)\n
+  \   * `:availability_zone_group` - (String)\n    * `:launch_specification` - (Hash)\n
+  \     * `:image_id` - (String)\n      * `:key_name` - (String)\n      * `:group_set`
+  - (Array<Hash>)\n        * `:group_name` - (String)\n        * `:group_id` - (String)\n
+  \     * `:user_data` - (String)\n      * `:addressing_type` - (String)\n      *
+  `:instance_type` - (String)\n      * `:placement` - (Hash)\n        * `:availability_zone`
+  - (String)\n        * `:group_name` - (String)\n      * `:kernel_id` - (String)\n
+  \     * `:ramdisk_id` - (String)\n      * `:block_device_mapping` - (Array<Hash>)\n
+  \       * `:virtual_name` - (String)\n        * `:device_name` - (String)\n        *
+  `:ebs` - (Hash)\n          * `:snapshot_id` - (String)\n          * `:volume_size`
+  - (Integer)\n          * `:delete_on_termination` - (Boolean)\n          * `:volume_type`
+  - (String)\n          * `:iops` - (Integer)\n        * `:no_device` - (String)\n
+  \     * `:monitoring_enabled` - (Boolean)\n      * `:subnet_id` - (String)\n      *
+  `:network_interface_set` - (Array<Hash>)\n        * `:network_interface_id` - (String)\n
+  \       * `:device_index` - (Integer)\n        * `:subnet_id` - (String)\n        *
+  `:description` - (String)\n        * `:private_ip_address` - (String)\n        *
+  `:security_group_id` - (Array<String>)\n        * `:delete_on_termination` - (Boolean)\n
+  \       * `:private_ip_addresses_set` - (Array<Hash>)\n          * `:private_ip_address`
+  - (String)\n          * `:primary` - (Boolean)\n        * `:secondary_private_ip_address_count`
+  - (Integer)\n      * `:iam_instance_profile` - (Hash)\n        * `:arn` - (String)\n
+  \       * `:name` - (String)\n      * `:ebs_optimized` - (Boolean)\n    * `:instance_id`
+  - (String)\n    * `:create_time` - (Time)\n    * `:product_description` - (String)\n
+  \   * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` -
+  (String)\n    * `:launched_availability_zone` - (String)"
 :reset_image_attribute: |-
   Calls the ResetImageAttribute API operation.
   @param [Hash] options
@@ -2096,15 +2101,15 @@
     * `:from_port` - (Integer) Deprecated.
     * `:to_port` - (Integer) Deprecated.
     * `:cidr_ip` - (String) Deprecated.
-    * `:ip_permissions` - (Array<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
-      * `:user_id_group_pairs` - (Array<Hash>) The list of AWS user IDs and groups included in this permission.
+      * `:user_id_group_pairs` - (Array&lt;<Hash>) The list of AWS user IDs and groups included in this permission.
         * `:user_id` - (String) The AWS user ID of an account.
         * `:group_name` - (String) Name of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
         * `:group_id` - (String) ID of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
-      * `:ip_ranges` - (Array<Hash>) The list of CIDR IP ranges included in this permission.
+      * `:ip_ranges` - (Array&lt;<Hash>) The list of CIDR IP ranges included in this permission.
         * `:cidr_ip` - (String) The list of CIDR IP ranges.
   @return [Core::Response]
 :revoke_security_group_ingress: |-
@@ -2118,15 +2123,15 @@
     * `:from_port` - (Integer) Deprecated
     * `:to_port` - (Integer) Deprecated
     * `:cidr_ip` - (String) Deprecated
-    * `:ip_permissions` - (Array<Hash>) List of IP permissions to revoke on the specified security group.  For an IP permission to be removed, it must exactly match one of the IP permissions you specify in this list.  Specifying permissions through IP permissions is the preferred way of revoking permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to revoke on the specified security group.  For an IP permission to be removed, it must exactly match one of the IP permissions you specify in this list.  Specifying permissions through IP permissions is the preferred way of revoking permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
-      * `:user_id_group_pairs` - (Array<Hash>) The list of AWS user IDs and groups included in this permission.
+      * `:user_id_group_pairs` - (Array&lt;<Hash>) The list of AWS user IDs and groups included in this permission.
         * `:user_id` - (String) The AWS user ID of an account.
         * `:group_name` - (String) Name of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
         * `:group_id` - (String) ID of the security group in the specified AWS account. Cannot be used when specifying a CIDR IP address range.
-      * `:ip_ranges` - (Array<Hash>) The list of CIDR IP ranges included in this permission.
+      * `:ip_ranges` - (Array&lt;<Hash>) The list of CIDR IP ranges included in this permission.
         * `:cidr_ip` - (String) The list of CIDR IP ranges.
   @return [Core::Response]
 :run_instances: "Calls the RunInstances API operation.\n@param [Hash] options\n  *
@@ -2137,89 +2142,89 @@
   instances to launch. If the value is more than Amazon EC2 can launch, the largest
   possible number above minCount will be launched instead. Between 1 and the maximum
   number allowed for your account (default: 20).\n  * `:key_name` - (String) The name
-  of the key pair.\n  * `:security_groups` - (Array<String>) The names of the security
-  groups into which the instances will be launched.\n  * `:security_group_ids` - (Array<String>)
-  \n  * `:user_data` - (String) Specifies additional information to make available
-  to the instance(s).\n  * `:instance_type` - (String) Specifies the instance type
-  for the launched instances.  Valid values include:\n    * `t1.micro`\n    * `m1.small`\n
-  \   * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    * `m2.xlarge`\n    *
-  `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n    * `c1.medium`\n
-  \   * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `cc1.4xlarge`\n
-  \   * `cc2.8xlarge`\n    * `cg1.4xlarge`\n  * `:placement` - (Hash) Specifies the
-  placement constraints (Availability Zones) for launching the instances.\n    * `:availability_zone`
-  - (String) The availability zone in which an Amazon EC2 instance runs.\n    * `:group_name`
-  - (String) The name of the PlacementGroup in which an Amazon EC2 instance runs.
-  \ Placement groups are primarily used for launching High Performance Computing instances
-  in the same group to ensure fast connection speeds.\n    * `:tenancy` - (String)
-  The allowed tenancy of instances launched into the VPC. A value of default means
-  instances can be launched with any tenancy; a value of dedicated means all instances
-  launched into the VPC will be launched as dedicated tenancy regardless of the tenancy
-  assigned to the instance at launch.\n  * `:kernel_id` - (String) The ID of the kernel
-  with which to launch the instance.\n  * `:ramdisk_id` - (String) The ID of the RAM
-  disk with which to launch the instance. Some kernels require additional drivers
-  at launch. Check the kernel requirements for information on whether you need to
-  specify a RAM disk. To find kernel requirements, go to the Resource Center and search
-  for the kernel ID.\n  * `:block_device_mappings` - (Array<Hash>) Specifies how block
-  devices are exposed to the instance. Each mapping is made up of a virtualName and
-  a deviceName.\n    * `:virtual_name` - (String) Specifies the virtual device name.\n
-  \   * `:device_name` - (String) Specifies the device name (e.g., /dev/sdh).\n    *
-  `:ebs` - (Hash) Specifies parameters used to automatically setup Amazon EBS volumes
-  when the instance is launched.\n      * `:snapshot_id` - (String) The ID of the
-  snapshot from which the volume will be created.\n      * `:volume_size` - (Integer)
-  The size of the volume, in gigabytes.\n      * `:delete_on_termination` - (Boolean)
-  Specifies whether the Amazon EBS volume is deleted on instance termination.\n      *
-  `:volume_type` - (String) Valid values include:\n        * `standard`\n        *
-  `io1`\n      * `:iops` - (Integer) \n    * `:no_device` - (String) Specifies the
-  device name to suppress during instance launch.\n  * `:monitoring` - (Hash) Enables
-  monitoring for the instance.\n    * `:enabled` - *required* - (Boolean) \n  * `:subnet_id`
-  - (String) Specifies the subnet ID within which to launch the instance(s) for Amazon
-  Virtual Private Cloud.\n  * `:disable_api_termination` - (Boolean) Specifies whether
-  the instance can be terminated using the APIs. You must modify this attribute before
-  you can terminate any \"locked\" instances from the APIs.\n  * `:instance_initiated_shutdown_behavior`
-  - (String) Specifies whether the instance's Amazon EBS volumes are stopped or terminated
-  when the instance is shut down.\n  * `:license` - (Hash) Specifies active licenses
-  in use and attached to an Amazon EC2 instance.\n    * `:pool` - (String) The license
-  pool from which to take a license when starting Amazon EC2 instances in the associated
-  RunInstances request.\n  * `:private_ip_address` - (String) If you're using Amazon
-  Virtual Private Cloud, you can optionally use this parameter to assign the instance
-  a specific available IP address from the subnet.\n  * `:client_token` - (String)
-  Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-  For more information, go to How to Ensure Idempotency in the Amazon Elastic Compute
-  Cloud User Guide.\n  * `:additional_info` - (String) \n  * `:network_interfaces`
-  - (Array<Hash>) \n    * `:network_interface_id` - (String) \n    * `:device_index`
-  - (Integer) \n    * `:subnet_id` - (String) \n    * `:description` - (String) \n
-  \   * `:private_ip_address` - (String) \n    * `:groups` - (Array<String>) \n    *
-  `:delete_on_termination` - (Boolean) \n    * `:private_ip_addresses` - (Array<Hash>)
-  \n      * `:private_ip_address` - *required* - (String) \n      * `:primary` - (Boolean)
-  \n    * `:secondary_private_ip_address_count` - (Integer) \n  * `:iam_instance_profile`
-  - (Hash) \n    * `:arn` - (String) \n    * `:name` - (String) \n  * `:ebs_optimized`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:reservation_id` - (String)\n
-  \ * `:owner_id` - (String)\n  * `:requester_id` - (String)\n  * `:group_set` - (Array<Hash>)\n
-  \   * `:group_name` - (String)\n    * `:group_id` - (String)\n  * `:instances_set`
-  - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:image_id` - (String)\n
-  \   * `:instance_state` - (Hash)\n      * `:code` - (Integer)\n      * `:name` -
-  (String)\n    * `:private_dns_name` - (String)\n    * `:dns_name` - (String)\n    *
-  `:reason` - (String)\n    * `:key_name` - (String)\n    * `:ami_launch_index` -
-  (Integer)\n    * `:product_codes` - (Array<Hash>)\n      * `:product_code` - (String)\n
-  \     * `:type` - (String)\n    * `:instance_type` - (String)\n    * `:launch_time`
-  - (Time)\n    * `:placement` - (Hash)\n      * `:availability_zone` - (String)\n
-  \     * `:group_name` - (String)\n      * `:tenancy` - (String)\n    * `:kernel_id`
-  - (String)\n    * `:ramdisk_id` - (String)\n    * `:platform` - (String)\n    *
-  `:monitoring` - (Hash)\n      * `:state` - (String)\n    * `:subnet_id` - (String)\n
-  \   * `:vpc_id` - (String)\n    * `:private_ip_address` - (String)\n    * `:ip_address`
-  - (String)\n    * `:state_reason` - (Hash)\n      * `:code` - (String)\n      *
-  `:message` - (String)\n    * `:architecture` - (String)\n    * `:root_device_type`
-  - (String)\n    * `:root_device_name` - (String)\n    * `:block_device_mapping`
-  - (Array<Hash>)\n      * `:device_name` - (String)\n      * `:ebs` - (Hash)\n        *
-  `:volume_id` - (String)\n        * `:status` - (String)\n        * `:attach_time`
-  - (Time)\n        * `:delete_on_termination` - (Boolean)\n    * `:virtualization_type`
-  - (String)\n    * `:instance_lifecycle` - (String)\n    * `:spot_instance_request_id`
-  - (String)\n    * `:license` - (Hash)\n      * `:pool` - (String)\n    * `:client_token`
-  - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      *
-  `:value` - (String)\n    * `:group_set` - (Array<Hash>)\n      * `:group_name` -
-  (String)\n      * `:group_id` - (String)\n    * `:source_dest_check` - (Boolean)\n
-  \   * `:hypervisor` - (String)\n    * `:network_interface_set` - (Array<Hash>)\n
+  of the key pair.\n  * `:security_groups` - (Array&lt;<String>) The names of the
+  security groups into which the instances will be launched.\n  * `:security_group_ids`
+  - (Array&lt;<String>) \n  * `:user_data` - (String) Specifies additional information
+  to make available to the instance(s).\n  * `:instance_type` - (String) Specifies
+  the instance type for the launched instances.  Valid values include:\n    * `t1.micro`\n
+  \   * `m1.small`\n    * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    *
+  `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n
+  \   * `c1.medium`\n    * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n
+  \   * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `cg1.4xlarge`\n  * `:placement`
+  - (Hash) Specifies the placement constraints (Availability Zones) for launching
+  the instances.\n    * `:availability_zone` - (String) The availability zone in which
+  an Amazon EC2 instance runs.\n    * `:group_name` - (String) The name of the PlacementGroup
+  in which an Amazon EC2 instance runs.  Placement groups are primarily used for launching
+  High Performance Computing instances in the same group to ensure fast connection
+  speeds.\n    * `:tenancy` - (String) The allowed tenancy of instances launched into
+  the VPC. A value of default means instances can be launched with any tenancy; a
+  value of dedicated means all instances launched into the VPC will be launched as
+  dedicated tenancy regardless of the tenancy assigned to the instance at launch.\n
+  \ * `:kernel_id` - (String) The ID of the kernel with which to launch the instance.\n
+  \ * `:ramdisk_id` - (String) The ID of the RAM disk with which to launch the instance.
+  Some kernels require additional drivers at launch. Check the kernel requirements
+  for information on whether you need to specify a RAM disk. To find kernel requirements,
+  go to the Resource Center and search for the kernel ID.\n  * `:block_device_mappings`
+  - (Array&lt;<Hash>) Specifies how block devices are exposed to the instance. Each
+  mapping is made up of a virtualName and a deviceName.\n    * `:virtual_name` - (String)
+  Specifies the virtual device name.\n    * `:device_name` - (String) Specifies the
+  device name (e.g., /dev/sdh).\n    * `:ebs` - (Hash) Specifies parameters used to
+  automatically setup Amazon EBS volumes when the instance is launched.\n      * `:snapshot_id`
+  - (String) The ID of the snapshot from which the volume will be created.\n      *
+  `:volume_size` - (Integer) The size of the volume, in gigabytes.\n      * `:delete_on_termination`
+  - (Boolean) Specifies whether the Amazon EBS volume is deleted on instance termination.\n
+  \     * `:volume_type` - (String) Valid values include:\n        * `standard`\n
+  \       * `io1`\n      * `:iops` - (Integer) \n    * `:no_device` - (String) Specifies
+  the device name to suppress during instance launch.\n  * `:monitoring` - (Hash)
+  Enables monitoring for the instance.\n    * `:enabled` - *required* - (Boolean)
+  \n  * `:subnet_id` - (String) Specifies the subnet ID within which to launch the
+  instance(s) for Amazon Virtual Private Cloud.\n  * `:disable_api_termination` -
+  (Boolean) Specifies whether the instance can be terminated using the APIs. You must
+  modify this attribute before you can terminate any \"locked\" instances from the
+  APIs.\n  * `:instance_initiated_shutdown_behavior` - (String) Specifies whether
+  the instance's Amazon EBS volumes are stopped or terminated when the instance is
+  shut down.\n  * `:license` - (Hash) Specifies active licenses in use and attached
+  to an Amazon EC2 instance.\n    * `:pool` - (String) The license pool from which
+  to take a license when starting Amazon EC2 instances in the associated RunInstances
+  request.\n  * `:private_ip_address` - (String) If you're using Amazon Virtual Private
+  Cloud, you can optionally use this parameter to assign the instance a specific available
+  IP address from the subnet.\n  * `:client_token` - (String) Unique, case-sensitive
+  identifier you provide to ensure idempotency of the request. For more information,
+  go to How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.\n
+  \ * `:additional_info` - (String) \n  * `:network_interfaces` - (Array&lt;<Hash>)
+  \n    * `:network_interface_id` - (String) \n    * `:device_index` - (Integer) \n
+  \   * `:subnet_id` - (String) \n    * `:description` - (String) \n    * `:private_ip_address`
+  - (String) \n    * `:groups` - (Array&lt;<String>) \n    * `:delete_on_termination`
+  - (Boolean) \n    * `:private_ip_addresses` - (Array&lt;<Hash>) \n      * `:private_ip_address`
+  - *required* - (String) \n      * `:primary` - (Boolean) \n    * `:secondary_private_ip_address_count`
+  - (Integer) \n  * `:iam_instance_profile` - (Hash) \n    * `:arn` - (String) \n
+  \   * `:name` - (String) \n  * `:ebs_optimized` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:reservation_id` - (String)\n  * `:owner_id` - (String)\n  * `:requester_id`
+  - (String)\n  * `:group_set` - (Array<Hash>)\n    * `:group_name` - (String)\n    *
+  `:group_id` - (String)\n  * `:instances_set` - (Array<Hash>)\n    * `:instance_id`
+  - (String)\n    * `:image_id` - (String)\n    * `:instance_state` - (Hash)\n      *
+  `:code` - (Integer)\n      * `:name` - (String)\n    * `:private_dns_name` - (String)\n
+  \   * `:dns_name` - (String)\n    * `:reason` - (String)\n    * `:key_name` - (String)\n
+  \   * `:ami_launch_index` - (Integer)\n    * `:product_codes` - (Array<Hash>)\n
+  \     * `:product_code` - (String)\n      * `:type` - (String)\n    * `:instance_type`
+  - (String)\n    * `:launch_time` - (Time)\n    * `:placement` - (Hash)\n      *
+  `:availability_zone` - (String)\n      * `:group_name` - (String)\n      * `:tenancy`
+  - (String)\n    * `:kernel_id` - (String)\n    * `:ramdisk_id` - (String)\n    *
+  `:platform` - (String)\n    * `:monitoring` - (Hash)\n      * `:state` - (String)\n
+  \   * `:subnet_id` - (String)\n    * `:vpc_id` - (String)\n    * `:private_ip_address`
+  - (String)\n    * `:ip_address` - (String)\n    * `:state_reason` - (Hash)\n      *
+  `:code` - (String)\n      * `:message` - (String)\n    * `:architecture` - (String)\n
+  \   * `:root_device_type` - (String)\n    * `:root_device_name` - (String)\n    *
+  `:block_device_mapping` - (Array<Hash>)\n      * `:device_name` - (String)\n      *
+  `:ebs` - (Hash)\n        * `:volume_id` - (String)\n        * `:status` - (String)\n
+  \       * `:attach_time` - (Time)\n        * `:delete_on_termination` - (Boolean)\n
+  \   * `:virtualization_type` - (String)\n    * `:instance_lifecycle` - (String)\n
+  \   * `:spot_instance_request_id` - (String)\n    * `:license` - (Hash)\n      *
+  `:pool` - (String)\n    * `:client_token` - (String)\n    * `:tag_set` - (Array<Hash>)\n
+  \     * `:key` - (String)\n      * `:value` - (String)\n    * `:group_set` - (Array<Hash>)\n
+  \     * `:group_name` - (String)\n      * `:group_id` - (String)\n    * `:source_dest_check`
+  - (Boolean)\n    * `:hypervisor` - (String)\n    * `:network_interface_set` - (Array<Hash>)\n
   \     * `:network_interface_id` - (String)\n      * `:subnet_id` - (String)\n      *
   `:vpc_id` - (String)\n      * `:description` - (String)\n      * `:owner_id` - (String)\n
   \     * `:status` - (String)\n      * `:private_ip_address` - (String)\n      *
@@ -2236,7 +2241,7 @@
   \         * `:ip_owner_id` - (String)\n    * `:iam_instance_profile` - (Hash)\n
   \     * `:arn` - (String)\n      * `:id` - (String)\n    * `:ebs_optimized` - (Boolean)"
 :start_instances: "Calls the StartInstances API operation.\n@param [Hash] options\n
-  \ * `:instance_ids` - *required* - (Array<String>) The list of Amazon EC2 instances
+  \ * `:instance_ids` - *required* - (Array&lt;<String>) The list of Amazon EC2 instances
   to start.\n  * `:additional_info` - (String) \n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
   `:instances_set` - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:current_state`
@@ -2245,7 +2250,7 @@
 :stop_instances: |-
   Calls the StopInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - *required* - (Array<String>) The list of Amazon EC2 instances to stop.
+    * `:instance_ids` - *required* - (Array&lt;<String>) The list of Amazon EC2 instances to stop.
     * `:force` - (Boolean) Forces the instance to stop. The instance will not have an opportunity to flush file system caches nor file system meta data. If you use this option, you must perform file system check and repair procedures. This option is not recommended for Windows instances.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -2260,7 +2265,7 @@
 :terminate_instances: |-
   Calls the TerminateInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - *required* - (Array<String>) The list of instances to terminate.
+    * `:instance_ids` - *required* - (Array&lt;<String>) The list of instances to terminate.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:instances_set` - (Array<Hash>)
@@ -2273,11 +2278,11 @@
         * `:name` - (String)
 :unassign_private_ip_addresses: "Calls the UnassignPrivateIpAddresses API operation.\n@param
   [Hash] options\n  * `:network_interface_id` - *required* - (String) \n  * `:private_ip_addresses`
-  - *required* - (Array<String>) \n@return [Core::Response]"
+  - *required* - (Array&lt;<String>) \n@return [Core::Response]"
 :unmonitor_instances: |-
   Calls the UnmonitorInstances API operation.
   @param [Hash] options
-    * `:instance_ids` - *required* - (Array<String>) The list of Amazon EC2 instances on which to disable monitoring.
+    * `:instance_ids` - *required* - (Array&lt;<String>) The list of Amazon EC2 instances on which to disable monitoring.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:instances_set` - (Array<Hash>)

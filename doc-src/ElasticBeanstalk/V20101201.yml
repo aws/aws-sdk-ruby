@@ -73,7 +73,7 @@
       * `:template_name` - (String) The name of the configuration template.
     * `:environment_id` - (String) The ID of the environment used with this configuration template.
     * `:description` - (String) Describes this configuration.
-    * `:option_settings` - (Array<Hash>) If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.
+    * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
       * `:value` - (String) The current value for the configuration option.
@@ -101,11 +101,11 @@
     * `:solution_stack_name` - (String) This is an alternative to specifying a configuration name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error.
     * `:cname_prefix` - (String) If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the environment uses the environment name.
     * `:description` - (String) Describes this environment.
-    * `:option_settings` - (Array<Hash>) If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
+    * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
       * `:value` - (String) The current value for the configuration option.
-    * `:options_to_remove` - (Array<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this new environment.
+    * `:options_to_remove` - (Array&lt;<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this new environment.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -165,7 +165,7 @@
   Calls the DescribeApplicationVersions API operation.
   @param [Hash] options
     * `:application_name` - (String) If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include ones that are associated with the specified application.
-    * `:version_labels` - (Array<String>) If specified, restricts the returned descriptions to only include ones that have the specified version labels.
+    * `:version_labels` - (Array&lt;<String>) If specified, restricts the returned descriptions to only include ones that have the specified version labels.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:application_versions` - (Array<Hash>)
@@ -180,7 +180,7 @@
 :describe_applications: |-
   Calls the DescribeApplications API operation.
   @param [Hash] options
-    * `:application_names` - (Array<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
+    * `:application_names` - (Array&lt;<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:applications` - (Array<Hash>)
@@ -197,7 +197,7 @@
     * `:template_name` - (String) The name of the configuration template whose configuration options you want to describe.
     * `:environment_name` - (String) The name of the environment whose configuration options you want to describe.
     * `:solution_stack_name` - (String) The name of the solution stack whose configuration options you want to describe.
-    * `:options` - (Array<Hash>) If specified, restricts the descriptions to only the specified options.
+    * `:options` - (Array&lt;<Hash>) If specified, restricts the descriptions to only the specified options.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -262,10 +262,10 @@
   @param [Hash] options
     * `:application_name` - (String) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
     * `:version_label` - (String) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-    * `:environment_ids` - (Array<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-    * `:environment_names` - (Array<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
+    * `:environment_ids` - (Array&lt;<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
+    * `:environment_names` - (Array&lt;<String>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
     * `:include_deleted` - (Boolean) Indicates whether to include deleted environments:  `true` : Environments that have been deleted after IncludedDeletedBackTo are displayed.  `false` : Do not include deleted environments.
-    * `:included_deleted_back_to` - (String<ISO8601 datetime>) If specified when IncludeDeleted is set to  `true` , then environments deleted after this date are displayed.
+    * `:included_deleted_back_to` - (String&lt;<ISO8601 datetime>) If specified when IncludeDeleted is set to  `true` , then environments deleted after this date are displayed.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:environments` - (Array<Hash>)
@@ -305,8 +305,8 @@
       * `WARN`
       * `ERROR`
       * `FATAL`
-    * `:start_time` - (String<ISO8601 datetime>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.
-    * `:end_time` - (String<ISO8601 datetime>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the EndTime.
+    * `:start_time` - (String&lt;<ISO8601 datetime>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the EndTime.
     * `:max_records` - (Integer) Specifies the maximum number of events that can be returned, beginning with the most recent event.
     * `:next_token` - (String) Pagination token. If specified, the events return the next batch of results.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -434,11 +434,11 @@
     * `:application_name` - *required* - (String) The name of the application associated with the configuration template to update. If no application is found with this name, UpdateConfigurationTemplate returns an InvalidParameterValue error.
     * `:template_name` - *required* - (String) The name of the configuration template to update. If no configuration template is found with this name, UpdateConfigurationTemplate returns an InvalidParameterValue error.
     * `:description` - (String) A new description for the configuration.
-    * `:option_settings` - (Array<Hash>) A list of configuration option settings to update with the new specified option value.
+    * `:option_settings` - (Array&lt;<Hash>) A list of configuration option settings to update with the new specified option value.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
       * `:value` - (String) The current value for the configuration option.
-    * `:options_to_remove` - (Array<Hash>) A list of configuration options to remove from the configuration set. Constraint: You can remove only UserDefined configuration options.
+    * `:options_to_remove` - (Array&lt;<Hash>) A list of configuration options to remove from the configuration set. Constraint: You can remove only UserDefined configuration options.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -463,11 +463,11 @@
     * `:version_label` - (String) If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an InvalidParameterValue error.
     * `:template_name` - (String) If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an InvalidParameterValue error.
     * `:description` - (String) If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
-    * `:option_settings` - (Array<Hash>) If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
+    * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
       * `:value` - (String) The current value for the configuration option.
-    * `:options_to_remove` - (Array<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this environment.
+    * `:options_to_remove` - (Array&lt;<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this environment.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -498,7 +498,7 @@
     * `:application_name` - *required* - (String) The name of the application that the configuration template or environment belongs to.
     * `:template_name` - (String) The name of the configuration template to validate the settings against. Condition: You cannot specify both this and an environment name.
     * `:environment_name` - (String) The name of the environment to validate the settings against. Condition: You cannot specify both this and a configuration template name.
-    * `:option_settings` - *required* - (Array<Hash>) A list of the options and desired values to evaluate.
+    * `:option_settings` - *required* - (Array&lt;<Hash>) A list of the options and desired values to evaluate.
       * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
       * `:option_name` - (String) The name of the configuration option.
       * `:value` - (String) The current value for the configuration option.

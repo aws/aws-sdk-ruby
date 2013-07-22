@@ -17,8 +17,8 @@
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
     * `:label` - *required* - (String) The unique identification of the permission you're setting (e.g., AliceSendMessage). Constraints: Maximum 80 characters; alphanumeric characters, hyphens (-), and underscores (_) are allowed.
-    * `:aws_account_ids` - *required* - (Array<String>) The AWS account number of the principal who will be given permission. The principal must have an AWS account, but does not need to be signed up for Amazon SQS.
-    * `:actions` - *required* - (Array<String>) The action the client wants to allow for the specified principal.
+    * `:aws_account_ids` - *required* - (Array&lt;<String>) The AWS account number of the principal who will be given permission. The principal must have an AWS account, but does not need to be signed up for Amazon SQS.
+    * `:actions` - *required* - (Array&lt;<String>) The action the client wants to allow for the specified principal.
   @return [Core::Response]
 :change_message_visibility: |-
   Calls the ChangeMessageVisibility API operation.
@@ -31,7 +31,7 @@
   Calls the ChangeMessageVisibilityBatch API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:entries` - *required* - (Array<Hash>) A list of receipt handles of the messages for which the visibility timeout must be changed.
+    * `:entries` - *required* - (Array&lt;<Hash>) A list of receipt handles of the messages for which the visibility timeout must be changed.
       * `:id` - *required* - (String) An identifier for this particular receipt handle. This is used to communicate the result. Note that the Ids of a batch request need to be unique within the request.
       * `:receipt_handle` - *required* - (String) A receipt handle.
       * `:visibility_timeout` - (Integer) The new value (in seconds) for the message's visibility timeout.
@@ -48,7 +48,7 @@
   Calls the CreateQueue API operation.
   @param [Hash] options
     * `:queue_name` - *required* - (String) The name for the queue to be created.
-    * `:attributes` - (Hash<String,String>) A map of attributes with their corresponding values.
+    * `:attributes` - (Hash&lt;<String,String>) A map of attributes with their corresponding values.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:queue_url` - (String)
@@ -62,7 +62,7 @@
   Calls the DeleteMessageBatch API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:entries` - *required* - (Array<Hash>) A list of receipt handles for the messages to be deleted.
+    * `:entries` - *required* - (Array&lt;<Hash>) A list of receipt handles for the messages to be deleted.
       * `:id` - *required* - (String) An identifier for this particular receipt handle. This is used to communicate the result. Note that the Ids of a batch request need to be unique within the request.
       * `:receipt_handle` - *required* - (String) A receipt handle.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -83,7 +83,7 @@
   Calls the GetQueueAttributes API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:attribute_names` - (Array<String>) A list of attributes to retrieve information for.
+    * `:attribute_names` - (Array&lt;<String>) A list of attributes to retrieve information for.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:attributes` - (Hash<String,String>)
@@ -106,7 +106,7 @@
   Calls the ReceiveMessage API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:attribute_names` - (Array<String>) A list of attributes that need to be returned along with each message. The set of valid attributes are [SenderId, ApproximateFirstReceiveTimestamp, ApproximateReceiveCount, SentTimestamp].
+    * `:attribute_names` - (Array&lt;<String>) A list of attributes that need to be returned along with each message. The set of valid attributes are [SenderId, ApproximateFirstReceiveTimestamp, ApproximateReceiveCount, SentTimestamp].
     * `:max_number_of_messages` - (Integer) The maximum number of messages to return. Amazon SQS never returns more messages than this value but may return fewer. All of the messages are not necessarily returned.
     * `:visibility_timeout` - (Integer) The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request.
     * `:wait_time_seconds` - (Integer) The duration (in seconds) for which the call will wait for a message to arrive in the queue before returning.  If a message is available, the call will return sooner than WaitTimeSeconds.
@@ -138,7 +138,7 @@
   Calls the SendMessageBatch API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:entries` - *required* - (Array<Hash>) A list of SendMessageBatchRequestEntrys.
+    * `:entries` - *required* - (Array&lt;<Hash>) A list of SendMessageBatchRequestEntrys.
       * `:id` - *required* - (String) An identifier for the message in this batch. This is used to communicate the result. Note that the the Ids of a batch request need to be unique within the request.
       * `:message_body` - *required* - (String) Body of the message.
       * `:delay_seconds` - (Integer) The number of seconds for which the message has to be delayed.
@@ -157,5 +157,5 @@
   Calls the SetQueueAttributes API operation.
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the SQS queue to take action on.
-    * `:attributes` - *required* - (Hash<String,String>) A map of attributes to set.
+    * `:attributes` - *required* - (Hash&lt;<String,String>) A map of attributes to set.
   @return [Core::Response]

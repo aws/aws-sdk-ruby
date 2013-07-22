@@ -39,9 +39,9 @@
   error.\n    * `:aliases` - *required* - (Hash) A complex type that contains information
   about CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of CNAMEs, if any, for this distribution.\n
-  \     * `:items` - (Array<String>) Optional: A complex type that contains CNAME
+  \     * `:items` - (Array&lt;String>) Optional: A complex type that contains CNAME
   elements, if any, for this distribution. If Quantity is 0, you can omit Items.\n
-  \    * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
+  \     * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
   The object that you want CloudFront to return (for example, index.html) when an
   end user requests the root URL for your distribution (http://www.example.com) instead
   of an object in your distribution (http://www.example.com/index.html). Specifying
@@ -53,8 +53,8 @@
   and specify the new object.\n    * `:origins` - *required* - (Hash) A complex type
   that contains information about origins for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of origins for this distribution.\n      * `:items`
-  - (Array<Hash>) A complex type that contains origins for this distribution.\n     *
-  `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
+  - (Array&lt;Hash>) A complex type that contains origins for this distribution.\n
+  \     * `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
   for the origin. The value of Id must be unique within the distribution. You use
   the value of Id when you create a cache behavior. The Id identifies the origin that
   CloudFront routes a request to when the request matches the path pattern for that
@@ -100,9 +100,9 @@
   - (Hash) A complex type that specifies the whitelisted cookies, if any, that you
   want CloudFront to forward to your origin that is associated with this cache behavior.\n
   \           * `:quantity` - *required* - (Integer) The number of whitelisted cookies
-  for this cache behavior.\n            * `:items` - (Array<String>) Optional: A complex
-  type that contains whitelisted cookies for this cache behavior. If Quantity is 0,
-  you can omit Items.\n           * `:Name` - (String) \n      * `:trusted_signers`
+  for this cache behavior.\n            * `:items` - (Array&lt;String>) Optional:
+  A complex type that contains whitelisted cookies for this cache behavior. If Quantity
+  is 0, you can omit Items.\n            * `:Name` - (String) \n      * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -117,8 +117,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n        * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n        * `:items`
-  - (Array<String>) Optional: A complex type that contains trusted signers for this
-  cache behavior. If Quantity is 0, you can omit Items.\n       * `:AwsAccountNumber`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n        * `:AwsAccountNumber`
   - (String) \n      * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
@@ -130,9 +130,9 @@
   updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).\n    *
   `:cache_behaviors` - *required* - (Hash) A complex type that contains zero or more
   CacheBehavior elements.\n      * `:quantity` - *required* - (Integer) The number
-  of cache behaviors for this distribution.\n      * `:items` - (Array<Hash>) Optional:
+  of cache behaviors for this distribution.\n      * `:items` - (Array&lt;Hash>) Optional:
   A complex type that contains cache behaviors for this distribution. If Quantity
-  is 0, you can omit Items.\n     * `:CacheBehavior` - (Hash) \n        * `:path_pattern`
+  is 0, you can omit Items.\n      * `:CacheBehavior` - (Hash) \n        * `:path_pattern`
   - *required* - (String) The pattern (for example, images/*.jpg) that specifies which
   requests you want this cache behavior to apply to. When CloudFront receives an end-user
   request, the requested path is compared with path patterns in the order in which
@@ -156,9 +156,9 @@
   - (Hash) A complex type that specifies the whitelisted cookies, if any, that you
   want CloudFront to forward to your origin that is associated with this cache behavior.\n
   \             * `:quantity` - *required* - (Integer) The number of whitelisted cookies
-  for this cache behavior.\n              * `:items` - (Array<String>) Optional: A
-  complex type that contains whitelisted cookies for this cache behavior. If Quantity
-  is 0, you can omit Items.\n             * `:Name` - (String) \n        * `:trusted_signers`
+  for this cache behavior.\n              * `:items` - (Array&lt;String>) Optional:
+  A complex type that contains whitelisted cookies for this cache behavior. If Quantity
+  is 0, you can omit Items.\n              * `:Name` - (String) \n        * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -173,8 +173,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n          * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n          *
-  `:items` - (Array<String>) Optional: A complex type that contains trusted signers
-  for this cache behavior. If Quantity is 0, you can omit Items.\n         * `:AwsAccountNumber`
+  `:items` - (Array&lt;String>) Optional: A complex type that contains trusted signers
+  for this cache behavior. If Quantity is 0, you can omit Items.\n          * `:AwsAccountNumber`
   - (String) \n        * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
@@ -256,8 +256,8 @@
   URL encode those characters. Do not URL encode any other characters in the path,
   or CloudFront will not invalidate the old version of the updated object.\n      *
   `:quantity` - *required* - (Integer) The number of objects that you want to invalidate.\n
-  \     * `:items` - (Array<String>) A complex type that contains a list of the objects
-  that you want to invalidate.\n     * `:Path` - (String) \n    * `:caller_reference`
+  \     * `:items` - (Array&lt;String>) A complex type that contains a list of the
+  objects that you want to invalidate.\n      * `:Path` - (String) \n    * `:caller_reference`
   - *required* - (String) A unique name that ensures the request can't be replayed.
   If the CallerReference is new (no matter the content of the Path object), a new
   distribution is created. If the CallerReference is a value you already sent in a
@@ -290,10 +290,10 @@
   origin's origin access identity.\n    * `:aliases` - *required* - (Hash) A complex
   type that contains information about CNAMEs (alternate domain names), if any, for
   this streaming distribution.\n      * `:quantity` - *required* - (Integer) The number
-  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array<String>) Optional:
-  A complex type that contains CNAME elements, if any, for this distribution. If Quantity
-  is 0, you can omit Items.\n     * `:CNAME` - (String) \n    * `:comment` - *required*
-  - (String) Any comments you want to include about the streaming distribution.\n
+  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array&lt;String>)
+  Optional: A complex type that contains CNAME elements, if any, for this distribution.
+  If Quantity is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment`
+  - *required* - (String) Any comments you want to include about the streaming distribution.\n
   \   * `:logging` - *required* - (Hash) A complex type that controls whether access
   logs are written for the streaming distribution.\n      * `:enabled` - *required*
   - (Boolean) Specifies whether you want CloudFront to save access logs to an Amazon
@@ -321,8 +321,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n      * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n      * `:items`
-  - (Array<String>) Optional: A complex type that contains trusted signers for this
-  cache behavior. If Quantity is 0, you can omit Items.\n     * `:AwsAccountNumber`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n      * `:AwsAccountNumber`
   - (String) \n    * `:price_class` - *required* - (String) A complex type that contains
   information about price class for this streaming distribution.  Valid values include:\n
   \     * `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    *
@@ -762,9 +762,9 @@
   error.\n    * `:aliases` - *required* - (Hash) A complex type that contains information
   about CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of CNAMEs, if any, for this distribution.\n
-  \     * `:items` - (Array<String>) Optional: A complex type that contains CNAME
+  \     * `:items` - (Array&lt;String>) Optional: A complex type that contains CNAME
   elements, if any, for this distribution. If Quantity is 0, you can omit Items.\n
-  \    * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
+  \     * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
   The object that you want CloudFront to return (for example, index.html) when an
   end user requests the root URL for your distribution (http://www.example.com) instead
   of an object in your distribution (http://www.example.com/index.html). Specifying
@@ -776,8 +776,8 @@
   and specify the new object.\n    * `:origins` - *required* - (Hash) A complex type
   that contains information about origins for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of origins for this distribution.\n      * `:items`
-  - (Array<Hash>) A complex type that contains origins for this distribution.\n     *
-  `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
+  - (Array&lt;Hash>) A complex type that contains origins for this distribution.\n
+  \     * `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
   for the origin. The value of Id must be unique within the distribution. You use
   the value of Id when you create a cache behavior. The Id identifies the origin that
   CloudFront routes a request to when the request matches the path pattern for that
@@ -823,9 +823,9 @@
   - (Hash) A complex type that specifies the whitelisted cookies, if any, that you
   want CloudFront to forward to your origin that is associated with this cache behavior.\n
   \           * `:quantity` - *required* - (Integer) The number of whitelisted cookies
-  for this cache behavior.\n            * `:items` - (Array<String>) Optional: A complex
-  type that contains whitelisted cookies for this cache behavior. If Quantity is 0,
-  you can omit Items.\n           * `:Name` - (String) \n      * `:trusted_signers`
+  for this cache behavior.\n            * `:items` - (Array&lt;String>) Optional:
+  A complex type that contains whitelisted cookies for this cache behavior. If Quantity
+  is 0, you can omit Items.\n            * `:Name` - (String) \n      * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -840,8 +840,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n        * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n        * `:items`
-  - (Array<String>) Optional: A complex type that contains trusted signers for this
-  cache behavior. If Quantity is 0, you can omit Items.\n       * `:AwsAccountNumber`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n        * `:AwsAccountNumber`
   - (String) \n      * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
@@ -853,9 +853,9 @@
   updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).\n    *
   `:cache_behaviors` - *required* - (Hash) A complex type that contains zero or more
   CacheBehavior elements.\n      * `:quantity` - *required* - (Integer) The number
-  of cache behaviors for this distribution.\n      * `:items` - (Array<Hash>) Optional:
+  of cache behaviors for this distribution.\n      * `:items` - (Array&lt;Hash>) Optional:
   A complex type that contains cache behaviors for this distribution. If Quantity
-  is 0, you can omit Items.\n     * `:CacheBehavior` - (Hash) \n        * `:path_pattern`
+  is 0, you can omit Items.\n      * `:CacheBehavior` - (Hash) \n        * `:path_pattern`
   - *required* - (String) The pattern (for example, images/*.jpg) that specifies which
   requests you want this cache behavior to apply to. When CloudFront receives an end-user
   request, the requested path is compared with path patterns in the order in which
@@ -879,9 +879,9 @@
   - (Hash) A complex type that specifies the whitelisted cookies, if any, that you
   want CloudFront to forward to your origin that is associated with this cache behavior.\n
   \             * `:quantity` - *required* - (Integer) The number of whitelisted cookies
-  for this cache behavior.\n              * `:items` - (Array<String>) Optional: A
-  complex type that contains whitelisted cookies for this cache behavior. If Quantity
-  is 0, you can omit Items.\n             * `:Name` - (String) \n        * `:trusted_signers`
+  for this cache behavior.\n              * `:items` - (Array&lt;String>) Optional:
+  A complex type that contains whitelisted cookies for this cache behavior. If Quantity
+  is 0, you can omit Items.\n              * `:Name` - (String) \n        * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -896,8 +896,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n          * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n          *
-  `:items` - (Array<String>) Optional: A complex type that contains trusted signers
-  for this cache behavior. If Quantity is 0, you can omit Items.\n         * `:AwsAccountNumber`
+  `:items` - (Array&lt;String>) Optional: A complex type that contains trusted signers
+  for this cache behavior. If Quantity is 0, you can omit Items.\n          * `:AwsAccountNumber`
   - (String) \n        * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
@@ -990,10 +990,10 @@
   origin's origin access identity.\n    * `:aliases` - *required* - (Hash) A complex
   type that contains information about CNAMEs (alternate domain names), if any, for
   this streaming distribution.\n      * `:quantity` - *required* - (Integer) The number
-  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array<String>) Optional:
-  A complex type that contains CNAME elements, if any, for this distribution. If Quantity
-  is 0, you can omit Items.\n     * `:CNAME` - (String) \n    * `:comment` - *required*
-  - (String) Any comments you want to include about the streaming distribution.\n
+  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array&lt;String>)
+  Optional: A complex type that contains CNAME elements, if any, for this distribution.
+  If Quantity is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment`
+  - *required* - (String) Any comments you want to include about the streaming distribution.\n
   \   * `:logging` - *required* - (Hash) A complex type that controls whether access
   logs are written for the streaming distribution.\n      * `:enabled` - *required*
   - (Boolean) Specifies whether you want CloudFront to save access logs to an Amazon
@@ -1021,8 +1021,8 @@
   Specifies whether you want to require end users to use signed URLs to access the
   files specified by PathPattern and TargetOriginId.\n      * `:quantity` - *required*
   - (Integer) The number of trusted signers for this cache behavior.\n      * `:items`
-  - (Array<String>) Optional: A complex type that contains trusted signers for this
-  cache behavior. If Quantity is 0, you can omit Items.\n     * `:AwsAccountNumber`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n      * `:AwsAccountNumber`
   - (String) \n    * `:price_class` - *required* - (String) A complex type that contains
   information about price class for this streaming distribution.  Valid values include:\n
   \     * `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    *

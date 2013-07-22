@@ -103,7 +103,7 @@
 :set_vault_notifications: "Calls the PUT SetVaultNotifications API operation.\n@param
   [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
   *required* - (String) \n  * `:vault_notification_config` - *required* - (Hash) \n
-  \   * `:sns_topic` - (String) \n    * `:events` - (Array<String>) \n   * `:member`
+  \   * `:sns_topic` - (String) \n    * `:events` - (Array&lt;String>) \n    * `:member`
   - (String) \n@return [Core::Response]"
 :upload_archive: "Calls the POST UploadArchive API operation.\n@param [Hash] options\n
   \ * `:vault_name` - *required* - (String) \n  * `:account_id` - *required* - (String)

@@ -58,34 +58,82 @@
   Transcoder to name the files. If you don't want Elastic Transcoder to create thumbnails,
   specify \"\". If you do want Elastic Transcoder to create thumbnails, specify the
   information that you want to include in the file name for each thumbnail. You can
-  specify the following values in any sequence: {count} (Required): If you want to
-  create thumbnails, you must include {count} in the ThumbnailPattern object. Wherever
-  you specify {count}, Elastic Transcoder adds a five-digit sequence number (beginning
-  with 00001) to thumbnail file names. The number indicates where a given thumbnail
-  appears in the sequence of thumbnails for a transcoded file. If you specify a literal
-  value and/or {resolution} but you omit {count}, Elastic Transcoder returns a validation
-  error and does not create the job. Literal values (Optional): You can specify literal
-  values anywhere in the ThumbnailPattern object. For example, you can include them
-  as a file name prefix or as a delimiter between {resolution} and {count}. {resolution}
-  (Optional): If you want Elastic Transcoder to include the resolution in the file
-  name, include {resolution} in the ThumbnailPattern object. When creating thumbnails,
-  Elastic Transcoder automatically saves the files in the format (.jpg or .png) that
-  appears in the preset that you specified in the PresetID value of CreateJobOutput.
-  Elastic Transcoder also appends the applicable file name extension.\n    * `:rotate`
-  - (String) The number of degrees clockwise by which you want Elastic Transcoder
-  to rotate the output relative to the input. Enter one of the following values: auto,
-  0, 90, 180, 270. The value auto generally works only if the file that you're transcoding
-  contains rotation metadata.\n    * `:preset_id` - (String) The Id of the preset
-  to use for this job. The preset determines the audio, video, and thumbnail settings
-  that Elastic Transcoder uses for transcoding.\n    * `:segment_duration` - (String)
-  If you specify a preset in PresetId for which the value of Container is ts (MPEG-TS),
-  SegmentDuration is the duration of each .ts file in seconds. The range of valid
-  values is 1 to 60 seconds.\n    * `:watermarks` - (Array<Hash>) Information about
-  the watermarks that you want Elastic Transcoder to add to the video during transcoding.
-  You can specify up to four watermarks for each output. Settings for each watermark
-  must be defined in the preset for the current output.\n   * `:member` - (Hash) \n
-  \     * `:preset_watermark_id` - (String) The ID of the watermark settings that
-  Elastic Transcoder uses to add watermarks to the video during transcoding. The settings
+  specify the following values in any sequence: `{count}` (Required): If you want
+  to create thumbnails, you must include `{count}` in the ThumbnailPattern object.
+  Wherever you specify `{count}`, Elastic Transcoder adds a five-digit sequence number
+  (beginning with 00001) to thumbnail file names. The number indicates where a given
+  thumbnail appears in the sequence of thumbnails for a transcoded file. If you specify
+  a literal value and/or `{resolution}` but you omit `{count}`, Elastic Transcoder
+  returns a validation error and does not create the job. Literal values (Optional):
+  You can specify literal values anywhere in the ThumbnailPattern object. For example,
+  you can include them as a file name prefix or as a delimiter between `{resolution}`
+  and `{count}`. `{resolution}` (Optional): If you want Elastic Transcoder to include
+  the resolution in the file name, include `{resolution}` in the ThumbnailPattern
+  object. When creating thumbnails, Elastic Transcoder automatically saves the files
+  in the format (.jpg or .png) that appears in the preset that you specified in the
+  PresetID value of CreateJobOutput. Elastic Transcoder also appends the applicable
+  file name extension.\n    * `:rotate` - (String) The number of degrees clockwise
+  by which you want Elastic Transcoder to rotate the output relative to the input.
+  Enter one of the following values: auto, 0, 90, 180, 270. The value auto generally
+  works only if the file that you're transcoding contains rotation metadata.\n    *
+  `:preset_id` - (String) The Id of the preset to use for this job. The preset determines
+  the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding.\n
+  \   * `:segment_duration` - (String) If you specify a preset in PresetId for which
+  the value of Container is ts (MPEG-TS), SegmentDuration is the duration of each
+  .ts file in seconds. The range of valid values is 1 to 60 seconds.\n    * `:watermarks`
+  - (Array&lt;Hash>) Information about the watermarks that you want Elastic Transcoder
+  to add to the video during transcoding. You can specify up to four watermarks for
+  each output. Settings for each watermark must be defined in the preset for the current
+  output.\n    * `:member` - (Hash) \n      * `:preset_watermark_id` - (String) The
+  ID of the watermark settings that Elastic Transcoder uses to add watermarks to the
+  video during transcoding. The settings are in the preset specified by Preset for
+  the current output. In that preset, the value of Watermarks Id tells Elastic Transcoder
+  which settings to use.\n      * `:input_key` - (String) The name of the .png or
+  .jpg file that you want to use for the watermark. To determine which Amazon S3 bucket
+  contains the specified file, Elastic Transcoder checks the pipeline specified by
+  Pipeline; the Input Bucket object in that pipeline identifies the bucket. If the
+  file name includes a prefix, for example, logos/128x64.png, include the prefix in
+  the key. If the file isn't in the specified bucket, Elastic Transcoder returns an
+  error.\n  * `:outputs` - (Array&lt;Hash>) A section of the request body that provides
+  information about the transcoded (target) files. We recommend that you use the Outputs
+  syntax instead of the Output syntax.\n  * `:member` - (Hash) \n    * `:key` - (String)
+  The name to assign to the transcoded file. Elastic Transcoder saves the file in
+  the Amazon S3 bucket specified by the OutputBucket object in the pipeline that is
+  specified by the pipeline ID. If a file with the specified name already exists in
+  the output bucket, the job fails.\n    * `:thumbnail_pattern` - (String) Whether
+  you want Elastic Transcoder to create thumbnails for your videos and, if so, how
+  you want Elastic Transcoder to name the files. If you don't want Elastic Transcoder
+  to create thumbnails, specify \"\". If you do want Elastic Transcoder to create
+  thumbnails, specify the information that you want to include in the file name for
+  each thumbnail. You can specify the following values in any sequence: `{count}`
+  (Required): If you want to create thumbnails, you must include `{count}` in the
+  ThumbnailPattern object. Wherever you specify `{count}`, Elastic Transcoder adds
+  a five-digit sequence number (beginning with 00001) to thumbnail file names. The
+  number indicates where a given thumbnail appears in the sequence of thumbnails for
+  a transcoded file. If you specify a literal value and/or `{resolution}` but you
+  omit `{count}`, Elastic Transcoder returns a validation error and does not create
+  the job. Literal values (Optional): You can specify literal values anywhere in the
+  ThumbnailPattern object. For example, you can include them as a file name prefix
+  or as a delimiter between `{resolution}` and `{count}`. `{resolution}` (Optional):
+  If you want Elastic Transcoder to include the resolution in the file name, include
+  `{resolution}` in the ThumbnailPattern object. When creating thumbnails, Elastic
+  Transcoder automatically saves the files in the format (.jpg or .png) that appears
+  in the preset that you specified in the PresetID value of CreateJobOutput. Elastic
+  Transcoder also appends the applicable file name extension.\n    * `:rotate` - (String)
+  The number of degrees clockwise by which you want Elastic Transcoder to rotate the
+  output relative to the input. Enter one of the following values: auto, 0, 90, 180,
+  270. The value auto generally works only if the file that you're transcoding contains
+  rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
+  this job. The preset determines the audio, video, and thumbnail settings that Elastic
+  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) If you specify
+  a preset in PresetId for which the value of Container is ts (MPEG-TS), SegmentDuration
+  is the duration of each .ts file in seconds. The range of valid values is 1 to 60
+  seconds.\n    * `:watermarks` - (Array&lt;Hash>) Information about the watermarks
+  that you want Elastic Transcoder to add to the video during transcoding. You can
+  specify up to four watermarks for each output. Settings for each watermark must
+  be defined in the preset for the current output.\n    * `:member` - (Hash) \n      *
+  `:preset_watermark_id` - (String) The ID of the watermark settings that Elastic
+  Transcoder uses to add watermarks to the video during transcoding. The settings
   are in the preset specified by Preset for the current output. In that preset, the
   value of Watermarks Id tells Elastic Transcoder which settings to use.\n      *
   `:input_key` - (String) The name of the .png or .jpg file that you want to use for
@@ -93,90 +141,43 @@
   Elastic Transcoder checks the pipeline specified by Pipeline; the Input Bucket object
   in that pipeline identifies the bucket. If the file name includes a prefix, for
   example, logos/128x64.png, include the prefix in the key. If the file isn't in the
-  specified bucket, Elastic Transcoder returns an error.\n  * `:outputs` - (Array<Hash>)
-  A section of the request body that provides information about the transcoded (target)
-  files. We recommend that you use the Outputs syntax instead of the Output syntax.\n
-  * `:member` - (Hash) \n    * `:key` - (String) The name to assign to the transcoded
-  file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the
-  OutputBucket object in the pipeline that is specified by the pipeline ID. If a file
-  with the specified name already exists in the output bucket, the job fails.\n    *
-  `:thumbnail_pattern` - (String) Whether you want Elastic Transcoder to create thumbnails
-  for your videos and, if so, how you want Elastic Transcoder to name the files. If
-  you don't want Elastic Transcoder to create thumbnails, specify \"\". If you do
-  want Elastic Transcoder to create thumbnails, specify the information that you want
-  to include in the file name for each thumbnail. You can specify the following values
-  in any sequence: {count} (Required): If you want to create thumbnails, you must
-  include {count} in the ThumbnailPattern object. Wherever you specify {count}, Elastic
-  Transcoder adds a five-digit sequence number (beginning with 00001) to thumbnail
-  file names. The number indicates where a given thumbnail appears in the sequence
-  of thumbnails for a transcoded file. If you specify a literal value and/or {resolution}
-  but you omit {count}, Elastic Transcoder returns a validation error and does not
-  create the job. Literal values (Optional): You can specify literal values anywhere
-  in the ThumbnailPattern object. For example, you can include them as a file name
-  prefix or as a delimiter between {resolution} and {count}. {resolution} (Optional):
-  If you want Elastic Transcoder to include the resolution in the file name, include
-  {resolution} in the ThumbnailPattern object. When creating thumbnails, Elastic Transcoder
-  automatically saves the files in the format (.jpg or .png) that appears in the preset
-  that you specified in the PresetID value of CreateJobOutput. Elastic Transcoder
-  also appends the applicable file name extension.\n    * `:rotate` - (String) The
-  number of degrees clockwise by which you want Elastic Transcoder to rotate the output
-  relative to the input. Enter one of the following values: auto, 0, 90, 180, 270.
-  The value auto generally works only if the file that you're transcoding contains
-  rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
-  this job. The preset determines the audio, video, and thumbnail settings that Elastic
-  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) If you specify
-  a preset in PresetId for which the value of Container is ts (MPEG-TS), SegmentDuration
-  is the duration of each .ts file in seconds. The range of valid values is 1 to 60
-  seconds.\n    * `:watermarks` - (Array<Hash>) Information about the watermarks that
-  you want Elastic Transcoder to add to the video during transcoding. You can specify
-  up to four watermarks for each output. Settings for each watermark must be defined
-  in the preset for the current output.\n   * `:member` - (Hash) \n      * `:preset_watermark_id`
-  - (String) The ID of the watermark settings that Elastic Transcoder uses to add
-  watermarks to the video during transcoding. The settings are in the preset specified
-  by Preset for the current output. In that preset, the value of Watermarks Id tells
-  Elastic Transcoder which settings to use.\n      * `:input_key` - (String) The name
-  of the .png or .jpg file that you want to use for the watermark. To determine which
-  Amazon S3 bucket contains the specified file, Elastic Transcoder checks the pipeline
-  specified by Pipeline; the Input Bucket object in that pipeline identifies the bucket.
-  If the file name includes a prefix, for example, logos/128x64.png, include the prefix
-  in the key. If the file isn't in the specified bucket, Elastic Transcoder returns
-  an error.\n  * `:output_key_prefix` - (String) The value, if any, that you want
-  Elastic Transcoder to prepend to the names of all files that this job creates, including
-  output files, thumbnails, and playlists.\n  * `:playlists` - (Array<Hash>) If you
-  specify a preset in PresetId for which the value of Container is ts (MPEG-TS), Playlists
-  contains information about the master playlists that you want Elastic Transcoder
-  to create. We recommend that you create only one master playlist. The maximum number
-  of master playlists in a job is 30.\n * `:member` - (Hash) \n    * `:name` - (String)
-  The name that you want Elastic Transcoder to assign to the master playlist, for
-  example, nyc-vacation.m3u8. The name cannot include a / character. If you create
-  more than one master playlist (not recommended), the values of all Name objects
-  must be unique. Elastic Transcoder automatically appends .m3u8 to the file name.
-  If you include .m3u8 in Name, it will appear twice in the file name.\n    * `:format`
-  - (String) This value must currently be HLSv3.\n    * `:output_keys` - (Array<String>)
-  For each output in this job that you want to include in a master playlist, the value
-  of the Outputs:Key object. If you include more than one output in a playlist, the
-  value of SegmentDuration for all of the outputs must be the same.\n   * `:member`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:job` - (Hash)\n    * `:id`
-  - (String)\n    * `:pipeline_id` - (String)\n    * `:input` - (Hash)\n      * `:key`
-  - (String)\n      * `:frame_rate` - (String)\n      * `:resolution` - (String)\n
-  \     * `:aspect_ratio` - (String)\n      * `:interlaced` - (String)\n      * `:container`
-  - (String)\n    * `:output` - (Hash)\n      * `:id` - (String)\n      * `:key` -
-  (String)\n      * `:thumbnail_pattern` - (String)\n      * `:rotate` - (String)\n
-  \     * `:preset_id` - (String)\n      * `:segment_duration` - (String)\n      *
-  `:status` - (String)\n      * `:status_detail` - (String)\n      * `:duration` -
-  (Integer)\n      * `:width` - (Integer)\n      * `:height` - (Integer)\n      *
-  `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id` - (String)\n        *
-  `:input_key` - (String)\n    * `:outputs` - (Array<Hash>)\n      * `:id` - (String)\n
-  \     * `:key` - (String)\n      * `:thumbnail_pattern` - (String)\n      * `:rotate`
-  - (String)\n      * `:preset_id` - (String)\n      * `:segment_duration` - (String)\n
-  \     * `:status` - (String)\n      * `:status_detail` - (String)\n      * `:duration`
-  - (Integer)\n      * `:width` - (Integer)\n      * `:height` - (Integer)\n      *
-  `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id` - (String)\n        *
-  `:input_key` - (String)\n    * `:output_key_prefix` - (String)\n    * `:playlists`
-  - (Array<Hash>)\n      * `:name` - (String)\n      * `:format` - (String)\n      *
-  `:output_keys` - (Array<String>)\n      * `:status` - (String)\n      * `:status_detail`
-  - (String)\n    * `:status` - (String)"
+  specified bucket, Elastic Transcoder returns an error.\n  * `:output_key_prefix`
+  - (String) The value, if any, that you want Elastic Transcoder to prepend to the
+  names of all files that this job creates, including output files, thumbnails, and
+  playlists.\n  * `:playlists` - (Array&lt;Hash>) If you specify a preset in PresetId
+  for which the value of Container is ts (MPEG-TS), Playlists contains information
+  about the master playlists that you want Elastic Transcoder to create. We recommend
+  that you create only one master playlist. The maximum number of master playlists
+  in a job is 30.\n  * `:member` - (Hash) \n    * `:name` - (String) The name that
+  you want Elastic Transcoder to assign to the master playlist, for example, nyc-vacation.m3u8.
+  The name cannot include a / character. If you create more than one master playlist
+  (not recommended), the values of all Name objects must be unique. Elastic Transcoder
+  automatically appends .m3u8 to the file name. If you include .m3u8 in Name, it will
+  appear twice in the file name.\n    * `:format` - (String) This value must currently
+  be HLSv3.\n    * `:output_keys` - (Array&lt;String>) For each output in this job
+  that you want to include in a master playlist, the value of the Outputs:Key object.
+  If you include more than one output in a playlist, the value of SegmentDuration
+  for all of the outputs must be the same.\n    * `:member` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:job` - (Hash)\n    * `:id` - (String)\n    * `:pipeline_id` - (String)\n    *
+  `:input` - (Hash)\n      * `:key` - (String)\n      * `:frame_rate` - (String)\n
+  \     * `:resolution` - (String)\n      * `:aspect_ratio` - (String)\n      * `:interlaced`
+  - (String)\n      * `:container` - (String)\n    * `:output` - (Hash)\n      * `:id`
+  - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern` - (String)\n
+  \     * `:rotate` - (String)\n      * `:preset_id` - (String)\n      * `:segment_duration`
+  - (String)\n      * `:status` - (String)\n      * `:status_detail` - (String)\n
+  \     * `:duration` - (Integer)\n      * `:width` - (Integer)\n      * `:height`
+  - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
+  - (String)\n        * `:input_key` - (String)\n    * `:outputs` - (Array<Hash>)\n
+  \     * `:id` - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern`
+  - (String)\n      * `:rotate` - (String)\n      * `:preset_id` - (String)\n      *
+  `:segment_duration` - (String)\n      * `:status` - (String)\n      * `:status_detail`
+  - (String)\n      * `:duration` - (Integer)\n      * `:width` - (Integer)\n      *
+  `:height` - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
+  - (String)\n        * `:input_key` - (String)\n    * `:output_key_prefix` - (String)\n
+  \   * `:playlists` - (Array<Hash>)\n      * `:name` - (String)\n      * `:format`
+  - (String)\n      * `:output_keys` - (Array<String>)\n      * `:status` - (String)\n
+  \     * `:status_detail` - (String)\n    * `:status` - (String)"
 :create_pipeline: "Calls the POST CreatePipeline API operation.\n@param [Hash] options\n
   \ * `:name` - (String) The name of the pipeline. We recommend that the name be unique
   within the AWS account, but uniqueness is not enforced. Constraints: Maximum 40
@@ -268,7 +269,7 @@
   class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
   instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
   or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array<Hash>)
+  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
   Optional. The Permissions object specifies which users and/or predefined Amazon
   S3 groups you want to have access to transcoded files and playlists, and the type
   of access you want them to have. You can grant permissions to a maximum of 30 users
@@ -278,7 +279,7 @@
   you must explicitly grant full control to the user. If you omit Permissions, Elastic
   Transcoder grants full control over the transcoded files and playlists to the owner
   of the role specified by Role, and grants no other permissions to any other user
-  or group.\n   * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
+  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
   of value that appears in the Grantee object: Canonical: Either the canonical user
   ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
   A canonical user ID is not the same as an AWS account number. Email: The registered
@@ -288,14 +289,14 @@
   To identify the user or group, you can specify the canonical user ID for an AWS
   account, an origin access identity for a CloudFront distribution, the registered
   email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array<String>) The permission that you want to give to the AWS user that is listed
-  in Grantee. Valid values include: READ: The grantee can read the thumbnails and
-  metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
-  The grantee can read the object ACL for thumbnails that Elastic Transcoder adds
-  to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+  - (Array&lt;String>) The permission that you want to give to the AWS user that is
+  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
+  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
+  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
   that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
   has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n     * `:member` - (String) \n  * `:thumbnail_config`
+  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n  * `:thumbnail_config`
   - (Hash) The ThumbnailConfig object specifies several values, including the Amazon
   S3 bucket in which you want Elastic Transcoder to save thumbnail files, which users
   you want to have access to the files, the type of access you want users to have,
@@ -340,7 +341,7 @@
   class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
   instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
   or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array<Hash>)
+  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
   Optional. The Permissions object specifies which users and/or predefined Amazon
   S3 groups you want to have access to transcoded files and playlists, and the type
   of access you want them to have. You can grant permissions to a maximum of 30 users
@@ -350,7 +351,7 @@
   you must explicitly grant full control to the user. If you omit Permissions, Elastic
   Transcoder grants full control over the transcoded files and playlists to the owner
   of the role specified by Role, and grants no other permissions to any other user
-  or group.\n   * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
+  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
   of value that appears in the Grantee object: Canonical: Either the canonical user
   ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
   A canonical user ID is not the same as an AWS account number. Email: The registered
@@ -360,14 +361,14 @@
   To identify the user or group, you can specify the canonical user ID for an AWS
   account, an origin access identity for a CloudFront distribution, the registered
   email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array<String>) The permission that you want to give to the AWS user that is listed
-  in Grantee. Valid values include: READ: The grantee can read the thumbnails and
-  metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
-  The grantee can read the object ACL for thumbnails that Elastic Transcoder adds
-  to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+  - (Array&lt;String>) The permission that you want to give to the AWS user that is
+  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
+  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
+  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
   that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
   has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n     * `:member` - (String) \n@return [Core::Response]
+  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:pipeline` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    *
   `:name` - (String)\n    * `:status` - (String)\n    * `:input_bucket` - (String)\n
@@ -412,8 +413,8 @@
   seconds, the standard segment duration when you’re using MPEG-TS for the container
   type of the output video. Specify an integer greater than 0. If you specify MaxBitRate
   and omit BufferSize, Elastic Transcoder sets BufferSize to 10 times the value of
-  MaxBitRate.\n   * `:value` - (String) \n    * `:keyframes_max_dist` - (String) The
-  maximum number of frames between key frames. Key frames are fully encoded frames;
+  MaxBitRate.\n    * `:value` - (String) \n    * `:keyframes_max_dist` - (String)
+  The maximum number of frames between key frames. Key frames are fully encoded frames;
   the frames between key frames are encoded based, in part, on the content of the
   key frames. The value is an integer formatted as a string; valid values are between
   1 (every frame is a key frame) and 100000, inclusive. A higher value results in
@@ -504,17 +505,17 @@
   `:padding_policy` - (String) When you set PaddingPolicy to Pad, Elastic Transcoder
   may add black bars to the top and bottom and/or left and right sides of the output
   video to make the total size of the output video match the values that you specified
-  for MaxWidth and MaxHeight.\n    * `:watermarks` - (Array<Hash>) Settings for the
-  size, location, and opacity of graphics that you want Elastic Transcoder to overlay
-  over videos that are transcoded using this preset. You can specify settings for
-  up to four watermarks. Watermarks appear in the specified size and location, and
-  with the specified opacity for the duration of the transcoded video. Watermarks
+  for MaxWidth and MaxHeight.\n    * `:watermarks` - (Array&lt;Hash>) Settings for
+  the size, location, and opacity of graphics that you want Elastic Transcoder to
+  overlay over videos that are transcoded using this preset. You can specify settings
+  for up to four watermarks. Watermarks appear in the specified size and location,
+  and with the specified opacity for the duration of the transcoded video. Watermarks
   can be in .png or .jpg format. If you want to display a watermark that is not rectangular,
   use the .png format, which supports transparency. When you create a job that uses
   this preset, you specify the .png or .jpg graphics that you want Elastic Transcoder
   to include in the transcoded videos. You can specify fewer graphics in the job than
   you specify watermark settings in the preset, which allows you to use the same preset
-  for up to four watermarks that have different dimensions.\n   * `:member` - (Hash)
+  for up to four watermarks that have different dimensions.\n    * `:member` - (Hash)
   \n      * `:id` - (String) A unique identifier for the settings for one watermark.
   The value of Id can be up to 40 characters long.\n      * `:max_width` - (String)
   The maximum width of the watermark in one of the following formats: number of pixels
@@ -1016,11 +1017,11 @@
   media files to be transcoded. The action attempts to read from this bucket.\n  *
   `:output_bucket` - (String) The Amazon S3 bucket that Elastic Transcoder will write
   transcoded media files to. The action attempts to read from this bucket.\n  * `:topics`
-  - (Array<String>) The ARNs of one or more Amazon Simple Notification Service (Amazon
-  SNS) topics that you want the action to send a test notification to.\n * `:member`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:success` - (String)\n  * `:messages`
-  - (Array<String>)"
+  - (Array&lt;String>) The ARNs of one or more Amazon Simple Notification Service
+  (Amazon SNS) topics that you want the action to send a test notification to.\n  *
+  `:member` - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:success` - (String)\n
+  \ * `:messages` - (Array<String>)"
 :update_pipeline: "Calls the PUT UpdatePipeline API operation.\n@param [Hash] options\n
   \ * `:id` - *required* - (String) The ID of the pipeline that you want to update.\n
   \ * `:name` - (String) The name of the pipeline. We recommend that the name be unique
@@ -1085,7 +1086,7 @@
   class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
   instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
   or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array<Hash>)
+  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
   Optional. The Permissions object specifies which users and/or predefined Amazon
   S3 groups you want to have access to transcoded files and playlists, and the type
   of access you want them to have. You can grant permissions to a maximum of 30 users
@@ -1095,7 +1096,7 @@
   you must explicitly grant full control to the user. If you omit Permissions, Elastic
   Transcoder grants full control over the transcoded files and playlists to the owner
   of the role specified by Role, and grants no other permissions to any other user
-  or group.\n   * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
+  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
   of value that appears in the Grantee object: Canonical: Either the canonical user
   ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
   A canonical user ID is not the same as an AWS account number. Email: The registered
@@ -1105,14 +1106,14 @@
   To identify the user or group, you can specify the canonical user ID for an AWS
   account, an origin access identity for a CloudFront distribution, the registered
   email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array<String>) The permission that you want to give to the AWS user that is listed
-  in Grantee. Valid values include: READ: The grantee can read the thumbnails and
-  metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
-  The grantee can read the object ACL for thumbnails that Elastic Transcoder adds
-  to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+  - (Array&lt;String>) The permission that you want to give to the AWS user that is
+  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
+  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
+  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
   that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
   has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n     * `:member` - (String) \n  * `:thumbnail_config`
+  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n  * `:thumbnail_config`
   - (Hash) The ThumbnailConfig object specifies several values, including the Amazon
   S3 bucket in which you want Elastic Transcoder to save thumbnail files, which users
   you want to have access to the files, the type of access you want users to have,
@@ -1157,7 +1158,7 @@
   class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
   instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
   or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array<Hash>)
+  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
   Optional. The Permissions object specifies which users and/or predefined Amazon
   S3 groups you want to have access to transcoded files and playlists, and the type
   of access you want them to have. You can grant permissions to a maximum of 30 users
@@ -1167,7 +1168,7 @@
   you must explicitly grant full control to the user. If you omit Permissions, Elastic
   Transcoder grants full control over the transcoded files and playlists to the owner
   of the role specified by Role, and grants no other permissions to any other user
-  or group.\n   * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
+  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
   of value that appears in the Grantee object: Canonical: Either the canonical user
   ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
   A canonical user ID is not the same as an AWS account number. Email: The registered
@@ -1177,14 +1178,14 @@
   To identify the user or group, you can specify the canonical user ID for an AWS
   account, an origin access identity for a CloudFront distribution, the registered
   email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array<String>) The permission that you want to give to the AWS user that is listed
-  in Grantee. Valid values include: READ: The grantee can read the thumbnails and
-  metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
-  The grantee can read the object ACL for thumbnails that Elastic Transcoder adds
-  to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+  - (Array&lt;String>) The permission that you want to give to the AWS user that is
+  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
+  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
+  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
   that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
   has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n     * `:member` - (String) \n@return [Core::Response]
+  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:pipeline` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    *
   `:name` - (String)\n    * `:status` - (String)\n    * `:input_bucket` - (String)\n

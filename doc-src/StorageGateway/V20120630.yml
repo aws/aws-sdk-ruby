@@ -26,15 +26,15 @@
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:gateway_arn` - (String)"
 :add_cache: "Calls the AddCache API operation.\n@param [Hash] options\n  * `:gateway_arn`
-  - *required* - (String) \n  * `:disk_ids` - *required* - (Array<String>) \n@return
+  - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>) \n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:gateway_arn` - (String)"
 :add_upload_buffer: "Calls the AddUploadBuffer API operation.\n@param [Hash] options\n
-  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array<String>)
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
   \n@return [Core::Response] The `#data` method of the response object returns a hash
   with the following structure:\n\n  * `:gateway_arn` - (String)"
 :add_working_storage: "Calls the AddWorkingStorage API operation.\n@param [Hash] options\n
-  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array<String>)
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
   \n@return [Core::Response] The `#data` method of the response object returns a hash
   with the following structure:\n\n  * `:gateway_arn` - (String)"
 :create_cachedi_scsi_volume: "Calls the CreateCachediSCSIVolume API operation.\n@param
@@ -97,11 +97,11 @@
   - (Numeric)\n  * `:cache_hit_percentage` - (Numeric)\n  * `:cache_miss_percentage`
   - (Numeric)"
 :describe_cachedi_scsi_volumes: "Calls the DescribeCachediSCSIVolumes API operation.\n@param
-  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:cachedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn` - (String)\n    *
-  `:volume_id` - (String)\n    * `:volume_type` - (String)\n    * `:volume_status`
-  - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cachedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
   - (Numeric)\n    * `:source_snapshot_id` - (String)\n    * `:volumei_scsi_attributes`
   - (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
   \     * `:network_interface_port` - (Integer)\n      * `:lun_number` - (Integer)\n
@@ -131,11 +131,11 @@
   \ * `:volume_arn` - (String)\n  * `:start_at` - (Integer)\n  * `:recurrence_in_hours`
   - (Integer)\n  * `:description` - (String)\n  * `:timezone` - (String)"
 :describe_storedi_scsi_volumes: "Calls the DescribeStorediSCSIVolumes API operation.\n@param
-  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:storedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn` - (String)\n    *
-  `:volume_id` - (String)\n    * `:volume_type` - (String)\n    * `:volume_status`
-  - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:storedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
   - (Numeric)\n    * `:volume_disk_id` - (String)\n    * `:source_snapshot_id` - (String)\n
   \   * `:preserved_existing_data` - (Boolean)\n    * `:volumei_scsi_attributes` -
   (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n

@@ -80,9 +80,9 @@
   the master user account for the cluster that is being created. Constraints: Must
   be between 8 and 64 characters in length. Must contain at least one uppercase letter.
   Must contain one lowercase letter. Must contain one number.\n  * `:cluster_security_groups`
-  - (Array<String>) A list of security groups to be associated with this cluster.
+  - (Array&lt;<String>) A list of security groups to be associated with this cluster.
   Default: The default cluster security group for Amazon Redshift.\n  * `:vpc_security_group_ids`
-  - (Array<String>) A list of Virtual Private Cloud (VPC) security groups to associate
+  - (Array&lt;<String>) A list of Virtual Private Cloud (VPC) security groups to associate
   with the cluster. Default: The default VPC security group is associated. Type: String
   list\n  * `:cluster_subnet_group_name` - (String) A cluster subnet group to be associated
   with this cluster. If this parameter is not provided the resulting cluster will
@@ -199,7 +199,7 @@
   @param [Hash] options
     * `:cluster_subnet_group_name` - *required* - (String) The name for the subnet group. Amazon Redshift stores the value as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Must not be "Default". Must be unique for all subnet groups that are created by your AWS account. Example: examplesubnetgroup
     * `:description` - *required* - (String) A description for the subnet group.
-    * `:subnet_ids` - *required* - (Array<String>) An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
+    * `:subnet_ids` - *required* - (Array&lt;<String>) An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cluster_subnet_group_name` - (String)
@@ -334,8 +334,8 @@
     * `:cluster_identifier` - (String) The identifier of the cluster for which information about snapshots is requested.
     * `:snapshot_identifier` - (String) The snapshot identifier of the snapshot about which to return information.
     * `:snapshot_type` - (String) The type of snapshots for which you are requesting information. By default, snapshots of all types are returned. Valid Values: automated | manual
-    * `:start_time` - (String<ISO8601 datetime>) A value that requests only snapshots created at or after the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2012-07-16T18:00:00Z
-    * `:end_time` - (String<ISO8601 datetime>) A time value that requests only snapshots created at or before the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2012-07-16T18:00:00Z
+    * `:start_time` - (String&lt;<ISO8601 datetime>) A value that requests only snapshots created at or after the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2012-07-16T18:00:00Z
+    * `:end_time` - (String&lt;<ISO8601 datetime>) A time value that requests only snapshots created at or before the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2012-07-16T18:00:00Z
     * `:max_records` - (Integer) The maximum number of snapshot records to include in the response. If more records exist than the specified MaxRecords value, the response returns a marker that you can use in a subsequent DescribeClusterSnapshots request in order to retrieve the next set of snapshot records. Default: 100 Constraints: Must be at least 20 and no more than 100.
     * `:marker` - (String) An optional marker returned by a previous DescribeClusterSnapshots request to indicate the first snapshot that the request will return.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -462,8 +462,8 @@
       * `cluster-parameter-group`
       * `cluster-security-group`
       * `cluster-snapshot`
-    * `:start_time` - (String<ISO8601 datetime>) The beginning of the time interval to retrieve events for, specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2009-07-08T18:00Z
-    * `:end_time` - (String<ISO8601 datetime>) The end of the time interval for which to retrieve events, specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2009-07-08T18:00Z
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The beginning of the time interval to retrieve events for, specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2009-07-08T18:00Z
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The end of the time interval for which to retrieve events, specified in ISO 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia page. Example: 2009-07-08T18:00Z
     * `:duration` - (Integer) The number of minutes prior to the time of the request for which to retrieve events. For example, if the request is sent at 18:00 and you specify a druration of 60, then only events which have occurred after 17:00 will be returned. Default: 60
     * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved. Default: 100 Constraints: Value must be at least 20 and no more than 100.
     * `:marker` - (String) An optional marker returned from a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -575,26 +575,27 @@
   will be outage for a period while the old cluster is deleted and your connection
   is switched to the new cluster. You can use DescribeResize to track the progress
   of the resize request. Valid Values:  Integer greater than 0\n  * `:cluster_security_groups`
-  - (Array<String>) A list of cluster security groups to be authorized on this cluster.
-  This change is asynchronously applied as soon as possible. Security groups currently
-  associated with the cluster and not in the list of groups to apply, will be revoked
-  from the cluster. Constraints: Must be 1 to 255 alphanumeric characters or hyphens
-  First character must be a letter Cannot end with a hyphen or contain two consecutive
-  hyphens\n  * `:vpc_security_group_ids` - (Array<String>) A list of Virtual Private
-  Cloud (VPC) security groups to associate with the cluster.\n  * `:master_user_password`
-  - (String) The new password for the cluster master user. This change is asynchronously
-  applied as soon as possible. Between the time of the request and the completion
-  of the request, the MasterUserPassword element exists in the PendingModifiedValues
-  element of the operation response. Operations never return the password, so this
-  operation provides a way to regain access to the master user account for a cluster
-  if the password is lost. Default: Uses existing setting. Constraints: Must be between
-  8 and 64 characters in length. Must contain at least one uppercase letter. Must
-  contain one lowercase letter. Must contain one number.\n  * `:cluster_parameter_group_name`
-  - (String) The name of the cluster parameter group to apply to this cluster. This
-  change is applied only after the cluster is rebooted. To reboot a cluster use RebootCluster.
-  Default: Uses existing setting. Constraints: The cluster parameter group must be
-  in the same parameter group family that matches the cluster version.\n  * `:automated_snapshot_retention_period`
-  - (Integer) The number of days that automated snapshots are retained. If the value
+  - (Array&lt;<String>) A list of cluster security groups to be authorized on this
+  cluster. This change is asynchronously applied as soon as possible. Security groups
+  currently associated with the cluster and not in the list of groups to apply, will
+  be revoked from the cluster. Constraints: Must be 1 to 255 alphanumeric characters
+  or hyphens First character must be a letter Cannot end with a hyphen or contain
+  two consecutive hyphens\n  * `:vpc_security_group_ids` - (Array&lt;<String>) A list
+  of Virtual Private Cloud (VPC) security groups to associate with the cluster.\n
+  \ * `:master_user_password` - (String) The new password for the cluster master user.
+  This change is asynchronously applied as soon as possible. Between the time of the
+  request and the completion of the request, the MasterUserPassword element exists
+  in the PendingModifiedValues element of the operation response. Operations never
+  return the password, so this operation provides a way to regain access to the master
+  user account for a cluster if the password is lost. Default: Uses existing setting.
+  Constraints: Must be between 8 and 64 characters in length. Must contain at least
+  one uppercase letter. Must contain one lowercase letter. Must contain one number.\n
+  \ * `:cluster_parameter_group_name` - (String) The name of the cluster parameter
+  group to apply to this cluster. This change is applied only after the cluster is
+  rebooted. To reboot a cluster use RebootCluster. Default: Uses existing setting.
+  Constraints: The cluster parameter group must be in the same parameter group family
+  that matches the cluster version.\n  * `:automated_snapshot_retention_period` -
+  (Integer) The number of days that automated snapshots are retained. If the value
   is 0, automated snapshots are disabled. Even if automated snapshots are disabled,
   you can still create manual snapshots when you want with CreateClusterSnapshot.
   If you decrease the automated snapshot retention period from its current value,
@@ -637,7 +638,7 @@
   Calls the ModifyClusterParameterGroup API operation.
   @param [Hash] options
     * `:parameter_group_name` - *required* - (String) The name of the parameter group to be modified.
-    * `:parameters` - *required* - (Array<Hash>) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request. For each parameter to be modified, you must supply at least the parameter name and parameter value; other name-value pairs of the parameter are optional.
+    * `:parameters` - *required* - (Array&lt;<Hash>) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request. For each parameter to be modified, you must supply at least the parameter name and parameter value; other name-value pairs of the parameter are optional.
       * `:parameter_name` - (String) The name of the parameter.
       * `:parameter_value` - (String) The value of the parameter.
       * `:description` - (String) A description of the parameter.
@@ -655,7 +656,7 @@
   @param [Hash] options
     * `:cluster_subnet_group_name` - *required* - (String) The name of the parameter group to be modified.
     * `:description` - (String) The name of the parameter group to be modified.
-    * `:subnet_ids` - *required* - (Array<String>) An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
+    * `:subnet_ids` - *required* - (Array&lt;<String>) An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cluster_subnet_group_name` - (String)
@@ -724,8 +725,8 @@
   [Hash] options\n  * `:parameter_group_name` - *required* - (String) The name of
   the cluster parameter group to be reset.\n  * `:reset_all_parameters` - (Boolean)
   If  `true` , all parameters in the specified parameter group will be reset to their
-  default values. Default:  `true` \n  * `:parameters` - (Array<Hash>) An array of
-  names of parameters to be reset. If ResetAllParameters option is not used, then
+  default values. Default:  `true` \n  * `:parameters` - (Array&lt;<Hash>) An array
+  of names of parameters to be reset. If ResetAllParameters option is not used, then
   at least one parameter name must be supplied. Constraints: A maximum of 20 parameters
   can be reset in a single request.\n    * `:parameter_name` - (String) The name of
   the parameter.\n    * `:parameter_value` - (String) The value of the parameter.\n

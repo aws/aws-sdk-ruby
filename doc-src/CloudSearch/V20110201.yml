@@ -46,9 +46,9 @@
   field.\n      * `:facet_enabled` - (Boolean) Specifies whether  facets are enabled
   for this field.\n      * `:result_enabled` - (Boolean) Specifies whether  values
   of this field can be returned in search results and used for ranking.\n    * `:source_attributes`
-  - (Array<Hash>) An optional list of source attributes that provide data for this
-  index field. If not specified, the data is pulled from a source attribute with the
-  same name as this IndexField. When one or more source attributes are specified,
+  - (Array&lt;<Hash>) An optional list of source attributes that provide data for
+  this index field. If not specified, the data is pulled from a source attribute with
+  the same name as this IndexField. When one or more source attributes are specified,
   an optional data transformation can be applied to the source data when populating
   the index field.  You can configure a maximum of 20 sources for an IndexField.\n
   \     * `:source_data_function` - *required* - (String) Identifies the transformation
@@ -65,10 +65,10 @@
   - (Hash) Maps source document attribute values to new values when populating the
   IndexField.\n        * `:source_name` - *required* - (String) The name of the document
   source field to add to this IndexField.\n        * `:default_value` - (String) \n
-  \       * `:cases` - (Hash<String,String>) A map that translates source field values
-  to custom values.\n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:index_field` - (Hash)\n    *
-  `:options` - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type`
+  \       * `:cases` - (Hash&lt;<String,String>) A map that translates source field
+  values to custom values.\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:index_field` - (Hash)\n
+  \   * `:options` - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type`
   - (String)\n      * `:u_int_options` - (Hash)\n        * `:default_value` - (Integer)\n
   \     * `:literal_options` - (Hash)\n        * `:default_value` - (String)\n        *
   `:search_enabled` - (Boolean)\n        * `:facet_enabled` - (Boolean)\n        *
@@ -163,7 +163,7 @@
 :describe_domains: |-
   Calls the DescribeDomains API operation.
   @param [Hash] options
-    * `:domain_names` - (Array<String>) Limits the DescribeDomains response to the specified search domains.
+    * `:domain_names` - (Array&lt;<String>) Limits the DescribeDomains response to the specified search domains.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:domain_status_list` - (Array<Hash>)
@@ -184,7 +184,7 @@
       * `:search_partition_count` - (Integer)
       * `:search_instance_count` - (Integer)
 :describe_index_fields: "Calls the DescribeIndexFields API operation.\n@param [Hash]
-  options\n  * `:domain_name` - *required* - (String) \n  * `:field_names` - (Array<String>)
+  options\n  * `:domain_name` - *required* - (String) \n  * `:field_names` - (Array&lt;<String>)
   Limits the DescribeIndexFields response to the specified fields.\n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:index_fields` - (Array<Hash>)\n    * `:options` - (Hash)\n      * `:index_field_name`
@@ -204,12 +204,13 @@
   - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)"
 :describe_rank_expressions: "Calls the DescribeRankExpressions API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:rank_names` -
-  (Array<String>) Limits the DescribeRankExpressions response to the specified fields.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:rank_expressions` - (Array<Hash>)\n    * `:options`
-  - (Hash)\n      * `:rank_name` - (String)\n      * `:rank_expression` - (String)\n
-  \   * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date`
-  - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)"
+  (Array&lt;<String>) Limits the DescribeRankExpressions response to the specified
+  fields.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:rank_expressions` - (Array<Hash>)\n
+  \   * `:options` - (Hash)\n      * `:rank_name` - (String)\n      * `:rank_expression`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)"
 :describe_service_access_policies: "Calls the DescribeServiceAccessPolicies API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n

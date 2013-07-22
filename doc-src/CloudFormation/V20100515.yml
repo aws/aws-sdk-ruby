@@ -28,7 +28,7 @@
   must point to a template (max size: 307,200 bytes) located in an S3 bucket in the
   same region as the stack. For more information, go to the AWS CloudFormation User
   Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed,
-  only TemplateBody is used.\n  * `:parameters` - (Array<Hash>) A list of Parameter
+  only TemplateBody is used.\n  * `:parameters` - (Array&lt;<Hash>) A list of Parameter
   structures that specify input parameters for the stack.\n    * `:parameter_key`
   - (String) The key associated with the parameter.\n    * `:parameter_value` - (String)
   The value associated with the parameter.\n  * `:disable_rollback` - (Boolean) Set
@@ -36,9 +36,9 @@
   either DisableRollback or OnFailure, but not both. Default:  `false` \n  * `:timeout_in_minutes`
   - (Integer) The amount of time that can pass before the stack status becomes CREATE_FAILED;
   if DisableRollback is not set or is set to  `false` , the stack will be rolled back.\n
-  \ * `:notification_arns` - (Array<String>) The Simple Notification Service (SNS)
+  \ * `:notification_arns` - (Array&lt;<String>) The Simple Notification Service (SNS)
   topic ARNs to publish stack related events. You can find your SNS topic ARNs using
-  the SNS console or your Command Line Interface (CLI).\n  * `:capabilities` - (Array<String>)
+  the SNS console or your Command Line Interface (CLI).\n  * `:capabilities` - (Array&lt;<String>)
   The list of capabilities that you want to allow in the stack. If your template contains
   IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise,
   this action returns an InsufficientCapabilities error. IAM resources are the following:
@@ -46,7 +46,7 @@
   \ * `:on_failure` - (String) Determines what action will be taken if stack creation
   fails. This must be one of: DO_NOTHING, ROLLBACK, or DELETE. You can specify either
   OnFailure or DisableRollback, but not both. Default: ROLLBACK  Valid values include:\n
-  \   * `DO_NOTHING`\n    * `ROLLBACK`\n    * `DELETE`\n  * `:tags` - (Array<Hash>)
+  \   * `DO_NOTHING`\n    * `ROLLBACK`\n    * `DELETE`\n  * `:tags` - (Array&lt;<Hash>)
   A set of user-defined Tags to associate with this stack, represented by key/value
   pairs. Tags defined for the stack are propogated to EC2 resources that are created
   as part of the stack. A maximum number of 10 tags can be specified.\n    * `:key`
@@ -135,7 +135,7 @@
   @param [Hash] options
     * `:template_body` - (String) Structure containing the template body. (For more information, go to the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.
     * `:template_url` - (String) Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
-    * `:parameters` - (Array<Hash>) A list of Parameter structures that specify input parameters.
+    * `:parameters` - (Array&lt;<Hash>) A list of Parameter structures that specify input parameters.
       * `:parameter_key` - (String) The key associated with the parameter.
       * `:parameter_value` - (String) The value associated with the parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -167,7 +167,7 @@
   Calls the ListStacks API operation.
   @param [Hash] options
     * `:next_token` - (String) String that identifies the start of the next list of stacks, if there is one. Default: There is no default value.
-    * `:stack_status_filter` - (Array<String>) Stack status to use as a filter. Specify one or more stack status codes to list only stacks with the specified status codes. For a complete list of stack status codes, see the StackStatus parameter of the Stack data type.
+    * `:stack_status_filter` - (Array&lt;<String>) Stack status to use as a filter. Specify one or more stack status codes to list only stacks with the specified status codes. For a complete list of stack status codes, see the StackStatus parameter of the Stack data type.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:stack_summaries` - (Array<Hash>)
@@ -186,10 +186,10 @@
     * `:stack_name` - *required* - (String) The name or stack ID of the stack to update. Must contain only alphanumeric characters (case sensitive) and start with an alpha character. Maximum length of the name is 255 characters.
     * `:template_body` - (String) Structure containing the template body. (For more information, go to the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.
     * `:template_url` - (String) Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
-    * `:parameters` - (Array<Hash>) A list of Parameter structures that specify input parameters for the stack.
+    * `:parameters` - (Array&lt;<Hash>) A list of Parameter structures that specify input parameters for the stack.
       * `:parameter_key` - (String) The key associated with the parameter.
       * `:parameter_value` - (String) The value associated with the parameter.
-    * `:capabilities` - (Array<String>) The list of capabilities that you want to allow in the stack. If your stack contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise, this action returns an InsufficientCapabilities error. IAM resources are the following: AWS::IAM::AccessKey, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::User, and AWS::IAM::UserToGroupAddition.
+    * `:capabilities` - (Array&lt;<String>) The list of capabilities that you want to allow in the stack. If your stack contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise, this action returns an InsufficientCapabilities error. IAM resources are the following: AWS::IAM::AccessKey, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::User, and AWS::IAM::UserToGroupAddition.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:stack_id` - (String)

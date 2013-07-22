@@ -38,8 +38,8 @@
   None\n    * `:virtual_interface_name` - (String) \n    * `:vlan` - (Integer) \n
   \   * `:asn` - (Integer) \n    * `:auth_key` - (String) \n    * `:amazon_address`
   - (String) \n    * `:customer_address` - (String) \n    * `:route_filter_prefixes`
-  - (Array<Hash>) \n      * `:cidr` - (String) CIDR notation for the advertised route.
-  Multiple routes are separated by commas Example: 10.10.10.0/24,10.10.11.0/24\n@return
+  - (Array&lt;<Hash>) \n      * `:cidr` - (String) CIDR notation for the advertised
+  route. Multiple routes are separated by commas Example: 10.10.10.0/24,10.10.11.0/24\n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:virtual_interface_id` - (String)\n  * `:location`
   - (String)\n  * `:connection_id` - (String)\n  * `:virtual_interface_type` - (String)\n

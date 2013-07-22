@@ -14,21 +14,22 @@
 ---
 :count_closed_workflow_executions: "Calls the CountClosedWorkflowExecutions API operation.\n@param
   [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer<unix timestamp>) \n    *
-  `:latest_date` - (Integer<unix timestamp>) \n  * `:close_time_filter` - (Hash) \n
-  \   * `:oldest_date` - *required* - (Integer<unix timestamp>) \n    * `:latest_date`
-  - (Integer<unix timestamp>) \n  * `:execution_filter` - (Hash) \n    * `:workflow_id`
-  - *required* - (String) \n  * `:type_filter` - (Hash) \n    * `:name` - *required*
-  - (String) \n    * `:version` - (String) \n  * `:tag_filter` - (Hash) \n    * `:tag`
-  - *required* - (String) \n  * `:close_status_filter` - (Hash) \n    * `:status`
-  - *required* - (String) Valid values include:\n      * `COMPLETED`\n      * `FAILED`\n
-  \     * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `count` - (Integer)\n  * `truncated` - (Boolean)"
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
+  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:type_filter` - (Hash)
+  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:close_status_filter` - (Hash)
+  \n    * `:status` - *required* - (String) Valid values include:\n      * `COMPLETED`\n
+  \     * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n
+  \     * `TIMED_OUT`\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `count` - (Integer)\n
+  \ * `truncated` - (Boolean)"
 :count_open_workflow_executions: "Calls the CountOpenWorkflowExecutions API operation.\n@param
   [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer<unix timestamp>)
-  \n    * `:latest_date` - (Integer<unix timestamp>) \n  * `:type_filter` - (Hash)
+  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
+  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
   \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
   - (Hash) \n    * `:tag` - *required* - (String) \n  * `:execution_filter` - (Hash)
   \n    * `:workflow_id` - *required* - (String) \n@return [Core::Response] The `#data`
@@ -240,24 +241,25 @@
   - (Time)\n    * `deprecationDate` - (Time)\n  * `nextPageToken` - (String)"
 :list_closed_workflow_executions: "Calls the ListClosedWorkflowExecutions API operation.\n@param
   [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer<unix timestamp>) \n    *
-  `:latest_date` - (Integer<unix timestamp>) \n  * `:close_time_filter` - (Hash) \n
-  \   * `:oldest_date` - *required* - (Integer<unix timestamp>) \n    * `:latest_date`
-  - (Integer<unix timestamp>) \n  * `:execution_filter` - (Hash) \n    * `:workflow_id`
-  - *required* - (String) \n  * `:close_status_filter` - (Hash) \n    * `:status`
-  - *required* - (String) Valid values include:\n      * `COMPLETED`\n      * `FAILED`\n
-  \     * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n
-  \ * `:type_filter` - (Hash) \n    * `:name` - *required* - (String) \n    * `:version`
-  - (String) \n  * `:tag_filter` - (Hash) \n    * `:tag` - *required* - (String) \n
-  \ * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `executionInfos` - (Array<Hash>)\n
-  \   * `execution` - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n
-  \   * `workflowType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
-  \   * `startTimestamp` - (Time)\n    * `closeTimestamp` - (Time)\n    * `executionStatus`
-  - (String)\n    * `closeStatus` - (String)\n    * `parent` - (Hash)\n      * `workflowId`
-  - (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    *
-  `cancelRequested` - (Boolean)\n  * `nextPageToken` - (String)"
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
+  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:close_status_filter`
+  - (Hash) \n    * `:status` - *required* - (String) Valid values include:\n      *
+  `COMPLETED`\n      * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      *
+  `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n  * `:type_filter` - (Hash) \n    * `:name`
+  - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter` - (Hash)
+  \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String) \n  *
+  `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `executionInfos` - (Array<Hash>)\n    * `execution` - (Hash)\n      * `workflowId`
+  - (String)\n      * `runId` - (String)\n    * `workflowType` - (Hash)\n      * `name`
+  - (String)\n      * `version` - (String)\n    * `startTimestamp` - (Time)\n    *
+  `closeTimestamp` - (Time)\n    * `executionStatus` - (String)\n    * `closeStatus`
+  - (String)\n    * `parent` - (Hash)\n      * `workflowId` - (String)\n      * `runId`
+  - (String)\n    * `tagList` - (Array<String>)\n    * `cancelRequested` - (Boolean)\n
+  \ * `nextPageToken` - (String)"
 :list_domains: "Calls the ListDomains API operation.\n@param [Hash] options\n  * `:next_page_token`
   - (String) \n  * `:registration_status` - *required* - (String) Valid values include:\n
   \   * `REGISTERED`\n    * `DEPRECATED`\n  * `:maximum_page_size` - (Integer) \n
@@ -267,8 +269,8 @@
   - (String)\n  * `nextPageToken` - (String)"
 :list_open_workflow_executions: "Calls the ListOpenWorkflowExecutions API operation.\n@param
   [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer<unix timestamp>)
-  \n    * `:latest_date` - (Integer<unix timestamp>) \n  * `:type_filter` - (Hash)
+  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
+  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
   \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
   - (Hash) \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String)
   \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n  *
@@ -466,7 +468,7 @@
   [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:reason` - (String)
   \n  * `:details` - (String) \n@return [Core::Response]"
 :respond_decision_task_completed: "Calls the RespondDecisionTaskCompleted API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:decisions` - (Array<Hash>)
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:decisions` - (Array&lt;<Hash>)
   \n    * `:decision_type` - *required* - (String) Valid values include:\n      *
   `ScheduleActivityTask`\n      * `RequestCancelActivityTask`\n      * `CompleteWorkflowExecution`\n
   \     * `FailWorkflowExecution`\n      * `CancelWorkflowExecution`\n      * `ContinueAsNewWorkflowExecution`\n
@@ -488,7 +490,7 @@
   \n      * `:task_list` - (Hash) \n        * `:name` - *required* - (String) \n      *
   `:task_start_to_close_timeout` - (String) \n      * `:child_policy` - (String) Valid
   values include:\n        * `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n
-  \     * `:tag_list` - (Array<String>) \n      * `:workflow_type_version` - (String)
+  \     * `:tag_list` - (Array&lt;<String>) \n      * `:workflow_type_version` - (String)
   \n    * `:record_marker_decision_attributes` - (Hash) \n      * `:marker_name` -
   *required* - (String) \n      * `:details` - (String) \n    * `:start_timer_decision_attributes`
   - (Hash) \n      * `:timer_id` - *required* - (String) \n      * `:control` - (String)
@@ -506,7 +508,7 @@
   - (Hash) \n        * `:name` - *required* - (String) \n      * `:task_start_to_close_timeout`
   - (String) \n      * `:child_policy` - (String) Valid values include:\n        *
   `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n      * `:tag_list`
-  - (Array<String>) \n  * `:execution_context` - (String) \n@return [Core::Response]"
+  - (Array&lt;<String>) \n  * `:execution_context` - (String) \n@return [Core::Response]"
 :signal_workflow_execution: "Calls the SignalWorkflowExecution API operation.\n@param
   [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
   - (String) \n  * `:run_id` - (String) \n  * `:signal_name` - *required* - (String)
@@ -516,7 +518,7 @@
   - (String) \n  * `:workflow_type` - *required* - (Hash) \n    * `:name` - *required*
   - (String) \n    * `:version` - *required* - (String) \n  * `:task_list` - (Hash)
   \n    * `:name` - *required* - (String) \n  * `:input` - (String) \n  * `:execution_start_to_close_timeout`
-  - (String) \n  * `:tag_list` - (Array<String>) \n  * `:task_start_to_close_timeout`
+  - (String) \n  * `:tag_list` - (Array&lt;<String>) \n  * `:task_start_to_close_timeout`
   - (String) \n  * `:child_policy` - (String) Valid values include:\n    * `TERMINATE`\n
   \   * `REQUEST_CANCEL`\n    * `ABANDON`\n@return [Core::Response] The `#data` method
   of the response object returns a hash with the following structure:\n\n  * `runId`

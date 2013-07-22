@@ -14,18 +14,18 @@
 ---
 :add_communication_to_case: "Calls the AddCommunicationToCase API operation.\n@param
   [Hash] options\n  * `:case_id` - (String) \n  * `:communication_body` - *required*
-  - (String) \n  * `:cc_email_addresses` - (Array<String>) \n@return [Core::Response]
+  - (String) \n  * `:cc_email_addresses` - (Array&lt;<String>) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:result` - (Boolean)"
 :create_case: "Calls the CreateCase API operation.\n@param [Hash] options\n  * `:subject`
   - *required* - (String) \n  * `:service_code` - *required* - (String) \n  * `:severity_code`
   - (String) \n  * `:category_code` - *required* - (String) \n  * `:communication_body`
-  - *required* - (String) \n  * `:cc_email_addresses` - (Array<String>) \n  * `:language`
-  - (String) \n  * `:issue_type` - (String) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:case_id` - (String)"
+  - *required* - (String) \n  * `:cc_email_addresses` - (Array&lt;<String>) \n  *
+  `:language` - (String) \n  * `:issue_type` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:case_id` - (String)"
 :describe_cases: "Calls the DescribeCases API operation.\n@param [Hash] options\n
-  \ * `:case_id_list` - (Array<String>) \n  * `:display_id` - (String) \n  * `:after_time`
+  \ * `:case_id_list` - (Array&lt;<String>) \n  * `:display_id` - (String) \n  * `:after_time`
   - (String) \n  * `:before_time` - (String) \n  * `:include_resolved_cases` - (Boolean)
   \n  * `:next_token` - (String) \n  * `:max_results` - (Integer) \n  * `:language`
   - (String) \n@return [Core::Response] The `#data` method of the response object
@@ -46,7 +46,7 @@
   \   * `:case_id` - (String)\n    * `:body` - (String)\n    * `:submitted_by` - (String)\n
   \   * `:time_created` - (String)\n  * `:next_token` - (String)"
 :describe_services: "Calls the DescribeServices API operation.\n@param [Hash] options\n
-  \ * `:service_code_list` - (Array<String>) \n  * `:language` - (String) \n@return
+  \ * `:service_code_list` - (Array&lt;<String>) \n  * `:language` - (String) \n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:services` - (Array<Hash>)\n    * `:code` - (String)\n
   \   * `:name` - (String)\n    * `:categories` - (Array<Hash>)\n      * `:code` -
@@ -56,7 +56,7 @@
   method of the response object returns a hash with the following structure:\n\n  *
   `:severity_levels` - (Array<Hash>)\n    * `:code` - (String)\n    * `:name` - (String)"
 :describe_trusted_advisor_check_refresh_statuses: "Calls the DescribeTrustedAdvisorCheckRefreshStatuses
-  API operation.\n@param [Hash] options\n  * `:check_ids` - *required* - (Array<String>)
+  API operation.\n@param [Hash] options\n  * `:check_ids` - *required* - (Array&lt;<String>)
   \n@return [Core::Response] The `#data` method of the response object returns a hash
   with the following structure:\n\n  * `:statuses` - (Array<Hash>)\n    * `:check_id`
   - (String)\n    * `:status` - (String)\n    * `:millis_until_next_refreshable` -
@@ -75,7 +75,7 @@
   `:resource_id` - (String)\n      * `:is_suppressed` - (Boolean)\n      * `:metadata`
   - (Array<String>)"
 :describe_trusted_advisor_check_summaries: "Calls the DescribeTrustedAdvisorCheckSummaries
-  API operation.\n@param [Hash] options\n  * `:check_ids` - *required* - (Array<String>)
+  API operation.\n@param [Hash] options\n  * `:check_ids` - *required* - (Array&lt;<String>)
   \n@return [Core::Response] The `#data` method of the response object returns a hash
   with the following structure:\n\n  * `:summaries` - (Array<Hash>)\n    * `:check_id`
   - (String)\n    * `:timestamp` - (String)\n    * `:status` - (String)\n    * `:has_flagged_resources`

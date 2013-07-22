@@ -21,9 +21,9 @@
   in the Amazon Route 53 Developer Guide.\n  * `:change_batch` - *required* - (Hash)
   A complex type that contains an optional comment and the Changes element.\n    *
   `:comment` - (String) Optional: Any comments you want to include about a change
-  batch request.\n    * `:changes` - *required* - (Array<Hash>) A complex type that
-  contains one Change element for each resource record set that you want to create
-  or delete.\n   * `:Change` - (Hash) \n      * `:action` - *required* - (String)
+  batch request.\n    * `:changes` - *required* - (Array&lt;Hash>) A complex type
+  that contains one Change element for each resource record set that you want to create
+  or delete.\n    * `:Change` - (Hash) \n      * `:action` - *required* - (String)
   The action to perform. Valid values: CREATE | DELETE  Valid values include:\n        *
   `CREATE`\n        * `DELETE`\n      * `:resource_record_set` - *required* - (Hash)
   Information about the resource record set to create or delete.\n        * `:name`
@@ -57,10 +57,10 @@
   or (2) there is no primary resource record set. Valid values: PRIMARY | SECONDARY
   \ Valid values include:\n          * `PRIMARY`\n          * `SECONDARY`\n        *
   `:ttl` - (Integer) The cache time to live for the current resource record set.\n
-  \       * `:resource_records` - (Array<Hash>) A complex type that contains the resource
-  records for the current resource record set.\n       * `:ResourceRecord` - (Hash)
-  \n          * `:value` - *required* - (String) The value of the Value element for
-  the current resource record set.\n        * `:alias_target` - (Hash) Alias resource
+  \       * `:resource_records` - (Array&lt;Hash>) A complex type that contains the
+  resource records for the current resource record set.\n        * `:ResourceRecord`
+  - (Hash) \n          * `:value` - *required* - (String) The value of the Value element
+  for the current resource record set.\n        * `:alias_target` - (Hash) Alias resource
   record sets only: Information about the Elastic Load Balancing LoadBalancer to which
   you are redirecting traffic.\n          * `:hosted_zone_id` - *required* - (String)
   Alias resource record sets only: The value of the hosted zone ID, CanonicalHostedZoneNameId,

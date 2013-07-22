@@ -16,7 +16,7 @@
   Calls the ApplySecurityGroupsToLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:security_groups` - *required* - (Array<String>) A list of security group IDs to associate with your LoadBalancer in VPC. The security group IDs must be provided as the ID and not the security group name (For example, sg-1234).
+    * `:security_groups` - *required* - (Array&lt;<String>) A list of security group IDs to associate with your LoadBalancer in VPC. The security group IDs must be provided as the ID and not the security group name (For example, sg-1234).
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:security_groups` - (Array<String>)
@@ -24,7 +24,7 @@
   Calls the AttachLoadBalancerToSubnets API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:subnets` - *required* - (Array<String>) A list of subnet IDs to add for the LoadBalancer.
+    * `:subnets` - *required* - (Array&lt;<String>) A list of subnet IDs to add for the LoadBalancer.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:subnets` - (Array<String>)
@@ -64,15 +64,15 @@
   Calls the CreateLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within your set of LoadBalancers.
-    * `:listeners` - *required* - (Array<Hash>) A list of the following tuples: LoadBalancerPort, InstancePort, and Protocol.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of the following tuples: LoadBalancerPort, InstancePort, and Protocol.
       * `:protocol` - *required* - (String) Specifies the LoadBalancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the LoadBalancer.
       * `:load_balancer_port` - *required* - (Integer) Specifies the external LoadBalancer port number. This property cannot be modified for the life of the LoadBalancer.
       * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the LoadBalancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
       * `:instance_port` - *required* - (Integer) Specifies the TCP port on which the instance server is listening. This property cannot be modified for the life of the LoadBalancer.
       * `:ssl_certificate_id` - (String) The ARN string of the server certificate. To get the ARN of the server certificate, call the AWS Identity and Access Management UploadServerCertificate API.
-    * `:availability_zones` - (Array<String>) A list of Availability Zones. At least one Availability Zone must be specified. Specified Availability Zones must be in the same EC2 Region as the LoadBalancer. Traffic will be equally distributed across all zones. This list can be modified after the creation of the LoadBalancer.
-    * `:subnets` - (Array<String>) A list of subnet IDs in your VPC to attach to your LoadBalancer.
-    * `:security_groups` - (Array<String>) The security groups assigned to your LoadBalancer within your VPC.
+    * `:availability_zones` - (Array&lt;<String>) A list of Availability Zones. At least one Availability Zone must be specified. Specified Availability Zones must be in the same EC2 Region as the LoadBalancer. Traffic will be equally distributed across all zones. This list can be modified after the creation of the LoadBalancer.
+    * `:subnets` - (Array&lt;<String>) A list of subnet IDs in your VPC to attach to your LoadBalancer.
+    * `:security_groups` - (Array&lt;<String>) The security groups assigned to your LoadBalancer within your VPC.
     * `:scheme` - (String) The type of a LoadBalancer. This option is only available for LoadBalancers attached to a Amazon VPC. By default, Elastic Load Balancer creates an internet-facing load balancer with publicly resolvable DNS name that resolves to public IP addresses. Specify the value internal for this option to create an internal load balancer with a DNS name that resolves to private IP addresses.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -81,7 +81,7 @@
   Calls the CreateLoadBalancerListeners API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name of the new LoadBalancer. The name must be unique within your AWS account.
-    * `:listeners` - *required* - (Array<Hash>) A list of LoadBalancerPort, InstancePort, Protocol, and SSLCertificateId items.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of LoadBalancerPort, InstancePort, Protocol, and SSLCertificateId items.
       * `:protocol` - *required* - (String) Specifies the LoadBalancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the LoadBalancer.
       * `:load_balancer_port` - *required* - (Integer) Specifies the external LoadBalancer port number. This property cannot be modified for the life of the LoadBalancer.
       * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the LoadBalancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
@@ -94,7 +94,7 @@
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer for which the policy is being created. This name must be unique within the client AWS account.
     * `:policy_name` - *required* - (String) The name of the LoadBalancer policy being created. The name must be unique within the set of policies for this LoadBalancer.
     * `:policy_type_name` - *required* - (String) The name of the base policy type being used to create this policy. To get the list of policy types, use the DescribeLoadBalancerPolicyTypes action.
-    * `:policy_attributes` - (Array<Hash>) A list of attributes associated with the policy being created.
+    * `:policy_attributes` - (Array&lt;<Hash>) A list of attributes associated with the policy being created.
       * `:attribute_name` - (String) The name of the attribute associated with the policy.
       * `:attribute_value` - (String) The value of the attribute associated with the policy.
   @return [Core::Response]
@@ -107,7 +107,7 @@
   Calls the DeleteLoadBalancerListeners API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the LoadBalancer.
-    * `:load_balancer_ports` - *required* - (Array<Integer>) The client port number(s) of the LoadBalancerListener(s) to be removed.
+    * `:load_balancer_ports` - *required* - (Array&lt;<Integer>) The client port number(s) of the LoadBalancerListener(s) to be removed.
   @return [Core::Response]
 :delete_load_balancer_policy: |-
   Calls the DeleteLoadBalancerPolicy API operation.
@@ -119,7 +119,7 @@
   Calls the DeregisterInstancesFromLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:instances` - *required* - (Array<Hash>) A list of EC2 instance IDs consisting of all instances to be deregistered.
+    * `:instances` - *required* - (Array&lt;<Hash>) A list of EC2 instance IDs consisting of all instances to be deregistered.
       * `:instance_id` - (String) Provides an EC2 instance ID.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -129,7 +129,7 @@
   Calls the DescribeInstanceHealth API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:instances` - (Array<Hash>) A list of instance IDs whose states are being queried.
+    * `:instances` - (Array&lt;<Hash>) A list of instance IDs whose states are being queried.
       * `:instance_id` - (String) Provides an EC2 instance ID.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -142,7 +142,7 @@
   Calls the DescribeLoadBalancerPolicies API operation.
   @param [Hash] options
     * `:load_balancer_name` - (String) The mnemonic name associated with the LoadBalancer. If no name is specified, the operation returns the attributes of either all the sample policies pre-defined by Elastic Load Balancing or the specified sample polices.
-    * `:policy_names` - (Array<String>) The names of LoadBalancer policies you've created or Elastic Load Balancing sample policy names.
+    * `:policy_names` - (Array&lt;<String>) The names of LoadBalancer policies you've created or Elastic Load Balancing sample policy names.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:policy_descriptions` - (Array<Hash>)
@@ -154,7 +154,7 @@
 :describe_load_balancer_policy_types: |-
   Calls the DescribeLoadBalancerPolicyTypes API operation.
   @param [Hash] options
-    * `:policy_type_names` - (Array<String>) Specifies the name of the policy types.  If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service.
+    * `:policy_type_names` - (Array&lt;<String>) Specifies the name of the policy types.  If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:policy_type_descriptions` - (Array<Hash>)
@@ -169,7 +169,7 @@
 :describe_load_balancers: |-
   Calls the DescribeLoadBalancers API operation.
   @param [Hash] options
-    * `:load_balancer_names` - (Array<String>) A list of names associated with the LoadBalancers at creation time.
+    * `:load_balancer_names` - (Array&lt;<String>) A list of names associated with the LoadBalancers at creation time.
     * `:marker` - (String) An optional parameter reserved for future use.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -219,7 +219,7 @@
   Calls the DetachLoadBalancerFromSubnets API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer to be detached. The name must be unique within the client AWS account.
-    * `:subnets` - *required* - (Array<String>) A list of subnet IDs to remove from the set of configured subnets for the LoadBalancer.
+    * `:subnets` - *required* - (Array&lt;<String>) A list of subnet IDs to remove from the set of configured subnets for the LoadBalancer.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:subnets` - (Array<String>)
@@ -227,7 +227,7 @@
   Calls the DisableAvailabilityZonesForLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:availability_zones` - *required* - (Array<String>) A list of Availability Zones to be removed from the LoadBalancer. There must be at least one Availability Zone registered with a LoadBalancer at all times. The client cannot remove all the Availability Zones from a LoadBalancer. Specified Availability Zones must be in the same Region.
+    * `:availability_zones` - *required* - (Array&lt;<String>) A list of Availability Zones to be removed from the LoadBalancer. There must be at least one Availability Zone registered with a LoadBalancer at all times. The client cannot remove all the Availability Zones from a LoadBalancer. Specified Availability Zones must be in the same Region.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:availability_zones` - (Array<String>)
@@ -235,7 +235,7 @@
   Calls the EnableAvailabilityZonesForLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:availability_zones` - *required* - (Array<String>) A list of new Availability Zones for the LoadBalancer. Each Availability Zone must be in the same Region as the LoadBalancer.
+    * `:availability_zones` - *required* - (Array&lt;<String>) A list of new Availability Zones for the LoadBalancer. Each Availability Zone must be in the same Region as the LoadBalancer.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:availability_zones` - (Array<String>)
@@ -243,7 +243,7 @@
   Calls the RegisterInstancesWithLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
-    * `:instances` - *required* - (Array<Hash>) A list of instance IDs that should be registered with the LoadBalancer. When the instance is stopped and then restarted, the IP addresses associated with your instance changes. Elastic Load Balancing cannot recognize the new IP address, which prevents it from routing traffic to your instances. We recommend that you de-register your Amazon EC2 instances from your load balancer after you stop your instance, and then register the load balancer with your instance after you've restarted. To de-register your instances from load balancer, use DeregisterInstancesFromLoadBalancer action.
+    * `:instances` - *required* - (Array&lt;<Hash>) A list of instance IDs that should be registered with the LoadBalancer. When the instance is stopped and then restarted, the IP addresses associated with your instance changes. Elastic Load Balancing cannot recognize the new IP address, which prevents it from routing traffic to your instances. We recommend that you de-register your Amazon EC2 instances from your load balancer after you stop your instance, and then register the load balancer with your instance after you've restarted. To de-register your instances from load balancer, use DeregisterInstancesFromLoadBalancer action.
       * `:instance_id` - (String) Provides an EC2 instance ID.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -261,12 +261,12 @@
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the LoadBalancer. This name must be unique within the client AWS account.
     * `:instance_port` - *required* - (Integer) The port number associated with the back-end server.
-    * `:policy_names` - *required* - (Array<String>) List of policy names to be set.  If the list is empty, then all current polices are removed from the back-end server.
+    * `:policy_names` - *required* - (Array&lt;<String>) List of policy names to be set.  If the list is empty, then all current polices are removed from the back-end server.
   @return [Core::Response]
 :set_load_balancer_policies_of_listener: |-
   Calls the SetLoadBalancerPoliciesOfListener API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer. The name must be unique within the client AWS account.
     * `:load_balancer_port` - *required* - (Integer) The external port of the LoadBalancer with which this policy applies to.
-    * `:policy_names` - *required* - (Array<String>) List of policies to be associated with the listener. Currently this list can have at most one policy. If the list is empty, the current policy is removed from the listener.
+    * `:policy_names` - *required* - (Array&lt;<String>) List of policies to be associated with the listener. Currently this list can have at most one policy. If the list is empty, the current policy is removed from the listener.
   @return [Core::Response]
