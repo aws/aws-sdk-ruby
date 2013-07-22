@@ -82,8 +82,8 @@ module Seahorse
 
       describe '#body' do
 
-        it 'defaults to nil' do
-          Response.new.body.must_equal(nil)
+        it 'defaults to an empty string' do
+          Response.new.body.must_equal('')
         end
 
         it 'can be set in the constructor' do

@@ -23,7 +23,7 @@ module Seahorse
         @context = options[:context]
         @status_code = options[:status_code]
         @headers = options[:headers] || HeaderHash.new
-        @body = options[:body] || nil
+        @body = options[:body] || ''
       end
 
       # @return [RequestContext, nil]
