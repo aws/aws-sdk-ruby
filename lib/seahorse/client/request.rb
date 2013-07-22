@@ -20,7 +20,7 @@ module Seahorse
     class Request
 
       # @param [Handler] handler
-      # @param [Context] context
+      # @param [RequestContext] context
       def initialize(handler, context)
         @handler = handler
         @context = context
@@ -29,7 +29,7 @@ module Seahorse
       # @return [Handler]
       attr_reader :handler
 
-      # @return [Context]
+      # @return [RequestContext]
       attr_reader :context
 
       def on(event_name, &callback)

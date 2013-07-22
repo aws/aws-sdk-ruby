@@ -15,7 +15,7 @@ module Seahorse
   class Client
 
     autoload :Configuration, 'seahorse/client/configuration'
-    autoload :Context, 'seahorse/client/context'
+    autoload :RequestContext, 'seahorse/client/request_context'
     autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
@@ -135,9 +135,9 @@ module Seahorse
       raise ArgumentError, msg
     end
 
-    # @return [Context]
+    # @return [RequestContext]
     def context_for(operation_name, params)
-      Context.new(
+      RequestContext.new(
         operation_name: operation_name.to_s,
         params: params,
         config: config,

@@ -15,7 +15,7 @@ require 'stringio'
 
 module Seahorse
   class Client
-    class Context
+    class RequestContext
 
       # @option options [String] :operation_name (nil)
       # @option options [Hash] :params ({})

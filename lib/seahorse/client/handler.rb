@@ -23,7 +23,7 @@ module Seahorse
       # @return [Handler, nil]
       attr_reader :handler
 
-      # @param [Context] context
+      # @param [RequestContext] context
       # @return [Response]
       def call(context)
         @handler.call(context)

@@ -32,7 +32,7 @@ module Seahorse
       describe '#call' do
 
         def context
-          @context ||= Context.new
+          @context ||= RequestContext.new
         end
 
         it 'returns a response object' do

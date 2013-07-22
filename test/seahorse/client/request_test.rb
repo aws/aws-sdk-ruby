@@ -22,7 +22,7 @@ module Seahorse
       end
 
       def context
-        @context ||= Context.new
+        @context ||= RequestContext.new
       end
 
       def request

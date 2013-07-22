@@ -15,7 +15,7 @@ module Seahorse
   class Client
     class Response
 
-      # @option options [Context] :context (nil)
+      # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
       # @option options [HashHeader] :headers (HeaderHash.new)
       # @option options [String] :body (nil)
@@ -26,7 +26,7 @@ module Seahorse
         @body = options[:body] || nil
       end
 
-      # @return [Context, nil]
+      # @return [RequestContext, nil]
       attr_accessor :context
 
       # @return [Integer, nil]

@@ -15,7 +15,7 @@ module Seahorse
   class Client
     class NetHttpHandler < Handler
 
-      # @param [Context] context
+      # @param [RequestContext] context
       # @return [Response]
       def call(context)
         Response.new(context: context)

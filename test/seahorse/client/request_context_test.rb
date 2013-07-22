@@ -15,16 +15,16 @@ require 'test_helper'
 
 module Seahorse
   class Client
-    describe Context do
+    describe RequestContext do
 
       describe '#operation_name' do
 
         it 'defaults to nil' do
-          Context.new.operation_name.must_equal(nil)
+          RequestContext.new.operation_name.must_equal(nil)
         end
 
         it 'can be set in the constructor' do
-          context = Context.new(operation_name: 'operation_name')
+          context = RequestContext.new(operation_name: 'operation_name')
           context.operation_name.must_equal('operation_name')
         end
 
@@ -33,12 +33,12 @@ module Seahorse
       describe '#params' do
 
         it 'defaults to a empty hash' do
-          Context.new.params.must_equal({})
+          RequestContext.new.params.must_equal({})
         end
 
         it 'can be set in the constructor' do
           params = Object.new
-          Context.new(params: params).params.must_be_same_as(params)
+          RequestContext.new(params: params).params.must_be_same_as(params)
         end
 
       end
@@ -46,12 +46,12 @@ module Seahorse
       describe '#config' do
 
         it 'defaults to nil' do
-          Context.new.config.must_equal(nil)
+          RequestContext.new.config.must_equal(nil)
         end
 
         it 'can be set in the constructor' do
           config = Object.new
-          Context.new(config: config).config.must_be_same_as(config)
+          RequestContext.new(config: config).config.must_be_same_as(config)
         end
 
       end
@@ -61,19 +61,19 @@ module Seahorse
         it 'defaults to a new EventEmitter' do
           events = Object.new
           EventEmitter.stub(:new, events) do
-            Context.new.events.must_be_same_as(events)
+            RequestContext.new.events.must_be_same_as(events)
           end
         end
 
         it 'can be set in the constructor' do
           events = Object.new
-          context = Context.new(events: events)
+          context = RequestContext.new(events: events)
           context.events.must_be_same_as(events)
         end
 
         it 'can be set' do
           events = Object.new
-          context = Context.new
+          context = RequestContext.new
           context.events = events
           context.events.must_be_same_as(events)
         end
@@ -83,17 +83,17 @@ module Seahorse
       describe '#http_endpoint' do
 
         it 'defaults to nil' do
-          Context.new.http_endpoint.must_equal(nil)
+          RequestContext.new.http_endpoint.must_equal(nil)
         end
 
         it 'can be set in the constructor' do
           endpoint = Object.new
-          context = Context.new(http_endpoint: endpoint)
+          context = RequestContext.new(http_endpoint: endpoint)
           context.http_endpoint.must_be_same_as(endpoint)
         end
 
         it 'can be set' do
-          context = Context.new
+          context = RequestContext.new
           context.http_endpoint = 'endpoint'
           context.http_endpoint.must_equal('endpoint')
         end
@@ -103,15 +103,15 @@ module Seahorse
       describe '#http_method' do
 
         it 'defaults to GET' do
-          Context.new.http_method.must_equal('GET')
+          RequestContext.new.http_method.must_equal('GET')
         end
 
         it 'can be set in the constructor' do
-          Context.new(http_method: 'POST').http_method.must_equal('POST')
+          RequestContext.new(http_method: 'POST').http_method.must_equal('POST')
         end
 
         it 'can be set' do
-          context = Context.new
+          context = RequestContext.new
           context.http_method = 'PUT'
           context.http_method.must_equal('PUT')
         end
@@ -121,15 +121,15 @@ module Seahorse
       describe '#http_uri' do
 
         it 'defaults to /' do
-          Context.new.http_uri.must_equal('/')
+          RequestContext.new.http_uri.must_equal('/')
         end
 
         it 'can be set in the constructor' do
-          Context.new(http_uri: '/uri').http_uri.must_equal('/uri')
+          RequestContext.new(http_uri: '/uri').http_uri.must_equal('/uri')
         end
 
         it 'can be set' do
-          context = Context.new
+          context = RequestContext.new
           context.http_uri = '/uri'
           context.http_uri.must_equal('/uri')
         end
@@ -139,22 +139,22 @@ module Seahorse
       describe '#http_headers' do
 
         it 'is a HeaderHash' do
-          Context.new.http_headers.must_be_kind_of(HeaderHash)
+          RequestContext.new.http_headers.must_be_kind_of(HeaderHash)
         end
 
         it 'defaults to a empty hash' do
-          Context.new.http_headers.to_h.must_equal({})
+          RequestContext.new.http_headers.to_h.must_equal({})
         end
 
         it 'can be set in the constructor' do
           headers = HeaderHash.new
-          context = Context.new(http_headers: headers)
+          context = RequestContext.new(http_headers: headers)
           context.http_headers.must_be_same_as(headers)
         end
 
         it 'can be set' do
           headers = HeaderHash.new
-          context = Context.new
+          context = RequestContext.new
           context.http_headers = headers
           context.http_headers.must_be_same_as(headers)
         end
@@ -164,22 +164,22 @@ module Seahorse
       describe '#http_body' do
 
         it 'responds to #read and #rewind' do
-          Context.new.http_body.must_respond_to(:read)
-          Context.new.http_body.must_respond_to(:rewind)
+          RequestContext.new.http_body.must_respond_to(:read)
+          RequestContext.new.http_body.must_respond_to(:rewind)
         end
 
         it 'defaults to a empty object' do
-          Context.new.http_body.read.must_equal('')
+          RequestContext.new.http_body.read.must_equal('')
         end
 
         it 'can be set in the constructor' do
           body = Object.new
-          Context.new(http_body: body).http_body.must_be_same_as(body)
+          RequestContext.new(http_body: body).http_body.must_be_same_as(body)
         end
 
         it 'can be set' do
           body = Object.new
-          context = Context.new
+          context = RequestContext.new
           context.http_body = body
           context.http_body.must_be_same_as(body)
         end
