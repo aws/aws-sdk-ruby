@@ -43,8 +43,13 @@ module Seahorse
           handler.call(context).context.must_be_same_as(context)
         end
 
-      end
+        it 'emits :http_headers'
 
+        it 'emits :http_data'
+
+        it 'emits :http_done'
+
+      end
     end
   end
 end

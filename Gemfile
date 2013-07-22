@@ -20,6 +20,7 @@ gem 'rake', :require => false
 group :test do
   gem 'simplecov', :require => false
   gem 'minitest'
+  gem 'webmock'
 end
 
 group :docs do

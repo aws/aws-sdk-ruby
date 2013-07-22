@@ -16,4 +16,5 @@ if ENV['COVERAGE']
 end
 
 require 'minitest/autorun'
+require 'webmock/minitest'
 require 'seahorse-client'
