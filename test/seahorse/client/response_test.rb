@@ -37,63 +37,24 @@ module Seahorse
 
       end
 
-      describe '#status_code' do
+      describe '#http_request' do
 
-        it 'defaults to nil' do
-          Response.new.status_code.must_equal(nil)
-        end
-
-        it 'can be set in the constructor' do
-          Response.new(status_code: 200).status_code.must_equal(200)
-        end
-
-        it 'is mustable' do
-          resp = Response.new
-          resp.status_code = 500
-          resp.status_code.must_equal(500)
+        it 'returns the context #http_request' do
+          http_request = HttpRequest.new
+          context = RequestContext.new(http_request: http_request)
+          resp = Response.new(context: context)
+          resp.http_request.must_be_same_as(http_request)
         end
 
       end
 
-      describe '#headers' do
+      describe '#http_response' do
 
-        it 'is a HeaderHash' do
-          Response.new.headers.must_be_kind_of(HeaderHash)
-        end
-
-        it 'defaults to a empty hash' do
-          Response.new.headers.to_h.must_equal({})
-        end
-
-        it 'can be set in the constructor' do
-          headers = HeaderHash.new
-          response = Response.new(headers: headers)
-          response.headers.must_be_same_as(headers)
-        end
-
-        it 'can be set' do
-          headers = HeaderHash.new
-          response = Response.new
-          response.headers = headers
-          response.headers.must_be_same_as(headers)
-        end
-
-      end
-
-      describe '#body' do
-
-        it 'defaults to an empty string' do
-          Response.new.body.must_equal('')
-        end
-
-        it 'can be set in the constructor' do
-          Response.new(body: 'body').body.must_equal('body')
-        end
-
-        it 'can be set' do
-          response = Response.new
-          response.body = 'body'
-          response.body.must_equal('body')
+        it 'returns the context #http_response' do
+          http_response = HttpResponse.new
+          context = RequestContext.new(http_response: http_response)
+          resp = Response.new(context: context)
+          resp.http_response.must_be_same_as(http_response)
         end
 
       end

@@ -13,28 +13,25 @@
 
 module Seahorse
   class Client
-    class Response
+    class HttpResponse
 
-      # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
       # @option options [HashHeader] :headers (HeaderHash.new)
       # @option options [String] :body ('')
       def initialize(options = {})
-        @context = options[:context]
+        @status_code = options[:status_code]
+        @headers = options[:headers] || HeaderHash.new
+        @body = options[:body] || ''
       end
 
-      # @return [RequestContext, nil]
-      attr_accessor :context
+      # @return [Integer, nil]
+      attr_accessor :status_code
 
-      # @return [HttpRequest]
-      def http_request
-        @context.http_request
-      end
+      # @return [HeaderHash]
+      attr_accessor :headers
 
-      # @return [HttpResponse]
-      def http_response
-        @context.http_response
-      end
+      # @return [String]
+      attr_accessor :body
 
     end
   end
