@@ -27,7 +27,7 @@ module Seahorse
           HttpResponse.new(status_code: 200).status_code.must_equal(200)
         end
 
-        it 'is mustable' do
+        it 'is mutable' do
           resp = HttpResponse.new
           resp.status_code = 500
           resp.status_code.must_equal(500)
