@@ -117,6 +117,28 @@ module Seahorse
 
       end
 
+      describe '#key?' do
+
+        it 'returns true if the header has been set' do
+          hash['foo'] = 'bar'
+          hash.key?('foo').must_equal(true)
+        end
+
+        it 'returns false if the header has not been set' do
+          hash.key?('foo').must_equal(false)
+        end
+
+        it 'is aliased as #has_key?' do
+          hash['foo'] = 'bar'
+          hash.has_key?('foo').must_equal(true)
+        end
+
+        it 'is aliased as #include?' do
+          hash['foo'] = 'bar'
+          hash.include?('foo').must_equal(true)
+        end
+
+      end
     end
   end
 end

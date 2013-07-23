@@ -24,6 +24,7 @@ module Seahorse
     autoload :HttpHandler, 'seahorse/client/http_handler'
     autoload :HttpRequest, 'seahorse/client/http_request'
     autoload :HttpResponse, 'seahorse/client/http_response'
+    autoload :NetHttpConnectionPool, 'seahorse/client/net_http_connection_pool'
     autoload :NetHttpHandler, 'seahorse/client/net_http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
