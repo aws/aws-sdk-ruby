@@ -21,24 +21,16 @@ module Seahorse
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
       # @option options [EventEmitter] :events (EventEmitter.new)
-      # @option options [Endpoint] :http_endpoint (nil)
-      # @option options [String] :http_method ('GET') The HTTP method, e.g.
-      #   `GET`, `PUT`, `POST`, `HEAD`, `DELETE`, etc.
-      # @option options [String] :http_path ('/') The HTTP request uri path
-      #   including the query string, e.g. `/abc?mno=xyz'
-      # @option options [HeaderHash] :http_headers ({})
-      # @option options [IO] :http_body (StringIO.new) Must respond to #read
+      # @option options [HttpRequest] :http_request (HttpRequest.new)
+      # @option options [HttpResponse] :http_response (HttpResponse.new)
       #   and #rewind.
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @params = options[:params] || {}
         @config = options[:config]
         @events = options[:events] || EventEmitter.new
-        @http_endpoint = options[:http_endpoint]
-        @http_method = options[:http_method] || 'GET'
-        @http_path = options[:http_path] || '/'
-        @http_headers = options[:http_headers] || HeaderHash.new
-        @http_body = options[:http_body] || StringIO.new
+        @http_request = options[:http_request] || HttpRequest.new
+        @http_response = options[:http_response] || HttpResponse.new
       end
 
       # @return [String] Name of the API operation called.
@@ -53,27 +45,11 @@ module Seahorse
       # @return [EventEmitter]
       attr_accessor :events
 
-      # @return [Endpoint] The HTTP request endpoint (scheme, host, port).
-      attr_accessor :http_endpoint
-
-      # @return [String] The HTTP request verb (e.g. `GET`, `PUT`, `POST`, etc)
-      attr_accessor :http_method
-
-      # @return [String] The request uri, e.g. '/foo/bar?abc=xyz'.
-      attr_accessor :http_path
-
-      # @return [HeaderHash] The HTTP request headers.
-      attr_accessor :http_headers
-
-      # @return [IO] The HTTP request payload.  Must respond to #read
-      #   and #rewind.
-      attr_accessor :http_body
-
       # @return [HttpRequest]
-      def http_request
-        args = [http_endpoint, http_method, http_path, http_headers, http_body]
-        HttpRequest.new(*args)
-      end
+      attr_accessor :http_request
+
+      # @return [HttpResponse]
+      attr_accessor :http_response
 
     end
   end

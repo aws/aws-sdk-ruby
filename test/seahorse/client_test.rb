@@ -141,7 +141,7 @@ module Seahorse
 
         it 'populates the context with the endpoint' do
           request = client.build_request('operation')
-          request.context.http_endpoint.must_be_same_as(client.endpoint)
+          request.context.http_request.endpoint.must_be_same_as(client.endpoint)
         end
 
         it 'populates the context with the configuration' do

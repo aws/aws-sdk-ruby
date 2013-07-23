@@ -80,144 +80,34 @@ module Seahorse
 
       end
 
-      describe '#http_endpoint' do
-
-        it 'defaults to nil' do
-          RequestContext.new.http_endpoint.must_equal(nil)
-        end
-
-        it 'can be set in the constructor' do
-          endpoint = Object.new
-          context = RequestContext.new(http_endpoint: endpoint)
-          context.http_endpoint.must_be_same_as(endpoint)
-        end
-
-        it 'can be set' do
-          context = RequestContext.new
-          context.http_endpoint = 'endpoint'
-          context.http_endpoint.must_equal('endpoint')
-        end
-
-      end
-
-      describe '#http_method' do
-
-        it 'defaults to GET' do
-          RequestContext.new.http_method.must_equal('GET')
-        end
-
-        it 'can be set in the constructor' do
-          RequestContext.new(http_method: 'POST').http_method.must_equal('POST')
-        end
-
-        it 'can be set' do
-          context = RequestContext.new
-          context.http_method = 'PUT'
-          context.http_method.must_equal('PUT')
-        end
-
-      end
-
-      describe '#http_path' do
-
-        it 'defaults to /' do
-          RequestContext.new.http_path.must_equal('/')
-        end
-
-        it 'can be set in the constructor' do
-          RequestContext.new(http_path: '/path').http_path.must_equal('/path')
-        end
-
-        it 'can be set' do
-          context = RequestContext.new
-          context.http_path = '/path'
-          context.http_path.must_equal('/path')
-        end
-
-      end
-
-      describe '#http_headers' do
-
-        it 'is a HeaderHash' do
-          RequestContext.new.http_headers.must_be_kind_of(HeaderHash)
-        end
-
-        it 'defaults to a empty hash' do
-          RequestContext.new.http_headers.to_h.must_equal({})
-        end
-
-        it 'can be set in the constructor' do
-          headers = HeaderHash.new
-          context = RequestContext.new(http_headers: headers)
-          context.http_headers.must_be_same_as(headers)
-        end
-
-        it 'can be set' do
-          headers = HeaderHash.new
-          context = RequestContext.new
-          context.http_headers = headers
-          context.http_headers.must_be_same_as(headers)
-        end
-
-      end
-
-      describe '#http_body' do
-
-        it 'responds to #read and #rewind' do
-          RequestContext.new.http_body.must_respond_to(:read)
-          RequestContext.new.http_body.must_respond_to(:rewind)
-        end
-
-        it 'defaults to a empty object' do
-          RequestContext.new.http_body.read.must_equal('')
-        end
-
-        it 'can be set in the constructor' do
-          body = Object.new
-          RequestContext.new(http_body: body).http_body.must_be_same_as(body)
-        end
-
-        it 'can be set' do
-          body = Object.new
-          context = RequestContext.new
-          context.http_body = body
-          context.http_body.must_be_same_as(body)
-        end
-
-      end
-
       describe '#http_request' do
 
-        def context
-          @context ||= RequestContext.new(:http_endpoint => 'endpoint')
+        it 'defaults to a HttpRequest object' do
+          RequestContext.new.http_request.must_be_kind_of(HttpRequest)
         end
 
-        it 'returns a HttpRequest object' do
-          context.http_request.must_be_kind_of(HttpRequest)
+        it 'can be set in the constructor' do
+          http_req = Object.new
+          context = RequestContext.new(http_request: http_req)
+          context.http_request.must_be_same_as(http_req)
         end
-
-        it 'populates the #endpoint' do
-          context.http_request.endpoint.must_be_same_as(context.http_endpoint)
-        end
-
-        it 'populates the #http_method' do
-          context.http_request.http_method.must_be_same_as(context.http_method)
-        end
-
-        it 'populates the #path' do
-          context.http_request.path.must_be_same_as(context.http_path)
-        end
-
-        it 'populates the #headers' do
-          context.http_request.headers.must_be_same_as(context.http_headers)
-        end
-
-        it 'populates the #body' do
-          context.http_request.body.must_be_same_as(context.http_body)
-        end
-
 
       end
+
+      describe '#http_response' do
+
+        it 'defaults to a httpResponse object' do
+          RequestContext.new.http_response.must_be_kind_of(HttpResponse)
+        end
+
+        it 'can be set in the constructor' do
+          http_resp = Object.new
+          context = RequestContext.new(http_response: http_resp)
+          context.http_response.must_be_same_as(http_resp)
+        end
+
+      end
+
     end
   end
 end

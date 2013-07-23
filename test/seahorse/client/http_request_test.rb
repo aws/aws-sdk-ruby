@@ -19,34 +19,73 @@ module Seahorse
     describe HttpRequest do
 
       def request
-        @endpoint = Endpoint.new('http://abc.xyz')
-        @http_method = 'GET'
-        @path = '/path?querystring'
-        @headers = { 'Header' => 'Value' }
-        @body = StringIO.new('body')
-        HttpRequest.new(@endpoint, @http_method, @path, @headers, @body)
+        @request ||= HttpRequest.new
       end
 
-      it 'provides access the endpoint' do
-        request.endpoint.must_be_same_as(@endpoint)
+      describe '#endpoint' do
+
+        it 'defaults to nil' do
+          HttpRequest.new.endpoint.must_equal(nil)
+        end
+
+        it 'can be set in the constructor' do
+          endpoint = Object.new
+          req = HttpRequest.new(endpoint: endpoint)
+          req.endpoint.must_equal(endpoint)
+        end
+
       end
 
-      it 'provides access the http_method' do
-        request.http_method.must_be_same_as(@http_method)
+      describe '#http_method' do
+
+        it 'defaults to GET' do
+          HttpRequest.new.http_method.must_equal('GET')
+        end
+
+        it 'can be set in the constructor' do
+          req = HttpRequest.new(http_method: 'POST')
+          req.http_method.must_equal('POST')
+        end
+
       end
 
-      it 'provides access the path' do
-        request.path.must_be_same_as(@path)
+      describe '#path' do
+
+        it 'defaults to GET' do
+          HttpRequest.new.path.must_equal('/')
+        end
+
+        it 'can be set in the constructor' do
+          req = HttpRequest.new(path: '/path?abc=xyz')
+          req.path.must_equal('/path?abc=xyz')
+        end
+
       end
 
-      it 'provides access the headers' do
-        request.headers.must_be_same_as(@headers)
+      describe '#headers' do
+
+        it 'defaults to a HeaderHash' do
+          HttpRequest.new.headers.must_be_kind_of(HeaderHash)
+        end
+
+        it 'defaults to a empty hash' do
+          HttpRequest.new.headers.to_h.must_equal({})
+        end
+
       end
 
-      it 'provides access the body' do
-        request.body.must_be_same_as(@body)
-      end
+      describe '#body' do
 
+        it 'defaults to an empty IO-like object' do
+          HttpRequest.new.body.read.must_equal('')
+        end
+
+        it 'can be set in the constructor' do
+          body = StringIO.new('body')
+          HttpRequest.new(body: body).body.must_be_same_as(body)
+        end
+
+      end
     end
   end
 end

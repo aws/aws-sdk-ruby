@@ -23,6 +23,7 @@ module Seahorse
     autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :HttpHandler, 'seahorse/client/http_handler'
     autoload :HttpRequest, 'seahorse/client/http_request'
+    autoload :HttpResponse, 'seahorse/client/http_response'
     autoload :NetHttpHandler, 'seahorse/client/net_http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
@@ -143,7 +144,8 @@ module Seahorse
         operation_name: operation_name.to_s,
         params: params,
         config: config,
-        http_endpoint: endpoint)
+        http_request: HttpRequest.new(endpoint: endpoint),
+      )
     end
 
     # @return [String] Returns the default endpoint for the client.

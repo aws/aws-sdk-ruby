@@ -11,39 +11,41 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'uri'
+require 'stringio'
 
 module Seahorse
   class Client
     class HttpRequest
 
-      # @param [Endpoint] endpoint
-      # @param [String] http_method
-      # @param [String] path
-      # @param [HeaderHash] headers
-      # @param [IO] body
-      def initialize(endpoint, http_method, path, headers, body)
-        @endpoint = endpoint
-        @http_method = http_method
-        @path = path
-        @headers = headers
-        @body = body
+      # @option options [Endpoint] :endpoint (nil)
+      # @option options [String] :http_method ('GET')
+      # @option options [String] :path ('/')
+      # @option options [Hash] :headers (HeaderHash.new)
+      # @option options [#read, #rewind] :body (StringIO.new) Must be an
+      #   IO-like object that responds to `#read` and `#rewind`.
+      def initialize(options = {})
+        @endpoint = options[:endpoint]
+        @http_method = options[:http_method] || 'GET'
+        @path = options[:path] || '/'
+        @headers = options[:headers] || HeaderHash.new
+        @body = options[:body] || StringIO.new('')
       end
 
-      # @return [Endpoint]
-      attr_reader :endpoint
+      # @return [Endpoint, nil]
+      attr_accessor :endpoint
 
       # @return [String]
-      attr_reader :http_method
+      attr_accessor :http_method
 
       # @return [String]
-      attr_reader :path
+      attr_accessor :path
 
       # @return [HeaderHash]
-      attr_reader :headers
+      attr_accessor :headers
 
-      # @return [IO]
-      attr_reader :body
+      # @return [#read, #rewind] An IO-like object that responds to `#read`
+      #  and `#rewind`.
+      attr_accessor :body
 
     end
   end
