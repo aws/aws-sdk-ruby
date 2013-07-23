@@ -200,7 +200,6 @@
     - :required
     AttributeValue:
     - :string
-    - :required
   :outputs:
     :children:
       SetSubscriptionAttributesResult:
@@ -216,7 +215,6 @@
     - :required
     AttributeValue:
     - :string
-    - :required
   :outputs:
     :children:
       SetTopicAttributesResult:
@@ -232,7 +230,6 @@
     - :required
     Endpoint:
     - :string
-    - :required
   :outputs:
     :children:
       SubscribeResult:
