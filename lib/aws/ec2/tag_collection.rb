@@ -50,7 +50,7 @@ module AWS
       #
       # @example tagging with names (keys) and values
       #
-      #   ec2.tags.create(instance, 'stage', 'production')
+      #   ec2.tags.create(instance, 'stage', :value => 'production')
       #
       # @param [Object] resource The item to tag.  This should be a taggable
       #   EC2 resource, like an instance, security group, etc.
