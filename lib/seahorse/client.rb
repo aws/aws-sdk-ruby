@@ -106,7 +106,7 @@ module Seahorse
     # @return [Handler]
     def build_handler(options, plugins)
       handler_list(plugins, options).inject(nil) do |stack, handler|
-        handler.new(stack)
+        handler.new(@config, stack)
       end
     end
 

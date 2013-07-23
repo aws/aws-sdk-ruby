@@ -15,10 +15,15 @@ module Seahorse
   class Client
     class Handler
 
+      # @param [Configuration] config
       # @param [Handler] handler (nil)
-      def initialize(handler = nil)
+      def initialize(config, handler = nil)
+        @config = config
         @handler = handler
       end
+
+      # @return [Configuration]
+      attr_reader :config
 
       # @return [Handler, nil]
       attr_reader :handler

@@ -108,6 +108,10 @@ module Seahorse
           request.handler.must_be_kind_of(Client::NetHttpHandler)
         end
 
+        it 'constructs the hander with the client configuration' do
+          request.handler.config.must_be_same_as(client.config)
+        end
+
         it 'accepts the handler as a client option' do
           handler = Class.new(Client::Handler)
           client = client_class.new(:http_handler => handler)
