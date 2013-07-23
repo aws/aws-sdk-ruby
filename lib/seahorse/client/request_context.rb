@@ -51,12 +51,14 @@ module Seahorse
       # @return [HttpResponse]
       attr_accessor :http_response
 
-      # @see EventListener#on
-      def on(event_name, &callback)
-        @events.on(event_name, &callback)
+      # Registers an event listener for the named event.  The listener
+      # can be an argument that responds to `#call` or a block.
+      # @see EventEmitter#on
+      def on(event_name, listener = nil, &callback)
+        @events.on(event_name, listener, &callback)
       end
 
-      # @see EventListener#emit
+      # @see EventEmitter#emit
       def emit(event_name, *args)
         @events.emit(event_name, *args)
       end
