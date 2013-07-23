@@ -137,7 +137,7 @@
     * `:stack_id` - *required* - (String) The stack ID.
     * `:layer_ids` - *required* - (Array&lt;<String>) An array that contains the instance layer IDs.
     * `:instance_type` - *required* - (String) The instance type. OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
-    * `:auto_scaling_type` - (String) The instance auto scaling type, which has three possible values: AlwaysRunning:  A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics. To use load-based auto scaling, you must enable it for the instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.  Valid values include:
+    * `:auto_scaling_type` - (String) The instance auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics. To use load-based auto scaling, you must enable it for the instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.  Valid values include:
       * `load`
       * `timer`
     * `:hostname` - (String) The instance host name.
@@ -276,7 +276,7 @@
   Calls the DescribeApps API operation.
   @param [Hash] options
     * `:stack_id` - (String) The app stack ID. If you use this parameter, DescribeApps returns a description of the apps in the specified stack.
-    * `:app_ids` - (Array&lt;<String>) An array of app IDs for the apps to be described. If you use this parameter, DescribeApps returns a description of the specified apps.  Otherwise, it returns a description of every app.
+    * `:app_ids` - (Array&lt;<String>) An array of app IDs for the apps to be described. If you use this parameter, DescribeApps returns a description of the specified apps. Otherwise, it returns a description of every app.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:apps` - (Array<Hash>)
@@ -569,7 +569,7 @@
   Calls the DescribeVolumes API operation.
   @param [Hash] options
     * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified instance.
-    * `:raid_array_id` - (String) The RAID array ID.  If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified RAID array.
+    * `:raid_array_id` - (String) The RAID array ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified RAID array.
     * `:volume_ids` - (Array&lt;<String>) Am array of volume IDs. If you use this parameter, DescribeVolumes returns descriptions of the specified volumes. Otherwise, it returns a description of every volume.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 

@@ -123,7 +123,7 @@
   - Determines whether the key attribute is HASH or RANGE. For a primary key that
   consists of a hash attribute, you must specify exactly one element with a KeyType
   of HASH. For a primary key that consists of hash and range attributes, you must
-  specify exactly two elements, in this order:  The first element must have a KeyType
+  specify exactly two elements, in this order: The first element must have a KeyType
   of HASH, and the second element must have a KeyType of RANGE. For more information,
   see Specifying the Primary Key .\n    * `:attribute_name` - *required* - (String)
   Represents the name of a key attribute.\n    * `:key_type` - *required* - (String)
@@ -155,10 +155,10 @@
   same attribute into two different indexes, this counts as two distinct attributes
   when determining the total.\n  * `:provisioned_throughput` - *required* - (Hash)
   \n    * `:read_capacity_units` - *required* - (Integer) The maximum number of strongly
-  consistent reads consumed per second before  returns a ThrottlingException. For
-  more information, see Specifying Read and Write Requirements .\n    * `:write_capacity_units`
+  consistent reads consumed per second before returns a ThrottlingException. For more
+  information, see Specifying Read and Write Requirements .\n    * `:write_capacity_units`
   - *required* - (Integer) The maximum number of writes consumed per second before
-  \ returns a ThrottlingException. For more information, see Specifying Read and Write
+  returns a ThrottlingException. For more information, see Specifying Read and Write
   Requirements .\n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `:table_description` - (Hash)\n
   \   * `:attribute_definitions` - (Array<Hash>)\n      * `:attribute_name` - (String)\n
@@ -193,7 +193,7 @@
         * `:ss` - (Array&lt;<String>) Represents a String set data type
         * `:ns` - (Array&lt;<String>) Represents a Number set data type
         * `:bs` - (Array&lt;<String>) Represents a Binary set data type
-      * `:exists` - (Boolean) Causes  to evaluate the value before attempting a conditional operation: If Exists is  `true` ,  will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` ,  assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself,  assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
+      * `:exists` - (Boolean) Causes to evaluate the value before attempting a conditional operation: If Exists is  `true` , will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
     * `:return_values` - (String) Use ReturnValues if you want to get the item attributes as they appeared before they were deleted. For DeleteItem, the valid values are: NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This is the default for ReturnValues.) ALL_OLD - The content of the old item is returned.  Valid values include:
       * `NONE`
       * `ALL_OLD`
@@ -339,7 +339,7 @@
         * `:ss` - (Array&lt;<String>) Represents a String set data type
         * `:ns` - (Array&lt;<String>) Represents a Number set data type
         * `:bs` - (Array&lt;<String>) Represents a Binary set data type
-      * `:exists` - (Boolean) Causes  to evaluate the value before attempting a conditional operation: If Exists is  `true` ,  will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` ,  assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself,  assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
+      * `:exists` - (Boolean) Causes to evaluate the value before attempting a conditional operation: If Exists is  `true` , will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
     * `:return_values` - (String) Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are: NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This is the default for ReturnValues.) ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.  Valid values include:
       * `NONE`
       * `ALL_OLD`
@@ -380,7 +380,7 @@
   attributes, specific item attributes, the count of matching items, or in the case
   of an index, some or all of the attributes projected into the index. ALL_ATTRIBUTES:
   Returns all of the item attributes. For a table, this is the default. For an index,
-  this mode causes  to fetch the full item from the table for each matching item in
+  this mode causes to fetch the full item from the table for each matching item in
   the index. If the index is configured to project all item attributes, the matching
   items will not be fetched from the table. Fetching items from the table incurs additional
   throughput cost and latency. ALL_PROJECTED_ATTRIBUTES: Allowed only when querying
@@ -389,7 +389,7 @@
   ALL_ATTRIBUTES. COUNT: Returns the number of matching items, rather than the matching
   items themselves. SPECIFIC_ATTRIBUTES : Returns only the attributes listed in AttributesToGet.
   This is equivalent to specifying AttributesToGet without specifying any value for
-  Select. When neither Select nor AttributesToGet  are specified, defaults to ALL_ATTRIBUTES
+  Select. When neither Select nor AttributesToGet are specified, defaults to ALL_ATTRIBUTES
   when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You
   cannot use both Select and AttributesToGet together in a single request, unless
   the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying
@@ -415,138 +415,139 @@
   comparisons for greater than, equals, or less than are based on ASCII character
   code values. For example, a is greater than A, and aa is greater than B. For a list
   of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
-  For Binary,  treats each byte of the binary data as unsigned when it compares binary
+  For Binary, treats each byte of the binary data as unsigned when it compares binary
   values, for example when evaluating query expressions. ComparisonOperator - A comparator
   for evaluating attributes. For example, equals, greater than, less than, etc. For
   information on specifying data types in JSON, see JSON Data Format . The following
   are descriptions of each comparison operator. EQ : Equal. AttributeValueList can
   contain only one AttributeValue of type String, Number, or Binary (not a set). If
   an item contains an AttributeValue of a different type than the one specified in
-  the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
   LE : Less than or equal. AttributeValueList can contain only one AttributeValue
   of type String, Number, or Binary (not a set). If an item contains an AttributeValue
   of a different type than the one specified in the request, the value does not match.
-  For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does
-  not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than. AttributeValueList
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than. AttributeValueList
   can contain only one AttributeValue of type String, Number, or Binary (not a set).
   If an item contains an AttributeValue of a different type than the one specified
-  in the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}.
-  GE : Greater than or equal. AttributeValueList can contain only one AttributeValue
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
+  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
+  an AttributeValue of a different type than the one specified in the request, the
+  value does not match. For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`.
+  Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater
+  than. AttributeValueList can contain only one AttributeValue of type String, Number,
+  or Binary (not a set). If an item contains an AttributeValue of a different type
+  than the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. BEGINS_WITH : checks for a prefix. AttributeValueList can contain
+  only one AttributeValue of type String or Binary (not a Number or a set). The target
+  attribute of the comparison must be a String or Binary (not a Number or a set).
+  BETWEEN : Greater than or equal to the first value, and less than or equal to the
+  second value. AttributeValueList must contain two AttributeValue elements of the
+  same type, either String, Number, or Binary (not a set). A target attribute matches
+  if the target value is greater than, or equal to, the first element and less than,
+  or equal to, the second element. If an item contains an AttributeValue of a different
+  type than the one specified in the request, the value does not match. For example,
+  `{\"S\":\"6\"}` does not compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does
+  not compare to {\"NS\":[\"6\", \"2\", \"1\"]}\n    * `:attribute_value_list` - (Array&lt;<Hash>)
+  Represents one or more values to evaluate against the supplied attribute. This list
+  contains exactly one value, except for a BETWEEN or IN comparison, in which case
+  the list contains two values. For type Number, value comparisons are numeric. String
+  value comparisons for greater than, equals, or less than are based on ASCII character
+  code values. For example, a is greater than A, and aa is greater than B. For a list
+  of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
+  For Binary, treats each byte of the binary data as unsigned when it compares binary
+  values, for example when evaluating query expressions.\n      * `:s` - (String)
+  Represents a String data type\n      * `:n` - (String) Represents a Number data
+  type\n      * `:b` - (String) Represents a Binary data type\n      * `:ss` - (Array&lt;<String>)
+  Represents a String set data type\n      * `:ns` - (Array&lt;<String>) Represents
+  a Number set data type\n      * `:bs` - (Array&lt;<String>) Represents a Binary
+  set data type\n    * `:comparison_operator` - *required* - (String) Represents a
+  comparator for evaluating attributes. For example, equals, greater than, less than,
+  etc. For information on specifying data types in JSON, see JSON Data Format . The
+  following are descriptions of each comparison operator. EQ : Equal. AttributeValueList
+  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\",
+  \"1\"]}. NE : Not equal. AttributeValueList can contain only one AttributeValue
   of type String, Number, or Binary (not a set). If an item contains an AttributeValue
   of a different type than the one specified in the request, the value does not match.
-  For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does
-  not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater than. AttributeValueList
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not equal {\"NS\":[\"6\", \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList
   can contain only one AttributeValue of type String, Number, or Binary (not a set).
   If an item contains an AttributeValue of a different type than the one specified
-  in the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}.
-  BEGINS_WITH : checks for a prefix. AttributeValueList can contain only one AttributeValue
-  of type String or Binary (not a Number or a set). The target attribute of the comparison
-  must be a String or Binary (not a Number or a set). BETWEEN : Greater than or equal
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. LT : Less than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GE : Greater than or equal.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If an item contains an AttributeValue of a different type than
+  the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. NOT_NULL : The attribute exists.
+  NULL : The attribute does not exist. CONTAINS : checks for a subsequence, or value
+  in a set. AttributeValueList can contain only one AttributeValue of type String,
+  Number, or Binary (not a set). If the target attribute of the comparison is a String,
+  then the operation checks for a substring match. If the target attribute of the
+  comparison is Binary, then the operation looks for a subsequence of the target that
+  matches the input. If the target attribute of the comparison is a set (\"SS\", \"NS\",
+  or \"BS\"), then the operation checks for a member of the set (not as a substring).
+  NOT_CONTAINS : checks for absence of a subsequence, or absence of a value in a set.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If the target attribute of the comparison is a String, then
+  the operation checks for the absence of a substring match. If the target attribute
+  of the comparison is Binary, then the operation checks for the absence of a subsequence
+  of the target that matches the input. If the target attribute of the comparison
+  is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks for the absence
+  of a member of the set (not as a substring). BEGINS_WITH : checks for a prefix.
+  AttributeValueList can contain only one AttributeValue of type String or Binary
+  (not a Number or a set). The target attribute of the comparison must be a String
+  or Binary (not a Number or a set). IN : checks for exact matches. AttributeValueList
+  can contain more than one AttributeValue of type String, Number, or Binary (not
+  a set). The target attribute of the comparison must be of the same type and exact
+  value to match. A String never matches a String set. BETWEEN : Greater than or equal
   to the first value, and less than or equal to the second value. AttributeValueList
   must contain two AttributeValue elements of the same type, either String, Number,
   or Binary (not a set). A target attribute matches if the target value is greater
   than, or equal to, the first element and less than, or equal to, the second element.
   If an item contains an AttributeValue of a different type than the one specified
-  in the request, the value does not match. For example, {\"S\":\"6\"} does not compare
-  to {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\",
-  \"1\"]}\n    * `:attribute_value_list` - (Array&lt;<Hash>) Represents one or more
-  values to evaluate against the supplied attribute. This list contains exactly one
-  value, except for a BETWEEN or IN comparison, in which case the list contains two
-  values. For type Number, value comparisons are numeric. String value comparisons
-  for greater than, equals, or less than are based on ASCII character code values.
-  For example, a is greater than A, and aa is greater than B. For a list of code values,
-  see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters. For Binary,  treats
-  each byte of the binary data as unsigned when it compares binary values, for example
-  when evaluating query expressions.\n      * `:s` - (String) Represents a String
-  data type\n      * `:n` - (String) Represents a Number data type\n      * `:b` -
-  (String) Represents a Binary data type\n      * `:ss` - (Array&lt;<String>) Represents
-  a String set data type\n      * `:ns` - (Array&lt;<String>) Represents a Number
-  set data type\n      * `:bs` - (Array&lt;<String>) Represents a Binary set data
-  type\n    * `:comparison_operator` - *required* - (String) Represents a comparator
-  for evaluating attributes. For example, equals, greater than, less than, etc.   For
-  information on specifying data types in JSON, see JSON Data Format . The following
-  are descriptions of each comparison operator. EQ : Equal. AttributeValueList can
-  contain only one AttributeValue of type String, Number, or Binary (not a set). If
-  an item contains an AttributeValue of a different type than the one specified in
-  the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
-  NE : Not equal. AttributeValueList can contain only one AttributeValue of type String,
-  Number, or Binary (not a set). If an item contains an AttributeValue of a different
-  type than the one specified in the request, the value does not match. For example,
-  {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\",
-  \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can contain only one
-  AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
-  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist.
-  CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for a substring
-  match. If the target attribute of the comparison is Binary, then the operation looks
-  for a subsequence of the target that matches the input. If the target attribute
-  of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks
-  for a member of the set (not as a substring). NOT_CONTAINS : checks for absence
-  of a subsequence, or absence of a value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for the absence
-  of a substring match. If the target attribute of the comparison is Binary, then
-  the operation checks for the absence of a subsequence of the target that matches
-  the input. If the target attribute of the comparison is a set (\"SS\", \"NS\", or
-  \"BS\"), then the operation checks for the absence of a member of the set (not as
-  a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain
-  only one AttributeValue of type String or Binary (not a Number or a set). The target
-  attribute of the comparison must be a String or Binary (not a Number or a set).
-  IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue
-  of type String, Number, or Binary (not a set). The target attribute of the comparison
-  must be of the same type and exact value to match. A String never matches a String
-  set. BETWEEN : Greater than or equal to the first value, and less than or equal
-  to the second value. AttributeValueList must contain two AttributeValue elements
-  of the same type, either String, Number, or Binary (not a set). A target attribute
-  matches if the target value is greater than, or equal to, the first element and
-  less than, or equal to, the second element. If an item contains an AttributeValue
-  of a different type than the one specified in the request, the value does not match.
-  For example, {\"S\":\"6\"} does not compare to {\"N\":\"6\"}. Also, {\"N\":\"6\"}
-  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}  Valid values include:\n      *
-  `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      * `LT`\n      * `GE`\n      *
-  `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n
-  \     * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n  * `:scan_index_forward` - (Boolean)
-  Specifies ascending ( `true` ) or descending ( `false` ) traversal of the index.
-  \ returns results reflecting the requested order determined by the range key. If
-  the data type is Number, the results are returned in numeric order. For String,
-  the results are returned in order of ASCII character code values. For Binary, Amazon
-  DynamoDB treats each byte of the binary data as unsigned when it compares binary
-  values. If ScanIndexForward is not specified, the results are returned in ascending
-  order.\n  * `:exclusive_start_key` - (Hash&lt;<String,Hash>) \n    * `:s` - (String)
-  Represents a String data type\n    * `:n` - (String) Represents a Number data type\n
-  \   * `:b` - (String) Represents a Binary data type\n    * `:ss` - (Array&lt;<String>)
-  Represents a String set data type\n    * `:ns` - (Array&lt;<String>) Represents
-  a Number set data type\n    * `:bs` - (Array&lt;<String>) Represents a Binary set
-  data type\n  * `:return_consumed_capacity` - (String) Valid values include:\n    *
-  `TOTAL`\n    * `NONE`\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:member` - (Hash<String,Hash>)\n
-  \   * `:s` - (String)\n    * `:n` - (String)\n    * `:b` - (String)\n    * `:ss`
-  - (Array<String>)\n    * `:ns` - (Array<String>)\n    * `:bs` - (Array<Blob>)\n
-  \ * `:count` - (Integer)\n  * `:last_evaluated_key` - (Hash<String,Hash>)\n    *
-  `:s` - (String)\n    * `:n` - (String)\n    * `:b` - (String)\n    * `:ss` - (Array<String>)\n
-  \   * `:ns` - (Array<String>)\n    * `:bs` - (Array<Blob>)\n  * `:consumed_capacity`
-  - (Hash)\n    * `:table_name` - (String)\n    * `:capacity_units` - (Numeric)"
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}  Valid values include:\n      * `EQ`\n      * `NE`\n      * `IN`\n
+  \     * `LE`\n      * `LT`\n      * `GE`\n      * `GT`\n      * `BETWEEN`\n      *
+  `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n      * `NOT_CONTAINS`\n      *
+  `BEGINS_WITH`\n  * `:scan_index_forward` - (Boolean) Specifies ascending ( `true`
+  ) or descending ( `false` ) traversal of the index. returns results reflecting the
+  requested order determined by the range key. If the data type is Number, the results
+  are returned in numeric order. For String, the results are returned in order of
+  ASCII character code values. For Binary, Amazon DynamoDB treats each byte of the
+  binary data as unsigned when it compares binary values. If ScanIndexForward is not
+  specified, the results are returned in ascending order.\n  * `:exclusive_start_key`
+  - (Hash&lt;<String,Hash>) \n    * `:s` - (String) Represents a String data type\n
+  \   * `:n` - (String) Represents a Number data type\n    * `:b` - (String) Represents
+  a Binary data type\n    * `:ss` - (Array&lt;<String>) Represents a String set data
+  type\n    * `:ns` - (Array&lt;<String>) Represents a Number set data type\n    *
+  `:bs` - (Array&lt;<String>) Represents a Binary set data type\n  * `:return_consumed_capacity`
+  - (String) Valid values include:\n    * `TOTAL`\n    * `NONE`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:member` - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n` - (String)\n
+  \   * `:b` - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` - (Array<String>)\n
+  \   * `:bs` - (Array<Blob>)\n  * `:count` - (Integer)\n  * `:last_evaluated_key`
+  - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n` - (String)\n    * `:b`
+  - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` - (Array<String>)\n    *
+  `:bs` - (Array<Blob>)\n  * `:consumed_capacity` - (Hash)\n    * `:table_name` -
+  (String)\n    * `:capacity_units` - (Numeric)"
 :scan: "Calls the Scan API operation.\n@param [Hash] options\n  * `:table_name` -
   *required* - (String) The name of the table containing the requested items.\n  *
   `:attributes_to_get` - (Array&lt;<String>) \n  * `:limit` - (Integer) \n  * `:select`
@@ -554,7 +555,7 @@
   attributes, specific item attributes, the count of matching items, or in the case
   of an index, some or all of the attributes projected into the index. ALL_ATTRIBUTES:
   Returns all of the item attributes. For a table, this is the default. For an index,
-  this mode causes  to fetch the full item from the table for each matching item in
+  this mode causes to fetch the full item from the table for each matching item in
   the index. If the index is configured to project all item attributes, the matching
   items will not be fetched from the table. Fetching items from the table incurs additional
   throughput cost and latency. ALL_PROJECTED_ATTRIBUTES: Retrieves all attributes
@@ -563,7 +564,7 @@
   the number of matching items, rather than the matching items themselves. SPECIFIC_ATTRIBUTES
   : Returns only the attributes listed in AttributesToGet. This is equivalent to specifying
   AttributesToGet without specifying any value for Select. When neither Select nor
-  AttributesToGet  are specified, defaults to ALL_ATTRIBUTES when accessing a table,
+  AttributesToGet are specified, defaults to ALL_ATTRIBUTES when accessing a table,
   and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select
   and AttributesToGet together in a single request, unless the value for Select is
   SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without
@@ -578,143 +579,145 @@
   comparisons are numeric. String value comparisons for greater than, equals, or less
   than are based on ASCII character code values. For example, a is greater than A,
   and aa is greater than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
-  For Binary,  treats each byte of the binary data as unsigned when it compares binary
+  For Binary, treats each byte of the binary data as unsigned when it compares binary
   values, for example when evaluating query expressions. ComparisonOperator - A comparator
   for evaluating attributes. For example, equals, greater than, less than, etc. For
   information on specifying data types in JSON, see JSON Data Format . The following
   are descriptions of each comparison operator. EQ : Equal. AttributeValueList can
   contain only one AttributeValue of type String, Number, or Binary (not a set). If
   an item contains an AttributeValue of a different type than the one specified in
-  the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
   NE : Not equal. AttributeValueList can contain only one AttributeValue of type String,
   Number, or Binary (not a set). If an item contains an AttributeValue of a different
   type than the one specified in the request, the value does not match. For example,
-  {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\",
-  \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can contain only one
-  AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
-  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist.
-  CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for a substring
-  match. If the target attribute of the comparison is Binary, then the operation looks
-  for a subsequence of the target that matches the input. If the target attribute
-  of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks
-  for a member of the set (not as a substring). NOT_CONTAINS : checks for absence
-  of a subsequence, or absence of a value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for the absence
-  of a substring match. If the target attribute of the comparison is Binary, then
-  the operation checks for the absence of a subsequence of the target that matches
-  the input. If the target attribute of the comparison is a set (\"SS\", \"NS\", or
-  \"BS\"), then the operation checks for the absence of a member of the set (not as
-  a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain
-  only one AttributeValue of type String or Binary (not a Number or a set). The target
-  attribute of the comparison must be a String or Binary (not a Number or a set).
-  IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue
-  of type String, Number, or Binary (not a set). The target attribute of the comparison
-  must be of the same type and exact value to match. A String never matches a String
-  set. BETWEEN : Greater than or equal to the first value, and less than or equal
-  to the second value. AttributeValueList must contain two AttributeValue elements
-  of the same type, either String, Number, or Binary (not a set). A target attribute
-  matches if the target value is greater than, or equal to, the first element and
-  less than, or equal to, the second element. If an item contains an AttributeValue
+  `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal
+  {\"NS\":[\"6\", \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can
+  contain only one AttributeValue of type String, Number, or Binary (not a set). If
+  an item contains an AttributeValue of a different type than the one specified in
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\",
+  \"1\"]}. LT : Less than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
   of a different type than the one specified in the request, the value does not match.
-  For example, {\"S\":\"6\"} does not compare to {\"N\":\"6\"}. Also, {\"N\":\"6\"}
-  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}\n    * `:attribute_value_list`
-  - (Array&lt;<Hash>) Represents one or more values to evaluate against the supplied
-  attribute. This list contains exactly one value, except for a BETWEEN or IN comparison,
-  in which case the list contains two values. For type Number, value comparisons are
-  numeric. String value comparisons for greater than, equals, or less than are based
-  on ASCII character code values. For example, a is greater than A, and aa is greater
-  than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
-  For Binary,  treats each byte of the binary data as unsigned when it compares binary
-  values, for example when evaluating query expressions.\n      * `:s` - (String)
-  Represents a String data type\n      * `:n` - (String) Represents a Number data
-  type\n      * `:b` - (String) Represents a Binary data type\n      * `:ss` - (Array&lt;<String>)
-  Represents a String set data type\n      * `:ns` - (Array&lt;<String>) Represents
-  a Number set data type\n      * `:bs` - (Array&lt;<String>) Represents a Binary
-  set data type\n    * `:comparison_operator` - *required* - (String) Represents a
-  comparator for evaluating attributes. For example, equals, greater than, less than,
-  etc.   For information on specifying data types in JSON, see JSON Data Format .
-  The following are descriptions of each comparison operator. EQ : Equal. AttributeValueList
-  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GE : Greater than or equal.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If an item contains an AttributeValue of a different type than
+  the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. NOT_NULL : The attribute exists.
+  NULL : The attribute does not exist. CONTAINS : checks for a subsequence, or value
+  in a set. AttributeValueList can contain only one AttributeValue of type String,
+  Number, or Binary (not a set). If the target attribute of the comparison is a String,
+  then the operation checks for a substring match. If the target attribute of the
+  comparison is Binary, then the operation looks for a subsequence of the target that
+  matches the input. If the target attribute of the comparison is a set (\"SS\", \"NS\",
+  or \"BS\"), then the operation checks for a member of the set (not as a substring).
+  NOT_CONTAINS : checks for absence of a subsequence, or absence of a value in a set.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If the target attribute of the comparison is a String, then
+  the operation checks for the absence of a substring match. If the target attribute
+  of the comparison is Binary, then the operation checks for the absence of a subsequence
+  of the target that matches the input. If the target attribute of the comparison
+  is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks for the absence
+  of a member of the set (not as a substring). BEGINS_WITH : checks for a prefix.
+  AttributeValueList can contain only one AttributeValue of type String or Binary
+  (not a Number or a set). The target attribute of the comparison must be a String
+  or Binary (not a Number or a set). IN : checks for exact matches. AttributeValueList
+  can contain more than one AttributeValue of type String, Number, or Binary (not
+  a set). The target attribute of the comparison must be of the same type and exact
+  value to match. A String never matches a String set. BETWEEN : Greater than or equal
+  to the first value, and less than or equal to the second value. AttributeValueList
+  must contain two AttributeValue elements of the same type, either String, Number,
+  or Binary (not a set). A target attribute matches if the target value is greater
+  than, or equal to, the first element and less than, or equal to, the second element.
   If an item contains an AttributeValue of a different type than the one specified
-  in the request, the value does not match. For example, {\"S\":\"6\"} does not equal
-  {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}\n    * `:attribute_value_list` - (Array&lt;<Hash>) Represents one
+  or more values to evaluate against the supplied attribute. This list contains exactly
+  one value, except for a BETWEEN or IN comparison, in which case the list contains
+  two values. For type Number, value comparisons are numeric. String value comparisons
+  for greater than, equals, or less than are based on ASCII character code values.
+  For example, a is greater than A, and aa is greater than B. For a list of code values,
+  see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters. For Binary, treats
+  each byte of the binary data as unsigned when it compares binary values, for example
+  when evaluating query expressions.\n      * `:s` - (String) Represents a String
+  data type\n      * `:n` - (String) Represents a Number data type\n      * `:b` -
+  (String) Represents a Binary data type\n      * `:ss` - (Array&lt;<String>) Represents
+  a String set data type\n      * `:ns` - (Array&lt;<String>) Represents a Number
+  set data type\n      * `:bs` - (Array&lt;<String>) Represents a Binary set data
+  type\n    * `:comparison_operator` - *required* - (String) Represents a comparator
+  for evaluating attributes. For example, equals, greater than, less than, etc. For
+  information on specifying data types in JSON, see JSON Data Format . The following
+  are descriptions of each comparison operator. EQ : Equal. AttributeValueList can
+  contain only one AttributeValue of type String, Number, or Binary (not a set). If
+  an item contains an AttributeValue of a different type than the one specified in
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\", \"1\"]}.
   NE : Not equal. AttributeValueList can contain only one AttributeValue of type String,
   Number, or Binary (not a set). If an item contains an AttributeValue of a different
   type than the one specified in the request, the value does not match. For example,
-  {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not equal {\"NS\":[\"6\",
-  \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can contain only one
-  AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
-  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
-  an AttributeValue of a different type than the one specified in the request, the
-  value does not match. For example, {\"S\":\"6\"} does not equal {\"N\":\"6\"}. Also,
-  {\"N\":\"6\"} does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater than.
-  AttributeValueList can contain only one AttributeValue of type String, Number, or
-  Binary (not a set). If an item contains an AttributeValue of a different type than
-  the one specified in the request, the value does not match. For example, {\"S\":\"6\"}
-  does not equal {\"N\":\"6\"}. Also, {\"N\":\"6\"} does not compare to {\"NS\":[\"6\",
-  \"2\", \"1\"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist.
-  CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for a substring
-  match. If the target attribute of the comparison is Binary, then the operation looks
-  for a subsequence of the target that matches the input. If the target attribute
-  of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks
-  for a member of the set (not as a substring). NOT_CONTAINS : checks for absence
-  of a subsequence, or absence of a value in a set. AttributeValueList can contain
-  only one AttributeValue of type String, Number, or Binary (not a set). If the target
-  attribute of the comparison is a String, then the operation checks for the absence
-  of a substring match. If the target attribute of the comparison is Binary, then
-  the operation checks for the absence of a subsequence of the target that matches
-  the input. If the target attribute of the comparison is a set (\"SS\", \"NS\", or
-  \"BS\"), then the operation checks for the absence of a member of the set (not as
-  a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain
-  only one AttributeValue of type String or Binary (not a Number or a set). The target
-  attribute of the comparison must be a String or Binary (not a Number or a set).
-  IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue
-  of type String, Number, or Binary (not a set). The target attribute of the comparison
-  must be of the same type and exact value to match. A String never matches a String
-  set. BETWEEN : Greater than or equal to the first value, and less than or equal
-  to the second value. AttributeValueList must contain two AttributeValue elements
-  of the same type, either String, Number, or Binary (not a set). A target attribute
-  matches if the target value is greater than, or equal to, the first element and
-  less than, or equal to, the second element. If an item contains an AttributeValue
+  `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal
+  {\"NS\":[\"6\", \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can
+  contain only one AttributeValue of type String, Number, or Binary (not a set). If
+  an item contains an AttributeValue of a different type than the one specified in
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\",
+  \"1\"]}. LT : Less than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
   of a different type than the one specified in the request, the value does not match.
-  For example, {\"S\":\"6\"} does not compare to {\"N\":\"6\"}. Also, {\"N\":\"6\"}
-  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}  Valid values include:\n      *
-  `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      * `LT`\n      * `GE`\n      *
-  `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n
-  \     * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n  * `:exclusive_start_key` - (Hash&lt;<String,Hash>)
-  In a parallel scan, a Scan request that includes ExclusiveStartKey must specify
-  the same segment whose previous Scan returned the corresponding value of LastEvaluatedKey.\n
-  \   * `:s` - (String) Represents a String data type\n    * `:n` - (String) Represents
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GE : Greater than or equal.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If an item contains an AttributeValue of a different type than
+  the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. NOT_NULL : The attribute exists.
+  NULL : The attribute does not exist. CONTAINS : checks for a subsequence, or value
+  in a set. AttributeValueList can contain only one AttributeValue of type String,
+  Number, or Binary (not a set). If the target attribute of the comparison is a String,
+  then the operation checks for a substring match. If the target attribute of the
+  comparison is Binary, then the operation looks for a subsequence of the target that
+  matches the input. If the target attribute of the comparison is a set (\"SS\", \"NS\",
+  or \"BS\"), then the operation checks for a member of the set (not as a substring).
+  NOT_CONTAINS : checks for absence of a subsequence, or absence of a value in a set.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If the target attribute of the comparison is a String, then
+  the operation checks for the absence of a substring match. If the target attribute
+  of the comparison is Binary, then the operation checks for the absence of a subsequence
+  of the target that matches the input. If the target attribute of the comparison
+  is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks for the absence
+  of a member of the set (not as a substring). BEGINS_WITH : checks for a prefix.
+  AttributeValueList can contain only one AttributeValue of type String or Binary
+  (not a Number or a set). The target attribute of the comparison must be a String
+  or Binary (not a Number or a set). IN : checks for exact matches. AttributeValueList
+  can contain more than one AttributeValue of type String, Number, or Binary (not
+  a set). The target attribute of the comparison must be of the same type and exact
+  value to match. A String never matches a String set. BETWEEN : Greater than or equal
+  to the first value, and less than or equal to the second value. AttributeValueList
+  must contain two AttributeValue elements of the same type, either String, Number,
+  or Binary (not a set). A target attribute matches if the target value is greater
+  than, or equal to, the first element and less than, or equal to, the second element.
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}  Valid values include:\n      * `EQ`\n      * `NE`\n      * `IN`\n
+  \     * `LE`\n      * `LT`\n      * `GE`\n      * `GT`\n      * `BETWEEN`\n      *
+  `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n      * `NOT_CONTAINS`\n      *
+  `BEGINS_WITH`\n  * `:exclusive_start_key` - (Hash&lt;<String,Hash>) In a parallel
+  scan, a Scan request that includes ExclusiveStartKey must specify the same segment
+  whose previous Scan returned the corresponding value of LastEvaluatedKey.\n    *
+  `:s` - (String) Represents a String data type\n    * `:n` - (String) Represents
   a Number data type\n    * `:b` - (String) Represents a Binary data type\n    * `:ss`
   - (Array&lt;<String>) Represents a String set data type\n    * `:ns` - (Array&lt;<String>)
   Represents a Number set data type\n    * `:bs` - (Array&lt;<String>) Represents
@@ -777,12 +780,12 @@
   Value is also a number, then the Value is mathematically added to the existing attribute.
   If Value is a negative number, then it is subtracted from the existing attribute.
   If you use ADD to increment or decrement a number value for an item that doesn't
-  exist before the update,  uses 0 as the initial value. In addition, if you use ADD
+  exist before the update, uses 0 as the initial value. In addition, if you use ADD
   to update an existing item, and intend to increment or decrement an attribute value
   which does not yet exist, uses 0 as the initial value. For example, suppose that
   the item you want to update does not yet have an attribute named itemcount, but
   you decide to ADD the number 3 to this attribute anyway, even though it currently
-  does not exist.  will create the itemcount attribute, set its initial value to 0,
+  does not exist. will create the itemcount attribute, set its initial value to 0,
   and finally add 3 to it. The result will be a new itemcount attribute in the item,
   with a value of 3. If the existing data type is a set, and if the Value is also
   a set, then the Value is added to the existing set. (This is a set operation, not
@@ -794,9 +797,9 @@
   the Value must also be a set of strings. The same holds  `true`  for number sets
   and binary sets. This action is only valid for an existing attribute whose data
   type is number or is a set. Do not use ADD for any other data types. If no item
-  with the specified Key is found: PUT -  creates a new item with the specified primary
+  with the specified Key is found: PUT - creates a new item with the specified primary
   key, and then adds the attribute. DELETE - Nothing happens; there is no attribute
-  to delete. ADD -  creates an item with the supplied primary key and number (or set
+  to delete. ADD - creates an item with the supplied primary key and number (or set
   of numbers) for the attribute value. The only data types allowed are number and
   number set; no other data types can be specified. If you specify any attributes
   that are part of an index key, then the data types for those attributes must match
@@ -821,12 +824,12 @@
   Value is also a number, then the Value is mathematically added to the existing attribute.
   If Value is a negative number, then it is subtracted from the existing attribute.
   If you use ADD to increment or decrement a number value for an item that doesn't
-  exist before the update,  uses 0 as the initial value. In addition, if you use ADD
+  exist before the update, uses 0 as the initial value. In addition, if you use ADD
   to update an existing item, and intend to increment or decrement an attribute value
   which does not yet exist, uses 0 as the initial value. For example, suppose that
   the item you want to update does not yet have an attribute named itemcount, but
   you decide to ADD the number 3 to this attribute anyway, even though it currently
-  does not exist.  will create the itemcount attribute, set its initial value to 0,
+  does not exist. will create the itemcount attribute, set its initial value to 0,
   and finally add 3 to it. The result will be a new itemcount attribute in the item,
   with a value of 3. If the existing data type is a set, and if the Value is also
   a set, then the Value is added to the existing set. (This is a set operation, not
@@ -838,9 +841,9 @@
   the Value must also be a set of strings. The same holds  `true`  for number sets
   and binary sets. This action is only valid for an existing attribute whose data
   type is number or is a set. Do not use ADD for any other data types. If no item
-  with the specified Key is found: PUT -  creates a new item with the specified primary
+  with the specified Key is found: PUT - creates a new item with the specified primary
   key, and then adds the attribute. DELETE - Nothing happens; there is no attribute
-  to delete. ADD -  creates an item with the supplied primary key and number (or set
+  to delete. ADD - creates an item with the supplied primary key and number (or set
   of numbers) for the attribute value. The only data types allowed are number and
   number set; no other data types can be specified.  Valid values include:\n      *
   `ADD`\n      * `PUT`\n      * `DELETE`\n  * `:expected` - (Hash&lt;<String,Hash>)
@@ -852,15 +855,15 @@
   (String) Represents a Binary data type\n      * `:ss` - (Array&lt;<String>) Represents
   a String set data type\n      * `:ns` - (Array&lt;<String>) Represents a Number
   set data type\n      * `:bs` - (Array&lt;<String>) Represents a Binary set data
-  type\n    * `:exists` - (Boolean) Causes  to evaluate the value before attempting
-  a conditional operation: If Exists is  `true` ,  will check to see if that attribute
+  type\n    * `:exists` - (Boolean) Causes to evaluate the value before attempting
+  a conditional operation: If Exists is  `true` , will check to see if that attribute
   value already exists in the table. If it is found, then the operation succeeds.
   If it is not found, the operation fails with a ConditionalCheckFailedException.
-  If Exists is  `false` ,  assumes that the attribute value does not exist in the
-  table. If in fact the value does not exist, then the assumption is valid and the
-  operation succeeds. If the value is found, despite the assumption that it does not
-  exist, the operation fails with a ConditionalCheckFailedException. The default setting
-  for Exists is  `true` . If you supply a Value all by itself,  assumes the attribute
+  If Exists is  `false` , assumes that the attribute value does not exist in the table.
+  If in fact the value does not exist, then the assumption is valid and the operation
+  succeeds. If the value is found, despite the assumption that it does not exist,
+  the operation fails with a ConditionalCheckFailedException. The default setting
+  for Exists is  `true` . If you supply a Value all by itself, assumes the attribute
   exists: You don't have to set Exists to  `true` , because it is implied. returns
   a ValidationException if: Exists is  `true`  but there is no Value to check. (You
   expect a value to exist, but don't specify what that value is.) Exists is  `false`
@@ -891,10 +894,10 @@
 :update_table: "Calls the UpdateTable API operation.\n@param [Hash] options\n  * `:table_name`
   - *required* - (String) The name of the table to be updated.\n  * `:provisioned_throughput`
   - *required* - (Hash) \n    * `:read_capacity_units` - *required* - (Integer) The
-  maximum number of strongly consistent reads consumed per second before  returns
-  a ThrottlingException. For more information, see Specifying Read and Write Requirements
+  maximum number of strongly consistent reads consumed per second before returns a
+  ThrottlingException. For more information, see Specifying Read and Write Requirements
   .\n    * `:write_capacity_units` - *required* - (Integer) The maximum number of
-  writes consumed per second before  returns a ThrottlingException. For more information,
+  writes consumed per second before returns a ThrottlingException. For more information,
   see Specifying Read and Write Requirements .\n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
   `:table_description` - (Hash)\n    * `:attribute_definitions` - (Array<Hash>)\n

@@ -165,7 +165,9 @@
   \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
   - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
   - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
   \     * `control` - (String)\n      * `startToFireTimeout` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `timerFiredEventAttributes` - (Hash)\n      * `timerId` - (String)\n
   \     * `startedEventId` - (Integer)\n    * `timerCanceledEventAttributes` - (Hash)\n
@@ -209,18 +211,18 @@
   \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
   - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes` - (Hash)\n
-  \     * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        *
-  `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n      * `control` - (String)\n    * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
   - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `scheduleActivityTaskFailedEventAttributes` - (Hash)\n      *
-  `activityType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes` - (Hash)\n      *
-  `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `scheduleActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `cause` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `startTimerFailedEventAttributes` - (Hash)\n      * `timerId`
   - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
   (Integer)\n    * `cancelTimerFailedEventAttributes` - (Hash)\n      * `timerId`
@@ -228,8 +230,8 @@
   (Integer)\n    * `startChildWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
   `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
   \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
-  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n  * `nextPageToken`
-  - (String)"
+  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
+  - (String)\n  * `nextPageToken` - (String)"
 :list_activity_types: "Calls the ListActivityTypes API operation.\n@param [Hash] options\n
   \ * `:domain` - *required* - (String) \n  * `:name` - (String) \n  * `:registration_status`
   - *required* - (String) Valid values include:\n    * `REGISTERED`\n    * `DEPRECATED`\n
@@ -369,7 +371,9 @@
   \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
   - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
   - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
   \     * `control` - (String)\n      * `startToFireTimeout` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `timerFiredEventAttributes` - (Hash)\n      * `timerId` - (String)\n
   \     * `startedEventId` - (Integer)\n    * `timerCanceledEventAttributes` - (Hash)\n
@@ -413,18 +417,18 @@
   \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
   - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes` - (Hash)\n
-  \     * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        *
-  `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n      * `control` - (String)\n    * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
   - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `scheduleActivityTaskFailedEventAttributes` - (Hash)\n      *
-  `activityType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes` - (Hash)\n      *
-  `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `scheduleActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `cause` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `startTimerFailedEventAttributes` - (Hash)\n      * `timerId`
   - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
   (Integer)\n    * `cancelTimerFailedEventAttributes` - (Hash)\n      * `timerId`
@@ -432,8 +436,8 @@
   (Integer)\n    * `startChildWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
   `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
   \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
-  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n  * `nextPageToken`
-  - (String)\n  * `previousStartedEventId` - (Integer)"
+  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
+  - (String)\n  * `nextPageToken` - (String)\n  * `previousStartedEventId` - (Integer)"
 :record_activity_task_heartbeat: "Calls the RecordActivityTaskHeartbeat API operation.\n@param
   [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:details` - (String)
   \n@return [Core::Response] The `#data` method of the response object returns a hash

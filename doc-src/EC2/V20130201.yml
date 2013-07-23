@@ -100,7 +100,7 @@
     * `:from_port` - (Integer) Deprecated.
     * `:to_port` - (Integer) Deprecated.
     * `:cidr_ip` - (String) Deprecated.
-    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
@@ -122,7 +122,7 @@
     * `:from_port` - (Integer) Deprecated
     * `:to_port` - (Integer) Deprecated
     * `:cidr_ip` - (String) Deprecated
-    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
@@ -504,7 +504,7 @@
 :create_tags: |-
   Calls the CreateTags API operation.
   @param [Hash] options
-    * `:resources` - *required* - (Array&lt;<String>) One or more IDs of resources to tag.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
+    * `:resources` - *required* - (Array&lt;<String>) One or more IDs of resources to tag. This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
     * `:tags` - *required* - (Array&lt;<Hash>) The tags to add or overwrite for the specified resources. Each tag item consists of a key-value pair.
       * `:key` - (String) The tag's key.
       * `:value` - (String) The tag's value.
@@ -655,7 +655,7 @@
 :delete_tags: |-
   Calls the DeleteTags API operation.
   @param [Hash] options
-    * `:resources` - *required* - (Array&lt;<String>) A list of one or more resource IDs.  This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
+    * `:resources` - *required* - (Array&lt;<String>) A list of one or more resource IDs. This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc.
     * `:tags` - (Array&lt;<Hash>) The tags to delete from the specified resources. Each tag item consists of a key-value pair. If a tag is specified without a value, the tag and all of its values are deleted.
       * `:key` - (String) The tag's key.
       * `:value` - (String) The tag's value.
@@ -1707,46 +1707,46 @@
   \     * `cc2.8xlarge`\n      * `cg1.4xlarge`\n    * `:placement` - (Hash) \n      *
   `:availability_zone` - (String) The availability zone in which an Amazon EC2 instance
   runs.\n      * `:group_name` - (String) The name of the PlacementGroup in which
-  an Amazon EC2 instance runs.  Placement groups are primarily used for launching
-  High Performance Computing instances in the same group to ensure fast connection
-  speeds.\n      * `:tenancy` - (String) The allowed tenancy of instances launched
-  into the VPC. A value of default means instances can be launched with any tenancy;
-  a value of dedicated means all instances launched into the VPC will be launched
-  as dedicated tenancy regardless of the tenancy assigned to the instance at launch.\n
-  \   * `:block_device_mappings` - (Array&lt;<Hash>) \n      * `:virtual_name` - (String)
-  Specifies the virtual device name.\n      * `:device_name` - (String) Specifies
-  the device name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters
-  used to automatically setup Amazon EBS volumes when the instance is launched.\n
-  \       * `:snapshot_id` - (String) The ID of the snapshot from which the volume
-  will be created.\n        * `:volume_size` - (Integer) The size of the volume, in
-  gigabytes.\n        * `:delete_on_termination` - (Boolean) Specifies whether the
-  Amazon EBS volume is deleted on instance termination.\n        * `:volume_type`
-  - (String) Valid values include:\n          * `standard`\n          * `io1`\n        *
-  `:iops` - (Integer) \n      * `:no_device` - (String) Specifies the device name
-  to suppress during instance launch.\n    * `:monitoring` - (Boolean) \n    * `:subnet_id`
-  - (String) \n    * `:disable_api_termination` - (Boolean) \n    * `:instance_initiated_shutdown_behavior`
-  - (String) \n    * `:private_ip_address` - (String) \n  * `:disk_images` - (Array&lt;<Hash>)
-  \n    * `:image` - (Hash) \n      * `:format` - *required* - (String) \n      *
-  `:bytes` - *required* - (Integer) \n      * `:import_manifest_url` - *required*
-  - (String) \n    * `:description` - (String) \n    * `:volume` - (Hash) \n      *
-  `:size` - *required* - (Integer) \n  * `:platform` - *required* - (String) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:conversion_task` - (Hash)\n    * `:conversion_task_id`
-  - (String)\n    * `:expiration_time` - (String)\n    * `:import_instance` - (Hash)\n
-  \     * `:volumes` - (Array<Hash>)\n        * `:bytes_converted` - (Integer)\n        *
-  `:availability_zone` - (String)\n        * `:image` - (Hash)\n          * `:format`
-  - (String)\n          * `:size` - (Integer)\n          * `:import_manifest_url`
-  - (String)\n          * `:checksum` - (String)\n        * `:volume` - (Hash)\n          *
-  `:size` - (Integer)\n          * `:id` - (String)\n        * `:status` - (String)\n
-  \       * `:status_message` - (String)\n        * `:description` - (String)\n      *
-  `:instance_id` - (String)\n      * `:platform` - (String)\n      * `:description`
-  - (String)\n    * `:import_volume` - (Hash)\n      * `:bytes_converted` - (Integer)\n
-  \     * `:availability_zone` - (String)\n      * `:description` - (String)\n      *
-  `:image` - (Hash)\n        * `:format` - (String)\n        * `:size` - (Integer)\n
-  \       * `:import_manifest_url` - (String)\n        * `:checksum` - (String)\n
-  \     * `:volume` - (Hash)\n        * `:size` - (Integer)\n        * `:id` - (String)\n
-  \   * `:state` - (String)\n    * `:status_message` - (String)\n    * `:tag_set`
-  - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` - (String)"
+  an Amazon EC2 instance runs. Placement groups are primarily used for launching High
+  Performance Computing instances in the same group to ensure fast connection speeds.\n
+  \     * `:tenancy` - (String) The allowed tenancy of instances launched into the
+  VPC. A value of default means instances can be launched with any tenancy; a value
+  of dedicated means all instances launched into the VPC will be launched as dedicated
+  tenancy regardless of the tenancy assigned to the instance at launch.\n    * `:block_device_mappings`
+  - (Array&lt;<Hash>) \n      * `:virtual_name` - (String) Specifies the virtual device
+  name.\n      * `:device_name` - (String) Specifies the device name (e.g., /dev/sdh).\n
+  \     * `:ebs` - (Hash) Specifies parameters used to automatically setup Amazon
+  EBS volumes when the instance is launched.\n        * `:snapshot_id` - (String)
+  The ID of the snapshot from which the volume will be created.\n        * `:volume_size`
+  - (Integer) The size of the volume, in gigabytes.\n        * `:delete_on_termination`
+  - (Boolean) Specifies whether the Amazon EBS volume is deleted on instance termination.\n
+  \       * `:volume_type` - (String) Valid values include:\n          * `standard`\n
+  \         * `io1`\n        * `:iops` - (Integer) \n      * `:no_device` - (String)
+  Specifies the device name to suppress during instance launch.\n    * `:monitoring`
+  - (Boolean) \n    * `:subnet_id` - (String) \n    * `:disable_api_termination` -
+  (Boolean) \n    * `:instance_initiated_shutdown_behavior` - (String) \n    * `:private_ip_address`
+  - (String) \n  * `:disk_images` - (Array&lt;<Hash>) \n    * `:image` - (Hash) \n
+  \     * `:format` - *required* - (String) \n      * `:bytes` - *required* - (Integer)
+  \n      * `:import_manifest_url` - *required* - (String) \n    * `:description`
+  - (String) \n    * `:volume` - (Hash) \n      * `:size` - *required* - (Integer)
+  \n  * `:platform` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:conversion_task` - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time`
+  - (String)\n    * `:import_instance` - (Hash)\n      * `:volumes` - (Array<Hash>)\n
+  \       * `:bytes_converted` - (Integer)\n        * `:availability_zone` - (String)\n
+  \       * `:image` - (Hash)\n          * `:format` - (String)\n          * `:size`
+  - (Integer)\n          * `:import_manifest_url` - (String)\n          * `:checksum`
+  - (String)\n        * `:volume` - (Hash)\n          * `:size` - (Integer)\n          *
+  `:id` - (String)\n        * `:status` - (String)\n        * `:status_message` -
+  (String)\n        * `:description` - (String)\n      * `:instance_id` - (String)\n
+  \     * `:platform` - (String)\n      * `:description` - (String)\n    * `:import_volume`
+  - (Hash)\n      * `:bytes_converted` - (Integer)\n      * `:availability_zone` -
+  (String)\n      * `:description` - (String)\n      * `:image` - (Hash)\n        *
+  `:format` - (String)\n        * `:size` - (Integer)\n        * `:import_manifest_url`
+  - (String)\n        * `:checksum` - (String)\n      * `:volume` - (Hash)\n        *
+  `:size` - (Integer)\n        * `:id` - (String)\n    * `:state` - (String)\n    *
+  `:status_message` - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` -
+  (String)\n      * `:value` - (String)"
 :import_key_pair: |-
   Calls the ImportKeyPair API operation.
   @param [Hash] options
@@ -1997,7 +1997,7 @@
   \   * `:placement` - (Hash) Defines a placement item.\n      * `:availability_zone`
   - (String) The availability zone in which an Amazon EC2 instance runs.\n      *
   `:group_name` - (String) The name of the PlacementGroup in which an Amazon EC2 instance
-  runs.  Placement groups are primarily used for launching High Performance Computing
+  runs. Placement groups are primarily used for launching High Performance Computing
   instances in the same group to ensure fast connection speeds.\n    * `:kernel_id`
   - (String) Specifies the ID of the kernel to select.\n    * `:ramdisk_id` - (String)
   Specifies the ID of the RAM disk to select. Some kernels require additional drivers
@@ -2101,7 +2101,7 @@
     * `:from_port` - (Integer) Deprecated.
     * `:to_port` - (Integer) Deprecated.
     * `:cidr_ip` - (String) Deprecated.
-    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group.  Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
@@ -2123,7 +2123,7 @@
     * `:from_port` - (Integer) Deprecated
     * `:to_port` - (Integer) Deprecated
     * `:cidr_ip` - (String) Deprecated
-    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to revoke on the specified security group.  For an IP permission to be removed, it must exactly match one of the IP permissions you specify in this list.  Specifying permissions through IP permissions is the preferred way of revoking permissions since it offers more flexibility and control.
+    * `:ip_permissions` - (Array&lt;<Hash>) List of IP permissions to revoke on the specified security group. For an IP permission to be removed, it must exactly match one of the IP permissions you specify in this list. Specifying permissions through IP permissions is the preferred way of revoking permissions since it offers more flexibility and control.
       * `:ip_protocol` - (String) The IP protocol of this permission. Valid protocol values: tcp, udp, icmp
       * `:from_port` - (Integer) Start of port range for the TCP and UDP protocols, or an ICMP type number. An ICMP type number of -1 indicates a wildcard (i.e., any ICMP type number).
       * `:to_port` - (Integer) End of port range for the TCP and UDP protocols, or an ICMP code. An ICMP code of -1 indicates a wildcard (i.e., any ICMP code).
@@ -2154,7 +2154,7 @@
   - (Hash) Specifies the placement constraints (Availability Zones) for launching
   the instances.\n    * `:availability_zone` - (String) The availability zone in which
   an Amazon EC2 instance runs.\n    * `:group_name` - (String) The name of the PlacementGroup
-  in which an Amazon EC2 instance runs.  Placement groups are primarily used for launching
+  in which an Amazon EC2 instance runs. Placement groups are primarily used for launching
   High Performance Computing instances in the same group to ensure fast connection
   speeds.\n    * `:tenancy` - (String) The allowed tenancy of instances launched into
   the VPC. A value of default means instances can be launched with any tenancy; a

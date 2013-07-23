@@ -17,8 +17,13 @@
   @param [Hash] options
     * `:instance_groups` - *required* - (Array&lt;<Hash>) Instance Groups to add.
       * `:name` - (String) Friendly name given to the instance group.
-      * `:market` - (String) Market type of the Amazon EC2 instances used to create a cluster node.
-      * `:instance_role` - *required* - (String) The role of the instance group in the cluster.
+      * `:market` - (String) Market type of the Amazon EC2 instances used to create a cluster node.  Valid values include:
+        * `ON_DEMAND`
+        * `SPOT`
+      * `:instance_role` - *required* - (String) The role of the instance group in the cluster.  Valid values include:
+        * `MASTER`
+        * `CORE`
+        * `TASK`
       * `:bid_price` - (String) Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
       * `:instance_type` - *required* - (String) The Amazon EC2 instance type for all instances in the instance group.
       * `:instance_count` - *required* - (Integer) Target number of instances for the instance group.
@@ -33,7 +38,10 @@
     * `:job_flow_id` - *required* - (String) A string that uniquely identifies the job flow. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows.
     * `:steps` - *required* - (Array&lt;<Hash>) A list of StepConfig to be executed by the job flow.
       * `:name` - *required* - (String) The name of the job flow step.
-      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.
+      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.  Valid values include:
+        * `TERMINATE_JOB_FLOW`
+        * `CANCEL_AND_WAIT`
+        * `CONTINUE`
       * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file used for the job flow step.
         * `:properties` - (Array&lt;<Hash>) A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
           * `:key` - (String) The unique identifier of a key value pair.
@@ -138,8 +146,13 @@
       * `:instance_count` - (Integer) The number of Amazon EC2 instances used to execute the job flow.
       * `:instance_groups` - (Array&lt;<Hash>) Configuration for the job flow's instance groups.
         * `:name` - (String) Friendly name given to the instance group.
-        * `:market` - (String) Market type of the Amazon EC2 instances used to create a cluster node.
-        * `:instance_role` - *required* - (String) The role of the instance group in the cluster.
+        * `:market` - (String) Market type of the Amazon EC2 instances used to create a cluster node.  Valid values include:
+          * `ON_DEMAND`
+          * `SPOT`
+        * `:instance_role` - *required* - (String) The role of the instance group in the cluster.  Valid values include:
+          * `MASTER`
+          * `CORE`
+          * `TASK`
         * `:bid_price` - (String) Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
         * `:instance_type` - *required* - (String) The Amazon EC2 instance type for all instances in the instance group.
         * `:instance_count` - *required* - (Integer) Target number of instances for the instance group.
@@ -152,7 +165,10 @@
       * `:ec2_subnet_id` - (String) To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC.
     * `:steps` - (Array&lt;<Hash>) A list of steps to be executed by the job flow.
       * `:name` - *required* - (String) The name of the job flow step.
-      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.
+      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.  Valid values include:
+        * `TERMINATE_JOB_FLOW`
+        * `CANCEL_AND_WAIT`
+        * `CONTINUE`
       * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file used for the job flow step.
         * `:properties` - (Array&lt;<Hash>) A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
           * `:key` - (String) The unique identifier of a key value pair.

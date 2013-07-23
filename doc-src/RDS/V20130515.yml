@@ -33,8 +33,8 @@
   @param [Hash] options
     * `:resource_name` - *required* - (String) The DB Instance the tags will be added to.
     * `:tags` - *required* - (Array&lt;<Hash>) The tags to be assigned to the DB Instance.
-      * `:key` - (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:". The string may only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-      * `:value` - (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with "aws:". The string may only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+      * `:key` - (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:". The string may only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+      * `:value` - (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with "aws:". The string may only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
   @return [Core::Response]
 :authorize_db_security_group_ingress: |-
   Calls the AuthorizeDBSecurityGroupIngress API operation.
@@ -115,7 +115,7 @@
   5.1.42\n  * `:auto_minor_version_upgrade` - (Boolean) Indicates that minor engine
   upgrades will be applied automatically to the DB Instance during the maintenance
   window. Default:  `true` \n  * `:license_model` - (String) License model information
-  for this DB Instance. Valid values:  license-included | bring-your-own-license |
+  for this DB Instance. Valid values: license-included | bring-your-own-license |
   general-public-license\n  * `:iops` - (Integer) The amount of provisioned input/output
   operations per second to be initially allocated for the database instance. Constraints:
   Must be an integer Type: Integer\n  * `:option_group_name` - (String) Indicates
@@ -782,7 +782,7 @@
 :describe_option_groups: |-
   Calls the DescribeOptionGroups API operation.
   @param [Hash] options
-    * `:option_group_name` - (String) The name of the option group to describe.  Cannot be supplied together with EngineName or MajorEngineVersion.
+    * `:option_group_name` - (String) The name of the option group to describe. Cannot be supplied together with EngineName or MajorEngineVersion.
     * `:marker` - (String) An optional pagination token provided by a previous DescribeOptionGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
     * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: minimum 20, maximum 100
     * `:engine_name` - (String) Filters the list of option groups to only include groups associated with a specific database engine.
@@ -1119,7 +1119,7 @@
   @param [Hash] options
     * `:db_instance_identifier` - *required* - (String) The DB Instance identifier. This value is stored as a lowercase string. Constraints: Must be the identifier for an existing Read Replica DB Instance Must contain from 1 to 63 alphanumeric characters or hyphens First character must be a letter Cannot end with a hyphen or contain two consecutive hyphens Example: mydbinstance
     * `:backup_retention_period` - (Integer) The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Default: 1 Constraints: Must be a value from 0 to 8
-    * `:preferred_backup_window` - (String) The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter. Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. US-East (Northern Virginia) Region: 03:00-11:00 UTC US-West (Northern California) Region: 06:00-14:00 UTC EU (Ireland) Region: 22:00-06:00 UTC Asia Pacific (Singapore) Region: 14:00-22:00 UTC Asia Pacific (Tokyo) Region:  17:00-03:00 UTC Constraints: Must be in the format hh24:mi-hh24:mi. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes.
+    * `:preferred_backup_window` - (String) The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter. Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. US-East (Northern Virginia) Region: 03:00-11:00 UTC US-West (Northern California) Region: 06:00-14:00 UTC EU (Ireland) Region: 22:00-06:00 UTC Asia Pacific (Singapore) Region: 14:00-22:00 UTC Asia Pacific (Tokyo) Region: 17:00-03:00 UTC Constraints: Must be in the format hh24:mi-hh24:mi. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:db_instance_identifier` - (String)
@@ -1336,7 +1336,7 @@
     * `:multi_az` - (Boolean) Specifies if the DB Instance is a Multi-AZ deployment. Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to  `true` .
     * `:publicly_accessible` - (Boolean) Specifies the accessibility options for the DB Instance. A value of  `true`  specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of  `false`  specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. Default VPC: `true`  VPC: `false`  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
     * `:auto_minor_version_upgrade` - (Boolean) Indicates that minor version upgrades will be applied automatically to the DB Instance during the maintenance window.
-    * `:license_model` - (String) License model information for the restored DB Instance. Default: Same as source. Valid values:  license-included | bring-your-own-license | general-public-license
+    * `:license_model` - (String) License model information for the restored DB Instance. Default: Same as source. Valid values: license-included | bring-your-own-license | general-public-license
     * `:db_name` - (String) The database name for the restored DB Instance. This parameter doesn't apply to the MySQL engine.
     * `:engine` - (String) The database engine to use for the new instance. Default: The same as source Constraint: Must be compatible with the engine of the source Example: oracle-ee
     * `:iops` - (Integer) The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB Instance. Constraints: Must be an integer greater than 1000.
@@ -1421,7 +1421,7 @@
     * `:multi_az` - (Boolean) Specifies if the DB Instance is a Multi-AZ deployment. Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to  `true` .
     * `:publicly_accessible` - (Boolean) Specifies the accessibility options for the DB Instance. A value of  `true`  specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of  `false`  specifies an internal instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. Default VPC: `true`  VPC: `false`  If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.
     * `:auto_minor_version_upgrade` - (Boolean) Indicates that minor version upgrades will be applied automatically to the DB Instance during the maintenance window.
-    * `:license_model` - (String) License model information for the restored DB Instance. Default: Same as source. Valid values:  license-included | bring-your-own-license | general-public-license
+    * `:license_model` - (String) License model information for the restored DB Instance. Default: Same as source. Valid values: license-included | bring-your-own-license | general-public-license
     * `:db_name` - (String) The database name for the restored DB Instance. This parameter is not used for the MySQL engine.
     * `:engine` - (String) The database engine to use for the new instance. Default: The same as source Constraint: Must be compatible with the engine of the source Example: oracle-ee
     * `:iops` - (Integer) The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB Instance. Constraints: Must be an integer greater than 1000.

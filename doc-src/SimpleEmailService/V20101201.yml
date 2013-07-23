@@ -126,18 +126,18 @@
   Calls the SetIdentityDkimEnabled API operation.
   @param [Hash] options
     * `:identity` - *required* - (String) The identity for which DKIM signing should be enabled or disabled.
-    * `:dkim_enabled` - *required* - (Boolean) Sets whether DKIM signing is enabled for an identity.  Set to  `true`  to enable DKIM signing for this identity;  `false`  to disable it.
+    * `:dkim_enabled` - *required* - (Boolean) Sets whether DKIM signing is enabled for an identity. Set to  `true`  to enable DKIM signing for this identity;  `false`  to disable it.
   @return [Core::Response]
 :set_identity_feedback_forwarding_enabled: |-
   Calls the SetIdentityFeedbackForwardingEnabled API operation.
   @param [Hash] options
     * `:identity` - *required* - (String) The identity for which to set feedback notification forwarding. Examples: user@example.com, example.com.
-    * `:forwarding_enabled` - *required* - (Boolean) Sets whether Amazon SES will forward feedback notifications as email.  `true`  specifies that Amazon SES will forward feedback notifications as email, in addition to any Amazon SNS topic publishing otherwise specified.  `false`  specifies that Amazon SES will publish feedback notifications only through Amazon SNS. This value can only be set to  `false`  when  topics are specified for both Bounce and Complaint topic types.
+    * `:forwarding_enabled` - *required* - (Boolean) Sets whether Amazon SES will forward feedback notifications as email.  `true`  specifies that Amazon SES will forward feedback notifications as email, in addition to any Amazon SNS topic publishing otherwise specified.  `false`  specifies that Amazon SES will publish feedback notifications only through Amazon SNS. This value can only be set to  `false`  when topics are specified for both Bounce and Complaint topic types.
   @return [Core::Response]
 :set_identity_notification_topic: |-
   Calls the SetIdentityNotificationTopic API operation.
   @param [Hash] options
-    * `:identity` - *required* - (String) The identity for which the topic will be set.  Examples: user@example.com, example.com.
+    * `:identity` - *required* - (String) The identity for which the topic will be set. Examples: user@example.com, example.com.
     * `:notification_type` - *required* - (String) The type of feedback notifications that will be published to the specified topic.  Valid values include:
       * `Bounce`
       * `Complaint`

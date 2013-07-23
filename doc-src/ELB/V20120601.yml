@@ -154,7 +154,7 @@
 :describe_load_balancer_policy_types: |-
   Calls the DescribeLoadBalancerPolicyTypes API operation.
   @param [Hash] options
-    * `:policy_type_names` - (Array&lt;<String>) Specifies the name of the policy types.  If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service.
+    * `:policy_type_names` - (Array&lt;<String>) Specifies the name of the policy types. If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:policy_type_descriptions` - (Array<Hash>)
@@ -261,7 +261,7 @@
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the LoadBalancer. This name must be unique within the client AWS account.
     * `:instance_port` - *required* - (Integer) The port number associated with the back-end server.
-    * `:policy_names` - *required* - (Array&lt;<String>) List of policy names to be set.  If the list is empty, then all current polices are removed from the back-end server.
+    * `:policy_names` - *required* - (Array&lt;<String>) List of policy names to be set. If the list is empty, then all current polices are removed from the back-end server.
   @return [Core::Response]
 :set_load_balancer_policies_of_listener: |-
   Calls the SetLoadBalancerPoliciesOfListener API operation.

@@ -29,39 +29,39 @@
   a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not
   allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and
   cannot be specified as field or rank expression names.\n    * `:index_field_type`
-  - *required* - (String) The type of field.  Based on this type, exactly one of the
+  - *required* - (String) The type of field. Based on this type, exactly one of the
   UIntOptions, LiteralOptions or TextOptions must be present.  Valid values include:\n
   \     * `uint`\n      * `literal`\n      * `text`\n    * `:u_int_options` - (Hash)
-  Options for an unsigned integer field.  Present if IndexFieldType specifies the
-  field is of type unsigned integer.\n      * `:default_value` - (Integer) The default
-  value for an unsigned integer field.\n    * `:literal_options` - (Hash) Options
-  for literal field.  Present if IndexFieldType specifies the field is of type literal.\n
-  \     * `:default_value` - (String) The default value for a literal field.\n      *
-  `:search_enabled` - (Boolean) Specifies whether search is enabled for this field.\n
-  \     * `:facet_enabled` - (Boolean) Specifies whether  facets are enabled for this
-  field.\n      * `:result_enabled` - (Boolean) Specifies whether values of this field
-  can be returned in search results and used for ranking.\n    * `:text_options` -
-  (Hash) Options for text field.  Present if IndexFieldType specifies the field is
-  of type text.\n      * `:default_value` - (String) The default value for a text
-  field.\n      * `:facet_enabled` - (Boolean) Specifies whether  facets are enabled
-  for this field.\n      * `:result_enabled` - (Boolean) Specifies whether  values
-  of this field can be returned in search results and used for ranking.\n    * `:source_attributes`
-  - (Array&lt;<Hash>) An optional list of source attributes that provide data for
-  this index field. If not specified, the data is pulled from a source attribute with
-  the same name as this IndexField. When one or more source attributes are specified,
-  an optional data transformation can be applied to the source data when populating
-  the index field.  You can configure a maximum of 20 sources for an IndexField.\n
-  \     * `:source_data_function` - *required* - (String) Identifies the transformation
-  to apply when copying data from a source attribute.  Valid values include:\n        *
-  `Copy`\n        * `TrimTitle`\n        * `Map`\n      * `:source_data_copy` - (Hash)
-  Copies data from a source document attribute to an IndexField.\n        * `:source_name`
-  - *required* - (String) The name of the document source field to add to this IndexField.\n
-  \       * `:default_value` - (String) \n      * `:source_data_trim_title` - (Hash)
-  Trims common title words from a source document attribute when populating an IndexField.
-  This can be used to create an IndexField you can use for sorting.\n        * `:source_name`
-  - *required* - (String) The name of the document source field to add to this IndexField.\n
-  \       * `:default_value` - (String) \n        * `:separator` - (String) The separator
-  that follows the text to trim.\n        * `:language` - (String) \n      * `:source_data_map`
+  Options for an unsigned integer field. Present if IndexFieldType specifies the field
+  is of type unsigned integer.\n      * `:default_value` - (Integer) The default value
+  for an unsigned integer field.\n    * `:literal_options` - (Hash) Options for literal
+  field. Present if IndexFieldType specifies the field is of type literal.\n      *
+  `:default_value` - (String) The default value for a literal field.\n      * `:search_enabled`
+  - (Boolean) Specifies whether search is enabled for this field.\n      * `:facet_enabled`
+  - (Boolean) Specifies whether facets are enabled for this field.\n      * `:result_enabled`
+  - (Boolean) Specifies whether values of this field can be returned in search results
+  and used for ranking.\n    * `:text_options` - (Hash) Options for text field. Present
+  if IndexFieldType specifies the field is of type text.\n      * `:default_value`
+  - (String) The default value for a text field.\n      * `:facet_enabled` - (Boolean)
+  Specifies whether facets are enabled for this field.\n      * `:result_enabled`
+  - (Boolean) Specifies whether values of this field can be returned in search results
+  and used for ranking.\n    * `:source_attributes` - (Array&lt;<Hash>) An optional
+  list of source attributes that provide data for this index field. If not specified,
+  the data is pulled from a source attribute with the same name as this IndexField.
+  When one or more source attributes are specified, an optional data transformation
+  can be applied to the source data when populating the index field. You can configure
+  a maximum of 20 sources for an IndexField.\n      * `:source_data_function` - *required*
+  - (String) Identifies the transformation to apply when copying data from a source
+  attribute.  Valid values include:\n        * `Copy`\n        * `TrimTitle`\n        *
+  `Map`\n      * `:source_data_copy` - (Hash) Copies data from a source document attribute
+  to an IndexField.\n        * `:source_name` - *required* - (String) The name of
+  the document source field to add to this IndexField.\n        * `:default_value`
+  - (String) \n      * `:source_data_trim_title` - (Hash) Trims common title words
+  from a source document attribute when populating an IndexField. This can be used
+  to create an IndexField you can use for sorting.\n        * `:source_name` - *required*
+  - (String) The name of the document source field to add to this IndexField.\n        *
+  `:default_value` - (String) \n        * `:separator` - (String) The separator that
+  follows the text to trim.\n        * `:language` - (String) \n      * `:source_data_map`
   - (Hash) Maps source document attribute values to new values when populating the
   IndexField.\n        * `:source_name` - *required* - (String) The name of the document
   source field to add to this IndexField.\n        * `:default_value` - (String) \n
@@ -91,7 +91,7 @@
   allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and
   cannot be specified as field or rank expression names.\n    * `:rank_expression`
   - *required* - (String) The expression to evaluate for ranking or thresholding while
-  processing a search request.  The RankExpression syntax is based on JavaScript expressions
+  processing a search request. The RankExpression syntax is based on JavaScript expressions
   and supports: Integer, floating point, hex and octal literals Shortcut evaluation
   of logical operators such that an expression a || b evaluates to the value a if
   a is  `true`  without evaluting b at all JavaScript order of precendence for operators
@@ -101,16 +101,16 @@
   acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan Random generation of
   a number between 0 and 1: rand Current time in epoch: time The min max functions
   that operate on a variable argument list Intermediate results are calculated as
-  double precision floating point values.  The final return value of a RankExpression
+  double precision floating point values. The final return value of a RankExpression
   is automatically converted from floating point to a 32-bit unsigned integer by rounding
   to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t),
-  4294967295.  Mathematical errors such as dividing by 0 will fail during evaluation
+  4294967295. Mathematical errors such as dividing by 0 will fail during evaluation
   and return a value of 0. The source data for a RankExpression can be the name of
   an IndexField of type uint, another RankExpression or the reserved name text_relevance.
-  \ The text_relevance source is defined to return an integer from 0 to 1000 (inclusive)
+  The text_relevance source is defined to return an integer from 0 to 1000 (inclusive)
   to indicate how relevant a document is to the search request, taking into account
   repetition of search terms in the document and proximity of search terms to each
-  other in each matching IndexField  in the document. For more information about using
+  other in each matching IndexField in the document. For more information about using
   rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.\n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:rank_expression` - (Hash)\n    * `:options` - (Hash)\n

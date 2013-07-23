@@ -34,7 +34,7 @@
   end with a hyphen or contain two consecutive hyphens. Example: mycachecluster\n
   \ * `:num_cache_nodes` - *required* - (Integer) The number of Cache Nodes the Cache
   Cluster should have.\n  * `:cache_node_type` - *required* - (String) The compute
-  and memory capacity of nodes in a Cache Cluster.  Valid values: cache.m1.large |
+  and memory capacity of nodes in a Cache Cluster. Valid values: cache.m1.large |
   cache.m1.xlarge | cache.m2.xlarge | cache.m2.2xlarge | cache.m2.4xlarge | cache.c1.xlarge\n
   \ * `:engine` - *required* - (String) The name of the cache engine to be used for
   this Cache Cluster. Currently, memcached is the only cache engine supported by the
@@ -541,7 +541,7 @@
   Calls the RebootCacheCluster API operation.
   @param [Hash] options
     * `:cache_cluster_id` - *required* - (String) The Cache Cluster identifier. This parameter is stored as a lowercase string.
-    * `:cache_node_ids_to_reboot` - *required* - (Array&lt;<String>) A list of Cache Cluster Node Ids to reboot.  To reboot an entire cache cluster, specify all cache cluster node Ids.
+    * `:cache_node_ids_to_reboot` - *required* - (Array&lt;<String>) A list of Cache Cluster Node Ids to reboot. To reboot an entire cache cluster, specify all cache cluster node Ids.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:cache_cluster_id` - (String)
@@ -589,7 +589,7 @@
   @param [Hash] options
     * `:cache_parameter_group_name` - *required* - (String) The name of the Cache Parameter Group.
     * `:reset_all_parameters` - (Boolean) Specifies whether ( `true` ) or not ( `false` ) to reset all parameters in the Cache Parameter Group to default values.
-    * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter names which should be reset.  If not resetting the entire CacheParameterGroup, at least one parameter name must be supplied.
+    * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter names which should be reset. If not resetting the entire CacheParameterGroup, at least one parameter name must be supplied.
       * `:parameter_name` - (String) Specifies the name of the parameter.
       * `:parameter_value` - (String) Specifies the value of the parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:

@@ -228,7 +228,7 @@
 :put_metric_alarm: |-
   Calls the PutMetricAlarm API operation.
   @param [Hash] options
-    * `:alarm_name` - *required* - (String) The descriptive name for the alarm.  This name must be unique within the user's AWS account
+    * `:alarm_name` - *required* - (String) The descriptive name for the alarm. This name must be unique within the user's AWS account
     * `:alarm_description` - (String) The description for the alarm.
     * `:actions_enabled` - (Boolean) Indicates whether or not actions should be executed during any changes to the alarm's state.
     * `:ok_actions` - (Array&lt;<String>) The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only action supported is publishing to an Amazon SNS topic or an Amazon Auto Scaling policy.
@@ -330,7 +330,7 @@
 :set_alarm_state: |-
   Calls the SetAlarmState API operation.
   @param [Hash] options
-    * `:alarm_name` - *required* - (String) The descriptive name for the alarm.  This name must be unique within the user's AWS account. The maximum length is 255 characters.
+    * `:alarm_name` - *required* - (String) The descriptive name for the alarm. This name must be unique within the user's AWS account. The maximum length is 255 characters.
     * `:state_value` - *required* - (String) The value of the state.  Valid values include:
       * `OK`
       * `ALARM`

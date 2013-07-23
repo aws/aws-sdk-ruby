@@ -577,7 +577,10 @@
 :list_virtual_mfa_devices: |-
   Calls the ListVirtualMFADevices API operation.
   @param [Hash] options
-    * `:assignment_status` - (String) The status (unassigned or assigned) of the devices to list. If you do not specify an AssignmentStatus, the action defaults to Any which lists both assigned and unassigned virtual MFA devices.
+    * `:assignment_status` - (String) The status (unassigned or assigned) of the devices to list. If you do not specify an AssignmentStatus, the action defaults to Any which lists both assigned and unassigned virtual MFA devices.  Valid values include:
+      * `Assigned`
+      * `Unassigned`
+      * `Any`
     * `:marker` - (String) Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
     * `:max_items` - (Integer) Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the IsTruncated response element is  `true` .
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -641,7 +644,9 @@
   @param [Hash] options
     * `:user_name` - (String) Name of the user whose key you want to update.
     * `:access_key_id` - *required* - (String) The Access Key ID of the Secret Access Key you want to update.
-    * `:status` - *required* - (String) The status you want to assign to the Secret Access Key. Active means the key can be used for API calls to AWS, while Inactive means the key cannot be used.
+    * `:status` - *required* - (String) The status you want to assign to the Secret Access Key. Active means the key can be used for API calls to AWS, while Inactive means the key cannot be used.  Valid values include:
+      * `Active`
+      * `Inactive`
   @return [Core::Response]
 :update_account_password_policy: "Calls the UpdateAccountPasswordPolicy API operation.\n@param
   [Hash] options\n  * `:minimum_password_length` - (Integer) \n  * `:require_symbols`
@@ -679,12 +684,14 @@
   @param [Hash] options
     * `:user_name` - (String) Name of the user the signing certificate belongs to.
     * `:certificate_id` - *required* - (String) The ID of the signing certificate you want to update.
-    * `:status` - *required* - (String) The status you want to assign to the certificate. Active means the certificate can be used for API calls to AWS, while Inactive means the certificate cannot be used.
+    * `:status` - *required* - (String) The status you want to assign to the certificate. Active means the certificate can be used for API calls to AWS, while Inactive means the certificate cannot be used.  Valid values include:
+      * `Active`
+      * `Inactive`
   @return [Core::Response]
 :update_user: |-
   Calls the UpdateUser API operation.
   @param [Hash] options
-    * `:user_name` - *required* - (String) Name of the user to update.  If you're changing the name of the user, this is the original user name.
+    * `:user_name` - *required* - (String) Name of the user to update. If you're changing the name of the user, this is the original user name.
     * `:new_path` - (String) New path for the user. Include this parameter only if you're changing the user's path.
     * `:new_user_name` - (String) New name for the user. Include this parameter only if you're changing the user's name.
   @return [Core::Response]
