@@ -17,49 +17,49 @@ module Seahorse
   class Client
     describe HeaderHash do
 
-      def hash
-        @hash ||= HeaderHash.new
+      def headers
+        @headers ||= HeaderHash.new
       end
 
       it 'provides indifferent access to symbolized keys' do
-        hash[:key] = 'value'
-        hash[:key].must_equal('value')
-        hash['key'].must_equal('value')
+        headers[:key] = 'value'
+        headers[:key].must_equal('value')
+        headers['key'].must_equal('value')
       end
 
       it 'provides indifferent access to string keys' do
-        hash['key'] = 'value'
-        hash['key'].must_equal('value')
-        hash[:key].must_equal('value')
+        headers['key'] = 'value'
+        headers['key'].must_equal('value')
+        headers[:key].must_equal('value')
       end
 
       it 'stringifies values' do
-        hash['key'] = 123
-        hash['key'].must_equal('123')
+        headers['key'] = 123
+        headers['key'].must_equal('123')
       end
 
       it 'can be seeded by the constructor' do
-        headers = { 'abc' => '123' }
-        hash = HeaderHash.new(headers)
-        hash.to_hash.must_equal(headers)
+        hash = { 'abc' => '123' }
+        headers = HeaderHash.new(hash)
+        headers.to_hash.must_equal(hash)
       end
 
       describe '#to_hash' do
 
         it 'returns a regular hash' do
-          hash[:abc] = 'xyz'
-          hash.to_hash.must_equal({ 'abc' => 'xyz' })
+          headers[:abc] = 'xyz'
+          headers.to_hash.must_equal({ 'abc' => 'xyz' })
         end
 
         it 'is aliased as #to_h' do
-          hash[:abc] = 'xyz'
-          hash.to_h.must_equal({ 'abc' => 'xyz' })
+          headers[:abc] = 'xyz'
+          headers.to_h.must_equal({ 'abc' => 'xyz' })
         end
 
         it 'returns a new hash that protects internal state' do
-          hash['abc'] = 'xyz'
-          hash.to_hash['abc'] = 'mno'
-          hash['abc'].must_equal('xyz')
+          headers['abc'] = 'xyz'
+          headers.to_hash['abc'] = 'mno'
+          headers['abc'].must_equal('xyz')
         end
 
       end
@@ -67,9 +67,9 @@ module Seahorse
       describe '#update' do
 
         it 'accepts a hash, updating self' do
-          hash.update(:abc => 123, 'xyz' => '234')
-          hash['abc'].must_equal('123')
-          hash['xyz'].must_equal('234')
+          headers.update(:abc => 123, 'xyz' => '234')
+          headers['abc'].must_equal('123')
+          headers['xyz'].must_equal('234')
         end
 
       end
@@ -77,23 +77,23 @@ module Seahorse
       describe '#each' do
 
         it 'is enumerable' do
-          hash.must_be_kind_of(Enumerable)
+          headers.must_be_kind_of(Enumerable)
         end
 
         it 'returns nil if a block is given' do
-          ret = hash.each {}
+          ret = headers.each {}
           ret.must_equal(nil)
         end
 
         it 'returns an Enumerator if a block is not given' do
-          hash.each.must_be_kind_of(Enumerator)
+          headers.each.must_be_kind_of(Enumerator)
         end
 
-        it 'yields hash keys and values' do
-          hash['key1'] = 'value1'
-          hash['key2'] = 'value2'
+        it 'yields headers keys and values' do
+          headers['key1'] = 'value1'
+          headers['key2'] = 'value2'
           yielded = []
-          hash.each do |key, value|
+          headers.each do |key, value|
             yielded << [key, value]
           end
           yielded.sort_by(&:first).must_equal([
@@ -103,10 +103,10 @@ module Seahorse
         end
 
         it 'is aliased as #each_pair' do
-          hash['key1'] = 'value1'
-          hash['key2'] = 'value2'
+          headers['key1'] = 'value1'
+          headers['key2'] = 'value2'
           yielded = []
-          hash.each_pair do |key, value|
+          headers.each_pair do |key, value|
             yielded << [key, value]
           end
           yielded.sort_by(&:first).must_equal([
@@ -120,22 +120,22 @@ module Seahorse
       describe '#key?' do
 
         it 'returns true if the header has been set' do
-          hash['foo'] = 'bar'
-          hash.key?('foo').must_equal(true)
+          headers['foo'] = 'bar'
+          headers.key?('foo').must_equal(true)
         end
 
         it 'returns false if the header has not been set' do
-          hash.key?('foo').must_equal(false)
+          headers.key?('foo').must_equal(false)
         end
 
         it 'is aliased as #has_key?' do
-          hash['foo'] = 'bar'
-          hash.has_key?('foo').must_equal(true)
+          headers['foo'] = 'bar'
+          headers.has_key?('foo').must_equal(true)
         end
 
         it 'is aliased as #include?' do
-          hash['foo'] = 'bar'
-          hash.include?('foo').must_equal(true)
+          headers['foo'] = 'bar'
+          headers.include?('foo').must_equal(true)
         end
 
       end
