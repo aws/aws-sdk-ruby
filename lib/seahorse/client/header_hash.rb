@@ -60,13 +60,20 @@ module Seahorse
           @data.enum_for(:each)
         end
       end
-      alias_method :each_pair, :each
+      alias each_pair each
+
+      # @return [Boolean] Returns `true` if the header is set.
+      def key?(key)
+        @data.key?(key.to_s)
+      end
+      alias has_key? key?
+      alias include? key?
 
       # @return [Hash]
       def to_hash
         @data.dup
       end
-      alias_method :to_h, :to_hash
+      alias to_h to_hash
 
     end
   end
