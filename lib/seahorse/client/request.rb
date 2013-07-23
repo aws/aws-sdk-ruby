@@ -33,7 +33,7 @@ module Seahorse
       attr_reader :context
 
       def on(event_name, &callback)
-        @context.events.on(event_name, &callback)
+        @context.on(event_name, &callback)
       end
 
       # @return [Response]

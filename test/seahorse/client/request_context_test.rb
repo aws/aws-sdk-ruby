@@ -108,6 +108,18 @@ module Seahorse
 
       end
 
+      describe '#on and #emit' do
+
+        it 'registers an event listener on #events' do
+          emitted = false
+          context = RequestContext.new
+          context.on(:event_name) { emitted = true }
+          context.emit(:event_name)
+          emitted.must_equal(true)
+        end
+
+      end
+
     end
   end
 end
