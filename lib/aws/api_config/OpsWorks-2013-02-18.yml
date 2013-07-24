@@ -55,6 +55,12 @@
     - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
     - :boolean
     CustomCookbooksSource:
@@ -190,6 +196,8 @@
     - :string
     Os:
     - :string
+    AmiId:
+    - :string
     SshKeyName:
     - :string
     AvailabilityZone:
@@ -198,6 +206,8 @@
     - :string
     RootDeviceType:
     - :string
+    InstallUpdatesOnBoot:
+    - :boolean
   :outputs:
     InstanceId:
       :sym: :instance_id
@@ -266,6 +276,8 @@
         Shutdown:
         - :list:
           - :string
+    InstallUpdatesOnBoot:
+    - :boolean
   :outputs:
     LayerId:
       :sym: :layer_id
@@ -299,6 +311,12 @@
     - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
     - :boolean
     CustomCookbooksSource:
@@ -582,6 +600,9 @@
         Name:
           :sym: :name
           :type: :string
+        Domain:
+          :sym: :domain
+          :type: :string
         Region:
           :sym: :region
           :type: :string
@@ -612,6 +633,9 @@
           :type: :string
         LayerId:
           :sym: :layer_id
+          :type: :string
+        VpcId:
+          :sym: :vpc_id
           :type: :string
         AvailabilityZones:
           :sym: :availability_zones
@@ -664,6 +688,9 @@
         Os:
           :sym: :os
           :type: :string
+        AmiId:
+          :sym: :ami_id
+          :type: :string
         AvailabilityZone:
           :sym: :availability_zone
           :type: :string
@@ -709,6 +736,9 @@
         RootDeviceVolumeId:
           :sym: :root_device_volume_id
           :type: :string
+        InstallUpdatesOnBoot:
+          :sym: :install_updates_on_boot
+          :type: :boolean
 - :name: DescribeLayers
   :method: :describe_layers
   :inputs:
@@ -819,6 +849,9 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        InstallUpdatesOnBoot:
+          :sym: :install_updates_on_boot
+          :type: :boolean
 - :name: DescribeLoadBasedAutoScaling
   :method: :describe_load_based_auto_scaling
   :inputs:
@@ -1027,6 +1060,16 @@
         CustomJson:
           :sym: :custom_json
           :type: :string
+        ConfigurationManager:
+          :sym: :configuration_manager
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Version:
+              :sym: :version
+              :type: :string
         UseCustomCookbooks:
           :sym: :use_custom_cookbooks
           :type: :boolean
@@ -1419,10 +1462,14 @@
     - :string
     Os:
     - :string
+    AmiId:
+    - :string
     SshKeyName:
     - :string
     Architecture:
     - :string
+    InstallUpdatesOnBoot:
+    - :boolean
   :outputs: {}
 - :name: UpdateLayer
   :method: :update_layer
@@ -1483,6 +1530,8 @@
         Shutdown:
         - :list:
           - :string
+    InstallUpdatesOnBoot:
+    - :boolean
   :outputs: {}
 - :name: UpdateStack
   :method: :update_stack
@@ -1510,6 +1559,12 @@
     - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
     - :boolean
     CustomCookbooksSource:
