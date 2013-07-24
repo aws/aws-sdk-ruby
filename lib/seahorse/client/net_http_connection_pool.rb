@@ -325,7 +325,7 @@ module Seahorse
           @http
         end
 
-        def __setojb__(obj)
+        def __setobj__(obj)
           @http = obj
         end
 

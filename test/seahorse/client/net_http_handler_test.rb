@@ -30,6 +30,12 @@ module Seahorse
         @handler ||= NetHttpHandler.new(config)
       end
 
+      def setup
+        endpoint = Endpoint.new('test.endpoint.api')
+        context.http_request.endpoint = endpoint
+        stub_request(:any, endpoint)
+      end
+
       it 'is a Handler' do
         NetHttpHandler.new(config).must_be_kind_of(Handler)
       end

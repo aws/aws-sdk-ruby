@@ -30,7 +30,7 @@ module Seahorse
       # @param [RequestContext] context
       # @return [Response]
       def call(context)
-        #transmit(context.http_request, context.http_response)
+        transmit(context.http_request, context.http_response)
         Response.new(context: context).signal_complete
       end
 
