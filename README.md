@@ -17,7 +17,7 @@ dependency (aws-sdk follows [semantic versioning](http://semver.org/)):
 
 You need to provide your AWS security credentials and choose a default region.
 
-```ruby
+```
 AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2')
 ```
 
@@ -42,7 +42,7 @@ response data. The service interfaces provide a higher level abstration built us
 
 **Example: list instance tags using a client**
 
-```ruby
+```
 resp = ec2.client.describe_tags(filters: [{ name: "resource-id", values: ["i-12345678"] }])
 resp[:tag_set].first
 #=> {:resource_id=>"i-12345678", :resource_type=>"instance", :key=>"role", :value=>"web"}
@@ -50,7 +50,7 @@ resp[:tag_set].first
 
 **Example: list instance tags using the AWS::EC2 higher level interface**
 
-```ruby
+```
 ec2.instances['i-12345678'].tags.to_h
 #=> {"role"=>"web"}
 ```
