@@ -33,6 +33,10 @@ module Seahorse
         NetHttpHandler.new(config).must_be_kind_of(Handler)
       end
 
+      it 'provides access to the configuration' do
+        NetHttpHandler.new(config).config.must_be_same_as(config)
+      end
+
       it 'returns a Response object from #call' do
         handler.call(context).must_be_kind_of(Response)
       end
