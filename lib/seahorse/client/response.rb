@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'thread'
+
 module Seahorse
   class Client
     class Response
@@ -21,6 +23,8 @@ module Seahorse
       # @option options [String] :body ('')
       def initialize(options = {})
         @context = options[:context]
+        @complete_callbacks = []
+        @complete_mutex = Mutex.new
       end
 
       # @return [RequestContext, nil]
@@ -34,6 +38,35 @@ module Seahorse
       # @return [HttpResponse]
       def http_response
         @context.http_response
+      end
+
+      # @return [void]
+      def on_complete(&callback)
+        @complete_mutex.synchronize do
+          if @completed
+            yield(self)
+          else
+            @complete_callbacks << Proc.new
+          end
+        end
+      end
+
+      # This method should only be called by the HTTP handler that generates
+      # this {Response}.  This triggers all {#on_complete} callbacks.
+      # @return [Request] Returns `self`.
+      def signal_complete
+        @complete_mutex.synchronize do
+          @completed = true
+          @complete_callbacks.each { |callback| callback.call(self) }
+          self
+        end
+      end
+
+      # @return [Boolean] Returns `true` if the full response has been received.
+      def complete?
+        @complete_mutex.synchronize do
+          !!@completed
+        end
       end
 
     end

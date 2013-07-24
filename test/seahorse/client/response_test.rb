@@ -59,6 +59,82 @@ module Seahorse
 
       end
 
+      describe '#completed?' do
+
+        it 'defaults to false' do
+          Response.new.complete?.must_equal(false)
+        end
+
+        it 'returns true if the response has been signaled' do
+          resp = Response.new
+          resp.signal_complete
+          resp.complete?.must_equal(true)
+        end
+
+      end
+
+      describe '#on_complete' do
+
+        it 'registers a callback that is triggered upon completion' do
+          called = false
+          resp = Response.new
+          resp.on_complete { called = true }
+          resp.signal_complete
+          called.must_equal(true)
+        end
+
+        it 'does not trigger callbacks when not signaled' do
+          called = false
+          resp = Response.new
+          resp.on_complete { called = true }
+          #resp.signal_complete
+          called.must_equal(false)
+        end
+
+        it 'triggers directly if the response has already been signaled' do
+          called = false
+          resp = Response.new
+          resp.signal_complete
+          resp.on_complete { called = true }
+          called.must_equal(true)
+        end
+
+        it 'accepts multiple callbacks' do
+          count = 0
+          resp = Response.new
+          3.times { resp.on_complete { count += 1 }}
+          resp.signal_complete
+          count.must_equal(3)
+        end
+
+        it 'triggers callbacks with FIFO ordering' do
+          order = []
+          resp = Response.new
+          resp.on_complete { order << 1 }
+          resp.on_complete { order << 2 }
+          resp.on_complete { order << 3 }
+          resp.signal_complete
+          order.must_equal([1, 2, 3])
+        end
+
+        it 'passes the response to the callback when arg accepted' do
+          callback_arg = nil
+          resp = Response.new
+          resp.on_complete { |response| callback_arg = response }
+          resp.signal_complete
+          callback_arg.must_be_same_as(resp)
+        end
+
+      end
+
+      describe '#signal_complete' do
+
+        it 'returns self' do
+          resp = Response.new
+          resp.signal_complete.must_be_same_as(resp)
+        end
+
+      end
     end
   end
 end

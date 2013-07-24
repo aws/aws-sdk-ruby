@@ -18,7 +18,7 @@ module Seahorse
       # @param [RequestContext] context
       # @return [Response]
       def call(context)
-        Response.new(context: context)
+        Response.new(context: context).signal_complete
       end
 
     end

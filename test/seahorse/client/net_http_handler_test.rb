@@ -21,6 +21,10 @@ module Seahorse
         @config ||= Configuration.new
       end
 
+      def context
+        @context ||= RequestContext.new
+      end
+
       def handler
         @handler ||= NetHttpHandler.new(config)
       end
@@ -29,27 +33,18 @@ module Seahorse
         NetHttpHandler.new(config).must_be_kind_of(Handler)
       end
 
-      describe '#call' do
-
-        def context
-          @context ||= RequestContext.new
-        end
-
-        it 'returns a response object' do
-          handler.call(context).must_be_kind_of(Response)
-        end
-
-        it 'returns a response with the given context' do
-          handler.call(context).context.must_be_same_as(context)
-        end
-
-        it 'emits :http_headers'
-
-        it 'emits :http_data'
-
-        it 'emits :http_done'
-
+      it 'returns a Response object from #call' do
+        handler.call(context).must_be_kind_of(Response)
       end
+
+      it 'populates the #context of the returned response' do
+        handler.call(context).context.must_be_same_as(context)
+      end
+
+      it 'returns a completed request' do
+        handler.call(context).complete?.must_equal(true)
+      end
+
     end
   end
 end
