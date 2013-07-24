@@ -49,7 +49,7 @@ module Seahorse
 
             # extract HTTP status code and headers
             response.status_code = resp.code.to_i
-            response.headers.update(resp.to_hash)
+            response.headers.update(response_headers(resp))
 
             # read the body in chunks
             resp.read_body do |chunk|
@@ -102,6 +102,15 @@ module Seahorse
           headers[key] = value
         end
         headers
+      end
+
+      # @param [Net::HTTP::Response] response
+      # @return [Hash<String, String>]
+      def response_headers(response)
+        response.to_hash.inject({}) do |headers, (k, v)|
+          headers[k] = v.first
+          headers
+        end
       end
 
     end

@@ -139,7 +139,7 @@ module Seahorse
           resp.complete?.must_equal(true)
         end
 
-        describe 'endpoint' do
+        describe 'request endpoint' do
 
           it 'makes a request against the given endpoint' do
             @endpoint = Endpoint.new('http://foo.bar.com')
@@ -161,7 +161,7 @@ module Seahorse
 
         end
 
-        describe 'http method' do
+        describe 'request http method' do
 
           it 'uses the http_request#http_method to make the request' do
             http_request.http_method = 'POST'
@@ -179,7 +179,7 @@ module Seahorse
 
         end
 
-        describe 'headers' do
+        describe 'request headers' do
 
           it 'passes along http_request#headers' do
             http_request.headers['abc'] = 'xyz'
@@ -217,7 +217,7 @@ module Seahorse
 
         end
 
-        describe 'path' do
+        describe 'request path' do
 
           it 'sends the request with the correct request uri' do
             http_request.path = '/path'
@@ -233,7 +233,7 @@ module Seahorse
 
         end
 
-        describe 'body' do
+        describe 'request body' do
 
           it 'sends the body' do
             http_request.body = StringIO.new('request-body')
@@ -243,6 +243,24 @@ module Seahorse
 
         end
 
+        describe 'response' do
+
+          it 'populates the status code' do
+            stub_request(:any, endpoint).to_return(status: 200)
+            make_request.http_response.status_code.must_equal(200)
+          end
+
+          it 'populates the headers' do
+            stub_request(:any, endpoint).to_return(headers: { foo: 'bar' })
+            make_request.http_response.headers['foo'].must_equal('bar')
+          end
+
+          it 'populates the response body' do
+            stub_request(:any, endpoint).to_return(body: 'response-body')
+            make_request.http_response.body.must_equal('response-body')
+          end
+
+        end
       end
     end
   end
