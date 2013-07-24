@@ -12,13 +12,14 @@
 # language governing permissions and limitations under the License.
 
 require 'test_helper'
+require 'ostruct'
 
 module Seahorse
   class Client
     describe NetHttpHandler do
 
       def config
-        @config ||= Configuration.new
+        @config ||= OpenStruct.new
       end
 
       def context
@@ -47,6 +48,14 @@ module Seahorse
 
       it 'returns a completed request' do
         handler.call(context).complete?.must_equal(true)
+      end
+
+      describe '#pool' do
+
+        it 'constructs a NetHttpConnectionPool' do
+          handler.pool.must_be_kind_of(NetHttpConnectionPool)
+        end
+
       end
 
     end

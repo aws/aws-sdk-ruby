@@ -34,13 +34,13 @@ module Seahorse
       # @return [Endpoint, nil]
       attr_accessor :endpoint
 
-      # @return [String]
+      # @return [String] The HTTP request method, e.g. `GET`, `PUT`, etc.
       attr_accessor :http_method
 
-      # @return [String]
+      # @return [String] The path name and querystring, e.g. `/abc?mno=xyz`.
       attr_accessor :path
 
-      # @return [HeaderHash]
+      # @return [HeaderHash] The hash of request headers.
       attr_accessor :headers
 
       # @return [#read, #rewind] An IO-like object that responds to `#read`

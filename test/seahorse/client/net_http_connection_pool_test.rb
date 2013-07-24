@@ -11,27 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'test_helper'
+
 module Seahorse
   class Client
-    module Plugins
-      module NetHttpPlugin
-
-        # @param [Configuration] config
-        # @return [void]
-        def self.add_configuration(config)
-          NetHttpConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-            config.add_option(opt_name, default_value)
-          end
-        end
-
-        # @param [HandlerList] handlers
-        # @param [Configuration] config
-        # @return [void]
-        def self.add_handlers(handlers, config)
-          handlers.add(NetHttpHandler, priority: :send)
-        end
-
-      end
+    describe NetHttpConnectionPool do
     end
   end
 end
