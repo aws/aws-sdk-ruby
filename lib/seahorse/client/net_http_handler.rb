@@ -36,20 +36,20 @@ module Seahorse
 
       private
 
-      # @param [HttpRequest] http_req
-      # @param [HttpResponse] http_resp
+      # @param [HttpRequest] request
+      # @param [HttpResponse] response
       # @return [void]
-      def transmit(http_req, http_resp)
+      def transmit(request, response)
         @pool.session_for(request.endpoint) do |http|
-          http.request(build_request(http_req)) do |resp|
+          http.request(net_http_request(request)) do |resp|
 
             # extract HTTP status code and headers
-            http_resp.status_code = resp.code.to_i
-            http_resp.headers.update(resp.to_hash)
+            response.status_code = resp.code.to_i
+            response.headers.update(resp.to_hash)
 
             # read the body in chunks
             resp.read_body do |chunk|
-              http_resp.body << chunk
+              response.body << chunk
             end
 
           end
@@ -70,17 +70,11 @@ module Seahorse
       # a {Seahorse::Client::HttpRequest}.
       # @param [HttpRequest] request
       # @return [Net::HTTP::Request]
-      def build_request(request)
+      def net_http_request(request)
+        request_class = Net::HTTP.const_get(request.http_method.capitalize)
         request = request_class.new(request.path, headers(request))
         request.body_stream = request.body
         request
-      end
-
-      # @param [HttpRequest] request
-      # @return Returns the base class for a `Net::HTTP::Request`, e.g.
-      #   `Net::HTTP::Get`, `Net::HTTP::Post`, etc.
-      def request_class(request)
-        Net::HTTP.const_get(request.http_method.capitalize)
       end
 
       # @param [HttpRequest] request
