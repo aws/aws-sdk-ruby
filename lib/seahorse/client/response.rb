@@ -25,8 +25,9 @@ module Seahorse
         @context = options[:context] || RequestContext.new
         @http_request = @context.http_request
         @http_response = @context.http_response
-        @complete_callbacks = []
         @complete_mutex = Mutex.new
+        @complete_callbacks = []
+        @completed = false
       end
 
       # @return [RequestContext]
@@ -63,7 +64,7 @@ module Seahorse
       # @return [Boolean] Returns `true` if the full response has been received.
       def complete?
         @complete_mutex.synchronize do
-          !!@completed
+          @completed
         end
       end
 
