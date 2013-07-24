@@ -13,10 +13,6 @@
 
 module Seahorse
   class Client
-
-    # Represents a single request.  You can send a request multiple
-    # times.  Each time you send a request, you will get a new
-    # {Response}.
     class Request
 
       # @param [Handler] handler
