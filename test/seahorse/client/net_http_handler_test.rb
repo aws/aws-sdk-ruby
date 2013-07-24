@@ -30,30 +30,12 @@ module Seahorse
         @handler ||= NetHttpHandler.new(config)
       end
 
-      def setup
-        endpoint = Endpoint.new('test.endpoint.api')
-        context.http_request.endpoint = endpoint
-        stub_request(:any, endpoint)
-      end
+      describe '#config' do
 
-      it 'is a Handler' do
-        NetHttpHandler.new(config).must_be_kind_of(Handler)
-      end
+        it 'provides access to the configuration' do
+          NetHttpHandler.new(config).config.must_be_same_as(config)
+        end
 
-      it 'provides access to the configuration' do
-        NetHttpHandler.new(config).config.must_be_same_as(config)
-      end
-
-      it 'returns a Response object from #call' do
-        handler.call(context).must_be_kind_of(Response)
-      end
-
-      it 'populates the #context of the returned response' do
-        handler.call(context).context.must_be_same_as(context)
-      end
-
-      it 'returns a completed request' do
-        handler.call(context).complete?.must_equal(true)
       end
 
       describe '#pool' do
@@ -115,6 +97,29 @@ module Seahorse
 
       end
 
+      describe '#call' do
+
+        def setup
+          @endpoint = Endpoint.new('test.endpoint.api')
+          context.http_request.endpoint = @endpoint
+        end
+
+        it 'returns a Response object from #call' do
+          stub_request(:any, @endpoint)
+          handler.call(context).must_be_kind_of(Response)
+        end
+
+        it 'populates the #context of the returned response' do
+          stub_request(:any, @endpoint)
+          handler.call(context).context.must_be_same_as(context)
+        end
+
+        it 'returns a completed request' do
+          stub_request(:any, @endpoint)
+          handler.call(context).complete?.must_equal(true)
+        end
+
+      end
     end
   end
 end
