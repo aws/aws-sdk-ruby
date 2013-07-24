@@ -25,6 +25,12 @@ Feature: EC2 Reserved Instances
     | TYPE  | NAME       | VALUE                              |
     | param | Action     | DescribeReservedInstancesOfferings |
 
+  Scenario: Paging reserved instance offerings
+    When I enumerate reserved instance offerings with a limit of 10 and batch size of 2
+    Then 5 requests should have been made like:
+    | TYPE  | NAME       | VALUE                              |
+    | param | Action     | DescribeReservedInstancesOfferings |
+
   @memoized
   Scenario: Describing reserved instance offerings with memoization
     Given I start a memoization block
