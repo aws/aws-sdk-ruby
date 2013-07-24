@@ -62,6 +62,57 @@ module Seahorse
           handler.pool.must_be_kind_of(NetHttpConnectionPool)
         end
 
+        it 'configures the pool#http_proxy' do
+          config.http_proxy = 'http://proxy.com'
+          handler.pool.http_proxy.must_equal(URI.parse('http://proxy.com'))
+        end
+
+        it 'configures the pool#http_continue_timeout' do
+          config.http_continue_timeout = 123
+          handler.pool.http_continue_timeout.must_equal(123)
+        end
+
+        it 'configures the pool#http_open_timeout' do
+          config.http_open_timeout = 123
+          handler.pool.http_open_timeout.must_equal(123)
+        end
+
+        it 'configures the pool#http_read_timeout' do
+          config.http_read_timeout = 123
+          handler.pool.http_read_timeout.must_equal(123)
+        end
+
+        it 'configures the pool#http_idle_timeout' do
+          config.http_idle_timeout = 123
+          handler.pool.http_idle_timeout.must_equal(123)
+        end
+
+        it 'configures the pool#http_wire_trace' do
+          config.http_wire_trace = true
+          handler.pool.http_wire_trace.must_equal(true)
+        end
+
+        it 'configures the pool#logger' do
+          config.http_wire_trace = true
+          config.logger = Object.new
+          handler.pool.logger.must_be_same_as(config.logger)
+        end
+
+        it 'configures the pool#ssl_verify_peer' do
+          config.ssl_verify_peer = false
+          handler.pool.ssl_verify_peer.must_equal(false)
+        end
+
+        it 'configures the pool#ssl_ca_bundle' do
+          config.ssl_ca_bundle = '/path/to/ca-bundle.crt'
+          handler.pool.ssl_ca_bundle.must_equal('/path/to/ca-bundle.crt')
+        end
+
+        it 'configures the pool#ssl_ca_directory' do
+          config.ssl_ca_bundle = '/path/to/certs'
+          handler.pool.ssl_ca_bundle.must_equal('/path/to/certs')
+        end
+
       end
 
     end
