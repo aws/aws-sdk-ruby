@@ -18,6 +18,10 @@ module Seahorse
     # the Ruby's `Net::HTTP`.
     class NetHttpHandler < Handler
 
+      # Raised when {NetHttpHandler} can not construct a `Net::HTTP::Request`
+      # from the given `#http_method`.
+      class InvalidHttpVerbError < StandardError; end
+
       # @param [Configuration] config
       def initialize(config, handler = nil)
         @config = config
@@ -71,10 +75,21 @@ module Seahorse
       # @param [HttpRequest] request
       # @return [Net::HTTP::Request]
       def net_http_request(request)
-        request_class = Net::HTTP.const_get(request.http_method.capitalize)
-        request = request_class.new(request.path, headers(request))
-        request.body_stream = request.body
-        request
+        request_class = net_http_request_class(request)
+        req = request_class.new(request.path, headers(request))
+        req.body_stream = request.body
+        req
+      end
+
+      # @param [HttpRequest] request
+      # @raise [InvalidHttpVerbError]
+      # @return Returns a base `Net::HTTP::Request` class, e.g.,
+      #   `Net::HTTP::Get`, `Net::HTTP::Post`, etc.
+      def net_http_request_class(request)
+        Net::HTTP.const_get(request.http_method.capitalize)
+      rescue NameError
+        msg = "`#{request.http_method}` is not a valid http verb"
+        raise InvalidHttpVerbError, msg
       end
 
       # @param [HttpRequest] request

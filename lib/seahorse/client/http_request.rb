@@ -37,11 +37,11 @@ module Seahorse
       # @return [String] The HTTP request method, e.g. `GET`, `PUT`, etc.
       attr_accessor :http_method
 
-      # @return [String] The path name and querystring, e.g. `/abc?mno=xyz`.
-      attr_accessor :path
-
       # @return [HeaderHash] The hash of request headers.
       attr_accessor :headers
+
+      # @return [String] The path name and querystring, e.g. `/abc?mno=xyz`.
+      attr_accessor :path
 
       # @return [#read, #rewind] An IO-like object that responds to `#read`
       #  and `#rewind`.

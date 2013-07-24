@@ -13,6 +13,7 @@
 
 require 'test_helper'
 require 'ostruct'
+require 'stringio'
 
 module Seahorse
   class Client
@@ -22,17 +23,34 @@ module Seahorse
         @config ||= OpenStruct.new
       end
 
+      def endpoint
+        @endpoint ||= Endpoint.new('test.endpoint.api')
+      end
+
       def context
-        @context ||= RequestContext.new
+        @context ||= begin
+          context = RequestContext.new
+          context.http_request.endpoint = endpoint
+          context
+        end
       end
 
       def handler
         @handler ||= NetHttpHandler.new(config)
       end
 
+      def make_request
+        handler.call(context)
+      end
+
+      def setup
+        WebMock.disable_net_connect!
+      end
+
       describe '#config' do
 
         it 'provides access to the configuration' do
+          config = OpenStruct.new
           NetHttpHandler.new(config).config.must_be_same_as(config)
         end
 
@@ -99,24 +117,130 @@ module Seahorse
 
       describe '#call' do
 
-        def setup
-          @endpoint = Endpoint.new('test.endpoint.api')
-          context.http_request.endpoint = @endpoint
+        def http_request
+          context.http_request
         end
 
         it 'returns a Response object from #call' do
-          stub_request(:any, @endpoint)
-          handler.call(context).must_be_kind_of(Response)
+          stub_request(:any, endpoint)
+          resp = make_request
+          resp.must_be_kind_of(Response)
         end
 
         it 'populates the #context of the returned response' do
-          stub_request(:any, @endpoint)
-          handler.call(context).context.must_be_same_as(context)
+          stub_request(:any, endpoint)
+          resp = make_request
+          resp.context.must_be_same_as(context)
         end
 
         it 'returns a completed request' do
-          stub_request(:any, @endpoint)
-          handler.call(context).complete?.must_equal(true)
+          stub_request(:any, endpoint)
+          resp = make_request
+          resp.complete?.must_equal(true)
+        end
+
+        describe 'endpoint' do
+
+          it 'makes a request against the given endpoint' do
+            @endpoint = Endpoint.new('http://foo.bar.com')
+            stub_request(:any, 'http://foo.bar.com')
+            make_request
+          end
+
+          it 'observes the Endpoint#port' do
+            @endpoint = Endpoint.new('http://foo.bar.com:9876')
+            stub_request(:any, 'http://foo.bar.com:9876')
+            make_request
+          end
+
+          it 'observes the Endpoint#scheme' do
+            @endpoint = Endpoint.new('https://foo.bar.com')
+            stub_request(:any, 'https://foo.bar.com')
+            make_request
+          end
+
+        end
+
+        describe 'http method' do
+
+          it 'uses the http_request#http_method to make the request' do
+            http_request.http_method = 'POST'
+            stub_request(:post, endpoint)
+            make_request
+          end
+
+          it 'raises a helpful error if the request method is invalid' do
+            http_request.http_method = 'abc'
+            err = assert_raises(NetHttpHandler::InvalidHttpVerbError) do
+              make_request
+            end
+            err.message.must_equal('`abc` is not a valid http verb')
+          end
+
+        end
+
+        describe 'headers' do
+
+          it 'passes along http_request#headers' do
+            http_request.headers['abc'] = 'xyz'
+            stub_request(:any, endpoint).with(:headers => { 'abc' => 'xyz' })
+            make_request
+          end
+
+          it 'populates a default content-type header' do
+            # this prevents net/http from setting content-type on our behalf
+            stub_request(:any, endpoint).
+              with(:headers => { 'content-type' => '' })
+            make_request
+          end
+
+          it 'does not clobber a custom content-type' do
+            http_request.headers['Content-Type'] = 'application/json'
+            stub_request(:any, endpoint).
+              with(:headers => { 'content-type' => 'application/json' })
+            make_request
+          end
+
+          it 'populates a default accept-encoding header' do
+            # this prevents net/http from setting accept-encoding on our behalf
+            stub_request(:any, endpoint).
+              with(:headers => { 'accept-encoding' => '' })
+            make_request
+          end
+
+          it 'does not clobber a custom accept-encoding' do
+            http_request.headers['Accept-Encoding'] = 'text/plain'
+            stub_request(:any, endpoint).
+              with(:headers => { 'accept-encoding' => 'text/plain' })
+            make_request
+          end
+
+        end
+
+        describe 'path' do
+
+          it 'sends the request with the correct request uri' do
+            http_request.path = '/path'
+            stub_request(:any, "#{endpoint}/path")
+            make_request
+          end
+
+          it 'sends the request with the querystring' do
+            http_request.path = '/abc?mno=xyz'
+            stub_request(:any, "#{endpoint}/abc?mno=xyz")
+            make_request
+          end
+
+        end
+
+        describe 'body' do
+
+          it 'sends the body' do
+            http_request.body = StringIO.new('request-body')
+            stub_request(:any, endpoint).with(body: 'request-body')
+            make_request
+          end
+
         end
 
       end
