@@ -26,6 +26,10 @@ module Seahorse
 
         describe '#add_configuration' do
 
+          it 'adds a :http_proxy option without default' do
+            config.http_proxy.must_equal(nil)
+          end
+
           it 'adds a :http_open_timeout option with default' do
             config.http_open_timeout.must_equal(15)
           end
@@ -38,20 +42,25 @@ module Seahorse
             config.http_idle_timeout.must_equal(5)
           end
 
+          it 'adds a :http_continue_timeout option with default' do
+            config.http_continue_timeout.must_equal(1)
+          end
+
           it 'adds a :http_wire_trace option with default' do
             config.http_wire_trace.must_equal(false)
           end
 
-          it 'adds a :http_proxy option without default' do
-            config.http_proxy.must_equal(nil)
+          it 'adds a :logger option without default' do
+            config.logger.must_equal(nil)
           end
 
           it 'adds a :ssl_verify_peer option with default' do
             config.ssl_verify_peer.must_equal(true)
           end
 
-          it 'adds a :ssl_ca_bundle option without default' do
-            config.ssl_ca_bundle.must_equal(nil)
+          it 'adds a :ssl_ca_bundle option with default' do
+            config.ssl_ca_bundle.must_equal(File.expand_path(File.join(
+              File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle-crt')))
           end
 
           it 'adds a :ssl_ca_directory option without default' do
