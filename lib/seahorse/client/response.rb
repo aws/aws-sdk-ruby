@@ -22,23 +22,21 @@ module Seahorse
       # @option options [HashHeader] :headers (HeaderHash.new)
       # @option options [String] :body ('')
       def initialize(options = {})
-        @context = options[:context]
+        @context = options[:context] || RequestContext.new
+        @http_request = @context.http_request
+        @http_response = @context.http_response
         @complete_callbacks = []
         @complete_mutex = Mutex.new
       end
 
-      # @return [RequestContext, nil]
-      attr_accessor :context
+      # @return [RequestContext]
+      attr_reader :context
 
       # @return [HttpRequest]
-      def http_request
-        @context.http_request
-      end
+      attr_reader :http_request
 
       # @return [HttpResponse]
-      def http_response
-        @context.http_response
-      end
+      attr_reader :http_response
 
       # @return [void]
       def on_complete(&callback)

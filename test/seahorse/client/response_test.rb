@@ -19,20 +19,13 @@ module Seahorse
 
       describe '#context' do
 
-        it 'defaults to nil' do
-          Response.new.context.must_equal(nil)
+        it 'defaults to a new context' do
+          Response.new.context.must_be_kind_of(RequestContext)
         end
 
         it 'can be set in the constructor' do
-          context = Object.new
+          context = RequestContext.new
           Response.new(context: context).context.must_be_same_as(context)
-        end
-
-        it 'is mustable' do
-          context = Object.new
-          resp = Response.new
-          resp.context = context
-          resp.context.must_be_same_as(context)
         end
 
       end
