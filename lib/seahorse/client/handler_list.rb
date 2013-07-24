@@ -13,7 +13,6 @@
 
 module Seahorse
   class Client
-    # @api private
     class HandlerList
 
       include Enumerable
