@@ -1,3 +1,111 @@
+2013-07-24 Loren Segal <lsegal@amazon.com>
+
+  * doc-src/templates/default/layout/html/footer.erb: Fix SiteCatalyst link
+
+  * lib/aws/dynamo_db/client.rb: Added back missing zlib statement.
+
+2013-07-23 Landon Clark <landon.clark@wildflowerhealth.com>
+
+  * lib/aws/ec2/tag_collection.rb: Fixed example for creating a tag collection
+  for an ec2 instance.
+
+  * .yardopts, doc-src/CloudSearch/V20110201.yml,
+  doc-src/CloudWatch/V20100801.yml, doc-src/DataPipeline/V20121029.yml,
+  doc-src/DynamoDB/V20111205.yml, doc-src/DynamoDB/V20120810.yml,
+  doc-src/EC2/V20130201.yml, doc-src/ELB/V20120601.yml,
+  doc-src/EMR/V20090331.yml, doc-src/ElastiCache/V20121115.yml,
+  doc-src/IAM/V20100508.yml, doc-src/OpsWorks/V20130218.yml,
+  doc-src/RDS/V20130515.yml, doc-src/Redshift/V20121201.yml,
+  doc-src/Route53/V20121212.yml, doc-src/SNS/V20100331.yml,
+  doc-src/SQS/V20121105.yml, doc-src/STS/V20110615.yml,
+  doc-src/SimpleDB/V20090415.yml, doc-src/SimpleEmailService/V20101201.yml,
+  doc-src/SimpleWorkflow/V20120125.yml: Moved API doc src from client classes
+  into YAML files.
+
+  * lib/aws/api_config/SNS-2010-03-31.yml,
+  lib/aws/api_config/SimpleWorkflow-2012-01-25.yml: Updated SWF and SNS api
+  configurations.
+
+2013-07-22 Trevor Rowe <trevorrowe@gmail.com>
+
+  * doc-src/AutoScaling/V20110101.yml, doc-src/CloudFormation/V20100515.yml,
+  doc-src/CloudFront/V20130512.yml, doc-src/CloudSearch/V20110201.yml,
+  doc-src/CloudWatch/V20100801.yml, doc-src/DataPipeline/V20121029.yml,
+  doc-src/DirectConnect/V20121025.yml, doc-src/DynamoDB/V20111205.yml,
+  doc-src/DynamoDB/V20120810.yml, doc-src/EC2/V20130201.yml,
+  doc-src/ELB/V20120601.yml, doc-src/EMR/V20090331.yml,
+  doc-src/ElastiCache/V20121115.yml, doc-src/ElasticBeanstalk/V20101201.yml,
+  doc-src/ElasticTranscoder/V20120925.yml, doc-src/Glacier/V20120601.yml,
+  doc-src/OpsWorks/V20130218.yml, doc-src/RDS/V20130515.yml,
+  doc-src/Redshift/V20121201.yml, doc-src/Route53/V20121212.yml,
+  doc-src/SNS/V20100331.yml, doc-src/SQS/V20121105.yml,
+  doc-src/SimpleDB/V20090415.yml, doc-src/SimpleEmailService/V20101201.yml,
+  doc-src/SimpleWorkflow/V20120125.yml, doc-src/StorageGateway/V20120630.yml,
+  doc-src/Support/V20130415.yml: Fixed faultly formatting of api docs.
+
+  * lib/aws/dynamo_db/client_v2.rb: Replaces @api private with @deprecated for
+  AWS::DynamoDB::ClientV2.
+
+  * lib/aws/dynamo_db.rb, lib/aws/dynamo_db/client.rb,
+  lib/aws/dynamo_db/client_base.rb: Removed the no-longer-needed
+  DynamoDB::ClientBase class.
+
+  * .yardopts, doc-src/AutoScaling/V20110101.yml,
+  doc-src/CloudFormation/V20100515.yml, doc-src/CloudFront/V20130512.yml,
+  doc-src/CloudSearch/V20110201.yml, doc-src/CloudWatch/V20100801.yml,
+  doc-src/DataPipeline/V20121029.yml, doc-src/DirectConnect/V20121025.yml,
+  doc-src/DynamoDB/V20111205.yml, doc-src/DynamoDB/V20120810.yml,
+  doc-src/EC2/V20130201.yml, doc-src/ELB/V20120601.yml,
+  doc-src/EMR/V20090331.yml, doc-src/ElastiCache/V20121115.yml,
+  doc-src/ElasticBeanstalk/V20101201.yml,
+  doc-src/ElasticTranscoder/V20120925.yml, doc-src/Glacier/V20120601.yml,
+  doc-src/IAM/V20100508.yml, doc-src/ImportExport/V20100601.yml,
+  doc-src/OpsWorks/V20130218.yml, doc-src/RDS/V20130515.yml,
+  doc-src/Redshift/V20121201.yml, doc-src/Route53/V20121212.yml,
+  doc-src/SNS/V20100331.yml, doc-src/SQS/V20121105.yml,
+  doc-src/STS/V20110615.yml, doc-src/SimpleDB/V20090415.yml,
+  doc-src/SimpleEmailService/V20101201.yml,
+  doc-src/SimpleWorkflow/V20120125.yml, doc-src/StorageGateway/V20120630.yml,
+  doc-src/Support/V20130415.yml, doc-src/api_docs_plugin.rb: Moved Client
+  class API documentation into yaml files inside doc-src.
+
+  These are now applied to the client classes as well as the parent Client
+  class.
+
+  * lib/aws/sns/message.rb: Minor yard doc tag fix.
+
+2013-07-19 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/auto_scaling/client.rb, lib/aws/cloud_formation/client.rb,
+  lib/aws/cloud_front/client.rb, lib/aws/cloud_search/client.rb,
+  lib/aws/cloud_watch/client.rb, lib/aws/data_pipeline/client.rb,
+  lib/aws/direct_connect/client.rb, lib/aws/ec2/client.rb,
+  lib/aws/elastic_beanstalk/client.rb, lib/aws/elastic_transcoder/client.rb,
+  lib/aws/elasticache/client.rb, lib/aws/elb/client.rb, lib/aws/emr/client.rb,
+  lib/aws/glacier/client.rb, lib/aws/iam/client.rb,
+  lib/aws/import_export/client.rb, lib/aws/ops_works/client.rb,
+  lib/aws/rds/client.rb, lib/aws/redshift/client.rb,
+  lib/aws/route_53/client.rb, lib/aws/simple_db/client.rb,
+  lib/aws/simple_email_service/client.rb, lib/aws/simple_workflow/client.rb,
+  lib/aws/sns/client.rb, lib/aws/sqs/client.rb,
+  lib/aws/storage_gateway/client.rb, lib/aws/sts/client.rb,
+  lib/aws/support/client.rb: Removed static API documentation from client
+  classes.
+
+  * .yardopts, Gemfile: Configured yard to use rdiscount instead of redcarpet.
+
+  * features/ec2/reserved_instances.feature,
+  features/ec2/step_definitions/reserved_instances.rb,
+  lib/aws/ec2/reserved_instances_offering_collection.rb: Added support for
+  paging Amazon EC2 reserved instances offerings.
+
+2013-07-18 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.13.0
+
+  * lib/aws/api_config/Redshift-2012-12-01.yml, lib/aws/redshift/client.rb:
+  Updated AWS::Redshift::Client to latest API version.
+
 2013-07-15 Trevor Rowe <trevorrowe@gmail.com>
 
   * spec/shared/aws_client_examples.rb: Disabed aync test.
