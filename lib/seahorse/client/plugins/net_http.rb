@@ -11,8 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module Seahorse::Client::Plugins::NetHttp
-  module Plugin
+module Seahorse::Client::Plugins
+  module NetHttp
+
+    autoload :Handler, 'seahorse/client/plugins/net_http/handler'
+    autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
 
     # @param [Configuration] config
     # @return [void]

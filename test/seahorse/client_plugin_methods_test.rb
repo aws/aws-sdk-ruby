@@ -121,7 +121,7 @@ module Seahorse
 
       it 'defaults to Plugins::NetHttp::Plugin' do
         client_class = Class.new(Client)
-        client_class.plugins.to_a.must_equal([Client::Plugins::NetHttp::Plugin])
+        client_class.plugins.to_a.must_equal([Client::Plugins::NetHttp])
       end
 
       it 'replaces default plugins with the list specified in the API' do

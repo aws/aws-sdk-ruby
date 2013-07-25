@@ -27,11 +27,7 @@ module Seahorse
     autoload :VERSION, 'seahorse/client/version'
 
     module Plugins
-      module NetHttp
-        autoload :Plugin, 'seahorse/client/plugins/net_http/plugin'
-        autoload :Handler, 'seahorse/client/plugins/net_http/handler'
-        autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
-      end
+      autoload :NetHttp, 'seahorse/client/plugins/net_http'
     end
 
     module Http
@@ -44,7 +40,7 @@ module Seahorse
       autoload :ResponseBodyStream,'seahorse/client/http/response_body_stream'
     end
 
-    @plugins = PluginList.new([Plugins::NetHttp::Plugin])
+    @plugins = PluginList.new([Plugins::NetHttp])
 
     # @option options [String, URI::HTTP, URI::HTTPS, Http::Endpoint] :endpoint
     #   Endpoints specify the http scheme, hostname and port to connect
