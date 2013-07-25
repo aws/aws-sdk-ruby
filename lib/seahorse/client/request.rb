@@ -82,7 +82,7 @@ module Seahorse
       # @return [Response]
       def send(&block)
         if block_given?
-          @context.http_response.body = Http::StreamingResponseBody.new(&block)
+          @context.http_response.body = Http::ResponseBodyStream.new(&block)
         end
         @handler.call(@context)
       end

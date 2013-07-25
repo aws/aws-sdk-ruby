@@ -14,17 +14,17 @@
 require 'test_helper'
 
 module Seahorse::Client::Http
-  describe StreamingResponseBody do
+  describe ResponseBodyStream do
 
     def body
-      @body ||= StreamingResponseBody.new {}
+      @body ||= ResponseBodyStream.new {}
     end
 
     describe '#write' do
 
       it 'yields chunks directly to the block' do
         chunks = []
-        body = StreamingResponseBody.new { |chunk| chunks << chunk }
+        body = ResponseBodyStream.new { |chunk| chunks << chunk }
         body.write('abc')
         body.write('mno')
         body.write('xyz')

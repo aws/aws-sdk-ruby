@@ -14,7 +14,7 @@
 require 'thread'
 
 module Seahorse::Client::Http
-  class StreamingResponseBody
+  class ResponseBodyStream
 
     include ResponseBody
 

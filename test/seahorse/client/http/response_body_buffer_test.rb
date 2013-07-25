@@ -14,10 +14,10 @@
 require 'test_helper'
 
 module Seahorse::Client::Http
-  describe BufferedResponseBody do
+  describe ResponseBodyBuffer do
 
     def body
-      @body ||= BufferedResponseBody.new
+      @body ||= ResponseBodyBuffer.new
     end
 
     describe '#write' do

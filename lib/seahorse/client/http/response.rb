@@ -18,7 +18,7 @@ module Seahorse::Client::Http
     def initialize
       @status_code = nil
       @headers = Headers.new
-      @body = BufferedResponseBody.new
+      @body = ResponseBodyBuffer.new
     end
 
     # @return [Integer, nil]
