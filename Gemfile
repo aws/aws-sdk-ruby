@@ -18,9 +18,9 @@ gemspec
 gem 'rake', :require => false
 
 group :test do
-  gem 'simplecov', :require => false
   gem 'minitest'
   gem 'webmock'
+  gem 'simplecov', :require => false
 end
 
 group :docs do
