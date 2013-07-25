@@ -19,29 +19,12 @@ module AWS
     # @api private
     class Request < Core::Http::Request
 
-      def add_authorization! credentials
+      include Core::Signature::Version4
 
-        self.access_key_id = credentials.access_key_id
-
-        headers['x-amz-security-token'] = credentials.session_token if
-          credentials.session_token
-
-        auth = "AWS #{access_key_id}:#{signature(credentials)}"
-        headers['authorization'] = auth
-
-      end
-
-      protected
-
-      def signature credentials
-        Core::Signer.sign(credentials.secret_access_key, string_to_sign, 'sha1')
-      end
-
-      def string_to_sign
-        headers['date'] ||= Time.now.httpdate
+      def service
+        'cloudfront'
       end
 
     end
-
   end
 end
