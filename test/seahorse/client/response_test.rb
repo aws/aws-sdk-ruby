@@ -68,6 +68,13 @@ module Seahorse
 
       describe '#on_complete' do
 
+        it 'returns self' do
+          resp = Response.new
+          resp.on_complete do
+            123
+          end.must_be_same_as(resp)
+        end
+
         it 'registers a callback that is triggered upon completion' do
           called = false
           resp = Response.new

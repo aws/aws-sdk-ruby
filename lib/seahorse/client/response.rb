@@ -39,7 +39,7 @@ module Seahorse
       # @return [Http::Response]
       attr_reader :http_response
 
-      # @return [void]
+      # @return [Response] Returns self.
       def on_complete(&callback)
         @complete_mutex.synchronize do
           if @completed
@@ -48,6 +48,7 @@ module Seahorse
             @complete_callbacks << Proc.new
           end
         end
+        self
       end
 
       # This method should only be called by the HTTP handler that generates
