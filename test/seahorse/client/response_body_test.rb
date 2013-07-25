@@ -83,6 +83,29 @@ module Seahorse
 
       end
 
+      describe '#empty?' do
+
+        it 'returns true for a new response body' do
+          body.empty?.must_equal(true)
+        end
+
+        it 'returns false after writing to a body' do
+          body.write('abc')
+          body.empty?.must_equal(false)
+        end
+
+        it 'returns true after being reset' do
+          body.write('abc')
+          body.reset!
+          body.empty?.must_equal(true)
+        end
+
+        it 'returns true if empty string is written to it' do
+          body.write('')
+          body.empty?.must_equal(true)
+        end
+
+      end
     end
   end
 end
