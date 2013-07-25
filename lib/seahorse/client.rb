@@ -36,7 +36,7 @@ module Seahorse
       autoload :Response, 'seahorse/client/http/response'
       autoload :ResponseBody, 'seahorse/client/http/response_body'
       autoload :ResponseBodyBuffer, 'seahorse/client/http/response_body_buffer'
-      autoload :ResponseBodyStream,'seahorse/client/http/response_body_stream'
+      autoload :ResponseBodyStream, 'seahorse/client/http/response_body_stream'
     end
 
     @plugins = PluginList.new([Plugins::NetHttp])
