@@ -20,7 +20,6 @@ module Seahorse
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HttpHandler, 'seahorse/client/http_handler'
-    autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'

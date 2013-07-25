@@ -19,7 +19,7 @@ module Seahorse
     Plugin1 = Class.new
     Plugin2 = Class.new
 
-    SingletonPlugin = Class.new(Client::Plugin) do
+    SingletonPlugin = Class.new do
       def self.new
         @instance ||= super
       end
