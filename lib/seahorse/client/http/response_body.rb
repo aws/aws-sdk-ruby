@@ -40,7 +40,7 @@ module Seahorse::Client::Http
     end
 
     # Returns the size of the response body.  This may return a value greater
-    # than zero, even if the body is not {#available}.  This can be the case
+    # than zero, even if the body is not {#available?}.  This can be the case
     # when the response body was streamed.
     # @return [Integer] Returns the size of the response body.
     def size
