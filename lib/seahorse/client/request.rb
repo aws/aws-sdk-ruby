@@ -42,12 +42,22 @@ module Seahorse
       # # Streaming Responses
       #
       # By default, HTTP responses are buffered into memory.  This can be
-      # problematic if you are downloading large response object, like
-      # files.
+      # bad if you are downloading large responses, e.g. large files.
+      # You can avoid this by streaming the response to a block or some other
+      # target.
       #
-      # To avoid buffering the response in memory, you can pass block
-      # to `#send`.  The response will be read in chunks and yielded to
-      # the block.
+      # ## Streaming to a File
+      #
+      # TODO: write this
+      #
+      # ## Streaming to a Tempfile
+      #
+      # TODO: write this
+      #
+      # ## Block Streaming
+      #
+      # Pass a block to `#send` and the response will be yielded in chunks
+      # and will not be loaded into memory.
       #
       #     # stream the response data
       #     response = request.send do |chunk|
