@@ -21,16 +21,16 @@ module Seahorse
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
       # @option options [EventEmitter] :events (EventEmitter.new)
-      # @option options [HttpRequest] :http_request (HttpRequest.new)
-      # @option options [HttpResponse] :http_response (HttpResponse.new)
+      # @option options [Http::Request] :http_request (Http::Request.new)
+      # @option options [Http::Response] :http_response (Http::Response.new)
       #   and #rewind.
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @params = options[:params] || {}
         @config = options[:config]
         @events = options[:events] || EventEmitter.new
-        @http_request = options[:http_request] || HttpRequest.new
-        @http_response = options[:http_response] || HttpResponse.new
+        @http_request = options[:http_request] || Http::Request.new
+        @http_response = options[:http_response] || Http::Response.new
       end
 
       # @return [String] Name of the API operation called.
@@ -45,10 +45,10 @@ module Seahorse
       # @return [EventEmitter]
       attr_accessor :events
 
-      # @return [HttpRequest]
+      # @return [Http::Request]
       attr_accessor :http_request
 
-      # @return [HttpResponse]
+      # @return [Http::Response]
       attr_accessor :http_response
 
       # Registers an event listener for the named event.  The listener

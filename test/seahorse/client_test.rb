@@ -65,7 +65,7 @@ module Seahorse
       end
 
       it 'returns an Endpoint object' do
-        client_class.new.endpoint.must_be_kind_of(Client::Endpoint)
+        client_class.new.endpoint.must_be_kind_of(Client::Http::Endpoint)
       end
 
       it 'is built from the :endpoint constructor option' do

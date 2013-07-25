@@ -11,26 +11,24 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module Seahorse
-  class Client
-    class HttpResponse
+module Seahorse::Client::Http
+  class Response
 
-      # @api private
-      def initialize
-        @status_code = nil
-        @headers = HeaderHash.new
-        @body = ResponseBody.new
-      end
-
-      # @return [Integer, nil]
-      attr_accessor :status_code
-
-      # @return [HeaderHash]
-      attr_accessor :headers
-
-      # @return [ResponseBody]
-      attr_accessor :body
-
+    # @api private
+    def initialize
+      @status_code = nil
+      @headers = Headers.new
+      @body = ResponseBody.new
     end
+
+    # @return [Integer, nil]
+    attr_accessor :status_code
+
+    # @return [Headers]
+    attr_accessor :headers
+
+    # @return [ResponseBody]
+    attr_accessor :body
+
   end
 end

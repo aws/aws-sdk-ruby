@@ -16,30 +16,33 @@ module Seahorse
 
     autoload :Configuration, 'seahorse/client/configuration'
     autoload :RequestContext, 'seahorse/client/request_context'
-    autoload :Endpoint, 'seahorse/client/endpoint'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'
-    autoload :HeaderHash, 'seahorse/client/header_hash'
     autoload :HttpHandler, 'seahorse/client/http_handler'
-    autoload :HttpRequest, 'seahorse/client/http_request'
-    autoload :HttpResponse, 'seahorse/client/http_response'
     autoload :NetHttpConnectionPool, 'seahorse/client/net_http_connection_pool'
     autoload :NetHttpHandler, 'seahorse/client/net_http_handler'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
-    autoload :ResponseBody, 'seahorse/client/response_body'
     autoload :VERSION, 'seahorse/client/version'
 
     module Plugins
       autoload :NetHttpPlugin, 'seahorse/client/plugins/net_http_plugin'
     end
 
+    module Http
+      autoload :Endpoint, 'seahorse/client/http/endpoint'
+      autoload :Headers, 'seahorse/client/http/headers'
+      autoload :Request, 'seahorse/client/http/request'
+      autoload :Response, 'seahorse/client/http/response'
+      autoload :ResponseBody, 'seahorse/client/http/response_body'
+    end
+
     @plugins = PluginList.new([Plugins::NetHttpPlugin])
 
-    # @option options [String, URI::HTTP, URI::HTTPS, Endpoint] :endpoint
+    # @option options [String, URI::HTTP, URI::HTTPS, Http::Endpoint] :endpoint
     #   Endpoints specify the http scheme, hostname and port to connect
     #   to.  You must specify at a minimum the hostname.  Endpoints without
     #   a uri scheme will default to https on port 443.
@@ -66,7 +69,7 @@ module Seahorse
       @endpoint = build_endpoint
     end
 
-    # @return [Endpoint]
+    # @return [Http::Endpoint]
     attr_reader :endpoint
 
     # @return [Configuration]
@@ -131,9 +134,9 @@ module Seahorse
       end
     end
 
-    # @return [Endpoint]
+    # @return [Http::Endpoint]
     def build_endpoint
-      Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+      Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
     rescue URI::InvalidURIError
       msg = 'unable to build #endpoint, must be specified in the client API '
       msg << 'or be set via the :endpoint option'
@@ -146,7 +149,7 @@ module Seahorse
         operation_name: operation_name.to_s,
         params: params,
         config: config,
-        http_request: HttpRequest.new(endpoint: endpoint),
+        http_request: Http::Request.new(endpoint: endpoint),
       )
     end
 

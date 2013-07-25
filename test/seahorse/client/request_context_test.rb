@@ -82,8 +82,8 @@ module Seahorse
 
       describe '#http_request' do
 
-        it 'defaults to a HttpRequest object' do
-          RequestContext.new.http_request.must_be_kind_of(HttpRequest)
+        it 'defaults to a Http::Request object' do
+          RequestContext.new.http_request.must_be_kind_of(Http::Request)
         end
 
         it 'can be set in the constructor' do
@@ -96,8 +96,8 @@ module Seahorse
 
       describe '#http_response' do
 
-        it 'defaults to a httpResponse object' do
-          RequestContext.new.http_response.must_be_kind_of(HttpResponse)
+        it 'defaults to a Http::Response object' do
+          RequestContext.new.http_response.must_be_kind_of(Http::Response)
         end
 
         it 'can be set in the constructor' do
