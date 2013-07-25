@@ -34,7 +34,7 @@ module Seahorse
             msg = 'unable to write after #read has been called'
             raise BodyClosedError, msg
           end
-          @data << chunk unless chunk.bytesize == 0
+          @data << chunk
         end
       end
       alias << write
@@ -55,9 +55,7 @@ module Seahorse
 
       # @return [Boolean]
       def empty?
-        @mutex.synchronize do
-          @data.empty?
-        end
+        size == 0
       end
 
       # @return [Integer]
