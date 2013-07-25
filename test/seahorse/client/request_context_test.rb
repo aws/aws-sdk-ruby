@@ -108,6 +108,21 @@ module Seahorse
 
       end
 
+      describe 'metadata' do
+
+        it 'returns nil for non-set keys' do
+          context = RequestContext.new
+          context[:color].must_equal(nil)
+        end
+
+        it 'can be set via #[]=' do
+          context = RequestContext.new
+          context[:color] = 'red'
+          context[:color].must_equal('red')
+        end
+
+      end
+
       describe '#on and #emit' do
 
         it 'registers an event listener on #events' do
