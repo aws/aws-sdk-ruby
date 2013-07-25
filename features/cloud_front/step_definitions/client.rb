@@ -47,6 +47,7 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
           :target_origin_id => 'abc',
           :forwarded_values => {
             :query_string => true,
+            :cookies => { :forward => 'none' }
           },
           :trusted_signers => {
             :enabled => false,
@@ -63,7 +64,10 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
           :enabled => false,
           :bucket => 'aws-sdk',
           :prefix => 'prefix',
-        }, :enabled => false
+          :include_cookies => false,
+        },
+        :enabled => false,
+        :price_class => 'PriceClass_All',
       },
     })
   rescue => @error
