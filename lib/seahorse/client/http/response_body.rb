@@ -21,8 +21,17 @@ module Seahorse::Client::Http
 
     class ResetNotPossibleError < StandardError; end
 
-    # Write a chunk of data to the body.  Chunks should be written to the
-    # body as they are read off the response.
+    # Writes a chunk of of data to the response body.
+    #
+    # You can write to a body multiple times.  You should write to the
+    # body as data is streamed off the HTTP response.  This allows
+    # response bodies to efficiently manage the data.
+    #
+    #     # write chunks as they are read off the socket
+    #     response.read_body do |chunk|
+    #       http_resp.body.write(chunk)
+    #     end
+    #
     # @param [String] chunk
     # @return [String] Returns the chunk passed in.
     def write(chunk)
@@ -32,29 +41,32 @@ module Seahorse::Client::Http
     # Returns the body as a string if it is {#available?}.  If the body is not
     # available, `nil` is returned.  The body may not be available if it has
     # been streamed.
+    # @note Calling `#read` closes the body for writes.
     # @return [String, nil]
     def read
       raise NotImplementedError
     end
 
-    # Returns `true` when the response body is available.  When the body
-    # is available, calling {#read} returns a String.  When the body is
-    # not available, calling {#read} returns `nil`.
-    # @return [Boolean] Returns `true` if the response body is available.
+    # Returns `true` when the response body is available.  A response body
+    # is not available if it has been streamed to an external source.
+    # When the body is available, calling {#read} must return a string.
+    # When the body is not available, calling {#read} must `nil`.
+    # @return [Boolean] Returns `true` if the response body is available
+    #   to {#read}.
     def available?
       raise NotImplementedError
     end
 
-    # Returns the size of the response body in bytes.  Even when the body
-    # is not {#available?}, this method should return the total number of
-    # bytes given to {#write}.
-    # @return [Integer] Returns the size of the response body.
+    # Returns the number of bytes passed to the {#write} method.
+    # Even if the data is no longer {#available?}, this method must
+    # returns the size.
+    # @return [Integer] Returns the number of bytes passed to {#write}.
     def size
       raise NotImplementedError
     end
 
-    # Returns `true` if no data has been written to this body.  It also
-    # returns `true` if only the empty string has been written.
+    # Returns `true` if no data has been written to this body.  It must also
+    # return `true` if only the empty string has been written to the body.
     # @return [Boolean]
     def empty?
       size == 0
@@ -62,17 +74,17 @@ module Seahorse::Client::Http
 
     # Returns `true` if it is safe to {#reset!} the response body.  A reset
     # may be needed in the case of a network error.  The response body
-    # may return `false` if bytes have already been read from the body.
+    # must return `false` if bytes have already been read from the body.
     # This is especially important for streaming bodies.
     # @return [Boolean]
     def can_reset?
       raise NotImplementedError
     end
 
-    # Resets (empties) the response body.  If the body can not be reset,
-    # then a {ResetNotPossibleError} should be raised.
-    # @return [void]
+    # Truncates the response body.  If the body can not be reset,
+    # then a {ResetNotPossibleError} must be raised.
     # @raise [ResetNotPossibleError] Raises when response body can not be reset.
+    # @return [void]
     def reset!
       raise NotImplementedError
     end

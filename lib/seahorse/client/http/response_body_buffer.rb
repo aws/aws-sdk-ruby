@@ -22,18 +22,23 @@ module Seahorse::Client::Http
     def initialize
       @data_mutex = Mutex.new
       @data = []
+      @read_called = false
     end
 
+    # Write a chunk of data to the body.  Chunks should be written to the
+    # body as they are read off the response.
+    # @note Chunks are buffered into memory.  This class should not be used for
+    #   large responses.
     # @param [String] chunk
-    # @return [String]
-    # @raise [BodyClosedError]
+    # @return [String] Returns the chunk passed in.
     def write(chunk)
       @data_mutex.synchronize do
         @data << chunk
       end
+      chunk
     end
 
-    # @return [String]
+    # @return [String] Returns the entire body as a string.
     def read
       @data_mutex.synchronize do
         if @read_called
@@ -45,12 +50,12 @@ module Seahorse::Client::Http
       end
     end
 
-    # @return [Boolean]
+    # @return [Boolean] Returns `true`, the buffered body is always available.
     def available?
       true
     end
 
-    # @return [Integer]
+    # @return [Integer] Returns the size of the response body in bytes.
     def size
       @data_mutex.synchronize do
         if @read_called
@@ -61,11 +66,16 @@ module Seahorse::Client::Http
       end
     end
 
-    # @return [Boolean]
+    # Returns `true` if the body can be reset.  {#read Reading} from the body
+    # causes this method to return `false`.
+    # @return [Boolean] Returns `true` if the body can be reset.
     def can_reset?
-      true
+      @data_mutex .synchronize do
+        !@read_called
+      end
     end
 
+    # Empties the response body buffer.
     # @return [void]
     def reset!
       @data_mutex.synchronize do

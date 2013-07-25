@@ -34,6 +34,10 @@ module Seahorse::Client::Http
         body.read.must_equal('abcmnoxyz')
       end
 
+      it 'returns the chunk passed in' do
+        body.write('abc').must_equal('abc')
+      end
+
     end
 
     describe '#read' do

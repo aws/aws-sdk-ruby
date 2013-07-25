@@ -62,7 +62,7 @@ module Seahorse::Client::Http
         body.size.must_equal(0)
       end
 
-      it 'counts the number of bytes yielded' do
+      it 'returns the total number of bytes written/yielded' do
         body.write('abc')
         body.write('mno')
         body.write('xyz')
@@ -95,7 +95,7 @@ module Seahorse::Client::Http
         err = assert_raises(ResponseBody::ResetNotPossibleError) do
           body.reset!
         end
-        err.message.must_equal('unable to reset after data has been yielded')
+        err.message.must_equal('unable to reset, data has already been yielded')
       end
 
     end
