@@ -25,5 +25,5 @@ end
 
 group :docs do
   gem 'yard'
-  gem 'redcarpet'
+  gem 'rdiscount'
 end

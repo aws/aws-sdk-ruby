@@ -1,3 +1,4 @@
---title 'Seahorse Client'
+--title 'Seahorse'
 --markup markdown
+--markup-provider rdiscount
 --no-api
