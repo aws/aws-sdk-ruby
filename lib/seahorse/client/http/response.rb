@@ -27,7 +27,7 @@ module Seahorse::Client::Http
     # @return [Headers]
     attr_accessor :headers
 
-    # @return [BufferedResponseBody]
+    # @return [ResponseBody]
     attr_accessor :body
 
   end
