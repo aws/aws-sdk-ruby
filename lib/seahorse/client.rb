@@ -15,13 +15,13 @@ module Seahorse
   class Client
 
     autoload :Configuration, 'seahorse/client/configuration'
-    autoload :RequestContext, 'seahorse/client/request_context'
     autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HttpHandler, 'seahorse/client/http_handler'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
+    autoload :RequestContext, 'seahorse/client/request_context'
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
 
