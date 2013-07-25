@@ -1,4 +1,22 @@
-2013-07-24 Loren Segal <lsegal@amazon.com>
+2013-07-25 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/cloud_front/step_definitions/client.rb: Fixed broken
+  AWS::CloudFront integration tests.
+
+  * lib/aws/cloud_front/request.rb: Updated CloudFront to use signature v4
+
+  Fixes #317
+
+2013-07-24 Trevor Rowe <trevorrowe@gmail.com>
+
+  * README.md: Removed GitHub style code blocks from README, they were causing
+  issues in the YARD documentation.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.14.0
+
+  * doc-src/OpsWorks/V20130218.yml,
+  lib/aws/api_config/OpsWorks-2013-02-18.yml: Updated AWS::OpsWorks::Client to
+  latest API version.
 
   * doc-src/templates/default/layout/html/footer.erb: Fix SiteCatalyst link
 
