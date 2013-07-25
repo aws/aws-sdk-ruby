@@ -19,7 +19,7 @@ module Seahorse
 
       # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
-      # @option options [HashHeader] :headers (HeaderHash.new)
+      # @option options [Http::Headers] :headers (Http::Headers.new)
       # @option options [String] :body ('')
       def initialize(options = {})
         @context = options[:context] || RequestContext.new
@@ -33,10 +33,10 @@ module Seahorse
       # @return [RequestContext]
       attr_reader :context
 
-      # @return [HttpRequest]
+      # @return [Http::Request]
       attr_reader :http_request
 
-      # @return [HttpResponse]
+      # @return [Http::Response]
       attr_reader :http_response
 
       # @return [void]

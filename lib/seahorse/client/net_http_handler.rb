@@ -40,8 +40,8 @@ module Seahorse
 
       private
 
-      # @param [HttpRequest] request
-      # @param [HttpResponse] response
+      # @param [Http::Request] request
+      # @param [Http::Response] response
       # @return [void]
       def transmit(request, response)
         @pool.session_for(request.endpoint) do |http|
@@ -71,8 +71,8 @@ module Seahorse
       end
 
       # Constructs and returns a Net::HTTP::Request object from
-      # a {Seahorse::Client::HttpRequest}.
-      # @param [HttpRequest] request
+      # a {Seahorse::Client::Http::Request}.
+      # @param [Http::Request] request
       # @return [Net::HTTP::Request]
       def net_http_request(request)
         request_class = net_http_request_class(request)
@@ -81,7 +81,7 @@ module Seahorse
         req
       end
 
-      # @param [HttpRequest] request
+      # @param [Http::Request] request
       # @raise [InvalidHttpVerbError]
       # @return Returns a base `Net::HTTP::Request` class, e.g.,
       #   `Net::HTTP::Get`, `Net::HTTP::Post`, etc.
@@ -92,7 +92,7 @@ module Seahorse
         raise InvalidHttpVerbError, msg
       end
 
-      # @param [HttpRequest] request
+      # @param [Http::Request] request
       # @return [Hash] Returns a vanilla hash of headers to send with the
       #   HTTP request.
       def headers(request)

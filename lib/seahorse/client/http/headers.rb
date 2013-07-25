@@ -37,7 +37,7 @@ module Seahorse::Client::Http
     end
 
     # @param [Hash] headers
-    # @return [HeaderHash]
+    # @return [Headers]
     def update(headers)
       headers.each_pair do |k, v|
         self[k] = v
