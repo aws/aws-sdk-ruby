@@ -11,36 +11,35 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'test_helper'
+
 module Seahorse::Client::Http
-  class StreamingResponseBody
+  describe StreamingResponseBody do
 
-    include ResponseBody
+    describe '#write' do
 
-    def initialize(&block)
-      @block = Proc.new
-    end
-
-    def write(chunk)
-      @write_called = true
-      @block.call(chunk)
-    end
-
-    def read
-      ''
-    end
-
-    def size
-      0
-    end
-
-    def empty?
-      true
-    end
-
-    def reset!
-      if @write_called
-        raise 'unable to reset after data has been yielded'
+      it 'yields chunks directly to the block' do
+        chunks = []
+        body = StreamingResponseBody.new { |chunk| chunks << chunk }
+        body.write('abc')
+        body.write('mno')
+        body.write('xyz')
+        chunks.must_equal(%w(abc mno xyz))
       end
+
+    end
+
+    describe '#read' do
+
+      it 'returns an empty string' do
+        body = StreamingResponseBody.new {}
+        body.write('abc')
+        body.read.must_equal('')
+      end
+
+    end
+
+    describe '#empty?' do
     end
 
   end

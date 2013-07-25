@@ -53,7 +53,7 @@ module Seahorse
 
             # read the body in chunks
             resp.read_body do |chunk|
-              response.body << chunk
+              response.body.write(chunk)
             end
 
           end

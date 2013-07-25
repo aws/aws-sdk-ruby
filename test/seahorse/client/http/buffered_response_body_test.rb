@@ -14,10 +14,10 @@
 require 'test_helper'
 
 module Seahorse::Client::Http
-  describe ResponseBody do
+  describe BufferedResponseBody do
 
     def body
-      @body ||= ResponseBody.new
+      @body ||= BufferedResponseBody.new
     end
 
     describe '#write' do
@@ -32,20 +32,6 @@ module Seahorse::Client::Http
         body.write('mno')
         body.write('xyz')
         body.read.must_equal('abcmnoxyz')
-      end
-
-      it 'is aliased as <<' do
-        body << 'abc'
-        body << 'mno'
-        body << 'xyz'
-        body.read.must_equal('abcmnoxyz')
-      end
-
-      it 'raises an error if it is called after the body has been read' do
-        body << 'abc'
-        body.read
-        err = assert_raises(ResponseBody::BodyClosedError) { body << 'xyz' }
-        err.message.must_equal('unable to write after #read has been called')
       end
 
     end

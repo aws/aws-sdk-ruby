@@ -75,9 +75,9 @@ module Seahorse
 
           def handler
             lambda do |context|
-              context.http_response.body << 'part1'
-              context.http_response.body << 'part2'
-              context.http_response.body << 'part3'
+              context.http_response.body.write('part1')
+              context.http_response.body.write('part2')
+              context.http_response.body.write('part3')
               Response.new(context: context)
             end
           end
@@ -90,7 +90,7 @@ module Seahorse
 
           it 'does not buffer the response chunks' do
             response = Request.new(handler, context).send { |chunk| }
-            response.http_response.body.must_equal('')
+            response.http_response.body.read.must_equal('')
           end
 
         end

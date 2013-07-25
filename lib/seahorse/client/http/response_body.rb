@@ -14,66 +14,50 @@
 require 'thread'
 
 module Seahorse::Client::Http
-  class ResponseBody
-
-    class BodyClosedError < StandardError; end
-
-    # @api private
-    def initialize
-      @mutex = Mutex.new
-      @data = []
-    end
+  module ResponseBody
 
     # @param [String] chunk
     # @return [String]
-    # @raise [StandardErro
     def write(chunk)
-      @mutex.synchronize do
-        if @read_called
-          msg = 'unable to write after #read has been called'
-          raise BodyClosedError, msg
-        end
-        @data << chunk
-      end
+      raise NotImplementedError
     end
-    alias << write
 
-    # @return [String]
+    # Returns the response body as a string if it is {#available?}.
+    # A response body may be unavailable if it has been streamed.
+    # @return [String, nil]
     def read
-      @mutex.synchronize do
-        if @read_called
-          @data
-        else
-          @read_called = true
-          @data = @data.join
-        end
-      end
+      raise NotImplementedError
     end
-    alias to_str read
-    alias to_s read
 
-    # @return [Boolean]
+    # Returns `true` when the response body is available.  When the body
+    # is available, calling {#read} returns a String.  When the body is
+    # not available, calling {#read} returns `nil`.
+    # @return [Boolean] Returns `true` if the response body is available.
+    def available?
+      raise NotImplementedError
+    end
+
+    # Returns the size of the response body.  This may return a value greater
+    # than zero, even if the body is not {#available}.  This can be the case
+    # when the response body was streamed.
+    # @return [Integer] Returns the size of the response body.
+    def size
+      raise NotImplementedError
+    end
+
+    # @return [Boolean] Returns `true` if no data has been written to this
+    #   response body.
     def empty?
       size == 0
     end
 
-    # @return [Integer]
-    def size
-      @mutex.synchronize do
-        if @read_called
-          @data.bytesize
-        else
-          @data.inject(0) { |total, chunk| total + chunk.bytesize }
-        end
-      end
-    end
-
+    # Attempts to reset the response body.  Not all response bodies can be
+    # reset.  For example, streaming response bodies that have already 
+    # yielded data can not be reset.
     # @return [void]
+    # @raise [NotImplementedError] Raises if the response body can not be reset.
     def reset!
-      @mutex.synchronize do
-        @read_called = false
-        @data = []
-      end
+      raise NotImplementedError
     end
 
   end
