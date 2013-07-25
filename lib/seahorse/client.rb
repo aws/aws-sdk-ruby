@@ -25,10 +25,6 @@ module Seahorse
     autoload :Response, 'seahorse/client/response'
     autoload :VERSION, 'seahorse/client/version'
 
-    module Plugins
-      autoload :NetHttp, 'seahorse/client/plugins/net_http'
-    end
-
     module Http
       autoload :Endpoint, 'seahorse/client/http/endpoint'
       autoload :Headers, 'seahorse/client/http/headers'
@@ -37,6 +33,10 @@ module Seahorse
       autoload :ResponseBody, 'seahorse/client/http/response_body'
       autoload :ResponseBodyBuffer, 'seahorse/client/http/response_body_buffer'
       autoload :ResponseBodyStream, 'seahorse/client/http/response_body_stream'
+    end
+
+    module Plugins
+      autoload :NetHttp, 'seahorse/client/plugins/net_http'
     end
 
     @plugins = PluginList.new([Plugins::NetHttp])
