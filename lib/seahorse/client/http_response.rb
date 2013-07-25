@@ -15,13 +15,11 @@ module Seahorse
   class Client
     class HttpResponse
 
-      # @option options [Integer] :status_code (nil)
-      # @option options [HashHeader] :headers (HeaderHash.new)
-      # @option options [String] :body ('')
-      def initialize(options = {})
-        @status_code = options[:status_code]
-        @headers = options[:headers] || HeaderHash.new
-        @body = options[:body] || ''
+      # @api private
+      def initialize
+        @status_code = nil
+        @headers = HeaderHash.new
+        @body = ResponseBody.new
       end
 
       # @return [Integer, nil]
@@ -30,7 +28,7 @@ module Seahorse
       # @return [HeaderHash]
       attr_accessor :headers
 
-      # @return [String]
+      # @return [ResponseBody]
       attr_accessor :body
 
     end

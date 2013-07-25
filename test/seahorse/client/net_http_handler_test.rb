@@ -257,7 +257,7 @@ module Seahorse
 
           it 'populates the response body' do
             stub_request(:any, endpoint).to_return(body: 'response-body')
-            make_request.http_response.body.must_equal('response-body')
+            make_request.http_response.body.read.must_equal('response-body')
           end
 
         end

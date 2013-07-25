@@ -23,11 +23,7 @@ module Seahorse
           HttpResponse.new.status_code.must_equal(nil)
         end
 
-        it 'can be set in the constructor' do
-          HttpResponse.new(status_code: 200).status_code.must_equal(200)
-        end
-
-        it 'is mutable' do
+        it 'can be set' do
           resp = HttpResponse.new
           resp.status_code = 500
           resp.status_code.must_equal(500)
@@ -45,12 +41,6 @@ module Seahorse
           HttpResponse.new.headers.to_h.must_equal({})
         end
 
-        it 'can be set in the constructor' do
-          headers = HeaderHash.new
-          response = HttpResponse.new(headers: headers)
-          response.headers.must_be_same_as(headers)
-        end
-
         it 'can be set' do
           headers = HeaderHash.new
           response = HttpResponse.new
@@ -62,18 +52,19 @@ module Seahorse
 
       describe '#body' do
 
-        it 'defaults to an empty string' do
-          HttpResponse.new.body.must_equal('')
+        it 'defaults to an ResponseBody' do
+          HttpResponse.new.body.must_be_kind_of(ResponseBody)
         end
 
-        it 'can be set in the constructor' do
-          HttpResponse.new(body: 'body').body.must_equal('body')
+        it 'defaults to an empty body' do
+          assert HttpResponse.new.body.empty?
         end
 
         it 'can be set' do
+          body = Object.new
           response = HttpResponse.new
-          response.body = 'body'
-          response.body.must_equal('body')
+          response.body = body
+          response.body.must_be_same_as(body)
         end
 
       end
