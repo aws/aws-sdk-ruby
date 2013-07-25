@@ -20,7 +20,7 @@ module Seahorse::Client::Http
 
     # @api private
     def initialize
-      @mutex = Mutex.new
+      @data_mutex = Mutex.new
       @data = []
     end
 
@@ -28,14 +28,14 @@ module Seahorse::Client::Http
     # @return [String]
     # @raise [BodyClosedError]
     def write(chunk)
-      @mutex.synchronize do
+      @data_mutex.synchronize do
         @data << chunk
       end
     end
 
     # @return [String]
     def read
-      @mutex.synchronize do
+      @data_mutex.synchronize do
         if @read_called
           @data
         else
@@ -52,7 +52,7 @@ module Seahorse::Client::Http
 
     # @return [Integer]
     def size
-      @mutex.synchronize do
+      @data_mutex.synchronize do
         if @read_called
           @data.bytesize
         else
@@ -68,7 +68,7 @@ module Seahorse::Client::Http
 
     # @return [void]
     def reset!
-      @mutex.synchronize do
+      @data_mutex.synchronize do
         @read_called = false
         @data = []
       end
