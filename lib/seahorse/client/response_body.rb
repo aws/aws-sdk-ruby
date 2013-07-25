@@ -60,6 +60,17 @@ module Seahorse
         end
       end
 
+      # @return [Integer]
+      def size
+        @mutex.synchronize do
+          if @read_called
+            @data.bytesize
+          else
+            @data.inject(0) { |total, chunk| total + chunk.bytesize }
+          end
+        end
+      end
+
       # @return [void]
       def reset!
         @mutex.synchronize do

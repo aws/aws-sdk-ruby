@@ -106,6 +106,25 @@ module Seahorse
         end
 
       end
+
+      describe '#size' do
+
+        it 'returns 0 for a new response body' do
+          body.size.must_equal(0)
+        end
+
+        it 'returns the total size' do
+          body.write('abc')
+          body.write('mno')
+          body.write('xyz')
+          body.size.must_equal(9)
+        end
+
+        it 'returns the same size as the read value' do
+          body.read.size.must_equal(body.size)
+        end
+
+      end
     end
   end
 end

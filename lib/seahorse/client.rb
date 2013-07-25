@@ -30,6 +30,7 @@ module Seahorse
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
     autoload :Response, 'seahorse/client/response'
+    autoload :ResponseBody, 'seahorse/client/response_body'
     autoload :VERSION, 'seahorse/client/version'
 
     module Plugins
