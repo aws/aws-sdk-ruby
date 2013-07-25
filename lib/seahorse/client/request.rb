@@ -35,6 +35,50 @@ module Seahorse
         @context.on(event_name, &callback)
       end
 
+      # Sends the request, returning a {Response Response}.
+      #
+      #     response = request.send
+      #
+      # # Streaming Responses
+      #
+      # By default, HTTP responses are buffered into memory.  This can be
+      # problematic if you are downloading large response object, like
+      # files.
+      #
+      # To avoid buffering the response in memory, you can pass block
+      # to `#send`.  The response will be read in chunks and yielded to
+      # the block.
+      #
+      #     # stream the response data
+      #     response = request.send do |chunk|
+      #       file.write(chunk)
+      #     end
+      #
+      # **Please Note**: When streaming to a block, retries are disabled.
+      #
+      # # Asynchronous Requests
+      #
+      # If you are using a HTTP handler that makes asynchronous requests,
+      # then you will need to wait for the returned response to be
+      # complete before you inspect the response.
+      #
+      #     response = request.send
+      #     response.complete?
+      #     #=> false
+      #
+      #     response.on_complete do
+      #       response.complete?
+      #       #=> true
+      #     end
+      #
+      # The {Response#on_complete on_complete} method can also yield the
+      # {Response Response} object to your block.
+      #
+      #     request.send.on_complete do |response|
+      #       response.complete?
+      #       #=> true
+      #     end
+      #
       # @return [Response]
       def send
         @handler.call(@context)
