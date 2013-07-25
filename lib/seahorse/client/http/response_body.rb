@@ -16,6 +16,8 @@ require 'thread'
 module Seahorse::Client::Http
   module ResponseBody
 
+    class ResetNotPossibleError < StandardError; end
+
     # @param [String] chunk
     # @return [String]
     def write(chunk)
@@ -51,11 +53,16 @@ module Seahorse::Client::Http
       size == 0
     end
 
+    # @return [Boolean]
+    def can_reset?
+      raise NotImplementedError
+    end
+
     # Attempts to reset the response body.  Not all response bodies can be
-    # reset.  For example, streaming response bodies that have already 
+    # reset.  For example, streaming response bodies that have already
     # yielded data can not be reset.
     # @return [void]
-    # @raise [NotImplementedError] Raises if the response body can not be reset.
+    # @raise [ResetNotPossibleError] Raises if the response body can not be reset.
     def reset!
       raise NotImplementedError
     end

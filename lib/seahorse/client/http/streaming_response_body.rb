@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'thread'
+
 module Seahorse::Client::Http
   class StreamingResponseBody
 
@@ -18,28 +20,44 @@ module Seahorse::Client::Http
 
     def initialize(&block)
       @block = Proc.new
+      @yielded = false
+      @bytes_yielded = 0
+      @yield_mutex = Mutex.new
     end
 
     def write(chunk)
-      @write_called = true
-      @block.call(chunk)
+      @yield_mutex.synchronize do
+        @yielded = true
+        @bytes_yielded += chunk.bytesize
+        @block.call(chunk)
+        chunk
+      end
     end
 
     def read
-      ''
+      nil
+    end
+
+    def available?
+      false
     end
 
     def size
-      0
+      @yield_mutex.synchronize do
+        @bytes_yielded
+      end
     end
 
-    def empty?
-      true
+    def can_reset?
+      @yield_mutex.synchronize do
+        !@yielded
+      end
     end
 
     def reset!
-      if @write_called
-        raise 'unable to reset after data has been yielded'
+      unless can_reset?
+        msg = 'unable to reset after data has been yielded'
+        raise ResetNotPossibleError, msg
       end
     end
 

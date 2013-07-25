@@ -61,6 +61,11 @@ module Seahorse::Client::Http
       end
     end
 
+    # @return [Boolean]
+    def can_reset?
+      true
+    end
+
     # @return [void]
     def reset!
       @mutex.synchronize do

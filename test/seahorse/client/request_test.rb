@@ -90,7 +90,7 @@ module Seahorse
 
           it 'does not buffer the response chunks' do
             response = Request.new(handler, context).send { |chunk| }
-            response.http_response.body.read.must_equal('')
+            response.http_response.body.read.must_equal(nil)
           end
 
         end

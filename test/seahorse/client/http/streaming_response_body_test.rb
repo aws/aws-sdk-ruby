@@ -16,6 +16,10 @@ require 'test_helper'
 module Seahorse::Client::Http
   describe StreamingResponseBody do
 
+    def body
+      @body ||= StreamingResponseBody.new {}
+    end
+
     describe '#write' do
 
       it 'yields chunks directly to the block' do
@@ -31,16 +35,69 @@ module Seahorse::Client::Http
 
     describe '#read' do
 
-      it 'returns an empty string' do
-        body = StreamingResponseBody.new {}
+      it 'returns nil' do
+        body.read.must_equal(nil)
+      end
+
+      it 'returns even if data has been written to it' do
         body.write('abc')
-        body.read.must_equal('')
+        body.read.must_equal(nil)
       end
 
     end
 
-    describe '#empty?' do
+    describe '#available?' do
+
+      it 'is always false' do
+        body.available?.must_equal(false)
+        body.write('abc')
+        body.available?.must_equal(false)
+      end
+
     end
 
+    describe '#size' do
+
+      it 'returns 0 for a new streaming response body' do
+        body.size.must_equal(0)
+      end
+
+      it 'counts the number of bytes yielded' do
+        body.write('abc')
+        body.write('mno')
+        body.write('xyz')
+        body.size.must_equal(9)
+      end
+
+    end
+
+    describe '#can_reset' do
+
+      it 'returns true if the body has not been written to' do
+        body.can_reset?.must_equal(true)
+      end
+
+      it 'returns false once the body has been written to' do
+        body.write('abc')
+        body.can_reset?.must_equal(false)
+      end
+
+    end
+
+    describe '#reset!' do
+
+      it 'can be safely called on a body that has not been written to' do
+        body.reset!
+      end
+
+      it 'raises an error if the body has already been written to' do
+        body.write('abc')
+        err = assert_raises(ResponseBody::ResetNotPossibleError) do
+          body.reset!
+        end
+        err.message.must_equal('unable to reset after data has been yielded')
+      end
+
+    end
   end
 end
