@@ -80,10 +80,25 @@ module Seahorse
       #     end
       #
       # @return [Response]
-      def send
+      def send(&read_block)
+        if block_given?
+          @context.http_response.body = StreamingResponseBody.new(&read_block)
+        end
         @handler.call(@context)
       end
 
+      class StreamingResponseBody < String
+
+        def initialize(&read_block)
+          super('')
+          @block = read_block
+        end
+
+        def <<(chunk)
+          @block.call(chunk)
+        end
+
+      end
     end
   end
 end

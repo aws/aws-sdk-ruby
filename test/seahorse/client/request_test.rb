@@ -60,17 +60,40 @@ module Seahorse
 
         it 'passes the request context to the handler' do
           handler = Minitest::Mock.new
-          handler.expect(:call, nil, [context])
+          handler.expect(:call, Response.new, [context])
           Request.new(handler, context).send
           handler.verify
         end
 
         it 'returns the response from the handler stack' do
-          resp = Object.new
+          resp = Response.new
           handler = lambda { |context| resp }
           Request.new(handler, context).send.must_be_same_as(resp)
         end
 
+        describe 'with block argument' do
+
+          def handler
+            lambda do |context|
+              context.http_response.body << 'part1'
+              context.http_response.body << 'part2'
+              context.http_response.body << 'part3'
+              Response.new(context: context)
+            end
+          end
+
+          it 'streams data from the handler to the #send block' do
+            data = []
+            Request.new(handler, context).send { |chunk| data << chunk }
+            data.must_equal(['part1', 'part2', 'part3'])
+          end
+
+          it 'does not buffer the response chunks' do
+            response = Request.new(handler, context).send { |chunk| }
+            response.http_response.body.must_equal('')
+          end
+
+        end
       end
     end
   end
