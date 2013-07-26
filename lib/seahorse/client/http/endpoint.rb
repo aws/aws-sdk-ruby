@@ -77,7 +77,7 @@ module Seahorse
         # @option options [Boolean] :ssl_default (true)
         # @return [String]
         def apply_scheme(endpoint, options)
-          "http#{options.fetch(:ssl_default, true) ? 's' : ''}://"
+          "http#{options.fetch(:ssl_default, true) ? 's' : ''}://#{endpoint}"
         end
 
       end

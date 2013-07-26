@@ -105,7 +105,7 @@ module Seahorse
       def plugin_handlers(plugins)
         handlers = HandlerList.new
         plugins.each do |plugin|
-          if plugin.respond_to(:add_handlers)
+          if plugin.respond_to?(:add_handlers)
             plugin.add_handlers(handlers, @config)
           end
         end
