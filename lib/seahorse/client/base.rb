@@ -17,7 +17,7 @@ module Seahorse
 
       @plugins = PluginList.new([Plugins::NetHttp])
 
-      # @option options [String, URI::HTTP, URI::HTTPS, Http::Endpoint] :endpoint
+      # @option options [String] :endpoint
       #   Endpoints specify the http scheme, hostname and port to connect
       #   to.  You must specify at a minimum the hostname.  Endpoints without
       #   a uri scheme will default to https on port 443.
@@ -103,10 +103,13 @@ module Seahorse
       # @param [Array<Plugin>] plugins
       # @return [HandlerList]
       def plugin_handlers(plugins)
-        plugins.inject(HandlerList.new) do |list, plugin|
-          plugin.add_handlers(list, @config) if plugin.respond_to?(:add_handlers)
-          list
+        handlers = HandlerList.new
+        plugins.each do |plugin|
+          if plugin.respond_to(:add_handlers)
+            plugin.add_handlers(handlers, @config)
+          end
         end
+        handlers
       end
 
       # @return [Http::Endpoint]

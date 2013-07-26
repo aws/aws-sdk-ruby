@@ -22,7 +22,7 @@ module Seahorse
     module Plugins
       module NetHttp
 
-        # @attr_reader [URI::HTTP,nil] http_proxy Returns the configured proxy uri.
+        # @attr_reader [URI::HTTP,nil] http_proxy Returns the configured proxy.
         # @attr_reader [Integer,Float] http_open_timeout
         # @attr_reader [Integer,Float] http_read_timeout
         # @attr_reader [Integer,Float] http_idle_timeout
@@ -38,7 +38,8 @@ module Seahorse
           @pools = {}
 
           DEFAULT_CERT_BUNDLE = File.expand_path(File.join(
-            File.dirname(__FILE__), '..', '..', '..', '..', '..', 'ca-bundle-crt'))
+            File.dirname(__FILE__),
+            '..', '..', '..', '..', '..', 'ca-bundle-crt'))
 
           OPTIONS = {
             http_proxy: nil,
@@ -75,16 +76,16 @@ module Seahorse
 
           # Makes an HTTP request, yielding a Net::HTTPResponse object.
           #
-          #   pool.request('http://google.com', Net::HTTP::Get.new('/')) do |resp|
+          #   pool.request('http://domain', Net::HTTP::Get.new('/')) do |resp|
           #     puts resp.code # status code
           #     puts resp.to_h.inspect # dump the headers
           #     puts resp.body
           #   end
           #
-          # @param [URI::HTTP,URI::HTTPS,String] endpoint The HTTP(S) endpoint to
+          # @param [String] endpoint The HTTP(S) endpoint to
           #    connect to (e.g. 'https://domain.com').
           #
-          # @param [Net::HTTPRequest] request The request to make.  This can be 
+          # @param [Net::HTTPRequest] request The request to make.  This can be
           #   any request object from Net::HTTP (e.g. Net::HTTP::Get,
           #   Net::HTTP::POST, etc).
           #
@@ -97,8 +98,8 @@ module Seahorse
             end
           end
 
-          # @param [URI::HTTP, URI::HTTPS, String] endpoint The HTTP(S) endpoint to
-          #    connect to (e.g. 'https://domain.com').
+          # @param [URI::HTTP, URI::HTTPS, String] endpoint The HTTP(S) endpoint
+          #    to connect to (e.g. 'https://domain.com').
           #
           # @yieldparam [Net::HTTPSession] session
           #
@@ -129,8 +130,8 @@ module Seahorse
             nil
           end
 
-          # @return [Integer] Returns the count of sessions currently in the pool,
-          #   not counting those currently in use.
+          # @return [Integer] Returns the count of sessions currently in the
+          #   pool, not counting those currently in use.
           def size
             @pool_mutex.synchronize do
               size = 0
@@ -151,7 +152,8 @@ module Seahorse
 
           # Closes and removes removes all sessions from the pool.
           # If empty! is called while there are outstanding requests they may
-          # get checked back into the pool, leaving the pool in a non-empty state.
+          # get checked back into the pool, leaving the pool in a non-empty
+          # state.
           # @return [nil]
           def empty!
             @pool_mutex.synchronize do
@@ -190,31 +192,32 @@ module Seahorse
             #   seconds to wait for a 100-continue response before sending the
             #   request body.  This option has no effect unless the request has
             #   "Expect" header set to "100-continue".  Defaults to `nil` which
-            #   disables this behaviour.  This value can safely be set per-request
-            #   on the session yeidled by {#session_for}.
+            #   disables this behaviour.  This value can safely be set per
+            #   request on the session yeidled by {#session_for}.
             #
-            # @option options [Boolean] :http_wire_trace (false) When `true`, HTTP
-            #   debug output will be sent to the `:logger`.
+            # @option options [Boolean] :http_wire_trace (false) When `true`,
+            #   HTTP debug output will be sent to the `:logger`.
             #
             # @option options [Logger] :logger Where debug output is sent.
             #    Defaults to `nil` when `:http_wire_trace` is `false`.
             #    Defaults to `Logger.new($stdout)` when `:http_wire_trace` is
             #    `true`.
             #
-            # @option options [Boolean] :ssl_verify_peer (true) When `true`, SSL
-            #   peer certificates are verified when establishing a connection.
+            # @option options [Boolean] :ssl_verify_peer (true) When `true`,
+            #   SSL peer certificates are verified when establishing a
+            #   connection.
             #
             # @option options [String] :ssl_ca_bundle Full path to the SSL
             #   certificate authority bundle file that should be used when
             #   verifying peer certificates.  If you do not pass
-            #   `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default will be
-            #   used if available.
+            #   `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+            #   will be used if available.
             #
-            # @option options [String] :ssl_ca_directory Full path of the directory
-            #   that contains the unbundled SSL certificate authority files#
-            #   for verifying peer certificates.  If you do not pass
-            #   `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default will
-            #   be used if available.
+            # @option options [String] :ssl_ca_directory Full path of the
+            #   directory that contains the unbundled SSL certificate
+            #   authority files for verifying peer certificates.  If you do
+            #   not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+            #   system default will be used if available.
             #
             # @return [ConnectionPool]
             def new options = {}
@@ -224,8 +227,8 @@ module Seahorse
               end
             end
 
-            # @return [Array<ConnectionPool>] Returns a list of of the constructed
-            #   connection pools.
+            # @return [Array<ConnectionPool>] Returns a list of of the
+            #   constructed connection pools.
             def pools
               @pools.values
             end

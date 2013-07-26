@@ -40,9 +40,9 @@ module Seahorse
           raise NotImplementedError
         end
 
-        # Returns the body as a string if it is {#available?}.  If the body is not
-        # available, `nil` is returned.  The body may not be available if it has
-        # been streamed.
+        # Returns the body as a string if it is {#available?}.  If the body is
+        # not available, `nil` is returned.  The body may not be available if
+        # it has been streamed.
         # @note Calling `#read` closes the body for writes.
         # @return [String, nil]
         def read
@@ -85,7 +85,8 @@ module Seahorse
 
         # Truncates the response body.  If the body can not be reset,
         # then a {ResetNotPossibleError} must be raised.
-        # @raise [ResetNotPossibleError] Raises when response body can not be reset.
+        # @raise [ResetNotPossibleError] Raises when response body can not be
+        #   reset.
         # @return [void]
         def reset!
           raise NotImplementedError

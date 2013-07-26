@@ -29,8 +29,8 @@ module Seahorse
 
         # Write a chunk of data to the body.  Chunks should be written to the
         # body as they are read off the response.
-        # @note Chunks are buffered into memory.  This class should not be used for
-        #   large responses.
+        # @note Chunks are buffered into memory.  This class should not be used
+        #   for large responses.
         # @param [String] chunk
         # @return [String] Returns the chunk passed in.
         def write(chunk)
@@ -52,7 +52,8 @@ module Seahorse
           end
         end
 
-        # @return [Boolean] Returns `true`, the buffered body is always available.
+        # @return [Boolean] Returns `true`, the buffered body is always
+        #   available.
         def available?
           true
         end
@@ -68,8 +69,8 @@ module Seahorse
           end
         end
 
-        # Returns `true` if the body can be reset.  {#read Reading} from the body
-        # causes this method to return `false`.
+        # Returns `true` if the body can be reset.  {#read Reading} from
+        #  the body causes this method to return `false`.
         # @return [Boolean] Returns `true` if the body can be reset.
         def can_reset?
           @data_mutex .synchronize do

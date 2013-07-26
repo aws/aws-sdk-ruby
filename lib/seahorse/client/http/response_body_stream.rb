@@ -70,7 +70,7 @@ module Seahorse
           end
         end
 
-        # @raise [ResetNotPossibleError] Raises if data has been written/yielded.
+        # @raise [ResetNotPossibleError] Raises if data has been written.
         def reset!
           unless can_reset?
             msg = 'unable to reset, data has already been yielded'
