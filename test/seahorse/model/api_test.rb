@@ -63,6 +63,10 @@ module Seahorse
       end
 
       describe '#validate!' do
+        it 'returns true when an API is valid' do
+          assert api.validate!
+        end
+
         it 'fails to validate operations when an invalid operation is loaded' do
           api = Api.from_hash 'operations' => {
             'operation_name' => {
