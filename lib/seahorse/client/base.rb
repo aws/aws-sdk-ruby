@@ -211,6 +211,12 @@ module Seahorse
           client_class
         end
 
+        # @return [Class<Configuration>] the configuration class used by
+        #   this client.
+        def configuration_class
+          Configuration
+        end
+
         private
 
         def inherited(subclass)
