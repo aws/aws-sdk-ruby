@@ -13,7 +13,11 @@
 
 module Aws
   module Core
-    class Client < Seahorse::Client
+    class Client < Seahorse::Client::Base
+
+      def self.configuration_class
+        Core::Configuration
+      end
 
       # @api private
       MISSING_REGION = 'a region must be specified'
@@ -29,12 +33,6 @@ module Aws
 
       private
 
-      # @param [Hash] options
-      # @return [Configuration]
-      def build_config(options)
-        Configuration.new(options)
-      end
-
       def default_endpoint
         "#{endpoint_prefix}.#{config.region}.#{domain}"
       end
@@ -44,7 +42,7 @@ module Aws
       end
 
       def endpoint_prefix
-        api['endpoint_prefix']
+        self.class.api.endpoint_prefix
       end
 
     end

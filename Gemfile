@@ -15,7 +15,7 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'seahorse-client', :path => '../seahorse-client'
+gem 'seahorse', :path => 'vendor/seahorse'
 
 group :development do
   gem 'rake', :require => false

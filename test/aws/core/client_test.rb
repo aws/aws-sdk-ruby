@@ -18,11 +18,7 @@ module Aws
     describe Client do
 
       def client_class
-        @client_class ||= begin
-          klass = Class.new(Client)
-          klass.set_api({})
-          klass
-        end
+        @client_class ||= Class.new(Client)
       end
 
       def client
@@ -30,7 +26,7 @@ module Aws
       end
 
       it 'is a Seahorse::Client' do
-        client.must_be_kind_of(Seahorse::Client)
+        client.must_be_kind_of(Seahorse::Client::Base)
       end
 
       describe '#config' do
@@ -44,7 +40,7 @@ module Aws
       describe '#endpoint' do
 
         it 'combines region and endpoint_prefix for the default endpoint' do
-          client_class.api['endpoint_prefix'] = 'SVC'
+          client_class.api.endpoint_prefix = 'SVC'
           client = client_class.new(:region => 'REGION')
           client.endpoint.must_equal('https://SVC.REGION.amazonaws.com')
         end

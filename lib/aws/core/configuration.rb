@@ -19,6 +19,8 @@ module Aws
         ENV['AWS_REGION'] || ENV['AMAZON_REGION']
       end
 
+      add_option(:ssl_default) { true }
+
     end
   end
 end
