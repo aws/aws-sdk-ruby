@@ -11,5 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse/model'
-require 'seahorse/client'
+
+module Seahorse
+  module Model
+    class Operation < Node
+      property :name, String
+      property :documentation, String
+      property :http_uri, String, in: :http, name: :uri
+      property :http_verb, String, in: :http, name: :method
+      property :input, Shape, always_serialize: true
+      property :output, Shape, always_serialize: true
+      property :errors, [Shape]
+    end
+  end
+end
