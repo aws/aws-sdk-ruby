@@ -96,15 +96,8 @@ module Seahorse
       #   via a block argument.
       #
       # @return [void]
-      def add_option(name, default = nil, &block)
-        self.class.send(:define_method, name) do
-          case
-          when @options.key?(name) then @options[name]
-          when block then block.call
-          else default
-          end
-        end
-        nil
+      def add_option(*args, &block)
+        self.class.add_option(*args, &block)
       end
 
       # Returns a new configuration that is merged with the given `options`.
@@ -134,6 +127,29 @@ module Seahorse
           config = Class.new(self).allocate
           config.send(:initialize, options)
           config
+        end
+
+        # Adds a getter method that returns the named option or a default
+        # value.  Default values can be passed as a static positional argument
+        # or via a block.
+        #
+        # @param [Symbol] name The name of the configuration option.  This will
+        #   be used to define a getter by the same name.
+        #
+        # @param default (nil) Specifies the default value used when not set
+        #   via the constructor.  You can skip this argument and specify a default
+        #   via a block argument.
+        #
+        # @return [void]
+        def add_option(name, default = nil, &block)
+          define_method(name) do
+            case
+            when @options.key?(name) then @options[name]
+            when block then block.call
+            else default
+            end
+          end
+          nil
         end
 
       end
