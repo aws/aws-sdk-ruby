@@ -71,13 +71,14 @@ module Seahorse
       # @param [Array<Plugin>] plugins
       # @return [Configuration]
       def build_config(options, plugins)
-        config = Configuration.new(options)
-        config.add_option(:ssl_default, true)
-        config.add_option(:endpoint, default_endpoint)
+        @config = self.class.configuration_class.new(options)
+        @config.add_option(:ssl_default, true)
+        @config.add_option(:endpoint, default_endpoint)
         plugins.each do |p|
-          p.add_configuration(config) if p.respond_to?(:add_configuration)
+          p.add_configuration(@config) if p.respond_to?(:add_configuration)
         end
-        config
+
+        @config
       end
 
       # @param [Hash] options
