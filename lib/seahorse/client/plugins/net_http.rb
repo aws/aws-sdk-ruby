@@ -11,26 +11,30 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module Seahorse::Client::Plugins
-  module NetHttp
+module Seahorse
+  module Client
+    module Plugins
+      module NetHttp
 
-    autoload :Handler, 'seahorse/client/plugins/net_http/handler'
-    autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
+        autoload :Handler, 'seahorse/client/plugins/net_http/handler'
+        autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
 
-    # @param [Configuration] config
-    # @return [void]
-    def self.add_configuration(config)
-      ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-        config.add_option(opt_name, default_value)
+        # @param [Configuration] config
+        # @return [void]
+        def self.add_configuration(config)
+          ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
+            config.add_option(opt_name, default_value)
+          end
+        end
+
+        # @param [HandlerList] handlers
+        # @param [Configuration] config
+        # @return [void]
+        def self.add_handlers(handlers, config)
+          handlers.add(Handler, priority: :send)
+        end
+
       end
     end
-
-    # @param [HandlerList] handlers
-    # @param [Configuration] config
-    # @return [void]
-    def self.add_handlers(handlers, config)
-      handlers.add(Handler, priority: :send)
-    end
-
   end
 end
