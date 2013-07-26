@@ -34,8 +34,6 @@ module Seahorse
 
       private
 
-      alias raw_each each
-
       def load_data(name, data)
         return data unless @raw_data.has_key?(name)
         self[name] = Operation.from_hash(@raw_data[name])
