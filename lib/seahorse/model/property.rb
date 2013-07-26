@@ -130,8 +130,6 @@ module Seahorse
           value.map {|v| deserialize(v, klass.first) }
         elsif klass.respond_to?(:from_hash)
           klass.from_hash(value)
-        elsif value.is_a?(Symbol)
-          value ? value.to_sym : nil
         elsif klass == Boolean
           value || false
         elsif klass
