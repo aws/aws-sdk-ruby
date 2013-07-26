@@ -18,23 +18,25 @@ module Seahorse
       autoload :Boolean, 'seahorse/model/types'
     end
 
-    autoload :Node, 'seahorse/model/node'
-    autoload :Property, 'seahorse/model/property'
-    autoload :Api, 'seahorse/model/api'
-    autoload :Operation, 'seahorse/model/operation'
-    autoload :LazyOperationHash, 'seahorse/model/lazy_operation_hash'
-
     module Shapes
         autoload :Shape, 'seahorse/model/shapes/shape'
-        autoload :StructureShape, 'seahorse/model/shapes/shape'
-        autoload :IntegerShape, 'seahorse/model/shapes/shape'
-        autoload :LongShape, 'seahorse/model/shapes/shape'
-        autoload :FloatShape, 'seahorse/model/shapes/shape'
-        autoload :DoubleShape, 'seahorse/model/shapes/shape'
-        autoload :TimestampShape, 'seahorse/model/shapes/shape'
-        autoload :BooleanShape, 'seahorse/model/shapes/shape'
+
         autoload :BlobShape, 'seahorse/model/shapes/shape'
+        autoload :BooleanShape, 'seahorse/model/shapes/shape'
+        autoload :DoubleShape, 'seahorse/model/shapes/shape'
+        autoload :IntegerShape, 'seahorse/model/shapes/shape'
+        autoload :FloatShape, 'seahorse/model/shapes/shape'
+        autoload :LongShape, 'seahorse/model/shapes/shape'
         autoload :StringShape, 'seahorse/model/shapes/shape'
+        autoload :StructureShape, 'seahorse/model/shapes/shape'
+        autoload :TimestampShape, 'seahorse/model/shapes/shape'
     end
+
+    autoload :Api, 'seahorse/model/api'
+    autoload :LazyOperationHash, 'seahorse/model/lazy_operation_hash'
+    autoload :Node, 'seahorse/model/node'
+    autoload :Operation, 'seahorse/model/operation'
+    autoload :Property, 'seahorse/model/property'
+    autoload :PropertyError, 'seahorse/model/property'
   end
 end
