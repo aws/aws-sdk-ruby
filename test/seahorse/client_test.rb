@@ -16,14 +16,6 @@ require 'test_helper'
 module Seahorse
   describe Client do
 
-    describe 'VERSION' do
-
-      it 'is a semver compatible version string' do
-        Client::VERSION.must_match(/\d+\.\d+\.\d+/)
-      end
-
-    end
-
     describe '.define' do
 
       it 'creates a new client class' do

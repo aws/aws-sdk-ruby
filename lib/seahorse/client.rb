@@ -24,7 +24,6 @@ module Seahorse
     autoload :Request, 'seahorse/client/request'
     autoload :RequestContext, 'seahorse/client/request_context'
     autoload :Response, 'seahorse/client/response'
-    autoload :VERSION, 'seahorse/client/version'
 
     module Http
       autoload :Endpoint, 'seahorse/client/http/endpoint'

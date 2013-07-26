@@ -11,5 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse/model'
-require 'seahorse/client'
+require 'test_helper'
+
+module Seahorse
+  describe VERSION do
+    it 'is a semver compatible version string' do
+      VERSION.must_match(/\d+\.\d+\.\d+/)
+    end
+  end
+end

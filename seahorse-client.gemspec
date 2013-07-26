@@ -1,11 +1,11 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'seahorse/client/version'
+require 'seahorse'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'seahorse-client'
-  spec.version       = Seahorse::Client::VERSION
+  spec.name          = 'seahorse'
+  spec.version       = Seahorse::VERSION
   spec.authors       = ['Amazon Web Services', 'Trevor Rowe']
   spec.email         = ['trevorrowe@gmail.com']
   spec.summary       = 'Client for Seahorse compatible web services.'
