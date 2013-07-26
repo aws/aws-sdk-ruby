@@ -206,9 +206,7 @@ module Seahorse
         # @param [Model::Api, Hash] api
         # @return [Class]
         def define(api)
-          client_class = Class.new(self)
-          client_class.set_api(api)
-          client_class
+          Class.new(self).tap {|c| c.set_api(api) }
         end
 
         # @return [Class<Configuration>] the configuration class used by
