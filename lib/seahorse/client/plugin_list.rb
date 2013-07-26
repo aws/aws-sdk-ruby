@@ -15,7 +15,7 @@ require 'set'
 require 'thread'
 
 module Seahorse
-  class Client
+  module Client
     # @api private
     class PluginList
 

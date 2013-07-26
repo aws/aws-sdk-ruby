@@ -14,7 +14,7 @@
 require 'test_helper'
 
 module Seahorse
-  class Client
+  module Client
     describe RequestContext do
 
       describe '#operation_name' do

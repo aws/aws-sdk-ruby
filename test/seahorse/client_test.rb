@@ -16,151 +16,19 @@ require 'test_helper'
 module Seahorse
   describe Client do
 
-    def api
-      { 'endpoint' => 'http://endpoint:123' }
-    end
+    describe 'VERSION' do
 
-    def client_class
-      @client_class ||= Client.define(api)
-    end
-
-    def client
-      @client ||= client_class.new
-    end
-
-    it 'defines a semver compatible version' do
-      Client::VERSION.must_match(/\d+\.\d+\.\d+/)
-    end
-
-    describe '#config' do
-
-      it 'has a #ssl_default option that defaults to true' do
-        client.config.ssl_default.must_equal(true)
+      it 'is a semver compatible version string' do
+        Client::VERSION.must_match(/\d+\.\d+\.\d+/)
       end
 
-      it 'has a #endpoint option that defaults to the API endpoint' do
-        client.config.endpoint.must_equal(api['endpoint'])
-      end
-
-      it 'returns a Configuration object' do
-        client.config.must_be_kind_of(Client::Configuration)
-      end
-
-      it 'passes constructor options to the configuration constructor' do
-        client = client_class.new(ssl_default: false)
-        client.config.ssl_default.must_equal(false)
-      end
-
-    end
-
-    describe '#endpoint' do
-
-      it 'raises a runtime error if the endpoint can not be built' do
-        client_class = Class.new(Client)
-        client_class.set_api({}) # endpoint not specified in API
-        err = assert_raises(ArgumentError) do
-          client_class.new # endpoint not specified via :endpoint option
-        end
-        err.message.must_match(/endpoint/)
-      end
-
-      it 'returns an Endpoint object' do
-        client_class.new.endpoint.must_be_kind_of(Client::Http::Endpoint)
-      end
-
-      it 'is built from the :endpoint constructor option' do
-        client_class = Client.define({})
-        client = client_class.new(endpoint: 'http://foo.com')
-        client.endpoint.must_equal('http://foo.com')
-      end
-
-      it 'comes from the client class API when not passed to the constructor' do
-        client_class = Client.define('endpoint' => 'http://foo.com')
-        client = client_class.new
-        client.endpoint.must_equal('http://foo.com')
-      end
-
-      it 'defaults to https when scheme not given' do
-        client = client_class.new(endpoint: 'foo.com')
-        client.endpoint.must_equal('https://foo.com')
-      end
-
-      it 'defaults to http when :ssl_default is false' do
-        client = client_class.new(endpoint: 'foo.com', ssl_default: false)
-        client.endpoint.must_equal('http://foo.com')
-      end
-
-    end
-
-    describe '#build_request' do
-
-      it 'returns a Request object' do
-        client.build_request('operation').must_be_kind_of(Client::Request)
-      end
-
-      describe 'handler' do
-
-        def request
-          @request ||= client.build_request('operation')
-        end
-
-        it 'defaults to a Plugins::NetHttp::Handler' do
-          request.handler.must_be_kind_of(Client::Plugins::NetHttp::Handler)
-        end
-
-        it 'constructs the hander with the client configuration' do
-          request.handler.config.must_be_same_as(client.config)
-        end
-
-        it 'accepts the handler as a client option' do
-          handler = Class.new(Client::Handler)
-          client = client_class.new(:http_handler => handler)
-          req = client.build_request('operation')
-          req.handler.must_be_kind_of(handler)
-        end
-
-      end
-
-      describe 'request context' do
-
-        it 'defaults params to an empty hash' do
-          client.build_request('operation').context.params.must_equal({})
-        end
-
-        it 'accepts params' do
-          params = {}
-          request = client.build_request('operation', params)
-          request.context.params.must_be_same_as(params)
-        end
-
-        it 'populates the context with the operation name' do
-          request = client.build_request('operation')
-          request.context.operation_name.must_equal('operation')
-        end
-
-        it 'stringifies the operation name' do
-          request = client.build_request(:operation)
-          request.context.operation_name.must_equal('operation')
-        end
-
-        it 'populates the context with the endpoint' do
-          request = client.build_request('operation')
-          request.context.http_request.endpoint.must_be_same_as(client.endpoint)
-        end
-
-        it 'populates the context with the configuration' do
-          request = client.build_request('operation')
-          request.context.config.must_be_same_as(client.config)
-        end
-
-      end
     end
 
     describe '.define' do
 
       it 'creates a new client class' do
         client_class = Client.define({})
-        client_class.ancestors.must_include(Client)
+        client_class.ancestors.must_include(Client::Base)
       end
 
       it 'sets the api on the client class' do
@@ -173,18 +41,7 @@ module Seahorse
         klass1 = Client.define({})
         klass2 = klass1.define({})
         klass2.ancestors.must_include(klass1)
-        klass2.ancestors.must_include(Client)
-      end
-
-    end
-
-    describe '.api' do
-
-      it 'can be set' do
-        api = {}
-        client_class = Class.new(Client)
-        client_class.set_api(api)
-        client_class.api.must_be_same_as(api)
+        klass2.ancestors.must_include(Client::Base)
       end
 
     end

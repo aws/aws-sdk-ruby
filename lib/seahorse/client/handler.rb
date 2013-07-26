@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 module Seahorse
-  class Client
+  module Client
     class Handler
 
       # @param [Configuration] config

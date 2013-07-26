@@ -14,7 +14,7 @@
 require 'stringio'
 
 module Seahorse
-  class Client
+  module Client
     class RequestContext
 
       # @option options [String] :operation_name (nil)

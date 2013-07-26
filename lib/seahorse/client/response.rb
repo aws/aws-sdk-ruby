@@ -14,7 +14,7 @@
 require 'thread'
 
 module Seahorse
-  class Client
+  module Client
     class Response
 
       # @option options [RequestContext] :context (nil)

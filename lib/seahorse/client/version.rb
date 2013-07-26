@@ -12,7 +12,9 @@
 # language governing permissions and limitations under the License.
 
 module Seahorse
-  class Client
+  module Client
+
     VERSION = '0.1.0'
+
   end
 end

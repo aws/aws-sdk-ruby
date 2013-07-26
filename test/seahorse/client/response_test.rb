@@ -14,7 +14,7 @@
 require 'test_helper'
 
 module Seahorse
-  class Client
+  module Client
     describe Response do
 
       describe '#context' do

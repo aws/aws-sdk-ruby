@@ -14,7 +14,7 @@
 require 'test_helper'
 
 module Seahorse
-  class Client
+  module Client
     describe EventEmitter do
 
       def event_emitter

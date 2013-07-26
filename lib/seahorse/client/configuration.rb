@@ -15,7 +15,7 @@
 require 'uri'
 
 module Seahorse
-  class Client
+  module Client
 
     # Configuration objects are immutable objects that are constructed with a
     # hash of user supplied data.  You can register configuration options 
