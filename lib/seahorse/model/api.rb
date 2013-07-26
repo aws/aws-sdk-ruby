@@ -14,8 +14,12 @@
 
 module Seahorse
   module Model
+
     class Api < Node
       property :metadata, Hash
+
+      property :endpoint, String
+      property :plugins, [String]
 
       property :api_version, String
       property :type, String

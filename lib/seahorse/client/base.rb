@@ -133,7 +133,7 @@ module Seahorse
 
       # @return [String] Returns the default endpoint for the client.
       def default_endpoint
-        self.class.api['endpoint']
+        self.class.api.endpoint
       end
 
       class << self
@@ -194,14 +194,15 @@ module Seahorse
           @api || {}
         end
 
-        # @param [Hash] api
-        # @return [void]
+        # @param [Model::Api, Hash] api
+        # @return [Model::Api]
         def set_api(api)
-          set_plugins(api['plugins']) if api['plugins']
+          api = Model::Api.from_hash(api) if api.is_a?(Hash)
+          set_plugins(api.plugins) if api.plugins
           @api = api
         end
 
-        # @param [Hash] api
+        # @param [Model::Api, Hash] api
         # @return [Class]
         def define(api)
           client_class = Class.new(self)

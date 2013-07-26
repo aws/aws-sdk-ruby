@@ -32,7 +32,7 @@ module Seahorse
       end
 
       it 'sets the api on the client class' do
-        api = {}
+        api = Model::Api.from_hash({})
         client_class = Client.define(api)
         client_class.api.must_be_same_as(api)
       end

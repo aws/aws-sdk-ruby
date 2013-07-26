@@ -156,10 +156,17 @@ module Seahorse
       describe '.api' do
 
         it 'can be set' do
-          api = {}
+          api = Model::Api.from_hash({})
           client_class = Class.new(Base)
           client_class.set_api(api)
           client_class.api.must_be_same_as(api)
+        end
+
+        it 'can be set as a hash, returning a Model::Api' do
+          client_class = Class.new(Base)
+          api = client_class.set_api({})
+          api.must_be_kind_of(Model::Api)
+          api.to_hash.must_equal(Model::Api.from_hash({}).to_hash)
         end
 
       end
