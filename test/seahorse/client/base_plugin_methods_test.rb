@@ -17,8 +17,8 @@ module Seahorse
   module Client
     describe Base do
 
-      Plugin1 = Class.new
-      Plugin2 = Class.new
+      PluginA = Class.new
+      PluginB = Class.new
 
       SingletonPlugin = Class.new do
         def self.new
@@ -77,15 +77,15 @@ module Seahorse
       describe '.add_plugin' do
 
         it 'adds plugins to the client' do
-          client_class.add_plugin(Plugin1)
-          assert_equal([Plugin1], client_class.plugins)
+          client_class.add_plugin(PluginA)
+          assert_equal([PluginA], client_class.plugins)
         end
 
         it 'does not add plugins to the client parent class' do
           subclass = Class.new(client_class)
-          subclass.add_plugin(Plugin1)
+          subclass.add_plugin(PluginA)
           client_class.plugins.must_equal([])
-          subclass.plugins.must_equal([Plugin1])
+          subclass.plugins.must_equal([PluginA])
         end
 
       end
@@ -93,19 +93,19 @@ module Seahorse
       describe '.remove_plugin' do
 
         it 'removes a plugin from the client' do
-          client_class.add_plugin(Plugin1)
-          client_class.add_plugin(Plugin2)
-          client_class.remove_plugin(Plugin1)
-          client_class.plugins.must_equal([Plugin2])
+          client_class.add_plugin(PluginA)
+          client_class.add_plugin(PluginB)
+          client_class.remove_plugin(PluginA)
+          client_class.plugins.must_equal([PluginB])
         end
 
         it 'does not remove plugins from the client parent class' do
-          client_class.add_plugin(Plugin1)
-          client_class.add_plugin(Plugin2)
+          client_class.add_plugin(PluginA)
+          client_class.add_plugin(PluginB)
           subclass = Class.new(client_class)
-          subclass.remove_plugin(Plugin2)
-          client_class.plugins.must_equal([Plugin1, Plugin2])
-          subclass.plugins.must_equal([Plugin1])
+          subclass.remove_plugin(PluginB)
+          client_class.plugins.must_equal([PluginA, PluginB])
+          subclass.plugins.must_equal([PluginA])
         end
 
       end
@@ -126,10 +126,10 @@ module Seahorse
         end
 
         it 'replaces default plugins with the list specified in the API' do
-          api = { 'plugins' => ['Seahorse::Client::Plugin1'] }
+          api = { 'plugins' => ['Seahorse::Client::PluginA'] }
           client_class = Class.new(Base)
           client_class.set_api(api)
-          client_class.plugins.to_a.must_equal([Plugin1])
+          client_class.plugins.to_a.must_equal([PluginA])
         end
 
       end
