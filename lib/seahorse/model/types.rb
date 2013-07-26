@@ -11,5 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse/model'
-require 'seahorse/client'
+
+module Seahorse
+  module Model
+    module Types
+      Boolean = Class.new
+    end
+  end
+end
