@@ -190,9 +190,9 @@ module Seahorse
           Array(@plugins).freeze
         end
 
-        # @return [Hash]
+        # @return [Model::Api]
         def api
-          @api || {}
+          @api ||= Model::Api.new
         end
 
         # @param [Model::Api, Hash] api
