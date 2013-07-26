@@ -13,106 +13,110 @@
 
 require 'test_helper'
 
-module Seahorse::Client::Http
-  describe ResponseBodyBuffer do
+module Seahorse
+  module Client
+    module Http
+      describe ResponseBodyBuffer do
 
-    def body
-      @body ||= ResponseBodyBuffer.new
-    end
+        def body
+          @body ||= ResponseBodyBuffer.new
+        end
 
-    describe '#write' do
+        describe '#write' do
 
-      it 'makes data available to #read' do
-        body.write('abc')
-        body.read.must_equal('abc')
+          it 'makes data available to #read' do
+            body.write('abc')
+            body.read.must_equal('abc')
+          end
+
+          it 'can be called multiple times' do
+            body.write('abc')
+            body.write('mno')
+            body.write('xyz')
+            body.read.must_equal('abcmnoxyz')
+          end
+
+          it 'returns the chunk passed in' do
+            body.write('abc').must_equal('abc')
+          end
+
+        end
+
+        describe '#read' do
+
+          it 'returns the body contents' do
+            body.write('abc')
+            body.read.must_equal('abc')
+          end
+
+          it 'can be called multiple times' do
+            body.write('abc')
+            body.read.must_equal('abc')
+            body.read.must_equal('abc')
+          end
+
+        end
+
+        describe '#reset!' do
+
+          it 'resets the body contents' do
+            body.write('abc')
+            body.reset!
+            body.read.must_equal('')
+          end
+
+          it 'reopens the body for writing' do
+            body.write('abc')
+            body.reset!
+            body.write('xyz')
+            body.read.must_equal('xyz')
+          end
+
+        end
+
+        describe '#empty?' do
+
+          it 'returns true for a new response body' do
+            body.empty?.must_equal(true)
+          end
+
+          it 'returns false after writing to a body' do
+            body.write('abc')
+            body.empty?.must_equal(false)
+          end
+
+          it 'returns true after being reset' do
+            body.write('abc')
+            body.reset!
+            body.empty?.must_equal(true)
+          end
+
+          it 'returns true if empty string is written to it' do
+            body.write('')
+            body.empty?.must_equal(true)
+          end
+
+        end
+
+        describe '#size' do
+
+          it 'returns 0 for a new response body' do
+            body.size.must_equal(0)
+          end
+
+          it 'returns the total size' do
+            body.write('abc')
+            body.write('mno')
+            body.write('xyz')
+            body.size.must_equal(9)
+          end
+
+          it 'returns the same size as the read value' do
+            body.read.size.must_equal(body.size)
+          end
+
+        end
       end
-
-      it 'can be called multiple times' do
-        body.write('abc')
-        body.write('mno')
-        body.write('xyz')
-        body.read.must_equal('abcmnoxyz')
-      end
-
-      it 'returns the chunk passed in' do
-        body.write('abc').must_equal('abc')
-      end
-
-    end
-
-    describe '#read' do
-
-      it 'returns the body contents' do
-        body.write('abc')
-        body.read.must_equal('abc')
-      end
-
-      it 'can be called multiple times' do
-        body.write('abc')
-        body.read.must_equal('abc')
-        body.read.must_equal('abc')
-      end
-
-    end
-
-    describe '#reset!' do
-
-      it 'resets the body contents' do
-        body.write('abc')
-        body.reset!
-        body.read.must_equal('')
-      end
-
-      it 'reopens the body for writing' do
-        body.write('abc')
-        body.reset!
-        body.write('xyz')
-        body.read.must_equal('xyz')
-      end
-
-    end
-
-    describe '#empty?' do
-
-      it 'returns true for a new response body' do
-        body.empty?.must_equal(true)
-      end
-
-      it 'returns false after writing to a body' do
-        body.write('abc')
-        body.empty?.must_equal(false)
-      end
-
-      it 'returns true after being reset' do
-        body.write('abc')
-        body.reset!
-        body.empty?.must_equal(true)
-      end
-
-      it 'returns true if empty string is written to it' do
-        body.write('')
-        body.empty?.must_equal(true)
-      end
-
-    end
-
-    describe '#size' do
-
-      it 'returns 0 for a new response body' do
-        body.size.must_equal(0)
-      end
-
-      it 'returns the total size' do
-        body.write('abc')
-        body.write('mno')
-        body.write('xyz')
-        body.size.must_equal(9)
-      end
-
-      it 'returns the same size as the read value' do
-        body.read.size.must_equal(body.size)
-      end
-
     end
   end
 end

@@ -13,7 +13,13 @@
 
 require 'test_helper'
 
-module Seahorse::Client::Plugins::NetHttp
-  describe ConnectionPool do
+module Seahorse
+  module Client
+    module Plugins
+      module NetHttp
+        describe ConnectionPool do
+        end
+      end
+    end
   end
 end

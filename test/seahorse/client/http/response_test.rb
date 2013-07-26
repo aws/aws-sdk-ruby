@@ -13,60 +13,64 @@
 
 require 'test_helper'
 
-module Seahorse::Client::Http
-  describe Response do
+module Seahorse
+  module Client
+    module Http
+      describe Response do
 
-    describe '#status_code' do
+        describe '#status_code' do
 
-      it 'defaults to nil' do
-        Response.new.status_code.must_equal(nil)
+          it 'defaults to nil' do
+            Response.new.status_code.must_equal(nil)
+          end
+
+          it 'can be set' do
+            resp = Response.new
+            resp.status_code = 500
+            resp.status_code.must_equal(500)
+          end
+
+        end
+
+        describe '#headers' do
+
+          it 'is a Http::Headers' do
+            Response.new.headers.must_be_kind_of(Headers)
+          end
+
+          it 'defaults to a empty hash' do
+            Response.new.headers.to_h.must_equal({})
+          end
+
+          it 'can be set' do
+            headers = Headers.new
+            response = Response.new
+            response.headers = headers
+            response.headers.must_be_same_as(headers)
+          end
+
+        end
+
+        describe '#body' do
+
+          it 'defaults to an ResponseBody' do
+            Response.new.body.must_be_kind_of(ResponseBody)
+          end
+
+          it 'defaults to an empty body' do
+            assert Response.new.body.empty?
+          end
+
+          it 'can be set' do
+            body = Object.new
+            response = Response.new
+            response.body = body
+            response.body.must_be_same_as(body)
+          end
+
+        end
+
       end
-
-      it 'can be set' do
-        resp = Response.new
-        resp.status_code = 500
-        resp.status_code.must_equal(500)
-      end
-
     end
-
-    describe '#headers' do
-
-      it 'is a Http::Headers' do
-        Response.new.headers.must_be_kind_of(Headers)
-      end
-
-      it 'defaults to a empty hash' do
-        Response.new.headers.to_h.must_equal({})
-      end
-
-      it 'can be set' do
-        headers = Headers.new
-        response = Response.new
-        response.headers = headers
-        response.headers.must_be_same_as(headers)
-      end
-
-    end
-
-    describe '#body' do
-
-      it 'defaults to an ResponseBody' do
-        Response.new.body.must_be_kind_of(ResponseBody)
-      end
-
-      it 'defaults to an empty body' do
-        assert Response.new.body.empty?
-      end
-
-      it 'can be set' do
-        body = Object.new
-        response = Response.new
-        response.body = body
-        response.body.must_be_same_as(body)
-      end
-
-    end
-
   end
 end
