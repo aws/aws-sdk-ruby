@@ -40,7 +40,7 @@ module Seahorse
           },
           'documentation' => 'Docstring',
           'operations' => {
-            'OperationName' => operation_hash
+            'operation_name' => operation_hash
           }
         }
       end
@@ -53,10 +53,17 @@ module Seahorse
         it 'loads from a hash' do
           api.metadata['key'].must_equal 'value'
           api.documentation.must_equal 'Docstring'
-          api.operations[:OperationName].to_hash.must_equal operation_hash
-          api.operations['OperationName'].to_hash.must_equal operation_hash
+          api.operations[:operation_name].to_hash.must_equal operation_hash
+          api.operations['operation_name'].to_hash.must_equal operation_hash
         end
 
+        it 'underscore cases operation names' do
+          api = Api.from_hash 'operations' => { 'OperationName' => {} }
+          api.operations[:operation_name].must_be_instance_of Operation
+        end
+      end
+
+      describe '#to_hash' do
         it 'serializes to a hash' do
           api.to_hash.must_equal(api_hash)
         end

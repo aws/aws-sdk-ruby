@@ -89,7 +89,7 @@ module Seahorse
         if klass == LazyOperationHash
           hsh = {}
           value.each do |k, v|
-            hsh[k.to_s] = serialize(v, Operation)
+            hsh[key_case(k.to_s)] = serialize(v, Operation)
           end
           hsh
         elsif value.is_a?(Hash) && klass.is_a?(Hash)
@@ -117,7 +117,10 @@ module Seahorse
         if klass == Symbol
           value ? value.to_sym : nil
         elsif klass == LazyOperationHash
-          LazyOperationHash.new(value)
+          hash = value.inject({}) do |hsh, (k, v)|
+            hsh[key_case(k)] = v; hsh
+          end
+          LazyOperationHash.new(hash)
         elsif klass.is_a?(Hash)
           hsh = {}
           value.each do |key, item|
@@ -137,6 +140,14 @@ module Seahorse
         else
           nil
         end
+      end
+
+      def key_case(name)
+        name = name.to_s
+        name = name.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
+        name = name.gsub(/([a-z\d])([A-Z])/,'\1_\2')
+        name = name.tr("-", "_")
+        name.downcase
       end
     end
   end
