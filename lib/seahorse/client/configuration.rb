@@ -100,6 +100,16 @@ module Seahorse
         self.class.add_option(*args, &block)
       end
 
+      # @return [Hash<Symbol,Object>]
+      def options
+        self.class.options.inject({}) do |options, opt_name|
+          options[opt_name] = send(opt_name)
+          options
+        end.freeze
+      end
+      alias to_h options
+      alias to_hash options
+
       # Returns a new configuration that is merged with the given `options`.
       # Returns `self` if `options` are empty.
       # @param [Hash] options ({})
@@ -117,7 +127,7 @@ module Seahorse
       # @return [String]
       # @api private
       def inspect
-        "#<Seahorse::Client::Configuration @options=#{@options.inspect}>"
+        "#<Seahorse::Client::Configuration @options=#{options.inspect}>"
       end
 
       class << self
@@ -142,6 +152,7 @@ module Seahorse
         #
         # @return [void]
         def add_option(name, default = nil, &block)
+          options << name
           define_method(name) do
             case
             when @options.key?(name) then @options[name]
@@ -150,6 +161,11 @@ module Seahorse
             end
           end
           nil
+        end
+
+        # @return [Array<Symbol>]
+        def options
+          @options ||= []
         end
 
       end

@@ -94,12 +94,39 @@ module Seahorse
 
       end
 
+      describe '#options' do
+
+        it 'returns a hash of all configuration options with defaults' do
+          cfg = Configuration.new(opt: 'opt-value')
+          cfg.add_option(:opt)
+          cfg.add_option(:nil_opt)
+          cfg.add_option(:opt_with_default, 'default')
+          cfg.add_option(:opt_with_block) { 'block-default' }
+          cfg.options.must_equal({
+            opt: 'opt-value',
+            nil_opt: nil,
+            opt_with_default: 'defult',
+            opt_with_block: 'block-default',
+          })
+        end
+
+        it 'returns a frozen hash' do
+          assert Configuration.new.options.frozen?
+        end
+
+      end
+
       describe '#inspect' do
 
         it 'provides a helpful inspect method' do
           opts = { :abc => 'xyz' }
           cfg = Configuration.new(opts)
-          cfg.inspect.must_include(opts.inspect)
+          cfg.inspect.must_include(cfg.options.inspect)
+        end
+
+        it 'displays the configuration class name' do
+          Configuration.new.inspect.
+            must_include('Seahorse::Client::Configuration')
         end
 
       end
