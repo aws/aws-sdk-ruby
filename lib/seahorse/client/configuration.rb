@@ -139,18 +139,7 @@ module Seahorse
           config
         end
 
-        # Adds a getter method that returns the named option or a default
-        # value.  Default values can be passed as a static positional argument
-        # or via a block.
-        #
-        # @param [Symbol] name The name of the configuration option.  This will
-        #   be used to define a getter by the same name.
-        #
-        # @param default (nil) Specifies the default value used when not set
-        #   via the constructor.  You can skip this argument and specify a default
-        #   via a block argument.
-        #
-        # @return [void]
+        # @api private
         def add_option(name, default = nil, &block)
           options << name
           define_method(name) do
@@ -163,6 +152,7 @@ module Seahorse
           nil
         end
 
+        # @api private
         # @return [Array<Symbol>]
         def options
           @options ||= []
