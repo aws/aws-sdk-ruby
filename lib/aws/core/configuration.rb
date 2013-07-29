@@ -490,7 +490,7 @@ module AWS
       add_option :http_wire_trace, false, :boolean => true
 
       add_option_with_needs(:http_handler,
-        AWS::Core::Http::ConnectionPool::OPTIONS
+        AWS::Core::Http::ConnectionPool::OPTIONS + [:verify_response_body_content_length]
       ) do |config,options|
         AWS::Core::Http::NetHttpHandler.new(options)
       end
@@ -518,6 +518,8 @@ module AWS
 
       add_option :user_agent_prefix
 
+      add_option :verify_response_body_content_length, true, :boolean => true
+      
     end
   end
 end

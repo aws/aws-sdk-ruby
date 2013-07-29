@@ -23,16 +23,19 @@ module AWS
       #
       class NetHttpHandler
 
+        class TruncatedBodyError < IOError; end
+        
         # @api private
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
           Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
-          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError
         ]
 
         # (see ConnectionPool.new)
         def initialize options = {}
           @pool = ConnectionPool.new(options)
+          @verify_content_length = options[:verify_response_body_content_length]
         end
 
         # @return [ConnectionPool]
@@ -58,16 +61,27 @@ module AWS
               http.request(build_net_http_request(request)) do |net_http_resp|
                 response.status = net_http_resp.code.to_i
                 response.headers = net_http_resp.to_hash
-                if block_given? and response.status < 300
-                  net_http_resp.read_body do |data|
-                    begin
-                      yield data
-                    ensure
-                      retry_possible = false
+                exp_length = determine_expected_content_length(response)
+                act_length = 0
+                begin
+                  if block_given? and response.status < 300
+                    net_http_resp.read_body do |data|
+                      begin
+                        act_length += data.bytesize
+                        yield data
+                      ensure
+                        retry_possible = false
+                      end
                     end
+                  else
+                    response.body = net_http_resp.read_body
+                    act_length += response.body.bytesize unless response.body.nil?
                   end
-                else
-                  response.body = net_http_resp.read_body
+                ensure
+                  run_check = exp_length.nil? == false && request.http_method != "HEAD" && @verify_content_length
+                  if run_check && act_length != exp_length
+                    raise TruncatedBodyError, 'content-length does not match'
+                  end
                 end
               end
 
@@ -81,6 +95,14 @@ module AWS
         end
 
         protected
+
+        def determine_expected_content_length response
+          if header = response.headers['content-length']
+            if header.is_a?(Array)
+              header.first.to_i
+            end
+          end
+        end
 
         # Given an AWS::Core::HttpRequest, this method translates
         # it into a Net::HTTPRequest (Get, Put, Post, Head or Delete).
