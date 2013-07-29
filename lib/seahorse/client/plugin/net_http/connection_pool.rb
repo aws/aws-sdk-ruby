@@ -19,7 +19,7 @@ require 'logger'
 
 module Seahorse
   module Client
-    module Plugins
+    module Plugin
       module NetHttp
 
         # @attr_reader [URI::HTTP,nil] http_proxy Returns the configured proxy.

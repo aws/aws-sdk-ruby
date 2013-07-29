@@ -15,7 +15,7 @@ module Seahorse
   module Client
     class Base
 
-      @plugins = PluginList.new([Plugins::NetHttp])
+      @plugins = PluginList.new([Plugin::NetHttp])
 
       # @option options [String] :endpoint
       #   Endpoints specify the http scheme, hostname and port to connect

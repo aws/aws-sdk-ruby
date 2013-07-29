@@ -17,7 +17,7 @@ require 'stringio'
 
 module Seahorse
   module Client
-    module Plugins
+    module Plugin
       module NetHttp
         describe Handler do
 

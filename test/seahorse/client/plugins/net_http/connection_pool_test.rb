@@ -15,7 +15,7 @@ require 'test_helper'
 
 module Seahorse
   module Client
-    module Plugins
+    module Plugin
       module NetHttp
         describe ConnectionPool do
         end

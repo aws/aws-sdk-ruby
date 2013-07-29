@@ -13,11 +13,11 @@
 
 module Seahorse
   module Client
-    module Plugins
+    module Plugin
       module NetHttp
 
-        autoload :Handler, 'seahorse/client/plugins/net_http/handler'
-        autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
+        autoload :Handler, 'seahorse/client/plugin/net_http/handler'
+        autoload :ConnectionPool, 'seahorse/client/plugin/net_http/connection_pool'
 
         # @param [Configuration] config
         # @return [void]
