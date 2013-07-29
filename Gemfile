@@ -20,7 +20,7 @@ group :repl do
 end
 
 group :documentation do
-  gem 'yard'
+  gem 'yard', '>= 0.8.7', '< 1.0'
   gem 'rdiscount'
   gem 'rdoc', '= 3.9.4'
 end

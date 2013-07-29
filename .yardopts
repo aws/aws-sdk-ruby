@@ -2,5 +2,5 @@
 --template-path doc-src/templates
 --markup markdown
 --markup-provider rdiscount
---no-api
+--hide-api private
 -e doc-src/api_docs_plugin.rb
