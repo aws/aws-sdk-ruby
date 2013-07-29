@@ -15,7 +15,7 @@ require 'test_helper'
 
 module Seahorse
   module Client
-    module Plugin
+    module Plugins
       describe NetHttp do
 
         def config

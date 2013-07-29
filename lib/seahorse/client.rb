@@ -35,8 +35,8 @@ module Seahorse
       autoload :ResponseBodyStream, 'seahorse/client/http/response_body_stream'
     end
 
-    module Plugin
-      autoload :NetHttp, 'seahorse/client/plugin/net_http'
+    module Plugins
+      autoload :NetHttp, 'seahorse/client/plugins/net_http'
     end
 
     # @param (see Base.define)

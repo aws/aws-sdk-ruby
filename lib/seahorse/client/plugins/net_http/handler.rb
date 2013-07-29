@@ -13,7 +13,7 @@
 
 module Seahorse
   module Client
-    module Plugin
+    module Plugins
       module NetHttp
 
         # The default HTTP handler for Seahorse::Client.  This is based on

@@ -101,8 +101,8 @@ module Seahorse
             @request ||= client.build_request('operation')
           end
 
-          it 'defaults to a Plugin::NetHttp::Handler' do
-            request.handler.must_be_kind_of(Plugin::NetHttp::Handler)
+          it 'defaults to a Plugins::NetHttp::Handler' do
+            request.handler.must_be_kind_of(Plugins::NetHttp::Handler)
           end
 
           it 'constructs the hander with the client configuration' do
