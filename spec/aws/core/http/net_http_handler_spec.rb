@@ -18,7 +18,7 @@ require 'timeout'
 module AWS::Core::Http
   describe NetHttpHandler do
 
-    let(:handler_opts) {{}}
+    let(:handler_opts) {{:verify_response_body_content_length => true}}
 
     let(:handler) { described_class.new(handler_opts) }
 
@@ -284,6 +284,94 @@ module AWS::Core::Http
         end
         expect { handle! }.to raise_error(IOError)
       end
+      
+    end
+
+    context 'content-length checking' do
+
+      let(:http_response) {
+        double = double('http-response',
+          :code => '200',
+          :body => 'resp-body',
+          :to_hash => { 'content-length' => ["10000"] })
+        double.stub(:read_body) do |&block|
+          block ? block.call('resp-body') : 'resp-body'
+        end
+        double
+      }
+      
+      it 'should raise if content-length does not match' do
+        handle!
+        response.network_error.should be_a_kind_of(NetHttpHandler::TruncatedBodyError)
+      end
+
+      context 'can turn off length checking' do
+        let(:handler_opts) {{:verify_response_body_content_length => false}}
+
+        let(:handler) { described_class.new(handler_opts) }
+
+        it 'should not raise if length does not match but check is off' do
+          response.network_error.should be(nil)
+        end
+        
+      end
+
+      context 'with streaming' do
+        let(:stream_result) { "" }
+        let(:read_block) { proc { |chunk| stream_result << chunk } }
+        
+        it 'should raise if streamed content-length does not match' do
+          expect { handle! }.to raise_error
+        end
+
+        context 'can turn off length checking' do
+          let(:handler_opts) {{:verify_response_body_content_length => false}}
+  
+          let(:handler) { described_class.new(handler_opts) }
+  
+          it 'should not raise if length does not match but check is off' do
+            expect { handle! }.to_not raise_error
+          end
+        
+         end
+        
+      end
+
+      context 'head requests' do
+
+        let(:request) {
+          double('aws-request',
+            :http_method => 'HEAD',
+            :endpoint => 'https://host.com',
+            :uri => '/path?querystring',
+            :body_stream => StringIO.new('body'),
+            :use_ssl? => true,
+            :ssl_verify_peer? => true,
+            :ssl_ca_file => '/ssl/ca',
+            :ssl_ca_path => nil,
+            :read_timeout => 60,
+            :continue_timeout => 1,
+            :headers => { 'foo' => 'bar' })
+        }
+
+        let(:http_response) {
+          double = double('http-response',
+            :code => '200',
+            :body => 'resp-body',
+            :to_hash => { 'content-length' => ["10000"] })
+          double.stub(:read_body) do |&block|
+            block ? block.call('') : ''
+          end
+          double
+        }
+
+        it 'should not raise for a head request' do
+          handle!
+          response.network_error.should be(nil)
+        end
+        
+      end
+      
     end
 
     context 'errors' do
