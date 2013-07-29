@@ -26,12 +26,12 @@ module Seahorse
           end
 
           def endpoint
-            @endpoint ||= Seahorse::Client::Http::Endpoint.new('test.endpoint.api')
+            @endpoint ||= Http::Endpoint.new('test.endpoint.api')
           end
 
           def context
             @context ||= begin
-              context = Seahorse::Client::RequestContext.new
+              context = RequestContext.new
               context.http_request.endpoint = endpoint
               context
             end
@@ -126,7 +126,7 @@ module Seahorse
             it 'returns a Response object from #call' do
               stub_request(:any, endpoint)
               resp = make_request
-              resp.must_be_kind_of(Seahorse::Client::Response)
+              resp.must_be_kind_of(Response)
             end
 
             it 'populates the #context of the returned response' do
@@ -144,19 +144,19 @@ module Seahorse
             describe 'request endpoint' do
 
               it 'makes a request against the given endpoint' do
-                @endpoint = Seahorse::Client::Http::Endpoint.new('http://foo.bar.com')
+                @endpoint = Http::Endpoint.new('http://foo.bar.com')
                 stub_request(:any, 'http://foo.bar.com')
                 make_request
               end
 
               it 'observes the Endpoint#port' do
-                @endpoint = Seahorse::Client::Http::Endpoint.new('http://foo.bar.com:9876')
+                @endpoint = Http::Endpoint.new('http://foo.bar.com:9876')
                 stub_request(:any, 'http://foo.bar.com:9876')
                 make_request
               end
 
               it 'observes the Endpoint#scheme' do
-                @endpoint = Seahorse::Client::Http::Endpoint.new('https://foo.bar.com')
+                @endpoint = Http::Endpoint.new('https://foo.bar.com')
                 stub_request(:any, 'https://foo.bar.com')
                 make_request
               end
