@@ -127,6 +127,14 @@ module AWS
         @raw['SigningCertURL']
       end
 
+      def subscribe_url
+        @raw['SubscribeURL']
+      end
+
+      def token
+        @raw['Token']
+      end
+
       def unsubscribe_url
         @raw['UnsubscribeURL']
       end
