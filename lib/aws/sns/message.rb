@@ -35,6 +35,17 @@ module AWS
     # If an originator is applicable, it should set the `@origin` accessor to denote 
     # itself.
     class Message
+      SIGNABLE_KEYS = [
+        'Message',
+        'MessageId',
+        'Subject',
+        'SubscribeURL',
+        'Timestamp',
+        'Token',
+        'TopicArn',
+        'Type',
+      ].freeze
+
       attr_reader :raw
       attr_accessor :origin
 
@@ -136,13 +147,13 @@ module AWS
       end
 
       def canonical_string
-        # TODO: Support SubscriptionConfirmation and UnsubscribeConfirmation messages
-        text = "Message\n#{message}\n"
-        text += "MessageId\n#{message_id}\n"
-        text += "Subject\n#{subject}\n" unless subject.nil? or subject.empty?
-        text += "Timestamp\n#{timestamp}\n"
-        text += "TopicArn\n#{topic_arn}\n"
-        text += "Type\n#{type}\n"
+        text = ''
+        SIGNABLE_KEYS.each do |key|
+          value = @raw[key]
+          next if value.nil? or value.empty?
+          text << key << "\n"
+          text << value << "\n"
+        end
         text
       end
 
