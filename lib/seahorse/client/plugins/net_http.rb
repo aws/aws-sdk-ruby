@@ -14,25 +14,16 @@
 module Seahorse
   module Client
     module Plugins
-      module NetHttp
+      class NetHttp < Plugin
 
         autoload :Handler, 'seahorse/client/plugins/net_http/handler'
         autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
 
-        # @param [Configuration] config
-        # @return [void]
-        def self.add_configuration(config)
-          ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-            config.add_option(opt_name, default_value)
-          end
+        ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
+          configure(opt_name, default_value)
         end
 
-        # @param [HandlerList] handlers
-        # @param [Configuration] config
-        # @return [void]
-        def self.add_handlers(handlers, config)
-          handlers.add(Handler, priority: :send)
-        end
+        handler(NetHttp::Handler, priority: :send)
 
       end
     end

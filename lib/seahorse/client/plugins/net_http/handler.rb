@@ -14,7 +14,7 @@
 module Seahorse
   module Client
     module Plugins
-      module NetHttp
+      class NetHttp < Plugin
 
         # The default HTTP handler for Seahorse::Client.  This is based on
         # the Ruby's `Net::HTTP`.

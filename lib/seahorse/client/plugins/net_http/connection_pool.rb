@@ -20,7 +20,7 @@ require 'logger'
 module Seahorse
   module Client
     module Plugins
-      module NetHttp
+      class NetHttp < Plugin
 
         # @attr_reader [URI::HTTP,nil] http_proxy Returns the configured proxy.
         # @attr_reader [Integer,Float] http_open_timeout

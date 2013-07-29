@@ -18,18 +18,41 @@ module Seahorse
 
       # @param [Configuration] config
       # @return [void]
-      def add_configuration(config); end
+      def add_configuration(config)
+        self.class.config_options.each do |opt|
+          name, default, default_block = *opt
+          config.add_option(name, default, &default_block)
+        end
+      end
 
       # @param [HandlerList] handlers
       # @param [Configuration] config
       # @return [void]
-      def add_handlers(handlers, config); end
+      def add_handlers(handlers, config)
+        handlers.copy_from(self.class.handlers)
+      end
 
       class << self
 
-        def add_configuration_option; end
+        # (see Configuration#add_option)
+        def configure(name, default = nil, &block)
+          config_options << [name, default, block]
+        end
 
-        def add_handler; end
+        # (see HandlerList#add)
+        def handler(handler, options = {})
+          handlers.add(handler, options)
+        end
+
+        # @api private
+        def config_options
+          @config_options ||= []
+        end
+
+        # @api private
+        def handlers
+          @handler ||= HandlerList.new
+        end
 
       end
     end

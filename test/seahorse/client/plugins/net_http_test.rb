@@ -20,7 +20,7 @@ module Seahorse
 
         def config
           Configuration.new.tap do |config|
-            NetHttp.add_configuration(config)
+            NetHttp.new.add_configuration(config)
           end
         end
 
@@ -73,7 +73,7 @@ module Seahorse
 
           it 'sets the :send hander to a NetHttp::Handler' do
             handlers = HandlerList.new
-            NetHttp.add_handlers(handlers, config)
+            NetHttp.new.add_handlers(handlers, config)
             handlers.to_a.must_equal([NetHttp::Handler])
           end
 

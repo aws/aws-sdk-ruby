@@ -25,23 +25,44 @@ module Seahorse
         @config ||= Configuration.new
       end
 
+      def plugin_class
+        @plugin_class ||= Class.new(Plugin)
+      end
+
       describe '#add_configuration' do
 
         it 'does nothing by default' do
-          Plugin.new.add_configuration(config)
+          plugin_class.new.add_configuration(config)
         end
 
-        it 'applies options registered by .add_configuration_option'
+        it 'adds options registered by .configure' do
+          plugin_class.configure(:opt_without_default)
+          plugin_class.configure(:opt_with_default, 'DEFAULT')
+          plugin_class.configure(:opt_with_block) { 'BLOCK-DEFAULT' }
+          plugin_class.new.add_configuration(config)
+          config.opt_without_default.must_equal(nil)
+          config.opt_with_default.must_equal('DEFAULT')
+          config.opt_with_block.must_equal('BLOCK-DEFAULT')
+        end
 
       end
 
       describe '#add_handlers' do
 
         it 'does nothing by default' do
-          Plugin.new.add_handlers(handlers, config)
+          plugin_class.new.add_handlers(handlers, config)
         end
 
-        it 'applies hanlers registered by .add_handler'
+        it 'adds handlers registered by .handler' do
+          build_handler = Class.new
+          sign_handler = Class.new
+          send_handler = Class.new
+          plugin_class.handler(build_handler)
+          plugin_class.handler(sign_handler, priority: :sign)
+          plugin_class.handler(send_handler, priority: :send)
+          plugin_class.new.add_handlers(handlers, config)
+          handlers.to_a.must_equal([send_handler, sign_handler, build_handler])
+        end
 
       end
     end

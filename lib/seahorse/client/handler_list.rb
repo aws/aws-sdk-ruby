@@ -48,6 +48,25 @@ module Seahorse
         end
       end
 
+      # Copies handlers from another list onto the current one.
+      # @param [HandlerList] handlers
+      # @return [void]
+      def copy_from(handlers)
+        handlers.send(:each_with_options) do |handler, options|
+          add(handler, options)
+        end
+      end
+
+      private
+
+      def each_with_options(&block)
+        @handlers.each do |priority, handlers|
+          handlers.each do |handler|
+            yield(handler, priority: priority)
+          end
+        end
+      end
+
       # There can only be a single send handler.  This provides the same
       # interface plus a helpful warning message.
       # @api private
