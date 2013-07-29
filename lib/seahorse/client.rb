@@ -39,8 +39,8 @@ module Seahorse
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
     end
 
-    # @param [Model::Api, Hash] api
-    # @return [Class]
+    # @param (see Base.define)
+    # @return (see Base.define)
     def self.define(api)
       Base.define(api)
     end
