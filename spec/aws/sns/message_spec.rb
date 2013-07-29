@@ -82,6 +82,11 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
       File.read("#{File.dirname __FILE__}/support/sns_manually_sent.json")
     }
 
+    it "should successfully authenticate a valid sns message" do
+      raw = File.open("#{File.dirname __FILE__}/support/sns_manually_sent.json", 'r') {|f| f.read}
+      AWS::SNS::Message.new(raw).should be_authentic
+    end
+
     %w(https://foo.com/wibble.pem https://amazonaws.com.dirtyhackers.com/itsrealhonest.pem http://sns.eu-west-1.amazonaws.com/foo.pem).each do |cert_url|
 
       it "should return false if the SigningCertURL does not originate from https-AWS" do
