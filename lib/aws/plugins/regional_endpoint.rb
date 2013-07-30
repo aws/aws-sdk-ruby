@@ -11,14 +11,17 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse'
 
 module Aws
-
-  autoload :VERSION, 'aws/version'
-
   module Plugins
-    autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
-  end
+    class RegionalEndpoint < Seahorse::Client::Plugin
 
+      option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
+
+      option(:endpoint) do |config|
+        config.api.metadata['regional_endpoint'] % config.region
+      end
+
+    end
+  end
 end
