@@ -71,7 +71,7 @@ module Seahorse
       # @param [Array<Plugin>] plugins
       # @return [Configuration]
       def build_config(options, plugins)
-        @config = self.class.configuration_class.new(options)
+        @config = Configuration.new(options)
         @config.add_option(:ssl_default, true)
         @config.add_option(:endpoint, default_endpoint)
         plugins.each do |plugin|
@@ -206,12 +206,6 @@ module Seahorse
         # @return [Class]
         def define(api)
           Class.new(self).tap {|c| c.set_api(api) }
-        end
-
-        # @return [Class<Configuration>] the configuration class used by
-        #   this client.
-        def configuration_class
-          Configuration
         end
 
         private
