@@ -461,6 +461,12 @@ module AWS
     #   append to all requests against AWS services.  This should be set
     #   for clients and applications built ontop of the aws-sdk gem.
     #
+    # @option options [Boolean] :verify_response_body_content_length (true)
+    #   When `true` all HTTP handlers will perform a check to ensure
+    #   that response bodies match the content-length specified in the
+    #   response header, if present. Note that some HTTP handlers will
+    #   always do this whether or not this value is true.
+    # 
     # @return [Core::Configuration] Returns the new configuration.
     #
     def config options = {}
