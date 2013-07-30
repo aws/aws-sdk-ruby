@@ -32,13 +32,15 @@ module Seahorse
       describe '#add_configuration' do
 
         it 'does nothing by default' do
+          options = config.options
           plugin_class.new.add_configuration(config)
+          config.options.must_equal(options)
         end
 
-        it 'adds options registered by .configure' do
-          plugin_class.configure(:opt_without_default)
-          plugin_class.configure(:opt_with_default, 'DEFAULT')
-          plugin_class.configure(:opt_with_block) { 'BLOCK-DEFAULT' }
+        it 'adds options registered by .option' do
+          plugin_class.option(:opt_without_default)
+          plugin_class.option(:opt_with_default, 'DEFAULT')
+          plugin_class.option(:opt_with_block) { 'BLOCK-DEFAULT' }
           plugin_class.new.add_configuration(config)
           config.opt_without_default.must_equal(nil)
           config.opt_with_default.must_equal('DEFAULT')

@@ -105,7 +105,7 @@ module Seahorse
           cfg.options.must_equal({
             opt: 'opt-value',
             nil_opt: nil,
-            opt_with_default: 'defult',
+            opt_with_default: 'default',
             opt_with_block: 'block-default',
           })
         end

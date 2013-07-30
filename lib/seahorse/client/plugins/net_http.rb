@@ -20,7 +20,7 @@ module Seahorse
         autoload :ConnectionPool, 'seahorse/client/plugins/net_http/connection_pool'
 
         ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-          configure(opt_name, default_value)
+          option(opt_name, default_value)
         end
 
         handler(NetHttp::Handler, priority: :send)

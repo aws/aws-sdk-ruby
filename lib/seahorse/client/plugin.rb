@@ -18,7 +18,7 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_configuration(config)
-        self.class.config_options.each do |opt|
+        self.class.options.each do |opt|
           name, default, default_block = *opt
           config.add_option(name, default, &default_block)
         end
@@ -34,8 +34,8 @@ module Seahorse
       class << self
 
         # (see Configuration#add_option)
-        def configure(name, default = nil, &block)
-          config_options << [name, default, block]
+        def option(name, default = nil, &block)
+          options << [name, default, block]
         end
 
         # (see HandlerList#add)
@@ -44,8 +44,8 @@ module Seahorse
         end
 
         # @api private
-        def config_options
-          @config_options ||= []
+        def options
+          @options ||= []
         end
 
         # @api private
