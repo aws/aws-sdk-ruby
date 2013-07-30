@@ -5,7 +5,7 @@ require 'aws/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'aws-core'
-  spec.version       = Aws::Core::VERSION
+  spec.version       = Aws::VERSION
   spec.authors       = ['Amazon Web Services', 'Trevor Rowe']
   spec.email         = ['trevorrowe@gmail.com']
   spec.summary       = 'AWS Core'

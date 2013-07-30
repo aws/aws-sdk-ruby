@@ -14,10 +14,10 @@
 require 'test_helper'
 
 module Aws
-  describe Core do
+  describe VERSION do
 
-    it 'defines a semver compatible version' do
-      Core::VERSION.must_match(/\d+\.\d+\.\d+/)
+    it 'is a semver compatible string' do
+      Aws::VERSION.must_match(/\d+\.\d+\.\d+/)
     end
 
   end

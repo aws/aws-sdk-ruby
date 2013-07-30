@@ -12,7 +12,5 @@
 # language governing permissions and limitations under the License.
 
 module Aws
-  module Core
-    VERSION = '0.1.0'
-  end
+  VERSION = '0.1.0'
 end

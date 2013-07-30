@@ -12,4 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'seahorse'
-require 'aws/core'
+
+module Aws
+  autoload :VERSION, 'aws/version'
+end
