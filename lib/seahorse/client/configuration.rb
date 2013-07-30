@@ -145,7 +145,7 @@ module Seahorse
           define_method(name) do
             case
             when @options.key?(name) then @options[name]
-            when block then block.call
+            when block then block.call(self)
             else default
             end
           end

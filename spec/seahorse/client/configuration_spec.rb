@@ -58,6 +58,12 @@ module Seahorse
           config.dynamic.should eq('value')
         end
 
+        it 'yields self to the block when an arg is accepted' do
+          config.add_option(:single, 1)
+          config.add_option(:double) { |config| config.single * 2 }
+          config.double.must_equal(2)
+        end
+
       end
 
       describe '#with_option' do
