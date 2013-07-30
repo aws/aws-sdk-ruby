@@ -11,23 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-source 'http://rubygems.org'
-
-gemspec
-
-gem 'rake', require: false
-
-group :test do
-  gem 'rspec', git: 'git://github.com/rspec/rspec'
-  gem 'rspec-core', git: 'git://github.com/rspec/rspec-core'
-  gem 'rspec-mocks', git: 'git://github.com/rspec/rspec-mocks'
-  gem 'rspec-expectations', git: 'git://github.com/rspec/rspec-expectations'
-
-  gem 'webmock'
-  gem 'simplecov', require: false
+if ENV['COVERAGE']
+  require 'simplecov'
 end
 
-group :docs do
-  gem 'yard'
-  gem 'rdiscount'
-end
+require 'rspec'
+require 'webmock/rspec'
+require 'seahorse'
