@@ -11,9 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/core/configuration'
-require 'aws/core/client'
-require 'aws/core/version'
+require 'aws/version'
 
 module Aws
   module Core
