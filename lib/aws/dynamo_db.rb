@@ -33,7 +33,7 @@ module AWS
   # designate a table name with a primary key.
   #
   #     table = dynamo_db.tables.create(
-  #       "MyTable",
+  #       "MyTable", 10, 5,
   #       :hash_key => { :id => :string }
   #     )
   #     sleep 1 while table.status == :creating
