@@ -38,18 +38,18 @@ module Seahorse
 
         def plugin_class
           @plugin_class ||= Class.new(SingletonPlugin) do
-            def add_configuration(config)
+            def add_options(config)
               config.add_option(:plugin_option)
             end
           end
         end
 
-        it 'instructs plugins to #add_configuration' do
+        it 'instructs plugins to #add_options' do
           client_class.add_plugin(plugin_class)
           client_class.new.config.must_respond_to(:plugin_option)
         end
 
-        it 'calls plugin#add_configuration only if the plugin responds' do
+        it 'calls plugin#add_options only if the plugin responds' do
           plugin = Object.new
           client_class.add_plugin(plugin)
           client_class.new

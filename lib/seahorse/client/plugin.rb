@@ -17,7 +17,7 @@ module Seahorse
 
       # @param [Configuration] config
       # @return [void]
-      def add_configuration(config)
+      def add_options(config)
         self.class.options.each do |opt|
           name, default, default_block = *opt
           config.add_option(name, default, &default_block)

@@ -74,10 +74,9 @@ module Seahorse
         @config = self.class.configuration_class.new(options)
         @config.add_option(:ssl_default, true)
         @config.add_option(:endpoint, default_endpoint)
-        plugins.each do |p|
-          p.add_configuration(@config) if p.respond_to?(:add_configuration)
+        plugins.each do |plugin|
+          plugin.add_options(@config) if plugin.respond_to?(:add_options)
         end
-
         @config
       end
 

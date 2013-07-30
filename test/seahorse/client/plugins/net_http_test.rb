@@ -20,11 +20,11 @@ module Seahorse
 
         def config
           Configuration.new.tap do |config|
-            NetHttp.new.add_configuration(config)
+            NetHttp.new.add_options(config)
           end
         end
 
-        describe '#add_configuration' do
+        describe '#add_options' do
 
           it 'adds a :http_proxy option without default' do
             config.http_proxy.must_equal(nil)
