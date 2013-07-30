@@ -16,10 +16,15 @@ module Aws
   module Plugins
     class RegionalEndpoint < Seahorse::Client::Plugin
 
-      option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
+      # raised when region is not configured
+      MISSING_REGION = 'missing required configuration option :region'
 
-      option(:endpoint) do |config|
-        config.api.metadata['regional_endpoint'] % config.region
+      def add_options(config)
+        config.add_option(:region, ENV['AWS_REGION'] || ENV['AMAZON_REGION'])
+        config.add_option(:endpoint) do |cfg|
+          cfg.api.metadata['regional_endpoint'] % cfg.region
+        end
+        raise ArgumentError, MISSING_REGION unless config.region
       end
 
     end

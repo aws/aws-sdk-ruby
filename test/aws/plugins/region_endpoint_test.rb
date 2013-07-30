@@ -33,8 +33,8 @@ module Aws
         end
 
         it 'adds a :region configuration option' do
-          setup_plugin
-          @config.must_respond_to(:region)
+          setup_plugin(region: 'region')
+          @config.region.must_equal('region')
         end
 
         it 'defaults to ENV["AWS_REGION"]' do
@@ -56,9 +56,9 @@ module Aws
           @config.region.must_equal('aws-region')
         end
 
-        it 'falls back to nil when env options are not set' do
-          setup_plugin
-          @config.region.must_equal(nil)
+        it 'raises an argument error when not set' do
+          err = assert_raises(ArgumentError) { setup_plugin }
+          err.message.must_equal(RegionalEndpoint::MISSING_REGION)
         end
 
         it 'can be set' do
