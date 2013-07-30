@@ -22,7 +22,7 @@ module Seahorse
       end
 
       it 'is enumerable' do
-        handlers.should be_kind_of(Enumerable)
+        expect(handlers).to be_kind_of(Enumerable)
       end
 
       describe '#add' do
@@ -30,7 +30,7 @@ module Seahorse
         it 'adds a handler' do
           handler = Class.new
           handlers.add(handler)
-          handlers.to_a.should eq([handler])
+          expect(handlers.to_a).to eq([handler])
         end
 
         it 'preserves insertion order' do
@@ -38,7 +38,7 @@ module Seahorse
           handler2 = Class.new
           handlers.add(handler1)
           handlers.add(handler2)
-          handlers.to_a.should eq([handler1, handler2])
+          expect(handlers.to_a).to eq([handler1, handler2])
         end
 
         it 'sorts handlers by reverse (stack) priority' do
@@ -46,14 +46,14 @@ module Seahorse
           handlers.add('build', priority: :build)
           handlers.add('sign', priority: :sign)
           handlers.add('send', priority: :send)
-          handlers.to_a.should eq(%w(send sign build validate))
+          expect(handlers.to_a).to eq(%w(send sign build validate))
         end
 
         it 'defaults priority to :build' do
           handlers.add('before', priority: :before_build)
           handlers.add('on')
           handlers.add('after', priority: :after_build)
-          handlers.to_a.should eq(['after', 'on', 'before'])
+          expect(handlers.to_a).to eq(['after', 'on', 'before'])
         end
 
         it 'accepts multiple handlers with the same priority' do
@@ -61,7 +61,7 @@ module Seahorse
           handlers.add('h2', priority: :validate)
           handlers.add('h3', priority: :build)
           handlers.add('h4', priority: :build)
-          handlers.to_a.should eq(['h3', 'h4', 'h1', 'h2'])
+          expect(handlers.to_a).to eq(['h3', 'h4', 'h1', 'h2'])
         end
 
         %w(validate build sign).each do |priority|
@@ -72,7 +72,7 @@ module Seahorse
               handlers.add('before', priority: :"before_#{priority}")
               handlers.add('on', priority: priority.to_sym)
               handlers.add('after', priority: :"after_#{priority}")
-              handlers.to_a.should eq(['after', 'on', 'before'])
+              expect(handlers.to_a).to eq(['after', 'on', 'before'])
             end
 
           end
@@ -84,7 +84,7 @@ module Seahorse
           it 'has a before level for send' do
             handlers.add('before', priority: :before_send)
             handlers.add('on', priority: :send)
-            handlers.to_a.should eq(['on', 'before'])
+            expect(handlers.to_a).to eq(['on', 'before'])
           end
 
           it 'does not support after send' do
@@ -97,7 +97,7 @@ module Seahorse
             handlers.add('handler1', priority: :send)
             handlers.add('handler2', priority: :send)
             handlers.add('handler3', priority: :send)
-            handlers.to_a.should eq(['handler3'])
+            expect(handlers.to_a).to eq(['handler3'])
           end
 
         end

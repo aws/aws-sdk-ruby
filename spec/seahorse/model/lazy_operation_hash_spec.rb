@@ -25,7 +25,7 @@ module Seahorse
           hash = {'a' => {'name' => 'op'}}
           lazy = LazyOperationHash.new(hash)
           lazy.load!
-          hash.should eq 'a' => {'name' => 'op'}
+          expect(hash).to eq 'a' => {'name' => 'op'}
         end
       end
 
@@ -33,17 +33,17 @@ module Seahorse
         it 'parses data when accessed' do
           ast = hash('operation' => {'name' => 'operation'})
           op = ast['operation']
-          op.name.should eq('operation')
+          expect(op.name).to eq('operation')
         end
 
         it 'caches data when accessed first time' do
           ast = hash('operation' => {'name' => 'operation'})
-          ast['operation'].should be(ast['operation'])
+          expect(ast['operation']).to be(ast['operation'])
         end
 
         it 'allows access by Symbol name' do
           ast = hash('operation' => {'name' => 'operation'})
-          ast[:operation].name.should eq('operation')
+          expect(ast[:operation].name).to eq('operation')
         end
       end
 
@@ -51,7 +51,7 @@ module Seahorse
         it 'sets value and removes raw inner data' do
           ast = hash
           ast[:operation] = 'VALUE'
-          ast[:operation].should eq 'VALUE'
+          expect(ast[:operation]).to eq 'VALUE'
         end
       end
 
@@ -59,8 +59,8 @@ module Seahorse
         it 'loads all data' do
           ast = hash('op1' => {'name' => 'op1'}, 'op2' => {'name' => 'op2'})
           ast.load!
-          ast['op1'].name.should eq('op1')
-          ast['op2'].name.should eq('op2')
+          expect(ast['op1'].name).to eq('op1')
+          expect(ast['op2'].name).to eq('op2')
         end
       end
     end

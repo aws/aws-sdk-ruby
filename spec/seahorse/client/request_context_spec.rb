@@ -20,12 +20,12 @@ module Seahorse
       describe '#operation_name' do
 
         it 'defaults to nil' do
-          RequestContext.new.operation_name.should be(nil)
+          expect(RequestContext.new.operation_name).to be(nil)
         end
 
         it 'can be set in the constructor' do
           context = RequestContext.new(operation_name: 'operation_name')
-          context.operation_name.should eq('operation_name')
+          expect(context.operation_name).to eq('operation_name')
         end
 
       end
@@ -33,12 +33,12 @@ module Seahorse
       describe '#params' do
 
         it 'defaults to a empty hash' do
-          RequestContext.new.params.should eq({})
+          expect(RequestContext.new.params).to eq({})
         end
 
         it 'can be set in the constructor' do
           params = Object.new
-          RequestContext.new(params: params).params.should be(params)
+          expect(RequestContext.new(params: params).params).to be(params)
         end
 
       end
@@ -46,12 +46,12 @@ module Seahorse
       describe '#config' do
 
         it 'defaults to nil' do
-          RequestContext.new.config.should be(nil)
+          expect(RequestContext.new.config).to be(nil)
         end
 
         it 'can be set in the constructor' do
           config = Object.new
-          RequestContext.new(config: config).config.should be(config)
+          expect(RequestContext.new(config: config).config).to be(config)
         end
 
       end
@@ -61,21 +61,21 @@ module Seahorse
         it 'defaults to a new EventEmitter' do
           events = Object.new
           allow(EventEmitter).to receive(:new).with(events) do
-            RequestContext.new.events.should be(events)
+            expect(RequestContext.new.events).to be(events)
           end
         end
 
         it 'can be set in the constructor' do
           events = Object.new
           context = RequestContext.new(events: events)
-          context.events.should be(events)
+          expect(context.events).to be(events)
         end
 
         it 'can be set' do
           events = Object.new
           context = RequestContext.new
           context.events = events
-          context.events.should be(events)
+          expect(context.events).to be(events)
         end
 
       end
@@ -83,13 +83,13 @@ module Seahorse
       describe '#http_request' do
 
         it 'defaults to a Http::Request object' do
-          RequestContext.new.http_request.should be_kind_of(Http::Request)
+          expect(RequestContext.new.http_request).to be_kind_of(Http::Request)
         end
 
         it 'can be set in the constructor' do
           http_req = Object.new
           context = RequestContext.new(http_request: http_req)
-          context.http_request.should be(http_req)
+          expect(context.http_request).to be(http_req)
         end
 
       end
@@ -97,13 +97,13 @@ module Seahorse
       describe '#http_response' do
 
         it 'defaults to a Http::Response object' do
-          RequestContext.new.http_response.should be_kind_of(Http::Response)
+          expect(RequestContext.new.http_response).to be_kind_of(Http::Response)
         end
 
         it 'can be set in the constructor' do
           http_resp = Object.new
           context = RequestContext.new(http_response: http_resp)
-          context.http_response.should be(http_resp)
+          expect(context.http_response).to be(http_resp)
         end
 
       end
@@ -112,13 +112,13 @@ module Seahorse
 
         it 'returns nil for non-set keys' do
           context = RequestContext.new
-          context[:color].should eq(nil)
+          expect(context[:color]).to eq(nil)
         end
 
         it 'can be set via #[]=' do
           context = RequestContext.new
           context[:color] = 'red'
-          context[:color].should eq('red')
+          expect(context[:color]).to eq('red')
         end
 
       end
@@ -130,7 +130,7 @@ module Seahorse
           context = RequestContext.new
           context.on(:event_name) { emitted = true }
           context.emit(:event_name)
-          emitted.should be(true)
+          expect(emitted).to be(true)
         end
 
       end

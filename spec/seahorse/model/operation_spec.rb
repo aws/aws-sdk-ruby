@@ -48,17 +48,17 @@ module Seahorse
 
       describe 'from_hash' do
         it 'loads from a hash' do
-          operation.name.should eq 'OperationName'
-          operation.documentation.should eq 'Docstring'
-          operation.http_uri.should eq '/path/to/operation'
-          operation.http_verb.should eq 'POST'
-          operation.input.should be_instance_of Shapes::StructureShape
-          operation.output.should eq nil
-          operation.errors[0].should be_instance_of Shapes::StringShape
+          expect(operation.name).to eq 'OperationName'
+          expect(operation.documentation).to eq 'Docstring'
+          expect(operation.http_uri).to eq '/path/to/operation'
+          expect(operation.http_verb).to eq 'POST'
+          expect(operation.input).to be_instance_of Shapes::StructureShape
+          expect(operation.output).to eq nil
+          expect(operation.errors[0]).to be_instance_of Shapes::StringShape
         end
 
         it 'serializes to a hash' do
-          operation.to_hash.should eq(operation_hash)
+          expect(operation.to_hash).to eq(operation_hash)
         end
       end
     end

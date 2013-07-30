@@ -19,29 +19,29 @@ module Seahorse
       describe Endpoint do
 
         it 'is a string' do
-          Endpoint.new('foo.com').should be_kind_of(String)
+          expect(Endpoint.new('foo.com')).to be_kind_of(String)
         end
 
         describe 'constructor' do
 
           it 'can be constructed from a string' do
-            Endpoint.new('abc.com').should be_kind_of(Endpoint)
+            expect(Endpoint.new('abc.com')).to be_kind_of(Endpoint)
           end
 
           it 'can be constructed from a URI::HTTP' do
             uri = 'http://foo.com'
-            Endpoint.new(URI.parse(uri)).should eq(uri)
+            expect(Endpoint.new(URI.parse(uri))).to eq(uri)
           end
 
           it 'can be constructed from a URI::HTTPS' do
             uri = 'https://foo.com'
-            Endpoint.new(URI.parse(uri)).should eq(uri)
+            expect(Endpoint.new(URI.parse(uri))).to eq(uri)
           end
 
           it 'can be constructed from an Endpoint' do
             endpoint1 = Endpoint.new('abc.com')
             endpoint2 = Endpoint.new(endpoint1) # copy constructor
-            endpoint1.should eq(endpoint2)
+            expect(endpoint1).to eq(endpoint2)
           end
 
           it 'raises an error if you pass non valid enpoint' do
@@ -55,16 +55,16 @@ module Seahorse
         describe '#scheme' do
 
           it 'can be specified in the constructor' do
-            Endpoint.new('http://foo.com').scheme.should eq('http')
-            Endpoint.new('https://foo.com').scheme.should eq('https')
+            expect(Endpoint.new('http://foo.com').scheme).to eq('http')
+            expect(Endpoint.new('https://foo.com').scheme).to eq('https')
           end
 
           it 'defaults to https when not passed to constructor' do
-            Endpoint.new('foo.com').scheme.should eq('https')
+            expect(Endpoint.new('foo.com').scheme).to eq('https')
           end
 
           it 'looks for the :ssl_default options when picking the default scheme' do
-            Endpoint.new('foo.com', ssl_default: false).scheme.should eq('http')
+            expect(Endpoint.new('foo.com', ssl_default: false).scheme).to eq('http')
           end
 
         end
@@ -72,11 +72,11 @@ module Seahorse
         describe '#http?' do
 
           it 'returns true if the scheme is http' do
-            Endpoint.new('http://foo.com').http?.should eq(true)
+            expect(Endpoint.new('http://foo.com').http?).to eq(true)
           end
 
           it 'returns false if the scheme is not http' do
-            Endpoint.new('https://foo.com').http?.should eq(false)
+            expect(Endpoint.new('https://foo.com').http?).to eq(false)
           end
 
         end
@@ -84,11 +84,11 @@ module Seahorse
         describe '#https?' do
 
           it 'returns true if the scheme is https' do
-            Endpoint.new('https://foo.com').https?.should eq(true)
+            expect(Endpoint.new('https://foo.com').https?).to eq(true)
           end
 
           it 'returns false if the scheme is not https' do
-            Endpoint.new('http://foo.com').https?.should eq(false)
+            expect(Endpoint.new('http://foo.com').https?).to eq(false)
           end
 
         end
@@ -96,8 +96,8 @@ module Seahorse
         describe '#host' do
 
           it 'is passed into the constructor' do
-            Endpoint.new('foo.com').host.should eq('foo.com')
-            Endpoint.new('abc.mno.xyz').host.should eq('abc.mno.xyz')
+            expect(Endpoint.new('foo.com').host).to eq('foo.com')
+            expect(Endpoint.new('abc.mno.xyz').host).to eq('abc.mno.xyz')
           end
 
         end
@@ -105,16 +105,16 @@ module Seahorse
         describe '#port' do
 
           it 'defaults to 80 for http endpoints' do
-            Endpoint.new('http://foo.com').port.should eq(80)
+            expect(Endpoint.new('http://foo.com').port).to eq(80)
           end
 
           it 'defaults to 443 for https endpoints' do
-            Endpoint.new('https://foo.com').port.should eq(443)
+            expect(Endpoint.new('https://foo.com').port).to eq(443)
           end
 
           it 'can be specified in the constructor' do
-            Endpoint.new('http://foo.com:123').port.should eq(123)
-            Endpoint.new('foo.com:321').port.should eq(321)
+            expect(Endpoint.new('http://foo.com:123').port).to eq(123)
+            expect(Endpoint.new('foo.com:321').port).to eq(321)
           end
 
         end

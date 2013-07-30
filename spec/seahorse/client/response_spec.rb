@@ -20,12 +20,12 @@ module Seahorse
       describe '#context' do
 
         it 'defaults to a new context' do
-          Response.new.context.should be_kind_of(RequestContext)
+          expect(Response.new.context).to be_kind_of(RequestContext)
         end
 
         it 'can be set in the constructor' do
           context = RequestContext.new
-          Response.new(context: context).context.should be(context)
+          expect(Response.new(context: context).context).to be(context)
         end
 
       end
@@ -36,7 +36,7 @@ module Seahorse
           http_request = Http::Request.new
           context = RequestContext.new(http_request: http_request)
           resp = Response.new(context: context)
-          resp.http_request.should be(http_request)
+          expect(resp.http_request).to be(http_request)
         end
 
       end
@@ -47,7 +47,7 @@ module Seahorse
           http_response = Http::Response.new
           context = RequestContext.new(http_response: http_response)
           resp = Response.new(context: context)
-          resp.http_response.should be(http_response)
+          expect(resp.http_response).to be(http_response)
         end
 
       end
@@ -55,13 +55,13 @@ module Seahorse
       describe '#completed?' do
 
         it 'defaults to false' do
-          Response.new.complete?.should be(false)
+          expect(Response.new.complete?).to be(false)
         end
 
         it 'returns true if the response has been signaled' do
           resp = Response.new
           resp.signal_complete
-          resp.complete?.should be(true)
+          expect(resp.complete?).to be(true)
         end
 
       end
@@ -70,9 +70,8 @@ module Seahorse
 
         it 'returns self' do
           resp = Response.new
-          resp.on_complete do
-            123
-          end.should be(resp)
+          result = resp.on_complete { 123 }
+          expect(result).to be(resp)
         end
 
         it 'registers a callback that is triggered upon completion' do
@@ -80,7 +79,7 @@ module Seahorse
           resp = Response.new
           resp.on_complete { called = true }
           resp.signal_complete
-          called.should be(true)
+          expect(called).to be(true)
         end
 
         it 'does not trigger callbacks when not signaled' do
@@ -88,7 +87,7 @@ module Seahorse
           resp = Response.new
           resp.on_complete { called = true }
           #resp.signal_complete
-          called.should be(false)
+          expect(called).to be(false)
         end
 
         it 'triggers directly if the response has already been signaled' do
@@ -96,7 +95,7 @@ module Seahorse
           resp = Response.new
           resp.signal_complete
           resp.on_complete { called = true }
-          called.should be(true)
+          expect(called).to be(true)
         end
 
         it 'accepts multiple callbacks' do
@@ -104,7 +103,7 @@ module Seahorse
           resp = Response.new
           3.times { resp.on_complete { count += 1 }}
           resp.signal_complete
-          count.should eq(3)
+          expect(count).to eq(3)
         end
 
         it 'triggers callbacks with FIFO ordering' do
@@ -114,7 +113,7 @@ module Seahorse
           resp.on_complete { order << 2 }
           resp.on_complete { order << 3 }
           resp.signal_complete
-          order.should eq([1, 2, 3])
+          expect(order).to eq([1, 2, 3])
         end
 
         it 'passes the response to the callback when arg accepted' do
@@ -122,7 +121,7 @@ module Seahorse
           resp = Response.new
           resp.on_complete { |response| callback_arg = response }
           resp.signal_complete
-          callback_arg.should be(resp)
+          expect(callback_arg).to be(resp)
         end
 
       end
@@ -131,7 +130,7 @@ module Seahorse
 
         it 'returns self' do
           resp = Response.new
-          resp.signal_complete.should be(resp)
+          expect(resp.signal_complete).to be(resp)
         end
 
       end

@@ -27,16 +27,16 @@ module Seahorse
 
       it 'provides access to the configuration' do
         config = Object.new
-        Handler.new(config).config.should be(config)
+        expect(Handler.new(config).config).to be(config)
       end
 
       it 'provides access to the nested handler' do
         handler = Handler.new('config')
-        Handler.new('config', handler).handler.should be(handler)
+        expect(Handler.new('config', handler).handler).to be(handler)
       end
 
       it 'responds to #call' do
-        Handler.new('config').should respond_to(:call)
+        expect(Handler.new('config')).to respond_to(:call)
       end
 
       it 'chains #call to the nested handler' do
@@ -48,7 +48,7 @@ module Seahorse
       it 'returns the response from the nested handler' do
         handler = double('handler')
         expect(handler).to receive(:call).with(context) { response }
-        Handler.new('config', handler).call(context).should be(response)
+        expect(Handler.new('config', handler).call(context)).to be(response)
       end
 
     end

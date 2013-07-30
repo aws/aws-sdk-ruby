@@ -35,16 +35,16 @@ module Seahorse
             }
           }, 'type' => 'list'
 
-          shape.should be_instance_of ListShape
-          shape.members.should be_instance_of StructureShape
-          shape.members.members[:property].should be_instance_of StringShape
+          expect(shape).to be_instance_of ListShape
+          expect(shape.members).to be_instance_of StructureShape
+          expect(shape.members.members[:property]).to be_instance_of StringShape
         end
       end
 
       describe StructureShape do
         it 'defaults to an empty members hash' do
           shape = StructureShape.new
-          shape.members.should eq({})
+          expect(shape.members).to eq({})
         end
       end
     end

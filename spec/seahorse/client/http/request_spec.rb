@@ -26,13 +26,13 @@ module Seahorse
         describe '#endpoint' do
 
           it 'defaults to nil' do
-            Request.new.endpoint.should eq(nil)
+            expect(Request.new.endpoint).to eq(nil)
           end
 
           it 'can be set in the constructor' do
             endpoint = Object.new
             req = Request.new(endpoint: endpoint)
-            req.endpoint.should eq(endpoint)
+            expect(req.endpoint).to eq(endpoint)
           end
 
         end
@@ -40,12 +40,12 @@ module Seahorse
         describe '#http_method' do
 
           it 'defaults to GET' do
-            Request.new.http_method.should eq('GET')
+            expect(Request.new.http_method).to eq('GET')
           end
 
           it 'can be set in the constructor' do
             req = Request.new(http_method: 'POST')
-            req.http_method.should eq('POST')
+            expect(req.http_method).to eq('POST')
           end
 
         end
@@ -53,12 +53,12 @@ module Seahorse
         describe '#path' do
 
           it 'defaults to GET' do
-            Request.new.path.should eq('/')
+            expect(Request.new.path).to eq('/')
           end
 
           it 'can be set in the constructor' do
             req = Request.new(path: '/path?abc=xyz')
-            req.path.should eq('/path?abc=xyz')
+            expect(req.path).to eq('/path?abc=xyz')
           end
 
         end
@@ -66,11 +66,11 @@ module Seahorse
         describe '#headers' do
 
           it 'defaults to a Http::Headers' do
-            Request.new.headers.should be_kind_of(Headers)
+            expect(Request.new.headers).to be_kind_of(Headers)
           end
 
           it 'defaults to a empty hash' do
-            Request.new.headers.to_h.should eq({})
+            expect(Request.new.headers.to_h).to eq({})
           end
 
         end
@@ -78,12 +78,12 @@ module Seahorse
         describe '#body' do
 
           it 'defaults to an empty IO-like object' do
-            Request.new.body.read.should eq('')
+            expect(Request.new.body.read).to eq('')
           end
 
           it 'can be set in the constructor' do
             body = StringIO.new('body')
-            Request.new(body: body).body.should be(body)
+            expect(Request.new(body: body).body).to be(body)
           end
 
         end

@@ -26,18 +26,18 @@ module Seahorse
 
           it 'makes data available to #read' do
             body.write('abc')
-            body.read.should eq('abc')
+            expect(body.read).to eq('abc')
           end
 
           it 'can be called multiple times' do
             body.write('abc')
             body.write('mno')
             body.write('xyz')
-            body.read.should eq('abcmnoxyz')
+            expect(body.read).to eq('abcmnoxyz')
           end
 
           it 'returns the chunk passed in' do
-            body.write('abc').should eq('abc')
+            expect(body.write('abc')).to eq('abc')
           end
 
         end
@@ -46,13 +46,13 @@ module Seahorse
 
           it 'returns the body contents' do
             body.write('abc')
-            body.read.should eq('abc')
+            expect(body.read).to eq('abc')
           end
 
           it 'can be called multiple times' do
             body.write('abc')
-            body.read.should eq('abc')
-            body.read.should eq('abc')
+            expect(body.read).to eq('abc')
+            expect(body.read).to eq('abc')
           end
 
         end
@@ -62,14 +62,14 @@ module Seahorse
           it 'resets the body contents' do
             body.write('abc')
             body.reset!
-            body.read.should eq('')
+            expect(body.read).to eq('')
           end
 
           it 'reopens the body for writing' do
             body.write('abc')
             body.reset!
             body.write('xyz')
-            body.read.should eq('xyz')
+            expect(body.read).to eq('xyz')
           end
 
         end
@@ -77,23 +77,23 @@ module Seahorse
         describe '#empty?' do
 
           it 'returns true for a new response body' do
-            body.empty?.should eq(true)
+            expect(body.empty?).to eq(true)
           end
 
           it 'returns false after writing to a body' do
             body.write('abc')
-            body.empty?.should eq(false)
+            expect(body.empty?).to eq(false)
           end
 
           it 'returns true after being reset' do
             body.write('abc')
             body.reset!
-            body.empty?.should eq(true)
+            expect(body.empty?).to eq(true)
           end
 
           it 'returns true if empty string is written to it' do
             body.write('')
-            body.empty?.should eq(true)
+            expect(body.empty?).to eq(true)
           end
 
         end
@@ -101,18 +101,18 @@ module Seahorse
         describe '#size' do
 
           it 'returns 0 for a new response body' do
-            body.size.should eq(0)
+            expect(body.size).to eq(0)
           end
 
           it 'returns the total size' do
             body.write('abc')
             body.write('mno')
             body.write('xyz')
-            body.size.should eq(9)
+            expect(body.size).to eq(9)
           end
 
           it 'returns the same size as the read value' do
-            body.read.size.should eq(body.size)
+            expect(body.read.size).to eq(body.size)
           end
 
         end

@@ -16,7 +16,7 @@ require 'spec_helper'
 module Seahorse
   describe VERSION do
     it 'is a semver compatible version string' do
-      VERSION.should match(/\d+\.\d+\.\d+/)
+      expect(VERSION).to match(/\d+\.\d+\.\d+/)
     end
   end
 end

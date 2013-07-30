@@ -53,7 +53,7 @@ module Seahorse
 
             it 'provides access to the configuration' do
               config = OpenStruct.new
-              Handler.new(config).config.should be(config)
+              expect(Handler.new(config).config).to be(config)
             end
 
           end
@@ -61,58 +61,58 @@ module Seahorse
           describe '#pool' do
 
             it 'constructs a ConnectionPool' do
-              handler.pool.should be_kind_of(ConnectionPool)
+              expect(handler.pool).to be_kind_of(ConnectionPool)
             end
 
             it 'configures the pool#http_proxy' do
               config.http_proxy = 'http://proxy.com'
-              handler.pool.http_proxy.should eq(URI.parse('http://proxy.com'))
+              expect(handler.pool.http_proxy).to eq(URI.parse('http://proxy.com'))
             end
 
             it 'configures the pool#http_continue_timeout' do
               config.http_continue_timeout = 123
-              handler.pool.http_continue_timeout.should eq(123)
+              expect(handler.pool.http_continue_timeout).to eq(123)
             end
 
             it 'configures the pool#http_open_timeout' do
               config.http_open_timeout = 123
-              handler.pool.http_open_timeout.should eq(123)
+              expect(handler.pool.http_open_timeout).to eq(123)
             end
 
             it 'configures the pool#http_read_timeout' do
               config.http_read_timeout = 123
-              handler.pool.http_read_timeout.should eq(123)
+              expect(handler.pool.http_read_timeout).to eq(123)
             end
 
             it 'configures the pool#http_idle_timeout' do
               config.http_idle_timeout = 123
-              handler.pool.http_idle_timeout.should eq(123)
+              expect(handler.pool.http_idle_timeout).to eq(123)
             end
 
             it 'configures the pool#http_wire_trace' do
               config.http_wire_trace = true
-              handler.pool.http_wire_trace.should eq(true)
+              expect(handler.pool.http_wire_trace).to eq(true)
             end
 
             it 'configures the pool#logger' do
               config.http_wire_trace = true
               config.logger = Object.new
-              handler.pool.logger.should be(config.logger)
+              expect(handler.pool.logger).to be(config.logger)
             end
 
             it 'configures the pool#ssl_verify_peer' do
               config.ssl_verify_peer = false
-              handler.pool.ssl_verify_peer.should eq(false)
+              expect(handler.pool.ssl_verify_peer).to eq(false)
             end
 
             it 'configures the pool#ssl_ca_bundle' do
               config.ssl_ca_bundle = '/path/to/ca-bundle.crt'
-              handler.pool.ssl_ca_bundle.should eq('/path/to/ca-bundle.crt')
+              expect(handler.pool.ssl_ca_bundle).to eq('/path/to/ca-bundle.crt')
             end
 
             it 'configures the pool#ssl_ca_directory' do
               config.ssl_ca_bundle = '/path/to/certs'
-              handler.pool.ssl_ca_bundle.should eq('/path/to/certs')
+              expect(handler.pool.ssl_ca_bundle).to eq('/path/to/certs')
             end
 
           end
@@ -126,19 +126,19 @@ module Seahorse
             it 'returns a Response object from #call' do
               stub_request(:any, endpoint)
               resp = make_request
-              resp.should be_kind_of(Response)
+              expect(resp).to be_kind_of(Response)
             end
 
             it 'populates the #context of the returned response' do
               stub_request(:any, endpoint)
               resp = make_request
-              resp.context.should be(context)
+              expect(resp.context).to be(context)
             end
 
             it 'returns a completed request' do
               stub_request(:any, endpoint)
               resp = make_request
-              resp.complete?.should eq(true)
+              expect(resp.complete?).to eq(true)
             end
 
             describe 'request endpoint' do
@@ -248,17 +248,17 @@ module Seahorse
 
               it 'populates the status code' do
                 stub_request(:any, endpoint).to_return(status: 200)
-                make_request.http_response.status_code.should eq(200)
+                expect(make_request.http_response.status_code).to eq(200)
               end
 
               it 'populates the headers' do
                 stub_request(:any, endpoint).to_return(headers: { foo: 'bar' })
-                make_request.http_response.headers['foo'].should eq('bar')
+                expect(make_request.http_response.headers['foo']).to eq('bar')
               end
 
               it 'populates the response body' do
                 stub_request(:any, endpoint).to_return(body: 'response-body')
-                make_request.http_response.body.read.should eq('response-body')
+                expect(make_request.http_response.body.read).to eq('response-body')
               end
 
             end

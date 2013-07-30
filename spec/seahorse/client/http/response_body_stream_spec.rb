@@ -30,7 +30,7 @@ module Seahorse
             body.write('abc')
             body.write('mno')
             body.write('xyz')
-            chunks.should eq(%w(abc mno xyz))
+            expect(chunks).to eq(%w(abc mno xyz))
           end
 
         end
@@ -38,12 +38,12 @@ module Seahorse
         describe '#read' do
 
           it 'returns nil' do
-            body.read.should eq(nil)
+            expect(body.read).to eq(nil)
           end
 
           it 'returns even if data has been written to it' do
             body.write('abc')
-            body.read.should eq(nil)
+            expect(body.read).to eq(nil)
           end
 
         end
@@ -51,9 +51,9 @@ module Seahorse
         describe '#available?' do
 
           it 'is always false' do
-            body.available?.should eq(false)
+            expect(body.available?).to eq(false)
             body.write('abc')
-            body.available?.should eq(false)
+            expect(body.available?).to eq(false)
           end
 
         end
@@ -61,14 +61,14 @@ module Seahorse
         describe '#size' do
 
           it 'returns 0 for a new streaming response body' do
-            body.size.should eq(0)
+            expect(body.size).to eq(0)
           end
 
           it 'returns the total number of bytes written/yielded' do
             body.write('abc')
             body.write('mno')
             body.write('xyz')
-            body.size.should eq(9)
+            expect(body.size).to eq(9)
           end
 
         end
@@ -76,12 +76,12 @@ module Seahorse
         describe '#can_reset' do
 
           it 'returns true if the body has not been written to' do
-            body.can_reset?.should eq(true)
+            expect(body.can_reset?).to eq(true)
           end
 
           it 'returns false once the body has been written to' do
             body.write('abc')
-            body.can_reset?.should eq(false)
+            expect(body.can_reset?).to eq(false)
           end
 
         end

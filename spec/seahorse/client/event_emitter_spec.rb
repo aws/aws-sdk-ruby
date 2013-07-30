@@ -24,21 +24,21 @@ module Seahorse
       describe '#on' do
 
         it 'returns nil' do
-          event_emitter.on(:event_name) { true }.should eq(nil)
+          expect(event_emitter.on(:event_name) { true }).to eq(nil)
         end
 
         it 'accepts symbolized event names' do
           called = false
           event_emitter.on(:evt) { called = true }
           event_emitter.emit(:evt)
-          called.should eq(true)
+          expect(called).to eq(true)
         end
 
         it 'accepts string event names' do
           called = false
           event_emitter.on('evt') { called = true }
           event_emitter.emit(:evt)
-          called.should eq(true)
+          expect(called).to eq(true)
         end
 
         it 'accepts listeners as objects that respond to #call' do
@@ -67,19 +67,19 @@ module Seahorse
           event_emitter.on(:evt) { called << :listener_a }
           event_emitter.on(:evt) { called << :listener_b }
           event_emitter.emit(:evt)
-          called.should eq([:listener_a, :listener_b])
+          expect(called).to eq([:listener_a, :listener_b])
         end
 
         it 'accepts strings for event names' do
           called = false
           event_emitter.on(:evt) { called = true }
           event_emitter.emit('evt')
-          called.should eq(true)
+          expect(called).to eq(true)
         end
 
         it 'returns nil' do
           event_emitter.on(:evt) {}
-          event_emitter.emit(:evt).should eq(nil)
+          expect(event_emitter.emit(:evt)).to eq(nil)
         end
 
         it 'passes along additional args to the listeners' do
@@ -87,7 +87,7 @@ module Seahorse
           yielded = nil
           event_emitter.on(:evt) {|*args| yielded = args }
           event_emitter.emit(:evt, *arg_list)
-          yielded.should eq(arg_list)
+          expect(yielded).to eq(arg_list)
         end
 
       end

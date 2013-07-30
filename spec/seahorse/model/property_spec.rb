@@ -29,23 +29,23 @@ module Seahorse
       describe 'scalar properties' do
         describe '#load_from' do
           it 'loads a String value from a Hash' do
-            property(String).load_from('prop' => 'VALUE').should eq('VALUE')
+            expect(property(String).load_from('prop' => 'VALUE')).to eq('VALUE')
           end
 
           it 'loads an Integer value from a Hash' do
-            property(Integer).load_from('prop' => 42).should eq(42)
+            expect(property(Integer).load_from('prop' => 42)).to eq(42)
           end
 
           it 'loads a Symbol value from a Hash (type casting)' do
-            property(Symbol).load_from('prop' => 'value').should eq(:value)
+            expect(property(Symbol).load_from('prop' => 'value')).to eq(:value)
           end
 
           it 'loads a Boolean value from a Hash (custom type)' do
-            property(Types::Boolean).load_from('prop' => nil).should eq(false)
+            expect(property(Types::Boolean).load_from('prop' => nil)).to eq(false)
           end
 
           it 'deserialized classes with .from_hash method' do
-            property.load_from('prop' => 'VALUE').should eq('VALUE!')
+            expect(property.load_from('prop' => 'VALUE')).to eq('VALUE!')
           end
 
           it 'raises an exception if the key is not in the hash' do
@@ -55,24 +55,24 @@ module Seahorse
 
         describe '#write_to' do
           it 'writes String value to a hash' do
-            property(String).write_to({}, 'VALUE').should eq('prop' => 'VALUE')
+            expect(property(String).write_to({}, 'VALUE')).to eq('prop' => 'VALUE')
           end
 
           it 'writes an Integer value to a hash' do
-            property(Integer).write_to({}, 42).should eq('prop' => 42)
+            expect(property(Integer).write_to({}, 42)).to eq('prop' => 42)
           end
 
           it 'writes a Symbol value to a Hash (type casting)' do
-            property(Symbol).write_to({}, :value).should eq('prop' => 'value')
+            expect(property(Symbol).write_to({}, :value)).to eq('prop' => 'value')
           end
 
           it 'writes a Boolean value to a Hash (custom type)' do
             value = property(Types::Boolean).write_to({}, false)
-            value.should eq('prop' => false)
+            expect(value).to eq('prop' => false)
           end
 
           it 'does not write nil values' do
-            property(String).write_to({}, nil).should eq({})
+            expect(property(String).write_to({}, nil)).to eq({})
           end
         end
       end
@@ -83,11 +83,11 @@ module Seahorse
         end
 
         it 'loads a value from the right location' do
-          property.load_from('other' => 'right').should eq('right')
+          expect(property.load_from('other' => 'right')).to eq('right')
         end
 
         it 'saves a value to the right location' do
-          property.write_to({}, 'value').should eq('other' => 'value')
+          expect(property.write_to({}, 'value')).to eq('other' => 'value')
         end
       end
 
@@ -97,11 +97,11 @@ module Seahorse
         end
 
         it 'loads a value from the right location' do
-          property.load_from('subnode' => {'prop' => 1}).should eq(1)
+          expect(property.load_from('subnode' => {'prop' => 1})).to eq(1)
         end
 
         it 'saves a value to the right location' do
-          property.write_to({}, 1).should eq('subnode' => {'prop' => 1})
+          expect(property.write_to({}, 1)).to eq('subnode' => {'prop' => 1})
         end
       end
 
@@ -111,7 +111,7 @@ module Seahorse
         end
 
         it 'always writes a value to a hash, even nil' do
-          property.write_to({}, nil).should eq('prop' => nil)
+          expect(property.write_to({}, nil)).to eq('prop' => nil)
         end
       end
 
@@ -119,7 +119,7 @@ module Seahorse
         describe '#load_from' do
           it 'de-serializes Array of properties' do
             value = property([property_class]).load_from({'prop' => %w(A B C)})
-            value.should eq(%w(A! B! C!))
+            expect(value).to eq(%w(A! B! C!))
           end
         end
 
@@ -127,7 +127,7 @@ module Seahorse
           it 'writes an Array of properties' do
             prop = property([Types::Boolean])
             value = prop.write_to({}, %w(1 1 1))
-            value.should eq('prop' => [true, true, true])
+            expect(value).to eq('prop' => [true, true, true])
           end
         end
       end
@@ -137,7 +137,7 @@ module Seahorse
           it 'de-serializes Hash of properties' do
             prop = property(Symbol => property_class)
             value = prop.load_from('prop' => {'a' => 'b'})
-            value.should eq(a: 'b!')
+            expect(value).to eq(a: 'b!')
           end
         end
 
@@ -145,7 +145,7 @@ module Seahorse
           it 'writes a Hash of properties' do
             prop = property(Symbol => Types::Boolean)
             value = prop.write_to({}, 'a' => 'b')
-            value.should eq('prop' => {'a' => true})
+            expect(value).to eq('prop' => {'a' => true})
           end
         end
       end

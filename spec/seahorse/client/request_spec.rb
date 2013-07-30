@@ -32,7 +32,7 @@ module Seahorse
       describe '#context' do
 
         it 'returns the request handler' do
-          request.handler.should be(handler)
+          expect(request.handler).to be(handler)
         end
 
       end
@@ -40,7 +40,7 @@ module Seahorse
       describe '#context' do
 
         it 'returns the request context given the constructor' do
-          request.context.should be(context)
+          expect(request.context).to be(context)
         end
 
       end
@@ -51,7 +51,7 @@ module Seahorse
           emitted = nil
           request.on(:event_name) { |value| emitted = value }
           request.context.events.emit(:event_name, 'abc')
-          emitted.should eq('abc')
+          expect(emitted).to eq('abc')
         end
 
       end
@@ -60,14 +60,14 @@ module Seahorse
 
         it 'passes the request context to the handler' do
           handler = double('handler')
-          handler.should receive(:call).with(context) { Response.new }
+          expect(handler).to receive(:call).with(context) { Response.new }
           Request.new(handler, context).send
         end
 
         it 'returns the response from the handler stack' do
           resp = Response.new
           handler = lambda { |context| resp }
-          Request.new(handler, context).send.should be(resp)
+          expect(Request.new(handler, context).send).to be(resp)
         end
 
         describe 'with block argument' do
@@ -84,12 +84,12 @@ module Seahorse
           it 'streams data from the handler to the #send block' do
             data = []
             Request.new(handler, context).send { |chunk| data << chunk }
-            data.should eq(['part1', 'part2', 'part3'])
+            expect(data).to eq(['part1', 'part2', 'part3'])
           end
 
           it 'does not buffer the response chunks' do
             response = Request.new(handler, context).send { |chunk| }
-            response.http_response.body.read.should eq(nil)
+            expect(response.http_response.body.read).to eq(nil)
           end
 
         end

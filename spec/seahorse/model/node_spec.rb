@@ -23,7 +23,7 @@ module Seahorse
             property :prop2, Integer, in: :subnode
           end
 
-          node.properties[:prop1].serialized_class.should eq(String)
+          expect(node.properties[:prop1].serialized_class).to eq(String)
         end
 
         it 'inherits properties from superclass' do
@@ -37,9 +37,9 @@ module Seahorse
 
           node3 = Class.new(node2)
 
-          node1.properties.keys.should eq ['prop1']
-          node2.properties.keys.should eq ['prop1', 'prop2']
-          node3.properties.keys.should eq ['prop1', 'prop2']
+          expect(node1.properties.keys).to eq ['prop1']
+          expect(node2.properties.keys).to eq ['prop1', 'prop2']
+          expect(node3.properties.keys).to eq ['prop1', 'prop2']
         end
       end
 
@@ -51,8 +51,8 @@ module Seahorse
           end
 
           node = node_class.from_hash('prop1' => 'a', 'prop2' => 'b')
-          node.prop1.should eq 'a'
-          node.prop2.should eq :b
+          expect(node.prop1).to eq 'a'
+          expect(node.prop2).to eq :b
         end
 
         it 'supports named properties' do
@@ -61,7 +61,7 @@ module Seahorse
           end
 
           node = node_class.from_hash('a' => 'a')
-          node.prop1.should eq 'a'
+          expect(node.prop1).to eq 'a'
         end
 
         it 'supports properties in sub-nodes' do
@@ -70,7 +70,7 @@ module Seahorse
           end
 
           node = node_class.from_hash('subnode' => {'prop1' => 'a'})
-          node.prop1.should eq 'a'
+          expect(node.prop1).to eq 'a'
         end
 
         it 'supports inherited properties in sub-nodes' do
@@ -80,7 +80,7 @@ module Seahorse
           node_class = Class.new(node_class_super)
 
           node = node_class.from_hash('subnode' => {'prop1' => 'a'})
-          node.prop1.should eq 'a'
+          expect(node.prop1).to eq 'a'
         end
 
         it 'supports shapes' do
@@ -95,8 +95,8 @@ module Seahorse
             }
           }
 
-          node.shape.should be_instance_of Shapes::StructureShape
-          node.shape.members[:foo].should be_instance_of Shapes::StringShape
+          expect(node.shape).to be_instance_of Shapes::StructureShape
+          expect(node.shape.members[:foo]).to be_instance_of Shapes::StringShape
         end
 
         it 'fails if unrecognized keys are found' do
@@ -119,7 +119,7 @@ module Seahorse
           node = node_class.new
           node.prop1 = 'a'
           node.prop2 = :b
-          node.to_hash.should eq('subnode' => {'prop1' => 'a'}, 'prop2' => 'b')
+          expect(node.to_hash).to eq('subnode' => {'prop1' => 'a'}, 'prop2' => 'b')
         end
       end
     end

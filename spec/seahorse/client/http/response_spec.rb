@@ -21,13 +21,13 @@ module Seahorse
         describe '#status_code' do
 
           it 'defaults to nil' do
-            Response.new.status_code.should eq(nil)
+            expect(Response.new.status_code).to eq(nil)
           end
 
           it 'can be set' do
             resp = Response.new
             resp.status_code = 500
-            resp.status_code.should eq(500)
+            expect(resp.status_code).to eq(500)
           end
 
         end
@@ -35,18 +35,18 @@ module Seahorse
         describe '#headers' do
 
           it 'is a Http::Headers' do
-            Response.new.headers.should be_kind_of(Headers)
+            expect(Response.new.headers).to be_kind_of(Headers)
           end
 
           it 'defaults to a empty hash' do
-            Response.new.headers.to_h.should eq({})
+            expect(Response.new.headers.to_h).to eq({})
           end
 
           it 'can be set' do
             headers = Headers.new
             response = Response.new
             response.headers = headers
-            response.headers.should be(headers)
+            expect(response.headers).to be(headers)
           end
 
         end
@@ -54,18 +54,18 @@ module Seahorse
         describe '#body' do
 
           it 'defaults to an ResponseBody' do
-            Response.new.body.should be_kind_of(ResponseBody)
+            expect(Response.new.body).to be_kind_of(ResponseBody)
           end
 
           it 'defaults to an empty body' do
-            Response.new.body.should be_empty
+            expect(Response.new.body).to be_empty
           end
 
           it 'can be set' do
             body = Object.new
             response = Response.new
             response.body = body
-            response.body.should be(body)
+            expect(response.body).to be(body)
           end
 
         end

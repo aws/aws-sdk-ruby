@@ -46,7 +46,7 @@ module Seahorse
 
         it 'instructs plugins to #add_options' do
           client_class.add_plugin(plugin_class)
-          client_class.new.config.should respond_to(:plugin_option)
+          expect(client_class.new.config).to respond_to(:plugin_option)
         end
 
         it 'calls plugin#add_options only if the plugin responds' do
@@ -76,14 +76,14 @@ module Seahorse
 
         it 'adds plugins to the client' do
           client_class.add_plugin(PluginA)
-          [PluginA].should eq(client_class.plugins)
+          expect([PluginA]).to eq(client_class.plugins)
         end
 
         it 'does not add plugins to the client parent class' do
           subclass = Class.new(client_class)
           subclass.add_plugin(PluginA)
-          client_class.plugins.should eq([])
-          subclass.plugins.should eq([PluginA])
+          expect(client_class.plugins).to eq([])
+          expect(subclass.plugins).to eq([PluginA])
         end
 
       end
@@ -94,7 +94,7 @@ module Seahorse
           client_class.add_plugin(PluginA)
           client_class.add_plugin(PluginB)
           client_class.remove_plugin(PluginA)
-          client_class.plugins.should eq([PluginB])
+          expect(client_class.plugins).to eq([PluginB])
         end
 
         it 'does not remove plugins from the client parent class' do
@@ -102,8 +102,8 @@ module Seahorse
           client_class.add_plugin(PluginB)
           subclass = Class.new(client_class)
           subclass.remove_plugin(PluginB)
-          client_class.plugins.should eq([PluginA, PluginB])
-          subclass.plugins.should eq([PluginA])
+          expect(client_class.plugins).to eq([PluginA, PluginB])
+          expect(subclass.plugins).to eq([PluginA])
         end
 
       end
@@ -111,23 +111,23 @@ module Seahorse
       describe '.plugins' do
 
         it 'returns a list of plugins applied to the client' do
-          client_class.plugins.should be_kind_of(Array)
+          expect(client_class.plugins).to be_kind_of(Array)
         end
 
         it 'returns a frozen list of plugins' do
-          client_class.plugins.frozen?.should eq(true)
+          expect(client_class.plugins.frozen?).to eq(true)
         end
 
         it 'defaults to Plugins::NetHttp::Plugin' do
           client_class = Class.new(Base)
-          client_class.plugins.to_a.should eq([Plugins::NetHttp])
+          expect(client_class.plugins.to_a).to eq([Plugins::NetHttp])
         end
 
         it 'replaces default plugins with the list specified in the API' do
           api = { 'plugins' => ['Seahorse::Client::PluginA'] }
           client_class = Class.new(Base)
           client_class.set_api(api)
-          client_class.plugins.to_a.should eq([PluginA])
+          expect(client_class.plugins.to_a).to eq([PluginA])
         end
 
       end

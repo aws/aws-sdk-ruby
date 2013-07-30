@@ -32,27 +32,27 @@ module Seahorse
       end
 
       it 'can be constructed with a list of plugins' do
-        PluginList.new([Plugin1, Plugin2]).to_a.should eq([Plugin1, Plugin2])
+        expect(PluginList.new([Plugin1, Plugin2]).to_a).to eq([Plugin1, Plugin2])
       end
 
       it 'can be seeded from another plugin list' do
         plugins.add(Plugin1)
         plugins.add(Plugin2)
-        PluginList.new(plugins).to_a.should eq([Plugin1, Plugin2])
+        expect(PluginList.new(plugins).to_a).to eq([Plugin1, Plugin2])
       end
 
       describe 'copy constructor' do
 
         it 'can be constructed from another plugin list' do
           plugins.add(Plugin1)
-          PluginList.new(plugins).to_a.should eq([Plugin1])
+          expect(PluginList.new(plugins).to_a).to eq([Plugin1])
         end
 
         it 'does not load plugins when constructing from another plugin list' do
           plugins.add('Seahorse::Client::LazyPlugin::CopyConstructor')
-          LazyPlugin.const_defined?(:CopyConstructor).should eq(false)
+          expect(LazyPlugin.const_defined?(:CopyConstructor)).to eq(false)
           PluginList.new(plugins)
-          LazyPlugin.const_defined?(:CopyConstructor).should eq(false)
+          expect(LazyPlugin.const_defined?(:CopyConstructor)).to eq(false)
         end
 
       end
@@ -61,43 +61,43 @@ module Seahorse
 
         it 'adds a new plugin' do
           plugins.add(Plugin1)
-          plugins.to_a.should eq([Plugin1])
+          expect(plugins.to_a).to eq([Plugin1])
         end
 
         it 'accepts a plugin by name (String)' do
           plugins.add('String')
-          plugins.to_a.should eq([String])
+          expect(plugins.to_a).to eq([String])
         end
 
         it 'accepts a plugin by name (Symbol)' do
           plugins.add(:String)
-          plugins.to_a.should eq([String])
+          expect(plugins.to_a).to eq([String])
         end
 
         it 'accepts a plugin object' do
           plugin = Object.new
           plugins.add(plugin)
-          plugins.to_a.should eq([plugin])
+          expect(plugins.to_a).to eq([plugin])
         end
 
         it 'only accpets one copy of each plugin' do
           plugin = Object.new
           plugins.add(plugin)
           plugins.add(plugin)
-          plugins.to_a.should eq([plugin])
+          expect(plugins.to_a).to eq([plugin])
         end
 
         it 'does not require plugins when added' do
           plugins.add('Seahorse::Client::LazyPlugin::Add')
-          LazyPlugin.const_defined?(:Add).should eq(false)
-          plugins.to_a.should eq([LazyPlugin::Add])
-          LazyPlugin.const_defined?(:Add).should eq(true)
+          expect(LazyPlugin.const_defined?(:Add)).to eq(false)
+          expect(plugins.to_a).to eq([LazyPlugin::Add])
+          expect(LazyPlugin.const_defined?(:Add)).to eq(true)
         end
 
         it 'requires prefixes from plugin names when loading' do
-          Kernel.const_defined?(:SeahorseFixtures).should eq(false)
+          expect(Kernel.const_defined?(:SeahorseFixtures)).to eq(false)
           plugins.add('fixtures/plugin.SeahorseFixtures::Plugin')
-          plugins.to_a.should eq([SeahorseFixtures::Plugin])
+          expect(plugins.to_a).to eq([SeahorseFixtures::Plugin])
         end
 
       end
@@ -108,13 +108,13 @@ module Seahorse
           plugins.add(Plugin1)
           plugins.add(Plugin2)
           plugins.remove(Plugin1)
-          plugins.to_a.should eq([Plugin2])
+          expect(plugins.to_a).to eq([Plugin2])
         end
 
         it 'can remove a plugin added by name' do
           plugins.add(:String)
           plugins.remove(String)
-          plugins.to_a.should eq([])
+          expect(plugins.to_a).to eq([])
         end
 
       end
@@ -124,7 +124,7 @@ module Seahorse
         it 'replaces the existing list of plugins' do
           plugins.add(Plugin1)
           plugins.set([Plugin2])
-          plugins.to_a.should eq([Plugin2])
+          expect(plugins.to_a).to eq([Plugin2])
         end
 
       end
@@ -132,7 +132,7 @@ module Seahorse
       describe '#each' do
 
         it 'is enumerable' do
-          plugins.should be_kind_of(Enumerable)
+          expect(plugins).to be_kind_of(Enumerable)
         end
 
       end
@@ -159,21 +159,21 @@ module Seahorse
         end
 
         it 'locks the mutex when adding a plugin' do
-          mutex.was_locked.should eq(false)
+          expect(mutex.was_locked).to eq(false)
           plugins.add(Plugin1)
-          mutex.was_locked.should eq(true)
+          expect(mutex.was_locked).to eq(true)
         end
 
         it 'locks the mutex when removing a plugin' do
-          mutex.was_locked.should eq(false)
+          expect(mutex.was_locked).to eq(false)
           plugins.remove(Plugin1)
-          mutex.was_locked.should eq(true)
+          expect(mutex.was_locked).to eq(true)
         end
 
         it 'locks the mutex when enumerating plugins' do
-          mutex.was_locked.should eq(false)
+          expect(mutex.was_locked).to eq(false)
           plugins.each { |plugin| }
-          mutex.was_locked.should eq(true)
+          expect(mutex.was_locked).to eq(true)
         end
 
       end

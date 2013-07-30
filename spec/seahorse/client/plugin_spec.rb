@@ -34,7 +34,7 @@ module Seahorse
         it 'does nothing by default' do
           options = config.options
           plugin_class.new.add_options(config)
-          config.options.should eq(options)
+          expect(config.options).to eq(options)
         end
 
         it 'adds options registered by .option' do
@@ -42,9 +42,9 @@ module Seahorse
           plugin_class.option(:opt_with_default, 'DEFAULT')
           plugin_class.option(:opt_with_block) { 'BLOCK-DEFAULT' }
           plugin_class.new.add_options(config)
-          config.opt_without_default.should eq(nil)
-          config.opt_with_default.should eq('DEFAULT')
-          config.opt_with_block.should eq('BLOCK-DEFAULT')
+          expect(config.opt_without_default).to eq(nil)
+          expect(config.opt_with_default).to eq('DEFAULT')
+          expect(config.opt_with_block).to eq('BLOCK-DEFAULT')
         end
 
       end
@@ -63,7 +63,7 @@ module Seahorse
           plugin_class.handler(sign_handler, priority: :sign)
           plugin_class.handler(send_handler, priority: :send)
           plugin_class.new.add_handlers(handlers, config)
-          handlers.to_a.should eq([send_handler, sign_handler, build_handler])
+          expect(handlers.to_a).to eq([send_handler, sign_handler, build_handler])
         end
 
       end
