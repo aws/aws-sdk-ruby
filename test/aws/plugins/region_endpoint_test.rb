@@ -61,6 +61,11 @@ module Aws
           err.message.must_equal(RegionalEndpoint::MISSING_REGION)
         end
 
+        it 'raises an argument error when set to nil' do
+          err = assert_raises(ArgumentError) { setup_plugin(region: nil) }
+          err.message.must_equal(RegionalEndpoint::MISSING_REGION)
+        end
+
         it 'can be set' do
           ENV['AWS_REGION'] = 'aws-region'
           setup_plugin(endpoint: 'my-endpoint')
