@@ -70,14 +70,14 @@ module Seahorse
 
         it 'adds plugins to the client' do
           client_class.add_plugin(PluginA)
-          expect([PluginA]).to eq(client_class.plugins)
+          expect(client_class.plugins).to include(PluginA)
         end
 
         it 'does not add plugins to the client parent class' do
           subclass = Class.new(client_class)
           subclass.add_plugin(PluginA)
-          expect(client_class.plugins).to eq([])
-          expect(subclass.plugins).to eq([PluginA])
+          expect(client_class.plugins).to_not include(PluginA)
+          expect(subclass.plugins).to include(PluginA)
         end
 
       end
@@ -88,7 +88,8 @@ module Seahorse
           client_class.add_plugin(PluginA)
           client_class.add_plugin(PluginB)
           client_class.remove_plugin(PluginA)
-          expect(client_class.plugins).to eq([PluginB])
+          expect(client_class.plugins).not_to include(PluginA)
+          expect(client_class.plugins).to include(PluginB)
         end
 
         it 'does not remove plugins from the client parent class' do
@@ -96,8 +97,10 @@ module Seahorse
           client_class.add_plugin(PluginB)
           subclass = Class.new(client_class)
           subclass.remove_plugin(PluginB)
-          expect(client_class.plugins).to eq([PluginA, PluginB])
-          expect(subclass.plugins).to eq([PluginA])
+          expect(client_class.plugins).to include(PluginA)
+          expect(client_class.plugins).to include(PluginB)
+          expect(subclass.plugins).to include(PluginA)
+          expect(subclass.plugins).not_to include(PluginB)
         end
 
       end
@@ -123,9 +126,9 @@ module Seahorse
 
         it 'replaces default plugins with the list specified in the API' do
           api = { 'plugins' => ['Seahorse::Client::PluginA'] }
-          client_class = Class.new(Base)
-          client_class.set_api(api)
-          expect(client_class.plugins.to_a).to eq([PluginA])
+          client_class = Base.define(api)
+          expect(client_class.plugins.count).to eq(4)
+          expect(client_class.plugins).to include(PluginA)
         end
 
       end

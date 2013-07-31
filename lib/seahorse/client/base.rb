@@ -181,7 +181,9 @@ module Seahorse
         # @return [Model::Api]
         def set_api(api)
           api = Model::Api.from_hash(api) if api.is_a?(Hash)
-          set_plugins(api.plugins) if api.plugins
+          Array(api.plugins).each do |plugin|
+            add_plugin(plugin)
+          end
           @api = api
         end
 
