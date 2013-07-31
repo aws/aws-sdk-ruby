@@ -11,17 +11,21 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'test_helper'
+require 'spec_helper'
 
 module Aws
   module Plugins
     describe RegionalEndpoint do
 
-      let(:api) {
-        api = Seahorse::Model::Api.new
-        api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
-        api
-      }
+      let(:api) do
+        Seahorse::Model::Api.new.tap do |api|
+          api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
+        end
+      end
+
+      before do
+        allow(ENV).to receive(:[]) { nil }
+      end
 
       def setup_plugin(options = {})
         options[:api] ||= api
@@ -34,49 +38,44 @@ module Aws
 
       describe 'region option' do
 
-        def teardown
-          ENV.delete('AWS_REGION')
-          ENV.delete('AMAZON_REGION')
-        end
-
         it 'adds a :region configuration option' do
           setup_plugin(region: 'region')
-          @config.region.must_equal('region')
+          expect(@config.region).to eq('region')
         end
 
         it 'defaults to ENV["AWS_REGION"]' do
-          ENV['AWS_REGION'] = 'aws-region'
+          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
           setup_plugin
-          @config.region.must_equal('aws-region')
+          expect(@config.region).to eq('aws-region')
         end
 
         it 'falls back to ENV["AMAZON_REGION"]' do
-          ENV['AMAZON_REGION'] = 'amazon-region'
+          allow(ENV).to receive(:[]).with('AMAZON_REGION') { 'amazon-region' }
           setup_plugin
-          @config.region.must_equal('amazon-region')
+          expect(@config.region).to eq('amazon-region')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
-          ENV['AWS_REGION'] = 'aws-region'
-          ENV['AMAZON_REGION'] = 'amazon-region'
+          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
+          allow(ENV).to receive(:[]).with('AMAZON_REGION') { 'amazon-region' }
           setup_plugin
-          @config.region.must_equal('aws-region')
+          expect(@config.region).to eq('aws-region')
         end
 
         it 'raises an argument error when not set' do
-          err = assert_raises(ArgumentError) { setup_plugin }
-          err.message.must_equal(RegionalEndpoint::MISSING_REGION)
+          expect { setup_plugin }.to raise_error(
+            ArgumentError, RegionalEndpoint::MISSING_REGION)
         end
 
         it 'raises an argument error when set to nil' do
-          err = assert_raises(ArgumentError) { setup_plugin(region: nil) }
-          err.message.must_equal(RegionalEndpoint::MISSING_REGION)
+          expect { setup_plugin(region: nil) }.to raise_error(
+            ArgumentError, RegionalEndpoint::MISSING_REGION)
         end
 
         it 'can be set' do
-          ENV['AWS_REGION'] = 'aws-region'
+          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
           setup_plugin(endpoint: 'my-endpoint')
-          @config.endpoint.must_equal('my-endpoint')
+          expect(@config.endpoint).to eq('my-endpoint')
         end
 
       end
@@ -86,7 +85,7 @@ module Aws
         it 'builds the endpoint from the regional_endpoint and the region' do
           api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
           setup_plugin(api: api, region: 'REGION')
-          @config.endpoint.must_equal('svc.REGION.amazonaws.com')
+          expect(@config.endpoint).to eq('svc.REGION.amazonaws.com')
         end
 
       end

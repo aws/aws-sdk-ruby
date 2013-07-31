@@ -11,13 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'test_helper'
+require 'spec_helper'
 
 module Aws
-  describe VERSION do
+  describe 'VERSION' do
 
     it 'is a semver compatible string' do
-      Aws::VERSION.must_match(/\d+\.\d+\.\d+/)
+      expect(VERSION).to match(/\d+\.\d+\.\d+/)
     end
 
   end

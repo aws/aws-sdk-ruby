@@ -11,15 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'minitest/autorun'
-
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start
 end
 
-%w(AWS AMAZON).each do |prefix|
-  ENV.delete("#{prefix}_REGION")
-end
-
-require 'aws-core'
+require 'rspec'
+require 'aws-sdk-core'
