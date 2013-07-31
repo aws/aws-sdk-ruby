@@ -19,19 +19,19 @@ module Seahorse
     describe '.define' do
 
       it 'creates a new client class' do
-        client_class = Client.define({})
+        client_class = Client.define
         expect(client_class.ancestors).to include(Client::Base)
       end
 
       it 'sets the api on the client class' do
         api = Model::Api.from_hash({})
-        client_class = Client.define(api)
+        client_class = Client.define(api: api)
         expect(client_class.api).to be(api)
       end
 
       it 'extends from subclasses of client' do
-        klass1 = Client.define({})
-        klass2 = klass1.define({})
+        klass1 = Client.define
+        klass2 = klass1.define
         expect(klass2.ancestors).to include(klass1)
         expect(klass2.ancestors).to include(Client::Base)
       end

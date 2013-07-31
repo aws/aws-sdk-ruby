@@ -21,7 +21,7 @@ module Seahorse
 
       let(:plugin_b) { Class.new }
 
-      let(:client_class) { Client.define('endpoint' => 'http://endpoint:123') }
+      let(:client_class) { Client.define(api: {'endpoint' => 'http://endpoint:123'}) }
 
       describe 'client construction' do
 
@@ -113,7 +113,7 @@ module Seahorse
         it 'replaces default plugins with the list specified in the API' do
           PluginA = plugin_a
           api = { 'plugins' => ['Seahorse::Client::PluginA'] }
-          client_class = Base.define(api)
+          client_class = Base.define(api: api)
           expect(client_class.plugins.count).to eq(4)
           expect(client_class.plugins).to include(plugin_a)
         end

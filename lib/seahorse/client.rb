@@ -44,8 +44,8 @@ module Seahorse
 
     # @param (see Base.define)
     # @return (see Base.define)
-    def self.define(api)
-      Base.define(api)
+    def self.define(options = {})
+      Base.define(options)
     end
 
   end

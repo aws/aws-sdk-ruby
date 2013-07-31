@@ -178,10 +178,12 @@ module Seahorse
           @api = api
         end
 
-        # @param [Model::Api, Hash] api
+        # @option options [Model::Api, Hash] :api ({})
         # @return [Class]
-        def define(api = {})
-          Class.new(self).tap {|c| c.set_api(api) }
+        def define(options = {})
+          client_class = Class.new(self)
+          client_class.set_api(options[:api]) if options.key?(:api)
+          client_class
         end
 
         private

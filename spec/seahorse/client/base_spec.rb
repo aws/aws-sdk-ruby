@@ -19,7 +19,7 @@ module Seahorse
 
       let(:api) {{ 'endpoint' => 'http://endpoint:123' }}
 
-      let(:client_class) { Client.define(api) }
+      let(:client_class) { Client.define(api: api) }
 
       let(:client) { client_class.new }
 
