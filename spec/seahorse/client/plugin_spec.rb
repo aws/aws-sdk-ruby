@@ -98,12 +98,42 @@ module Seahorse
 
       describe '.handler' do
 
+        class DummySendHandler < Handler
+          def initialize(config = nil, handler = nil); super; end
+          def call(context); Response.new(context: context).signal_complete; end
+        end
+
+        let(:handlers) { HandlerList.new }
+
         it 'registers a handler' do
           handler_class = Class.new(Handler)
-          handlers = HandlerList.new
           plugin = Class.new(Plugin) { handler(handler_class) }
           plugin.new.add_handlers(handlers, config)
           expect(handlers).to include(handler_class)
+        end
+
+        it 'accepts a block and constructs a handler class from it' do
+          plugin = Class.new(Plugin) do
+            handler(DummySendHandler, priorty: :send)
+            handler do |context|
+              context[:executed] = true
+              handler.call(context)
+            end
+          end
+          plugin.new.add_handlers(handlers, config)
+          context = RequestContext.new
+          resp = handlers.to_stack(config).call(context)
+          expect(resp.context[:executed]).to be(true)
+        end
+
+        it 'accepts a priority with the block' do
+          plugin = Class.new(Plugin) do
+            handler(DummySendHandler, priority: :send)
+            handler(priority: :send) {}
+          end
+          plugin.new.add_handlers(handlers, config)
+          expect(handlers.count).to be(1)
+          expect(handlers.first).not_to be_kind_of(DummySendHandler)
         end
 
       end

@@ -29,7 +29,18 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_handlers(handlers, config)
-        handlers.copy_from(self.class.handlers)
+        self.class.handlers.each do |handler, options|
+          handler = handler_from_proc(handler) if handler.is_a?(Proc)
+          handlers.add(handler, options)
+        end
+      end
+
+      private
+
+      def handler_from_proc(block)
+        Class.new(Handler) do
+          define_method(:call, &block)
+        end
       end
 
       class << self
@@ -44,8 +55,10 @@ module Seahorse
         end
 
         # (see HandlerList#add)
-        def handler(handler, options = {})
-          handlers.add(handler, options)
+        def handler(*args, &block)
+          options = args.last.is_a?(Hash) ? args.pop : {}
+          handler = args.empty? ? Proc.new : args.first
+          handlers << [handler, options]
         end
 
         # @api private
@@ -55,7 +68,7 @@ module Seahorse
 
         # @api private
         def handlers
-          @handler ||= HandlerList.new
+          @handlers ||= []
         end
 
       end
