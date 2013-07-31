@@ -21,9 +21,7 @@ module Seahorse
 
       let(:plugin_b) { Class.new }
 
-      def client_class
-        @client_class ||= Client.define('endpoint' => 'http://endpoint:123')
-      end
+      let(:client_class) { Client.define('endpoint' => 'http://endpoint:123') }
 
       describe 'client construction' do
 
