@@ -32,7 +32,7 @@ module Seahorse
         it 'passes client constructor options to config' do
           client = client_class.new(foo: 'bar')
           client.config.add_option(:foo)
-          client.config.foo.should eq('bar')
+          expect(client.config.foo).to eq('bar')
         end
 
       end
