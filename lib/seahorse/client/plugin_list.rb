@@ -98,7 +98,7 @@ module Seahorse
         def initialize(plugin)
           case plugin
           when Module
-            @canonical_name = plugin.name
+            @canonical_name = plugin.name || plugin.object_id
             @plugin = plugin
           when Symbol, String
             @canonical_name, @gem_name = plugin.to_s.split('.').reverse

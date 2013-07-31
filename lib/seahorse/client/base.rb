@@ -189,7 +189,7 @@ module Seahorse
 
         # @param [Model::Api, Hash] api
         # @return [Class]
-        def define(api)
+        def define(api = {})
           Class.new(self).tap {|c| c.set_api(api) }
         end
 

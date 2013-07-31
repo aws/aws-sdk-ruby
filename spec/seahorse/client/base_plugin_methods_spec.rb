@@ -17,14 +17,9 @@ module Seahorse
   module Client
     describe Base do
 
-      PluginA = Class.new
-      PluginB = Class.new
+      let(:plugin_a) { Class.new }
 
-      SingletonPlugin = Class.new do
-        def self.new
-          @instance ||= super
-        end
-      end
+      let(:plugin_b) { Class.new }
 
       def client_class
         @client_class ||= Client.define('endpoint' => 'http://endpoint:123')
@@ -32,17 +27,11 @@ module Seahorse
 
       describe 'client construction' do
 
-        let(:plugin_class) do
-          Class.new(SingletonPlugin) do
-            def add_options(config)
-              config.add_option(:plugin_option)
-            end
-          end
-        end
-
         it 'instructs plugins to #add_options' do
-          client_class.add_plugin(plugin_class)
-          expect(client_class.new.config).to respond_to(:plugin_option)
+          plugin = double('plugin')
+          plugin.stub(:add_options) { |config| config.add_option(:foo) }
+          client_class.add_plugin(plugin)
+          expect(client_class.new.config).to respond_to(:foo)
         end
 
         it 'calls plugin#add_options only if the plugin responds' do
@@ -71,15 +60,15 @@ module Seahorse
       describe '.add_plugin' do
 
         it 'adds plugins to the client' do
-          client_class.add_plugin(PluginA)
-          expect(client_class.plugins).to include(PluginA)
+          client_class.add_plugin(plugin_a)
+          expect(client_class.plugins).to include(plugin_a)
         end
 
         it 'does not add plugins to the client parent class' do
           subclass = Class.new(client_class)
-          subclass.add_plugin(PluginA)
-          expect(client_class.plugins).to_not include(PluginA)
-          expect(subclass.plugins).to include(PluginA)
+          subclass.add_plugin(plugin_a)
+          expect(client_class.plugins).to_not include(plugin_a)
+          expect(subclass.plugins).to include(plugin_a)
         end
 
       end
@@ -87,22 +76,19 @@ module Seahorse
       describe '.remove_plugin' do
 
         it 'removes a plugin from the client' do
-          client_class.add_plugin(PluginA)
-          client_class.add_plugin(PluginB)
-          client_class.remove_plugin(PluginA)
-          expect(client_class.plugins).not_to include(PluginA)
-          expect(client_class.plugins).to include(PluginB)
+          client_class.add_plugin(plugin_a)
+          client_class.add_plugin(plugin_b)
+          client_class.remove_plugin(plugin_a)
+          expect(client_class.plugins).not_to include(plugin_a)
+          expect(client_class.plugins).to include(plugin_b)
         end
 
         it 'does not remove plugins from the client parent class' do
-          client_class.add_plugin(PluginA)
-          client_class.add_plugin(PluginB)
-          subclass = Class.new(client_class)
-          subclass.remove_plugin(PluginB)
-          expect(client_class.plugins).to include(PluginA)
-          expect(client_class.plugins).to include(PluginB)
-          expect(subclass.plugins).to include(PluginA)
-          expect(subclass.plugins).not_to include(PluginB)
+          client_class.add_plugin(plugin_a)
+          subclass = client_class.define
+          subclass.remove_plugin(plugin_a)
+          expect(client_class.plugins).to include(plugin_a)
+          expect(subclass.plugins).not_to include(plugin_a)
         end
 
       end
@@ -127,10 +113,11 @@ module Seahorse
         end
 
         it 'replaces default plugins with the list specified in the API' do
+          PluginA = plugin_a
           api = { 'plugins' => ['Seahorse::Client::PluginA'] }
           client_class = Base.define(api)
           expect(client_class.plugins.count).to eq(4)
-          expect(client_class.plugins).to include(PluginA)
+          expect(client_class.plugins).to include(plugin_a)
         end
 
       end
