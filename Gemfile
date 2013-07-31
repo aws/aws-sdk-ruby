@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -15,12 +15,20 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'seahorse', :path => 'vendor/seahorse'
+gem 'rake', require: false
+gem 'seahorse', path: 'vendor/seahorse'
 
-group :development do
-  gem 'rake', :require => false
-  gem 'minitest'
-  gem 'simplecov', :require => false
+group :test do
+  gem 'rspec', git: 'git://github.com/rspec/rspec'
+  gem 'rspec-core', git: 'git://github.com/rspec/rspec-core'
+  gem 'rspec-mocks', git: 'git://github.com/rspec/rspec-mocks'
+  gem 'rspec-expectations', git: 'git://github.com/rspec/rspec-expectations'
+
+  gem 'webmock'
+  gem 'simplecov', require: false
+end
+
+group :docs do
   gem 'yard'
-  gem 'redcarpet'
+  gem 'rdiscount'
 end

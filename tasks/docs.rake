@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -18,6 +18,7 @@ namespace :docs do
   end
 end
 
-YARD::Rake::YardocTask.new('docs')
-
-task :docs => 'docs:clobber'
+desc "Generate the API documentation."
+task :docs => 'docs:clobber' do
+  sh "bundle exec yard"
+end

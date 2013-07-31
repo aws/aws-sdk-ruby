@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -11,12 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'rake/testtask'
+def execute_cmd cmd
+  puts cmd if Rake.application.options.trace
+  system(cmd)
+  unless $?.to_i == 0
+    $stderr.puts "Command failed (#{$?}): #{cmd}"
+    exit($? >> 8)
+  end
+end
 
-Rake::TestTask.new do |t|
-  t.libs.push 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
+desc "Runs unit tests"
+task :test do
+  opts = ['bundle exec rspec']
+  opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
+  execute_cmd(opts.join(' '))
 end
 
 desc 'Generates a coverage report'
