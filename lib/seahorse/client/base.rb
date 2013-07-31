@@ -43,8 +43,8 @@ module Seahorse
       #
       def initialize(options = {})
         plugins = build_plugins
-        @config = build_config(options, plugins)
-        @handler = handler_stack(options, plugins)
+        @config = build_config(plugins, options)
+        @handler = handler_list(plugins, options).to_stack(@config)
       end
 
       # @return [Configuration]
@@ -67,25 +67,16 @@ module Seahorse
         end
       end
 
-      # @param [Hash] options
       # @param [Array<Plugin>] plugins
+      # @param [Hash] options
       # @return [Configuration]
-      def build_config(options, plugins)
+      def build_config(plugins, options)
         options = options.merge(:api => self.class.api) unless options[:api]
         @config = Configuration.new(options)
         plugins.each do |plugin|
           plugin.add_options(@config) if plugin.respond_to?(:add_options)
         end
         @config
-      end
-
-      # @param [Hash] options
-      # @param [Array<Plugin>] plugins
-      # @return [Handler]
-      def handler_stack(options, plugins)
-        handler_list(plugins, options).inject(nil) do |stack, handler|
-          handler.new(@config, stack)
-        end
       end
 
       # @param [Array<Plugin>] plugins
