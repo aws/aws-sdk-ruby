@@ -4,3 +4,4 @@ vendor
 *.gem
 doc
 .yardoc
+vendor
