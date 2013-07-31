@@ -18,13 +18,10 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_options(config)
-        self.class.options.each do |opt|
-          name, default = opt
-          if default.is_a?(Proc)
-            config.add_option(name, default.call(config))
-          else
-            config.add_option(name, default)
-          end
+        self.class.options.each do |option|
+          name, default = option
+          default = default.call(config) if default.is_a?(Proc)
+          config.add_option(name, default)
         end
       end
 
