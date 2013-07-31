@@ -19,8 +19,12 @@ module Seahorse
       # @return [void]
       def add_options(config)
         self.class.options.each do |opt|
-          name, default, default_block = *opt
-          config.add_option(name, default, &default_block)
+          name, default = opt
+          if default.is_a?(Proc)
+            config.add_option(name, default.call(config))
+          else
+            config.add_option(name, default)
+          end
         end
       end
 
@@ -35,7 +39,11 @@ module Seahorse
 
         # (see Configuration#add_option)
         def option(name, default = nil, &block)
-          options << [name, default, block]
+          if block_given?
+            options << [name, Proc.new]
+          else
+            options << [name, default]
+          end
         end
 
         # (see HandlerList#add)
