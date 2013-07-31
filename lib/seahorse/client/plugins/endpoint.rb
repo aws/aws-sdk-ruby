@@ -16,10 +16,6 @@ module Seahorse
     module Plugins
       class Endpoint < Plugin
 
-        option(:endpoint) { |config| config.api.endpoint }
-
-        option(:ssl_default, true)
-
         # @api private
         class EndpointHandler < Handler
 
@@ -33,6 +29,10 @@ module Seahorse
           end
 
         end
+
+        option(:endpoint) { |config| config.api.endpoint }
+
+        option(:ssl_default, true)
 
         handler(EndpointHandler, priority: :build)
 
