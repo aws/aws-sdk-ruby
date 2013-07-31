@@ -18,3 +18,12 @@ end
 require 'rspec'
 require 'webmock/rspec'
 require 'seahorse'
+
+class DummySendHandler < Seahorse::Client::Handler
+  def initialize(config = nil, handler = nil)
+    super
+  end
+  def call(context)
+    Seahorse::Client::Response.new(context: context).signal_complete
+  end
+end

@@ -16,25 +16,17 @@ module Seahorse
     module Plugins
       class Endpoint < Plugin
 
-        # @api priviate
-        class EndpointHandler < Handler
-
-          def call(context)
-            set_http_endpoint(context.http_request, context.config)
-            super
-          end
-
-          def set_http_endpoint(http_request, config)
-            http_request.endpoint =
-              Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
-          end
-        end
-
         option(:endpoint) { |config| config.api.endpoint }
 
         option(:ssl_default, true)
 
-        handler(EndpointHandler)
+        handler do |context|
+          endpoint = context.config.endpoint
+          ssl_default = context.config.ssl_default
+          endpoint = Http::Endpoint.new(endpoint, ssl_default: ssl_default)
+          context.http_request.endpoint = endpoint
+          @handler.call(context)
+        end
 
       end
     end

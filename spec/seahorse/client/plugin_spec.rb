@@ -98,11 +98,6 @@ module Seahorse
 
       describe '.handler' do
 
-        class DummySendHandler < Handler
-          def initialize(config = nil, handler = nil); super; end
-          def call(context); Response.new(context: context).signal_complete; end
-        end
-
         let(:handlers) { HandlerList.new }
 
         it 'registers a handler' do
