@@ -95,6 +95,18 @@ module Seahorse
         end
 
       end
+
+      describe '.handler' do
+
+        it 'registers a handler' do
+          handler_class = Class.new(Handler)
+          handlers = HandlerList.new
+          plugin = Class.new(Plugin) { handler(handler_class) }
+          plugin.new.add_handlers(handlers, config)
+          expect(handlers).to include(handler_class)
+        end
+
+      end
     end
   end
 end
