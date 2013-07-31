@@ -19,6 +19,8 @@ require 'rspec'
 require 'webmock/rspec'
 require 'seahorse'
 
+# A helper :send_handler that does not send the request, it simply
+# returns an empty response.
 class DummySendHandler < Seahorse::Client::Handler
   def initialize(config = nil, handler = nil)
     super
