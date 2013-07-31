@@ -108,6 +108,7 @@ module Seahorse
           end
 
         end
+
       end
 
       describe '.api' do
