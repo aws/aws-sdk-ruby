@@ -102,7 +102,7 @@ module Seahorse
 
           it 'accepts the handler as a client option' do
             handler = Class.new(Handler)
-            client = client_class.new(:http_handler => handler)
+            client = client_class.new(:send_handler => handler)
             req = client.build_request('operation')
             expect(req.handler).to be_kind_of(handler)
           end

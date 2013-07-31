@@ -35,7 +35,7 @@ module Seahorse
       #   scheme for the #endpoint when not specified.  Defaults to `true`
       #   which creates https endpoints.
       #
-      # @option options [Handler] :http_handler
+      # @option options [Handler] :send_handler
       #
       def initialize(options = {})
         plugins = build_plugins
@@ -90,12 +90,12 @@ module Seahorse
       end
 
       # @param [Array<Plugin>] plugins
-      # @option options [HttpHandler] :http_handler (nil)
+      # @option options [HttpHandler] :send_handler (nil)
       # @return [HandlerList]
       def handler_list(plugins, options)
         list = plugin_handlers(plugins)
-        if options[:http_handler]
-          list.add(options[:http_handler], priority: :send)
+        if options[:send_handler]
+          list.add(options[:send_handler], priority: :send)
         end
         list
       end
