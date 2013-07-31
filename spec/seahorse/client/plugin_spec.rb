@@ -66,14 +66,12 @@ module Seahorse
 
         it 'provides a short-cut method for adding options' do
           plugin = Class.new(Plugin) { option(:opt) }
-          config = Configuration.new
           plugin.new.add_options(config)
           expect(config.opt).to be(nil)
         end
 
         it 'accepts a static default value' do
           plugin = Class.new(Plugin) { option(:opt, 'default') }
-          config = Configuration.new
           plugin.new.add_options(config)
           expect(config.opt).to eq('default')
         end
@@ -83,18 +81,15 @@ module Seahorse
           plugin = Class.new(Plugin) do
             option(:opt) { value }
           end
-          config = Configuration.new
           plugin.new.add_options(config)
           expect(config.opt).to be(value)
        end
 
         it 'accepts a default block value and yields the config' do
-          value = Object.new
           plugin = Class.new(Plugin) do
             option(:opt1, 10)
             option(:opt2) { |config| config.opt1 * 2 }
           end
-          config = Configuration.new
           plugin.new.add_options(config)
           expect(config.opt2).to equal(20)
         end
