@@ -23,8 +23,10 @@ module Aws
         end
       end
 
+      let(:env) { {} }
+
       before do
-        allow(ENV).to receive(:[]) { nil }
+        stub_const("ENV", env)
       end
 
       def setup_plugin(options = {})
@@ -44,20 +46,20 @@ module Aws
         end
 
         it 'defaults to ENV["AWS_REGION"]' do
-          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
+          env['AWS_REGION'] = 'aws-region'
           setup_plugin
           expect(@config.region).to eq('aws-region')
         end
 
         it 'falls back to ENV["AMAZON_REGION"]' do
-          allow(ENV).to receive(:[]).with('AMAZON_REGION') { 'amazon-region' }
+          env['AMAZON_REGION'] = 'amazon-region'
           setup_plugin
           expect(@config.region).to eq('amazon-region')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
-          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
-          allow(ENV).to receive(:[]).with('AMAZON_REGION') { 'amazon-region' }
+          env['AWS_REGION'] = 'aws-region'
+          env['AMAZON_REGION'] = 'amazon-region'
           setup_plugin
           expect(@config.region).to eq('aws-region')
         end
@@ -73,7 +75,7 @@ module Aws
         end
 
         it 'can be set' do
-          allow(ENV).to receive(:[]).with('AWS_REGION') { 'aws-region' }
+          env['AWS_REGION'] = 'aws-region'
           setup_plugin(endpoint: 'my-endpoint')
           expect(@config.endpoint).to eq('my-endpoint')
         end
