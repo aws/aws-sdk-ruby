@@ -20,13 +20,13 @@ module Seahorse
 
       it 'creates a new client class' do
         client_class = Client.define({})
-        expect(client_class.ancestors).to include Client::Base
+        expect(client_class.ancestors).to include(Client::Base)
       end
 
       it 'sets the api on the client class' do
         api = Model::Api.from_hash({})
         client_class = Client.define(api)
-        expect(client_class.api).to be api
+        expect(client_class.api).to be(api)
       end
 
       it 'extends from subclasses of client' do
