@@ -41,11 +41,7 @@ module Seahorse
         plugins = build_plugins
         @config = build_config(options, plugins)
         @handler = handler_stack(options, plugins)
-        @endpoint = build_endpoint
       end
-
-      # @return [Http::Endpoint]
-      attr_reader :endpoint
 
       # @return [Configuration]
       attr_reader :config
@@ -72,8 +68,6 @@ module Seahorse
       # @return [Configuration]
       def build_config(options, plugins)
         @config = Configuration.new(options)
-        @config.add_option(:ssl_default, true)
-        @config.add_option(:endpoint, default_endpoint)
         plugins.each do |plugin|
           plugin.add_options(@config) if plugin.respond_to?(:add_options)
         end
@@ -112,28 +106,13 @@ module Seahorse
         handlers
       end
 
-      # @return [Http::Endpoint]
-      def build_endpoint
-        Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
-      rescue URI::InvalidURIError
-        msg = 'unable to build #endpoint, must be specified in the client API '
-        msg << 'or be set via the :endpoint option'
-        raise ArgumentError, msg
-      end
-
       # @return [RequestContext]
       def context_for(operation_name, params)
         RequestContext.new(
           operation_name: operation_name.to_s,
           params: params,
           config: config,
-          http_request: Http::Request.new(endpoint: endpoint),
-        )
-      end
-
-      # @return [String] Returns the default endpoint for the client.
-      def default_endpoint
-        self.class.api.endpoint
+          http_request: Http::Request.new)
       end
 
       class << self

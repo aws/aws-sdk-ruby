@@ -25,59 +25,14 @@ module Seahorse
 
       describe '#config' do
 
-        it 'has a #ssl_default option that defaults to true' do
-          expect(client.config.ssl_default).to eq(true)
-        end
-
-        it 'has a #endpoint option that defaults to the API endpoint' do
-          expect(client.config.endpoint).to eq(api['endpoint'])
-        end
-
         it 'returns a Configuration object' do
           expect(client.config).to be_kind_of(Configuration)
         end
 
-        it 'passes constructor options to the configuration constructor' do
-          client = client_class.new(ssl_default: false)
-          expect(client.config.ssl_default).to eq(false)
-        end
-
-      end
-
-      describe '#endpoint' do
-
-        it 'raises a runtime error if the endpoint can not be built' do
-          client_class = Class.new(Base)
-          client_class.set_api({}) # endpoint not specified in API
-          expect do
-            client_class.new # endpoint not specified via :endpoint option
-          end.to raise_error(ArgumentError, /endpoint/)
-        end
-
-        it 'returns an Endpoint object' do
-          expect(client_class.new.endpoint).to be_kind_of(Http::Endpoint)
-        end
-
-        it 'is built from the :endpoint constructor option' do
-          client_class = Client.define({})
-          client = client_class.new(endpoint: 'http://foo.com')
-          expect(client.endpoint).to eq('http://foo.com')
-        end
-
-        it 'comes from the client class API when not passed to the constructor' do
-          client_class = Client.define('endpoint' => 'http://foo.com')
-          client = client_class.new
-          expect(client.endpoint).to eq('http://foo.com')
-        end
-
-        it 'defaults to https when scheme not given' do
-          client = client_class.new(endpoint: 'foo.com')
-          expect(client.endpoint).to eq('https://foo.com')
-        end
-
-        it 'defaults to http when :ssl_default is false' do
-          client = client_class.new(endpoint: 'foo.com', ssl_default: false)
-          expect(client.endpoint).to eq('http://foo.com')
+        it 'passes client constructor options to config' do
+          client = client_class.new(foo: 'bar')
+          client.config.add_option(:foo)
+          client.config.foo.should eq('bar')
         end
 
       end
@@ -129,11 +84,6 @@ module Seahorse
           it 'stringifies the operation name' do
             request = client.build_request(:operation)
             expect(request.context.operation_name).to eq('operation')
-          end
-
-          it 'populates the context with the endpoint' do
-            request = client.build_request('operation')
-            expect(request.context.http_request.endpoint).to be(client.endpoint)
           end
 
           it 'populates the context with the configuration' do
