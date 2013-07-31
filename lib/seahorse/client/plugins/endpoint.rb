@@ -20,14 +20,21 @@ module Seahorse
 
         option(:ssl_default, true)
 
-        build_endpoint = lambda do |config|
-          Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+        # @api private
+        class EndpointHandler < Handler
+
+          def call(context)
+            context.http_request.endpoint = endpoint_for(context.config)
+            @handler.call(context)
+          end
+
+          def endpoint_for(config)
+            Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+          end
+
         end
 
-        handler do |context|
-          context.http_request.endpoint = build_endpoint.call(context.config)
-          @handler.call(context)
-        end
+        handler(EndpointHandler, priority: :build)
 
       end
     end
