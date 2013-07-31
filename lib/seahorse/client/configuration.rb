@@ -91,18 +91,16 @@ module Seahorse
       # @param [Symbol] name The name of the configuration option.  This will
       #   be used to define a getter by the same name.
       #
-      # @param default (nil) Specifies the default value used when not set
+      # @param default Specifies the default value used when not set
       #   via the constructor.  You can skip this argument and specify a default
       #   via a block argument.
       #
       # @return [void]
-      def add_option(name, default = nil, &block)
-        @defaults[name] = block || default
+      def add_option(name, default = nil)
+        @defaults[name] = default
         define_singleton_method(name) do
           if @options.key?(name)
             @options[name]
-          elsif @defaults[name].is_a?(Proc)
-            @defaults[name] = @defaults[name].call(self)
           else
             @defaults[name]
           end
@@ -119,12 +117,6 @@ module Seahorse
       end
       alias to_h options
       alias to_hash options
-
-      # @return [String]
-      # @api private
-      def inspect
-        "#<#{self.class.name} @options=#{options.inspect}>"
-      end
 
     end
   end

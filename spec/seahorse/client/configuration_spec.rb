@@ -51,22 +51,6 @@ module Seahorse
           expect(config.size).to eq('large')
         end
 
-        it 'accpets a default via a block' do
-          config.add_option(:dynamic) { 'value' }
-          expect(config.dynamic).to eq('value')
-        end
-
-        it 'yields self to the block when an arg is accepted' do
-          config.add_option(:single, 1)
-          config.add_option(:double) { |config| config.single * 2 }
-          expect(config.double).to eq(2)
-        end
-
-        it 'caches block return values' do
-          config.add_option(:opt) { Object.new }
-          expect(config.opt).to be(config.opt)
-        end
-
       end
 
       describe '#options' do
@@ -76,12 +60,10 @@ module Seahorse
           cfg.add_option(:opt)
           cfg.add_option(:nil_opt)
           cfg.add_option(:opt_with_default, 'default')
-          cfg.add_option(:opt_with_block) { 'block-default' }
           expect(cfg.options).to eq({
             opt: 'opt-value',
             nil_opt: nil,
             opt_with_default: 'default',
-            opt_with_block: 'block-default',
           })
         end
 
