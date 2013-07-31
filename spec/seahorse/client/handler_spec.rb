@@ -17,13 +17,8 @@ module Seahorse
   module Client
     describe Handler do
 
-      def context
-        @context ||= RequestContext.new
-      end
-
-      def response
-        @response ||= Response.new
-      end
+      let(:context) { RequestContext.new }
+      let(:response) { Response.new }
 
       it 'provides access to the configuration' do
         config = Object.new

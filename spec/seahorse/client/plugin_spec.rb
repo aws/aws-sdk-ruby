@@ -17,17 +17,9 @@ module Seahorse
   module Client
     describe Plugin do
 
-      def handlers
-        @handlers ||= HandlerList.new
-      end
-
-      def config
-        @config ||= Configuration.new
-      end
-
-      def plugin_class
-        @plugin_class ||= Class.new(Plugin)
-      end
+      let(:handlers) { HandlerList.new }
+      let(:config) { Configuration.new}
+      let(:plugin_class) { Class.new(Plugin) }
 
       describe '#add_options' do
 

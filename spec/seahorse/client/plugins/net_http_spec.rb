@@ -18,7 +18,7 @@ module Seahorse
     module Plugins
       describe NetHttp do
 
-        def config
+        let(:config) do
           Configuration.new.tap do |config|
             NetHttp.new.add_options(config)
           end

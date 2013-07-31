@@ -16,8 +16,8 @@ require 'spec_helper'
 module Seahorse
   module Model
     describe Operation do
-      def operation_hash
-        @operation_hash ||= {
+      let(:operation_hash) do
+        {
           'name' => 'OperationName',
           'documentation' => 'Docstring',
           'http' => {
@@ -42,9 +42,7 @@ module Seahorse
         }
       end
 
-      def operation
-        @operation ||= Operation.from_hash(operation_hash)
-      end
+      let(:operation) { Operation.from_hash(operation_hash) }
 
       describe 'from_hash' do
         it 'loads from a hash' do

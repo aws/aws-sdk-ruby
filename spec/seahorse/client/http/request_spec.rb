@@ -19,19 +19,17 @@ module Seahorse
     module Http
       describe Request do
 
-        def request
-          @request ||= Request.new
-        end
+        def request(*args) Request.new(*args) end
 
         describe '#endpoint' do
 
           it 'defaults to nil' do
-            expect(Request.new.endpoint).to eq(nil)
+            expect(request.endpoint).to eq(nil)
           end
 
           it 'can be set in the constructor' do
             endpoint = Object.new
-            req = Request.new(endpoint: endpoint)
+            req = request(endpoint: endpoint)
             expect(req.endpoint).to eq(endpoint)
           end
 
@@ -40,11 +38,11 @@ module Seahorse
         describe '#http_method' do
 
           it 'defaults to GET' do
-            expect(Request.new.http_method).to eq('GET')
+            expect(request.http_method).to eq('GET')
           end
 
           it 'can be set in the constructor' do
-            req = Request.new(http_method: 'POST')
+            req = request(http_method: 'POST')
             expect(req.http_method).to eq('POST')
           end
 
@@ -53,11 +51,11 @@ module Seahorse
         describe '#path' do
 
           it 'defaults to GET' do
-            expect(Request.new.path).to eq('/')
+            expect(request.path).to eq('/')
           end
 
           it 'can be set in the constructor' do
-            req = Request.new(path: '/path?abc=xyz')
+            req = request(path: '/path?abc=xyz')
             expect(req.path).to eq('/path?abc=xyz')
           end
 
@@ -66,11 +64,11 @@ module Seahorse
         describe '#headers' do
 
           it 'defaults to a Http::Headers' do
-            expect(Request.new.headers).to be_kind_of(Headers)
+            expect(request.headers).to be_kind_of(Headers)
           end
 
           it 'defaults to a empty hash' do
-            expect(Request.new.headers.to_h).to eq({})
+            expect(request.headers.to_h).to eq({})
           end
 
         end
@@ -78,12 +76,12 @@ module Seahorse
         describe '#body' do
 
           it 'defaults to an empty IO-like object' do
-            expect(Request.new.body.read).to eq('')
+            expect(request.body.read).to eq('')
           end
 
           it 'can be set in the constructor' do
             body = StringIO.new('body')
-            expect(Request.new(body: body).body).to be(body)
+            expect(request(body: body).body).to be(body)
           end
 
         end

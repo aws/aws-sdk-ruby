@@ -21,32 +21,17 @@ module Seahorse
       class NetHttp < Plugin
         describe Handler do
 
-          def config
-            @config ||= OpenStruct.new
+          before(:each) { WebMock.disable_net_connect! }
+
+          let(:config) { OpenStruct.new }
+          let(:handler) { Handler.new(config) }
+          let(:make_request) { handler.call(context) }
+          let(:context) do
+            RequestContext.new.tap {|c| c.http_request.endpoint = endpoint }
           end
 
           def endpoint
             @endpoint ||= Http::Endpoint.new('test.endpoint.api')
-          end
-
-          def context
-            @context ||= begin
-              context = RequestContext.new
-              context.http_request.endpoint = endpoint
-              context
-            end
-          end
-
-          def handler
-            @handler ||= Handler.new(config)
-          end
-
-          def make_request
-            handler.call(context)
-          end
-
-          def setup
-            WebMock.disable_net_connect!
           end
 
           describe '#config' do
@@ -119,9 +104,7 @@ module Seahorse
 
           describe '#call' do
 
-            def http_request
-              context.http_request
-            end
+            let(:http_request) { context.http_request }
 
             it 'returns a Response object from #call' do
               stub_request(:any, endpoint)

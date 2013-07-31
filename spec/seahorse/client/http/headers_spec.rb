@@ -18,9 +18,7 @@ module Seahorse
     module Http
       describe Headers do
 
-        def headers
-          @headers ||= Headers.new
-        end
+        let(:headers) { Headers.new }
 
         it 'provides indifferent access to symbolized keys' do
           headers[:key] = 'value'

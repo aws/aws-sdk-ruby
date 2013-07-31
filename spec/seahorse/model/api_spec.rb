@@ -16,8 +16,8 @@ require 'spec_helper'
 module Seahorse
   module Model
     describe Api do
-      def operation_hash
-        @operation_hash ||= {
+      let(:operation_hash) do
+        {
           'name' => 'OperationName',
           'http' => {
             'uri' => '/path/to/operation',
@@ -33,8 +33,8 @@ module Seahorse
         }
       end
 
-      def api_hash
-        @api_hash ||= {
+      let(:api_hash) do
+        {
           'metadata' => {
             'key' => 'value'
           },
@@ -45,9 +45,7 @@ module Seahorse
         }
       end
 
-      def api
-        @api ||= Api.from_hash(api_hash)
-      end
+      let(:api) { Api.from_hash(api_hash) }
 
       describe 'from_hash' do
         it 'loads from a hash' do

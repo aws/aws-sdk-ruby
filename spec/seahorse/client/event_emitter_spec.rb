@@ -17,9 +17,7 @@ module Seahorse
   module Client
     describe EventEmitter do
 
-      def event_emitter
-        @event_emitter ||= EventEmitter.new
-      end
+      let(:event_emitter) { EventEmitter.new }
 
       describe '#on' do
 

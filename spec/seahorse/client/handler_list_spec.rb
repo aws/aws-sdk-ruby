@@ -17,9 +17,7 @@ module Seahorse
   module Client
     describe HandlerList do
 
-      def handlers
-        @handlers ||= HandlerList.new
-      end
+      let(:handlers) { HandlerList.new }
 
       it 'is enumerable' do
         expect(handlers).to be_kind_of(Enumerable)

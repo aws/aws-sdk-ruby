@@ -20,10 +20,10 @@ module Seahorse
         @property ||= Property.new('prop', type, opts)
       end
 
-      def property_class
-        klass = Class.new
-        def klass.from_hash(value) value.to_s + '!' end
-        klass
+      let(:property_class) do
+        Class.new do
+          def self.from_hash(value) value.to_s + '!' end
+        end
       end
 
       describe 'scalar properties' do
@@ -78,9 +78,7 @@ module Seahorse
       end
 
       describe 'with opts[:name]' do
-        def property
-          @property ||= Property.new('prop', String, name: 'other')
-        end
+        let(:property) { Property.new('prop', String, name: 'other') }
 
         it 'loads a value from the right location' do
           expect(property.load_from('other' => 'right')).to eq('right')
@@ -92,9 +90,7 @@ module Seahorse
       end
 
       describe 'with opts[:in]' do
-        def property
-          @property ||= Property.new('prop', Integer, in: 'subnode')
-        end
+        let(:property) { Property.new('prop', Integer, in: 'subnode') }
 
         it 'loads a value from the right location' do
           expect(property.load_from('subnode' => {'prop' => 1})).to eq(1)
@@ -106,9 +102,7 @@ module Seahorse
       end
 
       describe 'with opts[:always_serialize]' do
-        def property
-          @property ||= Property.new('prop', Hash, always_serialize: true)
-        end
+        let(:property) { Property.new('prop', Hash, always_serialize: true) }
 
         it 'always writes a value to a hash, even nil' do
           expect(property.write_to({}, nil)).to eq('prop' => nil)

@@ -17,9 +17,9 @@ module Seahorse
   module Client
     describe PluginList do
 
-      Plugin1 = Class.new
-      Plugin2 = Class.new
-      LazyPlugin = Class.new do
+      class Plugin1; end
+      class Plugin2; end
+      class LazyPlugin
         def self.const_missing name
           const = Object.new
           const_set(name, const)
@@ -27,9 +27,7 @@ module Seahorse
         end
       end
 
-      def plugins
-        @plugins ||= PluginList.new
-      end
+      let(:plugins) { PluginList.new }
 
       it 'can be constructed with a list of plugins' do
         expect(PluginList.new([Plugin1, Plugin2]).to_a).to eq([Plugin1, Plugin2])
@@ -150,13 +148,8 @@ module Seahorse
           end
         end
 
-        def mutex
-          @mutex ||= DummyMutex.new
-        end
-
-        def plugins
-          @plugins ||= PluginList.new([Plugin1], mutex: mutex)
-        end
+        let(:mutex) { DummyMutex.new }
+        let(:plugins) { PluginList.new([Plugin1], mutex: mutex) }
 
         it 'locks the mutex when adding a plugin' do
           expect(mutex.was_locked).to eq(false)

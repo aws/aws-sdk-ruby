@@ -17,9 +17,7 @@ module Seahorse
   module Client
     describe Configuration do
 
-      def config
-        @config ||= Configuration.new
-      end
+      let(:config) { Configuration.new }
 
       describe '#initialize' do
 

@@ -17,27 +17,21 @@ module Seahorse
   module Client
     describe Base do
 
-      PluginA = Class.new
-      PluginB = Class.new
-
-      SingletonPlugin = Class.new do
-        def self.new
-          @instance ||= super
-        end
+      class PluginA; end
+      class PluginB; end
+      class SingletonPlugin
+        def self.new; @instance ||= super end
       end
 
-      def api
-        @api ||= { 'endpoint' => 'http://endpoint:123', 'plugins' => [] }
-      end
-
-      def client_class
-        @client_class ||= Client.define(api)
+      let(:client_class) { Client.define(api) }
+      let(:api) do
+        { 'endpoint' => 'http://endpoint:123', 'plugins' => [] }
       end
 
       describe 'client construction' do
 
-        def plugin_class
-          @plugin_class ||= Class.new(SingletonPlugin) do
+        let(:plugin_class) do
+          Class.new(SingletonPlugin) do
             def add_options(config)
               config.add_option(:plugin_option)
             end

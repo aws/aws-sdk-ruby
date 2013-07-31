@@ -17,16 +17,10 @@ module Seahorse
   module Client
     describe Base do
 
-      def api
+      let(:client_class) { Client.define(api) }
+      let(:client) { client_class.new }
+      let(:api) do
         { 'endpoint' => 'http://endpoint:123' }
-      end
-
-      def client_class
-        @client_class ||= Client.define(api)
-      end
-
-      def client
-        @client ||= client_class.new
       end
 
       describe '#config' do
@@ -96,9 +90,7 @@ module Seahorse
 
         describe 'handler' do
 
-          def request
-            @request ||= client.build_request('operation')
-          end
+          let(:request) { client.build_request('operation') }
 
           it 'defaults to a Plugins::NetHttp::Handler' do
             expect(request.handler).to be_kind_of(Plugins::NetHttp::Handler)

@@ -18,9 +18,7 @@ module Seahorse
     module Http
       describe ResponseBodyBuffer do
 
-        def body
-          @body ||= ResponseBodyBuffer.new
-        end
+        let(:body) { ResponseBodyBuffer.new }
 
         describe '#write' do
 

@@ -17,17 +17,9 @@ module Seahorse
   module Client
     describe Request do
 
-      def handler
-        @handler ||= lambda { |context| }
-      end
-
-      def context
-        @context ||= RequestContext.new
-      end
-
-      def request
-        @request ||= Request.new(handler, context)
-      end
+      let(:handler) { -> (_) { } }
+      let(:context) { RequestContext.new }
+      let(:request) { Request.new(handler, context) }
 
       describe '#context' do
 
@@ -72,8 +64,8 @@ module Seahorse
 
         describe 'with block argument' do
 
-          def handler
-            lambda do |context|
+          let(:handler) do
+            -> (context) do
               context.http_response.body.write('part1')
               context.http_response.body.write('part2')
               context.http_response.body.write('part3')
