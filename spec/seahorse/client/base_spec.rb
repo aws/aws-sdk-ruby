@@ -47,19 +47,23 @@ module Seahorse
 
           let(:request) { client.build_request('operation') }
 
-          it 'defaults to a Plugins::NetHttp::Handler' do
-            expect(request.handler).to be_kind_of(Plugins::NetHttp::Handler)
+          it 'defaults the send handler to a Plugins::NetHttp::Handler' do
+            handler = request.handler
+            handler = handler.handler while handler.handler
+            expect(handler).to be_kind_of(Plugins::NetHttp::Handler)
           end
 
           it 'constructs the hander with the client configuration' do
             expect(request.handler.config).to be(client.config)
           end
 
-          it 'accepts the handler as a client option' do
-            handler = Class.new(Handler)
-            client = client_class.new(:send_handler => handler)
+          it 'accepts the send handler as a client option' do
+            handler_class = Class.new(Handler)
+            client = client_class.new(:send_handler => handler_class)
             req = client.build_request('operation')
-            expect(req.handler).to be_kind_of(handler)
+            handler = req.handler
+            handler = handler.handler while handler.handler
+            expect(handler).to be_kind_of(handler_class)
           end
 
         end

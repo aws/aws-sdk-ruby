@@ -37,6 +37,8 @@ module Seahorse
     end
 
     module Plugins
+      autoload :Api, 'seahorse/client/plugins/api'
+      autoload :Endpoint, 'seahorse/client/plugins/endpoint'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
     end
 

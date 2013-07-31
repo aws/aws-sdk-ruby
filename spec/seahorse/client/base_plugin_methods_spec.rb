@@ -112,9 +112,13 @@ module Seahorse
           expect(client_class.plugins.frozen?).to eq(true)
         end
 
-        it 'defaults to Plugins::NetHttp::Plugin' do
+        it 'has a defualt list of plugins' do
           client_class = Class.new(Base)
-          expect(client_class.plugins.to_a).to eq([Plugins::NetHttp])
+          expect(client_class.plugins.to_a).to eq([
+            Plugins::Api,
+            Plugins::Endpoint,
+            Plugins::NetHttp,
+          ])
         end
 
         it 'replaces default plugins with the list specified in the API' do
