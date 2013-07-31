@@ -19,12 +19,11 @@ module Aws
       # raised when region is not configured
       MISSING_REGION = 'missing required configuration option :region'
 
-      def add_options(config)
-        config.add_option(:region, ENV['AWS_REGION'] || ENV['AMAZON_REGION'])
-        config.add_option(:endpoint) do |cfg|
-          cfg.api.metadata['regional_endpoint'] % cfg.region
-        end
+      option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
+
+      option(:endpoint) do |config|
         raise ArgumentError, MISSING_REGION unless config.region
+        config.api.metadata['regional_endpoint'] % config.region
       end
 
     end

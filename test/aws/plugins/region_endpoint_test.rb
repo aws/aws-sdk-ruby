@@ -17,7 +17,14 @@ module Aws
   module Plugins
     describe RegionalEndpoint do
 
+      let(:api) {
+        api = Seahorse::Model::Api.new
+        api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
+        api
+      }
+
       def setup_plugin(options = {})
+        options[:api] ||= api
         @config ||= Seahorse::Client::Configuration.new(options)
         @config.add_option(:api)
         @handlers ||= Seahorse::Client::HandlerList.new
@@ -77,7 +84,6 @@ module Aws
       describe 'endpoint option' do
 
         it 'builds the endpoint from the regional_endpoint and the region' do
-          api = Seahorse::Model::Api.new
           api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
           setup_plugin(api: api, region: 'REGION')
           @config.endpoint.must_equal('svc.REGION.amazonaws.com')
