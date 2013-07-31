@@ -62,38 +62,9 @@ module Seahorse
           expect(config.double).to eq(2)
         end
 
-      end
-
-      describe '#with_option' do
-
-        it 'returns a new configuration object' do
-          cfg = Configuration.new(:abc => 'xyz')
-          cfg2 = cfg.with_options(:abc => 'mno')
-          expect(cfg2).to be_kind_of(Configuration)
-          expect(cfg2).to_not be(cfg)
-        end
-
-        it 'returns self when given options are empty' do
-          cfg = Configuration.new(:abc => 'xyz')
-          expect(cfg.with_options({})).to be(cfg)
-        end
-
-        it 'protects self from modification' do
-          cfg = Configuration.new(option: 'old-value')
-          cfg.add_option(:option)
-          cfg.with_options(option: 'new-value')
-          expect(cfg.option).to eq('old-value')
-        end
-
-        it 'merges options onto the returned object' do
-          cfg = Configuration.new(option: 'old-value')
-          cfg.add_option(:option)
-          cfg2 = cfg.with_options(option: 'new-value')
-          expect(cfg2.option).to eq('new-value')
-        end
-
-        it 'can be called without options' do
-          expect(Configuration.new.with_options).to be_kind_of(Configuration)
+        it 'caches block return values' do
+          config.add_option(:opt) { Object.new }
+          expect(config.opt).to be(config.opt)
         end
 
       end

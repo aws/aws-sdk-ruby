@@ -80,6 +80,7 @@ module Seahorse
 
       # @api private
       def initialize(options = {})
+        @defaults = {}
         @options = options
       end
 
@@ -95,13 +96,23 @@ module Seahorse
       #   via a block argument.
       #
       # @return [void]
-      def add_option(*args, &block)
-        self.class.add_option(*args, &block)
+      def add_option(name, default = nil, &block)
+        @defaults[name] = block || default
+        define_singleton_method(name) do
+          if @options.key?(name)
+            @options[name]
+          elsif @defaults[name].is_a?(Proc)
+            @defaults[name] = @defaults[name].call(self)
+          else
+            @defaults[name]
+          end
+        end
+        nil
       end
 
       # @return [Hash<Symbol,Object>]
       def options
-        self.class.options.inject({}) do |options, opt_name|
+        @defaults.keys.inject({}) do |options, opt_name|
           options[opt_name] = send(opt_name)
           options
         end.freeze
@@ -109,55 +120,12 @@ module Seahorse
       alias to_h options
       alias to_hash options
 
-      # Returns a new configuration that is merged with the given `options`.
-      # Returns `self` if `options` are empty.
-      # @param [Hash] options ({})
-      # @return [Configuration]
-      def with_options(options = {})
-        if options.empty?
-          self
-        else
-          cfg = self.class.allocate
-          cfg.send(:initialize, @options.merge(options))
-          cfg
-        end
-      end
-
       # @return [String]
       # @api private
       def inspect
-        "#<Seahorse::Client::Configuration @options=#{options.inspect}>"
+        "#<#{self.class.name} @options=#{options.inspect}>"
       end
 
-      class << self
-
-        # @api private
-        def new(options = {})
-          config = Class.new(self).allocate
-          config.send(:initialize, options)
-          config
-        end
-
-        # @api private
-        def add_option(name, default = nil, &block)
-          options << name
-          define_method(name) do
-            case
-            when @options.key?(name) then @options[name]
-            when block then block.call(self)
-            else default
-            end
-          end
-          nil
-        end
-
-        # @api private
-        # @return [Array<Symbol>]
-        def options
-          @options ||= []
-        end
-
-      end
     end
   end
 end
