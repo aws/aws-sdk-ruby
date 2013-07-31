@@ -20,7 +20,7 @@ module Seahorse
       def add_options(config)
         self.class.options.each do |option|
           name, default = option
-          default = default.call(config) if default.is_a?(Proc)
+          default = instance_exec(config, &default) if default.is_a?(Proc)
           config.add_option(name, default)
         end
       end

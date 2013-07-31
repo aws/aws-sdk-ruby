@@ -94,6 +94,17 @@ module Seahorse
           expect(config.opt2).to equal(20)
         end
 
+        it 'instance evals the block' do
+          plugin = Class.new(Plugin) do
+            def initialize
+              @value = 'instance-value'
+            end
+            option(:value) { @value }
+          end
+          plugin.new.add_options(config)
+          expect(config.value).to eq('instance-value')
+        end
+
       end
 
       describe '.handler' do
