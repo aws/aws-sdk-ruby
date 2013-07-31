@@ -18,7 +18,9 @@ module Seahorse
     describe Plugin do
 
       let(:handlers) { HandlerList.new }
-      let(:config) { Configuration.new}
+
+      let(:config) { Configuration.new }
+
       let(:plugin_class) { Class.new(Plugin) }
 
       describe '#add_options' do
