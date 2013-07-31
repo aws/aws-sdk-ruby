@@ -16,7 +16,7 @@ module Seahorse
     module Plugins
       class Api < Plugin
 
-        option(:api, Model::Api.new)
+        option(:api)
 
       end
     end

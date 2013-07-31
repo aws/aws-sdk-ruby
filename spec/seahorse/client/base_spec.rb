@@ -17,11 +17,11 @@ module Seahorse
   module Client
     describe Base do
 
+      let(:api) {{ 'endpoint' => 'http://endpoint:123' }}
+
       let(:client_class) { Client.define(api) }
+
       let(:client) { client_class.new }
-      let(:api) do
-        { 'endpoint' => 'http://endpoint:123' }
-      end
 
       describe '#config' do
 
@@ -29,7 +29,19 @@ module Seahorse
           expect(client.config).to be_kind_of(Configuration)
         end
 
-        it 'passes client constructor options to config' do
+        it 'contains the client api' do
+          expect(client.config.api).to be(client_class.api)
+        end
+
+        it 'defaults endpoint to the api endpoint' do
+          expect(client.config.endpoint).to eq(api['endpoint'])
+        end
+
+        it 'defaults ssl_default to true' do
+          expect(client.config.ssl_default).to equal(true)
+        end
+
+        it 'passes constructor args to the config' do
           client = client_class.new(foo: 'bar')
           client.config.add_option(:foo)
           expect(client.config.foo).to eq('bar')

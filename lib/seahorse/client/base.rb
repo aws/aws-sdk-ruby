@@ -71,6 +71,7 @@ module Seahorse
       # @param [Array<Plugin>] plugins
       # @return [Configuration]
       def build_config(options, plugins)
+        options = options.merge(:api => self.class.api) unless options[:api]
         @config = Configuration.new(options)
         plugins.each do |plugin|
           plugin.add_options(@config) if plugin.respond_to?(:add_options)
