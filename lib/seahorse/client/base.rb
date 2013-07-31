@@ -115,8 +115,7 @@ module Seahorse
         RequestContext.new(
           operation_name: operation_name.to_s,
           params: params,
-          config: config,
-          http_request: Http::Request.new)
+          config: config)
       end
 
       class << self
