@@ -32,6 +32,11 @@ module Seahorse
           expect(headers[:key]).to eq('value')
         end
 
+        it 'provides case-insenitive access to keys' do
+          headers['Content-Length'] = 100
+          expect(headers['content-length']).to eq('100')
+        end
+
         it 'stringifies values' do
           headers['key'] = 123
           expect(headers['key']).to eq('123')
@@ -135,6 +140,15 @@ module Seahorse
           it 'is aliased as #include?' do
             headers['foo'] = 'bar'
             expect(headers.include?('foo')).to eq(true)
+          end
+
+        end
+
+        describe '#inspect' do
+
+          it 'inspects like a normal hash' do
+            headers['foo'] = 'bar'
+            expect(headers.inspect).to eq({'foo' => 'bar'}.inspect)
           end
 
         end

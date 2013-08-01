@@ -29,13 +29,13 @@ module Seahorse
         # @param [String] key
         # @return [String]
         def [](key)
-          @data[key.to_s]
+          @data[key.to_s.downcase]
         end
 
         # @param [String] key
         # @param [String] value
         def []=(key, value)
-          @data[key.to_s] = value.to_s
+          @data[key.to_s.downcase] = value.to_s
         end
 
         # @param [Hash] headers
@@ -75,6 +75,11 @@ module Seahorse
           @data.dup
         end
         alias to_h to_hash
+
+        # @api private
+        def inspect
+          @data.inspect
+        end
 
       end
     end
