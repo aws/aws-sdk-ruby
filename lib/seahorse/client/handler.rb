@@ -34,6 +34,9 @@ module Seahorse
         @handler.call(context)
       end
 
+      def inspect
+        "#<#{self.class.name||'UnnamedHandler'} @handler=#{@handler.inspect}>"
+      end
     end
   end
 end

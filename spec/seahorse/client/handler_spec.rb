@@ -46,6 +46,19 @@ module Seahorse
         expect(Handler.new('config', handler).call(context)).to be(response)
       end
 
+      describe '#inspect' do
+        it 'does not display configuration object' do
+          stub_const('CustomHandler', Class.new(Handler))
+          handler = CustomHandler.new('config')
+          expect(handler.inspect).to eql '#<CustomHandler @handler=nil>'
+        end
+
+        it 'overrides class name for anonymous handler' do
+          handler = Class.new(Handler).new('config')
+          expect(handler.inspect).to eql '#<UnnamedHandler @handler=nil>'
+        end
+      end
+
     end
   end
 end
