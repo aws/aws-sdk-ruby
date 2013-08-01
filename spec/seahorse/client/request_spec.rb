@@ -42,13 +42,13 @@ module Seahorse
         it 'passes the request context to the handler' do
           handler = double('handler')
           expect(handler).to receive(:call).with(context) { Response.new }
-          Request.new(handler, context).send
+          Request.new(handler, context).send_request
         end
 
         it 'returns the response from the handler stack' do
           resp = Response.new
           handler = lambda { |context| resp }
-          expect(Request.new(handler, context).send).to be(resp)
+          expect(Request.new(handler, context).send_request).to be(resp)
         end
 
         describe 'with block argument' do
@@ -64,12 +64,12 @@ module Seahorse
 
           it 'streams data from the handler to the #send block' do
             data = []
-            Request.new(handler, context).send { |chunk| data << chunk }
+            Request.new(handler, context).send_request { |chunk| data << chunk }
             expect(data).to eq(['part1', 'part2', 'part3'])
           end
 
           it 'does not buffer the response chunks' do
-            response = Request.new(handler, context).send { |chunk| }
+            response = Request.new(handler, context).send_request { |chunk| }
             expect(response.http_response.body.read).to eq(nil)
           end
 

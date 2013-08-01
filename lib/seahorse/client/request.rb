@@ -30,7 +30,7 @@ module Seahorse
 
       # Sends the request, returning a {Response Response}.
       #
-      #     response = request.send
+      #     response = request.send_request
       #
       # # Streaming Responses
       #
@@ -53,7 +53,7 @@ module Seahorse
       # and will not be loaded into memory.
       #
       #     # stream the response data
-      #     response = request.send do |chunk|
+      #     response = request.send_request do |chunk|
       #       file.write(chunk)
       #     end
       #
@@ -65,7 +65,7 @@ module Seahorse
       # then you will need to wait for the returned response to be
       # complete before you inspect the response.
       #
-      #     response = request.send
+      #     response = request.send_request
       #     response.complete?
       #     #=> false
       #
@@ -77,13 +77,13 @@ module Seahorse
       # The {Response#on_complete on_complete} method can also yield the
       # {Response Response} object to your block.
       #
-      #     request.send.on_complete do |response|
+      #     request.send_request.on_complete do |response|
       #       response.complete?
       #       #=> true
       #     end
       #
       # @return [Response]
-      def send(&block)
+      def send_request(&block)
         if block_given?
           @context.http_response.body = Http::ResponseBodyStream.new(&block)
         end
