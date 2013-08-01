@@ -51,62 +51,59 @@ module Seahorse
 
       describe '#build_request' do
 
+        let(:request) { client_class.new.build_request('operation') }
+
         it 'returns a Request object' do
-          expect(client.build_request('operation')).to be_kind_of(Request)
+          expect(request).to be_kind_of(Request)
         end
 
-        describe 'handler' do
-
-          let(:request) { client.build_request('operation') }
-
-          it 'defaults the send handler to a NetHttp::Handler' do
-            handler = request.handler
-            handler = handler.handler while handler.handler
-            expect(handler).to be_kind_of(NetHttp::Handler)
-          end
-
-          it 'constructs the hander with the client configuration' do
-            expect(request.handler.config).to be(client.config)
-          end
-
-          it 'accepts the send handler as a client option' do
-            handler_class = Class.new(Handler)
-            client = client_class.new(:send_handler => handler_class)
-            req = client.build_request('operation')
-            handler = req.handler
-            handler = handler.handler while handler.handler
-            expect(handler).to be_kind_of(handler_class)
-          end
-
+        it 'builds a handler list from client plugins' do
+          client_class.clear_plugins
+          client_class.add_plugin(Plugins::Api)
+          client_class.add_plugin(Plugins::NetHttp)
+          client_class.add_plugin(Plugins::Endpoint)
+          handlers = request.handlers.to_a
+          expect(handlers).to include(NetHttp::Handler)
+          expect(handlers).to include(Plugins::Endpoint::EndpointHandler)
         end
 
-        describe 'request context' do
+        it 'defaults the send handler to a NetHttp::Handler' do
+          handlers = request.handlers.to_a
+          expect(handlers).to include(NetHttp::Handler)
+        end
 
-          it 'defaults params to an empty hash' do
-            expect(client.build_request('operation').context.params).to eq({})
-          end
+        it 'sets the send handler if given as a client constructor option' do
+          send_handler = Class.new(Handler)
+          client = client_class.new(:send_handler => send_handler)
+          request = client.build_request('operation')
+          expect(request.handlers.to_a).to include(send_handler)
+          expect(request.handlers.to_a).not_to include(NetHttp::Handler)
+        end
 
-          it 'accepts params' do
-            params = {}
-            request = client.build_request('operation', params)
-            expect(request.context.params).to be(params)
-          end
+        it 'populates the request context with the operation name' do
+          request = client.build_request('operation_name')
+          expect(request.context.operation_name).to eq('operation_name')
+        end
 
-          it 'populates the context with the operation name' do
-            request = client.build_request('operation')
-            expect(request.context.operation_name).to eq('operation')
-          end
+        it 'stringifies the operation name' do
+          request = client.build_request(:operation)
+          expect(request.context.operation_name).to eq('operation')
+        end
 
-          it 'stringifies the operation name' do
-            request = client.build_request(:operation)
-            expect(request.context.operation_name).to eq('operation')
-          end
+        it 'populates the request context params' do
+          params = double('params')
+          request = client.build_request('operation', params)
+          expect(request.context.params).to be(params)
+        end
 
-          it 'populates the context with the configuration' do
-            request = client.build_request('operation')
-            expect(request.context.config).to be(client.config)
-          end
+        it 'defaults request context params to an empty hash' do
+          request = client.build_request('operation')
+          expect(request.context.params).to eq({})
+        end
 
+        it 'populates the context with the client configuration' do
+          request = client.build_request('operation')
+          expect(request.context.config).to be(client.config)
         end
 
       end

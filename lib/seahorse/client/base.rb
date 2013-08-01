@@ -44,7 +44,7 @@ module Seahorse
       def initialize(options = {})
         plugins = build_plugins
         @config = build_config(plugins, options)
-        @handler = handler_list(plugins, options).to_stack(@config)
+        @handlers = handler_list(plugins, options)
       end
 
       # @return [Configuration]
@@ -55,7 +55,7 @@ module Seahorse
       # @param [Symbol, String] operation_name
       # @return [Request]
       def build_request(operation_name, params = {})
-        Request.new(@handler, context_for(operation_name, params))
+        Request.new(@handlers, context_for(operation_name, params))
       end
 
       private

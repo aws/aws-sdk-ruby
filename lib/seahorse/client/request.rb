@@ -15,15 +15,15 @@ module Seahorse
   module Client
     class Request
 
-      # @param [Handler] handler
+      # @param [HandlerList] handlers
       # @param [RequestContext] context
-      def initialize(handler, context)
-        @handler = handler
+      def initialize(handlers, context)
+        @handlers = handlers
         @context = context
       end
 
-      # @return [Handler]
-      attr_reader :handler
+      # @return [HandlerList]
+      attr_reader :handlers
 
       # @return [RequestContext]
       attr_reader :context
@@ -87,7 +87,7 @@ module Seahorse
         if block_given?
           @context.http_response.body = Http::ResponseBodyStream.new(&block)
         end
-        @handler.call(@context)
+        @handlers.to_stack(@context.config).call(@context)
       end
 
     end

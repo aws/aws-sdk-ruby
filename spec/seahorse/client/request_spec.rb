@@ -17,14 +17,16 @@ module Seahorse
   module Client
     describe Request do
 
-      let(:handler) { -> (_) { } }
+      let(:handlers) { HandlerList.new }
       let(:context) { RequestContext.new }
-      let(:request) { Request.new(handler, context) }
+      let(:request) { Request.new(handlers, context) }
 
-      describe '#context' do
+      describe '#handlers' do
 
-        it 'returns the request handler' do
-          expect(request.handler).to be(handler)
+        it 'returns the handler list' do
+          handlers = HandlerList.new
+          request = Request.new(handlers, context)
+          expect(request.handlers).to be(handlers)
         end
 
       end
@@ -32,6 +34,8 @@ module Seahorse
       describe '#context' do
 
         it 'returns the request context given the constructor' do
+          context = RequestContext.new
+          request = Request.new(handlers, context)
           expect(request.context).to be(context)
         end
 
@@ -39,41 +43,60 @@ module Seahorse
 
       describe '#send_request' do
 
-        it 'passes the request context to the handler' do
-          handler = double('handler')
-          expect(handler).to receive(:call).with(context) { Response.new }
-          Request.new(handler, context).send_request
+        it 'contructs a stack from the handler list' do
+          expect(handlers).to receive(:to_stack).
+            with(context.config).
+            and_return(-> (context) {})
+          request.send_request
+        end
+
+        it 'returns the response from the handler stack #call method' do
+          response = double('response')
+          allow(handlers).to receive(:to_stack).and_return(-> (_) { response })
+          expect(request.send_request).to be(response)
+        end
+
+        it 'passes the request context to the handler stack' do
+          passed = nil
+          handlers.stub(:to_stack).and_return(-> (context) { passed = context })
+          request.send_request
+          expect(passed).to be(context)
         end
 
         it 'returns the response from the handler stack' do
           resp = Response.new
-          handler = lambda { |context| resp }
-          expect(Request.new(handler, context).send_request).to be(resp)
+          handlers.stub(:to_stack).and_return(-> (context) { resp })
+          expect(Request.new(handlers, context).send_request).to be(resp)
         end
 
-        describe 'with block argument' do
+      end
 
-          let(:handler) do
-            -> (context) do
-              context.http_response.body.write('part1')
-              context.http_response.body.write('part2')
-              context.http_response.body.write('part3')
-              Response.new(context: context)
-            end
+      describe '#send_request with a block' do
+
+        let(:handler) do
+          -> (context) do
+            context.http_response.body.write('part1')
+            context.http_response.body.write('part2')
+            context.http_response.body.write('part3')
+            Response.new(context: context).signal_complete
           end
-
-          it 'streams data from the handler to the #send_request block' do
-            data = []
-            Request.new(handler, context).send_request { |chunk| data << chunk }
-            expect(data).to eq(['part1', 'part2', 'part3'])
-          end
-
-          it 'does not buffer the response chunks' do
-            response = Request.new(handler, context).send_request { |chunk| }
-            expect(response.http_response.body.read).to eq(nil)
-          end
-
         end
+
+        before(:each) do
+          handlers.stub(:to_stack).and_return(handler)
+        end
+
+        it 'streams data from the handler to the #send_request block' do
+          data = []
+          request.send_request { |chunk| data << chunk }
+          expect(data).to eq(['part1', 'part2', 'part3'])
+        end
+
+        it 'does not buffer the response chunks' do
+          response = request.send_request { |chunk| }
+          expect(response.http_response.body.read).to be(nil)
+        end
+
       end
     end
   end
