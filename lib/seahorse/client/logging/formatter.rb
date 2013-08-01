@@ -11,13 +11,35 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'spec_helper'
-
 module Seahorse
   module Client
-    module Plugins
-      class NetHttp < Plugin
-        describe ConnectionPool do
+    module Logging
+      class Formatter
+
+        def initialize(pattern, options = {})
+          @pattern = pattern
+          @max_string_size = options[:max_string_size] || 1000
+        end
+
+        # @return [String]
+        attr_reader :pattern
+
+        # @return [Integer]
+        attr_reader :max_string_size
+
+        # @param [Response] response
+        # @return [String]
+        def format response
+          ''
+        end
+
+        class << self
+
+          def default; end
+          def colored; end
+          def short; end
+          def debug; end
+
         end
       end
     end

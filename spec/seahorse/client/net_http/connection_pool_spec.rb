@@ -11,17 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'spec_helper'
+
 module Seahorse
   module Client
-    module Plugins
-      class NetHttp < Plugin
-
-        Client::NetHttp::ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-          option(opt_name, default_value)
-        end
-
-        handler(Client::NetHttp::Handler, priority: :send)
-
+      module NetHttp
+      describe ConnectionPool do
       end
     end
   end

@@ -71,10 +71,10 @@ module Seahorse
 
         describe '#add_handlers' do
 
-          it 'sets the :send hander to a NetHttp::Handler' do
+          it 'sets the :send hander to a Client::NetHttp::Handler' do
             handlers = HandlerList.new
             NetHttp.new.add_handlers(handlers, config)
-            expect(handlers.to_a).to eq([NetHttp::Handler])
+            expect(handlers.to_a).to eq([Client::NetHttp::Handler])
           end
 
         end

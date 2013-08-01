@@ -35,6 +35,16 @@ module Seahorse
       autoload :ResponseBodyStream, 'seahorse/client/http/response_body_stream'
     end
 
+    module Logging
+      autoload :Handler, 'seahorse/client/net_http/handler'
+      autoload :Formatter, 'seahorse/client/net_http/formatter'
+    end
+
+    module NetHttp
+      autoload :ConnectionPool, 'seahorse/client/net_http/connection_pool'
+      autoload :Handler, 'seahorse/client/net_http/handler'
+    end
+
     module Plugins
       autoload :Api, 'seahorse/client/plugins/api'
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'

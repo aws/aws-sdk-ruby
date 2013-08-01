@@ -13,36 +13,33 @@
 
 module Seahorse
   module Client
-    module Plugins
-      class Logging < Plugin
-        class Formatter
+    module Logging
+      class Handler < Client::Handler
 
-          def initialize(pattern, options = {})
-            @pattern = pattern
-            @max_string_size = options[:max_string_size] || 1000
-          end
-
-          # @return [String]
-          attr_reader :pattern
-
-          # @return [Integer]
-          attr_reader :max_string_size
-
-          # @param [Response] response
-          # @return [String]
-          def format response
-            ''
-          end
-
-          class << self
-
-            def default; end
-            def colored; end
-            def short; end
-            def debug; end
-
+        # @param [RequestContext] context
+        # @return [Response]
+        def call(context)
+          context[:started_at] = Time.now
+          super.on_complete do |response|
+            context[:completed_at] = Time.now
+            log(response)
           end
         end
+
+        private
+
+        # @param [Response] response
+        # @return [void]
+        def log(response)
+          @config.logger.send(@config.log_level, format(response))
+        end
+
+        # @param [Response] resposne
+        # @return [String]
+        def format(response)
+          @config.log_formatter.format(response)
+        end
+
       end
     end
   end

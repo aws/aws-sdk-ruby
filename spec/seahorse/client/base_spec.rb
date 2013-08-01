@@ -59,10 +59,10 @@ module Seahorse
 
           let(:request) { client.build_request('operation') }
 
-          it 'defaults the send handler to a Plugins::NetHttp::Handler' do
+          it 'defaults the send handler to a NetHttp::Handler' do
             handler = request.handler
             handler = handler.handler while handler.handler
-            expect(handler).to be_kind_of(Plugins::NetHttp::Handler)
+            expect(handler).to be_kind_of(NetHttp::Handler)
           end
 
           it 'constructs the hander with the client configuration' do

@@ -43,17 +43,16 @@ module Seahorse
       #
       class Logging < Plugin
 
-        autoload :Handler, 'seahorse/client/plugins/logging/handler'
-        autoload :Formatter, 'seahorse/client/plugins/logging/formatter'
-
         option(:logger, nil)
 
         option(:log_level, :info)
 
-        option(:log_formatter, Formatter.default)
+        option(:log_formatter, Clieng::Logging::Formatter.default)
 
         def add_handlers(handlers, config)
-          handlers.add(Handler, priority: :before_validate) if config.logger
+          if config.logger
+            handlers.add(Client::Logging::Handler, priority: :before_validate)
+          end
         end
 
       end
