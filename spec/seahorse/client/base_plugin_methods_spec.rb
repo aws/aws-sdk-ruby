@@ -91,6 +91,26 @@ module Seahorse
 
       end
 
+      describe '.set_plugins' do
+
+        it 'replaces existing plugins' do
+          client_class.add_plugin(plugin_a)
+          client_class.set_plugins([plugin_b])
+          expect(client_class.plugins).to eq([plugin_b])
+        end
+
+      end
+
+      describe '.clear_plugins' do
+
+        it 'removes all plugins' do
+          client_class.add_plugin(plugin_a)
+          client_class.clear_plugins
+          expect(client_class.plugins).to eq([])
+        end
+
+      end
+
       describe '.plugins' do
 
         it 'returns a list of plugins applied to the client' do
