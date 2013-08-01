@@ -29,7 +29,7 @@ module Seahorse
           setup_plugin
           expect(@config.logger).to be(nil)
           expect(@config.log_level).to equal(:info)
-          expect(@config.log_formatter).to equal(Client::Logging::Formatter.default)
+          expect(@config.log_formatter).to eq(Client::Logging::Formatter.default)
         end
 
         it 'adds a handler when a :logger is configured' do
