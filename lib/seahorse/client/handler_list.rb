@@ -38,7 +38,7 @@ module Seahorse
       # @param [Class] handler
       # @option options [Symbol] priority (:build)
       def add(handler, options = {})
-        @handlers[options[:priority] || :build] << handler
+        @handlers[options[:priority] || :build].unshift(handler)
       end
 
       # Yields the handlers.
@@ -83,7 +83,7 @@ module Seahorse
       # @api private
       class SendHandlers
 
-        def <<(handler)
+        def unshift(handler)
           @handler = handler
         end
 

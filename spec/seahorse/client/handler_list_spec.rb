@@ -36,7 +36,7 @@ module Seahorse
           handler2 = Class.new
           handlers.add(handler1)
           handlers.add(handler2)
-          expect(handlers.to_a).to eq([handler1, handler2])
+          expect(handlers.to_a).to eq([handler2, handler1])
         end
 
         it 'sorts handlers by reverse (stack) priority' do
@@ -59,7 +59,7 @@ module Seahorse
           handlers.add('h2', priority: :validate)
           handlers.add('h3', priority: :build)
           handlers.add('h4', priority: :build)
-          expect(handlers.to_a).to eq(['h3', 'h4', 'h1', 'h2'])
+          expect(handlers.to_a).to eq(['h4', 'h3', 'h2', 'h1'])
         end
 
         %w(validate build sign).each do |priority|
