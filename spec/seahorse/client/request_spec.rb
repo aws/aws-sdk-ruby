@@ -37,7 +37,7 @@ module Seahorse
 
       end
 
-      describe '#send' do
+      describe '#send_request' do
 
         it 'passes the request context to the handler' do
           handler = double('handler')
@@ -62,7 +62,7 @@ module Seahorse
             end
           end
 
-          it 'streams data from the handler to the #send block' do
+          it 'streams data from the handler to the #send_request block' do
             data = []
             Request.new(handler, context).send_request { |chunk| data << chunk }
             expect(data).to eq(['part1', 'part2', 'part3'])
