@@ -36,8 +36,8 @@ module Seahorse
     end
 
     module Logging
-      autoload :Handler, 'seahorse/client/net_http/handler'
-      autoload :Formatter, 'seahorse/client/net_http/formatter'
+      autoload :Handler, 'seahorse/client/logging/handler'
+      autoload :Formatter, 'seahorse/client/logging/formatter'
     end
 
     module NetHttp

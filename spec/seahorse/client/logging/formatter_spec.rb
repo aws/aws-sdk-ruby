@@ -11,15 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'test_helper'
-require 'logger'
+require 'spec_helper'
 
 module Seahorse
   module  Client
-    module Plugins
-      class Logging < Plugin
-        describe Formatter do
-        end
+    module Logging
+      describe Formatter do
       end
     end
   end

@@ -11,8 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'test_helper'
-require 'logger'
+require 'spec_helper'
 
 module Seahorse
   module  Client
@@ -28,30 +27,29 @@ module Seahorse
 
         it 'adds default configuration options' do
           setup_plugin
-          @config.logger.must_equal(nil)
-          @config.log_level.must_equal(:info)
-          @config.log_formatter.must_equal(Logging::Formatter.default)
+          expect(@config.logger).to be(nil)
+          expect(@config.log_level).to equal(:info)
+          expect(@config.log_formatter).to equal(Client::Logging::Formatter.default)
         end
 
         it 'adds a handler when a :logger is configured' do
           logger = Object.new
           setup_plugin(logger: logger)
-          @config.logger.must_equal(logger)
-          @handlers.first.must_equal(Logging::Handler)
+          expect(@config.logger).to be(logger)
+          expect(@handlers.first).to be(Client::Logging::Handler)
         end
 
         it 'skips the handler when :logger is not configured' do
           setup_plugin # no logger
-          @config.logger.must_equal(nil)
-          @handlers.to_a.must_equal([])
+          expect(@config.logger).to be(nil)
+          expect(@handlers.to_a).to eq([])
         end
 
         it 'adds the handler :before_validate (at the bottom of the stack)' do
-          @handlers = Minitest::Mock.new
-          @handlers.expect(:add, nil,
-            [Logging::Handler, { priority: :before_validate }])
+          @handlers = double('handler-list')
+          expect(@handlers).to receive(:add).
+            with(Client::Logging::Handler, priority: :before_validate)
           setup_plugin(logger: Object.new)
-          @handlers.verify
         end
 
       end

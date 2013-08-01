@@ -47,7 +47,7 @@ module Seahorse
 
         option(:log_level, :info)
 
-        option(:log_formatter, Clieng::Logging::Formatter.default)
+        option(:log_formatter, Client::Logging::Formatter.default)
 
         def add_handlers(handlers, config)
           if config.logger
