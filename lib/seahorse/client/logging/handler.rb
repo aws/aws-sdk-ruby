@@ -34,7 +34,7 @@ module Seahorse
           @config.logger.send(@config.log_level, format(response))
         end
 
-        # @param [Response] resposne
+        # @param [Response] response
         # @return [String]
         def format(response)
           @config.log_formatter.format(response)

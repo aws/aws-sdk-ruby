@@ -54,7 +54,13 @@ module Seahorse
           end
         end
 
-        # (see HandlerList#add)
+        # @overload handler(handler, options = {})
+        #   @param [Class] handler
+        #   @option options [Symbol] priority (:build)
+        #
+        # @overload handler(options = {}, &handler_block)
+        #   @option options [Symbol] priority (:build)
+        #
         def handler(*args, &block)
           options = args.last.is_a?(Hash) ? args.pop : {}
           handler = args.empty? ? Proc.new : args.first

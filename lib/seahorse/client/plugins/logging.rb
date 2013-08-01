@@ -31,10 +31,10 @@ module Seahorse
       #   `:warn`, `:debug`, etc).
       #
       # * `:log_formatter` - The default log formatter is
-      #   `Seahorse::Client::Plugin::Logging.Formatter.default`.  There are
-      #   a number of canned loggers to choose from.  See {Formatter}
-      #   for a complete list and for information on creating a custom
-      #   log formatter.
+      #   `Seahorse::Client::Logging.Formatter.default`.  There are
+      #   a number of canned loggers to choose from.  See
+      #   {Client::Logging::Formatter} for a complete list and for information
+      #   on creating a custom log formatter.
       #
       # ## Priority
       #

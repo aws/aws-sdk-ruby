@@ -64,18 +64,6 @@ module Seahorse
     #     config.current_time
     #     #=> returns a different value every time #current_time is called.
     #
-    # ## Duplicating Configuration Options
-    #
-    # If you want a copy of a configuration option merged with a new
-    # set of data, you can call {#with_options}.  This returns a new
-    # object.
-    #
-    #     config = Seahorse::Client::Configuration.new(:api_key => 'abc')
-    #     new_config = config.with_options(:api_key => 'xyz')
-    #
-    #     config.api_key #=> 'abc'
-    #     new_config.api_key #=> 'xyz'
-    #
     class Configuration
 
       # @api private
