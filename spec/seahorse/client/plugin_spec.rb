@@ -143,26 +143,26 @@ module Seahorse
         end
 
         it 'defines a class if the name is a String or Symbol' do
-          plugin = Class.new(Plugin) do
+          stub_const('DummyPlugin', Class.new(Plugin) do
             handler('Handler1') {}
             handler(:Handler2) {}
-          end
-          stub_const('Plugin1', plugin)
+          end)
 
-          expect(defined? Plugin1::Handler1).to eq nil
-          expect(defined? Plugin1::Handler2).to eq nil
+          expect(defined? DummyPlugin::Handler1).to eq nil
+          expect(defined? DummyPlugin::Handler2).to eq nil
 
-          plugin.new.add_handlers(handlers, config)
-          expect(handlers.to_a).to eq([Plugin1::Handler2, Plugin1::Handler1])
+          DummyPlugin.new.add_handlers(handlers, config)
+          expect(handlers.to_a).to eq([
+            DummyPlugin::Handler2, DummyPlugin::Handler1
+          ])
         end
 
         it 'only defines String/Symbol constant once' do
-          stub_const 'Plugin1', Class.new(Plugin) { handler('Handler1') {} }
-
+          stub_const 'DummyPlugin', Class.new(Plugin) { handler('Handler1') {} }
           5.times do
             handlers = HandlerList.new
-            Plugin1.new.add_handlers(handlers, config)
-            expect(handlers.to_a).to eq([Plugin1::Handler1])
+            DummyPlugin.new.add_handlers(handlers, config)
+            expect(handlers.to_a).to eq([DummyPlugin::Handler1])
           end
         end
 
