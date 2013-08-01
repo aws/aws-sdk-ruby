@@ -128,18 +128,28 @@ module Seahorse
             expect(headers.key?('foo')).to eq(true)
           end
 
+          it 'treats symbols indifferently' do
+            headers['foo'] = 'bar'
+            expect(headers.key?(:foo)).to be(true)
+          end
+
+          it 'treats strings case insensitively' do
+            headers['foo'] = 'bar'
+            expect(headers.key?('Foo')).to be(true)
+          end
+
           it 'returns false if the header has not been set' do
-            expect(headers.key?('foo')).to eq(false)
+            expect(headers.key?('foo')).to be(false)
           end
 
           it 'is aliased as #has_key?' do
             headers['foo'] = 'bar'
-            expect(headers.has_key?('foo')).to eq(true)
+            expect(headers.has_key?('foo')).to be(true)
           end
 
           it 'is aliased as #include?' do
             headers['foo'] = 'bar'
-            expect(headers.include?('foo')).to eq(true)
+            expect(headers.include?('foo')).to be(true)
           end
 
         end

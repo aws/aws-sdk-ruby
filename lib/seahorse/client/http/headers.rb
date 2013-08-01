@@ -65,7 +65,7 @@ module Seahorse
 
         # @return [Boolean] Returns `true` if the header is set.
         def key?(key)
-          @data.key?(key.to_s)
+          @data.key?(key.to_s.downcase)
         end
         alias has_key? key?
         alias include? key?
