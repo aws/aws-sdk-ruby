@@ -17,8 +17,11 @@ module Seahorse
   module Client
     describe PluginList do
 
-      class Plugin1; end
-      class Plugin2; end
+      before(:each) do
+        stub_const('Plugin1', Class.new)
+        stub_const('Plugin2', Class.new)
+      end
+
       class LazyPlugin
         def self.const_missing name
           const = Object.new
