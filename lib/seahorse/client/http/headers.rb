@@ -52,6 +52,14 @@ module Seahorse
           @data.delete(key.to_s)
         end
 
+        def keys
+          @data.keys
+        end
+
+        def values
+          @data.values
+        end
+
         # @yield [key, value]
         # @yieldparam [String] key
         # @yieldparam [String] value

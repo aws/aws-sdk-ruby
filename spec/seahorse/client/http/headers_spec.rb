@@ -123,16 +123,32 @@ module Seahorse
 
         describe '#delete' do
           it 'deletes a header by key' do
-            headers['foo'] = 'bar'
-            headers.delete('foo')
-            expect(headers).to_not have_key('foo')
+            headers['key1'] = 'value1'
+            headers.delete('key1')
+            expect(headers).to_not have_key('key1')
           end
 
           it 'deletes header with a symbol key' do
-            headers['foo'] = 'bar'
-            headers.delete(:foo)
-            expect(headers).to_not have_key('foo')
-            expect(headers).to_not have_key(:foo)
+            headers['key1'] = 'value'
+            headers.delete(:key1)
+            expect(headers).to_not have_key('key1')
+            expect(headers).to_not have_key(:key1)
+          end
+        end
+
+        describe '#keys' do
+          it 'returns the keys' do
+            headers['key1'] = 'value1'
+            headers['key2'] = 'value2'
+            expect(headers.keys).to eql(['key1', 'key2'])
+          end
+        end
+
+        describe '#values' do
+          it 'returns the values' do
+            headers['key1'] = 'value1'
+            headers['key2'] = 'value2'
+            expect(headers.values).to eql(['value1', 'value2'])
           end
         end
 
