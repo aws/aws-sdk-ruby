@@ -21,10 +21,10 @@ module Seahorse
       # a log message as a string..  When you construct a {Formatter}, you provide
       # a pattern string with substitutions.
       #
-      #     pattern = '[REQUEST :http_status_code] :operation :duration'
+      #     pattern = ':operation :http_response_status_code :total_time'
       #     formatter = Seahorse::Logging::Formatter.new(pattern)
       #     formatter.format(response)
-      #     #=> '[REQUEST 200] get_bucket 0.0352'
+      #     #=> 'get_bucket 200 0.0352'
       #
       # # Canned Formatters
       #
@@ -42,7 +42,7 @@ module Seahorse
       #
       #   * `:client_class` - The name of the client class.
       #
-      #   * `:operation_name` - The name of the client request method.
+      #   * `:operation` - The name of the client request method.
       #
       #   * `:request_params` - The user provided request parameters. Long
       #     strings are truncated/summarized if they exceed the
@@ -98,6 +98,10 @@ module Seahorse
       #
       #   * `:http_response_body` - The http response body contents.
       #
+      #   * `:error_class`
+      #
+      #   * `:error_message`
+      #
       #   * `:config:option` - A specific configuration option, inspected.
       #     Replace the trailing `option` of this placeholder with a desired
       #     value, e.g., `:config:region`.  If the given option is not
@@ -152,7 +156,7 @@ module Seahorse
           raise NotImplementedError
         end
 
-        def _operation_name(response)
+        def _operation(response)
           response.context.operation_name
         end
 
@@ -236,6 +240,14 @@ module Seahorse
           raise NotImplementedError
         end
 
+        def _error_class(response)
+          raise NotImplementedError
+        end
+
+        def _error_message(response)
+          raise NotImplementedError
+        end
+
         # @param [Hash] hash
         # @return [String]
         def summarize_hash hash
@@ -288,19 +300,18 @@ module Seahorse
           #
           # @example A sample of the default format.
           #
-          #     [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
+          #     [AWS::S3 200 0.580066 0 retries] list_objects(:bucket_name => 'bucket')
           #
           # @return [Formatter]
           #
           def default
 
             pattern = []
-            pattern << "[AWS"
-            pattern << ":service"
-            pattern << ":http_response_status"
-            pattern << ":duration"
+            pattern << "[:client_class"
+            pattern << ":http_resopnse_status_code"
+            pattern << ":total_time"
             pattern << ":retry_count retries]"
-            pattern << ":operation(:options)"
+            pattern << ":operation(:request_params)"
             pattern << ":error_class"
             pattern << ":error_message"
 
@@ -313,17 +324,16 @@ module Seahorse
           #
           # @example A sample of the short format
           #
-          #     [AWS SimpleEmailService 200 0.494532] list_verified_email_addresses
+          #     [AWS::S3 200 0.494532] list_buckets
           #
           # @return [Formatter]
           #
           def short
 
             pattern = []
-            pattern << "[AWS"
-            pattern << ":service"
-            pattern << ":http_response_status"
-            pattern << ":duration]"
+            pattern << "[:client_class"
+            pattern << ":http_resopnse_status_code"
+            pattern << ":total_time]"
             pattern << ":operation"
             pattern << ":error_class"
 
@@ -333,63 +343,31 @@ module Seahorse
 
           # A debug format that dumps most of the http request and response
           # data.
-          #
-          # @example A truncated sample of the debug format.
-          #
-          #   +-------------------------------------------------------------------------------
-          #   | AWS us-east-1 SimpleEmailService list_verified_email_addresses 0.429189 0 retries
-          #   +-------------------------------------------------------------------------------
-          #   |   REQUEST
-          #   +-------------------------------------------------------------------------------
-          #   |    METHOD: POST
-          #   |       URL: https://email.us-east-1.amazonaws.com::443:/
-          #   |   HEADERS: {"content-type"=>"application/x-www-form-urlencoded" ...
-          #   |      BODY: Action=ListVerifiedEmailAddresses&Timestamp= ...
-          #   +-------------------------------------------------------------------------------
-          #   |  RESPONSE
-          #   +-------------------------------------------------------------------------------
-          #   |    STATUS: 200
-          #   |   HEADERS: {"x-amzn-requestid"=>["..."], ...
-          #   |      BODY: <ListVerifiedEmailAddressesResponse ...
-          #
           # @return [Formatter]
-          #
           def debug
 
             sig_pattern = []
-            sig_pattern << ':region'
-            sig_pattern << ':service'
-            sig_pattern << ':operation'
-            sig_pattern << ':duration'
+            sig_pattern << ':class_name#:operation'
+            sig_pattern << ':total_time'
             sig_pattern << ':retry_count retries'
-
-            uri_pattern = []
-            uri_pattern << ':http_request_protocol'
-            uri_pattern << '://'
-            uri_pattern << ':http_request_host'
-            uri_pattern << '::'
-            uri_pattern << ':http_request_port'
-            uri_pattern << ':'
-            uri_pattern << ':http_request_uri'
 
             line = "+" + '-' * 79
 
             pattern = []
             pattern << line
-            pattern << "| AWS #{sig_pattern.join(' ')}"
+            pattern << "| #{sig_pattern.join(' ')}"
             pattern << line
             pattern << "|   REQUEST"
             pattern << line
-            pattern << "|    METHOD: :http_request_method"
-            pattern << "|       URL: #{uri_pattern.join}"
-            pattern << "|   HEADERS: :http_request_headers"
-            pattern << "|      BODY: :http_request_body"
+            pattern << "| :http_request_method :http_request_uri"
+            pattern << "| :http_request_headers"
+            pattern << "| :http_request_body"
             pattern << line
             pattern << "|  RESPONSE"
             pattern << line
-            pattern << "|    STATUS: :http_response_status"
-            pattern << "|   HEADERS: :http_response_headers"
-            pattern << "|      BODY: :http_response_body"
+            pattern << "| :http_resopnse_status_code"
+            pattern << "| :http_response_headers"
+            pattern << "| :http_response_body"
 
             Formatter.new(pattern.join("\n") + "\n")
 
@@ -399,7 +377,7 @@ module Seahorse
           #
           # @example A sample of the colored format (sans the ansi colors).
           #
-          #     [AWS SimpleEmailService 200 0.580066 0 retries] list_verified_email_addresses()
+          #     [AWS::S3 200 0.580066 0 retries] list_objects(:bucket_name => 'bucket')
           #
           # @return [Formatter]
           #
@@ -412,10 +390,10 @@ module Seahorse
             pattern = []
             pattern << "#{bold}#{color}[AWS"
             pattern << ":service"
-            pattern << ":http_response_status"
-            pattern << ":duration"
+            pattern << ":http_resopnse_status_code"
+            pattern << ":total_time"
             pattern << ":retry_count retries]#{reset}#{bold}"
-            pattern << ":operation(:options)"
+            pattern << ":operation(:request_params)"
             pattern << ":error_class"
             pattern << ":error_message#{reset}"
 
