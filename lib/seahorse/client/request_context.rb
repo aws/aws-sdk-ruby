@@ -28,7 +28,6 @@ module Seahorse
         @operation_name = options[:operation_name]
         @params = options[:params] || {}
         @config = options[:config]
-        @events = options[:events] || EventEmitter.new
         @http_request = options[:http_request] || Http::Request.new
         @http_response = options[:http_response] || Http::Response.new
         @metadata = {}
@@ -42,9 +41,6 @@ module Seahorse
 
       # @return [Configuration] The client configuration.
       attr_accessor :config
-
-      # @return [EventEmitter]
-      attr_accessor :events
 
       # @return [Http::Request]
       attr_accessor :http_request

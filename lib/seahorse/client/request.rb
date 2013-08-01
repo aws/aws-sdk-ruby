@@ -28,13 +28,6 @@ module Seahorse
       # @return [RequestContext]
       attr_reader :context
 
-      # Registers an event listener for the named event.  The listener
-      # can be an argument that responds to `#call` or a block.
-      # @see EventEmitter#on
-      def on(event_name, listener = nil, &callback)
-        @context.on(event_name, &callback)
-      end
-
       # Sends the request, returning a {Response Response}.
       #
       #     response = request.send

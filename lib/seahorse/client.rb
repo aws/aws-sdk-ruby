@@ -16,7 +16,6 @@ module Seahorse
 
     autoload :Base, 'seahorse/client/base'
     autoload :Configuration, 'seahorse/client/configuration'
-    autoload :EventEmitter, 'seahorse/client/event_emitter'
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :Plugin, 'seahorse/client/plugin'

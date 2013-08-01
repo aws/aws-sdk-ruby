@@ -56,30 +56,6 @@ module Seahorse
 
       end
 
-      describe '#events' do
-
-        it 'defaults to a new EventEmitter' do
-          events = Object.new
-          allow(EventEmitter).to receive(:new).with(events) do
-            expect(RequestContext.new.events).to be(events)
-          end
-        end
-
-        it 'can be set in the constructor' do
-          events = Object.new
-          context = RequestContext.new(events: events)
-          expect(context.events).to be(events)
-        end
-
-        it 'can be set' do
-          events = Object.new
-          context = RequestContext.new
-          context.events = events
-          expect(context.events).to be(events)
-        end
-
-      end
-
       describe '#http_request' do
 
         it 'defaults to a Http::Request object' do
@@ -122,19 +98,6 @@ module Seahorse
         end
 
       end
-
-      describe '#on and #emit' do
-
-        it 'registers an event listener on #events' do
-          emitted = false
-          context = RequestContext.new
-          context.on(:event_name) { emitted = true }
-          context.emit(:event_name)
-          expect(emitted).to be(true)
-        end
-
-      end
-
     end
   end
 end
