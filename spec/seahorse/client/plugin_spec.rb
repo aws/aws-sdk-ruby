@@ -120,7 +120,7 @@ module Seahorse
 
         it 'accepts a block and constructs a handler class from it' do
           plugin = Class.new(Plugin) do
-            handler(DummySendHandler, priorty: :send)
+            handler(DummySendHandler, priority: :send)
             handler do |context|
               context[:executed] = true
               handler.call(context)
@@ -129,7 +129,7 @@ module Seahorse
           plugin.new.add_handlers(handlers, config)
           context = RequestContext.new
           resp = handlers.to_stack(config).call(context)
-          expect(resp.context[:executed]).to be(true)
+          expect(resp.context[:executed]).to eq(true)
         end
 
         it 'accepts a priority with the block' do
