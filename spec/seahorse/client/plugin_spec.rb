@@ -142,6 +142,30 @@ module Seahorse
           expect(handlers.first).not_to be_kind_of(DummySendHandler)
         end
 
+        it 'defines a class if the name is a String or Symbol' do
+          plugin = Class.new(Plugin) do
+            handler('Handler1') {}
+            handler(:Handler2) {}
+          end
+          stub_const('Plugin1', plugin)
+
+          expect(defined? Plugin1::Handler1).to eq nil
+          expect(defined? Plugin1::Handler2).to eq nil
+
+          plugin.new.add_handlers(handlers, config)
+          expect(handlers.to_a).to eq([Plugin1::Handler2, Plugin1::Handler1])
+        end
+
+        it 'only defines String/Symbol constant once' do
+          stub_const 'Plugin1', Class.new(Plugin) { handler('Handler1') {} }
+
+          5.times do
+            handlers = HandlerList.new
+            Plugin1.new.add_handlers(handlers, config)
+            expect(handlers.to_a).to eq([Plugin1::Handler1])
+          end
+        end
+
       end
     end
   end

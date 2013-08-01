@@ -29,17 +29,21 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_handlers(handlers, config)
-        self.class.handlers.each do |handler, options|
-          handler = handler_from_proc(handler) if handler.is_a?(Proc)
+        self.class.handlers.each do |handler, options, name|
+          handler = handler_from_proc(handler, name) if handler.is_a?(Proc)
           handlers.add(handler, options)
         end
       end
 
       private
 
-      def handler_from_proc(block)
-        Class.new(Handler) do
-          define_method(:call, &block)
+      def handler_from_proc(block, name)
+        if name && self.class.const_defined?(name)
+          return self.class.const_get(name)
+        end
+
+        Class.new(Handler) { define_method(:call, &block) }.tap do |klass|
+          self.class.send(:const_set, name, klass) if name
         end
       end
 
@@ -61,10 +65,13 @@ module Seahorse
         # @overload handler(options = {}, &handler_block)
         #   @option options [Symbol] priority (:build)
         #
-        def handler(*args, &block)
-          options = args.last.is_a?(Hash) ? args.pop : {}
-          handler = args.empty? ? Proc.new : args.first
-          handlers << [handler, options]
+        def handler(handler = nil, options = {}, &block)
+          if handler.respond_to?(:new)
+            handlers << [handler, options]
+          else
+            handler, options = nil, handler if Hash === handler
+            handlers << [Proc.new, options, handler]
+          end
         end
 
         # @api private
