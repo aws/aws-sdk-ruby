@@ -121,6 +121,21 @@ module Seahorse
 
         end
 
+        describe '#delete' do
+          it 'deletes a header by key' do
+            headers['foo'] = 'bar'
+            headers.delete('foo')
+            expect(headers).to_not have_key('foo')
+          end
+
+          it 'deletes header with a symbol key' do
+            headers['foo'] = 'bar'
+            headers.delete(:foo)
+            expect(headers).to_not have_key('foo')
+            expect(headers).to_not have_key(:foo)
+          end
+        end
+
         describe '#key?' do
 
           it 'returns true if the header has been set' do
