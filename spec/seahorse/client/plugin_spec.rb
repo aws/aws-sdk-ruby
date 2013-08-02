@@ -159,13 +159,12 @@ module Seahorse
 
         it 'only defines the handler class once' do
           stub_const 'MyPlugin', Class.new(Plugin)
-          expect(MyPlugin).to receieve(
-          stub_const 'MyPlugin', Class.new(Plugin) { handler('MyHandler') {} }
-          5.times do
-            handlers = HandlerList.new
-            MyPlugin.new.add_handlers(handlers, config)
-            expect(handlers.to_a).to eq([MyPlugin::MyHandler])
-          end
+          expect(MyPlugin).to receive(:const_set).
+            with('MyHandler', anything).once
+
+          MyPlugin.handler('MyHandler') {|context|}
+          handlers = HandlerList.new
+          5.times { MyPlugin.new.add_handlers(handlers, config) }
         end
 
       end
