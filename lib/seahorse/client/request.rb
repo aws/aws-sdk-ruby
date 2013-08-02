@@ -84,9 +84,7 @@ module Seahorse
       #
       # @return [Response]
       def send_request(&block)
-        if block_given?
-          @context.http_response.body = Http::BodyStream.new(&block)
-        end
+        @context.http_response.body = BlockIO.new(&block) if block_given?
         @handlers.to_stack.call(@context)
       end
 

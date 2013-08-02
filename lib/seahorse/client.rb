@@ -15,6 +15,7 @@ module Seahorse
   module Client
 
     autoload :Base, 'seahorse/client/base'
+    autoload :BlockIO, 'seahorse/client/block_io'
     autoload :Configuration, 'seahorse/client/configuration'
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerList, 'seahorse/client/handler_list'

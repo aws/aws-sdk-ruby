@@ -90,9 +90,16 @@ module Seahorse
           expect(data).to eq(['part1', 'part2', 'part3'])
         end
 
+        it 'counts the bytes yielded' do
+          resp = request.send_request { |chunk| }
+          expect(resp.http_response.body.size).to eq(15)
+        end
+
         it 'does not buffer the response chunks' do
           response = request.send_request { |chunk| }
-          expect(response.http_response.body.read).to be(nil)
+          body = response.http_response.body
+          expect(body.read).to eq('')
+          expect { body.rewind }.to raise_error(NotImplementedError)
         end
 
       end
