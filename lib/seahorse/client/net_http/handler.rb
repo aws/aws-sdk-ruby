@@ -30,6 +30,8 @@ module Seahorse
           Response.new(context: context).signal_complete
         end
 
+        # @param [Configuration] config
+        # @return [ConnectionPool]
         def pool_for(config)
           ConnectionPool.for(pool_options(config))
         end
