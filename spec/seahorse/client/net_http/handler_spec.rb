@@ -23,80 +23,79 @@ module Seahorse
         before(:each) { WebMock.disable_net_connect! }
 
         let(:config) { OpenStruct.new }
-        let(:handler) { Handler.new(config) }
+
+        let(:handler) { Handler.new }
+
         let(:make_request) { handler.call(context) }
+
         let(:context) do
-          RequestContext.new.tap {|c| c.http_request.endpoint = endpoint }
+          RequestContext.new.tap do |context|
+            context.config = config
+            context.http_request.endpoint = endpoint
+          end
         end
 
         def endpoint
           @endpoint ||= Http::Endpoint.new('test.endpoint.api')
         end
 
-        describe '#config' do
-
-          it 'provides access to the configuration' do
-            config = OpenStruct.new
-            expect(Handler.new(config).config).to be(config)
-          end
-
-        end
-
         describe '#pool' do
 
+          let(:handler_pool) { handler.pool_for(config) }
+
           it 'constructs a ConnectionPool' do
-            expect(handler.pool).to be_kind_of(ConnectionPool)
+            expect(handler_pool).to be_kind_of(ConnectionPool)
           end
 
           it 'configures the pool#http_proxy' do
             config.http_proxy = 'http://proxy.com'
-            expect(handler.pool.http_proxy).to eq(URI.parse('http://proxy.com'))
+            expect(handler_pool.http_proxy).to eq(URI.parse('http://proxy.com'))
           end
 
           it 'configures the pool#http_continue_timeout' do
             config.http_continue_timeout = 123
-            expect(handler.pool.http_continue_timeout).to eq(123)
+            expect(handler_pool.http_continue_timeout).to eq(123)
           end
 
           it 'configures the pool#http_open_timeout' do
             config.http_open_timeout = 123
-            expect(handler.pool.http_open_timeout).to eq(123)
+            expect(handler_pool.http_open_timeout).to eq(123)
           end
 
           it 'configures the pool#http_read_timeout' do
             config.http_read_timeout = 123
-            expect(handler.pool.http_read_timeout).to eq(123)
+            expect(handler_pool.http_read_timeout).to eq(123)
           end
 
           it 'configures the pool#http_idle_timeout' do
             config.http_idle_timeout = 123
-            expect(handler.pool.http_idle_timeout).to eq(123)
+            expect(handler_pool.http_idle_timeout).to eq(123)
           end
 
           it 'configures the pool#http_wire_trace' do
             config.http_wire_trace = true
-            expect(handler.pool.http_wire_trace).to eq(true)
+            expect(handler_pool.http_wire_trace).to eq(true)
           end
 
           it 'configures the pool#logger' do
             config.http_wire_trace = true
             config.logger = Object.new
-            expect(handler.pool.logger).to be(config.logger)
+            expect(handler_pool.logger).to be(config.logger)
           end
 
           it 'configures the pool#ssl_verify_peer' do
             config.ssl_verify_peer = false
-            expect(handler.pool.ssl_verify_peer).to eq(false)
+            expect(handler_pool.ssl_verify_peer).to eq(false)
           end
 
           it 'configures the pool#ssl_ca_bundle' do
             config.ssl_ca_bundle = '/path/to/ca-bundle.crt'
-            expect(handler.pool.ssl_ca_bundle).to eq('/path/to/ca-bundle.crt')
+            expect(handler_pool.ssl_ca_bundle).to eq('/path/to/ca-bundle.crt')
           end
 
           it 'configures the pool#ssl_ca_directory' do
             config.ssl_ca_bundle = '/path/to/certs'
-            expect(handler.pool.ssl_ca_bundle).to eq('/path/to/certs')
+            expect(handler_pool.ssl_ca_bundle).to eq('/path/to/certs')
           end
 
         end

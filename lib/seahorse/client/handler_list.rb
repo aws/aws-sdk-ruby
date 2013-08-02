@@ -60,11 +60,10 @@ module Seahorse
       # Constructs the handlers recursively, building a handler stack.
       # The `:send` handler will be at the top of the stack and the
       # `:before_validate` handlers will be at the bottom.
-      # @param [Configuration] config
       # @return [Handler]
-      def to_stack(config)
+      def to_stack
         inject(nil) do |stack, handler|
-          handler.new(config, stack)
+          handler.new(stack)
         end
       end
 

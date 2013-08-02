@@ -44,9 +44,10 @@ module Seahorse
             logger: @logger,
             log_level: @log_level,
             log_formatter: @formatter)
-          @handler ||= Handler.new(@config, lambda { |context|
-            Response.new(context: context).signal_complete })
-          @handler.call(RequestContext.new)
+          @handler ||= Handler.new(lambda { |context|
+            Response.new(context: context).signal_complete
+          })
+          @handler.call(RequestContext.new(config: @config))
         end
 
         it 'populates the request context with timing information' do

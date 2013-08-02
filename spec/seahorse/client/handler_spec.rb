@@ -20,45 +20,34 @@ module Seahorse
       let(:context) { RequestContext.new }
       let(:response) { Response.new }
 
-      it 'provides access to the configuration' do
-        config = Object.new
-        expect(Handler.new(config).config).to be(config)
-      end
-
       it 'provides access to the nested handler' do
-        handler = Handler.new('config')
-        expect(Handler.new('config', handler).handler).to be(handler)
+        handler = Handler.new
+        expect(Handler.new(handler).handler).to be(handler)
       end
 
       it 'responds to #call' do
-        expect(Handler.new('config')).to respond_to(:call)
+        expect(Handler.new).to respond_to(:call)
       end
 
       it 'chains #call to the nested handler' do
         handler = double('handler')
         expect(handler).to receive(:call).with(context) { response }
-        Handler.new('config', handler).call(context)
+        Handler.new(handler).call(context)
       end
 
       it 'returns the response from the nested handler' do
         handler = double('handler')
         expect(handler).to receive(:call).with(context) { response }
-        expect(Handler.new('config', handler).call(context)).to be(response)
+        expect(Handler.new(handler).call(context)).to be(response)
       end
 
       describe '#inspect' do
-        it 'does not display configuration object' do
-          stub_const('CustomHandler', Class.new(Handler))
-          handler = CustomHandler.new('config')
-          expect(handler.inspect).to eql '#<CustomHandler @handler=nil>'
-        end
 
         it 'overrides class name for anonymous handler' do
-          handler = Class.new(Handler).new('config')
+          handler = Class.new(Handler).new
           expect(handler.inspect).to eql '#<UnnamedHandler @handler=nil>'
         end
       end
-
     end
   end
 end

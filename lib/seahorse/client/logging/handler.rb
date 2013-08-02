@@ -22,22 +22,24 @@ module Seahorse
           context[:started_at] = Time.now
           super.on_complete do |response|
             context[:completed_at] = Time.now
-            log(response)
+            log(response.context.config, response)
           end
         end
 
         private
 
+        # @param [Configuration] config
         # @param [Response] response
         # @return [void]
-        def log(response)
-          @config.logger.send(@config.log_level, format(response))
+        def log(config, response)
+          config.logger.send(config.log_level, format(config, response))
         end
 
+        # @param [Configuration] config
         # @param [Response] response
         # @return [String]
-        def format(response)
-          @config.log_formatter.format(response)
+        def format(config, response)
+          config.log_formatter.format(response)
         end
 
       end

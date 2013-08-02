@@ -218,10 +218,10 @@ module Seahorse
           #   system default will be used if available.
           #
           # @return [ConnectionPool]
-          def new options = {}
+          def for options = {}
             options = pool_options(options)
             @pools_mutex.synchronize do
-              @pools[options] ||= super(options)
+              @pools[options] ||= new(options)
             end
           end
 

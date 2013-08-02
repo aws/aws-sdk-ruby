@@ -87,7 +87,7 @@ module Seahorse
         if block_given?
           @context.http_response.body = Http::ResponseBodyStream.new(&block)
         end
-        @handlers.to_stack(@context.config).call(@context)
+        @handlers.to_stack.call(@context)
       end
 
     end

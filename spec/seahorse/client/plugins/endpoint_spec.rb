@@ -39,7 +39,7 @@ module Seahorse
         def handle_request!(options = {})
           config = apply_plugin!(options)
           context = RequestContext.new(config: config)
-          handlers.to_stack(config).call(context)
+          handlers.to_stack.call(context)
         end
 
         it 'adds an #endpoint option to config' do

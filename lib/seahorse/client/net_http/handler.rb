@@ -23,29 +23,25 @@ module Seahorse
         # from the given http verb.
         class InvalidHttpVerbError < StandardError; end
 
-        # @param [Configuration] config
-        def initialize(config, handler = nil)
-          @config = config
-          @pool = ConnectionPool.new(pool_options(@config))
-        end
-
-        # @return [ConnectionPool]
-        attr_reader :pool
-
         # @param [RequestContext] context
         # @return [Response]
         def call(context)
-          transmit(context.http_request, context.http_response)
+          transmit(context.config, context.http_request, context.http_response)
           Response.new(context: context).signal_complete
+        end
+
+        def pool_for(config)
+          ConnectionPool.for(pool_options(config))
         end
 
         private
 
-        # @param [Http::Request] request
+        # @param [Configuration] config
+        # @param [Http::Response] response
         # @param [Http::Response] response
         # @return [void]
-        def transmit(request, response)
-          @pool.session_for(request.endpoint) do |http|
+        def transmit(config, request, response)
+          pool_for(config).session_for(request.endpoint) do |http|
             http.request(net_http_request(request)) do |resp|
 
               # extract HTTP status code and headers
