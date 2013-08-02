@@ -88,7 +88,7 @@ module Seahorse
         # @return [Class] Returns the handler class.
         def handler(*args, &block)
           options = args.last.is_a?(Hash) ? args.pop : {}
-          handler = block_given? ? block_handler(proc, *args) : args.first
+          handler = block_given? ? handler_for(proc, *args) : args.first
           handlers << [handler, options]
           handler
         end
@@ -104,7 +104,7 @@ module Seahorse
         end
 
         # @api private
-        def block_handler(block, name = nil)
+        def handler_for(block, name = nil)
           if name
             const_set(name, new_handler(block))
           else
