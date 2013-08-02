@@ -1,0 +1,10 @@
+{
+  "pagination": {
+    "ListJobs": {
+      "input_token": "Marker",
+      "more_results": "IsTruncated",
+      "limit_key": "MaxJobs",
+      "result_key": "Jobs"
+    }
+  }
+}

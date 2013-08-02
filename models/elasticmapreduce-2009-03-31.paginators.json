@@ -1,0 +1,7 @@
+{
+  "pagination": {
+    "DescribeJobFlows": {
+      "result_key": "JobFlows"
+    }
+  }
+}

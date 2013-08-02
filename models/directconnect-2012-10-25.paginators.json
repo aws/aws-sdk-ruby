@@ -1,0 +1,16 @@
+{
+  "pagination": {
+    "DescribeConnections": {
+      "result_key": "connections"
+    },
+    "DescribeOfferings": {
+      "result_key": "offerings"
+    },
+    "DescribeVirtualGateways": {
+      "result_key": "virtualGateways"
+    },
+    "DescribeVirtualInterfaces": {
+      "result_key": "virtualInterfaces"
+    }
+  }
+}

@@ -18,11 +18,25 @@ module Aws
     attr_accessor :config
   end
 
+  autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
 
+  module Signers
+    autoload :Version3, 'aws/signers/version_3'
+    autoload :Version4, 'aws/signers/version_4'
+  end
+
   module Plugins
+    autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
+    autoload :JsonSerializer, 'aws/plugins/json_serializer'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
+    autoload :VersionedApiLoader, 'aws/plugins/versioned_api_loader'
+
+    module Signers
+      autoload :Version3, 'aws/plugins/signers/version_3'
+      autoload :Version4, 'aws/plugins/signers/version_4'
+    end
   end
 
 end
