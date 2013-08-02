@@ -45,6 +45,35 @@ module Seahorse
           end
         end
 
+        # @overload request_handler(options = {}, &handler_block)
+        #   @option options [Symbol] priority (:build)
+        #
+        # @overload request_handler(handler_name, options = {}, &handler_block)
+        #   @param [String] handler_name
+        #   @option options [Symbol] priority (:build)
+        def request_handler(*args, &block)
+          handler_block = lambda do |context|
+            block.call(context)
+            @handler.call(context)
+          end
+          handler(*args, &handler_block)
+        end
+
+        # @overload response_handler(options = {}, &handler_block)
+        #   @option options [Symbol] priority (:build)
+        #
+        # @overload response_handler(handler_name, options = {}, &handler_block)
+        #   @param [String] handler_name
+        #   @option options [Symbol] priority (:build)
+        def response_handler(*args, &block)
+          handler_block = lambda do |context|
+            @handler.call(context).on_complete do |response|
+              block.call(response)
+            end
+          end
+          handler(*args, &handler_block)
+        end
+
         # @overload handler(options = {}, &handler_block)
         #   @option options [Symbol] priority (:build)
         #
