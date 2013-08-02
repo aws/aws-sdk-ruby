@@ -16,8 +16,8 @@ module Seahorse
     module Plugins
       class NetHttp < Plugin
 
-        Client::NetHttp::ConnectionPool::OPTIONS.each_pair do |opt_name, default_value|
-          option(opt_name, default_value)
+        Client::NetHttp::ConnectionPool::OPTIONS.each_pair do |name, default|
+          option(name, default)
         end
 
         handler(Client::NetHttp::Handler, priority: :send)
