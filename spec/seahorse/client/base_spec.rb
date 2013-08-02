@@ -208,7 +208,7 @@ module Seahorse
           end
 
           it 'replaces default plugins with the list specified in the API' do
-            PluginA = plugin_a
+            stub_const('Seahorse::Client::PluginA', plugin_a)
             api = { 'plugins' => ['Seahorse::Client::PluginA'] }
             client_class = Base.define(api: api)
             expect(client_class.plugins.count).to eq(4)
