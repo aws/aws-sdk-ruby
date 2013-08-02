@@ -35,10 +35,10 @@ module Seahorse
         @handlers[:before_validate] = []
       end
 
-      # @param [Class] handler
+      # @param [Class] handler_class
       # @option options [Symbol] priority (:build)
-      def add(handler, options = {})
-        @handlers[options[:priority] || :build].unshift(handler)
+      def add(handler_class, options = {})
+        @handlers[options[:priority] || :build].unshift(handler_class)
       end
 
       # Yields the handlers.
