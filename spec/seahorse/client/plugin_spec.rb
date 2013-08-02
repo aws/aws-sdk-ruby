@@ -118,53 +118,83 @@ module Seahorse
           expect(handlers).to include(handler_class)
         end
 
-        it 'accepts a block and constructs a handler class from it' do
+        it 'accepts a priority option' do
+          handler1 = Class.new(Handler)
+          handler2 = Class.new(Handler)
           plugin = Class.new(Plugin) do
-            handler(DummySendHandler, priority: :send)
+            handler(handler1, priority: :validate)
+            handler(handler2, priority: :build)
+          end
+          plugin.new.add_handlers(handlers, config)
+          expect(handlers.to_a).to eq([handler2, handler1])
+        end
+
+        it 'builds a handler from a block' do
+          plugin = Class.new(Plugin) do
             handler do |context|
-              context[:executed] = true
-              handler.call(context)
+              'handler-return-value'
             end
           end
           plugin.new.add_handlers(handlers, config)
-          context = RequestContext.new
-          resp = handlers.to_stack(config).call(context)
-          expect(resp.context[:executed]).to eq(true)
+          resp = handlers.to_stack(config).call('context')
+          expect(resp).to eq('handler-return-value')
         end
 
         it 'accepts a priority with the block' do
           plugin = Class.new(Plugin) do
-            handler(DummySendHandler, priority: :send)
-            handler(priority: :send) {}
+            handler(priority: :validate) do |context|
+              context << :validate
+              super(context)
+            end
+            handler(priority: :build) do |context|
+              context << :build
+              @handler.call(context)
+            end
+            handler(priority: :sign) do |context|
+              context << :sign
+              handler.call(context)
+            end
+            handler(priority: :send) do |context|
+              context << :send
+              context
+            end
           end
           plugin.new.add_handlers(handlers, config)
-          expect(handlers.count).to be(1)
-          expect(handlers.first).not_to be_kind_of(DummySendHandler)
+          resp = handlers.to_stack(config).call([])
+          expect(resp).to eq([:validate, :build, :sign, :send])
         end
 
-        it 'defines a class if the name is a String or Symbol' do
-          stub_const('MyPlugin', Class.new(Plugin) do
-            handler('Handler1') {}
-            handler(:Handler2) {}
-          end)
+        it 'returns the handler class' do
+          handler_class = Class.new(Handler)
+          plugin = Class.new(Plugin)
+          expect(plugin.handler(handler_class)).to be(handler_class)
+        end
 
-          expect(MyPlugin::Handler1.ancestors).to include(Handler)
-          expect(MyPlugin::Handler2.ancestors).to include(Handler)
+        it 'returns the handler class created from a block' do
+          plugin = Class.new(Plugin)
+          handler = plugin.handler { |context| 'handler-return' }
+          expect(handler.ancestors).to include(Handler)
+          expect(handler.new(config).call('context')).to eq('handler-return')
+        end
 
-          MyPlugin.new.add_handlers(handlers, config)
-          expect(handlers.to_a).to eq([
-            MyPlugin::Handler2, MyPlugin::Handler1
-          ])
+        it 'assigns the handler to a constant if a name is given' do
+          plugin = Class.new(Plugin)
+          expect(plugin.const_defined?('MyHandler')).to be(false)
+          handler_class = plugin.handler('MyHandler') { |arg| arg }
+          expect(plugin::MyHandler).to be(handler_class)
+        end
+
+        it 'accepts the handler name as a symbol' do
+          plugin = Class.new(Plugin)
+          handler_class = plugin.handler(:MyHandler) { |arg| arg }
+          expect(plugin::MyHandler).to be(handler_class)
         end
 
         it 'only defines the handler class once' do
-          stub_const 'MyPlugin', Class.new(Plugin)
-          expect(MyPlugin).to receive(:const_set).
-            with('MyHandler', anything).once
-
-          MyPlugin.handler('MyHandler') {|context|}
-          handlers = HandlerList.new
-          5.times { MyPlugin.new.add_handlers(handlers, config) }
+          plugin = Class.new(Plugin)
+          expect(plugin).to receive(:const_set).with('MyHandler', anything).once
+          plugin.handler('MyHandler') {|context|}
+          5.times { plugin.new.add_handlers(HandlerList.new, config) }
         end
 
       end

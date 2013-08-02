@@ -56,13 +56,12 @@ module Seahorse
         #   @param [Class] handler_class
         #   @option options [Symbol] priority (:build)
         #
+        # @return [Class] Returns the handler class.
         def handler(*args, &block)
           options = args.last.is_a?(Hash) ? args.pop : {}
-          if block_given?
-            handlers << [handler_from_proc(args.first, &block), options]
-          else
-            handlers << [args.first, options]
-          end
+          handler = block_given? ? block_handler(proc, *args) : args.first
+          handlers << [handler, options]
+          handler
         end
 
         # @api private
@@ -76,16 +75,16 @@ module Seahorse
         end
 
         # @api private
-        def handler_from_proc(name = nil, &block)
+        def block_handler(block, name = nil)
           if name
-            const_set(name, new_handler(&block))
+            const_set(name, new_handler(block))
           else
-            new_handler(&block)
+            new_handler(block)
           end
         end
 
         # @api private
-        def new_handler(&block)
+        def new_handler(block)
           Class.new(Handler) do
             define_method(:call, &block)
           end
