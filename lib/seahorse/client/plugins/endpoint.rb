@@ -21,11 +21,7 @@ module Seahorse
         option(:ssl_default, true)
 
         request_handler(:EndpointHandler) do |context|
-          context.http_request.endpoint = endpoint_for(context.config)
-        end
-
-        def self.endpoint_for(config)
-          Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
+          context.http_request.endpoint = Http::Endpoint.from(context.config)
         end
 
       end
