@@ -21,15 +21,14 @@ module Seahorse
         # @option options [Endpoint] :endpoint (nil)
         # @option options [String] :http_method ('GET')
         # @option options [String] :path ('/')
-        # @option options [Hash] :headers (Headers.new)
-        # @option options [#read, #rewind] :body (StringIO.new) Must be an
-        #   IO-like object that responds to `#read` and `#rewind`.
+        # @option options [Headers] :headers (Headers.new)
+        # @option options [Body] :body (StringIO.new)
         def initialize(options = {})
           @endpoint = options[:endpoint]
           @http_method = options[:http_method] || 'GET'
           @path = options[:path] || '/'
           @headers = options[:headers] || Headers.new
-          @body = options[:body] || StringIO.new('')
+          @body = options[:body] || StringIO.new
         end
 
         # @return [Endpoint, nil]
@@ -44,8 +43,7 @@ module Seahorse
         # @return [String] The path name and querystring, e.g. `/abc?mno=xyz`.
         attr_accessor :path
 
-        # @return [#read, #rewind] An IO-like object that responds to `#read`
-        #  and `#rewind`.
+        # @return [IO]
         attr_accessor :body
 
       end

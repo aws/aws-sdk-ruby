@@ -11,16 +11,20 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'stringio'
+
 module Seahorse
   module Client
     module Http
       class Response
 
-        # @api private
-        def initialize
+        # @option options [Integer] :status_code (nil)
+        # @option options [Headers] :headers (Headers.new)
+        # @option options [IO] :body (StringIO.new)
+        def initialize(options = {})
           @status_code = nil
-          @headers = Headers.new
-          @body = ResponseBodyBuffer.new
+          @headers = options[:headers] || Headers.new
+          @body = options[:body] || StringIO.new
         end
 
         # @return [Integer, nil]
@@ -29,7 +33,7 @@ module Seahorse
         # @return [Headers]
         attr_accessor :headers
 
-        # @return [ResponseBody]
+        # @return [IO]
         attr_accessor :body
 
       end

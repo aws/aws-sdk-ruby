@@ -53,12 +53,16 @@ module Seahorse
 
         describe '#body' do
 
-          it 'defaults to an ResponseBody' do
-            expect(Response.new.body).to be_kind_of(ResponseBody)
+          it 'defaults to an IO object' do
+            expect(Response.new.body).to respond_to(:write)
+            expect(Response.new.body).to respond_to(:read)
+            expect(Response.new.body).to respond_to(:rewind)
           end
 
           it 'defaults to an empty body' do
-            expect(Response.new.body).to be_empty
+            body = Response.new.body
+            body.rewind
+            expect(body.read).to eq('')
           end
 
           it 'can be set' do

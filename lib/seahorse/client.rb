@@ -29,9 +29,6 @@ module Seahorse
       autoload :Headers, 'seahorse/client/http/headers'
       autoload :Request, 'seahorse/client/http/request'
       autoload :Response, 'seahorse/client/http/response'
-      autoload :ResponseBody, 'seahorse/client/http/response_body'
-      autoload :ResponseBodyBuffer, 'seahorse/client/http/response_body_buffer'
-      autoload :ResponseBodyStream, 'seahorse/client/http/response_body_stream'
     end
 
     module Logging
