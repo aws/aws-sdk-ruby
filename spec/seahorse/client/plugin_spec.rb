@@ -143,26 +143,28 @@ module Seahorse
         end
 
         it 'defines a class if the name is a String or Symbol' do
-          stub_const('DummyPlugin', Class.new(Plugin) do
+          stub_const('MyPlugin', Class.new(Plugin) do
             handler('Handler1') {}
             handler(:Handler2) {}
           end)
 
-          expect(defined? DummyPlugin::Handler1).to eq nil
-          expect(defined? DummyPlugin::Handler2).to eq nil
+          expect(MyPlugin::Handler1.ancestors).to include(Handler)
+          expect(MyPlugin::Handler2.ancestors).to include(Handler)
 
-          DummyPlugin.new.add_handlers(handlers, config)
+          MyPlugin.new.add_handlers(handlers, config)
           expect(handlers.to_a).to eq([
-            DummyPlugin::Handler2, DummyPlugin::Handler1
+            MyPlugin::Handler2, MyPlugin::Handler1
           ])
         end
 
-        it 'only defines String/Symbol constant once' do
-          stub_const 'DummyPlugin', Class.new(Plugin) { handler('Handler1') {} }
+        it 'only defines the handler class once' do
+          stub_const 'MyPlugin', Class.new(Plugin)
+          expect(MyPlugin).to receieve(
+          stub_const 'MyPlugin', Class.new(Plugin) { handler('MyHandler') {} }
           5.times do
             handlers = HandlerList.new
-            DummyPlugin.new.add_handlers(handlers, config)
-            expect(handlers.to_a).to eq([DummyPlugin::Handler1])
+            MyPlugin.new.add_handlers(handlers, config)
+            expect(handlers.to_a).to eq([MyPlugin::MyHandler])
           end
         end
 

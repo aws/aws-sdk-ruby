@@ -29,21 +29,8 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_handlers(handlers, config)
-        self.class.handlers.each do |handler, options, name|
-          handler = handler_from_proc(handler, name) if handler.is_a?(Proc)
-          handlers.add(handler, options)
-        end
-      end
-
-      private
-
-      def handler_from_proc(block, name)
-        if name && self.class.const_defined?(name)
-          return self.class.const_get(name)
-        end
-
-        Class.new(Handler) { define_method(:call, &block) }.tap do |klass|
-          self.class.send(:const_set, name, klass) if name
+        self.class.handlers.each do |handler_class, options|
+          handlers.add(handler_class, options)
         end
       end
 
@@ -58,19 +45,23 @@ module Seahorse
           end
         end
 
-        # @overload handler(handler, options = {})
-        #   @param [Class] handler
-        #   @option options [Symbol] priority (:build)
-        #
         # @overload handler(options = {}, &handler_block)
         #   @option options [Symbol] priority (:build)
         #
-        def handler(handler = nil, options = {}, &block)
-          if handler.respond_to?(:new)
-            handlers << [handler, options]
+        # @overload handler(handler_name, options = {}, &handler_block)
+        #   @param [String] handler_name
+        #   @option options [Symbol] priority (:build)
+        #
+        # @overload handler(handler_class, options = {})
+        #   @param [Class] handler_class
+        #   @option options [Symbol] priority (:build)
+        #
+        def handler(*args, &block)
+          options = args.last.is_a?(Hash) ? args.pop : {}
+          if block_given?
+            handlers << [handler_from_proc(args.first, &block), options]
           else
-            handler, options = nil, handler if Hash === handler
-            handlers << [Proc.new, options, handler]
+            handlers << [args.first, options]
           end
         end
 
@@ -82,6 +73,22 @@ module Seahorse
         # @api private
         def handlers
           @handlers ||= []
+        end
+
+        # @api private
+        def handler_from_proc(name = nil, &block)
+          if name
+            const_set(name, new_handler(&block))
+          else
+            new_handler(&block)
+          end
+        end
+
+        # @api private
+        def new_handler(&block)
+          Class.new(Handler) do
+            define_method(:call, &block)
+          end
         end
 
       end
