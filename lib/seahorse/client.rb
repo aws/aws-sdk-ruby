@@ -47,6 +47,7 @@ module Seahorse
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
+      autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
     end
 
     # @param (see Base.define)
