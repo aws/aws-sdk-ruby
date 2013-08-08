@@ -39,6 +39,10 @@ module Seahorse
       # @return [Http::Response]
       attr_reader :http_response
 
+      # @todo This will eventually return a structure like object, not a hash.
+      # @return [Hash] the hash of data returned from the service
+      attr_accessor :data
+
       # @return [Response] Returns self.
       def on_complete(&callback)
         @complete_mutex.synchronize do
