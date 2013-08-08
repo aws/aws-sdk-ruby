@@ -32,6 +32,10 @@ module Seahorse
         @raw_data.each {|k, v| load_data(k, v) }
       end
 
+      def keys
+        (super + @raw_data.keys).sort
+      end
+
       private
 
       def load_data(name, data)
@@ -40,7 +44,7 @@ module Seahorse
       end
 
       Hash.instance_methods.each do |meth|
-        next if meth =~ /^__|^(\[\]=?|initialize|default|object_id)$/
+        next if meth =~ /^__|^(\[\]=?|initialize|default|object_id|keys)$/
         class_eval(<<-eof, __FILE__, __LINE__ + 1)
           def #{meth}(*args, &block)
             load!

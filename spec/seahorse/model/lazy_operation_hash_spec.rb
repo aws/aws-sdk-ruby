@@ -29,6 +29,15 @@ module Seahorse
         end
       end
 
+      describe '#keys' do
+        it 'returns keys of unloaded objects' do
+          hash = {'a' => {'name' => 'op1'}, 'b' => {'name' => 'op2'}}
+          lazy = LazyOperationHash.new(hash)
+          lazy['a'] # hydrate a but not b
+          expect(lazy.keys).to eq %w(a b)
+        end
+      end
+
       describe '#[]' do
         it 'parses data when accessed' do
           ast = hash('operation' => {'name' => 'operation'})
