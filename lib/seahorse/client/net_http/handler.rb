@@ -55,6 +55,8 @@ module Seahorse
                 response.body.write(chunk)
               end
 
+              response.body.rewind
+
             end
           end
         end
