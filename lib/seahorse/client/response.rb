@@ -23,6 +23,7 @@ module Seahorse
       # @option options [String] :body ('')
       def initialize(options = {})
         @context = options[:context] || RequestContext.new
+        @data = options[:data] || {}
         @http_request = @context.http_request
         @http_response = @context.http_response
         @complete_mutex = Mutex.new

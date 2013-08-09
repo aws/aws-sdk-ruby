@@ -19,6 +19,7 @@ module Seahorse
         Plugins::Api,
         Plugins::Endpoint,
         Plugins::NetHttp,
+        Plugins::OperationMethods,
       ])
 
       # @option options [String] :endpoint

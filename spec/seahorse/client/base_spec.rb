@@ -204,6 +204,7 @@ module Seahorse
               Plugins::Api,
               Plugins::Endpoint,
               Plugins::NetHttp,
+              Plugins::OperationMethods
             ])
           end
 
@@ -211,7 +212,7 @@ module Seahorse
             stub_const('Seahorse::Client::PluginA', plugin_a)
             api = { 'plugins' => ['Seahorse::Client::PluginA'] }
             client_class = Base.define(api: api)
-            expect(client_class.plugins.count).to eq(4)
+            expect(client_class.plugins.count).to eq(5)
             expect(client_class.plugins).to include(plugin_a)
           end
 
@@ -234,7 +235,8 @@ module Seahorse
 
           it 'instructs plugins to #add_handlers' do
             plugin = double('plugin')
-            expect(plugin).to receive(:is_a?).twice.with(kind_of(Class)) { false }
+            expect(plugin).to receive(:is_a?).
+              at_least(:once).with(kind_of(Class)) { false }
             expect(plugin).to receive(:add_handlers).with(
               kind_of(HandlerList), kind_of(Configuration))
             client_class.add_plugin(plugin)

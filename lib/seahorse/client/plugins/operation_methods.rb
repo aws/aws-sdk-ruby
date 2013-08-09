@@ -11,25 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-if ENV['COVERAGE']
-  require 'simplecov'
-end
-
-require 'rspec'
-require 'webmock/rspec'
-require 'seahorse'
-
-# A helper :send_handler that does not send the request, it simply
-# returns an empty response.
-class DummySendHandler < Seahorse::Client::Handler
-  def call(context)
-    options = { context: context, data: context.config.response_data }
-    Seahorse::Client::Response.new(options).signal_complete
+module Seahorse
+  module Client
+    module Plugins
+      class OperationMethods < Plugin
+        initialize_client do |client|
+          client.config.api.operations.keys.each do |name|
+            client.class.send(:define_method, name) do |*args, &block|
+              build_request(name, *args, &block).send_request
+            end
+          end
+        end
+      end
+    end
   end
 end
-
-class DummySendPlugin < Seahorse::Client::Plugin
-  option(:response_data) { { result: 'success' } }
-  handler DummySendHandler, priority: :send
-end
-
