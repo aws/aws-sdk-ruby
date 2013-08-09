@@ -43,8 +43,8 @@ module Seahorse
       # @option options [Handler] :send_handler
       #
       def initialize(options = {})
-        plugins = build_plugins
-        @config = build_config(plugins, options)
+        plugins = self.class.build_plugins
+        @config = self.class.build_config(plugins, options)
         @handlers = handler_list(plugins, options)
       end
 
@@ -61,24 +61,6 @@ module Seahorse
 
       private
 
-      # @return [Array<Plugin>]
-      def build_plugins
-        self.class.plugins.map do |plugin|
-          plugin.is_a?(Class) ? plugin.new : plugin
-        end
-      end
-
-      # @param [Array<Plugin>] plugins
-      # @param [Hash] options
-      # @return [Configuration]
-      def build_config(plugins, options)
-        options = options.merge(:api => self.class.api) unless options[:api]
-        @config = Configuration.new(options)
-        plugins.each do |plugin|
-          plugin.add_options(@config) if plugin.respond_to?(:add_options)
-        end
-        @config
-      end
 
       # @param [Array<Plugin>] plugins
       # @option options [HttpHandler] :send_handler (nil)
@@ -198,6 +180,27 @@ module Seahorse
           client_class = Class.new(self)
           client_class.set_api(options[:api]) if options.key?(:api)
           client_class
+        end
+
+        # @return [Array<Plugin>]
+        # @api private
+        def build_plugins
+          plugins.map do |plugin|
+            plugin.is_a?(Class) ? plugin.new : plugin
+          end
+        end
+
+        # @param [Array<Plugin>] plugins
+        # @param [Hash] options
+        # @return [Configuration]
+        # @api private
+        def build_config(plugins, options)
+          options = options.merge(api: api) unless options[:api]
+          config = Configuration.new(options)
+          plugins.each do |plugin|
+            plugin.add_options(config) if plugin.respond_to?(:add_options)
+          end
+          config
         end
 
         private
