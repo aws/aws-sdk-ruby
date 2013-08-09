@@ -107,6 +107,16 @@ module Seahorse
 
       end
 
+      describe '.initialize_client' do
+        it 'provides a short-cut method for adding initializers' do
+          initialized_client = nil
+          client = client_with_plugin do
+            initialize_client {|c| initialized_client = c }
+          end
+          expect(client).to be(initialized_client)
+        end
+      end
+
       describe '.handler' do
 
         let(:handlers) { HandlerList.new }

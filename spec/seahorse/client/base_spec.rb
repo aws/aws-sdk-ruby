@@ -220,17 +220,20 @@ module Seahorse
 
         describe 'applying plugins' do
 
+          it 'instructs plugins to #initialize_client' do
+            initialized_client = nil
+            plugin = double('plugin')
+            plugin.stub(:initialize_client) {|c| initialized_client = c }
+            client_class.add_plugin(plugin)
+            client = client_class.new
+            expect(initialized_client).to be(client)
+          end
+
           it 'instructs plugins to #add_options' do
             plugin = double('plugin')
             plugin.stub(:add_options) { |config| config.add_option(:foo) }
             client_class.add_plugin(plugin)
             expect(client_class.new.config).to respond_to(:foo)
-          end
-
-          it 'calls plugin#add_options only if the plugin responds' do
-            plugin = Object.new
-            client_class.add_plugin(plugin)
-            client_class.new
           end
 
           it 'instructs plugins to #add_handlers' do
@@ -243,7 +246,7 @@ module Seahorse
             client_class.new
           end
 
-          it 'calls plugin#add_handlers only if the plugin responds' do
+          it 'does not call methods that plugin does not respond to' do
             plugin = Object.new
             client_class.add_plugin(plugin)
             client_class.new
