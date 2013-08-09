@@ -34,6 +34,14 @@ module Seahorse
         end
       end
 
+      # @param [Client::Base] client the client to initialize
+      # @return [void]
+      def initialize_client(client)
+        self.class.initializers.each do |block|
+          instance_exec(client, &block)
+        end
+      end
+
       class << self
 
         # (see Configuration#add_option)
@@ -95,6 +103,15 @@ module Seahorse
           handler = block_given? ? handler_for(proc, *args) : args.first
           handlers << [handler, options]
           handler
+        end
+
+        def initialize_client(&block)
+          initializers << block
+        end
+
+        # @api private
+        def initializers
+          @initializers ||= []
         end
 
         # @api private

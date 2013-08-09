@@ -46,6 +46,7 @@ module Seahorse
         plugins = self.class.build_plugins
         @config = self.class.build_config(plugins, options)
         @handlers = handler_list(plugins, options)
+        initialize_client(plugins)
       end
 
       # @return [Configuration]
@@ -61,6 +62,15 @@ module Seahorse
 
       private
 
+      # @param [Array<Plugin>] plugins
+      # @return [void]
+      def initialize_client(plugins)
+        plugins.each do |plugin|
+          if plugin.respond_to?(:initialize_client)
+            plugin.initialize_client(self)
+          end
+        end
+      end
 
       # @param [Array<Plugin>] plugins
       # @option options [HttpHandler] :send_handler (nil)
