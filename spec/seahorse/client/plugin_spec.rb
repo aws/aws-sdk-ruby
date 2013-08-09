@@ -113,20 +113,18 @@ module Seahorse
 
         it 'registers a handler' do
           handler_class = Class.new(Handler)
-          plugin = Class.new(Plugin) { handler(handler_class) }
-          plugin.new.add_handlers(handlers, config)
-          expect(handlers).to include(handler_class)
+          client = client_with_plugin { handler handler_class }
+          expect(client.handlers).to include(handler_class)
         end
 
         it 'accepts a priority option' do
           handler1 = Class.new(Handler)
           handler2 = Class.new(Handler)
-          plugin = Class.new(Plugin) do
+          client = client_with_plugin do
             handler(handler1, priority: :validate)
             handler(handler2, priority: :build)
           end
-          plugin.new.add_handlers(handlers, config)
-          expect(handlers.to_a).to eq([handler2, handler1])
+          expect(client.handlers.to_a).to eq([handler2, handler1])
         end
 
         it 'builds a handler from a block' do

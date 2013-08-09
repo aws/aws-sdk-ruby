@@ -33,3 +33,16 @@ class DummySendPlugin < Seahorse::Client::Plugin
   handler DummySendHandler, priority: :send
 end
 
+class Seahorse::Client::Base
+  attr_reader :handlers
+end
+
+def client_class_with_plugin(&block)
+  client = Seahorse::Client::Base.define
+  client.set_plugins([Class.new(Seahorse::Client::Plugin, &block)])
+  client
+end
+
+def client_with_plugin(options = {}, &block)
+  client_class_with_plugin(&block).new(options)
+end
