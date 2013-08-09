@@ -17,48 +17,31 @@ module Seahorse
   module Client
     module Plugins
       describe Endpoint do
-
-        let(:api) { double('api', endpoint: 'foo.com') }
-
-        let(:handlers) { HandlerList.new }
-
-        def apply_plugin!(options = {})
-
-          config = Configuration.new(options.merge(api: api))
-          config.add_option(:api)
-
-          handlers.add(DummySendHandler, priority: :send)
-
-          plugin = Plugins::Endpoint.new
-          plugin.add_options(config)
-          plugin.add_handlers(handlers, config)
-          config
-
+        let(:client_class) do
+          Client::Base.define api: {
+            'endpoint' => 'foo.com',
+            'plugins' => [Endpoint, DummySendPlugin]
+          }
         end
 
-        def handle_request!(options = {})
-          config = apply_plugin!(options)
-          context = RequestContext.new(config: config)
-          handlers.to_stack.call(context)
-        end
+        def client(opts = {}) @client ||= client_class.new(opts) end
 
         it 'adds an #endpoint option to config' do
-          config = apply_plugin!
-          expect(config.endpoint).to eq('foo.com')
+          expect(client.config.endpoint).to eq('foo.com')
         end
 
         it 'adds an #ssl_default option to config' do
-          config = apply_plugin!
-          expect(config.ssl_default).to be(true)
+          expect(client.config.ssl_default).to be(true)
         end
 
         it 'populates the http request endpoint' do
-          resp = handle_request!
+          resp = client.build_request('operation').send_request
           expect(resp.context.http_request.endpoint).to eq('https://foo.com')
         end
 
         it 'defaults to http when ssl_default is false' do
-          resp = handle_request!(ssl_default: false)
+          client = client(ssl_default: false)
+          resp = client.build_request('operation').send_request
           expect(resp.context.http_request.endpoint).to eq('http://foo.com')
        end
 
