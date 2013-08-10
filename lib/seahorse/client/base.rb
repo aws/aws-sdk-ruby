@@ -192,6 +192,26 @@ module Seahorse
           client_class
         end
 
+        # @api private
+        def new(options = {}, &block)
+          object = client_class(options).allocate
+          object.send(:initialize, options, &block)
+          object
+        end
+
+        # @param [Hash] options
+        # @return [Class<Base>] the client class to construct
+        def client_class(options = {})
+          klass = self
+          build_plugins.each do |plugin|
+            if plugin.respond_to?(:construct_client)
+              new_klass = plugin.construct_client(klass, options)
+              klass = new_klass if Class === new_klass
+            end
+          end
+          klass
+        end
+
         # @return [Array<Plugin>]
         # @api private
         def build_plugins

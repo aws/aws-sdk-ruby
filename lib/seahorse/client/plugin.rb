@@ -42,6 +42,19 @@ module Seahorse
         end
       end
 
+      # @param [Class<Client::Base>] client_class
+      # @param [Hash] options
+      # @return [Class<Client::Base>] the client class that should be
+      #   allocated and constructed
+      # @return [nil] if the client class should not be changed
+      def construct_client(client_class, options)
+        self.class.constructors.each do |block|
+          new_client_class = instance_exec(client_class, options, &block)
+          client_class = new_client_class if Class === new_client_class
+        end
+        client_class
+      end
+
       class << self
 
         # (see Configuration#add_option)
@@ -109,9 +122,18 @@ module Seahorse
           initializers << block
         end
 
+        def construct_client(&block)
+          constructors << block
+        end
+
         # @api private
         def initializers
           @initializers ||= []
+        end
+
+        # @api private
+        def constructors
+          @constructors ||= []
         end
 
         # @api private

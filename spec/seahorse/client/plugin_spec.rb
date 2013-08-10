@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'spec_helper'
+require 'ostruct'
 
 module Seahorse
   module Client
@@ -114,6 +115,16 @@ module Seahorse
             initialize_client {|c| initialized_client = c }
           end
           expect(client).to be(initialized_client)
+        end
+      end
+
+      describe '.construct_client' do
+        it 'provides a short-cut method for adding constructor callbacks' do
+          client = client_with_plugin(foo: 'bar') do
+            construct_client {|c,opts| OpenStruct }
+          end
+          expect(client).to be_kind_of OpenStruct
+          expect(client).to eq OpenStruct.new(foo: 'bar')
         end
       end
 

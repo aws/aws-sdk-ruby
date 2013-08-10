@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'spec_helper'
+require 'ostruct'
 
 module Seahorse
   module Client
@@ -216,6 +217,57 @@ module Seahorse
             expect(client_class.plugins).to include(plugin_a)
           end
 
+        end
+
+        describe '.client_class' do
+          it 'consults plugin list to see what client class to construct' do
+            subclient_class = Class.new(client_class)
+
+            plugin = double('plugin')
+            plugin.stub(:construct_client) do |klass, options|
+              subclient_class.send(:define_method, :foo) { options }
+              subclient_class
+            end
+
+            client_class.add_plugin(plugin)
+            expect(client_class.client_class).to be(subclient_class)
+            expect(client_class.new(foo: 'bar').foo).to eq(foo: 'bar')
+          end
+
+          it 'does not change the client class if plugin#construct_client does not return Class' do
+            plugin = Class.new(Plugin)
+            plugin.stub(:construct_client) {|c,o| nil }
+            client_class.add_plugin(plugin)
+            expect(client_class.client_class).to be(client_class)
+          end
+
+          it 'takes the last returned Class object from plugins' do
+            stub_const("ClassA", Class.new)
+            stub_const("ClassB", Class.new)
+            stub_const("ClassC", Class.new)
+
+            plugin1 = double('plugin1')
+            plugin1.stub(:construct_client) {|c,o| ClassA }
+            plugin2 = double('plugin2')
+            plugin2.stub(:construct_client) {|c,o| ClassB }
+            plugin3 = double('plugin3')
+            plugin3.stub(:construct_client) {|c,o| ClassC }
+
+            client_class.add_plugin(plugin1)
+            client_class.add_plugin(plugin2)
+            client_class.add_plugin(plugin3)
+
+            expect(client_class.client_class).to eq ClassC
+          end
+        end
+
+        describe '.new' do
+          it 'constructs the class specified by .client_class' do
+            client_class.stub(:client_class) { OpenStruct }
+            client = client_class.new(foo: 'bar')
+            expect(client).to be_kind_of(OpenStruct)
+            expect(client).to eq OpenStruct.new(foo: 'bar')
+          end
         end
 
         describe 'applying plugins' do
