@@ -923,7 +923,10 @@ module AWS
 
           if options[:range]
             range = options[:range]
-            range = "bytes=#{range.first}-#{range.last}" if range.is_a?(Range)
+            if range.is_a?(Range)
+              offset = range.exclude_end? ? -1 : 0
+              range = "bytes=#{range.first}-#{range.last + offset}"
+            end
             req.headers['Range'] = range
           end
 

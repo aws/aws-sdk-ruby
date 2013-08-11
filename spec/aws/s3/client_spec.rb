@@ -1483,6 +1483,22 @@ module AWS
         it_should_behave_like "formats date header", :if_modified_since, "If-Modified-Since"
         it_should_behave_like "formats date header", :if_unmodified_since, "If-Unmodified-Since"
 
+        context ':range option' do
+          it 'calculates the correct range for an inclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-10"
+            end
+            client.get_object(opts.merge(:range => (3..10)))
+          end
+
+          it 'calculates the correct range for an exclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-9"
+            end
+            client.get_object(opts.merge(:range => (3...10)))
+          end
+        end
+
         context 'response' do
 
           let(:body) { "FOO DATA" }
