@@ -11,13 +11,21 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
 module Aws
   class Credentials
+
+    # @return [String, nil]
     attr_accessor :access_key_id
+
+    # @return [String, nil]
     attr_accessor :secret_access_key
+
+    # @return [String, nil]
     attr_accessor :session_token
 
+    # @param [String] access_key_id
+    # @param [String] secret_access_key
+    # @param [String] session_token (nil)
     def initialize(access_key_id, secret_access_key, session_token = nil)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
@@ -27,5 +35,6 @@ module Aws
     def set?
       @access_key_id && @secret_access_key
     end
+
   end
 end
