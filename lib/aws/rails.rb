@@ -155,7 +155,7 @@ module AWS
         ActiveSupport.on_load(:action_mailer) do
           self.add_delivery_method(name, AWS::SimpleEmailService, options)
         end
-      else
+      elsif defined?(::ActionMailer)
         amb = ::ActionMailer::Base
         amb.send(:define_method, "perform_delivery_#{name}") do |mail|
           AWS::SimpleEmailService.new(options).send_raw_email(mail)
