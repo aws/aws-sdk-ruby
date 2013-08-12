@@ -51,6 +51,20 @@ module Seahorse
           expect { client.operation1 }.to raise_error(NoMethodError)
         end
 
+        it 'defines a helper that returns the list of valid operation names' do
+          expect(client.operation_names).to eq(operations)
+        end
+
+        it 'only registers methods on the client class once' do
+          expect(client_class).to receive(:define_method).
+            with(:operation_names).exactly(1).times
+          operations.each do |operation_name|
+            expect(client_class).to receive(:define_method).
+              with(operation_name).exactly(1).times
+          end
+          client_class.new(endpoint: 'localhost')
+        end
+
       end
     end
   end
