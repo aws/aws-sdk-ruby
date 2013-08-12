@@ -215,6 +215,12 @@ module AWS
     #   append to all requests against AWS services.  This should be set
     #   for clients and applications built on top of the aws-sdk gem.
     #
+    # @attr_reader [Boolean] verify_response_body_content_length (true)
+    #   When `true` all HTTP handlers will perform a check to ensure
+    #   that response bodies match the content-length specified in the
+    #   response header, if present. Note that some HTTP handlers will
+    #   always do this whether or not this value is true.
+    #
     class Configuration
 
       # Creates a new Configuration object.
@@ -490,7 +496,7 @@ module AWS
       add_option :http_wire_trace, false, :boolean => true
 
       add_option_with_needs(:http_handler,
-        AWS::Core::Http::ConnectionPool::OPTIONS
+        AWS::Core::Http::ConnectionPool::OPTIONS + [:verify_response_body_content_length]
       ) do |config,options|
         AWS::Core::Http::NetHttpHandler.new(options)
       end
@@ -518,6 +524,8 @@ module AWS
 
       add_option :user_agent_prefix
 
+      add_option :verify_response_body_content_length, true, :boolean => true
+      
     end
   end
 end
