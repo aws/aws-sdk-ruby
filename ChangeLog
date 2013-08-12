@@ -1,4 +1,76 @@
-2013-07-25 Trevor Rowe <trevorrowe@gmail.com>
+2013-08-11 Loren Segal <lsegal@amazon.com>
+
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Fix
+  S3::Client#get_object with exclusive Range
+
+  Fixes #326
+
+2013-08-01 Anatoly Mikhailov <mikhailov.anatoly@gmail.com>
+
+  * lib/aws/rails.rb: Make possible to use without ActionMailer
+
+  I use aws-sdk with background uploading queue, so it makes sense to turn off
+  any unused Rails libraries. It's possible to turn off every Rails specific
+  libraries except ActionMailer, so it works:
+
+
+  ```ruby
+  config.frameworks -= [ :active_record, :active_resource, :action_controller,
+  :action_view]
+  ```
+
+  But it doesn't work
+
+  ```ruby
+  config.frameworks -= [:action_mailer]
+  ```
+
+  The fix makes sure that you load ActionMailer to use it with SNS
+2013-07-30 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/configuration.rb: Update AWS::Core::Configuration
+  documentation.
+
+  Document the verify_response_body_content_length parameter.
+
+  * lib/aws/dynamo_db.rb: Update AWS::DynamoDB documentation example.
+
+  Example of table creation in docs did not work, added missing
+  parameters.
+
+2013-07-29 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/configuration.rb, lib/aws/core/http/net_http_handler.rb,
+  spec/aws/core/http/net_http_handler_spec.rb: Verify content-length for
+  Net::HTTP responses.
+
+  Some downloads from Amazon S3 can be truncated, and Net::HTTP
+  does not check response body size against the content-length
+  specified in the response header. This change adds such a check,
+  which can be toggled on or off (on by default) in the AWS.config.
+
+  * lib/aws/sns/message.rb: Add accessors for Token and SubscribeURL
+
+  * lib/aws/sns/message.rb: Support SubscriptionConfirmation and
+  UnsubscribeConfirmation messages
+
+  * spec/aws/sns/message_spec.rb: Validate that a properly signed message is
+  authentic
+
+  * .yardopts, Gemfile: Use --hide-api private instead of --no-api
+
+  * lib/aws/core/configuration.rb, lib/aws/core/http/net_http_handler.rb,
+  spec/aws/core/http/net_http_handler_spec.rb: Verify content-length for
+  Net::HTTP responses.
+
+  Some downloads from Amazon S3 can be truncated, and Net::HTTP
+  does not check response body size against the content-length
+  specified in the response header. This change adds such a check,
+  which can be toggled on or off (on by default) in the AWS.config.
+
+2013-07-25 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.14.1
 
   * features/cloud_front/step_definitions/client.rb: Fixed broken
   AWS::CloudFront integration tests.
@@ -150,10 +222,16 @@
   * lib/aws/api_config/STS-2011-06-15.yml, lib/aws/sts/client.rb: Added
   AWS::STS::Client#decode_authorization_message
 
+  * spec/aws/simple_email_service/identity_spec.rb: Updated indentation of
+  simple_email_service/identity_spec.rb
+
 2013-07-10 Loren Segal <lsegal@soen.ca>
 
   * tasks/docs.rake: Update docs.rake
   * .travis.yml: Ignore some Gemfile groups in Travis tests.
+  * spec/aws/simple_email_service/identity_spec.rb: Updated
+  simple_email_service/identity_spec.rb with tests for #verify_dkim
+
   * lib/aws/simple_email_service/identity.rb: Fix typo in
   SimpleEmailService::Identity
 
