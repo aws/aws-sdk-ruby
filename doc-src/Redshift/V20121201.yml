@@ -30,68 +30,45 @@
     * `:ip_ranges` - (Array<Hash>)
       * `:status` - (String)
       * `:cidrip` - (String)
-:authorize_snapshot_access: |-
-  Calls the AuthorizeSnapshotAccess API operation.
-  @param [Hash] options
-    * `:snapshot_identifier` - *required* - (String) The identifier of the snapshot the account is authorized to restore.
-    * `:account_with_restore_access` - *required* - (String) The identifier of the AWS customer account authorized to restore the specified snapshot.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:snapshot_identifier` - (String)
-    * `:cluster_identifier` - (String)
-    * `:snapshot_create_time` - (Time)
-    * `:status` - (String)
-    * `:port` - (Integer)
-    * `:availability_zone` - (String)
-    * `:cluster_create_time` - (Time)
-    * `:master_username` - (String)
-    * `:cluster_version` - (String)
-    * `:snapshot_type` - (String)
-    * `:node_type` - (String)
-    * `:number_of_nodes` - (Integer)
-    * `:db_name` - (String)
-    * `:vpc_id` - (String)
-    * `:encrypted` - (Boolean)
-    * `:accounts_with_restore_access` - (Array<Hash>)
-      * `:account_id` - (String)
-    * `:owner_account` - (String)
-    * `:total_backup_size_in_mega_bytes` - (Numeric)
-    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
-    * `:backup_progress_in_mega_bytes` - (Numeric)
-    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
-    * `:estimated_seconds_to_completion` - (Integer)
-    * `:elapsed_time_in_seconds` - (Integer)
-:copy_cluster_snapshot: |-
-  Calls the CopyClusterSnapshot API operation.
-  @param [Hash] options
-    * `:source_snapshot_identifier` - *required* - (String) The identifier for the source snapshot. Constraints: Must be the identifier for a valid automated snapshot whose state is "available".
-    * `:target_snapshot_identifier` - *required* - (String) The identifier given to the new manual snapshot. Constraints: Cannot be null, empty, or blank. Must contain from 1 to 255 alphanumeric characters or hyphens. First character must be a letter. Cannot end with a hyphen or contain two consecutive hyphens. Must be unique for the AWS account that is making the request.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:snapshot_identifier` - (String)
-    * `:cluster_identifier` - (String)
-    * `:snapshot_create_time` - (Time)
-    * `:status` - (String)
-    * `:port` - (Integer)
-    * `:availability_zone` - (String)
-    * `:cluster_create_time` - (Time)
-    * `:master_username` - (String)
-    * `:cluster_version` - (String)
-    * `:snapshot_type` - (String)
-    * `:node_type` - (String)
-    * `:number_of_nodes` - (Integer)
-    * `:db_name` - (String)
-    * `:vpc_id` - (String)
-    * `:encrypted` - (Boolean)
-    * `:accounts_with_restore_access` - (Array<Hash>)
-      * `:account_id` - (String)
-    * `:owner_account` - (String)
-    * `:total_backup_size_in_mega_bytes` - (Numeric)
-    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
-    * `:backup_progress_in_mega_bytes` - (Numeric)
-    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
-    * `:estimated_seconds_to_completion` - (Integer)
-    * `:elapsed_time_in_seconds` - (Integer)
+:authorize_snapshot_access: "Calls the AuthorizeSnapshotAccess API operation.\n@param
+  [Hash] options\n  * `:snapshot_identifier` - *required* - (String) The identifier
+  of the snapshot the account is authorized to restore.\n  * `:snapshot_cluster_identifier`
+  - (String) \n  * `:account_with_restore_access` - *required* - (String) The identifier
+  of the AWS customer account authorized to restore the specified snapshot.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
+  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
+  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
+  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
+  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
+  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
+  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
+  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
+  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
+  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
+  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
+  - (Integer)"
+:copy_cluster_snapshot: "Calls the CopyClusterSnapshot API operation.\n@param [Hash]
+  options\n  * `:source_snapshot_identifier` - *required* - (String) The identifier
+  for the source snapshot. Constraints: Must be the identifier for a valid automated
+  snapshot whose state is \"available\".\n  * `:source_snapshot_cluster_identifier`
+  - (String) \n  * `:target_snapshot_identifier` - *required* - (String) The identifier
+  given to the new manual snapshot. Constraints: Cannot be null, empty, or blank.
+  Must contain from 1 to 255 alphanumeric characters or hyphens. First character must
+  be a letter. Cannot end with a hyphen or contain two consecutive hyphens. Must be
+  unique for the AWS account that is making the request.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:snapshot_identifier` - (String)\n  * `:cluster_identifier` - (String)\n  *
+  `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  * `:port` - (Integer)\n
+  \ * `:availability_zone` - (String)\n  * `:cluster_create_time` - (Time)\n  * `:master_username`
+  - (String)\n  * `:cluster_version` - (String)\n  * `:snapshot_type` - (String)\n
+  \ * `:node_type` - (String)\n  * `:number_of_nodes` - (Integer)\n  * `:db_name`
+  - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted` - (Boolean)\n  * `:accounts_with_restore_access`
+  - (Array<Hash>)\n    * `:account_id` - (String)\n  * `:owner_account` - (String)\n
+  \ * `:total_backup_size_in_mega_bytes` - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes`
+  - (Numeric)\n  * `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
+  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
+  - (Integer)"
 :create_cluster: "Calls the CreateCluster API operation.\n@param [Hash] options\n
   \ * `:db_name` - (String) The name of the first database to be created when the
   cluster is created. To create additional databases after the cluster is created,
@@ -189,7 +166,11 @@
   \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
   - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
   - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)"
+  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
+  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
+  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
+  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
+  - (Integer)"
 :create_cluster_parameter_group: |-
   Calls the CreateClusterParameterGroup API operation.
   @param [Hash] options
@@ -295,7 +276,11 @@
   \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
   - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
   - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)"
+  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
+  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
+  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
+  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
+  - (Integer)"
 :delete_cluster_parameter_group: |-
   Calls the DeleteClusterParameterGroup API operation.
   @param [Hash] options
@@ -306,36 +291,23 @@
   @param [Hash] options
     * `:cluster_security_group_name` - *required* - (String) The name of the cluster security group to be deleted.
   @return [Core::Response]
-:delete_cluster_snapshot: |-
-  Calls the DeleteClusterSnapshot API operation.
-  @param [Hash] options
-    * `:snapshot_identifier` - *required* - (String) The unique identifier of the manual snapshot to be deleted. Constraints: Must be the name of an existing snapshot that is in the available state.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:snapshot_identifier` - (String)
-    * `:cluster_identifier` - (String)
-    * `:snapshot_create_time` - (Time)
-    * `:status` - (String)
-    * `:port` - (Integer)
-    * `:availability_zone` - (String)
-    * `:cluster_create_time` - (Time)
-    * `:master_username` - (String)
-    * `:cluster_version` - (String)
-    * `:snapshot_type` - (String)
-    * `:node_type` - (String)
-    * `:number_of_nodes` - (Integer)
-    * `:db_name` - (String)
-    * `:vpc_id` - (String)
-    * `:encrypted` - (Boolean)
-    * `:accounts_with_restore_access` - (Array<Hash>)
-      * `:account_id` - (String)
-    * `:owner_account` - (String)
-    * `:total_backup_size_in_mega_bytes` - (Numeric)
-    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
-    * `:backup_progress_in_mega_bytes` - (Numeric)
-    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
-    * `:estimated_seconds_to_completion` - (Integer)
-    * `:elapsed_time_in_seconds` - (Integer)
+:delete_cluster_snapshot: "Calls the DeleteClusterSnapshot API operation.\n@param
+  [Hash] options\n  * `:snapshot_identifier` - *required* - (String) The unique identifier
+  of the manual snapshot to be deleted. Constraints: Must be the name of an existing
+  snapshot that is in the available state.\n  * `:snapshot_cluster_identifier` - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
+  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
+  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
+  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
+  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
+  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
+  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
+  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
+  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
+  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
+  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
+  - (Integer)"
 :delete_cluster_subnet_group: |-
   Calls the DeleteClusterSubnetGroup API operation.
   @param [Hash] options
@@ -510,6 +482,13 @@
       * `:number_of_nodes` - (Integer)
       * `:publicly_accessible` - (Boolean)
       * `:encrypted` - (Boolean)
+      * `:restore_status` - (Hash)
+        * `:status` - (String)
+        * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+        * `:snapshot_size_in_mega_bytes` - (Integer)
+        * `:progress_in_mega_bytes` - (Integer)
+        * `:elapsed_time_in_seconds` - (Integer)
+        * `:estimated_time_to_completion_in_seconds` - (Integer)
 :describe_default_cluster_parameters: |-
   Calls the DescribeDefaultClusterParameters API operation.
   @param [Hash] options
@@ -708,7 +687,11 @@
   \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
   - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
   - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)"
+  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
+  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
+  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
+  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
+  - (Integer)"
 :modify_cluster_parameter_group: |-
   Calls the ModifyClusterParameterGroup API operation.
   @param [Hash] options
@@ -806,6 +789,13 @@
     * `:number_of_nodes` - (Integer)
     * `:publicly_accessible` - (Boolean)
     * `:encrypted` - (Boolean)
+    * `:restore_status` - (Hash)
+      * `:status` - (String)
+      * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+      * `:snapshot_size_in_mega_bytes` - (Integer)
+      * `:progress_in_mega_bytes` - (Integer)
+      * `:elapsed_time_in_seconds` - (Integer)
+      * `:estimated_time_to_completion_in_seconds` - (Integer)
 :reset_cluster_parameter_group: "Calls the ResetClusterParameterGroup API operation.\n@param
   [Hash] options\n  * `:parameter_group_name` - *required* - (String) The name of
   the cluster parameter group to be reset.\n  * `:reset_all_parameters` - (Boolean)
@@ -833,24 +823,24 @@
   two consecutive hyphens. Must be unique for all clusters within an AWS account.\n
   \ * `:snapshot_identifier` - *required* - (String) The name of the snapshot from
   which to create the new cluster. This parameter isn't case sensitive. Example: my-snapshot-id\n
-  \ * `:port` - (Integer) The port number on which the cluster accepts connections.
-  Default: The same port as the original cluster. Constraints: Must be between 1115
-  and 65535.\n  * `:availability_zone` - (String) The Amazon EC2 Availability Zone
-  in which to restore the cluster. Default: A random, system-chosen Availability Zone.
-  Example: us-east-1a\n  * `:allow_version_upgrade` - (Boolean) If  `true` , upgrades
-  can be applied during the maintenance window to the Amazon Redshift engine that
-  is running on the cluster. Default:  `true` \n  * `:cluster_subnet_group_name` -
-  (String) The name of the subnet group where you want to cluster restored. A snapshot
-  of cluster in VPC can be restored only in VPC. Therefore, you must provide subnet
-  group name where you want the cluster restored.\n  * `:publicly_accessible` - (Boolean)
-  If  `true` , the cluster can be accessed from a public network.\n  * `:owner_account`
-  - (String) The AWS customer account used to create or copy the snapshot. Required
-  if you are restoring a snapshot you do not own, optional if you own the snapshot.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:cluster_identifier` - (String)\n  * `:node_type` -
-  (String)\n  * `:cluster_status` - (String)\n  * `:modify_status` - (String)\n  *
-  `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint` - (Hash)\n
-  \   * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
+  \ * `:snapshot_cluster_identifier` - (String) \n  * `:port` - (Integer) The port
+  number on which the cluster accepts connections. Default: The same port as the original
+  cluster. Constraints: Must be between 1115 and 65535.\n  * `:availability_zone`
+  - (String) The Amazon EC2 Availability Zone in which to restore the cluster. Default:
+  A random, system-chosen Availability Zone. Example: us-east-1a\n  * `:allow_version_upgrade`
+  - (Boolean) If  `true` , upgrades can be applied during the maintenance window to
+  the Amazon Redshift engine that is running on the cluster. Default:  `true` \n  *
+  `:cluster_subnet_group_name` - (String) The name of the subnet group where you want
+  to cluster restored. A snapshot of cluster in VPC can be restored only in VPC. Therefore,
+  you must provide subnet group name where you want the cluster restored.\n  * `:publicly_accessible`
+  - (Boolean) If  `true` , the cluster can be accessed from a public network.\n  *
+  `:owner_account` - (String) The AWS customer account used to create or copy the
+  snapshot. Required if you are restoring a snapshot you do not own, optional if you
+  own the snapshot.\n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:cluster_identifier` - (String)\n
+  \ * `:node_type` - (String)\n  * `:cluster_status` - (String)\n  * `:modify_status`
+  - (String)\n  * `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint`
+  - (Hash)\n    * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
   - (Time)\n  * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_security_groups`
   - (Array<Hash>)\n    * `:cluster_security_group_name` - (String)\n    * `:status`
   - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n    * `:vpc_security_group_id`
@@ -862,7 +852,11 @@
   \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
   - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
   - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)"
+  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
+  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
+  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
+  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
+  - (Integer)"
 :revoke_cluster_security_group_ingress: |-
   Calls the RevokeClusterSecurityGroupIngress API operation.
   @param [Hash] options
@@ -881,34 +875,21 @@
     * `:ip_ranges` - (Array<Hash>)
       * `:status` - (String)
       * `:cidrip` - (String)
-:revoke_snapshot_access: |-
-  Calls the RevokeSnapshotAccess API operation.
-  @param [Hash] options
-    * `:snapshot_identifier` - *required* - (String) The identifier of the snapshot that the account can no longer access.
-    * `:account_with_restore_access` - *required* - (String) The identifier of the AWS customer account that can no longer restore the specified snapshot.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:snapshot_identifier` - (String)
-    * `:cluster_identifier` - (String)
-    * `:snapshot_create_time` - (Time)
-    * `:status` - (String)
-    * `:port` - (Integer)
-    * `:availability_zone` - (String)
-    * `:cluster_create_time` - (Time)
-    * `:master_username` - (String)
-    * `:cluster_version` - (String)
-    * `:snapshot_type` - (String)
-    * `:node_type` - (String)
-    * `:number_of_nodes` - (Integer)
-    * `:db_name` - (String)
-    * `:vpc_id` - (String)
-    * `:encrypted` - (Boolean)
-    * `:accounts_with_restore_access` - (Array<Hash>)
-      * `:account_id` - (String)
-    * `:owner_account` - (String)
-    * `:total_backup_size_in_mega_bytes` - (Numeric)
-    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
-    * `:backup_progress_in_mega_bytes` - (Numeric)
-    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
-    * `:estimated_seconds_to_completion` - (Integer)
-    * `:elapsed_time_in_seconds` - (Integer)
+:revoke_snapshot_access: "Calls the RevokeSnapshotAccess API operation.\n@param [Hash]
+  options\n  * `:snapshot_identifier` - *required* - (String) The identifier of the
+  snapshot that the account can no longer access.\n  * `:snapshot_cluster_identifier`
+  - (String) \n  * `:account_with_restore_access` - *required* - (String) The identifier
+  of the AWS customer account that can no longer restore the specified snapshot.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
+  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
+  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
+  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
+  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
+  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
+  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
+  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
+  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
+  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
+  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
+  - (Integer)"

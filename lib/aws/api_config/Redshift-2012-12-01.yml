@@ -52,6 +52,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
     AccountWithRestoreAccess:
     - :string
     - :required
@@ -97,6 +99,8 @@
     SourceSnapshotIdentifier:
     - :string
     - :required
+    SourceSnapshotClusterIdentifier:
+    - :string
     TargetSnapshotIdentifier:
     - :string
     - :required
@@ -230,6 +234,18 @@
                 :type: :boolean
               Encrypted:
                 :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
             :ignore: true
 - :name: CreateClusterParameterGroup
   :method: :create_cluster_parameter_group
@@ -408,6 +424,18 @@
                 :type: :boolean
               Encrypted:
                 :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
             :ignore: true
 - :name: DeleteClusterParameterGroup
   :method: :delete_cluster_parameter_group
@@ -435,6 +463,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
   :outputs:
     :children:
       DeleteClusterSnapshotResult:
@@ -729,6 +759,18 @@
                     :type: :boolean
                   Encrypted:
                     :type: :boolean
+                  RestoreStatus:
+                    :children:
+                      CurrentRestoreRateInMegaBytesPerSecond:
+                        :type: :float
+                      SnapshotSizeInMegaBytes:
+                        :type: :integer
+                      ProgressInMegaBytes:
+                        :type: :integer
+                      ElapsedTimeInSeconds:
+                        :type: :integer
+                      EstimatedTimeToCompletionInSeconds:
+                        :type: :integer
 - :name: DescribeDefaultClusterParameters
   :method: :describe_default_cluster_parameters
   :inputs:
@@ -1000,6 +1042,18 @@
                 :type: :boolean
               Encrypted:
                 :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
             :ignore: true
 - :name: ModifyClusterParameterGroup
   :method: :modify_cluster_parameter_group
@@ -1145,6 +1199,18 @@
                 :type: :boolean
               Encrypted:
                 :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
             :ignore: true
 - :name: ResetClusterParameterGroup
   :method: :reset_cluster_parameter_group
@@ -1186,6 +1252,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
     Port:
     - :integer
     AvailabilityZone:
@@ -1245,6 +1313,18 @@
                 :type: :boolean
               Encrypted:
                 :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
             :ignore: true
 - :name: RevokeClusterSecurityGroupIngress
   :method: :revoke_cluster_security_group_ingress
@@ -1284,6 +1364,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
     AccountWithRestoreAccess:
     - :string
     - :required
