@@ -14,15 +14,6 @@
 module Aws
   class Credentials
 
-    # @return [String, nil]
-    attr_accessor :access_key_id
-
-    # @return [String, nil]
-    attr_accessor :secret_access_key
-
-    # @return [String, nil]
-    attr_accessor :session_token
-
     # @param [String] access_key_id
     # @param [String] secret_access_key
     # @param [String] session_token (nil)
@@ -31,6 +22,15 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
     end
+
+    # @return [String, nil]
+    attr_accessor :access_key_id
+
+    # @return [String, nil]
+    attr_accessor :secret_access_key
+
+    # @return [String, nil]
+    attr_accessor :session_token
 
     def set?
       @access_key_id && @secret_access_key
