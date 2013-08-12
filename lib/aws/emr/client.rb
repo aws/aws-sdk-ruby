@@ -15,7 +15,7 @@ module AWS
   class EMR
 
     # Client class for Elastic MapReduce (EMR).
-    class Client < Core::QueryClient
+    class Client < Core::JSONClient
 
       API_VERSION = '2009-03-31'
 
