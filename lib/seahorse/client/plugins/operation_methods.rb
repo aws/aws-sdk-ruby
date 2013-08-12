@@ -46,7 +46,7 @@ module Seahorse
 
             names.each do |name|
               client.class.send(:define_method, name) do |*args, &block|
-                build_request(name, *args, &block).send_request
+                build_request(name, *args).send_request(&block)
               end
             end
 

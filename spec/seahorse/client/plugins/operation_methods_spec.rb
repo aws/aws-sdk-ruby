@@ -42,6 +42,21 @@ module Seahorse
           expect(client.operation1(param: 'X').data).to eq(result: 'success')
         end
 
+        it 'passes block arguments to the #send_request method' do
+          req = double('request')
+          client.stub(:build_request).and_return(req)
+          allow(req).to receive(:send_request).
+            and_yield('chunk1').
+            and_yield('chunk2').
+            and_yield('chunk3')
+
+          chunks = []
+          client.operation1 do |chunk|
+            chunks << chunk
+          end
+          expect(chunks).to eq(%w(chunk1 chunk2 chunk3))
+        end
+
         it 'can be removed from client' do
           next_client_class = Class.new(client_class)
           next_client_class.remove_plugin OperationMethods
