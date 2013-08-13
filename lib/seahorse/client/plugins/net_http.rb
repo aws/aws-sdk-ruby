@@ -20,7 +20,7 @@ module Seahorse
           option(name, default)
         end
 
-        handler(Client::NetHttp::Handler, priority: :send)
+        handler(Client::NetHttp::Handler, step: :send)
 
       end
     end

@@ -51,7 +51,7 @@ module Seahorse
 
         def add_handlers(handlers, config)
           if config.logger
-            handlers.add(Client::Logging::Handler, priority: :before_validate)
+            handlers.add(Client::Logging::Handler, step: :before_validate)
           end
         end
 

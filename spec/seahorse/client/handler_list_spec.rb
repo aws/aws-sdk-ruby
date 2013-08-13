@@ -39,37 +39,37 @@ module Seahorse
           expect(handlers.to_a).to eq([handler2, handler1])
         end
 
-        it 'sorts handlers by reverse (stack) priority' do
-          handlers.add('validate', priority: :validate)
-          handlers.add('build', priority: :build)
-          handlers.add('sign', priority: :sign)
-          handlers.add('send', priority: :send)
+        it 'sorts handlers by reverse (stack) step' do
+          handlers.add('validate', step: :validate)
+          handlers.add('build', step: :build)
+          handlers.add('sign', step: :sign)
+          handlers.add('send', step: :send)
           expect(handlers.to_a).to eq(%w(send sign build validate))
         end
 
-        it 'defaults priority to :build' do
-          handlers.add('before', priority: :before_build)
+        it 'defaults step to :build' do
+          handlers.add('before', step: :before_build)
           handlers.add('on')
-          handlers.add('after', priority: :after_build)
+          handlers.add('after', step: :after_build)
           expect(handlers.to_a).to eq(['after', 'on', 'before'])
         end
 
-        it 'accepts multiple handlers with the same priority' do
-          handlers.add('h1', priority: :validate)
-          handlers.add('h2', priority: :validate)
-          handlers.add('h3', priority: :build)
-          handlers.add('h4', priority: :build)
+        it 'accepts multiple handlers with the same step' do
+          handlers.add('h1', step: :validate)
+          handlers.add('h2', step: :validate)
+          handlers.add('h3', step: :build)
+          handlers.add('h4', step: :build)
           expect(handlers.to_a).to eq(['h4', 'h3', 'h2', 'h1'])
         end
 
-        %w(validate build sign).each do |priority|
+        %w(validate build sign).each do |step|
 
-          describe(priority) do
+          describe(step) do
 
-            it "has a before and after level for #{priority}" do
-              handlers.add('before', priority: :"before_#{priority}")
-              handlers.add('on', priority: priority.to_sym)
-              handlers.add('after', priority: :"after_#{priority}")
+            it "has a before and after level for #{step}" do
+              handlers.add('before', step: :"before_#{step}")
+              handlers.add('on', step: step.to_sym)
+              handlers.add('after', step: :"after_#{step}")
               expect(handlers.to_a).to eq(['after', 'on', 'before'])
             end
 
@@ -80,21 +80,21 @@ module Seahorse
         describe 'send' do
 
           it 'has a before level for send' do
-            handlers.add('before', priority: :before_send)
-            handlers.add('on', priority: :send)
+            handlers.add('before', step: :before_send)
+            handlers.add('on', step: :send)
             expect(handlers.to_a).to eq(['on', 'before'])
           end
 
           it 'does not support after send' do
             expect do
-              handlers.add('handler', priority: :after_send)
+              handlers.add('handler', step: :after_send)
             end.to raise_error(ArgumentError)
           end
 
           it 'only keeps the latest send handler' do
-            handlers.add('handler1', priority: :send)
-            handlers.add('handler2', priority: :send)
-            handlers.add('handler3', priority: :send)
+            handlers.add('handler1', step: :send)
+            handlers.add('handler2', step: :send)
+            handlers.add('handler3', step: :send)
             expect(handlers.to_a).to eq(['handler3'])
           end
 

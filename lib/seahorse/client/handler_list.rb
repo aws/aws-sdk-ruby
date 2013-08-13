@@ -20,7 +20,7 @@ module Seahorse
       # @api private
       def initialize
         @handlers = Hash.new do |hash, key|
-          raise ArgumentError, "invalid priority #{key.inspect}"
+          raise ArgumentError, "invalid step #{key.inspect}"
         end
         @handlers[:send] = SendHandlers.new
         @handlers[:before_send] = []
@@ -36,9 +36,9 @@ module Seahorse
       end
 
       # @param [Class] handler_class
-      # @option options [Symbol] priority (:build)
+      # @option options [Symbol] step (:build)
       def add(handler_class, options = {})
-        @handlers[options[:priority] || :build].unshift(handler_class)
+        @handlers[options[:step] || :build].unshift(handler_class)
       end
 
       # Yields the handlers.
@@ -70,9 +70,9 @@ module Seahorse
       private
 
       def each_with_options(&block)
-        @handlers.each do |priority, handlers|
+        @handlers.each do |step, handlers|
           handlers.each do |handler|
-            yield(handler, priority: priority)
+            yield(handler, step: step)
           end
         end
       end

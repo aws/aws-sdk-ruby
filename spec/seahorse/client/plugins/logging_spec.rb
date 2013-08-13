@@ -48,7 +48,7 @@ module Seahorse
         it 'adds the handler :before_validate (at the bottom of the stack)' do
           @handlers = double('handler-list')
           expect(@handlers).to receive(:add).
-            with(Client::Logging::Handler, priority: :before_validate)
+            with(Client::Logging::Handler, step: :before_validate)
           setup_plugin(logger: Object.new)
         end
 

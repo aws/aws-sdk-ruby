@@ -68,10 +68,10 @@ module Seahorse
 
         # @overload request_handler(handler_name, options = {}, &handler_block)
         #   @param [Symbol] handler_name
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @overload request_handler(options = {}, &handler_block)
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @return [Class]
         def request_handler(*args, &block)
@@ -84,10 +84,10 @@ module Seahorse
 
         # @overload response_handler(handler_name, options = {}, &handler_block)
         #   @param [Symbol] handler_name
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @overload response_handler(options = {}, &handler_block)
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @return [Class]
         def response_handler(*args, &block)
@@ -100,15 +100,15 @@ module Seahorse
         end
 
         # @overload handler(options = {}, &handler_block)
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @overload handler(handler_name, options = {}, &handler_block)
         #   @param [Symbol] handler_name
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @overload handler(handler_class, options = {})
         #   @param [Class] handler_class
-        #   @option options [Symbol] priority (:build)
+        #   @option options [Symbol] step (:build)
         #
         # @return [Class] Returns the handler class.
         def handler(*args, &block)

@@ -55,8 +55,8 @@ module Seahorse
           sign_handler = Class.new
           send_handler = Class.new
           plugin.handler(build_handler)
-          plugin.handler(sign_handler, priority: :sign)
-          plugin.handler(send_handler, priority: :send)
+          plugin.handler(sign_handler, step: :sign)
+          plugin.handler(send_handler, step: :send)
           plugin.new.add_handlers(handlers, config)
           expect(handlers.to_a).to eq([send_handler, sign_handler, build_handler])
         end
@@ -149,12 +149,12 @@ module Seahorse
           expect(client.handlers).to include(handler_class)
         end
 
-        it 'accepts a priority option' do
+        it 'accepts a step option' do
           handler1 = Class.new(Handler)
           handler2 = Class.new(Handler)
           client = client_with_plugin do
-            handler(handler1, priority: :validate)
-            handler(handler2, priority: :build)
+            handler(handler1, step: :validate)
+            handler(handler2, step: :build)
           end
           handlers = client.handlers.to_a
           expect(handlers).to include(handler1)
@@ -172,21 +172,21 @@ module Seahorse
           expect(resp).to eq('handler-return-value')
         end
 
-        it 'accepts a priority with the block' do
+        it 'accepts a step with the block' do
           plugin = Class.new(Plugin) do
-            handler(priority: :validate) do |context|
+            handler(step: :validate) do |context|
               context << :validate
               super(context)
             end
-            handler(priority: :build) do |context|
+            handler(step: :build) do |context|
               context << :build
               @handler.call(context)
             end
-            handler(priority: :sign) do |context|
+            handler(step: :sign) do |context|
               context << :sign
               handler.call(context)
             end
-            handler(priority: :send) do |context|
+            handler(step: :send) do |context|
               context << :send
               context
             end

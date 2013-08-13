@@ -30,7 +30,7 @@ end
 
 class DummySendPlugin < Seahorse::Client::Plugin
   option(:response_data) { { result: 'success' } }
-  handler DummySendHandler, priority: :send
+  handler DummySendHandler, step: :send
 end
 
 class Seahorse::Client::Base
