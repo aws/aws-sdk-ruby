@@ -16,7 +16,7 @@ module Aws
   module Plugins
     module Signers
       class Version3 < Seahorse::Client::Plugin
-        handler :Handler, priority: :sign do |context|
+        handler :Handler, step: :sign do |context|
           raise "Missing endpoint" unless context.config.respond_to?(:region)
           Aws::Signers::Version3.sign(context)
           super(context)
