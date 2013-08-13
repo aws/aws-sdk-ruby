@@ -49,7 +49,6 @@ module Seahorse
                 build_request(name, *args).send_request(&block)
               end
             end
-
           end
         end
 

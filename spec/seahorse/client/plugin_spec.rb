@@ -109,6 +109,7 @@ module Seahorse
       end
 
       describe '.initialize_client' do
+
         it 'provides a short-cut method for adding initializers' do
           initialized_client = nil
           client = client_with_plugin do
@@ -116,16 +117,29 @@ module Seahorse
           end
           expect(client).to be(initialized_client)
         end
+
       end
 
       describe '.construct_client' do
+
         it 'provides a short-cut method for adding constructor callbacks' do
-          client = client_with_plugin(foo: 'bar') do
-            construct_client {|c,opts| OpenStruct }
+
+          new_client_class = Class.new do
+            def initialize(config)
+              @config = config
+            end
+            attr_reader :config
           end
-          expect(client).to be_kind_of OpenStruct
-          expect(client).to eq OpenStruct.new(foo: 'bar')
+
+          client = client_with_plugin(foo: 'bar') do
+            option(:foo)
+            construct_client {|client_class, config| new_client_class }
+          end
+
+          expect(client).to be_kind_of(new_client_class)
+          expect(client.config.foo).to eq('bar')
         end
+
       end
 
       describe '.handler' do

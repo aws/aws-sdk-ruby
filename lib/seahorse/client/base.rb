@@ -15,37 +15,43 @@ module Seahorse
   module Client
     class Base
 
+      # @api private
+      REQUIRED_PLUGINS = [
+      ]
+
+      # default plugins
       @plugins = PluginList.new([
         Plugins::Api,
         Plugins::Endpoint,
+
         Plugins::NetHttp,
         Plugins::OperationMethods,
       ])
 
-      # @option options [String] :endpoint
-      #   Endpoints specify the http scheme, hostname and port to connect
-      #   to.  You must specify at a minimum the hostname.  Endpoints without
-      #   a uri scheme will default to https on port 443.
+      # @overload initialize(options = {})
       #
-      #       # defaults to https on port 443
-      #       hostname: 'domain.com'
+      #   @option options [String] :endpoint
+      #     Endpoints specify the http scheme, hostname and port to connect
+      #     to.  You must specify at a minimum the hostname.  Endpoints without
+      #     a uri scheme will default to https on port 443.
       #
-      #       # defaults to http on port 80
-      #       hostname: 'domain.com', ssl_default: false
+      #         # defaults to https on port 443
+      #         hostname: 'domain.com'
       #
-      #       # defaults are ignored, as scheme and port are present
-      #       hostname: 'http://domain.com:123'
+      #         # defaults to http on port 80
+      #         hostname: 'domain.com', ssl_default: false
       #
-      # @option options [Boolean] :ssl_default (true) Specifies the default
-      #   scheme for the #endpoint when not specified.  Defaults to `true`
-      #   which creates https endpoints.
+      #         # defaults are ignored, as scheme and port are present
+      #         hostname: 'http://domain.com:123'
       #
-      # @option options [Handler] :send_handler
+      #   @option options [Boolean] :ssl_default (true) Specifies the default
+      #     scheme for the #endpoint when not specified.  Defaults to `true`
+      #     which creates https endpoints.
       #
-      def initialize(options = {})
+      def initialize(config)
         plugins = self.class.build_plugins
-        @config = self.class.build_config(plugins, options)
-        @handlers = handler_list(plugins, options)
+        @config = config
+        @handlers = handler_list(plugins)
         initialize_client(plugins)
       end
 
@@ -73,19 +79,8 @@ module Seahorse
       end
 
       # @param [Array<Plugin>] plugins
-      # @option options [HttpHandler] :send_handler (nil)
       # @return [HandlerList]
-      def handler_list(plugins, options)
-        list = plugin_handlers(plugins)
-        if options[:send_handler]
-          list.add(options[:send_handler], priority: :send)
-        end
-        list
-      end
-
-      # @param [Array<Plugin>] plugins
-      # @return [HandlerList]
-      def plugin_handlers(plugins)
+      def handler_list(plugins)
         handlers = HandlerList.new
         plugins.each do |plugin|
           if plugin.respond_to?(:add_handlers)
@@ -164,9 +159,9 @@ module Seahorse
         # @see .set_plugins
         # @see .add_plugin
         # @see .remove_plugin
-        # @return [Array]
+        # @return [Array<Plugin>]
         def plugins
-          Array(@plugins).freeze
+          (REQUIRED_PLUGINS + Array(@plugins)).freeze
         end
 
         # @return [Model::Api]
@@ -193,19 +188,23 @@ module Seahorse
         end
 
         # @api private
-        def new(options = {}, &block)
-          object = client_class(options).allocate
-          object.send(:initialize, options, &block)
-          object
+        def new(options = {})
+          plugins = build_plugins
+          config = build_config(options, plugins)
+          client = client_class(config, plugins).allocate
+          client.send(:initialize, config)
+          client
         end
 
-        # @param [Hash] options
-        # @return [Class<Base>] the client class to construct
-        def client_class(options = {})
+        # @overload client_class(options = {})
+        #   @option (see #initialize)
+        #   @return [Class<Client::Base>]
+        def client_class(options = {}, plugins = build_plugins)
+          config = options.is_a?(Hash) ? build_config(options, plugins) : options
           klass = self
-          build_plugins.each do |plugin|
+          plugins.each do |plugin|
             if plugin.respond_to?(:construct_client)
-              new_klass = plugin.construct_client(klass, options)
+              new_klass = plugin.construct_client(klass, config)
               klass = new_klass if Class === new_klass
             end
           end
@@ -220,11 +219,11 @@ module Seahorse
           end
         end
 
-        # @param [Array<Plugin>] plugins
         # @param [Hash] options
+        # @param [Array<Plugin>] plugins
         # @return [Configuration]
         # @api private
-        def build_config(plugins, options)
+        def build_config(options, plugins)
           options = options.merge(api: api) unless options[:api]
           config = Configuration.new(options)
           plugins.each do |plugin|

@@ -73,14 +73,6 @@ module Seahorse
           expect(handlers).to include(NetHttp::Handler)
         end
 
-        it 'sets the send handler if given as a client constructor option' do
-          send_handler = Class.new(Handler)
-          client = client_class.new(:send_handler => send_handler)
-          request = client.build_request('operation')
-          expect(request.handlers.to_a).to include(send_handler)
-          expect(request.handlers.to_a).not_to include(NetHttp::Handler)
-        end
-
         it 'populates the request context with the operation name' do
           request = client.build_request('operation_name')
           expect(request.context.operation_name).to eq('operation_name')
@@ -220,18 +212,17 @@ module Seahorse
         end
 
         describe '.client_class' do
+
           it 'consults plugin list to see what client class to construct' do
             subclient_class = Class.new(client_class)
 
             plugin = double('plugin')
-            plugin.stub(:construct_client) do |klass, options|
-              subclient_class.send(:define_method, :foo) { options }
+            plugin.stub(:construct_client) do |klass, config|
               subclient_class
             end
 
             client_class.add_plugin(plugin)
             expect(client_class.client_class).to be(subclient_class)
-            expect(client_class.new(foo: 'bar').foo).to eq(foo: 'bar')
           end
 
           it 'does not change the client class if plugin#construct_client does not return Class' do
@@ -262,12 +253,14 @@ module Seahorse
         end
 
         describe '.new' do
+
           it 'constructs the class specified by .client_class' do
-            client_class.stub(:client_class) { OpenStruct }
+            new_client_class = Class.new { def initialize(cfg); end }
+            client_class.stub(:client_class) { new_client_class }
             client = client_class.new(foo: 'bar')
-            expect(client).to be_kind_of(OpenStruct)
-            expect(client).to eq OpenStruct.new(foo: 'bar')
+            expect(client).to be_kind_of(new_client_class)
           end
+
         end
 
         describe 'applying plugins' do
