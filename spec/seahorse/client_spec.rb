@@ -16,26 +16,11 @@ require 'spec_helper'
 module Seahorse
   describe Client do
 
-    describe '.define' do
-
-      it 'creates a new client class' do
-        client_class = Client.define
-        expect(client_class.ancestors).to include(Client::Base)
-      end
-
-      it 'sets the api on the client class' do
-        api = Model::Api.from_hash({})
-        client_class = Client.define(api: api)
-        expect(client_class.api).to be(api)
-      end
-
-      it 'extends from subclasses of client' do
-        klass1 = Client.define
-        klass2 = klass1.define
-        expect(klass2.ancestors).to include(klass1)
-        expect(klass2.ancestors).to include(Client::Base)
-      end
-
+    it 'is a helper method for Client::Base.define' do
+      options = double('options')
+      expect(Client::Base).to receive(:define).with(options)
+      Client.define(options)
     end
+
   end
 end

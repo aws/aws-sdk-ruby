@@ -121,6 +121,39 @@ module Seahorse
 
       end
 
+      describe '.define' do
+
+        it 'creates a new client class' do
+          client_class = Client.define
+          expect(client_class.ancestors).to include(Client::Base)
+        end
+
+        it 'sets the api on the client class' do
+          api = Model::Api.from_hash({})
+          client_class = Client.define(api: api)
+          expect(client_class.api).to be(api)
+        end
+
+        it 'extends from subclasses of client' do
+          klass1 = Client.define
+          klass2 = klass1.define
+          expect(klass2.ancestors).to include(klass1)
+          expect(klass2.ancestors).to include(Client::Base)
+        end
+
+      end
+
+      describe '.new' do
+
+        it 'constructs the class specified by .client_class' do
+          new_client_class = Class.new { def initialize(cfg); end }
+          client_class.stub(:client_class) { new_client_class }
+          client = client_class.new(foo: 'bar')
+          expect(client).to be_kind_of(new_client_class)
+        end
+
+      end
+
       describe 'plugin methods' do
 
         let(:plugin_a) { Class.new }
@@ -252,17 +285,6 @@ module Seahorse
 
             expect(client_class.client_class).to eq ClassC
           end
-        end
-
-        describe '.new' do
-
-          it 'constructs the class specified by .client_class' do
-            new_client_class = Class.new { def initialize(cfg); end }
-            client_class.stub(:client_class) { new_client_class }
-            client = client_class.new(foo: 'bar')
-            expect(client).to be_kind_of(new_client_class)
-          end
-
         end
 
         describe 'applying plugins' do
