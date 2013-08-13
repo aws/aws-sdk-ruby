@@ -187,9 +187,9 @@ module Seahorse
         # @option options [Model::Api, Hash] :api ({})
         # @return [Class]
         def define(options = {})
-          client_class = Class.new(self)
-          client_class.set_api(options[:api]) if options.key?(:api)
-          client_class
+          subclass = Class.new(self)
+          subclass.set_api(options[:api]) if options.key?(:api)
+          subclass
         end
 
         # @api private
