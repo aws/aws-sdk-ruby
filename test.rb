@@ -45,7 +45,7 @@ MyClient = Seahorse::Client.define(
   ],
   api: {
     'metadata' => {
-      'aws_api_versions' => [
+      'aws_api_versions' => {
         '2012-01-25' => 'models/swf-2012-01-25.json'
       },
       'regional_endpoint' => 'swf.%s.amazonaws.com'
