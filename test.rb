@@ -27,7 +27,7 @@ end
 class DummySenderPlugin < Seahorse::Client::Plugin
   option(:response_body) { '' }
 
-  handler :Handler, priority: :send do |context|
+  handler :Handler, step: :send do |context|
     response = Seahorse::Client::Response.new(context: context)
     response.http_response.body = StringIO.new(context.config.response_body)
     response.signal_complete
