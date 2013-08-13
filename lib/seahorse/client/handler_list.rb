@@ -23,16 +23,9 @@ module Seahorse
           raise ArgumentError, "invalid step #{key.inspect}"
         end
         @handlers[:send] = SendHandlers.new
-        @handlers[:before_send] = []
-        @handlers[:after_sign] = []
         @handlers[:sign] = []
-        @handlers[:before_sign] = []
-        @handlers[:after_build] = []
         @handlers[:build] = []
-        @handlers[:before_build] = []
-        @handlers[:after_validate] = []
         @handlers[:validate] = []
-        @handlers[:before_validate] = []
       end
 
       # @param [Class] handler_class
@@ -59,7 +52,7 @@ module Seahorse
 
       # Constructs the handlers recursively, building a handler stack.
       # The `:send` handler will be at the top of the stack and the
-      # `:before_validate` handlers will be at the bottom.
+      # `:validate` handlers will be at the bottom.
       # @return [Handler]
       def to_stack
         inject(nil) do |stack, handler|

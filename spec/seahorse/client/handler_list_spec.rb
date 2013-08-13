@@ -48,10 +48,10 @@ module Seahorse
         end
 
         it 'defaults step to :build' do
-          handlers.add('before', step: :before_build)
-          handlers.add('on')
-          handlers.add('after', step: :after_build)
-          expect(handlers.to_a).to eq(['after', 'on', 'before'])
+          handlers.add('validate', step: :validate)
+          handlers.add('build')
+          handlers.add('sign', step: :sign)
+          expect(handlers.to_a).to eq(['sign', 'build', 'validate'])
         end
 
         it 'accepts multiple handlers with the same step' do
@@ -62,34 +62,7 @@ module Seahorse
           expect(handlers.to_a).to eq(['h4', 'h3', 'h2', 'h1'])
         end
 
-        %w(validate build sign).each do |step|
-
-          describe(step) do
-
-            it "has a before and after level for #{step}" do
-              handlers.add('before', step: :"before_#{step}")
-              handlers.add('on', step: step.to_sym)
-              handlers.add('after', step: :"after_#{step}")
-              expect(handlers.to_a).to eq(['after', 'on', 'before'])
-            end
-
-          end
-
-        end
-
         describe 'send' do
-
-          it 'has a before level for send' do
-            handlers.add('before', step: :before_send)
-            handlers.add('on', step: :send)
-            expect(handlers.to_a).to eq(['on', 'before'])
-          end
-
-          it 'does not support after send' do
-            expect do
-              handlers.add('handler', step: :after_send)
-            end.to raise_error(ArgumentError)
-          end
 
           it 'only keeps the latest send handler' do
             handlers.add('handler1', step: :send)
