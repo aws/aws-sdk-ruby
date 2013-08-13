@@ -145,6 +145,11 @@ module Seahorse
           expect(klass2.ancestors).to include(Client::Base)
         end
 
+        it 'applies plugins passed in via :plugins' do
+          client_class = Client.define(plugins: [plugin_a])
+          expect(client_class.plugins).to include(plugin_a)
+        end
+
       end
 
       describe '.add_plugin' do
