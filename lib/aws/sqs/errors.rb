@@ -96,6 +96,29 @@ module AWS
         attr_reader :failures
 
       end
+
+      class ChecksumError < StandardError
+
+        def initialize failures
+          # failures can also be a single failure, always generate an array
+          @failures = failures.is_a?(Array) ? failures : [failures]
+          super("#{@failures.size} messages failed checksum verification")
+        end
+
+        attr_reader :failures
+      end
+
+      class BatchSendMultiError < StandardError
+        def initialize *error_set
+          @errors = []
+          error_set.each do |error|
+            @errors << error
+          end
+        end
+
+        attr_reader :errors
+      end
+
     end
   end
 end
