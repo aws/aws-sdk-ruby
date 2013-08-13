@@ -27,31 +27,29 @@ module Seahorse
         Plugins::OperationMethods,
       ])
 
-      # @overload initialize(options = {})
+      # @option options [String] :endpoint
+      #   Endpoints specify the http scheme, hostname and port to connect
+      #   to.  You must specify at a minimum the hostname.  Endpoints without
+      #   a uri scheme will default to https on port 443.
       #
-      #   @option options [String] :endpoint
-      #     Endpoints specify the http scheme, hostname and port to connect
-      #     to.  You must specify at a minimum the hostname.  Endpoints without
-      #     a uri scheme will default to https on port 443.
+      #       # defaults to https on port 443
+      #       hostname: 'domain.com'
       #
-      #         # defaults to https on port 443
-      #         hostname: 'domain.com'
+      #       # defaults to http on port 80
+      #       hostname: 'domain.com', ssl_default: false
       #
-      #         # defaults to http on port 80
-      #         hostname: 'domain.com', ssl_default: false
+      #       # defaults are ignored, as scheme and port are present
+      #       hostname: 'http://domain.com:123'
       #
-      #         # defaults are ignored, as scheme and port are present
-      #         hostname: 'http://domain.com:123'
+      # @option options [Boolean] :ssl_default (true) Specifies the default
+      #   scheme for the #endpoint when not specified.  Defaults to `true`
+      #   which creates https endpoints.
       #
-      #   @option options [Boolean] :ssl_default (true) Specifies the default
-      #     scheme for the #endpoint when not specified.  Defaults to `true`
-      #     which creates https endpoints.
-      #
-      def initialize(config)
-        plugins = self.class.build_plugins
-        @config = config
-        @handlers = handler_list(plugins)
-        initialize_client(plugins)
+      def initialize(options = {})
+        @plugins = self.class.build_plugins
+        @config = build_config(options)
+        @handlers = build_handlers
+        initialize_client
       end
 
       # @return [Configuration]
@@ -67,21 +65,30 @@ module Seahorse
 
       private
 
-      # @param [Array<Plugin>] plugins
-      # @return [void]
-      def initialize_client(plugins)
-        plugins.each do |plugin|
+      # Constructs a {Configuration} object and gives each plugin the
+      # opportunity to register options with default values.
+      def build_config(options)
+        options = options.merge(api: self.class.api) unless options[:api]
+        config = Configuration.new(options)
+        @plugins.each do |plugin|
+          plugin.add_options(config) if plugin.respond_to?(:add_options)
+        end
+        config
+      end
+
+      # Gives each plugin the opportunity to modify this client.
+      def initialize_client
+        @plugins.each do |plugin|
           if plugin.respond_to?(:initialize_client)
             plugin.initialize_client(self)
           end
         end
       end
 
-      # @param [Array<Plugin>] plugins
-      # @return [HandlerList]
-      def handler_list(plugins)
+      # Gives each plugin the opportunity to register handlers for this client.
+      def build_handlers
         handlers = HandlerList.new
-        plugins.each do |plugin|
+        @plugins.each do |plugin|
           if plugin.respond_to?(:add_handlers)
             plugin.add_handlers(handlers, @config)
           end
@@ -188,22 +195,18 @@ module Seahorse
 
         # @api private
         def new(options = {})
-          plugins = build_plugins
-          config = build_config(options, plugins)
-          client = client_class(config, plugins).allocate
-          client.send(:initialize, config)
+          client = client_class(options).allocate
+          client.send(:initialize, options)
           client
         end
 
-        # @overload client_class(options = {})
-        #   @option (see #initialize)
-        #   @return [Class<Client::Base>]
-        def client_class(options = {}, plugins = build_plugins)
-          config = options.is_a?(Hash) ? build_config(options, plugins) : options
+        # @param [Hash] options ({})
+        # @return [Class<Client::Base>]
+        def client_class(options = {})
           klass = self
-          plugins.each do |plugin|
-            if plugin.respond_to?(:construct_client)
-              new_klass = plugin.construct_client(klass, config)
+          build_plugins.each do |plugin|
+            if plugin.respond_to?(:client_class_for)
+              new_klass = plugin.client_class_for(klass, options)
               klass = new_klass if Class === new_klass
             end
           end
@@ -216,19 +219,6 @@ module Seahorse
           plugins.map do |plugin|
             plugin.is_a?(Class) ? plugin.new : plugin
           end
-        end
-
-        # @param [Hash] options
-        # @param [Array<Plugin>] plugins
-        # @return [Configuration]
-        # @api private
-        def build_config(options, plugins)
-          options = options.merge(api: api) unless options[:api]
-          config = Configuration.new(options)
-          plugins.each do |plugin|
-            plugin.add_options(config) if plugin.respond_to?(:add_options)
-          end
-          config
         end
 
         private

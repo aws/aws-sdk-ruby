@@ -120,24 +120,21 @@ module Seahorse
 
       end
 
-      describe '.construct_client' do
+      describe '.client_class_for' do
 
-        it 'provides a short-cut method for adding constructor callbacks' do
-
-          new_client_class = Class.new do
-            def initialize(config)
-              @config = config
-            end
-            attr_reader :config
+        it 'provides a method to specify a different client class' do
+          client = client_with_plugin do
+            client_class_for {|klass, options| OpenStruct }
           end
+          expect(client).to be_kind_of(OpenStruct)
+        end
 
-          client = client_with_plugin(foo: 'bar') do
-            option(:foo)
-            construct_client {|client_class, config| new_client_class }
+        it 'gives the constructor options to the block' do
+          yielded = nil
+          client_with_plugin(foo: 'bar') do
+            client_class_for {|klass, options| yielded = options }
           end
-
-          expect(client).to be_kind_of(new_client_class)
-          expect(client.config.foo).to eq('bar')
+          expect(yielded).to eq(foo: 'bar')
         end
 
       end

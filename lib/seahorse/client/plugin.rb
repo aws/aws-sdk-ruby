@@ -47,12 +47,12 @@ module Seahorse
       # @return [Class<Client::Base>] the client class that should be
       #   allocated and constructed
       # @return [nil] if the client class should not be changed
-      def construct_client(client_class, options)
+      def client_class_for(klass, options)
         self.class.constructors.each do |block|
-          new_client_class = instance_exec(client_class, options, &block)
-          client_class = new_client_class if Class === new_client_class
+          new_klass = instance_exec(klass, options, &block)
+          klass = new_klass if Class === new_klass
         end
-        client_class
+        klass
       end
 
       class << self
@@ -122,7 +122,7 @@ module Seahorse
           initializers << block
         end
 
-        def construct_client(&block)
+        def client_class_for(&block)
           constructors << block
         end
 
