@@ -45,7 +45,7 @@ module Seahorse
           expect(@handlers.to_a).to eq([])
         end
 
-        it 'adds the handler :before_validate (at the bottom of the stack)' do
+        it 'adds the handler to the bottom of the stack' do
           @handlers = double('handler-list')
           expect(@handlers).to receive(:add).
             with(Client::Logging::Handler, step: :validate)
