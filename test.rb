@@ -34,8 +34,8 @@ class DummySenderPlugin < Seahorse::Client::Plugin
   end
 end
 
-MyClient = Seahorse::Client.define api: {
-  'plugins' => [
+MyClient = Seahorse::Client.define(
+  plugins: [
     Aws::Plugins::VersionedApiLoader,
     Aws::Plugins::RegionalEndpoint,
     Aws::Plugins::EnvironmentCredentials,
@@ -43,13 +43,15 @@ MyClient = Seahorse::Client.define api: {
     Aws::Plugins::JsonSerializer,
     #DummySenderPlugin
   ],
-  'metadata' => {
-    'aws_api_versions' => {
-      '2012-01-25' => 'models/swf-2012-01-25.json'
+  api: {
+    'metadata' => {
+      'aws_api_versions' => [
+        '2012-01-25' => 'models/swf-2012-01-25.json'
+      },
+      'regional_endpoint' => 'swf.%s.amazonaws.com'
     },
-    'regional_endpoint' => 'swf.%s.amazonaws.com'
-  }
-}
+  },
+)
 
 client = MyClient.new region: 'us-east-1',
   ssl_default: false, api_version: '2012-01-25'
