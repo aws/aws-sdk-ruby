@@ -15,9 +15,10 @@
 module Aws
   module Plugins
     class VersionedApiLoader < Seahorse::Client::Plugin
+
       option(:api_version)
 
-      construct_client do |klass, options|
+      client_class_for do |klass, options|
         unless options[:api_version]
           raise ArgumentError, 'missing option :api_version'
         end
@@ -44,6 +45,7 @@ module Aws
       def api_config_file(klass, options)
         klass.api.metadata['aws_api_versions'][options[:api_version]]
       end
+
     end
   end
 end
