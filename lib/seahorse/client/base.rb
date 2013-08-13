@@ -186,7 +186,9 @@ module Seahorse
         end
 
         # @option options [Model::Api, Hash] :api ({})
-        # @return [Class]
+        # @option options [Array<Plugin>] :plugins ([]) A list of plugins to
+        #   add to the client class created.
+        # @return [Class<Client::Base>]
         def define(options = {})
           subclass = Class.new(self)
           subclass.set_api(options[:api]) if options.key?(:api)
