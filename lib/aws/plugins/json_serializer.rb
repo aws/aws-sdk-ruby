@@ -17,19 +17,24 @@ require 'stringio'
 module Aws
   module Plugins
     class JsonSerializer < Seahorse::Client::Plugin
-      handler(:Input) do |context|
-        json = JSON.generate(context.params)
+
+      request_handler(:Serialzer) do |context|
+        json = JSON.pretty_generate(context.params, indent: '  ')
+        version = context.config.api.json_version || '1.0'
+        content_type = "application/x-amz-json-#{version}"
         target = context.config.api.target_prefix + '.' + context.operation.name
         context.http_request.body = StringIO.new(json)
         context.http_request.http_method = 'POST'
         context.http_request.path = '/'
-        context.http_request.headers['Content-Type'] = 'application/x-amz-json-' + (context.config.api.json_version || 1.0).to_s
-        context.http_request.headers['Content-Length'] = json.size
+        context.http_request.headers['Content-Type'] = content_type
+        context.http_request.headers['Content-Length'] = json.bytesize
         context.http_request.headers['X-Amz-Target'] = target
-        super(context).tap do |response|
-          response.data = JSON.parse(context.http_response.body.read)
-        end
       end
+
+      response_handler(:Parser) do |response|
+        response.data = JSON.parse(response.context.http_response.body.read)
+      end
+
     end
   end
 end
