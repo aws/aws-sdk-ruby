@@ -67,7 +67,7 @@ module Seahorse
         end
 
         # @overload request_handler(handler_name, options = {}, &handler_block)
-        #   @param [String] handler_name
+        #   @param [Symbol] handler_name
         #   @option options [Symbol] priority (:build)
         #
         # @overload request_handler(options = {}, &handler_block)
@@ -83,7 +83,7 @@ module Seahorse
         end
 
         # @overload response_handler(handler_name, options = {}, &handler_block)
-        #   @param [String] handler_name
+        #   @param [Symbol] handler_name
         #   @option options [Symbol] priority (:build)
         #
         # @overload response_handler(options = {}, &handler_block)
@@ -103,7 +103,7 @@ module Seahorse
         #   @option options [Symbol] priority (:build)
         #
         # @overload handler(handler_name, options = {}, &handler_block)
-        #   @param [String] handler_name
+        #   @param [Symbol] handler_name
         #   @option options [Symbol] priority (:build)
         #
         # @overload handler(handler_class, options = {})

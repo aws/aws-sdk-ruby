@@ -112,7 +112,7 @@ module Seahorse
         # @return [String]
         attr_reader :canonical_name
 
-        # @return [Plugin]
+        # @return [Class<Plugin>]
         def plugin
           @plugin ||= require_plugin
         end
@@ -140,7 +140,7 @@ module Seahorse
 
         private
 
-        # @return [Module, Class]
+        # @return [Class<Plugin>]
         def require_plugin
           require(@gem_name) if @gem_name
           plugin_class = Kernel
