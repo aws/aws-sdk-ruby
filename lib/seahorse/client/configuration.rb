@@ -85,6 +85,7 @@ module Seahorse
       #
       # @return [void]
       def add_option(name, default = nil)
+        name = name.to_sym
         define_getter(name) unless @defaults.key?(name)
         @defaults[name] = default
         nil

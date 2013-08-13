@@ -64,6 +64,12 @@ module Seahorse
           config.add_option(:size, 'large')
         end
 
+        it 'symbolizes the option name' do
+          config.add_option('name', 'default')
+          expect(config.name).to eq('default')
+          expect(config.to_hash).to eq(name: 'default')
+        end
+
       end
 
       describe '#options' do
