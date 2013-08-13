@@ -85,14 +85,8 @@ module Seahorse
       #
       # @return [void]
       def add_option(name, default = nil)
+        define_getter(name) unless @defaults.key?(name)
         @defaults[name] = default
-        define_singleton_method(name) do
-          if @options.key?(name)
-            @options[name]
-          else
-            @defaults[name]
-          end
-        end
         nil
       end
 
@@ -105,6 +99,18 @@ module Seahorse
       end
       alias to_h options
       alias to_hash options
+
+      private
+
+      def define_getter(name)
+        define_singleton_method(name) do
+          if @options.key?(name)
+            @options[name]
+          else
+            @defaults[name]
+          end
+        end
+      end
 
     end
   end

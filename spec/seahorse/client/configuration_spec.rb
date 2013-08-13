@@ -51,6 +51,19 @@ module Seahorse
           expect(config.size).to eq('large')
         end
 
+        it 'can be called with the same option multiple times' do
+          config.add_option(:color, 'red')
+          config.add_option(:color, 'blue')
+          expect(config.color).to eq('blue')
+        end
+
+        it 'does not redefine the getter if called multiple times' do
+          expect(config).to receive(:define_singleton_method).
+            with(:size).exactly(1).times
+          config.add_option(:size, 'small')
+          config.add_option(:size, 'large')
+        end
+
       end
 
       describe '#options' do
