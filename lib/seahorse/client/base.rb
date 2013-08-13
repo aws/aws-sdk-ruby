@@ -17,13 +17,12 @@ module Seahorse
 
       # @api private
       REQUIRED_PLUGINS = [
+        Plugins::Api,
+        Plugins::Endpoint,
       ]
 
       # default plugins
       @plugins = PluginList.new([
-        Plugins::Api,
-        Plugins::Endpoint,
-
         Plugins::NetHttp,
         Plugins::OperationMethods,
       ])

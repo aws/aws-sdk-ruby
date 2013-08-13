@@ -159,7 +159,9 @@ module Seahorse
             handler(handler1, priority: :validate)
             handler(handler2, priority: :build)
           end
-          expect(client.handlers.to_a).to eq([handler2, handler1])
+          handlers = client.handlers.to_a
+          expect(handlers).to include(handler1)
+          expect(handlers).to include(handler2)
         end
 
         it 'builds a handler from a block' do

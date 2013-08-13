@@ -20,9 +20,11 @@ module Seahorse
 
       let(:api) {{ 'endpoint' => 'http://endpoint:123' }}
 
-      let(:client_class) { Client.define(api: api) }
+      let(:client_class) { Base.define(api: api) }
 
       let(:client) { client_class.new }
+
+      let(:required_plugins) { Base::REQUIRED_PLUGINS }
 
       describe '#config' do
 
@@ -166,7 +168,7 @@ module Seahorse
           it 'replaces existing plugins' do
             client_class.add_plugin(plugin_a)
             client_class.set_plugins([plugin_b])
-            expect(client_class.plugins).to eq([plugin_b])
+            expect(client_class.plugins).to eq(required_plugins + [plugin_b])
           end
 
         end
@@ -176,7 +178,7 @@ module Seahorse
           it 'removes all plugins' do
             client_class.add_plugin(plugin_a)
             client_class.clear_plugins
-            expect(client_class.plugins).to eq([])
+            expect(client_class.plugins).to eq(required_plugins + [])
           end
 
         end
