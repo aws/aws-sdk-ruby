@@ -645,15 +645,17 @@ module AWS
           end
 
           it 'should call get_object with instruction material location and decrypt with block' do
-            client.should_receive(:get_object).with(:bucket_name => "foobucket",
-                                                    :key => "foo.instruction").
-                                  and_return(inst_response)
-            client.should_receive(:get_object).with(:bucket_name => "foobucket",
-                                                    :key => "foo").
-                                                    and_yield(encrypted_data)
+            client.should_receive(:get_object).
+              with(:bucket_name => "foobucket", :key => "foo.instruction").
+              and_return(inst_response)
+
+            client.should_receive(:get_object).
+              with(:bucket_name => "foobucket", :key => "foo").
+              and_yield(encrypted_data).
+              and_return(response)
+
             out = StringIO.new
-            object.read(:encryption_key => rsa_key,
-                        :encryption_materials_location => :instruction_file) do |chunk|
+            object.read(:encryption_key => rsa_key, :encryption_materials_location => :instruction_file) do |chunk|
               out << chunk
             end
             out.rewind
