@@ -37,7 +37,6 @@ end
 MyClient = Seahorse::Client.define api: {
   'plugins' => [
     Aws::Plugins::VersionedApiLoader,
-    Seahorse::Client::Plugins::OperationMethods,
     Aws::Plugins::RegionalEndpoint,
     Aws::Plugins::EnvironmentCredentials,
     Aws::Plugins::Signers::Version3,
