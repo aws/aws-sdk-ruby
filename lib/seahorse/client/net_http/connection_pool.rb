@@ -37,7 +37,7 @@ module Seahorse
         @pools = {}
 
         DEFAULT_CERT_BUNDLE = File.expand_path(File.join(
-          File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle-crt'))
+          File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle.crt'))
 
         OPTIONS = {
           http_proxy: nil,
