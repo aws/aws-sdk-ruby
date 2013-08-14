@@ -128,7 +128,9 @@ module Seahorse
         end
       end
 
-      # Returns a handler list that 
+      # Returns a handler list for the given operation.  The returned
+      # will have the operation specific handlers merged with the common
+      # handlers.
       # @param [String] operation The name of an operation.
       # @return [HandlerList]
       def for(operation)
