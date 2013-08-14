@@ -81,8 +81,8 @@ module Aws
       def canonical_request(request)
         parts = []
         parts << request.http_method
-        parts << request.path.split('?', 1).first
-        parts << request.path.split('?', 1).last
+        parts << request.path.split('?', 1)[0] || ''
+        parts << request.path.split('?', 1)[1] || ''
         parts << canonical_headers(request) + "\n"
         parts << signed_headers(request)
         parts << request.headers['X-Amz-Content-Sha256']
