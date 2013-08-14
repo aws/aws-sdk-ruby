@@ -153,6 +153,55 @@ module Seahorse
 
       end
 
+      describe '#for' do
+
+        it 'returns a handler list' do
+          expect(handlers.for('operation')).to be_kind_of(HandlerList)
+        end
+
+        it 'returns a different handler list' do
+          expect(handlers.for('operation')).to_not be(handlers)
+        end
+
+        it 'copies the send handler' do
+          handlers.add('send', step: :send)
+          expect(handlers.for('operation').to_a).to eq(['send'])
+        end
+
+        it 'copies the common handlers' do
+          handlers.add('validate', step: :validate)
+          handlers.add('build', step: :build)
+          handlers.add('sign', step: :sign)
+          expect(handlers.for('operation').to_a).to eq(%w(sign build validate))
+        end
+
+        it 'deep copies handlers' do
+          handlers.add('handler1')
+          handlers2 = handlers.for('operation')
+          handlers2.add('handler2')
+          expect(handlers.to_a).to eq(['handler1'])
+          expect(handlers2.to_a).to eq(['handler1', 'handler2'])
+        end
+
+        it 'copies operation handlers with the given name' do
+          handlers.add('handler', operations: ['operation'])
+          expect(handlers.for('operation').to_a).to eq(['handler'])
+        end
+
+        it 'does not copy operation handlers that have a different name' do
+          handlers.add('handler', operations: ['operation'])
+          expect(handlers.for('operation2').to_a).to eq([])
+        end
+
+        it 'merges operation and common handlers preserving priority' do
+          handlers.add('high', priority: 30, operation: 'operation')
+          handlers.add('medium', priority: 20, operation: 'operation')
+          handlers.add('low', priority: 10)
+          expect(handlers.for('operation').to_a).to eq(%w(low medium high))
+        end
+
+      end
+
       describe '#to_stack' do
 
         it 'constructs a handler stack' do
