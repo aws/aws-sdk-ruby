@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'thread'
+
 module Seahorse
   module Client
     class HandlerList
@@ -45,6 +47,7 @@ module Seahorse
         @send = options[:send]
         @common = options[:common] || []
         @operations = Hash.new { |h, k| h[k] = [] }
+        @mutex = Mutex.new
       end
 
       # Registers a handler.  Handlers are used to build a handler stack.
@@ -117,14 +120,16 @@ module Seahorse
       #   send handler replaces the previous.
       #
       def add(handler_class, options = {})
-        if options[:step] == :send
-          @send = handler_class
-        elsif options[:operations]
-          options[:operations].each do |operation|
-            insert(@operations[operation], handler_class, options)
+        @mutex.synchronize do
+          if options[:step] == :send
+            @send = handler_class
+          elsif options[:operations]
+            options[:operations].each do |operation|
+              insert(@operations[operation], handler_class, options)
+            end
+          else
+            insert(@common, handler_class, options)
           end
-        else
-          insert(@common, handler_class, options)
         end
       end
 
@@ -134,18 +139,22 @@ module Seahorse
       # @param [String] operation The name of an operation.
       # @return [HandlerList]
       def for(operation)
-        HandlerList.new(
-          index: @index,
-          send: @send,
-          common: @common + @operations[operation],
-        )
+        @mutex.synchronize do
+          HandlerList.new(
+            index: @index,
+            send: @send,
+            common: @common + @operations[operation],
+          )
+        end
       end
 
       # Yields the handlers in stack order, which is reverse priority.
       def each(&block)
-        yield(@send) if @send
-        @common.sort.each do |order, insertion_order, handler|
-          yield(handler)
+        @mutex.synchronize do
+          yield(@send) if @send
+          @common.sort.each do |order, insertion_order, handler|
+            yield(handler)
+          end
         end
       end
 
