@@ -135,6 +135,22 @@ module Seahorse
 
         end
 
+        describe ':operations' do
+
+          it 'adds a handler that is not enumerated by default' do
+            handlers.add('handler', operations: ['operation_name'])
+            expect(handlers.to_a).to eq([])
+          end
+
+          it 'adds a handler that is enumerated for a given :operation' do
+            handlers.add('handler1', operations: ['operation1'])
+            handlers.add('handler2', operations: ['operation1'])
+            handlers.add('handler3', operations: ['operation2'])
+            expect(handlers.for('operation1').to_a).to eq(%w(handler1 handler2))
+          end
+
+        end
+
       end
 
       describe '#to_stack' do

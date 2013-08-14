@@ -40,9 +40,11 @@ module Seahorse
       include Enumerable
 
       # @api private
-      def initialize
-        @send_handler = nil
-        @handlers = []
+      def initialize(options = {})
+        @index = options[:index] || 0
+        @send = options[:send]
+        @common = options[:common] || []
+        @operations = Hash.new { |h, k| h[k] = [] }
       end
 
       # Registers a handler.  Handlers are used to build a handler stack.
@@ -115,17 +117,32 @@ module Seahorse
       #   send handler replaces the previous.
       #
       def add(handler_class, options = {})
-        if options[:step] == :send
-          @send_handler = handler_class
+        case
+        when options[:step] == :send then @send = handler_class
+        when options[:operations]
+          options[:operations].each do |operation|
+            @operations[operation] << [order(options), next_index, handler_class]
+          end
         else
-          @handlers << [order(options), @handlers.size, handler_class]
+          @common << [order(options), next_index, handler_class]
         end
+      end
+
+      # Returns a handler list that 
+      # @param [String] operation The name of an operation.
+      # @return [HandlerList]
+      def for(operation)
+        HandlerList.new(
+          index: @index,
+          send: @send,
+          common: @common + @operations[operation],
+        )
       end
 
       # Yields the handlers in stack order, which is reverse priority.
       def each(&block)
-        yield(@send_handler) if @send_handler
-        @handlers.sort.each do |order, insertion_order, handler|
+        yield(@send) if @send
+        @common.sort.each do |order, insertion_order, handler|
           yield(handler)
         end
       end
@@ -141,6 +158,10 @@ module Seahorse
       end
 
       private
+
+      def next_index
+        @index += 1
+      end
 
       # @return [Integer]
       def order(options)
