@@ -64,7 +64,9 @@ module Seahorse
       # @param [Symbol, String] operation_name
       # @return [Request]
       def build_request(operation_name, params = {})
-        Request.new(@handlers, context_for(operation_name, params))
+        Request.new(
+          @handlers.for(operation_name),
+          context_for(operation_name, params))
       end
 
       private
