@@ -31,15 +31,15 @@ module Seahorse
           expect(handlers.to_a).to eq([handler])
         end
 
-        it 'preserves insertion order' do
+        it 'handlers added latter have a higher priority' do
           handler1 = Class.new
           handler2 = Class.new
           handlers.add(handler1)
           handlers.add(handler2)
-          expect(handlers.to_a).to eq([handler2, handler1])
+          expect(handlers.to_a).to eq([handler1, handler2])
         end
 
-        it 'sorts handlers by reverse (stack) step' do
+        it 'sorts handlers by step priority order' do
           handlers.add('validate', step: :validate)
           handlers.add('build', step: :build)
           handlers.add('sign', step: :sign)
@@ -59,20 +59,76 @@ module Seahorse
           handlers.add('h2', step: :validate)
           handlers.add('h3', step: :build)
           handlers.add('h4', step: :build)
-          expect(handlers.to_a).to eq(['h4', 'h3', 'h2', 'h1'])
+          expect(handlers.to_a).to eq(%w(h3 h4 h1 h2))
         end
 
-        describe 'send' do
-
-          it 'only keeps the latest send handler' do
-            handlers.add('handler1', step: :send)
-            handlers.add('handler2', step: :send)
-            handlers.add('handler3', step: :send)
-            expect(handlers.to_a).to eq(['handler3'])
-          end
-
+        it 'accepts a priority' do
+          handlers.add('medium', priority: 50)
+          handlers.add('high', priority: 80)
+          handlers.add('low', priority: 20)
+          expect(handlers.to_a).to eq(%w(low medium high))
         end
+
+        it 'sorts handler with the same priority in FIFO order' do
+          handlers.add('a', priority: 20, step: :sign)
+          handlers.add('b', priority: 20, step: :sign)
+          handlers.add('c', priority: 20, step: :sign)
+          handlers.add('m', priority: 20, step: :build)
+          handlers.add('n', priority: 20, step: :build)
+          handlers.add('o', priority: 20, step: :build)
+          handlers.add('x', priority: 20, step: :validate)
+          handlers.add('y', priority: 20, step: :validate)
+          handlers.add('z', priority: 20, step: :validate)
+          handlers.add('-', step: :send)
+          expect(handlers.to_a).to eq(%w(- a b c m n o x y z))
+        end
+
+        it 'raises an error if :step is not valid' do
+          msg = "invalid :step `:bogus', must be one of :validate, :build, "
+          msg << ":sign or :send"
+          expect {
+            handlers.add('handler', step: :bogus)
+          }.to raise_error(ArgumentError, msg)
+        end
+
+        it 'raises an error if :priority is less than 0' do
+          msg = "invalid :priority `-1', must be between 0 and 99"
+          expect {
+            handlers.add('handler', priority: -1)
+          }.to raise_error(ArgumentError, msg)
+        end
+
+        it 'raises an error if :priority is greater than 99' do
+          msg = "invalid :priority `100', must be between 0 and 99"
+          expect {
+            handlers.add('handler', priority: 100)
+          }.to raise_error(ArgumentError, msg)
+        end
+
+        it 'only keeps the latest send handler' do
+          handlers.add('handler1', step: :send)
+          handlers.add('handler2', step: :send)
+          handlers.add('handler3', step: :send)
+          expect(handlers.to_a).to eq(['handler3'])
+        end
+
       end
+
+      describe '#to_stack' do
+
+        it 'constructs a handler stack' do
+          handler = double('handler')
+          expect(handler).to receive(:new).with(nil).and_return(1)
+          expect(handler).to receive(:new).with(1).and_return(2)
+          expect(handler).to receive(:new).with(2).and_return(3)
+          handlers.add(handler)
+          handlers.add(handler)
+          handlers.add(handler)
+          expect(handlers.to_stack).to eq(3)
+        end
+
+      end
+
     end
   end
 end

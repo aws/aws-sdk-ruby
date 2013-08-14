@@ -15,17 +15,27 @@ module Seahorse
   module Client
     class HandlerList
 
+      # @api private
+      INVALID_STEP = <<-MSG.strip
+        invalid :step `%s', must be one of :validate, :build, :sign or :send
+      MSG
+
+      # @api private
+      INVALID_PRIORITY = "invalid :priority `%s', must be between 0 and 99"
+
+      # @api private
+      STEPS = {
+        validate: 200,
+        build: 100,
+        sign: 0,
+      }
+
       include Enumerable
 
       # @api private
       def initialize
-        @handlers = Hash.new do |hash, key|
-          raise ArgumentError, "invalid step #{key.inspect}"
-        end
-        @handlers[:send] = SendHandlers.new
-        @handlers[:sign] = []
-        @handlers[:build] = []
-        @handlers[:validate] = []
+        @send_handler = nil
+        @handlers = []
       end
 
       # Registers a handler.  Handlers are used to build a handler stack.
@@ -74,9 +84,9 @@ module Seahorse
       #   of {Handler} or any class that construct an object that
       #   responds to `#call`.
       #
-      # @option options [Symbol] :step (:build) The request lifecycle
-      #   step the handler should run in.  Defaults to `:build`.  Valid
-      #   steps include:
+      # @option options [Symbol] :step (:build) The request life-cycle
+      #   step the handler should run in.  Defaults to `:build`.  The
+      #   list of possible steps, in high-to-low priority order are:
       #
       #   * `:validate`
       #   * `:build`
@@ -96,22 +106,18 @@ module Seahorse
       #   send handler replaces the previous.
       #
       def add(handler_class, options = {})
-        @handlers[options[:step] || :build].unshift(handler_class)
-      end
-
-      # Yields the handlers.
-      def each(&block)
-        @handlers.values.each do |handlers|
-          handlers.each(&block)
+        if options[:step] == :send
+          @send_handler = handler_class
+        else
+          @handlers << [order(options), @handlers.size, handler_class]
         end
       end
 
-      # Copies handlers from another list onto the current one.
-      # @param [HandlerList] handlers
-      # @return [void]
-      def copy_from(handlers)
-        handlers.send(:each_with_options) do |handler, options|
-          add(handler, options)
+      # Yields the handlers in stack order, which is reverse priority.
+      def each(&block)
+        yield(@send_handler) if @send_handler
+        @handlers.sort.each do |order, insertion, handler|
+          yield(handler)
         end
       end
 
@@ -127,28 +133,27 @@ module Seahorse
 
       private
 
-      def each_with_options(&block)
-        @handlers.each do |step, handlers|
-          handlers.each do |handler|
-            yield(handler, step: step)
-          end
-        end
+      # @return [Integer]
+      def order(options)
+        step_value(options) + priority(options)
       end
 
-      # There can only be a single send handler.  This provides the same
-      # interface plus a helpful warning message.
-      # @api private
-      class SendHandlers
-
-        def unshift(handler)
-          @handler = handler
+      def step_value(options)
+        step = options[:step] || :build
+        unless STEPS.key?(step)
+          raise ArgumentError, INVALID_STEP % step.inspect
         end
-
-        def each(&block)
-          yield(@handler) if @handler
-        end
-
+        STEPS[step]
       end
+
+      def priority(options)
+        priority = options[:priority] || 50
+        unless (0..99).include?(priority)
+          raise ArgumentError, INVALID_PRIORITY % priority.inspect
+        end
+        priority
+      end
+
     end
   end
 end
