@@ -112,6 +112,13 @@ module Seahorse
           expect(handlers.to_a).to eq(['handler3'])
         end
 
+        it 'ignores :priority when adding :send handlers' do
+          handlers.add('handler1', step: :send, priority: 80)
+          handlers.add('handler2', step: :send, priority: 50)
+          handlers.add('handler3', step: :send, priority: 20)
+          expect(handlers.to_a).to eq(['handler3'])
+        end
+
       end
 
       describe '#to_stack' do
