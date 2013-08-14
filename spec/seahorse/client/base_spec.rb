@@ -77,6 +77,15 @@ module Seahorse
 
       end
 
+      describe '#on_request' do
+      end
+
+      describe '#on_response' do
+      end
+
+      describe '#around' do
+      end
+
       describe '#build_request' do
 
         let(:request) { client.build_request('operation') }
