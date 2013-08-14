@@ -56,30 +56,40 @@ module Seahorse
 
       end
 
-      describe '#build_request' do
+      describe '#handlers' do
 
-        let(:request) { client_class.new.build_request('operation') }
-
-        it 'returns a Request object' do
-          expect(request).to be_kind_of(Request)
+        it 'returns a HandlerList' do
+          expect(client.handlers).to be_kind_of(HandlerList)
         end
 
         it 'builds a handler list from client plugins' do
           client_class.clear_plugins
-          client_class.add_plugin(Plugins::Api)
           client_class.add_plugin(Plugins::NetHttp)
-          client_class.add_plugin(Plugins::Endpoint)
-          handlers = request.handlers.to_a
-          expect(handlers).to include(NetHttp::Handler)
-          expect(handlers).to include(Plugins::Endpoint::EndpointHandler)
+          expect(client.handlers.to_a).to eq([
+            NetHttp::Handler,
+            Plugins::Endpoint::EndpointHandler,
+          ])
         end
 
         it 'defaults the send handler to a NetHttp::Handler' do
-          handlers = request.handlers.to_a
-          expect(handlers).to include(NetHttp::Handler)
+          expect(client.handlers.first).to be(NetHttp::Handler)
         end
 
-        it 'populates the request context with the operation name' do
+      end
+
+      describe '#build_request' do
+
+        let(:request) { client.build_request('operation') }
+
+        it 'returns a Request' do
+          expect(request).to be_kind_of(Request)
+        end
+
+        it 'populates the request handlers' do
+          expect(request.handlers).to eq(client.handlers)
+        end
+
+        it 'populates the request context operation name' do
           request = client.build_request('operation_name')
           expect(request.context.operation_name).to eq('operation_name')
         end
@@ -95,12 +105,12 @@ module Seahorse
           expect(request.context.params).to be(params)
         end
 
-        it 'defaults request context params to an empty hash' do
+        it 'defaults params to an empty hash' do
           request = client.build_request('operation')
           expect(request.context.params).to eq({})
         end
 
-        it 'populates the context with the client configuration' do
+        it 'populates the request context configuration' do
           request = client.build_request('operation')
           expect(request.context.config).to be(client.config)
         end

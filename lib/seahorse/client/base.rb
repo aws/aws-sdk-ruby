@@ -15,6 +15,7 @@ module Seahorse
   module Client
     class Base
 
+      # These plugins are applied to every client and can not be removed.
       # @api private
       REQUIRED_PLUGINS = [
         Plugins::Api,
@@ -48,12 +49,15 @@ module Seahorse
       def initialize(options = {})
         @plugins = self.class.build_plugins
         @config = build_config(options)
-        @handlers = build_handlers
+        @handlers = handler_list
         initialize_client
       end
 
       # @return [Configuration]
       attr_reader :config
+
+      # @return [HandlerList]
+      attr_reader :handlers
 
       # Builds and returns a {Request} for the named operation.  The request
       # will not have been sent.
@@ -86,7 +90,7 @@ module Seahorse
       end
 
       # Gives each plugin the opportunity to register handlers for this client.
-      def build_handlers
+      def handler_list
         handlers = HandlerList.new
         @plugins.each do |plugin|
           if plugin.respond_to?(:add_handlers)
