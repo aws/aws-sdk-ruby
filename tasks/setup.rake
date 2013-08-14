@@ -13,13 +13,11 @@
 
 desc "Performs initial setup work"
 task :setup do
-  target = 'vendor/seahorse'
-  if Dir.exists?(target)
-    puts "#{target} directory already exists"
-  else
-    sh "mkdir -p #{target}"
+  seahorse_dir = 'vendor/seahorse'
+  unless Dir.exists?(seahorse_dir)
+    sh "mkdir -p #{seahorse_dir}"
     sh "git clone https://github.com/aws/seahorse.git vendor/seahorse"
+    chdir(seahorse_dir) { sh "bundle install" }
+    sh "bundle install"
   end
-  chdir(target) { sh "bundle install" }
-  sh "bundle install"
 end

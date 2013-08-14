@@ -21,7 +21,7 @@ def execute_cmd cmd
 end
 
 desc "Runs unit tests"
-task :test do
+task :test => :setup do
   opts = ['bundle exec rspec']
   opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
   execute_cmd(opts.join(' '))
