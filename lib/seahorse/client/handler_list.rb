@@ -125,7 +125,7 @@ module Seahorse
             @send = handler_class
           elsif options[:operations]
             options[:operations].each do |operation|
-              insert(@operations[operation], handler_class, options)
+              insert(@operations[operation.to_s], handler_class, options)
             end
           else
             insert(@common, handler_class, options)
@@ -143,7 +143,7 @@ module Seahorse
           HandlerList.new(
             index: @index,
             send: @send,
-            common: @common + @operations[operation],
+            common: @common + @operations[operation.to_s],
           )
         end
       end

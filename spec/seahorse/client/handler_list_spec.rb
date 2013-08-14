@@ -200,6 +200,13 @@ module Seahorse
           expect(handlers.for('operation').to_a).to eq(%w(low medium high))
         end
 
+        it 'accpets operation names as symbols' do
+          handlers.add('handler1', operations: [:operation])
+          handlers.add('handler2', operations: ['operation'])
+          expect(handlers.for('operation').to_a).to eq(%w(handler1 handler2))
+          expect(handlers.for(:operation).to_a).to eq(%w(handler1 handler2))
+        end
+
       end
 
       describe '#to_stack' do
