@@ -32,7 +32,7 @@ module Aws
           json = JSON.parse(File.read(file))
           json['metadata'] = {
             'regional_endpoint' => json['endpoint_prefix'] + '.%s.amazonaws.com',
-            'aws_endpoint_prefix' => json['target_prefix']
+            'aws_endpoint_prefix' => json['endpoint_prefix']
           }
           new_klass = klass.define(api: json)
           new_klass.remove_plugin(VersionedApiLoader)

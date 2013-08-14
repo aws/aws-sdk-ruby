@@ -34,7 +34,7 @@ class DummySenderPlugin < Seahorse::Client::Plugin
   end
 end
 
-MyClient = Seahorse::Client.define(
+SWF = Seahorse::Client.define(
   plugins: [
     Aws::Plugins::VersionedApiLoader,
     Aws::Plugins::RegionalEndpoint,
@@ -47,15 +47,31 @@ MyClient = Seahorse::Client.define(
     'metadata' => {
       'aws_api_versions' => {
         '2012-01-25' => 'models/swf-2012-01-25.json'
-      },
-      'regional_endpoint' => 'swf.%s.amazonaws.com'
+      }
     },
   },
 )
 
-client = MyClient.new region: 'us-east-1',
-  ssl_default: false, api_version: '2012-01-25'
+EMR = Seahorse::Client.define(
+  plugins: [
+    Aws::Plugins::VersionedApiLoader,
+    Aws::Plugins::RegionalEndpoint,
+    Aws::Plugins::EnvironmentCredentials,
+    Aws::Plugins::Signers::Version4,
+    Aws::Plugins::JsonSerializer,
+    #DummySenderPlugin
+  ],
+  api: {
+    'metadata' => {
+      'aws_api_versions' => {
+        '2009-03-31' => 'models/elasticmapreduce-2009-03-31.json'
+      }
+    },
+  },
+)
 
-resp = client.list_domains(registrationStatus: 'REGISTERED')
+emr = EMR.new region: 'us-east-1',
+  ssl_default: false, api_version: '2009-03-31'
+
+resp = emr.describe_job_flows
 pp resp.data
-
