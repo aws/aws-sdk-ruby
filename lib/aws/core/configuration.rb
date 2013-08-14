@@ -182,6 +182,10 @@ module AWS
     #   if all SimpleDB read requests should be done consistently.
     #   Consistent reads are slower, but reflect all changes to SDB.
     #
+    # @attr_reader [Boolean] sqs_verify_checksums (true)
+    #   When `true` all SQS operations will check body content against
+    #   MD5 checksums, raising an exception if there is a mismatch.
+    #
     # @attr_reader [CredentialProvider::Provider] credential_provider
     #   Returns the object that is responsible for loading credentials.
     #
@@ -220,10 +224,6 @@ module AWS
     #   that response bodies match the content-length specified in the
     #   response header, if present. Note that some HTTP handlers will
     #   always do this whether or not this value is true.
-    #
-    # @attr_reader [Boolean] verify_sqs_checksums (true)
-    #   When `true` all SQS operations will check body content against
-    #   MD5 checksums, raising an exception if there is a mismatch.
     #
     class Configuration
 
@@ -529,8 +529,6 @@ module AWS
       add_option :user_agent_prefix
 
       add_option :verify_response_body_content_length, true, :boolean => true
-
-      add_option :verify_sqs_checksums, true, :boolean => true
       
     end
   end
