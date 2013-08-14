@@ -779,7 +779,11 @@ module AWS
       # @api private
       protected
       def is_checksum_valid checksum, data
-        calculate_checksum(data) == checksum
+        if config.sqs_verify_checksums?
+          calculate_checksum(data) == checksum
+        else
+          true
+        end
       end
 
       # @api private

@@ -15,4 +15,6 @@ AWS::Core::Configuration.module_eval do
 
   add_service 'SQS', 'sqs', 'sqs.%s.amazonaws.com'
 
+  add_option :sqs_verify_checksums, true, :boolean => true
+
 end

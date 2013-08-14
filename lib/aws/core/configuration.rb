@@ -221,6 +221,10 @@ module AWS
     #   response header, if present. Note that some HTTP handlers will
     #   always do this whether or not this value is true.
     #
+    # @attr_reader [Boolean] verify_sqs_checksums (true)
+    #   When `true` all SQS operations will check body content against
+    #   MD5 checksums, raising an exception if there is a mismatch.
+    #
     class Configuration
 
       # Creates a new Configuration object.
@@ -525,6 +529,8 @@ module AWS
       add_option :user_agent_prefix
 
       add_option :verify_response_body_content_length, true, :boolean => true
+
+      add_option :verify_sqs_checksums, true, :boolean => true
       
     end
   end
