@@ -15,13 +15,20 @@ module Seahorse
   module Client
     class HandlerList
 
-      # @api private
-      INVALID_STEP = <<-MSG.strip
-        invalid :step `%s', must be one of :validate, :build, :sign or :send
-      MSG
+      class InvalidStepError < ArgumentError
+        def initialize(step)
+          msg = "invalid :step `%s', must be one of :validate, :build, "
+          msg << ":sign or :send"
+          super(msg % step.inspect)
+        end
+      end
 
-      # @api private
-      INVALID_PRIORITY = "invalid :priority `%s', must be between 0 and 99"
+      class InvalidPriorityError < ArgumentError
+        def initialize(priority)
+          msg = "invalid :priority `%s', must be between 0 and 99"
+          super(msg % priority.inspect)
+        end
+      end
 
       # @api private
       STEPS = {
@@ -141,18 +148,14 @@ module Seahorse
       # @return [Integer]
       def step_value(options)
         step = options[:step] || :build
-        unless STEPS.key?(step)
-          raise ArgumentError, INVALID_STEP % step.inspect
-        end
+        raise InvalidStepError, step unless STEPS.key?(step)
         STEPS[step]
       end
 
       # @return [Integer]
       def priority(options)
         priority = options[:priority] || 50
-        unless (0..99).include?(priority)
-          raise ArgumentError, INVALID_PRIORITY % priority.inspect
-        end
+        raise InvalidPriorityError, priority unless (0..99).include?(priority)
         priority
       end
 
