@@ -109,6 +109,8 @@ module Seahorse
       #   same `:step` and `:priority`, the handler registered last has
       #   the highest priority.
       #
+      # @raise [InvalidStepError]
+      # @raise [InvalidPriorityError]
       # @note There can be only one `:send` handler.  Adding an additional
       #   send handler replaces the previous.
       #
