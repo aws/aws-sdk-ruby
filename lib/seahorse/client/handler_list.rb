@@ -116,7 +116,7 @@ module Seahorse
       # Yields the handlers in stack order, which is reverse priority.
       def each(&block)
         yield(@send_handler) if @send_handler
-        @handlers.sort.each do |order, insertion, handler|
+        @handlers.sort.each do |order, insertion_order, handler|
           yield(handler)
         end
       end
@@ -138,6 +138,7 @@ module Seahorse
         step_value(options) + priority(options)
       end
 
+      # @return [Integer]
       def step_value(options)
         step = options[:step] || :build
         unless STEPS.key?(step)
@@ -146,6 +147,7 @@ module Seahorse
         STEPS[step]
       end
 
+      # @return [Integer]
       def priority(options)
         priority = options[:priority] || 50
         unless (0..99).include?(priority)

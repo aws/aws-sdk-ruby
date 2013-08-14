@@ -15,8 +15,9 @@ module Seahorse
   module Client
     class Handler
 
-      # @param [Configuration] config
-      # @param [Handler] handler (nil)
+      # @param [Handler] handler (nil) The next handler in the stack that
+      #   should be called from within the {#call} method.  This value
+      #   must only be nil for send handlers.
       def initialize(handler = nil)
         @handler = handler
       end

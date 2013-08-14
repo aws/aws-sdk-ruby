@@ -39,7 +39,7 @@ module Seahorse
         private
 
         # @param [Configuration] config
-        # @param [Http::Response] response
+        # @param [Http::Request] request
         # @param [Http::Response] response
         # @return [void]
         def transmit(config, request, response)

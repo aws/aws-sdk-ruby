@@ -20,7 +20,7 @@ module Seahorse
         @size = 0
       end
 
-      # @param [String]
+      # @param [String] chunk
       # @return [Integer]
       def write(chunk)
         @block.call(chunk)
