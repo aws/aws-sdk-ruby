@@ -117,14 +117,14 @@ module Seahorse
       #   send handler replaces the previous.
       #
       def add(handler_class, options = {})
-        case
-        when options[:step] == :send then @send = handler_class
-        when options[:operations]
+        if options[:step] == :send
+          @send = handler_class
+        elsif options[:operations]
           options[:operations].each do |operation|
-            @operations[operation] << [order(options), next_index, handler_class]
+            insert(@operations[operation], handler_class, options)
           end
         else
-          @common << [order(options), next_index, handler_class]
+          insert(@common, handler_class, options)
         end
       end
 
@@ -160,6 +160,10 @@ module Seahorse
       end
 
       private
+
+      def insert(group, handler_class, options)
+        group << [order(options), next_index, handler_class]
+      end
 
       def next_index
         @index += 1
