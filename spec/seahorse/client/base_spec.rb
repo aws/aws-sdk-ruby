@@ -89,6 +89,8 @@ module Seahorse
           expect(request.handlers).to eq(client.handlers)
         end
 
+        it 'includes operation specific handlers in the handler list'
+
         it 'populates the request context operation name' do
           request = client.build_request('operation_name')
           expect(request.context.operation_name).to eq('operation_name')
