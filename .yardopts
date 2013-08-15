@@ -1,4 +1,5 @@
 --title 'Seahorse'
+--embed-mixins
 --markup markdown
 --markup-provider rdiscount
 --no-api
