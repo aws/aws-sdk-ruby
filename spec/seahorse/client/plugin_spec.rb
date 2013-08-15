@@ -24,6 +24,10 @@ module Seahorse
 
       let(:config) { Configuration.new }
 
+      it 'is a HandlerBuilder' do
+        expect(plugin).to be_kind_of(HandlerBuilder)
+      end
+
       describe '#add_options' do
 
         it 'does nothing by default' do
@@ -135,133 +139,6 @@ module Seahorse
             client_class_for {|klass, options| yielded = options }
           end
           expect(yielded).to eq(foo: 'bar')
-        end
-
-      end
-
-      describe '.handler' do
-
-        let(:handlers) { HandlerList.new }
-
-        it 'registers a handler' do
-          handler_class = Class.new(Handler)
-          client = client_with_plugin { handler handler_class }
-          expect(client.handlers).to include(handler_class)
-        end
-
-        it 'accepts a step option' do
-          handler1 = Class.new(Handler)
-          handler2 = Class.new(Handler)
-          client = client_with_plugin do
-            handler(handler1, step: :validate)
-            handler(handler2, step: :build)
-          end
-          handlers = client.handlers.to_a
-          expect(handlers).to include(handler1)
-          expect(handlers).to include(handler2)
-        end
-
-        it 'builds a handler from a block' do
-          plugin = Class.new(Plugin) do
-            handler do |context|
-              'handler-return-value'
-            end
-          end
-          plugin.new.add_handlers(handlers, config)
-          resp = handlers.to_stack.call('context')
-          expect(resp).to eq('handler-return-value')
-        end
-
-        it 'accepts a step with the block' do
-          plugin = Class.new(Plugin) do
-            handler(step: :validate) do |context|
-              context << :validate
-              super(context)
-            end
-            handler(step: :build) do |context|
-              context << :build
-              @handler.call(context)
-            end
-            handler(step: :sign) do |context|
-              context << :sign
-              handler.call(context)
-            end
-            handler(step: :send) do |context|
-              context << :send
-              context
-            end
-          end
-          plugin.new.add_handlers(handlers, config)
-          resp = handlers.to_stack.call([])
-          expect(resp).to eq([:validate, :build, :sign, :send])
-        end
-
-        it 'returns the handler class' do
-          handler_class = Class.new(Handler)
-          expect(plugin.handler(handler_class)).to be(handler_class)
-        end
-
-        it 'returns the handler class created from a block' do
-          handler = plugin.handler { |context| 'handler-return' }
-          expect(handler.ancestors).to include(Handler)
-          expect(handler.new.call('context')).to eq('handler-return')
-        end
-
-        it 'assigns the handler to a constant if a name is given' do
-          expect(plugin.const_defined?('MyHandler')).to be(false)
-          handler_class = plugin.handler('MyHandler') { |arg| arg }
-          expect(plugin::MyHandler).to be(handler_class)
-        end
-
-        it 'accepts the handler name as a symbol' do
-          handler_class = plugin.handler(:MyHandler) { |arg| arg }
-          expect(plugin::MyHandler).to be(handler_class)
-        end
-
-        it 'only defines the handler class once' do
-          expect(plugin).to receive(:const_set).with('MyHandler', anything).once
-          plugin.handler('MyHandler') {|context|}
-          5.times { plugin.new.add_handlers(HandlerList.new, config) }
-        end
-
-      end
-
-      describe '.request_handler' do
-
-        it 'passes the context to the block' do
-          yielded = nil
-          handler = plugin.request_handler do |context|
-            yielded = context
-          end
-          handler.new(->(_) { }).call('context')
-          expect(yielded).to eq('context')
-        end
-
-        it 'calls the next handler in the stack reguardless of the return' do
-          handler = plugin.request_handler do |context|
-            nil # still calls the next handler, despite the block return value
-          end
-          context = Object.new
-          resp = handler.new(->(context) { context }).call(context)
-          expect(resp).to be(context)
-        end
-
-      end
-
-      describe '.response_handler' do
-
-        it 'is called when the response is signaled complete' do
-          called = false
-          handler = plugin.response_handler { |response| called = true }
-          handler.new(->(_) { Response.new.signal_complete }).call(nil)
-          expect(called).to be(true)
-        end
-
-        it 'is not called if the response is not signaled complete' do
-          called = false
-          handler = plugin.response_handler { |response| called = true }
-          handler.new(->(_) { Response.new }).call(nil)
-          expect(called).to be(false)
         end
 
       end
