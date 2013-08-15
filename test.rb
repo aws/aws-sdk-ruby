@@ -22,6 +22,19 @@ class Seahorse::Model::Api
   property :json_version, String
   property :target_prefix, String
   property :timestamp_format, String
+  property :global_endpoint, String
+  property :checksum_format, String
+end
+
+class Seahorse::Model::Operation
+  property :documentation_url, String
+  property :response_code, Integer, in: :http
+end
+
+class Seahorse::Model::Shapes::Shape
+  property :location_name, String
+  property :payload, Boolean
+  property :streaming, Boolean
 end
 
 class DummySenderPlugin < Seahorse::Client::Plugin
@@ -34,44 +47,43 @@ class DummySenderPlugin < Seahorse::Client::Plugin
   end
 end
 
-SWF = Seahorse::Client.define(
-  plugins: [
+def options_for_client_class(endpoint, versions, plugins)
+  plugins = [
+    Aws::Plugins::GlobalConfiguration,
     Aws::Plugins::VersionedApiLoader,
     Aws::Plugins::RegionalEndpoint,
     Aws::Plugins::EnvironmentCredentials,
-    Aws::Plugins::Signers::Version3,
-    Aws::Plugins::JsonSerializer,
+    Aws::Plugins::RestProtocol,
+    Aws::Plugins::ContentLength
     #DummySenderPlugin
-  ],
-  api: {
-    'metadata' => {
-      'aws_api_versions' => {
-        '2012-01-25' => 'models/swf-2012-01-25.json'
+  ] + plugins.map {|plugin| "Aws::Plugins::#{plugin}" }
+
+  {
+    plugins: plugins,
+    api: {
+      'metadata' => {
+        'aws_api_versions' => versions.inject({}) {|hsh, version|
+          hsh[version] = "models/#{endpoint}-#{version}.json"; hsh
+        }
       }
-    },
-  },
-)
+    }
+  }
+end
 
-EMR = Seahorse::Client.define(
-  plugins: [
-    Aws::Plugins::VersionedApiLoader,
-    Aws::Plugins::RegionalEndpoint,
-    Aws::Plugins::EnvironmentCredentials,
-    Aws::Plugins::Signers::Version4,
-    Aws::Plugins::JsonSerializer,
-    #DummySenderPlugin
-  ],
-  api: {
-    'metadata' => {
-      'aws_api_versions' => {
-        '2009-03-31' => 'models/elasticmapreduce-2009-03-31.json'
-      }
-    },
-  },
-)
+def client_class(endpoint, versions, plugins)
+  opts = options_for_client_class(endpoint, versions, plugins)
+  Seahorse::Client.define(opts)
+end
 
-emr = EMR.new region: 'us-east-1',
-  ssl_default: false, api_version: '2009-03-31'
+SWF = client_class 'swf', %w(2012-01-25), %w(RpcProtocol Signers::Version3 JsonSerializer)
+EMR = client_class 'elasticmapreduce', %w(2009-03-31), %w(RpcProtocol Signers::Version4 JsonSerializer)
+CloudFront = client_class 'cloudfront', %w(2013-05-12), %w(Signers::Version4 XmlSerializer)
+S3 = client_class 's3', %w(2006-03-01), %w(Signers::Version4)
 
-resp = emr.describe_job_flows
+emr = EMR.new
+cloudfront = CloudFront.new
+s3 = S3.new
+
+s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
 pp resp.data
