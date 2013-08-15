@@ -131,6 +131,7 @@ module Seahorse
             insert(@common, handler_class, options)
           end
         end
+        handler_class
       end
 
       # Returns a handler list for the given operation.  The returned

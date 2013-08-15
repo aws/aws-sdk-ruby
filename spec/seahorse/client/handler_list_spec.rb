@@ -39,6 +39,11 @@ module Seahorse
           expect(handlers.to_a).to eq([handler1, handler2])
         end
 
+        it 'returns the handler class' do
+          handler_class = Class.new(Handler)
+          expect(handlers.add(handler_class)).to be(handler_class)
+        end
+
         describe ':step' do
 
           it 'sorts handlers by step priority order' do
