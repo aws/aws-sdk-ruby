@@ -15,6 +15,8 @@ module Seahorse
   module Client
     class Plugin
 
+      extend HandlerBuilder
+
       # @param [Configuration] config
       # @return [void]
       def add_options(config)
@@ -29,9 +31,7 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_handlers(handlers, config)
-        self.class.handlers.each do |handler_class, options|
-          handlers.add(handler_class, options)
-        end
+        handlers.copy_from(self.class.handlers)
       end
 
       # @param [Client::Base] client the client to initialize
@@ -57,65 +57,12 @@ module Seahorse
 
       class << self
 
-        # (see Configuration#add_option)
         def option(name, default = nil, &block)
           if block_given?
             options << [name, Proc.new]
           else
             options << [name, default]
           end
-        end
-
-        # @overload request_handler(handler_name, options = {}, &handler_block)
-        #   @param [Symbol] handler_name
-        #   @option options [Symbol] step (:build)
-        #
-        # @overload request_handler(options = {}, &handler_block)
-        #   @option options [Symbol] step (:build)
-        #
-        # @return [Class]
-        def request_handler(*args, &block)
-          handler_block = lambda do |context|
-            block.call(context)
-            @handler.call(context)
-          end
-          handler(*args, &handler_block)
-        end
-
-        # @overload response_handler(handler_name, options = {}, &handler_block)
-        #   @param [Symbol] handler_name
-        #   @option options [Symbol] step (:build)
-        #
-        # @overload response_handler(options = {}, &handler_block)
-        #   @option options [Symbol] step (:build)
-        #
-        # @return [Class]
-        def response_handler(*args, &block)
-          handler_block = lambda do |context|
-            @handler.call(context).on_complete do |response|
-              block.call(response)
-            end
-          end
-          handler(*args, &handler_block)
-        end
-
-        # @overload handler(options = {}, &handler_block)
-        #   @option options [Symbol] step (:build)
-        #
-        # @overload handler(handler_name, options = {}, &handler_block)
-        #   @param [Symbol] handler_name
-        #   @option options [Symbol] step (:build)
-        #
-        # @overload handler(handler_class, options = {})
-        #   @param [Class] handler_class
-        #   @option options [Symbol] step (:build)
-        #
-        # @return [Class] Returns the handler class.
-        def handler(*args, &block)
-          options = args.last.is_a?(Hash) ? args.pop : {}
-          handler = block_given? ? handler_for(proc, *args) : args.first
-          handlers << [handler, options]
-          handler
         end
 
         def initialize_client(&block)
@@ -143,23 +90,7 @@ module Seahorse
 
         # @api private
         def handlers
-          @handlers ||= []
-        end
-
-        # @api private
-        def handler_for(block, name = nil)
-          if name
-            const_set(name, new_handler(block))
-          else
-            new_handler(block)
-          end
-        end
-
-        # @api private
-        def new_handler(block)
-          Class.new(Handler) do
-            define_method(:call, &block)
-          end
+          @handlers ||= HandlerList.new
         end
 
       end
