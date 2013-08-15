@@ -25,7 +25,7 @@ module Aws
         )
       end
 
-      handler :MissingCredentialsHandler, step: :validate do |context|
+      handle :MissingCredentialsHandler, step: :validate do |context|
         unless context.config.credentials.set?
           raise ArgumentError, MISSING_CREDENTIALS
         end
