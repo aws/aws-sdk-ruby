@@ -19,21 +19,20 @@ module Aws
       option(:api_version)
 
       client_class_for do |klass, options|
-        unless options[:api_version]
-          raise ArgumentError, 'missing option :api_version'
-        end
-
-        const_name = "V#{options[:api_version].gsub('-', '')}"
+        version = latest_api_version(klass, options[:api_version])
+        const_name = "V#{version.gsub('-', '')}"
 
         if klass.const_defined?(const_name)
           klass.const_get(const_name)
         else
-          file = api_config_file(klass, options)
+          file = api_config_file(klass, version)
           json = JSON.parse(File.read(file))
-          json['metadata'] = {
-            'regional_endpoint' => json['endpoint_prefix'] + '.%s.amazonaws.com',
-            'aws_endpoint_prefix' => json['endpoint_prefix']
-          }
+          json = json.merge(
+            'metadata' => { 'aws_endpoint_prefix' => json['endpoint_prefix'] },
+            'endpoint' => json['global_endpoint'] ||
+              (json['endpoint_prefix'] + '.%s.amazonaws.com')
+          )
+
           new_klass = klass.define(api: json)
           new_klass.remove_plugin(VersionedApiLoader)
           klass.const_set(const_name, new_klass)
@@ -42,10 +41,27 @@ module Aws
 
       private
 
-      def api_config_file(klass, options)
-        klass.api.metadata['aws_api_versions'][options[:api_version]]
+      def api_config_file(klass, version)
+        api_versions(klass)[version]
       end
 
+      def latest_api_version(klass, version)
+        version ||= Aws.config[:api_version] || 'latest'
+        versions, last_version = api_versions(klass), nil
+        versions.keys.each do |key|
+          last_version = key if key <= version
+        end
+
+        if last_version.nil?
+          raise ArgumentError, "could not find matching API version for #{version}"
+        else
+          last_version
+        end
+      end
+
+      def api_versions(klass)
+        klass.api.metadata['aws_api_versions']
+      end
     end
   end
 end
