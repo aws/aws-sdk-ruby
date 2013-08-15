@@ -79,6 +79,17 @@ module Seahorse
         end
       end
 
+      class MapShape < Shape
+        property :keys, Shape
+        property :members, Shape
+
+        def initialize(*)
+          super
+          self.keys = nil
+          self.members = nil
+        end
+      end
+
       class StructureShape < Shape
         property :members, Symbol => Shape
 
@@ -91,6 +102,7 @@ module Seahorse
       class Shape < Node
         register_type structure: StructureShape
         register_type list: ListShape
+        register_type map: MapShape
         register_type string: StringShape
         register_type integer: IntegerShape
         register_type timestamp: TimestampShape

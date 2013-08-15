@@ -41,6 +41,24 @@ module Seahorse
         end
       end
 
+      describe MapShape do
+        it 'deserializes keys and members properties' do
+          shape = Shape.from_hash 'keys' => {
+            'type' => 'string'
+          }, 'members' => {
+            'type' => 'structure',
+            'members' => {
+              'property' => { 'type' => 'string' }
+            }
+          }, 'type' => 'map'
+
+          expect(shape).to be_instance_of MapShape
+          expect(shape.keys).to be_instance_of StringShape
+          expect(shape.members).to be_instance_of StructureShape
+          expect(shape.members.members[:property]).to be_instance_of StringShape
+        end
+      end
+
       describe StructureShape do
         it 'defaults to an empty members hash' do
           shape = StructureShape.new
