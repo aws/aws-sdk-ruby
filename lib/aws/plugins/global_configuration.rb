@@ -17,8 +17,8 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
       initialize_client do |client|
         client.config.options.each do |option, value|
-          global_value = Aws.config[option.to_sym]
-          client.config.add_option(option, global_value.nil? ? value : global_value)
+          global = Aws.config[option.to_sym]
+          client.config.add_option(option, global.nil? ? value : global)
         end
       end
     end
