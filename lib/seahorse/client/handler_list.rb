@@ -119,6 +119,8 @@ module Seahorse
       # @note There can be only one `:send` handler.  Adding an additional
       #   send handler replaces the previous.
       #
+      # @return [Class<Handler>] Returns the handler class that was added.
+      #
       def add(handler_class, options = {})
         @mutex.synchronize do
           if options[:step] == :send
