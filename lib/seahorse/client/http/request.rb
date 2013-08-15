@@ -24,11 +24,11 @@ module Seahorse
         # @option options [Headers] :headers (Headers.new)
         # @option options [Body] :body (StringIO.new)
         def initialize(options = {})
-          @endpoint = options[:endpoint]
-          @http_method = options[:http_method] || 'GET'
-          @path = options[:path] || '/'
-          @headers = options[:headers] || Headers.new
-          @body = options[:body] || StringIO.new
+          self.endpoint = options[:endpoint]
+          self.http_method = options[:http_method] || 'GET'
+          self.path = options[:path] || '/'
+          self.headers = options[:headers] || Headers.new
+          self.body = options[:body] || ''
         end
 
         # @return [Endpoint, nil]
@@ -44,8 +44,11 @@ module Seahorse
         attr_accessor :path
 
         # @return [IO]
-        attr_accessor :body
+        attr_reader :body
 
+        def body=(io)
+          @body = String === io ? PlainStringIO.new(io) : io
+        end
       end
     end
   end

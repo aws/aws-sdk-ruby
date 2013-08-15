@@ -29,6 +29,7 @@ module Seahorse
     module Http
       autoload :Endpoint, 'seahorse/client/http/endpoint'
       autoload :Headers, 'seahorse/client/http/headers'
+      autoload :PlainStringIO, 'seahorse/client/http/plain_string_io'
       autoload :Request, 'seahorse/client/http/request'
       autoload :Response, 'seahorse/client/http/response'
     end

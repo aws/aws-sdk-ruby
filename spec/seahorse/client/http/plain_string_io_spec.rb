@@ -11,31 +11,25 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'stringio'
+require 'spec_helper'
 
 module Seahorse
   module Client
     module Http
-      class Response
-
-        # @option options [Integer] :status_code (nil)
-        # @option options [Headers] :headers (Headers.new)
-        # @option options [IO] :body (StringIO.new)
-        def initialize(options = {})
-          @status_code = nil
-          @headers = options[:headers] || Headers.new
-          @body = options[:body] || PlainStringIO.new
+      describe PlainStringIO do
+        it 'is a StringIO object' do
+          expect(PlainStringIO.new).to be_a(StringIO)
         end
 
-        # @return [Integer, nil]
-        attr_accessor :status_code
-
-        # @return [Headers]
-        attr_accessor :headers
-
-        # @return [IO]
-        attr_accessor :body
-
+        describe '#inspect' do
+          it 'inspects as the string data object' do
+            io = PlainStringIO.new
+            io.write("first\n")
+            io.write("last")
+            expect(io.read).to eq ''
+            expect(io.inspect).to eq '"first\nlast"'
+          end
+        end
       end
     end
   end
