@@ -19,7 +19,7 @@ module Aws
 
       let(:api) do
         Seahorse::Model::Api.new.tap do |api|
-          api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
+          api.endpoint = 'svc.%s.amazonaws.com'
         end
       end
 

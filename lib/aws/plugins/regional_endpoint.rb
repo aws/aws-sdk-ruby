@@ -23,7 +23,7 @@ module Aws
 
       option(:endpoint) do |config|
         raise ArgumentError, MISSING_REGION unless config.region
-        config.api.metadata['regional_endpoint'] % config.region
+        config.api.endpoint % config.region
       end
 
     end
