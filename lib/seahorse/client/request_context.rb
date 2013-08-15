@@ -20,7 +20,6 @@ module Seahorse
       # @option options [String] :operation_name (nil)
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
-      # @option options [EventEmitter] :events (EventEmitter.new)
       # @option options [Http::Request] :http_request (Http::Request.new)
       # @option options [Http::Response] :http_response (Http::Response.new)
       #   and #rewind.
@@ -66,18 +65,6 @@ module Seahorse
       # @param [Object] value
       def []=(key, value)
         @metadata[key] = value
-      end
-
-      # Registers an event listener for the named event.  The listener
-      # can be an argument that responds to `#call` or a block.
-      # @see EventEmitter#on
-      def on(event_name, listener = nil, &callback)
-        @events.on(event_name, listener, &callback)
-      end
-
-      # @see EventEmitter#emit
-      def emit(event_name, *args)
-        @events.emit(event_name, *args)
       end
 
     end
