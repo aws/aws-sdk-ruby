@@ -13,16 +13,20 @@
 
 module Seahorse
   module Client
+
+    # This module provides the ability to add handlers to a class or
+    # module.  The including class or extending module must respond to
+    # `#handlers`, returning a {HandlerList}.
     module HandlerBuilder
 
-      def request_handler(*args, &block)
+      def handle_request(*args, &block)
         handler(*args) do |context|
           block.call(context)
           @handler.call(context)
         end
       end
 
-      def response_handler(*args, &block)
+      def handle_response(*args, &block)
         handler(*args) do |context|
           @handler.call(context).on_complete do |response|
             block.call(response)
@@ -30,11 +34,12 @@ module Seahorse
         end
       end
 
-      def handler(*args, &block)
+      def handle(*args, &block)
         options = args.last.is_a?(Hash) ? args.pop : {}
         handler_class = block ? handler_for(*args, &block) : args.first
         handlers.add(handler_class, options)
       end
+      alias handler handle
 
       # @api private
       def handler_for(name = nil, &block)

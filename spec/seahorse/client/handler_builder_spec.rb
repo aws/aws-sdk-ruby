@@ -87,11 +87,11 @@ module Seahorse
 
       end
 
-      describe '#request_handler' do
+      describe '#handle_request' do
 
         it 'passes the context to the block' do
           yielded = nil
-          handler = obj.request_handler do |context|
+          handler = obj.handle_request do |context|
             yielded = context
           end
           handler.new(->(_) { }).call('context')
@@ -99,7 +99,7 @@ module Seahorse
         end
 
         it 'calls the next handler in the stack reguardless of the return' do
-          handler = obj.request_handler do |context|
+          handler = obj.handle_request do |context|
             nil # still calls the next handler, despite the block return value
           end
           context = Object.new
@@ -109,18 +109,18 @@ module Seahorse
 
       end
 
-      describe '#response_handler' do
+      describe '#handle_response' do
 
         it 'is called when the response is signaled complete' do
           called = false
-          handler = obj.response_handler { |response| called = true }
+          handler = obj.handle_response { |response| called = true }
           handler.new(->(_) { Response.new.signal_complete }).call(nil)
           expect(called).to be(true)
         end
 
         it 'is not called if the response is not signaled complete' do
           called = false
-          handler = obj.response_handler { |response| called = true }
+          handler = obj.handle_response { |response| called = true }
           handler.new(->(_) { Response.new }).call(nil)
           expect(called).to be(false)
         end
@@ -156,13 +156,13 @@ module Seahorse
           expect(mod.handlers).to include(mod::SecondSendHandler)
         end
 
-        it 'can assign a name when calling request_handler' do
-          handler_class = mod.request_handler(:MyHandler) { |arg| }
+        it 'can assign a name when calling handle_request' do
+          handler_class = mod.handle_request(:MyHandler) { |arg| }
           expect(mod::MyHandler).to be(handler_class)
         end
 
-        it 'can assign a name when calling response_handler' do
-          handler_class = mod.response_handler(:MyHandler) { |arg| }
+        it 'can assign a name when calling handle_response' do
+          handler_class = mod.handle_response(:MyHandler) { |arg| }
           expect(mod::MyHandler).to be(handler_class)
         end
 

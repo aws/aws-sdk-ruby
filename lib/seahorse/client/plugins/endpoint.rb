@@ -20,7 +20,7 @@ module Seahorse
 
         option(:ssl_default, true)
 
-        request_handler(:EndpointHandler) do |context|
+        handle_request(:EndpointHandler) do |context|
           context.http_request.endpoint = Http::Endpoint.from(context.config)
         end
 
