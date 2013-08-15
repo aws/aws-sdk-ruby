@@ -35,6 +35,7 @@ class Seahorse::Model::Shapes::Shape
   property :location_name, String
   property :payload, Boolean
   property :streaming, Boolean
+  property :box, Boolean
 end
 
 class DummySenderPlugin < Seahorse::Client::Plugin
@@ -75,15 +76,23 @@ def client_class(endpoint, versions, plugins)
   Seahorse::Client.define(opts)
 end
 
-SWF = client_class 'swf', %w(2012-01-25), %w(RpcProtocol Signers::Version3 JsonSerializer)
-EMR = client_class 'elasticmapreduce', %w(2009-03-31), %w(RpcProtocol Signers::Version4 JsonSerializer)
+SWF = client_class 'swf', %w(2012-01-25), %w(Signers::Version3 JsonSerializer)
+EMR = client_class 'elasticmapreduce', %w(2009-03-31), %w(Signers::Version4 JsonSerializer)
 CloudFront = client_class 'cloudfront', %w(2013-05-12), %w(Signers::Version4 XmlSerializer)
 S3 = client_class 's3', %w(2006-03-01), %w(Signers::Version4)
+OpsWorks = client_class 'opsworks', %w(2013-02-18), %w(Signers::Version4 JsonSerializer)
 
+swf = SWF.new
 emr = EMR.new
 cloudfront = CloudFront.new
 s3 = S3.new
+opsworks = OpsWorks.new
 
-s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+pp resp.http_request
 resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
 pp resp.data
+
+# pp swf.list_domains(registrationStatus: 'REGISTERED').data
+
+# pp opsworks.describe_stacks.data
