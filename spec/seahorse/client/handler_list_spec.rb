@@ -158,6 +158,18 @@ module Seahorse
 
       end
 
+      describe '#copy_from' do
+
+        it 'copies handlers from one list to another' do
+          handlers.add('send', step: :send)
+          handlers.add('handler')
+          handlers2 = HandlerList.new
+          handlers2.copy_from(handlers)
+          expect(handlers2.to_a).to eq(handlers.to_a)
+        end
+
+      end
+
       describe '#for' do
 
         it 'returns a handler list' do

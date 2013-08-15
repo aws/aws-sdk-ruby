@@ -34,7 +34,7 @@ module Seahorse
       end
 
       # @api private
-      SortableHandler = Struct.new(:klass, :operations, :priority, :inserted) do
+      Entry = Struct.new(:klass, :options, :operations, :priority, :inserted) do
         def <=>(other)
           if priority == other.priority
             inserted <=> other.inserted
@@ -137,8 +137,9 @@ module Seahorse
           if options[:step] == :send
             @send = handler_class
           else
-            @handlers << SortableHandler.new(
+            @handlers << Entry.new(
               handler_class,
+              options,
               operations(options),
               priority(options),
               next_index,
@@ -146,6 +147,21 @@ module Seahorse
           end
         end
         handler_class
+      end
+
+      # Copies handlers from the `source_list` onto the current handler list.
+      # @param [HandlerList] source_list
+      # @return [void]
+      def copy_from(source_list)
+        @mutex.synchronize do
+          send, handlers = source_list.send(:handlers)
+          @send = send if send
+          handlers.each do |handler|
+            new_handler = handler.dup
+            new_handler.inserted = next_index
+            @handlers << new_handler
+          end
+        end
       end
 
       # Returns a handler list for the given operation.  The returned
@@ -190,7 +206,8 @@ module Seahorse
       end
 
       def filter(operation)
-        @handlers.inject([]) do |filtered, handler|
+        filtered = []
+        @handlers.each do |handler|
           if handler.operations.nil?
             filtered << handler
           elsif handler.operations.include?(operation)
@@ -198,8 +215,8 @@ module Seahorse
             handler.operations = nil
             filtered << handler
           end
-          filtered
         end
+        filtered
       end
 
       def next_index
@@ -223,6 +240,10 @@ module Seahorse
         priority = options[:priority] || 50
         raise InvalidPriorityError, priority unless (0..99).include?(priority)
         priority
+      end
+
+      def handlers
+        [@send, @handlers]
       end
 
     end
