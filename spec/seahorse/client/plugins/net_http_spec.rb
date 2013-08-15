@@ -60,7 +60,7 @@ module Seahorse
 
           it 'adds a :ssl_ca_bundle option with default' do
             expect(config.ssl_ca_bundle).to eq(File.expand_path(File.join(
-              File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle-crt')))
+              File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle.crt')))
           end
 
           it 'adds a :ssl_ca_directory option without default' do
