@@ -11,20 +11,16 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'seahorse'
 
 module Aws
-  class << self
-    attr_accessor :config
-  end
-
-  autoload :VERSION, 'aws/version'
-
   module Plugins
-    autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
-    autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
+    class GlobalConfiguration < Seahorse::Client::Plugin
+      initialize_client do |client|
+        client.config.options.each do |option, value|
+          global_value = Aws.config[option.to_sym]
+          client.config.add_option(option, global_value.nil? ? value : global_value)
+        end
+      end
+    end
   end
-
 end
-
-Aws.config = {}
