@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'thread'
+require 'set'
 
 module Seahorse
   module Client
@@ -33,6 +34,17 @@ module Seahorse
       end
 
       # @api private
+      SortableHandler = Struct.new(:klass, :operations, :priority, :inserted) do
+        def <=>(other)
+          if priority == other.priority
+            inserted <=> other.inserted
+          else
+            priority <=> other.priority
+          end
+        end
+      end
+
+      # @api private
       STEPS = {
         validate: 200,
         build: 100,
@@ -45,8 +57,7 @@ module Seahorse
       def initialize(options = {})
         @index = options[:index] || 0
         @send = options[:send]
-        @common = options[:common] || []
-        @operations = Hash.new { |h, k| h[k] = [] }
+        @handlers = options[:handlers] || []
         @mutex = Mutex.new
       end
 
@@ -125,12 +136,13 @@ module Seahorse
         @mutex.synchronize do
           if options[:step] == :send
             @send = handler_class
-          elsif options[:operations]
-            options[:operations].each do |operation|
-              insert(@operations[operation.to_s], handler_class, options)
-            end
           else
-            insert(@common, handler_class, options)
+            @handlers << SortableHandler.new(
+              handler_class,
+              operations(options),
+              priority(options),
+              next_index,
+            )
           end
         end
         handler_class
@@ -146,7 +158,7 @@ module Seahorse
           HandlerList.new(
             index: @index,
             send: @send,
-            common: @common + @operations[operation.to_s],
+            handlers: filter(operation.to_s),
           )
         end
       end
@@ -155,8 +167,8 @@ module Seahorse
       def each(&block)
         @mutex.synchronize do
           yield(@send) if @send
-          @common.sort.each do |order, insertion_order, handler|
-            yield(handler)
+          @handlers.sort.each do |handler|
+            yield(handler.klass) if handler.operations.nil?
           end
         end
       end
@@ -173,8 +185,21 @@ module Seahorse
 
       private
 
-      def insert(group, handler_class, options)
-        group << [order(options), next_index, handler_class]
+      def operations(options)
+        options[:operations] ? Set.new(options[:operations].map(&:to_s)) : nil
+      end
+
+      def filter(operation)
+        @handlers.inject([]) do |filtered, handler|
+          if handler.operations.nil?
+            filtered << handler
+          elsif handler.operations.include?(operation)
+            handler = handler.dup
+            handler.operations = nil
+            filtered << handler
+          end
+          filtered
+        end
       end
 
       def next_index
@@ -182,8 +207,8 @@ module Seahorse
       end
 
       # @return [Integer]
-      def order(options)
-        step_value(options) + priority(options)
+      def priority(options)
+        step_value(options) + priority_value(options)
       end
 
       # @return [Integer]
@@ -194,7 +219,7 @@ module Seahorse
       end
 
       # @return [Integer]
-      def priority(options)
+      def priority_value(options)
         priority = options[:priority] || 50
         raise InvalidPriorityError, priority unless (0..99).include?(priority)
         priority
