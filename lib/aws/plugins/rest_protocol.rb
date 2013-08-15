@@ -15,25 +15,23 @@ module Aws
   module Plugins
     class RestProtocol < Seahorse::Client::Plugin
       handle(:Handler) do |context|
-        uri = context.operation.http_uri
+        uri = context.operation.http_uri || '/'
         uri = uri.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
           value = context.params[$2.to_sym]
           value ? "#{$1}=#{value}" : ""
         end
         uri = uri.gsub(/\{(.+?)\}/) { context.params[$1.to_sym] }
 
-        context.http_request.http_method = context.operation.http_verb
+        context.http_request.http_method = context.operation.http_verb || 'POST'
         context.http_request.path = uri
 
         # add all top-level headers
-        context.operation.input.members.each do |name, member|
+        context.params.each do |key, value|
+          next unless member = context.operation.input.members[key]
           if member.location == 'header'
-            header = member.location_name || name
-            if context.params.has_key?(header.to_sym)
-              context.http_request.headers[header] = context.params[header.to_sym]
-            end
+            context.http_request.headers[member.location_name || key] = value
           elsif member.payload
-            context.http_request.body = context.params[name.to_sym]
+            context.http_request.body = value
           end
         end
 
