@@ -17,7 +17,7 @@ module Aws
   module Plugins
     class ContentLength < Seahorse::Client::Plugin
       handle_request :Handler do |context|
-        return if context.http_request.headers['Content-Length']
+        next if context.http_request.headers['Content-Length']
         length = context.http_request.body.size
         context.http_request.headers['Content-Length'] = length
       end
