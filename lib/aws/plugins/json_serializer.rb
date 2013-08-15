@@ -29,7 +29,9 @@ module Aws
         context.http_request.headers['X-Amz-Target'] = target
 
         super(context).on_complete do |response|
-          response.data = JSON.parse(response.context.http_response.body.read)
+          output = response.context.http_response.body.read
+          output = '{}' if output.empty?
+          response.data = JSON.parse(output)
         end
       end
 
