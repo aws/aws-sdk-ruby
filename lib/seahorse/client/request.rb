@@ -15,6 +15,8 @@ module Seahorse
   module Client
     class Request
 
+      include HandlerBuilder
+
       # @param [HandlerList] handlers
       # @param [RequestContext] context
       def initialize(handlers, context)

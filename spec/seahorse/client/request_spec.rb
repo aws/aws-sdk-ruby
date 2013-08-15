@@ -18,8 +18,14 @@ module Seahorse
     describe Request do
 
       let(:handlers) { HandlerList.new }
+
       let(:context) { RequestContext.new }
+
       let(:request) { Request.new(handlers, context) }
+
+      it 'is a HandlerBuilder' do
+        expect(request).to be_kind_of(HandlerBuilder)
+      end
 
       describe '#handlers' do
 

@@ -30,6 +30,10 @@ module Seahorse
 
       let(:plugin_b) { Class.new }
 
+      it 'is a HandlerBuilder' do
+        expect(client).to be_kind_of(HandlerBuilder)
+      end
+
       describe '#config' do
 
         it 'returns a Configuration object' do
