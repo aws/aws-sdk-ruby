@@ -77,15 +77,6 @@ module Seahorse
 
       end
 
-      describe '#on_request' do
-      end
-
-      describe '#on_response' do
-      end
-
-      describe '#around' do
-      end
-
       describe '#build_request' do
 
         let(:request) { client.build_request('operation') }
@@ -100,7 +91,7 @@ module Seahorse
 
         it 'includes operation specific handlers in the handler list' do
           handler = double('handler')
-          client.handlers.add(handler, operations: ['operation'])
+          client.handler(handler, operations: ['operation'])
           request = client.build_request('operation')
           expect(request.handlers.to_a).to include(handler)
         end

@@ -15,6 +15,8 @@ module Seahorse
   module Client
     class Base
 
+      include HandlerBuilder
+
       # These plugins are applied to every client and can not be removed.
       # @api private
       REQUIRED_PLUGINS = [
