@@ -14,30 +14,43 @@
 module Aws
   module Plugins
     class RestProtocol < Seahorse::Client::Plugin
-      handle(:Handler) do |context|
-        uri = context.operation.http_uri || '/'
-        uri = uri.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
-          value = context.params[$2.to_sym]
-          value ? "#{$1}=#{value}" : ""
-        end
-        uri = uri.gsub(/\{(.+?)\}/) { context.params[$1.to_sym] }
+      class Handler < Seahorse::Client::Handler
+        def call(context)
+          build_input_params(context)
+          context.http_request.http_method = context.operation.http_verb || 'POST'
+          context.http_request.path = interpolated_uri(context)
 
-        context.http_request.http_method = context.operation.http_verb || 'POST'
-        context.http_request.path = uri
-
-        # add all top-level headers
-        context.params.each do |key, value|
-          next unless member = context.operation.input.members[key]
-          if member.location == 'header'
-            context.http_request.headers[member.location_name || key] = value
-          elsif member.payload
-            context.http_request.body = value
+          handler.call(context).on_complete do |response|
+            response.data = {}
+            build_output_data(context, response)
           end
         end
 
-        super(context).on_complete do |response|
-          response.data = {}
+        private
 
+        def interpolated_uri(context)
+          uri = context.operation.http_uri || '/'
+          uri = uri.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
+            value = context.params[$2.to_sym]
+            value ? "#{$1}=#{value}" : ""
+          end
+          uri = uri.gsub(/\{(.+?)\}/) { context.params[$1.to_sym] }
+          uri
+        end
+
+        def build_input_params(context)
+          # add all top-level headers
+          context.params.each do |key, value|
+            next unless member = context.operation.input.members[key]
+            if member.location == 'header'
+              context.http_request.headers[member.location_name || key] = value
+            elsif member.payload
+              context.http_request.body = value
+            end
+          end
+        end
+
+        def build_output_data(context, response)
           # add all top-level headers
           context.operation.output.members.each do |name, member|
             if member.location == 'header'
@@ -51,6 +64,8 @@ module Aws
           end
         end
       end
+
+      handle(Handler)
     end
   end
 end
