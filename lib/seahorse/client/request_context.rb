@@ -35,10 +35,6 @@ module Seahorse
       # @return [String] Name of the API operation called.
       attr_accessor :operation_name
 
-      def operation
-        @operation ||= config.api.operations[operation_name]
-      end
-
       # @return [Hash] The hash of request parameters.
       attr_accessor :params
 
@@ -65,6 +61,11 @@ module Seahorse
       # @param [Object] value
       def []=(key, value)
         @metadata[key] = value
+      end
+
+      # @return [Model::Operation]
+      def operation
+        @operation ||= config.api.operations[operation_name]
       end
 
     end

@@ -246,7 +246,6 @@ module Seahorse
             Plugins::Endpoint,
             Plugins::NetHttp,
             Plugins::OperationMethods,
-            Plugins::ValidateParams,
           ])
         end
 
