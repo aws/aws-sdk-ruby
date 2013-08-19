@@ -44,13 +44,15 @@ module Aws
             next unless member = context.operation.input.members[key]
             if member.location == 'header'
               context.http_request.headers[member.location_name || key] = value
-            elsif member.payload
+            elsif member.payload && member.is_a?(Seahorse::Model::Shapes::ScalarShape)
               context.http_request.body = value
             end
           end
         end
 
         def build_output_data(context, response)
+          return if context.operation.output.nil?
+
           # add all top-level headers
           context.operation.output.members.each do |name, member|
             if member.location == 'header'
