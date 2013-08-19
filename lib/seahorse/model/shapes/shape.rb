@@ -58,16 +58,20 @@ module Seahorse
         property :flattened, Boolean
       end
 
-      class IntegerShape < Shape; end
-      class LongShape < Shape; end
-      class FloatShape < Shape; end
-      class DoubleShape < Shape; end
-      class TimestampShape < Shape; end
-      class BooleanShape < Shape; end
-      class BlobShape < Shape; end
+      class ScalarShape < Shape; end
+      class IntegerShape < ScalarShape; end
+      class LongShape < ScalarShape; end
+      class FloatShape < ScalarShape; end
+      class DoubleShape < ScalarShape; end
+      class BooleanShape < ScalarShape; end
+      class BlobShape < ScalarShape; end
 
-      class StringShape < Shape
+      class StringShape < ScalarShape
         property :enum, [String]
+      end
+
+      class TimestampShape < ScalarShape
+        property :timestamp_format, String
       end
 
       class ListShape < Shape
