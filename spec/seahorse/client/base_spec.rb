@@ -245,16 +245,17 @@ module Seahorse
             Plugins::Api,
             Plugins::Endpoint,
             Plugins::NetHttp,
-            Plugins::OperationMethods
+            Plugins::OperationMethods,
+            Plugins::ValidateParams,
           ])
         end
 
-        it 'replaces default plugins with the list specified in the API' do
+        it 'add plugins specified in the api to the default plugins' do
           stub_const('Seahorse::Client::PluginA', plugin_a)
           api = { 'plugins' => ['Seahorse::Client::PluginA'] }
           client_class = Base.define(api: api)
-          expect(client_class.plugins.count).to eq(5)
-          expect(client_class.plugins).to include(plugin_a)
+          expect(client_class.plugins).to include(Plugins::NetHttp)
+          expect(client_class.plugins).to include(Client::Plugins::NetHttp)
         end
 
       end

@@ -18,10 +18,10 @@ module Seahorse
     module Plugins
       describe Endpoint do
         let(:client_class) do
-          Client::Base.define api: {
-            'endpoint' => 'foo.com',
-            'plugins' => [Endpoint, DummySendPlugin]
-          }
+          client_class = Client::Base.define api: { 'endpoint' => 'foo.com' }
+          client_class.clear_plugins
+          client_class.add_plugin(DummySendPlugin)
+          client_class
         end
 
         def client(opts = {}) @client ||= client_class.new(opts) end
