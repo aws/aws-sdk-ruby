@@ -43,6 +43,10 @@ module Aws
     end
   end
 
+  module Xml
+    autoload :Builder, 'aws/xml/builder'
+  end
+
 end
 
 Aws.config = {}

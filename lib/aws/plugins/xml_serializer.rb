@@ -18,11 +18,13 @@ module Aws
     class XmlSerializer < Seahorse::Client::Plugin
 
       handle(:Handler) do |context|
-        xml = "<ListDistributionsRequest></ListDistributionsRequest>"
-        content_type = "application/xml"
+        input_shape = context.operation.input.members.values.find do |member|
+          member.payload
+        end || context.operation.input
+        xml = Aws::Xml::Builder.new.build(context.params, input_shape)
 
-        context.http_request.body = xml
-        context.http_request.headers['Content-Type'] = content_type
+        context.http_request.body = xml.to_s
+        context.http_request.headers['Content-Type'] = 'application/xml'
 
         super(context).on_complete do |response|
           response.data = MultiXml.parse(response.context.http_response.body.read)
