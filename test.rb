@@ -29,6 +29,7 @@ end
 class Seahorse::Model::Operation
   property :documentation_url, String
   property :response_code, Integer, in: :http
+  property :alias, String
 end
 
 class Seahorse::Model::Shapes::Shape
@@ -36,6 +37,8 @@ class Seahorse::Model::Shapes::Shape
   property :payload, Boolean
   property :streaming, Boolean
   property :box, Boolean
+  property :xmlattribute, String
+  property :xmlnamespace, String
 end
 
 class DummySenderPlugin < Seahorse::Client::Plugin
@@ -43,7 +46,7 @@ class DummySenderPlugin < Seahorse::Client::Plugin
 
   handler :Handler, step: :send do |context|
     response = Seahorse::Client::Response.new(context: context)
-    response.http_response.body = StringIO.new(context.config.response_body)
+    response.http_response.body = context.config.response_body
     response.signal_complete
   end
 end
@@ -79,7 +82,7 @@ end
 SWF = client_class 'swf', %w(2012-01-25), %w(Signers::Version3 JsonSerializer)
 EMR = client_class 'elasticmapreduce', %w(2009-03-31), %w(Signers::Version4 JsonSerializer)
 CloudFront = client_class 'cloudfront', %w(2013-05-12), %w(Signers::Version4 XmlSerializer)
-S3 = client_class 's3', %w(2006-03-01), %w(Signers::Version4)
+S3 = client_class 's3', %w(2006-03-01), %w(Signers::Version4 XmlSerializer)
 OpsWorks = client_class 'opsworks', %w(2013-02-18), %w(Signers::Version4 JsonSerializer)
 
 swf = SWF.new
@@ -88,10 +91,23 @@ cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
 
-resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
-pp resp.http_request
-resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
-pp resp.data
+# resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+# pp resp.http_request
+# resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
+# pp resp.data
+
+#pp s3.put_bucket_logging
+
+# cloudfront.create_distribution2013_05_12(DistributionConfig: {
+#   CallerReference: "Foo",
+#   Enabled: true,
+#   Aliases: {
+#     Quantity: 1,
+#     Items: [
+#       "Foo", "Bar", "Baz"
+#     ]
+#   }
+# }).data
 
 # pp swf.list_domains(registrationStatus: 'REGISTERED').data
 
