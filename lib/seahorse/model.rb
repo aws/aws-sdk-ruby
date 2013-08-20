@@ -22,10 +22,6 @@ module Seahorse
     autoload :Property, 'seahorse/model/property'
     autoload :PropertyError, 'seahorse/model/property'
 
-    module Types
-      autoload :Boolean, 'seahorse/model/types'
-    end
-
     module Shapes
       autoload :BlobShape, 'seahorse/model/shapes/shape'
       autoload :BooleanShape, 'seahorse/model/shapes/shape'
@@ -37,6 +33,10 @@ module Seahorse
       autoload :StringShape, 'seahorse/model/shapes/shape'
       autoload :StructureShape, 'seahorse/model/shapes/shape'
       autoload :TimestampShape, 'seahorse/model/shapes/shape'
+    end
+
+    module Types
+      autoload :Boolean, 'seahorse/model/types'
     end
 
   end
