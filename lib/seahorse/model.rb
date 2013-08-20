@@ -14,6 +14,14 @@
 
 module Seahorse
   module Model
+
+    autoload :Api, 'seahorse/model/api'
+    autoload :LazyOperationHash, 'seahorse/model/lazy_operation_hash'
+    autoload :Node, 'seahorse/model/node'
+    autoload :Operation, 'seahorse/model/operation'
+    autoload :Property, 'seahorse/model/property'
+    autoload :PropertyError, 'seahorse/model/property'
+
     module Types
       autoload :Boolean, 'seahorse/model/types'
     end
@@ -32,11 +40,5 @@ module Seahorse
         autoload :TimestampShape, 'seahorse/model/shapes/shape'
     end
 
-    autoload :Api, 'seahorse/model/api'
-    autoload :LazyOperationHash, 'seahorse/model/lazy_operation_hash'
-    autoload :Node, 'seahorse/model/node'
-    autoload :Operation, 'seahorse/model/operation'
-    autoload :Property, 'seahorse/model/property'
-    autoload :PropertyError, 'seahorse/model/property'
   end
 end
