@@ -27,17 +27,16 @@ module Seahorse
     end
 
     module Shapes
-        autoload :Shape, 'seahorse/model/shapes/shape'
-
-        autoload :BlobShape, 'seahorse/model/shapes/shape'
-        autoload :BooleanShape, 'seahorse/model/shapes/shape'
-        autoload :DoubleShape, 'seahorse/model/shapes/shape'
-        autoload :IntegerShape, 'seahorse/model/shapes/shape'
-        autoload :FloatShape, 'seahorse/model/shapes/shape'
-        autoload :LongShape, 'seahorse/model/shapes/shape'
-        autoload :StringShape, 'seahorse/model/shapes/shape'
-        autoload :StructureShape, 'seahorse/model/shapes/shape'
-        autoload :TimestampShape, 'seahorse/model/shapes/shape'
+      autoload :BlobShape, 'seahorse/model/shapes/shape'
+      autoload :BooleanShape, 'seahorse/model/shapes/shape'
+      autoload :DoubleShape, 'seahorse/model/shapes/shape'
+      autoload :IntegerShape, 'seahorse/model/shapes/shape'
+      autoload :FloatShape, 'seahorse/model/shapes/shape'
+      autoload :LongShape, 'seahorse/model/shapes/shape'
+      autoload :Shape, 'seahorse/model/shapes/shape'
+      autoload :StringShape, 'seahorse/model/shapes/shape'
+      autoload :StructureShape, 'seahorse/model/shapes/shape'
+      autoload :TimestampShape, 'seahorse/model/shapes/shape'
     end
 
   end
