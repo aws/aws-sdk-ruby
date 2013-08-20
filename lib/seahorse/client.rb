@@ -52,6 +52,11 @@ module Seahorse
       autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
     end
 
+    module Xml
+      autoload :Builder, 'seahorse/client/xml/builder'
+      autoload :Parser, 'seahorse/client/xml/parser'
+    end
+
     # @param (see Base.define)
     # @return (see Base.define)
     def self.define(options = {})
