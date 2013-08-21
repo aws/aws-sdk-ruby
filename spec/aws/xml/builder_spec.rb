@@ -263,6 +263,52 @@ module Aws
 
       describe 'scalars' do
       end
+
+      describe 'namespaces' do
+
+        it 'applies xml namespaces to any shape' do
+          ns = {
+            'prefix' => 'prefix',
+            'uri' => 'http://xmlns.com/uri'
+          }
+          rules['members'] = {
+            'scalar' => {
+              'type' => 'string',
+              'xmlnamespace' => ns,
+            },
+            'struct' => {
+              'type' => 'structure',
+              'xmlnamespace' => ns,
+              'members' => {
+                'list' => {
+                  'type' => 'list',
+                  'xmlnamespace' => ns,
+                  'members' => { 'type' => 'string', 'xmlname' => 'item' }
+                },
+              }
+            }
+          }
+          params = {
+            scalar: 'value',
+            struct: {
+              list: %w(a b),
+            }
+          }
+          expect(xml(params)).to eq(<<-XML)
+<xml>
+  <scalar xmlns="prefix:http://xmlns.com/uri">value</scalar>
+  <struct xmlns="prefix:http://xmlns.com/uri">
+    <list xmlns="prefix:http://xmlns.com/uri">
+      <item>a</item>
+      <item>b</item>
+    </list>
+  </struct>
+</xml>
+          XML
+        end
+
+      end
+
     end
   end
 end

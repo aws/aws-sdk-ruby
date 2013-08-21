@@ -90,11 +90,16 @@ module Aws
         end
       end
 
-      # args may be:
+      # The `args` list may contain:
+      #
       #   * [] - empty, no value or attributes
       #   * [value] - inline element, no attributes
       #   * [value, attributes_hash] - inline element with attributes
       #   * [attributes_hash] - self closing element with attributes
+      #
+      # Pass a block if you want to nest XML nodes inside.  When doing this,
+      # you may *not* pass a value to the `args` list.
+      #
       def node(name, shape, *args, &block)
         attrs = args.last.is_a?(Hash) ? args.pop : {}
         attrs = shape_attrs(shape).merge(attrs)
@@ -103,7 +108,12 @@ module Aws
       end
 
       def shape_attrs(shape)
-        {}
+        if uri = shape.xmlns_uri
+          xmlns = shape.xmlns_prefix ? "#{shape.xmlns_prefix}:#{uri}" : uri
+          { xmlns: xmlns }
+        else
+          {}
+        end
       end
 
     end
