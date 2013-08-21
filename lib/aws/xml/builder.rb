@@ -70,14 +70,6 @@ module Aws
         xml.send(name, value)
       end
 
-      def node(name, shape, value = nil, &block)
-        args = []
-        args << name
-        args << value
-        args << attributes(shape)
-        xml.send(*args.compact, &block)
-      end
-
     end
   end
 end
