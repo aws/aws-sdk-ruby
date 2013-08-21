@@ -27,9 +27,18 @@ module Aws
         @rules = rules
       end
 
+      # @param [Hash] params
+      # @return [String] Returns an XML doc string.
       def to_xml(params)
         structure(@rules.xmlname, @rules, params)
         @xml.join
+      end
+
+      # @param [Seahorse::Model::Shapes::Shape] rules
+      # @param [Hash] params
+      # @return [String] Returns an XML doc string.
+      def self.to_xml(rules, params)
+        Builder.new(rules).to_xml(params)
       end
 
       private
