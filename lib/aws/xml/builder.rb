@@ -72,12 +72,8 @@ module Aws
         case shape
         when StructureShape then structure(name, shape, value, xml)
         when ListShape then list(name, shape, value, xml)
-        else scalar(name, shape, value, xml)
+        else xml.send(name, value)
         end
-      end
-
-      def scalar(name, shape, value, xml)
-        xml.send(name, value)
       end
 
     end
