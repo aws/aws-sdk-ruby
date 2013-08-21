@@ -47,7 +47,7 @@ module Aws
         if values.empty?
          node(name, shape)
         else
-          node(name, structure_attrs(shape, values)) do
+          node(name, shape, structure_attrs(shape, values)) do
             shape.members.each_pair do |member_name, member_shape|
               if values.key?(member_name)
                 next if member_shape.xmlattribute
