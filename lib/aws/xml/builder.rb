@@ -33,14 +33,24 @@ module Aws
         if values.empty?
           xml.send(name)
         else
-          xml.send(name) do
+          xml.send(name, structure_attrs(shape, values)) do
             shape.members.each_pair do |member_name, member_shape|
               if values.key?(member_name)
+                next if member_shape.xmlattribute
                 mname = member_shape.xmlname || member_name
                 member(mname, member_shape, values[member_name], xml)
               end
             end
           end
+        end
+      end
+
+      def structure_attrs(shape, values)
+        shape.members.inject({}) do |attrs, (member_name, member_shape)|
+          if member_shape.xmlattribute && values.key?(member_name)
+            attrs[member_shape.xmlname || member_name] = values[member_name]
+          end
+          attrs
         end
       end
 

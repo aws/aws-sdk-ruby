@@ -100,6 +100,35 @@ module Aws
           XML
         end
 
+        it 'applies xml attribute members to the structure' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'encoding' => {
+                  'type' => 'string',
+                  'xmlattribute' => true,
+                  'xmlname' => 'encode',
+                },
+                'description' => { 'type' => 'string' },
+              }
+            }
+          }
+          params = {
+            config: {
+              encoding: 'base64',
+              description: 'optional',
+            },
+          }
+          expect(xml(params)).to eq(<<-XML)
+<xml>
+  <config encode="base64">
+    <description>optional</description>
+  </config>
+</xml>
+          XML
+        end
+
       end
 
       describe 'non-flattened lists' do
