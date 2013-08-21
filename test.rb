@@ -37,6 +37,12 @@ class Seahorse::Model::Shapes::Shape
   property :payload, Boolean
   property :streaming, Boolean
   property :box, Boolean
+  property :shape_name, String
+  property :xmlname, String
+  property :xmlattribute, Boolean
+  property :xmlns_prefix, String, in: :xmlnamespace, name: :prefix
+  property :xmlns_uri, String, in: :xmlnamespace, name: :uri
+  property :flattened, Boolean
 end
 
 class DummySenderPlugin < Seahorse::Client::Plugin

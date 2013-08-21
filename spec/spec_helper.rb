@@ -18,3 +18,11 @@ end
 
 require 'rspec'
 require 'aws-sdk-core'
+
+require 'seahorse'
+
+class Seahorse::Model::Shapes::Shape
+  property :xmlname, String
+  property :xmlattribute, Boolean
+  property :flattened, Boolean
+end
