@@ -20,25 +20,30 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      def to_xml(shape, value)
-        xml = []
-        builder = ::Builder::XmlMarkup.new(target: xml, indent: 2)
-        structure(shape.xmlname, shape, value, builder)
-        xml.join
+      # @param [Seahorse::Model::Shapes::Shape] rules
+      def initialize(rules)
+        @xml = []
+        @builder = ::Builder::XmlMarkup.new(target: @xml, indent: 2)
+        @rules = rules
+      end
+
+      def to_xml(params)
+        structure(@rules.xmlname, @rules, params)
+        @xml.join
       end
 
       private
 
-      def structure(name, shape, values, xml)
+      def structure(name, shape, values)
         if values.empty?
-          xml.send(name)
+         node(name, shape)
         else
-          xml.send(name, structure_attrs(shape, values)) do
+          node(name, structure_attrs(shape, values)) do
             shape.members.each_pair do |member_name, member_shape|
               if values.key?(member_name)
                 next if member_shape.xmlattribute
                 mname = member_shape.xmlname || member_name
-                member(mname, member_shape, values[member_name], xml)
+                member(mname, member_shape, values[member_name])
               end
             end
           end
@@ -54,26 +59,42 @@ module Aws
         end
       end
 
-      def list(name, shape, values, xml)
+      def list(name, shape, values)
         if shape.flattened
           values.each do |value|
-            member(name, shape.members, value, xml)
+            member(name, shape.members, value)
           end
         else
-          xml.send(name) do
+          node(name, shape) do
             values.each do |value|
-              member(shape.members.xmlname || 'member', shape.members, value, xml)
+              member(shape.members.xmlname || 'member', shape.members, value)
             end
           end
         end
       end
 
-      def member(name, shape, value, xml)
+      def member(name, shape, value)
         case shape
-        when StructureShape then structure(name, shape, value, xml)
-        when ListShape then list(name, shape, value, xml)
-        else xml.send(name, value)
+        when StructureShape then structure(name, shape, value)
+        when ListShape then list(name, shape, value)
+        else node(name, shape, value)
         end
+      end
+
+      # args may be:
+      #   * [] - empty, no value or attributes
+      #   * [value] - inline element, no attributes
+      #   * [value, attributes_hash] - inline element with attributes
+      #   * [attributes_hash] - self closing element with attributes
+      def node(name, shape, *args, &block)
+        attrs = args.last.is_a?(Hash) ? args.pop : {}
+        attrs = shape_attrs(shape).merge(attrs)
+        args << attrs
+        @builder.send(name, *args, &block)
+      end
+
+      def shape_attrs(shape)
+        {}
       end
 
     end

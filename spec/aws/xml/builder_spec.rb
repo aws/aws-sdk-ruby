@@ -25,7 +25,7 @@ module Aws
 
       def xml(params)
         shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Builder.new.to_xml(shape, params)
+        Builder.new(shape).to_xml(params)
       end
 
       describe 'structures' do
