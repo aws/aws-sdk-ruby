@@ -37,8 +37,6 @@ class Seahorse::Model::Shapes::Shape
   property :payload, Boolean
   property :streaming, Boolean
   property :box, Boolean
-  property :xmlattribute, String
-  property :xmlnamespace, String
 end
 
 class DummySenderPlugin < Seahorse::Client::Plugin
