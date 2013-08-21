@@ -49,12 +49,15 @@ module Seahorse
         property :default, Object
         property :documentation, String
         property :location, String
-
-        property :shape_name, String
         property :min_length, Integer
         property :max_length, Integer
         property :pattern, String
+
+        property :shape_name, String
         property :xmlname, String
+        property :xmlattribute, Boolean
+        property :xmlns_prefix, String, in: :xmlnamespace, name: :prefix
+        property :xmlns_uri, String, in: :xmlnamespace, name: :uri
         property :flattened, Boolean
       end
 
