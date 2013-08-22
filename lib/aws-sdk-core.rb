@@ -14,9 +14,6 @@
 require 'seahorse'
 
 module Aws
-  class << self
-    attr_accessor :config
-  end
 
   autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
@@ -47,6 +44,10 @@ module Aws
     autoload :Builder, 'aws/xml/builder'
   end
 
-end
+  @config = {}
 
-Aws.config = {}
+  class << self
+    attr_accessor :config
+  end
+
+end

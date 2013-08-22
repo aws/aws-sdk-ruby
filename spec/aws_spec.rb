@@ -21,4 +21,12 @@ module Aws
     end
 
   end
+
+  describe 'config' do
+
+    it 'defaults to an empty hash' do
+      expect(Aws.config).to eq({})
+    end
+
+  end
 end
