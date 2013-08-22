@@ -44,6 +44,8 @@ module Seahorse
           self.type = self.class.type
         end
 
+        attr_accessor :member_name
+
         property :type, Symbol
         property :required, Boolean
         property :default, Object

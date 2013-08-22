@@ -21,8 +21,9 @@ module Seahorse
       end
 
       let(:property_class) do
-        Class.new do
-          def self.from_hash(value) value.to_s + '!' end
+        Class.new(String) do
+          attr_accessor :member_name
+          def self.from_hash(value) new(value.to_s + '!') end
         end
       end
 

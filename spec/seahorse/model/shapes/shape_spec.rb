@@ -60,10 +60,24 @@ module Seahorse
       end
 
       describe StructureShape do
+
         it 'defaults to an empty members hash' do
           shape = StructureShape.new
           expect(shape.members).to eq({})
         end
+
+        it 'populates the #member_name property on its members' do
+          shape = Shape.from_hash(
+            'type' => 'structure',
+            'members' => {
+              'abc' => { 'type' => 'string' },
+              'xyz' => { 'type' => 'string' },
+            }
+          )
+          expect(shape.members[:abc].member_name).to eq(:abc)
+          expect(shape.members[:xyz].member_name).to eq(:xyz)
+        end
+
       end
     end
   end
