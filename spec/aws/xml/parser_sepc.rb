@@ -27,7 +27,11 @@ module Aws
         Parser.to_hash(shape, xml)
       end
 
-      it 'returns an empty hash when the rules have no members' do
+      it 'returns an empty hash when the XML is empty' do
+        expect(data('<xml/>')).to eq({})
+      end
+
+      it 'ignores xml elements when the rules are empty' do
         rules['members'] = {}
         expect(data('<xml><foo>bar</foo></xml>')).to eq({})
       end
