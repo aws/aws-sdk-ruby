@@ -16,6 +16,7 @@ require 'seahorse'
 
 module Aws
   module Xml
+    # @api private
     class Builder
 
       # @param [Seahorse::Model::Shapes::Shape] rules
