@@ -216,8 +216,8 @@ describe AWS do
       end
 
       it 'observes the nested region' do
-        AWS.config.stub(:s3).and_return(:region => 'us-west-2')
-        AWS.config.s3_endpoint.should eq('s3-us-west-2.amazonaws.com')
+        config = AWS.config.with(:s3 => { :region => 'us-west-2' })
+        config.s3_endpoint.should eq('s3-us-west-2.amazonaws.com')
       end
 
     end

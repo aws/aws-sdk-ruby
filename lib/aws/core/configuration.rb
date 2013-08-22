@@ -321,6 +321,13 @@ module AWS
         "<#{self.class.name}>"
       end
 
+      # @api private
+      def endpoint_region(svc)
+        (supplied[svc.method_name] || {})[:region] or
+        supplied[:"#{svc.old_name}_region"] or
+        region
+      end
+
       protected
 
       def supplied
@@ -399,9 +406,9 @@ module AWS
             elsif endpoint = config.send(svc_opt)[:endpoint]
               endpoint
             elsif endpoint_pattern
-              endpoint_pattern % config.send("#{svc_opt}_region")
+              endpoint_pattern % config.endpoint_region(svc)
             else
-              endpoint_builder.call(config.send("#{svc_opt}_region"))
+              endpoint_builder.call(config.endpoint_region(svc))
             end
           end
 
@@ -430,7 +437,7 @@ module AWS
                 else
                   'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
                 end
-              elsif matches = endpoint.match(/^.+\.(.+)\.amazonaws.com$/)
+              elsif matches = endpoint.match(/^.+?[.-](.+)\.amazonaws.com$/)
                 matches[1]
               else
                 AWS.const_get(name).global_endpoint? ? 'us-east-1' : config.region
