@@ -262,6 +262,19 @@ module Aws
       end
 
       describe 'scalars' do
+
+        it 'serializes integers to string'
+
+        it 'serializes floats to string'
+
+        it 'serializes booleans as `true` and `false`'
+
+        it 'serializes timestamps as is8601 strings by default'
+
+        it 'can serialize a timestamp as an rfc822 string'
+
+        it 'can serialize a timestamp as an unixtimestamp string'
+
       end
 
       describe 'namespaces' do
