@@ -263,17 +263,79 @@ module Aws
 
       describe 'scalars' do
 
-        it 'serializes integers to string'
+        it 'serializes integers to string' do
+          rules['members']['count'] = { 'type' => 'integer' }
+          expect(xml(count: 123)).to eq(<<-XML)
+<xml>
+  <count>123</count>
+</xml>
+          XML
+        end
 
-        it 'serializes floats to string'
+        it 'serializes floats to string' do
+          value = double('value', :to_s => '123.123')
+          rules['members']['price'] = { 'type' => 'float' }
+          expect(xml(price: value)).to eq(<<-XML)
+<xml>
+  <price>#{value.to_s}</price>
+</xml>
+          XML
+        end
 
-        it 'serializes booleans as `true` and `false`'
+        it 'serializes booleans as `true` and `false`' do
+          rules['members'] = {
+            'abc' => { 'type' => 'boolean' },
+            'xyz' => { 'type' => 'boolean' }
+          }
+          expect(xml(abc: true, xyz: false)).to eq(<<-XML)
+<xml>
+  <abc>true</abc>
+  <xyz>false</xyz>
+</xml>
+          XML
+        end
 
-        it 'serializes timestamps as is8601 strings by default'
+        it 'serializes timestamps as is8601 strings by default' do
+          now = Time.now
+          rules['members'] = {
+            'when' => { 'type' => 'timestamp' }
+          }
+          expect(xml(when: now)).to eq(<<-XML)
+<xml>
+  <when>#{now.utc.iso8601}</when>
+</xml>
+          XML
+        end
 
-        it 'can serialize a timestamp as an rfc822 string'
+        it 'can serialize a timestamp as an rfc822 string' do
+          now = Time.now
+          rules['members'] = {
+            'when' => {
+              'type' => 'timestamp',
+              'timestamp_format' => 'rfc822'
+            }
+          }
+          expect(xml(when: now)).to eq(<<-XML)
+<xml>
+  <when>#{now.utc.rfc822}</when>
+</xml>
+          XML
+        end
 
-        it 'can serialize a timestamp as an unixtimestamp string'
+        it 'can serialize a timestamp as an unixtimestamp string' do
+          now = Time.now
+          rules['members'] = {
+            'when' => {
+              'type' => 'timestamp',
+              'timestamp_format' => 'unixtimestamp'
+            }
+          }
+          expect(xml(when: now)).to eq(<<-XML)
+<xml>
+  <when>#{now.utc.to_i}</when>
+</xml>
+          XML
+        end
 
       end
 
