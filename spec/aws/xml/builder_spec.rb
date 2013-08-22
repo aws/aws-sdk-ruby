@@ -117,8 +117,8 @@ module Aws
           params = {
             config: {
               encoding: 'base64',
-              description: 'optional',
-            },
+              description: 'optional'
+            }
           }
           expect(xml(params)).to eq(<<-XML)
 <xml>
@@ -383,7 +383,6 @@ module Aws
         end
 
       end
-
     end
   end
 end

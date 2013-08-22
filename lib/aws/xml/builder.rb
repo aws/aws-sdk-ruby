@@ -87,7 +87,26 @@ module Aws
         elsif shape.is_a?(Seahorse::Model::Shapes::ListShape)
           list(name, shape, value)
         else
-          node(name, shape, value)
+          node(name, shape, format(shape, value))
+        end
+      end
+
+      def format(shape, value)
+        if shape.is_a?(Seahorse::Model::Shapes::TimestampShape)
+          format_timestamp(shape, value.utc)
+        else
+          value.to_s
+        end
+      end
+
+      def format_timestamp(shape, value)
+        case shape.timestamp_format
+        when 'iso8601', nil then value.iso8601
+        when 'rfc822' then value.rfc822
+        when 'unixtimestamp' then value.to_i
+        else
+          msg = "invalid timestamp format #{shape.timestamp_format.inspect}"
+          raise ArgumentError, msg
         end
       end
 
