@@ -113,7 +113,7 @@ module AWS::Core
     #it_should_behave_like "supports async option"
 
     before(:each) do
-      Kernel.stub!(:sleep)
+      Kernel.stub(:sleep)
     end
 
     let(:server_error_client) {
@@ -319,7 +319,7 @@ module AWS::Core
     end
 
     it 'it uses a randomized scaling factor for throttled requests' do
-      Kernel.stub!(:rand) { 0.5 }
+      Kernel.stub(:rand) { 0.5 }
       Kernel.should_receive(:sleep).with(0.55).with(1.1).with(2.2)
       begin
         client.with_http_handler{|req, resp|

@@ -1858,7 +1858,7 @@ module AWS
           end
 
           before(:each) do
-            Kernel.stub!(:sleep)
+            Kernel.stub(:sleep)
             http_handler.stub(:handle) do |req, resp|
               resp.body = error_response
             end

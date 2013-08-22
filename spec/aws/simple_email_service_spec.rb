@@ -230,7 +230,7 @@ module AWS
       context 'with an object as input, that understands destinations (e.g. Mail::Message)' do
         let(:raw) do
           r = "raw"
-          r.stub!(:destinations => ['bcc'])
+          r.stub(:destinations => ['bcc'])
           r
         end
 
