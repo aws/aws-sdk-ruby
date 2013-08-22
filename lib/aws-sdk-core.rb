@@ -42,6 +42,7 @@ module Aws
 
   module Xml
     autoload :Builder, 'aws/xml/builder'
+    autoload :Parser, 'aws/xml/parser'
   end
 
   @config = {}
