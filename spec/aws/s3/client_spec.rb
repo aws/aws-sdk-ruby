@@ -236,6 +236,112 @@ module AWS
 
       end
 
+      context 'logging', :logging => true do
+
+        let(:xml) { <<-XML.strip }
+<BucketLoggingStatus xmlns="http://doc.s3.amazonaws.com/2006-03-01">
+  <LoggingEnabled>
+    <TargetBucket>mybucketlogs</TargetBucket>
+    <TargetPrefix>mybucket-access_log-/</TargetPrefix>
+    <TargetGrants>
+      <Grant>
+        <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:type="AmazonCustomerByEmail">
+          <EmailAddress>user@company.com</EmailAddress>
+        </Grantee>
+        <Permission>READ</Permission>
+      </Grant>
+      <Grant>
+        <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:type="AmazonCustomerByEmail">
+          <EmailAddress>admin@company.com</EmailAddress>
+        </Grantee>
+        <Permission>WRITE</Permission>
+      </Grant>
+    </TargetGrants>
+  </LoggingEnabled>
+</BucketLoggingStatus>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_logging' do
+
+          it 'make a put request to the logging subresource' do
+
+            request = get_request(:put_bucket_logging, {
+              :bucket_name => 'bucket',
+              :logging_enabled => true,
+              :target_bucket => 'mybucketlogs',
+              :target_prefix => 'mybucket-access_log-/',
+              :grants => [{:email_address => 'user@company.com',
+                           :permission => 'READ'},
+                          {:email_address => 'admin@company.com',
+                           :permission => 'WRITE'}]
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('logging')
+
+          end
+          
+        end
+
+        context '#get_bucket_logging' do
+
+          it 'make a get request to the logging subresource' do
+            req = get_request(:get_bucket_logging, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('logging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_logging,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :logging_enabled =>
+                {:target_grants => [
+                  {:grantee =>
+                    {:type => "AmazonCustomerByEmail",
+                     :email_address => "user@company.com"},
+                  :permission => "READ"},
+                  {:grantee =>
+                    {:type => "AmazonCustomerByEmail",
+                     :email_address => "admin@company.com"},
+                  :permission => "WRITE"}],
+              :target_bucket => "mybucketlogs", :target_prefix => "mybucket-access_log-/"}
+            })
+          end
+
+        end
+
+      end
+
       context 'tagging', :tagging => true do
 
         let(:xml) { <<-XML.strip }

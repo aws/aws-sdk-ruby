@@ -71,6 +71,24 @@ module AWS
 
         end
 
+        GetBucketLogging = BaseGrammar.customize do
+          element("LoggingEnabled") do
+            element("TargetBucket") { }
+            element("TargetPrefix") { }
+            element("TargetGrants") do
+              list "Grant"
+              element("Grant") do
+                element("Grantee") do
+                  element("EmailAddress") { }
+                  element("ID") { }
+                  element("URI") { }
+                end
+                element("Permission") { }
+              end
+            end
+          end
+        end
+
         GetBucketVersioning = BaseGrammar.customize do
           default_value :status, :unversioned
           element("Status") do

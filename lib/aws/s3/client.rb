@@ -550,6 +550,90 @@ module AWS
 
       end
 
+      # @overload put_bucket_logging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [Boolean] :logging_enabled Set to true if turning on
+      #     bucket logging. If not set or false, all of the following options
+      #     will be ignored.
+      #   @option options [String] :target_bucket The name of the bucket in
+      #     which you want Amazon S3 to store server access logs. You can push
+      #     logs to any bucket you own, including the bucket being logged.
+      #   @option options [String] :target_prefix Allows you to specify a prefix
+      #     for the keys that the log files will be stored under. Recommended
+      #     if you will be writing logs from multiple buckets to the same target
+      #     bucket.
+      #   @option options [Array<Hash>] :grants An array of hashes specifying
+      #     permission grantees. For each hash, specify ONLY ONE of :id, :uri,
+      #     or :email_address.
+      #     * `:email_address` - (String) E-mail address of the person being
+      #       granted logging permissions.
+      #     * `:id` - (String) The canonical user ID of the grantee.
+      #     * `:uri` - (String) URI of the grantee group.
+      #     * `:permission` - (String) Logging permissions given to the Grantee
+      #          for the bucket. The bucket owner is automatically granted FULL_CONTROL
+      #          to all logs delivered to the bucket. This optional element enables
+      #          you grant access to others. Valid Values: FULL_CONTROL | READ | WRITE 
+      #   @return [Core::Response]
+      bucket_method(:put_bucket_logging, :put) do
+        configure_request do |req, options|
+
+          req.add_param('logging')
+
+          xml = Nokogiri::XML::Builder.new
+          xml.BucketLoggingStatus('xmlns' => XMLNS) do |xml|
+            if options[:logging_enabled] == true
+              xml.LoggingEnabled do
+                xml.TargetBucket(options[:target_bucket])
+                xml.TargetPrefix(options[:target_prefix])
+                unless options[:grants].nil?
+
+                  xml.TargetGrants do
+                    options[:grants].each do |grant|
+                      xml.Grant do
+                        if !grant[:email_address].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'AmazonCustomerByEmail') do
+                            xml.EmailAddress(grant[:email_address])
+                          end
+                        elsif !grant[:uri].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'Group') do
+                            xml.URI(grant[:uri])
+                          end
+                        elsif !grant[:id].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'CanonicalUser') do
+                            xml.ID(grant[:id])
+                          end
+                        end
+
+                        xml.Permission(grant[:permission])
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+
+          xml = xml.doc.root.to_xml
+          req.body = xml
+          req.headers['content-md5'] = md5(xml)
+          
+          super(req, options)
+
+        end
+      end
+
+      # Gets the bucket's logging status.
+      # @overload get_bucket_logging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_logging, :get, 'logging',
+        XML::GetBucketLogging)
+
       # @overload get_bucket_versioning(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
