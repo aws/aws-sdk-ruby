@@ -18,8 +18,6 @@ module Aws
   module Xml
     class Builder
 
-      include Seahorse::Model::Shapes
-
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @xml = []
@@ -83,10 +81,12 @@ module Aws
       end
 
       def member(name, shape, value)
-        case shape
-        when StructureShape then structure(name, shape, value)
-        when ListShape then list(name, shape, value)
-        else node(name, shape, value)
+        if shape.is_a?(Seahorse::Model::Shapes::StructureShape)
+          structure(name, shape, value)
+        elsif shape.is_a?(Seahorse::Model::Shapes::ListShape)
+          list(name, shape, value)
+        else
+          node(name, shape, value)
         end
       end
 
