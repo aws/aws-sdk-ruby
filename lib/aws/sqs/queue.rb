@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'digest'
+
 module AWS
   class SQS
 
@@ -118,10 +120,13 @@ module AWS
         client_opts[:message_body] = body
 
         response = client.send_message(client_opts)
-
+        
         msg = SentMessage.new
         msg.message_id = response[:message_id]
         msg.md5 = response[:md5_of_message_body]
+
+        verify_send_message_checksum body, msg.md5
+        
         msg
 
       end
@@ -186,6 +191,10 @@ module AWS
       #
       def receive_message(opts = {}, &block)
         resp = client.receive_message(receive_opts(opts))
+
+        failed = verify_receive_message_checksum resp
+
+        raise Errors::ChecksumError.new(failed) unless failed.empty?
 
         messages = resp[:messages].map do |m|
           ReceivedMessage.new(self, m[:message_id], m[:receipt_handle],
@@ -530,9 +539,11 @@ module AWS
         client_opts[:entries] = entries
 
         response = client.send_message_batch(client_opts)
-
+        
         failed = batch_failures(entries, response)
 
+        checksum_failed = verify_send_message_batch_checksum entries, response
+        
         sent = response[:successful].collect do |sent|
           msg = SentMessage.new
           msg.message_id = sent[:message_id]
@@ -540,7 +551,15 @@ module AWS
           msg
         end
 
-        raise Errors::BatchSendError.new(sent, failed) unless failed.empty?
+        if !failed.empty? && !checksum_failed.empty?
+          send_error = Errors::BatchSendError.new(sent, failed)
+          checksum_error = Errors::ChecksumError.new(checksum_failed)
+          raise Errors::BatchSendMultiError.new send_error, checksum_error
+        elsif !failed.empty?
+          raise Errors::BatchSendError.new(sent, failed) unless failed.empty?
+        elsif !checksum_failed.empty?
+          raise Errors::ChecksumError.new(checksum_failed)
+        end
 
         sent
 
@@ -755,6 +774,59 @@ module AWS
           :queue_url => url,
           :attributes => { name => value },
         })
+      end
+
+      # @api private
+      protected
+      def is_checksum_valid checksum, data
+        if config.sqs_verify_checksums?
+          calculate_checksum(data) == checksum
+        else
+          true
+        end
+      end
+
+      # @api private
+      protected
+      def calculate_checksum data
+        Digest::MD5.hexdigest data
+      end
+
+      # @api private
+      protected
+      def verify_send_message_checksum body, md5
+        unless is_checksum_valid md5, body
+          raise Errors::ChecksumError.new "Invalid MD5 #{md5} for message body #{body}"
+        end
+      end
+
+      # @api private
+      protected
+      def verify_send_message_batch_checksum entries, response
+        failed = []
+
+        response[:successful].each do |msg|
+          entry = entries.find{ |e| e[:id] == msg[:id] }
+          failed << msg unless is_checksum_valid msg[:md5_of_message_body], entry[:message_body]
+        end
+
+        failed
+      end
+
+      # @api private
+      protected
+      def verify_receive_message_checksum response
+        return [] if response[:messages].nil?
+
+        invalid_msgs = []
+
+        response[:messages].each do |msg|
+          md5 = msg[:md5_of_body]
+          body = msg[:body]
+          invalid_msgs << msg unless is_checksum_valid md5, body
+        end
+
+        invalid_msgs
       end
 
     end

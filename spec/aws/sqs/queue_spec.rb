@@ -64,10 +64,13 @@ module AWS
       context '#send_message' do
 
         let(:resp) { client.stub_for(:send_message) }
+        let(:valid_md5) { '123abc' }
+        let(:invalid_md5) { 'WRONGANSWER' }
 
         before(:each) do
           resp.data[:message_id] = 'abc123'
-          resp.data[:md5_of_message_body] = '123abc'
+          resp.data[:md5_of_message_body] = valid_md5
+          Digest::MD5.stub!(:hexdigest).and_return(valid_md5)
           client.stub(:send_message).and_return(resp)
         end
 
@@ -94,15 +97,21 @@ module AWS
           queue.send_message("HELLO").md5.should == "123abc"
         end
 
+        it 'should raise when the md5 does not match' do
+          resp.data[:md5_of_message_body] = invalid_md5
+          expect { queue.send_message("GOODBYE") }.to raise_error(Errors::ChecksumError)
+        end
+
       end
 
       context 'receiving messages' do
 
         let(:resp) { client.new_stub_for(:receive_message) }
+        let(:valid_md5) { "MD5" }
 
         let(:response_message) {{
           :message_id => "ID",
-          :md5_of_body => "MD5",
+          :md5_of_body => valid_md5,
           :body => "HELLO",
           :receipt_handle => "HANDLE",
           :attributes => attributes,
@@ -117,6 +126,7 @@ module AWS
 
         before(:each) do
           resp.data[:messages] = [response_message]
+          Digest::MD5.stub!(:hexdigest).and_return(valid_md5)
           client.stub(:receive_message).and_return(resp)
         end
 
@@ -127,6 +137,14 @@ module AWS
               with(:queue_url => url).
               and_return(resp)
             queue.receive_message
+          end
+
+          it 'should raise a ChecksumError if the MD5 does not match' do
+            response_message[:md5_of_body] = 'garbage'
+            client.should_receive(:receive_message).
+              with(:queue_url => url).
+              and_return(resp)
+            expect { queue.receive_message }.to raise_error(Errors::ChecksumError)
           end
 
           it 'should pass :visibility_timeout' do
@@ -1029,8 +1047,10 @@ module AWS
         context '#batch_send' do
 
           let(:response) { client.stub_for(:send_message_batch) }
+          let(:valid_md5) { 'md5' }
 
           before(:each) do
+            Digest::MD5.stub!(:hexdigest).and_return(valid_md5)
             client.stub(:send_message_batch).and_return(response)
           end
 
@@ -1060,12 +1080,14 @@ module AWS
 
             sent = []
             sent << {
+              :id => '0',
               :message_id => 'msg-1-id',
-              :md5_of_message_body => 'msg-1-md5',
+              :md5_of_message_body => valid_md5,
             }
             sent << {
+              :id => '1',
               :message_id => 'msg-2-id',
-              :md5_of_message_body => 'msg-2-md5',
+              :md5_of_message_body => valid_md5,
             }
             response.data[:successful] = sent
 
@@ -1073,23 +1095,44 @@ module AWS
 
             sent[0].should be_a(Queue::SentMessage)
             sent[0].message_id.should == 'msg-1-id'
-            sent[0].md5.should == 'msg-1-md5'
+            sent[0].md5.should == valid_md5
             sent[1].should be_a(Queue::SentMessage)
             sent[1].message_id.should == 'msg-2-id'
-            sent[1].md5.should == 'msg-2-md5'
+            sent[1].md5.should == valid_md5
 
+          end
+
+          it 'raises a ChecksumError if any md5s do not match' do
+            sent = []
+            sent << {
+              :id => '0',
+              :message_id => 'msg-1-id',
+              :md5_of_message_body => 'garbage',
+            }
+            sent << {
+              :id => '1',
+              :message_id => 'msg-2-id',
+              :md5_of_message_body => valid_md5,
+            }
+            response.data[:successful] = sent
+
+            expect {
+              queue.batch_send 'msg-1', 'msg-12'
+            }.to raise_error(Errors::ChecksumError)
           end
 
           it 'raises a BatchSendError if any of the messages failed' do
 
             sent = []
             sent << {
+              :id => '1',
               :message_id => 'msg-1-id',
-              :md5_of_message_body => 'msg-1-md5',
+              :md5_of_message_body => valid_md5,
             }
             sent << {
+              :id => '3',
               :message_id => 'msg-2-id',
-              :md5_of_message_body => 'msg-2-md5',
+              :md5_of_message_body => valid_md5,
             }
 
             failed = []
@@ -1117,10 +1160,10 @@ module AWS
 
             sent[0].should be_a(Queue::SentMessage)
             sent[0].message_id.should == 'msg-1-id'
-            sent[0].md5.should == 'msg-1-md5'
+            sent[0].md5.should == valid_md5
             sent[1].should be_a(Queue::SentMessage)
             sent[1].message_id.should == 'msg-2-id'
-            sent[1].md5.should == 'msg-2-md5'
+            sent[1].md5.should == valid_md5
 
             failed.should == [{
               :error_code => "error-code-1",
@@ -1131,6 +1174,42 @@ module AWS
               :error_message => "error-message-2",
               :sender_fault => false
             }]
+
+          end
+
+          it 'raises a BatchSendMultiError if there are multiple failure reasons' do
+            
+            sent = []
+            sent << {
+              :id => '1',
+              :message_id => 'msg-1-id',
+              :md5_of_message_body => 'garbage',
+            }
+            sent << {
+              :id => '3',
+              :message_id => 'msg-2-id',
+              :md5_of_message_body => 'garbage',
+            }
+
+            failed = []
+            failed << {
+              :code => 'error-code-1',
+              :message => 'error-message-1',
+              :sender_fault => true,
+              :id => '0',
+            }
+            failed << {
+              :code => 'error-code-2',
+              :message => 'error-message-2',
+              :sender_fault => false,
+              :id => '2',
+            }
+            response.data[:successful] = sent
+            response.data[:failed] = failed
+
+            expect {
+              queue.batch_send 'msg-1', 'msg-2', 'msg-3', 'msg-4'
+            }.to raise_error(Errors::BatchSendMultiError)
 
           end
 

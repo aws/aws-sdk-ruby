@@ -182,6 +182,10 @@ module AWS
     #   if all SimpleDB read requests should be done consistently.
     #   Consistent reads are slower, but reflect all changes to SDB.
     #
+    # @attr_reader [Boolean] sqs_verify_checksums (true)
+    #   When `true` all SQS operations will check body content against
+    #   MD5 checksums, raising an exception if there is a mismatch.
+    #
     # @attr_reader [CredentialProvider::Provider] credential_provider
     #   Returns the object that is responsible for loading credentials.
     #

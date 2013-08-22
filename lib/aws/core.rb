@@ -466,7 +466,11 @@ module AWS
     #   that response bodies match the content-length specified in the
     #   response header, if present. Note that some HTTP handlers will
     #   always do this whether or not this value is true.
-    # 
+    #
+    # @option options [Boolean] :sqs_verify_checksums (true)
+    #   When `true` all SQS operations will check body content against
+    #   MD5 checksums, raising an exception if there is a mismatch.
+    #
     # @return [Core::Configuration] Returns the new configuration.
     #
     def config options = {}
