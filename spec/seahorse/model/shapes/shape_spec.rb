@@ -16,17 +16,40 @@ require 'spec_helper'
 module Seahorse
   module Model
     module Shapes
+
       describe Shape do
+
+        describe '#serialized_name' do
+
+          it 'defaults to the #member_name' do
+            shape = Shape.new
+            shape.as = 'serialized-as'
+            expect(shape.serialized_name).to eq('serialized-as')
+          end
+
+          it 'falls back to the #member_name when #as is not set' do
+            shape = Shape.new
+            shape.as = nil
+            shape.member_name = 'member-name'
+            expect(shape.serialized_name).to eq('member-name')
+          end
+
+        end
+
         describe 'from_hash_class' do
+
           it 'fails if shape is not registered' do
             expect do
               Shape.from_hash_class('type' => 'invalid')
             end.to raise_error(/Unregistered shape type invalid/)
           end
+
         end
+
       end
 
       describe ListShape do
+
         it 'deserializes members property' do
           shape = Shape.from_hash 'members' => {
             'type' => 'structure',
@@ -39,9 +62,11 @@ module Seahorse
           expect(shape.members).to be_instance_of StructureShape
           expect(shape.members.members[:property]).to be_instance_of StringShape
         end
+
       end
 
       describe MapShape do
+
         it 'deserializes keys and members properties' do
           shape = Shape.from_hash 'keys' => {
             'type' => 'string'
@@ -57,6 +82,7 @@ module Seahorse
           expect(shape.members).to be_instance_of StructureShape
           expect(shape.members.members[:property]).to be_instance_of StringShape
         end
+
       end
 
       describe StructureShape do

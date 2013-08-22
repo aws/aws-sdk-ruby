@@ -46,6 +46,10 @@ module Seahorse
 
         attr_accessor :member_name
 
+        def serialized_name
+          @as || @member_name
+        end
+
         property :type, Symbol
         property :required, Boolean
         property :default, Object
@@ -54,6 +58,7 @@ module Seahorse
         property :min_length, Integer
         property :max_length, Integer
         property :pattern, String
+        property :as, String
       end
 
       class ScalarShape < Shape; end
