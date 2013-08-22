@@ -36,6 +36,45 @@ module Aws
         expect(data('<xml><foo>bar</foo></xml>')).to eq({})
       end
 
+      describe 'structures' do
+      end
+
+      describe 'non-flattened lists' do
+      end
+
+      describe 'flattened lists' do
+      end
+
+      describe 'non-flattened maps' do
+      end
+
+      describe 'flattened maps' do
+      end
+
+      describe 'booleans' do
+      end
+
+      describe 'timestamps' do
+      end
+
+      describe 'integers' do
+      end
+
+      describe 'floats' do
+      end
+
+      describe 'xmlnames' do
+      end
+
+      describe 'blobs' do
+      end
+
+      describe 'xml namespaces' do
+      end
+
+      describe 'parsing errors' do
+      end
+
     end
   end
 end
