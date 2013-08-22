@@ -399,9 +399,9 @@ module AWS
             elsif endpoint = config.send(svc_opt)[:endpoint]
               endpoint
             elsif endpoint_pattern
-              endpoint_pattern % config.region
+              endpoint_pattern % config.send("#{svc_opt}_region")
             else
-              endpoint_builder.call(config.region)
+              endpoint_builder.call(config.send("#{svc_opt}_region"))
             end
           end
 

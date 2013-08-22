@@ -215,6 +215,11 @@ describe AWS do
         AWS.config.iam_region.should == 'us-gov-west-1'
       end
 
+      it 'observes the nested region' do
+        AWS.config.stub(:s3).and_return(:region => 'us-west-2')
+        AWS.config.s3_endpoint.should eq('s3-us-west-2.amazonaws.com')
+      end
+
     end
 
   end
