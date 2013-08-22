@@ -31,12 +31,31 @@ module Aws
         expect(data('<xml/>')).to eq({})
       end
 
+      it 'ignores xml namespaces on the root element' do
+        expect(data('<xml xmlns="http://xmlns.com"/>')).to eq({})
+      end
+
       it 'ignores xml elements when the rules are empty' do
         rules['members'] = {}
         expect(data('<xml><foo>bar</foo></xml>')).to eq({})
       end
 
       describe 'structures' do
+
+        it 'parses structure members' do
+          rules['members'] = {
+            'first' => { 'type' => 'string' },
+            'last' => { 'type' => 'string' }
+          }
+          xml = <<-XML
+            <xml>
+              <first>abc</first>
+              <last>xyz</last>
+            </xml>
+          XML
+          expect(data(xml)).to eq(first: 'abc', last: 'xyz')
+        end
+
       end
 
       describe 'non-flattened lists' do

@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'multi_xml'
+
 module Aws
   module Xml
     # @api private
@@ -24,7 +26,7 @@ module Aws
       # @param [String<xml>] xml
       # @return [Hash]
       def to_hash(xml)
-        {}
+        structure(@rules, MultiXml.parse(xml).values.first || {})
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
@@ -32,6 +34,17 @@ module Aws
       # @return [Hash]
       def self.to_hash(rules, xml)
         Parser.new(rules).to_hash(xml)
+      end
+
+      private
+
+      def structure(shape, values)
+        shape.members.inject({}) do |data, (member_name, member_shape)|
+          if value = values[member_name.to_s]
+            data[member_name] = value
+          end
+          data
+        end
       end
 
     end
