@@ -44,7 +44,7 @@ module AWS
 
       context 'description' do
 
-        let(:creation_time) { Time.new(2013, 10, 21, 3, 41, 23, "-08:00") }
+        let(:creation_time) { Time.now }
 
         let(:resp) {
           double("response",
