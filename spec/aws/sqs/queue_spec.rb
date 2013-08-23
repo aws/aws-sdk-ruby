@@ -1043,7 +1043,7 @@ module AWS
           raised.should == true
 
         end
-
+  
         context '#batch_send' do
 
           let(:response) { client.stub_for(:send_message_batch) }
@@ -1168,11 +1168,15 @@ module AWS
             failed.should == [{
               :error_code => "error-code-1",
               :error_message => "error-message-1",
-              :sender_fault => true
+              :sender_fault => true,
+              :batch_index => 0,
+              :message_body => 'msg-1'
             }, {
               :error_code => "error-code-2",
               :error_message => "error-message-2",
-              :sender_fault => false
+              :sender_fault => false,
+              :batch_index => 2,
+              :message_body => 'msg-3'
             }]
 
           end
