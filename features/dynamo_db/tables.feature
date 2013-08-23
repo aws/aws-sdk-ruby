@@ -45,3 +45,8 @@ Feature: DynamoDB Tables
     And the table should eventually be active
     Then the table should support 20 read capacity units
     Then the table should support 15 write capacity units
+
+  @slow
+  Scenario: Describing a Table
+    When I create a DynamoDB table
+    Then I should be able to view table attributes as method calls

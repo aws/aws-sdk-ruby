@@ -44,6 +44,8 @@ module AWS
 
       context 'description' do
 
+        let(:creation_time) { Time.new(2013, 10, 21, 3, 41, 23, "-08:00") }
+
         let(:resp) {
           double("response",
             :request_type => :describe_table,
@@ -53,8 +55,14 @@ module AWS
 
         let(:response_table) {{
           "TableName" => "MyTable",
-          "ProvisionedThroughput" => {},
+          "ProvisionedThroughput" => {
+            "ReadCapacityUnits" => 10,
+            "WriteCapacityUnits" => 5},
           "KeySchema" => {},
+          "CreationDateTime" => creation_time,
+          "TableSizeBytes" => 9001,
+          "ItemCount" => 42,
+          "TableStatus" => "ACTIVE",
         }}
 
         let(:attributes) { table.attributes_from_response(resp) }
@@ -65,7 +73,13 @@ module AWS
           response_table.delete('KeySchema')
           response_table.should == {
             "TableName" => "MyTable",
-            "ProvisionedThroughput" => {},
+            "ProvisionedThroughput" => {
+              "ReadCapacityUnits" => 10,
+              "WriteCapacityUnits" => 5},
+            "CreationDateTime" => creation_time,
+            "TableSizeBytes" => 9001,
+            "ItemCount" => 42,
+            "TableStatus" => "ACTIVE",
           }
 
           client.stub(:describe_table).and_return(resp)
@@ -158,11 +172,19 @@ module AWS
             response_table["CreationDateTime"] = now
             # float equality comparison doesn't work reliably
             attributes[:creation_date_time].should eq(now)
+
+            # also check high level interface
+            client.stub(:describe_table).and_return(resp)
+            table.creation_date_time.should eq(now)
           end
 
           it 'should provide the status attribute' do
             response_table["TableStatus"] = "SOMETHING"
-            attributes[:status].should == :something
+            attributes[:status].should eq(:something)
+
+            # also check high level interface
+            client.stub(:describe_table).and_return(resp)
+            table.status.should eq(:something)
           end
 
           context 'hash key attribute' do
@@ -261,6 +283,24 @@ module AWS
             table.stub(:schema_loaded?).and_return(true)
             client.should_not_receive(:describe_table)
             table.range_key
+          end
+
+        end
+
+        context '#item_count' do
+
+          it 'should respond to a high level function call' do
+            client.stub(:describe_table).and_return(resp)
+            table.item_count.should eq(42)
+          end
+
+        end
+
+        context '#size_bytes' do
+
+          it 'should respond to a high level function call' do
+            client.stub(:describe_table).and_return(resp)
+            table.size_bytes.should eq(9001)
           end
 
         end
