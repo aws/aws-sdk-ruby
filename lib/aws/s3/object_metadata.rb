@@ -53,6 +53,13 @@ module AWS
       #     object.metadata['purpose'] = 'research'
       #     object.metadata['purpose']               # => 'research'
       #
+      # @deprecated In order to safely update an S3 object's metadata, you
+      #   should use {S3Object#copy_from}. This operation does not preserve
+      #   the ACL, storage class (standard vs. reduced redundancy) or server
+      #   side encryption settings. Using this method on anything other than
+      #   vanilla S3 objects risks clobbering other metadata values set on the
+      #   object.
+      #
       # @note The name and value of each metadata field must conform
       #   to US-ASCII.
       #

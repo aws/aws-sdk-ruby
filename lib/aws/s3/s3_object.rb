@@ -803,6 +803,8 @@ module AWS
       # @option options [Hash] :metadata A hash of metadata to save
       #   with the copied object.  Each name, value pair must conform
       #   to US-ASCII.  When blank, the sources metadata is copied.
+      #   If you set this value, you must set ALL metadata values for
+      #   the object as we do not preserve existing values.
       #
       # @option options [String] :content_type The content type of
       #   the copied object.  Defaults to the source object's content
