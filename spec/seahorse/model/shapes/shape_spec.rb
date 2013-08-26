@@ -31,7 +31,7 @@ module Seahorse
             shape = Shape.new
             shape.as = nil
             shape.member_name = :member_name
-            expect(shape.serialized_name).to eq(:member_name)
+            expect(shape.serialized_name).to eq('member_name')
           end
 
         end

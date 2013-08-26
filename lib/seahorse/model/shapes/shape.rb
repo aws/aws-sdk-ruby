@@ -47,7 +47,7 @@ module Seahorse
         attr_accessor :member_name
 
         def serialized_name
-          @as || @member_name
+          @as || @member_name.to_s
         end
 
         property :type, Symbol
