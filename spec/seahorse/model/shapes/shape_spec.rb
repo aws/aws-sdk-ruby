@@ -21,17 +21,17 @@ module Seahorse
 
         describe '#serialized_name' do
 
-          it 'defaults to the #member_name' do
+          it 'returns the #as property' do
             shape = Shape.new
-            shape.as = 'serialized-as'
-            expect(shape.serialized_name).to eq('serialized-as')
+            shape.as = :serialized_as
+            expect(shape.serialized_name).to eq(:serialized_as)
           end
 
-          it 'falls back to the #member_name when #as is not set' do
+          it 'returns the #member_name property when #as is not set' do
             shape = Shape.new
             shape.as = nil
-            shape.member_name = 'member-name'
-            expect(shape.serialized_name).to eq('member-name')
+            shape.member_name = :member_name
+            expect(shape.serialized_name).to eq(:member_name)
           end
 
         end
@@ -57,7 +57,6 @@ module Seahorse
               'property' => { 'type' => 'string' }
             }
           }, 'type' => 'list'
-
           expect(shape).to be_instance_of ListShape
           expect(shape.members).to be_instance_of StructureShape
           expect(shape.members.members[:property]).to be_instance_of StringShape
