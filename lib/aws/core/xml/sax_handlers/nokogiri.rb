@@ -29,6 +29,7 @@ module AWS
           def start_document; end
           def end_document; end
           def error(*args); end
+          def comment(*args); end
 
           def start_element_namespace element_name, attributes = [], *ignore
 
