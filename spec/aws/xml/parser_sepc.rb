@@ -56,6 +56,20 @@ module Aws
           expect(data(xml)).to eq(first: 'abc', last: 'xyz')
         end
 
+        it 'parses members using their serialized name' do
+          rules['members'] = {
+            'first' => { 'type' => 'string', 'as' => 'FirstName' },
+            'last' => { 'type' => 'string', 'as' => 'LastName' }
+          }
+          xml = <<-XML
+            <xml>
+              <FirstName>John</FirstName>
+              <LastName>Doe</LastName>
+            </xml>
+          XML
+          expect(data(xml)).to eq(first: 'John', last: 'Doe')
+        end
+
       end
 
       describe 'non-flattened lists' do

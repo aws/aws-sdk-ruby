@@ -38,9 +38,9 @@ module Aws
 
       private
 
-      def structure(shape, values)
+      def structure(shape, raw)
         shape.members.inject({}) do |data, (member_name, member_shape)|
-          if value = values[member_name.to_s]
+          if value = raw[rember_shape.serialized_name]
             data[member_name] = value
           end
           data
