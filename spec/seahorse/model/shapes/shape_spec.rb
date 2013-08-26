@@ -19,23 +19,6 @@ module Seahorse
 
       describe Shape do
 
-        describe '#serialized_name' do
-
-          it 'returns the #as property' do
-            shape = Shape.new
-            shape.as = :serialized_as
-            expect(shape.serialized_name).to eq(:serialized_as)
-          end
-
-          it 'returns the #member_name property when #as is not set' do
-            shape = Shape.new
-            shape.as = nil
-            shape.member_name = :member_name
-            expect(shape.serialized_name).to eq('member_name')
-          end
-
-        end
-
         describe 'from_hash_class' do
 
           it 'fails if shape is not registered' do
@@ -91,16 +74,16 @@ module Seahorse
           expect(shape.members).to eq({})
         end
 
-        it 'populates the #member_name property on its members' do
+        it 'provides a hash of members by their serialized names' do
           shape = Shape.from_hash(
             'type' => 'structure',
             'members' => {
-              'abc' => { 'type' => 'string' },
-              'xyz' => { 'type' => 'string' },
+              'abc' => { 'type' => 'string', 'serialized_name' => 'AbC' },
+              'xyz' => { 'type' => 'string', 'serialized_name' => 'xYz' },
             }
           )
-          expect(shape.members[:abc].member_name).to eq(:abc)
-          expect(shape.members[:xyz].member_name).to eq(:xyz)
+          expect(shape.members[:abc]).to be(shape.serialized_members['AbC'])
+          expect(shape.members[:xyz]).to be(shape.serialized_members['xYz'])
         end
 
       end

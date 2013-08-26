@@ -126,7 +126,6 @@ module Seahorse
           value.each do |key, item|
             key = deserialize(key, klass.keys.first)
             item = deserialize(item, klass.values.first)
-            item.member_name = key
             hsh[key] = item
           end
           hsh
