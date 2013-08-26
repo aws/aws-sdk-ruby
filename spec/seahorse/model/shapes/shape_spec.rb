@@ -74,6 +74,18 @@ module Seahorse
           expect(shape.members).to eq({})
         end
 
+        it 'populates the #member_name attribute' do
+          shape = Shape.from_hash(
+            'type' => 'structure',
+            'members' => {
+              'abc' => { 'type' => 'string' },
+              'xyz' => { 'type' => 'string' }
+            }
+          )
+          expect(shape.members[:abc].member_name).to eq(:abc)
+          expect(shape.members[:xyz].member_name).to eq(:xyz)
+        end
+
         it 'provides a hash of members by their serialized names' do
           shape = Shape.from_hash(
             'type' => 'structure',
@@ -84,6 +96,20 @@ module Seahorse
           )
           expect(shape.members[:abc]).to be(shape.serialized_members['AbC'])
           expect(shape.members[:xyz]).to be(shape.serialized_members['xYz'])
+        end
+
+        it 'defaults the #serialized_name value to the member_name' do
+          shape = Shape.from_hash(
+            'type' => 'structure',
+            'members' => {
+              'abc' => { 'type' => 'string' },
+              'xyz' => { 'type' => 'string' }
+            }
+          )
+          expect(shape.members[:abc].serialized_name).to eq('abc')
+          expect(shape.members[:xyz].serialized_name).to eq('xyz')
+          expect(shape.members[:abc]).to be(shape.serialized_members['abc'])
+          expect(shape.members[:xyz]).to be(shape.serialized_members['xyz'])
         end
 
       end

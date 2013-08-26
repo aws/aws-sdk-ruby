@@ -44,6 +44,8 @@ module Seahorse
           self.type = self.class.type
         end
 
+        attr_accessor :member_name
+
         property :type, Symbol
         property :required, Boolean
         property :default, Object
@@ -53,6 +55,17 @@ module Seahorse
         property :max_length, Integer
         property :pattern, String
         property :serialized_name, String
+
+        def serialized_name
+          @serialized_name || @member_name.to_s
+        end
+
+        def to_hash
+          hash = super
+          hash.delete('serialized_name') if @serialized_name.nil?
+          hash
+        end
+
       end
 
       class ScalarShape < Shape; end
@@ -108,7 +121,7 @@ module Seahorse
 
         def compute_serialized_members
           members.inject({}) do |hash, (member_name, member)|
-            hash[member.serialized_name || member_name.to_s] = member
+            hash[member.serialized_name || member.member_name.to_s] = member
             hash
           end
         end
