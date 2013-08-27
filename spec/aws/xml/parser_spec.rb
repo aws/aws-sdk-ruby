@@ -514,6 +514,26 @@ module Aws
       end
 
       describe 'booleans' do
+
+        before(:each) do
+          rules['members'] = { 'enabled' => { 'type' => 'boolean' } }
+        end
+
+        it 'converts boolean true values' do
+          xml = "<xml><enabled>true</enabled></xml>"
+          expect(data(xml)).to eq(enabled: true)
+        end
+
+        it 'converts boolean false values' do
+          xml = "<xml><enabled>false</enabled></xml>"
+          expect(data(xml)).to eq(enabled: false)
+        end
+
+        it 'does not apply a boolean true/false value when not present' do
+          xml = "<xml/>"
+          expect(data(xml)).to eq({})
+        end
+
       end
 
       describe 'timestamps' do

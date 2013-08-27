@@ -77,6 +77,7 @@ module Aws
         when :structure then structure(shape, raw)
         when :list then list(shape, raw)
         when :map then map(shape, raw)
+        when :boolean then raw == 'true'
         else raw
         end
       end
