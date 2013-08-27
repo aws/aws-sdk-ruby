@@ -421,6 +421,8 @@ module Aws
 
         it 'expects key and value tags by default'
 
+        it 'accepts maps with a single entry'
+
         it 'accepts alternate key and value names'
 
       end
