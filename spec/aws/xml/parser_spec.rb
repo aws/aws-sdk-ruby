@@ -690,6 +690,12 @@ module Aws
       end
 
       describe 'parsing errors' do
+
+        it 'does not trap xml parsing errors' do
+          xml = '<xml'
+          expect { parse(xml) }.to raise_error
+        end
+
       end
 
     end
