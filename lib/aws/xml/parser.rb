@@ -48,6 +48,15 @@ module Aws
         data
       end
 
+      def structure(shape, hash)
+        shape.members.inject({}) do |data, (member_name, member_shape)|
+          if value = hash[member_shape.serialized_name || member_name.to_s]
+            data[member_name] = member(member_shape, value)
+          end
+          data
+        end
+      end
+
       def member(shape, raw)
         case shape
         when Seahorse::Model::Shapes::StructureShape
