@@ -54,14 +54,14 @@ module Aws
         Array(values).map { |value| member(member_shape, value) }
       end
 
-      def map(shape, hash)
-        if hash.nil?
+      def map(shape, entries)
+        if entries.nil?
           {}
         else
           key_shape = shape.keys
           value_shape = shape.members
           data = {}
-          entries = hash['entry']
+          entries = entries['entry'] if !shape.flattened
           entries = [entries] unless entries.is_a?(Array)
           entries.each do |entry|
             key = entry[key_shape.serialized_name || 'key']
