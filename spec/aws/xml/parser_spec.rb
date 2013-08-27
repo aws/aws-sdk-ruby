@@ -210,9 +210,70 @@ module Aws
           expect(data(xml)[:items]).to eq([])
         end
 
-        it 'converts lists of strings into arrays of strings'
+        it 'converts lists of strings into arrays of strings' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'flattened' => true,
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>abc</items>
+              <items>mno</items>
+              <items>xyz</items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+        end
 
-        it 'can parse lists of complex types'
+        it 'observes the list serialization name when present' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'flattened' => true,
+              'serialized_name' => 'item',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <item>abc</item>
+              <item>mno</item>
+              <item>xyz</item>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+        end
+
+        it 'can parse lists of complex types' do
+          rules['members'] = {
+            'people' => {
+              'type' => 'list',
+              'flattened' => true,
+              'serialized_name' => 'Person',
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'name' => { 'type' => 'string', 'serialized_name' => 'Name' }
+                }
+              }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <Person><Name>abc</Name></Person>
+              <Person><Name>mno</Name></Person>
+              <Person><Name>xyz</Name></Person>
+            </xml>
+          XML
+          expect(data(xml)[:people]).to eq([
+            { name: 'abc' },
+            { name: 'mno' },
+            { name: 'xyz' }
+          ])
+        end
 
       end
 
