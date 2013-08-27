@@ -626,7 +626,36 @@ module Aws
 
       end
 
+      describe 'strings' do
+
+        it 'returns nil for empty elements' do
+          rules['members'] = {
+            'data' => { 'type' => 'string' }
+          }
+          xml = "<xml><data/></xml>"
+          expect(parse(xml)).to eq(data: nil)
+        end
+
+      end
+
       describe 'blobs' do
+
+        it 'returns nil for empty elements' do
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          xml = "<xml><data/></xml>"
+          expect(parse(xml)).to eq(data: nil)
+        end
+
+        it 'base64 decodes blob elements' do
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          xml = "<xml><data>aGVsbG8=</data></xml>"
+          expect(parse(xml)).to eq(data: 'hello')
+        end
+
       end
 
       describe 'xml attributes' do

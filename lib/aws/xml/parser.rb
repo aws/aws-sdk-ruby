@@ -13,11 +13,19 @@
 
 require 'multi_xml'
 require 'time'
+require 'base64'
 
 module Aws
   module Xml
     # @api private
     class Parser
+
+      # @api private
+      EMPTY_ELEMENT_DEFAULTS = {
+        :structure => {},
+        :list => [],
+        :map => {},
+      }
 
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
@@ -50,39 +58,40 @@ module Aws
       def list(shape, values)
         member_shape = shape.members
         if !shape.flattened
-          values = (values || {})[member_shape.serialized_name || 'member']
+          values = values[member_shape.serialized_name || 'member']
         end
         Array(values).map { |value| member(member_shape, value) }
       end
 
       def map(shape, entries)
-        if entries.nil?
-          {}
-        else
-          key_shape = shape.keys
-          value_shape = shape.members
-          data = {}
-          entries = entries['entry'] if !shape.flattened
-          entries = [entries] unless entries.is_a?(Array)
-          entries.each do |entry|
-            key = entry[key_shape.serialized_name || 'key']
-            value = entry[value_shape.serialized_name || 'value']
-            data[member(key_shape, key)] = member(value_shape, value)
-          end
-          data
+        key_shape = shape.keys
+        value_shape = shape.members
+        data = {}
+        entries = entries['entry'] if !shape.flattened
+        entries = [entries] unless entries.is_a?(Array)
+        entries.each do |entry|
+          key = entry[key_shape.serialized_name || 'key']
+          value = entry[value_shape.serialized_name || 'value']
+          data[member(key_shape, key)] = member(value_shape, value)
         end
+        data
       end
 
       def member(shape, raw)
-        case shape.type
-        when :structure then structure(shape, raw)
-        when :list then list(shape, raw)
-        when :map then map(shape, raw)
-        when :boolean then raw == 'true'
-        when :integer then raw ? raw.to_i : nil
-        when :float then raw ? raw.to_f : nil
-        when :timestamp then timestamp(raw)
-        else raw
+        if raw.nil?
+          EMPTY_ELEMENT_DEFAULTS[shape.type]
+        else
+          case shape.type
+          when :structure then structure(shape, raw)
+          when :list then list(shape, raw)
+          when :map then map(shape, raw)
+          when :boolean then raw == 'true'
+          when :integer then raw.to_i
+          when :float then raw.to_f
+          when :timestamp then timestamp(raw)
+          when :blob then Base64.decode64(raw)
+          else raw
+          end
         end
       end
 
