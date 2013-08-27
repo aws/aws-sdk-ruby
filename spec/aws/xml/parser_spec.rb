@@ -358,7 +358,6 @@ module Aws
               </attributes>
             </xml>
           XML
-          puts data(xml).inspect
           expect(data(xml)[:attributes]).to eq({
             'Color' => 'red',
             'Size' => 'large'
@@ -383,7 +382,6 @@ module Aws
               </attributes>
             </xml>
           XML
-          puts data(xml).inspect
           expect(data(xml)[:attributes]).to eq('Color' => 'red')
         end
 
@@ -463,7 +461,6 @@ module Aws
               </attributes>
             </xml>
           XML
-          puts data(xml).inspect
           expect(data(xml)[:attributes]).to eq({
             'Color' => 'red',
             'Size' => 'large'
