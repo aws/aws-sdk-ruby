@@ -94,9 +94,29 @@ module Aws
       end
 
       describe 'non-flattened lists' do
+
+        it 'returns missing lists as nil'
+
+        it 'returns empty list elements as []'
+
+        it 'converts lists of strings into arrays of strings'
+
+        it 'observes the list member serialization name when present'
+
+        it 'can parse lists of complex types'
+
       end
 
       describe 'flattened lists' do
+
+        it 'returns missing lists as nil'
+
+        it 'returns empty list elements as []'
+
+        it 'converts lists of strings into arrays of strings'
+
+        it 'can parse lists of complex types'
+
       end
 
       describe 'non-flattened maps' do
