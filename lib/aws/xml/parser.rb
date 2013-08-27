@@ -50,11 +50,17 @@ module Aws
 
       def structure(shape, hash)
         shape.members.inject({}) do |data, (member_name, member_shape)|
-          if value = hash[member_shape.serialized_name || member_name.to_s]
-            data[member_name] = member(member_shape, value)
-          end
+          key = member_shape.serialized_name
+          data[member_name] = member(member_shape, hash[key]) if hash.key?(key)
           data
         end
+      end
+
+      def list(shape, values)
+        []
+      end
+
+      def map(shape, hash)
       end
 
       def member(shape, raw)
@@ -62,8 +68,11 @@ module Aws
         when Seahorse::Model::Shapes::StructureShape
           structure(shape, raw)
         when Seahorse::Model::Shapes::ListShape
+          list(shape, raw)
         when Seahorse::Model::Shapes::MapShape
-        else raw
+          map(shape, raw)
+        else
+          raw
         end
       end
 

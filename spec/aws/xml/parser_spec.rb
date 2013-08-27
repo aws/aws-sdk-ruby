@@ -95,9 +95,27 @@ module Aws
 
       describe 'non-flattened lists' do
 
-        it 'returns missing lists as nil'
+        it 'returns missing lists as nil' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml/>"
+          expect(data(xml)[:items]).to be(nil)
+        end
 
-        it 'returns empty list elements as []'
+        it 'returns empty list elements as []' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml><items/></xml>"
+          expect(data(xml)[:items]).to eq([])
+        end
 
         it 'converts lists of strings into arrays of strings'
 
