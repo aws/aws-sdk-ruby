@@ -278,9 +278,27 @@ module Aws
       end
 
       describe 'non-flattened maps' do
+
+        it 'returns missing maps as nil'
+
+        it 'returns empty maps as {}'
+
+        it 'expects entry, key and value tags by default'
+
+        it 'accepts alternate key and value names'
+
       end
 
       describe 'flattened maps' do
+
+        it 'returns missing maps as nil'
+
+        it 'returns empty maps as {}'
+
+        it 'expects key and value tags by default'
+
+        it 'accepts alternate key and value names'
+
       end
 
       describe 'booleans' do
