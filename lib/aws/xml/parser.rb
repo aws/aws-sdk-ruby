@@ -47,12 +47,15 @@ module Aws
       end
 
       def list(shape, values)
-        member_shape = shape.members
-        if !shape.flattened
-          member_name = member_shape.serialized_name || 'member'
-          values = (values || {})[member_name]
+        if values.nil?
+          []
+        else
+          member_shape = shape.members
+          if !shape.flattened
+            values = values[member_shape.serialized_name || 'member']
+          end
+          values.map { |value| member(member_shape, value) }
         end
-        (values || []).map { |value| member(member_shape, value) }
       end
 
       def map(shape, hash)
