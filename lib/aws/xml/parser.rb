@@ -38,12 +38,23 @@ module Aws
 
       private
 
-      def structure(shape, raw)
-        shape.members.inject({}) do |data, (member_name, member_shape)|
-          if value = raw[rember_shape.serialized_name]
-            data[member_name] = value
+      def structure(shape, hash)
+        data = {}
+        hash.each_pair do |key, value|
+          if member_shape = shape.serialized_members[key]
+            data[member_shape.member_name] = member(member_shape, value)
           end
-          data
+        end
+        data
+      end
+
+      def member(shape, raw)
+        case shape
+        when Seahorse::Model::Shapes::StructureShape
+          structure(shape, raw)
+        when Seahorse::Model::Shapes::ListShape
+        when Seahorse::Model::Shapes::MapShape
+        else raw
         end
       end
 

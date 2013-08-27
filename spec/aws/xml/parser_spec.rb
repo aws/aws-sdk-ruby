@@ -58,8 +58,8 @@ module Aws
 
         it 'parses members using their serialized name' do
           rules['members'] = {
-            'first' => { 'type' => 'string', 'as' => 'FirstName' },
-            'last' => { 'type' => 'string', 'as' => 'LastName' }
+            'first' => { 'type' => 'string', 'serialized_name' => 'FirstName' },
+            'last' => { 'type' => 'string', 'serialized_name' => 'LastName' }
           }
           xml = <<-XML
             <xml>
@@ -68,6 +68,27 @@ module Aws
             </xml>
           XML
           expect(data(xml)).to eq(first: 'John', last: 'Doe')
+        end
+
+        it 'parses structures of structures' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'state' => { 'type' => 'string' }
+              }
+            },
+            'name' => { 'type' => 'string' }
+          }
+          xml = <<-XML
+            <xml>
+              <config>
+                <state>on</state>
+              </config>
+              <name>abc</name>
+            </xml>
+          XML
+          expect(data(xml)).to eq(config: { state: 'on' }, name: 'abc')
         end
 
       end
