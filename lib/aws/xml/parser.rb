@@ -73,15 +73,11 @@ module Aws
       end
 
       def member(shape, raw)
-        case shape
-        when Seahorse::Model::Shapes::StructureShape
-          structure(shape, raw)
-        when Seahorse::Model::Shapes::ListShape
-          list(shape, raw)
-        when Seahorse::Model::Shapes::MapShape
-          map(shape, raw)
-        else
-          raw
+        case shape.type
+        when :structure then structure(shape, raw)
+        when :list then list(shape, raw)
+        when :map then map(shape, raw)
+        else raw
         end
       end
 
