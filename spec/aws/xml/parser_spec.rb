@@ -22,22 +22,22 @@ module Aws
         'members' => {},
       }}
 
-      def data(xml)
+      def parse(xml)
         shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
         Parser.to_hash(shape, xml)
       end
 
       it 'returns an empty hash when the XML is empty' do
-        expect(data('<xml/>')).to eq({})
+        expect(parse('<xml/>')).to eq({})
       end
 
       it 'ignores xml namespaces on the root element' do
-        expect(data('<xml xmlns="http://xmlns.com"/>')).to eq({})
+        expect(parse('<xml xmlns="http://xmlns.com"/>')).to eq({})
       end
 
       it 'ignores xml elements when the rules are empty' do
         rules['members'] = {}
-        expect(data('<xml><foo>bar</foo></xml>')).to eq({})
+        expect(parse('<xml><foo>bar</foo></xml>')).to eq({})
       end
 
       describe 'structures' do
@@ -53,7 +53,7 @@ module Aws
               <last>xyz</last>
             </xml>
           XML
-          expect(data(xml)).to eq(first: 'abc', last: 'xyz')
+          expect(parse(xml)).to eq(first: 'abc', last: 'xyz')
         end
 
         it 'parses members using their serialized name' do
@@ -67,7 +67,7 @@ module Aws
               <LastName>Doe</LastName>
             </xml>
           XML
-          expect(data(xml)).to eq(first: 'John', last: 'Doe')
+          expect(parse(xml)).to eq(first: 'John', last: 'Doe')
         end
 
         it 'parses structures of structures' do
@@ -88,7 +88,7 @@ module Aws
               <name>abc</name>
             </xml>
           XML
-          expect(data(xml)).to eq(config: { state: 'on' }, name: 'abc')
+          expect(parse(xml)).to eq(config: { state: 'on' }, name: 'abc')
         end
 
       end
@@ -103,7 +103,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(data(xml)[:items]).to be(nil)
+          expect(parse(xml)[:items]).to be(nil)
         end
 
         it 'returns empty list elements as []' do
@@ -114,7 +114,7 @@ module Aws
             }
           }
           xml = "<xml><items/></xml>"
-          expect(data(xml)[:items]).to eq([])
+          expect(parse(xml)[:items]).to eq([])
         end
 
         it 'converts lists of strings into arrays of strings' do
@@ -133,7 +133,7 @@ module Aws
               </items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
         it 'accepts lists of single elements' do
@@ -150,7 +150,7 @@ module Aws
               </items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(['abc'])
+          expect(parse(xml)[:items]).to eq(['abc'])
         end
 
         it 'observes the list member serialization name when present' do
@@ -169,7 +169,7 @@ module Aws
               </items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
         it 'can parse lists of complex types' do
@@ -192,7 +192,7 @@ module Aws
               </items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq([
+          expect(parse(xml)[:items]).to eq([
             { name: 'abc' },
             { name: 'mno' },
             { name: 'xyz' }
@@ -212,7 +212,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(data(xml)[:items]).to be(nil)
+          expect(parse(xml)[:items]).to be(nil)
         end
 
         it 'returns empty list elements as []' do
@@ -224,7 +224,7 @@ module Aws
             }
           }
           xml = "<xml><items/></xml>"
-          expect(data(xml)[:items]).to eq([])
+          expect(parse(xml)[:items]).to eq([])
         end
 
         it 'converts lists of strings into arrays of strings' do
@@ -242,7 +242,7 @@ module Aws
               <items>xyz</items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
         it 'accepts lists of a single element' do
@@ -258,7 +258,7 @@ module Aws
               <items>abc</items>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(['abc'])
+          expect(parse(xml)[:items]).to eq(['abc'])
         end
 
         it 'observes the list serialization name when present' do
@@ -277,7 +277,7 @@ module Aws
               <item>xyz</item>
             </xml>
           XML
-          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
         it 'can parse lists of complex types' do
@@ -301,7 +301,7 @@ module Aws
               <Person><Name>xyz</Name></Person>
             </xml>
           XML
-          expect(data(xml)[:people]).to eq([
+          expect(parse(xml)[:people]).to eq([
             { name: 'abc' },
             { name: 'mno' },
             { name: 'xyz' }
@@ -321,7 +321,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(data(xml)[:attributes]).to be(nil)
+          expect(parse(xml)[:attributes]).to be(nil)
         end
 
         it 'returns empty maps as {}' do
@@ -333,7 +333,7 @@ module Aws
             }
           }
           xml = "<xml><attributes/></xml>"
-          expect(data(xml)[:attributes]).to eq({})
+          expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'expects entry, key and value tags by default' do
@@ -358,7 +358,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq({
+          expect(parse(xml)[:attributes]).to eq({
             'Color' => 'red',
             'Size' => 'large'
           })
@@ -382,7 +382,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq('Color' => 'red')
+          expect(parse(xml)[:attributes]).to eq('Color' => 'red')
         end
 
         it 'accepts alternate key and value names' do
@@ -407,7 +407,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
+          expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
         end
 
       end
@@ -424,7 +424,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(data(xml)[:attributes]).to be(nil)
+          expect(parse(xml)[:attributes]).to be(nil)
         end
 
         it 'returns empty maps as {}' do
@@ -437,7 +437,7 @@ module Aws
             }
           }
           xml = "<xml><attributes/></xml>"
-          expect(data(xml)[:attributes]).to eq({})
+          expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'expects key and value tags by default' do
@@ -461,7 +461,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq({
+          expect(parse(xml)[:attributes]).to eq({
             'Color' => 'red',
             'Size' => 'large'
           })
@@ -484,7 +484,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq('Color' => 'red')
+          expect(parse(xml)[:attributes]).to eq('Color' => 'red')
         end
 
         it 'accepts alternate key and value names' do
@@ -508,7 +508,7 @@ module Aws
               </attributes>
             </xml>
           XML
-          expect(data(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
+          expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
         end
 
       end
