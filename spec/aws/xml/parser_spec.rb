@@ -626,13 +626,38 @@ module Aws
 
       end
 
-      describe 'xmlnames' do
-      end
-
       describe 'blobs' do
       end
 
-      describe 'xml namespaces' do
+      describe 'xml attributes' do
+
+        it 'omits attributes that are not members' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'state' => { 'type' => 'string' }
+              }
+            }
+          }
+          xml = "<xml><config foo='bar'><state>on</state></config></xml>"
+          expect(parse(xml)).to eq(config: { state: 'on' })
+        end
+
+        it 'merges xml attributes that are members' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'state' => { 'type' => 'string' },
+                'foo' => { 'type' => 'string' }
+              }
+            }
+          }
+          xml = "<xml><config foo='bar'><state>on</state></config></xml>"
+          expect(parse(xml)).to eq(config: { state: 'on', foo: 'bar' })
+        end
+
       end
 
       describe 'parsing errors' do
