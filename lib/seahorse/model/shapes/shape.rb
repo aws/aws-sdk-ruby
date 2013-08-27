@@ -57,7 +57,8 @@ module Seahorse
         property :serialized_name, String
 
         def serialized_name
-          @serialized_name || @member_name.to_s
+          name = @serialized_name || @member_name.to_s
+          name == '' ? nil : name
         end
 
         def to_hash
