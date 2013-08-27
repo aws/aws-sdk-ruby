@@ -55,6 +55,19 @@ module Aws
       end
 
       def map(shape, hash)
+        if hash.nil?
+          {}
+        else
+          key_shape = shape.keys
+          value_shape = shape.members
+          data = {}
+          hash['entry'].each do |entry|
+            key = entry['key']
+            value = entry['value']
+            data[member(key_shape, key)] = member(value_shape, value)
+          end
+          data
+        end
       end
 
       def member(shape, raw)

@@ -336,7 +336,34 @@ module Aws
           expect(data(xml)[:attributes]).to eq({})
         end
 
-        it 'expects entry, key and value tags by default'
+        it 'expects entry, key and value tags by default' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <attributes>
+                <entry>
+                  <key>Color</key>
+                  <value>red</value>
+                </entry>
+                <entry>
+                  <key>Size</key>
+                  <value>large</value>
+                </entry>
+              </attributes>
+            </xml>
+          XML
+          puts data(xml).inspect
+          expect(data(xml)[:attributes]).to eq({
+            'Color' => 'red',
+            'Size' => 'large'
+          })
+        end
 
         it 'accepts alternate key and value names'
 
