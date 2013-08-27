@@ -484,11 +484,32 @@ module Aws
               </attributes>
             </xml>
           XML
-          puts data(xml).inspect
           expect(data(xml)[:attributes]).to eq('Color' => 'red')
         end
 
-        it 'accepts alternate key and value names'
+        it 'accepts alternate key and value names' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'flattened' => true,
+              'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
+              'members' => { 'type' => 'string', 'serialized_name' => 'val' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <attributes>
+                <attr>hue</attr>
+                <val>red</val>
+              </attributes>
+              <attributes>
+                <attr>size</attr>
+                <val>med</val>
+              </attributes>
+            </xml>
+          XML
+          expect(data(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
+        end
 
       end
 
