@@ -18,17 +18,22 @@ module Aws
     class XmlSerializer < Seahorse::Client::Plugin
 
       handle(:Handler) do |context|
-        input_shape = context.operation.input.members.values.find do |member|
-          member.payload
-        end || context.operation.input
-        xml = Aws::Xml::Builder.new.build(context.params, input_shape)
 
-        context.http_request.body = xml.to_s
-        context.http_request.headers['Content-Type'] = 'application/xml'
+        operation = context.operation
 
-        super(context).on_complete do |response|
-          response.data = MultiXml.parse(response.context.http_response.body.read)
+        # serialize xml request
+        if ['PUT', 'POST'].include?(operation.http_verb)
+          xml = Xml::Builder.to_xml(operation.input, context.params)
+          context.http_request.body = xml
+          context.http_request.headers['Content-Type'] = 'application/xml'
         end
+
+        # parse xml resopnse
+        super(context).on_complete do |response|
+          xml = response.context.http_response.body.read
+          response.data = Xml::Parser.to_hash(operation.output, xml)
+        end
+
       end
 
     end

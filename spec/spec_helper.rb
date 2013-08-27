@@ -22,7 +22,7 @@ require 'aws-sdk-core'
 require 'seahorse'
 
 class Seahorse::Model::Shapes::Shape
-  property :xmlname, String
+  property :xmlname, String # needs to be moved to :serialized_name
   property :xmlattribute, Boolean
   property :xmlns_prefix, String, in: :xmlnamespace, name: :prefix
   property :xmlns_uri, String, in: :xmlnamespace, name: :uri
