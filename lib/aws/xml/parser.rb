@@ -64,8 +64,8 @@ module Aws
           entries = hash['entry']
           entries = [entries] unless entries.is_a?(Array)
           entries.each do |entry|
-            key = entry['key']
-            value = entry['value']
+            key = entry[key_shape.serialized_name || 'key']
+            value = entry[value_shape.serialized_name || 'value']
             data[member(key_shape, key)] = member(value_shape, value)
           end
           data

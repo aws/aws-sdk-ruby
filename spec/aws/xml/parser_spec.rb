@@ -387,7 +387,30 @@ module Aws
           expect(data(xml)[:attributes]).to eq('Color' => 'red')
         end
 
-        it 'accepts alternate key and value names'
+        it 'accepts alternate key and value names' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
+              'members' => { 'type' => 'string', 'serialized_name' => 'val' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <attributes>
+                <entry>
+                  <attr>hue</attr>
+                  <val>red</val>
+                </entry>
+                <entry>
+                  <attr>size</attr>
+                  <val>med</val>
+                </entry>
+              </attributes>
+            </xml>
+          XML
+          expect(data(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
+        end
 
       end
 
