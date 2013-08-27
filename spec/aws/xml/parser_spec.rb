@@ -136,6 +136,23 @@ module Aws
           expect(data(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
+        it 'accepts lists of single elements' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>
+                <member>abc</member>
+              </items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(['abc'])
+        end
+
         it 'observes the list member serialization name when present' do
           rules['members'] = {
             'items' => {
@@ -226,6 +243,22 @@ module Aws
             </xml>
           XML
           expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+        end
+
+        it 'accepts lists of a single element' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'flattened' => true,
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>abc</items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(['abc'])
         end
 
         it 'observes the list serialization name when present' do
