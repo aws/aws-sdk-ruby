@@ -39,16 +39,6 @@ module Aws
       private
 
       def structure(shape, hash)
-        data = {}
-        hash.each_pair do |key, value|
-          if member_shape = shape.serialized_members[key]
-            data[member_shape.member_name] = member(member_shape, value)
-          end
-        end
-        data
-      end
-
-      def structure(shape, hash)
         shape.members.inject({}) do |data, (member_name, member_shape)|
           key = member_shape.serialized_name
           data[member_name] = member(member_shape, hash[key]) if hash.key?(key)
