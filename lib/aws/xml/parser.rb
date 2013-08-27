@@ -61,7 +61,9 @@ module Aws
           key_shape = shape.keys
           value_shape = shape.members
           data = {}
-          hash['entry'].each do |entry|
+          entries = hash['entry']
+          entries = [entries] unless entries.is_a?(Array)
+          entries.each do |entry|
             key = entry['key']
             value = entry['value']
             data[member(key_shape, key)] = member(value_shape, value)

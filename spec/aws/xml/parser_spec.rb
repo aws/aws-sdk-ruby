@@ -365,6 +365,28 @@ module Aws
           })
         end
 
+        it 'accepts maps with a single entry' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <attributes>
+                <entry>
+                  <key>Color</key>
+                  <value>red</value>
+                </entry>
+              </attributes>
+            </xml>
+          XML
+          puts data(xml).inspect
+          expect(data(xml)[:attributes]).to eq('Color' => 'red')
+        end
+
         it 'accepts alternate key and value names'
 
       end
