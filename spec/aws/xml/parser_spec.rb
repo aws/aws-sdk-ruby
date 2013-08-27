@@ -155,7 +155,32 @@ module Aws
           expect(data(xml)[:items]).to eq(%w(abc mno xyz))
         end
 
-        it 'can parse lists of complex types'
+        it 'can parse lists of complex types' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => {
+                'type' => 'structure',
+                'serialized_name' => 'item',
+                'members' => { 'name' => { 'type' => 'string' } }
+              }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>
+                <item><name>abc</name></item>
+                <item><name>mno</name></item>
+                <item><name>xyz</name></item>
+              </items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq([
+            { name: 'abc' },
+            { name: 'mno' },
+            { name: 'xyz' }
+          ])
+        end
 
       end
 
