@@ -591,9 +591,39 @@ module Aws
       end
 
       describe 'integers' do
+
+        before(:each) do
+          rules['members'] = { 'count' => { 'type' => 'integer' } }
+        end
+
+        it 'parses integer elements' do
+          xml = "<xml><count>123</count></xml>"
+          expect(parse(xml)[:count]).to eq(123)
+        end
+
+        it 'returns empty elements as nil' do
+          xml = "<xml><count/></xml>"
+          expect(parse(xml)[:count]).to eq(nil)
+        end
+
       end
 
       describe 'floats' do
+
+        before(:each) do
+          rules['members'] = { 'price' => { 'type' => 'float' } }
+        end
+
+        it 'parses float elements' do
+          xml = "<xml><price>12.34</price></xml>"
+          expect(parse(xml)[:price]).to eq(12.34)
+        end
+
+        it 'returns empty elements as nil' do
+          xml = "<xml><price/></xml>"
+          expect(parse(xml)[:price]).to eq(nil)
+        end
+
       end
 
       describe 'xmlnames' do

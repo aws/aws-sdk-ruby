@@ -79,6 +79,8 @@ module Aws
         when :list then list(shape, raw)
         when :map then map(shape, raw)
         when :boolean then raw == 'true'
+        when :integer then raw ? raw.to_i : nil
+        when :float then raw ? raw.to_f : nil
         when :timestamp then timestamp(raw)
         else raw
         end
