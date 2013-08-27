@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'spec_helper'
+require 'time'
 
 module Aws
   module Xml
@@ -521,22 +522,72 @@ module Aws
 
         it 'converts boolean true values' do
           xml = "<xml><enabled>true</enabled></xml>"
-          expect(data(xml)).to eq(enabled: true)
+          expect(parse(xml)).to eq(enabled: true)
         end
 
         it 'converts boolean false values' do
           xml = "<xml><enabled>false</enabled></xml>"
-          expect(data(xml)).to eq(enabled: false)
+          expect(parse(xml)).to eq(enabled: false)
         end
 
         it 'does not apply a boolean true/false value when not present' do
           xml = "<xml/>"
-          expect(data(xml)).to eq({})
+          expect(parse(xml)).to eq({})
         end
 
       end
 
       describe 'timestamps' do
+
+        before(:each) do
+          rules['members'] = {
+            'created_at' => {
+              'type' => 'timestamp',
+              'serialized_name' => 'CreatedAt',
+            }
+          }
+        end
+
+        it 'returns an empty element as nil' do
+          xml = "<xml><CreatedAt/></xml>"
+          expect(parse(xml)).to eq(:created_at => nil)
+        end
+
+        it 'can parse unix timestamps' do
+          timestamp = 1349908100
+          time = Time.at(timestamp)
+          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          data = parse(xml)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
+
+        it 'understands basic iso8601 strings' do
+          timestamp = '2012-09-10T15:47:10.001Z'
+          time = Time.parse(timestamp).to_time.utc
+          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          data = parse(xml)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
+
+        it 'understands basic rfc822 strings' do
+          timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
+          time = Time.parse(timestamp).to_time.utc
+          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          data = parse(xml)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
+
+        it 'throws an error when unable to determine the format' do
+          timestamp = 'bad-date-format'
+          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          lambda {
+            parse(xml)
+          }.should raise_error("unhandled timestamp format `#{timestamp}'")
+        end
+
       end
 
       describe 'integers' do

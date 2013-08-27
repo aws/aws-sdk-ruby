@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'multi_xml'
+require 'time'
 
 module Aws
   module Xml
@@ -78,7 +79,21 @@ module Aws
         when :list then list(shape, raw)
         when :map then map(shape, raw)
         when :boolean then raw == 'true'
+        when :timestamp then timestamp(raw)
         else raw
+        end
+      end
+
+      def timestamp(raw)
+        case raw
+        when nil then nil
+        when /^\d+$/ then Time.at(raw.to_i)
+        else
+          begin
+            Time.parse(raw)
+          rescue ArgumentError
+            raise "unhandled timestamp format `#{raw}'"
+          end
         end
       end
 
