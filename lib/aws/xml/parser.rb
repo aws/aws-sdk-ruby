@@ -56,6 +56,7 @@ module Aws
       end
 
       def map(shape, hash)
+        {}
       end
 
       def member(shape, raw)

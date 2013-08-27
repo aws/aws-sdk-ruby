@@ -279,9 +279,29 @@ module Aws
 
       describe 'non-flattened maps' do
 
-        it 'returns missing maps as nil'
+        it 'returns missing maps as nil' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml/>"
+          expect(data(xml)[:attributes]).to be(nil)
+        end
 
-        it 'returns empty maps as {}'
+        it 'returns empty maps as {}' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml><attributes/></xml>"
+          expect(data(xml)[:attributes]).to eq({})
+        end
 
         it 'expects entry, key and value tags by default'
 
@@ -291,9 +311,31 @@ module Aws
 
       describe 'flattened maps' do
 
-        it 'returns missing maps as nil'
+        it 'returns missing maps as nil' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'flattened' => true,
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml/>"
+          expect(data(xml)[:attributes]).to be(nil)
+        end
 
-        it 'returns empty maps as {}'
+        it 'returns empty maps as {}' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'flattened' => true,
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml><attributes/></xml>"
+          expect(data(xml)[:attributes]).to eq({})
+        end
 
         it 'expects key and value tags by default'
 
