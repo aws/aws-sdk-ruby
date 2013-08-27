@@ -82,17 +82,15 @@ module Aws
       end
 
       def member(name, shape, value)
-        if shape.is_a?(Seahorse::Model::Shapes::StructureShape)
-          structure(name, shape, value)
-        elsif shape.is_a?(Seahorse::Model::Shapes::ListShape)
-          list(name, shape, value)
-        else
-          node(name, shape, format(shape, value))
+        case shape.type
+        when :structure then structure(name, shape, value)
+        when :list then list(name, shape, value)
+        else node(name, shape, format(shape, value))
         end
       end
 
       def format(shape, value)
-        if shape.is_a?(Seahorse::Model::Shapes::TimestampShape)
+        if shape.type == :timestamp
           format_timestamp(shape, value.utc)
         else
           value.to_s
