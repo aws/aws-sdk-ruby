@@ -117,9 +117,43 @@ module Aws
           expect(data(xml)[:items]).to eq([])
         end
 
-        it 'converts lists of strings into arrays of strings'
+        it 'converts lists of strings into arrays of strings' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>
+                <member>abc</member>
+                <member>mno</member>
+                <member>xyz</member>
+              </items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+        end
 
-        it 'observes the list member serialization name when present'
+        it 'observes the list member serialization name when present' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string', 'serialized_name' => 'item' }
+            }
+          }
+          xml = <<-XML
+            <xml>
+              <items>
+                <item>abc</item>
+                <item>mno</item>
+                <item>xyz</item>
+              </items>
+            </xml>
+          XML
+          expect(data(xml)[:items]).to eq(%w(abc mno xyz))
+        end
 
         it 'can parse lists of complex types'
 

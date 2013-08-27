@@ -57,7 +57,8 @@ module Aws
       end
 
       def list(shape, values)
-        []
+        member_name = shape.members.serialized_name || 'member'
+        (values || {})[member_name] || []
       end
 
       def map(shape, hash)
