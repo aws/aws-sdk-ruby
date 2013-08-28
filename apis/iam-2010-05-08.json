@@ -1,9 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-05-08",
-  "endpoint": "iam.amazonaws.com",
+  "endpoint": "iam.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "iam",
     "result_wrapped": true,
     "service_abbreviation": "IAM",
     "service_full_name": "AWS Identity and Access Management",

@@ -1,8 +1,8 @@
 {
   "type": "json",
   "api_version": "2013-04-15",
+  "endpoint": "support.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "support",
     "json_version": "1.1",
     "service_full_name": "AWS Support",
     "signature_version": "v4",

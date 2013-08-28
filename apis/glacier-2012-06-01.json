@@ -1,9 +1,9 @@
 {
   "type": "rest-json",
   "api_version": "2012-06-01",
+  "endpoint": "glacier.%s.amazonaws.com",
   "metadata": {
     "checksum_format": "sha256",
-    "endpoint_prefix": "glacier",
     "service_full_name": "Amazon Glacier",
     "signature_version": "v4"
   },

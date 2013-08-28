@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2012-11-05",
+  "endpoint": "sqs.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "sqs",
     "result_wrapped": true,
     "service_abbreviation": "Amazon SQS",
     "service_full_name": "Amazon Simple Queue Service",

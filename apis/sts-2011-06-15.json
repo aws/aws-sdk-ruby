@@ -1,9 +1,8 @@
 {
   "type": "query",
   "api_version": "2011-06-15",
-  "endpoint": "sts.amazonaws.com",
+  "endpoint": "sts.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "sts",
     "result_wrapped": true,
     "service_abbreviation": "AWS STS",
     "service_full_name": "AWS Security Token Service",

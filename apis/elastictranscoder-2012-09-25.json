@@ -1,8 +1,8 @@
 {
   "type": "rest-json",
   "api_version": "2012-09-25",
+  "endpoint": "elastictranscoder.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "elastictranscoder",
     "service_full_name": "Amazon Elastic Transcoder",
     "signature_version": "v4"
   },

@@ -1,9 +1,8 @@
 {
   "type": "rest-xml",
   "api_version": "2012-12-12",
-  "endpoint": "route53.amazonaws.com",
+  "endpoint": "route53.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "route53",
     "service_abbreviation": "Route 53",
     "service_full_name": "Amazon Route 53",
     "signature_version": "v3https",

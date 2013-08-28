@@ -1,9 +1,8 @@
 {
   "type": "rest-xml",
   "api_version": "2012-05-05",
-  "endpoint": "cloudfront.amazonaws.com",
+  "endpoint": "cloudfront.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "cloudfront",
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
     "signature_version": "cloudfront",

@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-12-01",
+  "endpoint": "email.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "email",
     "result_wrapped": true,
     "service_abbreviation": "Amazon SES",
     "service_full_name": "Amazon Simple Email Service",

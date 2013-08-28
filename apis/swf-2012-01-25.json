@@ -1,8 +1,8 @@
 {
   "type": "json",
   "api_version": "2012-01-25",
+  "endpoint": "swf.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "swf",
     "json_version": 1.0,
     "service_abbreviation": "Amazon SWF",
     "service_full_name": "Amazon Simple Workflow Service",

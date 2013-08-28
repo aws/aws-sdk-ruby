@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2012-12-01",
+  "endpoint": "redshift.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "redshift",
     "result_wrapped": true,
     "service_full_name": "Amazon Redshift",
     "signature_version": "v4"

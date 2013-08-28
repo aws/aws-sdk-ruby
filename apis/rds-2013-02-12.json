@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2013-02-12",
+  "endpoint": "rds.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "rds",
     "result_wrapped": true,
     "service_abbreviation": "Amazon RDS",
     "service_full_name": "Amazon Relational Database Service",

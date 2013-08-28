@@ -1,8 +1,8 @@
 {
   "type": "json",
   "api_version": "2009-03-31",
+  "endpoint": "elasticmapreduce.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "elasticmapreduce",
     "json_version": 1.1,
     "service_abbreviation": "Amazon EMR",
     "service_full_name": "Amazon Elastic MapReduce",

@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-05-15",
+  "endpoint": "cloudformation.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "cloudformation",
     "result_wrapped": true,
     "service_full_name": "AWS CloudFormation",
     "signature_version": "v4"

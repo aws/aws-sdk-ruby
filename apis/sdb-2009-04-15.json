@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2009-04-15",
+  "endpoint": "sdb.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "sdb",
     "result_wrapped": true,
     "service_full_name": "Amazon SimpleDB",
     "signature_version": "v2"

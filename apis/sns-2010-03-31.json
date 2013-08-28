@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-03-31",
+  "endpoint": "sns.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "sns",
     "result_wrapped": true,
     "service_abbreviation": "Amazon SNS",
     "service_full_name": "Amazon Simple Notification Service",

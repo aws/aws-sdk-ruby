@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-08-01",
+  "endpoint": "monitoring.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "monitoring",
     "result_wrapped": true,
     "service_abbreviation": "CloudWatch",
     "service_full_name": "Amazon CloudWatch",

@@ -1,9 +1,8 @@
 {
   "type": "query",
   "api_version": "2010-06-01",
-  "endpoint": "importexport.amazonaws.com",
+  "endpoint": "importexport.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "importexport",
     "result_wrapped": true,
     "service_full_name": "AWS Import/Export",
     "signature_version": "v2"

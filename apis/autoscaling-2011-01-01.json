@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2011-01-01",
+  "endpoint": "autoscaling.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "autoscaling",
     "result_wrapped": true,
     "service_full_name": "Auto Scaling",
     "signature_version": "v4"

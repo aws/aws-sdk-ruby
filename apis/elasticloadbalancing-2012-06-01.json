@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2012-06-01",
+  "endpoint": "elasticloadbalancing.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "elasticloadbalancing",
     "result_wrapped": true,
     "service_full_name": "Elastic Load Balancing",
     "signature_version": "v4"

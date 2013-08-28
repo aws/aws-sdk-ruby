@@ -1,8 +1,8 @@
 {
   "type": "query",
   "api_version": "2012-11-15",
+  "endpoint": "elasticache.%s.amazonaws.com",
   "metadata": {
-    "endpoint_prefix": "elasticache",
     "result_wrapped": true,
     "service_full_name": "Amazon ElastiCache",
     "signature_version": "v2"
