@@ -20,9 +20,9 @@ module Seahorse
       property :api_version, String
       property :endpoint, String
       property :metadata, Hash
+      property :plugins, [String]
       property :documentation, String
       property :operations, LazyOperationHash
-      property :plugins, [String]
 
       def initialize(*)
         super
