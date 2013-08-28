@@ -41,6 +41,7 @@ module Seahorse
 
         def initialize(*)
           super
+          self.metadata = {}
           self.type = self.class.type
         end
 
@@ -65,6 +66,7 @@ module Seahorse
         def to_hash
           hash = super
           hash.delete('serialized_name') if @serialized_name.nil?
+          hash.delete('metadata') if hash['metadata'].empty?
           hash
         end
 

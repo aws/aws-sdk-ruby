@@ -37,7 +37,9 @@ module Seahorse
 
       def to_hash
         operations.load!
-        super
+        hash = super
+        hash.delete('metadata') if hash['metadata'].empty?
+        hash
       end
 
     end

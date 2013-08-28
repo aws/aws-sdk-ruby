@@ -16,6 +16,11 @@ module Seahorse
   module Model
     class Operation < Node
 
+      def initialize(*)
+        super
+        self.metadata = {}
+      end
+
       property :name, String
       property :http_method, String
       property :http_path, String
@@ -24,6 +29,12 @@ module Seahorse
       property :input, Shape
       property :output, Shape
       property :errors, [Shape]
+
+      def to_hash
+        hash = super
+        hash.delete('metadata') if hash['metadata'].empty?
+        hash
+      end
 
     end
   end
