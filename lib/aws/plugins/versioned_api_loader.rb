@@ -27,12 +27,6 @@ module Aws
         else
           file = api_config_file(klass, version)
           json = JSON.parse(File.read(file))
-          json = json.merge(
-            'metadata' => { 'aws_endpoint_prefix' => json['endpoint_prefix'] },
-            'endpoint' => json['global_endpoint'] ||
-              (json['endpoint_prefix'] + '.%s.amazonaws.com')
-          )
-
           new_klass = klass.define(api: json)
           new_klass.remove_plugin(VersionedApiLoader)
           klass.const_set(const_name, new_klass)
