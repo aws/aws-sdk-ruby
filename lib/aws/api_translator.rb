@@ -162,7 +162,6 @@ module Aws
     property :location
     property :serialized_name, from: :xmlname
     property :serialized_name, from: :location_name
-    property :required
     property :enum
     property :pattern
     property :min_length
@@ -213,9 +212,11 @@ module Aws
   end
 
   class InputShapeTranslator < ShapeTranslator
+    property :required
   end
 
   class OutputShapeTranslator < ShapeTranslator
+    ignore :required
   end
 
 end
