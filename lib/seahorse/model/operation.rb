@@ -15,13 +15,16 @@
 module Seahorse
   module Model
     class Operation < Node
+
       property :name, String
+      property :http_method, String
+      property :http_path, String
+      property :metadata, Hash
       property :documentation, String
-      property :http_uri, String, in: :http, name: :uri
-      property :http_verb, String, in: :http, name: :method
       property :input, Shape, always_serialize: true
       property :output, Shape, always_serialize: true
       property :errors, [Shape]
+
     end
   end
 end

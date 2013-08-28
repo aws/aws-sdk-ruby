@@ -19,10 +19,8 @@ module Seahorse
       let(:operation_hash) do
         {
           'name' => 'OperationName',
-          'http' => {
-            'uri' => '/path/to/operation',
-            'method' => 'POST'
-          },
+          'http_method' => 'POST',
+          'http_path' => '/path/to/operation',
           'input' => {
             'type' => 'structure',
             'members' => {

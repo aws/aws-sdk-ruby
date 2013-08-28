@@ -55,6 +55,7 @@ module Seahorse
         property :max_length, Integer
         property :pattern, String
         property :serialized_name, String
+        property :metadata, Hash
 
         def serialized_name
           name = @serialized_name || @member_name.to_s
@@ -71,9 +72,7 @@ module Seahorse
 
       class ScalarShape < Shape; end
       class IntegerShape < ScalarShape; end
-      class LongShape < ScalarShape; end
       class FloatShape < ScalarShape; end
-      class DoubleShape < ScalarShape; end
       class BooleanShape < ScalarShape; end
       class BlobShape < ScalarShape; end
 
@@ -137,8 +136,6 @@ module Seahorse
         register_type timestamp: TimestampShape
         register_type boolean: BooleanShape
         register_type blob: BlobShape
-        register_type long: LongShape
-        register_type double: DoubleShape
         register_type float: FloatShape
       end
     end

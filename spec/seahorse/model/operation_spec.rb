@@ -20,10 +20,8 @@ module Seahorse
         {
           'name' => 'OperationName',
           'documentation' => 'Docstring',
-          'http' => {
-            'uri' => '/path/to/operation',
-            'method' => 'POST'
-          },
+          'http_method' => 'POST',
+          'http_path' => '/path/to/operation',
           'input' => {
             'type' => 'structure',
             'members' => {
@@ -48,8 +46,8 @@ module Seahorse
         it 'loads from a hash' do
           expect(operation.name).to eq 'OperationName'
           expect(operation.documentation).to eq 'Docstring'
-          expect(operation.http_uri).to eq '/path/to/operation'
-          expect(operation.http_verb).to eq 'POST'
+          expect(operation.http_path).to eq '/path/to/operation'
+          expect(operation.http_method).to eq 'POST'
           expect(operation.input).to be_instance_of Shapes::StructureShape
           expect(operation.output).to eq nil
           expect(operation.errors[0]).to be_instance_of Shapes::StringShape

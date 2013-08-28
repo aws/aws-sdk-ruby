@@ -19,17 +19,10 @@ module Seahorse
       property :type, String
       property :api_version, String
       property :endpoint, String
-      property :signature_version, String
-      property :result_wrapped, String
-      property :service_full_name, String
-      property :service_abbreviation, String
-      property :global_endpoint, String
-      property :endpoint_prefix, String
-      property :xmlnamespace, String
       property :metadata, Hash
       property :documentation, String
-      property :plugins, [String]
       property :operations, LazyOperationHash
+      property :plugins, [String]
 
       def initialize(*)
         super
