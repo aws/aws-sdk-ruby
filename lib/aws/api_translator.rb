@@ -111,8 +111,8 @@ module Aws
   class OperationTranslator < Translator
 
     def translated
-      @properties['http_uri'] ||= '/'
-      @properties['http_verb'] ||= 'POST'
+      @properties['http_method'] ||= 'POST'
+      @properties['http_path'] ||= '/'
       operation = Seahorse::Model::Operation.from_hash(@properties)
       operation.input = @input
       operation.output = @output
@@ -126,8 +126,8 @@ module Aws
     ignore :alias
 
     def set_http(http)
-      @properties['http_uri'] = http['uri']
-      @properties['http_verb'] = http['verb']
+      @properties['http_method'] = http['verb']
+      @properties['http_path'] = http['uri']
     end
 
     def set_input(src)
