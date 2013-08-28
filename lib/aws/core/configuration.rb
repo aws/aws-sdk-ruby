@@ -446,7 +446,7 @@ module AWS
           end
 
           needs = [
-            :"#{ruby_name}",
+            :"#{svc_opt}",
             :"#{ruby_name}_endpoint",
             :"#{ruby_name}_port",
             :"#{ruby_name}_region",
@@ -469,7 +469,7 @@ module AWS
           ]
 
           create_block = lambda do |config,client_options|
-            options = client_options[:"#{ruby_name}"]
+            options = client_options[:"#{svc_opt}"]
             AWS.const_get(name)::Client.new(options.merge(:config => config))
           end
 
