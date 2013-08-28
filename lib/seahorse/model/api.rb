@@ -14,15 +14,11 @@
 
 module Seahorse
   module Model
-
     class Api < Node
-      property :metadata, Hash
 
-      property :endpoint, String
-      property :plugins, [String]
-
-      property :api_version, String
       property :type, String
+      property :api_version, String
+      property :endpoint, String
       property :signature_version, String
       property :result_wrapped, String
       property :service_full_name, String
@@ -30,8 +26,9 @@ module Seahorse
       property :global_endpoint, String
       property :endpoint_prefix, String
       property :xmlnamespace, String
-
+      property :metadata, Hash
       property :documentation, String
+      property :plugins, [String]
       property :operations, LazyOperationHash
 
       def initialize(*)
@@ -49,6 +46,7 @@ module Seahorse
         operations.load!
         super
       end
+
     end
   end
 end
