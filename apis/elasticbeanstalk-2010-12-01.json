@@ -41,8 +41,6 @@
           "fully_qualified_cname": {
             "type": "string",
             "documentation": "<p>The fully qualified CNAME to reserve when CreateEnvironment is called with the provided prefix.</p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "FullyQualifiedCNAME"
           }
         }
@@ -85,14 +83,11 @@
               "application_name": {
                 "type": "string",
                 "documentation": "<p>The name of the application.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ApplicationName"
               },
               "description": {
                 "type": "string",
                 "documentation": "<p>User-defined description of the application.</p>",
-                "max_length": 200,
                 "serialized_name": "Description"
               },
               "date_created": {
@@ -110,9 +105,7 @@
                 "documentation": "<p>The names of the versions for this application.</p>",
                 "serialized_name": "Versions",
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 100
+                  "type": "string"
                 }
               },
               "configuration_templates": {
@@ -120,9 +113,7 @@
                 "documentation": "<p> The names of the configuration templates associated with this application. </p>",
                 "serialized_name": "ConfigurationTemplates",
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 100
+                  "type": "string"
                 }
               }
             }
@@ -207,21 +198,16 @@
               "application_name": {
                 "type": "string",
                 "documentation": "<p>The name of the application associated with this release.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ApplicationName"
               },
               "description": {
                 "type": "string",
                 "documentation": "<p>The description of this application version.</p>",
-                "max_length": 200,
                 "serialized_name": "Description"
               },
               "version_label": {
                 "type": "string",
                 "documentation": "<p> A label uniquely identifying the version for the associated application. </p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "VersionLabel"
               },
               "source_bundle": {
@@ -232,13 +218,11 @@
                   "s3_bucket": {
                     "type": "string",
                     "documentation": "<p>The Amazon S3 bucket where the data is located.</p>",
-                    "max_length": 255,
                     "serialized_name": "S3Bucket"
                   },
                   "s3_key": {
                     "type": "string",
                     "documentation": "<p>The Amazon S3 key where the data is located.</p>",
-                    "max_length": 1024,
                     "serialized_name": "S3Key"
                   }
                 }
@@ -382,34 +366,26 @@
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the solution stack this configuration set uses. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "application_name": {
             "type": "string",
             "documentation": "<p> The name of the application associated with this configuration set. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> If not <code>null</code>, the name of the configuration template for this configuration set. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p> Describes this configuration set. </p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "environment_name": {
             "type": "string",
             "documentation": "<p> If not <code>null</code>, the name of the environment for this configuration set. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "deployment_status": {
@@ -589,8 +565,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of this environment.</p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "environment_id": {
@@ -601,34 +575,26 @@
           "application_name": {
             "type": "string",
             "documentation": "<p>The name of the application associated with this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p>The application version deployed in this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the <code>SolutionStack</code> deployed with this environment. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template used to originally launch this environment. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes this environment.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "endpoint_url": {
@@ -639,8 +605,6 @@
           "cname": {
             "type": "string",
             "documentation": "<p> The URL to the CNAME for this environment. </p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "CNAME"
           },
           "date_created": {
@@ -750,7 +714,6 @@
           "s3_bucket": {
             "type": "string",
             "documentation": "<p> The name of the Amazon S3 bucket created. </p>",
-            "max_length": 255,
             "serialized_name": "S3Bucket"
           }
         }
@@ -975,21 +938,16 @@
                 "application_name": {
                   "type": "string",
                   "documentation": "<p>The name of the application associated with this release.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "ApplicationName"
                 },
                 "description": {
                   "type": "string",
                   "documentation": "<p>The description of this application version.</p>",
-                  "max_length": 200,
                   "serialized_name": "Description"
                 },
                 "version_label": {
                   "type": "string",
                   "documentation": "<p> A label uniquely identifying the version for the associated application. </p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "VersionLabel"
                 },
                 "source_bundle": {
@@ -1000,13 +958,11 @@
                     "s3_bucket": {
                       "type": "string",
                       "documentation": "<p>The Amazon S3 bucket where the data is located.</p>",
-                      "max_length": 255,
                       "serialized_name": "S3Bucket"
                     },
                     "s3_key": {
                       "type": "string",
                       "documentation": "<p>The Amazon S3 key where the data is located.</p>",
-                      "max_length": 1024,
                       "serialized_name": "S3Key"
                     }
                   }
@@ -1063,14 +1019,11 @@
                 "application_name": {
                   "type": "string",
                   "documentation": "<p>The name of the application.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "ApplicationName"
                 },
                 "description": {
                   "type": "string",
                   "documentation": "<p>User-defined description of the application.</p>",
-                  "max_length": 200,
                   "serialized_name": "Description"
                 },
                 "date_created": {
@@ -1088,9 +1041,7 @@
                   "documentation": "<p>The names of the versions for this application.</p>",
                   "serialized_name": "Versions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 100
+                    "type": "string"
                   }
                 },
                 "configuration_templates": {
@@ -1098,9 +1049,7 @@
                   "documentation": "<p> The names of the configuration templates associated with this application. </p>",
                   "serialized_name": "ConfigurationTemplates",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 100
+                    "type": "string"
                   }
                 }
               }
@@ -1175,7 +1124,6 @@
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the solution stack these configuration options belong to. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "options": {
@@ -1314,34 +1262,26 @@
                 "solution_stack_name": {
                   "type": "string",
                   "documentation": "<p> The name of the solution stack this configuration set uses. </p>",
-                  "max_length": 100,
                   "serialized_name": "SolutionStackName"
                 },
                 "application_name": {
                   "type": "string",
                   "documentation": "<p> The name of the application associated with this configuration set. </p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "ApplicationName"
                 },
                 "template_name": {
                   "type": "string",
                   "documentation": "<p> If not <code>null</code>, the name of the configuration template for this configuration set. </p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "TemplateName"
                 },
                 "description": {
                   "type": "string",
                   "documentation": "<p> Describes this configuration set. </p>",
-                  "max_length": 200,
                   "serialized_name": "Description"
                 },
                 "environment_name": {
                   "type": "string",
                   "documentation": "<p> If not <code>null</code>, the name of the environment for this configuration set. </p>",
-                  "min_length": 4,
-                  "max_length": 23,
                   "serialized_name": "EnvironmentName"
                 },
                 "deployment_status": {
@@ -1431,8 +1371,6 @@
               "environment_name": {
                 "type": "string",
                 "documentation": "<p>The name of the environment.</p>",
-                "min_length": 4,
-                "max_length": 23,
                 "serialized_name": "EnvironmentName"
               },
               "auto_scaling_groups": {
@@ -1596,8 +1534,6 @@
                 "environment_name": {
                   "type": "string",
                   "documentation": "<p>The name of this environment.</p>",
-                  "min_length": 4,
-                  "max_length": 23,
                   "serialized_name": "EnvironmentName"
                 },
                 "environment_id": {
@@ -1608,34 +1544,26 @@
                 "application_name": {
                   "type": "string",
                   "documentation": "<p>The name of the application associated with this environment.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "ApplicationName"
                 },
                 "version_label": {
                   "type": "string",
                   "documentation": "<p>The application version deployed in this environment.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "VersionLabel"
                 },
                 "solution_stack_name": {
                   "type": "string",
                   "documentation": "<p> The name of the <code>SolutionStack</code> deployed with this environment. </p>",
-                  "max_length": 100,
                   "serialized_name": "SolutionStackName"
                 },
                 "template_name": {
                   "type": "string",
                   "documentation": "<p> The name of the configuration template used to originally launch this environment. </p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "TemplateName"
                 },
                 "description": {
                   "type": "string",
                   "documentation": "<p>Describes this environment.</p>",
-                  "max_length": 200,
                   "serialized_name": "Description"
                 },
                 "endpoint_url": {
@@ -1646,8 +1574,6 @@
                 "cname": {
                   "type": "string",
                   "documentation": "<p> The URL to the CNAME for this environment. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "CNAME"
                 },
                 "date_created": {
@@ -1843,29 +1769,21 @@
                 "application_name": {
                   "type": "string",
                   "documentation": "<p>The application associated with the event.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "ApplicationName"
                 },
                 "version_label": {
                   "type": "string",
                   "documentation": "<p>The release label for the application version associated with this event.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "VersionLabel"
                 },
                 "template_name": {
                   "type": "string",
                   "documentation": "<p>The name of the configuration associated with this event.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "TemplateName"
                 },
                 "environment_name": {
                   "type": "string",
                   "documentation": "<p>The name of the environment associated with this event.</p>",
-                  "min_length": 4,
-                  "max_length": 23,
                   "serialized_name": "EnvironmentName"
                 },
                 "request_id": {
@@ -1911,8 +1829,7 @@
             "documentation": "<p> A list of available solution stacks. </p>",
             "serialized_name": "SolutionStacks",
             "members": {
-              "type": "string",
-              "max_length": 100
+              "type": "string"
             }
           },
           "solution_stack_details": {
@@ -1926,7 +1843,6 @@
                 "solution_stack_name": {
                   "type": "string",
                   "documentation": "<p> The name of the solution stack. </p>",
-                  "max_length": 100,
                   "serialized_name": "SolutionStackName"
                 },
                 "permitted_file_types": {
@@ -1934,9 +1850,7 @@
                   "documentation": "<p> The permitted file types allowed for a solution stack. </p>",
                   "serialized_name": "PermittedFileTypes",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 100
+                    "type": "string"
                   }
                 }
               }
@@ -2178,8 +2092,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of this environment.</p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "environment_id": {
@@ -2190,34 +2102,26 @@
           "application_name": {
             "type": "string",
             "documentation": "<p>The name of the application associated with this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p>The application version deployed in this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the <code>SolutionStack</code> deployed with this environment. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template used to originally launch this environment. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes this environment.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "endpoint_url": {
@@ -2228,8 +2132,6 @@
           "cname": {
             "type": "string",
             "documentation": "<p> The URL to the CNAME for this environment. </p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "CNAME"
           },
           "date_created": {
@@ -2358,14 +2260,11 @@
               "application_name": {
                 "type": "string",
                 "documentation": "<p>The name of the application.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ApplicationName"
               },
               "description": {
                 "type": "string",
                 "documentation": "<p>User-defined description of the application.</p>",
-                "max_length": 200,
                 "serialized_name": "Description"
               },
               "date_created": {
@@ -2383,9 +2282,7 @@
                 "documentation": "<p>The names of the versions for this application.</p>",
                 "serialized_name": "Versions",
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 100
+                  "type": "string"
                 }
               },
               "configuration_templates": {
@@ -2393,9 +2290,7 @@
                 "documentation": "<p> The names of the configuration templates associated with this application. </p>",
                 "serialized_name": "ConfigurationTemplates",
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 100
+                  "type": "string"
                 }
               }
             }
@@ -2448,21 +2343,16 @@
               "application_name": {
                 "type": "string",
                 "documentation": "<p>The name of the application associated with this release.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ApplicationName"
               },
               "description": {
                 "type": "string",
                 "documentation": "<p>The description of this application version.</p>",
-                "max_length": 200,
                 "serialized_name": "Description"
               },
               "version_label": {
                 "type": "string",
                 "documentation": "<p> A label uniquely identifying the version for the associated application. </p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "VersionLabel"
               },
               "source_bundle": {
@@ -2473,13 +2363,11 @@
                   "s3_bucket": {
                     "type": "string",
                     "documentation": "<p>The Amazon S3 bucket where the data is located.</p>",
-                    "max_length": 255,
                     "serialized_name": "S3Bucket"
                   },
                   "s3_key": {
                     "type": "string",
                     "documentation": "<p>The Amazon S3 key where the data is located.</p>",
-                    "max_length": 1024,
                     "serialized_name": "S3Key"
                   }
                 }
@@ -2586,34 +2474,26 @@
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the solution stack this configuration set uses. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "application_name": {
             "type": "string",
             "documentation": "<p> The name of the application associated with this configuration set. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> If not <code>null</code>, the name of the configuration template for this configuration set. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p> Describes this configuration set. </p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "environment_name": {
             "type": "string",
             "documentation": "<p> If not <code>null</code>, the name of the environment for this configuration set. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "deployment_status": {
@@ -2770,8 +2650,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of this environment.</p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "environment_id": {
@@ -2782,34 +2660,26 @@
           "application_name": {
             "type": "string",
             "documentation": "<p>The name of the application associated with this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p>The application version deployed in this environment.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the <code>SolutionStack</code> deployed with this environment. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template used to originally launch this environment. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes this environment.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "endpoint_url": {
@@ -2820,8 +2690,6 @@
           "cname": {
             "type": "string",
             "documentation": "<p> The URL to the CNAME for this environment. </p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "CNAME"
           },
           "date_created": {

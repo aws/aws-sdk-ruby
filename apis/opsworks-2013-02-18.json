@@ -2608,15 +2608,11 @@
                     "thresholds_wait_time": {
                       "type": "integer",
                       "documentation": "<p>The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.</p>",
-                      "min_length": 1,
-                      "max_length": 100,
                       "serialized_name": "ThresholdsWaitTime"
                     },
                     "ignore_metrics_time": {
                       "type": "integer",
                       "documentation": "<p>The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. <code>IgnoreMetricsTime</code> allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.</p>",
-                      "min_length": 1,
-                      "max_length": 100,
                       "serialized_name": "IgnoreMetricsTime"
                     },
                     "cpu_threshold": {
@@ -2649,15 +2645,11 @@
                     "thresholds_wait_time": {
                       "type": "integer",
                       "documentation": "<p>The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.</p>",
-                      "min_length": 1,
-                      "max_length": 100,
                       "serialized_name": "ThresholdsWaitTime"
                     },
                     "ignore_metrics_time": {
                       "type": "integer",
                       "documentation": "<p>The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. <code>IgnoreMetricsTime</code> allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.</p>",
-                      "min_length": 1,
-                      "max_length": 100,
                       "serialized_name": "IgnoreMetricsTime"
                     },
                     "cpu_threshold": {

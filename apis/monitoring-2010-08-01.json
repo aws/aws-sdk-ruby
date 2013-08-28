@@ -112,8 +112,6 @@
                 "alarm_name": {
                   "type": "string",
                   "documentation": "<p> The descriptive name for the alarm. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "AlarmName"
                 },
                 "timestamp": {
@@ -134,15 +132,11 @@
                 "history_summary": {
                   "type": "string",
                   "documentation": "<p> A human-readable summary of the alarm history. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "HistorySummary"
                 },
                 "history_data": {
                   "type": "string",
                   "documentation": "<p> Machine-readable data about the alarm in JSON format. </p>",
-                  "min_length": 1,
-                  "max_length": 4095,
                   "serialized_name": "HistoryData"
                 }
               }
@@ -243,22 +237,16 @@
                 "alarm_name": {
                   "type": "string",
                   "documentation": "<p> The name of the alarm. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "AlarmName"
                 },
                 "alarm_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of the alarm. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
                   "serialized_name": "AlarmArn"
                 },
                 "alarm_description": {
                   "type": "string",
                   "documentation": "<p> The description for the alarm. </p>",
-                  "min_length": 0,
-                  "max_length": 255,
                   "serialized_name": "AlarmDescription"
                 },
                 "alarm_configuration_updated_timestamp": {
@@ -274,34 +262,25 @@
                 "ok_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic and triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "OKActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "alarm_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic and triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "AlarmActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "insufficient_data_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic or triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "InsufficientDataActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "state_value": {
@@ -317,15 +296,11 @@
                 "state_reason": {
                   "type": "string",
                   "documentation": "<p> A human-readable explanation for the alarm's state. </p>",
-                  "min_length": 0,
-                  "max_length": 1023,
                   "serialized_name": "StateReason"
                 },
                 "state_reason_data": {
                   "type": "string",
                   "documentation": "<p> An explanation for the alarm's state in machine-readable JSON format </p>",
-                  "min_length": 0,
-                  "max_length": 4000,
                   "serialized_name": "StateReasonData"
                 },
                 "state_updated_timestamp": {
@@ -336,16 +311,11 @@
                 "metric_name": {
                   "type": "string",
                   "documentation": "<p> The name of the alarm's metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "MetricName"
                 },
                 "namespace": {
                   "type": "string",
                   "documentation": "<p> The namespace of alarm's associated metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[^:].*",
                   "serialized_name": "Namespace"
                 },
                 "statistic": {
@@ -363,7 +333,6 @@
                 "dimensions": {
                   "type": "list",
                   "documentation": "<p> The list of dimensions associated with the alarm's associated metric. </p>",
-                  "max_length": 10,
                   "serialized_name": "Dimensions",
                   "members": {
                     "type": "structure",
@@ -372,15 +341,11 @@
                       "name": {
                         "type": "string",
                         "documentation": "<p> The name of the dimension. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Name"
                       },
                       "value": {
                         "type": "string",
                         "documentation": "<p> The value representing the dimension measurement </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Value"
                       }
                     }
@@ -389,7 +354,6 @@
                 "period": {
                   "type": "integer",
                   "documentation": "<p> The period in seconds over which the statistic is applied. </p>",
-                  "min_length": 60,
                   "serialized_name": "Period"
                 },
                 "unit": {
@@ -429,7 +393,6 @@
                 "evaluation_periods": {
                   "type": "integer",
                   "documentation": "<p> The number of periods over which data is compared to the specified threshold. </p>",
-                  "min_length": 1,
                   "serialized_name": "EvaluationPeriods"
                 },
                 "threshold": {
@@ -596,22 +559,16 @@
                 "alarm_name": {
                   "type": "string",
                   "documentation": "<p> The name of the alarm. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "AlarmName"
                 },
                 "alarm_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of the alarm. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
                   "serialized_name": "AlarmArn"
                 },
                 "alarm_description": {
                   "type": "string",
                   "documentation": "<p> The description for the alarm. </p>",
-                  "min_length": 0,
-                  "max_length": 255,
                   "serialized_name": "AlarmDescription"
                 },
                 "alarm_configuration_updated_timestamp": {
@@ -627,34 +584,25 @@
                 "ok_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic and triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "OKActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "alarm_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic and triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "AlarmActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "insufficient_data_actions": {
                   "type": "list",
                   "documentation": "<p> The list of actions to execute when this alarm transitions into an <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Number (ARN). Currently the only actions supported are publishing to an Amazon SNS topic or triggering an Auto Scaling policy. </p>",
-                  "max_length": 5,
                   "serialized_name": "InsufficientDataActions",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1024
+                    "type": "string"
                   }
                 },
                 "state_value": {
@@ -670,15 +618,11 @@
                 "state_reason": {
                   "type": "string",
                   "documentation": "<p> A human-readable explanation for the alarm's state. </p>",
-                  "min_length": 0,
-                  "max_length": 1023,
                   "serialized_name": "StateReason"
                 },
                 "state_reason_data": {
                   "type": "string",
                   "documentation": "<p> An explanation for the alarm's state in machine-readable JSON format </p>",
-                  "min_length": 0,
-                  "max_length": 4000,
                   "serialized_name": "StateReasonData"
                 },
                 "state_updated_timestamp": {
@@ -689,16 +633,11 @@
                 "metric_name": {
                   "type": "string",
                   "documentation": "<p> The name of the alarm's metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "MetricName"
                 },
                 "namespace": {
                   "type": "string",
                   "documentation": "<p> The namespace of alarm's associated metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[^:].*",
                   "serialized_name": "Namespace"
                 },
                 "statistic": {
@@ -716,7 +655,6 @@
                 "dimensions": {
                   "type": "list",
                   "documentation": "<p> The list of dimensions associated with the alarm's associated metric. </p>",
-                  "max_length": 10,
                   "serialized_name": "Dimensions",
                   "members": {
                     "type": "structure",
@@ -725,15 +663,11 @@
                       "name": {
                         "type": "string",
                         "documentation": "<p> The name of the dimension. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Name"
                       },
                       "value": {
                         "type": "string",
                         "documentation": "<p> The value representing the dimension measurement </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Value"
                       }
                     }
@@ -742,7 +676,6 @@
                 "period": {
                   "type": "integer",
                   "documentation": "<p> The period in seconds over which the statistic is applied. </p>",
-                  "min_length": 60,
                   "serialized_name": "Period"
                 },
                 "unit": {
@@ -782,7 +715,6 @@
                 "evaluation_periods": {
                   "type": "integer",
                   "documentation": "<p> The number of periods over which data is compared to the specified threshold. </p>",
-                  "min_length": 1,
                   "serialized_name": "EvaluationPeriods"
                 },
                 "threshold": {
@@ -1185,22 +1117,16 @@
                 "namespace": {
                   "type": "string",
                   "documentation": "<p> The namespace of the metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[^:].*",
                   "serialized_name": "Namespace"
                 },
                 "metric_name": {
                   "type": "string",
                   "documentation": "<p> The name of the metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "MetricName"
                 },
                 "dimensions": {
                   "type": "list",
                   "documentation": "<p> A list of dimensions associated with the metric. </p>",
-                  "max_length": 10,
                   "serialized_name": "Dimensions",
                   "members": {
                     "type": "structure",
@@ -1209,15 +1135,11 @@
                       "name": {
                         "type": "string",
                         "documentation": "<p> The name of the dimension. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Name"
                       },
                       "value": {
                         "type": "string",
                         "documentation": "<p> The value representing the dimension measurement </p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "Value"
                       }
                     }

@@ -293,8 +293,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of events, if there is one.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -614,7 +612,6 @@
                 "notification_ar_ns": {
                   "type": "list",
                   "documentation": "<p>SNS topic ARNs to which stack related events are published.</p>",
-                  "max_length": 5,
                   "serialized_name": "NotificationARNs",
                   "members": {
                     "type": "string"
@@ -623,7 +620,6 @@
                 "timeout_in_minutes": {
                   "type": "integer",
                   "documentation": "<p>The amount of time within which stack creation should complete.</p>",
-                  "min_length": 1,
                   "serialized_name": "TimeoutInMinutes"
                 },
                 "capabilities": {
@@ -689,8 +685,6 @@
           },
           "next_token": {
             "type": "string",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -777,8 +771,6 @@
           "template_body": {
             "type": "string",
             "documentation": "<p>Structure containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/\">AWS CloudFormation User Guide</a>.)</p>",
-            "min_length": 1,
-            "max_length": 51200,
             "serialized_name": "TemplateBody"
           }
         }
@@ -867,8 +859,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of events, if there is one.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -994,8 +984,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of stacks, if there is one.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }

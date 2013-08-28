@@ -212,7 +212,6 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "status": {
@@ -232,7 +231,6 @@
               "comment": {
                 "type": "string",
                 "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
-                "max_length": 256,
                 "serialized_name": "Comment"
               }
             }
@@ -374,14 +372,11 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the specified health check.</p>",
-                "max_length": 64,
                 "serialized_name": "Id"
               },
               "caller_reference": {
                 "type": "string",
                 "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "CallerReference"
               },
               "health_check_config": {
@@ -392,15 +387,11 @@
                   "ip_address": {
                     "type": "string",
                     "documentation": "<p>IP Address of the instance being checked. </p>",
-                    "max_length": 15,
-                    "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
                     "serialized_name": "IPAddress"
                   },
                   "port": {
                     "type": "integer",
                     "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
-                    "min_length": 1,
-                    "max_length": 65535,
                     "serialized_name": "Port"
                   },
                   "type": {
@@ -415,13 +406,11 @@
                   "resource_path": {
                     "type": "string",
                     "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
-                    "max_length": 255,
                     "serialized_name": "ResourcePath"
                   },
                   "fully_qualified_domain_name": {
                     "type": "string",
                     "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
-                    "max_length": 255,
                     "serialized_name": "FullyQualifiedDomainName"
                   }
                 }
@@ -432,7 +421,6 @@
             "type": "string",
             "documentation": "<p>The unique URL representing the new health check.</p>",
             "location": "header",
-            "max_length": 1024,
             "serialized_name": "Location"
           }
         }
@@ -522,20 +510,16 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the specified hosted zone.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "name": {
                 "type": "string",
                 "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
-                "max_length": 1024,
                 "serialized_name": "Name"
               },
               "caller_reference": {
                 "type": "string",
                 "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
-                "min_length": 1,
-                "max_length": 128,
                 "serialized_name": "CallerReference"
               },
               "config": {
@@ -546,7 +530,6 @@
                   "comment": {
                     "type": "string",
                     "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
-                    "max_length": 256,
                     "serialized_name": "Comment"
                   }
                 }
@@ -566,7 +549,6 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "status": {
@@ -586,7 +568,6 @@
               "comment": {
                 "type": "string",
                 "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
-                "max_length": 256,
                 "serialized_name": "Comment"
               }
             }
@@ -599,11 +580,9 @@
               "name_servers": {
                 "type": "list",
                 "documentation": "<p>A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each <code>NameServer</code> that is assigned to your hosted zone.</p>",
-                "min_length": 1,
                 "serialized_name": "NameServers",
                 "members": {
                   "type": "string",
-                  "max_length": 1024,
                   "serialized_name": "NameServer"
                 }
               }
@@ -613,7 +592,6 @@
             "type": "string",
             "documentation": "<p>The unique URL representing the new hosted zone.</p>",
             "location": "header",
-            "max_length": 1024,
             "serialized_name": "Location"
           }
         }
@@ -768,7 +746,6 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "status": {
@@ -788,7 +765,6 @@
               "comment": {
                 "type": "string",
                 "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
-                "max_length": 256,
                 "serialized_name": "Comment"
               }
             }
@@ -870,7 +846,6 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "status": {
@@ -890,7 +865,6 @@
               "comment": {
                 "type": "string",
                 "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
-                "max_length": 256,
                 "serialized_name": "Comment"
               }
             }
@@ -951,14 +925,11 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the specified health check.</p>",
-                "max_length": 64,
                 "serialized_name": "Id"
               },
               "caller_reference": {
                 "type": "string",
                 "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "CallerReference"
               },
               "health_check_config": {
@@ -969,15 +940,11 @@
                   "ip_address": {
                     "type": "string",
                     "documentation": "<p>IP Address of the instance being checked. </p>",
-                    "max_length": 15,
-                    "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
                     "serialized_name": "IPAddress"
                   },
                   "port": {
                     "type": "integer",
                     "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
-                    "min_length": 1,
-                    "max_length": 65535,
                     "serialized_name": "Port"
                   },
                   "type": {
@@ -992,13 +959,11 @@
                   "resource_path": {
                     "type": "string",
                     "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
-                    "max_length": 255,
                     "serialized_name": "ResourcePath"
                   },
                   "fully_qualified_domain_name": {
                     "type": "string",
                     "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
-                    "max_length": 255,
                     "serialized_name": "FullyQualifiedDomainName"
                   }
                 }
@@ -1063,20 +1028,16 @@
               "id": {
                 "type": "string",
                 "documentation": "<p>The ID of the specified hosted zone.</p>",
-                "max_length": 32,
                 "serialized_name": "Id"
               },
               "name": {
                 "type": "string",
                 "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
-                "max_length": 1024,
                 "serialized_name": "Name"
               },
               "caller_reference": {
                 "type": "string",
                 "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
-                "min_length": 1,
-                "max_length": 128,
                 "serialized_name": "CallerReference"
               },
               "config": {
@@ -1087,7 +1048,6 @@
                   "comment": {
                     "type": "string",
                     "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
-                    "max_length": 256,
                     "serialized_name": "Comment"
                   }
                 }
@@ -1107,11 +1067,9 @@
               "name_servers": {
                 "type": "list",
                 "documentation": "<p>A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each <code>NameServer</code> that is assigned to your hosted zone.</p>",
-                "min_length": 1,
                 "serialized_name": "NameServers",
                 "members": {
                   "type": "string",
-                  "max_length": 1024,
                   "serialized_name": "NameServer"
                 }
               }
@@ -1182,14 +1140,11 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The ID of the specified health check.</p>",
-                  "max_length": 64,
                   "serialized_name": "Id"
                 },
                 "caller_reference": {
                   "type": "string",
                   "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
                   "serialized_name": "CallerReference"
                 },
                 "health_check_config": {
@@ -1200,15 +1155,11 @@
                     "ip_address": {
                       "type": "string",
                       "documentation": "<p>IP Address of the instance being checked. </p>",
-                      "max_length": 15,
-                      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
                       "serialized_name": "IPAddress"
                     },
                     "port": {
                       "type": "integer",
                       "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
-                      "min_length": 1,
-                      "max_length": 65535,
                       "serialized_name": "Port"
                     },
                     "type": {
@@ -1223,13 +1174,11 @@
                     "resource_path": {
                       "type": "string",
                       "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
-                      "max_length": 255,
                       "serialized_name": "ResourcePath"
                     },
                     "fully_qualified_domain_name": {
                       "type": "string",
                       "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
-                      "max_length": 255,
                       "serialized_name": "FullyQualifiedDomainName"
                     }
                   }
@@ -1240,7 +1189,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
-            "max_length": 64,
             "serialized_name": "Marker"
           },
           "is_truncated": {
@@ -1251,7 +1199,6 @@
           "next_marker": {
             "type": "string",
             "documentation": "<p> Indicates where to continue listing health checks. If ListHealthChecksResponse$IsTruncated is <code>true</code>, make another request to <code>ListHealthChecks</code> and include the value of the <code>NextMarker</code> element in the <code>Marker</code> element to get the next page of results.</p>",
-            "max_length": 64,
             "serialized_name": "NextMarker"
           },
           "max_items": {
@@ -1315,20 +1262,16 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The ID of the specified hosted zone.</p>",
-                  "max_length": 32,
                   "serialized_name": "Id"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
-                  "max_length": 1024,
                   "serialized_name": "Name"
                 },
                 "caller_reference": {
                   "type": "string",
                   "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
                   "serialized_name": "CallerReference"
                 },
                 "config": {
@@ -1339,7 +1282,6 @@
                     "comment": {
                       "type": "string",
                       "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
-                      "max_length": 256,
                       "serialized_name": "Comment"
                     }
                   }
@@ -1355,7 +1297,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
-            "max_length": 64,
             "serialized_name": "Marker"
           },
           "is_truncated": {
@@ -1366,7 +1307,6 @@
           "next_marker": {
             "type": "string",
             "documentation": "<p> Indicates where to continue listing hosted zones. If ListHostedZonesResponse$IsTruncated is <code>true</code>, make another request to <code>ListHostedZones</code> and include the value of the <code>NextMarker</code> element in the <code>Marker</code> element to get the next page of results.</p>",
-            "max_length": 64,
             "serialized_name": "NextMarker"
           },
           "max_items": {
@@ -1464,7 +1404,6 @@
                 "name": {
                   "type": "string",
                   "documentation": "<p>The domain name of the current resource record set.</p>",
-                  "max_length": 1024,
                   "serialized_name": "Name"
                 },
                 "type": {
@@ -1487,22 +1426,16 @@
                 "set_identifier": {
                   "type": "string",
                   "documentation": "<p><i>Weighted, Regional, and Failover resource record sets only:</i> An identifier that differentiates among multiple resource record sets that have the same combination of DNS name and type.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
                   "serialized_name": "SetIdentifier"
                 },
                 "weight": {
                   "type": "integer",
                   "documentation": "<p><i>Weighted resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that determines what portion of traffic for the current resource record set is routed to the associated location.</p>",
-                  "min_length": 0,
-                  "max_length": 255,
                   "serialized_name": "Weight"
                 },
                 "region": {
                   "type": "string",
                   "documentation": "<p><i>Regional resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that specifies the AWS region for the current resource record set.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
                   "serialized_name": "Region",
                   "enum": [
                     "us-east-1",
@@ -1527,14 +1460,11 @@
                 "ttl": {
                   "type": "integer",
                   "documentation": "<p>The cache time to live for the current resource record set.</p>",
-                  "min_length": 0,
-                  "max_length": 2147483647,
                   "serialized_name": "TTL"
                 },
                 "resource_records": {
                   "type": "list",
                   "documentation": "<p>A complex type that contains the resource records for the current resource record set.</p>",
-                  "min_length": 1,
                   "serialized_name": "ResourceRecords",
                   "members": {
                     "type": "structure",
@@ -1544,7 +1474,6 @@
                       "value": {
                         "type": "string",
                         "documentation": "<p>The value of the <code>Value</code> element for the current resource record set.</p>",
-                        "max_length": 4000,
                         "serialized_name": "Value"
                       }
                     }
@@ -1558,13 +1487,11 @@
                     "hosted_zone_id": {
                       "type": "string",
                       "documentation": "<p><i>Alias resource record sets only:</i> The value of the hosted zone ID for the AWS resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
-                      "max_length": 32,
                       "serialized_name": "HostedZoneId"
                     },
                     "dns_name": {
                       "type": "string",
                       "documentation": "<p><i>Alias resource record sets only:</i> The external DNS name associated with the AWS Resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
-                      "max_length": 1024,
                       "serialized_name": "DNSName"
                     },
                     "evaluate_target_health": {
@@ -1577,7 +1504,6 @@
                 "health_check_id": {
                   "type": "string",
                   "documentation": "<p><i>Health Check resource record sets only, not required for alias resource record sets:</i> An identifier that is used to identify health check associated with the resource record set.</p>",
-                  "max_length": 64,
                   "serialized_name": "HealthCheckId"
                 }
               }
@@ -1591,7 +1517,6 @@
           "next_record_name": {
             "type": "string",
             "documentation": "<p>If the results were truncated, the name of the next record in the list. This element is present only if ListResourceRecordSetsResponse$IsTruncated is true. </p>",
-            "max_length": 1024,
             "serialized_name": "NextRecordName"
           },
           "next_record_type": {
@@ -1614,8 +1539,6 @@
           "next_record_identifier": {
             "type": "string",
             "documentation": "<p><i>Weighted resource record sets only:</i> If results were truncated for a given DNS name and type, the value of <code>SetIdentifier</code> for the next resource record set that has the current DNS name and type.</p>",
-            "min_length": 1,
-            "max_length": 128,
             "serialized_name": "NextRecordIdentifier"
           },
           "max_items": {

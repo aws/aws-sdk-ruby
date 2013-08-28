@@ -550,7 +550,6 @@
                       },
                       "items": {
                         "type": "list",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",
@@ -2021,7 +2020,6 @@
                       },
                       "items": {
                         "type": "list",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",
@@ -2318,7 +2316,6 @@
                   },
                   "items": {
                     "type": "list",
-                    "min_length": 1,
                     "serialized_name": "Items",
                     "members": {
                       "type": "structure",
@@ -3197,7 +3194,6 @@
                         },
                         "items": {
                           "type": "list",
-                          "min_length": 1,
                           "serialized_name": "Items",
                           "members": {
                             "type": "structure",
@@ -4241,7 +4237,6 @@
                       },
                       "items": {
                         "type": "list",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",

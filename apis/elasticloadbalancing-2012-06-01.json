@@ -217,29 +217,21 @@
               "interval": {
                 "type": "integer",
                 "documentation": "<p> Specifies the approximate interval, in seconds, between health checks of an individual instance. </p>",
-                "min_length": 1,
-                "max_length": 300,
                 "serialized_name": "Interval"
               },
               "timeout": {
                 "type": "integer",
                 "documentation": "<p> Specifies the amount of time, in seconds, during which no response means a failed health probe. </p> This value must be less than the <i>Interval</i> value.",
-                "min_length": 1,
-                "max_length": 300,
                 "serialized_name": "Timeout"
               },
               "unhealthy_threshold": {
                 "type": "integer",
                 "documentation": "<p> Specifies the number of consecutive health probe failures required before moving the instance to the <i>Unhealthy</i> state. </p>",
-                "min_length": 2,
-                "max_length": 10,
                 "serialized_name": "UnhealthyThreshold"
               },
               "healthy_threshold": {
                 "type": "integer",
                 "documentation": "<p> Specifies the number of consecutive health probe successes required before moving the instance to the <i>Healthy</i> state. </p>",
-                "min_length": 2,
-                "max_length": 10,
                 "serialized_name": "HealthyThreshold"
               }
             }
@@ -1236,8 +1228,6 @@
                           "instance_port": {
                             "type": "integer",
                             "documentation": "<p> Specifies the TCP port on which the instance server is listening. This property cannot be modified for the life of the LoadBalancer. </p>",
-                            "min_length": 1,
-                            "max_length": 65535,
                             "serialized_name": "InstancePort"
                           },
                           "ssl_certificate_id": {
@@ -1326,8 +1316,6 @@
                       "instance_port": {
                         "type": "integer",
                         "documentation": "<p> Provides the port on which the back-end server is listening. </p>",
-                        "min_length": 1,
-                        "max_length": 65535,
                         "serialized_name": "InstancePort"
                       },
                       "policy_names": {
@@ -1391,29 +1379,21 @@
                     "interval": {
                       "type": "integer",
                       "documentation": "<p> Specifies the approximate interval, in seconds, between health checks of an individual instance. </p>",
-                      "min_length": 1,
-                      "max_length": 300,
                       "serialized_name": "Interval"
                     },
                     "timeout": {
                       "type": "integer",
                       "documentation": "<p> Specifies the amount of time, in seconds, during which no response means a failed health probe. </p> This value must be less than the <i>Interval</i> value.",
-                      "min_length": 1,
-                      "max_length": 300,
                       "serialized_name": "Timeout"
                     },
                     "unhealthy_threshold": {
                       "type": "integer",
                       "documentation": "<p> Specifies the number of consecutive health probe failures required before moving the instance to the <i>Unhealthy</i> state. </p>",
-                      "min_length": 2,
-                      "max_length": 10,
                       "serialized_name": "UnhealthyThreshold"
                     },
                     "healthy_threshold": {
                       "type": "integer",
                       "documentation": "<p> Specifies the number of consecutive health probe successes required before moving the instance to the <i>Healthy</i> state. </p>",
-                      "min_length": 2,
-                      "max_length": 10,
                       "serialized_name": "HealthyThreshold"
                     }
                   }

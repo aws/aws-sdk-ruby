@@ -127,9 +127,6 @@
           "pipeline_id": {
             "type": "string",
             "documentation": "<p>The ID that AWS Data Pipeline assigns the newly created pipeline. The ID is a string of the form: df-06372391ZG65EXAMPLE.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           }
         }
@@ -275,17 +272,11 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>Identifier of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>Name of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 },
                 "fields": {
@@ -299,25 +290,16 @@
                       "key": {
                         "type": "string",
                         "documentation": "<p>The field identifier.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "key"
                       },
                       "string_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as a String.</p>",
-                        "min_length": 0,
-                        "max_length": 10240,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "stringValue"
                       },
                       "ref_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "refValue"
                       }
                     }
@@ -329,9 +311,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p> The starting point for the next page of results. To view the next page of results, call DescribeObjects again with this marker value. </p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           },
           "has_more_results": {
@@ -426,17 +405,11 @@
                 "pipeline_id": {
                   "type": "string",
                   "documentation": "<p>The pipeline identifier that was assigned by AWS Data Pipeline. This is a string of the form <code>df-297EG78HU43EEXAMPLE</code>.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "pipelineId"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>Name of the pipeline.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 },
                 "fields": {
@@ -450,25 +423,16 @@
                       "key": {
                         "type": "string",
                         "documentation": "<p>The field identifier.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "key"
                       },
                       "string_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as a String.</p>",
-                        "min_length": 0,
-                        "max_length": 10240,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "stringValue"
                       },
                       "ref_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "refValue"
                       }
                     }
@@ -477,9 +441,6 @@
                 "description": {
                   "type": "string",
                   "documentation": "<p>Description of the pipeline.</p>",
-                  "min_length": 0,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "description"
                 }
               }
@@ -579,9 +540,6 @@
           "evaluated_expression": {
             "type": "string",
             "documentation": "<p>The evaluated expression.</p>",
-            "min_length": 0,
-            "max_length": 20971520,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "evaluatedExpression"
           }
         }
@@ -687,17 +645,11 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>Identifier of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>Name of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 },
                 "fields": {
@@ -711,25 +663,16 @@
                       "key": {
                         "type": "string",
                         "documentation": "<p>The field identifier.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "key"
                       },
                       "string_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as a String.</p>",
-                        "min_length": 0,
-                        "max_length": 10240,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "stringValue"
                       },
                       "ref_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "refValue"
                       }
                     }
@@ -821,17 +764,11 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>Identifier of the pipeline that was assigned by AWS Data Pipeline. This is a string of the form <code>df-297EG78HU43EEXAMPLE</code>.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>Name of the pipeline.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 }
               }
@@ -840,9 +777,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If not null, indicates the starting point for the set of pipeline identifiers that the next call to ListPipelines will retrieve. If null, there are no more pipeline identifiers.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           },
           "has_more_results": {
@@ -940,25 +874,16 @@
               "task_id": {
                 "type": "string",
                 "documentation": "<p>An internal identifier for the task. This ID is passed to the SetTaskStatus and ReportTaskProgress actions.</p>",
-                "min_length": 1,
-                "max_length": 2048,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "taskId"
               },
               "pipeline_id": {
                 "type": "string",
                 "documentation": "<p>Identifier of the pipeline that provided the task.</p>",
-                "min_length": 1,
-                "max_length": 1024,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "pipelineId"
               },
               "attempt_id": {
                 "type": "string",
                 "documentation": "<p>Identifier of the pipeline task attempt object. AWS Data Pipeline uses this value to track how many times a task is attempted.</p>",
-                "min_length": 1,
-                "max_length": 1024,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "attemptId"
               },
               "objects": {
@@ -966,10 +891,7 @@
                 "documentation": "<p>Connection information for the location where the task runner will publish the output of the task.</p>",
                 "serialized_name": "objects",
                 "keys": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  "type": "string"
                 },
                 "members": {
                   "type": "structure",
@@ -978,17 +900,11 @@
                     "id": {
                       "type": "string",
                       "documentation": "<p>Identifier of the object.</p>",
-                      "min_length": 1,
-                      "max_length": 1024,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "id"
                     },
                     "name": {
                       "type": "string",
                       "documentation": "<p>Name of the object.</p>",
-                      "min_length": 1,
-                      "max_length": 1024,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "name"
                     },
                     "fields": {
@@ -1002,25 +918,16 @@
                           "key": {
                             "type": "string",
                             "documentation": "<p>The field identifier.</p>",
-                            "min_length": 1,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "key"
                           },
                           "string_value": {
                             "type": "string",
                             "documentation": "<p>The field value, expressed as a String.</p>",
-                            "min_length": 0,
-                            "max_length": 10240,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "stringValue"
                           },
                           "ref_value": {
                             "type": "string",
                             "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                            "min_length": 1,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "refValue"
                           }
                         }
@@ -1171,9 +1078,6 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The identifier of the object that contains the validation error.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "errors": {
@@ -1181,10 +1085,7 @@
                   "documentation": "<p>A description of the validation error.</p>",
                   "serialized_name": "errors",
                   "members": {
-                    "type": "string",
-                    "min_length": 0,
-                    "max_length": 10000,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 }
               }
@@ -1201,9 +1102,6 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The identifier of the object that contains the validation warning.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "warnings": {
@@ -1211,10 +1109,7 @@
                   "documentation": "<p>A description of the validation warning.</p>",
                   "serialized_name": "warnings",
                   "members": {
-                    "type": "string",
-                    "min_length": 0,
-                    "max_length": 10000,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 }
               }
@@ -1381,18 +1276,12 @@
             "documentation": "<p>A list of identifiers that match the query selectors.</p>",
             "serialized_name": "ids",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 1024,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           },
           "marker": {
             "type": "string",
             "documentation": "<p> The starting point for the results to be returned. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call QueryObjects again and pass the marker value from the response to retrieve the next set of results. </p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           },
           "has_more_results": {
@@ -1916,9 +1805,6 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The identifier of the object that contains the validation error.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "errors": {
@@ -1926,10 +1812,7 @@
                   "documentation": "<p>A description of the validation error.</p>",
                   "serialized_name": "errors",
                   "members": {
-                    "type": "string",
-                    "min_length": 0,
-                    "max_length": 10000,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 }
               }
@@ -1946,9 +1829,6 @@
                 "id": {
                   "type": "string",
                   "documentation": "<p>The identifier of the object that contains the validation warning.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "warnings": {
@@ -1956,10 +1836,7 @@
                   "documentation": "<p>A description of the validation warning.</p>",
                   "serialized_name": "warnings",
                   "members": {
-                    "type": "string",
-                    "min_length": 0,
-                    "max_length": 10000,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 }
               }

@@ -1159,8 +1159,7 @@
                     "date": {
                       "type": "timestamp",
                       "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
-                      "serialized_name": "Date",
-                      "timestamp_format": "iso8601"
+                      "serialized_name": "Date"
                     },
                     "storage_class": {
                       "type": "string",
@@ -1186,8 +1185,7 @@
                     "date": {
                       "type": "timestamp",
                       "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
-                      "serialized_name": "Date",
-                      "timestamp_format": "iso8601"
+                      "serialized_name": "Date"
                     }
                   }
                 }

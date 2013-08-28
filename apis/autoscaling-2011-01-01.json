@@ -737,9 +737,6 @@
                 "adjustment_type": {
                   "type": "string",
                   "documentation": "<p>A policy adjustment type. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AdjustmentType"
                 }
               }
@@ -798,25 +795,16 @@
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> Specifies the name of the group. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "auto_scaling_group_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of the Auto Scaling group. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupARN"
                 },
                 "launch_configuration_name": {
                   "type": "string",
                   "documentation": "<p> Specifies the name of the associated LaunchConfiguration. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LaunchConfigurationName"
                 },
                 "min_size": {
@@ -842,13 +830,9 @@
                 "availability_zones": {
                   "type": "list",
                   "documentation": "<p> Contains a list of Availability Zones for the group. </p>",
-                  "min_length": 1,
                   "serialized_name": "AvailabilityZones",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 255,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 },
                 "load_balancer_names": {
@@ -856,18 +840,12 @@
                   "documentation": "<p> A list of load balancers associated with this Auto Scaling group. </p>",
                   "serialized_name": "LoadBalancerNames",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 255,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 },
                 "health_check_type": {
                   "type": "string",
                   "documentation": "<p> The service of interest for the health status check, either \"EC2\" for Amazon EC2 or \"ELB\" for Elastic Load Balancing. </p>",
-                  "min_length": 1,
-                  "max_length": 32,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "HealthCheckType"
                 },
                 "health_check_grace_period": {
@@ -886,17 +864,11 @@
                       "instance_id": {
                         "type": "string",
                         "documentation": "<p> Specifies the ID of the Amazon EC2 instance. </p>",
-                        "min_length": 1,
-                        "max_length": 16,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "InstanceId"
                       },
                       "availability_zone": {
                         "type": "string",
                         "documentation": "<p> Availability Zones associated with this instance. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "AvailabilityZone"
                       },
                       "lifecycle_state": {
@@ -914,17 +886,11 @@
                       "health_status": {
                         "type": "string",
                         "documentation": "<p> The instance's health status. </p>",
-                        "min_length": 1,
-                        "max_length": 32,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "HealthStatus"
                       },
                       "launch_configuration_name": {
                         "type": "string",
                         "documentation": "<p> The launch configuration associated with this instance. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "LaunchConfigurationName"
                       }
                     }
@@ -946,17 +912,11 @@
                       "process_name": {
                         "type": "string",
                         "documentation": "<p> The name of the suspended process. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "ProcessName"
                       },
                       "suspension_reason": {
                         "type": "string",
                         "documentation": "<p> The reason that the process was suspended. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "SuspensionReason"
                       }
                     }
@@ -965,17 +925,11 @@
                 "placement_group": {
                   "type": "string",
                   "documentation": "<p> The name of the cluster placement group, if applicable. For more information, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\"> Using Cluster Instances</a> in the Amazon EC2 User Guide. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "PlacementGroup"
                 },
                 "vpc_zone_identifier": {
                   "type": "string",
                   "documentation": "<p> The subnet identifier for the Amazon VPC connection, if applicable. You can specify several subnets in a comma-separated list. </p> <p> When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "VPCZoneIdentifier"
                 },
                 "enabled_metrics": {
@@ -989,17 +943,11 @@
                       "metric": {
                         "type": "string",
                         "documentation": "<p> The name of the enabled metric. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "Metric"
                       },
                       "granularity": {
                         "type": "string",
                         "documentation": "<p> The granularity of the enabled metric. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "Granularity"
                       }
                     }
@@ -1008,9 +956,6 @@
                 "status": {
                   "type": "string",
                   "documentation": "<p> A list of status conditions for the Auto Scaling group. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Status"
                 },
                 "tags": {
@@ -1024,29 +969,21 @@
                       "resource_id": {
                         "type": "string",
                         "documentation": "<p> The name of the Auto Scaling group. </p>",
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "ResourceId"
                       },
                       "resource_type": {
                         "type": "string",
                         "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "ResourceType"
                       },
                       "key": {
                         "type": "string",
                         "documentation": "<p> The key of the tag. </p>",
-                        "min_length": 1,
-                        "max_length": 128,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "Key"
                       },
                       "value": {
                         "type": "string",
                         "documentation": "<p> The value of the tag. </p>",
-                        "min_length": 0,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "Value"
                       },
                       "propagate_at_launch": {
@@ -1062,10 +999,7 @@
                   "documentation": "<p> A standalone termination policy or a list of termination policies for this Auto Scaling group. </p>",
                   "serialized_name": "TerminationPolicies",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 1600,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 }
               }
@@ -1074,7 +1008,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1145,49 +1078,31 @@
                 "instance_id": {
                   "type": "string",
                   "documentation": "<p> The instance ID of the Amazon EC2 instance. </p>",
-                  "min_length": 1,
-                  "max_length": 16,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "InstanceId"
                 },
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> The name of the Auto Scaling group associated with this instance. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "availability_zone": {
                   "type": "string",
                   "documentation": "<p> The Availability Zone in which this instance resides. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AvailabilityZone"
                 },
                 "lifecycle_state": {
                   "type": "string",
                   "documentation": "<p> The life cycle state of this instance. </p>",
-                  "min_length": 1,
-                  "max_length": 32,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LifecycleState"
                 },
                 "health_status": {
                   "type": "string",
                   "documentation": "<p> The health status of this instance. \"Healthy\" means that the instance is healthy and should remain in service. \"Unhealthy\" means that the instance is unhealthy. Auto Scaling should terminate and replace it. </p>",
-                  "min_length": 1,
-                  "max_length": 32,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "HealthStatus"
                 },
                 "launch_configuration_name": {
                   "type": "string",
                   "documentation": "<p> The launch configuration associated with this instance. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LaunchConfigurationName"
                 }
               }
@@ -1196,7 +1111,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1232,10 +1146,7 @@
             "documentation": "<p> Notification types supported by Auto Scaling. They are: autoscaling:EC2_INSTANCE_LAUNCH, autoscaling:EC2_INSTANCE_LAUNCH_ERROR, autoscaling:EC2_INSTANCE_TERMINATE, autoscaling:EC2_INSTANCE_TERMINATE_ERROR, autoscaling:TEST_NOTIFICATION </p>",
             "serialized_name": "AutoScalingNotificationTypes",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 255,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           }
         }
@@ -1291,33 +1202,21 @@
                 "launch_configuration_name": {
                   "type": "string",
                   "documentation": "<p> Specifies the name of the launch configuration. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LaunchConfigurationName"
                 },
                 "launch_configuration_arn": {
                   "type": "string",
                   "documentation": "<p> The launch configuration's Amazon Resource Name (ARN). </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LaunchConfigurationARN"
                 },
                 "image_id": {
                   "type": "string",
                   "documentation": "<p> Provides the unique ID of the <i>Amazon Machine Image</i> (AMI) that was assigned during registration. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ImageId"
                 },
                 "key_name": {
                   "type": "string",
                   "documentation": "<p> Provides the name of the Amazon EC2 key pair. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "KeyName"
                 },
                 "security_groups": {
@@ -1325,39 +1224,27 @@
                   "documentation": "<p> A description of the security groups to associate with the Amazon EC2 instances. </p>",
                   "serialized_name": "SecurityGroups",
                   "members": {
-                    "type": "string",
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 },
                 "user_data": {
                   "type": "string",
                   "documentation": "<p> The user data available to the launched Amazon EC2 instances. </p>",
-                  "max_length": 21847,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "UserData"
                 },
                 "instance_type": {
                   "type": "string",
                   "documentation": "<p> Specifies the instance type of the Amazon EC2 instance. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "InstanceType"
                 },
                 "kernel_id": {
                   "type": "string",
                   "documentation": "<p> Provides the ID of the kernel associated with the Amazon EC2 AMI. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "KernelId"
                 },
                 "ramdisk_id": {
                   "type": "string",
                   "documentation": "<p> Provides ID of the RAM disk associated with the Amazon EC2 AMI. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "RamdiskId"
                 },
                 "block_device_mappings": {
@@ -1371,17 +1258,11 @@
                       "virtual_name": {
                         "type": "string",
                         "documentation": "<p>The virtual name associated with the device. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "VirtualName"
                       },
                       "device_name": {
                         "type": "string",
                         "documentation": "<p> The name of the device within Amazon EC2. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "DeviceName"
                       },
                       "ebs": {
@@ -1392,16 +1273,11 @@
                           "snapshot_id": {
                             "type": "string",
                             "documentation": "<p> The snapshot ID. </p>",
-                            "min_length": 1,
-                            "max_length": 255,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "SnapshotId"
                           },
                           "volume_size": {
                             "type": "integer",
                             "documentation": "<p> The volume size, in gigabytes. </p>",
-                            "min_length": 1,
-                            "max_length": 1024,
                             "serialized_name": "VolumeSize"
                           }
                         }
@@ -1424,16 +1300,11 @@
                 "spot_price": {
                   "type": "string",
                   "documentation": "<p>Specifies the price to bid when launching Spot Instances.</p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "SpotPrice"
                 },
                 "iam_instance_profile": {
                   "type": "string",
                   "documentation": "<p>Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "IamInstanceProfile"
                 },
                 "created_time": {
@@ -1452,7 +1323,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1493,9 +1363,6 @@
               "members": {
                 "metric": {
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Metric"
                 }
               }
@@ -1512,9 +1379,6 @@
                 "granularity": {
                   "type": "string",
                   "documentation": "<p> The granularity of a Metric. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Granularity"
                 }
               }
@@ -1572,25 +1436,16 @@
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> Specifies the Auto Scaling group name. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "topic_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "TopicARN"
                 },
                 "notification_type": {
                   "type": "string",
                   "documentation": "<p> The types of events for an action to start. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "NotificationType"
                 }
               }
@@ -1599,7 +1454,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>A string that is used to mark the start of the next batch of returned results for pagination.</p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1678,17 +1532,11 @@
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> The name of the Auto Scaling group associated with this scaling policy. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "policy_name": {
                   "type": "string",
                   "documentation": "<p> The name of the scaling policy. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "PolicyName"
                 },
                 "scaling_adjustment": {
@@ -1699,9 +1547,6 @@
                 "adjustment_type": {
                   "type": "string",
                   "documentation": "<p> Specifies whether the <code>ScalingAdjustment</code> is an absolute number or a percentage of the current capacity. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AdjustmentType"
                 },
                 "cooldown": {
@@ -1712,9 +1557,6 @@
                 "policy_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of the policy. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "PolicyARN"
                 },
                 "alarms": {
@@ -1728,17 +1570,11 @@
                       "alarm_name": {
                         "type": "string",
                         "documentation": "<p>The name of the alarm.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "AlarmName"
                       },
                       "alarm_arn": {
                         "type": "string",
                         "documentation": "<p>The Amazon Resource Name (ARN) of the alarm.</p>",
-                        "min_length": 1,
-                        "max_length": 1600,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "AlarmARN"
                       }
                     }
@@ -1755,7 +1591,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1833,29 +1668,21 @@
                 "activity_id": {
                   "type": "string",
                   "documentation": "<p> Specifies the ID of the activity. </p>",
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ActivityId"
                 },
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> The name of the Auto Scaling group. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "description": {
                   "type": "string",
                   "documentation": "<p> Contains a friendly, more verbose description of the scaling activity. </p>",
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Description"
                 },
                 "cause": {
                   "type": "string",
                   "documentation": "<p> Contains the reason the activity was begun. </p>",
-                  "min_length": 1,
-                  "max_length": 1023,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Cause"
                 },
                 "start_time": {
@@ -1886,9 +1713,6 @@
                 "status_message": {
                   "type": "string",
                   "documentation": "<p> Contains a friendly, more verbose description of the activity status. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "StatusMessage"
                 },
                 "progress": {
@@ -1899,7 +1723,6 @@
                 "details": {
                   "type": "string",
                   "documentation": "<p> Contains details of the scaling activity. </p>",
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Details"
                 }
               }
@@ -1908,7 +1731,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> Acts as a paging mechanism for large result sets. Set to a non-empty string if there are additional results waiting to be returned. Pass this in to subsequent calls to return additional results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -1950,9 +1772,6 @@
                 "process_name": {
                   "type": "string",
                   "documentation": "<p> The name of a process. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ProcessName"
                 }
               }
@@ -2028,25 +1847,16 @@
                 "auto_scaling_group_name": {
                   "type": "string",
                   "documentation": "<p> The name of the Auto Scaling group to be updated. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AutoScalingGroupName"
                 },
                 "scheduled_action_name": {
                   "type": "string",
                   "documentation": "<p> The name of this scheduled action. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ScheduledActionName"
                 },
                 "scheduled_action_arn": {
                   "type": "string",
                   "documentation": "<p> The Amazon Resource Name (ARN) of this scheduled action. </p>",
-                  "min_length": 1,
-                  "max_length": 1600,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ScheduledActionARN"
                 },
                 "time": {
@@ -2067,9 +1877,6 @@
                 "recurrence": {
                   "type": "string",
                   "documentation": "<p> The regular schedule that an action occurs. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Recurrence"
                 },
                 "min_size": {
@@ -2093,7 +1900,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -2180,29 +1986,21 @@
                 "resource_id": {
                   "type": "string",
                   "documentation": "<p> The name of the Auto Scaling group. </p>",
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ResourceId"
                 },
                 "resource_type": {
                   "type": "string",
                   "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "ResourceType"
                 },
                 "key": {
                   "type": "string",
                   "documentation": "<p> The key of the tag. </p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Key"
                 },
                 "value": {
                   "type": "string",
                   "documentation": "<p> The value of the tag. </p>",
-                  "min_length": 0,
-                  "max_length": 256,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Value"
                 },
                 "propagate_at_launch": {
@@ -2216,7 +2014,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p> A string used to mark the start of the next batch of returned results. </p>",
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "NextToken"
           }
         }
@@ -2252,10 +2049,7 @@
             "documentation": "<p> Termination policies supported by Auto Scaling. They are: <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, <code>Default</code> </p>",
             "serialized_name": "TerminationPolicyTypes",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 1600,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           }
         }
@@ -2498,9 +2292,6 @@
           "policy_arn": {
             "type": "string",
             "documentation": "<p> A policy's Amazon Resource Name (ARN). </p>",
-            "min_length": 1,
-            "max_length": 1600,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "PolicyARN"
           }
         }
@@ -2801,29 +2592,21 @@
               "activity_id": {
                 "type": "string",
                 "documentation": "<p> Specifies the ID of the activity. </p>",
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "ActivityId"
               },
               "auto_scaling_group_name": {
                 "type": "string",
                 "documentation": "<p> The name of the Auto Scaling group. </p>",
-                "min_length": 1,
-                "max_length": 255,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "AutoScalingGroupName"
               },
               "description": {
                 "type": "string",
                 "documentation": "<p> Contains a friendly, more verbose description of the scaling activity. </p>",
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "Description"
               },
               "cause": {
                 "type": "string",
                 "documentation": "<p> Contains the reason the activity was begun. </p>",
-                "min_length": 1,
-                "max_length": 1023,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "Cause"
               },
               "start_time": {
@@ -2854,9 +2637,6 @@
               "status_message": {
                 "type": "string",
                 "documentation": "<p> Contains a friendly, more verbose description of the activity status. </p>",
-                "min_length": 1,
-                "max_length": 255,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "StatusMessage"
               },
               "progress": {
@@ -2867,7 +2647,6 @@
               "details": {
                 "type": "string",
                 "documentation": "<p> Contains details of the scaling activity. </p>",
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "Details"
               }
             }

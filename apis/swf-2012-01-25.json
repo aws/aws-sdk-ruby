@@ -145,7 +145,6 @@
           "count": {
             "type": "integer",
             "documentation": "<p> The number of workflow executions. </p>",
-            "min_length": 0,
             "serialized_name": "count"
           },
           "truncated": {
@@ -275,7 +274,6 @@
           "count": {
             "type": "integer",
             "documentation": "<p> The number of workflow executions. </p>",
-            "min_length": 0,
             "serialized_name": "count"
           },
           "truncated": {
@@ -351,7 +349,6 @@
           "count": {
             "type": "integer",
             "documentation": "<p> The number of tasks in the task list. </p>",
-            "min_length": 0,
             "serialized_name": "count"
           },
           "truncated": {
@@ -427,7 +424,6 @@
           "count": {
             "type": "integer",
             "documentation": "<p> The number of tasks in the task list. </p>",
-            "min_length": 0,
             "serialized_name": "count"
           },
           "truncated": {
@@ -731,15 +727,11 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   },
                   "version": {
                     "type": "string",
                     "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 64,
                     "serialized_name": "version"
                   }
                 }
@@ -756,7 +748,6 @@
               "description": {
                 "type": "string",
                 "documentation": "<p> The description of the activity type provided in RegisterActivityType. </p>",
-                "max_length": 1024,
                 "serialized_name": "description"
               },
               "creation_date": {
@@ -779,13 +770,11 @@
               "default_task_start_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum duration for tasks of an activity type specified when registering the activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> Decision. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultTaskStartToCloseTimeout"
               },
               "default_task_heartbeat_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum time, specified when registering the activity type, before which a worker processing a task must report progress by calling RecordActivityTaskHeartbeat. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> Decision. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultTaskHeartbeatTimeout"
               },
               "default_task_list": {
@@ -796,8 +785,6 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of the task list. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   }
                 }
@@ -805,13 +792,11 @@
               "default_task_schedule_to_start_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum duration, specified when registering the activity type, that a task of an activity type can wait before being assigned to a worker. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> Decision. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultTaskScheduleToStartTimeout"
               },
               "default_task_schedule_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum duration, specified when registering the activity type, for tasks of this activity type. You can override this default when scheduling a task through the <code>ScheduleActivityTask</code> Decision. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultTaskScheduleToCloseTimeout"
               }
             }
@@ -873,8 +858,6 @@
               "name": {
                 "type": "string",
                 "documentation": "<p> The name of the domain. This name is unique within the account. </p>",
-                "min_length": 1,
-                "max_length": 256,
                 "serialized_name": "name"
               },
               "status": {
@@ -889,7 +872,6 @@
               "description": {
                 "type": "string",
                 "documentation": "<p> The description of the domain provided through RegisterDomain. </p>",
-                "max_length": 1024,
                 "serialized_name": "description"
               }
             }
@@ -902,8 +884,6 @@
               "workflow_execution_retention_period_in_days": {
                 "type": "string",
                 "documentation": "<p> The retention period for workflow executions in this domain. </p>",
-                "min_length": 1,
-                "max_length": 8,
                 "serialized_name": "workflowExecutionRetentionPeriodInDays"
               }
             }
@@ -994,15 +974,11 @@
                   "workflow_id": {
                     "type": "string",
                     "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "workflowId"
                   },
                   "run_id": {
                     "type": "string",
                     "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                    "min_length": 1,
-                    "max_length": 64,
                     "serialized_name": "runId"
                   }
                 }
@@ -1015,15 +991,11 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   },
                   "version": {
                     "type": "string",
                     "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 64,
                     "serialized_name": "version"
                   }
                 }
@@ -1068,15 +1040,11 @@
                   "workflow_id": {
                     "type": "string",
                     "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "workflowId"
                   },
                   "run_id": {
                     "type": "string",
                     "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                    "min_length": 1,
-                    "max_length": 64,
                     "serialized_name": "runId"
                   }
                 }
@@ -1084,12 +1052,9 @@
               "tag_list": {
                 "type": "list",
                 "documentation": "<p> The list of tags associated with the workflow execution. Tags can be used to identify and list workflow executions of interest through the visibility APIs. A workflow execution can have a maximum of 5 tags. </p>",
-                "max_length": 5,
                 "serialized_name": "tagList",
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 256
+                  "type": "string"
                 }
               },
               "cancel_requested": {
@@ -1107,15 +1072,11 @@
               "task_start_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The maximum duration allowed for decision tasks for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "min_length": 1,
-                "max_length": 8,
                 "serialized_name": "taskStartToCloseTimeout"
               },
               "execution_start_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The total duration for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "min_length": 1,
-                "max_length": 8,
                 "serialized_name": "executionStartToCloseTimeout"
               },
               "task_list": {
@@ -1126,8 +1087,6 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of the task list. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   }
                 }
@@ -1152,26 +1111,21 @@
               "open_activity_tasks": {
                 "type": "integer",
                 "documentation": "<p> The count of activity tasks whose status is OPEN. </p>",
-                "min_length": 0,
                 "serialized_name": "openActivityTasks"
               },
               "open_decision_tasks": {
                 "type": "integer",
                 "documentation": "<p> The count of decision tasks whose status is OPEN. A workflow execution can have at most one open decision task. </p>",
-                "min_length": 0,
-                "max_length": 1,
                 "serialized_name": "openDecisionTasks"
               },
               "open_timers": {
                 "type": "integer",
                 "documentation": "<p> The count of timers started by this workflow execution that have not fired yet. </p>",
-                "min_length": 0,
                 "serialized_name": "openTimers"
               },
               "open_child_workflow_executions": {
                 "type": "integer",
                 "documentation": "<p> The count of child workflow executions whose status is OPEN. </p>",
-                "min_length": 0,
                 "serialized_name": "openChildWorkflowExecutions"
               }
             }
@@ -1184,7 +1138,6 @@
           "latest_execution_context": {
             "type": "string",
             "documentation": "<p> The latest executionContext provided by the decider for this workflow execution. A decider can provide an executionContext, which is a free form string, when closing a decision task using RespondDecisionTaskCompleted. </p>",
-            "max_length": 32768,
             "serialized_name": "latestExecutionContext"
           }
         }
@@ -1273,15 +1226,11 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   },
                   "version": {
                     "type": "string",
                     "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                    "min_length": 1,
-                    "max_length": 64,
                     "serialized_name": "version"
                   }
                 }
@@ -1298,7 +1247,6 @@
               "description": {
                 "type": "string",
                 "documentation": "<p> The description of the type registered through RegisterWorkflowType. </p>",
-                "max_length": 1024,
                 "serialized_name": "description"
               },
               "creation_date": {
@@ -1321,13 +1269,11 @@
               "default_task_start_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum duration, specified when registering the workflow type, that a decision task for executions of this workflow type might take before returning completion or failure. If the task does not close in the specified time then the task is automatically timed out and rescheduled. If the decider eventually reports a completion or failure, it is ignored. This default can be overridden when starting a workflow execution using the StartWorkflowExecution action or the <code>StartChildWorkflowExecution</code> Decision. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultTaskStartToCloseTimeout"
               },
               "default_execution_start_to_close_timeout": {
                 "type": "string",
                 "documentation": "<p> The optional default maximum duration, specified when registering the workflow type, for executions of this workflow type. This default can be overridden when starting a workflow execution using the StartWorkflowExecution action or the <code>StartChildWorkflowExecution</code> Decision. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                "max_length": 8,
                 "serialized_name": "defaultExecutionStartToCloseTimeout"
               },
               "default_task_list": {
@@ -1338,8 +1284,6 @@
                   "name": {
                     "type": "string",
                     "documentation": "<p> The name of the task list. </p>",
-                    "min_length": 1,
-                    "max_length": 256,
                     "serialized_name": "name"
                   }
                 }
@@ -1527,19 +1471,16 @@
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration of decision tasks for this workflow type. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "child_policy": {
@@ -1560,8 +1501,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -1574,15 +1513,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -1590,18 +1525,14 @@
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags associated with this workflow execution. An execution can have up to 5 tags. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     },
                     "continued_execution_run_id": {
                       "type": "string",
                       "documentation": "<p> If this workflow execution was started due to a <code>ContinueAsNewWorkflowExecution</code> decision, then it contains the <code>runId</code> of the previous workflow execution that was closed and continued as this execution. </p>",
-                      "max_length": 64,
                       "serialized_name": "continuedExecutionRunId"
                     },
                     "parent_workflow_execution": {
@@ -1612,15 +1543,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -1640,7 +1567,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The result produced by the workflow execution upon successful completion. </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "decision_task_completed_event_id": {
@@ -1679,13 +1605,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The descriptive reason provided for the failure (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -1749,7 +1673,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details for the cancellation (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -1788,7 +1711,6 @@
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the new workflow execution. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "decision_task_completed_event_id": {
@@ -1799,14 +1721,11 @@
                     "new_execution_run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the new workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "newExecutionRunId"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The total duration allowed for the new workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_list": {
@@ -1817,8 +1736,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -1826,7 +1743,6 @@
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration of decision tasks for the new workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "child_policy": {
@@ -1842,12 +1758,9 @@
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags associated with the new workflow execution. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     },
                     "workflow_type": {
@@ -1858,15 +1771,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -1908,13 +1817,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason provided for the termination (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details provided for the termination (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "child_policy": {
@@ -1952,15 +1859,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -1993,8 +1896,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -2002,7 +1903,6 @@
                     "start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for this decision task. The task is considered timed out if it does not completed within this duration. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "startToCloseTimeout"
                     }
                   }
@@ -2015,7 +1915,6 @@
                     "identity": {
                       "type": "string",
                       "documentation": "<p> Identity of the decider making the request. This enables diagnostic tracing when problems arise. The form of this identity is user defined. </p>",
-                      "max_length": 256,
                       "serialized_name": "identity"
                     },
                     "scheduled_event_id": {
@@ -2033,7 +1932,6 @@
                     "execution_context": {
                       "type": "string",
                       "documentation": "<p> User defined context for the workflow execution. </p>",
-                      "max_length": 32768,
                       "serialized_name": "executionContext"
                     },
                     "scheduled_event_id": {
@@ -2086,15 +1984,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2102,38 +1996,31 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The unique id of the activity task. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the activity task. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. This data is not sent to the activity. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "schedule_to_start_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time the activity task can wait to be assigned to a worker. </p>",
-                      "max_length": 8,
                       "serialized_name": "scheduleToStartTimeout"
                     },
                     "schedule_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time for this activity task. </p>",
-                      "max_length": 8,
                       "serialized_name": "scheduleToCloseTimeout"
                     },
                     "start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time a worker may take to process the activity task. </p>",
-                      "max_length": 8,
                       "serialized_name": "startToCloseTimeout"
                     },
                     "task_list": {
@@ -2144,8 +2031,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -2158,7 +2043,6 @@
                     "heartbeat_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum time before which the worker processing this task must report progress by calling RecordActivityTaskHeartbeat. If the timeout is exceeded, the activity task is automatically timed out. If the worker subsequently attempts to record a heartbeat or return a result, it will be ignored. </p>",
-                      "max_length": 8,
                       "serialized_name": "heartbeatTimeout"
                     }
                   }
@@ -2171,7 +2055,6 @@
                     "identity": {
                       "type": "string",
                       "documentation": "<p> Identity of the worker that was assigned this task. This aids diagnostics when problems arise. The form of this identity is user defined. </p>",
-                      "max_length": 256,
                       "serialized_name": "identity"
                     },
                     "scheduled_event_id": {
@@ -2189,7 +2072,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The results of the activity task (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "scheduled_event_id": {
@@ -2212,13 +2094,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason provided for the failure (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "scheduled_event_id": {
@@ -2262,7 +2142,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Contains the content of the <code>details</code> parameter for the last call made by the activity to <code>RecordActivityTaskHeartbeat</code>. </p>",
-                      "max_length": 2048,
                       "serialized_name": "details"
                     }
                   }
@@ -2275,7 +2154,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the cancellation (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "scheduled_event_id": {
@@ -2308,8 +2186,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The unique ID of the task. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     }
                   }
@@ -2322,14 +2198,11 @@
                     "signal_name": {
                       "type": "string",
                       "documentation": "<p> The name of the signal received. The decider can use the signal name and inputs to determine how to the process the signal. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "signalName"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> Inputs provided with the signal (if any). The decider can use the signal name and inputs to determine how to process the signal. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "external_workflow_execution": {
@@ -2340,15 +2213,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2368,14 +2237,11 @@
                     "marker_name": {
                       "type": "string",
                       "documentation": "<p> The name of the marker. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "markerName"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the marker (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -2393,8 +2259,6 @@
                     "marker_name": {
                       "type": "string",
                       "documentation": "<p>The marker's name.</p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "markerName"
                     },
                     "cause": {
@@ -2420,21 +2284,16 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that was started. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "start_to_fire_timeout": {
                       "type": "string",
                       "documentation": "<p> The duration of time after which the timer will fire. </p> <p>The duration is specified in seconds. The valid values are integers greater than or equal to 0.</p>",
-                      "min_length": 1,
-                      "max_length": 8,
                       "serialized_name": "startToFireTimeout"
                     },
                     "decision_task_completed_event_id": {
@@ -2452,8 +2311,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that fired. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "started_event_id": {
@@ -2471,8 +2328,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that was canceled. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "started_event_id": {
@@ -2495,8 +2350,6 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the child workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "workflow_type": {
@@ -2507,15 +2360,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2523,19 +2372,16 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent decision tasks. This data is not sent to the activity. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> The inputs provided to the child workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for the child workflow execution. If the workflow execution is not closed within this duration, it will be timed out and force terminated. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_list": {
@@ -2546,8 +2392,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -2570,18 +2414,14 @@
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration allowed for the decision tasks for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags to associated with the child workflow execution. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     }
                   }
@@ -2599,15 +2439,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2620,15 +2456,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2653,15 +2485,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2674,15 +2502,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2690,7 +2514,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The result of the child workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "initiated_event_id": {
@@ -2718,15 +2541,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2739,15 +2558,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2755,13 +2570,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason for the failure (if provided). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if provided). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "initiated_event_id": {
@@ -2789,15 +2602,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2810,15 +2619,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2856,15 +2661,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2877,15 +2678,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2893,7 +2690,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the cancellation (if provided). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "initiated_event_id": {
@@ -2921,15 +2717,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -2942,15 +2734,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -2975,27 +2763,21 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution to send the signal to. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "signal_name": {
                       "type": "string",
                       "documentation": "<p> The name of the signal. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "signalName"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> Input provided to the signal (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "decision_task_completed_event_id": {
@@ -3006,7 +2788,6 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent decision tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -3024,15 +2805,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -3052,14 +2829,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution that the signal was being delivered to. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution that the signal was being delivered to. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "cause": {
@@ -3084,7 +2858,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -3102,15 +2875,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -3130,14 +2899,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution to be canceled. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution to be canceled. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "decision_task_completed_event_id": {
@@ -3148,7 +2914,6 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -3161,14 +2926,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow to which the cancel request was to be delivered. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "cause": {
@@ -3193,7 +2955,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -3211,15 +2972,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -3227,8 +2984,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The activityId provided in the <code>ScheduleActivityTask</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "cause": {
@@ -3264,8 +3019,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The activityId provided in the <code>RequestCancelActivityTask</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "cause": {
@@ -3292,8 +3045,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The timerId provided in the <code>StartTimer</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "cause": {
@@ -3322,8 +3073,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The timerId provided in the <code>CancelTimer</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "cause": {
@@ -3355,15 +3104,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -3389,8 +3134,6 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the child workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "initiated_event_id": {
@@ -3405,7 +3148,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -3416,7 +3158,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> The token for the next page. If set, the history consists of more than one page and the next page can be retrieved by repeating the request with this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -3519,15 +3260,11 @@
                     "name": {
                       "type": "string",
                       "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "name"
                     },
                     "version": {
                       "type": "string",
                       "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "version"
                     }
                   }
@@ -3544,7 +3281,6 @@
                 "description": {
                   "type": "string",
                   "documentation": "<p> The description of the activity type provided in RegisterActivityType. </p>",
-                  "max_length": 1024,
                   "serialized_name": "description"
                 },
                 "creation_date": {
@@ -3563,7 +3299,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> Returns a value if the results are paginated. To get the next page of results, repeat the request specifying this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -3757,15 +3492,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "runId"
                     }
                   }
@@ -3778,15 +3509,11 @@
                     "name": {
                       "type": "string",
                       "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "name"
                     },
                     "version": {
                       "type": "string",
                       "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "version"
                     }
                   }
@@ -3831,15 +3558,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "runId"
                     }
                   }
@@ -3847,12 +3570,9 @@
                 "tag_list": {
                   "type": "list",
                   "documentation": "<p> The list of tags associated with the workflow execution. Tags can be used to identify and list workflow executions of interest through the visibility APIs. A workflow execution can have a maximum of 5 tags. </p>",
-                  "max_length": 5,
                   "serialized_name": "tagList",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 256
+                    "type": "string"
                   }
                 },
                 "cancel_requested": {
@@ -3866,7 +3586,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> The token of the next page in the result. If set, the results have more than one page. The next page can be retrieved by repeating the request with this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -3949,8 +3668,6 @@
                 "name": {
                   "type": "string",
                   "documentation": "<p> The name of the domain. This name is unique within the account. </p>",
-                  "min_length": 1,
-                  "max_length": 256,
                   "serialized_name": "name"
                 },
                 "status": {
@@ -3965,7 +3682,6 @@
                 "description": {
                   "type": "string",
                   "documentation": "<p> The description of the domain provided through RegisterDomain. </p>",
-                  "max_length": 1024,
                   "serialized_name": "description"
                 }
               }
@@ -3974,7 +3690,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> Returns a value if the results are paginated. To get the next page of results, repeat the request specifying this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -4119,15 +3834,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "runId"
                     }
                   }
@@ -4140,15 +3851,11 @@
                     "name": {
                       "type": "string",
                       "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "name"
                     },
                     "version": {
                       "type": "string",
                       "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "version"
                     }
                   }
@@ -4193,15 +3900,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "runId"
                     }
                   }
@@ -4209,12 +3912,9 @@
                 "tag_list": {
                   "type": "list",
                   "documentation": "<p> The list of tags associated with the workflow execution. Tags can be used to identify and list workflow executions of interest through the visibility APIs. A workflow execution can have a maximum of 5 tags. </p>",
-                  "max_length": 5,
                   "serialized_name": "tagList",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 256
+                    "type": "string"
                   }
                 },
                 "cancel_requested": {
@@ -4228,7 +3928,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> The token of the next page in the result. If set, the results have more than one page. The next page can be retrieved by repeating the request with this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -4331,15 +4030,11 @@
                     "name": {
                       "type": "string",
                       "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "name"
                     },
                     "version": {
                       "type": "string",
                       "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "version"
                     }
                   }
@@ -4356,7 +4051,6 @@
                 "description": {
                   "type": "string",
                   "documentation": "<p> The description of the type registered through RegisterWorkflowType. </p>",
-                  "max_length": 1024,
                   "serialized_name": "description"
                 },
                 "creation_date": {
@@ -4375,7 +4069,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> The token for the next page of type information. If set then the list consists of more than one page. You can retrieve the next page by repeating the request (that returned the structure) with the this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           }
         }
@@ -4452,15 +4145,11 @@
           "task_token": {
             "type": "string",
             "documentation": "<p> The opaque string used as a handle on the task. This token is used by workers to communicate progress and response information back to the system about the task. </p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "taskToken"
           },
           "activity_id": {
             "type": "string",
             "documentation": "<p> The unique ID of the task. </p>",
-            "min_length": 1,
-            "max_length": 256,
             "serialized_name": "activityId"
           },
           "started_event_id": {
@@ -4476,15 +4165,11 @@
               "workflow_id": {
                 "type": "string",
                 "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                "min_length": 1,
-                "max_length": 256,
                 "serialized_name": "workflowId"
               },
               "run_id": {
                 "type": "string",
                 "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "runId"
               }
             }
@@ -4497,15 +4182,11 @@
               "name": {
                 "type": "string",
                 "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                "min_length": 1,
-                "max_length": 256,
                 "serialized_name": "name"
               },
               "version": {
                 "type": "string",
                 "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "version"
               }
             }
@@ -4513,7 +4194,6 @@
           "input": {
             "type": "string",
             "documentation": "<p> The inputs provided when the activity task was scheduled. The form of the input is user defined and should be meaningful to the activity implementation. </p>",
-            "max_length": 32768,
             "serialized_name": "input"
           }
         }
@@ -4619,8 +4299,6 @@
           "task_token": {
             "type": "string",
             "documentation": "<p> The opaque string used as a handle on the task. This token is used by workers to communicate progress and response information back to the system about the task. </p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "taskToken"
           },
           "started_event_id": {
@@ -4636,15 +4314,11 @@
               "workflow_id": {
                 "type": "string",
                 "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                "min_length": 1,
-                "max_length": 256,
                 "serialized_name": "workflowId"
               },
               "run_id": {
                 "type": "string",
                 "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "runId"
               }
             }
@@ -4657,15 +4331,11 @@
               "name": {
                 "type": "string",
                 "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                "min_length": 1,
-                "max_length": 256,
                 "serialized_name": "name"
               },
               "version": {
                 "type": "string",
                 "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "version"
               }
             }
@@ -4750,19 +4420,16 @@
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration of decision tasks for this workflow type. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "child_policy": {
@@ -4783,8 +4450,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -4797,15 +4462,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -4813,18 +4474,14 @@
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags associated with this workflow execution. An execution can have up to 5 tags. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     },
                     "continued_execution_run_id": {
                       "type": "string",
                       "documentation": "<p> If this workflow execution was started due to a <code>ContinueAsNewWorkflowExecution</code> decision, then it contains the <code>runId</code> of the previous workflow execution that was closed and continued as this execution. </p>",
-                      "max_length": 64,
                       "serialized_name": "continuedExecutionRunId"
                     },
                     "parent_workflow_execution": {
@@ -4835,15 +4492,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -4863,7 +4516,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The result produced by the workflow execution upon successful completion. </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "decision_task_completed_event_id": {
@@ -4902,13 +4554,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The descriptive reason provided for the failure (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -4972,7 +4622,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details for the cancellation (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -5011,7 +4660,6 @@
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the new workflow execution. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "decision_task_completed_event_id": {
@@ -5022,14 +4670,11 @@
                     "new_execution_run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the new workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 64,
                       "serialized_name": "newExecutionRunId"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The total duration allowed for the new workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_list": {
@@ -5040,8 +4685,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -5049,7 +4692,6 @@
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration of decision tasks for the new workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "child_policy": {
@@ -5065,12 +4707,9 @@
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags associated with the new workflow execution. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     },
                     "workflow_type": {
@@ -5081,15 +4720,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5131,13 +4766,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason provided for the termination (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details provided for the termination (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "child_policy": {
@@ -5175,15 +4808,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -5216,8 +4845,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -5225,7 +4852,6 @@
                     "start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for this decision task. The task is considered timed out if it does not completed within this duration. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "startToCloseTimeout"
                     }
                   }
@@ -5238,7 +4864,6 @@
                     "identity": {
                       "type": "string",
                       "documentation": "<p> Identity of the decider making the request. This enables diagnostic tracing when problems arise. The form of this identity is user defined. </p>",
-                      "max_length": 256,
                       "serialized_name": "identity"
                     },
                     "scheduled_event_id": {
@@ -5256,7 +4881,6 @@
                     "execution_context": {
                       "type": "string",
                       "documentation": "<p> User defined context for the workflow execution. </p>",
-                      "max_length": 32768,
                       "serialized_name": "executionContext"
                     },
                     "scheduled_event_id": {
@@ -5309,15 +4933,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5325,38 +4945,31 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The unique id of the activity task. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> The input provided to the activity task. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. This data is not sent to the activity. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "schedule_to_start_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time the activity task can wait to be assigned to a worker. </p>",
-                      "max_length": 8,
                       "serialized_name": "scheduleToStartTimeout"
                     },
                     "schedule_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time for this activity task. </p>",
-                      "max_length": 8,
                       "serialized_name": "scheduleToCloseTimeout"
                     },
                     "start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum amount of time a worker may take to process the activity task. </p>",
-                      "max_length": 8,
                       "serialized_name": "startToCloseTimeout"
                     },
                     "task_list": {
@@ -5367,8 +4980,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -5381,7 +4992,6 @@
                     "heartbeat_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum time before which the worker processing this task must report progress by calling RecordActivityTaskHeartbeat. If the timeout is exceeded, the activity task is automatically timed out. If the worker subsequently attempts to record a heartbeat or return a result, it will be ignored. </p>",
-                      "max_length": 8,
                       "serialized_name": "heartbeatTimeout"
                     }
                   }
@@ -5394,7 +5004,6 @@
                     "identity": {
                       "type": "string",
                       "documentation": "<p> Identity of the worker that was assigned this task. This aids diagnostics when problems arise. The form of this identity is user defined. </p>",
-                      "max_length": 256,
                       "serialized_name": "identity"
                     },
                     "scheduled_event_id": {
@@ -5412,7 +5021,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The results of the activity task (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "scheduled_event_id": {
@@ -5435,13 +5043,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason provided for the failure (if any). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "scheduled_event_id": {
@@ -5485,7 +5091,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Contains the content of the <code>details</code> parameter for the last call made by the activity to <code>RecordActivityTaskHeartbeat</code>. </p>",
-                      "max_length": 2048,
                       "serialized_name": "details"
                     }
                   }
@@ -5498,7 +5103,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the cancellation (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "scheduled_event_id": {
@@ -5531,8 +5135,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The unique ID of the task. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     }
                   }
@@ -5545,14 +5147,11 @@
                     "signal_name": {
                       "type": "string",
                       "documentation": "<p> The name of the signal received. The decider can use the signal name and inputs to determine how to the process the signal. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "signalName"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> Inputs provided with the signal (if any). The decider can use the signal name and inputs to determine how to process the signal. </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "external_workflow_execution": {
@@ -5563,15 +5162,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -5591,14 +5186,11 @@
                     "marker_name": {
                       "type": "string",
                       "documentation": "<p> The name of the marker. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "markerName"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the marker (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "decision_task_completed_event_id": {
@@ -5616,8 +5208,6 @@
                     "marker_name": {
                       "type": "string",
                       "documentation": "<p>The marker's name.</p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "markerName"
                     },
                     "cause": {
@@ -5643,21 +5233,16 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that was started. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "start_to_fire_timeout": {
                       "type": "string",
                       "documentation": "<p> The duration of time after which the timer will fire. </p> <p>The duration is specified in seconds. The valid values are integers greater than or equal to 0.</p>",
-                      "min_length": 1,
-                      "max_length": 8,
                       "serialized_name": "startToFireTimeout"
                     },
                     "decision_task_completed_event_id": {
@@ -5675,8 +5260,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that fired. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "started_event_id": {
@@ -5694,8 +5277,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The unique Id of the timer that was canceled. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "started_event_id": {
@@ -5718,8 +5299,6 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the child workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "workflow_type": {
@@ -5730,15 +5309,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5746,19 +5321,16 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent decision tasks. This data is not sent to the activity. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> The inputs provided to the child workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "execution_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration for the child workflow execution. If the workflow execution is not closed within this duration, it will be timed out and force terminated. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "executionStartToCloseTimeout"
                     },
                     "task_list": {
@@ -5769,8 +5341,6 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the task list. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         }
                       }
@@ -5793,18 +5363,14 @@
                     "task_start_to_close_timeout": {
                       "type": "string",
                       "documentation": "<p> The maximum duration allowed for the decision tasks for this workflow execution. </p> <p>The valid values are integers greater than or equal to <code>0</code>. An integer value can be used to specify the duration in seconds while <code>NONE</code> can be used to specify unlimited duration.</p>",
-                      "max_length": 8,
                       "serialized_name": "taskStartToCloseTimeout"
                     },
                     "tag_list": {
                       "type": "list",
                       "documentation": "<p> The list of tags to associated with the child workflow execution. </p>",
-                      "max_length": 5,
                       "serialized_name": "tagList",
                       "members": {
-                        "type": "string",
-                        "min_length": 1,
-                        "max_length": 256
+                        "type": "string"
                       }
                     }
                   }
@@ -5822,15 +5388,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -5843,15 +5405,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5876,15 +5434,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -5897,15 +5451,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5913,7 +5463,6 @@
                     "result": {
                       "type": "string",
                       "documentation": "<p> The result of the child workflow execution (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "result"
                     },
                     "initiated_event_id": {
@@ -5941,15 +5490,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -5962,15 +5507,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -5978,13 +5519,11 @@
                     "reason": {
                       "type": "string",
                       "documentation": "<p> The reason for the failure (if provided). </p>",
-                      "max_length": 256,
                       "serialized_name": "reason"
                     },
                     "details": {
                       "type": "string",
                       "documentation": "<p> The details of the failure (if provided). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "initiated_event_id": {
@@ -6012,15 +5551,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -6033,15 +5568,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -6079,15 +5610,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -6100,15 +5627,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -6116,7 +5639,6 @@
                     "details": {
                       "type": "string",
                       "documentation": "<p> Details of the cancellation (if provided). </p>",
-                      "max_length": 32768,
                       "serialized_name": "details"
                     },
                     "initiated_event_id": {
@@ -6144,15 +5666,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -6165,15 +5683,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -6198,27 +5712,21 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution to send the signal to. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "signal_name": {
                       "type": "string",
                       "documentation": "<p> The name of the signal. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "signalName"
                     },
                     "input": {
                       "type": "string",
                       "documentation": "<p> Input provided to the signal (if any). </p>",
-                      "max_length": 32768,
                       "serialized_name": "input"
                     },
                     "decision_task_completed_event_id": {
@@ -6229,7 +5737,6 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent decision tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -6247,15 +5754,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -6275,14 +5778,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution that the signal was being delivered to. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution that the signal was being delivered to. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "cause": {
@@ -6307,7 +5807,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -6325,15 +5824,11 @@
                         "workflow_id": {
                           "type": "string",
                           "documentation": "<p> The user defined identifier associated with the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "workflowId"
                         },
                         "run_id": {
                           "type": "string",
                           "documentation": "<p> A system generated unique identifier for the workflow execution. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "runId"
                         }
                       }
@@ -6353,14 +5848,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow execution to be canceled. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution to be canceled. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "decision_task_completed_event_id": {
@@ -6371,7 +5863,6 @@
                     "control": {
                       "type": "string",
                       "documentation": "<p> Optional data attached to the event that can be used by the decider in subsequent workflow tasks. </p>",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -6384,14 +5875,11 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the external workflow to which the cancel request was to be delivered. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "run_id": {
                       "type": "string",
                       "documentation": "<p> The <code>runId</code> of the external workflow execution. </p>",
-                      "max_length": 64,
                       "serialized_name": "runId"
                     },
                     "cause": {
@@ -6416,7 +5904,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -6434,15 +5921,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of this activity. The combination of activity type name and version must be unique within a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of this activity. The combination of activity type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -6450,8 +5933,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The activityId provided in the <code>ScheduleActivityTask</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "cause": {
@@ -6487,8 +5968,6 @@
                     "activity_id": {
                       "type": "string",
                       "documentation": "<p> The activityId provided in the <code>RequestCancelActivityTask</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "activityId"
                     },
                     "cause": {
@@ -6515,8 +5994,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The timerId provided in the <code>StartTimer</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "cause": {
@@ -6545,8 +6022,6 @@
                     "timer_id": {
                       "type": "string",
                       "documentation": "<p> The timerId provided in the <code>CancelTimer</code> decision that failed. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "timerId"
                     },
                     "cause": {
@@ -6578,15 +6053,11 @@
                         "name": {
                           "type": "string",
                           "documentation": "<p> The name of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 256,
                           "serialized_name": "name"
                         },
                         "version": {
                           "type": "string",
                           "documentation": "<p> The version of the workflow type. This field is required. The combination of workflow type name and version must be unique with in a domain. </p>",
-                          "min_length": 1,
-                          "max_length": 64,
                           "serialized_name": "version"
                         }
                       }
@@ -6612,8 +6083,6 @@
                     "workflow_id": {
                       "type": "string",
                       "documentation": "<p> The <code>workflowId</code> of the child workflow execution. </p>",
-                      "min_length": 1,
-                      "max_length": 256,
                       "serialized_name": "workflowId"
                     },
                     "initiated_event_id": {
@@ -6628,7 +6097,6 @@
                     },
                     "control": {
                       "type": "string",
-                      "max_length": 32768,
                       "serialized_name": "control"
                     }
                   }
@@ -6639,7 +6107,6 @@
           "next_page_token": {
             "type": "string",
             "documentation": "<p> Returns a value if the results are paginated. To get the next page of results, repeat the request specifying this token and all other arguments unchanged. </p>",
-            "max_length": 2048,
             "serialized_name": "nextPageToken"
           },
           "previous_started_event_id": {
@@ -7984,8 +7451,6 @@
           "run_id": {
             "type": "string",
             "documentation": "<p> The <code>runId</code> of a workflow execution. This Id is generated by the service and can be used to uniquely identify the workflow execution within a domain. </p>",
-            "min_length": 1,
-            "max_length": 64,
             "serialized_name": "runId"
           }
         }

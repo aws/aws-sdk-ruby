@@ -168,10 +168,7 @@
             "documentation": "<p>Table names and the respective item attributes from the tables.</p>",
             "serialized_name": "Responses",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "structure",
@@ -243,22 +240,15 @@
           "unprocessed_keys": {
             "type": "map",
             "documentation": "<p>Contains a map of tables and their respective keys that were not processed with the current response, possibly due to reaching a limit on the response size. The <code>UnprocessedKeys</code> value is in the same form as a <code>RequestItems</code> parameter (so the value can be provided directly to a subsequent <code>BatchGetItem</code> operation). For more information, see the above <code>RequestItems</code> parameter.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "UnprocessedKeys",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "structure",
               "members": {
                 "keys": {
                   "type": "list",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "Keys",
                   "members": {
                     "type": "structure",
@@ -362,7 +352,6 @@
                 "attributes_to_get": {
                   "type": "list",
                   "documentation": "<p>List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.</p>",
-                  "min_length": 1,
                   "serialized_name": "AttributesToGet",
                   "members": {
                     "type": "string"
@@ -624,10 +613,7 @@
             "documentation": "<p>The response object as a result of <code>BatchWriteItem</code> call. This is essentially a map of table name to <code>ConsumedCapacityUnits</code>.</p>",
             "serialized_name": "Responses",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "structure",
@@ -643,19 +629,12 @@
           "unprocessed_items": {
             "type": "map",
             "documentation": "<p>The Items which we could not successfully process in a <code>BatchWriteItem</code> call is returned as <code>UnprocessedItems</code></p>",
-            "min_length": 1,
-            "max_length": 25,
             "serialized_name": "UnprocessedItems",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "list",
-              "min_length": 1,
-              "max_length": 25,
               "members": {
                 "type": "structure",
                 "documentation": "<p>This structure is a Union of PutRequest and DeleteRequest. It can contain exactly one of <code>PutRequest</code> or <code>DeleteRequest</code>. Never Both. This is enforced in the code.</p>",
@@ -987,9 +966,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table being described.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
@@ -1005,8 +981,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1029,8 +1003,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1075,17 +1047,14 @@
                   },
                   "number_of_decreases_today": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -1477,9 +1446,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table being described.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
@@ -1495,8 +1461,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1519,8 +1483,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1565,17 +1527,14 @@
                   },
                   "number_of_decreases_today": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -1664,9 +1623,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table being described.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
@@ -1682,8 +1638,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1706,8 +1660,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -1752,17 +1704,14 @@
                   },
                   "number_of_decreases_today": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -2064,18 +2013,12 @@
             "type": "list",
             "serialized_name": "TableNames",
             "members": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             }
           },
           "last_evaluated_table_name": {
             "type": "string",
             "documentation": "<p>The name of the last table in the current list. Use this value as the <code>ExclusiveStartTableName</code> in a new request to continue the list until all the table names are returned. If this value is null, all table names have been returned.</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "LastEvaluatedTableName"
           }
         }
@@ -3700,9 +3643,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table being described.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
@@ -3718,8 +3658,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -3742,8 +3680,6 @@
                       "attribute_name": {
                         "type": "string",
                         "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                        "min_length": 1,
-                        "max_length": 255,
                         "serialized_name": "AttributeName"
                       },
                       "attribute_type": {
@@ -3788,17 +3724,14 @@
                   },
                   "number_of_decreases_today": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }

@@ -202,17 +202,11 @@
               "user_name": {
                 "type": "string",
                 "documentation": "<p>Name of the user the key is associated with.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "access_key_id": {
                 "type": "string",
                 "documentation": "<p>The ID for this access key.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "AccessKeyId"
               },
               "status": {
@@ -332,32 +326,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the group. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "group_name": {
                 "type": "string",
                 "documentation": "<p>The name that identifies the group.</p>",
-                "min_length": 1,
-                "max_length": 128,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "GroupName"
               },
               "group_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "GroupId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -441,32 +424,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the instance profile. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "instance_profile_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the instance profile.</p>",
-                "min_length": 1,
-                "max_length": 128,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "InstanceProfileName"
               },
               "instance_profile_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the instance profile. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "InstanceProfileId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -485,32 +457,21 @@
                     "path": {
                       "type": "string",
                       "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 1,
-                      "max_length": 512,
-                      "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                       "serialized_name": "Path"
                     },
                     "role_name": {
                       "type": "string",
                       "documentation": "<p>The name identifying the role.</p>",
-                      "min_length": 1,
-                      "max_length": 64,
-                      "pattern": "[\\w+=,.@-]*",
                       "serialized_name": "RoleName"
                     },
                     "role_id": {
                       "type": "string",
                       "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 16,
-                      "max_length": 32,
-                      "pattern": "[\\w]*",
                       "serialized_name": "RoleId"
                     },
                     "arn": {
                       "type": "string",
                       "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 20,
-                      "max_length": 2048,
                       "serialized_name": "Arn"
                     },
                     "create_date": {
@@ -521,9 +482,6 @@
                     "assume_role_policy_document": {
                       "type": "string",
                       "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                      "min_length": 1,
-                      "max_length": 131072,
-                      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                       "serialized_name": "AssumeRolePolicyDocument"
                     }
                   }
@@ -596,9 +554,6 @@
               "user_name": {
                 "type": "string",
                 "documentation": "<p>The name of the user, which can be used for signing into the AWS Management Console.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "create_date": {
@@ -691,32 +646,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "role_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the role.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "RoleName"
               },
               "role_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "RoleId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -727,9 +671,6 @@
               "assume_role_policy_document": {
                 "type": "string",
                 "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                "min_length": 1,
-                "max_length": 131072,
-                "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                 "serialized_name": "AssumeRolePolicyDocument"
               }
             }
@@ -808,32 +749,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "user_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the user.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "user_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "UserId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -916,9 +846,6 @@
               "serial_number": {
                 "type": "string",
                 "documentation": "<p>The serial number associated with <code>VirtualMFADevice</code>.</p>",
-                "min_length": 9,
-                "max_length": 256,
-                "pattern": "[\\w+=/:,.@-]*",
                 "serialized_name": "SerialNumber"
               },
               "base_32_string_seed": {
@@ -939,32 +866,21 @@
                   "path": {
                     "type": "string",
                     "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 1,
-                    "max_length": 512,
-                    "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                     "serialized_name": "Path"
                   },
                   "user_name": {
                     "type": "string",
                     "documentation": "<p>The name identifying the user.</p>",
-                    "min_length": 1,
-                    "max_length": 64,
-                    "pattern": "[\\w+=,.@-]*",
                     "serialized_name": "UserName"
                   },
                   "user_id": {
                     "type": "string",
                     "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 16,
-                    "max_length": 32,
-                    "pattern": "[\\w]*",
                     "serialized_name": "UserId"
                   },
                   "arn": {
                     "type": "string",
                     "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 20,
-                    "max_length": 2048,
                     "serialized_name": "Arn"
                   },
                   "create_date": {
@@ -1719,8 +1635,6 @@
               "minimum_password_length": {
                 "type": "integer",
                 "documentation": "<p>Minimum length to require for IAM user passwords.</p>",
-                "min_length": 6,
-                "max_length": 128,
                 "serialized_name": "MinimumPasswordLength"
               },
               "require_symbols": {
@@ -1850,32 +1764,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the group. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "group_name": {
                 "type": "string",
                 "documentation": "<p>The name that identifies the group.</p>",
-                "min_length": 1,
-                "max_length": 128,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "GroupName"
               },
               "group_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "GroupId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -1896,32 +1799,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "user_name": {
                   "type": "string",
                   "documentation": "<p>The name identifying the user.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "UserName"
                 },
                 "user_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "UserId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -1940,9 +1832,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If IsTruncated is <code>true</code>, then this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -1995,25 +1884,16 @@
           "group_name": {
             "type": "string",
             "documentation": "<p>The group the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "policy_name": {
             "type": "string",
             "documentation": "<p>The name of the policy.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -2062,32 +1942,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the instance profile. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "instance_profile_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the instance profile.</p>",
-                "min_length": 1,
-                "max_length": 128,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "InstanceProfileName"
               },
               "instance_profile_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the instance profile. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "InstanceProfileId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -2106,32 +1975,21 @@
                     "path": {
                       "type": "string",
                       "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 1,
-                      "max_length": 512,
-                      "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                       "serialized_name": "Path"
                     },
                     "role_name": {
                       "type": "string",
                       "documentation": "<p>The name identifying the role.</p>",
-                      "min_length": 1,
-                      "max_length": 64,
-                      "pattern": "[\\w+=,.@-]*",
                       "serialized_name": "RoleName"
                     },
                     "role_id": {
                       "type": "string",
                       "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 16,
-                      "max_length": 32,
-                      "pattern": "[\\w]*",
                       "serialized_name": "RoleId"
                     },
                     "arn": {
                       "type": "string",
                       "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 20,
-                      "max_length": 2048,
                       "serialized_name": "Arn"
                     },
                     "create_date": {
@@ -2142,9 +2000,6 @@
                     "assume_role_policy_document": {
                       "type": "string",
                       "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                      "min_length": 1,
-                      "max_length": 131072,
-                      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                       "serialized_name": "AssumeRolePolicyDocument"
                     }
                   }
@@ -2198,9 +2053,6 @@
               "user_name": {
                 "type": "string",
                 "documentation": "<p>The name of the user, which can be used for signing into the AWS Management Console.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "create_date": {
@@ -2256,32 +2108,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "role_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the role.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "RoleName"
               },
               "role_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "RoleId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -2292,9 +2133,6 @@
               "assume_role_policy_document": {
                 "type": "string",
                 "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                "min_length": 1,
-                "max_length": 131072,
-                "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                 "serialized_name": "AssumeRolePolicyDocument"
               }
             }
@@ -2349,25 +2187,16 @@
           "role_name": {
             "type": "string",
             "documentation": "<p>The role the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "policy_name": {
             "type": "string",
             "documentation": "<p>The name of the policy.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -2421,32 +2250,21 @@
                   "path": {
                     "type": "string",
                     "documentation": "<p>Path to the server certificate. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 1,
-                    "max_length": 512,
-                    "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                     "serialized_name": "Path"
                   },
                   "server_certificate_name": {
                     "type": "string",
                     "documentation": "<p>The name that identifies the server certificate.</p>",
-                    "min_length": 1,
-                    "max_length": 128,
-                    "pattern": "[\\w+=,.@-]*",
                     "serialized_name": "ServerCertificateName"
                   },
                   "server_certificate_id": {
                     "type": "string",
                     "documentation": "<p>The stable and unique string identifying the server certificate. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 16,
-                    "max_length": 32,
-                    "pattern": "[\\w]*",
                     "serialized_name": "ServerCertificateId"
                   },
                   "arn": {
                     "type": "string",
                     "documentation": "<p>The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                    "min_length": 20,
-                    "max_length": 2048,
                     "serialized_name": "Arn"
                   },
                   "upload_date": {
@@ -2459,17 +2277,11 @@
               "certificate_body": {
                 "type": "string",
                 "documentation": "<p>The contents of the public key certificate.</p>",
-                "min_length": 1,
-                "max_length": 16384,
-                "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                 "serialized_name": "CertificateBody"
               },
               "certificate_chain": {
                 "type": "string",
                 "documentation": "<p>The contents of the public key certificate chain.</p>",
-                "min_length": 1,
-                "max_length": 2097152,
-                "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*",
                 "serialized_name": "CertificateChain"
               }
             }
@@ -2519,32 +2331,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "user_name": {
                 "type": "string",
                 "documentation": "<p>The name identifying the user.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "user_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "UserId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "create_date": {
@@ -2604,25 +2405,16 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>The user the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "policy_name": {
             "type": "string",
             "documentation": "<p>The name of the policy.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -2688,17 +2480,11 @@
                 "user_name": {
                   "type": "string",
                   "documentation": "<p>Name of the user the key is associated with.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "UserName"
                 },
                 "access_key_id": {
                   "type": "string",
                   "documentation": "<p>The ID for this access key.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "AccessKeyId"
                 },
                 "status": {
@@ -2726,9 +2512,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -2780,10 +2563,7 @@
             "documentation": "<p>A list of aliases associated with the account.</p>",
             "serialized_name": "AccountAliases",
             "members": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 63,
-              "pattern": "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$"
+              "type": "string"
             }
           },
           "is_truncated": {
@@ -2794,9 +2574,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -2845,10 +2622,7 @@
             "documentation": "<p>A list of policy names.</p>",
             "serialized_name": "PolicyNames",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 128,
-              "pattern": "[\\w+=,.@-]*"
+              "type": "string"
             }
           },
           "is_truncated": {
@@ -2859,9 +2633,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -2927,32 +2698,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the group. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "group_name": {
                   "type": "string",
                   "documentation": "<p>The name that identifies the group.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "GroupName"
                 },
                 "group_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "GroupId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -2971,9 +2731,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3028,32 +2785,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the group. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "group_name": {
                   "type": "string",
                   "documentation": "<p>The name that identifies the group.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "GroupName"
                 },
                 "group_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "GroupId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -3072,9 +2818,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3140,32 +2883,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the instance profile. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "instance_profile_name": {
                   "type": "string",
                   "documentation": "<p>The name identifying the instance profile.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "InstanceProfileName"
                 },
                 "instance_profile_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the instance profile. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "InstanceProfileId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -3184,32 +2916,21 @@
                       "path": {
                         "type": "string",
                         "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 1,
-                        "max_length": 512,
-                        "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                         "serialized_name": "Path"
                       },
                       "role_name": {
                         "type": "string",
                         "documentation": "<p>The name identifying the role.</p>",
-                        "min_length": 1,
-                        "max_length": 64,
-                        "pattern": "[\\w+=,.@-]*",
                         "serialized_name": "RoleName"
                       },
                       "role_id": {
                         "type": "string",
                         "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 16,
-                        "max_length": 32,
-                        "pattern": "[\\w]*",
                         "serialized_name": "RoleId"
                       },
                       "arn": {
                         "type": "string",
                         "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 20,
-                        "max_length": 2048,
                         "serialized_name": "Arn"
                       },
                       "create_date": {
@@ -3220,9 +2941,6 @@
                       "assume_role_policy_document": {
                         "type": "string",
                         "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                        "min_length": 1,
-                        "max_length": 131072,
-                        "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                         "serialized_name": "AssumeRolePolicyDocument"
                       }
                     }
@@ -3239,9 +2957,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3296,32 +3011,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the instance profile. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "instance_profile_name": {
                   "type": "string",
                   "documentation": "<p>The name identifying the instance profile.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "InstanceProfileName"
                 },
                 "instance_profile_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the instance profile. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "InstanceProfileId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -3340,32 +3044,21 @@
                       "path": {
                         "type": "string",
                         "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 1,
-                        "max_length": 512,
-                        "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                         "serialized_name": "Path"
                       },
                       "role_name": {
                         "type": "string",
                         "documentation": "<p>The name identifying the role.</p>",
-                        "min_length": 1,
-                        "max_length": 64,
-                        "pattern": "[\\w+=,.@-]*",
                         "serialized_name": "RoleName"
                       },
                       "role_id": {
                         "type": "string",
                         "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 16,
-                        "max_length": 32,
-                        "pattern": "[\\w]*",
                         "serialized_name": "RoleId"
                       },
                       "arn": {
                         "type": "string",
                         "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                        "min_length": 20,
-                        "max_length": 2048,
                         "serialized_name": "Arn"
                       },
                       "create_date": {
@@ -3376,9 +3069,6 @@
                       "assume_role_policy_document": {
                         "type": "string",
                         "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                        "min_length": 1,
-                        "max_length": 131072,
-                        "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                         "serialized_name": "AssumeRolePolicyDocument"
                       }
                     }
@@ -3395,9 +3085,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3463,17 +3150,11 @@
                 "user_name": {
                   "type": "string",
                   "documentation": "<p>The user with whom the MFA device is associated.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "UserName"
                 },
                 "serial_number": {
                   "type": "string",
                   "documentation": "<p>The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the device ARN.</p>",
-                  "min_length": 9,
-                  "max_length": 256,
-                  "pattern": "[\\w+=/:,.@-]*",
                   "serialized_name": "SerialNumber"
                 },
                 "enable_date": {
@@ -3492,9 +3173,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3555,10 +3233,7 @@
             "documentation": "<p>A list of policy names.</p>",
             "serialized_name": "PolicyNames",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 128,
-              "pattern": "[\\w+=,.@-]*"
+              "type": "string"
             }
           },
           "is_truncated": {
@@ -3569,9 +3244,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3637,32 +3309,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "role_name": {
                   "type": "string",
                   "documentation": "<p>The name identifying the role.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "RoleName"
                 },
                 "role_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "RoleId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the role. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -3673,9 +3334,6 @@
                 "assume_role_policy_document": {
                   "type": "string",
                   "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>.</p>",
-                  "min_length": 1,
-                  "max_length": 131072,
-                  "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                   "serialized_name": "AssumeRolePolicyDocument"
                 }
               }
@@ -3689,9 +3347,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3745,32 +3400,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the server certificate. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "server_certificate_name": {
                   "type": "string",
                   "documentation": "<p>The name that identifies the server certificate.</p>",
-                  "min_length": 1,
-                  "max_length": 128,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "ServerCertificateName"
                 },
                 "server_certificate_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the server certificate. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "ServerCertificateId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "upload_date": {
@@ -3789,9 +3433,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3845,25 +3486,16 @@
                 "user_name": {
                   "type": "string",
                   "documentation": "<p>Name of the user the signing certificate is associated with.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "UserName"
                 },
                 "certificate_id": {
                   "type": "string",
                   "documentation": "<p>The ID for the signing certificate.</p>",
-                  "min_length": 24,
-                  "max_length": 128,
-                  "pattern": "[\\w]*",
                   "serialized_name": "CertificateId"
                 },
                 "certificate_body": {
                   "type": "string",
                   "documentation": "<p>The contents of the signing certificate.</p>",
-                  "min_length": 1,
-                  "max_length": 16384,
-                  "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                   "serialized_name": "CertificateBody"
                 },
                 "status": {
@@ -3891,9 +3523,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -3954,10 +3583,7 @@
             "documentation": "<p>A list of policy names.</p>",
             "serialized_name": "PolicyNames",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 128,
-              "pattern": "[\\w+=,.@-]*"
+              "type": "string"
             }
           },
           "is_truncated": {
@@ -3968,9 +3594,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -4036,32 +3659,21 @@
                 "path": {
                   "type": "string",
                   "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 1,
-                  "max_length": 512,
-                  "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                   "serialized_name": "Path"
                 },
                 "user_name": {
                   "type": "string",
                   "documentation": "<p>The name identifying the user.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
-                  "pattern": "[\\w+=,.@-]*",
                   "serialized_name": "UserName"
                 },
                 "user_id": {
                   "type": "string",
                   "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 16,
-                  "max_length": 32,
-                  "pattern": "[\\w]*",
                   "serialized_name": "UserId"
                 },
                 "arn": {
                   "type": "string",
                   "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                  "min_length": 20,
-                  "max_length": 2048,
                   "serialized_name": "Arn"
                 },
                 "create_date": {
@@ -4080,9 +3692,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -4137,9 +3746,6 @@
                 "serial_number": {
                   "type": "string",
                   "documentation": "<p>The serial number associated with <code>VirtualMFADevice</code>.</p>",
-                  "min_length": 9,
-                  "max_length": 256,
-                  "pattern": "[\\w+=/:,.@-]*",
                   "serialized_name": "SerialNumber"
                 },
                 "base_32_string_seed": {
@@ -4160,32 +3766,21 @@
                     "path": {
                       "type": "string",
                       "documentation": "<p>Path to the user. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 1,
-                      "max_length": 512,
-                      "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                       "serialized_name": "Path"
                     },
                     "user_name": {
                       "type": "string",
                       "documentation": "<p>The name identifying the user.</p>",
-                      "min_length": 1,
-                      "max_length": 64,
-                      "pattern": "[\\w+=,.@-]*",
                       "serialized_name": "UserName"
                     },
                     "user_id": {
                       "type": "string",
                       "documentation": "<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 16,
-                      "max_length": 32,
-                      "pattern": "[\\w]*",
                       "serialized_name": "UserId"
                     },
                     "arn": {
                       "type": "string",
                       "documentation": "<p>The Amazon Resource Name (ARN) specifying the user. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                      "min_length": 20,
-                      "max_length": 2048,
                       "serialized_name": "Arn"
                     },
                     "create_date": {
@@ -4210,9 +3805,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           }
         }
@@ -5099,32 +4691,21 @@
               "path": {
                 "type": "string",
                 "documentation": "<p>Path to the server certificate. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 1,
-                "max_length": 512,
-                "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
                 "serialized_name": "Path"
               },
               "server_certificate_name": {
                 "type": "string",
                 "documentation": "<p>The name that identifies the server certificate.</p>",
-                "min_length": 1,
-                "max_length": 128,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "ServerCertificateName"
               },
               "server_certificate_id": {
                 "type": "string",
                 "documentation": "<p>The stable and unique string identifying the server certificate. For more information about IDs, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 16,
-                "max_length": 32,
-                "pattern": "[\\w]*",
                 "serialized_name": "ServerCertificateId"
               },
               "arn": {
                 "type": "string",
                 "documentation": "<p>The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p>",
-                "min_length": 20,
-                "max_length": 2048,
                 "serialized_name": "Arn"
               },
               "upload_date": {
@@ -5218,25 +4799,16 @@
               "user_name": {
                 "type": "string",
                 "documentation": "<p>Name of the user the signing certificate is associated with.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[\\w+=,.@-]*",
                 "serialized_name": "UserName"
               },
               "certificate_id": {
                 "type": "string",
                 "documentation": "<p>The ID for the signing certificate.</p>",
-                "min_length": 24,
-                "max_length": 128,
-                "pattern": "[\\w]*",
                 "serialized_name": "CertificateId"
               },
               "certificate_body": {
                 "type": "string",
                 "documentation": "<p>The contents of the signing certificate.</p>",
-                "min_length": 1,
-                "max_length": 16384,
-                "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
                 "serialized_name": "CertificateBody"
               },
               "status": {

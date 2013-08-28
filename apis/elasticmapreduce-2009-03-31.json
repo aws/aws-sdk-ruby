@@ -101,9 +101,6 @@
           "job_flow_id": {
             "type": "string",
             "documentation": "<p>The job flow ID in which the instance groups are added.</p>",
-            "min_length": 0,
-            "max_length": 256,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "JobFlowId"
           },
           "instance_group_ids": {
@@ -111,10 +108,7 @@
             "documentation": "<p>Instance group IDs of the newly created instance groups.</p>",
             "serialized_name": "InstanceGroupIds",
             "members": {
-              "type": "string",
-              "min_length": 0,
-              "max_length": 256,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           }
         }
@@ -317,33 +311,21 @@
                 "job_flow_id": {
                   "type": "string",
                   "documentation": "<p>The job flow identifier.</p>",
-                  "min_length": 0,
-                  "max_length": 256,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "JobFlowId"
                 },
                 "name": {
                   "type": "string",
                   "documentation": "<p>The name of the job flow.</p>",
-                  "min_length": 0,
-                  "max_length": 256,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "Name"
                 },
                 "log_uri": {
                   "type": "string",
                   "documentation": "<p>The location in Amazon S3 where log files for the job are stored. </p>",
-                  "min_length": 0,
-                  "max_length": 10280,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "LogUri"
                 },
                 "ami_version": {
                   "type": "string",
                   "documentation": "<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>",
-                  "min_length": 0,
-                  "max_length": 256,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "AmiVersion"
                 },
                 "execution_status_detail": {
@@ -389,9 +371,6 @@
                     "last_state_change_reason": {
                       "type": "string",
                       "documentation": "<p>Description of the job flow last changed state.</p>",
-                      "min_length": 0,
-                      "max_length": 10280,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "LastStateChangeReason"
                     }
                   }
@@ -404,33 +383,21 @@
                     "master_instance_type": {
                       "type": "string",
                       "documentation": "<p>The Amazon EC2 master node instance type.</p>",
-                      "min_length": 1,
-                      "max_length": 256,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "MasterInstanceType"
                     },
                     "master_public_dns_name": {
                       "type": "string",
                       "documentation": "<p>The DNS name of the master node.</p>",
-                      "min_length": 0,
-                      "max_length": 10280,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "MasterPublicDnsName"
                     },
                     "master_instance_id": {
                       "type": "string",
                       "documentation": "<p>The Amazon EC2 instance identifier of the master node.</p>",
-                      "min_length": 0,
-                      "max_length": 10280,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "MasterInstanceId"
                     },
                     "slave_instance_type": {
                       "type": "string",
                       "documentation": "<p>The Amazon EC2 slave node instance type.</p>",
-                      "min_length": 1,
-                      "max_length": 256,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "SlaveInstanceType"
                     },
                     "instance_count": {
@@ -449,17 +416,11 @@
                           "instance_group_id": {
                             "type": "string",
                             "documentation": "<p>Unique identifier for the instance group. </p>",
-                            "min_length": 0,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "InstanceGroupId"
                           },
                           "name": {
                             "type": "string",
                             "documentation": "<p>Friendly name for the instance group. </p>",
-                            "min_length": 0,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "Name"
                           },
                           "market": {
@@ -484,17 +445,11 @@
                           "bid_price": {
                             "type": "string",
                             "documentation": "<p>Bid price for EC2 Instances when launching nodes as Spot Instances, expressed in USD.</p>",
-                            "min_length": 0,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "BidPrice"
                           },
                           "instance_type": {
                             "type": "string",
                             "documentation": "<p>Amazon EC2 Instance type.</p>",
-                            "min_length": 1,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "InstanceType"
                           },
                           "instance_request_count": {
@@ -527,9 +482,6 @@
                           "last_state_change_reason": {
                             "type": "string",
                             "documentation": "<p>Details regarding the state of the instance group. </p>",
-                            "min_length": 0,
-                            "max_length": 10280,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "LastStateChangeReason"
                           },
                           "creation_date_time": {
@@ -563,17 +515,11 @@
                     "ec_2_key_name": {
                       "type": "string",
                       "documentation": "<p>The name of an Amazon EC2 key pair that can be used to ssh to the master node of job flow.</p>",
-                      "min_length": 0,
-                      "max_length": 256,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "Ec2KeyName"
                     },
                     "ec_2_subnet_id": {
                       "type": "string",
                       "documentation": "<p>For job flows launched within Amazon Virtual Private Cloud, this value specifies the identifier of the subnet where the job flow was launched.</p>",
-                      "min_length": 0,
-                      "max_length": 256,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "Ec2SubnetId"
                     },
                     "placement": {
@@ -584,9 +530,6 @@
                         "availability_zone": {
                           "type": "string",
                           "documentation": "<p>The Amazon EC2 Availability Zone for the job flow.</p>",
-                          "min_length": 0,
-                          "max_length": 10280,
-                          "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                           "serialized_name": "AvailabilityZone"
                         }
                       }
@@ -604,9 +547,6 @@
                     "hadoop_version": {
                       "type": "string",
                       "documentation": "<p>Specifies the Hadoop version for the job flow.</p>",
-                      "min_length": 0,
-                      "max_length": 256,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "HadoopVersion"
                     }
                   }
@@ -627,9 +567,6 @@
                           "name": {
                             "type": "string",
                             "documentation": "<p>The name of the job flow step.</p>",
-                            "min_length": 0,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "Name"
                           },
                           "action_on_failure": {
@@ -658,17 +595,11 @@
                                     "key": {
                                       "type": "string",
                                       "documentation": "<p>The unique identifier of a key value pair.</p>",
-                                      "min_length": 0,
-                                      "max_length": 10280,
-                                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                                       "serialized_name": "Key"
                                     },
                                     "value": {
                                       "type": "string",
                                       "documentation": "<p>The value part of the identified key.</p>",
-                                      "min_length": 0,
-                                      "max_length": 10280,
-                                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                                       "serialized_name": "Value"
                                     }
                                   }
@@ -677,17 +608,11 @@
                               "jar": {
                                 "type": "string",
                                 "documentation": "<p>A path to a JAR file run during the step.</p>",
-                                "min_length": 0,
-                                "max_length": 10280,
-                                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                                 "serialized_name": "Jar"
                               },
                               "main_class": {
                                 "type": "string",
                                 "documentation": "<p>The name of the main class in the specified Java file. If not specified, the JAR file should specify a Main-Class in its manifest file.</p>",
-                                "min_length": 0,
-                                "max_length": 10280,
-                                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                                 "serialized_name": "MainClass"
                               },
                               "args": {
@@ -695,10 +620,7 @@
                                 "documentation": "<p>A list of command line arguments passed to the JAR file's main function when executed.</p>",
                                 "serialized_name": "Args",
                                 "members": {
-                                  "type": "string",
-                                  "min_length": 0,
-                                  "max_length": 10280,
-                                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                                  "type": "string"
                                 }
                               }
                             }
@@ -742,9 +664,6 @@
                           "last_state_change_reason": {
                             "type": "string",
                             "documentation": "<p>A description of the step's current state.</p>",
-                            "min_length": 0,
-                            "max_length": 10280,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "LastStateChangeReason"
                           }
                         }
@@ -768,9 +687,6 @@
                           "name": {
                             "type": "string",
                             "documentation": "<p>The name of the bootstrap action.</p>",
-                            "min_length": 0,
-                            "max_length": 256,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                             "serialized_name": "Name"
                           },
                           "script_bootstrap_action": {
@@ -781,9 +697,6 @@
                               "path": {
                                 "type": "string",
                                 "documentation": "<p>Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.</p>",
-                                "min_length": 0,
-                                "max_length": 10280,
-                                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                                 "serialized_name": "Path"
                               },
                               "args": {
@@ -791,10 +704,7 @@
                                 "documentation": "<p>A list of command line arguments to pass to the bootstrap action script.</p>",
                                 "serialized_name": "Args",
                                 "members": {
-                                  "type": "string",
-                                  "min_length": 0,
-                                  "max_length": 10280,
-                                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                                  "type": "string"
                                 }
                               }
                             }
@@ -809,10 +719,7 @@
                   "documentation": "<p>A list of strings set by third party software when the job flow is launched. If you are not using third party software to manage the job flow this value is empty.</p>",
                   "serialized_name": "SupportedProducts",
                   "members": {
-                    "type": "string",
-                    "min_length": 0,
-                    "max_length": 256,
-                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                    "type": "string"
                   }
                 },
                 "visible_to_all_users": {
@@ -823,9 +730,6 @@
                 "job_flow_role": {
                   "type": "string",
                   "documentation": "<p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>",
-                  "min_length": 0,
-                  "max_length": 10280,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "JobFlowRole"
                 }
               }
@@ -1245,9 +1149,6 @@
           "job_flow_id": {
             "type": "string",
             "documentation": "<p>An unique identifier for the job flow.</p>",
-            "min_length": 0,
-            "max_length": 256,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "JobFlowId"
           }
         }

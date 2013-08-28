@@ -133,10 +133,7 @@
             "documentation": "<p>A map of table name to a list of items. Each object in <i>Responses</i> consists of a table name, along with a map of attribute data consisting of the data type and attribute value.</p>",
             "serialized_name": "Responses",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "list",
@@ -196,14 +193,9 @@
           "unprocessed_keys": {
             "type": "map",
             "documentation": "<p>A map of tables and their respective keys that were not processed with the current response. The <i>UnprocessedKeys</i> value is in the same form as <i>RequestItems</i>, so the value can be provided directly to a subsequent <i>BatchGetItem</i> operation. For more information, see <i>RequestItems</i> in the Request Parameters section.</p> <p>Each element consists of:</p> <ul> <li> <p><i>Keys</i> - An array of primary key attribute values that define specific items in the table.</p> </li> <li> <li> <p><i>AttributesToGet</i> - One or more attributes to be retrieved from the table or index. By default, all attributes are returned. If a specified attribute is not found, it does not appear in the result.</p> </li> <p>If you are querying an index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the index, Amazon DynamoDB will need to fetch each matching item from the table. This extra fetching incurs additional throughput cost and latency. </p> </li> <li> <p><i>ConsistentRead</i> - The consistency of a read operation. If set to <code>true</code>, then a strongly consistent read is used; otherwise, an eventually consistent read is used.</p> </li> </ul>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "UnprocessedKeys",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "structure",
@@ -212,8 +204,6 @@
                 "keys": {
                   "type": "list",
                   "documentation": "<p>Represents the primary key attribute values that define the items and the attributes associated with the items.</p>",
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "Keys",
                   "members": {
                     "type": "map",
@@ -270,7 +260,6 @@
                 "attributes_to_get": {
                   "type": "list",
                   "documentation": "<p>Represents one or more attributes to retrieve from the table or index. If no attribute names are specified then all attributes will be returned. If any of the specified attributes are not found, they will not appear in the result.</p> <p>If you are querying an index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the index, Amazon DynamoDB will need to fetch each matching item from the table. This extra fetching incurs additional throughput cost and latency. </p>",
-                  "min_length": 1,
                   "serialized_name": "AttributesToGet",
                   "members": {
                     "type": "string"
@@ -295,9 +284,6 @@
                 "table_name": {
                   "type": "string",
                   "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                  "min_length": 3,
-                  "max_length": 255,
-                  "pattern": "[a-zA-Z0-9_.-]+",
                   "serialized_name": "TableName"
                 },
                 "capacity_units": {
@@ -529,19 +515,12 @@
           "unprocessed_items": {
             "type": "map",
             "documentation": "<p>A map of tables and requests against those tables that were not processed. The <i>UnprocessedKeys</i> value is in the same form as <i>RequestItems</i>, so you can provide this value directly to a subsequent <i>BatchGetItem</i> operation. For more information, see <i>RequestItems</i> in the Request Parameters section.</p> <p>Each <i>UnprocessedItems</i> entry consists of a table name and, for that table, a list of operations to perform (<i>DeleteRequest</i> or <i>PutRequest</i>).</p> <ul> <li> <p><i>DeleteRequest</i> - Perform a <i>DeleteItem</i> operation on the specified item. The item to be deleted is identified by a <i>Key</i> subelement:</p> <ul> <li> <p><i>Key</i> - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value.</p> </li> </ul> </li> <li> <p><i>PutRequest</i> - Perform a <i>PutItem</i> operation on the specified item. The item to be put is identified by an <i>Item</i> subelement:</p> <ul> <li> <p><i>Item</i> - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a <i>ValidationException</i>.</p> <p>If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.</p> </li> </ul> </li> </ul>",
-            "min_length": 1,
-            "max_length": 25,
             "serialized_name": "UnprocessedItems",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "list",
-              "min_length": 1,
-              "max_length": 25,
               "members": {
                 "type": "structure",
                 "documentation": "<p>Represents an operation to perform - either <i>DeleteItem</i> or <i>PutItem</i>. You can only specify one of these operations, not both, in a single <i>WriteRequest</i>. If you do need to perform both of these operations, you will need to specify two separate <i>WriteRequest</i> objects.</p>",
@@ -675,10 +654,7 @@
             "documentation": "<p>A list of tables that were processed by <i>BatchWriteItem</i> and, for each table, information about any item collections that were affected by individual <i>DeleteItem</i> or <i>PutItem</i> operations.</p> <p>Each entry consists of the following subelements:</p> <ul> <li> <p><i>ItemCollectionKey</i> - The hash key value of the item collection. This is the same as the hash key of the item.</p> </li> <li> <p><i>SizeEstimateRange</i> - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the secondary indexes on the table. Use this estimate to measure whether a secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>",
             "serialized_name": "ItemCollectionMetrics",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "list",
@@ -762,9 +738,6 @@
                 "table_name": {
                   "type": "string",
                   "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                  "min_length": 3,
-                  "max_length": 255,
-                  "pattern": "[a-zA-Z0-9_.-]+",
                   "serialized_name": "TableName"
                 },
                 "capacity_units": {
@@ -1031,8 +1004,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>A name for the attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "attribute_type": {
@@ -1051,16 +1022,11 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
                 "type": "list",
                 "documentation": "<p>The primary key structure for the table. Each <i>KeySchemaElement</i> consists of:</p> <ul> <li> <p><i>AttributeName</i> - The name of the attribute.</p> </li> <li> <p><i>KeyType</i> - The key type for the attribute. Can be either <code>HASH</code> or <code>RANGE</code>.</p> </li> </ul> <p>For more information about primary keys, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey\">Primary Key</a> in the Amazon DynamoDB Developer Guide.</p>",
-                "min_length": 1,
-                "max_length": 2,
                 "serialized_name": "KeySchema",
                 "members": {
                   "type": "structure",
@@ -1069,8 +1035,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of a key attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "key_type": {
@@ -1119,19 +1083,16 @@
                   "number_of_decreases_today": {
                     "type": "integer",
                     "documentation": "<p>The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the Amazon DynamoDB Developer Guide.</p>",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of strongly consistent reads consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 <i>ReadCapacityUnits</i> per second provides 100 eventually consistent <i>ReadCapacityUnits</i> per second.</p>",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of writes consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>.</p>",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -1157,16 +1118,11 @@
                     "index_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of the secondary index.</p>",
-                      "min_length": 3,
-                      "max_length": 255,
-                      "pattern": "[a-zA-Z0-9_.-]+",
                       "serialized_name": "IndexName"
                     },
                     "key_schema": {
                       "type": "list",
                       "documentation": "Represents the complete index key schema, which consists of one or more pairs of attribute names and key types (<code>HASH</code> or <code>RANGE</code>).",
-                      "min_length": 1,
-                      "max_length": 2,
                       "serialized_name": "KeySchema",
                       "members": {
                         "type": "structure",
@@ -1175,8 +1131,6 @@
                           "attribute_name": {
                             "type": "string",
                             "documentation": "<p>Represents the name of a key attribute.</p>",
-                            "min_length": 1,
-                            "max_length": 255,
                             "serialized_name": "AttributeName"
                           },
                           "key_type": {
@@ -1209,13 +1163,9 @@
                         "non_key_attributes": {
                           "type": "list",
                           "documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p> <p>The total count of attributes specified in <i>NonKeyAttributes</i>, summed across all of the local secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p>",
-                          "min_length": 1,
-                          "max_length": 20,
                           "serialized_name": "NonKeyAttributes",
                           "members": {
-                            "type": "string",
-                            "min_length": 1,
-                            "max_length": 255
+                            "type": "string"
                           }
                         }
                       }
@@ -1507,9 +1457,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -1687,8 +1634,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>A name for the attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "attribute_type": {
@@ -1707,16 +1652,11 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
                 "type": "list",
                 "documentation": "<p>The primary key structure for the table. Each <i>KeySchemaElement</i> consists of:</p> <ul> <li> <p><i>AttributeName</i> - The name of the attribute.</p> </li> <li> <p><i>KeyType</i> - The key type for the attribute. Can be either <code>HASH</code> or <code>RANGE</code>.</p> </li> </ul> <p>For more information about primary keys, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey\">Primary Key</a> in the Amazon DynamoDB Developer Guide.</p>",
-                "min_length": 1,
-                "max_length": 2,
                 "serialized_name": "KeySchema",
                 "members": {
                   "type": "structure",
@@ -1725,8 +1665,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of a key attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "key_type": {
@@ -1775,19 +1713,16 @@
                   "number_of_decreases_today": {
                     "type": "integer",
                     "documentation": "<p>The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the Amazon DynamoDB Developer Guide.</p>",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of strongly consistent reads consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 <i>ReadCapacityUnits</i> per second provides 100 eventually consistent <i>ReadCapacityUnits</i> per second.</p>",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of writes consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>.</p>",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -1813,16 +1748,11 @@
                     "index_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of the secondary index.</p>",
-                      "min_length": 3,
-                      "max_length": 255,
-                      "pattern": "[a-zA-Z0-9_.-]+",
                       "serialized_name": "IndexName"
                     },
                     "key_schema": {
                       "type": "list",
                       "documentation": "Represents the complete index key schema, which consists of one or more pairs of attribute names and key types (<code>HASH</code> or <code>RANGE</code>).",
-                      "min_length": 1,
-                      "max_length": 2,
                       "serialized_name": "KeySchema",
                       "members": {
                         "type": "structure",
@@ -1831,8 +1761,6 @@
                           "attribute_name": {
                             "type": "string",
                             "documentation": "<p>Represents the name of a key attribute.</p>",
-                            "min_length": 1,
-                            "max_length": 255,
                             "serialized_name": "AttributeName"
                           },
                           "key_type": {
@@ -1865,13 +1793,9 @@
                         "non_key_attributes": {
                           "type": "list",
                           "documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p> <p>The total count of attributes specified in <i>NonKeyAttributes</i>, summed across all of the local secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p>",
-                          "min_length": 1,
-                          "max_length": 20,
                           "serialized_name": "NonKeyAttributes",
                           "members": {
-                            "type": "string",
-                            "min_length": 1,
-                            "max_length": 255
+                            "type": "string"
                           }
                         }
                       }
@@ -1980,8 +1904,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>A name for the attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "attribute_type": {
@@ -2000,16 +1922,11 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
                 "type": "list",
                 "documentation": "<p>The primary key structure for the table. Each <i>KeySchemaElement</i> consists of:</p> <ul> <li> <p><i>AttributeName</i> - The name of the attribute.</p> </li> <li> <p><i>KeyType</i> - The key type for the attribute. Can be either <code>HASH</code> or <code>RANGE</code>.</p> </li> </ul> <p>For more information about primary keys, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey\">Primary Key</a> in the Amazon DynamoDB Developer Guide.</p>",
-                "min_length": 1,
-                "max_length": 2,
                 "serialized_name": "KeySchema",
                 "members": {
                   "type": "structure",
@@ -2018,8 +1935,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of a key attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "key_type": {
@@ -2068,19 +1983,16 @@
                   "number_of_decreases_today": {
                     "type": "integer",
                     "documentation": "<p>The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the Amazon DynamoDB Developer Guide.</p>",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of strongly consistent reads consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 <i>ReadCapacityUnits</i> per second provides 100 eventually consistent <i>ReadCapacityUnits</i> per second.</p>",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of writes consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>.</p>",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -2106,16 +2018,11 @@
                     "index_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of the secondary index.</p>",
-                      "min_length": 3,
-                      "max_length": 255,
-                      "pattern": "[a-zA-Z0-9_.-]+",
                       "serialized_name": "IndexName"
                     },
                     "key_schema": {
                       "type": "list",
                       "documentation": "Represents the complete index key schema, which consists of one or more pairs of attribute names and key types (<code>HASH</code> or <code>RANGE</code>).",
-                      "min_length": 1,
-                      "max_length": 2,
                       "serialized_name": "KeySchema",
                       "members": {
                         "type": "structure",
@@ -2124,8 +2031,6 @@
                           "attribute_name": {
                             "type": "string",
                             "documentation": "<p>Represents the name of a key attribute.</p>",
-                            "min_length": 1,
-                            "max_length": 255,
                             "serialized_name": "AttributeName"
                           },
                           "key_type": {
@@ -2158,13 +2063,9 @@
                         "non_key_attributes": {
                           "type": "list",
                           "documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p> <p>The total count of attributes specified in <i>NonKeyAttributes</i>, summed across all of the local secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p>",
-                          "min_length": 1,
-                          "max_length": 20,
                           "serialized_name": "NonKeyAttributes",
                           "members": {
-                            "type": "string",
-                            "min_length": 1,
-                            "max_length": 255
+                            "type": "string"
                           }
                         }
                       }
@@ -2373,9 +2274,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -2458,18 +2356,12 @@
             "documentation": "<p>The names of the tables associated with the current account at the current endpoint.</p>",
             "serialized_name": "TableNames",
             "members": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             }
           },
           "last_evaluated_table_name": {
             "type": "string",
             "documentation": "<p>The name of the last table in the current list, only if some tables for the account and endpoint have not been returned. This value does not exist in a response if all table names are already returned. Use this value as the <i>ExclusiveStartTableName</i> in a new request to continue the list until all the table names are returned.</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "LastEvaluatedTableName"
           }
         }
@@ -2722,9 +2614,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -3199,9 +3088,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -3587,9 +3473,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -3941,9 +3824,6 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The table that consumed the provisioned throughput.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "capacity_units": {
@@ -4143,8 +4023,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>A name for the attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "attribute_type": {
@@ -4163,16 +4041,11 @@
               "table_name": {
                 "type": "string",
                 "documentation": "<p>The name of the table.</p>",
-                "min_length": 3,
-                "max_length": 255,
-                "pattern": "[a-zA-Z0-9_.-]+",
                 "serialized_name": "TableName"
               },
               "key_schema": {
                 "type": "list",
                 "documentation": "<p>The primary key structure for the table. Each <i>KeySchemaElement</i> consists of:</p> <ul> <li> <p><i>AttributeName</i> - The name of the attribute.</p> </li> <li> <p><i>KeyType</i> - The key type for the attribute. Can be either <code>HASH</code> or <code>RANGE</code>.</p> </li> </ul> <p>For more information about primary keys, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey\">Primary Key</a> in the Amazon DynamoDB Developer Guide.</p>",
-                "min_length": 1,
-                "max_length": 2,
                 "serialized_name": "KeySchema",
                 "members": {
                   "type": "structure",
@@ -4181,8 +4054,6 @@
                     "attribute_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of a key attribute.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "AttributeName"
                     },
                     "key_type": {
@@ -4231,19 +4102,16 @@
                   "number_of_decreases_today": {
                     "type": "integer",
                     "documentation": "<p>The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Limits</a> in the Amazon DynamoDB Developer Guide.</p>",
-                    "min_length": 1,
                     "serialized_name": "NumberOfDecreasesToday"
                   },
                   "read_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of strongly consistent reads consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>. Eventually consistent reads require less effort than strongly consistent reads, so a setting of 50 <i>ReadCapacityUnits</i> per second provides 100 eventually consistent <i>ReadCapacityUnits</i> per second.</p>",
-                    "min_length": 1,
                     "serialized_name": "ReadCapacityUnits"
                   },
                   "write_capacity_units": {
                     "type": "integer",
                     "documentation": "<p>The maximum number of writes consumed per second before Amazon DynamoDB returns a <i>ThrottlingException</i>.</p>",
-                    "min_length": 1,
                     "serialized_name": "WriteCapacityUnits"
                   }
                 }
@@ -4269,16 +4137,11 @@
                     "index_name": {
                       "type": "string",
                       "documentation": "<p>Represents the name of the secondary index.</p>",
-                      "min_length": 3,
-                      "max_length": 255,
-                      "pattern": "[a-zA-Z0-9_.-]+",
                       "serialized_name": "IndexName"
                     },
                     "key_schema": {
                       "type": "list",
                       "documentation": "Represents the complete index key schema, which consists of one or more pairs of attribute names and key types (<code>HASH</code> or <code>RANGE</code>).",
-                      "min_length": 1,
-                      "max_length": 2,
                       "serialized_name": "KeySchema",
                       "members": {
                         "type": "structure",
@@ -4287,8 +4150,6 @@
                           "attribute_name": {
                             "type": "string",
                             "documentation": "<p>Represents the name of a key attribute.</p>",
-                            "min_length": 1,
-                            "max_length": 255,
                             "serialized_name": "AttributeName"
                           },
                           "key_type": {
@@ -4321,13 +4182,9 @@
                         "non_key_attributes": {
                           "type": "list",
                           "documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p> <p>The total count of attributes specified in <i>NonKeyAttributes</i>, summed across all of the local secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p>",
-                          "min_length": 1,
-                          "max_length": 20,
                           "serialized_name": "NonKeyAttributes",
                           "members": {
-                            "type": "string",
-                            "min_length": 1,
-                            "max_length": 255
+                            "type": "string"
                           }
                         }
                       }

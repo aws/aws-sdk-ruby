@@ -40,16 +40,11 @@
               "domain_id": {
                 "type": "string",
                 "documentation": "<p>An internally generated unique identifier for a domain.</p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "DomainId"
               },
               "domain_name": {
                 "type": "string",
                 "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
-                "min_length": 3,
-                "max_length": 28,
-                "pattern": "[a-z][a-z0-9\\-]+",
                 "serialized_name": "DomainName"
               },
               "created": {
@@ -65,7 +60,6 @@
               "num_searchable_docs": {
                 "type": "integer",
                 "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
-                "min_length": 0,
                 "serialized_name": "NumSearchableDocs"
               },
               "doc_service": {
@@ -120,13 +114,11 @@
               "search_partition_count": {
                 "type": "integer",
                 "documentation": "<p>The number of partitions across which the search index is spread.</p>",
-                "min_length": 1,
                 "serialized_name": "SearchPartitionCount"
               },
               "search_instance_count": {
                 "type": "integer",
                 "documentation": "<p>The number of search instances that are available to process search requests.</p>",
-                "min_length": 1,
                 "serialized_name": "SearchInstanceCount"
               }
             }
@@ -427,9 +419,6 @@
                   "index_field_name": {
                     "type": "string",
                     "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                    "min_length": 1,
-                    "max_length": 64,
-                    "pattern": "[a-z][a-z0-9_]*",
                     "serialized_name": "IndexFieldName"
                   },
                   "index_field_type": {
@@ -450,7 +439,6 @@
                       "default_value": {
                         "type": "integer",
                         "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
-                        "min_length": 0,
                         "serialized_name": "DefaultValue"
                       }
                     }
@@ -463,8 +451,6 @@
                       "default_value": {
                         "type": "string",
                         "documentation": "<p>The default value for a literal field. Optional.</p>",
-                        "min_length": 0,
-                        "max_length": 1024,
                         "serialized_name": "DefaultValue"
                       },
                       "search_enabled": {
@@ -492,8 +478,6 @@
                       "default_value": {
                         "type": "string",
                         "documentation": "<p>The default value for a text field. Optional.</p>",
-                        "min_length": 0,
-                        "max_length": 1024,
                         "serialized_name": "DefaultValue"
                       },
                       "facet_enabled": {
@@ -509,9 +493,6 @@
                       "text_processor": {
                         "type": "string",
                         "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
-                        "min_length": 1,
-                        "max_length": 64,
-                        "pattern": "[a-z][a-z0-9_]*",
                         "serialized_name": "TextProcessor"
                       }
                     }
@@ -542,16 +523,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             }
                           }
@@ -564,16 +540,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             },
                             "separator": {
@@ -584,7 +555,6 @@
                             "language": {
                               "type": "string",
                               "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
-                              "pattern": "[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*",
                               "serialized_name": "Language"
                             }
                           }
@@ -597,16 +567,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             },
                             "cases": {
@@ -615,15 +580,11 @@
                               "serialized_name": "Cases",
                               "keys": {
                                 "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>",
-                                "min_length": 0,
-                                "max_length": 1024
+                                "documentation": "<p>The value of a field or source document attribute.</p>"
                               },
                               "members": {
                                 "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>",
-                                "min_length": 0,
-                                "max_length": 1024
+                                "documentation": "<p>The value of a field or source document attribute.</p>"
                               }
                             }
                           }
@@ -651,7 +612,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -779,16 +739,11 @@
                   "rank_name": {
                     "type": "string",
                     "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                    "min_length": 1,
-                    "max_length": 64,
-                    "pattern": "[a-z][a-z0-9_]*",
                     "serialized_name": "RankName"
                   },
                   "rank_expression": {
                     "type": "string",
                     "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
-                    "min_length": 1,
-                    "max_length": 10240,
                     "serialized_name": "RankExpression"
                   }
                 }
@@ -811,7 +766,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -909,16 +863,11 @@
               "domain_id": {
                 "type": "string",
                 "documentation": "<p>An internally generated unique identifier for a domain.</p>",
-                "min_length": 1,
-                "max_length": 64,
                 "serialized_name": "DomainId"
               },
               "domain_name": {
                 "type": "string",
                 "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
-                "min_length": 3,
-                "max_length": 28,
-                "pattern": "[a-z][a-z0-9\\-]+",
                 "serialized_name": "DomainName"
               },
               "created": {
@@ -934,7 +883,6 @@
               "num_searchable_docs": {
                 "type": "integer",
                 "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
-                "min_length": 0,
                 "serialized_name": "NumSearchableDocs"
               },
               "doc_service": {
@@ -989,13 +937,11 @@
               "search_partition_count": {
                 "type": "integer",
                 "documentation": "<p>The number of partitions across which the search index is spread.</p>",
-                "min_length": 1,
                 "serialized_name": "SearchPartitionCount"
               },
               "search_instance_count": {
                 "type": "integer",
                 "documentation": "<p>The number of search instances that are available to process search requests.</p>",
-                "min_length": 1,
                 "serialized_name": "SearchInstanceCount"
               }
             }
@@ -1072,9 +1018,6 @@
                   "index_field_name": {
                     "type": "string",
                     "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                    "min_length": 1,
-                    "max_length": 64,
-                    "pattern": "[a-z][a-z0-9_]*",
                     "serialized_name": "IndexFieldName"
                   },
                   "index_field_type": {
@@ -1095,7 +1038,6 @@
                       "default_value": {
                         "type": "integer",
                         "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
-                        "min_length": 0,
                         "serialized_name": "DefaultValue"
                       }
                     }
@@ -1108,8 +1050,6 @@
                       "default_value": {
                         "type": "string",
                         "documentation": "<p>The default value for a literal field. Optional.</p>",
-                        "min_length": 0,
-                        "max_length": 1024,
                         "serialized_name": "DefaultValue"
                       },
                       "search_enabled": {
@@ -1137,8 +1077,6 @@
                       "default_value": {
                         "type": "string",
                         "documentation": "<p>The default value for a text field. Optional.</p>",
-                        "min_length": 0,
-                        "max_length": 1024,
                         "serialized_name": "DefaultValue"
                       },
                       "facet_enabled": {
@@ -1154,9 +1092,6 @@
                       "text_processor": {
                         "type": "string",
                         "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
-                        "min_length": 1,
-                        "max_length": 64,
-                        "pattern": "[a-z][a-z0-9_]*",
                         "serialized_name": "TextProcessor"
                       }
                     }
@@ -1187,16 +1122,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             }
                           }
@@ -1209,16 +1139,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             },
                             "separator": {
@@ -1229,7 +1154,6 @@
                             "language": {
                               "type": "string",
                               "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
-                              "pattern": "[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*",
                               "serialized_name": "Language"
                             }
                           }
@@ -1242,16 +1166,11 @@
                             "source_name": {
                               "type": "string",
                               "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                              "min_length": 1,
-                              "max_length": 64,
-                              "pattern": "[a-z][a-z0-9_]*",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
                               "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                              "min_length": 0,
-                              "max_length": 1024,
                               "serialized_name": "DefaultValue"
                             },
                             "cases": {
@@ -1260,15 +1179,11 @@
                               "serialized_name": "Cases",
                               "keys": {
                                 "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>",
-                                "min_length": 0,
-                                "max_length": 1024
+                                "documentation": "<p>The value of a field or source document attribute.</p>"
                               },
                               "members": {
                                 "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>",
-                                "min_length": 0,
-                                "max_length": 1024
+                                "documentation": "<p>The value of a field or source document attribute.</p>"
                               }
                             }
                           }
@@ -1296,7 +1211,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -1402,16 +1316,11 @@
                   "rank_name": {
                     "type": "string",
                     "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                    "min_length": 1,
-                    "max_length": 64,
-                    "pattern": "[a-z][a-z0-9_]*",
                     "serialized_name": "RankName"
                   },
                   "rank_expression": {
                     "type": "string",
                     "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
-                    "min_length": 1,
-                    "max_length": 10240,
                     "serialized_name": "RankExpression"
                   }
                 }
@@ -1434,7 +1343,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -1526,9 +1434,6 @@
               "options": {
                 "type": "string",
                 "documentation": "<p>The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[a-z][a-z0-9_]*",
                 "serialized_name": "Options"
               },
               "status": {
@@ -1549,7 +1454,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -1641,16 +1545,11 @@
                 "domain_id": {
                   "type": "string",
                   "documentation": "<p>An internally generated unique identifier for a domain.</p>",
-                  "min_length": 1,
-                  "max_length": 64,
                   "serialized_name": "DomainId"
                 },
                 "domain_name": {
                   "type": "string",
                   "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
-                  "min_length": 3,
-                  "max_length": 28,
-                  "pattern": "[a-z][a-z0-9\\-]+",
                   "serialized_name": "DomainName"
                 },
                 "created": {
@@ -1666,7 +1565,6 @@
                 "num_searchable_docs": {
                   "type": "integer",
                   "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
-                  "min_length": 0,
                   "serialized_name": "NumSearchableDocs"
                 },
                 "doc_service": {
@@ -1721,13 +1619,11 @@
                 "search_partition_count": {
                   "type": "integer",
                   "documentation": "<p>The number of partitions across which the search index is spread.</p>",
-                  "min_length": 1,
                   "serialized_name": "SearchPartitionCount"
                 },
                 "search_instance_count": {
                   "type": "integer",
                   "documentation": "<p>The number of search instances that are available to process search requests.</p>",
-                  "min_length": 1,
                   "serialized_name": "SearchInstanceCount"
                 }
               }
@@ -1811,9 +1707,6 @@
                     "index_field_name": {
                       "type": "string",
                       "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                      "min_length": 1,
-                      "max_length": 64,
-                      "pattern": "[a-z][a-z0-9_]*",
                       "serialized_name": "IndexFieldName"
                     },
                     "index_field_type": {
@@ -1834,7 +1727,6 @@
                         "default_value": {
                           "type": "integer",
                           "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
-                          "min_length": 0,
                           "serialized_name": "DefaultValue"
                         }
                       }
@@ -1847,8 +1739,6 @@
                         "default_value": {
                           "type": "string",
                           "documentation": "<p>The default value for a literal field. Optional.</p>",
-                          "min_length": 0,
-                          "max_length": 1024,
                           "serialized_name": "DefaultValue"
                         },
                         "search_enabled": {
@@ -1876,8 +1766,6 @@
                         "default_value": {
                           "type": "string",
                           "documentation": "<p>The default value for a text field. Optional.</p>",
-                          "min_length": 0,
-                          "max_length": 1024,
                           "serialized_name": "DefaultValue"
                         },
                         "facet_enabled": {
@@ -1893,9 +1781,6 @@
                         "text_processor": {
                           "type": "string",
                           "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
-                          "min_length": 1,
-                          "max_length": 64,
-                          "pattern": "[a-z][a-z0-9_]*",
                           "serialized_name": "TextProcessor"
                         }
                       }
@@ -1926,16 +1811,11 @@
                               "source_name": {
                                 "type": "string",
                                 "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                                "min_length": 1,
-                                "max_length": 64,
-                                "pattern": "[a-z][a-z0-9_]*",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
                                 "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                                "min_length": 0,
-                                "max_length": 1024,
                                 "serialized_name": "DefaultValue"
                               }
                             }
@@ -1948,16 +1828,11 @@
                               "source_name": {
                                 "type": "string",
                                 "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                                "min_length": 1,
-                                "max_length": 64,
-                                "pattern": "[a-z][a-z0-9_]*",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
                                 "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                                "min_length": 0,
-                                "max_length": 1024,
                                 "serialized_name": "DefaultValue"
                               },
                               "separator": {
@@ -1968,7 +1843,6 @@
                               "language": {
                                 "type": "string",
                                 "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
-                                "pattern": "[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*",
                                 "serialized_name": "Language"
                               }
                             }
@@ -1981,16 +1855,11 @@
                               "source_name": {
                                 "type": "string",
                                 "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
-                                "min_length": 1,
-                                "max_length": 64,
-                                "pattern": "[a-z][a-z0-9_]*",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
                                 "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
-                                "min_length": 0,
-                                "max_length": 1024,
                                 "serialized_name": "DefaultValue"
                               },
                               "cases": {
@@ -1999,15 +1868,11 @@
                                 "serialized_name": "Cases",
                                 "keys": {
                                   "type": "string",
-                                  "documentation": "<p>The value of a field or source document attribute.</p>",
-                                  "min_length": 0,
-                                  "max_length": 1024
+                                  "documentation": "<p>The value of a field or source document attribute.</p>"
                                 },
                                 "members": {
                                   "type": "string",
-                                  "documentation": "<p>The value of a field or source document attribute.</p>",
-                                  "min_length": 0,
-                                  "max_length": 1024
+                                  "documentation": "<p>The value of a field or source document attribute.</p>"
                                 }
                               }
                             }
@@ -2035,7 +1900,6 @@
                     "update_version": {
                       "type": "integer",
                       "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                      "min_length": 0,
                       "serialized_name": "UpdateVersion"
                     },
                     "state": {
@@ -2142,16 +2006,11 @@
                     "rank_name": {
                       "type": "string",
                       "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-                      "min_length": 1,
-                      "max_length": 64,
-                      "pattern": "[a-z][a-z0-9_]*",
                       "serialized_name": "RankName"
                     },
                     "rank_expression": {
                       "type": "string",
                       "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
-                      "min_length": 1,
-                      "max_length": 10240,
                       "serialized_name": "RankExpression"
                     }
                   }
@@ -2174,7 +2033,6 @@
                     "update_version": {
                       "type": "integer",
                       "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                      "min_length": 0,
                       "serialized_name": "UpdateVersion"
                     },
                     "state": {
@@ -2281,7 +2139,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -2387,7 +2244,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -2493,7 +2349,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -2599,7 +2454,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -2683,10 +2537,7 @@
             "serialized_name": "FieldNames",
             "members": {
               "type": "string",
-              "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
-              "min_length": 1,
-              "max_length": 64,
-              "pattern": "[a-z][a-z0-9_]*"
+              "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
             }
           }
         }
@@ -2759,9 +2610,6 @@
               "options": {
                 "type": "string",
                 "documentation": "<p>The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.</p>",
-                "min_length": 1,
-                "max_length": 64,
-                "pattern": "[a-z][a-z0-9_]*",
                 "serialized_name": "Options"
               },
               "status": {
@@ -2782,7 +2630,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -2900,7 +2747,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -3024,7 +2870,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -3148,7 +2993,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
@@ -3272,7 +3116,6 @@
                   "update_version": {
                     "type": "integer",
                     "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
-                    "min_length": 0,
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {

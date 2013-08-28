@@ -755,7 +755,6 @@
                       "items": {
                         "type": "list",
                         "documentation": "A complex type that contains origins for this distribution.",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",
@@ -2568,7 +2567,6 @@
                       "items": {
                         "type": "list",
                         "documentation": "A complex type that contains origins for this distribution.",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",
@@ -3026,7 +3024,6 @@
                   "items": {
                     "type": "list",
                     "documentation": "A complex type that contains origins for this distribution.",
-                    "min_length": 1,
                     "serialized_name": "Items",
                     "members": {
                       "type": "structure",
@@ -4186,7 +4183,6 @@
                         "items": {
                           "type": "list",
                           "documentation": "A complex type that contains origins for this distribution.",
-                          "min_length": 1,
                           "serialized_name": "Items",
                           "members": {
                             "type": "structure",
@@ -5643,7 +5639,6 @@
                       "items": {
                         "type": "list",
                         "documentation": "A complex type that contains origins for this distribution.",
-                        "min_length": 1,
                         "serialized_name": "Items",
                         "members": {
                           "type": "structure",
