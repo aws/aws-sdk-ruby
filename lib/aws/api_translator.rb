@@ -80,6 +80,7 @@ module Aws
       @operations.each do |operation|
         api.operations[operation.name] = operation
       end
+      api.metadata.delete('xmlnamespace') unless api.type.match(/xml/)
       api
     end
 
