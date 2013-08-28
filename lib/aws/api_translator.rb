@@ -89,7 +89,6 @@ module Aws
     property :endpoint, from: :global_endpoint
 
     metadata :signature_version
-    metadata :endpoint_prefix
     metadata :checksum_format
     metadata :json_version
     metadata :target_prefix
@@ -99,6 +98,10 @@ module Aws
     metadata :service_abbreviation
     metadata :result_wrapped
     metadata :xmlnamespace
+
+    def set_endpoint_prefix(prefix)
+      @properties['endpoint'] = "#{prefix}.%s.amazonaws.com"
+    end
 
     def set_operations(operations)
       @operations = operations.values.map do |src|
