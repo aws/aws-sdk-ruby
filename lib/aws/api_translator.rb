@@ -140,6 +140,7 @@ module Aws
 
     def set_errors(errors)
       @errors = errors.map { |src| ShapeTranslator.translate(src) }
+      @errors = nil if @errors.empty?
     end
 
   end
