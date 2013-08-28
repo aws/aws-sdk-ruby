@@ -17,7 +17,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
           build_input_params(context)
-          context.http_request.http_method = context.operation.http_verb || 'POST'
+          context.http_request.http_method = context.operation.http_method
           context.http_request.path = interpolated_uri(context)
 
           handler.call(context).on_complete do |response|

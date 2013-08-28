@@ -22,7 +22,7 @@ module Aws
         operation = context.operation
 
         # serialize xml request
-        if ['PUT', 'POST'].include?(operation.http_verb)
+        if ['PUT', 'POST'].include?(operation.http_method)
           xml = Xml::Builder.to_xml(operation.input, context.params)
           context.http_request.body = xml
           context.http_request.headers['Content-Type'] = 'application/xml'
