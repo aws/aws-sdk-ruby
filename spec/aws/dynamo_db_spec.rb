@@ -19,9 +19,9 @@ module AWS
 
     let(:config) { stub_config }
 
-    let(:client) { config.dynamo_db_client }
-
     let(:dynamo_db) { DynamoDB.new(:config => config) }
+
+    let(:client) { dynamo_db.client }
 
     it_behaves_like 'a class that accepts configuration',
       :dynamo_db_client
