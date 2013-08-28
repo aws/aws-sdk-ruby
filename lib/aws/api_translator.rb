@@ -131,11 +131,11 @@ module Aws
     end
 
     def set_input(src)
-      @input = ShapeTranslator.translate(src)
+      @input = InputShapeTranslator.translate(src)
     end
 
     def set_output(src)
-      @output = ShapeTranslator.translate(src)
+      @output = OutputShapeTranslator.translate(src)
     end
 
     def set_errors(errors)
@@ -185,18 +185,18 @@ module Aws
     end
 
     def set_keys(member)
-      @keys = ShapeTranslator.translate(member)
+      @keys = self.class.translate(member)
     end
 
     # Structure shapes have a hash of members.  Lists and maps have a
     # single member (with a type).
     def set_members(members)
       if members['type'].is_a?(String)
-        @members = ShapeTranslator.translate(members)
+        @members = self.class.translate(members)
       else
         @members = {}
         members.each do |name, src|
-          shape = ShapeTranslator.translate(src)
+          shape = self.class.translate(src)
           shape.serialized_name ||= name
           @members[underscore(name)] = shape
         end
@@ -210,6 +210,12 @@ module Aws
         join('_').downcase                        # join parts
     end
 
+  end
+
+  class InputShapeTranslator < ShapeTranslator
+  end
+
+  class OutputShapeTranslator < ShapeTranslator
   end
 
 end
