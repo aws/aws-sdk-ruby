@@ -1,6 +1,5 @@
---title 'AWS Core'
+--title 'AWS SDK Core'
+--embed-mixins
 --markup markdown
---no-api private
-lib/**/*.rb
--
-LICENSE.txt
+--markup-provider rdiscount
+--hide-api private
