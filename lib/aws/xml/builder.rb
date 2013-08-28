@@ -127,9 +127,10 @@ module Aws
       end
 
       def shape_attrs(shape)
-        if uri = shape.xmlns_uri
-          xmlns = shape.xmlns_prefix ? "#{shape.xmlns_prefix}:#{uri}" : uri
-          { xmlns: xmlns }
+        if xmlns = shape.xmlns_uri
+          attribute = 'xmlns'
+          attribute += ':' + shape.xmlns_prefix if shape.xmlns_prefix
+          { attribute => xmlns }
         else
           {}
         end

@@ -371,9 +371,9 @@ module Aws
           }
           expect(xml(params)).to eq(<<-XML)
 <xml>
-  <scalar xmlns="prefix:http://xmlns.com/uri">value</scalar>
-  <struct xmlns="prefix:http://xmlns.com/uri">
-    <list xmlns="prefix:http://xmlns.com/uri">
+  <scalar xmlns:prefix="http://xmlns.com/uri">value</scalar>
+  <struct xmlns:prefix="http://xmlns.com/uri">
+    <list xmlns:prefix="http://xmlns.com/uri">
       <item>a</item>
       <item>b</item>
     </list>
