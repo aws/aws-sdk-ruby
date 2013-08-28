@@ -121,7 +121,8 @@ module Aws
     end
 
     property :name
-    property :documentation_url
+
+    ignore :documentation_url
     ignore :alias
 
     def set_http(http)
