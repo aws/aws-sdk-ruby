@@ -219,6 +219,10 @@ module Aws
 
   class OutputShapeTranslator < ShapeTranslator
     ignore :required
+    ignore :pattern
+    ignore :min_length
+    ignore :max_length
+    ignore :timestamp_format
   end
 
 end
