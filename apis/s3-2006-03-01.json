@@ -957,10 +957,8 @@
                   "type": "structure",
                   "serialized_name": "Grantee",
                   "metadata": {
-                    "xmlnamespace": {
-                      "prefix": "xsi",
-                      "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                    }
+                    "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "xmlns_prefix": "xsi"
                   },
                   "members": {
                     "type": {
@@ -1264,10 +1262,8 @@
                       "type": "structure",
                       "serialized_name": "Grantee",
                       "metadata": {
-                        "xmlnamespace": {
-                          "prefix": "xsi",
-                          "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                        }
+                        "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "xmlns_prefix": "xsi"
                       },
                       "members": {
                         "type": {
@@ -1924,10 +1920,8 @@
                   "type": "structure",
                   "serialized_name": "Grantee",
                   "metadata": {
-                    "xmlnamespace": {
-                      "prefix": "xsi",
-                      "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                    }
+                    "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "xmlns_prefix": "xsi"
                   },
                   "members": {
                     "type": {
@@ -3000,10 +2994,8 @@
                       "type": "structure",
                       "serialized_name": "Grantee",
                       "metadata": {
-                        "xmlnamespace": {
-                          "prefix": "xsi",
-                          "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                        }
+                        "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "xmlns_prefix": "xsi"
                       },
                       "members": {
                         "display_name": {
@@ -3361,10 +3353,8 @@
                           "type": "structure",
                           "serialized_name": "Grantee",
                           "metadata": {
-                            "xmlnamespace": {
-                              "prefix": "xsi",
-                              "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                            }
+                            "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                            "xmlns_prefix": "xsi"
                           },
                           "members": {
                             "display_name": {
@@ -4033,10 +4023,8 @@
                       "type": "structure",
                       "serialized_name": "Grantee",
                       "metadata": {
-                        "xmlnamespace": {
-                          "prefix": "xsi",
-                          "uri": "http://www.w3.org/2001/XMLSchema-instance"
-                        }
+                        "xmlns_uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "xmlns_prefix": "xsi"
                       },
                       "members": {
                         "display_name": {

@@ -184,6 +184,12 @@ module Aws
     ignore :member_order
     ignore :box
 
+    def set_xmlnamespace(xmlns)
+      metadata = @properties['metadata'] ||= {}
+      metadata['xmlns_uri'] = xmlns['uri']
+      metadata['xmlns_prefix'] = xmlns['prefix'] if xmlns['prefix']
+    end
+
     def set_type(type)
       @properties['type'] = CONVERT_TYPES[type] || type
     end
