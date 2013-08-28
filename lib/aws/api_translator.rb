@@ -147,6 +147,11 @@ module Aws
   # @api private
   class ShapeTranslator < Translator
 
+    CONVERT_TYPES = {
+      'long' => 'integer',
+      'double' => 'float',
+    }
+
     def translated
       shape = Seahorse::Model::Shapes::Shape.from_hash(@properties)
       shape.members = @members unless @members.nil?
@@ -154,7 +159,6 @@ module Aws
       shape
     end
 
-    property :type
     property :location
     property :serialized_name, from: :xmlname
     property :serialized_name, from: :location_name
@@ -175,6 +179,10 @@ module Aws
     ignore :shape_name
     ignore :member_order
     ignore :box
+
+    def set_type(type)
+      @properties['type'] = CONVERT_TYPES[type] || type
+    end
 
     def set_keys(member)
       @keys = ShapeTranslator.translate(member)
