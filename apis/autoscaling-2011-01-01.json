@@ -1,0 +1,3012 @@
+{
+  "type": "query",
+  "api_version": "2011-01-01",
+  "metadata": {
+    "endpoint_prefix": "autoscaling",
+    "result_wrapped": true,
+    "service_full_name": "Auto Scaling",
+    "signature_version": "v4"
+  },
+  "documentation": "<fullname>Auto Scaling</fullname> <p> This guide provides detailed information about Auto Scaling actions, data types, parameters, and errors. For detailed information about Auto Scaling features and their associated API calls, go to the <a href=\"http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/\">Auto Scaling Developer Guide</a>. </p> <p> Auto Scaling is a web service designed to automatically launch or terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on user-defined policies, schedules, and health checks. This service is used in conjunction with Amazon CloudWatch and Elastic Load Balancing services. </p> <p>This reference is based on the current WSDL, which is available at:</p> <p><a href=\"http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl\">http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl</a> </p> <p><b>Endpoints</b></p> <p>For information about this product's regions and endpoints, go to <a href=\"http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>",
+  "operations": {
+    "create_auto_scaling_group": {
+      "name": "CreateAutoScalingGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new Auto Scaling group with the specified name and other attributes. When the creation request is completed, the Auto Scaling group is ready to be used in other calls. </p> The Auto Scaling group name must be unique within the scope of your AWS account, and under the quota of Auto Scaling groups allowed for your account.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "launch_configuration_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the launch configuration to use with the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "LaunchConfigurationName"
+          },
+          "min_size": {
+            "type": "integer",
+            "required": true,
+            "documentation": "<p> The minimum size of the Auto Scaling group. </p>",
+            "serialized_name": "MinSize"
+          },
+          "max_size": {
+            "type": "integer",
+            "required": true,
+            "documentation": "<p> The maximum size of the Auto Scaling group. </p>",
+            "serialized_name": "MaxSize"
+          },
+          "desired_capacity": {
+            "type": "integer",
+            "documentation": "<p> The number of Amazon EC2 instances that should be running in the group. </p>",
+            "serialized_name": "DesiredCapacity"
+          },
+          "default_cooldown": {
+            "type": "integer",
+            "documentation": "<p> The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. </p>",
+            "serialized_name": "DefaultCooldown"
+          },
+          "availability_zones": {
+            "type": "list",
+            "documentation": "<p> A list of Availability Zones for the Auto Scaling group. This is required unless you have specified subnets. </p>",
+            "min_length": 1,
+            "serialized_name": "AvailabilityZones",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "load_balancer_names": {
+            "type": "list",
+            "documentation": "<p> A list of load balancers to use. </p>",
+            "serialized_name": "LoadBalancerNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "health_check_type": {
+            "type": "string",
+            "documentation": "<p>The service you want the health status from, Amazon EC2 or Elastic Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.</p>",
+            "min_length": 1,
+            "max_length": 32,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "HealthCheckType"
+          },
+          "health_check_grace_period": {
+            "type": "integer",
+            "documentation": "<p>Length of time in seconds after a new Amazon EC2 instance comes into service that Auto Scaling starts checking its health.</p>",
+            "serialized_name": "HealthCheckGracePeriod"
+          },
+          "placement_group": {
+            "type": "string",
+            "documentation": "<p>Physical location of your cluster placement group created in Amazon EC2. For more information about cluster placement group, see <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Using Cluster Instances</a></p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PlacementGroup"
+          },
+          "vpc_zone_identifier": {
+            "type": "string",
+            "documentation": "<p>A comma-separated list of subnet identifiers of Amazon Virtual Private Clouds (Amazon VPCs).</p> <p>If you specify subnets and Availability Zones with this call, ensure that the subnets' Availability Zones match the Availability Zones specified. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "VPCZoneIdentifier"
+          },
+          "termination_policies": {
+            "type": "list",
+            "documentation": "<p>A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed. </p> <p> For more information on configuring a termination policy for your Auto Scaling group, go to <a href=\"http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Instance Termination Policy for Your Auto Scaling Group</a> in the the <i>Auto Scaling Developer Guide</i>. </p>",
+            "serialized_name": "TerminationPolicies",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "tags": {
+            "type": "list",
+            "documentation": "<p> The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. Valid values: key=<i>value</i>, value=<i>value</i>, propagate=<i>true</i> or <i>false</i>. Value and propagate are optional parameters. </p>",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The tag applied to an Auto Scaling group. </p>",
+              "members": {
+                "resource_id": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceId"
+                },
+                "resource_type": {
+                  "type": "string",
+                  "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceType"
+                },
+                "key": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p> The key of the tag. </p>",
+                  "min_length": 1,
+                  "max_length": 128,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "documentation": "<p> The value of the tag. </p>",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Value"
+                },
+                "propagate_at_launch": {
+                  "type": "boolean",
+                  "documentation": "<p> Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change. </p>",
+                  "serialized_name": "PropagateAtLaunch"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The named Auto Scaling group or launch configuration already exists. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_launch_configuration": {
+      "name": "CreateLaunchConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new launch configuration. The launch configuration name must be unique within the scope of the client's AWS account. The maximum limit of launch configurations, which by default is 100, must not yet have been met; otherwise, the call will fail. When created, the new launch configuration is available for immediate use. </p> <p>You can create a launch configuration with Amazon EC2 security groups or with Amazon VPC security groups. However, you can't use Amazon EC2 security groups together with Amazon VPC security groups, or vice versa.</p> At this time, Auto Scaling launch configurations don't support compressed (e.g. zipped) user data files.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "launch_configuration_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the launch configuration to create. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "LaunchConfigurationName"
+          },
+          "image_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> Unique ID of the <i>Amazon Machine Image</i> (AMI) which was assigned during registration. For more information about Amazon EC2 images, please see <a href=\"http://aws.amazon.com/ec2/\"> Amazon EC2 product documentation</a>. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "ImageId"
+          },
+          "key_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Amazon EC2 key pair. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "KeyName"
+          },
+          "security_groups": {
+            "type": "list",
+            "documentation": "<p> The names of the security groups with which to associate Amazon EC2 or Amazon VPC instances. Specify Amazon EC2 security groups using security group names, such as <code>websrv</code>. Specify Amazon VPC security groups using security group IDs, such as <code>sg-12345678</code>. For more information about Amazon EC2 security groups, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?using-network-security.html\"> Using Security Groups</a> in the Amazon EC2 product documentation. For more information about Amazon VPC security groups, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/index.html?VPC_SecurityGroups.html\"> Security Groups</a> in the Amazon VPC product documentation. </p>",
+            "serialized_name": "SecurityGroups",
+            "members": {
+              "type": "string",
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "user_data": {
+            "type": "string",
+            "documentation": "<p> The user data available to the launched Amazon EC2 instances. For more information about Amazon EC2 user data, please see <a href=\"http://aws.amazon.com/ec2/\"> Amazon EC2 product documentation</a>. </p>",
+            "max_length": 21847,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "UserData"
+          },
+          "instance_type": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The instance type of the Amazon EC2 instance. For more information about Amazon EC2 instance types, please see <a href=\"http://aws.amazon.com/ec2/\"> Amazon EC2 product documentation</a> </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "InstanceType"
+          },
+          "kernel_id": {
+            "type": "string",
+            "documentation": "<p> The ID of the kernel associated with the Amazon EC2 AMI. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "KernelId"
+          },
+          "ramdisk_id": {
+            "type": "string",
+            "documentation": "<p> The ID of the RAM disk associated with the Amazon EC2 AMI. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "RamdiskId"
+          },
+          "block_device_mappings": {
+            "type": "list",
+            "documentation": "<p> A list of mappings that specify how block devices are exposed to the instance. Each mapping is made up of a <i>VirtualName</i>, a <i>DeviceName</i>, and an <i>ebs</i> data structure that contains information about the associated Elastic Block Storage volume. For more information about Amazon EC2 BlockDeviceMappings, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/index.html?block-device-mapping-concepts.html\"> Block Device Mapping</a> in the Amazon EC2 product documentation. </p>",
+            "serialized_name": "BlockDeviceMappings",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The <code>BlockDeviceMapping</code> data type. </p>",
+              "members": {
+                "virtual_name": {
+                  "type": "string",
+                  "documentation": "<p>The virtual name associated with the device. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "VirtualName"
+                },
+                "device_name": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p> The name of the device within Amazon EC2. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "DeviceName"
+                },
+                "ebs": {
+                  "type": "structure",
+                  "documentation": "<p> The Elastic Block Storage volume information. </p>",
+                  "serialized_name": "Ebs",
+                  "members": {
+                    "snapshot_id": {
+                      "type": "string",
+                      "documentation": "<p> The snapshot ID. </p>",
+                      "min_length": 1,
+                      "max_length": 255,
+                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                      "serialized_name": "SnapshotId"
+                    },
+                    "volume_size": {
+                      "type": "integer",
+                      "documentation": "<p> The volume size, in gigabytes. </p>",
+                      "min_length": 1,
+                      "max_length": 1024,
+                      "serialized_name": "VolumeSize"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "instance_monitoring": {
+            "type": "structure",
+            "documentation": "<p>Enables detailed monitoring, which is enabled by default.</p> <p> When detailed monitoring is enabled, CloudWatch will generate metrics every minute and your account will be charged a fee. When you disable detailed monitoring, by specifying <code>False</code>, Cloudwatch will generate metrics every 5 minutes. For information about monitoring, see the <a href=\"http://aws.amazon.com/cloudwatch/\">Amazon CloudWatch</a> product page. </p>",
+            "serialized_name": "InstanceMonitoring",
+            "members": {
+              "enabled": {
+                "type": "boolean",
+                "documentation": "<p> If <code>True</code>, instance monitoring is enabled. </p>",
+                "serialized_name": "Enabled"
+              }
+            }
+          },
+          "spot_price": {
+            "type": "string",
+            "documentation": "<p>The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the price you specify exceeds the current Spot market price. For more information on launching Spot Instances, go to <a href=\"http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html\"> Using Auto Scaling to Launch Spot Instances</a> in the <i>Auto Scaling Developer Guide</i>. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "serialized_name": "SpotPrice"
+          },
+          "iam_instance_profile": {
+            "type": "string",
+            "documentation": "<p>The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. For information on launching EC2 instances with an IAM role, go to <a href=\"http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html\">Launching Auto Scaling Instances With an IAM Role</a> in the <i>Auto Scaling Developer Guide</i>.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "IamInstanceProfile"
+          },
+          "ebs_optimized": {
+            "type": "boolean",
+            "documentation": "<p> Whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal EBS I/O performance. This optimization is not available with all instance types. Additional usage charges apply when using an EBS Optimized instance. For information about EBS-optimized instances, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html#EBSOptimized\">EBS-Optimized Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>",
+            "serialized_name": "EbsOptimized"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The named Auto Scaling group or launch configuration already exists. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_or_update_tags": {
+      "name": "CreateOrUpdateTags",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates new tags or updates existing tags for an Auto Scaling group. </p> A tag's definition is composed of a resource ID, resource type, key and value, and the propagate flag. Value and the propagate flag are optional parameters. See the Request Parameters for more information.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "tags": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p> The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. The resource type and resource ID identify the type and name of resource for which the tag is created. Currently, <code>auto-scaling-group</code> is the only supported resource type. The valid value for the resource ID is <i>groupname</i>. </p> <p>The <code>PropagateAtLaunch</code> flag defines whether the new tag will be applied to instances launched by the Auto Scaling group. Valid values are <code>true</code> or <code>false</code>. However, instances that are already running will not get the new or updated tag. Likewise, when you modify a tag, the updated version will be applied only to new instances launched by the Auto Scaling group after the change. Running instances that had the previous version of the tag will continue to have the older tag. </p> <p>When you create a tag and a tag of the same name already exists, the operation overwrites the previous tag definition, but you will not get an error message. </p>",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The tag applied to an Auto Scaling group. </p>",
+              "members": {
+                "resource_id": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceId"
+                },
+                "resource_type": {
+                  "type": "string",
+                  "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceType"
+                },
+                "key": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p> The key of the tag. </p>",
+                  "min_length": 1,
+                  "max_length": 128,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "documentation": "<p> The value of the tag. </p>",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Value"
+                },
+                "propagate_at_launch": {
+                  "type": "boolean",
+                  "documentation": "<p> Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change. </p>",
+                  "serialized_name": "PropagateAtLaunch"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The named Auto Scaling group or launch configuration already exists. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_auto_scaling_group": {
+      "name": "DeleteAutoScalingGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes the specified Auto Scaling group if the group has no instances and no scaling activities in progress. </p> To remove all instances before calling DeleteAutoScalingGroup, you can call UpdateAutoScalingGroup to set the minimum and maximum size of the AutoScalingGroup to zero.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "force_delete": {
+            "type": "boolean",
+            "documentation": "<p>Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. </p>",
+            "serialized_name": "ForceDelete"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> This is returned when you cannot delete a launch configuration or Auto Scaling group because it is being used. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_launch_configuration": {
+      "name": "DeleteLaunchConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes the specified LaunchConfiguration. </p> <p> The specified launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "launch_configuration_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the launch configuration. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "LaunchConfigurationName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> This is returned when you cannot delete a launch configuration or Auto Scaling group because it is being used. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_notification_configuration": {
+      "name": "DeleteNotificationConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Deletes notifications created by PutNotificationConfiguration.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name of the Auto Scaling group.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "topic_arn": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "TopicARN"
+          }
+        }
+      }
+    },
+    "delete_policy": {
+      "name": "DeletePolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Deletes a policy created by PutScalingPolicy.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p>The name of the Auto Scaling group.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name or PolicyARN of the policy you want to delete.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PolicyName"
+          }
+        }
+      }
+    },
+    "delete_scheduled_action": {
+      "name": "DeleteScheduledAction",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Deletes a scheduled action previously created using the PutScheduledUpdateGroupAction.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p>The name of the Auto Scaling group.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "scheduled_action_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name of the action you want to delete.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "ScheduledActionName"
+          }
+        }
+      }
+    },
+    "delete_tags": {
+      "name": "DeleteTags",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Removes the specified tags or a set of tags from a set of resources.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "tags": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. Valid values are: Resource type = <i>auto-scaling-group</i>, Resource ID = <i>AutoScalingGroupName</i>, key=<i>value</i>, value=<i>value</i>, propagate=<i>true</i> or <i>false</i>. </p>",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The tag applied to an Auto Scaling group. </p>",
+              "members": {
+                "resource_id": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceId"
+                },
+                "resource_type": {
+                  "type": "string",
+                  "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceType"
+                },
+                "key": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p> The key of the tag. </p>",
+                  "min_length": 1,
+                  "max_length": 128,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "documentation": "<p> The value of the tag. </p>",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Value"
+                },
+                "propagate_at_launch": {
+                  "type": "boolean",
+                  "documentation": "<p> Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change. </p>",
+                  "serialized_name": "PropagateAtLaunch"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_adjustment_types": {
+      "name": "DescribeAdjustmentTypes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns policy adjustment types for use in the PutScalingPolicy action. </p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The output of the DescribeAdjustmentTypes action. </p>",
+        "members": {
+          "adjustment_types": {
+            "type": "list",
+            "documentation": "<p> A list of specific policy adjustment types. </p>",
+            "serialized_name": "AdjustmentTypes",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> Specifies whether the PutScalingPolicy <code>ScalingAdjustment</code> parameter is an absolute number or a percentage of the current capacity. </p>",
+              "members": {
+                "adjustment_type": {
+                  "type": "string",
+                  "documentation": "<p>A policy adjustment type. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AdjustmentType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_auto_scaling_groups": {
+      "name": "DescribeAutoScalingGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a full description of each Auto Scaling group in the given list. This includes all Amazon EC2 instances that are members of the group. If a list of names is not provided, the service returns the full details of all Auto Scaling groups. </p> <p> This action supports pagination by returning a token if there are more pages to retrieve. To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> The <code>AutoScalingGroupNamesType</code> data type. </p>",
+        "members": {
+          "auto_scaling_group_names": {
+            "type": "list",
+            "documentation": "<p> A list of Auto Scaling group names. </p>",
+            "serialized_name": "AutoScalingGroupNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to return. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The <code>AutoScalingGroupsType</code> data type. </p>",
+        "members": {
+          "auto_scaling_groups": {
+            "type": "list",
+            "documentation": "<p> A list of Auto Scaling groups. </p>",
+            "serialized_name": "AutoScalingGroups",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The AutoScalingGroup data type. </p>",
+              "members": {
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the group. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "auto_scaling_group_arn": {
+                  "type": "string",
+                  "documentation": "<p> The Amazon Resource Name (ARN) of the Auto Scaling group. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupARN"
+                },
+                "launch_configuration_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the associated LaunchConfiguration. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "LaunchConfigurationName"
+                },
+                "min_size": {
+                  "type": "integer",
+                  "documentation": "<p> Contains the minimum size of the Auto Scaling group. </p>",
+                  "serialized_name": "MinSize"
+                },
+                "max_size": {
+                  "type": "integer",
+                  "documentation": "<p> Contains the maximum size of the Auto Scaling group. </p>",
+                  "serialized_name": "MaxSize"
+                },
+                "desired_capacity": {
+                  "type": "integer",
+                  "documentation": "<p> Specifies the desired capacity for the Auto Scaling group. </p>",
+                  "serialized_name": "DesiredCapacity"
+                },
+                "default_cooldown": {
+                  "type": "integer",
+                  "documentation": "<p> The number of seconds after a scaling activity completes before any further scaling activities can start. </p>",
+                  "serialized_name": "DefaultCooldown"
+                },
+                "availability_zones": {
+                  "type": "list",
+                  "documentation": "<p> Contains a list of Availability Zones for the group. </p>",
+                  "min_length": 1,
+                  "serialized_name": "AvailabilityZones",
+                  "members": {
+                    "type": "string",
+                    "min_length": 1,
+                    "max_length": 255,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                },
+                "load_balancer_names": {
+                  "type": "list",
+                  "documentation": "<p> A list of load balancers associated with this Auto Scaling group. </p>",
+                  "serialized_name": "LoadBalancerNames",
+                  "members": {
+                    "type": "string",
+                    "min_length": 1,
+                    "max_length": 255,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                },
+                "health_check_type": {
+                  "type": "string",
+                  "documentation": "<p> The service of interest for the health status check, either \"EC2\" for Amazon EC2 or \"ELB\" for Elastic Load Balancing. </p>",
+                  "min_length": 1,
+                  "max_length": 32,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "HealthCheckType"
+                },
+                "health_check_grace_period": {
+                  "type": "integer",
+                  "documentation": "<p> The length of time that Auto Scaling waits before checking an instance's health status. The grace period begins when an instance comes into service. </p>",
+                  "serialized_name": "HealthCheckGracePeriod"
+                },
+                "instances": {
+                  "type": "list",
+                  "documentation": "<p> Provides a summary list of Amazon EC2 instances. </p>",
+                  "serialized_name": "Instances",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> The <code>Instance</code> data type. </p>",
+                    "members": {
+                      "instance_id": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the ID of the Amazon EC2 instance. </p>",
+                        "min_length": 1,
+                        "max_length": 16,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "InstanceId"
+                      },
+                      "availability_zone": {
+                        "type": "string",
+                        "documentation": "<p> Availability Zones associated with this instance. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "AvailabilityZone"
+                      },
+                      "lifecycle_state": {
+                        "type": "string",
+                        "documentation": "<p> Contains a description of the current <i>lifecycle</i> state. </p>",
+                        "serialized_name": "LifecycleState",
+                        "enum": [
+                          "Pending",
+                          "Quarantined",
+                          "InService",
+                          "Terminating",
+                          "Terminated"
+                        ]
+                      },
+                      "health_status": {
+                        "type": "string",
+                        "documentation": "<p> The instance's health status. </p>",
+                        "min_length": 1,
+                        "max_length": 32,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "HealthStatus"
+                      },
+                      "launch_configuration_name": {
+                        "type": "string",
+                        "documentation": "<p> The launch configuration associated with this instance. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "LaunchConfigurationName"
+                      }
+                    }
+                  }
+                },
+                "created_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> Specifies the date and time the Auto Scaling group was created. </p>",
+                  "serialized_name": "CreatedTime"
+                },
+                "suspended_processes": {
+                  "type": "list",
+                  "documentation": "<p> Suspended processes associated with this Auto Scaling group. </p>",
+                  "serialized_name": "SuspendedProcesses",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> An Auto Scaling process that has been suspended. For more information, see ProcessType. </p>",
+                    "members": {
+                      "process_name": {
+                        "type": "string",
+                        "documentation": "<p> The name of the suspended process. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "ProcessName"
+                      },
+                      "suspension_reason": {
+                        "type": "string",
+                        "documentation": "<p> The reason that the process was suspended. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "SuspensionReason"
+                      }
+                    }
+                  }
+                },
+                "placement_group": {
+                  "type": "string",
+                  "documentation": "<p> The name of the cluster placement group, if applicable. For more information, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\"> Using Cluster Instances</a> in the Amazon EC2 User Guide. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "PlacementGroup"
+                },
+                "vpc_zone_identifier": {
+                  "type": "string",
+                  "documentation": "<p> The subnet identifier for the Amazon VPC connection, if applicable. You can specify several subnets in a comma-separated list. </p> <p> When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "VPCZoneIdentifier"
+                },
+                "enabled_metrics": {
+                  "type": "list",
+                  "documentation": "<p> A list of metrics enabled for this Auto Scaling group. </p>",
+                  "serialized_name": "EnabledMetrics",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> The <code>EnabledMetric</code> data type. </p>",
+                    "members": {
+                      "metric": {
+                        "type": "string",
+                        "documentation": "<p> The name of the enabled metric. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "Metric"
+                      },
+                      "granularity": {
+                        "type": "string",
+                        "documentation": "<p> The granularity of the enabled metric. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "Granularity"
+                      }
+                    }
+                  }
+                },
+                "status": {
+                  "type": "string",
+                  "documentation": "<p> A list of status conditions for the Auto Scaling group. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Status"
+                },
+                "tags": {
+                  "type": "list",
+                  "documentation": "<p> A list of tags for the Auto Scaling group. </p>",
+                  "serialized_name": "Tags",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> The tag applied to an Auto Scaling group. </p>",
+                    "members": {
+                      "resource_id": {
+                        "type": "string",
+                        "documentation": "<p> The name of the Auto Scaling group. </p>",
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "ResourceId"
+                      },
+                      "resource_type": {
+                        "type": "string",
+                        "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "ResourceType"
+                      },
+                      "key": {
+                        "type": "string",
+                        "documentation": "<p> The key of the tag. </p>",
+                        "min_length": 1,
+                        "max_length": 128,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "Key"
+                      },
+                      "value": {
+                        "type": "string",
+                        "documentation": "<p> The value of the tag. </p>",
+                        "min_length": 0,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "Value"
+                      },
+                      "propagate_at_launch": {
+                        "type": "boolean",
+                        "documentation": "<p> Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change. </p>",
+                        "serialized_name": "PropagateAtLaunch"
+                      }
+                    }
+                  }
+                },
+                "termination_policies": {
+                  "type": "list",
+                  "documentation": "<p> A standalone termination policy or a list of termination policies for this Auto Scaling group. </p>",
+                  "serialized_name": "TerminationPolicies",
+                  "members": {
+                    "type": "string",
+                    "min_length": 1,
+                    "max_length": 1600,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_auto_scaling_instances": {
+      "name": "DescribeAutoScalingInstances",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a description of each Auto Scaling instance in the <code>InstanceIds</code> list. If a list is not provided, the service returns the full details of all instances up to a maximum of 50. By default, the service returns a list of 20 items. </p> <p> This action supports pagination by returning a token if there are more pages to retrieve. To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_ids": {
+            "type": "list",
+            "documentation": "<p> The list of Auto Scaling instances to describe. If this list is omitted, all auto scaling instances are described. The list of requested instances cannot contain more than 50 items. If unknown instances are requested, they are ignored with no error. </p>",
+            "serialized_name": "InstanceIds",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 16,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of Auto Scaling instances to be described with each call. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> The token returned by a previous call to indicate that there is more data available. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The <code>AutoScalingInstancesType</code> data type. </p>",
+        "members": {
+          "auto_scaling_instances": {
+            "type": "list",
+            "documentation": "<p> A list of Auto Scaling instances. </p>",
+            "serialized_name": "AutoScalingInstances",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The <code>AutoScalingInstanceDetails</code> data type. </p>",
+              "members": {
+                "instance_id": {
+                  "type": "string",
+                  "documentation": "<p> The instance ID of the Amazon EC2 instance. </p>",
+                  "min_length": 1,
+                  "max_length": 16,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "InstanceId"
+                },
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group associated with this instance. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "availability_zone": {
+                  "type": "string",
+                  "documentation": "<p> The Availability Zone in which this instance resides. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AvailabilityZone"
+                },
+                "lifecycle_state": {
+                  "type": "string",
+                  "documentation": "<p> The life cycle state of this instance. </p>",
+                  "min_length": 1,
+                  "max_length": 32,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "LifecycleState"
+                },
+                "health_status": {
+                  "type": "string",
+                  "documentation": "<p> The health status of this instance. \"Healthy\" means that the instance is healthy and should remain in service. \"Unhealthy\" means that the instance is unhealthy. Auto Scaling should terminate and replace it. </p>",
+                  "min_length": 1,
+                  "max_length": 32,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "HealthStatus"
+                },
+                "launch_configuration_name": {
+                  "type": "string",
+                  "documentation": "<p> The launch configuration associated with this instance. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "LaunchConfigurationName"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_auto_scaling_notification_types": {
+      "name": "DescribeAutoScalingNotificationTypes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of all notification types that are supported by Auto Scaling. </p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>The <code>AutoScalingNotificationTypes</code> data type.</p>",
+        "members": {
+          "auto_scaling_notification_types": {
+            "type": "list",
+            "documentation": "<p> Notification types supported by Auto Scaling. They are: autoscaling:EC2_INSTANCE_LAUNCH, autoscaling:EC2_INSTANCE_LAUNCH_ERROR, autoscaling:EC2_INSTANCE_TERMINATE, autoscaling:EC2_INSTANCE_TERMINATE_ERROR, autoscaling:TEST_NOTIFICATION </p>",
+            "serialized_name": "AutoScalingNotificationTypes",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      }
+    },
+    "describe_launch_configurations": {
+      "name": "DescribeLaunchConfigurations",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a full description of the launch configurations, or the specified launch configurations, if they exist. </p> <p> If no name is specified, then the full details of all launch configurations are returned. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> The <code>LaunchConfigurationNamesType</code> data type. </p>",
+        "members": {
+          "launch_configuration_names": {
+            "type": "list",
+            "documentation": "<p> A list of launch configuration names. </p>",
+            "serialized_name": "LaunchConfigurationNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of launch configurations. The default is 100. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The <code>LaunchConfigurationsType</code> data type. </p>",
+        "members": {
+          "launch_configurations": {
+            "type": "list",
+            "documentation": "<p> A list of launch configurations. </p>",
+            "serialized_name": "LaunchConfigurations",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The <code>LaunchConfiguration</code> data type. </p>",
+              "members": {
+                "launch_configuration_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the launch configuration. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "LaunchConfigurationName"
+                },
+                "launch_configuration_arn": {
+                  "type": "string",
+                  "documentation": "<p> The launch configuration's Amazon Resource Name (ARN). </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "LaunchConfigurationARN"
+                },
+                "image_id": {
+                  "type": "string",
+                  "documentation": "<p> Provides the unique ID of the <i>Amazon Machine Image</i> (AMI) that was assigned during registration. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ImageId"
+                },
+                "key_name": {
+                  "type": "string",
+                  "documentation": "<p> Provides the name of the Amazon EC2 key pair. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "KeyName"
+                },
+                "security_groups": {
+                  "type": "list",
+                  "documentation": "<p> A description of the security groups to associate with the Amazon EC2 instances. </p>",
+                  "serialized_name": "SecurityGroups",
+                  "members": {
+                    "type": "string",
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                },
+                "user_data": {
+                  "type": "string",
+                  "documentation": "<p> The user data available to the launched Amazon EC2 instances. </p>",
+                  "max_length": 21847,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "UserData"
+                },
+                "instance_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the instance type of the Amazon EC2 instance. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "InstanceType"
+                },
+                "kernel_id": {
+                  "type": "string",
+                  "documentation": "<p> Provides the ID of the kernel associated with the Amazon EC2 AMI. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "KernelId"
+                },
+                "ramdisk_id": {
+                  "type": "string",
+                  "documentation": "<p> Provides ID of the RAM disk associated with the Amazon EC2 AMI. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "RamdiskId"
+                },
+                "block_device_mappings": {
+                  "type": "list",
+                  "documentation": "<p> Specifies how block devices are exposed to the instance. Each mapping is made up of a <i>virtualName</i> and a <i>deviceName</i>. </p>",
+                  "serialized_name": "BlockDeviceMappings",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> The <code>BlockDeviceMapping</code> data type. </p>",
+                    "members": {
+                      "virtual_name": {
+                        "type": "string",
+                        "documentation": "<p>The virtual name associated with the device. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "VirtualName"
+                      },
+                      "device_name": {
+                        "type": "string",
+                        "documentation": "<p> The name of the device within Amazon EC2. </p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "DeviceName"
+                      },
+                      "ebs": {
+                        "type": "structure",
+                        "documentation": "<p> The Elastic Block Storage volume information. </p>",
+                        "serialized_name": "Ebs",
+                        "members": {
+                          "snapshot_id": {
+                            "type": "string",
+                            "documentation": "<p> The snapshot ID. </p>",
+                            "min_length": 1,
+                            "max_length": 255,
+                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                            "serialized_name": "SnapshotId"
+                          },
+                          "volume_size": {
+                            "type": "integer",
+                            "documentation": "<p> The volume size, in gigabytes. </p>",
+                            "min_length": 1,
+                            "max_length": 1024,
+                            "serialized_name": "VolumeSize"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "instance_monitoring": {
+                  "type": "structure",
+                  "documentation": "<p> Controls whether instances in this group are launched with detailed monitoring or not. </p>",
+                  "serialized_name": "InstanceMonitoring",
+                  "members": {
+                    "enabled": {
+                      "type": "boolean",
+                      "documentation": "<p> If <code>True</code>, instance monitoring is enabled. </p>",
+                      "serialized_name": "Enabled"
+                    }
+                  }
+                },
+                "spot_price": {
+                  "type": "string",
+                  "documentation": "<p>Specifies the price to bid when launching Spot Instances.</p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "serialized_name": "SpotPrice"
+                },
+                "iam_instance_profile": {
+                  "type": "string",
+                  "documentation": "<p>Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "IamInstanceProfile"
+                },
+                "created_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> Provides the creation date and time for this launch configuration. </p>",
+                  "serialized_name": "CreatedTime"
+                },
+                "ebs_optimized": {
+                  "type": "boolean",
+                  "documentation": "<p>Specifies whether the instance is optimized for EBS I/O (<i>true</i>) or not (<i>false</i>).</p>",
+                  "serialized_name": "EbsOptimized"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_metric_collection_types": {
+      "name": "DescribeMetricCollectionTypes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of metrics and a corresponding list of granularities for each metric. </p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>The output of the DescribeMetricCollectionTypes action.</p>",
+        "members": {
+          "metrics": {
+            "type": "list",
+            "documentation": "<p>The list of Metrics collected.The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>",
+            "serialized_name": "Metrics",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The MetricCollectionType data type. </p>",
+              "members": {
+                "metric": {
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Metric"
+                }
+              }
+            }
+          },
+          "granularities": {
+            "type": "list",
+            "documentation": "<p>A list of granularities for the listed Metrics.</p>",
+            "serialized_name": "Granularities",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The MetricGranularityType data type. </p>",
+              "members": {
+                "granularity": {
+                  "type": "string",
+                  "documentation": "<p> The granularity of a Metric. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Granularity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_notification_configurations": {
+      "name": "DescribeNotificationConfigurations",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of notification actions associated with Auto Scaling groups for specified events. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_names": {
+            "type": "list",
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "serialized_name": "AutoScalingGroupNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that is used to mark the start of the next batch of returned results for pagination. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p>Maximum number of records to be returned. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>The output of the DescribeNotificationConfigurations action.</p>",
+        "members": {
+          "notification_configurations": {
+            "type": "list",
+            "documentation": "<p>The list of notification configurations.</p>",
+            "serialized_name": "NotificationConfigurations",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The <code>NotificationConfiguration</code> data type. </p>",
+              "members": {
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the Auto Scaling group name. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "topic_arn": {
+                  "type": "string",
+                  "documentation": "<p> The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "TopicARN"
+                },
+                "notification_type": {
+                  "type": "string",
+                  "documentation": "<p> The types of events for an action to start. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "NotificationType"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p>A string that is used to mark the start of the next batch of returned results for pagination.</p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_policies": {
+      "name": "DescribePolicies",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns descriptions of what each policy does. This action supports pagination. If the response includes a token, there are more records available. To get the additional records, repeat the request with the response token as the <code>NextToken</code> parameter. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "policy_names": {
+            "type": "list",
+            "documentation": "<p> A list of policy names or policy ARNs to be described. If this list is omitted, all policy names are described. If an auto scaling group name is provided, the results are limited to that group. The list of requested policy names cannot contain more than 50 items. If unknown policy names are requested, they are ignored with no error. </p>",
+            "serialized_name": "PolicyNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that is used to mark the start of the next batch of returned results for pagination. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of policies that will be described with each call. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The <code>PoliciesType</code> data type. </p>",
+        "members": {
+          "scaling_policies": {
+            "type": "list",
+            "documentation": "<p> A list of scaling policies. </p>",
+            "serialized_name": "ScalingPolicies",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The <code>ScalingPolicy</code> data type. </p>",
+              "members": {
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group associated with this scaling policy. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "policy_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the scaling policy. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "PolicyName"
+                },
+                "scaling_adjustment": {
+                  "type": "integer",
+                  "documentation": "<p> The number associated with the specified adjustment type. A positive value adds to the current capacity and a negative value removes from the current capacity. </p>",
+                  "serialized_name": "ScalingAdjustment"
+                },
+                "adjustment_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies whether the <code>ScalingAdjustment</code> is an absolute number or a percentage of the current capacity. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AdjustmentType"
+                },
+                "cooldown": {
+                  "type": "integer",
+                  "documentation": "<p> The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. </p>",
+                  "serialized_name": "Cooldown"
+                },
+                "policy_arn": {
+                  "type": "string",
+                  "documentation": "<p> The Amazon Resource Name (ARN) of the policy. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "PolicyARN"
+                },
+                "alarms": {
+                  "type": "list",
+                  "documentation": "<p> A list of CloudWatch Alarms related to the policy. </p>",
+                  "serialized_name": "Alarms",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>The Alarm data type.</p>",
+                    "members": {
+                      "alarm_name": {
+                        "type": "string",
+                        "documentation": "<p>The name of the alarm.</p>",
+                        "min_length": 1,
+                        "max_length": 255,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "AlarmName"
+                      },
+                      "alarm_arn": {
+                        "type": "string",
+                        "documentation": "<p>The Amazon Resource Name (ARN) of the alarm.</p>",
+                        "min_length": 1,
+                        "max_length": 1600,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "AlarmARN"
+                      }
+                    }
+                  }
+                },
+                "min_adjustment_step": {
+                  "type": "integer",
+                  "documentation": "<p> Changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least the specified number of instances. </p>",
+                  "serialized_name": "MinAdjustmentStep"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_scaling_activities": {
+      "name": "DescribeScalingActivities",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns the scaling activities for the specified Auto Scaling group. </p> <p> If the specified <code>ActivityIds</code> list is empty, all the activities from the past six weeks are returned. Activities are sorted by completion time. Activities still in progress appear first on the list. </p> <p> This action supports pagination. If the response includes a token, there are more records available. To get the additional records, repeat the request with the response token as the <code>NextToken</code> parameter. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "activity_ids": {
+            "type": "list",
+            "documentation": "<p> A list containing the activity IDs of the desired scaling activities. If this list is omitted, all activities are described. If an <code>AutoScalingGroupName</code> is provided, the results are limited to that group. The list of requested activities cannot contain more than 50 items. If unknown activities are requested, they are ignored with no error. </p>",
+            "serialized_name": "ActivityIds",
+            "members": {
+              "type": "string",
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the AutoScalingGroup. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of scaling activities to return. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results for pagination. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The output for the DescribeScalingActivities action. </p>",
+        "members": {
+          "activities": {
+            "type": "list",
+            "documentation": "<p> A list of the requested scaling activities. </p>",
+            "serialized_name": "Activities",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> A scaling Activity is a long-running process that represents a change to your AutoScalingGroup, such as changing the size of the group. It can also be a process to replace an instance, or a process to perform any other long-running operations supported by the API. </p>",
+              "members": {
+                "activity_id": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the ID of the activity. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ActivityId"
+                },
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p> Contains a friendly, more verbose description of the scaling activity. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Description"
+                },
+                "cause": {
+                  "type": "string",
+                  "documentation": "<p> Contains the reason the activity was begun. </p>",
+                  "min_length": 1,
+                  "max_length": 1023,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Cause"
+                },
+                "start_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> Provides the start time of this activity. </p>",
+                  "serialized_name": "StartTime"
+                },
+                "end_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> Provides the end time of this activity. </p>",
+                  "serialized_name": "EndTime"
+                },
+                "status_code": {
+                  "type": "string",
+                  "documentation": "<p> Contains the current status of the activity. </p>",
+                  "serialized_name": "StatusCode",
+                  "enum": [
+                    "WaitingForSpotInstanceRequestId",
+                    "WaitingForSpotInstanceId",
+                    "WaitingForInstanceId",
+                    "PreInService",
+                    "InProgress",
+                    "Successful",
+                    "Failed",
+                    "Cancelled"
+                  ]
+                },
+                "status_message": {
+                  "type": "string",
+                  "documentation": "<p> Contains a friendly, more verbose description of the activity status. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "StatusMessage"
+                },
+                "progress": {
+                  "type": "integer",
+                  "documentation": "<p> Specifies a value between 0 and 100 that indicates the progress of the activity. </p>",
+                  "serialized_name": "Progress"
+                },
+                "details": {
+                  "type": "string",
+                  "documentation": "<p> Contains details of the scaling activity. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Details"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> Acts as a paging mechanism for large result sets. Set to a non-empty string if there are additional results waiting to be returned. Pass this in to subsequent calls to return additional results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_scaling_process_types": {
+      "name": "DescribeScalingProcessTypes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns scaling process types for use in the ResumeProcesses and SuspendProcesses actions.</p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The output of the DescribeScalingProcessTypes action. </p>",
+        "members": {
+          "processes": {
+            "type": "list",
+            "documentation": "<p> A list of ProcessType names. </p>",
+            "serialized_name": "Processes",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> There are two primary Auto Scaling process types--<code>Launch</code> and <code>Terminate</code>. The <code>Launch</code> process creates a new Amazon EC2 instance for an Auto Scaling group, and the <code>Terminate</code> process removes an existing Amazon EC2 instance. </p> <p> The remaining Auto Scaling process types relate to specific Auto Scaling features: <ul> <li>AddToLoadBalancer</li> <li>AlarmNotification</li> <li>AZRebalance</li> <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>ScheduledActions</li> </ul> </p> <important> <p> If you suspend <code>Launch</code> or <code>Terminate</code>, all other process types are affected to varying degrees. The following descriptions discuss how each process type is affected by a suspension of <code>Launch</code> or <code>Terminate</code>. </p> </important> <p> The <code>AddToLoadBalancer</code> process type adds instances to the the load balancer when the instances are launched. If you suspend this process, Auto Scaling will launch the instances but will not add them to the load balancer. If you resume the <code>AddToLoadBalancer</code> process, Auto Scaling will also resume adding new instances to the load balancer when they are launched. However, Auto Scaling will not add running instances that were launched while the process was suspended; those instances must be added manually using the the <a href=\"http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/APIReference/API_RegisterInstancesWithLoadBalancer.html\"> RegisterInstancesWithLoadBalancer</a> call in the <i>Elastic Load Balancing API Reference</i>. </p> <p> The <code>AlarmNotification</code> process type accepts notifications from Amazon CloudWatch alarms that are associated with the Auto Scaling group. If you suspend the <code>AlarmNotification</code> process type, Auto Scaling will not automatically execute scaling policies that would be triggered by alarms. </p> <p> Although the <code>AlarmNotification</code> process type is not directly affected by a suspension of <code>Launch</code> or <code>Terminate</code>, alarm notifications are often used to signal that a change in the size of the Auto Scaling group is warranted. If you suspend <code>Launch</code> or <code>Terminate</code>, Auto Scaling might not be able to implement the alarm's associated policy. </p> <p> The <code>AZRebalance</code> process type seeks to maintain a balanced number of instances across Availability Zones within a Region. If you remove an Availability Zone from your Auto Scaling group or an Availability Zone otherwise becomes unhealthy or unavailable, Auto Scaling launches new instances in an unaffected Availability Zone before terminating the unhealthy or unavailable instances. When the unhealthy Availability Zone returns to a healthy state, Auto Scaling automatically redistributes the application instances evenly across all of the designated Availability Zones. </p> <important> <p> If you call SuspendProcesses on the <code>launch</code> process type, the <code>AZRebalance</code> process will neither launch new instances nor terminate existing instances. This is because the <code>AZRebalance</code> process terminates existing instances only after launching the replacement instances. </p> <p> If you call SuspendProcesses on the <code>terminate</code> process type, the <code>AZRebalance</code> process can cause your Auto Scaling group to grow up to ten percent larger than the maximum size. This is because Auto Scaling allows groups to temporarily grow larger than the maximum size during rebalancing activities. If Auto Scaling cannot terminate instances, your Auto Scaling group could remain up to ten percent larger than the maximum size until you resume the <code>terminate</code> process type. </p> </important> <p> The <code>HealthCheck</code> process type checks the health of the instances. Auto Scaling marks an instance as unhealthy if Amazon EC2 or Elastic Load Balancing informs Auto Scaling that the instance is unhealthy. The <code>HealthCheck</code> process can override the health status of an instance that you set with SetInstanceHealth. </p> <p> The <code>ReplaceUnhealthy</code> process type terminates instances that are marked as unhealthy and subsequently creates new instances to replace them. This process calls both of the primary process types--first <code>Terminate</code> and then <code>Launch</code>. </p> <important> <p> The <code>HealthCheck</code> process type works in conjunction with the <code>ReplaceUnhealthly</code> process type to provide health check functionality. If you suspend either <code>Launch</code> or <code>Terminate</code>, the <code>ReplaceUnhealthy</code> process type will not function properly. </p> </important> <p> The <code>ScheduledActions</code> process type performs scheduled actions that you create with PutScheduledUpdateGroupAction. Scheduled actions often involve launching new instances or terminating existing instances. If you suspend either <code>Launch</code> or <code>Terminate</code>, your scheduled actions might not function as expected. </p>",
+              "members": {
+                "process_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of a process. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ProcessName"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_scheduled_actions": {
+      "name": "DescribeScheduledActions",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Lists all the actions scheduled for your Auto Scaling group that haven't been executed. To see a list of actions already executed, see the activity record returned in DescribeScalingActivities. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "scheduled_action_names": {
+            "type": "list",
+            "documentation": "<p> A list of scheduled actions to be described. If this list is omitted, all scheduled actions are described. The list of requested scheduled actions cannot contain more than 50 items. If an auto scaling group name is provided, the results are limited to that group. If unknown scheduled actions are requested, they are ignored with no error. </p>",
+            "serialized_name": "ScheduledActionNames",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "start_time": {
+            "type": "timestamp",
+            "documentation": "<p> The earliest scheduled start time to return. If scheduled action names are provided, this field will be ignored. </p>",
+            "serialized_name": "StartTime"
+          },
+          "end_time": {
+            "type": "timestamp",
+            "documentation": "<p> The latest scheduled start time to return. If scheduled action names are provided, this field is ignored. </p>",
+            "serialized_name": "EndTime"
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of scheduled actions to return. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> A scaling action that is scheduled for a future time and date. An action can be scheduled up to thirty days in advance. </p> <p> Starting with API version 2011-01-01, you can use <code>recurrence</code> to specify that a scaling action occurs regularly on a schedule. </p>",
+        "members": {
+          "scheduled_update_group_actions": {
+            "type": "list",
+            "documentation": "<p> A list of scheduled actions designed to update an Auto Scaling group. </p>",
+            "serialized_name": "ScheduledUpdateGroupActions",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> This data type stores information about a scheduled update to an Auto Scaling group. </p>",
+              "members": {
+                "auto_scaling_group_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group to be updated. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "AutoScalingGroupName"
+                },
+                "scheduled_action_name": {
+                  "type": "string",
+                  "documentation": "<p> The name of this scheduled action. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ScheduledActionName"
+                },
+                "scheduled_action_arn": {
+                  "type": "string",
+                  "documentation": "<p> The Amazon Resource Name (ARN) of this scheduled action. </p>",
+                  "min_length": 1,
+                  "max_length": 1600,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ScheduledActionARN"
+                },
+                "time": {
+                  "type": "timestamp",
+                  "documentation": "<p> <code>Time</code> is deprecated.</p> <p>The time that the action is scheduled to begin. <code>Time</code> is an alias for <code>StartTime</code>. </p>",
+                  "serialized_name": "Time"
+                },
+                "start_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> The time that the action is scheduled to begin. This value can be up to one month in the future. </p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action will start and stop.</p>",
+                  "serialized_name": "StartTime"
+                },
+                "end_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> The time that the action is scheduled to end. This value can be up to one month in the future. </p>",
+                  "serialized_name": "EndTime"
+                },
+                "recurrence": {
+                  "type": "string",
+                  "documentation": "<p> The regular schedule that an action occurs. </p>",
+                  "min_length": 1,
+                  "max_length": 255,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Recurrence"
+                },
+                "min_size": {
+                  "type": "integer",
+                  "documentation": "<p> The minimum size of the Auto Scaling group. </p>",
+                  "serialized_name": "MinSize"
+                },
+                "max_size": {
+                  "type": "integer",
+                  "documentation": "<p> The maximum size of the Auto Scaling group. </p>",
+                  "serialized_name": "MaxSize"
+                },
+                "desired_capacity": {
+                  "type": "integer",
+                  "documentation": "<p> The number of instances you prefer to maintain in your Auto Scaling group. </p>",
+                  "serialized_name": "DesiredCapacity"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_tags": {
+      "name": "DescribeTags",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Lists the Auto Scaling group tags. </p> <p> You can use filters to limit results when describing tags. For example, you can query for tags of a particular Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results. </p> <p> You can also specify multiple filters. The result includes information for a particular tag only if it matches all your filters. If there's no match, no special message is returned. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "filters": {
+            "type": "list",
+            "documentation": "<p> The value of the filter type used to identify the tags to be returned. For example, you can filter so that tags are returned according to Auto Scaling group, the key and value, or whether the new tag will be applied to instances launched after the tag is created (PropagateAtLaunch). </p>",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>The <code>Filter</code> data type.</p>",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "documentation": "<p> The name of the filter. Valid Name values are: <code>\"auto-scaling-group\"</code>, <code>\"key\"</code>, <code>\"value\"</code>, and <code>\"propagate-at-launch\"</code>. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Name"
+                },
+                "values": {
+                  "type": "list",
+                  "documentation": "<p> The value of the filter. </p>",
+                  "serialized_name": "Values",
+                  "members": {
+                    "type": "string",
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string that marks the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to return. </p>",
+            "min_length": 1,
+            "max_length": 50,
+            "serialized_name": "MaxRecords"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "tags": {
+            "type": "list",
+            "documentation": "<p> The list of tags. </p>",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> The tag applied to an Auto Scaling group. </p>",
+              "members": {
+                "resource_id": {
+                  "type": "string",
+                  "documentation": "<p> The name of the Auto Scaling group. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceId"
+                },
+                "resource_type": {
+                  "type": "string",
+                  "documentation": "<p> The kind of resource to which the tag is applied. Currently, Auto Scaling supports the <code>auto-scaling-group</code> resource type. </p>",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "ResourceType"
+                },
+                "key": {
+                  "type": "string",
+                  "documentation": "<p> The key of the tag. </p>",
+                  "min_length": 1,
+                  "max_length": 128,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "documentation": "<p> The value of the tag. </p>",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "Value"
+                },
+                "propagate_at_launch": {
+                  "type": "boolean",
+                  "documentation": "<p> Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change. </p>",
+                  "serialized_name": "PropagateAtLaunch"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p> A string used to mark the start of the next batch of returned results. </p>",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "NextToken"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The <code>NextToken</code> value is invalid. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_termination_policy_types": {
+      "name": "DescribeTerminationPolicyTypes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of all termination policies supported by Auto Scaling. </p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>The <code>TerminationPolicyTypes</code> data type.</p>",
+        "members": {
+          "termination_policy_types": {
+            "type": "list",
+            "documentation": "<p> Termination policies supported by Auto Scaling. They are: <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, <code>Default</code> </p>",
+            "serialized_name": "TerminationPolicyTypes",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      }
+    },
+    "disable_metrics_collection": {
+      "name": "DisableMetricsCollection",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Disables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code>. You can specify the list of affected metrics with the <code>Metrics</code> parameter. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name or ARN of the Auto Scaling Group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "metrics": {
+            "type": "list",
+            "documentation": "<p> The list of metrics to disable. If no metrics are specified, all metrics are disabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>",
+            "serialized_name": "Metrics",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      }
+    },
+    "enable_metrics_collection": {
+      "name": "EnableMetricsCollection",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Enables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code>. You can specify the list of enabled metrics with the <code>Metrics</code> parameter. </p> <p> Auto scaling metrics collection can be turned on only if the <code>InstanceMonitoring</code> flag, in the Auto Scaling group's launch configuration, is set to <code>True</code>. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name or ARN of the Auto Scaling group.</p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "metrics": {
+            "type": "list",
+            "documentation": "<p> The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>",
+            "serialized_name": "Metrics",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "granularity": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The granularity to associate with the metrics to collect. Currently, the only legal granularity is \"1Minute\". </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "Granularity"
+          }
+        }
+      }
+    },
+    "execute_policy": {
+      "name": "ExecutePolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Runs the policy you create for your Auto Scaling group in PutScalingPolicy.</p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "documentation": "<p> The name or ARN of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name or PolicyARN of the policy you want to run. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PolicyName"
+          },
+          "honor_cooldown": {
+            "type": "boolean",
+            "documentation": "<p> Set to <code>True</code> if you want Auto Scaling to reject this request when the Auto Scaling group is in cooldown. </p>",
+            "serialized_name": "HonorCooldown"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "put_notification_configuration": {
+      "name": "PutNotificationConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to this topic can have messages for events delivered to an endpoint such as a web server or email address. </p> <p> A new <code>PutNotificationConfiguration</code> overwrites an existing configuration.</p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "topic_arn": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "TopicARN"
+          },
+          "notification_types": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>The type of events that will trigger the notification. For more information, go to DescribeAutoScalingNotificationTypes.</p>",
+            "serialized_name": "NotificationTypes",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "put_scaling_policy": {
+      "name": "PutScalingPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameter(s) you want to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name or ARN of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name of the policy you want to create or update.</p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PolicyName"
+          },
+          "scaling_adjustment": {
+            "type": "integer",
+            "required": true,
+            "documentation": "<p> The number of instances by which to scale. <code>AdjustmentType</code> determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity. </p>",
+            "serialized_name": "ScalingAdjustment"
+          },
+          "adjustment_type": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> Specifies whether the <code>ScalingAdjustment</code> is an absolute number or a percentage of the current capacity. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AdjustmentType"
+          },
+          "cooldown": {
+            "type": "integer",
+            "documentation": "<p> The amount of time, in seconds, after a scaling activity completes and before the next scaling acitvity can start. </p>",
+            "serialized_name": "Cooldown"
+          },
+          "min_adjustment_step": {
+            "type": "integer",
+            "documentation": "<p> Used with <code>AdjustmentType</code> with the value <code>PercentChangeInCapacity</code>, the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least the number of instances specified in the value. </p> <p> You will get a <code>ValidationError</code> if you use <code>MinAdjustmentStep</code> on a policy with an <code>AdjustmentType</code> other than <code>PercentChangeInCapacity</code>. </p>",
+            "serialized_name": "MinAdjustmentStep"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The <code>PolicyARNType</code> data type. </p>",
+        "members": {
+          "policy_arn": {
+            "type": "string",
+            "documentation": "<p> A policy's Amazon Resource Name (ARN). </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PolicyARN"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "put_scheduled_update_group_action": {
+      "name": "PutScheduledUpdateGroupAction",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name or ARN of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "scheduled_action_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of this scaling action. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "ScheduledActionName"
+          },
+          "time": {
+            "type": "timestamp",
+            "documentation": "<p><code>Time</code> is deprecated.</p> <p>The time for this action to start. <code>Time</code> is an alias for <code>StartTime</code> and can be specified instead of <code>StartTime</code>, or vice versa. If both <code>Time</code> and <code>StartTime</code> are specified, their values should be identical. Otherwise, <code>PutScheduledUpdateGroupAction</code> will return an error.</p>",
+            "serialized_name": "Time"
+          },
+          "start_time": {
+            "type": "timestamp",
+            "documentation": "<p>The time for this action to start, as in <code>--start-time 2010-06-01T00:00:00Z</code>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action will start and stop.</p>",
+            "serialized_name": "StartTime"
+          },
+          "end_time": {
+            "type": "timestamp",
+            "documentation": "<p>The time for this action to end.</p>",
+            "serialized_name": "EndTime"
+          },
+          "recurrence": {
+            "type": "string",
+            "documentation": "<p> The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. For information about cron syntax, go to <a href=\"http://en.wikipedia.org/wiki/Cron\">Wikipedia, The Free Encyclopedia</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action will start and stop.</p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "Recurrence"
+          },
+          "min_size": {
+            "type": "integer",
+            "documentation": "<p> The minimum size for the new Auto Scaling group. </p>",
+            "serialized_name": "MinSize"
+          },
+          "max_size": {
+            "type": "integer",
+            "documentation": "<p> The maximum size for the Auto Scaling group. </p>",
+            "serialized_name": "MaxSize"
+          },
+          "desired_capacity": {
+            "type": "integer",
+            "documentation": "<p> The number of Amazon EC2 instances that should be running in the group. </p>",
+            "serialized_name": "DesiredCapacity"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The named Auto Scaling group or launch configuration already exists. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "resume_processes": {
+      "name": "ResumeProcesses",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Resumes Auto Scaling processes for an Auto Scaling group. For more information, see SuspendProcesses and ProcessType. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name or Amazon Resource Name (ARN) of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "scaling_processes": {
+            "type": "list",
+            "documentation": "<p> The processes that you want to suspend or resume, which can include one or more of the following: </p> <ul> <li>Launch</li> <li>Terminate</li> <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li> <li>AlarmNotification</li> <li>ScheduledActions</li> <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types, omit this parameter. </p>",
+            "serialized_name": "ScalingProcesses",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      }
+    },
+    "set_desired_capacity": {
+      "name": "SetDesiredCapacity",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Adjusts the desired size of the AutoScalingGroup by initiating scaling activities. When reducing the size of the group, it is not possible to define which Amazon EC2 instances will be terminated. This applies to any Auto Scaling decisions that might result in terminating instances. </p> <p> There are two common use cases for <code>SetDesiredCapacity</code>: one for users of the Auto Scaling triggering system, and another for developers who write their own triggering systems. Both use cases relate to the concept of cooldown. </p> <p> In the first case, if you use the Auto Scaling triggering system, <code>SetDesiredCapacity</code> changes the size of your Auto Scaling group without regard to the cooldown period. This could be useful, for example, if Auto Scaling did something unexpected for some reason. If your cooldown period is 10 minutes, Auto Scaling would normally reject requests to change the size of the group for that entire 10-minute period. The <code>SetDesiredCapacity</code> command allows you to circumvent this restriction and change the size of the group before the end of the cooldown period. </p> <p> In the second case, if you write your own triggering system, you can use <code>SetDesiredCapacity</code> to control the size of your Auto Scaling group. If you want the same cooldown functionality that Auto Scaling offers, you can configure <code>SetDesiredCapacity</code> to honor cooldown by setting the <code>HonorCooldown</code> parameter to <code>true</code>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "desired_capacity": {
+            "type": "integer",
+            "required": true,
+            "documentation": "<p> The new capacity setting for the Auto Scaling group. </p>",
+            "serialized_name": "DesiredCapacity"
+          },
+          "honor_cooldown": {
+            "type": "boolean",
+            "documentation": "<p> By default, <code>SetDesiredCapacity</code> overrides any cooldown period. Set to <code>True</code> if you want Auto Scaling to reject this request when the Auto Scaling group is in cooldown. </p>",
+            "serialized_name": "HonorCooldown"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "set_instance_health": {
+      "name": "SetInstanceHealth",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Sets the health status of an instance. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The identifier of the Amazon EC2 instance. </p>",
+            "min_length": 1,
+            "max_length": 16,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "InstanceId"
+          },
+          "health_status": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The health status of the instance. \"Healthy\" means that the instance is healthy and should remain in service. \"Unhealthy\" means that the instance is unhealthy. Auto Scaling should terminate and replace it. </p>",
+            "min_length": 1,
+            "max_length": 32,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "HealthStatus"
+          },
+          "should_respect_grace_period": {
+            "type": "boolean",
+            "documentation": "<p>If True, this call should respect the grace period associated with the group.</p>",
+            "serialized_name": "ShouldRespectGracePeriod"
+          }
+        }
+      }
+    },
+    "suspend_processes": {
+      "name": "SuspendProcesses",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Suspends Auto Scaling processes for an Auto Scaling group. To suspend specific process types, specify them by name with the <code>ScalingProcesses.member.N</code> parameter. To suspend all process types, omit the <code>ScalingProcesses.member.N</code> parameter. </p> <important> <p> Suspending either of the two primary process types, <code>Launch</code> or <code>Terminate</code>, can prevent other process types from functioning properly. For more information about processes and their dependencies, see ProcessType. </p> </important> <p> To resume processes that have been suspended, use ResumeProcesses. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name or Amazon Resource Name (ARN) of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "scaling_processes": {
+            "type": "list",
+            "documentation": "<p> The processes that you want to suspend or resume, which can include one or more of the following: </p> <ul> <li>Launch</li> <li>Terminate</li> <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li> <li>AlarmNotification</li> <li>ScheduledActions</li> <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types, omit this parameter. </p>",
+            "serialized_name": "ScalingProcesses",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      }
+    },
+    "terminate_instance_in_auto_scaling_group": {
+      "name": "TerminateInstanceInAutoScalingGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Terminates the specified instance. Optionally, the desired group size can be adjusted. </p> This call simply registers a termination request. The termination of the instance cannot happen immediately.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "instance_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The ID of the Amazon EC2 instance to be terminated. </p>",
+            "min_length": 1,
+            "max_length": 16,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "InstanceId"
+          },
+          "should_decrement_desired_capacity": {
+            "type": "boolean",
+            "required": true,
+            "documentation": "<p> Specifies whether (<i>true</i>) or not (<i>false</i>) terminating this instance should also decrement the size of the AutoScalingGroup. </p>",
+            "serialized_name": "ShouldDecrementDesiredCapacity"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> The output for the TerminateInstanceInAutoScalingGroup action. </p>",
+        "members": {
+          "activity": {
+            "type": "structure",
+            "documentation": "<p> A scaling Activity. </p>",
+            "serialized_name": "Activity",
+            "members": {
+              "activity_id": {
+                "type": "string",
+                "documentation": "<p> Specifies the ID of the activity. </p>",
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "ActivityId"
+              },
+              "auto_scaling_group_name": {
+                "type": "string",
+                "documentation": "<p> The name of the Auto Scaling group. </p>",
+                "min_length": 1,
+                "max_length": 255,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "AutoScalingGroupName"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p> Contains a friendly, more verbose description of the scaling activity. </p>",
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "Description"
+              },
+              "cause": {
+                "type": "string",
+                "documentation": "<p> Contains the reason the activity was begun. </p>",
+                "min_length": 1,
+                "max_length": 1023,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "Cause"
+              },
+              "start_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the start time of this activity. </p>",
+                "serialized_name": "StartTime"
+              },
+              "end_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the end time of this activity. </p>",
+                "serialized_name": "EndTime"
+              },
+              "status_code": {
+                "type": "string",
+                "documentation": "<p> Contains the current status of the activity. </p>",
+                "serialized_name": "StatusCode",
+                "enum": [
+                  "WaitingForSpotInstanceRequestId",
+                  "WaitingForSpotInstanceId",
+                  "WaitingForInstanceId",
+                  "PreInService",
+                  "InProgress",
+                  "Successful",
+                  "Failed",
+                  "Cancelled"
+                ]
+              },
+              "status_message": {
+                "type": "string",
+                "documentation": "<p> Contains a friendly, more verbose description of the activity status. </p>",
+                "min_length": 1,
+                "max_length": 255,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "StatusMessage"
+              },
+              "progress": {
+                "type": "integer",
+                "documentation": "<p> Specifies a value between 0 and 100 that indicates the progress of the activity. </p>",
+                "serialized_name": "Progress"
+              },
+              "details": {
+                "type": "string",
+                "documentation": "<p> Contains details of the scaling activity. </p>",
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "Details"
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "update_auto_scaling_group": {
+      "name": "UpdateAutoScalingGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Updates the configuration for the specified AutoScalingGroup. </p> <p> To update an Auto Scaling group with a launch configuration that has the <code>InstanceMonitoring</code> flag set to <code>False</code>, you must first ensure that collection of group metrics is disabled. Otherwise, calls to UpdateAutoScalingGroup will fail. If you have previously enabled group metrics collection, you can disable collection of all group metrics by calling DisableMetricsCollection. </p> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Triggers that are currently in progress aren't affected. </p> <ul> <li> <p>If a new value is specified for <i>MinSize</i> without specifying the value for <i>DesiredCapacity</i>, and if the new <i>MinSize</i> is larger than the current size of the Auto Scaling Group, there will be an implicit call to SetDesiredCapacity to set the group to the new <i>MinSize</i>. </p> </li> <li> <p>If a new value is specified for <i>MaxSize</i> without specifying the value for <i>DesiredCapacity</i>, and the new <i>MaxSize</i> is smaller than the current size of the Auto Scaling Group, there will be an implicit call to SetDesiredCapacity to set the group to the new <i>MaxSize</i>. </p> </li> <li> <p>All other optional parameters are left unchanged if not passed in the request.</p> </li> </ul>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Auto Scaling group. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "AutoScalingGroupName"
+          },
+          "launch_configuration_name": {
+            "type": "string",
+            "documentation": "<p> The name of the launch configuration. </p>",
+            "min_length": 1,
+            "max_length": 1600,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "LaunchConfigurationName"
+          },
+          "min_size": {
+            "type": "integer",
+            "documentation": "<p> The minimum size of the Auto Scaling group. </p>",
+            "serialized_name": "MinSize"
+          },
+          "max_size": {
+            "type": "integer",
+            "documentation": "<p> The maximum size of the Auto Scaling group. </p>",
+            "serialized_name": "MaxSize"
+          },
+          "desired_capacity": {
+            "type": "integer",
+            "documentation": "<p> The desired capacity for the Auto Scaling group. </p>",
+            "serialized_name": "DesiredCapacity"
+          },
+          "default_cooldown": {
+            "type": "integer",
+            "documentation": "<p> The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. </p>",
+            "serialized_name": "DefaultCooldown"
+          },
+          "availability_zones": {
+            "type": "list",
+            "documentation": "<p> Availability Zones for the group. </p>",
+            "min_length": 1,
+            "serialized_name": "AvailabilityZones",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "health_check_type": {
+            "type": "string",
+            "documentation": "<p> The service of interest for the health status check, either \"EC2\" for Amazon EC2 or \"ELB\" for Elastic Load Balancing. </p>",
+            "min_length": 1,
+            "max_length": 32,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "HealthCheckType"
+          },
+          "health_check_grace_period": {
+            "type": "integer",
+            "documentation": "<p> The length of time that Auto Scaling waits before checking an instance's health status. The grace period begins when an instance comes into service. </p>",
+            "serialized_name": "HealthCheckGracePeriod"
+          },
+          "placement_group": {
+            "type": "string",
+            "documentation": "<p> The name of the cluster placement group, if applicable. For more information, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\"> Using Cluster Instances</a> in the Amazon EC2 User Guide. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "PlacementGroup"
+          },
+          "vpc_zone_identifier": {
+            "type": "string",
+            "documentation": "<p> The subnet identifier for the Amazon VPC connection, if applicable. You can specify several subnets in a comma-separated list. </p> <p> When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>. </p>",
+            "min_length": 1,
+            "max_length": 255,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "VPCZoneIdentifier"
+          },
+          "termination_policies": {
+            "type": "list",
+            "documentation": "<p> A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed. </p> <p> For more information on creating a termination policy for your Auto Scaling group, go to <a href=\"http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Instance Termination Policy for Your Auto Scaling Group</a> in the the <i>Auto Scaling Developer Guide</i>. </p>",
+            "serialized_name": "TerminationPolicies",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1600,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p> </p>",
+              "min_length": 1,
+              "max_length": 255,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

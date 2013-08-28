@@ -1,0 +1,4189 @@
+{
+  "type": "query",
+  "api_version": "2012-11-15",
+  "metadata": {
+    "endpoint_prefix": "elasticache",
+    "result_wrapped": true,
+    "service_full_name": "Amazon ElastiCache",
+    "signature_version": "v2"
+  },
+  "documentation": "<fullname>Amazon ElastiCache</fullname> <p> Amazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud. </p> <p> With Amazon ElastiCache, customers gain all of the benefits of a high-performance, in-memory cache with far less of the administrative burden of launching and managing a distributed cache. The service makes set-up, scaling, and cluster failure handling much simpler than in a self-managed cache deployment. </p> <p> In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance statistics associated with their cache and can receive alarms if a part of their cache runs hot. </p>",
+  "operations": {
+    "authorize_cache_security_group_ingress": {
+      "name": "AuthorizeCacheSecurityGroupIngress",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Authorizes ingress to a CacheSecurityGroup using EC2 Security Groups as authorization (therefore the application using the cache must be running on EC2 clusters). This API requires the following parameters: EC2SecurityGroupName and EC2SecurityGroupOwnerId. </p> You cannot authorize ingress from an EC2 security group in one Region to an Amazon Cache Cluster in another.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Security Group to authorize. </p>",
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "ec2_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> Name of the EC2 Security Group to include in the authorization. </p>",
+            "serialized_name": "EC2SecurityGroupName"
+          },
+          "ec2_security_group_owner_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> AWS Account Number of the owner of the security group specified in the EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable value. </p>",
+            "serialized_name": "EC2SecurityGroupOwnerId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "documentation": "<p> Defines a set of EC2 Security groups that are allowed to access a Cache Cluster. </p>",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "documentation": "<p> Provides the AWS ID of the owner of a specific Cache Security Group. </p>",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Security Group. </p>",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p> Provides the description of the Cache Security Group. </p>",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "documentation": "<p> Contains a list of EC2SecurityGroup elements. </p>",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> Provides the status of the EC2 Security Group. </p>",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the name of the EC2 Security Group. </p>",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the AWS ID of the owner of the EC2 Security Group specified in the <i>EC2SecurityGroupName</i> field. </p>",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Security Group does not allow deletion. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The specified EC2 Security Group is already authorized for the specified Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_cache_cluster": {
+      "name": "CreateCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new Cache Cluster. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The Cache Cluster identifier. This parameter is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 20 alphanumeric characters or hyphens.</li> <li>First character must be a letter.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> </ul> <p>Example: <code>mycachecluster</code></p>",
+            "serialized_name": "CacheClusterId"
+          },
+          "num_cache_nodes": {
+            "type": "integer",
+            "required": true,
+            "documentation": "<p> The number of Cache Nodes the Cache Cluster should have. </p>",
+            "serialized_name": "NumCacheNodes"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The compute and memory capacity of nodes in a Cache Cluster. </p> <p>Valid values: <code>cache.t1.micro</code> | <code>cache.m1.small</code> | <code>cache.m1.medium</code> | <code>cache.m1.large</code> | <code>cache.m1.xlarge</code> | <code>cache.m3.xlarge</code> | <code>cache.m3.2xlarge</code> | <code>cache.m2.xlarge</code> | <code>cache.m2.2xlarge</code> | <code>cache.m2.4xlarge</code> | <code>cache.c1.xlarge</code> </p>",
+            "serialized_name": "CacheNodeType"
+          },
+          "engine": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the cache engine to be used for this Cache Cluster. </p> Currently, <i>memcached</i> is the only cache engine supported by the service.",
+            "serialized_name": "Engine"
+          },
+          "engine_version": {
+            "type": "string",
+            "documentation": "<p> The version of the cache engine to be used for this cluster. </p>",
+            "serialized_name": "EngineVersion"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the cache parameter group to associate with this Cache cluster. If this argument is omitted, the default CacheParameterGroup for the specified engine will be used. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "cache_subnet_group_name": {
+            "type": "string",
+            "documentation": "<p>The name of the Cache Subnet Group to be used for the Cache Cluster.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (VPC).</p>",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "documentation": "<p> A list of Cache Security Group Names to associate with this Cache Cluster. </p> <p> Use this parameter only when you are creating a cluster outside of an Amazon Virtual Private Cloud (VPC). </p>",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (VPC).</p>",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "preferred_availability_zone": {
+            "type": "string",
+            "documentation": "<p> The EC2 Availability Zone that the Cache Cluster will be created in. </p> <p> All cache nodes belonging to a cache cluster are placed in the preferred availability zone. </p> <p> Default: System chosen (random) availability zone. </p>",
+            "serialized_name": "PreferredAvailabilityZone"
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "documentation": "<p> The weekly time range (in UTC) during which system maintenance can occur. </p> <p> Example: <code>sun:05:00-sun:09:00</code> </p>",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "port": {
+            "type": "integer",
+            "documentation": "<p> The port number on which each of the Cache Nodes will accept connections. </p>",
+            "serialized_name": "Port"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "documentation": "<p> The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications will be sent. </p> The Amazon SNS topic owner must be the same as the Cache Cluster owner.",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "documentation": "<p> Indicates that minor engine upgrades will be applied automatically to the Cache Cluster during the maintenance window. </p> <p>Default: <code>true</code></p>",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "documentation": "<p> Contains information about a Cache Cluster. </p>",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "documentation": "<p> Provides the landing page to download the latest ElastiCache client library. </p>",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the compute and memory capacity node type for the Cache Cluster. </p>",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "documentation": "<p> Provides the cache engine version of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "documentation": "<p> Specifies the current state of this Cache Cluster. </p>",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "documentation": "<p> Specifies the number of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Availability Zone the Cache Cluster is located in. </p>",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "documentation": "<p> Specifies the weekly time range (in UTC) during which system maintenance can occur. </p>",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "documentation": "<p> Specifies that changes to the Cache Cluster are pending. This element is only included when changes are pending. Specific changes are identified by sub-elements. </p>",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "documentation": "<p> Contains the new <i>NumCacheNodes</i> for the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "documentation": "<p> Contains the list of node Ids to remove from the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "documentation": "<p> Contains the new version of the Cache Engine the Cache Cluster will be upgraded to. </p>",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "documentation": "<p> Specifies the notification details the Cache Cluster contains. </p>",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the topic Amazon Resource Name (ARN), identifying this resource. </p>",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the current state of this topic. </p>",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "documentation": "<p> Provides the list of Cache Security Group elements containing <i>CacheSecurityGroup.Name</i> and <i>CacheSecurityGroup.Status</i> sub-elements. </p>",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Links a CacheCluster to one or more CacheSecurityGroups. </p>",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> The name of the Cache Security Group. </p>",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the CacheSecurityGroupMembership, the status changes either when a CacheSecurityGroup is modified, or when the CacheSecurityGroups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "documentation": "<p> Provides the status of the Cache Parameter Group assigned to the Cache Cluster.</p>",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "documentation": "<p> The name of the Cache Parameter Group. </p>",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "documentation": "<p> The status of parameter updates. </p>",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "documentation": "<p> A list of the Cache Node Ids which need to be rebooted for parameter changes to be applied. </p>",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p>Specifies the name of the Cache Subnet Group associated with the Cache Cluster.</p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "documentation": "<p> Specifies the list of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A Cache Cluster is made up of one or more Cache Nodes. Each Cache Node is an separate endpoint servicing the memcached protocol. </p>",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies a Cache Node identifier. This is the unique key that identifies a Cache Node per Customer (AWS account). </p>",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "timestamp",
+                      "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the endpoint details for a Cache Node. </p>",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the status of the parameter group applied to this Cache Node.</p>",
+                      "serialized_name": "ParameterGroupStatus"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "documentation": "<p> Indicates that minor version patches are applied automatically. </p>",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p>",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>Represents one or more Cache Security Groups to which a Cache Cluster belongs.</p>",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "documentation": "<p> The identifier of the Cache Security Group. </p>",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the Cache Security Group membership. The status changes whenever a Cache Security Group is modified, or when the Cache Security Groups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> User already has a Cache Cluster with the given identifier. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Specified Cache node type is not available in the specified Availability Zone. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSubnetGroupName</i> does not refer to an existing Cache Subnet Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Clusters per customer. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Nodes in a single Cache Cluster. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Nodes per customer. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_cache_parameter_group": {
+      "name": "CreateCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new Cache Parameter Group. Cache Parameter groups control the parameters for a Cache Cluster.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Parameter Group. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "cache_parameter_group_family": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Parameter Group Family the Cache Parameter Group can be used with. </p> Currently, <i>memcached1.4</i> is the only cache parameter group family supported by the service.",
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The description for the Cache Parameter Group. </p>",
+            "serialized_name": "Description"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_parameter_group": {
+            "type": "structure",
+            "documentation": "<p> Contains a set of parameters and their values which can be applied to a Cache Cluster. </p>",
+            "serialized_name": "CacheParameterGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_parameter_group_name": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the Cache Parameter Group. </p>",
+                "serialized_name": "CacheParameterGroupName"
+              },
+              "cache_parameter_group_family": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the Cache Parameter Group Family that this Cache Parameter Group is compatible with. </p>",
+                "serialized_name": "CacheParameterGroupFamily"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p> Provides the customer-specified description for this Cache Parameter Group. </p>",
+                "serialized_name": "Description"
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Parameter Groups. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> A Cache Parameter Group with the name specified in <i>CacheParameterGroupName</i> already exists. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Parameter Group does not allow for the requested action to occur. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_cache_security_group": {
+      "name": "CreateCacheSecurityGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new Cache Security Group. Cache Security groups control access to one or more Cache Clusters. </p> <p> Only use cache security groups when you are creating a cluster outside of an Amazon Virtual Private Cloud (VPC). Inside of a VPC, use VPC security groups. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name for the Cache Security Group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be \"Default\".</p> <p>Example: <code>mysecuritygroup</code></p>",
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The description for the Cache Security Group. </p>",
+            "serialized_name": "Description"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "documentation": "<p> Defines a set of EC2 Security groups that are allowed to access a Cache Cluster. </p>",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "documentation": "<p> Provides the AWS ID of the owner of a specific Cache Security Group. </p>",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Security Group. </p>",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p> Provides the description of the Cache Security Group. </p>",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "documentation": "<p> Contains a list of EC2SecurityGroup elements. </p>",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> Provides the status of the EC2 Security Group. </p>",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the name of the EC2 Security Group. </p>",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the AWS ID of the owner of the EC2 Security Group specified in the <i>EC2SecurityGroupName</i> field. </p>",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> A Cache Security Group with the name specified in <i>CacheSecurityGroupName</i> already exists. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Security Groups. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_cache_subnet_group": {
+      "name": "CreateCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Creates a new Cache Subnet Group. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name for the Cache Subnet Group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p> <p>Example: <code>mysubnetgroup</code></p>",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_subnet_group_description": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The description for the Cache Subnet Group. </p>",
+            "serialized_name": "CacheSubnetGroupDescription"
+          },
+          "subnet_ids": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p> The EC2 Subnet IDs for the Cache Subnet Group. </p>",
+            "serialized_name": "SubnetIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SubnetIdentifier"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_subnet_group": {
+            "type": "structure",
+            "documentation": "<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li>CreateCacheSubnetGroup</li> <li>ModifyCacheSubnetGroup</li> <li>DescribeCacheSubnetGroups</li> <li>DeleteCacheSubnetGroup</li> </ul> <p>This data type is used as a response element in the DescribeCacheSubnetGroups action.</p>",
+            "serialized_name": "CacheSubnetGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Subnet Group. </p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_subnet_group_description": {
+                "type": "string",
+                "documentation": "<p> Provides the description of the Cache Subnet Group. </p>",
+                "serialized_name": "CacheSubnetGroupDescription"
+              },
+              "vpc_id": {
+                "type": "string",
+                "documentation": "<p> Provides the VPC ID of the Cache Subnet Group. </p>",
+                "serialized_name": "VpcId"
+              },
+              "subnets": {
+                "type": "list",
+                "documentation": "<p> Contains a list of subnets for this group. </p>",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Network Subnet associated with a Cache Cluster </p>",
+                  "serialized_name": "Subnet",
+                  "members": {
+                    "subnet_identifier": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the unique identifier for the Subnet </p>",
+                      "serialized_name": "SubnetIdentifier"
+                    },
+                    "subnet_availability_zone": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the Availability Zone associated with the Subnet </p>",
+                      "serialized_name": "SubnetAvailabilityZone",
+                      "metadata": {
+                        "wrapper": true
+                      },
+                      "members": {
+                        "name": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the name of the Availability Zone </p>",
+                          "serialized_name": "Name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSubnetGroupName</i> is already used by an existing Cache Subnet Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Subnet Groups. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of subnets in a Cache Subnet Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request subnet is invalid, or all subnets are not in the same VPC. </p>",
+          "members": {
+          }
+        }
+      ]
+    },
+    "delete_cache_cluster": {
+      "name": "DeleteCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes a previously provisioned Cache Cluster. A successful response from the web service indicates the request was received correctly. This action cannot be canceled or reverted. DeleteCacheCluster deletes all associated Cache Nodes, node endpoints and the Cache Cluster itself. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The Cache Cluster identifier for the Cache Cluster to be deleted. This parameter isn't case sensitive. </p>",
+            "serialized_name": "CacheClusterId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "documentation": "<p> Contains information about a Cache Cluster. </p>",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "documentation": "<p> Provides the landing page to download the latest ElastiCache client library. </p>",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the compute and memory capacity node type for the Cache Cluster. </p>",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "documentation": "<p> Provides the cache engine version of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "documentation": "<p> Specifies the current state of this Cache Cluster. </p>",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "documentation": "<p> Specifies the number of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Availability Zone the Cache Cluster is located in. </p>",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "documentation": "<p> Specifies the weekly time range (in UTC) during which system maintenance can occur. </p>",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "documentation": "<p> Specifies that changes to the Cache Cluster are pending. This element is only included when changes are pending. Specific changes are identified by sub-elements. </p>",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "documentation": "<p> Contains the new <i>NumCacheNodes</i> for the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "documentation": "<p> Contains the list of node Ids to remove from the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "documentation": "<p> Contains the new version of the Cache Engine the Cache Cluster will be upgraded to. </p>",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "documentation": "<p> Specifies the notification details the Cache Cluster contains. </p>",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the topic Amazon Resource Name (ARN), identifying this resource. </p>",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the current state of this topic. </p>",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "documentation": "<p> Provides the list of Cache Security Group elements containing <i>CacheSecurityGroup.Name</i> and <i>CacheSecurityGroup.Status</i> sub-elements. </p>",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Links a CacheCluster to one or more CacheSecurityGroups. </p>",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> The name of the Cache Security Group. </p>",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the CacheSecurityGroupMembership, the status changes either when a CacheSecurityGroup is modified, or when the CacheSecurityGroups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "documentation": "<p> Provides the status of the Cache Parameter Group assigned to the Cache Cluster.</p>",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "documentation": "<p> The name of the Cache Parameter Group. </p>",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "documentation": "<p> The status of parameter updates. </p>",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "documentation": "<p> A list of the Cache Node Ids which need to be rebooted for parameter changes to be applied. </p>",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p>Specifies the name of the Cache Subnet Group associated with the Cache Cluster.</p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "documentation": "<p> Specifies the list of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A Cache Cluster is made up of one or more Cache Nodes. Each Cache Node is an separate endpoint servicing the memcached protocol. </p>",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies a Cache Node identifier. This is the unique key that identifies a Cache Node per Customer (AWS account). </p>",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "timestamp",
+                      "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the endpoint details for a Cache Node. </p>",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the status of the parameter group applied to this Cache Node.</p>",
+                      "serialized_name": "ParameterGroupStatus"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "documentation": "<p> Indicates that minor version patches are applied automatically. </p>",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p>",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>Represents one or more Cache Security Groups to which a Cache Cluster belongs.</p>",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "documentation": "<p> The identifier of the Cache Security Group. </p>",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the Cache Security Group membership. The status changes whenever a Cache Security Group is modified, or when the Cache Security Groups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheClusterId</i> does not refer to an existing Cache Cluster. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The specified Cache Cluster is not in the <i>available</i> state. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_cache_parameter_group": {
+      "name": "DeleteCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes the specified CacheParameterGroup. The CacheParameterGroup cannot be deleted if it is associated with any cache clusters. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Parameter Group to delete. </p> The specified cache security group must not be associated with any Cache clusters.",
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Parameter Group does not allow for the requested action to occur. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_cache_security_group": {
+      "name": "DeleteCacheSecurityGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes a Cache Security Group. </p> The specified Cache Security Group must not be associated with any Cache Clusters.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Security Group to delete. </p> You cannot delete the default security group.",
+            "serialized_name": "CacheSecurityGroupName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Security Group does not allow deletion. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_cache_subnet_group": {
+      "name": "DeleteCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Deletes a Cache Subnet Group. </p> The specified Cache Subnet Group must not be associated with any Cache Clusters.",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Subnet Group to delete. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>",
+            "serialized_name": "CacheSubnetGroupName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> Request cache subnet group is currently in use. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSubnetGroupName</i> does not refer to an existing Cache Subnet Group. </p>",
+          "members": {
+          }
+        }
+      ]
+    },
+    "describe_cache_clusters": {
+      "name": "DescribeCacheClusters",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns information about all provisioned Cache Clusters if no Cache Cluster identifier is specified, or about a specific Cache Cluster if a Cache Cluster identifier is supplied. </p> <p> Cluster information will be returned by default. An optional <i>ShowDetails</i> flag can be used to retrieve detailed information about the Cache Nodes associated with the Cache Cluster. Details include the DNS address and port for the Cache Node endpoint. </p> <p> If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned. </p> <p> If the cluster is in the DELETING state, only cluster level information will be displayed. </p> <p> While adding Cache Nodes, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. The cluster lifecycle tells the customer when new nodes are AVAILABLE. </p> <p> While removing existing Cache Nodes from an cluster, endpoint information for the removed nodes will not be displayed. </p> <p>DescribeCacheClusters supports pagination.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "documentation": "<p> The user-supplied cluster identifier. If this parameter is specified, only information about that specific Cache Cluster is returned. This parameter isn't case sensitive. </p>",
+            "serialized_name": "CacheClusterId"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p> <p> Default: 100 </p> <p> Constraints: minimum 20, maximum 100 </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          },
+          "show_cache_node_info": {
+            "type": "boolean",
+            "documentation": "<p> An optional flag that can be included in the DescribeCacheCluster request to retrieve Cache Nodes information. </p>",
+            "serialized_name": "ShowCacheNodeInfo"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains one or more Cache Clusters. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "cache_clusters": {
+            "type": "list",
+            "documentation": "<p> A list of CacheClusters.</p>",
+            "serialized_name": "CacheClusters",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> Contains information about a Cache Cluster. </p>",
+              "serialized_name": "CacheCluster",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_cluster_id": {
+                  "type": "string",
+                  "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                  "serialized_name": "CacheClusterId"
+                },
+                "configuration_endpoint": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                  "serialized_name": "ConfigurationEndpoint",
+                  "members": {
+                    "address": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                      "serialized_name": "Address"
+                    },
+                    "port": {
+                      "type": "integer",
+                      "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                      "serialized_name": "Port"
+                    }
+                  }
+                },
+                "client_download_landing_page": {
+                  "type": "string",
+                  "documentation": "<p> Provides the landing page to download the latest ElastiCache client library. </p>",
+                  "serialized_name": "ClientDownloadLandingPage"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the compute and memory capacity node type for the Cache Cluster. </p>",
+                  "serialized_name": "CacheNodeType"
+                },
+                "engine": {
+                  "type": "string",
+                  "documentation": "<p> Provides the name of the cache engine to be used for this Cache Cluster. </p>",
+                  "serialized_name": "Engine"
+                },
+                "engine_version": {
+                  "type": "string",
+                  "documentation": "<p> Provides the cache engine version of the cache engine to be used for this Cache Cluster. </p>",
+                  "serialized_name": "EngineVersion"
+                },
+                "cache_cluster_status": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the current state of this Cache Cluster. </p>",
+                  "serialized_name": "CacheClusterStatus"
+                },
+                "num_cache_nodes": {
+                  "type": "integer",
+                  "documentation": "<p> Specifies the number of Cache Nodes the Cache Cluster contains. </p>",
+                  "serialized_name": "NumCacheNodes"
+                },
+                "preferred_availability_zone": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the Availability Zone the Cache Cluster is located in. </p>",
+                  "serialized_name": "PreferredAvailabilityZone"
+                },
+                "cache_cluster_create_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
+                  "serialized_name": "CacheClusterCreateTime"
+                },
+                "preferred_maintenance_window": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the weekly time range (in UTC) during which system maintenance can occur. </p>",
+                  "serialized_name": "PreferredMaintenanceWindow"
+                },
+                "pending_modified_values": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies that changes to the Cache Cluster are pending. This element is only included when changes are pending. Specific changes are identified by sub-elements. </p>",
+                  "serialized_name": "PendingModifiedValues",
+                  "members": {
+                    "num_cache_nodes": {
+                      "type": "integer",
+                      "documentation": "<p> Contains the new <i>NumCacheNodes</i> for the Cache Cluster that will be applied or is in progress. </p>",
+                      "serialized_name": "NumCacheNodes"
+                    },
+                    "cache_node_ids_to_remove": {
+                      "type": "list",
+                      "documentation": "<p> Contains the list of node Ids to remove from the Cache Cluster that will be applied or is in progress. </p>",
+                      "serialized_name": "CacheNodeIdsToRemove",
+                      "members": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeId"
+                      }
+                    },
+                    "engine_version": {
+                      "type": "string",
+                      "documentation": "<p> Contains the new version of the Cache Engine the Cache Cluster will be upgraded to. </p>",
+                      "serialized_name": "EngineVersion"
+                    }
+                  }
+                },
+                "notification_configuration": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies the notification details the Cache Cluster contains. </p>",
+                  "serialized_name": "NotificationConfiguration",
+                  "members": {
+                    "topic_arn": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the topic Amazon Resource Name (ARN), identifying this resource. </p>",
+                      "serialized_name": "TopicArn"
+                    },
+                    "topic_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the current state of this topic. </p>",
+                      "serialized_name": "TopicStatus"
+                    }
+                  }
+                },
+                "cache_security_groups": {
+                  "type": "list",
+                  "documentation": "<p> Provides the list of Cache Security Group elements containing <i>CacheSecurityGroup.Name</i> and <i>CacheSecurityGroup.Status</i> sub-elements. </p>",
+                  "serialized_name": "CacheSecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> Links a CacheCluster to one or more CacheSecurityGroups. </p>",
+                    "serialized_name": "CacheSecurityGroup",
+                    "members": {
+                      "cache_security_group_name": {
+                        "type": "string",
+                        "documentation": "<p> The name of the Cache Security Group. </p>",
+                        "serialized_name": "CacheSecurityGroupName"
+                      },
+                      "status": {
+                        "type": "string",
+                        "documentation": "<p> The status of the CacheSecurityGroupMembership, the status changes either when a CacheSecurityGroup is modified, or when the CacheSecurityGroups assigned to a Cache Cluster are modified. </p>",
+                        "serialized_name": "Status"
+                      }
+                    }
+                  }
+                },
+                "cache_parameter_group": {
+                  "type": "structure",
+                  "documentation": "<p> Provides the status of the Cache Parameter Group assigned to the Cache Cluster.</p>",
+                  "serialized_name": "CacheParameterGroup",
+                  "members": {
+                    "cache_parameter_group_name": {
+                      "type": "string",
+                      "documentation": "<p> The name of the Cache Parameter Group. </p>",
+                      "serialized_name": "CacheParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "documentation": "<p> The status of parameter updates. </p>",
+                      "serialized_name": "ParameterApplyStatus"
+                    },
+                    "cache_node_ids_to_reboot": {
+                      "type": "list",
+                      "documentation": "<p> A list of the Cache Node Ids which need to be rebooted for parameter changes to be applied. </p>",
+                      "serialized_name": "CacheNodeIdsToReboot",
+                      "members": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeId"
+                      }
+                    }
+                  }
+                },
+                "cache_subnet_group_name": {
+                  "type": "string",
+                  "documentation": "<p>Specifies the name of the Cache Subnet Group associated with the Cache Cluster.</p>",
+                  "serialized_name": "CacheSubnetGroupName"
+                },
+                "cache_nodes": {
+                  "type": "list",
+                  "documentation": "<p> Specifies the list of Cache Nodes the Cache Cluster contains. </p>",
+                  "serialized_name": "CacheNodes",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> A Cache Cluster is made up of one or more Cache Nodes. Each Cache Node is an separate endpoint servicing the memcached protocol. </p>",
+                    "serialized_name": "CacheNode",
+                    "members": {
+                      "cache_node_id": {
+                        "type": "string",
+                        "documentation": "<p> Specifies a Cache Node identifier. This is the unique key that identifies a Cache Node per Customer (AWS account). </p>",
+                        "serialized_name": "CacheNodeId"
+                      },
+                      "cache_node_status": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                        "serialized_name": "CacheNodeStatus"
+                      },
+                      "cache_node_create_time": {
+                        "type": "timestamp",
+                        "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
+                        "serialized_name": "CacheNodeCreateTime"
+                      },
+                      "endpoint": {
+                        "type": "structure",
+                        "documentation": "<p> Specifies the endpoint details for a Cache Node. </p>",
+                        "serialized_name": "Endpoint",
+                        "members": {
+                          "address": {
+                            "type": "string",
+                            "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                            "serialized_name": "Address"
+                          },
+                          "port": {
+                            "type": "integer",
+                            "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                            "serialized_name": "Port"
+                          }
+                        }
+                      },
+                      "parameter_group_status": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the status of the parameter group applied to this Cache Node.</p>",
+                        "serialized_name": "ParameterGroupStatus"
+                      }
+                    }
+                  }
+                },
+                "auto_minor_version_upgrade": {
+                  "type": "boolean",
+                  "documentation": "<p> Indicates that minor version patches are applied automatically. </p>",
+                  "serialized_name": "AutoMinorVersionUpgrade"
+                },
+                "security_groups": {
+                  "type": "list",
+                  "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p>",
+                  "serialized_name": "SecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>Represents one or more Cache Security Groups to which a Cache Cluster belongs.</p>",
+                    "members": {
+                      "security_group_id": {
+                        "type": "string",
+                        "documentation": "<p> The identifier of the Cache Security Group. </p>",
+                        "serialized_name": "SecurityGroupId"
+                      },
+                      "status": {
+                        "type": "string",
+                        "documentation": "<p> The status of the Cache Security Group membership. The status changes whenever a Cache Security Group is modified, or when the Cache Security Groups assigned to a Cache Cluster are modified. </p>",
+                        "serialized_name": "Status"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheClusterId</i> does not refer to an existing Cache Cluster. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_cache_engine_versions": {
+      "name": "DescribeCacheEngineVersions",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of the available cache engines and their versions. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "engine": {
+            "type": "string",
+            "documentation": "<p> The cache engine to return. </p>",
+            "serialized_name": "Engine"
+          },
+          "engine_version": {
+            "type": "string",
+            "documentation": "<p> The cache engine version to return. </p> <p>Example: <code>1.4.14</code></p>",
+            "serialized_name": "EngineVersion"
+          },
+          "cache_parameter_group_family": {
+            "type": "string",
+            "documentation": "<p> The name of a specific Cache Parameter Group family to return details for. </p> <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          },
+          "default_only": {
+            "type": "boolean",
+            "documentation": "<p> Indicates that only the default version of the specified engine or engine and major version combination is returned. </p>",
+            "serialized_name": "DefaultOnly"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains the result of a successful invocation of the DescribeCacheEngineVersions action. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The identifier returned to allow retrieval of paginated results. </p>",
+            "serialized_name": "Marker"
+          },
+          "cache_engine_versions": {
+            "type": "list",
+            "documentation": "<p> A list of <code>CacheEngineVersion</code> elements. </p>",
+            "serialized_name": "CacheEngineVersions",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> This data type is used as a response element in the action DescribeCacheEngineVersions. </p>",
+              "serialized_name": "CacheEngineVersion",
+              "members": {
+                "engine": {
+                  "type": "string",
+                  "documentation": "<p> The name of the cache engine. </p>",
+                  "serialized_name": "Engine"
+                },
+                "engine_version": {
+                  "type": "string",
+                  "documentation": "<p> The version number of the cache engine. </p>",
+                  "serialized_name": "EngineVersion"
+                },
+                "cache_parameter_group_family": {
+                  "type": "string",
+                  "documentation": "<p> The name of the CacheParameterGroupFamily for the cache engine. </p>",
+                  "serialized_name": "CacheParameterGroupFamily"
+                },
+                "cache_engine_description": {
+                  "type": "string",
+                  "documentation": "<p> The description of the cache engine. </p>",
+                  "serialized_name": "CacheEngineDescription"
+                },
+                "cache_engine_version_description": {
+                  "type": "string",
+                  "documentation": "<p> The description of the cache engine version. </p>",
+                  "serialized_name": "CacheEngineVersionDescription"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_parameter_groups": {
+      "name": "DescribeCacheParameterGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of CacheParameterGroup descriptions. If a CacheParameterGroupName is specified, the list will contain only the descriptions of the specified CacheParameterGroup. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of a specific cache parameter group to return details for. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains a list of CacheParameterGroups. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "cache_parameter_groups": {
+            "type": "list",
+            "documentation": "<p> A list of CacheParameterGroup instances. </p>",
+            "serialized_name": "CacheParameterGroups",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> Contains a set of parameters and their values which can be applied to a Cache Cluster. </p>",
+              "serialized_name": "CacheParameterGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_parameter_group_name": {
+                  "type": "string",
+                  "documentation": "<p> Provides the name of the Cache Parameter Group. </p>",
+                  "serialized_name": "CacheParameterGroupName"
+                },
+                "cache_parameter_group_family": {
+                  "type": "string",
+                  "documentation": "<p> Provides the name of the Cache Parameter Group Family that this Cache Parameter Group is compatible with. </p>",
+                  "serialized_name": "CacheParameterGroupFamily"
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p> Provides the customer-specified description for this Cache Parameter Group. </p>",
+                  "serialized_name": "Description"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_cache_parameters": {
+      "name": "DescribeCacheParameters",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns the detailed parameter list for a particular CacheParameterGroup. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of a specific cache parameter group to return details for. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "source": {
+            "type": "string",
+            "documentation": "<p> The parameter types to return. </p> <p> Valid values: <code>user</code> | <code>system</code> | <code>engine-default</code> </p>",
+            "serialized_name": "Source"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains a list of Parametes and CacheNodeTypeSpecificParameters. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "parameters": {
+            "type": "list",
+            "documentation": "<p> A list of Parameter instances. </p>",
+            "serialized_name": "Parameters",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> A setting controlling some apsect of the service's behavior. </p>",
+              "serialized_name": "Parameter",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the parameter. </p>",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the value of the parameter. </p>",
+                  "serialized_name": "ParameterValue"
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p> Provides a description of the parameter. </p>",
+                  "serialized_name": "Description"
+                },
+                "source": {
+                  "type": "string",
+                  "documentation": "<p> Indicates the source of the parameter value. </p>",
+                  "serialized_name": "Source"
+                },
+                "data_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the valid data type for the parameter. </p>",
+                  "serialized_name": "DataType"
+                },
+                "allowed_values": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the valid range of values for the parameter. </p>",
+                  "serialized_name": "AllowedValues"
+                },
+                "is_modifiable": {
+                  "type": "boolean",
+                  "documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. </p>",
+                  "serialized_name": "IsModifiable"
+                },
+                "minimum_engine_version": {
+                  "type": "string",
+                  "documentation": "<p> The earliest engine version to which the parameter can apply. </p>",
+                  "serialized_name": "MinimumEngineVersion"
+                }
+              }
+            }
+          },
+          "cache_node_type_specific_parameters": {
+            "type": "list",
+            "documentation": "<p> A list of CacheNodeTypeSpecificParameter instances. </p>",
+            "serialized_name": "CacheNodeTypeSpecificParameters",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> A parameter that has a different value for each Cache Node Type it is applied to. </p>",
+              "serialized_name": "CacheNodeTypeSpecificParameter",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the parameter. </p>",
+                  "serialized_name": "ParameterName"
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p> Provides a description of the parameter. </p>",
+                  "serialized_name": "Description"
+                },
+                "source": {
+                  "type": "string",
+                  "documentation": "<p> Indicates the source of the parameter value. </p>",
+                  "serialized_name": "Source"
+                },
+                "data_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the valid data type for the parameter. </p>",
+                  "serialized_name": "DataType"
+                },
+                "allowed_values": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the valid range of values for the parameter. </p>",
+                  "serialized_name": "AllowedValues"
+                },
+                "is_modifiable": {
+                  "type": "boolean",
+                  "documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. </p>",
+                  "serialized_name": "IsModifiable"
+                },
+                "minimum_engine_version": {
+                  "type": "string",
+                  "documentation": "<p> The earliest engine version to which the parameter can apply. </p>",
+                  "serialized_name": "MinimumEngineVersion"
+                },
+                "cache_node_type_specific_values": {
+                  "type": "list",
+                  "documentation": "<p> A list of Cache Node types and their corresponding values for this parameter. </p>",
+                  "serialized_name": "CacheNodeTypeSpecificValues",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> A value that applies only to a certain Cache Node Type. </p>",
+                    "serialized_name": "CacheNodeTypeSpecificValue",
+                    "members": {
+                      "cache_node_type": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the Cache Node type for which this value applies. </p>",
+                        "serialized_name": "CacheNodeType"
+                      },
+                      "value": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the value for the Cache Node type. </p>",
+                        "serialized_name": "Value"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_cache_security_groups": {
+      "name": "DescribeCacheSecurityGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of CacheSecurityGroup descriptions. If a CacheSecurityGroupName is specified, the list will contain only the description of the specified CacheSecurityGroup. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Cache Security Group to return details for. </p>",
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p> <p> Default: 100 </p> <p> Constraints: minimum 20, maximum 100 </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains a list of CacheSecurityGroups. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "cache_security_groups": {
+            "type": "list",
+            "documentation": "<p> A list of CacheSecurityGroup instances. </p>",
+            "serialized_name": "CacheSecurityGroups",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> Defines a set of EC2 Security groups that are allowed to access a Cache Cluster. </p>",
+              "serialized_name": "CacheSecurityGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "owner_id": {
+                  "type": "string",
+                  "documentation": "<p> Provides the AWS ID of the owner of a specific Cache Security Group. </p>",
+                  "serialized_name": "OwnerId"
+                },
+                "cache_security_group_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the Cache Security Group. </p>",
+                  "serialized_name": "CacheSecurityGroupName"
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p> Provides the description of the Cache Security Group. </p>",
+                  "serialized_name": "Description"
+                },
+                "ec2_security_groups": {
+                  "type": "list",
+                  "documentation": "<p> Contains a list of EC2SecurityGroup elements. </p>",
+                  "serialized_name": "EC2SecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                    "serialized_name": "EC2SecurityGroup",
+                    "members": {
+                      "status": {
+                        "type": "string",
+                        "documentation": "<p> Provides the status of the EC2 Security Group. </p>",
+                        "serialized_name": "Status"
+                      },
+                      "ec2_security_group_name": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the name of the EC2 Security Group. </p>",
+                        "serialized_name": "EC2SecurityGroupName"
+                      },
+                      "ec2_security_group_owner_id": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the AWS ID of the owner of the EC2 Security Group specified in the <i>EC2SecurityGroupName</i> field. </p>",
+                        "serialized_name": "EC2SecurityGroupOwnerId"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_cache_subnet_groups": {
+      "name": "DescribeCacheSubnetGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns a list of CacheSubnetGroup descriptions. If a CacheSubnetGroupName is specified, the list will contain only the description of the specified Cache Subnet Group. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Cache Subnet Group to return details for. </p>",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a marker is included in the response so that the remaining results may be retrieved. </p> <p>Default: 100</p> <p>Constraints: minimum 20, maximum 100</p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents the output from a DescribeCacheSubnetGroups action.</p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "cache_subnet_groups": {
+            "type": "list",
+            "documentation": "<p>One or more Cache Subnet Groups.</p>",
+            "serialized_name": "CacheSubnetGroups",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li>CreateCacheSubnetGroup</li> <li>ModifyCacheSubnetGroup</li> <li>DescribeCacheSubnetGroups</li> <li>DeleteCacheSubnetGroup</li> </ul> <p>This data type is used as a response element in the DescribeCacheSubnetGroups action.</p>",
+              "serialized_name": "CacheSubnetGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_subnet_group_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the Cache Subnet Group. </p>",
+                  "serialized_name": "CacheSubnetGroupName"
+                },
+                "cache_subnet_group_description": {
+                  "type": "string",
+                  "documentation": "<p> Provides the description of the Cache Subnet Group. </p>",
+                  "serialized_name": "CacheSubnetGroupDescription"
+                },
+                "vpc_id": {
+                  "type": "string",
+                  "documentation": "<p> Provides the VPC ID of the Cache Subnet Group. </p>",
+                  "serialized_name": "VpcId"
+                },
+                "subnets": {
+                  "type": "list",
+                  "documentation": "<p> Contains a list of subnets for this group. </p>",
+                  "serialized_name": "Subnets",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> Network Subnet associated with a Cache Cluster </p>",
+                    "serialized_name": "Subnet",
+                    "members": {
+                      "subnet_identifier": {
+                        "type": "string",
+                        "documentation": "<p> Specifies the unique identifier for the Subnet </p>",
+                        "serialized_name": "SubnetIdentifier"
+                      },
+                      "subnet_availability_zone": {
+                        "type": "structure",
+                        "documentation": "<p> Specifies the Availability Zone associated with the Subnet </p>",
+                        "serialized_name": "SubnetAvailabilityZone",
+                        "metadata": {
+                          "wrapper": true
+                        },
+                        "members": {
+                          "name": {
+                            "type": "string",
+                            "documentation": "<p> Specifies the name of the Availability Zone </p>",
+                            "serialized_name": "Name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSubnetGroupName</i> does not refer to an existing Cache Subnet Group. </p>",
+          "members": {
+          }
+        }
+      ]
+    },
+    "describe_engine_default_parameters": {
+      "name": "DescribeEngineDefaultParameters",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns the default engine and system parameter information for the specified cache engine. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_family": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Parameter Group Family. </p> Currently, <i>memcached1.4</i> is the only cache parameter group family supported by the service.",
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "engine_defaults": {
+            "type": "structure",
+            "documentation": "<p> The default Parameters and CacheNodeTypeSpecificParameters for a CacheParameterGroupFamily. </p>",
+            "serialized_name": "EngineDefaults",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_parameter_group_family": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Parameter Group Family which the engine default parameters apply to. </p>",
+                "serialized_name": "CacheParameterGroupFamily"
+              },
+              "marker": {
+                "type": "string",
+                "documentation": "<p> Provides an identifier to allow retrieval of paginated results. </p>",
+                "serialized_name": "Marker"
+              },
+              "parameters": {
+                "type": "list",
+                "documentation": "<p> Contains a list of engine default parameters. </p>",
+                "serialized_name": "Parameters",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A setting controlling some apsect of the service's behavior. </p>",
+                  "serialized_name": "Parameter",
+                  "members": {
+                    "parameter_name": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the name of the parameter. </p>",
+                      "serialized_name": "ParameterName"
+                    },
+                    "parameter_value": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the value of the parameter. </p>",
+                      "serialized_name": "ParameterValue"
+                    },
+                    "description": {
+                      "type": "string",
+                      "documentation": "<p> Provides a description of the parameter. </p>",
+                      "serialized_name": "Description"
+                    },
+                    "source": {
+                      "type": "string",
+                      "documentation": "<p> Indicates the source of the parameter value. </p>",
+                      "serialized_name": "Source"
+                    },
+                    "data_type": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the valid data type for the parameter. </p>",
+                      "serialized_name": "DataType"
+                    },
+                    "allowed_values": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the valid range of values for the parameter. </p>",
+                      "serialized_name": "AllowedValues"
+                    },
+                    "is_modifiable": {
+                      "type": "boolean",
+                      "documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. </p>",
+                      "serialized_name": "IsModifiable"
+                    },
+                    "minimum_engine_version": {
+                      "type": "string",
+                      "documentation": "<p> The earliest engine version to which the parameter can apply. </p>",
+                      "serialized_name": "MinimumEngineVersion"
+                    }
+                  }
+                }
+              },
+              "cache_node_type_specific_parameters": {
+                "type": "list",
+                "documentation": "<p> A list of CacheNodeTypeSpecificParameter instances. </p>",
+                "serialized_name": "CacheNodeTypeSpecificParameters",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A parameter that has a different value for each Cache Node Type it is applied to. </p>",
+                  "serialized_name": "CacheNodeTypeSpecificParameter",
+                  "members": {
+                    "parameter_name": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the name of the parameter. </p>",
+                      "serialized_name": "ParameterName"
+                    },
+                    "description": {
+                      "type": "string",
+                      "documentation": "<p> Provides a description of the parameter. </p>",
+                      "serialized_name": "Description"
+                    },
+                    "source": {
+                      "type": "string",
+                      "documentation": "<p> Indicates the source of the parameter value. </p>",
+                      "serialized_name": "Source"
+                    },
+                    "data_type": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the valid data type for the parameter. </p>",
+                      "serialized_name": "DataType"
+                    },
+                    "allowed_values": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the valid range of values for the parameter. </p>",
+                      "serialized_name": "AllowedValues"
+                    },
+                    "is_modifiable": {
+                      "type": "boolean",
+                      "documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. </p>",
+                      "serialized_name": "IsModifiable"
+                    },
+                    "minimum_engine_version": {
+                      "type": "string",
+                      "documentation": "<p> The earliest engine version to which the parameter can apply. </p>",
+                      "serialized_name": "MinimumEngineVersion"
+                    },
+                    "cache_node_type_specific_values": {
+                      "type": "list",
+                      "documentation": "<p> A list of Cache Node types and their corresponding values for this parameter. </p>",
+                      "serialized_name": "CacheNodeTypeSpecificValues",
+                      "members": {
+                        "type": "structure",
+                        "documentation": "<p> A value that applies only to a certain Cache Node Type. </p>",
+                        "serialized_name": "CacheNodeTypeSpecificValue",
+                        "members": {
+                          "cache_node_type": {
+                            "type": "string",
+                            "documentation": "<p> Specifies the Cache Node type for which this value applies. </p>",
+                            "serialized_name": "CacheNodeType"
+                          },
+                          "value": {
+                            "type": "string",
+                            "documentation": "<p> Specifies the value for the Cache Node type. </p>",
+                            "serialized_name": "Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_events": {
+      "name": "DescribeEvents",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns events related to Cache Clusters, Cache Security Groups, and Cache Parameter Groups for the past 14 days. Events specific to a particular Cache Cluster, Cache Security Group, or Cache Parameter Group can be obtained by providing the name as a parameter. By default, the past hour of events are returned. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "source_identifier": {
+            "type": "string",
+            "documentation": "<p> The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response. </p>",
+            "serialized_name": "SourceIdentifier"
+          },
+          "source_type": {
+            "type": "string",
+            "documentation": "<p> The event source to retrieve events for. If no value is specified, all events are returned. </p>",
+            "serialized_name": "SourceType",
+            "enum": [
+              "cache-cluster",
+              "cache-parameter-group",
+              "cache-security-group",
+              "cache-subnet-group"
+            ]
+          },
+          "start_time": {
+            "type": "timestamp",
+            "documentation": "<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. </p>",
+            "serialized_name": "StartTime"
+          },
+          "end_time": {
+            "type": "timestamp",
+            "documentation": "<p> The end of the time interval for which to retrieve events, specified in ISO 8601 format. </p>",
+            "serialized_name": "EndTime"
+          },
+          "duration": {
+            "type": "integer",
+            "documentation": "<p> The number of minutes to retrieve events for. </p>",
+            "serialized_name": "Duration"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <i>MaxRecords</i> value, a marker is included in the response so that the remaining results may be retrieved. </p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains a list of Events. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker obtained from a previous operation response. </p>",
+            "serialized_name": "Marker"
+          },
+          "events": {
+            "type": "list",
+            "documentation": "<p> A list of Event instances. </p>",
+            "serialized_name": "Events",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> An event represents something interesting that has happened in the system. </p>",
+              "serialized_name": "Event",
+              "members": {
+                "source_identifier": {
+                  "type": "string",
+                  "documentation": "<p> Provides the identifier for the source of the event. </p>",
+                  "serialized_name": "SourceIdentifier"
+                },
+                "source_type": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the source type for this event. </p>",
+                  "serialized_name": "SourceType",
+                  "enum": [
+                    "cache-cluster",
+                    "cache-parameter-group",
+                    "cache-security-group",
+                    "cache-subnet-group"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "documentation": "<p> Provides the text of this event. </p>",
+                  "serialized_name": "Message"
+                },
+                "date": {
+                  "type": "timestamp",
+                  "documentation": "<p> Specifies the date and time of the event. </p>",
+                  "serialized_name": "Date"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_reserved_cache_nodes": {
+      "name": "DescribeReservedCacheNodes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns information about reserved Cache Nodes for this account, or about a specified reserved Cache Node. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "reserved_cache_node_id": {
+            "type": "string",
+            "documentation": "<p> The reserved Cache Node identifier filter value. Specify this parameter to show only the reservation that matches the specified reservation ID. </p>",
+            "serialized_name": "ReservedCacheNodeId"
+          },
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "documentation": "<p> The offering identifier filter value. Specify this parameter to show only purchased reservations matching the specified offering identifier. </p>",
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "documentation": "<p> The Cache Node type filter value. Specify this parameter to show only those reservations matching the specified Cache Nodes type. </p>",
+            "serialized_name": "CacheNodeType"
+          },
+          "duration": {
+            "type": "string",
+            "documentation": "<p> The duration filter value, specified in years or seconds. Specify this parameter to show only reservations for this duration. </p> <p>Valid Values: <code>1 | 3 | 31536000 | 94608000</code></p>",
+            "serialized_name": "Duration"
+          },
+          "product_description": {
+            "type": "string",
+            "documentation": "<p> The product description filter value. Specify this parameter to show only those reservations matching the specified product description. </p>",
+            "serialized_name": "ProductDescription"
+          },
+          "offering_type": {
+            "type": "string",
+            "documentation": "<p> The offering type filter value. Specify this parameter to show only the available offerings matching the specified offering type. </p> <p>Valid Values: <code>\"Light Utilization\" | \"Medium Utilization\" | \"Heavy Utilization\" </code></p>",
+            "serialized_name": "OfferingType"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: minimum 20, maximum 100</p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker provided in the previous request. If this parameter is specified, the response includes records beyond the marker only, up to <code>MaxRecords</code>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains the result of a successful invocation of the DescribeReservedCacheNodes action. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker provided for paginated results. </p>",
+            "serialized_name": "Marker"
+          },
+          "reserved_cache_nodes": {
+            "type": "list",
+            "documentation": "<p> A list of of reserved Cache Nodes. </p>",
+            "serialized_name": "ReservedCacheNodes",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodes and PurchaseReservedCacheNodesOffering actions. </p>",
+              "serialized_name": "ReservedCacheNode",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "reserved_cache_node_id": {
+                  "type": "string",
+                  "documentation": "<p> The unique identifier for the reservation. </p>",
+                  "serialized_name": "ReservedCacheNodeId"
+                },
+                "reserved_cache_nodes_offering_id": {
+                  "type": "string",
+                  "documentation": "<p> The offering identifier. </p>",
+                  "serialized_name": "ReservedCacheNodesOfferingId"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "documentation": "<p> The cache node type for the reserved Cache Node. </p>",
+                  "serialized_name": "CacheNodeType"
+                },
+                "start_time": {
+                  "type": "timestamp",
+                  "documentation": "<p> The time the reservation started. </p>",
+                  "serialized_name": "StartTime"
+                },
+                "duration": {
+                  "type": "integer",
+                  "documentation": "<p> The duration of the reservation in seconds. </p>",
+                  "serialized_name": "Duration"
+                },
+                "fixed_price": {
+                  "type": "float",
+                  "documentation": "<p> The fixed price charged for this reserved Cache Node. </p>",
+                  "serialized_name": "FixedPrice"
+                },
+                "usage_price": {
+                  "type": "float",
+                  "documentation": "<p> The hourly price charged for this reserved Cache Node. </p>",
+                  "serialized_name": "UsagePrice"
+                },
+                "cache_node_count": {
+                  "type": "integer",
+                  "documentation": "<p> The number of reserved Cache Nodes. </p>",
+                  "serialized_name": "CacheNodeCount"
+                },
+                "product_description": {
+                  "type": "string",
+                  "documentation": "<p> The description of the reserved Cache Node. </p>",
+                  "serialized_name": "ProductDescription"
+                },
+                "offering_type": {
+                  "type": "string",
+                  "documentation": "<p> The offering type of this reserved Cache Node. </p>",
+                  "serialized_name": "OfferingType"
+                },
+                "state": {
+                  "type": "string",
+                  "documentation": "<p> The state of the reserved Cache Node. </p>",
+                  "serialized_name": "State"
+                },
+                "recurring_charges": {
+                  "type": "list",
+                  "documentation": "<p> The recurring price charged to run this reserved Cache Node. </p>",
+                  "serialized_name": "RecurringCharges",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodes and DescribeReservedCacheNodesOfferings actions. </p>",
+                    "serialized_name": "RecurringCharge",
+                    "metadata": {
+                      "wrapper": true
+                    },
+                    "members": {
+                      "recurring_charge_amount": {
+                        "type": "float",
+                        "documentation": "<p> The amount of the recurring charge. </p>",
+                        "serialized_name": "RecurringChargeAmount"
+                      },
+                      "recurring_charge_frequency": {
+                        "type": "string",
+                        "documentation": "<p> The frequency of the recurring charge. </p>",
+                        "serialized_name": "RecurringChargeFrequency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The specified reserved Cache Node not found. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_reserved_cache_nodes_offerings": {
+      "name": "DescribeReservedCacheNodesOfferings",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Lists available reserved Cache Node offerings. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "documentation": "<p> The offering identifier filter value. Specify this parameter to show only the available offering that matches the specified reservation identifier. </p> <p>Example: <code>438012d3-4052-4cc7-b2e3-8d3372e0e706</code></p>",
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "documentation": "<p> The Cache Node type filter value. Specify this parameter to show only the available offerings matching the specified Cache Node type. </p>",
+            "serialized_name": "CacheNodeType"
+          },
+          "duration": {
+            "type": "string",
+            "documentation": "<p> Duration filter value, specified in years or seconds. Specify this parameter to show only reservations for this duration. </p> <p>Valid Values: <code>1 | 3 | 31536000 | 94608000</code></p>",
+            "serialized_name": "Duration"
+          },
+          "product_description": {
+            "type": "string",
+            "documentation": "<p> Product description filter value. Specify this parameter to show only the available offerings matching the specified product description. </p>",
+            "serialized_name": "ProductDescription"
+          },
+          "offering_type": {
+            "type": "string",
+            "documentation": "<p> The offering type filter value. Specify this parameter to show only the available offerings matching the specified offering type. </p> <p>Valid Values: <code>\"Light Utilization\" | \"Medium Utilization\" | \"Heavy Utilization\" </code></p>",
+            "serialized_name": "OfferingType"
+          },
+          "max_records": {
+            "type": "integer",
+            "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: minimum 20, maximum 100</p>",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The marker provided in the previous request. If this parameter is specified, the response includes records beyond the marker only, up to <code>MaxRecords</code>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains the result of a successful invocation of the DescribeReservedCacheNodesOfferings action. </p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p> A marker provided for paginated results. </p>",
+            "serialized_name": "Marker"
+          },
+          "reserved_cache_nodes_offerings": {
+            "type": "list",
+            "documentation": "<p> A list of reserved Cache Node offerings. </p>",
+            "serialized_name": "ReservedCacheNodesOfferings",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodesOfferings action. </p>",
+              "serialized_name": "ReservedCacheNodesOffering",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "reserved_cache_nodes_offering_id": {
+                  "type": "string",
+                  "documentation": "<p> The offering identifier. </p>",
+                  "serialized_name": "ReservedCacheNodesOfferingId"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "documentation": "<p> The Cache Node type for the reserved Cache Node. </p>",
+                  "serialized_name": "CacheNodeType"
+                },
+                "duration": {
+                  "type": "integer",
+                  "documentation": "<p> The duration of the offering in seconds. </p>",
+                  "serialized_name": "Duration"
+                },
+                "fixed_price": {
+                  "type": "float",
+                  "documentation": "<p> The fixed price charged for this offering. </p>",
+                  "serialized_name": "FixedPrice"
+                },
+                "usage_price": {
+                  "type": "float",
+                  "documentation": "<p> The hourly price charged for this offering. </p>",
+                  "serialized_name": "UsagePrice"
+                },
+                "product_description": {
+                  "type": "string",
+                  "documentation": "<p> The cache engine used by the offering. </p>",
+                  "serialized_name": "ProductDescription"
+                },
+                "offering_type": {
+                  "type": "string",
+                  "documentation": "<p> The offering type. </p>",
+                  "serialized_name": "OfferingType"
+                },
+                "recurring_charges": {
+                  "type": "list",
+                  "documentation": "<p> The recurring price charged to run this reserved Cache Node. </p>",
+                  "serialized_name": "RecurringCharges",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodes and DescribeReservedCacheNodesOfferings actions. </p>",
+                    "serialized_name": "RecurringCharge",
+                    "metadata": {
+                      "wrapper": true
+                    },
+                    "members": {
+                      "recurring_charge_amount": {
+                        "type": "float",
+                        "documentation": "<p> The amount of the recurring charge. </p>",
+                        "serialized_name": "RecurringChargeAmount"
+                      },
+                      "recurring_charge_frequency": {
+                        "type": "string",
+                        "documentation": "<p> The frequency of the recurring charge. </p>",
+                        "serialized_name": "RecurringChargeFrequency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> Specified offering does not exist. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "modify_cache_cluster": {
+      "name": "ModifyCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Modifies the Cache Cluster settings. You can change one or more Cache Cluster configuration parameters by specifying the parameters and the new values in the request. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The Cache Cluster identifier. This value is stored as a lowercase string. </p>",
+            "serialized_name": "CacheClusterId"
+          },
+          "num_cache_nodes": {
+            "type": "integer",
+            "documentation": "<p> The number of Cache Nodes the Cache Cluster should have. If NumCacheNodes is greater than the existing number of Cache Nodes, Cache Nodes will be added. If NumCacheNodes is less than the existing number of Cache Nodes, Cache Nodes will be removed. When removing Cache Nodes, the Ids of the specific Cache Nodes to be removed must be supplied using the CacheNodeIdsToRemove parameter. </p>",
+            "serialized_name": "NumCacheNodes"
+          },
+          "cache_node_ids_to_remove": {
+            "type": "list",
+            "documentation": "<p> The list of Cache Node IDs to be removed. This parameter is only valid when NumCacheNodes is less than the existing number of Cache Nodes. The number of Cache Node Ids supplied in this parameter must match the difference between the existing number of Cache Nodes in the cluster and the new NumCacheNodes requested. </p>",
+            "serialized_name": "CacheNodeIdsToRemove",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheNodeId"
+            }
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "documentation": "<p> A list of Cache Security Group Names to authorize on this Cache Cluster. This change is asynchronously applied as soon as possible. </p> <p>This parameter can be used only with clusters that are created outside of an Amazon Virtual Private Cloud (VPC).</p> <p>Constraints: Must contain no more than 255 alphanumeric characters. Must not be \"Default\".</p>",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p> <p>This parameter can be used only with clusters that are created in an Amazon Virtual Private Cloud (VPC).</p>",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "documentation": "<p> The weekly time range (in UTC) during which system maintenance can occur, which may result in an outage. This change is made immediately. If moving this window to the current time, there must be at least 120 minutes between the current time and end of the window to ensure pending changes are applied. </p>",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "documentation": "<p> The Amazon Resource Name (ARN) of the SNS topic to which notifications will be sent. </p> The SNS topic owner must be same as the Cache Cluster owner.",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Cache Parameter Group to apply to this Cache Cluster. This change is asynchronously applied as soon as possible for parameters when the <i>ApplyImmediately</i> parameter is specified as <i>true</i> for this request. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "notification_topic_status": {
+            "type": "string",
+            "documentation": "<p> The status of the Amazon SNS notification topic. The value can be <i>active</i> or <i>inactive</i>. Notifications are sent only if the status is <i>active</i>. </p>",
+            "serialized_name": "NotificationTopicStatus"
+          },
+          "apply_immediately": {
+            "type": "boolean",
+            "documentation": "<p> Specifies whether or not the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <i>PreferredMaintenanceWindow</i> setting for the Cache Cluster. </p> <p> If this parameter is passed as <code>false</code>, changes to the Cache Cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. </p> <p> Default: <code>false</code> </p>",
+            "serialized_name": "ApplyImmediately"
+          },
+          "engine_version": {
+            "type": "string",
+            "documentation": "<p> The version of the cache engine to upgrade this cluster to. </p>",
+            "serialized_name": "EngineVersion"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "documentation": "<p> Indicates that minor engine upgrades will be applied automatically to the Cache Cluster during the maintenance window. </p> <p>Default: <code>true</code></p>",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "documentation": "<p> Contains information about a Cache Cluster. </p>",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "documentation": "<p> Provides the landing page to download the latest ElastiCache client library. </p>",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the compute and memory capacity node type for the Cache Cluster. </p>",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "documentation": "<p> Provides the cache engine version of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "documentation": "<p> Specifies the current state of this Cache Cluster. </p>",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "documentation": "<p> Specifies the number of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Availability Zone the Cache Cluster is located in. </p>",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "documentation": "<p> Specifies the weekly time range (in UTC) during which system maintenance can occur. </p>",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "documentation": "<p> Specifies that changes to the Cache Cluster are pending. This element is only included when changes are pending. Specific changes are identified by sub-elements. </p>",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "documentation": "<p> Contains the new <i>NumCacheNodes</i> for the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "documentation": "<p> Contains the list of node Ids to remove from the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "documentation": "<p> Contains the new version of the Cache Engine the Cache Cluster will be upgraded to. </p>",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "documentation": "<p> Specifies the notification details the Cache Cluster contains. </p>",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the topic Amazon Resource Name (ARN), identifying this resource. </p>",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the current state of this topic. </p>",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "documentation": "<p> Provides the list of Cache Security Group elements containing <i>CacheSecurityGroup.Name</i> and <i>CacheSecurityGroup.Status</i> sub-elements. </p>",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Links a CacheCluster to one or more CacheSecurityGroups. </p>",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> The name of the Cache Security Group. </p>",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the CacheSecurityGroupMembership, the status changes either when a CacheSecurityGroup is modified, or when the CacheSecurityGroups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "documentation": "<p> Provides the status of the Cache Parameter Group assigned to the Cache Cluster.</p>",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "documentation": "<p> The name of the Cache Parameter Group. </p>",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "documentation": "<p> The status of parameter updates. </p>",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "documentation": "<p> A list of the Cache Node Ids which need to be rebooted for parameter changes to be applied. </p>",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p>Specifies the name of the Cache Subnet Group associated with the Cache Cluster.</p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "documentation": "<p> Specifies the list of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A Cache Cluster is made up of one or more Cache Nodes. Each Cache Node is an separate endpoint servicing the memcached protocol. </p>",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies a Cache Node identifier. This is the unique key that identifies a Cache Node per Customer (AWS account). </p>",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "timestamp",
+                      "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the endpoint details for a Cache Node. </p>",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the status of the parameter group applied to this Cache Node.</p>",
+                      "serialized_name": "ParameterGroupStatus"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "documentation": "<p> Indicates that minor version patches are applied automatically. </p>",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p>",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>Represents one or more Cache Security Groups to which a Cache Cluster belongs.</p>",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "documentation": "<p> The identifier of the Cache Security Group. </p>",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the Cache Security Group membership. The status changes whenever a Cache Security Group is modified, or when the Cache Security Groups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The specified Cache Cluster is not in the <i>available</i> state. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Security Group does not allow deletion. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheClusterId</i> does not refer to an existing Cache Cluster. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Nodes in a single Cache Cluster. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of Cache Nodes per customer. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "modify_cache_parameter_group": {
+      "name": "ModifyCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Modifies the parameters of a CacheParameterGroup. To modify more than one parameter, submit a list of ParameterName and ParameterValue parameters. A maximum of 20 parameters can be modified in a single request. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the cache parameter group to modify. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "parameter_name_values": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p> An array of parameter names and values for the parameter update. At least one parameter name and value must be supplied; subsequent arguments are optional. A maximum of 20 parameters may be modified in a single request. </p>",
+            "serialized_name": "ParameterNameValues",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> A name and value pair used to update the value of a Parameter. </p>",
+              "serialized_name": "ParameterNameValue",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the parameter. </p>",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the value of the parameter. </p>",
+                  "serialized_name": "ParameterValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains the name of a Cache Parameter Group. </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Cache Parameter Group. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Parameter Group does not allow for the requested action to occur. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "modify_cache_subnet_group": {
+      "name": "ModifyCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Modifies an existing Cache Subnet Group. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p></p>",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name for the Cache Subnet Group. This value is stored as a lowercase string. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p> <p>Example: <code>mysubnetgroup</code></p>",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_subnet_group_description": {
+            "type": "string",
+            "documentation": "<p> The description for the Cache Subnet Group. </p>",
+            "serialized_name": "CacheSubnetGroupDescription"
+          },
+          "subnet_ids": {
+            "type": "list",
+            "documentation": "<p> The EC2 Subnet IDs for the Cache Subnet Group. </p>",
+            "serialized_name": "SubnetIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SubnetIdentifier"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_subnet_group": {
+            "type": "structure",
+            "documentation": "<p> Contains the result of a successful invocation of the following actions: </p> <ul> <li>CreateCacheSubnetGroup</li> <li>ModifyCacheSubnetGroup</li> <li>DescribeCacheSubnetGroups</li> <li>DeleteCacheSubnetGroup</li> </ul> <p>This data type is used as a response element in the DescribeCacheSubnetGroups action.</p>",
+            "serialized_name": "CacheSubnetGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Subnet Group. </p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_subnet_group_description": {
+                "type": "string",
+                "documentation": "<p> Provides the description of the Cache Subnet Group. </p>",
+                "serialized_name": "CacheSubnetGroupDescription"
+              },
+              "vpc_id": {
+                "type": "string",
+                "documentation": "<p> Provides the VPC ID of the Cache Subnet Group. </p>",
+                "serialized_name": "VpcId"
+              },
+              "subnets": {
+                "type": "list",
+                "documentation": "<p> Contains a list of subnets for this group. </p>",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Network Subnet associated with a Cache Cluster </p>",
+                  "serialized_name": "Subnet",
+                  "members": {
+                    "subnet_identifier": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the unique identifier for the Subnet </p>",
+                      "serialized_name": "SubnetIdentifier"
+                    },
+                    "subnet_availability_zone": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the Availability Zone associated with the Subnet </p>",
+                      "serialized_name": "SubnetAvailabilityZone",
+                      "metadata": {
+                        "wrapper": true
+                      },
+                      "members": {
+                        "name": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the name of the Availability Zone </p>",
+                          "serialized_name": "Name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSubnetGroupName</i> does not refer to an existing Cache Subnet Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would result in user exceeding the allowed number of subnets in a Cache Subnet Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request subnet is currently in use. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request subnet is invalid, or all subnets are not in the same VPC. </p>",
+          "members": {
+          }
+        }
+      ]
+    },
+    "purchase_reserved_cache_nodes_offering": {
+      "name": "PurchaseReservedCacheNodesOffering",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Purchases a reserved Cache Node offering. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The ID of the Reserved Cache Node offering to purchase. </p> <p>Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706</p>",
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "reserved_cache_node_id": {
+            "type": "string",
+            "documentation": "<p> Customer-specified identifier to track this reservation. </p> <p>Example: myreservationID</p>",
+            "serialized_name": "ReservedCacheNodeId"
+          },
+          "cache_node_count": {
+            "type": "integer",
+            "documentation": "<p> The number of instances to reserve. </p> <p>Default: <code>1</code></p>",
+            "serialized_name": "CacheNodeCount"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "reserved_cache_node": {
+            "type": "structure",
+            "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodes and PurchaseReservedCacheNodesOffering actions. </p>",
+            "serialized_name": "ReservedCacheNode",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "reserved_cache_node_id": {
+                "type": "string",
+                "documentation": "<p> The unique identifier for the reservation. </p>",
+                "serialized_name": "ReservedCacheNodeId"
+              },
+              "reserved_cache_nodes_offering_id": {
+                "type": "string",
+                "documentation": "<p> The offering identifier. </p>",
+                "serialized_name": "ReservedCacheNodesOfferingId"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "documentation": "<p> The cache node type for the reserved Cache Node. </p>",
+                "serialized_name": "CacheNodeType"
+              },
+              "start_time": {
+                "type": "timestamp",
+                "documentation": "<p> The time the reservation started. </p>",
+                "serialized_name": "StartTime"
+              },
+              "duration": {
+                "type": "integer",
+                "documentation": "<p> The duration of the reservation in seconds. </p>",
+                "serialized_name": "Duration"
+              },
+              "fixed_price": {
+                "type": "float",
+                "documentation": "<p> The fixed price charged for this reserved Cache Node. </p>",
+                "serialized_name": "FixedPrice"
+              },
+              "usage_price": {
+                "type": "float",
+                "documentation": "<p> The hourly price charged for this reserved Cache Node. </p>",
+                "serialized_name": "UsagePrice"
+              },
+              "cache_node_count": {
+                "type": "integer",
+                "documentation": "<p> The number of reserved Cache Nodes. </p>",
+                "serialized_name": "CacheNodeCount"
+              },
+              "product_description": {
+                "type": "string",
+                "documentation": "<p> The description of the reserved Cache Node. </p>",
+                "serialized_name": "ProductDescription"
+              },
+              "offering_type": {
+                "type": "string",
+                "documentation": "<p> The offering type of this reserved Cache Node. </p>",
+                "serialized_name": "OfferingType"
+              },
+              "state": {
+                "type": "string",
+                "documentation": "<p> The state of the reserved Cache Node. </p>",
+                "serialized_name": "State"
+              },
+              "recurring_charges": {
+                "type": "list",
+                "documentation": "<p> The recurring price charged to run this reserved Cache Node. </p>",
+                "serialized_name": "RecurringCharges",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> This data type is used as a response element in the DescribeReservedCacheNodes and DescribeReservedCacheNodesOfferings actions. </p>",
+                  "serialized_name": "RecurringCharge",
+                  "metadata": {
+                    "wrapper": true
+                  },
+                  "members": {
+                    "recurring_charge_amount": {
+                      "type": "float",
+                      "documentation": "<p> The amount of the recurring charge. </p>",
+                      "serialized_name": "RecurringChargeAmount"
+                    },
+                    "recurring_charge_frequency": {
+                      "type": "string",
+                      "documentation": "<p> The frequency of the recurring charge. </p>",
+                      "serialized_name": "RecurringChargeFrequency"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> Specified offering does not exist. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> User already has a reservation with the given identifier. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Request would exceed the user's Cache Node quota. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "reboot_cache_cluster": {
+      "name": "RebootCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Reboots some (or all) of the cache cluster nodes within a previously provisioned ElastiCache cluster. This API results in the application of modified CacheParameterGroup parameters to the cache cluster. This action is taken as soon as possible, and results in a momentary outage to the cache cluster during which the cache cluster status is set to rebooting. During that momentary outage, the contents of the cache (for each cache cluster node being rebooted) are lost. A CacheCluster event is created when the reboot is completed. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The Cache Cluster identifier. This parameter is stored as a lowercase string. </p>",
+            "serialized_name": "CacheClusterId"
+          },
+          "cache_node_ids_to_reboot": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p> A list of Cache Cluster Node Ids to reboot. To reboot an entire cache cluster, specify all cache cluster node Ids. </p>",
+            "serialized_name": "CacheNodeIdsToReboot",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheNodeId"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "documentation": "<p> Contains information about a Cache Cluster. </p>",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "documentation": "<p> Specifies a user-supplied identifier. This is the unique key that identifies a Cache Cluster. </p>",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "documentation": "<p> Provides the landing page to download the latest ElastiCache client library. </p>",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the compute and memory capacity node type for the Cache Cluster. </p>",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "documentation": "<p> Provides the name of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "documentation": "<p> Provides the cache engine version of the cache engine to be used for this Cache Cluster. </p>",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "documentation": "<p> Specifies the current state of this Cache Cluster. </p>",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "documentation": "<p> Specifies the number of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Availability Zone the Cache Cluster is located in. </p>",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "timestamp",
+                "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "documentation": "<p> Specifies the weekly time range (in UTC) during which system maintenance can occur. </p>",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "documentation": "<p> Specifies that changes to the Cache Cluster are pending. This element is only included when changes are pending. Specific changes are identified by sub-elements. </p>",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "documentation": "<p> Contains the new <i>NumCacheNodes</i> for the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "documentation": "<p> Contains the list of node Ids to remove from the Cache Cluster that will be applied or is in progress. </p>",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "documentation": "<p> Contains the new version of the Cache Engine the Cache Cluster will be upgraded to. </p>",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "documentation": "<p> Specifies the notification details the Cache Cluster contains. </p>",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the topic Amazon Resource Name (ARN), identifying this resource. </p>",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "documentation": "<p> Specifies the current state of this topic. </p>",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "documentation": "<p> Provides the list of Cache Security Group elements containing <i>CacheSecurityGroup.Name</i> and <i>CacheSecurityGroup.Status</i> sub-elements. </p>",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Links a CacheCluster to one or more CacheSecurityGroups. </p>",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> The name of the Cache Security Group. </p>",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the CacheSecurityGroupMembership, the status changes either when a CacheSecurityGroup is modified, or when the CacheSecurityGroups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "documentation": "<p> Provides the status of the Cache Parameter Group assigned to the Cache Cluster.</p>",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "documentation": "<p> The name of the Cache Parameter Group. </p>",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "documentation": "<p> The status of parameter updates. </p>",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "documentation": "<p> A list of the Cache Node Ids which need to be rebooted for parameter changes to be applied. </p>",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "documentation": "<p>Specifies the name of the Cache Subnet Group associated with the Cache Cluster.</p>",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "documentation": "<p> Specifies the list of Cache Nodes the Cache Cluster contains. </p>",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> A Cache Cluster is made up of one or more Cache Nodes. Each Cache Node is an separate endpoint servicing the memcached protocol. </p>",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies a Cache Node identifier. This is the unique key that identifies a Cache Node per Customer (AWS account). </p>",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "timestamp",
+                      "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "documentation": "<p> Specifies the endpoint details for a Cache Node. </p>",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "documentation": "<p> Specifies the DNS address of the Cache Node. </p>",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "documentation": "<p> Specifies the port that the cache engine is listening on. </p>",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the status of the parameter group applied to this Cache Node.</p>",
+                      "serialized_name": "ParameterGroupStatus"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "documentation": "<p> Indicates that minor version patches are applied automatically. </p>",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "documentation": "<p> Specifies the VPC Security Groups associated with the Cache Cluster. </p>",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>Represents one or more Cache Security Groups to which a Cache Cluster belongs.</p>",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "documentation": "<p> The identifier of the Cache Security Group. </p>",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> The status of the Cache Security Group membership. The status changes whenever a Cache Security Group is modified, or when the Cache Security Groups assigned to a Cache Cluster are modified. </p>",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The specified Cache Cluster is not in the <i>available</i> state. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheClusterId</i> does not refer to an existing Cache Cluster. </p>",
+          "members": {
+          }
+        }
+      ]
+    },
+    "reset_cache_parameter_group": {
+      "name": "ResetCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Modifies the parameters of a CacheParameterGroup to the engine or system default value. To reset specific parameters submit a list of the parameter names. To reset the entire CacheParameterGroup, specify the CacheParameterGroup name and ResetAllParameters parameters. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Parameter Group. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "reset_all_parameters": {
+            "type": "boolean",
+            "documentation": "<p> Specifies whether (<i>true</i>) or not (<i>false</i>) to reset all parameters in the Cache Parameter Group to default values. </p>",
+            "serialized_name": "ResetAllParameters"
+          },
+          "parameter_name_values": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p> An array of parameter names which should be reset. If not resetting the entire CacheParameterGroup, at least one parameter name must be supplied. </p>",
+            "serialized_name": "ParameterNameValues",
+            "members": {
+              "type": "structure",
+              "documentation": "<p> A name and value pair used to update the value of a Parameter. </p>",
+              "serialized_name": "ParameterNameValue",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the name of the parameter. </p>",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "documentation": "<p> Specifies the value of the parameter. </p>",
+                  "serialized_name": "ParameterValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p> Contains the name of a Cache Parameter Group. </p>",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "documentation": "<p> The name of the Cache Parameter Group. </p>",
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Parameter Group does not allow for the requested action to occur. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheParameterGroupName</i> does not refer to an existing Cache Parameter Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "revoke_cache_security_group_ingress": {
+      "name": "RevokeCacheSecurityGroupIngress",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Revokes ingress from a CacheSecurityGroup for previously authorized EC2 Security Groups. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> </p>",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the Cache Security Group to revoke ingress from. </p>",
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "ec2_security_group_name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the EC2 Security Group to revoke access from. </p>",
+            "serialized_name": "EC2SecurityGroupName"
+          },
+          "ec2_security_group_owner_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The AWS Account Number of the owner of the security group specified in the <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an acceptable value. </p>",
+            "serialized_name": "EC2SecurityGroupOwnerId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "documentation": "<p> Defines a set of EC2 Security groups that are allowed to access a Cache Cluster. </p>",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "documentation": "<p> Provides the AWS ID of the owner of a specific Cache Security Group. </p>",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "documentation": "<p> Specifies the name of the Cache Security Group. </p>",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p> Provides the description of the Cache Security Group. </p>",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "documentation": "<p> Contains a list of EC2SecurityGroup elements. </p>",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p> Specifies the current state of this Cache Node. </p>",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "documentation": "<p> Provides the status of the EC2 Security Group. </p>",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the name of the EC2 Security Group. </p>",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "documentation": "<p> Specifies the AWS ID of the owner of the EC2 Security Group specified in the <i>EC2SecurityGroupName</i> field. </p>",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p> <i>CacheSecurityGroupName</i> does not refer to an existing Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> Specified EC2 Security Group is not authorized for the specified Cache Security Group. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p> The state of the Cache Security Group does not allow deletion. </p>",
+          "members": {
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

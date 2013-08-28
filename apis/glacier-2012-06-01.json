@@ -1,0 +1,2878 @@
+{
+  "type": "rest-json",
+  "api_version": "2012-06-01",
+  "metadata": {
+    "checksum_format": "sha256",
+    "endpoint_prefix": "glacier",
+    "service_full_name": "Amazon Glacier",
+    "signature_version": "v4"
+  },
+  "documentation": "<p>Amazon Glacier is a storage solution for \"cold data.\"</p> <p>Amazon Glacier is an extremely low-cost storage service that provides secure, durable, and easy-to-use storage for data backup and archival. With Amazon Glacier, customers can store their data cost effectively for months, years, or decades. Amazon Glacier also enables customers to offload the administrative burdens of operating and scaling storage to AWS, so they don't have to worry about capacity planning, hardware provisioning, data replication, hardware failure and recovery, or time-consuming hardware migrations.</p> <p>Amazon Glacier is a great storage choice when low storage cost is paramount, your data is rarely retrieved, and retrieval latency of several hours is acceptable. If your application requires fast or frequent access to your data, consider using Amazon S3. For more information, go to <a href=\"http://aws.amazon.com/s3/\">Amazon Simple Storage Service (Amazon S3)</a>.</p> <p>You can store any kind of data in any format. There is no maximum limit on the total amount of data you can store in Amazon Glacier. </p> <p>If you are a first-time user of Amazon Glacier, we recommend that you begin by reading the following sections in the <i>Amazon Glacier Developer Guide</i>:</p> <ul> <li><p><a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/introduction.html\">What is Amazon Glacier</a> - This section of the Developer Guide describes the underlying data model, the operations it supports, and the AWS SDKs that you can use to interact with the service.</p></li> <li><p><a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html\">Getting Started with Amazon Glacier</a> - The Getting Started section walks you through the process of creating a vault, uploading archives, creating jobs to download archives, retrieving the job output, and deleting archives.</p></li> </ul>",
+  "operations": {
+    "abort_multipart_upload": {
+      "name": "AbortMultipartUpload",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "documentation": "<p>This operation aborts a multipart upload identified by the upload ID.</p> <p>After the Abort Multipart Upload request succeeds, you cannot upload any more parts to the multipart upload or complete the multipart upload. Aborting a completed upload fails. However, aborting an already-aborted upload will succeed, for a short time. For more information about uploading a part and completing a multipart upload, see UploadPart and CompleteMultipartUpload.</p> <p>This operation is idempotent.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to abort a multipart upload identified by the upload ID. </p> <p>For information about the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-abort-upload.html\">Abort Multipart Upload</a>. For conceptual information, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a>.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "upload_id": {
+            "type": "string",
+            "documentation": "<p>The upload ID of the multipart upload to delete.</p>",
+            "location": "uri",
+            "serialized_name": "uploadId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "complete_multipart_upload": {
+      "name": "CompleteMultipartUpload",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "documentation": "<p>You call this operation to inform Amazon Glacier that all the archive parts have been uploaded and that Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource. Using the URI path, you can then access the archive. After you upload an archive, you should save the archive ID returned to retrieve the archive at a later point. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob.</p> <p>In the request, you must include the computed SHA256 tree hash of the entire archive you have uploaded. For information about computing a SHA256 tree hash, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>. On the server side, Amazon Glacier also constructs the SHA256 tree hash of the assembled archive. If the values match, Amazon Glacier saves the archive to the vault; otherwise, it returns an error, and the operation fails. The ListParts operation returns a list of parts uploaded for a specific multipart upload. It includes checksum information for each uploaded part that can be used to debug a bad checksum issue.</p> <p>Additionally, Amazon Glacier also checks for any missing content ranges when assembling the archive, if missing content ranges are found, Amazon Glacier returns an error and the operation fails. </p> <p>Complete Multipart Upload is an idempotent operation. After your first successful complete multipart upload, if you call the operation again within a short period, the operation will succeed and return the same archive ID. This is useful in the event you experience a network issue that causes an aborted connection or receive a 500 server error, in which case you can repeat your Complete Multipart Upload request and get the same archive ID without creating duplicate archives. Note, however, that after the multipart upload completes, you cannot call the List Parts operation and the multipart upload will not appear in List Multipart Uploads response, even if idempotent complete is possible.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-complete-upload.html\">Complete Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to complete a multipart upload operation. This informs Amazon Glacier that all the archive parts have been uploaded and Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "upload_id": {
+            "type": "string",
+            "documentation": "<p>The upload ID of the multipart upload.</p>",
+            "location": "uri",
+            "serialized_name": "uploadId"
+          },
+          "archive_size": {
+            "type": "string",
+            "documentation": "<p>The total size, in bytes, of the entire archive. This value should be the sum of all the sizes of the individual parts that you uploaded.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-size"
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash of the individual parts. If the value you specify in the request does not match the SHA256 tree hash of the final assembled archive as computed by Amazon Glacier, Amazon Glacier returns an error and the request fails.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p> <p>For information about the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a>. For conceptual information, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a>.</p>",
+        "members": {
+          "location": {
+            "type": "string",
+            "documentation": "<p>The relative URI path of the newly added archive resource.</p>",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The checksum of the archive computed by Amazon Glacier.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          },
+          "archive_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the archive. This value is also included as part of the location.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-id"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_vault": {
+      "name": "CreateVault",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}",
+      "documentation": "<p>This operation creates a new vault with the specified name. The name of the vault must be unique within a region for an AWS account. You can create up to 1,000 vaults per account. If you need to create more vaults, contact Amazon Glacier.</p> <p>You must use the following guidelines when naming a vault. </p> <p> <ul> <li> <p> Names can be between 1 and 255 characters long. </p> </li> <li> <p>Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period).</p> </li> </ul> </p> <p>This operation is idempotent.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/creating-vaults.html\">Creating a Vault in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-put.html\">Create Vault </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "location": {
+            "type": "string",
+            "documentation": "<p>The URI of the vault that was created.</p>",
+            "location": "header",
+            "serialized_name": "Location"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the request results in a vault or account limit being exceeded.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_archive": {
+      "name": "DeleteArchive",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/archives/{archiveId}",
+      "documentation": "<p>This operation deletes an archive from a vault. Subsequent requests to initiate a retrieval of this archive will fail. Archive retrievals that are in progress for this archive ID may or may not succeed according to the following scenarios:</p> <ul> <li>If the archive retrieval job is actively preparing the data for download when Amazon Glacier receives the delete archive request, the archival retrieval operation might fail. </li> <li>If the archive retrieval job has successfully prepared the archive for download when Amazon Glacier receives the delete archive request, you will be able to download the output. </li> </ul> <p>This operation is idempotent. Attempting to delete an already-deleted archive does not result in an error. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/deleting-an-archive.html\">Deleting an Archive in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for deleting an archive from an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "archive_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the archive to delete.</p>",
+            "location": "uri",
+            "serialized_name": "archiveId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_vault": {
+      "name": "DeleteVault",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}",
+      "documentation": "<p>This operation deletes a vault. Amazon Glacier will delete a vault only if there are no archives in the vault as of the last inventory and there have been no writes to the vault since the last inventory. If either of these conditions is not satisfied, the vault deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error. You can use DescribeVault to return the number of archives in a vault, and you can use <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-initiate-job-post.html\">Initiate a Job (POST jobs)</a> to initiate a new inventory retrieval for a vault. The inventory contains the archive IDs you use to delete archives using <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-archive-delete.html\">Delete Archive (DELETE archive)</a>.</p> <p>This operation is idempotent.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/deleting-vaults.html\">Deleting a Vault in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-delete.html\">Delete Vault </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for deleting a vault from Amazon Glacier.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_vault_notifications": {
+      "name": "DeleteVaultNotifications",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "documentation": "<p>This operation deletes the notification configuration set for a vault. The operation is eventually consistent;that is, it might take some time for Amazon Glacier to completely disable the notifications and you might still receive some notifications for a short time after you send the delete request. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault Notifications in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-notifications-delete.html\">Delete Vault Notification Configuration </a> in the Amazon Glacier Developer Guide. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for deleting a vault notification configuration from an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_job": {
+      "name": "DescribeJob",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/jobs/{jobId}",
+      "documentation": "<p>This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob. </p> <p>This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job. </p> <p>A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For information about the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-describe-job-get.html\">Working with Archives in Amazon Glacier</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving a job description.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "job_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the job to describe.</p>",
+            "location": "uri",
+            "serialized_name": "jobId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Describes an Amazon Glacier job.</p>",
+        "members": {
+          "job_id": {
+            "type": "string",
+            "documentation": "<p>An opaque string that identifies an Amazon Glacier job.</p>",
+            "serialized_name": "JobId"
+          },
+          "job_description": {
+            "type": "string",
+            "documentation": "<p>The job description you provided when you initiated the job.</p>",
+            "serialized_name": "JobDescription"
+          },
+          "action": {
+            "type": "string",
+            "documentation": "<p>The job type. It is either ArchiveRetrieval or InventoryRetrieval.</p>",
+            "serialized_name": "Action",
+            "enum": [
+              "ArchiveRetrieval",
+              "InventoryRetrieval"
+            ]
+          },
+          "archive_id": {
+            "type": "string",
+            "documentation": "<p>For an ArchiveRetrieval job, this is the archive ID requested for download. Otherwise, this field is null.</p>",
+            "serialized_name": "ArchiveId"
+          },
+          "vault_arn": {
+            "type": "string",
+            "documentation": "<p>The Amazon Resource Name (ARN) of the vault from which the archive retrieval was requested.</p>",
+            "serialized_name": "VaultARN"
+          },
+          "creation_date": {
+            "type": "string",
+            "documentation": "<p>The UTC date when the job was created. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+            "serialized_name": "CreationDate"
+          },
+          "completed": {
+            "type": "boolean",
+            "documentation": "<p>The job status. When a job is completed, you get the job's output.</p>",
+            "serialized_name": "Completed"
+          },
+          "status_code": {
+            "type": "string",
+            "documentation": "<p>The status code can be InProgress, Succeeded, or Failed, and indicates the status of the job.</p>",
+            "serialized_name": "StatusCode",
+            "enum": [
+              "InProgress",
+              "Succeeded",
+              "Failed"
+            ]
+          },
+          "status_message": {
+            "type": "string",
+            "documentation": "<p>A friendly message that describes the job status.</p>",
+            "serialized_name": "StatusMessage"
+          },
+          "archive_size_in_bytes": {
+            "type": "integer",
+            "documentation": "<p>For an ArchiveRetrieval job, this is the size in bytes of the archive being requested for download. For the InventoryRetrieval job, the value is null.</p>",
+            "serialized_name": "ArchiveSizeInBytes"
+          },
+          "inventory_size_in_bytes": {
+            "type": "integer",
+            "documentation": "<p>For an InventoryRetrieval job, this is the size in bytes of the inventory requested for download. For the ArchiveRetrieval job, the value is null.</p>",
+            "serialized_name": "InventorySizeInBytes"
+          },
+          "sns_topic": {
+            "type": "string",
+            "documentation": "<p>An Amazon Simple Notification Service (Amazon SNS) topic that receives notification.</p>",
+            "serialized_name": "SNSTopic"
+          },
+          "completion_date": {
+            "type": "string",
+            "documentation": "<p>The UTC time that the archive retrieval request completed. While the job is in progress, the value will be null.</p>",
+            "serialized_name": "CompletionDate"
+          },
+          "sha256_tree_hash": {
+            "type": "string",
+            "documentation": "<p>For an ArchiveRetrieval job, it is the checksum of the archive. Otherwise, the value is null.</p>",
+            "serialized_name": "SHA256TreeHash"
+          },
+          "archive_sha256_tree_hash": {
+            "type": "string",
+            "serialized_name": "ArchiveSHA256TreeHash"
+          },
+          "retrieval_byte_range": {
+            "type": "string",
+            "serialized_name": "RetrievalByteRange"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_vault": {
+      "name": "DescribeVault",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}",
+      "documentation": "<p>This operation returns information about a vault, including the vault's Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault. The number of archives and their total size are as of the last inventory generation. This means that if you add or remove an archive from a vault, and then immediately use Describe Vault, the change in contents will not be immediately reflected. If you want to retrieve the latest inventory of the vault, use InitiateJob. Amazon Glacier generates vault inventories approximately daily. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a Vault Inventory in Amazon Glacier</a>. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-get.html\">Describe Vault </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving metadata for a specific vault in Amazon Glacier.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "vault_arn": {
+            "type": "string",
+            "documentation": "<p>The Amazon Resource Name (ARN) of the vault.</p>",
+            "serialized_name": "VaultARN"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "serialized_name": "VaultName"
+          },
+          "creation_date": {
+            "type": "string",
+            "documentation": "<p>The UTC date when the vault was created. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+            "serialized_name": "CreationDate"
+          },
+          "last_inventory_date": {
+            "type": "string",
+            "documentation": "<p>The UTC date when Amazon Glacier completed the last vault inventory. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+            "serialized_name": "LastInventoryDate"
+          },
+          "number_of_archives": {
+            "type": "integer",
+            "documentation": "<p>The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example, if you just created the vault.</p>",
+            "serialized_name": "NumberOfArchives"
+          },
+          "size_in_bytes": {
+            "type": "integer",
+            "documentation": "<p>Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example, if you just created the vault.</p>",
+            "serialized_name": "SizeInBytes"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "get_job_output": {
+      "name": "GetJobOutput",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output",
+      "documentation": "<p>This operation downloads the output of the job you initiated using InitiateJob. Depending on the job type you specified when you initiated the job, the output will be either the content of an archive or a vault inventory.</p> <p>A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. That is, you can download the job output within the 24 hours period after Amazon Glacier completes the job.</p> <p>If the job output is large, then you can use the <code>Range</code> request header to retrieve a portion of the output. This allows you to download the entire output in smaller chunks of bytes. For example, suppose you have 1 GB of job output you want to download and you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job Output requests. You use the following process to download the job output:</p> <ol> <li> <p>Download a 128 MB chunk of output by specifying the appropriate byte range using the <code>Range</code> header.</p> </li> <li> <p>Along with the data, the response includes a checksum of the payload. You compute the checksum of the payload on the client and compare it with the checksum you received in the response to ensure you received all the expected data.</p> </li> <li> <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time specifying the appropriate byte range.</p> </li> <li> <p>After downloading all the parts of the job output, you have a list of eight checksum values. Compute the tree hash of these values to find the checksum of the entire output. Using the Describe Job API, obtain job information of the job that provided you the output. The response includes the checksum of the entire archive stored in Amazon Glacier. You compare this value with the checksum you computed to ensure you have downloaded the entire archive content with no errors.</p> </li> </ol> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a Vault Inventory</a>, <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/downloading-an-archive.html\">Downloading an Archive</a>, and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-job-output-get.html\">Get Job Output </a> </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for downloading output of an Amazon Glacier job.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "job_id": {
+            "type": "string",
+            "documentation": "<p>The job ID whose data is downloaded.</p>",
+            "location": "uri",
+            "serialized_name": "jobId"
+          },
+          "range": {
+            "type": "string",
+            "documentation": "<p>The range of bytes to retrieve from the output. For example, if you want to download the first 1,048,576 bytes, specify \"Range: bytes=0-1048575\". By default, this operation downloads the entire output. </p>",
+            "location": "header",
+            "serialized_name": "Range"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "body": {
+            "type": "blob",
+            "documentation": "<p>The job data, either archive data or inventory data.</p>",
+            "serialized_name": "body",
+            "metadata": {
+              "streaming": true,
+              "payload": true
+            }
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p> The checksum of the data in the response. This header is returned only when retrieving the output for an archive retrieval job. Furthermore, this header appears only under the following conditions: <ul> <li>You get the entire range of the archive.</li> <li>You request a range to return of the archive that starts and ends on a multiple of 1 MB. For example, if you have an 3.1 MB archive and you specify a range to return that starts at 1 MB and ends at 2 MB, then the x-amz-sha256-tree-hash is returned as a response header.</li> <li>You request a range of the archive to return that starts on a multiple of 1 MB and goes to the end of the archive. For example, if you have a 3.1 MB archive and you specify a range that starts at 2 MB and ends at 3.1 MB (the end of the archive), then the x-amz-sha256-tree-hash is returned as a response header.</li> </ul> </p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          },
+          "status": {
+            "type": "integer",
+            "documentation": "<p>The HTTP response code for a job output request. The value depends on whether a range was specified in the request.</p>",
+            "location": "http_status",
+            "serialized_name": "status"
+          },
+          "content_range": {
+            "type": "string",
+            "documentation": "<p>The range of bytes returned by Amazon Glacier. If only partial output is downloaded, the response provides the range of bytes Amazon Glacier returned. For example, bytes 0-1048575/8388608 returns the first 1 MB from 8 MB.</p>",
+            "location": "header",
+            "serialized_name": "Content-Range"
+          },
+          "accept_ranges": {
+            "type": "string",
+            "documentation": "<p>Indicates the range units accepted. For more information, go to <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html\">RFC2616</a>. </p>",
+            "location": "header",
+            "serialized_name": "Accept-Ranges"
+          },
+          "content_type": {
+            "type": "string",
+            "documentation": "<p>The Content-Type depends on whether the job output is an archive or a vault inventory. For archive data, the Content-Type is application/octet-stream. For vault inventory, if you requested CSV format when you initiated the job, the Content-Type is text/csv. Otherwise, by default, vault inventory is returned as JSON, and the Content-Type is application/json. </p>",
+            "location": "header",
+            "serialized_name": "Content-Type"
+          },
+          "archive_description": {
+            "type": "string",
+            "documentation": "<p>The description of an archive.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-description"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "get_vault_notifications": {
+      "name": "GetVaultNotifications",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "documentation": "<p>This operation retrieves the <code class=\"code\">notification-configuration</code> subresource of the specified vault.</p> <p>For information about setting a notification configuration on a vault, see SetVaultNotifications. If a notification configuration for a vault is not set, the operation returns a <code class=\"code\">404 Not Found</code> error. For more information about vault notifications, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault Notifications in Amazon Glacier</a>. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault Notifications in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-notifications-get.html\">Get Vault Notification Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving the notification configuration set on an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "vault_notification_config": {
+            "type": "structure",
+            "documentation": "<p>Returns the notification configuration set on the vault.</p>",
+            "serialized_name": "vaultNotificationConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "sns_topic": {
+                "type": "string",
+                "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).</p>",
+                "serialized_name": "SNSTopic"
+              },
+              "events": {
+                "type": "list",
+                "documentation": "<p>A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.</p>",
+                "serialized_name": "Events",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "initiate_job": {
+      "name": "InitiateJob",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/jobs",
+      "documentation": "<p>This operation initiates a job of the specified type. In this release, you can initiate a job to retrieve either an archive or a vault inventory (a list of archives in a vault). </p> <p>Retrieving data from Amazon Glacier is a two-step process: </p> <ol> <li><p>Initiate a retrieval job.</p></li> <li><p>After the job completes, download the bytes.</p></li> </ol> <p>The retrieval request is executed asynchronously. When you initiate a retrieval job, Amazon Glacier creates a job and returns a job ID in the response. When Amazon Glacier completes the job, you can get the job output (archive or inventory data). For information about getting job output, see GetJobOutput operation. </p> <p>The job must complete before you can get its output. To determine when a job is complete, you have the following options:</p> <ul> <li> <p><b>Use Amazon SNS Notification</b> You can specify an Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Glacier can post a notification after the job is completed. You can specify an SNS topic per job request. The notification is sent only after Amazon Glacier completes the job. In addition to specifying an SNS topic per job request, you can configure vault notifications for a vault so that job notifications are always sent. For more information, see SetVaultNotificationConfiguration.</p> </li> <li> <p><b>Get job details</b> You can make a DescribeJob request to obtain job status information while a job is in progress. However, it is more efficient to use an Amazon SNS notification to determine when a job is complete.</p> </li> </ul> <p>The information you get via notification is same that you get by calling DescribeJob.</p> <p>If for a specific event, you add both the notification configuration on the vault and also specify an SNS topic in your initiate job request, Amazon Glacier sends both notifications. For more information, see SetVaultNotificationConfiguration.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p><b>About the Vault Inventory</b></p> <p>Amazon Glacier prepares an inventory for each vault periodically, every 24 hours. When you initiate a job for a vault inventory, Amazon Glacier returns the last inventory for the vault. The inventory data you get might be up to a day or two days old. Also, the initiate inventory job might take some time to complete before you can download the vault inventory. So you do not want to retrieve a vault inventory for each vault operation. However, in some scenarios, you might find the vault inventory useful. For example, when you upload an archive, you can provide an archive description but not an archive name. Amazon Glacier provides you a unique archive ID, an opaque string of characters. So, you might maintain your own database that maps archive names to their corresponding Amazon Glacier assigned archive IDs. You might find the vault inventory useful in the event you need to reconcile information in your database with the actual vault inventory. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-initiate-job-post.html\">Initiate a Job</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/vault-inventory.html\">Downloading a Vault Inventory</a> </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for initiating an Amazon Glacier job.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "job_parameters": {
+            "type": "structure",
+            "documentation": "<p>Provides options for specifying job information.</p>",
+            "serialized_name": "jobParameters",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "format": {
+                "type": "string",
+                "documentation": "<p>When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid Values are \"CSV\" and \"JSON\". </p>",
+                "serialized_name": "Format"
+              },
+              "type": {
+                "type": "string",
+                "documentation": "<p>The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid Values are \"archive-retrieval\" and \"inventory-retrieval\". </p>",
+                "serialized_name": "Type"
+              },
+              "archive_id": {
+                "type": "string",
+                "documentation": "<p>The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to archive-retrieval. An error occurs if you specify this request parameter for an inventory retrieval job request. </p>",
+                "serialized_name": "ArchiveId"
+              },
+              "description": {
+                "type": "string",
+                "documentation": "<p>The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes—specifically, ASCII values 32—126 decimal or 0x20—0x7E hexadecimal.</p>",
+                "serialized_name": "Description"
+              },
+              "sns_topic": {
+                "type": "string",
+                "documentation": "<p>The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.</p>",
+                "serialized_name": "SNSTopic"
+              },
+              "retrieval_byte_range": {
+                "type": "string",
+                "serialized_name": "RetrievalByteRange"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "location": {
+            "type": "string",
+            "documentation": "<p>The relative URI path of the job.</p>",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "job_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the job.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-job-id"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "initiate_multipart_upload": {
+      "name": "InitiateMultipartUpload",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads",
+      "documentation": "<p>This operation initiates a multipart upload. Amazon Glacier creates a multipart upload resource and returns its ID in the response. The multipart upload ID is used in subsequent requests to upload parts of an archive (see UploadMultipartPart).</p> <p>When you initiate a multipart upload, you specify the part size in number of bytes. The part size must be a megabyte (1024 KB) multiplied by a power of 2-for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB.</p> <p>Every part you upload to this resource (see UploadMultipartPart), except the last one, must have the same size. The last one can be the same size or smaller. For example, suppose you want to upload a 16.2 MB file. If you initiate the multipart upload with a part size of 4 MB, you will upload four parts of 4 MB each and one part of 0.2 MB. </p> <p>You don't need to know the size of the archive when you start a multipart upload because Amazon Glacier does not require you to specify the overall archive size.</p> <p>After you complete the multipart upload, Amazon Glacier removes the multipart upload resource referenced by the ID. Amazon Glacier also removes the multipart upload resource if you cancel the multipart upload or it may be removed if there is no activity for a period of 24 hours.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html\">Initiate Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for initiating a multipart upload to an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "archive_description": {
+            "type": "string",
+            "documentation": "<p>The archive description that you are uploading in parts.</p> <p>The part size must be a megabyte (1024 KB) multiplied by a power of 2—for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096 MB).</p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-description"
+          },
+          "part_size": {
+            "type": "string",
+            "documentation": "<p>The size of each part except the last, in bytes. The last part can be smaller than this part size.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-part-size"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "location": {
+            "type": "string",
+            "documentation": "<p>The relative URI path of the multipart upload ID Amazon Glacier created. </p>",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "upload_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the multipart upload. This value is also included as part of the location. </p>",
+            "location": "header",
+            "serialized_name": "x-amz-multipart-upload-id"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "list_jobs": {
+      "name": "ListJobs",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/jobs?marker={marker}&limit={limit}&completed={completed}&statuscode={statuscode}",
+      "documentation": "<p>This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished. </p> <p>Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists. </p> <p>To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data, and for an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time.</p> <p>This List Jobs operation supports pagination. By default, this operation returns up to 1,000 jobs in the response. You should always check the response for a <code>marker</code> at which to continue the list; if there are no more items the <code>marker</code> is <code>null</code>. To return a list of jobs that begins at a specific job, set the <code>marker</code> request parameter to the value you obtained from a previous List Jobs request. You can also limit the number of jobs returned in the response by specifying the <code>limit</code> parameter in the request.</p> <p>Additionally, you can filter the jobs list returned by specifying an optional <code>statuscode</code> (InProgress, Succeeded, or Failed) and <code>completed</code> (true, false) parameter. The <code>statuscode</code> allows you to specify that only jobs that match a specified status are returned. The <code>completed</code> parameter allows you to specify that only jobs in a specific completion state are returned.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-jobs-get.html\">List Jobs </a> </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving a job list for an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "limit": {
+            "type": "string",
+            "documentation": "<p>Specifies that the response be limited to the specified number of items or fewer. If not specified, the List Jobs operation returns up to 1,000 jobs.</p>",
+            "location": "uri",
+            "serialized_name": "limit"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string used for pagination. This value specifies the job at which the listing of jobs should begin. Get the marker value from a previous List Jobs response. You need only include the marker if you are continuing the pagination of results started in a previous List Jobs request.</p>",
+            "location": "uri",
+            "serialized_name": "marker"
+          },
+          "statuscode": {
+            "type": "string",
+            "documentation": "<p>Specifies the type of job status to return. You can specify the following values: \"InProgress\", \"Succeeded\", or \"Failed\".</p>",
+            "location": "uri",
+            "serialized_name": "statuscode"
+          },
+          "completed": {
+            "type": "string",
+            "documentation": "<p>Specifies the state of the jobs to return. You can specify <code>true</code> or <code>false</code>.</p>",
+            "location": "uri",
+            "serialized_name": "completed"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "job_list": {
+            "type": "list",
+            "documentation": "<p>A list of job objects. Each job object contains metadata describing the job. </p>",
+            "serialized_name": "JobList",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Describes an Amazon Glacier job.</p>",
+              "members": {
+                "job_id": {
+                  "type": "string",
+                  "documentation": "<p>An opaque string that identifies an Amazon Glacier job.</p>",
+                  "serialized_name": "JobId"
+                },
+                "job_description": {
+                  "type": "string",
+                  "documentation": "<p>The job description you provided when you initiated the job.</p>",
+                  "serialized_name": "JobDescription"
+                },
+                "action": {
+                  "type": "string",
+                  "documentation": "<p>The job type. It is either ArchiveRetrieval or InventoryRetrieval.</p>",
+                  "serialized_name": "Action",
+                  "enum": [
+                    "ArchiveRetrieval",
+                    "InventoryRetrieval"
+                  ]
+                },
+                "archive_id": {
+                  "type": "string",
+                  "documentation": "<p>For an ArchiveRetrieval job, this is the archive ID requested for download. Otherwise, this field is null.</p>",
+                  "serialized_name": "ArchiveId"
+                },
+                "vault_arn": {
+                  "type": "string",
+                  "documentation": "<p>The Amazon Resource Name (ARN) of the vault from which the archive retrieval was requested.</p>",
+                  "serialized_name": "VaultARN"
+                },
+                "creation_date": {
+                  "type": "string",
+                  "documentation": "<p>The UTC date when the job was created. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+                  "serialized_name": "CreationDate"
+                },
+                "completed": {
+                  "type": "boolean",
+                  "documentation": "<p>The job status. When a job is completed, you get the job's output.</p>",
+                  "serialized_name": "Completed"
+                },
+                "status_code": {
+                  "type": "string",
+                  "documentation": "<p>The status code can be InProgress, Succeeded, or Failed, and indicates the status of the job.</p>",
+                  "serialized_name": "StatusCode",
+                  "enum": [
+                    "InProgress",
+                    "Succeeded",
+                    "Failed"
+                  ]
+                },
+                "status_message": {
+                  "type": "string",
+                  "documentation": "<p>A friendly message that describes the job status.</p>",
+                  "serialized_name": "StatusMessage"
+                },
+                "archive_size_in_bytes": {
+                  "type": "integer",
+                  "documentation": "<p>For an ArchiveRetrieval job, this is the size in bytes of the archive being requested for download. For the InventoryRetrieval job, the value is null.</p>",
+                  "serialized_name": "ArchiveSizeInBytes"
+                },
+                "inventory_size_in_bytes": {
+                  "type": "integer",
+                  "documentation": "<p>For an InventoryRetrieval job, this is the size in bytes of the inventory requested for download. For the ArchiveRetrieval job, the value is null.</p>",
+                  "serialized_name": "InventorySizeInBytes"
+                },
+                "sns_topic": {
+                  "type": "string",
+                  "documentation": "<p>An Amazon Simple Notification Service (Amazon SNS) topic that receives notification.</p>",
+                  "serialized_name": "SNSTopic"
+                },
+                "completion_date": {
+                  "type": "string",
+                  "documentation": "<p>The UTC time that the archive retrieval request completed. While the job is in progress, the value will be null.</p>",
+                  "serialized_name": "CompletionDate"
+                },
+                "sha256_tree_hash": {
+                  "type": "string",
+                  "documentation": "<p>For an ArchiveRetrieval job, it is the checksum of the archive. Otherwise, the value is null.</p>",
+                  "serialized_name": "SHA256TreeHash"
+                },
+                "archive_sha256_tree_hash": {
+                  "type": "string",
+                  "serialized_name": "ArchiveSHA256TreeHash"
+                },
+                "retrieval_byte_range": {
+                  "type": "string",
+                  "serialized_name": "RetrievalByteRange"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string that represents where to continue pagination of the results. You use this value in a new List Jobs request to obtain more jobs in the list. If there are no more jobs, this value is <code>null</code>. </p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "list_multipart_uploads": {
+      "name": "ListMultipartUploads",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads?marker={marker}&limit={limit}",
+      "documentation": "<p>This operation lists in-progress multipart uploads for the specified vault. An in-progress multipart upload is a multipart upload that has been initiated by an InitiateMultipartUpload request, but has not yet been completed or aborted. The list returned in the List Multipart Upload response has no guaranteed order. </p> <p>The List Multipart Uploads operation supports pagination. By default, this operation returns up to 1,000 multipart uploads in the response. You should always check the response for a <code>marker</code> at which to continue the list; if there are no more items the <code>marker</code> is <code>null</code>. To return a list of multipart uploads that begins at a specific upload, set the <code>marker</code> request parameter to the value you obtained from a previous List Multipart Upload request. You can also limit the number of uploads returned in the response by specifying the <code>limit</code> parameter in the request.</p> <p>Note the difference between this operation and listing parts (ListParts). The List Multipart Uploads operation lists all multipart uploads for a vault and does not require a multipart upload ID. The List Parts operation requires a multipart upload ID since parts are associated with a single upload.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-list-uploads.html\">List Multipart Uploads </a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "limit": {
+            "type": "string",
+            "documentation": "<p>Specifies the maximum number of uploads returned in the response body. If this value is not specified, the List Uploads operation returns up to 1,000 uploads.</p>",
+            "location": "uri",
+            "serialized_name": "limit"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.</p>",
+            "location": "uri",
+            "serialized_name": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "uploads_list": {
+            "type": "list",
+            "documentation": "<p>A list of in-progress multipart uploads.</p>",
+            "serialized_name": "UploadsList",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>A list of in-progress multipart uploads for a vault.</p>",
+              "members": {
+                "multipart_upload_id": {
+                  "type": "string",
+                  "documentation": "<p>The ID of a multipart upload.</p>",
+                  "serialized_name": "MultipartUploadId"
+                },
+                "vault_arn": {
+                  "type": "string",
+                  "documentation": "<p>The Amazon Resource Name (ARN) of the vault that contains the archive.</p>",
+                  "serialized_name": "VaultARN"
+                },
+                "archive_description": {
+                  "type": "string",
+                  "documentation": "<p>The description of the archive that was specified in the Initiate Multipart Upload request.</p>",
+                  "serialized_name": "ArchiveDescription"
+                },
+                "part_size_in_bytes": {
+                  "type": "integer",
+                  "documentation": "<p>The part size, in bytes, specified in the Initiate Multipart Upload request. This is the size of all the parts in the upload except the last part, which may be smaller than this size.</p>",
+                  "serialized_name": "PartSizeInBytes"
+                },
+                "creation_date": {
+                  "type": "string",
+                  "documentation": "<p>The UTC time at which the multipart upload was initiated.</p>",
+                  "serialized_name": "CreationDate"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string that represents where to continue pagination of the results. You use the marker in a new List Multipart Uploads request to obtain more uploads in the list. If there are no more uploads, this value is <code>null</code>.</p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "list_parts": {
+      "name": "ListParts",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}?marker={marker}&limit={limit}",
+      "documentation": "<p>This operation lists the parts of an archive that have been uploaded in a specific multipart upload. You can make this request at any time during an in-progress multipart upload before you complete the upload (see CompleteMultipartUpload. List Parts returns an error for completed uploads. The list returned in the List Parts response is sorted by part range. </p> <p>The List Parts operation supports pagination. By default, this operation returns up to 1,000 uploaded parts in the response. You should always check the response for a <code class=\"code\">marker</code> at which to continue the list; if there are no more items the <code class=\"code\">marker</code> is <code class=\"code\">null</code>. To return a list of parts that begins at a specific part, set the <code>marker</code> request parameter to the value you obtained from a previous List Parts request. You can also limit the number of parts returned in the response by specifying the <code>limit</code> parameter in the request. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-multipart-list-parts.html\">List Parts</a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "upload_id": {
+            "type": "string",
+            "documentation": "<p>The upload ID of the multipart upload.</p>",
+            "location": "uri",
+            "serialized_name": "uploadId"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string used for pagination. This value specifies the part at which the listing of parts should begin. Get the marker value from the response of a previous List Parts response. You need only include the marker if you are continuing the pagination of results started in a previous List Parts request.</p>",
+            "location": "uri",
+            "serialized_name": "marker"
+          },
+          "limit": {
+            "type": "string",
+            "documentation": "<p>Specifies the maximum number of parts returned in the response body. If this value is not specified, the List Parts operation returns up to 1,000 uploads.</p>",
+            "location": "uri",
+            "serialized_name": "limit"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "multipart_upload_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the upload to which the parts are associated.</p>",
+            "serialized_name": "MultipartUploadId"
+          },
+          "vault_arn": {
+            "type": "string",
+            "documentation": "<p>The Amazon Resource Name (ARN) of the vault to which the multipart upload was initiated.</p>",
+            "serialized_name": "VaultARN"
+          },
+          "archive_description": {
+            "type": "string",
+            "documentation": "<p>The description of the archive that was specified in the Initiate Multipart Upload request.</p>",
+            "serialized_name": "ArchiveDescription"
+          },
+          "part_size_in_bytes": {
+            "type": "integer",
+            "documentation": "<p>The part size in bytes.</p>",
+            "serialized_name": "PartSizeInBytes"
+          },
+          "creation_date": {
+            "type": "string",
+            "documentation": "<p>The UTC time at which the multipart upload was initiated.</p>",
+            "serialized_name": "CreationDate"
+          },
+          "parts": {
+            "type": "list",
+            "documentation": "<p>A list of the part sizes of the multipart upload.</p>",
+            "serialized_name": "Parts",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>A list of the part sizes of the multipart upload.</p>",
+              "members": {
+                "range_in_bytes": {
+                  "type": "string",
+                  "documentation": "<p>The byte range of a part, inclusive of the upper value of the range.</p>",
+                  "serialized_name": "RangeInBytes"
+                },
+                "sha256_tree_hash": {
+                  "type": "string",
+                  "documentation": "<p>The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is never <code>null</code>.</p>",
+                  "serialized_name": "SHA256TreeHash"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>An opaque string that represents where to continue pagination of the results. You use the marker in a new List Parts request to obtain more jobs in the list. If there are no more parts, this value is <code>null</code>.</p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "list_vaults": {
+      "name": "ListVaults",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults?marker={marker}&limit={limit}",
+      "documentation": "<p>This operation lists all vaults owned by the calling user's account. The list returned in the response is ASCII-sorted by vault name. </p> <p>By default, this operation returns up to 1,000 items. If there are more vaults to list, the response <code class=\"code\">marker</code> field contains the vault Amazon Resource Name (ARN) at which to continue the list with a new List Vaults request; otherwise, the <code class=\"code\">marker</code> field is <code class=\"code\">null</code>. To return a list of vaults that begins at a specific vault, set the <code class=\"code\">marker</code> request parameter to the vault ARN you obtained from a previous List Vaults request. You can also limit the number of vaults returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/retrieving-vault-info.html\">Retrieving Vault Metadata in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vaults-get.html\">List Vaults </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to retrieve the vault list owned by the calling user's account. The list provides metadata information for each vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.</p>",
+            "location": "uri",
+            "serialized_name": "marker"
+          },
+          "limit": {
+            "type": "string",
+            "documentation": "<p>The maximum number of items returned in the response. If you don't specify a value, the List Vaults operation returns up to 1,000 items.</p>",
+            "location": "uri",
+            "serialized_name": "limit"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "vault_list": {
+            "type": "list",
+            "documentation": "<p>List of vaults.</p>",
+            "serialized_name": "VaultList",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+              "members": {
+                "vault_arn": {
+                  "type": "string",
+                  "documentation": "<p>The Amazon Resource Name (ARN) of the vault.</p>",
+                  "serialized_name": "VaultARN"
+                },
+                "vault_name": {
+                  "type": "string",
+                  "documentation": "<p>The name of the vault.</p>",
+                  "serialized_name": "VaultName"
+                },
+                "creation_date": {
+                  "type": "string",
+                  "documentation": "<p>The UTC date when the vault was created. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+                  "serialized_name": "CreationDate"
+                },
+                "last_inventory_date": {
+                  "type": "string",
+                  "documentation": "<p>The UTC date when Amazon Glacier completed the last vault inventory. A string representation of ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".</p>",
+                  "serialized_name": "LastInventoryDate"
+                },
+                "number_of_archives": {
+                  "type": "integer",
+                  "documentation": "<p>The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example, if you just created the vault.</p>",
+                  "serialized_name": "NumberOfArchives"
+                },
+                "size_in_bytes": {
+                  "type": "integer",
+                  "documentation": "<p>Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example, if you just created the vault.</p>",
+                  "serialized_name": "SizeInBytes"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.</p>",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "set_vault_notifications": {
+      "name": "SetVaultNotifications",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "documentation": "<p>This operation configures notifications that will be sent when specific events happen to a vault. By default, you don't get any notifications. </p> <p>To configure vault notifications, send a PUT request to the <code class=\"code\">notification-configuration</code> subresource of the vault. The request should include a JSON document that provides an Amazon SNS topic and specific events for which you want Amazon Glacier to send notifications to the topic.</p> <p>Amazon SNS topics must grant permission to the vault to be allowed to publish notifications to the topic. You can configure a vault to publish a notification for the following vault events:</p> <ul> <li> <b>ArchiveRetrievalCompleted</b> This event occurs when a job that was initiated for an archive retrieval is completed (InitiateJob). The status of the completed job can be \"Succeeded\" or \"Failed\". The notification sent to the SNS topic is the same output as returned from DescribeJob. </li> <li> <b>InventoryRetrievalCompleted</b> This event occurs when a job that was initiated for an inventory retrieval is completed (InitiateJob). The status of the completed job can be \"Succeeded\" or \"Failed\". The notification sent to the SNS topic is the same output as returned from DescribeJob. </li> </ul> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/configuring-notifications.html\">Configuring Vault Notifications in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-vault-notifications-put.html\">Set Vault Notification Configuration </a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to configure notifications that will be sent when specific events happen to a vault.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "vault_notification_config": {
+            "type": "structure",
+            "documentation": "<p>Provides options for specifying notification configuration.</p>",
+            "serialized_name": "vaultNotificationConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "sns_topic": {
+                "type": "string",
+                "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).</p>",
+                "serialized_name": "SNSTopic"
+              },
+              "events": {
+                "type": "list",
+                "documentation": "<p>A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.</p>",
+                "serialized_name": "Events",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "upload_archive": {
+      "name": "UploadArchive",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/archives",
+      "documentation": "<p>This operation adds an archive to a vault. This is a synchronous operation, and for a successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in the <code class=\"code\">x-amz-archive-id</code> header of the response. </p> <p>You must use the archive ID to access your data in Amazon Glacier. After you upload an archive, you should save the archive ID returned so that you can retrieve or delete the archive later. Besides saving the archive ID, you can also index it and give it a friendly name to allow for better searching. You can also use the optional archive description field to specify how the archive is referred to in an external index of archives, such as you might create in Amazon DynamoDB. You can also get the vault inventory to obtain a list of archive IDs in a vault. For more information, see InitiateJob. </p> <p>You must provide a SHA256 tree hash of the data you are uploading. For information about computing a SHA256 tree hash, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>. </p> <p>You can optionally specify an archive description of up to 1,024 printable ASCII characters. You can get the archive description when you either retrieve the archive or get the vault inventory. For more information, see InitiateJob. Amazon Glacier does not interpret the description in any way. An archive description does not need to be unique. You cannot use the description to retrieve or sort the archive list. </p> <p>Archives are immutable. After you upload an archive, you cannot edit the archive or its description. </p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/uploading-an-archive.html\">Uploading an Archive in Amazon Glacier</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a> in the <i>Amazon Glacier Developer Guide</i>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to add an archive to a vault.</p>",
+        "members": {
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "archive_description": {
+            "type": "string",
+            "documentation": "<p>The optional description of the archive you are uploading. </p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-description"
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The SHA256 checksum (a linear hash) of the payload.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          },
+          "body": {
+            "type": "blob",
+            "documentation": "<p>The data to upload.</p>",
+            "serialized_name": "body",
+            "metadata": {
+              "streaming": true,
+              "payload": true
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p> <p>For information about the underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-archive-post.html\">Upload Archive</a>. For conceptual information, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/working-with-archives.html\">Working with Archives in Amazon Glacier</a>.</p>",
+        "members": {
+          "location": {
+            "type": "string",
+            "documentation": "<p>The relative URI path of the newly added archive resource.</p>",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The checksum of the archive computed by Amazon Glacier.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          },
+          "archive_id": {
+            "type": "string",
+            "documentation": "<p>The ID of the archive. This value is also included as part of the location.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-archive-id"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>408 Request Timeout</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "upload_multipart_part": {
+      "name": "UploadMultipartPart",
+      "http_method": "POST",
+      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "documentation": "<p>This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload.</p> <p>Amazon Glacier rejects your upload part request if any of the following conditions is true:</p> <ul> <li> <p><b>SHA256 tree hash does not match</b>To ensure that part data is not corrupted in transmission, you compute a SHA256 tree hash of the part and include it in your request. Upon receiving the part data, Amazon Glacier also computes a SHA256 tree hash. If these hash values don't match, the operation fails. For information about computing a SHA256 tree hash, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/checksum-calculations.html\">Computing Checksums</a>.</p> </li> <li> <p><b>Part size does not match</b>The size of each part except the last must match the size specified in the corresponding InitiateMultipartUpload request. The size of the last part must be the same size as, or smaller than, the specified size.</p> <p>If you upload a part whose size is smaller than the part size you specified in your initiate multipart upload request and that part is not the last part, then the upload part request will succeed. However, the subsequent Complete Multipart Upload request will fail.</p> </li> <li> <b>Range does not align</b>The byte range value in the request does not align with the part size specified in the corresponding initiate request. For example, if you specify a part size of 4194304 bytes (4 MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are valid part ranges. However, if you set a range value of 2 MB to 6 MB, the range does not align with the part size and the upload will fail. </li> </ul> <p>This operation is idempotent. If you upload the same part multiple times, the data included in the most recent request overwrites the previously uploaded data.</p> <p>An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html\">Access Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For conceptual information and underlying REST API, go to <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/uploading-archive-mpu.html\">Uploading Large Archives in Parts (Multipart Upload)</a> and <a href=\"http://docs.amazonwebservices.com/amazonglacier/latest/dev/api-upload-part.html\">Upload Part </a> in the <i>Amazon Glacier Developer Guide</i>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Provides options to upload a part of an archive in a multipart upload operation.</p>",
+        "members": {
+          "account_id": {
+            "type": "string",
+            "documentation": "<p>The <code>AccountId</code> is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it. </p>",
+            "location": "uri",
+            "serialized_name": "accountId"
+          },
+          "vault_name": {
+            "type": "string",
+            "documentation": "<p>The name of the vault.</p>",
+            "location": "uri",
+            "serialized_name": "vaultName"
+          },
+          "upload_id": {
+            "type": "string",
+            "documentation": "<p>The upload ID of the multipart upload.</p>",
+            "location": "uri",
+            "serialized_name": "uploadId"
+          },
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The SHA256 tree hash of the data being uploaded. </p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          },
+          "range": {
+            "type": "string",
+            "documentation": "<p>Identifies the range of bytes in the assembled archive that will be uploaded in this part. Amazon Glacier uses this information to assemble the archive in the proper sequence. The format of this header follows RFC 2616. An example header is Content-Range:bytes 0-4194303/*.</p>",
+            "location": "header",
+            "serialized_name": "Content-Range"
+          },
+          "body": {
+            "type": "blob",
+            "documentation": "<p>The data to upload.</p>",
+            "serialized_name": "body",
+            "metadata": {
+              "streaming": true,
+              "payload": true
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the Amazon Glacier response to your request.</p>",
+        "members": {
+          "checksum": {
+            "type": "string",
+            "documentation": "<p>The SHA256 tree hash that Amazon Glacier computed for the uploaded part.</p>",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>404 Not Found</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a parameter of the request is incorrectly specified. </p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if a required header or parameter is missing from the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client.</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>400 Bad Request</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Client</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>408 Request Timeout</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>Returned if the service cannot complete the request.</p>",
+          "members": {
+            "type": {
+              "type": "string",
+              "documentation": "<p>Server</p>",
+              "serialized_name": "type"
+            },
+            "code": {
+              "type": "string",
+              "documentation": "<p>500 Internal Server Error</p>",
+              "serialized_name": "code"
+            },
+            "message": {
+              "type": "string",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

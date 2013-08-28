@@ -1,0 +1,5071 @@
+{
+  "type": "rest-xml",
+  "api_version": "2012-05-05",
+  "endpoint": "cloudfront.amazonaws.com",
+  "metadata": {
+    "endpoint_prefix": "cloudfront",
+    "service_abbreviation": "CloudFront",
+    "service_full_name": "Amazon CloudFront",
+    "signature_version": "cloudfront",
+    "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+  },
+  "operations": {
+    "create_cloud_front_origin_access_identity2012_05_05": {
+      "name": "CreateCloudFrontOriginAccessIdentity2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront",
+      "input": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity": {
+            "type": "structure",
+            "serialized_name": "CloudFrontOriginAccessIdentity",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "s3_canonical_user_id": {
+                "type": "string",
+                "serialized_name": "S3CanonicalUserId"
+              },
+              "cloud_front_origin_access_identity_config": {
+                "type": "structure",
+                "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "If the CallerReference is a value you already sent in a previous request to create an identity but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Processing your request would cause you to exceed the maximum number of origin access identities allowed.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "create_distribution2012_05_05": {
+      "name": "CreateDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution",
+      "input": {
+        "type": "structure",
+        "members": {
+          "distribution_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "DistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "aliases": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "default_root_object": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "DefaultRootObject"
+              },
+              "origins": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Origins",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "min_length": 1,
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Origin",
+                      "members": {
+                        "id": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "Id"
+                        },
+                        "domain_name": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "DomainName"
+                        },
+                        "s3_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "S3OriginConfig",
+                          "members": {
+                            "origin_access_identity": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "OriginAccessIdentity"
+                            }
+                          }
+                        },
+                        "custom_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "CustomOriginConfig",
+                          "members": {
+                            "http_port": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "HTTPPort"
+                            },
+                            "https_port": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "HTTPSPort"
+                            },
+                            "origin_protocol_policy": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "OriginProtocolPolicy",
+                              "enum": [
+                                "http-only",
+                                "match-viewer"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "default_cache_behavior": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "DefaultCacheBehavior",
+                "members": {
+                  "target_origin_id": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "TargetOriginId"
+                  },
+                  "forwarded_values": {
+                    "type": "structure",
+                    "required": true,
+                    "serialized_name": "ForwardedValues",
+                    "members": {
+                      "query_string": {
+                        "type": "boolean",
+                        "required": true,
+                        "serialized_name": "QueryString"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "required": true,
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "required": true,
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "required": true,
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "viewer_protocol_policy": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "ViewerProtocolPolicy",
+                    "enum": [
+                      "allow-all",
+                      "https-only"
+                    ]
+                  },
+                  "min_ttl": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "MinTTL"
+                  }
+                }
+              },
+              "cache_behaviors": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "CacheBehaviors",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "CacheBehavior",
+                      "members": {
+                        "path_pattern": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "PathPattern"
+                        },
+                        "target_origin_id": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "TargetOriginId"
+                        },
+                        "forwarded_values": {
+                          "type": "structure",
+                          "required": true,
+                          "serialized_name": "ForwardedValues",
+                          "members": {
+                            "query_string": {
+                              "type": "boolean",
+                              "required": true,
+                              "serialized_name": "QueryString"
+                            }
+                          }
+                        },
+                        "trusted_signers": {
+                          "type": "structure",
+                          "required": true,
+                          "serialized_name": "TrustedSigners",
+                          "members": {
+                            "enabled": {
+                              "type": "boolean",
+                              "required": true,
+                              "serialized_name": "Enabled"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "AwsAccountNumber"
+                              }
+                            }
+                          }
+                        },
+                        "viewer_protocol_policy": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "ViewerProtocolPolicy",
+                          "enum": [
+                            "allow-all",
+                            "https-only"
+                          ]
+                        },
+                        "min_ttl": {
+                          "type": "integer",
+                          "required": true,
+                          "serialized_name": "MinTTL"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "required": true,
+                "serialized_name": "Enabled"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "distribution": {
+            "type": "structure",
+            "serialized_name": "Distribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "in_progress_invalidation_batches": {
+                "type": "integer",
+                "serialized_name": "InProgressInvalidationBatches"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "distribution_config": {
+                "type": "structure",
+                "serialized_name": "DistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "default_root_object": {
+                    "type": "string",
+                    "serialized_name": "DefaultRootObject"
+                  },
+                  "origins": {
+                    "type": "structure",
+                    "serialized_name": "Origins",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "min_length": 1,
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "Origin",
+                          "members": {
+                            "id": {
+                              "type": "string",
+                              "serialized_name": "Id"
+                            },
+                            "domain_name": {
+                              "type": "string",
+                              "serialized_name": "DomainName"
+                            },
+                            "s3_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "S3OriginConfig",
+                              "members": {
+                                "origin_access_identity": {
+                                  "type": "string",
+                                  "serialized_name": "OriginAccessIdentity"
+                                }
+                              }
+                            },
+                            "custom_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "CustomOriginConfig",
+                              "members": {
+                                "http_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPPort"
+                                },
+                                "https_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPSPort"
+                                },
+                                "origin_protocol_policy": {
+                                  "type": "string",
+                                  "serialized_name": "OriginProtocolPolicy",
+                                  "enum": [
+                                    "http-only",
+                                    "match-viewer"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "default_cache_behavior": {
+                    "type": "structure",
+                    "serialized_name": "DefaultCacheBehavior",
+                    "members": {
+                      "target_origin_id": {
+                        "type": "string",
+                        "serialized_name": "TargetOriginId"
+                      },
+                      "forwarded_values": {
+                        "type": "structure",
+                        "serialized_name": "ForwardedValues",
+                        "members": {
+                          "query_string": {
+                            "type": "boolean",
+                            "serialized_name": "QueryString"
+                          }
+                        }
+                      },
+                      "trusted_signers": {
+                        "type": "structure",
+                        "serialized_name": "TrustedSigners",
+                        "members": {
+                          "enabled": {
+                            "type": "boolean",
+                            "serialized_name": "Enabled"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "serialized_name": "Quantity"
+                          },
+                          "items": {
+                            "type": "list",
+                            "serialized_name": "Items",
+                            "members": {
+                              "type": "string",
+                              "serialized_name": "AwsAccountNumber"
+                            }
+                          }
+                        }
+                      },
+                      "viewer_protocol_policy": {
+                        "type": "string",
+                        "serialized_name": "ViewerProtocolPolicy",
+                        "enum": [
+                          "allow-all",
+                          "https-only"
+                        ]
+                      },
+                      "min_ttl": {
+                        "type": "integer",
+                        "serialized_name": "MinTTL"
+                      }
+                    }
+                  },
+                  "cache_behaviors": {
+                    "type": "structure",
+                    "serialized_name": "CacheBehaviors",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "CacheBehavior",
+                          "members": {
+                            "path_pattern": {
+                              "type": "string",
+                              "serialized_name": "PathPattern"
+                            },
+                            "target_origin_id": {
+                              "type": "string",
+                              "serialized_name": "TargetOriginId"
+                            },
+                            "forwarded_values": {
+                              "type": "structure",
+                              "serialized_name": "ForwardedValues",
+                              "members": {
+                                "query_string": {
+                                  "type": "boolean",
+                                  "serialized_name": "QueryString"
+                                }
+                              }
+                            },
+                            "trusted_signers": {
+                              "type": "structure",
+                              "serialized_name": "TrustedSigners",
+                              "members": {
+                                "enabled": {
+                                  "type": "boolean",
+                                  "serialized_name": "Enabled"
+                                },
+                                "quantity": {
+                                  "type": "integer",
+                                  "serialized_name": "Quantity"
+                                },
+                                "items": {
+                                  "type": "list",
+                                  "serialized_name": "Items",
+                                  "members": {
+                                    "type": "string",
+                                    "serialized_name": "AwsAccountNumber"
+                                  }
+                                }
+                              }
+                            },
+                            "viewer_protocol_policy": {
+                              "type": "string",
+                              "serialized_name": "ViewerProtocolPolicy",
+                              "enum": [
+                                "allow-all",
+                                "https-only"
+                              ]
+                            },
+                            "min_ttl": {
+                              "type": "integer",
+                              "serialized_name": "MinTTL"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The caller reference you attempted to create the distribution with is associated with another distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The origin access identity is not valid or doesn't exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "One or more of your trusted signers do not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more CNAMEs than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Processing your request would cause you to exceed the maximum number of distributions allowed.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The default root object file name is too big or contains an invalid character.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "No origin exists with the specified Origin Id.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "You cannot create anymore origins for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "You cannot create anymore cache behaviors for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "create_invalidation2012_05_05": {
+      "name": "CreateInvalidation2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation",
+      "input": {
+        "type": "structure",
+        "members": {
+          "distribution_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri",
+            "serialized_name": "DistributionId"
+          },
+          "invalidation_batch": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "InvalidationBatch",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "paths": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Paths",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "Path"
+                    }
+                  }
+                }
+              },
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "invalidation": {
+            "type": "structure",
+            "serialized_name": "Invalidation",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "create_time": {
+                "type": "timestamp",
+                "serialized_name": "CreateTime"
+              },
+              "invalidation_batch": {
+                "type": "structure",
+                "serialized_name": "InvalidationBatch",
+                "members": {
+                  "paths": {
+                    "type": "structure",
+                    "serialized_name": "Paths",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "Path"
+                        }
+                      }
+                    }
+                  },
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "create_streaming_distribution2012_05_05": {
+      "name": "CreateStreamingDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution",
+      "input": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "StreamingDistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "s3_origin": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "S3Origin",
+                "members": {
+                  "domain_name": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "DomainName"
+                  },
+                  "origin_access_identity": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "OriginAccessIdentity"
+                  }
+                }
+              },
+              "aliases": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "trusted_signers": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "TrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "AwsAccountNumber"
+                    }
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "required": true,
+                "serialized_name": "Enabled"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution": {
+            "type": "structure",
+            "serialized_name": "StreamingDistribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "streaming_distribution_config": {
+                "type": "structure",
+                "serialized_name": "StreamingDistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "s3_origin": {
+                    "type": "structure",
+                    "serialized_name": "S3Origin",
+                    "members": {
+                      "domain_name": {
+                        "type": "string",
+                        "serialized_name": "DomainName"
+                      },
+                      "origin_access_identity": {
+                        "type": "string",
+                        "serialized_name": "OriginAccessIdentity"
+                      }
+                    }
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The origin access identity is not valid or doesn't exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "One or more of your trusted signers do not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Processing your request would cause you to exceed the maximum number of streaming distributions allowed.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_cloud_front_origin_access_identity2012_05_05": {
+      "name": "DeleteCloudFrontOriginAccessIdentity2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified origin access identity does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_distribution2012_05_05": {
+      "name": "DeleteDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_streaming_distribution2012_05_05": {
+      "name": "DeleteStreamingDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified streaming distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_cloud_front_origin_access_identity2012_05_05": {
+      "name": "GetCloudFrontOriginAccessIdentity2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity": {
+            "type": "structure",
+            "serialized_name": "CloudFrontOriginAccessIdentity",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "s3_canonical_user_id": {
+                "type": "string",
+                "serialized_name": "S3CanonicalUserId"
+              },
+              "cloud_front_origin_access_identity_config": {
+                "type": "structure",
+                "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified origin access identity does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_cloud_front_origin_access_identity_config2012_05_05": {
+      "name": "GetCloudFrontOriginAccessIdentityConfig2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity_config": {
+            "type": "structure",
+            "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified origin access identity does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_distribution2012_05_05": {
+      "name": "GetDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "distribution": {
+            "type": "structure",
+            "serialized_name": "Distribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "in_progress_invalidation_batches": {
+                "type": "integer",
+                "serialized_name": "InProgressInvalidationBatches"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "distribution_config": {
+                "type": "structure",
+                "serialized_name": "DistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "default_root_object": {
+                    "type": "string",
+                    "serialized_name": "DefaultRootObject"
+                  },
+                  "origins": {
+                    "type": "structure",
+                    "serialized_name": "Origins",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "min_length": 1,
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "Origin",
+                          "members": {
+                            "id": {
+                              "type": "string",
+                              "serialized_name": "Id"
+                            },
+                            "domain_name": {
+                              "type": "string",
+                              "serialized_name": "DomainName"
+                            },
+                            "s3_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "S3OriginConfig",
+                              "members": {
+                                "origin_access_identity": {
+                                  "type": "string",
+                                  "serialized_name": "OriginAccessIdentity"
+                                }
+                              }
+                            },
+                            "custom_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "CustomOriginConfig",
+                              "members": {
+                                "http_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPPort"
+                                },
+                                "https_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPSPort"
+                                },
+                                "origin_protocol_policy": {
+                                  "type": "string",
+                                  "serialized_name": "OriginProtocolPolicy",
+                                  "enum": [
+                                    "http-only",
+                                    "match-viewer"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "default_cache_behavior": {
+                    "type": "structure",
+                    "serialized_name": "DefaultCacheBehavior",
+                    "members": {
+                      "target_origin_id": {
+                        "type": "string",
+                        "serialized_name": "TargetOriginId"
+                      },
+                      "forwarded_values": {
+                        "type": "structure",
+                        "serialized_name": "ForwardedValues",
+                        "members": {
+                          "query_string": {
+                            "type": "boolean",
+                            "serialized_name": "QueryString"
+                          }
+                        }
+                      },
+                      "trusted_signers": {
+                        "type": "structure",
+                        "serialized_name": "TrustedSigners",
+                        "members": {
+                          "enabled": {
+                            "type": "boolean",
+                            "serialized_name": "Enabled"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "serialized_name": "Quantity"
+                          },
+                          "items": {
+                            "type": "list",
+                            "serialized_name": "Items",
+                            "members": {
+                              "type": "string",
+                              "serialized_name": "AwsAccountNumber"
+                            }
+                          }
+                        }
+                      },
+                      "viewer_protocol_policy": {
+                        "type": "string",
+                        "serialized_name": "ViewerProtocolPolicy",
+                        "enum": [
+                          "allow-all",
+                          "https-only"
+                        ]
+                      },
+                      "min_ttl": {
+                        "type": "integer",
+                        "serialized_name": "MinTTL"
+                      }
+                    }
+                  },
+                  "cache_behaviors": {
+                    "type": "structure",
+                    "serialized_name": "CacheBehaviors",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "CacheBehavior",
+                          "members": {
+                            "path_pattern": {
+                              "type": "string",
+                              "serialized_name": "PathPattern"
+                            },
+                            "target_origin_id": {
+                              "type": "string",
+                              "serialized_name": "TargetOriginId"
+                            },
+                            "forwarded_values": {
+                              "type": "structure",
+                              "serialized_name": "ForwardedValues",
+                              "members": {
+                                "query_string": {
+                                  "type": "boolean",
+                                  "serialized_name": "QueryString"
+                                }
+                              }
+                            },
+                            "trusted_signers": {
+                              "type": "structure",
+                              "serialized_name": "TrustedSigners",
+                              "members": {
+                                "enabled": {
+                                  "type": "boolean",
+                                  "serialized_name": "Enabled"
+                                },
+                                "quantity": {
+                                  "type": "integer",
+                                  "serialized_name": "Quantity"
+                                },
+                                "items": {
+                                  "type": "list",
+                                  "serialized_name": "Items",
+                                  "members": {
+                                    "type": "string",
+                                    "serialized_name": "AwsAccountNumber"
+                                  }
+                                }
+                              }
+                            },
+                            "viewer_protocol_policy": {
+                              "type": "string",
+                              "serialized_name": "ViewerProtocolPolicy",
+                              "enum": [
+                                "allow-all",
+                                "https-only"
+                              ]
+                            },
+                            "min_ttl": {
+                              "type": "integer",
+                              "serialized_name": "MinTTL"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_distribution_config2012_05_05": {
+      "name": "GetDistributionConfig2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "distribution_config": {
+            "type": "structure",
+            "serialized_name": "DistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "aliases": {
+                "type": "structure",
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "default_root_object": {
+                "type": "string",
+                "serialized_name": "DefaultRootObject"
+              },
+              "origins": {
+                "type": "structure",
+                "serialized_name": "Origins",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "min_length": 1,
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Origin",
+                      "members": {
+                        "id": {
+                          "type": "string",
+                          "serialized_name": "Id"
+                        },
+                        "domain_name": {
+                          "type": "string",
+                          "serialized_name": "DomainName"
+                        },
+                        "s3_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "S3OriginConfig",
+                          "members": {
+                            "origin_access_identity": {
+                              "type": "string",
+                              "serialized_name": "OriginAccessIdentity"
+                            }
+                          }
+                        },
+                        "custom_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "CustomOriginConfig",
+                          "members": {
+                            "http_port": {
+                              "type": "integer",
+                              "serialized_name": "HTTPPort"
+                            },
+                            "https_port": {
+                              "type": "integer",
+                              "serialized_name": "HTTPSPort"
+                            },
+                            "origin_protocol_policy": {
+                              "type": "string",
+                              "serialized_name": "OriginProtocolPolicy",
+                              "enum": [
+                                "http-only",
+                                "match-viewer"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "default_cache_behavior": {
+                "type": "structure",
+                "serialized_name": "DefaultCacheBehavior",
+                "members": {
+                  "target_origin_id": {
+                    "type": "string",
+                    "serialized_name": "TargetOriginId"
+                  },
+                  "forwarded_values": {
+                    "type": "structure",
+                    "serialized_name": "ForwardedValues",
+                    "members": {
+                      "query_string": {
+                        "type": "boolean",
+                        "serialized_name": "QueryString"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "viewer_protocol_policy": {
+                    "type": "string",
+                    "serialized_name": "ViewerProtocolPolicy",
+                    "enum": [
+                      "allow-all",
+                      "https-only"
+                    ]
+                  },
+                  "min_ttl": {
+                    "type": "integer",
+                    "serialized_name": "MinTTL"
+                  }
+                }
+              },
+              "cache_behaviors": {
+                "type": "structure",
+                "serialized_name": "CacheBehaviors",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "CacheBehavior",
+                      "members": {
+                        "path_pattern": {
+                          "type": "string",
+                          "serialized_name": "PathPattern"
+                        },
+                        "target_origin_id": {
+                          "type": "string",
+                          "serialized_name": "TargetOriginId"
+                        },
+                        "forwarded_values": {
+                          "type": "structure",
+                          "serialized_name": "ForwardedValues",
+                          "members": {
+                            "query_string": {
+                              "type": "boolean",
+                              "serialized_name": "QueryString"
+                            }
+                          }
+                        },
+                        "trusted_signers": {
+                          "type": "structure",
+                          "serialized_name": "TrustedSigners",
+                          "members": {
+                            "enabled": {
+                              "type": "boolean",
+                              "serialized_name": "Enabled"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "AwsAccountNumber"
+                              }
+                            }
+                          }
+                        },
+                        "viewer_protocol_policy": {
+                          "type": "string",
+                          "serialized_name": "ViewerProtocolPolicy",
+                          "enum": [
+                            "allow-all",
+                            "https-only"
+                          ]
+                        },
+                        "min_ttl": {
+                          "type": "integer",
+                          "serialized_name": "MinTTL"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "serialized_name": "Enabled"
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_invalidation2012_05_05": {
+      "name": "GetInvalidation2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "distribution_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri",
+            "serialized_name": "DistributionId"
+          },
+          "id": {
+            "type": "string",
+            "required": true,
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "invalidation": {
+            "type": "structure",
+            "serialized_name": "Invalidation",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "create_time": {
+                "type": "timestamp",
+                "serialized_name": "CreateTime"
+              },
+              "invalidation_batch": {
+                "type": "structure",
+                "serialized_name": "InvalidationBatch",
+                "members": {
+                  "paths": {
+                    "type": "structure",
+                    "serialized_name": "Paths",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "Path"
+                        }
+                      }
+                    }
+                  },
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified invalidation does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_streaming_distribution2012_05_05": {
+      "name": "GetStreamingDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution/{Id}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution": {
+            "type": "structure",
+            "serialized_name": "StreamingDistribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "streaming_distribution_config": {
+                "type": "structure",
+                "serialized_name": "StreamingDistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "s3_origin": {
+                    "type": "structure",
+                    "serialized_name": "S3Origin",
+                    "members": {
+                      "domain_name": {
+                        "type": "string",
+                        "serialized_name": "DomainName"
+                      },
+                      "origin_access_identity": {
+                        "type": "string",
+                        "serialized_name": "OriginAccessIdentity"
+                      }
+                    }
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified streaming distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "get_streaming_distribution_config2012_05_05": {
+      "name": "GetStreamingDistributionConfig2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution_config": {
+            "type": "structure",
+            "serialized_name": "StreamingDistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "s3_origin": {
+                "type": "structure",
+                "serialized_name": "S3Origin",
+                "members": {
+                  "domain_name": {
+                    "type": "string",
+                    "serialized_name": "DomainName"
+                  },
+                  "origin_access_identity": {
+                    "type": "string",
+                    "serialized_name": "OriginAccessIdentity"
+                  }
+                }
+              },
+              "aliases": {
+                "type": "structure",
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "trusted_signers": {
+                "type": "structure",
+                "serialized_name": "TrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "AwsAccountNumber"
+                    }
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "serialized_name": "Enabled"
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The specified streaming distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "list_cloud_front_origin_access_identities2012_05_05": {
+      "name": "ListCloudFrontOriginAccessIdentities2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "marker": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity_list": {
+            "type": "structure",
+            "serialized_name": "CloudFrontOriginAccessIdentityList",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "marker": {
+                "type": "string",
+                "serialized_name": "Marker"
+              },
+              "next_marker": {
+                "type": "string",
+                "serialized_name": "NextMarker"
+              },
+              "max_items": {
+                "type": "integer",
+                "serialized_name": "MaxItems"
+              },
+              "is_truncated": {
+                "type": "boolean",
+                "serialized_name": "IsTruncated"
+              },
+              "quantity": {
+                "type": "integer",
+                "serialized_name": "Quantity"
+              },
+              "items": {
+                "type": "list",
+                "serialized_name": "Items",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CloudFrontOriginAccessIdentitySummary",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "Id"
+                    },
+                    "s3_canonical_user_id": {
+                      "type": "string",
+                      "serialized_name": "S3CanonicalUserId"
+                    },
+                    "comment": {
+                      "type": "string",
+                      "serialized_name": "Comment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "list_distributions2012_05_05": {
+      "name": "ListDistributions2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution?Marker={Marker}&MaxItems={MaxItems}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "marker": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "distribution_list": {
+            "type": "structure",
+            "serialized_name": "DistributionList",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "marker": {
+                "type": "string",
+                "serialized_name": "Marker"
+              },
+              "next_marker": {
+                "type": "string",
+                "serialized_name": "NextMarker"
+              },
+              "max_items": {
+                "type": "integer",
+                "serialized_name": "MaxItems"
+              },
+              "is_truncated": {
+                "type": "boolean",
+                "serialized_name": "IsTruncated"
+              },
+              "quantity": {
+                "type": "integer",
+                "serialized_name": "Quantity"
+              },
+              "items": {
+                "type": "list",
+                "serialized_name": "Items",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DistributionSummary",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "Id"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "last_modified_time": {
+                      "type": "timestamp",
+                      "serialized_name": "LastModifiedTime"
+                    },
+                    "domain_name": {
+                      "type": "string",
+                      "serialized_name": "DomainName"
+                    },
+                    "aliases": {
+                      "type": "structure",
+                      "serialized_name": "Aliases",
+                      "members": {
+                        "quantity": {
+                          "type": "integer",
+                          "serialized_name": "Quantity"
+                        },
+                        "items": {
+                          "type": "list",
+                          "serialized_name": "Items",
+                          "members": {
+                            "type": "string",
+                            "serialized_name": "CNAME"
+                          }
+                        }
+                      }
+                    },
+                    "origins": {
+                      "type": "structure",
+                      "serialized_name": "Origins",
+                      "members": {
+                        "quantity": {
+                          "type": "integer",
+                          "serialized_name": "Quantity"
+                        },
+                        "items": {
+                          "type": "list",
+                          "min_length": 1,
+                          "serialized_name": "Items",
+                          "members": {
+                            "type": "structure",
+                            "serialized_name": "Origin",
+                            "members": {
+                              "id": {
+                                "type": "string",
+                                "serialized_name": "Id"
+                              },
+                              "domain_name": {
+                                "type": "string",
+                                "serialized_name": "DomainName"
+                              },
+                              "s3_origin_config": {
+                                "type": "structure",
+                                "serialized_name": "S3OriginConfig",
+                                "members": {
+                                  "origin_access_identity": {
+                                    "type": "string",
+                                    "serialized_name": "OriginAccessIdentity"
+                                  }
+                                }
+                              },
+                              "custom_origin_config": {
+                                "type": "structure",
+                                "serialized_name": "CustomOriginConfig",
+                                "members": {
+                                  "http_port": {
+                                    "type": "integer",
+                                    "serialized_name": "HTTPPort"
+                                  },
+                                  "https_port": {
+                                    "type": "integer",
+                                    "serialized_name": "HTTPSPort"
+                                  },
+                                  "origin_protocol_policy": {
+                                    "type": "string",
+                                    "serialized_name": "OriginProtocolPolicy",
+                                    "enum": [
+                                      "http-only",
+                                      "match-viewer"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "default_cache_behavior": {
+                      "type": "structure",
+                      "serialized_name": "DefaultCacheBehavior",
+                      "members": {
+                        "target_origin_id": {
+                          "type": "string",
+                          "serialized_name": "TargetOriginId"
+                        },
+                        "forwarded_values": {
+                          "type": "structure",
+                          "serialized_name": "ForwardedValues",
+                          "members": {
+                            "query_string": {
+                              "type": "boolean",
+                              "serialized_name": "QueryString"
+                            }
+                          }
+                        },
+                        "trusted_signers": {
+                          "type": "structure",
+                          "serialized_name": "TrustedSigners",
+                          "members": {
+                            "enabled": {
+                              "type": "boolean",
+                              "serialized_name": "Enabled"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "AwsAccountNumber"
+                              }
+                            }
+                          }
+                        },
+                        "viewer_protocol_policy": {
+                          "type": "string",
+                          "serialized_name": "ViewerProtocolPolicy",
+                          "enum": [
+                            "allow-all",
+                            "https-only"
+                          ]
+                        },
+                        "min_ttl": {
+                          "type": "integer",
+                          "serialized_name": "MinTTL"
+                        }
+                      }
+                    },
+                    "cache_behaviors": {
+                      "type": "structure",
+                      "serialized_name": "CacheBehaviors",
+                      "members": {
+                        "quantity": {
+                          "type": "integer",
+                          "serialized_name": "Quantity"
+                        },
+                        "items": {
+                          "type": "list",
+                          "serialized_name": "Items",
+                          "members": {
+                            "type": "structure",
+                            "serialized_name": "CacheBehavior",
+                            "members": {
+                              "path_pattern": {
+                                "type": "string",
+                                "serialized_name": "PathPattern"
+                              },
+                              "target_origin_id": {
+                                "type": "string",
+                                "serialized_name": "TargetOriginId"
+                              },
+                              "forwarded_values": {
+                                "type": "structure",
+                                "serialized_name": "ForwardedValues",
+                                "members": {
+                                  "query_string": {
+                                    "type": "boolean",
+                                    "serialized_name": "QueryString"
+                                  }
+                                }
+                              },
+                              "trusted_signers": {
+                                "type": "structure",
+                                "serialized_name": "TrustedSigners",
+                                "members": {
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "serialized_name": "Enabled"
+                                  },
+                                  "quantity": {
+                                    "type": "integer",
+                                    "serialized_name": "Quantity"
+                                  },
+                                  "items": {
+                                    "type": "list",
+                                    "serialized_name": "Items",
+                                    "members": {
+                                      "type": "string",
+                                      "serialized_name": "AwsAccountNumber"
+                                    }
+                                  }
+                                }
+                              },
+                              "viewer_protocol_policy": {
+                                "type": "string",
+                                "serialized_name": "ViewerProtocolPolicy",
+                                "enum": [
+                                  "allow-all",
+                                  "https-only"
+                                ]
+                              },
+                              "min_ttl": {
+                                "type": "integer",
+                                "serialized_name": "MinTTL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comment": {
+                      "type": "string",
+                      "serialized_name": "Comment"
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "serialized_name": "Enabled"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "list_invalidations2012_05_05": {
+      "name": "ListInvalidations2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "distribution_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri",
+            "serialized_name": "DistributionId"
+          },
+          "marker": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "invalidation_list": {
+            "type": "structure",
+            "serialized_name": "InvalidationList",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "marker": {
+                "type": "string",
+                "serialized_name": "Marker"
+              },
+              "next_marker": {
+                "type": "string",
+                "serialized_name": "NextMarker"
+              },
+              "max_items": {
+                "type": "integer",
+                "serialized_name": "MaxItems"
+              },
+              "is_truncated": {
+                "type": "boolean",
+                "serialized_name": "IsTruncated"
+              },
+              "quantity": {
+                "type": "integer",
+                "serialized_name": "Quantity"
+              },
+              "items": {
+                "type": "list",
+                "serialized_name": "Items",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "InvalidationSummary",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "Id"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "list_streaming_distributions2012_05_05": {
+      "name": "ListStreamingDistributions2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
+      "input": {
+        "type": "structure",
+        "members": {
+          "marker": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution_list": {
+            "type": "structure",
+            "serialized_name": "StreamingDistributionList",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "marker": {
+                "type": "string",
+                "serialized_name": "Marker"
+              },
+              "next_marker": {
+                "type": "string",
+                "serialized_name": "NextMarker"
+              },
+              "max_items": {
+                "type": "integer",
+                "serialized_name": "MaxItems"
+              },
+              "is_truncated": {
+                "type": "boolean",
+                "serialized_name": "IsTruncated"
+              },
+              "quantity": {
+                "type": "integer",
+                "serialized_name": "Quantity"
+              },
+              "items": {
+                "type": "list",
+                "serialized_name": "Items",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "StreamingDistributionSummary",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "Id"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "last_modified_time": {
+                      "type": "timestamp",
+                      "serialized_name": "LastModifiedTime"
+                    },
+                    "domain_name": {
+                      "type": "string",
+                      "serialized_name": "DomainName"
+                    },
+                    "s3_origin": {
+                      "type": "structure",
+                      "serialized_name": "S3Origin",
+                      "members": {
+                        "domain_name": {
+                          "type": "string",
+                          "serialized_name": "DomainName"
+                        },
+                        "origin_access_identity": {
+                          "type": "string",
+                          "serialized_name": "OriginAccessIdentity"
+                        }
+                      }
+                    },
+                    "aliases": {
+                      "type": "structure",
+                      "serialized_name": "Aliases",
+                      "members": {
+                        "quantity": {
+                          "type": "integer",
+                          "serialized_name": "Quantity"
+                        },
+                        "items": {
+                          "type": "list",
+                          "serialized_name": "Items",
+                          "members": {
+                            "type": "string",
+                            "serialized_name": "CNAME"
+                          }
+                        }
+                      }
+                    },
+                    "trusted_signers": {
+                      "type": "structure",
+                      "serialized_name": "TrustedSigners",
+                      "members": {
+                        "enabled": {
+                          "type": "boolean",
+                          "serialized_name": "Enabled"
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "serialized_name": "Quantity"
+                        },
+                        "items": {
+                          "type": "list",
+                          "serialized_name": "Items",
+                          "members": {
+                            "type": "string",
+                            "serialized_name": "AwsAccountNumber"
+                          }
+                        }
+                      }
+                    },
+                    "comment": {
+                      "type": "string",
+                      "serialized_name": "Comment"
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "serialized_name": "Enabled"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "update_cloud_front_origin_access_identity2012_05_05": {
+      "name": "UpdateCloudFrontOriginAccessIdentity2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cloud_front_origin_access_identity": {
+            "type": "structure",
+            "serialized_name": "CloudFrontOriginAccessIdentity",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "s3_canonical_user_id": {
+                "type": "string",
+                "serialized_name": "S3CanonicalUserId"
+              },
+              "cloud_front_origin_access_identity_config": {
+                "type": "structure",
+                "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Origin and CallerReference cannot be updated.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified origin access identity does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "update_distribution2012_05_05": {
+      "name": "UpdateDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/distribution/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "distribution_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "DistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "aliases": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "default_root_object": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "DefaultRootObject"
+              },
+              "origins": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Origins",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "min_length": 1,
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Origin",
+                      "members": {
+                        "id": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "Id"
+                        },
+                        "domain_name": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "DomainName"
+                        },
+                        "s3_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "S3OriginConfig",
+                          "members": {
+                            "origin_access_identity": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "OriginAccessIdentity"
+                            }
+                          }
+                        },
+                        "custom_origin_config": {
+                          "type": "structure",
+                          "serialized_name": "CustomOriginConfig",
+                          "members": {
+                            "http_port": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "HTTPPort"
+                            },
+                            "https_port": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "HTTPSPort"
+                            },
+                            "origin_protocol_policy": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "OriginProtocolPolicy",
+                              "enum": [
+                                "http-only",
+                                "match-viewer"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "default_cache_behavior": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "DefaultCacheBehavior",
+                "members": {
+                  "target_origin_id": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "TargetOriginId"
+                  },
+                  "forwarded_values": {
+                    "type": "structure",
+                    "required": true,
+                    "serialized_name": "ForwardedValues",
+                    "members": {
+                      "query_string": {
+                        "type": "boolean",
+                        "required": true,
+                        "serialized_name": "QueryString"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "required": true,
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "required": true,
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "required": true,
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "viewer_protocol_policy": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "ViewerProtocolPolicy",
+                    "enum": [
+                      "allow-all",
+                      "https-only"
+                    ]
+                  },
+                  "min_ttl": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "MinTTL"
+                  }
+                }
+              },
+              "cache_behaviors": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "CacheBehaviors",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "CacheBehavior",
+                      "members": {
+                        "path_pattern": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "PathPattern"
+                        },
+                        "target_origin_id": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "TargetOriginId"
+                        },
+                        "forwarded_values": {
+                          "type": "structure",
+                          "required": true,
+                          "serialized_name": "ForwardedValues",
+                          "members": {
+                            "query_string": {
+                              "type": "boolean",
+                              "required": true,
+                              "serialized_name": "QueryString"
+                            }
+                          }
+                        },
+                        "trusted_signers": {
+                          "type": "structure",
+                          "required": true,
+                          "serialized_name": "TrustedSigners",
+                          "members": {
+                            "enabled": {
+                              "type": "boolean",
+                              "required": true,
+                              "serialized_name": "Enabled"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "required": true,
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "AwsAccountNumber"
+                              }
+                            }
+                          }
+                        },
+                        "viewer_protocol_policy": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "ViewerProtocolPolicy",
+                          "enum": [
+                            "allow-all",
+                            "https-only"
+                          ]
+                        },
+                        "min_ttl": {
+                          "type": "integer",
+                          "required": true,
+                          "serialized_name": "MinTTL"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "required": true,
+                "serialized_name": "Enabled"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "distribution": {
+            "type": "structure",
+            "serialized_name": "Distribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "in_progress_invalidation_batches": {
+                "type": "integer",
+                "serialized_name": "InProgressInvalidationBatches"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "distribution_config": {
+                "type": "structure",
+                "serialized_name": "DistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "default_root_object": {
+                    "type": "string",
+                    "serialized_name": "DefaultRootObject"
+                  },
+                  "origins": {
+                    "type": "structure",
+                    "serialized_name": "Origins",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "min_length": 1,
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "Origin",
+                          "members": {
+                            "id": {
+                              "type": "string",
+                              "serialized_name": "Id"
+                            },
+                            "domain_name": {
+                              "type": "string",
+                              "serialized_name": "DomainName"
+                            },
+                            "s3_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "S3OriginConfig",
+                              "members": {
+                                "origin_access_identity": {
+                                  "type": "string",
+                                  "serialized_name": "OriginAccessIdentity"
+                                }
+                              }
+                            },
+                            "custom_origin_config": {
+                              "type": "structure",
+                              "serialized_name": "CustomOriginConfig",
+                              "members": {
+                                "http_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPPort"
+                                },
+                                "https_port": {
+                                  "type": "integer",
+                                  "serialized_name": "HTTPSPort"
+                                },
+                                "origin_protocol_policy": {
+                                  "type": "string",
+                                  "serialized_name": "OriginProtocolPolicy",
+                                  "enum": [
+                                    "http-only",
+                                    "match-viewer"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "default_cache_behavior": {
+                    "type": "structure",
+                    "serialized_name": "DefaultCacheBehavior",
+                    "members": {
+                      "target_origin_id": {
+                        "type": "string",
+                        "serialized_name": "TargetOriginId"
+                      },
+                      "forwarded_values": {
+                        "type": "structure",
+                        "serialized_name": "ForwardedValues",
+                        "members": {
+                          "query_string": {
+                            "type": "boolean",
+                            "serialized_name": "QueryString"
+                          }
+                        }
+                      },
+                      "trusted_signers": {
+                        "type": "structure",
+                        "serialized_name": "TrustedSigners",
+                        "members": {
+                          "enabled": {
+                            "type": "boolean",
+                            "serialized_name": "Enabled"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "serialized_name": "Quantity"
+                          },
+                          "items": {
+                            "type": "list",
+                            "serialized_name": "Items",
+                            "members": {
+                              "type": "string",
+                              "serialized_name": "AwsAccountNumber"
+                            }
+                          }
+                        }
+                      },
+                      "viewer_protocol_policy": {
+                        "type": "string",
+                        "serialized_name": "ViewerProtocolPolicy",
+                        "enum": [
+                          "allow-all",
+                          "https-only"
+                        ]
+                      },
+                      "min_ttl": {
+                        "type": "integer",
+                        "serialized_name": "MinTTL"
+                      }
+                    }
+                  },
+                  "cache_behaviors": {
+                    "type": "structure",
+                    "serialized_name": "CacheBehaviors",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "CacheBehavior",
+                          "members": {
+                            "path_pattern": {
+                              "type": "string",
+                              "serialized_name": "PathPattern"
+                            },
+                            "target_origin_id": {
+                              "type": "string",
+                              "serialized_name": "TargetOriginId"
+                            },
+                            "forwarded_values": {
+                              "type": "structure",
+                              "serialized_name": "ForwardedValues",
+                              "members": {
+                                "query_string": {
+                                  "type": "boolean",
+                                  "serialized_name": "QueryString"
+                                }
+                              }
+                            },
+                            "trusted_signers": {
+                              "type": "structure",
+                              "serialized_name": "TrustedSigners",
+                              "members": {
+                                "enabled": {
+                                  "type": "boolean",
+                                  "serialized_name": "Enabled"
+                                },
+                                "quantity": {
+                                  "type": "integer",
+                                  "serialized_name": "Quantity"
+                                },
+                                "items": {
+                                  "type": "list",
+                                  "serialized_name": "Items",
+                                  "members": {
+                                    "type": "string",
+                                    "serialized_name": "AwsAccountNumber"
+                                  }
+                                }
+                              }
+                            },
+                            "viewer_protocol_policy": {
+                              "type": "string",
+                              "serialized_name": "ViewerProtocolPolicy",
+                              "enum": [
+                                "allow-all",
+                                "https-only"
+                              ]
+                            },
+                            "min_ttl": {
+                              "type": "integer",
+                              "serialized_name": "MinTTL"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Origin and CallerReference cannot be updated.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more CNAMEs than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The default root object file name is too big or contains an invalid character.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The origin access identity is not valid or doesn't exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "One or more of your trusted signers do not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "No origin exists with the specified Origin Id.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "You cannot create anymore origins for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "You cannot create anymore cache behaviors for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    },
+    "update_streaming_distribution2012_05_05": {
+      "name": "UpdateStreamingDistribution2012_05_05",
+      "http_method": "POST",
+      "http_path": "/2012-05-05/streaming-distribution/{Id}/config",
+      "input": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "StreamingDistributionConfig",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "caller_reference": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "CallerReference"
+              },
+              "s3_origin": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "S3Origin",
+                "members": {
+                  "domain_name": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "DomainName"
+                  },
+                  "origin_access_identity": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "OriginAccessIdentity"
+                  }
+                }
+              },
+              "aliases": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Aliases",
+                "members": {
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CNAME"
+                    }
+                  }
+                }
+              },
+              "comment": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Comment"
+              },
+              "logging": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "Logging",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Bucket"
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "required": true,
+                    "serialized_name": "Prefix"
+                  }
+                }
+              },
+              "trusted_signers": {
+                "type": "structure",
+                "required": true,
+                "serialized_name": "TrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "required": true,
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "AwsAccountNumber"
+                    }
+                  }
+                }
+              },
+              "enabled": {
+                "type": "boolean",
+                "required": true,
+                "serialized_name": "Enabled"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "location": "uri",
+            "serialized_name": "Id"
+          },
+          "if_match": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "If-Match"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streaming_distribution": {
+            "type": "structure",
+            "serialized_name": "StreamingDistribution",
+            "metadata": {
+              "payload": true
+            },
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "last_modified_time": {
+                "type": "timestamp",
+                "serialized_name": "LastModifiedTime"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "active_trusted_signers": {
+                "type": "structure",
+                "serialized_name": "ActiveTrustedSigners",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "serialized_name": "Quantity"
+                  },
+                  "items": {
+                    "type": "list",
+                    "serialized_name": "Items",
+                    "members": {
+                      "type": "structure",
+                      "serialized_name": "Signer",
+                      "members": {
+                        "aws_account_number": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        },
+                        "key_pair_ids": {
+                          "type": "structure",
+                          "serialized_name": "KeyPairIds",
+                          "members": {
+                            "quantity": {
+                              "type": "integer",
+                              "serialized_name": "Quantity"
+                            },
+                            "items": {
+                              "type": "list",
+                              "serialized_name": "Items",
+                              "members": {
+                                "type": "string",
+                                "serialized_name": "KeyPairId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "streaming_distribution_config": {
+                "type": "structure",
+                "serialized_name": "StreamingDistributionConfig",
+                "members": {
+                  "caller_reference": {
+                    "type": "string",
+                    "serialized_name": "CallerReference"
+                  },
+                  "s3_origin": {
+                    "type": "structure",
+                    "serialized_name": "S3Origin",
+                    "members": {
+                      "domain_name": {
+                        "type": "string",
+                        "serialized_name": "DomainName"
+                      },
+                      "origin_access_identity": {
+                        "type": "string",
+                        "serialized_name": "OriginAccessIdentity"
+                      }
+                    }
+                  },
+                  "aliases": {
+                    "type": "structure",
+                    "serialized_name": "Aliases",
+                    "members": {
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "CNAME"
+                        }
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  },
+                  "logging": {
+                    "type": "structure",
+                    "serialized_name": "Logging",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "bucket": {
+                        "type": "string",
+                        "serialized_name": "Bucket"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "serialized_name": "Prefix"
+                      }
+                    }
+                  },
+                  "trusted_signers": {
+                    "type": "structure",
+                    "serialized_name": "TrustedSigners",
+                    "members": {
+                      "enabled": {
+                        "type": "boolean",
+                        "serialized_name": "Enabled"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "serialized_name": "Quantity"
+                      },
+                      "items": {
+                        "type": "list",
+                        "serialized_name": "Items",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "AwsAccountNumber"
+                        }
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              }
+            }
+          },
+          "e_tag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Access denied.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Origin and CallerReference cannot be updated.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The If-Match version is missing or not valid for the distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The specified streaming distribution does not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The argument is invalid.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The origin access identity is not valid or doesn't exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "One or more of your trusted signers do not exist.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

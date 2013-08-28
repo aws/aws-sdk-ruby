@@ -1,0 +1,2023 @@
+{
+  "type": "json",
+  "api_version": "2012-10-29",
+  "metadata": {
+    "endpoint_prefix": "datapipeline",
+    "json_version": 1.1,
+    "service_full_name": "AWS Data Pipeline",
+    "signature_version": "v4",
+    "target_prefix": "DataPipeline"
+  },
+  "documentation": "<p> This is the <i>AWS Data Pipeline API Reference</i>. This guide provides descriptions and samples of the AWS Data Pipeline API. </p> <p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline API implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You call these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline API to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides an open-source implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p> <p> The AWS Data Pipeline API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. In the code examples in this reference, the Signature Version 4 Request parameters are represented as AuthParams. </p>",
+  "operations": {
+    "activate_pipeline": {
+      "name": "ActivatePipeline",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Validates a pipeline and initiates processing. If the pipeline does not pass validation, activation fails. </p> <p> Call this action to start processing pipeline tasks of a pipeline you've created using the CreatePipeline and PutPipelineDefinition actions. A pipeline cannot be modified after it has been successfully activated. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input of the ActivatePipeline action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the pipeline to activate. </p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the ActivatePipeline action.</p>",
+        "members": {
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "create_pipeline": {
+      "name": "CreatePipeline",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Creates a new empty pipeline. When this action succeeds, you can then use the PutPipelineDefinition action to populate the pipeline.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the CreatePipeline action.</p>",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> The name of the new pipeline. You can use the same name for multiple pipelines associated with your AWS account, because AWS Data Pipeline assigns each new pipeline a unique pipeline identifier. </p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "name"
+          },
+          "unique_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> A unique identifier that you specify. This identifier is not the same as the pipeline identifier assigned by AWS Data Pipeline. You are responsible for defining the format and ensuring the uniqueness of this identifier. You use this parameter to ensure idempotency during repeated calls to CreatePipeline. For example, if the first call to CreatePipeline does not return a clear success, you can pass in the same unique identifier and pipeline name combination on a subsequent call to CreatePipeline. CreatePipeline ensures that if a pipeline already exists with the same name and unique identifier, a new pipeline will not be created. Instead, you'll receive the pipeline identifier from the previous attempt. The uniqueness of the name and unique identifier combination is scoped to the AWS account or IAM user credentials. </p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "uniqueId"
+          },
+          "description": {
+            "type": "string",
+            "documentation": "<p>The description of the new pipeline.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "description"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the CreatePipeline action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "documentation": "<p>The ID that AWS Data Pipeline assigns the newly created pipeline. The ID is a string of the form: df-06372391ZG65EXAMPLE.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "delete_pipeline": {
+      "name": "DeletePipeline",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Permanently deletes a pipeline, its pipeline definition and its run history. You cannot query or restore a deleted pipeline. AWS Data Pipeline will attempt to cancel instances associated with the pipeline that are currently being processed by task runners. Deleting a pipeline cannot be undone. </p> <p> To temporarily pause a pipeline instead of deleting it, call SetStatus with the status set to Pause on individual components. Components that are paused by SetStatus can be resumed. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the DeletePipeline action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the pipeline to be deleted.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_objects": {
+      "name": "DescribeObjects",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Returns the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p> The DescribeObjects action returns the object definitions for a specified set of object identifiers. You can filter the results to named fields and used markers to page through the results. </p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifier of the pipeline that contains the object definitions.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "object_ids": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>Identifiers of the pipeline objects that contain the definitions to be described. You can pass as many as 25 identifiers in a single call to DescribeObjects.</p>",
+            "serialized_name": "objectIds",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1024,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "evaluate_expressions": {
+            "type": "boolean",
+            "documentation": "<p>Indicates whether any expressions in the object should be evaluated when the object descriptions are returned.</p>",
+            "serialized_name": "evaluateExpressions"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>The starting point for the results to be returned. The first time you call DescribeObjects, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call DescribeObjects again and pass the marker value from the response to retrieve the next set of results.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>If <code>True</code>, there are more results that can be returned in another call to DescribeObjects.</p>",
+        "members": {
+          "pipeline_objects": {
+            "type": "list",
+            "documentation": "<p>An array of object definitions that are returned by the call to DescribeObjects.</p>",
+            "serialized_name": "pipelineObjects",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>Identifier of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "documentation": "<p>Name of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                },
+                "fields": {
+                  "type": "list",
+                  "documentation": "<p>Key-value pairs that define the properties of the object.</p>",
+                  "serialized_name": "fields",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                    "members": {
+                      "key": {
+                        "type": "string",
+                        "documentation": "<p>The field identifier.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "key"
+                      },
+                      "string_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as a String.</p>",
+                        "min_length": 0,
+                        "max_length": 10240,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "stringValue"
+                      },
+                      "ref_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "refValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The starting point for the next page of results. To view the next page of results, call DescribeObjects again with this marker value. </p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          },
+          "has_more_results": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, there are more pages of results to return.</p>",
+            "serialized_name": "hasMoreResults"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "describe_pipelines": {
+      "name": "DescribePipelines",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Retrieve metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines you have read permission for. </p> <p> To retrieve the full pipeline definition instead of metadata about the pipeline, call the GetPipelineDefinition action. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input to the DescribePipelines action.</p>",
+        "members": {
+          "pipeline_ids": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>Identifiers of the pipelines to describe. You can pass as many as 25 identifiers in a single call to DescribePipelines. You can obtain pipeline identifiers by calling ListPipelines.</p>",
+            "serialized_name": "pipelineIds",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1024,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the DescribePipelines action.</p>",
+        "members": {
+          "pipeline_description_list": {
+            "type": "list",
+            "documentation": "<p>An array of descriptions returned for the specified pipelines.</p>",
+            "serialized_name": "pipelineDescriptionList",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains pipeline metadata.</p>",
+              "members": {
+                "pipeline_id": {
+                  "type": "string",
+                  "documentation": "<p>The pipeline identifier that was assigned by AWS Data Pipeline. This is a string of the form <code>df-297EG78HU43EEXAMPLE</code>.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "pipelineId"
+                },
+                "name": {
+                  "type": "string",
+                  "documentation": "<p>Name of the pipeline.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                },
+                "fields": {
+                  "type": "list",
+                  "documentation": "<p>A list of read-only fields that contain metadata about the pipeline: @userId, @accountId, and @pipelineState.</p>",
+                  "serialized_name": "fields",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                    "members": {
+                      "key": {
+                        "type": "string",
+                        "documentation": "<p>The field identifier.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "key"
+                      },
+                      "string_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as a String.</p>",
+                        "min_length": 0,
+                        "max_length": 10240,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "stringValue"
+                      },
+                      "ref_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "refValue"
+                      }
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "documentation": "<p>Description of the pipeline.</p>",
+                  "min_length": 0,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "description"
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "evaluate_expression": {
+      "name": "EvaluateExpression",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Evaluates a string in the context of a specified object. A task runner can use this action to evaluate SQL queries stored in Amazon S3. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the EvaluateExpression action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the pipeline.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "object_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the object.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "objectId"
+          },
+          "expression": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The expression to evaluate.</p>",
+            "min_length": 0,
+            "max_length": 20971520,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "expression"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the EvaluateExpression action.</p>",
+        "members": {
+          "evaluated_expression": {
+            "type": "string",
+            "documentation": "<p>The evaluated expression.</p>",
+            "min_length": 0,
+            "max_length": 20971520,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "evaluatedExpression"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified task was not found. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "get_pipeline_definition": {
+      "name": "GetPipelineDefinition",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns the definition of the specified pipeline. You can call GetPipelineDefinition to retrieve the pipeline definition you provided using PutPipelineDefinition.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the GetPipelineDefinition action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the pipeline.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "version": {
+            "type": "string",
+            "documentation": "<p>The version of the pipeline definition to retrieve. This parameter accepts the values <code>latest</code> (default) and <code>active</code>. Where <code>latest</code> indicates the last definition saved to the pipeline and <code>active</code> indicates the last definition of the pipeline that was activated.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "version"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the GetPipelineDefinition action.</p>",
+        "members": {
+          "pipeline_objects": {
+            "type": "list",
+            "documentation": "<p>An array of objects defined in the pipeline.</p>",
+            "serialized_name": "pipelineObjects",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>Identifier of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "documentation": "<p>Name of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                },
+                "fields": {
+                  "type": "list",
+                  "documentation": "<p>Key-value pairs that define the properties of the object.</p>",
+                  "serialized_name": "fields",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                    "members": {
+                      "key": {
+                        "type": "string",
+                        "documentation": "<p>The field identifier.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "key"
+                      },
+                      "string_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as a String.</p>",
+                        "min_length": 0,
+                        "max_length": 10240,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "stringValue"
+                      },
+                      "ref_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "refValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "list_pipelines": {
+      "name": "ListPipelines",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns a list of pipeline identifiers for all active pipelines. Identifiers are returned only for pipelines you have permission to access. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input to the ListPipelines action.</p>",
+        "members": {
+          "marker": {
+            "type": "string",
+            "documentation": "<p>The starting point for the results to be returned. The first time you call ListPipelines, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call ListPipelines again and pass the marker value from the response to retrieve the next set of results.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the ListPipelines action.</p>",
+        "members": {
+          "pipeline_id_list": {
+            "type": "list",
+            "documentation": "<p> A list of all the pipeline identifiers that your account has permission to access. If you require additional information about the pipelines, you can use these identifiers to call DescribePipelines and GetPipelineDefinition. </p>",
+            "serialized_name": "pipelineIdList",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains the name and identifier of a pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>Identifier of the pipeline that was assigned by AWS Data Pipeline. This is a string of the form <code>df-297EG78HU43EEXAMPLE</code>.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "documentation": "<p>Name of the pipeline.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p>If not null, indicates the starting point for the set of pipeline identifiers that the next call to ListPipelines will retrieve. If null, there are no more pipeline identifiers.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          },
+          "has_more_results": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, there are more results that can be obtained by a subsequent call to ListPipelines.</p>",
+            "serialized_name": "hasMoreResults"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "poll_for_task": {
+      "name": "PollForTask",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Task runners call this action to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the workerGroup parameter of the PollForTask call. The task returned by PollForTask may come from any of the pipelines that match the workerGroup value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner. </p> <p> If tasks are ready in the work queue, PollForTask returns a response immediately. If no tasks are available in the queue, PollForTask uses long-polling and holds on to a poll connection for up to a 90 seconds during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call PollForTask again on the same <code>workerGroup</code> until it receives a response, and this may take up to 90 seconds. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The data type passed in as input to the PollForTask action.</p>",
+        "members": {
+          "worker_group": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Indicates the type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to PollForTask. There are no wildcard values permitted in <code>workerGroup</code>, the string must be an exact, case-sensitive, match. </p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "workerGroup"
+          },
+          "hostname": {
+            "type": "string",
+            "documentation": "<p>The public DNS name of the calling task runner.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "hostname"
+          },
+          "instance_identity": {
+            "type": "structure",
+            "documentation": "<p>Identity information for the Amazon EC2 instance that is hosting the task runner. You can get this value by calling the URI, <code>http://169.254.169.254/latest/meta-data/instance-id</code>, from the EC2 instance. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html\">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p>",
+            "serialized_name": "instanceIdentity",
+            "members": {
+              "document": {
+                "type": "string",
+                "documentation": "<p>A description of an Amazon EC2 instance that is generated when the instance is launched and exposed to the instance via the instance metadata service in the form of a JSON representation of an object.</p>",
+                "min_length": 0,
+                "max_length": 1024,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "document"
+              },
+              "signature": {
+                "type": "string",
+                "documentation": "<p>A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.</p>",
+                "min_length": 0,
+                "max_length": 1024,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "signature"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the PollForTask action.</p>",
+        "members": {
+          "task_object": {
+            "type": "structure",
+            "documentation": "<p>An instance of PollForTaskResult, which contains an instance of TaskObject. The returned object contains all the information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is taskId, which contains an identifier for the task being assigned. The calling task runner uses taskId in subsequent calls to ReportTaskProgress and SetTaskStatus.</p>",
+            "serialized_name": "taskObject",
+            "members": {
+              "task_id": {
+                "type": "string",
+                "documentation": "<p>An internal identifier for the task. This ID is passed to the SetTaskStatus and ReportTaskProgress actions.</p>",
+                "min_length": 1,
+                "max_length": 2048,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "taskId"
+              },
+              "pipeline_id": {
+                "type": "string",
+                "documentation": "<p>Identifier of the pipeline that provided the task.</p>",
+                "min_length": 1,
+                "max_length": 1024,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "pipelineId"
+              },
+              "attempt_id": {
+                "type": "string",
+                "documentation": "<p>Identifier of the pipeline task attempt object. AWS Data Pipeline uses this value to track how many times a task is attempted.</p>",
+                "min_length": 1,
+                "max_length": 1024,
+                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                "serialized_name": "attemptId"
+              },
+              "objects": {
+                "type": "map",
+                "documentation": "<p>Connection information for the location where the task runner will publish the output of the task.</p>",
+                "serialized_name": "objects",
+                "keys": {
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                },
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "documentation": "<p>Identifier of the object.</p>",
+                      "min_length": 1,
+                      "max_length": 1024,
+                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                      "serialized_name": "id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "documentation": "<p>Name of the object.</p>",
+                      "min_length": 1,
+                      "max_length": 1024,
+                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                      "serialized_name": "name"
+                    },
+                    "fields": {
+                      "type": "list",
+                      "documentation": "<p>Key-value pairs that define the properties of the object.</p>",
+                      "serialized_name": "fields",
+                      "members": {
+                        "type": "structure",
+                        "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                        "members": {
+                          "key": {
+                            "type": "string",
+                            "documentation": "<p>The field identifier.</p>",
+                            "min_length": 1,
+                            "max_length": 256,
+                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                            "serialized_name": "key"
+                          },
+                          "string_value": {
+                            "type": "string",
+                            "documentation": "<p>The field value, expressed as a String.</p>",
+                            "min_length": 0,
+                            "max_length": 10240,
+                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                            "serialized_name": "stringValue"
+                          },
+                          "ref_value": {
+                            "type": "string",
+                            "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                            "min_length": 1,
+                            "max_length": 256,
+                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                            "serialized_name": "refValue"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified task was not found. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "put_pipeline_definition": {
+      "name": "PutPipelineDefinition",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> PutPipelineDefinition also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> </ol> </p> <p> Pipeline object definitions are passed to the PutPipelineDefinition action and returned by the GetPipelineDefinition action. </p> </examples>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input of the PutPipelineDefinition action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the pipeline to be configured.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "pipeline_objects": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>The objects that define the pipeline. These will overwrite the existing pipeline definition.</p>",
+            "serialized_name": "pipelineObjects",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p>Identifier of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p>Name of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                },
+                "fields": {
+                  "type": "list",
+                  "required": true,
+                  "documentation": "<p>Key-value pairs that define the properties of the object.</p>",
+                  "serialized_name": "fields",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                    "members": {
+                      "key": {
+                        "type": "string",
+                        "required": true,
+                        "documentation": "<p>The field identifier.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "key"
+                      },
+                      "string_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as a String.</p>",
+                        "min_length": 0,
+                        "max_length": 10240,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "stringValue"
+                      },
+                      "ref_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "refValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output of the PutPipelineDefinition action.</p>",
+        "members": {
+          "validation_errors": {
+            "type": "list",
+            "documentation": "<p>A list of the validation errors that are associated with the objects defined in <code>pipelineObjects</code>.</p>",
+            "serialized_name": "validationErrors",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Defines a validation error returned by PutPipelineDefinition or ValidatePipelineDefinition. Validation errors prevent pipeline activation. The set of validation errors that can be returned are defined by AWS Data Pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>The identifier of the object that contains the validation error.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "errors": {
+                  "type": "list",
+                  "documentation": "<p>A description of the validation error.</p>",
+                  "serialized_name": "errors",
+                  "members": {
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 10000,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "validation_warnings": {
+            "type": "list",
+            "documentation": "<p>A list of the validation warnings that are associated with the objects defined in <code>pipelineObjects</code>.</p>",
+            "serialized_name": "validationWarnings",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Defines a validation warning returned by PutPipelineDefinition or ValidatePipelineDefinition. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>The identifier of the object that contains the validation warning.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "warnings": {
+                  "type": "list",
+                  "documentation": "<p>A description of the validation warning.</p>",
+                  "serialized_name": "warnings",
+                  "members": {
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 10000,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "errored": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, there were validation errors. If errored is <code>True</code>, the pipeline definition is stored but cannot be activated until you correct the pipeline and call PutPipelineDefinition to commit the corrected pipeline.</p>",
+            "serialized_name": "errored"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "query_objects": {
+      "name": "QueryObjects",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Queries a pipeline for the names of objects that match a specified set of conditions.</p> <p>The objects returned by QueryObjects are paginated and then filtered by the value you set for query. This means the action may return an empty result set with a value set for marker. If <code>HasMoreResults</code> is set to <code>True</code>, you should continue to call QueryObjects, passing in the returned value for marker, until <code>HasMoreResults</code> returns <code>False</code>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the QueryObjects action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifier of the pipeline to be queried for object names.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "query": {
+            "type": "structure",
+            "documentation": "<p> Query that defines the objects to be returned. The Query object can contain a maximum of ten selectors. The conditions in the query are limited to top-level String fields in the object. These filters can be applied to components, instances, and attempts. </p>",
+            "serialized_name": "query",
+            "members": {
+              "selectors": {
+                "type": "list",
+                "documentation": "<p>List of selectors that define the query. An object must satisfy all of the selectors to match the query.</p>",
+                "serialized_name": "selectors",
+                "members": {
+                  "type": "structure",
+                  "documentation": "<p>A comparision that is used to determine whether a query should return this object.</p>",
+                  "members": {
+                    "field_name": {
+                      "type": "string",
+                      "documentation": "<p>The name of the field that the operator will be applied to. The field name is the \"key\" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.</p>",
+                      "min_length": 0,
+                      "max_length": 1024,
+                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                      "serialized_name": "fieldName"
+                    },
+                    "operator": {
+                      "type": "structure",
+                      "documentation": "<p>Contains a logical operation for comparing the value of a field with a specified value.</p>",
+                      "serialized_name": "operator",
+                      "members": {
+                        "type": {
+                          "type": "string",
+                          "documentation": "<p> The logical operation to be performed: equal (<code>EQ</code>), equal reference (<code>REF_EQ</code>), less than or equal (<code>LE</code>), greater than or equal (<code>GE</code>), or between (<code>BETWEEN</code>). Equal reference (<code>REF_EQ</code>) can be used only with reference fields. The other comparison types can be used only with String fields. The comparison types you can use apply only to certain object fields, as detailed below. </p> <p> The comparison operators EQ and REF_EQ act on the following fields: </p> <ul> <li>name</li> <li>@sphere</li> <li>parent</li> <li>@componentParent</li> <li>@instanceParent</li> <li>@status</li> <li>@scheduledStartTime</li> <li>@scheduledEndTime</li> <li>@actualStartTime</li> <li>@actualEndTime</li> </ul> <p> The comparison operators <code>GE</code>, <code>LE</code>, and <code>BETWEEN</code> act on the following fields: </p> <ul> <li>@scheduledStartTime</li> <li>@scheduledEndTime</li> <li>@actualStartTime</li> <li>@actualEndTime</li> </ul> <p>Note that fields beginning with the at sign (@) are read-only and set by the web service. When you name fields, you should choose names containing only alpha-numeric values, as symbols may be reserved by AWS Data Pipeline. User-defined fields that you add to a pipeline should prefix their name with the string \"my\".</p>",
+                          "serialized_name": "type",
+                          "enum": [
+                            "EQ",
+                            "REF_EQ",
+                            "LE",
+                            "GE",
+                            "BETWEEN"
+                          ]
+                        },
+                        "values": {
+                          "type": "list",
+                          "documentation": "<p>The value that the actual field value will be compared with.</p>",
+                          "serialized_name": "values",
+                          "members": {
+                            "type": "string",
+                            "min_length": 0,
+                            "max_length": 1024,
+                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "sphere": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p> Specifies whether the query applies to components or instances. Allowable values: <code>COMPONENT</code>, <code>INSTANCE</code>, <code>ATTEMPT</code>. </p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "sphere"
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The starting point for the results to be returned. The first time you call QueryObjects, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call QueryObjects again and pass the marker value from the response to retrieve the next set of results. </p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          },
+          "limit": {
+            "type": "integer",
+            "documentation": "<p>Specifies the maximum number of object names that QueryObjects will return in a single call. The default value is 100. </p>",
+            "serialized_name": "limit"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the QueryObjects action.</p>",
+        "members": {
+          "ids": {
+            "type": "list",
+            "documentation": "<p>A list of identifiers that match the query selectors.</p>",
+            "serialized_name": "ids",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1024,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "marker": {
+            "type": "string",
+            "documentation": "<p> The starting point for the results to be returned. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call QueryObjects again and pass the marker value from the response to retrieve the next set of results. </p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "marker"
+          },
+          "has_more_results": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, there are more results that can be obtained by a subsequent call to QueryObjects.</p>",
+            "serialized_name": "hasMoreResults"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "report_task_progress": {
+      "name": "ReportTaskProgress",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Updates the AWS Data Pipeline service on the progress of the calling task runner. When the task runner is assigned a task, it should call ReportTaskProgress to acknowledge that it has the task within 2 minutes. If the web service does not recieve this acknowledgement within the 2 minute window, it will assign the task in a subsequent PollForTask call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a <code>reportProgressTimeout</code> field in your pipeline. If a task runner does not report its status after 5 minutes, AWS Data Pipeline will assume that the task runner is unable to process the task and will reassign the task in a subsequent response to PollForTask. task runners should call ReportTaskProgress every 60 seconds. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the ReportTaskProgress action.</p>",
+        "members": {
+          "task_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifier of the task assigned to the task runner. This value is provided in the TaskObject that the service returns with the response for the PollForTask action.</p>",
+            "min_length": 1,
+            "max_length": 2048,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "taskId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the ReportTaskProgress action.</p>",
+        "members": {
+          "canceled": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, the calling task runner should cancel processing of the task. The task runner does not need to call SetTaskStatus for canceled tasks.</p>",
+            "serialized_name": "canceled"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified task was not found. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "report_task_runner_heartbeat": {
+      "name": "ReportTaskRunnerHeartbeat",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate that they are operational. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input for the ReportTaskRunnerHeartbeat action.</p>",
+        "members": {
+          "taskrunner_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identifier of the task runner. This value should be unique across your AWS account. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service provides a unique identifier when it launches the application. If you have written a custom task runner, you should assign a unique identifier for the task runner.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "taskrunnerId"
+          },
+          "worker_group": {
+            "type": "string",
+            "documentation": "<p>Indicates the type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to ReportTaskRunnerHeartbeat. There are no wildcard values permitted in <code>workerGroup</code>, the string must be an exact, case-sensitive, match.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "workerGroup"
+          },
+          "hostname": {
+            "type": "string",
+            "documentation": "<p>The public DNS name of the calling task runner.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "hostname"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the ReportTaskRunnerHeartbeat action.</p>",
+        "members": {
+          "terminate": {
+            "type": "boolean",
+            "documentation": "<p>Indicates whether the calling task runner should terminate. If <code>True</code>, the task runner that called ReportTaskRunnerHeartbeat should terminate. </p>",
+            "serialized_name": "terminate"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "set_status": {
+      "name": "SetStatus",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Requests that the status of an array of physical or logical pipeline objects be updated in the pipeline. This update may not occur immediately, but is eventually consistent. The status that can be set depends on the type of object.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input to the SetStatus action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifies the pipeline that contains the objects.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "object_ids": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>Identifies an array of objects. The corresponding objects can be either physical or components, but not a mix of both types.</p>",
+            "serialized_name": "objectIds",
+            "members": {
+              "type": "string",
+              "min_length": 1,
+              "max_length": 1024,
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+            }
+          },
+          "status": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Specifies the status to be set on all the objects in <code>objectIds</code>. For components, this can be either <code>PAUSE</code> or <code>RESUME</code>. For instances, this can be either <code>CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "status"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "set_task_status": {
+      "name": "SetTaskStatus",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p> Notifies AWS Data Pipeline that a task is completed and provides information about the final status. The task runner calls this action regardless of whether the task was sucessful. The task runner does not need to call SetTaskStatus for tasks that are canceled by the web service during a call to ReportTaskProgress. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input of the SetTaskStatus action.</p>",
+        "members": {
+          "task_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifies the task assigned to the task runner. This value is set in the TaskObject that is returned by the PollForTask action.</p>",
+            "min_length": 1,
+            "max_length": 2048,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "taskId"
+          },
+          "task_status": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>If <code>FINISHED</code>, the task successfully completed. If <code>FAILED</code> the task ended unsuccessfully. The <code>FALSE</code> value is used by preconditions.</p>",
+            "serialized_name": "taskStatus",
+            "enum": [
+              "FINISHED",
+              "FAILED",
+              "FALSE"
+            ]
+          },
+          "error_id": {
+            "type": "string",
+            "documentation": "<p>If an error occurred during the task, this value specifies an id value that represents the error. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with string \"Service_\" which is reserved by the system.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "errorId"
+          },
+          "error_message": {
+            "type": "string",
+            "documentation": "<p>If an error occurred during the task, this value specifies a text description of the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.</p>",
+            "serialized_name": "errorMessage"
+          },
+          "error_stack_trace": {
+            "type": "string",
+            "documentation": "<p>If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.</p>",
+            "min_length": 0,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "errorStackTrace"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>The output from the SetTaskStatus action.</p>",
+        "members": {
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified task was not found. </p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    },
+    "validate_pipeline_definition": {
+      "name": "ValidatePipelineDefinition",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Tests the pipeline definition with a set of validation checks to ensure that it is well formed and can run without error. </p> </examples>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>The input of the ValidatePipelineDefinition action.</p>",
+        "members": {
+          "pipeline_id": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>Identifies the pipeline whose definition is to be validated.</p>",
+            "min_length": 1,
+            "max_length": 1024,
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "serialized_name": "pipelineId"
+          },
+          "pipeline_objects": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>A list of objects that define the pipeline changes to validate against the pipeline.</p>",
+            "serialized_name": "pipelineObjects",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p>Identifier of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "name": {
+                  "type": "string",
+                  "required": true,
+                  "documentation": "<p>Name of the object.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "name"
+                },
+                "fields": {
+                  "type": "list",
+                  "required": true,
+                  "documentation": "<p>Key-value pairs that define the properties of the object.</p>",
+                  "serialized_name": "fields",
+                  "members": {
+                    "type": "structure",
+                    "documentation": "<p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>",
+                    "members": {
+                      "key": {
+                        "type": "string",
+                        "required": true,
+                        "documentation": "<p>The field identifier.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "key"
+                      },
+                      "string_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as a String.</p>",
+                        "min_length": 0,
+                        "max_length": 10240,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "stringValue"
+                      },
+                      "ref_value": {
+                        "type": "string",
+                        "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
+                        "min_length": 1,
+                        "max_length": 256,
+                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                        "serialized_name": "refValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Contains the output from the ValidatePipelineDefinition action.</p>",
+        "members": {
+          "validation_errors": {
+            "type": "list",
+            "documentation": "<p>Lists the validation errors that were found by ValidatePipelineDefinition.</p>",
+            "serialized_name": "validationErrors",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Defines a validation error returned by PutPipelineDefinition or ValidatePipelineDefinition. Validation errors prevent pipeline activation. The set of validation errors that can be returned are defined by AWS Data Pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>The identifier of the object that contains the validation error.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "errors": {
+                  "type": "list",
+                  "documentation": "<p>A description of the validation error.</p>",
+                  "serialized_name": "errors",
+                  "members": {
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 10000,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "validation_warnings": {
+            "type": "list",
+            "documentation": "<p>Lists the validation warnings that were found by ValidatePipelineDefinition.</p>",
+            "serialized_name": "validationWarnings",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Defines a validation warning returned by PutPipelineDefinition or ValidatePipelineDefinition. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.</p>",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "documentation": "<p>The identifier of the object that contains the validation warning.</p>",
+                  "min_length": 1,
+                  "max_length": 1024,
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "serialized_name": "id"
+                },
+                "warnings": {
+                  "type": "list",
+                  "documentation": "<p>A description of the validation warning.</p>",
+                  "serialized_name": "warnings",
+                  "members": {
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 10000,
+                    "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                  }
+                }
+              }
+            }
+          },
+          "errored": {
+            "type": "boolean",
+            "documentation": "<p>If <code>True</code>, there were validation errors.</p>",
+            "serialized_name": "errored"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "<p>An internal service error occurred.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "documentation": "<p>The specified pipeline has been deleted.</p>",
+          "members": {
+            "message": {
+              "type": "string",
+              "documentation": "<p>Description of the error message.</p>",
+              "serialized_name": "message"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

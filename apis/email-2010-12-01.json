@@ -1,0 +1,793 @@
+{
+  "type": "query",
+  "api_version": "2010-12-01",
+  "metadata": {
+    "endpoint_prefix": "email",
+    "result_wrapped": true,
+    "service_abbreviation": "Amazon SES",
+    "service_full_name": "Amazon Simple Email Service",
+    "signature_version": "v4",
+    "signing_name": "ses"
+  },
+  "documentation": "<fullname>Amazon Simple Email Service</fullname> <p> This is the API Reference for Amazon Simple Email Service (Amazon SES). This documentation is intended to be used in conjunction with the Amazon SES Developer Guide. </p> <p> For specific details on how to construct a service request, please consult the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide\">Amazon SES Developer Guide</a>. </p> The endpoint for Amazon SES is located at: <code>https://email.us-east-1.amazonaws.com</code>",
+  "operations": {
+    "delete_identity": {
+      "name": "DeleteIdentity",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Deletes the specified identity (email address or domain) from the list of verified identities.</p> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to delete an identity from the list of identities for the AWS Account.</p>",
+        "members": {
+          "identity": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identity to be removed from the list of identities for the AWS Account.</p>",
+            "serialized_name": "Identity"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "members": {
+        }
+      }
+    },
+    "delete_verified_email_address": {
+      "name": "DeleteVerifiedEmailAddress",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Deletes the specified email address from the list of verified addresses.</p> <important>The DeleteVerifiedEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The DeleteIdentity action is now preferred.</important> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to delete an address from the list of verified email addresses.</p>",
+        "members": {
+          "email_address": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>An email address to be removed from the list of verified addresses.</p>",
+            "serialized_name": "EmailAddress"
+          }
+        }
+      }
+    },
+    "get_identity_dkim_attributes": {
+      "name": "GetIdentityDkimAttributes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns the current status of Easy DKIM signing for an entity. For domain name identities, this action also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published.</p> <p>This action takes a list of identities as input and returns the following information for each:</p> <ul> <li>Whether Easy DKIM signing is enabled or disabled.</li> <li>A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.</li> <li>Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.</li> </ul> <p>This action is throttled at one request per second.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Given a list of verified identities, describes their DKIM attributes. The DKIM attributes of an email address identity includes whether DKIM signing is individually enabled or disabled for that address. The DKIM attributes of a domain name identity includes whether DKIM signing is enabled, as well as the DNS records (tokens) that must remain published in the domain name's DNS.</p>",
+        "members": {
+          "identities": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>A list of one or more verified identities - email addresses, domains, or both.</p>",
+            "serialized_name": "Identities",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a list of all the DKIM attributes for the specified identity.</p>",
+        "members": {
+          "dkim_attributes": {
+            "type": "map",
+            "documentation": "<p>The DKIM attributes for an email address or a domain. </p>",
+            "serialized_name": "DkimAttributes",
+            "keys": {
+              "type": "string"
+            },
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Represents the DKIM attributes of a verified email address or a domain.</p>",
+              "members": {
+                "dkim_enabled": {
+                  "type": "boolean",
+                  "documentation": "<p>True if DKIM signing is enabled for email sent from the identity; false otherwise.</p>",
+                  "serialized_name": "DkimEnabled"
+                },
+                "dkim_verification_status": {
+                  "type": "string",
+                  "documentation": "<p>Describes whether Amazon SES has successfully verified the DKIM DNS records (tokens) published in the domain name's DNS. (This only applies to domain identities, not email address identities.)</p>",
+                  "serialized_name": "DkimVerificationStatus",
+                  "enum": [
+                    "Pending",
+                    "Success",
+                    "Failed",
+                    "TemporaryFailure",
+                    "NotStarted"
+                  ]
+                },
+                "dkim_tokens": {
+                  "type": "list",
+                  "documentation": "<p>A set of character strings that represent the domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain. (This only applies to domain identities, not email address identities.)</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>",
+                  "serialized_name": "DkimTokens",
+                  "members": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_identity_notification_attributes": {
+      "name": "GetIdentityNotificationAttributes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes.</p> <p>This action is throttled at one request per second.</p> <p>For more information about feedback notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/bounce-complaint-notifications.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "identities": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>A list of one or more identities.</p>",
+            "serialized_name": "Identities",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Describes whether an identity has a bounce topic or complaint topic set, or feedback forwarding enabled.</p>",
+        "members": {
+          "notification_attributes": {
+            "type": "map",
+            "documentation": "<p>A map of Identity to IdentityNotificationAttributes.</p>",
+            "serialized_name": "NotificationAttributes",
+            "keys": {
+              "type": "string"
+            },
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Represents the notification attributes of an identity, including whether a bounce or complaint topic are set, and whether feedback forwarding is enabled.</p>",
+              "members": {
+                "bounce_topic": {
+                  "type": "string",
+                  "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic where Amazon SES will publish bounce notifications.</p>",
+                  "serialized_name": "BounceTopic"
+                },
+                "complaint_topic": {
+                  "type": "string",
+                  "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic where Amazon SES will publish complaint notifications.</p>",
+                  "serialized_name": "ComplaintTopic"
+                },
+                "forwarding_enabled": {
+                  "type": "boolean",
+                  "documentation": "<p>Describes whether Amazon SES will forward feedback as email. <code>true</code> indicates that Amazon SES will forward feedback as email, while <code>false</code> indicates that feedback will be published only to the specified Bounce and Complaint topics.</p>",
+                  "serialized_name": "ForwardingEnabled"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_identity_verification_attributes": {
+      "name": "GetIdentityVerificationAttributes",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Given a list of identities (email addresses and/or domains), returns the verification status and (for domain identities) the verification token for each identity.</p> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to provide the verification attributes for a list of identities.</p>",
+        "members": {
+          "identities": {
+            "type": "list",
+            "required": true,
+            "documentation": "<p>A list of identities.</p>",
+            "serialized_name": "Identities",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents the verification attributes for a list of identities.</p>",
+        "members": {
+          "verification_attributes": {
+            "type": "map",
+            "documentation": "<p>A map of Identities to IdentityVerificationAttributes objects.</p>",
+            "serialized_name": "VerificationAttributes",
+            "keys": {
+              "type": "string"
+            },
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Represents the verification attributes of a single identity.</p>",
+              "members": {
+                "verification_status": {
+                  "type": "string",
+                  "documentation": "<p>The verification status of the identity: \"Pending\", \"Success\", \"Failed\", or \"TemporaryFailure\".</p>",
+                  "serialized_name": "VerificationStatus",
+                  "enum": [
+                    "Pending",
+                    "Success",
+                    "Failed",
+                    "TemporaryFailure",
+                    "NotStarted"
+                  ]
+                },
+                "verification_token": {
+                  "type": "string",
+                  "documentation": "<p>The verification token for a domain identity. Null for email address identities.</p>",
+                  "serialized_name": "VerificationToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_send_quota": {
+      "name": "GetSendQuota",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns the user's current sending limits.</p> <p>This action is throttled at one request per second.</p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents the user's current activity limits returned from a successful <code>GetSendQuota</code> request. </p>",
+        "members": {
+          "max_24_hour_send": {
+            "type": "float",
+            "documentation": "<p>The maximum number of emails the user is allowed to send in a 24-hour interval.</p>",
+            "serialized_name": "Max24HourSend"
+          },
+          "max_send_rate": {
+            "type": "float",
+            "documentation": "<p>The maximum number of emails the user is allowed to send per second.</p>",
+            "serialized_name": "MaxSendRate"
+          },
+          "sent_last_24_hours": {
+            "type": "float",
+            "documentation": "<p>The number of emails sent during the previous 24 hours.</p>",
+            "serialized_name": "SentLast24Hours"
+          }
+        }
+      }
+    },
+    "get_send_statistics": {
+      "name": "GetSendStatistics",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns the user's sending statistics. The result is a list of data points, representing the last two weeks of sending activity. </p> <p>Each data point in the list contains statistics for a 15-minute interval.</p> <p>This action is throttled at one request per second.</p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a list of <code>SendDataPoint</code> items returned from a successful <code>GetSendStatistics</code> request. This list contains aggregated data from the previous two weeks of sending activity. </p>",
+        "members": {
+          "send_data_points": {
+            "type": "list",
+            "documentation": "<p>A list of data points, each of which represents 15 minutes of activity.</p>",
+            "serialized_name": "SendDataPoints",
+            "members": {
+              "type": "structure",
+              "documentation": "<p>Represents sending statistics data. Each <code>SendDataPoint</code> contains statistics for a 15-minute period of sending activity. </p>",
+              "members": {
+                "timestamp": {
+                  "type": "timestamp",
+                  "documentation": "<p>Time of the data point.</p>",
+                  "serialized_name": "Timestamp"
+                },
+                "delivery_attempts": {
+                  "type": "integer",
+                  "documentation": "<p>Number of emails that have been enqueued for sending.</p>",
+                  "serialized_name": "DeliveryAttempts"
+                },
+                "bounces": {
+                  "type": "integer",
+                  "documentation": "<p>Number of emails that have bounced.</p>",
+                  "serialized_name": "Bounces"
+                },
+                "complaints": {
+                  "type": "integer",
+                  "documentation": "<p>Number of unwanted emails that were rejected by recipients.</p>",
+                  "serialized_name": "Complaints"
+                },
+                "rejects": {
+                  "type": "integer",
+                  "documentation": "<p>Number of emails rejected by Amazon SES.</p>",
+                  "serialized_name": "Rejects"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list_identities": {
+      "name": "ListIdentities",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns a list containing all of the identities (email addresses and domains) for a specific AWS Account, regardless of verification status.</p> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to list all identities for the AWS Account.</p>",
+        "members": {
+          "identity_type": {
+            "type": "string",
+            "documentation": "<p>The type of the identities to list. Possible values are \"EmailAddress\" and \"Domain\". If this parameter is omitted, then all identities will be listed.</p>",
+            "serialized_name": "IdentityType",
+            "enum": [
+              "EmailAddress",
+              "Domain"
+            ]
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p>The token to use for pagination.</p>",
+            "serialized_name": "NextToken"
+          },
+          "max_items": {
+            "type": "integer",
+            "documentation": "<p>The maximum number of identities per page. Possible values are 1-100 inclusive.</p>",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a list of all verified identities for the AWS Account.</p>",
+        "members": {
+          "identities": {
+            "type": "list",
+            "documentation": "<p>A list of identities.</p>",
+            "serialized_name": "Identities",
+            "members": {
+              "type": "string"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "documentation": "<p>The token used for pagination.</p>",
+            "serialized_name": "NextToken"
+          }
+        }
+      }
+    },
+    "list_verified_email_addresses": {
+      "name": "ListVerifiedEmailAddresses",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns a list containing all of the email addresses that have been verified.</p> <important>The ListVerifiedEmailAddresses action is deprecated as of the May 15, 2012 release of Domain Verification. The ListIdentities action is now preferred.</important> <p>This action is throttled at one request per second.</p>",
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a list of all the email addresses verified for the current user.</p>",
+        "members": {
+          "verified_email_addresses": {
+            "type": "list",
+            "documentation": "<p>A list of email addresses that have been verified.</p>",
+            "serialized_name": "VerifiedEmailAddresses",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "send_email": {
+      "name": "SendEmail",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Composes an email message based on input data, and then immediately queues the message for sending. </p> <important> You can only send email from verified email addresses and domains. If you have not requested production access to Amazon SES, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>. </important> <p>The total size of the message cannot exceed 10 MB.</p> <p>Amazon SES has a limit on the total number of recipients per message: The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. </p> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your <i>sending quota</i> - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to send a single email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, message, reply-to, and return-path parts. This object can then be sent using the <code>SendEmail</code> action. </p>",
+        "members": {
+          "source": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identity's email address.</p> <p> By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href=\"http://tools.ietf.org/html/rfc2047\">RFC 2047</a>. </p>",
+            "serialized_name": "Source"
+          },
+          "destination": {
+            "type": "structure",
+            "required": true,
+            "documentation": "<p>The destination for this email, composed of To:, CC:, and BCC: fields.</p>",
+            "serialized_name": "Destination",
+            "members": {
+              "to_addresses": {
+                "type": "list",
+                "documentation": "<p>The To: field(s) of the message.</p>",
+                "serialized_name": "ToAddresses",
+                "members": {
+                  "type": "string"
+                }
+              },
+              "cc_addresses": {
+                "type": "list",
+                "documentation": "<p>The CC: field(s) of the message.</p>",
+                "serialized_name": "CcAddresses",
+                "members": {
+                  "type": "string"
+                }
+              },
+              "bcc_addresses": {
+                "type": "list",
+                "documentation": "<p>The BCC: field(s) of the message.</p>",
+                "serialized_name": "BccAddresses",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "message": {
+            "type": "structure",
+            "required": true,
+            "documentation": "<p>The message to be sent.</p>",
+            "serialized_name": "Message",
+            "members": {
+              "subject": {
+                "type": "structure",
+                "required": true,
+                "documentation": "<p>The subject of the message: A short summary of the content, which will appear in the recipient's inbox.</p>",
+                "serialized_name": "Subject",
+                "members": {
+                  "data": {
+                    "type": "string",
+                    "required": true,
+                    "documentation": "<p>The textual data of the content.</p>",
+                    "serialized_name": "Data"
+                  },
+                  "charset": {
+                    "type": "string",
+                    "documentation": "<p>The character set of the content.</p>",
+                    "serialized_name": "Charset"
+                  }
+                }
+              },
+              "body": {
+                "type": "structure",
+                "required": true,
+                "documentation": "<p>The message body.</p>",
+                "serialized_name": "Body",
+                "members": {
+                  "text": {
+                    "type": "structure",
+                    "documentation": "<p>The content of the message, in text format. Use this for text-based email clients, or clients on high-latency networks (such as mobile devices). </p>",
+                    "serialized_name": "Text",
+                    "members": {
+                      "data": {
+                        "type": "string",
+                        "required": true,
+                        "documentation": "<p>The textual data of the content.</p>",
+                        "serialized_name": "Data"
+                      },
+                      "charset": {
+                        "type": "string",
+                        "documentation": "<p>The character set of the content.</p>",
+                        "serialized_name": "Charset"
+                      }
+                    }
+                  },
+                  "html": {
+                    "type": "structure",
+                    "documentation": "<p>The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message. </p>",
+                    "serialized_name": "Html",
+                    "members": {
+                      "data": {
+                        "type": "string",
+                        "required": true,
+                        "documentation": "<p>The textual data of the content.</p>",
+                        "serialized_name": "Data"
+                      },
+                      "charset": {
+                        "type": "string",
+                        "documentation": "<p>The character set of the content.</p>",
+                        "serialized_name": "Charset"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "reply_to_addresses": {
+            "type": "list",
+            "documentation": "<p>The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply. </p>",
+            "serialized_name": "ReplyToAddresses",
+            "members": {
+              "type": "string"
+            }
+          },
+          "return_path": {
+            "type": "string",
+            "documentation": "<p>The email address to which bounce notifications are to be forwarded. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the <code>ReturnPath</code> parameter. </p>",
+            "serialized_name": "ReturnPath"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a unique message ID returned from a successful <code>SendEmail</code> request. </p>",
+        "members": {
+          "message_id": {
+            "type": "string",
+            "documentation": "<p>The unique message identifier returned from the <code>SendEmail</code> action. </p>",
+            "serialized_name": "MessageId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.",
+          "members": {
+          }
+        }
+      ]
+    },
+    "send_raw_email": {
+      "name": "SendRawEmail",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <important> You can only send email from verified email addresses and domains. If you have not requested production access to Amazon SES, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Amazon SES Developer Guide</a>. </important> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> <p>Amazon SES has a limit on the total number of recipients per message: The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group. </p> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your <i>sending quota</i> - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Amazon SES Developer Guide</a>. </p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to send a raw email message.</p> <p>This datatype can be used in application code to compose a message consisting of source, destination, and raw message text. This object can then be sent using the <code>SendRawEmail</code> action. </p>",
+        "members": {
+          "source": {
+            "type": "string",
+            "documentation": "<p>The identity's email address.</p> <p> By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href=\"http://tools.ietf.org/html/rfc2047\">RFC 2047</a>. </p> If you specify the <code>Source</code> parameter, then bounce notifications and complaints will be sent to this email address. This takes precedence over any <i>Return-Path</i> header that you might include in the raw text of the message.",
+            "serialized_name": "Source"
+          },
+          "destinations": {
+            "type": "list",
+            "documentation": "<p>A list of destinations for the message.</p>",
+            "serialized_name": "Destinations",
+            "members": {
+              "type": "string"
+            }
+          },
+          "raw_message": {
+            "type": "structure",
+            "required": true,
+            "documentation": "<p>The raw text of the message. The client is responsible for ensuring the following:</p> <p> <ul> <li>Message must contain a header and a body, separated by a blank line.</li> <li>All required header fields must be present.</li> <li>Each part of a multipart MIME message must be formatted properly.</li> <li>MIME content types must be among those supported by Amazon SES. For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html\">Amazon SES Developer Guide</a>. </li> <li>Content must be base64-encoded, if MIME requires it.</li> </ul> </p>",
+            "serialized_name": "RawMessage",
+            "members": {
+              "data": {
+                "type": "blob",
+                "required": true,
+                "documentation": "<p>The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). </p> <p>For more information, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html\">Amazon SES Developer Guide</a>. </p>",
+                "serialized_name": "Data"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a unique message ID returned from a successful <code>SendRawEmail</code> request. </p>",
+        "members": {
+          "message_id": {
+            "type": "string",
+            "documentation": "<p>The unique message identifier returned from the <code>SendRawEmail</code> action. </p>",
+            "serialized_name": "MessageId"
+          }
+        }
+      },
+      "errors": [
+        {
+          "type": "structure",
+          "documentation": "Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.",
+          "members": {
+          }
+        }
+      ]
+    },
+    "set_identity_dkim_enabled": {
+      "name": "SetIdentityDkimEnabled",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Enables or disables Easy DKIM signing of email sent from an identity:</p> <ul> <li>If Easy DKIM signing is enabled for a domain name identity (e.g., <code>example.com</code>), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (e.g., <code>user@example.com</code>).</li> <li>If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.</li> </ul> <p>For email addresses (e.g., <code>user@example.com</code>), you can only enable Easy DKIM signing if the corresponding domain (e.g., <code>example.com</code>) has been set up for Easy DKIM using the AWS Console or the <code>VerifyDomainDkim</code> action.</p> <p>This action is throttled at one request per second.</p> <p>For more information about Easy DKIM signing, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to enable or disable DKIM signing for an identity.</p>",
+        "members": {
+          "identity": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identity for which DKIM signing should be enabled or disabled.</p>",
+            "serialized_name": "Identity"
+          },
+          "dkim_enabled": {
+            "type": "boolean",
+            "required": true,
+            "documentation": "<p>Sets whether DKIM signing is enabled for an identity. Set to <code>true</code> to enable DKIM signing for this identity; <code>false</code> to disable it. </p>",
+            "serialized_name": "DkimEnabled"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "members": {
+        }
+      }
+    },
+    "set_identity_feedback_forwarding_enabled": {
+      "name": "SetIdentityFeedbackForwardingEnabled",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Given an identity (email address or domain), enables or disables whether Amazon SES forwards feedback notifications as email. Feedback forwarding may only be disabled when both complaint and bounce topics are set.</p> <p>This action is throttled at one request per second.</p> <p>For more information about feedback notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/bounce-complaint-notifications.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "members": {
+          "identity": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identity for which to set feedback notification forwarding. Examples: <code>user@example.com</code>, <code>example.com</code>.</p>",
+            "serialized_name": "Identity"
+          },
+          "forwarding_enabled": {
+            "type": "boolean",
+            "required": true,
+            "documentation": "<p>Sets whether Amazon SES will forward feedback notifications as email. <code>true</code> specifies that Amazon SES will forward feedback notifications as email, in addition to any Amazon SNS topic publishing otherwise specified. <code>false</code> specifies that Amazon SES will publish feedback notifications only through Amazon SNS. This value can only be set to <code>false</code> when topics are specified for both <code>Bounce</code> and <code>Complaint</code> topic types.</p>",
+            "serialized_name": "ForwardingEnabled"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "members": {
+        }
+      }
+    },
+    "set_identity_notification_topic": {
+      "name": "SetIdentityNotificationTopic",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Given an identity (email address or domain), sets the Amazon SNS topic to which Amazon SES will publish bounce and complaint notifications for emails sent with that identity as the <code>Source</code>. Publishing to topics may only be disabled when feedback forwarding is enabled.</p> <p>This action is throttled at one request per second.</p> <p>For more information about feedback notification, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/bounce-complaint-notifications.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request to set or clear an identity's notification topic.</p>",
+        "members": {
+          "identity": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The identity for which the topic will be set. Examples: <code>user@example.com</code>, <code>example.com</code>.</p>",
+            "serialized_name": "Identity"
+          },
+          "notification_type": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The type of feedback notifications that will be published to the specified topic.</p>",
+            "serialized_name": "NotificationType",
+            "enum": [
+              "Bounce",
+              "Complaint"
+            ]
+          },
+          "sns_topic": {
+            "type": "string",
+            "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic. If the parameter is omitted from the request or a null value is passed, the topic is cleared and publishing is disabled.</p>",
+            "serialized_name": "SnsTopic"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "members": {
+        }
+      }
+    },
+    "verify_domain_dkim": {
+      "name": "VerifyDomainDkim",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Returns a set of DKIM tokens for a domain. DKIM <i>tokens</i> are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain.</p> <p>This action is throttled at one request per second.</p> <p>To enable or disable Easy DKIM signing for a domain, use the <code>SetIdentityDkimEnabled</code> action.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to begin DKIM verification for a domain.</p>",
+        "members": {
+          "domain": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The name of the domain to be verified for Easy DKIM signing.</p>",
+            "serialized_name": "Domain"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents the DNS records that must be published in the domain name's DNS to complete DKIM setup.</p>",
+        "members": {
+          "dkim_tokens": {
+            "type": "list",
+            "documentation": "<p>A set of character strings that represent the domain's identity. If the identity is an email address, the tokens represent the domain of that address.</p> <p>Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign emails originating from that domain.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html\">Amazon SES Developer Guide</a>.</p>",
+            "serialized_name": "DkimTokens",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "verify_domain_identity": {
+      "name": "VerifyDomainIdentity",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Verifies a domain.</p> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to begin domain verification.</p>",
+        "members": {
+          "domain": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The domain to be verified.</p>",
+            "serialized_name": "Domain"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>Represents a token used for domain ownership verification.</p>",
+        "members": {
+          "verification_token": {
+            "type": "string",
+            "documentation": "<p>A TXT record that must be placed in the DNS settings for the domain, in order to complete domain verification.</p>",
+            "serialized_name": "VerificationToken"
+          }
+        }
+      }
+    },
+    "verify_email_address": {
+      "name": "VerifyEmailAddress",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <important>The VerifyEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The VerifyEmailIdentity action is now preferred.</important> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to begin email address verification.</p>",
+        "members": {
+          "email_address": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The email address to be verified.</p>",
+            "serialized_name": "EmailAddress"
+          }
+        }
+      }
+    },
+    "verify_email_identity": {
+      "name": "VerifyEmailIdentity",
+      "http_method": "POST",
+      "http_path": "/",
+      "documentation": "<p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <p>This action is throttled at one request per second.</p>",
+      "input": {
+        "type": "structure",
+        "documentation": "<p>Represents a request instructing the service to begin email address verification.</p>",
+        "members": {
+          "email_address": {
+            "type": "string",
+            "required": true,
+            "documentation": "<p>The email address to be verified.</p>",
+            "serialized_name": "EmailAddress"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "documentation": "<p>An empty element. Receiving this element indicates that the request completed successfully.</p>",
+        "members": {
+        }
+      }
+    }
+  }
+}
