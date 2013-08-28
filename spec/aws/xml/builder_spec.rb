@@ -107,7 +107,7 @@ module Aws
               'members' => {
                 'encoding' => {
                   'type' => 'string',
-                  'xmlattribute' => true,
+                  'metadata' => { 'xmlattribute' => true },
                   'serialized_name' => 'encode',
                 },
                 'description' => { 'type' => 'string' },

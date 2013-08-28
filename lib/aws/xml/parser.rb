@@ -109,7 +109,7 @@ module Aws
       end
 
       def flat?(shape)
-        shape.metadata && !!shape.metadata['flattened']
+        !!shape.metadata['flattened']
       end
 
     end

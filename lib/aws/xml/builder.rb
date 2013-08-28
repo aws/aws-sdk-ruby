@@ -49,7 +49,7 @@ module Aws
           node(name, shape, structure_attrs(shape, values)) do
             shape.members.each_pair do |member_name, member_shape|
               if values.key?(member_name)
-                next if member_shape.xmlattribute
+                next if xml_attribute?(member_shape)
                 mname = member_shape.serialized_name
                 member(mname, member_shape, values[member_name])
               end
@@ -60,7 +60,7 @@ module Aws
 
       def structure_attrs(shape, values)
         shape.members.inject({}) do |attrs, (member_name, member_shape)|
-          if member_shape.xmlattribute && values.key?(member_name)
+          if xml_attribute?(member_shape) && values.key?(member_name)
             attrs[member_shape.serialized_name] = values[member_name]
           end
           attrs
@@ -68,7 +68,7 @@ module Aws
       end
 
       def list(name, shape, values)
-        if shape.metadata && shape.metadata['flattened']
+        if shape.metadata['flattened']
           values.each do |value|
             member(name, shape.members, value)
           end
@@ -133,6 +133,10 @@ module Aws
         else
           {}
         end
+      end
+
+      def xml_attribute?(shape)
+        !!shape.metadata['xmlattribute']
       end
 
     end
