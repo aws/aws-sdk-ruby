@@ -17,6 +17,8 @@
 - :name: ActivateLicense
   :method: :activate_license
   :inputs:
+    DryRun:
+    - :boolean
     LicenseId:
     - :string
     - :required
@@ -27,6 +29,8 @@
 - :name: AllocateAddress
   :method: :allocate_address
   :inputs:
+    DryRun:
+    - :boolean
     Domain:
     - :string
   :outputs: {}
@@ -48,6 +52,8 @@
 - :name: AssociateAddress
   :method: :associate_address
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     PublicIp:
@@ -64,6 +70,8 @@
 - :name: AssociateDhcpOptions
   :method: :associate_dhcp_options
   :inputs:
+    DryRun:
+    - :boolean
     DhcpOptionsId:
     - :string
     - :required
@@ -74,6 +82,8 @@
 - :name: AssociateRouteTable
   :method: :associate_route_table
   :inputs:
+    DryRun:
+    - :boolean
     SubnetId:
     - :string
     - :required
@@ -84,6 +94,8 @@
 - :name: AttachInternetGateway
   :method: :attach_internet_gateway
   :inputs:
+    DryRun:
+    - :boolean
     InternetGatewayId:
     - :string
     - :required
@@ -94,6 +106,8 @@
 - :name: AttachNetworkInterface
   :method: :attach_network_interface
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :string
     - :required
@@ -107,6 +121,8 @@
 - :name: AttachVolume
   :method: :attach_volume
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -125,6 +141,8 @@
 - :name: AttachVpnGateway
   :method: :attach_vpn_gateway
   :inputs:
+    DryRun:
+    - :boolean
     VpnGatewayId:
     - :string
     - :required
@@ -135,6 +153,8 @@
 - :name: AuthorizeSecurityGroupEgress
   :method: :authorize_security_group_egress
   :inputs:
+    DryRun:
+    - :boolean
     GroupId:
     - :string
     - :required
@@ -186,6 +206,8 @@
 - :name: AuthorizeSecurityGroupIngress
   :method: :authorize_security_group_ingress
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     GroupId:
@@ -238,6 +260,8 @@
 - :name: BundleInstance
   :method: :bundle_instance
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -271,6 +295,8 @@
 - :name: CancelBundleTask
   :method: :cancel_bundle_task
   :inputs:
+    DryRun:
+    - :boolean
     BundleId:
     - :string
     - :required
@@ -285,6 +311,8 @@
 - :name: CancelConversionTask
   :method: :cancel_conversion_task
   :inputs:
+    DryRun:
+    - :boolean
     ConversionTaskId:
     - :string
     - :required
@@ -348,6 +376,8 @@
 - :name: CancelSpotInstanceRequests
   :method: :cancel_spot_instance_requests
   :inputs:
+    DryRun:
+    - :boolean
     SpotInstanceRequestId:
     - :list:
       - :string
@@ -364,6 +394,8 @@
 - :name: ConfirmProductInstance
   :method: :confirm_product_instance
   :inputs:
+    DryRun:
+    - :boolean
     ProductCode:
     - :string
     - :required
@@ -374,6 +406,8 @@
 - :name: CopyImage
   :method: :copy_image
   :inputs:
+    DryRun:
+    - :boolean
     SourceRegion:
     - :string
     - :required
@@ -391,6 +425,8 @@
 - :name: CopySnapshot
   :method: :copy_snapshot
   :inputs:
+    DryRun:
+    - :boolean
     SourceRegion:
     - :string
     - :required
@@ -403,6 +439,8 @@
 - :name: CreateCustomerGateway
   :method: :create_customer_gateway
   :inputs:
+    DryRun:
+    - :boolean
     Type:
     - :string
     - :required
@@ -426,6 +464,8 @@
 - :name: CreateDhcpOptions
   :method: :create_dhcp_options
   :inputs:
+    DryRun:
+    - :boolean
     DhcpConfiguration:
     - :list:
       - :structure:
@@ -464,6 +504,8 @@
 - :name: CreateImage
   :method: :create_image
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -523,7 +565,9 @@
   :outputs: {}
 - :name: CreateInternetGateway
   :method: :create_internet_gateway
-  :inputs: {}
+  :inputs:
+    DryRun:
+    - :boolean
   :outputs:
     :children:
       internetGateway:
@@ -543,6 +587,8 @@
 - :name: CreateKeyPair
   :method: :create_key_pair
   :inputs:
+    DryRun:
+    - :boolean
     KeyName:
     - :string
     - :required
@@ -550,6 +596,8 @@
 - :name: CreateNetworkAcl
   :method: :create_network_acl
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :string
     - :required
@@ -597,6 +645,8 @@
 - :name: CreateNetworkAclEntry
   :method: :create_network_acl_entry
   :inputs:
+    DryRun:
+    - :boolean
     NetworkAclId:
     - :string
     - :required
@@ -653,6 +703,8 @@
           - :boolean
     SecondaryPrivateIpAddressCount:
     - :integer
+    DryRun:
+    - :boolean
   :outputs:
     :children:
       networkInterface:
@@ -693,6 +745,8 @@
 - :name: CreatePlacementGroup
   :method: :create_placement_group
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     - :required
@@ -766,6 +820,8 @@
 - :name: CreateRoute
   :method: :create_route
   :inputs:
+    DryRun:
+    - :boolean
     RouteTableId:
     - :string
     - :required
@@ -782,6 +838,8 @@
 - :name: CreateRouteTable
   :method: :create_route_table
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :string
     - :required
@@ -819,6 +877,8 @@
 - :name: CreateSecurityGroup
   :method: :create_security_group
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     - :required
@@ -832,6 +892,8 @@
 - :name: CreateSnapshot
   :method: :create_snapshot
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -852,6 +914,8 @@
 - :name: CreateSpotDatafeedSubscription
   :method: :create_spot_datafeed_subscription
   :inputs:
+    DryRun:
+    - :boolean
     Bucket:
     - :string
     - :required
@@ -861,6 +925,8 @@
 - :name: CreateSubnet
   :method: :create_subnet
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :string
     - :required
@@ -888,6 +954,8 @@
 - :name: CreateTags
   :method: :create_tags
   :inputs:
+    DryRun:
+    - :boolean
     ResourceId:
     - :list:
       - :string
@@ -906,6 +974,8 @@
 - :name: CreateVolume
   :method: :create_volume
   :inputs:
+    DryRun:
+    - :boolean
     Size:
     - :integer
     SnapshotId:
@@ -945,6 +1015,8 @@
 - :name: CreateVpc
   :method: :create_vpc
   :inputs:
+    DryRun:
+    - :boolean
     CidrBlock:
     - :string
     - :required
@@ -965,6 +1037,8 @@
 - :name: CreateVpnConnection
   :method: :create_vpn_connection
   :inputs:
+    DryRun:
+    - :boolean
     Type:
     - :string
     - :required
@@ -1022,6 +1096,8 @@
 - :name: CreateVpnGateway
   :method: :create_vpn_gateway
   :inputs:
+    DryRun:
+    - :boolean
     Type:
     - :string
     - :required
@@ -1048,6 +1124,8 @@
 - :name: DeactivateLicense
   :method: :deactivate_license
   :inputs:
+    DryRun:
+    - :boolean
     LicenseId:
     - :string
     - :required
@@ -1058,6 +1136,8 @@
 - :name: DeleteCustomerGateway
   :method: :delete_customer_gateway
   :inputs:
+    DryRun:
+    - :boolean
     CustomerGatewayId:
     - :string
     - :required
@@ -1065,6 +1145,8 @@
 - :name: DeleteDhcpOptions
   :method: :delete_dhcp_options
   :inputs:
+    DryRun:
+    - :boolean
     DhcpOptionsId:
     - :string
     - :required
@@ -1072,6 +1154,8 @@
 - :name: DeleteInternetGateway
   :method: :delete_internet_gateway
   :inputs:
+    DryRun:
+    - :boolean
     InternetGatewayId:
     - :string
     - :required
@@ -1079,6 +1163,8 @@
 - :name: DeleteKeyPair
   :method: :delete_key_pair
   :inputs:
+    DryRun:
+    - :boolean
     KeyName:
     - :string
     - :required
@@ -1086,6 +1172,8 @@
 - :name: DeleteNetworkAcl
   :method: :delete_network_acl
   :inputs:
+    DryRun:
+    - :boolean
     NetworkAclId:
     - :string
     - :required
@@ -1093,6 +1181,8 @@
 - :name: DeleteNetworkAclEntry
   :method: :delete_network_acl_entry
   :inputs:
+    DryRun:
+    - :boolean
     NetworkAclId:
     - :string
     - :required
@@ -1106,6 +1196,8 @@
 - :name: DeleteNetworkInterface
   :method: :delete_network_interface
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :string
     - :required
@@ -1113,6 +1205,8 @@
 - :name: DeletePlacementGroup
   :method: :delete_placement_group
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     - :required
@@ -1120,6 +1214,8 @@
 - :name: DeleteRoute
   :method: :delete_route
   :inputs:
+    DryRun:
+    - :boolean
     RouteTableId:
     - :string
     - :required
@@ -1130,6 +1226,8 @@
 - :name: DeleteRouteTable
   :method: :delete_route_table
   :inputs:
+    DryRun:
+    - :boolean
     RouteTableId:
     - :string
     - :required
@@ -1137,6 +1235,8 @@
 - :name: DeleteSecurityGroup
   :method: :delete_security_group
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     GroupId:
@@ -1145,17 +1245,23 @@
 - :name: DeleteSnapshot
   :method: :delete_snapshot
   :inputs:
+    DryRun:
+    - :boolean
     SnapshotId:
     - :string
     - :required
   :outputs: {}
 - :name: DeleteSpotDatafeedSubscription
   :method: :delete_spot_datafeed_subscription
-  :inputs: {}
+  :inputs:
+    DryRun:
+    - :boolean
   :outputs: {}
 - :name: DeleteSubnet
   :method: :delete_subnet
   :inputs:
+    DryRun:
+    - :boolean
     SubnetId:
     - :string
     - :required
@@ -1163,6 +1269,8 @@
 - :name: DeleteTags
   :method: :delete_tags
   :inputs:
+    DryRun:
+    - :boolean
     ResourceId:
     - :list:
       - :string
@@ -1180,6 +1288,8 @@
 - :name: DeleteVolume
   :method: :delete_volume
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -1187,6 +1297,8 @@
 - :name: DeleteVpc
   :method: :delete_vpc
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :string
     - :required
@@ -1194,6 +1306,8 @@
 - :name: DeleteVpnConnection
   :method: :delete_vpn_connection
   :inputs:
+    DryRun:
+    - :boolean
     VpnConnectionId:
     - :string
     - :required
@@ -1211,6 +1325,8 @@
 - :name: DeleteVpnGateway
   :method: :delete_vpn_gateway
   :inputs:
+    DryRun:
+    - :boolean
     VpnGatewayId:
     - :string
     - :required
@@ -1218,6 +1334,8 @@
 - :name: DeregisterImage
   :method: :deregister_image
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :string
     - :required
@@ -1225,6 +1343,8 @@
 - :name: DescribeAccountAttributes
   :method: :describe_account_attributes
   :inputs:
+    DryRun:
+    - :boolean
     AttributeName:
     - :list:
       - :string
@@ -1247,6 +1367,8 @@
 - :name: DescribeAddresses
   :method: :describe_addresses
   :inputs:
+    DryRun:
+    - :boolean
     PublicIp:
     - :list:
       - :string
@@ -1279,6 +1401,8 @@
 - :name: DescribeAvailabilityZones
   :method: :describe_availability_zones
   :inputs:
+    DryRun:
+    - :boolean
     ZoneName:
     - :list:
       - :string
@@ -1311,6 +1435,8 @@
 - :name: DescribeBundleTasks
   :method: :describe_bundle_tasks
   :inputs:
+    DryRun:
+    - :boolean
     BundleId:
     - :list:
       - :string
@@ -1341,6 +1467,8 @@
 - :name: DescribeConversionTasks
   :method: :describe_conversion_tasks
   :inputs:
+    DryRun:
+    - :boolean
     Filter:
     - :list:
       - :structure:
@@ -1404,6 +1532,8 @@
 - :name: DescribeCustomerGateways
   :method: :describe_customer_gateways
   :inputs:
+    DryRun:
+    - :boolean
     CustomerGatewayId:
     - :list:
       - :string
@@ -1438,6 +1568,8 @@
 - :name: DescribeDhcpOptions
   :method: :describe_dhcp_options
   :inputs:
+    DryRun:
+    - :boolean
     DhcpOptionsId:
     - :list:
       - :string
@@ -1498,6 +1630,8 @@
 - :name: DescribeImageAttribute
   :method: :describe_image_attribute
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :string
     - :required
@@ -1536,6 +1670,8 @@
 - :name: DescribeImages
   :method: :describe_images
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :list:
       - :string
@@ -1602,6 +1738,8 @@
 - :name: DescribeInstanceAttribute
   :method: :describe_instance_attribute
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -1640,6 +1778,8 @@
 - :name: DescribeInstanceStatus
   :method: :describe_instance_status
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -1709,6 +1849,8 @@
 - :name: DescribeInstances
   :method: :describe_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -1831,6 +1973,8 @@
 - :name: DescribeInternetGateways
   :method: :describe_internet_gateways
   :inputs:
+    DryRun:
+    - :boolean
     InternetGatewayId:
     - :list:
       - :string
@@ -1869,6 +2013,8 @@
 - :name: DescribeKeyPairs
   :method: :describe_key_pairs
   :inputs:
+    DryRun:
+    - :boolean
     KeyName:
     - :list:
       - :string
@@ -1897,6 +2043,8 @@
 - :name: DescribeLicenses
   :method: :describe_licenses
   :inputs:
+    DryRun:
+    - :boolean
     LicenseId:
     - :list:
       - :string
@@ -1942,6 +2090,8 @@
 - :name: DescribeNetworkAcls
   :method: :describe_network_acls
   :inputs:
+    DryRun:
+    - :boolean
     NetworkAclId:
     - :list:
       - :string
@@ -2005,6 +2155,8 @@
 - :name: DescribeNetworkInterfaceAttribute
   :method: :describe_network_interface_attribute
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :string
     - :required
@@ -2040,6 +2192,8 @@
 - :name: DescribeNetworkInterfaces
   :method: :describe_network_interfaces
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :list:
       - :string
@@ -2100,6 +2254,8 @@
 - :name: DescribePlacementGroups
   :method: :describe_placement_groups
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :list:
       - :string
@@ -2125,6 +2281,8 @@
 - :name: DescribeRegions
   :method: :describe_regions
   :inputs:
+    DryRun:
+    - :boolean
     RegionName:
     - :list:
       - :string
@@ -2150,6 +2308,8 @@
 - :name: DescribeReservedInstances
   :method: :describe_reserved_instances
   :inputs:
+    DryRun:
+    - :boolean
     ReservedInstancesId:
     - :list:
       - :string
@@ -2260,6 +2420,8 @@
 - :name: DescribeReservedInstancesOfferings
   :method: :describe_reserved_instances_offerings
   :inputs:
+    DryRun:
+    - :boolean
     ReservedInstancesOfferingId:
     - :list:
       - :string
@@ -2287,6 +2449,14 @@
     NextToken:
     - :string
     MaxResults:
+    - :integer
+    IncludeMarketplace:
+    - :boolean
+    MinDuration:
+    - :long
+    MaxDuration:
+    - :long
+    MaxInstanceCount:
     - :integer
   :outputs:
     :children:
@@ -2328,6 +2498,8 @@
 - :name: DescribeRouteTables
   :method: :describe_route_tables
   :inputs:
+    DryRun:
+    - :boolean
     RouteTableId:
     - :list:
       - :string
@@ -2381,6 +2553,8 @@
 - :name: DescribeSecurityGroups
   :method: :describe_security_groups
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :list:
       - :string
@@ -2466,6 +2640,8 @@
 - :name: DescribeSnapshotAttribute
   :method: :describe_snapshot_attribute
   :inputs:
+    DryRun:
+    - :boolean
     SnapshotId:
     - :string
     - :required
@@ -2489,6 +2665,8 @@
 - :name: DescribeSnapshots
   :method: :describe_snapshots
   :inputs:
+    DryRun:
+    - :boolean
     SnapshotId:
     - :list:
       - :string
@@ -2535,11 +2713,15 @@
               :name: :snapshot_index
 - :name: DescribeSpotDatafeedSubscription
   :method: :describe_spot_datafeed_subscription
-  :inputs: {}
+  :inputs:
+    DryRun:
+    - :boolean
   :outputs: {}
 - :name: DescribeSpotInstanceRequests
   :method: :describe_spot_instance_requests
   :inputs:
+    DryRun:
+    - :boolean
     SpotInstanceRequestId:
     - :list:
       - :string
@@ -2624,6 +2806,8 @@
                                     :type: :boolean
                           secondaryPrivateIpAddressCount:
                             :type: :integer
+                          associatePublicIpAddress:
+                            :type: :boolean
                   ebsOptimized:
                     :type: :boolean
               createTime:
@@ -2637,6 +2821,8 @@
 - :name: DescribeSpotPriceHistory
   :method: :describe_spot_price_history
   :inputs:
+    DryRun:
+    - :boolean
     StartTime:
     - :timestamp
     EndTime:
@@ -2679,6 +2865,8 @@
 - :name: DescribeSubnets
   :method: :describe_subnets
   :inputs:
+    DryRun:
+    - :boolean
     SubnetId:
     - :list:
       - :string
@@ -2717,6 +2905,8 @@
 - :name: DescribeTags
   :method: :describe_tags
   :inputs:
+    DryRun:
+    - :boolean
     Filter:
     - :list:
       - :structure:
@@ -2744,6 +2934,8 @@
 - :name: DescribeVolumeAttribute
   :method: :describe_volume_attribute
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -2764,6 +2956,8 @@
 - :name: DescribeVolumeStatus
   :method: :describe_volume_status
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :list:
       - :string
@@ -2819,6 +3013,8 @@
 - :name: DescribeVolumes
   :method: :describe_volumes
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :list:
       - :string
@@ -2871,6 +3067,8 @@
 - :name: DescribeVpcAttribute
   :method: :describe_vpc_attribute
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :string
     - :required
@@ -2889,6 +3087,8 @@
 - :name: DescribeVpcs
   :method: :describe_vpcs
   :inputs:
+    DryRun:
+    - :boolean
     VpcId:
     - :list:
       - :string
@@ -2923,6 +3123,8 @@
 - :name: DescribeVpnConnections
   :method: :describe_vpn_connections
   :inputs:
+    DryRun:
+    - :boolean
     VpnConnectionId:
     - :list:
       - :string
@@ -2978,6 +3180,8 @@
 - :name: DescribeVpnGateways
   :method: :describe_vpn_gateways
   :inputs:
+    DryRun:
+    - :boolean
     VpnGatewayId:
     - :list:
       - :string
@@ -3018,6 +3222,8 @@
 - :name: DetachInternetGateway
   :method: :detach_internet_gateway
   :inputs:
+    DryRun:
+    - :boolean
     InternetGatewayId:
     - :string
     - :required
@@ -3028,6 +3234,8 @@
 - :name: DetachNetworkInterface
   :method: :detach_network_interface
   :inputs:
+    DryRun:
+    - :boolean
     AttachmentId:
     - :string
     - :required
@@ -3037,6 +3245,8 @@
 - :name: DetachVolume
   :method: :detach_volume
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -3055,6 +3265,8 @@
 - :name: DetachVpnGateway
   :method: :detach_vpn_gateway
   :inputs:
+    DryRun:
+    - :boolean
     VpnGatewayId:
     - :string
     - :required
@@ -3075,6 +3287,8 @@
 - :name: DisassociateAddress
   :method: :disassociate_address
   :inputs:
+    DryRun:
+    - :boolean
     PublicIp:
     - :string
     AssociationId:
@@ -3083,6 +3297,8 @@
 - :name: DisassociateRouteTable
   :method: :disassociate_route_table
   :inputs:
+    DryRun:
+    - :boolean
     AssociationId:
     - :string
     - :required
@@ -3100,6 +3316,8 @@
 - :name: EnableVolumeIO
   :method: :enable_volume_io
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -3107,6 +3325,8 @@
 - :name: GetConsoleOutput
   :method: :get_console_output
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -3117,6 +3337,8 @@
 - :name: GetPasswordData
   :method: :get_password_data
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -3127,16 +3349,18 @@
 - :name: ImportInstance
   :method: :import_instance
   :inputs:
+    DryRun:
+    - :boolean
     Description:
     - :string
     LaunchSpecification:
     - :structure:
         Architecture:
         - :string
-        SecurityGroup:
+        GroupName:
         - :list:
           - :string
-        - :rename: securityGroups
+        - :rename: groupNames
         AdditionalInfo:
         - :string
         UserData:
@@ -3152,36 +3376,10 @@
             - :string
             Tenancy:
             - :string
-        BlockDeviceMapping:
-        - :list:
-          - :structure:
-              VirtualName:
-              - :string
-              - :rename: VirtualName
-              DeviceName:
-              - :string
-              - :rename: DeviceName
-              Ebs:
-              - :structure:
-                  SnapshotId:
-                  - :string
-                  VolumeSize:
-                  - :integer
-                  DeleteOnTermination:
-                  - :boolean
-                  VolumeType:
-                  - :string
-                  Iops:
-                  - :integer
-              NoDevice:
-              - :string
-        - :rename: blockDeviceMappings
         Monitoring:
         - :boolean
         SubnetId:
         - :string
-        DisableApiTermination:
-        - :boolean
         InstanceInitiatedShutdownBehavior:
         - :string
         PrivateIpAddress:
@@ -3255,6 +3453,8 @@
 - :name: ImportKeyPair
   :method: :import_key_pair
   :inputs:
+    DryRun:
+    - :boolean
     KeyName:
     - :string
     - :required
@@ -3265,6 +3465,8 @@
 - :name: ImportVolume
   :method: :import_volume
   :inputs:
+    DryRun:
+    - :boolean
     AvailabilityZone:
     - :string
     Image:
@@ -3329,6 +3531,8 @@
 - :name: ModifyImageAttribute
   :method: :modify_image_attribute
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :string
     - :required
@@ -3378,6 +3582,8 @@
 - :name: ModifyInstanceAttribute
   :method: :modify_instance_attribute
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -3441,6 +3647,8 @@
 - :name: ModifyNetworkInterfaceAttribute
   :method: :modify_network_interface_attribute
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :string
     - :required
@@ -3466,6 +3674,8 @@
 - :name: ModifySnapshotAttribute
   :method: :modify_snapshot_attribute
   :inputs:
+    DryRun:
+    - :boolean
     SnapshotId:
     - :string
     - :required
@@ -3505,6 +3715,8 @@
 - :name: ModifyVolumeAttribute
   :method: :modify_volume_attribute
   :inputs:
+    DryRun:
+    - :boolean
     VolumeId:
     - :string
     - :required
@@ -3530,6 +3742,8 @@
 - :name: MonitorInstances
   :method: :monitor_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -3546,6 +3760,8 @@
 - :name: PurchaseReservedInstancesOffering
   :method: :purchase_reserved_instances_offering
   :inputs:
+    DryRun:
+    - :boolean
     ReservedInstancesOfferingId:
     - :string
     - :required
@@ -3562,6 +3778,8 @@
 - :name: RebootInstances
   :method: :reboot_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -3571,6 +3789,8 @@
 - :name: RegisterImage
   :method: :register_image
   :inputs:
+    DryRun:
+    - :boolean
     ImageLocation:
     - :string
     Name:
@@ -3613,6 +3833,8 @@
 - :name: ReleaseAddress
   :method: :release_address
   :inputs:
+    DryRun:
+    - :boolean
     PublicIp:
     - :string
     AllocationId:
@@ -3621,6 +3843,8 @@
 - :name: ReplaceNetworkAclAssociation
   :method: :replace_network_acl_association
   :inputs:
+    DryRun:
+    - :boolean
     AssociationId:
     - :string
     - :required
@@ -3631,6 +3855,8 @@
 - :name: ReplaceNetworkAclEntry
   :method: :replace_network_acl_entry
   :inputs:
+    DryRun:
+    - :boolean
     NetworkAclId:
     - :string
     - :required
@@ -3666,6 +3892,8 @@
 - :name: ReplaceRoute
   :method: :replace_route
   :inputs:
+    DryRun:
+    - :boolean
     RouteTableId:
     - :string
     - :required
@@ -3682,6 +3910,8 @@
 - :name: ReplaceRouteTableAssociation
   :method: :replace_route_table_association
   :inputs:
+    DryRun:
+    - :boolean
     AssociationId:
     - :string
     - :required
@@ -3692,6 +3922,8 @@
 - :name: ReportInstanceStatus
   :method: :report_instance_status
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -3712,6 +3944,8 @@
 - :name: RequestSpotInstances
   :method: :request_spot_instances
   :inputs:
+    DryRun:
+    - :boolean
     SpotPrice:
     - :string
     - :required
@@ -3807,6 +4041,8 @@
               - :rename: privateIpAddresses
               SecondaryPrivateIpAddressCount:
               - :integer
+              AssociatePublicIpAddress:
+              - :boolean
         - :rename: networkInterfaces
         IamInstanceProfile:
         - :structure:
@@ -3894,6 +4130,8 @@
                                     :type: :boolean
                           secondaryPrivateIpAddressCount:
                             :type: :integer
+                          associatePublicIpAddress:
+                            :type: :boolean
                   ebsOptimized:
                     :type: :boolean
               createTime:
@@ -3907,6 +4145,8 @@
 - :name: ResetImageAttribute
   :method: :reset_image_attribute
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :string
     - :required
@@ -3917,6 +4157,8 @@
 - :name: ResetInstanceAttribute
   :method: :reset_instance_attribute
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :string
     - :required
@@ -3927,6 +4169,8 @@
 - :name: ResetNetworkInterfaceAttribute
   :method: :reset_network_interface_attribute
   :inputs:
+    DryRun:
+    - :boolean
     NetworkInterfaceId:
     - :string
     - :required
@@ -3936,6 +4180,8 @@
 - :name: ResetSnapshotAttribute
   :method: :reset_snapshot_attribute
   :inputs:
+    DryRun:
+    - :boolean
     SnapshotId:
     - :string
     - :required
@@ -3946,6 +4192,8 @@
 - :name: RevokeSecurityGroupEgress
   :method: :revoke_security_group_egress
   :inputs:
+    DryRun:
+    - :boolean
     GroupId:
     - :string
     - :required
@@ -3997,6 +4245,8 @@
 - :name: RevokeSecurityGroupIngress
   :method: :revoke_security_group_ingress
   :inputs:
+    DryRun:
+    - :boolean
     GroupName:
     - :string
     GroupId:
@@ -4049,6 +4299,8 @@
 - :name: RunInstances
   :method: :run_instances
   :inputs:
+    DryRun:
+    - :boolean
     ImageId:
     - :string
     - :required
@@ -4160,6 +4412,8 @@
           - :rename: privateIpAddresses
           SecondaryPrivateIpAddressCount:
           - :integer
+          AssociatePublicIpAddress:
+          - :boolean
     - :rename: networkInterfaces
     IamInstanceProfile:
     - :structure:
@@ -4269,6 +4523,8 @@
     - :rename: InstanceIds
     AdditionalInfo:
     - :string
+    DryRun:
+    - :boolean
   :outputs:
     :children:
       instancesSet:
@@ -4289,6 +4545,8 @@
 - :name: StopInstances
   :method: :stop_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -4316,6 +4574,8 @@
 - :name: TerminateInstances
   :method: :terminate_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
@@ -4353,6 +4613,8 @@
 - :name: UnmonitorInstances
   :method: :unmonitor_instances
   :inputs:
+    DryRun:
+    - :boolean
     InstanceId:
     - :list:
       - :string
