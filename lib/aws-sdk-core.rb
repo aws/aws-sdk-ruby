@@ -15,6 +15,7 @@ require 'seahorse'
 
 module Aws
 
+  autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
 
