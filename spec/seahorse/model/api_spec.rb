@@ -26,8 +26,7 @@ module Seahorse
             'members' => {
               'property' => { 'type' => 'string' }
             }
-          },
-          'output' => nil
+          }
         }
       end
 

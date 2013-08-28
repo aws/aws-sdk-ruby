@@ -21,8 +21,8 @@ module Seahorse
       property :http_path, String
       property :metadata, Hash
       property :documentation, String
-      property :input, Shape, always_serialize: true
-      property :output, Shape, always_serialize: true
+      property :input, Shape
+      property :output, Shape
       property :errors, [Shape]
 
     end

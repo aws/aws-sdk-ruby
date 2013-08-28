@@ -28,7 +28,6 @@ module Seahorse
               'property' => { 'type' => 'string' }
             }
           },
-          'output' => nil,
           'errors' => [
             {
               'type' => 'string'
