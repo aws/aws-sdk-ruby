@@ -91,7 +91,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the origin access identity created.",
             "location": "header",
@@ -1114,7 +1114,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the distribution created.",
             "location": "header",
@@ -1895,7 +1895,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the streaming distribution created.",
             "location": "header",
@@ -2306,7 +2306,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the origin access identity's information. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -2378,7 +2378,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -2920,7 +2920,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the distribution's information. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -3375,7 +3375,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -3752,7 +3752,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the streaming distribution's information. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -3925,7 +3925,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -4933,7 +4933,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -5992,7 +5992,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",
@@ -6589,7 +6589,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
             "location": "header",

@@ -78,7 +78,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -761,7 +761,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -1408,7 +1408,7 @@
             "location": "header",
             "serialized_name": "Location"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -1796,7 +1796,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -1860,7 +1860,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -2226,7 +2226,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -2520,7 +2520,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -2836,7 +2836,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -2976,7 +2976,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -3725,7 +3725,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -4443,7 +4443,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
@@ -4924,7 +4924,7 @@
               }
             }
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"

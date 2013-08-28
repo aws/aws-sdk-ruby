@@ -512,12 +512,12 @@
                       "documentation": "<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented once for every hour an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>",
                       "serialized_name": "NormalizedInstanceHours"
                     },
-                    "ec_2_key_name": {
+                    "ec2_key_name": {
                       "type": "string",
                       "documentation": "<p>The name of an Amazon EC2 key pair that can be used to ssh to the master node of job flow.</p>",
                       "serialized_name": "Ec2KeyName"
                     },
-                    "ec_2_subnet_id": {
+                    "ec2_subnet_id": {
                       "type": "string",
                       "documentation": "<p>For job flows launched within Amazon Virtual Private Cloud, this value specifies the identifier of the subnet where the job flow was launched.</p>",
                       "serialized_name": "Ec2SubnetId"
@@ -923,7 +923,7 @@
                   }
                 }
               },
-              "ec_2_key_name": {
+              "ec2_key_name": {
                 "type": "string",
                 "documentation": "<p>Specifies the name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called \"hadoop.\"</p>",
                 "min_length": 0,
@@ -965,7 +965,7 @@
                 "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "HadoopVersion"
               },
-              "ec_2_subnet_id": {
+              "ec2_subnet_id": {
                 "type": "string",
                 "documentation": "<p> To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. </p> <p> Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC. </p>",
                 "min_length": 0,

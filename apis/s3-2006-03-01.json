@@ -85,7 +85,7 @@
                 "members": {
                   "type": "structure",
                   "members": {
-                    "e_tag": {
+                    "etag": {
                       "type": "string",
                       "documentation": "Entity tag returned when the part was uploaded.",
                       "serialized_name": "ETag"
@@ -129,7 +129,7 @@
             "location": "header",
             "serialized_name": "x-amz-expiration"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "Entity tag of the object.",
             "serialized_name": "ETag"
@@ -339,7 +339,7 @@
               "payload": true
             },
             "members": {
-              "e_tag": {
+              "etag": {
                 "type": "string",
                 "serialized_name": "ETag"
               },
@@ -1774,7 +1774,7 @@
             "location": "header",
             "serialized_name": "Content-Length"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL",
             "location": "header",
@@ -2153,7 +2153,7 @@
             "location": "header",
             "serialized_name": "Content-Length"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL",
             "location": "header",
@@ -2529,7 +2529,7 @@
             "members": {
               "type": "structure",
               "members": {
-                "e_tag": {
+                "etag": {
                   "type": "string",
                   "serialized_name": "ETag"
                 },
@@ -2731,7 +2731,7 @@
                   "type": "timestamp",
                   "serialized_name": "LastModified"
                 },
-                "e_tag": {
+                "etag": {
                   "type": "string",
                   "serialized_name": "ETag"
                 },
@@ -2903,7 +2903,7 @@
                   "documentation": "Date and time at which the part was uploaded.",
                   "serialized_name": "LastModified"
                 },
-                "e_tag": {
+                "etag": {
                   "type": "string",
                   "documentation": "Entity tag returned when the part was uploaded.",
                   "serialized_name": "ETag"
@@ -3969,7 +3969,7 @@
             "location": "header",
             "serialized_name": "x-amz-expiration"
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "Entity tag for the uploaded object.",
             "location": "header",
@@ -4273,7 +4273,7 @@
               "AES256"
             ]
           },
-          "e_tag": {
+          "etag": {
             "type": "string",
             "documentation": "Entity tag for the uploaded object.",
             "location": "header",
@@ -4372,7 +4372,7 @@
               "payload": true
             },
             "members": {
-              "e_tag": {
+              "etag": {
                 "type": "string",
                 "documentation": "Entity tag of the object.",
                 "serialized_name": "ETag"

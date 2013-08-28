@@ -88,7 +88,7 @@
             "min_length": 1,
             "serialized_name": "TimeoutInMinutes"
           },
-          "notification_ar_ns": {
+          "notification_arns": {
             "type": "list",
             "documentation": "<p>The Simple Notification Service (SNS) topic ARNs to publish stack related events. You can find your SNS topic ARNs using the <a href=\"http://console.aws.amazon.com/sns\">SNS console</a> or your Command Line Interface (CLI).</p>",
             "max_length": 5,
@@ -609,7 +609,7 @@
                   "documentation": "<p>Boolean to enable or disable rollback on stack creation failures:</p> <p> <ul> <li> <code>true</code>: disable rollback</li> <li> <code>false</code>: enable rollback</li> </ul> </p>",
                   "serialized_name": "DisableRollback"
                 },
-                "notification_ar_ns": {
+                "notification_arns": {
                   "type": "list",
                   "documentation": "<p>SNS topic ARNs to which stack related events are published.</p>",
                   "serialized_name": "NotificationARNs",

@@ -2068,7 +2068,7 @@
                   "documentation": "<p>The instance ID.</p>",
                   "serialized_name": "InstanceId"
                 },
-                "ec_2_instance_id": {
+                "ec2_instance_id": {
                   "type": "string",
                   "documentation": "<p>The ID of the associated Amazon EC2 instance.</p>",
                   "serialized_name": "Ec2InstanceId"
@@ -3477,7 +3477,7 @@
                   "documentation": "<p>The volume ID.</p>",
                   "serialized_name": "VolumeId"
                 },
-                "ec_2_volume_id": {
+                "ec2_volume_id": {
                   "type": "string",
                   "documentation": "<p>The Amazon EC2 volume ID.</p>",
                   "serialized_name": "Ec2VolumeId"

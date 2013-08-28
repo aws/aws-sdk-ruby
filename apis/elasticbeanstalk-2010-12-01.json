@@ -2000,7 +2000,7 @@
                     "tail"
                   ]
                 },
-                "ec_2_instance_id": {
+                "ec2_instance_id": {
                   "type": "string",
                   "documentation": "<p>The Amazon EC2 Instance ID for this information.</p>",
                   "serialized_name": "Ec2InstanceId"
