@@ -343,21 +343,21 @@ module Aws
 
         it 'applies xml namespaces to any shape' do
           ns = {
-            'prefix' => 'prefix',
-            'uri' => 'http://xmlns.com/uri'
+            'xmlns_prefix' => 'prefix',
+            'xmlns_uri' => 'http://xmlns.com/uri'
           }
           rules['members'] = {
             'scalar' => {
               'type' => 'string',
-              'xmlnamespace' => ns,
+              'metadata' => ns,
             },
             'struct' => {
               'type' => 'structure',
-              'xmlnamespace' => ns,
+              'metadata' => ns,
               'members' => {
                 'list' => {
                   'type' => 'list',
-                  'xmlnamespace' => ns,
+                  'metadata' => ns,
                   'members' => { 'type' => 'string', 'serialized_name' => 'item' }
                 },
               }
