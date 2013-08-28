@@ -57,7 +57,7 @@ module Aws
 
       def list(shape, values)
         member_shape = shape.members
-        if !shape.flattened
+        unless flat?(shape)
           values = values[member_shape.serialized_name || 'member']
         end
         Array(values).map { |value| member(member_shape, value) }
@@ -67,7 +67,7 @@ module Aws
         key_shape = shape.keys
         value_shape = shape.members
         data = {}
-        entries = entries['entry'] if !shape.flattened
+        entries = entries['entry'] unless flat?(shape)
         entries = [entries] unless entries.is_a?(Array)
         entries.each do |entry|
           key = entry[key_shape.serialized_name || 'key']
@@ -106,6 +106,10 @@ module Aws
             raise "unhandled timestamp format `#{raw}'"
           end
         end
+      end
+
+      def flat?(shape)
+        shape.metadata && !!shape.metadata['flattened']
       end
 
     end

@@ -208,7 +208,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'members' => { 'type' => 'string' }
             }
           }
@@ -220,7 +220,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'members' => { 'type' => 'string' }
             }
           }
@@ -232,7 +232,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'members' => { 'type' => 'string' }
             }
           }
@@ -250,7 +250,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'members' => { 'type' => 'string' }
             }
           }
@@ -266,7 +266,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'serialized_name' => 'item',
               'members' => { 'type' => 'string' }
             }
@@ -285,7 +285,7 @@ module Aws
           rules['members'] = {
             'people' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'serialized_name' => 'Person',
               'members' => {
                 'type' => 'structure',
@@ -419,7 +419,7 @@ module Aws
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -432,7 +432,7 @@ module Aws
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -445,7 +445,7 @@ module Aws
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -472,7 +472,7 @@ module Aws
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -492,7 +492,7 @@ module Aws
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
               'members' => { 'type' => 'string', 'serialized_name' => 'val' }
             }

@@ -19,7 +19,7 @@ module Aws
 
       let(:rules) {{
         'type' => 'structure',
-        'xmlname' => 'xml',
+        'serialized_name' => 'xml',
         'members' => {},
       }}
 
@@ -108,7 +108,7 @@ module Aws
                 'encoding' => {
                   'type' => 'string',
                   'xmlattribute' => true,
-                  'xmlname' => 'encode',
+                  'serialized_name' => 'encode',
                 },
                 'description' => { 'type' => 'string' },
               }
@@ -154,8 +154,8 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'xmlname' => 'ItemList',
-              'members' => { 'type' => 'string', 'xmlname' => 'Item' }
+              'serialized_name' => 'ItemList',
+              'members' => { 'type' => 'string', 'serialized_name' => 'Item' }
             }
           }
           expect(xml(items: %w(abc xyz))).to eq(<<-XML)
@@ -202,7 +202,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
+              'metadata' => { 'flattened' => true },
               'members' => { 'type' => 'string' }
             }
           }
@@ -219,8 +219,8 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
-              'xmlname' => 'item',
+              'metadata' => { 'flattened' => true },
+              'serialized_name' => 'item',
               'members' => { 'type' => 'string' }
             }
           }
@@ -237,8 +237,8 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'flattened' => true,
-              'xmlname' => 'item',
+              'metadata' => { 'flattened' => true },
+              'serialized_name' => 'item',
               'members' => {
                 'type' => 'structure',
                 'members' => {
@@ -358,7 +358,7 @@ module Aws
                 'list' => {
                   'type' => 'list',
                   'xmlnamespace' => ns,
-                  'members' => { 'type' => 'string', 'xmlname' => 'item' }
+                  'members' => { 'type' => 'string', 'serialized_name' => 'item' }
                 },
               }
             }

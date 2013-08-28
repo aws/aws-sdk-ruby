@@ -29,7 +29,7 @@ module Aws
       # @param [Hash] params
       # @return [String] Returns an XML doc string.
       def to_xml(params)
-        structure(@rules.xmlname, @rules, params)
+        structure(@rules.serialized_name, @rules, params)
         @xml.join
       end
 
@@ -50,7 +50,7 @@ module Aws
             shape.members.each_pair do |member_name, member_shape|
               if values.key?(member_name)
                 next if member_shape.xmlattribute
-                mname = member_shape.xmlname || member_name
+                mname = member_shape.serialized_name
                 member(mname, member_shape, values[member_name])
               end
             end
@@ -61,21 +61,22 @@ module Aws
       def structure_attrs(shape, values)
         shape.members.inject({}) do |attrs, (member_name, member_shape)|
           if member_shape.xmlattribute && values.key?(member_name)
-            attrs[member_shape.xmlname || member_name] = values[member_name]
+            attrs[member_shape.serialized_name] = values[member_name]
           end
           attrs
         end
       end
 
       def list(name, shape, values)
-        if shape.flattened
+        if shape.metadata && shape.metadata['flattened']
           values.each do |value|
             member(name, shape.members, value)
           end
         else
           node(name, shape) do
             values.each do |value|
-              member(shape.members.xmlname || 'member', shape.members, value)
+              mname = shape.members.serialized_name || 'member'
+              member(mname, shape.members, value)
             end
           end
         end
