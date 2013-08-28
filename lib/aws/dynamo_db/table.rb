@@ -81,6 +81,10 @@ module AWS
     #
     # @attr [Time] throughput_last_decreased_at
     #
+    # @attr [Integer] size_bytes
+    #
+    # @attr [Integer] item_count
+    #
     # @attr [PrimaryKeyElement] hash_key Returns the hash key element
     #   for this table.
     #
@@ -112,6 +116,10 @@ module AWS
       attribute :read_capacity_units
 
       attribute :write_capacity_units
+
+      attribute :item_count
+
+      attribute :size_bytes, :from => 'TableSizeBytes'
 
       attribute :hash_key, :from => "HashKeyElement", :static => true do
         translates_output {|v| PrimaryKeyElement.new(v) }
