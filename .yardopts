@@ -2,4 +2,4 @@
 --embed-mixins
 --markup markdown
 --markup-provider rdiscount
---no-api
+--hide-api private
