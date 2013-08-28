@@ -446,6 +446,7 @@ module AWS
           end
 
           needs = [
+            :"#{ruby_name}",
             :"#{ruby_name}_endpoint",
             :"#{ruby_name}_port",
             :"#{ruby_name}_region",
@@ -468,7 +469,8 @@ module AWS
           ]
 
           create_block = lambda do |config,client_options|
-            AWS.const_get(name)::Client.new(:config => config)
+            options = client_options[:"#{ruby_name}"]
+            AWS.const_get(name)::Client.new(options.merge(:config => config))
           end
 
           add_option_with_needs :"#{ruby_name}_client", needs, &create_block

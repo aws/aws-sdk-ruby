@@ -125,6 +125,14 @@ module AWS
 
     endpoint_prefix 'dynamodb'
 
+
+    def initialize options = {}
+      options = options.dup
+      options[:dynamo_db] ||= {}
+      options[:dynamo_db][:api_version] = '2011-12-05'
+      super(options)
+    end
+
     # Returns a collection representing all the tables in your account.
     #
     # @return [TableCollection]
