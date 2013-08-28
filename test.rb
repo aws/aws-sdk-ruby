@@ -71,7 +71,7 @@ def options_for_client_class(endpoint, versions, plugins)
     api: {
       'metadata' => {
         'aws_api_versions' => versions.inject({}) {|hsh, version|
-          hsh[version] = "models/#{endpoint}-#{version}.json"; hsh
+          hsh[version] = "apis/#{endpoint}-#{version}.json"; hsh
         }
       }
     }
