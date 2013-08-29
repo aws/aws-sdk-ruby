@@ -143,7 +143,7 @@ module Aws
     end
 
     def set_errors(errors)
-      @errors = errors.map { |src| ShapeTranslator.translate(src) }
+      @errors = errors.map { |src| OutputShapeTranslator.translate(src) }
       @errors = nil if @errors.empty?
     end
 
@@ -168,9 +168,6 @@ module Aws
     property :serialized_name, from: :xmlname
     property :serialized_name, from: :location_name
     property :enum
-    property :pattern
-    property :min_length
-    property :max_length
     property :timestamp_format
 
     metadata :flattened
@@ -183,6 +180,11 @@ module Aws
     ignore :shape_name
     ignore :member_order
     ignore :box
+
+    # validation properties
+    ignore :pattern
+    ignore :min_length
+    ignore :max_length
 
     def set_xmlnamespace(xmlns)
       metadata = @properties['metadata'] ||= {}
@@ -244,9 +246,6 @@ module Aws
 
   class OutputShapeTranslator < ShapeTranslator
     ignore :required
-    ignore :pattern
-    ignore :min_length
-    ignore :max_length
     ignore :timestamp_format
   end
 
