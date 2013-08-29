@@ -1,3 +1,137 @@
+2013-08-28 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/configuration.rb, spec/aws/dynamo_db_spec.rb: Test failure
+  fixes for DynamoDB.
+
+  The way we dealt with the configuration in the previous change on
+  DynamoDB clients had knock on effects to clients of, for example,
+  Simple Email Service. Fixed those, and updated tests for DynamoDB
+  to handle the different way we instantiate its client.
+
+  * features/dynamo_db/step_definitions/versioning.rb,
+  features/dynamo_db/versioning.feature, lib/aws/core/configuration.rb,
+  lib/aws/dynamo_db.rb: Make AWS::DynamoDB use legacy client.
+
+  The higher level abstractions provided for DynamoDB only work fully with
+  the legacy version of the low-level client. This change forces the higher
+  level abstractions to fall back to the legacy client API, but allows use of
+  the new client-level API directly.
+
+2013-08-26 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/s3/object_metadata.rb, lib/aws/s3/s3_object.rb: Deprecated
+  AWS::S3::ObjectMetadata#[]=
+
+  Marked AWS::S3::ObjectMetadata#[]= as deprecated and updated documentation
+  to include a warning note on unexpected changes to metadata and values it
+  does not set. Updated AWS::S3::S3Object#copy_from documentation to explain
+  risks of setting metadata hash without copying previous values.
+
+  Resolves Issue #325
+
+2013-08-23 Alex Wood <awood45@gmail.com>
+
+  * spec/aws/dynamo_db/table_spec.rb: Make AWS::DynamoDB::Table tests support
+  1.8.7
+
+  Ruby 1.8.7 doesn't support Time.new with parameters. Using Time.now
+  instead since that is sufficient for the cases covered.
+
+  * features/dynamo_db/step_definitions/tables.rb,
+  features/dynamo_db/tables.feature, lib/aws/dynamo_db/table.rb,
+  spec/aws/dynamo_db/table_spec.rb: Add high level methods to
+  AWS::DynamoDB::Table
+
+  Adds item_count and size_bytes to the Amazon DynamoDB high level
+  abstraction layer. Relevant Cucumber and RSpec tests included to
+  make the process of adding these for later releases a little easier.
+
+2013-08-22 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/xml/sax_handlers/nokogiri.rb, lib/aws/s3/client.rb,
+  lib/aws/s3/client/xml.rb, spec/aws/s3/client_spec.rb: Add AWS::S3::Client
+  Bucket Logging Methods
+
+  Adds the following methods and associated tests:
+  AWS::S3::Client#get_bucket_logging
+  AWS::S3::Client#put_bucket_logging
+
+  Also adds a method to the Nokogiri Sax Handler to handle comments
+  in XML by ignoring them.
+
+  * spec/aws/s3/client_spec.rb, spec/aws/simple_email_service_spec.rb,
+  spec/aws/sqs/queue_spec.rb, spec/shared/aws_client_examples.rb: Replaced
+  #stub! calls with #stub to silence rspec deprecation warnings.
+
+  * lib/aws/core/configuration.rb, spec/aws_spec.rb: Resolved an issue where
+  config might get stuck in a recursive loop.
+
+  When building a service endpoint, the region is used to construct the
+  default endpoint.  When attempting to determine the region, the endpoint
+  is is parsed (recursive loop).
+
+  The recent patch to make endpoint use the svc region instead of the global
+  region uncovered this bug.  This patch stops the loops by changing the logic
+  in #svc_endpoint to used only the explicitly configured regions, and never
+  a region guessed from the endpoint.
+
+  * lib/aws/core/configuration.rb, spec/aws_spec.rb: Fixed an issue around
+  configuring endpoints by service region.
+
+  * Gemfile: Loosened the rspec version dependency.
+
+2013-08-13 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/s3/s3_object_encrypt_spec.rb, spec/spec_helper.rb: Updated a spec
+  to work with a newer version of rspec.
+
+  * lib/aws/sqs/errors.rb, lib/aws/sqs/queue.rb, spec/aws/sqs/queue_spec.rb:
+  Add MD5 validation for Amazon SQS.
+
+  When available, validates SQS operations against MD5 checksums,
+  raising errors when there are mismatches.
+
+2013-08-14 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/configuration.rb: Remove SQS checksum verification from
+  global config.
+
+  Accidentally left the old location of :sqs_validate_checksums
+  out of the pull request. Removing the old version, tests still
+  pass.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb, lib/aws/sqs/config.rb,
+  lib/aws/sqs/queue.rb: Configuration toggle for SQS MD5 check.
+
+  Adds :sqs_verify_checksums to the AWS config. True by default,
+  setting this value to false will skip the validation of MD5
+  checksums for SQS operations.
+
+2013-08-12 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/version.rb: Bump version to 1.15.0
+
+  * ChangeLog, spec/aws/emr/instance_group_collection_spec.rb,
+  spec/aws/emr/instance_group_spec.rb: Fix EMR spec stubbing.
+
+  JSON stubbing is not as sophisticated as XML stubbing, added missing
+  values to spec tests.
+
+  * doc-src/SNS/V20100331.yml, lib/aws/api_config/SNS-2010-03-31.yml: Update
+  AWS::SNS::Client API to latest version.
+
+  SNS now supports mobile push.
+
+  * doc-src/Redshift/V20121201.yml,
+  lib/aws/api_config/Redshift-2012-12-01.yml: API updates for Amazon Redshift.
+
+  Adds cluster snapshot identifiers to CopyClusterSnapshot and
+  DeleteClusterSnapshot. Enables better status reporting for
+  restoring from snapshots.
+
+  * lib/aws/api_config/EMR-2009-03-31.yml, lib/aws/emr/client.rb,
+  lib/aws/emr/request.rb: Updated EMR to use SigV4 and AWS JSON protocol.
+
 2013-08-11 Loren Segal <lsegal@amazon.com>
 
   * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Fix
