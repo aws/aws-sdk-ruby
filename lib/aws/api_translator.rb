@@ -85,7 +85,7 @@ module Aws
     end
 
     property :type
-    property :api_version
+    property :version, from: :api_version
     property :endpoint, from: :global_endpoint
 
     metadata :signature_version
