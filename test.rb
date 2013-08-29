@@ -11,39 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
 require 'bundler/setup'
 require 'aws-sdk-core'
 require 'json'
 require 'pp'
 require 'stringio'
-
-class Seahorse::Model::Api
-  property :json_version, String
-  property :target_prefix, String
-  property :timestamp_format, String
-  property :global_endpoint, String
-  property :checksum_format, String
-end
-
-class Seahorse::Model::Operation
-  property :documentation_url, String
-  property :response_code, Integer, in: :http
-  property :alias, String
-end
-
-class Seahorse::Model::Shapes::Shape
-  property :location_name, String
-  property :payload, Boolean
-  property :streaming, Boolean
-  property :box, Boolean
-  property :shape_name, String
-  property :xmlname, String
-  property :xmlattribute, Boolean
-  property :xmlns_prefix, String, in: :xmlnamespace, name: :prefix
-  property :xmlns_uri, String, in: :xmlnamespace, name: :uri
-  property :flattened, Boolean
-end
 
 class DummySenderPlugin < Seahorse::Client::Plugin
   option(:response_body) { '' }
@@ -95,10 +67,10 @@ cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
 
-# resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
-# pp resp.http_request
+resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+pp resp.http_request
 # resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
-# pp resp.data
+pp resp.data
 
 #pp s3.put_bucket_logging
 
