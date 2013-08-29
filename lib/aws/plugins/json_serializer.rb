@@ -19,9 +19,9 @@ module Aws
     class JsonSerializer < Seahorse::Client::Plugin
       handle(:Handler) do |context|
         json = JSON.generate(context.params)
-        version = context.config.api.json_version || '1.0'
+        version = context.config.api.metadata['json_version'] || '1.0'
         content_type = "application/x-amz-json-#{version}"
-        target = context.config.api.target_prefix + '.' + context.operation.name
+        target = context.config.api.metadata['target_prefix'] + '.' + context.operation.name
 
         context.http_request.body = json
         context.http_request.headers['Content-Type'] = content_type
