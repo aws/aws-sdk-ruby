@@ -90,6 +90,12 @@ module Seahorse
             expect(req.body.read).to eq('body')
           end
 
+          it 'converts nil bodies into empty io objects' do
+            req = request
+            req.body = nil
+            expect(req.body.read).to eq('')
+          end
+
           it 'can be set as a string in accessor' do
             req = request
             req.body = 'body'

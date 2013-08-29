@@ -28,7 +28,7 @@ module Seahorse
           self.http_method = options[:http_method] || 'GET'
           self.path = options[:path] || '/'
           self.headers = options[:headers] || Headers.new
-          self.body = options[:body] || ''
+          self.body = options[:body]
         end
 
         # @return [Endpoint, nil]
@@ -47,7 +47,11 @@ module Seahorse
         attr_reader :body
 
         def body=(io)
-          @body = String === io ? PlainStringIO.new(io) : io
+          @body = case io
+            when nil then PlainStringIO.new('')
+            when String then PlainStringIO.new(io)
+            else io
+          end
         end
       end
     end
