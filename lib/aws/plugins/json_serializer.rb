@@ -17,8 +17,9 @@ require 'stringio'
 module Aws
   module Plugins
     class JsonSerializer < Seahorse::Client::Plugin
+
       handle(:Handler) do |context|
-        json = JSON.generate(context.params)
+        json = MultiJson.dump(context.params)
         version = context.config.api.metadata['json_version'] || '1.0'
         content_type = "application/x-amz-json-#{version}"
         target = context.config.api.metadata['target_prefix'] + '.' + context.operation.name
@@ -31,7 +32,7 @@ module Aws
         super(context).on_complete do |response|
           output = response.context.http_response.body.read
           output = '{}' if output.empty?
-          response.data = JSON.parse(output)
+          response.data = MultiJson.load(output)
         end
       end
 
