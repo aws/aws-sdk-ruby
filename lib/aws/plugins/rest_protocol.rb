@@ -29,13 +29,13 @@ module Aws
         private
 
         def interpolated_uri(context)
-          uri = context.operation.http_uri || '/'
-          uri = uri.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
+          path = context.operation.http_path
+          path = path.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
             value = context.params[$2.to_sym]
             value ? "#{$1}=#{value}" : ""
           end
-          uri = uri.gsub(/\{(.+?)\}/) { context.params[$1.to_sym] }
-          uri
+          path = path.gsub(/\{(.+?)\}/) { context.params[$1.to_sym] }
+          path
         end
 
         def build_input_params(context)
