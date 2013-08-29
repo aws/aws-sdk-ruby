@@ -80,11 +80,9 @@ module Aws
       @operations.each do |operation|
         api.operations[operation.name] = operation
       end
-      api.metadata.delete('xmlnamespace') unless api.type.match(/xml/)
       api
     end
 
-    property :type
     property :version, from: :api_version
     property :endpoint, from: :global_endpoint
 
@@ -98,6 +96,17 @@ module Aws
     metadata :service_abbreviation
     metadata :result_wrapped
     metadata :xmlnamespace
+
+    def set_type(type)
+      plugin = case type
+        when 'query' then 'Aws::Plugins::QuerySerializer'
+        when /json/ then 'Aws::Plugins::JsonSerializer'
+        when /xml/ then 'Aws::Plugins::XmlSerializer'
+        else raise "unhandled type `#{type}'"
+      end
+      @properties['plugins'] ||= []
+      @properties['plugins'] << plugin
+    end
 
     def set_endpoint_prefix(prefix)
       @properties['endpoint'] = "#{prefix}.%s.amazonaws.com"
@@ -125,7 +134,6 @@ module Aws
     end
 
     property :name
-
     ignore :documentation_url
     ignore :alias
 
