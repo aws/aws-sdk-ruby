@@ -1,14 +1,17 @@
 {
-  "type": "json",
-  "api_version": "2011-12-05",
+  "version": "2011-12-05",
   "endpoint": "dynamodb.%s.amazonaws.com",
   "metadata": {
     "json_version": 1.0,
     "service_abbreviation": "DynamoDB",
     "service_full_name": "Amazon DynamoDB",
     "signature_version": "v4",
-    "target_prefix": "DynamoDB_20111205"
+    "target_prefix": "DynamoDB_20111205",
+    "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<p>Amazon DynamoDB is a fast, highly scalable, highly available, cost-effective non-relational database service.</p> <p>Amazon DynamoDB removes traditional scalability limitations on data storage while maintaining low latency and predictable performance.</p>",
   "operations": {
     "batch_get_item": {
@@ -23,14 +26,9 @@
             "type": "map",
             "required": true,
             "documentation": "<p>A map of the table name and corresponding items to get by primary key. While requesting items, each table name can be invoked only once per operation.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "RequestItems",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "structure",
@@ -38,8 +36,6 @@
                 "keys": {
                   "type": "list",
                   "required": true,
-                  "min_length": 1,
-                  "max_length": 100,
                   "serialized_name": "Keys",
                   "members": {
                     "type": "structure",
@@ -144,7 +140,6 @@
                 "attributes_to_get": {
                   "type": "list",
                   "documentation": "<p>List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.</p>",
-                  "min_length": 1,
                   "serialized_name": "AttributesToGet",
                   "members": {
                     "type": "string"
@@ -412,19 +407,12 @@
             "type": "map",
             "required": true,
             "documentation": "<p>A map of table name to list-of-write-requests. Used as input to the <code>BatchWriteItem</code> API call</p>",
-            "min_length": 1,
-            "max_length": 25,
             "serialized_name": "RequestItems",
             "keys": {
-              "type": "string",
-              "min_length": 3,
-              "max_length": 255,
-              "pattern": "[a-zA-Z0-9_.-]+"
+              "type": "string"
             },
             "members": {
               "type": "list",
-              "min_length": 1,
-              "max_length": 25,
               "members": {
                 "type": "structure",
                 "documentation": "<p>This structure is a Union of PutRequest and DeleteRequest. It can contain exactly one of <code>PutRequest</code> or <code>DeleteRequest</code>. Never Both. This is enforced in the code.</p>",
@@ -866,9 +854,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table you want to create. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "key_schema": {
@@ -887,8 +872,6 @@
                     "type": "string",
                     "required": true,
                     "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                    "min_length": 1,
-                    "max_length": 255,
                     "serialized_name": "AttributeName"
                   },
                   "attribute_type": {
@@ -913,8 +896,6 @@
                     "type": "string",
                     "required": true,
                     "documentation": "<p>The <code>AttributeName</code> of the <code>KeySchemaElement</code>.</p>",
-                    "min_length": 1,
-                    "max_length": 255,
                     "serialized_name": "AttributeName"
                   },
                   "attribute_type": {
@@ -942,14 +923,12 @@
                 "type": "integer",
                 "required": true,
                 "documentation": "<p><code>ReadCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>ReadCapacityUnits</code>. Eventually-consistent reads only require half the <code>ReadCapacityUnits</code> of stirctly consistent reads.</p>",
-                "min_length": 1,
                 "serialized_name": "ReadCapacityUnits"
               },
               "write_capacity_units": {
                 "type": "integer",
                 "required": true,
                 "documentation": "<p><code>WriteCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>WriteCapacityUnits</code>.</p>",
-                "min_length": 1,
                 "serialized_name": "WriteCapacityUnits"
               }
             }
@@ -1116,9 +1095,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to delete an item. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "key": {
@@ -1429,9 +1405,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table you want to delete. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           }
         }
@@ -1606,9 +1579,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table you want to describe. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           }
         }
@@ -1763,9 +1733,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to get an item. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "key": {
@@ -1872,7 +1839,6 @@
           "attributes_to_get": {
             "type": "list",
             "documentation": "<p>List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.</p>",
-            "min_length": 1,
             "serialized_name": "AttributesToGet",
             "members": {
               "type": "string"
@@ -1992,16 +1958,11 @@
           "exclusive_start_table_name": {
             "type": "string",
             "documentation": "<p>The name of the table that starts the list. If you already ran a <code>ListTables</code> operation and received a <code>LastEvaluatedTableName</code> value in the response, use that value here to continue the list.</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "ExclusiveStartTableName"
           },
           "limit": {
             "type": "integer",
             "documentation": "<p>A number of maximum table names to return.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "Limit"
           }
         }
@@ -2048,9 +2009,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to put an item. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "item": {
@@ -2314,15 +2272,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to query. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "attributes_to_get": {
             "type": "list",
             "documentation": "<p>List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.</p>",
-            "min_length": 1,
             "serialized_name": "AttributesToGet",
             "members": {
               "type": "string"
@@ -2331,7 +2285,6 @@
           "limit": {
             "type": "integer",
             "documentation": "<p>The maximum number of items to return. If Amazon DynamoDB hits this limit while querying the table, it stops the query and returns the matching values up to the limit, and a <code>LastEvaluatedKey</code> to apply in a subsequent operation to continue the query. Also, if the result set size exceeds 1MB before Amazon DynamoDB hits this limit, it stops the query and returns the matching values, and a <code>LastEvaluatedKey</code> to apply in a subsequent operation to continue the query.</p>",
-            "min_length": 1,
             "serialized_name": "Limit"
           },
           "consistent_read": {
@@ -2790,15 +2743,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to scan. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "attributes_to_get": {
             "type": "list",
             "documentation": "<p>List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.</p>",
-            "min_length": 1,
             "serialized_name": "AttributesToGet",
             "members": {
               "type": "string"
@@ -2807,7 +2756,6 @@
           "limit": {
             "type": "integer",
             "documentation": "<p>The maximum number of items to return. If Amazon DynamoDB hits this limit while scanning the table, it stops the scan and returns the matching values up to the limit, and a <code>LastEvaluatedKey</code> to apply in a subsequent operation to continue the scan. Also, if the scanned data set size exceeds 1 MB before Amazon DynamoDB hits this limit, it stops the scan and returns the matching values up to the limit, and a <code>LastEvaluatedKey</code> to apply in a subsequent operation to continue the scan.</p>",
-            "min_length": 1,
             "serialized_name": "Limit"
           },
           "count": {
@@ -3220,9 +3168,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table in which you want to update an item. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "key": {
@@ -3604,9 +3549,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the table you want to update. Allowed characters are <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>_</code> (underscore), <code>-</code> (hyphen) and <code>.</code> (period).</p>",
-            "min_length": 3,
-            "max_length": 255,
-            "pattern": "[a-zA-Z0-9_.-]+",
             "serialized_name": "TableName"
           },
           "provisioned_throughput": {
@@ -3619,14 +3561,12 @@
                 "type": "integer",
                 "required": true,
                 "documentation": "<p><code>ReadCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>ReadCapacityUnits</code>. Eventually-consistent reads only require half the <code>ReadCapacityUnits</code> of stirctly consistent reads.</p>",
-                "min_length": 1,
                 "serialized_name": "ReadCapacityUnits"
               },
               "write_capacity_units": {
                 "type": "integer",
                 "required": true,
                 "documentation": "<p><code>WriteCapacityUnits</code> are in terms of strictly consistent reads, assuming items of 1k. 2k items require twice the <code>WriteCapacityUnits</code>.</p>",
-                "min_length": 1,
                 "serialized_name": "WriteCapacityUnits"
               }
             }

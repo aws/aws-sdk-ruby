@@ -1,13 +1,16 @@
 {
-  "type": "json",
-  "api_version": "2012-10-29",
+  "version": "2012-10-29",
   "endpoint": "datapipeline.%s.amazonaws.com",
   "metadata": {
     "json_version": 1.1,
     "service_full_name": "AWS Data Pipeline",
     "signature_version": "v4",
-    "target_prefix": "DataPipeline"
+    "target_prefix": "DataPipeline",
+    "xmlnamespace": "http://datapipeline.amazonaws.com/doc/2012-10-29/"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<p> This is the <i>AWS Data Pipeline API Reference</i>. This guide provides descriptions and samples of the AWS Data Pipeline API. </p> <p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline API implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You call these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline API to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides an open-source implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p> <p> The AWS Data Pipeline API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. In the code examples in this reference, the Signature Version 4 Request parameters are represented as AuthParams. </p>",
   "operations": {
     "activate_pipeline": {
@@ -23,9 +26,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline to activate. </p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           }
         }
@@ -96,26 +96,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the new pipeline. You can use the same name for multiple pipelines associated with your AWS account, because AWS Data Pipeline assigns each new pipeline a unique pipeline identifier. </p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "name"
           },
           "unique_id": {
             "type": "string",
             "required": true,
             "documentation": "<p> A unique identifier that you specify. This identifier is not the same as the pipeline identifier assigned by AWS Data Pipeline. You are responsible for defining the format and ensuring the uniqueness of this identifier. You use this parameter to ensure idempotency during repeated calls to CreatePipeline. For example, if the first call to CreatePipeline does not return a clear success, you can pass in the same unique identifier and pipeline name combination on a subsequent call to CreatePipeline. CreatePipeline ensures that if a pipeline already exists with the same name and unique identifier, a new pipeline will not be created. Instead, you'll receive the pipeline identifier from the previous attempt. The uniqueness of the name and unique identifier combination is scoped to the AWS account or IAM user credentials. </p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "uniqueId"
           },
           "description": {
             "type": "string",
             "documentation": "<p>The description of the new pipeline.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "description"
           }
         }
@@ -169,9 +160,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline to be deleted.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           }
         }
@@ -225,9 +213,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifier of the pipeline that contains the object definitions.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "object_ids": {
@@ -236,10 +221,7 @@
             "documentation": "<p>Identifiers of the pipeline objects that contain the definitions to be described. You can pass as many as 25 identifiers in a single call to DescribeObjects.</p>",
             "serialized_name": "objectIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 1024,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           },
           "evaluate_expressions": {
@@ -250,9 +232,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>The starting point for the results to be returned. The first time you call DescribeObjects, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call DescribeObjects again and pass the marker value from the response to retrieve the next set of results.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           }
         }
@@ -382,10 +361,7 @@
             "documentation": "<p>Identifiers of the pipelines to describe. You can pass as many as 25 identifiers in a single call to DescribePipelines. You can obtain pipeline identifiers by calling ListPipelines.</p>",
             "serialized_name": "pipelineIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 1024,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           }
         }
@@ -508,27 +484,18 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "object_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the object.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "objectId"
           },
           "expression": {
             "type": "string",
             "required": true,
             "documentation": "<p>The expression to evaluate.</p>",
-            "min_length": 0,
-            "max_length": 20971520,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "expression"
           }
         }
@@ -615,17 +582,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "version": {
             "type": "string",
             "documentation": "<p>The version of the pipeline definition to retrieve. This parameter accepts the values <code>latest</code> (default) and <code>active</code>. Where <code>latest</code> indicates the last definition saved to the pipeline and <code>active</code> indicates the last definition of the pipeline that was activated.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "version"
           }
         }
@@ -742,9 +703,6 @@
           "marker": {
             "type": "string",
             "documentation": "<p>The starting point for the results to be returned. The first time you call ListPipelines, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call ListPipelines again and pass the marker value from the response to retrieve the next set of results.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           }
         }
@@ -824,17 +782,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Indicates the type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to PollForTask. There are no wildcard values permitted in <code>workerGroup</code>, the string must be an exact, case-sensitive, match. </p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "workerGroup"
           },
           "hostname": {
             "type": "string",
             "documentation": "<p>The public DNS name of the calling task runner.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "hostname"
           },
           "instance_identity": {
@@ -845,17 +797,11 @@
               "document": {
                 "type": "string",
                 "documentation": "<p>A description of an Amazon EC2 instance that is generated when the instance is launched and exposed to the instance via the instance metadata service in the form of a JSON representation of an object.</p>",
-                "min_length": 0,
-                "max_length": 1024,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "document"
               },
               "signature": {
                 "type": "string",
                 "documentation": "<p>A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.</p>",
-                "min_length": 0,
-                "max_length": 1024,
-                "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "serialized_name": "signature"
               }
             }
@@ -989,9 +935,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline to be configured.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "pipeline_objects": {
@@ -1007,18 +950,12 @@
                   "type": "string",
                   "required": true,
                   "documentation": "<p>Identifier of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "name": {
                   "type": "string",
                   "required": true,
                   "documentation": "<p>Name of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 },
                 "fields": {
@@ -1034,25 +971,16 @@
                         "type": "string",
                         "required": true,
                         "documentation": "<p>The field identifier.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "key"
                       },
                       "string_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as a String.</p>",
-                        "min_length": 0,
-                        "max_length": 10240,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "stringValue"
                       },
                       "ref_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "refValue"
                       }
                     }
@@ -1182,9 +1110,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifier of the pipeline to be queried for object names.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "query": {
@@ -1203,9 +1128,6 @@
                     "field_name": {
                       "type": "string",
                       "documentation": "<p>The name of the field that the operator will be applied to. The field name is the \"key\" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.</p>",
-                      "min_length": 0,
-                      "max_length": 1024,
-                      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "serialized_name": "fieldName"
                     },
                     "operator": {
@@ -1230,10 +1152,7 @@
                           "documentation": "<p>The value that the actual field value will be compared with.</p>",
                           "serialized_name": "values",
                           "members": {
-                            "type": "string",
-                            "min_length": 0,
-                            "max_length": 1024,
-                            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                            "type": "string"
                           }
                         }
                       }
@@ -1247,17 +1166,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p> Specifies whether the query applies to components or instances. Allowable values: <code>COMPONENT</code>, <code>INSTANCE</code>, <code>ATTEMPT</code>. </p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "sphere"
           },
           "marker": {
             "type": "string",
             "documentation": "<p> The starting point for the results to be returned. The first time you call QueryObjects, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call QueryObjects again and pass the marker value from the response to retrieve the next set of results. </p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "marker"
           },
           "limit": {
@@ -1351,9 +1264,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifier of the task assigned to the task runner. This value is provided in the TaskObject that the service returns with the response for the PollForTask action.</p>",
-            "min_length": 1,
-            "max_length": 2048,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "taskId"
           }
         }
@@ -1440,25 +1350,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the task runner. This value should be unique across your AWS account. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service provides a unique identifier when it launches the application. If you have written a custom task runner, you should assign a unique identifier for the task runner.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "taskrunnerId"
           },
           "worker_group": {
             "type": "string",
             "documentation": "<p>Indicates the type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to ReportTaskRunnerHeartbeat. There are no wildcard values permitted in <code>workerGroup</code>, the string must be an exact, case-sensitive, match.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "workerGroup"
           },
           "hostname": {
             "type": "string",
             "documentation": "<p>The public DNS name of the calling task runner.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "hostname"
           }
         }
@@ -1512,9 +1413,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifies the pipeline that contains the objects.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "object_ids": {
@@ -1523,19 +1421,13 @@
             "documentation": "<p>Identifies an array of objects. The corresponding objects can be either physical or components, but not a mix of both types.</p>",
             "serialized_name": "objectIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 1024,
-              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+              "type": "string"
             }
           },
           "status": {
             "type": "string",
             "required": true,
             "documentation": "<p>Specifies the status to be set on all the objects in <code>objectIds</code>. For components, this can be either <code>PAUSE</code> or <code>RESUME</code>. For instances, this can be either <code>CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "status"
           }
         }
@@ -1600,9 +1492,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifies the task assigned to the task runner. This value is set in the TaskObject that is returned by the PollForTask action.</p>",
-            "min_length": 1,
-            "max_length": 2048,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "taskId"
           },
           "task_status": {
@@ -1619,9 +1508,6 @@
           "error_id": {
             "type": "string",
             "documentation": "<p>If an error occurred during the task, this value specifies an id value that represents the error. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with string \"Service_\" which is reserved by the system.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "errorId"
           },
           "error_message": {
@@ -1632,9 +1518,6 @@
           "error_stack_trace": {
             "type": "string",
             "documentation": "<p>If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.</p>",
-            "min_length": 0,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "errorStackTrace"
           }
         }
@@ -1716,9 +1599,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Identifies the pipeline whose definition is to be validated.</p>",
-            "min_length": 1,
-            "max_length": 1024,
-            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "serialized_name": "pipelineId"
           },
           "pipeline_objects": {
@@ -1734,18 +1614,12 @@
                   "type": "string",
                   "required": true,
                   "documentation": "<p>Identifier of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "id"
                 },
                 "name": {
                   "type": "string",
                   "required": true,
                   "documentation": "<p>Name of the object.</p>",
-                  "min_length": 1,
-                  "max_length": 1024,
-                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                   "serialized_name": "name"
                 },
                 "fields": {
@@ -1761,25 +1635,16 @@
                         "type": "string",
                         "required": true,
                         "documentation": "<p>The field identifier.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "key"
                       },
                       "string_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as a String.</p>",
-                        "min_length": 0,
-                        "max_length": 10240,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "stringValue"
                       },
                       "ref_value": {
                         "type": "string",
                         "documentation": "<p>The field value, expressed as the identifier of another object.</p>",
-                        "min_length": 1,
-                        "max_length": 256,
-                        "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                         "serialized_name": "refValue"
                       }
                     }

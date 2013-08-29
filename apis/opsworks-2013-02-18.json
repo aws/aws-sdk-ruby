@@ -1,13 +1,16 @@
 {
-  "type": "json",
-  "api_version": "2013-02-18",
+  "version": "2013-02-18",
   "endpoint": "opsworks.%s.amazonaws.com",
   "metadata": {
     "json_version": 1.1,
     "service_full_name": "AWS OpsWorks",
     "signature_version": "v4",
-    "target_prefix": "OpsWorks_20130218"
+    "target_prefix": "OpsWorks_20130218",
+    "xmlnamespace": "http://opsworks.amazonaws.com/doc/2013-02-18/"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<fullname>AWS OpsWorks</fullname> <p>Welcome to the <i>AWS OpsWorks API Reference</i>. This guide provides descriptions, syntax, and usage examples about AWS OpsWorks actions and data types, including common parameters and error codes. </p> <p>AWS OpsWorks is an application management service that provides an integrated experience for overseeing the complete application lifecycle. For information about this product, go to the <a href=\"http://aws.amazon.com/opsworks/\">AWS OpsWorks</a> details page. </p> <p><b>Endpoints</b></p> <p>AWS OpsWorks supports only one endpoint, opsworks.us-east-1.amazonaws.com (HTTPS), so you must connect to that endpoint. You can then use the API to direct AWS OpsWorks to create stacks in any AWS Region.</p> <p><b>Chef Version</b></p> <p>When you call CreateStack, CloneStack, or UpdateStack we recommend you use the <code>ConfigurationManager</code> parameter to specify the Chef version, 0.9 or 11.4. The default value is currently 0.9. However, we expect to change the default value to 11.4 in late August 2013.</p>",
   "operations": {
     "attach_elastic_load_balancer": {
@@ -3712,15 +3715,11 @@
               "thresholds_wait_time": {
                 "type": "integer",
                 "documentation": "<p>The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ThresholdsWaitTime"
               },
               "ignore_metrics_time": {
                 "type": "integer",
                 "documentation": "<p>The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. <code>IgnoreMetricsTime</code> allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "IgnoreMetricsTime"
               },
               "cpu_threshold": {
@@ -3753,15 +3752,11 @@
               "thresholds_wait_time": {
                 "type": "integer",
                 "documentation": "<p>The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ThresholdsWaitTime"
               },
               "ignore_metrics_time": {
                 "type": "integer",
                 "documentation": "<p>The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. <code>IgnoreMetricsTime</code> allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "IgnoreMetricsTime"
               },
               "cpu_threshold": {

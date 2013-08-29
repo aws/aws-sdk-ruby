@@ -1,6 +1,5 @@
 {
-  "type": "json",
-  "api_version": "2012-06-30",
+  "version": "2012-06-30",
   "endpoint": "storagegateway.%s.amazonaws.com",
   "metadata": {
     "json_version": 1.1,
@@ -8,6 +7,9 @@
     "signature_version": "v4",
     "target_prefix": "StorageGateway_20120630"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is a service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <a href=\"http://docs.amazonwebservices.com/storagegateway/latest/userguide/AWSStorageGatewayHTTPRequestsHeaders.html\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</li> <li> <a href=\"http://docs.amazonwebservices.com/storagegateway/latest/userguide/AWSStorageGatewaySigningRequests.html\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</li> <li> <a href=\"http://docs.amazonwebservices.com/storagegateway/latest/userguide/APIErrorResponses.html\">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</li> <li> <a href=\"http://docs.amazonwebservices.com/storagegateway/latest/userguide/AWSStorageGatewayAPIOperations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</li> <li> <a href=\"http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html\">AWS Storage Gateway Regions and Endpoints</a>: Provides a list of each of the regions and endpoints available for use with AWS Storage Gateway. </li> </ul>",
   "operations": {
     "activate_gateway": {
@@ -23,17 +25,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.</p>",
-            "min_length": 1,
-            "max_length": 50,
             "serialized_name": "ActivationKey"
           },
           "gateway_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A unique identifier for your gateway. This name becomes part of the gateway Amazon Resources Name (ARN) which is what you use as an input to other operations.</p>",
-            "min_length": 2,
-            "max_length": 255,
-            "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$",
             "serialized_name": "GatewayName"
           },
           "gateway_timezone": {
@@ -79,8 +76,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>One of the values that indicates the region where you want to store the snapshot backups. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href=\"http://docs.amazonwebservices.com/general/latest/gr/rande.html#sg_region\">Regions and Endpoints</a> in the <b>Amazon Web Services Glossary</b>.</p> <p><i>Valid Values</i>: \"us-east-1\", \"us-west-1\", \"us-west-2\", \"eu-west-1\", \"ap-northeast-1\", \"ap-southest-1\", \"sa-east-1\"</p>",
-            "min_length": 1,
-            "max_length": 25,
             "serialized_name": "GatewayRegion"
           },
           "gateway_type": {
@@ -315,8 +310,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "disk_ids": {
@@ -325,9 +318,7 @@
             "documentation": "<p>An array of strings that identify disks that are to be configured as cache. Each string in the array must be minimum length of 1 and maximum length of 300. You can get the disk IDs from the ListLocalDisks API.</p>",
             "serialized_name": "DiskIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 300
+              "type": "string"
             }
           }
         }
@@ -553,8 +544,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "disk_ids": {
@@ -563,9 +552,7 @@
             "documentation": "<p>An array of strings that identify disks that are to be configured as upload buffer. Each string in the array must be minimum length of 1 and maximum length of 300. You can get disk IDs from the ListLocalDisks API.</p>",
             "serialized_name": "DiskIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 300
+              "type": "string"
             }
           }
         }
@@ -791,8 +778,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "disk_ids": {
@@ -801,9 +786,7 @@
             "documentation": "<p>An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the ListLocalDisks API.</p>",
             "serialized_name": "DiskIds",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 300
+              "type": "string"
             }
           }
         }
@@ -1029,8 +1012,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "volume_size_in_bytes": {
@@ -1042,31 +1023,24 @@
           "snapshot_id": {
             "type": "string",
             "documentation": "<p>The snapshot ID (e.g., \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI cached volume from a snapshot; otherwise, do not include this field. To list snapshots for your account, use <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in Amazon Elastic Compute Cloud API Reference.</p>",
-            "pattern": "\\Asnap-[0-9a-fA-F]{8}\\z",
             "serialized_name": "SnapshotId"
           },
           "target_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <b>TargetName</b> as <i>myvolume</i> results in the target ARN of <i>arn:aws:storagegateway:us-east-1:111122223333:gateway/mygateway/target/iqn.1997-05.com.amazon:myvolume</i>. The target name must be unique across all volumes of a gateway. </p>",
-            "min_length": 1,
-            "max_length": 200,
-            "pattern": "^[-\\.;a-z0-9]+$",
             "serialized_name": "TargetName"
           },
           "network_interface_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use the DescribeGatewayInformation operation to get a list of the network interfaces available on the gateway. </p>",
-            "pattern": "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z",
             "serialized_name": "NetworkInterfaceId"
           },
           "client_token": {
             "type": "string",
             "required": true,
             "documentation": "<p>A unique identifying string for the cached volume.</p>",
-            "min_length": 5,
-            "max_length": 100,
             "serialized_name": "ClientToken"
           }
         }
@@ -1297,16 +1271,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           },
           "snapshot_description": {
             "type": "string",
             "required": true,
             "documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field</p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "SnapshotDescription"
           }
         }
@@ -1537,16 +1507,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           },
           "snapshot_description": {
             "type": "string",
             "required": true,
             "documentation": "<p>A textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field.</p> <p><i>Length</i>: Minimum length of 1. Maximum length of 255.</p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "SnapshotDescription"
           }
         }
@@ -1782,22 +1748,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "disk_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The unique identifier for the gateway local disk that is configured as a stored volume. Use <a href=\"http://docs.amazonwebservices.com/storagegateway/latest/userguide/API_ListLocalDisks.html\">ListLocalDisks</a> to list disk IDs for a gateway.</p>",
-            "min_length": 1,
-            "max_length": 300,
             "serialized_name": "DiskId"
           },
           "snapshot_id": {
             "type": "string",
             "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>",
-            "pattern": "\\Asnap-[0-9a-fA-F]{8}\\z",
             "serialized_name": "SnapshotId"
           },
           "preserve_existing_data": {
@@ -1810,16 +1771,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-1:111122223333:gateway/mygateway/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.</p>",
-            "min_length": 1,
-            "max_length": 200,
-            "pattern": "^[-\\.;a-z0-9]+$",
             "serialized_name": "TargetName"
           },
           "network_interface_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of the network interfaces available on a gateway.</p> <p><i>Valid Values</i>: A valid IP address.</p>",
-            "pattern": "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z",
             "serialized_name": "NetworkInterfaceId"
           }
         }
@@ -2055,8 +2012,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "bandwidth_type": {
@@ -2293,17 +2248,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for specified VolumeARN.</p>",
-            "min_length": 50,
-            "max_length": 800,
             "serialized_name": "TargetARN"
           },
           "initiator_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The iSCSI initiator that connects to the target.</p>",
-            "min_length": 1,
-            "max_length": 255,
-            "pattern": "[0-9a-z:.-]+",
             "serialized_name": "InitiatorName"
           }
         }
@@ -2534,8 +2484,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -2761,8 +2709,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           }
         }
@@ -2988,8 +2934,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           }
         }
@@ -3215,8 +3159,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -3452,8 +3394,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -3714,9 +3654,7 @@
             "documentation": "<p>An array of strings, where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must be from the same gateway. Use ListVolumes to get volume ARNs of a gateway.</p>",
             "serialized_name": "VolumeARNs",
             "members": {
-              "type": "string",
-              "min_length": 50,
-              "max_length": 500
+              "type": "string"
             }
           }
         }
@@ -4031,8 +3969,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for specified VolumeARN.</p>",
-            "min_length": 50,
-            "max_length": 800,
             "serialized_name": "TargetARN"
           }
         }
@@ -4284,8 +4220,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -4603,8 +4537,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -4883,8 +4815,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           }
         }
@@ -5165,9 +5095,7 @@
             "documentation": "<p>An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume. All of the specified stored volumes must from the same gateway. Use ListVolumes to get volume ARNs for a gateway.</p>",
             "serialized_name": "VolumeARNs",
             "members": {
-              "type": "string",
-              "min_length": 50,
-              "max_length": 500
+              "type": "string"
             }
           }
         }
@@ -5492,8 +5420,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -5737,8 +5663,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -5981,14 +5905,11 @@
           "marker": {
             "type": "string",
             "documentation": "<p>An opaque string that indicates the position at which to begin the returned list of gateways.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "Marker"
           },
           "limit": {
             "type": "integer",
             "documentation": "<p>Specifies that the list of gateways returned be limited to the specified number of items.</p>",
-            "min_length": 1,
             "serialized_name": "Limit"
           }
         }
@@ -6230,8 +6151,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -6505,8 +6424,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -6763,21 +6680,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>A string that indicates the position at which to begin the returned list of volumes. Obtain the marker from the response of a previous List iSCSI Volumes request.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "Marker"
           },
           "limit": {
             "type": "integer",
             "documentation": "<p>Specifies that the list of volumes returned be limited to the specified number of items.</p>",
-            "min_length": 1,
             "serialized_name": "Limit"
           }
         }
@@ -7033,8 +6945,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -7260,8 +7170,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -7487,20 +7395,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "average_upload_rate_limit_in_bits_per_sec": {
             "type": "integer",
             "documentation": "<p>The average upload bandwidth rate limit in bits per second.</p>",
-            "min_length": 51200,
             "serialized_name": "AverageUploadRateLimitInBitsPerSec"
           },
           "average_download_rate_limit_in_bits_per_sec": {
             "type": "integer",
             "documentation": "<p>The average download bandwidth rate limit in bits per second.</p>",
-            "min_length": 102400,
             "serialized_name": "AverageDownloadRateLimitInBitsPerSec"
           }
         }
@@ -7726,32 +7630,23 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for specified VolumeARN.</p>",
-            "min_length": 50,
-            "max_length": 800,
             "serialized_name": "TargetARN"
           },
           "secret_to_authenticate_initiator": {
             "type": "string",
             "required": true,
             "documentation": "<p>The secret key that the initiator (e.g. Windows client) must provide to participate in mutual CHAP with the target.</p>",
-            "min_length": 12,
-            "max_length": 16,
             "serialized_name": "SecretToAuthenticateInitiator"
           },
           "initiator_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The iSCSI initiator that connects to the target.</p>",
-            "min_length": 1,
-            "max_length": 255,
-            "pattern": "[0-9a-z:.-]+",
             "serialized_name": "InitiatorName"
           },
           "secret_to_authenticate_target": {
             "type": "string",
             "documentation": "<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p>",
-            "min_length": 12,
-            "max_length": 16,
             "serialized_name": "SecretToAuthenticateTarget"
           }
         }
@@ -7982,16 +7877,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "gateway_name": {
             "type": "string",
             "documentation": "<p>A unique identifier for your gateway. This name becomes part of the gateway Amazon Resources Name (ARN) which is what you use as an input to other operations.</p>",
-            "min_length": 2,
-            "max_length": 255,
-            "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$",
             "serialized_name": "GatewayName"
           },
           "gateway_timezone": {
@@ -8255,8 +8145,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           }
         }
@@ -8482,32 +8370,24 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "GatewayARN"
           },
           "hour_of_day": {
             "type": "integer",
             "required": true,
             "documentation": "<p>The hour component of the maintenance start time represented as <emphasis>hh</emphasis>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.</p>",
-            "min_length": 0,
-            "max_length": 23,
             "serialized_name": "HourOfDay"
           },
           "minute_of_hour": {
             "type": "integer",
             "required": true,
             "documentation": "<p>The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (00 to 59). The minute of the hour is in the time zone of the gateway.</p>",
-            "min_length": 0,
-            "max_length": 59,
             "serialized_name": "MinuteOfHour"
           },
           "day_of_week": {
             "type": "integer",
             "required": true,
             "documentation": "<p>The maintenance start time day of the week.</p>",
-            "min_length": 0,
-            "max_length": 6,
             "serialized_name": "DayOfWeek"
           }
         }
@@ -8733,31 +8613,23 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.</p>",
-            "min_length": 50,
-            "max_length": 500,
             "serialized_name": "VolumeARN"
           },
           "start_at": {
             "type": "integer",
             "required": true,
             "documentation": "<p>The hour of the day at which the snapshot schedule begins represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>",
-            "min_length": 0,
-            "max_length": 23,
             "serialized_name": "StartAt"
           },
           "recurrence_in_hours": {
             "type": "integer",
             "required": true,
             "documentation": "<p>Frequency of snapshots. Specify the number of hours between snapshots.</p>",
-            "min_length": 1,
-            "max_length": 24,
             "serialized_name": "RecurrenceInHours"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Optional description of the snapshot that overwrites the existing description.</p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "Description"
           }
         }

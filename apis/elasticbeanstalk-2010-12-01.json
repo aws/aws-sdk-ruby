@@ -1,13 +1,16 @@
 {
-  "type": "query",
-  "api_version": "2010-12-01",
+  "version": "2010-12-01",
   "endpoint": "elasticbeanstalk.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_abbreviation": "Elastic Beanstalk",
     "service_full_name": "AWS Elastic Beanstalk",
-    "signature_version": "v4"
+    "signature_version": "v4",
+    "xmlnamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
   },
+  "plugins": [
+    "Aws::Plugins::QuerySerializer"
+  ],
   "documentation": "<fullname>AWS Elastic Beanstalk</fullname> <p> This is the AWS Elastic Beanstalk API Reference. This guide provides detailed information about AWS Elastic Beanstalk actions, data types, parameters, and errors. </p> <p>AWS Elastic Beanstalk is a tool that makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on Amazon Web Services cloud resources. </p> <p> For more information about this product, go to the <a href=\"http://aws.amazon.com/elasticbeanstalk/\">AWS Elastic Beanstalk</a> details page. The location of the lastest AWS Elastic Beanstalk WSDL is <a href=\"http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl\">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. </p> <p><b>Endpoints</b></p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>",
   "operations": {
     "check_dns_availability": {
@@ -23,8 +26,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The prefix used when this CNAME is reserved. </p>",
-            "min_length": 4,
-            "max_length": 63,
             "serialized_name": "CNAMEPrefix"
           }
         }
@@ -59,14 +60,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the application.</p> <p> Constraint: This name must be unique within your account. If the specified name already exists, the action returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes the application.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           }
         }
@@ -142,22 +140,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application. If no application is found with this name, and <code>AutoCreateApplication</code> is <code>false</code>, returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "required": true,
             "documentation": "<p>A label identifying this version.</p> <p>Constraint: Must be unique per application. If an application version already exists with this label for the specified application, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes this version.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "source_bundle": {
@@ -168,13 +161,11 @@
               "s3_bucket": {
                 "type": "string",
                 "documentation": "<p>The Amazon S3 bucket where the data is located.</p>",
-                "max_length": 255,
                 "serialized_name": "S3Bucket"
               },
               "s3_key": {
                 "type": "string",
                 "documentation": "<p>The Amazon S3 key where the data is located.</p>",
-                "max_length": 1024,
                 "serialized_name": "S3Key"
               }
             }
@@ -281,22 +272,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application to associate with this configuration template. If no application is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the configuration template.</p> <p>Constraint: This name must be unique per application. </p> <p>Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values. </p> <p> Use ListAvailableSolutionStacks to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "source_configuration": {
@@ -307,15 +293,11 @@
               "application_name": {
                 "type": "string",
                 "documentation": "<p>The name of the application associated with the configuration.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "ApplicationName"
               },
               "template_name": {
                 "type": "string",
                 "documentation": "<p>The name of the configuration template.</p>",
-                "min_length": 1,
-                "max_length": 100,
                 "serialized_name": "TemplateName"
               }
             }
@@ -328,7 +310,6 @@
           "description": {
             "type": "string",
             "documentation": "<p>Describes this configuration.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "option_settings": {
@@ -464,49 +445,37 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application that contains the version to be deployed. </p> <p> If no application is found with this name, <code>CreateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p>The name of the application version to deploy.</p> <p> If the specified application has no associated application versions, AWS Elastic Beanstalk <code>UpdateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p> <p> Default: If not specified, AWS Elastic Beanstalk attempts to launch the most recently created application version. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "environment_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> A unique name for the deployment environment. Used in the application URL. </p> <p>Constraint: Must be from 4 to 23 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this parameter or a <code>SolutionStackName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> This is an alternative to specifying a configuration name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. </p> <p> Condition: You must specify either this or a <code>TemplateName</code>, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "cname_prefix": {
             "type": "string",
             "documentation": "<p> If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name. </p>",
-            "min_length": 4,
-            "max_length": 63,
             "serialized_name": "CNAMEPrefix"
           },
           "description": {
             "type": "string",
             "documentation": "<p>Describes this environment.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "option_settings": {
@@ -752,8 +721,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the application to delete.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "terminate_env_by_force": {
@@ -785,16 +752,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the application to delete releases from.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "required": true,
             "documentation": "<p> The label of the version to delete. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "delete_source_bundle": {
@@ -844,16 +807,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application to delete the configuration template from. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the configuration template to delete.</p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           }
         }
@@ -880,16 +839,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application the environment is associated with. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "environment_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the environment to delete the draft configuration from. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           }
         }
@@ -907,8 +862,6 @@
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include ones that are associated with the specified application. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_labels": {
@@ -916,9 +869,7 @@
             "documentation": "<p> If specified, restricts the returned descriptions to only include ones that have the specified version labels. </p>",
             "serialized_name": "VersionLabels",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 100
+              "type": "string"
             }
           }
         }
@@ -997,9 +948,7 @@
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names. </p>",
             "serialized_name": "ApplicationNames",
             "members": {
-              "type": "string",
-              "min_length": 1,
-              "max_length": 100
+              "type": "string"
             }
           }
         }
@@ -1070,28 +1019,21 @@
           "application_name": {
             "type": "string",
             "documentation": "<p> The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template whose configuration options you want to describe. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment whose configuration options you want to describe. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "solution_stack_name": {
             "type": "string",
             "documentation": "<p> The name of the solution stack whose configuration options you want to describe. </p>",
-            "max_length": 100,
             "serialized_name": "SolutionStackName"
           },
           "options": {
@@ -1227,22 +1169,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The application for the environment or configuration template. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template to describe. </p> <p> Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment to describe. </p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           }
         }
@@ -1353,8 +1289,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment to retrieve AWS resource usage data. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           }
         }
@@ -1478,15 +1412,11 @@
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "environment_ids": {
@@ -1502,9 +1432,7 @@
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names. </p>",
             "serialized_name": "EnvironmentNames",
             "members": {
-              "type": "string",
-              "min_length": 4,
-              "max_length": 23
+              "type": "string"
             }
           },
           "include_deleted": {
@@ -1672,22 +1600,16 @@
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this application version. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that are associated with this environment configuration. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "environment_id": {
@@ -1698,8 +1620,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "request_id": {
@@ -1733,8 +1653,6 @@
           "max_records": {
             "type": "integer",
             "documentation": "<p> Specifies the maximum number of events that can be returned, beginning with the most recent event. </p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxRecords"
           },
           "next_token": {
@@ -1876,8 +1794,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment to rebuild. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           }
         }
@@ -1908,8 +1824,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of the environment of the requested data.</p> <p> If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "info_type": {
@@ -1941,8 +1855,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment to restart the server for. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           }
         }
@@ -1965,8 +1877,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of the data's environment.</p> <p> If no such environment is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "info_type": {
@@ -2038,8 +1948,6 @@
           "source_environment_name": {
             "type": "string",
             "documentation": "<p> The name of the source environment. </p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "SourceEnvironmentName"
           },
           "destination_environment_id": {
@@ -2050,8 +1958,6 @@
           "destination_environment_name": {
             "type": "string",
             "documentation": "<p> The name of the destination environment. </p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "DestinationEnvironmentName"
           }
         }
@@ -2074,8 +1980,6 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "terminate_resources": {
@@ -2236,14 +2140,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application to update. If no such application is found, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "description": {
             "type": "string",
             "documentation": "<p> A new description for the application. </p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description. </p>",
-            "max_length": 200,
             "serialized_name": "Description"
           }
         }
@@ -2311,22 +2212,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application associated with this version. </p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "version_label": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the version to update.</p> <p> If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "description": {
             "type": "string",
             "documentation": "<p>A new description for this release.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           }
         }
@@ -2400,22 +2296,17 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the application associated with the configuration template to update.</p> <p> If no application is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the configuration template to update.</p> <p> If no configuration template is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p>A new description for the configuration.</p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "option_settings": {
@@ -2570,28 +2461,21 @@
           "environment_name": {
             "type": "string",
             "documentation": "<p>The name of the environment to update. If no environment with this name exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "version_label": {
             "type": "string",
             "documentation": "<p> If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "VersionLabel"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "description": {
             "type": "string",
             "documentation": "<p> If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment. </p>",
-            "max_length": 200,
             "serialized_name": "Description"
           },
           "option_settings": {
@@ -2794,22 +2678,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the application that the configuration template or environment belongs to. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "ApplicationName"
           },
           "template_name": {
             "type": "string",
             "documentation": "<p> The name of the configuration template to validate the settings against. </p> <p> Condition: You cannot specify both this and an environment name. </p>",
-            "min_length": 1,
-            "max_length": 100,
             "serialized_name": "TemplateName"
           },
           "environment_name": {
             "type": "string",
             "documentation": "<p> The name of the environment to validate the settings against. </p> <p> Condition: You cannot specify both this and a configuration template name. </p>",
-            "min_length": 4,
-            "max_length": 23,
             "serialized_name": "EnvironmentName"
           },
           "option_settings": {

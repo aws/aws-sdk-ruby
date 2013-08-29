@@ -1,6 +1,5 @@
 {
-  "type": "rest-xml",
-  "api_version": "2013-05-12",
+  "version": "2013-05-12",
   "endpoint": "cloudfront.%s.amazonaws.com",
   "metadata": {
     "service_abbreviation": "CloudFront",
@@ -8,6 +7,9 @@
     "signature_version": "v4",
     "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2013-05-12/"
   },
+  "plugins": [
+    "Aws::Plugins::XmlSerializer"
+  ],
   "operations": {
     "create_cloud_front_origin_access_identity2013_05_12": {
       "name": "CreateCloudFrontOriginAccessIdentity2013_05_12",
@@ -219,7 +221,6 @@
                   "items": {
                     "type": "list",
                     "documentation": "A complex type that contains origins for this distribution.",
-                    "min_length": 1,
                     "serialized_name": "Items",
                     "members": {
                       "type": "structure",
@@ -5091,7 +5092,6 @@
                   "items": {
                     "type": "list",
                     "documentation": "A complex type that contains origins for this distribution.",
-                    "min_length": 1,
                     "serialized_name": "Items",
                     "members": {
                       "type": "structure",

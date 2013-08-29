@@ -1,13 +1,16 @@
 {
-  "type": "query",
-  "api_version": "2010-05-08",
+  "version": "2010-05-08",
   "endpoint": "iam.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_abbreviation": "IAM",
     "service_full_name": "AWS Identity and Access Management",
-    "signature_version": "v4"
+    "signature_version": "v4",
+    "xmlnamespace": "https://iam.amazonaws.com/doc/2010-05-08/"
   },
+  "plugins": [
+    "Aws::Plugins::QuerySerializer"
+  ],
   "documentation": "<fullname>AWS Identity and Access Management</fullname> <p>This guide provides descriptions of the Identity and Access Management (IAM) API as well as links to related content in the guide, <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/\" target=\"_blank\">Using IAM</a>.</p> <p>IAM is a web service that enables AWS customers to manage users and user permissions under their AWS account. For more information about this product go to <a href=\"http://aws.amazon.com/iam/\" target=\"_blank\">AWS Identity and Access Management (IAM)</a>. For information about setting up signatures and authorization through the API, go to <a href=\"http://docs.amazonwebservices.com/general/latest/gr/signing_aws_api_requests.html\" target=\"_blank\">Signing AWS API Requests</a> in the <i>AWS General Reference</i>. For general information about using the Query API with IAM, go to <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\" target=\"_blank\">Making Query Requests</a> in <i>Using IAM</i>.</p> <p>If you're new to AWS and need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://aws.amazon.com/documentation/\" target=\"_blank\">http://aws.amazon.com/documentation/</a>.</p>",
   "operations": {
     "add_role_to_instance_profile": {
@@ -22,18 +25,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the instance profile to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "InstanceProfileName"
           },
           "role_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to add.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           }
         }
@@ -83,18 +80,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "user_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to add.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -133,17 +124,11 @@
           "old_password": {
             "type": "string",
             "required": true,
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "OldPassword"
           },
           "new_password": {
             "type": "string",
             "required": true,
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "NewPassword"
           }
         }
@@ -182,9 +167,6 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>The user name that the new key will belong to.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -266,9 +248,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the account alias to create.</p>",
-            "min_length": 3,
-            "max_length": 63,
-            "pattern": "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$",
             "serialized_name": "AccountAlias"
           }
         }
@@ -297,18 +276,12 @@
           "path": {
             "type": "string",
             "documentation": "<p>The path to the group. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           },
           "group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to create. Do not include the path in this value.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           }
         }
@@ -396,17 +369,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the instance profile to create.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "InstanceProfileName"
           },
           "path": {
             "type": "string",
             "documentation": "<p>The path to the instance profile. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           }
         }
@@ -525,18 +492,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to create a password for.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "password": {
             "type": "string",
             "required": true,
             "documentation": "<p>The new password for the user name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "Password"
           }
         }
@@ -608,27 +569,18 @@
           "path": {
             "type": "string",
             "documentation": "<p>The path to the role. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           },
           "role_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to create.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w-]*",
             "serialized_name": "RoleName"
           },
           "assume_role_policy_document": {
             "type": "string",
             "required": true,
             "documentation": "<p>The policy that grants an entity permission to assume the role.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "AssumeRolePolicyDocument"
           }
         }
@@ -720,18 +672,12 @@
           "path": {
             "type": "string",
             "documentation": "<p>The path for the user name. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           },
           "user_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to create.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -818,17 +764,12 @@
           "path": {
             "type": "string",
             "documentation": "<p>The path for the virtual MFA device. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           },
           "virtual_mfa_device_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.</p>",
-            "min_length": 1,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "VirtualMFADeviceName"
           }
         }
@@ -932,18 +873,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user whose MFA device you want to deactivate.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "serial_number": {
             "type": "string",
             "required": true,
             "documentation": "<p>The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the device ARN.</p>",
-            "min_length": 9,
-            "max_length": 256,
-            "pattern": "[\\w+=/:,.@-]*",
             "serialized_name": "SerialNumber"
           }
         }
@@ -982,18 +917,12 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user whose key you want to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "access_key_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The Access Key ID for the Access Key ID and Secret Access Key you want to delete.</p>",
-            "min_length": 16,
-            "max_length": 32,
-            "pattern": "[\\w]*",
             "serialized_name": "AccessKeyId"
           }
         }
@@ -1023,9 +952,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the account alias to delete.</p>",
-            "min_length": 3,
-            "max_length": 63,
-            "pattern": "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$",
             "serialized_name": "AccountAlias"
           }
         }
@@ -1073,9 +999,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           }
         }
@@ -1115,18 +1038,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -1156,9 +1073,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the instance profile to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "InstanceProfileName"
           }
         }
@@ -1198,9 +1112,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user whose password you want to delete.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -1240,9 +1151,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to delete.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           }
         }
@@ -1282,18 +1190,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role the associated with the policy.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -1323,9 +1225,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the server certificate you want to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "ServerCertificateName"
           }
         }
@@ -1364,18 +1263,12 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user the signing certificate belongs to.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "certificate_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>ID of the signing certificate to delete.</p>",
-            "min_length": 24,
-            "max_length": 128,
-            "pattern": "[\\w]*",
             "serialized_name": "CertificateId"
           }
         }
@@ -1405,9 +1298,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -1447,18 +1337,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to delete.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -1488,9 +1372,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN.</p>",
-            "min_length": 9,
-            "max_length": 256,
-            "pattern": "[\\w+=/:,.@-]*",
             "serialized_name": "SerialNumber"
           }
         }
@@ -1530,36 +1411,24 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user for whom you want to enable the MFA device.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "serial_number": {
             "type": "string",
             "required": true,
             "documentation": "<p>The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the device ARN.</p>",
-            "min_length": 9,
-            "max_length": 256,
-            "pattern": "[\\w+=/:,.@-]*",
             "serialized_name": "SerialNumber"
           },
           "authentication_code_1": {
             "type": "string",
             "required": true,
             "documentation": "<p>An authentication code emitted by the device.</p>",
-            "min_length": 6,
-            "max_length": 6,
-            "pattern": "[\\d]*",
             "serialized_name": "AuthenticationCode1"
           },
           "authentication_code_2": {
             "type": "string",
             "required": true,
             "documentation": "<p>A subsequent authentication code emitted by the device.</p>",
-            "min_length": 6,
-            "max_length": 6,
-            "pattern": "[\\d]*",
             "serialized_name": "AuthenticationCode2"
           }
         }
@@ -1729,24 +1598,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -1860,18 +1721,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to get.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -1922,9 +1777,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the instance profile to get information about.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "InstanceProfileName"
           }
         }
@@ -2033,9 +1885,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user whose login profile you want to retrieve.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -2088,9 +1937,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to get information about.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           }
         }
@@ -2163,18 +2009,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role associated with the policy.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to get.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -2225,9 +2065,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the server certificate you want to retrieve information about.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "ServerCertificateName"
           }
         }
@@ -2311,9 +2148,6 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user to get information about.</p> <p>This parameter is optional. If it is not included, it defaults to the user making the request.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -2381,18 +2215,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user who the policy is associated with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document to get.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           }
         }
@@ -2442,24 +2270,16 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of keys you want in the response. If there are additional keys beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2539,16 +2359,11 @@
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of account aliases you want in the response. If there are additional account aliases beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2590,24 +2405,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the group to list policies for.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of policy names you want in the response. If there are additional policy names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2660,24 +2467,16 @@
           "path_prefix": {
             "type": "string",
             "documentation": "<p>The path prefix for filtering the results. For example: <code>/division_abc/subdivision_xyz/</code>, which would get all groups whose path starts with <code>/division_abc/subdivision_xyz/</code>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing all groups.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "\\u002F[\\u0021-\\u007F]*",
             "serialized_name": "PathPrefix"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of groups you want in the response. If there are additional groups beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2747,24 +2546,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the user to list groups for.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of groups you want in the response. If there are additional groups beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2845,24 +2636,16 @@
           "path_prefix": {
             "type": "string",
             "documentation": "<p>The path prefix for filtering the results. For example: <code>/application_abc/component_xyz/</code>, which would get all instance profiles whose path starts with <code>/application_abc/component_xyz/</code>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing all instance profiles.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "\\u002F[\\u0021-\\u007F]*",
             "serialized_name": "PathPrefix"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -2973,24 +2756,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the role to list instance profiles for.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3112,24 +2887,16 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user whose MFA devices you want to list.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of MFA devices you want in the response. If there are additional MFA devices beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3201,24 +2968,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the role to list policies for.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3271,24 +3030,16 @@
           "path_prefix": {
             "type": "string",
             "documentation": "<p>The path prefix for filtering the results. For example: <code>/application_abc/component_xyz/</code>, which would get all roles whose path starts with <code>/application_abc/component_xyz/</code>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing all roles.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "\\u002F[\\u0021-\\u007F]*",
             "serialized_name": "PathPrefix"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3362,24 +3113,16 @@
           "path_prefix": {
             "type": "string",
             "documentation": "<p>The path prefix for filtering the results. For example: <code>/company/servercerts</code> would get all server certificates for which the path starts with <code>/company/servercerts</code>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing all server certificates.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "\\u002F[\\u0021-\\u007F]*",
             "serialized_name": "PathPrefix"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of server certificates you want in the response. If there are additional server certificates beyond the maximum you specify, the <code>IsTruncated</code> response element will be set to <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3448,24 +3191,16 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>The name of the user.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of certificate IDs you want in the response. If there are additional certificate IDs beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3551,24 +3286,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the user to list policies for.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this only when paginating results to indicate the maximum number of policy names you want in the response. If there are additional policy names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3621,24 +3348,16 @@
           "path_prefix": {
             "type": "string",
             "documentation": "<p>The path prefix for filtering the results. For example: <code>/division_abc/subdivision_xyz/</code>, which would get all user names whose path starts with <code>/division_abc/subdivision_xyz/</code>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing all user names.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "\\u002F[\\u0021-\\u007F]*",
             "serialized_name": "PathPrefix"
           },
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3717,16 +3436,11 @@
           "marker": {
             "type": "string",
             "documentation": "<p>Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>",
-            "min_length": 1,
-            "max_length": 320,
-            "pattern": "[\\u0020-\\u00FF]*",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "integer",
             "documentation": "<p>Use this parameter only when paginating results to indicate the maximum number of user names you want in the response. If there are additional user names beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>",
-            "min_length": 1,
-            "max_length": 1000,
             "serialized_name": "MaxItems"
           }
         }
@@ -3821,27 +3535,18 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to associate the policy with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "required": true,
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -3891,27 +3596,18 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to associate the policy with.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "required": true,
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -3961,27 +3657,18 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to associate the policy with.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "policy_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the policy document.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "PolicyName"
           },
           "policy_document": {
             "type": "string",
             "required": true,
             "documentation": "<p>The policy document.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -4031,18 +3718,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the instance profile to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "InstanceProfileName"
           },
           "role_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to remove.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           }
         }
@@ -4072,18 +3753,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "user_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to remove.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           }
         }
@@ -4113,36 +3788,24 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user whose MFA device you want to resynchronize.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "serial_number": {
             "type": "string",
             "required": true,
             "documentation": "<p>Serial number that uniquely identifies the MFA device.</p>",
-            "min_length": 9,
-            "max_length": 256,
-            "pattern": "[\\w+=/:,.@-]*",
             "serialized_name": "SerialNumber"
           },
           "authentication_code_1": {
             "type": "string",
             "required": true,
             "documentation": "<p>An authentication code emitted by the device.</p>",
-            "min_length": 6,
-            "max_length": 6,
-            "pattern": "[\\d]*",
             "serialized_name": "AuthenticationCode1"
           },
           "authentication_code_2": {
             "type": "string",
             "required": true,
             "documentation": "<p>A subsequent authentication code emitted by the device.</p>",
-            "min_length": 6,
-            "max_length": 6,
-            "pattern": "[\\d]*",
             "serialized_name": "AuthenticationCode2"
           }
         }
@@ -4181,18 +3844,12 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user whose key you want to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "access_key_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The Access Key ID of the Secret Access Key you want to update.</p>",
-            "min_length": 16,
-            "max_length": 32,
-            "pattern": "[\\w]*",
             "serialized_name": "AccessKeyId"
           },
           "status": {
@@ -4230,8 +3887,6 @@
         "members": {
           "minimum_password_length": {
             "type": "integer",
-            "min_length": 6,
-            "max_length": 128,
             "serialized_name": "MinimumPasswordLength"
           },
           "require_symbols": {
@@ -4291,18 +3946,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the role to update.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "RoleName"
           },
           "policy_document": {
             "type": "string",
             "required": true,
             "documentation": "<p>The policy that grants an entity permission to assume the role.</p>",
-            "min_length": 1,
-            "max_length": 131072,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "PolicyDocument"
           }
         }
@@ -4342,25 +3991,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the group to update. If you're changing the name of the group, this is the original name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "GroupName"
           },
           "new_path": {
             "type": "string",
             "documentation": "<p>New path for the group. Only include this if changing the group's path.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "NewPath"
           },
           "new_group_name": {
             "type": "string",
             "documentation": "<p>New name for the group. Only include this if changing the group's name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "NewGroupName"
           }
         }
@@ -4400,18 +4040,12 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user whose password you want to update.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "password": {
             "type": "string",
             "required": true,
             "documentation": "<p>The new password for the user name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "Password"
           }
         }
@@ -4461,25 +4095,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the server certificate that you want to update.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "ServerCertificateName"
           },
           "new_path": {
             "type": "string",
             "documentation": "<p>The new path for the server certificate. Include this only if you are updating the server certificate's path.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "NewPath"
           },
           "new_server_certificate_name": {
             "type": "string",
             "documentation": "<p>The new name for the server certificate. Include this only if you are updating the server certificate's name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "NewServerCertificateName"
           }
         }
@@ -4518,18 +4143,12 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user the signing certificate belongs to.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "certificate_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The ID of the signing certificate you want to update.</p>",
-            "min_length": 24,
-            "max_length": 128,
-            "pattern": "[\\w]*",
             "serialized_name": "CertificateId"
           },
           "status": {
@@ -4569,25 +4188,16 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Name of the user to update. If you're changing the name of the user, this is the original user name.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "new_path": {
             "type": "string",
             "documentation": "<p>New path for the user. Include this parameter only if you're changing the user's path.</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "NewPath"
           },
           "new_user_name": {
             "type": "string",
             "documentation": "<p>New name for the user. Include this parameter only if you're changing the user's name.</p>",
-            "min_length": 1,
-            "max_length": 64,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "NewUserName"
           }
         }
@@ -4636,44 +4246,29 @@
           "path": {
             "type": "string",
             "documentation": "<p>The path for the server certificate. For more information about paths, see <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>",
-            "min_length": 1,
-            "max_length": 512,
-            "pattern": "(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)",
             "serialized_name": "Path"
           },
           "server_certificate_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name for the server certificate. Do not include the path in this value.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "ServerCertificateName"
           },
           "certificate_body": {
             "type": "string",
             "required": true,
             "documentation": "<p>The contents of the public key certificate in PEM-encoded format.</p>",
-            "min_length": 1,
-            "max_length": 16384,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "CertificateBody"
           },
           "private_key": {
             "type": "string",
             "required": true,
             "documentation": "<p>The contents of the private key in PEM-encoded format.</p>",
-            "min_length": 1,
-            "max_length": 16384,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*",
             "serialized_name": "PrivateKey"
           },
           "certificate_chain": {
             "type": "string",
             "documentation": "<p>The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain.</p>",
-            "min_length": 1,
-            "max_length": 2097152,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*",
             "serialized_name": "CertificateChain"
           }
         }
@@ -4770,18 +4365,12 @@
           "user_name": {
             "type": "string",
             "documentation": "<p>Name of the user the signing certificate is for.</p>",
-            "min_length": 1,
-            "max_length": 128,
-            "pattern": "[\\w+=,.@-]*",
             "serialized_name": "UserName"
           },
           "certificate_body": {
             "type": "string",
             "required": true,
             "documentation": "<p>The contents of the signing certificate.</p>",
-            "min_length": 1,
-            "max_length": 16384,
-            "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
             "serialized_name": "CertificateBody"
           }
         }

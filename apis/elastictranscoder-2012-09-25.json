@@ -1,11 +1,13 @@
 {
-  "type": "rest-json",
-  "api_version": "2012-09-25",
+  "version": "2012-09-25",
   "endpoint": "elastictranscoder.%s.amazonaws.com",
   "metadata": {
     "service_full_name": "Amazon Elastic Transcoder",
     "signature_version": "v4"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<fullname>AWS Elastic Transcoder Service</fullname> <p>The AWS Elastic Transcoder Service.</p>",
   "operations": {
     "cancel_job": {
@@ -21,7 +23,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the job that you want to cancel. </p> <p>To get a list of the jobs (including their <code>jobId</code>) that have a status of <code>Submitted</code>, use the ListJobsByStatus API action.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -82,7 +83,6 @@
           "pipeline_id": {
             "type": "string",
             "documentation": "<p>The <code>Id</code> of the pipeline that you want Elastic Transcoder to use for transcoding. The pipeline determines several settings, including the Amazon S3 bucket from which Elastic Transcoder gets the files to transcode and the bucket into which Elastic Transcoder puts the transcoded files.</p>",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "PipelineId"
           },
           "input": {
@@ -93,38 +93,31 @@
               "key": {
                 "type": "string",
                 "documentation": "<p> The name of the file to transcode. Elsewhere in the body of the JSON block is the the ID of the pipeline to use for processing the job. The <code>InputBucket</code> object in that pipeline tells Elastic Transcoder which Amazon S3 bucket to get the file from. </p> <p>If the file name includes a prefix, such as <code>cooking/lasagna.mpg</code>, include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error.</p>",
-                "min_length": 1,
-                "max_length": 255,
                 "serialized_name": "Key"
               },
               "frame_rate": {
                 "type": "string",
                 "documentation": "<p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate of the input file, specify <code>auto</code>. If you want to specify the frame rate for the input file, enter one of the following values: </p> <p> <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code> </p> <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of the frame rate.</p>",
-                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
                 "serialized_name": "FrameRate"
               },
               "resolution": {
                 "type": "string",
                 "documentation": "<p>This value must be <code>auto</code>, which causes Elastic Transcoder to automatically detect the resolution of the input file.</p>",
-                "pattern": "(^auto$)|(^\\d{1,5}x\\d{1,5}$)",
                 "serialized_name": "Resolution"
               },
               "aspect_ratio": {
                 "type": "string",
                 "documentation": "<p> The aspect ratio of the input file. If you want Elastic Transcoder to automatically detect the aspect ratio of the input file, specify <code>auto</code>. If you want to specify the aspect ratio for the output file, enter one of the following values: </p> <p> <code>1:1</code>, <code>4:3</code>, <code>3:2</code>, <code>16:9</code> </p> <p> If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of the aspect ratio. </p>",
-                "pattern": "(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)",
                 "serialized_name": "AspectRatio"
               },
               "interlaced": {
                 "type": "string",
                 "documentation": "<p>Whether the input file is interlaced. If you want Elastic Transcoder to automatically detect whether the input file is interlaced, specify <code>auto</code>. If you want to specify whether the input file is interlaced, enter one of the following values:</p> <p><code>true</code>, <code>false</code></p> <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of interlacing.</p>",
-                "pattern": "(^auto$)|(^true$)|(^false$)",
                 "serialized_name": "Interlaced"
               },
               "container": {
                 "type": "string",
                 "documentation": "<p>The container type for the input file. If you want Elastic Transcoder to automatically detect the container type of the input file, specify <code>auto</code>. If you want to specify the container type for the input file, enter one of the following values: </p> <p> <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>, <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>, <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code> </p>",
-                "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
                 "serialized_name": "Container"
               }
             }
@@ -137,32 +130,26 @@
               "key": {
                 "type": "string",
                 "documentation": "<p> The name to assign to the transcoded file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the <code>OutputBucket</code> object in the pipeline that is specified by the pipeline ID. If a file with the specified name already exists in the output bucket, the job fails. </p>",
-                "min_length": 1,
-                "max_length": 255,
                 "serialized_name": "Key"
               },
               "thumbnail_pattern": {
                 "type": "string",
                 "documentation": "<p>Whether you want Elastic Transcoder to create thumbnails for your videos and, if so, how you want Elastic Transcoder to name the files.</p> <p>If you don't want Elastic Transcoder to create thumbnails, specify \"\".</p> <p> If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: </p> <ul> <li> <p> <b><code>`{count}`</code> (Required)</b>: If you want to create thumbnails, you must include <code>`{count}`</code> in the <code>ThumbnailPattern</code> object. Wherever you specify <code>`{count}`</code>, Elastic Transcoder adds a five-digit sequence number (beginning with <b>00001</b>) to thumbnail file names. The number indicates where a given thumbnail appears in the sequence of thumbnails for a transcoded file. </p> <important>If you specify a literal value and/or <code>`{resolution}`</code> but you omit <code>`{count}`</code>, Elastic Transcoder returns a validation error and does not create the job.</important> </li> <li> <p> <b>Literal values (Optional)</b>: You can specify literal values anywhere in the <code>ThumbnailPattern</code> object. For example, you can include them as a file name prefix or as a delimiter between <code>`{resolution}`</code> and <code>`{count}`</code>. </p> </li> <li> <p> <b><code>`{resolution}`</code> (Optional)</b>: If you want Elastic Transcoder to include the resolution in the file name, include <code>`{resolution}`</code> in the <code>ThumbnailPattern</code> object. </p> </li> </ul> <p>When creating thumbnails, Elastic Transcoder automatically saves the files in the format (.jpg or .png) that appears in the preset that you specified in the <code>PresetID</code> value of <code>CreateJobOutput</code>. Elastic Transcoder also appends the applicable file name extension.</p>",
-                "pattern": "(^$)|(^.*\\{count\\}.*$)",
                 "serialized_name": "ThumbnailPattern"
               },
               "rotate": {
                 "type": "string",
                 "documentation": "<p> The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values: <code>auto</code>, <code>0</code>, <code>90</code>, <code>180</code>, <code>270</code>. The value <code>auto</code> generally works only if the file that you're transcoding contains rotation metadata. </p>",
-                "pattern": "(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)",
                 "serialized_name": "Rotate"
               },
               "preset_id": {
                 "type": "string",
                 "documentation": "<p> The <code>Id</code> of the preset to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. </p>",
-                "pattern": "^\\d{13}-\\w{6}$",
                 "serialized_name": "PresetId"
               },
               "segment_duration": {
                 "type": "string",
                 "documentation": "<p>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is ts (MPEG-TS), SegmentDuration is the duration of each .ts file in seconds. The range of valid values is 1 to 60 seconds.</p>",
-                "pattern": "^\\d{1,5}([.]\\d{0,5})?$",
                 "serialized_name": "SegmentDuration"
               },
               "watermarks": {
@@ -176,16 +163,11 @@
                     "preset_watermark_id": {
                       "type": "string",
                       "documentation": "<p>The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks Id tells Elastic Transcoder which settings to use.</p>",
-                      "min_length": 1,
-                      "max_length": 40,
                       "serialized_name": "PresetWatermarkId"
                     },
                     "input_key": {
                       "type": "string",
                       "documentation": "<p> The name of the .png or .jpg file that you want to use for the watermark. To determine which Amazon S3 bucket contains the specified file, Elastic Transcoder checks the pipeline specified by <code>Pipeline</code>; the <code>Input Bucket</code> object in that pipeline identifies the bucket.</p> <p> If the file name includes a prefix, for example, <b>logos/128x64.png</b>, include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error. </p>",
-                      "min_length": 1,
-                      "max_length": 255,
-                      "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
                       "serialized_name": "InputKey"
                     }
                   }
@@ -196,7 +178,6 @@
           "outputs": {
             "type": "list",
             "documentation": "<p> A section of the request body that provides information about the transcoded (target) files. We recommend that you use the <code>Outputs</code> syntax instead of the <code>Output</code> syntax. </p>",
-            "max_length": 30,
             "serialized_name": "Outputs",
             "members": {
               "type": "structure",
@@ -205,32 +186,26 @@
                 "key": {
                   "type": "string",
                   "documentation": "<p> The name to assign to the transcoded file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the <code>OutputBucket</code> object in the pipeline that is specified by the pipeline ID. If a file with the specified name already exists in the output bucket, the job fails. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "Key"
                 },
                 "thumbnail_pattern": {
                   "type": "string",
                   "documentation": "<p>Whether you want Elastic Transcoder to create thumbnails for your videos and, if so, how you want Elastic Transcoder to name the files.</p> <p>If you don't want Elastic Transcoder to create thumbnails, specify \"\".</p> <p> If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: </p> <ul> <li> <p> <b><code>`{count}`</code> (Required)</b>: If you want to create thumbnails, you must include <code>`{count}`</code> in the <code>ThumbnailPattern</code> object. Wherever you specify <code>`{count}`</code>, Elastic Transcoder adds a five-digit sequence number (beginning with <b>00001</b>) to thumbnail file names. The number indicates where a given thumbnail appears in the sequence of thumbnails for a transcoded file. </p> <important>If you specify a literal value and/or <code>`{resolution}`</code> but you omit <code>`{count}`</code>, Elastic Transcoder returns a validation error and does not create the job.</important> </li> <li> <p> <b>Literal values (Optional)</b>: You can specify literal values anywhere in the <code>ThumbnailPattern</code> object. For example, you can include them as a file name prefix or as a delimiter between <code>`{resolution}`</code> and <code>`{count}`</code>. </p> </li> <li> <p> <b><code>`{resolution}`</code> (Optional)</b>: If you want Elastic Transcoder to include the resolution in the file name, include <code>`{resolution}`</code> in the <code>ThumbnailPattern</code> object. </p> </li> </ul> <p>When creating thumbnails, Elastic Transcoder automatically saves the files in the format (.jpg or .png) that appears in the preset that you specified in the <code>PresetID</code> value of <code>CreateJobOutput</code>. Elastic Transcoder also appends the applicable file name extension.</p>",
-                  "pattern": "(^$)|(^.*\\{count\\}.*$)",
                   "serialized_name": "ThumbnailPattern"
                 },
                 "rotate": {
                   "type": "string",
                   "documentation": "<p> The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values: <code>auto</code>, <code>0</code>, <code>90</code>, <code>180</code>, <code>270</code>. The value <code>auto</code> generally works only if the file that you're transcoding contains rotation metadata. </p>",
-                  "pattern": "(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)",
                   "serialized_name": "Rotate"
                 },
                 "preset_id": {
                   "type": "string",
                   "documentation": "<p> The <code>Id</code> of the preset to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. </p>",
-                  "pattern": "^\\d{13}-\\w{6}$",
                   "serialized_name": "PresetId"
                 },
                 "segment_duration": {
                   "type": "string",
                   "documentation": "<p>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is ts (MPEG-TS), SegmentDuration is the duration of each .ts file in seconds. The range of valid values is 1 to 60 seconds.</p>",
-                  "pattern": "^\\d{1,5}([.]\\d{0,5})?$",
                   "serialized_name": "SegmentDuration"
                 },
                 "watermarks": {
@@ -244,16 +219,11 @@
                       "preset_watermark_id": {
                         "type": "string",
                         "documentation": "<p>The ID of the watermark settings that Elastic Transcoder uses to add watermarks to the video during transcoding. The settings are in the preset specified by Preset for the current output. In that preset, the value of Watermarks Id tells Elastic Transcoder which settings to use.</p>",
-                        "min_length": 1,
-                        "max_length": 40,
                         "serialized_name": "PresetWatermarkId"
                       },
                       "input_key": {
                         "type": "string",
                         "documentation": "<p> The name of the .png or .jpg file that you want to use for the watermark. To determine which Amazon S3 bucket contains the specified file, Elastic Transcoder checks the pipeline specified by <code>Pipeline</code>; the <code>Input Bucket</code> object in that pipeline identifies the bucket.</p> <p> If the file name includes a prefix, for example, <b>logos/128x64.png</b>, include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error. </p>",
-                        "min_length": 1,
-                        "max_length": 255,
-                        "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
                         "serialized_name": "InputKey"
                       }
                     }
@@ -265,14 +235,11 @@
           "output_key_prefix": {
             "type": "string",
             "documentation": "<p>The value, if any, that you want Elastic Transcoder to prepend to the names of all files that this job creates, including output files, thumbnails, and playlists.</p>",
-            "min_length": 1,
-            "max_length": 255,
             "serialized_name": "OutputKeyPrefix"
           },
           "playlists": {
             "type": "list",
             "documentation": "<p>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is ts (MPEG-TS), Playlists contains information about the master playlists that you want Elastic Transcoder to create.</p> <p>We recommend that you create only one master playlist. The maximum number of master playlists in a job is 30.</p>",
-            "max_length": 30,
             "serialized_name": "Playlists",
             "members": {
               "type": "structure",
@@ -281,25 +248,19 @@
                 "name": {
                   "type": "string",
                   "documentation": "<p>The name that you want Elastic Transcoder to assign to the master playlist, for example, nyc-vacation.m3u8. The name cannot include a / character. If you create more than one master playlist (not recommended), the values of all <code>Name</code> objects must be unique. Elastic Transcoder automatically appends .m3u8 to the file name. If you include .m3u8 in <code>Name</code>, it will appear twice in the file name. </p>",
-                  "min_length": 1,
-                  "max_length": 255,
                   "serialized_name": "Name"
                 },
                 "format": {
                   "type": "string",
                   "documentation": "<p>This value must currently be HLSv3.</p>",
-                  "pattern": "(^HLSv3$)",
                   "serialized_name": "Format"
                 },
                 "output_keys": {
                   "type": "list",
                   "documentation": "<p>For each output in this job that you want to include in a master playlist, the value of the <code>Outputs:Key</code> object. If you include more than one output in a playlist, the value of <code>SegmentDuration</code> for all of the outputs must be the same.</p>",
-                  "max_length": 30,
                   "serialized_name": "OutputKeys",
                   "members": {
-                    "type": "string",
-                    "min_length": 1,
-                    "max_length": 255
+                    "type": "string"
                   }
                 }
               }
@@ -636,26 +597,21 @@
           "name": {
             "type": "string",
             "documentation": "<p>The name of the pipeline. We recommend that the name be unique within the AWS account, but uniqueness is not enforced.</p> <p>Constraints: Maximum 40 characters.</p>",
-            "min_length": 1,
-            "max_length": 40,
             "serialized_name": "Name"
           },
           "input_bucket": {
             "type": "string",
             "documentation": "<p>The Amazon S3 bucket in which you saved the media files that you want to transcode.</p>",
-            "pattern": "^(\\w|\\.|-){1,255}$",
             "serialized_name": "InputBucket"
           },
           "output_bucket": {
             "type": "string",
             "documentation": "<p>The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. (Use this, or use ContentConfig:Bucket plus ThumbnailConfig:Bucket.)</p> <p>Specify this value when all of the following are true: <ul> <li>You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.</li> <li>You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.</li> <li>You do not want to specify the permissions that Elastic Transcoder grants to the files. <important>When Elastic Transcoder saves files in <code>OutputBucket</code>, it grants full control over the files only to the AWS account that owns the role that is specified by <code>Role</code>.</important> </li> <li>You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.</li> </ul></p> <p>If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit <code>OutputBucket</code> and specify values for <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead.</p>",
-            "pattern": "^(\\w|\\.|-){1,255}$",
             "serialized_name": "OutputBucket"
           },
           "role": {
             "type": "string",
             "documentation": "<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to create the pipeline.</p>",
-            "pattern": "^arn:aws:iam::\\w{12}:role/.+$",
             "serialized_name": "Role"
           },
           "notifications": {
@@ -666,25 +622,21 @@
               "progressing": {
                 "type": "string",
                 "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Progressing"
               },
               "completed": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Completed"
               },
               "warning": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Warning"
               },
               "error": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Error"
               }
             }
@@ -697,19 +649,16 @@
               "bucket": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: <ul> <li>You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.</li> <li>You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.</li> <li>You do not want to specify the permissions that Elastic Transcoder grants to the files. </li> <li>You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.</li> </ul> If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead. </p>",
-                "pattern": "^(\\w|\\.|-){1,255}$",
                 "serialized_name": "Bucket"
               },
               "storage_class": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 storage class, <code>Standard</code> or <code>ReducedRedundancy</code>, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. </p>",
-                "pattern": "(^ReducedRedundancy$)|(^Standard$)",
                 "serialized_name": "StorageClass"
               },
               "permissions": {
                 "type": "list",
                 "documentation": "<p>Optional. The <code>Permissions</code> object specifies which users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.</p> <p>If you include <code>Permissions</code>, Elastic Transcoder grants only the permissions that you specify. It does not grant full permissions to the owner of the role specified by <code>Role</code>. If you want that user to have full control, you must explicitly grant full control to the user.</p> <p> If you omit <code>Permissions</code>, Elastic Transcoder grants full control over the transcoded files and playlists to the owner of the role specified by <code>Role</code>, and grants no other permissions to any other user or group.</p>",
-                "max_length": 30,
                 "serialized_name": "Permissions",
                 "members": {
                   "type": "structure",
@@ -718,24 +667,19 @@
                     "grantee_type": {
                       "type": "string",
                       "documentation": "<p>The type of value that appears in the Grantee object: <ul> <li> <code>Canonical</code>: Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. <important>A canonical user ID is not the same as an AWS account number.</important> </li> <li> <code>Email</code>: The registered email address of an AWS account.</li> <li> <code>Group</code>: One of the following predefined Amazon S3 groups: <code>AllUsers</code>, <code>AuthenticatedUsers</code>, or <code>LogDelivery</code>.</li> </ul> </p>",
-                      "pattern": "(^Canonical$)|(^Email$)|(^Group$)",
                       "serialized_name": "GranteeType"
                     },
                     "grantee": {
                       "type": "string",
                       "documentation": "<p>The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "Grantee"
                     },
                     "access": {
                       "type": "list",
                       "documentation": "<p> The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: <ul> <li> <code>READ</code>: The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>READ_ACP</code>: The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>WRITE_ACP</code>: The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>FULL_CONTROL</code>: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> </ul> </p>",
-                      "max_length": 30,
                       "serialized_name": "Access",
                       "members": {
-                        "type": "string",
-                        "pattern": "(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)"
+                        "type": "string"
                       }
                     }
                   }
@@ -751,19 +695,16 @@
               "bucket": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: <ul> <li>You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.</li> <li>You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.</li> <li>You do not want to specify the permissions that Elastic Transcoder grants to the files. </li> <li>You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.</li> </ul> If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead. </p>",
-                "pattern": "^(\\w|\\.|-){1,255}$",
                 "serialized_name": "Bucket"
               },
               "storage_class": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 storage class, <code>Standard</code> or <code>ReducedRedundancy</code>, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. </p>",
-                "pattern": "(^ReducedRedundancy$)|(^Standard$)",
                 "serialized_name": "StorageClass"
               },
               "permissions": {
                 "type": "list",
                 "documentation": "<p>Optional. The <code>Permissions</code> object specifies which users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.</p> <p>If you include <code>Permissions</code>, Elastic Transcoder grants only the permissions that you specify. It does not grant full permissions to the owner of the role specified by <code>Role</code>. If you want that user to have full control, you must explicitly grant full control to the user.</p> <p> If you omit <code>Permissions</code>, Elastic Transcoder grants full control over the transcoded files and playlists to the owner of the role specified by <code>Role</code>, and grants no other permissions to any other user or group.</p>",
-                "max_length": 30,
                 "serialized_name": "Permissions",
                 "members": {
                   "type": "structure",
@@ -772,24 +713,19 @@
                     "grantee_type": {
                       "type": "string",
                       "documentation": "<p>The type of value that appears in the Grantee object: <ul> <li> <code>Canonical</code>: Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. <important>A canonical user ID is not the same as an AWS account number.</important> </li> <li> <code>Email</code>: The registered email address of an AWS account.</li> <li> <code>Group</code>: One of the following predefined Amazon S3 groups: <code>AllUsers</code>, <code>AuthenticatedUsers</code>, or <code>LogDelivery</code>.</li> </ul> </p>",
-                      "pattern": "(^Canonical$)|(^Email$)|(^Group$)",
                       "serialized_name": "GranteeType"
                     },
                     "grantee": {
                       "type": "string",
                       "documentation": "<p>The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "Grantee"
                     },
                     "access": {
                       "type": "list",
                       "documentation": "<p> The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: <ul> <li> <code>READ</code>: The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>READ_ACP</code>: The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>WRITE_ACP</code>: The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>FULL_CONTROL</code>: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> </ul> </p>",
-                      "max_length": 30,
                       "serialized_name": "Access",
                       "members": {
-                        "type": "string",
-                        "pattern": "(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)"
+                        "type": "string"
                       }
                     }
                   }
@@ -1016,21 +952,16 @@
           "name": {
             "type": "string",
             "documentation": "<p>The name of the preset. We recommend that the name be unique within the AWS account, but uniqueness is not enforced.</p>",
-            "min_length": 1,
-            "max_length": 40,
             "serialized_name": "Name"
           },
           "description": {
             "type": "string",
             "documentation": "<p>A description of the preset.</p>",
-            "min_length": 0,
-            "max_length": 255,
             "serialized_name": "Description"
           },
           "container": {
             "type": "string",
             "documentation": "<p>The container type for the output file. This value must be <code>mp4</code>.</p>",
-            "pattern": "(^mp4$)|(^ts$)|(^webm$)",
             "serialized_name": "Container"
           },
           "video": {
@@ -1041,95 +972,77 @@
               "codec": {
                 "type": "string",
                 "documentation": "<p>The video codec for the output file. Valid values include <code>H.264</code> and <code>vp8</code>. You can only specify <code>vp8</code> when the container type is <code>webm</code>.</p>",
-                "pattern": "(^H\\.264$)|(^vp8$)",
                 "serialized_name": "Codec"
               },
               "codec_options": {
                 "type": "map",
                 "documentation": "<p> <b>Profile</b> </p> <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following profiles:</p> <ul> <li> <code>baseline</code>: The profile most commonly used for videoconferencing and for mobile applications.</li> <li> <code>main</code>: The profile used for standard-definition digital TV broadcasts.</li> <li> <code>high</code>: The profile used for high-definition digital TV broadcasts and for Blu-ray discs.</li> </ul> <p> <b>Level (H.264 Only)</b> </p> <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following levels:</p> <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>, <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>, <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p> <p> <b>MaxReferenceFrames (H.264 Only)</b> </p> <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously decoded frames to use as a reference for decoding future frames. Valid values are integers 0 through 16, but we recommend that you not use a value greater than the following:</p> <p> <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels * Height in pixels)), 16)</code> </p> <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends on the value of the <code>Level</code> object. See the list below. (A macroblock is a block of pixels measuring 16x16.) </p> <ul> <li>1 - 396</li> <li>1b - 396</li> <li>1.1 - 900</li> <li>1.2 - 2376</li> <li>1.3 - 2376</li> <li>2 - 2376</li> <li>2.1 - 4752</li> <li>2.2 - 8100</li> <li>3 - 8100</li> <li>3.1 - 18000</li> <li>3.2 - 20480</li> <li>4 - 32768</li> <li>4.1 - 32768</li> </ul> <p> <b>MaxBitRate</b> </p> <p>The maximum number of bits per second in a video buffer; the size of the buffer is specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can reduce the bandwidth required to stream a video by reducing the maximum bit rate, but this also reduces the quality of the video.</p> <p> <b>BufferSize</b> </p> <p>The maximum number of bits in any x seconds of the output video. This window is commonly 10 seconds, the standard segment duration when you&#x2019;re using MPEG-TS for the container type of the output video. Specify an integer greater than 0. If you specify <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>",
-                "max_length": 30,
                 "serialized_name": "CodecOptions",
                 "keys": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 255
+                  "type": "string"
                 },
                 "members": {
-                  "type": "string",
-                  "min_length": 1,
-                  "max_length": 255
+                  "type": "string"
                 }
               },
               "keyframes_max_dist": {
                 "type": "string",
                 "documentation": "<p>The maximum number of frames between key frames. Key frames are fully encoded frames; the frames between key frames are encoded based, in part, on the content of the key frames. The value is an integer formatted as a string; valid values are between 1 (every frame is a key frame) and 100000, inclusive. A higher value results in higher compression but may also discernibly decrease video quality.</p>",
-                "pattern": "^\\d{1,6}$",
                 "serialized_name": "KeyframesMaxDist"
               },
               "fixed_gop": {
                 "type": "string",
                 "documentation": "<p>Whether to use a fixed value for <code>FixedGOP</code>. Valid values are <code>true</code> and <code>false</code>:</p> <ul> <li> <code>true</code>: Elastic Transcoder uses the value of <code>KeyframesMaxDist</code> for the distance between key frames (the number of frames in a group of pictures, or GOP).</li> <li> <code>false</code>: The distance between key frames can vary.</li> </ul>",
-                "pattern": "(^true$)|(^false$)",
                 "serialized_name": "FixedGOP"
               },
               "bit_rate": {
                 "type": "string",
                 "documentation": "<p>The bit rate of the video stream in the output file, in kilobits/second. Valid values depend on the values of <code>Level</code> and <code>Profile</code>. If you specify <code>auto</code>, Elastic Transcoder uses the detected bit rate of the input source. If you specify a value other than <code>auto</code>, we recommend that you specify a value less than or equal to the maximum H.264-compliant value listed for your level and profile:</p> <p> <i>Level - Maximum video bit rate in kilobits/second (baseline and main Profile) : maximum video bit rate in kilobits/second (high Profile)</i> </p> <ul> <li>1 - 64 : 80</li> <li>1b - 128 : 160</li> <li>1.1 - 192 : 240</li> <li>1.2 - 384 : 480</li> <li>1.3 - 768 : 960</li> <li>2 - 2000 : 2500</li> <li>3 - 10000 : 12500</li> <li>3.1 - 14000 : 17500</li> <li>3.2 - 20000 : 25000</li> <li>4 - 20000 : 25000</li> <li>4.1 - 50000 : 62500</li> </ul>",
-                "pattern": "(^\\d{2,5}$)|(^auto$)",
                 "serialized_name": "BitRate"
               },
               "frame_rate": {
                 "type": "string",
                 "documentation": "<p>The frames per second for the video stream in the output file. Valid values include:</p> <p><code>auto</code>, <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder uses the detected frame rate of the input source. If you specify a frame rate, we recommend that you perform the following calculation:</p> <p> <code>Frame rate = maximum recommended decoding speed in luma samples/second / (width in pixels * height in pixels)</code> </p> <p>where:</p> <ul> <li> <i>width in pixels</i> and <i>height in pixels</i> represent the Resolution of the output video.</li> <li> <i>maximum recommended decoding speed in Luma samples/second</i> is less than or equal to the maximum value listed in the following table, based on the value that you specified for Level.</li> </ul> <p>The maximum recommended decoding speed in Luma samples/second for each level is described in the following list (<i>Level - Decoding speed</i>):</p> <ul> <li>1 - 380160</li> <li>1b - 380160</li> <li>1.1 - 76800</li> <li>1.2 - 1536000</li> <li>1.3 - 3041280</li> <li>2 - 3041280</li> <li>2.1 - 5068800</li> <li>2.2 - 5184000</li> <li>3 - 10368000</li> <li>3.1 - 27648000</li> <li>3.2 - 55296000</li> <li>4 - 62914560</li> <li>4.1 - 62914560</li> </ul>",
-                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
                 "serialized_name": "FrameRate"
               },
               "max_frame_rate": {
                 "type": "string",
                 "documentation": "<p>If you specify <code>auto</code> for <code>FrameRate</code>, Elastic Transcoder uses the frame rate of the input video for the frame rate of the output video. Specify the maximum frame rate that you want Elastic Transcoder to use when the frame rate of the input video is greater than the desired maximum frame rate of the output video. Valid values include: <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code>.</p>",
-                "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
                 "serialized_name": "MaxFrameRate"
               },
               "resolution": {
                 "type": "string",
                 "documentation": "<important> <p>To better control resolution and aspect ratio of output videos, we recommend that you use the values <code>MaxWidth</code>, <code>MaxHeight</code>, <code>SizingPolicy</code>, <code>PaddingPolicy</code>, and <code>DisplayAspectRatio</code> instead of <code>Resolution</code> and <code>AspectRatio</code>. The two groups of settings are mutually exclusive. Do not use them together.</p> </important> <p>The width and height of the video in the output file, in pixels. Valid values are <code>auto</code> and <i>width</i> x <i>height</i>:</p> <ul> <li> <code>auto</code>: Elastic Transcoder attempts to preserve the width and height of the input file, subject to the following rules.</li> <li> <code><i>width</i> x <i>height</i></code>: The width and height of the output video in pixels.</li> </ul> <p>Note the following about specifying the width and height:</p> <ul> <li>The width must be an even integer between 128 and 4096, inclusive.</li> <li>The height must be an even integer between 96 and 3072, inclusive.</li> <li>If you specify a resolution that is less than the resolution of the input file, Elastic Transcoder rescales the output file to the lower resolution.</li> <li>If you specify a resolution that is greater than the resolution of the input file, Elastic Transcoder rescales the output to the higher resolution.</li> <li>We recommend that you specify a resolution for which the product of width and height is less than or equal to the applicable value in the following list (<i>List - Max width x height value</i>):</li> <ul> <li>1 - 25344</li> <li>1b - 25344</li> <li>1.1 - 101376</li> <li>1.2 - 101376</li> <li>1.3 - 101376</li> <li>2 - 101376</li> <li>2.1 - 202752</li> <li>2.2 - 404720</li> <li>3 - 404720</li> <li>3.1 - 921600</li> <li>3.2 - 1310720</li> <li>4 - 2097152</li> <li>4.1 - 2097152</li> </ul> </ul>",
-                "pattern": "(^auto$)|(^\\d{1,5}x\\d{1,5}$)",
                 "serialized_name": "Resolution"
               },
               "aspect_ratio": {
                 "type": "string",
                 "documentation": "<important> <p>To better control resolution and aspect ratio of output videos, we recommend that you use the values <code>MaxWidth</code>, <code>MaxHeight</code>, <code>SizingPolicy</code>, <code>PaddingPolicy</code>, and <code>DisplayAspectRatio</code> instead of <code>Resolution</code> and <code>AspectRatio</code>. The two groups of settings are mutually exclusive. Do not use them together.</p> </important> <p>The display aspect ratio of the video in the output file. Valid values include:</p> <p><code>auto</code>, <code>1:1</code>, <code>4:3</code>, <code>3:2</code>, <code>16:9</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder tries to preserve the aspect ratio of the input file.</p> <p>If you specify an aspect ratio for the output file that differs from aspect ratio of the input file, Elastic Transcoder adds pillarboxing (black bars on the sides) or letterboxing (black bars on the top and bottom) to maintain the aspect ratio of the active region of the video.</p>",
-                "pattern": "(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)",
                 "serialized_name": "AspectRatio"
               },
               "max_width": {
                 "type": "string",
                 "documentation": "<p> The maximum width of the output video in pixels. If you specify <code>auto</code>, Elastic Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 128 and 4096. </p>",
-                "pattern": "(^auto$)|(^\\d{2,4}$)",
                 "serialized_name": "MaxWidth"
               },
               "max_height": {
                 "type": "string",
                 "documentation": "<p>The maximum height of the output video in pixels. If you specify <code>auto</code>, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 96 and 3072.</p>",
-                "pattern": "(^auto$)|(^\\d{2,4}$)",
                 "serialized_name": "MaxHeight"
               },
               "display_aspect_ratio": {
                 "type": "string",
                 "documentation": "<p>The value that Elastic Transcoder adds to the metadata in the output file.</p>",
-                "pattern": "(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)",
                 "serialized_name": "DisplayAspectRatio"
               },
               "sizing_policy": {
                 "type": "string",
                 "documentation": "<p>Specify one of the following values to control scaling of the output video:</p> <p> <ul> <li> <code>Fit</code>: Elastic Transcoder scales the output video so it matches the value that you specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without exceeding the other value.</li> <li> <code>Fill</code>: Elastic Transcoder scales the output video so it matches the value that you specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or exceeds the other value. Elastic Transcoder centers the output video and then crops it in the dimension (if any) that exceeds the maximum value.</li> <li> <code>Stretch</code>: Elastic Transcoder stretches the output video to match the values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative proportions of the input video and the output video are different, the output video will be distorted.</li> <li> <code>Keep</code>: Elastic Transcoder does not scale the output video. If either dimension of the input video exceeds the values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>, Elastic Transcoder crops the output video.</li> <li> <code>ShrinkToFit</code>: Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of <code>MaxWidth</code> and <code>MaxHeight</code> without exceeding either value. If you specify this option, Elastic Transcoder does not scale the video up.</li> <li> <code>ShrinkToFill</code>: Elastic Transcoder scales the output video down so that its dimensions match the values that you specified for at least one of <code>MaxWidth</code> and <code>MaxHeight</code> without dropping below either value. If you specify this option, Elastic Transcoder does not scale the video up.</li> </ul> </p>",
-                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
                 "serialized_name": "SizingPolicy"
               },
               "padding_policy": {
                 "type": "string",
                 "documentation": "<p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add black bars to the top and bottom and/or left and right sides of the output video to make the total size of the output video match the values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>.</p>",
-                "pattern": "(^Pad$)|(^NoPad$)",
                 "serialized_name": "PaddingPolicy"
               },
               "watermarks": {
@@ -1143,62 +1056,51 @@
                     "id": {
                       "type": "string",
                       "documentation": "A unique identifier for the settings for one watermark. The value of <code>Id</code> can be up to 40 characters long.",
-                      "min_length": 1,
-                      "max_length": 40,
                       "serialized_name": "Id"
                     },
                     "max_width": {
                       "type": "string",
                       "documentation": "<p>The maximum width of the watermark in one of the following formats: <ul> <li>number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of <code>MaxWidth</code>.</li> <li>integer percentage (%): The range of valid values is 0 to 100. Use the value of <code>Target</code> to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation.</li> If you specify the value in pixels, it must be less than or equal to the value of <code>MaxWidth</code>.</ul></p>",
-                      "pattern": "(^\\d{1,3}([.]\\d{0,5})?%$)|(^\\d{2,4}?px$)",
                       "serialized_name": "MaxWidth"
                     },
                     "max_height": {
                       "type": "string",
                       "documentation": "<p>The maximum height of the watermark in one of the following formats: <ul> <li>number of pixels (px): The minimum value is 16 pixels, and the maximum value is the value of <code>MaxHeight</code>.</li> <li>integer percentage (%): The range of valid values is 0 to 100. Use the value of <code>Target</code> to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the calculation.</li> </ul> If you specify the value in pixels, it must be less than or equal to the value of <code>MaxHeight</code>.</p>",
-                      "pattern": "(^\\d{1,3}([.]\\d{0,5})?%$)|(^\\d{2,4}?px$)",
                       "serialized_name": "MaxHeight"
                     },
                     "sizing_policy": {
                       "type": "string",
                       "documentation": "<p>A value that controls scaling of the watermark: <ul> <li> <b>Fit</b>: Elastic Transcoder scales the watermark so it matches the value that you specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without exceeding the other value.</li> <li> <b>Stretch</b>: Elastic Transcoder stretches the watermark to match the values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative proportions of the watermark and the values of <code>MaxWidth</code> and <code>MaxHeight</code> are different, the watermark will be distorted.</li> <li> <b>ShrinkToFit</b>: Elastic Transcoder scales the watermark down so that its dimensions match the values that you specified for at least one of <code>MaxWidth</code> and <code>MaxHeight</code> without exceeding either value. If you specify this option, Elastic Transcoder does not scale the watermark up.</li> </ul> </p>",
-                      "pattern": "(^Fit$)|(^Stretch$)|(^ShrinkToFit$)",
                       "serialized_name": "SizingPolicy"
                     },
                     "horizontal_align": {
                       "type": "string",
                       "documentation": "<p>The horizontal position of the watermark unless you specify a non-zero value for <code>HorizontalOffset</code>: <ul> <li> <b>Left</b>: The left edge of the watermark is aligned with the left border of the video.</li> <li> <b>Right</b>: The right edge of the watermark is aligned with the right border of the video.</li> <li> <b>Center</b>: The watermark is centered between the left and right borders.</li> </ul></p>",
-                      "pattern": "(^Left$)|(^Right$)|(^Center$)",
                       "serialized_name": "HorizontalAlign"
                     },
                     "horizontal_offset": {
                       "type": "string",
                       "documentation": "<p>The amount by which you want the horizontal position of the watermark to be offset from the position specified by HorizontalAlign: <ul> <li>number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of MaxWidth.</li> <li>integer percentage (%): The range of valid values is 0 to 100.</li> </ul>For example, if you specify Left for <code>HorizontalAlign</code> and 5px for <code>HorizontalOffset</code>, the left side of the watermark appears 5 pixels from the left border of the output video.</p> <p><code>HorizontalOffset</code> is only valid when the value of <code>HorizontalAlign</code> is <code>Left</code> or <code>Right</code>. If you specify an offset that causes the watermark to extend beyond the left or right border and Elastic Transcoder has not added black bars, the watermark is cropped. If Elastic Transcoder has added black bars, the watermark extends into the black bars. If the watermark extends beyond the black bars, it is cropped.</p> <p>Use the value of <code>Target</code> to specify whether you want to include the black bars that are added by Elastic Transcoder, if any, in the offset calculation.</p>",
-                      "pattern": "(^\\d{1,3}([.]\\d{0,5})?%$)|(^\\d{2,4}?px$)",
                       "serialized_name": "HorizontalOffset"
                     },
                     "vertical_align": {
                       "type": "string",
                       "documentation": "<p>The vertical position of the watermark unless you specify a non-zero value for <code>VerticalOffset</code>: <ul> <li> <b>Top</b>: The top edge of the watermark is aligned with the top border of the video.</li> <li> <b>Bottom</b>: The bottom edge of the watermark is aligned with the bottom border of the video.</li> <li> <b>Center</b>: The watermark is centered between the top and bottom borders.</li> </ul></p>",
-                      "pattern": "(^Top$)|(^Bottom$)|(^Center$)",
                       "serialized_name": "VerticalAlign"
                     },
                     "vertical_offset": {
                       "type": "string",
                       "documentation": "<code>VerticalOffset</code> <p>The amount by which you want the vertical position of the watermark to be offset from the position specified by VerticalAlign:<ul> <li>number of pixels (px): The minimum value is 0 pixels, and the maximum value is the value of <code>MaxHeight</code>.</li> <li>integer percentage (%): The range of valid values is 0 to 100.</li> </ul> For example, if you specify <code>Top</code> for <code>VerticalAlign</code> and <code>5px</code> for <code>VerticalOffset</code>, the top of the watermark appears 5 pixels from the top border of the output video.</p> <p><code>VerticalOffset</code> is only valid when the value of VerticalAlign is Top or Bottom.</p> <p>If you specify an offset that causes the watermark to extend beyond the top or bottom border and Elastic Transcoder has not added black bars, the watermark is cropped. If Elastic Transcoder has added black bars, the watermark extends into the black bars. If the watermark extends beyond the black bars, it is cropped.</p> <p>Use the value of <code>Target</code> to specify whether you want Elastic Transcoder to include the black bars that are added by Elastic Transcoder, if any, in the offset calculation.</p>",
-                      "pattern": "(^\\d{1,3}([.]\\d{0,5})?%$)|(^\\d{2,4}?px$)",
                       "serialized_name": "VerticalOffset"
                     },
                     "opacity": {
                       "type": "string",
                       "documentation": "<p>A percentage that indicates how much you want a watermark to obscure the video in the location where it appears. Valid values are 0 (the watermark is invisible) to 100 (the watermark completely obscures the video in the specified location). The datatype of <code>Opacity</code> is float.</p> <p>Elastic Transcoder supports transparent .png graphics. If you use a transparent .png, the transparent portion of the video appears as if you had specified a value of 0 for <code>Opacity</code>. The .jpg file format doesn't support transparency.</p>",
-                      "pattern": "^\\d{1,3}([.]\\d{0,20})?$",
                       "serialized_name": "Opacity"
                     },
                     "target": {
                       "type": "string",
                       "documentation": "<p>A value that determines how Elastic Transcoder interprets values that you specified for <code>HorizontalOffset</code>, <code>VerticalOffset</code>, <code>MaxWidth</code>, and <code>MaxHeight</code>: <ul> <li> <b>Content</b>: <code>HorizontalOffset</code> and <code>VerticalOffset</code> values are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any. In addition, <code>MaxWidth</code> and <code>MaxHeight</code>, if specified as a percentage, are calculated based on the borders of the video excluding black bars added by Elastic Transcoder, if any.</li> <li> <b>Frame</b>: <code>HorizontalOffset</code> and <code>VerticalOffset</code> values are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any.</li> In addition, <code>MaxWidth</code> and <code>MaxHeight</code>, if specified as a percentage, are calculated based on the borders of the video including black bars added by Elastic Transcoder, if any.</ul></p>",
-                      "pattern": "(^Content$)|(^Frame$)",
                       "serialized_name": "Target"
                     }
                   }
@@ -1214,25 +1116,21 @@
               "codec": {
                 "type": "string",
                 "documentation": "<p>The audio codec for the output file. This value must be <code>AAC</code>.</p>",
-                "pattern": "(^AAC$)|(^vorbis$)",
                 "serialized_name": "Codec"
               },
               "sample_rate": {
                 "type": "string",
                 "documentation": "<p>The sample rate of the audio stream in the output file, in Hertz. Valid values include:</p> <p><code>auto</code>, <code>22050</code>, <code>32000</code>, <code>44100</code>, <code>48000</code>, <code>96000</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder automatically detects the sample rate.</p>",
-                "pattern": "(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)",
                 "serialized_name": "SampleRate"
               },
               "bit_rate": {
                 "type": "string",
                 "documentation": "<p>The bit rate of the audio stream in the output file, in kilobits/second. Enter an integer between 64 and 320, inclusive.</p>",
-                "pattern": "^\\d{1,3}$",
                 "serialized_name": "BitRate"
               },
               "channels": {
                 "type": "string",
                 "documentation": "<p>The number of audio channels in the output file. Valid values include:</p> <p><code>auto</code>, <code>0</code>, <code>1</code>, <code>2</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder automatically detects the number of channels in the input file.</p>",
-                "pattern": "(^auto$)|(^0$)|(^1$)|(^2$)",
                 "serialized_name": "Channels"
               }
             }
@@ -1245,49 +1143,41 @@
               "format": {
                 "type": "string",
                 "documentation": "<p>The format of thumbnails, if any. Valid values are <code>jpg</code> and <code>png</code>. </p> <p>You specify whether you want Elastic Transcoder to create thumbnails when you create a job.</p>",
-                "pattern": "(^jpg$)|(^png$)",
                 "serialized_name": "Format"
               },
               "interval": {
                 "type": "string",
                 "documentation": "<p>The number of seconds between thumbnails. Specify an integer value.</p>",
-                "pattern": "^\\d{1,5}$",
                 "serialized_name": "Interval"
               },
               "resolution": {
                 "type": "string",
                 "documentation": "<important> <p>To better control resolution and aspect ratio of thumbnails, we recommend that you use the values <code>MaxWidth</code>, <code>MaxHeight</code>, <code>SizingPolicy</code>, and <code>PaddingPolicy</code> instead of <code>Resolution</code> and <code>AspectRatio</code>. The two groups of settings are mutually exclusive. Do not use them together.</p> </important> <p>The width and height of thumbnail files in pixels. Specify a value in the format <code><i>width</i></code> x <code><i>height</i></code> where both values are even integers. The values cannot exceed the width and height that you specified in the <code>Video:Resolution</code> object.</p>",
-                "pattern": "^\\d{1,5}x\\d{1,5}$",
                 "serialized_name": "Resolution"
               },
               "aspect_ratio": {
                 "type": "string",
                 "documentation": "<important> <p>To better control resolution and aspect ratio of thumbnails, we recommend that you use the values <code>MaxWidth</code>, <code>MaxHeight</code>, <code>SizingPolicy</code>, and <code>PaddingPolicy</code> instead of <code>Resolution</code> and <code>AspectRatio</code>. The two groups of settings are mutually exclusive. Do not use them together.</p> </important> <p>The aspect ratio of thumbnails. Valid values include:</p> <p><code>auto</code>, <code>1:1</code>, <code>4:3</code>, <code>3:2</code>, <code>16:9</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder tries to preserve the aspect ratio of the video in the output file.</p>",
-                "pattern": "(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)",
                 "serialized_name": "AspectRatio"
               },
               "max_width": {
                 "type": "string",
                 "documentation": "<p>The maximum width of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 4096. </p>",
-                "pattern": "(^auto$)|(^\\d{2,4}$)",
                 "serialized_name": "MaxWidth"
               },
               "max_height": {
                 "type": "string",
                 "documentation": "<p>The maximum height of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072. </p>",
-                "pattern": "(^auto$)|(^\\d{2,4}$)",
                 "serialized_name": "MaxHeight"
               },
               "sizing_policy": {
                 "type": "string",
                 "documentation": "<p>Specify one of the following values to control scaling of thumbnails:</p> <p> <ul> <li> <code>Fit</code>: Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail MaxWidth or MaxHeight settings without exceeding the other value. </li> <li> <code>Fill</code>: Elastic Transcoder scales thumbnails so they match the value that you specified in thumbnail <code>MaxWidth</code> or <code>MaxHeight</code> settings and matches or exceeds the other value. Elastic Transcoder centers the image in thumbnails and then crops in the dimension (if any) that exceeds the maximum value.</li> <li> <code>Stretch</code>: Elastic Transcoder stretches thumbnails to match the values that you specified for thumbnail <code>MaxWidth</code> and <code>MaxHeight</code> settings. If the relative proportions of the input video and thumbnails are different, the thumbnails will be distorted.</li> <li> <code>Keep</code>: Elastic Transcoder does not scale thumbnails. If either dimension of the input video exceeds the values that you specified for thumbnail <code>MaxWidth</code> and <code>MaxHeight</code> settings, Elastic Transcoder crops the thumbnails.</li> <li> <code>ShrinkToFit</code>: Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of thumbnail <code>MaxWidth</code> and <code>MaxHeight</code> without exceeding either value. If you specify this option, Elastic Transcoder does not scale thumbnails up.</li> <li> <code>ShrinkToFill</code>: Elastic Transcoder scales thumbnails down so that their dimensions match the values that you specified for at least one of <code>MaxWidth</code> and <code>MaxHeight</code> without dropping below either value. If you specify this option, Elastic Transcoder does not scale thumbnails up.</li> </ul> </p>",
-                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
                 "serialized_name": "SizingPolicy"
               },
               "padding_policy": {
                 "type": "string",
                 "documentation": "<p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add black bars to the top and bottom and/or left and right sides of thumbnails to make the total size of the thumbnails match the values that you specified for thumbnail <code>MaxWidth</code> and <code>MaxHeight</code> settings.</p>",
-                "pattern": "(^Pad$)|(^NoPad$)",
                 "serialized_name": "PaddingPolicy"
               }
             }
@@ -1600,7 +1490,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the pipeline that you want to delete.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -1662,7 +1551,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the preset for which you want to get detailed information.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -1718,21 +1606,18 @@
             "type": "string",
             "documentation": "<p> The ID of the pipeline for which you want to get job information. </p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "PipelineId"
           },
           "ascending": {
             "type": "string",
             "documentation": "<p> To list jobs in chronological order by the date and time that they were submitted, enter <code>true</code>. To list jobs in reverse chronological order, enter <code>false</code>. </p>",
             "location": "uri",
-            "pattern": "(^true$)|(^false$)",
             "serialized_name": "Ascending"
           },
           "page_token": {
             "type": "string",
             "documentation": "<p> When Elastic Transcoder returns more than one page of results, use <code>pageToken</code> in subsequent <code>GET</code> requests to get each successive page of results. </p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "PageToken"
           }
         }
@@ -2070,21 +1955,18 @@
             "type": "string",
             "documentation": "<p>To get information about all of the jobs associated with the current AWS account that have a given status, specify the following status: <code>Submitted</code>, <code>Progressing</code>, <code>Complete</code>, <code>Canceled</code>, or <code>Error</code>.</p>",
             "location": "uri",
-            "pattern": "(^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)",
             "serialized_name": "Status"
           },
           "ascending": {
             "type": "string",
             "documentation": "<p> To list jobs in chronological order by the date and time that they were submitted, enter <code>true</code>. To list jobs in reverse chronological order, enter <code>false</code>. </p>",
             "location": "uri",
-            "pattern": "(^true$)|(^false$)",
             "serialized_name": "Ascending"
           },
           "page_token": {
             "type": "string",
             "documentation": "<p> When Elastic Transcoder returns more than one page of results, use <code>pageToken</code> in subsequent <code>GET</code> requests to get each successive page of results. </p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "PageToken"
           }
         }
@@ -2927,7 +2809,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the job for which you want to get detailed information.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -3256,7 +3137,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the pipeline to read.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -3473,7 +3353,6 @@
             "type": "string",
             "documentation": "<p>The identifier of the preset for which you want to get detailed information.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           }
         }
@@ -3778,29 +3657,24 @@
           "role": {
             "type": "string",
             "documentation": "<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to test.</p>",
-            "pattern": "^arn:aws:iam::\\w{12}:role/.+$",
             "serialized_name": "Role"
           },
           "input_bucket": {
             "type": "string",
             "documentation": "<p>The Amazon S3 bucket that contains media files to be transcoded. The action attempts to read from this bucket.</p>",
-            "pattern": "^(\\w|\\.|-){1,255}$",
             "serialized_name": "InputBucket"
           },
           "output_bucket": {
             "type": "string",
             "documentation": "<p>The Amazon S3 bucket that Elastic Transcoder will write transcoded media files to. The action attempts to read from this bucket.</p>",
-            "pattern": "^(\\w|\\.|-){1,255}$",
             "serialized_name": "OutputBucket"
           },
           "topics": {
             "type": "list",
             "documentation": "<p>The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics that you want the action to send a test notification to.</p>",
-            "max_length": 30,
             "serialized_name": "Topics",
             "members": {
-              "type": "string",
-              "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)"
+              "type": "string"
             }
           }
         }
@@ -3870,26 +3744,21 @@
             "required": true,
             "documentation": "<p>The ID of the pipeline that you want to update.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           },
           "name": {
             "type": "string",
             "documentation": "<p>The name of the pipeline. We recommend that the name be unique within the AWS account, but uniqueness is not enforced.</p> <p>Constraints: Maximum 40 characters</p>",
-            "min_length": 1,
-            "max_length": 40,
             "serialized_name": "Name"
           },
           "input_bucket": {
             "type": "string",
             "documentation": "<p>The Amazon S3 bucket in which you saved the media files that you want to transcode and the graphics that you want to use as watermarks.</p>",
-            "pattern": "^(\\w|\\.|-){1,255}$",
             "serialized_name": "InputBucket"
           },
           "role": {
             "type": "string",
             "documentation": "<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.</p>",
-            "pattern": "^arn:aws:iam::\\w{12}:role/.+$",
             "serialized_name": "Role"
           },
           "notifications": {
@@ -3900,25 +3769,21 @@
               "progressing": {
                 "type": "string",
                 "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Progressing"
               },
               "completed": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Completed"
               },
               "warning": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Warning"
               },
               "error": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Error"
               }
             }
@@ -3931,19 +3796,16 @@
               "bucket": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: <ul> <li>You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.</li> <li>You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.</li> <li>You do not want to specify the permissions that Elastic Transcoder grants to the files. </li> <li>You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.</li> </ul> If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead. </p>",
-                "pattern": "^(\\w|\\.|-){1,255}$",
                 "serialized_name": "Bucket"
               },
               "storage_class": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 storage class, <code>Standard</code> or <code>ReducedRedundancy</code>, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. </p>",
-                "pattern": "(^ReducedRedundancy$)|(^Standard$)",
                 "serialized_name": "StorageClass"
               },
               "permissions": {
                 "type": "list",
                 "documentation": "<p>Optional. The <code>Permissions</code> object specifies which users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.</p> <p>If you include <code>Permissions</code>, Elastic Transcoder grants only the permissions that you specify. It does not grant full permissions to the owner of the role specified by <code>Role</code>. If you want that user to have full control, you must explicitly grant full control to the user.</p> <p> If you omit <code>Permissions</code>, Elastic Transcoder grants full control over the transcoded files and playlists to the owner of the role specified by <code>Role</code>, and grants no other permissions to any other user or group.</p>",
-                "max_length": 30,
                 "serialized_name": "Permissions",
                 "members": {
                   "type": "structure",
@@ -3952,24 +3814,19 @@
                     "grantee_type": {
                       "type": "string",
                       "documentation": "<p>The type of value that appears in the Grantee object: <ul> <li> <code>Canonical</code>: Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. <important>A canonical user ID is not the same as an AWS account number.</important> </li> <li> <code>Email</code>: The registered email address of an AWS account.</li> <li> <code>Group</code>: One of the following predefined Amazon S3 groups: <code>AllUsers</code>, <code>AuthenticatedUsers</code>, or <code>LogDelivery</code>.</li> </ul> </p>",
-                      "pattern": "(^Canonical$)|(^Email$)|(^Group$)",
                       "serialized_name": "GranteeType"
                     },
                     "grantee": {
                       "type": "string",
                       "documentation": "<p>The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "Grantee"
                     },
                     "access": {
                       "type": "list",
                       "documentation": "<p> The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: <ul> <li> <code>READ</code>: The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>READ_ACP</code>: The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>WRITE_ACP</code>: The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>FULL_CONTROL</code>: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> </ul> </p>",
-                      "max_length": 30,
                       "serialized_name": "Access",
                       "members": {
-                        "type": "string",
-                        "pattern": "(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)"
+                        "type": "string"
                       }
                     }
                   }
@@ -3985,19 +3842,16 @@
               "bucket": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. Specify this value when all of the following are true: <ul> <li>You want to save transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.</li> <li>You do not want to specify the users or groups who have access to the transcoded files, thumbnails, and playlists.</li> <li>You do not want to specify the permissions that Elastic Transcoder grants to the files. </li> <li>You want to associate the transcoded files and thumbnails with the Amazon S3 Standard storage class.</li> </ul> If you want to save transcoded files and playlists in one bucket and thumbnails in another bucket, specify which users can access the transcoded files or the permissions the users have, or change the Amazon S3 storage class, omit OutputBucket and specify values for <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead. </p>",
-                "pattern": "^(\\w|\\.|-){1,255}$",
                 "serialized_name": "Bucket"
               },
               "storage_class": {
                 "type": "string",
                 "documentation": "<p> The Amazon S3 storage class, <code>Standard</code> or <code>ReducedRedundancy</code>, that you want Elastic Transcoder to assign to the video files and playlists that it stores in your Amazon S3 bucket. </p>",
-                "pattern": "(^ReducedRedundancy$)|(^Standard$)",
                 "serialized_name": "StorageClass"
               },
               "permissions": {
                 "type": "list",
                 "documentation": "<p>Optional. The <code>Permissions</code> object specifies which users and/or predefined Amazon S3 groups you want to have access to transcoded files and playlists, and the type of access you want them to have. You can grant permissions to a maximum of 30 users and/or predefined Amazon S3 groups.</p> <p>If you include <code>Permissions</code>, Elastic Transcoder grants only the permissions that you specify. It does not grant full permissions to the owner of the role specified by <code>Role</code>. If you want that user to have full control, you must explicitly grant full control to the user.</p> <p> If you omit <code>Permissions</code>, Elastic Transcoder grants full control over the transcoded files and playlists to the owner of the role specified by <code>Role</code>, and grants no other permissions to any other user or group.</p>",
-                "max_length": 30,
                 "serialized_name": "Permissions",
                 "members": {
                   "type": "structure",
@@ -4006,24 +3860,19 @@
                     "grantee_type": {
                       "type": "string",
                       "documentation": "<p>The type of value that appears in the Grantee object: <ul> <li> <code>Canonical</code>: Either the canonical user ID for an AWS account or an origin access identity for an Amazon CloudFront distribution. <important>A canonical user ID is not the same as an AWS account number.</important> </li> <li> <code>Email</code>: The registered email address of an AWS account.</li> <li> <code>Group</code>: One of the following predefined Amazon S3 groups: <code>AllUsers</code>, <code>AuthenticatedUsers</code>, or <code>LogDelivery</code>.</li> </ul> </p>",
-                      "pattern": "(^Canonical$)|(^Email$)|(^Group$)",
                       "serialized_name": "GranteeType"
                     },
                     "grantee": {
                       "type": "string",
                       "documentation": "<p>The AWS user or group that you want to have access to transcoded files and playlists. To identify the user or group, you can specify the canonical user ID for an AWS account, an origin access identity for a CloudFront distribution, the registered email address of an AWS account, or a predefined Amazon S3 group.</p>",
-                      "min_length": 1,
-                      "max_length": 255,
                       "serialized_name": "Grantee"
                     },
                     "access": {
                       "type": "list",
                       "documentation": "<p> The permission that you want to give to the AWS user that is listed in Grantee. Valid values include: <ul> <li> <code>READ</code>: The grantee can read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>READ_ACP</code>: The grantee can read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>WRITE_ACP</code>: The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> <li> <code>FULL_CONTROL</code>: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.</li> </ul> </p>",
-                      "max_length": 30,
                       "serialized_name": "Access",
                       "members": {
-                        "type": "string",
-                        "pattern": "(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)"
+                        "type": "string"
                       }
                     }
                   }
@@ -4251,7 +4100,6 @@
             "type": "string",
             "documentation": "<p> The identifier of the pipeline for which you want to change notification settings. </p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           },
           "notifications": {
@@ -4262,25 +4110,21 @@
               "progressing": {
                 "type": "string",
                 "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Progressing"
               },
               "completed": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing the job.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Completed"
               },
               "warning": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Warning"
               },
               "error": {
                 "type": "string",
                 "documentation": "<p>The Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition.</p>",
-                "pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)",
                 "serialized_name": "Error"
               }
             }
@@ -4505,13 +4349,11 @@
             "type": "string",
             "documentation": "<p>The identifier of the pipeline to update.</p>",
             "location": "uri",
-            "pattern": "^\\d{13}-\\w{6}$",
             "serialized_name": "Id"
           },
           "status": {
             "type": "string",
             "documentation": "<p>The desired status of the pipeline:</p> <ul> <li> <code>Active</code>: The pipeline is processing jobs.</li> <li> <code>Paused</code>: The pipeline is not currently processing jobs.</li> </ul>",
-            "pattern": "(^Active$)|(^Paused$)",
             "serialized_name": "Status"
           }
         }

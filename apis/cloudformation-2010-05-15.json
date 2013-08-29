@@ -1,12 +1,14 @@
 {
-  "type": "query",
-  "api_version": "2010-05-15",
+  "version": "2010-05-15",
   "endpoint": "cloudformation.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_full_name": "AWS CloudFormation",
     "signature_version": "v4"
   },
+  "plugins": [
+    "Aws::Plugins::QuerySerializer"
+  ],
   "documentation": "<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation enables you to create and manage AWS infrastructure deployments predictably and repeatedly. AWS CloudFormation helps you leverage AWS products such as Amazon EC2, EBS, Amazon SNS, ELB, and Auto Scaling to build highly-reliable, highly scalable, cost effective applications without worrying about creating and configuring the underlying the AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about this product, go to the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"http://aws.amazon.com/documentation/\">http://aws.amazon.com/documentation/</a>.</p> You must call the AWS CloudFormation API as a regular IAM user. AWS CloudFormation does not support calling the API with an <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html\">IAM role</a>",
   "operations": {
     "cancel_update_stack": {
@@ -45,15 +47,11 @@
           "template_body": {
             "type": "string",
             "documentation": "<p>Structure containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 51200,
             "serialized_name": "TemplateBody"
           },
           "template_url": {
             "type": "string",
             "documentation": "<p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes) located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "TemplateURL"
           },
           "parameters": {
@@ -85,13 +83,11 @@
           "timeout_in_minutes": {
             "type": "integer",
             "documentation": "<p>The amount of time that can pass before the stack status becomes CREATE_FAILED; if <code>DisableRollback</code> is not set or is set to <code>false</code>, the stack will be rolled back.</p>",
-            "min_length": 1,
             "serialized_name": "TimeoutInMinutes"
           },
           "notification_arns": {
             "type": "list",
             "documentation": "<p>The Simple Notification Service (SNS) topic ARNs to publish stack related events. You can find your SNS topic ARNs using the <a href=\"http://console.aws.amazon.com/sns\">SNS console</a> or your Command Line Interface (CLI).</p>",
-            "max_length": 5,
             "serialized_name": "NotificationARNs",
             "members": {
               "type": "string"
@@ -208,8 +204,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of events, if there is one.</p> <p>Default: There is no default value.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -512,8 +506,6 @@
           },
           "next_token": {
             "type": "string",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -701,15 +693,11 @@
           "template_body": {
             "type": "string",
             "documentation": "<p>Structure containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 51200,
             "serialized_name": "TemplateBody"
           },
           "template_url": {
             "type": "string",
             "documentation": "<p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "TemplateURL"
           },
           "parameters": {
@@ -794,8 +782,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of stack resource summaries, if there is one.</p> <p>Default: There is no default value.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           }
         }
@@ -876,8 +862,6 @@
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of stacks, if there is one.</p> <p>Default: There is no default value.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "NextToken"
           },
           "stack_status_filter": {
@@ -1007,15 +991,11 @@
           "template_body": {
             "type": "string",
             "documentation": "<p>Structure containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 51200,
             "serialized_name": "TemplateBody"
           },
           "template_url": {
             "type": "string",
             "documentation": "<p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "TemplateURL"
           },
           "parameters": {
@@ -1084,15 +1064,11 @@
           "template_body": {
             "type": "string",
             "documentation": "<p>String containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 51200,
             "serialized_name": "TemplateBody"
           },
           "template_url": {
             "type": "string",
             "documentation": "<p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes) located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
-            "min_length": 1,
-            "max_length": 1024,
             "serialized_name": "TemplateURL"
           }
         }

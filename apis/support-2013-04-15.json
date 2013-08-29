@@ -1,13 +1,16 @@
 {
-  "type": "json",
-  "api_version": "2013-04-15",
+  "version": "2013-04-15",
   "endpoint": "support.%s.amazonaws.com",
   "metadata": {
     "json_version": "1.1",
     "service_full_name": "AWS Support",
     "signature_version": "v4",
-    "target_prefix": "AWSSupport_20130415"
+    "target_prefix": "AWSSupport_20130415",
+    "xmlnamespace": "http://support.amazonaws.com/doc/2013-04-15/"
   },
+  "plugins": [
+    "Aws::Plugins::JsonSerializer"
+  ],
   "documentation": "<fullname>AWS Support</fullname> <p>The AWS Support API reference is intended for programmers who need detailed information about the AWS Support actions and data types. This service enables you to manage with your AWS Support cases programmatically. It is built on the AWS Query API programming model and provides HTTP methods that take parameters and return results in JSON format.</p> <p>The AWS Support service also exposes a set of <a href=\"https://aws.amazon.com/support/trustedadvisor\" title=\"TrustedAdvisor\">Trusted Advisor</a> features. You can retrieve a list of checks you can run on your resources, specify checks to run and refresh, and check the status of checks you have submitted. </p> <p>The following list describes the AWS Support case management actions: </p> <ul> <li> <b>Service names, issue categories, and available severity levels. </b>The actions <a href=\"API_DescribeServices.html\" title=\"DescribeServices\">DescribeServices</a> and <a href=\"API_DescribeSeverityLevels.html\">DescribeSeverityLevels</a> enable you to obtain AWS service names, service codes, service categories, and problem severity levels. You use these values when you call the <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a> action. </li> <li> <b>Case Creation, case details, and case resolution</b>. The actions <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a>, <a href=\"API_DescribeCases.html\" title=\"DescribeCases\">DescribeCases</a>, and <a href=\"API_ResolveCase.html\" title=\"ResolveCase\">ResolveCase</a> enable you to create AWS Support cases, retrieve them, and resolve them.</li> <li> <b>Case communication</b>. The actions <a href=\"API_DescribeCaseCommunications.html\" title=\"DescribeCaseCommunications\">DescribeCaseCommunications</a> and <a href=\"API_AddCommunicationToCase.html\" title=\"AddCommunicationToCase\">AddCommunicationToCase</a> enable you to retrieve and add communication to AWS Support cases. </li> </ul> <p>The following list describes the actions available from the AWS Support service for Trusted Advisor:</p> <ul> <li><a href=\"API_DescribeTrustedAdviserChecks.html\" title=\"DescribeTrustedAdvisorChecks\">DescribeTrustedAdviserChecks</a></li> returns the list of checks that you can run against your AWS resources. <li>Using the CheckId for a specific check returned by DescribeTrustedAdviserChecks, you can call <a href=\"API_DescribeTrustedAdvisorCheckResult.html\" title=\"DescribeTrustedAdvisorCheckResult\">DescribeTrustedAdvisorCheckResult</a> </li> and obtain a new result for the check you specified. <li> Using <a href=\"API_DescribeTrustedAdvisorCheckSummaries.html\" title=\"DescribeTrustedAdvisorCheckSummaries\">DescribeTrustedAdvisorCheckSummaries</a>, you can get summaries for a set of Trusted Advisor checks.</li> <li> <a href=\"API_RefreshTrustedAdvisorCheck.html\" title=\"RefreshTrustedAdvisorCheck\">RefreshTrustedAdvisorCheck</a> enables you to request that Trusted Advisor run the check again. </li> <li> <a href=\"API_DescribeTrustedAdvisorCheckRefreshStatuses.html\" title=\"DescribeTrustedAdvisorCheckRefreshStatuses\"></a> gets statuses on the checks you are running. </li> </ul> <p>For authentication of requests, the AWS Support uses <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>See the AWS Support <a href=\"http://docs.aws.amazon.com/awssupport/latest/developerguide/Welcome.html\">Developer Guide</a> for information about how to use this service to manage create and manage your support cases, and how to call Trusted Advisor for results of checks on your resources. </p>",
   "operations": {
     "add_communication_to_case": {
@@ -28,15 +31,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Represents the body of an email communication added to the support case.</p>",
-            "min_length": 1,
-            "max_length": 8000,
             "serialized_name": "communicationBody"
           },
           "cc_email_addresses": {
             "type": "list",
             "documentation": "<p>Represents any email addresses contained in the CC line of an email added to the support case.</p>",
-            "min_length": 0,
-            "max_length": 10,
             "serialized_name": "ccEmailAddresses",
             "members": {
               "type": "string"
@@ -98,7 +97,6 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Code for the AWS service returned by the call to <a href=\"API_DescribeServices.html\" title=\"DescribeServices\">DescribeServices</a>.</p>",
-            "pattern": "[0-9a-z\\-_]+",
             "serialized_name": "serviceCode"
           },
           "severity_code": {
@@ -116,15 +114,11 @@
             "type": "string",
             "required": true,
             "documentation": "<p>Parameter that represents the communication body text when you create an AWS Support case by calling <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a>.</p>",
-            "min_length": 1,
-            "max_length": 8000,
             "serialized_name": "communicationBody"
           },
           "cc_email_addresses": {
             "type": "list",
             "documentation": "<p>List of email addresses that AWS Support copies on case correspondence.</p>",
-            "min_length": 0,
-            "max_length": 10,
             "serialized_name": "ccEmailAddresses",
             "members": {
               "type": "string"
@@ -189,8 +183,6 @@
           "case_id_list": {
             "type": "list",
             "documentation": "<p>A list of Strings comprising ID numbers for support cases you want returned. The maximum number of cases is 100. </p>",
-            "min_length": 0,
-            "max_length": 100,
             "serialized_name": "caseIdList",
             "members": {
               "type": "string"
@@ -224,8 +216,6 @@
           "max_results": {
             "type": "integer",
             "documentation": "<p>Integer that sets the maximum number of results to return before paginating.</p>",
-            "min_length": 10,
-            "max_length": 100,
             "serialized_name": "maxResults"
           },
           "language": {
@@ -415,8 +405,6 @@
           "max_results": {
             "type": "integer",
             "documentation": "<p>Integer that sets the maximum number of results to return before paginating.</p>",
-            "min_length": 10,
-            "max_length": 100,
             "serialized_name": "maxResults"
           }
         }
@@ -499,12 +487,9 @@
           "service_code_list": {
             "type": "list",
             "documentation": "<p>List in JSON format of service codes available for AWS services.</p>",
-            "min_length": 0,
-            "max_length": 100,
             "serialized_name": "serviceCodeList",
             "members": {
-              "type": "string",
-              "pattern": "[0-9a-z\\-_]+"
+              "type": "string"
             }
           },
           "language": {
