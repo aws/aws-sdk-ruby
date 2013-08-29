@@ -52,9 +52,6 @@ module Seahorse
         property :default, Object
         property :documentation, String
         property :location, String
-        property :min_length, Integer
-        property :max_length, Integer
-        property :pattern, String
         property :serialized_name, String
         property :metadata, Hash
 
