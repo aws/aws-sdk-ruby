@@ -89,7 +89,20 @@ module Aws
 
       describe 'maps' do
 
-        it 'parses maps as hashes (without symbolizing keys'
+        it 'parses maps as hashes (without symbolizing keys' do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          json = '{"attributes":{"Size":"large","Color":"red"}}'
+          expect(parse(json)).to eq(attributes: {
+            'Size' => 'large',
+            'Color' => 'red'
+          })
+        end
 
       end
 
