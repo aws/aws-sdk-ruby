@@ -33,7 +33,7 @@ def options_for_client_class(endpoint, versions, plugins)
     Aws::Plugins::VersionedApiLoader,
     Aws::Plugins::RegionalEndpoint,
     Aws::Plugins::EnvironmentCredentials,
-    Aws::Plugins::RestProtocol,
+    #Aws::Plugins::RestProtocol,
     Aws::Plugins::ContentLength
     #DummySenderPlugin
   ] + plugins.map {|plugin| "Aws::Plugins::#{plugin}" }
@@ -67,10 +67,10 @@ cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
 
-resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
-pp resp.http_request
+#resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
+#pp resp.http_request
 # resp = s3.get_object Bucket: 'lorenfoo', Key: 'foo'
-pp resp.data
+#pp resp.data
 
 #pp s3.put_bucket_logging
 
@@ -85,6 +85,6 @@ pp resp.data
 #   }
 # }).data
 
-# pp swf.list_domains(registrationStatus: 'REGISTERED').data
+pp swf.list_domains(registration_status: 'REGISTERED').data
 
 # pp opsworks.describe_stacks.data

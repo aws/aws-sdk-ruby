@@ -14,12 +14,13 @@
 module Aws
   module Plugins
     class RestProtocol < Seahorse::Client::Plugin
+
       class Handler < Seahorse::Client::Handler
+
         def call(context)
-          build_input_params(context)
           context.http_request.http_method = context.operation.http_method
           context.http_request.path = interpolated_uri(context)
-
+          build_input_params(context)
           handler.call(context).on_complete do |response|
             response.data = {}
             build_output_data(context, response)
@@ -68,6 +69,7 @@ module Aws
       end
 
       handle(Handler)
+
     end
   end
 end
