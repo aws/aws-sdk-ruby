@@ -17,6 +17,8 @@ module Aws
   module Json
     class Parser
 
+      include Seahorse::Model::Shapes
+
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @rules = rules
@@ -37,16 +39,25 @@ module Aws
 
       private
 
-      def structure(shape, hash)
-        hash.inject({}) do |data, (key, value)|
+      def structure(shape, values)
+        data = {}
+        values.each do |key, value|
           member_shape = shape.serialized_members[key]
           data[member_shape.member_name] = member(member_shape, value)
-          data
         end
+        data
+      end
+
+      def list(shape, values)
+        values.map { |value| member(shape.members, value) }
       end
 
       def member(shape, value)
-        value
+        case shape
+        when StructureShape then structure(shape, value)
+        when ListShape then list(shape, value)
+        else value
+        end
       end
 
     end

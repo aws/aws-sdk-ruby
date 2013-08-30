@@ -56,6 +56,49 @@ module Aws
 
       end
 
+      describe 'lists' do
+
+        it 'parses lists' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          json = '{"items":["abc", "mno", "xyz"]}'
+          expect(parse(json)).to eq(items: %w(abc mno xyz))
+        end
+
+        it 'parses lists of complex members' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'name' => { 'type' => 'string' }
+                }
+              }
+            }
+          }
+          json = '{"items":[{"name":"abc"},{"name":"xyz"}]}'
+          expect(parse(json)).to eq(items: [{name:'abc'}, {name:'xyz'}])
+        end
+
+      end
+
+      describe 'maps' do
+
+        it 'parses maps as hashes (without symbolizing keys'
+
+      end
+
+      describe 'booleans' do
+
+        it 'converts true/false booleans'
+
+      end
+
     end
   end
 end
