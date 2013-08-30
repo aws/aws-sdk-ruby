@@ -189,7 +189,13 @@ module Aws
 
       describe 'blobs' do
 
-        it 'base64 decodes blobs'
+        it 'base64 decodes blobs' do
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          json = '{"data":"aGVsbG8="}'
+          expect(parse(json)).to eq(data: 'hello')
+        end
 
       end
 
@@ -198,7 +204,6 @@ module Aws
         it 'does not trap xml parsing errors'
 
       end
-
     end
   end
 end
