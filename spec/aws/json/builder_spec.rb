@@ -30,11 +30,32 @@ module Aws
 
       describe 'structures' do
 
-        it 'returns an empty xml doc when there are no params'
+        it 'returns an empty xml doc when there are no params' do
+          expect(json({})).to eq('{}')
+        end
 
-        it 'omits params that are not in the rules'
+        it 'omits params that are not in the rules' do
+          expect(json(abc: 'xyz')).to eq('{}')
+        end
 
-        it 'serializes nested structures'
+        it 'observes serialized name properties' do
+          rules['members'] = {
+            'name' => { 'type' => 'string', 'serialized_name' => 'FullName' }
+          }
+          expect(json(name: 'John Doe')).to eq('{"FullName":"John Doe"}')
+        end
+
+        it 'serializes nested structures' do
+          rules['members'] = {
+            'abc' => {
+              'type' => 'structure',
+              'members' => {
+                'mno' => { 'type' => 'string' }
+              }
+            }
+          }
+          expect(json(abc: { mno: 'xyz' })).to eq('{"abc":{"mno":"xyz"}}')
+        end
 
       end
 

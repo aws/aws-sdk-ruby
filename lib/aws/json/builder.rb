@@ -25,7 +25,7 @@ module Aws
       # @param [Seahorse::Model::Shapes::Shape] rules
       # @return [String<JSON>]
       def to_json(params)
-        MultiJson.dump(params)
+        MultiJson.dump(structure(@rules, params))
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
@@ -33,6 +33,18 @@ module Aws
       # @return [String<JSON>]
       def self.to_json(rules, params)
         new(rules).to_json(params)
+      end
+
+      private
+
+      def structure(shape, values)
+        data = {}
+        values.each do |key, value|
+          if member_shape = shape.members[key]
+            data[member_shape.serialized_name] = value
+          end
+        end
+        data
       end
 
     end
