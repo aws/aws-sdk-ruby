@@ -2,10 +2,10 @@
   "version": "2013-04-15",
   "endpoint": "support.%s.amazonaws.com",
   "metadata": {
-    "json_version": "1.1",
+    "json-target-prefix": "AWSSupport_20130415",
+    "json-version": "1.1",
     "service_full_name": "AWS Support",
     "signature_version": "v4",
-    "target_prefix": "AWSSupport_20130415",
     "xmlnamespace": "http://support.amazonaws.com/doc/2013-04-15/"
   },
   "plugins": [

@@ -2,11 +2,11 @@
   "version": "2011-12-05",
   "endpoint": "dynamodb.%s.amazonaws.com",
   "metadata": {
-    "json_version": 1.0,
+    "json-target-prefix": "DynamoDB_20111205",
+    "json-version": 1.0,
     "service_abbreviation": "DynamoDB",
     "service_full_name": "Amazon DynamoDB",
     "signature_version": "v4",
-    "target_prefix": "DynamoDB_20111205",
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"
   },
   "plugins": [

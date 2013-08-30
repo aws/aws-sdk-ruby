@@ -53,10 +53,9 @@ module Aws
       end
 
       def metadata(name, options = {})
-        method_name = "set_#{options[:from] || name}"
-        define_method(method_name) do |value|
+        define_method("set_#{name}") do |value|
           @properties['metadata'] ||= {}
-          @properties['metadata'][name.to_s] = value
+          @properties['metadata'][options[:as] || name.to_s] = value
         end
       end
 
@@ -88,8 +87,8 @@ module Aws
 
     metadata :signature_version
     metadata :checksum_format
-    metadata :json_version
-    metadata :target_prefix
+    metadata :json_version, as: 'json-version'
+    metadata :target_prefix, as: 'json-target-prefix'
     metadata :timestamp_format
     metadata :signing_name
     metadata :service_full_name

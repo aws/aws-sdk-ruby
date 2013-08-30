@@ -2,10 +2,10 @@
   "version": "2013-02-18",
   "endpoint": "opsworks.%s.amazonaws.com",
   "metadata": {
-    "json_version": 1.1,
+    "json-target-prefix": "OpsWorks_20130218",
+    "json-version": 1.1,
     "service_full_name": "AWS OpsWorks",
     "signature_version": "v4",
-    "target_prefix": "OpsWorks_20130218",
     "xmlnamespace": "http://opsworks.amazonaws.com/doc/2013-02-18/"
   },
   "plugins": [

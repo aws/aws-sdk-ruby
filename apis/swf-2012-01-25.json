@@ -2,11 +2,11 @@
   "version": "2012-01-25",
   "endpoint": "swf.%s.amazonaws.com",
   "metadata": {
-    "json_version": 1.0,
+    "json-target-prefix": "SimpleWorkflowService",
+    "json-version": 1.0,
     "service_abbreviation": "Amazon SWF",
     "service_full_name": "Amazon Simple Workflow Service",
     "signature_version": "v3",
-    "target_prefix": "SimpleWorkflowService",
     "timestamp_format": "unixTimestamp"
   },
   "plugins": [

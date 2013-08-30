@@ -2,10 +2,10 @@
   "version": "2012-06-30",
   "endpoint": "storagegateway.%s.amazonaws.com",
   "metadata": {
-    "json_version": 1.1,
+    "json-target-prefix": "StorageGateway_20120630",
+    "json-version": 1.1,
     "service_full_name": "AWS Storage Gateway",
-    "signature_version": "v4",
-    "target_prefix": "StorageGateway_20120630"
+    "signature_version": "v4"
   },
   "plugins": [
     "Aws::Plugins::JsonSerializer"
