@@ -22,8 +22,8 @@ module Aws
         operation = context.operation
         metadata = context.config.api.metadata
 
-        target = "#{metadata['json-target-prefix']}.#{operation.name}"
-        version = metadata['json-version']
+        target = "#{metadata['json_target_prefix']}.#{operation.name}"
+        version = metadata['json_version']
 
         # build request
         req = context.http_request

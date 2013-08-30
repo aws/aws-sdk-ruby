@@ -2,8 +2,8 @@
   "version": "2011-12-05",
   "endpoint": "dynamodb.%s.amazonaws.com",
   "metadata": {
-    "json-target-prefix": "DynamoDB_20111205",
-    "json-version": 1.0,
+    "json_target_prefix": "DynamoDB_20111205",
+    "json_version": 1.0,
     "service_abbreviation": "DynamoDB",
     "service_full_name": "Amazon DynamoDB",
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"

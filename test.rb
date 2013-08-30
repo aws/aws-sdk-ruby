@@ -27,9 +27,9 @@ class DummySenderPlugin < Seahorse::Client::Plugin
   end
 end
 
-def options_for_client_class(endpoint, versions, plugins)
+def client_class(endpoint, versions, plugins = [])
   #plugins << DummySenderPlugin
-  {
+  Seahorse::Client.define({
     plugins: plugins,
     api: {
       'metadata' => {
@@ -38,15 +38,13 @@ def options_for_client_class(endpoint, versions, plugins)
         }
       }
     }
-  }
-end
-
-def client_class(endpoint, versions, plugins = [])
-  opts = options_for_client_class(endpoint, versions, plugins)
-  Seahorse::Client.define(opts)
+  })
 end
 
 SWF = client_class 'swf', %w(2012-01-25)
+
+raise SWF.plugins.inspect
+
 EMR = client_class 'elasticmapreduce', %w(2009-03-31)
 CloudFront = client_class 'cloudfront', %w(2013-05-12)
 S3 = client_class 's3', %w(2006-03-01)

@@ -87,8 +87,8 @@ module Aws
 
     metadata :signature_version
     metadata :checksum_format
-    metadata :json_version, as: 'json-version'
-    metadata :target_prefix, as: 'json-target-prefix'
+    metadata :json_version, as: 'json_version'
+    metadata :target_prefix, as: 'json_target_prefix'
     metadata :timestamp_format
     metadata :signing_name
     metadata :service_full_name
