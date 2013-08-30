@@ -19,6 +19,8 @@ module Aws
     # @api private
     class Builder
 
+      include Seahorse::Model::Shapes
+
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @xml = []
@@ -37,7 +39,7 @@ module Aws
       # @param [Hash] params
       # @return [String] Returns an XML doc string.
       def self.to_xml(rules, params)
-        Builder.new(rules).to_xml(params)
+        new(rules).to_xml(params)
       end
 
       private
@@ -83,15 +85,15 @@ module Aws
       end
 
       def member(name, shape, value)
-        case shape.type
-        when :structure then structure(name, shape, value)
-        when :list then list(name, shape, value)
+        case shape
+        when StructureShape then structure(name, shape, value)
+        when ListShape then list(name, shape, value)
         else node(name, shape, format(shape, value))
         end
       end
 
       def format(shape, value)
-        if shape.type == :timestamp
+        if shape.is_a?(TimestampShape)
           format_timestamp(shape, value.utc)
         else
           value.to_s
