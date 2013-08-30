@@ -18,10 +18,35 @@ module Aws
     class Parser
 
       # @param [Seahorse::Model::Shapes::Shape] rules
+      def initialize(rules)
+        @rules = rules
+      end
+
+      # @param [String<JSON>] json
+      # @return [Hash]
+      def to_hash(json)
+        structure(@rules, MultiJson.load(json == '' ? '{}' : json))
+      end
+
+      # @param [Seahorse::Model::Shapes::Shape] rules
       # @param [String<JSON>] json
       # @return [Hash]
       def self.to_hash(rules, json)
-        MultiJson.load(json)
+        new(rules).to_hash(json)
+      end
+
+      private
+
+      def structure(shape, hash)
+        hash.inject({}) do |data, (key, value)|
+          member_shape = shape.serialized_members[key]
+          data[member_shape.member_name] = member(member_shape, value)
+          data
+        end
+      end
+
+      def member(shape, value)
+        value
       end
 
     end
