@@ -19,21 +19,22 @@ module Aws
     class JsonSerializer < Seahorse::Client::Plugin
       handle(:Handler) do |context|
 
+        operation = context.operation
         metadata = context.config.api.metadata
 
-        target = "#{metadata['json-target-prefix']}.#{context.operation_name}"
+        target = "#{metadata['json-target-prefix']}.#{operation.name}"
         version = metadata['json-version']
 
         # build request
         req = context.http_request
         req.headers['X-Amz-Target'] = target
         req.headers['Content-Type'] = "application/x-amz-json-#{version}"
-        req.body = MultiJson.dump(context.params)
+        req.body = Json::Builder.to_json(operation.input, context.params)
 
         # parse response
         super(context).on_complete do |response|
           response.context.http_response.body.tap do |body|
-            response.data = MultiJson.load(body.read) || {}
+            response.data = Json::Parser.to_hash(operation.output, body.read)
             body.rewind
           end
         end

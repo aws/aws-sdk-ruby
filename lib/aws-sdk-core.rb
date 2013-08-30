@@ -19,6 +19,11 @@ module Aws
   autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
 
+  module Json
+    autoload :Builder, 'aws/json/builder'
+    autoload :Parser, 'aws/json/parser'
+  end
+
   module Plugins
 
     autoload :ContentLength, 'aws/plugins/content_length'
